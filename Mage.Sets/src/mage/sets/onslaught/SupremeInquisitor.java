@@ -79,7 +79,7 @@ public class SupremeInquisitor extends CardImpl {
 
         // Tap five untapped Wizards you control: Search target player's library for up to five cards and exile them. Then that player shuffles his or her library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SupremeInquisitorEffect(), new TapTargetCost(new TargetControlledPermanent(5, 5, filter, true)));
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

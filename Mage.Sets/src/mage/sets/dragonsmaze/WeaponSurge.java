@@ -68,7 +68,7 @@ public class WeaponSurge extends CardImpl {
         // Target creature you control gets +1/+0 and gains first strike until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(1,0, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // Overload {1}{R}
         Ability ability = new OverloadAbility(this, new BoostAllEffect(1,0, Duration.EndOfTurn, filter, false), new ManaCostsImpl("{1}{R}"));

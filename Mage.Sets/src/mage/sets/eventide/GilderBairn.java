@@ -63,7 +63,7 @@ public class GilderBairn extends CardImpl {
         // {2}{GU}, {untap}: For each counter on target permanent, put another of those counters on that permanent.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GilderBairnEffect(), new ManaCostsImpl("{2}{G/U}"));
         ability.addCost(new UntapSourceCost());
-        ability.addTarget(new TargetPermanent(true));
+        ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
 
     }

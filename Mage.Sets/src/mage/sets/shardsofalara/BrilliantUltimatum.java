@@ -62,7 +62,7 @@ public class BrilliantUltimatum extends CardImpl {
 
         // Exile the top five cards of your library. An opponent separates those cards into two piles. You may play any number of cards from one of those piles without paying their mana costs.
         this.getSpellAbility().addEffect(new BrilliantUltimatumEffect());
-        this.getSpellAbility().addTarget(new TargetOpponent(true, true));
+        this.getSpellAbility().addTarget(new TargetOpponent(true));
 
     }
 

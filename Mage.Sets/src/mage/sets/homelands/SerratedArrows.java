@@ -71,7 +71,7 @@ public class SerratedArrows extends CardImpl {
                 new AddCountersTargetEffect(CounterType.M1M1.createInstance()),
                 new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.ARROWHEAD.createInstance()));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

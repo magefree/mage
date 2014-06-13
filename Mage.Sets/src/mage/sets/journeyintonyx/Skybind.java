@@ -65,7 +65,7 @@ public class Skybind extends CardImpl {
 
         // Constellation — When Skybind or another enchantment enters the battlefield under your control, exile target nonenchantment permanent. Return that card to the battlefield under its owner's control at the beginning of the next end step.
         Ability ability = new ConstellationAbility(new SkybindEffect(), false);
-        ability.addTarget(new TargetPermanent(filter, true));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

@@ -64,7 +64,7 @@ public class DoggedHunter extends CardImpl {
 
         // {tap}: Destroy target creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
         
     }

@@ -57,7 +57,7 @@ public class PainKami extends CardImpl {
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new ManacostVariableValue()), new ManaCostsImpl("{X}{R}"));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

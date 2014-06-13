@@ -69,7 +69,7 @@ public class GodosIrregulars extends CardImpl {
 
         // {R}: Godo's Irregulars deals 1 damage to target creature blocking it.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{R"));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
@@ -79,7 +79,7 @@ public class GodosIrregulars extends CardImpl {
             ability.getTargets().clear();
             FilterCreaturePermanent filter = basicFilter.copy();
             filter.add(new BlockingAttackerIdPredicate(this.getId()));
-            Target target = new TargetCreaturePermanent(filter, true);
+            Target target = new TargetCreaturePermanent(filter);
             ability.addTarget(target);
         }
     }

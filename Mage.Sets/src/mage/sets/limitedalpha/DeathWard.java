@@ -49,7 +49,7 @@ public class DeathWard extends CardImpl {
 
         // Regenerate target creature.
         this.getSpellAbility().addEffect(new RegenerateTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public DeathWard(final DeathWard card) {

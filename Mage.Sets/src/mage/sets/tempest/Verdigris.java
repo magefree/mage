@@ -53,7 +53,7 @@ public class Verdigris extends CardImpl {
         this.expansionSetCode = "TMP";
         this.color.setGreen(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     public Verdigris(final Verdigris card) {

@@ -64,8 +64,8 @@ public class KorozdaGorgon extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
         // {2}, Remove a +1/+1 counter from a creature you control: Target creature gets -1/-1 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-1,-1, Duration.EndOfTurn), new GenericManaCost(2));
-        ability.addCost(new RemoveCounterCost(new TargetControlledCreaturePermanent(true), CounterType.P1P1));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addCost(new RemoveCounterCost(new TargetControlledCreaturePermanent(), CounterType.P1P1));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

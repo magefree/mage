@@ -64,7 +64,7 @@ public class Anathemancer extends CardImpl {
 
         // When Anathemancer enters the battlefield, it deals damage to target player equal to the number of nonbasic lands that player controls.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(new AnathemancerCount()));
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // Unearth {5}{B}{R}
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{5}{B}{R}")));

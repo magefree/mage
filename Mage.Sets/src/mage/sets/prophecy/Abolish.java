@@ -66,7 +66,7 @@ public class Abolish extends CardImpl {
 
         // Destroy target artifact or enchantment.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     public Abolish(final Abolish card) {

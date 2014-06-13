@@ -75,14 +75,14 @@ public class HideSeek extends SplitCard {
         getLeftHalfCard().getColor().setRed(true);
         getLeftHalfCard().getColor().setWhite(true);
         getLeftHalfCard().getSpellAbility().addEffect(new PutOnLibraryTargetEffect(false));
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // Seek
         // Search target opponent's library for a card and exile it. You gain life equal to its converted mana cost. Then that player shuffles his or her library..
         getRightHalfCard().getColor().setWhite(true);
         getRightHalfCard().getColor().setBlack(true);
         getRightHalfCard().getSpellAbility().addEffect(new SeekEffect());
-        getRightHalfCard().getSpellAbility().addTarget(new TargetOpponent(true));
+        getRightHalfCard().getSpellAbility().addTarget(new TargetOpponent());
 
     }
 

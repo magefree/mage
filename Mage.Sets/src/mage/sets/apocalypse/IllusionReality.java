@@ -66,7 +66,7 @@ public class IllusionReality extends SplitCard {
         // Reality
         // Destroy target artifact.
         getRightHalfCard().getColor().setGreen(true);
-        getRightHalfCard().getSpellAbility().addTarget(new TargetArtifactPermanent(true));
+        getRightHalfCard().getSpellAbility().addTarget(new TargetArtifactPermanent());
         getRightHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect());
 
     }

@@ -50,7 +50,7 @@ public class WingShards extends CardImpl {
 
         // Target player sacrifices an attacking creature.
         this.getSpellAbility().addEffect(new SacrificeEffect(new FilterAttackingCreature(), 1, "Target player"));
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         // Storm
         this.addAbility(new StormAbility());
     }

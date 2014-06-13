@@ -52,7 +52,7 @@ public class DragonBlood extends CardImpl {
         this.expansionSetCode = "MRD";
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance(1)), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

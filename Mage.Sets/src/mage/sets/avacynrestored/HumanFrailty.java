@@ -55,7 +55,7 @@ public class HumanFrailty extends CardImpl {
         this.color.setBlack(true);
 
         // Destroy target Human creature.
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 

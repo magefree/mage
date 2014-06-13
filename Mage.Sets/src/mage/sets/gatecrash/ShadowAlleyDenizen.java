@@ -73,7 +73,7 @@ public class ShadowAlleyDenizen extends CardImpl {
                 Zone.BATTLEFIELD,
                 new GainAbilityTargetEffect(IntimidateAbility.getInstance(), Duration.EndOfTurn),
                 filter, false, null, true);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

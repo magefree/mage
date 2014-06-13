@@ -71,7 +71,7 @@ public class GruulGuildmage extends CardImpl {
         this.addAbility(firstAbility);
         // {3}{G}: Target creature gets +2/+2 until end of turn.
         Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{3}{G}"));
-        secondAbility.addTarget(new TargetCreaturePermanent(true));
+        secondAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(secondAbility);
     }
 

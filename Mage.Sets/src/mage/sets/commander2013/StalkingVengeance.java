@@ -72,7 +72,7 @@ public class StalkingVengeance extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
         // Whenever another creature you control dies, it deals damage equal to its power to target player.
         Ability ability = new DiesCreatureTriggeredAbility(new StalkingVengeanceDamageEffect(), false, filter, true);
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

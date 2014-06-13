@@ -65,7 +65,7 @@ public class FiligreeFracture extends CardImpl {
         this.color.setGreen(true);
 
         // Destroy target artifact or enchantment. If that permanent was blue or black, draw a card.
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new FiligreeFractureEffect());
     }

@@ -60,7 +60,7 @@ public class OrimsChant extends CardImpl {
         this.addAbility(new KickerAbility("{W}"));
 
         // Target player can't cast spells this turn.
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new OrimsChantCantCastEffect());
 
         // If Orim's Chant was kicked, creatures can't attack this turn.

@@ -54,7 +54,7 @@ public class Mudhole extends CardImpl {
         this.color.setRed(true);
 
         // Target player exiles all land cards from his or her graveyard.
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new MudholeEffect());
     }
 

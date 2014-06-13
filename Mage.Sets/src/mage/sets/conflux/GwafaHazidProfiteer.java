@@ -78,7 +78,7 @@ public class GwafaHazidProfiteer extends CardImpl {
         // {W}{U}, {tap}: Put a bribery counter on target creature you don't control. Its controller draws a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GwafaHazidProfiteerEffect1(), new ManaCostsImpl("{W}{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
         
         // Creatures with bribery counters on them can't attack or block.

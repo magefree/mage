@@ -56,7 +56,7 @@ public class NephaliaDrownyard extends CardImpl {
         // {1}{U}{B}, {T}: Target player puts the top three cards of his or her library into his or her graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(3), new ManaCostsImpl("{1}{U}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

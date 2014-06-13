@@ -57,7 +57,7 @@ public class OxiddaScrapmelter extends CardImpl {
         this.toughness = new MageInt(3);
 
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
-        ability.addTarget(new TargetPermanent(filter, true));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

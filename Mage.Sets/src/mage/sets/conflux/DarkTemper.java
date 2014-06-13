@@ -56,7 +56,7 @@ public class DarkTemper extends CardImpl {
 
         // Dark Temper deals 2 damage to target creature. If you control a black permanent, destroy the creature instead.
         this.getSpellAbility().addEffect(new DarkTemperEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public DarkTemper(final DarkTemper card) {

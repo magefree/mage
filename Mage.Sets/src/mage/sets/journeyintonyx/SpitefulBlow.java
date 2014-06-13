@@ -52,7 +52,7 @@ public class SpitefulBlow extends CardImpl {
 
         // Destroy target creature and target land.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         Effect effect = new DestroyTargetEffect();
         effect.setText("and target land");
         effect.setTargetPointer(new SecondTargetPointer());

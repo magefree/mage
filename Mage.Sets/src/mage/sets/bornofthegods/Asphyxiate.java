@@ -57,7 +57,7 @@ public class Asphyxiate extends CardImpl {
 
         // Destroy target untapped creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter,true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
     public Asphyxiate(final Asphyxiate card) {

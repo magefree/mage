@@ -52,7 +52,7 @@ public class MagneticMine extends CardImpl {
         this.expansionSetCode = "MBS";
 
         MagneticMineTriggeredAbility ability = new MagneticMineTriggeredAbility(new DamageTargetEffect(2));
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

@@ -69,7 +69,7 @@ public class Scarecrone extends CardImpl {
 
         // {1}, Sacrifice a Scarecrow: Draw a card.
         Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
-        firstAbility.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filterScarecrow, false, true)));
+        firstAbility.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filterScarecrow, false)));
         this.addAbility(firstAbility);
 
         // {4}, {T}: Return target artifact creature card from your graveyard to the battlefield.

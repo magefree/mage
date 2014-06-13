@@ -51,7 +51,7 @@ public class Traumatize extends CardImpl {
         super(ownerId, 119, "Traumatize", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
         this.expansionSetCode = "10E";
         this.color.setBlue(true);
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new TraumatizeEffect());
     }
 

@@ -64,7 +64,7 @@ public class SirenOfTheFangedCoast extends CardImpl {
         this.addAbility(new TributeAbility(3));
         // When Siren of the Fanged Coast enters the battlefield, if tribute wasn't paid, gain control of target creature.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Duration.EndOfGame, true), false);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(),
                 "When {this} enters the battlefield, if its tribute wasn't paid, gain control of target creature."));        
     }

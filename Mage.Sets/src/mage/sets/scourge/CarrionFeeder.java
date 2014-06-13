@@ -60,7 +60,7 @@ public class CarrionFeeder extends CardImpl {
         // Sacrifice a creature: Put a +1/+1 counter on Carrion Feeder.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(true))));
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
     }
 
     public CarrionFeeder(final CarrionFeeder card) {

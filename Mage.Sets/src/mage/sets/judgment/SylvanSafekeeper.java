@@ -63,7 +63,7 @@ public class SylvanSafekeeper extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
                 new GainAbilityTargetEffect(ShroudAbility.getInstance(), Duration.EndOfTurn), 
                 new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
-        ability.addTarget(new TargetControlledCreaturePermanent(true));
+        ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }
 

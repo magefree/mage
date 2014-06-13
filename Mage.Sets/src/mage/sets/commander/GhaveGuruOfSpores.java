@@ -81,13 +81,13 @@ public class GhaveGuruOfSpores extends CardImpl {
 		
 		// {1}, Remove a +1/+1 counter from a creature you control: Put a 1/1 green Saproling creature token onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new GenericManaCost(1));
-        ability.addCost(new RemoveCounterCost(new TargetControlledCreaturePermanent(true), CounterType.P1P1));
+        ability.addCost(new RemoveCounterCost(new TargetControlledCreaturePermanent(), CounterType.P1P1));
         this.addAbility(ability);
 		
 		// {1}, Sacrifice a creature: Put a +1/+1 counter on target creature.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new GenericManaCost(1));
         ability2.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-        ability2.addTarget(new TargetCreaturePermanent(true));
+        ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability2);
     }
 

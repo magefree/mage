@@ -63,7 +63,7 @@ public class SoulScourge extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // When Soul Scourge enters the battlefield, target player loses 3 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SoulScourgeEntersEffect(), false);
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // When Soul Scourge leaves the battlefield, that player gains 3 life.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new SoulScourgeLeavesEffect(), false));

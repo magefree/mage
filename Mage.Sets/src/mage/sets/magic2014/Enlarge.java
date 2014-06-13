@@ -54,7 +54,7 @@ public class Enlarge extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(7,7, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new MustBeBlockedByAtLeastOneTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public Enlarge(final Enlarge card) {

@@ -64,7 +64,7 @@ public class AirServant extends CardImpl {
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{2}{U}"));
-        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 

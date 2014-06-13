@@ -48,7 +48,7 @@ public class BurstOfEnergy extends CardImpl {
 
         // Untap target permanent.
         this.getSpellAbility().addEffect(new UntapTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(true));
+        this.getSpellAbility().addTarget(new TargetPermanent());
     }
 
     public BurstOfEnergy(final BurstOfEnergy card) {

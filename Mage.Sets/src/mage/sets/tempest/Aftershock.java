@@ -58,7 +58,7 @@ public class Aftershock extends CardImpl {
         this.expansionSetCode = "TMP";
         this.color.setRed(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new DamageControllerEffect(3));
     }
 

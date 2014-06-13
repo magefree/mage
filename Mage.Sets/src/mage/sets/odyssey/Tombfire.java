@@ -55,7 +55,7 @@ public class Tombfire extends CardImpl {
         this.color.setBlack(true);
 
         // Target player exiles all cards with flashback from his or her graveyard.
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new TombfireEffect());
 
     }

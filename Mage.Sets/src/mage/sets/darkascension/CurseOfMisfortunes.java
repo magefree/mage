@@ -67,7 +67,7 @@ public class CurseOfMisfortunes extends CardImpl {
         this.color.setBlack(true);
 
         // Enchant player
-        TargetPlayer auraTarget = new TargetPlayer(true);
+        TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));

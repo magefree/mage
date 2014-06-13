@@ -69,8 +69,8 @@ public class FallOfTheHammer extends CardImpl {
 
         // Target creature you control deals damage equal to its power to another target creature.
         this.getSpellAbility().addEffect(new FallOfTheHammerDamageEffect());
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
-        this.getSpellAbility().addTarget(new FallOfTheHammerTargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        this.getSpellAbility().addTarget(new FallOfTheHammerTargetCreaturePermanent(filter));
     }
 
     public FallOfTheHammer(final FallOfTheHammer card) {
@@ -117,8 +117,8 @@ class FallOfTheHammerDamageEffect extends OneShotEffect {
 
 class FallOfTheHammerTargetCreaturePermanent extends TargetCreaturePermanent {
 
-    public FallOfTheHammerTargetCreaturePermanent(FilterCreaturePermanent filter, boolean required) {
-        super(filter, required);
+    public FallOfTheHammerTargetCreaturePermanent(FilterCreaturePermanent filter) {
+        super(filter);
     }
 
     @Override

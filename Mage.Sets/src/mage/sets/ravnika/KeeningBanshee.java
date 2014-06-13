@@ -58,7 +58,7 @@ public class KeeningBanshee extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // When Keening Banshee enters the battlefield, target creature gets -2/-2 until end of turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(-2, -2, Duration.EndOfTurn), false);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

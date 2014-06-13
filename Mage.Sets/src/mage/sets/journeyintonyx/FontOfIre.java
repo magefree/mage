@@ -54,7 +54,7 @@ public class FontOfIre extends CardImpl {
         // {3}{R}, Sacrifice Font of Ire: Font of Ire deals 5 damage to target player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(5), new ManaCostsImpl("{3}{R}"));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);        
     }
 

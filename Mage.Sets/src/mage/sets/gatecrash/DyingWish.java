@@ -57,7 +57,7 @@ public class DyingWish extends CardImpl {
         this.color.setBlack(true);
 
         // Enchant creature you control
-        TargetPermanent auraTarget = new TargetControlledCreaturePermanent(true);
+        TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
@@ -68,7 +68,7 @@ public class DyingWish extends CardImpl {
         DynamicValue attachedPower = new AttachedPermanentPowerCount();
         ability = new DiesAttachedTriggeredAbility(new LoseLifeTargetEffect(attachedPower), "enchanted creature");
         ability.addEffect(new GainLifeEffect(attachedPower));
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

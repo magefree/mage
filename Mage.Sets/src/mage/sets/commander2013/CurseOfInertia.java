@@ -64,7 +64,7 @@ public class CurseOfInertia extends CardImpl {
         this.color.setBlue(true);
 
         // Enchant player
-        TargetPlayer auraTarget = new TargetPlayer(true);
+        TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
@@ -140,7 +140,7 @@ class CurseOfInertiaTapOrUntapTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (player != null) {
-            Target target = new TargetPermanent(true);
+            Target target = new TargetPermanent();
             if (target.canChoose(source.getSourceId(), player.getId(), game)
                     && player.choose(outcome, target, source.getSourceId(), game)) {
                 Permanent targetPermanent = game.getPermanent(target.getFirstTarget());

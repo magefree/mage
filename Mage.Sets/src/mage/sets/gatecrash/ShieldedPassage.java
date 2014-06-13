@@ -49,7 +49,7 @@ public class ShieldedPassage extends CardImpl {
 
         // Prevent all damage that would be dealt to target creature this turn.
         this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public ShieldedPassage(final ShieldedPassage card) {

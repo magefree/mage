@@ -66,7 +66,7 @@ public class CraftyPathmage extends CardImpl {
 
         // {tap}: Target creature with power 2 or less is unblockable this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UnblockableTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 

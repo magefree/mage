@@ -71,7 +71,7 @@ public class TimberwatchElf extends CardImpl {
         effect.setText("Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield");
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 effect, new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

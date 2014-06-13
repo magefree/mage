@@ -49,7 +49,7 @@ public class MentalVapors extends CardImpl {
 
         // Target player discards a card.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(1));
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         
         // Cipher (Then you may exilce this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)
         this.getSpellAbility().addEffect(new CipherEffect());

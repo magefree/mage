@@ -65,7 +65,7 @@ public class WurmweaverCoil extends CardImpl {
         this.expansionSetCode = "GPT";
         this.subtype.add("Aura");
         this.color.setGreen(true);
-        TargetPermanent auraTarget = new TargetCreaturePermanent(filter, true);
+        TargetPermanent auraTarget = new TargetCreaturePermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

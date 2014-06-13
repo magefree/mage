@@ -58,7 +58,7 @@ public class KemuriOnna extends CardImpl {
 
         // When Kemuri-Onna enters the battlefield, target player discards a card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1), false);
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // Whenever you cast a Spirit or Arcane spell, you may return Kemuri-Onna to its owner's hand.
         this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(), filter, true));

@@ -48,7 +48,7 @@ public class DesertTwister extends CardImpl {
 
         // Destroy target permanent.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-		this.getSpellAbility().addTarget(new TargetPermanent(true));
+		this.getSpellAbility().addTarget(new TargetPermanent());
     }
 
     public DesertTwister(final DesertTwister card) {

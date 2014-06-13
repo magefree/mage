@@ -72,7 +72,7 @@ public class WickerboughElder extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(1)), false));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ColoredManaCost(ColoredManaSymbol.G));
         ability.addCost(new RemoveCountersSourceCost(CounterType.M1M1.createInstance(1)));
-        ability.addTarget(new TargetPermanent(filter, true));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

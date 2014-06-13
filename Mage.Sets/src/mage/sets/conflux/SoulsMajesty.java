@@ -50,7 +50,7 @@ public class SoulsMajesty extends CardImpl {
         super(ownerId, 92, "Soul's Majesty", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{G}");
         this.expansionSetCode = "CON";
         this.color.setGreen(true);
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addEffect(new SoulsMajestyEffect());
     }
 

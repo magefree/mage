@@ -57,13 +57,13 @@ public class FarAway extends SplitCard {
         // Return target creature to its owner's hand.
         getLeftHalfCard().getColor().setBlue(true);
         getLeftHalfCard().getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Away
         // Target player sacrifices a creature.
         getRightHalfCard().getColor().setBlack(true);
         getRightHalfCard().getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target player"));
-        getRightHalfCard().getSpellAbility().addTarget(new TargetPlayer(true));
+        getRightHalfCard().getSpellAbility().addTarget(new TargetPlayer());
 
     }
 

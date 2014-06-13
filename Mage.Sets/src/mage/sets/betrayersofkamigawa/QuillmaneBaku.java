@@ -77,7 +77,7 @@ public class QuillmaneBaku extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new QuillmaneBakuReturnEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI.createInstance(1)));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
@@ -93,7 +93,7 @@ public class QuillmaneBaku extends CardImpl {
             ability.getTargets().clear();
             FilterCreaturePermanent newFilter = new FilterCreaturePermanent("creature with converted mana cost " + maxConvManaCost  + " or less");
             newFilter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, maxConvManaCost + 1));
-            TargetCreaturePermanent target = new TargetCreaturePermanent(newFilter, true);
+            TargetCreaturePermanent target = new TargetCreaturePermanent(newFilter);
             ability.getTargets().add(target);
         }
     }

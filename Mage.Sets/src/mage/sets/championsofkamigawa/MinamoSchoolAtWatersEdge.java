@@ -65,7 +65,7 @@ public class MinamoSchoolAtWatersEdge extends CardImpl {
         this.addAbility(new BlueManaAbility());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(),  new ColoredManaCost(ColoredManaSymbol.U));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter, true));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

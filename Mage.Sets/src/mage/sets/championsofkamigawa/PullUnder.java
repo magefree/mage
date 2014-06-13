@@ -49,7 +49,7 @@ public class PullUnder extends CardImpl {
         this.subtype.add("Arcane");
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(-5, -5, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public PullUnder (final PullUnder card) {

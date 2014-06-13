@@ -75,7 +75,7 @@ public class ExperimentKraj extends CardImpl {
 
         // {tap}: Put a +1/+1 counter on target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()),new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

@@ -50,7 +50,7 @@ public class BloodFeud extends CardImpl {
 
         // Target creature fights another target creature.
         this.getSpellAbility().addEffect(new FightTargetsEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetOtherCreaturePermanent());
     }
 
@@ -67,7 +67,7 @@ public class BloodFeud extends CardImpl {
 class TargetOtherCreaturePermanent extends TargetCreaturePermanent {
 
     public TargetOtherCreaturePermanent() {
-        super(true);
+        super();
     }
 
     public TargetOtherCreaturePermanent(final TargetOtherCreaturePermanent target) {

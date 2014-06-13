@@ -60,7 +60,7 @@ public class EtchedMonstrosity extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(5)), "{this} gets five -1/-1 counters"));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(3), new ManaCostsImpl("{W}{U}{B}{R}{G}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.M1M1.createInstance(5)));
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

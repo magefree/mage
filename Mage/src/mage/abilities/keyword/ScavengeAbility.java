@@ -65,7 +65,7 @@ public class ScavengeAbility extends ActivatedAbilityImpl {
         super(Zone.GRAVEYARD, new ScavengeEffect(), costs);
         this.timing = TimingRule.SORCERY;
         this.addCost(new ExileSourceFromGraveCost());
-        this.addTarget(new TargetCreaturePermanent(true));
+        this.addTarget(new TargetCreaturePermanent());
     }
 
     public ScavengeAbility(final ScavengeAbility ability) {

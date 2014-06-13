@@ -63,7 +63,7 @@ public class FearsomeTemper extends CardImpl {
         this.color.setRed(true);
 
         // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
@@ -74,7 +74,7 @@ public class FearsomeTemper extends CardImpl {
         effect.setText("Enchanted creature gets +2/+2");
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         Ability grantedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedByTargetSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{2}{R}"));
-        grantedAbility.addTarget(new TargetCreaturePermanent(true));
+        grantedAbility.addTarget(new TargetCreaturePermanent());
         effect = new GainAbilityAttachedEffect(grantedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield);
         effect.setText("and has \"{2}{R}: Target creature can't block this creature this turn");
         ability.addEffect(effect);

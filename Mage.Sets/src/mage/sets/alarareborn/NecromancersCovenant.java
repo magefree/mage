@@ -70,7 +70,7 @@ public class NecromancersCovenant extends CardImpl {
 
         // When Necromancer's Covenant enters the battlefield, exile all creature cards from target player's graveyard, then put a 2/2 black Zombie creature token onto the battlefield for each card exiled this way.
         Ability ability = new EntersBattlefieldTriggeredAbility(new NecromancersConvenantEffect(), false);
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
         // Zombies you control have lifelink.

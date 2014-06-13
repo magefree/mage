@@ -89,7 +89,7 @@ public class XenagosGodOfRevels extends CardImpl {
         effect.setText("another target creature you control gains haste");
         Ability ability = new BeginningOfCombatTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, false, false);
         ability.addEffect(new XenagosGodOfRevelsEffect());
-        ability.addTarget(new TargetControlledCreaturePermanent(1,1,filter, false, true));
+        ability.addTarget(new TargetControlledCreaturePermanent(1,1,filter, false));
         this.addAbility(ability);
     }
 

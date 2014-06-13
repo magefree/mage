@@ -56,7 +56,7 @@ public class IgniteMemories extends CardImpl {
         this.color.setRed(true);
 
         // Target player reveals a card at random from his or her hand. Ignite Memories deals damage to that player equal to that card's converted mana cost.
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new IgniteMemoriesEffect());
         // Storm
         this.addAbility(new StormAbility());

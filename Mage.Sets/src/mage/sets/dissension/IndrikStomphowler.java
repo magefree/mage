@@ -62,7 +62,7 @@ public class IndrikStomphowler extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        ability.addTarget(new TargetPermanent(filter, true));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

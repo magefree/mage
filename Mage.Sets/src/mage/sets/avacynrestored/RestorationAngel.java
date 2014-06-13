@@ -75,7 +75,7 @@ public class RestorationAngel extends CardImpl {
         
         // When Restoration Angel enters the battlefield, you may exile target non-Angel creature you control, then return that card to the battlefield under your control
         Ability ability = new EntersBattlefieldTriggeredAbility(new RestorationAngelEffect(), true);
-        ability.addTarget(new TargetControlledCreaturePermanent(1, 1, filter, false, true));
+        ability.addTarget(new TargetControlledCreaturePermanent(1, 1, filter, false));
         this.addAbility(ability);
     }
 

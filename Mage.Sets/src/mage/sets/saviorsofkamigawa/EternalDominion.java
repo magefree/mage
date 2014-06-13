@@ -61,7 +61,7 @@ public class EternalDominion extends CardImpl {
         // Search target opponent's library for an artifact, creature, enchantment, or land card.
         // Put that card onto the battlefield under your control. Then that player shuffles his or her library.
         this.getSpellAbility().addEffect(new EternalDominionEffect());
-        this.getSpellAbility().addTarget(new TargetOpponent(true));
+        this.getSpellAbility().addTarget(new TargetOpponent());
         
         // Epic
         this.getSpellAbility().addEffect(new EpicEffect());

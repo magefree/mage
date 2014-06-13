@@ -58,7 +58,7 @@ public class CeaseFire extends CardImpl {
 
         // Target player can't cast creature spells this turn.
         this.getSpellAbility().addEffect(new CeaseFireEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

@@ -49,7 +49,7 @@ public class BlueSunsZenith extends CardImpl {
         this.color.setBlue(true);
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public BlueSunsZenith (final BlueSunsZenith card) {

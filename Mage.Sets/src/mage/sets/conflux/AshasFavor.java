@@ -55,7 +55,7 @@ public class AshasFavor extends CardImpl {
         this.subtype.add("Aura");
         this.color.setWhite(true);
 
-        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

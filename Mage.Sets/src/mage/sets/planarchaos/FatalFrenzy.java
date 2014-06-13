@@ -63,7 +63,7 @@ public class FatalFrenzy extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new BoostTargetEffect(new TargetPermanentPowerCount(), new StaticValue(0), Duration.EndOfTurn, true));
         this.getSpellAbility().addEffect(new FatalFrenzyEffect());
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
     }
 

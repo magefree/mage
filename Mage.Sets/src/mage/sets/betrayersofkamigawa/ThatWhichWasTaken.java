@@ -72,7 +72,7 @@ public class ThatWhichWasTaken extends CardImpl {
         // {4}, {T}: Put a divinity counter on target permanent other than That Which Was Taken.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.DIVINITY.createInstance()), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter, true));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // Each permanent with a divinity counter on it is indestructible.

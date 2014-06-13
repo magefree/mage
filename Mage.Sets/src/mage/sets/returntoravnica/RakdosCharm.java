@@ -60,7 +60,7 @@ public class RakdosCharm extends CardImpl {
 
         // Choose one — Exile all cards from target player's graveyard;
         this.getSpellAbility().addEffect(new ExileGraveyardAllTargetPlayerEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
 
         // or destroy target artifact;
         Mode mode = new Mode();

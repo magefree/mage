@@ -56,7 +56,7 @@ public class Scrap extends CardImpl {
         this.expansionSetCode = "USG";
         this.color.setRed(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 

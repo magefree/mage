@@ -68,13 +68,13 @@ public class CabalPatriarch extends CardImpl {
       TargetControlledPermanent target = new TargetControlledPermanent(new FilterControlledCreaturePermanent("a creature"));
       target.setRequired(true);
       ability1.addCost(new SacrificeTargetCost(target));
-      ability1.addTarget(new TargetCreaturePermanent(true));
+      ability1.addTarget(new TargetCreaturePermanent());
       this.addAbility(ability1);
         
         // {2}{B}, Exile a creature card from your graveyard: Target creature gets -2/-2 until end of turn.
       Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2, -2, Duration.EndOfTurn), new ManaCostsImpl("{2}{B}"));
       ability2.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard("a creature card"))));
-      ability2.addTarget(new TargetCreaturePermanent(true));
+      ability2.addTarget(new TargetCreaturePermanent());
       this.addAbility(ability2);
     }
 

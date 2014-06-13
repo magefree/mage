@@ -59,7 +59,7 @@ public class HuntedLammasu extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // When Hunted Lammasu enters the battlefield, put a 4/4 black Horror creature token onto the battlefield under target opponent's control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenTargetEffect(new HorrorToken()), false);
-        Target target = new TargetOpponent(true);
+        Target target = new TargetOpponent();
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

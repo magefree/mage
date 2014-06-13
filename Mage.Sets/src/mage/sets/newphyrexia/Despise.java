@@ -58,7 +58,7 @@ public class Despise extends CardImpl {
         this.color.setBlack(true);
 
         // Target opponent reveals his or her hand. You choose a creature or planeswalker card from it. That player discards that card.
-        this.getSpellAbility().addTarget(new TargetOpponent(true));
+        this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter));
     }
 

@@ -72,11 +72,11 @@ public class GideonJura extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), false));
 
         LoyaltyAbility ability1 = new LoyaltyAbility(new GideonJuraEffect(), 2);
-        ability1.addTarget(new TargetOpponent(true));
+        ability1.addTarget(new TargetOpponent());
         this.addAbility(ability1);
 
         LoyaltyAbility ability2 = new LoyaltyAbility(new DestroyTargetEffect(), -2);
-        ability2.addTarget(new TargetCreaturePermanent(filter, true));
+        ability2.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability2);
 
         LoyaltyAbility ability3 = new LoyaltyAbility(new BecomesCreatureSourceEffect(new GideonJuraToken(), "planeswalker", Duration.EndOfTurn), 0);

@@ -65,7 +65,7 @@ public class VassalsDuty extends CardImpl {
 
         // {1}: The next 1 damage that would be dealt to target legendary creature you control this turn is dealt to you instead.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VassalsDutyPreventDamageTargetEffect(Duration.EndOfTurn, 1), new GenericManaCost(1));
-        ability.addTarget(new TargetControlledCreaturePermanent(1,1,filter, false, true));
+        ability.addTarget(new TargetControlledCreaturePermanent(1,1,filter, false));
         this.addAbility(ability);
     }
 

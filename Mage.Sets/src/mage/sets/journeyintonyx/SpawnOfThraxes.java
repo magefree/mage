@@ -66,7 +66,7 @@ public class SpawnOfThraxes extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // When Spawn of Thraxes enters the battlefield, it deals damage to target creature or player equal to the number of Mountains you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)));
-        ability.addTarget(new TargetCreatureOrPlayer(true));
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);        
     }
 

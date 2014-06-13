@@ -62,7 +62,7 @@ public class SteamAugury extends CardImpl {
 
         // Reveal the top five cards of your library and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard.
         this.getSpellAbility().addEffect(new SteamAuguryEffect());
-        this.getSpellAbility().addTarget(new TargetOpponent(true));
+        this.getSpellAbility().addTarget(new TargetOpponent());
 
     }
 

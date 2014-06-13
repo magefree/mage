@@ -55,7 +55,7 @@ public class LabyrinthChampion extends CardImpl {
 
         // Heroic - Whenever you cast a spell that targets Labyrinth Champion, Labyrinth Champion deals 2 damage to target creature or player.
         Ability ability = new HeroicAbility(new DamageTargetEffect(2), false);
-        ability.addTarget(new TargetCreatureOrPlayer(true));
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

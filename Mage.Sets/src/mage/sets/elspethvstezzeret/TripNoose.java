@@ -52,7 +52,7 @@ public class TripNoose extends CardImpl {
         // {2}, {tap}: Tap target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("2"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

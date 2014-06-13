@@ -52,7 +52,7 @@ public class TowerOfMurmurs extends CardImpl {
         this.expansionSetCode = "MRD";
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(8), new GenericManaCost(8));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

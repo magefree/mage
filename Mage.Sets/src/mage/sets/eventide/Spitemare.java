@@ -60,7 +60,7 @@ public class Spitemare extends CardImpl {
 
         // Whenever Spitemare is dealt damage, it deals that much damage to target creature or player.
         Ability ability = new SpitemareTriggeredAbility();
-        ability.addTarget(new TargetCreatureOrPlayer(true));
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
 
     }

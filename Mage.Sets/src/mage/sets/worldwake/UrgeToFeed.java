@@ -63,7 +63,7 @@ public class UrgeToFeed extends CardImpl {
 
         // Target creature gets -3/-3 until end of turn. You may tap any number of untapped Vampire creatures you control. If you do, put a +1/+1 counter on each of those Vampires.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-3, -3, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new UrgeToFeedEffect());
     }
 
@@ -98,7 +98,7 @@ class UrgeToFeedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TargetCreaturePermanent target = new TargetCreaturePermanent(filter, true);
+        TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
         while (true) {
             target.clearChosen();
             if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getId(), game)) {

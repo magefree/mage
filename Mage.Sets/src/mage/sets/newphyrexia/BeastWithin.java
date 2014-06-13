@@ -54,7 +54,7 @@ public class BeastWithin extends CardImpl {
 
         this.color.setGreen(true);
 
-        this.getSpellAbility().addTarget(new TargetPermanent(true));
+        this.getSpellAbility().addTarget(new TargetPermanent());
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new BeastWithinEffect());
     }

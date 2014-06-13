@@ -86,12 +86,12 @@ public class MarathWillOfTheWild extends CardImpl {
         effect.setText("Put X +1/+1 counters on target creature");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
         ability.addCost(new MarathWillOfTheWildRemoveCountersCost());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
 
         // or Marath deals X damage to target creature or player;
         Mode mode = new Mode();
         mode.getEffects().add(new DamageTargetEffect(new ManacostVariableValue()));
-        mode.getTargets().add(new TargetCreatureOrPlayer(true));
+        mode.getTargets().add(new TargetCreatureOrPlayer());
         ability.addMode(mode);
 
         // or put an X/X green Elemental creature token onto the battlefield.

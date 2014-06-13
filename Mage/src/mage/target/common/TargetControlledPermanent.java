@@ -42,11 +42,6 @@ public class TargetControlledPermanent extends TargetPermanent {
         this(1, 1, new FilterControlledPermanent(), false);
     }
 
-    public TargetControlledPermanent(boolean required) {
-        this(1, 1, new FilterControlledPermanent(), false);
-        this.setRequired(true);
-    }
-
     public TargetControlledPermanent(int numTargets) {
         this(numTargets, numTargets, new FilterControlledPermanent(), false);
     }

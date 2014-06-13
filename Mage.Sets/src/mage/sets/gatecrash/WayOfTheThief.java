@@ -71,7 +71,7 @@ public class WayOfTheThief extends CardImpl {
         this.color.setBlue(true);
 
         // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

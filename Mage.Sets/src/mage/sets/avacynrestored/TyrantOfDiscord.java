@@ -59,7 +59,7 @@ public class TyrantOfDiscord extends CardImpl {
 
         // When Tyrant of Discord enters the battlefield, target opponent chooses a permanent he or she controls at random and sacrifices it. If a nonland permanent is sacrificed this way, repeat this process.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TyrantOfDiscordEffect());
-        ability.addTarget(new TargetOpponent(true));
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
 

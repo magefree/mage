@@ -52,7 +52,7 @@ public class BeaconOfImmortality extends CardImpl {
         this.color.setWhite(true);
 
         // Double target player's life total.
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new BeaconOfImmortalityEffect());
         // Shuffle Beacon of Immortality into its owner's library.
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());

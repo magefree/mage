@@ -82,7 +82,7 @@ public class KioraTheCrashingWave extends CardImpl {
 
         // +1: Until your next turn, prevent all damage that would be dealt to and dealt by target permanent an opponent controls.
         LoyaltyAbility ability = new LoyaltyAbility(new KioraPreventionEffect(), 1);
-        ability.addTarget(new TargetPermanent(filter, true));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // -1: Draw a card. You may play an additional land this turn.

@@ -57,7 +57,7 @@ public class CultbrandCinder extends CardImpl {
 
         // When Cultbrand Cinder enters the battlefield, put a -1/-1 counter on target creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance()));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

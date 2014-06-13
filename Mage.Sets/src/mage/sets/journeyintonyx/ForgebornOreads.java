@@ -54,7 +54,7 @@ public class ForgebornOreads extends CardImpl {
 
         // Constellation - Whenever Forgeborn Oreads or another enchantment enters the battlefield under your control, Forgeborn Oreads deals 1 damage to target creature or player.
         Ability ability = new ConstellationAbility(new DamageTargetEffect(1));
-        ability.addTarget(new TargetCreatureOrPlayer(true));
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
 
     }

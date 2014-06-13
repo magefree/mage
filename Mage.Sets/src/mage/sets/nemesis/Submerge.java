@@ -68,7 +68,7 @@ public class Submerge extends CardImpl {
         this.addAbility(new AlternativeCostSourceAbility(null, condition));        
         // Put target creature on top of its owner's library.
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
                 
     }
 

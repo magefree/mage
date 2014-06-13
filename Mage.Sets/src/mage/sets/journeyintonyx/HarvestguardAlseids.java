@@ -55,7 +55,7 @@ public class HarvestguardAlseids extends CardImpl {
 
         // Constellation — Whenever Harvestguard Alseids or another enchantment enters the battlefield under your control, prevent all damage that would be dealt to target creature this turn.
         Ability ability = new ConstellationAbility(new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE), false);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

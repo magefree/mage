@@ -67,7 +67,7 @@ public class BitterheartWitch extends CardImpl {
 
         // When Bitterheart Witch dies, you may search your library for a Curse card, put it onto the battlefield attached to target player, then shuffle your library.
         Ability ability = new DiesTriggeredAbility(new BitterheartWitchEffect(), true);
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
     }

@@ -62,8 +62,8 @@ public class LastStand extends CardImpl {
 
         // Target opponent loses 2 life for each Swamp you control. Last Stand deals damage equal to the number of Mountains you control to target creature. Put a 1/1 green Saproling creature token onto the battlefield for each Forest you control. You gain 2 life for each Plains you control. Draw a card for each Island you control, then discard that many cards.
         this.getSpellAbility().addEffect(new LastStandEffect());
-        this.getSpellAbility().addTarget(new TargetOpponent(true));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public LastStand(final LastStand card) {

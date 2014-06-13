@@ -81,7 +81,7 @@ public class DevoutChaplain extends CardImpl {
         // {tap}, Tap two untapped Humans you control: Exile target artifact or enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledPermanent(2, 2, humanFilter, false)));
-        ability.addTarget(new TargetPermanent(filter, true));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

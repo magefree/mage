@@ -61,7 +61,7 @@ public class MorgueBurst extends CardImpl {
         // Return target creature card from your graveyard to your hand. Morgue Burst deals damage to target creature or player equal to the power of the card returned this way.
         this.getSpellAbility().addEffect(new MorgueBurstEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
     public MorgueBurst(final MorgueBurst card) {

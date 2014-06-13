@@ -50,7 +50,7 @@ public class RiftBolt extends CardImpl {
 
         // Rift Bolt deals 3 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
 
         // Suspend 1-{R}
         this.addAbility(new SuspendAbility(1, new ManaCostsImpl("{R}"), this));

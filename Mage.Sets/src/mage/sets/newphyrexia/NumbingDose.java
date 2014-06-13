@@ -68,7 +68,7 @@ public class NumbingDose extends CardImpl {
 
         this.color.setBlue(true);
 
-        TargetPermanent auraTarget = new TargetPermanent(filter, true);
+        TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         EnchantAbility ability = new EnchantAbility(auraTarget.getTargetName());

@@ -65,7 +65,7 @@ public class TerashisGrasp extends CardImpl {
         this.color.setWhite(true);
 
         // Destroy target artifact or enchantment. 
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         // You gain life equal to its converted mana cost.
         this.getSpellAbility().addEffect(new TerashisGraspEffect());

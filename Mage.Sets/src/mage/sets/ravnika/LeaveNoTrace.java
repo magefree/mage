@@ -60,7 +60,7 @@ public class LeaveNoTrace extends CardImpl {
 
         // Radiance - Destroy target enchantment and each other enchantment that shares a color with it.
         this.getSpellAbility().addEffect(new LeaveNoTraceEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(true));
+        this.getSpellAbility().addTarget(new TargetPermanent());
     }
 
     public LeaveNoTrace(final LeaveNoTrace card) {

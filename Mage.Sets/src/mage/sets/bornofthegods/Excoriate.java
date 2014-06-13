@@ -56,7 +56,7 @@ public class Excoriate extends CardImpl {
 
         // Exile target tapped creature.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
     public Excoriate(final Excoriate card) {

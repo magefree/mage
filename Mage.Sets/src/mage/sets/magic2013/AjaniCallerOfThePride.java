@@ -75,7 +75,7 @@ public class AjaniCallerOfThePride extends CardImpl {
         effects.add(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
         effects.add(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
         ability = new LoyaltyAbility(effects, -3);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // -8: Put X 2/2 white Cat creature tokens onto the battlefield, where X is your life total.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new CatToken(), new ControllerLifeCount()), -8));

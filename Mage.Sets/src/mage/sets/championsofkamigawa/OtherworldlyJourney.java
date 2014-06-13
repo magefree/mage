@@ -59,7 +59,7 @@ public class OtherworldlyJourney extends CardImpl {
         this.color.setWhite(true);
         // Exile target creature. At the beginning of the next end step, return that card to the battlefield under its owner's control with a +1/+1 counter on it.
         this.getSpellAbility().addEffect(new OtherworldlyJourneyEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public OtherworldlyJourney(final OtherworldlyJourney card) {

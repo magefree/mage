@@ -112,7 +112,7 @@ class KaisoMemoryOfLoyalty extends Token {
                 Zone.BATTLEFIELD,
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE),
                 new RemoveCountersSourceCost(CounterType.KI.createInstance()));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 }

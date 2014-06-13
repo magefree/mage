@@ -55,7 +55,7 @@ public class CryptIncursion extends CardImpl {
         this.color.setBlack(true);
 
         // Exile all creature cards from target player's graveyard. You gain 3 life for each card exiled this way.
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new CryptIncursionEffect());
 
 

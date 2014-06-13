@@ -53,7 +53,7 @@ public class SnareTheSkies extends CardImpl {
         // Target creature gets +1/+1 and gains reach until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(ReachAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public SnareTheSkies(final SnareTheSkies card) {

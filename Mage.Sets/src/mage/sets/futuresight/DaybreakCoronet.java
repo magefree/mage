@@ -69,7 +69,7 @@ public class DaybreakCoronet extends CardImpl {
         this.color.setWhite(true);
 
         // Enchant creature with another Aura attached to it
-        TargetPermanent auraTarget = new TargetCreaturePermanent(filter, true);
+        TargetPermanent auraTarget = new TargetCreaturePermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

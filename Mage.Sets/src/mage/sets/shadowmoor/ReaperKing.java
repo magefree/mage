@@ -77,7 +77,7 @@ public class ReaperKing extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
         // Whenever another Scarecrow enters the battlefield under your control, destroy target permanent.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(new DestroyTargetEffect(), filterTrigger);
-        ability.addTarget(new TargetPermanent(true));
+        ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
 
     }

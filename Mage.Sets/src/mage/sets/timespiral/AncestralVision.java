@@ -49,7 +49,7 @@ public class AncestralVision extends CardImpl {
         // Suspend 4-{U}
         this.addAbility(new SuspendAbility(4, new ManaCostsImpl("U"), this));
         // Target player draws three cards.
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(3));
     }
 

@@ -61,7 +61,7 @@ public class Dreadbore extends CardImpl {
 
         // Destroy target creature or planeswalker.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     public Dreadbore(final Dreadbore card) {

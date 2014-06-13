@@ -65,7 +65,7 @@ public class DevourFlesh extends CardImpl {
 
         // Target player sacrifices a creature, then gains life equal to that creature's toughness.
         this.getSpellAbility().addEffect(new DevourFleshSacrificeEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public DevourFlesh(final DevourFlesh card) {

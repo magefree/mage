@@ -62,7 +62,7 @@ public class EatenBySpiders extends CardImpl {
 
         // Destroy target creature with flying and all Equipment attached to that creature.
         this.getSpellAbility().addEffect(new EatenBySpidersEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
     public EatenBySpiders(final EatenBySpiders card) {

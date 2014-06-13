@@ -55,7 +55,7 @@ public class ConsignToDream extends CardImpl {
 
         // Return target permanent to its owner's hand. If that permanent is red or green, put it on top of its owner's library instead.
         this.getSpellAbility().addEffect(new ConsignToDreamEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(true));
+        this.getSpellAbility().addTarget(new TargetPermanent());
 
     }
 

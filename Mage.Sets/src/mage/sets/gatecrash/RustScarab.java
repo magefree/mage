@@ -104,7 +104,7 @@ class BecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
                 FilterPermanent filter = new FilterPermanent("artifact or enchantment defending player controls");
                 filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.ENCHANTMENT)));
                 filter.add(new ControllerIdPredicate(defenderId));
-                Target target = new TargetPermanent(filter, true);
+                Target target = new TargetPermanent(filter);
                 this.addTarget(target);
                 return true;
             }

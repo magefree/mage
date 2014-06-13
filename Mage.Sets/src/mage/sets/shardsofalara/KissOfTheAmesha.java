@@ -49,7 +49,7 @@ public class KissOfTheAmesha extends CardImpl {
         this.color.setWhite(true);
 
         // Target player gains 7 life and draws two cards.
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(7));
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(2));
     }

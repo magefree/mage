@@ -83,7 +83,7 @@ public class UnscytheKillerOfKings extends CardImpl {
         this.addWatcher(new EquippedDidDamageWatcher());
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), new TargetControlledCreaturePermanent(true)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), new TargetControlledCreaturePermanent()));
     }
 
     public UnscytheKillerOfKings(final UnscytheKillerOfKings card) {

@@ -61,7 +61,7 @@ public class DromarsCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
         mode = new Mode();
         mode.getEffects().add(new BoostTargetEffect(-2, -2, Duration.EndOfTurn));
-        mode.getTargets().add(new TargetCreaturePermanent(true));
+        mode.getTargets().add(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
     }
 

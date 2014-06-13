@@ -61,7 +61,7 @@ public class DivineOffering extends CardImpl {
         this.color.setWhite(true);
 
         // Destroy target artifact. You gain life equal to its converted mana cost.
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new DivineOfferingEffect());
     }

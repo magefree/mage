@@ -60,7 +60,7 @@ public class GoblinWarStrike extends CardImpl {
 
         // Goblin War Strike deals damage equal to the number of Goblins you control to target player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)));
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public GoblinWarStrike(final GoblinWarStrike card) {

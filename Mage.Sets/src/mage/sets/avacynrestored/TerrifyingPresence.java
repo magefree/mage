@@ -52,7 +52,7 @@ public class TerrifyingPresence extends CardImpl {
 
         // Prevent all combat damage that would be dealt by creatures other than target creature this turn.
         this.getSpellAbility().addEffect(new TerrifyingPresenceEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public TerrifyingPresence(final TerrifyingPresence card) {

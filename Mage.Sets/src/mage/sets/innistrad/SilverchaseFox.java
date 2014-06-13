@@ -65,7 +65,7 @@ public class SilverchaseFox extends CardImpl {
 
         // {1}{W}, Sacrifice Silverchase Fox: Exile target enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{1}{W}"));
-        ability.addTarget(new TargetPermanent(filter, true));
+        ability.addTarget(new TargetPermanent(filter));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

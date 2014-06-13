@@ -53,7 +53,7 @@ public class WildHunger extends CardImpl {
         this.color.setGreen(true);
 
         // Target creature gets +3/+1 and gains trample until end of turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 1, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
         // Flashback {3}{R}

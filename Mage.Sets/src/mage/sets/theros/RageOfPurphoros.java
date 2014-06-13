@@ -57,7 +57,7 @@ public class RageOfPurphoros extends CardImpl {
 
         // Rage of Purphoros deals 4 damage to target creature. It can't be regenerated this turn. Scry 1.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new RageOfPurphorosEffect());
         this.getSpellAbility().addEffect(new ScryEffect(1));
 

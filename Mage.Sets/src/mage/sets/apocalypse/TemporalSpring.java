@@ -46,7 +46,7 @@ public class TemporalSpring extends CardImpl {
         this.color.setBlue(true);
         this.color.setGreen(true);
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetPermanent(true));
+        this.getSpellAbility().addTarget(new TargetPermanent());
     }
 
     public TemporalSpring(final TemporalSpring card) {

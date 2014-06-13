@@ -67,7 +67,7 @@ public class NyxWeaver extends CardImpl {
         // {1}{B}{G}, Exile Nyx Weaver: Return target card from your graveyard to your hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl("{1}{B}{G}"));
         ability.addCost(new ExileSourceCost());
-        ability.addTarget(new TargetCardInYourGraveyard(true));
+        ability.addTarget(new TargetCardInYourGraveyard());
         this.addAbility(ability);
     }
 

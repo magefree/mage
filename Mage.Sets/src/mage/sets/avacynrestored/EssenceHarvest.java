@@ -55,7 +55,7 @@ public class EssenceHarvest extends CardImpl {
 
         // Target player loses X life and you gain X life, where X is the greatest power among creatures you control.
         this.getSpellAbility().addEffect(new EssenceHarvestEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public EssenceHarvest(final EssenceHarvest card) {

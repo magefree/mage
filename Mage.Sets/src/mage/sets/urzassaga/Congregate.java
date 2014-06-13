@@ -50,7 +50,7 @@ public class Congregate extends CardImpl {
 
         // Target player gains 2 life for each creature on the battlefield.
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(new PermanentsOnBattlefieldCount(new FilterCreaturePermanent(), 2)));
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public Congregate(final Congregate card) {

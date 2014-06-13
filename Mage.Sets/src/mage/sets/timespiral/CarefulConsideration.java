@@ -54,7 +54,7 @@ public class CarefulConsideration extends CardImpl {
                 new DrawDiscardTargetEffect(4,3),
                 MyMainPhaseCondition.getInstance(),
                 "Target player draws four cards, then discards three cards. If you cast this spell during your main phase, instead that player draws four cards, then discards two cards"));
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public CarefulConsideration(final CarefulConsideration card) {

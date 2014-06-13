@@ -76,7 +76,7 @@ public class SkullmaneBaku extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SkullmaneBakuUnboostEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI.createInstance(1)));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

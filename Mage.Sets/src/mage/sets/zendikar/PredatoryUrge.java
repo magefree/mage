@@ -61,7 +61,7 @@ public class PredatoryUrge extends CardImpl {
         this.color.setGreen(true);
 
         // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
@@ -69,7 +69,7 @@ public class PredatoryUrge extends CardImpl {
         // Enchanted creature has "{tap}: This creature deals damage equal to its power to target creature.
         // That creature deals damage equal to its power to this creature."
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PredatoryUrgeEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA)));
     }
 

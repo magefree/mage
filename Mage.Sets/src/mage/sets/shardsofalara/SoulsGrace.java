@@ -52,7 +52,7 @@ public class SoulsGrace extends CardImpl {
         this.color.setWhite(true);
 
         // You gain life equal to target creature's power.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new SoulsGraceEffect());
     }
 

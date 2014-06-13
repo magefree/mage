@@ -63,7 +63,7 @@ public class MagisterSphinx extends CardImpl {
         
         // When Magister Sphinx enters the battlefield, target player's life total becomes 10.
         Ability ability = new EntersBattlefieldTriggeredAbility(new MagisterSphinxEffect(), false);
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         
     }

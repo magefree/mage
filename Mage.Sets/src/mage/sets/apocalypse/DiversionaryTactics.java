@@ -59,7 +59,7 @@ public class DiversionaryTactics extends CardImpl {
         this.expansionSetCode = "APC";
         this.color.setWhite(true);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, false)));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
     }

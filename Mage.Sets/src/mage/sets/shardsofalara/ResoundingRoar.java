@@ -54,12 +54,12 @@ public class ResoundingRoar extends CardImpl {
 
         // Target creature gets +3/+3 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Cycling {5}{R}{G}{W}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{5}{R}{G}{W}")));
         // When you cycle Resounding Roar, target creature gets +6/+6 until end of turn.
         Ability ability = new CycleTriggeredAbility(new BoostTargetEffect(6, 6, Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

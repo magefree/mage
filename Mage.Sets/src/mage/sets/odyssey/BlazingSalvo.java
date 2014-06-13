@@ -52,7 +52,7 @@ public class BlazingSalvo extends CardImpl {
         this.color.setRed(true);
 
         // Blazing Salvo deals 3 damage to target creature unless that creature's controller has Blazing Salvo deal 5 damage to him or her.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BlazingSalvoEffect());
     }
 

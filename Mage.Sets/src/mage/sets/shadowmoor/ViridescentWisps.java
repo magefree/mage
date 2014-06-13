@@ -51,7 +51,7 @@ public class ViridescentWisps extends CardImpl {
         this.expansionSetCode = "SHM";
         this.color.setGreen(true);
         //    Target creature becomes green and gets +1/+0 until end of turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new SetCardColorTargetEffect(ObjectColor.GREEN, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new BoostTargetEffect(1,0, Duration.EndOfTurn));
         // Draw a card.

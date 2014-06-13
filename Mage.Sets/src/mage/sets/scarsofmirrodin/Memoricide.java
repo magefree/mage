@@ -57,7 +57,7 @@ public class Memoricide extends CardImpl {
 
         // Name a nonland card. Search target player's graveyard, hand, and library for any number of cards with
         // that name and exile them. Then that player shuffles his or her library
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new MemoricideEffect());
     }
 

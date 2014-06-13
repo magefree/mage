@@ -57,7 +57,7 @@ public class RevokeExistence extends CardImpl {
         this.expansionSetCode = "SOM";
         this.color.setWhite(true);
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     public RevokeExistence (final RevokeExistence card) {

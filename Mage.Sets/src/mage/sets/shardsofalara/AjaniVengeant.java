@@ -68,7 +68,7 @@ public class AjaniVengeant extends CardImpl {
 
 
         LoyaltyAbility ability1 = new LoyaltyAbility(new SkipNextUntapTargetEffect(), 1);
-        ability1.addTarget(new TargetPermanent(true));
+        ability1.addTarget(new TargetPermanent());
         this.addAbility(ability1);
 
         Effects effects1 = new Effects();
@@ -79,7 +79,7 @@ public class AjaniVengeant extends CardImpl {
         this.addAbility(ability2);
 
         LoyaltyAbility ability3 = new LoyaltyAbility(new DestroyAllControlledTargetEffect(filter), -7);
-        ability3.addTarget(new TargetPlayer(true));
+        ability3.addTarget(new TargetPlayer());
         this.addAbility(ability3);
 
 

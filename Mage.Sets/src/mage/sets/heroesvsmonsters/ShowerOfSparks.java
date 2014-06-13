@@ -51,13 +51,13 @@ public class ShowerOfSparks extends CardImpl {
 
         // Shower of Sparks deals 1 damage to target creature and 1 damage to target player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         Effect effect = new DamageTargetEffect(1);
         effect.setTargetPointer(new SecondTargetPointer());
         effect.setText("and 1 damage to target player");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public ShowerOfSparks(final ShowerOfSparks card) {

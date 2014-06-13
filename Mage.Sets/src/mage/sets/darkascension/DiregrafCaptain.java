@@ -98,7 +98,7 @@ class DiregrafCaptainTriggeredAbility extends TriggeredAbilityImpl {
 
     public DiregrafCaptainTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), false);
-        this.addTarget(new TargetOpponent(true));
+        this.addTarget(new TargetOpponent());
     }
 
     public DiregrafCaptainTriggeredAbility(final DiregrafCaptainTriggeredAbility ability) {

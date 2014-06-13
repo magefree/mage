@@ -51,7 +51,7 @@ public class TeeteringPeaks extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.addAbility(new EntersBattlefieldTappedAbility());
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), false);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         this.addAbility(new RedManaAbility());
     }

@@ -66,7 +66,7 @@ public class DeadshotMinotaur extends CardImpl {
 
         // When Deadshot Minotaur enters the battlefield, it deals 3 damage to target creature with flying.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3), false);
-        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
         // Cycling {RG}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{R/G}")));

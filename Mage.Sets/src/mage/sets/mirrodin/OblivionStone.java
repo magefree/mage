@@ -58,7 +58,7 @@ public class OblivionStone extends CardImpl {
         // {4}, {tap}: Put a fate counter on target permanent.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.FATE.createInstance()), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(true));
+        ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
         // {5}, {tap}, Sacrifice Oblivion Stone: Destroy each nonland permanent without a fate counter on it, then remove all fate counters from all permanents.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OblivionStoneEffect(), new GenericManaCost(5));

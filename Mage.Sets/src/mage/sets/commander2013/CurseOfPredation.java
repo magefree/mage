@@ -62,7 +62,7 @@ public class CurseOfPredation extends CardImpl {
         this.color.setGreen(true);
 
         // Enchant player
-        TargetPlayer auraTarget = new TargetPlayer(true);
+        TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));

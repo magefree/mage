@@ -63,7 +63,7 @@ public class ScribNibblers extends CardImpl {
 
         // {tap}: Exile the top card of target player's library. If it's a land card, you gain 1 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScribNibblersEffect(), new TapSourceCost());
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
         // Landfall - Whenever a land enters the battlefield under your control, you may untap Scrib Nibblers.

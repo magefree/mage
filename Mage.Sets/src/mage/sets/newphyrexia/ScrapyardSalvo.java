@@ -50,7 +50,7 @@ public class ScrapyardSalvo extends CardImpl {
 
         this.color.setRed(true);
 
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DamageTargetEffect(new CardsInControllerGraveyardCount(filter)));
     }
 

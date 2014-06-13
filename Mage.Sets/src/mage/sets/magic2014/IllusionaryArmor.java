@@ -60,7 +60,7 @@ public class IllusionaryArmor extends CardImpl {
         this.color.setBlue(true);
 
         // Enchant Creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));

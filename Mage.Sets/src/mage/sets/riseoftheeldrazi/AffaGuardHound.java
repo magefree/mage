@@ -57,7 +57,7 @@ public class AffaGuardHound extends CardImpl {
 
         this.addAbility(FlashAbility.getInstance());
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(0, 3, Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

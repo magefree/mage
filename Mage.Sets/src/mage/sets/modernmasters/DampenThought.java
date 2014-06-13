@@ -50,7 +50,7 @@ public class DampenThought extends CardImpl {
 
         // Target player puts the top four cards of his or her library into his or her graveyard.
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         // Splice onto Arcane {1}{U}
         this.addAbility(new SpliceOntoArcaneAbility("{1}{U}"));
     }

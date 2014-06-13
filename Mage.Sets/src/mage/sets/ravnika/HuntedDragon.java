@@ -62,7 +62,7 @@ public class HuntedDragon extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
         // When Hunted Dragon enters the battlefield, put three 2/2 white Knight creature tokens with first strike onto the battlefield under target opponent's control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenTargetEffect(new KnightToken(), 3), false);
-        Target target = new TargetOpponent(true);
+        Target target = new TargetOpponent();
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

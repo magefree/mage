@@ -57,14 +57,14 @@ public class CurseOfTheSwine extends CardImpl {
         // Exile X target creatures. For each creature exiled this way, its controller puts a 2/2 green Boar creature token onto the battlefield.
        this.getSpellAbility().addEffect(new CurseOfTheSwineEffect());
         // Correct number of targets will be set in adjustTargets
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
             ability.getTargets().clear();
-            ability.addTarget(new TargetCreaturePermanent(ability.getManaCostsToPay().getX(), true));
+            ability.addTarget(new TargetCreaturePermanent(ability.getManaCostsToPay().getX()));
         }
     }
 

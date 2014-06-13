@@ -73,7 +73,7 @@ public class DereviEmpyrialTactician extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Derevi, Empyrial Tactician enters the battlefield or a creature you control deals combat damage to a player, you may tap or untap target permanent.
         Ability ability = new DereviEmpyrialTacticianTriggeredAbility(new MayTapOrUntapTargetEffect());
-        ability.addTarget(new TargetPermanent(true));
+        ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
         
         // {1}{G}{W}{U}: Put Derevi onto the battlefield from the command zone.

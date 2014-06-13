@@ -73,8 +73,8 @@ static {
         this.toughness = new MageInt(3);
 
         // Tap an untapped Cephalid you control: Tap target permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter1, true, true)));
-        ability.addTarget(new TargetPermanent(true));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter1, true)));
+        ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
         
         // {U}{U}{U}: Tap all creatures without flying.

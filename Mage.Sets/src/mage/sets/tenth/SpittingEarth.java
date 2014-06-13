@@ -54,7 +54,7 @@ public class SpittingEarth extends CardImpl {
         this.expansionSetCode = "10E";
         this.color.setRed(true);
         this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public SpittingEarth(final SpittingEarth card) {

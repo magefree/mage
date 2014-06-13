@@ -70,7 +70,7 @@ public class RalZarek extends CardImpl {
 
         // -2: Ral Zarek deals 3 damage to target creature or player.
         LoyaltyAbility ability2 = new LoyaltyAbility(new DamageTargetEffect(3), -2);
-        ability2.addTarget(new TargetCreatureOrPlayer(true));
+        ability2.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability2);
 
         // -7: Flip five coins. Take an extra turn after this one for each coin that comes up heads.

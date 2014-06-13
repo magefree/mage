@@ -82,7 +82,7 @@ class LilianasCaressAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.DISCARDED_CARD && game.getOpponents(controllerId).contains(event.getPlayerId())) {
-            this.addTarget(new TargetPlayer(true));
+            this.addTarget(new TargetPlayer());
             getTargets().get(0).add(event.getPlayerId(), game);
             return true;
         }

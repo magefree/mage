@@ -87,7 +87,7 @@ public class ShrewdHatchling extends CardImpl {
         
         // {UR}: Target creature can't block Shrewd Hatchling this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShrewdHatchlingEffect(), new ManaCostsImpl("{U/R}"));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         
         // Whenever you cast a blue spell, remove a -1/-1 counter from Shrewd Hatchling.

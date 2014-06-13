@@ -89,7 +89,7 @@ class UlamogTheInfiniteGyreDestroyOnCastAbility extends TriggeredAbilityImpl {
 
     UlamogTheInfiniteGyreDestroyOnCastAbility ( ) {
         super(Zone.STACK, new DestroyTargetEffect());
-        this.addTarget(new TargetPermanent(true));
+        this.addTarget(new TargetPermanent());
     }
 
     UlamogTheInfiniteGyreDestroyOnCastAbility(UlamogTheInfiniteGyreDestroyOnCastAbility ability) {

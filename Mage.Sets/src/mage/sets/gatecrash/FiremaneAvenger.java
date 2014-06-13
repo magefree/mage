@@ -59,7 +59,7 @@ public class FiremaneAvenger extends CardImpl {
 
         // Battalion - Whenever Firemane Avenger and at least two other creatures attack, Firemane Avenger deals 3 damage to target creature or player and you gain 3 life.
         Ability ability = new BattalionAbility(new DamageTargetEffect(3));
-        ability.addTarget(new TargetCreatureOrPlayer(true));
+        ability.addTarget(new TargetCreatureOrPlayer());
         ability.addEffect(new GainLifeEffect(3));
         this.addAbility(ability);
     }

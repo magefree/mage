@@ -57,10 +57,10 @@ public class FeralContest extends CardImpl {
 
         // Put a +1/+1 counter on target creature you control. 
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         // Another target creature blocks it this turn if able.
         this.getSpellAbility().addEffect(new FeralContestEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public FeralContest(final FeralContest card) {

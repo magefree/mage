@@ -59,7 +59,7 @@ public class MageSlayer extends CardImpl {
         this.addAbility(new AttacksAttachedTriggeredAbility(new MageSlayerEffect(), false));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(3), new TargetControlledCreaturePermanent(true)));
+        this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(3), new TargetControlledCreaturePermanent()));
 
     }
 

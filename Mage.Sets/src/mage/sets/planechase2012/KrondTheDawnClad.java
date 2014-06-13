@@ -64,7 +64,7 @@ public class KrondTheDawnClad extends CardImpl {
                 new AttacksTriggeredAbility(new ExileTargetEffect(), false),
                 new EnchantedCondition(),
                 "Whenever Krond the Dawn-Clad attacks, if it's enchanted, exile target permanent.");
-        ability.addTarget(new TargetPermanent(true));
+        ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }
 

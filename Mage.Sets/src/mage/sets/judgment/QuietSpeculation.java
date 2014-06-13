@@ -69,7 +69,7 @@ public class QuietSpeculation extends CardImpl {
         // Search target player's library for up to three cards with flashback and put them into that player's graveyard. Then the player shuffles his or her library.
         TargetCardInLibrary target = new TargetCardInLibrary(0, 3, filterCard);
         this.getSpellAbility().addEffect(new SearchLibraryPutInGraveEffect(target));
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public QuietSpeculation(final QuietSpeculation card) {

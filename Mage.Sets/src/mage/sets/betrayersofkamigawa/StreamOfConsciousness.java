@@ -57,7 +57,7 @@ public class StreamOfConsciousness extends CardImpl {
 
         // Target player shuffles up to four target cards from his or her graveyard into his or her library.
         this.getSpellAbility().addEffect(new StreamOfConsciousnessEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addTarget(new StreamOfConsciousnessTarget());
 
     }

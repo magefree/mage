@@ -110,7 +110,7 @@ class XathridDemonEffect extends OneShotEffect {
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature other than " + sourcePermanent.getName());
         filter.add(new AnotherPredicate());
 
-        Target target = new TargetControlledCreaturePermanent(1, 1, filter, true, true);
+        Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
         if (target.canChoose(source.getSourceId(), player.getId(), game)) {
             player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());

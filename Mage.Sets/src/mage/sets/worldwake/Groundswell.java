@@ -56,7 +56,7 @@ public class Groundswell extends CardImpl {
         this.expansionSetCode = "WWK";
         this.color.setGreen(true);
 
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GroundswellEffect(Duration.EndOfTurn));
 
         this.addWatcher(new LandfallWatcher());

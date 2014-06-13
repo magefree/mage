@@ -50,7 +50,7 @@ public class AugerSpree extends CardImpl {
 
         // Target creature gets +4/-4 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(4, -4, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public AugerSpree(final AugerSpree card) {

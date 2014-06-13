@@ -50,7 +50,7 @@ public class ConsumingVortex extends CardImpl {
 
         // Return target creature to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Splice onto Arcane {3}{U}
         this.addAbility(new SpliceOntoArcaneAbility("{3}{U}"));
     }

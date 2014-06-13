@@ -63,7 +63,7 @@ public class SetessanStarbreaker extends CardImpl {
 
         // When Setessa Starbreaker enters the battlefield, you may destroy target Aura.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true);
-        ability.addTarget(new TargetPermanent(filter, true));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

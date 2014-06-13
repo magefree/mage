@@ -54,7 +54,7 @@ public class Vengeance extends CardImpl {
         this.color.setWhite(true);
 
         // Destroy target tapped creature.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 

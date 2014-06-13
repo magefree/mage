@@ -71,7 +71,7 @@ public class BanishingLight extends CardImpl {
 
         // When Banishing Light enters the battlefield, exile target nonland permanent an opponent controls until Banishing Light leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BanishingLightExileEffect());
-        ability.addTarget(new TargetPermanent(filter, true));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);    
         // Implemented as triggered effect that doesn't uses the stack (implementation with watcher does not work correctly because if the returned creature
         // has a DiesTriggeredAll ability it triggers for the dying / battlefield leaving source object, what shouldn't happen)

@@ -62,7 +62,7 @@ public class SingeMindOgre extends CardImpl {
 
         // When Singe-Mind Ogre enters the battlefield, target player reveals a card at random from his or her hand, then loses life equal to that card's converted mana cost.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SingeMindOgreEffect(), false);
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         
     }

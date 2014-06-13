@@ -55,7 +55,7 @@ public class Saltblast extends CardImpl {
 
         // Destroy target nonwhite permanent.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     public Saltblast(final Saltblast card) {

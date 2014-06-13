@@ -56,7 +56,7 @@ public class CageOfHands extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Aura");
         this.color.setWhite(true);
-        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Neutral));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

@@ -60,7 +60,7 @@ public class ElderCathar extends CardImpl {
 
         // When Elder Cathar dies, put a +1/+1 counter on target creature you control. If that creature is a Human, put two +1/+1 counters on it instead.
         Ability ability = new DiesTriggeredAbility(new ElderCatharAddCountersTargetEffect(), false);
-        ability.addTarget(new TargetControlledCreaturePermanent(true));
+        ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }
 

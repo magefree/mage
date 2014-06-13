@@ -55,7 +55,7 @@ public class Spitebellows extends CardImpl {
 
         // When Spitebellows leaves the battlefield, it deals 6 damage to target creature.
         Ability ability = new LeavesBattlefieldTriggeredAbility(new DamageTargetEffect(6), false);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // Evoke {1}{R}{R}
         this.addAbility(new EvokeAbility(this, "{1}{R}{R}"));

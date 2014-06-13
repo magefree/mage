@@ -66,12 +66,12 @@ public class SelesnyaCharm extends CardImpl {
         // Choose one — Target creature gets +2/+2 and gains trample until end of turn;
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new BoostTargetEffect(2,2, Duration.EndOfTurn));
-        this.getSpellAbility().getTargets().add(new TargetCreaturePermanent(true));
+        this.getSpellAbility().getTargets().add(new TargetCreaturePermanent());
 
         // or exile target creature with power 5 or greater;
         Mode mode = new Mode();
         mode.getEffects().add(new ExileTargetEffect());
-        mode.getTargets().add(new TargetCreaturePermanent(filter, true));
+        mode.getTargets().add(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addMode(mode);
 
         // or put a 2/2 white Knight creature token with vigilance onto the battlefield.

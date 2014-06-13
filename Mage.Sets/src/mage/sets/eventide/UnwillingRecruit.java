@@ -58,7 +58,7 @@ public class UnwillingRecruit extends CardImpl {
 
         // Gain control of target creature until end of turn. Untap that creature. It gets +X/+0 and gains haste until end of turn.
         this.getSpellAbility().addEffect(new UnwillingRecruitEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
     }
 

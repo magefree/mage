@@ -55,10 +55,10 @@ public class TormentorExarch extends CardImpl {
         this.toughness = new MageInt(2);
 
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), false);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         Mode mode = new Mode();
         mode.getEffects().add(new BoostTargetEffect(0, -2, Duration.EndOfTurn));
-        mode.getTargets().add(new TargetCreaturePermanent(true));
+        mode.getTargets().add(new TargetCreaturePermanent());
         ability.addMode(mode);
         this.addAbility(ability);
     }

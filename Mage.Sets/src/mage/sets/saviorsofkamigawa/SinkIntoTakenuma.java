@@ -54,7 +54,7 @@ public class SinkIntoTakenuma extends CardImpl {
         this.getSpellAbility().addEffect(new SweepEffect("Swamp"));
         DynamicValue sweepValue = new SweepNumber("Swamp", false);
         this.getSpellAbility().addEffect(new DiscardTargetEffect(sweepValue));
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public SinkIntoTakenuma(final SinkIntoTakenuma card) {

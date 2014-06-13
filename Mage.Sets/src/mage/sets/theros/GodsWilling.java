@@ -54,7 +54,7 @@ public class GodsWilling extends CardImpl {
         this.getSpellAbility().addEffect(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));
         Choice colorChoice = new ChoiceColor();
         this.getSpellAbility().addChoice(colorChoice);
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 

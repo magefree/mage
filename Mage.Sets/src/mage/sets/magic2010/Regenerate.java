@@ -45,7 +45,7 @@ public class Regenerate extends CardImpl {
         this.expansionSetCode = "M10";
         this.color.setGreen(true);
         this.getSpellAbility().addEffect(new RegenerateTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public Regenerate(final Regenerate card) {

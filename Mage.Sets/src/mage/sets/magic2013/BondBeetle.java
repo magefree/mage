@@ -56,7 +56,7 @@ public class BondBeetle extends CardImpl {
 
         // When Bond Beetle enters the battlefield, put a +1/+1 counter on target creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

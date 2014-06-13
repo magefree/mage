@@ -55,7 +55,7 @@ public class Mournwhelk extends CardImpl {
 
         // When Mournwhelk enters the battlefield, target player discards two cards.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(2));
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // Evoke {3}{B}
         this.addAbility(new EvokeAbility(this, "{3}{B}"));

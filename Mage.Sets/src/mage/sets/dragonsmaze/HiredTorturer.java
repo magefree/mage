@@ -72,7 +72,7 @@ public class HiredTorturer extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2),new ManaCostsImpl("{3}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new HiredTorturerEffect());
-        ability.addTarget(new TargetOpponent(true));
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
     }

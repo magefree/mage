@@ -68,7 +68,7 @@ public class NessianDemolok extends CardImpl {
         this.addAbility(new TributeAbility(3));
         // When Nessian Demolok enters the battlefield, if tribute wasn't paid, destroy target noncreature permanent.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        ability.addTarget(new TargetPermanent(filter, true));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(),
                 "When {this} enters the battlefield, if its tribute wasn't paid, destroy target noncreature permanent."));
     }

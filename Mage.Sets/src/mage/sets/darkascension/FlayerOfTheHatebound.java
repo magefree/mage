@@ -66,7 +66,7 @@ public class FlayerOfTheHatebound extends CardImpl {
 
         // Whenever Flayer of the Hatebound or another creature enters the battlefield from your graveyard, that creature deals damage equal to its power to target creature or player.
         Ability ability = new FlayerTriggeredAbility();
-        ability.addTarget(new TargetCreatureOrPlayer(true));
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

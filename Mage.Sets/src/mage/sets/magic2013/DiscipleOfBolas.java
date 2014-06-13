@@ -68,7 +68,7 @@ public class DiscipleOfBolas extends CardImpl {
 
         // When Disciple of Bolas enters the battlefield, sacrifice another creature. You gain X life and draw X cards, where X is that creature's power.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DiscipleOfBolasEffect());
-        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 

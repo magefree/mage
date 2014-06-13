@@ -35,11 +35,7 @@ import mage.target.TargetPermanent;
  * @author ayratn
  */
 public class TargetArtifactPermanent extends TargetPermanent {
-
-    public TargetArtifactPermanent(boolean required) {
-        this();
-        this.setRequired(required);
-    }
+    
     public TargetArtifactPermanent() {
         this(1, 1, new FilterArtifactPermanent(), false);
     }

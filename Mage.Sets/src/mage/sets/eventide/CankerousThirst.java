@@ -60,7 +60,7 @@ public class CankerousThirst extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalContinousEffect(
                 new BoostTargetEffect(3, 3, Duration.EndOfTurn),
                 new ManaWasSpentCondition(ColoredManaSymbol.G), "If {G} was spent to cast {this}, you may have target creature get +3/+3 until end of turn", true));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.addInfo("Info1", "<i>(Do both if {B}{G} was spent.)<i>");
     }
 

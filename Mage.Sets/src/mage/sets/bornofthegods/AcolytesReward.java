@@ -57,8 +57,8 @@ public class AcolytesReward extends CardImpl {
 
         // Prevent the next X damage that would be dealt to target creature this turn, where X is your devotion to white. If damage is prevented this way, Acolyte's Reward deals that much damage to target creature or player.
         this.getSpellAbility().addEffect(new AcolytesRewardEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
     public AcolytesReward(final AcolytesReward card) {

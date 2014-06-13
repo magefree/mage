@@ -58,7 +58,7 @@ public class HarmsWay extends CardImpl {
         // The next 2 damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to target creature or player instead.
         this.getSpellAbility().addEffect(new HarmsWayPreventDamageTargetEffect());
         this.getSpellAbility().addTarget(new TargetSource());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
     public HarmsWay(final HarmsWay card) {

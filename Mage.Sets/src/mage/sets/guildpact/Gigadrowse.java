@@ -54,7 +54,7 @@ public class Gigadrowse extends CardImpl {
         this.addAbility(new ReplicateAbility(this, "{U}"));
         // Tap target permanent.
         this.getSpellAbility().addEffect(new TapTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(true));
+        this.getSpellAbility().addTarget(new TargetPermanent());
     }
 
     public Gigadrowse(final Gigadrowse card) {

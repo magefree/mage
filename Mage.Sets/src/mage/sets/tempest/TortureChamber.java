@@ -68,7 +68,7 @@ public class TortureChamber extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TortureChamberEffect2(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new TortureChamberCost());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

@@ -63,7 +63,7 @@ public class HuntedHorror extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         // When Hunted Horror enters the battlefield, put two 3/3 green Centaur creature tokens with protection from black onto the battlefield under target opponent's control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenTargetEffect(new CentaurToken(), 2), false);
-        Target target = new TargetOpponent(true);
+        Target target = new TargetOpponent();
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

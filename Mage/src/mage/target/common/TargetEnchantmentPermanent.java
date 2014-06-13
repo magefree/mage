@@ -36,11 +36,6 @@ import mage.target.TargetPermanent;
  * @author LevelX2
  */
 public class TargetEnchantmentPermanent extends TargetPermanent {
-
-    public TargetEnchantmentPermanent(boolean required) {
-        this();
-        this.setRequired(required);
-    }
     
     public TargetEnchantmentPermanent() {
         this(1, 1, new FilterEnchantmentPermanent(), false);

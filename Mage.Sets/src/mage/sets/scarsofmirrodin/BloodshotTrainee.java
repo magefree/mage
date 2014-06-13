@@ -59,7 +59,7 @@ public class BloodshotTrainee extends CardImpl {
         this.toughness = new MageInt(3);
 
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(4), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new BloodshotTraineeCost());
         this.addAbility(ability);
     }

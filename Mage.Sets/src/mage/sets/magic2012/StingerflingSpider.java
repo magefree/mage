@@ -63,7 +63,7 @@ public class StingerflingSpider extends CardImpl {
         this.toughness = new MageInt(5);
         this.addAbility(ReachAbility.getInstance());
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 

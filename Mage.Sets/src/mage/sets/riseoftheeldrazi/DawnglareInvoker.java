@@ -66,7 +66,7 @@ public class DawnglareInvoker extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DawnglareInvokerEffect(),
                 new ManaCostsImpl("{8}"));
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

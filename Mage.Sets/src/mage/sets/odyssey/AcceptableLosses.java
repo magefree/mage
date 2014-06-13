@@ -52,7 +52,7 @@ public class AcceptableLosses extends CardImpl {
         this.getSpellAbility().addCost(new DiscardTargetCost(new TargetCardInHand(), true));
         // Acceptable Losses deals 5 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public AcceptableLosses(final AcceptableLosses card) {

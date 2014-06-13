@@ -61,7 +61,7 @@ public class LegacyWeapon extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new ExileTargetEffect(),
                 new ManaCostsImpl("{W}{U}{B}{R}{G}"));
-        ability.addTarget(new TargetPermanent(true));
+        ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
         // If Legacy Weapon would be put into a graveyard from anywhere, reveal Legacy Weapon and shuffle it into its owner's library instead.
         this.addAbility(new PutIntoGraveFromAnywhereTriggeredAbility(new LegacyWeaponEffect()));

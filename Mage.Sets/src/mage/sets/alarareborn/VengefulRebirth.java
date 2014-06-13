@@ -60,7 +60,7 @@ public class VengefulRebirth extends CardImpl {
         Target target = new TargetCardInYourGraveyard();
         target.setRequired(true);
         this.getSpellAbility().addTarget(target);
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new VengefulRebirthEffect());
         // Exile Vengeful Rebirth.
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());

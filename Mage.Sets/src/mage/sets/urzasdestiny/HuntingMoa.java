@@ -57,7 +57,7 @@ public class HuntingMoa extends CardImpl {
         this.addAbility(new EchoAbility("{2}{G}"));
         // When Hunting Moa enters the battlefield or dies, put a +1/+1 counter on target creature.
         Ability enterAbility = new EntersBattlefieldOrDiesSourceTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);
-        enterAbility.addTarget(new TargetCreaturePermanent(true));
+        enterAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(enterAbility);
     }
 

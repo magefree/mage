@@ -49,7 +49,7 @@ public class BruteForce extends CardImpl {
 
         // Target creature gets +3/+3 until end of turn.
         this.getSpellAbility().getEffects().add(new BoostTargetEffect(3,3, Duration.EndOfTurn));
-        this.getSpellAbility().getTargets().add(new TargetCreaturePermanent(true));
+        this.getSpellAbility().getTargets().add(new TargetCreaturePermanent());
     }
 
     public BruteForce(final BruteForce card) {

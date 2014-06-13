@@ -47,7 +47,7 @@ public class Rescind extends CardImpl {
         this.expansionSetCode = "USG";
         this.color.setBlue(true);
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(true));
+        this.getSpellAbility().addTarget(new TargetPermanent());
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 

@@ -102,7 +102,7 @@ class SereneMasterEffect extends OneShotEffect {
         if (controller != null && sourceCreature != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature it's blocking");
             filter.add(new BlockedByIdPredicate((source.getSourceId())));
-            Target target = new TargetCreaturePermanent(filter, true);
+            Target target = new TargetCreaturePermanent(filter);
             if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
                 if (controller.chooseTarget(outcome, target, source, game)) {
                     Permanent attackingCreature = game.getPermanent(target.getFirstTarget());

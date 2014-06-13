@@ -55,7 +55,7 @@ public class AetherAdept extends CardImpl {
 
         // When AEther Adept enters the battlefield, return target creature to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

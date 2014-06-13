@@ -74,7 +74,7 @@ public class Cromat extends CardImpl {
         filter.add(Predicates.or(new BlockedByIdPredicate(this.getId()),
                                  new BlockingAttackerIdPredicate(this.getId())));        
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{W}{B}"));
-        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
         // {U}{R}: Cromat gains flying until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{U}{R}")));

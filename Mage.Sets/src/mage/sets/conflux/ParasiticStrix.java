@@ -81,7 +81,7 @@ class ParasiticStrixTriggeredAbility extends TriggeredAbilityImpl {
     public ParasiticStrixTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2));
         this.addEffect(new GainLifeEffect(2));
-        this.addTarget(new TargetPlayer(true));
+        this.addTarget(new TargetPlayer());
     }
 
     public ParasiticStrixTriggeredAbility(final ParasiticStrixTriggeredAbility ability) {

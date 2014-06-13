@@ -59,7 +59,7 @@ public class CaoCaoLordOfWei extends CardImpl {
 
         // {tap}: Target opponent discards two cards. Activate this ability only during your turn, before attackers are declared.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(2), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.getInstance());
-        ability.addTarget(new TargetOpponent(true));
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);        
     }
 

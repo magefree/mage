@@ -58,7 +58,7 @@ public class Skullcrack extends CardImpl {
         this.getSpellAbility().addEffect(new CantGainLifeAllEffect(Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new DamageCantBePreventedEffect());
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
 
     }
 

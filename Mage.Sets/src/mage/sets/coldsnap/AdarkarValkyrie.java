@@ -79,7 +79,7 @@ public class AdarkarValkyrie extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
         // {tap}: When target creature other than Adarkar Valkyrie dies this turn, return that card to the battlefield under your control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AdarkarValkyrieEffect(), new TapSourceCost());
-        Target target = new TargetCreaturePermanent(filter, true);
+        Target target = new TargetCreaturePermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);
     }

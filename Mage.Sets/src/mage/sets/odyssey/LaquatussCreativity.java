@@ -53,7 +53,7 @@ public class LaquatussCreativity extends CardImpl {
 
         // Target player draws cards equal to the number of cards in his or her hand, then discards that many cards.
         this.getSpellAbility().addEffect(new LaquatussCreativityEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public LaquatussCreativity(final LaquatussCreativity card) {

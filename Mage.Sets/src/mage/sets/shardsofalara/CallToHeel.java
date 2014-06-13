@@ -56,7 +56,7 @@ public class CallToHeel extends CardImpl {
         // Return target creature to its owner's hand. Its controller draws a card.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addEffect(new CallToHeelEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public CallToHeel(final CallToHeel card) {

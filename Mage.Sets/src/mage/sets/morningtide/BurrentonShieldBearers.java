@@ -54,7 +54,7 @@ public class BurrentonShieldBearers extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         Ability ability = new AttacksTriggeredAbility(new BoostTargetEffect(0, 3, Duration.EndOfTurn), false);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

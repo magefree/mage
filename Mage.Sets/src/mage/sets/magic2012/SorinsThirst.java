@@ -48,7 +48,7 @@ public class SorinsThirst extends CardImpl {
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public SorinsThirst (final SorinsThirst card) {

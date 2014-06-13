@@ -62,11 +62,11 @@ public class DevouringGreed extends CardImpl {
         this.color.setBlack(true);
 
         // As an additional cost to cast Devouring Greed, you may sacrifice any number of Spirits.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true, false)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true)));
 
         // Target player loses 2 life plus 2 life for each Spirit sacrificed this way. You gain that much life.
         this.getSpellAbility().addEffect(new DevouringGreedEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
 
     }
 

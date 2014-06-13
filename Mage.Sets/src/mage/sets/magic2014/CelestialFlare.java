@@ -51,7 +51,7 @@ public class CelestialFlare extends CardImpl {
 
         // Target player sacrifices an attacking or blocking creature.
         this.getSpellAbility().addEffect(new SacrificeEffect(filter, 1, "Target player"));
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
 
     }
 

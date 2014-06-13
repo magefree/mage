@@ -67,7 +67,7 @@ public class SlayerOfTheWicked extends CardImpl {
 
         // When Slayer of the Wicked enters the battlefield, you may destroy target Vampire, Werewolf, or Zombie.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 

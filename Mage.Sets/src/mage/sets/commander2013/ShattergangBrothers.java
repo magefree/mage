@@ -74,7 +74,7 @@ public class ShattergangBrothers extends CardImpl {
         // {2}{B}, Sacrifice a creature: Each other player sacrifices a creature.
         FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("a creature");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShattergangBrothersEffect(filterCreature), new ManaCostsImpl("{2}{B}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filterCreature, true, true)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filterCreature, true)));
         this.addAbility(ability);
         // {2}{R}, Sacrifice an artifact: Each other player sacrifices an artifact.
         FilterControlledPermanent filter = new FilterControlledArtifactPermanent("an artifact");

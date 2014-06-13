@@ -51,7 +51,7 @@ public class NiveousWisps extends CardImpl {
         this.expansionSetCode = "SHM";
         this.color.setWhite(true);
         // Target creature becomes white until end of turn. Tap that creature.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new SetCardColorTargetEffect(ObjectColor.WHITE, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new TapTargetEffect());
         // Draw a card.

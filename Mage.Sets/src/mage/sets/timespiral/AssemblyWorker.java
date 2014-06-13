@@ -64,7 +64,7 @@ public class AssemblyWorker extends CardImpl {
 
         // {tap}: Target Assembly-Worker creature gets +1/+1 until end of turn.
        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new TapSourceCost());
-       ability.addTarget(new TargetPermanent(filter, true));
+       ability.addTarget(new TargetPermanent(filter));
        this.addAbility(ability);
     }
 

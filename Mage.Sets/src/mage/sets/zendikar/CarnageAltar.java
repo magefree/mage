@@ -49,7 +49,7 @@ public class CarnageAltar extends CardImpl {
         this.expansionSetCode = "ZEN";
 
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(3));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(true)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         this.addAbility(ability);
     }
 

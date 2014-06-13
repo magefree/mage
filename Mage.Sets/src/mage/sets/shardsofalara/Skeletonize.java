@@ -65,7 +65,7 @@ public class Skeletonize extends CardImpl {
 
         // Skeletonize deals 3 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // When a creature dealt damage this way dies this turn, put a 1/1 black Skeleton creature token onto the battlefield with "{B}: Regenerate this creature."
         this.getSpellAbility().addEffect(new SkeletonizeEffect());
         this.addWatcher(new DamagedByWatcher());

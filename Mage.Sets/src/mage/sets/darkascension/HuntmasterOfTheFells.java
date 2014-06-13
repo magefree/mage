@@ -141,7 +141,7 @@ class RavagerOfTheFellsAbility extends TriggeredAbilityImpl {
 
     public RavagerOfTheFellsAbility() {
         super(Zone.BATTLEFIELD, new RavagerOfTheFellsEffect(), false);
-        Target target1 = new TargetOpponent(true);
+        Target target1 = new TargetOpponent();
         target1.setRequired(true);
         this.addTarget(target1);
         this.addTarget(new RavagerOfTheFellsTarget());

@@ -61,7 +61,7 @@ public class NeedForSpeed extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
                                                    new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), 
                                                    new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledPermanent("land"))));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

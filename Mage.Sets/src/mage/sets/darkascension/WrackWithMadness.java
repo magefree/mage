@@ -52,7 +52,7 @@ public class WrackWithMadness extends CardImpl {
 
         // Target creature deals damage to itself equal to its power.
         this.getSpellAbility().addEffect(new WrackWithMadnessEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public WrackWithMadness(final WrackWithMadness card) {

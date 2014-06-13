@@ -80,14 +80,14 @@ public class TamiyoTheMoonSage extends CardImpl {
         // +1: Tap target permanent. It doesn't untap during its controller's next untap step.
         LoyaltyAbility ability = new LoyaltyAbility(new TapTargetEffect(), 1);
         ability.addEffect(new SkipNextUntapTargetEffect());
-        Target target = new TargetPermanent(true);
+        Target target = new TargetPermanent();
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
 
         // -2: Draw a card for each tapped creature target player controls.
         ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(new TappedCreaturesControlledByTargetCount()), -2);
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
         // -8: You get an emblem with "You have no maximum hand size" and "Whenever a card is put into your graveyard from anywhere, you may return it to your hand."

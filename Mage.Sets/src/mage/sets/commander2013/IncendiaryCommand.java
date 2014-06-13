@@ -61,7 +61,7 @@ public class IncendiaryCommand extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(2);
         // Incendiary Command deals 4 damage to target player;
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         // or Incendiary Command deals 2 damage to each creature;
         Mode mode = new Mode();
         mode.getEffects().add(new DamageAllEffect(2, new FilterCreaturePermanent()));

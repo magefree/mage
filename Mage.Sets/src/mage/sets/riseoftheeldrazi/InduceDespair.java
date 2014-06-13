@@ -60,7 +60,7 @@ public class InduceDespair extends CardImpl {
         // Target creature gets -X/-X until end of turn, where X is the revealed card's converted mana cost.
         this.getSpellAbility().addEffect(new InduceDespairEffect());
         this.getSpellAbility().addCost(new RevealTargetFromHandCost(new TargetCardInHand(filter)));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public InduceDespair(final InduceDespair card) {

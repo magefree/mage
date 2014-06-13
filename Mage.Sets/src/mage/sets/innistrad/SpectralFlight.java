@@ -55,7 +55,7 @@ public class SpectralFlight extends CardImpl {
         this.color.setBlue(true);
 
         // Enchant creature
-        TargetPermanent target = new TargetCreaturePermanent(true);
+        TargetPermanent target = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(target.getTargetName());

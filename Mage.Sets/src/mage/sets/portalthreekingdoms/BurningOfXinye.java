@@ -57,7 +57,7 @@ public class BurningOfXinye extends CardImpl {
         this.color.setRed(true);
 
         // You destroy four lands you control, then target opponent destroys four lands he or she controls. Then Burning of Xinye deals 4 damage to each creature.
-        this.getSpellAbility().addTarget(new TargetOpponent(true));
+        this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new BurningOfXinyeEffect());
         this.getSpellAbility().addEffect(new DamageAllEffect(4, new FilterCreaturePermanent()));
     }

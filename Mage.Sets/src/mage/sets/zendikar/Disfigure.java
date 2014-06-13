@@ -47,7 +47,7 @@ public class Disfigure extends CardImpl {
 
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(-2, -2, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public Disfigure(final Disfigure card) {

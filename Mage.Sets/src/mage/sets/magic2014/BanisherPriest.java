@@ -74,7 +74,7 @@ public class BanisherPriest extends CardImpl {
 
         // When Banisher Priest enters the battlefield, exile target creature an opponent controls until Banisher Priest leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BanisherPriestExileEffect());
-        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
         // Implemented as triggered effect that doesn't uses the stack (implementation with watcher does not work correctly because if the returned creature
         // has a DiesTriggeredAll ability it triggers for the dying Banish Priest, what shouldn't happen)

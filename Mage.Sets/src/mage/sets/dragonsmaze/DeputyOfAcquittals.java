@@ -70,7 +70,7 @@ public class DeputyOfAcquittals extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
         // When Deputy of Acquittals enters the battlefield, you may return another target creature you control to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
-        Target target = new TargetCreaturePermanent(filter, true);
+        Target target = new TargetCreaturePermanent(filter);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

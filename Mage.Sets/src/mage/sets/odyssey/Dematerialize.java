@@ -51,7 +51,7 @@ public class Dematerialize extends CardImpl {
 
         // Return target permanent to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(true));
+        this.getSpellAbility().addTarget(new TargetPermanent());
         // Flashback {5}{U}{U}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{U}{U}"), TimingRule.SORCERY));
     }

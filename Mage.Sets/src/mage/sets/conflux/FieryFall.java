@@ -50,7 +50,7 @@ public class FieryFall extends CardImpl {
         
         // Fiery Fall deals 5 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         
         // Basic landcycling  {1}{R} ({1}{R}, Discard this card: Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.)
         this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{1}{R}")));

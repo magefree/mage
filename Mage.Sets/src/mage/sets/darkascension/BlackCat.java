@@ -58,7 +58,7 @@ public class BlackCat extends CardImpl {
 
         // When Black Cat dies, target opponent discards a card at random.
         Ability ability = new DiesTriggeredAbility(new DiscardTargetEffect(1, true),false);
-        ability.addTarget(new TargetOpponent(true));
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
 

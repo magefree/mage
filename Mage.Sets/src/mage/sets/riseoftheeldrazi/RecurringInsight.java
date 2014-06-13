@@ -82,7 +82,7 @@ class RecurringInsightEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TargetOpponent target = new TargetOpponent(true);
+        TargetOpponent target = new TargetOpponent();
         Player you = game.getPlayer(source.getControllerId());
         if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
             you.chooseTarget(Outcome.DrawCard, target, source, game);

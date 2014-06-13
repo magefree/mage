@@ -80,7 +80,7 @@ public class VizkopaGuildmage extends CardImpl {
 
         // 1{W}{B}: Target creature gains lifelink until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn),new ManaCostsImpl("{1}{W}{B}"));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // 1{W}{B}: Whenever you gain life this turn, each opponent loses that much life.

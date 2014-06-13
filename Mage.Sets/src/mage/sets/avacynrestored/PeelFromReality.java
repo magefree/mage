@@ -63,8 +63,8 @@ public class PeelFromReality extends CardImpl {
 
         // Return target creature you control and target creature you don't control to their owners' hands.
         this.getSpellAbility().addEffect(new PeelFromRealityEffect());
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
     public PeelFromReality(final PeelFromReality card) {

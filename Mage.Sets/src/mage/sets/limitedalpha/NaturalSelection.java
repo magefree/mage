@@ -60,7 +60,7 @@ public class NaturalSelection extends CardImpl {
 
         // Look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle his or her library.
         this.getSpellAbility().addEffect(new NaturalSelectionEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public NaturalSelection(final NaturalSelection card) {

@@ -48,7 +48,7 @@ public class Opportunity extends CardImpl {
 
         // Target player draws four cards.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public Opportunity(final Opportunity card) {

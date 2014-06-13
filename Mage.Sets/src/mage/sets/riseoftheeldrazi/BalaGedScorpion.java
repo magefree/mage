@@ -61,7 +61,7 @@ public class BalaGedScorpion extends CardImpl {
         this.toughness = new MageInt(3);
 
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
 
         this.addAbility(ability);
     }

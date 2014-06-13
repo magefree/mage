@@ -78,7 +78,7 @@ public class CrimsonHellkite extends CardImpl {
         if (variableCost instanceof VariableManaCost) {
             ((VariableManaCost) variableCost).setFilter(filterRedMana);
         }
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

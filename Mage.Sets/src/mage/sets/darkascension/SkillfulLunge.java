@@ -50,7 +50,7 @@ public class SkillfulLunge extends CardImpl {
         this.color.setWhite(true);
 
         // Target creature gets +2/+0 and gains first strike until end of turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
     }

@@ -106,7 +106,7 @@ class TrueNameNemesisChoosePlayerEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
-            TargetPlayer target = new TargetPlayer(true);
+            TargetPlayer target = new TargetPlayer();
             if (player.choose(this.outcome, target, source.getSourceId(), game)) {
                 Player chosenPlayer = game.getPlayer(target.getFirstTarget());
                 if (chosenPlayer != null) {

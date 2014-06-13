@@ -64,7 +64,7 @@ public class LaquatussChampion extends CardImpl {
 
         // When Laquatus's Champion enters the battlefield, target player loses 6 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(new LaquatussChampionEntersEffect(), false);
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // When Laquatus's Champion leaves the battlefield, that player gains 6 life.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new LaquatussChampionLeavesEffect(), false));

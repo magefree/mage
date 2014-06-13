@@ -56,7 +56,7 @@ public class MagmaticForce extends CardImpl {
 
         // At the beginning of each upkeep, Magmatic Force deals 3 damage to target creature or player.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), TargetController.ANY, false);
-        ability.addTarget(new TargetCreatureOrPlayer(true));        
+        ability.addTarget(new TargetCreatureOrPlayer());        
         this.addAbility(ability);
     }
 

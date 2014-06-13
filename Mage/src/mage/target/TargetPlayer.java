@@ -46,11 +46,6 @@ public class TargetPlayer extends TargetImpl {
 
     protected FilterPlayer filter;
 
-    public TargetPlayer(boolean required) {
-        this();
-        setRequired(required);
-    }
-
     public TargetPlayer() {
         this(1, 1, false);
     }

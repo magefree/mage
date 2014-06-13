@@ -69,7 +69,7 @@ public class DiscipleOfPhenax extends CardImpl {
         // When Disciple of Phenax enters the battlefield, target player reveals a number of cards
         // from his or her hand equal to your devotion to black. You choose one of them. That player discards that card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DiscipleOfPhenaxEffect(), false);
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
     }

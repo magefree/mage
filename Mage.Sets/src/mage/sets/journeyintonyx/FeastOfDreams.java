@@ -63,7 +63,7 @@ public class FeastOfDreams extends CardImpl {
 
         // Destroy target enchanted creature or enchantment creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
     public FeastOfDreams(final FeastOfDreams card) {

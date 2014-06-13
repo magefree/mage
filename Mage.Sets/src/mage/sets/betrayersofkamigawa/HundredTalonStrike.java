@@ -72,7 +72,7 @@ public class HundredTalonStrike extends CardImpl {
         effect.setText("and gains first strike until end of turn");
         this.getSpellAbility().addEffect(effect);
         // Splice onto Arcane-Tap an untapped white creature you control.
-        this.addAbility(new SpliceOntoArcaneAbility(new TapTargetCost(new TargetControlledCreaturePermanent(1,1,filter,false,true))));
+        this.addAbility(new SpliceOntoArcaneAbility(new TapTargetCost(new TargetControlledCreaturePermanent(1,1,filter,false))));
     }
 
     public HundredTalonStrike(final HundredTalonStrike card) {

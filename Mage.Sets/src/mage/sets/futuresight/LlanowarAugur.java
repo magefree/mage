@@ -66,7 +66,7 @@ public class LlanowarAugur extends CardImpl {
                 new SacrificeSourceCost());
         ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
         ability.addCost(new OnlyDuringUpkeepCost());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

@@ -48,7 +48,7 @@ public class Terminate extends CardImpl {
         this.color.setRed(true);
 
         // Destroy target creature. It can't be regenerated.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
     }
 

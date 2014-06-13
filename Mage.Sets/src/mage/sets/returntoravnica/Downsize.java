@@ -61,7 +61,7 @@ public class Downsize extends CardImpl {
         this.color.setBlue(true);
 
         // Target creature you don't control gets -4/-0 until end of turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new BoostTargetEffect(-4,0, Duration.EndOfTurn));
 
         // Overload {2}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")

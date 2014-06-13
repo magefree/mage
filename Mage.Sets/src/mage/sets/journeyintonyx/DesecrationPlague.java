@@ -57,7 +57,7 @@ public class DesecrationPlague extends CardImpl {
 
         // Destroy target enchantment or land.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
     }
 

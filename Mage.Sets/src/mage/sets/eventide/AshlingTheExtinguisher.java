@@ -77,7 +77,7 @@ public class AshlingTheExtinguisher extends CardImpl {
 class AshlingTheExtinguisherTriggeredAbility extends TriggeredAbilityImpl {
     public AshlingTheExtinguisherTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeTargetEffect());
-        this.addTarget(new TargetCreaturePermanent(true));
+        this.addTarget(new TargetCreaturePermanent());
     }
 
     public AshlingTheExtinguisherTriggeredAbility(final AshlingTheExtinguisherTriggeredAbility ability) {
@@ -100,7 +100,7 @@ class AshlingTheExtinguisherTriggeredAbility extends TriggeredAbilityImpl {
                     filter.add(new ControllerIdPredicate(opponent.getId()));
 
                     this.getTargets().clear();
-                    this.addTarget(new TargetCreaturePermanent(filter, true));
+                    this.addTarget(new TargetCreaturePermanent(filter));
                     return true;
                 }
             }

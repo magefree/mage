@@ -76,9 +76,9 @@ public class MerrowReejerey extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter1, true)));
         // Whenever you cast a Merfolk spell, you may tap or untap target permanent.
         Ability ability = new SpellCastControllerTriggeredAbility(new MayTapOrUntapTargetEffect(), filter2, true);
-        Target target = new TargetPermanent(true);
+        Target target = new TargetPermanent();
         target.setRequired(true);
-        ability.addTarget(new TargetPermanent(true));
+        ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }
 

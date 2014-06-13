@@ -55,7 +55,7 @@ public class Smite extends CardImpl {
         this.color.setWhite(true);
 
         // Destroy target blocked creature.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect(false));
     }
 

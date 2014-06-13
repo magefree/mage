@@ -55,7 +55,7 @@ public class DemonicDread extends CardImpl {
         this.addAbility(new CascadeAbility());
 
         // Target creature can't block this turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new CantBlockTargetEffect(Duration.EndOfTurn));
 
     }

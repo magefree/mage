@@ -60,7 +60,7 @@ public class UncheckedGrowth extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn));
         // If it's a Spirit, it gains trample until end of turn.
         this.getSpellAbility().addEffect(new UncheckedGrowthTrampleEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public UncheckedGrowth(final UncheckedGrowth card) {

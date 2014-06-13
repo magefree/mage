@@ -58,7 +58,7 @@ public class MagmaSpray extends CardImpl {
 
         // Magma Spray deals 2 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // If that creature would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new MagmaSprayEffect());
         this.addWatcher(new DamagedByWatcher());

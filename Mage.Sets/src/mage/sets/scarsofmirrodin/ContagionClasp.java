@@ -56,7 +56,7 @@ public class ContagionClasp extends CardImpl {
 
         // When Contagion Clasp enters the battlefield, put a -1/-1 counter on target creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance(), Outcome.UnboostCreature), false);
-        TargetCreaturePermanent target = new TargetCreaturePermanent(true);
+        TargetCreaturePermanent target = new TargetCreaturePermanent();
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

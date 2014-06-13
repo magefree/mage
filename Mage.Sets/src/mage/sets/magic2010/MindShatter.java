@@ -52,7 +52,7 @@ public class MindShatter extends CardImpl {
         this.color.setBlack(true);
 
         // Target player discards X cards at random.
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new MindShatterEffect());
     }
 

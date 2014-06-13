@@ -57,7 +57,7 @@ public class EchoingCalm extends CardImpl {
 
         this.color.setWhite(true);
 
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new EchoingCalmEffect());
     }
 

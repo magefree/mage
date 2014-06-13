@@ -51,7 +51,7 @@ public class KodamasMight extends CardImpl {
 
         // Target creature gets +2/+2 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(2,2, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Splice onto Arcane {G}
         this.addAbility(new SpliceOntoArcaneAbility("{G}"));
     }

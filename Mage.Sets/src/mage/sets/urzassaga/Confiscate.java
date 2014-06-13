@@ -55,7 +55,7 @@ public class Confiscate extends CardImpl {
         this.color.setBlue(true);
 
         // Enchant permanent
-        TargetPermanent auraTarget = new TargetPermanent(true);
+        TargetPermanent auraTarget = new TargetPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

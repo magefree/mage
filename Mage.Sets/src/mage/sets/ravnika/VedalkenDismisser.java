@@ -55,7 +55,7 @@ public class VedalkenDismisser extends CardImpl {
 
         // When Vedalken Dismisser enters the battlefield, put target creature on top of its owner's library.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PutOnLibraryTargetEffect(true), false);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

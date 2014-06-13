@@ -65,7 +65,7 @@ public class WalkTheAeons extends CardImpl {
 
         // Target player takes an extra turn after this one.
         this.getSpellAbility().addEffect(new ExtraTurnEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public WalkTheAeons(final WalkTheAeons card) {

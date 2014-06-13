@@ -55,7 +55,7 @@ public class ReturnedCentaur extends CardImpl {
 
         // When Returned Centaur enters the battlefield, target player puts the top four cards of his or her library into his or her graveyard.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PutLibraryIntoGraveTargetEffect(4));
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

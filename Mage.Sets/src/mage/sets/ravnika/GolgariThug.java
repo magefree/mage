@@ -64,7 +64,7 @@ public class GolgariThug extends CardImpl {
 
         // When Golgari Thug dies, put target creature card from your graveyard on top of your library.
         Ability ability = new DiesTriggeredAbility(new PutOnLibraryTargetEffect(true));
-        ability.addTarget(new TargetCardInYourGraveyard(filter, true));
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
         // Dredge 4
         this.addAbility(new DredgeAbility(4));

@@ -55,7 +55,7 @@ public class Phthisis extends CardImpl {
 
         // Destroy target creature. Its controller loses life equal to its power plus its toughness.
         this.getSpellAbility().addEffect(new PhthisisEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Suspend 5-{1}{B}
         this.addAbility(new SuspendAbility(5, new ManaCostsImpl("{1}{B}"), this));

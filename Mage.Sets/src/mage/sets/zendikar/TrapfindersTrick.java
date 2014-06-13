@@ -55,7 +55,7 @@ public class TrapfindersTrick extends CardImpl {
 
         // Target player reveals his or her hand and discards all Trap cards.
         this.getSpellAbility().addEffect(new TrapfindersTrickEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public TrapfindersTrick(final TrapfindersTrick card) {

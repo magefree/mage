@@ -70,7 +70,7 @@ public class UndeadSlayer extends CardImpl {
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ColoredManaCost(ColoredManaSymbol.W));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter, true));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

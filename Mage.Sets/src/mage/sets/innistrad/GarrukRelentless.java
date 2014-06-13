@@ -73,7 +73,7 @@ public class GarrukRelentless extends CardImpl {
 
         // 0: Garruk Relentless deals 3 damage to target creature. That creature deals damage equal to its power to him
         LoyaltyAbility ability1 = new LoyaltyAbility(new GarrukRelentlessDamageEffect(), 0);
-        ability1.addTarget(new TargetCreaturePermanent(true));
+        ability1.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability1);
 
         // 0: Put a 2/2 green Wolf creature token onto the battlefield.

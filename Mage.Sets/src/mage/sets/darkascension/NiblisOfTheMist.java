@@ -56,7 +56,7 @@ public class NiblisOfTheMist extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // When Niblis of the Mist enters the battlefield, you may tap target creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

@@ -66,11 +66,11 @@ public class OdunosRiverTrawler extends CardImpl {
 
         // When Odunos River Trawler enters the battlefield, return target enchantment creature card from your graveyard to your hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect());
-        ability.addTarget(new TargetCardInYourGraveyard(filter, true));        
+        ability.addTarget(new TargetCardInYourGraveyard(filter));        
         this.addAbility(ability);
         // {W}, Sacrifice Odunos River Trawler: Return target enchantment creature card from your graveyard to your hand.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl("{W}"));
-        ability.addTarget(new TargetCardInYourGraveyard(filter, true));        
+        ability.addTarget(new TargetCardInYourGraveyard(filter));        
         this.addAbility(ability);
     }
 

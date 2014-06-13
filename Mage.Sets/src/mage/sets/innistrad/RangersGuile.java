@@ -50,7 +50,7 @@ public class RangersGuile extends CardImpl {
         this.color.setGreen(true);
 
         // Target creature you control gets +1/+1 and gains hexproof until end of turn.
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.EndOfTurn));
     }

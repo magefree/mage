@@ -99,7 +99,7 @@ class SwordOfFireAndIceAbility extends TriggeredAbilityImpl {
     public SwordOfFireAndIceAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
         this.addEffect(new DrawCardSourceControllerEffect(1));
-        this.addTarget(new TargetCreatureOrPlayer(true));
+        this.addTarget(new TargetCreatureOrPlayer());
     }
 
     public SwordOfFireAndIceAbility(final SwordOfFireAndIceAbility ability) {

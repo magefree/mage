@@ -65,7 +65,7 @@ public class LoxodonMender extends CardImpl {
         this.toughness = new MageInt(3);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ColoredManaCost(ColoredManaSymbol.W));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter, true));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

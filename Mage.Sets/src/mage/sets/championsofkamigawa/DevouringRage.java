@@ -67,11 +67,11 @@ public class DevouringRage extends CardImpl {
         this.color.setRed(true);
 
         // As an additional cost to cast Devouring Rage, you may sacrifice any number of Spirits.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true, false)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true)));
 
         // Target creature gets +3/+0 until end of turn. For each Spirit sacrificed this way, that creature gets an additional +3/+0 until end of turn
         this.getSpellAbility().addEffect(new DevouringRageEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
     }
 

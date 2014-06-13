@@ -68,7 +68,7 @@ public class KikuNightsFlower extends CardImpl {
                 new KikuNightsFlowerEffect(), 
                 new ManaCostsImpl("{2}{B}{B}")
         );
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

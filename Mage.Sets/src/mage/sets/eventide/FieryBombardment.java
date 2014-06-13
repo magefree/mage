@@ -67,8 +67,8 @@ public class FieryBombardment extends CardImpl {
         Effect effect = new FieryBombardmentEffect();
         effect.setText("<i>Chroma</i> - Fiery Bombardment deals damage to target creature or player equal to the number of red mana symbols in the sacrificed creature's mana cost.");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(true)));
-        ability.addTarget(new TargetCreatureOrPlayer(true));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
 
     }

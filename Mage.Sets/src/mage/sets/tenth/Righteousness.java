@@ -52,7 +52,7 @@ public class Righteousness extends CardImpl {
         this.color.setWhite(true);
 
         this.getSpellAbility().addEffect(new BoostTargetEffect(7, 7, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
     public Righteousness(final Righteousness card) {

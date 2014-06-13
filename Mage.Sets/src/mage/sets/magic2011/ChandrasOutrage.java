@@ -51,7 +51,7 @@ public class ChandrasOutrage extends CardImpl {
         this.expansionSetCode = "M11";
         this.color.setRed(true);
         this.getSpellAbility().addEffect(new ChandrasOutrageEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public ChandrasOutrage(final ChandrasOutrage card) {

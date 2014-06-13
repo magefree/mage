@@ -66,7 +66,7 @@ public class JhessianBalmgiver extends CardImpl {
         this.addAbility(ability);
         // {tap}: Target creature is unblockable this turn.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UnblockableTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

@@ -57,7 +57,7 @@ public class FadeIntoAntiquity extends CardImpl {
 
         // Exile target artifact or enchantment.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        Target target = new TargetPermanent(filter, true);
+        Target target = new TargetPermanent(filter);
         target.setRequired(true);
         this.getSpellAbility().addTarget(target);
     }

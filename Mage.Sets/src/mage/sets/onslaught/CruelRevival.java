@@ -70,7 +70,7 @@ public class CruelRevival extends CardImpl {
 
         // Destroy target non-Zombie creature. It can't be regenerated. Return up to one target Zombie card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new CruelRevivalEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 1, filter2));
     }
 

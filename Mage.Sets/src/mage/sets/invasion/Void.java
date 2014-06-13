@@ -72,7 +72,7 @@ public class Void extends CardImpl {
         numberChoice.setChoices(numbers);
         numberChoice.setMessage("Choose a number");
         this.getSpellAbility().addChoice(numberChoice);
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new VoidEffect());
 
     }

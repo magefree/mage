@@ -57,7 +57,7 @@ public class IrresistiblePrey extends CardImpl {
                 new GainAbilityTargetEffect(
                 new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneTargetEffect()),
                 Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 

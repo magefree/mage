@@ -51,7 +51,7 @@ public class ChandrasFury extends CardImpl {
         // Chandra's Fury deals 4 damage to target player and 1 damage to each creature that player controls.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         this.getSpellAbility().addEffect(new DamageAllControlledTargetEffect(1, new FilterCreaturePermanent()));
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public ChandrasFury(final ChandrasFury card) {

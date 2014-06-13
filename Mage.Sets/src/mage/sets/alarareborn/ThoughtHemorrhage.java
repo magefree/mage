@@ -56,7 +56,7 @@ public class ThoughtHemorrhage extends CardImpl {
         this.color.setBlack(true);
 
         // Name a nonland card. Target player reveals his or her hand. Thought Hemorrhage deals 3 damage to that player for each card with that name revealed this way. Search that player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles his or her library.
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new ThoughtHemorrhageEffect());
     }
 

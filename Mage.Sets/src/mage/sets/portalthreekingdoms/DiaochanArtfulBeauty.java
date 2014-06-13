@@ -66,7 +66,7 @@ public class DiaochanArtfulBeauty extends CardImpl {
         
         // {tap}: Destroy target creature of your choice, then destroy target creature of an opponent's choice. Activate this ability only during your turn, before attackers are declared.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DiaochanArtfulBeautyDestroyEffect(), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.getInstance());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         ability.addTarget(new TargetOpponentsChoiceCreaturePermanent());
         this.addAbility(ability);          
     }
@@ -159,7 +159,7 @@ class TargetOpponentsChoiceCreaturePermanent extends TargetPermanent {
 
     private UUID getOpponentId(UUID playerId, Ability source, Game game) {
         if (opponentId == null) {
-            TargetOpponent target = new TargetOpponent(true);
+            TargetOpponent target = new TargetOpponent();
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 if (player.chooseTarget(Outcome.Detriment, target, source, game)) {

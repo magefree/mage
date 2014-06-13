@@ -57,7 +57,7 @@ public class WarpedPhysique extends CardImpl {
         // Target creature gets +X/-X until end of turn, where X is the number of cards in your hand.
         DynamicValue xValue =  new CardsInControllerHandCount();
         this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, new SignInversionDynamicValue(xValue), Duration.EndOfTurn, true));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public WarpedPhysique(final WarpedPhysique card) {

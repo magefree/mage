@@ -62,8 +62,8 @@ public class NayaSojourners extends CardImpl {
         // When you cycle Naya Sojourners or it dies, you may put a +1/+1 counter on target creature.
         Ability ability1 = new CycleTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         Ability ability2 = new DiesTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        ability1.addTarget(new TargetCreaturePermanent(true));
-        ability2.addTarget(new TargetCreaturePermanent(true));
+        ability1.addTarget(new TargetCreaturePermanent());
+        ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability1);
         this.addAbility(ability2);
         

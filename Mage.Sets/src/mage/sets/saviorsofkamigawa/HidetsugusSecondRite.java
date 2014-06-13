@@ -52,7 +52,7 @@ public class HidetsugusSecondRite extends CardImpl {
 
         // If target player has exactly 10 life, Hidetsugu's Second Rite deals 10 damage to that player.
         this.getSpellAbility().addEffect(new HidetsugusSecondRiteEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public HidetsugusSecondRite(final HidetsugusSecondRite card) {

@@ -62,7 +62,7 @@ public class QuicksilverDagger extends CardImpl {
         this.color.setBlue(true);
 
         // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
@@ -70,7 +70,7 @@ public class QuicksilverDagger extends CardImpl {
         
         // Enchanted creature has "{tap}: This creature deals 1 damage to target player. You draw a card."
         Ability gainAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-        gainAbility.addTarget(new TargetPlayer(true));
+        gainAbility.addTarget(new TargetPlayer());
         gainAbility.addEffect(new DrawCardSourceControllerEffect(1));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainAbility, AttachmentType.AURA)));
     }

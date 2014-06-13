@@ -57,7 +57,7 @@ public class Reprisal extends CardImpl {
 
         // Destroy target creature with power 4 or greater. It can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
     public Reprisal(final Reprisal card) {

@@ -56,7 +56,7 @@ public class NightmarishEnd extends CardImpl {
         Effect effect = new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true);
         effect.setText("Target creature gets -X/-X until end of turn, where X is the number of cards in your hand");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public NightmarishEnd(final NightmarishEnd card) {

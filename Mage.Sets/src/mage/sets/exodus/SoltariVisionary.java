@@ -101,7 +101,7 @@ class SoltariVisionaryTriggeredAbility extends TriggeredAbilityImpl {
                 filter.add(new ControllerIdPredicate(event.getPlayerId()));
                 filter.setMessage("enchantment controlled by " + game.getPlayer(event.getTargetId()).getName());
                 this.getTargets().clear();
-                this.addTarget(new TargetPermanent(filter, true));
+                this.addTarget(new TargetPermanent(filter));
                 return true;
             }
         }

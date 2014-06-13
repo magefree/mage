@@ -69,7 +69,7 @@ public class SludgeStrider extends CardImpl {
 
         // Whenever another artifact enters the battlefield under your control or another artifact you control leaves the battlefield, you may pay {1}. If you do, target player loses 1 life and you gain 1 life.
         Ability ability = new SludgeStriderTriggeredAbility();
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
     }

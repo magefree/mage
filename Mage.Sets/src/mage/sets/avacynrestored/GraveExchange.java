@@ -64,7 +64,7 @@ public class GraveExchange extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
         // Target player sacrifices a creature.
         this.getSpellAbility().addEffect(new GraveExchangeEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public GraveExchange(final GraveExchange card) {

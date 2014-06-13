@@ -67,7 +67,7 @@ public class LeoninIconoclast extends CardImpl {
 
         // Heroic — Whenever you cast a spell that targets Leonin Iconoclast, destroy target enchantment creature an opponent controls.
         Ability ability = new HeroicAbility(new DestroyTargetEffect());
-        ability.addTarget(new TargetPermanent(filter, true));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

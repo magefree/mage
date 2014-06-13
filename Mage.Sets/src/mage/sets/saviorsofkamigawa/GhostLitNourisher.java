@@ -64,7 +64,7 @@ public class GhostLitNourisher extends CardImpl {
         this.addAbility(ability);
         // Channel - {3}{G}, Discard Ghost-Lit Nourisher: Target creature gets +4/+4 until end of turn.
         Ability ability2 = new ChannelAbility("{3}{G}", new BoostTargetEffect(4, 4, Duration.EndOfTurn));
-        ability2.addTarget(new TargetCreaturePermanent(true));
+        ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability2);
     }
 

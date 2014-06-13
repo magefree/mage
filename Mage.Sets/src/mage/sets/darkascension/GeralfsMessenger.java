@@ -59,7 +59,7 @@ public class GeralfsMessenger extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Geralf's Messenger enters the battlefield, target opponent loses 2 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(2));
-        ability.addTarget(new TargetOpponent(true));
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
         // Undying
         this.addAbility(new UndyingAbility());

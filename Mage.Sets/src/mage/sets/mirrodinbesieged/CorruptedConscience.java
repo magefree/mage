@@ -53,7 +53,7 @@ public class CorruptedConscience extends CardImpl {
         this.expansionSetCode = "MBS";
         this.subtype.add("Aura");
         this.color.setBlue(true);
-        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

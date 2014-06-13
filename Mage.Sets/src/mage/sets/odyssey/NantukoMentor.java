@@ -63,7 +63,7 @@ public class NantukoMentor extends CardImpl {
         // {2}{G}, {tap}: Target creature gets +X/+X until end of turn, where X is that creature's power.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NantukoMentorBoostTargetEffect(), new ManaCostsImpl("{2}{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

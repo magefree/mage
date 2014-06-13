@@ -57,7 +57,7 @@ public class ToothOfChissGoria extends CardImpl {
         this.addAbility(new AffinityForArtifactsAbility());
         // {tap}: Target creature gets +1/+0 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 0, Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

@@ -40,11 +40,6 @@ public class TargetAttackingCreature extends TargetPermanent {
     public TargetAttackingCreature() {
         this(1, 1, new FilterAttackingCreature(), false);
     }
-
-    public TargetAttackingCreature(boolean required) {
-        this(1, 1, new FilterAttackingCreature(), false);
-        this.setRequired(required);
-    }
     
     public TargetAttackingCreature(int numTargets) {
         this(numTargets, numTargets, new FilterAttackingCreature(), false);

@@ -65,7 +65,7 @@ public class KeldonVandals extends CardImpl {
         this.addAbility(new EchoAbility("{2}{R}"));
         // When Keldon Vandals enters the battlefield, destroy target artifact.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
-        ability.addTarget(new TargetPermanent(filter, true));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

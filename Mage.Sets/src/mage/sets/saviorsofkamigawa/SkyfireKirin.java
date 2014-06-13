@@ -75,7 +75,7 @@ public class SkyfireKirin extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a Spirit or Arcane spell, you may gain control of target creature with that spell's converted mana cost until end of turn.
         Ability ability = new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new SkyfireKirinEffect(), new FilterSpiritOrArcaneCard(), true, true);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
@@ -87,7 +87,7 @@ public class SkyfireKirin extends CardImpl {
                 int cmc = spell.getManaCost().convertedManaCost();
                 ability.getTargets().clear();
                 FilterPermanent filter = new FilterCreaturePermanent(new StringBuilder("creature with converted mana costs of ").append(cmc).toString());
-                Target target = new TargetPermanent(filter, true);
+                Target target = new TargetPermanent(filter);
                 ability.addTarget(target);
             }
         }

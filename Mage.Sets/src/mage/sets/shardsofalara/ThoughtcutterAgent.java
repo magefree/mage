@@ -69,7 +69,7 @@ public class ThoughtcutterAgent extends CardImpl {
         revealEffect.setText("and reveals his or her hand");
         ability.addEffect(revealEffect);
         
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

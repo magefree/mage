@@ -52,8 +52,8 @@ public class PitFight extends CardImpl {
 
         // Target creature you control fights another target creature.
         this.getSpellAbility().addEffect(new FightTargetsEffect());
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
-        this.getSpellAbility().addTarget(new TargetOtherCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetOtherCreaturePermanent());
     }
 
     public PitFight(final PitFight card) {
@@ -68,9 +68,9 @@ public class PitFight extends CardImpl {
 
 
 class TargetOtherCreaturePermanent extends TargetCreaturePermanent {
-
-    public TargetOtherCreaturePermanent(boolean required) {
-        super(required);
+    
+    public TargetOtherCreaturePermanent() {
+        super();
     }
 
     public TargetOtherCreaturePermanent(final TargetOtherCreaturePermanent target) {

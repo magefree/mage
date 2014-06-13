@@ -46,7 +46,7 @@ public class HorrifyingRevelation extends CardImpl {
         this.expansionSetCode = "MBS";
         this.color.setBlack(true);
 
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DiscardTargetEffect(1));
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(1));
     }

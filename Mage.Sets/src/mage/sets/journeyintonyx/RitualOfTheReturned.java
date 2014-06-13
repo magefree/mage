@@ -59,7 +59,7 @@ public class RitualOfTheReturned extends CardImpl {
 
         // Exile target creature card from your graveyard. Put a black Zombie creature token onto the battlefield with power equal to the exiled card's power and toughness equal to the exiled card's toughness.
         this.getSpellAbility().addEffect(new RitualOfTheReturnedExileEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard(), true));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
     }
 
     public RitualOfTheReturned(final RitualOfTheReturned card) {

@@ -54,7 +54,7 @@ public class WitsEnd extends CardImpl {
 
         // Target player discards his or her hand.
         this.getSpellAbility().addEffect(new WitsEndEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public WitsEnd(final WitsEnd card) {

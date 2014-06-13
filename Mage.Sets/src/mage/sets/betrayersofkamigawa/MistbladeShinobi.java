@@ -102,7 +102,7 @@ class MistbladeShinobiTriggeredAbility extends TriggeredAbilityImpl {
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + opponent.getName() + " controls");
                 filter.add(new ControllerIdPredicate(opponent.getId()));
                 this.getTargets().clear();
-                this.addTarget(new TargetCreaturePermanent(filter, true));
+                this.addTarget(new TargetCreaturePermanent(filter));
                 return true;
             }
         }

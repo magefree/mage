@@ -67,7 +67,7 @@ public class IzzetCharm extends CardImpl {
         // or Izzet Charm deals 2 damage to target creature;
         Mode mode = new Mode();
         mode.getEffects().add(new DamageTargetEffect(2));
-        mode.getTargets().add(new TargetCreaturePermanent(true));
+        mode.getTargets().add(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
 
         //  or draw two cards, then discard two cards.

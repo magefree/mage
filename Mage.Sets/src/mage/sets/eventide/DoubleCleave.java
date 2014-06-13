@@ -49,7 +49,7 @@ public class DoubleCleave extends CardImpl {
         this.color.setRed(true);
         this.color.setWhite(true);
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public DoubleCleave(final DoubleCleave card) {

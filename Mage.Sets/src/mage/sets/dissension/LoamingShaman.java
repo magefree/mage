@@ -62,7 +62,7 @@ public class LoamingShaman extends CardImpl {
 
         // When Loaming Shaman enters the battlefield, target player shuffles any number of target cards from his or her graveyard into his or her library.
         Ability ability = new EntersBattlefieldTriggeredAbility(new LoamingShamanEffect(), false);
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         ability.addTarget(new LoamingShamanTargetCardsInGraveyard(0, Integer.MAX_VALUE, new FilterCard("cards in target player's graveyard")));
         this.addAbility(ability);
     }

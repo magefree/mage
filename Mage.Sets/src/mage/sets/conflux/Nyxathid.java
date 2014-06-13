@@ -102,7 +102,7 @@ class ChooseOpponent extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
-            TargetOpponent target = new TargetOpponent(true);
+            TargetOpponent target = new TargetOpponent();
             target.setRequired(true);
             target.setNotTarget(true);
             if (player.choose(this.outcome, target, source.getSourceId(), game)) {

@@ -57,7 +57,7 @@ public class AngelOfFinality extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // When Angel of Finality enters the battlefield, exile all cards from target player's graveyard.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileGraveyardAllTargetPlayerEffect());
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

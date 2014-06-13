@@ -55,7 +55,7 @@ public class HurkylsRecall extends CardImpl {
 
         // Return all artifacts target player owns to his or her hand.
         this.getSpellAbility().addEffect(new HurkylsRecallReturnToHandEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public HurkylsRecall(final HurkylsRecall card) {

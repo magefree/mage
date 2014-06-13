@@ -75,7 +75,7 @@ public class BrutalizerExarch extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new BrutalizerExarchEffect1());
         Mode mode = new Mode();
         mode.getEffects().add(new BrutalizerExarchEffect2());
-        mode.getTargets().add(new TargetPermanent(filter, true));
+        mode.getTargets().add(new TargetPermanent(filter));
         ability.addMode(mode);
         this.addAbility(ability);
     }

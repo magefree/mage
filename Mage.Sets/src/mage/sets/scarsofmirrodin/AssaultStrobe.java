@@ -49,7 +49,7 @@ public class AssaultStrobe extends CardImpl {
         this.expansionSetCode = "SOM";
         this.color.setRed(true);        
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public AssaultStrobe (final AssaultStrobe card) {

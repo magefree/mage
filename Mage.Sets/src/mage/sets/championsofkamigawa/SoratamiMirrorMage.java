@@ -67,7 +67,7 @@ public class SoratamiMirrorMage extends CardImpl {
         // {3}, Return three lands you control to their owner's hand: Return target creature to its owner's hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new GenericManaCost(3));
         ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(3, 3, filter, false)));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

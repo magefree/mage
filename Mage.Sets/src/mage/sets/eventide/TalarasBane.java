@@ -60,7 +60,7 @@ public class TalarasBane extends CardImpl {
 
         // Target opponent reveals his or her hand. You choose a green or white creature card from it. You gain life equal that creature card's toughness, then that player discards that card.
         this.getSpellAbility().addEffect(new TalarasBaneEffect());
-        this.getSpellAbility().addTarget(new TargetOpponent(true));
+        this.getSpellAbility().addTarget(new TargetOpponent());
         
     }
 

@@ -57,7 +57,7 @@ public class Indestructibility extends CardImpl {
         this.color.setWhite(true);
 
         // Enchant permanent
-        TargetPermanent auraTarget = new TargetPermanent(true);
+        TargetPermanent auraTarget = new TargetPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));

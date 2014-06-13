@@ -58,7 +58,7 @@ public class ShinenOfStarsLight extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
         // Channel - {1}{W}, Discard Shinen of Stars' Light: Target creature gains first strike until end of turn.
         Ability ability = new ChannelAbility("{1}{W}", new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

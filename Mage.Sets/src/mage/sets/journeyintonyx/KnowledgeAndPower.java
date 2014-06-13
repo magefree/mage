@@ -76,7 +76,7 @@ class ScryTriggeredAbility extends TriggeredAbilityImpl {
 
     public ScryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new DamageTargetEffect(2), new GenericManaCost(2)), false);
-        this.addTarget(new TargetCreatureOrPlayer(true));
+        this.addTarget(new TargetCreatureOrPlayer());
     }
 
     public ScryTriggeredAbility(final ScryTriggeredAbility ability) {

@@ -60,7 +60,7 @@ public class BlindHunter extends CardImpl {
         // Haunt
         // When Blind Hunter enters the battlefield or the creature it haunts dies, target player loses 2 life and you gain 2 life.
         Ability ability = new HauntAbility(this, new LoseLifeTargetEffect(2));
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         ability.addEffect(new GainLifeEffect(2));
         this.addAbility(ability);
 

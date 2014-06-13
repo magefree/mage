@@ -71,7 +71,7 @@ public class InitiateOfBlood extends CardImpl {
 
         // {T}: Initiate of Blood deals 1 damage to target creature that was dealt damage this turn. 
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
 
         // When that creature is put into a graveyard this turn, flip Initiate of Blood.
@@ -109,7 +109,7 @@ class GokaTheUnjust extends Token {
 
         // {T}: Goka the Unjust deals 4 damage to target creature that was dealt damage this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(4), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 }

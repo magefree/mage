@@ -56,7 +56,7 @@ public class SpiderwigBoggart extends CardImpl {
         this.toughness = new MageInt(2);
         // When Spiderwig Boggart enters the battlefield, target creature gains fear until end of turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn), false);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

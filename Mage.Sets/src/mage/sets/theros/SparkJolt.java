@@ -49,7 +49,7 @@ public class SparkJolt extends CardImpl {
 
         // Spark Jolt deals 1 damage to target creature or player. Scry 1.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 

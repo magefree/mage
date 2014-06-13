@@ -56,7 +56,7 @@ public class Clear extends CardImpl {
         this.expansionSetCode = "USG";
         this.color.setWhite(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 

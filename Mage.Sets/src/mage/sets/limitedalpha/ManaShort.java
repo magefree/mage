@@ -56,7 +56,7 @@ public class ManaShort extends CardImpl {
 
         // Tap all lands target player controls and empty his or her mana pool.
         this.getSpellAbility().addEffect(new ManaShortEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public ManaShort(final ManaShort card) {

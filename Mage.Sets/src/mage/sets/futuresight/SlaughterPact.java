@@ -60,7 +60,7 @@ public class SlaughterPact extends CardImpl {
         this.color.setBlack(true);
         
         // Destroy target nonblack creature.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         // At the beginning of your next upkeep, pay {2}{B}. If you don't, you lose the game.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PactDelayedTriggeredAbility(new ManaCostsImpl("{2}{B}")),false));

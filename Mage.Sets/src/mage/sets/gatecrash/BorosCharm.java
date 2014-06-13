@@ -59,7 +59,7 @@ public class BorosCharm extends CardImpl {
 
         //Choose one - Boros Charm deals 4 damage to target player
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         //or permanents you control are indestructible this turn
         Mode mode = new Mode();
         Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledPermanent(), false);
@@ -69,7 +69,7 @@ public class BorosCharm extends CardImpl {
         //or target creature gains double strike until end of turn.
         Mode mode2 = new Mode();
         mode2.getEffects().add(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
-        mode2.getTargets().add(new TargetCreaturePermanent(true));
+        mode2.getTargets().add(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode2);
     }
 

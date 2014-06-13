@@ -55,7 +55,7 @@ public class TritonCavalry extends CardImpl {
 
         // Heroic — Whenever you cast a spell that targets Triton Cavalry, you may return target enchantment to its owner's hand.
         Ability ability = new HeroicAbility(new ReturnToHandTargetEffect(), true);
-        ability.addTarget(new TargetEnchantmentPermanent(true));
+        ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability);
     }
 

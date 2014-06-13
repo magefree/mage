@@ -82,7 +82,7 @@ public class ArachnusSpinner extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new ArachnusSpinnerEffect(),
                 new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

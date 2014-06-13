@@ -46,11 +46,6 @@ public class TargetCardInGraveyard extends TargetCard {
         this(1, 1, new FilterCard("card from a graveyard"));
     }
 
-    public TargetCardInGraveyard(boolean required) {
-        this();
-        this.setRequired(required);
-    }
-
     public TargetCardInGraveyard(FilterCard filter) {
         this(1, 1, filter);
     }

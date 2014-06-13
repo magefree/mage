@@ -67,7 +67,7 @@ public class IndigoFaerie extends CardImpl {
         
         // {U}: Target permanent becomes blue in addition to its other colors until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBlueTargetEffect(), new ManaCostsImpl("{U}"));
-        ability.addTarget(new TargetPermanent(true));
+        ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
         
     }

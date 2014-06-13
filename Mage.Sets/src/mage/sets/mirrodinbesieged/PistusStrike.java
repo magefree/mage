@@ -63,7 +63,7 @@ public class PistusStrike extends CardImpl {
         this.expansionSetCode = "MBS";
         this.color.setGreen(true);
 
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new PoisonControllerTargetCreatureEffect());
     }

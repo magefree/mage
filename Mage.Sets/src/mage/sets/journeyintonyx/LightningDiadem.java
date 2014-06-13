@@ -59,7 +59,7 @@ public class LightningDiadem extends CardImpl {
         this.color.setRed(true);
 
         // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
@@ -67,7 +67,7 @@ public class LightningDiadem extends CardImpl {
 
         // When Lightning Diadem enters the battlefield, it deals 2 damage to target creature or player.
         ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2));
-        ability.addTarget(new TargetCreatureOrPlayer(true));
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2.

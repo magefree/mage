@@ -53,7 +53,7 @@ public class HypnoticCloud extends CardImpl {
         this.addAbility(new KickerAbility("{4}"));
         // Target player discards a card. If Hypnotic Cloud was kicked, that player discards three cards instead.
 
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DiscardTargetEffect(3), new DiscardTargetEffect(1), KickedCondition.getInstance(),
                 "Target player discards a card. If {this} was kicked, that player discards three cards instead"));
 

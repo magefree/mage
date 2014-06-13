@@ -56,7 +56,7 @@ public class Cursebreak extends CardImpl {
         this.color.setWhite(true);
 
         // Destroy target enchantment. You gain 2 life.
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
     }

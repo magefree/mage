@@ -62,7 +62,7 @@ public class SadisticHypnotist extends CardImpl {
         TargetControlledPermanent target = new TargetControlledCreaturePermanent(1,1, new FilterControlledCreaturePermanent("a creature"), true);
         target.setRequired(true);
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(2), new SacrificeTargetCost(target));
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

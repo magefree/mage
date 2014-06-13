@@ -56,7 +56,7 @@ public class AppetiteForBrains extends CardImpl {
 
         // Target opponent reveals his or her hand. You choose a card from it with converted mana cost 4 or greater and exile that card.
         this.getSpellAbility().addEffect(new ExileCardYouChooseTargetOpponentEffect(filter));
-        this.getSpellAbility().addTarget(new TargetOpponent(true));
+        this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
     public AppetiteForBrains(final AppetiteForBrains card) {

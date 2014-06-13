@@ -57,7 +57,7 @@ public class WingSnare extends CardImpl {
 
         // Destroy target creature with flying.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
     public WingSnare(final WingSnare card) {

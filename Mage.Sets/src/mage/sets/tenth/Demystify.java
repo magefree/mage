@@ -54,7 +54,7 @@ public class Demystify extends CardImpl {
         this.expansionSetCode = "10E";
         this.color.setWhite(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     public Demystify (final Demystify card) {

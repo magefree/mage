@@ -56,7 +56,7 @@ public class DownDirty extends SplitCard {
         // Target player discards two cards.
         getLeftHalfCard().getColor().setBlack(true);
         getLeftHalfCard().getSpellAbility().addEffect(new DiscardTargetEffect(2));
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetPlayer(true));
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetPlayer());
 
         // Dirty
         // Return target card from your graveyard to your hand.

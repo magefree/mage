@@ -56,7 +56,7 @@ public class WrenchMind extends CardImpl {
         this.color.setBlack(true);
 
         // Target player discards two cards unless he or she discards an artifact card.
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new WrenchMindEffect());
 
     }

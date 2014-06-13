@@ -75,7 +75,7 @@ public class EtherswornAdjudicator extends CardImpl {
         // {1}{W}{B}, {T}: Destroy target creature or enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{W}{B}"));
         ability.addCost(new TapSourceCost());
-        Target target = new TargetPermanent(filter, true);
+        Target target = new TargetPermanent(filter);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

@@ -55,7 +55,7 @@ public class GoldenhideOx extends CardImpl {
 
         // Constellation - Whenever Goldenhide Ox or another enchantment enters the battlefield under your control, target creature must be blocked this turn if able.
         Ability ability = new ConstellationAbility(new MustBeBlockedByAtLeastOneTargetEffect(Duration.EndOfTurn), false);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

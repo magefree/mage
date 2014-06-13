@@ -65,7 +65,7 @@ public class AzoriusArrester extends CardImpl {
 
         // When Azorius Arrester enters the battlefield, detain target creature an opponent controls.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DetainTargetEffect(), false);
-        TargetCreaturePermanent target = new TargetCreaturePermanent(filter, true);
+        TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

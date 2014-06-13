@@ -67,7 +67,7 @@ public class CabalPit extends CardImpl {
             "<i>Threshold</i> - {B}, {T}, Sacrifice {this}: Target creature gets -2/-2 until end of turn. Activate this ability only if seven or more cards are in your graveyard.");
         thresholdAbility.addCost(new TapSourceCost());
         thresholdAbility.addCost(new SacrificeSourceCost());
-        thresholdAbility.addTarget(new TargetCreaturePermanent(true));
+        thresholdAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(thresholdAbility);
     }
 

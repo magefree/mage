@@ -48,7 +48,7 @@ public class Murder extends CardImpl {
 
         // Destroy target creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public Murder(final Murder card) {

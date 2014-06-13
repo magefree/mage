@@ -60,7 +60,7 @@ public class Vertigo extends CardImpl {
         // Vertigo deals 2 damage to target creature with flying. That creature loses flying until end of turn.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addEffect(new LoseAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
     public Vertigo(final Vertigo card) {

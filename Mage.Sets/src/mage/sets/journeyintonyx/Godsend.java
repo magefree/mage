@@ -151,7 +151,7 @@ class GodsendTriggeredAbility extends TriggeredAbilityImpl {
                                 uuidPredicates.add(new PermanentIdPredicate(creatureId));
                             }
                             filter.add(Predicates.or(uuidPredicates));
-                            this.getTargets().add(new TargetCreaturePermanent(filter, true));
+                            this.getTargets().add(new TargetCreaturePermanent(filter));
                         }
                         return true;
                     }

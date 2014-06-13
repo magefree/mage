@@ -60,7 +60,7 @@ public class OrnateKanzashi extends CardImpl {
         // {2}, {T}: Target opponent exiles the top card of his or her library. You may play that card this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OrnateKanzashiEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetOpponent(true));
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
 

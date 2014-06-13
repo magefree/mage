@@ -52,7 +52,7 @@ public class CrownOfFlames extends CardImpl {
         this.expansionSetCode = "TMP";
         this.subtype.add("Aura");
         this.color.setRed(true);
-        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

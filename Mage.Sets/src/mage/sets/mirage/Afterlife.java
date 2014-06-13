@@ -56,7 +56,7 @@ public class Afterlife extends CardImpl {
 
         // Destroy target creature. It can't be regenerated. Its controller puts a
         // 1/1 white Spirit creature token with flying onto the battlefield.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addEffect(new AfterlifeEffect());
     }

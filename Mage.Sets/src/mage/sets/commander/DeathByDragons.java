@@ -56,7 +56,7 @@ public class DeathByDragons extends CardImpl {
 
         // Each player other than target player puts a 5/5 red Dragon creature token with flying onto the battlefield.
         this.getSpellAbility().addEffect(new DeathByDragonsEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public DeathByDragons(final DeathByDragons card) {

@@ -70,7 +70,7 @@ public class ThievingSprite extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // When Thieving Sprite enters the battlefield, target player reveals X cards from his or her hand, where X is the number of Faeries you control. You choose one of those cards. That player discards that card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ThievingSpriteEffect(), false);
-        TargetPlayer target = new TargetPlayer(true);
+        TargetPlayer target = new TargetPlayer();
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

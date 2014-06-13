@@ -59,7 +59,7 @@ public class Briarhorn extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
         // When Briarhorn enters the battlefield, target creature gets +3/+3 until end of turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(3,3, Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // Evoke {1}{G}
         this.addAbility(new EvokeAbility(this, "{1}{G}"));

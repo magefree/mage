@@ -58,7 +58,7 @@ public class UndyingFlames extends CardImpl {
 
         // Exile cards from the top of your library until you exile a nonland card. Undying Flames deals damage to target creature or player equal to that card's converted mana cost.
         this.getSpellAbility().addEffect(new UndyingFlamesEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
 
         // Epic
         this.getSpellAbility().addEffect(new EpicEffect());

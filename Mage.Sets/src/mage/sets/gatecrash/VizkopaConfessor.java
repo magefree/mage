@@ -69,7 +69,7 @@ public class VizkopaConfessor extends CardImpl {
 
         // When Vizkopa Confessor enters the battlefield, pay any amount of life. Target opponent reveals that many cards from his or her hand. You choose one of them and exile it.
         Ability ability = new EntersBattlefieldTriggeredAbility(new VizkopaConfessorEffect());
-        ability.addTarget(new TargetOpponent(true));
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
 

@@ -51,7 +51,7 @@ public class BojukaBog extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Bojuka Bog enters the battlefield, exile all cards from target player's graveyard.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ExileGraveyardAllTargetPlayerEffect());
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // {T}: Add {B} to your mana pool.
         this.addAbility(new BlackManaAbility());

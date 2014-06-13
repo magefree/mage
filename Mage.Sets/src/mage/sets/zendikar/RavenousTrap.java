@@ -65,7 +65,7 @@ public class RavenousTrap extends CardImpl {
 
         // Exile all cards from target player's graveyard.
         this.getSpellAbility().addEffect(new ExileGraveyardAllTargetPlayerEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public RavenousTrap(final RavenousTrap card) {

@@ -54,7 +54,7 @@ public class CommanderGrevenIlVec extends CardImpl {
         this.power = new MageInt(7);
         this.toughness = new MageInt(5);
         Ability ability = new EntersBattlefieldTriggeredAbility(new SacrificeTargetEffect(), false);
-        ability.addTarget(new TargetControlledCreaturePermanent(true));
+        ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
         this.addAbility(FearAbility.getInstance());
     }

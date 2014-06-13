@@ -81,7 +81,7 @@ public class ChandraPyromaster extends CardImpl {
 
         // +1: Chandra, Pyromaster deals 1 damage to target player and 1 damage to up to one target creature that player controls. That creature can't block this turn.
         LoyaltyAbility ability1 = new LoyaltyAbility(new ChandraPyromasterEffect1(), 1);
-        Target target1 = new TargetPlayer(true);
+        Target target1 = new TargetPlayer();
         ability1.addTarget(target1);
         ability1.addTarget(new ChandraPyromasterTarget());
         this.addAbility(ability1);

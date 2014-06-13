@@ -58,7 +58,7 @@ public class ObNixilisTheFallen extends CardImpl {
 
         Ability ability = new LandfallAbility(new LoseLifeTargetEffect(3), true);
         ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)));
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

@@ -68,8 +68,8 @@ public class UndercityInformer extends CardImpl {
 
         //{1}, Sacrifice a creature: Target player reveals the top card of his or her library until he or she reveals a land card, then puts those cards into his or her graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UndercityInformerEffect(), new ManaCostsImpl("{1}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(true)));
-        ability.addTarget(new TargetPlayer(true));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

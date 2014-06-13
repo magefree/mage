@@ -64,18 +64,18 @@ public class ChandraNalaar extends CardImpl {
 
 
         LoyaltyAbility ability1 = new LoyaltyAbility(new DamageTargetEffect(1), 1);
-        ability1.addTarget(new TargetPlayer(true));
+        ability1.addTarget(new TargetPlayer());
         this.addAbility(ability1);
 
         LoyaltyAbility ability2 = new LoyaltyAbility(new DamageTargetEffect(ChandraNalaarXValue.getDefault()));
-        ability2.addTarget(new TargetCreaturePermanent(true));
+        ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability2);
 
         Effects effects1 = new Effects();
         effects1.add(new DamageTargetEffect(10));
         effects1.add(new DamageAllControlledTargetEffect(10, new FilterCreaturePermanent()));
         LoyaltyAbility ability3 = new LoyaltyAbility(effects1, -8);
-        ability3.addTarget(new TargetPlayer(true));
+        ability3.addTarget(new TargetPlayer());
         this.addAbility(ability3);
     }
 

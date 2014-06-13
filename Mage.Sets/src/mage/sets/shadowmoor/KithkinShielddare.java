@@ -65,7 +65,7 @@ public class KithkinShielddare extends CardImpl {
                 new BoostTargetEffect(2, 2, Duration.EndOfTurn),
                 new ManaCostsImpl("{W}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 

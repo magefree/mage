@@ -106,7 +106,7 @@ class LightwielderPaladinTriggeredAbility extends TriggeredAbilityImpl {
                 filter.add(new ControllerIdPredicate(event.getTargetId()));
 
                 this.getTargets().clear();
-                this.addTarget(new TargetPermanent(filter, true));
+                this.addTarget(new TargetPermanent(filter));
                 return true;
             }
         }

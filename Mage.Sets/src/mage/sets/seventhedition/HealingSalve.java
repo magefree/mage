@@ -53,7 +53,7 @@ public class HealingSalve extends CardImpl {
 
         // Choose one - Target player gains 3 life; or prevent the next 3 damage that would be dealt to target creature or player this turn.
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         
         Mode mode = new Mode();
         mode.getEffects().add(new PreventDamageToTargetEffect(Duration.EndOfTurn, 3));

@@ -61,7 +61,7 @@ public class GeistcatchersRig extends CardImpl {
         this.toughness = new MageInt(5);
         // When Geistcatcher's Rig enters the battlefield, you may have it deal 4 damage to target creature with flying.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(4), true);
-        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 

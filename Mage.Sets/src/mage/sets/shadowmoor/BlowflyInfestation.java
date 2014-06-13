@@ -64,7 +64,7 @@ public class BlowflyInfestation extends CardImpl {
 
         Effect effect = new BlowflyInfestationEffect();
         TriggeredAbility triggeredAbility = new DiesCreatureTriggeredAbility(effect, false, false, true);
-        triggeredAbility.addTarget(new TargetCreaturePermanent(true));
+        triggeredAbility.addTarget(new TargetCreaturePermanent());
         Condition condition = new BlowflyInfestationCondition();
         this.addAbility(new ConditionalTriggeredAbility(triggeredAbility, condition, rule));
 

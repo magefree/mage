@@ -88,7 +88,7 @@ public class AthreosGodOfPassage extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));        
         // Whenever another creature you own dies, return it to your hand unless target opponent pays 3 life.
         Ability ability = new AthreosDiesCreatureTriggeredAbility(new AthreosGodOfPassageReturnEffect(), false, filter, true);
-        ability.addTarget(new TargetOpponent(true));
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
         
     }

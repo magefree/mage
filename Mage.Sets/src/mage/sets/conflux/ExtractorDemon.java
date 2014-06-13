@@ -61,7 +61,7 @@ public class ExtractorDemon extends CardImpl {
         
         // Whenever another creature leaves the battlefield, you may have target player put the top two cards of his or her library into his or her graveyard.
         Ability ability = new DiesCreatureTriggeredAbility(new PutLibraryIntoGraveTargetEffect(2), true, true, false);
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         
         // Unearth {2}{B}

@@ -60,7 +60,7 @@ public class GoblinCadets extends CardImpl {
 
         // Whenever Goblin Cadets blocks or becomes blocked, target opponent gains control of it.
         Ability ability = new BlocksOrBecomesBlockedTriggeredAbility(new GoblinCadetsChangeControlEffect(), false);
-        ability.addTarget(new TargetOpponent(true));
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
     }

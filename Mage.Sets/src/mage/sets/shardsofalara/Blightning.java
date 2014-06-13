@@ -49,7 +49,7 @@ public class Blightning extends CardImpl {
         this.color.setRed(true);
 
         // Blightning deals 3 damage to target player. That player discards two cards.
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
     }

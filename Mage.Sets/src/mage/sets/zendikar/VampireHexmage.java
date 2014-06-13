@@ -64,7 +64,7 @@ public class VampireHexmage extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         SimpleActivatedAbility vampireHexmageAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VampireHexmageEffect(), new SacrificeSourceCost());
-        vampireHexmageAbility.addTarget(new TargetPermanent(true));
+        vampireHexmageAbility.addTarget(new TargetPermanent());
         this.addAbility(vampireHexmageAbility);
     }
 

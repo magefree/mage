@@ -55,7 +55,7 @@ public class CetaDisciple extends CardImpl {
         this.toughness = new MageInt(1);
         Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R));
         firstAbility.addCost(new TapSourceCost());
-        firstAbility.addTarget(new TargetCreaturePermanent(true));
+        firstAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(firstAbility);
         Ability secondAbility = new AnyColorManaAbility(new ColoredManaCost(ColoredManaSymbol.G));
         secondAbility.addCost(new TapSourceCost());

@@ -63,7 +63,7 @@ public class FlameblastDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Flameblast Dragon attacks, you may pay {X}{R}. If you do, Flameblast Dragon deals X damage to target creature or player.
         Ability ability = new AttacksTriggeredAbility(new FlameblastDragonEffect(), false);
-        ability.addTarget(new TargetCreatureOrPlayer(true));
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

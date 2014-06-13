@@ -52,7 +52,7 @@ public class CullingMark extends CardImpl {
 
         // Target creature blocks this turn if able.
         this.getSpellAbility().addEffect(new BlocksIfAbleTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public CullingMark(final CullingMark card) {

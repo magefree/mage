@@ -51,7 +51,7 @@ public class VaporSnag extends CardImpl {
         // Return target creature to its owner's hand. Its controller loses 1 life.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(1));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public VaporSnag (final VaporSnag card) {

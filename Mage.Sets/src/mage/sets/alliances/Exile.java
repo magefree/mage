@@ -66,7 +66,7 @@ public class Exile extends CardImpl {
         this.color.setWhite(true);
 
         // Exile target nonwhite attacking creature. 
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         // You gain life equal to its toughness.
         this.getSpellAbility().addEffect(new ExileEffect());

@@ -69,7 +69,7 @@ public class Moonhold extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalReplacementEffect(
                 effect2,
                 new ManaWasSpentCondition(ColoredManaSymbol.W), false));
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.addInfo("Info1", "<i>(Do both if {R}{W} was spent.)</i>");
     }
 

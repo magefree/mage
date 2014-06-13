@@ -57,7 +57,7 @@ public class TidespoutTyrant extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a spell, return target permanent to its owner's hand.
         Ability ability = new SpellCastControllerTriggeredAbility(new ReturnToHandTargetEffect(), false);
-        ability.addTarget(new TargetPermanent(true));        
+        ability.addTarget(new TargetPermanent());        
         this.addAbility(ability);
     }
 

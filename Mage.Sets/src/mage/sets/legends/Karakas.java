@@ -62,7 +62,7 @@ public class Karakas extends CardImpl {
         this.addAbility(new WhiteManaAbility());
         // {tap}: Return target legendary creature to its owner's hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 

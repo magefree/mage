@@ -55,7 +55,7 @@ public class IntoTheMawOfHell extends CardImpl {
         // Destroy target land. Into the Maw of Hell deals 13 damage to target creature.
         this.getSpellAbility().addTarget(new TargetLandPermanent());
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new IntoTheMawOfHellEffect());
     }
 

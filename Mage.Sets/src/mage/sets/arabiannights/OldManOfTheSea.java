@@ -82,7 +82,7 @@ public class OldManOfTheSea extends CardImpl {
                 "Gain control of target creature with power less than or equal to {this}'s power for as long as {this} remains tapped and that creature's power remains less than or equal to {this}'s power");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(controllableCreatures, true));
+        ability.addTarget(new TargetCreaturePermanent(controllableCreatures));
         this.addAbility(ability);
         // internal ability to check condition
         this.addAbility(new OldManOfTheSeaStateBasedTriggeredAbility());

@@ -50,7 +50,7 @@ public class MendingTouch extends CardImpl {
 
         // Regenerate target creature.
         this.getSpellAbility().addEffect(new RegenerateTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public MendingTouch(final MendingTouch card) {

@@ -55,7 +55,7 @@ public class GrotagThrasher extends CardImpl {
 
         // Whenever Grotag Thrasher attacks, target creature can't block this turn.
         AttacksTriggeredAbility ability = new AttacksTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn), false);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

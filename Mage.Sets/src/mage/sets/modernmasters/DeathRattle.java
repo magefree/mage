@@ -61,7 +61,7 @@ public class DeathRattle extends CardImpl {
 
         // Destroy target nongreen creature. It can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         
     }
 

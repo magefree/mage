@@ -62,7 +62,7 @@ public class BoggartShenanigans extends CardImpl {
 
         // Whenever another Goblin you control dies, you may have Boggart Shenanigans deal 1 damage to target player.
         Ability ability = new DiesCreatureTriggeredAbility(new DamageTargetEffect(1), true, filter, false);
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

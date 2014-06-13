@@ -61,7 +61,7 @@ public class SurrakarBanisher extends CardImpl {
         this.toughness = new MageInt(3);
 
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 

@@ -65,7 +65,7 @@ public class MarshCasualties extends CardImpl {
                 new MarshCasualtiesEffect(-1, -1),
                 KickedCondition.getInstance(),
                 ruleText));
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public MarshCasualties(final MarshCasualties card) {

@@ -76,7 +76,7 @@ public class Mindreaver extends CardImpl {
 
         // <i>Heroic</i> - Whenever you cast a spell that targets Mindreaver, exile the top three cards of target player's library.
         Ability ability = new HeroicAbility(new MindreaverExileEffect(), false);
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         
         // {U}{U}, Sacrifice Mindreaver: Counter target spell with the same name as a card exiled with mindreaver.

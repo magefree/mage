@@ -69,7 +69,7 @@ public class KillingGlare extends CardImpl {
             ability.getTargets().clear();
             FilterCreaturePermanent filter = new FilterCreaturePermanent(new StringBuilder("creature with power ").append(xValue).append(" or less").toString());
             filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, xValue + 1));
-            ability.addTarget(new TargetCreaturePermanent(filter, true));
+            ability.addTarget(new TargetCreaturePermanent(filter));
         }
     }
 

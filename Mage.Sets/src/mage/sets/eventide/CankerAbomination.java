@@ -64,7 +64,7 @@ public class CankerAbomination extends CardImpl {
 
         // As Canker Abomination enters the battlefield, choose an opponent. Canker Abomination enters the battlefield with a -1/-1 counter on it for each creature that player controls.
         Ability ability = new AsEntersBattlefieldAbility(new CankerAbominationEffect());
-        Target target = new TargetOpponent(true);
+        Target target = new TargetOpponent();
         target.setNotTarget(true);
         ability.addTarget(target);
         this.addAbility(ability);

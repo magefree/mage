@@ -58,7 +58,7 @@ public class SunderFromWithin extends CardImpl {
         this.color.setRed(true);
         // Destroy target artifact or land.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     public SunderFromWithin(final SunderFromWithin card) {

@@ -61,7 +61,7 @@ public class RoninWarclub extends CardImpl {
         
         // Whenever a creature enters the battlefield under your control, attach Ronin Warclub to that creature.
         Ability ability = new RoninWarclubTriggeredAbility();
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         
         // Equip {5} ({5}: Attach to target creature you control. Equip only as a sorcery.)
@@ -98,7 +98,7 @@ public class RoninWarclub extends CardImpl {
                         // remove previous target
                         if (this.getTargets().get(0).getTargets().size() > 0) {
                             this.getTargets().clear();
-                            this.addTarget(new TargetCreaturePermanent(true));
+                            this.addTarget(new TargetCreaturePermanent());
                         }
                         Target target = this.getTargets().get(0);
                         if (target instanceof TargetCreaturePermanent) {

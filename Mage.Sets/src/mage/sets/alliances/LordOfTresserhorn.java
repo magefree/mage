@@ -76,7 +76,7 @@ public class LordOfTresserhorn extends CardImpl {
         effect.setText(", and target opponent draws two cards");
         effect.setTargetPointer(new SecondTargetPointer());
         ability.addEffect(effect);
-        ability.addTarget(new TargetOpponent(true));
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
         // {B}: Regenerate Lord of Tresserhorn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));

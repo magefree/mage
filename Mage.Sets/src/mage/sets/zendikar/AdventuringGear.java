@@ -73,7 +73,7 @@ class AdventuringGearAbility extends LandfallAbility {
     public AdventuringGearAbility() {
         super(null, false);
         this.addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
-        this.addTarget(new TargetCreaturePermanent(true));
+        this.addTarget(new TargetCreaturePermanent());
     }
 
     public AdventuringGearAbility(final AdventuringGearAbility ability) {

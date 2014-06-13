@@ -68,7 +68,7 @@ public class BrainMaggot extends CardImpl {
 
         // When Brain Maggot enters the battlefield, target opponent reveals his or her hand and you choose a nonland card from it. Exile that card until Brain Maggot leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BrainMaggotExileEffect());
-        ability.addTarget(new TargetOpponent(true));
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);    
         // Implemented as triggered effect that doesn't uses the stack (implementation with watcher does not work correctly because if the returned creature
         // has a DiesTriggeredAll ability it triggers for the dying / battlefield leaving source object, what shouldn't happen)

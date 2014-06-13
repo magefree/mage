@@ -53,7 +53,7 @@ public class Assassinate extends CardImpl {
         super(ownerId, 128, "Assassinate", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "10E";
         this.color.setBlack(true);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
 
     }

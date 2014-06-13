@@ -47,7 +47,7 @@ public class BituminousBlast extends CardImpl {
         this.expansionSetCode = "ARB";
         this.color.setBlack(true);
         this.color.setRed(true);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         this.addAbility(new CascadeAbility());
     }

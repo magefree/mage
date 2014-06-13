@@ -47,7 +47,7 @@ public class GraspOfDarkness extends CardImpl {
         this.expansionSetCode = "SOM";
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(-4, -4, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public GraspOfDarkness (final GraspOfDarkness card) {

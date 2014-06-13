@@ -60,7 +60,7 @@ public class KingMacarTheGoldCursed extends CardImpl {
 
         // Inspired - Whenever King Macar, the Gold-Cursed becomes untapped, you may exile target creature. If you do, put a colorless artifact token named Gold onto the battlefield. It has "Sacrifice this artifact: Add one mana of any color to your mana pool."
         Ability ability = new InspiredAbility(new ExileTargetEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         Effect effect = new CreateTokenEffect(new GoldToken());
         effect.setText("If you do, put a colorless artifact token named Gold onto the battlefield. It has \"Sacrifice this artifact: Add one mana of any color to your mana pool.\"");
         ability.addEffect(effect);        

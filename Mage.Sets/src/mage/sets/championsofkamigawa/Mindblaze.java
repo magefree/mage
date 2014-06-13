@@ -65,7 +65,7 @@ public class Mindblaze extends CardImpl {
         // Mindblaze deals 8 damage to that player.
         // Then that player shuffles his or her library.
         this.getSpellAbility().addEffect(new MindblazeEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public Mindblaze (final Mindblaze card) {

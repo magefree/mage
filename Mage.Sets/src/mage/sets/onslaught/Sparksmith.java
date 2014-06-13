@@ -66,7 +66,7 @@ public class Sparksmith extends CardImpl {
 
         // {tap}: Sparksmith deals X damage to target creature and X damage to you, where X is the number of Goblins on the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         ability.addEffect(new DamageControllerEffect(new PermanentsOnBattlefieldCount(filter)));
         this.addAbility(ability);
     }

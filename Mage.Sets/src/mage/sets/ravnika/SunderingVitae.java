@@ -61,7 +61,7 @@ public class SunderingVitae extends CardImpl {
         // Convoke
         this.addAbility(new ConvokeAbility());
         // Destroy target artifact or enchantment.
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 

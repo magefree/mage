@@ -72,7 +72,7 @@ public class BrigidHeroOfKinsbaile extends CardImpl {
 
         // {tap}: Brigid, Hero of Kinsbaile deals 2 damage to each attacking or blocking creature target player controls.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BrigidHeroOfKinsbaileEffect(), new TapSourceCost());
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
     }

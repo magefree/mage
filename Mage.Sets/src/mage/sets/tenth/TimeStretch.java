@@ -51,7 +51,7 @@ public class TimeStretch extends CardImpl {
         this.color.setBlue(true);
 
         // Target player takes two extra turns after this one.
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new TimeStretchEffect());
 
     }

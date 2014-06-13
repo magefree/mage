@@ -59,13 +59,13 @@ public class ArmedDangerous extends SplitCard {
         getLeftHalfCard().getColor().setRed(true);
         getLeftHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(1,1, Duration.EndOfTurn));
         getLeftHalfCard().getSpellAbility().addEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Dangerous
         // All creatures able to block target creature this turn do so.
         getRightHalfCard().getColor().setGreen(true);
         getRightHalfCard().getSpellAbility().addEffect(new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn));
-        getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
     }
 

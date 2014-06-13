@@ -51,7 +51,7 @@ public class TowerOfCalamities extends CardImpl {
         super(ownerId, 212, "Tower of Calamities", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "SOM";
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(12), new ManaCostsImpl("{8}"));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

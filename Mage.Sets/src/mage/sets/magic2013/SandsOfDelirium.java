@@ -55,7 +55,7 @@ public class SandsOfDelirium extends CardImpl {
         // {X}, {tap}: Target player puts the top X cards of his or her library into his or her graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(new ManacostVariableValue()), new VariableManaCost());
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

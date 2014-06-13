@@ -55,7 +55,7 @@ public class Plummet extends CardImpl {
         super(ownerId, 190, "Plummet", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "M11";
         this.color.setGreen(true);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 

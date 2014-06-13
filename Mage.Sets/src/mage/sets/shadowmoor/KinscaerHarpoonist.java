@@ -64,7 +64,7 @@ public class KinscaerHarpoonist extends CardImpl {
         Effect effect = new LoseAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("you may have target creature lose flying until end of turn");
         Ability ability = new AttacksTriggeredAbility(effect, true);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         
     }

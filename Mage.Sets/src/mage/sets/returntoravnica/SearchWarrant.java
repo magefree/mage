@@ -52,7 +52,7 @@ public class SearchWarrant extends CardImpl {
         this.color.setWhite(true);
 
         // Target player reveals his or her hand. You gain life equal to the number of cards in that player's hand.
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new SearchWarrantEffect());
 
     }

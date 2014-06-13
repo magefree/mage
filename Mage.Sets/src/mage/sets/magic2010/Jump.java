@@ -48,7 +48,7 @@ public class Jump extends CardImpl {
         this.expansionSetCode = "M10";
         this.color.setBlue(true);
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public Jump(final Jump card) {

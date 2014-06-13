@@ -58,7 +58,7 @@ public class HideousEnd extends CardImpl {
         this.color.setBlack(true);
 
         // Destroy target nonblack creature. Its controller loses 2 life.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(2));
     }

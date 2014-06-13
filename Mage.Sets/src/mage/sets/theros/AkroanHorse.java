@@ -104,7 +104,7 @@ class AkroanHorseChangeControlEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Target target = new TargetOpponent(true);
+        Target target = new TargetOpponent();
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             if (controller.chooseTarget(outcome, target, source, game)) {

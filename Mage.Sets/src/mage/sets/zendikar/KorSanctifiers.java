@@ -71,7 +71,7 @@ public class KorSanctifiers extends CardImpl {
 
         // When Kor Sanctifiers enters the battlefield, if it was kicked, destroy target artifact or enchantment.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        ability.addTarget(new TargetPermanent(filter, true));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, destroy target artifact or enchantment."));
     }
 

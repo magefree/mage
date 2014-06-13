@@ -75,7 +75,7 @@ public class SistersOfStoneDeath extends CardImpl {
 
         // {G}: Target creature blocks Sisters of Stone Death this turn if able.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(), new ManaCostsImpl("{G}"));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // {B}{G}: Exile target creature blocking or blocked by Sisters of Stone Death.
@@ -83,7 +83,7 @@ public class SistersOfStoneDeath extends CardImpl {
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creature blocking or blocked by Sisters of Stone Death");
         filter.add(Predicates.or(new BlockedByIdPredicate(this.getId()),
                 new BlockingAttackerIdPredicate(this.getId())));
-        ability2.addTarget(new TargetCreaturePermanent(filter, true));
+        ability2.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability2);
 
         // {2}{B}: Put a creature card exiled with Sisters of Stone Death onto the battlefield under your control.

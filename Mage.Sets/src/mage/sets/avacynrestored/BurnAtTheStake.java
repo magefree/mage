@@ -66,7 +66,7 @@ public class BurnAtTheStake extends CardImpl {
         this.getSpellAbility().addCost(new TapVariableTargetCost(filter, true, "any number of"));
         // Burn at the Stake deals damage to target creature or player equal to three times the number of creatures tapped this way.
         this.getSpellAbility().addEffect(new BurnAtTheStakeEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
     public BurnAtTheStake(final BurnAtTheStake card) {

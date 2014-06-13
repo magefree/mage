@@ -82,7 +82,7 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
     public CarpetOfFlowersTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CarpetOfFlowersEffect(), true);
         this.addChoice(new ChoiceColor());
-        this.addTarget(new TargetOpponent(true));
+        this.addTarget(new TargetOpponent());
         
     }
 

@@ -77,7 +77,7 @@ class SparkMageTriggeredAbility extends TriggeredAbilityImpl {
 
     public SparkMageTriggeredAbility(){
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
-        this.addTarget(new TargetCreaturePermanent(true));
+        this.addTarget(new TargetCreaturePermanent());
     }
     
     public SparkMageTriggeredAbility(final SparkMageTriggeredAbility ability) {
@@ -99,7 +99,7 @@ class SparkMageTriggeredAbility extends TriggeredAbilityImpl {
                     FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + opponent.getName() + " controls");
                     filter.add(new ControllerIdPredicate(opponent.getId()));
                     this.getTargets().clear();
-                    this.getTargets().add(new TargetCreaturePermanent(filter, true));
+                    this.getTargets().add(new TargetCreaturePermanent(filter));
                     return true;
                 }
             }

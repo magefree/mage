@@ -51,7 +51,7 @@ public class BattlewiseValor extends CardImpl {
         // Target creature gets +2/+2 until end of turn. Scry 1.
         this.getSpellAbility().addEffect(new BoostTargetEffect(2,2, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new ScryEffect(1));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public BattlewiseValor(final BattlewiseValor card) {

@@ -58,7 +58,7 @@ public class AkkiDrillmaster extends CardImpl {
         this.toughness = new MageInt(2);
         // {tap}: Target creature gains haste until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

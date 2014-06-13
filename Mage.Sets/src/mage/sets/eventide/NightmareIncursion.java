@@ -63,7 +63,7 @@ public class NightmareIncursion extends CardImpl {
 
         // Search target player's library for up to X cards, where X is the number of Swamps you control, and exile them. Then that player shuffles his or her library.
         Effect effect = new NightmareIncursionEffect();
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(effect);
 
     }

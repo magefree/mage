@@ -56,7 +56,7 @@ public class HuntersInsight extends CardImpl {
 
         // Choose target creature you control. Whenever that creature deals combat damage to a player or planeswalker this turn, draw that many cards.
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new HuntersInsightTriggeredAbility(), Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 
     public HuntersInsight(final HuntersInsight card) {

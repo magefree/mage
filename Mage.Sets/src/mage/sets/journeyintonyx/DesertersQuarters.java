@@ -62,7 +62,7 @@ public class DesertersQuarters extends CardImpl {
         // {6}, T: Tap target creature. It doesn't untap during its controller's untap step for as long as Deserter's Quarters remains tapped.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DesertersQuartersTapTargetEffect(), new GenericManaCost(6));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DesertersQuartersRestrictionEffect()));

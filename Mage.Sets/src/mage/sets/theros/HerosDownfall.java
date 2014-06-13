@@ -57,7 +57,7 @@ public class HerosDownfall extends CardImpl {
 
         // Destroy target creature or planeswalker.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        Target target = new TargetPermanent(filter, true);
+        Target target = new TargetPermanent(filter);
         target.setRequired(true);
         this.getSpellAbility().addTarget(target);
     }

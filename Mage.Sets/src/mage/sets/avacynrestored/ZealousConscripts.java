@@ -61,7 +61,7 @@ public class ZealousConscripts extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
         // When Zealous Conscripts enters the battlefield, gain control of target permanent until end of turn. Untap that permanent. It gains haste until end of turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Duration.EndOfTurn));
-        ability.addTarget(new TargetPermanent(true));
+        ability.addTarget(new TargetPermanent());
         ability.addEffect(new UntapTargetEffect());
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn, "It gains haste until end of turn"));
         this.addAbility(ability);

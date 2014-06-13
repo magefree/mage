@@ -78,8 +78,8 @@ public class DomriRade extends CardImpl {
 
         // -2: Target creature you control fights another target creature.
         LoyaltyAbility ability2 = new LoyaltyAbility(new FightTargetsEffect(), -2);
-        ability2.addTarget(new TargetControlledCreaturePermanent(true));
-        ability2.addTarget(new TargetOtherCreaturePermanent(true));
+        ability2.addTarget(new TargetControlledCreaturePermanent());
+        ability2.addTarget(new TargetOtherCreaturePermanent());
         this.addAbility(ability2);
 
         // -7: You get an emblem with "Creatures you control have double strike, trample, hexproof and haste."

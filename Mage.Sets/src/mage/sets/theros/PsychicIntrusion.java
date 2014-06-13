@@ -62,7 +62,7 @@ public class PsychicIntrusion extends CardImpl {
         // Target opponent reveals his or her hand. You choose a nonland card from that player's graveyard or hand and exile it.
         // You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color
         // to cast that spell.
-        this.getSpellAbility().addTarget(new TargetOpponent(true));
+        this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new PsychicIntrusionExileEffect());
 
     }

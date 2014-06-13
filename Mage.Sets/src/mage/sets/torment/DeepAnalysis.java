@@ -56,7 +56,7 @@ public class DeepAnalysis extends CardImpl {
 
         // Target player draws two cards.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(2));
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Flashback-{1}{U}, Pay 3 life.
         CostsImpl costs = new CostsImpl();

@@ -85,7 +85,7 @@ public class FuryCharm extends CardImpl {
         Mode mode = new Mode();
         mode.getEffects().add(new BoostTargetEffect(1,1, Duration.EndOfTurn));
         mode.getEffects().add(new GainAbilityTargetEffect(TrampleAbility.getInstance(),Duration.EndOfTurn));
-        mode.getTargets().add(new TargetCreaturePermanent(true));
+        mode.getTargets().add(new TargetCreaturePermanent());
         this.getSpellAbility().getModes().addMode(mode);
         // or remove two time counters from target permanent or suspended card.
         mode = new Mode();
@@ -108,7 +108,7 @@ public class FuryCharm extends CardImpl {
                 if (effect instanceof FuryCharmRemoveCounterEffect) {
                     Choice targetChoice = ability.getChoices().get(0);
                     if (targetChoice.getChoice().equals("Permanent")) {
-                        ability.addTarget(new TargetCreaturePermanent(true));
+                        ability.addTarget(new TargetCreaturePermanent());
                     }
                     if (targetChoice.getChoice().equals("Suspended Card")) {
                         Target target = new TargetCardInExile(1,1, filter, null, true);

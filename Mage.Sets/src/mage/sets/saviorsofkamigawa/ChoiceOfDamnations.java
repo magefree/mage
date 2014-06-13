@@ -58,7 +58,7 @@ public class ChoiceOfDamnations extends CardImpl {
 
         // Target opponent chooses a number. You may have that player lose that much life. If you don't, that player sacrifices all but that many permanents.
         this.getSpellAbility().addEffect(new ChoiceOfDamnationsEffect());
-        this.getSpellAbility().addTarget(new TargetOpponent(true));
+        this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
     public ChoiceOfDamnations(final ChoiceOfDamnations card) {

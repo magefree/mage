@@ -51,7 +51,7 @@ public class ArtfulDodge extends CardImpl {
 
         // Target creature is unblockable this turn.
         this.getSpellAbility().addEffect(new UnblockableTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Flashback {U}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{U}"), TimingRule.SORCERY));
     }

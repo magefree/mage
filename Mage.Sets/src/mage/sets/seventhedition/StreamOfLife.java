@@ -49,7 +49,7 @@ public class StreamOfLife extends CardImpl {
 
         // Target player gains X life.
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(new ManacostVariableValue()));
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public StreamOfLife(final StreamOfLife card) {

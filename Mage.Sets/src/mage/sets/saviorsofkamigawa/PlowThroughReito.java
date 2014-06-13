@@ -55,7 +55,7 @@ public class PlowThroughReito extends CardImpl {
         this.getSpellAbility().addEffect(new SweepEffect("Plains"));
         DynamicValue sweepValue = new SweepNumber("Plains", true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(sweepValue, sweepValue, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public PlowThroughReito(final PlowThroughReito card) {

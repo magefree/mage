@@ -56,7 +56,7 @@ public class JourneyToNowhere extends CardImpl {
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
         filter.add(new AnotherPredicate());
         Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect("Journey to Nowhere exile"), false);
-        Target target = new TargetPermanent(filter, true);
+        Target target = new TargetPermanent(filter);
         target.setRequired(true);
         ability1.addTarget(target);
         this.addAbility(ability1);

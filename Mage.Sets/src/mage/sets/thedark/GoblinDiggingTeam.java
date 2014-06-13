@@ -65,7 +65,7 @@ public class GoblinDiggingTeam extends CardImpl {
         // {tap}, Sacrifice Goblin Digging Team: Destroy target Wall.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetPermanent(filter, true));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

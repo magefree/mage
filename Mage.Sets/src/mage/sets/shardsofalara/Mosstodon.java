@@ -68,7 +68,7 @@ public class Mosstodon extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn),
                 new ManaCostsImpl("{1}"));
-        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 

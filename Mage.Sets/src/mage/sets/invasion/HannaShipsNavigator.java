@@ -73,7 +73,7 @@ public class HannaShipsNavigator extends CardImpl {
         // {1}{W}{U}, {tap}: Return target artifact or enchantment card from your graveyard to your hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl("{1}{W}{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCardInYourGraveyard(filter, true));
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
 

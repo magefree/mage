@@ -71,7 +71,7 @@ public class PrimevalBounty extends CardImpl {
         // Whenever you cast a noncreature spell, put three +1/+1 counters on target creature you control.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(3));
         Ability ability = new SpellCastControllerTriggeredAbility(effect, filterNonCreature, false);
-        ability.addTarget(new TargetControlledCreaturePermanent(true));
+        ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 
         // Whenever a land enters the battlefield under your control, you gain 3 life. 

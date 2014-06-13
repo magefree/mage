@@ -49,7 +49,7 @@ public class Reknit extends CardImpl {
 
         // Regenerate target permanent.
         this.getSpellAbility().addEffect(new RegenerateTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(true));
+        this.getSpellAbility().addTarget(new TargetPermanent());
     }
 
     public Reknit(final Reknit card) {

@@ -46,7 +46,7 @@ public class CruelEdict extends CardImpl {
         this.expansionSetCode = "10E";
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target opponent sacrifices a creature"));
-        this.getSpellAbility().addTarget(new TargetOpponent(true));
+        this.getSpellAbility().addTarget(new TargetOpponent());
         // Target opponent sacrifices a creature.
     }
 

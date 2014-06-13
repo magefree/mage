@@ -72,7 +72,7 @@ public class Nekrataal extends CardImpl {
 
         // When Nekrataal enters the battlefield, destroy target nonartifact, nonblack creature. That creature can't be regenerated.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(true));
-        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
 
     }

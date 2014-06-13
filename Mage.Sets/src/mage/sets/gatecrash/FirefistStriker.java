@@ -58,7 +58,7 @@ public class FirefistStriker extends CardImpl {
 
         // Battalion — Whenever Firefist Striker and at least two other creatures attack, target creature can't block this turn.
         Ability ability = new BattalionAbility(new CantBlockTargetEffect(Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

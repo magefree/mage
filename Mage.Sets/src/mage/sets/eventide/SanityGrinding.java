@@ -58,7 +58,7 @@ public class SanityGrinding extends CardImpl {
 
         // Chroma - Reveal the top ten cards of your library. For each blue mana symbol in the mana costs of the revealed cards, target opponent puts the top card of his or her library into his or her graveyard. Then put the cards you revealed this way on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new SanityGrindingEffect());
-        this.getSpellAbility().addTarget(new TargetOpponent(true));
+        this.getSpellAbility().addTarget(new TargetOpponent());
 
     }
 

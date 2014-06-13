@@ -60,7 +60,7 @@ public class MoonlitStrider extends CardImpl {
         // Sacrifice Moonlit Strider: Target creature you control gains protection from the color of your choice until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), new SacrificeSourceCost());
         ability.addChoice(new ChoiceColor());
-        ability.addTarget(new TargetControlledCreaturePermanent(true));
+        ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);        
         
         // Soulshift 3 (When this creature dies, you may return target Spirit card with converted mana cost 3 or less from your graveyard to your hand.)

@@ -70,7 +70,7 @@ public class Dragonshift extends CardImpl {
         // Until end of turn, target creature you control becomes a 4/4 blue and red Dragon, loses all abilities, and gains flying.
         this.getSpellAbility().addEffect(new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(new DragonToken(), null, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // Overload {3}{U}{U}{R}{R}
         Ability ability = new OverloadAbility(this, new LoseAllAbilitiesAllEffect(new FilterControlledCreaturePermanent(""), Duration.EndOfTurn), new ManaCostsImpl("{3}{U}{U}{R}{R}"));

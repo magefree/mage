@@ -76,7 +76,7 @@ public class SarkhanVol extends CardImpl {
         effects2.add(new UntapTargetEffect());
         effects2.add(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
         LoyaltyAbility ability = new LoyaltyAbility(effects2, -2);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // -6: Put five 4/4 red Dragon creature tokens with flying onto the battlefield.

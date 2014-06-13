@@ -55,7 +55,7 @@ public class BogardanRager extends CardImpl {
         this.toughness = new MageInt(4);
         this.addAbility(FlashAbility.getInstance());
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(4, 0, Duration.EndOfTurn), false);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

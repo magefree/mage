@@ -61,7 +61,7 @@ public class BleakCovenVampires extends CardImpl {
 
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(4), false);
         ability.addEffect(new GainLifeEffect(4));
-        Target target = new TargetPlayer(true);
+        Target target = new TargetPlayer();
         target.setRequired(true);
         ability.addTarget(target);
 

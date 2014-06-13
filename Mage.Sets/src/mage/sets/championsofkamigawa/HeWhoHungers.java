@@ -78,7 +78,7 @@ public class HeWhoHungers extends CardImpl {
         /* {1}, Sacrifice a Spirit: Target opponent reveals his or her hand. You choose a card from it. 
          * That player discards that card. Activate this ability only any time you could cast a sorcery. */
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardCardYouChooseTargetEffect(), new ManaCostsImpl("{1}"));
-        ability.addTarget(new TargetOpponent(true));
+        ability.addTarget(new TargetOpponent());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
 

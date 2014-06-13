@@ -54,7 +54,7 @@ public class EarlyHarvest extends CardImpl {
 
         // Target player untaps all basic lands he or she controls.
         this.getSpellAbility().addEffect(new UntapAllLandsTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public EarlyHarvest(final EarlyHarvest card) {

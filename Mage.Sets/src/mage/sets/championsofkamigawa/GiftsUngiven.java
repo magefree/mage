@@ -114,7 +114,7 @@ class GiftsUngivenEffect extends OneShotEffect {
 
                     Player opponent;
                     if (game.getOpponents(player.getId()).size() > 1) {
-                        TargetOpponent targetOpponent = new TargetOpponent(true);
+                        TargetOpponent targetOpponent = new TargetOpponent();
                         player.chooseTarget(outcome, targetOpponent, source, game);
                         opponent = game.getPlayer(target.getFirstTarget());
                     } else {

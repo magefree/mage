@@ -65,7 +65,7 @@ public class BreachingHippocamp extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
         // When Breaching Hippocamp enters the battlefield, untap another target creature you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new UntapTargetEffect(), false);
-        ability.addTarget(new TargetControlledCreaturePermanent(1,1,filter, false, true));
+        ability.addTarget(new TargetControlledCreaturePermanent(1,1,filter, false));
         this.addAbility(ability);
     }
 

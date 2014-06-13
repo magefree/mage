@@ -66,7 +66,7 @@ public class ShieldOfTheRighteous extends CardImpl {
         this.addAbility(new BlocksCreatureAttachedTriggeredAbility(new SkipNextUntapTargetEffect("that creature"), "equipped", false, false, true));
         
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), new TargetControlledCreaturePermanent(true)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), new TargetControlledCreaturePermanent()));
     }
 
     public ShieldOfTheRighteous(final ShieldOfTheRighteous card) {

@@ -60,7 +60,7 @@ public class MazeOfIth extends CardImpl {
         effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE, true);
         effect.setText("and dealt by that creature this turn");
         ability.addEffect(effect);
-        ability.addTarget(new TargetAttackingCreature(true));
+        ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);
     }
 

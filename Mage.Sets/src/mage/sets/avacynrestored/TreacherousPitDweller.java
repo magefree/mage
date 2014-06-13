@@ -78,7 +78,7 @@ class TreacherousPitDwellerTriggeredAbility extends ZoneChangeTriggeredAbility {
     public TreacherousPitDwellerTriggeredAbility() {
         super(Zone.GRAVEYARD, Zone.BATTLEFIELD, new TreacherousPitDwellerEffect(), ruleText, false);
         zone = Zone.BATTLEFIELD;
-        addTarget(new TargetOpponent(true));
+        addTarget(new TargetOpponent());
     }
 
     public TreacherousPitDwellerTriggeredAbility(final TreacherousPitDwellerTriggeredAbility ability) {

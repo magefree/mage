@@ -55,7 +55,7 @@ public class BileBlight extends CardImpl {
 
         // Target creature and all creatures with the same name as that creature get -3/-3 until end of turn.
         this.getSpellAbility().addEffect(new BileBlightEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public BileBlight(final BileBlight card) {

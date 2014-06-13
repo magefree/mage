@@ -55,7 +55,7 @@ public class DarkBanishing extends CardImpl {
         this.expansionSetCode = "TMP";
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
     public DarkBanishing(final DarkBanishing card) {

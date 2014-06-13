@@ -51,7 +51,7 @@ public class BoonOfErebos extends CardImpl {
 
         // Target creature gets +2/+0 until end of turn.  Regenerate it.  You lose 2 life.
         this.getSpellAbility().addEffect(new BoostTargetEffect(2,0, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new RegenerateTargetEffect());
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
     }

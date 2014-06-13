@@ -66,7 +66,7 @@ public class AuraOfDominion extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Aura");
         this.color.setBlue(true);
-        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Untap));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));

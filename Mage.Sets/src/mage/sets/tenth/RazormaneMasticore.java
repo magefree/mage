@@ -67,7 +67,7 @@ public class RazormaneMasticore extends CardImpl {
 
         // At the beginning of your draw step, you may have Razormane Masticore deal 3 damage to target creature.
         Ability ability = new BeginningOfDrawTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), TargetController.YOU, true);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

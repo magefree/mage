@@ -52,10 +52,10 @@ public class PunishTheEnemy extends CardImpl {
 
         // Punish the Enemy deals 3 damage to target player and 3 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3, true, "target player and 3 damage to target creature"));
-        Target target = new TargetPlayer(true);
+        Target target = new TargetPlayer();
         target.setRequired(true);
         this.getSpellAbility().addTarget(target);
-        target = new TargetCreaturePermanent(true);
+        target = new TargetCreaturePermanent();
         target.setRequired(true);
         this.getSpellAbility().addTarget(target);
     }

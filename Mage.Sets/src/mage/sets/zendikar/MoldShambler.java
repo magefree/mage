@@ -71,7 +71,7 @@ public class MoldShambler extends CardImpl {
 
         // When Mold Shambler enters the battlefield, if it was kicked, destroy target noncreature permanent.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        Target target = new TargetPermanent(filter, true);
+        Target target = new TargetPermanent(filter);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(new ConditionalTriggeredAbility(ability, new LockedInCondition(KickedCondition.getInstance()), "When {this} enters the battlefield, if it was kicked, destroy target noncreature permanent."));

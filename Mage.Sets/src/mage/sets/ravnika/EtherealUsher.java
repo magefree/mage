@@ -61,7 +61,7 @@ public class EtherealUsher extends CardImpl {
                 new UnblockableTargetEffect(),
                 new ManaCostsImpl("{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // Transmute {1}{U}{U}
         this.addAbility(new TransmuteAbility("{1}{U}{U}"));

@@ -58,7 +58,7 @@ public class Bramblesnap extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 1, Duration.EndOfTurn),
-                new TapTargetCost(new TargetControlledCreaturePermanent(true))));
+                new TapTargetCost(new TargetControlledCreaturePermanent())));
     }
 
     public Bramblesnap(final Bramblesnap card) {

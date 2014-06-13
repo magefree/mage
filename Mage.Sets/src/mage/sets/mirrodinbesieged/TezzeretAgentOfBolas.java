@@ -82,12 +82,12 @@ public class TezzeretAgentOfBolas extends CardImpl {
         effect = new SetPowerToughnessTargetEffect(5,5, Duration.EndOfGame);
         effect.setText("Target artifact becomes a 5/5 artifact creature");
         ability1.addEffect(effect);
-        ability1.addTarget(new TargetArtifactPermanent(true));
+        ability1.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability1);
 
         // -4: Target player loses X life and you gain X life, where X is twice the number of artifacts you control.
         LoyaltyAbility ability2 = new LoyaltyAbility(new TezzeretAgentOfBolasEffect2(), -4);
-        ability2.addTarget(new TargetPlayer(true));
+        ability2.addTarget(new TargetPlayer());
         this.addAbility(ability2);
 
     }

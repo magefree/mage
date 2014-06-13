@@ -70,7 +70,7 @@ public class DawnToDusk extends CardImpl {
         // and/or destroy target enchantment.
         Mode mode = new Mode();
         mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetPermanent(filter, true));
+        mode.getTargets().add(new TargetPermanent(filter));
         this.getSpellAbility().addMode(mode);
     }
 

@@ -65,7 +65,7 @@ public class MogissMarauder extends CardImpl {
                 "up to X target creatures each gain intimidate"), false);
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn,
                 "and haste until end of turn, where X is your devotion to black"));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

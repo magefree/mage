@@ -66,7 +66,7 @@ public class BarbarianRing extends CardImpl {
             "<i>Threshold</i> - {R}, {T}, Sacrifice {this}: {this} deals 2 damage to target creature or player. Activate this ability only if seven or more cards are in your graveyard.");
         thresholdAbility.addCost(new TapSourceCost());
         thresholdAbility.addCost(new SacrificeSourceCost());
-        thresholdAbility.addTarget(new TargetCreatureOrPlayer(true));
+        thresholdAbility.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(thresholdAbility);
     }
 

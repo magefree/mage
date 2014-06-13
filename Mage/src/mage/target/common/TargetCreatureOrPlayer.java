@@ -51,11 +51,6 @@ public class TargetCreatureOrPlayer extends TargetImpl {
 
     protected FilterCreatureOrPlayer filter;
 
-    public TargetCreatureOrPlayer(boolean required) {
-        this();
-        setRequired(required);
-    }
-
     public TargetCreatureOrPlayer() {
         this(1, 1);
     }

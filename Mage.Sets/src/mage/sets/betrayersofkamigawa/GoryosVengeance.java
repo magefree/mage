@@ -74,7 +74,7 @@ public class GoryosVengeance extends CardImpl {
 
         // Return target legendary creature card from your graveyard to the battlefield. That creature gains haste. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new GoryosVengeanceEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter, true));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
 
         // Splice onto Arcane {2}{B}
         this.addAbility(new SpliceOntoArcaneAbility("{2}{B}"));

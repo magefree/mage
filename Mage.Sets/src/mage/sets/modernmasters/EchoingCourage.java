@@ -57,7 +57,7 @@ public class EchoingCourage extends CardImpl {
 
         // Target creature and all other creatures with the same name as that creature get +2/+2 until end of turn.
         this.getSpellAbility().addEffect(new EchoingCourageEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public EchoingCourage(final EchoingCourage card) {

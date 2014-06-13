@@ -67,7 +67,7 @@ public class CurseOfEchoes extends CardImpl {
         this.color.setBlue(true);
 
         // Enchant player
-        TargetPlayer auraTarget = new TargetPlayer(true);
+        TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Damage));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));

@@ -98,7 +98,7 @@ class TomoyaTheRevealer extends Token {
         // {3}{U}{U},{T} : Target player draws X cards, where X is the number of cards in your hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(new CardsInControllerHandCount()), new ManaCostsImpl("{3}{U}{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 }

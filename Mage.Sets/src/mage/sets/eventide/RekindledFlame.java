@@ -59,7 +59,7 @@ public class RekindledFlame extends CardImpl {
 
         // Rekindled Flame deals 4 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         
         // At the beginning of your upkeep, if an opponent has no cards in hand, you may return Rekindled Flame from your graveyard to your hand.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD, new ConditionalOneShotEffect(new ReturnSourceFromGraveyardToHandEffect(), new OpponentHasNoCardsInHandCondition(), rule), TargetController.YOU, true);

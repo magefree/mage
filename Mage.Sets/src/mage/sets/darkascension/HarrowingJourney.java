@@ -50,7 +50,7 @@ public class HarrowingJourney extends CardImpl {
         // Target player draws three cards and loses 3 life.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(3));
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public HarrowingJourney(final HarrowingJourney card) {

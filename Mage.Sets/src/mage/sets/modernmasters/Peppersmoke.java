@@ -60,7 +60,7 @@ public class Peppersmoke extends CardImpl {
 
         // Target creature gets -1/-1 until end of turn. If you control a Faerie, draw a card.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-1,-1,Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(
                 new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1),
                 new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0),

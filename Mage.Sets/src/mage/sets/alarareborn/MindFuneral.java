@@ -57,7 +57,7 @@ public class MindFuneral extends CardImpl {
 
         // Target opponent reveals cards from the top of his or her library until four land cards are revealed. That player puts all cards revealed this way into his or her graveyard.
         this.getSpellAbility().addEffect(new MindFuneralEffect());
-        this.getSpellAbility().addTarget(new TargetOpponent(true));
+        this.getSpellAbility().addTarget(new TargetOpponent());
         
     }
 

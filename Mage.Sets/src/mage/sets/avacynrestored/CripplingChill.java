@@ -50,7 +50,7 @@ public class CripplingChill extends CardImpl {
         this.color.setBlue(true);
 
         // Tap target creature. It doesn't untap during its controller's next untap step.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new TapTargetEffect());
         this.getSpellAbility().addEffect(new SkipNextUntapTargetEffect());
         // Draw a card.

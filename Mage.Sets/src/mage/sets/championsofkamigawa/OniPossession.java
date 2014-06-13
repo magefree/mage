@@ -67,14 +67,14 @@ public class OniPossession extends CardImpl {
 
         this.color.setBlack(true);
         // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
     this.getSpellAbility().addTarget(auraTarget);
     this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
     Ability ability = new EnchantAbility(auraTarget.getTargetName());
     this.addAbility(ability);
         // At the beginning of your upkeep, sacrifice a creature.
         Ability ability2 = new BeginningOfUpkeepTriggeredAbility(new SacrificeTargetEffect("sacrifice a creature"), TargetController.YOU, false);
-        ability2.addTarget(new TargetControlledCreaturePermanent(1,1, new FilterControlledCreaturePermanent(),false, true));
+        ability2.addTarget(new TargetControlledCreaturePermanent(1,1, new FilterControlledCreaturePermanent(),false));
         this.addAbility(ability2);
         // Enchanted creature gets +3/+3 and has trample.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));

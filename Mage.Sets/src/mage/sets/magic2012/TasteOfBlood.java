@@ -48,7 +48,7 @@ public class TasteOfBlood extends CardImpl {
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addEffect(new GainLifeEffect(1));
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public TasteOfBlood (final TasteOfBlood card) {

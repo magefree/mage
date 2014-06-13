@@ -51,7 +51,7 @@ public class StrangeInversion extends CardImpl {
 
         // Switch target creature's power and toughness until end of turn.
         this.getSpellAbility().addEffect(new SwitchPowerToughnessTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Splice onto Arcane {1}{R}
         this.addAbility(new SpliceOntoArcaneAbility("{1}{R}"));
     }

@@ -60,7 +60,7 @@ public class NeverendingTorment extends CardImpl {
 
         // Search target player's library for X cards, where X is the number of cards in your hand, and exile them. Then that player shuffles his or her library.
         this.getSpellAbility().addEffect(new NeverendingTormentEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Epic
         this.getSpellAbility().addEffect(new EpicEffect());

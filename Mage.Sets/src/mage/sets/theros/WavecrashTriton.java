@@ -64,7 +64,7 @@ public class WavecrashTriton extends CardImpl {
 
         // Heroic - Whenever you cast a spell that targets Wavecrash Triton, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.
         Ability ability = new HeroicAbility(new TapTargetEffect());
-        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         ability.addEffect(new SkipNextUntapTargetEffect("That creature"));
         this.addAbility(ability);
     }

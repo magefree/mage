@@ -48,7 +48,7 @@ public class Ostracize extends CardImpl {
         this.color.setBlack(true);
 
         // Target opponent reveals his or her hand. You choose a creature card from it. That player discards that card.
-        this.getSpellAbility().addTarget(new TargetOpponent(true));
+        this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(new FilterCreatureCard("a creature card")));
     }
 

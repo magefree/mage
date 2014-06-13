@@ -54,7 +54,7 @@ public class SeismicStrike extends CardImpl {
         this.expansionSetCode = "M10";
         this.color.setRed(true);
         this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public SeismicStrike(final SeismicStrike card) {

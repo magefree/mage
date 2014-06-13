@@ -57,7 +57,7 @@ public class AgonizingMemories extends CardImpl {
 
         // Look at target player's hand and choose two cards from it. Put them on top of that player's library in any order.
         this.getSpellAbility().addEffect(new AgonizingMemoriesEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public AgonizingMemories(final AgonizingMemories card) {

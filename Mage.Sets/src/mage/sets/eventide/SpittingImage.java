@@ -62,7 +62,7 @@ public class SpittingImage extends CardImpl {
 
         // Put a token that's a copy of target creature onto the battlefield.
         this.getSpellAbility().addEffect(new SpittingImageEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         
         // Retrace
         this.addAbility(new RetraceAbility(new DiscardTargetCost(new TargetCardInHand(new FilterLandCard())), TimingRule.SORCERY));

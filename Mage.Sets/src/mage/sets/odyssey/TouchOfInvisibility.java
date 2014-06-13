@@ -50,7 +50,7 @@ public class TouchOfInvisibility extends CardImpl {
 
         // Target creature is unblockable this turn.
         this.getSpellAbility().addEffect(new CantBeBlockedTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

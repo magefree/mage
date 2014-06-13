@@ -57,7 +57,7 @@ public class CephalidLooter extends CardImpl {
 
         // {tap}: Target player draws a card, then discards a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

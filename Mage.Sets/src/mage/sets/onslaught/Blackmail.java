@@ -49,7 +49,7 @@ public class Blackmail extends CardImpl {
 
         // Target player reveals three cards from his or her hand and you choose one of them. That player discards that card.
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(TargetController.ANY, 3));
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public Blackmail(final Blackmail card) {

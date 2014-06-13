@@ -58,7 +58,7 @@ public class LeoninBola extends CardImpl {
         // Equipped creature has "{tap}, Unattach Leonin Bola: Tap target creature."
         Ability gainAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
         gainAbility.addCost(new UnattachCost(this.getId()));
-        gainAbility.addTarget(new TargetCreaturePermanent(true));
+        gainAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainAbility, AttachmentType.EQUIPMENT)));
         
         // Equip {1}

@@ -55,7 +55,7 @@ public class JabarisBanner extends CardImpl {
         // {1}, {tap}: Target creature gains flanking until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new FlankingAbility(), Duration.EndOfTurn), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

@@ -107,7 +107,7 @@ class TributeEffect extends OneShotEffect {
             if (game.getOpponents(controller.getId()).size() == 1) {
                 opponentId = game.getOpponents(controller.getId()).iterator().next();
             } else {
-                Target target = new TargetOpponent(true);
+                Target target = new TargetOpponent();
                 controller.choose(outcome, target, source.getSourceId(), game);
                 opponentId = target.getFirstTarget();
             }

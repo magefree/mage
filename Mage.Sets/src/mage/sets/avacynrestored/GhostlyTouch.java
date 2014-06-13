@@ -56,7 +56,7 @@ public class GhostlyTouch extends CardImpl {
         this.color.setBlue(true);
 
         // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
@@ -64,7 +64,7 @@ public class GhostlyTouch extends CardImpl {
 
         // Enchanted creature has "Whenever this creature attacks, you may tap or untap target permanent."
         Ability gainedAbility = new AttacksTriggeredAbility(new MayTapOrUntapTargetEffect(), true);
-        gainedAbility.addTarget(new TargetPermanent(true));
+        gainedAbility.addTarget(new TargetPermanent());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)));
     }
 

@@ -56,7 +56,7 @@ public class IonasJudgment extends CardImpl {
         this.expansionSetCode = "WWK";
         this.color.setWhite(true);
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
     }
 

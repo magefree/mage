@@ -57,7 +57,7 @@ public class CutTheEarthlyBond extends CardImpl {
 
         // Return target enchanted permanent to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        Target target = new TargetPermanent(filter, true);
+        Target target = new TargetPermanent(filter);
         target.setRequired(true);
         this.getSpellAbility().addTarget(target);
 

@@ -50,7 +50,7 @@ public class HoldAtBay extends CardImpl {
 
         // Prevent the next 7 damage that would be dealt to target creature or player this turn.
         this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, 7));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
     public HoldAtBay(final HoldAtBay card) {

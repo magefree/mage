@@ -60,7 +60,7 @@ public class InnerFlameAcolyte extends CardImpl {
         // When Inner-Flame Acolyte enters the battlefield, target creature gets +2/+0 and gains haste until end of turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(2,0, Duration.EndOfTurn));
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // Evoke {R}

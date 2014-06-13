@@ -106,7 +106,7 @@ class AzamukiTreacheryIncarnate extends Token {
                 Zone.BATTLEFIELD,
                 new GainControlTargetEffect(Duration.EndOfTurn),
                 new RemoveCountersSourceCost(CounterType.KI.createInstance()));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 }

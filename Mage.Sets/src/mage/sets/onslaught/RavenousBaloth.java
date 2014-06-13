@@ -62,7 +62,7 @@ public class RavenousBaloth extends CardImpl {
 
         // Sacrifice a Beast: You gain 4 life.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(4),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filter,true,true))));
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filter,true))));
     }
 
     public RavenousBaloth(final RavenousBaloth card) {

@@ -58,7 +58,7 @@ public class AerialPredation extends CardImpl {
         this.color.setGreen(true);
         
         // Destroy target creature with flying. You gain 2 life.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
     }

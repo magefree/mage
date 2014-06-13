@@ -67,7 +67,7 @@ public class MagusOfTheArena extends CardImpl {
         // {3}, {tap}: Tap target creature you control and target creature of an opponent's choice he or she controls. Those creatures fight each other.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MagusOfTheArenaEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetControlledCreaturePermanent(true));
+        ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addTarget(new TargetOpponentsChoiceControlledCreaturePermanent());
         this.addAbility(ability);
     }
@@ -155,7 +155,7 @@ class TargetOpponentsChoiceControlledCreaturePermanent extends TargetPermanent {
 
     private UUID getOpponentId(UUID playerId, Ability source, Game game) {
         if (opponentId == null) {
-            TargetOpponent target = new TargetOpponent(true);
+            TargetOpponent target = new TargetOpponent();
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 if (player.chooseTarget(Outcome.Detriment, target, source, game)) {

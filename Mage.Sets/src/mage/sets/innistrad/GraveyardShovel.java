@@ -58,7 +58,7 @@ public class GraveyardShovel extends CardImpl {
         // {2}, {tap}: Target player exiles a card from his or her graveyard. If it's a creature card, you gain 2 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GraveyardShovelEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

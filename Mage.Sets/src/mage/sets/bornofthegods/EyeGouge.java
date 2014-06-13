@@ -53,7 +53,7 @@ public class EyeGouge extends CardImpl {
 
         // Target creature gets -1/-1 until end of turn. If it's a Cyclops, destroy it.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-1,-1, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         Effect effect = new ConditionalOneShotEffect(new DestroyTargetEffect(), new TargetHasSubtypeCondition("Cyclops"), 
                 "If it's a Cyclops, destroy it");
         this.getSpellAbility().addEffect(effect);

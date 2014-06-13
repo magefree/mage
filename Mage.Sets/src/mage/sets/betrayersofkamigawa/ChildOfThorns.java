@@ -56,7 +56,7 @@ public class ChildOfThorns extends CardImpl {
         this.toughness = new MageInt(1);
         // Sacrifice Child of Thorns: Target creature gets +1/+1 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

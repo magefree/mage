@@ -67,7 +67,7 @@ public class Stingscourger extends CardImpl {
         this.addAbility(new EchoAbility("{3}{R}"));
         // When Stingscourger enters the battlefield, return target creature an opponent controls to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
-        TargetCreaturePermanent target = new TargetCreaturePermanent(filter, true);
+        TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

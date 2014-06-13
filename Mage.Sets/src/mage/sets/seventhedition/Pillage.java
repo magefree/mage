@@ -60,7 +60,7 @@ public class Pillage extends CardImpl {
 
         // Destroy target artifact or land. It can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     public Pillage(final Pillage card) {

@@ -52,7 +52,7 @@ public class Forget extends CardImpl {
 
         // Target player discards two cards, then draws as many cards as he or she discarded this way.
         this.getSpellAbility().addEffect(new ForgetEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public Forget(final Forget card) {

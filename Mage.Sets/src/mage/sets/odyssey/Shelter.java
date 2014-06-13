@@ -50,7 +50,7 @@ public class Shelter extends CardImpl {
         this.color.setWhite(true);
 
         // Target creature you control gains protection from the color of your choice until end of turn.
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addChoice(new ChoiceColor());
         this.getSpellAbility().addEffect(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));
         // 

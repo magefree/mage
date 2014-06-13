@@ -87,7 +87,7 @@ class ValakutTheMoltenPinnacleTriggeredAbility extends TriggeredAbilityImpl {
 
     ValakutTheMoltenPinnacleTriggeredAbility () {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(3), true);
-        this.addTarget(new TargetCreatureOrPlayer(true));
+        this.addTarget(new TargetCreatureOrPlayer());
     }
 
     ValakutTheMoltenPinnacleTriggeredAbility(ValakutTheMoltenPinnacleTriggeredAbility ability) {

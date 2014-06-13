@@ -57,7 +57,7 @@ public class Bribery extends CardImpl {
 
         // Search target opponent's library for a creature card and put that card onto the battlefield under your control. Then that player shuffles his or her library.
         this.getSpellAbility().addEffect(new BriberyEffect());
-        this.getSpellAbility().addTarget(new TargetOpponent(true));
+        this.getSpellAbility().addTarget(new TargetOpponent());
 
 
     }

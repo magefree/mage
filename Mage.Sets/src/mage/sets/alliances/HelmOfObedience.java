@@ -60,7 +60,7 @@ public class HelmOfObedience extends CardImpl {
         xCosts.setMinX(1);
         SimpleActivatedAbility abilitiy = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HelmOfObedienceEffect(), xCosts);
         abilitiy.addCost(new TapSourceCost());
-        abilitiy.addTarget(new TargetOpponent(true));
+        abilitiy.addTarget(new TargetOpponent());
         this.addAbility(abilitiy);
     }
 

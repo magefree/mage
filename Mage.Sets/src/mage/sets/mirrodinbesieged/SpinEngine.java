@@ -57,7 +57,7 @@ public class SpinEngine extends CardImpl {
 
         // {R}: Target creature can't block Spin Engine this turn
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SpinEngineEffect(), new ManaCostsImpl("{R}"));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

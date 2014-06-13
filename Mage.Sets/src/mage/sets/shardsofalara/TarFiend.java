@@ -59,7 +59,7 @@ public class TarFiend extends CardImpl {
 
         // When Tar Fiend enters the battlefield, target player discards a card for each creature it devoured.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(new DevouredCreaturesCount()));
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

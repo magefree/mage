@@ -69,12 +69,12 @@ public class TymaretTheMurderKing extends CardImpl {
 
         // {1}{R}, Sacrifice another creature: Tymaret, the Murder King deals 2 damage to target player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{1}{R}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filter, false, true)));
-        ability.addTarget(new TargetPlayer(true));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filter, false)));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // {1}{B}, Sacrifice a creature: Return Tymaret from your graveyard to your hand.
         ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{1}{B}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, new FilterControlledCreaturePermanent("a creature"), false, true)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, new FilterControlledCreaturePermanent("a creature"), false)));
         this.addAbility(ability);
 
     }

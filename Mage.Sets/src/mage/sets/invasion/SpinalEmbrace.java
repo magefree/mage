@@ -78,7 +78,7 @@ public class SpinalEmbrace extends CardImpl {
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
         // Untap target creature you don't control and gain control of it. It gains haste until end of turn. At the beginning of the next end step, sacrifice it. If you do, you gain life equal to its toughness.
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new UntapTargetEffect());
         Effect effect = new GainControlTargetEffect(Duration.EndOfTurn);
         effect.setText("and gain control of it");

@@ -60,7 +60,7 @@ public class AuriokBladewarden extends CardImpl {
 
         // {tap}: Target creature gets +X/+X until end of turn, where X is Auriok Bladewarden's power.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(new SourcePermanentPowerCount(), new SourcePermanentPowerCount(), Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

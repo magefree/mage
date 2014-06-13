@@ -56,7 +56,7 @@ public class StripBare extends CardImpl {
 
         // Destroy all Auras and Equipment attached to target creature.
         this.getSpellAbility().addEffect(new StripBareEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
     }
 

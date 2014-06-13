@@ -56,7 +56,7 @@ public class PainfulMemories extends CardImpl {
 
         // Look at target opponent's hand and choose a card from it. Put that card on top of that player's library.
         this.getSpellAbility().addEffect(new PainfulMemoriesEffect());
-        this.getSpellAbility().addTarget(new TargetOpponent(true));
+        this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
     public PainfulMemories(final PainfulMemories card) {

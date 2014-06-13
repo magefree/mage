@@ -66,7 +66,7 @@ public class HuntersProwess extends CardImpl {
         Ability grantedAbility = new DealsCombatDamageToAPlayerTriggeredAbility(new HuntersProwessDrawEffect(), false, true);
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(grantedAbility, Duration.EndOfTurn,
                 "and \"Whenever this creature deals combat damage to a player, draw that many cards.\""));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public HuntersProwess(final HuntersProwess card) {

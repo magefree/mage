@@ -113,7 +113,7 @@ class FrostTitanAbility2 extends TriggeredAbilityImpl {
     public FrostTitanAbility2() {
         super(Zone.BATTLEFIELD, new TapTargetEffect(), false);
         this.addEffect(new SkipNextUntapTargetEffect());
-        this.addTarget(new TargetPermanent(true));
+        this.addTarget(new TargetPermanent());
     }
 
     public FrostTitanAbility2(final FrostTitanAbility2 ability) {

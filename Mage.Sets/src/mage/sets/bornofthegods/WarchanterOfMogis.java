@@ -57,7 +57,7 @@ public class WarchanterOfMogis extends CardImpl {
 
         // <i>Inspired</i> - Whenever Warchanter of Mogis becomes untapped, target creature you control gains intimidate until end of turn.
         Ability ability = new InspiredAbility(new GainAbilityTargetEffect(IntimidateAbility.getInstance(), Duration.EndOfTurn), false);
-        ability.addTarget(new TargetControlledCreaturePermanent(true));        
+        ability.addTarget(new TargetControlledCreaturePermanent());        
         this.addAbility(ability);
     }
 

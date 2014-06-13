@@ -50,7 +50,7 @@ public class UndyingEvil extends CardImpl {
 
         // Target creature gains undying until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new UndyingAbility(), Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public UndyingEvil(final UndyingEvil card) {

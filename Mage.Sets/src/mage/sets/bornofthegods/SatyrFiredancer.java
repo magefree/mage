@@ -82,7 +82,7 @@ public class SatyrFiredancer extends CardImpl {
             if (opponent != null) {
                 FilterCreaturePermanent filter = new FilterCreaturePermanent(new StringBuilder("creature controlled by ").append(opponent.getName()).toString());
                 filter.add(new ControllerIdPredicate(opponent.getId()));
-                ability.getTargets().add(new TargetCreaturePermanent(filter, true));
+                ability.getTargets().add(new TargetCreaturePermanent(filter));
             }
         }
     }

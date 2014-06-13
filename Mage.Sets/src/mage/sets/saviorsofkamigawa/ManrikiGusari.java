@@ -63,7 +63,7 @@ public class ManrikiGusari extends CardImpl {
         // Equipped creature gets +1/+2 and has "{tap}: Destroy target Equipment."
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 2)));
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
-        gainedAbility.addTarget(new TargetPermanent(filter, true));
+        gainedAbility.addTarget(new TargetPermanent(filter));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.EQUIPMENT)));
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));

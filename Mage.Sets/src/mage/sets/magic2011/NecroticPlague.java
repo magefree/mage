@@ -75,7 +75,7 @@ public class NecroticPlague extends CardImpl {
         this.subtype.add("Aura");
 
         // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
@@ -102,7 +102,7 @@ public class NecroticPlague extends CardImpl {
                 if (creatureController != null) {
                     ability.setControllerId(creatureController.getId());
                     ability.getTargets().clear();
-                    TargetCreaturePermanent target = new TargetCreaturePermanent(filter, true);
+                    TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
                     target.setRequired(true);
                     ability.getTargets().add(target);
                 }

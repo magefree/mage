@@ -56,7 +56,7 @@ public class Naturalize extends CardImpl {
         super(ownerId, 282, "Naturalize", Rarity.COMMON, new CardType[]{CardType.INSTANT},"{1}{G}");
         this.expansionSetCode = "10E";
         this.color.setGreen(true);
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 

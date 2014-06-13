@@ -49,7 +49,7 @@ public class VeteransReflexes extends CardImpl {
         this.color.setWhite(true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new UntapTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public VeteransReflexes (final VeteransReflexes card) {

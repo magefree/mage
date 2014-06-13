@@ -50,7 +50,7 @@ public class TitansStrength extends CardImpl {
 
         // Target creature gets +3/+1 until end of turn. Scry 1.
         this.getSpellAbility().addEffect(new BoostTargetEffect(3,1, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 

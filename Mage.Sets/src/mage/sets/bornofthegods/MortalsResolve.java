@@ -57,7 +57,7 @@ public class MortalsResolve extends CardImpl {
         effect = new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains indestructible until end of turn");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public MortalsResolve(final MortalsResolve card) {

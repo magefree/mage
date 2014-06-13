@@ -65,7 +65,7 @@ public class BlazingShoal extends CardImpl {
 
         // Target creature gets +X/+0 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(new ExileFromHandCostCardConvertedMana(), new StaticValue(0), Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public BlazingShoal(final BlazingShoal card) {

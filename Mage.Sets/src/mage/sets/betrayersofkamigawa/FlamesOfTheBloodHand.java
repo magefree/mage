@@ -55,7 +55,7 @@ public class FlamesOfTheBloodHand extends CardImpl {
         Effect effect = new CantGainLifeTargetEffect(Duration.EndOfTurn);
         effect.setText("If that player would gain life this turn, that player gains no life instead");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public FlamesOfTheBloodHand(final FlamesOfTheBloodHand card) {

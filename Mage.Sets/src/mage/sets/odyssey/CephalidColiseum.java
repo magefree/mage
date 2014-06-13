@@ -68,7 +68,7 @@ public class CephalidColiseum extends CardImpl {
         thresholdAbility.addEffect(new DiscardTargetEffect(3));
         thresholdAbility.addCost(new TapSourceCost());
         thresholdAbility.addCost(new SacrificeSourceCost());
-        thresholdAbility.addTarget(new TargetPlayer(true));
+        thresholdAbility.addTarget(new TargetPlayer());
         this.addAbility(thresholdAbility);
     }
 

@@ -72,7 +72,7 @@ public class NewPrahvGuildmage extends CardImpl {
 
         // {W}{U}: Target creature gains flying until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W}{U}"));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         
         // {3}{W}{U}: Detain target nonland permanent an opponent controls. 

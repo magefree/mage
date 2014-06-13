@@ -60,7 +60,7 @@ public class CabalTherapy extends CardImpl {
         this.color.setBlack(true);
 
         // Name a nonland card. Target player reveals his or her hand and discards all cards with that name.
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new CabalTherapyEffect());
         // Flashback-Sacrifice a creature.
         this.addAbility(new FlashbackAbility(

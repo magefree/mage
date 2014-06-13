@@ -70,7 +70,7 @@ public class SlaughterGames extends CardImpl {
 
         // Name a nonland card. Search target opponent's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles his or her library.
         this.getSpellAbility().addEffect(new SlaughterGamesEffect());
-        this.getSpellAbility().addTarget(new TargetOpponent(true));
+        this.getSpellAbility().addTarget(new TargetOpponent());
 
     }
 

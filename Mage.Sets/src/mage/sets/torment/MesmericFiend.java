@@ -66,7 +66,7 @@ public class MesmericFiend extends CardImpl {
 
         // When Mesmeric Fiend enters the battlefield, target opponent reveals his or her hand and you choose a nonland card from it. Exile that card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new MesmericFiendExileEffect(), false);
-        ability.addTarget(new TargetOpponent(true));
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
         // When Mesmeric Fiend leaves the battlefield, return the exiled card to its owner's hand.

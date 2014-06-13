@@ -56,7 +56,7 @@ public class Distress extends CardImpl {
         this.color.setBlack(true);
 
         // Target player reveals his or her hand. You choose a nonland card from it. That player discards that card.
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY));
     }
 

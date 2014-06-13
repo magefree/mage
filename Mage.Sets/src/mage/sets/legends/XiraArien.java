@@ -65,7 +65,7 @@ public class XiraArien extends CardImpl {
         // {B}{R}{G}, {tap}: Target player draws a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(1), new ManaCostsImpl("{B}{R}{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

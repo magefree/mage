@@ -60,7 +60,7 @@ public class WitchsMist extends CardImpl {
 
         // {2}{B}, {T}: Destroy target creature that was dealt damage this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(),new ManaCostsImpl("{2}{B}"));
-        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

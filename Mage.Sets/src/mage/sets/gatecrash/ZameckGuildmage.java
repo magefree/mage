@@ -77,7 +77,7 @@ public class ZameckGuildmage extends CardImpl {
 
         // {G}{U}, Remove a +1/+1 counter from a creature you control: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{G}{U}"));
-        ability.addCost(new RemoveCounterCost(new TargetControlledCreaturePermanent(true), CounterType.P1P1));
+        ability.addCost(new RemoveCounterCost(new TargetControlledCreaturePermanent(), CounterType.P1P1));
         this.addAbility(ability);
     }
 

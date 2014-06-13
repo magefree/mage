@@ -64,7 +64,7 @@ public class OrzhovEuthanist extends CardImpl {
         // Haunt
         // When Orzhov Euthanist enters the battlefield or the creature it haunts dies, destroy target creature that was dealt damage this turn.
         Ability ability = new HauntAbility(this, new DestroyTargetEffect());
-        Target target = new TargetCreaturePermanent(filter, true);
+        Target target = new TargetCreaturePermanent(filter);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

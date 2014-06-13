@@ -65,7 +65,7 @@ public class LightningStorm extends CardImpl {
         Effect effect = new DamageTargetEffect(new LightningStormCountCondition(CounterType.CHARGE));
         effect.setText("{this} deals X damage to target creature or player, where X is 3 plus the number of charge counters on it");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         // Discard a land card: Put two charge counters on Lightning Storm. You may choose a new target for it. Any player may activate this ability but only if Lightning Storm is on the stack.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.STACK,
                 new LightningStormAddCounterEffect() ,

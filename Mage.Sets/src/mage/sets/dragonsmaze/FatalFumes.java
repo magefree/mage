@@ -50,7 +50,7 @@ public class FatalFumes extends CardImpl {
         this.color.setBlack(true);
 
         // Target creature gets -4/-2 until end of turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(-4,-2, Duration.EndOfTurn));
     }
 

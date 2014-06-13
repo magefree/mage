@@ -71,12 +71,12 @@ public class SorinMarkov extends CardImpl {
 
         // -3: Target opponent's life total becomes 10.
         LoyaltyAbility ability2 = new LoyaltyAbility(new SorinMarkovEffect(), -3);
-        ability2.addTarget(new TargetOpponent(true));
+        ability2.addTarget(new TargetOpponent());
         this.addAbility(ability2);
 
         // -7: You control target player during that player's next turn.
         LoyaltyAbility ability3 = new LoyaltyAbility(new ControlTargetPlayerNextTurnEffect(), -7);
-        ability3.addTarget(new TargetPlayer(true));
+        ability3.addTarget(new TargetPlayer());
         this.addAbility(ability3);
     }
 

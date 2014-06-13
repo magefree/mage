@@ -59,7 +59,7 @@ public class SealOfDoom extends CardImpl {
         this.expansionSetCode = "DIS";
         this.color.setBlack(true);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(true), new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 

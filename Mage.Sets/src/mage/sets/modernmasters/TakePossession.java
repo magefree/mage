@@ -58,7 +58,7 @@ public class TakePossession extends CardImpl {
         // Split second
         this.addAbility(new SplitSecondAbility());
         // Enchant permanent
-        TargetPermanent auraTarget = new TargetPermanent(true);
+        TargetPermanent auraTarget = new TargetPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

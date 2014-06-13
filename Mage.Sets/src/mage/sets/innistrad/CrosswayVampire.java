@@ -55,7 +55,7 @@ public class CrosswayVampire extends CardImpl {
 
         // When Crossway Vampire enters the battlefield, target creature can't block this turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

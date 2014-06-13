@@ -66,7 +66,7 @@ public class DranaKalastriaBloodchief extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(new StaticValue(0), new SignInversionDynamicValue(new ManacostVariableValue()), Duration.EndOfTurn), new ManaCostsImpl("{X}{B}{B}"));
         ability.addEffect(new BoostSourceEffect(new ManacostVariableValue(), new StaticValue(0), Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

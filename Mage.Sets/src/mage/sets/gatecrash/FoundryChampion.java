@@ -66,7 +66,7 @@ public class FoundryChampion extends CardImpl {
 
         //When Foundry Champion enters the battlefield, it deals damage to target creature or player equal to the number of creatures you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent())));
-        ability.addTarget(new TargetCreatureOrPlayer(true));
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
         
         //{R}: Foundry Champion gets +1/+0 until end of turn.

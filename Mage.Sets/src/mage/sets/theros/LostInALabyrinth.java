@@ -50,7 +50,7 @@ public class LostInALabyrinth extends CardImpl {
 
         // Target creature gets -3/-0 until end of turn. Scry 1.</i>
         this.getSpellAbility().addEffect(new BoostTargetEffect(-3,-0, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 

@@ -76,7 +76,7 @@ public class AegisAngel extends CardImpl {
                 new SourceOnBattlefieldControlUnchangedCondition(),
                 "another target permanent is indestructible for as long as you control Aegis Angel");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
-        Target target = new TargetPermanent(filter, true);
+        Target target = new TargetPermanent(filter);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

@@ -61,7 +61,7 @@ public class UnseenWalker extends CardImpl {
          
         // {1}{G}{G}: Target creature gains forestwalk until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new ForestwalkAbility(), Duration.EndOfTurn), new ManaCostsImpl("{1}{G}{G}"));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

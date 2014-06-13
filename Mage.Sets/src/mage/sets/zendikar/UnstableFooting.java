@@ -76,7 +76,7 @@ public class UnstableFooting extends CardImpl {
         if (ability instanceof SpellAbility) {
             ability.getTargets().clear();
             if (KickedCondition.getInstance().apply(game, ability)) {
-                ability.addTarget(new TargetPlayer(true));
+                ability.addTarget(new TargetPlayer());
             }
         }
     }

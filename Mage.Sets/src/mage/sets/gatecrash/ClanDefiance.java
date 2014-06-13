@@ -69,7 +69,7 @@ public class ClanDefiance extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(3);
         // Clan Defiance deals X damage to target creature with flying;
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         // Clan Defiance deals X damage to target creature without flying;
         Mode mode1 = new Mode();
         mode1.getEffects().add(new DamageTargetEffect(new ManacostVariableValue()));
@@ -78,7 +78,7 @@ public class ClanDefiance extends CardImpl {
         // and/or Clan Defiance deals X damage to target player.
         Mode mode2 = new Mode();
         mode2.getEffects().add(new DamageTargetEffect(new ManacostVariableValue()));
-        mode2.getTargets().add(new TargetPlayer(true));
+        mode2.getTargets().add(new TargetPlayer());
         this.getSpellAbility().addMode(mode2);
         
     }

@@ -54,7 +54,7 @@ public class WretchedBanquet extends CardImpl {
 
         // Destroy target creature if it has the least power or is tied for least power among creatures on the battlefield.
         this.getSpellAbility().addEffect(new WretchedBanquetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public WretchedBanquet(final WretchedBanquet card) {

@@ -70,7 +70,7 @@ public class CabalInquisitor extends CardImpl {
 
         // Threshold - {1}{B}, {tap}, Exile two cards from your graveyard: Target player discards a card. Activate this ability only any time you could cast a sorcery, and only if seven or more cards are in your graveyard.
         Ability ability = new ActivateAsSorceryConditionalActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl("{1}{B}"), new CardsInControllerGraveCondition(7), "<br/><br/><i>Threshold</i> - {1}{B}, {tap}, Exile two cards from your graveyard: Target player discards a card. Activate this ability only any time you could cast a sorcery, and only if seven or more cards are in your graveyard.");
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(2, new FilterCard("cards from your graveyard"))));
         this.addAbility(ability);

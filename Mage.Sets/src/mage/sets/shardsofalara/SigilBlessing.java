@@ -52,7 +52,7 @@ public class SigilBlessing extends CardImpl {
         this.color.setWhite(true);
 
         // Until end of turn, target creature you control gets +3/+3 and other creatures you control get +1/+1.
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
     }

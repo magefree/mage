@@ -62,7 +62,7 @@ public class QuicksilverGargantuan extends CardImpl {
         this.toughness = new MageInt(7);
 
         Ability ability = new EntersBattlefieldAbility(new QuicksilverGargantuanCopyEffect(), text);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

@@ -69,7 +69,7 @@ public class LeoninRelicWarder extends CardImpl {
         this.toughness = new MageInt(2);
 
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect("Leonin Relic-Warder exile"), true);
-        Target target = new TargetPermanent(filter, true);
+        Target target = new TargetPermanent(filter);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

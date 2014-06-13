@@ -46,7 +46,7 @@ public class PhyrexianAltar extends CardImpl {
         this.expansionSetCode = "INV";
 
         // Sacrifice a creature: Add one mana of any color to your mana pool.
-        this.addAbility(new AnyColorManaAbility(new SacrificeTargetCost(new TargetControlledCreaturePermanent(true))));
+        this.addAbility(new AnyColorManaAbility(new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
     }
 
     public PhyrexianAltar(final PhyrexianAltar card) {

@@ -56,7 +56,7 @@ public class Extract extends CardImpl {
 
         // Search target player's library for a card and exile it. Then that player shuffles his or her library.
         this.getSpellAbility().addEffect(new ExtractEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
    
     }
 

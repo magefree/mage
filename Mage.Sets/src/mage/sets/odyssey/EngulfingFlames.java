@@ -58,7 +58,7 @@ public class EngulfingFlames extends CardImpl {
 
         // Engulfing Flames deals 1 damage to target creature. It can't be regenerated this turn.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new EngulfingFlamesEffect());
         this.addWatcher(new DamagedByWatcher());
         // Flashback {3}{R}

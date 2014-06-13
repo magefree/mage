@@ -58,7 +58,7 @@ public class BlindingSouleater extends CardImpl {
                 new TapTargetEffect(),
                 new PhyrexianManaCost(ColoredManaSymbol.W));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

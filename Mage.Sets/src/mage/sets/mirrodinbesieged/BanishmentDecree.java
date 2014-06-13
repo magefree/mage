@@ -57,7 +57,7 @@ public class BanishmentDecree extends CardImpl {
         this.expansionSetCode = "MBS";
         this.color.setWhite(true);
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     public BanishmentDecree (final BanishmentDecree card) {

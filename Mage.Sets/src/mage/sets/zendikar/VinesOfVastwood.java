@@ -58,7 +58,7 @@ public class VinesOfVastwood extends CardImpl {
         this.addAbility(new KickerAbility("{G}"));
 
         // Target creature can't be the target of spells or abilities your opponents control this turn.
-        TargetCreaturePermanent target = new TargetCreaturePermanent(true);
+        TargetCreaturePermanent target = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.EndOfTurn));
 

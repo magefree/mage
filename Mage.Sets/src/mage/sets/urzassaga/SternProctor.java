@@ -66,7 +66,7 @@ public class SternProctor extends CardImpl {
 
         // When Stern Proctor enters the battlefield, return target artifact or enchantment to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
-        TargetPermanent target = new TargetPermanent(filter, true);
+        TargetPermanent target = new TargetPermanent(filter);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

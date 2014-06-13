@@ -59,7 +59,7 @@ public class FieryJustice extends CardImpl {
         effect.setTargetPointer(new SecondTargetPointer());
         effect.setText("Target opponent gains 5 life");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetOpponent(true));
+        this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
     public FieryJustice(final FieryJustice card) {

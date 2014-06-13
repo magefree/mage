@@ -74,7 +74,7 @@ public class TiborAndLumia extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         Ability firstAbility = new SpellCastControllerTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), filterBlue, false);
-        firstAbility.addTarget(new TargetCreaturePermanent(true));
+        firstAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(firstAbility);
         this.addAbility(new SpellCastControllerTriggeredAbility(new DamageAllEffect(1, filter), filterRed, false));
 

@@ -49,7 +49,7 @@ public class BarlsCage extends CardImpl {
 
 		// {3}: Target creature doesn't untap during its controller's next untap step.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SkipNextUntapTargetEffect("Target creature"), new GenericManaCost(3));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

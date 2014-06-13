@@ -59,7 +59,7 @@ public class BloodflowConnoisseur extends CardImpl {
 
         // Sacrifice a creature: Put a +1/+1 counter on Bloodflow Connoisseur.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(true)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         this.addAbility(ability);
     }
 

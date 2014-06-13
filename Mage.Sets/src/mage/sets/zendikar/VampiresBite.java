@@ -58,7 +58,7 @@ public class VampiresBite extends CardImpl {
         this.addAbility(new KickerAbility("{2}{B}"));
 
         // Target creature gets +3/+0 until end of turn. If Vampire's Bite was kicked, that creature gains lifelink until end of turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 0, Duration.EndOfTurn));
         ContinuousEffect effect = new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn);
         this.getSpellAbility().addEffect(new ConditionalContinousEffect(effect, new LockedInCondition(KickedCondition.getInstance()), "If {this} was kicked, that creature gains lifelink until end of turn"));

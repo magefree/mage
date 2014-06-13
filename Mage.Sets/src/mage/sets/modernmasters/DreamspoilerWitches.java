@@ -77,7 +77,7 @@ public class DreamspoilerWitches extends CardImpl {
 class DreamspoilerWitchesTriggeredAbility extends TriggeredAbilityImpl {
     DreamspoilerWitchesTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BoostTargetEffect(-1,-1, Duration.EndOfTurn), true);
-        this.addTarget(new TargetCreaturePermanent(true));
+        this.addTarget(new TargetCreaturePermanent());
     }
 
     DreamspoilerWitchesTriggeredAbility(final DreamspoilerWitchesTriggeredAbility ability) {

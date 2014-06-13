@@ -52,7 +52,7 @@ public class MomentOfHeroism extends CardImpl {
         // Target creature gets +2/+2 and gains lifelink until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public MomentOfHeroism(final MomentOfHeroism card) {

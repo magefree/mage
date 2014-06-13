@@ -119,7 +119,7 @@ class PorphyryNodesEffect extends OneShotEffect {
             if (multipleExist) {
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("one of the creatures with the least power");
                 filter.add(new PowerPredicate(Filter.ComparisonType.Equal, leastPower));
-                Target target = new TargetPermanent(filter, true);
+                Target target = new TargetPermanent(filter);
                 target.setNotTarget(true);
                 if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
                     if (controller.choose(outcome, target, source.getSourceId(), game)) {

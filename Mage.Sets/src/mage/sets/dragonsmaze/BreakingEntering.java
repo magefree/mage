@@ -72,7 +72,7 @@ public class BreakingEntering extends SplitCard {
         getLeftHalfCard().getColor().setBlue(true);
         getLeftHalfCard().getColor().setBlack(true);
         getLeftHalfCard().getSpellAbility().addEffect(new PutTopCardOfLibraryIntoGraveTargetEffect(8));
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetPlayer(true));
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetPlayer());
 
         // Entering
         // Put a creature card from a graveyard onto the battlefield under your control. It gains haste until end of turn.

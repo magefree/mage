@@ -52,7 +52,7 @@ public class RakdossReturn extends CardImpl {
         // Rakdos's Return deals X damage to target opponent. That player discards X cards.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addEffect(new DiscardTargetEffect(new ManacostVariableValue()));
-        this.getSpellAbility().addTarget(new TargetOpponent(true));
+        this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
     public RakdossReturn (final RakdossReturn card) {

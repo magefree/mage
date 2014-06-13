@@ -66,7 +66,7 @@ public class GrixisBattlemage extends CardImpl {
         // {R}, {tap}: Target creature can't block this turn.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBlockTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{R}"));
         ability2.addCost(new TapSourceCost());
-        ability2.addTarget(new TargetCreaturePermanent(true));
+        ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability2);
     }
 

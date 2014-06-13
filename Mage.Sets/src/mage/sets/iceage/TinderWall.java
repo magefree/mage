@@ -78,7 +78,7 @@ public class TinderWall extends CardImpl {
         FilterAttackingCreature filter = new FilterAttackingCreature("creature it's blocking");
         filter.add(new BlockingByPredicate(this.getId()));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{R}"));
-        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
         

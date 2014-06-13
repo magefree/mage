@@ -60,7 +60,7 @@ public class DarkWithering extends CardImpl {
         this.color.setBlack(true);
 
         // Destroy target nonblack creature.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
 
         // Madness {B}

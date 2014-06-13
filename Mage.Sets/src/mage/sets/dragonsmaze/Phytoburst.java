@@ -52,7 +52,7 @@ public class Phytoburst extends CardImpl {
 
         // Target creature gets +5/+5 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(5,5, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public Phytoburst(final Phytoburst card) {

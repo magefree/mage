@@ -63,7 +63,7 @@ public class FaithsShield extends CardImpl {
 
         // Fateful hour - If you have 5 or less life, instead you and each permanent you control gain protection from the color of your choice until end of turn.
         this.getSpellAbility().addEffect(new FaithsShieldEffect());
-        this.getSpellAbility().addTarget(new TargetControlledPermanent(true));
+        this.getSpellAbility().addTarget(new TargetControlledPermanent());
         this.getSpellAbility().addChoice(new ChoiceColor());        
     }
 

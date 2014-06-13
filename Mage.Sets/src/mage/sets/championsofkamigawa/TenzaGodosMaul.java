@@ -86,7 +86,7 @@ public class TenzaGodosMaul extends CardImpl {
                 new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.EQUIPMENT),
                 new EquippedMatchesFilterCondition(redFilter), rule2)));
         // Equip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), new TargetControlledCreaturePermanent(true)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), new TargetControlledCreaturePermanent()));
 
     }
 

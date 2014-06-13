@@ -62,7 +62,7 @@ public class OrdealOfErebos extends CardImpl {
         this.color.setBlack(true);
 
         // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
@@ -75,7 +75,7 @@ public class OrdealOfErebos extends CardImpl {
         this.addAbility(ability);
         // When you sacrifice Ordeal of Erebos, target player discards two cards.
         ability = new SacrificeSourceTriggeredAbility(new DiscardTargetEffect(2), false);
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
     }

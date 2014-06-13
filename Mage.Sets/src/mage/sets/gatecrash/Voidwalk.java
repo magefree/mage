@@ -58,7 +58,7 @@ public class Voidwalk extends CardImpl {
 
         // Exile target creature. Return it to the battlefield under its owner's control at the beginning of the next end step.
         this.getSpellAbility().addEffect(new VoidwalkEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Cipher
         this.getSpellAbility().addEffect(new CipherEffect());

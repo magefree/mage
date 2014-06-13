@@ -53,7 +53,7 @@ public class HarvestPyre extends CardImpl {
         this.getSpellAbility().addCost(new ExileXFromYourGraveCost(new FilterCard("cards from your graveyard")));
 
         // Harvest Pyre deals X damage to target creature.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new DamageTargetEffect(new GetXValue()));
     }
 

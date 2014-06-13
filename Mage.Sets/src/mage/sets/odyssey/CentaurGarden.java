@@ -67,7 +67,7 @@ public class CentaurGarden extends CardImpl {
             "<i>Threshold</i> - {G}, {T}, Sacrifice {this}: Target creature gets +3/+3 until end of turn. Activate this ability only if seven or more cards are in your graveyard.");
         thresholdAbility.addCost(new TapSourceCost());
         thresholdAbility.addCost(new SacrificeSourceCost());
-        thresholdAbility.addTarget(new TargetCreaturePermanent(true));
+        thresholdAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(thresholdAbility);
     }
 

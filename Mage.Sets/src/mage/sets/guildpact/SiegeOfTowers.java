@@ -65,7 +65,7 @@ public class SiegeOfTowers extends CardImpl {
         Effect effect = new BecomesCreatureTargetEffect(new SiegeOfTowersToken(), "land", Duration.EndOfGame);
         effect.setText("Target Mountain becomes a 3/1 creature. It's still a land");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
     }
 

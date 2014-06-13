@@ -60,7 +60,7 @@ public class Soulblast extends CardImpl {
         this.getSpellAbility().addCost(new SacrificeAllCost(filter));
         // Soulblast deals damage to target creature or player equal to the total power of the sacrificed creatures.
         this.getSpellAbility().addEffect(new SoulblastEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
     public Soulblast(final Soulblast card) {

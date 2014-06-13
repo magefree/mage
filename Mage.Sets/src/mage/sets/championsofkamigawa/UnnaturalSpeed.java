@@ -50,7 +50,7 @@ public class UnnaturalSpeed extends CardImpl {
         this.subtype.add("Arcane");
         this.color.setRed(true);
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public UnnaturalSpeed (final UnnaturalSpeed card) {

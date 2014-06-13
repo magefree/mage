@@ -52,7 +52,7 @@ public class Capsize extends CardImpl {
         
         // Return target permanent to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(true));
+        this.getSpellAbility().addTarget(new TargetPermanent());
     }
 
     public Capsize(final Capsize card) {

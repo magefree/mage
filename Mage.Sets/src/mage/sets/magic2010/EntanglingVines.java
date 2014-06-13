@@ -62,7 +62,7 @@ public class EntanglingVines extends CardImpl {
         this.color.setGreen(true);
 
         // Enchant tapped creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent(filter, true);
+        TargetPermanent auraTarget = new TargetCreaturePermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));

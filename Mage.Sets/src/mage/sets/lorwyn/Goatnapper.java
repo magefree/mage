@@ -65,7 +65,7 @@ public class Goatnapper extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new EntersBattlefieldTriggeredAbility(new UntapTargetEffect(), false);
-        ability.addTarget(new TargetPermanent(filter, true));
+        ability.addTarget(new TargetPermanent(filter));
         ability.addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
         this.addAbility(ability);

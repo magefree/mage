@@ -71,7 +71,7 @@ public class MerrowBonegnawer extends CardImpl {
 
         // {tap}: Target player exiles a card from his or her graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileFromZoneTargetEffect(Zone.GRAVEYARD, exileId, "Merrow Bonegnawer", new FilterCard("a card")), new TapSourceCost());
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         
         // Whenever you cast a black spell, you may untap Merrow Bonegnawer.

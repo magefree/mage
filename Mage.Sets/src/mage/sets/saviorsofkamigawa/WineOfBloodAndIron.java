@@ -63,7 +63,7 @@ public class WineOfBloodAndIron extends CardImpl {
                 new BoostTargetEffect(new TargetPermanentPowerCount(), new StaticValue(0), Duration.EndOfTurn, true),
                 new GenericManaCost(4));
         ability.addEffect(new WineOfBloodAndIronEffect());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

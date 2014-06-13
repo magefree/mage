@@ -65,7 +65,7 @@ public class NogginWhack extends CardImpl {
         this.addAbility(new ProwlAbility(this, "{1}{B}"));
         // Target player reveals three cards from his or her hand. You choose two of them. That player discards those cards.
         this.getSpellAbility().addEffect(new NogginWhackEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
 
     }
 

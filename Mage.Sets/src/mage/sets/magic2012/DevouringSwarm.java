@@ -55,7 +55,7 @@ public class DevouringSwarm extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledCreaturePermanent(true))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
     }
 
     public DevouringSwarm(final DevouringSwarm card) {

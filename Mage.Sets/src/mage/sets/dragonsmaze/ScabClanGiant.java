@@ -69,7 +69,7 @@ public class ScabClanGiant extends CardImpl {
 
         // When Scab-Clan Giant enters the battlefield, it fights target creature an opponent controls chosen at random.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ScabClanGiantEffect());
-        Target target = new TargetCreaturePermanent(filter, true);
+        Target target = new TargetCreaturePermanent(filter);
         target.setRandom(true);
         ability.addTarget(target);
         this.addAbility(ability);

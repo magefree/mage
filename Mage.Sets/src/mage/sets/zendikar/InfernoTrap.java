@@ -62,7 +62,7 @@ public class InfernoTrap extends CardImpl {
         
         // Inferno Trap deals 4 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public InfernoTrap(final InfernoTrap card) {

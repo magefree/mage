@@ -56,7 +56,7 @@ public class CoercedConfession extends CardImpl {
 
         // Target player puts the top four cards of his or her library into his or her graveyard. You draw a card for each creature card put into a graveyard this way.
         getSpellAbility().addEffect(new CoercedConfessionMillEffect());
-        getSpellAbility().addTarget(new TargetPlayer(true));
+        getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public CoercedConfession(final CoercedConfession card) {

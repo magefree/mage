@@ -67,7 +67,7 @@ public class ArchitectsOfWill extends CardImpl {
 
         // When Architects of Will enters the battlefield, look at the top three cards of target player's library, then put them back in any order.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ArchitectsOfWillEffect(), false);
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
         // Cycling {UB}

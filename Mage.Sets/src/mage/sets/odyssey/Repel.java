@@ -47,7 +47,7 @@ public class Repel extends CardImpl {
         this.color.setBlue(true);
 
         // Put target creature on top of its owner's library.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
     }
 

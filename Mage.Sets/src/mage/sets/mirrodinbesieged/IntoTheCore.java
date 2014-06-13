@@ -54,8 +54,8 @@ public class IntoTheCore extends CardImpl {
 
         this.color.setRed(true);
 
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new ExileTargetEffect());
     }
 

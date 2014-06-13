@@ -58,7 +58,7 @@ public class MurderInvestigation extends CardImpl {
         this.color.setWhite(true);
 
         // Enchant creature you control
-        TargetPermanent auraTarget = new TargetControlledCreaturePermanent(true);
+        TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

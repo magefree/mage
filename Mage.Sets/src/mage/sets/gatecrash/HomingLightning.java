@@ -56,7 +56,7 @@ public class HomingLightning extends CardImpl {
 
         // Homing Lightning deals 4 damage to target creature and each other creature with the same name as that creature.
         this.getSpellAbility().addEffect(new HomingLightningEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public HomingLightning(final HomingLightning card) {

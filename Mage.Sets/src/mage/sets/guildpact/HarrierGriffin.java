@@ -55,7 +55,7 @@ public class HarrierGriffin extends CardImpl {
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new TapTargetEffect(), TargetController.YOU, false);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

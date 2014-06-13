@@ -45,17 +45,10 @@ public class TargetOpponent extends TargetPlayer {
     public TargetOpponent() {
         this(false);
     }
-
-    public TargetOpponent(boolean required) {
-        super(1, 1, false, new FilterPlayer("opponent"));
-        this.filter.add(new PlayerPredicate(TargetController.OPPONENT));
-        setRequired(required);
-    }
     
-    public TargetOpponent(boolean required, boolean notTarget) {
+    public TargetOpponent(boolean notTarget) {
         super(1, 1, false, new FilterPlayer("opponent"));
         this.filter.add(new PlayerPredicate(TargetController.OPPONENT));
-        setRequired(required);
         setNotTarget(notTarget);
     }
 

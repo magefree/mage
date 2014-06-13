@@ -73,7 +73,7 @@ public class HearthKami extends CardImpl {
             ability.getTargets().clear();
             FilterArtifactPermanent filter = new FilterArtifactPermanent(new StringBuilder("artifact with converted mana cost ").append(xValue).toString());
             filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, xValue));
-            Target target = new TargetPermanent(filter, true);
+            Target target = new TargetPermanent(filter);
             target.setRequired(true);
             ability.addTarget(target);
         }

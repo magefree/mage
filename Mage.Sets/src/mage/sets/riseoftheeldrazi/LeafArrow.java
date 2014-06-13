@@ -55,7 +55,7 @@ public class LeafArrow extends CardImpl {
 
         this.color.setGreen(true);
 
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
     }
 

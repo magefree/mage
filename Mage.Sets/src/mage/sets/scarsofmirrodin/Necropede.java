@@ -54,7 +54,7 @@ public class Necropede extends CardImpl {
         this.toughness = new MageInt(1);
         this.addAbility(InfectAbility.getInstance());
         Ability ability = new DiesTriggeredAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance()), true);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

@@ -56,7 +56,7 @@ public class SelhoffOccultist extends CardImpl {
 
         // Whenever Selhoff Occultist or another creature dies, target player puts the top card of his or her library into his or her graveyard.
         Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(new PutLibraryIntoGraveTargetEffect(1), false);
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

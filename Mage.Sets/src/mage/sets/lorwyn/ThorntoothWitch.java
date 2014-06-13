@@ -63,7 +63,7 @@ public class ThorntoothWitch extends CardImpl {
         this.toughness = new MageInt(4);
         // Whenever you cast a Treefolk spell, you may have target creature get +3/-3 until end of turn.
         Ability ability = new SpellCastControllerTriggeredAbility(new BoostTargetEffect(3, -3, Duration.EndOfTurn), filter, true);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

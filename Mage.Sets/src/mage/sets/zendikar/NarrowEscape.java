@@ -46,7 +46,7 @@ public class NarrowEscape extends CardImpl {
         super(ownerId, 27, "Narrow Escape", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "ZEN";
         this.color.setWhite(true);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addEffect(new GainLifeEffect(4));
     }

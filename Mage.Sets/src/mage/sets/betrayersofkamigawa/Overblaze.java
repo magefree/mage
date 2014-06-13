@@ -57,7 +57,7 @@ public class Overblaze extends CardImpl {
 
         // Each time target permanent would deal damage to a creature or player this turn, it deals double that damage to that creature or player instead.
         this.getSpellAbility().addEffect(new FireServantEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(true));
+        this.getSpellAbility().addTarget(new TargetPermanent());
         // Splice onto Arcane {2}{R}{R}
         this.addAbility(new SpliceOntoArcaneAbility("{2}{R}{R}"));
     }

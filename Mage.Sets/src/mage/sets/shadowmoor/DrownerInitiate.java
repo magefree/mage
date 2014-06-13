@@ -67,7 +67,7 @@ public class DrownerInitiate extends CardImpl {
 
         // Whenever a player casts a blue spell, you may pay {1}. If you do, target player puts the top two cards of his or her library into his or her graveyard.
         Ability ability = new SpellCastAllTriggeredAbility(new DoIfCostPaid(new PutLibraryIntoGraveTargetEffect(2), new ManaCostsImpl("{1}")), filter, true);
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         
     }

@@ -52,7 +52,7 @@ public class PsychicTransfer extends CardImpl {
 
         // If the difference between your life total and target player's life total is 5 or less, exchange life totals with that player.
         this.getSpellAbility().addEffect(new PsychicTransferEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public PsychicTransfer(final PsychicTransfer card) {

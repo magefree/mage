@@ -73,7 +73,7 @@ public class CavernHarpy extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // When Cavern Harpy enters the battlefield, return a blue or black creature you control to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
-        ability.addTarget(new TargetControlledCreaturePermanent(1,1,filter, false, true));
+        ability.addTarget(new TargetControlledCreaturePermanent(1,1,filter, false));
         this.addAbility(ability);        
         // Pay 1 life: Return Cavern Harpy to its owner's hand.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new PayLifeCost(1)));

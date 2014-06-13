@@ -62,7 +62,7 @@ public class FlamespeakersWill extends CardImpl {
         this.color.setRed(true);
 
         // Enchant creature you control
-        TargetPermanent auraTarget = new TargetControlledCreaturePermanent(true);
+        TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
@@ -73,7 +73,7 @@ public class FlamespeakersWill extends CardImpl {
         // Whenever enchanted creature deals combat damage to a player, you may sacrifice Flamespeaker's Will. If you do, destroy target artifact.
         ability = new DealsDamageToAPlayerAttachedTriggeredAbility(
                 new DoIfCostPaid(new DestroyTargetEffect(), new SacrificeSourceCost()), "enchanted creature", false, false, true, TargetController.ANY);
-        ability.addTarget(new TargetArtifactPermanent(true));
+        ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
     }
 

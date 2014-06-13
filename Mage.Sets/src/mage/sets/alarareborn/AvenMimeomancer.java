@@ -67,7 +67,7 @@ public class AvenMimeomancer extends CardImpl {
 
         // At the beginning of your upkeep, you may put a feather counter on target creature. If you do, that creature is 3/1 and has flying for as long as it has a feather counter on it.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.FEATHER.createInstance()), TargetController.YOU, true);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         ability.addEffect(new AvenEffect());
         ability.addEffect(new AvenEffect2());
         this.addAbility(ability);

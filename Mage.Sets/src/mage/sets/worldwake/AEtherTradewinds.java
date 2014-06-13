@@ -59,8 +59,8 @@ public class AEtherTradewinds extends CardImpl {
         this.color.setBlue(true);
 
         // Return target permanent you control and target permanent you don't control to their owners' hands.
-        this.getSpellAbility().addTarget(new TargetControlledPermanent(true));
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetControlledPermanent());
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new AEtherTradewindsEffect());
         
     }

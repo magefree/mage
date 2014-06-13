@@ -60,7 +60,7 @@ public class PrimalBellow extends CardImpl {
 
         this.color.setGreen(true);
         PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(value, value, Duration.EndOfTurn));
     }
 

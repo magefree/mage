@@ -70,7 +70,7 @@ public class UnexpectedlyAbsent extends CardImpl {
 
         // Put target nonland permanent into its owner's library just beneath the top X cards of that library.
         this.getSpellAbility().addEffect(new UnexpectedlyAbsentEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
     }
 

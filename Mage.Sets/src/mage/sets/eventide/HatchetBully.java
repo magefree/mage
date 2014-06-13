@@ -68,8 +68,8 @@ public class HatchetBully extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HatchetBullyEffect(), new ManaCostsImpl("{2}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new HatchetBullyCost());
-        ability.addTarget(new TargetCreatureOrPlayer(true));
-        Target target = new TargetControlledCreaturePermanent(true);
+        ability.addTarget(new TargetCreatureOrPlayer());
+        Target target = new TargetControlledCreaturePermanent();
         target.setNotTarget(true);
         ability.addTarget(target);
         this.addAbility(ability);

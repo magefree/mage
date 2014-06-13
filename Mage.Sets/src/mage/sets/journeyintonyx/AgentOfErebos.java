@@ -54,7 +54,7 @@ public class AgentOfErebos extends CardImpl {
 
         // Constellation - Whenever Agent of Erebos or another enchantment enters the battlefield under your control, exile all cards from target player's graveyard.
         Ability ability = new ConstellationAbility(new ExileGraveyardAllTargetPlayerEffect(), false);
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

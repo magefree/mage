@@ -62,7 +62,7 @@ public class GrapplingHook extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DoubleStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
         // Whenever equipped creature attacks, you may have target creature block it this turn if able.
         Ability ability = new AttacksAttachedTriggeredAbility(new GrapplingHookEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // Equip {4}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));

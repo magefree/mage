@@ -58,7 +58,7 @@ public class ResistanceFighter extends CardImpl {
 
         // Sacrifice Resistance Fighter: Prevent all combat damage target creature would deal this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageByTargetEffect(Duration.EndOfTurn, true), new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

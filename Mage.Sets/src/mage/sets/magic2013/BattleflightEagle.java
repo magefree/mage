@@ -64,7 +64,7 @@ public class BattleflightEagle extends CardImpl {
         // When Battleflight Eagle enters the battlefield, target creature gets +2/+2 and gains flying until end of turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
         ability.addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

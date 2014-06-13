@@ -62,7 +62,7 @@ public class KithkinZealot extends CardImpl {
 
         // When Kithkin Zealot enters the battlefield, you gain 1 life for each black and/or red permanent target opponent controls.
         Ability ability = new EntersBattlefieldTriggeredAbility(new KithkinZealotEffect(), false);
-        ability.addTarget(new TargetOpponent(true));
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
 

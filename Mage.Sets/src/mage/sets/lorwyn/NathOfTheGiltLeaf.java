@@ -65,7 +65,7 @@ public class NathOfTheGiltLeaf extends CardImpl {
         Effect effect = new DiscardTargetEffect(1, true);
         effect.setText("you may have target opponent discard a card at random");
         Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, true);
-        ability.addTarget(new TargetOpponent(true));
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
         // Whenever an opponent discards a card, you may put a 1/1 green Elf Warrior creature token onto the battlefield.

@@ -52,7 +52,7 @@ public class SwiftJustice extends CardImpl {
         this.color.setWhite(true);
 
         // Until end of turn, target creature gets +1/+0 and gains first strike and lifelink.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         Effect effect = new BoostTargetEffect(1,0,Duration.EndOfTurn);
         effect.setText("Until end of turn, target creature gets +1/+0");
         this.getSpellAbility().addEffect(effect);

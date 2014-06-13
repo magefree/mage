@@ -57,7 +57,7 @@ public class VolitionReins extends CardImpl {
         this.subtype.add("Aura");
         this.color.setBlue(true);
 
-        TargetPermanent auraTarget = new TargetPermanent(true);
+        TargetPermanent auraTarget = new TargetPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

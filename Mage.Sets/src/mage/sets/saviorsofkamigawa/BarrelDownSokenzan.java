@@ -56,7 +56,7 @@ public class BarrelDownSokenzan extends CardImpl {
         this.getSpellAbility().addEffect(new SweepEffect("Mountain"));
         DynamicValue sweepValue = new MultipliedValue(new SweepNumber("Mountain", false), 2);
         this.getSpellAbility().addEffect(new DamageTargetEffect(sweepValue));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public BarrelDownSokenzan(final BarrelDownSokenzan card) {

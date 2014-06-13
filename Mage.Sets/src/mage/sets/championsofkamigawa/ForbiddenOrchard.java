@@ -71,7 +71,7 @@ class ForbiddenOrchardTriggeredAbility extends TriggeredAbilityImpl {
 
     public ForbiddenOrchardTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenTargetEffect(new SpiritToken()));
-        this.addTarget(new TargetOpponent(true));
+        this.addTarget(new TargetOpponent());
     }
 
     public ForbiddenOrchardTriggeredAbility(final ForbiddenOrchardTriggeredAbility ability) {

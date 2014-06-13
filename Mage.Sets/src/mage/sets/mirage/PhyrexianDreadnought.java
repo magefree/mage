@@ -85,7 +85,7 @@ class PhyrexianDreadnoughtSacrificeCost extends CostImpl {
     }
 
     public PhyrexianDreadnoughtSacrificeCost() {
-        this.addTarget(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true, false));
+        this.addTarget(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true));
         this.text = "sacrifice any number of creatures with total power 12 or greater";
     }
 

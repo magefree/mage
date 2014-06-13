@@ -56,7 +56,7 @@ public class SatyrGrovedancer extends CardImpl {
 
         // When Satyr Grovedancer enters the battlefield, put a +1/+1 counter on target creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

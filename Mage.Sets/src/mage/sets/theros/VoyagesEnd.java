@@ -49,7 +49,7 @@ public class VoyagesEnd extends CardImpl {
 
         // Return target creature to its owner's hand. Scry 1.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new ScryEffect(1));
 
     }

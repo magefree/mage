@@ -54,7 +54,7 @@ public class VisceraSeer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new SacrificeTargetCost(new TargetControlledCreaturePermanent(true))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
     }
 
     public VisceraSeer(final VisceraSeer card) {

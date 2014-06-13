@@ -58,7 +58,7 @@ public class Weakness extends CardImpl {
         this.expansionSetCode = "M10";
         this.color.setBlack(true);
         this.subtype.add("Aura");
-        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
     this.getSpellAbility().addTarget(auraTarget);
     this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

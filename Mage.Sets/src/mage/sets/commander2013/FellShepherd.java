@@ -84,7 +84,7 @@ public class FellShepherd extends CardImpl {
         // {B}, Sacrifice another creature: Target creature gets -2/-2 until end of turn.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2,-2, Duration.EndOfTurn), new ManaCostsImpl("{B}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
     }

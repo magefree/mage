@@ -49,7 +49,7 @@ public class InfernalPlunge extends CardImpl {
         this.color.setRed(true);
 
         // As an additional cost to cast Infernal Plunge, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(true)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         // Add {R}{R}{R} to your mana pool.
         this.getSpellAbility().addEffect(new BasicManaEffect(Mana.RedMana(3)));
     }

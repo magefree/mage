@@ -56,7 +56,7 @@ public class RiddleOfLightning extends CardImpl {
         this.color.setRed(true);
 
         // Choose target creature or player. Scry 3, then reveal the top card of your library. Riddle of Lightning deals damage equal to that card's converted mana cost to that creature or player.
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         Effect effect = new ScryEffect(3);
         effect.setText("Choose target creature or player. Scry 3");
         this.getSpellAbility().addEffect(effect);

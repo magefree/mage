@@ -59,7 +59,7 @@ public class WreakHavoc extends CardImpl {
         this.color.setGreen(true);
         this.addAbility(new CantCounterAbility());
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     public WreakHavoc(final WreakHavoc card) {

@@ -63,7 +63,7 @@ public class EmberwildeAugur extends CardImpl {
                 new DamageTargetEffect(3), 
                 new SacrificeSourceCost(),
                 new IsStepCondition(PhaseStep.UPKEEP));
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

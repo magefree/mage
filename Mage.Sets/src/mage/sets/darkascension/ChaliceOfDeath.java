@@ -55,7 +55,7 @@ public class ChaliceOfDeath extends CardImpl {
 
         // {tap}: Target player loses 5 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(5), new TapSourceCost());
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

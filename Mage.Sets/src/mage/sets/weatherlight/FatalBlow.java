@@ -56,7 +56,7 @@ public class FatalBlow extends CardImpl {
 
         // Destroy target creature that was dealt damage this turn. It can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
     public FatalBlow(final FatalBlow card) {

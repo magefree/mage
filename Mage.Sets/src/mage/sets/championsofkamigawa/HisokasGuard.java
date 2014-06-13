@@ -75,7 +75,7 @@ public class HisokasGuard extends CardImpl {
         filter.add(new AnotherPredicate());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HisokasGuardGainAbilityTargetEffect(), new ManaCostsImpl("{1}{U}"));
         ability.addCost(new TapSourceCost());
-        Target target = new TargetControlledCreaturePermanent(1, 1, filter, true, true);
+        Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
         ability.addTarget(target);
         this.addAbility(ability);
 

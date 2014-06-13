@@ -63,7 +63,7 @@ public class JunkyoBell extends CardImpl {
         // where X is the number of creatures you control. If you do, sacrifice that creature at the beginning of the next end step.
         PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent());
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new BoostTargetEffect(amount, amount, Duration.EndOfTurn), TargetController.YOU, true);
-        ability.addTarget(new TargetControlledCreaturePermanent(true));
+        ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addEffect(new JunkyoBellSacrificeEffect());
         this.addAbility(ability);
     }

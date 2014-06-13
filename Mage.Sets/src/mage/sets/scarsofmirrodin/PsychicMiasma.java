@@ -52,7 +52,7 @@ public class PsychicMiasma extends CardImpl {
         super(ownerId, 76, "Psychic Miasma", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
         this.expansionSetCode = "SOM";
         this.color.setBlack(true);
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         PsychicMiasmaEffect1 effect1 = new PsychicMiasmaEffect1();
         this.getSpellAbility().addEffect(effect1);
         this.getSpellAbility().addEffect(new PsychicMiasmaEffect2());

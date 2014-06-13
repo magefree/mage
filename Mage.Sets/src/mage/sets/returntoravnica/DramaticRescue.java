@@ -51,7 +51,7 @@ public class DramaticRescue extends CardImpl {
         // Target player draws two cards.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
     }
 

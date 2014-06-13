@@ -58,7 +58,7 @@ public class BonfireOfTheDamned extends CardImpl {
 
         // Bonfire of the Damned deals X damage to target player and each creature he or she controls.
         this.getSpellAbility().addEffect(new BonfireOfTheDamnedEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Miracle {X}{R}
         this.addAbility(new MiracleAbility(new ManaCostsImpl("{X}{R}")));

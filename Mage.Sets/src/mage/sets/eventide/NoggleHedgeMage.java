@@ -81,7 +81,7 @@ public class NoggleHedgeMage extends CardImpl {
         
         // When Noggle Hedge-Mage enters the battlefield, if you control two or more Mountains, you may have Noggle Hedge-Mage deal 2 damage to target player.
         Ability ability2 = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2), true), new ControlsPermanentCondition(filter2, CountType.MORE_THAN, 1), rule2, true);
-        ability2.addTarget(new TargetPlayer(true));
+        ability2.addTarget(new TargetPlayer());
         this.addAbility(ability2);
     }
 

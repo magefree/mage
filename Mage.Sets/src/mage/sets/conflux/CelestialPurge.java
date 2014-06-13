@@ -57,7 +57,7 @@ public class CelestialPurge extends CardImpl {
         super(ownerId, 5, "Celestial Purge", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "CON";
         this.color.setWhite(true);
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new ExileTargetEffect());
     }
 

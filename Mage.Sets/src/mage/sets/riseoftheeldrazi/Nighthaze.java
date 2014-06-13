@@ -51,7 +51,7 @@ public class Nighthaze extends CardImpl {
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new SwampwalkAbility(), Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public Nighthaze (final Nighthaze card) {

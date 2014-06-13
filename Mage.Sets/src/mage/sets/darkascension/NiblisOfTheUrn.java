@@ -56,7 +56,7 @@ public class NiblisOfTheUrn extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Niblis of the Urn attacks, you may tap target creature.
         Ability ability = new AttacksTriggeredAbility(new TapTargetEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

@@ -58,13 +58,13 @@ public class GiveTake extends SplitCard {
         // Give
         // Put three +1/+1 counters on target creature.
         getLeftHalfCard().getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(3)));
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
         getLeftHalfCard().getColor().setGreen(true);
 
         // Take
         // Remove all +1/+1 counters from target creature you control. Draw that many cards.
         getRightHalfCard().getSpellAbility().addEffect(new TakeEffect());
-        getRightHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
+        getRightHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         getLeftHalfCard().getColor().setBlue(true);
     }
 

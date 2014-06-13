@@ -65,7 +65,7 @@ public class QuirionRanger extends CardImpl {
 
         // Return a Forest you control to its owner's hand: Untap target creature. Activate this ability only once each turn.
         Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ReturnToHandTargetCost(new TargetControlledPermanent(filter)));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

@@ -105,7 +105,7 @@ class ThroatSlitterTriggeredAbility extends TriggeredAbilityImpl {
             filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
             filter.setMessage("nonblack creature controlled by " + game.getPlayer(event.getTargetId()).getName());
             this.getTargets().clear();
-            this.addTarget(new TargetPermanent(filter, true));
+            this.addTarget(new TargetPermanent(filter));
             return true;
         }
         return false;

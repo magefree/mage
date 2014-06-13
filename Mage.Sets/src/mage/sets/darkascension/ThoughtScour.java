@@ -48,7 +48,7 @@ public class ThoughtScour extends CardImpl {
         this.color.setBlue(true);
 
         // Target player puts the top two cards of his or her library into his or her graveyard.
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(2));
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

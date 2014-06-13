@@ -63,7 +63,7 @@ public class CurseOfOblivion extends CardImpl {
         this.color.setBlack(true);
 
         // Enchant player
-        TargetPlayer target = new TargetPlayer(true);
+        TargetPlayer target = new TargetPlayer();
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(target.getTargetName());

@@ -68,7 +68,7 @@ public class VortexElemental extends CardImpl {
 
         // {3}{U}{U}: Target creature blocks Vortex Elemental this turn if able.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(), new ManaCostsImpl("{3}{U}{U}"));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

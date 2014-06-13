@@ -60,7 +60,7 @@ public class SearingBlood extends CardImpl {
 
         // Searing Blood deals 2 damage to target creature. When that creature dies this turn, Searing Blood deals 3 damage to that creature's controller.
         this.getSpellAbility().addEffect(new SearingBloodEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public SearingBlood(final SearingBlood card) {

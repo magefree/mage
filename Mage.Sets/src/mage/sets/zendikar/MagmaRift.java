@@ -56,7 +56,7 @@ public class MagmaRift extends CardImpl {
 
         // Magma Rift deals 5 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public MagmaRift(final MagmaRift card) {

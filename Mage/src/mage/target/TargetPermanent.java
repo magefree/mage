@@ -50,19 +50,9 @@ public class TargetPermanent extends TargetObject {
     public TargetPermanent() {
         this(1, 1, new FilterPermanent(), false);
     }
-
-    public TargetPermanent(boolean required) {
-        this(1, 1, new FilterPermanent(), false);
-        this.setRequired(required);
-    }
     
     public TargetPermanent(FilterPermanent filter) {
         this(1, 1, filter, false);
-    }
-
-    public TargetPermanent(FilterPermanent filter, boolean required) {
-        this(1, 1, filter, false);
-        this.required = required;
     }
 
     public TargetPermanent(int numTargets, FilterPermanent filter) {

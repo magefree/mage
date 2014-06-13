@@ -66,7 +66,7 @@ public class HairStrungKoto extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new PutLibraryIntoGraveTargetEffect(1),
                 new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

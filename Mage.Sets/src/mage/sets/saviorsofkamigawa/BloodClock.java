@@ -96,7 +96,7 @@ class BloodClockEffect extends OneShotEffect {
             game.informPlayers(player.getName() + " pays 2 life. He will not return a permanent he or she controls.");
             return true;
         } else {
-            Target target = new TargetControlledPermanent(true);
+            Target target = new TargetControlledPermanent();
             if (target.canChoose(source.getSourceId(), player.getId(), game) && player.chooseTarget(outcome, target, source, game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {

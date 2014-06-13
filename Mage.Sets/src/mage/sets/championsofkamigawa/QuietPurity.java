@@ -54,7 +54,7 @@ public class QuietPurity extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
         this.color.setWhite(true);
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 

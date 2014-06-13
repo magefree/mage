@@ -47,7 +47,7 @@ public class EyeOfNowhere extends CardImpl {
         this.subtype.add("Arcane");
         this.color.setBlue(true);
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(true));
+        this.getSpellAbility().addTarget(new TargetPermanent());
 
     }
 

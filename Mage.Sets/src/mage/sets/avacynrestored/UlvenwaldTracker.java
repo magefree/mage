@@ -61,8 +61,8 @@ public class UlvenwaldTracker extends CardImpl {
         // {1}{G}, {tap}: Target creature you control fights another target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new FightTargetsEffect(), new ManaCostsImpl("{1}{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetControlledCreaturePermanent(true));
-        ability.addTarget(new TargetOtherCreaturePermanent(true));
+        ability.addTarget(new TargetControlledCreaturePermanent());
+        ability.addTarget(new TargetOtherCreaturePermanent());
         this.addAbility(ability);
     }
 
@@ -76,9 +76,9 @@ public class UlvenwaldTracker extends CardImpl {
     }
 }
 class TargetOtherCreaturePermanent extends TargetCreaturePermanent {
-
-    public TargetOtherCreaturePermanent(boolean required) {
-        super(true);
+    
+    public TargetOtherCreaturePermanent() {
+        super();
     }
 
     public TargetOtherCreaturePermanent(final TargetOtherCreaturePermanent target) {

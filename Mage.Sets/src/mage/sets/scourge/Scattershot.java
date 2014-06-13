@@ -48,7 +48,7 @@ public class Scattershot extends CardImpl {
         this.color.setRed(true);
 
         // Scattershot deals 1 damage to target creature.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         // Storm
         this.addAbility(new StormAbility());

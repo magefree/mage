@@ -58,7 +58,7 @@ public class CrushingVines extends CardImpl {
         this.color.setGreen(true);
 
         // Choose one - Destroy target creature with flying; or destroy target artifact.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         Mode mode = new Mode();
         mode.getTargets().add(new TargetArtifactPermanent());

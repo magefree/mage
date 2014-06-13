@@ -72,7 +72,7 @@ public class DuskmantleGuildmage extends CardImpl {
 
         // {2}{U}{B}: Target player puts the top two cards of his or her library into his or her graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(2), new ManaCostsImpl("{2}{U}{B}"));
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

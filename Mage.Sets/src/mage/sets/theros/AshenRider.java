@@ -58,7 +58,7 @@ public class AshenRider extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // When Ashen Rider enters the battlefield or dies, exile target permanent.
         Ability ability = new EntersBattlefieldOrDiesSourceTriggeredAbility(new ExileTargetEffect(), false);
-        ability.addTarget(new TargetPermanent(true));
+        ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }
 

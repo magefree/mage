@@ -71,7 +71,7 @@ public class SetessanTactics extends CardImpl {
         effect.setText("Until end of turn, any number of target creatures each get +1/+1");
         this.getSpellAbility().addEffect(effect);
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new FightTargetSourceEffect(), new TapSourceCost());
-        gainedAbility.addTarget(new TargetCreaturePermanent(filter, true));
+        gainedAbility.addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(gainedAbility, Duration.EndOfTurn,
                 "and gain \"T: This creature fights another target creature"));
     }

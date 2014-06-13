@@ -65,7 +65,7 @@ public class MortalObstinacy extends CardImpl {
         this.color.setWhite(true);
 
         // Enchant creature you control
-        TargetPermanent auraTarget = new TargetControlledCreaturePermanent(true);
+        TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
@@ -92,7 +92,7 @@ class MortalObstinacyAbility extends TriggeredAbilityImpl {
 
     public MortalObstinacyAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new DestroyTargetEffect(), new SacrificeSourceCost()));
-        addTarget(new TargetEnchantmentPermanent(true));
+        addTarget(new TargetEnchantmentPermanent());
     }
 
     public MortalObstinacyAbility(final MortalObstinacyAbility ability) {

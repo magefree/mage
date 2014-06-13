@@ -56,7 +56,7 @@ public class UltimatePrice extends CardImpl {
         this.color.setBlack(true);
 
         // Destroy target monocolored creature.
-        Target target = new TargetCreaturePermanent(filter, true);
+        Target target = new TargetCreaturePermanent(filter);
         target.setRequired(true);
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

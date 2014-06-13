@@ -79,14 +79,14 @@ public class JayaBallardTaskMage extends CardImpl {
 
         // {R}, {tap}, Discard a card: Destroy target blue permanent.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{R}"));
-        ability.addTarget(new TargetPermanent(filter, true));
+        ability.addTarget(new TargetPermanent(filter));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());        
         this.addAbility(ability);
         
         // {1}{R}, {tap}, Discard a card: Jaya Ballard, Task Mage deals 3 damage to target creature or player. A creature dealt damage this way can't be regenerated this turn.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new ManaCostsImpl("{1}{R}"));
-        ability.addTarget(new TargetCreatureOrPlayer(true));
+        ability.addTarget(new TargetCreatureOrPlayer());
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost()); 
         ability.addEffect(new CantRegenerateEffect());

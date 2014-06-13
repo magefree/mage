@@ -67,7 +67,7 @@ public class GuildFeud extends CardImpl {
         // cards of your library. If two creatures are put onto the battlefield this way,
         // those creatures fight each other.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new GuildFeudEffect(), TargetController.YOU, true);
-        ability.addTarget(new TargetOpponent(true));
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
 

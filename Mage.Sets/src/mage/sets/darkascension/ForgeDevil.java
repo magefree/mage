@@ -56,7 +56,7 @@ public class ForgeDevil extends CardImpl {
         // When Forge Devil enters the battlefield, it deals 1 damage to target creature and 1 damage to you.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1));
         ability.addEffect(new DamageControllerEffect(1));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

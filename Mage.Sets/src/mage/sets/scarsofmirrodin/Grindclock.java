@@ -57,7 +57,7 @@ public class Grindclock extends CardImpl {
         this.expansionSetCode = "SOM";
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost()));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrindclockEffect(), new TapSourceCost());
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

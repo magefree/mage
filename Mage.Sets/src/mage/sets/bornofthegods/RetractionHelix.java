@@ -63,7 +63,7 @@ public class RetractionHelix extends CardImpl {
         Effect effect = new GainAbilityTargetEffect(gainedAbility, Duration.EndOfTurn);
         effect.setText("Until end of turn, target creature gains \"{T}: Return target nonland permanent to its owner's hand.\"");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public RetractionHelix(final RetractionHelix card) {

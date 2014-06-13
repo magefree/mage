@@ -62,7 +62,7 @@ public class GlimmerdustNap extends CardImpl {
         this.color.setBlue(true);
 
         // Enchant tapped creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent(filter, true);
+        TargetPermanent auraTarget = new TargetCreaturePermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));

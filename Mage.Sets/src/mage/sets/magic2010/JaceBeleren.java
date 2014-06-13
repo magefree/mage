@@ -58,11 +58,11 @@ public class JaceBeleren extends CardImpl {
         this.addAbility(new LoyaltyAbility(new DrawCardAllEffect(1), 2));
 
         LoyaltyAbility ability1 = new LoyaltyAbility(new DrawCardTargetEffect(1), -1);
-        ability1.addTarget(new TargetPlayer(true));
+        ability1.addTarget(new TargetPlayer());
         this.addAbility(ability1);
 
         LoyaltyAbility ability2 = new LoyaltyAbility(new PutLibraryIntoGraveTargetEffect(20), -10);
-        ability2.addTarget(new TargetPlayer(true));
+        ability2.addTarget(new TargetPlayer());
         this.addAbility(ability2);
 
     }

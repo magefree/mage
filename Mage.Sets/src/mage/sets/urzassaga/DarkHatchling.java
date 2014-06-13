@@ -67,7 +67,7 @@ public class DarkHatchling extends CardImpl {
 
         // When Dark Hatchling enters the battlefield, destroy target nonblack creature. It can't be regenerated.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(true));
-        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 

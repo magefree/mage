@@ -57,7 +57,7 @@ public class SolemnOffering extends CardImpl {
         super(ownerId, 33, "Solemn Offering", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
         this.expansionSetCode = "M10";
         this.color.setWhite(true);
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new GainLifeEffect(4));
     }

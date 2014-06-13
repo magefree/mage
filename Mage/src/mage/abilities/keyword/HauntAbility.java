@@ -125,7 +125,7 @@ class HauntExileAbility extends ZoneChangeTriggeredAbility {
     public HauntExileAbility() {
         super(Zone.BATTLEFIELD, Zone.GRAVEYARD, new HauntEffect(), null, false);
         this.setRuleAtTheTop(true);
-        this.addTarget(new TargetCreaturePermanent(true));
+        this.addTarget(new TargetCreaturePermanent());
 
     }
 

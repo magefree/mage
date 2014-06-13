@@ -127,7 +127,7 @@ class KeranosGodOfStormsTriggeredAbility extends TriggeredAbilityImpl {
                         this.addEffect(new DrawCardSourceControllerEffect(1));
                     } else {
                         this.addEffect(new DamageTargetEffect(3));
-                        this.addTarget(new TargetCreatureOrPlayer(true));
+                        this.addTarget(new TargetCreatureOrPlayer());
                     }
                     return true;
                 }

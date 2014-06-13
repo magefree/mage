@@ -65,13 +65,13 @@ public class NacatlHuntPride extends CardImpl {
         // {R}, {tap}: Target creature can't block this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBlockTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         
         // {G}, {tap}: Target creature blocks this turn if able.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BlocksIfAbleTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{G}"));
         ability2.addCost(new TapSourceCost());
-        ability2.addTarget(new TargetCreaturePermanent(true));
+        ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability2);
         
     }

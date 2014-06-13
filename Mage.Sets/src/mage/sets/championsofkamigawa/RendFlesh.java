@@ -56,7 +56,7 @@ public class RendFlesh extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
         this.color.setBlack(true);
-        Target target = new TargetCreaturePermanent(filter, true);
+        Target target = new TargetCreaturePermanent(filter);
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }

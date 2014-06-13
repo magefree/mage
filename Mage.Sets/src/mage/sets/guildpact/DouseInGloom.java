@@ -46,7 +46,7 @@ public class DouseInGloom extends CardImpl {
         this.expansionSetCode = "GPT";
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
     }
 

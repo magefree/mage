@@ -49,7 +49,7 @@ public class PharikasCure extends CardImpl {
 
         // Pharika's Cure deals 2 damage to target creature and you gain 2 life.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
     }
 

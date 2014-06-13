@@ -73,12 +73,12 @@ public class KarnLiberated extends CardImpl {
 
         // +4: Target player exiles a card from his or her hand.
         LoyaltyAbility ability1 = new LoyaltyAbility(new ExileFromZoneTargetEffect(Zone.HAND, exileId, "Karn Liberated", new FilterCard()), 4);
-        ability1.addTarget(new TargetPlayer(true));
+        ability1.addTarget(new TargetPlayer());
         this.addAbility(ability1);
 
         // -3: Exile target permanent.
         LoyaltyAbility ability2 = new LoyaltyAbility(new ExileTargetEffect(exileId, "Karn Liberated"), -3);
-        ability2.addTarget(new TargetPermanent(true));
+        ability2.addTarget(new TargetPermanent());
         this.addAbility(ability2);
 
         // -14: Restart the game, leaving in exile all non-Aura permanent cards exiled with Karn Liberated. Then put those cards onto the battlefield under your control.

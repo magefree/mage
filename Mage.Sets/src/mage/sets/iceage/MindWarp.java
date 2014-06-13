@@ -50,7 +50,7 @@ public class MindWarp extends CardImpl {
 
         // Look at target player's hand and choose X cards from it. That player discards those cards.
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(new ManacostVariableValue(), TargetController.ANY));
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public MindWarp(final MindWarp card) {

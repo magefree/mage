@@ -66,7 +66,7 @@ public class TidehollowSculler extends CardImpl {
 
         // When Tidehollow Sculler enters the battlefield, target opponent reveals his or her hand and you choose a nonland card from it. Exile that card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TidehollowScullerExileEffect(), false);
-        ability.addTarget(new TargetOpponent(true));
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
 

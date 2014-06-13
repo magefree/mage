@@ -65,7 +65,7 @@ public class Blightcaster extends CardImpl {
         // Whenever you cast an enchantment spell, you may have target creature get -2/-2 until end of turn.
         Effect effect = new BoostTargetEffect(-2,-2, Duration.EndOfTurn);
         Ability ability = new SpellCastControllerTriggeredAbility(effect, filter, true);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
     }

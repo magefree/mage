@@ -48,7 +48,7 @@ public class Mindculling extends CardImpl {
         this.color.setBlue(true);
 
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
-        this.getSpellAbility().addTarget(new TargetOpponent(true));
+        this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
     }
 

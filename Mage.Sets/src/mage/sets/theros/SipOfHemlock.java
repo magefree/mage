@@ -49,7 +49,7 @@ public class SipOfHemlock extends CardImpl {
 
         // Destroy target creature.  Its controller loses 2 life.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(2));
     }
 

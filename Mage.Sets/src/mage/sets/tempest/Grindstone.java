@@ -56,7 +56,7 @@ public class Grindstone extends CardImpl {
         // {3}, {tap}: Target player puts the top two cards of his or her library into his or her graveyard. If both cards share a color, repeat this process.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrindstoneEffect(), new ManaCostsImpl("{3}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         
         

@@ -63,10 +63,10 @@ public class Coretapper extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
-        firstAbility.addTarget(new TargetPermanent(filter, true));
+        firstAbility.addTarget(new TargetPermanent(filter));
         this.addAbility(firstAbility);
         Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.CHARGE.createInstance(2)), new SacrificeSourceCost());
-        secondAbility.addTarget(new TargetPermanent(filter, true));
+        secondAbility.addTarget(new TargetPermanent(filter));
         this.addAbility(secondAbility);
     }
 

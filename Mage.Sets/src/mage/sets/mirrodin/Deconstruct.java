@@ -55,7 +55,7 @@ public class Deconstruct extends CardImpl {
         this.expansionSetCode = "MRD";
         this.color.setGreen(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new BasicManaEffect(new Mana(0, 3, 0, 0, 0, 0, 0)));
     }
 

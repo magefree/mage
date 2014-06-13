@@ -148,13 +148,15 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             // If there is more than one other player who could make such a choice, the spell or ability’s controller decides which of those players will make the choice. 
             UUID playerId = null;
             if (modeChooser == TargetController.OPPONENT) {
-                TargetOpponent targetOpponent = new TargetOpponent(true);
+                TargetOpponent targetOpponent = new TargetOpponent();
                 if (targetOpponent.choose(Outcome.Benefit, source.getControllerId(), source.getSourceId(), game)) {
                     playerId = targetOpponent.getFirstTarget();
                 }
-            }
-            if (playerId == null ) {
+            } else {
                 playerId = source.getControllerId();
+            }
+            if (playerId == null) {
+                return false;
             }
             Player player = game.getPlayer(playerId);
             

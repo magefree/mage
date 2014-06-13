@@ -55,7 +55,7 @@ public class NightTerrors extends CardImpl {
         this.color.setBlack(true);
 
         // Target player reveals his or her hand. You choose a nonland card from it. Exile that card.
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new NightTerrorsEffect());
     }
 

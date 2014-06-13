@@ -59,7 +59,7 @@ public class AssaultBattery extends SplitCard {
         Effect effect = new DamageTargetEffect(2);
         effect.setText("Assault deals 2 damage to target creature or player");
         getLeftHalfCard().getSpellAbility().addEffect(effect);
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreatureOrPlayer());
 
         // Battery
         // Put a 3/3 green Elephant creature token onto the battlefield.

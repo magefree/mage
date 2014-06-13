@@ -69,7 +69,7 @@ public class SpearOfHeliod extends CardImpl {
         // {1}{W}{W}, {T}: Destroy target creature that dealt damage to you this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{W}{W}"));
         ability.addCost(new TapSourceCost());
-        Target target = new TargetCreaturePermanent(filter, true);
+        Target target = new TargetCreaturePermanent(filter);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

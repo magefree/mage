@@ -60,7 +60,7 @@ public class Expunge extends CardImpl {
         this.color.setBlack(true);
 
         // Destroy target nonartifact, nonblack creature. It can't be regenerated.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
 		// Cycling {2} ({2}, Discard this card: Draw a card.)
 		this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));

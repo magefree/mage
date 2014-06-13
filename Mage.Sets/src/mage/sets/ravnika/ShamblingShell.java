@@ -60,7 +60,7 @@ public class ShamblingShell extends CardImpl {
 
         // Sacrifice Shambling Shell: Put a +1/+1 counter on target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // Dredge 3
         this.addAbility(new DredgeAbility(3));

@@ -67,7 +67,7 @@ public class FireIce extends SplitCard {
         // Draw a card.
         getRightHalfCard().getColor().setBlue(true);
         getRightHalfCard().getSpellAbility().addEffect(new TapTargetEffect());
-        getRightHalfCard().getSpellAbility().addTarget(new TargetPermanent(true));
+        getRightHalfCard().getSpellAbility().addTarget(new TargetPermanent());
         getRightHalfCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
 
     }

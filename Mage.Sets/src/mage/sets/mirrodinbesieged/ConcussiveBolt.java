@@ -55,7 +55,7 @@ public class ConcussiveBolt extends CardImpl {
         this.color.setRed(true);
 
         // Concussive Bolt deals 4 damage to target player.
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         // Metalcraft - If you control three or more artifacts, creatures that player controls can't block this turn.
         this.getSpellAbility().addEffect(new ConcussiveBoltEffect());

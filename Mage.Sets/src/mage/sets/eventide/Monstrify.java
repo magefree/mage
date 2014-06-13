@@ -53,7 +53,7 @@ public class Monstrify extends CardImpl {
 
         // Target creature gets +4/+4 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Retrace
         this.addAbility(new RetraceAbility(new ManaCostsImpl("{3}{G}"), TimingRule.SORCERY));
     }

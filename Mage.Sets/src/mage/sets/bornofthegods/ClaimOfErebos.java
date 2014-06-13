@@ -62,7 +62,7 @@ public class ClaimOfErebos extends CardImpl {
         this.color.setBlack(true);
 
         // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent(true);
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
@@ -70,7 +70,7 @@ public class ClaimOfErebos extends CardImpl {
         // Enchanted creature has "{1}{B}, {T}: Target player loses 2 life."
         Ability grantedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), new ManaCostsImpl("{1}{B}"));
         grantedAbility.addCost(new TapSourceCost());
-        grantedAbility.addTarget(new TargetPlayer(true));
+        grantedAbility.addTarget(new TargetPlayer());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(grantedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield)));
         
         

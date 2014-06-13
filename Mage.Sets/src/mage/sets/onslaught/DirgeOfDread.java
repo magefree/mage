@@ -60,7 +60,7 @@ public class DirgeOfDread extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{B}")));
         // When you cycle Dirge of Dread, you may have target creature gain fear until end of turn.
         Ability ability = new CycleTriggeredAbility(new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn), true);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

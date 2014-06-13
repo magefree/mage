@@ -65,7 +65,7 @@ public class BloodhuskRitualist extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(new MultikickerCount())),
                 KickedCondition.getInstance(),
                 "");
-        ability.addTarget(new TargetOpponent(true));
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
 

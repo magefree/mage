@@ -69,7 +69,7 @@ public class PusKami extends CardImpl {
         // {B}, Sacrifice Pus Kami: Destroy target nonblack creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ColoredManaCost(ColoredManaSymbol.B));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
         this.addAbility(new SoulshiftAbility(6));
     }

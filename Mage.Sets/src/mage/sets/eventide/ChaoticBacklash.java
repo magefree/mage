@@ -56,7 +56,7 @@ public class ChaoticBacklash extends CardImpl {
 
         // Chaotic Backlash deals damage to target player equal to twice the number of white and/or blue permanents he or she controls.
         this.getSpellAbility().addEffect(new ChaoticBacklashEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         
     }
 

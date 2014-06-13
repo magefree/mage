@@ -66,8 +66,8 @@ public class HuntTheWeak extends CardImpl {
         effect = new FightTargetsEffect();
         effect.setText("Then that creature fights target creature you don't control");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
-        Target target = new TargetCreaturePermanent(filter, true);
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        Target target = new TargetCreaturePermanent(filter);
         target.setRequired(true);
         this.getSpellAbility().addTarget(target);
 

@@ -71,15 +71,15 @@ public class FleshBlood extends SplitCard {
         Target target = new TargetCardInGraveyard(new FilterCreatureCard());
         target.setRequired(true);
         getLeftHalfCard().getSpellAbility().addTarget(target);
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
         getLeftHalfCard().getSpellAbility().addEffect(new FleshEffect());
 
         // Blood
         // Target creature you control deals damage equal to its power to target creature or player.
         getRightHalfCard().getColor().setRed(true);
         getRightHalfCard().getColor().setGreen(true);
-        getRightHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
-        getRightHalfCard().getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
+        getRightHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        getRightHalfCard().getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         getRightHalfCard().getSpellAbility().addEffect(new BloodEffect());
 
     }

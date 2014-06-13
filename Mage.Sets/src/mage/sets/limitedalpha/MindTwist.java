@@ -49,7 +49,7 @@ public class MindTwist extends CardImpl {
 
         // Target player discards X cards at random.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(new ManacostVariableValue(), true));
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public MindTwist(final MindTwist card) {

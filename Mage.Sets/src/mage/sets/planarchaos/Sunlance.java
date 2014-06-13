@@ -57,7 +57,7 @@ public class Sunlance extends CardImpl {
 
         // Sunlance deals 3 damage to target nonwhite creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
     public Sunlance(final Sunlance card) {

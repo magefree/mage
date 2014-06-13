@@ -61,7 +61,7 @@ public class HallowedHealer extends CardImpl {
 
         // {tap}: Prevent the next 2 damage that would be dealt to target creature or player this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn,2), new TapSourceCost());
-        ability.addTarget(new TargetCreatureOrPlayer(true));
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
         // Threshold - {tap}: Prevent the next 4 damage that would be dealt to target creature or player this turn. Activate this ability only if seven or more cards are in your graveyard.
         Ability thresholdAbility = new ConditionalGainActivatedAbility(Zone.BATTLEFIELD, 
@@ -69,7 +69,7 @@ public class HallowedHealer extends CardImpl {
                                                                         new TapSourceCost(), 
                                                                         new CardsInControllerGraveCondition(7), 
                                                                         "<i>Threshold</i> - {T}: Prevent the next 4 damage that would be dealt to target creature or player this turn. Activate this ability only if seven or more cards are in your graveyard.");
-        thresholdAbility.addTarget(new TargetCreatureOrPlayer(true));
+        thresholdAbility.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(thresholdAbility);
     }
 

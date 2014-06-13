@@ -57,7 +57,7 @@ public class PerishTheThought extends CardImpl {
 
         // Target opponent reveals his or her hand. You choose a card from it. That player shuffles that card into his or her library.
         this.getSpellAbility().addEffect(new PerishTheThoughtEffect());
-        this.getSpellAbility().addTarget(new TargetOpponent(true));
+        this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
     public PerishTheThought(final PerishTheThought card) {

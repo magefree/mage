@@ -67,7 +67,7 @@ public class UmezawasJitte extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2, Duration.EndOfTurn), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
         Mode mode = new Mode();
         mode.getEffects().add(new BoostTargetEffect(-1, -1, Duration.EndOfTurn));
-        mode.getTargets().add(new TargetCreaturePermanent(true));
+        mode.getTargets().add(new TargetCreaturePermanent());
         ability.addMode(mode);
         mode = new Mode();
         mode.getEffects().add(new GainLifeEffect(2));

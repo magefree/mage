@@ -56,7 +56,7 @@ public class ConsumeStrength extends CardImpl {
 
         // Target creature gets +2/+2 until end of turn. Another target creature gets -2/-2 until end of turn.
         this.getSpellAbility().addEffect(new ConsumeStrengthEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
         
     }
 

@@ -64,12 +64,12 @@ public class NightDay extends SplitCard {
         // Target creature gets -1/-1 until end of turn.
         getLeftHalfCard().getColor().setBlack(true);
         getLeftHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(-1,-1,Duration.EndOfTurn));
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Day
         // Creatures target player controls get +1/+1 until end of turn.
         getRightHalfCard().getColor().setWhite(true);
-        getRightHalfCard().getSpellAbility().addTarget(new TargetPlayer(true));
+        getRightHalfCard().getSpellAbility().addTarget(new TargetPlayer());
         getRightHalfCard().getSpellAbility().addEffect(new DayEffect());
 
     }

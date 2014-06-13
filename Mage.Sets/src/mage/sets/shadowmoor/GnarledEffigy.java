@@ -54,7 +54,7 @@ public class GnarledEffigy extends CardImpl {
                 new AddCountersTargetEffect(CounterType.M1M1.createInstance()),
                 new ManaCostsImpl("4"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

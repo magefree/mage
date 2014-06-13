@@ -81,7 +81,7 @@ public class TriadOfFates extends CardImpl {
         // {1}, {T}: Put a fate counter on another target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.FATE.createInstance()), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
-        Target target = new TargetCreaturePermanent(filter, true);
+        Target target = new TargetCreaturePermanent(filter);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);

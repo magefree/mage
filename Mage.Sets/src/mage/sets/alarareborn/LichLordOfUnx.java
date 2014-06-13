@@ -75,7 +75,7 @@ public class LichLordOfUnx extends CardImpl {
         this.addAbility(ability);
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(new PermanentsOnBattlefieldCount(filter)), new ManaCostsImpl("{U}{U}{B}{B}"));
         ability.addEffect(new PutLibraryIntoGraveTargetEffect(new PermanentsOnBattlefieldCount(filter, 1)));
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

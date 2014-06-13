@@ -50,7 +50,7 @@ public class SwallowingPlague extends CardImpl {
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addEffect(new GainLifeEffect(new ManacostVariableValue()));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public SwallowingPlague (final SwallowingPlague card) {

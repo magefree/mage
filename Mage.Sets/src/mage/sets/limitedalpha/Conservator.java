@@ -56,7 +56,7 @@ public class Conservator extends CardImpl {
 
         // {3}, {tap}: Prevent the next 2 damage that would be dealt to you this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConservatorEffect(), new GenericManaCost(3));
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

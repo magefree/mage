@@ -64,7 +64,7 @@ public class KessigMalcontents extends CardImpl {
 
         // When Kessig Malcontents enters the battlefield, it deals damage to target player equal to the number of Humans you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)));
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

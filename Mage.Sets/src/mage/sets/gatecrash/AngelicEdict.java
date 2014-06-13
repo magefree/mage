@@ -56,7 +56,7 @@ public class AngelicEdict extends CardImpl {
 
         // Exile target creature or enchantment.
         getSpellAbility().addEffect(new ExileTargetEffect());
-        getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     public AngelicEdict(final AngelicEdict card) {

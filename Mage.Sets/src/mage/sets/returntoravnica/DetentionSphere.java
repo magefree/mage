@@ -73,7 +73,7 @@ public class DetentionSphere extends CardImpl {
         // target nonland permanent not named Detention Sphere and all
         // other permanents with the same name as that permanent.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DetentionSphereEntersEffect(), true);
-        ability.addTarget(new TargetPermanent(filter, true));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
 

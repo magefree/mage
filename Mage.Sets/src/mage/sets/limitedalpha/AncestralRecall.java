@@ -48,7 +48,7 @@ public class AncestralRecall extends CardImpl {
 
         // Target player draws three cards.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public AncestralRecall(final AncestralRecall card) {

@@ -53,7 +53,7 @@ public class SoulsMight extends CardImpl {
 
         // Put X +1/+1 counters on target creature, where X is that creature's power.
         this.getSpellAbility().addEffect(new SoulsMightEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public SoulsMight(final SoulsMight card) {

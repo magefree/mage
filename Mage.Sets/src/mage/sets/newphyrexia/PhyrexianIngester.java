@@ -73,7 +73,7 @@ public class PhyrexianIngester extends CardImpl {
 
         // Imprint - When Phyrexian Ingester enters the battlefield, you may exile target nontoken creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PhyrexianIngesterImprintEffect(), true);
-        ability.addTarget(new TargetPermanent(filter, true));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
         // Phyrexian Ingester gets +X/+Y, where X is the exiled creature card's power and Y is its toughness.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhyrexianIngesterBoostEffect()));

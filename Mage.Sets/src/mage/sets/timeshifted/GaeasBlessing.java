@@ -59,7 +59,7 @@ public class GaeasBlessing extends CardImpl {
 
         // Target player shuffles up to three target cards from his or her graveyard into his or her library.
         this.getSpellAbility().addEffect(new GaeasBlessingEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addTarget(new GaeasBlessingTarget());
         
         // Draw a card.

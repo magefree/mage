@@ -70,7 +70,7 @@ public class GrinningTotem extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrinningTotemSearchAndExileEffect(), new ManaCostsImpl("{2}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetOpponent(true));
+        ability.addTarget(new TargetOpponent());
         // Until the beginning of your next upkeep, you may play that card.
         ability.addEffect(new GrinningTotemMayPlayEffect());
         // At the beginning of your next upkeep, if you haven't played it, put it into its owner's graveyard.

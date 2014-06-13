@@ -47,7 +47,7 @@ public class TitanicGrowth extends CardImpl {
         this.expansionSetCode = "M12";
         this.color.setGreen(true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public TitanicGrowth(final TitanicGrowth card) {

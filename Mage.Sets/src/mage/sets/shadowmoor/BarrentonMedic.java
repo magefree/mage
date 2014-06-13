@@ -62,7 +62,7 @@ public class BarrentonMedic extends CardImpl {
 
         // {tap}: Prevent the next 1 damage that would be dealt to target creature or player this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
-        ability.addTarget(new TargetCreatureOrPlayer(true));
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
         
         // Put a -1/-1 counter on Barrenton Medic: Untap Barrenton Medic.

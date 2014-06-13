@@ -93,7 +93,7 @@ class HavengulSkaabAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-            TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent(1, 1, filter, false, true);
+            TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent(1, 1, filter, false);
             this.addTarget(target);
             return true;
         }

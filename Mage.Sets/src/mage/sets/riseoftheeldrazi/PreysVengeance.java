@@ -49,7 +49,7 @@ public class PreysVengeance extends CardImpl {
         this.expansionSetCode = "ROE";
         this.color.setGreen(true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.addAbility(new ReboundAbility());
     }
 

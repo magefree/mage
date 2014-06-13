@@ -67,7 +67,7 @@ public class DevoutHarpist extends CardImpl {
 
         // {tap}: Destroy target Aura attached to a creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter, true));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
         
     }

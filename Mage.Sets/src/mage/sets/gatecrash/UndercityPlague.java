@@ -51,7 +51,7 @@ public class UndercityPlague extends CardImpl {
         this.color.setBlack(true);
 
         // Target player loses 1 life, discards a card, then sacrifices a permanent.
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(1));
         this.getSpellAbility().addEffect(new DiscardTargetEffect(1));
         this.getSpellAbility().addEffect(new SacrificeEffect(new FilterPermanent(),1,"then that player"));

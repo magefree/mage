@@ -81,7 +81,7 @@ public class RageForger extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false));
         // Whenever a creature you control with a +1/+1 counter on it attacks, you may have that creature deal 1 damage to target player.
         Ability ability = new AttacksCreatureYourControlTriggeredAbility(new RageForgerDamageEffect(), true, filterAttack, true);
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         
     }

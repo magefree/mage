@@ -56,7 +56,7 @@ public class LeapOfFlame extends CardImpl {
         // Replicate {U}{R}
         this.addAbility(new ReplicateAbility(this, "{U}{R}"));
         // Target creature gets +1/+0 and gains flying and first strike until end of turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         Effect effect = new BoostTargetEffect(1,0,Duration.EndOfTurn);
         effect.setText("Target creature gets +1/+0");
         this.getSpellAbility().addEffect(effect);

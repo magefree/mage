@@ -66,7 +66,7 @@ public class Crypsis extends CardImpl {
         Effect effect = new UntapTargetEffect();
         effect.setText("Untap it.");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         
     }
 

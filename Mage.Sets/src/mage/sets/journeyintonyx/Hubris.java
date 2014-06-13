@@ -56,7 +56,7 @@ public class Hubris extends CardImpl {
 
         // Return target creature and all Auras attached to it to their owners' hand.
         this.getSpellAbility().addEffect(new HubrisReturnEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
 
     }

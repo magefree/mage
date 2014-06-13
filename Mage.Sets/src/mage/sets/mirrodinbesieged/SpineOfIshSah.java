@@ -48,7 +48,7 @@ public class SpineOfIshSah extends CardImpl {
         this.expansionSetCode = "MBS";
 
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
-        ability.addTarget(new TargetPermanent(true));
+        ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
         this.addAbility(new DiesTriggeredAbility(new ReturnToHandSourceEffect()));
     }

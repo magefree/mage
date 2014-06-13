@@ -63,7 +63,7 @@ public class RelicCrush extends CardImpl {
 
         // Destroy target artifact or enchantment and up to one other target artifact or enchantment.
         this.getSpellAbility().addEffect(new RelicCrushEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addTarget(new TargetPermanent(0, 1, filter, false));
         
     }

@@ -91,7 +91,7 @@ class DeadReckoningEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
         TargetCardInYourGraveyard target1 = new TargetCardInYourGraveyard(new FilterCreatureCard("creature card in your graveyard"));
-        TargetCreaturePermanent target2 = new TargetCreaturePermanent(true);
+        TargetCreaturePermanent target2 = new TargetCreaturePermanent();
 
         if (you != null) {
             if (target1.canChoose(source.getControllerId(), game)

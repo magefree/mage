@@ -50,7 +50,7 @@ public class WipeAway extends CardImpl {
         // Split second
         this.addAbility(new SplitSecondAbility());
         // Return target permanent to its owner's hand.
-        this.getSpellAbility().addTarget(new TargetPermanent(true));
+        this.getSpellAbility().addTarget(new TargetPermanent());
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
     }
 

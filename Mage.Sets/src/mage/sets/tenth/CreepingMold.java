@@ -57,7 +57,7 @@ public class CreepingMold extends CardImpl {
         this.expansionSetCode = "10E";
         this.color.setGreen(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter, true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     public CreepingMold(final CreepingMold card) {

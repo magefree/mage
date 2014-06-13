@@ -55,7 +55,7 @@ public class StrengthFromTheFallen extends CardImpl {
         // Constellation - Whenever Strength from the Fallen or another entchantment enters the battlefield under your control, target creature gets +X/+X until end of turn, where X is the number of creature cards in your graveyard.
         DynamicValue xValue = new CardsInControllerGraveyardCount(new FilterCreatureCard("creature cards"));
         Ability ability = new ConstellationAbility(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true));
-        ability.addTarget(new TargetCreaturePermanent(true));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
     }

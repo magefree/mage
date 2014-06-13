@@ -53,7 +53,7 @@ public class CoffinPurge extends CardImpl {
         // Exile target card from a graveyard.
         
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInGraveyard(true));
+        this.getSpellAbility().addTarget(new TargetCardInGraveyard());
         // Flashback {B}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{B}"), TimingRule.INSTANT));
     }

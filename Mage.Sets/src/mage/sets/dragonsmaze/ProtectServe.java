@@ -55,13 +55,13 @@ public class ProtectServe extends SplitCard {
         // Target creature gets +2/+4 until end of turn.
         getLeftHalfCard().getColor().setWhite(true);
         getLeftHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(2,4, Duration.EndOfTurn));
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Serve
         // Target creature gets -6/-0 until end of turn.
         getRightHalfCard().getColor().setBlue(true);
         getRightHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(-6,0, Duration.EndOfTurn));
-        getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
     }
 

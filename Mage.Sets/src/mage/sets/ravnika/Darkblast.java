@@ -50,7 +50,7 @@ public class Darkblast extends CardImpl {
 
         // Target creature gets -1/-1 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-1, -1, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Dredge 3
         this.addAbility(new DredgeAbility(3));
     }

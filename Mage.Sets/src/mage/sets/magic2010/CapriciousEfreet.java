@@ -70,7 +70,7 @@ public class CapriciousEfreet extends CardImpl {
 
         // At the beginning of your upkeep, choose target nonland permanent you control and up to two target nonland permanents you don't control. Destroy one of them at random.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new CapriciousEfreetEffect(), TargetController.YOU, false);
-        ability.addTarget(new TargetPermanent(filterControlled, true));
+        ability.addTarget(new TargetPermanent(filterControlled));
         ability.addTarget(new TargetPermanent(0, 2, filterNotControlled, false));
         this.addAbility(ability);
     }

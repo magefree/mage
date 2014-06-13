@@ -56,7 +56,7 @@ public class Borrowing100000Arrows extends CardImpl {
 
         // Draw a card for each tapped creature target opponent controls.
         this.getSpellAbility().addEffect(new Borrowing100000ArrowsEffect());
-        this.getSpellAbility().addTarget(new TargetOpponent(true));
+        this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
     public Borrowing100000Arrows(final Borrowing100000Arrows card) {

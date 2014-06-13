@@ -71,7 +71,7 @@ public class BlindingBeam extends CardImpl {
         // or creatures don't untap during target player's next untap step.
         Mode mode = new Mode();
         mode.getEffects().add(new BlindingBeamEffect());
-        mode.getTargets().add(new TargetPlayer(true));
+        mode.getTargets().add(new TargetPlayer());
         this.getSpellAbility().getModes().addMode(mode);
 
         // Entwine {1}

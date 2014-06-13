@@ -49,7 +49,7 @@ public class BoltOfKeranos extends CardImpl {
 
         // Bolt of Keranos deals 3 damage to target creature and/or player. Scry 1.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 

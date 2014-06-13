@@ -56,7 +56,7 @@ public class WandOfDenial extends CardImpl {
 
         // {tap}: Look at the top card of target player's library. If it's a nonland card, you may pay 2 life. If you do, put it into that player's graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WandOfDenialEffect(), new TapSourceCost());
-        ability.addTarget(new TargetPlayer(true));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

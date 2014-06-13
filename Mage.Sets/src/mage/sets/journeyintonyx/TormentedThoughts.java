@@ -60,7 +60,7 @@ public class TormentedThoughts extends CardImpl {
 
         // Target player discards a number of cards equal to the sacrificed creature's power.
         this.getSpellAbility().addEffect(new TormentedThoughtsDiscardEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer(true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public TormentedThoughts(final TormentedThoughts card) {
