@@ -58,7 +58,6 @@ public class Gainsay extends CardImpl {
         // Counter target blue spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         Target target = new TargetSpell(filter);
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
     }
 

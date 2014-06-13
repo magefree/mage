@@ -77,7 +77,6 @@ public class ShellOfTheLastKappa extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShellOfTheLastKappaEffect(), new ManaCostsImpl("{3}"));
         ability.addCost(new TapSourceCost());
         Target target = new TargetSpell(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
         // {3}, {tap}, Sacrifice Shell of the Last Kappa: You may cast a card exiled with Shell of the Last Kappa without paying its mana cost.

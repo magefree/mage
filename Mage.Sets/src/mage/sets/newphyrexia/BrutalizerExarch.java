@@ -111,7 +111,6 @@ class BrutalizerExarchEffect1 extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(new FilterCreatureCard("creature card in your library"));
-            target.setRequired(true);
             if (player.searchLibrary(target, game)) {
                 Card card = player.getLibrary().remove(target.getFirstTarget(), game);
                 if (card != null) {

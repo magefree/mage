@@ -56,7 +56,6 @@ public class PollutedDead extends CardImpl {
         // When Polluted Dead dies, destroy target land.
         Ability ability = new DiesTriggeredAbility(new DestroyTargetEffect());
         Target target = new TargetLandPermanent();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

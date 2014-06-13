@@ -105,7 +105,6 @@ class BitterheartWitchEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         if (player != null && targetPlayer != null) {
             TargetCardInLibrary targetCard = new TargetCardInLibrary(filter);
-            targetCard.setRequired(true);
             if (player.searchLibrary(targetCard, game)) {
                 Card card = game.getCard(targetCard.getFirstTarget());
                 if (card != null) {

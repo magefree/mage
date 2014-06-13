@@ -106,7 +106,6 @@ class HarmonicConvergenceEffect extends OneShotEffect {
         }
 
         TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on top of your library"));
-        target.setRequired(true);
         for (UUID playerId : moveList.keySet()) {
             Player player = game.getPlayer(playerId);
             List<Permanent> list = moveList.get(playerId);

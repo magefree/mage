@@ -60,7 +60,6 @@ public class GrixisIllusionist extends CardImpl {
         // {tap}: Target land you control becomes the basic land type of your choice until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.EndOfTurn), new TapSourceCost());
         Target target = new TargetLandPermanent();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
         

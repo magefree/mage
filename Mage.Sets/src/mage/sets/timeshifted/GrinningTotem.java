@@ -113,7 +113,6 @@ class GrinningTotemSearchAndExileEffect extends OneShotEffect {
         if (you != null && targetOpponent != null) {
             if (targetOpponent.getLibrary().size() > 0) {
                 TargetCardInLibrary targetCard = new TargetCardInLibrary();
-                targetCard.setRequired(true);
                 if (you.searchLibrary(targetCard, game, targetOpponent.getId())) {
                     Card card = targetOpponent.getLibrary().remove(targetCard.getFirstTarget(), game);
                     if (card != null) {

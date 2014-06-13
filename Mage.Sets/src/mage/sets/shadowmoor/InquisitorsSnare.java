@@ -60,7 +60,6 @@ public class InquisitorsSnare extends CardImpl {
         // Prevent all damage target attacking or blocking creature would deal this turn. If that creature is black or red, destroy it.
         this.getSpellAbility().addEffect(new InquisitorsSnareEffect());
         Target target = new TargetAttackingOrBlockingCreature();
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
 
     }

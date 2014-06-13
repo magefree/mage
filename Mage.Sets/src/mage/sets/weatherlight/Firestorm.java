@@ -70,7 +70,6 @@ public class Firestorm extends CardImpl {
         int xValue = new GetXValue().calculate(game, ability);
         if (xValue > 0) {
             Target target = new TargetCreatureOrPlayer(xValue);
-            target.setRequired(true);
             ability.addTarget(target);
         }
     }

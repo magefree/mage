@@ -107,7 +107,6 @@ class ShimatsuTheBloodcloakedEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (creature != null && controller != null) {
             Target target = new TargetControlledPermanent(0, Integer.MAX_VALUE, new FilterPermanent(), true);
-            target.setRequired(false);
             if (!target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
                 return false;
             }

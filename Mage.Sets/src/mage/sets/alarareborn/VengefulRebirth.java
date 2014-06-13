@@ -58,7 +58,6 @@ public class VengefulRebirth extends CardImpl {
         this.color.setGreen(true);
         // Return target card from your graveyard to your hand. If you return a nonland card to your hand this way, {this} deals damage equal to that card's converted mana cost to target creature or player
         Target target = new TargetCardInYourGraveyard();
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new VengefulRebirthEffect());

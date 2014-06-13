@@ -100,7 +100,6 @@ class LobotomyEffect extends OneShotEffect {
             targetPlayer.revealCards("Lobotomy", targetPlayer.getHand(), game);
             if (you != null) {
                 TargetCard target = new TargetCard(Zone.PICK, filter);
-                target.setRequired(true);
                 target.setNotTarget(true);
                 if (you.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
                     Card chosenCard = targetPlayer.getHand().get(target.getFirstTarget(), game);

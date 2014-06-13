@@ -116,7 +116,6 @@ class LordOfTheVoidEffect extends OneShotEffect {
         }
         if(cards.getCards(new FilterCreatureCard(), game).size() > 0){
             TargetCard target = new TargetCard(Zone.EXILED, new FilterCreatureCard());
-            target.setRequired(true);
             if(controller.chooseTarget(Outcome.PutCreatureInPlay, cards, target, source, game)){
                 Card card = cards.get(target.getFirstTarget(), game);
                 if(card != null){

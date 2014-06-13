@@ -55,7 +55,6 @@ public class MysticCompass extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
         Target target = new TargetLandPermanent();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

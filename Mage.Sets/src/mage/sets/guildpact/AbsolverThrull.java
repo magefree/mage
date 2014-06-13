@@ -59,7 +59,6 @@ public class AbsolverThrull extends CardImpl {
         // When Absolver Thrull enters the battlefield or the creature it haunts dies, destroy target enchantment.
         Ability ability = new HauntAbility(this, new DestroyTargetEffect());
         Target target = new TargetPermanent(new FilterEnchantmentPermanent());
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

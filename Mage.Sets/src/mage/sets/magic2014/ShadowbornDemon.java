@@ -78,7 +78,6 @@ public class ShadowbornDemon extends CardImpl {
         // When Shadowborn Demon enters the battlefield, destroy target non-Demon creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(),false);
         Target target = new TargetCreaturePermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
         // At the beginning of your upkeep, if there are fewer than six creature cards in your graveyard, sacrifice a creature.

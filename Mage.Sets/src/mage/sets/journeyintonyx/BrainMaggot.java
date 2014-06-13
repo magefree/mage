@@ -110,7 +110,6 @@ class BrainMaggotExileEffect extends OneShotEffect {
             opponent.revealCards(sourcePermanent.getName(), opponent.getHand(), game);
 
             TargetCard target = new TargetCard(Zone.HAND, new FilterNonlandCard("nonland card to exile"));
-            target.setRequired(true);
             if (controller.choose(Outcome.Exile, opponent.getHand(), target, game)) {
                 Card card = opponent.getHand().get(target.getFirstTarget(), game);
                 // If source permanent leaves the battlefield before its triggered ability resolves, the target card won't be exiled.

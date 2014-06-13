@@ -56,7 +56,6 @@ public class MartialGlory extends CardImpl {
         Effect effect = new BoostTargetEffect(3,0, Duration.EndOfTurn);
         effect.setText("Target creature gets +3/+0 until end of turn");
         Target target = new TargetCreaturePermanent(new FilterCreaturePermanent("first creature"));
-        target.setRequired(true);
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(target);
         
@@ -65,7 +64,6 @@ public class MartialGlory extends CardImpl {
         effect2.setText("<br></br>Target creature gets +0/+3 until end of turn");
         effect2.setTargetPointer(SecondTargetPointer.getInstance());
         target = new TargetCreaturePermanent(new FilterCreaturePermanent("second creature (can be the same as the first)"));
-        target.setRequired(true);
         this.getSpellAbility().addEffect(effect2);
         this.getSpellAbility().addTarget(target);
 

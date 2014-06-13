@@ -126,7 +126,6 @@ class DimirCharmEffect extends OneShotEffect {
             }
             if(cards.size() > 0){
                 TargetCard target = new TargetCard(Zone.PICK, new FilterCard("Card to put back on top of library"));
-                target.setRequired(true);
                 if(controller.chooseTarget(Outcome.Benefit, cards, target, source, game)){
                     Card card = cards.get(target.getFirstTarget(), game);
                     if(card != null){

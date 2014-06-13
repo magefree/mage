@@ -73,12 +73,10 @@ public class HeliodsEmissary extends CardImpl {
         // Whenever Heliod's Emissary or enchanted creature attacks, tap target creature an opponent controls.
         Ability ability = new AttacksTriggeredAbility(new TapTargetEffect(), false);
         Target target = new TargetCreaturePermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
         ability = new AttacksAttachedTriggeredAbility(new TapTargetEffect(), AttachmentType.AURA, false);
         target = new TargetCreaturePermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
         // Enchanted creature gets +3/+3.

@@ -70,7 +70,6 @@ public class LordOfTresserhorn extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new LoseLifeSourceControllerEffect(2), false);
         ability.addEffect(new SacrificeTargetEffect(", you sacrifice two creatures"));
         Target target = new TargetControlledCreaturePermanent(2,2, new FilterControlledCreaturePermanent(), true);
-        target.setRequired(true);
         ability.addTarget(target);
         Effect effect = new DrawCardTargetEffect(2);
         effect.setText(", and target opponent draws two cards");

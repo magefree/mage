@@ -76,7 +76,6 @@ public class PrimalCommand extends CardImpl {
         Mode mode = new Mode();
         mode.getEffects().add(new PutOnLibraryTargetEffect(true));
         Target target = new TargetPermanent(filterNonCreature);
-        target.setRequired(true);
         mode.getTargets().add(target);
         this.getSpellAbility().getModes().addMode(mode);
         // or target player shuffles his or her graveyard into his or her library;

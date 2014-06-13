@@ -72,7 +72,6 @@ public class StrongholdAssassin extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, new FilterControlledCreaturePermanent("a creature"), true)));
         Target target = new TargetCreaturePermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

@@ -55,7 +55,6 @@ public class RottingGiant extends CardImpl {
 
         // Whenever Rotting Giant attacks or blocks, sacrifice it unless you exile a card from your graveyard.
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard();
-        target.setRequired(true);
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ExileFromGraveCost(target)), false));
     }
 

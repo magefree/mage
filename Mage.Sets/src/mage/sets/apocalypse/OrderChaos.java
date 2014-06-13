@@ -59,7 +59,6 @@ public class OrderChaos extends SplitCard {
         getLeftHalfCard().getColor().setWhite(true);
         getLeftHalfCard().getSpellAbility().addEffect(new ExileTargetEffect());
         Target target = new TargetAttackingCreature();
-        target.setRequired(true);
         getLeftHalfCard().getSpellAbility().addTarget(target);
 
         // Chaos

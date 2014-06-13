@@ -58,7 +58,6 @@ public class TriumphOfCruelty extends CardImpl {
         // At the beginning of your upkeep, target opponent discards a card if you control the creature with the greatest power or tied for the greatest power.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new DiscardTargetEffect(1), TargetController.YOU, false);
         Target target =  new TargetOpponent();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(new ConditionalTriggeredAbility(ability, ControlsBiggestOrTiedCreatureCondition.getInstance(), ruleText));
     }

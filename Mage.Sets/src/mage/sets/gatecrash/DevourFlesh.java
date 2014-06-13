@@ -105,7 +105,6 @@ class DevourFleshSacrificeEffect extends OneShotEffect {
         int realCount = game.getBattlefield().countAll(filter, player.getId(), game);
         if (realCount > 0) {
             Target target = new TargetControlledPermanent(1, 1, filter, true);
-            target.setRequired(true);
             while (player.isInGame() && !target.isChosen() && target.canChoose(player.getId(), game)) {
                 player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
             }

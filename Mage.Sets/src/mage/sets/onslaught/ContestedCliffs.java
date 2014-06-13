@@ -72,10 +72,8 @@ public class ContestedCliffs extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{R}{G}"));
         ability.addCost(new TapSourceCost());
         Target target1 = new TargetCreaturePermanent(filter1);
-        target1.setRequired(true);
         ability.addTarget(target1);
         Target target2 = new TargetCreaturePermanent(filter2);
-        target2.setRequired(true);
         ability.addTarget(target2);
         this.addAbility(ability);
         

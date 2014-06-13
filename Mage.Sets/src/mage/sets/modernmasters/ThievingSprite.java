@@ -71,7 +71,6 @@ public class ThievingSprite extends CardImpl {
         // When Thieving Sprite enters the battlefield, target player reveals X cards from his or her hand, where X is the number of Faeries you control. You choose one of those cards. That player discards that card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ThievingSpriteEffect(), false);
         TargetPlayer target = new TargetPlayer();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
 
@@ -121,7 +120,6 @@ class ThievingSpriteEffect extends OneShotEffect {
             cardsInHand.addAll(targetPlayer.getHand());
 
             TargetCard target = new TargetCard(numberOfFaeries, Zone.PICK, new FilterCard());
-            target.setRequired(true);
 
             if (targetPlayer.choose(Outcome.Discard, cardsInHand, target, game)) {
                 List<UUID> targets = target.getTargets();
@@ -137,7 +135,6 @@ class ThievingSpriteEffect extends OneShotEffect {
         }
         
         TargetCard targetInHand = new TargetCard(Zone.PICK, new FilterCard("card to discard"));
-        targetInHand.setRequired(true);
 
         if (!revealedCards.isEmpty()) {
             targetPlayer.revealCards("Thieving Sprite", revealedCards, game);

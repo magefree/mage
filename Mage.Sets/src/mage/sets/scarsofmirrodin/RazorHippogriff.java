@@ -67,7 +67,6 @@ public class RazorHippogriff extends CardImpl {
 
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
         TargetCard target = new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard"));
-        target.setRequired(true);
         ability.addTarget(target);
         ability.addEffect(new RazorHippogriffGainLifeEffect());
 

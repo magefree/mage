@@ -58,7 +58,6 @@ public class RetractionHelix extends CardImpl {
         // Until end of turn, target creature gains "{T}: Return target nonland permanent to its owner's hand."
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new TapSourceCost());
         Target target = new TargetNonlandPermanent();
-        target.setRequired(true);
         gainedAbility.addTarget(target);
         Effect effect = new GainAbilityTargetEffect(gainedAbility, Duration.EndOfTurn);
         effect.setText("Until end of turn, target creature gains \"{T}: Return target nonland permanent to its owner's hand.\"");

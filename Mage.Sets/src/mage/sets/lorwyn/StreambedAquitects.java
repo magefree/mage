@@ -72,14 +72,12 @@ public class StreambedAquitects extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1,1, Duration.EndOfTurn), new TapSourceCost());
         ability.addEffect(new GainAbilityTargetEffect(new IslandwalkAbility(), Duration.EndOfTurn));
         Target target = new TargetCreaturePermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
 
         // {tap}: Target land becomes an Island until end of turn.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.EndOfTurn, "Island"), new TapSourceCost());
         target = new TargetLandPermanent();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

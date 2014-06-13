@@ -132,7 +132,6 @@ class TellingTimeEffect extends OneShotEffect {
         }
 
         TargetCard target = new TargetCard(Zone.PICK, new FilterCard(message));
-        target.setRequired(true);
         if (player.choose(Outcome.Benefit, cards, target, game)) {
             Card card = cards.get(target.getFirstTarget(), game);
             if (card != null) {

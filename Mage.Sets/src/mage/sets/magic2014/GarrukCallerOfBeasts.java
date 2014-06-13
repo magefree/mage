@@ -146,7 +146,6 @@ class GarrukCallerOfBeastsPutOntoBattlefieldEffect extends OneShotEffect {
                 if (controller.chooseUse(Outcome.PutCreatureInPlay,
                         "Put a green creature card onto the battlefield?", game)) {
                     Target target = new TargetCardInHand(filterGreenCreature);
-                    target.setRequired(true);
                     if (controller.chooseTarget(outcome, target, source, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null) {

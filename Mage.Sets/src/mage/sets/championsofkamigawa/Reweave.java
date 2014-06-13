@@ -63,7 +63,6 @@ public class Reweave extends CardImpl {
         // Target permanent's controller sacrifices it. If he or she does, that player reveals cards from the top of his or her library until he or she reveals a permanent card that shares a card type with the sacrificed permanent, puts that card onto the battlefield, then shuffles his or her library.
         this.getSpellAbility().addEffect(new ReweaveEffect());
         Target target = new TargetPermanent();
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
 
         // Splice onto Arcane {2}{U}{U}

@@ -94,7 +94,6 @@ public class BowOfNylea extends CardImpl {
         Mode mode = new Mode();
         mode.getEffects().add(new DamageTargetEffect(2));
         Target target = new TargetCreaturePermanent(filterFlying);
-        target.setRequired(true);
         mode.getTargets().add(target);
         ability.addMode(mode);
         // or you gain 3 life;
@@ -152,7 +151,6 @@ class PutCardsFromGraveyardToLibraryEffect extends OneShotEffect {
             }
             if (!cards.isEmpty()) {
                 TargetCard target = new TargetCard(Zone.PICK, new FilterCard("on bottom of your library (last chosen will be on bottom)"));
-                target.setRequired(true);
                 while (player.isInGame() && cards.size() > 1) {
                     player.choose(Outcome.Neutral, cards, target, game);
                     Card card = cards.get(target.getFirstTarget(), game);

@@ -88,7 +88,6 @@ class MonomaniaEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {
             TargetCard target = new TargetCard(Zone.PICK, filter);
-            target.setRequired(true);
             if (player.choose(Outcome.Detriment, player.getHand(), target, game)) {
                 while (player.getHand().size() > 1) {
                     for (UUID uuid : player.getHand()) {

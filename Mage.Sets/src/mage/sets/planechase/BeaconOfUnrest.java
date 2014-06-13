@@ -62,7 +62,6 @@ public class BeaconOfUnrest extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
         Target target = new TargetCardInGraveyard(filter);
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
     }
 

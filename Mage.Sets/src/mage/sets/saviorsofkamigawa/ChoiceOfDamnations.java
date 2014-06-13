@@ -102,7 +102,6 @@ class ChoiceOfDamnationsEffect extends OneShotEffect {
                     if (numberPermanents > amount) {
                         int numberToSacrifice = numberPermanents - amount;
                         Target target = new TargetControlledPermanent(numberToSacrifice, numberToSacrifice, new FilterPermanent(), false);
-                        target.setRequired(true);
                         targetPlayer.chooseTarget(Outcome.Sacrifice, target, source, game);
                         for (UUID uuid : target.getTargets()) {
                             Permanent permanent = game.getPermanent(uuid);

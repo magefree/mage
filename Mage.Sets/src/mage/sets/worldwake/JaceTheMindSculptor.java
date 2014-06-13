@@ -163,7 +163,6 @@ class JaceTheMindSculptorEffect2 extends OneShotEffect {
 
     private boolean putOnLibrary(Player player, Ability source, Game game) {
         TargetCardInHand target = new TargetCardInHand();
-        target.setRequired(true);
         player.chooseTarget(Outcome.ReturnToHand, target, source, game);
         Card card = player.getHand().get(target.getFirstTarget(), game);
         if (card != null) {

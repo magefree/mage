@@ -66,7 +66,6 @@ public class TenebTheHarvester extends CardImpl {
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
                 new DoIfCostPaid(new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{2}{B}")), false);
         Target target = new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard"));
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

@@ -71,7 +71,6 @@ public class SacrificeXTargetCost extends VariableCostImpl  {
     @Override
     public Cost getFixedCostsFromAnnouncedValue(int xValue) {
         TargetControlledPermanent target = new TargetControlledPermanent(xValue, xValue, filter, true);
-        target.setRequired(true);
         return new SacrificeTargetCost(target);
     }
 

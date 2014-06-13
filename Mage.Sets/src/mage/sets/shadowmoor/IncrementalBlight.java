@@ -55,7 +55,6 @@ public class IncrementalBlight extends CardImpl {
         // Put a -1/-1 counter on target creature, two -1/-1 counters on another target creature, and three -1/-1 counters on a third target creature.
         this.getSpellAbility().addEffect(new IncrementalBlightEffect());
         Target target = new TargetCreaturePermanent(3,3);
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);                       
     }
 

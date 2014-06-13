@@ -62,7 +62,6 @@ public class PriestOfIroas extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{3}{W}"));
         ability.addCost(new SacrificeSourceCost());
         Target target = new TargetPermanent(new FilterEnchantmentPermanent());
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
 

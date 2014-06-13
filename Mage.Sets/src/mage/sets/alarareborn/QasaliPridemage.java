@@ -77,7 +77,6 @@ public class QasaliPridemage extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}"));
         ability.addCost(new SacrificeSourceCost());
         Target target = new TargetPermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

@@ -53,7 +53,6 @@ public class BashToBits extends CardImpl {
         // Destroy target artifact.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         Target target = new TargetArtifactPermanent();
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
         // Flashback {4}{R}{R}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{R}{R}"), TimingRule.INSTANT));

@@ -79,7 +79,6 @@ public class PuppeteerClique extends CardImpl {
         // When Puppeteer Clique enters the battlefield, put target creature card from an opponent's graveyard onto the battlefield under your control. It gains haste. At the beginning of your next end step, exile it.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PuppeteerCliqueEffect(), false);
         Target target = new TargetCardInOpponentsGraveyard(new FilterCreatureCard("creature card from your opponent's graveyard"));
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
 

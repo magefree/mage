@@ -79,7 +79,6 @@ public class EightAndAHalfTails extends CardImpl {
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new SetCardColorTargetEffect(ObjectColor.WHITE, Duration.EndOfTurn, "Target spell or permanent becomes white until end of turn"), new ManaCostsImpl("{1}"));
         target = new TargetSpellOrPermanent();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

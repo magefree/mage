@@ -79,7 +79,6 @@ public class NewPrahvGuildmage extends CardImpl {
         // (Until your next turn, that permanent can't attack or block and its activated abilities can't be activated.)
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DetainTargetEffect(), new ManaCostsImpl("{3}{W}{U}"));
         TargetNonlandPermanent target = new TargetNonlandPermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

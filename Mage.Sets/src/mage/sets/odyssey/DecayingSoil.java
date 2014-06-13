@@ -80,7 +80,6 @@ public class DecayingSoil extends CardImpl {
         // At the beginning of your upkeep, exile a card from your graveyard.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), TargetController.YOU, false);
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
         

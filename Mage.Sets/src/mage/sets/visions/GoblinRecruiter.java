@@ -121,7 +121,6 @@ class GoblinRecruiterEffect extends OneShotEffect {
             if (numberOfGoblins > 0) {
                 if (cards.size() > 1) {
                     TargetCard targetCard = new TargetCard(Zone.LIBRARY, putOnTopOfLibraryFilter);
-                    targetCard.setRequired(true);
                     while (player.isInGame() && cards.size() > 1) {
                         player.choose(Outcome.Benefit, cards, targetCard, game);
                         Card card = cards.get(targetCard.getFirstTarget(), game);

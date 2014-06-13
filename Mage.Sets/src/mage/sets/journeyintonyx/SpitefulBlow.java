@@ -58,7 +58,6 @@ public class SpitefulBlow extends CardImpl {
         effect.setTargetPointer(new SecondTargetPointer());
         this.getSpellAbility().addEffect(effect);
         Target target = new TargetLandPermanent();
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
     }
 

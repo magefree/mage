@@ -118,7 +118,6 @@ class TargetOpponentsChoiceControlledCreaturePermanent extends TargetPermanent {
 
     public TargetOpponentsChoiceControlledCreaturePermanent() {
         super(1, 1, new FilterControlledCreaturePermanent(), false);
-        this.setRequired(true);
         this.targetName = filter.getMessage();
     }
 

@@ -60,7 +60,6 @@ public class GracefulAntelope extends CardImpl {
         // Whenever Graceful Antelope deals combat damage to a player, you may have target land become a Plains until Graceful Antelope leaves the battlefield.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new BecomesBasicLandTargetEffect(Duration.WhileOnBattlefield,"Plains"), true);
         Target target = new TargetLandPermanent();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

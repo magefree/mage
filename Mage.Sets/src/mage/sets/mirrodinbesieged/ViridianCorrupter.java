@@ -66,7 +66,6 @@ public class ViridianCorrupter extends CardImpl {
 
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
         Target target = new TargetPermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

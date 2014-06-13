@@ -65,7 +65,6 @@ public class ArenaAthlete extends CardImpl {
         // <i>Heroic</i>  Whenever you cast a spell that targets Arena Athlete, target creature an opponent controls can't block this turn.
         Ability ability = new HeroicAbility(new CantBlockTargetEffect(Duration.EndOfTurn));
         TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

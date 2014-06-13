@@ -118,7 +118,6 @@ class PsychicIntrusionExileEffect extends OneShotEffect {
                 Card card = null;
                 if (cardsHand > 0 && fromHand) {
                     TargetCard target = new TargetCard(Zone.PICK, filter);
-                    target.setRequired(true);
                     if (you.choose(Outcome.Benefit, opponent.getHand(), target, game)) {
                         card = opponent.getHand().get(target.getFirstTarget(), game);
 
@@ -126,7 +125,6 @@ class PsychicIntrusionExileEffect extends OneShotEffect {
                 }
                 if (cardsGraveyard > 0 && !fromHand) {
                     TargetCard target = new TargetCard(Zone.PICK, filter);
-                    target.setRequired(true);
                     if (you.choose(Outcome.Benefit, opponent.getGraveyard(), target, game)) {
                         card = opponent.getGraveyard().get(target.getFirstTarget(), game);
 

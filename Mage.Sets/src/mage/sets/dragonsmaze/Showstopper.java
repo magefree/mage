@@ -67,7 +67,6 @@ public class Showstopper extends CardImpl {
         // Until end of turn, creatures you control gain "When this creature dies, it deals 2 damage to target creature an opponent controls."
         TriggeredAbility ability = new DiesTriggeredAbility(new DamageTargetEffect(2), false);
         Target target = new TargetCreaturePermanent(filter2);
-        target.setRequired(true);
         ability.addTarget(target);
         Effect effect = new GainAbilityControlledEffect(ability, Duration.EndOfTurn, filter);
         effect.setText("Until end of turn, creatures you control gain \"When this creature dies, it deals 2 damage to target creature an opponent controls.\" ");

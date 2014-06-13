@@ -60,7 +60,6 @@ public class HollowhengeSpirit extends CardImpl {
         // When Hollowhenge Spirit enters the battlefield, remove target attacking or blocking creature from combat.
         Ability ability = new EntersBattlefieldTriggeredAbility(new RemoveFromCombatTargetEffect());
         Target target = new TargetAttackingOrBlockingCreature();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
 

@@ -87,7 +87,6 @@ public class GethLordOfTheVault extends CardImpl {
                 new CardTypePredicate(CardType.CREATURE)));
             filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, xValue));
             Target target = new TargetCardInOpponentsGraveyard(filter);
-            target.setRequired(true);
             ability.addTarget(target);
         }
     }

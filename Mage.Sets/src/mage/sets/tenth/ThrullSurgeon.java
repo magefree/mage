@@ -98,7 +98,6 @@ class ThrullSurgeonEffect extends OneShotEffect {
         if (targetPlayer != null && you != null) {
             you.lookAtCards("Discard", targetPlayer.getHand(), game);
             TargetCard target = new TargetCard(Zone.PICK, new FilterCard());
-            target.setRequired(true);
             target.setNotTarget(true);
             if (you.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
                 Card card = targetPlayer.getHand().get(target.getFirstTarget(), game);

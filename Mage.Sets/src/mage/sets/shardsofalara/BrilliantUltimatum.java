@@ -142,7 +142,6 @@ class BrilliantUltimatumEffect extends OneShotEffect {
                 game.informPlayer(you, you.getName() + " chose Pile 1.");
                 while (!pileOne.isEmpty() && you.chooseUse(Outcome.PlayForFree, "Do you want to play a card from Pile 1?", game)) {
                     TargetCard targetExiledCard = new TargetCard(Zone.EXILED, new FilterCard());
-                    targetExiledCard.setRequired(true);
                     if (you.chooseTarget(Outcome.PlayForFree, pile1, targetExiledCard, source, game)) {
                         Card card = pile1.get(targetExiledCard.getFirstTarget(), game);
                         if (card != null) {
@@ -162,7 +161,6 @@ class BrilliantUltimatumEffect extends OneShotEffect {
                 game.informPlayer(you, you.getName() + " chose Pile 2.");
                 while (!pileTwo.isEmpty() && you.chooseUse(Outcome.PlayForFree, "Do you want to play a card from Pile 2?", game)) {
                     TargetCard targetExiledCard = new TargetCard(Zone.EXILED, new FilterCard());
-                    targetExiledCard.setRequired(true);
                     if (you.chooseTarget(Outcome.PlayForFree, pile2, targetExiledCard, source, game)) {
                         Card card = pile2.get(targetExiledCard.getFirstTarget(), game);
                         if (card != null) {

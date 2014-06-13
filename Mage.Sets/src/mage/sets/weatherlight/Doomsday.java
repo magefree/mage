@@ -116,7 +116,6 @@ class DoomsdayEffect extends OneShotEffect {
                 }
                 //Put the chosen cards on top of your library in any order
                 target = new TargetCard(Zone.PICK, new FilterCard("Card to put on top"));
-                target.setRequired(true);
                 while (cards.size() > 1 && player.isInGame()) {
                     player.choose(Outcome.Neutral, cards, target, game);
                     Card card = cards.get(target.getFirstTarget(), game);

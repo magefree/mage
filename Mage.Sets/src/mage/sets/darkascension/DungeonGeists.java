@@ -77,7 +77,6 @@ public class DungeonGeists extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect(), false);
         ability.addEffect(new DungeonGeistsEffect());
         Target target = new TargetCreaturePermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
         // watcher needed to send normal events to Dungeon Geists ReplacementEffect

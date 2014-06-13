@@ -111,10 +111,6 @@ class CataclysmEffect extends OneShotEffect {
             Target target3 = new TargetControlledPermanent(1, 1, filter3, false);
             Target target4 = new TargetControlledPermanent(1, 1, filter4, false);
 
-            target1.setRequired(true);
-            target2.setRequired(true);
-            target3.setRequired(true);
-            target4.setRequired(true);
 
             target1.setNotTarget(true);
             target2.setNotTarget(true);

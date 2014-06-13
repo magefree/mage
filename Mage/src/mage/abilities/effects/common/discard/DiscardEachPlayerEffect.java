@@ -90,7 +90,6 @@ public class DiscardEachPlayerEffect extends OneShotEffect {
                         }
                     } else {
                         Target target = new TargetDiscard(numberOfCardsToDiscard, numberOfCardsToDiscard, new FilterCard(), playerId);
-                        target.setRequired(true);
                         player.chooseTarget(outcome, target, source, game);
                         cards.addAll(target.getTargets());
                     }

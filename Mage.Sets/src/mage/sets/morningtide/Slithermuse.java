@@ -103,7 +103,6 @@ class SlithermuseEffect extends OneShotEffect {
         Permanent permanent = (Permanent)game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         if (player != null && permanent != null) {
             TargetOpponent target = new TargetOpponent();
-            target.setRequired(true);
             target.setNotTarget(true);
             if (player.choose(this.outcome, target, source.getSourceId(), game)) {
                 Player chosenPlayer = game.getPlayer(target.getFirstTarget());

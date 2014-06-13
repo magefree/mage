@@ -76,7 +76,6 @@ public class ShipwreckSinger extends CardImpl {
         // {1}{U}: Target creature an opponent controls attacks this turn if able.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttacksIfAbleTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}"));
         Target target = new TargetCreaturePermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
         // {1}{B}, {T}: Attacking creatures get -1/-1 until end of turn.

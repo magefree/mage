@@ -75,7 +75,6 @@ public class DeadwoodTreefolk extends CardImpl {
         // When Deadwood Treefolk enters the battlefield or leaves the battlefield, return another target creature card from your graveyard to your hand.
         ability = new EntersBattlefieldOrDiesSourceTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), false);
         Target target = new TargetCardInYourGraveyard(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

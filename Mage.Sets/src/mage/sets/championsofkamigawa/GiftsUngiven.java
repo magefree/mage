@@ -121,7 +121,6 @@ class GiftsUngivenEffect extends OneShotEffect {
                         opponent = game.getPlayer(game.getOpponents(player.getId()).iterator().next());
                     }
                     TargetCard targetDiscard = new TargetCard(2, Zone.PICK, new FilterCard("cards to put in graveyard"));
-                    targetDiscard.setRequired(true);
                     if (opponent != null && opponent.choose(Outcome.Discard, cards, targetDiscard, game)) {
                         cardsToKeep.removeAll(targetDiscard.getTargets());
                         cards.removeAll(cardsToKeep);

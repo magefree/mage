@@ -95,7 +95,6 @@ class AmassTheComponentsEffect extends OneShotEffect {
         if (player.getHand().size() > 0) {
             FilterCard filter = new FilterCard("card from your hand to put on the bottom of your library");
             TargetCard target = new TargetCard(Zone.HAND, filter);
-            target.setRequired(true);
 
             if (player.choose(Outcome.Detriment, player.getHand(), target, game)) {
                 Card card = player.getHand().get(target.getFirstTarget(), game);

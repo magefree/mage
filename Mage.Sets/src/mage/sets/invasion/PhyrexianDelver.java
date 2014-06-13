@@ -62,7 +62,6 @@ public class PhyrexianDelver extends CardImpl {
         // When Phyrexian Delver enters the battlefield, return target creature card from your graveyard to the battlefield. You lose life equal to that card's converted mana cost.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PhyrexianDelverEffect(), false);
         Target target = new TargetCardInYourGraveyard(1, new FilterCreatureCard("creature card from your graveyard"));
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

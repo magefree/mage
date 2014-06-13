@@ -58,7 +58,6 @@ public class MarkovWarlord extends CardImpl {
         // When Markov Warlord enters the battlefield, up to two target creatures can't block this turn.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn));
         TargetCreaturePermanent target = new TargetCreaturePermanent(0, 2);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
 

@@ -64,7 +64,6 @@ public class Deglamer extends CardImpl {
         // Choose target artifact or enchantment. Its owner shuffles it into his or her library.
         this.getSpellAbility().addEffect(new DeglamerShuffleIntoLibraryEffect());
         Target target = new TargetPermanent(1,1,filter,true);
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
     }
 

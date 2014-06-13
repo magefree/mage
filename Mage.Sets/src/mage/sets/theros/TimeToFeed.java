@@ -85,7 +85,6 @@ public class TimeToFeed extends CardImpl {
         this.getSpellAbility().addEffect(effect);
 
         Target target = new TargetCreaturePermanent(filter1);
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         

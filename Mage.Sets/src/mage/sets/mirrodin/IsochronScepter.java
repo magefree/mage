@@ -102,7 +102,6 @@ class IsochronScepterImprintEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player.getHand().size() > 0) {
             TargetCard target = new TargetCard(Zone.HAND, filter);
-            target.setRequired(true);
             if (target.canChoose(source.getSourceId(), source.getControllerId(), game) 
                     && player.choose(Outcome.Benefit, player.getHand(), target, game)) {
                 Card card = player.getHand().get(target.getFirstTarget(), game);

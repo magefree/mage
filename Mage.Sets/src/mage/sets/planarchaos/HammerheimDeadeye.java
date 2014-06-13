@@ -68,7 +68,6 @@ public class HammerheimDeadeye extends CardImpl {
         // When Hammerheim Deadeye enters the battlefield, destroy target creature with flying.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
         Target target = new TargetCreaturePermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

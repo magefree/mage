@@ -104,7 +104,6 @@ class EldraziMonumentEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         TargetControlledPermanent target = new TargetControlledCreaturePermanent();
-        target.setRequired(true);
         Player player = game.getPlayer(source.getControllerId());
         if (target.canChoose(source.getControllerId(), game)) {
             player.choose(this.outcome, target, source.getSourceId(), game);

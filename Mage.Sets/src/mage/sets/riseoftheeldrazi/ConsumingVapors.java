@@ -97,7 +97,6 @@ class ConsumingVaporsEffect extends OneShotEffect {
         filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(new ControllerPredicate(TargetController.YOU));
         TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
-        target.setRequired(true);
 
         //A spell or ability could have removed the only legal target this player
         //had, if thats the case this ability should fizzle.

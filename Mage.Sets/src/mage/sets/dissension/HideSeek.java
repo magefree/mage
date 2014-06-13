@@ -119,7 +119,6 @@ class SeekEffect extends OneShotEffect {
         if (player != null && opponent != null) {
             if (opponent.getLibrary().size() > 0) {
                 TargetCardInLibrary target = new TargetCardInLibrary();
-                target.setRequired(true);
                 if (player.searchLibrary(target, game, opponent.getId())) {
                     UUID targetId = target.getFirstTarget();
                     Card card = opponent.getLibrary().remove(targetId, game);

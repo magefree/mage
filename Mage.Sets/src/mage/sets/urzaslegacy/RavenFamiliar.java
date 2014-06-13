@@ -125,7 +125,6 @@ public class RavenFamiliar extends CardImpl {
             }
 
             target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
-            target.setRequired(true);
             while (player.isInGame() && cards.size() > 1) {
                 player.choose(Outcome.Neutral, cards, target, game);
                 Card card = cards.get(target.getFirstTarget(), game);

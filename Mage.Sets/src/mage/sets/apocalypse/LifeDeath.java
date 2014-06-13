@@ -72,7 +72,6 @@ public class LifeDeath extends SplitCard {
         // Return target creature card from your graveyard to the battlefield. You lose life equal to its converted mana cost.
         getRightHalfCard().getColor().setBlack(true);
         Target target = new TargetCardInYourGraveyard(1, new FilterCreatureCard("creature card from your graveyard"));
-        target.setRequired(true);        
         getRightHalfCard().getSpellAbility().addTarget(target);
         getRightHalfCard().getSpellAbility().addEffect(new DeathEffect());
 

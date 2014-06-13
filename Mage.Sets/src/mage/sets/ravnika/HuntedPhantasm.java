@@ -60,7 +60,6 @@ public class HuntedPhantasm extends CardImpl {
         // When Hunted Phantasm enters the battlefield, put five 1/1 red Goblin creature tokens onto the battlefield under target opponent's control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenTargetEffect(new GoblinToken(), 5), false);
         Target target = new TargetOpponent();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

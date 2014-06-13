@@ -115,7 +115,6 @@ class SylvanLibraryEffect extends OneShotEffect {
                 int numberOfTargets = Math.min(2, cards.size());
                 if (numberOfTargets > 0) {
                     TargetCard target = new TargetCard(numberOfTargets, Zone.PICK, new FilterCard(new StringBuilder(numberOfTargets).append(" cards of cards drawn this turn").toString()));
-                    target.setRequired(true);
                     controller.chooseTarget(outcome, cards, target, source, game);
 
                     Cards cardsPutBack = new CardsImpl();
@@ -135,7 +134,6 @@ class SylvanLibraryEffect extends OneShotEffect {
                     int numberOfCardsToPutBack = cardsPutBack.size();
                     if (numberOfCardsToPutBack > 1) {
                         TargetCard target2 = new TargetCard(Zone.PICK, new FilterCard("card to put on the top of your library (last chosen will be on top)"));
-                        target2.setRequired(true);
                         while (controller.isInGame() && cardsPutBack.size() > 1) {
                             controller.choose(Outcome.Benefit, cardsPutBack, target2, game);
                             Card card = cardsPutBack.get(target2.getFirstTarget(), game);

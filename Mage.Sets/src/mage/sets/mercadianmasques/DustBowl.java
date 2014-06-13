@@ -63,7 +63,6 @@ public class DustBowl extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
         Target target = new TargetNonBasicLandPermanent();
-        target.setRequired(true);
         ability.addTarget(target);        
         this.addAbility(ability);
     }

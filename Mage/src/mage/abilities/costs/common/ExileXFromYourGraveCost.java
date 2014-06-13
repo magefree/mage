@@ -79,7 +79,6 @@ public class ExileXFromYourGraveCost extends VariableCostImpl  {
     @Override
     public Cost getFixedCostsFromAnnouncedValue(int xValue) {
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(xValue, filter);
-        target.setRequired(true);
         return new ExileFromGraveCost(target);
     }
 

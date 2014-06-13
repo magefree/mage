@@ -97,7 +97,6 @@ class SmokestackEffect extends OneShotEffect {
             if (count > 0) {
                 int amount = Math.min(count, game.getBattlefield().countAll(new FilterControlledPermanent(), activePlayer.getId(), game));
                 Target target = new TargetControlledPermanent(amount, amount, new FilterControlledPermanent(), false);
-                target.setRequired(true);
                 //A spell or ability could have removed the only legal target this player
                 //had, if thats the case this ability should fizzle.
                 if (target.canChoose(activePlayer.getId(), game)) {

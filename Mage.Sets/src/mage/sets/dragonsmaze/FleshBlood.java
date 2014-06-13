@@ -69,7 +69,6 @@ public class FleshBlood extends SplitCard {
         getLeftHalfCard().getColor().setBlack(true);
         getLeftHalfCard().getColor().setGreen(true);
         Target target = new TargetCardInGraveyard(new FilterCreatureCard());
-        target.setRequired(true);
         getLeftHalfCard().getSpellAbility().addTarget(target);
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
         getLeftHalfCard().getSpellAbility().addEffect(new FleshEffect());

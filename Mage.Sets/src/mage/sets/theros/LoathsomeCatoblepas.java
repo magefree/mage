@@ -71,7 +71,6 @@ public class LoathsomeCatoblepas extends CardImpl {
         // When Loathsome Catoblepas dies, target creature an opponent controls gets -3/-3 until end of turn.
         Ability ability = new DiesTriggeredAbility(new BoostTargetEffect(-3,-3, Duration.EndOfTurn), false);
         Target target = new TargetCreaturePermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
 

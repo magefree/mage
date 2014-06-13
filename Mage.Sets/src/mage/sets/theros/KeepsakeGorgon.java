@@ -73,7 +73,6 @@ public class KeepsakeGorgon extends CardImpl {
         // When Keepsake Gorgon becomes monstrous, destroy target non-Gorgon creature an opponent controls.
         Ability ability = new BecomesMonstrousSourceTriggeredAbility(new DestroyTargetEffect());
         Target target = new TargetCreaturePermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

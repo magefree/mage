@@ -102,7 +102,6 @@ class IntuitionEffect extends SearchEffect {
         
         if (player.getLibrary().size() >= 3 && player.searchLibrary(target, game)) {
             
-            target.setRequired(true);
             if (target.getTargets().size() == 3) {
                 Cards cards = new CardsImpl();
                 for (UUID cardId: (List<UUID>)target.getTargets()) {
@@ -114,7 +113,6 @@ class IntuitionEffect extends SearchEffect {
                 player.revealCards("Reveal", cards, game);
                 
                 TargetCard targetCard = new TargetCard(Zone.PICK, new FilterCard());
-                targetCard.setRequired(true);
                 
                 while(!opponent.choose(Outcome.Neutral, cards, targetCard, game));
                 Card card = cards.get(targetCard.getFirstTarget(), game);

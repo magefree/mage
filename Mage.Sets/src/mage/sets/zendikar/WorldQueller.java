@@ -147,7 +147,6 @@ class WorldQuellerEffect extends OneShotEffect {
                 filter.add(new CardTypePredicate(type));
 
                 TargetPermanent target = new TargetControlledPermanent(1, 1, filter, false);
-                target.setRequired(true);
                 target.setNotTarget(true);
 
                 // you always go first

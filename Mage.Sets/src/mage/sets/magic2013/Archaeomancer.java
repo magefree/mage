@@ -67,7 +67,6 @@ public class Archaeomancer extends CardImpl {
         // When Archaeomancer enters the battlefield, return target instant or sorcery card from your graveyard to your hand.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
         Target target = new TargetCardInYourGraveyard(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

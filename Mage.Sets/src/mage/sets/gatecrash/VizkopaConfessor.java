@@ -116,7 +116,6 @@ class VizkopaConfessorEffect extends OneShotEffect {
                 int count = Math.min(cardsInHand.size(), payLife);
 
                 TargetCard target = new TargetCard(count, Zone.HAND, new FilterCard());
-                target.setRequired(true);
                 Cards revealedCards = new CardsImpl();
 
                 if (targetPlayer.chooseTarget(Outcome.Discard, cardsInHand, target, source, game)) {
@@ -130,7 +129,6 @@ class VizkopaConfessorEffect extends OneShotEffect {
                 }
 
                 TargetCard targetInHand = new TargetCard(Zone.HAND, new FilterCard("card to exile"));
-                targetInHand.setRequired(true);
 
                 if (!revealedCards.isEmpty()) {
                     targetPlayer.revealCards(sourceCard.getName(), revealedCards, game);

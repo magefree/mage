@@ -100,7 +100,6 @@ class ReturnToHandEffect extends OneShotEffect {
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
         filter.add(new ControllerPredicate(TargetController.YOU));
         Target target = new TargetControlledPermanent(1, 1, filter, true);
-        target.setRequired(true);
 
         if (target.canChoose(player.getId(), game)) {
             while (player.isInGame() && !target.isChosen() && target.canChoose(player.getId(), game)) {

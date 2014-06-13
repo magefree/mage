@@ -52,7 +52,6 @@ public class Dissolve extends CardImpl {
         // Counter target spell. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         Target target = new TargetSpell();
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }

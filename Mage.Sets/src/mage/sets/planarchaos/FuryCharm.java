@@ -112,7 +112,6 @@ public class FuryCharm extends CardImpl {
                     }
                     if (targetChoice.getChoice().equals("Suspended Card")) {
                         Target target = new TargetCardInExile(1,1, filter, null, true);
-                        target.setRequired(true);
                         ability.addTarget(target);
                     }
                 }

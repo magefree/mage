@@ -61,7 +61,6 @@ public class Wispmare extends CardImpl {
         // When Wispmare enters the battlefield, destroy target enchantment.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
         Target target = new TargetPermanent(new FilterEnchantmentPermanent());
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
         // Evoke {W}

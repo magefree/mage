@@ -77,7 +77,6 @@ public class SpellBlast extends CardImpl {
             FilterSpell newfilter = new FilterSpell(new StringBuilder("spell with converted mana cost ").append(xValue).toString());
             newfilter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, xValue));
             Target target = new TargetSpell(newfilter);
-            target.setRequired(true);
             ability.addTarget(target);
         }
 

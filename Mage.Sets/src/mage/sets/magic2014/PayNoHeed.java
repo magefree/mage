@@ -57,7 +57,6 @@ public class PayNoHeed extends CardImpl {
         effect.setText("Prevent all damage a source of your choice would deal this turn");
         this.getSpellAbility().addEffect(effect);
         TargetSource targetSource = new TargetSource();
-        targetSource.setRequired(true);
         this.getSpellAbility().addTarget(targetSource);
         
     }

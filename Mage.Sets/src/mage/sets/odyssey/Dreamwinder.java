@@ -73,7 +73,6 @@ public class Dreamwinder extends CardImpl {
         // {U}, Sacrifice an Island: Target land becomes an Island until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.EndOfTurn, "Island"), new ManaCostsImpl("{U}"));
         Target target = new TargetLandPermanent();
-        target.setRequired(true);
         ability.addTarget(target);
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
         this.addAbility(ability);

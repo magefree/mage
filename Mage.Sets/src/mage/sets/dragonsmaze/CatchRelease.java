@@ -140,11 +140,6 @@ class ReleaseSacrificeEffect extends OneShotEffect {
             Target target4 = new TargetControlledPermanent(1, 1, filter4, false);
             Target target5 = new TargetControlledPermanent(1, 1, filter5, false);
 
-            target1.setRequired(true);
-            target2.setRequired(true);
-            target3.setRequired(true);
-            target4.setRequired(true);
-            target5.setRequired(true);
 
             target1.setNotTarget(false);
             target2.setNotTarget(false);

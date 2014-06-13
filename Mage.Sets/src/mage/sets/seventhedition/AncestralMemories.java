@@ -105,7 +105,6 @@ class AncestralMemoriesEffect extends OneShotEffect {
                 player.lookAtCards("Ancestral Memories", cards, game);
 
                 TargetCard target = new TargetCard(Math.min(2, cards.size()), Zone.PICK, new FilterCard("two cards to put in your hand"));
-                target.setRequired(true);
                 if (player.choose(Outcome.Benefit, cards, target, game)) {
                     for (UUID targetId : (List<UUID>)target.getTargets()) {
                         Card card = cards.get(targetId, game);

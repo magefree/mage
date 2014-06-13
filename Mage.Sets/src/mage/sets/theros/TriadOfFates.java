@@ -82,14 +82,12 @@ public class TriadOfFates extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.FATE.createInstance()), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
         Target target = new TargetCreaturePermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
         // {W}, {T}: Exile target creature that has a fate counter on it, then return it to the battlefield under its owner's control.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect("Triad of Fates"), new ManaCostsImpl("{W}"));
         ability.addCost(new TapSourceCost());
         target = new TargetCreaturePermanent(filterCounter);
-        target.setRequired(true);
         ability.addTarget(target);
         ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect());
         this.addAbility(ability);
@@ -97,7 +95,6 @@ public class TriadOfFates extends CardImpl {
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{B}"));
         ability.addCost(new TapSourceCost());
         target = new TargetCreaturePermanent(filterCounter);
-        target.setRequired(true);
         ability.addTarget(target);
         ability.addEffect(new DrawCardControllerTargetEffect());
         this.addAbility(ability);

@@ -77,7 +77,6 @@ public class UbulSarGatekeepers extends CardImpl {
                 new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 1),
                 "Whenever {this} enters the battlefield, if you control two or more Gates, target creature an opponent controls gets -2/-2 until end of turn.");
         Target target = new TargetCreaturePermanent(targetFilter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

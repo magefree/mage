@@ -71,7 +71,6 @@ public class OrderOfWhiteclay extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{1}{W}{W}"));
         ability.addCost(new UntapSourceCost());
         Target target = new TargetCardInYourGraveyard(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
         

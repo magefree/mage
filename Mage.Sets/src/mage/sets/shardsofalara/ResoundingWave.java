@@ -59,7 +59,6 @@ public class ResoundingWave extends CardImpl {
         // When you cycle Resounding Wave, return two target permanents to their owners' hands.
         Ability ability = new CycleTriggeredAbility(new ReturnToHandTargetEffect());
         TargetPermanent target = new TargetPermanent(2, new FilterPermanent("two target permanents"));
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

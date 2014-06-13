@@ -60,7 +60,6 @@ public class Faultgrinder extends CardImpl {
         // When Faultgrinder enters the battlefield, destroy target land.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(),false);
         Target target = new TargetLandPermanent();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
 

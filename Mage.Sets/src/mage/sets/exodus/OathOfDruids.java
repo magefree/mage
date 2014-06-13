@@ -81,7 +81,6 @@ public class OathOfDruids extends CardImpl {
                 ability.setControllerId(activePlayer.getId());
                 ability.getTargets().clear();
                 TargetPlayer target = new TargetPlayer(1, 1, false, filter);
-                target.setRequired(true);
                 ability.getTargets().add(target);
             }
         }

@@ -34,7 +34,6 @@ public class AngelOfFlightAlabaster extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new ReturnToHandTargetEffect(), TargetController.YOU, false);
         Target target = new TargetCardInYourGraveyard(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
 

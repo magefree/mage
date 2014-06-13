@@ -61,7 +61,6 @@ public class Dawnfluke extends CardImpl {
         // When Dawnfluke enters the battlefield, prevent the next 3 damage that would be dealt to target creature or player this turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PreventDamageToTargetEffect(Duration.EndOfTurn, 3));
         Target target = new TargetCreatureOrPlayer();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
         // Evoke {W}

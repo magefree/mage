@@ -64,7 +64,6 @@ public class ManicVandal extends CardImpl {
 
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
         Target target = new TargetPermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

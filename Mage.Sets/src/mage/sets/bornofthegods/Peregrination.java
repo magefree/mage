@@ -110,7 +110,6 @@ class PeregrinationEffect extends OneShotEffect {
                 player.revealCards("Peregrination", revealed, game);
                 if (target.getTargets().size() == 2) {
                     TargetCard target2 = new TargetCard(Zone.PICK, filter);
-                    target2.setRequired(true);
                     player.choose(Outcome.Benefit, revealed, target2, game);
                     Card card = revealed.get(target2.getFirstTarget(), game);
 

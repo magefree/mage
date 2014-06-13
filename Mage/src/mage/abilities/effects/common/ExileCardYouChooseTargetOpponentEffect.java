@@ -69,7 +69,6 @@ public class ExileCardYouChooseTargetOpponentEffect extends OneShotEffect {
             Player you = game.getPlayer(source.getControllerId());
             if (you != null) {
                 TargetCard target = new TargetCard(Zone.PICK, filter);
-                                target.setRequired(true);
                 if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
                     Card card = player.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {

@@ -75,7 +75,6 @@ public class HuntTheHunter extends CardImpl {
         effect.setText("It fights target green creature an opponent controls");
         this.getSpellAbility().addEffect(effect);
         Target target = new TargetCreaturePermanent(filterOpponentGreen);
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
     }
 

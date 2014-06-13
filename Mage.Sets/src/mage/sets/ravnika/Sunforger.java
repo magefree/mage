@@ -123,7 +123,6 @@ class SunforgerEffect extends OneShotEffect {
         if (you != null) {
             if (you.getLibrary().size() > 0) {
                 TargetCardInLibrary target = new TargetCardInLibrary(filter);
-                target.setRequired(true);
                 if (you.searchLibrary(target, game, you.getId())) {
                     UUID targetId = target.getFirstTarget();
                     Card card = you.getLibrary().remove(targetId, game);

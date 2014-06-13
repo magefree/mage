@@ -69,7 +69,6 @@ public class IncreasingVengeance extends CardImpl {
         // Copy target instant or sorcery spell you control. If Increasing Vengeance was cast from a graveyard, copy that spell twice instead. You may choose new targets for the copies.
         this.getSpellAbility().addEffect(new IncreasingVengeanceEffect());
         Target target = new TargetSpell(filter);
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
 
         // Flashback {3}{R}{R}

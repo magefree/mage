@@ -73,7 +73,6 @@ public class Shriekmaw extends CardImpl {
         // When Shriekmaw enters the battlefield, destroy target nonartifact, nonblack creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(),false);
         Target target = new TargetCreaturePermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
         

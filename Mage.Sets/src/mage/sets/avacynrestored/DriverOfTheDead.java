@@ -65,7 +65,6 @@ public class DriverOfTheDead extends CardImpl {
         // When Driver of the Dead dies, return target creature card with converted mana cost 2 or less from your graveyard to the battlefield.
         Ability ability = new DiesTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), false);
         Target target = new TargetCardInYourGraveyard(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

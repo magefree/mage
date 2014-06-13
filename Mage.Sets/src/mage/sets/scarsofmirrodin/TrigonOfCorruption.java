@@ -69,7 +69,6 @@ public class TrigonOfCorruption extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, putCounterEffect, costs);
         ability.addManaCost(new GenericManaCost(2));
         Target target = new TargetCreaturePermanent();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
 

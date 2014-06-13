@@ -205,7 +205,6 @@ class JuxtaposeEffect extends ContinuousEffectImpl {
             }
 
             TargetCard targetCard = new TargetCard(Zone.BATTLEFIELD, new FilterCard());
-            targetCard.setRequired(true);
             if (player.choose(Outcome.Benefit, cards, targetCard, game)) {
                 permanent = game.getPermanent(targetCard.getFirstTarget());
             }

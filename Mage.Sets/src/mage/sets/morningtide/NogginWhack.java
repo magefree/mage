@@ -107,7 +107,6 @@ class NogginWhackEffect extends OneShotEffect {
             int count = Math.min(cardsInHand.size(), 3);
 
             TargetCard target = new TargetCard(count, Zone.HAND, new FilterCard());
-            target.setRequired(true);
             Cards revealedCards = new CardsImpl();
 
             if (targetPlayer.chooseTarget(Outcome.Discard, cardsInHand, target, source, game)) {
@@ -122,7 +121,6 @@ class NogginWhackEffect extends OneShotEffect {
 
             int cardsToDiscard = Math.min(revealedCards.size(), 2);
             TargetCard targetInHand = new TargetCard(cardsToDiscard, cardsToDiscard, Zone.HAND, new FilterCard("card to discard"));
-            targetInHand.setRequired(true);
 
             if (!revealedCards.isEmpty()) {
                 targetPlayer.revealCards("Noggin Whack", revealedCards, game);

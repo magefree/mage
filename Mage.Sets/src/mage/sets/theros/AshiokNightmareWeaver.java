@@ -167,7 +167,6 @@ class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect {
         FilterCard filter = new FilterCreatureCard(new StringBuilder("creature card with converted mana cost {").append(cmc).append("} exiled with Ashiok, Nightmare Weaver").toString());
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, cmc));
         Target target = new TargetCardInExile(filter, CardUtil.getCardExileZoneId(game, source));
-        target.setRequired(true);
 
         if (target.canChoose(source.getSourceId(), player.getId(), game)) {
             if (player.chooseTarget(Outcome.PutCreatureInPlay, target, source, game)) {

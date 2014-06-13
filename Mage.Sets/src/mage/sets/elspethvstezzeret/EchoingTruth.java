@@ -57,7 +57,6 @@ public class EchoingTruth extends CardImpl {
 
         // Return target nonland permanent and all other permanents with the same name as that permanent to their owners' hands.
         Target target = new TargetNonlandPermanent();
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new ReturnToHandAllNamedPermanentsEffect());
     }

@@ -60,7 +60,6 @@ public class WearAway extends CardImpl {
         // Destroy target artifact or enchantment.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         Target target = new TargetPermanent(filter);
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
         // Splice onto Arcane {3}{G}
         this.addAbility(new SpliceOntoArcaneAbility("{3}{G}"));

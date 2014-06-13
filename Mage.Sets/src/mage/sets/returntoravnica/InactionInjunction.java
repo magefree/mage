@@ -61,7 +61,6 @@ public class InactionInjunction extends CardImpl {
         // (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)
         this.getSpellAbility().addEffect(new DetainTargetEffect());
         TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
         
         // Draw a card.

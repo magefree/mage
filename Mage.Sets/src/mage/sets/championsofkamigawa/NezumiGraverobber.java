@@ -70,7 +70,6 @@ public class NezumiGraverobber extends CardImpl {
         // {1}{B}: Exile target card from an opponent's graveyard. If no cards are in that graveyard, flip Nezumi Graverobber.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{1}{B}"));
         Target target = new TargetCardInOpponentsGraveyard(new FilterCard("card from an opponent's graveyard"));
-        target.setRequired(true);
         ability.addTarget(target);
         ability.addEffect(new NezumiGraverobberFlipEffect());
         this.addAbility(ability);

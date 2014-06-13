@@ -71,7 +71,6 @@ public class DeputyOfAcquittals extends CardImpl {
         // When Deputy of Acquittals enters the battlefield, you may return another target creature you control to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
         Target target = new TargetCreaturePermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

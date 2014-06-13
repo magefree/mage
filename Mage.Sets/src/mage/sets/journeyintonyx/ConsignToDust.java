@@ -64,7 +64,6 @@ public class ConsignToDust extends CardImpl {
         Effect effect = new DestroyTargetEffect();
         effect.setText("Destroy any number of target artifacts and/or enchantments");
         Target target = new TargetPermanent(0, Integer.MAX_VALUE, filter, false);
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(effect);
     }

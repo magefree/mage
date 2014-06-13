@@ -64,7 +64,6 @@ public class DruidLyrist extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         Target target = new TargetPermanent(new FilterEnchantmentPermanent());
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

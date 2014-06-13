@@ -67,7 +67,6 @@ public class PharikasMender extends CardImpl {
         // When Pharika's Mender enters the battlefield, you may return target creature or enchantment card from your graveyard to your hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect());
         Target target = new TargetCardInYourGraveyard(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

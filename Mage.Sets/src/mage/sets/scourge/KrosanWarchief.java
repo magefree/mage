@@ -74,7 +74,6 @@ public class KrosanWarchief extends CardImpl {
                 new RegenerateTargetEffect(),
                 new ManaCostsImpl("{1}{G}"));
         Target target = new TargetCreaturePermanent(filterTarget);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

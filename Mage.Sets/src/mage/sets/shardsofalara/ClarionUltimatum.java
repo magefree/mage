@@ -100,7 +100,6 @@ class ClarionUltimatumEffect extends OneShotEffect {
         }
 
         TargetControlledPermanent permanentsTarget = new TargetControlledPermanent(Math.min(permanentsCount, 5));
-        permanentsTarget.setRequired(true);
         player.choose(Outcome.Benefit, permanentsTarget, source.getSourceId(), game);
 
         List<Card> chosenCards = new ArrayList<Card>();

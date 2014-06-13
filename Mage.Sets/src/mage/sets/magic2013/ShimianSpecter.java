@@ -106,7 +106,6 @@ class ShimianSpecterEffect extends OneShotEffect {
             damagedPlayer.revealCards("Shimian Specter", damagedPlayer.getHand(), game);
 
             TargetCard target = new TargetCard(Zone.PICK, filter);
-            target.setRequired(true);
             target.setNotTarget(true);
             if (you.choose(Outcome.Benefit, damagedPlayer.getHand(), target, game)) {
                 Card chosenCard = damagedPlayer.getHand().get(target.getFirstTarget(), game);

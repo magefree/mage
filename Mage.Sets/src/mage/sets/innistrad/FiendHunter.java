@@ -67,7 +67,6 @@ public class FiendHunter extends CardImpl {
         // When Fiend Hunter enters the battlefield, you may exile another target creature.
         Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect("Fiend Hunter Exile"), true);
         Target target = new TargetPermanent(filter);
-        target.setRequired(true);
         ability1.addTarget(target);
         this.addAbility(ability1);
 

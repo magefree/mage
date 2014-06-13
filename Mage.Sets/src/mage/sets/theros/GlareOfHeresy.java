@@ -57,7 +57,6 @@ public class GlareOfHeresy extends CardImpl {
         // Exile target white permanent.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         Target target = new TargetPermanent(filter);
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
     }
 

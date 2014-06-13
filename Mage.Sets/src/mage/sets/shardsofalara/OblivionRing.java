@@ -63,7 +63,6 @@ public class OblivionRing extends CardImpl {
         // When Oblivion Ring enters the battlefield, exile another target nonland permanent.
         Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect( "Oblivion Ring exile"), false);
         Target target = new TargetPermanent(anotherNonlandPermanent);
-        target.setRequired(true);
         ability1.addTarget(target);
         this.addAbility(ability1);
 

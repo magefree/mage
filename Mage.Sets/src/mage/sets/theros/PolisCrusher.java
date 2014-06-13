@@ -103,7 +103,6 @@ public class PolisCrusher extends CardImpl {
                         FilterPermanent filterEnchantment = new FilterEnchantmentPermanent("enchantment attacked player controls");
                         filterEnchantment.add(new ControllerIdPredicate(attackedPlayer.getId()));
                         Target target = new TargetPermanent(filterEnchantment);
-                        target.setRequired(true);
                         ability.addTarget(target);
                         effect.setTargetPointer(new FirstTargetPointer());
                         break;

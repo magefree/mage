@@ -61,7 +61,6 @@ public class PreyUpon extends CardImpl {
         this.getSpellAbility().addEffect(new FightTargetsEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         Target target = new TargetCreaturePermanent(filter);
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
     }
 

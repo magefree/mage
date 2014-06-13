@@ -95,9 +95,6 @@ class RetraceEffect extends OneShotEffect {
                 card.getSpellAbility().clear();
                 int amount = source.getManaCostsToPay().getX();
                 card.getSpellAbility().getManaCostsToPay().setX(amount);
-                for (Target target : card.getSpellAbility().getTargets()) {
-                    target.setRequired(true);
-                }
                 return controller.cast(card.getSpellAbility(), game, true);
             }
         }

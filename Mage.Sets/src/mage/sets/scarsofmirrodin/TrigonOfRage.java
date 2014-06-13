@@ -69,7 +69,6 @@ public class TrigonOfRage extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, pumpEffect, costs);
         ability.addManaCost(new GenericManaCost(2));
         Target target = new TargetCreaturePermanent();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
 

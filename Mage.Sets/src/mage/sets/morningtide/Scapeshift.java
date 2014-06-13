@@ -107,7 +107,6 @@ class ScapeshiftEffect extends OneShotEffect {
             }
         }
         TargetCardInLibrary target = new TargetCardInLibrary(amount, new FilterLandCard("lands"));
-        target.setRequired(true);
         if (player.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
                 for (UUID cardId: (List<UUID>)target.getTargets()) {

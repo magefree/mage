@@ -75,7 +75,6 @@ public class MeletisCharlatan extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MeletisCharlatanCopyTargetSpellEffect(), new ManaCostsImpl("{2}{U}"));
         ability.addCost(new TapSourceCost());
         Target target = new TargetSpell(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

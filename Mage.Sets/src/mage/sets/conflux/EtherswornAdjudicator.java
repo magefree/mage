@@ -76,7 +76,6 @@ public class EtherswornAdjudicator extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{W}{B}"));
         ability.addCost(new TapSourceCost());
         Target target = new TargetPermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
         // {2}{U}: Untap Ethersworn Adjudicator.

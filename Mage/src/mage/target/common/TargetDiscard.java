@@ -62,7 +62,6 @@ public class TargetDiscard extends TargetCard {
         super(minNumTargets, maxNumTargets, Zone.HAND, filter);
         this.filter.add(new OwnerIdPredicate(playerId));
         this.playerId = playerId;
-        this.required = true;
         this.targetName = "card to discard";
     }
 

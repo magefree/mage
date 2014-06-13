@@ -67,7 +67,6 @@ public class EpharasWarden extends CardImpl {
         // {T}: Tap target creature with power 3 or less.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
         Target target = new TargetCreaturePermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

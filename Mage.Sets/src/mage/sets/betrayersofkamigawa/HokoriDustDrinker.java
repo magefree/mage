@@ -105,7 +105,6 @@ class HokoriDustDrinkerUntapEffect extends OneShotEffect {
         FilterLandPermanent filter = new FilterLandPermanent("land you control");
         filter.add(new ControllerIdPredicate(game.getActivePlayerId()));
         Target target = new TargetLandPermanent(filter);
-        target.setRequired(true);
         if (player != null && player.chooseTarget(Outcome.Untap, target, source, game)) {
             for (UUID landId : target.getTargets()) {
                 Permanent land = game.getPermanent(landId);

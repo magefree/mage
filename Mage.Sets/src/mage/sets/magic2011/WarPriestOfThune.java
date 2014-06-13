@@ -65,7 +65,6 @@ public class WarPriestOfThune extends CardImpl {
         // When War Priest of Thune enters the battlefield, you may destroy target enchantment.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true);
         Target target = new TargetPermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

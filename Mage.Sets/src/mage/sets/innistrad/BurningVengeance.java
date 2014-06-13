@@ -71,7 +71,6 @@ class BurningVengeanceOnCastAbility extends TriggeredAbilityImpl {
     BurningVengeanceOnCastAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2), false);
         TargetCreatureOrPlayer target = new TargetCreatureOrPlayer();
-        target.setRequired(true);
         this.addTarget(target);
     }
 

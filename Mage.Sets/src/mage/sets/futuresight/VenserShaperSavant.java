@@ -68,7 +68,6 @@ public class VenserShaperSavant extends CardImpl {
         // When Venser, Shaper Savant enters the battlefield, return target spell or permanent to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new VenserShaperSavantEffect(), false);
         Target target = new TargetSpellOrPermanent();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

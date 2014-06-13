@@ -59,7 +59,6 @@ public class Restore extends CardImpl {
         // Put target land card from a graveyard onto the battlefield under your control.
         this.getSpellAbility().addEffect(new RestoreEffect());
         Target target = new TargetCardInGraveyard(filter);
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
     }
 

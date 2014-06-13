@@ -62,7 +62,6 @@ public class StonehornDignitary extends CardImpl {
         // When Stonehorn Dignitary enters the battlefield, target opponent skips his or her next combat phase.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SkipNextCombatEffect());
         Target target = new TargetOpponent();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

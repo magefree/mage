@@ -57,7 +57,6 @@ public class AgonyWarp extends CardImpl {
         effect.setText("Target creature gets -3/-0 until end of turn");
         this.getSpellAbility().addEffect(effect);
         Target target = new TargetCreaturePermanent(new FilterCreaturePermanent("first creature"));
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
 
         // Target creature gets -0/-3 until end of turn.
@@ -66,7 +65,6 @@ public class AgonyWarp extends CardImpl {
         effect2.setTargetPointer(SecondTargetPointer.getInstance());
         this.getSpellAbility().addEffect(effect2);
         target = new TargetCreaturePermanent(new FilterCreaturePermanent("second creature (can be the same as the first)"));
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
     }
 

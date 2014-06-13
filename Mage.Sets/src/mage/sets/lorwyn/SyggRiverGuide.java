@@ -76,7 +76,6 @@ public class SyggRiverGuide extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{W}"));
         ability.addChoice(new ChoiceColor());
         Target target = new TargetControlledCreaturePermanent(1,1,filter, false);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
 

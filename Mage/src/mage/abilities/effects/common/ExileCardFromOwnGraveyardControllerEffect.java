@@ -67,7 +67,6 @@ public class ExileCardFromOwnGraveyardControllerEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if(player != null){
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(Math.min(amount, player.getGraveyard().size()), new FilterCard());
-            target.setRequired(true);
             if (player.chooseTarget(outcome, target, source, game)) {
                 for (UUID targetId: target.getTargets()) {
                     Card card = player.getGraveyard().get(targetId, game);

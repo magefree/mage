@@ -94,7 +94,6 @@ class SunTitanAbility extends TriggeredAbilityImpl {
     public SunTitanAbility() {
         super(Zone.BATTLEFIELD, null, true);
         Target target = new TargetCardInYourGraveyard(filter);
-        target.setRequired(true);
         this.addTarget(target);
         this.addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
     }

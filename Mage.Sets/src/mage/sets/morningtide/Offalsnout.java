@@ -60,7 +60,6 @@ public class Offalsnout extends CardImpl {
         // When Offalsnout leaves the battlefield, exile target card from a graveyard.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect(),false);
         Target target = new TargetCardInGraveyard();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
         // Evoke {B}

@@ -58,7 +58,6 @@ public class DestroyTheEvidence extends CardImpl {
         // Destroy target land. Its controller reveals cards from the top of his
         // or her library until he or she reveals a land card, then puts those cards into his or her graveyard.
         TargetLandPermanent target = new TargetLandPermanent();
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new DestroyTheEvidenceEffect());

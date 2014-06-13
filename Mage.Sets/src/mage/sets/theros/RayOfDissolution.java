@@ -52,7 +52,6 @@ public class RayOfDissolution extends CardImpl {
         // Destroy target enchantment. You gain 3 life.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         Target target = new TargetPermanent(new FilterEnchantmentPermanent());
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new GainLifeEffect(3));
     }

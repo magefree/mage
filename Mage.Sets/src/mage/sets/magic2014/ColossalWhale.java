@@ -105,7 +105,6 @@ class ColossalWhaleAbility extends TriggeredAbilityImpl {
 
             this.getTargets().clear();
             TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-            target.setRequired(true);
             this.addTarget(target);
             return true;
         }

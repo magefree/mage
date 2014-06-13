@@ -68,7 +68,6 @@ public class AdvocateOfTheBeast extends CardImpl {
         // At the beginning of your end step, put a +1/+1 counter on target Beast creature you control.
         Ability ability = new BeginningOfEndStepTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), TargetController.YOU, false);
         Target target = new TargetCreaturePermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

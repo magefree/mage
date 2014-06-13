@@ -73,7 +73,6 @@ public class SweepEffect extends OneShotEffect {
             FilterPermanent filter = new FilterControlledLandPermanent(new StringBuilder("any number of ").append(sweepSubtype).append("s you control").toString());
             filter.add(new SubtypePredicate(sweepSubtype));
             Target target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
-            target.setRequired(true);
             if (controller.chooseTarget(outcome, target, source, game)) {
                 game.getState().setValue(CardUtil.getCardZoneString("sweep", source.getSourceId(), game), target.getTargets().size());
                 for (UUID uuid : target.getTargets()) {

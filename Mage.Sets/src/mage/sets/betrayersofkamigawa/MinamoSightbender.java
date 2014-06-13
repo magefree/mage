@@ -74,7 +74,6 @@ public class MinamoSightbender extends CardImpl {
         // {X}, {T}: Target creature with power X or less is unblockable this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UnblockableTargetEffect(), new ManaCostsImpl("{X}"));
         Target target = new TargetCreaturePermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

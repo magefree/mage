@@ -113,7 +113,6 @@ class RestoreBalanceEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if(player != null){
                     TargetControlledPermanent target = new TargetControlledPermanent(minLand, minLand, new FilterControlledLandPermanent(), true);
-                    target.setRequired(true);
                     if(target.choose(Outcome.Benefit, player.getId(), source.getId(), game)){
                         for(Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledLandPermanent(), player.getId(), source.getId(), game)){
                             if(permanent != null && !target.getTargets().contains(permanent.getId())){
@@ -140,7 +139,6 @@ class RestoreBalanceEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if(player != null){
                     TargetControlledPermanent target = new TargetControlledPermanent(minCreature, minCreature, new FilterControlledCreaturePermanent(), true);
-                    target.setRequired(true);
                     if(target.choose(Outcome.Benefit, player.getId(), source.getId(), game)){
                         for(Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), player.getId(), source.getId(), game)){
                             if(permanent != null && !target.getTargets().contains(permanent.getId())){
@@ -166,7 +164,6 @@ class RestoreBalanceEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if(player != null){
                     TargetCardInHand target = new TargetCardInHand(minCard, new FilterCard());
-                    target.setRequired(true);
                     if(target.choose(Outcome.Benefit, player.getId(), source.getId(), game)){
                         Cards cards =  player.getHand().copy();
                         for(UUID cardUUID : cards){

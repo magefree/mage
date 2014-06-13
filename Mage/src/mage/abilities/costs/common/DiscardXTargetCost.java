@@ -78,7 +78,6 @@ public class DiscardXTargetCost extends VariableCostImpl {
     @Override
     public Cost getFixedCostsFromAnnouncedValue(int xValue) {
         TargetCardInHand target = new TargetCardInHand(xValue, filter);
-        target.setRequired(true);
         return new DiscardTargetCost(target);
     }
 }

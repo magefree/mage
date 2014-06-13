@@ -54,7 +54,6 @@ public abstract class TargetAmount extends TargetImpl {
         this.amount = amount;
         //this.remainingAmount = amount;
         amountWasSet = false;
-        this.required = true;
     }
 
     public TargetAmount(final TargetAmount target) {

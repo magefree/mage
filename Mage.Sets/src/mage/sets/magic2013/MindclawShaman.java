@@ -112,7 +112,6 @@ class MindclawShamanEffect extends OneShotEffect {
                 Player you = game.getPlayer(source.getControllerId());
                 if (you != null) {
                     TargetCard target = new TargetCard(Zone.PICK, filter);
-                    target.setRequired(true);
                     target.setNotTarget(true);
                     if (you.choose(Outcome.Benefit, targetOpponent.getHand(), target, game)) {
                         Card chosenCard = targetOpponent.getHand().get(target.getFirstTarget(), game);

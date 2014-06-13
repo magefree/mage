@@ -57,7 +57,6 @@ public class MiraculousRecovery extends CardImpl {
         // Return target creature card from your graveyard to the battlefield. Put a +1/+1 counter on it.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         Target target = new TargetCardInYourGraveyard(new FilterCreatureCard());
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new MiraculousRecoveryEffect());
     }

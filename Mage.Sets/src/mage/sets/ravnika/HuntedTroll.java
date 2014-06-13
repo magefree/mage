@@ -66,7 +66,6 @@ public class HuntedTroll extends CardImpl {
         // When Hunted Troll enters the battlefield, put four 1/1 blue Faerie creature tokens with flying onto the battlefield under target opponent's control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenTargetEffect(new FaerieToken(), 4), false);
         Target target = new TargetOpponent();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
         // {G}: Regenerate Hunted Troll.

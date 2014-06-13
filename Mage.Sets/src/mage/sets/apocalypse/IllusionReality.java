@@ -59,7 +59,6 @@ public class IllusionReality extends SplitCard {
         getLeftHalfCard().getColor().setBlue(true);
         getLeftHalfCard().getSpellAbility().addEffect(new SetCardColorTargetEffect(Duration.EndOfTurn));
         Target target = new TargetSpellOrPermanent();
-        target.setRequired(true);
         getLeftHalfCard().getSpellAbility().addTarget(target);
         getLeftHalfCard().getSpellAbility().addChoice(new ChoiceColor());
 

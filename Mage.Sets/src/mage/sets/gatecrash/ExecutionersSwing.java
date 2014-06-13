@@ -77,7 +77,6 @@ class TargetCreaturePermanentThatDealtDamageThisTurn extends TargetPermanent {
 
     public TargetCreaturePermanentThatDealtDamageThisTurn() {
         super(1, 1, new FilterCreaturePermanent(), false);
-        setRequired(true);
         targetName = "creature that dealt damage this turn";
     }
 

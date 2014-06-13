@@ -60,7 +60,6 @@ public class Nevermaker extends CardImpl {
         // When Nevermaker leaves the battlefield, put target nonland permanent on top of its owner's library.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PutOnLibraryTargetEffect(true), false);
         Target target = new TargetNonlandPermanent();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
 

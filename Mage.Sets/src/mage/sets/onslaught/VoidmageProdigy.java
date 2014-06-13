@@ -71,7 +71,6 @@ public class VoidmageProdigy extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{U}{U}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
         Target target = new TargetSpell();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
 

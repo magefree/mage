@@ -135,7 +135,6 @@ class FlashOfInsightEffect extends OneShotEffect {
         }
 
         target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
-        target.setRequired(true);
         if (cards.size() > 0) {
             game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ")
                     .append(player.getName()).append(" puts ")

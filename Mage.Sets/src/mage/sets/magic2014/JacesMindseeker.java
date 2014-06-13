@@ -128,7 +128,6 @@ class JaceMindseekerEffect extends OneShotEffect {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
                 TargetCard target = new TargetCard(Zone.PICK, filter);
-                target.setRequired(true);
                 target.setNotTarget(true);
                 if (controller.chooseUse(outcome, "Cast an instant or sorcery card from among them for free?", game)
                         && controller.choose(outcome, cards, target, game)) {                  

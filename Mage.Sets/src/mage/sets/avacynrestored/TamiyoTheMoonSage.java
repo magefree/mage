@@ -81,7 +81,6 @@ public class TamiyoTheMoonSage extends CardImpl {
         LoyaltyAbility ability = new LoyaltyAbility(new TapTargetEffect(), 1);
         ability.addEffect(new SkipNextUntapTargetEffect());
         Target target = new TargetPermanent();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
 

@@ -79,7 +79,6 @@ public class PharikaGodOfAffliction extends CardImpl {
         // BG: Exile target creature card from a graveyard. It's owner puts a 1/1 black and green Snake enchantment creature token with deathtouch onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PharikaExileEffect(), new ManaCostsImpl("{B}{G}"));
         Target target = new TargetCardInGraveyard(new FilterCreatureCard("a creature card from a graveyard"));
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
                 

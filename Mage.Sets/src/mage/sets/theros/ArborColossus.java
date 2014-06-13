@@ -73,7 +73,6 @@ public class ArborColossus extends CardImpl {
         // When Arbor Colossus becomes monstrous, destroy target creature with flying an opponent controls.
         Ability ability = new BecomesMonstrousSourceTriggeredAbility(new DestroyTargetEffect());
         Target target = new TargetCreaturePermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

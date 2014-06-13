@@ -75,7 +75,6 @@ public class ReturnToHandChosenControlledPermanentEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             TargetControlledPermanent target = new TargetControlledPermanent(number, number, filter, true);
-            target.setRequired(true);
             if (player.choose(this.outcome, target, source.getSourceId(), game)) {
                 for (UUID targetCreatureId : (List<UUID>)target.getTargets()) {
                     Permanent permanent = game.getPermanent(targetCreatureId);

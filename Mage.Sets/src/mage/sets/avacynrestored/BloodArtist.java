@@ -59,7 +59,6 @@ public class BloodArtist extends CardImpl {
         Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(new LoseLifeTargetEffect(1), false);
         ability.addEffect(new GainLifeEffect(1));
         Target target = new TargetPlayer();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

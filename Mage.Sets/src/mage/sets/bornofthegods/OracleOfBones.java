@@ -108,7 +108,6 @@ class OracleOfBonesCastEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Target target = new TargetCardInHand(filter);
-            target.setRequired(true);
             if (target.canChoose(source.getSourceId(), controller.getId(), game) &&
               controller.chooseUse(outcome, "Cast an instant or sorcery card from your hand without paying its mana cost?", game)) {
                 Card cardToCast = null;

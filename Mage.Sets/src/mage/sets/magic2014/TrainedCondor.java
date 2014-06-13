@@ -68,7 +68,6 @@ public class TrainedCondor extends CardImpl {
         Effect effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         Ability ability = new AttacksTriggeredAbility(effect, false);
         Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

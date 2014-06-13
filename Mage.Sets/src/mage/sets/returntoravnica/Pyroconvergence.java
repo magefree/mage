@@ -69,7 +69,6 @@ class PyroconvergenceTriggeredAbility extends TriggeredAbilityImpl {
     public PyroconvergenceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
         TargetCreatureOrPlayer target = new TargetCreatureOrPlayer();
-        target.setRequired(true);
         this.addTarget(target);
     }
 

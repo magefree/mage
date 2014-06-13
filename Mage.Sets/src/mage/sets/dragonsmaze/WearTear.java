@@ -55,7 +55,6 @@ public class WearTear extends SplitCard {
         getLeftHalfCard().getColor().setRed(true);
         getLeftHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect());
         Target target = new TargetArtifactPermanent();
-        target.setRequired(true);
         getLeftHalfCard().getSpellAbility().addTarget(target);
 
         // Tear
@@ -63,7 +62,6 @@ public class WearTear extends SplitCard {
         getRightHalfCard().getColor().setWhite(true);
         getRightHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect());
         target = new TargetPermanent(new FilterEnchantment());
-        target.setRequired(true);
         getRightHalfCard().getSpellAbility().addTarget(target);
     }
 

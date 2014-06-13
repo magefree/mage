@@ -172,7 +172,6 @@ class PanopticMirrorCastEffect extends OneShotEffect {
             }
             else{
                 TargetCard target = new TargetCard(1, Zone.EXILED, new FilterCard("card to copy"));
-                target.setRequired(true);
                 controller.choose(Outcome.Copy, cards, target, game);
                 cardToCopy = cards.get(target.getFirstTarget(), game);
             }

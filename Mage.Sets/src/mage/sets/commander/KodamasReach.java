@@ -106,7 +106,6 @@ class KodamasReachEffect extends OneShotEffect {
                 player.revealCards("Kodama's Reach", revealed, game);
                 if (target.getTargets().size() == 2) {
                     TargetCard target2 = new TargetCard(Zone.PICK, filter);
-                    target2.setRequired(true);
                     player.choose(Outcome.Benefit, revealed, target2, game);
                     Card card = revealed.get(target2.getFirstTarget(), game);
                     card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());

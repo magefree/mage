@@ -88,7 +88,6 @@ public class SacrificeEffect extends OneShotEffect{
         amount = Math.min(amount, realCount);
 
         Target target = new TargetControlledPermanent(amount, amount, filter, true);
-        target.setRequired(true);
 
         //A spell or ability could have removed the only legal target this player
         //had, if thats the case this ability should fizzle.

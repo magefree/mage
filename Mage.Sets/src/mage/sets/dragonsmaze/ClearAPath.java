@@ -60,7 +60,6 @@ public class ClearAPath extends CardImpl {
         // Destroy target creature with defender.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         Target target = new TargetCreaturePermanent(filter);
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
     }
 

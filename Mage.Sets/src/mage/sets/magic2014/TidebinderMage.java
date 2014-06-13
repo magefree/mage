@@ -82,7 +82,6 @@ public class TidebinderMage extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect(), false);
         ability.addEffect(new TidebinderMageEffect());
         Target target = new TargetCreaturePermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
         this.addWatcher(new TidebinderMageWatcher());

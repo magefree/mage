@@ -72,7 +72,6 @@ public class LyevSkyknight extends CardImpl {
         // (Until your next turn, that permanent can't attack or block and its activated abilities can't be activated.)
         Ability ability = new EntersBattlefieldTriggeredAbility(new DetainTargetEffect(), false);
         TargetNonlandPermanent target = new TargetNonlandPermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

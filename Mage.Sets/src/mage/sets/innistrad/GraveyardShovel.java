@@ -94,7 +94,6 @@ class GraveyardShovelEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (targetPlayer != null && controller != null) {
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard();
-            target.setRequired(true);
             if (targetPlayer.chooseTarget(Outcome.Exile, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {

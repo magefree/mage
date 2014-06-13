@@ -83,7 +83,6 @@ public class SmeltWardGatekeepers extends CardImpl {
         ability.addEffect(new UntapTargetEffect());
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
         Target target = new TargetCreaturePermanent(targetFilter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

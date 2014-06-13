@@ -91,7 +91,6 @@ class TargetControlledPermanentSharingOpponentPermanentCardType extends TargetCo
         super();
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
         setTargetName("nonland permanent you control");
-        setRequired(true);
     }  
     
     public TargetControlledPermanentSharingOpponentPermanentCardType(final TargetControlledPermanentSharingOpponentPermanentCardType target) {

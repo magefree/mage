@@ -141,7 +141,6 @@ class BaneAlleyBrokerDrawExileEffect extends OneShotEffect {
       if (player != null) {
           player.drawCards(1, game);
           Target target = new TargetCardInHand(new FilterCard("card to exile"));
-          target.setRequired(true);
           if (player.chooseTarget(outcome, target, source, game)) {
               Card card = game.getCard(target.getFirstTarget());
               Card sourceCard = game.getCard(source.getSourceId());

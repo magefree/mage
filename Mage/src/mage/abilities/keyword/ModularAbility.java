@@ -53,7 +53,6 @@ public class ModularAbility extends DiesTriggeredAbility {
     public ModularAbility(Card card, int amount, boolean sunburst) {
         super(new ModularDistributeCounterEffect(), true);
         Target target = new TargetArtifactPermanent(filter);
-        target.setRequired(true);
         this.addTarget(target);
         this.amount = amount;
         this.sunburst = sunburst;

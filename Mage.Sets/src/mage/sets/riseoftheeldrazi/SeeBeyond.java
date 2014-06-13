@@ -85,7 +85,6 @@ class SeeBeyondEffect extends OneShotEffect {
         player.drawCards(2, game);
         if (player.getHand().size() > 0) {
             TargetCard target = new TargetCard(Zone.HAND, filter);
-            target.setRequired(true);
             player.choose(Outcome.Detriment, player.getHand(), target, game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {

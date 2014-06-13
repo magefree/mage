@@ -71,7 +71,6 @@ public class IsperiasSkywatch extends CardImpl {
         // (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)
         Ability ability = new EntersBattlefieldTriggeredAbility(new DetainTargetEffect());
         TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

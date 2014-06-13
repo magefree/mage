@@ -68,7 +68,6 @@ public class HuntTheWeak extends CardImpl {
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         Target target = new TargetCreaturePermanent(filter);
-        target.setRequired(true);
         this.getSpellAbility().addTarget(target);
 
     }

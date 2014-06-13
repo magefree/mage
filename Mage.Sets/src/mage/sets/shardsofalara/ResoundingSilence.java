@@ -60,7 +60,6 @@ public class ResoundingSilence extends CardImpl {
         // When you cycle Resounding Silence, exile up to two target attacking creatures.
         Ability ability = new CycleTriggeredAbility(new ExileTargetEffect());
         TargetPermanent target = new TargetAttackingCreature(0, 2, new FilterAttackingCreature("up to two target attacking creatures"), false);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

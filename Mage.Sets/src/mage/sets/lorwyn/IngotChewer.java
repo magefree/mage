@@ -57,7 +57,6 @@ public class IngotChewer extends CardImpl {
         // When Ingot Chewer enters the battlefield, destroy target artifact.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
         Target target = new TargetArtifactPermanent();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
         // Evoke {R}

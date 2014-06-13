@@ -78,7 +78,6 @@ public class BurrentonForgeTender extends CardImpl {
         effect.setText("Prevent all damage a red source of your choice would deal this turn");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,  effect, new SacrificeSourceCost());
         TargetSource targetSource = new TargetSource(filterObject);
-        targetSource.setRequired(true);
         ability.addTarget(targetSource);
         this.addAbility(ability);
 

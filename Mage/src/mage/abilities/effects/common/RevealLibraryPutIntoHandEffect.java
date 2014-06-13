@@ -102,7 +102,6 @@ public class RevealLibraryPutIntoHandEffect extends OneShotEffect {
             Card card;
             if (anyOrder) {
                 TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
-                target.setRequired(true);
                 player.choose(Outcome.Neutral, cards, target, game);
                 card = cards.get(target.getFirstTarget(), game);
             } else {

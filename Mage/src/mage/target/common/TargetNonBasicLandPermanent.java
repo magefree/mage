@@ -44,7 +44,6 @@ public class TargetNonBasicLandPermanent extends TargetLandPermanent {
         filter.add(Predicates.not(new NamePredicate("Swamp")));
         filter.add(Predicates.not(new NamePredicate("Plains")));
         this.targetName = "nonbasic land";
-        this.setRequired(true);
     }
 
     public TargetNonBasicLandPermanent(final TargetNonBasicLandPermanent target) {

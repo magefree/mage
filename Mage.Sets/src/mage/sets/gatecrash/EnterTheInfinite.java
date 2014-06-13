@@ -122,7 +122,6 @@ class PutCardOnLibraryEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             TargetCardInHand target = new TargetCardInHand();
-            target.setRequired(true);
             player.chooseTarget(Outcome.ReturnToHand, target, source, game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {

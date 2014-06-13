@@ -77,7 +77,6 @@ public class BladewingTheRisen extends CardImpl {
         // When Bladewing the Risen enters the battlefield, you may return target Dragon permanent card from your graveyard to the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), true);
         Target target = new TargetCardInYourGraveyard(filterCard);
-        target.setRequired(true);
         ability.addTarget(target);
          this.addAbility(ability);
         // {B}{R}: Dragon creatures get +1/+1 until end of turn.

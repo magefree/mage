@@ -117,7 +117,6 @@ class RiteOfRuinEffect extends OneShotEffect {
             for (UUID playerId : controller.getInRange()) {
                 int amount = Math.min(count, game.getBattlefield().countAll(filter, playerId, game));
                 TargetControlledPermanent target = new TargetControlledPermanent(amount, amount, filter, false);
-                target.setRequired(true);
                 Player player = game.getPlayer(playerId);
                 if (player != null && player.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
                     sacrifices.addAll(target.getTargets());

@@ -56,7 +56,6 @@ public class AkoumBoulderfoot extends CardImpl {
 
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1), false);
         Target target = new TargetCreatureOrPlayer();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

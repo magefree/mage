@@ -128,7 +128,6 @@ class ShattergangBrothersEffect extends OneShotEffect {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
                         TargetControlledPermanent target = new TargetControlledPermanent(filter);
-                        target.setRequired(true);
                         target.setNotTarget(true);
                         if (target.canChoose(source.getSourceId(), playerId, game) &&
                                 player.chooseTarget(outcome, target, source, game)) {

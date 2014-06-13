@@ -57,7 +57,6 @@ public class AEthersnipe extends CardImpl {
         // When AEthersnipe enters the battlefield, return target nonland permanent to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
         Target target = new TargetNonlandPermanent();
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
 

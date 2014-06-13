@@ -169,7 +169,6 @@ class PreventAllDamageToControllerEffect extends PreventionEffectImpl {
             Player player = game.getPlayer(source.getControllerId());
             if(player != null){
                 TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(Math.min(damage, player.getGraveyard().size()), new FilterCard()); 
-                target.setRequired(true);
                 if (target.choose(Outcome.Exile, source.getControllerId(), source.getSourceId(), game)) {
                     for (UUID targetId: target.getTargets()) {
                         Card card = player.getGraveyard().get(targetId, game);

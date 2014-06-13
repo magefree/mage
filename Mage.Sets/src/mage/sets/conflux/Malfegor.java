@@ -103,7 +103,6 @@ class MalfegorEffect extends OneShotEffect {
                     if (opponent != null) {
                         for (int i = 0; i < sacrificeNumber; i++) {
                             Target target = new TargetControlledPermanent(new FilterControlledCreaturePermanent());
-                            target.setRequired(true);
                             if (target.canChoose(opponentId, game)) {
                                 if (opponent.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
                                     Permanent permanent = game.getPermanent(target.getFirstTarget());

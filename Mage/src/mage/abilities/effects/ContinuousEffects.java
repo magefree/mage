@@ -553,7 +553,6 @@ public class ContinuousEffects implements Serializable {
                     }
                     filter.add(Predicates.or(idPredicates));
                     TargetCardInHand target = new TargetCardInHand(filter);
-                    target.setRequired(true);
                     controller.chooseTarget(Outcome.Benefit, target, abilityToModify, game);
                     UUID cardId = target.getFirstTarget();
                     if (cardId != null) {

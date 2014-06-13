@@ -100,7 +100,6 @@ class DreamCacheEffect extends OneShotEffect {
     private boolean putInLibrary(Player player, Ability source, Game game, boolean putOnTop) {
         if (player.getHand().size() > 0) {
             TargetCardInHand target = new TargetCardInHand();
-            target.setRequired(true);
             player.chooseTarget(Outcome.Detriment, target, source, game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {

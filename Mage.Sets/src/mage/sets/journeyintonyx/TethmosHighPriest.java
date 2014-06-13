@@ -67,7 +67,6 @@ public class TethmosHighPriest extends CardImpl {
         // Heroic — Whenever you cast a spell that targets Tethmos High Priest, return target creature card with converted mana cost 2 or less from your graveyard to the battlefield.
         Ability ability = new HeroicAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), false);
         Target target = new TargetCardInYourGraveyard(filter);
-        target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }
