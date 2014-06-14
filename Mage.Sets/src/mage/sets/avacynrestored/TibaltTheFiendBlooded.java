@@ -81,8 +81,9 @@ public class TibaltTheFiendBlooded extends CardImpl {
         ability.addEffect(effect);
         this.addAbility(ability);
         // -4: Tibalt, the Fiend-Blooded deals damage equal to the number of cards in target player's hand to that player.
-        //effect =
-        ability = new LoyaltyAbility(new DamageTargetEffect(new CardsInTargetHandCount(), true, "that player"), -4);
+        effect = new DamageTargetEffect(new CardsInTargetHandCount(), true);
+        effect.setText("{this} deals damage equal to the number of cards in target player's hand to that player");
+        ability = new LoyaltyAbility(effect, -4);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // -6: Gain control of all creatures until end of turn. Untap them. They gain haste until end of turn.
