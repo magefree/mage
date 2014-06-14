@@ -35,6 +35,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -57,7 +58,10 @@ public class GoblinArsonist extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new DiesTriggeredAbility(new GoblinArsonistEffect(), true));
+        // When Goblin Arsonist dies, you may have it deal 1 damage to target creature or player.
+        Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(1), true);
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
     }
 
     public GoblinArsonist(final GoblinArsonist card) {
@@ -68,44 +72,4 @@ public class GoblinArsonist extends CardImpl {
     public GoblinArsonist copy() {
         return new GoblinArsonist(this);
     }
-}
-
-class GoblinArsonistEffect extends OneShotEffect {
-
-    public GoblinArsonistEffect() {
-        super(Outcome.Damage);
-        staticText = "have it deal 1 damage to target creature or player";
-    }
-
-    public GoblinArsonistEffect(final GoblinArsonistEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        TargetCreatureOrPlayer target = new TargetCreatureOrPlayer();
-        Player player = game.getPlayer(source.getControllerId());
-        if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
-            player.chooseTarget(Outcome.Damage, target, source, game);
-
-            Permanent permanent = game.getPermanent(target.getFirstTarget());
-            if (permanent != null) {
-                permanent.damage(1, source.getSourceId(), game, true, false);
-                return true;
-            }
-
-            Player targetPlayer = game.getPlayer(target.getFirstTarget());
-            if (targetPlayer != null) {
-                targetPlayer.damage(1, source.getSourceId(), game, true, false);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public GoblinArsonistEffect copy() {
-        return new GoblinArsonistEffect(this);
-    }
-
 }
