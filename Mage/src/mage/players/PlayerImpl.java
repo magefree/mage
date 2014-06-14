@@ -792,7 +792,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (ability.activate(game, false)) {
                 ability.resolve(game);
                 // #169
-                if (storedBookmark == -1) {
+                if (storedBookmark == -1 || storedBookmark > bookmark) { // e.g. userfull for undo Nykthos, Shrine to Nyx
                     setStoredBookmark(bookmark);
                 }
                 //game.removeBookmark(bookmark);
@@ -1651,6 +1651,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void declareAttacker(UUID attackerId, UUID defenderId, Game game) {
+        setStoredBookmark(game.bookmarkState()); // makes it possible to UNDO a declared attacker with costs from e.g. Propaganda
         Permanent attacker = game.getPermanent(attackerId);
         if (attacker != null && attacker.canAttack(game) && attacker.getControllerId().equals(playerId)) {
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKER, defenderId, attackerId, playerId))) {
