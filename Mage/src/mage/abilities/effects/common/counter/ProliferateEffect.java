@@ -65,7 +65,7 @@ public class ProliferateEffect extends OneShotEffect {
         //had, if thats the case this ability should fizzle.
         if (target.canChoose(controller.getId(), game)) {
             boolean abilityApplied = false;
-            Map<String, Serializable> options = new HashMap<String, Serializable>();
+            Map<String, Serializable> options = new HashMap<>();
             options.put("UI.right.btn.text", "Done");
             while (target.canChoose(controller.getId(), game)) {
                 if (controller.choose(Outcome.Benefit, target, source.getSourceId(), game, options)) {

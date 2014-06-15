@@ -164,7 +164,7 @@ public abstract class TargetImpl implements Target {
     
     @Override
     public boolean isRequired(Ability ability) {
-        return ability.isActivated() || !(ability.getAbilityType().equals(AbilityType.SPELL) || ability.getAbilityType().equals(AbilityType.ACTIVATED));
+        return ability == null || ability.isActivated() || !(ability.getAbilityType().equals(AbilityType.SPELL) || ability.getAbilityType().equals(AbilityType.ACTIVATED));
     }
 
     @Override
