@@ -36,6 +36,7 @@ import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.util.CardUtil;
@@ -75,8 +76,12 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
             if (card != null) {
                 Player player = game.getPlayer(source.getControllerId());
                 if (player != null) {
-                    if(player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId(), tapped)){
-                        result = true;
+                    if (player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId(), tapped)){
+                        Permanent permanent = game.getPermanent(source.getSourceId());
+                        if (permanent != null) {
+                            permanent.changeControllerId(source.getControllerId(), game);
+                            result = true;
+                        }
                     }
                 }
             }

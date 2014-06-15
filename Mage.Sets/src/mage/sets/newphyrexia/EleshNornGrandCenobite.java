@@ -54,8 +54,14 @@ public class EleshNornGrandCenobite extends CardImpl {
         this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(7);
+
+        // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
+
+        // Other creatures you control get +2/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, true)));
+
+        // Creatures your opponents control get -2/-2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostOpponentsEffect(-2, -2, Duration.WhileOnBattlefield)));
     }
 
