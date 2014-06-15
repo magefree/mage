@@ -130,7 +130,7 @@ public class UserManager {
                     .append(" sessionId: ").append(user.getSessionId())
                     .append(" Reason: ").append(reason.toString()));
             ChatManager.getInstance().removeUser(userId, reason);
-            users.get(userId).kill(reason);
+            user.kill(reason);
             users.remove(userId);
         } else {
             logger.warn(new StringBuilder("Trying to remove userId: ").append(userId).append(" but user does not exist."));
@@ -165,7 +165,7 @@ public class UserManager {
                             if (user.isExpired(expired.getTime())) {
                                 logger.info(new StringBuilder(user.getName()).append(": session expired userId: ").append(user.getId())
                                         .append(" Host: ").append(user.getHost()));
-                                SessionManager.getInstance().getSession(user.getSessionId()).kill(DisconnectReason.SessionExpired);
+                                removeUser(user.getId(), DisconnectReason.SessionExpired);
                             }
                         }
                         logger.debug("checkExpired - end");
