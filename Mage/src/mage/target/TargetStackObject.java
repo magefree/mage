@@ -96,8 +96,9 @@ public class TargetStackObject extends TargetObject {
         for (StackObject stackObject: game.getStack()) {
             if (game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match(stackObject, game)) {
                 count++;
-                if (count >= this.minNumberOfTargets)
+                if (count >= this.minNumberOfTargets) {
                     return true;
+                }
             }
         }
         return false;
@@ -110,7 +111,7 @@ public class TargetStackObject extends TargetObject {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<UUID>();
+        Set<UUID> possibleTargets = new HashSet<>();
         for (StackObject stackObject: game.getStack()) {
             if (game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match(stackObject, game)) {
                 possibleTargets.add(stackObject.getId());

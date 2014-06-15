@@ -34,6 +34,8 @@ import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.filter.FilterCard;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.players.Player;
 import mage.target.TargetCard;
 
 /**
@@ -101,8 +103,17 @@ public class TargetCardInYourGraveyard extends TargetCard {
     }
     @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        if (game.getPlayer(sourceControllerId).getGraveyard().count(filter, sourceId, sourceControllerId, game) >= this.minNumberOfTargets) {
-            return true;
+        Player player = game.getPlayer(sourceControllerId);
+        if (player != null) {
+            int possibleTargets = 0;
+            for (Card card : player.getGraveyard().getCards(filter, game)) {
+                if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, sourceControllerId))) {
+                    possibleTargets++;
+                    if (possibleTargets >= this.minNumberOfTargets) {
+                        return true;
+                    }
+                }
+            }
         }
         return false;
     }

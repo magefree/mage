@@ -220,12 +220,12 @@ public abstract class TargetImpl implements Target {
         if (maxNumberOfTargets == 0 || targets.size() < maxNumberOfTargets) {
             if (!targets.containsKey(id)) {
                 if (source != null) {
-                    if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getId(), source.getControllerId()))) {
+                    if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getSourceId(), source.getControllerId()))) {
                         targets.put(id, 0);
                         rememberZoneChangeCounter(id, game);
                         chosen = targets.size() >= minNumberOfTargets;
                         if (!skipEvent) {
-                            game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getId(), source.getControllerId()));
+                            game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getSourceId(), source.getControllerId()));
                         }
                     }
                 }
