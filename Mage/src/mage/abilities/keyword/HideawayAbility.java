@@ -150,7 +150,7 @@ class HideawayExileEffect extends OneShotEffect {
                 target2.clearChosen();
             }
             Card card = cards.get(cards.iterator().next(), game);
-            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
         }
 
         return true;
