@@ -93,6 +93,7 @@ public interface Target extends Serializable {
     List<UUID> getTargets();
     Filter getFilter();
 
+    boolean isRequired();
     boolean isRequired(UUID sourceId, Game game);
     boolean isRequired(Ability ability);
     void setRequired(boolean required);

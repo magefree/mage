@@ -54,7 +54,8 @@ public abstract class TargetImpl implements Target {
     protected Zone zone;
     protected int maxNumberOfTargets;
     protected int minNumberOfTargets;
-    protected boolean required = false;
+    protected boolean required = true;
+    protected boolean requiredExplicitlySet = false;
     protected boolean chosen = false;
     // is the target handled as targeted spell/ability (notTarget = true is used for not targeted effects like e.g. sacrifice)
     protected boolean notTarget = false;
@@ -77,6 +78,7 @@ public abstract class TargetImpl implements Target {
         this.maxNumberOfTargets = target.maxNumberOfTargets;
         this.minNumberOfTargets = target.minNumberOfTargets;
         this.required = target.required;
+        this.requiredExplicitlySet = target.requiredExplicitlySet;
         this.chosen = target.chosen;
         this.targets.putAll(target.targets);
         this.zoneChangeCounters.putAll(target.zoneChangeCounters);
@@ -148,11 +150,16 @@ public abstract class TargetImpl implements Target {
     @Override
     public boolean isRequired(UUID sourceId, Game game) {
         MageObject object = game.getObject(sourceId);
-        if (object != null && object instanceof Ability) {
+        if (!requiredExplicitlySet && object != null && object instanceof Ability) {
             return isRequired((Ability) object);
         } else {
-            return required;
+            return isRequired();
         }
+    }
+    
+    @Override
+    public boolean isRequired() {
+        return required;
     }
     
     @Override
@@ -163,6 +170,7 @@ public abstract class TargetImpl implements Target {
     @Override
     public void setRequired(boolean required) {
         this.required = required;
+        this.requiredExplicitlySet = true;
     }
 
     @Override
