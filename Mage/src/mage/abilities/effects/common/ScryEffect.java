@@ -80,6 +80,7 @@ public class ScryEffect extends OneShotEffect {
                 cards.add(card);
             }
             TargetCard target1 = new TargetCard(Zone.LIBRARY, filter1);
+            target1.setRequired(false);
             // move cards to the bottom of the library
             while (player.isInGame() && cards.size() > 0 && player.choose(Outcome.Detriment, cards, target1, game)) {
                 Card card = cards.get(target1.getFirstTarget(), game);
