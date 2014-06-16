@@ -129,7 +129,6 @@ public class UserManager {
                     .append(" userId: ").append(userId)
                     .append(" sessionId: ").append(user.getSessionId())
                     .append(" Reason: ").append(reason.toString()));
-            ChatManager.getInstance().removeUser(userId, reason);
             user.kill(reason);
             users.remove(userId);
         } else {

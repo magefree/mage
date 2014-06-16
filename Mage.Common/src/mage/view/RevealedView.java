@@ -39,8 +39,8 @@ import mage.game.Game;
  */
 public class RevealedView implements Serializable {
 
-    private String name;
-    private SimpleCardsView cards = new SimpleCardsView();
+    private final String name;
+    private final SimpleCardsView cards = new SimpleCardsView();
 
     public RevealedView(String name, Cards cards, Game game) {
         this.name = name;

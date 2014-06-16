@@ -45,12 +45,8 @@ import mage.abilities.PlayLandAbility;
 import mage.abilities.SpecialAction;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCost;
-import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.costs.common.RemoveCounterCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.PhyrexianManaCost;
@@ -343,7 +339,7 @@ public class HumanPlayer extends PlayerImpl {
             Map<String, Serializable> options = getOptions(target);
             if (target.getTargets().size() > 0) {
                 if (options == null) {
-                    options = new HashMap<String, Serializable>(1);
+                    options = new HashMap<>(1);
                 }
                 List<UUID> chosen = (List<UUID>)target.getTargets();
                 options.put("chosen", (Serializable)chosen);
