@@ -724,5 +724,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         return morphCard;
     }
 
-
+    @Override
+    public String getLogName() {
+        if (this.isFaceDown()) {
+            return "facedown card";
+        }
+        return name;
+    }
 }

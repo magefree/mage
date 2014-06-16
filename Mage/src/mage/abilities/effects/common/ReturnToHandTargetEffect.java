@@ -74,7 +74,7 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
                 case BATTLEFIELD:
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent != null) {
-                        controller.moveCardToHandWithInfo((Card) permanent, source.getSourceId(), game, Zone.BATTLEFIELD);
+                        controller.moveCardToHandWithInfo((Card) permanent, source.getSourceId(), game, Zone.BATTLEFIELD);                        
                     } else {
                         result = false;
                     }
@@ -91,6 +91,9 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
                     card = game.getCard(targetId);
                     if (card != null) {
                         controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.EXILED);
+                        if (card.isFaceDown()) {
+                            card.setFaceDown(false);
+                        }
                     } else {
                         result = false;
                     }

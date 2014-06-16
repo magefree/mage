@@ -28,15 +28,12 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.SkipDrawStepEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -57,7 +54,7 @@ public class DragonAppeasement extends CardImpl {
         this.color.setBlack(true);
 
         // Skip your draw step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipYourDrawStepEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect()));
         
         // Whenever you sacrifice a creature, you may draw a card.
         this.addAbility(new DragonAppeasementTriggeredAbility());
@@ -71,42 +68,6 @@ public class DragonAppeasement extends CardImpl {
     @Override
     public DragonAppeasement copy() {
         return new DragonAppeasement(this);
-    }
-}
-
-class SkipYourDrawStepEffect extends ReplacementEffectImpl {
-
-    public SkipYourDrawStepEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        staticText = "Skip your draw step";
-    }
-
-    public SkipYourDrawStepEffect(final SkipYourDrawStepEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SkipYourDrawStepEffect copy() {
-        return new SkipYourDrawStepEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DRAW_STEP
-                && (event.getPlayerId().equals(source.getControllerId()))) {
-            return true;
-        }
-        return false;
     }
 }
 
