@@ -28,24 +28,32 @@
 
 package mage.sets.worldwake;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.common.FilterArtifactCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.Game;
+import mage.players.Player;
+import mage.target.Target;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 
-import java.util.UUID;
-import mage.abilities.effects.common.PutOntoBattlefieldTargetEffect;
+
 
 /**
  *
@@ -74,9 +82,8 @@ public class StoneforgeMystic extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
 
         // {1}{W}, {T}: You may put an Equipment card from your hand onto the battlefield.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOntoBattlefieldTargetEffect(false, true), new ManaCostsImpl("{1}{W}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StoneforgeMysticEffect(), new ManaCostsImpl("{1}{W}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCardInHand(0, 1, filter));
         this.addAbility(ability);
     }
 
@@ -89,4 +96,45 @@ public class StoneforgeMystic extends CardImpl {
         return new StoneforgeMystic(this);
     }
 
+}
+
+class StoneforgeMysticEffect extends OneShotEffect {
+
+    private static final FilterArtifactCard filter = new FilterArtifactCard("Equipment card");
+
+    static {
+        filter.add(new SubtypePredicate("Equipment"));
+    }
+
+    public StoneforgeMysticEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "You may put an Equipment card from your hand onto the battlefield";
+    }
+
+    public StoneforgeMysticEffect(final StoneforgeMysticEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public StoneforgeMysticEffect copy() {
+        return new StoneforgeMysticEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Target target = new TargetCardInHand(new FilterArtifactCard("an Equipment card from your hand"));
+            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
+                    && controller.chooseUse(outcome, "Put an Equipment from your hand to battlefield?", game)
+                    && controller.chooseTarget(outcome, target, source, game)) {
+                Card card = game.getCard(target.getFirstTarget());
+                if (card != null) {
+                     controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
+                }
+            }
+        }
+
+        return false;
+    }
 }

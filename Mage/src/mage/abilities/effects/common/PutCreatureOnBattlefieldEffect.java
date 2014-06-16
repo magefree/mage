@@ -42,7 +42,7 @@ public class PutCreatureOnBattlefieldEffect extends OneShotEffect {
         if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
-                card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId());
+                player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
                 return true;
             }
         }
