@@ -29,17 +29,15 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DamageMultiEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetArtifactPermanent;
+import mage.filter.common.FilterControlledArtifactPermanent;
+import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlayerAmount;
 
 /**
@@ -58,10 +56,9 @@ public class KuldothaFlamefiend extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Kuldotha Flamefiend enters the battlefield, you may sacrifice an artifact. If you do, Kuldotha Flamefiend deals 4 damage divided as you choose among any number of target creatures and/or players.
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new SacrificeArtifactEffect(), true);
-        ability.addEffect(new DamageMultiEffect(4));
+        EntersBattlefieldTriggeredAbility ability = 
+                new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(new DamageMultiEffect(4), new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact")))), false);
         ability.addTarget(new TargetCreatureOrPlayerAmount(4));
-        ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
     }
 
@@ -72,32 +69,5 @@ public class KuldothaFlamefiend extends CardImpl {
     @Override
     public KuldothaFlamefiend copy() {
         return new KuldothaFlamefiend(this);
-    }
-}
-
-class SacrificeArtifactEffect extends OneShotEffect {
-
-    public SacrificeArtifactEffect() {
-        super(Outcome.Sacrifice);
-        this.staticText = "sacrifice an artifact";
-    }
-
-    public SacrificeArtifactEffect(final SacrificeArtifactEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SacrificeArtifactEffect copy() {
-        return new SacrificeArtifactEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (permanent != null) {
-            permanent.sacrifice(source.getSourceId(), game);
-            return true;
-        }
-        return false;
     }
 }
