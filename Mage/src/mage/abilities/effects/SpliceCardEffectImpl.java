@@ -50,7 +50,6 @@ public abstract class SpliceCardEffectImpl extends ContinuousEffectImpl implemen
 
     public SpliceCardEffectImpl(final SpliceCardEffectImpl effect) {
         super(effect);
-        this.effectType = effect.effectType;
     }
 
     /**

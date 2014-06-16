@@ -53,7 +53,6 @@ public abstract class CostModificationEffectImpl extends ContinuousEffectImpl im
 
     public CostModificationEffectImpl(final CostModificationEffectImpl effect) {
         super(effect);
-        this.effectType = effect.effectType;
         this.modificationType = effect.modificationType;
     }
 
