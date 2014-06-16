@@ -87,10 +87,10 @@ public class ConditionalRestrictionEffect extends RestrictionEffect  {
             otherwiseEffect.setTargetPointer(this.targetPointer);
             return otherwiseEffect.applies(permanent, source, game);
         }
-        if (!conditionState && effect.getDuration() == Duration.OneUse) {
+        if (effect.getDuration() == Duration.OneUse) {
             used = true;
         }
-        if (!conditionState && effect.getDuration() == Duration.Custom) {
+        if (effect.getDuration() == Duration.Custom) {
             this.discard();
         }
         return false;
