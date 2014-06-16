@@ -112,9 +112,10 @@ class BrilliantUltimatumEffect extends OneShotEffect {
         Player opponent = game.getPlayer(source.getFirstTarget());
         if (opponent != null) {
             TargetCard target = new TargetCard(0, pile2.size(), Zone.EXILED, new FilterCard("cards to put in the first pile"));
+            target.setRequired(false);
             Cards pile1 = new CardsImpl();
-            List<Card> pileOne = new ArrayList<Card>();
-            List<Card> pileTwo = new ArrayList<Card>();
+            List<Card> pileOne = new ArrayList<>();
+            List<Card> pileTwo = new ArrayList<>();
             if (opponent.choose(Outcome.Neutral, pile2, target, game)) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {

@@ -134,6 +134,7 @@ class WhimsOfTheFateEffect extends OneShotEffect {
                         } else {
                             target = new TargetSecondPilePermanent(playerPiles.get(1), filter);
                         }
+                        target.setRequired(false);
                         currentPlayer.chooseTarget(outcome, target, source, game);
                         StringBuilder message = new StringBuilder(currentPlayer.getName()).append(" pile ").append(i).append(": ");
                         if (target.getTargets().isEmpty()) {

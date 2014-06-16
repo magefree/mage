@@ -112,8 +112,9 @@ class SteamAuguryEffect extends OneShotEffect {
         Player opponent = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (opponent != null) {
             TargetCard target = new TargetCard(0, cards.size(), Zone.PICK, new FilterCard("cards to put in the first pile"));
-            List<Card> pile1 = new ArrayList<Card>();
+            List<Card> pile1 = new ArrayList<>();
             Cards pile1CardsIds = new CardsImpl();
+            target.setRequired(false);
             if (player.choose(Outcome.Neutral, cards, target, game)) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
@@ -124,7 +125,7 @@ class SteamAuguryEffect extends OneShotEffect {
                     }
                 }
             }
-            List<Card> pile2 = new ArrayList<Card>();
+            List<Card> pile2 = new ArrayList<>();
             Cards pile2CardsIds = new CardsImpl();
             for (UUID cardId :cards) {
                 Card card = game.getCard(cardId);

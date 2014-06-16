@@ -262,7 +262,7 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect {
             }
             
             TargetCard target = new TargetCard(0, cards.size(), Zone.PICK, new FilterCard("cards to put in the first pile"));
-
+            target.setRequired(false);
             Cards pile1 = new CardsImpl();
             if (opponent.choose(Outcome.Neutral, cards, target, game)) {
                 for (UUID targetId : (List<UUID>) target.getTargets()) {

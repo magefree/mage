@@ -117,7 +117,8 @@ class SphinxOfUthuunEffect extends OneShotEffect {
             Player opponent = game.getPlayer(opponents.iterator().next());
 
             TargetCard target = new TargetCard(0, cards.size(), Zone.PICK, new FilterCard("cards to put in the first pile"));
-            List<Card> pile1 = new ArrayList<Card>();
+            target.setRequired(false);
+            List<Card> pile1 = new ArrayList<>();
             Cards pile1CardsIds = new CardsImpl();
             if (opponent.choose(Outcome.Neutral, cards, target, game)) {
                 List<UUID> targets = target.getTargets();
@@ -129,7 +130,7 @@ class SphinxOfUthuunEffect extends OneShotEffect {
                     }
                 }
             }
-            List<Card> pile2 = new ArrayList<Card>();
+            List<Card> pile2 = new ArrayList<>();
             Cards pile2CardsIds = new CardsImpl();
             for (UUID cardId :cards) {
                 Card card = game.getCard(cardId);
