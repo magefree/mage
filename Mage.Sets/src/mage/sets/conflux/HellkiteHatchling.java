@@ -56,8 +56,8 @@ public class HellkiteHatchling extends CardImpl {
 
         this.color.setRed(true);
         this.color.setGreen(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
         // Devour 1 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with that many +1/+1 counters on it.)
         this.addAbility(new DevourAbility(DevourFactor.Devour1));
