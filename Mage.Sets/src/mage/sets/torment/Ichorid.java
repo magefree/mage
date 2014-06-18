@@ -75,7 +75,9 @@ public class Ichorid extends CardImpl {
         FilterCard filter = new FilterCreatureCard("an other black creature card from your graveyard");
         filter.add(Predicates.not(new CardIdPredicate(this.getId())));
         filter.add(new ColorPredicate(ObjectColor.BLACK));
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(filter)));
+        TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
+        target.setRequired(false);
+        ability.addCost(new ExileFromGraveCost(target));
         this.addAbility(ability);
         
     }
