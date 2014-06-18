@@ -44,6 +44,7 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.SaprolingToken;
 
 /**
@@ -64,8 +65,11 @@ public class SporolothAncient extends CardImpl {
         // At the beginning of your upkeep, put a spore counter on Sporoloth Ancient.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance()), TargetController.YOU, false));
         // Creatures you control have "Remove two spore counters from this creature: Put a 1/1 green Saproling creature token onto the battlefield."
-        Effect effect = new GainAbilityControlledEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new RemoveCountersSourceCost(CounterType.SPORE.createInstance(2))),
-                    Duration.WhileOnBattlefield);
+        Effect effect = new GainAbilityControlledEffect(
+                new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new RemoveCountersSourceCost(CounterType.SPORE.createInstance(2))),
+                Duration.WhileOnBattlefield,
+                new FilterCreaturePermanent("Creatures you control")
+        );
         effect.setText("Creatures you control have \"Remove two spore counters from this creature: Put a 1/1 green Saproling creature token onto the battlefield.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
