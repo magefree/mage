@@ -80,7 +80,7 @@ class IncreasingAmbitionEffect extends SearchEffect {
 
     public IncreasingAmbitionEffect() {
         super(new TargetCardInLibrary(), Outcome.DrawCard);
-        staticText = "Search your library for a card and put that card into your hand. If Increasing Ambition was cast from a graveyard, instead search your library for two cards and put those cards into your hand. Then shuffle your library";
+        staticText = "Search your library for a card and put that card into your hand. If {this} was cast from a graveyard, instead search your library for two cards and put those cards into your hand. Then shuffle your library";
     }
 
     public IncreasingAmbitionEffect(final IncreasingAmbitionEffect effect) {
@@ -108,8 +108,9 @@ class IncreasingAmbitionEffect extends SearchEffect {
                     if (target.getTargets().size() > 0) {
                         for (UUID cardId: (List<UUID>)target.getTargets()) {
                             Card card = player.getLibrary().remove(cardId, game);
-                            if (card != null)
+                            if (card != null) {
                                 card.moveToZone(Zone.HAND, source.getId(), game, false);
+                            }
                         }
                     }
                 }

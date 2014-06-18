@@ -77,7 +77,7 @@ class PrimevalTitanAbility extends TriggeredAbilityImpl {
 
     public PrimevalTitanAbility() {
         super(Zone.BATTLEFIELD, null, true);
-        TargetCardInLibrary target = new TargetCardInLibrary(2, new FilterLandCard());
+        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterLandCard());
         this.addEffect(new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay));
     }
 
