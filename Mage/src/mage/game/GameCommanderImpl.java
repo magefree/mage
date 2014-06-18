@@ -118,8 +118,8 @@ public abstract class GameCommanderImpl extends GameImpl {
         Player player = getPlayer(playerId);
         TargetCardInHand target = new TargetCardInHand(1, player.getHand().size(), new FilterCard("card to mulligan"));
         target.setNotTarget(true);
-        //target.setRequired(true);
-        if(player.choose(Outcome.Exile, player.getHand(), target, this)){
+        target.setRequired(false);
+        if (player.choose(Outcome.Exile, player.getHand(), target, this)){
             int numCards = target.getTargets().size();
             for(UUID uuid : target.getTargets()){
                 Card card = player.getHand().get(uuid, this);
