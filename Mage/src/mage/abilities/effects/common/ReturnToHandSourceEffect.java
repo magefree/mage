@@ -73,12 +73,12 @@ public class ReturnToHandSourceEffect extends OneShotEffect {
                     case BATTLEFIELD:
                         Permanent permanent = game.getPermanent(source.getSourceId());
                         if (permanent != null) {
-                            controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.BATTLEFIELD);
+                            return controller.moveCardToHandWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD);
                         }
                         break;
                     case GRAVEYARD:
                         if (!fromBattlefieldOnly) {
-                            controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD);
+                            return controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD);
                         }
 
                 }
