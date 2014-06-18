@@ -76,7 +76,7 @@ public class PharikaGodOfAffliction extends CardImpl {
         Effect effect = new LoseCreatureTypeSourceEffect(new DevotionCount(ColoredManaSymbol.B, ColoredManaSymbol.G), 7);
         effect.setText("As long as your devotion to black and green is less than seven, Pharika isn't a creature");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));             
-        // BG: Exile target creature card from a graveyard. It's owner puts a 1/1 black and green Snake enchantment creature token with deathtouch onto the battlefield.
+        // {B}{G}: Exile target creature card from a graveyard. It's owner puts a 1/1 black and green Snake enchantment creature token with deathtouch onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PharikaExileEffect(), new ManaCostsImpl("{B}{G}"));
         Target target = new TargetCardInGraveyard(new FilterCreatureCard("a creature card from a graveyard"));
         ability.addTarget(target);
@@ -108,11 +108,17 @@ class PharikaExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card targetCard = game.getCard(source.getFirstTarget());
-        if (targetCard != null) {
-            Player tokenController = game.getPlayer(targetCard.getOwnerId());
-            if (tokenController != null) {
-                return new PharikaSnakeToken().putOntoBattlefield(1, game, source.getSourceId(), tokenController.getId());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Card targetCard = game.getCard(source.getFirstTarget());
+            if (targetCard != null) {
+                if (game.getState().getZone(source.getFirstTarget()).equals(Zone.GRAVEYARD)) {
+                    controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.GRAVEYARD);
+                }
+                Player tokenController = game.getPlayer(targetCard.getOwnerId());
+                if (tokenController != null) {
+                    return new PharikaSnakeToken().putOntoBattlefield(1, game, source.getSourceId(), tokenController.getId());
+                }            
             }            
         }
         return false;
