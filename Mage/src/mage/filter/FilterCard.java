@@ -112,6 +112,10 @@ public class FilterCard extends FilterObject<Card> {
         }
         return filtered;
     }
+    
+    public boolean hasPredicates() {
+        return predicates.size() > 0;
+    }
 
     @Override
     public FilterCard copy() {
