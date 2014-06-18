@@ -30,20 +30,19 @@ package mage.sets.magic2011;
 
 import java.util.List;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
@@ -107,21 +106,20 @@ class CultivateEffect extends OneShotEffect {
                     TargetCard target2 = new TargetCard(Zone.PICK, filter);
                     player.choose(Outcome.Benefit, revealed, target2, game);
                     Card card = revealed.get(target2.getFirstTarget(), game);
-                    card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
-                    revealed.remove(card);
-                    Permanent permanent = game.getPermanent(card.getId());
-                    if (permanent != null) {
-                        permanent.setTapped(true);
+                    if (card != null) {
+                        player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId(), true);
+                        revealed.remove(card);
                     }
                     card = revealed.getCards(game).iterator().next();
-                    card.moveToZone(Zone.HAND, source.getId(), game, false);
+                    if (card != null) {
+                        player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                    }
                 }
                 else if (target.getTargets().size() == 1) {
                     Card card = revealed.getCards(game).iterator().next();
-                    card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
-                    Permanent permanent = game.getPermanent(card.getId());
-                    if (permanent != null)
-                        permanent.setTapped(true);
+                    if (card != null) {
+                        player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId(), true);
+                    }
                 }
 
             }
