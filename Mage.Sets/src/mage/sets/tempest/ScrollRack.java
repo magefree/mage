@@ -93,6 +93,7 @@ class ScrollRackEffect extends OneShotEffect {
 
         if (you != null) {
             TargetCardInHand target = new TargetCardInHand(0, you.getHand().size(), filter);
+            target.setRequired(false);
             int amountExiled = 0;
             if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Neutral, source.getControllerId(), source.getId(), game)) {
                 if (!target.getTargets().isEmpty()) {
