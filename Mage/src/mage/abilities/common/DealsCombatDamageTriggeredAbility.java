@@ -32,7 +32,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedCreatureEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -67,7 +67,7 @@ public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
             if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER || event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
                   if (event.getSourceId().equals(this.sourceId)
-                    && ((DamagedCreatureEvent) event).isCombatDamage()) {
+                    && ((DamagedEvent) event).isCombatDamage()) {
                             if (setTargetPointer) {
                                 for (Effect effect : this.getEffects()) {
                                         effect.setTargetPointer(new FixedTarget(event.getTargetId()));
