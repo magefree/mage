@@ -150,10 +150,12 @@ class TidebinderMageEffect extends ReplacementEffectImpl {
 
         if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
             if (event.getTargetId().equals(targetPointer.getFirst(game, source))) {
-                return true;
+                Permanent permanent = game.getPermanent(event.getTargetId());
+                if (permanent != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
+                    return true;
+                }
             }
         }
-
         return false;
     }
 }
@@ -180,7 +182,6 @@ class TidebinderMageWatcher extends Watcher {
             if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
                 condition = true;
                 game.replaceEvent(event);
-                return;
             }
         }
     }
