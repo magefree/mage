@@ -28,17 +28,26 @@
 
 package mage.view;
 
-import mage.constants.Zone;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.cards.Card;
+import mage.constants.Zone;
+import static mage.constants.Zone.ALL;
+import static mage.constants.Zone.BATTLEFIELD;
+import static mage.constants.Zone.COMMAND;
+import static mage.constants.Zone.EXILED;
+import static mage.constants.Zone.GRAVEYARD;
+import static mage.constants.Zone.STACK;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.TargetPointer;
-
-import java.util.*;
 
 /**
  *
@@ -81,11 +90,11 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
                     break;
             }
             if (sourceCard != null) {
-                AbilityView abilityView = new AbilityView(ability, sourceCard.getName(), new CardView(sourceCard));
+                AbilityView abilityView = new AbilityView(ability, sourceCard.getLogName(), new CardView(sourceCard));
                 if (ability.getTargets().size() > 0) {
                     abilityView.setTargets(ability.getTargets());
                 } else {
-                    List<UUID> abilityTargets = new ArrayList<UUID>();
+                    List<UUID> abilityTargets = new ArrayList<>();
                     for (Effect effect : ability.getEffects()) {
                         TargetPointer targetPointer = effect.getTargetPointer();
                         if (targetPointer != null) {
@@ -95,11 +104,11 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
                     }
                     if (!abilityTargets.isEmpty()) {
                         abilityView.overrideTargets(abilityTargets);
-                        List<String> names = new ArrayList<String>();
+                        List<String> names = new ArrayList<>();
                         for (UUID uuid : abilityTargets) {
                             MageObject mageObject = game.getObject(uuid);
                             if (mageObject != null) {
-                                names.add(mageObject.getName());
+                                names.add(mageObject.getLogName());
                             }
                         }
                         if (!names.isEmpty()) {
@@ -116,7 +125,7 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
         for (Ability ability: abilities) {
             Card sourceCard = state.getPermanent(ability.getSourceId());
             if (sourceCard != null) {
-                this.put(ability.getId(), new AbilityView(ability, sourceCard.getName(), new CardView(sourceCard)));
+                this.put(ability.getId(), new AbilityView(ability, sourceCard.getLogName(), new CardView(sourceCard)));
             }
         }
     }

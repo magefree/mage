@@ -139,6 +139,7 @@ class NecropotenceEffect extends OneShotEffect {
                 card.setFaceDown(true);
                 if (controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY)) {
                     Effect returnToHandeffect = new ReturnToHandTargetEffect();
+                    returnToHandeffect.setText("put that face down card into your hand");
                     returnToHandeffect.setTargetPointer(new FixedTarget(card.getId()));
                     DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(returnToHandeffect, TargetController.YOU);
                     delayedAbility.setSourceId(source.getSourceId());

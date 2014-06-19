@@ -90,7 +90,7 @@ public class StackAbilityView extends CardView {
                     for (UUID uuid : targetList) {
                         MageObject mageObject = game.getObject(uuid);
                         if (mageObject != null) {
-                            names.add(mageObject.getName());
+                            names.add(mageObject.getLogName());
                         }
                     }
 
