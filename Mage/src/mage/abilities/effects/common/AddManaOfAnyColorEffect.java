@@ -68,8 +68,9 @@ public class AddManaOfAnyColorEffect extends ManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
-        Player player = game.getPlayer(source.getControllerId());
-
+        if (choice == null || choice.getColor() == null) {
+            return false;
+        }
         Mana mana = null;
         if (choice.getColor().isBlack()) {
             mana = Mana.BlackMana(amount);
@@ -82,7 +83,8 @@ public class AddManaOfAnyColorEffect extends ManaEffect {
         } else if (choice.getColor().isWhite()) {
             mana = Mana.WhiteMana(amount);
         }
-
+        
+        Player player = game.getPlayer(source.getControllerId());
         if (player != null && mana != null) {
             player.getManaPool().addMana(mana, game, source);
             return true;
