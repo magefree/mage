@@ -668,7 +668,7 @@ public class HumanPlayer extends PlayerImpl {
             possibleDefender = defenders;
         }
         if (possibleDefender.size() == 1) {
-            declareAttacker(attackerId, defenders.iterator().next(), game);
+            declareAttacker(attackerId, defenders.iterator().next(), game, true);
             return true;
         }
         else {
@@ -683,7 +683,7 @@ public class HumanPlayer extends PlayerImpl {
                 }
             }
             if (chooseTarget(Outcome.Damage, target, null, game)) {
-                declareAttacker(attackerId, response.getUUID(), game);
+                declareAttacker(attackerId, response.getUUID(), game, true);
                 return true;
             }
         }

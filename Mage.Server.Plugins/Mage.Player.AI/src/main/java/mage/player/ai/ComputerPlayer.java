@@ -1254,12 +1254,12 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             CombatSimulator combat = simulateAttack(attackers, blockers, opponentId, game);
             if (combat.rating > 2) {
                 for (CombatGroupSimulator group: combat.groups) {
-                    this.declareAttacker(group.attackers.get(0).id, group.defenderId, game);
+                    this.declareAttacker(group.attackers.get(0).id, group.defenderId, game, false);
                 }
             }
         }
         for (Permanent attacker: actualAttackers) {
-            this.declareAttacker(attacker.getId(), opponentId, game);
+            this.declareAttacker(attacker.getId(), opponentId, game, false);
         }
     }
 

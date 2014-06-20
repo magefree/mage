@@ -971,7 +971,7 @@ public class ComputerPlayer6 extends ComputerPlayer implements Player {
             List<Permanent> killers = CombatUtil.canKillOpponent(game, attackersList, possibleBlockers, defender);
             if (!killers.isEmpty()) {
                 for (Permanent attacker : killers) {
-                    attackingPlayer.declareAttacker(attacker.getId(), defenderId, game);
+                    attackingPlayer.declareAttacker(attacker.getId(), defenderId, game, false);
                 }
                 return;
             }
@@ -1133,7 +1133,7 @@ public class ComputerPlayer6 extends ComputerPlayer implements Player {
                     safeToAttack = false;
                 }
                 if (safeToAttack) {
-                    attackingPlayer.declareAttacker(attacker.getId(), defenderId, game);
+                    attackingPlayer.declareAttacker(attacker.getId(), defenderId, game, false);
                 }
             }
         }
@@ -1240,7 +1240,7 @@ public class ComputerPlayer6 extends ComputerPlayer implements Player {
                 UUID defenderId = game.getOpponents(playerId).iterator().next();
                 for (CombatGroup group : engagement.getGroups()) {
                     for (UUID attackerId : group.getAttackers()) {
-                        sim.getPlayer(activePlayerId).declareAttacker(attackerId, defenderId, sim);
+                        sim.getPlayer(activePlayerId).declareAttacker(attackerId, defenderId, sim, false);
                     }
                 }
                 sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, playerId, playerId));

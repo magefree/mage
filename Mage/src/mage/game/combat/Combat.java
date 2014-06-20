@@ -232,16 +232,16 @@ public class Combat implements Serializable, Copyable<Combat> {
                 creaturesForcedToAttack.put(creature.getId(), defendersForcedToAttack);
                 if (defendersForcedToAttack.isEmpty()) {
                     if (defenders.size() == 1) {
-                        player.declareAttacker(creature.getId(), defenders.iterator().next(), game);
+                        player.declareAttacker(creature.getId(), defenders.iterator().next(), game, false);
                     } else {
                         TargetDefender target = new TargetDefender(defenders, creature.getId());
                         target.setRequired(true);
                         if (player.chooseTarget(Outcome.Damage, target, null, game)) {
-                            player.declareAttacker(creature.getId(), target.getFirstTarget(), game);
+                            player.declareAttacker(creature.getId(), target.getFirstTarget(), game, false);
                         }
                     }
                 } else {
-                    player.declareAttacker(creature.getId(), defendersForcedToAttack.iterator().next(), game);
+                    player.declareAttacker(creature.getId(), defendersForcedToAttack.iterator().next(), game, false);
                 }
             }
 

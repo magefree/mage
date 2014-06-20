@@ -159,7 +159,7 @@ public class MCTSNode {
                     Game sim = game.copy();
                     MCTSPlayer simPlayer = (MCTSPlayer) sim.getPlayer(player.getId());
                     for (UUID attackerId: attack) {
-                        simPlayer.declareAttacker(attackerId, defenderId, sim);
+                        simPlayer.declareAttacker(attackerId, defenderId, sim, false);
                     }
                     sim.resume();
                     children.add(new MCTSNode(this, sim, sim.getCombat()));

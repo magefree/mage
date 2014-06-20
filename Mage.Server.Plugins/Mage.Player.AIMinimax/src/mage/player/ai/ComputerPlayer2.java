@@ -602,7 +602,7 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
                             UUID defenderId = game.getOpponents(playerId).iterator().next();
                             for (CombatGroup group: engagement.getGroups()) {
                                 for (UUID attackerId: group.getAttackers()) {
-                                    sim.getPlayer(activePlayerId).declareAttacker(attackerId, defenderId, sim);
+                                    sim.getPlayer(activePlayerId).declareAttacker(attackerId, defenderId, sim, false);
                                 }
                             }
                             sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, playerId, playerId));
@@ -651,16 +651,18 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
 
     @Override
     public void selectAttackers(Game game, UUID attackingPlayerId) {
-        if (logger.isDebugEnabled() && (combat == null || combat.getGroups().isEmpty()))
+        if (logger.isDebugEnabled() && (combat == null || combat.getGroups().isEmpty())) {
             logger.debug("not attacking");
+        }
         if (combat != null) {
             UUID opponentId = game.getCombat().getDefenders().iterator().next();
             for (UUID attackerId: combat.getAttackers()) {
-                this.declareAttacker(attackerId, opponentId, game);
+                this.declareAttacker(attackerId, opponentId, game, false);
                 if (logger.isDebugEnabled()) {
                     Permanent p = game.getPermanent(attackerId);
-                    if (p != null)
+                    if (p != null) {
                         logger.debug("attacking with:" + p.getName());
+                    }
                 }
              }
         }

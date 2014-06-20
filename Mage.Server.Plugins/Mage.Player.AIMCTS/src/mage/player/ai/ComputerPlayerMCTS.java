@@ -201,7 +201,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
         Combat combat = root.getCombat();
         UUID opponentId = game.getCombat().getDefenders().iterator().next();
         for (UUID attackerId: combat.getAttackers()) {
-            this.declareAttacker(attackerId, opponentId, game);
+            this.declareAttacker(attackerId, opponentId, game, false);
         }
     }
 
