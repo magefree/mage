@@ -25,51 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.ManaWasSpentCondition;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.SacrificeSourceUnlessConditionEffect;
-import mage.abilities.keyword.UnblockableAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
-import mage.watchers.common.ManaSpentToCastWatcher;
+package mage.watchers.common;
+
+import mage.Mana;
+import mage.constants.WatcherScope;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
+import mage.watchers.Watcher;
 
 /**
+ * Watcher saves the mana that was spent to cast a spell
+ *
  *
  * @author LevelX2
  */
-public class AzoriusHerald extends CardImpl {
+public class ManaSpentToCastWatcher extends Watcher {
 
-    public AzoriusHerald(UUID ownerId) {
-        super(ownerId, 6, "Azorius Herald", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "C13";
-        this.subtype.add("Spirit");
+    Mana payment = null;
 
-        this.color.setWhite(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
-
-        // Azorius Herald can't be blocked.
-        this.addAbility(new UnblockableAbility());
-        // When Azorius Herald enters the battlefield, you gain 4 life.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4)));
-        // When Azorius Herald enters the battlefield, sacrifice it unless {U} was spent to cast it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.U)), false));
-        this.addWatcher(new ManaSpentToCastWatcher());        
+    public ManaSpentToCastWatcher() {
+        super("ManaSpentToCast", WatcherScope.CARD);
     }
 
-    public AzoriusHerald(final AzoriusHerald card) {
-        super(card);
+    public ManaSpentToCastWatcher(final ManaSpentToCastWatcher watcher) {
+        super(watcher);
+        this.payment = watcher.payment;
     }
 
     @Override
-    public AzoriusHerald copy() {
-        return new AzoriusHerald(this);
+    public void watch(GameEvent event, Game game) {
+         if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone() == Zone.HAND) {
+            Spell spell = (Spell) game.getObject(event.getTargetId());
+            if (this.getSourceId().equals(spell.getSourceId())) {
+               payment = spell.getSpellAbility().getManaCostsToPay().getPayment();
+            }
+        }
     }
+
+    @Override
+    public ManaSpentToCastWatcher copy() {
+        return new ManaSpentToCastWatcher(this);
+    }
+
+    public Mana getAndResetLastPayment() {
+        Mana returnPayment = null;
+        if (payment != null) {
+            returnPayment = payment.copy();
+            // reset payment for next check
+            payment = null;
+        }
+        return returnPayment;
+
+    }
+
 }

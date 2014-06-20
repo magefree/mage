@@ -30,15 +30,15 @@ package mage.sets.eventide;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.ManaWasSpentCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.decorator.ConditionalReplacementEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PreventAllDamageByAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
-import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
@@ -60,12 +60,13 @@ public class BatwingBrume extends CardImpl {
         this.color.setWhite(true);
 
         // Prevent all combat damage that would be dealt this turn if {W} was spent to cast Batwing Brume. Each player loses 1 life for each attacking creature he or she controls if {B} was spent to cast Batwing Brume.
-        this.getSpellAbility().addEffect(new ConditionalContinousEffect(
-                new PreventAllDamageByAllEffect(Duration.EndOfTurn, true),
-                new ManaWasSpentCondition(ColoredManaSymbol.W), "Prevent all combat damage that would be dealt this turn if {W} was spent to cast {this}", true));
+        Effect effect = new ConditionalReplacementEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn, true),
+                new ManaWasSpentCondition(ColoredManaSymbol.W), true);
+        effect.setText("Prevent all combat damage that would be dealt this turn if {W} was spent to cast {this}");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new BatwingBrumeEffect(),
-                new ManaWasSpentCondition(ColoredManaSymbol.W), "Each player loses 1 life for each attacking creature he or she controls if {B} was spent to cast {this}"));
+                new ManaWasSpentCondition(ColoredManaSymbol.B), "Each player loses 1 life for each attacking creature he or she controls if {B} was spent to cast {this}"));
         this.addInfo("Info1", "<i>(Do both if {W}{B} was spent.)<i>");
 
     }
@@ -92,13 +93,20 @@ class BatwingBrumeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Player player : game.getPlayers().values()) {
-            if (player != null) {
-                final int amount = game.getBattlefield().getAllActivePermanents(new FilterAttackingCreature(), player.getId(), game).size();
-                player.loseLife(amount, game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (UUID playerId : controller.getInRange()) {
+                final int amount = game.getBattlefield().getAllActivePermanents(new FilterAttackingCreature(), playerId, game).size();
+                if (amount > 0) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null) {
+                        player.loseLife(amount, game);
+                    }
+                }
             }
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override

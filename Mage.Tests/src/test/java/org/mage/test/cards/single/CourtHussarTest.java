@@ -25,51 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.ManaWasSpentCondition;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.SacrificeSourceUnlessConditionEffect;
-import mage.abilities.keyword.UnblockableAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
-import mage.watchers.common.ManaSpentToCastWatcher;
+package org.mage.test.cards.single;
+
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
  * @author LevelX2
  */
-public class AzoriusHerald extends CardImpl {
 
-    public AzoriusHerald(UUID ownerId) {
-        super(ownerId, 6, "Azorius Herald", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "C13";
-        this.subtype.add("Spirit");
+public class CourtHussarTest extends CardTestPlayerBase {
 
-        this.color.setWhite(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+    // When Court Hussar enters the battlefield, sacrifice it unless {W} was spent to cast it.
+    @Test
+    public void testWhiteManaWasPaidCard() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island");
+        addCard(Zone.HAND, playerA, "Court Hussar");
 
-        // Azorius Herald can't be blocked.
-        this.addAbility(new UnblockableAbility());
-        // When Azorius Herald enters the battlefield, you gain 4 life.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4)));
-        // When Azorius Herald enters the battlefield, sacrifice it unless {U} was spent to cast it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.U)), false));
-        this.addWatcher(new ManaSpentToCastWatcher());        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Court Hussar");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerA, "Court Hussar", 1);
+
     }
 
-    public AzoriusHerald(final AzoriusHerald card) {
-        super(card);
+    @Test
+    public void testNoWhiteManaWasPaidCard() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island");
+        addCard(Zone.HAND, playerA, "Court Hussar");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Court Hussar");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerA, "Court Hussar", 0);
+
     }
 
-    @Override
-    public AzoriusHerald copy() {
-        return new AzoriusHerald(this);
-    }
 }
