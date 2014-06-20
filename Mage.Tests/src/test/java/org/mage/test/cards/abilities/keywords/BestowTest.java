@@ -33,6 +33,7 @@ import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -170,5 +171,65 @@ public class BestowTest extends CardTestPlayerBase {
         // because cast with bestow, Boon Satyr may not be tapped
         assertTapped("Boon Satyr", false);
         
-    }    
+    }  
+    
+    /**
+     * If I have a bestowed creature on the battlefield and my opponent uses Far // Away casting 
+     * both sides, will the creature that has bestow come in time for it to be sacrificed or does 
+     * it fully resolve before the creature comes in?
+     * 
+     * Bestowed creature can be used to sacrifice a creature for the Away part.
+     * http://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/513828-bestow-far-away
+     */    
+    @Test
+    @Ignore
+    public void bestowWithFusedSpell() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        /**
+         * Cyclops of One-Eyed Pass  {2}{R}{R}
+         *  Creature - Cyclops
+         *  5/2
+         */
+        addCard(Zone.BATTLEFIELD, playerA, "Cyclops of One-Eyed Pass");
+        
+        /**
+         * Nyxborn Rollicker  {R}
+         *  Enchantment Creature - Satyr
+         *  1/1
+         *  Bestow {1}{R} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
+         *  Enchanted creature gets +1/+1.
+         */
+        addCard(Zone.HAND, playerA, "Nyxborn Rollicker");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+
+        /**
+         * Far {1}{U}
+         * Instant
+         * Return target creature to its owner's hand.
+         * Away {2}{B}
+         * Instant
+         * Target player sacrifices a creature.
+         * Fuse (You may cast one or both halves of this card from your hand.)
+         */        
+        addCard(Zone.HAND, playerB, "Far // Away");
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nyxborn Rollicker using bestow", "Cyclops of One-Eyed Pass");
+        
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "fused Far // Away", "Cyclops of One-Eyed Pass^targetPlayer=PlayerA");
+        playerA.addTarget("Nyxborn Rollicker");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertHandCount(playerA, 0);
+        assertHandCount(playerB, 0);
+        
+        assertGraveyardCount(playerB, "Far // Away", 1);
+        
+        assertPermanentCount(playerA, "Nyxborn Rollicker", 0);
+        assertGraveyardCount(playerA, "Nyxborn Rollicker", 1);
+        
+    }      
 }
