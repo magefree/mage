@@ -398,7 +398,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
             UUID defenderId = game.getOpponents(attackerId).iterator().next();
             for (CombatGroup group: engagement.getGroups()) {
                 for (UUID attackId: group.getAttackers()) {
-                    sim.getPlayer(attackerId).declareAttacker(attackId, defenderId, sim);
+                    sim.getPlayer(attackerId).declareAttacker(attackId, defenderId, sim, false);
                 }
             }
             sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, attackerId, attackerId));
