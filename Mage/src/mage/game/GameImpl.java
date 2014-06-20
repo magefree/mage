@@ -937,11 +937,16 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public synchronized void quit(UUID playerId) {
-        Player player = state.getPlayer(playerId);
-        if (player != null) {            
-            player.quit(this);            
-        }else {
-            logger.error(new StringBuilder("quit - player not found - playerId: ").append(playerId));
+        if (state != null) {
+            Player player = state.getPlayer(playerId);
+            if (player != null) {
+                logger.debug(player.getName() + " quits the game");
+                player.quit(this);
+            }else {
+                logger.error(new StringBuilder("quit - player not found - playerId: ").append(playerId));
+            }
+        } else {
+            logger.error(new StringBuilder("quit - state not found - playerId: ").append(playerId));
         }
     }
 
@@ -1841,7 +1846,7 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public void leave(UUID playerId) {
         Player player = getPlayer(playerId);
-        if (player.hasLeft()) {
+        if (player == null || player.hasLeft()) {
             return;
         }
         player.leave();
