@@ -56,7 +56,9 @@ import java.util.Map;
 import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.Modes;
+import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
+import mage.constants.SpellAbilityType;
 import mage.filter.common.FilterCreatureForCombatBlock;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.game.stack.StackObject;
@@ -176,7 +178,7 @@ public class TestPlayer extends ComputerPlayer {
                 filter.add(new NamePredicate(groups[0]));
                 Permanent attacker = findPermanent(filter, playerId, game);
                 if (attacker != null && attacker.canAttack(game)) {
-                    this.declareAttacker(attacker.getId(), defenderId, game);
+                    this.declareAttacker(attacker.getId(), defenderId, game, false);
                 }
             }
         }
@@ -337,77 +339,102 @@ public class TestPlayer extends ComputerPlayer {
         }
         return true;
     }
+    
     private boolean addTargets(Ability ability, String[] groups, Game game) {
         boolean result = true;
         for (int i = 1; i < groups.length; i++) {
             String group = groups[i];
-            String target;
-            if (group.startsWith("targetPlayer=")) {
-                int targetsSet = 0;
-                target = group.substring(group.indexOf("targetPlayer=") + 13);
-                for (Player player: game.getPlayers().values()) {
-                    if (player.getName().equals(target)) {
-                        ability.getTargets().get(0).addTarget(player.getId(), ability, game);
-                        targetsSet++;
-                        break;
-                    }
-                }
-                if (targetsSet < 1) {
+            if (ability instanceof SpellAbility && ((SpellAbility) ability).getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
+                if (group.contains("FuseLeft-")) {
+                    result = handleTargetString(group.substring(group.indexOf("FuseLeft-") + 9), ability, game);
+                } else if(group.startsWith("FuseRight-")) {
+                    result = handleTargetString(group.substring(group.indexOf("FuseRight-") + 10), ability, game);
+                } else {
                     result = false;
                 }
-            }
-            else if (group.startsWith("target=")) {
-                target = group.substring(group.indexOf("target=") + 7);
-                String[] targetList = target.split("\\^");
-                int index = 0;
-                int targetsSet = 0;
-                for (String targetName: targetList) {
-                    if (targetName.startsWith("targetPlayer=")) {
-                        target = targetName.substring(targetName.indexOf("targetPlayer=") + 13);
-                        for (Player player: game.getPlayers().values()) {
-                            if (player.getName().equals(target)) {
-                                ability.getTargets().get(index).addTarget(player.getId(), ability, game);
-                                index++;
-                                targetsSet++;
-                                break;
-                            }
-                        }
-                    } else {
-                        if (ability.getTargets().size() == 0) {
-                            throw new AssertionError("Ability has no targets. " + ability.toString());
-                        }
-                        for (UUID id: ability.getTargets().get(0).possibleTargets(ability.getSourceId(), ability.getControllerId(), game)) {
-                            MageObject object = game.getObject(id);
-                            if (object != null && object.getName().equals(targetName)) {
-                                if (index >= ability.getTargets().size()) {
-                                    index--;
-                                }
-                                if (ability.getTargets().get(index).getNumberOfTargets() == 1) {
-                                    ability.getTargets().get(index).clearChosen();
-                                }
-                                if (ability.getTargets().get(index) instanceof TargetCreaturePermanentAmount) {
-                                    // supports only to set the complete amount to one target
-                                    TargetCreaturePermanentAmount targetAmount = (TargetCreaturePermanentAmount) ability.getTargets().get(index);
-                                    targetAmount.setAmount(ability, game);
-                                    int amount = targetAmount.getAmountRemaining();
-                                    targetAmount.addTarget(id, amount,ability, game);
-                                    targetsSet++;
-                                } else {
-                                    ability.getTargets().get(index).addTarget(id, ability, game);
-                                    targetsSet++;
-                                }
-                                index++;
-                                break;
-                            }
-                        }
-                    }
-                }
-                if (targetsSet != targetList.length) {
-                    result = false;
-                }
+            } else {
+                result = handleTargetString(group, ability, game);
             }
         }
         return result;
     }
 
+    private boolean handleTargetString(String target, Ability ability, Game game){
+        boolean result = false;
+        if (target.startsWith("targetPlayer=")) {
+            result = handlePlayerTarget(target.substring(target.indexOf("targetPlayer=") + 13), ability, game);
+        } else if (target.startsWith("target=")) {
+            result = handleNonPlayerTargetTarget(target.substring(target.indexOf("target=") + 7), ability, game);
+        }
+        return result;
+    }
+    
+    private boolean handlePlayerTarget(String target, Ability ability, Game game) {
+        boolean result = true;
+        int targetsSet = 0;
+        for (Player player: game.getPlayers().values()) {
+            if (player.getName().equals(target)) {
+                ability.getTargets().get(0).addTarget(player.getId(), ability, game);
+                targetsSet++;
+                break;
+            }
+        }
+        if (targetsSet < 1) {
+            result = false;
+        }
+        return result;
+    }
+    
+    private boolean handleNonPlayerTargetTarget(String target, Ability ability, Game game) {
+        boolean result = true;
+        String[] targetList = target.split("\\^");
+        int index = 0;
+        int targetsSet = 0;
+        for (String targetName: targetList) {
+            if (targetName.startsWith("targetPlayer=")) {
+                target = targetName.substring(targetName.indexOf("targetPlayer=") + 13);
+                for (Player player: game.getPlayers().values()) {
+                    if (player.getName().equals(target)) {
+                        ability.getTargets().get(index).addTarget(player.getId(), ability, game);
+                        index++;
+                        targetsSet++;
+                        break;
+                    }
+                }
+            } else {
+                if (ability.getTargets().size() == 0) {
+                    throw new AssertionError("Ability has no targets. " + ability.toString());
+                }
+                for (UUID id: ability.getTargets().get(0).possibleTargets(ability.getSourceId(), ability.getControllerId(), game)) {
+                    MageObject object = game.getObject(id);
+                    if (object != null && object.getName().equals(targetName)) {
+                        if (index >= ability.getTargets().size()) {
+                            index--;
+                        }
+                        if (ability.getTargets().get(index).getNumberOfTargets() == 1) {
+                            ability.getTargets().get(index).clearChosen();
+                        }
+                        if (ability.getTargets().get(index) instanceof TargetCreaturePermanentAmount) {
+                            // supports only to set the complete amount to one target
+                            TargetCreaturePermanentAmount targetAmount = (TargetCreaturePermanentAmount) ability.getTargets().get(index);
+                            targetAmount.setAmount(ability, game);
+                            int amount = targetAmount.getAmountRemaining();
+                            targetAmount.addTarget(id, amount,ability, game);
+                            targetsSet++;
+                        } else {
+                            ability.getTargets().get(index).addTarget(id, ability, game);
+                            targetsSet++;
+                        }
+                        index++;
+                        break;
+                    }
+                }
+            }
+        }
+        if (targetsSet != targetList.length) {
+            result = false;
+        }
+        return result;
+    }
 }
+
