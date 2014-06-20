@@ -31,7 +31,6 @@ package mage.abilities.costs.common;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.cards.Card;
@@ -40,14 +39,14 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
- 
+
 /**
  *
  * @author LevelX2
  */
 public class ExileFromHandCost extends CostImpl {
  
-    List<Card> cards = new ArrayList<Card>();
+    List<Card> cards = new ArrayList<>();
  
     public ExileFromHandCost(TargetCardInHand target) {
         this.addTarget(target);

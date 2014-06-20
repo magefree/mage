@@ -51,8 +51,8 @@ import mage.watchers.Watcher;
  */
 public class ProwlWatcher extends Watcher {
 
-    private Map<UUID, Set<String>> damagingSubtypes = new HashMap<UUID, Set<String>>();
-    private Set<UUID> allSubtypes = new HashSet<UUID>();
+    private final Map<UUID, Set<String>> damagingSubtypes = new HashMap<>();
+    private final Set<UUID> allSubtypes = new HashSet<>();
 
     public ProwlWatcher() {
         super("Prowl", WatcherScope.GAME);
@@ -82,7 +82,7 @@ public class ProwlWatcher extends Watcher {
                     } else {
                         Set<String> subtypes = damagingSubtypes.get(creature.getControllerId());
                         if (subtypes == null) {
-                            subtypes = new LinkedHashSet<String>();
+                            subtypes = new LinkedHashSet<>();
                         }
                         subtypes.addAll(creature.getSubtype());
                         damagingSubtypes.put(creature.getControllerId(), subtypes);

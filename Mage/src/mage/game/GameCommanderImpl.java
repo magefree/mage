@@ -55,8 +55,8 @@ import mage.watchers.common.CommanderCombatDamageWatcher;
 
 public abstract class GameCommanderImpl extends GameImpl {
 
-    private final Map<UUID, Cards> mulliganedCards = new HashMap<UUID, Cards>();
-    private final Set<CommanderCombatDamageWatcher> commanderCombatWatcher = new HashSet<CommanderCombatDamageWatcher>();
+    private final Map<UUID, Cards> mulliganedCards = new HashMap<>();
+    private final Set<CommanderCombatDamageWatcher> commanderCombatWatcher = new HashSet<>();
 
     public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans) {
         super(attackOption, range, freeMulligans);
