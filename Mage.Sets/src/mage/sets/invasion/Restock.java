@@ -53,7 +53,7 @@ public class Restock extends CardImpl {
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();
         effect.setText("Return two target cards from your graveyard to your hand");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(2,2, new FilterCard("")));        
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(2, new FilterCard("card from your graveyard")));
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 

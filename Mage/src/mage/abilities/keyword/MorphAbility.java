@@ -46,6 +46,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continious.SourceEffect;
@@ -103,7 +104,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
 
     protected static final String ABILITY_KEYWORD = "Morph";
     protected static final String REMINDER_TEXT = "(You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)";
-    protected String morphCostsText;
+    protected String ruleText;
     protected List<AlternativeCost2> alternateCosts = new LinkedList<>();
 
     // needed to check activation status, if card changes zone after casting it
@@ -117,7 +118,15 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
         super(Zone.HAND, null);
         card.setMorphCard(true);
         name = ABILITY_KEYWORD;
-        morphCostsText = morphCosts.getText();
+        StringBuilder sb = new StringBuilder();
+        sb.append(ABILITY_KEYWORD).append(" ");
+        if (!(morphCosts instanceof ManaCosts)) {
+            sb.append("- ");
+        }
+        sb.append(morphCosts.getText()).append(" ");
+        sb.append(REMINDER_TEXT);
+        ruleText = sb.toString();
+
         alternateCosts.add(new AlternativeCost2Impl(ABILITY_KEYWORD, REMINDER_TEXT, new GenericManaCost(3)));
 
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesFaceDownCreatureEffect(morphCosts));
@@ -186,7 +195,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
                         ability.getCosts().clear();
                         for (Iterator it = ((Costs) alternateCastingCost).iterator(); it.hasNext();) {
                             Cost cost = (Cost) it.next();
-                            if (cost instanceof ManaCostsImpl) {
+                            if (cost instanceof ManaCosts) {
                                 ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
                             } else {
                                 ability.getCosts().add(cost.copy());
@@ -223,23 +232,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
 
     @Override
     public String getRule() {
-       StringBuilder sb = new StringBuilder();
-       int numberCosts = 0;
-       String remarkText = "";
-       for (AlternativeCost2 alternateCastingCost: alternateCosts) {
-           if (numberCosts == 0) {
-               sb.append(alternateCastingCost.getText(false));
-               remarkText = alternateCastingCost.getReminderText();
-           } else {
-               sb.append(" and/or ").append(alternateCastingCost.getText(true));
-           }
-           ++numberCosts;
-       }
-       if (numberCosts == 1) {
-            sb.append(" ").append(remarkText);
-       }
-
-       return sb.toString();
+        return ruleText;
     }
 
     @Override

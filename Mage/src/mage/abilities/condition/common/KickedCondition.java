@@ -67,4 +67,10 @@ public class KickedCondition implements Condition {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "{this} was kicked";
+    }
+
 }

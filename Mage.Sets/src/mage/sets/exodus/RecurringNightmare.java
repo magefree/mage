@@ -28,15 +28,14 @@
 package mage.sets.exodus;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.ReturnToHandSourceCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureCard;
@@ -50,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
 public class RecurringNightmare extends CardImpl {
     
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card in your graveyard");
-    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("creature to sacrifice");
+    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("creature");
 
     public RecurringNightmare(UUID ownerId) {
         super(ownerId, 72, "Recurring Nightmare", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

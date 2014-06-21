@@ -4,22 +4,25 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.PostResolveEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
 public class DoIfCostPaid extends OneShotEffect {
-    private final OneShotEffect executingEffect;
+    private final Effect executingEffect;
     private final Cost cost;
     private String chooseUseText;
 
-    public DoIfCostPaid(OneShotEffect effect, Cost cost) {
+    public DoIfCostPaid(Effect effect, Cost cost) {
         this(effect, cost, null);
     }
 
-    public DoIfCostPaid(OneShotEffect effect, Cost cost, String chooseUseText) {
+    public DoIfCostPaid(Effect effect, Cost cost, String chooseUseText) {
         super(Outcome.Benefit);
         this.executingEffect = effect;
         this.cost = cost;
@@ -28,7 +31,7 @@ public class DoIfCostPaid extends OneShotEffect {
 
     public DoIfCostPaid(final DoIfCostPaid effect) {
         super(effect);
-        this.executingEffect = (OneShotEffect) effect.executingEffect.copy();
+        this.executingEffect = effect.executingEffect.copy();
         this.cost = effect.cost.copy();
         this.chooseUseText = effect.chooseUseText;
     }
@@ -49,7 +52,14 @@ public class DoIfCostPaid extends OneShotEffect {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                     executingEffect.setTargetPointer(this.targetPointer);
-                    return executingEffect.apply(game, source);
+                    if (executingEffect instanceof OneShotEffect) {
+                        if (!(executingEffect instanceof PostResolveEffect)) {
+                            return executingEffect.apply(game, source);
+                        }
+                    }
+                    else {
+                        game.addEffect((ContinuousEffect) executingEffect, source);
+                    }
                 }
             }
             return true;
