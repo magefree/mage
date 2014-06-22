@@ -28,12 +28,16 @@
 
 package mage.target.common;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.players.Player;
 import mage.target.TargetCard;
 
 /**
@@ -68,6 +72,37 @@ public class TargetCardInHand extends TargetCard {
         Card card = game.getPlayer(source.getControllerId()).getHand().get(id, game);
         if (card != null) {
             return filter.match(card, source.getControllerId(), game);
+        }
+        return false;
+    }
+
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceId, UUID playerId, Game game) {
+        Set<UUID> possibleTargets = new HashSet<>();
+        Player player = game.getPlayer(playerId);
+        if (player != null) {
+            for (Card card : player.getHand().getCards(filter, game)) {
+                if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, playerId))) {
+                    possibleTargets.add(card.getId());
+                }
+            }
+        }
+        return possibleTargets;
+    }
+
+    @Override
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+        int possibleTargets = 0;
+        Player player = game.getPlayer(sourceControllerId);
+        if (player != null) {
+            for (Card card : player.getHand().getCards(filter, game)) {
+                if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, sourceControllerId))) {
+                    possibleTargets++;
+                    if (possibleTargets >= this.minNumberOfTargets) {
+                        return true;
+                    }
+                }
+            }
         }
         return false;
     }

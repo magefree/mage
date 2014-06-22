@@ -30,20 +30,19 @@ package mage.abilities.effects.common.search;
 
 import java.util.List;
 import java.util.UUID;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetCardInGraveyard;
-import mage.target.common.TargetCardInHand;
+import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -90,7 +89,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
                 int cardsCount = (cardName.isEmpty() ? 0 :targetPlayer.getGraveyard().count(filter, game));
                 if (cardsCount > 0) {
                     filter.setMessage("card named " + cardName + " in the graveyard of " + targetPlayer.getName());
-                    TargetCardInGraveyard target = new TargetCardInGraveyard((graveyardExileOptional ? 0 :cardsCount), cardsCount, filter);
+                    TargetCard target = new TargetCard((graveyardExileOptional ? 0 :cardsCount), cardsCount,Zone.GRAVEYARD, filter);
                     if (controller.choose(Outcome.Exile, targetPlayer.getGraveyard(), target, game)) {
                         List<UUID> targets = target.getTargets();
                         for (UUID targetId : targets) {
@@ -107,7 +106,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
                 cardsCount = (cardName.isEmpty() ? 0 :targetPlayer.getHand().count(filter, game));
                 if (cardsCount > 0) {
                     filter.setMessage("card named " + cardName + " in the hand of " + targetPlayer.getName());
-                    TargetCardInHand target = new TargetCardInHand(0, cardsCount, filter);
+                    TargetCard target = new TargetCard(0, cardsCount, Zone.HAND, filter);
                     if (controller.choose(Outcome.Exile, targetPlayer.getHand(), target, game)) {
                         List<UUID> targets = target.getTargets();
                         for (UUID targetId : targets) {
