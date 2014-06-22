@@ -71,7 +71,7 @@ public class NantukoVigilante extends CardImpl {
         this.addAbility(new MorphAbility(this,new ManaCostsImpl("{1}{G}")));
         // When Nantuko Vigilante is turned face up, destroy target artifact or enchantment.
         Ability ability = new TurnedFaceUpTriggeredAbility(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 
