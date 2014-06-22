@@ -44,6 +44,7 @@ import java.awt.event.MouseListener;
 import java.beans.Beans;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.DefaultComboBoxModel;
@@ -276,11 +277,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         int numColumns = maxWidth / Config.dimensions.frameWidth;
         int curColumn = 0;
         int curRow = 0;
-        int landCount = 0;
-        int creatureCount = 0;
-        int sorceryCount = 0;
-        int instantCount = 0;
-        int enchantmentCount = 0;
+        Comparator<CardView> comparator = null;
         //FIXME: why we remove all cards? for performance it's better to merge changes
         // as it is already done in ListView
         cardArea.removeAll();
@@ -289,20 +286,24 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
             List<CardView> sortedCards = new ArrayList<>(cards.values());
             switch (sortSetting.getSortBy()) {
                 case NAME:
-                    Collections.sort(sortedCards, new CardViewNameComparator());
+                    comparator = new CardViewNameComparator();
                     break;
                 case RARITY:
-                    Collections.sort(sortedCards, new CardViewRarityComparator());
+                    comparator = new CardViewRarityComparator();
                     break;
                 case COLOR:
-                    Collections.sort(sortedCards, new CardViewColorComparator());
+                    comparator = new CardViewColorComparator();
                     break;
                 case COLOR_DETAILED:
-                    Collections.sort(sortedCards, new CardViewColorDetailedComparator());
+                    comparator = new CardViewColorDetailedComparator();
                     break;
                 case CASTING_COST:
-                    Collections.sort(sortedCards, new CardViewCostComparator());
+                    comparator = new CardViewCostComparator();
                     break;
+            }
+            if(comparator != null){
+                Collections.sort(sortedCards, new CardViewNameComparator());
+                Collections.sort(sortedCards, comparator);
             }
             CardView lastCard = null;
             for (CardView card: sortedCards) {
@@ -310,37 +311,11 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
                     if (lastCard == null) {
                         lastCard = card;
                     }
-                    switch (sortSetting.getSortBy()) {
-                        case NAME:
-                            if (!card.getName().equals(lastCard.getName())) {
-                                curColumn++;
-                                curRow = 0;
-                            }
-                            break;
-                        case RARITY:
-                            if (!card.getRarity().equals(lastCard.getRarity())) {
-                                curColumn++;
-                                curRow = 0;
-                            }
-                            break;
-                        case COLOR:
-                            if (card.getColor().compareTo(lastCard.getColor()) != 0) {
-                                curColumn++;
-                                curRow = 0;
-                            }
-                            break;
-                        case COLOR_DETAILED:
-                            if (card.getColor().hashCode() != lastCard.getColor().hashCode()) {
-                                curColumn++;
-                                curRow = 0;
-                            }
-                            break;
-                        case CASTING_COST:
-                            if (card.getConvertedManaCost() != lastCard.getConvertedManaCost()) {
-                                curColumn++;
-                                curRow = 0;
-                            }
-                            break;
+                    if(comparator != null){
+                        if(comparator.compare(card, lastCard) > 0){
+                            curColumn++;
+                            curRow = 0;
+                        }
                     }
                     rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
                     addCard(card, bigCard, gameId, rectangle);
@@ -355,23 +330,40 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
                         curRow++;
                     }
                 }
-                if (card.getCardTypes().contains(CardType.LAND)) {
-                    landCount++;
-                }
-                if (card.getCardTypes().contains(CardType.CREATURE)) {
-                    creatureCount++;
-                }
-                if (card.getCardTypes().contains(CardType.SORCERY)) {
-                    sorceryCount++;
-                }
-                if (card.getCardTypes().contains(CardType.INSTANT)) {
-                    instantCount++;
-                }
-                if (card.getCardTypes().contains(CardType.ENCHANTMENT)) {
-                    enchantmentCount++;
-                }
             }
         }
+        updateCounts();
+        cardArea.setPreferredSize(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight + 200));
+        cardArea.revalidate();
+        this.revalidate();
+        this.repaint();
+        this.setVisible(true);
+    }
+    
+    private void updateCounts(){
+        int landCount = 0;
+        int creatureCount = 0;
+        int sorceryCount = 0;
+        int instantCount = 0;
+        int enchantmentCount = 0;
+        for (CardView card: cards.values()) {
+           if (card.getCardTypes().contains(CardType.LAND)) {
+                landCount++;
+            }
+            if (card.getCardTypes().contains(CardType.CREATURE)) {
+                creatureCount++;
+            }
+            if (card.getCardTypes().contains(CardType.SORCERY)) {
+                sorceryCount++;
+            }
+            if (card.getCardTypes().contains(CardType.INSTANT)) {
+                instantCount++;
+            }
+            if (card.getCardTypes().contains(CardType.ENCHANTMENT)) {
+                enchantmentCount++;
+            }
+        }
+        
         int count = cards != null ? cards.size() : 0;
         this.lblCount.setText(Integer.toString(count));
         this.lblCreatureCount.setText(Integer.toString(creatureCount));
@@ -379,11 +371,6 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         this.lblSorceryCount.setText(Integer.toString(sorceryCount));
         this.lblInstantCount.setText(Integer.toString(instantCount));
         this.lblEnchantmentCount.setText(Integer.toString(enchantmentCount));
-        cardArea.setPreferredSize(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight + 200));
-        cardArea.revalidate();
-        this.revalidate();
-        this.repaint();
-        this.setVisible(true);
     }
 
     private void addCard(CardView card, BigCard bigCard, UUID gameId, Rectangle rectangle) {
@@ -437,7 +424,6 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         bgView = new javax.swing.ButtonGroup();
         panelControl = new javax.swing.JPanel();
@@ -615,7 +601,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
                         .addComponent(lblLandCount)
                         .addComponent(lblCreatureCount)
                         .addComponent(lblSorceryCount)
-                        .addComponent(lblInstantCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblInstantCount)
                         .addComponent(lblEnchantmentCount)
                         .addComponent(chkPiles))
                     .addComponent(cbSortBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -636,7 +622,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
             .addGroup(layout.createSequentialGroup()
                 .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelControl, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE)
+                    .addComponent(panelControl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelCardArea)))
         );
         layout.setVerticalGroup(
