@@ -37,7 +37,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="panelControl" pref="654" max="32767" attributes="0"/>
+                  <Component id="panelControl" max="32767" attributes="0"/>
                   <Component id="panelCardArea" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -105,7 +105,7 @@
                           <Component id="lblLandCount" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblCreatureCount" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblSorceryCount" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblInstantCount" alignment="3" min="-2" pref="-17" max="-2" attributes="0"/>
+                          <Component id="lblInstantCount" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblEnchantmentCount" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="chkPiles" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -127,7 +127,7 @@
             <Property name="text" type="java.lang.String" value="999"/>
             <Property name="toolTipText" type="java.lang.String" value="Number of all cards in this area."/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Standardcursor"/>
+              <Color id="Default Cursor"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="inheritsPopupMenu" type="boolean" value="false"/>
@@ -145,7 +145,7 @@
             <Property name="toolTipText" type="java.lang.String" value="Number of lands."/>
             <Property name="verticalAlignment" type="int" value="1"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Standardcursor"/>
+              <Color id="Default Cursor"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="inheritsPopupMenu" type="boolean" value="false"/>
@@ -163,7 +163,7 @@
             <Property name="toolTipText" type="java.lang.String" value="Number of creatures."/>
             <Property name="verticalAlignment" type="int" value="1"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Standardcursor"/>
+              <Color id="Default Cursor"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="inheritsPopupMenu" type="boolean" value="false"/>
@@ -181,7 +181,7 @@
             <Property name="toolTipText" type="java.lang.String" value="Number of sorceries."/>
             <Property name="verticalAlignment" type="int" value="1"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Standardcursor"/>
+              <Color id="Default Cursor"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="inheritsPopupMenu" type="boolean" value="false"/>
@@ -199,7 +199,7 @@
             <Property name="toolTipText" type="java.lang.String" value="Number of instants."/>
             <Property name="verticalAlignment" type="int" value="1"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Standardcursor"/>
+              <Color id="Default Cursor"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="inheritsPopupMenu" type="boolean" value="false"/>
@@ -217,7 +217,7 @@
             <Property name="toolTipText" type="java.lang.String" value="Number of enchantments."/>
             <Property name="verticalAlignment" type="int" value="1"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Standardcursor"/>
+              <Color id="Default Cursor"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="inheritsPopupMenu" type="boolean" value="false"/>

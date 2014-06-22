@@ -45,7 +45,9 @@ import java.beans.Beans;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
@@ -87,6 +89,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
     protected CardEventSource cardEventSource = new CardEventSource();
     private Dimension cardDimension;
     private CardsView cards;
+    private Map<UUID, MageCard> mageCards = new LinkedHashMap<>();
     protected BigCard bigCard;
     protected UUID gameId;
     private SortSetting sortSetting;
@@ -124,6 +127,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
                 ((CardPanel)comp).cleanUp();
             }
         }
+        mageCards.clear();
         cardArea.removeAll();
         this.bigCard = null;
 
@@ -277,10 +281,27 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         int numColumns = maxWidth / Config.dimensions.frameWidth;
         int curColumn = 0;
         int curRow = 0;
+        int maxRow = 0;
+        int maxColumn = 0;
         Comparator<CardView> comparator = null;
-        //FIXME: why we remove all cards? for performance it's better to merge changes
-        // as it is already done in ListView
-        cardArea.removeAll();
+        Map<UUID, MageCard> oldMageCards = mageCards;
+        mageCards = new LinkedHashMap<>();
+        
+        //Find card view
+        for(UUID uuid : cards.keySet()){
+            if(oldMageCards.containsKey(uuid)){
+                mageCards.put(uuid, oldMageCards.get(uuid));
+                oldMageCards.remove(uuid);
+            }
+            else{
+                mageCards.put(uuid, addCard(cards.get(uuid), bigCard, gameId));
+            }
+        }
+        //Remove unused cards
+        for(MageCard card : oldMageCards.values()){
+            cardArea.remove(card);
+        }
+        
         if (cards != null && cards.size() > 0) {
             Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
             List<CardView> sortedCards = new ArrayList<>(cards.values());
@@ -314,26 +335,31 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
                     if(comparator != null){
                         if(comparator.compare(card, lastCard) > 0){
                             curColumn++;
+                            maxRow = Math.max(maxRow, curRow);
                             curRow = 0;
                         }
                     }
                     rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
-                    addCard(card, bigCard, gameId, rectangle);
+                    setCardBounds(mageCards.get(card.getId()), rectangle);
+                    
                     curRow++;
                     lastCard = card;
                 } else {
                     rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
-                    addCard(card, bigCard, gameId, rectangle);
+                    setCardBounds(mageCards.get(card.getId()), rectangle);
                     curColumn++;
                     if (curColumn == numColumns) {
+                        maxColumn = Math.max(maxColumn, curColumn);
                         curColumn = 0;
                         curRow++;
                     }
                 }
             }
         }
+        maxRow = Math.max(maxRow, curRow);
+        maxColumn = Math.max(maxColumn, curColumn);
         updateCounts();
-        cardArea.setPreferredSize(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight + 200));
+        cardArea.setPreferredSize(new Dimension((maxColumn+1) * Config.dimensions.frameWidth, Config.dimensions.frameHeight + maxRow*20));
         cardArea.revalidate();
         this.revalidate();
         this.repaint();
@@ -373,17 +399,22 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         this.lblEnchantmentCount.setText(Integer.toString(enchantmentCount));
     }
 
-    private void addCard(CardView card, BigCard bigCard, UUID gameId, Rectangle rectangle) {
+    private MageCard addCard(CardView card, BigCard bigCard, UUID gameId) {
         if (cardDimension == null) {
             cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
         }
         MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, cardDimension, gameId, true);
-        cardImg.setBounds(rectangle);
         cardArea.add(cardImg);
-        cardArea.moveToFront(cardImg);
         cardImg.update(card);
         cardImg.addMouseListener(this);
-        cardImg.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+        return cardImg;
+    }
+    
+
+    private void setCardBounds(MageCard card, Rectangle rectangle) {
+        card.setBounds(rectangle);
+        card.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+        cardArea.moveToFront(card);
     }
 
     @Override
