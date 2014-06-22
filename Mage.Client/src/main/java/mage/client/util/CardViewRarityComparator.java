@@ -39,13 +39,7 @@ public class CardViewRarityComparator implements Comparator<CardView> {
 
     @Override
     public int compare(CardView o1, CardView o2) {
-        int val = o1.getRarity().compareTo(o2.getRarity());
-        if (val == 0) {
-            return o1.getName().compareTo(o2.getName());
-        }
-        else {
-            return val;
-        }
+        return o1.getRarity().compareTo(o2.getRarity());
     }
 
 }

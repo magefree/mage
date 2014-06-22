@@ -39,13 +39,7 @@ public class CardViewColorDetailedComparator implements Comparator<CardView> {
 
     @Override
     public int compare(CardView o1, CardView o2) {
-        int val = o1.getColor().hashCode() - o2.getColor().hashCode();
-        if (val == 0) {
-            return o1.getName().compareTo(o2.getName());
-        }
-        else {
-            return val;
-        }
+        return o1.getColor().hashCode() - o2.getColor().hashCode();
     }
 
 }
