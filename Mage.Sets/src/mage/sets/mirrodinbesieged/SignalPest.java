@@ -27,18 +27,20 @@
  */
 package mage.sets.mirrodinbesieged;
 
+import java.io.ObjectStreamException;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
+import mage.abilities.MageSingleton;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.BattleCryAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -70,9 +72,13 @@ public class SignalPest extends CardImpl {
     }
 }
 
-class SignalPestAbility extends EvasionAbility {
+class SignalPestAbility extends EvasionAbility implements MageSingleton {
 
     private static SignalPestAbility instance;
+
+    private Object readResolve() throws ObjectStreamException {
+        return instance;
+    }
 
     public static SignalPestAbility getInstance() {
         if (instance == null) {

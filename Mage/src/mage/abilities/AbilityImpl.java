@@ -734,8 +734,8 @@ public abstract class AbilityImpl implements Ability {
 
         MageObject object;
         UUID parameterSourceId;
-        // for singleton abilities like Flying we can't rely on abilities' source
-        // so will use the one that came as a parameter if it is not null
+        // for singleton abilities like Flying we can't rely on abilities' source because it's only once in continuous effects
+        // so will use the sourceId of the object itself that came as a parameter if it is not null
         if (this instanceof MageSingleton && source != null) {
             object = source;
             parameterSourceId = source.getId();
