@@ -46,7 +46,7 @@ import mage.players.Player;
  */
 public class AlternativeCostSourceAbility extends StaticAbility implements AlternativeSourceCosts {
 
-    protected List<AlternativeCost2> alternateCosts = new LinkedList<>();
+    Costs<AlternativeCost2> alternateCosts = new CostsImpl<>();
     protected Condition condition;
     protected String rule;
 
@@ -107,17 +107,19 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
         if (ability instanceof SpellAbility) {
             Player player = game.getPlayer(ability.getControllerId());
             if (player != null) {
-                if (player.chooseUse(Outcome.Detriment, alternateCosts.isEmpty() ? "Cast without paying its mana cost?":"Pay alternative costs?", game)) {
+                if (alternateCosts.canPay(ability.getSourceId(), ability.getControllerId(), game) &&
+                        player.chooseUse(Outcome.Detriment, alternateCosts.isEmpty() ? "Cast without paying its mana cost?":"Pay alternative costs?", game)) {
                     ability.getManaCostsToPay().clear();
                     ability.getCosts().clear();
-                    for (AlternativeCost2 alternateCost : alternateCosts) {
+                    for (Cost cost : alternateCosts) {
+                        AlternativeCost2 alternateCost = (AlternativeCost2) cost;
                         alternateCost.activate();
                         for (Iterator it = ((Costs) alternateCost).iterator(); it.hasNext();) {
-                            Cost cost = (Cost) it.next();
-                            if (cost instanceof ManaCost) {
-                                ability.getManaCostsToPay().add((ManaCost) cost.copy());
+                            Cost costDeailed = (Cost) it.next();
+                            if (costDeailed instanceof ManaCost) {
+                                ability.getManaCostsToPay().add((ManaCost) costDeailed.copy());
                             } else {
-                                ability.getCosts().add(cost.copy());
+                                ability.getCosts().add(costDeailed.copy());
                             }
                         }
                     }
