@@ -99,16 +99,17 @@ class ReshapeSearchEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        FilterCard filter = new FilterCard("artifact card with converted mana cost X or less");
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
         //Set the mana cost one higher to 'emulate' a less than or equal to comparison.
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, source.getManaCostsToPay().getX() + 1));
+        int xValue = source.getManaCostsToPay().getX() + 1;
+        FilterCard filter = new FilterCard("artifact card with converted mana cost " + xValue + " or less");
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, xValue));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         if (player.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
                 Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
                 if (card != null) {
-                    card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
+                    player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
                 }
             }
             player.shuffleLibrary(game);

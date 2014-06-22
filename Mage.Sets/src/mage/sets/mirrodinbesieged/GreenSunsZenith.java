@@ -58,6 +58,9 @@ public class GreenSunsZenith extends CardImpl {
         super(ownerId, 81, "Green Sun's Zenith", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}");
         this.expansionSetCode = "MBS";
         this.color.setGreen(true);
+        // Search your library for a green creature card with converted mana cost X or less,
+        // put it onto the battlefield, then shuffle your library.
+        // Shuffle Green Sun's Zenith into its owner's library.
         this.getSpellAbility().addEffect(new GreenSunsZenithSearchEffect());
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
     }
@@ -86,19 +89,23 @@ class GreenSunsZenithSearchEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null)
+        if (player == null) {
             return false;
-        FilterCard filter = new FilterCard("green creature card with converted mana cost X or less");
+        }
+        //Set the mana cost one higher to 'emulate' a less than or equal to comparison.
+        int xValue = source.getManaCostsToPay().getX() + 1;
+        FilterCard filter = new FilterCard("green creature card with converted mana cost " + xValue + " or less");
         filter.add(new ColorPredicate(ObjectColor.GREEN));
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        //Set the mana cost one higher to 'emulate' a less than or equal to comparison.
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, source.getManaCostsToPay().getX() + 1));
+        
+        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, xValue));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         if (player.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
                 Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
-                if (card != null)
-                    card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
+                if (card != null) {
+                    player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                }
             }
             player.shuffleLibrary(game);
             return true;

@@ -49,8 +49,10 @@ public class OvergrownTomb extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Swamp");
         this.subtype.add("Forest");
+
         this.addAbility(new BlackManaAbility());
         this.addAbility(new GreenManaAbility());
+
         this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "you may pay 2 life. If you don't, {this} enters the battlefield tapped"));
     }
 
