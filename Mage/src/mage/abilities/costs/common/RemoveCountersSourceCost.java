@@ -42,8 +42,8 @@ import mage.util.CardUtil;
  */
 public class RemoveCountersSourceCost extends CostImpl {
 
-    private int amount;
-    private String name;
+    private final int amount;
+    private final String name;
 
     public RemoveCountersSourceCost(Counter counter) {
         this.amount = counter.getCount();
@@ -63,8 +63,9 @@ public class RemoveCountersSourceCost extends CostImpl {
     @Override
     public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
         Permanent permanent = game.getPermanent(sourceId);
-        if (permanent.getCounters().getCount(name) >= amount)
+        if (permanent.getCounters().getCount(name) >= amount) {
             return true;
+        }
         return false;
     }
 

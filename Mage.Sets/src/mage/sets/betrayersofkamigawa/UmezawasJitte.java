@@ -48,6 +48,7 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+import mage.game.events.GameEvent.EventType;
 
 /**
  * @author Loki
@@ -90,12 +91,16 @@ public class UmezawasJitte extends CardImpl {
 
 class UmezawasJitteAbility extends TriggeredAbilityImpl {
 
+    private boolean usedInPhase;
+
     public UmezawasJitteAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(2)));
+        this.usedInPhase = false;
     }
 
     public UmezawasJitteAbility(final UmezawasJitteAbility ability) {
         super(ability);
+        this.usedInPhase = ability.usedInPhase;
     }
 
     @Override
@@ -107,15 +112,19 @@ class UmezawasJitteAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event instanceof DamagedEvent) {
             Permanent p = game.getPermanent(event.getSourceId());
-            if (((DamagedEvent) event).isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
+            if (!usedInPhase && ((DamagedEvent) event).isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
+                usedInPhase = true;
                 return true;
             }
+        }
+        if (event.getType().equals(EventType.COMBAT_DAMAGE_STEP_PRE)) {
+            usedInPhase = false;
         }
         return false;
     }
 
     @Override
     public String getRule() {
-        return "Whenever equipped creature deals combat damage, put two charge counters on {this}.";
+        return "Whenever equipped creature deals combat damage, " + super.getRule();
     }
 }
