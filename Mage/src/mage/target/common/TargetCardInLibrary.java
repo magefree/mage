@@ -65,7 +65,7 @@ public class TargetCardInLibrary extends TargetCard {
 
     public TargetCardInLibrary(int minNumTargets, int maxNumTargets, FilterCard filter) {
         super(minNumTargets, maxNumTargets, Zone.LIBRARY, filter);
-        this.setRequired(!filter.hasPredicates());
+        this.setRequired(minNumTargets > 0 && !filter.hasPredicates());
         this.librarySearchLimit = Integer.MAX_VALUE;
     }
 
