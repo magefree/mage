@@ -55,7 +55,11 @@ public class KeigaTheTideStar extends CardImpl {
         this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+
+        // When Keiga, the Tide Star dies, gain control of target creature.
         Ability ability = new DiesTriggeredAbility(new GainControlTargetEffect(Duration.Custom));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
