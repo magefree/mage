@@ -99,7 +99,7 @@ class HeliodGodOfTheSunToken extends Token {
         this.cardType.add(CardType.ENCHANTMENT);
         
         this.subtype.add("Cleric");
-        this.color.isWhite();
+        this.color.setWhite(true);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
