@@ -157,7 +157,7 @@ while ( my ($key, $value) = each(@setCards) ) {
                         if(-e $fileName) {
                             open (DATA, $fileName);
                             while(my $line = <DATA>) {
-                                if ($line =~ /extends CardImpl<(\w+?)>/ || $line =~ /extends LevelerCard<(\w+?)>/) {
+                                if ($line =~ /extends CardImpl / || $line =~ /extends LevelerCard /) {
                                     $vars{'baseClassName'} = $1;
                                     $vars{'baseSet'} = $knownSets{$keySet};
 
@@ -172,7 +172,6 @@ while ( my ($key, $value) = each(@setCards) ) {
                         }
                     }
                 }
-
                 if($found eq 1) {
                     my $result = $template->fill_in(HASH => \%vars);
                     if (defined($result)) {

@@ -70,26 +70,25 @@ public class PutOnLibraryTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean result = false;
-        for (UUID targetId : targetPointer.getTargets(game, source)) {
-            switch (game.getState().getZone(targetId)) {
-                case BATTLEFIELD:
-                    Permanent permanent = game.getPermanent(targetId);
-                    if (permanent != null) {
-                        result |= permanent.moveToZone(Zone.LIBRARY, source.getId(), game, onTop);
-                    }
-                case GRAVEYARD:
-                    Card card = game.getCard(targetId);
-                    if (card != null) {
-                        for (Player player : game.getPlayers().values()) {
-                            if (player.getGraveyard().contains(card.getId())) {
-                                player.getGraveyard().remove(card);
-                                result |= card.moveToZone(Zone.LIBRARY, source.getId(), game, onTop);
-                            }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (UUID targetId : targetPointer.getTargets(game, source)) {
+                switch (game.getState().getZone(targetId)) {
+                    case BATTLEFIELD:
+                        Permanent permanent = game.getPermanent(targetId);
+                        if (permanent != null) {
+                            result |= controller.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, onTop, true);
                         }
-                    }
+                    case GRAVEYARD:
+                        Card card = game.getCard(targetId);
+                        if (card != null && game.getState().getZone(targetId).equals(Zone.GRAVEYARD)) {
+                            result |= controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD, onTop, true);
+                        }
+                }
             }
         }
         return result;
+
     }
 
     @Override

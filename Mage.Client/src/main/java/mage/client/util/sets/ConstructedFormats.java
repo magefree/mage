@@ -20,37 +20,47 @@ public class ConstructedFormats {
 
     private static final String[] constructedFormats = {
             ALL, STANDARD, EXTENDED, MODERN,
-            "Commander 2013 Edition",
             "* Theros Block", "Journey into Nyx", "Born of the Gods", "Theros",
-            "Magic 2014",
-            "Modern Masters",
             "* Return to Ravnica Block", "Dragon's Maze", "Gatecrash", "Return to Ravnica",
-            "Magic 2013", "Planechase 2012",
             "* Innistrad Block", "Avacyn Restored", "Dark Ascension", "Innistrad",
-            "Magic 2012", "Commander",
-            "* Scars of Mirrodin Block", "New Phyrexia", "Mirrodin Besieged", "Scars of Mirrodin", "Magic 2011",
+            "* Scars of Mirrodin Block", "New Phyrexia", "Mirrodin Besieged", "Scars of Mirrodin", 
             "* Zendikar Block", "Rise of the Eldrazi", "Worldwake", "Zendikar",
-            "Magic 2010", "Planechase",
             "* Shards of Alara Block", "Alara Reborn", "Conflux", "Shards of Alara",
             "* Shadowmoor Block", "Shadowmoor", "Eventide",
             "* Lorwyn Block", "Lorwyn", "Morningtide",
-            "* Time Spiral Block", "Future Sight", "Planar Chaos", "Time Spiral", "Tenth Edition",
+            "* Time Spiral Block", "Future Sight", "Planar Chaos", "Time Spiral",
             "* Ravnica Block", "Dissension", "Guildpact", "Ravnica: City of Guilds",
-            "* Kamigawa Block", "Saviors of Kamigawa", "Betrayers of Kamigawa", "Champions of Kamigawa", "Ninth Edition",
+            "* Kamigawa Block", "Saviors of Kamigawa", "Betrayers of Kamigawa", "Champions of Kamigawa", 
             "* Mirrodin Block", "Fifth Dawn", "Darksteel", "Mirrodin",
-            "* Onslaught Block", "Scourge", "Legions", "Onslaught", "Eighth Edition",
+            "* Onslaught Block", "Scourge", "Legions", "Onslaught", 
             "* Odyssey Block", "Judgment", "Torment", "Odyssey",
-            "* Invasion Block", "Apocalypse", "Planeshift", "Invasion", "Seventh Edition",
+            "* Invasion Block", "Apocalypse", "Planeshift", "Invasion", 
             "* Masquerade Block", "Prophecy", "Nemesis", "Mercadian Masques",
-            "* Urza Block", "Urza's Destiny", "Urza's Legacy", "Urza's Saga", "Sixth Edition",
+            "* Urza Block", "Urza's Destiny", "Urza's Legacy", "Urza's Saga", 
             "* Tempest Block", "Exodus", "Stronghold", "Tempest",
-            "* Mirage Block", "Weatherlight", "Visions", "Mirage", "Fifth Edition",
-            "* Ice Age Block", "Coldsnap", "Alliances", "Ice Age", "Fourth Edition",
-            "Homelands", "Fallen Empires", "The Dark", "Legends", "Antiquities", "Arabian Nights",
+            "* Mirage Block", "Weatherlight", "Visions", "Mirage", 
+            "* Ice Age Block", "Coldsnap", "Alliances", "Ice Age", 
+            "Homelands", "Fallen Empires", "The Dark", "Legends", "Antiquities", "Arabian Nights",            
+            "Magic 2014",
+            "Magic 2013",
+            "Magic 2012",
+            "Magic 2011",
+            "Magic 2010",
+            "Tenth Edition",
+            "Ninth Edition",
+            "Eighth Edition",
+            "Seventh Edition",
+            "Sixth Edition",
+            "Fifth Edition",
+            "Fourth Edition",
             "Revised Edition", "Unlimited Edition", "Limited Edition Beta", "Limited Edition Alpha",
+            "Conspiracy",
+            "Modern Masters",
+            "Commander 2013 Edition",
+            "Commander",
+            "Planechase 2012",
+            "Planechase",
             "Portal", "Portal Second Age", "Portal Three Kingdoms",
-            "Guru",
-            "Unhinged",
             "Duel Decks: Elves vs. Goblins",
             "Duel Decks: Jace vs. Chandra",
             "Duel Decks: Divine vs. Demonic",
@@ -60,7 +70,9 @@ public class ConstructedFormats {
             "Duel Decks: Ajani vs. Nicol Bolas",
             "Duel Decks: Venser vs. Koth",
             "Duel Decks: Heroes vs. Monsters",
-            "Duel Decks: Jace vs. Vraska"
+            "Duel Decks: Jace vs. Vraska",
+            "Guru",
+            "Unhinged",
     };
     
     private ConstructedFormats() {
@@ -392,6 +404,9 @@ public class ConstructedFormats {
         }
         if (format.equals("Modern Masters")) {
             return Arrays.asList("MMA");
+        }
+        if (format.equals("Conspiracy")) {
+            return Arrays.asList("CNS");
         }
         if (format.equals("Guru")) {
             return Arrays.asList("GUR");

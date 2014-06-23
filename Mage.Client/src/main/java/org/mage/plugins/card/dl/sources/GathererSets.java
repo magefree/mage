@@ -42,7 +42,9 @@ public class GathererSets implements Iterable<DownloadJob> {
                                                  "ISD", "DKA", "AVR", 
                                                  "RTR", "GTC", "DGM",
                                                  "MMA",
-                                                 "THS", "BNG", "JOU"};
+                                                 "THS", "BNG", "JOU",
+                                                 "CNS"
+                                                 };
     private static final HashMap<String, String> symbolsReplacements = new HashMap<>();
 
     static {
