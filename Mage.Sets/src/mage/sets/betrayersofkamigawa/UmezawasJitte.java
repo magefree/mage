@@ -110,9 +110,9 @@ class UmezawasJitteAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event instanceof DamagedEvent) {
-            Permanent p = game.getPermanent(event.getSourceId());
-            if (!usedInPhase && ((DamagedEvent) event).isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
+        if (event instanceof DamagedEvent && !usedInPhase && ((DamagedEvent) event).isCombatDamage()) {
+            Permanent permanent = game.getPermanent(event.getSourceId());
+            if (permanent != null && permanent.getAttachments().contains(this.getSourceId())) {
                 usedInPhase = true;
                 return true;
             }

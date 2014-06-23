@@ -62,7 +62,7 @@ public class DescendantOfKiyomaro extends CardImpl {
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
                 new BoostSourceEffect(1,2, Duration.WhileOnBattlefield),
                 new MoreCardsInHandThanOpponentsCondition(),
-                "As long as you have more cards in hand than each opponent, Descendant of Kiyomaro gets +1/+2"));
+                "As long as you have more cards in hand than each opponent, {this} gets +1/+2"));
         ability.addEffect(new ConditionalContinousEffect(
                 new GainAbilitySourceEffect(new DealsCombatDamageTriggeredAbility(new GainLifeEffect(3), false)),
                 new MoreCardsInHandThanOpponentsCondition(),

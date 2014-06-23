@@ -27,10 +27,8 @@
  */
 package mage.sets.gatecrash;
 
+import java.util.HashSet;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,11 +36,15 @@ import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -79,6 +81,10 @@ public class FiveAlarmFire extends CardImpl {
 
 class FiveAlarmFireTriggeredAbility extends TriggeredAbilityImpl {
 
+    // Because a creature that is blocked by multiple creatures it deals damage to, only causes to add one counter to ,
+    // it's neccessary to remember which creature already triggered
+    HashSet<UUID> triggeringCreatures = new HashSet<>();
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
     
     public FiveAlarmFireTriggeredAbility() {
@@ -87,6 +93,7 @@ class FiveAlarmFireTriggeredAbility extends TriggeredAbilityImpl {
 
     public FiveAlarmFireTriggeredAbility(final FiveAlarmFireTriggeredAbility ability) {
             super(ability);
+            triggeringCreatures.addAll(ability.triggeringCreatures);
     }
 
     @Override
@@ -96,13 +103,24 @@ class FiveAlarmFireTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER || event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
+        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE
+                || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER
+                || event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
+            if (((DamagedEvent) event).isCombatDamage() && triggeringCreatures.contains(event.getSourceId())) {
                 Permanent permanent = game.getPermanent(event.getSourceId());
-                if(permanent != null &&  filter.match(permanent, sourceId, controllerId, game) && ((DamagedEvent) event).isCombatDamage()){
+                if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
+                    triggeringCreatures.add(event.getSourceId());
                     return true;
                 }
+
             }
-            return false;
+
+        }
+        // reset the remembered creatures for every combat damage step
+        if (event.getType().equals(EventType.COMBAT_DAMAGE_STEP_PRE)) {
+            triggeringCreatures.clear();
+        }
+        return false;
     }
 
     @Override

@@ -34,28 +34,26 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
+ * This triggers only once for each phase the source creature deals damage.
+ * So a creature blocked by two creatures and dealing damage to both blockers in the same
+ * combat damage step triggers only once.
  *
  * @author LevelX
  */
 public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl {
 
-    private boolean setTargetPointer;
+    private boolean usedInPhase;
 
     public DealsCombatDamageTriggeredAbility(Effect effect, boolean optional) {
-            this(effect, optional, false);
-    }
-
-    public DealsCombatDamageTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
-        this.setTargetPointer = setTargetPointer;
+        this.usedInPhase = false;
     }
 
     public DealsCombatDamageTriggeredAbility(final DealsCombatDamageTriggeredAbility ability) {
             super(ability);
-            this.setTargetPointer = ability.setTargetPointer;
+            this.usedInPhase = ability.usedInPhase;
     }
 
     @Override
@@ -65,20 +63,18 @@ public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER || event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
-                  if (event.getSourceId().equals(this.sourceId)
-                    && ((DamagedEvent) event).isCombatDamage()) {
-                            if (setTargetPointer) {
-                                for (Effect effect : this.getEffects()) {
-                                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                                        effect.setValue("damage", event.getAmount());
-                                }
-                            }
-                            return true;
-                    }
+        if (event instanceof DamagedEvent
+                && !usedInPhase
+                && event.getSourceId().equals(this.sourceId)
+                && ((DamagedEvent) event).isCombatDamage()) {
+            usedInPhase = true;
+            return true;
 
-            }
-            return false;
+        }
+        if (event.getType().equals(GameEvent.EventType.COMBAT_DAMAGE_STEP_PRE)) {
+            usedInPhase = false;
+        }
+        return false;
     }
 
     @Override

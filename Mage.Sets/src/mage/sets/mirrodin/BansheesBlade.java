@@ -78,12 +78,16 @@ public class BansheesBlade extends CardImpl {
 
 class BansheesBladeAbility extends TriggeredAbilityImpl {
 
+    private boolean usedInPhase;
+
     public BansheesBladeAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)));
+        this.usedInPhase = false;
     }
 
     public BansheesBladeAbility(final BansheesBladeAbility ability) {
         super(ability);
+        this.usedInPhase = ability.usedInPhase;
     }
 
     @Override
@@ -93,11 +97,15 @@ class BansheesBladeAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event instanceof DamagedEvent) {
-            Permanent p = game.getPermanent(event.getSourceId());
-            if (((DamagedEvent) event).isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
+        if (event instanceof DamagedEvent && ((DamagedEvent) event).isCombatDamage() && !usedInPhase) {
+            Permanent permanent = game.getPermanent(event.getSourceId());
+            if (permanent != null && permanent.getAttachments().contains(this.getSourceId())) {
+                usedInPhase = true;
                 return true;
             }
+        }
+        if (event.getType().equals(GameEvent.EventType.COMBAT_DAMAGE_STEP_PRE)) {
+            usedInPhase = false;
         }
         return false;
     }
