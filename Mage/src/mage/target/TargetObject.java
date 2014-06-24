@@ -58,6 +58,9 @@ public abstract class TargetObject extends TargetImpl {
     public TargetObject(int minNumTargets, int maxNumTargets, Zone zone, boolean notTarget) {
         this.minNumberOfTargets = minNumTargets;
         this.maxNumberOfTargets = maxNumTargets;
+        if (minNumTargets == 0) {
+            setRequired(false);
+        }
         this.zone = zone;
         this.targetName = "card";
         this.notTarget = notTarget;

@@ -61,9 +61,7 @@ public class TargetCard extends TargetObject {
     }
 
     public TargetCard(int minNumTargets, int maxNumTargets, Zone zone, FilterCard filter) {
-        this.minNumberOfTargets = minNumTargets;
-        this.maxNumberOfTargets = maxNumTargets;
-        this.zone = zone;
+        super(minNumTargets, maxNumTargets, zone, false);
         this.filter = filter;
         this.targetName = filter.getMessage();
     }
