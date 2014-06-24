@@ -60,12 +60,16 @@ public abstract class MatchImpl implements Match {
     protected Date startTime;
     protected Date endTime;
 
+    protected int draws;
+    protected int startedGames;
+
     protected boolean replayAvailable;
 
     public MatchImpl(MatchOptions options) {
         this.options = options;
         startTime = new Date();
         replayAvailable = false;
+        draws = 0;
     }
 
     @Override
@@ -169,8 +173,13 @@ public abstract class MatchImpl implements Match {
     }
 
     @Override
+    public void addGame() {
+        startedGames++;
+    }
+
+    @Override
     public int getNumGames() {
-        return games.size();
+        return startedGames;
     }
 
     @Override
@@ -184,6 +193,7 @@ public abstract class MatchImpl implements Match {
     }
 
     protected void initGame(Game game) throws GameException {
+        addGame(); // raises only the number
         shufflePlayers();        
         for (MatchPlayer matchPlayer: this.players) {
             if (!matchPlayer.hasQuit()) {
@@ -221,16 +231,13 @@ public abstract class MatchImpl implements Match {
                 if (player.hasQuit()) {
                     matchPlayer.setQuit(true);
                 }
-                if (player.hasTimerTimeout()) {
-                    matchPlayer.setTimerTimeout(true);
-                }
                 if (player.hasWon()) {
                     matchPlayer.addWin();
                 }
-                if (player.hasLost()) {
-                    matchPlayer.addLose();
-                }
             }
+        }
+        if (game.isADraw()) {
+            addDraw();
         }
         checkIfMatchEnds();
         game.fireGameEndInfo();
@@ -312,15 +319,17 @@ public abstract class MatchImpl implements Match {
         StringBuilder sb = new StringBuilder();
         sb.append("\nMatch score:\n");
         for (MatchPlayer mp :this.getPlayers()) {
-            sb.append("- ").append(mp.getName());
-            sb.append(" (").append(mp.getWins()).append(mp.getWins()==1?" win / ":" wins / ");
-            sb.append(mp.getLoses()).append(mp.getLoses()==1?" loss)":" losses)");
+            sb.append("   ").append(mp.getName());
+            sb.append(" - ").append(mp.getWins()).append(mp.getWins()==1?" win":" wins");
             if (mp.hasQuit()) {
                 sb.append(" QUITTED");
             }
             sb.append("\n");
         }
-        sb.append("\n").append(this.getWinsNeeded()).append(this.getWinsNeeded() == 1 ? " win":" wins").append(" needed to win the match\n");
+        if (getDraws() > 0) {
+            sb.append("   Draws: ").append(getDraws()).append("\n");
+        }
+        sb.append("\n").append("You have to win ").append(this.getWinsNeeded()).append(this.getWinsNeeded() == 1 ? " game":" games").append(" to win the complete match\n");
         sb.append("\nGame has started\n");
         return sb.toString();
     }
@@ -359,6 +368,17 @@ public abstract class MatchImpl implements Match {
             this.getGames().clear();
         }         
     }    
+
+    @Override
+    public void addDraw() {
+        ++draws;
+    }
+
+    @Override
+    public int getDraws() {
+        return draws;
+    }
+
 
     @Override
     public void cleanUp() {

@@ -195,13 +195,6 @@ public abstract class GameCommanderImpl extends GameImpl {
         return super.checkStateBasedActions();
     }
 
-
-
-    @Override
-    public void quit(UUID playerId) {
-        super.quit(playerId);
-    }
-
     @Override
     public Set<UUID> getOpponents(UUID playerId) {
         Set<UUID> opponents = new HashSet<>();
@@ -217,10 +210,4 @@ public abstract class GameCommanderImpl extends GameImpl {
     public boolean isOpponent(Player player, UUID playerToCheck) {
        return !player.getId().equals(playerToCheck);
     }
-    
-    @Override
-    public void leave(UUID playerId) {
-        super.leave(playerId);
-    }
-
 }

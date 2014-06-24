@@ -1537,8 +1537,11 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void concede(Game game) {        
+        log.debug("playerImpl.concede -> start " + this.getName());
         game.gameOver(playerId);
+        log.debug("playerImpl.concede -> before lost " + this.getName());
         lost(game);
+        log.debug("playerImpl.concede -> after lost " + this.getName());
         this.left = true;
     }
 
@@ -1583,16 +1586,21 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void lost(Game game) {
+        log.debug("player lost -> start: " + this.getName());
         if (canLose(game)) {
             this.loses = true;
             //20100423 - 603.9
             if (!this.wins) {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST, null, null, playerId));
                 game.informPlayers(new StringBuilder(this.getName()).append(" has lost the game.").toString());
+            } else {
+                log.debug("player.lost -> stop setting lost because he already has won!: " + this.getName());
             }
-            if (!hasLeft()) {
-                game.leave(playerId);
-            }
+            // for draw first all players that have lost have to be set to lost
+//            if (!hasLeft()) {
+//                log.debug("player.lost -> calling leave");
+//                game.gameOver(playerId);
+//            }
         }
     }
 
@@ -1603,6 +1611,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void won(Game game) {
+        log.debug("player won -> start: " + this.getName());
         if (!game.replaceEvent(new GameEvent(GameEvent.EventType.WINS, null, null, playerId))) {
             if (!this.loses) {
                 //20130501 - 800.7, 801.16
@@ -1610,6 +1619,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 for (UUID opponentId: game.getOpponents(playerId)) {
                     Player opponent = game.getPlayer(opponentId);
                     if (opponent != null && !opponent.hasLost()) {
+                        log.debug("player won -> calling opponent lost: " + this.getName() + "  opponent: " + opponent.getName());
                         opponent.lost(game);
                     }
                 }
@@ -1622,10 +1632,13 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
                 if (opponentsAlive == 0 && !hasWon()) {
+                    log.debug("player won -> No more oppononets alive game won: " + this.getName());
                     game.informPlayers(new StringBuilder(this.getName()).append(" has won the game").toString());
                     this.wins = true;
                     game.end();
                 }
+            } else {
+                log.debug("player won -> but already lost before: " + this.getName());
             }
         }
     }

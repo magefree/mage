@@ -238,7 +238,7 @@ public class MageServerImpl implements MageServer {
             public void execute() throws MageException {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 TableManager.getInstance().updateDeck(userId, tableId, deckList);
-                logger.debug("Session " + sessionId + " updated deck");
+                logger.trace("Session " + sessionId + " updated deck");
             }
         });
     }

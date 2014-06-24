@@ -455,6 +455,7 @@ public abstract class GameImpl implements Game, Serializable {
             boolean result = checkIfGameIsOver();
             return result;
         }  else {
+            logger.debug("game.gameOver -> player leaves " + playerId );
             leave(playerId);
             return true;
         }
@@ -479,7 +480,7 @@ public abstract class GameImpl implements Game, Serializable {
             end();
             for (Player player: state.getPlayers().values()) {
                 if (!player.hasLeft() && !player.hasLost()) {
-                    logger.debug(new StringBuilder("Player ").append(player.getName()).append(" won the game ").append(this.getId()));
+                    logger.debug(new StringBuilder("game.checkIfGameIsOver ->Player ").append(player.getName()).append(" won the game ").append(this.getId()));
                     player.won(this);
                 }
             }            
@@ -494,6 +495,11 @@ public abstract class GameImpl implements Game, Serializable {
         return endTime != null;
     }
 
+    @Override
+    public boolean isADraw() {
+        return hasEnded() && winnerId == null;
+    }
+    
     @Override
     public String getWinner() {
         if (winnerId == null) {
@@ -1843,14 +1849,16 @@ public abstract class GameImpl implements Game, Serializable {
      * @param playerId 
      */
 
-    @Override
-    public void leave(UUID playerId) {
+    protected void leave(UUID playerId) {
+
         Player player = getPlayer(playerId);
         if (player == null || player.hasLeft()) {
+            logger.debug("game.leave -> player already left " + (player != null ? player.getName():playerId));
             return;
         }
+        logger.debug("game.leave -> start  player: " + player.getName());
         player.leave();
-        if (gameOver(null)) {
+        if (checkIfGameIsOver()) {
             // no need to remove objects if only one player is left so the game is over
             return;
         }

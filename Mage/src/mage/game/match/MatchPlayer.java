@@ -38,7 +38,6 @@ import mage.players.Player;
  */
 public class MatchPlayer {
     private int wins;
-    private int loses;
     private boolean matchWinner;
 
     private Deck deck;
@@ -54,7 +53,6 @@ public class MatchPlayer {
         this.player = player;
         this.deck = deck;
         this.wins = 0;
-        this.loses = 0;
         this.doneSideboarding = true;
         this.quit = false;
         this.timerTimeout = false;
@@ -76,14 +74,6 @@ public class MatchPlayer {
 
     public void addWin() {
         this.wins++;
-    }
-
-    public int getLoses() {
-        return loses;
-    }
-
-    public void addLose() {
-        this.loses++;
     }
 
     public Deck getDeck() {
@@ -128,14 +118,6 @@ public class MatchPlayer {
     public void setQuit(boolean quit) {
         this.doneSideboarding = true;
         this.quit = quit;
-    }
-
-    public boolean hasTimerTimeout() {
-        return timerTimeout;
-    }
-
-    public void setTimerTimeout(boolean timerTimeout) {
-        this.timerTimeout = timerTimeout;
     }
 
     public boolean isMatchWinner() {

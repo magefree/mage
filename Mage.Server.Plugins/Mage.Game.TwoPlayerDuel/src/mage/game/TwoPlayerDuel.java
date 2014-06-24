@@ -70,11 +70,6 @@ public class TwoPlayerDuel extends GameImpl {
     }
 
     @Override
-    public void quit(UUID playerId) {
-        super.quit(playerId);
-    }
-
-    @Override
     public Set<UUID> getOpponents(UUID playerId) {
         Set<UUID> opponents = new HashSet<>();
         for (UUID opponentId: this.getPlayer(playerId).getInRange()) {

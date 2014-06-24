@@ -125,7 +125,6 @@ public interface Game extends MageItem, Serializable {
     boolean canPlaySorcery(UUID playerId);
     UUID getActivePlayerId();
     UUID getPriorityPlayerId();
-    void leave(UUID playerId);
     boolean gameOver(UUID playerId);
     boolean hasEnded();
     Battlefield getBattlefield();
@@ -134,6 +133,7 @@ public interface Game extends MageItem, Serializable {
     Combat getCombat();
     GameState getState();
     String getWinner();
+    boolean isADraw();
     ContinuousEffects getContinuousEffects();
     GameStates getGameStates();
     void loadGameStates(GameStates states);

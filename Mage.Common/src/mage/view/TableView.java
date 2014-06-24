@@ -99,6 +99,9 @@ public class TableView implements Serializable {
                     sbScore.insert(0,matchPlayer.getWins()).insert(0,"Score: ");
                 }
             }
+            if (table.getMatch().getDraws() > 0) {
+                sbScore.append(" Draws: ").append(table.getMatch().getDraws());
+            }
             this.controllerName += sb.toString();
             this.deckType = table.getDeckType();
             if (table.getMatch().getGames().isEmpty()) {

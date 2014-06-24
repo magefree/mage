@@ -67,6 +67,7 @@ public class MatchView implements Serializable {
         this.matchName = match.getName();
         this.gameType = match.getOptions().getGameType();
         this.deckType = match.getOptions().getDeckType();
+        
         for (Game game: match.getGames()) {
             games.add(game.getId());
         }
@@ -75,15 +76,22 @@ public class MatchView implements Serializable {
         for (MatchPlayer matchPlayer: match.getPlayers()) {
             sb1.append(matchPlayer.getName());
             if(matchPlayer.hasQuit()) {
-                if (matchPlayer.hasTimerTimeout()) {
+                if (matchPlayer.getPlayer().hasTimerTimeout()) {
                     sb1.append(" [timer] ");
+                } else if (matchPlayer.getPlayer().hasIdleTimeout()) {
+                    sb1.append(" [idle] ");
                 } else {
                     sb1.append(" [quit] ");
                 }
             }
+            int lostGames = match.getNumGames() - (matchPlayer.getWins() + match.getDraws());
             sb1.append(", ");
-            sb2.append(matchPlayer.getName()).append(" ");
-            sb2.append(matchPlayer.getWins()).append("-").append(matchPlayer.getLoses()).append(", ");
+            sb2.append(matchPlayer.getName()).append(" [");
+            sb2.append(matchPlayer.getWins()).append("-");
+            if (match.getDraws() > 0) {
+                sb2.append(match.getDraws()).append("-");
+            }
+            sb2.append(lostGames).append("], ");
         }
         players = sb1.substring(0, sb1.length() - 2);
         result = sb2.substring(0, sb2.length() - 2);

@@ -97,23 +97,23 @@ public class GameEndView implements Serializable {
             if (matchPlayer.isMatchWinner()) {
                 matchWinner = matchPlayer;
             }
-            if (matchPlayer.hasTimerTimeout()) {
+            if (matchPlayer.getPlayer().hasTimerTimeout()) {
                 if (matchPlayer.getPlayer().equals(you)) {
                     additonalText.append("You run out of time. ");
                 } else {
                     additonalText.append(matchPlayer.getName()).append(" runs out of time. ");
-                }
-            } else if (matchPlayer.hasQuit()) {
-                if (matchPlayer.getPlayer().equals(you)) {
-                    additonalText.append("You have quit the match. ");
-                } else {
-                    additonalText.append(matchPlayer.getName()).append(" has quit the match. ");
                 }
             } else if (matchPlayer.getPlayer().hasIdleTimeout()) {
                 if (matchPlayer.getPlayer().equals(you)) {
                     additonalText.append("You lost the match for beeing idle. ");
                 } else {
                     additonalText.append(matchPlayer.getName()).append(" lost for beeing idle. ");
+                }
+            } else if (matchPlayer.hasQuit()) {
+                if (matchPlayer.getPlayer().equals(you)) {
+                    additonalText.append("You have quit the match. ");
+                } else {
+                    additonalText.append(matchPlayer.getName()).append(" has quit the match. ");
                 }
             }
         }

@@ -301,15 +301,18 @@ public abstract class TournamentImpl implements Tournament {
         MatchPlayer mp2 = match.getPlayer(p2.getPlayer().getId());
         StringBuilder matchResult = new StringBuilder();
         matchResult.append(p2.getPlayer().getName());
-        matchResult.append(" (").append(mp1.getWins());
+        matchResult.append(" [").append(mp1.getWins());
         if (mp1.hasQuit()) {
-            matchResult.append(mp1.hasTimerTimeout()?"T":"Q");
+            matchResult.append(mp1.getPlayer().hasIdleTimeout()? "I" :(mp1.getPlayer().hasTimerTimeout()?"T":"Q"));
+        }
+        if (match.getDraws() > 0) {
+            matchResult.append(match.getDraws()).append("-");
         }
         matchResult.append("-").append(mp2.getWins());
         if (mp2.hasQuit()) {
-            matchResult.append(mp2.hasTimerTimeout()?"T":"Q");
+            matchResult.append(mp2.getPlayer().hasIdleTimeout()? "I" :(mp2.getPlayer().hasTimerTimeout()?"T":"Q"));
         }                
-        matchResult.append(") ");        
+        matchResult.append("] ");
         return matchResult.toString();
     }
     
