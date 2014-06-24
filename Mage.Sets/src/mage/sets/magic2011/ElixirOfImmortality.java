@@ -72,7 +72,7 @@ class ElixerOfImmortalityEffect extends OneShotEffect {
 
     public ElixerOfImmortalityEffect() {
         super(Outcome.GainLife);
-        staticText = "Shuffle {this} and your graveyard into your library";
+        staticText = "You gain 5 life. Shuffle {this} and your graveyard into your library";
     }
 
     public ElixerOfImmortalityEffect(final ElixerOfImmortalityEffect effect) {
@@ -86,7 +86,7 @@ class ElixerOfImmortalityEffect extends OneShotEffect {
         if (player != null) {
             player.gainLife(5, game);
             if (permanent != null) {
-                permanent.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                player.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, true, true);
             }
             player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
             player.getGraveyard().clear();
