@@ -62,7 +62,7 @@ public class GamePane extends MagePane {
     public void showGame(UUID gameId, UUID playerId) {
         this.setTitle("Game " + gameId);
         this.gameId = gameId;
-        gamePanel.showGame(gameId, playerId);
+        gamePanel.showGame(gameId, playerId, this);
     }
 
     public void cleanUp() {

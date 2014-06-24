@@ -134,6 +134,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private UUID gameId;
     private UUID playerId;
     private Session session;
+    GamePane gamePane;
     private ReplayTask replayTask;
     private final PickNumberDialog pickNumber;
     private JLayeredPane jLayeredPane;
@@ -141,6 +142,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private boolean smallMode = false;
     private boolean initialized = false;
     private int lastUpdatedTurn;
+    private boolean menuNameSet = false;
     
     
     private Map<String, Card> loadedCards = new HashMap<>();
@@ -336,8 +338,9 @@ public final class GamePanel extends javax.swing.JPanel {
         DialogManager.getManager(gameId).setBounds(0, 0, rect.width, rect.height);
     }
 
-    public synchronized void showGame(UUID gameId, UUID playerId) {
+    public synchronized void showGame(UUID gameId, UUID playerId, GamePane gamePane) {
         this.gameId = gameId;
+        this.gamePane = gamePane;
         this.playerId = playerId;
         session = MageFrame.getSession();
         MageFrame.addGame(gameId, this);
@@ -553,6 +556,17 @@ public final class GamePanel extends javax.swing.JPanel {
                     logger.warn(""+p);
                 }
             }
+        }
+        if (!menuNameSet) {
+            StringBuilder sb = new StringBuilder();
+            for (PlayerView player: game.getPlayers()) {
+                if (sb.length() > 0) {
+                    sb.append(" vs. ");
+                }
+                sb.append(player.getName());
+            }
+            menuNameSet = true;
+            gamePane.setTitle("Game: " + sb.toString());
         }
 
         GameManager.getInstance().setStackSize(game.getStack().size());
@@ -1536,4 +1550,6 @@ class ReplayTask extends SwingWorker<Void, Collection<MatchView>> {
             logger.fatal("Replay Match Task error", ex);
         } catch (CancellationException ex) {}
     }
+
+
 }
