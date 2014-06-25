@@ -76,7 +76,6 @@ public interface Permanent extends Card, Controllable {
     boolean addAttachment(UUID permanentId, Game game);
     boolean removeAttachment(UUID permanentId, Game game);
 
-    boolean changeControllerId(UUID controllerId, Game game);
     boolean canBeTargetedBy(MageObject source, UUID controllerId, Game game);
     boolean hasProtectionFrom(MageObject source, Game game);
     boolean hasSummoningSickness();
@@ -119,9 +118,12 @@ public interface Permanent extends Card, Controllable {
     void setLoyaltyUsed(boolean used);
     boolean isLoyaltyUsed();
 
+    public void resetControl();
+    boolean changeControllerId(UUID controllerId, Game game);
+    boolean checkControlChanged(Game game);
+
     void beginningOfTurn(Game game);
     void endOfTurn(Game game);
-    void checkControlChanged(Game game);
     int getTurnsOnBattlefield();
 
     void addPower(int power);
