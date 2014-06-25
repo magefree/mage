@@ -70,6 +70,7 @@ close(DATA);
 
 my %cardTypes;
 $cardTypes{'Artifact'} = 'CardType.ARTIFACT';
+$cardTypes{'Conspiracy'} = 'CardType.CONSPIRACY';
 $cardTypes{'Creature'} = 'CardType.CREATURE';
 $cardTypes{'Enchantment'} = 'CardType.ENCHANTMENT';
 $cardTypes{'Instant'} = 'CardType.INSTANT';
@@ -84,6 +85,7 @@ $raritiesConversion{'U'} = 'UNCOMMON';
 $raritiesConversion{'R'} = 'RARE';
 $raritiesConversion{'M'} = 'MYTHIC';
 $raritiesConversion{'Special'} = 'SPECIAL';
+$raritiesConversion{'Bonus'} = 'BONUS';
 
 my %manaToColor;
 $manaToColor{'B'} = 'Black';

@@ -6,6 +6,7 @@ package mage.constants;
  */
 public enum CardType {
     ARTIFACT ("Artifact"),
+    CONSPIRACY ("Conspiracy"),
     CREATURE ("Creature"),
     ENCHANTMENT ("Enchantment"),
     INSTANT ("Instant"),
@@ -14,7 +15,7 @@ public enum CardType {
     SORCERY ("Sorcery"),
     TRIBAL ("Tribal");
 
-    private String text;
+    private final String text;
 
     CardType(String text) {
         this.text = text;

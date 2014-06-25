@@ -29,6 +29,7 @@ public class WizardCardsImageSource implements CardImageSource {
     public WizardCardsImageSource() {
         sets = new HashMap<>();
         setsAliases = new HashMap<>();
+        setsAliases.put("CNS", "vintagemasters/cig");
         setsAliases.put("CNS", "conspiracy/cig");
         setsAliases.put("JOU", "journeyintonyx/cig");
         setsAliases.put("BNG", "bornofthegods/cig");

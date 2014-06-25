@@ -54,6 +54,7 @@ public class ConstructedFormats {
             "Fifth Edition",
             "Fourth Edition",
             "Revised Edition", "Unlimited Edition", "Limited Edition Beta", "Limited Edition Alpha",
+            "Vintage Masters",
             "Conspiracy",
             "Modern Masters",
             "Commander 2013 Edition",
@@ -407,6 +408,9 @@ public class ConstructedFormats {
         }
         if (format.equals("Conspiracy")) {
             return Arrays.asList("CNS");
+        }
+        if (format.equals("Vintage Masters")) {
+            return Arrays.asList("VMA");
         }
         if (format.equals("Guru")) {
             return Arrays.asList("GUR");

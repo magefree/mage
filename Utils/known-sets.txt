@@ -1,100 +1,101 @@
+Alara Reborn|alarareborn|
+Alliances|alliances|
+Antiquities|antiquities|
+Apocalypse|apocalypse|
+Arabian Nights|arabiannights|
+Avacyn Restored|avacynrestored|
+Betrayers of Kamigawa|betrayersofkamigawa|
+Born of the Gods|bornofthegods|
+Champions of Kamigawa|championsofkamigawa|
+Classic Sixth Edition|sixthedition|
+Coldsnap|coldsnap|
+Commander 2013 Edition|commander2013|
+Conflux|conflux|
+Dark Ascension|darkascension|
+Darksteel|darksteel|
+Dissension|dissension|
+Dragon's Maze|dragonsmaze|
+Duel Decks: Ajani vs. Nicol Bolas|ajanivsnicolbolas|
+Duel Decks: Divine vs. Demonic|divinevsdemonic|
+Duel Decks: Elspeth vs. Tezzeret|elspethvstezzeret|
+Duel Decks: Elves vs. Goblins|elvesvsgoblins|
+Duel Decks: Garruk vs. Liliana|garrukvsliliana|
+Duel Decks: Heroes vs. Monsters|heroesvsmonsters|
+Duel Decks: Jace vs. Chandra|jacevschandra|
+Duel Decks: Jace vs. Vraska|jacevsvraska|
+Duel Decks: Knights vs. Dragons|knightsvsdragons|
+Duel Decks: Venser vs. Koth|venservskoth|
+Eighth Edition|eighthedition|
+Eventide|eventide|
+Exodus|exodus|
+Fallen Empires|fallenempires|
+Fifth Dawn|fifthdawn|
+Fifth Edition|fifthedition|
+Fourth Edition|fourthedition|
+Future Sight|futuresight|
+Gatecrash|gatecrash|
+Guildpact|guildpact|
+Homelands|homelands|
+Ice Age|iceage|
+Innistrad|innistrad|
+Invasion|invasion|
+Journey into Nyx|journeyintonyx|
+Judgment|judgment|
+Legends|legends|
+Legions|legions|
 Limited Edition Alpha|limitedalpha|
 Limited Edition Beta|limitedbeta|
-Unlimited Edition|unlimitededition|
-Revised Edition|revisededition|
-Fourth Edition|fourthedition|
-Fifth Edition|fifthedition|
-Classic Sixth Edition|sixthedition|
-Seventh Edition|seventhedition|
-Eighth Edition|eighthedition|
-Ninth Edition|ninthedition|
-Tenth Edition|tenth|
+Lorwyn|lorwyn|
 Magic 2010|magic2010|
 Magic 2011|magic2011|
 Magic 2012|magic2012|
 Magic 2013|magic2013|
 Magic 2014|magic2014|
-Planechase|planechase|
-Planechase 2012 Edition|planechase2012|
-Duel Decks: Knights vs. Dragons|knightsvsdragons|
-Duel Decks: Ajani vs. Nicol Bolas|ajanivsnicolbolas|
-Duel Decks: Venser vs. Koth|venservskoth|
-Duel Decks: Jace vs. Vraska|jacevsvraska|
-Duel Decks: Heroes vs. Monsters|heroesvsmonsters|
-Duel Decks: Elspeth vs. Tezzeret|elspethvstezzeret|
-Duel Decks: Elves vs. Goblins|elvesvsgoblins|
-Duel Decks: Jace vs. Chandra|jacevschandra|
-Duel Decks: Divine vs. Demonic|divinevsdemonic|
-Duel Decks: Garruk vs. Liliana|garrukvsliliana|
-Arabian Nights|arabiannights|
-Antiquities|antiquities|
-Legends|legends|
-The Dark|thedark|
-Fallen Empires|fallenempires|
-Homelands|homelands|
-Ice Age|iceage|
-Alliances|alliances|
-Coldsnap|coldsnap|
-Mirage|mirage|
-Visions|visions|
-Weatherlight|weatherlight|
-Tempest|tempest|
-Stronghold|stronghold|
-Exodus|exodus|
-Urza's Saga|urzassaga|
-Urza's Legacy|urzaslegacy|
-Urza's Destiny|urzasdestiny|
-Mercadian Masques|mercadianmasques|
-Nemesis|nemesis|
-Prophecy|prophecy|
-Invasion|invasion|
-Planeshift|planeshift|
-Apocalypse|apocalypse|
-Odyssey|odyssey|
-Torment|torment|
-Judgment|judgment|
-Onslaught|onslaught|
-Legions|legions|
-Scourge|scourge|
-Mirrodin|mirrodin|
-Darksteel|darksteel|
-Fifth Dawn|fifthdawn|
-Champions of Kamigawa|championsofkamigawa|
-Betrayers of Kamigawa|betrayersofkamigawa|
-Saviors of Kamigawa|saviorsofkamigawa|
-Ravnica: City of Guilds|ravnika|
-Guildpact|guildpact|
-Dissension|dissension|
-Time Spiral|timespiral|
-Time Spiral "Timeshifted"|timeshifted|
-Planar Chaos|planarchaos|
-Future Sight|futuresight|
-Lorwyn|lorwyn|
-Morningtide|morningtide|
-Shadowmoor|shadowmoor|
-Eventide|eventide|
-Shards of Alara|shardsofalara|
-Conflux|conflux|
-Alara Reborn|alarareborn|
-Zendikar|zendikar|
-Worldwake|worldwake|
-Return to Ravnica|returntoravnica|
-Rise of the Eldrazi|riseoftheeldrazi|
-Scars of Mirrodin|scarsofmirrodin|
-Mirrodin Besieged|mirrodinbesieged|
-New Phyrexia|newphyrexia|
-Innistrad|innistrad|
-Dark Ascension|darkascension|
-Avacyn Restored|avacynrestored|
-Gatecrash|gatecrash|
 Magic: The Gathering-Commander|commander|
 Magic: The Gathering-Conspiracy|conspiracy|
-Commander 2013 Edition|commander2013|
-Dragon's Maze|dragonsmaze|
+Mercadian Masques|mercadianmasques|
+Mirage|mirage|
+Mirrodin Besieged|mirrodinbesieged|
+Mirrodin|mirrodin|
 Modern Masters|modernmasters|
-Theros|theros|
-Born of the Gods|bornofthegods|
-Journey into Nyx|journeyintonyx|
-Portal|portal|
+Morningtide|morningtide|
+Nemesis|nemesis|
+New Phyrexia|newphyrexia|
+Ninth Edition|ninthedition|
+Odyssey|odyssey|
+Onslaught|onslaught|
+Planar Chaos|planarchaos|
+Planechase 2012 Edition|planechase2012|
+Planechase|planechase|
+Planeshift|planeshift|
 Portal Second Age|portalsecondage|
-Portal Three Kingdoms|portalthreekingdoms
+Portal Three Kingdoms|portalthreekingdoms|
+Portal|portal|
+Prophecy|prophecy|
+Ravnica: City of Guilds|ravnika|
+Return to Ravnica|returntoravnica|
+Revised Edition|revisededition|
+Rise of the Eldrazi|riseoftheeldrazi|
+Saviors of Kamigawa|saviorsofkamigawa|
+Scars of Mirrodin|scarsofmirrodin|
+Scourge|scourge|
+Seventh Edition|seventhedition|
+Shadowmoor|shadowmoor|
+Shards of Alara|shardsofalara|
+Stronghold|stronghold|
+Tempest|tempest|
+Tenth Edition|tenth|
+The Dark|thedark|
+Theros|theros|
+Time Spiral "Timeshifted"|timeshifted|
+Time Spiral|timespiral|
+Torment|torment|
+Unlimited Edition|unlimitededition|
+Urza's Destiny|urzasdestiny|
+Urza's Legacy|urzaslegacy|
+Urza's Saga|urzassaga|
+Visions|visions|
+Vintage Masters|vintagemasters|
+Weatherlight|weatherlight|
+Worldwake|worldwake|
+Zendikar|zendikar|

@@ -12,12 +12,13 @@ public enum Rarity {
     UNCOMMON ("Uncommon", "uncommon", "U", 2),
     RARE ("Rare", "rare", "R", 3),
     MYTHIC ("Mythic", "mythic", "M", 3),
-    SPECIAL ("Special", "special", "SP", 3);
+    SPECIAL ("Special", "special", "Special", 3),
+    BONUS ("Bonus", "bonus", "Bonus", 3);
 
-    private String text;
-    private String symbolCode;
-    private String code;
-    private int rating;
+    private final String text;
+    private final String symbolCode;
+    private final String code;
+    private final int rating;
 
     Rarity(String text, String symbolCode, String code, int rating) {
         this.text = text;

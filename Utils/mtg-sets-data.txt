@@ -119,6 +119,7 @@ Vanguard Set 1|VG1|
 Vanguard Set 2|VG2|
 Vanguard Set 3|VG3|
 Vanguard Set 4|VG4|
+Vintage Masters|VMA|
 Visions|VIS|
 Weatherlight|WTH|
 Worldwake|WWK|
