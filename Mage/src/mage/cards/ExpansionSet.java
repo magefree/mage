@@ -155,6 +155,10 @@ public abstract class ExpansionSet implements Serializable {
 
         if (numBoosterSpecial > 0) {
             int specialCards = 0;
+            List<CardInfo> specialBonus = getSpecialBonus();
+            if (specialBonus != null) {
+                specialCards += specialBonus.size();
+            }
             List<CardInfo> specialMythic = getSpecialMythic();
             if (specialMythic != null) {
                 specialCards += specialMythic.size();
@@ -181,7 +185,7 @@ public abstract class ExpansionSet implements Serializable {
                         }
                         continue;
                     }
-                    if (rnd.nextInt(5) < 4) {
+                    if (rnd.nextInt(4) < 3) {
                         if (specialUncommon != null) {
                             addToBooster(booster, specialUncommon);
                         } else {
@@ -198,9 +202,20 @@ public abstract class ExpansionSet implements Serializable {
                         continue;
                     }
                     if (specialMythic != null) {
-                        addToBooster(booster, specialMythic);
+                        if (specialBonus != null) {
+                            if (rnd.nextInt(3) < 2) {
+                                addToBooster(booster, specialMythic);
+                                continue;
+                            }
+                        } else {
+                            addToBooster(booster, specialMythic);
+                            continue;
+                        }
                     } else {
                         i--;
+                    }
+                    if (specialBonus != null) {
+                        addToBooster(booster, specialBonus);
                     }
                 }
             }
@@ -259,13 +274,20 @@ public abstract class ExpansionSet implements Serializable {
     public List<CardInfo> getSpecialCommon() {
         return null;
     }
+
     public List<CardInfo> getSpecialUncommon() {
         return null;
     }
+
     public List<CardInfo> getSpecialRare() {
         return null;
     }
+
     public List<CardInfo> getSpecialMythic() {
+        return null;
+    }
+
+    public List<CardInfo> getSpecialBonus() {
         return null;
     }
 }

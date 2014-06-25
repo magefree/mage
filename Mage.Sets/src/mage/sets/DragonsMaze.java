@@ -84,7 +84,7 @@ public class DragonsMaze extends ExpansionSet {
 
     @Override
     public List<CardInfo> getSpecialRare() {
-        List<CardInfo> specialRare = new ArrayList<CardInfo>();
+        List<CardInfo> specialRare = new ArrayList<>();
         CardCriteria criteria = new CardCriteria();
         criteria.setCodes("GTC").name("Breeding Pool");
         specialRare.addAll(CardRepository.instance.findCards(criteria));

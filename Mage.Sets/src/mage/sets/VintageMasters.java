@@ -28,8 +28,15 @@
 
 package mage.sets;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 
@@ -50,11 +57,47 @@ public class VintageMasters extends ExpansionSet {
         super("Vintage Masters", "VMA", "mage.sets.vintagemasters", new GregorianCalendar(2014, 6, 16).getTime(), SetType.REPRINT);
         this.hasBasicLands = false;
         this.hasBoosters = true;
+        this.numBoosterSpecial = 1;
         this.numBoosterLands = 0;
-        this.numBoosterCommon = 11;
+        this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+    }
+
+    @Override
+    public List<CardInfo> getSpecialCommon() {
+        CardCriteria criteria = new CardCriteria();
+        criteria.rarities(Rarity.COMMON).setCodes(this.code);
+        return CardRepository.instance.findCards(criteria);
+    }
+
+    @Override
+    public List<CardInfo> getSpecialUncommon() {
+        CardCriteria criteria = new CardCriteria();
+        criteria.rarities(Rarity.UNCOMMON).setCodes(this.code);
+        return CardRepository.instance.findCards(criteria);
+    }
+
+    @Override
+    public List<CardInfo> getSpecialRare() {
+        CardCriteria criteria = new CardCriteria();
+        criteria.rarities(Rarity.RARE).setCodes(this.code);
+        return CardRepository.instance.findCards(criteria);
+    }
+
+    @Override
+    public List<CardInfo> getSpecialMythic() {
+        CardCriteria criteria = new CardCriteria();
+        criteria.rarities(Rarity.MYTHIC).setCodes(this.code);
+        return CardRepository.instance.findCards(criteria);
+    }
+
+    @Override
+    public List<CardInfo> getSpecialBonus() {
+        CardCriteria criteria = new CardCriteria();
+        criteria.rarities(Rarity.BONUS).setCodes(this.code);
+        return CardRepository.instance.findCards(criteria);
     }
 
 }
