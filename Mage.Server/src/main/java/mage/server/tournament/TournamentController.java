@@ -149,7 +149,15 @@ public class TournamentController {
 
     public synchronized void join(UUID userId) {
         UUID playerId = userPlayerMap.get(userId);
+        if (playerId == null) {
+            logger.error("join: got no playerId  for userId: " + userId + " for tournament " + tournament.getId());
+            return;
+        }
         TournamentSession tournamentSession = new TournamentSession(tournament, userId, tableId, playerId);
+        if (tournamentSessions == null) {
+            logger.error("join: got no playerId  for userId: " + userId + " for tournament " + tournament.getId());
+            return;
+        }
         tournamentSessions.put(playerId, tournamentSession);
         UserManager.getInstance().getUser(userId).addTournament(playerId, tournamentSession);
         TournamentPlayer player = tournament.getPlayer(playerId);

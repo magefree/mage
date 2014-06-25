@@ -327,23 +327,23 @@ public class User {
     }
 
     public void kill(DisconnectReason reason) {
-        logger.debug("start user kill");
+        logger.debug("user.kill before game session " + gameSessions.size() );
         for (GameSession gameSession: gameSessions.values()) {
             gameSession.kill();
         }
-        logger.debug("user kill after game");
+        logger.debug("user.kill before draft session " + draftSessions.size());
         for (DraftSession draftSession: draftSessions.values()) {
             draftSession.setKilled();
         }
-        logger.debug("user kill after draft");
+        logger.debug("user.kill before tournament session " + tournamentSessions.size());
         for (TournamentSession tournamentSession: tournamentSessions.values()) {
             tournamentSession.setKilled();
         }
-        logger.debug("user kill after tournament");
+        logger.debug("user.kill before tables " + tables.size());
         for (Entry<UUID, Table> entry: tables.entrySet()) {
             TableManager.getInstance().leaveTable(userId, entry.getValue().getId());
         }
-        logger.debug("user kill after table");
+        logger.debug("user.kill before chat remove user");
         ChatManager.getInstance().removeUser(userId, reason);
     }
 

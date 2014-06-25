@@ -946,13 +946,13 @@ public abstract class GameImpl implements Game, Serializable {
         if (state != null) {
             Player player = state.getPlayer(playerId);
             if (player != null) {
-                logger.debug(player.getName() + " quits the game");
+                logger.debug("gameImpl.quit" + player.getName() + " quits the game");
                 player.quit(this);
             }else {
-                logger.error(new StringBuilder("quit - player not found - playerId: ").append(playerId));
+                logger.error(new StringBuilder("gameImpl.quit - player not found - playerId: ").append(playerId));
             }
         } else {
-            logger.error(new StringBuilder("quit - state not found - playerId: ").append(playerId));
+            logger.error(new StringBuilder("gameImpl.quit - state not found - playerId: ").append(playerId));
         }
     }
 
