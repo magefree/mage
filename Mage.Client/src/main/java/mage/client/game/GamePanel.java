@@ -359,8 +359,9 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
 
-    public synchronized void watchGame(UUID gameId) {
+    public synchronized void watchGame(UUID gameId, GamePane gamePane) {
         this.gameId = gameId;
+        this.gamePane = gamePane;
         this.playerId = null;
         session = MageFrame.getSession();
         MageFrame.addGame(gameId, this);
@@ -559,14 +560,22 @@ public final class GamePanel extends javax.swing.JPanel {
         }
         if (!menuNameSet) {
             StringBuilder sb = new StringBuilder();
+            if (playerId == null) {
+                sb.append("Watching: ");
+            } else {
+                sb.append("Playing: ");
+            }
+            boolean first = true;
             for (PlayerView player: game.getPlayers()) {
-                if (sb.length() > 0) {
-                    sb.append(" vs. ");
+                if (first) {
+                    first = false;
+                } else {
+                    sb.append(" - ");
                 }
                 sb.append(player.getName());
             }
             menuNameSet = true;
-            gamePane.setTitle("Game: " + sb.toString());
+            gamePane.setTitle(sb.toString());
         }
 
         GameManager.getInstance().setStackSize(game.getStack().size());

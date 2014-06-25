@@ -77,7 +77,7 @@ public class GamePane extends MagePane {
     public void watchGame(UUID gameId) {
         this.setTitle("Watching " + gameId);
         this.gameId = gameId;
-        gamePanel.watchGame(gameId);
+        gamePanel.watchGame(gameId, this);
     }
 
     public void replayGame(UUID gameId) {
