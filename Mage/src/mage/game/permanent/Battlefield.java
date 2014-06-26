@@ -412,18 +412,28 @@ public class Battlefield implements Serializable {
         return phasedOut;
     }
 
+    public void resetPermanentsControl() {
+        for (Permanent perm: field.values()) {
+            if (perm.isPhasedIn()) {
+                perm.resetControl();
+            }
+        }
+    }
+    
     /**
      * since control could change several times during applyEvents we only want to fire
      * control changed events after all control change effects have been applied
      * 
      * @param game 
      */
-    public void fireControlChangeEvents(Game game) {
+    public boolean fireControlChangeEvents(Game game) {
+        boolean controlChanged = false;
         for (Permanent perm: field.values()) {
             if (perm.isPhasedIn()) {
-                perm.checkControlChanged(game);
+                controlChanged |= perm.checkControlChanged(game);
             }
         }
+        return controlChanged;
     }
 
 }

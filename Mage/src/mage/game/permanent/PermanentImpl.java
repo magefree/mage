@@ -80,7 +80,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected UUID originalControllerId;
     protected UUID controllerId;
     protected UUID beforeResetControllerId;
-    protected boolean controllerChanged;
     protected int damage;
     protected boolean controlledFromStartOfControllerTurn;
     protected int turnsOnBattlefield;
@@ -169,9 +168,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
      */
     @Override
     public void reset(Game game) {
-        this.beforeResetControllerId = this.controllerId;
-        this.controllerId = originalControllerId;
-        controllerChanged = !controllerId.equals(beforeResetControllerId);
+        this.resetControl();
         this.maxBlocks = 1;
         this.minBlockedBy = 1;
         this.maxBlockedBy = 0;
@@ -449,41 +446,36 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public void resetControl() {
+        this.beforeResetControllerId = this.controllerId;
+        this.controllerId = this.originalControllerId;
+    }
+    
+    @Override
     public boolean changeControllerId(UUID controllerId, Game game) {
-        if (!controllerId.equals(this.controllerId)) {
-            Player newController = game.getPlayer(controllerId);
-            if (newController != null && (!newController.hasLeft() || !newController.hasLost())) {
-                // changeControllerId can be called by continuous effect
-                // so it will lead to this.controlledFromStartOfControllerTurn set to false over and over
-                // because of reset(game) method called before applying effect as state-based action
-                // that changes this.controllerId to original one (actually owner)
-                if (!controllerId.equals(beforeResetControllerId)) {
-                    this.removeFromCombat(game);
-                    this.controlledFromStartOfControllerTurn = false;
-                    this.controllerChanged = true;
-                } else {
-                    this.controllerChanged = false;
-                }
-                this.controllerId = controllerId;
-                this.abilities.setControllerId(controllerId);
-                game.getContinuousEffects().setController(this.objectId, controllerId);
-                return true;
-            }
+        Player newController = game.getPlayer(controllerId);
+        if (newController != null && (!newController.hasLeft() || !newController.hasLost())) {
+            this.controllerId = controllerId;
+            return true;
         }
         return false;
     }
 
     @Override
-    public void checkControlChanged(Game game) {
-        if (this.controllerChanged) {
+    public boolean checkControlChanged(Game game) {
+        if (!controllerId.equals(beforeResetControllerId)) {
+            this.removeFromCombat(game);
+            this.controlledFromStartOfControllerTurn = false;
+            
+            this.abilities.setControllerId(controllerId);
+            game.getContinuousEffects().setController(objectId, controllerId);
+            
             game.fireEvent(new GameEvent(EventType.LOST_CONTROL, objectId, objectId, beforeResetControllerId));
-            // reset the original controller to abilities and ContinuousEffects
-            if (controllerId.equals(originalControllerId)) {
-                this.abilities.setControllerId(controllerId);
-                game.getContinuousEffects().setController(this.objectId, controllerId);
-            }
             game.fireEvent(new GameEvent(EventType.GAINED_CONTROL, objectId, objectId, controllerId));
+            
+            return true;
         }
+        return false;
     }
 
     @Override

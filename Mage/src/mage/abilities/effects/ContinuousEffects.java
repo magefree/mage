@@ -701,11 +701,22 @@ public class ContinuousEffects implements Serializable {
         }
 
         layer = filterLayeredEffects(layerEffects, Layer.ControlChangingEffects_2);
-        for (ContinuousEffect effect: layer) {
-            HashSet<Ability> abilities = layeredEffects.getAbility(effect.getId());
-            for (Ability ability : abilities) {
-                effect.apply(Layer.ControlChangingEffects_2, SubLayer.NA, ability, game);
+        // apply control changing effects multiple times if it's needed
+        // for cases when control over permanents with change control abilities is changed
+        // e.g. Mind Control is controlled by Steal Enchantment
+        while (true) {
+            for (ContinuousEffect effect: layer) {
+                HashSet<Ability> abilities = layeredEffects.getAbility(effect.getId());
+                for (Ability ability : abilities) {
+                    effect.apply(Layer.ControlChangingEffects_2, SubLayer.NA, ability, game);
+                }
             }
+            // if control over all permanent has not changed, we can no longer reapply control changing effects
+            if (!game.getBattlefield().fireControlChangeEvents(game)) {
+                break;
+            }
+            // reset control before reapplying control changing effects
+            game.getBattlefield().resetPermanentsControl();
         }
         layer = filterLayeredEffects(layerEffects, Layer.TextChangingEffects_3);
         for (ContinuousEffect effect: layer) {
