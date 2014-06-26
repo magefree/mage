@@ -39,9 +39,11 @@ Persist|new|
 Phasing|instance|
 Plainscycling|cost|
 Plainswalk|new|
+Provoke|new|
 Reach|instance|
 Rebound|new|
 Scavenge|cost|
+Shadow|instance|
 Shroud|instance|
 Soulbond|instance|
 Soulshift|number|

@@ -25,70 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.sets.onslaught;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.TributeNotPaidCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.TributeAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.Token;
+import mage.constants.Zone;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class Ornitharch extends CardImpl {
+public class VisaraTheDreadful extends CardImpl {
 
-    public Ornitharch(UUID ownerId) {
-        super(ownerId, 23, "Ornitharch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-        this.expansionSetCode = "BNG";
-        this.subtype.add("Archon");
+    public VisaraTheDreadful(UUID ownerId) {
+        super(ownerId, 179, "Visara the Dreadful", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
+        this.expansionSetCode = "ONS";
+        this.supertype.add("Legendary");
+        this.subtype.add("Gorgon");
 
-        this.color.setWhite(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        this.color.setBlack(true);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // Tribute 2
-        this.addAbility(new TributeAbility(2));
-        // When Ornitharch enters the battlefield, if tribute wasn't paid, put two 1/1 white Bird creature tokens with flying onto the battlefield.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BirdToken(), 2), false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(),
-                "When {this} enters the battlefield, if its tribute wasn't paid, put two 1/1 white Bird creature tokens with flying onto the battlefield."));        
+        // {tap}: Destroy target creature. It can't be regenerated.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(true) , new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public Ornitharch(final Ornitharch card) {
+    public VisaraTheDreadful(final VisaraTheDreadful card) {
         super(card);
     }
 
     @Override
-    public Ornitharch copy() {
-        return new Ornitharch(this);
+    public VisaraTheDreadful copy() {
+        return new VisaraTheDreadful(this);
     }
-}
-
-class BirdToken extends Token {
-
-    public BirdToken() {
-        super("Bird", "1/1 white Bird creature tokens with flying");
-        this.setOriginalExpansionSetCode("BNG");
-        cardType.add(CardType.CREATURE);
-        color = ObjectColor.WHITE;
-        subtype.add("Bird");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        
-        this.addAbility(FlyingAbility.getInstance());
-    }
-
 }

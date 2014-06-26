@@ -25,55 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.sets.judgment;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.TributeNotPaidCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.TributeAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TimingRule;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.permanent.token.Token;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class Ornitharch extends CardImpl {
+public class BattleScreech extends CardImpl {
 
-    public Ornitharch(UUID ownerId) {
-        super(ownerId, 23, "Ornitharch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-        this.expansionSetCode = "BNG";
-        this.subtype.add("Archon");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped white creatures you control");
 
-        this.color.setWhite(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Tribute 2
-        this.addAbility(new TributeAbility(2));
-        // When Ornitharch enters the battlefield, if tribute wasn't paid, put two 1/1 white Bird creature tokens with flying onto the battlefield.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BirdToken(), 2), false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(),
-                "When {this} enters the battlefield, if its tribute wasn't paid, put two 1/1 white Bird creature tokens with flying onto the battlefield."));        
+    static {
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public Ornitharch(final Ornitharch card) {
+    public BattleScreech(UUID ownerId) {
+        super(ownerId, 3, "Battle Screech", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
+        this.expansionSetCode = "JUD";
+
+        this.color.setWhite(true);
+
+        // Put two 1/1 white Bird creature tokens with flying onto the battlefield.
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new BirdToken(), 2));
+
+        // Flashback-Tap three untapped white creatures you control.
+        this.addAbility(new FlashbackAbility(new TapTargetCost(new TargetControlledCreaturePermanent(3,3, filter, true)), TimingRule.SORCERY));
+    }
+
+    public BattleScreech(final BattleScreech card) {
         super(card);
     }
 
     @Override
-    public Ornitharch copy() {
-        return new Ornitharch(this);
+    public BattleScreech copy() {
+        return new BattleScreech(this);
     }
 }
 
@@ -87,7 +91,7 @@ class BirdToken extends Token {
         subtype.add("Bird");
         power = new MageInt(1);
         toughness = new MageInt(1);
-        
+
         this.addAbility(FlyingAbility.getInstance());
     }
 

@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,48 +20,48 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.vintagemasters;
 
-package mage.abilities.effects.common;
-
-import mage.abilities.Ability;
-import mage.abilities.effects.PreventionEffectImpl;
+import java.util.UUID;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continious.GainAbilityControllerEffect;
+import mage.abilities.keyword.CyclingAbility;
+import mage.abilities.keyword.ShroudAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.constants.Rarity;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LevelX2
  */
-public class PreventCombatDamageBySourceEffect extends PreventionEffectImpl {
+public class GildedLight extends CardImpl {
 
-    public PreventCombatDamageBySourceEffect(Duration duration) {
-            super(duration, Integer.MAX_VALUE, true);
-            staticText = "Prevent all combat damage that would be dealt by {this}" + duration.toString();
+    public GildedLight(UUID ownerId) {
+        super(ownerId, 29, "Gilded Light", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
+        this.expansionSetCode = "VMA";
+
+        this.color.setWhite(true);
+
+        // You gain shroud until end of turn.
+        this.getSpellAbility().addEffect(new GainAbilityControllerEffect(ShroudAbility.getInstance(), Duration.EndOfTurn));
+
+        // Cycling {2}
+        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public PreventCombatDamageBySourceEffect(final PreventCombatDamageBySourceEffect effect) {
-            super(effect);
+    public GildedLight(final GildedLight card) {
+        super(card);
     }
 
     @Override
-    public PreventCombatDamageBySourceEffect copy() {
-            return new PreventCombatDamageBySourceEffect(this);
+    public GildedLight copy() {
+        return new GildedLight(this);
     }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game)) {
-            if (event.getSourceId().equals(source.getSourceId())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 }

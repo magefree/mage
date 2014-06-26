@@ -25,86 +25,89 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.sets.vintagemasters;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.CycleAllTriggeredAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.common.ExileSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Plopman
+ * @author LevelX2
  */
-public class AstralSlide extends CardImpl {
+public class MistmoonGriffin extends CardImpl {
 
-    public AstralSlide(UUID ownerId) {
-        super(ownerId, 4, "Astral Slide", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
-        this.expansionSetCode = "ONS";
+    public MistmoonGriffin(UUID ownerId) {
+        super(ownerId, 34, "Mistmoon Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        this.expansionSetCode = "VMA";
+        this.subtype.add("Griffin");
 
         this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Whenever a player cycles a card, you may exile target creature. If you do, return that card to the battlefield under its owner's control at the beginning of the next end step.
-        Ability ability = new CycleAllTriggeredAbility(new AstralSlideEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // When Mistmoon Griffin dies, exile Mistmoon Griffin, then return the top creature card of your graveyard to the battlefield.
+        Ability ability = new DiesTriggeredAbility(new ExileSourceEffect());
+        ability.addEffect(new MistmoonGriffinEffect());
         this.addAbility(ability);
+
     }
 
-    public AstralSlide(final AstralSlide card) {
+    public MistmoonGriffin(final MistmoonGriffin card) {
         super(card);
     }
 
     @Override
-    public AstralSlide copy() {
-        return new AstralSlide(this);
+    public MistmoonGriffin copy() {
+        return new MistmoonGriffin(this);
     }
 }
 
+class MistmoonGriffinEffect extends OneShotEffect {
 
-class AstralSlideEffect extends OneShotEffect {
-
-    public AstralSlideEffect() {
-        super(Outcome.Detriment);
-        staticText = "Exile target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step";
+    public MistmoonGriffinEffect() {
+        super(Outcome.Benefit);
+        this.staticText = ", then return the top creature card of your graveyard to the battlefield";
     }
 
-    public AstralSlideEffect(final AstralSlideEffect effect) {
+    public MistmoonGriffinEffect(final MistmoonGriffinEffect effect) {
         super(effect);
+    }
+
+    @Override
+    public MistmoonGriffinEffect copy() {
+        return new MistmoonGriffinEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent permanent = game.getPermanent(source.getFirstTarget());
-            if (permanent != null) {
-                if (controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD)) {
-                    //create delayed triggered ability
-                    AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD, false));
-                    delayedAbility.setSourceId(source.getSourceId());
-                    delayedAbility.setControllerId(source.getControllerId());
-                    game.addDelayedTriggeredAbility(delayedAbility);
-                    return true;
+            Card lastCreatureCard = null;
+            for (Card card :controller.getGraveyard().getCards(game)) {
+                if (card.getCardType().contains(CardType.CREATURE)) {
+                    lastCreatureCard = card;
                 }
             }
+            if (lastCreatureCard != null) {
+                return controller.putOntoBattlefieldWithInfo(lastCreatureCard, game, Zone.GRAVEYARD, source.getSourceId());
+            }
+            return true;
         }
-
         return false;
-    }
-
-    @Override
-    public AstralSlideEffect copy() {
-        return new AstralSlideEffect(this);
     }
 }

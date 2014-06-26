@@ -25,70 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.sets.vintagemasters;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.TributeNotPaidCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.TributeAbility;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.Token;
 
 /**
  *
  * @author LevelX2
  */
-public class Ornitharch extends CardImpl {
+public class TerohsFaithful extends CardImpl {
 
-    public Ornitharch(UUID ownerId) {
-        super(ownerId, 23, "Ornitharch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-        this.expansionSetCode = "BNG";
-        this.subtype.add("Archon");
+    public TerohsFaithful(UUID ownerId) {
+        super(ownerId, 52, "Teroh's Faithful", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        this.expansionSetCode = "VMA";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
 
         this.color.setWhite(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(4);
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Tribute 2
-        this.addAbility(new TributeAbility(2));
-        // When Ornitharch enters the battlefield, if tribute wasn't paid, put two 1/1 white Bird creature tokens with flying onto the battlefield.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BirdToken(), 2), false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(),
-                "When {this} enters the battlefield, if its tribute wasn't paid, put two 1/1 white Bird creature tokens with flying onto the battlefield."));        
+        // When Teroh's Faithful enters the battlefield, you gain 4 life.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4), false));
     }
 
-    public Ornitharch(final Ornitharch card) {
+    public TerohsFaithful(final TerohsFaithful card) {
         super(card);
     }
 
     @Override
-    public Ornitharch copy() {
-        return new Ornitharch(this);
+    public TerohsFaithful copy() {
+        return new TerohsFaithful(this);
     }
-}
-
-class BirdToken extends Token {
-
-    public BirdToken() {
-        super("Bird", "1/1 white Bird creature tokens with flying");
-        this.setOriginalExpansionSetCode("BNG");
-        cardType.add(CardType.CREATURE);
-        color = ObjectColor.WHITE;
-        subtype.add("Bird");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        
-        this.addAbility(FlyingAbility.getInstance());
-    }
-
 }

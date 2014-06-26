@@ -25,16 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.sets.onslaught;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.common.BlocksTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
@@ -50,53 +51,55 @@ import mage.game.permanent.Permanent;
 
 /**
  *
- * @author cbt33, BetaSteward (GainProtectionFromColorTargetEffect)
+ * @author LevelX2
  */
-public class ResilientWanderer extends CardImpl {
+public class JarethLeonineTitan extends CardImpl {
 
-    public ResilientWanderer(UUID ownerId) {
-        super(ownerId, 43, "Resilient Wanderer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "ODY";
-        this.subtype.add("Human");
-        this.subtype.add("Nomad");
+    public JarethLeonineTitan(UUID ownerId) {
+        super(ownerId, 43, "Jareth, Leonine Titan", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}{W}");
+        this.expansionSetCode = "ONS";
+        this.supertype.add("Legendary");
+        this.subtype.add("Cat");
+        this.subtype.add("Giant");
 
         this.color.setWhite(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(7);
 
-        // First strike
-        this.addAbility(FirstStrikeAbility.getInstance());
-        // Discard a card: Resilient Wanderer gains protection from the color of your choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorSourceEffect(), new DiscardCardCost());
+        // Whenever Jareth, Leonine Titan blocks, it gets +7/+7 until end of turn.
+        this.addAbility(new BlocksTriggeredAbility(new BoostSourceEffect(7,7,Duration.EndOfTurn), false));
+        // {W}: Jareth gains protection from the color of your choice until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JarethsGainProtectionFromColorSourceEffect(), new ManaCostsImpl("{W}"));
         ability.addChoice(new ChoiceColor());
         this.addAbility(ability);
+
     }
 
-    public ResilientWanderer(final ResilientWanderer card) {
+    public JarethLeonineTitan(final JarethLeonineTitan card) {
         super(card);
     }
 
     @Override
-    public ResilientWanderer copy() {
-        return new ResilientWanderer(this);
+    public JarethLeonineTitan copy() {
+        return new JarethLeonineTitan(this);
     }
 }
 
-class GainProtectionFromColorSourceEffect extends ContinuousEffectImpl {
+class JarethsGainProtectionFromColorSourceEffect extends ContinuousEffectImpl {
 
     protected FilterCard protectionFilter;
-    
-    public GainProtectionFromColorSourceEffect() {
+
+    public JarethsGainProtectionFromColorSourceEffect() {
         super(Duration.EndOfTurn, Outcome.AddAbility);
     }
 
-    public GainProtectionFromColorSourceEffect(final GainProtectionFromColorSourceEffect effect) {
+    public JarethsGainProtectionFromColorSourceEffect(final JarethsGainProtectionFromColorSourceEffect effect) {
         super(effect);
     }
 
     @Override
-    public GainProtectionFromColorSourceEffect copy() {
-        return new GainProtectionFromColorSourceEffect(this);
+    public JarethsGainProtectionFromColorSourceEffect copy() {
+        return new JarethsGainProtectionFromColorSourceEffect(this);
     }
 
     @Override
