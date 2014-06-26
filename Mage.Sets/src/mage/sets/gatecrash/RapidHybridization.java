@@ -57,7 +57,7 @@ public class RapidHybridization extends CardImpl {
 
         // Destroy target creature. It can't be regenerated. That creature's controller puts a 3/3 green Frog Lizard creature token onto the battlefield.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addEffect(new RapidHybridizationEffect());
     }
 
