@@ -25,35 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.vintagemasters;
 
 import java.util.UUID;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.MageInt;
+import mage.abilities.common.CantBlockAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.InsectToken;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class CarrionCall extends CardImpl {
+public class HulkingGoblin extends CardImpl {
 
-    public CarrionCall (UUID ownerId) {
-        super(ownerId, 115, "Carrion Call", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "SOM";
-        this.color.setGreen(true);
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new InsectToken("SOM"), 2));
+    public HulkingGoblin(UUID ownerId) {
+        super(ownerId, 174, "Hulking Goblin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.expansionSetCode = "VMA";
+        this.subtype.add("Goblin");
+
+        this.color.setRed(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Hulking Goblin can't block.
+        this.addAbility(new CantBlockAbility());
     }
 
-    public CarrionCall (final CarrionCall card) {
+    public HulkingGoblin(final HulkingGoblin card) {
         super(card);
     }
 
     @Override
-    public CarrionCall copy() {
-        return new CarrionCall(this);
+    public HulkingGoblin copy() {
+        return new HulkingGoblin(this);
     }
 }

@@ -299,7 +299,7 @@ public class HumanPlayer extends PlayerImpl {
                                 return true;
                             }
                         }
-                    } else if (target.canTarget(response.getUUID(), source, game)) {
+                    } else if (target.canTarget(response.getUUID(), playerId, source, game)) {
                         target.addTarget(response.getUUID(), source, game);
                         if(target.doneChosing()){
                             return true;
@@ -875,7 +875,7 @@ public class HumanPlayer extends PlayerImpl {
                 return true;
             }
             // if ability has no mana costs you have to pick it from ability picker
-            return !ability.getManaCostsToPay().isEmpty();               
+            return false;
         }
         return true;
     }

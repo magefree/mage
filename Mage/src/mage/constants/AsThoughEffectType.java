@@ -8,6 +8,7 @@ public enum AsThoughEffectType {
     ATTACK,
     ACTIVATE_HASTE,
     BLOCK_TAPPED,
+    BLOCK_SHADOW,
     BE_BLOCKED,    
     CAST,
     DAMAGE,

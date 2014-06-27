@@ -25,35 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.vintagemasters;
 
 import java.util.UUID;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.InsectToken;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class CarrionCall extends CardImpl {
+public class YavimayaElder extends mage.sets.commander.YavimayaElder {
 
-    public CarrionCall (UUID ownerId) {
-        super(ownerId, 115, "Carrion Call", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "SOM";
-        this.color.setGreen(true);
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new InsectToken("SOM"), 2));
+    public YavimayaElder(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 240;
+        this.expansionSetCode = "VMA";
+        this.rarity = Rarity.UNCOMMON;
     }
 
-    public CarrionCall (final CarrionCall card) {
+    public YavimayaElder(final YavimayaElder card) {
         super(card);
     }
 
     @Override
-    public CarrionCall copy() {
-        return new CarrionCall(this);
+    public YavimayaElder copy() {
+        return new YavimayaElder(this);
     }
 }

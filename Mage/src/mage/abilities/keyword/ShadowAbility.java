@@ -1,14 +1,14 @@
 package mage.abilities.keyword;
 
+import java.io.ObjectStreamException;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.MageSingleton;
 import mage.abilities.effects.RestrictionEffect;
+import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.io.ObjectStreamException;
 
 /**
  * "Shadow" keyword
@@ -61,8 +61,10 @@ class ShadowEffect extends RestrictionEffect implements MageSingleton {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (blocker.getAbilities().containsKey(ShadowAbility.getInstance().getId()))
+        if (blocker.getAbilities().containsKey(ShadowAbility.getInstance().getId())
+                || game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_SHADOW, blocker.getControllerId(), game)) {
             return true;
+        }
         return false;
     }
 

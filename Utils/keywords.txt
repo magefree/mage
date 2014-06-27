@@ -18,6 +18,7 @@ Fear|instance|
 First strike|instance|
 Flanking|new|
 Flash|instance|
+Flashback|cost|
 Flying|instance|
 Forestcycling|cost|
 Forestwalk|new|

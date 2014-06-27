@@ -25,35 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.CycleTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.InsectToken;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class CarrionCall extends CardImpl {
+public class SolarBlast extends CardImpl {
 
-    public CarrionCall (UUID ownerId) {
-        super(ownerId, 115, "Carrion Call", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "SOM";
-        this.color.setGreen(true);
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new InsectToken("SOM"), 2));
+    public SolarBlast(UUID ownerId) {
+        super(ownerId, 234, "Solar Blast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
+        this.expansionSetCode = "ONS";
+
+        this.color.setRed(true);
+
+        // Solar Blast deals 3 damage to target creature or player.
+        this.getSpellAbility().addEffect(new DamageTargetEffect(3));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        // Cycling {1}{R}{R}
+        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{R}{R}")));
+        // When you cycle Solar Blast, you may have it deal 1 damage to target creature or player.
+        Ability ability = new CycleTriggeredAbility(new DamageTargetEffect(1), true);
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
     }
 
-    public CarrionCall (final CarrionCall card) {
+    public SolarBlast(final SolarBlast card) {
         super(card);
     }
 
     @Override
-    public CarrionCall copy() {
-        return new CarrionCall(this);
+    public SolarBlast copy() {
+        return new SolarBlast(this);
     }
 }

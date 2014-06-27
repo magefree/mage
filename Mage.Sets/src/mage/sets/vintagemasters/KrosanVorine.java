@@ -25,35 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.vintagemasters;
 
 import java.util.UUID;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.combat.CantBeBlockedByMoreThanOneSourceEffect;
+import mage.abilities.keyword.ProvokeAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.InsectToken;
+import mage.constants.Zone;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class CarrionCall extends CardImpl {
+public class KrosanVorine extends CardImpl {
 
-    public CarrionCall (UUID ownerId) {
-        super(ownerId, 115, "Carrion Call", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "SOM";
+    public KrosanVorine(UUID ownerId) {
+        super(ownerId, 219, "Krosan Vorine", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "VMA";
+        this.subtype.add("Cat");
+        this.subtype.add("Beast");
+
         this.color.setGreen(true);
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new InsectToken("SOM"), 2));
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
+
+        // Provoke
+        this.addAbility(new ProvokeAbility());
+        // Krosan Vorine can't be blocked by more than one creature.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
     }
 
-    public CarrionCall (final CarrionCall card) {
+    public KrosanVorine(final KrosanVorine card) {
         super(card);
     }
 
     @Override
-    public CarrionCall copy() {
-        return new CarrionCall(this);
+    public KrosanVorine copy() {
+        return new KrosanVorine(this);
     }
 }

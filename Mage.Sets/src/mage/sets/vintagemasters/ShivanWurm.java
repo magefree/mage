@@ -25,35 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.vintagemasters;
 
 import java.util.UUID;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.MageInt;
+import mage.ObjectColor;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.InsectToken;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class CarrionCall extends CardImpl {
+public class ShivanWurm extends CardImpl {
 
-    public CarrionCall (UUID ownerId) {
-        super(ownerId, 115, "Carrion Call", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "SOM";
-        this.color.setGreen(true);
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new InsectToken("SOM"), 2));
+    static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("red or green creature you control");
+
+    static {
+        filter.add(Predicates.or(new ColorPredicate(ObjectColor.RED), new ColorPredicate(ObjectColor.GREEN)));
     }
 
-    public CarrionCall (final CarrionCall card) {
+    public ShivanWurm(UUID ownerId) {
+        super(ownerId, 261, "Shivan Wurm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");
+        this.expansionSetCode = "VMA";
+        this.subtype.add("Wurm");
+
+        this.color.setRed(true);
+        this.color.setGreen(true);
+        this.power = new MageInt(7);
+        this.toughness = new MageInt(7);
+
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        // When Shivan Wurm enters the battlefield, return a red or green creature you control to its owner's hand.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
+        ability.addTarget(new TargetControlledCreaturePermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public ShivanWurm(final ShivanWurm card) {
         super(card);
     }
 
     @Override
-    public CarrionCall copy() {
-        return new CarrionCall(this);
+    public ShivanWurm copy() {
+        return new ShivanWurm(this);
     }
 }

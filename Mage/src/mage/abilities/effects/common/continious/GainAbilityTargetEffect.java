@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common.continious;
 
+import java.util.Locale;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -41,6 +42,8 @@ import mage.target.Target;
 
 import java.util.UUID;
 import mage.cards.Card;
+import mage.constants.PhaseStep;
+import mage.game.turn.Step;
 
 /**
  *
@@ -51,6 +54,11 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
     protected Ability ability;
     // shall a card gain the ability (otherwise permanent)
     private boolean onCard;
+
+    // Duration until next phase step of player
+    private PhaseStep durationPhaseStep = null;
+    private UUID durationPlayerId;
+    private boolean sameStep;
 
     public GainAbilityTargetEffect(Ability ability, Duration duration) {
         this(ability, duration, null);
@@ -72,6 +80,41 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
         super(effect);
         this.ability = effect.ability.copy();
         this.onCard = effect.onCard;
+        this.durationPhaseStep = effect.durationPhaseStep;
+        this.durationPlayerId = effect.durationPlayerId;
+        this.sameStep = effect.sameStep;
+    }
+
+    /**
+     * Used to set a duration to the next durationPhaseStep of the
+     * first controller of the effect.
+     * 
+     * @param phaseStep 
+     */
+    public void setDurationToPhase(PhaseStep phaseStep) {
+        durationPhaseStep = phaseStep;
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (durationPhaseStep != null) {
+            durationPlayerId = source.getControllerId();
+            sameStep = true;
+        }
+    }
+
+    @Override
+    public boolean isInactive(Ability source, Game game) {
+        if (durationPhaseStep != null && durationPhaseStep.equals(game.getPhase().getStep().getType()))
+        {
+            if (!sameStep && game.getActivePlayerId().equals(durationPlayerId) || game.getPlayer(durationPlayerId).hasReachedNextTurnAfterLeaving()) {
+                return true;
+            }
+        } else {
+            sameStep = false;
+        }
+        return false;
     }
 
     @Override
@@ -127,7 +170,12 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
             sb.append(target.getTargetName()).append(" gains ");
 
         }
-        sb.append(ability.getRule()).append(" ").append(duration.toString());
+        if (durationPhaseStep != null) {
+            sb.append(" until your next ").append(durationPhaseStep.toString().toLowerCase(Locale.ENGLISH));
+        }
+        if (!duration.toString().isEmpty()) {
+            sb.append(ability.getRule()).append(" ").append(duration.toString());
+        }
         return sb.toString();
     }
 

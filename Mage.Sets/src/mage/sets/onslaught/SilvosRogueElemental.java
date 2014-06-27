@@ -25,35 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.RegenerateSourceEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.InsectToken;
+import mage.constants.Zone;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class CarrionCall extends CardImpl {
+public class SilvosRogueElemental extends CardImpl {
 
-    public CarrionCall (UUID ownerId) {
-        super(ownerId, 115, "Carrion Call", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "SOM";
+    public SilvosRogueElemental(UUID ownerId) {
+        super(ownerId, 282, "Silvos, Rogue Elemental", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
+        this.expansionSetCode = "ONS";
+        this.supertype.add("Legendary");
+        this.subtype.add("Elemental");
+
         this.color.setGreen(true);
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new InsectToken("SOM"), 2));
+        this.power = new MageInt(8);
+        this.toughness = new MageInt(5);
+
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        // {G}: Regenerate Silvos, Rogue Elemental.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
     }
 
-    public CarrionCall (final CarrionCall card) {
+    public SilvosRogueElemental(final SilvosRogueElemental card) {
         super(card);
     }
 
     @Override
-    public CarrionCall copy() {
-        return new CarrionCall(this);
+    public SilvosRogueElemental copy() {
+        return new SilvosRogueElemental(this);
     }
 }

@@ -77,6 +77,9 @@ public class BlocksIfAbleTargetEffect extends RequirementEffect {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         if (this.duration == Duration.EndOfTurn) {
             return "Target " + mode.getTargets().get(0).getTargetName() + " blocks this turn if able";
         }

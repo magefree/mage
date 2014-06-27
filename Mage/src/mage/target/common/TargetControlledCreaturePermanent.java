@@ -44,6 +44,10 @@ public class TargetControlledCreaturePermanent extends TargetControlledPermanent
         this(numTargets, numTargets, new FilterControlledCreaturePermanent(), false);
     }
 
+    public TargetControlledCreaturePermanent(FilterControlledCreaturePermanent filter) {
+        super(1, 1, filter, false);
+    }
+
     public TargetControlledCreaturePermanent(int minNumTargets, int maxNumTargets, FilterControlledCreaturePermanent filter, boolean notTarget) {
         super(minNumTargets, maxNumTargets, filter, notTarget);
         this.targetName = filter.getMessage();

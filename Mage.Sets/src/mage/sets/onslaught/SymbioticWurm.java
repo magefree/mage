@@ -25,10 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.onslaught;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -37,23 +38,30 @@ import mage.game.permanent.token.InsectToken;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class CarrionCall extends CardImpl {
+public class SymbioticWurm extends CardImpl {
 
-    public CarrionCall (UUID ownerId) {
-        super(ownerId, 115, "Carrion Call", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "SOM";
+    public SymbioticWurm(UUID ownerId) {
+        super(ownerId, 289, "Symbiotic Wurm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}{G}");
+        this.expansionSetCode = "ONS";
+        this.subtype.add("Wurm");
+
         this.color.setGreen(true);
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new InsectToken("SOM"), 2));
+        this.power = new MageInt(7);
+        this.toughness = new MageInt(7);
+
+        // When Symbiotic Wurm dies, put seven 1/1 green Insect creature tokens onto the battlefield.
+        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new InsectToken(), 7)));
+
     }
 
-    public CarrionCall (final CarrionCall card) {
+    public SymbioticWurm(final SymbioticWurm card) {
         super(card);
     }
 
     @Override
-    public CarrionCall copy() {
-        return new CarrionCall(this);
+    public SymbioticWurm copy() {
+        return new SymbioticWurm(this);
     }
 }

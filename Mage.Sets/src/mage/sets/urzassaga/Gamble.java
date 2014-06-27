@@ -25,35 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.discard.DiscardControllerEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.InsectToken;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class CarrionCall extends CardImpl {
+public class Gamble extends CardImpl {
 
-    public CarrionCall (UUID ownerId) {
-        super(ownerId, 115, "Carrion Call", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "SOM";
-        this.color.setGreen(true);
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new InsectToken("SOM"), 2));
+    public Gamble(UUID ownerId) {
+        super(ownerId, 188, "Gamble", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}");
+        this.expansionSetCode = "USG";
+
+        this.color.setRed(true);
+
+        // Search your library for a card, put that card into your hand, discard a card at random, then shuffle your library.
+        Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false, true);
+        effect.setText("Search your library for a card, put that card into your hand");        
+        this.getSpellAbility().addEffect(effect);
+        effect = new DiscardControllerEffect(1, true);
+        effect.setText(", discard a card at random, then shuffle your library");
+        this.getSpellAbility().addEffect(effect);
+
     }
 
-    public CarrionCall (final CarrionCall card) {
+    public Gamble(final Gamble card) {
         super(card);
     }
 
     @Override
-    public CarrionCall copy() {
-        return new CarrionCall(this);
+    public Gamble copy() {
+        return new Gamble(this);
     }
 }

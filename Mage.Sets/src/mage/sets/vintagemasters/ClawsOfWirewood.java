@@ -25,35 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.vintagemasters;
 
 import java.util.UUID;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageAllEffect;
+import mage.abilities.effects.common.DamagePlayersEffect;
+import mage.abilities.keyword.CyclingAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.InsectToken;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class CarrionCall extends CardImpl {
+public class ClawsOfWirewood extends CardImpl {
 
-    public CarrionCall (UUID ownerId) {
-        super(ownerId, 115, "Carrion Call", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "SOM";
-        this.color.setGreen(true);
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new InsectToken("SOM"), 2));
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
+
+    static {
+        filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public CarrionCall (final CarrionCall card) {
+    public ClawsOfWirewood(UUID ownerId) {
+        super(ownerId, 201, "Claws of Wirewood", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
+        this.expansionSetCode = "VMA";
+
+        this.color.setGreen(true);
+
+        // Claws of Wirewood deals 3 damage to each creature with flying and each player.
+        this.getSpellAbility().addEffect(new DamageAllEffect(3, filter));
+        Effect effect = new DamagePlayersEffect(3);
+        effect.setText("and each player");
+        this.getSpellAbility().addEffect(effect);
+        // Cycling {2}
+        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+    }
+
+    public ClawsOfWirewood(final ClawsOfWirewood card) {
         super(card);
     }
 
     @Override
-    public CarrionCall copy() {
-        return new CarrionCall(this);
+    public ClawsOfWirewood copy() {
+        return new ClawsOfWirewood(this);
     }
 }

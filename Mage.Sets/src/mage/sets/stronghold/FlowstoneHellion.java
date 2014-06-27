@@ -25,35 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.stronghold;
 
 import java.util.UUID;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.game.permanent.token.InsectToken;
+import mage.constants.Zone;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class CarrionCall extends CardImpl {
+public class FlowstoneHellion extends CardImpl {
 
-    public CarrionCall (UUID ownerId) {
-        super(ownerId, 115, "Carrion Call", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "SOM";
-        this.color.setGreen(true);
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new InsectToken("SOM"), 2));
+    public FlowstoneHellion(UUID ownerId) {
+        super(ownerId, 84, "Flowstone Hellion", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
+        this.expansionSetCode = "STH";
+        this.subtype.add("Hellion");
+        this.subtype.add("Beast");
+
+        this.color.setRed(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // Haste
+        this.addAbility(HasteAbility.getInstance());
+        // {0}: Flowstone Hellion gets +1/-1 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(+1,-1,Duration.EndOfTurn), new GenericManaCost(0)));
     }
 
-    public CarrionCall (final CarrionCall card) {
+    public FlowstoneHellion(final FlowstoneHellion card) {
         super(card);
     }
 
     @Override
-    public CarrionCall copy() {
-        return new CarrionCall(this);
+    public FlowstoneHellion copy() {
+        return new FlowstoneHellion(this);
     }
 }

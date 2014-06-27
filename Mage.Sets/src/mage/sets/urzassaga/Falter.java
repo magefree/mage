@@ -25,35 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.combat.CantBlockAllEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.game.permanent.token.InsectToken;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class CarrionCall extends CardImpl {
+public class Falter extends CardImpl {
 
-    public CarrionCall (UUID ownerId) {
-        super(ownerId, 115, "Carrion Call", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "SOM";
-        this.color.setGreen(true);
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new InsectToken("SOM"), 2));
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures without flying");
+
+    static {
+        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
-    public CarrionCall (final CarrionCall card) {
+    public Falter(UUID ownerId) {
+        super(ownerId, 184, "Falter", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
+        this.expansionSetCode = "USG";
+
+        this.color.setRed(true);
+
+        // Creatures without flying can't block this turn.
+        this.getSpellAbility().addEffect(new CantBlockAllEffect(filter, Duration.EndOfTurn));
+    }
+
+    public Falter(final Falter card) {
         super(card);
     }
 
     @Override
-    public CarrionCall copy() {
-        return new CarrionCall(this);
+    public Falter copy() {
+        return new Falter(this);
     }
 }

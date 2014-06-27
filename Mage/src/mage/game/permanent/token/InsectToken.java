@@ -28,9 +28,8 @@
 
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
 import mage.MageInt;
-import mage.ObjectColor;
+import mage.constants.CardType;
 
 /**
  *
@@ -39,9 +38,14 @@ import mage.ObjectColor;
 public class InsectToken extends Token {
 
     public InsectToken() {
+        this("M10");
+    }
+
+    public InsectToken(String setCode) {
         super("Insect", "1/1 green Insect creature token");
+        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.GREEN;
+        color.setGreen(true);
         subtype.add("Insect");
         power = new MageInt(1);
         toughness = new MageInt(1);

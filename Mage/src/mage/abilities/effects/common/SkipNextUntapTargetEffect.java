@@ -28,26 +28,26 @@
 
 package mage.abilities.effects.common;
 
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.effects.ReplacementEffectImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.Mode;
+import mage.abilities.effects.ReplacementEffectImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class SkipNextUntapTargetEffect extends ReplacementEffectImpl {
 
-    protected Set<UUID> usedFor = new HashSet<UUID>();
+    protected Set<UUID> usedFor = new HashSet<>();
     protected int count;
 
     public SkipNextUntapTargetEffect() {
@@ -79,15 +79,10 @@ public class SkipNextUntapTargetEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if (targetPointer.getTargets(game, source).size() < 2) {
-            used = true;
-        } else {
-            count++;
-        }
         // not clear how to turn off the effect for more than one target
         // especially as some targets may leave the battlefield since the effect creation
         // so handling this in applies method is the only option for now for such cases
-        if (count == targetPointer.getTargets(game, source).size()) {
+        if (usedFor.size() >= targetPointer.getTargets(game, source).size()) {
             // this won't work for targets disappeared before applies() return true
             used = true;
         }
@@ -97,17 +92,19 @@ public class SkipNextUntapTargetEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == EventType.UNTAP) {
-            for (UUID target : targetPointer.getTargets(game, source)) {
-                if (event.getTargetId().equals(target)) {
-                    if (!usedFor.contains(target)) {
-                        usedFor.add(target);
-                        return true;
-                    }
-                    break;
+            if (targetPointer.getTargets(game, source).contains(event.getTargetId())
+                    && !usedFor.contains(event.getTargetId())) {
+                Permanent permanent = game.getPermanent(event.getTargetId());
+                if (permanent == null) {
+                    usedFor.add(event.getTargetId());
+                    return false;
                 }
-            }
+                if (permanent.getControllerId().equals(game.getActivePlayerId())) {
+                    usedFor.add(event.getTargetId());
+                    return true;
+                }
 
-            return false;
+            }
         }
         return false;
     }

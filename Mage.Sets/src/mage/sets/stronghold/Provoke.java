@@ -25,35 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.stronghold;
 
 import java.util.UUID;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.combat.BlocksIfAbleTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.game.permanent.token.InsectToken;
+import mage.constants.TargetController;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class CarrionCall extends CardImpl {
+public class Provoke extends CardImpl {
 
-    public CarrionCall (UUID ownerId) {
-        super(ownerId, 115, "Carrion Call", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "SOM";
-        this.color.setGreen(true);
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new InsectToken("SOM"), 2));
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
+
+    static {
+        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
-    public CarrionCall (final CarrionCall card) {
+    public Provoke(UUID ownerId) {
+        super(ownerId, 63, "Provoke", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
+        this.expansionSetCode = "STH";
+
+        this.color.setGreen(true);
+
+        // Untap target creature you don't control. That creature blocks this turn if able.
+        this.getSpellAbility().addEffect(new UntapTargetEffect());
+        Effect effect = new BlocksIfAbleTargetEffect(Duration.EndOfTurn);
+        effect.setText("That creature blocks this turn if able");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        // Draw a card.
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+    }
+
+    public Provoke(final Provoke card) {
         super(card);
     }
 
     @Override
-    public CarrionCall copy() {
-        return new CarrionCall(this);
+    public Provoke copy() {
+        return new Provoke(this);
     }
 }

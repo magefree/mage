@@ -123,7 +123,7 @@ public class Turn implements Serializable {
         resetCounts();
         game.getPlayer(activePlayerId).beginTurn(game);
         for (Phase phase: phases) {
-                if (game.isPaused() || game.gameOver(null)) {
+            if (game.isPaused() || game.gameOver(null)) {
                 return;
             }
             currentPhase = phase;

@@ -81,7 +81,7 @@ public abstract class Step implements Serializable {
         stepPart = StepPart.PRE;
     }
 
-        public void priority(Game game, UUID activePlayerId, boolean resuming) {
+    public void priority(Game game, UUID activePlayerId, boolean resuming) {
         if (hasPriority) {
             stepPart = StepPart.PRIORITY;
             game.playPriority(activePlayerId, resuming);

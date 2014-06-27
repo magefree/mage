@@ -25,35 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.judgment;
 
 import java.util.UUID;
+import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.permanent.token.InsectToken;
+import mage.constants.TimingRule;
+import mage.game.permanent.token.BearToken;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class CarrionCall extends CardImpl {
+public class GrizzlyFate extends CardImpl {
 
-    public CarrionCall (UUID ownerId) {
-        super(ownerId, 115, "Carrion Call", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "SOM";
+    public GrizzlyFate(UUID ownerId) {
+        super(ownerId, 119, "Grizzly Fate", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
+        this.expansionSetCode = "JUD";
+
         this.color.setGreen(true);
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new InsectToken("SOM"), 2));
+
+        // Put two 2/2 green Bear creature tokens onto the battlefield.
+        // Threshold - Put four 2/2 green Bear creature tokens onto the battlefield instead if seven or more cards are in your graveyard.
+        Effect effect = new ConditionalOneShotEffect(new CreateTokenEffect(new BearToken(), 4),
+                                                     new CreateTokenEffect(new BearToken(), 2),
+                                                     new CardsInControllerGraveCondition(7),
+                                                     "Put two 2/2 green Bear creature tokens onto the battlefield.<br/><br/><i>Threshold</i> - Put four 2/2 green Bear creature tokens onto the battlefield instead if seven or more cards are in your graveyard.");
+        this.getSpellAbility().addEffect(effect);
+        // Flashback {5}{G}{G}
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{G}{G}"), TimingRule.SORCERY));
     }
 
-    public CarrionCall (final CarrionCall card) {
+    public GrizzlyFate(final GrizzlyFate card) {
         super(card);
     }
 
     @Override
-    public CarrionCall copy() {
-        return new CarrionCall(this);
+    public GrizzlyFate copy() {
+        return new GrizzlyFate(this);
     }
 }

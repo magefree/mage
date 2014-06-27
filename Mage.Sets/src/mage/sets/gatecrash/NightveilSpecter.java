@@ -29,6 +29,7 @@ package mage.sets.gatecrash;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -110,9 +111,9 @@ class NightveilSpecterExileEffect extends OneShotEffect {
       Player player = game.getPlayer(targetPointer.getFirst(game, source));
       if (player != null) {
           Card card = player.getLibrary().removeFromTop(game);
-          Card sourceCard = game.getCard(source.getSourceId());
-          if (card != null && sourceCard != null) {
-              return card.moveToExile(CardUtil.getCardExileZoneId(game, source), sourceCard.getName(), source.getSourceId(), game);
+          MageObject sourceObject = game.getObject(source.getSourceId());
+          if (card != null && sourceObject != null) {
+              player.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourceObject.getLogName(), source.getSourceId(), game, Zone.LIBRARY);
           }
       }
       return false;
