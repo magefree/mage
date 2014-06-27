@@ -155,13 +155,17 @@ public class TableController {
         if (seat == null) {
             throw new GameException("No available seats.");
         }
+        User user = UserManager.getInstance().getUser(userId);
+        if (user == null) {
+            logger.fatal(new StringBuilder("couldn't get user ").append(name).append(" for join tornament userId = ").append(userId).toString());
+            return false;
+        }
+        if (userPlayerMap.containsKey(userId)){
+            user.showUserMessage("Join Table", new StringBuilder("You can join a table only one time.").toString());
+            return false;
+        }
         Player player = createPlayer(name, seat.getPlayerType(), skill);
         if (player != null) {
-            User user = UserManager.getInstance().getUser(userId);
-            if (user == null) {
-                logger.fatal(new StringBuilder("couldn't get user ").append(name).append(" for join tornament userId = ").append(userId).toString());
-                return false;
-            }
             if (!player.canJoinTable(table)) {
                 user.showUserMessage("Join Table", new StringBuilder("A ").append(seat.getPlayerType()).append(" player can't join this table.").toString());
                 return false;
