@@ -29,23 +29,25 @@
 package mage.sets.darksteel;
 
 import java.util.UUID;
-
+import mage.ObjectColor;
+import mage.abilities.Ability;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.continious.BoostEquippedEffect;
+import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EquipAbility;
+import mage.abilities.keyword.ProtectionAbility;
+import mage.cards.Card;
+import mage.cards.CardImpl;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.ObjectColor;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.effects.common.continious.BoostEquippedEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EquipAbility;
-import mage.abilities.keyword.ProtectionAbility;
-import mage.cards.CardImpl;
+import static mage.constants.Zone.GRAVEYARD;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
@@ -54,6 +56,7 @@ import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -92,14 +95,29 @@ public class SwordOfLightAndShadow extends CardImpl {
         return new SwordOfLightAndShadow(this);
     }
 
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+
+        if (ability instanceof SwordOfLightAndShadowAbility) {
+            Player controller = game.getPlayer(ability.getControllerId());
+            if (controller != null) {
+                // Target may only be added if possible target exists. Else the gain life effect won't trigger, becuase there is no valid target for the
+                // return to hand ability
+                if (controller.getGraveyard().count(new FilterCreatureCard(), ability.getSourceId(), ability.getControllerId(), game) > 0) {
+                    ability.addTarget(new TargetCardInYourGraveyard(0,1,new FilterCreatureCard("creature card from your graveyard")));
+                }
+            }
+        }
+
+    }
 }
 
 class SwordOfLightAndShadowAbility extends TriggeredAbilityImpl {
 
     public SwordOfLightAndShadowAbility() {
-        super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect());
+        super(Zone.BATTLEFIELD, new SwordOfLightAndShadowReturnToHandTargetEffect(), false);
         this.addEffect(new GainLifeEffect(3));
-        this.addTarget(new TargetCardInYourGraveyard(0,1,new FilterCreatureCard("creature card from your graveyard")));
+        
     }
 
     public SwordOfLightAndShadowAbility(final SwordOfLightAndShadowAbility ability) {
@@ -127,4 +145,48 @@ class SwordOfLightAndShadowAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever equipped creature deals combat damage to a player, you gain 3 life and you may return up to one target creature card from your graveyard to your hand.";
     }
+}
+
+class SwordOfLightAndShadowReturnToHandTargetEffect extends OneShotEffect {
+
+    public SwordOfLightAndShadowReturnToHandTargetEffect() {
+        super(Outcome.ReturnToHand);
+        staticText = "and you may return up to one target creature card from your graveyard to your hand";
+    }
+
+    public SwordOfLightAndShadowReturnToHandTargetEffect(final SwordOfLightAndShadowReturnToHandTargetEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public SwordOfLightAndShadowReturnToHandTargetEffect copy() {
+        return new SwordOfLightAndShadowReturnToHandTargetEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        boolean result = true; // in case no target is selected
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        if (!source.getTargets().isEmpty() && targetPointer.getFirst(game, source) != null) {
+            if (controller.chooseUse(outcome, "Return creature card from graveyard to hand?", game)) {
+                for (UUID targetId : targetPointer.getTargets(game, source)) {
+                    switch (game.getState().getZone(targetId)) {
+                        case GRAVEYARD:
+                            Card card = game.getCard(targetId);
+                            if (card != null) {
+                                controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD);
+                            }  else {
+                                result = false;
+                            }
+                            break;
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
 }
