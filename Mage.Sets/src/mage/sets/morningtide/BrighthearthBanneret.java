@@ -34,10 +34,10 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.keyword.ReinforceAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterSpell;
+import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class BrighthearthBanneret extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("Elemental spells and Warrior spells");
+    private static final FilterCard filter = new FilterCard("Elemental spells and Warrior spells");
 
     static {
         filter.add(Predicates.or(
@@ -66,7 +66,7 @@ public class BrighthearthBanneret extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Elemental spells and Warrior spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
         // Reinforce 1-{1}{R}
         this.addAbility(new ReinforceAbility(1, new ManaCostsImpl("{1}{R}")));
     }

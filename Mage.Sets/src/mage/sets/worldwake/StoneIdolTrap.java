@@ -34,7 +34,7 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
-import mage.abilities.effects.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;

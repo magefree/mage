@@ -33,10 +33,10 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterSpell;
+import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class StonybrookBanneret extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("Merfolk spells and Wizard spells");
+    private static final FilterCard filter = new FilterCard("Merfolk spells and Wizard spells");
 
     static {
         filter.add(Predicates.or(
@@ -67,7 +67,7 @@ public class StonybrookBanneret extends CardImpl {
         // Islandwalk
         this.addAbility(new IslandwalkAbility());
         // Merfolk spells and Wizard spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
     public StonybrookBanneret(final StonybrookBanneret card) {

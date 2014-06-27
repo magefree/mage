@@ -37,10 +37,10 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterSpell;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInLibrary;
 public class EyeOfUgin extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("colorless creature card");
-    private static final FilterSpell filterSpells = new FilterSpell("Colorless Eldrazi spells");
+    private static final FilterCard filterSpells = new FilterCard("Colorless Eldrazi spells");
 
     static {
         filter.add(new ColorlessPredicate());
@@ -67,7 +67,7 @@ public class EyeOfUgin extends CardImpl {
         this.supertype.add("Legendary");
 
         // Colorless Eldrazi spells you cast cost {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filterSpells, 2)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filterSpells, 2)));
         // {7}, {tap}: Search your library for a colorless creature card, reveal it, and put it into your hand. Then shuffle your library.
         Ability searchAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true),

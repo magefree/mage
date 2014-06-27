@@ -34,7 +34,7 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.dynamicvalue.common.OpponentsLostLifeCount;
-import mage.abilities.effects.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.RetraceAbility;

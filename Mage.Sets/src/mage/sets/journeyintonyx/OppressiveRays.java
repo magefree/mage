@@ -33,7 +33,7 @@ import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;

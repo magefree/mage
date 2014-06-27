@@ -31,12 +31,12 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
+import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  */
 public class CentaurOmenreader extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("creature spells");
+    private static final FilterCard filter = new FilterCard("creature spells");
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
@@ -77,14 +77,14 @@ public class CentaurOmenreader extends CardImpl {
     }
 }
 
-class CentaurOmenreaderSpellsCostReductionEffect extends SpellsCostReductionEffect {
+class CentaurOmenreaderSpellsCostReductionEffect extends SpellsCostReductionControllerEffect {
 
-    public CentaurOmenreaderSpellsCostReductionEffect(FilterSpell filter) {
+    public CentaurOmenreaderSpellsCostReductionEffect(FilterCard filter) {
         super(filter, 2);
         staticText = "As long as {this} is tapped, creature spells you cast cost {2} less to cast";
     }
 
-    protected CentaurOmenreaderSpellsCostReductionEffect(SpellsCostReductionEffect effect) {
+    protected CentaurOmenreaderSpellsCostReductionEffect(SpellsCostReductionControllerEffect effect) {
         super(effect);
     }
 

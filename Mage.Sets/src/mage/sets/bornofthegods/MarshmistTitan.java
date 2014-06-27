@@ -34,7 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
-import mage.abilities.effects.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;

@@ -175,7 +175,7 @@ class FlashbackEffect extends OneShotEffect {
                 int amount = source.getManaCostsToPay().getX();
                 if (amount == 0) {
                     // add variable cost like Discard X cards to get the X value to the spell
-                    // because there is currently no way to set the x value in anotehr way, it#s set for the 
+                    // because there is currently no way to set the x value in anotehr way, it's set for the
                     // x mana value to be known by the spell
                     for (Cost cost:source.getCosts()) {
                         if (cost instanceof VariableCost && cost.isPaid()) {

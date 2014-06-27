@@ -34,10 +34,10 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterSpell;
+import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class StormscapeFamiliar extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("White spells and black spells");
+    private static final FilterCard filter = new FilterCard("White spells and black spells");
 
     static {
         filter.add(Predicates.or(
@@ -67,7 +67,7 @@ public class StormscapeFamiliar extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // White spells and black spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
     public StormscapeFamiliar(final StormscapeFamiliar card) {

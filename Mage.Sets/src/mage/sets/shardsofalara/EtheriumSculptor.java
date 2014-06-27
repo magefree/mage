@@ -33,9 +33,9 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterSpell;
+import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  * @author North
  */
 public class EtheriumSculptor extends CardImpl {
-    private static final FilterSpell filter = new FilterSpell("Artifact spells");
+    private static final FilterCard filter = new FilterCard("Artifact spells");
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
@@ -59,7 +59,7 @@ public class EtheriumSculptor extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Artifact spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
     public EtheriumSculptor(final EtheriumSculptor card) {

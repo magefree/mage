@@ -32,12 +32,12 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.cost.SpellsCostIncreaseEffect;
+import mage.abilities.effects.common.cost.SpellsCostIncreasementControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
+import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class Derelor extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("Black spells");
+    private static final FilterCard filter = new FilterCard("Black spells");
     
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
@@ -62,7 +62,7 @@ public class Derelor extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Black spells you cast cost {B} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreaseEffect(filter, new ManaCostsImpl("B"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasementControllerEffect(filter, new ManaCostsImpl("B"))));
     }
 
     public Derelor(final Derelor card) {

@@ -32,9 +32,9 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreatureSpell;
+import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.other.FaceDownPredicate;
 
 /**
@@ -43,7 +43,7 @@ import mage.filter.predicate.other.FaceDownPredicate;
  */
 public class DreamChisel extends CardImpl {
 
-    private static final FilterCreatureSpell filter = new FilterCreatureSpell("Face-down creature spells");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("Face-down creature spells");
 
     static {
         filter.add(new FaceDownPredicate());
@@ -54,7 +54,7 @@ public class DreamChisel extends CardImpl {
         this.expansionSetCode = "ONS";
 
         // Face-down creature spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
     public DreamChisel(final DreamChisel card) {

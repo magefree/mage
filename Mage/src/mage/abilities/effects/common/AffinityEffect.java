@@ -3,7 +3,7 @@ package mage.abilities.effects.common;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.effects.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;

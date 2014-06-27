@@ -31,11 +31,11 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.effects.CostModificationEffectImpl;
+import mage.cards.Card;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.FilterSpell;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.util.CardUtil;
@@ -44,14 +44,14 @@ import mage.util.CardUtil;
  *
  * @author North
  */
-public class SpellsCostReductionEffect extends CostModificationEffectImpl {
+public class SpellsCostReductionControllerEffect extends CostModificationEffectImpl {
 
-    private final FilterSpell filter;
+    private final FilterCard filter;
     private final int amount;
     private ManaCosts<ManaCost> manaCostsToReduce = null;
 
 
-    public SpellsCostReductionEffect(FilterSpell filter, ManaCosts<ManaCost> manaCostsToReduce) {
+    public SpellsCostReductionControllerEffect(FilterCard filter, ManaCosts<ManaCost> manaCostsToReduce) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.filter = filter;
         this.amount = 0;
@@ -67,7 +67,7 @@ public class SpellsCostReductionEffect extends CostModificationEffectImpl {
     }
 
 
-    public SpellsCostReductionEffect(FilterSpell filter, int amount) {
+    public SpellsCostReductionControllerEffect(FilterCard filter, int amount) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.filter = filter;
         this.amount = amount;
@@ -77,7 +77,7 @@ public class SpellsCostReductionEffect extends CostModificationEffectImpl {
         this.staticText = sb.toString();
     }
 
-    protected SpellsCostReductionEffect(SpellsCostReductionEffect effect) {
+    protected SpellsCostReductionControllerEffect(SpellsCostReductionControllerEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.amount = effect.amount;
@@ -96,16 +96,23 @@ public class SpellsCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if ((abilityToModify instanceof SpellAbility)
-                && abilityToModify.getControllerId().equals(source.getControllerId())) {
-            Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
-            return spell != null && this.filter.match(spell, game);
+        if (abilityToModify instanceof SpellAbility) {
+            if (abilityToModify.getControllerId().equals(source.getControllerId())) {
+                Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
+                if (spell != null) {
+                    return this.filter.match(spell, game);
+                } else {
+                    // used at least for flashback ability because Flashback ability doesn't use stack
+                    Card sourceCard = game.getCard(abilityToModify.getSourceId());
+                    return sourceCard != null && this.filter.match(sourceCard, game);
+                }
+            }
         }
         return false;
     }
 
     @Override
-    public SpellsCostReductionEffect copy() {
-        return new SpellsCostReductionEffect(this);
+    public SpellsCostReductionControllerEffect copy() {
+        return new SpellsCostReductionControllerEffect(this);
     }
 }

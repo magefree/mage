@@ -35,9 +35,9 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterSpell;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class DaruWarchief extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("Soldier spells");
+    private static final FilterCard filter = new FilterCard("Soldier spells");
     private static final FilterCreaturePermanent filterCreatures = new FilterCreaturePermanent("Soldier creatures");
 
     static {
@@ -66,7 +66,7 @@ public class DaruWarchief extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Soldier spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
         // Soldier creatures you control get +1/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 2, Duration.WhileOnBattlefield, filterCreatures, false)));
     }

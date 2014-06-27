@@ -37,9 +37,9 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterSpell;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 
 public class LongForgottenGohei extends CardImpl {
 
-    private static final FilterSpell arcaneFilter = new FilterSpell("Arcane spells");
+    private static final FilterCard arcaneFilter = new FilterCard("Arcane spells");
     private static final FilterCreaturePermanent spiritFilter = new FilterCreaturePermanent("Spirit creatures");
 
     static {
@@ -62,7 +62,7 @@ public class LongForgottenGohei extends CardImpl {
             super(ownerId, 261, "Long-Forgotten Gohei", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
             this.expansionSetCode = "CHK";
             // Arcane spells you cast cost {1} less to cast.
-            this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(arcaneFilter, 1)));
+            this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(arcaneFilter, 1)));
             // Spirit creatures you control get +1/+1.
             this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, spiritFilter, false)));
     }

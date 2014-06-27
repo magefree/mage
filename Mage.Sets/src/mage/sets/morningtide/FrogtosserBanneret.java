@@ -33,10 +33,10 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterSpell;
+import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class FrogtosserBanneret extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("Goblin spells and Rogue spells");
+    private static final FilterCard filter = new FilterCard("Goblin spells and Rogue spells");
 
     static {
         filter.add(Predicates.or(
@@ -67,7 +67,7 @@ public class FrogtosserBanneret extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // Goblin spells and Rogue spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
     public FrogtosserBanneret(final FrogtosserBanneret card) {

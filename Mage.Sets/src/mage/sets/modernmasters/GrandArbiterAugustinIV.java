@@ -38,12 +38,12 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.CostModificationEffectImpl;
-import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
-import mage.filter.FilterSpell;
+import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.util.CardUtil;
@@ -54,8 +54,8 @@ import mage.util.CardUtil;
  */
 public class GrandArbiterAugustinIV extends CardImpl {
 
-    private static final FilterSpell filterWhite = new FilterSpell("White spells");
-    private static final FilterSpell filterBlue = new FilterSpell("Blue spells");
+    private static final FilterCard filterWhite = new FilterCard("White spells");
+    private static final FilterCard filterBlue = new FilterCard("Blue spells");
     static {
         filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
         filterBlue.add(new ColorPredicate(ObjectColor.BLUE));
@@ -74,9 +74,9 @@ public class GrandArbiterAugustinIV extends CardImpl {
         this.toughness = new MageInt(3);
 
         // White spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filterWhite, 1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filterWhite, 1)));
         // Blue spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filterBlue, 1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filterBlue, 1)));
         // Spells your opponents cast cost {1} more to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GrandArbiterAugustinIVCostIncreaseEffect()));
     }

@@ -33,10 +33,10 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
+import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class GoblinElectromancer extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("Instant and sorcery spells");
+    private static final FilterCard filter = new FilterCard("Instant and sorcery spells");
     static {
         filter.add(Predicates.or(
             new CardTypePredicate(CardType.INSTANT),
@@ -66,7 +66,7 @@ public class GoblinElectromancer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Instant and sorcery spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
     public GoblinElectromancer(final GoblinElectromancer card) {

@@ -29,14 +29,13 @@ package mage.abilities.effects.common.cost;
 
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.effects.CostModificationEffectImpl;
-import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.game.Game;
+import mage.game.stack.Spell;
 import mage.util.CardUtil;
 
 /**
@@ -73,9 +72,15 @@ public class SpellsCostIncreasementAllEffect extends CostModificationEffectImpl 
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if ((abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility)) {
-            Card sourceCard = game.getCard(abilityToModify.getSourceId());
-            return sourceCard != null && this.filter.match(sourceCard, game);
+        if (abilityToModify instanceof SpellAbility) {
+            Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
+            if (spell != null) {
+                return this.filter.match(spell, game);
+            } else {
+                // used at least for flashback ability because Flashback ability doesn't use stack
+                Card sourceCard = game.getCard(abilityToModify.getSourceId());
+                return sourceCard != null && this.filter.match(sourceCard, game);
+            }
         }
         return false;
     }

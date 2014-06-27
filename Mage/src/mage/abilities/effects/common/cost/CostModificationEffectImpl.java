@@ -26,14 +26,19 @@
  * or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects;
+package mage.abilities.effects.common.cost;
 
 import mage.constants.Duration;
 import mage.constants.EffectType;
 import mage.constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.CostModificationEffect;
+import mage.cards.Card;
 import mage.constants.CostModificationType;
 import mage.game.Game;
+import mage.game.stack.Spell;
 
 /**
  * Simple implementation of a {@link CostModificationEffect} offering simplified
@@ -67,10 +72,10 @@ public abstract class CostModificationEffectImpl extends ContinuousEffectImpl im
      */
     @Override
     public final boolean apply ( Game game, Ability source ) { return false; }
-    
-    
+       
     @Override
     public CostModificationType getModificationType(){
         return this.modificationType;
     }
+
 }

@@ -33,7 +33,6 @@ import mage.abilities.SpellAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.effects.CostModificationEffectImpl;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;

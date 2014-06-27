@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CastCommanderAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.CostModificationEffectImpl;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;

@@ -35,10 +35,10 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterSpell;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -48,11 +48,11 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class GoblinWarchief extends CardImpl {
 
-    private static final FilterSpell filterSpells = new FilterSpell("Goblin spells");
+    private static final FilterCard filterSpells = new FilterCard("Goblin spells");
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblins");
 
     static {
-        filter.add(new SubtypePredicate("Goblin"));
+        filterSpells.add(new SubtypePredicate("Goblin"));
         filter.add(new SubtypePredicate("Goblin"));
     }
 
@@ -66,7 +66,7 @@ public class GoblinWarchief extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Goblin spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filterSpells, 1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filterSpells, 1)));
         // Goblin creatures you control have haste.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
     }

@@ -35,7 +35,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;

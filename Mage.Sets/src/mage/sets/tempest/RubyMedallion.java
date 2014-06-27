@@ -33,9 +33,9 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterSpell;
+import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class RubyMedallion extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("Red spells");
+    private static final FilterCard filter = new FilterCard("Red spells");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
@@ -54,7 +54,7 @@ public class RubyMedallion extends CardImpl {
         this.expansionSetCode = "TMP";
 
         // Red spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
     public RubyMedallion(final RubyMedallion card) {

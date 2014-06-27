@@ -30,7 +30,7 @@ package mage.sets.bornofthegods;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.HeroicAbility;
 import mage.cards.CardImpl;
@@ -38,7 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.FilterSpell;
+import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class HeroOfIroas extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("Aura spells");
+    private static final FilterCard filter = new FilterCard("Aura spells");
     static {
         filter.add(new SubtypePredicate("Aura"));
     }
@@ -63,7 +63,7 @@ public class HeroOfIroas extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Aura spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
         // <i>Heroic</i> - Whenever you cast a spell that targets Hero of Iroas, put a +1/+1 counter on Hero of Iroas.
         this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
     }

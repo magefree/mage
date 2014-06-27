@@ -36,9 +36,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateTargetEffect;
-import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterSpell;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.Target;
@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class KrosanWarchief extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("Beast spells");
+    private static final FilterCard filter = new FilterCard("Beast spells");
     private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("Beast");
 
     static {
@@ -68,7 +68,7 @@ public class KrosanWarchief extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Beast spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
         // {1}{G}: Regenerate target Beast.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new RegenerateTargetEffect(),

@@ -40,7 +40,7 @@ import mage.abilities.StaticAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.Card;
 import mage.constants.CostModificationType;
 import mage.filter.common.FilterControlledCreaturePermanent;

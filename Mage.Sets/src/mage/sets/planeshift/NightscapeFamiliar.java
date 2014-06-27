@@ -37,9 +37,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterSpell;
+import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class NightscapeFamiliar extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("Blue spells and red spells");
+    private static final FilterCard filter = new FilterCard("Blue spells and red spells");
 
     static {
         filter.add(Predicates.or(
@@ -67,7 +67,7 @@ public class NightscapeFamiliar extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Blue spells and red spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
         // {1}{B}: Regenerate Nightscape Familiar.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
     }

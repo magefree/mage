@@ -33,9 +33,9 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterSpell;
+import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class BoskBanneret extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("Treefolk spells and Shaman spells");
+    private static final FilterCard filter = new FilterCard("Treefolk spells and Shaman spells");
 
     static {
         filter.add(Predicates.or(
@@ -64,7 +64,7 @@ public class BoskBanneret extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Treefolk spells and Shaman spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
     public BoskBanneret(final BoskBanneret card) {

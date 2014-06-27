@@ -36,7 +36,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.AdjustingSourceCosts;
-import mage.abilities.effects.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.combat.CanBlockAdditionalCreatureEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.FlyingAbility;
