@@ -46,7 +46,7 @@ import mage.game.events.GameEvent.EventType;
 public abstract class Phase implements Serializable {
 
     protected TurnPhase type;
-    protected List<Step> steps = new ArrayList<Step>();
+    protected List<Step> steps = new ArrayList<>();
     protected EventType event;
     protected EventType preEvent;
     protected EventType postEvent;
@@ -194,6 +194,7 @@ public abstract class Phase implements Serializable {
 
     protected void playStep(Game game) {
         if (!currentStep.skipStep(game, activePlayerId)) {
+            game.getState().increaseStepNum();
             prePriority(game, activePlayerId);
             if (!game.isPaused() && !game.gameOver(null)) {
                 currentStep.priority(game, activePlayerId, false);

@@ -105,6 +105,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Exile exile;
     private Battlefield battlefield;
     private int turnNum = 1;
+    private int stepNum = 0;
     private UUID turnId = null;
     private boolean extraTurn = false;
     private boolean legendaryRuleActive = true;
@@ -149,6 +150,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.lookedAt.putAll(state.lookedAt);
         this.battlefield = state.battlefield.copy();
         this.turnNum = state.turnNum;
+        this.stepNum = state.stepNum;
         this.extraTurn = state.extraTurn;
         this.legendaryRuleActive = state.legendaryRuleActive;
         this.gameOver = state.gameOver;
@@ -349,6 +351,19 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public Combat getCombat() {
         return combat;
+    }
+
+    /**
+     * Gets the game step counter. This counter isgoing one up for
+     * every played step during the game.
+     * @return
+     */
+    public int getStepNum() {
+        return stepNum;
+    }
+
+    public void increaseStepNum() {
+        this.stepNum++;
     }
 
     public int getTurnNum() {
@@ -695,6 +710,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         revealed.clear();
         lookedAt.clear();
         turnNum = 0;
+        stepNum = 0;
         extraTurn = false;
         legendaryRuleActive = true;
         gameOver = false;

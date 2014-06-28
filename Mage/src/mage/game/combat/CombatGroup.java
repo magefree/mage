@@ -53,11 +53,11 @@ import mage.util.Copyable;
  */
 public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 
-    protected List<UUID> attackers = new ArrayList<UUID>();
-    protected List<UUID> blockers = new ArrayList<UUID>();
-    protected List<UUID> blockerOrder = new ArrayList<UUID>();
-    protected List<UUID> attackerOrder = new ArrayList<UUID>();
-    protected Map<UUID, UUID> players = new HashMap<UUID, UUID>();
+    protected List<UUID> attackers = new ArrayList<>();
+    protected List<UUID> blockers = new ArrayList<>();
+    protected List<UUID> blockerOrder = new ArrayList<>();
+    protected List<UUID> attackerOrder = new ArrayList<>();
+    protected Map<UUID, UUID> players = new HashMap<>();
     protected boolean blocked;
     protected UUID defenderId; // planeswalker or player
     protected UUID defendingPlayerId;
@@ -274,7 +274,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         int damage = getDamageValueFromPermanent(attacker, game);
         if (canDamage(attacker, first)) {
             // must be set before attacker damage marking because of effects like Test of Faith
-            Map<UUID, Integer> blockerPower = new HashMap<UUID, Integer>();
+            Map<UUID, Integer> blockerPower = new HashMap<>();
             for (UUID blockerId: blockerOrder) {
                 Permanent blocker = game.getPermanent(blockerId);
                 if (canDamage(blocker, first)) {
@@ -283,7 +283,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     }
                 }
             }
-            Map<UUID, Integer> assigned = new HashMap<UUID, Integer>();
+            Map<UUID, Integer> assigned = new HashMap<>();
             if (blocked) {
                 for (UUID blockerId: blockerOrder) {
                     Permanent blocker = game.getPermanent(blockerId);
@@ -316,8 +316,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 Permanent blocker = game.getPermanent(entry.getKey());
                 blocker.markDamage(entry.getValue(), attacker.getId(), game, true, true);
             }
-        }
-        else {
+        } else {
             for (UUID blockerId: blockerOrder) {
                 Permanent blocker = game.getPermanent(blockerId);
                 if (canDamage(blocker, first)) {
@@ -365,7 +364,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         int damage = getDamageValueFromPermanent(blocker, game);
 
         if (canDamage(blocker, first)) {
-            Map<UUID, Integer> assigned = new HashMap<UUID, Integer>();
+            Map<UUID, Integer> assigned = new HashMap<>();
             for (UUID attackerId: attackerOrder) {
                 Permanent attacker = game.getPermanent(attackerId);
                 int lethalDamage;
@@ -437,7 +436,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             return;
         }
         Player player = game.getPlayer(playerId);
-        List<UUID> blockerList = new ArrayList<UUID>(blockers);
+        List<UUID> blockerList = new ArrayList<>(blockers);
         blockerOrder.clear();
         while (true) {
             if (blockerList.size() == 1) {
@@ -445,7 +444,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 break;
             }
             else {
-                List<Permanent> blockerPerms = new ArrayList<Permanent>();
+                List<Permanent> blockerPerms = new ArrayList<>();
                 for (UUID blockerId: blockerList) {
                     blockerPerms.add(game.getPermanent(blockerId));
                 }
@@ -461,7 +460,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             return;
         }
         Player player = game.getPlayer(playerId);
-        List<UUID> attackerList = new ArrayList<UUID>(attackers);
+        List<UUID> attackerList = new ArrayList<>(attackers);
         attackerOrder.clear();
         while (true) {
             if (attackerList.size() == 1) {
@@ -469,7 +468,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 break;
             }
             else {
-                List<Permanent> attackerPerms = new ArrayList<Permanent>();
+                List<Permanent> attackerPerms = new ArrayList<>();
                 for (UUID attackerId: attackerList) {
                     attackerPerms.add(game.getPermanent(attackerId));
                 }
@@ -532,7 +531,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             return blockWasLegal;
         }
         if (blockersCount == 1) {
-            List<UUID> toBeRemoved = new ArrayList<UUID>();
+            List<UUID> toBeRemoved = new ArrayList<>();
             for (UUID blockerId: getBlockers()) {
                 Permanent blocker = game.getPermanent(blockerId);
                 if (blocker != null && blocker.getAbilities().containsKey(CantBlockAloneAbility.getInstance().getId())) {
