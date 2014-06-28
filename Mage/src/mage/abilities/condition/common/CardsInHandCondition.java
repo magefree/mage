@@ -163,13 +163,16 @@ public class CardsInHandCondition implements Condition {
             case MORE_THAN:
                 sb.append(" more than ");
                 break;
+            case EQUAL_TO:                
+                sb.append(" exactly ");
+                break;
         }
         if (count == 0) {
-            sb.append(" no ");
+            sb.append("no");
         } else {
             sb.append(CardUtil.numberToText(workCount));
         }                
-        sb.append("cards in hand");
+        sb.append(" cards in hand");
         return sb.toString();
     }
     
