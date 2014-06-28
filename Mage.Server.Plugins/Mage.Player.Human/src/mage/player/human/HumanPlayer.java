@@ -239,7 +239,11 @@ public class HumanPlayer extends PlayerImpl {
         updateGameStatePriority("choose(5)", game);
         while (!abort) {
             Set<UUID> cards = target.possibleTargets(null, playerId, game);
-            game.fireSelectTargetEvent(playerId, target.getMessage(), cards, target.isRequired(sourceId, game), options);
+            boolean required = target.isRequired(sourceId, game);
+            if (target.getTargets().size() >= target.getNumberOfTargets()) {
+                required = false;
+            }
+            game.fireSelectTargetEvent(playerId, target.getMessage(), cards, required, options);
             waitForResponse(game);
             if (response.getUUID() != null) {
                 if (target instanceof TargetPermanent) {
@@ -287,7 +291,10 @@ public class HumanPlayer extends PlayerImpl {
         updateGameStatePriority("chooseTarget", game);
         while (!abort) {
             Set<UUID> possibleTargets = target.possibleTargets(source==null?null:source.getSourceId(), playerId, game);
-            boolean required = possibleTargets.isEmpty() ? false : target.isRequired(source);
+            boolean required = target.isRequired(source);
+            if (possibleTargets.isEmpty() || target.getTargets().size() >= target.getNumberOfTargets()) {
+                required = false;
+            }
             game.fireSelectTargetEvent(playerId, target.getMessage(), possibleTargets, required, getOptions(target));
             waitForResponse(game);
             if (response.getUUID() != null) {
@@ -319,7 +326,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     private Map<String, Serializable> getOptions(Target target) {
-        return target.getNumberOfTargets() != target.getMaxNumberOfTargets() ? staticOptions : null;
+        return target.getTargets().size() >= target.getNumberOfTargets() ? staticOptions : null;
     }
 
     @Override
@@ -335,6 +342,9 @@ public class HumanPlayer extends PlayerImpl {
                 if (count == 0) {
                     required = false;
                 }
+            }
+            if (target.getTargets().size() >= target.getNumberOfTargets()) {
+                required = false;
             }
             Map<String, Serializable> options = getOptions(target);
             if (target.getTargets().size() > 0) {
@@ -379,7 +389,10 @@ public class HumanPlayer extends PlayerImpl {
                     required = false;
                 }
             }
-            game.fireSelectTargetEvent(playerId, target.getMessage(), cards, target.isRequired(source), null);
+            if (target.getTargets().size() >= target.getNumberOfTargets()) {
+                required = false;
+            }
+            game.fireSelectTargetEvent(playerId, target.getMessage(), cards, required, null);
             waitForResponse(game);
             if (response.getUUID() != null) {
                 if (target.canTarget(response.getUUID(), cards, game)) {
