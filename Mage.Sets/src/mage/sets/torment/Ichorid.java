@@ -34,6 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -71,13 +72,10 @@ public class Ichorid extends CardImpl {
         // At the beginning of the end step, sacrifice Ichorid.
         this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new SacrificeSourceEffect(), false));
         // At the beginning of your upkeep, if Ichorid is in your graveyard, you may exile a black creature card other than Ichorid from your graveyard. If you do, return Ichorid to the battlefield.
-        Ability ability = new IchoridTriggerdAbility();
-        FilterCard filter = new FilterCreatureCard("an other black creature card from your graveyard");
+        FilterCard filter = new FilterCreatureCard("a black creature card other than Ichorid from your graveyard");
         filter.add(Predicates.not(new CardIdPredicate(this.getId())));
         filter.add(new ColorPredicate(ObjectColor.BLACK));
-        TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
-        target.setRequired(false);
-        ability.addCost(new ExileFromGraveCost(target));
+        Ability ability = new IchoridTriggerdAbility(filter);
         this.addAbility(ability);
         
     }
@@ -93,9 +91,11 @@ public class Ichorid extends CardImpl {
 }
 
 class IchoridTriggerdAbility extends BeginningOfUpkeepTriggeredAbility{
-    
-    public IchoridTriggerdAbility(){
-        super(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), TargetController.YOU, false);
+
+    public IchoridTriggerdAbility(FilterCard filter){
+        super(Zone.GRAVEYARD, 
+                new DoIfCostPaid(new ReturnSourceFromGraveyardToBattlefieldEffect(), new ExileFromGraveCost(new TargetCardInYourGraveyard(filter))),
+                TargetController.YOU, false);
     }
 
     public IchoridTriggerdAbility(IchoridTriggerdAbility ability) {
@@ -107,7 +107,6 @@ class IchoridTriggerdAbility extends BeginningOfUpkeepTriggeredAbility{
         return new IchoridTriggerdAbility(this);
     }
     
-
     @Override
     public boolean checkInterveningIfClause(Game game) {
         Player controller = game.getPlayer(controllerId);
@@ -121,7 +120,5 @@ class IchoridTriggerdAbility extends BeginningOfUpkeepTriggeredAbility{
     public String getRule() {
         return "At the beginning of your upkeep, if {source} is in your graveyard, you may exile a black creature card other than {source} from your graveyard. If you do, return {source} to the battlefield";
     }
-    
-    
     
 }

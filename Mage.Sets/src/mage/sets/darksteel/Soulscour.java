@@ -29,18 +29,13 @@
 package mage.sets.darksteel;
 
 import java.util.UUID;
-
+import mage.abilities.effects.common.DestroyAllEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.CardImpl;
-import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -48,11 +43,19 @@ import mage.game.permanent.Permanent;
  */
 public class Soulscour extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterPermanent("nonartifact permanents");
+
+    static {
+        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
+    }
+
     public Soulscour (UUID ownerId) {
         super(ownerId, 14, "Soulscour", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{7}{W}{W}{W}");
         this.expansionSetCode = "DST";
         this.color.setWhite(true);
-        this.getSpellAbility().addEffect(new SoulscourEffect());
+
+        // Destroy all nonartifact permanents.
+        this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
     public Soulscour (final Soulscour card) {
@@ -62,39 +65,6 @@ public class Soulscour extends CardImpl {
     @Override
     public Soulscour copy() {
         return new Soulscour(this);
-    }
-
-}
-
-
-class SoulscourEffect extends OneShotEffect {
-
-    private static final FilterPermanent filter = new FilterPermanent("");
-
-    static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
-    }
-
-    public SoulscourEffect() {
-        super(Outcome.DestroyPermanent);
-        staticText = "Destroy all nonartifact permanents";
-    }
-
-    public SoulscourEffect(final SoulscourEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.destroy(source.getId(), game, false);
-        }
-        return true;
-    }
-
-    @Override
-    public SoulscourEffect copy() {
-        return new SoulscourEffect(this);
     }
 
 }

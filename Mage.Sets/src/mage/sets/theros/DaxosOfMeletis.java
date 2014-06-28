@@ -29,6 +29,7 @@ package mage.sets.theros;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -108,28 +109,31 @@ class DaxosOfMeletisEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player damagedPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (damagedPlayer != null) {
-            Player controller = game.getPlayer(source.getControllerId());
-            UUID exileId = CardUtil.getCardExileZoneId(game, source);
-            Card card = damagedPlayer.getLibrary().getFromTop(game);
-            if (card != null && controller != null) {
-                // move card to exile
-                card.moveToExile(exileId, "Daxos of Meletis", source.getSourceId(), game);
-                // player gains life
-                int cmc = card.getManaCost().convertedManaCost();
-                if (cmc > 0) {
-                    controller.gainLife(cmc, game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Player damagedPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
+            if (damagedPlayer != null) {
+                MageObject sourceObject = game.getObject(source.getSourceId());
+                UUID exileId = CardUtil.getCardExileZoneId(game, source);
+                Card card = damagedPlayer.getLibrary().getFromTop(game);
+                if (card != null) {
+                    // move card to exile
+                    controller.moveCardToExileWithInfo(card, exileId,  sourceObject.getLogName(), source.getSourceId(), game, Zone.LIBRARY);
+                    // player gains life
+                    int cmc = card.getManaCost().convertedManaCost();
+                    if (cmc > 0) {
+                        controller.gainLife(cmc, game);
+                    }
+                    // Add effects only if the card has a spellAbility (e.g. not for lands).
+                    if (card.getSpellAbility() != null) {
+                        // allow to cast the card
+                        game.addEffect(new DaxosOfMeletisCastFromExileEffect(card.getId(), exileId), source);
+                        // and you may spend mana as though it were mana of any color to cast it
+                        game.addEffect(new DaxosOfMeletisSpendAnyManaEffect(card.getId()), source);
+                    }
                 }
-                // Add effects only if the card has a spellAbility (e.g. not for lands).
-                if (card.getSpellAbility() != null) {
-                    // allow to cast the card
-                    game.addEffect(new DaxosOfMeletisCastFromExileEffect(card.getId(), exileId), source);
-                    // and you may spend mana as though it were mana of any color to cast it
-                    game.addEffect(new DaxosOfMeletisSpendAnyManaEffect(card.getId()), source);
-                }
+                return true;
             }
-            return true;
         }
         return false;
     }
