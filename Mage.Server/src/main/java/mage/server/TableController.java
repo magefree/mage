@@ -160,7 +160,7 @@ public class TableController {
             logger.fatal(new StringBuilder("couldn't get user ").append(name).append(" for join tornament userId = ").append(userId).toString());
             return false;
         }
-        if (userPlayerMap.containsKey(userId)){
+        if (userPlayerMap.containsKey(userId) && playerType.equals("Human")){
             user.showUserMessage("Join Table", new StringBuilder("You can join a table only one time.").toString());
             return false;
         }

@@ -42,7 +42,7 @@ public class TournamentManager {
 
     private static final TournamentManager INSTANCE = new TournamentManager();
 
-    private ConcurrentHashMap<UUID, TournamentController> controllers = new ConcurrentHashMap<UUID, TournamentController>();
+    private final ConcurrentHashMap<UUID, TournamentController> controllers = new ConcurrentHashMap<>();
 
     public static TournamentManager getInstance() {
         return INSTANCE;
