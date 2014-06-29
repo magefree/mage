@@ -239,6 +239,9 @@ public class HumanPlayer extends PlayerImpl {
         updateGameStatePriority("choose(5)", game);
         while (!abort) {
             Set<UUID> cards = target.possibleTargets(null, playerId, game);
+            if (cards == null || cards.isEmpty()) {
+                return false;
+            }
             boolean required = target.isRequired(sourceId, game);
             if (target.getTargets().size() >= target.getNumberOfTargets()) {
                 required = false;
@@ -278,9 +281,7 @@ public class HumanPlayer extends PlayerImpl {
                 if (!target.isRequired(sourceId, game)) {
                     return false;
                 }
-                if (cards == null || cards.isEmpty()) {
-                    return false;
-                }
+
             }
         }
         return false;

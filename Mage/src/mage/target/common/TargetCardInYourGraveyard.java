@@ -28,10 +28,13 @@
 
 package mage.target.common;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.cards.Cards;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -87,6 +90,29 @@ public class TargetCardInYourGraveyard extends TargetCard {
         return false;
     }
 
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+        Set<UUID> possibleTargets = new HashSet<>();
+        Player player = game.getPlayer(sourceControllerId);
+        for (Card card : player.getGraveyard().getCards(filter, game)) {
+            if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, sourceControllerId))) {
+                possibleTargets.add(card.getId());
+            }
+        }
+        return possibleTargets;
+    }
+
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Cards cards, Game game) {
+        Set<UUID> possibleTargets = new HashSet<>();
+        Player player = game.getPlayer(sourceControllerId);
+        for (Card card: cards.getCards(filter, game)) {
+            if (player.getGraveyard().getCards(game).contains(card)) {
+                possibleTargets.add(card.getId());
+            }
+        }
+        return possibleTargets;
+    }
     /**
      * Checks if there are enough {@link Card} that can be selected.
      *
