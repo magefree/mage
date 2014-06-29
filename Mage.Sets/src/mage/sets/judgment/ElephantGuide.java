@@ -66,7 +66,7 @@ public class ElephantGuide extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +3/+3.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3,3, Duration.EndOfTurn)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3,3, Duration.WhileOnBattlefield)));
         // When enchanted creature dies, put a 3/3 green Elephant creature token onto the battlefield.
         this.addAbility(new DiesAttachedTriggeredAbility(new CreateTokenEffect(new ElephantToken()),"enchanted creature"));
     }
