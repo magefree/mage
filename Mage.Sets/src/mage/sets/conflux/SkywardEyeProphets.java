@@ -33,6 +33,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -61,6 +62,7 @@ public class SkywardEyeProphets extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
+        // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
         // {tap}: Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SkywardEyeProphetsEffect(), new TapSourceCost()));
@@ -93,22 +95,26 @@ public class SkywardEyeProphets extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            Player player = game.getPlayer(source.getControllerId());
-            if (player != null && player.getLibrary().size() > 0) {
+            Player controller = game.getPlayer(source.getControllerId());
+            MageObject sourceObject = game.getObject(source.getSourceId());
+            if (sourceObject == null || controller == null) {
+                return false;
+            }
+            if (controller.getLibrary().size() > 0) {
                 CardsImpl cards = new CardsImpl();
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                    player.revealCards("Skyward Eye Prophets", cards, game);
-                    if (card.getCardType().contains(CardType.LAND)) {
-                        card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId());
-                    } else {
-                        card.moveToZone(Zone.HAND, source.getId(), game, true);
-                    }
-                    return true;
+                Card card = controller.getLibrary().getFromTop(game);
+                if (card == null) {
+                    return false;
+                }
+                cards.add(card);
+                controller.revealCards(sourceObject.getLogName(), cards, game);
+                if (card.getCardType().contains(CardType.LAND)) {
+                    return controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                } else {
+                    return controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                 }
             }
-            return false;
+            return true;
         }
     }
 }

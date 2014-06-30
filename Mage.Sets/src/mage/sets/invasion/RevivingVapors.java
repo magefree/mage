@@ -25,56 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.MageObject;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetCard;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class BeastHunt extends CardImpl {
+public class RevivingVapors extends CardImpl {
 
-    public BeastHunt(UUID ownerId) {
-        super(ownerId, 158, "Beast Hunt", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
-        this.expansionSetCode = "ZEN";
+    public RevivingVapors(UUID ownerId) {
+        super(ownerId, 265, "Reviving Vapors", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}{U}");
+        this.expansionSetCode = "INV";
 
-        this.color.setGreen(true);
+        this.color.setBlue(true);
+        this.color.setWhite(true);
 
-        this.getSpellAbility().addEffect(new BeastHuntEffect());
+        // Reveal the top three cards of your library and put one of them into your hand. You gain life equal to that card's converted mana cost. Put all other cards revealed this way into your graveyard.
+        this.getSpellAbility().addEffect(new RevivingVaporsEffect());
     }
 
-    public BeastHunt(final BeastHunt card) {
+    public RevivingVapors(final RevivingVapors card) {
         super(card);
     }
 
     @Override
-    public BeastHunt copy() {
-        return new BeastHunt(this);
+    public RevivingVapors copy() {
+        return new RevivingVapors(this);
     }
 }
 
-class BeastHuntEffect extends OneShotEffect {
+class RevivingVaporsEffect extends OneShotEffect {
 
-    public BeastHuntEffect() {
+    public RevivingVaporsEffect() {
         super(Outcome.Benefit);
-        staticText = "Reveal the top three cards of your library. Put all creature cards revealed this way into your hand and the rest into your graveyard";
+        staticText = "Reveal the top three cards of your library and put one of them into your hand. You gain life equal to that card's converted mana cost. Put all other cards revealed this way into your graveyard";
     }
 
-    public BeastHuntEffect(final BeastHuntEffect effect) {
+    public RevivingVaporsEffect(final RevivingVaporsEffect effect) {
         super(effect);
     }
 
@@ -92,11 +96,6 @@ class BeastHuntEffect extends OneShotEffect {
             Card card = controller.getLibrary().removeFromTop(game);
             if (card != null) {
                 cards.add(card);
-                if (card.getCardType().contains(CardType.CREATURE)) {
-                    controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                } else {
-                    controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                }
             } else {
                 return false;
             }
@@ -104,13 +103,30 @@ class BeastHuntEffect extends OneShotEffect {
 
         if (!cards.isEmpty()) {
             controller.revealCards(sourceObject.getLogName(), cards, game);
-        }
+            Card card = null;
+            if (cards.size() == 1) {
+                card = cards.getRandom(game);
+            } else {
+                TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put into your hand"));
+                target.setRequired(true);
+                if (controller.choose(Outcome.DrawCard, cards, target, game)) {
+                    card = cards.get(target.getFirstTarget(), game);
+                }
+            }
+            if (card != null) {
+                cards.remove(card);
+                controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+            }
 
+            for (Card moveCard: cards.getCards(game)) {
+                controller.moveCardToGraveyardWithInfo(moveCard, source.getSourceId(), game, Zone.LIBRARY);
+            }
+        }
         return true;
     }
 
     @Override
-    public BeastHuntEffect copy() {
-        return new BeastHuntEffect(this);
+    public RevivingVaporsEffect copy() {
+        return new RevivingVaporsEffect(this);
     }
 }

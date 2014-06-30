@@ -25,45 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.sets.vintagemasters;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.Mana;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.mana.SimpleManaAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 
 /**
  *
  * @author LevelX2
  */
-public class NantukoElder extends CardImpl {
+public class BragoKingEternal extends CardImpl {
 
-    public NantukoElder(UUID ownerId) {
-        super(ownerId, 254, "Nantuko Elder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "ODY";
-        this.subtype.add("Insect");
-        this.subtype.add("Druid");
+    public BragoKingEternal(UUID ownerId) {
+        super(ownerId, 246, "Brago, King Eternal", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
+        this.expansionSetCode = "VMA";
+        this.supertype.add("Legendary");
+        this.subtype.add("Spirit");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
+        this.color.setBlue(true);
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(4);
 
-        // {tap}: Add {1}{G} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 0, 0, 1,0 ), new TapSourceCost()));
-
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // When Brago, King Eternal deals combat damage to a player, exile any number of target nonland permanents you control, then return those cards to the battlefield under their owner's control.
     }
 
-    public NantukoElder(final NantukoElder card) {
+    public BragoKingEternal(final BragoKingEternal card) {
         super(card);
     }
 
     @Override
-    public NantukoElder copy() {
-        return new NantukoElder(this);
+    public BragoKingEternal copy() {
+        return new BragoKingEternal(this);
     }
 }

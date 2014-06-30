@@ -1,0 +1,55 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package mage.abilities.effects.common;
+
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
+import mage.constants.Outcome;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.players.Player;
+
+/**
+ *
+ * @author LevelX2
+ */
+
+public class LookLibraryMayPutToBottomEffect extends OneShotEffect {
+
+    public LookLibraryMayPutToBottomEffect() {
+        super(Outcome.DrawCard);
+        this.staticText = "Look at the top card of your library. You may put that card on the bottom of your library.";
+    }
+
+    public LookLibraryMayPutToBottomEffect(final LookLibraryMayPutToBottomEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        if (!controller.getLibrary().isEmptyDraw()) {
+            Card card = controller.getLibrary().getFromTop(game);
+            if (card == null) {
+                return false;
+            }
+            boolean toBottom = controller.chooseUse(outcome, "Put card on the bottom of your library?", game);
+            return controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, !toBottom, false);
+        }
+        return true;
+    }
+
+    @Override
+    public LookLibraryMayPutToBottomEffect copy() {
+        return new LookLibraryMayPutToBottomEffect(this);
+    }
+
+}

@@ -19,12 +19,12 @@ public enum PhaseStep {
     END_TURN ("End Turn", 11),
     CLEANUP ("Cleanup", 12);
 
-    private String text;
+    private final String text;
 
     /**
      * Index is used for game state scoring system.
      */
-    private int index;
+    private final int index;
 
     PhaseStep(String text, int index) {
         this.text = text;

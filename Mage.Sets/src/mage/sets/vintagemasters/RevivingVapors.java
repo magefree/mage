@@ -25,45 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.sets.vintagemasters;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.Mana;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.mana.SimpleManaAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 
 /**
  *
  * @author LevelX2
  */
-public class NantukoElder extends CardImpl {
+public class RevivingVapors extends mage.sets.invasion.RevivingVapors {
 
-    public NantukoElder(UUID ownerId) {
-        super(ownerId, 254, "Nantuko Elder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "ODY";
-        this.subtype.add("Insect");
-        this.subtype.add("Druid");
-
-        this.color.setGreen(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
-
-        // {tap}: Add {1}{G} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 0, 0, 1,0 ), new TapSourceCost()));
-
+    public RevivingVapors(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 259;
+        this.expansionSetCode = "VMA";
     }
 
-    public NantukoElder(final NantukoElder card) {
+    public RevivingVapors(final RevivingVapors card) {
         super(card);
     }
 
     @Override
-    public NantukoElder copy() {
-        return new NantukoElder(this);
+    public RevivingVapors copy() {
+        return new RevivingVapors(this);
     }
 }

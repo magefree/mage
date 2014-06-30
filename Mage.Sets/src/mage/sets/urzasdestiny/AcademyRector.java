@@ -25,12 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.sets.urzasdestiny;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.EpicEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -45,49 +48,49 @@ import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author jeffwadsworth
-
+ * @author LevelX2
  */
-public class EnduringIdeal extends CardImpl {
+public class AcademyRector extends CardImpl {
 
-    public EnduringIdeal(UUID ownerId) {
-        super(ownerId, 9, "Enduring Ideal", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}{W}");
-        this.expansionSetCode = "SOK";
+    public AcademyRector(UUID ownerId) {
+        super(ownerId, 1, "Academy Rector", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        this.expansionSetCode = "UDS";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
 
         this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
 
-        // Search your library for an enchantment card and put it onto the battlefield. Then shuffle your library.
-        this.getSpellAbility().addEffect(new EnduringIdealEffect());
-        
-        // Epic
-        this.getSpellAbility().addEffect(new EpicEffect());
-        
+        // When Academy Rector dies, you may exile it. If you do, search your library for an enchantment card, put that card onto the battlefield, then shuffle your library.
+        Ability ability = new DiesTriggeredAbility(new DoIfCostPaid(new AcademyRectorEffect(), new ExileSourceCost(), "Exile to search enchantment?"), false);
+        this.addAbility(ability);
     }
 
-    public EnduringIdeal(final EnduringIdeal card) {
+    public AcademyRector(final AcademyRector card) {
         super(card);
     }
 
     @Override
-    public EnduringIdeal copy() {
-        return new EnduringIdeal(this);
+    public AcademyRector copy() {
+        return new AcademyRector(this);
     }
 }
 
-class EnduringIdealEffect extends OneShotEffect {
-    
+class AcademyRectorEffect extends OneShotEffect {
+
     private static final FilterCard filter = new FilterCard();
-    
+
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
-    public EnduringIdealEffect() {
+    public AcademyRectorEffect() {
         super(Outcome.Benefit);
         staticText = "Search your library for an enchantment card and put it onto the battlefield. Then shuffle your library";
     }
 
-    public EnduringIdealEffect(final EnduringIdealEffect effect) {
+    public AcademyRectorEffect(final AcademyRectorEffect effect) {
         super(effect);
     }
 
@@ -110,7 +113,7 @@ class EnduringIdealEffect extends OneShotEffect {
     }
 
     @Override
-    public EnduringIdealEffect copy() {
-        return new EnduringIdealEffect(this);
+    public AcademyRectorEffect copy() {
+        return new AcademyRectorEffect(this);
     }
 }

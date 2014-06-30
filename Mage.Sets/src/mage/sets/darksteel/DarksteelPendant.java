@@ -25,13 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.sets.darksteel;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.Mana;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.mana.SimpleManaAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.LookLibraryMayPutToBottomEffect;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -41,29 +43,26 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class NantukoElder extends CardImpl {
+public class DarksteelPendant extends CardImpl {
 
-    public NantukoElder(UUID ownerId) {
-        super(ownerId, 254, "Nantuko Elder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "ODY";
-        this.subtype.add("Insect");
-        this.subtype.add("Druid");
+    public DarksteelPendant(UUID ownerId) {
+        super(ownerId, 113, "Darksteel Pendant", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+        this.expansionSetCode = "DST";
 
-        this.color.setGreen(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
-
-        // {tap}: Add {1}{G} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 0, 0, 1,0 ), new TapSourceCost()));
-
+        // Darksteel Pendant is indestructible.
+        this.addAbility(IndestructibleAbility.getInstance());
+        // {1}, {tap}: Look at the top card of your library. You may put that card on the bottom of your library.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryMayPutToBottomEffect(), new GenericManaCost(1));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
     }
 
-    public NantukoElder(final NantukoElder card) {
+    public DarksteelPendant(final DarksteelPendant card) {
         super(card);
     }
 
     @Override
-    public NantukoElder copy() {
-        return new NantukoElder(this);
+    public DarksteelPendant copy() {
+        return new DarksteelPendant(this);
     }
 }

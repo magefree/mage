@@ -25,45 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.sets.vintagemasters;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.Mana;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.EnterBattlefieldPayCostOrPutGraveyardEffect;
+import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class NantukoElder extends CardImpl {
+public class LakeOfTheDead extends CardImpl {
 
-    public NantukoElder(UUID ownerId) {
-        super(ownerId, 254, "Nantuko Elder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "ODY";
-        this.subtype.add("Insect");
-        this.subtype.add("Druid");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Swamp");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
+    static {
+        filter.add(new SubtypePredicate("Swamp"));
+    }
 
-        // {tap}: Add {1}{G} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 0, 0, 1,0 ), new TapSourceCost()));
+    public LakeOfTheDead(UUID ownerId) {
+        super(ownerId, 302, "Lake of the Dead", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "VMA";
+
+        // If Lake of the Dead would enter the battlefield, sacrifice a Swamp instead. If you do, put Lake of the Dead onto the battlefield. If you don't, put it into its owner's graveyard.
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new EnterBattlefieldPayCostOrPutGraveyardEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)))));
+        // {tap}: Add {B} to your mana pool.
+        this.addAbility(new BlackManaAbility());
+
+        // {tap}, Sacrifice a Swamp: Add {B}{B}{B}{B} to your mana pool.
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 0, 0, 4, 0, 0), new TapSourceCost());
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        this.addAbility(ability);
 
     }
 
-    public NantukoElder(final NantukoElder card) {
+    public LakeOfTheDead(final LakeOfTheDead card) {
         super(card);
     }
 
     @Override
-    public NantukoElder copy() {
-        return new NantukoElder(this);
+    public LakeOfTheDead copy() {
+        return new LakeOfTheDead(this);
     }
 }

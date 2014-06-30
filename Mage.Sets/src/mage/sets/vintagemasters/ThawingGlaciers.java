@@ -25,45 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.sets.vintagemasters;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.Mana;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextCleanupDelayedTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.mana.SimpleManaAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterBasicLandCard;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
  * @author LevelX2
  */
-public class NantukoElder extends CardImpl {
+public class ThawingGlaciers extends CardImpl {
 
-    public NantukoElder(UUID ownerId) {
-        super(ownerId, 254, "Nantuko Elder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "ODY";
-        this.subtype.add("Insect");
-        this.subtype.add("Druid");
+    public ThawingGlaciers(UUID ownerId) {
+        super(ownerId, 318, "Thawing Glaciers", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "VMA";
 
-        this.color.setGreen(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
+        // Thawing Glaciers enters the battlefield tapped.
+        this.addAbility(new EntersBattlefieldTappedAbility());
+        // {1}, {tap}: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library. Return Thawing Glaciers to its owner's hand at the beginning of the next cleanup step.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true, Outcome.PutLandInPlay), new GenericManaCost(1));
+        ability.addCost(new TapSourceCost());
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextCleanupDelayedTriggeredAbility(new ReturnToHandSourceEffect())));
 
-        // {tap}: Add {1}{G} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 0, 0, 1,0 ), new TapSourceCost()));
-
+        this.addAbility(ability);
     }
 
-    public NantukoElder(final NantukoElder card) {
+    public ThawingGlaciers(final ThawingGlaciers card) {
         super(card);
     }
 
     @Override
-    public NantukoElder copy() {
-        return new NantukoElder(this);
+    public ThawingGlaciers copy() {
+        return new ThawingGlaciers(this);
     }
 }

@@ -30,6 +30,8 @@ package mage.sets.stronghold;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.Card;
@@ -76,7 +78,7 @@ class MoxDiamondReplacementEffect extends ReplacementEffectImpl {
 
     public MoxDiamondReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
-        staticText = "If Mox Diamond would enter the battlefield, you may discard a land card instead. If you do, put Mox Diamond onto the battlefield. If you don't, put it into its owner's graveyard";
+        staticText = "If {this} would enter the battlefield, you may discard a land card instead. If you do, put {this} onto the battlefield. If you don't, put it into its owner's graveyard";
     }
 
     public MoxDiamondReplacementEffect(final MoxDiamondReplacementEffect effect) {
@@ -94,19 +96,21 @@ class MoxDiamondReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        
-        Player player = game.getPlayer(source.getControllerId());
-        TargetCardInHand target = new TargetCardInHand(new FilterLandCard());
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {        
+        Player player = game.getPlayer(source.getControllerId());        
         if (player != null){
-            if(player.chooseTarget(Outcome.Discard, target, source, game)){
+            TargetCardInHand target = new TargetCardInHand(new FilterLandCard());
+            Cost cost = new DiscardTargetCost(target);
+            if (cost.canPay(source.getSourceId(), source.getControllerId(), game) &&
+                    player.chooseUse(outcome, "Discard land? (Otherwise Mox Diamond goes to graveyard)", game) &&
+                    player.chooseTarget(Outcome.Discard, target, source, game)){
                 player.discard(game.getCard(target.getFirstTarget()), source, game);
                 return false;
             }
             else{
                 Card card = game.getCard(event.getTargetId());
                 if (card != null) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
+                    player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, null);
                 }
                 return true;
             }
