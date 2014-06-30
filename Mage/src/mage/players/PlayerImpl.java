@@ -754,9 +754,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     resetStoredBookmark(game);
                     return true;
                 }
-                if (!game.hasEnded()) { // if player left or game is over no undo is possible - this could lead to wrong winner
-                    game.restoreState(bookmark);
-                }
+                game.restoreState(bookmark);
             }
         }
         return false;

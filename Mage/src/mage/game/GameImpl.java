@@ -528,7 +528,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public void restoreState(int bookmark) {
-        if (!simulation) {
+        if (!simulation && !this.hasEnded()) { // if player left or game is over no undo is possible - this could lead to wrong winner
             if (bookmark != 0) {
                 if (!savedStates.contains(bookmark - 1)) {
                     throw new UnsupportedOperationException("It was not possible to do the requested undo operation (bookmark " + (bookmark -1) + " does not exist)");
