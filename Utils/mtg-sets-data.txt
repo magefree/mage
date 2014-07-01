@@ -68,6 +68,7 @@ Magic 2011|M11|
 Magic 2012|M12|
 Magic 2013|M13|
 Magic 2014|M14|
+Magic 2015|M15|
 Magic: The Gathering-Commander|CMD|
 Magic: The Gathering-Conspiracy|CNS|
 Masters Edition II|ME2|

@@ -94,7 +94,7 @@ public class ImageCache {
                         }
                         TFile file = new TFile(path);
                         if (!file.exists()) {
-                            log.warn("File does not exist: " + file.toString());
+                            log.debug("File does not exist: " + file.toString());
                             return null;
                         }
 

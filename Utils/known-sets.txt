@@ -51,6 +51,7 @@ Magic 2011|magic2011|
 Magic 2012|magic2012|
 Magic 2013|magic2013|
 Magic 2014|magic2014|
+Magic 2015|magic2015|
 Magic: The Gathering-Commander|commander|
 Magic: The Gathering-Conspiracy|conspiracy|
 Mercadian Masques|mercadianmasques|

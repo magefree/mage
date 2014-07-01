@@ -40,7 +40,8 @@ public class ConstructedFormats {
             "* Tempest Block", "Exodus", "Stronghold", "Tempest",
             "* Mirage Block", "Weatherlight", "Visions", "Mirage", 
             "* Ice Age Block", "Coldsnap", "Alliances", "Ice Age", 
-            "Homelands", "Fallen Empires", "The Dark", "Legends", "Antiquities", "Arabian Nights",            
+            "Homelands", "Fallen Empires", "The Dark", "Legends", "Antiquities", "Arabian Nights",
+            "Magic 2015",
             "Magic 2014",
             "Magic 2013",
             "Magic 2012",
@@ -390,6 +391,9 @@ public class ConstructedFormats {
         }
         if (format.equals("Magic 2014")) {
             return Arrays.asList("M14");
+        }
+        if (format.equals("Magic 2015")) {
+            return Arrays.asList("M15");
         }
         if (format.equals("Planechase")) {
             return Arrays.asList("HOP");

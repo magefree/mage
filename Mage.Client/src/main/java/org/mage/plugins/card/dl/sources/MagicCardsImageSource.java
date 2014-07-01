@@ -51,6 +51,7 @@ public class MagicCardsImageSource implements CardImageSource {
             put("POR", "portal");
             put("PO2", "portal-second-age");
             put("PTK", "portal-three-kingdoms");
+            put("M15", "magic-2015");
             put("M14", "magic-2014");
             put("M13", "magic-2013");
             put("M12", "magic-2012");
