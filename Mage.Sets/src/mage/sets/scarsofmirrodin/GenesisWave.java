@@ -84,12 +84,15 @@ class GenesisWaveEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
         Cards cards = new CardsImpl(Zone.PICK);
         int count = source.getManaCostsToPay().getX();
-        count = Math.min(player.getLibrary().size(), count);
+        count = Math.min(controller.getLibrary().size(), count);
         for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
+            Card card = controller.getLibrary().removeFromTop(game);
             cards.add(card);
             game.setZone(card.getId(), Zone.PICK);
         }
@@ -102,7 +105,7 @@ class GenesisWaveEffect extends OneShotEffect {
                                  new CardTypePredicate(CardType.PLANESWALKER)
                 ));
         TargetCard target1 = new TargetCard(Zone.PICK, filter);
-        while (cards.size() > 0 && player.choose(Outcome.PutCardInPlay, cards, target1, game)) {
+        while (cards.size() > 0 && controller.choose(Outcome.PutCardInPlay, cards, target1, game)) {
             Card card = cards.get(target1.getFirstTarget(), game);
             if (card != null) {
                 cards.remove(card);
@@ -113,6 +116,8 @@ class GenesisWaveEffect extends OneShotEffect {
         while (cards.size() > 0) {
             Card card = cards.get(cards.iterator().next(), game);
             cards.remove(card);
+            controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+
             card.moveToZone(Zone.GRAVEYARD, source.getId(), game, true);
         }
         return true;

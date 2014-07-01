@@ -28,50 +28,79 @@
 package mage.sets.magic2015;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.game.Game;
+import mage.players.Player;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class InvasiveSpecies extends CardImpl {
+public class LifesLegacy extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another permanent you control");
-    
-    static {
-        filter.add(new AnotherPredicate());
-    }
-    
-    public InvasiveSpecies(UUID ownerId) {
-        super(ownerId, 181, "Invasive Species", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+    public LifesLegacy(UUID ownerId) {
+        super(ownerId, 183, "Life's Legacy", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "M15";
-        this.subtype.add("Insect");
 
         this.color.setGreen(true);
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        // As an additional cost to cast Life's Legacy, sacrifice a creature.
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        // Draw cards equal to the sacrificed creature's power.
+        this.getSpellAbility().addEffect(new LifesLegacyEffect());
 
-        // When Invasive Species enters the battlefield, return another permanent you control to its owner's hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter));
-        
-        this.addAbility(ability);
     }
 
-    public InvasiveSpecies(final InvasiveSpecies card) {
+    public LifesLegacy(final LifesLegacy card) {
         super(card);
     }
 
     @Override
-    public InvasiveSpecies copy() {
-        return new InvasiveSpecies(this);
+    public LifesLegacy copy() {
+        return new LifesLegacy(this);
+    }
+}
+
+class LifesLegacyEffect extends OneShotEffect {
+
+    public LifesLegacyEffect() {
+        super(Outcome.DrawCard);
+        staticText = "Draw cards equal to the sacrificed creature's power";
+    }
+
+    public LifesLegacyEffect(final LifesLegacyEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        int power = 0;
+        for (Cost cost: source.getCosts()) {
+            if (cost instanceof SacrificeTargetCost && ((SacrificeTargetCost)cost).getPermanents().size() > 0) {
+                power = ((SacrificeTargetCost)cost).getPermanents().get(0).getPower().getValue();
+                break;
+            }
+        }
+        if (power > 0) {
+            controller.drawCards(power, game);
+        }
+        return true;
+    }
+
+    @Override
+    public LifesLegacyEffect copy() {
+        return new LifesLegacyEffect(this);
     }
 }

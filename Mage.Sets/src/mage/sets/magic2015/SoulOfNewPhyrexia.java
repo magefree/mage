@@ -28,6 +28,7 @@
 package mage.sets.magic2015;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExileSourceFromGraveCost;
@@ -52,6 +53,9 @@ public class SoulOfNewPhyrexia extends CardImpl {
         this.expansionSetCode = "M15";
         this.subtype.add("Avatar");
 
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(6);
+        
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // {5}: Permanents you control gain indestructible until end of turn.

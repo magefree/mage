@@ -91,9 +91,8 @@ public class ReturnToHandChosenControlledPermanentEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder("return ");
         if (!filter.getMessage().startsWith("another")) {
             sb.append(CardUtil.numberToText(number, "a"));
-            sb.append(" ").append(filter.getMessage());
         }
-        
+        sb.append(" ").append(filter.getMessage());
         if (number > 1) {
             sb.append(" to their owner's hand");
         } else {

@@ -53,7 +53,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
     /**
      *
      * @param token
-     * @param subType - subType the target remains (used in rule text), if set the subtypes are not cleared
+     * @param type
      * @param duration
      */
     public BecomesCreatureTargetEffect(Token token, String type, Duration duration) {
