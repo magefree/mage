@@ -49,11 +49,11 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
     protected FilterPermanent filter;
 
     public GainAbilityControlledEffect(Ability ability, Duration duration) {
-        this(ability, duration, new FilterPermanent());
+        this(ability, duration, new FilterPermanent("permanents"));
     }
 
     public GainAbilityControlledEffect(CompoundAbility ability, Duration duration) {
-        this(ability, duration, new FilterPermanent());
+        this(ability, duration, new FilterPermanent("permanents"));
     }
 
     public GainAbilityControlledEffect(Ability ability, Duration duration, FilterPermanent filter) {
