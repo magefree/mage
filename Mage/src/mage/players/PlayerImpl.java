@@ -769,17 +769,20 @@ public abstract class PlayerImpl implements Player, Serializable {
     public boolean playLand(Card card, Game game) {
         //20091005 - 305.1
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), playerId))) {
-            int bookmark = game.bookmarkState();
+            // int bookmark = game.bookmarkState();
             Zone zone = game.getState().getZone(card.getId());
             if (card.putOntoBattlefield(game, zone, null, playerId)) {
                 landsPlayed++;
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LAND_PLAYED, card.getId(), playerId));
                 game.fireInformEvent(name + " plays " + card.getName());
-                game.removeBookmark(bookmark);
+                // game.removeBookmark(bookmark);
                 resetStoredBookmark(game);
                 return true;
             }
-            game.restoreState(bookmark);
+            // putOntoBattlefield retured false if putOntoBattlefield was replaced by replacement effect (e.g. Kjeldorian Outpost).
+            // But that would undo the effect completely,
+            // what makes no real sense. So it makes no sense to generally do a restorState here.
+            // game.restoreState(bookmark);
         }
         return false;
     }
