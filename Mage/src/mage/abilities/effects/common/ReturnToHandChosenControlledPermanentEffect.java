@@ -27,7 +27,6 @@
  */
 package mage.abilities.effects.common;
 
-import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -76,7 +75,7 @@ public class ReturnToHandChosenControlledPermanentEffect extends OneShotEffect {
         if (player != null) {
             TargetControlledPermanent target = new TargetControlledPermanent(number, number, filter, true);
             if (player.choose(this.outcome, target, source.getSourceId(), game)) {
-                for (UUID targetCreatureId : (List<UUID>)target.getTargets()) {
+                for (UUID targetCreatureId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(targetCreatureId);
                     if (permanent != null) {
                         player.moveCardToHandWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD);
@@ -90,8 +89,11 @@ public class ReturnToHandChosenControlledPermanentEffect extends OneShotEffect {
 
     private String getText() {
         StringBuilder sb = new StringBuilder("return ");
-        sb.append(CardUtil.numberToText(number, "a"));
-        sb.append(" ").append(filter.getMessage());
+        if (!filter.getMessage().startsWith("another")) {
+            sb.append(CardUtil.numberToText(number, "a"));
+            sb.append(" ").append(filter.getMessage());
+        }
+        
         if (number > 1) {
             sb.append(" to their owner's hand");
         } else {
