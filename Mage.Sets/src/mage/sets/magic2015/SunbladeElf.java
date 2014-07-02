@@ -25,52 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.sets.magic2015;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.costs.common.DiscardTargetCost;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.common.continious.BoostSourceWhileControlsEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCardInHand;
 
 /**
  *
- * @author Backfir3
+ * @author LevelX2
  */
-public class Abolish extends CardImpl {
+public class SunbladeElf extends CardImpl {
 
-    private static final FilterCard filterCost = new FilterCard("Plains card");
+    private static final FilterPermanent filter = new FilterPermanent("Plains");
 
     static {
-        filterCost.add(new SubtypePredicate("Plains"));
+        filter.add(new SubtypePredicate("Plains"));
     }
 
-    public Abolish(UUID ownerId) {
-        super(ownerId, 1, "Abolish", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
-        this.expansionSetCode = "PCY";
-        this.color.setWhite(true);
+    public SunbladeElf(UUID ownerId) {
+        super(ownerId, 202, "Sunblade Elf", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "M15";
+        this.subtype.add("Elf");
+        this.subtype.add("Warrior");
 
-        // You may discard a Plains card rather than pay Abolish's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new DiscardTargetCost(new TargetCardInHand(filterCost))));
+        this.color.setGreen(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Destroy target artifact or enchantment.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
+        // Sunblade Elf gets +1/+1 as long as you control a Plains.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filter, 1, 1)));
+        // {4}{W}: Creatures you control get +1/+1 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.EndOfTurn, new FilterCreaturePermanent(), false), new ManaCostsImpl("{4}{W}")));
+
     }
 
-    public Abolish(final Abolish card) {
+    public SunbladeElf(final SunbladeElf card) {
         super(card);
     }
 
     @Override
-    public Abolish copy() {
-        return new Abolish(this);
+    public SunbladeElf copy() {
+        return new SunbladeElf(this);
     }
 }

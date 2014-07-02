@@ -39,13 +39,18 @@ import mage.constants.CardType;
 public class BeastToken extends Token {
 
     public BeastToken() {
+        this("LRW");
+    }
+
+    public BeastToken(String setCode) {
         super("Beast", "3/3 green Beast creature token");
+        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color = ObjectColor.GREEN;
         subtype.add("Beast");
         power = new MageInt(3);
         toughness = new MageInt(3);
-        setOriginalExpansionSetCode("LRW");
+        
     }
 
 }

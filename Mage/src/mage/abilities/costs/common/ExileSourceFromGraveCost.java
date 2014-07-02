@@ -28,12 +28,13 @@
 
 package mage.abilities.costs.common;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.cards.Card;
+import mage.constants.Zone;
 import mage.game.Game;
-
-import java.util.UUID;
+import mage.players.Player;
 
 /**
  *
@@ -51,9 +52,12 @@ public class ExileSourceFromGraveCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        Card card = game.getCard(sourceId);
-        if (card != null) {
-            paid = card.moveToExile(null, "", sourceId, game);
+        Player controller = game.getPlayer(controllerId);
+        if (controller != null) {
+            Card card = game.getCard(sourceId);
+            if (card != null && game.getState().getZone(sourceId).equals(Zone.GRAVEYARD)) {
+                paid = controller.moveCardToExileWithInfo(card, null, "", sourceId, game, Zone.GRAVEYARD);
+            }
         }
         return paid;
     }
@@ -61,7 +65,7 @@ public class ExileSourceFromGraveCost extends CostImpl {
     @Override
     public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
         Card card = game.getCard(sourceId);
-        if (card != null) {
+        if (card != null && game.getState().getZone(sourceId).equals(Zone.GRAVEYARD)) {
             return true;
         }
         return false;

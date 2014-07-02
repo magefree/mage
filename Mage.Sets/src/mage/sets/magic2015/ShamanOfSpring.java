@@ -25,52 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.sets.magic2015;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.costs.common.DiscardTargetCost;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.cards.CardImpl;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCardInHand;
 
 /**
  *
- * @author Backfir3
+ * @author LevelX2
  */
-public class Abolish extends CardImpl {
+public class ShamanOfSpring extends CardImpl {
 
-    private static final FilterCard filterCost = new FilterCard("Plains card");
+    public ShamanOfSpring(UUID ownerId) {
+        super(ownerId, 199, "Shaman of Spring", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "M15";
+        this.subtype.add("Elf");
+        this.subtype.add("Shaman");
 
-    static {
-        filterCost.add(new SubtypePredicate("Plains"));
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // When Shaman of Spring enters the battlefield, draw a card.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
-    public Abolish(UUID ownerId) {
-        super(ownerId, 1, "Abolish", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
-        this.expansionSetCode = "PCY";
-        this.color.setWhite(true);
-
-        // You may discard a Plains card rather than pay Abolish's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new DiscardTargetCost(new TargetCardInHand(filterCost))));
-
-        // Destroy target artifact or enchantment.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
-    }
-
-    public Abolish(final Abolish card) {
+    public ShamanOfSpring(final ShamanOfSpring card) {
         super(card);
     }
 
     @Override
-    public Abolish copy() {
-        return new Abolish(this);
+    public ShamanOfSpring copy() {
+        return new ShamanOfSpring(this);
     }
 }
