@@ -96,7 +96,7 @@ public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder(super.getRule()).append("Activate this ability ");
+        StringBuilder sb = new StringBuilder(super.getRule()).append(" Activate this ability ");
         switch(maxActivationsPerTurn) {
             case 1:
                 sb.append("only once");
@@ -107,7 +107,7 @@ public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
             default:
                 sb.append("no more than ").append(CardUtil.numberToText(maxActivationsPerTurn)).append(" times");
         }
-        sb.append(" each turn");
+        sb.append(" each turn.");
         return sb.toString();
     }
 
