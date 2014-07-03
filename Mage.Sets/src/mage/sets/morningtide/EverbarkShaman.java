@@ -56,7 +56,7 @@ public class EverbarkShaman extends CardImpl {
     private static final FilterCard filterTreefolk = new FilterCard("Treefolk from your graveyard");
 
     static {
-        filterForest.add(new NamePredicate("Forest"));
+        filterForest.add(new SubtypePredicate("Forest"));
         filterTreefolk.add(new SubtypePredicate("Treefolk"));
     }
 

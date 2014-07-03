@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -44,13 +44,15 @@ public class Boil extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("islands");
 
     static {
-        filter.add(new NamePredicate("Island"));
+        filter.add(new SubtypePredicate("Island"));
     }
 
     public Boil(UUID ownerId) {
         super(ownerId, 165, "Boil", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
         this.expansionSetCode = "TMP";
         this.color.setRed(true);
+        
+        // Destroy all Islands.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
