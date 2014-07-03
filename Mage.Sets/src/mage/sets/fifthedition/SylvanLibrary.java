@@ -28,7 +28,6 @@
 package mage.sets.fifthedition;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -49,6 +48,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.target.common.TargetCardInHand;
 import mage.watchers.Watcher;
 
 /**
@@ -83,7 +83,7 @@ public class SylvanLibrary extends CardImpl {
 class SylvanLibraryEffect extends OneShotEffect {
 
     public SylvanLibraryEffect() {
-        super(Outcome.DrawCard);
+        super(Outcome.LoseLife);
         this.staticText = "draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library";
     }
 
@@ -114,11 +114,11 @@ class SylvanLibraryEffect extends OneShotEffect {
                 }
                 int numberOfTargets = Math.min(2, cards.size());
                 if (numberOfTargets > 0) {
-                    TargetCard target = new TargetCard(numberOfTargets, Zone.PICK, new FilterCard(new StringBuilder(numberOfTargets).append(" cards of cards drawn this turn").toString()));
+                    TargetCardInHand target = new TargetCardInHand(numberOfTargets, new FilterCard(new StringBuilder(numberOfTargets).append(" cards of cards drawn this turn").toString()));
                     controller.chooseTarget(outcome, cards, target, source, game);
 
                     Cards cardsPutBack = new CardsImpl();
-                    for (UUID cardId :(List<UUID>) target.getTargets()) {
+                    for (UUID cardId :target.getTargets()) {
                         Card card = cards.get(cardId, game);
                         if (card != null) {
                             if (controller.canPayLifeCost()
