@@ -30,8 +30,7 @@ package mage.sets.judgment;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUntapTriggeredAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
@@ -72,7 +71,7 @@ public class ErhnamDjinn extends CardImpl {
         GainAbilityTargetEffect effect = new GainAbilityTargetEffect(new ForestwalkAbility(), Duration.Custom,
         "target non-Wall creature an opponent controls gains forestwalk until your next upkeep");
         effect.setDurationToPhase(PhaseStep.UPKEEP);
-        Ability ability = new BeginningOfUntapTriggeredAbility(effect, TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

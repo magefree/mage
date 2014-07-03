@@ -47,7 +47,6 @@ public class GoldToken extends Token {
         super("Gold", "colorless artifact token named Gold onto the battlefield. It has \"Sacrifice this artifact: Add one mana of any color to your mana pool.\"");
         this.setOriginalExpansionSetCode("BNG");
         cardType.add(CardType.ARTIFACT);
-        subtype.add("Gold");
 
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new SacrificeSourceCost());
         ability.addChoice(new ChoiceColor());

@@ -103,11 +103,11 @@ class ArcTrailEffect extends OneShotEffect {
             }
 
             if (permanent != null) {
-                applied |= (permanent.damage( damage, source.getSourceId(), game, false, true ) > 0);
+                applied |= (permanent.damage( damage, source.getSourceId(), game, true, false ) > 0);
             }
             Player player = game.getPlayer(target);
             if (player != null) {
-                applied |= (player.damage( damage, source.getSourceId(), game, false, true ) > 0);
+                applied |= (player.damage( damage, source.getSourceId(), game, true, false ) > 0);
             }
 
             twoDamageDone = true;
