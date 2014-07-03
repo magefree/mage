@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class FixedTarget implements TargetPointer {
-    private UUID target;
+    private final UUID target;
     private int zoneChangeCounter;
 
     public FixedTarget(UUID target) {
@@ -35,11 +35,11 @@ public class FixedTarget implements TargetPointer {
         if (this.zoneChangeCounter > 0) { // will be zero if not defined in init
             Card card = game.getCard(target);
             if (card != null && card.getZoneChangeCounter() != this.zoneChangeCounter) {
-                return new ArrayList<UUID>(); // return empty
+                return new ArrayList<>(); // return empty
             }
         }
 
-        ArrayList<UUID> list = new ArrayList<UUID>(1);
+        ArrayList<UUID> list = new ArrayList<>(1);
         list.add(target);
         return list;
     }

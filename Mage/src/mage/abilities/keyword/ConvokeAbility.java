@@ -30,8 +30,6 @@ package mage.abilities.keyword;
 
 import java.util.UUID;
 import mage.ObjectColor;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,6 +38,8 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -86,6 +86,7 @@ import mage.util.CardUtil;
 public class ConvokeAbility extends SimpleStaticAbility implements AdjustingSourceCosts {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+    
     static {
       filter.add(Predicates.not(new TappedPredicate()));
     }
