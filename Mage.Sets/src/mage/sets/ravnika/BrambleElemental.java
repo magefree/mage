@@ -30,16 +30,10 @@ package mage.sets.ravnika;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.AuraAttachedTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SaprolingToken;
 
 /**
@@ -57,7 +51,7 @@ public class BrambleElemental extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever an Aura becomes attached to Bramble Elemental, put two 1/1 green Saproling creature tokens onto the battlefield.
-        this.addAbility(new AttachedTriggeredAbility(new CreateTokenEffect(new SaprolingToken(),2),false));
+        this.addAbility(new AuraAttachedTriggeredAbility(new CreateTokenEffect(new SaprolingToken(),2),false));
     }
 
     public BrambleElemental(final BrambleElemental card) {
@@ -68,38 +62,4 @@ public class BrambleElemental extends CardImpl {
     public BrambleElemental copy() {
         return new BrambleElemental(this);
     }
-}
-
-class AttachedTriggeredAbility extends TriggeredAbilityImpl {
-
-    public AttachedTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
-    }
-
-    public AttachedTriggeredAbility(final AttachedTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ATTACHED && event.getTargetId().equals(this.getSourceId()) ) {
-            Permanent attachment = game.getPermanent(event.getSourceId());
-            if (attachment != null && attachment.getSubtype().contains("Aura")) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever an Aura becomes attached to {this}, " + super.getRule();
-    }
-
-    @Override
-    public AttachedTriggeredAbility copy() {
-        return new AttachedTriggeredAbility(this);
-    }
-
-
 }
