@@ -95,7 +95,7 @@ class PlasmCaptureCounterEffect extends OneShotEffect {
         Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell != null) {
             result = game.getStack().counter(getTargetPointer().getFirst(game, source), source.getSourceId(), game);
-            int mana = spell.getManaCost().convertedManaCost();
+            int mana = spell.getConvertedManaCost();
             AtTheBeginOfPreCombatMainDelayedTriggeredAbility delayedAbility =
                     new AtTheBeginOfPreCombatMainDelayedTriggeredAbility(new PlasmCaptureManaEffect(mana), TargetController.YOU);
             delayedAbility.setSourceId(source.getSourceId());

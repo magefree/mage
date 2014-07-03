@@ -99,7 +99,7 @@ class CelestialKirinEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getState().getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell != null) {
-            int cmc = spell.getManaCost().convertedManaCost();
+            int cmc = spell.getConvertedManaCost();
             FilterPermanent filter = new FilterPermanent();
             filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, cmc));
             return new DestroyAllEffect(filter).apply(game, source);

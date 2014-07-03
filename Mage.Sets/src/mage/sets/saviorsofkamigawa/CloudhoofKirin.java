@@ -108,7 +108,7 @@ class CloudhoofKirinEffect extends OneShotEffect {
                 }
             }
             if (targetPlayer != null) {
-                int cardsCount = Math.min(spell.getManaCost().convertedManaCost(), targetPlayer.getLibrary().size());
+                int cardsCount = Math.min(spell.getConvertedManaCost(), targetPlayer.getLibrary().size());
                 for (int i = 0; i < cardsCount; i++) {
                     Card card = targetPlayer.getLibrary().removeFromTop(game);
                     if (card != null) {

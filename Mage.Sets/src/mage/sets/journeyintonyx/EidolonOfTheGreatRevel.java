@@ -93,7 +93,7 @@ class EidolonOfTheGreatRevelTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if(event.getType() == GameEvent.EventType.SPELL_CAST){
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if(spell != null && spell.getManaCost().convertedManaCost() <= 3){
+            if(spell != null && spell.getConvertedManaCost() <= 3){
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }

@@ -100,7 +100,7 @@ class ImpsMischiefLoseLifeEffect extends OneShotEffect {
         if (spell != null) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
-                player.loseLife(spell.getManaCost().convertedManaCost(), game);
+                player.loseLife(spell.getConvertedManaCost(), game);
                 return true;
             }            
         }        

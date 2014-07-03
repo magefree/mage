@@ -58,7 +58,6 @@ import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -596,6 +595,19 @@ public class Spell implements StackObject, Card {
         return card.getManaCost();
     }
 
+    /**
+     *  202.3b When calculating the converted mana cost of an object with an {X} in its
+     *  mana cost, X is treated as 0 while the object is not on the stack, and X is 
+     *  treated as the number chosen for it while the object is on the stack.
+     */
+    public int getConvertedManaCost() {
+        int cmc = 0;
+        for (Ability spellAbility: spellAbilities) {
+            cmc += spellAbility.getManaCostsToPay().convertedManaCost();
+        }
+        return cmc;
+    }
+    
     @Override
     public MageInt getPower() {
         return card.getPower();

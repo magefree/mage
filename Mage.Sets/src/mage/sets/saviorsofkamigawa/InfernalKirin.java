@@ -103,7 +103,7 @@ class InfernalKirinEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
         if (spell != null) {
-            int cmc = spell.getManaCost().convertedManaCost();
+            int cmc = spell.getConvertedManaCost();
             Player targetPlayer = null;
             for(Target target: source.getTargets()) {
                 if (target instanceof TargetPlayer) {

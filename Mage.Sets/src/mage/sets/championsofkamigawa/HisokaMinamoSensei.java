@@ -144,7 +144,7 @@ class HisokaMinamoSenseiCounterEffect extends OneShotEffect {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
         if (spell != null) {
             HisokaMinamoSenseiDiscardTargetCost cost = (HisokaMinamoSenseiDiscardTargetCost) source.getCosts().get(0);
-            if (cost != null && cost.getConvertedCosts() == spell.getManaCost().convertedManaCost()) {
+            if (cost != null && cost.getConvertedCosts() == spell.getConvertedManaCost()) {
                 return game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game);
             }
         }

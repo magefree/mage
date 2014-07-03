@@ -28,7 +28,6 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-import static javax.xml.bind.JAXBIntrospector.getValue;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -128,7 +127,7 @@ class ChaliceOfTheVoidTriggeredAbility extends TriggeredAbilityImpl {
         if(event.getType() == GameEvent.EventType.SPELL_CAST){
             Permanent chalice = game.getPermanent(this.sourceId);
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if(spell != null && chalice != null && spell.getManaCost().convertedManaCost() == chalice.getCounters().getCount(CounterType.CHARGE)){ 
+            if(spell != null && chalice != null && spell.getConvertedManaCost() == chalice.getCounters().getCount(CounterType.CHARGE)){ 
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 }
