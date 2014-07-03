@@ -32,10 +32,12 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
@@ -46,6 +48,7 @@ public class DiscardTargetEffect extends OneShotEffect {
 
     protected DynamicValue amount;
     protected boolean randomDiscard;
+    protected boolean setTargetPointer;
 
     public DiscardTargetEffect(DynamicValue amount) {
         this(amount, false);
@@ -64,11 +67,19 @@ public class DiscardTargetEffect extends OneShotEffect {
     public DiscardTargetEffect(int amount, boolean randomDiscard) {
         this(new StaticValue(amount), randomDiscard);
     }
+    
+    public DiscardTargetEffect(int amount, boolean randomDiscard, boolean setTargetPointer) {
+        super(Outcome.Discard);
+        this.randomDiscard = randomDiscard;
+        this.amount = new StaticValue(amount);
+        this.setTargetPointer = setTargetPointer;
+    }
 
     public DiscardTargetEffect(final DiscardTargetEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
         this.randomDiscard = effect.randomDiscard;
+        this.setTargetPointer = effect.setTargetPointer;
     }
 
     @Override
@@ -86,6 +97,11 @@ public class DiscardTargetEffect extends OneShotEffect {
                     Card card = player.getHand().getRandom(game);
                     if (card != null) {
                         player.discard(card, source, game);
+                        if (setTargetPointer) {
+                            for (Effect effect : source.getEffects()) {
+                                effect.setTargetPointer(new FixedTarget(card.getId()));
+                            }
+                        }
                     }
                 }
             } else {
