@@ -25,23 +25,24 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.sets.magic2015;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.PutCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.counters.Counter;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -50,61 +51,63 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
- * @author Loki
+ *
+ * @author LevelX2
  */
-public class BirthingPod extends CardImpl {
+public class YisanTheWandererBard extends CardImpl {
 
-    public BirthingPod(UUID ownerId) {
-        super(ownerId, 104, "Birthing Pod", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}{GP}");
-        this.expansionSetCode = "NPH";
+    public YisanTheWandererBard(UUID ownerId) {
+        super(ownerId, 209, "Yisan, the Wanderer Bard", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        this.expansionSetCode = "M15";
+        this.supertype.add("Legendary");
+        this.subtype.add("Human");
+        this.subtype.add("Rogue");
 
         this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-        // {1}{GP}, {tap}, Sacrifice a creature: Search your library for a creature card with converted mana cost equal to 1 plus the sacrificed creature's converted mana cost, put that card onto the battlefield, then shuffle your library. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new BirthingPodEffect(), new ManaCostsImpl("{1}{GP}"));
+        // {2}{G}, {T}, Put a verse counter on Yisan, the Wanderer Bard: Search your library for a creature card with converted mana cost equal to the number of verse counters on Yisan, put it onto the battlefield, then shuffle your library.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new YisanTheWandererBardEffect(), new ManaCostsImpl("{2}{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new PutCountersSourceCost(new Counter("verse")));
         this.addAbility(ability);
     }
 
-    public BirthingPod(final BirthingPod card) {
+    public YisanTheWandererBard(final YisanTheWandererBard card) {
         super(card);
     }
 
     @Override
-    public BirthingPod copy() {
-        return new BirthingPod(this);
+    public YisanTheWandererBard copy() {
+        return new YisanTheWandererBard(this);
     }
 }
 
-class BirthingPodEffect extends OneShotEffect {
-    BirthingPodEffect() {
+class YisanTheWandererBardEffect extends OneShotEffect {
+    
+    public YisanTheWandererBardEffect() {
         super(Outcome.Benefit);
-        staticText = "Search your library for a creature card with converted mana cost equal to 1 plus the sacrificed creature's converted mana cost, put that card onto the battlefield, then shuffle your library";
+        this.staticText = "Search your library for a creature card with converted mana cost equal to the number of verse counters on {this}, put it onto the battlefield, then shuffle your library";
     }
-
-    BirthingPodEffect(final BirthingPodEffect effect) {
+    
+    public YisanTheWandererBardEffect(final YisanTheWandererBardEffect effect) {
         super(effect);
     }
-
+    
+    @Override
+    public YisanTheWandererBardEffect copy() {
+        return new YisanTheWandererBardEffect(this);
+    }
+    
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sacrificedPermanent = null;
-        for (Cost cost : source.getCosts()) {
-            if (cost instanceof SacrificeTargetCost) {
-                SacrificeTargetCost sacrificeCost = (SacrificeTargetCost) cost;
-                if (sacrificeCost.getPermanents().size() > 0) {
-                    sacrificedPermanent = sacrificeCost.getPermanents().get(0);
-                }
-                break;
-            }
-        }
         Player player = game.getPlayer(source.getControllerId());
-        if (sacrificedPermanent != null && player != null) {
-            int newConvertedCost = sacrificedPermanent.getManaCost().convertedManaCost() + 1;
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (sourcePermanent != null && player != null) {
+            int newConvertedCost = sourcePermanent.getCounters().getCount("verse");
             FilterCard filter = new FilterCard("creature card with converted mana cost " + newConvertedCost);
             filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, newConvertedCost));
             filter.add(new CardTypePredicate(CardType.CREATURE));
@@ -121,10 +124,5 @@ class BirthingPodEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public BirthingPodEffect copy() {
-        return new BirthingPodEffect(this);
     }
 }

@@ -120,8 +120,11 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                             permanent.getPower().setValue(token.getPower().getValue());
                         }
                 }
+                result = true;
             }
-            result |= true;
+        }
+        if (!result && this.duration.equals(Duration.Custom) ) {
+            this.discard();
         }
         return result;
     }

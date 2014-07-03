@@ -31,10 +31,12 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -44,6 +46,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterBasicLandCard;
 import mage.filter.common.FilterLandPermanent;
@@ -52,11 +55,10 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetLandPermanent;
-import mage.target.targetpointer.TargetPointer;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -79,8 +81,10 @@ public class NissaWorldwaker extends CardImpl {
 
         this.color.setGreen(true);
 
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
+        
         // +1: Target land you control becomes a 4/4 Elemental creature with trample.  It's still a land.
-        LoyaltyAbility ability = new LoyaltyAbility(new BecomesCreatureTargetEffect(new NissaWorldwakerToken(), "land", Duration.EndOfTurn), 1);
+        LoyaltyAbility ability = new LoyaltyAbility(new BecomesCreatureTargetEffect(new NissaWorldwakerToken(), "land", Duration.Custom), 1);
         ability.addTarget(new TargetLandPermanent(filter));
         this.addAbility(ability);
 
@@ -131,16 +135,16 @@ class NissaWorldwakerSearchEffect extends OneShotEffect {
                 for (UUID cardId: target.getTargets()) {
                     Card card = player.getLibrary().getCard(cardId, game);
                     if (card != null) {
-                        player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                        if (player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId())) {
+                            ContinuousEffect effect = new BecomesCreatureTargetEffect(new NissaWorldwakerToken(), "land", Duration.Custom);
+                            effect.setTargetPointer(new FixedTarget(card.getId()));
+                            game.addEffect(effect, source);                                                    
+                        }                                             
                     }
                 }
             }
         }
         player.shuffleLibrary(game);
-
-        ContinuousEffect effect = new BecomesCreatureTargetEffect(new NissaWorldwakerToken(), "land", Duration.EndOfGame);
-        game.addEffect(effect, source);
-
         return true;
     }
 }

@@ -34,7 +34,6 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -44,6 +43,7 @@ import mage.players.Player;
 public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect {
 
     private boolean tapped;
+    private boolean ownerControl;
 
     public ReturnSourceFromGraveyardToBattlefieldEffect() {
         this(false);
@@ -54,10 +54,17 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect 
         this.tapped = tapped;
         setText();
     }
+    public ReturnSourceFromGraveyardToBattlefieldEffect(boolean tapped, boolean ownerControl) {
+        super(Outcome.PutCreatureInPlay);
+        this.tapped = tapped;
+        this.ownerControl = ownerControl;
+        setText();
+    }
 
     public ReturnSourceFromGraveyardToBattlefieldEffect(final ReturnSourceFromGraveyardToBattlefieldEffect effect) {
         super(effect);
         this.tapped = effect.tapped;
+        this.ownerControl = effect.ownerControl;
     }
 
     @Override
@@ -67,22 +74,36 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect 
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Card card = player.getGraveyard().get(source.getSourceId(), game);
-        if (card != null) {
-            if(card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId(), tapped))
-            {
-                return true;
-            }
+        if (!game.getState().getZone(source.getSourceId()).equals(Zone.GRAVEYARD)) {
+            return false;
+        }        
+        Card card = game.getCard(source.getSourceId());
+        if (card == null) {
+            return false;
         }
-        return false;
+        
+        Player player;   
+        if (ownerControl) {
+            player = game.getPlayer(card.getOwnerId());
+        } else {
+            player = game.getPlayer(source.getControllerId());
+        }                
+        if (player == null) {            
+            return false;
+        }        
+        
+        return player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId(), tapped);
     }
 
     private void setText() {
-        if (tapped)
-            staticText = "Return {this} from your graveyard to the battlefield tapped";
-        else
-            staticText = "Return {this} from your graveyard to the battlefield";
+        StringBuilder sb = new StringBuilder("Return {this} from your graveyard to the battlefield");
+        if (tapped) {
+            sb.append(" tapped");
+        }        
+        if (ownerControl) {
+               sb.append(" under its owner's control");
+        }
+        staticText = sb.toString();
     }
 
 }

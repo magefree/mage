@@ -42,9 +42,9 @@ import mage.util.CardUtil;
  */
 public class PutCountersSourceCost extends CostImpl {
 
-    private int amount;
-    private String name;
-    private Counter counter;
+    private final int amount;
+    private final String name;
+    private final Counter counter;
 
     public PutCountersSourceCost(Counter counter) {
         this.counter = counter.copy();

@@ -42,9 +42,11 @@ import mage.cards.CardImpl;
 public class Overwhelm extends CardImpl {
 
     public Overwhelm(UUID ownerId) {
-      super(ownerId, 175, "Overwhelm", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{G}{G}");
+      super(ownerId, 175, "Overwhelm", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{G}{G}");      
       this.expansionSetCode = "RAV";
 
+      this.color.setGreen(true);
+      
       // Convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)
       this.addAbility(new ConvokeAbility());
 
