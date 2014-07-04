@@ -131,6 +131,9 @@ public class TargetCardInYourGraveyard extends TargetCard {
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         Player player = game.getPlayer(sourceControllerId);
         if (player != null) {
+            if (this.minNumberOfTargets == 0) {
+                return true;
+            }
             int possibleTargets = 0;
             for (Card card : player.getGraveyard().getCards(filter, game)) {
                 if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, sourceControllerId))) {
