@@ -67,12 +67,12 @@ public class HedronFieldPurists extends CardImpl {
         // LEVEL 1-4
         // 1/4
         // If a source would deal damage to you or a creature you control, prevent 1 of that damage.
-        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         abilities1.add(new SimpleStaticAbility(Zone.BATTLEFIELD, new HedronFieldPuristsEffect(1)));
         // LEVEL 5+
         // 2/5
         // If a source would deal damage to you or a creature you control, prevent 2 of that damage.
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         abilities2.add(new SimpleStaticAbility(Zone.BATTLEFIELD, new HedronFieldPuristsEffect(2)));
 
         LevelerCardBuilder.construct(this,
@@ -92,36 +92,13 @@ public class HedronFieldPurists extends CardImpl {
 
 class HedronFieldPuristsEffect extends PreventionEffectImpl {
 
-    private int amount;
-
     public HedronFieldPuristsEffect(int amount) {
-        super(Duration.WhileOnBattlefield);
-        this.amount = amount;
+        super(Duration.WhileOnBattlefield, amount, false, false);
         this.staticText = "If a source would deal damage to you or a creature you control, prevent " + amount + " of that damage";
     }
 
     public HedronFieldPuristsEffect(HedronFieldPuristsEffect effect) {
         super(effect);
-        this.amount = effect.amount;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), 1, false);
-        if (!game.replaceEvent(preventEvent)) {
-            int damage = event.getAmount();
-            if (damage >= this.amount) {
-                event.setAmount(damage - amount);
-                damage = amount;
-                this.used = true;
-            } else {
-                event.setAmount(0);
-                amount -= damage;
-            }
-            game.informPlayers(damage + " damage has been prevented.");
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
-        }
-        return false;
     }
 
     @Override
