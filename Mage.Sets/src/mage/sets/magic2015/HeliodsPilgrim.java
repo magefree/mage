@@ -53,7 +53,7 @@ public class HeliodsPilgrim extends CardImpl {
     }
 
     public HeliodsPilgrim(UUID ownerId) {
-        super(ownerId, 9925, "Heliod's Pilgrim", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        super(ownerId, 14, "Heliod's Pilgrim", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.expansionSetCode = "M15";
         this.subtype.add("Human");
         this.subtype.add("Cleric");

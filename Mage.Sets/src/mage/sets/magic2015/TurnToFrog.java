@@ -38,7 +38,7 @@ public class TurnToFrog extends mage.sets.magic2012.TurnToFrog {
 
     public TurnToFrog(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9921;
+        this.cardNumber = 81;
         this.expansionSetCode = "M15";
         this.rarity = Rarity.COMMON;
     }

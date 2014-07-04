@@ -50,7 +50,7 @@ public class SeraphOfTheMasses extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
 
     public SeraphOfTheMasses(UUID ownerId) {
-        super(ownerId, 9927, "Seraph of the Masses", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
+        super(ownerId, 32, "Seraph of the Masses", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
         this.expansionSetCode = "M15";
         this.subtype.add("Angel");
 

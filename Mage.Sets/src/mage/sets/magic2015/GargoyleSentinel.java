@@ -38,7 +38,7 @@ public class GargoyleSentinel extends mage.sets.magic2011.GargoyleSentinel {
 
     public GargoyleSentinel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9907;
+        this.cardNumber = 216;
         this.expansionSetCode = "M15";
         this.rarity = Rarity.COMMON;
     }

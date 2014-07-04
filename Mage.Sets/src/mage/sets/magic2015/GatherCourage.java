@@ -37,7 +37,7 @@ public class GatherCourage extends mage.sets.ravnika.GatherCourage {
 
     public GatherCourage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9908;
+        this.cardNumber = 175;
         this.expansionSetCode = "M15";
     }
 

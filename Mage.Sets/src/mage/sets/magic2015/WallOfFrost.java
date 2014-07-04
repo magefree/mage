@@ -38,7 +38,7 @@ public class WallOfFrost extends mage.sets.magic2010.WallOfFrost {
 
     public WallOfFrost(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9922;
+        this.cardNumber = 83;
         this.expansionSetCode = "M15";
         this.rarity = Rarity.COMMON;
     }

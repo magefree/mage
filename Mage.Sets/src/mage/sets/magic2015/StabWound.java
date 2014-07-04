@@ -37,7 +37,7 @@ public class StabWound extends mage.sets.returntoravnica.StabWound {
 
     public StabWound(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9919;
+        this.cardNumber = 116;
         this.expansionSetCode = "M15";
     }
 

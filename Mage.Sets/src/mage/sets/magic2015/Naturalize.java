@@ -37,7 +37,7 @@ public class Naturalize extends mage.sets.tenth.Naturalize {
 
     public Naturalize(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9912;
+        this.cardNumber = 185;
         this.expansionSetCode = "M15";
     }
 

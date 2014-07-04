@@ -37,7 +37,7 @@ public class Restock extends mage.sets.invasion.Restock {
 
     public Restock(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9916;
+        this.cardNumber = 195;
         this.expansionSetCode = "M15";
     }
 

@@ -38,7 +38,7 @@ public class WallOfMulch extends mage.sets.onslaught.WallOfMulch {
 
     public WallOfMulch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9924;
+        this.cardNumber = 208;
         this.expansionSetCode = "M15";
         this.rarity = Rarity.COMMON;
     }

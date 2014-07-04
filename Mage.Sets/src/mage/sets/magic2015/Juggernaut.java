@@ -38,7 +38,7 @@ public class Juggernaut extends mage.sets.tenth.Juggernaut {
 
     public Juggernaut(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9911;
+        this.cardNumber = 220;
         this.expansionSetCode = "M15";
         this.rarity = Rarity.COMMON;
     }
