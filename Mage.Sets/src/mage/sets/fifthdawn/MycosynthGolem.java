@@ -51,7 +51,7 @@ import mage.game.events.GameEvent;
 public class MycosynthGolem extends CardImpl {
 
     public MycosynthGolem(UUID ownerId) {
-        super(ownerId, 137, "Mycosynth Golem", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");
+        super(ownerId, 137, "Mycosynth Golem", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{11}");
         this.expansionSetCode = "5DN";
         this.subtype.add("Golem");
 
