@@ -45,16 +45,20 @@ import mage.game.permanent.Permanent;
  */
 public class BoostSourceWhileControlsEffect extends WhileConditionContiniousEffect {
 
-    private int power;
-    private int toughness;
-    private String filterDescription;
+    private final int power;
+    private final int toughness;
+    private final String filterDescription;
 
     public BoostSourceWhileControlsEffect(FilterPermanent filter, int power, int toughness) {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, new ControlsPermanentCondition(filter), Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
         this.filterDescription = filter.getMessage();
-        staticText = "{this} gets " + String.format("%1$+d/%2$+d", power, toughness) + " as long as you control a " + filterDescription;
+        staticText = "{this} gets " 
+                + String.format("%1$+d/%2$+d", power, toughness)
+                + " as long as you control "
+                + (filterDescription.startsWith("an ") ? "":"a ")
+                + filterDescription;
     }
 
     public BoostSourceWhileControlsEffect(final BoostSourceWhileControlsEffect effect) {

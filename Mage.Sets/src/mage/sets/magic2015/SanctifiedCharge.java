@@ -25,59 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.magic2015;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.ObjectColor;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continious.BoostEnchantedEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
-import mage.abilities.keyword.BestowAbility;
-import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author LevelX2
  */
-public class ObservantAlseid extends CardImpl {
+public class SanctifiedCharge extends CardImpl {
 
-    public ObservantAlseid(UUID ownerId) {
-        super(ownerId, 24, "Observant Alseid", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "THS";
-        this.subtype.add("Nymph");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("White creatures");
 
-        this.color.setWhite(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // Bestow {4}{W} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
-        this.addAbility(new BestowAbility(this, "{4}{W}"));
-        // Vigilance
-        this.addAbility(VigilanceAbility.getInstance());
-        // Enchanted creature gets +2/+2 and has vigilance.
-        Effect effect = new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield);
-        effect.setText("Enchanted creature gets +2/+2");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        effect = new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA);
-        effect.setText("and has vigilance");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+    static {
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    public ObservantAlseid(final ObservantAlseid card) {
+    public SanctifiedCharge(UUID ownerId) {
+        super(ownerId, 30, "Sanctified Charge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{W}");
+        this.expansionSetCode = "M15";
+
+        this.color.setWhite(true);
+
+        // Creatures you control get +2/+1 until end of turn.  White creatures you control also gain first strike until end of turn.
+        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 1, Duration.EndOfTurn));
+        Effect effect = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter);
+        effect.setText("White creatures you control also gain first strike until end of turn");
+        this.getSpellAbility().addEffect(effect);
+
+    }
+
+    public SanctifiedCharge(final SanctifiedCharge card) {
         super(card);
     }
 
     @Override
-    public ObservantAlseid copy() {
-        return new ObservantAlseid(this);
+    public SanctifiedCharge copy() {
+        return new SanctifiedCharge(this);
     }
 }

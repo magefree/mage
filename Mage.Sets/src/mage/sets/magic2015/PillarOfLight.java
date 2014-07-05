@@ -25,59 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.magic2015;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continious.BoostEnchantedEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
-import mage.abilities.keyword.BestowAbility;
-import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.filter.Filter;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ToughnessPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class ObservantAlseid extends CardImpl {
+public class PillarOfLight extends CardImpl {
 
-    public ObservantAlseid(UUID ownerId) {
-        super(ownerId, 24, "Observant Alseid", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "THS";
-        this.subtype.add("Nymph");
+    static private final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughness 4 or greater");
 
-        this.color.setWhite(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // Bestow {4}{W} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
-        this.addAbility(new BestowAbility(this, "{4}{W}"));
-        // Vigilance
-        this.addAbility(VigilanceAbility.getInstance());
-        // Enchanted creature gets +2/+2 and has vigilance.
-        Effect effect = new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield);
-        effect.setText("Enchanted creature gets +2/+2");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        effect = new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA);
-        effect.setText("and has vigilance");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+    static {
+        filter.add(new ToughnessPredicate(Filter.ComparisonType.GreaterThan, 3));
     }
 
-    public ObservantAlseid(final ObservantAlseid card) {
+    public PillarOfLight(UUID ownerId) {
+        super(ownerId, 24, "Pillar of Light", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
+        this.expansionSetCode = "M15";
+
+        this.color.setWhite(true);
+
+        // Exile target creature with toughness 4 or greater.
+        this.getSpellAbility().addEffect(new ExileTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+    }
+
+    public PillarOfLight(final PillarOfLight card) {
         super(card);
     }
 
     @Override
-    public ObservantAlseid copy() {
-        return new ObservantAlseid(this);
+    public PillarOfLight copy() {
+        return new PillarOfLight(this);
     }
 }

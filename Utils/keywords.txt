@@ -3,6 +3,7 @@ Basic landcycling|cost|
 Battle cry|new|
 Bloodthirst|number|
 Bushido|number|
+Convoke|new|
 Cascade|new|
 Cumulative upkeep|cost|
 Cycling|cost|

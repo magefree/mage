@@ -29,7 +29,6 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.constants.CardType;
 
 /**
@@ -39,10 +38,13 @@ import mage.constants.CardType;
 public class SoldierToken extends Token {
 
     public SoldierToken() {
+        this("10E");
+    }
+    public SoldierToken(String setCode) {
         super("Soldier", "1/1 white Soldier creature token");
-        this.setOriginalExpansionSetCode("10E");
+        this.setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.WHITE;
+        color.setWhite(true);
         subtype.add("Soldier");
         power = new MageInt(1);
         toughness = new MageInt(1);

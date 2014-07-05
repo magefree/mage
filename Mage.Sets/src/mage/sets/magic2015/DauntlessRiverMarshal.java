@@ -25,59 +25,62 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.magic2015;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continious.BoostEnchantedEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
-import mage.abilities.keyword.BestowAbility;
-import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.effects.common.continious.BoostSourceWhileControlsEffect;
 import mage.cards.CardImpl;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class ObservantAlseid extends CardImpl {
+public class DauntlessRiverMarshal extends CardImpl {
 
-    public ObservantAlseid(UUID ownerId) {
-        super(ownerId, 24, "Observant Alseid", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "THS";
-        this.subtype.add("Nymph");
+    private static final FilterPermanent filter = new FilterPermanent("an Island");
+
+    static {
+        filter.add(new SubtypePredicate("Island"));
+
+    }
+
+    public DauntlessRiverMarshal(UUID ownerId) {
+        super(ownerId, 8, "Dauntless River Marshal", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "M15";
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
 
         this.color.setWhite(true);
         this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-        // Bestow {4}{W} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
-        this.addAbility(new BestowAbility(this, "{4}{W}"));
-        // Vigilance
-        this.addAbility(VigilanceAbility.getInstance());
-        // Enchanted creature gets +2/+2 and has vigilance.
-        Effect effect = new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield);
-        effect.setText("Enchanted creature gets +2/+2");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        effect = new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA);
-        effect.setText("and has vigilance");
-        ability.addEffect(effect);
+        // Dauntless River Marshal gets +1/+1 as long as you control an Island.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filter, 1, 1)));
+        
+        // {3}{U}: Tap target creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{3}{U}"));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    public ObservantAlseid(final ObservantAlseid card) {
+    public DauntlessRiverMarshal(final DauntlessRiverMarshal card) {
         super(card);
     }
 
     @Override
-    public ObservantAlseid copy() {
-        return new ObservantAlseid(this);
+    public DauntlessRiverMarshal copy() {
+        return new DauntlessRiverMarshal(this);
     }
 }

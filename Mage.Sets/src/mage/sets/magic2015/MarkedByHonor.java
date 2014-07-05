@@ -25,28 +25,24 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.returntoravnica;
+package mage.sets.magic2015;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continious.BoostEnchantedEffect;
+import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.VigilanceAbility;
+import mage.cards.CardImpl;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.BoostEnchantedEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.VigilanceAbility;
-import mage.cards.CardImpl;
-import mage.game.permanent.token.KnightToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -54,23 +50,21 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class KnightlyValor extends CardImpl {
+public class MarkedByHonor extends CardImpl {
 
-    public KnightlyValor (UUID ownerId) {
-        super(ownerId, 13, "Knightly Valor", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
-        this.expansionSetCode = "RTR";
+    public MarkedByHonor(UUID ownerId) {
+        super(ownerId, 17, "Marked by Honor", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
+        this.expansionSetCode = "M15";
         this.subtype.add("Aura");
+
         this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-
-        // When Knightly Valor enters the battlefield, put a 2/2 white Knight creature token with vigilance onto the battlefield.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KnightToken())));
 
         // Enchanted creature gets +2/+2 and has vigilance.
         Effect effect = new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield);
@@ -83,13 +77,12 @@ public class KnightlyValor extends CardImpl {
 
     }
 
-    public KnightlyValor (final KnightlyValor card) {
+    public MarkedByHonor(final MarkedByHonor card) {
         super(card);
     }
 
     @Override
-    public KnightlyValor copy() {
-        return new KnightlyValor(this);
+    public MarkedByHonor copy() {
+        return new MarkedByHonor(this);
     }
-
 }
