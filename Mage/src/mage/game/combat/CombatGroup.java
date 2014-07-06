@@ -438,7 +438,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         Player player = game.getPlayer(playerId);
         List<UUID> blockerList = new ArrayList<>(blockers);
         blockerOrder.clear();
-        while (true) {
+        while (true && player.isInGame()) {
             if (blockerList.size() == 1) {
                 blockerOrder.add(blockerList.get(0));
                 break;
