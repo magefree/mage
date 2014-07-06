@@ -118,6 +118,7 @@ public class AjaniSteadfast extends CardImpl {
 class AjaniSteadfastEmblem extends Emblem {
 
     public AjaniSteadfastEmblem() {
+        setName("Emblem Ajani Steadfast");
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new AjaniSteadfastPreventEffect()));        
         this.setExpansionSetCodeForImage("M15");
     }

@@ -167,7 +167,19 @@ public abstract class AbilityImpl implements Ability {
             for (Effect effect: getEffects()) {
                 if (effect instanceof OneShotEffect) {
                     if (!(effect instanceof PostResolveEffect)) {
-                        result &= effect.apply(game, this);
+                        boolean effectResult = effect.apply(game, this);
+                        result &= effectResult;
+                        if (logger.isDebugEnabled()) {
+                            if (!effectResult) {
+                                if (this.getSourceId() != null) {
+                                    MageObject mageObject = game.getObject(this.getSourceId());
+                                    if (mageObject != null) {
+                                        logger.debug("AbilityImpl.resolve: object: " + mageObject.getName());
+                                    }
+                                }
+                                logger.debug("AbilityImpl.resolve: effect returned false -" + effect.getText(this.getModes().getMode()));
+                            }
+                        }
                     }
                 }
                 else {

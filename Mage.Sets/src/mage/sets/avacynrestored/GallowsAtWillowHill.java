@@ -27,8 +27,7 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -36,7 +35,9 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -49,8 +50,6 @@ import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  * @author noxx
@@ -112,7 +111,7 @@ class GallowsAtWillowHillEffect extends OneShotEffect {
                     Player controller = game.getPlayer(permanent.getControllerId());
                     permanent.destroy(source.getId(), game, false);
                     if (controller != null) {
-                        Token spirit = new SpiritWhiteToken();
+                        Token spirit = new SpiritWhiteToken("AVR", 1);
                         spirit.putOntoBattlefield(1, game, source.getSourceId(), controller.getId());
                     }
                     affectedTargets++;

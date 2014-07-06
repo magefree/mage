@@ -63,9 +63,6 @@ public class PlayerLostLifeWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.UNTAP_STEP_PRE) {
-            reset();
-        }
         if (event.getType() == GameEvent.EventType.LOST_LIFE) {
             UUID playerId = event.getPlayerId();
             if (playerId != null) {

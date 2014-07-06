@@ -37,13 +37,24 @@ import mage.constants.CardType;
 public class SpiritWhiteToken extends Token {
 
     public SpiritWhiteToken() {
+        this("SHM", 0);
+    }
+
+    public SpiritWhiteToken(String setCode) {
+        this(setCode, 0);
+    }
+    public SpiritWhiteToken(String setCode, int tokenType) {
         super("Spirit", "1/1 white Spirit creature token with flying");
+        setOriginalExpansionSetCode(setCode);
+        if (tokenType > 0) {
+            setTokenType(tokenType);
+        }
         cardType.add(CardType.CREATURE);
         subtype.add("Spirit");
         color.setWhite(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
+        
         addAbility(FlyingAbility.getInstance());
-        this.setOriginalExpansionSetCode("SHM");
     }
 }

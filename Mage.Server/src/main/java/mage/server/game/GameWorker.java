@@ -28,12 +28,11 @@
 
 package mage.server.game;
 
+import java.util.UUID;
+import java.util.concurrent.Callable;
 import mage.MageException;
 import mage.game.Game;
 import org.apache.log4j.Logger;
-
-import java.util.UUID;
-import java.util.concurrent.Callable;
 
 /**
  *

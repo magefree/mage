@@ -74,9 +74,9 @@ public class ReturnToTheRanks extends CardImpl {
     public void adjustTargets(Ability ability, Game game) {
         for (Effect effect : ability.getEffects()) {
             if (effect instanceof ReturnFromGraveyardToBattlefieldTargetEffect) {
-                int xValue = new GetXValue().calculate(game, ability);
+                int xValue = ability.getManaCostsToPay().getX();
                 ability.getTargets().clear();
-                ability.addTarget(new TargetCardInYourGraveyard(xValue,xValue, new FilterCreatureCard("creature cards from your graveyard")));
+                ability.addTarget(new TargetCardInYourGraveyard(xValue,xValue, filter));
             }
         }
     }

@@ -507,6 +507,10 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                         break;
                     case EXILED:
                         game.getExile().removeCard(this, game);
+                        if (isFaceDown()) {
+                            // 110.6b Permanents enter the battlefield untapped, unflipped, face up, and phased in unless a spell or ability says otherwise.
+                            this.setFaceDown(false);
+                        }
                         removed = true;
                         break;
                     case COMMAND:

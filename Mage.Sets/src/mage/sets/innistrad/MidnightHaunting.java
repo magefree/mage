@@ -28,10 +28,10 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.game.permanent.token.SpiritWhiteToken;
 
 /**
@@ -47,7 +47,7 @@ public class MidnightHaunting extends CardImpl {
         this.color.setWhite(true);
 
         // Put two 1/1 white Spirit creature tokens with flying onto the battlefield.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritWhiteToken(), 2));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritWhiteToken("ISD"), 2));
     }
 
     public MidnightHaunting(final MidnightHaunting card) {

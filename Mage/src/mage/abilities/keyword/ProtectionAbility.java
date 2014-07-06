@@ -48,15 +48,18 @@ import mage.game.stack.Spell;
 public class ProtectionAbility extends StaticAbility {
 
     protected Filter filter;
+    protected boolean removeAuras;
 
     public ProtectionAbility(Filter filter) {
         super(Zone.BATTLEFIELD, null);
         this.filter = filter;
+        this.removeAuras = true;
     }
 
     public ProtectionAbility(final ProtectionAbility ability) {
         super(ability);
         this.filter = ability.filter.copy();
+        this.removeAuras = ability.removeAuras;
     }
 
     @Override
@@ -66,7 +69,7 @@ public class ProtectionAbility extends StaticAbility {
 
     @Override
     public String getRule() {
-        return "Protection from " + filter.getMessage();
+        return "Protection from " + filter.getMessage() + (removeAuras ? "":". This effect doesn't remove auras.");
     }
 
     public boolean canTarget(MageObject source, Game game) {
@@ -100,5 +103,13 @@ public class ProtectionAbility extends StaticAbility {
 
     public void setFilter(FilterCard filter) {
         this.filter = filter;
+    }
+
+    public void setRemovesAuras(boolean removeAuras) {
+        this.removeAuras = removeAuras;
+    }
+
+    public boolean removesAuras() {
+        return removeAuras;
     }
 }

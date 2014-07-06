@@ -35,7 +35,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.cards.Card;
@@ -81,7 +80,7 @@ public class ConstrictingSliver extends CardImpl {
 
         // Sliver creatures you control have "When this creature enters the battlefield, you may exile target creature an opponent controls 
         // until this creature leaves the battlefield."
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1), true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect(), true);
         ability.addTarget(new TargetCreaturePermanent(filterTarget));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability,

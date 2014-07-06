@@ -130,7 +130,7 @@ class EvershrikeEffect extends OneShotEffect {
                         Card aura = game.getCard(targetAura.getFirstTarget());
                         if (aura != null) {
                             game.getState().setValue("attachTo:" + aura.getId(), evershrikePermanent);
-                            aura.putOntoBattlefield(game, Zone.HAND, source.getId(), you.getId());
+                            aura.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), you.getId());
                             evershrikePermanent.addAttachment(aura.getId(), game);
                             exiled = false;
                             count = you.getHand().count(filterAuraCard, game);

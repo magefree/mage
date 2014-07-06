@@ -27,15 +27,14 @@
  */
 package mage.sets.innistrad;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.game.permanent.token.SpiritWhiteToken;
-
-import java.util.UUID;
 
 /**
  * @author nantuko
@@ -53,7 +52,7 @@ public class MausoleumGuard extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Mausoleum Guard dies, put two 1/1 white Spirit creature tokens with flying onto the battlefield.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken(), 2)));
+        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken("ISD"), 2)));
     }
 
     public MausoleumGuard(final MausoleumGuard card) {

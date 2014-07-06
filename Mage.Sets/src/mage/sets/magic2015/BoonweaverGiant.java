@@ -118,7 +118,7 @@ class BoonweaverGiantEffect extends OneShotEffect {
                 }
             }
         }
-        if (player.chooseUse(Outcome.Neutral, "Search your Hand for an Aura card?", game)) {
+        if (card == null && player.chooseUse(Outcome.Neutral, "Search your Hand for an Aura card?", game)) {
             TargetCardInHand target = new TargetCardInHand(filter);
             if (player.choose(Outcome.PutCardInPlay, player.getHand(), target, game)) {
                 card = game.getCard(target.getFirstTarget());
@@ -140,9 +140,9 @@ class BoonweaverGiantEffect extends OneShotEffect {
         if (card != null) {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
-                game.getState().setValue("attachTo:" + card.getId(), permanent.getId());
+                game.getState().setValue("attachTo:" + card.getId(), permanent);
             }
-            card.putOntoBattlefield(game, zone, source.getSourceId(), source.getControllerId());
+            player.putOntoBattlefieldWithInfo(card, game, zone, source.getSourceId());
             if (permanent != null) {
                 return permanent.addAttachment(card.getId(), game);
             }

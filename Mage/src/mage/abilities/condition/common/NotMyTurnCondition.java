@@ -33,7 +33,8 @@ import mage.abilities.condition.Condition;
 import mage.game.Game;
 
 public class NotMyTurnCondition implements Condition {
-    private static NotMyTurnCondition fInstance = new NotMyTurnCondition();
+    
+    private static final NotMyTurnCondition fInstance = new NotMyTurnCondition();
 
     public static Condition getInstance() {
         return fInstance;
@@ -42,8 +43,9 @@ public class NotMyTurnCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         UUID activePlayerId = game.getActivePlayerId();
-        if (activePlayerId != null)
+        if (activePlayerId != null) {
             return !activePlayerId.equals(source.getControllerId());
+        }
         return false;
     }
 }

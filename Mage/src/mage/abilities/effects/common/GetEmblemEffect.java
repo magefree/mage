@@ -28,9 +28,10 @@
 
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.command.Emblem;
 
@@ -40,7 +41,7 @@ import mage.game.command.Emblem;
  */
 public class GetEmblemEffect extends OneShotEffect {
 
-    private Emblem emblem;
+    private final Emblem emblem;
 
     public GetEmblemEffect(Emblem emblem) {
         super(Outcome.Benefit);
@@ -60,6 +61,10 @@ public class GetEmblemEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (sourceObject == null) {
+            return false;
+        }
         game.addEmblem(emblem, source);
         return true;
     }

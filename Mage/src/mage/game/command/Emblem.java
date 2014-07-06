@@ -63,6 +63,7 @@ public class Emblem implements CommandObject {
 
     public Emblem(final Emblem emblem) {
         this.id = emblem.id;
+        this.name = emblem.name;
         this.controllerId = emblem.controllerId;
         this.sourceId = emblem.sourceId;
         this.abilites = emblem.abilites.copy();

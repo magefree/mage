@@ -765,6 +765,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         return false;
     }
 
+    @Override
+    public boolean cantBeEnchantedBy(MageObject source, Game game) {
+        for (ProtectionAbility ability : abilities.getProtectionAbilities()) {
+            if (!(source.getSubtype().contains("Aura") && !ability.removesAuras()) && !ability.canTarget(source, game)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     protected boolean canDamage(MageObject source, Game game) {
         //noxx: having protection doesn't prevents from dealing damage
         // instead it adds damage prevention

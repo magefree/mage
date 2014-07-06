@@ -1419,13 +1419,14 @@ public abstract class GameImpl implements Game, Serializable {
                         else {
                             Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
                             if (auraFilter instanceof FilterControlledCreaturePermanent) {
-                                if (!((FilterControlledCreaturePermanent)auraFilter).match(attachedTo, perm.getId(), perm.getControllerId(), this) || attachedTo.hasProtectionFrom(perm, this)) {
+                                if (!((FilterControlledCreaturePermanent)auraFilter).match(attachedTo, perm.getId(), perm.getControllerId(), this)
+                                        || attachedTo.cantBeEnchantedBy(perm, this)) {
                                     if (movePermanentToGraveyardWithInfo(perm)) {
                                         somethingHappened = true;
                                     }
                                 }
                             } else {
-                                if (!auraFilter.match(attachedTo, this) || attachedTo.hasProtectionFrom(perm, this)) {
+                                if (!auraFilter.match(attachedTo, this) || attachedTo.cantBeEnchantedBy(perm, this)) {
                                     // handle bestow unattachment
                                     Card card = this.getCard(perm.getId());
                                     if (card != null && card.getCardType().contains(CardType.CREATURE)) {
@@ -1442,15 +1443,15 @@ public abstract class GameImpl implements Game, Serializable {
                         }
                     }
                     else if (target instanceof TargetPlayer) {
-                        Player attachedTo = getPlayer(perm.getAttachedTo());
-                        if (attachedTo == null) {
+                        Player attachedToPlayer = getPlayer(perm.getAttachedTo());
+                        if (attachedToPlayer == null) {
                             if (movePermanentToGraveyardWithInfo(perm)) {
                                 somethingHappened = true;
                             }
                         }
                         else {
                             Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
-                            if (!auraFilter.match(attachedTo, this) || attachedTo.hasProtectionFrom(perm, this)) {
+                            if (!auraFilter.match(attachedToPlayer, this) || attachedToPlayer.hasProtectionFrom(perm, this)) {
                                 if (movePermanentToGraveyardWithInfo(perm)) {
                                     somethingHappened = true;
                                 }
@@ -1988,9 +1989,9 @@ public abstract class GameImpl implements Game, Serializable {
                     targetName = targetPlayer.getName();
                 }
             } else {
-                targetName = targetObject.getName();
+                targetName = targetObject.getLogName();
             }
-            StringBuilder message = new StringBuilder(preventionSource.getName()).append(": Prevented ");
+            StringBuilder message = new StringBuilder(preventionSource.getLogName()).append(": Prevented ");
             message.append(Integer.toString(result.getPreventedDamage())).append(" damage from ").append(damageSource.getName());
             if (!targetName.isEmpty()) {
                 message.append(" to ").append(targetName);
