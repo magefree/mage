@@ -369,6 +369,14 @@ public class TableController {
 
     public synchronized void leaveTable(UUID userId) {
         UUID playerId = userPlayerMap.get(userId);
+        if (table == null) {
+            logger.error("TableController.leaveTable table == null - userId: " + userId);
+            return;
+        }
+        if (table.isTournament() && tournament == null) {
+            logger.error("TableController.leaveTable tournament == null - userId: " + userId + "  table: " + table.getId());
+            return;
+        }
         if (playerId != null) {
             if (table.getState() == TableState.WAITING || table.getState() == TableState.STARTING) {
                 table.leaveNotStartedTable(playerId);
@@ -382,7 +390,9 @@ public class TableController {
                 userPlayerMap.remove(userId);
             } else if (!table.getState().equals(TableState.FINISHED)) {
                 if (table.isTournament()) {
+                    logger.debug("TableController.leaveTable before userQuitTournamentSubTables");
                     TableManager.getInstance().userQuitTournamentSubTables(userId);
+                    logger.debug("TableController.leaveTable before quit tournament ");
                     TournamentManager.getInstance().quit(tournament.getId(), userId);
                 } else {
                     MatchPlayer matchPlayer = match.getPlayer(playerId);
@@ -396,6 +406,8 @@ public class TableController {
                     match.leave(playerId);
                 }
             }
+        } else {
+            logger.error("TableController.leaveTable no playerId found for userId: " + userId);
         }
 
     }

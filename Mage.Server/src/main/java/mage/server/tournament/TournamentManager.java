@@ -33,6 +33,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import mage.cards.decks.Deck;
 import mage.game.tournament.Tournament;
 import mage.view.TournamentView;
+import org.jboss.logging.Logger;
 
 /**
  *
@@ -62,7 +63,11 @@ public class TournamentManager {
     }
 
     public void quit(UUID tournamentId, UUID userId) {
-        controllers.get(tournamentId).quit(userId);
+        if (controllers.contains(tournamentId)) {
+            controllers.get(tournamentId).quit(userId);
+        } else {
+            Logger.getLogger(TournamentManager.class).error("TournamentManager.quit tournament controller missing  tournamentid: " + tournamentId + " userId: " + userId);
+        }
     }
 
 

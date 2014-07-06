@@ -171,8 +171,12 @@ public class TableManager {
     // remove user from all tournament sub tables
     public void userQuitTournamentSubTables(UUID userId) {
         for (TableController controller: controllers.values()) {
-            if (controller.getTable().isTournamentSubTable()) {
-                controller.leaveTable(userId);
+            if (controller.getTable() != null) {
+                if (controller.getTable().isTournamentSubTable()) {
+                    controller.leaveTable(userId);
+                }
+            } else {
+                logger.error("TableManager.userQuitTournamentSubTables table == null - userId " + userId);
             }
         }
     }
@@ -219,6 +223,7 @@ public class TableManager {
                 removeTable(tableId);
 
             } else {
+                logger.debug("TableManager.leaveTable leaveTable");
                 tableController.leaveTable(userId);
             }
         }
