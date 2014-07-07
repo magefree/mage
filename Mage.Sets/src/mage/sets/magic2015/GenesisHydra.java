@@ -27,7 +27,6 @@
  */
 package mage.sets.magic2015;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -47,13 +46,13 @@ import mage.counters.CounterType;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
+
+import java.util.UUID;
 
 /**
  *
@@ -75,7 +74,7 @@ public class GenesisHydra extends CardImpl {
         // When you cast Genesis Hydra, reveal the top X cards of your library. You may put a nonland permanent card with converted mana cost X or less from among them onto the battlefield. Then shuffle the rest into your library.
         this.addAbility(new CastSourceTriggeredAbility(new GenesisHydraPutOntoBattlefieldEffect(), false));
         // Genesis Hydra enters the battlefield with X +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new GenesisHydraEntersBattlefieldEfect(), "with X +1/+1 counters on it"));
+        this.addAbility(new EntersBattlefieldAbility(new GenesisHydraEntersBattlefieldEffect(), "with X +1/+1 counters on it"));
     }
 
     public GenesisHydra(final GenesisHydra card) {
@@ -88,14 +87,14 @@ public class GenesisHydra extends CardImpl {
     }
 }
 
-class GenesisHydraEntersBattlefieldEfect extends OneShotEffect {
+class GenesisHydraEntersBattlefieldEffect extends OneShotEffect {
 
-    public GenesisHydraEntersBattlefieldEfect() {
+    public GenesisHydraEntersBattlefieldEffect() {
         super(Outcome.BoostCreature);
         staticText = "{this} enters the battlefield with X +1/+1 counters on it";
     }
 
-    public GenesisHydraEntersBattlefieldEfect(final GenesisHydraEntersBattlefieldEfect effect) {
+    public GenesisHydraEntersBattlefieldEffect(final GenesisHydraEntersBattlefieldEffect effect) {
         super(effect);
     }
 
@@ -115,8 +114,8 @@ class GenesisHydraEntersBattlefieldEfect extends OneShotEffect {
     }
 
     @Override
-    public GenesisHydraEntersBattlefieldEfect copy() {
-        return new GenesisHydraEntersBattlefieldEfect(this);
+    public GenesisHydraEntersBattlefieldEffect copy() {
+        return new GenesisHydraEntersBattlefieldEffect(this);
     }
 
 }
@@ -144,6 +143,10 @@ class GenesisHydraPutOntoBattlefieldEffect extends OneShotEffect {
         for (int i = 0; i < count; i++) {
             Card card = controller.getLibrary().removeFromTop(game);
             cards.add(card);
+        }
+
+        if (cards.size() > 0) {
+            controller.revealCards("Genesis Hydra", cards, game);
         }
 
         FilterCard filter = new FilterNonlandCard("a nonland card with converted mana cost " + count + " or less to put onto the battlefield");
