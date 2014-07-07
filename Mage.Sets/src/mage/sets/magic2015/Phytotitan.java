@@ -27,11 +27,11 @@
  */
 package mage.sets.magic2015;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
@@ -40,6 +40,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -89,7 +91,7 @@ class PhytotitanEffect extends OneShotEffect {
         //create delayed triggered ability
         Effect effect = new ReturnSourceFromGraveyardToBattlefieldEffect(true, true);
         effect.setText(staticText);
-        AtTheBeginOfNextUpkeepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(effect);
+        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(effect);
         delayedAbility.setSourceId(source.getSourceId());
         delayedAbility.setControllerId(source.getControllerId());
         game.addDelayedTriggeredAbility(delayedAbility);
