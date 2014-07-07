@@ -56,6 +56,7 @@ import mage.client.table.TablesPane;
 import mage.client.tournament.TournamentPane;
 import mage.client.util.EDTExceptionHandler;
 import mage.client.util.SettingsManager;
+import mage.client.util.SystemUtil;
 import mage.client.util.audio.MusicPlayer;
 import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.stats.UpdateMemUsageTask;
@@ -313,6 +314,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 }
             }
         });
+
+        if (SystemUtil.isMacOSX()) {
+            SystemUtil.enableMacOSFullScreenMode(this);
+        }
     }
 
     private void addTooltipContainer() {
