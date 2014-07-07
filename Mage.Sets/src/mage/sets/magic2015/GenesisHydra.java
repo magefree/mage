@@ -138,11 +138,17 @@ class GenesisHydraPutOntoBattlefieldEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl();
-        int count = source.getManaCostsToPay().getX();
-        count = Math.min(controller.getLibrary().size(), count);
-        for (int i = 0; i < count; i++) {
-            Card card = controller.getLibrary().removeFromTop(game);
-            cards.add(card);
+
+        Object obj = getValue(CastSourceTriggeredAbility.SOURCE_CAST_SPELL_ABILITY);
+        int count = 0;
+        if (obj != null && obj instanceof SpellAbility) {
+            count = ((SpellAbility) obj).getManaCostsToPay().getX();
+            // using other var because of tooltip
+            int size = Math.min(controller.getLibrary().size(), count);
+            for (int i = 0; i < size; i++) {
+                Card card = controller.getLibrary().removeFromTop(game);
+                cards.add(card);
+            }
         }
 
         if (cards.size() > 0) {

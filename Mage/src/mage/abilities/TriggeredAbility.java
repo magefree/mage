@@ -28,9 +28,11 @@
 
 package mage.abilities;
 
-import java.util.UUID;
+import mage.MageObject;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +43,6 @@ public interface TriggeredAbility extends Ability {
     void trigger(Game game, UUID controllerId);
     boolean checkTrigger(GameEvent event, Game game);
     boolean checkInterveningIfClause(Game game);
-    @Override
     TriggeredAbility copy();
-
+    void setSourceObject(MageObject mageObject);
 }

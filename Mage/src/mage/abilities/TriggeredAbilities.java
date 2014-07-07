@@ -29,18 +29,14 @@
 
 package mage.abilities;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageObject;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+
+import java.util.*;
 
 
 /**
@@ -78,6 +74,7 @@ public class TriggeredAbilities extends HashMap<String, TriggeredAbility> {
                         if (object instanceof Permanent) {
                             ability.setControllerId(((Permanent) object).getControllerId());
                         }
+                        ability.setSourceObject(object);
                         if (ability.checkTrigger(event, game)) {
                             UUID controllerId = ability.getControllerId();
                             ability.trigger(game, controllerId);

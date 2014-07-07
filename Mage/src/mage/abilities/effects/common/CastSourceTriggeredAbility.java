@@ -32,12 +32,15 @@ import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
 
 /**
  *
  * @author Plopman
  */
 public class CastSourceTriggeredAbility extends TriggeredAbilityImpl {
+
+    public static final String SOURCE_CAST_SPELL_ABILITY = "sourceCastSpellAbility";
 
     public CastSourceTriggeredAbility(Effect effect) {
         this(effect, false);
@@ -59,6 +62,14 @@ public class CastSourceTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType().equals(GameEvent.EventType.SPELL_CAST) && event.getSourceId().equals(this.getSourceId())) {
+            if (getSourceObject() != null && getSourceObject() instanceof Spell) {
+                Spell spell = (Spell)getSourceObject();
+                if (spell.getSpellAbility() != null) {
+                    for (Effect effect : getEffects()) {
+                        effect.setValue(SOURCE_CAST_SPELL_ABILITY, spell.getSpellAbility());
+                    }
+                }
+            }
             return true;
         }
         return false;
