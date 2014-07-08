@@ -34,10 +34,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.command.Emblem;
+import mage.players.Player;
 
 /**
  *
- * @author nantuko
+ * @author LevelX2
  */
 public class GetEmblemEffect extends OneShotEffect {
 
@@ -46,7 +47,7 @@ public class GetEmblemEffect extends OneShotEffect {
     public GetEmblemEffect(Emblem emblem) {
         super(Outcome.Benefit);
         this.emblem = emblem;
-        this.staticText = "You get an emblem with \"" + emblem.getAbilities().getRules(null) + "\"";
+        this.staticText = "Target opponent gets an emblem with \"" + emblem.getAbilities().getRules(null) + "\"";
     }
 
     public GetEmblemEffect(final GetEmblemEffect effect) {
@@ -65,7 +66,11 @@ public class GetEmblemEffect extends OneShotEffect {
         if (sourceObject == null) {
             return false;
         }
-        game.addEmblem(emblem, source);
+        Player toPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (toPlayer == null) {
+            return false;
+        }
+        game.addEmblem(emblem, source, toPlayer.getId());
         return true;
     }
 

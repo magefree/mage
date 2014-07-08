@@ -1170,9 +1170,18 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public void addEmblem(Emblem emblem, Ability source) {
+        addEmblem(emblem, source, null);
+    }
+
+    @Override
+    public void addEmblem(Emblem emblem, Ability source, UUID toPlayerId) {
         Emblem newEmblem = emblem.copy();
         newEmblem.setSourceId(source.getSourceId());
-        newEmblem.setControllerId(source.getControllerId());
+        if (toPlayerId == null) {
+            newEmblem.setControllerId(source.getControllerId());
+        } else {
+            newEmblem.setControllerId(toPlayerId);
+        }
         newEmblem.assignNewId();
         newEmblem.getAbilities().newId();
         for (Ability ability : newEmblem.getAbilities()) {
