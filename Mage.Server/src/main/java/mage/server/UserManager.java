@@ -155,19 +155,23 @@ public class UserManager {
                 new Runnable() {
                     @Override
                     public void run() {
-                        logger.debug("checkExpired - start");
-                        Calendar expired = Calendar.getInstance();
-                        expired.add(Calendar.MINUTE, -3);
-                        List<User> usersToCheck = new ArrayList<>();
-                        usersToCheck.addAll(users.values());
-                        for (User user : usersToCheck) {
-                            if (user.isExpired(expired.getTime())) {
-                                logger.info(new StringBuilder(user.getName()).append(": session expired userId: ").append(user.getId())
-                                        .append(" Host: ").append(user.getHost()));
-                                removeUser(user.getId(), DisconnectReason.SessionExpired);
+                        try {
+                            logger.debug("checkExpired - start");
+                            Calendar expired = Calendar.getInstance();
+                            expired.add(Calendar.MINUTE, -3);
+                            List<User> usersToCheck = new ArrayList<>();
+                            usersToCheck.addAll(users.values());
+                            for (User user : usersToCheck) {
+                                if (user.isExpired(expired.getTime())) {
+                                    logger.info(new StringBuilder(user.getName()).append(": session expired userId: ").append(user.getId())
+                                            .append(" Host: ").append(user.getHost()));
+                                    removeUser(user.getId(), DisconnectReason.SessionExpired);
+                                }
                             }
+                            logger.debug("checkExpired - end");
+                        } catch (Exception ex) {
+                            handleException(ex);
                         }
-                        logger.debug("checkExpired - end");
                     }
                 }
             );

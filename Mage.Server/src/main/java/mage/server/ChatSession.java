@@ -66,25 +66,29 @@ public class ChatSession {
     }
 
     synchronized public void  kill(UUID userId, DisconnectReason reason) {
-        if (userId != null && clients.containsKey(userId)) {            
-            String userName = clients.get(userId);
-            logger.debug(userName + " leaves chat: " + chatId);
-            clients.remove(userId);
-            String message = null;
-            switch (reason) {
-                case Disconnected:
-                    message = " has left XMage";
-                    break;
-                 case LostConnection:
-                    message = " has lost connection";
-                    break;
-                 default:
-                     logger.debug(userName + " left chat with reason: " + reason.name() + " " + chatId);
+        try {
+            if (userId != null && clients.containsKey(userId)) {
+                String userName = clients.get(userId);
+                logger.debug((userName == null ? "[null]" :userName) + " leaves chat: " + (chatId == null?"[null]":chatId));
+                clients.remove(userId);
+                String message = null;
+                switch (reason) {
+                    case Disconnected:
+                        message = " has left XMage";
+                        break;
+                     case LostConnection:
+                        message = " has lost connection";
+                        break;
+                     default:
+                         logger.debug(userName + " left chat with reason: " + reason.name() + " " + chatId);
+                }
+                if (message != null) {
+                    broadcast(null, new StringBuilder(userName).append(message).toString(), MessageColor.BLUE, true, MessageType.STATUS);
+                    logger.debug(userName + " left chat with reason: " + message + " " + chatId);
+                }
             }
-            if (message != null) {
-                broadcast(null, new StringBuilder(userName).append(message).toString(), MessageColor.BLUE, true, MessageType.STATUS);
-                logger.debug(userName + " left chat with reason: " + message + " " + chatId);
-            }
+        } catch(Exception ex) {
+            logger.fatal(ex);
         }
     }
 
