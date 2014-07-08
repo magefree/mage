@@ -32,6 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -72,8 +73,10 @@ public class JaceTheLivingGuildpact extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));
 
         // +1: Look at the top two cards of your library. Put one of them into your graveyard.
-        this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(
-                new StaticValue(2), false, new StaticValue(1), new FilterCard(), Zone.LIBRARY, true, false, false, Zone.GRAVEYARD, false), 1));
+        Effect effect = new LookLibraryAndPickControllerEffect(
+                new StaticValue(2), false, new StaticValue(1), new FilterCard(), Zone.LIBRARY, true, false, false, Zone.GRAVEYARD, false);
+        effect.setText("Look at the top two cards of your library. Put one of them into your graveyard");
+        this.addAbility(new LoyaltyAbility(effect, 1));
 
         // -3: Return another target nonland permanent to its owner's hand. 
         LoyaltyAbility ability = new LoyaltyAbility(new ReturnToHandTargetEffect(), -3);

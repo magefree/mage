@@ -25,47 +25,72 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.sets.magic2015;
 
 import java.util.UUID;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
-import mage.abilities.effects.common.continious.LoseAllAbilitiesTargetEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.FrogToken;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  *
- * @author nantuko
+ * @author LevelX2
  */
-public class TurnToFrog extends CardImpl {
+public class MilitaryIntelligence extends CardImpl {
 
-    public TurnToFrog(UUID ownerId) {
-        super(ownerId, 78, "Turn to Frog", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "M12";
+    public MilitaryIntelligence(UUID ownerId) {
+        super(ownerId, 69, "Military Intelligence", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
+        this.expansionSetCode = "M15";
 
         this.color.setBlue(true);
 
-        // Until end of turn, target creature loses all abilities and becomes a blue Frog with base power and toughness 1/1.
-        Effect effect = new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn);
-        effect.setText("Until end of turn, target creature loses all abilities");
-        this.getSpellAbility().addEffect(effect);
-        effect = new BecomesCreatureTargetEffect(new FrogToken(), null, Duration.EndOfTurn);
-        effect.setText("and becomes a blue Frog with base power and toughness 1/1");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        // Whenever you attack with two or more creatures, draw a card.
+        this.addAbility(new MilitaryIntelligenceTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public TurnToFrog(final TurnToFrog card) {
+    public MilitaryIntelligence(final MilitaryIntelligence card) {
         super(card);
     }
 
     @Override
-    public TurnToFrog copy() {
-        return new TurnToFrog(this);
+    public MilitaryIntelligence copy() {
+        return new MilitaryIntelligence(this);
+    }
+}
+
+class MilitaryIntelligenceTriggeredAbility extends TriggeredAbilityImpl {
+
+    public MilitaryIntelligenceTriggeredAbility(Effect effect) {
+        super(Zone.BATTLEFIELD, effect);
+    }
+
+    public MilitaryIntelligenceTriggeredAbility(final MilitaryIntelligenceTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public MilitaryIntelligenceTriggeredAbility copy() {
+        return new MilitaryIntelligenceTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.DECLARED_ATTACKERS) {
+            if (game.getCombat().getAttackers().size() >= 2 && game.getCombat().getAttackerId().equals(getControllerId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return new StringBuilder("Whenever you attack with two or more creatures, ").append(super.getRule()).toString() ;
     }
 }

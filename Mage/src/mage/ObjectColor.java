@@ -240,18 +240,24 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
     }
 
     public boolean contains(ObjectColor color) {
-        if (this == color)
+        if (this == color) {
             return true;
-        if (color.white & this.white)
+        }
+        if (color.white & this.white) {
             return true;
-        if (color.blue & this.blue)
+        }
+        if (color.blue & this.blue) {
             return true;
-        if (color.black & this.black)
+        }
+        if (color.black & this.black) {
             return true;
-        if (color.red & this.red)
+        }
+        if (color.red & this.red) {
             return true;
-        if (color.green & this.green)
+        }
+        if (color.green & this.green) {
             return true;
+        }
         return false;
     }
 

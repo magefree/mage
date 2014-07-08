@@ -25,20 +25,20 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.sets.magic2015;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -51,36 +51,36 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class FaerieImpostor extends CardImpl {
+public class Quickling extends CardImpl {
 
-    public FaerieImpostor(UUID ownerId) {
-        super(ownerId, 39, "Faerie Impostor", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}");
-        this.expansionSetCode = "RTR";
+    public Quickling(UUID ownerId) {
+        super(ownerId, 76, "Quickling", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        this.expansionSetCode = "M15";
         this.subtype.add("Faerie");
         this.subtype.add("Rogue");
 
         this.color.setBlue(true);
         this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+        this.toughness = new MageInt(2);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-
-        // When Faerie Impostor enters the battlefield, sacrifice it unless you return another creature you control to its owner's hand.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new FaerieImpostorEffect()));
+        // Flash
+        this.addAbility(FlashAbility.getInstance());
+        // When Quickling enters the battlefield, sacrifice it unless you return another creature you control to its owner's hand.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new QuicklingEffect()));
     }
 
-    public FaerieImpostor(final FaerieImpostor card) {
+    public Quickling(final Quickling card) {
         super(card);
     }
 
     @Override
-    public FaerieImpostor copy() {
-        return new FaerieImpostor(this);
+    public Quickling copy() {
+        return new Quickling(this);
     }
 }
-
-class FaerieImpostorEffect extends OneShotEffect {
+class QuicklingEffect extends OneShotEffect {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
     private static final String effectText = "sacrifice it unless you return another creature you control to its owner's hand";
@@ -89,12 +89,12 @@ class FaerieImpostorEffect extends OneShotEffect {
         filter.add(new AnotherPredicate());
     }
 
-    FaerieImpostorEffect ( ) {
+    QuicklingEffect ( ) {
         super(Outcome.ReturnToHand);
         staticText = effectText;
     }
 
-    FaerieImpostorEffect ( FaerieImpostorEffect effect ) {
+    QuicklingEffect ( QuicklingEffect effect ) {
         super(effect);
     }
 
@@ -124,8 +124,8 @@ class FaerieImpostorEffect extends OneShotEffect {
     }
 
     @Override
-    public FaerieImpostorEffect copy() {
-        return new FaerieImpostorEffect(this);
+    public QuicklingEffect copy() {
+        return new QuicklingEffect(this);
     }
 
 }

@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExileSourceCost;
+import mage.abilities.costs.common.ExileSourceFromGraveCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
@@ -77,7 +78,7 @@ public class SoulOfTheros extends CardImpl {
 
         // {4}{W}{W}, Exile Soul of Theros from your graveyard: Creatures you control get +2/+2 and gain first strike and lifelink until end of turn.
         ability = new SimpleActivatedAbility(Zone.GRAVEYARD, effect1, new ManaCostsImpl("{4}{W}{W}"));
-        ability.addCost(new ExileSourceCost());
+        ability.addCost(new ExileSourceFromGraveCost());
         ability.addEffect(effect2);
         ability.addEffect(effect3);
         this.addAbility(ability);

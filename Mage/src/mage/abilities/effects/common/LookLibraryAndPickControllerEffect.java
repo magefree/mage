@@ -198,6 +198,9 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         if (numberToPick.calculate(null, null) > 0) {
             

@@ -141,6 +141,9 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         Target target = mode.getTargets().get(0);
         if(target.getMaxNumberOfTargets() > 1){

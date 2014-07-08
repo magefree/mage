@@ -25,47 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.sets.magic2015;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
-import mage.abilities.effects.common.continious.LoseAllAbilitiesTargetEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.FrogToken;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
- * @author nantuko
+ * @author LevelX2
  */
-public class TurnToFrog extends CardImpl {
+public class ResearchAssistant extends CardImpl {
 
-    public TurnToFrog(UUID ownerId) {
-        super(ownerId, 78, "Turn to Frog", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "M12";
+    public ResearchAssistant(UUID ownerId) {
+        super(ownerId, 77, "Research Assistant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        this.expansionSetCode = "M15";
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
 
         this.color.setBlue(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
 
-        // Until end of turn, target creature loses all abilities and becomes a blue Frog with base power and toughness 1/1.
-        Effect effect = new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn);
-        effect.setText("Until end of turn, target creature loses all abilities");
-        this.getSpellAbility().addEffect(effect);
-        effect = new BecomesCreatureTargetEffect(new FrogToken(), null, Duration.EndOfTurn);
-        effect.setText("and becomes a blue Frog with base power and toughness 1/1");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        // {3}{U}, {T}: Draw a card, then discard a card.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new ManaCostsImpl("{3}{U}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+
     }
 
-    public TurnToFrog(final TurnToFrog card) {
+    public ResearchAssistant(final ResearchAssistant card) {
         super(card);
     }
 
     @Override
-    public TurnToFrog copy() {
-        return new TurnToFrog(this);
+    public ResearchAssistant copy() {
+        return new ResearchAssistant(this);
     }
 }

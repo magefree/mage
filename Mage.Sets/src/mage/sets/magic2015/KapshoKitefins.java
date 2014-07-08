@@ -25,47 +25,61 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.sets.magic2015;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
-import mage.abilities.effects.common.continious.LoseAllAbilitiesTargetEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.FrogToken;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author nantuko
+ * @author LevelX2
  */
-public class TurnToFrog extends CardImpl {
+public class KapshoKitefins extends CardImpl {
 
-    public TurnToFrog(UUID ownerId) {
-        super(ownerId, 78, "Turn to Frog", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "M12";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("{this} or another creature");
+    private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("creature an opponent controls");
 
-        this.color.setBlue(true);
-
-        // Until end of turn, target creature loses all abilities and becomes a blue Frog with base power and toughness 1/1.
-        Effect effect = new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn);
-        effect.setText("Until end of turn, target creature loses all abilities");
-        this.getSpellAbility().addEffect(effect);
-        effect = new BecomesCreatureTargetEffect(new FrogToken(), null, Duration.EndOfTurn);
-        effect.setText("and becomes a blue Frog with base power and toughness 1/1");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+        filterTarget.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public TurnToFrog(final TurnToFrog card) {
+    public KapshoKitefins(UUID ownerId) {
+        super(ownerId, 66, "Kapsho Kitefins", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
+        this.expansionSetCode = "M15";
+        this.subtype.add("Fish");
+
+        this.color.setBlue(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Whenever Kapsho Kitefins or another creature enters the battlefield under your control, tap target creature an opponent controls.
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new TapTargetEffect(), filter,  false);
+        ability.addTarget(new TargetCreaturePermanent(filterTarget));
+        this.addAbility(ability);
+
+    }
+
+    public KapshoKitefins(final KapshoKitefins card) {
         super(card);
     }
 
     @Override
-    public TurnToFrog copy() {
-        return new TurnToFrog(this);
+    public KapshoKitefins copy() {
+        return new KapshoKitefins(this);
     }
 }
