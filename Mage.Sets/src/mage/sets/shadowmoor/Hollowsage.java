@@ -25,76 +25,85 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.shadowmoor;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTappedAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.HeroicAbility;
+import mage.abilities.TriggeredAbility;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author LevelX2
+ * @author jeffwadsworth
  */
-public class TormentedHero extends CardImpl {
-
-    public TormentedHero(UUID ownerId) {
-        super(ownerId, 108, "Tormented Hero", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "THS";
-        this.subtype.add("Human");
-        this.subtype.add("Warior");
-
+public class Hollowsage extends CardImpl {
+    
+    public Hollowsage(UUID ownerId) {
+        super(ownerId, 69, "Hollowsage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.expansionSetCode = "SHM";
+        this.subtype.add("Merfolk");
+        this.subtype.add("Wizard");
+        
         this.color.setBlack(true);
         this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+        this.toughness = new MageInt(2);
 
-        // Tormented Hero enters the battlefield tapped.
-        this.addAbility(new EntersBattlefieldTappedAbility());
-        // Heroic - Whenever you cast a spell that targets Tormented Hero, each opponent loses 1 life. You gain life equal to the life lost this way.
-        this.addAbility(new HeroicAbility(new EachOpponentLosesYouGainSumLifeEffect()));
+        // Whenever Hollowsage becomes untapped, you may have target player discard a card.
+        TriggeredAbility ability = new BecomesUntappedTriggeredAbility(new DiscardTargetEffect(1), true);
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
+        
     }
-
-    public TormentedHero(final TormentedHero card) {
+    
+    public Hollowsage(final Hollowsage card) {
         super(card);
     }
-
+    
     @Override
-    public TormentedHero copy() {
-        return new TormentedHero(this);
+    public Hollowsage copy() {
+        return new Hollowsage(this);
     }
 }
 
-class EachOpponentLosesYouGainSumLifeEffect extends OneShotEffect {
-
-    public EachOpponentLosesYouGainSumLifeEffect() {
-        super(Outcome.Damage);
-        staticText = "Each opponent loses 1 life. You gain life equal to the life lost this way";
+class BecomesUntappedTriggeredAbility extends TriggeredAbilityImpl {
+    
+    public BecomesUntappedTriggeredAbility(Effect effect, boolean isOptional) {
+        super(Zone.BATTLEFIELD, effect, isOptional);
     }
 
-    public EachOpponentLosesYouGainSumLifeEffect(final EachOpponentLosesYouGainSumLifeEffect effect) {
-        super(effect);
+    public BecomesUntappedTriggeredAbility(Effect effect) {
+        super(Zone.BATTLEFIELD, effect);
+    }
+
+    public BecomesUntappedTriggeredAbility(final BecomesUntappedTriggeredAbility ability) {
+        super(ability);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        int lostLife = 0;
-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            lostLife += game.getPlayer(opponentId).loseLife(1, game);
+    public BecomesUntappedTriggeredAbility copy() {
+        return new BecomesUntappedTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.TAPPED && event.getTargetId().equals(sourceId)) {
+            return true;
         }
-        game.getPlayer(source.getControllerId()).gainLife(lostLife, game);
-        return true;
+        return false;
     }
 
     @Override
-    public EachOpponentLosesYouGainSumLifeEffect copy() {
-        return new EachOpponentLosesYouGainSumLifeEffect(this);
+    public String getRule() {
+        return "When {this} becomes untapped, " + super.getRule();
     }
-
 }
