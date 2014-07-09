@@ -28,38 +28,60 @@
 package mage.sets.magic2015;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continious.LoseAbilitySourceEffect;
+import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 
 import java.util.UUID;
 
 /**
  * @author noxx
  */
-public class NecromancersAssistant extends CardImpl {
+public class XathridSlyblade extends CardImpl {
 
-    public NecromancersAssistant(UUID ownerId) {
-        super(ownerId, 107, "Necromancer's Assistant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+    public XathridSlyblade(UUID ownerId) {
+        super(ownerId, 124, "Xathrid Slyblade", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "M15";
-        this.subtype.add("Zombie");
+        this.subtype.add("Human");
+        this.subtype.add("Assassin");
 
         this.color.setBlack(true);
-        this.power = new MageInt(3);
+        this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // When Necromancer's Assistant enters the battlefield, put the top three cards of your library into your graveyard.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new PutTopCardOfLibraryIntoGraveControllerEffect(3)));
+        // Hexproof
+        this.addAbility(HexproofAbility.getInstance());
+
+        // {3}{B}: Until end of turn, Xathrid Slyblade loses hexproof and gains first strike and deathtouch.
+        Effect effect = new LoseAbilitySourceEffect(HexproofAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("Until end of turn, Xathrid Slyblade loses hexproof and gains first strike and deathtouch");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{3}{B}"));
+        Effect effect2 = new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
+        effect2.setText("");
+        ability.addEffect(effect2);
+        Effect effect3 = new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn);
+        effect3.setText("");
+        ability.addEffect(effect3);
+        this.addAbility(ability);
     }
 
-    public NecromancersAssistant(final NecromancersAssistant card) {
+    public XathridSlyblade(final XathridSlyblade card) {
         super(card);
     }
 
     @Override
-    public NecromancersAssistant copy() {
-        return new NecromancersAssistant(this);
+    public XathridSlyblade copy() {
+        return new XathridSlyblade(this);
     }
 }

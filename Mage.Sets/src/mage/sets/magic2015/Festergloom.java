@@ -27,39 +27,45 @@
  */
 package mage.sets.magic2015;
 
-import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.ObjectColor;
+import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 import java.util.UUID;
 
 /**
  * @author noxx
  */
-public class NecromancersAssistant extends CardImpl {
+public class Festergloom extends CardImpl {
 
-    public NecromancersAssistant(UUID ownerId) {
-        super(ownerId, 107, "Necromancer's Assistant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "M15";
-        this.subtype.add("Zombie");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Nonblack creatures");
 
-        this.color.setBlack(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(1);
-
-        // When Necromancer's Assistant enters the battlefield, put the top three cards of your library into your graveyard.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new PutTopCardOfLibraryIntoGraveControllerEffect(3)));
+    static {
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public NecromancersAssistant(final NecromancersAssistant card) {
+    public Festergloom(UUID ownerId) {
+        super(ownerId, 97, "Festergloom", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
+        this.expansionSetCode = "M15";
+
+        this.color.setBlack(true);
+
+        // Nonblack creatures get -1/-1 until end of turn.
+        this.getSpellAbility().addEffect(new BoostAllEffect(-1, -1, Duration.EndOfTurn, filter, false));
+    }
+
+    public Festergloom(final Festergloom card) {
         super(card);
     }
 
     @Override
-    public NecromancersAssistant copy() {
-        return new NecromancersAssistant(this);
+    public Festergloom copy() {
+        return new Festergloom(this);
     }
 }
