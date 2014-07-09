@@ -25,48 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.dynamicvalue.common;
+package mage.sets.magic2015;
 
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.game.Game;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.counters.CounterType;
+import mage.filter.common.FilterCreatureCard;
 
 /**
  *
  * @author LevelX2
  */
-public class ManaSpentToCastCount  implements DynamicValue{
+public class UndergrowthScavenger extends CardImpl {
 
-    public ManaSpentToCastCount(){
+    public UndergrowthScavenger(UUID ownerId) {
+        super(ownerId, 204, "Undergrowth Scavenger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "M15";
+        this.subtype.add("Fungus");
+        this.subtype.add("Horror");
+
+        this.color.setGreen(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
+
+        // Undergrowth Scavenger enters the battlefield with a number of +1/+1 counters on it equal to the number of creature cards in all graveyards.
+        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new CardsInAllGraveyardsCount(new FilterCreatureCard()), true);
+        effect.setText("with a number of +1/+1 counters on it equal to the number of creature cards in all graveyards");
+        this.addAbility(new EntersBattlefieldAbility(effect));        
+    }
+
+    public UndergrowthScavenger(final UndergrowthScavenger card) {
+        super(card);
     }
 
     @Override
-    public int calculate(Game game, Ability source) {
-        if (!game.getStack().isEmpty()) {
-            for (StackObject stackObject : game.getStack()) {
-                if (stackObject instanceof Spell && ((Spell)stackObject).getSourceId().equals(source.getSourceId())) {
-                    return ((Spell)stackObject).getSpellAbility().getManaCostsToPay().convertedManaCost();
-                }                
-            }
-        }
-        return 0;
+    public UndergrowthScavenger copy() {
+        return new UndergrowthScavenger(this);
     }
-
-    @Override
-    public DynamicValue copy() {
-        return new ManaSpentToCastCount();
-    }
-
-    @Override
-    public String toString() {
-        return "X";
-    }
-
-    @Override
-    public String getMessage() {
-        return "the amount of mana spent to cast it";
-    }
-
 }

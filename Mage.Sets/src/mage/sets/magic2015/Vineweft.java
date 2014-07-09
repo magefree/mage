@@ -25,47 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.sets.magic2015;
 
 import java.util.UUID;
-import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
+import mage.abilities.effects.common.continious.BoostEnchantedEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class SyphonSliver extends CardImpl {
+public class Vineweft extends CardImpl {
 
-    public SyphonSliver(UUID ownerId) {
-        super(ownerId, 117, "Syphon Sliver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "M14";
-        this.subtype.add("Sliver");
+    public Vineweft(UUID ownerId) {
+        super(ownerId, 207, "Vineweft", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
+        this.expansionSetCode = "M15";
+        this.subtype.add("Aura");
 
-        this.color.setBlack(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.color.setGreen(true);
 
-        // Sliver creatures you control have lifelink.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new GainAbilityControlledEffect(LifelinkAbility.getInstance(),
-                Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver","Sliver creatures"))));
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+
+        // Enchanted creature gets +1/+1.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1,1,Duration.WhileOnBattlefield)));
+
+        // {4}{G}: Return Vineweft from your graveyard to your hand.
+        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{4}{G}")));
     }
 
-    public SyphonSliver(final SyphonSliver card) {
+    public Vineweft(final Vineweft card) {
         super(card);
     }
 
     @Override
-    public SyphonSliver copy() {
-        return new SyphonSliver(this);
+    public Vineweft copy() {
+        return new Vineweft(this);
     }
 }

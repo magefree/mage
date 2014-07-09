@@ -129,10 +129,16 @@ public class AddCountersTargetEffect extends OneShotEffect {
         } else {
             sb.append("a ");
         }
-        sb.append(counter.getName().toLowerCase()).append(" counter on target ");
+        sb.append(counter.getName().toLowerCase()).append(" counter on ");
+
+
         // TODO: add normal text infrastructure for target pointers
         if (mode.getTargets().size() > 0) {
-            sb.append(mode.getTargets().get(0).getTargetName());
+            String targetName = mode.getTargets().get(0).getTargetName();
+            if (!targetName.startsWith("another")) {
+                sb.append("target ");
+            }
+            sb.append(targetName);
         }
         if (amount.getMessage().length() > 0) {
             sb.append(" for each ").append(amount.getMessage());

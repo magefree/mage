@@ -25,48 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.dynamicvalue.common;
+package mage.sets.magic2015;
 
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.game.Game;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.keyword.DeathtouchAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class ManaSpentToCastCount  implements DynamicValue{
+public class VenomSliver extends CardImpl {
 
-    public ManaSpentToCastCount(){
+    public VenomSliver(UUID ownerId) {
+        super(ownerId, 205, "Venom Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "M15";
+        this.subtype.add("Sliver");
+
+        this.color.setGreen(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // Sliver creatures you control have deathtouch.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new GainAbilityControlledEffect(DeathtouchAbility.getInstance(),
+                Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver","Sliver creatures"))));
+    }
+
+    public VenomSliver(final VenomSliver card) {
+        super(card);
     }
 
     @Override
-    public int calculate(Game game, Ability source) {
-        if (!game.getStack().isEmpty()) {
-            for (StackObject stackObject : game.getStack()) {
-                if (stackObject instanceof Spell && ((Spell)stackObject).getSourceId().equals(source.getSourceId())) {
-                    return ((Spell)stackObject).getSpellAbility().getManaCostsToPay().convertedManaCost();
-                }                
-            }
-        }
-        return 0;
+    public VenomSliver copy() {
+        return new VenomSliver(this);
     }
-
-    @Override
-    public DynamicValue copy() {
-        return new ManaSpentToCastCount();
-    }
-
-    @Override
-    public String toString() {
-        return "X";
-    }
-
-    @Override
-    public String getMessage() {
-        return "the amount of mana spent to cast it";
-    }
-
 }

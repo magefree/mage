@@ -25,48 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.dynamicvalue.common;
+package mage.sets.magic2015;
 
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.game.Game;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
+import java.util.UUID;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.keyword.ConvokeAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterBasicLandCard;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
  * @author LevelX2
  */
-public class ManaSpentToCastCount  implements DynamicValue{
+public class NissasExpedition extends CardImpl {
 
-    public ManaSpentToCastCount(){
+    public NissasExpedition(UUID ownerId) {
+        super(ownerId, 188, "Nissa's Expedition", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");
+        this.expansionSetCode = "M15";
+
+        this.color.setGreen(true);
+
+        // Convoke
+        this.addAbility(new ConvokeAbility());
+        // Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle your library.
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0,2,new FilterBasicLandCard()), true, true));
+    }
+
+    public NissasExpedition(final NissasExpedition card) {
+        super(card);
     }
 
     @Override
-    public int calculate(Game game, Ability source) {
-        if (!game.getStack().isEmpty()) {
-            for (StackObject stackObject : game.getStack()) {
-                if (stackObject instanceof Spell && ((Spell)stackObject).getSourceId().equals(source.getSourceId())) {
-                    return ((Spell)stackObject).getSpellAbility().getManaCostsToPay().convertedManaCost();
-                }                
-            }
-        }
-        return 0;
+    public NissasExpedition copy() {
+        return new NissasExpedition(this);
     }
-
-    @Override
-    public DynamicValue copy() {
-        return new ManaSpentToCastCount();
-    }
-
-    @Override
-    public String toString() {
-        return "X";
-    }
-
-    @Override
-    public String getMessage() {
-        return "the amount of mana spent to cast it";
-    }
-
 }

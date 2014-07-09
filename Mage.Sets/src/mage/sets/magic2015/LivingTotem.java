@@ -25,48 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.dynamicvalue.common;
+package mage.sets.magic2015;
 
+import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.game.Game;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.keyword.ConvokeAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.counters.CounterType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class ManaSpentToCastCount  implements DynamicValue{
+public class LivingTotem extends CardImpl {
 
-    public ManaSpentToCastCount(){
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
+
+    static {
+        filter.add(new AnotherPredicate());
+    }
+
+    public LivingTotem(UUID ownerId) {
+        super(ownerId, 184, "Living Totem", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "M15";
+        this.subtype.add("Plant");
+        this.subtype.add("Elemental");
+
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
+
+        // Convoke
+        this.addAbility(new ConvokeAbility());
+        // When Living Totem enters the battlefield, you may put a +1/+1 counter on another target creature.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), true);
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public LivingTotem(final LivingTotem card) {
+        super(card);
     }
 
     @Override
-    public int calculate(Game game, Ability source) {
-        if (!game.getStack().isEmpty()) {
-            for (StackObject stackObject : game.getStack()) {
-                if (stackObject instanceof Spell && ((Spell)stackObject).getSourceId().equals(source.getSourceId())) {
-                    return ((Spell)stackObject).getSpellAbility().getManaCostsToPay().convertedManaCost();
-                }                
-            }
-        }
-        return 0;
+    public LivingTotem copy() {
+        return new LivingTotem(this);
     }
-
-    @Override
-    public DynamicValue copy() {
-        return new ManaSpentToCastCount();
-    }
-
-    @Override
-    public String toString() {
-        return "X";
-    }
-
-    @Override
-    public String getMessage() {
-        return "the amount of mana spent to cast it";
-    }
-
 }
