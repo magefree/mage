@@ -32,23 +32,18 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -74,13 +69,12 @@ public class BloodHost extends CardImpl {
         // {1}{B}, Sacrifice another creature: Put a +1/+1 counter on Blood Host
         Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance());
         effect.setText("Put a +1/+1 counter on {this}");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{B}"));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         // and you gain 2 life.
         effect = new GainLifeEffect(2);
         effect.setText("and you gain 2 life");
         ability.addEffect(effect);
-        ability.addCost(new GenericManaCost(1));
-        ability.addCost(new ColoredManaCost(ColoredManaSymbol.B));
         this.addAbility(ability);
     }
 
@@ -91,27 +85,5 @@ public class BloodHost extends CardImpl {
     @Override
     public BloodHost copy() {
         return new BloodHost(this);
-    }
-}
-
-class BloodHostEffect extends OneShotEffect {
-    
-    BloodHostEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Put a +1/+1 counter on {this} and you gain 2 life.";
-    }
-    
-    BloodHostEffect(final BloodHostEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public BloodHostEffect copy() {
-        return new BloodHostEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 }

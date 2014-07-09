@@ -28,64 +28,72 @@
 package mage.sets.magic2015;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author emerald000
  */
-public class CruelSadist extends CardImpl {
-
-    public CruelSadist(UUID ownerId) {
-        super(ownerId, 93, "Cruel Sadist", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "M15";
-        this.subtype.add("Human");
-        this.subtype.add("Assassin");
-
-        this.color.setBlack(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // {B}, {T}, Pay 1 life: Put a +1/+1 counter on Cruel Sadist.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ColoredManaCost(ColoredManaSymbol.B));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new PayLifeCost(1));
-        this.addAbility(ability);
-               
-        // {2}{B}, {T}, Remove X +1/+1 counters from Cruel Sadist: Cruel Sadist deals X damage to target creature.
-        Effect effect = new DamageTargetEffect(new RemovedCountersForCostValue());
-        effect.setText("{this} deals X damage to target creature");
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}{B}"));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.P1P1.createInstance()));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+public class EternalThirst extends CardImpl {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature an opponent controls");
+    static {
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public CruelSadist(final CruelSadist card) {
+    public EternalThirst(UUID ownerId) {
+        super(ownerId, 95, "Eternal Thirst", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
+        this.expansionSetCode = "M15";
+        this.subtype.add("Aura");
+
+        this.color.setBlack(true);
+
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+
+        // Enchanted creature has lifelink
+        Effect effect = new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.AURA);
+        effect.setText("Enchanted creature has lifelink");
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        // and "Whenever a creature an opponent controls dies, put a +1/+1 counter on this creature."
+        effect = new GainAbilityAttachedEffect(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true, filter), AttachmentType.AURA);
+        ability.addEffect(effect);
+        effect.setText("and \"Whenever a creature an opponent controls dies, put a +1/+1 counter on this creature.\"");
+        this.addAbility(ability);
+
+
+    }
+
+    public EternalThirst(final EternalThirst card) {
         super(card);
     }
 
     @Override
-    public CruelSadist copy() {
-        return new CruelSadist(this);
+    public EternalThirst copy() {
+        return new EternalThirst(this);
     }
 }

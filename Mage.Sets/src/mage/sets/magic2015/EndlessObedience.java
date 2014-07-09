@@ -28,23 +28,22 @@
 package mage.sets.magic2015;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.filter.common.FilterCreatureCard;
+import mage.target.common.TargetCardInGraveyard;
 
 /**
  *
  * @author emerald000
  */
-public class CovenantOfBlood extends CardImpl {
+public class EndlessObedience extends CardImpl {
 
-    public CovenantOfBlood(UUID ownerId) {
-        super(ownerId, 91, "Covenant of Blood", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{6}{B}");
+    public EndlessObedience(UUID ownerId) {
+        super(ownerId, 94, "Endless Obedience", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
         this.expansionSetCode = "M15";
 
         this.color.setBlack(true);
@@ -52,23 +51,17 @@ public class CovenantOfBlood extends CardImpl {
         // Convoke
         this.addAbility(new ConvokeAbility());
         
-        // Covenant of Blood deals 4 damage to target creature or player
-        Effect effect = new DamageTargetEffect(4);
-        effect.setText("{this} deals 4 damage to target creature or player");
-        this.getSpellAbility().addEffect(effect);
-        // and you gain 4 life.
-        effect = new GainLifeEffect(4);
-        effect.setText("and you gain 4 life");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        // Put target creature card from a graveyard onto the battlefield under your control.
+        this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
     }
 
-    public CovenantOfBlood(final CovenantOfBlood card) {
+    public EndlessObedience(final EndlessObedience card) {
         super(card);
     }
 
     @Override
-    public CovenantOfBlood copy() {
-        return new CovenantOfBlood(this);
+    public EndlessObedience copy() {
+        return new EndlessObedience(this);
     }
 }
