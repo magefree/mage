@@ -28,6 +28,7 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -88,6 +89,7 @@ class CranialExtractionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
         if (player != null && controller != null) {
             Choice cardChoice = new ChoiceImpl();
             cardChoice.setChoices(CardRepository.instance.getNonLandNames());
@@ -100,24 +102,24 @@ class CranialExtractionEffect extends OneShotEffect {
             }
 
             String cardName = cardChoice.getChoice();
-            game.informPlayers("CranialExtraction, named card: [" + cardName + "]");
+            game.informPlayers(sourceObject.getLogName() + ", named card: [" + cardName + "]");
             for (Card card: player.getGraveyard().getCards(game)) {
                 if (card.getName().equals(cardName)) {
-                    card.moveToExile(null, "", source.getId(), game);                    
+                    controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD);
                 }
             }
             for (Card card: player.getHand().getCards(game)) {
                 if (card.getName().equals(cardName)) {
-                    card.moveToExile(null, "", source.getId(), game);                    
+                    controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.HAND);
                 }
             }
             for (Card card: player.getLibrary().getCards(game)) {
                 if (card.getName().equals(cardName)) {
-                    card.moveToExile(null, "", source.getId(), game);                    
+                    controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY);
                 }
             }
-            controller.lookAtCards("CranialExtraction Hand", player.getHand(), game);
-            controller.lookAtCards("CranialExtraction Library", new CardsImpl(Zone.PICK, player.getLibrary().getCards(game)), game);
+            controller.lookAtCards(sourceObject.getLogName() + " Hand", player.getHand(), game);
+            controller.lookAtCards(sourceObject.getLogName() + " Library", new CardsImpl(Zone.PICK, player.getLibrary().getCards(game)), game);
             player.shuffleLibrary(game);
         }
         return true;
