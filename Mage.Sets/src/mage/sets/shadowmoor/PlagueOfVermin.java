@@ -49,7 +49,7 @@ import mage.players.PlayerList;
 public class PlagueOfVermin extends CardImpl {
 
     public PlagueOfVermin(UUID ownerId) {
-        super(ownerId, 73, "Plague of Vermin", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}");
+        super(ownerId, 73, "Plague of Vermin", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{B}");
         this.expansionSetCode = "SHM";
 
         this.color.setBlack(true);
