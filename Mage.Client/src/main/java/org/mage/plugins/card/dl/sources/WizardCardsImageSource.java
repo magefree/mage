@@ -69,36 +69,61 @@ public class WizardCardsImageSource implements CardImageSource {
     private Map<String, String> getSetLinks(String cardSet) {
         Map<String, String> setLinks = new HashMap<>();
         try {
-            Document doc = Jsoup.connect("http://www.wizards.com/magic/tcg/article.aspx?x=mtg/tcg/" + setsAliases.get(cardSet)).get();
-            Elements cardsImages = doc.select("img[height$=370]");
-            for (int i = 0; i < cardsImages.size(); i++) {
-                String cardName = normalizeName(cardsImages.get(i).attr("title"));
-                if (cardName != null && !cardName.isEmpty()) {
-                    if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
-                        int landNumber = 1;
-                        while (setLinks.get((cardName + landNumber).toLowerCase()) != null) {
-                            landNumber++;
+            String urlDocument;
+            if (cardSet.equals("M15")) {
+                urlDocument = "http://magic.wizards.com/en/content/magic-2015-core-set-card-set-archive-products-game-info";
+                Document doc = Jsoup.connect(urlDocument).get();
+                Elements cardsImages = doc.select("div.advanced-card img");
+                for (int i = 0; i < cardsImages.size(); i++) {
+                    String cardName = normalizeName(cardsImages.get(i).attr("alt"));
+                    if (cardName != null && !cardName.isEmpty()) {
+                        if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
+                            int landNumber = 1;
+                            while (setLinks.get((cardName + landNumber).toLowerCase()) != null) {
+                                landNumber++;
+                            }
+                            cardName += landNumber;
                         }
-                        cardName += landNumber;
+                        setLinks.put(cardName.toLowerCase(), cardsImages.get(i).attr("src"));
+                    } else {
+                        setLinks.put(Integer.toString(i), cardsImages.get(i).attr("src"));
                     }
-                    setLinks.put(cardName.toLowerCase(), cardsImages.get(i).attr("src"));
-                } else {
-                    setLinks.put(Integer.toString(i), cardsImages.get(i).attr("src"));
                 }
-            }
-
-            cardsImages = doc.select("img[height$=470]");
-            for (int i = 0; i < cardsImages.size(); i++) {
-                String cardName = normalizeName(cardsImages.get(i).attr("title"));
-
-                if (cardName != null && !cardName.isEmpty()) {
-                    String[] cardNames = cardName.replace(")", "").split(" \\(");
-                    for (String name : cardNames) {
-                        setLinks.put(name.toLowerCase(), cardsImages.get(i).attr("src"));
+                
+            } else {
+                urlDocument = "http://www.wizards.com/magic/tcg/article.aspx?x=mtg/tcg/" + setsAliases.get(cardSet);
+                Document doc = Jsoup.connect(urlDocument).get();
+                Elements cardsImages = doc.select("img[height$=370]");
+                for (int i = 0; i < cardsImages.size(); i++) {
+                    String cardName = normalizeName(cardsImages.get(i).attr("title"));
+                    if (cardName != null && !cardName.isEmpty()) {
+                        if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
+                            int landNumber = 1;
+                            while (setLinks.get((cardName + landNumber).toLowerCase()) != null) {
+                                landNumber++;
+                            }
+                            cardName += landNumber;
+                        }
+                        setLinks.put(cardName.toLowerCase(), cardsImages.get(i).attr("src"));
+                    } else {
+                        setLinks.put(Integer.toString(i), cardsImages.get(i).attr("src"));
                     }
-                } else {
-                    setLinks.put(Integer.toString(i), cardsImages.get(i).attr("src"));
                 }
+
+                cardsImages = doc.select("img[height$=470]");
+                for (int i = 0; i < cardsImages.size(); i++) {
+                    String cardName = normalizeName(cardsImages.get(i).attr("title"));
+
+                    if (cardName != null && !cardName.isEmpty()) {
+                        String[] cardNames = cardName.replace(")", "").split(" \\(");
+                        for (String name : cardNames) {
+                            setLinks.put(name.toLowerCase(), cardsImages.get(i).attr("src"));
+                        }
+                    } else {
+                        setLinks.put(Integer.toString(i), cardsImages.get(i).attr("src"));
+                    }
+                }
+                
             }
         } catch (IOException ex) {
             System.out.println("Exception when parsing the wizards page: " + ex.getMessage());
