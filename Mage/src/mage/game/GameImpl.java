@@ -943,17 +943,19 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public synchronized void quit(UUID playerId) {
+        logger.debug("GameImpl.quit start " + playerId);
         if (state != null) {
             Player player = state.getPlayer(playerId);
             if (player != null) {
-                logger.debug("gameImpl.quit" + player.getName() + " quits the game");
+                logger.debug("GameImpl.quit " + player.getName() + " quits the game");
                 player.quit(this);
             }else {
-                logger.error(new StringBuilder("gameImpl.quit - player not found - playerId: ").append(playerId));
+                logger.error(new StringBuilder("GameImpl.quit - player not found - playerId: ").append(playerId));
             }
         } else {
-            logger.error(new StringBuilder("gameImpl.quit - state not found - playerId: ").append(playerId));
+            logger.error(new StringBuilder("GameImpl.quit - state not found - playerId: ").append(playerId));
         }
+        logger.debug("GameImpl.quit end " + playerId);
     }
 
     @Override

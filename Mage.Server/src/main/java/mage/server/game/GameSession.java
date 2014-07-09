@@ -56,12 +56,15 @@ import mage.view.GameClientMessage;
 import mage.view.GameView;
 import mage.view.LookedAtView;
 import mage.view.SimpleCardsView;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class GameSession extends GameWatcher {
+
+    private static final Logger logger = Logger.getLogger(GameSession.class);
 
     private final UUID playerId;
     private final boolean useTimeout;
@@ -277,7 +280,10 @@ public class GameSession extends GameWatcher {
 
     public void kill() {
         if (game != null) {
+            logger.debug("GameSession.kill before player quit for game");
             game.quit(playerId);
+        } else {
+            logger.error("GameSession.kill game object missing   playerId: " + (playerId == null ? "[null]":playerId));
         }
     }
 

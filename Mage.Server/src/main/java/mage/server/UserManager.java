@@ -182,7 +182,7 @@ public class UserManager {
     }
 
     public void handleException(Exception ex) {
-        if (!ex.getMessage().equals("No message")) {
+        if (ex != null && !ex.getMessage().equals("No message")) {
             logger.fatal("", ex);            
         }
     }
