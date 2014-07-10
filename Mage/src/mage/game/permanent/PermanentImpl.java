@@ -92,7 +92,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected int minBlockedBy = 1;
     // maximal number of creatures the creature can be blocked by  0 = no restriction
     protected int maxBlockedBy = 0;
-    protected boolean loyaltyUsed;
     protected boolean deathtouched;
     protected List<UUID> attachments = new ArrayList<>();
     protected Map<String, List<UUID>> connectedCards = new HashMap<>();
@@ -100,6 +99,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected UUID attachedTo;
     protected UUID pairedCard;
     protected List<Counter> markedDamage;
+    protected int timesLoyaltyUsed = 0;
 
     private static final List<UUID> emptyList = Collections.unmodifiableList(new ArrayList<UUID>());
 
@@ -128,7 +128,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.attacking = permanent.attacking;
         this.blocking = permanent.blocking;
         this.maxBlocks = permanent.maxBlocks;
-        this.loyaltyUsed = permanent.loyaltyUsed;
         this.deathtouched = permanent.deathtouched;
         this.attachments.addAll(permanent.attachments);
         for (Map.Entry<String, List<UUID>> entry: permanent.connectedCards.entrySet()) {
@@ -149,6 +148,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.transformed = permanent.transformed;
         this.monstrous = permanent.monstrous;
         this.pairedCard = permanent.pairedCard;
+        this.timesLoyaltyUsed = permanent.timesLoyaltyUsed;
     }
 
     @Override
@@ -276,7 +276,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void endOfTurn(Game game) {
         this.damage = 0;
-        this.loyaltyUsed = false;
+        this.timesLoyaltyUsed = 0;
         this.turnsOnBattlefield++;
         this.deathtouched = false;
         dealtDamageByThisTurn = null;
@@ -286,14 +286,19 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public void setLoyaltyUsed(boolean used) {
-        this.loyaltyUsed = used;
+    public void addLoyaltyUsed() {
+        this.timesLoyaltyUsed++;
     }
 
     @Override
-    public boolean isLoyaltyUsed() {
-        return this.loyaltyUsed;
+    public boolean canLoyaltyBeUsed(Game game) {
+        Player controller = game.getPlayer(controllerId);
+        if (controller != null) {
+            return controller.getLoyaltyUsePerTurn() > timesLoyaltyUsed;
+        }
+        return false;
     }
+
 
     @Override
     public boolean isTapped() {
