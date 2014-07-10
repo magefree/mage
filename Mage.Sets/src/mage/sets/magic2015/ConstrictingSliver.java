@@ -31,7 +31,7 @@ import java.util.LinkedList;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -80,21 +80,13 @@ public class ConstrictingSliver extends CardImpl {
 
         // Sliver creatures you control have "When this creature enters the battlefield, you may exile target creature an opponent controls 
         // until this creature leaves the battlefield."
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect(), true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ConstrictingSliverExileEffect(), true);
         ability.addTarget(new TargetCreaturePermanent(filterTarget));
+        ability.addEffect(new ConstrictingSliverAddDelayedReturnEffect());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability,
                 Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Sliver","Sliver creatures"),
                 "Sliver creatures you control have \"When this creature enters the battlefield, you may exile target creature an opponent controls until this creature leaves the battlefield.\"")));
-        // Implemented as triggered effect that doesn't uses the stack (implementation with watcher does not work correctly because if the returned creature
-        // has a DiesTriggeredAll ability it triggers for the battlefield leaving itself, what shouldn't happen)
-        // TODO: This has probably a problem if this leaves battlefield while other slivers have exiled creatures, they won't probably return but should I guess.
-        // so it should better be a kind of Exile effect with a duration
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new GainAbilityAllEffect(new ConstrictingSliverReturnExiledCreatureAbility(),
-                Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Sliver","Sliver creatures"),""));
-        this.addAbility(ability);
-
 
     }
 
@@ -135,16 +127,44 @@ class ConstrictingSliverExileEffect extends OneShotEffect {
         return false;
     }
 }
+
+class ConstrictingSliverAddDelayedReturnEffect extends OneShotEffect {
+
+    public ConstrictingSliverAddDelayedReturnEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "";
+    }
+
+    public ConstrictingSliverAddDelayedReturnEffect(final ConstrictingSliverAddDelayedReturnEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ConstrictingSliverAddDelayedReturnEffect copy() {
+        return new ConstrictingSliverAddDelayedReturnEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        DelayedTriggeredAbility delayedAbility = new ConstrictingSliverReturnExiledCreatureAbility();
+        delayedAbility.setSourceId(source.getSourceId());
+        delayedAbility.setControllerId(source.getControllerId());
+        game.addDelayedTriggeredAbility(delayedAbility);
+        return true;
+    }
+}
+
+
 /**
  * Returns the exiled card as creature leaves battlefield
  * Uses no stack
  * @author LevelX2
  */
 
-class ConstrictingSliverReturnExiledCreatureAbility extends TriggeredAbilityImpl {
+class ConstrictingSliverReturnExiledCreatureAbility extends DelayedTriggeredAbility {
 
     public ConstrictingSliverReturnExiledCreatureAbility() {
-        super(Zone.BATTLEFIELD, new ConstrictingSliverReturnExiledCreatureEffect());
+        super(new ConstrictingSliverReturnExiledCreatureEffect(), Duration.OneUse);
         this.usesStack = false;
         this.setRuleVisible(false);
     }
