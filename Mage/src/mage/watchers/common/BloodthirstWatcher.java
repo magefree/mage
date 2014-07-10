@@ -51,8 +51,9 @@ public class BloodthirstWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (condition == true) //no need to check - condition has already occured
+        if (condition == true) { //no need to check - condition has already occured
             return;
+        }
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
             DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
             if (game.getPlayer(this.getControllerId()).hasOpponent(damageEvent.getPlayerId(), game)) {

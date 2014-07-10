@@ -41,7 +41,7 @@ import java.util.UUID;
  */
 public class AttackedThisTurnWatcher extends Watcher {
 
-    public Set<UUID> attackedThisTurnCreatures = new HashSet<UUID>();
+    public Set<UUID> attackedThisTurnCreatures = new HashSet<>();
 
     public AttackedThisTurnWatcher() {
         super("AttackedThisTurn", WatcherScope.GAME);
