@@ -60,19 +60,19 @@ public class PayLoyaltyCost extends CostImpl {
     @Override
     public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
         Permanent planeswalker = game.getPermanent(sourceId);
-        return planeswalker.getCounters().getCount(CounterType.LOYALTY) + amount >= 0 && !planeswalker.isLoyaltyUsed();
+        return planeswalker.getCounters().getCount(CounterType.LOYALTY) + amount >= 0 && planeswalker.canLoyaltyBeUsed(game);
     }
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         Permanent planeswalker = game.getPermanent(sourceId);
-        if (planeswalker.getCounters().getCount(CounterType.LOYALTY) + amount >= 0 && !planeswalker.isLoyaltyUsed()) {
+        if (planeswalker.getCounters().getCount(CounterType.LOYALTY) + amount >= 0 && planeswalker.canLoyaltyBeUsed(game)) {
             if (amount > 0) {
                 planeswalker.getCounters().addCounter(CounterType.LOYALTY.createInstance(amount));
             } else if (amount < 0) {
                 planeswalker.getCounters().removeCounter(CounterType.LOYALTY, Math.abs(amount));
             }
-            planeswalker.setLoyaltyUsed(true);
+            planeswalker.addLoyaltyUsed();
             this.paid = true;
         }
         return paid;

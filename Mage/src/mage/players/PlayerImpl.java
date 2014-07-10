@@ -142,6 +142,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected Counters counters;
     protected int landsPlayed;
     protected int landsPerTurn = 1;
+    protected int loyaltyUsePerTurn = 1;
     protected int maxHandSize = 7;
     protected int maxAttackedBy = Integer.MAX_VALUE;
     protected ManaPool manaPool;
@@ -230,6 +231,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         this.landsPlayed = player.landsPlayed;
         this.landsPerTurn = player.landsPerTurn;
+        this.loyaltyUsePerTurn = player.loyaltyUsePerTurn;
         this.maxHandSize = player.maxHandSize;
         this.maxAttackedBy = player.maxAttackedBy;
         this.manaPool = player.manaPool.copy();
@@ -287,6 +289,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         this.landsPlayed = player.getLandsPlayed();
         this.landsPerTurn = player.getLandsPerTurn();
+        this.loyaltyUsePerTurn = player.getLoyaltyUsePerTurn();
         this.maxHandSize = player.getMaxHandSize();
         this.maxAttackedBy = player.getMaxAttackedBy();
         this.manaPool = player.getManaPool().copy();
@@ -377,6 +380,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public void reset() {
         this.abilities.clear();
         this.landsPerTurn = 1;
+        this.loyaltyUsePerTurn = 1;
         this.maxHandSize = 7;
         this.maxAttackedBy = Integer.MAX_VALUE;
         this.canGainLife = true;
@@ -1455,6 +1459,16 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void setLandsPerTurn(int landsPerTurn) {
         this.landsPerTurn = landsPerTurn;
+    }
+
+    @Override
+    public int getLoyaltyUsePerTurn() {
+        return this.loyaltyUsePerTurn;
+    }
+
+    @Override
+    public void setLoyaltyUsePerTurn(int loyaltyUsePerTurn) {
+        this.loyaltyUsePerTurn = loyaltyUsePerTurn;
     }
 
     @Override

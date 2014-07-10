@@ -119,6 +119,8 @@ public interface Player extends MageItem, Copyable<Player> {
     int getLandsPlayed();
     int getLandsPerTurn();
     void setLandsPerTurn(int landsPerTurn);
+    int getLoyaltyUsePerTurn();
+    void setLoyaltyUsePerTurn(int loyaltyUsePerTurn);
     int getMaxHandSize();
     void setMaxHandSize(int maxHandSize);
     int getMaxAttackedBy();
