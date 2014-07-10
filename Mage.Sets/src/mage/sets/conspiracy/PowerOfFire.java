@@ -25,14 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.sets.conspiracy;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
@@ -50,13 +49,13 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author jeffwadsworth
  */
-public class BurningAnger extends CardImpl {
+public class PowerOfFire extends CardImpl {
 
-    public BurningAnger(UUID ownerId) {
-        super(ownerId, 133, "Burning Anger", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
-        this.expansionSetCode = "M15";
+    public PowerOfFire(UUID ownerId) {
+        super(ownerId, 150, "Power of Fire", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
+        this.expansionSetCode = "CNS";
         this.subtype.add("Aura");
 
         this.color.setRed(true);
@@ -67,20 +66,22 @@ public class BurningAnger extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-
-        // Enchanted creature has "{T}: This creature deals damage equal to its power to target creature or player."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new SourcePermanentPowerCount()), new TapSourceCost());
+        
+        // Enchanted creature has "{tap}: This creature deals 1 damage to target creature or player."
+        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         gainedAbility.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield,
-                "Enchanted creature has \"{T}: This creature deals damage equal to its power to target creature or player.\"")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, 
+        "Enchanted creature has \"{T}: This creature deals 1 damage to target creature or player.\"")));
+        
     }
 
-    public BurningAnger(final BurningAnger card) {
+    public PowerOfFire(final PowerOfFire card) {
         super(card);
     }
 
     @Override
-    public BurningAnger copy() {
-        return new BurningAnger(this);
+    public PowerOfFire copy() {
+        return new PowerOfFire(this);
     }
 }
+
