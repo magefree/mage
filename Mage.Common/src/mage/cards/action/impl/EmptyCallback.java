@@ -41,4 +41,8 @@ public class EmptyCallback implements ActionCallback {
     public void mousePressed(MouseEvent e, TransferData data) {
     }
 
+    @Override
+    public void mouseReleased(MouseEvent e, TransferData data) {
+    }
+
 }

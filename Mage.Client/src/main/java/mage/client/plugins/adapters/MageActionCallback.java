@@ -1,23 +1,5 @@
 package mage.client.plugins.adapters;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
-import java.awt.image.BufferedImage;
-import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
-import javax.swing.JComponent;
-import javax.swing.JPopupMenu;
-import javax.swing.Popup;
-import javax.swing.PopupFactory;
-import javax.swing.SwingUtilities;
 import mage.cards.MageCard;
 import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
@@ -44,6 +26,18 @@ import mage.view.SimpleCardsView;
 import org.apache.log4j.Logger;
 import org.jdesktop.swingx.JXPanel;
 import org.mage.plugins.card.images.ImageCache;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
+import java.awt.image.BufferedImage;
+import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Class that handles the callbacks from the card panels to mage to display big card
@@ -98,6 +92,13 @@ public class MageActionCallback implements ActionCallback {
 
     @Override
     public void mousePressed(MouseEvent e, TransferData data) {
+        data.component.requestFocusInWindow();
+        // Closes popup & enlarged view if a card/Permanent is selected
+        hidePopup();
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e, TransferData data) {
         data.component.requestFocusInWindow();
         defaultCallback.mouseClicked(e, data.gameId, session, data.card);
         // Closes popup & enlarged view if a card/Permanent is selected
