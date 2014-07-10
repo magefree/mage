@@ -54,7 +54,11 @@ public class AttackedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public AttackedByCreatureTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
-        super(Zone.BATTLEFIELD, effect, optional);
+        this(Zone.BATTLEFIELD, effect, optional, setTargetPointer);
+    }
+    
+    public AttackedByCreatureTriggeredAbility(Zone zone, Effect effect, boolean optional, boolean setTargetPointer) {
+        super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
     }
 

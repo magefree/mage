@@ -109,7 +109,7 @@ class TheChainVeilTriggeredEffect extends OneShotEffect {
         if (controller != null) {
             ActivatedLoyaltyAbilityWatcher watcher = (ActivatedLoyaltyAbilityWatcher) game.getState().getWatchers().get("ActivatedLoyaltyAbilityWatcher");
             if (watcher != null) {
-                if (!watcher.activatedLayaltyAbility(source.getSourceId())) {
+                if (!watcher.activatedLayaltyAbility(source.getControllerId())) {
                     controller.loseLife(2, game);
                 }
             }
@@ -136,7 +136,9 @@ class ActivatedLoyaltyAbilityWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
        if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY ) {
            StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
-           if (stackObject instanceof LoyaltyAbility) {
+           if (stackObject != null &&
+                   stackObject.getStackAbility() != null &&
+                   stackObject.getStackAbility() instanceof LoyaltyAbility) {
                playerIds.add(stackObject.getControllerId());
            }
        }
