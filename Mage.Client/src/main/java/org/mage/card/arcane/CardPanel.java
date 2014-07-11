@@ -106,6 +106,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     private boolean displayTitleAnyway;
 
+    private JPanel cardArea;
+
     public CardPanel(CardView newGameCard, UUID gameId, final boolean loadImage, ActionCallback callback, final boolean foil, Dimension dimension) {
         this.gameCard = newGameCard;
         this.callback = callback;
@@ -152,7 +154,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         }
 
         if (this.gameCard.isToken()) {
-        // token icon
+            // token icon
             iconPanel = new JPanel();
             iconPanel.setLayout(null);
             iconPanel.setOpaque(false);
@@ -354,6 +356,11 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         repaint();
     }
 
+    @Override
+    public void setCardAreaRef(JPanel cardArea) {
+        this.cardArea = cardArea;
+    }
+
     public boolean getSelected() {
         return this.isSelected;
     }
@@ -516,20 +523,35 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     }
 
     @Override
-    public final void setCardBounds(int x, int y, int width, int height) {
-        cardWidth = width;
-        cardHeight = height;
-        int rotCenterX = Math.round(width / 2f);
-        int rotCenterY = height - rotCenterX;
-        int rotCenterToTopCorner = Math.round(width * CardPanel.ROT_CENTER_TO_TOP_CORNER);
-        int rotCenterToBottomCorner = Math.round(width * CardPanel.ROT_CENTER_TO_BOTTOM_CORNER);
-        int xOffset = rotCenterX - rotCenterToBottomCorner;
-        int yOffset = rotCenterY - rotCenterToTopCorner;
+    public final void setCardBounds(int x, int y, int cardWidth, int cardHeight) {
+        this.cardWidth = cardWidth;
+        this.cardHeight = cardHeight;
+        int rotCenterX = Math.round(cardWidth / 2f);
+        int rotCenterY = cardHeight - rotCenterX;
+        int rotCenterToTopCorner = Math.round(cardWidth * CardPanel.ROT_CENTER_TO_TOP_CORNER);
+        int rotCenterToBottomCorner = Math.round(cardWidth * CardPanel.ROT_CENTER_TO_BOTTOM_CORNER);
+        int xOffset = getXOffset(cardWidth);
+        int yOffset = getYOffset(cardWidth, cardHeight);
         cardXOffset = -xOffset;
         cardYOffset = -yOffset;
-        width = -xOffset + rotCenterX + rotCenterToTopCorner;
-        height = -yOffset + rotCenterY + rotCenterToBottomCorner;
+        int width = -xOffset + rotCenterX + rotCenterToTopCorner;
+        int height = -yOffset + rotCenterY + rotCenterToBottomCorner;
         setBounds(x + xOffset, y + yOffset, width, height);
+    }
+
+    public int getXOffset(int cardWidth) {
+        int rotCenterX = Math.round(cardWidth / 2f);
+        int rotCenterToBottomCorner = Math.round(cardWidth * CardPanel.ROT_CENTER_TO_BOTTOM_CORNER);
+        int xOffset = rotCenterX - rotCenterToBottomCorner;
+        return xOffset;
+    }
+
+    public int getYOffset(int cardWidth, int cardHeight) {
+        int rotCenterX = Math.round(cardWidth / 2f);
+        int rotCenterY = cardHeight - rotCenterX;
+        int rotCenterToTopCorner = Math.round(cardWidth * CardPanel.ROT_CENTER_TO_TOP_CORNER);
+        int yOffset = rotCenterY - rotCenterToTopCorner;
+        return yOffset;
     }
 
     public int getCardX() {
@@ -777,6 +799,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     public void mouseDragged(MouseEvent e) {
+        data.component = this;
+        callback.mouseDragged(e, data);
     }
 
     @Override
@@ -834,11 +858,6 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         data.gameId = this.gameId;
         data.popupOffsetX = isTapped() ? cardHeight + cardXOffset + POPUP_X_GAP : cardWidth + cardXOffset + POPUP_X_GAP;
         data.popupOffsetY = 40;
-        if (this.isShowing()) {
-            data.locationOnScreen = this.getLocationOnScreen();
-        } else {
-
-        }
         return data;
     }
 
@@ -965,4 +984,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         callback.mouseWheelMoved(e, data);
     }
 
+    public JPanel getCardArea() {
+        return cardArea;
+    }
 }

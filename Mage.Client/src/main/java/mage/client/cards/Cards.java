@@ -39,14 +39,14 @@ import mage.client.plugins.impl.Plugins;
 import mage.client.util.CardsViewUtil;
 import mage.client.util.Config;
 import mage.view.*;
+import org.apache.log4j.Logger;
+import org.mage.card.arcane.CardPanel;
 
 import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.*;
 import java.util.Map.Entry;
-import mage.cards.action.ActionCallback;
-import mage.client.plugins.adapters.MageActionCallback;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -60,6 +60,8 @@ public class Cards extends javax.swing.JPanel {
     private boolean dontDisplayTapped = false;
     private static final int GAP_X = 5;
     private String zone;
+
+    private static final Border emptyBorder = new EmptyBorder(0,0,0,0);
 
     /**
      * Defines whether component should be visible whenever there is no objects within.
@@ -82,18 +84,15 @@ public class Cards extends javax.swing.JPanel {
         if (!skipAddingScrollPane) {
             jScrollPane1.setOpaque(false);
             jScrollPane1.getViewport().setOpaque(false);
+            jScrollPane1.setBorder(emptyBorder);
         }
         if (Plugins.getInstance().isCardPluginLoaded()) {
             cardArea.setLayout(null);
         }
+        cardArea.setBorder(emptyBorder);
     }
 
-    public void cleanUp() {
-//        ActionCallback actionCallback = Plugins.getInstance().getActionCallback();
-//        if (actionCallback instanceof MageActionCallback) {
-//            ((MageActionCallback) actionCallback).setCardPreviewComponent(null);
-//        }
-    }
+    public void cleanUp() {}
 
     /**
      * Sets components background color
@@ -182,12 +181,13 @@ public class Cards extends javax.swing.JPanel {
         }
 
         if (changed) {
-            layoutCards(getCardDimension(), cards, order);
+            layoutCards();
         }
 
         if (!isVisibleIfEmpty) {
             cardArea.setVisible(cards.size() > 0);
         }
+
         sizeCards(getCardDimension());
         this.revalidate();
         this.repaint();
@@ -196,13 +196,13 @@ public class Cards extends javax.swing.JPanel {
     }
 
     public void sizeCards(Dimension cardDimension) {
-        cardArea.setPreferredSize(new Dimension((int)(cards.size() * (cardDimension.getWidth() + GAP_X)) + 5, (int)(cardDimension.getHeight()) + 20));
+        cardArea.setPreferredSize(new Dimension((int)((cards.size()) * (cardDimension.getWidth() + GAP_X)) + 20, (int)(cardDimension.getHeight()) + 20));
         cardArea.revalidate();
         cardArea.repaint();
     }
 
     private Dimension getCardDimension() {
-           if (cardDimension == null) {
+        if (cardDimension == null) {
             cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
         }
         return cardDimension;
@@ -215,6 +215,19 @@ public class Cards extends javax.swing.JPanel {
         }
         cards.put(card.getId(), cardImg);
         cardArea.add(cardImg);
+        definePosition(cardImg);
+        cardImg.setCardAreaRef(cardArea);
+    }
+
+    private void definePosition(MageCard card) {
+        int dx = 0;
+        for (Component comp: cardArea.getComponents()) {
+            if (!comp.equals(card)) {
+                dx = Math.max(dx, (int)comp.getLocation().getX());
+            }
+        }
+        dx += ((CardPanel)card).getCardWidth() + GAP_X;
+        card.setLocation(dx, (int)card.getLocation().getY());
     }
 
     private void removeCard(UUID cardId) {
@@ -232,35 +245,7 @@ public class Cards extends javax.swing.JPanel {
     }
 
     private int countCards() {
-        int count = 0;
-        for (Component comp: cardArea.getComponents()) {
-            count++;
-        }
-        return count;
-    }
-
-    private void layoutCards(Dimension dimension, Map<UUID, MageCard> cards, java.util.List<UUID> order) {
-        if (Plugins.getInstance().isCardPluginLoaded()) {
-            int dx = GAP_X;
-            if (order != null) {
-                for (UUID cardId : order) {
-                    MageCard card = cards.get(cardId);
-                    if (card != null) {
-                        card.setLocation(dx, 0);
-                        card.setCardBounds(dx, 0, dimension.width, dimension.height);
-                        dx += dimension.width + GAP_X;
-                    } else {
-                        System.err.println("[ERROR] Cards.java: couldn't find a card from ordered list!");
-                    }
-                }
-            } else {
-                for (MageCard card: cards.values()) {
-                    card.setLocation(dx, 0);
-                    card.setCardBounds(dx, 0, dimension.width, dimension.height);
-                    dx += dimension.width + GAP_X;
-                }
-            }
-        }
+        return cardArea.getComponentCount();
     }
 
     /** This method is called from within the constructor to
@@ -311,7 +296,29 @@ public class Cards extends javax.swing.JPanel {
 
     public void setCardDimension(Dimension dimension) {
         this.cardDimension = dimension;
-        layoutCards(cardDimension, cards, null);
+        layoutCards();
+    }
+
+    private void layoutCards() {
+        java.util.List<CardPanel> cards = new ArrayList();
+
+        for (Component component : cardArea.getComponents()) {
+            if (component instanceof CardPanel) {
+                cards.add((CardPanel)component);
+            }
+        }
+        Collections.sort(cards, new Comparator<CardPanel>() {
+            @Override
+            public int compare(CardPanel cp1, CardPanel cp2) {
+                return Integer.valueOf(cp1.getLocation().x).compareTo(Integer.valueOf(cp2.getLocation().x));
+            }
+        });
+
+        int dx = 0;
+        for (Component component : cards) {
+            component.setLocation(dx, component.getLocation().y);
+            dx += ((CardPanel) component).getCardWidth() + GAP_X;
+        }
     }
 
     public void setZone(String zone) {
