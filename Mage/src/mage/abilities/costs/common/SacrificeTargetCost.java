@@ -34,7 +34,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
@@ -72,7 +71,7 @@ public class SacrificeTargetCost extends CostImpl {
                     return false;
                 }
                 permanents.add(permanent.copy());
-                paid |= game.getPlayer(ability.getControllerId()).moveCardToGraveyardWithInfo(permanent, sourceId, game, Zone.BATTLEFIELD);
+                paid |= permanent.sacrifice(sourceId, game);
             }
             if (!paid && targets.get(0).getNumberOfTargets() == 0) {
                 paid = true; // e.g. for Devouring Rage
