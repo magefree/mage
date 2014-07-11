@@ -864,6 +864,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         data.card = this.gameCard;
         data.popupText = popupText;
         data.gameId = this.gameId;
+        data.locationOnScreen = data.component.getLocationOnScreen(); // we need this for popup
         data.popupOffsetX = isTapped() ? cardHeight + cardXOffset + POPUP_X_GAP : cardWidth + cardXOffset + POPUP_X_GAP;
         data.popupOffsetY = 40;
         return data;
