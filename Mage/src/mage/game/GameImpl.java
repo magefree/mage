@@ -28,23 +28,6 @@
 
 package mage.game;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Random;
-import java.util.Set;
-import java.util.Stack;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -68,13 +51,7 @@ import mage.cards.CardsImpl;
 import mage.cards.SplitCard;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.MultiplayerAttackOption;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.RangeOfInfluence;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
@@ -89,14 +66,8 @@ import mage.game.combat.Combat;
 import mage.game.command.CommandObject;
 import mage.game.command.Commander;
 import mage.game.command.Emblem;
-import mage.game.events.DamageEvent;
-import mage.game.events.GameEvent;
-import mage.game.events.Listener;
-import mage.game.events.PlayerQueryEvent;
-import mage.game.events.PlayerQueryEventSource;
-import mage.game.events.TableEvent;
+import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
-import mage.game.events.TableEventSource;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -114,13 +85,13 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.util.functions.ApplyToPermanent;
-import mage.watchers.common.CastSpellLastTurnWatcher;
-import mage.watchers.common.MiracleWatcher;
-import mage.watchers.common.MorbidWatcher;
-import mage.watchers.common.PlayerDamagedBySourceWatcher;
-import mage.watchers.common.PlayerLostLifeWatcher;
-import mage.watchers.common.SoulbondWatcher;
+import mage.watchers.common.*;
 import org.apache.log4j.Logger;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
 
 public abstract class GameImpl implements Game, Serializable {
 
@@ -1846,7 +1817,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public boolean canPlaySorcery(UUID playerId) {
-        return getActivePlayerId().equals(playerId) && getStack().isEmpty() && isMainPhase();
+        return isMainPhase() && getActivePlayerId().equals(playerId) && getStack().isEmpty();
     }
 
     /**

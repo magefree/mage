@@ -28,17 +28,6 @@
 
 package mage.server.game;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 import mage.cards.Cards;
 import mage.constants.ManaType;
 import mage.game.Game;
@@ -50,13 +39,15 @@ import mage.server.User;
 import mage.server.UserManager;
 import mage.server.util.ConfigSettings;
 import mage.server.util.ThreadExecutor;
-import mage.view.AbilityPickerView;
-import mage.view.CardsView;
-import mage.view.GameClientMessage;
-import mage.view.GameView;
-import mage.view.LookedAtView;
-import mage.view.SimpleCardsView;
+import mage.view.*;
 import org.apache.log4j.Logger;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -245,15 +236,9 @@ public class GameSession extends GameWatcher {
         player.setUserData(this.userData);
         GameView gameView = new GameView(game.getState(), game, playerId);
         gameView.setHand(new SimpleCardsView(player.getHand().getCards(game)));
+        gameView.setCanPlayInHand(player.getPlayableInHand(game));
 
-        if (player.getPlayersUnderYourControl().size() > 0) {
-            Map<String, SimpleCardsView> handCards = new HashMap<>();
-            for (UUID controlledPlayerId : player.getPlayersUnderYourControl()) {
-                Player opponent = game.getPlayer(controlledPlayerId);
-                handCards.put(opponent.getName(), new SimpleCardsView(opponent.getHand().getCards(game)));
-            }
-            gameView.setOpponentHands(handCards);
-        }
+        processControlledPlayers(player, gameView);
 
         //TODO: should player who controls another player's turn be able to look at all these cards?
 
@@ -265,6 +250,17 @@ public class GameSession extends GameWatcher {
         game.getState().clearLookedAt(playerId);
 
         return gameView;
+    }
+
+    private void processControlledPlayers(Player player, GameView gameView) {
+        if (player.getPlayersUnderYourControl().size() > 0) {
+            Map<String, SimpleCardsView> handCards = new HashMap<>();
+            for (UUID controlledPlayerId : player.getPlayersUnderYourControl()) {
+                Player opponent = game.getPlayer(controlledPlayerId);
+                handCards.put(opponent.getName(), new SimpleCardsView(opponent.getHand().getCards(game)));
+            }
+            gameView.setOpponentHands(handCards);
+        }
     }
 
     public void removeGame() {

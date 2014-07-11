@@ -80,6 +80,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     public  int cardXOffset, cardYOffset, cardWidth, cardHeight;
 
     private boolean isSelected;
+    private boolean isPlayable;
     private boolean showCastingCost;
     private boolean hasImage = false;
     private float alpha = 1.0f;
@@ -420,6 +421,11 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             g2d.fillRoundRect(cardXOffset + 1, cardYOffset + 1, cardWidth - 2, cardHeight - 2, cornerSize, cornerSize);
         }
 
+        if (isPlayable) {
+            g2d.setColor(new Color(250, 250, 0, 200));
+            g2d.fillRoundRect(cardXOffset + 1, cardYOffset + 1, cardWidth - 2, cardHeight - 2, cornerSize, cornerSize);
+        }
+
         //TODO:uncomment
         /*
                   if (gameCard.isAttacking()) {
@@ -707,6 +713,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             ptText.setText("");
         }
         setText(card);
+
+        this.isPlayable = card.isPlayable();
 
         boolean updateImage = !gameCard.getName().equals(card.getName()) || gameCard.isFaceDown() != card.isFaceDown(); // update after e.g. turning a night/day card
         this.gameCard = card;

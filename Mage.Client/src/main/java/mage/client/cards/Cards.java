@@ -310,7 +310,7 @@ public class Cards extends javax.swing.JPanel {
         Collections.sort(cards, new Comparator<CardPanel>() {
             @Override
             public int compare(CardPanel cp1, CardPanel cp2) {
-                return Integer.valueOf(cp1.getLocation().x).compareTo(Integer.valueOf(cp2.getLocation().x));
+                return Integer.valueOf(cp1.getLocation().x).compareTo(cp2.getLocation().x);
             }
         });
 
