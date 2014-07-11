@@ -34,6 +34,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
@@ -71,7 +72,7 @@ public class ExileTargetCost extends CostImpl {
                     return false;
                 }
                 permanents.add(permanent.copy());
-                paid |= permanent.moveToExile(null, null, sourceId, game);
+                paid |= game.getPlayer(ability.getControllerId()).moveCardToExileWithInfo(permanent, null, null, sourceId, game, Zone.BATTLEFIELD);
             }
             if (!paid && targets.get(0).getNumberOfTargets() == 0) {
                 paid = true;
