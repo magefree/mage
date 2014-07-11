@@ -47,6 +47,8 @@ public class CardPluginImpl implements CardPlugin {
 
     private static final Logger log = Logger.getLogger(CardPluginImpl.class);
 
+    private static final int ATTACHMENT_DY_OFFSET = 10;
+
     private static final int GUTTER_Y = 15;
     private static final int GUTTER_X = 5;
     static final float EXTRA_CARD_SPACING_X = 0.04f;
@@ -373,6 +375,9 @@ public class CardPluginImpl implements CardPlugin {
                 }
                 Stack stack = new Stack();
                 stack.add(panel);
+                if (panel.getOriginalPermanent().getAttachments() != null) {
+                    stack.setMaxAttachedCount(panel.getOriginalPermanent().getAttachments().size());
+                }
                 add(stack);
             }
         }
@@ -410,6 +415,11 @@ public class CardPluginImpl implements CardPlugin {
     private class Stack extends ArrayList<MagePermanent> {
         private static final long serialVersionUID = 1L;
 
+        /**
+         * Max attached object count attached to single permanent in the stack.
+         */
+        private int maxAttachedCount = 0;
+
         public Stack() {
             super(8);
         }
@@ -419,7 +429,15 @@ public class CardPluginImpl implements CardPlugin {
         }
 
         private int getHeight() {
-            return cardHeight + (size() - 1) * stackSpacingY + cardSpacingY;
+            return cardHeight + (size() - 1) * stackSpacingY + cardSpacingY + ATTACHMENT_DY_OFFSET*maxAttachedCount;
+        }
+
+        public int getMaxAttachedCount() {
+            return maxAttachedCount;
+        }
+
+        public void setMaxAttachedCount(int maxAttachedCount) {
+            this.maxAttachedCount = maxAttachedCount;
         }
     }
 
