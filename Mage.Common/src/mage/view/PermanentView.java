@@ -28,9 +28,6 @@
 
 package mage.view;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnFaceUpAbility;
 import mage.abilities.common.TurnedFaceUpTriggeredAbility;
@@ -38,9 +35,12 @@ import mage.cards.Card;
 import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -59,6 +59,7 @@ public class PermanentView extends CardView {
     private final boolean copy;
     private final String nameOwner; // only filled if != controller
     private final boolean controlled;
+    private UUID attachedTo;
 
     public PermanentView(Permanent permanent, Card card, UUID createdForPlayerId, Game game) {
         super(permanent, null, permanent.getControllerId().equals(createdForPlayerId));
@@ -73,6 +74,7 @@ public class PermanentView extends CardView {
             attachments = new ArrayList<>();
             attachments.addAll(permanent.getAttachments());
         }
+        this.attachedTo = permanent.getAttachedTo();
         if (isToken()) {
             original = new CardView(((PermanentToken)permanent).getToken());
             original.expansionSetCode = permanent.getExpansionSetCode();
@@ -179,5 +181,12 @@ public class PermanentView extends CardView {
     public boolean isControlled() {
         return controlled;
     }
-    
+
+    public UUID getAttachedTo() {
+        return attachedTo;
+    }
+
+    public boolean isAttachedTo() {
+        return attachedTo != null;
+    }
 }
