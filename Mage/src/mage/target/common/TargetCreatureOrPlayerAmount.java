@@ -53,7 +53,12 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount {
     protected FilterCreatureOrPlayer filter;
 
     public TargetCreatureOrPlayerAmount(int amount) {
+        // 107.1c If a rule or ability instructs a player to choose “any number,” that player may choose
+        // any positive number or zero, unless something (such as damage or counters) is being divided
+        // or distributed among “any number” of players and/or objects. In that case, a nonzero number
+        // of players and/or objects must be chosen if possible.
         this(new StaticValue(amount));
+        this.minNumberOfTargets = 1;
     }
 
     public TargetCreatureOrPlayerAmount(DynamicValue amount) {

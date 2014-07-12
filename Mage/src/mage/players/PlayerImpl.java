@@ -1514,7 +1514,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void idleTimeout(Game game) {
-        game.informPlayers(new StringBuilder(getName()).append(" has run out of time. Loosing the Match.").toString());
+        game.informPlayers(new StringBuilder(getName()).append(" was idle for too long. Loosing the Match.").toString());
         quit = true;
         idleTimeout = true;
         this.concede(game);

@@ -327,7 +327,7 @@ public abstract class TargetImpl implements Target {
     @Override
     public boolean isLegal(Ability source, Game game) {
         //20101001 - 608.2b
-        Set <UUID> illegalTargets = new HashSet<UUID>();
+        Set <UUID> illegalTargets = new HashSet<>();
         int replacedTargets = 0;
         for (UUID targetId: targets.keySet()) {
             Card card = game.getCard(targetId);
