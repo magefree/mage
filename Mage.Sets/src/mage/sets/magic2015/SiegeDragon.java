@@ -96,6 +96,12 @@ public class SiegeDragon extends CardImpl {
 
 class SiegeDragonAttacksTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("wall");
+
+    static {
+        filter.add(new SubtypePredicate("Wall"));
+    }
+
     public SiegeDragonAttacksTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SiegeDragonDamageEffect());
     }
@@ -111,14 +117,13 @@ class SiegeDragonAttacksTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            filter.add(new ControllerIdPredicate(event.getTargetId()));
-            filter.add(new SubtypePredicate("Wall"));
-            List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, this.getControllerId(), this.getSourceId(), game);
-            return permanents.isEmpty();
-        }
-        return false;
+        return GameEvent.EventType.ATTACKER_DECLARED.equals(event.getType()) && event.getSourceId().equals(this.getSourceId());
+    }
+
+    @Override
+    public boolean checkInterveningIfClause(Game game) {
+        UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(getSourceId(), game);
+        return defendingPlayerId != null && game.getBattlefield().countAll(filter, defendingPlayerId, game) < 1;
     }
 
     @Override
@@ -144,10 +149,10 @@ class SiegeDragonDamageEffect extends OneShotEffect {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID defenderId = game.getCombat().getDefenderId(source.getSourceId());
-        if (defenderId != null) {
+        UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(source.getSourceId(), game);
+        if (defendingPlayerId != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            filter.add(new ControllerIdPredicate(defenderId));
+            filter.add(new ControllerIdPredicate(defendingPlayerId));
             filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
             List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
             for (Permanent permanent : permanents) {
