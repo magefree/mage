@@ -33,17 +33,18 @@ public class OldCardLayoutStrategy implements CardLayoutStrategy {
 
     @Override
     public void doLayout(JLayeredPane jLayeredPane, int width) {
-        Map<UUID, MagePermanent> permanents = ((BattlefieldPanel)jLayeredPane).getPermanents();
-        JLayeredPane jPanel = ((BattlefieldPanel)jLayeredPane).getMainPanel();
+        Map<UUID, MagePermanent> permanents = ((BattlefieldPanel) jLayeredPane).getPermanents();
+        JLayeredPane jPanel = ((BattlefieldPanel) jLayeredPane).getMainPanel();
 
-        int height = Plugins.getInstance().sortPermanents(((BattlefieldPanel)jLayeredPane).getUiComponentsList(), permanents.values());
+        int height = Plugins.getInstance().sortPermanents(((BattlefieldPanel) jLayeredPane).getUiComponentsList(), permanents.values());
         jPanel.setPreferredSize(new Dimension(width - 30, height));
 
-        for (PermanentView permanent: ((BattlefieldPanel)jLayeredPane).getBattlefield().values()) {
+        for (PermanentView permanent : ((BattlefieldPanel) jLayeredPane).getBattlefield().values()) {
             if (permanent.getAttachments() != null) {
                 groupAttachments(jLayeredPane, jPanel, permanents, permanent);
             }
         }
+
     }
 
     private void groupAttachments(JLayeredPane jLayeredPane, JLayeredPane jPanel, Map<UUID, MagePermanent> permanents, PermanentView permanent) {

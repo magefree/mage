@@ -151,6 +151,11 @@ public class CardPluginImpl implements CardPlugin {
             }
 
             Stack stack = new Stack();
+
+            if (permanent.getOriginalPermanent().getAttachments() != null) {
+                stack.setMaxAttachedCount(permanent.getOriginalPermanent().getAttachments().size());
+            }
+
             stack.add(permanent);
             allLands.add(insertIndex == -1 ? allLands.size() : insertIndex, stack);
         }
