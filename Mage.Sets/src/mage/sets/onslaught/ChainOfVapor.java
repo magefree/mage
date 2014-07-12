@@ -89,31 +89,34 @@ class ChainOfVaporEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            if(!permanent.moveToZone(Zone.HAND, source.getId(), game, false)){
+            if (!controller.moveCardToHandWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD)){
                 return false;
-            }
-            
+            }            
             Player player = game.getPlayer(permanent.getControllerId());
-            if(player.chooseUse(Outcome.ReturnToHand, "Sacrifice a land to copy this spell?", game)){
+            if (player.chooseUse(Outcome.ReturnToHand, "Sacrifice a land to copy this spell?", game)){
                 TargetControlledPermanent target = new TargetControlledPermanent(new FilterControlledLandPermanent());
-                if(player.chooseTarget(Outcome.Sacrifice, target, source, game)){
+                if (player.chooseTarget(Outcome.Sacrifice, target, source, game)){
                     Permanent land = game.getPermanent(target.getFirstTarget());
                     if(land != null){
                         if(land.sacrifice(source.getId(), game)){
-                            Spell spell = game.getStack().getSpell(source.getId());
+                            Spell spell = game.getStack().getSpell(source.getSourceId());
                             if (spell != null) {
                                 Spell copy = spell.copySpell();
                                 copy.setControllerId(player.getId());
                                 copy.setCopiedSpell(true);
                                 game.getStack().push(copy);
-                                copy.chooseNewTargets(game, source.getControllerId());
+                                copy.chooseNewTargets(game, player.getId());
                                 String activateMessage = copy.getActivatedMessage(game);
                                 if (activateMessage.startsWith(" casts ")) {
                                     activateMessage = activateMessage.substring(6);
                                 }
-                                game.informPlayers(player.getName() + " copies " + activateMessage);;
+                                game.informPlayers(player.getName() + " copies " + activateMessage);
                                 return true;
                             }
                             return false;
