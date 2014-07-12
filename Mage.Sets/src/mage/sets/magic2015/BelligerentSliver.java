@@ -29,9 +29,11 @@ package mage.sets.magic2015;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.combat.CantBeBlockedByOneAllEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -65,7 +67,8 @@ public class BelligerentSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Sliver creatures you control have "This creature can't be blocked except by two or more creatures."
-        Effect effect = new CantBeBlockedByOneAllEffect(2, filter, Duration.WhileOnBattlefield);
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2, Duration.WhileOnBattlefield));
+        Effect effect = new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, filter);
         effect.setText("Sliver creatures you control have \"This creature can't be blocked except by two or more creatures.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
