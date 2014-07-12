@@ -18,6 +18,7 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
+import mage.constants.TimingRule;
 
 /**
  * @author Loki
@@ -25,6 +26,7 @@ import java.util.UUID;
 public class TransmuteAbility extends SimpleActivatedAbility {
     public TransmuteAbility(String manaCost) {
         super(Zone.HAND, new TransmuteEffect(), new ManaCostsImpl(manaCost));
+        this.setTiming(TimingRule.SORCERY);
         this.addCost(new DiscardSourceCost());
     }
 
