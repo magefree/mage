@@ -106,7 +106,7 @@ class TangleWireEffect extends OneShotEffect {
         int counterCount = permanent.getCounters().getCount(CounterType.FADE);
         int amount = Math.min(counterCount, targetCount);
         
-        Target target = new TargetControlledPermanent(amount, amount, filter, false);
+        Target target = new TargetControlledPermanent(amount, amount, filter, true);
         target.setNotTarget(true);
 
         if (amount > 0 && player.chooseTarget(Outcome.Tap, target, source, game)) {
