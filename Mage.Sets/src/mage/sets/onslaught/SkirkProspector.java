@@ -34,15 +34,25 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
  * @author Plopman
  */
 public class SkirkProspector extends CardImpl {
+
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Goblin");
+
+    static {
+        filter.add(new SubtypePredicate(("Goblin")));
+    }
 
     public SkirkProspector(UUID ownerId) {
         super(ownerId, 230, "Skirk Prospector", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
@@ -54,7 +64,7 @@ public class SkirkProspector extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sacrifice a Goblin: Add {R} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana, new SacrificeSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana, new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filter,true))));
     }
 
     public SkirkProspector(final SkirkProspector card) {
