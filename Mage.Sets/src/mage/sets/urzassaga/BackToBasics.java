@@ -36,7 +36,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 
@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  */
 public class BackToBasics extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("Nonbasic lands");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Nonbasic lands");
 
     static {
         filter.add(Predicates.not(new SupertypePredicate("Basic")));
