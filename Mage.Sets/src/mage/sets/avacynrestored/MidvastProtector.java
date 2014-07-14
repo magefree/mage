@@ -56,10 +56,10 @@ public class MidvastProtector extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Midvast Protector enters the battlefield, target creature you control gains protection from the color of your choice until end of turn.
-    EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), false);
-    ability.addTarget(new TargetControlledCreaturePermanent());
-    ability.addChoice(new ChoiceColor());
-    this.addAbility(ability);
+        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), false);
+        ability.addTarget(new TargetControlledCreaturePermanent());
+        ability.addChoice(new ChoiceColor());
+        this.addAbility(ability);
     }
 
     public MidvastProtector(final MidvastProtector card) {

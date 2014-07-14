@@ -45,13 +45,13 @@ public class CardCriteria {
 
     private String name;
     private String rules;
-    private List<String> setCodes;
-    private List<CardType> types;
-    private List<CardType> notTypes;
-    private List<String> supertypes;
-    private List<String> notSupertypes;
-    private List<String> subtypes;
-    private List<Rarity> rarities;
+    private final List<String> setCodes;
+    private final List<CardType> types;
+    private final List<CardType> notTypes;
+    private final List<String> supertypes;
+    private final List<String> notSupertypes;
+    private final List<String> subtypes;
+    private final List<Rarity> rarities;
     private Boolean doubleFaced;
     private boolean black;
     private boolean blue;
@@ -62,15 +62,16 @@ public class CardCriteria {
     private String sortBy;
     private Long start;
     private Long count;
+    private int maxCardNumber;
 
     public CardCriteria() {
-        this.setCodes = new ArrayList<String>();
-        this.rarities = new ArrayList<Rarity>();
-        this.types = new ArrayList<CardType>();
-        this.notTypes = new ArrayList<CardType>();
-        this.supertypes = new ArrayList<String>();
-        this.notSupertypes = new ArrayList<String>();
-        this.subtypes = new ArrayList<String>();
+        this.setCodes = new ArrayList<>();
+        this.rarities = new ArrayList<>();
+        this.types = new ArrayList<>();
+        this.notTypes = new ArrayList<>();
+        this.supertypes = new ArrayList<>();
+        this.notSupertypes = new ArrayList<>();
+        this.subtypes = new ArrayList<>();
 
         this.black = true;
         this.blue = true;
@@ -78,6 +79,8 @@ public class CardCriteria {
         this.red = true;
         this.white = true;
         this.colorless = true;
+
+        this.maxCardNumber = Integer.MAX_VALUE;
     }
 
     public CardCriteria black(boolean black) {
@@ -170,6 +173,11 @@ public class CardCriteria {
         return this;
     }
 
+    public CardCriteria maxCardNumber(int maxCardNumber) {
+        this.maxCardNumber = maxCardNumber;
+        return this;
+    }
+
     public CardCriteria setOrderBy(String sortBy) {
         this.sortBy = sortBy;
         return this;
@@ -211,7 +219,7 @@ public class CardCriteria {
         }
 
 
-        if (types.size() != 7) { //if all types selected - no selection needed
+        if (types.size() != 9) { //if all types selected - no selection needed
             for (CardType type : types) {
                 where.like("types", new SelectArg('%' + type.name() + '%'));
             }
@@ -273,11 +281,18 @@ public class CardCriteria {
             }
         }
 
+        if (maxCardNumber != Integer.MAX_VALUE) {
+            where.le("cardNumber", maxCardNumber);
+            clausesCount++;
+        }
+
         if (clausesCount > 0) {
             where.and(clausesCount);
         } else {
             where.eq("cardNumber", new SelectArg(0));
         }
+
+
 
         if (start != null) {
             qb.offset(start);

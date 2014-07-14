@@ -64,6 +64,7 @@ public abstract class ExpansionSet implements Serializable {
     protected int ratioBoosterMythic;
 
     protected String packageName;
+    protected int maxCardNumberInBooster;
 
     public ExpansionSet(String name, String code, String packageName, Date releaseDate, SetType setType) {
         this.name = name;
@@ -71,6 +72,7 @@ public abstract class ExpansionSet implements Serializable {
         this.releaseDate = releaseDate;
         this.setType = setType;
         this.packageName = packageName;
+        this.maxCardNumberInBooster = Integer.MAX_VALUE;
     }
 
     public String getName() {
@@ -116,14 +118,23 @@ public abstract class ExpansionSet implements Serializable {
 
         CardCriteria criteria = new CardCriteria();
         criteria.setCodes(this.code).rarities(Rarity.UNCOMMON).doubleFaced(false);
+        if (maxCardNumberInBooster != Integer.MAX_VALUE) {
+            criteria.maxCardNumber(maxCardNumberInBooster);
+        }
         List<CardInfo> uncommon = CardRepository.instance.findCards(criteria);
 
         criteria = new CardCriteria();
         criteria.setCodes(this.code).rarities(Rarity.RARE).doubleFaced(false);
+        if (maxCardNumberInBooster != Integer.MAX_VALUE) {
+            criteria.maxCardNumber(maxCardNumberInBooster);
+        }
         List<CardInfo> rare = CardRepository.instance.findCards(criteria);
 
         criteria = new CardCriteria();
         criteria.setCodes(this.code).rarities(Rarity.MYTHIC).doubleFaced(false);
+        if (maxCardNumberInBooster != Integer.MAX_VALUE) {
+            criteria.maxCardNumber(maxCardNumberInBooster);
+        }
         List<CardInfo> mythic = CardRepository.instance.findCards(criteria);
      
         if (numBoosterLands > 0) {
@@ -268,6 +279,9 @@ public abstract class ExpansionSet implements Serializable {
     public List<CardInfo> getCommon() {
         CardCriteria criteria = new CardCriteria();
         criteria.setCodes(this.code).rarities(Rarity.COMMON).doubleFaced(false);
+        if (maxCardNumberInBooster != Integer.MAX_VALUE) {
+            criteria.maxCardNumber(maxCardNumberInBooster);
+        }
         return CardRepository.instance.findCards(criteria);
     }
 
