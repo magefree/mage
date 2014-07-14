@@ -874,34 +874,20 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         //20091005 - 603.3c, 603.3d
         int bookmark = game.bookmarkState();
-        //FIXME: remove try\catch once we find out the reason for NPE on server
         TriggeredAbility ability = source.copy();
-//        try {
-//            ability = source.copy();
-//        } catch (NullPointerException npe) {
-//            log.fatal("NPE for source=" + source);
-//            log.fatal("NPE for source=" + source.getRule());
-//            throw npe;
-//        }
-        if (ability != null && ability.canChooseTarget(game)) {
+        if (ability != null && ability.canChooseTarget(game)) {            
             if (ability.isUsesStack()) {
                 game.getStack().push(new StackAbility(ability, playerId));
-                if (ability.activate(game, false)) {
-                    if (ability.getRuleVisible()) {
-                        game.informPlayers(ability.getGameLogMessage(game));
-                    }
-                    game.removeBookmark(bookmark);
-                    return true;
+            }
+            if (ability.activate(game, false)) {
+                if (ability.getRuleVisible()) {
+                    game.informPlayers(ability.getGameLogMessage(game));
                 }
-            } else {
-                if (ability.activate(game, false)) {
-                    if (ability.getRuleVisible()) {
-                        game.informPlayers(ability.getGameLogMessage(game));
-                    }
+                if (!ability.isUsesStack()) {
                     ability.resolve(game);
-                    game.removeBookmark(bookmark);
-                    return true;
                 }
+                game.removeBookmark(bookmark);
+                return true;
             }
         }
         game.restoreState(bookmark);

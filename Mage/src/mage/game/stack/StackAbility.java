@@ -63,15 +63,16 @@ import mage.constants.AbilityWord;
  */
 public class StackAbility implements StackObject, Ability {
 
-    private static List emptyList = new ArrayList();
+    private static List<CardType> emptyCardType = new ArrayList<>();
+    private static List<String> emptyString = new ArrayList<>();
     private static ObjectColor emptyColor = new ObjectColor();
-    private static ManaCosts emptyCost = new ManaCostsImpl();
-    private static Costs emptyCosts = new CostsImpl();
+    private static ManaCosts<ManaCost> emptyCost = new ManaCostsImpl<>();
+    private static Costs<Cost> emptyCosts = new CostsImpl<>();
     private static Abilities<Ability> emptyAbilites = new AbilitiesImpl<>();
 
     private final Ability ability;
     private UUID controllerId;
-    private String name = "";
+    private String name;
     private String expansionSetCode;
 
     public StackAbility(Ability ability, UUID controllerId) {
@@ -134,12 +135,12 @@ public class StackAbility implements StackObject, Ability {
 
     @Override
     public List<CardType> getCardType() {
-        return emptyList;
+        return emptyCardType;
     }
 
     @Override
     public List<String> getSubtype() {
-        return emptyList;
+        return emptyString;
     }
 
     @Override
@@ -149,11 +150,11 @@ public class StackAbility implements StackObject, Ability {
 
     @Override
     public List<String> getSupertype() {
-        return emptyList;
+        return emptyString;
     }
 
     @Override
-    public Abilities getAbilities() {
+    public Abilities<Ability> getAbilities() {
         return emptyAbilites;
     }
 
@@ -168,7 +169,7 @@ public class StackAbility implements StackObject, Ability {
     }
 
     @Override
-    public ManaCosts getManaCost() {
+    public ManaCosts<ManaCost> getManaCost() {
         return emptyCost;
     }
 
@@ -203,7 +204,7 @@ public class StackAbility implements StackObject, Ability {
     }
 
     @Override
-    public Costs getCosts() {
+    public Costs<Cost> getCosts() {
         return emptyCosts;
     }
 
@@ -281,7 +282,7 @@ public class StackAbility implements StackObject, Ability {
     public void addAlternativeCost(AlternativeCost cost) { }
 
     @Override
-    public ManaCosts getManaCosts() {
+    public ManaCosts<ManaCost> getManaCosts() {
         return ability.getManaCosts();
     }
 
@@ -318,10 +319,20 @@ public class StackAbility implements StackObject, Ability {
     }
 
     @Override
-    public void adjustChoices(Ability ability, Game game) {}
+    public void adjustChoices(Ability ability, Game game) {
+        Card card = game.getCard(ability.getSourceId());
+        if (card != null) {
+            card.adjustChoices(ability, game);
+        }
+    }
     
     @Override
-    public void adjustCosts(Ability ability, Game game) {}
+    public void adjustCosts(Ability ability, Game game) {
+        Card card = game.getCard(ability.getSourceId());
+        if (card != null) {
+            card.adjustCosts(ability, game);
+        }
+    }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
