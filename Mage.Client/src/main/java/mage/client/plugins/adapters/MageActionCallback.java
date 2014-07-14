@@ -48,7 +48,7 @@ public class MageActionCallback implements ActionCallback {
     public static final int GAP_X = 5;
     public static final double COMPARE_GAP_X = 30;
     public static final int GO_DOWN_ON_DRAG_Y_OFFSET = 0;
-    public static final int MIN_X_OFFSET_REQUIRED = 25;
+    public static final int MIN_X_OFFSET_REQUIRED = 20;
 
     private Popup popup;
     private JPopupMenu jPopupMenu;
@@ -219,18 +219,19 @@ public class MageActionCallback implements ActionCallback {
             maxXOffset = Math.abs((int) (mouse.getX() - initialMousePos.x) - xOffset);
 
         }
-        if (maxXOffset > MIN_X_OFFSET_REQUIRED) { // we need this for protection from small card movements
-            CardPanel card = ((CardPanel)transferData.component);
-            for (Component component : card.getCardArea().getComponents()) {
-                if (component instanceof CardPanel) {
-                    if (cardPanels.contains(component)) {
-                        component.setLocation(component.getLocation().x, component.getLocation().y - GO_DOWN_ON_DRAG_Y_OFFSET);
-                    }
+
+        CardPanel card = ((CardPanel)transferData.component);
+        for (Component component : card.getCardArea().getComponents()) {
+            if (component instanceof CardPanel) {
+                if (cardPanels.contains(component)) {
+                    component.setLocation(component.getLocation().x, component.getLocation().y - GO_DOWN_ON_DRAG_Y_OFFSET);
                 }
             }
-            sort(card, card.getCardArea(), true);
-            cardPanels.clear();
-        } else {
+        }
+        sort(card, card.getCardArea(), true);
+        cardPanels.clear();
+
+        if (maxXOffset < MIN_X_OFFSET_REQUIRED) { // we need this for protection from small card movements
             transferData.component.requestFocusInWindow();
             defaultCallback.mouseClicked(e, transferData.gameId, session, transferData.card);
             // Closes popup & enlarged view if a card/Permanent is selected
