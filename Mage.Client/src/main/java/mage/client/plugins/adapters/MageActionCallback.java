@@ -213,31 +213,36 @@ public class MageActionCallback implements ActionCallback {
 
     @Override
     public void mouseReleased(MouseEvent e, TransferData transferData) {
-        int maxXOffset = 0;
-        if (isDragging) {
-            CardPanel card = ((CardPanel)transferData.component);
-            Point mouse = new Point(e.getX(), e.getY());
-            SwingUtilities.convertPointToScreen(mouse, transferData.component);
-            int xOffset = card.getXOffset(card.getCardWidth());
-            maxXOffset = Math.abs((int) (mouse.getX() - initialMousePos.x) - xOffset);
-
-        }
-
         CardPanel card = ((CardPanel)transferData.component);
-        for (Component component : card.getCardArea().getComponents()) {
-            if (component instanceof CardPanel) {
-                if (cardPanels.contains(component)) {
-                    component.setLocation(component.getLocation().x, component.getLocation().y - GO_DOWN_ON_DRAG_Y_OFFSET);
+        if (card.getZone() != null && card.getZone().equalsIgnoreCase("hand")) {
+            int maxXOffset = 0;
+            if (isDragging) {
+                Point mouse = new Point(e.getX(), e.getY());
+                SwingUtilities.convertPointToScreen(mouse, transferData.component);
+                int xOffset = card.getXOffset(card.getCardWidth());
+                maxXOffset = Math.abs((int) (mouse.getX() - initialMousePos.x) - xOffset);
+
+            }
+
+            for (Component component : card.getCardArea().getComponents()) {
+                if (component instanceof CardPanel) {
+                    if (cardPanels.contains(component)) {
+                        component.setLocation(component.getLocation().x, component.getLocation().y - GO_DOWN_ON_DRAG_Y_OFFSET);
+                    }
                 }
             }
-        }
-        card.setLocation(card.getLocation().x, card.getLocation().y + GO_UP_ON_DRAG_Y_OFFSET);
-        sort(card, card.getCardArea(), true);
-        cardPanels.clear();
+            card.setLocation(card.getLocation().x, card.getLocation().y + GO_UP_ON_DRAG_Y_OFFSET);
+            sort(card, card.getCardArea(), true);
+            cardPanels.clear();
 
-        this.startedDragging = false;
-
-        if (maxXOffset < MIN_X_OFFSET_REQUIRED) { // we need this for protection from small card movements
+            this.startedDragging = false;
+            if (maxXOffset < MIN_X_OFFSET_REQUIRED) { // we need this for protection from small card movements
+                transferData.component.requestFocusInWindow();
+                defaultCallback.mouseClicked(e, transferData.gameId, session, transferData.card);
+                // Closes popup & enlarged view if a card/Permanent is selected
+                hidePopup();
+            }
+        } else {
             transferData.component.requestFocusInWindow();
             defaultCallback.mouseClicked(e, transferData.gameId, session, transferData.card);
             // Closes popup & enlarged view if a card/Permanent is selected
