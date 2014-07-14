@@ -29,11 +29,13 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.SoldierToken;
+import mage.game.permanent.token.Token;
 
 /**
  *
@@ -45,6 +47,8 @@ public class JoinTheRanks extends CardImpl {
         super(ownerId, 9, "Join the Ranks", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
         this.expansionSetCode = "WWK";
         this.color.setWhite(true);        
+        
+        // Put two 1/1 white Soldier Ally creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SoldierToken(), 2));
     }
 
@@ -57,4 +61,18 @@ public class JoinTheRanks extends CardImpl {
         return new JoinTheRanks(this);
     }
 
+}
+class JoinTheRanksSoldierToken extends Token {
+
+    public JoinTheRanksSoldierToken() {
+        super("Soldier Ally", "1/1 white Soldier Ally creature token");
+        this.setOriginalExpansionSetCode("WWK");
+        cardType.add(CardType.CREATURE);
+        color.setWhite(true);
+        subtype.add("Soldier");
+        subtype.add("Ally");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+        
+    }
 }
