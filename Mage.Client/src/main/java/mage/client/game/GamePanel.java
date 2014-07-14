@@ -74,6 +74,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private static final Logger logger = Logger.getLogger(GamePanel.class);
     private static final String YOUR_HAND = "Your hand";
     private static final int X_PHASE_WIDTH = 55;
+    public static final int STACK_MIN_CARDS_OFFSET_Y = 7;
     private final Map<UUID, PlayAreaPanel> players = new HashMap<>();
     private final Map<UUID, ExileZoneDialog> exiles = new HashMap<>();
     private final Map<String, ShowCardsDialog> revealed = new HashMap<>();
@@ -106,6 +107,8 @@ public final class GamePanel extends javax.swing.JPanel {
         MageFrame.getDesktop().add(pickNumber, JLayeredPane.MODAL_LAYER);
 
         this.feedbackPanel.setConnectedChatPanel(this.userChatPanel);
+
+        this.stack.setMinOffsetY(STACK_MIN_CARDS_OFFSET_Y);
 
         // Override layout (I can't edit generated code)
         this.setLayout(new BorderLayout());

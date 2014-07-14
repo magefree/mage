@@ -63,6 +63,8 @@ public class Cards extends javax.swing.JPanel {
 
     private static final Border emptyBorder = new EmptyBorder(0,0,0,0);
 
+    private int minOffsetY = 0;
+
     /**
      * Defines whether component should be visible whenever there is no objects within.
      * True by default.
@@ -316,12 +318,16 @@ public class Cards extends javax.swing.JPanel {
 
         int dx = 0;
         for (Component component : cards) {
-            component.setLocation(dx, component.getLocation().y);
+            component.setLocation(dx, Math.max(component.getLocation().y, minOffsetY));
             dx += ((CardPanel) component).getCardWidth() + GAP_X;
         }
     }
 
     public void setZone(String zone) {
         this.zone = zone;
+    }
+
+    public void setMinOffsetY(int minOffsetY) {
+        this.minOffsetY = minOffsetY;
     }
 }
