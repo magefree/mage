@@ -49,6 +49,8 @@ public class CrypticCommandTest extends CardTestPlayerBase {
     @Test
     public void testCommand() {
         addCard(Zone.HAND, playerA, "Thoughtseize");
+        // Counter target spell. If that spell is countered this way, put it into its owner's hand instead of into that player's graveyard.
+        // Draw a card.
         addCard(Zone.HAND, playerA, "Remand");
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
@@ -70,10 +72,12 @@ public class CrypticCommandTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 
-        assertHandCount(playerA, 2);
+        assertGraveyardCount(playerA, "Remand", 1);
         assertGraveyardCount(playerA, 1);
-        assertHandCount(playerB, 0); // Because Cryptic Command has no legal target playerB does not draw a card and has 0 cards in hand
+        assertGraveyardCount(playerB, "Cryptic Command", 1);
         assertGraveyardCount(playerB, 1);
+        assertHandCount(playerA, 2); // Thoughtsize + card drawn from Remand
+        assertHandCount(playerB, 0); // Because Cryptic Command has no legal target playerB does not draw a card and has 0 cards in hand
         
     }
     

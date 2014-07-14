@@ -344,6 +344,9 @@ public class TestPlayer extends ComputerPlayer {
         boolean result = true;
         for (int i = 1; i < groups.length; i++) {
             String group = groups[i];
+            if (group.startsWith("spellOnStack")) {
+                break;
+            }
             if (ability instanceof SpellAbility && ((SpellAbility) ability).getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
                 if (group.contains("FuseLeft-")) {
                     result = handleTargetString(group.substring(group.indexOf("FuseLeft-") + 9), ability, game);
