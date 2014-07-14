@@ -1824,7 +1824,10 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (card != null) {
                 for (Ability ability0 : card.getAbilities()) {
                     if (ability0 instanceof AdjustingSourceCosts) {
-                        ((AdjustingSourceCosts)ability0).adjustCosts(copy, game);
+                        // A workaround for Issue#457
+                        if (!(ability0 instanceof ConvokeAbility)) {
+                            ((AdjustingSourceCosts) ability0).adjustCosts(copy, game);
+                        }
                     }
                 }
             }
