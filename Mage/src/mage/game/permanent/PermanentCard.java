@@ -30,6 +30,7 @@ package mage.game.permanent;
 
 import java.util.ArrayList;
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.LevelerCard;
 import mage.constants.Zone;
@@ -221,6 +222,21 @@ public class PermanentCard extends PermanentImpl {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        card.adjustTargets(ability, game);
+    }
+
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        card.adjustCosts(ability, game);
+    }
+
+    @Override
+    public void adjustChoices(Ability ability, Game game) {
+        card.adjustChoices(ability, game);
     }
     
 }

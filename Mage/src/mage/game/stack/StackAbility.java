@@ -54,6 +54,7 @@ import mage.target.Targets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.cards.Card;
 import mage.constants.AbilityWord;
 
 /**
@@ -323,7 +324,12 @@ public class StackAbility implements StackObject, Ability {
     public void adjustCosts(Ability ability, Game game) {}
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {}
+    public void adjustTargets(Ability ability, Game game) {
+        Card card = game.getCard(ability.getSourceId());
+        if (card != null) {
+            card.adjustTargets(ability, game);
+        }
+    }
 
     @Override
     public Costs<Cost> getOptionalCosts() {

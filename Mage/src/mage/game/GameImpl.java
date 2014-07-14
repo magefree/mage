@@ -284,7 +284,7 @@ public abstract class GameImpl implements Game, Serializable {
         return state.getPlayer(playerId);
     }
 
-    @Override
+   @Override
     public MageObject getObject(UUID objectId) {
         if (objectId == null) {
             return null;
@@ -304,13 +304,13 @@ public abstract class GameImpl implements Game, Serializable {
                 return item;
             }
         }
-        
+
         for (CommandObject commandObject : state.getCommand()) {
             if (commandObject instanceof Commander && commandObject.getId().equals(objectId)) {
                 return commandObject;
             }
         }
-                
+
         object = getCard(objectId);
 
         if (object == null) {
@@ -319,6 +319,8 @@ public abstract class GameImpl implements Game, Serializable {
                     return commandObject;
                 }
             }
+            // can be an ability of a sacrificed Token trying to get it's source object
+            object = getLastKnownInformation(objectId, Zone.BATTLEFIELD);
         }
 
         return object;
@@ -415,8 +417,8 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     /**
-     * Starts check if game over or if playerId is given
-     * let the player concede.
+     * Starts check if game is over or
+     * if playerId is given let the player concede.
      *
      * @param playerId
      * @return
@@ -817,24 +819,27 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     protected UUID findWinnersAndLosers() {
-        UUID winner = null;
+        logger.debug(new StringBuilder("GameImpl.findWinnersAndLosers start gameId ").append(this.getId()));
+        UUID winnerIdFound = null;
         for (Player player: state.getPlayers().values()) {
             if (player.hasWon()) {
-                winner = player.getId();
+                logger.debug(new StringBuilder("GameImpl.findWinnersAndLosers playerHasWon ").append(player.getId()));
+                winnerIdFound = player.getId();
                 break;
             }
             if (!player.hasLost() && !player.hasLeft()) {
+                logger.debug(new StringBuilder("GameImpl.findWinnersAndLosers player ").append(player.getId()));
                 player.won(this);
-                winner = player.getId();
+                winnerIdFound = player.getId();
                 break;
             }
         }
         for (Player player: state.getPlayers().values()) {
-            if (winner != null && !player.getId().equals(winner) && !player.hasLost()) {
+            if (winnerIdFound != null && !player.getId().equals(winnerIdFound) && !player.hasLost()) {
                 player.lost(this);
             }
         }
-        return winner;
+        return winnerIdFound;
     }
 
     protected void endOfTurn() {

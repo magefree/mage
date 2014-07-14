@@ -599,6 +599,7 @@ public class Spell implements StackObject, Card {
      *  202.3b When calculating the converted mana cost of an object with an {X} in its
      *  mana cost, X is treated as 0 while the object is not on the stack, and X is 
      *  treated as the number chosen for it while the object is on the stack.
+     * @return
      */
     public int getConvertedManaCost() {
         int cmc = 0;
@@ -753,13 +754,25 @@ public class Spell implements StackObject, Card {
     }
 
     @Override
-    public void adjustChoices(Ability ability, Game game) {}
+    public void adjustChoices(Ability ability, Game game) {
+        if (card != null) {
+            card.adjustChoices(ability, game);
+        }
+    }
     
     @Override
-    public void adjustCosts(Ability ability, Game game) {}
+    public void adjustCosts(Ability ability, Game game) {
+        if (card != null) {
+            card.adjustCosts(ability, game);
+        }
+    }
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {}
+    public void adjustTargets(Ability ability, Game game) {
+        if (card != null) {
+            card.adjustTargets(ability, game);
+        }
+    }
 
 
     @Override

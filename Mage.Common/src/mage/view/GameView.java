@@ -48,6 +48,7 @@ import mage.players.Player;
 
 import java.io.Serializable;
 import java.util.*;
+import org.apache.log4j.Logger;
 
 
 /**
@@ -56,6 +57,8 @@ import java.util.*;
  */
 public class GameView implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    private static final transient Logger logger = Logger.getLogger(GameView.class);
 
     private final int priorityTime;
     private final List<PlayerView> players = new ArrayList<>();
@@ -121,7 +124,7 @@ public class GameView implements Serializable {
                         checkPaid(stackObject.getId(), ((StackAbility)stackObject));
                     }
                 } else {
-
+                    logger.error("Stack Object for stack ability not found: " + stackObject.toString());
                 }
             }
             else {

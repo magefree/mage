@@ -217,9 +217,9 @@ public abstract class AbilityImpl implements Ability {
         }
 
         
-        Card card = game.getCard(sourceId);
-        if (card != null) {
-            card.adjustChoices(this, game);
+        MageObject sourceObject = game.getObject(sourceId);
+        if (sourceObject != null) {
+            sourceObject.adjustChoices(this, game);
         }
         for (UUID modeId :this.getModes().getSelectedModes()) {
             this.getModes().setMode(this.getModes().get(modeId));
@@ -247,9 +247,9 @@ public abstract class AbilityImpl implements Ability {
         // as buyback, kicker, or convoke costs (see rules 117.8 and 117.9), the player announces his
         // or her intentions to pay any or all of those costs (see rule 601.2e).
         // A player can't apply two alternative methods of casting or two alternative costs to a single spell.
-        if (card != null && !(this instanceof FlashbackAbility)) {
+        if (sourceObject != null && !(this instanceof FlashbackAbility)) {
             boolean alternativeCostisUsed = false;
-            for (Ability ability : card.getAbilities()) {
+            for (Ability ability : sourceObject.getAbilities()) {
                 // if cast for noMana no Alternative costs are allowed
                 if (!noMana && ability instanceof AlternativeSourceCosts) {
                     AlternativeSourceCosts alternativeSpellCosts = (AlternativeSourceCosts) ability;
@@ -305,12 +305,12 @@ public abstract class AbilityImpl implements Ability {
             // and/or zones become the target of a spell trigger at this point; they'll wait to be put on
             // the stack until the spell has finished being cast.)
 
-            if (card != null) {
-                card.adjustTargets(this, game);
+            if (sourceObject != null) {
+                sourceObject.adjustTargets(this, game);
             }
             if (getTargets().size() > 0 && getTargets().chooseTargets(getEffects().get(0).getOutcome(), this.controllerId, this, game) == false) {
                 if (variableManaCost != null || announceString != null) {
-                    game.informPlayer(controller, new StringBuilder(card != null ? card.getName(): "").append(": no valid targets with this value of X").toString());
+                    game.informPlayer(controller, new StringBuilder(sourceObject != null ? sourceObject.getLogName(): "").append(": no valid targets with this value of X").toString());
                 } else {
                     logger.debug("activate failed - target");
                 }
@@ -328,9 +328,9 @@ public abstract class AbilityImpl implements Ability {
             }
         }
         //20100716 - 601.2e
-        if (card != null) {
-            card.adjustCosts(this, game);
-            for (Ability ability : card.getAbilities()) {
+        if (sourceObject != null) {
+            sourceObject.adjustCosts(this, game);
+            for (Ability ability : sourceObject.getAbilities()) {
                 if (ability instanceof AdjustingSourceCosts) {
                     ((AdjustingSourceCosts)ability).adjustCosts(this, game);
                 }
@@ -824,6 +824,9 @@ public abstract class AbilityImpl implements Ability {
             return "";
         }
         MageObject object = game.getObject(this.sourceId);
+        if (object == null) { // e.g. sacrificed token
+            logger.warn("Could get no object: " + this.toString());
+        }
         return new StringBuilder(" activates: ")
                 .append(object != null ? this.formatRule(modes.getText(), object.getName()) :modes.getText())
                 .append(" from ")
@@ -833,9 +836,6 @@ public abstract class AbilityImpl implements Ability {
     protected String getMessageText(Game game) {
         StringBuilder sb = new StringBuilder();
         MageObject object = game.getObject(this.sourceId);
-        if (object == null) {
-            object = game.getLastKnownInformation(this.sourceId, Zone.BATTLEFIELD);
-        }
         if (object != null) {
             if (object instanceof StackAbility) {
                 Card card = game.getCard(((StackAbility) object).getSourceId());
@@ -854,7 +854,7 @@ public abstract class AbilityImpl implements Ability {
                     }
                     sb.append(getOptionalTextSuffix(game, spell));
                 } else {
-                    sb.append(object.getName());
+                    sb.append(object.getLogName());
                 }
             }
         } else {
