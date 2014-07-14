@@ -29,16 +29,17 @@
 package mage.sets.magic2011;
 
 import java.util.UUID;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.target.TargetPlayer;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -50,6 +51,8 @@ public class LilianasCaress extends CardImpl {
         super(ownerId, 103, "Liliana's Caress", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.expansionSetCode = "M11";
         this.color.setBlack(true);
+
+        // Whenever an opponent discards a card, that player loses 2 life.
         this.addAbility(new LilianasCaressAbility());
     }
 
@@ -82,8 +85,9 @@ class LilianasCaressAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.DISCARDED_CARD && game.getOpponents(controllerId).contains(event.getPlayerId())) {
-            this.addTarget(new TargetPlayer());
-            getTargets().get(0).add(event.getPlayerId(), game);
+            for (Effect effect :this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+            }
             return true;
         }
         return false;
