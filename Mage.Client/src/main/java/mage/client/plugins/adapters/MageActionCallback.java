@@ -49,7 +49,7 @@ public class MageActionCallback implements ActionCallback {
     public static final double COMPARE_GAP_X = 30;
 
     public static final int GO_DOWN_ON_DRAG_Y_OFFSET = 0;
-    public static final int GO_UP_ON_DRAG_Y_OFFSET = 10;
+    public static final int GO_UP_ON_DRAG_Y_OFFSET = 0;
 
     public static final int MIN_X_OFFSET_REQUIRED = 20;
 
@@ -73,6 +73,7 @@ public class MageActionCallback implements ActionCallback {
     private static final ScheduledExecutorService timeoutExecutor = Executors.newScheduledThreadPool(1);
     private ScheduledFuture<?> hideTimeout;
 
+    private CardPanel prevCard;
     private boolean startedDragging;
     private boolean isDragging;
     private Point initialCardPos;
@@ -200,8 +201,14 @@ public class MageActionCallback implements ActionCallback {
     @Override
     public void mousePressed(MouseEvent e, TransferData data) {
         data.component.requestFocusInWindow();
+
+        // for some reason sometime mouseRelease happens before numerous Mouse_Dragged events
+        // that results in not finished dragging
+        clearDragging(this.prevCard);
+
         isDragging = false;
         startedDragging = false;
+        prevCard = null;
         cardPanels.clear();
         Point mouse = new Point(e.getX(), e.getY());
         SwingUtilities.convertPointToScreen(mouse, data.component);
@@ -221,19 +228,9 @@ public class MageActionCallback implements ActionCallback {
                 SwingUtilities.convertPointToScreen(mouse, transferData.component);
                 int xOffset = card.getXOffset(card.getCardWidth());
                 maxXOffset = Math.abs((int) (mouse.getX() - initialMousePos.x) - xOffset);
-
             }
 
-            for (Component component : card.getCardArea().getComponents()) {
-                if (component instanceof CardPanel) {
-                    if (cardPanels.contains(component)) {
-                        component.setLocation(component.getLocation().x, component.getLocation().y - GO_DOWN_ON_DRAG_Y_OFFSET);
-                    }
-                }
-            }
-            card.setLocation(card.getLocation().x, card.getLocation().y + GO_UP_ON_DRAG_Y_OFFSET);
-            sort(card, card.getCardArea(), true);
-            cardPanels.clear();
+            clearDragging(card);
 
             this.startedDragging = false;
             if (maxXOffset < MIN_X_OFFSET_REQUIRED) { // we need this for protection from small card movements
@@ -250,6 +247,22 @@ public class MageActionCallback implements ActionCallback {
         }
     }
 
+    private void clearDragging(CardPanel card) {
+        if (this.startedDragging && prevCard != null && card != null) {
+            for (Component component : card.getCardArea().getComponents()) {
+                if (component instanceof CardPanel) {
+                    if (cardPanels.contains(component)) {
+                        component.setLocation(component.getLocation().x, component.getLocation().y - GO_DOWN_ON_DRAG_Y_OFFSET);
+                    }
+                }
+            }
+            card.setLocation(card.getLocation().x, card.getLocation().y + GO_UP_ON_DRAG_Y_OFFSET);
+            sort(card, card.getCardArea(), true);
+            cardPanels.clear();
+        }
+        prevCard = null;
+    }
+
     @Override
     public void mouseMoved(MouseEvent e, TransferData transferData) {
         handlePopup(transferData);
@@ -263,6 +276,7 @@ public class MageActionCallback implements ActionCallback {
             return;
         }
         isDragging = true;
+        prevCard = card;
         Point p = card.getCardLocation();
         Point mouse = new Point(e.getX(), e.getY());
         SwingUtilities.convertPointToScreen(mouse, transferData.component);
@@ -279,6 +293,16 @@ public class MageActionCallback implements ActionCallback {
         if (!this.startedDragging) {
             this.startedDragging = true;
         }
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e, final TransferData data) {
+        if (data != null) {
+            hideAll(data.gameId);
+        } else {
+            hideAll(null);
+        }
+        ///clearDragging((CardPanel)data.component);
     }
 
     private void sort(CardPanel card, JPanel container, boolean sortSource) {
@@ -385,15 +409,6 @@ public class MageActionCallback implements ActionCallback {
             popupContainer.setVisible(false);
         } catch (Exception e2) {
             e2.printStackTrace();
-        }
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e, final TransferData data) {
-        if (data != null) {
-            hideAll(data.gameId);
-        } else {
-            hideAll(null);
         }
     }
 
