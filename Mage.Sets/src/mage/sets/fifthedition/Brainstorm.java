@@ -96,12 +96,13 @@ class BrainstormEffect extends OneShotEffect {
 
     private boolean putOnLibrary(Player player, Ability source, Game game) {
         TargetCardInHand target = new TargetCardInHand();
-        player.chooseTarget(Outcome.ReturnToHand, target, source, game);
-        Card card = player.getHand().get(target.getFirstTarget(), game);
-        if (card != null) {
-            player.getHand().remove(card);
-            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+        if (target.canChoose(source.getSourceId(), player.getId(), game)) {
+            player.chooseTarget(Outcome.ReturnToHand, target, source, game);
+            Card card = player.getHand().get(target.getFirstTarget(), game);
+            if (card != null) {
+                return player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.HAND, true, false);
+            }
         }
-        return true;
+        return false;
     }
 }

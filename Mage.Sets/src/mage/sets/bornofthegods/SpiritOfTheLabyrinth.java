@@ -27,6 +27,7 @@
  */
 package mage.sets.bornofthegods;
 
+import java.util.HashSet;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -76,12 +77,17 @@ public class SpiritOfTheLabyrinth extends CardImpl {
 
 class SpiritOfTheLabyrinthWatcher extends Watcher {
 
+    private final HashSet<UUID> playersThatDrewCard;
+    
     public SpiritOfTheLabyrinthWatcher() {
-        super("DrewCard", WatcherScope.PLAYER);
+        super("DrewCard", WatcherScope.GAME);
+        this.playersThatDrewCard = new HashSet<>();
     }
 
     public SpiritOfTheLabyrinthWatcher(final SpiritOfTheLabyrinthWatcher watcher) {
         super(watcher);
+        this.playersThatDrewCard = new HashSet<>();
+        playersThatDrewCard.addAll(watcher.playersThatDrewCard);
     }
 
     @Override
@@ -91,14 +97,21 @@ class SpiritOfTheLabyrinthWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (condition == true) {//no need to check - condition has already occured
-            return;
-        }
         if (event.getType() == GameEvent.EventType.DREW_CARD ) {
-            if (event.getPlayerId().equals(this.getControllerId())) {
-                condition = true;
+            if (!playersThatDrewCard.contains(event.getPlayerId())) {
+                playersThatDrewCard.add(event.getPlayerId());
             }
         }
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        playersThatDrewCard.clear();
+    }
+    
+    public boolean hasPlayerDrewCardThisTurn(UUID playerId) {
+        return playersThatDrewCard.contains(playerId);
     }
 
 }
@@ -132,8 +145,8 @@ class SpiritOfTheLabyrinthEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.DRAW_CARD) {
-            Watcher watcher = game.getState().getWatchers().get("DrewCard", event.getPlayerId());
-            if (watcher != null && watcher.conditionMet()) {
+            SpiritOfTheLabyrinthWatcher watcher = (SpiritOfTheLabyrinthWatcher) game.getState().getWatchers().get("DrewCard");
+            if (watcher != null && watcher.hasPlayerDrewCardThisTurn(event.getPlayerId())) {
                 return true;
             }
         }
