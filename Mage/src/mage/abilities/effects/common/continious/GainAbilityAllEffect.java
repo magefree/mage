@@ -33,6 +33,8 @@ import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -107,6 +109,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
+        boolean quotes = (ability instanceof SimpleActivatedAbility) || (ability instanceof TriggeredAbility);
         if (excludeSource) {
             sb.append("Other ");
         }
@@ -124,7 +127,13 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
                 sb.append(" gain ");
             }            
         }
+        if (quotes) {
+            sb.append("\"");
+        }
         sb.append(ability.getRule());
+        if (quotes) {
+            sb.append("\"");
+        }
         if (duration.toString().length() > 0) {
             sb.append(" ").append(duration.toString());
         }

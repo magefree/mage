@@ -60,13 +60,15 @@ public class LilianaVess extends CardImpl {
         this.subtype.add("Liliana");
         this.color.setBlack(true);
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));
-
+        // +1: Target player discards a card.
         LoyaltyAbility ability1 = new LoyaltyAbility(new DiscardTargetEffect(1), 1);
         ability1.addTarget(new TargetPlayer());
         this.addAbility(ability1);
 
+        // -2: Search your library for a card, then shuffle your library and put that card on top of it.
         this.addAbility(new LoyaltyAbility(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary()), -2));
 
+        // -8: Put all creature cards from all graveyards onto the battlefield under your control.
         this.addAbility(new LoyaltyAbility(new LilianaVessEffect(), -8));
 
     }

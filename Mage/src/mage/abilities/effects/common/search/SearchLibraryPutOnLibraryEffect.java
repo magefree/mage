@@ -31,6 +31,7 @@ package mage.abilities.effects.common.search;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.MageObject;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.abilities.Ability;
@@ -75,32 +76,39 @@ public class SearchLibraryPutOnLibraryEffect extends SearchEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null)
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller == null || sourceObject == null) {
             return false;
-        if (player.searchLibrary(target, game)) {
-            List<Card> cards = new ArrayList<Card>();
+        }
+        if (controller.searchLibrary(target, game)) {
+            List<Card> cards = new ArrayList<>();
             for (UUID cardId: (List<UUID>)target.getTargets()) {
-                Card card = player.getLibrary().remove(cardId, game);
-                if (card != null)
+                Card card = controller.getLibrary().remove(cardId, game);
+                if (card != null) {
                     cards.add(card);
+                }
             }
             Cards foundCards = new CardsImpl();
             foundCards.addAll(cards);
             if (reveal) {
-                player.revealCards("Revealed", foundCards, game);
+                controller.revealCards(sourceObject.getLogName(), foundCards, game);
             }
             if (forceShuffle) {
-                player.shuffleLibrary(game);
+                controller.shuffleLibrary(game);
             }
-            for (Card card: cards) {
-                card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+            if (cards.size() > 0) {
+                game.informPlayers(controller.getName() + " moves " + cards.size() + " card" + (cards.size() == 1 ? " ":"s ") + "on top of his or her library");
+            }
+            for (Card card: cards) {                
+                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
             }
             return true;
         }
         // shuffle
-        if (forceShuffle)
-            player.shuffleLibrary(game);
+        if (forceShuffle) {
+            controller.shuffleLibrary(game);
+        }
         return false;
     }
 

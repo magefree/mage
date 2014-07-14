@@ -57,7 +57,7 @@ public class TheTabernacleAtPendrellVale extends CardImpl {
 
         // All creatures have "At the beginning of your upkeep, destroy this creature unless you pay {1}."
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new DestroySourceUnlessPaysEffect(new ManaCostsImpl("{1}")), TargetController.YOU, false);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent("Creatures"))));
     }
 
     public TheTabernacleAtPendrellVale(final TheTabernacleAtPendrellVale card) {
@@ -91,8 +91,9 @@ class DestroySourceUnlessPaysEffect extends OneShotEffect {
         if (player != null && permanent != null) { 
             if (player.chooseUse(Outcome.Benefit, "Pay " + cost.getText()  + "?", game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getId(), source.getControllerId(), false))
+                if (cost.pay(source, game, source.getId(), source.getControllerId(), false)) {
                     return true;
+                }
             }
             permanent.destroy(source.getSourceId(), game, false);
             return true;
