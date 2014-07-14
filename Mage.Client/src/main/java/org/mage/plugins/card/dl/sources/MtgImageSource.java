@@ -28,6 +28,7 @@
 
 package org.mage.plugins.card.dl.sources;
 
+import java.net.URLEncoder;
 import mage.cards.SplitCard;
 import org.mage.plugins.card.images.CardDownloadData;
 
@@ -60,9 +61,9 @@ public class MtgImageSource implements CardImageSource {
         if (card.isSplitCard()) {            
             url.append(card.getDownloadName().replaceAll(" // ", ""));
         } else {
-            url.append(card.getDownloadName());
+            url.append(card.getDownloadName().replaceAll(" ", "%20"));
         }
-        
+
         if (card.isTwoFacedCard()) {
             url.append(card.isSecondSide() ? "b" : "a");
         }
