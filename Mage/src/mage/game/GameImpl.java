@@ -51,6 +51,7 @@ import mage.abilities.ActivatedAbility;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.ChancellorAbility;
+import mage.abilities.common.GemstoneCavernsAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
@@ -813,18 +814,30 @@ public abstract class GameImpl implements Game, Serializable {
         for (UUID playerId: state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
             for (Card card: player.getHand().getCards(this)) {
-                if (card.getAbilities().containsKey(LeylineAbility.getInstance().getId())) {
-                    if (player.chooseUse(Outcome.PutCardInPlay, "Do you wish to put " + card.getName() + " on the battlefield?", this)) {
-                        card.putOntoBattlefield(this, Zone.HAND, null, player.getId());
+                if (player.getHand().contains(card.getId())) {
+                    if (card.getAbilities().containsKey(LeylineAbility.getInstance().getId())) {
+                        if (player.chooseUse(Outcome.PutCardInPlay, "Do you wish to put " + card.getName() + " on the battlefield?", this)) {
+                            card.putOntoBattlefield(this, Zone.HAND, null, player.getId());
+                        }
                     }
-                }
-                for (Ability ability: card.getAbilities()) {
-                    if (ability instanceof ChancellorAbility) {
-                        if (player.chooseUse(Outcome.PutCardInPlay, "Do you wish to reveal " + card.getName() + "?", this)) {
-                            Cards cards = new CardsImpl();
-                            cards.add(card);
-                            player.revealCards("Revealed", cards, this);
-                            ability.resolve(this);
+                    for (Ability ability: card.getAbilities()) {
+                        if (ability instanceof ChancellorAbility) {
+                            if (player.chooseUse(Outcome.PutCardInPlay, "Do you wish to reveal " + card.getName() + "?", this)) {
+                                Cards cards = new CardsImpl();
+                                cards.add(card);
+                                player.revealCards("Revealed", cards, this);
+                                ability.resolve(this);
+                            }
+                        }
+                        if (ability instanceof GemstoneCavernsAbility) {
+                            if (!playerId.equals(startingPlayerId)) {
+                                if (player.chooseUse(Outcome.PutCardInPlay, "Do you wish to put " + card.getName() + " into play?", this)) {
+                                    Cards cards = new CardsImpl();
+                                    cards.add(card);
+                                    player.revealCards("Revealed", cards, this);
+                                    ability.resolve(this);
+                                }
+                            }
                         }
                     }
                 }

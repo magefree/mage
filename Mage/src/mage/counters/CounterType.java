@@ -59,6 +59,7 @@ public enum CounterType {
     KI("Ki"),
     LEVEL("Level"),
     LORE("Lore"),
+    LUCK("Luck"),
     LOYALTY("Loyalty"),
     M1M1(new BoostCounter(-1, -1).name),
     MINING("Mining"),
