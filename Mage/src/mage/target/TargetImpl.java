@@ -219,7 +219,7 @@ public abstract class TargetImpl implements Target {
 
     @Override
     public void addTarget(UUID id, Ability source, Game game) {
-        addTarget(id, source, game, false);
+        addTarget(id, source, game, notTarget);
     }
 
     @Override

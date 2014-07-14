@@ -67,7 +67,7 @@ public class KiraGreatGlassSpinner extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Creatures you control have "Whenever this creature becomes the target of a spell or ability for the first time in a turn, counter that spell or ability."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new KiraGreatGlassSpinnerAbility(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new KiraGreatGlassSpinnerAbility(), Duration.WhileOnBattlefield, new FilterCreaturePermanent("Creatures you control"))));
 
     }
 
@@ -86,7 +86,7 @@ public class KiraGreatGlassSpinner extends CardImpl {
 
 class KiraGreatGlassSpinnerAbility extends TriggeredAbilityImpl {
 
-    protected Map<UUID,Integer> turnUsed = new HashMap<UUID,Integer>();
+    protected Map<UUID,Integer> turnUsed = new HashMap<>();
 
     public KiraGreatGlassSpinnerAbility() {
         super(Zone.BATTLEFIELD, new CounterTargetEffect(), false);

@@ -141,7 +141,7 @@ class FireballTargetCreatureOrPlayer extends TargetCreatureOrPlayer {
     @Override
     public List<TargetCreatureOrPlayer> getTargetOptions(Ability source, Game game) {
         
-        List<TargetCreatureOrPlayer> options = new ArrayList<TargetCreatureOrPlayer>();
+        List<TargetCreatureOrPlayer> options = new ArrayList<>();
         int xVal = source.getManaCostsToPay().getX();        
 
         if (xVal < 1) {
