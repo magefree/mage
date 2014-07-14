@@ -47,7 +47,10 @@ public class MageActionCallback implements ActionCallback {
     private static final Logger logger = Logger.getLogger(ActionCallback.class);
     public static final int GAP_X = 5;
     public static final double COMPARE_GAP_X = 30;
+
     public static final int GO_DOWN_ON_DRAG_Y_OFFSET = 0;
+    public static final int GO_UP_ON_DRAG_Y_OFFSET = 10;
+
     public static final int MIN_X_OFFSET_REQUIRED = 20;
 
     private Popup popup;
@@ -70,7 +73,7 @@ public class MageActionCallback implements ActionCallback {
     private static final ScheduledExecutorService timeoutExecutor = Executors.newScheduledThreadPool(1);
     private ScheduledFuture<?> hideTimeout;
 
-    private CardView currentCard;
+    private boolean startedDragging;
     private boolean isDragging;
     private Point initialCardPos;
     private Point initialMousePos;
@@ -197,8 +200,8 @@ public class MageActionCallback implements ActionCallback {
     @Override
     public void mousePressed(MouseEvent e, TransferData data) {
         data.component.requestFocusInWindow();
-        currentCard = data.card;
         isDragging = false;
+        startedDragging = false;
         cardPanels.clear();
         Point mouse = new Point(e.getX(), e.getY());
         SwingUtilities.convertPointToScreen(mouse, data.component);
@@ -228,8 +231,11 @@ public class MageActionCallback implements ActionCallback {
                 }
             }
         }
+        card.setLocation(card.getLocation().x, card.getLocation().y + GO_UP_ON_DRAG_Y_OFFSET);
         sort(card, card.getCardArea(), true);
         cardPanels.clear();
+
+        this.startedDragging = false;
 
         if (maxXOffset < MIN_X_OFFSET_REQUIRED) { // we need this for protection from small card movements
             transferData.component.requestFocusInWindow();
@@ -251,7 +257,6 @@ public class MageActionCallback implements ActionCallback {
             // drag'n'drop is allowed for HAND zone only
             return;
         }
-        currentCard = null;
         isDragging = true;
         Point p = card.getCardLocation();
         Point mouse = new Point(e.getX(), e.getY());
@@ -265,6 +270,10 @@ public class MageActionCallback implements ActionCallback {
                 card.getCardHeight());
         card.getCardArea().setComponentZOrder(card, 0);
         sort(card, card.getCardArea(), false);
+
+        if (!this.startedDragging) {
+            this.startedDragging = true;
+        }
     }
 
     private void sort(CardPanel card, JPanel container, boolean sortSource) {
@@ -276,6 +285,10 @@ public class MageActionCallback implements ActionCallback {
                         component.setLocation(component.getLocation().x, component.getLocation().y + GO_DOWN_ON_DRAG_Y_OFFSET);
                     }
                     cardPanels.add((CardPanel)component);
+                } else {
+                    if (!startedDragging) {
+                        component.setLocation(component.getLocation().x, component.getLocation().y - GO_UP_ON_DRAG_Y_OFFSET);
+                    }
                 }
                 cards.add((CardPanel)component);
             }
