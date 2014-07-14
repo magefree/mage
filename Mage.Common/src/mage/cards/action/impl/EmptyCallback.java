@@ -18,6 +18,11 @@ public class EmptyCallback implements ActionCallback {
     }
 
     @Override
+    public void mouseDragged(MouseEvent e, TransferData data) {
+
+    }
+
+    @Override
     public void mouseEntered(MouseEvent e, TransferData data) {
     }
 

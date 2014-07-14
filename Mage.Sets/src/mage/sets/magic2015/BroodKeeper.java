@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.abilities.common.AuraAttachedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -60,7 +61,9 @@ public class BroodKeeper extends CardImpl {
 
         // Whenever an Aura becomes attached to Brood Keeper, put a 2/2 red Dragon creature token with flying onto the battlefield.
         // It has "{R}: This creature gets +1/+0 until end of turn."
-        this.addAbility(new AuraAttachedTriggeredAbility(new CreateTokenEffect(new BroodKeeperDragonToken()), false));
+        Effect effect = new CreateTokenEffect(new BroodKeeperDragonToken());
+        effect.setText("put a 2/2 red Dragon creature token with flying onto the battlefield. It has \"{R}: This creature gets +1/+0 until end of turn.\"");
+        this.addAbility(new AuraAttachedTriggeredAbility(effect, false));
     }
 
     public BroodKeeper(final BroodKeeper card) {

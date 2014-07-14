@@ -28,21 +28,9 @@
 
 package mage.players;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageItem;
 import mage.MageObject;
-import mage.abilities.Abilities;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.Mode;
-import mage.abilities.Modes;
-import mage.abilities.SpellAbility;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.*;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
@@ -68,6 +56,9 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.Copyable;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  *
@@ -339,6 +330,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     List<Ability> getPlayable(Game game, boolean hidden);
     List<Ability> getPlayableOptions(Ability ability, Game game);
+
+    Set<UUID> getPlayableInHand(Game game);
 
     void addCounters(Counter counter, Game game);
     List<UUID> getAttachments();

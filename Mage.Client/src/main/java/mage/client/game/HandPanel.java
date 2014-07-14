@@ -5,13 +5,13 @@ import mage.client.cards.BigCard;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.Config;
 import mage.constants.Zone;
+import mage.view.CardsView;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.UUID;
-import mage.view.CardsView;
 
 public class HandPanel extends JPanel {
 
@@ -31,12 +31,13 @@ public class HandPanel extends JPanel {
     public void initComponents() {
         hand = new mage.client.cards.Cards(true);
         hand.setCardDimension(getHandCardDimension());
+
         jPanel = new JPanel();
         jScrollPane1 = new JScrollPane(jPanel);
         jScrollPane1.getViewport().setBackground(new Color(0,0,0,0));
 
         jPanel.setLayout(new GridBagLayout()); // centers hand
-        jPanel.setBackground(new Color(0,0,0,0));
+        jPanel.setBackground(new Color(0, 0, 0, 0));
         jPanel.add(hand);
 
         setOpaque(false);
@@ -47,12 +48,13 @@ public class HandPanel extends JPanel {
         jScrollPane1.setBorder(emptyBorder);
         jScrollPane1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
         jScrollPane1.getHorizontalScrollBar().setUnitIncrement(8);
+        jScrollPane1.setViewportBorder(emptyBorder);
 
         setLayout(new BorderLayout());
         add(jScrollPane1, BorderLayout.CENTER);
 
         hand.setHScrollSpeed(8);
-        hand.setBackgroundColor(new Color(0, 0, 0, 100));
+        hand.setBackgroundColor(new Color(0, 0, 0, 0));
         hand.setVisibleIfEmpty(false);
         hand.setBorder(emptyBorder);
         hand.setZone(Zone.HAND.toString());
@@ -87,7 +89,7 @@ public class HandPanel extends JPanel {
 
     private JPanel jPanel;
     private JScrollPane jScrollPane1;
-    private Border emptyBorder = new EmptyBorder(0,0,0,0);
+    private static final Border emptyBorder = new EmptyBorder(0,0,0,0);
     private mage.client.cards.Cards hand;
 
 }

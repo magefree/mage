@@ -87,7 +87,7 @@ public class AthreosGodOfPassage extends CardImpl {
         effect.setText("As long as your devotion to white and black is less than seven, Athreos isn't a creature");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));        
         // Whenever another creature you own dies, return it to your hand unless target opponent pays 3 life.
-        Ability ability = new AthreosDiesCreatureTriggeredAbility(new AthreosGodOfPassageReturnEffect(), false, filter, true);
+        Ability ability = new AthreosDiesCreatureTriggeredAbility(new AthreosGodOfPassageReturnEffect(), false, filter);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
         
@@ -152,12 +152,10 @@ class AthreosGodOfPassageReturnEffect extends OneShotEffect {
 class AthreosDiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
     protected FilterCreaturePermanent filter;
-    private boolean setTargetPointer;
 
-    public AthreosDiesCreatureTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter, boolean setTargetPointer) {
+    public AthreosDiesCreatureTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
-        this.setTargetPointer = setTargetPointer;
     }
 
     public AthreosDiesCreatureTriggeredAbility(AthreosDiesCreatureTriggeredAbility ability) {
@@ -177,10 +175,8 @@ class AthreosDiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
             if (zEvent.getFromZone().equals(Zone.BATTLEFIELD) && zEvent.getToZone().equals(Zone.GRAVEYARD)) {
                 Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
                 if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
-                    if (setTargetPointer) {
-                        for (Effect effect : this.getEffects()) {
-                            effect.setValue("creatureId", event.getTargetId());
-                        }
+                    for (Effect effect : this.getEffects()) {
+                        effect.setValue("creatureId", event.getTargetId());
                     }
                     return true;
                 }

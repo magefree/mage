@@ -47,6 +47,8 @@ public class CardPluginImpl implements CardPlugin {
 
     private static final Logger log = Logger.getLogger(CardPluginImpl.class);
 
+    private static final int ATTACHMENT_DY_OFFSET = 10;
+
     private static final int GUTTER_Y = 15;
     private static final int GUTTER_X = 5;
     static final float EXTRA_CARD_SPACING_X = 0.04f;
@@ -149,12 +151,18 @@ public class CardPluginImpl implements CardPlugin {
             }
 
             Stack stack = new Stack();
+
+            if (permanent.getOriginalPermanent().getAttachments() != null) {
+                stack.setMaxAttachedCount(permanent.getOriginalPermanent().getAttachments().size());
+            }
+
             stack.add(permanent);
             allLands.add(insertIndex == -1 ? allLands.size() : insertIndex, stack);
         }
 
         Row allCreatures = new Row(permanents, RowType.creature);
         Row allOthers = new Row(permanents, RowType.other);
+        Row allAttached = new Row(permanents, RowType.attached);
 
         boolean othersOnTheRight = true;
         if (options != null && options.containsKey("nonLandPermanentsInOnePile")) {
@@ -266,6 +274,14 @@ public class CardPluginImpl implements CardPlugin {
             y = rowBottom;
         }
 
+        // we need this only for defining card size
+        // attached permanents will be handled separately
+        for (Stack stack : allAttached) {
+            for (MagePermanent panel : stack) {
+                panel.setCardBounds(0, 0, cardWidth, cardHeight);
+            }
+        }
+
         return y;
     }
 
@@ -338,7 +354,7 @@ public class CardPluginImpl implements CardPlugin {
     }
 
     private static enum RowType {
-        land, creature, other;
+        land, creature, other, attached;
 
         public boolean isType(MagePermanent card) {
             switch (this) {
@@ -348,6 +364,8 @@ public class CardPluginImpl implements CardPlugin {
                     return CardUtil.isCreature(card);
                 case other:
                     return !CardUtil.isLand(card) && !CardUtil.isCreature(card);
+                case attached:
+                    return card.getOriginalPermanent().isAttachedTo();
                 default:
                     throw new RuntimeException("Unhandled type: " + this);
             }
@@ -371,8 +389,15 @@ public class CardPluginImpl implements CardPlugin {
                 if (!type.isType(panel)) {
                     continue;
                 }
+                // all attached permanents are grouped separately later
+                if (!type.equals(RowType.attached) && RowType.attached.isType(panel)) {
+                    continue;
+                }
                 Stack stack = new Stack();
                 stack.add(panel);
+                if (panel.getOriginalPermanent().getAttachments() != null) {
+                    stack.setMaxAttachedCount(panel.getOriginalPermanent().getAttachments().size());
+                }
                 add(stack);
             }
         }
@@ -410,6 +435,11 @@ public class CardPluginImpl implements CardPlugin {
     private class Stack extends ArrayList<MagePermanent> {
         private static final long serialVersionUID = 1L;
 
+        /**
+         * Max attached object count attached to single permanent in the stack.
+         */
+        private int maxAttachedCount = 0;
+
         public Stack() {
             super(8);
         }
@@ -419,7 +449,15 @@ public class CardPluginImpl implements CardPlugin {
         }
 
         private int getHeight() {
-            return cardHeight + (size() - 1) * stackSpacingY + cardSpacingY;
+            return cardHeight + (size() - 1) * stackSpacingY + cardSpacingY + ATTACHMENT_DY_OFFSET*maxAttachedCount;
+        }
+
+        public int getMaxAttachedCount() {
+            return maxAttachedCount;
+        }
+
+        public void setMaxAttachedCount(int maxAttachedCount) {
+            this.maxAttachedCount = maxAttachedCount;
         }
     }
 

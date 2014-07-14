@@ -28,11 +28,6 @@
 
 package mage.view;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.costs.Cost;
 import mage.cards.Card;
@@ -51,6 +46,9 @@ import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 
+import java.io.Serializable;
+import java.util.*;
+
 
 /**
  *
@@ -62,6 +60,7 @@ public class GameView implements Serializable {
     private final int priorityTime;
     private final List<PlayerView> players = new ArrayList<>();
     private SimpleCardsView hand;
+    private Set<UUID> canPlayInHand;
     private Map<String, SimpleCardsView> opponentHands;
     private final CardsView stack = new CardsView();
     private final List<ExileView> exiles = new ArrayList<>();
@@ -280,4 +279,11 @@ public class GameView implements Serializable {
         return isPlayer;
     }
 
+    public Set<UUID> getCanPlayInHand() {
+        return canPlayInHand;
+    }
+
+    public void setCanPlayInHand(Set<UUID> canPlayInHand) {
+        this.canPlayInHand = canPlayInHand;
+    }
 }

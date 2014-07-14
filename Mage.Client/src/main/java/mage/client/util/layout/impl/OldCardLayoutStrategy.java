@@ -20,19 +20,31 @@ import java.util.UUID;
  */
 public class OldCardLayoutStrategy implements CardLayoutStrategy {
 
+    /**
+     * This offset is used once to shift all attachments
+     */
+    private static final int ATTACHMENTS_DX_OFFSET = 8;
+
+    /**
+     * This offset is used for each attachment
+     */
+    private static final int ATTACHMENT_DX_OFFSET = 0;
+    private static final int ATTACHMENT_DY_OFFSET = 10;
+
     @Override
     public void doLayout(JLayeredPane jLayeredPane, int width) {
-        Map<UUID, MagePermanent> permanents = ((BattlefieldPanel)jLayeredPane).getPermanents();
-        JLayeredPane jPanel = ((BattlefieldPanel)jLayeredPane).getMainPanel();
+        Map<UUID, MagePermanent> permanents = ((BattlefieldPanel) jLayeredPane).getPermanents();
+        JLayeredPane jPanel = ((BattlefieldPanel) jLayeredPane).getMainPanel();
 
-        int height = Plugins.getInstance().sortPermanents(((BattlefieldPanel)jLayeredPane).getUiComponentsList(), permanents.values());
+        int height = Plugins.getInstance().sortPermanents(((BattlefieldPanel) jLayeredPane).getUiComponentsList(), permanents.values());
         jPanel.setPreferredSize(new Dimension(width - 30, height));
 
-        for (PermanentView permanent: ((BattlefieldPanel)jLayeredPane).getBattlefield().values()) {
+        for (PermanentView permanent : ((BattlefieldPanel) jLayeredPane).getBattlefield().values()) {
             if (permanent.getAttachments() != null) {
                 groupAttachments(jLayeredPane, jPanel, permanents, permanent);
             }
         }
+
     }
 
     private void groupAttachments(JLayeredPane jLayeredPane, JLayeredPane jPanel, Map<UUID, MagePermanent> permanents, PermanentView permanent) {
@@ -60,7 +72,11 @@ public class OldCardLayoutStrategy implements CardLayoutStrategy {
                 if (link != null) {
                     link.setBounds(r);
                     perm.getLinks().add(link);
-                    r.translate(8, 10);
+                    if (index == 1) {
+                        r.translate(ATTACHMENTS_DX_OFFSET, ATTACHMENT_DY_OFFSET); // do it once
+                    } else {
+                        r.translate(ATTACHMENT_DX_OFFSET, ATTACHMENT_DY_OFFSET);
+                    }
                     perm.setBounds(r);
                     jLayeredPane.moveToFront(link);
                     jLayeredPane.moveToFront(perm);

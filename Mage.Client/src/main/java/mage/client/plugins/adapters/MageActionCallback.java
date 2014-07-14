@@ -1,19 +1,17 @@
 package mage.client.plugins.adapters;
 
 import mage.cards.MageCard;
-import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
 import mage.cards.action.TransferData;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.components.MageComponents;
 import mage.client.dialog.PreferencesDialog;
-import mage.client.game.PlayAreaPanel;
-import mage.client.game.PlayerPanelExt;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.DefaultActionCallback;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.ArrowBuilder;
+import mage.client.util.gui.ArrowUtil;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.components.CardInfoPane;
 import mage.constants.EnlargeMode;
@@ -21,10 +19,9 @@ import mage.remote.Session;
 import mage.utils.ThreadUtils;
 import mage.view.CardView;
 import mage.view.PermanentView;
-import mage.view.PlayerView;
-import mage.view.SimpleCardsView;
 import org.apache.log4j.Logger;
 import org.jdesktop.swingx.JXPanel;
+import org.mage.card.arcane.CardPanel;
 import org.mage.plugins.card.images.ImageCache;
 
 import javax.swing.*;
@@ -32,8 +29,8 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.image.BufferedImage;
+import java.util.*;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -43,11 +40,15 @@ import java.util.concurrent.TimeUnit;
  * Class that handles the callbacks from the card panels to mage to display big card
  * images from the cards the mouse hovers on. Also handles tooltip text window.
  *
- * @author Nantuko
+ * @author Nantuko, noxx
  */
 public class MageActionCallback implements ActionCallback {
 
     private static final Logger logger = Logger.getLogger(ActionCallback.class);
+    public static final int GAP_X = 5;
+    public static final double COMPARE_GAP_X = 30;
+    public static final int GO_DOWN_ON_DRAG_Y_OFFSET = 0;
+    public static final int MIN_X_OFFSET_REQUIRED = 25;
 
     private Popup popup;
     private JPopupMenu jPopupMenu;
@@ -68,6 +69,12 @@ public class MageActionCallback implements ActionCallback {
 
     private static final ScheduledExecutorService timeoutExecutor = Executors.newScheduledThreadPool(1);
     private ScheduledFuture<?> hideTimeout;
+
+    private CardView currentCard;
+    private boolean isDragging;
+    private Point initialCardPos;
+    private Point initialMousePos;
+    private Set<CardPanel> cardPanels = new HashSet<CardPanel>();
 
     public MageActionCallback() {
         enlargeMode = EnlargeMode.NORMAL;
@@ -91,21 +98,6 @@ public class MageActionCallback implements ActionCallback {
     }
 
     @Override
-    public void mousePressed(MouseEvent e, TransferData data) {
-        data.component.requestFocusInWindow();
-        // Closes popup & enlarged view if a card/Permanent is selected
-        hidePopup();
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e, TransferData data) {
-        data.component.requestFocusInWindow();
-        defaultCallback.mouseClicked(e, data.gameId, session, data.card);
-        // Closes popup & enlarged view if a card/Permanent is selected
-        hidePopup();
-    }
-
-    @Override
     public void mouseEntered(MouseEvent e, final TransferData data) {
         hidePopup();
         cancelTimeout();
@@ -116,107 +108,16 @@ public class MageActionCallback implements ActionCallback {
         Component parentComponent = SwingUtilities.getRoot(data.component);
         Point parentPoint = parentComponent.getLocationOnScreen();
 
-        drawArrowsForTargets(data, parentPoint);
-        drawArrowsForSource(data, parentPoint);
-        drawArrowsForPairedCards(data, parentPoint);
-        drawArrowsForEnchantPlayers(data, parentPoint);
+        if (data.locationOnScreen == null) {
+            data.locationOnScreen = data.component.getLocationOnScreen();
+        }
+
+        ArrowUtil.drawArrowsForTargets(data, parentPoint);
+        ArrowUtil.drawArrowsForSource(data, parentPoint);
+        ArrowUtil.drawArrowsForPairedCards(data, parentPoint);
+        ArrowUtil.drawArrowsForEnchantPlayers(data, parentPoint);
 
         showPopup(data, parentComponent, parentPoint);
-    }
-
-    private void drawArrowsForPairedCards(TransferData data, Point parentPoint) {
-        if (data.card.getPairedCard() != null) {
-            Point me = new Point(data.locationOnScreen);
-            me.translate(-parentPoint.x, -parentPoint.y);
-            UUID uuid = data.card.getPairedCard();
-            for (PlayAreaPanel pa : MageFrame.getGame(data.gameId).getPlayers().values()) {
-                MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
-                if (permanent != null) {
-                    Point target = permanent.getLocationOnScreen();
-                    target.translate(-parentPoint.x, -parentPoint.y);
-                    ArrowBuilder.getBuilder().addArrow(data.gameId, (int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() + 10, Color.green, ArrowBuilder.Type.PAIRED);
-                }
-            }
-        }
-    }
-
-    private void drawArrowsForEnchantPlayers(TransferData data, Point parentPoint) {
-        if (data.gameId != null && MageFrame.getGame(data.gameId) != null) {
-            for (PlayAreaPanel pa : MageFrame.getGame(data.gameId).getPlayers().values()) {
-                PlayerPanelExt playAreaPanel = pa.getPlayerPanel();
-                if (playAreaPanel != null && playAreaPanel.getPlayer() != null && playAreaPanel.getPlayer().hasAttachments()) {
-                    Point me = new Point(data.locationOnScreen);
-                    me.translate(-parentPoint.x, -parentPoint.y);
-                    for (UUID attachmentId : playAreaPanel.getPlayer().getAttachments()) {
-                        if (attachmentId.equals(data.card.getId())) {
-                            Point player = pa.getLocationOnScreen();
-                            player.translate(-parentPoint.x, -parentPoint.y);
-                            ArrowBuilder.getBuilder().addArrow(data.gameId,(int) me.getX() + 35, (int) me.getY(), (int) player.getX() + 40, (int) player.getY() - 40, Color.magenta, ArrowBuilder.Type.ENCHANT_PLAYERS);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private void drawArrowsForSource(TransferData data, Point parentPoint) {
-        if (data.card.isAbility()) {
-            Point me = new Point(data.locationOnScreen);
-            me.translate(-parentPoint.x, -parentPoint.y);
-            UUID uuid = data.card.getParentId();
-            for (PlayAreaPanel pa : MageFrame.getGame(data.gameId).getPlayers().values()) {
-                MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
-                if (permanent != null) {
-                    Point source = permanent.getLocationOnScreen();
-                    source.translate(-parentPoint.x, -parentPoint.y);
-                    ArrowBuilder.getBuilder().addArrow(data.gameId, (int) source.getX() + 40, (int) source.getY() + 10, (int) me.getX() + 35, (int) me.getY() + 20, Color.blue, ArrowBuilder.Type.SOURCE);
-                }
-            }
-        }
-    }
-
-    private void drawArrowsForTargets(TransferData data, Point parentPoint) {
-        List<UUID> targets = data.card.getTargets();
-        if (targets == null) {
-            return;
-        }
-
-        Point me = new Point(data.locationOnScreen);
-        me.translate(-parentPoint.x, -parentPoint.y);
-        for (UUID uuid : targets) {
-
-            PlayAreaPanel p = MageFrame.getGame(data.gameId).getPlayers().get(uuid);
-            if (p != null) {
-                Point target = p.getLocationOnScreen();
-                target.translate(-parentPoint.x, -parentPoint.y);
-                ArrowBuilder.getBuilder().addArrow(data.gameId, (int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() - 40, Color.red, ArrowBuilder.Type.TARGET);
-                continue;
-            }
-
-            for (PlayAreaPanel panel : MageFrame.getGame(data.gameId).getPlayers().values()) {
-                MagePermanent permanent = panel.getBattlefieldPanel().getPermanents().get(uuid);
-                if (permanent != null) {
-                    Point target = permanent.getLocationOnScreen();
-                    target.translate(-parentPoint.x, -parentPoint.y);
-                    ArrowBuilder.getBuilder().addArrow(data.gameId, (int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() + 10, Color.red, ArrowBuilder.Type.TARGET);
-                    continue;
-                }
-
-                PlayerView view = panel.getPlayerPanel().getPlayer();
-                if (view != null) {
-                    SimpleCardsView graveyard = view.getGraveyard();
-                    if (graveyard.containsKey(uuid)) {
-                        p = MageFrame.getGame(data.gameId).getPlayers().get(view.getPlayerId());
-                        if (p != null) {
-                            Point target = p.getLocationOnScreen();
-                            target.translate(-parentPoint.x, -parentPoint.y);
-                            int yOffset = p.isSmallMode() ? (PlayAreaPanel.PANEL_HEIGHT - PlayAreaPanel.PANEL_HEIGHT_SMALL) : 0;
-                            ArrowBuilder.getBuilder().addArrow(data.gameId, (int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 15, (int) target.getY() + 145 - yOffset, Color.red, ArrowBuilder.Type.TARGET);
-                        }
-                    }
-                }
-            }
-        }
     }
 
     private void showPopup(final TransferData data, final Component parentComponent, final Point parentPoint) {
@@ -229,6 +130,12 @@ public class MageActionCallback implements ActionCallback {
 
         if (cardInfoPane == null) {
             PopupFactory factory = PopupFactory.getSharedInstance();
+            if (data.locationOnScreen == null) {
+                if (data.component == null) {
+                    return;
+                }
+                data.locationOnScreen = data.component.getLocationOnScreen();
+            }
             popup = factory.getPopup(data.component, data.popupText, (int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40);
             popup.show();
             // hack to get popup to resize to fit text
@@ -256,6 +163,10 @@ public class MageActionCallback implements ActionCallback {
 
                     ((CardInfoPane) popup2).setCard(data.card, popupContainer);
 
+                    if (data.locationOnScreen == null) {
+                        data.locationOnScreen = data.component.getLocationOnScreen();
+                    }
+
                     Point location = new Point((int) data.locationOnScreen.getX() + data.popupOffsetX - 40, (int) data.locationOnScreen.getY() + data.popupOffsetY - 40);
                     location = GuiDisplayUtil.keepComponentInsideParent(location, parentPoint, popup2, parentComponent);
                     location.translate(-parentPoint.x, -parentPoint.y);
@@ -265,15 +176,15 @@ public class MageActionCallback implements ActionCallback {
 
                     final Component c = MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
                     SwingUtilities.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (!popupTextWindowOpen || !enlargedWindowState.equals(EnlargedWindowState.CLOSED)) {
-                                return;
-                            }
-                            popupContainer.setVisible(true);
-                            c.repaint();
-                        }
-                    }
+                                                   @Override
+                                                   public void run() {
+                                                       if (!popupTextWindowOpen || !enlargedWindowState.equals(EnlargedWindowState.CLOSED)) {
+                                                           return;
+                                                       }
+                                                       popupContainer.setVisible(true);
+                                                       c.repaint();
+                                                   }
+                                               }
                     );
 
                 } catch (InterruptedException e) {
@@ -284,7 +195,126 @@ public class MageActionCallback implements ActionCallback {
     }
 
     @Override
+    public void mousePressed(MouseEvent e, TransferData data) {
+        data.component.requestFocusInWindow();
+        currentCard = data.card;
+        isDragging = false;
+        cardPanels.clear();
+        Point mouse = new Point(e.getX(), e.getY());
+        SwingUtilities.convertPointToScreen(mouse, data.component);
+        initialMousePos = new Point((int)mouse.getX(), (int)mouse.getY());
+        initialCardPos = data.component.getLocation();
+        // Closes popup & enlarged view if a card/Permanent is selected
+        hidePopup();
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e, TransferData transferData) {
+        int maxXOffset = 0;
+        if (isDragging) {
+            CardPanel card = ((CardPanel)transferData.component);
+            Point mouse = new Point(e.getX(), e.getY());
+            SwingUtilities.convertPointToScreen(mouse, transferData.component);
+            int xOffset = card.getXOffset(card.getCardWidth());
+            maxXOffset = Math.abs((int) (mouse.getX() - initialMousePos.x) - xOffset);
+
+        }
+        if (maxXOffset > MIN_X_OFFSET_REQUIRED) { // we need this for protection from small card movements
+            CardPanel card = ((CardPanel)transferData.component);
+            for (Component component : card.getCardArea().getComponents()) {
+                if (component instanceof CardPanel) {
+                    if (cardPanels.contains(component)) {
+                        component.setLocation(component.getLocation().x, component.getLocation().y - GO_DOWN_ON_DRAG_Y_OFFSET);
+                    }
+                }
+            }
+            sort(card, card.getCardArea(), true);
+            cardPanels.clear();
+        } else {
+            transferData.component.requestFocusInWindow();
+            defaultCallback.mouseClicked(e, transferData.gameId, session, transferData.card);
+            // Closes popup & enlarged view if a card/Permanent is selected
+            hidePopup();
+        }
+    }
+
+    @Override
     public void mouseMoved(MouseEvent e, TransferData transferData) {
+        handlePopup(transferData);
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e, TransferData transferData) {
+        CardPanel card = ((CardPanel)transferData.component);
+        if (card.getZone() == null || !card.getZone().equalsIgnoreCase("hand")) {
+            // drag'n'drop is allowed for HAND zone only
+            return;
+        }
+        currentCard = null;
+        isDragging = true;
+        Point p = card.getCardLocation();
+        Point mouse = new Point(e.getX(), e.getY());
+        SwingUtilities.convertPointToScreen(mouse, transferData.component);
+        int xOffset = card.getXOffset(card.getCardWidth());
+        int newX = Math.max(initialCardPos.x + (int)(mouse.getX() - initialMousePos.x) - xOffset, 0);
+        card.setCardBounds(
+                newX,
+                p.y,
+                card.getCardWidth(),
+                card.getCardHeight());
+        card.getCardArea().setComponentZOrder(card, 0);
+        sort(card, card.getCardArea(), false);
+    }
+
+    private void sort(CardPanel card, JPanel container, boolean sortSource) {
+        java.util.List<CardPanel> cards = new ArrayList<CardPanel>();
+        for (Component component : container.getComponents()) {
+            if (component instanceof CardPanel) {
+                if (!component.equals(card)) {
+                    if (!cardPanels.contains(component)) {
+                        component.setLocation(component.getLocation().x, component.getLocation().y + GO_DOWN_ON_DRAG_Y_OFFSET);
+                    }
+                    cardPanels.add((CardPanel)component);
+                }
+                cards.add((CardPanel)component);
+            }
+        }
+        sortLayout(cards, card, sortSource);
+    }
+
+    private void sortLayout(List<CardPanel> cards, CardPanel source, boolean includeSource) {
+        source.getLocation().x -= COMPARE_GAP_X; // this creates nice effect
+
+        Collections.sort(cards, new Comparator<CardPanel>() {
+            @Override
+            public int compare(CardPanel cp1, CardPanel cp2) {
+                return Integer.valueOf(cp1.getLocation().x).compareTo(cp2.getLocation().x);
+            }
+        });
+
+        int dx = 0;
+        boolean createdGapForSource = false;
+        for (Component component : cards) {
+            if (!includeSource) {
+                if (!component.equals(source)) {
+                    component.setLocation(dx, component.getLocation().y);
+                    dx += ((CardPanel) component).getCardWidth() + GAP_X;
+                    // once dx is bigger than source's x position
+                    // we need to create a gap for the source card
+                    // but only once
+                    if (!createdGapForSource && (dx + COMPARE_GAP_X) > source.getLocation().x) {
+                        createdGapForSource = true;
+                        dx += ((CardPanel) component).getCardWidth() + GAP_X;
+                    }
+                }
+            } else {
+                component.setLocation(dx, component.getLocation().y);
+                dx += ((CardPanel) component).getCardWidth() + GAP_X;
+            }
+        }
+    }
+
+    private void handlePopup(TransferData transferData) {
         if (!Plugins.getInstance().isCardPluginLoaded()) {
             return;
         }
@@ -469,6 +499,7 @@ public class MageActionCallback implements ActionCallback {
                     final Component popupContainer = MageFrame.getUI().getComponent(mageComponentCardPreviewContainer);
                     Component cardPreviewPane = MageFrame.getUI().getComponent(mageComponentCardPreviewPane);
                     if (cardPreviewPane != null) {
+                        transferData.locationOnScreen = transferData.component.getLocationOnScreen();
                         Point location = new Point((int) transferData.locationOnScreen.getX() + transferData.popupOffsetX - 40, (int) transferData.locationOnScreen.getY() + transferData.popupOffsetY - 40);
                         location = GuiDisplayUtil.keepComponentInsideParent(location, parentPoint, cardPreviewPane, parentComponent);
                         location.translate(-parentPoint.x, -parentPoint.y);

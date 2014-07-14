@@ -28,17 +28,11 @@
 
 package mage.view;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.Modes;
 import mage.abilities.SpellAbility;
-import mage.abilities.common.TurnFaceUpAbility;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
@@ -49,13 +43,16 @@ import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.target.Target;
 import mage.target.Targets;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -113,6 +110,8 @@ public class CardView extends SimpleCardView {
 
     protected boolean rotate;
     protected boolean hideInfo; // controlls if the tooltip window is shown (eg. controlled face down morph card)
+
+    protected boolean isPlayable;
 
     public CardView(Card card) {
         this(card, null, false);
@@ -673,5 +672,12 @@ public class CardView extends SimpleCardView {
     public boolean hideInfo() {
         return hideInfo;
     }
-    
+
+    public boolean isPlayable() {
+        return isPlayable;
+    }
+
+    public void setPlayable(boolean isPlayable) {
+        this.isPlayable = isPlayable;
+    }
 }

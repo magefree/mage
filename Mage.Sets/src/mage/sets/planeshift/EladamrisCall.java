@@ -25,54 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.sets.planeshift;
 
 import java.util.UUID;
-
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageInt;
-import mage.Mana;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.mana.SimpleManaAbility;
-import mage.cards.CardImpl;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author Plopman
+ * @author LevelX2
  */
-public class SkirkProspector extends CardImpl {
+public class EladamrisCall extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Goblin");
-
+    private static final FilterCard filter = new FilterCard("creature card");
+    
     static {
-        filter.add(new SubtypePredicate(("Goblin")));
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+    }
+    
+    public EladamrisCall(UUID ownerId) {
+        super(ownerId, 106, "Eladamri's Call", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{G}{W}");
+        this.expansionSetCode = "PLS";
+
+        this.color.setGreen(true);
+        this.color.setWhite(true);
+
+        // Search your library for a creature card, reveal that card, and put it into your hand. Then shuffle your library.
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true));
     }
 
-    public SkirkProspector(UUID ownerId) {
-        super(ownerId, 230, "Skirk Prospector", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "ONS";
-        this.subtype.add("Goblin");
-
-        this.color.setRed(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // Sacrifice a Goblin: Add {R} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana, new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filter,true))));
-    }
-
-    public SkirkProspector(final SkirkProspector card) {
+    public EladamrisCall(final EladamrisCall card) {
         super(card);
     }
 
     @Override
-    public SkirkProspector copy() {
-        return new SkirkProspector(this);
+    public EladamrisCall copy() {
+        return new EladamrisCall(this);
     }
 }
