@@ -403,20 +403,15 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             g2d.setComposite(composite);
         }
 
-        //TODO:uncomment
-        if (!hasImage /*&& gameCard.getTableID() > 0*/) {
+        if (!hasImage) {
             g2d.setColor(new Color(30, 200, 200, 120));
         } else {
             g2d.setColor(new Color(0, 0, 0, 200));
         }
 
-        //for debug repainting
-        //g2d.setColor(new Color(MyRandom.random.nextInt(255),MyRandom.random.nextInt(255),MyRandom.random.nextInt(255),150));
         int cornerSize = Math.max(4, Math.round(cardWidth * ROUNDED_CORNER_SIZE));
         g2d.fillRoundRect(cardXOffset, cardYOffset, cardWidth, cardHeight, cornerSize, cornerSize);
         if (isSelected) {
-            //g2d.setColor(new Color(0,250,0,200));
-            //g2d.setColor(new Color(200, 120, 40, 200));
             g2d.setColor(Color.green);
             g2d.fillRoundRect(cardXOffset + 1, cardYOffset + 1, cardWidth - 2, cardHeight - 2, cornerSize, cornerSize);
         }
@@ -426,35 +421,14 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             g2d.fillRoundRect(cardXOffset + 1, cardYOffset + 1, cardWidth - 2, cardHeight - 2, cornerSize, cornerSize);
         }
 
+        //g2d.setColor(new Color(200, 120, 40, 200));
+
         //TODO:uncomment
         /*
                   if (gameCard.isAttacking()) {
                       g2d.setColor(new Color(200,10,10,200));
                       g2d.fillRoundRect(cardXOffset+1, cardYOffset+1, cardWidth-2, cardHeight-2, cornerSize, cornerSize);
                   }*/
-
-        /*if (isSelected) {
-                      g2d.setColor(Color.green);
-                      int offset = gameCard.isTapped() ? 1 : 0;
-                      for (int i = 1, n = Math.max(1, Math.round(cardWidth * SELECTED_BORDER_SIZE)); i <= n; i++)
-                          g2d.drawRoundRect(cardXOffset - i, cardYOffset - i + offset, cardWidth + i * 2 - 1, cardHeight + i * 2 - 1,
-                              cornerSize, cornerSize);
-                  }*/
-
-
-        //for debugging
-        // REMOVEME
-        /*
-                  Point component = getLocation();
-
-                  int cx = getCardX() + component.x;
-                  int cy = getCardY() + component.y;
-                  int cw = getCardWidth();
-                  int ch = getCardHeight();
-
-                  g2d.setColor(Color.white);
-                  g2d.drawRect(getCardX() - component.x, getCardY() - component.y, cw, ch);
-                  */
     }
 
     @Override
