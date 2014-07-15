@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -54,9 +55,13 @@ public class ForgeDevil extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Forge Devil enters the battlefield, it deals 1 damage to target creature and 1 damage to you.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1));
-        ability.addEffect(new DamageControllerEffect(1));
+        Effect effect = new DamageTargetEffect(1);
+        effect.setText("it deals 1 damage to target creature");
+        Ability ability = new EntersBattlefieldTriggeredAbility(effect);
         ability.addTarget(new TargetCreaturePermanent());
+        effect = new DamageControllerEffect(1);
+        effect.setText("and 1 damage to you");
+        ability.addEffect(effect);
         this.addAbility(ability);
     }
 
