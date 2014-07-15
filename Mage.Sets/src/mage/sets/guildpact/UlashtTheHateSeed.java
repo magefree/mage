@@ -125,8 +125,8 @@ class UlashtTheHateSeedEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && player != null) {
-            int amount = game.getBattlefield().countAll(filterRed, source.getControllerId(), game) - 1;
-            amount += game.getBattlefield().countAll(filterGreen, source.getControllerId(), game) - 1;
+            int amount = game.getBattlefield().count(filterRed, source.getSourceId(), source.getControllerId(), game);
+            amount += game.getBattlefield().count(filterGreen, source.getSourceId(), source.getControllerId(), game);
             if (amount > 0) {
                 permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
             }
