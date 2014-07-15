@@ -79,7 +79,7 @@ class MasterOfPredicamentsEffect extends OneShotEffect {
 
     public MasterOfPredicamentsEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "choose a card in your hand.  That player guesses whether the card's converted mana cost is greater than 4.  If the player guessed wrong, you may cast the card without paying its mana cost";
+        this.staticText = "choose a card in your hand. That player guesses whether the card's converted mana cost is greater than 4. If the player guessed wrong, you may cast the card without paying its mana cost";
     }
 
     public MasterOfPredicamentsEffect(final MasterOfPredicamentsEffect effect) {
@@ -113,13 +113,15 @@ class MasterOfPredicamentsEffect extends OneShotEffect {
                     return false;
                 }
                 boolean guessWrong;
-                if (attackedPlayer.chooseUse(Outcome.Detriment, "Is the choosen card's converted mana cost greater than 4?", game)) {
+                if (attackedPlayer.chooseUse(Outcome.Detriment, "Is the chosen card's converted mana cost greater than 4?", game)) {
+                    game.informPlayers(attackedPlayer.getName() + " guessed that the chosen card's converted mana cost is greater than 4");
                     guessWrong = cardFromHand.getManaCost().convertedManaCost() <= 4;
                 } else {
+                    game.informPlayers(attackedPlayer.getName() + " guessed that the chosen card's converted mana cost is not greater than 4");
                     guessWrong = cardFromHand.getManaCost().convertedManaCost() > 4;
                 }
+                game.informPlayers(attackedPlayer.getName() + " guessed " + (guessWrong ? "wrong" : "right"));
                 if (guessWrong) {
-                    game.informPlayers(attackedPlayer.getName() + " guessed " + (guessWrong ? "wrong":"right"));
                     if (cardFromHand.getCardType().contains(CardType.LAND)) {
                         // If the revealed card is a land, you can't cast it. So nothing happens
                     } else {
