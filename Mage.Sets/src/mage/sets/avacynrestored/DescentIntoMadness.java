@@ -110,9 +110,14 @@ class DescentIntoMadnessEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {        
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null && controller != null) {
             sourcePermanent.addCounters(CounterType.DESPAIR.createInstance(), game);
+        }
+        if (sourcePermanent == null) {
+            sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+        }
+        if (sourcePermanent != null && controller != null) {            
             int count = sourcePermanent.getCounters().getCount(CounterType.DESPAIR);
             if (count > 0) {
                 // select the permanents and hand cards in turn order
