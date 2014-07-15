@@ -109,9 +109,10 @@ public class CardView extends SimpleCardView {
     protected boolean controlledByOwner = true;
 
     protected boolean rotate;
-    protected boolean hideInfo; // controlls if the tooltip window is shown (eg. controlled face down morph card)
+    protected boolean hideInfo; // controls if the tooltip window is shown (eg. controlled face down morph card)
 
     protected boolean isPlayable;
+    protected boolean isChoosable;
 
     public CardView(Card card) {
         this(card, null, false);
@@ -679,5 +680,9 @@ public class CardView extends SimpleCardView {
 
     public void setPlayable(boolean isPlayable) {
         this.isPlayable = isPlayable;
+    }
+
+    public boolean isChoosable() {
+        return isChoosable;
     }
 }

@@ -81,6 +81,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     private boolean isSelected;
     private boolean isPlayable;
+    private boolean isChoosable;
     private boolean showCastingCost;
     private boolean hasImage = false;
     private float alpha = 1.0f;
@@ -353,8 +354,16 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     @Override
     public void setSelected(boolean isSelected) {
         this.isSelected = isSelected;
-        this.titleText.setGlowColor(Color.green);
-        repaint();
+        if (isSelected) {
+            this.titleText.setGlowColor(Color.green);
+        }
+        // noxx: bad idea is to call repaint in setter method
+        ////repaint();
+    }
+
+    @Override
+    public void setChoosable(boolean isChoosable) {
+        this.isChoosable = isChoosable;
     }
 
     @Override
@@ -411,8 +420,12 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
         int cornerSize = Math.max(4, Math.round(cardWidth * ROUNDED_CORNER_SIZE));
         g2d.fillRoundRect(cardXOffset, cardYOffset, cardWidth, cardHeight, cornerSize, cornerSize);
+
         if (isSelected) {
             g2d.setColor(Color.green);
+            g2d.fillRoundRect(cardXOffset + 1, cardYOffset + 1, cardWidth - 2, cardHeight - 2, cornerSize, cornerSize);
+        } else if (isChoosable) {
+            g2d.setColor(new Color(250, 250, 0, 230));
             g2d.fillRoundRect(cardXOffset + 1, cardYOffset + 1, cardWidth - 2, cardHeight - 2, cornerSize, cornerSize);
         }
 
@@ -421,7 +434,6 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             g2d.fillRoundRect(cardXOffset + 1, cardYOffset + 1, cardWidth - 2, cardHeight - 2, cornerSize, cornerSize);
         }
 
-        //g2d.setColor(new Color(200, 120, 40, 200));
 
         //TODO:uncomment
         /*
@@ -689,6 +701,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         setText(card);
 
         this.isPlayable = card.isPlayable();
+        this.isChoosable = card.isChoosable();
 
         boolean updateImage = !gameCard.getName().equals(card.getName()) || gameCard.isFaceDown() != card.isFaceDown(); // update after e.g. turning a night/day card
         this.gameCard = card;

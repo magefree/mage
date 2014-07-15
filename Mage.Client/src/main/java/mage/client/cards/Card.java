@@ -530,4 +530,8 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
     @Override
     public void setCardAreaRef(JPanel cardArea) {
     }
+
+    @Override
+    public void setChoosable(boolean isChoosable) {
+    }
 }

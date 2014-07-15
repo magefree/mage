@@ -34,15 +34,6 @@
 
 package mage.client.dialog;
 
-import java.awt.Component;
-import java.awt.Point;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.io.Serializable;
-import java.util.Map;
-import java.util.UUID;
-import javax.swing.JLayeredPane;
-import javax.swing.SwingUtilities;
 import mage.cards.CardDimensions;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
@@ -53,6 +44,14 @@ import mage.client.util.gui.GuiDisplayUtil;
 import mage.view.CardsView;
 import mage.view.SimpleCardsView;
 import org.mage.card.arcane.CardPanel;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.Serializable;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -97,6 +96,10 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
             if (options.containsKey("chosen")) {
                 java.util.List<UUID> chosenCards = (java.util.List<UUID>)options.get("chosen");
                 cardArea.selectCards(chosenCards);
+            }
+            if (options.containsKey("choosable")) {
+                java.util.List<UUID> choosableCards = (java.util.List<UUID>)options.get("choosable");
+                cardArea.markCards(choosableCards);
             }
         }
 

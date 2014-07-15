@@ -28,23 +28,8 @@
 
 package mage.player.human;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.Mode;
-import mage.abilities.Modes;
-import mage.abilities.PlayLandAbility;
-import mage.abilities.SpecialAction;
-import mage.abilities.SpellAbility;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.*;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCost;
@@ -60,8 +45,6 @@ import mage.choices.ChoiceImpl;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
-import static mage.constants.SpellAbilityType.SPLIT;
-import static mage.constants.SpellAbilityType.SPLIT_FUSED;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
@@ -85,6 +68,9 @@ import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetDefender;
 import mage.util.ManaUtil;
 import org.apache.log4j.Logger;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  *
@@ -348,12 +334,23 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
             Map<String, Serializable> options = getOptions(target);
+            if (options == null) {
+                options = new HashMap<>(1);
+            }
+
             if (target.getTargets().size() > 0) {
-                if (options == null) {
-                    options = new HashMap<>(1);
-                }
                 List<UUID> chosen = (List<UUID>)target.getTargets();
                 options.put("chosen", (Serializable)chosen);
+            }
+
+            List<UUID> choosable = new ArrayList<>();
+            for (UUID cardId : cards) {
+                if (target.canTarget(cardId, cards, game)) {
+                    choosable.add(cardId);
+                }
+            }
+            if (!choosable.isEmpty()) {
+                options.put("choosable", (Serializable) choosable);
             }
             game.fireSelectTargetEvent(playerId, target.getMessage(), cards, required, options);
             waitForResponse(game);

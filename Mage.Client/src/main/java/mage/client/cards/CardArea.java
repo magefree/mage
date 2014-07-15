@@ -28,16 +28,6 @@
 
 package mage.client.cards;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.awt.event.MouseListener;
-import java.util.List;
-import java.util.UUID;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import mage.cards.CardDimensions;
 import mage.cards.MageCard;
 import mage.client.plugins.impl.Plugins;
@@ -48,6 +38,12 @@ import mage.view.CardView;
 import mage.view.CardsView;
 import mage.view.SimpleCardsView;
 import org.mage.card.arcane.CardPanel;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseListener;
+import java.util.List;
+import java.util.UUID;
 
 public class CardArea extends JPanel {
 
@@ -174,6 +170,17 @@ public class CardArea extends JPanel {
                 MageCard mageCard = (MageCard)component;
                 if (selected.contains(mageCard.getOriginal().getId())) {
                     mageCard.setSelected(true);
+                }
+            }
+        }
+    }
+
+    public void markCards(List<UUID> marked) {
+        for (Component component : cardArea.getComponents()) {
+            if (component instanceof MageCard) {
+                MageCard mageCard = (MageCard)component;
+                if (marked.contains(mageCard.getOriginal().getId())) {
+                    mageCard.setChoosable(true);
                 }
             }
         }
