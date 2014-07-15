@@ -75,6 +75,7 @@ public class Main {
     private static final MageVersion version = new MageVersion(1, 3, 0, MageVersion.MAGE_VERSION_INFO);
 
     private static final String testModeArg = "-testMode=";
+    private static final String fastDBModeArg = "-fastDbMode=";
     private static final String adminPasswordArg = "-adminPassword=";
     private static final String pluginFolder = "plugins";
 
@@ -82,6 +83,7 @@ public class Main {
     public static PluginClassLoader classLoader = new PluginClassLoader();
     public static TransporterServer server;
     protected static boolean testMode;
+    protected static boolean fastDbMode;
 
     /**
      * @param args the command line arguments
@@ -90,9 +92,29 @@ public class Main {
 
         logger.info("Starting MAGE server version " + version);
         logger.info("Logging level: " + logger.getEffectiveLevel());
+
+        String adminPassword = "";
+        for (String arg: args) {
+            if (arg.startsWith(testModeArg)) {
+                testMode = Boolean.valueOf(arg.replace(testModeArg, ""));
+            }
+            else if (arg.startsWith(adminPasswordArg)) {
+                adminPassword = arg.replace(adminPasswordArg, "");
+                adminPassword = SystemUtil.sanitize(adminPassword);
+            }
+            else if (arg.startsWith(fastDBModeArg)) {
+                fastDbMode = Boolean.valueOf(arg.replace(fastDBModeArg, ""));
+            }
+        }
+
         logger.info("Loading cards...");
-        CardScanner.scan();
+        if (fastDbMode) {
+            CardScanner.scanned = true;
+        } else {
+            CardScanner.scan();
+        }
         logger.info("Done.");
+
         deleteSavedGames();
         ConfigSettings config = ConfigSettings.getInstance();
         for (GamePlugin plugin: config.getGameTypes()) {
@@ -110,17 +132,7 @@ public class Main {
         for (Plugin plugin: config.getDeckTypes()) {
             DeckValidatorFactory.getInstance().addDeckType(plugin.getName(), loadPlugin(plugin));
         }
-        String adminPassword = "";
-        for (String arg: args) {
-            if (arg.startsWith(testModeArg)) {
-                testMode = Boolean.valueOf(arg.replace(testModeArg, ""));
-            }
-            else if (arg.startsWith(adminPasswordArg)) {
-                adminPassword = arg.replace(adminPasswordArg, "");
-                adminPassword = SystemUtil.sanitize(adminPassword);
-            }
-        }
-        
+
         logger.info("Config - max seconds idle: " + config.getMaxSecondsIdle());
         logger.info("Config - max game threads: " + config.getMaxGameThreads());
         logger.info("Config - max AI opponents: " + config.getMaxAiOpponents());

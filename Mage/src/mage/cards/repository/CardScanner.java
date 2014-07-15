@@ -40,10 +40,9 @@ import java.util.List;
  */
 public class CardScanner {
 
-    private static boolean scanned = false;
+    public static boolean scanned = false;
 
     private static final Logger logger = Logger.getLogger(CardScanner.class);
-
 
     public static void scan() {
         if (scanned) {
@@ -76,5 +75,6 @@ public class CardScanner {
             logger.info("Cards need storing in DB: " + cardsToAdd.size());
             CardRepository.instance.addCards(cardsToAdd);
         }
+
     }
 }
