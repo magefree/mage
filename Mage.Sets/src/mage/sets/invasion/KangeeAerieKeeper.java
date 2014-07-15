@@ -82,10 +82,10 @@ public class KangeeAerieKeeper extends CardImpl {
         
         // When Kangee, Aerie Keeper enters the battlefield, if it was kicked, put X feather counters on it.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.FEATHER.createInstance(), new GetKickerXValue(), true));
-        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When Kangee, Aerie Keeper enters the battlefield, if it was kicked, put X feather counters on it."));
+        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, put X feather counters on it."));
         
         // Other Bird creatures get +1/+1 for each feather counter on Kangee, Aerie Keeper.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(new CountersCount(CounterType.FEATHER), new CountersCount(CounterType.FEATHER), Duration.WhileOnBattlefield, filter, true, "Other Bird creatures get +1/+1 for each feather counter on Kangee, Aerie Keeper.")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(new CountersCount(CounterType.FEATHER), new CountersCount(CounterType.FEATHER), Duration.WhileOnBattlefield, filter, true, "Other Bird creatures get +1/+1 for each feather counter on {this}.")));
     }
 
     public KangeeAerieKeeper(final KangeeAerieKeeper card) {

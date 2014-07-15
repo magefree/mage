@@ -78,7 +78,7 @@ public class KaronaFalseGod extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new KaronaFalseGodControlEffect(), TargetController.ANY, false));
         
         // Whenever Karona attacks, creatures of the creature type of your choice get +3/+3 until end of turn.
-        this.addAbility(new AttacksTriggeredAbility(new KaronaFalseGodBoostEffect(), false, "Whenever Karona attacks, creatures of the creature type of your choice get +3/+3 until end of turn."));
+        this.addAbility(new AttacksTriggeredAbility(new KaronaFalseGodBoostEffect(), false, "Whenever {this} attacks, creatures of the creature type of your choice get +3/+3 until end of turn."));
     }
 
     public KaronaFalseGod(final KaronaFalseGod card) {
@@ -95,7 +95,7 @@ class KaronaFalseGodControlEffect extends ContinuousEffectImpl {
     
     KaronaFalseGodControlEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-        this.staticText = "that player untaps Karona, False God and gains control of it.";
+        this.staticText = "that player untaps {this} and gains control of it.";
     }
     
     KaronaFalseGodControlEffect(final KaronaFalseGodControlEffect effect) {
