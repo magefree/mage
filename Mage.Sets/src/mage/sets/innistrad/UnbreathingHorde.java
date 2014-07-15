@@ -28,11 +28,6 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -40,6 +35,11 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -65,7 +65,7 @@ public class UnbreathingHorde extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Unbreathing Horde enters the battlefield with a +1/+1 counter on it for each other Zombie you control and each Zombie card in your graveyard.
-         this.addAbility(new EntersBattlefieldAbility(new UnbreathingHordeEffect1(), "with a +1/+1 counter on it for each other Zombie you control and each Zombie card in your graveyard"));
+        this.addAbility(new EntersBattlefieldAbility(new UnbreathingHordeEffect1(), "with a +1/+1 counter on it for each other Zombie you control and each Zombie card in your graveyard"));
 
         // If Unbreathing Horde would be dealt damage, prevent that damage and remove a +1/+1 counter from it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UnbreathingHordeEffect2()));
