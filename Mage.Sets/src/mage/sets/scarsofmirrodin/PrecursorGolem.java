@@ -27,8 +27,6 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -38,10 +36,14 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -51,8 +53,6 @@ import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  * @author nantuko
@@ -141,9 +141,11 @@ class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl {
                     }
                 }
             }
-            getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId()));
-            getEffects().get(0).setValue("targetedGolem", targetGolem);
-            return true;
+            if (targetGolem != null) {
+                getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId()));
+                getEffects().get(0).setValue("targetedGolem", targetGolem);
+                return true;
+            }
         }
         return false;
     }
