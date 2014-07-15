@@ -33,6 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -93,23 +94,22 @@ class AuguryAdeptEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card sourceCard = game.getCard(source.getSourceId());
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null || sourceCard == null) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null || sourceObject == null) {
             return false;
         }
         Cards cards = new CardsImpl();
-        Card card = player.getLibrary().removeFromTop(game);
+        Card card = controller.getLibrary().removeFromTop(game);
         if (card != null) {
             card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
 
             int cmc = card.getManaCost().convertedManaCost();
             if (cmc > 0) {
-                player.gainLife(cmc, game);
+                controller.gainLife(cmc, game);
             }
             cards.add(card);
-            player.revealCards(sourceCard.getName(), cards, game);
-            game.informPlayers(sourceCard.getName() + ": "+ player.getName() + " revealed " +card.getName() + " and gained " + cmc + " live");
+            controller.revealCards(sourceObject.getName(), cards, game);
         }
         return true;
     }

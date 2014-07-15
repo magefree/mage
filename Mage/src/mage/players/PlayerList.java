@@ -44,6 +44,25 @@ public class PlayerList extends CircularList<UUID> {
         super(list);
     }
 
+    public Player getCurrent(Game game) {
+        Player player = null;
+        game.getPlayer(this.get());
+        return player;
+    }
+    
+    public Player getNextInRange(Player basePlayer, Game game) {
+        UUID currentPlayerBefore = get();        
+        UUID nextPlayerId = super.getNext();
+        do {
+            if (basePlayer.getInRange().contains(nextPlayerId)) {
+                return game.getPlayer(nextPlayerId);             
+            }
+            nextPlayerId = super.getNext();
+        }        
+        while (!nextPlayerId.equals(currentPlayerBefore));
+        return null;
+    }
+    
     public Player getNext(Game game) {
         Player player;
         UUID start = this.get();

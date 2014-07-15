@@ -27,6 +27,9 @@
  */
 package mage.sets.avacynrestored;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -44,9 +47,26 @@ import mage.target.TargetCard;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardIdPredicate;
+import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.players.PlayerList;
 
 /**
- *
+ * 5/1/2012 	For each despair counter on Descent into Madness, you'll exile a permanent 
+ * you control or exile a card from your hand, not both.
+ * 5/1/2012 	First you choose the permanents and/or cards from your hand that will be
+ * exiled. Then each other player in turn order does the same. Then all the chosen permanents
+ * and cards are exiled simultaneously. Players who choose after you will know what permanents
+ * you'll be exiling when they choose. They'll know how many cards you'll be exiling from
+ * your hand, but they won't see those cards.
+ * 5/1/2012 	If there are more counters on Descent into Madness than the total number of
+ * permanents you control plus the number of cards in your hand, you'll exile all permanents
+ * you control (including Descent into Madness) and all cards from your hand.
+ * 5/1/2012 	If Descent into Madness isn't on the battlefield when its ability resolves,
+ * use the number of counters on it when it left the battlefield to determine how many permanents
+ * and/or cards from hands to exile.
+ * 
  * @author noxx
  */
 public class DescentIntoMadness extends CardImpl {
@@ -73,9 +93,6 @@ public class DescentIntoMadness extends CardImpl {
 
 class DescentIntoMadnessEffect extends OneShotEffect {
 
-    private static final FilterCard filterInHand = new FilterCard();
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
-
     public DescentIntoMadnessEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "put a despair counter on {this}, then each player exiles X permanents he or she controls and/or cards from his or her hand, where X is the number of despair counters on {this}";
@@ -91,56 +108,107 @@ class DescentIntoMadnessEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            permanent.addCounters(CounterType.DESPAIR.createInstance(), game);
-            int count = permanent.getCounters().getCount(CounterType.DESPAIR);
+    public boolean apply(Game game, Ability source) {        
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (sourcePermanent != null && controller != null) {
+            sourcePermanent.addCounters(CounterType.DESPAIR.createInstance(), game);
+            int count = sourcePermanent.getCounters().getCount(CounterType.DESPAIR);
             if (count > 0) {
-
-                Player controller = game.getPlayer(permanent.getControllerId());
-                if (controller != null) {
-                    for (UUID playerId : controller.getInRange()) {
-                        Player player = game.getPlayer(playerId);
-                        if (player != null) {
-                            exileCards(player, count, source, game);
+                // select the permanents and hand cards in turn order
+                LinkedList<UUID> selectedObjects = new LinkedList<>();
+                PlayerList playerList = game.getState().getPlayerList(controller.getId());
+                Player currentPlayer = controller;
+                do {
+                    selectCards(currentPlayer, selectedObjects, count, source, game);
+                    currentPlayer = playerList.getNextInRange(controller, game);                    
+                } while (!currentPlayer.equals(controller) && controller.isInGame());
+                
+                // move permanents and hand cards to exile
+                for (UUID objectId : selectedObjects) {
+                    if (game.getState().getZone(objectId).equals(Zone.BATTLEFIELD)) {
+                        Permanent permanent = game.getPermanent(objectId);
+                        if (permanent != null) {
+                            Player player = game.getPlayer(permanent.getControllerId());
+                            if (player != null) {
+                                player.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD);
+                            }
                         }
+                    } else if (game.getState().getZone(objectId).equals(Zone.HAND)) {
+                        Card card = game.getCard(objectId);
+                        if (card != null) {
+                            Player player = game.getPlayer(card.getOwnerId());
+                            if (player != null) {
+                                player.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.HAND);
+                            }
+                        }                        
                     }
                 }
+                
             }
+            return true;
         }
         return false;
     }
 
-    private void exileCards(Player player, int count, Ability source, Game game) {
+    private void selectCards(Player player, List<UUID> selectedObjects, int count, Ability source, Game game) {
         int amount = Math.min(count, player.getHand().size() + game.getBattlefield().getAllActivePermanents(player.getId()).size());
-
+        int cardsFromHand = 0;
+        
         while (player.isInGame() && amount > 0) {
-            Target target = new TargetControlledPermanent(0, 1, filter, true);
-            if (target.canChoose(player.getId(), game)
-                    && player.choose(Outcome.Exile, target, source.getSourceId(), game)) {
-
-                for (UUID targetId : target.getTargets()) {
-                    Permanent chosen = game.getPermanent(targetId);
-                    if (chosen != null) {
-                        chosen.moveToExile(source.getId(), "Descent into Madness", source.getSourceId(), game);
-                        amount--;
+            
+            Target target;
+            do {
+                FilterControlledPermanent filter = new FilterControlledPermanent();
+                filter.setMessage("permanent you control (" + amount + " left in total)" );
+                List<PermanentIdPredicate> uuidPredicates = new ArrayList<>();
+                for (UUID uuid :selectedObjects) {
+                    uuidPredicates.add(new PermanentIdPredicate(uuid));
+                }
+                filter.add(Predicates.not(Predicates.or(uuidPredicates)));                    
+                
+                target = new TargetControlledPermanent(0, 1, filter, true);
+                if (target.canChoose(player.getId(), game)
+                        && player.choose(Outcome.Exile, target, source.getSourceId(), game)) {                
+                    for (UUID targetId : target.getTargets()) {
+                        if (!selectedObjects.contains(targetId)) {
+                            Permanent chosen = game.getPermanent(targetId);
+                            if (chosen != null) {
+                                amount--;
+                                game.informPlayers(player.getName() + " selects " + chosen.getLogName() + " from battlefield");
+                                selectedObjects.add(targetId);
+                            }
+                        }
                     }
                 }
-            }
-
-            if (amount > 0) {
-                TargetCard targetInHand = new TargetCard(Zone.HAND, filterInHand);
-                if (targetInHand.canChoose(player.getId(), game) &&
-                        player.choose(Outcome.Exile, player.getHand(), targetInHand, game)) {
-
-                    Card card = player.getHand().get(targetInHand.getFirstTarget(), game);
-                    if (card != null) {
-                        card.moveToExile(source.getId(), "Descent into Madness", source.getSourceId(), game);
-                        amount--;
+            } while (amount > 0 && !target.getTargets().isEmpty() && player.isInGame());
+            if (amount > 0) {                
+                TargetCard targetInHand;
+                do {
+                    FilterCard filterInHand = new FilterCard();
+                    filterInHand.setMessage("card from your hand (" + amount + " left in total)");                    
+                    targetInHand = new TargetCard(0, 1, Zone.HAND, filterInHand);
+                    List<CardIdPredicate> uuidPredicates = new ArrayList<>();
+                    for (UUID uuid :selectedObjects) {
+                        uuidPredicates.add(new CardIdPredicate(uuid));
                     }
-                }
+                    filterInHand.add(Predicates.not(Predicates.or(uuidPredicates)));                    
+                    if (targetInHand.canChoose(player.getId(), game) &&
+                            player.choose(Outcome.Exile, player.getHand(), targetInHand, game)) {
+
+                        Card card = player.getHand().get(targetInHand.getFirstTarget(), game);
+                        if (card != null) {
+                            selectedObjects.add(targetInHand.getFirstTarget());
+                            amount--;
+                            cardsFromHand++;
+                        }
+                    }
+                } while (amount > 0 && !targetInHand.getTargets().isEmpty() && player.isInGame());
+
             }
+        }
+        if (cardsFromHand > 0) {
+            game.informPlayers(player.getName() + " selects " + cardsFromHand + (cardsFromHand == 1?" card":" cards") + " from his or her hand");
         }
     }
 }
