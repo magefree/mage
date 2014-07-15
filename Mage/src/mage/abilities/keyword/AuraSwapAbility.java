@@ -37,6 +37,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.other.AuraCardCanAttachToPermanentId;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -98,17 +99,16 @@ class AuraSwapEffect extends OneShotEffect {
         if (player != null) {
             Permanent auraPermanent = game.getPermanent(source.getSourceId());
             if (auraPermanent != null && auraPermanent.getSubtype().contains("Aura") && auraPermanent.getOwnerId().equals(source.getControllerId())) {
-                if (player.getHand().count(filter, game) > 0) {
-                    TargetCardInHand target = new TargetCardInHand(0, 1, filter);
-                    if (player.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
-                        Card auraInHand = game.getCard(target.getFirstTarget());
-                        Permanent enchantedPermanent = game.getPermanent(auraPermanent.getAttachedTo());
-                        if (auraInHand != null && !enchantedPermanent.cantBeEnchantedBy(auraInHand, game) && auraInHand.getSpellAbility().getTargets().get(0).canTarget(enchantedPermanent.getId(), source, game)) {
-                            player.putOntoBattlefieldWithInfo(auraInHand, game, Zone.HAND, source.getSourceId());
-                            enchantedPermanent.addAttachment(auraInHand.getId(), game);
-                            player.moveCardToHandWithInfo(auraPermanent, source.getSourceId(), game, Zone.BATTLEFIELD);
-                            return true;
-                        }
+                Permanent enchantedPermanent = game.getPermanent(auraPermanent.getAttachedTo());
+                filter.add(new AuraCardCanAttachToPermanentId(enchantedPermanent.getId()));
+                TargetCardInHand target = new TargetCardInHand(0, 1, filter);
+                if (player.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
+                    Card auraInHand = game.getCard(target.getFirstTarget());
+                    if (auraInHand != null) {
+                        player.putOntoBattlefieldWithInfo(auraInHand, game, Zone.HAND, source.getSourceId());
+                        enchantedPermanent.addAttachment(auraInHand.getId(), game);
+                        player.moveCardToHandWithInfo(auraPermanent, source.getSourceId(), game, Zone.BATTLEFIELD);
+                        return true;
                     }
                 }
             }
