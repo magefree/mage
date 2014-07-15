@@ -46,11 +46,13 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
@@ -63,10 +65,11 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AjaniSteadfast extends CardImpl {
 
-    private static final FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("tapped creature");
+    private static final FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("other planeswalker you control");
     
     static {
         filter.add(new AnotherPredicate());
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
     
     public AjaniSteadfast(UUID ownerId) {
