@@ -71,6 +71,9 @@ public class Battlefield implements Serializable {
     /**
      * Returns a count of all {@link Permanent} that match the filter and are controlled by controllerId.
      * 
+     * Some filter predicates do not work here (e.g. AnotherPredicate() because filter.match() is called
+     * without controllerId. To use this predicates you can use count() instead of countAll()
+     * 
      * @param filter
      * @param controllerId
      * @param game
