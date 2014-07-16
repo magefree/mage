@@ -335,6 +335,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.idleTimeout = false;
 
         this.turns = 0;
+        this.isGameUnderControl = true;
+        this.turnController = this.getId();
+        this.playersUnderYourControl.clear();
         this.passed = false;
         this.passedTurn = false;
         this.passedAllTurns = false;
@@ -345,7 +348,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.setReachedNextTurnAfterLeaving(false);
         game.getState().getWatchers().add(new BloodthirstWatcher(playerId));  
     }
-    
+    /**
+     * called before apply effects
+     *
+     */
     @Override
     public void reset() {
         this.abilities.clear();

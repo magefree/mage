@@ -41,8 +41,8 @@ import mage.constants.TurnPhase;
  */
 public class TurnMod implements Serializable {
 
-    private UUID id;
-    private UUID playerId;
+    private final UUID id;
+    private final UUID playerId;
     private UUID newControllerId;
     private boolean extraTurn;
     private boolean skipTurn;
