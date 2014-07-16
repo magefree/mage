@@ -34,6 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.AdjustingSourceCosts;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.choices.Choice;
@@ -119,13 +120,14 @@ public class ConvokeAbility extends SimpleStaticAbility implements AdjustingSour
         if (player.chooseUse(Outcome.Detriment, "Convoke creatures?", game)) {
             player.chooseTarget(Outcome.Tap, target, ability, game);
             if (target.getTargets().size() > 0) {
-                int adjCost = 0;
                 for (UUID creatureId: target.getTargets()) {
                     Permanent perm = game.getPermanent(creatureId);
-                    if (perm == null) {
+                    if (perm == null || ability.getManaCostsToPay().convertedManaCost() == 0) {
                         continue;
                     }
-                    if (perm.tap(game)) {
+                    if (!perm.isTapped() && perm.tap(game)) {
+                        ManaCosts<ManaCost> manaCostsToReduce = new ManaCostsImpl<>();
+                        int costBefore = ability.getManaCostsToPay().convertedManaCost();
                         Choice chooseManaType = buildChoice(perm.getColor(), ability.getManaCostsToPay());
                         if (chooseManaType.getChoices().size() > 0) {
                             if (chooseManaType.getChoices().size() > 1) {
@@ -137,8 +139,6 @@ public class ConvokeAbility extends SimpleStaticAbility implements AdjustingSour
                             } else {
                                 chooseManaType.setChoice(chooseManaType.getChoices().iterator().next());
                             }
-
-                            ManaCosts manaCostsToReduce = new ManaCostsImpl();
                             if (chooseManaType.getChoice().equals("Black")) {
                                 manaCostsToReduce.load("{B}");
                             }
@@ -155,16 +155,21 @@ public class ConvokeAbility extends SimpleStaticAbility implements AdjustingSour
                                 manaCostsToReduce.load("{R}");
                             }
                             if (chooseManaType.getChoice().equals("Colorless")) {
-                                ++adjCost;
+                                manaCostsToReduce.load("{1}");
                             }
                             CardUtil.reduceCost((SpellAbility)ability, manaCostsToReduce);
                         } else {
-                            ++adjCost;
+                            manaCostsToReduce.load("{1}");
+                            CardUtil.reduceCost((SpellAbility)ability, manaCostsToReduce);
+                        }
+                        if (costBefore == ability.getManaCostsToPay().convertedManaCost()) {
+                            // creature could not reduce mana costs so tap must be reverted
+                            perm.untap(game);
+                        } else {
+                            game.informPlayers("Convoke: " + player.getName() + " taps " + perm.getLogName() + " to reduce mana costs by " + manaCostsToReduce.getText());
                         }
                     }
                 }
-                this.getTargets().add(target);
-                CardUtil.adjustCost((SpellAbility)ability, adjCost);
             }
         }
     }
