@@ -28,13 +28,13 @@
 
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -87,7 +87,7 @@ public class CounterUnlessPaysEffect extends OneShotEffect {
                 }
                 costToPay.clearPaid();
                 if (!costToPay.pay(source, game, spell.getSourceId(), spell.getControllerId(), false)) {
-                    return game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
+                    return game.getStack().counter(spell.getId(), source.getSourceId(), game);
                 }
             }
         }
