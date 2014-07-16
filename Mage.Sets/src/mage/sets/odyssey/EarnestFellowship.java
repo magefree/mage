@@ -27,6 +27,7 @@
  */
 package mage.sets.odyssey;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.ObjectColor;
@@ -44,6 +45,7 @@ import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -62,9 +64,6 @@ public class EarnestFellowship extends CardImpl {
 
         // Each creature has protection from its colors.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EarnestFellowshipEffect()));
-
-        
-        
     }
 
     public EarnestFellowship(final EarnestFellowship card) {
@@ -100,24 +99,13 @@ class EarnestFellowshipEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             if (permanent.getColor().hasColor()) {
-                ObjectColor color = permanent.getColor();
-                FilterCard filterColor = new FilterCard("its own Colors");               
-                if (color.contains(ObjectColor.BLACK)){
-                    filterColor.add(new ColorPredicate(ObjectColor.BLACK));
-                }               
-                if (color.contains(ObjectColor.BLUE)){
-                    filterColor.add(new ColorPredicate(ObjectColor.BLUE));
-                }                
-                if (color.contains(ObjectColor.WHITE)){
-                    filterColor.add(new ColorPredicate(ObjectColor.WHITE));
-                }                
-                if (color.contains(ObjectColor.RED)){
-                    filterColor.add(new ColorPredicate(ObjectColor.RED));
-                }                
-                if (color.contains(ObjectColor.GREEN)){
-                    filterColor.add(new ColorPredicate(ObjectColor.GREEN));
+                List<ColorPredicate> colorPredicates = new ArrayList<>();
+                for (ObjectColor color : permanent.getColor().getColors()) {
+                    colorPredicates.add(new ColorPredicate(color));
                 }
-                Ability ability = new ProtectionAbility(filterColor);
+                FilterCard filterColors = new FilterCard("its colors");
+                filterColors.add(Predicates.or(colorPredicates));
+                Ability ability = new ProtectionAbility(filterColors);
                 permanent.addAbility(ability, source.getSourceId(), game);
             }
        }

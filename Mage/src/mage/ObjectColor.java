@@ -29,6 +29,8 @@
 package mage;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import mage.util.Copyable;
 
 public class ObjectColor implements Serializable, Copyable<ObjectColor>, Comparable<ObjectColor> {
@@ -95,6 +97,26 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
             count++;
         }
         return count;
+    }
+
+    public List<ObjectColor> getColors() {
+        List<ObjectColor> colors = new ArrayList<>();
+        if (this.isWhite()) {
+            colors.add(ObjectColor.WHITE);
+        }
+        if (this.isBlue()) {
+            colors.add(ObjectColor.BLUE);
+        }
+        if (this.isBlack()) {
+            colors.add(ObjectColor.BLACK);
+        }
+        if (this.isRed()) {
+            colors.add(ObjectColor.RED);
+        }
+        if (this.isGreen()) {
+            colors.add(ObjectColor.GREEN);
+        }
+        return colors;
     }
 
     public void setColor(ObjectColor color) {
