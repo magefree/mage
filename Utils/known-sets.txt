@@ -83,6 +83,8 @@ Scourge|scourge|
 Seventh Edition|seventhedition|
 Shadowmoor|shadowmoor|
 Shards of Alara|shardsofalara|
+Starter 1999|starter1999|
+Starter 2000|starter2000|
 Stronghold|stronghold|
 Tempest|tempest|
 Tenth Edition|tenth|

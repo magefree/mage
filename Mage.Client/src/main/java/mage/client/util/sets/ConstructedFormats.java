@@ -62,7 +62,7 @@ public class ConstructedFormats {
             "Commander",
             "Planechase 2012",
             "Planechase",
-            "Portal", "Portal Second Age", "Portal Three Kingdoms",
+            "Portal", "Portal Second Age", "Portal Three Kingdoms","Starter 1999","Starter 2000",
             "Duel Decks: Elves vs. Goblins",
             "Duel Decks: Jace vs. Chandra",
             "Duel Decks: Divine vs. Demonic",
@@ -430,6 +430,12 @@ public class ConstructedFormats {
         }
         if (format.equals("Portal Three Kingdoms")) {
             return Arrays.asList("PTK");
+        }
+        if (format.equals("Starter 1999")) {
+            return Arrays.asList("S99");
+        }
+        if (format.equals("Starter 2000")) {
+            return Arrays.asList("S00");
         }
         if (format.equals("Duel Decks: Elves vs. Goblins")) {
             return Arrays.asList("EVG");
