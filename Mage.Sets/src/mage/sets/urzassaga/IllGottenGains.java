@@ -100,7 +100,7 @@ class IllGottenGainsEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     Target target = new TargetCardInYourGraveyard(0, 3, new FilterCard());
-                    if (target.choose(Outcome.ReturnToHand, player.getId(), source.getId(), game)) {
+                    if (target.choose(Outcome.ReturnToHand, player.getId(), source.getSourceId(), game)) {
                         for (UUID targetId : target.getTargets()) {
                             Card card = game.getCard(targetId);
                             player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD);
