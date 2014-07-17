@@ -130,7 +130,7 @@ class ChandraPyromasterEffect1 extends OneShotEffect {
         }
         Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (creature != null) {
-            creature.damage(1, source.getSourceId(), game, true, false);
+            creature.damage(1, source.getSourceId(), game, false, true);
             ContinuousEffect effect = new CantBlockTargetEffect(Duration.EndOfTurn);
             effect.setTargetPointer(new FixedTarget(creature.getId()));
             game.addEffect(effect, source);

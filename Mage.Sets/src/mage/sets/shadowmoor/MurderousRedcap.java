@@ -98,7 +98,7 @@ class MurderousRedcapEffect extends OneShotEffect {
             sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         }
         if (sourcePermanent != null && permanent != null) {
-            permanent.damage(sourcePermanent.getPower().getValue(), sourcePermanent.getId(), game, true, false);
+            permanent.damage(sourcePermanent.getPower().getValue(), sourcePermanent.getId(), game, false, true);
             return true;
         }
         Player player = game.getPlayer(source.getFirstTarget());

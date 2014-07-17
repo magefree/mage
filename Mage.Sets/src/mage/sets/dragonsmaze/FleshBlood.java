@@ -148,7 +148,7 @@ class BloodEffect extends OneShotEffect {
 
         Permanent targetCreature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (sourcePermanent != null && targetCreature != null) {
-            targetCreature.damage(sourcePermanent.getPower().getValue(), sourcePermanent.getId(), game, true, false);
+            targetCreature.damage(sourcePermanent.getPower().getValue(), sourcePermanent.getId(), game, false, true);
             return true;
         }
         Player targetPlayer = game.getPlayer(source.getTargets().get(1).getFirstTarget());

@@ -97,7 +97,7 @@ class AbyssalHunterEffect extends OneShotEffect {
         if (targetCreature != null) {
             targetCreature.tap(game);
             if (hunter != null) {
-                targetCreature.damage(hunter.getPower().getValue(), hunter.getId(), game, true, false);
+                targetCreature.damage(hunter.getPower().getValue(), hunter.getId(), game, false, true);
             }
             return true;
         }

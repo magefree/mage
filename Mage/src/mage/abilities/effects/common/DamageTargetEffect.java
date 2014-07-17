@@ -108,7 +108,7 @@ public class DamageTargetEffect extends OneShotEffect {
                 for (UUID targetId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent != null) {
-                        permanent.damage(amount.calculate(game, source), source.getSourceId(), game, preventable, false);
+                        permanent.damage(amount.calculate(game, source), source.getSourceId(), game, false, preventable);
                     }
                     Player player = game.getPlayer(targetId);
                     if (player != null) {
@@ -121,7 +121,7 @@ public class DamageTargetEffect extends OneShotEffect {
         for (UUID targetId :this.getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
-                permanent.damage(amount.calculate(game, source), source.getSourceId(), game, preventable, false);
+                permanent.damage(amount.calculate(game, source), source.getSourceId(), game, false, preventable);
             } else {
                 Player player = game.getPlayer(targetId);
                 if (player != null) {

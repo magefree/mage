@@ -144,7 +144,7 @@ class RaziaBorosArchangelEffect extends PreventionEffectImpl {
                 if (permanent != null) {
                     game.informPlayers("Dealing " + prevented + " to " + permanent.getName() + " instead");
                     // keep the original source id as it is redirecting
-                    permanent.damage(prevented, event.getSourceId(), game, true, false);
+                    permanent.damage(prevented, event.getSourceId(), game, false, true);
                 }
             }
         }

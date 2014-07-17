@@ -81,9 +81,9 @@ public interface Permanent extends Card, Controllable {
     boolean cantBeEnchantedBy(MageObject source, Game game);
     boolean hasSummoningSickness();
     int getDamage();
-    int damage(int damage, UUID sourceId, Game game, boolean preventable, boolean combat);
+    int damage(int damage, UUID sourceId, Game game, boolean combat, boolean preventable);
 
-    int damage(int damage, UUID sourceId, Game game, boolean preventable, boolean combat, ArrayList<UUID> appliedEffects);
+    int damage(int damage, UUID sourceId, Game game, boolean combat, boolean preventable, ArrayList<UUID> appliedEffects);
 
     /**
      * used in combat only to deal damage at the same time

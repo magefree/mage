@@ -107,7 +107,7 @@ class EmberGaleEffect extends OneShotEffect {
                     new ColorPredicate(ObjectColor.BLUE)));
             filter2.add(new CardTypePredicate(CardType.CREATURE));
             for (Permanent creature : game.getBattlefield().getAllActivePermanents(filter2, targetPlayer.getId(), game)) {
-                creature.damage(1, source.getSourceId(), game, true, false);
+                creature.damage(1, source.getSourceId(), game, false, true);
             }
             return true;
         }

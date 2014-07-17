@@ -142,7 +142,7 @@ class RazorBoomerangEffect extends OneShotEffect {
         for (UUID target : targetPointer.getTargets(game, source)) {
             Permanent creature = game.getPermanent(target);
             if (creature != null) {
-                creature.damage(1, attachmentid, game, true, false);
+                creature.damage(1, attachmentid, game, false, true);
             }
             Player player = game.getPlayer(target);
             if (player != null) {

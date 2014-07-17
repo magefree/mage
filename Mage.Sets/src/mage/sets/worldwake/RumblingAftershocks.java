@@ -153,7 +153,7 @@ class RumblingAftershocksDealDamageEffect extends OneShotEffect {
             }
             Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
             if (permanent != null) {
-                permanent.damage(damageAmount.intValue(), source.getSourceId(), game, true, false);
+                permanent.damage(damageAmount.intValue(), source.getSourceId(), game, false, true);
                 return true;
             }
         }

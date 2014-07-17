@@ -102,7 +102,7 @@ class HarmsWayPreventDamageTargetEffect extends PreventionEffectImpl {
             if (permanent != null) {
                 game.informPlayers("Dealing " + preventionData.getPreventedDamage() + " to " + permanent.getName() + " instead");
                 // keep the original source id as it is redirecting
-                permanent.damage(preventionData.getPreventedDamage(), event.getSourceId(), game, true, false);
+                permanent.damage(preventionData.getPreventedDamage(), event.getSourceId(), game, false, true);
             }
             Player player = game.getPlayer(redirectTo);
             if (player != null) {

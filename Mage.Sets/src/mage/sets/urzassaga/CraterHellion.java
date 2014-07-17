@@ -96,7 +96,7 @@ class CraterHellionEffect extends OneShotEffect {
             List<Permanent> permanents = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
             for (Permanent permanent: permanents) {
                 if(!permanent.getId().equals(source.getSourceId())) {
-                    permanent.damage(4, source.getSourceId(), game, true, false);
+                    permanent.damage(4, source.getSourceId(), game, false, true);
                 }
             }
             return true;

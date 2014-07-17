@@ -103,7 +103,7 @@ class MordantDragonEffect extends OneShotEffect {
                 if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Damage, source.getControllerId(), source.getId(), game)) {
                     UUID creature = target.getFirstTarget();
                     if (creature != null) {
-                        game.getPermanent(creature).damage(amount, source.getSourceId(), game, true, false);
+                        game.getPermanent(creature).damage(amount, source.getSourceId(), game, false, true);
                         return true;
                     }
                 }

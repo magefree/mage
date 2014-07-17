@@ -148,8 +148,8 @@ class GuildFeudEffect extends OneShotEffect {
             // If two creatures are put onto the battlefield this way, those creatures fight each other
             if (opponentCreature != null && controllerCreature != null) {
                 int power = opponentCreature.getPower().getValue();
-                opponentCreature.damage(controllerCreature.getPower().getValue(), source.getSourceId(), game, true, false);
-                controllerCreature.damage(power, source.getSourceId(), game, true, false);
+                opponentCreature.damage(controllerCreature.getPower().getValue(), source.getSourceId(), game, false, true);
+                controllerCreature.damage(power, source.getSourceId(), game, false, true);
             }
         }
         return false;

@@ -92,7 +92,7 @@ class HomingLightningEffect extends OneShotEffect {
         if (target != null) {
             for (Permanent creature : creatures) {
                 if (creature != null) {
-                    creature.damage(4, id, game, true, false);
+                    creature.damage(4, id, game, false, true);
                 }
             }
             return true;

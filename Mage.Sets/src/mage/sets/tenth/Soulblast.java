@@ -106,7 +106,7 @@ class SoulblastEffect extends OneShotEffect {
             } else {
                 Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
                 if (creature != null) {
-                    creature.damage(power, source.getSourceId(), game, true, false);
+                    creature.damage(power, source.getSourceId(), game, false, true);
                 }
             }
         }

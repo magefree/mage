@@ -99,7 +99,7 @@ class ChainLightningEffect extends OneShotEffect {
             else {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null) {
-                    permanent.damage(3, source.getSourceId(), game, true, false);
+                    permanent.damage(3, source.getSourceId(), game, false, true);
                     affectedPlayer = game.getPlayer(permanent.getControllerId());
                 }
             }

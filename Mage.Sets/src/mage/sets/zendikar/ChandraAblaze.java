@@ -149,7 +149,7 @@ class ChandraAblazeEffect2 extends OneShotEffect {
         if (card != null && card.getColor().isRed()) {
             Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
             if (permanent != null) {
-                permanent.damage(4, source.getSourceId(), game, true, false);
+                permanent.damage(4, source.getSourceId(), game, false, true);
                 return true;
             }
 

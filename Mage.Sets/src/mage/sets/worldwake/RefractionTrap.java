@@ -204,7 +204,7 @@ class RefractionTrapPreventDamageEffect extends PreventionEffectImpl {
                 Permanent target = game.getPermanent(damageTarget);
                 if (target != null) {
                     game.informPlayers("Dealing " + prevented + " to " + target.getName());
-                    target.damage(prevented, source.getSourceId(), game, true, false);
+                    target.damage(prevented, source.getSourceId(), game, false, true);
                 }
                 Player player = game.getPlayer(damageTarget);
                 if (player != null) {

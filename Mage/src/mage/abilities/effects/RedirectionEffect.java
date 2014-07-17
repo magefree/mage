@@ -67,7 +67,7 @@ public abstract class RedirectionEffect extends ReplacementEffectImpl {
         DamageEvent damageEvent = (DamageEvent)event;
         Permanent permanent = game.getPermanent(redirectTarget.getFirstTarget());
         if (permanent != null) {
-            permanent.damage(damageEvent.getAmount(), event.getSourceId(), game, damageEvent.isPreventable(), damageEvent.isCombatDamage(), event.getAppliedEffects());
+            permanent.damage(damageEvent.getAmount(), event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
             return true;
         }
         Player player = game.getPlayer(redirectTarget.getFirstTarget());

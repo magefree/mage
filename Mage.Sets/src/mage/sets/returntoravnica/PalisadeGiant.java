@@ -148,7 +148,7 @@ class PalisadeGiantReplacementEffect extends ReplacementEffectImpl {
             }
             game.informPlayers(message.toString());
             // redirect damage
-            sourcePermanent.damage(damageEvent.getAmount(), damageEvent.getSourceId(), game, damageEvent.isPreventable(), damageEvent.isCombatDamage(), event.getAppliedEffects());
+            sourcePermanent.damage(damageEvent.getAmount(), damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
             return true;
         }
         return false;

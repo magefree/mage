@@ -121,7 +121,7 @@ class OrimsThunderEffect2 extends OneShotEffect {
         }
         boolean kicked = KickedCondition.getInstance().apply(game, source);
         if (kicked && secondTarget != null) {
-            secondTarget.damage(damage, source.getId(), game, true, false);
+            secondTarget.damage(damage, source.getId(), game, false, true);
             return true;
         }
         return false;

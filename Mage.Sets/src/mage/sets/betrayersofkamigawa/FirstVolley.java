@@ -89,7 +89,7 @@ class FirstVolleyEffect extends OneShotEffect {
         if (permanent != null) {
             Player controller = game.getPlayer(permanent.getControllerId());
             if (controller != null) {
-                permanent.damage(1, source.getSourceId(), game, true, false);
+                permanent.damage(1, source.getSourceId(), game, false, true);
                 controller.damage(1, source.getSourceId(), game, false, true);
                 return true;
             }

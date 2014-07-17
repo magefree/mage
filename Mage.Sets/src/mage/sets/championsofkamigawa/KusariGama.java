@@ -152,7 +152,7 @@ class KusariGamaDamageEffect extends OneShotEffect {
                     if (!blockerId.equals(damagedCreatureId)) {
                         Permanent blockingCreature = game.getPermanent(blockerId);
                         if (blockingCreature != null && blockingCreature.getControllerId().equals(creature.getControllerId())) {
-                            blockingCreature.damage(damage, source.getSourceId(), game, true, false);
+                            blockingCreature.damage(damage, source.getSourceId(), game, false, true);
                         }
                     }
                 }

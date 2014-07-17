@@ -100,7 +100,7 @@ class EmbersmithEffect extends OneShotEffect {
         if (cost.pay(source, game, source.getId(), source.getControllerId(), false)) {
             Permanent permanent = game.getPermanent(source.getFirstTarget());
             if (permanent != null) {
-                permanent.damage(1, source.getId(), game, true, false);
+                permanent.damage(1, source.getId(), game, false, true);
                 return true;
             }
             Player player = game.getPlayer(source.getFirstTarget());

@@ -137,7 +137,7 @@ class AcolytesRewardEffect extends PreventionEffectImpl {
                     } else {
                         Permanent targetDamageCreature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
                         if (targetDamageCreature != null) {
-                            targetDamageCreature.damage(toPrevent, source.getSourceId(), game, true, false);
+                            targetDamageCreature.damage(toPrevent, source.getSourceId(), game, false, true);
                             game.informPlayers(new StringBuilder("Acolyte's Reward ").append("deals ").append(toPrevent).append(" damage to ").append(targetDamageCreature.getName()).toString());
                         }
                     }

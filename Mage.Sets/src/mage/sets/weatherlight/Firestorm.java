@@ -100,7 +100,7 @@ class FirestormEffect extends OneShotEffect {
                 for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
                     Permanent creature = game.getPermanent(targetId);
                     if (creature != null) {
-                        creature.damage(amount, source.getSourceId(), game, true, false);
+                        creature.damage(amount, source.getSourceId(), game, false, true);
                     } else {
                         Player player = game.getPlayer(targetId);
                         if (player != null) {

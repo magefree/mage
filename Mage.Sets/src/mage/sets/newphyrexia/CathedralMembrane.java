@@ -127,7 +127,7 @@ class CathedralMembraneEffect extends OneShotEffect {
             for (UUID uuid : watcher.blockedCreatures) {
                 Permanent permanent = game.getPermanent(uuid);
                 if (permanent != null) {
-                    permanent.damage(6, source.getSourceId(), game, true, false);
+                    permanent.damage(6, source.getSourceId(), game, false, true);
                 }
             }
         }

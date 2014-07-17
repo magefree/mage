@@ -97,7 +97,7 @@ public class AuraBarbs extends CardImpl {
                 if (auraEnchantment.getAttachedTo() != null) {
                     Permanent attachedToCreature = game.getPermanent(auraEnchantment.getAttachedTo());
                     if (attachedToCreature != null && attachedToCreature.getCardType().contains(CardType.CREATURE)) {
-                        attachedToCreature.damage(2, auraEnchantment.getId(), game, true, false);
+                        attachedToCreature.damage(2, auraEnchantment.getId(), game, false, true);
                         game.informPlayers("2 damage assigned to " + attachedToCreature.getName() + " from " + auraEnchantment.getName());
                     }
                 }

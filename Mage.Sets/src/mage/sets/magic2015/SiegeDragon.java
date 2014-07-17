@@ -156,7 +156,7 @@ class SiegeDragonDamageEffect extends OneShotEffect {
             filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
             List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
             for (Permanent permanent : permanents) {
-                permanent.damage(2, source.getSourceId(), game, true, false);
+                permanent.damage(2, source.getSourceId(), game, false, true);
             }
             return true;
         }

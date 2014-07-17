@@ -98,7 +98,7 @@ class ConsumeSpiritEffect extends OneShotEffect {
         if (amount > 0) {
             Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent != null) {
-                permanent.damage(amount, source.getSourceId(), game, true, false);
+                permanent.damage(amount, source.getSourceId(), game, false, true);
             } else {
                 Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
                 if (player != null) {

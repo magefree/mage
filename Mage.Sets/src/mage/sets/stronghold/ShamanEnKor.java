@@ -114,7 +114,7 @@ class ShamanEnKorPreventionEffect extends PreventionEffectImpl {
             if (redirectTo != null) {
                 game.informPlayers("Dealing " + preventionResult.getPreventedDamage() + " to " + redirectTo.getName() + " instead.");
                 DamageEvent damageEvent = (DamageEvent) event;
-                redirectTo.damage(preventionResult.getPreventedDamage(), event.getSourceId(), game, damageEvent.isPreventable(), damageEvent.isCombatDamage(), event.getAppliedEffects());
+                redirectTo.damage(preventionResult.getPreventedDamage(), event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
             }
         }
         return false;
@@ -206,7 +206,7 @@ class ShamanEnKorReplacementEffect extends ReplacementEffectImpl {
             game.informPlayers(message.toString());
             // redirect damage
             this.used = true;
-            sourcePermanent.damage(damageEvent.getAmount(), damageEvent.getSourceId(), game, damageEvent.isPreventable(), damageEvent.isCombatDamage(), event.getAppliedEffects());
+            sourcePermanent.damage(damageEvent.getAmount(), damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
             return true;
         }
         return false;

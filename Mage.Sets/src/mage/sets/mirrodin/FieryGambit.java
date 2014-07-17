@@ -104,7 +104,7 @@ class FieryGambitEffect extends OneShotEffect {
             if (controllerStopped) {
                 Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
                 if (creature != null) {
-                    creature.damage(3, source.getSourceId(), game, true, false);
+                    creature.damage(3, source.getSourceId(), game, false, true);
                 }
                 if (flipsWon > 1) {
                     new DamagePlayersEffect(6, TargetController.OPPONENT).apply(game, source);

@@ -94,7 +94,7 @@ class PariahEffect extends ReplacementEffectImpl {
 		if(equipment != null){
             Permanent p = game.getPermanent(equipment.getAttachedTo());
 			if (p != null) {
-				p.damage(damageEvent.getAmount(), event.getSourceId(), game, damageEvent.isPreventable(), damageEvent.isCombatDamage());
+				p.damage(damageEvent.getAmount(), event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
 				return true;
 			}
 		}

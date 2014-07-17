@@ -115,7 +115,7 @@ class ShurikenDamageEffect extends OneShotEffect {
         if (equipment != null) {
             Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
             if (creature != null) {
-                creature.damage(2, equipment.getId(), game, true, false);
+                creature.damage(2, equipment.getId(), game, false, true);
             }
             return true;
         }

@@ -98,10 +98,10 @@ class AlphaBrawlEffect extends OneShotEffect {
             if (player != null) {
                 int power = creature.getPower().getValue();
                 for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
-                    perm.damage(power, creature.getId(), game, true, false);
+                    perm.damage(power, creature.getId(), game, false, true);
                 }
                 for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
-                    creature.damage(perm.getPower().getValue(), perm.getId(), game, true, false);
+                    creature.damage(perm.getPower().getValue(), perm.getId(), game, false, true);
                 }
                 return true;
             }

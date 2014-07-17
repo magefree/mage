@@ -144,7 +144,7 @@ class FlayerEffect extends OneShotEffect {
             UUID target = source.getTargets().getFirstTarget();
             Permanent targetCreature = game.getPermanent(target);
             if (targetCreature != null) {
-                targetCreature.damage(amount, creature.getId(), game, true, false);
+                targetCreature.damage(amount, creature.getId(), game, false, true);
                 return true;
             }
             Player player = game.getPlayer(target);

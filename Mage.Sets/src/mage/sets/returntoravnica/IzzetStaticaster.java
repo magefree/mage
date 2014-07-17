@@ -110,7 +110,7 @@ class IzzetStaticasterDamageEffect extends OneShotEffect {
             filter.add(new NamePredicate(targetPermanent.getName()));
             List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getId(), game);
             for (Permanent permanent : permanents) {
-                permanent.damage(1, source.getSourceId(), game, true, false);
+                permanent.damage(1, source.getSourceId(), game, false, true);
             }
             return true;
         }

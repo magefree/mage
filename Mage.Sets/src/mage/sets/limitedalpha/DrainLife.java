@@ -104,7 +104,7 @@ class DrainLifeEffect extends OneShotEffect {
                 if (permanent.getToughness().getValue() < amount) {
                     lifetogain = permanent.getToughness().getValue();
                 }
-                permanent.damage(amount, source.getSourceId(), game, true, false);
+                permanent.damage(amount, source.getSourceId(), game, false, true);
             } else {
                 Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
                 if (player != null) {

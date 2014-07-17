@@ -99,7 +99,7 @@ class SpikeshotGoblinEffect extends OneShotEffect {
 
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            permanent.damage(damage, sourcePermanent.getId(), game, true, false);
+            permanent.damage(damage, sourcePermanent.getId(), game, false, true);
             return true;
         }
         Player player = game.getPlayer(source.getFirstTarget());

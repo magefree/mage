@@ -180,7 +180,7 @@ class TortureChamberEffect2 extends OneShotEffect {
         }
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            permanent.damage(countersRemoved, source.getSourceId(), game, true, false);
+            permanent.damage(countersRemoved, source.getSourceId(), game, false, true);
             return true;
         }
         return false;

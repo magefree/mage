@@ -128,7 +128,7 @@ class BaneFireEffect extends OneShotEffect {
             return true;
         }
         if (targetCreature != null) {
-            targetCreature.damage(damage, source.getSourceId(), game, false, preventable);
+            targetCreature.damage(damage, source.getSourceId(), game, preventable, false);
             return true;
         }
         return false;

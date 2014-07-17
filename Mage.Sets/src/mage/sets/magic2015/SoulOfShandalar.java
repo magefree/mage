@@ -117,7 +117,7 @@ class SoulOfShandalarEffect extends OneShotEffect {
         }
         Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (creature != null) {
-            creature.damage(3, source.getSourceId(), game, true, false);
+            creature.damage(3, source.getSourceId(), game, false, true);
         }
         return true;
     }

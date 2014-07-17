@@ -586,13 +586,13 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public int damage(int damageAmount, UUID sourceId, Game game, boolean preventable, boolean combat) {
-        return damage(damageAmount, sourceId, game, preventable, combat, false, null);
+    public int damage(int damage, UUID sourceId, Game game, boolean combat, boolean preventable) {
+        return damage(damage, sourceId, game, preventable, combat, false, null);
     }
 
     @Override
-    public int damage(int damageAmount, UUID sourceId, Game game, boolean preventable, boolean combat, ArrayList<UUID> appliedEffects) {
-        return damage(damageAmount, sourceId, game, preventable, combat, false, appliedEffects);
+    public int damage(int damage, UUID sourceId, Game game, boolean combat, boolean preventable, ArrayList<UUID> appliedEffects) {
+        return damage(damage, sourceId, game, preventable, combat, false, appliedEffects);
     }
     /**
      * @param damageAmount

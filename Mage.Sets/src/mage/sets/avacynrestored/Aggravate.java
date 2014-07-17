@@ -99,7 +99,7 @@ class AggraveteEffect extends OneShotEffect {
             filter.add(new ControllerIdPredicate(player.getId()));
             List<Permanent> creatures = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getId(), game);
             for (Permanent creature : creatures) {
-                creature.damage(1, source.getSourceId(), game, true, false);
+                creature.damage(1, source.getSourceId(), game, false, true);
             }
             return true;
         }

@@ -1337,7 +1337,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID sourceId, Game game) {
         log.debug("assignDamage");
         //TODO: improve this
-        game.getPermanent(targets.get(0)).damage(damage, sourceId, game, true, false);
+        game.getPermanent(targets.get(0)).damage(damage, sourceId, game, false, true);
     }
 
     @Override

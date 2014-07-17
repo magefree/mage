@@ -92,7 +92,7 @@ class BlazingSalvoEffect extends OneShotEffect {
                 if (player.chooseUse(Outcome.Damage, message, game)){
                     player.damage(5, source.getSourceId(), game, true, false);
                 } else {
-                    permanent.damage(3, source.getSourceId(), game, true, false);
+                    permanent.damage(3, source.getSourceId(), game, false, true);
                 }
                 return true;  
             } 

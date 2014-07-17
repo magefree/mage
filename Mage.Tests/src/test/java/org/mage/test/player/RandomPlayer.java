@@ -404,7 +404,7 @@ public class RandomPlayer extends ComputerPlayer {
             }
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
-                permanent.damage(amount, sourceId, game, true, false);
+                permanent.damage(amount, sourceId, game, false, true);
                 remainingDamage -= amount;
             }
             else {

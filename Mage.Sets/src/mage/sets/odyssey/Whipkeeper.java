@@ -93,7 +93,7 @@ class WhipkeeperEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanent(source.getFirstTarget());
         if (creature != null) {
-            creature.damage(creature.getDamage(), source.getSourceId(), game, true, false);
+            creature.damage(creature.getDamage(), source.getSourceId(), game, false, true);
             return true;
         }
         return false;

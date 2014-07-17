@@ -96,7 +96,7 @@ class SuddenDemiseDamageEffect extends OneShotEffect {
                 FilterPermanent filter = new FilterCreaturePermanent();
                 filter.add(new ColorPredicate(choice.getColor()));
                 for (Permanent permanent:game.getBattlefield().getActivePermanents(filter, source.getControllerId(), id, game)) {
-                    permanent.damage(damage, source.getSourceId(), game, true, false);
+                    permanent.damage(damage, source.getSourceId(), game, false, true);
                 }
                 return true;
             }

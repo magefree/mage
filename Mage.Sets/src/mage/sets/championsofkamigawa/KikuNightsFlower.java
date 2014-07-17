@@ -103,7 +103,7 @@ class KikuNightsFlowerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (permanent != null) {
-            permanent.damage(permanent.getPower().getValue(), permanent.getId(), game, true, false);
+            permanent.damage(permanent.getPower().getValue(), permanent.getId(), game, false, true);
             return true;
         }
         return false;

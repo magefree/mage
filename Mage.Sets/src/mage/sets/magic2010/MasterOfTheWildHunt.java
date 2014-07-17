@@ -118,7 +118,7 @@ class MasterOfTheWildHuntEffect extends OneShotEffect {
         if (target != null && game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0) {
             for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                 permanent.tap(game);
-                target.damage(permanent.getToughness().getValue(), permanent.getId(), game, true, false);
+                target.damage(permanent.getToughness().getValue(), permanent.getId(), game, false, true);
                 wolves.add(permanent.getId());
             }
             Player player = game.getPlayer(target.getControllerId());

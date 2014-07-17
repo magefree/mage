@@ -103,7 +103,7 @@ class BlastOfGeniusEffect extends OneShotEffect {
                     int damage = card.getManaCost().convertedManaCost();
                     Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
                     if (creature != null) {
-                        creature.damage(damage, source.getSourceId(), game, true, false);
+                        creature.damage(damage, source.getSourceId(), game, false, true);
                         return true;
                     }
                     Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));

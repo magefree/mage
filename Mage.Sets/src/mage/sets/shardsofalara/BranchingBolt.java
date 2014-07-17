@@ -108,12 +108,12 @@ class BranchingBoltEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            permanent.damage(3, source.getSourceId(), game, true, false);
+            permanent.damage(3, source.getSourceId(), game, false, true);
         }
 
         permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (permanent != null) {
-            permanent.damage(3, source.getSourceId(), game, true, false);
+            permanent.damage(3, source.getSourceId(), game, false, true);
         }
         return true;
     }

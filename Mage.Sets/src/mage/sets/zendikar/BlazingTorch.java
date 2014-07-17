@@ -175,7 +175,7 @@ class BlazingTorchDamageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (permanent != null && sourceId != null) {
-            permanent.damage(2, sourceId, game, true, false);
+            permanent.damage(2, sourceId, game, false, true);
             return true;
         }
         Player player = game.getPlayer(targetPointer.getFirst(game, source));

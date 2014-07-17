@@ -103,7 +103,7 @@ class SphinxBoneWandEffect extends OneShotEffect {
 
             Permanent permanent = game.getPermanent(source.getFirstTarget());
             if (permanent != null) {
-                permanent.damage(amount, source.getSourceId(), game, true, false);
+                permanent.damage(amount, source.getSourceId(), game, false, true);
             }
             Player player = game.getPlayer(source.getFirstTarget());
             if (player != null) {

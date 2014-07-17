@@ -120,7 +120,7 @@ class LastStandEffect extends OneShotEffect {
             if (creature != null) {
                 int mountains = game.getBattlefield().count(filterMountain, source.getSourceId(), source.getControllerId(), game);
                 if (mountains > 0) {
-                    creature.damage(mountains, source.getSourceId(), game, true, false);
+                    creature.damage(mountains, source.getSourceId(), game, false, true);
                 }
             }
             // Put a 1/1 green Saproling creature token onto the battlefield for each Forest you control.

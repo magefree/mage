@@ -106,7 +106,7 @@ class FallOfTheHammerDamageEffect extends OneShotEffect {
             int damage = ownCreature.getPower().getValue();
             Permanent targetCreature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
             if (targetCreature != null) {
-                targetCreature.damage(damage, ownCreature.getId(), game, true, false);
+                targetCreature.damage(damage, ownCreature.getId(), game, false, true);
                 return true;
             }
         }

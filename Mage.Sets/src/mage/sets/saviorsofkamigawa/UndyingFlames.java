@@ -101,7 +101,7 @@ class UndyingFlamesEffect extends OneShotEffect {
                     if (damage > 0) {
                         Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
                         if (creature != null) {
-                            creature.damage(damage, source.getSourceId(), game, true, false);
+                            creature.damage(damage, source.getSourceId(), game, false, true);
                             game.informPlayers(new StringBuilder(sourceCard.getName()).append(" deals ").append(damage).append(" damage to ").append(creature.getName()).toString());
                             applied = true;
                             break;

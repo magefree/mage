@@ -114,7 +114,7 @@ class CursedScrollEffect extends OneShotEffect {
                         if (you.chooseTarget(Outcome.Damage, target, source, game)) {
                             Permanent creature = game.getPermanent(target.getFirstTarget());
                             if (creature != null) {
-                                creature.damage(2, source.getSourceId(), game, true, false);
+                                creature.damage(2, source.getSourceId(), game, false, true);
                                 return true;
                             }
                             Player player = game.getPlayer(target.getFirstTarget());

@@ -101,7 +101,7 @@ class SoulsFireEffect extends OneShotEffect {
 
         Permanent permanent = game.getPermanent(targetId);
         if (permanent != null) {
-            permanent.damage(damage, sourcePermanent.getId(), game, true, false);
+            permanent.damage(damage, sourcePermanent.getId(), game, false, true);
             return true;
         }
 

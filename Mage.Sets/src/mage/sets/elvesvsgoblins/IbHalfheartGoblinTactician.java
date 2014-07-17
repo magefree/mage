@@ -135,7 +135,7 @@ class IbHalfheartGoblinTacticianEffect extends OneShotEffect {
             for (UUID blockerId : blockingCreatures) {
                 Permanent blockingCreature = game.getPermanent(blockerId);
                 if (blockingCreature != null) {
-                    blockingCreature.damage(4, blockedCreature.getId(), game, true, false);
+                    blockingCreature.damage(4, blockedCreature.getId(), game, false, true);
                 }
             }
             return true;

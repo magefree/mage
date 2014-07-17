@@ -100,7 +100,7 @@ class BloodshotCyclopsEffect extends OneShotEffect {
         if (amount > 0) {
             Permanent permanent = game.getPermanent(source.getFirstTarget());
             if (permanent != null) {
-                permanent.damage(amount, source.getSourceId(), game, true, false);
+                permanent.damage(amount, source.getSourceId(), game, false, true);
                 return true;
             }
             Player player = game.getPlayer(source.getFirstTarget());

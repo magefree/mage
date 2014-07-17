@@ -110,7 +110,7 @@ class ExplosiveRevelationEffect extends OneShotEffect {
             for (UUID targetId: targetPointer.getTargets(game, source)) {
                 Permanent targetedCreature = game.getPermanent(targetId);
                 if (targetedCreature != null) {
-                    targetedCreature.damage(damage, source.getSourceId(), game, true, false);
+                    targetedCreature.damage(damage, source.getSourceId(), game, false, true);
                 }
                 else {
                     Player targetedPlayer = game.getPlayer(targetId);

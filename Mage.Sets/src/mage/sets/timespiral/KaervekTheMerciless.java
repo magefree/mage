@@ -109,7 +109,7 @@ class KaervekTheMercilessEffect extends OneShotEffect {
             }
             Permanent targetCreature = game.getPermanent(source.getFirstTarget());
             if (targetCreature != null) {
-                targetCreature.damage(cost, source.getSourceId(), game, false, true);
+                targetCreature.damage(cost, source.getSourceId(), game, true, false);
                 return true;
             }
         }

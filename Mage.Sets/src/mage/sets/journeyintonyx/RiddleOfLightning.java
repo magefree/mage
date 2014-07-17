@@ -99,7 +99,7 @@ class RiddleOfLightningEffect extends OneShotEffect {
                 controller.revealCards(sourceCard.getName(), new CardsImpl(card), game);
                 Permanent targetCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
                 if (targetCreature != null) {
-                    targetCreature.damage(card.getManaCost().convertedManaCost(), source.getSourceId(), game, true, false);
+                    targetCreature.damage(card.getManaCost().convertedManaCost(), source.getSourceId(), game, false, true);
                     return true;
                 }
                 Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
