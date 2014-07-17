@@ -29,6 +29,7 @@ package mage.sets.futuresight;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -103,6 +104,10 @@ class YixlidJailerEffect extends ContinuousEffectImpl {
                                 card.getAbilities().clear();
                                 game.getContinuousEffects().removeGainedEffectsForSource(card.getId());
                                 game.getState().resetTriggersForSourceId(card.getId());
+                                Abilities abilities = game.getState().getAllOtherAbilities(card.getId());
+                                if (abilities != null) {
+                                    abilities.clear();
+                                }
                             }
                         }
                     }
