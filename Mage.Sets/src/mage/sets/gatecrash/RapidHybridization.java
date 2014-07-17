@@ -37,7 +37,6 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -89,7 +88,7 @@ class RapidHybridizationEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
+        Permanent permanent = (Permanent) game.getPermanentOrLKIBattlefield(targetPointer.getFirst(game, source));
         if (permanent != null) {
             RapidHybridizationToken token = new RapidHybridizationToken();
             token.putOntoBattlefield(1, game, source.getId(), permanent.getControllerId());
