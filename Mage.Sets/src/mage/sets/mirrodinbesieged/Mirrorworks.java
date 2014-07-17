@@ -28,10 +28,6 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -39,12 +35,16 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
-import mage.players.Player;
 import mage.game.permanent.token.EmptyToken;
+import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
@@ -93,7 +93,10 @@ class MirrorworksAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && !event.getTargetId().equals(this.getSourceId())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && !(permanent instanceof PermanentToken) && permanent.getCardType().contains(CardType.ARTIFACT)) {
+            if (permanent != null
+                    && permanent.getControllerId().equals(getControllerId())
+                    && !(permanent instanceof PermanentToken)
+                    && permanent.getCardType().contains(CardType.ARTIFACT)) {
                 getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
                 return true;
             }
