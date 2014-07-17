@@ -112,6 +112,7 @@ class AcademyResearchersEffect extends OneShotEffect {
                     permanent.addAttachment(auraInHand.getId(), game);
                 }
             }
+            return true;
         }
         return false;
     }
