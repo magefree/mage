@@ -29,16 +29,12 @@ package mage.sets.legions;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.GainAbilityAllEffect;
+import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.Token;
 
@@ -57,9 +53,12 @@ public class BroodSliver extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever a Sliver deals combat damage to a player, its controller may put a 1/1 colorless Sliver creature token onto the battlefield.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new CreateTokenEffect(new SliverToken()), true);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver", "Sliver creatures"))));
+        // Whenever a Sliver deals combat damage to a player, its controller may put a 1/1 colorless Sliver creature token onto the battlefield.       
+        Effect effect = new CreateTokenTargetEffect(new SliverToken());
+        effect.setText("its controller may put a 1/1 colorless Sliver creature token onto the battlefield");
+        this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(effect, 
+                        new FilterCreaturePermanent("Sliver", "a Sliver"), 
+                        true, true, true));        
     }
 
     public BroodSliver(final BroodSliver card) {

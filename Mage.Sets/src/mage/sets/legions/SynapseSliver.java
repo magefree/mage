@@ -29,18 +29,13 @@ package mage.sets.legions;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continious.GainAbilityAllEffect;
+import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -58,9 +53,11 @@ public class SynapseSliver extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever a Sliver deals combat damage to a player, its controller may draw a card.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), true);
-        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("Sliver", "Sliver")));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver", "Sliver creatures"))));
+        Effect effect = new DrawCardTargetEffect(1);
+        effect.setText("its controller may draw a card");
+        this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(effect, 
+                        new FilterCreaturePermanent("Sliver", "a Sliver"), 
+                        true, true, true));
     }
 
     public SynapseSliver(final SynapseSliver card) {
