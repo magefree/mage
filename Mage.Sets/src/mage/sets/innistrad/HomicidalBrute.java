@@ -93,7 +93,7 @@ class HomicidalBruteTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.END_PHASE_PRE && event.getPlayerId().equals(this.controllerId)) {
+        if (event.getType() == GameEvent.EventType.END_TURN_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
             Watcher watcher = game.getState().getWatchers().get("HomicidalBruteAttacked", sourceId);
             if (watcher == null || !watcher.conditionMet()) {
                 return true;

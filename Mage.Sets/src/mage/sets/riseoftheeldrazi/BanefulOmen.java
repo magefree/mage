@@ -86,7 +86,7 @@ public class BanefulOmen extends CardImpl {
 
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getType() == GameEvent.EventType.END_PHASE_PRE && event.getPlayerId().equals(this.controllerId)) {
+            if (event.getType() == GameEvent.EventType.END_TURN_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
                 return true;
             }
             return false;

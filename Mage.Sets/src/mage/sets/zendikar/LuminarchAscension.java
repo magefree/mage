@@ -98,7 +98,7 @@ class LuminarchAscensionTriggeredAbility extends TriggeredAbilityImpl {
 
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getType() == GameEvent.EventType.END_PHASE_PRE
+            if (event.getType() == GameEvent.EventType.END_TURN_STEP_PRE
                     && game.getOpponents(controllerId).contains(event.getPlayerId())) {
                 return true;
             }
@@ -108,8 +108,8 @@ class LuminarchAscensionTriggeredAbility extends TriggeredAbilityImpl {
 
 class SourceHasCountersCost extends CostImpl {
 
-    private int counters;
-    private CounterType counterType;
+    private final int counters;
+    private final CounterType counterType;
 
     public SourceHasCountersCost(int counters, CounterType counterType) {
         this.counters = counters;
@@ -142,7 +142,7 @@ class SourceHasCountersCost extends CostImpl {
 
 class YouLostNoLifeThisTurnCondition implements Condition {
 
-    private static YouLostNoLifeThisTurnCondition fInstance = new YouLostNoLifeThisTurnCondition();
+    private static final YouLostNoLifeThisTurnCondition fInstance = new YouLostNoLifeThisTurnCondition();
 
     public static Condition getInstance() {
         return fInstance;

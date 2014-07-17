@@ -93,7 +93,7 @@ class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.END_PHASE_PRE) {
+        if (event.getType() == GameEvent.EventType.END_TURN_STEP_PRE) {
             return true;
         }
         return false;
