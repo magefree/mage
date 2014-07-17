@@ -69,6 +69,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import mage.game.Game;
 
 
 /**
@@ -490,7 +491,7 @@ public class TableController {
                         if (!user.isConnected()) {
                             // if the user is not connected but exits, the user is currently disconnected. So it's neccessary
                             // to join the user to the game here, so he can join the game, if he reconnects in time.
-                            // remove a existing constructing for the player if it exists
+                            // remove an existing constructing for the player if it exists
                             user.removeConstructing(match.getPlayer(entry.getValue()).getPlayer().getId());
                             GameManager.getInstance().joinGame(match.getGame().getId(), user.getId());
                         }
@@ -528,8 +529,15 @@ public class TableController {
         }
         catch (Exception ex) {
             logger.fatal("Error starting game", ex);
-            TableManager.getInstance().removeTable(table.getId());
-            GameManager.getInstance().removeGame(match.getGame().getId());
+            if (table != null) {
+                TableManager.getInstance().removeTable(table.getId());
+            }
+            if (match != null) {
+                Game game = match.getGame();
+                if (game != null) {
+                    GameManager.getInstance().removeGame(game.getId());
+                }
+            }
         }
     }
 
