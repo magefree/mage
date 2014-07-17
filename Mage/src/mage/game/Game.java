@@ -260,7 +260,7 @@ public interface Game extends MageItem, Serializable {
     void applyEffects();
     boolean checkStateAndTriggered();
     void playPriority(UUID activePlayerId, boolean resuming);
-    boolean endTurn(UUID playerId);
+    boolean endTurn();
 
     int doAction(MageAction action);
 

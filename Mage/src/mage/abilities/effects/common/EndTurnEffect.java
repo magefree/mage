@@ -46,7 +46,8 @@ public class EndTurnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.endTurn(source.getControllerId());
+        game.informPlayers("The current turn ends");
+        return game.endTurn();
     }
 
     @Override

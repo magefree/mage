@@ -37,6 +37,9 @@ import mage.constants.PhaseStep;
 import mage.constants.TurnPhase;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 
 /**
@@ -49,8 +52,10 @@ public class Turn implements Serializable {
     private UUID activePlayerId;
     private final List<Phase> phases = new ArrayList<>();
     private boolean declareAttackersStepStarted = false;
-
+    private boolean endTurn; // indicates that an end turn effect has resolved.
+    
     public Turn() {
+        endTurn = false;
         phases.add(new BeginningPhase());
         phases.add(new PreCombatMainPhase());
         phases.add(new CombatPhase());
@@ -66,6 +71,8 @@ public class Turn implements Serializable {
         for (Phase phase: turn.phases) {
             this.phases.add(phase.copy());
         }
+        this.declareAttackersStepStarted = turn.declareAttackersStepStarted;
+        this.endTurn = turn.endTurn;
 
     }
 
@@ -126,23 +133,21 @@ public class Turn implements Serializable {
             if (game.isPaused() || game.gameOver(null)) {
                 return;
             }
-            currentPhase = phase;
-            game.fireEvent(new GameEvent(GameEvent.EventType.PHASE_CHANGED, activePlayerId, null, activePlayerId));
-            if (!game.getState().getTurnMods().skipPhase(activePlayerId, currentPhase.getType())) {
-                if (phase.play(game, activePlayerId)) {
-                    //20091005 - 500.4/703.4n
-                    game.emptyManaPools();
+            if (!isEndTurnRequested() || phase.getType().equals(TurnPhase.END)) {
+                currentPhase = phase;
+                game.fireEvent(new GameEvent(GameEvent.EventType.PHASE_CHANGED, activePlayerId, null, activePlayerId));
+                if (!game.getState().getTurnMods().skipPhase(activePlayerId, currentPhase.getType())) {
+                    if (phase.play(game, activePlayerId)) {
+                        //20091005 - 500.4/703.4n
+                        game.emptyManaPools();                        
+                        game.saveState(false);
 
-                    //game.saveState();
-
-                    //20091005 - 500.8
-                    while (playExtraPhases(game, phase.getType())) {
+                        //20091005 - 500.8
+                        while (playExtraPhases(game, phase.getType())) {
+                        }
                     }
                 }
             }
-            // magenoxx: this causes bugs when we need to add several phases connected with each other (WorldAtWarTest)
-            //if (!currentPhase.equals(phase)) // phase was changed from the card
-              //  break;
         }
 
     }
@@ -250,28 +255,41 @@ public class Turn implements Serializable {
  * @param activePlayerId
  */
     public void endTurn(Game game, UUID activePlayerId) {
-        // Exile all spells and abilities on the stack
-        game.getStack().clear();
-
-        // Discard down to your maximum hand size.
-        Player activePlayer = game.getPlayer(activePlayerId);
-        game.getState().setPriorityPlayerId(activePlayer.getId());
-        //20091005 - 514.1
-        if (!activePlayer.hasLeft() && !activePlayer.hasLost()) {
-            activePlayer.discardToMax(game);
-            activePlayer.setGameUnderYourControl(true);
+        // Ending the turn this way (Time Stop) means the following things happen in order: 
+       
+        setEndTurnRequested(true);
+        
+        // 1) All spells and abilities on the stack are exiled. This includes Time Stop, though it will continue to resolve. 
+        // It also includes spells and abilities that can't be countered. 
+        while (!game.getStack().isEmpty()) {
+            StackObject stackObject = game.getStack().removeLast();
+            if (stackObject instanceof Spell) {
+                ((Spell) stackObject).moveToExile(null, "", null, game);
+            }
         }
-
-        // Damage wears off.
-        //20100423 - 514.2
-        game.getBattlefield().endOfTurn(activePlayerId, game);
-        game.getState().removeEotEffects(game);
-
-        Phase phase = new EndPhase();
-        phase.setStep(new CleanupStep());
-        currentPhase = phase;
-        game.fireEvent(new GameEvent(GameEvent.EventType.PHASE_CHANGED, activePlayerId, null, activePlayerId));
-        //phase.play(game, activePlayerId);
+        // 2) All attacking and blocking creatures are removed from combat. 
+        for (UUID attackerId: game.getCombat().getAttackers()) {
+            Permanent permanent = game.getPermanent(attackerId);
+            if (permanent != null) {
+                permanent.removeFromCombat(game);
+            }
+            game.getCombat().removeAttacker(attackerId, game);
+        }
+        for (UUID blockerId: game.getCombat().getBlockers()) {
+            Permanent permanent = game.getPermanent(blockerId);
+            if (permanent != null) {
+                permanent.removeFromCombat(game);
+            }
+        }
+        
+        // 3) State-based actions are checked. No player gets priority, and no triggered abilities are put onto the stack.         
+        
+        game.checkStateAndTriggered(); // triggered effects don't go to steck because check of endTurnRequested
+        
+        // 4) The current phase and/or step ends. 
+        // The game skips straight to the cleanup step. The cleanup step happens in its entirety.
+        // this is caused by the endTurnRequest state
+        
     }
 
     public boolean isDeclareAttackersStepStarted() {
@@ -282,6 +300,14 @@ public class Turn implements Serializable {
         this.declareAttackersStepStarted = declareAttackersStepStarted;
     }
 
+    public void setEndTurnRequested(boolean endTurn) {
+        this.endTurn = endTurn;
+    }
+    
+    public boolean isEndTurnRequested() {
+        return endTurn;
+    }
+    
     public Turn copy() {
         return new Turn(this);
     }

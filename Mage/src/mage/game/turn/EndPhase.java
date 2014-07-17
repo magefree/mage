@@ -55,6 +55,7 @@ public class EndPhase extends Phase {
     @Override
     protected void playStep(Game game) {
         if (currentStep.getType() == PhaseStep.CLEANUP) {
+            game.getTurn().setEndTurnRequested(false); // so triggers trigger again
             currentStep.beginStep(game, activePlayerId);
             if (game.checkStateAndTriggered()) {
                 playStep(game);

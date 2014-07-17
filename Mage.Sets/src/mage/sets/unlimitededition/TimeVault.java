@@ -122,7 +122,7 @@ class TimeVaultReplacementEffect extends ReplacementEffectImpl {
         if (player != null && permanent != null) {
             if (player.chooseUse(Outcome.Untap, "Skip your turn to untap " + permanent.getName() + "?", game)) {
                 permanent.untap(game);
-                game.endTurn(source.getControllerId());;
+                game.endTurn();
                 return true;
             }
         }

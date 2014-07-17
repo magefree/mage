@@ -1056,7 +1056,7 @@ public abstract class GameImpl implements Game, Serializable {
         int bookmark = 0;
         clearAllBookmarks();
         try {
-            while (!isPaused() && !gameOver(null)) {
+            while (!isPaused() && !gameOver(null) && !this.getTurn().isEndTurnRequested()) {
                 if (!resuming) {
                     state.getPlayers().resetPassed();
                     state.getPlayerList().setCurrent(activePlayerId);
@@ -1143,9 +1143,11 @@ public abstract class GameImpl implements Game, Serializable {
         } finally {
             if (top != null) {
                 state.getStack().remove(top);
-                while (state.hasSimultaneousEvents()) {
-                    state.handleSimultaneousEvent(this);
-                    checkTriggered();                    
+                if (!getTurn().isEndTurnRequested()) {
+                    while (state.hasSimultaneousEvents()) {
+                        state.handleSimultaneousEvent(this);
+                        checkTriggered();                    
+                    }
                 }
             }
         }
@@ -1305,12 +1307,15 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public boolean checkStateAndTriggered() {
+        boolean trigger = !getTurn().isEndTurnRequested();
         boolean somethingHappened = false;
         //20091005 - 115.5
         while (!isPaused() && !gameOver(null)) {
             if (!checkStateBasedActions() ) {
-                state.handleSimultaneousEvent(this);
-                if (isPaused() || gameOver(null) || !checkTriggered()) {
+                if (trigger) {
+                    state.handleSimultaneousEvent(this);
+                }
+                if (isPaused() || gameOver(null) || !trigger  || !checkTriggered()) {
                     break;
                 }
             }
@@ -2273,10 +2278,7 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public boolean endTurn(UUID playerId) {
-        if (!getActivePlayerId().equals(playerId)) {
-            return false;
-        }
+    public boolean endTurn() {
         getTurn().endTurn(this, getActivePlayerId());
         return true;
     }
