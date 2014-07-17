@@ -28,9 +28,6 @@
 
 package mage.game.stack;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -50,11 +47,7 @@ import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
 import mage.cards.SplitCard;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.SpellAbilityType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
@@ -65,6 +58,10 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.watchers.Watcher;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -133,7 +130,7 @@ public class Spell implements StackObject, Card {
         boolean ignoreAbility = true;
         boolean payNoMana = noMana;
         for (SpellAbility spellAbility: spellAbilities) {
-            // costs for spliced abilities were added to main spellAbility, so pay no man for spliced abilities
+            // costs for spliced abilities were added to main spellAbility, so pay no mana for spliced abilities
             payNoMana |= spellAbility.getSpellAbilityType().equals(SpellAbilityType.SPLICE);
             if (ignoreAbility) {
                 ignoreAbility = false;

@@ -717,7 +717,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         //20091005 - 601.2a
         Card card = game.getCard(ability.getSourceId());
         if (card != null) {
-            if (card.isMorphCard()) {
+            if (card.isMorphCard()) { //TODO: move to other place
                 card.setFaceDown(true);
             }
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getId(), ability.getSourceId(), playerId))) {
