@@ -72,6 +72,7 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
+import mage.game.turn.Step;
 import mage.players.net.UserData;
 import mage.target.Target;
 import mage.target.TargetAmount;
@@ -163,6 +164,13 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean reachedNextTurnAfterLeaving = false;
 
     protected UserData userData;
+
+    /**
+     * During some steps we can't play anything
+     */
+    protected final Map<PhaseStep, Step.StepPart> silentPhaseSteps = new HashMap<PhaseStep, Step.StepPart>() {{
+        put(PhaseStep.DECLARE_ATTACKERS, Step.StepPart.PRE);
+    }};
 
     public PlayerImpl(String name, RangeOfInfluence range) {
         this(UUID.randomUUID());
@@ -1860,81 +1868,85 @@ public abstract class PlayerImpl implements Player, Serializable {
     public List<Ability> getPlayable(Game game, boolean hidden) {
         List<Ability> playable = new ArrayList<>();
 
-        ManaOptions available = getManaAvailable(game);
-        available.addMana(manaPool.getMana());
+        if (!shouldSkipGettingPlayable(game)) {
 
-        if (hidden) {
-            for (Card card: hand.getUniqueCards(game)) {
-                for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.HAND)) {
-                    if (canPlay(ability, available, game)) {
-                        playable.add(ability);
-                    }
-                }
-            }
-        }
-        for (Card card: graveyard.getUniqueCards(game)) {
-            for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.GRAVEYARD)) {
-                if (canPlay(ability, available, game)) {
-                    playable.add(ability);
-                }
-            }
-            if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.CAST, this.getId(), game)) {
-                for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.HAND)) {
-                    if (ability instanceof SpellAbility || ability instanceof PlayLandAbility) {
-                        playable.add(ability);
-                    }
-                }
-            }
-        }
-        for (ExileZone exile: game.getExile().getExileZones()) {
-            for (Card card: exile.getCards(game)) {
-                if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.CAST, this.getId(), game)) {
-                    for (Ability ability: card.getAbilities()) {
-                        ability.setControllerId(this.getId()); // controller must be set for case owner != caster
-                        if (ability.getZone().match(Zone.HAND) && (ability instanceof SpellAbility || ability instanceof PlayLandAbility)) {
+            ManaOptions available = getManaAvailable(game);
+            available.addMana(manaPool.getMana());
+
+            if (hidden) {
+                for (Card card : hand.getUniqueCards(game)) {
+                    for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {
+                        if (canPlay(ability, available, game)) {
                             playable.add(ability);
                         }
                     }
                 }
             }
-        }
-        for (Cards cards: game.getState().getRevealed().values()) {
-            for (Card card: cards.getCards(game)) {
+            for (Card card : graveyard.getUniqueCards(game)) {
+                for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.GRAVEYARD)) {
+                    if (canPlay(ability, available, game)) {
+                        playable.add(ability);
+                    }
+                }
                 if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.CAST, this.getId(), game)) {
-                    for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.HAND)) {
+                    for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {
                         if (ability instanceof SpellAbility || ability instanceof PlayLandAbility) {
                             playable.add(ability);
                         }
                     }
                 }
             }
-        }
-        // eliminate duplicate activated abilities
-        Map<String, Ability> playableActivated = new HashMap<>();
-        for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
-            for (ActivatedAbility ability: permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
-                if (!playableActivated.containsKey(ability.toString())) {
-                    if (canPlay(ability, available, game)) {
-                        playableActivated.put(ability.toString(), ability);
+            for (ExileZone exile : game.getExile().getExileZones()) {
+                for (Card card : exile.getCards(game)) {
+                    if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.CAST, this.getId(), game)) {
+                        for (Ability ability : card.getAbilities()) {
+                            ability.setControllerId(this.getId()); // controller must be set for case owner != caster
+                            if (ability.getZone().match(Zone.HAND) && (ability instanceof SpellAbility || ability instanceof PlayLandAbility)) {
+                                playable.add(ability);
+                            }
+                        }
                     }
                 }
             }
-        }
-        // get cast commander if available
-        if (!(this.getCommanderId() == null)) {
-            Zone zone = game.getState().getZone(this.getCommanderId());
-            if (zone != null && zone.equals(Zone.COMMAND)) {
-                MageObject object = game.getObject(this.getCommanderId());
-                if (object != null) {
-                    for (ActivatedAbility ability : ((Commander) object).getAbilities().getActivatedAbilities(Zone.COMMAND)) {
+            for (Cards cards : game.getState().getRevealed().values()) {
+                for (Card card : cards.getCards(game)) {
+                    if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.CAST, this.getId(), game)) {
+                        for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {
+                            if (ability instanceof SpellAbility || ability instanceof PlayLandAbility) {
+                                playable.add(ability);
+                            }
+                        }
+                    }
+                }
+            }
+            // eliminate duplicate activated abilities
+            Map<String, Ability> playableActivated = new HashMap<>();
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
+                for (ActivatedAbility ability : permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
+                    if (!playableActivated.containsKey(ability.toString())) {
                         if (canPlay(ability, available, game)) {
                             playableActivated.put(ability.toString(), ability);
                         }
                     }
                 }
             }
+            // get cast commander if available
+            if (!(this.getCommanderId() == null)) {
+                Zone zone = game.getState().getZone(this.getCommanderId());
+                if (zone != null && zone.equals(Zone.COMMAND)) {
+                    MageObject object = game.getObject(this.getCommanderId());
+                    if (object != null) {
+                        for (ActivatedAbility ability : ((Commander) object).getAbilities().getActivatedAbilities(Zone.COMMAND)) {
+                            if (canPlay(ability, available, game)) {
+                                playableActivated.put(ability.toString(), ability);
+                            }
+                        }
+                    }
+                }
+            }
+            playable.addAll(playableActivated.values());
         }
-        playable.addAll(playableActivated.values());
+
         return playable;
     }
 
@@ -1942,19 +1954,46 @@ public abstract class PlayerImpl implements Player, Serializable {
     public Set<UUID> getPlayableInHand(Game game) {
         Set<UUID> playable = new HashSet<>();
 
-        ManaOptions available = getManaAvailable(game);
-        available.addMana(manaPool.getMana());
-
-        for (Card card: hand.getCards(game)) {
-            for (ActivatedAbility ability: card.getAbilities().getPlayableAbilities(Zone.HAND)) {
-                if (canPlay(ability, available, game)) {
+        if (!shouldSkipGettingPlayable(game)) {
+            // for clean_up phase show all cards
+            if (game.getPhase() != null && PhaseStep.CLEANUP.equals(game.getPhase().getStep().getType())) {
+                for (Card card: hand.getCards(game)) {
                     playable.add(card.getId());
-                    break;
+                }
+            } else {
+                ManaOptions available = getManaAvailable(game);
+                available.addMana(manaPool.getMana());
+
+                for (Card card : hand.getCards(game)) {
+                    for (ActivatedAbility ability : card.getAbilities().getPlayableAbilities(Zone.HAND)) {
+                        if (canPlay(ability, available, game)) {
+                            playable.add(card.getId());
+                            break;
+                        }
+                    }
                 }
             }
         }
 
         return playable;
+    }
+
+    /**
+     * Skip "silent" phase step when players are not allowed to cast anything.
+     * E.g. players can't play or cast anything during declaring attackers.
+     *
+     * @param game
+     * @return
+     */
+    private boolean shouldSkipGettingPlayable(Game game) {
+        for (Entry<PhaseStep, Step.StepPart> phaseStep : silentPhaseSteps.entrySet()) {
+            if (game.getPhase() != null && phaseStep.getKey().equals(game.getPhase().getStep().getType())) {
+                if (phaseStep.getValue() == null || phaseStep.getValue().equals(game.getPhase().getStep().getStepPart())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
