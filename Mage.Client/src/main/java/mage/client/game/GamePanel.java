@@ -46,6 +46,7 @@ import mage.client.util.Config;
 import mage.client.util.GameManager;
 import mage.client.util.PhaseManager;
 import mage.client.util.gui.ArrowBuilder;
+import mage.constants.Constants;
 import mage.constants.EnlargeMode;
 import mage.constants.PhaseStep;
 import mage.remote.Session;
@@ -62,6 +63,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.Serializable;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 
@@ -448,6 +450,10 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     public synchronized void updateGame(GameView game) {
+        updateGame(game, null);
+    }
+
+    public synchronized void updateGame(GameView game, Map<String, Serializable> options) {
         if (playerId == null || game.getHand() == null) {
             this.handContainer.setVisible(false);
         } else {
@@ -506,8 +512,23 @@ public final class GamePanel extends javax.swing.JPanel {
         this.txtActivePlayer.setText(game.getActivePlayerName());
         this.txtPriority.setText(game.getPriorityPlayerName());
         this.txtTurn.setText(Integer.toString(game.getTurn()));
+
+        List<UUID> possibleAttackers = new ArrayList<>();
+        if (options != null && options.containsKey(Constants.Option.POSSIBLE_ATTACKERS)) {
+            if (options.get(Constants.Option.POSSIBLE_ATTACKERS) instanceof List) {
+                possibleAttackers.addAll((List) options.get(Constants.Option.POSSIBLE_ATTACKERS));
+            }
+        }
+
         for (PlayerView player: game.getPlayers()) {
             if (players.containsKey(player.getPlayerId())) {
+                if (!possibleAttackers.isEmpty()) {
+                    for (UUID permanentId : possibleAttackers) {
+                        if (player.getBattlefield().containsKey(permanentId)) {
+                            player.getBattlefield().get(permanentId).setCanAttack(true);
+                        }
+                    }
+                }
                 players.get(player.getPlayerId()).update(player);
             } else {
                 logger.warn("Couldn't find player.");
@@ -693,15 +714,15 @@ public final class GamePanel extends javax.swing.JPanel {
         return JOptionPane.showConfirmDialog(this, message, title, JOptionPane.YES_NO_OPTION);
     }
 
-    public void select(String message, GameView gameView, int messageId) {
-        updateGame(gameView);
+    public void select(String message, GameView gameView, int messageId, Map<String, Serializable> options) {
+        updateGame(gameView, options);
         String messageToDisplay = message;
-        Map<String, Serializable> options = null;
+        Map<String, Serializable> panelOptions = null;
         for (PlayerView playerView : gameView.getPlayers()) {
             if (playerView.getPlayerId().equals(playerId)) {
                 if (playerView.isActive()) {
-                    options = new HashMap<>();
-                    options.put("your_turn", true);
+                    panelOptions = new HashMap<>();
+                    panelOptions.put("your_turn", true);
                     messageToDisplay = message + " <div style='font-size:11pt'>Your turn</div>";
                 }
                 // magenoxx: because of uncaught bug with saving state, rolling back and stack
@@ -712,7 +733,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 break;
             }
         }
-        this.feedbackPanel.getFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), options, messageId);
+        this.feedbackPanel.getFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), panelOptions, messageId);
         if (PhaseManager.getInstance().isSkip(gameView, message)) {
             this.feedbackPanel.doClick();
             logger.debug(new StringBuilder("Phase skipped: ").append(message).append(" id: ").append(messageId));

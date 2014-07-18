@@ -113,6 +113,7 @@ public class CardView extends SimpleCardView {
 
     protected boolean isPlayable;
     protected boolean isChoosable;
+    protected boolean canAttack;
 
     public CardView(Card card) {
         this(card, null, false);
@@ -684,5 +685,13 @@ public class CardView extends SimpleCardView {
 
     public boolean isChoosable() {
         return isChoosable;
+    }
+
+    public boolean isCanAttack() {
+        return canAttack;
+    }
+
+    public void setCanAttack(boolean canAttack) {
+        this.canAttack = canAttack;
     }
 }

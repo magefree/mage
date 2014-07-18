@@ -60,6 +60,12 @@ public class GameClientMessage implements Serializable {
         this.message = message;
     }
 
+    public GameClientMessage(GameView gameView, String message, Map<String, Serializable> options) {
+        this.gameView = gameView;
+        this.message = message;
+        this.options = options;
+    }
+
     private GameClientMessage(GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required) {
         this.gameView = gameView;
         this.message = question;

@@ -27,15 +27,6 @@
  */
 package mage.game.combat;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
@@ -56,6 +47,9 @@ import mage.target.common.TargetDefender;
 import mage.util.CardUtil;
 import mage.util.Copyable;
 import mage.util.trace.TraceUtil;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -424,7 +418,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * Retrieves all requirements that apply and creates a Map with blockers and attackers
      * // Map<creature that can block, Set< all attackers the creature can block and force it to block the attacker>>
      * 
-     * @param player - attacker
+     * @param attackingPlayer - attacker
      * @param game 
      */
     private void retrieveMustBlockAttackerRequirements(Player attackingPlayer, Game game) {

@@ -28,13 +28,6 @@
 
 package mage.game;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -72,6 +65,9 @@ import mage.players.Player;
 import mage.players.PlayerList;
 import mage.players.Players;
 import mage.util.functions.ApplyToPermanent;
+
+import java.io.Serializable;
+import java.util.*;
 
 public interface Game extends MageItem, Serializable {
 
@@ -161,6 +157,7 @@ public interface Game extends MageItem, Serializable {
     void fireSelectTargetEvent(UUID playerId, String message, List<TriggeredAbility> abilities);
     void fireSelectTargetEvent(UUID playerId, String message, List<Permanent> perms, boolean required);
     void fireSelectEvent(UUID playerId, String message);
+    void fireSelectEvent(UUID playerId, String message, Map<String, Serializable> options);
     void firePriorityEvent(UUID playerId);
     void firePlayManaEvent(UUID playerId, String message);
     void firePlayXManaEvent(UUID playerId, String message);

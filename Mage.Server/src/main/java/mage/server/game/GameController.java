@@ -28,24 +28,6 @@
 
 package mage.server.game;
 
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
-import java.util.zip.GZIPOutputStream;
 import mage.MageException;
 import mage.abilities.Ability;
 import mage.cards.Card;
@@ -65,24 +47,24 @@ import mage.game.events.TableEvent;
 import mage.game.permanent.Permanent;
 import mage.interfaces.Action;
 import mage.players.Player;
-import mage.server.ChatManager;
-import mage.server.Main;
-import mage.server.TableManager;
-import mage.server.User;
-import mage.server.UserManager;
+import mage.server.*;
 import mage.server.util.ConfigSettings;
 import mage.server.util.Splitter;
 import mage.server.util.SystemUtil;
 import mage.server.util.ThreadExecutor;
 import mage.utils.timer.PriorityTimer;
-import mage.view.AbilityPickerView;
-import mage.view.CardsView;
-import mage.view.ChatMessage;
+import mage.view.*;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
-import mage.view.GameView;
-import mage.view.PermanentView;
 import org.apache.log4j.Logger;
+
+import java.io.*;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+import java.util.zip.GZIPOutputStream;
 
 /**
  *
@@ -211,7 +193,7 @@ public class GameController implements GameCallback {
                                 target(event.getPlayerId(), event.getMessage(), event.getAbilities(), event.isRequired(), event.getOptions());
                                 break;
                             case SELECT:
-                                select(event.getPlayerId(), event.getMessage());
+                                select(event.getPlayerId(), event.getMessage(), event.getOptions());
                                 break;
                             case PLAY_MANA:
                                 playMana(event.getPlayerId(), event.getMessage());
@@ -617,11 +599,11 @@ public class GameController implements GameCallback {
         });
     }
 
-    private synchronized void select(final UUID playerId, final String message) throws MageException {
+    private synchronized void select(final UUID playerId, final String message, final Map<String, Serializable> options) throws MageException {
         perform(playerId, new Command() {
             @Override
             public void execute(UUID playerId) {
-                getGameSession(playerId).select(message);
+                getGameSession(playerId).select(message, options);
             }
         });
     }

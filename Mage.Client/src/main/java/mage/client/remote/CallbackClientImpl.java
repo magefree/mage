@@ -27,10 +27,6 @@
  */
 package mage.client.remote;
 
-import java.util.List;
-import java.util.UUID;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 import mage.cards.decks.Deck;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
@@ -38,24 +34,20 @@ import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.draft.DraftPanel;
 import mage.client.game.GamePanel;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.audio.AudioManager;
 import mage.client.util.DeckUtil;
 import mage.client.util.GameManager;
+import mage.client.util.audio.AudioManager;
 import mage.client.util.object.SaveObjectUtil;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.utils.CompressUtil;
-import mage.view.AbilityPickerView;
-import mage.view.ChatMessage;
+import mage.view.*;
 import mage.view.ChatMessage.MessageType;
-import mage.view.DeckView;
-import mage.view.DraftClientMessage;
-import mage.view.DraftView;
-import mage.view.GameClientMessage;
-import mage.view.GameEndView;
-import mage.view.GameView;
-import mage.view.TableClientMessage;
 import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -218,7 +210,7 @@ public class CallbackClientImpl implements CallbackClient {
                                 GameClientMessage message = (GameClientMessage) callback.getData();
                                 GamePanel panel = MageFrame.getGame(callback.getObjectId());
                                 if (panel != null) {
-                                    panel.select(message.getMessage(), message.getGameView(), callback.getMessageId());
+                                    panel.select(message.getMessage(), message.getGameView(), callback.getMessageId(), message.getOptions());
                                 }       break;
                             }
                         case "gameChooseAbility":

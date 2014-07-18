@@ -77,4 +77,11 @@ public final class Constants {
         DISCONNECTED, CONNECTED, CONNECTING, DISCONNECTING, SERVER_UNAVAILABLE, SERVER_STARTING;
     }
 
+    public enum Option {
+        ;
+
+        public static final String POSSIBLE_ATTACKERS = "possibleAttackers";
+
+    }
+
 }

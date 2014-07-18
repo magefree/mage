@@ -91,12 +91,12 @@ public class GameSession extends GameWatcher {
         }
     }
 
-    public void select(final String message) {
+    public void select(final String message, final Map<String, Serializable> options) {
         if (!killed) {
             setupTimeout();
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-                user.fireCallback(new ClientCallback("gameSelect", game.getId(), new GameClientMessage(getGameView(), message)));
+                user.fireCallback(new ClientCallback("gameSelect", game.getId(), new GameClientMessage(getGameView(), message, options)));
             }
         }
     }

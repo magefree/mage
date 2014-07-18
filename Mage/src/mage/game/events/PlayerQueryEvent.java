@@ -28,19 +28,15 @@
 
 package mage.game.events;
 
-import java.io.Serializable;
-import java.util.EventObject;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.TriggeredAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.game.permanent.Permanent;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  *
@@ -186,6 +182,10 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 
     public static PlayerQueryEvent selectEvent(UUID playerId, String message) {
         return new PlayerQueryEvent(playerId, message, null, null, null, null, QueryType.SELECT, 0, 0, false);
+    }
+
+    public static PlayerQueryEvent selectEvent(UUID playerId, String message, Map<String, Serializable> options) {
+        return new PlayerQueryEvent(playerId, message, null, null, null, null, QueryType.SELECT, 0, 0, false, options);
     }
 
     public static PlayerQueryEvent playManaEvent(UUID playerId, String message) {

@@ -42,10 +42,7 @@ import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.constants.ManaType;
-import mage.constants.Outcome;
-import mage.constants.RangeOfInfluence;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
 import mage.filter.common.FilterCreatureForCombat;
@@ -594,7 +591,18 @@ public class HumanPlayer extends PlayerImpl {
             if (passedAllTurns /*|| passedTurn*/) {
                 return;
             }
-            game.fireSelectEvent(playerId, "Select attackers");
+            Map<String, Serializable> options = new HashMap<>();
+
+            List<UUID> possibleAttackers = new ArrayList<>();
+
+            for (Permanent possibleAttacker : game.getBattlefield().getActivePermanents(filter, attackingPlayerId, game)) {
+                if (possibleAttacker.canAttack(game)) {
+                    possibleAttackers.add(possibleAttacker.getId());
+                }
+            }
+            options.put(Constants.Option.POSSIBLE_ATTACKERS, (Serializable)possibleAttackers);
+
+            game.fireSelectEvent(playerId, "Select attackers", options);
             waitForResponse(game);
             if (response.getBoolean() != null) {
                 // check if enough attackers are declared
