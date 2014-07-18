@@ -27,35 +27,19 @@
  */
 package mage.sets.futuresight;
 
-import java.util.ArrayList;
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continious.BoostAllEffect;
-import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicate;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.AttackingPredicate;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -65,7 +49,7 @@ import mage.game.permanent.Permanent;
 public class SliverLegion extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver", "All Sliver creatures");
-    private static final FilterCreaturePermanent countfilter = new FilterCreaturePermanent("Sliver","each other sliver");
+    private static final FilterPermanent countfilter = new FilterPermanent("Sliver","each other sliver");
 
     static {
         countfilter.add(new AnotherPredicate());
