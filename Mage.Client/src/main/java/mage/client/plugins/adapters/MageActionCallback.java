@@ -226,8 +226,7 @@ public class MageActionCallback implements ActionCallback {
             if (isDragging) {
                 Point mouse = new Point(e.getX(), e.getY());
                 SwingUtilities.convertPointToScreen(mouse, transferData.component);
-                int xOffset = card.getXOffset(card.getCardWidth());
-                maxXOffset = Math.abs((int) (mouse.getX() - initialMousePos.x) - xOffset);
+                maxXOffset = Math.abs((int) (mouse.getX() - initialMousePos.x));
             }
 
             clearDragging(card);
