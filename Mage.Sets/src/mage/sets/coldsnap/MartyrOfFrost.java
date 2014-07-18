@@ -34,55 +34,56 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.MultipliedValue;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.RevealTargetFromHandCostCount;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.TargetSpell;
 import mage.target.common.TargetCardInHand;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class MartyrOfSands extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("X white cards from your hand");
+public class MartyrOfFrost extends CardImpl {
+    
+    private static final FilterCard filter = new FilterCard("X blue cards from your hand");
     static {
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
+        filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
-    public MartyrOfSands(UUID ownerId) {
-        super(ownerId, 15, "Martyr of Sands", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+    public MartyrOfFrost(UUID ownerId) {
+        super(ownerId, 40, "Martyr of Frost", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
         this.expansionSetCode = "CSP";
         this.subtype.add("Human");
-        this.subtype.add("Cleric");
+        this.subtype.add("Wizard");
 
-        this.color.setWhite(true);
+        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {1}, Reveal X white cards from your hand, Sacrifice Martyr of Sands: You gain three times X life.
-        Effect effect = new GainLifeEffect(new MultipliedValue(new RevealTargetFromHandCostCount(), 3));
-        effect.setText("You gain three times X life.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}"));
+        // {2}, Reveal X blue cards from your hand, Sacrifice Martyr of Frost: Counter target spell unless its controller pays {X}.
+        Effect effect = new CounterUnlessPaysEffect(new RevealTargetFromHandCostCount());
+        effect.setText("Counter target spell unless its controller pays {X}.");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
         ability.addCost(new RevealTargetFromHandCost(new TargetCardInHand(0, Integer.MAX_VALUE, filter)));
         ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetSpell());
         this.addAbility(ability);
     }
 
-    public MartyrOfSands(final MartyrOfSands card) {
+    public MartyrOfFrost(final MartyrOfFrost card) {
         super(card);
     }
 
     @Override
-    public MartyrOfSands copy() {
-        return new MartyrOfSands(this);
+    public MartyrOfFrost copy() {
+        return new MartyrOfFrost(this);
     }
 }

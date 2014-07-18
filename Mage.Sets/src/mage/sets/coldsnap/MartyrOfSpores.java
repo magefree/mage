@@ -34,55 +34,57 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.MultipliedValue;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.RevealTargetFromHandCostCount;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCardInHand;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class MartyrOfSands extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("X white cards from your hand");
+public class MartyrOfSpores extends CardImpl {
+    
+    private static final FilterCard filter = new FilterCard("X green cards from your hand");
     static {
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    public MartyrOfSands(UUID ownerId) {
-        super(ownerId, 15, "Martyr of Sands", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+    public MartyrOfSpores(UUID ownerId) {
+        super(ownerId, 113, "Martyr of Spores", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
         this.expansionSetCode = "CSP";
         this.subtype.add("Human");
-        this.subtype.add("Cleric");
+        this.subtype.add("Shaman");
 
-        this.color.setWhite(true);
+        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {1}, Reveal X white cards from your hand, Sacrifice Martyr of Sands: You gain three times X life.
-        Effect effect = new GainLifeEffect(new MultipliedValue(new RevealTargetFromHandCostCount(), 3));
-        effect.setText("You gain three times X life.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}"));
+        // {1}, Reveal X green cards from your hand, Sacrifice Martyr of Spores: Target creature gets +X/+X until end of turn.
+        Effect effect = new BoostTargetEffect(new RevealTargetFromHandCostCount(), new RevealTargetFromHandCostCount(), Duration.EndOfTurn, true);
+        effect.setText("Target creature gets +X/+X until end of turn.");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(1));
         ability.addCost(new RevealTargetFromHandCost(new TargetCardInHand(0, Integer.MAX_VALUE, filter)));
         ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    public MartyrOfSands(final MartyrOfSands card) {
+    public MartyrOfSpores(final MartyrOfSpores card) {
         super(card);
     }
 
     @Override
-    public MartyrOfSands copy() {
-        return new MartyrOfSands(this);
+    public MartyrOfSpores copy() {
+        return new MartyrOfSpores(this);
     }
 }

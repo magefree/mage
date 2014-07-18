@@ -34,55 +34,61 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.MultipliedValue;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.RevealTargetFromHandCostCount;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.DamageAllEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCardInHand;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class MartyrOfSands extends CardImpl {
+public class MartyrOfAshes extends CardImpl {
+    
+    private static final FilterCard filterHand = new FilterCard("X red cards from your hand");
+    private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creatures without flying");
 
-    private static final FilterCard filter = new FilterCard("X white cards from your hand");
     static {
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
+        filterHand.add(new ColorPredicate(ObjectColor.RED));
+        filterCreature.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
-
-    public MartyrOfSands(UUID ownerId) {
-        super(ownerId, 15, "Martyr of Sands", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+    
+    public MartyrOfAshes(UUID ownerId) {
+        super(ownerId, 92, "Martyr of Ashes", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
         this.expansionSetCode = "CSP";
         this.subtype.add("Human");
-        this.subtype.add("Cleric");
+        this.subtype.add("Shaman");
 
-        this.color.setWhite(true);
+        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {1}, Reveal X white cards from your hand, Sacrifice Martyr of Sands: You gain three times X life.
-        Effect effect = new GainLifeEffect(new MultipliedValue(new RevealTargetFromHandCostCount(), 3));
-        effect.setText("You gain three times X life.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}"));
-        ability.addCost(new RevealTargetFromHandCost(new TargetCardInHand(0, Integer.MAX_VALUE, filter)));
+        // {2}, Reveal X red cards from your hand, Sacrifice Martyr of Ashes: Martyr of Ashes deals X damage to each creature without flying.
+        Effect effect = new DamageAllEffect(new RevealTargetFromHandCostCount(), filterCreature);
+        effect.setText("Martyr of Ashes deals X damage to each creature without flying.");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
+        ability.addCost(new RevealTargetFromHandCost(new TargetCardInHand(0, Integer.MAX_VALUE, filterHand)));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
 
-    public MartyrOfSands(final MartyrOfSands card) {
+    public MartyrOfAshes(final MartyrOfAshes card) {
         super(card);
     }
 
     @Override
-    public MartyrOfSands copy() {
-        return new MartyrOfSands(this);
+    public MartyrOfAshes copy() {
+        return new MartyrOfAshes(this);
     }
 }

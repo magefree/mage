@@ -25,64 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.sets.odyssey;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.RevealTargetFromHandCostCount;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.target.common.TargetCardInHand;
+import mage.filter.common.FilterLandCard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class MartyrOfSands extends CardImpl {
+public class PetrifiedField extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("X white cards from your hand");
-    static {
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
-    }
+    public PetrifiedField(UUID ownerId) {
+        super(ownerId, 323, "Petrified Field", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "ODY";
 
-    public MartyrOfSands(UUID ownerId) {
-        super(ownerId, 15, "Martyr of Sands", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "CSP";
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
-
-        this.color.setWhite(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // {1}, Reveal X white cards from your hand, Sacrifice Martyr of Sands: You gain three times X life.
-        Effect effect = new GainLifeEffect(new MultipliedValue(new RevealTargetFromHandCostCount(), 3));
-        effect.setText("You gain three times X life.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}"));
-        ability.addCost(new RevealTargetFromHandCost(new TargetCardInHand(0, Integer.MAX_VALUE, filter)));
+        // {tap}: Add {1} to your mana pool.
+        this.addAbility(new ColorlessManaAbility());
+        
+        // {tap}, Sacrifice Petrified Field: Return target land card from your graveyard to your hand.
+        Effect effect = new ReturnFromGraveyardToHandTargetEffect();
+        effect.setText("Return target land card from your graveyard to your hand.");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetCardInYourGraveyard(new FilterLandCard()));
         this.addAbility(ability);
     }
 
-    public MartyrOfSands(final MartyrOfSands card) {
+    public PetrifiedField(final PetrifiedField card) {
         super(card);
     }
 
     @Override
-    public MartyrOfSands copy() {
-        return new MartyrOfSands(this);
+    public PetrifiedField copy() {
+        return new PetrifiedField(this);
     }
 }
