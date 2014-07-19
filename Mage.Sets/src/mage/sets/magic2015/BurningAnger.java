@@ -33,6 +33,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
@@ -69,7 +70,9 @@ public class BurningAnger extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has "{T}: This creature deals damage equal to its power to target creature or player."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new SourcePermanentPowerCount()), new TapSourceCost());
+        Effect effect = new DamageTargetEffect(new SourcePermanentPowerCount());
+        effect.setText("{this} deals damage equal to its power to target creature or player");
+        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         gainedAbility.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield,
                 "Enchanted creature has \"{T}: This creature deals damage equal to its power to target creature or player.\"")));

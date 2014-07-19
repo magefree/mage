@@ -62,6 +62,7 @@ public class LeoninArbiter extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
+        // Players can't search libraries. Any player may pay {2} for that player to ignore this effect until end of turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeoninArbiterReplacementEffect()));
     }
 
@@ -78,7 +79,7 @@ public class LeoninArbiter extends CardImpl {
 class LeoninArbiterReplacementEffect extends ReplacementEffectImpl {
 
     private static final String effectText = "Players can't search libraries. Any player may pay {2} for that player to ignore this effect until end of turn";
-    private List<UUID> paidPlayers = new ArrayList<UUID>();
+    private final List<UUID> paidPlayers = new ArrayList<>();
 
     LeoninArbiterReplacementEffect ( ) {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
@@ -87,7 +88,7 @@ class LeoninArbiterReplacementEffect extends ReplacementEffectImpl {
 
     LeoninArbiterReplacementEffect ( LeoninArbiterReplacementEffect effect ) {
         super(effect);
-        this.paidPlayers = effect.paidPlayers;
+        this.paidPlayers.addAll(effect.paidPlayers);
     }
 
     @Override
@@ -105,7 +106,7 @@ class LeoninArbiterReplacementEffect extends ReplacementEffectImpl {
                 if ( arbiterTax.canPay(source.getSourceId(), event.getPlayerId(), game) &&
                      player.chooseUse(Outcome.Neutral, "Pay {2} to search your library?", game) )
                 {
-                    if (arbiterTax.payOrRollback(source, game, this.getId(), event.getPlayerId()) ) {
+                    if (arbiterTax.payOrRollback(source, game, source.getSourceId(), event.getPlayerId()) ) {
                         paidPlayers.add(event.getPlayerId());
                         return false;
                     }
@@ -121,7 +122,7 @@ class LeoninArbiterReplacementEffect extends ReplacementEffectImpl {
         if ( event.getType() == EventType.SEARCH_LIBRARY ) {
             return true;
         }
-        if ( event.getType() == EventType.END_TURN_STEP_POST ) {
+        if ( event.getType() == EventType.END_PHASE_POST) {
             this.paidPlayers.clear();
         }
         return false;
