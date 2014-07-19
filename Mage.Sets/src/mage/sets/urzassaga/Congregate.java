@@ -49,7 +49,7 @@ public class Congregate extends CardImpl {
         this.color.setWhite(true);
 
         // Target player gains 2 life for each creature on the battlefield.
-        this.getSpellAbility().addEffect(new GainLifeTargetEffect(new PermanentsOnBattlefieldCount(new FilterCreaturePermanent(), 2)));
+        this.getSpellAbility().addEffect(new GainLifeTargetEffect(new PermanentsOnBattlefieldCount(new FilterCreaturePermanent("creature on the battlefield"), 2)));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
