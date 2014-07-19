@@ -29,9 +29,6 @@ package mage.sets.zendikar;
 
 import java.util.Set;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -42,6 +39,9 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.discard.DiscardHandAllEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -131,7 +131,7 @@ class ChandraAblazeEffect2 extends OneShotEffect {
 
     public ChandraAblazeEffect2() {
         super(Outcome.Damage);
-        this.staticText = "If a red card is discarded this way, Chandra Ablaze deals 4 damage to target creature or player";
+        this.staticText = "If a red card is discarded this way, {this} deals 4 damage to target creature or player";
     }
 
     public ChandraAblazeEffect2(final ChandraAblazeEffect2 effect) {

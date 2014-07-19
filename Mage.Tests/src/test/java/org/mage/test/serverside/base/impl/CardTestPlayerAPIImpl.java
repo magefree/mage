@@ -26,6 +26,8 @@ import org.mage.test.serverside.base.MageTestPlayerBase;
 
 import java.util.List;
 import java.util.UUID;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.NamePredicate;
 
 /**
  * API for test initialization and asserting the test results.
@@ -555,6 +557,20 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void assertHandCount(Player player, int count) throws AssertionError {
         int actual = currentGame.getPlayer(player.getId()).getHand().size();
         Assert.assertEquals("(Hand) Card counts are not equal ", count, actual);
+    }
+
+    /**
+     * Assert card count in player's hand.
+     *
+     * @param player   {@link Player} who's hand should be counted.
+     * @param cardName  Name of the cards that should be counted.
+     * @param count    Expected count.
+     */
+    public void assertHandCount(Player player, String cardName, int count) throws AssertionError {
+        FilterCard filter = new FilterCard();
+        filter.add(new NamePredicate(cardName));
+        int actual = currentGame.getPlayer(player.getId()).getHand().count(filter, player.getId(), currentGame);
+        Assert.assertEquals("(Hand) Card counts for card " + cardName + " are not equal ", count, actual);
     }
 
     /**

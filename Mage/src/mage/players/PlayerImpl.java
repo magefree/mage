@@ -609,8 +609,26 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean discard(Card card, Ability source, Game game) {
         //20100716 - 701.7
-        if (card != null 
-                && card.moveToZone(Zone.GRAVEYARD, source==null?null:source.getSourceId(), game, false)) {
+        /* 701.7. Discard #
+            701.7a To discard a card, move it from its owners hand to that players graveyard.
+            701.7b By default, effects that cause a player to discard a card allow the affected
+                   player to choose which card to discard. Some effects, however, require a random
+                   discard or allow another player to choose which card is discarded.
+            701.7c If a card is discarded, but an effect causes it to be put into a hidden zone
+                   instead of into its owners graveyard without being revealed, all values of that
+                   cards characteristics are considered to be undefined.
+                   TODOD:
+                   If a card is discarded this way to pay a cost that specifies a characteristic
+                   about the discarded card, that cost payment is illegal; the game returns to
+                   the moment before the cost was paid (see rule 717, "Handling Illegal Actions").
+        */
+        if (card != null) {
+            /* If a card is discarded while Rest in Peace is on the battlefield, abilities that function
+             * when a card is discarded (such as madness) still work, even though that card never reaches
+             * a graveyard. In addition, spells or abilities that check the characteristics of a discarded
+             * card (such as Chandra Ablaze's first ability) can find that card in exile. */
+            // So discard is also successful if card is moved to another zone by replacement effect!
+            card.moveToZone(Zone.GRAVEYARD, source==null?null:source.getSourceId(), game, false);
             game.informPlayers(new StringBuilder(name).append(" discards ").append(card.getName()).toString());
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, card.getId(), source==null?null:source.getId(), playerId));
             return true;
