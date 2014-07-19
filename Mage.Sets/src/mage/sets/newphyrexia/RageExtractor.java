@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -85,11 +86,11 @@ class RageExtractorTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(this.controllerId)) {
-            Card card = game.getCard(event.getSourceId());
-            if (card != null) {
-                for (ManaCost cost : card.getManaCost()) {
+            Spell spell = (Spell) game.getStack().getStackObject(event.getTargetId());
+            if (spell != null) {
+                for (ManaCost cost : spell.getCard().getManaCost()) {
                     if (cost instanceof PhyrexianManaCost) {
-                        ((DamageTargetEffect)getEffects().get(0)).setAmount(new StaticValue(card.getManaCost().convertedManaCost()));
+                        ((DamageTargetEffect)getEffects().get(0)).setAmount(new StaticValue(spell.getConvertedManaCost()));
                         return true;
                     }
                 }

@@ -42,7 +42,7 @@ import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
+import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
@@ -92,14 +92,14 @@ class CounterbalanceEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
-            StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));
+            Spell spell = (Spell) game.getStack().getStackObject(targetPointer.getFirst(game, source));
             if (spell != null) {
                 Card topcard = controller.getLibrary().getFromTop(game);
                 if (topcard != null) {
                     CardsImpl cards = new CardsImpl();
                     cards.add(topcard);
                     controller.revealCards(sourcePermanent.getName(), cards, game);
-                    if (topcard.getManaCost().convertedManaCost() == spell.getManaCost().convertedManaCost()) {
+                    if (topcard.getManaCost().convertedManaCost() == spell.getConvertedManaCost()) {
                         return game.getStack().counter(spell.getId(), source.getSourceId(), game);
                     }
                 }
