@@ -1,5 +1,5 @@
 /*
- *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -25,68 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common.continious;
 
-import java.util.UUID;
+package mage.abilities.effects.common;
+
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.Duration;
-import mage.constants.Layer;
+import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.players.Player;
 
 /**
- * @author nantuko
+ *
+ * @author Mael
  */
-public class PlayWithTheTopCardRevealedEffect extends ContinuousEffectImpl {
-    
-    protected boolean allPlayers;
+public class ShuffleLibraryTargetEffect extends OneShotEffect {
 
-    public PlayWithTheTopCardRevealedEffect() {
-        this(false);
-    }
-    
-    public PlayWithTheTopCardRevealedEffect(boolean allPlayers) {
-        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
-        this.allPlayers = allPlayers;
-        if (allPlayers) {
-            staticText = "Each player plays with the top card of his or her library revealed.";
-        }
-        else {
-            staticText = "Play with the top card of your library revealed";
-        }
+    public ShuffleLibraryTargetEffect() {
+        super(Outcome.Neutral);
+        this.staticText = "Target player shuffles his or her library";
     }
 
-    public PlayWithTheTopCardRevealedEffect(final PlayWithTheTopCardRevealedEffect effect) {
+    public ShuffleLibraryTargetEffect(final ShuffleLibraryTargetEffect effect) {
         super(effect);
-        this.allPlayers = effect.allPlayers;
+    }
+
+    @Override
+    public ShuffleLibraryTargetEffect copy() {
+        return new ShuffleLibraryTargetEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (allPlayers) {
-                for (UUID playerId : controller.getInRange()) {
-                    Player player = game.getPlayer(playerId);
-                    if (player != null) {
-                        player.setTopCardRevealed(true);
-                    }
-                }
-            }
-            else {
-                controller.setTopCardRevealed(true);
-            }
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        if (player != null) {
+			player.shuffleLibrary(game);
             return true;
         }
         return false;
     }
-
-    @Override
-    public PlayWithTheTopCardRevealedEffect copy() {
-        return new PlayWithTheTopCardRevealedEffect(this);
-    }
-
 }

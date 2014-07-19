@@ -28,19 +28,16 @@
 package mage.sets.alliances;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ShuffleLibraryTargetEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.players.Player;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.target.TargetPlayer;
 
 /**
@@ -59,7 +56,7 @@ public class SoldierOfFortune extends CardImpl {
         this.toughness = new MageInt(1);
 		
 		// {R}, {T}: Target player shuffles his or her library.
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoldierOfFortuneEffect(), new TapSourceCost());
+		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShuffleLibraryTargetEffect(), new TapSourceCost());
 		ability.addManaCost(new ManaCostsImpl("{R}"));
 		ability.addTarget(new TargetPlayer());
 		this.addAbility(ability);
@@ -73,32 +70,4 @@ public class SoldierOfFortune extends CardImpl {
     public SoldierOfFortune copy() {
         return new SoldierOfFortune(this);
     }
-}
-
-class SoldierOfFortuneEffect extends OneShotEffect {
-
-    public SoldierOfFortuneEffect() {
-        super(Outcome.Neutral);
-        this.staticText = "Target player shuffles his or her library";
-    }
-
-    public SoldierOfFortuneEffect(final SoldierOfFortuneEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SoldierOfFortuneEffect copy() {
-        return new SoldierOfFortuneEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null) {
-			player.shuffleLibrary(game);
-            return true;
-        }
-        return false;
-    }
-
 }
