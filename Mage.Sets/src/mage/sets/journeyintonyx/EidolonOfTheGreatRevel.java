@@ -105,6 +105,6 @@ class EidolonOfTheGreatRevelTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a player casts a spell with converted mana cost 3 or less, Eidolon of the Great Revel deals 2 damage to that player.";
+        return "Whenever a player casts a spell with converted mana cost 3 or less, {this} deals 2 damage to that player.";
     }
 }

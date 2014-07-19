@@ -58,6 +58,7 @@ import mage.abilities.Mode;
 import mage.abilities.Modes;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
+import mage.abilities.costs.VariableCost;
 import mage.constants.SpellAbilityType;
 import mage.filter.common.FilterCreatureForCombatBlock;
 import mage.filter.common.FilterPlaneswalkerPermanent;
@@ -317,6 +318,30 @@ public class TestPlayer extends ComputerPlayer {
             }
         }
         return true;
+    }
+
+    @Override
+    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
+        if (!choices.isEmpty()) {
+            if (choices.get(0).startsWith("X=")) {
+                int xValue = Integer.parseInt(choices.get(0).substring(2));
+                choices.remove(0);
+                return xValue;
+            }
+        }
+        return super.announceXMana(min, max, message, game, ability);
+    }
+
+    @Override
+    public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variablCost) {
+        if (!choices.isEmpty()) {
+            if (choices.get(0).startsWith("X=")) {
+                int xValue = Integer.parseInt(choices.get(0).substring(2));
+                choices.remove(0);
+                return xValue;
+            }
+        }
+        return super.announceXCost(min, max, message, game, ability, null);
     }
 
     protected Permanent findPermanent(FilterPermanent filter, UUID controllerId, Game game) {

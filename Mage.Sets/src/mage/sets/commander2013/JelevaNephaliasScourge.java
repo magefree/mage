@@ -95,7 +95,7 @@ class JelevaNephaliasScourgeEffect extends OneShotEffect {
 
     public JelevaNephaliasScourgeEffect() {
         super(Outcome.Benefit);
-        this.staticText = "each player exiles the top X cards of his or her library, where X is the amount of mana spent to cast Jeleva";
+        this.staticText = "each player exiles the top X cards of his or her library, where X is the amount of mana spent to cast {this}";
     }
 
     public JelevaNephaliasScourgeEffect(final JelevaNephaliasScourgeEffect effect) {
@@ -174,7 +174,7 @@ class JelevaNephaliasCastEffect extends OneShotEffect {
 
 class JelevaNephaliasWatcher extends Watcher {
 
-    private Map<Integer, Integer> manaSpendToCast = new HashMap<Integer, Integer>(); // cast
+    private Map<Integer, Integer> manaSpendToCast = new HashMap<>(); // cast
 
     public JelevaNephaliasWatcher() {
         super("ManaPaidToCastJelevaNephalias", WatcherScope.CARD);

@@ -41,7 +41,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class DiscardTest extends CardTestPlayerBase {
 
    /*
-    * If Rest in Peace is in play, every card going to the graveyard goes to exile intead.
+    * If Rest in Peace is in play, every card going to the graveyard goes to exile instead.
     * If a card is discarded while Rest in Peace is on the battlefield, abilities that function
     * when a card is discarded (such as madness) still work, even though that card never reaches
     * a graveyard.
@@ -49,8 +49,6 @@ public class DiscardTest extends CardTestPlayerBase {
 
     @Test
     public void testRestInPeaceAndCycle() {
-        // Check that Lion goes to graveyard from evoke ability
-        // Check that evoke does not trigger again to sacrifice Shriekmaw if it's exhumed
 
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.HAND, playerA, "Tranquil Thicket");

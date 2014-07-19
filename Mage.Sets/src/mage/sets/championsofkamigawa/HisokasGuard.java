@@ -97,7 +97,7 @@ class HisokasGuardGainAbilityTargetEffect extends ContinuousEffectImpl {
 
     public HisokasGuardGainAbilityTargetEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        staticText = "Target creature you control other than Hisoka's Guard has shroud for as long as Hisoka's Guard remains tapped";
+        staticText = "Target creature you control other than {this} has shroud for as long as {this} remains tapped";
         this.ability = ShroudAbility.getInstance();
     }
 

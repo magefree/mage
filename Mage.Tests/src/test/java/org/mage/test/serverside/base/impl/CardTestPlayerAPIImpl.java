@@ -699,6 +699,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player.addAction(turnNum, PhaseStep.DECLARE_BLOCKERS, "block:"+blocker+";"+attacker);
     }
 
+    /**
+     * For use choices set "Yes" or "No" the the choice string.
+     * For X values set "X=[xValue]" example: for X=3 set choice string to "X=3".
+     * 
+     * @param player
+     * @param choice
+     */
     public void setChoice(TestPlayer player, String choice) {
         player.addChoice(choice);
     }

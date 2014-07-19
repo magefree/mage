@@ -601,7 +601,7 @@ public class Spell implements StackObject, Card {
     public int getConvertedManaCost() {
         int cmc = 0;
         for (Ability spellAbility: spellAbilities) {
-            cmc += spellAbility.getManaCostsToPay().convertedManaCost();
+            cmc += spellAbility.getManaCosts().convertedManaCost() + spellAbility.getManaCostsToPay().getX();
         }
         return cmc;
     }
