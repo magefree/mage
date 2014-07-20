@@ -43,9 +43,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.common.TargetOpponent;
+import mage.target.common.TargetOpponentsChoicePermanent;
 
 /**
  *
@@ -67,7 +66,7 @@ public class DiaochanArtfulBeauty extends CardImpl {
         // {tap}: Destroy target creature of your choice, then destroy target creature of an opponent's choice. Activate this ability only during your turn, before attackers are declared.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DiaochanArtfulBeautyDestroyEffect(), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.getInstance());
         ability.addTarget(new TargetCreaturePermanent());
-        ability.addTarget(new TargetOpponentsChoiceCreaturePermanent());
+        ability.addTarget(new TargetOpponentsChoicePermanent(new FilterCreaturePermanent()));
         this.addAbility(ability);          
     }
 
@@ -83,12 +82,12 @@ public class DiaochanArtfulBeauty extends CardImpl {
 
 class DiaochanArtfulBeautyDestroyEffect extends OneShotEffect {
     
-    public DiaochanArtfulBeautyDestroyEffect() {
+    DiaochanArtfulBeautyDestroyEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target creature of your choice, then destroy target creature of an opponent's choice";
     }
     
-    public DiaochanArtfulBeautyDestroyEffect(final DiaochanArtfulBeautyDestroyEffect effect) {
+    DiaochanArtfulBeautyDestroyEffect(final DiaochanArtfulBeautyDestroyEffect effect) {
         super(effect);
     }
     
@@ -114,60 +113,4 @@ class DiaochanArtfulBeautyDestroyEffect extends OneShotEffect {
         }
         return false;
     }
-}
-
-class TargetOpponentsChoiceCreaturePermanent extends TargetPermanent {
-
-    private UUID opponentId = null;
-
-    public TargetOpponentsChoiceCreaturePermanent() {
-        super(1, 1, new FilterCreaturePermanent(), false);
-        this.targetName = filter.getMessage();
-    }
-
-    public TargetOpponentsChoiceCreaturePermanent(final TargetOpponentsChoiceCreaturePermanent target) {
-        super(target);
-        this.opponentId = target.opponentId;
-    }
-
-    @Override
-    public boolean canTarget(UUID controllerId, UUID id, UUID sourceId, Game game, boolean flag) {
-        if (opponentId != null) {
-            return super.canTarget(opponentId, id, sourceId, game, flag);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (opponentId != null) {
-            return super.canTarget(opponentId, id, source, game);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game) {
-        return super.chooseTarget(outcome, getOpponentId(playerId, source, game), source, game);
-    }
-
-    @Override
-    public TargetOpponentsChoiceCreaturePermanent copy() {
-        return new TargetOpponentsChoiceCreaturePermanent(this);
-    }
-
-    private UUID getOpponentId(UUID playerId, Ability source, Game game) {
-        if (opponentId == null) {
-            TargetOpponent target = new TargetOpponent();
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                if (player.chooseTarget(Outcome.Detriment, target, source, game)) {
-                    opponentId = target.getFirstTarget();
-                }
-            }
-
-        }
-        return opponentId;
-    }
-
 }

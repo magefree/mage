@@ -28,9 +28,9 @@
 
 package mage.abilities.common;
 
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -50,7 +50,7 @@ public class ZoneChangeAllTriggeredAbility extends TriggeredAbilityImpl {
     protected Zone toZone;
     protected String rule;
 
-    public ZoneChangeAllTriggeredAbility(Zone zone, Zone toZone, Effect effect, FilterPermanent filter,String rule, boolean optional) {
+    public ZoneChangeAllTriggeredAbility(Zone zone, Zone toZone, Effect effect, FilterPermanent filter, String rule, boolean optional) {
         this(zone, null, toZone, effect, filter, rule, optional);
     }
 

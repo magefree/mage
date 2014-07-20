@@ -84,7 +84,7 @@ class EbonyOwlNetsukeTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Player player = game.getPlayer(event.getPlayerId());
-            if (player != null && player.getHand().size() >= 7) {
+            if (player != null) {
                 EbonyOwlNetsukeEffect effect = new EbonyOwlNetsukeEffect();
                 effect.setTargetPointer(new FixedTarget(player.getId()));
                 this.addEffect(effect);
@@ -93,6 +93,12 @@ class EbonyOwlNetsukeTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
+    
+    @Override
+    public boolean checkInterveningIfClause(Game game) {
+        Player player = game.getPlayer(game.getActivePlayerId());
+        return player != null && player.getHand().size() >= 7;
+    }   
     
     @Override
     public String getRule() {
@@ -119,7 +125,7 @@ class EbonyOwlNetsukeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null && player.getHand().size() >= 7) {
+        if (player != null) {
             player.damage(4, source.getSourceId(), game, false, true);
             return true;
         }

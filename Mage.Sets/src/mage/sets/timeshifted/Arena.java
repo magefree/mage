@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.sets.timeshifted;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -48,54 +47,48 @@ import mage.target.common.TargetOpponentsChoicePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class MagusOfTheArena extends CardImpl {
+public class Arena extends CardImpl {
 
-    public MagusOfTheArena(UUID ownerId) {
-        super(ownerId, 115, "Magus of the Arena", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
-        this.expansionSetCode = "C13";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-
-        this.color.setRed(true);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
+    public Arena(UUID ownerId) {
+        super(ownerId, 117, "Arena", Rarity.SPECIAL, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "TSB";
 
         // {3}, {tap}: Tap target creature you control and target creature of an opponent's choice he or she controls. Those creatures fight each other.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MagusOfTheArenaEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ArenaEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addTarget(new TargetOpponentsChoicePermanent(new FilterControlledCreaturePermanent()));
         this.addAbility(ability);
     }
 
-    public MagusOfTheArena(final MagusOfTheArena card) {
+    public Arena(final Arena card) {
         super(card);
     }
 
     @Override
-    public MagusOfTheArena copy() {
-        return new MagusOfTheArena(this);
+    public Arena copy() {
+        return new Arena(this);
     }
 }
 
-class MagusOfTheArenaEffect extends OneShotEffect {
-
-    MagusOfTheArenaEffect() {
+class ArenaEffect extends OneShotEffect {
+    
+    ArenaEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Tap target creature you control and target creature of an opponent's choice he or she controls. Those creatures fight each other";
+        this.staticText = "Tap target creature you control and target creature of an opponent's choice he or she controls. Those creatures fight each other.";
     }
-
-    MagusOfTheArenaEffect(final MagusOfTheArenaEffect effect) {
+    
+    ArenaEffect(final ArenaEffect effect) {
         super(effect);
     }
-
+    
     @Override
-    public MagusOfTheArenaEffect copy() {
-        return new MagusOfTheArenaEffect(this);
+    public ArenaEffect copy() {
+        return new ArenaEffect(this);
     }
-
+    
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanent(source.getFirstTarget());

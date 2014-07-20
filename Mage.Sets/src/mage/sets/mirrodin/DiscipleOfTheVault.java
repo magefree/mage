@@ -25,45 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.ZoneChangeAllTriggeredAbility;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
+import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author North
+ * @author emerald000
  */
-public class FangrenMarauder extends CardImpl {
+public class DiscipleOfTheVault extends CardImpl {
 
-    public FangrenMarauder(UUID ownerId) {
-        super(ownerId, 79, "Fangren Marauder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");
-        this.expansionSetCode = "MBS";
-        this.subtype.add("Beast");
+    public DiscipleOfTheVault(UUID ownerId) {
+        super(ownerId, 62, "Disciple of the Vault", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
+        this.color.setBlack(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Whenever an artifact is put into a graveyard from the battlefield, you may gain 5 life.
-        this.addAbility(new ZoneChangeAllTriggeredAbility(Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.GRAVEYARD,
-                new GainLifeEffect(5), new FilterArtifactPermanent(),
-                "Whenever an artifact is put into a graveyard from the battlefield, ", true));
+        // Whenever an artifact is put into a graveyard from the battlefield, you may have target opponent lose 1 life.
+        Effect effect = new LoseLifeTargetEffect(1);
+        effect.setText("you may have target opponent lose 1 life");
+        Ability ability = new ZoneChangeAllTriggeredAbility(Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.GRAVEYARD,
+                effect, new FilterArtifactPermanent(),
+                "Whenever an artifact is put into a graveyard from the battlefield, ", true);
+        ability.addTarget(new TargetOpponent());
+        this.addAbility(ability);
     }
 
-    public FangrenMarauder(final FangrenMarauder card) {
+    public DiscipleOfTheVault(final DiscipleOfTheVault card) {
         super(card);
     }
 
     @Override
-    public FangrenMarauder copy() {
-        return new FangrenMarauder(this);
+    public DiscipleOfTheVault copy() {
+        return new DiscipleOfTheVault(this);
     }
 }
