@@ -28,7 +28,6 @@
 package mage.sets.magic2015;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,7 +39,6 @@ public class SengirVampire extends mage.sets.tenth.SengirVampire {
         super(ownerId);
         this.cardNumber = 277;
         this.expansionSetCode = "M15";
-        this.rarity = Rarity.COMMON;
     }
 
     public SengirVampire(final SengirVampire card) {

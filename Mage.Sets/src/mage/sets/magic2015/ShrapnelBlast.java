@@ -28,7 +28,6 @@
 package mage.sets.magic2015;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,7 +39,6 @@ public class ShrapnelBlast extends mage.sets.mirrodin.ShrapnelBlast {
         super(ownerId);
         this.cardNumber = 161;
         this.expansionSetCode = "M15";
-        this.rarity = Rarity.COMMON;
     }
 
     public ShrapnelBlast(final ShrapnelBlast card) {

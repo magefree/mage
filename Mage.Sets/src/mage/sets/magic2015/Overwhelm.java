@@ -28,7 +28,6 @@
 package mage.sets.magic2015;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,7 +39,6 @@ public class Overwhelm extends mage.sets.ravnika.Overwhelm {
         super(ownerId);
         this.cardNumber = 189;
         this.expansionSetCode = "M15";
-        this.rarity = Rarity.COMMON;
     }
 
     public Overwhelm(final Overwhelm card) {

@@ -28,7 +28,6 @@
 package mage.sets.magic2015;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,7 +39,6 @@ public class WallOfFrost extends mage.sets.magic2010.WallOfFrost {
         super(ownerId);
         this.cardNumber = 83;
         this.expansionSetCode = "M15";
-        this.rarity = Rarity.COMMON;
     }
 
     public WallOfFrost(final WallOfFrost card) {

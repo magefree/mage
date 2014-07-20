@@ -28,7 +28,6 @@
 package mage.sets.magic2015;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,7 +39,6 @@ public class StaffOfTheSunMagus extends mage.sets.magic2014.StaffOfTheSunMagus {
         super(ownerId);
         this.cardNumber = 235;
         this.expansionSetCode = "M15";
-        this.rarity = Rarity.COMMON;
     }
 
     public StaffOfTheSunMagus(final StaffOfTheSunMagus card) {

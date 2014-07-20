@@ -28,7 +28,6 @@
 package mage.sets.magic2015;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,7 +39,6 @@ public class FurnaceWhelp extends mage.sets.tenth.FurnaceWhelp {
         super(ownerId);
         this.cardNumber = 279;
         this.expansionSetCode = "M15";
-        this.rarity = Rarity.COMMON;
     }
 
     public FurnaceWhelp(final FurnaceWhelp card) {

@@ -28,7 +28,6 @@
 package mage.sets.magic2015;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,7 +39,6 @@ public class IllusoryAngel extends mage.sets.planechase2012.IllusoryAngel {
         super(ownerId);
         this.cardNumber = 59;
         this.expansionSetCode = "M15";
-        this.rarity = Rarity.COMMON;
     }
 
     public IllusoryAngel(final IllusoryAngel card) {

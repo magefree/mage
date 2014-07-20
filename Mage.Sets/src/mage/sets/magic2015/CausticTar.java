@@ -28,7 +28,6 @@
 package mage.sets.magic2015;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,7 +39,6 @@ public class CausticTar extends mage.sets.odyssey.CausticTar {
         super(ownerId);
         this.cardNumber = 89;
         this.expansionSetCode = "M15";
-        this.rarity = Rarity.COMMON;
     }
 
     public CausticTar(final CausticTar card) {

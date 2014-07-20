@@ -28,7 +28,6 @@
 package mage.sets.magic2015;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,7 +39,6 @@ public class JacesIngenuity extends mage.sets.magic2011.JacesIngenuity {
         super(ownerId);
         this.cardNumber = 63;
         this.expansionSetCode = "M15";
-        this.rarity = Rarity.COMMON;
     }
 
     public JacesIngenuity(final JacesIngenuity card) {

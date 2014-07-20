@@ -28,7 +28,6 @@
 package mage.sets.magic2015;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,7 +39,6 @@ public class StaffOfTheDeathMagus extends mage.sets.magic2014.StaffOfTheDeathMag
         super(ownerId);
         this.cardNumber = 232;
         this.expansionSetCode = "M15";
-        this.rarity = Rarity.COMMON;
     }
 
     public StaffOfTheDeathMagus(final StaffOfTheDeathMagus card) {

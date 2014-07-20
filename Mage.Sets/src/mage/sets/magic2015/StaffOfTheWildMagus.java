@@ -28,7 +28,6 @@
 package mage.sets.magic2015;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,7 +39,6 @@ public class StaffOfTheWildMagus extends mage.sets.magic2014.StaffOfTheWildMagus
         super(ownerId);
         this.cardNumber = 236;
         this.expansionSetCode = "M15";
-        this.rarity = Rarity.COMMON;
     }
 
     public StaffOfTheWildMagus(final StaffOfTheWildMagus card) {

@@ -28,7 +28,6 @@
 package mage.sets.magic2015;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,7 +39,6 @@ public class IntoTheVoid extends mage.sets.avacynrestored.IntoTheVoid {
         super(ownerId);
         this.cardNumber = 60;
         this.expansionSetCode = "M15";
-        this.rarity = Rarity.COMMON;
     }
 
     public IntoTheVoid(final IntoTheVoid card) {
