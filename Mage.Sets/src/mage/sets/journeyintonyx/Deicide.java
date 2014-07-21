@@ -88,10 +88,9 @@ class DeicideExileEffect extends SearchTargetGraveyardHandLibraryForCardNameAndE
             Permanent targetEnchantment = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (targetEnchantment != null) {
                 controller.moveCardToExileWithInfo(targetEnchantment, null, null, source.getSourceId(), game, Zone.BATTLEFIELD);
-                Card exiledCard = game.getCard(targetEnchantment.getId());
-                if (exiledCard.hasSubtype("God")) {
+                if (targetEnchantment.hasSubtype("God")) {
                     Player enchantmentController = game.getPlayer(targetEnchantment.getControllerId());                
-                    return super.applySearchAndExile(game, source, exiledCard.getName(), enchantmentController.getId());
+                    return super.applySearchAndExile(game, source, targetEnchantment.getName(), enchantmentController.getId());
                 }
             }
         }
