@@ -114,6 +114,7 @@ class NightveilSpecterExileEffect extends OneShotEffect {
           MageObject sourceObject = game.getObject(source.getSourceId());
           if (card != null && sourceObject != null) {
               player.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourceObject.getLogName(), source.getSourceId(), game, Zone.LIBRARY);
+              return true;
           }
       }
       return false;

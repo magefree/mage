@@ -93,6 +93,7 @@ class FirstResponseEffect extends OneShotEffect {
             if (watcher.getLiveLostLastTurn(source.getControllerId()) > 0) {
                 return new CreateTokenEffect(new SoldierToken("M15")).apply(game, source);
             }
+            return true;
         }
         return false;
     }

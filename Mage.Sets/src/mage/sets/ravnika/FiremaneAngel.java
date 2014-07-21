@@ -35,8 +35,10 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.OnlyDuringUpkeepCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -44,6 +46,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.game.Game;
 
 /**
  *
@@ -61,13 +64,17 @@ public class FiremaneAngel extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+        // Firststrike
         this.addAbility(FirstStrikeAbility.getInstance());
         // At the beginning of your upkeep, if Firemane Angel is in your graveyard or on the battlefield, you may gain 1 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(1), TargetController.YOU, true));
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD, new GainLifeEffect(1), TargetController.YOU, true));
+        Ability ability = new ConditionalTriggeredAbility(
+                new BeginningOfUpkeepTriggeredAbility(Zone.ALL, new GainLifeEffect(1), TargetController.YOU, true),
+                SourceOnBattelfieldOrGraveyardCondition.getInstance(), "");
+        this.addAbility(ability);
         // {6}{R}{R}{W}{W}: Return Firemane Angel from your graveyard to the battlefield. Activate this ability only during your upkeep.
-        Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl("{6}{R}{R}{W}{W}"));
+        ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl("{6}{R}{R}{W}{W}"));
         ability.addCost(new OnlyDuringUpkeepCost());
         this.addAbility(ability);
     }
@@ -80,4 +87,26 @@ public class FiremaneAngel extends CardImpl {
     public FiremaneAngel copy() {
         return new FiremaneAngel(this);
     }
+}
+
+class SourceOnBattelfieldOrGraveyardCondition implements Condition {
+
+    private static final SourceOnBattelfieldOrGraveyardCondition fInstance = new SourceOnBattelfieldOrGraveyardCondition();
+
+    public static SourceOnBattelfieldOrGraveyardCondition getInstance() {
+        return fInstance;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return (game.getState().getZone(source.getSourceId()).equals(Zone.GRAVEYARD) ||
+                game.getState().getZone(source.getSourceId()).equals(Zone.BATTLEFIELD));
+    }
+
+    @Override
+    public String toString() {
+        return "if {this} is in your graveyard or on the battlefield";
+    }
+
+
 }

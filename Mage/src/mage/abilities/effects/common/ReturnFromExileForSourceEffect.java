@@ -30,13 +30,17 @@ package mage.abilities.effects.common;
 
 import java.util.LinkedList;
 import java.util.UUID;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
+import mage.constants.Zone;
+import static mage.constants.Zone.BATTLEFIELD;
+import static mage.constants.Zone.GRAVEYARD;
+import static mage.constants.Zone.HAND;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
@@ -71,15 +75,22 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID exileId = source.getSourceId();
-        ExileZone exile = game.getExile().getExileZone(exileId);
-        if (exile != null) {
-            LinkedList<UUID> cards = new LinkedList<UUID>(exile);
-            for (UUID cardId: cards) {
-                Card card = game.getCard(cardId);
-                card.moveToZone(zone, source.getId(), game, tapped);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            UUID exileId = source.getSourceId();
+            ExileZone exile = game.getExile().getExileZone(exileId);
+            if (exile != null) { // null is valid if source left battlefield before enters the battlefield effect resolved
+                LinkedList<UUID> cards = new LinkedList<>(exile);
+                for (UUID cardId: cards) {
+                    Card card = game.getCard(cardId);
+                    if (card == null) {
+                        return false;
+                    }
+                    game.informPlayers(controller.getName() + " moves " + card.getLogName() + " to " + zone.toString().toLowerCase());
+                    card.moveToZone(zone, source.getId(), game, tapped);
+                }
+                exile.clear();
             }
-            exile.clear();
             return true;
         }
         return false;
@@ -91,8 +102,9 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
         switch(zone) {
             case BATTLEFIELD:
                 sb.append("to the battlefield under its owner's control");
-                if (tapped)
+                if (tapped) {
                     sb.append(" tapped");
+                }
                 break;
             case HAND:
                 sb.append("to their owner's hand");

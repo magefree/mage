@@ -137,6 +137,7 @@ class BoonweaverGiantEffect extends OneShotEffect {
             }
             player.shuffleLibrary(game);
         }
+        // aura card found - attach it
         if (card != null) {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
@@ -146,8 +147,7 @@ class BoonweaverGiantEffect extends OneShotEffect {
             if (permanent != null) {
                 return permanent.addAttachment(card.getId(), game);
             }
-            return true;
         }
-        return false;
+        return true;
     }
 }
