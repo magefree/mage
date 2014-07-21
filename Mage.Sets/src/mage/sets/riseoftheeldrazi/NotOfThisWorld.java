@@ -43,7 +43,6 @@ import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import static mage.filter.predicate.permanent.ControllerControlsIslandPredicate.filter;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -53,8 +52,6 @@ import mage.game.stack.StackObject;
 import mage.target.Target;
 import mage.target.TargetObject;
 import mage.target.Targets;
-
-
 
 /**
  *
@@ -128,7 +125,7 @@ class TargetSpellTargetingControlledPermanent extends TargetObject {
                     for (Target target : objectTargets) {
                         for (UUID targetId : target.getTargets()) {
                             Permanent targetedPermanent = game.getPermanentOrLKIBattlefield(targetId);
-                            if (targetedPermanent.getControllerId().equals(sourceControllerId)) {
+                            if (targetedPermanent != null && targetedPermanent.getControllerId().equals(sourceControllerId)) {
                                 return true;
                             }
                         }
@@ -155,7 +152,7 @@ class TargetSpellTargetingControlledPermanent extends TargetObject {
                     for (Target target : objectTargets) {
                         for (UUID targetId : target.getTargets()) {
                             Permanent targetedPermanent = game.getPermanentOrLKIBattlefield(targetId);
-                            if (targetedPermanent.getControllerId().equals(sourceControllerId)) {
+                            if (targetedPermanent != null && targetedPermanent.getControllerId().equals(sourceControllerId)) {
                                 possibleTargets.add(stackObject.getId());
                             }
                         }
