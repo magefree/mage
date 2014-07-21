@@ -90,12 +90,9 @@ class WindsOfChangeEffect extends OneShotEffect {
                 if (player != null) {
                     int cardsHand = player.getHand().size();
                     if (cardsHand > 0){
-                        for (UUID cardId: player.getHand()) {
-                            Card card = game.getCard(cardId);
-                            if (card != null) {
-                                player.removeFromHand(card, game);
-                                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                            }
+                        for (Card card: player.getHand().getCards(game)) {
+                            player.removeFromHand(card, game);
+                            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                         }
                         game.informPlayers(player.getName() + " shuffles the cards from his or her hand into his or her library");
                         player.shuffleLibrary(game);
