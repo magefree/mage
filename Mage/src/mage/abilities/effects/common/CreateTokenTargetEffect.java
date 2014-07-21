@@ -76,6 +76,9 @@ public class CreateTokenTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder("put ");
         if (amount.toString().equals("1")) {
             sb.append("a");
