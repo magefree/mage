@@ -326,6 +326,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                         break;
                     case STACK:
                     case PICK:
+                    case BATTLEFIELD: // for sacrificing permanents
                         break;
                     default:
                         Card sourceCard = game.getCard(sourceId);

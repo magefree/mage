@@ -815,7 +815,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         //20091005 - 701.13
         if (!game.replaceEvent(GameEvent.getEvent(EventType.SACRIFICE_PERMANENT, objectId, sourceId, controllerId))) {
             // Commander replacement effect or Rest in Peace (exile instead of graveyard) in play does not prevent successful sacrifice
-            moveToZone(Zone.GRAVEYARD, sourceId, game, true);
+            moveToZone(Zone.GRAVEYARD, sourceId, game, false);
             Player player = game.getPlayer(getControllerId());
             if (player != null) {
                 game.informPlayers(new StringBuilder(player.getName()).append(" sacrificed ").append(this.getLogName()).toString());
