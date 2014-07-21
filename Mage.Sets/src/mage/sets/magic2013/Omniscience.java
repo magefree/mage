@@ -42,6 +42,7 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 
 import java.util.UUID;
+import mage.util.CardUtil;
 
 /**
  *
@@ -99,7 +100,8 @@ class OmniscienceEffect extends CostModificationEffectImpl {
                             && !sourceCard.getCardType().contains(CardType.LAND)) {
                         Player player = game.getPlayer(source.getControllerId());
                         String message = "Cast " + sourceCard.getName() + " without paying its mana costs?";
-                        if (player != null && player.chooseUse(outcome, message, game)) {
+                        if (player != null && 
+                                (CardUtil.isCheckPlayableMode(abilityToModify) || player.chooseUse(outcome, message, game))) {
                             return true;
                         }
                     }

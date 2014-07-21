@@ -33,6 +33,7 @@ import java.util.UUID;
 
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.AlternativeCostImpl;
@@ -489,5 +490,18 @@ public class CardUtil {
             uniqueString.append(card.getZoneChangeCounter());
         }
         return uniqueString.toString();
+    }
+    
+    /**
+     * Returns if the ability is used to check which cards
+     * are playable on hand. (Issue #457)
+     * @param ability - ability to check
+     * @return 
+     */
+    public static boolean isCheckPlayableMode(Ability ability) {
+        if (ability instanceof ActivatedAbility) {
+            return ((ActivatedAbility) ability).isCheckPlayableMode();
+        }
+        return false;
     }
 }

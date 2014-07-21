@@ -42,6 +42,7 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.abilities.ActivatedAbility;
 
 /**
  *
@@ -100,9 +101,10 @@ class RooftopStormCostReductionEffect extends CostModificationEffectImpl {
                 Card sourceCard = game.getCard(spell.getSourceId());
                 if (sourceCard != null && sourceCard.hasSubtype("Zombie")) {
                     Player player = game.getPlayer(spell.getControllerId());
-                    if (player != null && player.chooseUse(Outcome.Benefit, "Pay {0} rather than pay the mana cost for Zombie creature", game)) {
+                    if (player != null && 
+                            (CardUtil.isCheckPlayableMode(spell) || player.chooseUse(Outcome.Benefit, "Pay {0} rather than pay the mana cost for Zombie creature", game))) {
                         spell.getManaCostsToPay().clear();
-                        spell.getManaCostsToPay().addAll(new ManaCostsImpl("{0}"));
+                        spell.getManaCostsToPay().addAll(new ManaCostsImpl<>("{0}"));
                         return true;
                     }
                 }

@@ -28,8 +28,6 @@
 package mage.abilities.costs;
 
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;

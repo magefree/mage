@@ -38,4 +38,20 @@ import mage.game.Game;
 public interface ActivatedAbility extends Ability {
 
     boolean canActivate(UUID playerId, Game game);
+    
+    /**
+     * Creates a fresh copy of this activated ability.
+     * 
+     * @return A new copy of this ability.
+     */
+    @Override
+    ActivatedAbility copy();   
+    
+    /**
+     * Set a flag to know, that the ability is only created adn used to check 
+     * what's playbable for the player.
+     */
+    void setCheckPlayableMode();
+    
+    boolean isCheckPlayableMode();
 }

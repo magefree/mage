@@ -53,9 +53,11 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     protected TimingRule timing = TimingRule.INSTANT;
     protected TargetController mayActivate = TargetController.YOU;
     protected UUID activatorId;
+    protected boolean checkPlayableMode;
 
     protected ActivatedAbilityImpl(AbilityType abilityType, Zone zone) {
         super(abilityType, zone);
+        this.checkPlayableMode = false;
     }
 
     public ActivatedAbilityImpl(ActivatedAbilityImpl ability) {
@@ -63,6 +65,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         timing = ability.timing;
         mayActivate = ability.mayActivate;
         activatorId = ability.activatorId;
+        checkPlayableMode = ability.checkPlayableMode;
     }
 
     public ActivatedAbilityImpl(Zone zone) {
@@ -216,5 +219,15 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     public void setTiming(TimingRule timing) {
         this.timing = timing;
     }
-        
+
+    @Override
+    public void setCheckPlayableMode() {
+        checkPlayableMode = true;
+    }
+
+    @Override
+    public boolean isCheckPlayableMode() {
+        return checkPlayableMode;
+    }
+    
 }

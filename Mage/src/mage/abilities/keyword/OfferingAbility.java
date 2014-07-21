@@ -128,6 +128,11 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
+    public boolean applies(UUID sourceId, Ability affectedAbility, Ability source, Game game) {
         if (sourceId.equals(source.getSourceId())) {
             Card card = game.getCard(sourceId);
             if (!card.getOwnerId().equals(source.getControllerId())) {
@@ -139,10 +144,7 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl {
                 Object alreadyConfirmed = game.getState().getValue("offering_ok_" + card.getId());
                 game.getState().setValue("offering_" + card.getId(), null);
                 game.getState().setValue("offering_ok_" + card.getId(), null);
-                if (alreadyConfirmed != null) {
-                    return true;
-                }
-                return false;
+                return alreadyConfirmed != null;
             } else {
                 // first call -> remove previous Ids
                 game.getState().setValue("offering_Id_" + card.getId(), null);
@@ -153,7 +155,8 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl {
                 FilterControlledCreaturePermanent filter = ((OfferingAbility) source).getFilter();
                 Card spellToCast = game.getCard(source.getSourceId());
                 Player player = game.getPlayer(source.getControllerId());
-                if (player != null && player.chooseUse(Outcome.Benefit, "Offer a " + filter.getMessage() + " to cast " + spellToCast.getName() + "?", game)) {
+                if (player != null &&  !CardUtil.isCheckPlayableMode(affectedAbility) && 
+                        player.chooseUse(Outcome.Benefit, "Offer a " + filter.getMessage() + " to cast " + spellToCast.getName() + "?", game)) {
                     Target target = new TargetControlledCreaturePermanent(1,1,filter,true);
                     player.chooseTarget(Outcome.Sacrifice, target, source, game);
                     if (!target.isChosen()) {
@@ -185,9 +188,9 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl {
 
 class OfferingCostReductionEffect extends CostModificationEffectImpl {
 
-    private UUID spellAbilityId;
-    private UUID activationId;
-    private ManaCosts<ManaCost> manaCostsToReduce;
+    private final UUID spellAbilityId;
+    private final UUID activationId;
+    private final ManaCosts<ManaCost> manaCostsToReduce;
 
     OfferingCostReductionEffect (UUID spellAbilityId, ManaCosts<ManaCost> manaCostsToReduce, UUID activationId) {
         super(Duration.OneUse, Outcome.Benefit, CostModificationType.REDUCE_COST);

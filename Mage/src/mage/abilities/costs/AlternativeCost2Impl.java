@@ -57,7 +57,7 @@ public class AlternativeCost2Impl <T extends AlternativeCost2Impl<T>> extends Co
         if (reminderText != null) {
             this.reminderText = new StringBuilder("<i>").append(reminderText).append("</i>").toString();
         }
-        this.add((Cost) cost);
+        this.add(cost);
     }
 
     public AlternativeCost2Impl(final AlternativeCost2Impl cost) {

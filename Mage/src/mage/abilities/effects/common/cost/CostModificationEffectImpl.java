@@ -32,13 +32,10 @@ import mage.constants.Duration;
 import mage.constants.EffectType;
 import mage.constants.Outcome;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.CostModificationEffect;
-import mage.cards.Card;
 import mage.constants.CostModificationType;
 import mage.game.Game;
-import mage.game.stack.Spell;
 
 /**
  * Simple implementation of a {@link CostModificationEffect} offering simplified

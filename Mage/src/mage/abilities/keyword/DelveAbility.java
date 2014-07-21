@@ -85,7 +85,7 @@ import mage.util.CardUtil;
         if (!target.canChoose(sourceId, controllerId, game)) {
             return;
         }
-        if (player.chooseUse(Outcome.Detriment, "Delve cards from your graveyard?", game)) {
+        if (!CardUtil.isCheckPlayableMode(ability) && player.chooseUse(Outcome.Detriment, "Delve cards from your graveyard?", game)) {
             player.chooseTarget(Outcome.Detriment, target, ability, game);
             if (target.getTargets().size() > 0) {
                 int adjCost = 0;
@@ -94,11 +94,11 @@ import mage.util.CardUtil;
                     if (card == null) {
                         continue;
                     }
-                    card.moveToExile(null, null, this.getSourceId(), game);
+                    player.moveCardToExileWithInfo(card, null, "", getSourceId(), game, Zone.GRAVEYARD);
                     ++adjCost;
                 }
-                game.informPlayers(new StringBuilder(player.getName()).append(" delved ")
-                        .append(adjCost).append(" creature").append(adjCost != 1?"s":"").append(" from his or her graveyard").toString());
+                game.informPlayers(new StringBuilder("Delve: ").append(player.getName()).append(" exiled ")
+                        .append(adjCost).append(" card").append(adjCost != 1?"s":"").append(" from his or her graveyard").toString());
                 CardUtil.adjustCost((SpellAbility)ability, adjCost);
             }
         }

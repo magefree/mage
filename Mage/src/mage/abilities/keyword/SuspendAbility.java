@@ -193,7 +193,7 @@ public class SuspendAbility extends ActivatedAbilityImpl {
         MageObject object = game.getObject(sourceId);
         return (object.getCardType().contains(CardType.INSTANT) ||
                 object.hasAbility(FlashAbility.getInstance().getId(), game) ||
-                game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST, playerId,  game) ||
+                game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST, this, playerId,  game) ||
                 game.canPlaySorcery(playerId));
     }
 

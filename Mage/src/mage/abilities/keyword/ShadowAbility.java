@@ -62,7 +62,7 @@ class ShadowEffect extends RestrictionEffect implements MageSingleton {
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
         if (blocker.getAbilities().containsKey(ShadowAbility.getInstance().getId())
-                || game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_SHADOW, blocker.getControllerId(), game)) {
+                || game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_SHADOW, source, blocker.getControllerId(), game)) {
             return true;
         }
         return false;

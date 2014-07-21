@@ -28,10 +28,13 @@
 
 package mage.abilities.effects;
 
+import java.util.UUID;
+import mage.abilities.Ability;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
 import mage.constants.EffectType;
 import mage.constants.Outcome;
+import mage.game.Game;
 
 /**
  *
@@ -50,6 +53,11 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
     public AsThoughEffectImpl(final AsThoughEffectImpl effect) {
         super(effect);
         this.type = effect.type;
+    }
+   
+    @Override
+    public boolean applies(UUID sourceId, Ability affectedAbility, Ability source, Game game) {
+        return applies(sourceId, source, game);
     }
 
     @Override

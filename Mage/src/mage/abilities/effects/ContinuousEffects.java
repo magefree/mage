@@ -420,19 +420,31 @@ public class ContinuousEffects implements Serializable {
     }
 
     public boolean asThough(UUID objectId, AsThoughEffectType type, UUID controllerId, Game game) {
+        return asThough(objectId, type, null, controllerId, game);
+    }
+
+    public boolean asThough(UUID objectId, AsThoughEffectType type, Ability affectedAbility, UUID controllerId, Game game) {
         List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(type, game);
         for (AsThoughEffect effect: asThoughEffectsList) {
             HashSet<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
             for (Ability ability : abilities) {
                 if (controllerId.equals(ability.getControllerId())) {
-                    if (effect.applies(objectId, ability, game)) {
-                        return true;
+                    if (affectedAbility == null) {
+                        if (effect.applies(objectId, ability, game)) {
+                            return true;
+                        }                        
+                    } else {
+                        if (effect.applies(objectId, affectedAbility, ability, game)) {
+                            return true;
+                        }
                     }
                 }
             }
         }
         return false;
+        
     }
+    
 
     /**
      * Filters out asThough effects that are not active.

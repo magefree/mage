@@ -118,7 +118,7 @@ public class ManaPool implements Serializable {
 
     // check if any mana can be spend to cast the mana cost of an ability
     private boolean spendAnyMana(Ability ability, Game game) {
-        return game.getContinuousEffects().asThough(ability.getSourceId(), AsThoughEffectType.SPEND_ANY_MANA, ability.getControllerId(), game);
+        return game.getContinuousEffects().asThough(ability.getSourceId(), AsThoughEffectType.SPEND_ANY_MANA, ability, ability.getControllerId(), game);
     }
 
     public int get(ManaType manaType) {

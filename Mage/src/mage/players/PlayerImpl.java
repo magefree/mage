@@ -1834,8 +1834,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     protected boolean canPlay(ActivatedAbility ability, ManaOptions available, Game game) {
-        if (!(ability instanceof ManaAbility) && ability.canActivate(playerId, game)) {
-            Ability copy = ability.copy();
+        if (!(ability instanceof ManaAbility)) {
+            ActivatedAbility copy = ability.copy();     
+            copy.setCheckPlayableMode(); // prevents from endless loops for asking player to use effects by checking this mode
+            if (!copy.canActivate(playerId, game)) {
+                return false;
+            }
             game.getContinuousEffects().costModification(copy, game);
 
             Card card = game.getCard(ability.getSourceId());

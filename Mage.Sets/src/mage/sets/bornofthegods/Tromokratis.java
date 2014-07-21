@@ -114,7 +114,7 @@ class CantBeBlockedUnlessAllEffect extends RestrictionEffect {
         // check if all creatures of defender are able to block this permanent
         // permanent.canBlock() can't be used because causing recursive call
         for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, blocker.getControllerId(), game)) {
-            if (permanent.isTapped() && !game.getState().getContinuousEffects().asThough(this.getId(), AsThoughEffectType.BLOCK_TAPPED, blocker.getControllerId(), game)) {
+            if (permanent.isTapped() && !game.getState().getContinuousEffects().asThough(this.getId(), AsThoughEffectType.BLOCK_TAPPED, source, blocker.getControllerId(), game)) {
                 return false;
             }
             // check blocker restrictions

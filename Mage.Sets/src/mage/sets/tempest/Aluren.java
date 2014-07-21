@@ -49,6 +49,7 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -113,7 +114,8 @@ class AlurenEffect extends CostModificationEffectImpl {
                 if (sourceCard != null && sourceCard.getCardType().contains(CardType.CREATURE) && sourceCard.getManaCost().convertedManaCost() <= 3) {
                     Player player = game.getPlayer(stackObject.getControllerId());
                     String message = "Cast " + sourceCard.getName() + " without paying its mana costs?";
-                    if (player != null && player.chooseUse(outcome, message, game)) {
+                    if (player != null && 
+                            (CardUtil.isCheckPlayableMode(abilityToModify) || player.chooseUse(outcome, message, game))) {
                         return true;
                     }
                 }
