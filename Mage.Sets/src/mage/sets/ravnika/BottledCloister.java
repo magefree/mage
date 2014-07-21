@@ -40,6 +40,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -134,15 +135,18 @@ class BottledCloisterReturnEffect extends OneShotEffect {
         if (controller != null && sourcePermanent != null) {
             UUID exileId = CardUtil.getCardExileZoneId(game, source);
             int numberOfCards = 0;
-            for (Card card:  game.getExile().getExileZone(exileId).getCards(game)) {
-                if (card.getOwnerId().equals(controller.getId())) {
-                    numberOfCards++;
-                    card.setFaceDown(false);
-                    card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+            ExileZone exileZone = game.getExile().getExileZone(exileId);
+            if (exileZone != null) {
+                for (Card card:  exileZone.getCards(game)) {
+                    if (card.getOwnerId().equals(controller.getId())) {
+                        numberOfCards++;
+                        card.setFaceDown(false);
+                        card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                    }
                 }
             }
             if (numberOfCards > 0) {
-                game.informPlayers(sourcePermanent.getName() + ": " + controller.getName() + " returns "+ numberOfCards + " card" + (numberOfCards > 1 ?"s":"") + " from exile to hand");
+                game.informPlayers(sourcePermanent.getLogName() + ": " + controller.getName() + " returns "+ numberOfCards + " card" + (numberOfCards > 1 ?"s":"") + " from exile to hand");
             }
             return true;
         }
