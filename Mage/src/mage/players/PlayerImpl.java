@@ -1517,8 +1517,10 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void quit(Game game) {
+        log.debug("PlayerImpl.quit start " + getName() + " quits game " + game.getId());       
         game.informPlayers(new StringBuilder(getName()).append(" quits the match.").toString());
         quit = true;
+        log.debug("PlayerImpl.quit before concede" + getName() + " quits game " + game.getId());
         this.concede(game);
     }
 
