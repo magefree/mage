@@ -88,37 +88,37 @@ class GenesisWaveEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Cards cards = new CardsImpl(Zone.PICK);
-        int count = source.getManaCostsToPay().getX();
-        count = Math.min(controller.getLibrary().size(), count);
-        for (int i = 0; i < count; i++) {
+        Cards cards = new CardsImpl(Zone.LIBRARY);
+        int xValue = source.getManaCostsToPay().getX();
+        int numberCards = Math.min(controller.getLibrary().size(), xValue);
+        for (int i = 0; i < numberCards; i++) {
             Card card = controller.getLibrary().removeFromTop(game);
             cards.add(card);
-            game.setZone(card.getId(), Zone.PICK);
         }
-        FilterCard filter = new FilterCard("card with converted mana cost " + count + " or less to put onto the battlefield");
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, count + 1));
+        FilterCard filter = new FilterCard("card with converted mana cost " + xValue + " or less to put onto the battlefield");
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, xValue + 1));
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
                                  new CardTypePredicate(CardType.CREATURE),
                                  new CardTypePredicate(CardType.ENCHANTMENT),
                                  new CardTypePredicate(CardType.LAND),
                                  new CardTypePredicate(CardType.PLANESWALKER)
                 ));
-        TargetCard target1 = new TargetCard(Zone.PICK, filter);
+        TargetCard target1 = new TargetCard(Zone.LIBRARY, filter);
         while (cards.size() > 0 && controller.choose(Outcome.PutCardInPlay, cards, target1, game)) {
             Card card = cards.get(target1.getFirstTarget(), game);
             if (card != null) {
                 cards.remove(card);
-                card.putOntoBattlefield(game, Zone.PICK, source.getSourceId(), source.getControllerId());
+                controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
             }
             target1.clearChosen();
+            if (!controller.isInGame()) {
+                break;
+            }
         }
         while (cards.size() > 0) {
             Card card = cards.get(cards.iterator().next(), game);
             cards.remove(card);
-            controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
-
-            card.moveToZone(Zone.GRAVEYARD, source.getId(), game, true);
+            controller.moveCardToGraveyardWithInfo(card, source.getId(), game, Zone.LIBRARY);
         }
         return true;
     }
