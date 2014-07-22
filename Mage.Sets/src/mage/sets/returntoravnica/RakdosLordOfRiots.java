@@ -27,13 +27,14 @@
  */
 package mage.sets.returntoravnica;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.CostImpl;
 import mage.abilities.dynamicvalue.common.OpponentsLostLifeCount;
+import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -41,11 +42,17 @@ import mage.abilities.keyword.RetraceAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.CostModificationType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  *
@@ -64,7 +71,7 @@ public class RakdosLordOfRiots extends CardImpl {
         this.toughness = new MageInt(6);
 
         // You can't cast Rakdos, Lord of Riots unless an opponent lost life this turn.
-        this.getSpellAbility().addCost(new RakdosLordOfRiotsCost());
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new RakdosLordOfRiotsCantCastEffect()));
 
         // Flying, trample
         this.addAbility(FlyingAbility.getInstance());
@@ -84,45 +91,44 @@ public class RakdosLordOfRiots extends CardImpl {
     }
 }
 
-class RakdosLordOfRiotsCost extends CostImpl {
+class RakdosLordOfRiotsCantCastEffect extends ReplacementEffectImpl {
 
-    public RakdosLordOfRiotsCost() {
-        text = "You can't cast Rakdos, Lord of Riots unless an opponent lost life this turn";
+    public RakdosLordOfRiotsCantCastEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        staticText = "You can't cast {this} unless an opponent lost life this turn";
     }
 
-    public RakdosLordOfRiotsCost(final RakdosLordOfRiotsCost cost) {
-        super(cost);
-    }
-
-    @Override
-    public RakdosLordOfRiotsCost copy() {
-        return new RakdosLordOfRiotsCost(this);
+    public RakdosLordOfRiotsCantCastEffect(final RakdosLordOfRiotsCantCastEffect effect) {
+        super(effect);
     }
 
     @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-        Player controller = game.getPlayer(controllerId);
-        if (game.getActivePlayerId().equals(controllerId)) {
-            OpponentsLostLifeCount dynamicValue = new OpponentsLostLifeCount();
-            if (dynamicValue != null && dynamicValue.calculate(game, controllerId) > 0) {
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public RakdosLordOfRiotsCantCastEffect copy() {
+        return new RakdosLordOfRiotsCantCastEffect(this);
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {                
+            game.informPlayer(controller, "You can't cast Rakdos, Lord of Riots because your opponents lost no life this turn yet");
+        }
+       return true;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == EventType.CAST_SPELL && event.getSourceId().equals(source.getSourceId())) {
+            if (new OpponentsLostLifeCount().calculate(game, source) == 0) {
                 return true;
-            } else {
-                game.informPlayer(controller, "You can't cast Rakdos, Lord of Riots because your opponents lost no life this turn yet");
-                return false;
             }
         }
-        // Always return true for not controller's turn:
-        // http://www.wizards.com/magic/magazine/article.aspx?x=mtg/faq/rtr
-        // Rakdos can be put onto the battlefield by another spell or ability even if no opponent has lost life that turn.
-
-        return true;
-
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        this.paid = true;
-        return paid;
+        return false;
     }
 }
 
