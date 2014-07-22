@@ -82,7 +82,7 @@ public class ChatSession {
                         message = " has lost connection";
                         break;
                      default:
-                         logger.debug(userName + " left chat with reason: " + reason.name() + " " + chatId);
+                         logger.debug(userName + " left chat " + chatId + " with reason: " + (reason == null ?"null":reason.toString()));
                 }
                 if (message != null) {
                     broadcast(null, new StringBuilder(userName).append(message).toString(), MessageColor.BLUE, true, MessageType.STATUS);
