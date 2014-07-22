@@ -711,7 +711,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             connection.setAvatarId(avatarId);
             connection.setShowAbilityPickerForced(showAbilityPickerForced);
             logger.debug("connecting (auto): " + proxyType + " " + proxyServer + " " + proxyPort + " " + proxyUsername);
-            if (MageFrame.connect(connection)) {
+            if (MageFrame.connect(connection)) {  
+                showGames();
                 return true;
             } else {
                 showMessage("Unable to connect to server");
@@ -887,9 +888,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }//GEN-LAST:event_btnDeckEditorActionPerformed
 
     private void btnGamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGamesActionPerformed
-        this.tablesPane.setVisible(true);
-        this.tablesPane.showTables();
-        setActive(tablesPane);
+        this.showGames();
     }//GEN-LAST:event_btnGamesActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -971,6 +970,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         this.tablesPane.hideTables();
     }
 
+    public void showGames() {        
+        this.tablesPane.setVisible(true);
+        this.tablesPane.showTables();
+        setActive(tablesPane);
+    }
+    
     public void hideGames() {
         JInternalFrame[] windows = desktopPane.getAllFramesInLayer(JLayeredPane.DEFAULT_LAYER);
         for (JInternalFrame window : windows) {
@@ -1107,6 +1112,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 }
                 instance = new MageFrame();
                 instance.setVisible(true);
+                
             }
         });
     }

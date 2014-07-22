@@ -335,8 +335,9 @@ public class ConnectDialog extends MageDialog {
                 get();
                 setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
                 if (result) {
-                    lblStatus.setText("");
+                    lblStatus.setText("");                    
                     connected();
+                    MageFrame.getInstance().showGames();
                 } else {
                     lblStatus.setText("Could not connect");
                 }
