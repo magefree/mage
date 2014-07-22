@@ -66,7 +66,8 @@ public class ChatSession {
     }
 
     synchronized public void  kill(UUID userId, DisconnectReason reason) {
-        logger.debug("ChatSession.kill  userId: " + userId + "  reason: " + (reason == null?"null":reason.toString()));
+        logger.debug("ChatSession.kill  chatSession: " + chatId + "  userId: " + userId + "  reason: " + (reason == null?"null":reason.toString()) 
+                        + "  clients.size " + clients.size() + "  userid " + (clients.containsKey(userId) ?"contained":"NOT contained"));
         try {
             if (userId != null && clients.containsKey(userId)) {
                 String userName = clients.get(userId);
