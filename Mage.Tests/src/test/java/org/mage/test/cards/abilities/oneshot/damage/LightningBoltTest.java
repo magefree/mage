@@ -78,4 +78,22 @@ public class LightningBoltTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Craw Wurm", 0);
     }
 
+    @Test
+    public void testDamageTarmagoyf() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        
+        addCard(Zone.GRAVEYARD, playerB, "Forest");
+        addCard(Zone.GRAVEYARD, playerB, "Clear a Path");
+        addCard(Zone.BATTLEFIELD, playerB, "Tarmogoyf");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Tarmogoyf");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        // Tarmogoyf is a 2/3 that then takes 3 damage, then becomes a 3/4 as the 
+        // Lightning Bolt is put into the graveyard and then state base actions are checked and Tarmogoyf survives.
+        assertPermanentCount(playerB, "Tarmogoyf", 1);
+    }
+
 }
