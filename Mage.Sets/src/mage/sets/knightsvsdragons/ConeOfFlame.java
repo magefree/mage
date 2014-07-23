@@ -93,7 +93,7 @@ class ConeOfFlameEffect extends OneShotEffect {
             }
             Player player = game.getPlayer(targetId);
             if (player != null) {
-                applied |= (player.damage(damage, source.getSourceId(), game, true, false) > 0);
+                applied |= (player.damage(damage, source.getSourceId(), game, false, true) > 0);
             }
             damage++;
         }
