@@ -28,6 +28,7 @@
 package mage.sets.magic2015;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
@@ -37,6 +38,7 @@ public class StabWound extends mage.sets.returntoravnica.StabWound {
 
     public StabWound(UUID ownerId) {
         super(ownerId);
+        this.rarity = Rarity.UNCOMMON;
         this.cardNumber = 116;
         this.expansionSetCode = "M15";
     }
