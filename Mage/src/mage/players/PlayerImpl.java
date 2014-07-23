@@ -2011,7 +2011,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      */
     private boolean shouldSkipGettingPlayable(Game game) {
         for (Entry<PhaseStep, Step.StepPart> phaseStep : silentPhaseSteps.entrySet()) {
-            if (game.getPhase() != null && phaseStep.getKey().equals(game.getPhase().getStep().getType())) {
+            if (game.getPhase() != null && game.getPhase().getStep() != null && phaseStep.getKey().equals(game.getPhase().getStep().getType())) {
                 if (phaseStep.getValue() == null || phaseStep.getValue().equals(game.getPhase().getStep().getStepPart())) {
                     return true;
                 }
