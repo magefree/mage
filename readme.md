@@ -1,22 +1,23 @@
 # XMage - Magic, Another Game Engine
 
-XMage allows you to play magic against one or more online players or computer opponents. It includes full rules enforcement for about **8,000** unique cards (13,715 in all). Starting with Eventide, all regular sets have nearly all the cards implemented ([see here in detail which cards are implemented](http://ct-magefree.rhcloud.com/stats)).
+XMage allows you to play magic against one or more online players or computer opponents. It includes full rules enforcement for over **8,500** unique cards (15,481 counting all cards from different editions). Starting with Eventide, all regular sets have nearly all the cards implemented ([see here in detail which cards are implemented](http://ct-magefree.rhcloud.com/stats)).
 
 There are public servers where you can play XMage against other players. Apart from this, you can also host your own server to play against the AI and/or your friends.
 
 You can visit the XMage forum [here](http://www.slightlymagic.net/forum/viewforum.php?f=70).
 
 ## Features
-* There is a basic computer AI opponent available.
+* Deck editor to build your desired decks.
+* There is a simple computer AI opponent available.
 * You can play either a two player duel or a multiplayer free-for-all game with up to 10 players.
 * Commander format(also up to 10 players).
 * There are two tournament types supported witch can be played with up to 16 players:
  * Elimination or swiss type handling
- * Booster (also Cube) draft (4-16)
- * Sealed (2-16)
+ * Booster (also Cube) draft tournaments (4-16)
+ * Sealed (also from Cube) tournaments (2-16)
 
 ## Installation
-Download the latest release from [here](http://XMage.info). You need this to be able to play on the official server.
+Download the latest release from [here](http://XMage.info). You need this to be able to play on the public server.
 
 After you extract the content of the archive, you will find batch files to start the client/server in the corresponding directories. See the included readme files for more instructions.
 
