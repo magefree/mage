@@ -350,7 +350,7 @@ public class ContinuousEffects implements Serializable {
                 }
             }
             if (!applicableAbilities.isEmpty()) {
-                replaceEffects.put((ReplacementEffect) effect, applicableAbilities);
+                replaceEffects.put(effect, applicableAbilities);
             }
         }
         for (PreventionEffect effect: preventionEffects) {
@@ -599,10 +599,10 @@ public class ContinuousEffects implements Serializable {
                 ReplacementEffect entry = it1.next();
                 if (consumed.containsKey(entry.getId())) {
                     HashSet<UUID> consumedAbilitiesIds = consumed.get(entry.getId());
-                    if (rEffects.get(entry) == null || consumedAbilitiesIds.size() == ((HashSet<Ability>) rEffects.get(entry)).size()) {
+                    if (rEffects.get(entry) == null || consumedAbilitiesIds.size() == rEffects.get(entry).size()) {
                         it1.remove();
                     } else {
-                        Iterator it = ((HashSet<Ability>) rEffects.get(entry)).iterator();
+                        Iterator it = rEffects.get(entry).iterator();
                         while (it.hasNext()) {
                             Ability ability = (Ability) it.next();
                             if (consumedAbilitiesIds.contains(ability.getId())) {
@@ -619,7 +619,7 @@ public class ContinuousEffects implements Serializable {
             int index;
             boolean onlyOne = false;
             if (rEffects.size() == 1) {
-                ReplacementEffect effect = (ReplacementEffect) rEffects.keySet().iterator().next();
+                ReplacementEffect effect = rEffects.keySet().iterator().next();
                 HashSet<Ability> abilities = replacementEffects.getAbility(effect.getId());
                 if (abilities == null || abilities.size() == 1) {
                     onlyOne = true;
@@ -636,21 +636,21 @@ public class ContinuousEffects implements Serializable {
             int checked = 0;
             ReplacementEffect rEffect = null;
             Ability rAbility = null;
-            for (Map.Entry entry : rEffects.entrySet()) {
+            for (Map.Entry<ReplacementEffect, HashSet<Ability>> entry : rEffects.entrySet()) {
                 if (entry.getValue() == null) {
                     if (checked == index) {
-                        rEffect = (ReplacementEffect) entry.getKey();
+                        rEffect = entry.getKey();
                         break;
                     } else {
                         checked++;
                     }
                 } else {
-                    HashSet<Ability> abilities = (HashSet<Ability>) entry.getValue();
+                    HashSet<Ability> abilities = entry.getValue();
                     int size = abilities.size();
                     if (index > (checked + size - 1)) {
                         checked += size;
                     } else {
-                        rEffect = (ReplacementEffect) entry.getKey();
+                        rEffect = entry.getKey();
                         Iterator it = abilities.iterator();
                         while (it.hasNext() && rAbility == null) {
                             if (checked == index) {
@@ -847,7 +847,7 @@ public class ContinuousEffects implements Serializable {
             case ASTHOUGH:
                 AsThoughEffect newAsThoughEffect = (AsThoughEffect)effect;
                 if (!asThoughEffectsMap.containsKey(newAsThoughEffect.getAsThoughEffectType())) {
-                    ContinuousEffectsList list = new ContinuousEffectsList();
+                    ContinuousEffectsList<AsThoughEffect> list = new ContinuousEffectsList<>();
                     asThoughEffectsMap.put(newAsThoughEffect.getAsThoughEffectType(), list);
                 }
                 asThoughEffectsMap.get(newAsThoughEffect.getAsThoughEffectType()).addEffect(newAsThoughEffect, source);
@@ -929,13 +929,13 @@ public class ContinuousEffects implements Serializable {
 
     public List<String> getReplacementEffectsTexts(HashMap<ReplacementEffect, HashSet<Ability>> rEffects, Game game) {
         List<String> texts = new ArrayList<>();
-        for (Map.Entry entry : rEffects.entrySet()) {
-            for (Ability ability :(HashSet<Ability>) entry.getValue()) {
+        for (Map.Entry<ReplacementEffect, HashSet<Ability>> entry : rEffects.entrySet()) {
+            for (Ability ability :entry.getValue()) {
                 MageObject object = game.getObject(ability.getSourceId());
                 if (object != null) {
                     texts.add(ability.getRule(object.getLogName()));
                 } else {
-                    texts.add(((ReplacementEffect)entry.getKey()).getText(null));
+                    texts.add(entry.getKey().getText(null));
                 }
             }
 
