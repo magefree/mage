@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class ImageManagerImpl implements ImageManager {
 
-    private static ImageManagerImpl fInstance = new ImageManagerImpl();
+    private static final ImageManagerImpl fInstance = new ImageManagerImpl();
 
     public static ImageManagerImpl getInstance() {
         return fInstance;
@@ -29,7 +29,7 @@ public class ImageManagerImpl implements ImageManager {
         String[] phases = {"Untap", "Upkeep", "Draw", "Main1",
                 "Combat_Start", "Combat_Attack", "Combat_Block", "Combat_Damage", "Combat_End",
                 "Main2", "Cleanup", "Next_Turn"};
-        phasesImages = new HashMap<String, Image>();
+        phasesImages = new HashMap<>();
         for (String name : phases) {
             Image image = getImageFromResource("/phases/phase_" + name.toLowerCase() + ".png", new Rectangle(36, 36));
             phasesImages.put(name, image);
@@ -104,6 +104,24 @@ public class ImageManagerImpl implements ImageManager {
             imageTokenIcon = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
         }
         return imageTokenIcon;
+    }
+
+    @Override
+    public BufferedImage getTriggeredAbilityImage() {
+        if (triggeredAbilityIcon == null) {
+            Image image = getImageFromResourceTransparent("/card/triggered_ability.png", Color.WHITE, new Rectangle(20, 20));
+            triggeredAbilityIcon = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+        }
+        return triggeredAbilityIcon;
+    }
+
+    @Override
+    public BufferedImage getActivatedAbilityImage() {
+        if (activatedAbilityIcon == null) {
+            Image image = getImageFromResourceTransparent("/card/activated_ability.png", Color.WHITE, new Rectangle(20, 20));
+            activatedAbilityIcon = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+        }
+        return activatedAbilityIcon;
     }
 
     @Override
@@ -235,6 +253,8 @@ public class ImageManagerImpl implements ImageManager {
     private static BufferedImage imageNight;
 
     private static BufferedImage imageTokenIcon;
+    private static BufferedImage triggeredAbilityIcon;
+    private static BufferedImage activatedAbilityIcon;
     private static BufferedImage imageCopyIcon;
 
     private static BufferedImage imageDlgAcceptButton;

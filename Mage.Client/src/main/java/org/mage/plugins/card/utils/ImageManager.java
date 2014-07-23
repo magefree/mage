@@ -13,6 +13,8 @@ public interface ImageManager {
     Image getNightImage();
     
     Image getTokenIconImage();
+    Image getTriggeredAbilityImage();
+    Image getActivatedAbilityImage();
     Image getCopyInformIconImage();
 
     Image getDlgAcceptButtonImage();

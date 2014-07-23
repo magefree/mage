@@ -34,6 +34,7 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Modes;
 import mage.abilities.effects.Effect;
+import mage.constants.AbilityType;
 import mage.constants.MageObjectType;
 import mage.game.Game;
 import mage.game.stack.StackAbility;
@@ -48,10 +49,12 @@ public class StackAbilityView extends CardView {
     private static final long serialVersionUID = 1L;
 
     private final CardView sourceCard;
+    private final AbilityType abilityType;
 
     public StackAbilityView(Game game, StackAbility ability, String sourceName, CardView sourceCard) {
         this.id = ability.getId();
         this.mageObjectType = MageObjectType.ABILITY_STACK;
+        this.abilityType =  ability.getStackAbility().getAbilityType();
         this.sourceCard = sourceCard;
         this.sourceCard.setMageObjectType(mageObjectType);
         this.name = "Ability";
@@ -113,4 +116,9 @@ public class StackAbilityView extends CardView {
     public CardView getSourceCard() {
         return this.sourceCard;
     }
+
+    public AbilityType getAbilityType() {
+        return abilityType;
+    }
+        
 }

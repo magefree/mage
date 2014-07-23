@@ -31,6 +31,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.constants.AbilityType;
+import mage.constants.MageObjectType;
 
 /**
  * Main class for drawing Mage card object.
@@ -104,7 +106,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     private boolean animationInProgress = false;
 
     private JButton dayNightButton;
-    private JButton tokenButton;
+    private JButton typeButton;
     private JButton showCopySourceButton;
 
     private boolean displayTitleAnyway;
@@ -156,23 +158,16 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             });
         }
 
+        if (newGameCard.isAbility()) {
+            if (AbilityType.TRIGGERED.equals(newGameCard.getAbilityType())) {
+                setTypeIcon(ImageManagerImpl.getInstance().getTriggeredAbilityImage(),"Triggered Ability");
+            } else if (AbilityType.ACTIVATED.equals(newGameCard.getAbilityType())) {
+                setTypeIcon(ImageManagerImpl.getInstance().getActivatedAbilityImage(),"Activated Ability");                
+            }            
+        }
+        
         if (this.gameCard.isToken()) {
-            // token icon
-            iconPanel = new JPanel();
-            iconPanel.setLayout(null);
-            iconPanel.setOpaque(false);
-            add(iconPanel);
-
-            tokenButton = new JButton("");
-            tokenButton.setLocation(2, 2);
-            tokenButton.setSize(25, 25);
-
-            iconPanel.setVisible(this.gameCard.isToken());
-
-            BufferedImage tokenIconImage = ImageManagerImpl.getInstance().getTokenIconImage();
-            tokenButton.setIcon(new ImageIcon(tokenIconImage));
-
-            iconPanel.add(tokenButton);
+            setTypeIcon(ImageManagerImpl.getInstance().getTokenIconImage(),"Token Permanent");                
         }
 
         // icon to inform about permanent is copying something
@@ -276,6 +271,24 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         });
     }
 
+    private void setTypeIcon(BufferedImage bufferedImage, String toolTipText) {
+        iconPanel = new JPanel();
+        iconPanel.setLayout(null);
+        iconPanel.setOpaque(false);
+        add(iconPanel);
+
+        typeButton = new JButton("");
+        typeButton.setLocation(2, 2);
+        typeButton.setSize(25, 25);
+
+        iconPanel.setVisible(true);
+        typeButton.setIcon(new ImageIcon(bufferedImage));
+        if (toolTipText != null) {
+            typeButton.setToolTipText(toolTipText);
+        }
+        iconPanel.add(typeButton);    
+    }
+    
     public void cleanUp() {
         if (dayNightButton != null) {
             for(ActionListener al: dayNightButton.getActionListeners()) {

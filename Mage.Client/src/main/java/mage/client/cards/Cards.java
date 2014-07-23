@@ -155,7 +155,7 @@ public class Cards extends javax.swing.JPanel {
         }
 
         // order objects for display
-        java.util.List<CardView> orderedList = new ArrayList<CardView>();
+        java.util.List<CardView> orderedList = new ArrayList<>();
         for (CardView card: cardsView.values()) {
             orderedList.add(0, card);
         }
@@ -173,7 +173,10 @@ public class Cards extends javax.swing.JPanel {
                 tmp.setIsAbility(true);
                 tmp.overrideTargets(card.getTargets());
                 tmp.overrideId(card.getId());
+                tmp.setAbilityType(((StackAbilityView)card).getAbilityType());
                 card = tmp;
+            } else {
+                card.setAbilityType(null);
             }
             if (!cards.containsKey(card.getId())) {
                 addCard(card, bigCard, gameId);
@@ -302,7 +305,7 @@ public class Cards extends javax.swing.JPanel {
     }
 
     private void layoutCards() {
-        java.util.List<CardPanel> cards = new ArrayList();
+        java.util.List<CardPanel> cards = new ArrayList<>();
 
         for (Component component : cardArea.getComponents()) {
             if (component instanceof CardPanel) {

@@ -53,6 +53,7 @@ import mage.target.Targets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.constants.AbilityType;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -78,6 +79,7 @@ public class CardView extends SimpleCardView {
     protected MageObjectType mageObjectType;
 
     protected boolean isAbility;
+    protected AbilityType abilityType;
     protected boolean isToken;
 
     protected CardView ability;
@@ -450,6 +452,14 @@ public class CardView extends SimpleCardView {
 
     public boolean isAbility() {
         return isAbility;
+    }
+
+    public AbilityType getAbilityType() {
+        return abilityType;
+    }
+
+    public void setAbilityType(AbilityType abilityType) {
+        this.abilityType = abilityType;
     }
 
     public String getPower() {
