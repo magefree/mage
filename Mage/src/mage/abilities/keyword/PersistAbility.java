@@ -66,7 +66,7 @@ class PersistEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         game.addEffect(new PersistReplacementEffect(), source);
-        return false;
+        return true;
     }
 }
 

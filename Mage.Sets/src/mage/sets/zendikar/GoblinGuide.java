@@ -102,9 +102,10 @@ class GoblinGuideEffect extends OneShotEffect {
                 defender.revealCards("Goblin Guide", cards, game);
                 if (card.getCardType().contains(CardType.LAND)) {
                     defender.getLibrary().removeFromTop(game);
-                    card.moveToZone(Zone.HAND, source.getId(), game, true);
+                    defender.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                 }
             }
+            return true;
         }
         return false;
     }

@@ -89,6 +89,7 @@ public class CounterUnlessPaysEffect extends OneShotEffect {
                 if (!costToPay.pay(source, game, spell.getSourceId(), spell.getControllerId(), false)) {
                     return game.getStack().counter(spell.getId(), source.getSourceId(), game);
                 }
+                return true;
             }
         }
         return false;

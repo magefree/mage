@@ -112,6 +112,7 @@ class VendilionCliqueEffect extends OneShotEffect {
                     player.drawCards(1, game);
                 }
             }
+            return true;
         }
         return false;
     }

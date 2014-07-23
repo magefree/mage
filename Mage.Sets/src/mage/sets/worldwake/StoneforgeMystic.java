@@ -133,8 +133,8 @@ class StoneforgeMysticEffect extends OneShotEffect {
                      controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
                 }
             }
+            return true;
         }
-
         return false;
     }
 }

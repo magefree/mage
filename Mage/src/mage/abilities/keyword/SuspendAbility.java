@@ -313,7 +313,6 @@ class SuspendPlayCardEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-
         Player player = game.getPlayer(source.getControllerId());
         Card card = game.getCard(source.getSourceId());
         if (player != null && card != null) {
@@ -340,7 +339,7 @@ class SuspendPlayCardEffect extends OneShotEffect {
                 card.getAbilities().removeAll(abilitiesToRemove);
             }
             // cast the card for free
-            player.cast(card.getSpellAbility(), game, true);
+            return player.cast(card.getSpellAbility(), game, true);
         }
         return false;
     }
