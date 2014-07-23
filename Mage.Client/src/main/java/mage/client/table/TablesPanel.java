@@ -40,8 +40,6 @@ import java.awt.HeadlessException;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.beans.PropertyVetoException;
 import java.io.File;
 import java.text.DateFormat;
@@ -54,8 +52,6 @@ import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -65,7 +61,6 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
-import javax.swing.JSplitPane;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
 import mage.cards.decks.importer.DeckImporterUtil;
@@ -89,7 +84,6 @@ import mage.view.MatchView;
 import mage.view.TableView;
 import mage.view.UsersView;
 import org.apache.log4j.Logger;
-import org.mage.plugins.card.dl.beans.PropertyChangeSupport;
 
 /**
  *
@@ -112,9 +106,6 @@ public class TablesPanel extends javax.swing.JPanel {
     private Session session;
     private List<String> messages;
     private int currentMessage;
-   
-    private static final ScheduledExecutorService timeoutExecutor = Executors.newScheduledThreadPool(1);
-    private ScheduledFuture<?> setDividerLocation;    
       
     /** Creates new form TablesPanel */
     public TablesPanel() {
@@ -381,12 +372,12 @@ public class TablesPanel extends javax.swing.JPanel {
         MageFrame.getUI().addButton(MageComponents.NEW_GAME_BUTTON, btnNewTable);
         
         // divider locations have to be set with delay else values set are overwritten with system defaults
-        setDividerLocation = timeoutExecutor.schedule(new Runnable() {
+        Executors.newSingleThreadScheduledExecutor().schedule(new Runnable() {
             @Override
             public void run() {
                 restoreDividerLocations();
             }
-        }, 300, TimeUnit.MILLISECONDS);        
+        }, 300, TimeUnit.MILLISECONDS);       
         
     }
 
