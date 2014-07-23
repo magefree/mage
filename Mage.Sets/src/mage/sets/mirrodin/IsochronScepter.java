@@ -49,6 +49,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
 
 /**
  *
@@ -82,7 +83,7 @@ public class IsochronScepter extends CardImpl {
 
 class IsochronScepterImprintEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard("card with converted mana cost 2 or less from your hand");
+    private static final FilterCard filter = new FilterCard("instant card with converted mana cost 2 or less from your hand");
     static  {
         filter.add(new CardTypePredicate(CardType.INSTANT));
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 3));
@@ -99,24 +100,28 @@ class IsochronScepterImprintEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player.getHand().size() > 0) {
-            TargetCard target = new TargetCard(Zone.HAND, filter);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game) 
-                    && player.choose(Outcome.Benefit, player.getHand(), target, game)) {
-                Card card = player.getHand().get(target.getFirstTarget(), game);
-                if (card != null) {
-                    card.moveToExile(source.getSourceId(), "Isochron Scepter (Imprint)", source.getSourceId(), game);
-                    Permanent permanent = game.getPermanent(source.getSourceId());
-                    if (permanent != null) {
-                        permanent.imprint(card.getId(), game);
-                        permanent.addInfo("imprint", new StringBuilder("[Imprinted card - ").append(card.getName()).append("]").toString());
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (controller != null) {
+            if (controller.getHand().size() > 0) {
+                TargetCard target = new TargetCard(Zone.HAND, filter);
+                if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
+                        && controller.choose(Outcome.Benefit, controller.getHand(), target, game)) {
+                    Card card = controller.getHand().get(target.getFirstTarget(), game);
+                    if (card != null) {
+                        controller.moveCardToExileWithInfo(card, source.getSourceId(), sourcePermanent.getLogName() +" (Imprint)", source.getSourceId(), game, Zone.HAND);
+                        Permanent permanent = game.getPermanent(source.getSourceId());
+                        if (permanent != null) {
+                            permanent.imprint(card.getId(), game);
+                            permanent.addInfo("imprint", CardUtil.addToolTipMarkTags("[Imprinted card - " + card.getLogName() + "]"));
+                        }
                     }
-                    return true;
                 }
             }
+            return true;
         }
-        return true;
+        return false;
+        
     }
 
     @Override
@@ -144,25 +149,25 @@ class IsochronScepterCopyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent scepter = game.getPermanent(source.getSourceId());
-        if (scepter == null) {
-            scepter = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        }
-        if (scepter != null && scepter.getImprinted() != null && !scepter.getImprinted().isEmpty()) {
-            Card imprintedInstant = game.getCard(scepter.getImprinted().get(0));
-            if (imprintedInstant != null && game.getState().getZone(imprintedInstant.getId()).equals(Zone.EXILED)) {
-                Player controller = game.getPlayer(source.getControllerId());
-                if (controller != null && controller.chooseUse(outcome, new StringBuilder("Create a copy of ").append(imprintedInstant.getName()).append("?").toString(), game)) {
-                    Card copiedCard = game.copyCard(imprintedInstant, source, source.getControllerId());
-                    if (copiedCard != null) {
-                        game.getExile().add(source.getSourceId(), "",copiedCard);
-                        game.getState().setZone(copiedCard.getId(), Zone.EXILED);
-                        if (controller.chooseUse(outcome, "Cast the copied card without paying mana cost?", game)) {
-                            return controller.cast(copiedCard.getSpellAbility(), game, true);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Permanent scepter = game.getPermanentOrLKIBattlefield(source.getSourceId());
+            if (scepter != null && scepter.getImprinted() != null && !scepter.getImprinted().isEmpty()) {
+                Card imprintedInstant = game.getCard(scepter.getImprinted().get(0));
+                if (imprintedInstant != null && game.getState().getZone(imprintedInstant.getId()).equals(Zone.EXILED)) {
+                    if (controller.chooseUse(outcome, new StringBuilder("Create a copy of ").append(imprintedInstant.getName()).append("?").toString(), game)) {
+                        Card copiedCard = game.copyCard(imprintedInstant, source, source.getControllerId());
+                        if (copiedCard != null) {
+                            game.getExile().add(source.getSourceId(), "",copiedCard);
+                            game.getState().setZone(copiedCard.getId(), Zone.EXILED);
+                            if (controller.chooseUse(outcome, "Cast the copied card without paying mana cost?", game)) {
+                                controller.cast(copiedCard.getSpellAbility(), game, true);
+                            }
                         }
                     }
                 }
             }
+            return true;
         }
         return false;
     }

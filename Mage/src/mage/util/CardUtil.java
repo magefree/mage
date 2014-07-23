@@ -504,4 +504,14 @@ public class CardUtil {
         }
         return false;
     }
+
+    /**
+     * Adds tags to mark the additional info of a card
+     * (e.g. blue font color)
+     * @param text text body
+     * @return
+     */
+    public static String addToolTipMarkTags(String text) {
+        return "<font color = 'blue'>" + text + "</font>";
+    }
 }

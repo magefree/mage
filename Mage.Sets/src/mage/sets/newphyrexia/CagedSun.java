@@ -52,6 +52,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -103,7 +104,7 @@ class CagedSunEffect1 extends OneShotEffect {
             if (player.choose(Outcome.BoostCreature, colorChoice, game)) {
                 game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
                 game.getState().setValue(permanent.getId() + "_color", colorChoice.getColor());
-                permanent.addInfo("chosen color", "<font color = 'blue'>Chosen color: " + colorChoice.getColor().getDescription() + "</font>");
+                permanent.addInfo("chosen color", CardUtil.addToolTipMarkTags("Chosen color: " + colorChoice.getColor().getDescription()));
             }
         }
         return false;
