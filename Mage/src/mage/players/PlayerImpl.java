@@ -1995,6 +1995,12 @@ public abstract class PlayerImpl implements Player, Serializable {
                             break;
                         }
                     }
+                    for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {
+                        if (!playable.contains(ability) && canPlay(ability, available, game)) {
+                            playable.add(card.getId());
+                            break;
+                        }
+                    }
                 }
             }
         }
