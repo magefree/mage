@@ -83,6 +83,7 @@ public abstract class TargetImpl implements Target {
         this.targets.putAll(target.targets);
         this.zoneChangeCounters.putAll(target.zoneChangeCounters);
         this.atRandom = target.atRandom;
+        this.notTarget = target.notTarget;
     }
 
     @Override
@@ -228,7 +229,7 @@ public abstract class TargetImpl implements Target {
         if (maxNumberOfTargets == 0 || targets.size() < maxNumberOfTargets) {
             if (!targets.containsKey(id)) {
                 if (source != null) {
-                    if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getSourceId(), source.getControllerId()))) {
+                    if (!skipEvent && !game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getSourceId(), source.getControllerId()))) {
                         targets.put(id, 0);
                         rememberZoneChangeCounter(id, game);
                         chosen = targets.size() >= minNumberOfTargets;
@@ -267,7 +268,7 @@ public abstract class TargetImpl implements Target {
             amount += targets.get(id);
         }
         if (source != null) {
-            if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getId(), source.getControllerId()))) {
+            if (!skipEvent && !game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getId(), source.getControllerId()))) {
                 targets.put(id, amount);
                 rememberZoneChangeCounter(id, game);
                 chosen = targets.size() >= minNumberOfTargets;
@@ -337,7 +338,7 @@ public abstract class TargetImpl implements Target {
                     continue; // it's not legal so continue to have a look at other targeted objects
                 }
             }
-            if (game.replaceEvent(GameEvent.getEvent(EventType.TARGET, targetId, source.getId(), source.getControllerId()))) {
+            if (!notTarget && game.replaceEvent(GameEvent.getEvent(EventType.TARGET, targetId, source.getId(), source.getControllerId()))) {
                 replacedTargets++;
                 continue;
             }
