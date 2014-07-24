@@ -28,6 +28,7 @@
 package mage.sets.magic2015;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
@@ -37,6 +38,7 @@ public class TurnToFrog extends mage.sets.magic2012.TurnToFrog {
 
     public TurnToFrog(UUID ownerId) {
         super(ownerId);
+        this.rarity = Rarity.UNCOMMON;
         this.cardNumber = 81;
         this.expansionSetCode = "M15";
     }
