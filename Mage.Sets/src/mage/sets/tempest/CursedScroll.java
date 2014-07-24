@@ -64,6 +64,7 @@ public class CursedScroll extends CardImpl {
         // {3}, {tap}: Name a card. Reveal a card at random from your hand. If it's the named card, Cursed Scroll deals 2 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CursedScrollEffect(), new ManaCostsImpl("{3}"));
         ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 
@@ -99,7 +100,6 @@ class CursedScrollEffect extends OneShotEffect {
                 if (!you.isInGame()) {
                     return false;
                 }
-
             }
             String cardName = cardChoice.getChoice();
             game.informPlayers("Cursed Scroll, named card: [" + cardName + "]");
@@ -109,24 +109,20 @@ class CursedScrollEffect extends OneShotEffect {
                 revealed.add(card);
                 you.revealCards("Cursed Scroll", revealed, game);
                 if (card.getName().equals(cardName)) {
-                    TargetCreatureOrPlayer target = new TargetCreatureOrPlayer();
-                    if (target.canChoose(you.getId(), game)) {
-                        if (you.chooseTarget(Outcome.Damage, target, source, game)) {
-                            Permanent creature = game.getPermanent(target.getFirstTarget());
-                            if (creature != null) {
-                                creature.damage(2, source.getSourceId(), game, false, true);
-                                return true;
-                            }
-                            Player player = game.getPlayer(target.getFirstTarget());
-                            if (player != null) {
-                                player.damage(2, source.getSourceId(), game, true, false);
-                                return true;
-                            }
-                            return false;
-                        }
+                    Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
+                    if (creature != null) {
+                        creature.damage(2, source.getSourceId(), game, false, true);
+                        return true;
                     }
+                    Player player = game.getPlayer(targetPointer.getFirst(game, source));
+                    if (player != null) {
+                        player.damage(2, source.getSourceId(), game, false, true);
+                        return true;
+                    }
+                    return false;
                 }
             }
+            return true;
         }
         return false;
     }
