@@ -63,17 +63,14 @@ public class TargetSource extends TargetObject {
     }
 
     public TargetSource(int minNumTargets, int maxNumTargets, FilterObject filter) {
-        this.minNumberOfTargets = minNumTargets;
-        this.maxNumberOfTargets = maxNumTargets;
-        this.zone = Zone.ALL;
+        super(minNumTargets, maxNumTargets, Zone.ALL, true);
         this.filter = filter;
-        this.targetName = filter.getMessage();
+        this.targetName = filter.getMessage();        
     }
 
     public TargetSource(final TargetSource target) {
         super(target);
         this.filter = target.filter.copy();
-        setNotTarget(true);
     }
 
     @Override
@@ -83,17 +80,21 @@ public class TargetSource extends TargetObject {
 
     @Override
     public void add(UUID id, Game game) {
+        addTarget(id, null, game);
+    }
+
+    @Override
+    public void addTarget(UUID id, Ability source, Game game) {
         if (targets.size() < maxNumberOfTargets) {
-            if (!targets.containsKey(id)) {
-                MageObject object = game.getObject(id);
-                if (object != null && object instanceof StackObject) {
-                    targets.put(((StackObject) object).getSourceId(), 0);
-                }
-                else {
-                    targets.put(id, 0);
-                }
+            MageObject object = game.getObject(id);
+            if (object != null && object instanceof StackObject) {
+                addTarget(((StackObject) object).getSourceId(), source, game, notTarget);
+            }
+            else {
+                addTarget(id, source, game, notTarget);
             }
         }
+        
     }
 
     @Override

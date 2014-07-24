@@ -47,14 +47,13 @@ public class CardPluginImpl implements CardPlugin {
 
     private static final Logger log = Logger.getLogger(CardPluginImpl.class);
 
-    private static final int ATTACHMENT_DY_OFFSET = 10;
-
     private static final int GUTTER_Y = 15;
     private static final int GUTTER_X = 5;
     static final float EXTRA_CARD_SPACING_X = 0.04f;
     private static final float CARD_SPACING_Y = 0.03f;
     private static final float STACK_SPACING_X = 0.07f;
     private static final float STACK_SPACING_Y = 0.13f;
+    private static final float ATTACHMENT_SPACING_Y = 0.13f;
 
     private int landStackMax = 5;
     private int cardWidthMin = 50, cardWidthMax = Constants.CARD_SIZE_FULL.width;
@@ -63,7 +62,7 @@ public class CardPluginImpl implements CardPlugin {
     private int playAreaWidth, playAreaHeight;
     private int cardWidth, cardHeight;
     private int extraCardSpacingX, cardSpacingX, cardSpacingY;
-    private int stackSpacingX, stackSpacingY;
+    private int stackSpacingX, stackSpacingY, attachmentSpacingY;
     private List<Row> rows = new ArrayList<>();
 
     @Init
@@ -185,6 +184,7 @@ public class CardPluginImpl implements CardPlugin {
             cardSpacingY = Math.round(cardHeight * CARD_SPACING_Y);
             stackSpacingX = stackVertical ? 0 : Math.round(cardWidth * STACK_SPACING_X);
             stackSpacingY = Math.round(cardHeight * STACK_SPACING_Y);
+            attachmentSpacingY = Math.round(cardHeight * ATTACHMENT_SPACING_Y);
             Row creatures = (Row) allCreatures.clone();
             Row lands = (Row) allLands.clone();
             Row others = (Row) allOthers.clone();
@@ -449,7 +449,7 @@ public class CardPluginImpl implements CardPlugin {
         }
 
         private int getHeight() {
-            return cardHeight + (size() - 1) * stackSpacingY + cardSpacingY + ATTACHMENT_DY_OFFSET*maxAttachedCount;
+            return cardHeight + (size() - 1) * stackSpacingY + cardSpacingY + attachmentSpacingY*maxAttachedCount;
         }
 
         public int getMaxAttachedCount() {
