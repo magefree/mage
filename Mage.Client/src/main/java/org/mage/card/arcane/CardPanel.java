@@ -9,6 +9,7 @@ import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.audio.AudioManager;
 import mage.components.ImagePanel;
+import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.EnlargeMode;
 import mage.utils.CardUtil;
@@ -31,8 +32,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.constants.AbilityType;
-import mage.constants.MageObjectType;
 
 /**
  * Main class for drawing Mage card object.
@@ -310,16 +309,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     }
 
     private void setText(CardView card) {
-        if (displayTitleAnyway) {
-            titleText.setText(card.getName());
-            return;
-        }
-
-        if (hasImage) {
-            titleText.setText("");
-        } else {
-            titleText.setText(card.getName());
-        }
+        titleText.setText(!displayTitleAnyway && hasImage ? "" : card.getName());
     }
 
     private void setImage(Image srcImage) {
