@@ -28,6 +28,7 @@
 package mage.sets.magic2015;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
@@ -37,6 +38,7 @@ public class Restock extends mage.sets.invasion.Restock {
 
     public Restock(UUID ownerId) {
         super(ownerId);
+        this.rarity = Rarity.UNCOMMON;
         this.cardNumber = 195;
         this.expansionSetCode = "M15";
     }

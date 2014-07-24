@@ -28,6 +28,7 @@
 package mage.sets.magic2015;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
@@ -37,6 +38,7 @@ public class GatherCourage extends mage.sets.ravnika.GatherCourage {
 
     public GatherCourage(UUID ownerId) {
         super(ownerId);
+        this.rarity = Rarity.UNCOMMON;
         this.cardNumber = 175;
         this.expansionSetCode = "M15";
     }

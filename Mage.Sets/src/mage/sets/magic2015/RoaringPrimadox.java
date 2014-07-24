@@ -28,6 +28,7 @@
 package mage.sets.magic2015;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
@@ -37,6 +38,7 @@ public class RoaringPrimadox extends mage.sets.magic2013.RoaringPrimadox {
 
     public RoaringPrimadox(UUID ownerId) {
         super(ownerId);
+        this.rarity = Rarity.UNCOMMON;
         this.cardNumber = 196;
         this.expansionSetCode = "M15";
     }

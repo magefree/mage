@@ -28,6 +28,7 @@
 package mage.sets.magic2015;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
@@ -37,6 +38,7 @@ public class GarruksPackleader extends mage.sets.magic2011.GarruksPackleader {
 
     public GarruksPackleader(UUID ownerId) {
         super(ownerId);
+        this.rarity = Rarity.UNCOMMON;
         this.cardNumber = 283;
         this.expansionSetCode = "M15";
     }
