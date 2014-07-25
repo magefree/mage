@@ -64,8 +64,6 @@ public class HarmsWayRedirectDamageTest extends CardTestPlayerBase {
      * Tests redirecting from triggered ability
      */
     @Test
-    // This test doesn't work in test framework but the test case works fine in real game
-    //  -- this is because of no possibility to ask AI to play spell when triggered is in the stack
     public void testRedirectTriggeredAbilityDamage() {
         addCard(Zone.HAND, playerA, "Lightning Bolt");
         // The next 2 damage that a source of your choice would deal to you and/or permanents

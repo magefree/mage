@@ -228,8 +228,8 @@ public abstract class TargetImpl implements Target {
         //20100423 - 113.3
         if (maxNumberOfTargets == 0 || targets.size() < maxNumberOfTargets) {
             if (!targets.containsKey(id)) {
-                if (source != null) {
-                    if (!skipEvent && !game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getSourceId(), source.getControllerId()))) {
+                if (source != null && !skipEvent) {
+                    if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getSourceId(), source.getControllerId()))) {
                         targets.put(id, 0);
                         rememberZoneChangeCounter(id, game);
                         chosen = targets.size() >= minNumberOfTargets;
@@ -237,8 +237,7 @@ public abstract class TargetImpl implements Target {
                             game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getSourceId(), source.getControllerId()));
                         }
                     }
-                }
-                else {
+                } else {
                     targets.put(id, 0);
                 }
             }
@@ -267,8 +266,8 @@ public abstract class TargetImpl implements Target {
         if (targets.containsKey(id)) {
             amount += targets.get(id);
         }
-        if (source != null) {
-            if (!skipEvent && !game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getId(), source.getControllerId()))) {
+        if (source != null && !skipEvent) {
+            if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getId(), source.getControllerId()))) {
                 targets.put(id, amount);
                 rememberZoneChangeCounter(id, game);
                 chosen = targets.size() >= minNumberOfTargets;
@@ -276,8 +275,7 @@ public abstract class TargetImpl implements Target {
                     game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getId(), source.getControllerId()));
                 }
             }
-        }
-        else {
+        } else {
             targets.put(id, amount);
             rememberZoneChangeCounter(id, game);
         }
