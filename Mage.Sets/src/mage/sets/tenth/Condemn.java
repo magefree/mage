@@ -95,6 +95,7 @@ class CondemnEffect extends OneShotEffect {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
                 player.gainLife(permanent.getToughness().getValue(), game);
+                return true;
             }
         }
         return false;
