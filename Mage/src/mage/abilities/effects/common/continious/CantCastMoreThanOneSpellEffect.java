@@ -31,6 +31,7 @@ package mage.abilities.effects.common.continious;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -46,7 +47,7 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  * @author LevelX2
  */
 
-public class CantCastMoreThanOneSpellEffect extends ReplacementEffectImpl {
+public class CantCastMoreThanOneSpellEffect extends ContinuousRuleModifiyingEffectImpl {
 
     private final TargetController targetController;
     
@@ -71,18 +72,7 @@ public class CantCastMoreThanOneSpellEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
-        Player caster = game.getPlayer(event.getPlayerId());
-        if (mageObject != null && caster != null) {
-
-            game.informPlayer(caster, mageObject.getName() + ": You can't cast more than one spell each turn.");
-        }
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL) {
             switch (targetController) {
                 case YOU:

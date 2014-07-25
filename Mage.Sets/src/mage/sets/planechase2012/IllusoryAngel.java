@@ -36,6 +36,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -76,10 +77,10 @@ public class IllusoryAngel extends CardImpl {
     }
 }
 
-class IllusoryAngelEffect extends ReplacementEffectImpl {
+class IllusoryAngelEffect extends ContinuousRuleModifiyingEffectImpl {
     IllusoryAngelEffect() {
        super(Duration.EndOfGame, Outcome.Detriment);
-       staticText = "Cast Illusory Angel only if you've cast another spell this turn";
+       staticText = "Cast {this} only if you've cast another spell this turn";
     }
 
     IllusoryAngelEffect(final IllusoryAngelEffect effect) {
@@ -87,12 +88,7 @@ class IllusoryAngelEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-       return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
        if (event.getType() == GameEvent.EventType.CAST_SPELL && event.getSourceId().equals(source.getSourceId())) {
            CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
            if (watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId()) == 0) {

@@ -55,6 +55,7 @@ import mage.watchers.Watcher;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 
 /**
  * GATECRASH FAQ 11.01.2013
@@ -147,7 +148,7 @@ class AureliasFuryEffect extends OneShotEffect {
     }
 }
 
-class AureliasFuryCantCastEffect extends ReplacementEffectImpl {
+class AureliasFuryCantCastEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public AureliasFuryCantCastEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
@@ -169,12 +170,16 @@ class AureliasFuryCantCastEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public String getInfoMessage(Ability source, Game game) {
+        MageObject mageObject = game.getObject(source.getSourceId());
+        if (mageObject != null) {
+            return "You can't cast noncreature spells this turn (you were dealt damage by " + mageObject.getLogName() + ")";
+        }
+        return null;
     }
-
+    
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL ) {
             Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (player != null && player.getId().equals(event.getPlayerId())) {
@@ -190,8 +195,8 @@ class AureliasFuryCantCastEffect extends ReplacementEffectImpl {
 
 class AureliasFuryDamagedByWatcher extends Watcher {
 
-    public List<UUID> damagedCreatures = new ArrayList<UUID>();
-    public List<UUID> damagedPlayers = new ArrayList<UUID>();
+    public List<UUID> damagedCreatures = new ArrayList<>();
+    public List<UUID> damagedPlayers = new ArrayList<>();
 
     public AureliasFuryDamagedByWatcher() {
         super("AureliasFuryDamagedByWatcher", WatcherScope.CARD);

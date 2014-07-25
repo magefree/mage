@@ -34,7 +34,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -67,7 +67,7 @@ public class SteelGolem extends CardImpl {
     }
 }
 
-class SteelGolemEffect extends ReplacementEffectImpl {
+class SteelGolemEffect extends ContinuousRuleModifiyingEffectImpl {
     
     public SteelGolemEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
@@ -89,12 +89,7 @@ class SteelGolemEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL && event.getPlayerId().equals(source.getControllerId())) {
             MageObject object = game.getObject(event.getSourceId());
             if (object.getCardType().contains(CardType.CREATURE)) {

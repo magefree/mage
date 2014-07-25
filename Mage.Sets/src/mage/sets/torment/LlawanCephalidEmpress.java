@@ -29,11 +29,12 @@ package mage.sets.torment;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -80,7 +81,7 @@ public class LlawanCephalidEmpress extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandFromBattlefieldAllEffect(filter), false));
 
         // Your opponents can't cast blue creature spells.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LlawanCephalidEmpressReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LlawanCephalidRuleModifyingEffect()));
     }
 
     public LlawanCephalidEmpress(final LlawanCephalidEmpress card) {
@@ -94,7 +95,7 @@ public class LlawanCephalidEmpress extends CardImpl {
 }
 
 
-class LlawanCephalidEmpressReplacementEffect extends ReplacementEffectImpl {
+class LlawanCephalidRuleModifyingEffect extends ContinuousRuleModifiyingEffectImpl {
 
     private static final FilterCard filter = new FilterCard("blue creature spells");
 
@@ -103,32 +104,36 @@ class LlawanCephalidEmpressReplacementEffect extends ReplacementEffectImpl {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    public LlawanCephalidEmpressReplacementEffect() {
+    public LlawanCephalidRuleModifyingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Your opponents can't cast blue creature spells";
     }
 
-    public LlawanCephalidEmpressReplacementEffect(final LlawanCephalidEmpressReplacementEffect effect) {
+    public LlawanCephalidRuleModifyingEffect(final LlawanCephalidRuleModifyingEffect effect) {
         super(effect);
     }
 
     @Override
-    public LlawanCephalidEmpressReplacementEffect copy() {
-        return new LlawanCephalidEmpressReplacementEffect(this);
+    public LlawanCephalidRuleModifyingEffect copy() {
+        return new LlawanCephalidRuleModifyingEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         return true;
     }
-
+    
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public String getInfoMessage(Ability source, Game game) {
+        MageObject mageObject = game.getObject(source.getSourceId());
+        if (mageObject != null) {
+            return "You can't cast blue creature spells (" + mageObject.getLogName() + " in play).";
+        }
+        return null;
     }
-
+    
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null && game.isOpponent(controller, event.getPlayerId())) {

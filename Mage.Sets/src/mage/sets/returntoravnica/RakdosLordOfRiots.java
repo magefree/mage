@@ -30,11 +30,10 @@ package mage.sets.returntoravnica;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.OpponentsLostLifeCount;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -91,7 +90,7 @@ public class RakdosLordOfRiots extends CardImpl {
     }
 }
 
-class RakdosLordOfRiotsCantCastEffect extends ReplacementEffectImpl {
+class RakdosLordOfRiotsCantCastEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public RakdosLordOfRiotsCantCastEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
@@ -113,16 +112,7 @@ class RakdosLordOfRiotsCantCastEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {                
-            game.informPlayer(controller, "You can't cast Rakdos, Lord of Riots because your opponents lost no life this turn yet");
-        }
-       return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == EventType.CAST_SPELL && event.getSourceId().equals(source.getSourceId())) {
             if (new OpponentsLostLifeCount().calculate(game, source) == 0) {
                 return true;

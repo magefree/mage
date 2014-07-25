@@ -36,6 +36,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -81,7 +82,7 @@ public class SerraAvenger extends CardImpl {
     }
 }
 
-class CantCastSerraAvengerEffect extends ReplacementEffectImpl {
+class CantCastSerraAvengerEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public CantCastSerraAvengerEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
@@ -103,16 +104,7 @@ class CantCastSerraAvengerEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            game.informPlayer(controller, "You can't cast Serra Avenger during your first, second, or third turns of the game");
-        }
-       return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == EventType.CAST_SPELL && event.getSourceId().equals(source.getSourceId())) {
             Player controller = game.getPlayer(source.getControllerId());
             // it can be cast on other players turn 1 - 3 if some effect let allow you to do this

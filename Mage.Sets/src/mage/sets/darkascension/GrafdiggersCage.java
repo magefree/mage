@@ -34,6 +34,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -112,7 +113,7 @@ class GrafdiggersCageEffect extends ReplacementEffectImpl {
 
 }
 
-class GrafdiggersCageEffect2 extends ReplacementEffectImpl {
+class GrafdiggersCageEffect2 extends ContinuousRuleModifiyingEffectImpl {
 
     public GrafdiggersCageEffect2() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
@@ -134,12 +135,7 @@ class GrafdiggersCageEffect2 extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL) {
             Card card = game.getCard(event.getSourceId());
             if (card != null) {
