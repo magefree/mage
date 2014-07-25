@@ -31,10 +31,12 @@ import java.util.UUID;
 
 import mage.constants.*;
 import mage.MageInt;
+import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
@@ -45,6 +47,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -102,7 +105,7 @@ class IonaShieldOfEmeriaChooseColorEffect extends OneShotEffect {
             if (player.choose(Outcome.Detriment, colorChoice, game)) {
                 game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
                 game.getState().setValue(permanent.getId() + "_color", colorChoice.getColor());
-                permanent.addInfo("chosen color", new StringBuilder("<font color='blue'>Chosen color: ").append(colorChoice.getColor().getDescription()).append("</font>").toString());
+                permanent.addInfo("chosen color", CardUtil.addToolTipMarkTags("Chosen color: " + colorChoice.getColor().getDescription()));
             }
             return true;
         }
@@ -115,7 +118,8 @@ class IonaShieldOfEmeriaChooseColorEffect extends OneShotEffect {
     }
 }
 
-class IonaShieldOfEmeriaReplacementEffect extends ReplacementEffectImpl {
+class IonaShieldOfEmeriaReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
+
     IonaShieldOfEmeriaReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Your opponents can't cast spells of the chosen color";
@@ -126,12 +130,17 @@ class IonaShieldOfEmeriaReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public String getInfoMessage(Ability source, Game game) {
+        ObjectColor chosenColor = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
+        MageObject mageObject = game.getObject(source.getSourceId());
+        if (mageObject != null && chosenColor != null) {
+            return "You can't cast " + chosenColor.toString() +" spells (" + mageObject.getLogName() + ").";
+        }
+        return null;
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL) {
             if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId()) ) {
                 ObjectColor chosenColor = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");

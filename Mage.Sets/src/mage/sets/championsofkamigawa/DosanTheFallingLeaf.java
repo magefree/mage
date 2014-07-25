@@ -28,13 +28,16 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -69,7 +72,8 @@ public class DosanTheFallingLeaf extends CardImpl {
     }
 }
 
-class DosanTheFallingLeafEffect extends ReplacementEffectImpl {
+class DosanTheFallingLeafEffect extends ContinuousRuleModifiyingEffectImpl {
+
     DosanTheFallingLeafEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Players can cast spells only during their own turns";
@@ -80,12 +84,7 @@ class DosanTheFallingLeafEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         return event.getType() == GameEvent.EventType.CAST_SPELL && !game.getActivePlayerId().equals(event.getPlayerId());
     }
 

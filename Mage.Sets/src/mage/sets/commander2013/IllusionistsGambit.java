@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.RequirementEffect;
@@ -79,7 +80,7 @@ public class IllusionistsGambit extends CardImpl {
     }
 }
 
-class IllusionistsGambitEffect extends ReplacementEffectImpl {
+class IllusionistsGambitEffect extends ContinuousRuleModifiyingEffectImpl {
     IllusionistsGambitEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);
         staticText = "Cast {this} only during the declare blockers step on an opponent's turn";
@@ -90,12 +91,7 @@ class IllusionistsGambitEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType().equals(GameEvent.EventType.CAST_SPELL) && event.getSourceId().equals(source.getSourceId())) {
             if (game.getTurn().getStepType().equals(PhaseStep.DECLARE_BLOCKERS)) {
                 return !game.getOpponents(source.getControllerId()).contains(game.getActivePlayerId());
@@ -209,8 +205,8 @@ class IllusionistsGambitRequirementEffect extends RequirementEffect {
 
 class IllusionistsGambitReplacementEffect extends ReplacementEffectImpl {
 
-    private List attackers;
-    private Phase phase;
+    private final List attackers;
+    private final Phase phase;
 
     IllusionistsGambitReplacementEffect(List attackers, Phase phase) {
         super(Duration.Custom, Outcome.Benefit);

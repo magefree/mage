@@ -35,6 +35,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
@@ -44,7 +45,9 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -95,7 +98,8 @@ class VoidstoneGargoyleChooseCardEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (controller != null && permanent != null) {
             Choice cardChoice = new ChoiceImpl();
             cardChoice.setChoices(CardRepository.instance.getNonLandNames());
             cardChoice.clearChoice();
@@ -105,8 +109,10 @@ class VoidstoneGargoyleChooseCardEffect extends OneShotEffect {
                 }
             }
             String cardName = cardChoice.getChoice();
-            game.informPlayers("VoidstoneGargoyle, named card: [" + cardName + "]");
+            game.informPlayers(permanent.getLogName() + ", named card: [" + cardName + "]");
             game.getState().setValue(source.getSourceId().toString(), cardName);
+            permanent.addInfo("named card", CardUtil.addToolTipMarkTags("Named card: [" + cardName +"]"));
+            return true;
         }        
         return false;
     }
@@ -118,7 +124,7 @@ class VoidstoneGargoyleChooseCardEffect extends OneShotEffect {
 
 }
 
-class VoidstoneGargoyleReplacementEffect1 extends ReplacementEffectImpl {
+class VoidstoneGargoyleReplacementEffect1 extends ContinuousRuleModifiyingEffectImpl {
 
     public VoidstoneGargoyleReplacementEffect1() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
@@ -140,12 +146,16 @@ class VoidstoneGargoyleReplacementEffect1 extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public String getInfoMessage(Ability source, Game game) {
+        MageObject mageObject = game.getObject(source.getSourceId());
+        if (mageObject != null) {
+            return "You can't cast a card with that name (" + mageObject.getLogName() + ").";
+        }
+        return null;
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL) {
             MageObject object = game.getObject(event.getSourceId());
             if (object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString()))) {

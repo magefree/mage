@@ -29,13 +29,14 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
+import mage.MageObject;
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.ReplacementEffectImpl;
-import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -63,7 +64,7 @@ public class Silence extends CardImpl {
     }
 }
 
-class SilenceEffect extends ReplacementEffectImpl {
+class SilenceEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public SilenceEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
@@ -85,12 +86,16 @@ class SilenceEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public String getInfoMessage(Ability source, Game game) {
+        MageObject mageObject = game.getObject(source.getSourceId());
+        if (mageObject != null) {
+            return "You can't cast spells this turn (" + mageObject.getLogName() + ").";
+        }
+        return null;
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == EventType.CAST_SPELL && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             return true;
         }

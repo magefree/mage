@@ -37,6 +37,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
@@ -82,7 +83,7 @@ public class Godsend extends CardImpl {
         // Whenever equipped creature blocks or becomes blocked by one or more creatures, you may exile one of those creatures.
         this.addAbility(new GodsendTriggeredAbility());
         // Opponents can't cast cards with the same name as cards exiled with Godsend.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GodsendReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GodsendRuleModifyingEffect()));
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
     }
@@ -199,14 +200,14 @@ class GodsendExileEffect extends OneShotEffect {
     }
 }
 
-class GodsendReplacementEffect extends ReplacementEffectImpl {
+class GodsendRuleModifyingEffect extends ContinuousRuleModifiyingEffectImpl {
 
-    public GodsendReplacementEffect() {
+    public GodsendRuleModifyingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Opponents can't cast cards with the same name as cards exiled with {this}";
     }
 
-    public GodsendReplacementEffect(final GodsendReplacementEffect effect) {
+    public GodsendRuleModifyingEffect(final GodsendRuleModifyingEffect effect) {
         super(effect);
     }
 
@@ -216,23 +217,21 @@ class GodsendReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public GodsendReplacementEffect copy() {
-        return new GodsendReplacementEffect(this);
+    public GodsendRuleModifyingEffect copy() {
+        return new GodsendRuleModifyingEffect(this);
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(event.getPlayerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (player != null && sourcePermanent != null) {
-            game.informPlayer(player, new StringBuilder("You can't cast this spell because a card with the same name is exiled by ")
-                    .append(sourcePermanent.getName()).append(".").toString());
+    public String getInfoMessage(Ability source, Game game) {
+        MageObject mageObject = game.getObject(source.getSourceId());
+        if (mageObject != null) {
+            return "You can't cast this spell because a card with the same name is exiled by " + mageObject.getLogName() + ".";
         }
-        return true;
+        return null;
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == EventType.CAST_SPELL && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             MageObject object = game.getObject(event.getSourceId());
             if (object != null) {

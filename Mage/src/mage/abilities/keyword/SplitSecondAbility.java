@@ -1,9 +1,8 @@
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
-import mage.abilities.MageSingleton;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.mana.ManaAbility;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -39,7 +38,8 @@ public class SplitSecondAbility extends SimpleStaticAbility  {
     }
 }
 
-class SplitSecondEffect extends ReplacementEffectImpl implements MageSingleton {
+class SplitSecondEffect extends ContinuousRuleModifiyingEffectImpl {
+
     SplitSecondEffect() {
         super(Duration.WhileOnStack, Outcome.Detriment);
     }
@@ -49,7 +49,12 @@ class SplitSecondEffect extends ReplacementEffectImpl implements MageSingleton {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+    public String getInfoMessage(Ability source, Game game) {
+        return "You can't cast spells or activate abilities that aren't mana abilities (Split second).";
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL) {
             return true;
         }
@@ -60,11 +65,6 @@ class SplitSecondEffect extends ReplacementEffectImpl implements MageSingleton {
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return true;
     }
 
     @Override

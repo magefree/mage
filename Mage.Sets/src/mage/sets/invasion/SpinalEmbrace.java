@@ -32,9 +32,9 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continious.GainControlTargetEffect;
@@ -97,7 +97,7 @@ public class SpinalEmbrace extends CardImpl {
     }
 }
 
-class SpinalEmbraceEffect extends ReplacementEffectImpl {
+class SpinalEmbraceEffect extends ContinuousRuleModifiyingEffectImpl {
     SpinalEmbraceEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);
         staticText = "Cast {this} only during combat";
@@ -108,12 +108,7 @@ class SpinalEmbraceEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType().equals(GameEvent.EventType.CAST_SPELL) && event.getSourceId().equals(source.getSourceId())) {
             return !game.getTurn().getPhaseType().equals(TurnPhase.COMBAT);
         }

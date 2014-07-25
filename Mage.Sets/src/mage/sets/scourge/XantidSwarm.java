@@ -31,8 +31,8 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -63,8 +63,7 @@ public class XantidSwarm extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Xantid Swarm attacks, defending player can't cast spells this turn.
-        Ability ability = new XantidSwarmTriggeredAbility(new XantidSwarmReplacementEffect());
-        
+        Ability ability = new XantidSwarmTriggeredAbility(new XantidSwarmReplacementEffect());        
         this.addAbility(ability);
     }
 
@@ -109,7 +108,7 @@ class XantidSwarmTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class XantidSwarmReplacementEffect extends ReplacementEffectImpl {
+class XantidSwarmReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public XantidSwarmReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
@@ -131,12 +130,7 @@ class XantidSwarmReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL ) {
             Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (player != null && player.getId().equals(event.getPlayerId())) {

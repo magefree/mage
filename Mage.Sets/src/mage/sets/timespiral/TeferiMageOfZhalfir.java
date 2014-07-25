@@ -33,6 +33,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.Card;
@@ -133,7 +134,8 @@ class TeferiMageOfZhalfirAddFlashEffect extends ContinuousEffectImpl {
     }
 }
 
-class TeferiMageOfZhalfirReplacementEffect extends ReplacementEffectImpl {
+class TeferiMageOfZhalfirReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
+
     TeferiMageOfZhalfirReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Each opponent can cast spells only any time he or she could cast a sorcery";
@@ -144,17 +146,15 @@ class TeferiMageOfZhalfirReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+    public String getInfoMessage(Ability source, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
-        Player opponent = game.getPlayer(event.getPlayerId());
-        if (opponent != null && mageObject != null) {
-            game.informPlayer(opponent, "You can cast spells only any time you could cast a sorcery (" + mageObject.getName() +")");
+        if (mageObject != null) {
+            return "You can cast spells only any time you could cast a sorcery  (" + mageObject.getLogName() + ").";
         }
-        return true;
+        return null;
     }
-
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null && controller.hasOpponent(event.getPlayerId(), game)) {

@@ -8,6 +8,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -79,7 +80,7 @@ public class EpicEffect extends OneShotEffect {
     }
 }
 
-class EpicReplacementEffect extends ReplacementEffectImpl {
+class EpicReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public EpicReplacementEffect() {
         super(Duration.EndOfGame, Outcome.Neutral);
@@ -101,17 +102,16 @@ class EpicReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+    public String getInfoMessage(Ability source, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && mageObject != null) {
-            game.informPlayer(controller, "For the rest of the game, you can't cast spells (Epic - " + mageObject.getName() +")");
+        if (mageObject != null) {
+            return "For the rest of the game, you can't cast spells (Epic - " + mageObject.getName() +")";
         }
-        return true;
+        return null;
     }
-
+    
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL
                 && source.getControllerId() == event.getPlayerId()) {
             MageObject object = game.getObject(event.getSourceId());

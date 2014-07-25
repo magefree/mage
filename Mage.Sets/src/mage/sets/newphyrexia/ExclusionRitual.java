@@ -33,6 +33,7 @@ import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
@@ -94,7 +95,7 @@ class ExclusionRitualImprintEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (sourcePermanent != null && targetPermanent != null) {
-            targetPermanent.moveToExile(getId(), "Exclusion Ritual (Imprint)", source.getSourceId(), game);
+            targetPermanent.moveToExile(getId(), sourcePermanent.getLogName() + " (Imprint)", source.getSourceId(), game);
             sourcePermanent.imprint(targetPermanent.getId(), game);
         }
         return true;
@@ -106,7 +107,7 @@ class ExclusionRitualImprintEffect extends OneShotEffect {
     }
 }
 
-class ExclusionRitualReplacementEffect extends ReplacementEffectImpl {
+class ExclusionRitualReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
     ExclusionRitualReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Players can't cast spells with the same name as the exiled card";
@@ -117,12 +118,7 @@ class ExclusionRitualReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL) {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             Card card = game.getCard(event.getSourceId());

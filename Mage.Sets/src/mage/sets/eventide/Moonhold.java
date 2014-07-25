@@ -28,17 +28,17 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.ManaWasSpentCondition;
-import mage.abilities.decorator.ConditionalReplacementEffect;
-import mage.abilities.effects.ReplacementEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
+import mage.abilities.effects.ContinuousRuleModifiyingEffect;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
-import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
@@ -59,14 +59,14 @@ public class Moonhold extends CardImpl {
         this.color.setWhite(true);
 
         // Target player can't play land cards this turn if {R} was spent to cast Moonhold and can't play creature cards this turn if {W} was spent to cast it.
-        ReplacementEffect effect = new MoonholdEffect();
-        ReplacementEffect effect2 = new MoonholdEffect2();
+        ContinuousRuleModifiyingEffect effect = new MoonholdEffect();
+        ContinuousRuleModifiyingEffect effect2 = new MoonholdEffect2();
         effect.setText("Target player can't play land cards this turn if {R} was spent to cast {this} ");
         effect2.setText("and can't play creature cards this turn if {W} was spent to cast it.");
-        this.getSpellAbility().addEffect(new ConditionalReplacementEffect(
+        this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(
                 effect,
                 new ManaWasSpentCondition(ColoredManaSymbol.R), false));
-        this.getSpellAbility().addEffect(new ConditionalReplacementEffect(
+        this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(
                 effect2,
                 new ManaWasSpentCondition(ColoredManaSymbol.W), false));
         this.getSpellAbility().addTarget(new TargetPlayer());
@@ -83,7 +83,7 @@ public class Moonhold extends CardImpl {
     }
 }
 
-class MoonholdEffect extends ReplacementEffectImpl {
+class MoonholdEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public MoonholdEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
@@ -104,12 +104,16 @@ class MoonholdEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public String getInfoMessage(Ability source, Game game) {
+        MageObject mageObject = game.getObject(source.getSourceId());
+        if (mageObject != null) {
+            return "You can't play land cards this turn (" + mageObject.getLogName() + ").";
+        }
+        return null;
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.PLAY_LAND
                 && event.getPlayerId().equals(source.getFirstTarget())) {
             return true;
@@ -118,7 +122,7 @@ class MoonholdEffect extends ReplacementEffectImpl {
     }
 }
 
-class MoonholdEffect2 extends ReplacementEffectImpl {
+class MoonholdEffect2 extends ContinuousRuleModifiyingEffectImpl {
 
     public MoonholdEffect2() {
         super(Duration.EndOfTurn, Outcome.Detriment);
@@ -139,12 +143,16 @@ class MoonholdEffect2 extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public String getInfoMessage(Ability source, Game game) {
+        MageObject mageObject = game.getObject(source.getSourceId());
+        if (mageObject != null) {
+            return "You can't play creature cards this turn (" + mageObject.getLogName() + ").";
+        }
+        return null;
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL
                 && event.getPlayerId().equals(source.getFirstTarget())) {
             Card card = game.getCard(event.getSourceId());

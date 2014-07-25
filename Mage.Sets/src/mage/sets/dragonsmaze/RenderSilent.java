@@ -29,16 +29,16 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.game.Game;
@@ -116,7 +116,7 @@ class RenderSilentCounterEffect extends OneShotEffect {
 
 }
 
-class RenderSilentEffect extends ReplacementEffectImpl {
+class RenderSilentEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public RenderSilentEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
@@ -138,12 +138,16 @@ class RenderSilentEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public String getInfoMessage(Ability source, Game game) {
+        MageObject mageObject = game.getObject(source.getSourceId());
+        if (mageObject != null) {
+            return "You can't cast spells this turn (" + mageObject.getLogName() + ").";
+        }
+        return null;
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL ) {
             Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (player != null && player.getId().equals(event.getPlayerId())) {

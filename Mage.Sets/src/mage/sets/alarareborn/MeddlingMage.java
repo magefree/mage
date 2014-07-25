@@ -38,8 +38,8 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
@@ -47,7 +47,9 @@ import mage.choices.ChoiceImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -97,7 +99,8 @@ class MeddlingMageChooseCardEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (controller != null && permanent != null) {
             Choice cardChoice = new ChoiceImpl();
             cardChoice.setChoices(CardRepository.instance.getNonLandNames());
             cardChoice.clearChoice();
@@ -107,8 +110,10 @@ class MeddlingMageChooseCardEffect extends OneShotEffect {
                 }
             }
             String cardName = cardChoice.getChoice();
-            game.informPlayers("MeddlingMage, named card: [" + cardName + "]");
+            game.informPlayers(permanent.getLogName() + ", named card: [" + cardName + "]");
             game.getState().setValue(source.getSourceId().toString(), cardName);
+            permanent.addInfo("named card", CardUtil.addToolTipMarkTags("Named card: [" + cardName +"]"));
+            return true;
         }        
         return false;
     }
@@ -120,7 +125,7 @@ class MeddlingMageChooseCardEffect extends OneShotEffect {
 
 }
 
-class MeddlingMageReplacementEffect extends ReplacementEffectImpl {
+class MeddlingMageReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public MeddlingMageReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
@@ -142,12 +147,16 @@ class MeddlingMageReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public String getInfoMessage(Ability source, Game game) {
+        MageObject mageObject = game.getObject(source.getSourceId());
+        if (mageObject != null) {
+            return "You can't cast a card with that name (" + mageObject.getLogName() + " in play).";
+        }
+        return null;
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == EventType.CAST_SPELL) {
             MageObject object = game.getObject(event.getSourceId());
             if (object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString()))) {

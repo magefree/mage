@@ -30,14 +30,18 @@ package mage.sets.shardsofalara;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
@@ -75,7 +79,7 @@ public class EtherswornCanonist extends CardImpl {
 
 class EtherswornCanonistWatcher extends Watcher {
 
-    private Map<UUID, Boolean> castNonartifactSpell = new HashMap<UUID, Boolean>();
+    private Map<UUID, Boolean> castNonartifactSpell = new HashMap<>();
     
     public EtherswornCanonistWatcher() {
         super("EtherswornCanonistWatcher", WatcherScope.GAME);
@@ -119,7 +123,7 @@ class EtherswornCanonistWatcher extends Watcher {
 
 }
 
-class EtherswornCanonistReplacementEffect extends ReplacementEffectImpl {
+class EtherswornCanonistReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public EtherswornCanonistReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
@@ -141,12 +145,7 @@ class EtherswornCanonistReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL) {
             EtherswornCanonistWatcher watcher = (EtherswornCanonistWatcher)game.getState().getWatchers().get("EtherswornCanonistWatcher");
             Card card = game.getCard(event.getSourceId());

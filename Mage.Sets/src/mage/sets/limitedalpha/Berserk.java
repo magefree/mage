@@ -33,9 +33,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.dynamicvalue.common.TargetPermanentPowerCount;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -53,9 +53,7 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
-import mage.watchers.Watchers;
 import mage.watchers.common.AttackedThisTurnWatcher;
-import mage.watchers.common.CastSpellLastTurnWatcher;
 
 /**
  *
@@ -97,7 +95,7 @@ public class Berserk extends CardImpl {
     }
 }
 
-class BerserkReplacementEffect extends ReplacementEffectImpl {
+class BerserkReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
     BerserkReplacementEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);
         staticText = "Cast {this} only before the combat damage step";
@@ -108,16 +106,7 @@ class BerserkReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            game.informPlayer(controller, "This spell can only be played before combat damage step.");
-        }
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType().equals(GameEvent.EventType.CAST_SPELL) && event.getSourceId().equals(source.getSourceId())) {
             CombatDamageStepStartedWatcher watcher = (CombatDamageStepStartedWatcher) game.getState().getWatchers().get("CombatDamageStepStarted");
             return watcher == null || watcher.conditionMet();

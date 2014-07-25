@@ -30,6 +30,7 @@ package mage.sets.odyssey;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -74,7 +75,7 @@ public class CeaseFire extends CardImpl {
     }
 }
 
-class CeaseFireEffect extends ReplacementEffectImpl {
+class CeaseFireEffect extends ContinuousRuleModifiyingEffectImpl {
 
     private static final FilterSpell filter = new FilterSpell();
     static {
@@ -83,7 +84,7 @@ class CeaseFireEffect extends ReplacementEffectImpl {
 
     public CeaseFireEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
-        staticText = "Target player can't cast creature spells";
+        staticText = "Target player can't cast creature spells this turn";
     }
 
     public CeaseFireEffect(final CeaseFireEffect effect) {
@@ -101,12 +102,16 @@ class CeaseFireEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public String getInfoMessage(Ability source, Game game) {
+        MageObject mageObject = game.getObject(source.getSourceId());
+        if (mageObject != null) {
+            return "You can't cast creature spells this turn (" + mageObject.getLogName() + ").";
+        }
+        return null;
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL && event.getPlayerId().equals(source.getFirstTarget())) {
             MageObject object = game.getObject(event.getSourceId());
             if (filter.match((Spell) object, game)) {

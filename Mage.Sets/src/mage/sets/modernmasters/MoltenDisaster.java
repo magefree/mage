@@ -108,7 +108,7 @@ class MoltenDisasterTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "If Molten Disaster was kicked, it has split second <i>(As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)</i>";
+        return "If {this} was kicked, it has split second <i>(As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)</i>";
     }
 }
 

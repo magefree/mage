@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -111,7 +112,7 @@ class CurseOfExhaustionWatcher extends Watcher {
 
 }
 
-class CurseOfExhaustionEffect extends ReplacementEffectImpl {
+class CurseOfExhaustionEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public CurseOfExhaustionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
@@ -133,12 +134,7 @@ class CurseOfExhaustionEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL) {
             Permanent enchantment = game.getPermanent(source.getSourceId());
             if (enchantment != null && enchantment.getAttachedTo() != null) {

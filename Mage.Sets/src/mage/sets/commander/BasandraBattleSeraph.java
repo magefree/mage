@@ -28,24 +28,23 @@
 package mage.sets.commander;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TurnPhase;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.common.combat.AttacksIfAbleTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.AttacksThisTurnMarkerAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TurnPhase;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCreaturePermanent;
@@ -91,7 +90,7 @@ public class BasandraBattleSeraph extends CardImpl {
     }
 }
 
-class BasandraBattleSeraphEffect extends ReplacementEffectImpl {
+class BasandraBattleSeraphEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public BasandraBattleSeraphEffect() {
         super(Duration.EndOfTurn, Outcome.Neutral);
@@ -113,12 +112,7 @@ class BasandraBattleSeraphEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL
                 && game.getPhase().getType() == TurnPhase.COMBAT) {
             return true;

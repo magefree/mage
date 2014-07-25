@@ -30,6 +30,7 @@ package mage.sets.legends;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.UntapAllLandsControllerEffect;
 import mage.cards.CardImpl;
@@ -72,7 +73,7 @@ public class Reset extends CardImpl {
     }
 }
 
-class ResetReplacementEffect extends ReplacementEffectImpl {
+class ResetReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
     ResetReplacementEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);
         staticText = "Cast {this} only during an opponent's turn after his or her upkeep step";
@@ -83,12 +84,7 @@ class ResetReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType().equals(GameEvent.EventType.CAST_SPELL) && event.getSourceId().equals(source.getSourceId())) {
             if (game.getTurn().getStepType().equals(PhaseStep.UNTAP)
                     || game.getTurn().getStepType().equals(PhaseStep.UPKEEP)

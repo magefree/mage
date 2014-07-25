@@ -28,8 +28,10 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -72,7 +74,7 @@ public class WardOfBones extends CardImpl {
     }
 }
 
-class WardOfBonesEffect extends ReplacementEffectImpl {
+class WardOfBonesEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public WardOfBonesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
@@ -94,12 +96,16 @@ class WardOfBonesEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public String getInfoMessage(Ability source, Game game) {
+        MageObject mageObject = game.getObject(source.getSourceId());
+        if (mageObject != null) {
+            return "You can't play the land or cast the spell (" + mageObject.getLogName() + " in play).";
+        }
+        return null;
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.PLAY_LAND
                 || event.getType() == GameEvent.EventType.CAST_SPELL
                 && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
@@ -108,22 +114,22 @@ class WardOfBonesEffect extends ReplacementEffectImpl {
             if (card == null || opponent == null) {
                 return false;
             }
-            final int yourCreatures = game.getBattlefield().countAll(new FilterCreaturePermanent(), source.getControllerId(), game);
-            final int yourArtifacts = game.getBattlefield().countAll(new FilterArtifactPermanent(), source.getControllerId(), game);
-            final int yourEnchantments = game.getBattlefield().countAll(new FilterEnchantmentPermanent(), source.getControllerId(), game);
-            final int yourLands = game.getBattlefield().countAll(new FilterLandPermanent(), source.getControllerId(), game);
             if (card.getCardType().contains(CardType.CREATURE)
-                    && game.getBattlefield().countAll(new FilterCreaturePermanent(), opponent.getId(), game) > yourCreatures) {
+                    && game.getBattlefield().countAll(new FilterCreaturePermanent(), opponent.getId(), game) 
+                        > game.getBattlefield().countAll(new FilterCreaturePermanent(), source.getControllerId(), game)) {
                 return true;
             }
             if (card.getCardType().contains(CardType.ARTIFACT)
-                    && game.getBattlefield().countAll(new FilterArtifactPermanent(), opponent.getId(), game) > yourArtifacts) {
+                    && game.getBattlefield().countAll(new FilterArtifactPermanent(), opponent.getId(), game) 
+                        > game.getBattlefield().countAll(new FilterArtifactPermanent(), source.getControllerId(), game)) {
                 return true;
             }
             if (card.getCardType().contains(CardType.ENCHANTMENT)
-                    && game.getBattlefield().countAll(new FilterEnchantmentPermanent(), opponent.getId(), game) > yourEnchantments) {
+                    && game.getBattlefield().countAll(new FilterEnchantmentPermanent(), opponent.getId(), game) 
+                        > game.getBattlefield().countAll(new FilterEnchantmentPermanent(), source.getControllerId(), game)) {
                 return true;
             }
+            final int yourLands = game.getBattlefield().countAll(new FilterLandPermanent(), source.getControllerId(), game);
             if (card.getCardType().contains(CardType.LAND)
                     && game.getBattlefield().countAll(new FilterLandPermanent(), opponent.getId(), game) > yourLands) {
                 return true;

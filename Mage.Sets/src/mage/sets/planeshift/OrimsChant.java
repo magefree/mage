@@ -33,6 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -78,7 +79,7 @@ public class OrimsChant extends CardImpl {
 
 }
 
-class OrimsChantCantCastEffect extends ReplacementEffectImpl {
+class OrimsChantCantCastEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public OrimsChantCantCastEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
@@ -100,12 +101,7 @@ class OrimsChantCantCastEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL ) {
             Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (player != null && player.getId().equals(event.getPlayerId())) {
@@ -118,7 +114,7 @@ class OrimsChantCantCastEffect extends ReplacementEffectImpl {
 
 class OrimsChantCantAttackEffect extends ReplacementEffectImpl {
 
-    private static final String effectText = "If Orim's Chant was kicked, creatures can't attack this turn";
+    private static final String effectText = "If {this} was kicked, creatures can't attack this turn";
     private Condition condition = new LockedInCondition(KickedCondition.getInstance());
 
     OrimsChantCantAttackEffect ( ) {

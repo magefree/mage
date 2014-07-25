@@ -28,25 +28,27 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
+import mage.MageObject;
+import mage.abilities.Ability;
+import mage.abilities.common.AsEntersBattlefieldAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.CardImpl;
+import mage.cards.repository.CardRepository;
+import mage.choices.Choice;
+import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
-import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -77,6 +79,7 @@ public class Nevermore extends CardImpl {
     }
 
 }
+
 class NevermoreEffect1 extends OneShotEffect {
 
     public NevermoreEffect1() {
@@ -91,7 +94,8 @@ class NevermoreEffect1 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (controller != null && permanent != null) {
             Choice cardChoice = new ChoiceImpl();
             cardChoice.setChoices(CardRepository.instance.getNonLandNames());
             cardChoice.clearChoice();
@@ -101,8 +105,10 @@ class NevermoreEffect1 extends OneShotEffect {
                 }
             }
             String cardName = cardChoice.getChoice();
-            game.informPlayers("Nevermore, named card: [" + cardName + "]");
+            game.informPlayers(permanent.getLogName() + ", named card: [" + cardName + "]");
             game.getState().setValue(source.getSourceId().toString(), cardName);
+            permanent.addInfo("named card", CardUtil.addToolTipMarkTags("Named card: [" + cardName +"]"));
+            return true;
         }        
         return false;
     }
@@ -114,7 +120,7 @@ class NevermoreEffect1 extends OneShotEffect {
 
 }
 
-class NevermoreEffect2 extends ReplacementEffectImpl {
+class NevermoreEffect2 extends ContinuousRuleModifiyingEffectImpl {
 
     public NevermoreEffect2() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
@@ -136,12 +142,7 @@ class NevermoreEffect2 extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == EventType.CAST_SPELL) {
             MageObject object = game.getObject(event.getSourceId());
             if (object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString()))) {
