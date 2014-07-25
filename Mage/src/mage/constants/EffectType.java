@@ -8,6 +8,7 @@ public enum EffectType {
 
     ONESHOT("One Shot Effect"),
     CONTINUOUS("Continuous Effect"),
+    CONTINUOUS_RULE_MODIFICATION("Layered rule modification"),
     REPLACEMENT("Replacement Effect"),
     PREVENTION("Prevention Effect"),
     REDIRECTION("Redirection Effect"),
@@ -18,7 +19,7 @@ public enum EffectType {
     COSTMODIFICATION("Cost Modification Effect"),
     SPLICE("Splice Card  Effect");
 
-    private String text;
+    private final String text;
 
     EffectType(String text) {
         this.text = text;

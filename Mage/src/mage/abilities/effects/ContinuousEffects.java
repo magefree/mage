@@ -80,6 +80,7 @@ public class ContinuousEffects implements Serializable {
 
     //transient Continuous effects
     private ContinuousEffectsList<ContinuousEffect> layeredEffects = new ContinuousEffectsList<>();
+    private ContinuousEffectsList<ContinuousRuleModifiyingEffect> continuousRuleModifyingEffects = new ContinuousEffectsList<>();
     private ContinuousEffectsList<ReplacementEffect> replacementEffects = new ContinuousEffectsList<>();
     private ContinuousEffectsList<PreventionEffect> preventionEffects = new ContinuousEffectsList<>();
     private ContinuousEffectsList<RequirementEffect> requirementEffects = new ContinuousEffectsList<>();
@@ -111,6 +112,7 @@ public class ContinuousEffects implements Serializable {
         this.planeswalkerRedirectionEffect = effect.planeswalkerRedirectionEffect.copy();
         this.auraReplacementEffect = effect.auraReplacementEffect.copy();
         layeredEffects = effect.layeredEffects.copy();
+        continuousRuleModifyingEffects = effect.continuousRuleModifyingEffects.copy();
         replacementEffects = effect.replacementEffects.copy();
         preventionEffects = effect.preventionEffects.copy();
         requirementEffects = effect.requirementEffects.copy();
@@ -130,7 +132,8 @@ public class ContinuousEffects implements Serializable {
     }
 
     private void collectAllEffects() {
-        allEffectsLists.add(layeredEffects);
+        allEffectsLists.add(layeredEffects);        
+        allEffectsLists.add(continuousRuleModifyingEffects);
         allEffectsLists.add(replacementEffects);
         allEffectsLists.add(preventionEffects);
         allEffectsLists.add(requirementEffects);
@@ -157,6 +160,7 @@ public class ContinuousEffects implements Serializable {
 
     public void removeEndOfCombatEffects() {
         layeredEffects.removeEndOfCombatEffects();
+        continuousRuleModifyingEffects.removeEndOfCombatEffects();
         replacementEffects.removeEndOfCombatEffects();
         preventionEffects.removeEndOfCombatEffects();
         requirementEffects.removeEndOfCombatEffects();
@@ -170,6 +174,7 @@ public class ContinuousEffects implements Serializable {
 
     public void removeEndOfTurnEffects() {
         layeredEffects.removeEndOfTurnEffects();
+        continuousRuleModifyingEffects.removeEndOfTurnEffects();
         replacementEffects.removeEndOfTurnEffects();
         preventionEffects.removeEndOfTurnEffects();
         requirementEffects.removeEndOfTurnEffects();
@@ -183,6 +188,7 @@ public class ContinuousEffects implements Serializable {
 
     public void removeInactiveEffects(Game game) {
         layeredEffects.removeInactiveEffects(game);
+        continuousRuleModifyingEffects.removeInactiveEffects(game);
         replacementEffects.removeInactiveEffects(game);
         preventionEffects.removeInactiveEffects(game);
         requirementEffects.removeInactiveEffects(game);
@@ -320,8 +326,7 @@ public class ContinuousEffects implements Serializable {
      * @param game
      * @return a list of all {@link ReplacementEffect} that apply to the current event
      */
-    private HashMap<ReplacementEffect, HashSet<Ability>> getApplicableReplacementEffects(GameEvent event, Game game) {
-        // List<ReplacementEffect> replaceEffects = new ArrayList<ReplacementEffect>();
+    private HashMap<ReplacementEffect, HashSet<Ability>> getApplicableReplacementEffects(GameEvent event, Game game) {        
         HashMap<ReplacementEffect, HashSet<Ability>> replaceEffects = new HashMap<>();
         if (planeswalkerRedirectionEffect.applies(event, null, game)) {
             replaceEffects.put(planeswalkerRedirectionEffect, null);
@@ -588,8 +593,34 @@ public class ContinuousEffects implements Serializable {
         }
     }
 
-
+    public boolean preventedByRuleModification(GameEvent event, Game game, boolean checkPlayableMode) {
+       for (ContinuousRuleModifiyingEffect effect: continuousRuleModifyingEffects) {
+            for (Ability ability : continuousRuleModifyingEffects.getAbility(effect.getId())) {
+                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, false)) {
+                    if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
+                        if (effect.applies(event, ability, checkPlayableMode, game)) {
+                            if (!checkPlayableMode) {
+                                String message = effect.getInfoMessage(ability, game);
+                                if (message != null && !message.isEmpty()) {
+                                    Player player = game.getPlayer(event.getPlayerId());
+                                    if (player != null) {
+                                        game.informPlayer(player, message);
+                                    }
+                                }
+                            }
+                            return true;
+                        }
+                    }
+                }
+            }
+        }        
+        return false;
+    }
+    
     public boolean replaceEvent(GameEvent event, Game game) {
+        if (preventedByRuleModification(event, game, false)) {
+            return true;
+        }
         boolean caught = false;
         HashMap<UUID, HashSet<UUID>> consumed = new HashMap<>();
         do {
@@ -860,6 +891,10 @@ public class ContinuousEffects implements Serializable {
                 SpliceCardEffect newSpliceCardEffect = (SpliceCardEffect)effect;
                 spliceCardEffects.addEffect(newSpliceCardEffect, source);
                 break;
+            case CONTINUOUS_RULE_MODIFICATION:
+                ContinuousRuleModifiyingEffect newContinuousRuleModifiyingEffect = (ContinuousRuleModifiyingEffect)effect;
+                continuousRuleModifyingEffects.addEffect(newContinuousRuleModifiyingEffect, source);
+                break;                
             default:
                 layeredEffects.addEffect(effect, source);
                 break;

@@ -39,6 +39,7 @@ import mage.constants.SpellAbilityType;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  *
@@ -97,6 +98,14 @@ public class SpellAbility extends ActivatedAbilityImpl {
             if (this.getManaCosts().isEmpty() && this.getCosts().isEmpty()) {
                 return false;
             }
+            // Check if rule modifying events prevent to cast the spell in check playable mode
+            if (this.isCheckPlayableMode()) {
+                if (game.getContinuousEffects().preventedByRuleModification(
+                        GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, this.getId(), this.getSourceId(), playerId), game, true)) {
+                    return false;
+                }
+            }
+            
             if (costs.canPay(sourceId, controllerId, game)) {
                 if (getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
                     SplitCard splitCard = (SplitCard) game.getCard(getSourceId());
