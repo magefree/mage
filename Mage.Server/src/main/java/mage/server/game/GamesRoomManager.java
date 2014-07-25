@@ -40,8 +40,8 @@ public class GamesRoomManager {
     private static final GamesRoomManager INSTANCE = new GamesRoomManager();
 //    private static final Logger logger = Logger.getLogger(GamesRoomManager.class);
 
-    private ConcurrentHashMap<UUID, GamesRoom> rooms = new ConcurrentHashMap<UUID, GamesRoom>();
-    private UUID mainRoomId;
+    private final ConcurrentHashMap<UUID, GamesRoom> rooms = new ConcurrentHashMap<>();
+    private final UUID mainRoomId;
 
     public static GamesRoomManager getInstance() {
         return INSTANCE;

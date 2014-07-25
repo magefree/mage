@@ -299,7 +299,7 @@ public class TableWaitingDialog extends MageDialog {
 }
 
 class TableWaitModel extends AbstractTableModel {
-    private String[] columnNames = new String[]{"Seat Num", "Player Name", "Player Type"};
+    private final String[] columnNames = new String[]{"Seat Num", "Player Name", "Player Type"};
     private SeatView[] seats = new SeatView[0];
 
     public void loadData(TableView table) {
@@ -362,10 +362,10 @@ class TableWaitModel extends AbstractTableModel {
 
 class UpdateSeatsTask extends SwingWorker<Void, TableView> {
 
-    private Session session;
-    private UUID roomId;
-    private UUID tableId;
-    private TableWaitingDialog dialog;
+    private final Session session;
+    private final UUID roomId;
+    private final UUID tableId;
+    private final TableWaitingDialog dialog;
     private int count = 0;
 
     private static final Logger logger = Logger.getLogger(TableWaitingDialog.class);

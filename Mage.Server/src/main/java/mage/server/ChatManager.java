@@ -69,7 +69,9 @@ public class ChatManager {
     }
 
     public void destroyChatSession(UUID chatId) {
-        chatSessions.remove(chatId);
+        if (chatId != null) {
+            chatSessions.remove(chatId);
+        }
     }
 
     public void broadcast(UUID chatId, String userName, String message, MessageColor color) {

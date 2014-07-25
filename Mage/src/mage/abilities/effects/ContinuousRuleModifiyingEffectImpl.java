@@ -70,7 +70,7 @@ public abstract class ContinuousRuleModifiyingEffectImpl extends ContinuousEffec
     @Override
     public String getInfoMessage(Ability source, Game game) {
         if (infoMessage == null) {
-            String message = null;
+            String message;
             MageObject object = game.getObject(source.getSourceId());
             if (object != null) {
                 message = source.getRule(object.getLogName());

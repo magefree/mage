@@ -204,7 +204,8 @@ public class TableManager {
 
     public boolean removeTable(UUID userId, UUID tableId) {
         if (isTableOwner(tableId, userId) || UserManager.getInstance().isAdmin(userId)) {
-            leaveTable(userId, tableId);
+            leaveTable(userId, tableId);            
+            ChatManager.getInstance().destroyChatSession(controllers.get(tableId).getChatId());  
             removeTable(tableId);
             return true;
         }
@@ -246,6 +247,8 @@ public class TableManager {
     public void startMatch(UUID userId, UUID roomId, UUID tableId) {
         if (controllers.containsKey(tableId)) {
             controllers.get(tableId).startMatch(userId);
+            // chat of start dialog can be killed
+            ChatManager.getInstance().destroyChatSession(controllers.get(tableId).getChatId());            
         }
     }
 
@@ -264,6 +267,7 @@ public class TableManager {
     public void startTournament(UUID userId, UUID roomId, UUID tableId) {
         if (controllers.containsKey(tableId)) {
             controllers.get(tableId).startTournament(userId);
+            ChatManager.getInstance().destroyChatSession(controllers.get(tableId).getChatId());     
         }
     }
 
@@ -334,9 +338,10 @@ public class TableManager {
     public void removeTable(UUID tableId) {
         if (tables.containsKey(tableId)) {
             Table table = tables.get(tableId);
+            ChatManager.getInstance().destroyChatSession(controllers.get(tableId).getChatId());  
             controllers.remove(tableId);
             tables.remove(tableId);
-            // If table is not finished, the table has to removed completly (if finished it will be removed in GamesRoomImpl.Update())
+                // If table is not finished, the table has to be removed completly (if finished it will be removed in GamesRoomImpl.Update())
             if (!table.getState().equals(TableState.FINISHED)) {
                 GamesRoomManager.getInstance().removeTable(tableId);
             }
