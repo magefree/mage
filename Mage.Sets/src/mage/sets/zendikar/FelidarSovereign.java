@@ -37,7 +37,7 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.WinGameEffect;
+import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -62,7 +62,7 @@ public class FelidarSovereign extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
         this.addAbility(LifelinkAbility.getInstance());
         // At the beginning of your upkeep, if you have 40 or more life, you win the game.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameEffect(), TargetController.YOU, false);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false);
         this.addAbility(new ConditionalTriggeredAbility(ability, new FortyOrMoreLifeCondition(), "At the beginning of your upkeep, if you have 40 or more life, you win the game."));
 
     }

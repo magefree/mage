@@ -25,57 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.sets.legions;
 
 import java.util.UUID;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
-import mage.abilities.effects.common.WinGameSourceControllerEffect;
-import mage.cards.CardImpl;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.NamePredicate;
-
 /**
  *
- * @author Plopman
+ * @author LevelX2
  */
-public class Biovisionary extends CardImpl {
+public class PhageTheUntouchable extends mage.sets.tenth.PhageTheUntouchable {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("if you control four or more creatures named Biovisionary");
-    static{
-        filter.add(new NamePredicate("Biovisionary"));
-    }
-           
-    public Biovisionary(UUID ownerId) {
-        super(ownerId, 146, "Biovisionary", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
-        this.expansionSetCode = "GTC";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-        
-
-        this.color.setGreen(true);
-        this.color.setBlue(true);
-        
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
-
-        //At the beginning of the end step, if you control four or more creatures named Biovisionary, you win the game.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new WinGameSourceControllerEffect(), TargetController.ANY, new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 3), false));
+    public PhageTheUntouchable(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 78;
+        this.expansionSetCode = "LGN";
     }
 
-    public Biovisionary(final Biovisionary card) {
+    public PhageTheUntouchable(final PhageTheUntouchable card) {
         super(card);
     }
 
     @Override
-    public Biovisionary copy() {
-        return new Biovisionary(this);
+    public PhageTheUntouchable copy() {
+        return new PhageTheUntouchable(this);
     }
 }
-

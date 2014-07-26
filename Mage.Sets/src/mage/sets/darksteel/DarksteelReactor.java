@@ -34,7 +34,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.common.WinGameEffect;
+import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
@@ -75,7 +75,7 @@ public class DarksteelReactor extends CardImpl {
 class DarksteelReactorStateTriggeredAbility extends StateTriggeredAbility {
 
     public DarksteelReactorStateTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new WinGameEffect());
+        super(Zone.BATTLEFIELD, new WinGameSourceControllerEffect());
     }
 
     public DarksteelReactorStateTriggeredAbility(final DarksteelReactorStateTriggeredAbility ability) {

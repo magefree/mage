@@ -41,9 +41,9 @@ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.LoseGameTargetPlayerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
@@ -53,7 +53,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.game.turn.Step;
-import mage.players.Player;
 import mage.target.common.TargetNonlandPermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -110,7 +109,7 @@ class VraskaTheUnseenGainAbilityEffect extends ContinuousEffectImpl {
     public VraskaTheUnseenGainAbilityEffect(Ability ability) {
         super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
-        staticText = "Until your next turn, whenever a creature deals combat damage to Vraska the Unseen, destroy that creature";
+        staticText = "Until your next turn, whenever a creature deals combat damage to {this}, destroy that creature";
     }
 
     public VraskaTheUnseenGainAbilityEffect(final VraskaTheUnseenGainAbilityEffect effect) {
@@ -153,34 +152,7 @@ class AssassinToken extends Token {
         subtype.add("Assassin");
         power = new MageInt(1);
         toughness = new MageInt(1);
-        addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new VraskaTheUnseenLoseGameEffect(),false, true));
-    }
-}
-
-class VraskaTheUnseenLoseGameEffect extends OneShotEffect {
-
-    public VraskaTheUnseenLoseGameEffect() {
-        super(Outcome.Damage);
-        this.staticText = "that player loses the game";
-    }
-
-    public VraskaTheUnseenLoseGameEffect(final VraskaTheUnseenLoseGameEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public VraskaTheUnseenLoseGameEffect copy() {
-        return new VraskaTheUnseenLoseGameEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player target = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (target != null) {
-            target.lost(game);
-            return true;
-        }
-        return false;
+        addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LoseGameTargetPlayerEffect(),false, true));
     }
 }
 

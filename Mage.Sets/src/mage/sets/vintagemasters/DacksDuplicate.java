@@ -25,57 +25,62 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.sets.vintagemasters;
 
 import java.util.UUID;
-
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.EntersBattlefieldEffect;
+import mage.abilities.effects.common.CopyPermanentEffect;
+import mage.abilities.keyword.DethroneAbility;
+import mage.abilities.keyword.HasteAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
-import mage.abilities.effects.common.WinGameSourceControllerEffect;
-import mage.cards.CardImpl;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.util.functions.ApplyToPermanent;
 
 /**
  *
- * @author Plopman
+ * @author LevelX2
  */
-public class Biovisionary extends CardImpl {
+public class DacksDuplicate extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("if you control four or more creatures named Biovisionary");
-    static{
-        filter.add(new NamePredicate("Biovisionary"));
-    }
-           
-    public Biovisionary(UUID ownerId) {
-        super(ownerId, 146, "Biovisionary", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
-        this.expansionSetCode = "GTC";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-        
+    public DacksDuplicate(UUID ownerId) {
+        super(ownerId, 248, "Dack's Duplicate", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{R}");
+        this.expansionSetCode = "VMA";
+        this.subtype.add("Shapeshifter");
 
-        this.color.setGreen(true);
+        this.color.setRed(true);
         this.color.setBlue(true);
-        
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
 
-        //At the beginning of the end step, if you control four or more creatures named Biovisionary, you win the game.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new WinGameSourceControllerEffect(), TargetController.ANY, new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 3), false));
+        // You may have Dack's Duplicate enter the battlefield as a copy of any creature on the battlefield except it gains haste and dethrone.
+        this.addAbility(new SimpleStaticAbility(
+            Zone.BATTLEFIELD,
+            new EntersBattlefieldEffect(new CopyPermanentEffect(new DacksDuplicateApplyToPermanent()),
+            "You may have {this} enter the battlefield as a copy of any creature on the battlefield except it gains haste and dethrone",
+            true)));
     }
 
-    public Biovisionary(final Biovisionary card) {
+    public DacksDuplicate(final DacksDuplicate card) {
         super(card);
     }
 
     @Override
-    public Biovisionary copy() {
-        return new Biovisionary(this);
+    public DacksDuplicate copy() {
+        return new DacksDuplicate(this);
     }
 }
 
+class DacksDuplicateApplyToPermanent extends ApplyToPermanent {
+    @Override
+    public Boolean apply(Game game, Permanent permanent) {
+        permanent.addAbility(new DethroneAbility(), game);
+        permanent.addAbility(HasteAbility.getInstance(), game);
+        return true;
+    }
+}

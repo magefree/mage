@@ -8,6 +8,7 @@ Cascade|new|
 Cumulative upkeep|cost|
 Cycling|cost|
 Deathtouch|instance|
+Dethrone|new|
 Defender|instance|
 Double Strike|instance|
 Dredge|number|

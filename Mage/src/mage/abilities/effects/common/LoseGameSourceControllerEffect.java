@@ -25,53 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
 
-import java.util.UUID;
+package mage.abilities.effects.common;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.WinGameSourceControllerEffect;
-import mage.cards.CardImpl;
-import mage.constants.TargetController;
+import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LevelX2
  */
-public class NearDeathExperience extends CardImpl {
 
-    public NearDeathExperience(UUID ownerId) {
-        super(ownerId, 38, "Near-Death Experience", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}{W}");
-        this.expansionSetCode = "ROE";
+public class LoseGameSourceControllerEffect extends OneShotEffect {
 
-        this.color.setWhite(true);
-
-        // At the beginning of your upkeep, if you have exactly 1 life, you win the game.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, new OneLifeCondition(), "At the beginning of your upkeep, if you have exactly 1 life, you win the game."));
+    public LoseGameSourceControllerEffect() {
+        super(Outcome.Detriment);
+        this.staticText = "you lose the game";
     }
 
-    public NearDeathExperience(final NearDeathExperience card) {
-        super(card);
+    public LoseGameSourceControllerEffect(final LoseGameSourceControllerEffect effect) {
+        super(effect);
     }
 
     @Override
-    public NearDeathExperience copy() {
-        return new NearDeathExperience(this);
+    public LoseGameSourceControllerEffect copy() {
+        return new LoseGameSourceControllerEffect(this);
     }
-}
-
-class OneLifeCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.getPlayer(source.getControllerId()).getLife() == 1;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            controller.lost(game);
+            return true;
+        }
+        return false;
     }
 }

@@ -25,57 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.sets.conspiracy;
 
 import java.util.UUID;
-
+import mage.MageInt;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.keyword.DethroneAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
-import mage.abilities.effects.common.WinGameSourceControllerEffect;
-import mage.cards.CardImpl;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.NamePredicate;
 
 /**
  *
- * @author Plopman
+ * @author LevelX2
  */
-public class Biovisionary extends CardImpl {
+public class MarchesasInfiltrator extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("if you control four or more creatures named Biovisionary");
-    static{
-        filter.add(new NamePredicate("Biovisionary"));
-    }
-           
-    public Biovisionary(UUID ownerId) {
-        super(ownerId, 146, "Biovisionary", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
-        this.expansionSetCode = "GTC";
+    public MarchesasInfiltrator(UUID ownerId) {
+        super(ownerId, 22, "Marchesa's Infiltrator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "CNS";
         this.subtype.add("Human");
-        this.subtype.add("Wizard");
-        
+        this.subtype.add("Rogue");
 
-        this.color.setGreen(true);
         this.color.setBlue(true);
-        
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        //At the beginning of the end step, if you control four or more creatures named Biovisionary, you win the game.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new WinGameSourceControllerEffect(), TargetController.ANY, new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 3), false));
+        // Dethrone
+        this.addAbility(new DethroneAbility());
+        // Whenever Marchesa's Infiltrator deals combat damage to a player, draw a card.
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
-    public Biovisionary(final Biovisionary card) {
+    public MarchesasInfiltrator(final MarchesasInfiltrator card) {
         super(card);
     }
 
     @Override
-    public Biovisionary copy() {
-        return new Biovisionary(this);
+    public MarchesasInfiltrator copy() {
+        return new MarchesasInfiltrator(this);
     }
 }
-

@@ -46,7 +46,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.WinGameEffect;
+import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -82,7 +82,7 @@ public class HellkiteTyrant extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new HellkiteTyrantEffect(),false, true));
 
         // At the beginning of your upkeep, if you control twenty or more artifacts, you win the game.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameEffect(), TargetController.YOU, false);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false);
         this.addAbility(new ConditionalTriggeredAbility(
                 ability,
                 new ControlsPermanentCondition(new FilterArtifactPermanent(), ControlsPermanentCondition.CountType.MORE_THAN,19),

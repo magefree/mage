@@ -74,7 +74,7 @@ public class AureliaTheWarleader extends CardImpl {
 
         // Whenever Aurelia, the Warleader attacks for the first time each turn, untap all creatures you control. After this phase, there is an additional combat phase.
         Ability ability = new AureliaAttacksTriggeredAbility(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(),"untap all creatures you control"), false);
-        ability.addEffect(new AdditionalCombatPhaseEffect());;
+        ability.addEffect(new AdditionalCombatPhaseEffect());
         this.addAbility(ability);
 
     }

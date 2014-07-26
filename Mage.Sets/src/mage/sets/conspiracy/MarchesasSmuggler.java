@@ -25,61 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.sets.conspiracy;
 
 import java.util.UUID;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.common.WinGameSourceControllerEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.ShroudAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.keyword.DethroneAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.counters.CounterType;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LevelX2
  */
-public class HelixPinnacle extends CardImpl {
+public class MarchesasSmuggler extends CardImpl {
 
-    final String rule = "if there are 100 or more tower counters on Helix Pinnacle, you win the game";
+    public MarchesasSmuggler(UUID ownerId) {
+        super(ownerId, 50, "Marchesa's Smuggler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}{R}");
+        this.expansionSetCode = "CNS";
+        this.subtype.add("Human");
+        this.subtype.add("Rogue");
 
-    public HelixPinnacle(UUID ownerId) {
-        super(ownerId, 68, "Helix Pinnacle", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");
-        this.expansionSetCode = "EVE";
+        this.color.setRed(true);
+        this.color.setBlue(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        this.color.setGreen(true);
-
-        // Shroud
-        this.addAbility(ShroudAbility.getInstance());
-
-        // {X}: Put X tower counters on Helix Pinnacle.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new AddCountersSourceEffect(CounterType.TOWER.createInstance(), new ManacostVariableValue(), true),
-                new ManaCostsImpl("{X}")));
-        
-        // At the beginning of your upkeep, if there are 100 or more tower counters on Helix Pinnacle, you win the game.
-        this.addAbility(new ConditionalTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new WinGameSourceControllerEffect(), TargetController.YOU, false),
-                new SourceHasCounterCondition(CounterType.TOWER, 100),
-                rule, false ));
+        // Dethrone
+        this.addAbility(new DethroneAbility());
+        // {1}{U}{R}: Target creature you control gains haste until end of turn and can't be blocked this turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{U}{R}"));
+        ability.addTarget(new TargetControlledCreaturePermanent());
+        Effect effect = new CantBeBlockedTargetEffect(Duration.EndOfTurn);
+        effect.setText("and can't be blocked this turn");
+        ability.addEffect(effect);
+        this.addAbility(ability);
 
     }
 
-    public HelixPinnacle(final HelixPinnacle card) {
+    public MarchesasSmuggler(final MarchesasSmuggler card) {
         super(card);
     }
 
     @Override
-    public HelixPinnacle copy() {
-        return new HelixPinnacle(this);
+    public MarchesasSmuggler copy() {
+        return new MarchesasSmuggler(this);
     }
 }

@@ -25,44 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.conspiracy;
 
-package mage.abilities.effects.common;
-
-import mage.constants.Outcome;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.game.Game;
-import mage.players.Player;
+import java.util.UUID;
 
 /**
  *
- * @author plopman
+ * @author LevelX2
  */
+public class ScourgeOfTheThrone extends mage.sets.vintagemasters.ScourgeOfTheThrone {
 
-
-public class WinGameEffect extends OneShotEffect {
-
-    public WinGameEffect() {
-        super(Outcome.Win);
-        this.staticText = "you win the game";
+    public ScourgeOfTheThrone(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 35;
+        this.expansionSetCode = "CNS";
     }
 
-    public WinGameEffect(final WinGameEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public WinGameEffect copy() {
-        return new WinGameEffect(this);
+    public ScourgeOfTheThrone(final ScourgeOfTheThrone card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.won(game);
-            return true;
-        }
-        return false;
+    public ScourgeOfTheThrone copy() {
+        return new ScourgeOfTheThrone(this);
     }
 }
