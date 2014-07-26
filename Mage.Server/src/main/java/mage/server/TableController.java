@@ -70,6 +70,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import mage.game.Game;
+import mage.view.ChatMessage;
 
 
 /**
@@ -387,7 +388,12 @@ public class TableController {
                     match.leave(playerId);
                 }
                 User user = UserManager.getInstance().getUser(userId);
-                user.removeTable(playerId);
+                if (user != null) {
+                    ChatManager.getInstance().broadcast(chatId, user.getName(), "has left the table", ChatMessage.MessageColor.BLUE, true, ChatMessage.MessageType.STATUS, ChatMessage.SoundToPlay.PlayerLeft);
+                    user.removeTable(playerId);
+                } else {
+                    logger.debug("TableController.leaveTable user with this userId not found  userId: " + userId);
+                }
                 userPlayerMap.remove(userId);
             } else if (!table.getState().equals(TableState.FINISHED)) {
                 if (table.isTournament()) {

@@ -41,6 +41,7 @@ public class AudioManager {
     private MageClip playerSubmittedDeck = null;
     private MageClip playerWhispered = null;
     private MageClip playerLeft = null;
+    private MageClip playerQuitTournament = null;
     private MageClip playerWon = null;
     private MageClip playerLost = null;
     /**
@@ -222,6 +223,14 @@ public class AudioManager {
         checkAndPlayClip(getManager().playerLeft);
     }
 
+    public static void playPlayerQuitTournament() {
+        if(audioManager.playerQuitTournament== null) {
+            audioManager.playerQuitTournament = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPlayerQuitTournament.wav"),
+                            AudioGroup.OtherSounds);
+        }
+        checkAndPlayClip(getManager().playerQuitTournament);
+    }
+
     public static void playPlayerLost() {
         if(audioManager.playerLost == null) {        
             audioManager.playerLost = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPlayerLost.wav"),
@@ -261,6 +270,7 @@ public class AudioManager {
 
     public void play(final Clip clip) {
         new Thread(new Runnable() {
+            @Override
             public void run() {
                 clip.setFramePosition(0);
                 clip.start();

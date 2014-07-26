@@ -53,7 +53,7 @@ public class ChatMessage implements Serializable {
     }
 
     public enum SoundToPlay {
-        PlayerLeft, PlayerSubmittedDeck, PlayerWhispered;
+        PlayerLeft, PlayerQuitTournament, PlayerSubmittedDeck, PlayerWhispered;
     }
 
     public ChatMessage(String username, String message, String time, MessageColor color) {

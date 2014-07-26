@@ -305,7 +305,7 @@ public class TournamentController {
             if (tPlayer != null) {
                 if (started) {
                     if (tPlayer.isInTournament()) {
-                        ChatManager.getInstance().broadcast(chatId, "", tPlayer.getPlayer().getName() + " has quit the tournament", MessageColor.BLACK, true, MessageType.STATUS, SoundToPlay.PlayerLeft);
+                        ChatManager.getInstance().broadcast(chatId, "", tPlayer.getPlayer().getName() + " has quit the tournament", MessageColor.BLACK, true, MessageType.STATUS, SoundToPlay.PlayerQuitTournament);
                         String info;
                         if (tournament.isDoneConstructing()) {
                             info = new StringBuilder("during round ").append(tournament.getRounds().size()).toString();

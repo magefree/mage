@@ -114,6 +114,9 @@ public class CallbackClientImpl implements CallbackClient {
                                             case PlayerLeft:
                                                 AudioManager.playPlayerLeft();
                                                 break;
+                                            case PlayerQuitTournament:
+                                                AudioManager.playPlayerQuitTournament();
+                                                break;
                                             case PlayerSubmittedDeck:
                                                 AudioManager.playPlayerSubmittedDeck();
                                                 break;
