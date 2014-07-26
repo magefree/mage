@@ -774,12 +774,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean playLand(Card card, Game game) {
         //20091005 - 305.1
-        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), playerId))) {
+        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), card.getId(), playerId))) {
             // int bookmark = game.bookmarkState();
             Zone zone = game.getState().getZone(card.getId());
             if (card.putOntoBattlefield(game, zone, null, playerId)) {
                 landsPlayed++;
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LAND_PLAYED, card.getId(), playerId));
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LAND_PLAYED, card.getId(), card.getId(), playerId));
                 game.fireInformEvent(name + " plays " + card.getName());
                 // game.removeBookmark(bookmark);
                 resetStoredBookmark(game);
@@ -1900,6 +1900,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (hidden) {
                 for (Card card : hand.getUniqueCards(game)) {
                     for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {
+                        if (ability instanceof PlayLandAbility) {
+                            if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(), ability.getSourceId(), playerId), game, true)) {
+                                break;
+                            }
+                        }
                         if (canPlay(ability, available, game)) {
                             playable.add(ability);
                         }
@@ -1990,6 +1995,11 @@ public abstract class PlayerImpl implements Player, Serializable {
 
                 for (Card card : hand.getCards(game)) {
                     for (ActivatedAbility ability : card.getAbilities().getPlayableAbilities(Zone.HAND)) {
+                        if (ability instanceof PlayLandAbility) {
+                            if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(), ability.getSourceId(), playerId), game, true)) {
+                                break;
+                            }
+                        }
                         if (canPlay(ability, available, game)) {
                             playable.add(card.getId());
                             break;

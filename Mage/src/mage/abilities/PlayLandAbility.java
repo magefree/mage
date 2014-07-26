@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.constants.AbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  *
@@ -55,10 +56,7 @@ public class PlayLandAbility extends ActivatedAbilityImpl {
             return false;
         }
         //20091005 - 114.2a
-        if (game.canPlaySorcery(playerId)) {
-            return game.getPlayer(playerId).canPlayLand();
-        }
-        return false;
+        return game.canPlaySorcery(playerId) && game.getPlayer(playerId).canPlayLand();
     }
 
     @Override

@@ -125,7 +125,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         playables = filterAbilities(game, playables, suggested);
         for (Ability ability: playables) {
             List<Ability> options = game.getPlayer(playerId).getPlayableOptions(ability, game);
-            options = filterOptions(game, options, ability, suggested);
+                options = filterOptions(game, options, ability, suggested);
             options = optimizeOptions(game, options, ability);
             if (options.isEmpty()) {
                   allActions.add(ability);

@@ -82,6 +82,7 @@ import java.util.*;
 import java.util.HashSet;
 import java.util.Map.Entry;
 import mage.abilities.costs.VariableCost;
+import mage.abilities.keyword.FlashAbility;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
 
@@ -812,8 +813,15 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     protected void playLand(Game game) {
         log.debug("playLand");
-        Set<Card> lands = hand.getCards(new FilterLandCard(), game);
-        while (lands.size() > 0 && this.landsPlayed < this.landsPerTurn) {
+        Set<Card> lands = new LinkedHashSet<>();
+        for (Card landCard:  hand.getCards(new FilterLandCard(), game)) {
+            // remove lands that can not be played
+            if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, landCard.getId(), landCard.getId(), playerId), game, true)) {
+                break;
+            }
+            lands.add(landCard);
+        }
+        while (lands.size() > 0 && this.canPlayLand()) {
             if (lands.size() == 1) {
                 this.playLand(lands.iterator().next(), game);
             }
@@ -875,8 +883,10 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 for (Mana avail: available) {
                     if (mana.enough(avail)) {
                         SpellAbility ability = card.getSpellAbility();
-                        if (ability != null && ability.canActivate(playerId, game)) {
-                            if (card.getCardType().contains(CardType.INSTANT)) {
+                        if (ability != null && ability.canActivate(playerId, game) && game.getContinuousEffects().
+                                preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getSourceId(), ability.getSourceId(), playerId), game, true)) {
+                            if (card.getCardType().contains(CardType.INSTANT)
+                                    || card.hasAbility(FlashAbility.getInstance().getId(), game)) {
                                 playableInstant.add(card);
                             }
                             else {
