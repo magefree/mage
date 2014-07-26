@@ -33,6 +33,7 @@ import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -76,7 +77,7 @@ public class AggressiveMining extends CardImpl {
     }
 }
 
-class AggressiveMiningEffect extends ReplacementEffectImpl {
+class AggressiveMiningEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public AggressiveMiningEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
@@ -98,12 +99,7 @@ class AggressiveMiningEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         return event.getType().equals(GameEvent.EventType.PLAY_LAND) && event.getPlayerId().equals(source.getControllerId());
     }
     
