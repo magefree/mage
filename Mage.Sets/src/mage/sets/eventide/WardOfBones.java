@@ -32,7 +32,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -109,7 +108,7 @@ class WardOfBonesEffect extends ContinuousRuleModifiyingEffectImpl {
         if (event.getType() == GameEvent.EventType.PLAY_LAND
                 || event.getType() == GameEvent.EventType.CAST_SPELL
                 && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            final Card card = game.getCard(event.getTargetId());
+            final Card card = game.getCard(event.getSourceId());
             final Player opponent = game.getPlayer(event.getPlayerId());
             if (card == null || opponent == null) {
                 return false;
