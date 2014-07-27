@@ -3,7 +3,10 @@ package org.mage.test.utils;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.mana.BasicManaAbility;
 import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.RedManaAbility;
+import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.Card;
 import mage.cards.repository.CardRepository;
 import mage.util.ManaUtil;
@@ -43,6 +46,20 @@ public class ManaUtilTest extends CardTestPlayerBase {
 
         testManaToPayVsLand("{1}{R}", "Cavern of Souls", 2, 2); // can't auto choose to pay
         testManaToPayVsLand("{2}", "Cavern of Souls", 2, 2); // can't auto choose to pay
+
+        // hybrid mana
+        testManaToPayVsLand("{W/R}{W/R}{W/R}", "Sacred Foundry", 2, 1); // auto choose for hybrid mana: choose any
+        testManaToPayVsLand("{R}{W/R}", "Sacred Foundry", 2, RedManaAbility.class); // auto choose for hybrid mana: we should choose {R}
+        testManaToPayVsLand("{G}{W/R}", "Sacred Foundry", 2, 1); // auto choose for hybrid mana: choose any
+        testManaToPayVsLand("{G}{W/R}{W}", "Sacred Foundry", 2, WhiteManaAbility.class); // auto choose for hybrid mana: choose {W}
+
+        // we can't auto choose here:
+        // let say we auto choose {R}, then we have to use it to pay for {R} not {W/R} (as {W/R} is more generic cost)
+        // but in such case what is left to pay is {W/R}{W} and it is possible that we won't have 2 white sources
+        // Example: 1x Sacred Foundry 1x Mountain 1x Mountain
+        // we can pay {W/R}{W}{R} by using Sacred Foundry and choosing {W} then using two Mountains
+        // but if we auto choose {R} then we won't be able to pay the cost at all
+        testManaToPayVsLand("{W/R}{W}{R}", "Sacred Foundry", 2, 2);
     }
 
     /**
@@ -65,6 +82,35 @@ public class ManaUtilTest extends CardTestPlayerBase {
 
         useableAbilities = ManaUtil.tryToAutoPay(unpaid, (LinkedHashMap)useableAbilities);
         Assert.assertEquals(expected2, useableAbilities.size());
+    }
+
+    /**
+     * Another way to test ManaUtil.tryToAutoPay
+     * Here we also check what ability was auto chosen
+     *
+     * N.B. This method can be used ONLY if we have one ability left that auto choose mode!
+     * That's why we assert the following:
+     * Assert.assertEquals(1, useableAbilities.size());
+     *
+     * We get all mana abilities, then try to auto pay and compare to expected1 and expected2 params.
+     *
+     * @param manaToPay Mana that should be paid using land.
+     * @param landName Land to use as mana producer.
+     * @param expected1 The amount of mana abilities the land should have.
+     * @param expectedChosen
+     */
+    private void testManaToPayVsLand(String manaToPay, String landName, int expected1, Class<? extends BasicManaAbility> expectedChosen) {
+        ManaCost unpaid = new ManaCostsImpl(manaToPay);
+        Card card = CardRepository.instance.findCard(landName).getCard();
+        Assert.assertNotNull(card);
+
+        HashMap<UUID, ManaAbility> useableAbilities = getManaAbilities(card);
+        Assert.assertEquals(expected1, useableAbilities.size());
+
+        useableAbilities = ManaUtil.tryToAutoPay(unpaid, (LinkedHashMap)useableAbilities);
+        Assert.assertEquals(1, useableAbilities.size());
+        ManaAbility ability = useableAbilities.values().iterator().next();
+        Assert.assertTrue("Wrong mana ability has been chosen", expectedChosen.isInstance(ability));
     }
 
     /**
