@@ -28,14 +28,14 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -105,11 +105,13 @@ class ShowAndTellEffect extends OneShotEffect {
         for (UUID playerId : controller.getInRange()) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                TargetCardInHand target = new TargetCardInHand(filter);
-                if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
-                    Card card = game.getCard(target.getFirstTarget());
-                    if (card != null) {
-                        player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
+                if (player.chooseUse(outcome, "Put an artifact, creature, enchantment, or land card from hand onto the battlefield?", game)) {
+                    TargetCardInHand target = new TargetCardInHand(filter);
+                    if (player.choose(outcome, target, source.getSourceId(), game)) {
+                        Card card = game.getCard(target.getFirstTarget());
+                        if (card != null) {
+                            player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
+                        }
                     }
                 }
             }
