@@ -269,8 +269,9 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
-        if (this.isHuman())
+        if (this.isHuman()) {
             return chooseRandom(target, game);
+        }
         return super.choose(outcome, target, sourceId, game, options);
     }
 
@@ -303,8 +304,9 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-        if (cards.isEmpty())
+        if (cards.isEmpty()) {
             return !target.isRequired(source);
+        }
         Card card = cards.getRandom(game);
         target.addTarget(card.getId(), source, game);
         return true;
@@ -313,8 +315,9 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
         Set<UUID> possibleTargets = target.possibleTargets(source==null?null:source.getSourceId(), playerId, game);
-        if (possibleTargets.isEmpty())
+        if (possibleTargets.isEmpty()) {
             return !target.isRequired(source);
+        }
         if (!target.isRequired(source)) {
             if (rnd.nextInt(possibleTargets.size() + 1) == 0) {
                 return false;
@@ -341,8 +344,9 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public boolean chooseUse(Outcome outcome, String message, Game game) {
-        if (this.isHuman())
+        if (this.isHuman()) {
             return rnd.nextBoolean();
+        }
         return super.chooseUse(outcome, message, game);
     }
 
@@ -370,15 +374,17 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public int chooseEffect(List<String> rEffects, Game game) {
-        if (this.isHuman())
+        if (this.isHuman()) {
             return rnd.nextInt(rEffects.size());
+        }
         return super.chooseEffect(rEffects, game);
     }
 
     @Override
     public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
-        if (this.isHuman())
+        if (this.isHuman()) {
             return abilities.get(rnd.nextInt(abilities.size()));
+        }
         return super.chooseTriggeredAbility(abilities, game);
     }
 
@@ -387,8 +393,9 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
         if (this.isHuman()) {
             Iterator<Mode> it = modes.values().iterator();
             Mode mode = it.next();
-            if (modes.size() == 1)
+            if (modes.size() == 1) {
                 return mode;
+            }
             int modeNum = rnd.nextInt(modes.values().size());
             for (int i = 0; i < modeNum; i++) {
                 mode = it.next();

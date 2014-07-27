@@ -224,7 +224,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
         if (target instanceof TargetCardInHand) {
             List<Card> cards = new ArrayList<>();
-            for (UUID cardId: ((TargetCardInHand)target).possibleTargets(this.getId(), hand, game)) {
+            for (UUID cardId: ((TargetCardInHand)target).possibleTargets(sourceId, this.getId(), game)) {
                 Card card = game.getCard(cardId);
                 if (card != null) {
                     cards.add(card);

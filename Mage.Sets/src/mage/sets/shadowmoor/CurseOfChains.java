@@ -25,59 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.sets.shadowmoor;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.TapEnchantedEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
+public class CurseOfChains extends CardImpl {
 
-public class ReturnToHandFromGraveyardAllEffect extends OneShotEffect {
+    public CurseOfChains(UUID ownerId) {
+        super(ownerId, 139, "Curse of Chains", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W/U}");
+        this.expansionSetCode = "SHM";
+        this.subtype.add("Aura");
 
-    private final FilterCard filter;
+        this.color.setBlue(true);
+        this.color.setWhite(true);
 
-    public ReturnToHandFromGraveyardAllEffect(FilterCard filter) {
-        super(Outcome.ReturnToHand);
-        this.filter = filter;
-        staticText = "Each player returns all " + filter.getMessage() + " from his or her graveyard to his or her hand";
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Tap));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+
+        // At the beginning of each upkeep, tap enchanted creature.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TapEnchantedEffect(), TargetController.ANY, false));
     }
 
-    public ReturnToHandFromGraveyardAllEffect(final ReturnToHandFromGraveyardAllEffect effect) {
-        super(effect);
-        this.filter = effect.filter;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (UUID playerId : controller.getInRange()) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    for (Card card :player.getGraveyard().getCards(filter, source.getSourceId(), source.getControllerId(), game)) {
-                        card.moveToZone(Zone.HAND, playerId, game, false);
-                    }
-                }
-
-            }
-            return true;
-        }
-        return false;
+    public CurseOfChains(final CurseOfChains card) {
+        super(card);
     }
 
     @Override
-    public ReturnToHandFromGraveyardAllEffect copy() {
-        return new ReturnToHandFromGraveyardAllEffect(this);
+    public CurseOfChains copy() {
+        return new CurseOfChains(this);
     }
 }

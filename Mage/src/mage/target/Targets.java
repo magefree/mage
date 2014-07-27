@@ -77,7 +77,7 @@ public class Targets extends ArrayList<Target> {
 
     public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Game game) {
         if (this.size() > 0) {
-            if (!canChoose(playerId, game)) {
+            if (!canChoose(sourceId, playerId, game)) {
                 return false;
             }
             while (!isChosen()) {

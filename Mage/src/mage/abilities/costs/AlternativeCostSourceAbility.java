@@ -106,7 +106,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
             Player player = game.getPlayer(ability.getControllerId());
             if (player != null) {
                 if (alternateCosts.canPay(ability.getSourceId(), ability.getControllerId(), game) &&
-                        player.chooseUse(Outcome.Detriment, alternateCosts.isEmpty() ? "Cast without paying its mana cost?":"Pay alternative costs?", game)) {
+                        player.chooseUse(Outcome.Detriment, alternateCosts.isEmpty() ? "Cast without paying its mana cost?":"Pay alternative costs? (" + alternateCosts.getText() +")", game)) {
                     ability.getManaCostsToPay().clear();
                     ability.getCosts().clear();
                     for (Cost cost : alternateCosts) {
@@ -121,7 +121,11 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
                             }
                         }
                     }
+                } else {
+                    return false;
                 }
+            } else {
+                return false;
             }
         }
         return isActivated(ability, game);

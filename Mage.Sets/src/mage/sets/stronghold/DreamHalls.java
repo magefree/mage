@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.stronghold;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -41,6 +41,9 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.AnotherCardPredicate;
+import mage.filter.predicate.mageobject.SharesColorWithSourcePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -48,43 +51,51 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class FistOfSuns extends CardImpl {
+public class DreamHalls extends CardImpl {
 
-    public FistOfSuns(UUID ownerId) {
-        super(ownerId, 123, "Fist of Suns", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "5DN";
+    public DreamHalls(UUID ownerId) {
+        super(ownerId, 28, "Dream Halls", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
+        this.expansionSetCode = "STH";
 
-        // You may pay {W}{U}{B}{R}{G} rather than pay the mana cost for spells that you cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FistOfSunsRuleEffect()));
+        this.color.setBlue(true);
+
+        // Rather than pay the mana cost for a spell, its controller may discard a card that shares a color with that spell.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DreamHallsEffect()));
     }
 
-    public FistOfSuns(final FistOfSuns card) {
+    public DreamHalls(final DreamHalls card) {
         super(card);
     }
 
     @Override
-    public FistOfSuns copy() {
-        return new FistOfSuns(this);
+    public DreamHalls copy() {
+        return new DreamHalls(this);
     }
-        
 }
 
-class FistOfSunsRuleEffect extends ContinuousEffectImpl {
+class DreamHallsEffect extends ContinuousEffectImpl {
 
-    static AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(new ManaCostsImpl("{W}{U}{B}{R}{G}"));
-    
-    public FistOfSunsRuleEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "You may pay {W}{U}{B}{R}{G} rather than pay the mana cost for spells that you cast";
+    private static final FilterCard filter = new FilterCard("a card that shares a color with that spell");
+
+    static {
+        filter.add(new AnotherCardPredicate());
+        filter.add(new SharesColorWithSourcePredicate());
     }
 
-    public FistOfSunsRuleEffect(final FistOfSunsRuleEffect effect) {
+    static AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(new DiscardCardCost(filter));
+
+    public DreamHallsEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        staticText = "Rather than pay the mana cost for a spell, its controller may discard a card that shares a color with that spell";
+    }
+
+    public DreamHallsEffect(final DreamHallsEffect effect) {
         super(effect);
     }
 
     @Override
-    public FistOfSunsRuleEffect copy() {
-        return new FistOfSunsRuleEffect(this);
+    public DreamHallsEffect copy() {
+        return new DreamHallsEffect(this);
     }
 
     @Override

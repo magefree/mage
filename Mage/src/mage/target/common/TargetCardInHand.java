@@ -86,7 +86,7 @@ public class TargetCardInHand extends TargetCard {
         Set<UUID> possibleTargets = new HashSet<>();
         Player player = game.getPlayer(playerId);
         if (player != null) {
-            for (Card card : player.getHand().getCards(filter, game)) {
+            for (Card card : player.getHand().getCards(filter, sourceId, playerId, game)) {
                 if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, playerId))) {
                     possibleTargets.add(card.getId());
                 }
@@ -100,7 +100,7 @@ public class TargetCardInHand extends TargetCard {
         int possibleTargets = 0;
         Player player = game.getPlayer(sourceControllerId);
         if (player != null) {
-            for (Card card : player.getHand().getCards(filter, game)) {
+            for (Card card : player.getHand().getCards(filter, sourceId, sourceControllerId, game)) {
                 if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, sourceControllerId))) {
                     possibleTargets++;
                     if (possibleTargets >= this.minNumberOfTargets) {

@@ -41,10 +41,18 @@ public class DiscardCardCost extends DiscardTargetCost {
     }
 
     public DiscardCardCost(boolean randomDiscard) {
-        super(new TargetCardInHand(new FilterCard(randomDiscard ?"a card at random":"a card")), randomDiscard);
+        this(new FilterCard(randomDiscard ?"a card at random":"a card"), randomDiscard);
     }
 
-    public DiscardCardCost(DiscardCardCost cost) {
+    public DiscardCardCost(FilterCard filter) {
+        this(filter, false);
+    }
+
+    public DiscardCardCost(FilterCard filter, boolean randomDiscard) {
+        super(new TargetCardInHand(filter), randomDiscard);
+    }
+
+    public DiscardCardCost(final DiscardCardCost cost) {
         super(cost);
     }
 

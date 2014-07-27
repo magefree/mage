@@ -87,7 +87,7 @@ public class DiscardTargetCost extends CostImpl {
                         return false;
                     }
                     this.cards.add(card.copy());
-                    paid |= player.discard(card, null, game);
+                    paid |= player.discard(card, ability, game);
                 }
             }
         }
@@ -96,7 +96,7 @@ public class DiscardTargetCost extends CostImpl {
 
     @Override
     public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, game);
+        return targets.canChoose(sourceId, controllerId, game);
     }
 
     @Override

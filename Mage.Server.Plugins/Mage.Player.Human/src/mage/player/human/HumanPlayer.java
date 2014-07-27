@@ -221,7 +221,7 @@ public class HumanPlayer extends PlayerImpl {
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
         updateGameStatePriority("choose(5)", game);
         while (!abort) {
-            Set<UUID> cards = target.possibleTargets(null, playerId, game);
+            Set<UUID> cards = target.possibleTargets(sourceId, playerId, game);
             if (cards == null || cards.isEmpty()) {
                 return false;
             }
@@ -232,6 +232,9 @@ public class HumanPlayer extends PlayerImpl {
             game.fireSelectTargetEvent(playerId, target.getMessage(), cards, required, options);
             waitForResponse(game);
             if (response.getUUID() != null) {
+                if (!cards.contains(response.getUUID())) {
+                    continue;
+                }
                 if (target instanceof TargetPermanent) {
                     if (((TargetPermanent)target).canTarget(playerId, response.getUUID(), sourceId, game, false)) {
                         target.add(response.getUUID(), game);

@@ -94,7 +94,7 @@ public class TargetCardInYourGraveyard extends TargetCard {
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         Player player = game.getPlayer(sourceControllerId);
-        for (Card card : player.getGraveyard().getCards(filter, game)) {
+        for (Card card : player.getGraveyard().getCards(filter, sourceId, sourceControllerId, game)) {
             if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, sourceControllerId))) {
                 possibleTargets.add(card.getId());
             }
@@ -135,7 +135,7 @@ public class TargetCardInYourGraveyard extends TargetCard {
                 return true;
             }
             int possibleTargets = 0;
-            for (Card card : player.getGraveyard().getCards(filter, game)) {
+            for (Card card : player.getGraveyard().getCards(filter, sourceId, sourceControllerId, game)) {
                 if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, sourceControllerId))) {
                     possibleTargets++;
                     if (possibleTargets >= this.minNumberOfTargets) {
