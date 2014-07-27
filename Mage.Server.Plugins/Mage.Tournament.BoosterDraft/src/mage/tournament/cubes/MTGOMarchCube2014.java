@@ -138,7 +138,7 @@ public class MTGOMarchCube2014 extends DraftCube {
         cubeCards.add(new CardIdentity("Terminus",""));
         cubeCards.add(new CardIdentity("Wrath of God",""));
         cubeCards.add(new CardIdentity("Phyrexian Metamorph",""));
-        cubeCards.add(new CardIdentity("Ætherling",""));
+        cubeCards.add(new CardIdentity("AEtherling",""));
         cubeCards.add(new CardIdentity("Augur of Bolas",""));
         cubeCards.add(new CardIdentity("Consecrated Sphinx",""));
         cubeCards.add(new CardIdentity("Coralhelm Commander",""));
@@ -737,7 +737,7 @@ public class MTGOMarchCube2014 extends DraftCube {
         cubeCards.add(new CardIdentity("Kozilek, Butcher of Truth",""));
         cubeCards.add(new CardIdentity("Ulamog, the Infinite Gyre",""));
         cubeCards.add(new CardIdentity("Emrakul, the Aeons Torn",""));
-        cubeCards.add(new CardIdentity("Æther Vial",""));
+        cubeCards.add(new CardIdentity("AEther Vial",""));
         cubeCards.add(new CardIdentity("Elixir of Immortality",""));
         cubeCards.add(new CardIdentity("Pithing Needle",""));
         cubeCards.add(new CardIdentity("Relic of Progenitus",""));
