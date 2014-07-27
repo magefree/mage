@@ -11,6 +11,13 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class MomentousFallTest extends CardTestPlayerBase {
 
+    /**
+     *  Momentous Fall
+     *  Instant {2}{G}{G}
+     *  As an additional cost to cast Momentous Fall, sacrifice a creature.
+     *  You draw cards equal to the sacrificed creature's power, then you
+     *  gain life equal to its toughness.
+     */
     @Test
     public void testSacrificeCostAndLKI() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);

@@ -82,24 +82,29 @@ class MomentousFallEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int power = 0;
-        int toughness = 0;
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
 
-        for (Cost cost: source.getCosts()) {
-            if (cost instanceof SacrificeTargetCost && ((SacrificeTargetCost)cost).getPermanents().size() > 0) {
-                power = ((SacrificeTargetCost)cost).getPermanents().get(0).getPower().getValue();
-                toughness = ((SacrificeTargetCost)cost).getPermanents().get(0).getToughness().getValue();
-                break;
+            int power = 0;
+            int toughness = 0;
+
+            for (Cost cost : source.getCosts()) {
+                if (cost instanceof SacrificeTargetCost && ((SacrificeTargetCost) cost).getPermanents().size() > 0) {
+                    power = ((SacrificeTargetCost) cost).getPermanents().get(0).getPower().getValue();
+                    toughness = ((SacrificeTargetCost) cost).getPermanents().get(0).getToughness().getValue();
+                    break;
+                }
             }
+            if (power > 0) {
+                controller.drawCards(power, game);
+            }
+            if (toughness > 0) {
+                controller.gainLife(toughness, game);
+            }
+            return true;
         }
-        if (power > 0) {
-            player.drawCards(power, game);
-        }
-        if (toughness > 0) {
-            player.gainLife(toughness, game);
-        }
-        return true;
+        return false;
+
     }
 
     @Override
