@@ -60,7 +60,7 @@ public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
         this.rulePrefix = rulePrefix;
     }
 
-    public EntersBattlefieldTriggeredAbility(EntersBattlefieldTriggeredAbility ability) {
+    public EntersBattlefieldTriggeredAbility(final EntersBattlefieldTriggeredAbility ability) {
         super(ability);
         this.rulePrefix = ability.rulePrefix;
         this.noRule = ability.noRule;
