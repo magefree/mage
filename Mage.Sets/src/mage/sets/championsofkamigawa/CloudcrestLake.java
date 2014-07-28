@@ -46,6 +46,9 @@ public class CloudcrestLake extends CardImpl {
     public CloudcrestLake(UUID ownerId) {
         super(ownerId, 274, "Cloudcrest Lake", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "CHK";
+        
+        // {T}: Add {1} to your mana pool.
+        // {T}: Add {W} or {U} to your mana pool. Cloudcrest Lake doesn't untap during your next untap step.
         this.addAbility(new ColorlessManaAbility());
         Ability whiteManaAbility = new WhiteManaAbility();
         whiteManaAbility.addEffect(new SkipNextUntapSourceEffect());

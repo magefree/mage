@@ -1,7 +1,7 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
@@ -12,7 +12,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author nantuko
  */
-public class SkipEnchantedUntapEffect extends ReplacementEffectImpl {
+public class SkipEnchantedUntapEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public SkipEnchantedUntapEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
@@ -34,12 +34,7 @@ public class SkipEnchantedUntapEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
             Permanent enchantment = game.getPermanent(source.getSourceId());
             if (enchantment != null && enchantment.getAttachedTo() != null) {
