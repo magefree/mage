@@ -23,7 +23,7 @@ import mage.game.Game;
  */
 public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
 
-    private Condition condition;
+    private final Condition condition;
     private String ruleText = null;
 
     private static final Effects emptyEffects = new Effects();
@@ -34,7 +34,7 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
         this.ruleText = rule;
     }
 
-    public ConditionalActivatedAbility(Zone zone, Effect effect, Costs costs, Condition condition, String rule) {
+    public ConditionalActivatedAbility(Zone zone, Effect effect, Costs<Cost> costs, Condition condition, String rule) {
         super(zone, effect, costs);
         this.condition = condition;
         this.ruleText = rule;

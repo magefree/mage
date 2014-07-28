@@ -31,7 +31,6 @@ package mage.abilities.condition.common;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.constants.PhaseStep;
-import mage.constants.TurnPhase;
 import mage.game.Game;
 
 /**
@@ -41,19 +40,25 @@ import mage.game.Game;
 public class IsStepCondition implements Condition {
 
     protected PhaseStep phaseStep;
+    protected boolean onlyDuringYourSteps;
 
     public  IsStepCondition(PhaseStep phaseStep) {
+        this(phaseStep, true);
+    }
+    
+    public  IsStepCondition(PhaseStep phaseStep, boolean onlyDuringYourSteps) {
         this.phaseStep = phaseStep;
+        this.onlyDuringYourSteps = onlyDuringYourSteps;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.getActivePlayerId().equals(source.getSourceId()) && game.getStep().getType().equals(phaseStep);
+        return phaseStep.equals(game.getStep().getType()) && (!onlyDuringYourSteps || game.getActivePlayerId().equals(source.getControllerId()));
     }
 
     @Override
     public String toString() {
-        return new StringBuilder("during your ").append(phaseStep.toString()).toString();
+        return new StringBuilder("during ").append(onlyDuringYourSteps ? "your ":"the ").append(phaseStep.getStepText()).toString();
     }
 
 }

@@ -33,14 +33,15 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.MetalcraftCost;
-import mage.abilities.costs.common.OnlyDuringUpkeepCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.PhaseStep;
 
 /**
  *
@@ -56,11 +57,19 @@ public class KuldothaPhoenix extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
+        // Flying, haste
+        
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
-        Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true), new ManaCostsImpl("{4}"));
-        ability.addCost(new MetalcraftCost());
-        ability.addCost(new OnlyDuringUpkeepCost());
+        // Metalcraft - : Return Kuldotha Phoenix from your graveyard to the battlefield. 
+        // Activate this ability only during your upkeep and only if you control three or more artifacts.        
+        Ability ability = new ConditionalActivatedAbility(Zone.GRAVEYARD, 
+                new ReturnSourceFromGraveyardToBattlefieldEffect(true), 
+                new ManaCostsImpl("{4}"), 
+                new IsStepCondition(PhaseStep.UPKEEP),
+                null
+        );        
+        ability.addCost(new MetalcraftCost());       
         this.addAbility(ability);
     }
 

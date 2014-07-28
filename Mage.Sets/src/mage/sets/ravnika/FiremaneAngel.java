@@ -34,16 +34,17 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.costs.common.OnlyDuringUpkeepCost;
+import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.constants.PhaseStep;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -71,12 +72,12 @@ public class FiremaneAngel extends CardImpl {
         // At the beginning of your upkeep, if Firemane Angel is in your graveyard or on the battlefield, you may gain 1 life.
         Ability ability = new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.ALL, new GainLifeEffect(1), TargetController.YOU, true),
-                SourceOnBattelfieldOrGraveyardCondition.getInstance(), "");
+                SourceOnBattelfieldOrGraveyardCondition.getInstance(), 
+                "At the beginning of your upkeep, if {this} is in your graveyard or on the battlefield, you may gain 1 life", true);
         this.addAbility(ability);
         // {6}{R}{R}{W}{W}: Return Firemane Angel from your graveyard to the battlefield. Activate this ability only during your upkeep.
-        ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl("{6}{R}{R}{W}{W}"));
-        ability.addCost(new OnlyDuringUpkeepCost());
-        this.addAbility(ability);
+        this.addAbility(new ConditionalActivatedAbility(Zone.GRAVEYARD, 
+                new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl("{6}{R}{R}{W}{W}"), new IsStepCondition(PhaseStep.UPKEEP), null));        
     }
 
     public FiremaneAngel(final FiremaneAngel card) {

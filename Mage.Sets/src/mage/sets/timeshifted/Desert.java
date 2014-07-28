@@ -29,7 +29,7 @@ package mage.sets.timeshifted;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -41,7 +41,6 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
-import mage.game.Game;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -64,7 +63,7 @@ public class Desert extends CardImpl {
         // {tap}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Desert deals 1 damage to target attacking creature. Activate this ability only during the end of combat step.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost(), IsEndOfCombatStep.getInstance(), null);
+        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost(), new IsStepCondition(PhaseStep.END_COMBAT, false), null);
         Target target = new TargetCreaturePermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);
@@ -78,24 +77,4 @@ public class Desert extends CardImpl {
     public Desert copy() {
         return new Desert(this);
     }
-}
-
-class IsEndOfCombatStep implements Condition {
-
-    private static IsEndOfCombatStep fInstance = new IsEndOfCombatStep();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return game.getStep().getType() == PhaseStep.END_COMBAT;
-    }
-
-    @Override
-    public String toString() {
-        return "during the end of combat step";
-    }
-
 }

@@ -33,13 +33,14 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.OnlyDuringUpkeepCost;
+import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.PlainscyclingAbility;
 import mage.cards.CardImpl;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
 
 /**
@@ -60,9 +61,14 @@ public class EternalDragon extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // {3}{W}{W}: Return Eternal Dragon from your graveyard to your hand. Activate this ability only during your upkeep.
-        Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnToHandSourceEffect(), new ManaCostsImpl("{3}{W}{W}"));
-        ability.addCost(new OnlyDuringUpkeepCost());
+
+        // {3}{W}{W}: Return Eternal Dragon from your graveyard to your hand. Activate this ability only during your upkeep.        
+        Ability ability = new ConditionalActivatedAbility(Zone.GRAVEYARD, 
+                new ReturnToHandSourceEffect(), 
+                new ManaCostsImpl("{3}{W}{W}"), 
+                new IsStepCondition(PhaseStep.UPKEEP),
+                null
+        );          
         this.addAbility(ability);
         // PlainscyclingAbility {2}
         this.addAbility(new PlainscyclingAbility(new ManaCostsImpl("{2}")));

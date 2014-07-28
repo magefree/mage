@@ -30,15 +30,14 @@ package mage.sets.futuresight;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.OnlyDuringUpkeepCost;
+import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.PhaseStep;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
@@ -61,11 +60,12 @@ public class LlanowarAugur extends CardImpl {
 
         // Sacrifice Llanowar Augur: Target creature gets +3/+3 and gains trample until end of turn.
         // Activate this ability only during your upkeep.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostTargetEffect(3, 3, Duration.EndOfTurn),
-                new SacrificeSourceCost());
-        ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
-        ability.addCost(new OnlyDuringUpkeepCost());
+        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, 
+                new BoostTargetEffect(3, 3, Duration.EndOfTurn), 
+                new SacrificeSourceCost(), 
+                new IsStepCondition(PhaseStep.UPKEEP),
+                null
+        );        
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

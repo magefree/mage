@@ -33,15 +33,15 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.OnlyDuringUpkeepCost;
+import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.SkipUntapSourceEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.PhaseStep;
 
 /**
  *
@@ -64,9 +64,8 @@ public class ColossusOfSardia extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipUntapSourceEffect()));
 
         // {9}: Untap Colossus of Sardia. Activate this ability only during your upkeep.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{9}"));
-        ability.addCost(new OnlyDuringUpkeepCost());
-        this.addAbility(ability);
+        this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD, 
+                new UntapSourceEffect(), new ManaCostsImpl("{9}"), new IsStepCondition(PhaseStep.UPKEEP), null));
     }
 
     public ColossusOfSardia(final ColossusOfSardia card) {

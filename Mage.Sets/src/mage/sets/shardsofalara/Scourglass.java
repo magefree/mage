@@ -31,12 +31,12 @@ import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.OnlyDuringUpkeepCost;
+import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -49,6 +49,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 public class Scourglass extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("permanents except for artifacts and lands");
+    
     static{
         filter.add(Predicates.not(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.LAND))));
     }
@@ -60,9 +61,8 @@ public class Scourglass extends CardImpl {
         this.color.setWhite(true);
 
         // {tap}, Sacrifice Scourglass: Destroy all permanents except for artifacts and lands. Activate this ability only during your upkeep.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAllEffect(filter), new TapSourceCost());
-        ability.addCost(new OnlyDuringUpkeepCost());
-        this.addAbility(ability);
+        this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD, 
+                new DestroyAllEffect(filter), new TapSourceCost(),  new IsStepCondition(PhaseStep.UPKEEP), null));
     }
 
     public Scourglass(final Scourglass card) {

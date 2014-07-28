@@ -18,7 +18,7 @@ public interface Condition extends Serializable {
         Equal("=="),
         LessThan("<");
 
-        private String text;
+        private final String text;
 
         ComparisonType(String text) {
             this.text = text;
