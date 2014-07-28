@@ -27,15 +27,17 @@
  */
 package mage.sets.tenth;
 
-
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -70,8 +72,7 @@ public class GaeasHerald extends CardImpl {
 }
 
 
-class CantCounterEffect extends ReplacementEffectImpl {
-
+class CantCounterEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public CantCounterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
@@ -94,12 +95,7 @@ class CantCounterEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.COUNTER) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && spell.getCardType().contains(CardType.CREATURE)) {

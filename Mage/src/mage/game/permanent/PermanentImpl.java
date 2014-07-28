@@ -750,9 +750,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             if (hasProtectionFrom(source, game)) {
                 return false;
             }
-            // needed to get the correct possible targets if target replacement effects are active
+            // needed to get the correct possible targets if target rule modification effects are active
             // e.g. Fiendslayer Paladin tried to target with Ultimate Price
-            if (game.replaceEvent(GameEvent.getEvent(EventType.TARGET, this.getId(), source.getId(), sourceControllerId))) {
+            if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(EventType.TARGET, this.getId(), source.getId(), sourceControllerId), game, true)) {
                 return false;
             }
         }

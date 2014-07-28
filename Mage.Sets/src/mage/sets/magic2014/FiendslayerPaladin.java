@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.Card;
@@ -44,6 +44,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 
 /**
@@ -83,7 +84,7 @@ public class FiendslayerPaladin extends CardImpl {
     }
 }
 
-class FiendslayerPaladinEffect extends ReplacementEffectImpl {
+class FiendslayerPaladinEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public FiendslayerPaladinEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
@@ -105,12 +106,16 @@ class FiendslayerPaladinEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public String getInfoMessage(Ability source, Game game) {
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (sourcePermanent != null) {
+            return sourcePermanent.getLogName() + " can't be the target of black or red spells opponents control";
+        }
+        return null;
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.TARGET) {
             Card targetCard = game.getCard(event.getTargetId());
             StackObject stackObject = (StackObject) game.getStack().getStackObject(event.getSourceId());

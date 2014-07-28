@@ -11,7 +11,6 @@ import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredA
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;

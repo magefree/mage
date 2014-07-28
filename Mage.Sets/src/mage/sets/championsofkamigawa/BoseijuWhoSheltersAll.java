@@ -37,6 +37,7 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
@@ -125,7 +126,7 @@ class BoseijuWhoSheltersAllWatcher extends Watcher {
     }
 }
 
-class BoseijuWhoSheltersAllCantCounterEffect extends ReplacementEffectImpl {
+class BoseijuWhoSheltersAllCantCounterEffect extends ContinuousRuleModifiyingEffectImpl {
 
     private static final FilterCard filter = new FilterInstantOrSorceryCard();
     
@@ -149,17 +150,16 @@ class BoseijuWhoSheltersAllCantCounterEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(event.getPlayerId());
-        Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (player != null && spell != null) {
-            game.informPlayers(new StringBuilder(spell.getName()).append(" can't be countered by spells or abilities (Boseiju, Who Shelters All) - counter ignored").toString());
+    public String getInfoMessage(Ability source, Game game) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (sourceObject != null) {
+            return "This spell can't be countered by spells or abilities (" + sourceObject.getName() + ").";
         }
-        return true;
+        return null;
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.COUNTER) {
             BoseijuWhoSheltersAllWatcher watcher = (BoseijuWhoSheltersAllWatcher) game.getState().getWatchers().get("ManaPaidFromBoseijuWhoSheltersAllWatcher");
             Spell spell = game.getStack().getSpell(event.getTargetId());

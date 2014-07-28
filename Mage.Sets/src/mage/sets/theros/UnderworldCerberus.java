@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.ReturnToHandFromGraveyardAllEffect;
@@ -84,7 +85,7 @@ public class UnderworldCerberus extends CardImpl {
     }
 }
 
-class UnderworldCerberusEffect extends ReplacementEffectImpl {
+class UnderworldCerberusEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public UnderworldCerberusEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
@@ -106,12 +107,7 @@ class UnderworldCerberusEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.TARGET) {
             Card targetCard = game.getCard(event.getTargetId());
             StackObject stackObject = (StackObject) game.getStack().getStackObject(event.getSourceId());

@@ -28,11 +28,11 @@
 
 package mage.abilities.effects.common;
 
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.filter.FilterObject;
 import mage.filter.FilterSpell;
 import mage.game.Game;
@@ -44,7 +44,7 @@ import mage.game.stack.Spell;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CantCounterControlledEffect extends ReplacementEffectImpl {
+public class CantCounterControlledEffect extends ContinuousRuleModifiyingEffectImpl {
 
     private FilterSpell filterTarget;
     private FilterObject filterSource;
@@ -62,10 +62,12 @@ public class CantCounterControlledEffect extends ReplacementEffectImpl {
 
     public CantCounterControlledEffect(final CantCounterControlledEffect effect) {
         super(effect);
-        if (effect.filterTarget != null)
+        if (effect.filterTarget != null) {
             this.filterTarget = effect.filterTarget.copy();
-        if (effect.filterSource != null)
+        }
+        if (effect.filterSource != null) {
             this.filterSource = effect.filterSource.copy();
+        }
     }
 
     @Override
@@ -79,19 +81,14 @@ public class CantCounterControlledEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == EventType.COUNTER) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && spell.getControllerId().equals(source.getControllerId())
                     && filterTarget.match(spell, game)) {
-                if (filterSource == null)
+                if (filterSource == null) {
                     return true;
-                else {
+                } else {
                     MageObject sourceObject = game.getObject(source.getSourceId());
                     if (sourceObject != null && filterSource.match(sourceObject, game)) {
                         return true;

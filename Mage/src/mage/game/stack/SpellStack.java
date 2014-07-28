@@ -30,6 +30,7 @@ package mage.game.stack;
 
 import java.util.ArrayDeque;
 import java.util.UUID;
+import mage.MageObject;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -73,18 +74,20 @@ public class SpellStack extends ArrayDeque<StackObject> {
 
     public boolean counter(UUID objectId, UUID sourceId, Game game) {
         StackObject stackObject = getStackObject(objectId);
-        if (stackObject != null) {
+        MageObject sourceObject = game.getObject(sourceId);
+        if (stackObject != null && sourceObject != null) {
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, objectId, sourceId, stackObject.getControllerId()))) {
                 if ( stackObject instanceof Spell ) {
                     game.rememberLKI(objectId, Zone.STACK, (Spell)stackObject);
                 }
                 this.remove(stackObject);
                 stackObject.counter(sourceId, game);
-                game.informPlayers(new StringBuilder(stackObject.getName()).append(" is countered").toString());
+                game.informPlayers(new StringBuilder(stackObject.getName()).append(" is countered by ").append(sourceObject.getLogName()).toString());
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, objectId, sourceId, stackObject.getControllerId()));
-                return true;
+            } else {
+                game.informPlayers(new StringBuilder(stackObject.getName()).append(" could not be countered by ").append(sourceObject.getLogName()).toString());
             }
-            return false;
+            return true;
         }
         return false;
     }

@@ -30,7 +30,7 @@ package mage.abilities.effects.common;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.cards.Card;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -42,7 +42,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CantCounterSourceEffect extends ReplacementEffectImpl {
+public class CantCounterSourceEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public CantCounterSourceEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit);
@@ -64,12 +64,7 @@ public class CantCounterSourceEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == EventType.COUNTER) {
             Card card = game.getCard(source.getSourceId());
             if (card != null) {

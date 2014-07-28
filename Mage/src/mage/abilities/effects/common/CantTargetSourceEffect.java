@@ -28,10 +28,10 @@
 
 package mage.abilities.effects.common;
 
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.abilities.Ability;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.filter.FilterStackObject;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -42,9 +42,9 @@ import mage.game.stack.StackObject;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CantTargetSourceEffect extends ReplacementEffectImpl {
+public class CantTargetSourceEffect extends ContinuousRuleModifiyingEffectImpl {
 
-    private FilterStackObject filterSource;
+    private final FilterStackObject filterSource;
 
     public CantTargetSourceEffect(FilterStackObject filterSource, Duration duration) {
         super(duration, Outcome.Benefit);
@@ -68,12 +68,7 @@ public class CantTargetSourceEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == EventType.TARGET && event.getTargetId().equals(source.getSourceId())) {
             StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
             if (sourceObject != null && filterSource.match(sourceObject, source.getControllerId(), game)) {

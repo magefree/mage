@@ -28,10 +28,10 @@
 
 package mage.abilities.effects.common;
 
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.abilities.Ability;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterStackObject;
 import mage.game.Game;
@@ -44,7 +44,7 @@ import mage.game.stack.StackObject;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CantTargetEffect extends ReplacementEffectImpl {
+public class CantTargetEffect extends ContinuousRuleModifiyingEffectImpl {
 
     private FilterPermanent filterTarget;
     private FilterStackObject filterSource;
@@ -82,12 +82,7 @@ public class CantTargetEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == EventType.TARGET) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && filterTarget.match(permanent, source.getSourceId(), source.getControllerId(), game)) {

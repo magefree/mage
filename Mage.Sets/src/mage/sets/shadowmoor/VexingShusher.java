@@ -29,10 +29,12 @@ package mage.sets.shadowmoor;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.CantCounterAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -80,7 +82,7 @@ public class VexingShusher extends CardImpl {
     }
 }
 
-class VexingShusherCantCounterTargetEffect extends ReplacementEffectImpl {
+class VexingShusherCantCounterTargetEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public VexingShusherCantCounterTargetEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
@@ -102,12 +104,16 @@ class VexingShusherCantCounterTargetEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public String getInfoMessage(Ability source, Game game) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (sourceObject != null) {
+            return "This spell can't be countered by spells or abilities (" + sourceObject.getName() + ").";
+        }
+        return null;
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         return event.getType() == EventType.COUNTER && event.getTargetId().equals(targetPointer.getFirst(game, source));
     }
 

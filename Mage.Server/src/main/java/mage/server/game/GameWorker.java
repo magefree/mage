@@ -61,10 +61,13 @@ public class GameWorker implements Callable {
             game.cleanUp();
         } catch (MageException ex) {
             logger.fatal("GameWorker mage error [" + game.getId() + "]" +ex, ex);
+            ex.printStackTrace();
         } catch (Exception e) {
-            logger.fatal("GameWorker general exception [" + game.getId() + "]" + e, e);
+            logger.fatal("GameWorker general exception [" + game.getId() + "]" + e.getMessage(), e);
+            e.printStackTrace();
         } catch (Error err) {
             logger.fatal("GameWorker general error [" + game.getId() + "]" +err, err);
+            err.printStackTrace();
         }
         return null;
     }

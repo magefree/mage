@@ -36,6 +36,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.mana.ColorlessManaAbility;
@@ -208,7 +209,7 @@ class CavernOfSoulsWatcher extends Watcher {
     }
 }
 
-class CavernOfSoulsCantCounterEffect extends ReplacementEffectImpl {
+class CavernOfSoulsCantCounterEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public CavernOfSoulsCantCounterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
@@ -230,17 +231,16 @@ class CavernOfSoulsCantCounterEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player caster = game.getPlayer(event.getPlayerId());
+    public String getInfoMessage(Ability source, Game game) {
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (caster != null) {
-            game.informPlayer(caster, "This spell can't be countered because a colored mana from " + sourceObject.getName() + " was spent to cast it.");
+        if (sourceObject != null) {
+            return "This spell can't be countered because a colored mana from " + sourceObject.getName() + " was spent to cast it.";
         }
-        return true;
+        return null;
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.COUNTER) {
             CavernOfSoulsWatcher watcher = (CavernOfSoulsWatcher) game.getState().getWatchers().get("ManaPaidFromCavernOfSoulsWatcher");
             Spell spell = game.getStack().getSpell(event.getTargetId());

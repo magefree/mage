@@ -33,6 +33,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
@@ -128,14 +129,14 @@ class BaneFireEffect extends OneShotEffect {
             return true;
         }
         if (targetCreature != null) {
-            targetCreature.damage(damage, source.getSourceId(), game, preventable, false);
+            targetCreature.damage(damage, source.getSourceId(), game, false, preventable);
             return true;
         }
         return false;
     }
 }
 
-class BanefireCantCounterEffect extends ReplacementEffectImpl {
+class BanefireCantCounterEffect extends ContinuousRuleModifiyingEffectImpl {
 
     Condition condition = new testCondition(new ManacostVariableValue(), 5);
 
@@ -160,12 +161,7 @@ class BanefireCantCounterEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == EventType.COUNTER) {
             Card card = game.getCard(source.getSourceId());
             if (card != null) {

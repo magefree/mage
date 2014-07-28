@@ -28,7 +28,7 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 
-public class CantActivateAbilitiesAttachedEffect extends ReplacementEffectImpl {
+public class CantActivateAbilitiesAttachedEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public CantActivateAbilitiesAttachedEffect() {
         super(Duration.WhileOnBattlefield, Outcome.UnboostCreature);
@@ -62,12 +62,7 @@ public class CantActivateAbilitiesAttachedEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
             Permanent enchantment = game.getPermanent(source.getSourceId());
             if (enchantment != null && enchantment.getAttachedTo() != null) {

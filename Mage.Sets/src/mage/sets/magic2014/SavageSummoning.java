@@ -33,9 +33,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.CantCounterAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -141,9 +143,9 @@ class SavageSummoningAsThoughEffect extends AsThoughEffectImpl {
 
 class SavageSummoningWatcher extends Watcher {
 
-    private Set<String> savageSummoningSpells = new HashSet<String>();;
-    private Map<UUID, Set<String>> spellsCastWithSavageSummoning = new LinkedHashMap<UUID, Set<String>>();
-    private Map<String, Set<String>> cardsCastWithSavageSummoning = new LinkedHashMap<String, Set<String>>();
+    private Set<String> savageSummoningSpells = new HashSet<>();;
+    private Map<UUID, Set<String>> spellsCastWithSavageSummoning = new LinkedHashMap<>();
+    private Map<String, Set<String>> cardsCastWithSavageSummoning = new LinkedHashMap<>();
 
     public SavageSummoningWatcher() {
         super("consumeSavageSummoningWatcher", WatcherScope.PLAYER);
@@ -171,9 +173,9 @@ class SavageSummoningWatcher extends Watcher {
             if (isSavageSummoningSpellActive() && event.getPlayerId().equals(getControllerId())) {
                 Spell spell = game.getStack().getSpell(event.getTargetId());
                 if (spell != null && spell.getCardType().contains(CardType.CREATURE)) {                    
-                    spellsCastWithSavageSummoning.put(spell.getId(), new HashSet<String>(savageSummoningSpells));
+                    spellsCastWithSavageSummoning.put(spell.getId(), new HashSet<>(savageSummoningSpells));
                     String cardKey = new StringBuilder(spell.getCard().getId().toString()).append("_").append(spell.getCard().getZoneChangeCounter()).toString();
-                    cardsCastWithSavageSummoning.put(cardKey, new HashSet<String>(savageSummoningSpells));
+                    cardsCastWithSavageSummoning.put(cardKey, new HashSet<>(savageSummoningSpells));
                     savageSummoningSpells.clear();
                 }
             }
@@ -219,7 +221,7 @@ class SavageSummoningWatcher extends Watcher {
 
 }
 
-class SavageSummoningCantCounterEffect extends ReplacementEffectImpl {
+class SavageSummoningCantCounterEffect extends ContinuousRuleModifiyingEffectImpl {
     private SavageSummoningWatcher watcher;
     private int zoneChangeCounter;
 
@@ -255,12 +257,16 @@ class SavageSummoningCantCounterEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public String getInfoMessage(Ability source, Game game) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (sourceObject != null) {
+            return "This creature spell can't be countered (" + sourceObject.getName() + ").";
+        }
+        return null;
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
         if (event.getType() == GameEvent.EventType.COUNTER) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && watcher.isSpellCastWithThisSavageSummoning(spell.getId(), source.getSourceId(), zoneChangeCounter)) {
