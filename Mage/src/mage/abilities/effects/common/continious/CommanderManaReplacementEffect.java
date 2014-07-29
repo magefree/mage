@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common.continious;
 
+import java.util.Iterator;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -34,8 +35,10 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
+import mage.game.command.CommandObject;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -48,6 +51,8 @@ import mage.game.events.ManaEvent;
  * of that player's commander, that amount of colorless mana is added to that player's mana pool instead.
  */
 public class CommanderManaReplacementEffect extends ReplacementEffectImpl {
+
+    private static final transient Logger logger = Logger.getLogger(CommanderManaReplacementEffect.class);
 
     private final UUID playerId;
     private final Mana commanderMana;
@@ -114,6 +119,16 @@ public class CommanderManaReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.ADD_MANA && event.getPlayerId().equals(playerId)) {
+            if (logger.isDebugEnabled()) {
+                if (!game.getGameType().toString().startsWith("Commander")) {
+                    logger.debug("Non Commander game has active CommanderManaReplacementEffect");
+                    Iterator it = game.getState().getCommand().iterator();
+                    while (it.hasNext()) {
+                        Object object = it.next();
+                        logger.debug("Class: " + object.getClass() + " - " + object.toString());
+                    }
+                }
+            }
             return true;
         }
         return false;
