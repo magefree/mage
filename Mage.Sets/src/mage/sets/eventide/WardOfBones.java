@@ -95,7 +95,7 @@ class WardOfBonesEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
-    public String getInfoMessage(Ability source, Game game) {
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
             return "You can't play the land or cast the spell (" + mageObject.getLogName() + " in play).";
@@ -104,7 +104,7 @@ class WardOfBonesEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.PLAY_LAND
                 || event.getType() == GameEvent.EventType.CAST_SPELL
                 && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {

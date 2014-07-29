@@ -52,6 +52,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author BetaSteward_at_googlemail.com
  */
 public class AjaniVengeant extends CardImpl {
+    
     private static final FilterPermanent filter = new FilterPermanent("lands");
 
     static {
@@ -66,11 +67,12 @@ public class AjaniVengeant extends CardImpl {
         this.color.setWhite(true);
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
-
+        // +1: Target permanent doesn't untap during its controller's next untap step.
         LoyaltyAbility ability1 = new LoyaltyAbility(new SkipNextUntapTargetEffect(), 1);
         ability1.addTarget(new TargetPermanent());
         this.addAbility(ability1);
 
+        // −2: Ajani Vengeant deals 3 damage to target creature or player and you gain 3 life.
         Effects effects1 = new Effects();
         effects1.add(new DamageTargetEffect(3));
         effects1.add(new GainLifeEffect(3));
@@ -78,6 +80,7 @@ public class AjaniVengeant extends CardImpl {
         ability2.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability2);
 
+        // −7: Destroy all lands target player controls.
         LoyaltyAbility ability3 = new LoyaltyAbility(new DestroyAllControlledTargetEffect(filter), -7);
         ability3.addTarget(new TargetPlayer());
         this.addAbility(ability3);

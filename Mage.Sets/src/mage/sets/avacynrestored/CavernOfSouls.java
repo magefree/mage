@@ -231,7 +231,7 @@ class CavernOfSoulsCantCounterEffect extends ContinuousRuleModifiyingEffectImpl 
     }
 
     @Override
-    public String getInfoMessage(Ability source, Game game) {
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (sourceObject != null) {
             return "This spell can't be countered because a colored mana from " + sourceObject.getName() + " was spent to cast it.";
@@ -240,7 +240,7 @@ class CavernOfSoulsCantCounterEffect extends ContinuousRuleModifiyingEffectImpl 
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.COUNTER) {
             CavernOfSoulsWatcher watcher = (CavernOfSoulsWatcher) game.getState().getWatchers().get("ManaPaidFromCavernOfSoulsWatcher");
             Spell spell = game.getStack().getSpell(event.getTargetId());

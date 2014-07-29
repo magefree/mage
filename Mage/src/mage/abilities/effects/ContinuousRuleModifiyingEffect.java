@@ -42,18 +42,33 @@ public interface ContinuousRuleModifiyingEffect extends ContinuousEffect {
      * 
      * @param event the event to check if it may happen
      * @param source the ability of the effect
-     * @param checkPlayableMode is the call for checking playables or to prevent a real event
      * @param game the game
      * @return 
      */
-    boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game);
+    boolean applies(GameEvent event, Ability source, Game game);
  
+    /**
+     * Defines if the user should get a message about the rule modifying effect
+     * if he was applied
+     * 
+     * @return true if user should be informed
+     */
+    boolean sendMessageToUser();
+
+    /**
+     * Defines if the a message should be send to game log about the rule modifying effect
+     * if he was applied
+     * 
+     * @return true if message should go to game log
+     */
+    boolean sendMessageToGameLog();
     /**
      * Returns a message text that informs the player why he can't do something.
      * 
      * @param source the ability of the effect
+     * @param event
      * @param game the game
      * @return 
      */
-    String getInfoMessage(Ability source, Game game);
+    String getInfoMessage(Ability source, GameEvent event, Game game);
 }

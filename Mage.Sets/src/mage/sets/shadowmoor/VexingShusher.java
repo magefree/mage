@@ -104,7 +104,7 @@ class VexingShusherCantCounterTargetEffect extends ContinuousRuleModifiyingEffec
     }
 
     @Override
-    public String getInfoMessage(Ability source, Game game) {
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (sourceObject != null) {
             return "This spell can't be countered by spells or abilities (" + sourceObject.getName() + ").";
@@ -113,7 +113,7 @@ class VexingShusherCantCounterTargetEffect extends ContinuousRuleModifiyingEffec
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getType() == EventType.COUNTER && event.getTargetId().equals(targetPointer.getFirst(game, source));
     }
 

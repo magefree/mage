@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -98,10 +98,10 @@ public class TidebinderMage extends CardImpl {
     }
 }
 
-class TidebinderMageEffect extends ReplacementEffectImpl {
+class TidebinderMageEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public TidebinderMageEffect() {
-        super(Duration.OneUse, Outcome.Detriment);
+        super(Duration.OneUse, Outcome.Detriment, false, false);
         this.staticText = "That creature doesn't untap during its controller's untap step for as long as you control {this}";
     }
 
@@ -120,30 +120,25 @@ class TidebinderMageEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         // Source must be on the battlefield (it's neccessary to check here because if as response to the enter
         // the battlefield triggered ability the source dies (or will be exiled), then the ZONE_CHANGE or LOST_CONTROL
         // event will happen before this effect is applied ever)
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent == null || !sourcePermanent.getControllerId().equals(source.getControllerId())) {
-            this.used = true;
+            discard();
             return false;
         }
         if (event.getType() == GameEvent.EventType.LOST_CONTROL) {
             if (event.getTargetId().equals(source.getSourceId())) {
-                this.used = true;
+                discard();
                 return false;
             }
         }
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
             if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                this.used = true;
+                discard();
                 return false;
             }
         }

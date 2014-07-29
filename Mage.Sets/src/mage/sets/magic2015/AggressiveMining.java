@@ -99,7 +99,7 @@ class AggressiveMiningEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getType().equals(GameEvent.EventType.PLAY_LAND) && event.getPlayerId().equals(source.getControllerId());
     }
     

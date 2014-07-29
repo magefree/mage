@@ -29,9 +29,10 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
@@ -41,9 +42,10 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
+ * 
  * @author BetaSteward_at_googlemail.com
  */
-public class SkipUntapTargetEffect extends ReplacementEffectImpl {
+public class SkipUntapTargetEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public SkipUntapTargetEffect(Duration duration) {
         super(duration, Outcome.Detriment);
@@ -64,11 +66,15 @@ public class SkipUntapTargetEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
+        MageObject mageObject = game.getObject(source.getSourceId());
+        Permanent permanentToUntap = game.getPermanent((event.getTargetId()));
+        if (permanentToUntap != null && mageObject != null) {
+            return permanentToUntap.getLogName() + " doesn't untap (" + mageObject.getLogName() + ")";
+        }
+        return null;
     }
-
-
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == EventType.UNTAP) {

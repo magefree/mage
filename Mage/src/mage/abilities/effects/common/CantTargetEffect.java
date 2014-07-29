@@ -82,7 +82,7 @@ public class CantTargetEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.TARGET) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && filterTarget.match(permanent, source.getSourceId(), source.getControllerId(), game)) {

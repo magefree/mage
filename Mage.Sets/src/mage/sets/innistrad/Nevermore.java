@@ -142,7 +142,7 @@ class NevermoreEffect2 extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.CAST_SPELL) {
             MageObject object = game.getObject(event.getSourceId());
             if (object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString()))) {

@@ -105,16 +105,24 @@ public class VraskaTheUnseen extends CardImpl {
 class VraskaTheUnseenGainAbilityEffect extends ContinuousEffectImpl {
 
     protected Ability ability;
+    protected int startingTurn;
 
     public VraskaTheUnseenGainAbilityEffect(Ability ability) {
         super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
         staticText = "Until your next turn, whenever a creature deals combat damage to {this}, destroy that creature";
+        startingTurn = 0;
     }
 
     public VraskaTheUnseenGainAbilityEffect(final VraskaTheUnseenGainAbilityEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game); //To change body of generated methods, choose Tools | Templates.
+        startingTurn = game.getTurnNum();
     }
 
     @Override
@@ -134,7 +142,7 @@ class VraskaTheUnseenGainAbilityEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (game.getPhase().getStep().getType() == PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE)
+        if (startingTurn != 0 && game.getTurnNum() != startingTurn)
         {
             if (game.getActivePlayerId().equals(source.getControllerId())) {
                 return true;
@@ -187,7 +195,7 @@ class VraskaTheUnseenTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Until your next turn, whenever a creature deals combat damage to Vraska the Unseen, destroy that creature";
+        return "Until your next turn, whenever a creature deals combat damage to {this}, destroy that creature";
     }
 
 }

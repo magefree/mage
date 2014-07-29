@@ -28,12 +28,11 @@
 
 package mage.abilities.effects.common;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
@@ -45,13 +44,17 @@ import mage.game.permanent.Permanent;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class SkipNextUntapTargetEffect extends ReplacementEffectImpl {
+public class SkipNextUntapTargetEffect extends ContinuousRuleModifiyingEffectImpl {
 
-    protected Set<UUID> usedFor = new HashSet<>();
-    protected int count;
+    private int validForTurnNum;
 
+    /**
+     * Attention: This effect won't work with targets controlled by different controllers
+     * If this is needed, the validForTurnNum has to be saved per controller.
+     * 
+     */
     public SkipNextUntapTargetEffect() {
-        super(Duration.OneUse, Outcome.Detriment);
+        super(Duration.Custom, Outcome.Detriment, false, true);
     }
 
     public SkipNextUntapTargetEffect(String text) {
@@ -61,10 +64,7 @@ public class SkipNextUntapTargetEffect extends ReplacementEffectImpl {
 
     public SkipNextUntapTargetEffect(final SkipNextUntapTargetEffect effect) {
         super(effect);
-        for (UUID uuid : effect.usedFor) {
-            this.usedFor.add(uuid);
-        }
-        this.count = effect.count;
+        this.validForTurnNum = effect.validForTurnNum;
     }
 
     @Override
@@ -78,32 +78,53 @@ public class SkipNextUntapTargetEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        // not clear how to turn off the effect for more than one target
-        // especially as some targets may leave the battlefield since the effect creation
-        // so handling this in applies method is the only option for now for such cases
-        if (usedFor.size() >= targetPointer.getTargets(game, source).size()) {
-            // this won't work for targets disappeared before applies() return true
-            used = true;
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
+        MageObject mageObject = game.getObject(source.getSourceId());
+        Permanent permanentToUntap = game.getPermanent((event.getTargetId()));
+        if (permanentToUntap != null && mageObject != null) {
+            return permanentToUntap.getLogName() + " doesn't untap (" + mageObject.getLogName() + ")";
         }
-        return true;
+        return null;
     }
-
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        // the check for turn number is needed if multiple effects are added to prevent untap in next untap step
+        // if we don't check for turn number, every turn only one effect would be used instead of correctly only one time
+        // to skip the untap effect.
+        
+        // Discard effect if related to previous turn
+        if (validForTurnNum > 0 && validForTurnNum < game.getTurnNum()) {
+            discard();
+            return false;
+        }
+        // remember the turn of the untap step the effect has to be applied
+        if (GameEvent.EventType.UNTAP_STEP.equals(event.getType())) {            
+            UUID controllerId = null;
+            for(UUID targetId : getTargetPointer().getTargets(game, source)) {
+                Permanent permanent = game.getPermanent(targetId);
+                if (permanent != null) {
+                    controllerId = permanent.getControllerId();
+                }
+            }
+            if (controllerId == null) { // no more targets on the battlefield, effect can be discarded
+                discard();
+                return false;                                
+            }
+            
+            if (game.getActivePlayerId().equals(controllerId)) { 
+                if (validForTurnNum == game.getTurnNum()) { // the turn has a second untap step but the effect is already related to the first untap step
+                    discard();
+                    return false;                                
+                }
+                validForTurnNum = game.getTurnNum();
+            }
+            
+        }
+        
         if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == EventType.UNTAP) {
-            if (targetPointer.getTargets(game, source).contains(event.getTargetId())
-                    && !usedFor.contains(event.getTargetId())) {
-                Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent == null) {
-                    usedFor.add(event.getTargetId());
-                    return false;
-                }
-                if (permanent.getControllerId().equals(game.getActivePlayerId())) {
-                    usedFor.add(event.getTargetId());
-                    return true;
-                }
-
+            if (targetPointer.getTargets(game, source).contains(event.getTargetId())) {
+                return true;
             }
         }
         return false;

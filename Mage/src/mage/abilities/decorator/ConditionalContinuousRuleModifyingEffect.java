@@ -82,17 +82,17 @@ public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModi
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (lockedInCondition && !(condition instanceof FixedCondition)) {
             condition = new FixedCondition(condition.apply(game, source));
         }
         conditionState = condition.apply(game, source);
         if (conditionState) {
             effect.setTargetPointer(this.targetPointer);
-            return effect.applies(event, source, checkPlayableMode, game);
+            return effect.applies(event, source, game);
         } else if (otherwiseEffect != null) {
             otherwiseEffect.setTargetPointer(this.targetPointer);
-            return otherwiseEffect.applies(event, source, checkPlayableMode, game);
+            return otherwiseEffect.applies(event, source, game);
         }
         return false;
     }

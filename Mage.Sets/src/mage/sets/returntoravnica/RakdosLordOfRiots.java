@@ -111,7 +111,7 @@ class RakdosLordOfRiotsCantCastEffect extends ContinuousRuleModifiyingEffectImpl
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.CAST_SPELL && event.getSourceId().equals(source.getSourceId())) {
             if (new OpponentsLostLifeCount().calculate(game, source) == 0) {
                 return true;

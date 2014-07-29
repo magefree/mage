@@ -593,18 +593,31 @@ public class ContinuousEffects implements Serializable {
         }
     }
 
+    /**
+     * Checks if an event wont't happen because of an rule modifying effect
+     * 
+     * @param event
+     * @param game
+     * @param checkPlayableMode true if the event does not really happen but it#s checked if the event would be replaced
+     * @return 
+     */
     public boolean preventedByRuleModification(GameEvent event, Game game, boolean checkPlayableMode) {
        for (ContinuousRuleModifiyingEffect effect: continuousRuleModifyingEffects) {
             for (Ability ability : continuousRuleModifyingEffects.getAbility(effect.getId())) {
                 if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, false)) {
                     if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
-                        if (effect.applies(event, ability, checkPlayableMode, game)) {
+                        if (effect.applies(event, ability, game)) {
                             if (!checkPlayableMode) {
-                                String message = effect.getInfoMessage(ability, game);
+                                String message = effect.getInfoMessage(ability, event, game);
                                 if (message != null && !message.isEmpty()) {
-                                    Player player = game.getPlayer(event.getPlayerId());
-                                    if (player != null) {
-                                        game.informPlayer(player, message);
+                                    if (effect.sendMessageToUser()) {
+                                        Player player = game.getPlayer(event.getPlayerId());
+                                        if (player != null) {
+                                            game.informPlayer(player, message);
+                                        }
+                                    }
+                                    if (effect.sendMessageToGameLog()) {
+                                        game.informPlayers(message);
                                     }
                                 }
                             }

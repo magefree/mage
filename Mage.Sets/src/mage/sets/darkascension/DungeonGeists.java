@@ -27,28 +27,31 @@
  */
 package mage.sets.darkascension;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.*;
-import mage.constants.Zone;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
-
-import java.util.UUID;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -93,10 +96,10 @@ public class DungeonGeists extends CardImpl {
     }
 }
 
-class DungeonGeistsEffect extends ReplacementEffectImpl {
+class DungeonGeistsEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public DungeonGeistsEffect() {
-        super(Duration.OneUse, Outcome.Detriment);
+        super(Duration.Custom, Outcome.Detriment, false, false);
         this.staticText = "That creature doesn't untap during its controller's untap step for as long as you control {this}";
     }
 
@@ -115,11 +118,6 @@ class DungeonGeistsEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         // Source must be on the battlefield (it's neccessary to check here because if as response to the enter
         // the battlefield triggered ability the source dies (or will be exiled), then the ZONE_CHANGE or LOST_CONTROL
@@ -131,18 +129,17 @@ class DungeonGeistsEffect extends ReplacementEffectImpl {
         }
         if (event.getType() == GameEvent.EventType.LOST_CONTROL) {
             if (event.getTargetId().equals(source.getSourceId())) {
-                this.used = true;
+                discard();
                 return false;
             }
         }
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
             if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                this.used = true;
+                discard();
                 return false;
             }
         }
-
 
         if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
             if (event.getTargetId().equals(targetPointer.getFirst(game, source))) {

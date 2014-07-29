@@ -58,8 +58,11 @@ public class FrostTitan extends CardImpl {
         this.color.setBlue(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
-
+        
+        // Whenever Frost Titan becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays 2.        
         this.addAbility(new FrostTitanAbility1());
+
+        // Whenever Frost Titan enters the battlefield or attacks, tap target permanent. It doesn't untap during its controller's next untap step.
         this.addAbility(new FrostTitanAbility2());
     }
 

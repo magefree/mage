@@ -138,7 +138,7 @@ class RenderSilentEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
-    public String getInfoMessage(Ability source, Game game) {
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
             return "You can't cast spells this turn (" + mageObject.getLogName() + ").";
@@ -147,7 +147,7 @@ class RenderSilentEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL ) {
             Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (player != null && player.getId().equals(event.getPlayerId())) {

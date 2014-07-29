@@ -89,7 +89,7 @@ class SteelGolemEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL && event.getPlayerId().equals(source.getControllerId())) {
             MageObject object = game.getObject(event.getSourceId());
             if (object.getCardType().contains(CardType.CREATURE)) {

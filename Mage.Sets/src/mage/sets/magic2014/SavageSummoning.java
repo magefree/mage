@@ -257,7 +257,7 @@ class SavageSummoningCantCounterEffect extends ContinuousRuleModifiyingEffectImp
     }
 
     @Override
-    public String getInfoMessage(Ability source, Game game) {
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (sourceObject != null) {
             return "This creature spell can't be countered (" + sourceObject.getName() + ").";
@@ -266,7 +266,7 @@ class SavageSummoningCantCounterEffect extends ContinuousRuleModifiyingEffectImp
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.COUNTER) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && watcher.isSpellCastWithThisSavageSummoning(spell.getId(), source.getSourceId(), zoneChangeCounter)) {

@@ -130,7 +130,7 @@ class IonaShieldOfEmeriaReplacementEffect extends ContinuousRuleModifiyingEffect
     }
 
     @Override
-    public String getInfoMessage(Ability source, Game game) {
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
         ObjectColor chosenColor = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null && chosenColor != null) {
@@ -140,7 +140,7 @@ class IonaShieldOfEmeriaReplacementEffect extends ContinuousRuleModifiyingEffect
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL) {
             if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId()) ) {
                 ObjectColor chosenColor = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");

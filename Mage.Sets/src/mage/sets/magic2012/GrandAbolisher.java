@@ -95,7 +95,7 @@ class GrandAbolisherEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
-    public String getInfoMessage(Ability source, Game game) {
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
         Player activePlayer = game.getPlayer(game.getActivePlayerId());
         MageObject mageObject = game.getObject(source.getSourceId());
         if (activePlayer != null && mageObject != null) {
@@ -106,7 +106,7 @@ class GrandAbolisherEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         boolean spell = event.getType() == GameEvent.EventType.CAST_SPELL;
         boolean activated = event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
         if ((spell || activated) && game.getActivePlayerId().equals(source.getControllerId()) && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {

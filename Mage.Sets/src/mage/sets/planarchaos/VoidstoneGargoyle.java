@@ -146,7 +146,7 @@ class VoidstoneGargoyleReplacementEffect1 extends ContinuousRuleModifiyingEffect
     }
 
     @Override
-    public String getInfoMessage(Ability source, Game game) {
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
             return "You can't cast a card with that name (" + mageObject.getLogName() + ").";
@@ -155,7 +155,7 @@ class VoidstoneGargoyleReplacementEffect1 extends ContinuousRuleModifiyingEffect
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL) {
             MageObject object = game.getObject(event.getSourceId());
             if (object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString()))) {

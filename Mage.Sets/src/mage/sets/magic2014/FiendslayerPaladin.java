@@ -106,7 +106,7 @@ class FiendslayerPaladinEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
-    public String getInfoMessage(Ability source, Game game) {
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null) {
             return sourcePermanent.getLogName() + " can't be the target of black or red spells opponents control";
@@ -115,7 +115,7 @@ class FiendslayerPaladinEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.TARGET) {
             Card targetCard = game.getCard(event.getTargetId());
             StackObject stackObject = (StackObject) game.getStack().getStackObject(event.getSourceId());

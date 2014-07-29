@@ -124,7 +124,7 @@ class LlawanCephalidRuleModifyingEffect extends ContinuousRuleModifiyingEffectIm
     }
     
     @Override
-    public String getInfoMessage(Ability source, Game game) {
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
             return "You can't cast blue creature spells (" + mageObject.getLogName() + " in play).";
@@ -133,7 +133,7 @@ class LlawanCephalidRuleModifyingEffect extends ContinuousRuleModifiyingEffectIm
     }
     
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null && game.isOpponent(controller, event.getPlayerId())) {

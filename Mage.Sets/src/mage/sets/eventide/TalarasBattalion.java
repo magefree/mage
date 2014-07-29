@@ -98,7 +98,7 @@ class TalarasBattalionEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL
                 && event.getSourceId().equals(source.getSourceId())) {
             CastGreenSpellThisTurnCondition condition = new CastGreenSpellThisTurnCondition();

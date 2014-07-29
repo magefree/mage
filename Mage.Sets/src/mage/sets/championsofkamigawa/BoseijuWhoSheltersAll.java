@@ -150,7 +150,7 @@ class BoseijuWhoSheltersAllCantCounterEffect extends ContinuousRuleModifiyingEff
     }
 
     @Override
-    public String getInfoMessage(Ability source, Game game) {
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (sourceObject != null) {
             return "This spell can't be countered by spells or abilities (" + sourceObject.getName() + ").";
@@ -159,7 +159,7 @@ class BoseijuWhoSheltersAllCantCounterEffect extends ContinuousRuleModifiyingEff
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.COUNTER) {
             BoseijuWhoSheltersAllWatcher watcher = (BoseijuWhoSheltersAllWatcher) game.getState().getWatchers().get("ManaPaidFromBoseijuWhoSheltersAllWatcher");
             Spell spell = game.getStack().getSpell(event.getTargetId());

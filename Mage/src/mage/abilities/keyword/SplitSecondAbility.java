@@ -49,12 +49,12 @@ class SplitSecondEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
-    public String getInfoMessage(Ability source, Game game) {
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
         return "You can't cast spells or activate abilities that aren't mana abilities (Split second).";
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL) {
             return true;
         }

@@ -101,7 +101,7 @@ class EpicReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
-    public String getInfoMessage(Ability source, Game game) {
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
             return "For the rest of the game, you can't cast spells (Epic - " + mageObject.getName() +")";
@@ -110,7 +110,7 @@ class EpicReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
     }
     
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL
                 && source.getControllerId() == event.getPlayerId()) {
             MageObject object = game.getObject(event.getSourceId());

@@ -34,6 +34,7 @@ import mage.constants.Duration;
 import mage.constants.EffectType;
 import mage.constants.Outcome;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  *
@@ -41,6 +42,8 @@ import mage.game.Game;
  */
 public abstract class ContinuousRuleModifiyingEffectImpl extends ContinuousEffectImpl implements ContinuousRuleModifiyingEffect {
 
+    protected final boolean messageToUser;
+    protected final boolean messageToGameLog;
     protected final String infoMessage;
     
     // 613.10
@@ -57,18 +60,26 @@ public abstract class ContinuousRuleModifiyingEffectImpl extends ContinuousEffec
     // But player isn't asked to choose order of effects if multiple are applied to the same event.
 
     public ContinuousRuleModifiyingEffectImpl(Duration duration, Outcome outcome) {
+        this(duration, outcome, true, false);
+    }
+    
+    public ContinuousRuleModifiyingEffectImpl(Duration duration, Outcome outcome, boolean messageToUser, boolean messageToLog) {
         super(duration, outcome);
         this.effectType = EffectType.CONTINUOUS_RULE_MODIFICATION;
         this.infoMessage = null;
+        this.messageToUser = messageToUser;
+        this.messageToGameLog = messageToLog;
     }
 
     public ContinuousRuleModifiyingEffectImpl(final ContinuousRuleModifiyingEffectImpl effect) {
         super(effect);
         this.infoMessage = effect.infoMessage;
+        this.messageToUser = effect.messageToUser;
+        this.messageToGameLog = effect.messageToGameLog;
     }
 
     @Override
-    public String getInfoMessage(Ability source, Game game) {
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
         if (infoMessage == null) {
             String message;
             MageObject object = game.getObject(source.getSourceId());
@@ -83,4 +94,15 @@ public abstract class ContinuousRuleModifiyingEffectImpl extends ContinuousEffec
         }
     }
 
+    @Override
+    public boolean sendMessageToUser() {
+        return messageToUser;
+    }
+
+    @Override
+    public boolean sendMessageToGameLog() {
+        return messageToGameLog;
+    }
+
+    
 }

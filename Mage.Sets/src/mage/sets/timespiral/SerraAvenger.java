@@ -104,7 +104,7 @@ class CantCastSerraAvengerEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.CAST_SPELL && event.getSourceId().equals(source.getSourceId())) {
             Player controller = game.getPlayer(source.getControllerId());
             // it can be cast on other players turn 1 - 3 if some effect let allow you to do this

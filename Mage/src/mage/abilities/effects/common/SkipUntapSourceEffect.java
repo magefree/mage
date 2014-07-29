@@ -31,6 +31,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -40,10 +41,10 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author North
  */
-public class SkipUntapSourceEffect extends ReplacementEffectImpl {
+public class SkipUntapSourceEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public SkipUntapSourceEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment, false, true);
         staticText = "{this} doesn't untap during your untap step";
     }
 
@@ -59,11 +60,6 @@ public class SkipUntapSourceEffect extends ReplacementEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
     }
 
     @Override

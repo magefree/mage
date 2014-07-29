@@ -64,7 +64,7 @@ public class CantCounterSourceEffect extends ContinuousRuleModifiyingEffectImpl 
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.COUNTER) {
             Card card = game.getCard(source.getSourceId());
             if (card != null) {

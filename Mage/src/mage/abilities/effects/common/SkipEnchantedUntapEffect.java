@@ -15,7 +15,7 @@ import mage.game.permanent.Permanent;
 public class SkipEnchantedUntapEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public SkipEnchantedUntapEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment, false, true);
         staticText = "Enchanted permanent doesn't untap during its controller's untap step";
     }
 
@@ -34,7 +34,20 @@ public class SkipEnchantedUntapEffect extends ContinuousRuleModifiyingEffectImpl
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
+        Permanent enchantment = game.getPermanent(source.getSourceId());
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+            Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
+            if (enchanted != null) {
+                return enchanted.getLogName() + " doesn't untap during its controller's untap step (" + enchantment.getLogName() + ")";
+            }            
+        }
+        return null;
+    }
+
+    
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
             Permanent enchantment = game.getPermanent(source.getSourceId());
             if (enchantment != null && enchantment.getAttachedTo() != null) {

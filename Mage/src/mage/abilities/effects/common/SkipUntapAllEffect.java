@@ -30,7 +30,7 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
@@ -51,13 +51,13 @@ import mage.players.Player;
  * @author LevelX2
  */
 
-public class SkipUntapAllEffect extends ReplacementEffectImpl {
+public class SkipUntapAllEffect extends ContinuousRuleModifiyingEffectImpl {
 
     TargetController targetController;
     FilterPermanent filter;
     
     public SkipUntapAllEffect(Duration duration, TargetController targetController, FilterPermanent filter) {
-        super(duration, Outcome.Detriment);
+        super(duration, Outcome.Detriment, false, false);
         this.targetController = targetController;
         this.filter = filter;
     }
@@ -77,12 +77,6 @@ public class SkipUntapAllEffect extends ReplacementEffectImpl {
     public boolean apply(Game game, Ability source) {
         return false;
     }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {

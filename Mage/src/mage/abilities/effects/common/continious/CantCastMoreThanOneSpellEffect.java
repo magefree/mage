@@ -72,7 +72,7 @@ public class CantCastMoreThanOneSpellEffect extends ContinuousRuleModifiyingEffe
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL) {
             switch (targetController) {
                 case YOU:

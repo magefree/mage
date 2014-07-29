@@ -84,7 +84,7 @@ class DosanTheFallingLeafEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getType() == GameEvent.EventType.CAST_SPELL && !game.getActivePlayerId().equals(event.getPlayerId());
     }
 

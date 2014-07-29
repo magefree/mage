@@ -81,7 +81,7 @@ public class CantCounterControlledEffect extends ContinuousRuleModifiyingEffectI
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.COUNTER) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && spell.getControllerId().equals(source.getControllerId())

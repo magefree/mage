@@ -541,8 +541,9 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
         boolean skip = false;
         while (true) {
             Phase currentPhase = game.getPhase();
-            if (!skip)
+            if (!skip) {
                 currentPhase.getStep().endStep(game, activePlayerId);
+            }
             game.applyEffects();
             switch (currentPhase.getStep().getType()) {
                 case UNTAP:

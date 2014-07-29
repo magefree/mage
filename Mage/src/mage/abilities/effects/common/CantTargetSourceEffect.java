@@ -68,7 +68,7 @@ public class CantTargetSourceEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.TARGET && event.getTargetId().equals(source.getSourceId())) {
             StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
             if (sourceObject != null && filterSource.match(sourceObject, source.getControllerId(), game)) {

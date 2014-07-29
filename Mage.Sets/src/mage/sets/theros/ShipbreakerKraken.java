@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesMonstrousSourceTriggeredAbility;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.MonstrosityAbility;
@@ -84,10 +85,10 @@ public class ShipbreakerKraken extends CardImpl {
     }
 }
 
-class ShipbreakerKrakenReplacementEffect extends ReplacementEffectImpl {
+class ShipbreakerKrakenReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public ShipbreakerKrakenReplacementEffect() {
-        super(Duration.OneUse, Outcome.Detriment);
+        super(Duration.Custom, Outcome.Detriment);
         this.staticText = "Those creatures don't untap during their controllers' untap steps for as long as you control {this}";
     }
 
@@ -106,30 +107,25 @@ class ShipbreakerKrakenReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         // Source must be on the battlefield (it's neccessary to check here because if as response to the enter
         // the battlefield triggered ability the source dies (or will be exiled), then the ZONE_CHANGE or LOST_CONTROL
         // event will happen before this effect is applied ever)
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent == null || !sourcePermanent.getControllerId().equals(source.getControllerId())) {
-            this.used = true;
+            discard();
             return false;
         }
         if (event.getType() == GameEvent.EventType.LOST_CONTROL) {
             if (event.getTargetId().equals(source.getSourceId())) {
-                this.used = true;
+                discard();
                 return false;
             }
         }
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
             if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                this.used = true;
+                discard();
                 return false;
             }
         }

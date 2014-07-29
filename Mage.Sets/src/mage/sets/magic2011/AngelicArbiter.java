@@ -189,7 +189,7 @@ class AngelicArbiterEffect2 extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.CAST_SPELL && game.getActivePlayerId().equals(event.getPlayerId()) && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             Watcher watcher = game.getState().getWatchers().get("OpponentAttacked", source.getControllerId());
             if (watcher != null && watcher.conditionMet()) {

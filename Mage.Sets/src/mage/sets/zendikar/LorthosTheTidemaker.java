@@ -36,18 +36,17 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.SkipNextUntapTargetEffect;
 import mage.cards.CardImpl;
-import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.PhaseStep;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -111,53 +110,14 @@ class LorthosTheTideMakerEffect extends OneShotEffect {
                         Permanent permanent = game.getPermanent(target);
                         if (permanent != null) {
                             permanent.tap(game);
-                            game.addEffect(new LorthosTheTideMakerEffect2(permanent.getId()), source);
+                            ContinuousEffect effect = new SkipNextUntapTargetEffect();
+                            effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                            game.addEffect(effect, source);
                         }
                     }
                     return false;
                 }
             }
-        }
-        return false;
-    }
-}
-
-class LorthosTheTideMakerEffect2 extends ReplacementEffectImpl {
-
-    protected UUID permanentId;
-
-    public LorthosTheTideMakerEffect2(UUID permanentId) {
-        super(Duration.OneUse, Outcome.Detriment);
-        this.permanentId = permanentId;
-    }
-
-    public LorthosTheTideMakerEffect2(final LorthosTheTideMakerEffect2 effect) {
-        super(effect);
-        permanentId = effect.permanentId;
-    }
-
-    @Override
-    public LorthosTheTideMakerEffect2 copy() {
-        return new LorthosTheTideMakerEffect2(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        used = true;
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP
-                && event.getType() == GameEvent.EventType.UNTAP
-                && event.getTargetId().equals(permanentId)) {
-            return true;
         }
         return false;
     }

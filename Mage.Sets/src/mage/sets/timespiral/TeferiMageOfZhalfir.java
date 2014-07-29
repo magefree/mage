@@ -146,7 +146,7 @@ class TeferiMageOfZhalfirReplacementEffect extends ContinuousRuleModifiyingEffec
     }
 
     @Override
-    public String getInfoMessage(Ability source, Game game) {
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
             return "You can cast spells only any time you could cast a sorcery  (" + mageObject.getLogName() + ").";
@@ -154,7 +154,7 @@ class TeferiMageOfZhalfirReplacementEffect extends ContinuousRuleModifiyingEffec
         return null;
     }
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null && controller.hasOpponent(event.getPlayerId(), game)) {

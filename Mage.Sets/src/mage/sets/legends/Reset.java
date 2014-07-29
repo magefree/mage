@@ -84,7 +84,7 @@ class ResetReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType().equals(GameEvent.EventType.CAST_SPELL) && event.getSourceId().equals(source.getSourceId())) {
             if (game.getTurn().getStepType().equals(PhaseStep.UNTAP)
                     || game.getTurn().getStepType().equals(PhaseStep.UPKEEP)

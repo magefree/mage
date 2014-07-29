@@ -130,7 +130,7 @@ class XantidSwarmReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, boolean checkPlayableMode, Game game) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL ) {
             Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (player != null && player.getId().equals(event.getPlayerId())) {

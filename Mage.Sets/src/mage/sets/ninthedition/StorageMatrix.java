@@ -74,7 +74,7 @@ class StorageMatrixRestrictionEffect extends RestrictionEffect {
 
     private int turn;
     private boolean applies;
-    private static final HashSet<String> choice = new HashSet<String>();
+    private static final HashSet<String> choice = new HashSet<>();
     static{
         choice.add(CardType.ARTIFACT.toString());
         choice.add(CardType.CREATURE.toString());
