@@ -665,7 +665,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 card = pickWorstCard(cards, null, target, source, game);
             }
             if (source != null) {
-                if (target.canTarget(card.getId(), this.getId(), source, game)) {
+                if (target.canTarget(this.getId(), card.getId(), source, game)) {
                     return card;
                 }
             }

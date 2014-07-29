@@ -78,7 +78,7 @@ public class TargetCardInHand extends TargetCard {
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
-        return this.canTarget(id, source.getControllerId(), source, game);
+        return this.canTarget(source.getControllerId(), id, source, game);
     }
 
     @Override

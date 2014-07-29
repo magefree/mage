@@ -293,7 +293,7 @@ public class HumanPlayer extends PlayerImpl {
                                 return true;
                             }
                         }
-                    } else if (target.canTarget(response.getUUID(), playerId, source, game)) {
+                    } else if (target.canTarget(playerId, response.getUUID(), source, game)) {
                         target.addTarget(response.getUUID(), source, game);
                         if(target.doneChosing()){
                             return true;
