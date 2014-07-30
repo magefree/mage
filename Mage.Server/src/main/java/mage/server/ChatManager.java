@@ -72,8 +72,6 @@ public class ChatManager {
     public void leaveChat(UUID chatId, UUID userId) {
         if (chatSessions.containsKey(chatId)) {
             chatSessions.get(chatId).kill(userId, DisconnectReason.CleaningUp);
-        } else {
-            logger.debug("ChatManager:leaveChat - chatId does not exist - chatId: " + chatId +"  userId: " + userId);
         } 
     }
 

@@ -204,9 +204,12 @@ public class TableManager {
 
     public boolean removeTable(UUID userId, UUID tableId) {
         if (isTableOwner(tableId, userId) || UserManager.getInstance().isAdmin(userId)) {
-            leaveTable(userId, tableId);            
-            ChatManager.getInstance().destroyChatSession(controllers.get(tableId).getChatId());  
-            removeTable(tableId);
+            leaveTable(userId, tableId);
+            TableController tableController = controllers.get(tableId);
+            if (tableController != null) {
+                ChatManager.getInstance().destroyChatSession(tableController.getChatId());
+                removeTable(tableId);
+            }
             return true;
         }
         return false;
