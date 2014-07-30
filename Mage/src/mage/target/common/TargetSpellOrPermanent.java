@@ -127,7 +127,7 @@ public class TargetSpellOrPermanent extends TargetImpl {
     }
 
     @Override
-    public boolean canTarget(UUID id, UUID playerId, Ability source, Game game) {
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
         return canTarget(id, source, game);
     }
 

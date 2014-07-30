@@ -41,9 +41,11 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.token.EmptyToken;
+import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
@@ -95,22 +97,24 @@ class SeanceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getFirstTarget());
-        if (card != null) {
-            card.moveToExile(null, "", source.getSourceId(), game);
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(card);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && card != null) {
+            if (controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD)) {
+                EmptyToken token = new EmptyToken();
+                CardUtil.copyTo(token).from(card);
 
-            if (!token.hasSubtype("Spirit")) {
-                token.getSubtype().add("Spirit");
+                if (!token.hasSubtype("Spirit")) {
+                    token.getSubtype().add("Spirit");
+                }                
+                token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+
+                ExileTargetEffect exileEffect = new ExileTargetEffect();
+                exileEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
+                DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(exileEffect);
+                delayedAbility.setSourceId(source.getSourceId());
+                delayedAbility.setControllerId(source.getControllerId());
+                game.addDelayedTriggeredAbility(delayedAbility);
             }
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-
-            ExileTargetEffect exileEffect = new ExileTargetEffect();
-            exileEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
-            DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(exileEffect);
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            game.addDelayedTriggeredAbility(delayedAbility);
 
             return true;
         }

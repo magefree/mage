@@ -68,7 +68,7 @@ public class TargetCardInHand extends TargetCard {
     }
 
     @Override
-    public boolean canTarget(UUID id, UUID playerId, Ability source, Game game) {
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
         Card card = game.getPlayer(playerId).getHand().get(id, game);
         if (card != null) {
             return filter.match(card, source.getSourceId(), playerId, game);
