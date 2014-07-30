@@ -75,13 +75,13 @@ public class ManaUtil {
 
             chosenManaAbilityForHybrid = checkRedMana(symbols, countColored, ability);
             chosenManaAbility = chosenManaAbilityForHybrid != null ? chosenManaAbilityForHybrid : chosenManaAbility;
-            checkBlackMana(symbols, countColored, ability);
+            chosenManaAbilityForHybrid = checkBlackMana(symbols, countColored, ability);
             chosenManaAbility = chosenManaAbilityForHybrid != null ? chosenManaAbilityForHybrid : chosenManaAbility;
-            checkBlueMana(symbols, countColored, ability);
+            chosenManaAbilityForHybrid = checkBlueMana(symbols, countColored, ability);
             chosenManaAbility = chosenManaAbilityForHybrid != null ? chosenManaAbilityForHybrid : chosenManaAbility;
-            checkWhiteMana(symbols, countColored, ability);
+            chosenManaAbilityForHybrid = checkWhiteMana(symbols, countColored, ability);
             chosenManaAbility = chosenManaAbilityForHybrid != null ? chosenManaAbilityForHybrid : chosenManaAbility;
-            checkGreenMana(symbols, countColored, ability);
+            chosenManaAbilityForHybrid = checkGreenMana(symbols, countColored, ability);
             chosenManaAbility = chosenManaAbilityForHybrid != null ? chosenManaAbilityForHybrid : chosenManaAbility;
         }
 

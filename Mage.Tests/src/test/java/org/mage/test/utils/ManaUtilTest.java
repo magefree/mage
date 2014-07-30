@@ -3,10 +3,7 @@ package org.mage.test.utils;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.mana.BasicManaAbility;
-import mage.abilities.mana.ManaAbility;
-import mage.abilities.mana.RedManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
+import mage.abilities.mana.*;
 import mage.cards.Card;
 import mage.cards.repository.CardRepository;
 import mage.util.ManaUtil;
@@ -42,7 +39,9 @@ public class ManaUtilTest extends CardTestPlayerBase {
         testManaToPayVsLand("{R}{R}{G}{W}{W}", "Steam Vents", 2, 1); // should use {R}
         testManaToPayVsLand("{R}{R}{G}{B}{U}", "Temple Garden", 2, 1); // should use {G}
         testManaToPayVsLand("{W}{W}{G}{B}{U}", "Sacred Foundry", 2, 1); // should use {W}
-        testManaToPayVsLand("{W}{W}{R}{B}{U}", "Overgrown Tomb", 2, 1); // should use {B}
+        testManaToPayVsLand("{W}{W}{R}{B}{U}", "Overgrown Tomb", 2, BlackManaAbility.class); // should use {B}
+        testManaToPayVsLand("{W}{W}{R}{B}{U}", "Swamp", 1, BlackManaAbility.class);
+        testManaToPayVsLand("{W}{W}{R}{B}{U}", "Plains", 1, WhiteManaAbility.class);
 
         testManaToPayVsLand("{1}{R}", "Cavern of Souls", 2, 2); // can't auto choose to pay
         testManaToPayVsLand("{2}", "Cavern of Souls", 2, 2); // can't auto choose to pay
@@ -52,6 +51,7 @@ public class ManaUtilTest extends CardTestPlayerBase {
         testManaToPayVsLand("{R}{W/R}", "Sacred Foundry", 2, RedManaAbility.class); // auto choose for hybrid mana: we should choose {R}
         testManaToPayVsLand("{G}{W/R}", "Sacred Foundry", 2, 1); // auto choose for hybrid mana: choose any
         testManaToPayVsLand("{G}{W/R}{W}", "Sacred Foundry", 2, WhiteManaAbility.class); // auto choose for hybrid mana: choose {W}
+        testManaToPayVsLand("{W/B}{W/B}", "Swamp", 1, BlackManaAbility.class);
 
         // we can't auto choose here:
         // let say we auto choose {R}, then we have to use it to pay for {R} not {W/R} (as {W/R} is more generic cost)
