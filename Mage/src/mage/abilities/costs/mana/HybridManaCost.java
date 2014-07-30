@@ -129,4 +129,12 @@ public class HybridManaCost extends ManaCostImpl {
     public boolean containsColor(ColoredManaSymbol coloredManaSymbol) {
         return mana1.equals(coloredManaSymbol) || mana2.equals(coloredManaSymbol);
     }
+
+    public ColoredManaSymbol getMana1() {
+        return mana1;
+    }
+
+    public ColoredManaSymbol getMana2() {
+        return mana2;
+    }
 }
