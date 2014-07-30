@@ -87,8 +87,8 @@ class HallowedBurialEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getSourceId(), game)) {
-                creature.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
+            for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), controller.getId(), source.getSourceId(), game)) {
+                controller.moveCardToLibraryWithInfo(creature, source.getSourceId(), game, Zone.BATTLEFIELD, false, true);
             }
             return true;
         }
