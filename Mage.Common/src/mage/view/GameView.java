@@ -124,7 +124,7 @@ public class GameView implements Serializable {
                         checkPaid(stackObject.getId(), ((StackAbility)stackObject));
                     }
                 } else {
-                    logger.error("Stack Object for stack ability not found: " + stackObject.toString());
+                    logger.error("Stack Object for stack ability not found: " + stackObject.getStackAbility().getRule());
                 }
             }
             else {
