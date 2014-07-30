@@ -42,6 +42,7 @@ import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
+import mage.constants.TimingRule;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -75,7 +76,7 @@ public class Teleportal extends CardImpl {
         this.getSpellAbility().addEffect(new UnblockableTargetEffect());
 
         // Overload {3}{U}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        OverloadAbility ability = new OverloadAbility(this, new BoostAllEffect(1,0, Duration.EndOfTurn, filter,false), new ManaCostsImpl("{3}{U}{R}"));
+        OverloadAbility ability = new OverloadAbility(this, new BoostAllEffect(1,0, Duration.EndOfTurn, filter,false), new ManaCostsImpl("{3}{U}{R}"), TimingRule.SORCERY);
         ability.addEffect(new TeleportalEffect(filter));
         this.addAbility(ability);
     }

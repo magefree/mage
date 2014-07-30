@@ -37,6 +37,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
 import mage.constants.TargetController;
+import mage.constants.TimingRule;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -64,7 +65,7 @@ public class MizziumMortars extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
 
         // Overload {3}{R}{R}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        this.addAbility(new OverloadAbility(this, new DamageAllEffect(4, filter), new ManaCostsImpl("{3}{R}{R}{R}")));
+        this.addAbility(new OverloadAbility(this, new DamageAllEffect(4, filter), new ManaCostsImpl("{3}{R}{R}{R}"), TimingRule.SORCERY));
     }
 
     public MizziumMortars(final MizziumMortars card) {

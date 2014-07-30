@@ -32,6 +32,7 @@ import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.cards.Card;
+import mage.constants.TimingRule;
 
 
 /**
@@ -59,8 +60,13 @@ import mage.cards.Card;
 public class OverloadAbility extends SpellAbility {
 
     public OverloadAbility(Card card,Effect effect, ManaCosts costs) {
+        this(card, effect, costs, TimingRule.INSTANT);
+    }
+
+    public OverloadAbility(Card card,Effect effect, ManaCosts costs, TimingRule timingRule) {
         super(costs, card.getName() + " with overload");
         this.addEffect(effect);
+        this.timing = timingRule;
     }
 
     public OverloadAbility(final OverloadAbility ability) {
