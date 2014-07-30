@@ -28,7 +28,6 @@
 
 package mage.server;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -192,8 +191,17 @@ public class Session {
         return sessionId;
     }
 
-    public void userLostConnection() {
+    //synchronized public void  userLostConnection() {
+    public void  userLostConnection() {
         User user = UserManager.getInstance().getUser(userId);
+        if (user == null) {
+            logger.error("Session.userLostConnection  user for session not found  sessionId: " + sessionId + "  userId: " +userId);
+            return;
+        }
+        if (user.getSessionId().isEmpty()) {
+            logger.debug("Session.userLostConnection  user was already disconnected  sessionId: " + sessionId + "  userId: " +userId);
+            return;
+        }
         if (logger.isInfoEnabled()) {
             StringBuilder sb = new StringBuilder("user ");
             if (user == null) {
@@ -218,7 +226,7 @@ public class Session {
             call.setMessageId(messageId++);
             callbackHandler.handleCallbackOneway(new Callback(call));
         } catch (HandleCallbackException ex) {
-            logger.fatal(new StringBuilder("Session of userId ").append(userId).append(" fireCallback error: ").append(ex.getMessage()).toString(), ex);
+            logger.info(new StringBuilder("Session of userId ").append(userId).append(" callback exception: ").append(ex.getMessage()).toString());
             userLostConnection();
         }
     }

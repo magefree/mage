@@ -1004,6 +1004,9 @@ public class MageServerImpl implements MageServer {
     protected void execute(final String actionName, final String sessionId, final Action action) throws MageException {
         if (SessionManager.getInstance().isValidSession(sessionId)) {
             try {
+                if (actionName.equals("joinChat")) {
+                    logger.debug("MageServerImpl.execute  sessionId: " + sessionId + " action: " + actionName);
+                }
                 callExecutor.execute(
                     new Runnable() {
                         @Override
@@ -1021,7 +1024,7 @@ public class MageServerImpl implements MageServer {
                     }
                 );
             }
-            catch (Exception ex) {
+            catch (Exception ex) {                
                 handleException(ex);
             }
         } else {
