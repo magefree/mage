@@ -26,13 +26,13 @@ public class ManaUtilTest extends CardTestPlayerBase {
     @Test
     public void test() {
         testManaToPayVsLand("{R}", "Blood Crypt", 2, 1); // should use {R}
-        testManaToPayVsLand("{1}{R}", "Blood Crypt", 2, 1); // should use {R}
+        testManaToPayVsLand("{1}{R}", "Blood Crypt", 2, RedManaAbility.class); // should use {R}
         testManaToPayVsLand("{R}{B}", "Blood Crypt", 2, 2); // can't auto choose to pay
         testManaToPayVsLand("{2}{R}{B}", "Blood Crypt", 2, 2); // can't auto choose to pay
         testManaToPayVsLand("{R}{R}{B}{B}", "Blood Crypt", 2, 2); // can't auto choose to pay
-        testManaToPayVsLand("{R}{G}{W}{W}{U}", "Blood Crypt", 2, 1); // should use {R}
-        testManaToPayVsLand("{R}{R}{G}{W}{W}{U}", "Blood Crypt", 2, 1); // should use {R}
-        testManaToPayVsLand("{R}{R}", "Blood Crypt", 2, 1); // should use {R}
+        testManaToPayVsLand("{R}{G}{W}{W}{U}", "Blood Crypt", 2, RedManaAbility.class); // should use {R}
+        testManaToPayVsLand("{R}{R}{G}{W}{W}{U}", "Blood Crypt", 2, RedManaAbility.class); // should use {R}
+        testManaToPayVsLand("{R}{R}", "Blood Crypt", 2, RedManaAbility.class); // should use {R}
         testManaToPayVsLand("{G}{W}", "Blood Crypt", 2, 2); // can't auto choose to pay
         testManaToPayVsLand("{1}{G}{W}", "Blood Crypt", 2, 1); // should use any but auto choose it
         testManaToPayVsLand("{2}{G}{W}{U}", "Blood Crypt", 2, 1); // should use any but auto choose it
@@ -60,6 +60,8 @@ public class ManaUtilTest extends CardTestPlayerBase {
         // we can pay {W/R}{W}{R} by using Sacred Foundry and choosing {W} then using two Mountains
         // but if we auto choose {R} then we won't be able to pay the cost at all
         testManaToPayVsLand("{W/R}{W}{R}", "Sacred Foundry", 2, 2);
+
+        testManaToPayVsLand("{W/R}{R/G}", "Sacred Foundry", 2, 2); // can't auto choose to pay
     }
 
     /**
