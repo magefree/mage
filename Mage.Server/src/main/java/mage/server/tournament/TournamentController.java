@@ -150,19 +150,25 @@ public class TournamentController {
     public synchronized void join(UUID userId) {
         UUID playerId = userPlayerMap.get(userId);
         if (playerId == null) {
-            logger.error("join: got no playerId  for userId: " + userId + " for tournament " + tournament.getId());
+            if (logger.isDebugEnabled()) {
+                User user = UserManager.getInstance().getUser(userId);
+                if (user != null) {
+                    logger.debug(user.getName() + " shows tournament panel  tournamentId: " + tournament.getId());
+                }
+            }
             return;
         }
+        if (tournamentSessions.containsKey(playerId)) {
+            logger.debug("player reopened tournament panel   userId: " + userId + " tournamentId: " + tournament.getId());
+            return;
+        } 
+        // first join of player
         TournamentSession tournamentSession = new TournamentSession(tournament, userId, tableId, playerId);
-        if (tournamentSessions == null) {
-            logger.error("join: got no playerId  for userId: " + userId + " for tournament " + tournament.getId());
-            return;
-        }
         tournamentSessions.put(playerId, tournamentSession);
         UserManager.getInstance().getUser(userId).addTournament(playerId, tournamentSession);
         TournamentPlayer player = tournament.getPlayer(playerId);
         player.setJoined();
-        logger.debug("player " + playerId + " has joined tournament " + tournament.getId());
+        logger.debug("player " +player.getPlayer().getName()  + " - client has joined tournament " + tournament.getId());
         ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has joined the tournament", MessageColor.BLACK, true, MessageType.STATUS);
         checkStart();
     }

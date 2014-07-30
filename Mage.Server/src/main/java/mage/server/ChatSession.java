@@ -139,6 +139,7 @@ public class ChatSession {
                     user.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color, messageType, soundToPlay)));
                 }
                 else {
+                    logger.debug("ChatSession.broadcast user not found - killed from chat session - userId: " + userId +"  chatId: " +chatId);
                     kill(userId, DisconnectReason.CleaningUp);
                 }
             }

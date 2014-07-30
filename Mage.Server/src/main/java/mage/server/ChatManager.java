@@ -161,7 +161,7 @@ public class ChatManager {
     }
 
     public void removeUser(UUID userId, DisconnectReason reason) {
-        Logger.getLogger(ChatManager.class).debug("ChatManager: Remove user start");
+        Logger.getLogger(ChatManager.class).debug("ChatManager: Remove user start - chatSessions: " + chatSessions.size());
         for (ChatSession chat: chatSessions.values()) {
             chat.kill(userId, reason);
         }
