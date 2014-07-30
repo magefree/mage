@@ -47,7 +47,7 @@ public class IsPhaseCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.getTurn().getPhaseType().equals(turnPhase);
+        return turnPhase.equals(game.getTurn().getPhaseType());
     }
 
     @Override
