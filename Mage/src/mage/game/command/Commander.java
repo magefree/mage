@@ -27,8 +27,6 @@
 */
 package mage.game.command;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
@@ -42,6 +40,9 @@ import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -62,8 +63,6 @@ public class Commander implements CommandObject{
             if (!(ability instanceof SpellAbility)) {
                 if (ability.getZone().match(Zone.COMMAND)){
                     Ability newAbility = ability.copy();
-                    // Why are the abilities in command zone printed twice to the toolTipText
-                    newAbility.setRuleVisible(false);
                     abilites.add(newAbility);
                 }
             }

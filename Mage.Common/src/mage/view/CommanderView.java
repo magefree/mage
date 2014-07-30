@@ -27,10 +27,11 @@
 */
 package mage.view;
 
-import java.io.Serializable;
 import mage.cards.Card;
 import mage.constants.MageObjectType;
 import mage.game.command.Commander;
+
+import java.io.Serializable;
 
 /**
  *
@@ -40,7 +41,6 @@ public class CommanderView extends CardView implements CommandObjectView, Serial
 
     public CommanderView(Commander commander, Card sourceCard) {
         super(sourceCard);
-        rules.addAll(commander.getAbilities().getRules(sourceCard.getName()));
         this.mageObjectType = MageObjectType.COMMANDER;
     }
 
