@@ -712,7 +712,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             connection.setShowAbilityPickerForced(showAbilityPickerForced);
             logger.debug("connecting (auto): " + proxyType + " " + proxyServer + " " + proxyPort + " " + proxyUsername);
             if (MageFrame.connect(connection)) {  
-                showGames();
+                showGames(false);                
                 return true;
             } else {
                 showMessage("Unable to connect to server");
@@ -888,7 +888,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }//GEN-LAST:event_btnDeckEditorActionPerformed
 
     private void btnGamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGamesActionPerformed
-        this.showGames();
+        this.showGames(true);
     }//GEN-LAST:event_btnGamesActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -970,10 +970,14 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         this.tablesPane.hideTables();
     }
 
-    public void showGames() {        
+    public void showGames(boolean setActive) {        
+        MagePane topPane = getTopMost(tablesPane);
         this.tablesPane.setVisible(true);
         this.tablesPane.showTables();
         setActive(tablesPane);
+        if (!setActive && topPane != null) {            
+            setActive(topPane);
+        }
     }
     
     public void hideGames() {

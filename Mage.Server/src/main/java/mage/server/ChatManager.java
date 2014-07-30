@@ -42,6 +42,8 @@ import org.apache.log4j.Logger;
  */
 public class ChatManager {
 
+    private static final Logger logger = Logger.getLogger(ChatManager.class);
+    
     private static final ChatManager INSTANCE = new ChatManager();
 
     public static ChatManager getInstance() {
@@ -59,19 +61,28 @@ public class ChatManager {
     }
 
     public void joinChat(UUID chatId, UUID userId) {
-        chatSessions.get(chatId).join(userId);
+        if (chatSessions.containsKey(chatId)) {
+            chatSessions.get(chatId).join(userId);
+        } else {
+            logger.debug("ChatManager:joinChat - chatId does not exist - chatId: " + chatId +"  userId: " + userId);
+        }        
+        
     }
 
     public void leaveChat(UUID chatId, UUID userId) {
         if (chatSessions.containsKey(chatId)) {
             chatSessions.get(chatId).kill(userId, DisconnectReason.CleaningUp);
-        }
+        } else {
+            logger.debug("ChatManager:leaveChat - chatId does not exist - chatId: " + chatId +"  userId: " + userId);
+        } 
     }
 
     public void destroyChatSession(UUID chatId) {
-        if (chatId != null) {
+        if (chatId != null && chatSessions.containsKey(chatId)) {
             chatSessions.remove(chatId);
-        }
+        } else {
+            logger.debug("ChatManager:destroy chat - chatId does not exist - chatId: " + chatId);
+        } 
     }
 
     public void broadcast(UUID chatId, String userName, String message, MessageColor color) {
