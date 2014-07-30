@@ -33,7 +33,9 @@ import mage.abilities.common.DealsDamageToACreatureAttachedTriggeredAbility;
 import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.condition.common.SourceOnBattelfieldCondition;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
 import mage.abilities.decorator.ConditionalReplacementEffect;
+import mage.abilities.effects.ContinuousRuleModifiyingEffect;
 import mage.abilities.effects.ReplacementEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.SkipUntapTargetEffect;
@@ -57,9 +59,9 @@ public class NekoTe extends CardImpl {
         this.subtype.add("Equipment");
 
         // Whenever equipped creature deals damage to a creature, tap that creature. That creature doesn't untap during its controller's untap step for as long as Neko-Te remains on the battlefield.
-        ReplacementEffect skipUntapEffect = new SkipUntapTargetEffect(Duration.WhileOnBattlefield);
+        ContinuousRuleModifiyingEffect skipUntapEffect = new SkipUntapTargetEffect(Duration.WhileOnBattlefield);
         skipUntapEffect.setText("That creature doesn't untap during its controller's untap step for as long as {this} remains on the battlefield");
-        ConditionalReplacementEffect effect = new ConditionalReplacementEffect(skipUntapEffect, new SourceOnBattelfieldCondition(), false);
+        ConditionalContinuousRuleModifyingEffect effect = new ConditionalContinuousRuleModifyingEffect(skipUntapEffect, new SourceOnBattelfieldCondition(), false);
         Ability ability = new DealsDamageToACreatureAttachedTriggeredAbility(new TapTargetEffect("that creature"), false, "equipped creature", false, true);
         ability.addEffect(effect);
         this.addAbility(ability);
