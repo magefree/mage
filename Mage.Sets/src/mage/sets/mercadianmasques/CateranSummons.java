@@ -33,6 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -43,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class CateranSummons extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("Mercenary card");
+    private static final FilterCard filter = new FilterCreatureCard("Mercenary card");
 
     static {
         filter.add(new SubtypePredicate("Mercenary"));

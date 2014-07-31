@@ -49,6 +49,7 @@ public class Dragonstorm extends CardImpl {
     static {
         filter.add(new SubtypePredicate("Dragon"));
     }
+    
     public Dragonstorm(UUID ownerId) {
         super(ownerId, 60, "Dragonstorm", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{8}{R}");
         this.expansionSetCode = "TSB";

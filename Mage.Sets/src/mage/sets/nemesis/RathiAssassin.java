@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.nemesis;
 
 import java.util.UUID;
@@ -43,8 +42,8 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonType;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -59,35 +58,36 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class RathiAssassin extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("Mercenary permanent card with converted mana cost 3 or less");
+    private static final FilterPermanentCard filter = new FilterPermanentCard("Mercenary permanent card with converted mana cost 3 or less");
     private static final FilterCreaturePermanent destroyFilter = new FilterCreaturePermanent("tapped nonblack creature");
 
     static {
         filter.add(new SubtypePredicate("Mercenary"));
-		filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 4));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 4));
         destroyFilter.add(new TappedPredicate());
         destroyFilter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
     public RathiAssassin(UUID ownerId) {
-		super(ownerId, 67, "Rathi Assassin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-		this.expansionSetCode = "NMS";
-		this.subtype.add("Zombie");
-		this.subtype.add("Mercenary");
-		this.subtype.add("Assassin");
-		this.color.setBlack(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
-	
-		// {1}{B}{B}, {T}: Destroy target tapped nonblack creature.
-		Ability destroyAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{B}{B}"));
-		destroyAbility.addCost(new TapSourceCost());
-		destroyAbility.addTarget(new TargetCreaturePermanent(destroyFilter));
-		this.addAbility(destroyAbility);
-		// {3}, {T}: Search your library for a Mercenary permanent card with converted mana cost 3 or less and put it onto the battlefield. Then shuffle your library.
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
-		ability.addManaCost(new GenericManaCost(3));
-		this.addAbility(ability);
+        super(ownerId, 67, "Rathi Assassin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        this.expansionSetCode = "NMS";
+        this.subtype.add("Zombie");
+        this.subtype.add("Mercenary");
+        this.subtype.add("Assassin");
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // {1}{B}{B}, {T}: Destroy target tapped nonblack creature.
+        Ability destroyAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{B}{B}"));
+        destroyAbility.addCost(new TapSourceCost());
+        destroyAbility.addTarget(new TargetCreaturePermanent(destroyFilter));
+        this.addAbility(destroyAbility);
+        
+        // {3}, {T}: Search your library for a Mercenary permanent card with converted mana cost 3 or less and put it onto the battlefield. Then shuffle your library.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
+        ability.addManaCost(new GenericManaCost(3));
+        this.addAbility(ability);
     }
 
     public RathiAssassin(final RathiAssassin card) {

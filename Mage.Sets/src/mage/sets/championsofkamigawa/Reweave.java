@@ -27,7 +27,6 @@
  */
 package mage.sets.championsofkamigawa;
 
-import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -40,6 +39,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterPermanentCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Library;
@@ -81,6 +81,8 @@ public class Reweave extends CardImpl {
 
 class ReweaveEffect extends OneShotEffect {
 
+    private static final FilterPermanentCard filter = new FilterPermanentCard();
+
     public ReweaveEffect() {
         super(Outcome.Detriment);
         this.staticText = "Target permanent's controller sacrifices it. If he or she does, that player reveals cards from the top of his or her library until he or she reveals a permanent card that shares a card type with the sacrificed permanent, puts that card onto the battlefield, then shuffles his or her library";
@@ -96,47 +98,48 @@ class ReweaveEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean apply(Game game, Ability source) {        
         Permanent permanent = game.getPermanent(source.getTargets().getFirstTarget());
-        if ( permanent != null ) {
-            if (permanent.sacrifice(this.getId(), game)) {
-                Player player = game.getPlayer(permanent.getControllerId());
-                if (player != null) {
-                    Library library = player.getLibrary();
+        if (permanent != null) {
+            if (permanent.sacrifice(source.getSourceId(), game)) {
+                Player permanentController = game.getPlayer(permanent.getControllerId());
+                if (permanentController != null) {
+                    Library library = permanentController.getLibrary();
                     if (library.size() > 0) {
                         Cards cards = new CardsImpl();
                         Card card = null;
                         boolean cardFound = false;
                         if (library.size() > 0) {
-                            do  {
+                            do {
                                 card = library.removeFromTop(game);
                                 cards.add(card);
-                                for (CardType cardType : permanent.getCardType()) {
-                                    if (card.getCardType().contains(cardType)) {
-                                        // a permanent card
-                                        if (!card.getCardType().contains(CardType.INSTANT) && !card.getCardType().contains(CardType.SORCERY)) {
+                                if (filter.match(card, game)) {
+                                    for (CardType cardType : permanent.getCardType()) {
+                                        if (card.getCardType().contains(cardType)) {
+                                            // a permanent card
                                             cardFound = true;
                                             break;
                                         }
                                     }
                                 }
                             } while (!cardFound && library.size() > 0);
-                            card.putOntoBattlefield(game, Zone.PICK, source.getId(), player.getId());
+                            permanentController.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
                         }
-                        
+
                         if (cards.size() > 0) {
-                            player.revealCards("Reweave", cards, game);
-                            Set<Card> cardsToShuffle = cards.getCards(game);
-                            if (card != null) {
-                                cardsToShuffle.remove(card);
+                            permanentController.revealCards("Reweave", cards, game);
+                            if (cardFound && card != null) {
+                                cards.remove(card);
                             }
-                            library.addAll(cardsToShuffle, game);
+                            library.addAll(cards.getCards(game), game);
+                            permanentController.shuffleLibrary(game);
                         }
                     }
+                    return true;
                 }
-            }
-            return true;
+                return false;
+            }            
         }
-        return false;
+        return true;
     }
 }

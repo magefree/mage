@@ -40,7 +40,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPlayer;
@@ -52,7 +52,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class Blightspeaker extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Rebel permanent card with converted mana cost 3 or less");
+    private static final FilterPermanentCard filter = new FilterPermanentCard("Rebel permanent card with converted mana cost 3 or less");
+    
     static {
         filter.add(new SubtypePredicate("Rebel"));
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
@@ -73,6 +74,7 @@ public class Blightspeaker extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
+        
         // {4}, {tap}: Search your library for a Rebel permanent card with converted mana cost 3 or less and put it onto the battlefield. Then shuffle your library.
         SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false),

@@ -45,7 +45,8 @@ public class FilterPermanentCard extends FilterCard {
 
     public FilterPermanentCard(String name) {
         super(name);
-        this.add(Predicates.or(
+        this.add(
+                Predicates.or(
                 new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.CREATURE),
                 new CardTypePredicate(CardType.ENCHANTMENT),

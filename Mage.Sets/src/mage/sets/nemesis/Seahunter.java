@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.nemesis;
 
 import java.util.UUID;
@@ -39,7 +38,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
@@ -49,25 +48,25 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class Seahunter extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("Merfolk permanent card");
+    private static final FilterPermanentCard filter = new FilterPermanentCard("Merfolk permanent card");
 
     static {
         filter.add(new SubtypePredicate("Merfolk"));
     }
 
     public Seahunter(UUID ownerId) {
-		super(ownerId, 41, "Seahunter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-		this.expansionSetCode = "NMS";
-		this.subtype.add("Human");
-		this.subtype.add("Mercenary");
-		this.color.setBlue(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
-	
-		// {3}, {T}: Search your library for a Merfolk permanent card and put it onto the battlefield. Then shuffle your library.
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
-		ability.addManaCost(new GenericManaCost(3));
-		this.addAbility(ability);
+        super(ownerId, 41, "Seahunter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
+        this.expansionSetCode = "NMS";
+        this.subtype.add("Human");
+        this.subtype.add("Mercenary");
+        this.color.setBlue(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // {3}, {T}: Search your library for a Merfolk permanent card and put it onto the battlefield. Then shuffle your library.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
+        ability.addManaCost(new GenericManaCost(3));
+        this.addAbility(ability);
     }
 
     public Seahunter(final Seahunter card) {

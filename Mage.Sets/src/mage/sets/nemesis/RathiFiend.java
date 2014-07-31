@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.nemesis;
 
 import java.util.UUID;
@@ -42,7 +41,7 @@ import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -53,28 +52,28 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class RathiFiend extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("Mercenary permanent card with converted mana cost 3 or less");
+    private static final FilterPermanentCard filter = new FilterPermanentCard("Mercenary permanent card with converted mana cost 3 or less");
 
     static {
         filter.add(new SubtypePredicate("Mercenary"));
-		filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 4));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 4));
     }
 
     public RathiFiend(UUID ownerId) {
-		super(ownerId, 68, "Rathi Fiend", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
-		this.expansionSetCode = "NMS";
-		this.subtype.add("Horror");
-		this.subtype.add("Mercenary");
-		this.color.setBlack(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
-	
-		// When Rathi Fiend enters the battlefield, each player loses 3 life.
+        super(ownerId, 68, "Rathi Fiend", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.expansionSetCode = "NMS";
+        this.subtype.add("Horror");
+        this.subtype.add("Mercenary");
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // When Rathi Fiend enters the battlefield, each player loses 3 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifeAllPlayersEffect(3), false));
-		// {3}, {T}: Search your library for a Mercenary permanent card with converted mana cost 3 or less and put it onto the battlefield. Then shuffle your library.
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
-		ability.addManaCost(new GenericManaCost(3));
-		this.addAbility(ability);
+        // {3}, {T}: Search your library for a Mercenary permanent card with converted mana cost 3 or less and put it onto the battlefield. Then shuffle your library.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
+        ability.addManaCost(new GenericManaCost(3));
+        this.addAbility(ability);
     }
 
     public RathiFiend(final RathiFiend card) {

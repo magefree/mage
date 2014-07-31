@@ -39,7 +39,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
 import mage.filter.Filter;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class AmrouScout extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("Rebel permanent card with converted mana cost 3 or less");
+    private static final FilterPermanentCard filter = new FilterPermanentCard("Rebel permanent card with converted mana cost 3 or less");
     static {
         filter.add(new SubtypePredicate("Rebel"));
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));

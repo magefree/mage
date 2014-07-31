@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.mercadianmasques;
 
 import java.util.UUID;
@@ -42,6 +41,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterCreatureCard;
+import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -52,29 +52,29 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class RamosianSkyMarshal extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("Rebel permanent card with converted mana cost 6 or less");
+    private static final FilterPermanentCard filter = new FilterPermanentCard("Rebel permanent card with converted mana cost 6 or less");
 
     static {
         filter.add(new SubtypePredicate("Rebel"));
-		filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 7));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 7));
     }
 
     public RamosianSkyMarshal(UUID ownerId) {
-		super(ownerId, 40, "Ramosian Sky Marshal", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-		this.expansionSetCode = "MMQ";
-		this.subtype.add("Human");
-		this.subtype.add("Rebel");
-		this.color.setWhite(true);
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(3);
-	
-		// Flying
+        super(ownerId, 40, "Ramosian Sky Marshal", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
+        this.expansionSetCode = "MMQ";
+        this.subtype.add("Human");
+        this.subtype.add("Rebel");
+        this.color.setWhite(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
-		
-		// {7}, {T}: Search your library for a Rebel permanent card with converted mana cost 6 or less and put it onto the battlefield. Then shuffle your library.
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
-		ability.addManaCost(new GenericManaCost(7));
-		this.addAbility(ability);
+
+        // {7}, {T}: Search your library for a Rebel permanent card with converted mana cost 6 or less and put it onto the battlefield. Then shuffle your library.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
+        ability.addManaCost(new GenericManaCost(7));
+        this.addAbility(ability);
     }
 
     public RamosianSkyMarshal(final RamosianSkyMarshal card) {

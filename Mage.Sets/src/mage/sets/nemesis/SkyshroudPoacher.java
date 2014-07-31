@@ -49,9 +49,11 @@ import mage.target.common.TargetCardInLibrary;
 public class SkyshroudPoacher extends CardImpl {
 
     private static final FilterPermanentCard filter = new FilterPermanentCard("Elf permanent card");
+    
     static {
         filter.add(new SubtypePredicate("Elf"));
     }
+    
     public SkyshroudPoacher(UUID ownerId) {
         super(ownerId, 119, "Skyshroud Poacher", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.expansionSetCode = "NMS";

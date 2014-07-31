@@ -38,7 +38,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -100,7 +100,7 @@ class GoblinLackeyTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} deals damage to an opponent, you may put a Goblin creature card from your hand onto the battlefield.";
+        return "Whenever {this} deals damage to an opponent, you may put a Goblin permanent card from your hand onto the battlefield.";
     }
 }
 
@@ -108,7 +108,7 @@ class GoblinLackeyEffect extends OneShotEffect {
 
     public GoblinLackeyEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "you may put a Goblin creature card from your hand onto the battlefield";
+        this.staticText = "you may put a Goblin permanent card from your hand onto the battlefield";
     }
 
     public GoblinLackeyEffect(final GoblinLackeyEffect effect) {
@@ -122,21 +122,21 @@ class GoblinLackeyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
-
-        FilterCreatureCard filter = new FilterCreatureCard("Goblin creature card from your hand");
+        FilterPermanentCard filter = new FilterPermanentCard("Goblin permanent card from your hand");
         filter.add(new SubtypePredicate("Goblin"));
         TargetCardInHand target = new TargetCardInHand(filter);
-        if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+        if (controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
-                card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId());
-                return true;
+                controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
+            } else {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 }

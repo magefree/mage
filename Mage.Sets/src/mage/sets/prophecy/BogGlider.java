@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledPermanent;
 public class BogGlider extends CardImpl {
 
     final static FilterControlledPermanent landFilter = new FilterControlledLandPermanent("a land");
-    private static final FilterCreatureCard filter = new FilterCreatureCard("Mercenary permanent card with converted mana cost 2 or less");
+    private static final FilterPermanentCard filter = new FilterPermanentCard("Mercenary permanent card with converted mana cost 2 or less");
 
     static {
         filter.add(new SubtypePredicate("Mercenary"));

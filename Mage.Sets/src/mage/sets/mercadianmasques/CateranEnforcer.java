@@ -41,7 +41,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -52,11 +52,11 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class CateranEnforcer extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("Mercenary permanent card with converted mana cost 4 or less");
+    private static final FilterPermanentCard filter = new FilterPermanentCard("Mercenary permanent card with converted mana cost 4 or less");
 
     static {
         filter.add(new SubtypePredicate("Mercenary"));
-		filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 5));
+	filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 5));
     }
 
     public CateranEnforcer(UUID ownerId) {
