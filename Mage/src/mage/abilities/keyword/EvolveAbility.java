@@ -161,8 +161,8 @@ class EvolveEffect extends OneShotEffect {
                 game.getState().setValue("EvolveAddCounterActive", Boolean.TRUE);
                 sourceCreature.addCounters(CounterType.P1P1.createInstance(), game);
                 game.getState().setValue("EvolveAddCounterActive", Boolean.FALSE);
-                return true;
             }
+            return true;
         }
         return false;
     }

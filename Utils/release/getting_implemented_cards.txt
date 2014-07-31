@@ -43,6 +43,9 @@ since 1.3.0-2014-07-11
 git log 458255cd0627af90c2ebeab4c410a16d55a36f41..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
 since 1.3.0-2014-07-19
 git log 75eb0bdfdf36ba83dd5a3e2c6a204ceb186c9d5e..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
+since 1.3.0-2014-07-30
+git log 69ce53e6e8036bf01bdd090e8785f4d63c486d1e..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
+
 
 
 3. Copy added_cards.txt to trunk\Utils folder

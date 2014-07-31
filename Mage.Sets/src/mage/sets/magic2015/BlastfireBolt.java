@@ -38,6 +38,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -86,15 +87,19 @@ class DestroyAllAttachedEquipmentEffect extends OneShotEffect {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(source.getFirstTarget());
-        if (target != null) {
-            ArrayList<UUID> attachments = new ArrayList<>(target.getAttachments());
-            for (UUID attachmentId : attachments) {
-                Permanent attachment = game.getPermanent(attachmentId);
-                if (attachment != null && attachment.getSubtype().contains("Equipment")) {
-                    attachment.destroy(source.getSourceId(), game, false);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Permanent target = game.getPermanent(source.getFirstTarget());
+            if (target != null) {
+                ArrayList<UUID> attachments = new ArrayList<>(target.getAttachments());
+                for (UUID attachmentId : attachments) {
+                    Permanent attachment = game.getPermanent(attachmentId);
+                    if (attachment != null && attachment.getSubtype().contains("Equipment")) {
+                        attachment.destroy(source.getSourceId(), game, false);
+                    }
                 }
             }
+            return true;
         }
         return false;
     }
