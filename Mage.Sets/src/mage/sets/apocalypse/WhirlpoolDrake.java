@@ -30,8 +30,10 @@ package mage.sets.apocalypse;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
@@ -46,46 +48,50 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class WhirlpoolRider extends CardImpl {
+public class WhirlpoolDrake extends CardImpl {
 
-    public WhirlpoolRider(UUID ownerId) {
-        super(ownerId, 35, "Whirlpool Rider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+    public WhirlpoolDrake(UUID ownerId) {
+        super(ownerId, 34, "Whirlpool Drake", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.expansionSetCode = "APC";
-        this.subtype.add("Merfolk");
+        this.subtype.add("Drake");
 
         this.color.setBlue(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // When Whirlpool Rider enters the battlefield, shuffle the cards from your hand into your library, then draw that many cards.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new WhirlpoolRiderTriggeredEffect()));
-
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // When Whirlpool Drake enters the battlefield, shuffle the cards from your hand into your library, then draw that many cards.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new WhirlpoolSDrakeTriggeredEffect(), false));
+        
+        // When Whirlpool Drake dies, shuffle the cards from your hand into your library, then draw that many cards.
+        this.addAbility(new DiesTriggeredAbility(new WhirlpoolSDrakeTriggeredEffect(), false));
     }
 
-    public WhirlpoolRider(final WhirlpoolRider card) {
+    public WhirlpoolDrake(final WhirlpoolDrake card) {
         super(card);
     }
 
     @Override
-    public WhirlpoolRider copy() {
-        return new WhirlpoolRider(this);
+    public WhirlpoolDrake copy() {
+        return new WhirlpoolDrake(this);
     }
 }
 
-class WhirlpoolRiderTriggeredEffect extends OneShotEffect {
+class WhirlpoolSDrakeTriggeredEffect extends OneShotEffect {
 
-    public WhirlpoolRiderTriggeredEffect() {
+    public WhirlpoolSDrakeTriggeredEffect() {
         super(Outcome.DrawCard);
         this.staticText = "shuffle the cards from your hand into your library, then draw that many cards";
     }
 
-    public WhirlpoolRiderTriggeredEffect(final WhirlpoolRiderTriggeredEffect effect) {
+    public WhirlpoolSDrakeTriggeredEffect(final WhirlpoolSDrakeTriggeredEffect effect) {
         super(effect);
     }
 
     @Override
-    public WhirlpoolRiderTriggeredEffect copy() {
-        return new WhirlpoolRiderTriggeredEffect(this);
+    public WhirlpoolSDrakeTriggeredEffect copy() {
+        return new WhirlpoolSDrakeTriggeredEffect(this);
     }
 
     @Override
@@ -105,9 +111,8 @@ class WhirlpoolRiderTriggeredEffect extends OneShotEffect {
                 controller.shuffleLibrary(game);
                 controller.drawCards(cardsHand, game);
             }
-            return true;            
+            return true;
         }
-
         return false;
     }
 }

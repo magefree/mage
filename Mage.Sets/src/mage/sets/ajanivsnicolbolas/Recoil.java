@@ -25,37 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenth;
+package mage.sets.ajanivsnicolbolas;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class Boomerang extends CardImpl {
+public class Recoil extends mage.sets.invasion.Recoil {
 
-    public Boomerang(UUID ownerId) {
-        super(ownerId, 70, "Boomerang", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
-        this.expansionSetCode = "10E";
-        this.color.setBlue(true);
-        
-        // Return target permanent to its owner's hand. 
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent());
+    public Recoil(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 61;
+        this.expansionSetCode = "DDH";
     }
 
-    public Boomerang(final Boomerang card) {
+    public Recoil(final Recoil card) {
         super(card);
     }
 
     @Override
-    public Boomerang copy() {
-        return new Boomerang(this);
+    public Recoil copy() {
+        return new Recoil(this);
     }
 }

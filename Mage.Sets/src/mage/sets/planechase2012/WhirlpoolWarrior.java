@@ -107,13 +107,13 @@ class WhirlpoolWarriorTriggeredEffect extends OneShotEffect {
                     Card card = game.getCard(cardId);
                     if (card != null) {
                         controller.removeFromHand(card, game);
-                        card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                     }
                 }
                 controller.shuffleLibrary(game);
                 controller.drawCards(cardsHand, game);
-                return true;
             }
+            return true;
         }
 
         return false;

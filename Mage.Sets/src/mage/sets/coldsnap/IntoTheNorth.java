@@ -25,37 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenth;
+package mage.sets.coldsnap;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.filter.common.FilterLandCard;
+import mage.filter.predicate.mageobject.SupertypePredicate;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class Boomerang extends CardImpl {
+public class IntoTheNorth extends CardImpl {
+    
+    private static final FilterLandCard filter = new FilterLandCard("snow land card");
 
-    public Boomerang(UUID ownerId) {
-        super(ownerId, 70, "Boomerang", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
-        this.expansionSetCode = "10E";
-        this.color.setBlue(true);
+    static {
+        filter.add(new SupertypePredicate("Snow"));
+    }
+    
+    public IntoTheNorth(UUID ownerId) {
+        super(ownerId, 111, "Into the North", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
+        this.expansionSetCode = "CSP";
+
+        this.color.setGreen(true);
+
+        // Search your library for a snow land card and put it onto the battlefield tapped. Then shuffle your library.
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true, Outcome.PutLandInPlay));
         
-        // Return target permanent to its owner's hand. 
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent());
     }
 
-    public Boomerang(final Boomerang card) {
+    public IntoTheNorth(final IntoTheNorth card) {
         super(card);
     }
 
     @Override
-    public Boomerang copy() {
-        return new Boomerang(this);
+    public IntoTheNorth copy() {
+        return new IntoTheNorth(this);
     }
 }

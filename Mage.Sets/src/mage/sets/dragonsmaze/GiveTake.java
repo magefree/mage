@@ -82,7 +82,7 @@ class TakeEffect extends OneShotEffect {
 
     public TakeEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Remove all +1/+1 counters from target creature you control. Draw that many cards.";
+        this.staticText = "Remove all +1/+1 counters from target creature you control. Draw that many cards";
     }
 
     public TakeEffect(final TakeEffect effect) {

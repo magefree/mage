@@ -25,18 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.sets.invasion;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -44,51 +42,47 @@ import mage.target.TargetPermanent;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LevelX2
  */
-public class DinrovaHorror extends CardImpl {
+public class Recoil extends CardImpl {
 
-    public DinrovaHorror(UUID ownerId) {
-        super(ownerId, 155, "Dinrova Horror", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}{B}");
-        this.expansionSetCode = "GTC";
-        this.subtype.add("Horror");
+    public Recoil(UUID ownerId) {
+        super(ownerId, 264, "Recoil", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{B}");
+        this.expansionSetCode = "INV";
 
         this.color.setBlue(true);
         this.color.setBlack(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
 
-        // When Dinrova Horror enters the battlefield, return target permanent to its owner's hand, then that player discards a card.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DinrovaHorrorEffect(), false);
-        ability.addTarget(new TargetPermanent());
-        this.addAbility(ability);
-
+        // Return target permanent to its owner's hand. Then that player discards a card.
+        this.getSpellAbility().addEffect(new RecoilEffect());
+        this.getSpellAbility().addTarget(new TargetPermanent());        
+        
     }
 
-    public DinrovaHorror(final DinrovaHorror card) {
+    public Recoil(final Recoil card) {
         super(card);
     }
 
     @Override
-    public DinrovaHorror copy() {
-        return new DinrovaHorror(this);
+    public Recoil copy() {
+        return new Recoil(this);
     }
 }
 
-class DinrovaHorrorEffect extends OneShotEffect {
+class RecoilEffect extends OneShotEffect {
 
-    public DinrovaHorrorEffect() {
+    public RecoilEffect() {
         super(Outcome.Detriment);
-        this.staticText = "return target permanent to its owner's hand, then that player discards a card";
+        this.staticText = "return target permanent to its owner's hand. Then that player discards a card";
     }
 
-    public DinrovaHorrorEffect(final DinrovaHorrorEffect effect) {
+    public RecoilEffect(final RecoilEffect effect) {
         super(effect);
     }
 
     @Override
-    public DinrovaHorrorEffect copy() {
-        return new DinrovaHorrorEffect(this);
+    public RecoilEffect copy() {
+        return new RecoilEffect(this);
     }
 
     @Override
