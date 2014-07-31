@@ -61,10 +61,8 @@ public class Commander implements CommandObject{
         abilites.add(new CastCommanderAbility(card));
         for (Ability ability : card.getAbilities()) {
             if (!(ability instanceof SpellAbility)) {
-                if (ability.getZone().match(Zone.COMMAND)){
-                    Ability newAbility = ability.copy();
-                    abilites.add(newAbility);
-                }
+                Ability newAbility = ability.copy();
+                abilites.add(newAbility);
             }
         }
     }
