@@ -45,7 +45,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -53,6 +52,9 @@ import mage.players.Player;
 import mage.target.TargetCard;
 
 import java.util.UUID;
+import mage.filter.common.FilterPermanentCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -155,10 +157,12 @@ class GenesisHydraPutOntoBattlefieldEffect extends OneShotEffect {
             controller.revealCards("Genesis Hydra", cards, game);
         }
 
-        FilterCard filter = new FilterNonlandCard("a nonland card with converted mana cost " + count + " or less to put onto the battlefield");
+        FilterCard filter = new FilterPermanentCard("a nonland permanent card with converted mana cost " + count + " or less to put onto the battlefield");
+        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
         filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, count + 1));
         TargetCard target1 = new TargetCard(Zone.LIBRARY, filter);
-        if (cards.size() > 0 && controller.choose(Outcome.PutCardInPlay, cards, target1, game)) {
+        if (cards.count(filter, controller.getId(), source.getSourceId(), game) > 0
+                && controller.choose(Outcome.PutCardInPlay, cards, target1, game)) {
             Card card = cards.get(target1.getFirstTarget(), game);
             if (card != null) {
                 cards.remove(card);
