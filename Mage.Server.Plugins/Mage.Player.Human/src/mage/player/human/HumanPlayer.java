@@ -87,7 +87,7 @@ public class HumanPlayer extends PlayerImpl {
     private static final Logger log = Logger.getLogger(HumanPlayer.class);
 
     static {
-        replacementEffectChoice.setMessage("Choose replacement effect");
+        replacementEffectChoice.setMessage("Choose replacement effect to resolve first");
         staticOptions.put("UI.right.btn.text", "Done");
     }
 

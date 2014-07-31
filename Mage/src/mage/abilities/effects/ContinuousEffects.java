@@ -359,6 +359,11 @@ public class ContinuousEffects implements Serializable {
             }
         }
         for (PreventionEffect effect: preventionEffects) {
+            if (event.getAppliedEffects() != null && event.getAppliedEffects().contains(effect.getId())) {
+                // Effect already applied to this event, ignore it
+                // TODO: Handle also gained effect that are connected to different abilities.
+                continue;
+            }            
             HashSet<Ability> abilities = preventionEffects.getAbility(effect.getId());
             HashSet<Ability> applicableAbilities = new HashSet<>();
             for (Ability ability : abilities) {
