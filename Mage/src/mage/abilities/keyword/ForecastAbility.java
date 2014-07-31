@@ -70,7 +70,7 @@ public class ForecastAbility extends LimitedTimesPerTurnActivatedAbility {
     @Override
     public boolean canActivate(UUID playerId, Game game) {
         // May be activated only during the upkeep step of the card's owner
-        if (!game.getActivePlayerId().equals(controllerId) || !game.getStep().getType().equals(PhaseStep.UPKEEP)) {
+        if (!game.getActivePlayerId().equals(controllerId) || !PhaseStep.UPKEEP.equals(game.getStep().getType())) {
             return false;
         }
         return super.canActivate(playerId, game);

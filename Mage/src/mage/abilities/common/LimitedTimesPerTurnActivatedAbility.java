@@ -42,6 +42,17 @@ import mage.util.CardUtil;
  */
 public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
 
+    class ActivationInfo {
+
+        public int turnNum;
+        public int activationCounter;
+
+        public ActivationInfo(int turnNum, int activationCounter) {
+            this.turnNum = turnNum;
+            this.activationCounter = activationCounter;
+        }
+    }
+
     private int maxActivationsPerTurn;
 
     public LimitedTimesPerTurnActivatedAbility(Zone zone, Effect effect, Cost cost) {
@@ -61,8 +72,8 @@ public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
     @Override
     public boolean canActivate(UUID playerId, Game game) {
         if (super.canActivate(playerId, game)) {
-            Integer activations = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activations", sourceId, game));
-            return activations == null || activations < maxActivationsPerTurn;
+            ActivationInfo activationInfo = (ActivationInfo) game.getState().getValue(CardUtil.getCardZoneString("activations", sourceId, game));
+            return activationInfo == null || activationInfo.turnNum != game.getTurnNum() || activationInfo.activationCounter < maxActivationsPerTurn;
         }
         return false;
     }
@@ -71,22 +82,22 @@ public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
     public boolean activate(Game game, boolean noMana) {
         if (canActivate(this.controllerId, game)) {
             if (super.activate(game, noMana)) {
-                Integer activations = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activations", sourceId, game));
-                if (activations == null) {
-                    activations = new Integer(1);
+                ActivationInfo activationInfo = (ActivationInfo) game.getState().getValue(CardUtil.getCardZoneString("activations", sourceId, game));
+                if (activationInfo == null) {
+                    activationInfo = new ActivationInfo(game.getTurnNum(), 1);
                 } else {
-                    activations++;
+                    if (activationInfo.turnNum != game.getTurnNum()) {
+                        activationInfo.turnNum = game.getTurnNum();
+                        activationInfo.activationCounter = 1;
+                    } else {
+                        activationInfo.activationCounter++;
+                    }
                 }
-                game.getState().setValue(CardUtil.getCardZoneString("activations", sourceId, game), activations);
+                game.getState().setValue(CardUtil.getCardZoneString("activations", sourceId, game), activationInfo);
                 return true;
             }
         }
         return false;
-    }
-
-    @Override
-    public void reset(Game game) {
-        game.getState().setValue(CardUtil.getCardZoneString("activations", sourceId, game), new Integer(0));
     }
 
     @Override
