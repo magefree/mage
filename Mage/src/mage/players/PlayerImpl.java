@@ -1982,7 +1982,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public Set<UUID> getPlayableInHand(Game game) {
         Set<UUID> playable = new HashSet<>();
-        if (game.getStep() != null && !shouldSkipGettingPlayable(game)) {
+        if (!shouldSkipGettingPlayable(game)) {
             // for clean_up phase show all cards
             if (game.getPhase() != null && PhaseStep.CLEANUP.equals(game.getPhase().getStep().getType())) {
                 for (Card card: hand.getCards(game)) {
@@ -2025,6 +2025,9 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @return
      */
     private boolean shouldSkipGettingPlayable(Game game) {
+        if (game.getStep() == null) { // happens at the start of the game 
+            return true;
+        }
         for (Entry<PhaseStep, Step.StepPart> phaseStep : silentPhaseSteps.entrySet()) {
             if (game.getPhase() != null && game.getPhase().getStep() != null && phaseStep.getKey().equals(game.getPhase().getStep().getType())) {
                 if (phaseStep.getValue() == null || phaseStep.getValue().equals(game.getPhase().getStep().getStepPart())) {
