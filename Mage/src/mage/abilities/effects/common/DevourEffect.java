@@ -48,6 +48,14 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * Effect for the DevourAbility
  * 
+ *     702.81. Devour
+ *       702.81a Devour is a static ability. "Devour N" means "As this object enters the battlefield, 
+ *         you may sacrifice any number of creatures. This permanent enters the battlefield with N +1/+1
+ *         counters on it for each creature sacrificed this way."
+ *       702.81b Some objects have abilities that refer to the number of creatures the permanent devoured. 
+ *        "It devoured" means "sacrificed as a result of its devour ability as it entered the battlefield." 
+ *
+ * 
  * @author LevelX2
  */
 public class DevourEffect extends ReplacementEffectImpl {
@@ -56,7 +64,7 @@ public class DevourEffect extends ReplacementEffectImpl {
     static {
         filter.add(new AnotherPredicate());
     }
-    private DevourFactor devourFactor;
+    private final DevourFactor devourFactor;
 
     public enum DevourFactor {
         Devour1 ("Devour 1", "that many +1/+1 counters on it", 1),
@@ -64,9 +72,9 @@ public class DevourEffect extends ReplacementEffectImpl {
         Devour3 ("Devour 3", "three times that many +1/+1 counters on it", 3),
         DevourX ("Devour X, where X is the number of creatures devoured this way", "X +1/+1 counters on it for each of those creatures", Integer.MAX_VALUE);
 
-        private String text;
-        private String ruleText;
-        private int factor;
+        private final String text;
+        private final String ruleText;
+        private final int factor;
 
         DevourFactor(String text, String ruleText, int factor) {
             this.text = text;
@@ -127,7 +135,7 @@ public class DevourEffect extends ReplacementEffectImpl {
             if (controller.chooseUse(Outcome.Detriment, "Devour creatures?", game)) {
                 controller.chooseTarget(Outcome.Detriment, target, source, game);
                 if (target.getTargets().size() > 0) {
-                    List<ArrayList<String>> cardSubtypes = new ArrayList<ArrayList<String>>();
+                    List<ArrayList<String>> cardSubtypes = new ArrayList<>();
                     int devouredCreatures = target.getTargets().size();
                     game.informPlayers(new StringBuilder(creature.getName()).append(" devours ").append(devouredCreatures).append(" creatures").toString());
                     for (UUID targetId: target.getTargets()) {
@@ -167,7 +175,7 @@ public class DevourEffect extends ReplacementEffectImpl {
         if (object != null) {
             return (List<ArrayList<String>>) object;
         }
-        return new ArrayList<ArrayList<String>>();
+        return new ArrayList<>();
     }
 
     public int getDevouredCreaturesAmount(Game game, UUID permanentId) {

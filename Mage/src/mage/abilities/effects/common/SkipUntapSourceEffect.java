@@ -32,7 +32,6 @@ import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
