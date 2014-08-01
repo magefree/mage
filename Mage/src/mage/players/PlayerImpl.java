@@ -1982,8 +1982,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public Set<UUID> getPlayableInHand(Game game) {
         Set<UUID> playable = new HashSet<>();
-
-        if (!shouldSkipGettingPlayable(game)) {
+        if (game.getStep() != null && !shouldSkipGettingPlayable(game)) {
             // for clean_up phase show all cards
             if (game.getPhase() != null && PhaseStep.CLEANUP.equals(game.getPhase().getStep().getType())) {
                 for (Card card: hand.getCards(game)) {
