@@ -944,10 +944,11 @@ public class ComputerPlayer6 extends ComputerPlayer implements Player {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, activePlayerId, activePlayerId))) {
 
             Player attackingPlayer = game.getPlayer(activePlayerId);
+            // TODO: this works only in two player game, also no attack of Planeswalker
             UUID defenderId = game.getOpponents(playerId).iterator().next();
             Player defender = game.getPlayer(defenderId);
 
-            List<Permanent> attackersList = super.getAvailableAttackers(game);
+            List<Permanent> attackersList = super.getAvailableAttackers(defenderId, game);
             if (attackersList.isEmpty()) {
                 return;
             }

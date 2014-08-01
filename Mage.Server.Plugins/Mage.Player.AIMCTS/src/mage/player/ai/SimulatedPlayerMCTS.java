@@ -176,7 +176,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
         //useful only for two player games - will only attack first opponent
 //        logger.info("select attackers");
         UUID defenderId = game.getOpponents(playerId).iterator().next();
-        List<Permanent> attackersList = super.getAvailableAttackers(game);
+        List<Permanent> attackersList = super.getAvailableAttackers(defenderId, game);
         //use binary digits to calculate powerset of attackers
         int powerElements = (int) Math.pow(2, attackersList.size());
         int value = rnd.nextInt(powerElements);
@@ -186,8 +186,9 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
             binary.insert(0, "0");  //pad with zeros
         }
         for (int i = 0; i < attackersList.size(); i++) {
-            if (binary.charAt(i) == '1')
+            if (binary.charAt(i) == '1') {
                 game.getCombat().declareAttacker(attackersList.get(i).getId(), defenderId, game);
+            }
         }
         actionCount++;
     }

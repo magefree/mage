@@ -28,6 +28,7 @@
 
 package mage.abilities.effects;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.constants.Duration;
 import mage.constants.EffectType;
@@ -62,6 +63,10 @@ public abstract class RestrictionEffect extends ContinuousEffectImpl {
     public abstract boolean applies(Permanent permanent, Ability source, Game game);
 
     public boolean canAttack(Game game) {
+        return true;
+    }
+    
+    public boolean canAttack(UUID defenderId, Ability source, Game game) {
         return true;
     }
 

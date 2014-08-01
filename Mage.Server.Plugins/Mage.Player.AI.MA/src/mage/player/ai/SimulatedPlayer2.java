@@ -334,7 +334,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         Map<Integer, Combat> engagements = new HashMap<>();
         //useful only for two player games - will only attack first opponent
         UUID defenderId = game.getOpponents(playerId).iterator().next();
-        List<Permanent> attackersList = super.getAvailableAttackers(game);
+        List<Permanent> attackersList = super.getAvailableAttackers(defenderId, game);
         //use binary digits to calculate powerset of attackers
         int powerElements = (int) Math.pow(2, attackersList.size());
         StringBuilder binary = new StringBuilder();

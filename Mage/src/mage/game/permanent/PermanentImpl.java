@@ -857,8 +857,15 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         return game.replaceEvent(GameEvent.getEvent(eventType, this.objectId, ownerId));
     }
 
+
+
     @Override
     public boolean canAttack(Game game) {
+        return canAttack(null, game);
+    }
+    
+    @Override
+    public boolean canAttack(UUID defenderId, Game game) {
         if (tapped) {
             return false;
         }
@@ -866,15 +873,22 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             return false;
         }
         //20101001 - 508.1c
-        for (RestrictionEffect effect: game.getContinuousEffects().getApplicableRestrictionEffects(this, game).keySet()) {
-            if (!effect.canAttack(game)) {
+        for (Map.Entry<RestrictionEffect, HashSet<Ability>> effectEntry: game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
+            if (!effectEntry.getKey().canAttack(game)) {
                 return false;
+            }
+            if (defenderId != null) {
+                for (Ability ability :effectEntry.getValue()) {
+                    if (!effectEntry.getKey().canAttack(defenderId, ability, game)) {
+                        return false;
+                    }                    
+                }
             }
         }
         return !abilities.containsKey(DefenderAbility.getInstance().getId())
                 || game.getContinuousEffects().asThough(this.objectId, AsThoughEffectType.ATTACK, this.getControllerId(), game);
     }
-
+    
     @Override
     public boolean canBlock(UUID attackerId, Game game) {
         if (tapped && !game.getState().getContinuousEffects().asThough(this.getId(), AsThoughEffectType.BLOCK_TAPPED, this.getControllerId(), game)) {

@@ -135,8 +135,9 @@ public class MCTSPlayer extends ComputerPlayer {
             }
             List<UUID> engagement = new ArrayList<UUID>();
             for (int j = 0; j < attackersList.size(); j++) {
-                if (binary.charAt(j) == '1')
+                if (binary.charAt(j) == '1') {
                     engagement.add(attackersList.get(j).getId());
+                }
             }
             engagements.add(engagement);
         }
@@ -146,7 +147,9 @@ public class MCTSPlayer extends ComputerPlayer {
     public List<List<List<UUID>>> getBlocks(Game game) {
         List<List<List<UUID>>> engagements = new ArrayList<List<List<UUID>>>();
         int numGroups = game.getCombat().getGroups().size();
-        if (numGroups == 0) return engagements;
+        if (numGroups == 0) {
+            return engagements;
+        }
 
         //add a node with no blockers
         List<List<UUID>> engagement = new ArrayList<List<UUID>>();

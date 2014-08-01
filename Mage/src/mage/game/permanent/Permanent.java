@@ -150,6 +150,14 @@ public interface Permanent extends Card, Controllable {
     void setMaxBlockedBy(int maxBlockedBy);
     
     boolean canAttack(Game game);
+    
+    /**
+     * 
+     * @param defenderId id of planeswalker or player to attack
+     * @param game
+     * @return 
+     */
+    boolean canAttack(UUID defenderId, Game game);
     boolean canBlock(UUID attackerId, Game game);
     boolean canBlockAny(Game game);
     

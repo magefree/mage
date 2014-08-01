@@ -1673,7 +1673,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             setStoredBookmark(game.bookmarkState()); // makes it possible to UNDO a declared attacker with costs from e.g. Propaganda
         }
         Permanent attacker = game.getPermanent(attackerId);
-        if (attacker != null && attacker.canAttack(game) && attacker.getControllerId().equals(playerId)) {
+        if (attacker != null && attacker.canAttack(defenderId, game) && attacker.getControllerId().equals(playerId)) {
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKER, defenderId, attackerId, playerId))) {
                 game.getCombat().declareAttacker(attackerId, defenderId, game);
             }
@@ -1767,13 +1767,19 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public List<Permanent> getAvailableAttackers(Game game) {
+        // TODO: get available opponents and their planeswalkers, check for each if permanent can attack one
+        return  getAvailableAttackers(null, game);
+    }
+    
+    @Override
+    public List<Permanent> getAvailableAttackers(UUID defenderId, Game game) {
         FilterCreatureForCombat filter = new FilterCreatureForCombat();
         List<Permanent> attackers = game.getBattlefield().getAllActivePermanents(filter, playerId, game);
         for (Iterator<Permanent> i = attackers.iterator(); i.hasNext();) {
             Permanent entry = i.next();
-            if (!entry.canAttack(game)) {
+            if (!entry.canAttack(defenderId, game)) {
                 i.remove();
-            }
+            } 
         }
         return attackers;
     }

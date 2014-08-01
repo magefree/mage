@@ -180,7 +180,7 @@ public class RandomPlayer extends ComputerPlayer {
     public void selectAttackers(Game game, UUID attackingPlayerId) {
         //useful only for two player games - will only attack first opponent
         UUID defenderId = game.getOpponents(playerId).iterator().next();
-        List<Permanent> attackersList = super.getAvailableAttackers(game);
+        List<Permanent> attackersList = super.getAvailableAttackers(defenderId, game);
         //use binary digits to calculate powerset of attackers
         int powerElements = (int) Math.pow(2, attackersList.size());
         int value = rnd.nextInt(powerElements);

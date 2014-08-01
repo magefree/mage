@@ -29,25 +29,22 @@
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
-import mage.abilities.MageSingleton;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.AttachmentType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
  *
  * @author LevelX2
  */
-public class CanBlockOnlyFlyingAttachedEffect extends ReplacementEffectImpl implements MageSingleton {
+
+public class CanBlockOnlyFlyingAttachedEffect extends RestrictionEffect {
 
     public CanBlockOnlyFlyingAttachedEffect(AttachmentType attachmentType) {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        super(Duration.WhileOnBattlefield);
         if (attachmentType.equals(AttachmentType.AURA)) {
             this.staticText = "Enchanted creature can block only creatures with flying";
         } else {
@@ -60,33 +57,18 @@ public class CanBlockOnlyFlyingAttachedEffect extends ReplacementEffectImpl impl
     }
 
     @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return permanent.getAttachments().contains(source.getSourceId());
+    }
+
+    @Override
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return attacker.getAbilities().contains(FlyingAbility.getInstance());
+    }
+
+    @Override
     public CanBlockOnlyFlyingAttachedEffect copy() {
         return new CanBlockOnlyFlyingAttachedEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.DECLARE_BLOCKER) {
-            Permanent attachment = game.getPermanent(source.getSourceId());
-            if (attachment != null && attachment.getAttachedTo() != null
-                    && event.getSourceId().equals(attachment.getAttachedTo())) {
-                Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent != null && !permanent.getAbilities().containsKey(FlyingAbility.getInstance().getId())) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
 }

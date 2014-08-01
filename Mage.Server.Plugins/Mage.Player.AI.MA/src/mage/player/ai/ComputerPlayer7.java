@@ -382,9 +382,9 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
         Integer val = null;
         SimulationNode2 bestNode = null;
         SimulatedPlayer2 attacker = (SimulatedPlayer2) game.getPlayer(attackerId);
-
+        UUID defenderId = game.getOpponents(attackerId).iterator().next();
         if (logger.isDebugEnabled()) {
-            logger.debug(attacker.getName() + "'s possible attackers: " + attacker.getAvailableAttackers(game));
+            logger.debug(attacker.getName() + "'s possible attackers: " + attacker.getAvailableAttackers(defenderId, game));
         }
         for (Combat engagement: attacker.addAttackers(game)) {
             if (logger.isDebugEnabled()) {
@@ -394,8 +394,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 logger.debug("Sim Attackers -- pruning attackers");
                 break;
             }
-            Game sim = game.copy();
-            UUID defenderId = game.getOpponents(attackerId).iterator().next();
+            Game sim = game.copy();            
             for (CombatGroup group: engagement.getGroups()) {
                 for (UUID attackId: group.getAttackers()) {
                     sim.getPlayer(attackerId).declareAttacker(attackId, defenderId, sim, false);

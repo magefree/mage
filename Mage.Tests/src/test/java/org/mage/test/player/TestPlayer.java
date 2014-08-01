@@ -178,7 +178,7 @@ public class TestPlayer extends ComputerPlayer {
                 FilterCreatureForCombat filter = new FilterCreatureForCombat();
                 filter.add(new NamePredicate(groups[0]));
                 Permanent attacker = findPermanent(filter, playerId, game);
-                if (attacker != null && attacker.canAttack(game)) {
+                if (attacker != null && attacker.canAttack(defenderId, game)) {
                     this.declareAttacker(attacker.getId(), defenderId, game, false);
                 }
             }

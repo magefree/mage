@@ -28,38 +28,29 @@
 
 package mage.abilities.effects.common.combat;
 
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.MageSingleton;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.RestrictionEffect;
 import mage.constants.AttachmentType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 
 /**
  * 
  * @author LevelX2
  */
-public class CantAttackControllerAttachedEffect extends ReplacementEffectImpl implements MageSingleton {
 
-    /**
-     * The creature this permanent is attached to can't attack the controller 
-     * of the attachment nor it's plainswalkers
-     * 
-     * @param attachmentType 
-     */
+public class CantAttackControllerAttachedEffect extends RestrictionEffect {
+
     public CantAttackControllerAttachedEffect(AttachmentType attachmentType) {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        super(Duration.WhileOnBattlefield);
         if (attachmentType.equals(AttachmentType.AURA)) {
             this.staticText = "Enchanted creature can't attack you or a planeswalker you control";
         } else {
             this.staticText = "Equiped creature can't attack you or a planeswalker you control";
-        }        
+        }         
     }
 
     public CantAttackControllerAttachedEffect(final CantAttackControllerAttachedEffect effect) {
@@ -67,43 +58,23 @@ public class CantAttackControllerAttachedEffect extends ReplacementEffectImpl im
     }
 
     @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return permanent.getAttachments().contains(source.getSourceId());
+    }
+
+    @Override
+    public boolean canAttack(UUID defenderId, Ability source, Game game) {
+        if (defenderId.equals(source.getControllerId())) {
+            return false;
+        }
+        Permanent plainswalker = game.getPermanent(defenderId);
+        return plainswalker == null || !plainswalker.getControllerId().equals(source.getSourceId());
+    }
+
+    
+    @Override
     public CantAttackControllerAttachedEffect copy() {
         return new CantAttackControllerAttachedEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        Player attackingPlayer = game.getPlayer(event.getPlayerId());
-        if (attackingPlayer != null && sourcePermanent != null) {
-            game.informPlayer(attackingPlayer, 
-                    new StringBuilder("You can't attack this player or his or her planeswalker, because the attacking creature is enchanted by ")
-                            .append(sourcePermanent.getName()).append(".").toString());
-        }        
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.DECLARE_ATTACKER) {
-            Permanent attachment = game.getPermanent(source.getSourceId());
-            if (attachment != null && attachment.getAttachedTo() != null
-                    && event.getSourceId().equals(attachment.getAttachedTo())) {
-                if (event.getTargetId().equals(source.getControllerId())) {
-                    return true;
-                }
-                Permanent plainswalker = game.getPermanent(event.getTargetId());
-                if (plainswalker != null && plainswalker.getControllerId().equals(source.getSourceId())) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
 }
