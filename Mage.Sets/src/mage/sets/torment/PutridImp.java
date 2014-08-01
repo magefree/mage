@@ -61,7 +61,7 @@ public class PutridImp extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Discard a card: Putrid Imp gains flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance()), new DiscardCardCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new DiscardCardCost()));
         // Threshold - As long as seven or more cards are in your graveyard, Putrid Imp gets +1/+1 and can't block.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7), "Threshold - As long as seven or more cards are in your graveyard, Putrid Imp gets +1/+1 and can't block")));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CantBlockSourceEffect(Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7), "")));
