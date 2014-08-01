@@ -35,6 +35,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -873,22 +874,43 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             return false;
         }
         //20101001 - 508.1c
+        if (defenderId == null) {
+            boolean oneCanBeAttacked = false;
+            for (UUID defenderToCheckId: game.getCombat().getDefenders()) {
+                if (canAttackCheckRestrictionEffects(defenderToCheckId, game)) {
+                    oneCanBeAttacked = true;
+                    break;
+                }
+            }
+            if (!oneCanBeAttacked) {
+                return false;
+            }
+        } else {
+            if (!canAttackCheckRestrictionEffects(defenderId, game)) {
+                return false;
+            }
+        }
+
+        return !abilities.containsKey(DefenderAbility.getInstance().getId())
+                || game.getContinuousEffects().asThough(this.objectId, AsThoughEffectType.ATTACK, this.getControllerId(), game);
+    }
+
+
+    private boolean canAttackCheckRestrictionEffects(UUID defenderId, Game game) {
+        //20101001 - 508.1c
         for (Map.Entry<RestrictionEffect, HashSet<Ability>> effectEntry: game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
             if (!effectEntry.getKey().canAttack(game)) {
                 return false;
             }
-            if (defenderId != null) {
-                for (Ability ability :effectEntry.getValue()) {
-                    if (!effectEntry.getKey().canAttack(defenderId, ability, game)) {
-                        return false;
-                    }                    
+            for (Ability ability :effectEntry.getValue()) {
+                if (!effectEntry.getKey().canAttack(defenderId, ability, game)) {
+                    return false;
                 }
             }
         }
-        return !abilities.containsKey(DefenderAbility.getInstance().getId())
-                || game.getContinuousEffects().asThough(this.objectId, AsThoughEffectType.ATTACK, this.getControllerId(), game);
+        return true;
     }
-    
+
     @Override
     public boolean canBlock(UUID attackerId, Game game) {
         if (tapped && !game.getState().getContinuousEffects().asThough(this.getId(), AsThoughEffectType.BLOCK_TAPPED, this.getControllerId(), game)) {
