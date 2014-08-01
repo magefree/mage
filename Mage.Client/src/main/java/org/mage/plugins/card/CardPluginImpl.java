@@ -192,6 +192,8 @@ public class CardPluginImpl implements CardPlugin {
             wrap(creatures, rows, -1);
             int afterCreaturesIndex = rows.size();
             wrap(lands, rows, afterCreaturesIndex);
+            int afterLandsIndex = rows.size();
+            wrap(others, rows, afterLandsIndex);
             // Store the current rows and others.
             List<Row> storedRows = new ArrayList<>(rows.size());
             for (Row row : rows) {
@@ -365,7 +367,8 @@ public class CardPluginImpl implements CardPlugin {
                 case other:
                     return !CardUtil.isLand(card) && !CardUtil.isCreature(card);
                 case attached:
-                    return card.getOriginalPermanent().isAttachedTo();
+                    return card.getOriginalPermanent().isAttachedTo()
+                            && !card.getOriginalPermanent().getSubTypes().contains("Curse");
                 default:
                     throw new RuntimeException("Unhandled type: " + this);
             }
