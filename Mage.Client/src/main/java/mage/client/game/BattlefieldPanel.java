@@ -150,6 +150,14 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
                             }
                         }
                     }
+                    if (!changed) {
+                        UUID u1 = oldMagePermanent.getOriginalPermanent().getAttachedTo();
+                        UUID u2 = permanent.getAttachedTo();
+                        if (u1 == null && u2 != null || u2 == null && u1 != null
+                                || (u1 != null && !u1.equals(u2)) ) {
+                            changed = true;
+                        }
+                    }
 
                 }
                 oldMagePermanent.update(permanent);
