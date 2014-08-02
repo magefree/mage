@@ -28,18 +28,15 @@
 package mage.sets.mirage;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -53,7 +50,7 @@ public class CursedTotem extends CardImpl {
         this.expansionSetCode = "MIR";
 
         // Activated abilities of creatures can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CursedTotemEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CursedTotemCantActivateEffect()));
     }
 
     public CursedTotem(final CursedTotem card) {
@@ -66,41 +63,30 @@ public class CursedTotem extends CardImpl {
     }
 }
 
-class CursedTotemEffect extends ReplacementEffectImpl {
+class CursedTotemCantActivateEffect extends RestrictionEffect {
 
-    public CursedTotemEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+    public CursedTotemCantActivateEffect() {
+        super(Duration.WhileOnBattlefield);
         staticText = "Activated abilities of creatures can't be activated";
     }
 
-    public CursedTotemEffect(final CursedTotemEffect effect) {
+    public CursedTotemCantActivateEffect(final CursedTotemCantActivateEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return permanent.getCardType().contains(CardType.CREATURE);
     }
 
     @Override
-    public CursedTotemEffect copy() {
-        return new CursedTotemEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ACTIVATE_ABILITY) {
-            Permanent creature = game.getPermanent(event.getSourceId());
-            if (creature != null && creature.getCardType().contains(CardType.CREATURE)) {
-                return true;
-            }
-        }
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
         return false;
+    }
+
+    @Override
+    public CursedTotemCantActivateEffect copy() {
+        return new CursedTotemCantActivateEffect(this);
     }
 
 }

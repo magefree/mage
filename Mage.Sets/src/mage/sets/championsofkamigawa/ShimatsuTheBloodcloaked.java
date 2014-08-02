@@ -79,7 +79,7 @@ class ShimatsuTheBloodcloakedEffect extends ReplacementEffectImpl {
     
     public ShimatsuTheBloodcloakedEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-        this.staticText = "As Shimatsu the Bloodcloaked enters the battlefield, sacrifice any number of permanents. Shimatsu enters the battlefield with that many +1/+1 counters on it";
+        this.staticText = "As {this} enters the battlefield, sacrifice any number of permanents. {this} enters the battlefield with that many +1/+1 counters on it";
     }
     
     public ShimatsuTheBloodcloakedEffect(final ShimatsuTheBloodcloakedEffect effect) {

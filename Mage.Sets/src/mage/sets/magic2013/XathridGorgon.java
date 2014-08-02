@@ -35,7 +35,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.continious.AddCardTypeTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continious.SetCardColorTargetEffect;
@@ -45,12 +45,10 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -83,7 +81,7 @@ public class XathridGorgon extends CardImpl {
         effect.setText("and becomes a colorless artifact in addition to its other types");
         ability.addEffect(effect);
         ability.addEffect(new SetCardColorTargetEffect(new ObjectColor(), Duration.Custom, ""));
-        ability.addEffect(new XathridGorgonEffect());
+        ability.addEffect(new XathridGorgonCantActivateEffect());
         this.addAbility(ability);
         
     }
@@ -98,43 +96,36 @@ public class XathridGorgon extends CardImpl {
     }
 }
 
-class XathridGorgonEffect extends ReplacementEffectImpl {
+class XathridGorgonCantActivateEffect extends RestrictionEffect {
 
-    public XathridGorgonEffect() {
-        super(Duration.Custom, Outcome.Detriment);
+    public XathridGorgonCantActivateEffect() {
+        super(Duration.Custom);
         staticText = "Its activated abilities can't be activated";
     }
 
-    public XathridGorgonEffect(final XathridGorgonEffect effect) {
+    public XathridGorgonCantActivateEffect(final XathridGorgonCantActivateEffect effect) {
         super(effect);
     }
 
     @Override
-    public XathridGorgonEffect copy() {
-        return new XathridGorgonEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.ACTIVATE_ABILITY) && event.getSourceId().equals(targetPointer.getFirst(game, source))) {
-            Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
-            if (target != null) {
-                    return true;
-            } else {
-                this.discard();
-            }
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (target != null) {
+                return true;
+        } else {
+            this.discard();
         }
         return false;
+    }
+
+    @Override
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
+    public XathridGorgonCantActivateEffect copy() {
+        return new XathridGorgonCantActivateEffect(this);
     }
 
 }

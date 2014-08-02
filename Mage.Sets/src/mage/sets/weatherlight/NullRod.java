@@ -30,15 +30,13 @@ package mage.sets.weatherlight;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
@@ -52,7 +50,7 @@ public class NullRod extends CardImpl {
         this.expansionSetCode = "WTH";
 
         // Activated abilities of artifacts can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantActivateAbilitiesEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NullRodCantActivateEffect()));
     }
 
     public NullRod(final NullRod card) {
@@ -65,40 +63,30 @@ public class NullRod extends CardImpl {
     }
 }
 
-class CantActivateAbilitiesEffect extends ReplacementEffectImpl {
+class NullRodCantActivateEffect extends RestrictionEffect {
 
-    public CantActivateAbilitiesEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Activated abilities of artifacts can't be activated.";
+    public NullRodCantActivateEffect() {
+        super(Duration.WhileOnBattlefield);
+        staticText = "Activated abilities of artifacts can't be activated";
     }
 
-    public CantActivateAbilitiesEffect(final CantActivateAbilitiesEffect effect) {
+    public NullRodCantActivateEffect(final NullRodCantActivateEffect effect) {
         super(effect);
     }
 
     @Override
-    public CantActivateAbilitiesEffect copy() {
-        return new CantActivateAbilitiesEffect(this);
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return permanent.getCardType().contains(CardType.ARTIFACT);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent.getCardType().contains(CardType.ARTIFACT)) {
-                return true;
-            }
-        }
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
         return false;
     }
+
+    @Override
+    public NullRodCantActivateEffect copy() {
+        return new NullRodCantActivateEffect(this);
+    }
+
 }

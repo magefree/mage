@@ -28,25 +28,26 @@
 
 package mage.abilities.effects.common.combat;
 
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.RestrictionEffect;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
  * @author LevelX2
  */
 
-public class CantAttackUnlessDefenderControllsPermanent extends ReplacementEffectImpl {
+public class CantAttackUnlessDefenderControllsPermanent extends RestrictionEffect {
 
     private final FilterPermanent filter;
 
     public CantAttackUnlessDefenderControllsPermanent(FilterPermanent filter) {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        super(Duration.WhileOnBattlefield);
         this.filter = filter;
         staticText = new StringBuilder("{this} can't attack unless defending player controls ").append(filter.getMessage()).toString();
     }
@@ -57,27 +58,36 @@ public class CantAttackUnlessDefenderControllsPermanent extends ReplacementEffec
     }
 
     @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return permanent.getId().equals(source.getSourceId());
+    }
+
+    @Override
+    public boolean canAttack(Game game) {
+        return false;
+    }
+
+    @Override
+    public boolean canAttack(UUID defenderId, Ability source, Game game) {
+        UUID defendingPlayerId = null;
+        Player player = game.getPlayer(defenderId);
+        if (player == null) {
+            Permanent permanent = game.getPermanent(defenderId);
+            if (permanent != null) {
+                defendingPlayerId = permanent.getControllerId();
+            }
+        } else {
+            defendingPlayerId = defenderId;
+        }
+        if (defendingPlayerId != null && game.getBattlefield().countAll(filter, defendingPlayerId, game) == 0) {
+            return true;
+        }
+        return true;
+    }
+
+    @Override
     public CantAttackUnlessDefenderControllsPermanent copy() {
         return new CantAttackUnlessDefenderControllsPermanent(this);
     }
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARE_ATTACKER && source.getSourceId().equals(event.getSourceId())) {
-            if (game.getBattlefield().countAll(filter, event.getTargetId(), game) == 0) {
-                return true;
-            }
-        }
-        return false;
-    }
 }

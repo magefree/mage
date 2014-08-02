@@ -42,6 +42,7 @@ import mage.abilities.effects.common.combat.CantBlockAttackActivateAttachedEffec
 import mage.abilities.effects.common.counter.AddPlusOneCountersAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;

@@ -28,18 +28,15 @@
 
 package mage.abilities.effects.common.continious;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
 /**

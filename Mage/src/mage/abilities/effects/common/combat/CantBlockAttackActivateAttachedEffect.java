@@ -27,23 +27,20 @@
  */
 package mage.abilities.effects.common.combat;
 
-import mage.constants.Outcome;
 import mage.abilities.Ability;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.RestrictionEffect;
 import mage.constants.Duration;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
  *
  * @author LevelX2
  */
-
-public class CantBlockAttackActivateAttachedEffect extends ReplacementEffectImpl {
+public class CantBlockAttackActivateAttachedEffect extends RestrictionEffect {
 
     public CantBlockAttackActivateAttachedEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        super(Duration.WhileOnBattlefield);
         staticText = "Enchanted creature can't attack or block, and its activated abilities can't be activated";
     }
 
@@ -52,30 +49,34 @@ public class CantBlockAttackActivateAttachedEffect extends ReplacementEffectImpl
     }
 
     @Override
-    public CantBlockAttackActivateAttachedEffect copy() {
-        return new CantBlockAttackActivateAttachedEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARE_ATTACKER || event.getType() == GameEvent.EventType.DECLARE_BLOCKER || event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
-            Permanent enchantment = game.getPermanent(source.getSourceId());
-            if (enchantment != null && enchantment.getAttachedTo() != null) {
-                if (event.getSourceId().equals(enchantment.getAttachedTo())) {
-                    return true;
-                }
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        Permanent enchantment = game.getPermanent(source.getSourceId());
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+            if (permanent.getId().equals(enchantment.getAttachedTo())) {
+                return true;
             }
         }
         return false;
     }
+
+    @Override
+    public boolean canAttack(Game game) {
+        return false;
+    }
+
+    @Override
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
+    public CantBlockAttackActivateAttachedEffect copy() {
+        return new CantBlockAttackActivateAttachedEffect(this);
+    }
+
 }

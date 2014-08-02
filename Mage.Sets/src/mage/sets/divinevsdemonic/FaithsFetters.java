@@ -38,6 +38,7 @@ import mage.abilities.effects.common.combat.CantBlockAttackActivateAttachedEffec
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;

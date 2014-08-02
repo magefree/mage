@@ -29,22 +29,18 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-
 
 /**
  *
@@ -60,8 +56,10 @@ public class LinvalaKeeperOfSilence extends CardImpl {
         this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
+
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LinvalaKeeperOfSilenceEffect()));
+        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LinvalaKeeperOfSilenceCantActivateEffect()));
     }
 
     public LinvalaKeeperOfSilence (final LinvalaKeeperOfSilence card) {
@@ -74,39 +72,30 @@ public class LinvalaKeeperOfSilence extends CardImpl {
     }
 }
 
-class LinvalaKeeperOfSilenceEffect extends ReplacementEffectImpl {
-    LinvalaKeeperOfSilenceEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+class LinvalaKeeperOfSilenceCantActivateEffect extends RestrictionEffect {
+
+    public LinvalaKeeperOfSilenceCantActivateEffect() {
+        super(Duration.WhileOnBattlefield);
         staticText = "Activated abilities of creatures your opponents control can't be activated";
     }
 
-    LinvalaKeeperOfSilenceEffect(final LinvalaKeeperOfSilenceEffect effect) {
+    public LinvalaKeeperOfSilenceCantActivateEffect(final LinvalaKeeperOfSilenceCantActivateEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return permanent.getCardType().contains(CardType.CREATURE) && game.getOpponents(source.getControllerId()).contains(permanent.getControllerId());
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent p = game.getPermanent(event.getSourceId());
-        if ( event.getType() == GameEvent.EventType.ACTIVATE_ABILITY && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())
-                && p != null && p.getCardType().contains(CardType.CREATURE)) {
-            return true;
-        }
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
         return false;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public LinvalaKeeperOfSilenceEffect copy() {
-        return new LinvalaKeeperOfSilenceEffect(this);
+    public LinvalaKeeperOfSilenceCantActivateEffect copy() {
+        return new LinvalaKeeperOfSilenceCantActivateEffect(this);
     }
 
 }

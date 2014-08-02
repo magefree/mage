@@ -89,7 +89,7 @@ public class FullMoonsRise extends CardImpl {
 
 class FullMoonsRiseEffect extends OneShotEffect {
 
-    private FilterPermanent filter;
+    private final FilterPermanent filter;
 
     public FullMoonsRiseEffect(FilterPermanent filter) {
         super(Outcome.Regenerate);

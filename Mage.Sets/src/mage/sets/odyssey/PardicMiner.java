@@ -34,7 +34,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;

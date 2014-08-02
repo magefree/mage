@@ -33,19 +33,17 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -79,38 +77,25 @@ public class Peacekeeper extends CardImpl {
     }
 }
 
-class PeacekeeperCantAttackEffect extends ReplacementEffectImpl {
+class PeacekeeperCantAttackEffect extends RestrictionEffect {
 
-    private static final String effectText = "Creatures can't attack";
-
-    PeacekeeperCantAttackEffect ( ) {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = effectText;
+    public PeacekeeperCantAttackEffect() {
+        super(Duration.WhileOnBattlefield);
+        staticText = "Creatures can't attack";
     }
 
-    PeacekeeperCantAttackEffect (final PeacekeeperCantAttackEffect effect ) {
+    public PeacekeeperCantAttackEffect(final PeacekeeperCantAttackEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        throw new UnsupportedOperationException("Not supported.");
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return permanent.getCardType().contains(CardType.CREATURE);
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player atackingPlayer = game.getPlayer(event.getPlayerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent != null && atackingPlayer != null) {
-            game.informPlayer(atackingPlayer, new StringBuilder(sourcePermanent.getName()).append(" prevents you from attacking with this creature.").toString());
-        }
-
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARE_ATTACKER;
+    public boolean canAttack(Game game) {
+        return false;
     }
 
     @Override

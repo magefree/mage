@@ -28,18 +28,22 @@
 package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.AbilityType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -108,7 +112,7 @@ class NameCard extends OneShotEffect {
 
 }
 
-class PithingNeedleEffect extends ReplacementEffectImpl {
+class PithingNeedleEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public PithingNeedleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
@@ -126,11 +130,6 @@ class PithingNeedleEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         return true;
     }
 

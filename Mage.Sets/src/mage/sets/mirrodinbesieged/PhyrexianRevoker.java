@@ -148,7 +148,7 @@ class PhyrexianRevokerEffect2 extends ContinuousRuleModifiyingEffectImpl {
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            return "You can't activate sources with that name (" + mageObject.getLogName() + " in play).";
+            return "You can't activate abilities of sources with that name (" + mageObject.getLogName() + " in play).";
         }
         return null;
     }

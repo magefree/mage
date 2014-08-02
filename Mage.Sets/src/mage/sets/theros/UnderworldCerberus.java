@@ -33,7 +33,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.ReturnToHandFromGraveyardAllEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;

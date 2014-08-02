@@ -137,7 +137,7 @@ class WrexialEffect extends OneShotEffect {
 
 class WrexialReplacementEffect extends ReplacementEffectImpl {
 
-    private UUID cardid;
+    private final UUID cardid;
 
     public WrexialReplacementEffect(UUID cardid) {
         super(Duration.EndOfTurn, Outcome.Exile);

@@ -34,7 +34,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;

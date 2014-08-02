@@ -36,7 +36,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -73,7 +73,7 @@ public class AbyssalPersecutor extends CardImpl {
     }
 }
 
-class AbyssalPersecutorCannotWinEffect extends ReplacementEffectImpl {
+class AbyssalPersecutorCannotWinEffect extends ContinuousRuleModifiyingEffectImpl {
 
     AbyssalPersecutorCannotWinEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
@@ -91,16 +91,6 @@ class AbyssalPersecutorCannotWinEffect extends ReplacementEffectImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
     }
 
     @Override

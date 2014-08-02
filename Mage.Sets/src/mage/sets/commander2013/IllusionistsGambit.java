@@ -34,8 +34,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.RequirementEffect;
+import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -143,7 +143,7 @@ class IllusionistsGambitRemoveFromCombatEffect extends OneShotEffect {
             game.getState().getTurnMods().add(new TurnMod(game.getActivePlayerId(), TurnPhase.COMBAT, null, false));
             ContinuousEffect effect = new IllusionistsGambitRequirementEffect(attackers, phase);
             game.addEffect(effect, source);
-            effect = new IllusionistsGambitReplacementEffect(attackers, phase);
+            effect = new IllusionistsGambitRestrictionEffect(attackers, phase);
             game.addEffect(effect, source);
 
         }
@@ -203,32 +203,27 @@ class IllusionistsGambitRequirementEffect extends RequirementEffect {
     }
 }
 
-class IllusionistsGambitReplacementEffect extends ReplacementEffectImpl {
+class IllusionistsGambitRestrictionEffect extends RestrictionEffect {
 
     private final List attackers;
     private final Phase phase;
 
-    IllusionistsGambitReplacementEffect(List attackers, Phase phase) {
+    public IllusionistsGambitRestrictionEffect(List attackers, Phase phase) {
         super(Duration.Custom, Outcome.Benefit);
         this.attackers = attackers;
         this.phase = phase;
         staticText = "They can't attack you or a planeswalker you control that combat";
     }
 
-    IllusionistsGambitReplacementEffect(IllusionistsGambitReplacementEffect effect) {
+    public IllusionistsGambitRestrictionEffect(final IllusionistsGambitRestrictionEffect effect) {
         super(effect);
         this.attackers = effect.attackers;
         this.phase = effect.phase;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        throw new UnsupportedOperationException("Not supported.");
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return attackers.contains(permanent.getId());
     }
 
     @Override
@@ -242,24 +237,37 @@ class IllusionistsGambitReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARE_ATTACKER && attackers.contains(event.getSourceId())) {
-            if (event.getTargetId().equals(source.getControllerId()) ) {
-                return true;
-            }
-            // planeswalker
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getControllerId().equals(source.getControllerId())
-                                  && permanent.getCardType().contains(CardType.PLANESWALKER)) {
-                return true;
-            }
-        }
+    public boolean canAttack(Game game) {
         return false;
     }
 
     @Override
-    public IllusionistsGambitReplacementEffect copy() {
-        return new IllusionistsGambitReplacementEffect(this);
+    public boolean canAttack(UUID defenderId, Ability source, Game game) {
+        if (defenderId.equals(source.getControllerId()) ) {
+            return false;
+        }
+        // planeswalker
+        Permanent permanent = game.getPermanent(defenderId);
+        if (permanent != null && permanent.getControllerId().equals(source.getControllerId())
+                              && permanent.getCardType().contains(CardType.PLANESWALKER)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
+    public IllusionistsGambitRestrictionEffect copy() {
+        return new IllusionistsGambitRestrictionEffect(this);
     }
 
 }

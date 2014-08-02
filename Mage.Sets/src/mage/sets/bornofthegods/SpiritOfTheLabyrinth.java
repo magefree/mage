@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -116,10 +117,10 @@ class SpiritOfTheLabyrinthWatcher extends Watcher {
 
 }
 
-class SpiritOfTheLabyrinthEffect extends ReplacementEffectImpl {
+class SpiritOfTheLabyrinthEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public SpiritOfTheLabyrinthEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment, false, false);
         staticText = "Each player can't draw more than one card each turn";
     }
 
@@ -134,11 +135,6 @@ class SpiritOfTheLabyrinthEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         return true;
     }
 

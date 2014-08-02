@@ -119,7 +119,7 @@ class MysticBarrierTriggeredAbility extends TriggeredAbilityImpl {
 class MysticBarrierChooseEffect extends OneShotEffect {
 
     public static final String[] SET_VALUES = new String[] { MysticBarrier.ALLOW_ATTACKING_LEFT, MysticBarrier.ALLOW_ATTACKING_RIGHT };
-    public static final Set<String> CHOICES = new HashSet<String>(Arrays.asList(SET_VALUES));
+    public static final Set<String> CHOICES = new HashSet<>(Arrays.asList(SET_VALUES));
     final static Choice DIRECTION_CHOICE = new ChoiceImpl(true);
     static {
         DIRECTION_CHOICE.setChoices(CHOICES);

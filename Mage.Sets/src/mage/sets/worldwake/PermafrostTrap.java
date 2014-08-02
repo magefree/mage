@@ -35,14 +35,17 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.SkipNextUntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 
 /**
@@ -158,11 +161,13 @@ class PermafrostTrapEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID target : this.targetPointer.getTargets(game, source)) {
-            Permanent creature = game.getPermanent(target);
+        for (UUID targetId : this.targetPointer.getTargets(game, source)) {
+            Permanent creature = game.getPermanent(targetId);
             if (creature != null) {
                 creature.tap(game);
-                game.addEffect(new PermafrostEffect2(creature.getId()), source);
+                SkipNextUntapTargetEffect effect = new SkipNextUntapTargetEffect();
+                effect.setTargetPointer(new FixedTarget(targetId));
+                game.addEffect(effect, source);
             }
         }
         return false;
@@ -171,46 +176,5 @@ class PermafrostTrapEffect extends OneShotEffect {
     @Override
     public PermafrostTrapEffect copy() {
         return new PermafrostTrapEffect(this);
-    }
-}
-
-class PermafrostEffect2 extends ReplacementEffectImpl {
-
-    protected UUID creatureId;
-
-    public PermafrostEffect2(UUID creatureId) {
-        super(Duration.OneUse, Outcome.Detriment);
-        this.creatureId = creatureId;
-    }
-
-    public PermafrostEffect2(final PermafrostEffect2 effect) {
-        super(effect);
-        creatureId = effect.creatureId;
-    }
-
-    @Override
-    public PermafrostEffect2 copy() {
-        return new PermafrostEffect2(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        used = true;
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP
-                && event.getType() == GameEvent.EventType.UNTAP
-                && event.getTargetId().equals(creatureId)) {
-            return true;
-        }
-        return false;
     }
 }

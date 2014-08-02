@@ -38,7 +38,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -52,7 +51,6 @@ import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
-import mage.players.Player;
 import mage.watchers.Watcher;
 
 /**

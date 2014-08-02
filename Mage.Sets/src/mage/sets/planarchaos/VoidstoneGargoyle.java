@@ -37,7 +37,6 @@ import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.repository.CardRepository;
@@ -45,6 +44,7 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -71,7 +71,7 @@ public class VoidstoneGargoyle extends CardImpl {
         // The named card can't be cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VoidstoneGargoyleReplacementEffect1()));
         // Activated abilities of sources with the chosen name can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VoidstoneGargoyleReplacementEffect2()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VoidstoneGargoyleRuleModifyingEffect2()));
     }
 
     public VoidstoneGargoyle(final VoidstoneGargoyle card) {
@@ -167,14 +167,14 @@ class VoidstoneGargoyleReplacementEffect1 extends ContinuousRuleModifiyingEffect
 
 }
 
-class VoidstoneGargoyleReplacementEffect2 extends ReplacementEffectImpl {
+class VoidstoneGargoyleRuleModifyingEffect2 extends ContinuousRuleModifiyingEffectImpl {
 
-    public VoidstoneGargoyleReplacementEffect2() {
+    public VoidstoneGargoyleRuleModifyingEffect2() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Activated abilities of sources with the chosen name can't be activated.";
+        staticText = "Activated abilities of sources with the chosen name can't be activated";
     }
 
-    public VoidstoneGargoyleReplacementEffect2(final VoidstoneGargoyleReplacementEffect2 effect) {
+    public VoidstoneGargoyleRuleModifyingEffect2(final VoidstoneGargoyleRuleModifyingEffect2 effect) {
         super(effect);
     }
 
@@ -184,18 +184,22 @@ class VoidstoneGargoyleReplacementEffect2 extends ReplacementEffectImpl {
     }
 
     @Override
-    public VoidstoneGargoyleReplacementEffect2 copy() {
-        return new VoidstoneGargoyleReplacementEffect2(this);
+    public VoidstoneGargoyleRuleModifyingEffect2 copy() {
+        return new VoidstoneGargoyleRuleModifyingEffect2(this);
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
+        MageObject mageObject = game.getObject(source.getSourceId());
+        if (mageObject != null) {
+            return "You can't activate abilities of sources with that name (" + mageObject.getLogName() + " in play).";
+        }
+        return null;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
+        if (event.getType() == EventType.ACTIVATE_ABILITY) {
             MageObject object = game.getObject(event.getSourceId());
             if (object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString()))) {
                 return true;

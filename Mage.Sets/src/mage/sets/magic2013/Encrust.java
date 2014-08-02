@@ -32,8 +32,10 @@ import java.util.UUID;
 import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.CantActivateAbilitiesAttachedEffect;
 import mage.abilities.effects.common.SkipEnchantedUntapEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -74,8 +76,10 @@ public class Encrust extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted permanent doesn't untap during its controller's untap step and its activated abilities can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipEnchantedUntapEffect()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EncrustEffect()));
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipEnchantedUntapEffect());
+        Effect effect = new CantActivateAbilitiesAttachedEffect();
+        effect.setText("and its activated abilities can't be activated");
+        this.addAbility(ability);
     }
 
     public Encrust(final Encrust card) {
@@ -87,43 +91,3 @@ public class Encrust extends CardImpl {
         return new Encrust(this);
     }
 }
-
-class EncrustEffect extends ReplacementEffectImpl {
-
-    public EncrustEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Its activated abilities can't be activated";
-    }
-
-    public EncrustEffect(final EncrustEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public EncrustEffect copy() {
-        return new EncrustEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
-            Permanent enchantment = game.getPermanent(source.getSourceId());
-            Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
-            if (event.getSourceId().equals(enchanted.getId())) {
-                return true;
-            }
-        }
-        return false;
-    }
-}
-

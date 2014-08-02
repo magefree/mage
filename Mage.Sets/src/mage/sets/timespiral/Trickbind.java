@@ -28,17 +28,17 @@
 package mage.sets.timespiral;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.keyword.SplitSecondAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.keyword.SplitSecondAbility;
-import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.target.common.TargetActivatedOrTriggeredAbility;
 import mage.target.targetpointer.FixedTarget;
@@ -93,7 +93,7 @@ class TrickbindCounterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
         if(stackObject != null && game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game)) {
-            TrickbindReplacementEffect effect = new TrickbindReplacementEffect();
+            TrickbindCantActivateEffect effect = new TrickbindCantActivateEffect();
             effect.setTargetPointer(new FixedTarget(stackObject.getSourceId()));
             game.getContinuousEffects().addEffect(effect, source);
             return true;
@@ -103,39 +103,33 @@ class TrickbindCounterEffect extends OneShotEffect {
 
 }
 
-class TrickbindReplacementEffect extends ReplacementEffectImpl {
+class TrickbindCantActivateEffect extends RestrictionEffect {
 
-    public TrickbindReplacementEffect() {
-        super(Duration.EndOfTurn, Outcome.LoseAbility);
+    public TrickbindCantActivateEffect() {
+        super(Duration.EndOfTurn);
         staticText = "Activated abilities of that permanent can't be activated this turn";
     }
 
-    public TrickbindReplacementEffect(final TrickbindReplacementEffect effect) {
+    public TrickbindCantActivateEffect(final TrickbindCantActivateEffect effect) {
         super(effect);
     }
 
     @Override
-    public TrickbindReplacementEffect copy() {
-        return new TrickbindReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
-            if (this.targetPointer.getFirst(game, source).equals(event.getSourceId())) {
-                return true;
-            }
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (getTargetPointer().getFirst(game, source).equals(permanent.getId())) {
+            return true;
         }
         return false;
     }
+
+    @Override
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
+    public TrickbindCantActivateEffect copy() {
+        return new TrickbindCantActivateEffect(this);
+    }
+
 }

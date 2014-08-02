@@ -80,7 +80,7 @@ public class OmnathLocusOfMana extends CardImpl {
 
 class OmnathReplacementEffect extends ReplacementEffectImpl {
     
-    private static final List<ManaType> manaTypes =  new ArrayList<ManaType>();
+    private static final List<ManaType> manaTypes =  new ArrayList<>();
     static {
         manaTypes.add(ManaType.BLACK);
         manaTypes.add(ManaType.BLUE);

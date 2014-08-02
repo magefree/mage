@@ -30,16 +30,13 @@ package mage.sets.innistrad;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -55,7 +52,7 @@ public class StonySilence extends CardImpl {
         this.color.setWhite(true);
 
         // Activated abilities of artifacts can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StonySilenceEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StonySilenceCantActivateEffect()));
 
     }
 
@@ -69,41 +66,30 @@ public class StonySilence extends CardImpl {
     }
 }
 
-class StonySilenceEffect extends ReplacementEffectImpl {
+class StonySilenceCantActivateEffect extends RestrictionEffect {
 
-    public StonySilenceEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+    public StonySilenceCantActivateEffect() {
+        super(Duration.WhileOnBattlefield);
         staticText = "Activated abilities of artifacts can't be activated";
     }
 
-    public StonySilenceEffect(final StonySilenceEffect effect) {
+    public StonySilenceCantActivateEffect(final StonySilenceCantActivateEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return permanent.getCardType().contains(CardType.ARTIFACT);
     }
 
     @Override
-    public StonySilenceEffect copy() {
-        return new StonySilenceEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ACTIVATE_ABILITY) {
-            Permanent artifact = game.getPermanent(event.getSourceId());
-            if (artifact != null && artifact.getCardType().contains(CardType.ARTIFACT)) {
-                return true;
-            }
-        }
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
         return false;
+    }
+
+    @Override
+    public StonySilenceCantActivateEffect copy() {
+        return new StonySilenceCantActivateEffect(this);
     }
 
 }
