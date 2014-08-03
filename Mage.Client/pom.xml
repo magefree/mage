@@ -33,7 +33,7 @@
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.14</version>
+            <version>1.2.17</version>
         </dependency>
         <dependency>
             <groupId>net.sf.trove4j</groupId>
