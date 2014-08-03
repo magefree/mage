@@ -105,5 +105,49 @@ public class BanisherPriestTest extends CardTestPlayerBase {
         // check that returning Rockslide Elemental did not get a +1/+1 counter from dying Banisher Priest
         assertPowerToughness(playerB, "Rockslide Elemental", 1, 1);
     }
+
+    /**
+     * Check if Banisher Priest is removed from graveyard with Seance and
+     * the target creature exiled with the token returns to the game, when
+     * the token is exiled.
+     */
+    @Test
+    public void testBanisherPriestToken() {
+
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+
+        /**
+        * Banisher Priest
+        * Creature — Human Cleric 2/2, 1WW
+        * When Banisher Priest enters the battlefield, exile target creature an opponent controls until Banisher Priest leaves the battlefield.
+        */
+        addCard(Zone.GRAVEYARD, playerB, "Banisher Priest");
+
+        /**
+         * Seance        {2}{W}{W}
+         * Enchantment
+         * At the beginning of each upkeep, you may exile target creature card from your graveyard.
+         * If you do, put a token onto the battlefield that's a copy of that card except it's a
+         * Spirit in addition to its other types. Exile it at the beginning of the next end step.
+         */
+        addCard(Zone.BATTLEFIELD, playerB, "Seance");
+        playerB.addChoice("Banisher Priest"); // return the Banisher Priest from graveyard with Seance
+        playerB.addChoice("Silvercoat Lion"); // Exile the Silvercoat Lion with the triggered ability of the Banisher Priest token
+
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        // Banisher Priest should be in exile
+        assertExileCount("Banisher Priest", 1);
+        // Token ceased to exist
+        assertPermanentCount(playerB, "Banisher Priest", 0);
+        // Silvercoat Lion should be back on battlefield
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+
+    }
 }
 

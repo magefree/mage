@@ -30,6 +30,7 @@ package mage.sets.magic2014;
 import java.util.LinkedList;
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -176,13 +177,13 @@ class ReturnExiledCreatureEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         ExileZone exile = game.getExile().getExileZone(source.getSourceId());
-        Card sourceCard = game.getCard(source.getSourceId());
-        if (exile != null && sourceCard != null) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (exile != null && sourceObject != null) {
             LinkedList<UUID> cards = new LinkedList<>(exile);
             for (UUID cardId : cards) {
                 Card card = game.getCard(cardId);
                 card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
-                game.informPlayers(new StringBuilder(sourceCard.getName()).append(": ").append(card.getName()).append(" returns to battlefield from exile").toString());
+                game.informPlayers(new StringBuilder(sourceObject.getLogName()).append(": ").append(card.getName()).append(" returns to battlefield from exile").toString());
             }
             exile.clear();
             return true;
