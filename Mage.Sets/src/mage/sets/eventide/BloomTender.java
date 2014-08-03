@@ -31,9 +31,9 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -59,7 +59,7 @@ public class BloomTender extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: For each color among permanents you control, add one mana of that color to your mana pool.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BloomTenderEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BloomTenderEffect(), new TapSourceCost()));
 
     }
 

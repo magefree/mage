@@ -54,7 +54,7 @@ public class SeaGateOracle extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(new StaticValue(2), false, new StaticValue(1), new FilterCard(), Zone.GRAVEYARD, false, false), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(new StaticValue(2), false, new StaticValue(1), new FilterCard(), Zone.LIBRARY, false, false), false));
     }
 
 
