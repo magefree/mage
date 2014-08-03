@@ -30,15 +30,17 @@ package mage.sets.odyssey;
 import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -47,9 +49,10 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class SetonKrosanProtector extends CardImpl {
     
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("druid");
+    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Druid you control");
     
     static {
+        filter.add(Predicates.not(new TappedPredicate()));
         filter.add(new SubtypePredicate("Druid"));
     }
 
@@ -65,7 +68,7 @@ public class SetonKrosanProtector extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Tap an untapped Druid you control: Add {G} to your mana pool.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, 
                                                   new BasicManaEffect(Mana.GreenMana), 
                                                   new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true))));
     }
