@@ -69,11 +69,16 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
     private final ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<>();
 
-    public GamesRoomImpl() {
+    public GamesRoomImpl()  {
         updateExecutor.scheduleAtFixedRate(new Runnable() {
             @Override
-            public void run() {
-                update();
+            public void run(){
+                try {
+                    update();
+                } catch (Exception ex) {
+                    logger.fatal("Games room update exception!", ex);
+                }
+                
             }
         }, 2, 2, TimeUnit.SECONDS);
     }

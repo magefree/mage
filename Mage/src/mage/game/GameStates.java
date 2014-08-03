@@ -48,7 +48,7 @@ public class GameStates implements Serializable {
     public void save(GameState gameState) {
 //        states.add(new Copier<GameState>().copyCompressed(gameState));
         states.add(gameState.copy());
-        logger.debug("Saved game state: " + states.size());
+        logger.trace("Saved game state: " + states.size());
     }
 
     public int getSize() {

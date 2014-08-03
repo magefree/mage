@@ -69,10 +69,10 @@ public class ChatSession {
 
         try {
             if (userId != null && clients.containsKey(userId)) {
+                String userName = clients.get(userId);
                 clients.remove(userId);
                 logger.debug("ChatSession.kill  chatSession: " + chatId + "  userId: " + userId + "  reason: " + (reason == null?"null":reason.toString())
-                        + "  clients.size " + clients.size());
-                String userName = clients.get(userId);                
+                        + "  clients.size " + clients.size());                
                 String message = null;
                 switch (reason) {
                     case Disconnected:
@@ -90,7 +90,7 @@ public class ChatSession {
                 }
             }
         } catch(Exception ex) {
-            logger.fatal(ex);
+            logger.fatal("ChatSession.kill exception: " + ex.toString());
         }
     }
 
@@ -157,4 +157,7 @@ public class ChatSession {
         return clients.containsKey(userId);
     }
 
+    public ConcurrentHashMap<UUID, String> getClients() {
+        return clients;
+    }
 }

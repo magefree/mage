@@ -72,7 +72,7 @@ public class TableManager {
      *
      * In minutes.
      */
-    private static final int EXPIRE_CHECK_PERIOD = 10;
+    private static final int EXPIRE_CHECK_PERIOD = 5;
     
     /**
      * This parameters defines when table can be counted as expired.
@@ -355,7 +355,21 @@ public class TableManager {
     }
 
     private void checkExpired() {
-        logger.debug("Table expire checking...");
+        logger.debug("--- Table expire checking -----------------------------------------------------------------------");
+        Collection<User> users = UserManager.getInstance().getUsers();
+        logger.debug("------- Users: " + users.size() + " ------------------------");
+        for (User user :users) {
+            logger.debug(user.getName() + "  SessionId: " + user.getSessionId() + "  ConnectionTime: " + user.getConnectionTime());
+        }
+        ArrayList<ChatSession> chatSessions = ChatManager.getInstance().getChatSessions();
+        logger.debug("------- ChatSessions: " + chatSessions.size() + " ------------------------");
+        for (ChatSession chatSession: chatSessions) {
+            logger.debug(chatSession.getChatId() + "  Clients: " + chatSession.getClients().values().toString());
+        }
+        logger.debug("------- Tables: " + tables.size() + " ------------------------");
+        for (Table table: tables.values()) {
+            logger.debug(table.getId() + " Name: [" + table.getName()+ "]  StartTime: " + table.getStartTime());
+        }
 
         Date now = new Date();
         List<UUID> toRemove = new ArrayList<>();

@@ -28,6 +28,7 @@
 
 package mage.server;
 
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -175,5 +176,11 @@ public class ChatManager {
             chat.kill(userId, reason);
         }
         Logger.getLogger(ChatManager.class).debug("ChatManager: Remove user end");
+    }
+
+    public ArrayList<ChatSession> getChatSessions() {
+        ArrayList<ChatSession> chatSessionList = new ArrayList<>();
+        chatSessionList.addAll(chatSessions.values());
+        return chatSessionList;
     }
 }

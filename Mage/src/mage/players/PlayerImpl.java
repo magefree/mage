@@ -1562,14 +1562,14 @@ public abstract class PlayerImpl implements Player, Serializable {
     public void passTurnPriority(Game game) {
         passedTurn = true;
         this.skip();
-        log.debug("Passed priority for turn");
+        log.trace("Passed priority for turn");
     }
 
     @Override
     public void restorePriority(Game game) {
         passedAllTurns = false;
         passedTurn = false;
-        log.debug("Restore priority");
+        log.trace("Restore priority");
     }
 
     @Override

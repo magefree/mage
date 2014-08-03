@@ -123,11 +123,11 @@ public class GameController implements GameCallback {
                                 break;
                             case INFO:
                                 ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK, true, ChatMessage.MessageType.GAME);
-                                logger.debug(game.getId() + " " + event.getMessage());
+                                logger.trace(game.getId() + " " + event.getMessage());
                                 break;
                             case STATUS:
                                 ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.ORANGE, event.getWithTime(), ChatMessage.MessageType.GAME);
-                                logger.debug(game.getId() + " " + event.getMessage());
+                                logger.trace(game.getId() + " " + event.getMessage());
                                 break;
                             case ERROR:
                                 error(event.getMessage(), event.getException());

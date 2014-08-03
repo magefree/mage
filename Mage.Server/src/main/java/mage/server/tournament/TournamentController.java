@@ -165,12 +165,17 @@ public class TournamentController {
         // first join of player
         TournamentSession tournamentSession = new TournamentSession(tournament, userId, tableId, playerId);
         tournamentSessions.put(playerId, tournamentSession);
-        UserManager.getInstance().getUser(userId).addTournament(playerId, tournamentSession);
-        TournamentPlayer player = tournament.getPlayer(playerId);
-        player.setJoined();
-        logger.debug("player " +player.getPlayer().getName()  + " - client has joined tournament " + tournament.getId());
-        ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has joined the tournament", MessageColor.BLACK, true, MessageType.STATUS);
-        checkStart();
+        User user = UserManager.getInstance().getUser(userId);
+        if (user != null) {
+            user.addTournament(playerId, tournamentSession);
+            TournamentPlayer player = tournament.getPlayer(playerId);
+            player.setJoined();
+            logger.debug("player " +player.getPlayer().getName()  + " - client has joined tournament " + tournament.getId());
+            ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has joined the tournament", MessageColor.BLACK, true, MessageType.STATUS);
+            checkStart();
+        } else {
+            logger.error("TournamentController.join  user not found  uderId: " +userId  + "   tournamentId: " + tournament.getId());
+        }
     }
 
     private void checkStart() {
