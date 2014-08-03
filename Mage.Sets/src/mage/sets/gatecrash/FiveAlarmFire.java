@@ -106,7 +106,7 @@ class FiveAlarmFireTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE
                 || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER
                 || event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
-            if (((DamagedEvent) event).isCombatDamage() && triggeringCreatures.contains(event.getSourceId())) {
+            if (((DamagedEvent) event).isCombatDamage() && !triggeringCreatures.contains(event.getSourceId())) {
                 Permanent permanent = game.getPermanent(event.getSourceId());
                 if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
                     triggeringCreatures.add(event.getSourceId());
