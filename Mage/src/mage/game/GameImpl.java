@@ -620,7 +620,7 @@ public abstract class GameImpl implements Game, Serializable {
         }
         if (gameOver(null)) {
             winnerId = findWinnersAndLosers();
-            logger.info(new StringBuilder("Game with gameId ").append(this.getId()).append(" ended."));
+            logger.info("GAME ended  gameId: " + this.getId());
         }
     }
 

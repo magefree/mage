@@ -65,7 +65,7 @@ public class ChatManager {
         if (chatSessions.containsKey(chatId)) {
             chatSessions.get(chatId).join(userId);
         } else {
-            logger.debug("ChatManager:joinChat - chatId does not exist - chatId: " + chatId +"  userId: " + userId);
+            logger.warn("User could not join chatId: " + chatId +" userId: " + userId);
         }        
         
     }
@@ -80,7 +80,7 @@ public class ChatManager {
         if (chatId != null && chatSessions.containsKey(chatId)) {
             chatSessions.remove(chatId);
         } else {
-            logger.debug("ChatManager:destroy chat - chatId does not exist - chatId: " + chatId);
+            logger.warn("Chat to destroy does not exist - chatId: " + chatId);
         } 
     }
 
@@ -171,11 +171,9 @@ public class ChatManager {
     }
 
     public void removeUser(UUID userId, DisconnectReason reason) {
-        Logger.getLogger(ChatManager.class).debug("ChatManager: Remove user start - chatSessions: " + chatSessions.size());
         for (ChatSession chat: chatSessions.values()) {
             chat.kill(userId, reason);
         }
-        Logger.getLogger(ChatManager.class).debug("ChatManager: Remove user end");
     }
 
     public ArrayList<ChatSession> getChatSessions() {

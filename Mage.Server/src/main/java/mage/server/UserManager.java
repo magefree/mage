@@ -125,14 +125,11 @@ public class UserManager {
     public void removeUser(UUID userId, DisconnectReason reason) {
         User user = users.get(userId);
         if (user != null) {
-            logger.debug(new StringBuilder("Remove user: ").append(user.getName())
-                    .append(" userId: ").append(userId)
-                    .append(" sessionId: ").append(user.getSessionId())
-                    .append(" Reason: ").append(reason.toString()));
+            logger.debug(user.getName() + " " + reason.toString() + "userId: " + userId);
             user.kill(reason);
             users.remove(userId);
         } else {
-            logger.warn(new StringBuilder("Trying to remove userId: ").append(userId).append(" but user does not exist."));
+            logger.warn(new StringBuilder("Trying to remove userId: ").append(userId).append(" but it does not exist."));
         }
     }
 

@@ -71,8 +71,7 @@ public class ChatSession {
             if (userId != null && clients.containsKey(userId)) {
                 String userName = clients.get(userId);
                 clients.remove(userId);
-                logger.debug("ChatSession.kill  chatSession: " + chatId + "  userId: " + userId + "  reason: " + (reason == null?"null":reason.toString())
-                        + "  clients.size " + clients.size());                
+                logger.debug(userName + (reason == null?"null":"(" + reason.toString() +")") + " removed from chatId " + chatId) ;
                 String message = null;
                 switch (reason) {
                     case Disconnected:
@@ -82,15 +81,14 @@ public class ChatSession {
                         message = " has lost connection";
                         break;
                      default:
-                         logger.debug(userName + " left chat " + chatId + " with reason: " + (reason == null ?"null":reason.toString()));
+                        message = reason == null ? " left (unknown reason) ": " left (" + reason.toString() +")";
                 }
                 if (message != null) {
                     broadcast(null, new StringBuilder(userName).append(message).toString(), MessageColor.BLUE, true, MessageType.STATUS);
-                    logger.debug(userName + " left chat with reason: " + message + " " + chatId);
                 }
             }
         } catch(Exception ex) {
-            logger.fatal("ChatSession.kill exception: " + ex.toString());
+            logger.fatal("exception: " + ex.toString());
         }
     }
 
@@ -139,7 +137,7 @@ public class ChatSession {
                     user.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color, messageType, soundToPlay)));
                 }
                 else {
-                    logger.debug("ChatSession.broadcast user not found - killed from chat session - userId: " + userId +"  chatId: " +chatId);
+                    logger.debug("user not found - killed from chat session - userId: " + userId +"  chatId: " +chatId);
                     kill(userId, DisconnectReason.CleaningUp);
                 }
             }

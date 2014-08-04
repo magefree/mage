@@ -217,7 +217,6 @@ public class Session {
     }
 
     public void kill(DisconnectReason reason) {
-        logger.debug("session removed for user " + userId + " - reason: " + reason.toString());
         UserManager.getInstance().removeUser(userId, reason);
     }
 

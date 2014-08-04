@@ -120,14 +120,14 @@ public class User {
         this.sessionId = sessionId;
         if (sessionId.isEmpty()) {
             userState = UserState.Disconnected;
-            logger.debug(new StringBuilder("User ").append(userName).append(" disconnected - userId = ").append(userId.toString()).toString());
+            logger.debug("Disconnected User " + userName + " id: " + userId);
         } else if (userState == UserState.Created) {
             userState = UserState.Connected;
-            logger.debug(new StringBuilder("User ").append(userName).append(" created - userId = ").append(userId.toString()).toString());
+            logger.debug("Created user " + userName + " id: " + userId);
         } else {
             userState = UserState.Reconnected;
             reconnect();
-            logger.info(new StringBuilder("User ").append(userName).append(" reconnected - userId = ").append(userId.toString()).toString());
+            logger.info("Reconnected user " + userName + " id: " + userId);
         }
     }
 
@@ -327,23 +327,23 @@ public class User {
     }
 
     public void kill(DisconnectReason reason) {
-        logger.debug("user.kill before game session " + gameSessions.size() );
+        logger.debug("game sessions: " + gameSessions.size() );
         for (GameSession gameSession: gameSessions.values()) {
             gameSession.kill();
         }
-        logger.debug("user.kill before draft session " + draftSessions.size());
+        logger.debug("draft sessions " + draftSessions.size());
         for (DraftSession draftSession: draftSessions.values()) {
             draftSession.setKilled();
         }
-        logger.debug("user.kill before tournament session " + tournamentSessions.size());
+        logger.debug("tournament sessions " + tournamentSessions.size());
         for (TournamentSession tournamentSession: tournamentSessions.values()) {
             tournamentSession.setKilled();
         }
-        logger.debug("user.kill before tables " + tables.size());
+        logger.debug("tables " + tables.size());
         for (Entry<UUID, Table> entry: tables.entrySet()) {
             TableManager.getInstance().leaveTable(userId, entry.getValue().getId());
         }
-        logger.debug("user.kill before chat remove user");
+        logger.debug("chat remove user");
         ChatManager.getInstance().removeUser(userId, reason);
     }
 
@@ -396,22 +396,22 @@ public class User {
             }
         }
         if (match > 0) {
-            sb.append("MP: ").append(match).append(" ");
+            sb.append("Match: ").append(match).append(" ");
         }
         if (sideboard > 0) {
-            sb.append("MS: ").append(sideboard).append(" ");
+            sb.append("Sideb: ").append(sideboard).append(" ");
         }
         if (draft > 0) {
-            sb.append("TD: ").append(draft).append(" ");
+            sb.append("Draft: ").append(draft).append(" ");
         }
         if (construct > 0) {
-            sb.append("TC: ").append(construct).append(" ");
+            sb.append("Const: ").append(construct).append(" ");
         }
         if (tournament > 0) {
-            sb.append("TP: ").append(tournament).append(" ");
+            sb.append("Tourn: ").append(tournament).append(" ");
         }
         if (watchedGames.size() > 0) {
-            sb.append("WA: ").append(watchedGames.size()).append(" ");
+            sb.append("Watch: ").append(watchedGames.size()).append(" ");
         }
 
         sb.append(disconnectInfo);
@@ -433,4 +433,9 @@ public class User {
     public void removeGameWatchInfo(UUID gameId) {
         watchedGames.remove(gameId);
     }
+
+    public UserState getUserState() {
+        return userState;
+    }
+    
 }

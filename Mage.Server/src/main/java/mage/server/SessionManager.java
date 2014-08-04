@@ -74,15 +74,18 @@ public class SessionManager {
         if (session != null) {
             String returnMessage =  session.registerUser(userName);
             if (returnMessage == null) {
-            LogServiceImpl.instance.log(LogKeys.KEY_USER_CONNECTED, userName, session.getHost(), sessionId);
-            logger.info(new StringBuilder("User: ").append(userName)
-                    .append(" userId: ").append(session.getUserId())
-                    .append(" connected from: ").append(session.getHost())
-                    .append(" sessionId: ").append(sessionId));
-            return true;
+                LogServiceImpl.instance.log(LogKeys.KEY_USER_CONNECTED, userName, session.getHost(), sessionId);
+
+                logger.info(userName + " joined server");
+                logger.debug("- userId:    " + session.getUserId());
+                logger.debug("- sessionId: " + sessionId);
+                logger.debug("- host:      " + session.getHost());
+                return true;
             } else {
-                logger.info(new StringBuilder("User not registered - ").append(returnMessage));
+                logger.debug(userName + " not registered: " + returnMessage);
             }
+        } else {
+            logger.error(userName + " tried to join with no sessionId");
         }
         return false;
     }

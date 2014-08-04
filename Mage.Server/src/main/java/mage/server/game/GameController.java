@@ -106,7 +106,7 @@ public class GameController implements GameCallback {
     }
 
     public void cleanUp() {
-        ChatManager.getInstance().destroyChatSession(chatId);
+        // nothing now
     }
 
     private void init() {

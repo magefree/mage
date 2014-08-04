@@ -159,7 +159,7 @@ public class TableController {
         }
         User user = UserManager.getInstance().getUser(userId);
         if (user == null) {
-            logger.fatal(new StringBuilder("couldn't get user ").append(name).append(" for join tornament userId = ").append(userId).toString());
+            logger.fatal(new StringBuilder("couldn't get user ").append(name).append(" for join tournament userId = ").append(userId).toString());
             return false;
         }
         if (userPlayerMap.containsKey(userId) && playerType.equals("Human")){
@@ -174,7 +174,7 @@ public class TableController {
             }
             tournament.addPlayer(player, seat.getPlayerType());
             table.joinTable(player, seat);            
-            logger.debug("player joined " + player.getId());
+            logger.trace("player " + player.getName() + " joined tableId: " + table.getId());
             //only inform human players and add them to sessionPlayerMap
             if (seat.getPlayer().isHuman()) {
                 user.addTable(player.getId(), table);
@@ -243,14 +243,13 @@ public class TableController {
         }
         match.addPlayer(player, deck);
         table.joinTable(player, seat);
-        logger.debug("player joined " + player.getId() + " " + player.getName());
+        logger.trace(player.getName() + " joined tableId: " + table.getId());
         //only inform human players and add them to sessionPlayerMap
         if (seat.getPlayer().isHuman()) {
             user.addTable(player.getId(), table);
             user.joinedTable(table.getRoomId(), table.getId(), false);
             userPlayerMap.put(userId, player.getId());
         }
-
         return true;
     }
 
@@ -364,7 +363,7 @@ public class TableController {
             player = PlayerFactory.getInstance().createPlayer(playerType, name, options.getRange(), skill);
         }
         if (player != null) {
-            logger.debug("Player created " + player.getId());
+            logger.trace("Player " + player.getName() + " created id: " + player.getId());
         }
         return player;
     }
@@ -466,14 +465,12 @@ public class TableController {
     public synchronized void startMatch() {
         if (table.getState() == TableState.STARTING) {
             try {
-                String tableInfo;
                 if (table.isTournamentSubTable()) {
-                    tableInfo = "Tournament tournamentId: " + table.getTournament().getId() + " - sub";
+                    logger.info("Tourn. match started id:" + match.getId() + " tournId: " + table.getTournament().getId());
                 } else {
                     User user = UserManager.getInstance().getUser(userId);
-                    tableInfo = "User (table controller) " + user.getName();
+                    logger.info("MATCH started [" + match.getName() + "] " + match.getId() + "(" + user.getName() +")");
                 }
-                logger.info(new StringBuilder(tableInfo).append(" match started match Id: ").append(match.getId()));
                 match.startMatch();
                 startGame(null);
             } catch (GameException ex) {
@@ -501,8 +498,6 @@ public class TableController {
                             user.removeConstructing(match.getPlayer(entry.getValue()).getPlayer().getId());
                             GameManager.getInstance().joinGame(match.getGame().getId(), user.getId());
                         }
-
-                        logger.info(new StringBuilder("User ").append(user.getName()).append(" game started - gameId ").append(match.getGame().getId()).append(" matchId ").append(match.getId()).append(" userId: ").append(user.getId()));
                         user.gameStarted(match.getGame().getId(), entry.getValue());
                         if (creator == null) {
                             creator = user.getName();
@@ -514,7 +509,7 @@ public class TableController {
                         }
                     }
                     else {
-                        logger.warn("Unable to find player " + entry.getKey());
+                        logger.error("Unable to find player " + entry.getKey());
                         match.getPlayer(entry.getValue()).setQuit(true);
                     }
                 }
@@ -531,6 +526,10 @@ public class TableController {
             ServerMessagesUtil.getInstance().incGamesStarted();
 
             // log about game started
+            logger.info("GAME started [" + match.getName() +"] "+ creator + " - " + opponent.toString());
+            logger.debug("- matchId: " + match.getId() + " [" + match.getName() + "]");
+            logger.debug("- gameId:  " + match.getGame().getId());
+            logger.debug("- chatId:  " + GameManager.getInstance().getChatId(match.getGame().getId()));            
             LogServiceImpl.instance.log(LogKeys.KEY_GAME_STARTED, String.valueOf(userPlayerMap.size()), creator, opponent.toString());
         }
         catch (Exception ex) {

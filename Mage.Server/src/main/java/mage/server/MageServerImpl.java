@@ -93,7 +93,6 @@ public class MageServerImpl implements MageServer {
                 LogServiceImpl.instance.log(LogKeys.KEY_WRONG_VERSION, userName, version.toString(), Main.getVersion().toString(), sessionId);
                 throw new MageVersionException(version, Main.getVersion());
             }
-            logger.debug(new StringBuilder("RegisterClient - userName: ").append(userName).append(" sessionId = ").append(sessionId));
             return SessionManager.getInstance().registerUser(sessionId, userName);
         } catch (MageException ex) {
             if (ex instanceof MageVersionException) {
@@ -137,7 +136,12 @@ public class MageServerImpl implements MageServer {
             public TableView execute() throws MageException {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTable(userId, options);
-                logger.debug("Table " + table.getTableId() + " created");
+                if (logger.isDebugEnabled()) {
+                    User user = UserManager.getInstance().getUser(userId);
+                    if (user != null) {
+                        logger.debug(user.getName() + " created tableId: " + table.getTableId());
+                    }
+                }
                 LogServiceImpl.instance.log(LogKeys.KEY_TABLE_CREATED, sessionId, userId.toString(), table.getTableId().toString());
                 return table;
             }
@@ -198,8 +202,12 @@ public class MageServerImpl implements MageServer {
             @Override
             public Boolean execute() throws MageException {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+                logger.debug(name + " joins tableId: " + tableId);
+                if (userId == null) {
+                    logger.fatal("Got no userId from sessionId" + sessionId + " tableId" + tableId);
+                    return false;
+                }                
                 boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTable(userId, tableId, name, playerType, skill, deckList);
-                logger.debug("Session " + sessionId + " joined table " + tableId);
                 return ret;
             }
         });
@@ -211,8 +219,17 @@ public class MageServerImpl implements MageServer {
             @Override
             public Boolean execute() throws MageException {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+                if (logger.isDebugEnabled()) {
+                    User user = UserManager.getInstance().getUser(userId);
+                    if (user != null) {
+                        logger.debug("join tourn. tableId: " + tableId + " " + user.getName());
+                    }
+                }                
+                if (userId == null) {
+                    logger.fatal("Got no userId from sessionId" + sessionId + " tableId" + tableId);
+                    return false;
+                }                 
                 boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTournamentTable(userId, tableId, name, playerType, skill);
-                logger.debug("Session " + sessionId + " joined table " + tableId);
                 return ret;
             }
         });
@@ -1004,9 +1021,6 @@ public class MageServerImpl implements MageServer {
     protected void execute(final String actionName, final String sessionId, final Action action) throws MageException {
         if (SessionManager.getInstance().isValidSession(sessionId)) {
             try {
-                if (actionName.equals("joinChat")) {
-                    logger.debug("MageServerImpl.execute  sessionId: " + sessionId + " action: " + actionName);
-                }
                 callExecutor.execute(
                     new Runnable() {
                         @Override

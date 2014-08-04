@@ -28,6 +28,8 @@
 
 package mage.server;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -63,7 +65,8 @@ public class TableManager {
 
     private static final TableManager INSTANCE = new TableManager();
     private static final Logger logger = Logger.getLogger(TableManager.class);
-
+    private static final DateFormat formatter = new SimpleDateFormat("hh:mm:ss");
+    
     private final ConcurrentHashMap<UUID, TableController> controllers = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<>();
 
@@ -341,7 +344,6 @@ public class TableManager {
     public void removeTable(UUID tableId) {
         if (tables.containsKey(tableId)) {
             Table table = tables.get(tableId);
-            ChatManager.getInstance().destroyChatSession(controllers.get(tableId).getChatId());  
             controllers.remove(tableId);
             tables.remove(tableId);
                 // If table is not finished, the table has to be removed completly (if finished it will be removed in GamesRoomImpl.Update())
@@ -354,23 +356,27 @@ public class TableManager {
         }
     }
 
-    private void checkExpired() {
-        logger.debug("--- Table expire checking -----------------------------------------------------------------------");
+    public void debugServerState() {
+        logger.debug("--- Server state ----------------------------------------------");
         Collection<User> users = UserManager.getInstance().getUsers();
-        logger.debug("------- Users: " + users.size() + " ------------------------");
+        logger.debug("--------User: " + users.size() + " [userId | since | name -----------------------");
         for (User user :users) {
-            logger.debug(user.getName() + "  SessionId: " + user.getSessionId() + "  ConnectionTime: " + user.getConnectionTime());
+            logger.debug(user.getId() + " | " + formatter.format(user.getConnectionTime()) + " | " + user.getName() +" (" +user.getUserState().toString() +")");
         }
         ArrayList<ChatSession> chatSessions = ChatManager.getInstance().getChatSessions();
-        logger.debug("------- ChatSessions: " + chatSessions.size() + " ------------------------");
+        logger.debug("------- ChatSessions: " + chatSessions.size() + " ----------------------------------");
         for (ChatSession chatSession: chatSessions) {
-            logger.debug(chatSession.getChatId() + "  Clients: " + chatSession.getClients().values().toString());
+            logger.debug(chatSession.getChatId() + " " + chatSession.getClients().values().toString());
         }
-        logger.debug("------- Tables: " + tables.size() + " ------------------------");
+        logger.debug("------- Tables: " + tables.size() + " --------------------------------------------");
         for (Table table: tables.values()) {
-            logger.debug(table.getId() + " Name: [" + table.getName()+ "]  StartTime: " + table.getStartTime());
-        }
-
+            logger.debug(table.getId() + " [" + table.getName()+ "] " + formatter.format(table.getStartTime()) +" (" + table.getState().toString() + ")");
+        }        
+        logger.debug("--- Server state END ------------------------------------------");
+    }
+    
+    private void checkExpired() {
+        debugServerState();
         Date now = new Date();
         List<UUID> toRemove = new ArrayList<>();
         for (Table table : tables.values()) {
@@ -398,5 +404,6 @@ public class TableManager {
                 logger.error(e);
             }
         }
+
     }
 }
