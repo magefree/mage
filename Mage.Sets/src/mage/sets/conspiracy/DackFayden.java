@@ -75,8 +75,7 @@ public class DackFayden extends CardImpl {
         this.color.setBlue(true);
         this.color.setRed(true);
         
-        //TO CHANGE!!!
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), false));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
         // +1: Target player draws two cards, then discards two cards.
         LoyaltyAbility ability = new LoyaltyAbility(new DrawCardTargetEffect(2), 1);
