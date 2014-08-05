@@ -1555,7 +1555,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         passedTurn = true;
         passedAllTurns = true;
         this.skip();
-        log.debug("Passed priority for turns");
+        log.trace("Passed priority for turns");
     }
 
     @Override

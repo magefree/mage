@@ -79,6 +79,7 @@ public class ChatManager {
     public void destroyChatSession(UUID chatId) {
         if (chatId != null && chatSessions.containsKey(chatId)) {
             chatSessions.remove(chatId);
+            logger.debug("Chat removed - chatId: " + chatId);
         } else {
             logger.warn("Chat to destroy does not exist - chatId: " + chatId);
         } 
