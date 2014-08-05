@@ -44,7 +44,7 @@ import mage.watchers.Watcher;
  */
 public class PlayerDamagedBySourceWatcher extends Watcher {
 
-    private Set<String> damageSourceIds = new HashSet<String>();
+    private final Set<String> damageSourceIds = new HashSet<>();
 
     public PlayerDamagedBySourceWatcher(UUID playerId) {
         super("PlayerDamagedBySource", WatcherScope.PLAYER);

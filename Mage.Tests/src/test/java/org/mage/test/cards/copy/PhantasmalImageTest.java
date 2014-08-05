@@ -260,4 +260,47 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertLife(playerA, 18);
     }
 
+    /**
+     *  I attack with a Phantasmal Image of Steel Hellkite. It deals damage. I activate 
+     *  it for zero. A.I. has Chalice of the Void set to one counter. The Chalice should 
+     *  be destroyed I think as in play it has a converted mana cost of zero but it is not.
+     */
+
+    @Test
+    public void testCopiedSteelHellkite() {
+        addCard(Zone.BATTLEFIELD, playerA, "Steel Hellkite");
+        addCard(Zone.HAND, playerA, "Chalice of the Void");
+
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.HAND, playerB, "Phantasmal Image");
+
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chalice of the Void");
+        setChoice(playerA, "X=0");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image");
+        setChoice(playerB, "Steel Hellkite");
+        
+        attack(4, playerB, "Steel Hellkite");
+
+        activateAbility(4, PhaseStep.POSTCOMBAT_MAIN, playerB, "{X}: Destroy each nonland permanent with converted mana cost X whose controller was dealt combat damage by {this} this turn. Activate this ability only once each turn.");
+        setChoice(playerB, "X=0");
+        
+
+        setStopAt(4, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Steel Hellkite", 1);
+        assertPermanentCount(playerB, "Steel Hellkite", 1);
+
+        assertLife(playerB, 20);
+        assertLife(playerA, 15);
+        
+        assertPermanentCount(playerA, "Chalice of the Void", 0);
+        assertGraveyardCount(playerA, "Chalice of the Void", 1);
+        
+        
+        
+    }
 }
