@@ -56,7 +56,6 @@ public class Modern extends Constructed {
 
         banned.add("Ancestral Vision");
         banned.add("Ancient Den");
-        // banned.add("Bitterblossom"); // (unbanned effective February 7, 2014)
         banned.add("Blazing Shoal");
         banned.add("Bloodbraid Elf"); //  (banned effective February 1, 2013)
         banned.add("Chrome Mox");
@@ -75,8 +74,8 @@ public class Modern extends Constructed {
         banned.add("Preordain");
         banned.add("Punishing Fire");
         banned.add("Rite of Flame");
-        banned.add("Second Sunrise"); //  (banned effective May 3, 2013)
         banned.add("Seat of the Synod");
+        banned.add("Second Sunrise"); //  (banned effective May 3, 2013)
         banned.add("Seething Song");  //  (banned effective February 1, 2013)
         banned.add("Sensei's Divining Top");
         banned.add("Stoneforge Mystic");
@@ -85,7 +84,6 @@ public class Modern extends Constructed {
         banned.add("Tree of Tales");
         banned.add("Umezawa's Jitte");
         banned.add("Vault of Whispers");
-        // banned.add("Wild Nacatl"); // (unbanned effective February 7, 2014)
 
     }
 }

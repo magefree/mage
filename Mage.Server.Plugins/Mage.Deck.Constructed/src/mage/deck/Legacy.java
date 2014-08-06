@@ -38,13 +38,16 @@ public class Legacy extends Constructed {
 
     public Legacy() {
         super("Constructed - Legacy");
-
+       
+        banned.add("Advantageous Proclamation");
         banned.add("Amulet of Quoz");
         banned.add("Ancestral Recall");
+        banned.add("Backup Plan");
         banned.add("Balance");
         banned.add("Bazaar of Baghdad");
         banned.add("Black Lotus");
         banned.add("Black Vise");
+        banned.add("Brago's Favor");
         banned.add("Bronze Tablet");
         banned.add("Channel");
         banned.add("Chaos Orb");
@@ -53,6 +56,7 @@ public class Legacy extends Constructed {
         banned.add("Demonic Attorney");
         banned.add("Demonic Consultation");
         banned.add("Demonic Tutor");
+        banned.add("Double Stroke");
         banned.add("Earthcraft");
         banned.add("Falling Star");
         banned.add("Fastbond");
@@ -61,7 +65,9 @@ public class Legacy extends Constructed {
         banned.add("Goblin Recruiter");
         banned.add("Gush");
         banned.add("Hermit Druid");
+        banned.add("Immediate Action");
         banned.add("Imperial Seal");
+        banned.add("Iterative Analysis");
         banned.add("Jeweled Bird");
         banned.add("Library of Alexandria");
         banned.add("Mana Crypt");
@@ -77,15 +83,20 @@ public class Legacy extends Constructed {
         banned.add("Mox Pearl");
         banned.add("Mox Ruby");
         banned.add("Mox Sapphire");
+        banned.add("Muzzio's Preparations");
         banned.add("Mystical Tutor");
         banned.add("Necropotence");
         banned.add("Oath of Druids");
+        banned.add("Power Play");
         banned.add("Rebirth");
+        banned.add("Secret Summoning");
+        banned.add("Secrets of Paradise");
+        banned.add("Sentinel Dispatch");
         banned.add("Shahrazad");
         banned.add("Skullclamp");
         banned.add("Sol Ring");
         banned.add("Strip Mine");
-        banned.add("Survival of the Fittes");
+        banned.add("Survival of the Fittest");
         banned.add("Tempest Efreet");
         banned.add("Time Vault");
         banned.add("Time Walk");
@@ -93,12 +104,14 @@ public class Legacy extends Constructed {
         banned.add("Timmerian Fiends");
         banned.add("Tinker");
         banned.add("Tolarian Academy");
+        banned.add("Unexpected Potential");
         banned.add("Vampiric Tutor");
         banned.add("Wheel of Fortune");
         banned.add("Windfall");
         banned.add("Worldgorger Dragon");
+        banned.add("Worldknit");
         banned.add("Yawgmoth's Bargain");
         banned.add("Yawgmoth's Will");
-
+        
     }
 }

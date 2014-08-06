@@ -63,6 +63,7 @@ public class Commander extends DeckValidator {
          banned.add("Ancestral Recall");
          banned.add("Balance");
          banned.add("Biorhythm");
+         banned.add("Black Lotus");
          banned.add("Channel");
          banned.add("Coalition Victory");
          banned.add("Emrakul, the Aeons Torn");
@@ -83,13 +84,14 @@ public class Commander extends DeckValidator {
          banned.add("Primeval Titan");
          banned.add("Protean Hulk");
          banned.add("Recurring Nightmare");
-         banned.add("Staff of Domination");
          banned.add("Sundering Titan");
          banned.add("Sway of the Stars");
+         banned.add("Sylvan Primordial");
          banned.add("Time Vault");
          banned.add("Time Walk");
          banned.add("Tinker");
          banned.add("Tolarian Academy");
+         banned.add("Trade Secrets");
          banned.add("Upheaval");
          banned.add("Worldfire");
          banned.add("Yawgmoth's Bargain");

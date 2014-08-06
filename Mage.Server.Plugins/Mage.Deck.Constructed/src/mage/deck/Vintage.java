@@ -39,40 +39,51 @@ public class Vintage extends Constructed {
     public Vintage() {
         super("Constructed - Vintage");
 
+        banned.add("Advantageous Proclamation");
         banned.add("Amulet of Quoz");
+        banned.add("Backup Plan");
+        banned.add("Brago's Favor");
         banned.add("Bronze Tablet");
         banned.add("Chaos Orb");
         banned.add("Contract from Below");
         banned.add("Darkpact");
         banned.add("Demonic Attorney");
+        banned.add("Double Stroke");
         banned.add("Falling Star");
+        banned.add("Immediate Action");
+        banned.add("Iterative Analysis");
         banned.add("Jeweled Bird");
+        banned.add("Muzzio's Preparations");
+        banned.add("Power Play");
         banned.add("Rebirth");
+        banned.add("Secret Summoning");
+        banned.add("Secrets of Paradise");
+        banned.add("Sentinel Dispatch");
         banned.add("Shahrazad");
         banned.add("Tempest Efreet");
         banned.add("Timmerian Fiends");
-
+        banned.add("Unexpected Potential");
+        banned.add("Worldknit");
+                   
         restricted.add("Ancestral Recall");
         restricted.add("Balance");
         restricted.add("Black Lotus");
         restricted.add("Brainstorm");
-        restricted.add("Burning Wish");
         restricted.add("Channel");
         restricted.add("Demonic Consultation");
         restricted.add("Demonic Tutor");
-        restricted.add("Fact or Fiction");
         restricted.add("Fastbond");
         restricted.add("Flash");
         restricted.add("Gifts Ungiven");
         restricted.add("Imperial Seal");
         restricted.add("Library of Alexandria");
-        restricted.add("Lion's Eye Diamond");
+        restricted.add("Lion’s Eye Diamond");
         restricted.add("Lotus Petal");
         restricted.add("Mana Crypt");
         restricted.add("Mana Vault");
         restricted.add("Memory Jar");
         restricted.add("Merchant Scroll");
-        restricted.add("Mind's Desire");
+        restricted.add("Mind’s Desire");
         restricted.add("Mox Emerald");
         restricted.add("Mox Jet");
         restricted.add("Mox Pearl");
@@ -93,8 +104,9 @@ public class Vintage extends Constructed {
         restricted.add("Vampiric Tutor");
         restricted.add("Wheel of Fortune");
         restricted.add("Windfall");
-        restricted.add("Yawgmoth's Bargain");
-        restricted.add("Yawgmoth's Will");
+        restricted.add("Yawgmoth’s Bargain");
+        restricted.add("Yawgmoth’s Will");
+
 
     }
 }
