@@ -28,23 +28,21 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CantActivateAbilitiesAttachedEffect;
 import mage.abilities.effects.common.SkipEnchantedUntapEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -79,6 +77,7 @@ public class Encrust extends CardImpl {
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipEnchantedUntapEffect());
         Effect effect = new CantActivateAbilitiesAttachedEffect();
         effect.setText("and its activated abilities can't be activated");
+        ability.addEffect(effect);
         this.addAbility(ability);
     }
 

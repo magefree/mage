@@ -36,6 +36,7 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+import org.apache.log4j.Logger;
 
 /**
  * @author LevelX2
@@ -77,12 +78,17 @@ public class HideawayPlayEffect extends OneShotEffect {
                     game.informPlayer(controller, "You're not able to play the land now due to regular restrictions.");
                 }
             } else {
-                // The land's last ability allows you to play the removed card as part of the resolution of that ability.
-                // Timing restrictions based on the card's type are ignored (for instance, if it's a creature or sorcery).
-                // Other play restrictions are not (such as "Play [this card] only during combat").
-                if (controller.chooseUse(Outcome.Benefit, new StringBuilder("Cast ").append(card.getName()).append(" without paying it's mana cost?").toString(), game)) {
-                    card.setFaceDown(false);
-                    return controller.cast(card.getSpellAbility(), game, true);
+                if (card.getSpellAbility() != null) {
+                    // The land's last ability allows you to play the removed card as part of the resolution of that ability.
+                    // Timing restrictions based on the card's type are ignored (for instance, if it's a creature or sorcery).
+                    // Other play restrictions are not (such as "Play [this card] only during combat").
+                    if (controller.chooseUse(Outcome.Benefit, new StringBuilder("Cast ").append(card.getName()).append(" without paying it's mana cost?").toString(), game)) {
+                        card.setFaceDown(false);
+                        return controller.cast(card.getSpellAbility(), game, true);
+                    }
+                } else {
+                    Logger.getLogger(HideawayPlayEffect.class).error("Non land card had no spell ability: " + card.getName());
+                    return false;
                 }
             }
             return true;
