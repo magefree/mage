@@ -63,6 +63,7 @@ import mage.constants.SpellAbilityType;
 import mage.filter.common.FilterCreatureForCombatBlock;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.game.stack.StackObject;
+import mage.target.TargetPlayer;
 
 /**
  *
@@ -262,6 +263,20 @@ public class TestPlayer extends ComputerPlayer {
                     }
                 }
             }
+            if (target instanceof TargetPlayer) {
+                for (Player player :game.getPlayers().values()) {
+                    for (String choose2: choices) {
+                        if (player.getName().equals(choose2)) {
+                            if (((TargetPlayer)target).canTarget(playerId, player.getId(), null, game) && !target.getTargets().contains(player.getId())) {
+                                target.add(player.getId(), game);
+                                choices.remove(choose2);
+                                return true;                                
+                            }
+                        }
+                    }
+                }
+            }
+            
         }
         return super.choose(outcome, target, sourceId, game, options);
     }

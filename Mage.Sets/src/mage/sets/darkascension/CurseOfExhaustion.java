@@ -41,7 +41,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.watchers.Watcher;
+import mage.watchers.common.CastSpellLastTurnWatcher;
 
 /**
  *
@@ -56,7 +56,6 @@ public class CurseOfExhaustion extends CardImpl {
         this.subtype.add("Curse");
 
         this.color.setWhite(true);
-        this.addWatcher(new CurseOfExhaustionWatcher());
 
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();
@@ -76,39 +75,6 @@ public class CurseOfExhaustion extends CardImpl {
     public CurseOfExhaustion copy() {
         return new CurseOfExhaustion(this);
     }
-}
-
-class CurseOfExhaustionWatcher extends Watcher {
-
-    public CurseOfExhaustionWatcher() {
-        super("SpellCast", WatcherScope.PLAYER);
-    }
-
-    public CurseOfExhaustionWatcher(final CurseOfExhaustionWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public CurseOfExhaustionWatcher copy() {
-        return new CurseOfExhaustionWatcher(this);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (condition == true) {//no need to check - condition has already occured
-            return;
-        }
-        if (event.getType() == GameEvent.EventType.SPELL_CAST ) {
-            Permanent enchantment = game.getPermanent(this.sourceId);
-            if (enchantment != null && enchantment.getAttachedTo() != null) {
-                Player player = game.getPlayer(enchantment.getAttachedTo());
-                if (player != null && event.getPlayerId().equals(player.getId())) {
-                    condition = true;
-                }
-            }
-        }
-    }
-
 }
 
 class CurseOfExhaustionEffect extends ContinuousRuleModifiyingEffectImpl {
@@ -139,8 +105,8 @@ class CurseOfExhaustionEffect extends ContinuousRuleModifiyingEffectImpl {
             if (enchantment != null && enchantment.getAttachedTo() != null) {
                 Player player = game.getPlayer(enchantment.getAttachedTo());
                 if (player != null && event.getPlayerId().equals(player.getId())) {
-                    Watcher watcher = game.getState().getWatchers().get("SpellCast", source.getControllerId());
-                    if (watcher != null && watcher.conditionMet()) {
+                    CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
+                    if (watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(event.getPlayerId()) > 0) {
                         return true;
                     }
                 }

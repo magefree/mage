@@ -84,6 +84,80 @@ public class CursesTest extends CardTestPlayerBase {
         assertLife(playerB, 14);
     }
 
+    /**
+     * Checks if Copy Enchantment works for palyer auras
+     */
+    @Test
+    public void testCurseOfExhaustion3() {        
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 3);        
+        
+        addCard(Zone.HAND, playerA, "Curse of Exhaustion");
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 2);        
+        
+        addCard(Zone.HAND, playerB, "Copy Enchantment", 1);
+        
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of Exhaustion", playerB);
+        
+        castSpell(4, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Copy Enchantment");
+        setChoice(playerB, "Yes");
+        setChoice(playerB, "Curse of Exhaustion");
+        setChoice(playerB, "targetPlayer=PlayerA");
+        castSpell(4, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        
+
+
+        setStopAt(4, PhaseStep.END_TURN);
+        execute();
+
+        assertHandCount(playerB, "Copy Enchantment", 0);
+        assertGraveyardCount(playerB, "Copy Enchantment", 0);
+        
+        assertPermanentCount(playerA, "Curse of Exhaustion", 1);        
+        assertPermanentCount(playerB, "Curse of Exhaustion", 1);
+        
+        assertLife(playerA, 20);
+        assertLife(playerB, 17);
+    }
+    
+    // returng curse enchantment from graveyard to battlefield
+    @Test
+    public void testCurseOfExhaustion4() {        
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 3);
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+        
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 2);
+        
+        addCard(Zone.GRAVEYARD, playerB, "Curse of Exhaustion", 1);
+        addCard(Zone.HAND, playerB, "Obzedat's Aid", 1);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Obzedat's Aid", "Curse of Exhaustion");
+        setChoice(playerB, "PlayerA");
+        
+        
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertHandCount(playerB, "Obzedat's Aid", 0);
+        assertGraveyardCount(playerB, "Obzedat's Aid", 1);
+        assertGraveyardCount(playerB, "Curse of Exhaustion", 0);
+        
+        assertPermanentCount(playerB, "Curse of Exhaustion", 1);
+        
+        assertLife(playerA, 20);
+        assertLife(playerB, 17);
+    }    
+    
     @Test
     public void testCurseOfThirst1() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
