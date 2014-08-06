@@ -55,8 +55,8 @@ public class ChatManager {
 
     private final ConcurrentHashMap<UUID, ChatSession> chatSessions = new ConcurrentHashMap<>();
 
-    public UUID createChatSession() {
-        ChatSession chatSession = new ChatSession();
+    public UUID createChatSession(String info) {
+        ChatSession chatSession = new ChatSession(info);
         chatSessions.put(chatSession.getChatId(), chatSession);
         return chatSession.getChatId();
     }
@@ -120,8 +120,8 @@ public class ChatManager {
             chatSessions.get(chatId).broadcastInfoToUser(user,message);
             return true;
         }
-        if (command.startsWith("\\W ") || command.startsWith("\\WHISPER ")) {
-            String rest = message.substring(command.startsWith("\\W ") ? 3 : 9);
+        if (command.startsWith("\\W ") || command.startsWith("\\WHISPER ") || command.startsWith("/W ") || command.startsWith("/WHISPER ")) {
+            String rest = message.substring(command.startsWith("\\W ") || command.startsWith("/W ")? 3 : 9);
             int first = rest.indexOf(" ");
             if (first > 1) {
                 String userToName = rest.substring(0,first);

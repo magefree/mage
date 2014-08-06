@@ -49,10 +49,14 @@ public class ChatSession {
     private static final Logger logger = Logger.getLogger(ChatSession.class);
     private final ConcurrentHashMap<UUID, String> clients = new ConcurrentHashMap<>();
     private final UUID chatId;
+    private final Date createTime;
+    private final String info;
     private final DateFormat timeFormatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT);
 
-    public ChatSession() {
+    public ChatSession(String info) {
         chatId = UUID.randomUUID();
+        this.createTime = new Date();
+        this.info = info;
     }
 
     public void join(UUID userId) {
@@ -72,7 +76,7 @@ public class ChatSession {
                 String userName = clients.get(userId);
                 clients.remove(userId);
                 logger.debug(userName + (reason == null?"null":"(" + reason.toString() +")") + " removed from chatId " + chatId) ;
-                String message = null;
+                String message;
                 switch (reason) {
                     case Disconnected:
                         message = " has left XMage";
@@ -158,4 +162,13 @@ public class ChatSession {
     public ConcurrentHashMap<UUID, String> getClients() {
         return clients;
     }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+    
 }

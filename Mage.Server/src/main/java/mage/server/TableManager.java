@@ -343,10 +343,17 @@ public class TableManager {
 
     public void removeTable(UUID tableId) {
         if (tables.containsKey(tableId)) {
+            
+            TableController tableController = controllers.get(tableId);            
+            if (tableController != null) {
+                controllers.remove(tableId);
+                tableController.cleanUp();            
+            }
+            
             Table table = tables.get(tableId);
-            controllers.remove(tableId);
             tables.remove(tableId);
-                // If table is not finished, the table has to be removed completly (if finished it will be removed in GamesRoomImpl.Update())
+            
+            // If table is not finished, the table has to be removed completly (if finished it will be removed in GamesRoomImpl.Update())
             if (!table.getState().equals(TableState.FINISHED)) {
                 GamesRoomManager.getInstance().removeTable(tableId);
             }
@@ -366,7 +373,7 @@ public class TableManager {
         ArrayList<ChatSession> chatSessions = ChatManager.getInstance().getChatSessions();
         logger.debug("------- ChatSessions: " + chatSessions.size() + " ----------------------------------");
         for (ChatSession chatSession: chatSessions) {
-            logger.debug(chatSession.getChatId() + " " + chatSession.getClients().values().toString());
+            logger.debug(chatSession.getChatId() + " " +formatter.format(chatSession.getCreateTime()) +" " + chatSession.getInfo()+ " "+ chatSession.getClients().values().toString());
         }
         logger.debug("------- Tables: " + tables.size() + " --------------------------------------------");
         for (Table table: tables.values()) {

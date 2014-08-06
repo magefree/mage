@@ -41,7 +41,7 @@ public abstract class RoomImpl implements Room {
 
     public RoomImpl() {
         roomId = UUID.randomUUID();
-        chatId = ChatManager.getInstance().createChatSession();
+        chatId = ChatManager.getInstance().createChatSession("Room " + roomId);
     }
 
     /**

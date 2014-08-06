@@ -91,7 +91,7 @@ public class GameController implements GameCallback {
     public GameController(Game game, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId, UUID choosingPlayerId) {
         gameSessionId = UUID.randomUUID();
         this.userPlayerMap = userPlayerMap;
-        chatId = ChatManager.getInstance().createChatSession();
+        chatId = ChatManager.getInstance().createChatSession("Game " + game.getId());
         this.game = game;
         this.game.setSaveGame(ConfigSettings.getInstance().isSaveGameActivated());
         this.tableId = tableId;
@@ -106,7 +106,7 @@ public class GameController implements GameCallback {
     }
 
     public void cleanUp() {
-        // nothing now
+        ChatManager.getInstance().destroyChatSession(chatId);
     }
 
     private void init() {

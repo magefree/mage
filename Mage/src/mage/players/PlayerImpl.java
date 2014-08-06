@@ -1542,11 +1542,11 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void concede(Game game) {        
-        log.debug("playerImpl.concede -> start " + this.getName());
+        log.debug(this.getName() + (" concedes gameId:" +game.getId()));
         game.gameOver(playerId);
-        log.debug("playerImpl.concede -> before lost " + this.getName());
+        log.debug("Before lost " + this.getName());
         lost(game);
-        log.debug("playerImpl.concede -> after lost " + this.getName());
+        log.debug("After lost " + this.getName());
         this.left = true;
     }
 

@@ -79,7 +79,7 @@ public class TournamentController {
 
     public TournamentController(Tournament tournament, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
         this.userPlayerMap = userPlayerMap;
-        chatId = ChatManager.getInstance().createChatSession();
+        chatId = ChatManager.getInstance().createChatSession("Tournament " + tournament.getId());
         this.tournament = tournament;
         this.tableId = tableId;
         init();
@@ -426,5 +426,9 @@ public class TournamentController {
             }
         }
 
+    }
+    
+    public void cleanUpOnRemoveTournament() {
+        ChatManager.getInstance().destroyChatSession(chatId);
     }
 }

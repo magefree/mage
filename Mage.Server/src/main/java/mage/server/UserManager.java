@@ -125,7 +125,7 @@ public class UserManager {
     public void removeUser(UUID userId, DisconnectReason reason) {
         User user = users.get(userId);
         if (user != null) {
-            logger.debug(user.getName() + " " + reason.toString() + "userId: " + userId);
+            logger.debug(user.getName() + " removed (" + reason.toString() + ")  userId: " + userId);
             user.kill(reason);
             users.remove(userId);
         } else {

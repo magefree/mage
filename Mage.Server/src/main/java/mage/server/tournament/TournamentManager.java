@@ -94,5 +94,14 @@ public class TournamentManager {
     public UUID getChatId(UUID tournamentId) {
         return controllers.get(tournamentId).getChatId();
     }
+    
+    public void removeTournament(UUID tournamentId) {
+        TournamentController tournamentController = controllers.get(tournamentId);
+        if (tournamentController != null) {
+            controllers.remove(tournamentId);
+            tournamentController.cleanUpOnRemoveTournament();
+            
+        }
+    }
 
 }

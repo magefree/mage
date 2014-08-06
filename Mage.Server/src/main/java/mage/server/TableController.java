@@ -96,7 +96,6 @@ public class TableController {
 
     public TableController(UUID roomId, UUID userId, MatchOptions options) {
         this.userId = userId;
-        chatId = ChatManager.getInstance().createChatSession();
         this.options = options;
         match = GameFactory.getInstance().createMatch(options.getGameType(), options);
         if (userId != null) {
@@ -108,12 +107,12 @@ public class TableController {
             controllerName = "System";
         }
         table = new Table(roomId, options.getGameType(), options.getName(), controllerName, DeckValidatorFactory.getInstance().createDeckValidator(options.getDeckType()), options.getPlayerTypes(), match);
+        chatId = ChatManager.getInstance().createChatSession("Match Table " + table.getId());        
         init();
     }
 
     public TableController(UUID roomId, UUID userId, TournamentOptions options) {
         this.userId = userId;
-        chatId = ChatManager.getInstance().createChatSession();
         tournament = TournamentFactory.getInstance().createTournament(options.getTournamentType(), options);
         if (userId != null) {
             User user = UserManager.getInstance().getUser(userId);
@@ -128,6 +127,7 @@ public class TableController {
             controllerName = "System";
         }
         table = new Table(roomId, options.getTournamentType(), options.getName(), controllerName, DeckValidatorFactory.getInstance().createDeckValidator(options.getMatchOptions().getDeckType()), options.getPlayerTypes(), tournament);
+        chatId = ChatManager.getInstance().createChatSession("Tourn. table " + table.getId());        
     }
 
     private void init() {
@@ -369,15 +369,15 @@ public class TableController {
     }
 
     public synchronized void leaveTable(UUID userId) {
-        UUID playerId = userPlayerMap.get(userId);
         if (table == null) {
-            logger.error("TableController.leaveTable table == null - userId: " + userId);
+            logger.error("No table object - userId: " + userId);
             return;
         }
         if (table.isTournament() && tournament == null) {
-            logger.error("TableController.leaveTable tournament == null - userId: " + userId + "  table: " + table.getId());
+            logger.error("No tournament object - userId: " + userId + "  table: " + table.getId());
             return;
         }
+        UUID playerId = userPlayerMap.get(userId);        
         if (playerId != null) {
             if (table.getState() == TableState.WAITING || table.getState() == TableState.STARTING) {
                 table.leaveNotStartedTable(playerId);
@@ -391,14 +391,14 @@ public class TableController {
                     ChatManager.getInstance().broadcast(chatId, user.getName(), "has left the table", ChatMessage.MessageColor.BLUE, true, ChatMessage.MessageType.STATUS, ChatMessage.SoundToPlay.PlayerLeft);
                     user.removeTable(playerId);
                 } else {
-                    logger.debug("TableController.leaveTable user with this userId not found  userId: " + userId);
+                    logger.debug("User not found - userId: " + userId + " tableId:" + table.getId());
                 }
                 userPlayerMap.remove(userId);
             } else if (!table.getState().equals(TableState.FINISHED)) {
                 if (table.isTournament()) {
-                    logger.debug("TableController.leaveTable before userQuitTournamentSubTables");
+                    logger.debug("Quit tournament sub tables for userId: " + userId);
                     TableManager.getInstance().userQuitTournamentSubTables(userId);
-                    logger.debug("TableController.leaveTable before quit tournament ");
+                    logger.debug("Quit tournament  Id: " + table.getTournament().getId());
                     TournamentManager.getInstance().quit(tournament.getId(), userId);
                 } else {
                     MatchPlayer matchPlayer = match.getPlayer(playerId);
@@ -413,7 +413,7 @@ public class TableController {
                 }
             }
         } else {
-            logger.error("TableController.leaveTable no playerId found for userId: " + userId);
+            logger.error("No playerId found for userId: " + userId);
         }
 
     }
@@ -658,7 +658,6 @@ public class TableController {
     private void closeTable() {
         this.matchEnd();
         table.closeTable();
-        ChatManager.getInstance().destroyChatSession(chatId);
     }
 
     private void matchEnd() {
@@ -789,5 +788,9 @@ public class TableController {
             return validHumanPlayers >= 2 || validHumanPlayers == humanPlayers;
         }
         return true;
+    }
+    
+    void cleanUp() {
+        ChatManager.getInstance().destroyChatSession(chatId);
     }
 }

@@ -49,6 +49,7 @@ import mage.server.RoomImpl;
 import mage.server.TableManager;
 import mage.server.User;
 import mage.server.UserManager;
+import mage.server.tournament.TournamentManager;
 import mage.view.MatchView;
 import mage.view.TableView;
 import mage.view.UsersView;
@@ -106,7 +107,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
             } else {
                 // more since 50 matches finished since this match so remove it
                 if (table.isTournament()) {
-                    // Any special action needed?
+                    TournamentManager.getInstance().removeTournament(table.getTournament().getId());
                 }
                 this.removeTable(table.getId());
            }
