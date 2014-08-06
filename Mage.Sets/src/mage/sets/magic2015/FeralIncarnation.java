@@ -50,7 +50,7 @@ public class FeralIncarnation extends CardImpl {
         // Convoke
         this.addAbility(new ConvokeAbility());
         // Put three 3/3 green Beast creature tokens onto the battlefield.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken("M15"), 3));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken("M15", 1), 3));
     }
 
     public FeralIncarnation(final FeralIncarnation card) {

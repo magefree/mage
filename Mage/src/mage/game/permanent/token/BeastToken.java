@@ -41,10 +41,16 @@ public class BeastToken extends Token {
     public BeastToken() {
         this("LRW");
     }
-
     public BeastToken(String setCode) {
+        this(setCode, Integer.MIN_VALUE);
+    }
+
+    public BeastToken(String setCode, int tokenType) {
         super("Beast", "3/3 green Beast creature token");
         setOriginalExpansionSetCode(setCode);
+        if (tokenType != Integer.MIN_VALUE) {
+            setTokenType(tokenType);
+        }
         cardType.add(CardType.CREATURE);
         color = ObjectColor.GREEN;
         subtype.add("Beast");

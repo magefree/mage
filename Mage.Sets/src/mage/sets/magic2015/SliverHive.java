@@ -130,6 +130,7 @@ class SliverToken extends Token {
 
     SliverToken() {
         super("Sliver", "1/1 colorless Sliver creature token");
+        setOriginalExpansionSetCode("M15");
         cardType.add(CardType.CREATURE);
         subtype.add("Sliver");
         power = new MageInt(1);
