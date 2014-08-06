@@ -23,13 +23,13 @@ public class OldCardLayoutStrategy implements CardLayoutStrategy {
     /**
      * This offset is used once to shift all attachments
      */
-    private static final int ATTACHMENTS_DX_OFFSET = 8;
+    private static final int ATTACHMENTS_DX_OFFSET = 11;
 
     /**
      * This offset is used for each attachment
      */
     private static final int ATTACHMENT_DX_OFFSET = 0;
-    private static final int ATTACHMENT_DY_OFFSET = 10;
+    private static final int ATTACHMENT_DY_OFFSET = 11;
 
     @Override
     public void doLayout(JLayeredPane jLayeredPane, int width) {
