@@ -149,6 +149,7 @@ class GarrukApexPredatorBeastToken extends Token {
     public GarrukApexPredatorBeastToken() {
         super("Beast", "3/3 black Beast creature token with deathtouch");
         setOriginalExpansionSetCode("M15");
+        setTokenType(2);
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add("Beast");

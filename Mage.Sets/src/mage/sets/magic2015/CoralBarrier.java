@@ -74,7 +74,7 @@ class CoralBarrierSquidToken extends Token {
 
     public CoralBarrierSquidToken() {
         super("Squid", "1/1 blue Squid creature token with islandwalk");
-        this.setOriginalExpansionSetCode("MMA");
+        this.setOriginalExpansionSetCode("M15");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add("Squid");
