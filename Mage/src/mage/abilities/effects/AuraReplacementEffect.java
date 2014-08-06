@@ -44,14 +44,18 @@ import mage.players.Player;
 import mage.target.Target;
 
 import java.util.UUID;
+import mage.abilities.SpellAbility;
+import mage.abilities.effects.common.AttachEffect;
 import mage.game.stack.Spell;
 
 /**
  * Cards with the Aura subtype don't change the zone they are in, if there is no
  * valid target on the battlefield. Also, when entering the battlefield and it
- * was not cast (so from Zone != Hand), this effect gets the target to witch to attach it
+ * was not cast (so from Zone != Hand), this effect gets the target to whitch to attach it
  * and adds the Aura the the battlefield and attachs it to the target.
  * The "attachTo:" value in game state has to be set therefore.
+ * 
+ * If no "attachTo:" value is defined, the controlling player has to chose the aura target.
  *
  * This effect is automatically added to ContinuousEffects at the start of a game
  *
@@ -109,7 +113,18 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         if (targetId == null) {
             Target target = card.getSpellAbility().getTargets().get(0);
             Player player = game.getPlayer(card.getOwnerId());
-            if (player != null && player.choose(Outcome.BoostCreature, target, card.getId(), game)) {
+            Outcome auraOutcome = Outcome.BoostCreature;
+            Ability: for (Ability ability:card.getAbilities()) {
+                if (ability instanceof SpellAbility) {
+                    for (Effect effect: ability.getEffects()) {
+                        if (effect instanceof AttachEffect) {
+                            auraOutcome = effect.getOutcome();
+                            break Ability;
+                        }
+                    }
+                }
+            }
+            if (player != null && player.choose(auraOutcome, target, card.getId(), game)) {
                 targetId = target.getFirstTarget();
             }
         }
