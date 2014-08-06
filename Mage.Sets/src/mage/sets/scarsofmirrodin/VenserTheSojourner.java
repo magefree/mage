@@ -29,6 +29,7 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
+import mage.MageObject;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -48,17 +49,20 @@ import mage.abilities.effects.common.combat.UnblockableAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -66,17 +70,24 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class VenserTheSojourner extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterCreaturePermanent("permanent you own");
+
+    static {
+        filter.add(new OwnerPredicate(TargetController.YOU));
+    }
+
     public VenserTheSojourner(UUID ownerId) {
         super(ownerId, 135, "Venser, the Sojourner", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{U}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Venser");
         this.color.setWhite(true);
         this.color.setBlue(true);
+
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
         // +2: Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step.
         LoyaltyAbility ability1 = new LoyaltyAbility(new VenserTheSojournerEffect(), 2);
-        Target target = new TargetControlledPermanent();
+        Target target = new TargetPermanent(filter);
         ability1.addTarget(target);
         this.addAbility(ability1);
 
@@ -114,18 +125,23 @@ class VenserTheSojournerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (getTargetPointer().getFirst(game, source) != null) {
-            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (permanent != null) {
-                if (permanent.moveToExile(source.getSourceId(), "Venser, the Sojourner", source.getSourceId(), game)) {
-                    //create delayed triggered ability
-                    AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
-                    delayedAbility.setSourceId(source.getSourceId());
-                    delayedAbility.setControllerId(source.getControllerId());
-                    game.addDelayedTriggeredAbility(delayedAbility);
-                    return true;
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
+            if (getTargetPointer().getFirst(game, source) != null) {
+                Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+                if (permanent != null) {
+                    if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourceObject.getLogName(), source.getSourceId(), game, Zone.BATTLEFIELD)) {
+                        //create delayed triggered ability
+                        AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
+                        delayedAbility.setSourceId(source.getSourceId());
+                        delayedAbility.setControllerId(source.getControllerId());
+                        game.addDelayedTriggeredAbility(delayedAbility);
+                        return true;
+                    }
                 }
             }
+
         }
         return false;
     }
