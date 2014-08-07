@@ -52,7 +52,7 @@ public class CardPluginImpl implements CardPlugin {
     static final float EXTRA_CARD_SPACING_X = 0.04f;
     private static final float CARD_SPACING_Y = 0.03f;
     private static final float STACK_SPACING_X = 0.07f;
-    private static final float STACK_SPACING_Y = 0.13f;
+    private static final float STACK_SPACING_Y = 0.10f;
     private static final float ATTACHMENT_SPACING_Y = 0.13f;
 
     private int landStackMax = 5;
