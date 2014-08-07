@@ -494,7 +494,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         beforeCall = System.currentTimeMillis();
         if (DownloadPictures.checkForNewCards(cards)) {
             logger.info("Card images checking time: " + ((System.currentTimeMillis() - beforeCall) / 1000 + " seconds"));
-            if (JOptionPane.showConfirmDialog(null, "New cards are available.  Do you want to download the images?", "New images available", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(this, "New cards are available.  Do you want to download the images?", "New images available", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 DownloadPictures.startDownload(null, cards);
             }
         }
@@ -507,7 +507,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public void btnSymbolsActionPerformed(java.awt.event.ActionEvent evt) {
-        if (JOptionPane.showConfirmDialog(null, "Do you want to download mana symbols?") == JOptionPane.OK_OPTION) {
+        if (JOptionPane.showConfirmDialog(this, "Do you want to download mana symbols?") == JOptionPane.OK_OPTION) {
             Plugins.getInstance().downloadSymbols();
         }
     }
@@ -1226,7 +1226,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 @Override
                 public void run() {
                         disableButtons();
-                    if (JOptionPane.showConfirmDialog(null, "The connection to server was lost. Reconnect?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    if (JOptionPane.showConfirmDialog(MageFrame.this, "The connection to server was lost. Reconnect?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                         session.disconnect(false);
                         tablesPane.clearChat();
                         if (performConnect()) {
