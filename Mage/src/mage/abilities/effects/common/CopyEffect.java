@@ -106,7 +106,7 @@ public class CopyEffect extends ContinuousEffectImpl {
         }
         permanent.removeAllAbilities(source.getSourceId(), game);
         for (Ability ability: target.getAbilities()) {
-             permanent.addAbility(ability, source.getSourceId(), game);
+             permanent.addAbility(ability, game);
         }
         permanent.getPower().setValue(target.getPower().getValue());
         permanent.getToughness().setValue(target.getToughness().getValue());
