@@ -97,6 +97,16 @@ public class DialogContainer extends JPanel {
             dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
             dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
 
+        } else if (dialogType == DialogManager.MTGDialogs.ExileDialog) {
+
+            backgroundColor = new Color(250, 250, 250, 50);
+
+            alpha = 0;
+            ChoiceDialog dlg = new ChoiceDialog(params, "Exile");
+            add(dlg);
+            dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
+            dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
+
         } else if (dialogType == DialogManager.MTGDialogs.EmblemsDialog) {
 
             backgroundColor = new Color(0, 0, 50, 110);

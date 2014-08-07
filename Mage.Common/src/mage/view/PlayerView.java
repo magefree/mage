@@ -30,16 +30,17 @@ package mage.view;
 
 import mage.cards.Card;
 import mage.counters.CounterType;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.command.CommandObject;
+import mage.game.command.Commander;
 import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.io.Serializable;
 import java.util.*;
-import mage.game.command.Commander;
 
 /**
  *
@@ -59,6 +60,7 @@ public class PlayerView implements Serializable {
     private final boolean hasLeft;
     private final ManaPoolView manaPool;
     private final SimpleCardsView graveyard = new SimpleCardsView();
+    private final SimpleCardsView exile = new SimpleCardsView();
     private final Map<UUID, PermanentView> battlefield = new LinkedHashMap<>();
     private final CardView topCard;
     private final UserDataView userDataView;
@@ -80,6 +82,14 @@ public class PlayerView implements Serializable {
         this.hasLeft = player.hasLeft();
         for (Card card: player.getGraveyard().getCards(game)) {
             graveyard.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.isFaceDown(), card.getTokenSetCode()));
+        }
+        for (ExileZone exileZone : game.getExile().getExileZones()) {
+            for (Card card : exileZone.getCards(game)) {
+                if (!player.getId().equals(card.getOwnerId())) {
+                    break;
+                }
+                exile.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.isFaceDown(), card.getTokenSetCode()));
+            }
         }
         for (Permanent permanent: state.getBattlefield().getAllPermanents()) {
             if (showInBattlefield(permanent, state)) {
@@ -163,6 +173,10 @@ public class PlayerView implements Serializable {
 
     public SimpleCardsView getGraveyard() {
         return this.graveyard;
+    }
+
+    public SimpleCardsView getExile() {
+        return exile;
     }
 
     public Map<UUID, PermanentView> getBattlefield() {

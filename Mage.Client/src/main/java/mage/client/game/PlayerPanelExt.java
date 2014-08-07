@@ -34,28 +34,6 @@
 
 package mage.client.game;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-import javax.swing.BorderFactory;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 import mage.MageException;
 import mage.cards.MageCard;
 import mage.cards.action.ActionCallback;
@@ -82,6 +60,19 @@ import mage.view.ManaPoolView;
 import mage.view.PlayerView;
 import org.mage.card.arcane.ManaSymbols;
 
+import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
  * Enhanced player pane.
  *
@@ -94,7 +85,6 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private Session session;
     private PlayerView player;
 
-    //private ShowCardsDialog graveyard;
     private BigCard bigCard;
 
     private static final int AVATAR_COUNT = 77;
@@ -193,10 +183,12 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
         int graveCards = player.getGraveyard().size();
         if (graveCards > 99) {
-            Font font = graveLabel.getFont();
-            font = font.deriveFont(9f);
-            graveLabel.setFont(font);
-            changedFontGrave = true;
+            if (!changedFontGrave) {
+                Font font = graveLabel.getFont();
+                font = font.deriveFont(9f);
+                graveLabel.setFont(font);
+                changedFontGrave = true;
+            }
         } else if (changedFontGrave) {
             Font font = lifeLabel.getFont();
             font = font.deriveFont(12f);
@@ -204,6 +196,22 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             changedFontGrave = false;
         }
         graveLabel.setText(Integer.toString(graveCards));
+
+        int exileCards = player.getExile().size();
+        if (exileCards > 99) {
+            if (!changedFontExile) {
+                Font font = exileLabel.getFont();
+                font = font.deriveFont(9f);
+                exileLabel.setFont(font);
+                changedFontExile = true;
+            }
+        } else if (changedFontExile) {
+            Font font = lifeLabel.getFont();
+            font = font.deriveFont(12f);
+            exileLabel.setFont(font);
+            changedFontExile = false;
+        }
+        exileLabel.setText(Integer.toString(exileCards));
 
         if (!MageFrame.isLite()) {
             int id = player.getUserData().getAvatarId();
@@ -395,6 +403,22 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             }
         });
 
+        exileLabel = new JLabel();
+        exileLabel.setToolTipText("Exile");
+        image = ImageHelper.getImageFromResources("/info/exile.png");
+        r = new Rectangle(21, 21);
+        resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
+        exileZone = new HoverButton(null, resized, resized, resized, r);
+        exileZone.setToolTipText("Exile");
+        exileZone.setOpaque(false);
+        exileZone.setObserver(new Command() {
+            @Override
+            public void execute() {
+                btnExileZoneActionPerformed(null);
+            }
+        });
+        exileZone.setBounds(25, 0, 21, 21);
+
         // Cheat button
         r = new Rectangle(25, 21);
         image = ImageHelper.getImageFromResources("/info/cheat.png");
@@ -426,8 +450,11 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                 btnCommandZoneActionPerformed(null);
             }
         });
-        commandZone.setBounds(0, 0, 21, 21);
+        commandZone.setBounds(5, 0, 21, 21);
         zonesPanel.add(commandZone);
+
+        cheat.setBounds(28, 0, 25, 21);
+        zonesPanel.add(cheat);
 
         btnPlayer = new JButton();
         btnPlayer.setText("Player");
@@ -554,19 +581,19 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                         .addGroup(gl_panelBackground.createSequentialGroup()
                                 .addGap(9)
                                 .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
-                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(3)
-                                                .addComponent(poison, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(2)
-                                                .addComponent(btnWhiteMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(2)
-                                                .addComponent(btnBlueMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(2)
-                                                .addComponent(btnBlackMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(grave, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(gl_panelBackground.createSequentialGroup()
+                                                        .addGap(3)
+                                                        .addComponent(poison, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(gl_panelBackground.createSequentialGroup()
+                                                        .addGap(2)
+                                                        .addComponent(btnWhiteMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(gl_panelBackground.createSequentialGroup()
+                                                        .addGap(2)
+                                                        .addComponent(btnBlueMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(gl_panelBackground.createSequentialGroup()
+                                                        .addGap(2)
+                                                        .addComponent(btnBlackMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(grave, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
                                 )
                                 .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
                                         .addGroup(gl_panelBackground.createSequentialGroup()
@@ -601,12 +628,19 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                 .addGap(40)
                                                 .addComponent(libraryLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+                                        /*.addGroup(gl_panelBackground.createSequentialGroup()
+                                                .addGap(18)
+                                                .addComponent(cheat, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))*/
                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                 .addGap(18)
-                                                .addComponent(cheat, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(exileZone, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+                                                )
                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                 .addGap(5)
                                                 .addComponent(graveLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(gl_panelBackground.createSequentialGroup()
+                                                .addGap(40)
+                                                .addComponent(exileLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                 .addGap(1)
                                                 .addComponent(manaCountLabelU, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))))
@@ -644,16 +678,16 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                                 .addGap(1)
                                 .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
                                         .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(4)
-                                                .addComponent(poison, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
-                                                .addGap(4)
-                                                .addComponent(btnWhiteMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-                                                .addGap(2)
-                                                .addComponent(btnBlueMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-                                                .addGap(2)
-                                                .addComponent(btnBlackMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-                                                .addGap(5)
-                                                .addComponent(grave, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(4)
+                                                        .addComponent(poison, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(4)
+                                                        .addComponent(btnWhiteMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(2)
+                                                        .addComponent(btnBlueMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(2)
+                                                        .addComponent(btnBlackMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(5)
+                                                        .addComponent(grave, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
                                         )
                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                 .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
@@ -685,12 +719,19 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                                                 .addGap(31)
                                                 .addComponent(manaCountLabelG, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
                                         .addComponent(libraryLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+                                        /*.addGroup(gl_panelBackground.createSequentialGroup()
+                                                .addGap(76)
+                                                .addComponent(cheat, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))*/
                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                 .addGap(76)
-                                                .addComponent(cheat, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(exileZone, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+                                                )
                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                 .addGap(76)
                                                 .addComponent(graveLabel, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(gl_panelBackground.createSequentialGroup()
+                                                .addGap(76)
+                                                .addComponent(exileLabel, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                 .addGap(31)
                                                 .addComponent(manaCountLabelU, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
@@ -749,6 +790,10 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         DialogManager.getManager(gameId).showEmblemsDialog(CardsViewUtil.convertCommandObject(player.getCommadObjectList()), bigCard, gameId);
     }
 
+    private void btnExileZoneActionPerformed(java.awt.event.ActionEvent evt) {
+        DialogManager.getManager(gameId).showExileDialog(CardsViewUtil.convertSimple(player.getExile(), MageFrame.getGame(gameId).getLoadedCards()), bigCard, gameId);
+    }
+
     private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheatActionPerformed
         DckDeckImporter deckImporter = new DckDeckImporter();
         session.cheat(gameId, playerId, deckImporter.importDeck("cheat.dck"));
@@ -776,9 +821,11 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private JLabel libraryLabel;
     private JLabel poisonLabel;
     private JLabel graveLabel;
+    private JLabel exileLabel;
     private boolean changedFontLibrary;
     private boolean changedFontLife;
     private boolean changedFontGrave;
+    private boolean changedFontExile;
 
     private JPanel zonesPanel;
     private HoverButton exileZone;

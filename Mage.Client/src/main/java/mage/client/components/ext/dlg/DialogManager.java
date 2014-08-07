@@ -1,7 +1,11 @@
 package mage.client.components.ext.dlg;
 
-import java.awt.Component;
-import java.awt.Rectangle;
+import mage.client.cards.BigCard;
+import mage.client.game.FeedbackPanel;
+import mage.view.CardsView;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -9,10 +13,6 @@ import java.awt.event.MouseWheelEvent;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import javax.swing.JComponent;
-import mage.client.cards.BigCard;
-import mage.client.game.FeedbackPanel;
-import mage.view.CardsView;
 
 /**
  * @author mw, noxx
@@ -40,7 +40,7 @@ public class DialogManager extends JComponent implements MouseListener,
 
     public enum MTGDialogs {
         none, AboutDialog, MessageDialog, StackDialog, AssignDamageDialog, ManaChoiceDialog, ChoiceDialog, EmblemsDialog, GraveDialog, DialogContainer, CombatDialog,
-        ChooseDeckDialog, ChooseCommonDialog, RevealDialog
+        ChooseDeckDialog, ChooseCommonDialog, RevealDialog, ExileDialog
     }
 
     /**
@@ -164,6 +164,35 @@ public class DialogManager extends JComponent implements MouseListener,
         //params.feedbackPanel = feedbackPanel;
         params.setCards(cards);
         dialogContainer = new DialogContainer(MTGDialogs.GraveDialog, params);
+        dialogContainer.setVisible(true);
+        add(dialogContainer);
+
+        this.currentDialog = MTGDialogs.DialogContainer;
+
+        setDlgBounds(new Rectangle(x, y, w, h));
+
+        dialogContainer.showDialog(true);
+
+        setVisible(true);
+    }
+
+    public void showExileDialog(CardsView cards, BigCard bigCard, UUID gameId) {
+
+        int w = 720;
+        int h = 550;
+
+        int height = getHeight();
+        int width = getWidth();
+
+        int x = ((width - w) / 2);
+        int y = ((height - h) / 2);
+
+        DlgParams params = new DlgParams();
+        params.rect = new Rectangle(x, y, w, h);
+        params.bigCard = bigCard;
+        params.gameId = gameId;
+        params.setCards(cards);
+        dialogContainer = new DialogContainer(MTGDialogs.ExileDialog, params);
         dialogContainer.setVisible(true);
         add(dialogContainer);
 
