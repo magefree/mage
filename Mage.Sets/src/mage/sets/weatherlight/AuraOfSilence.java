@@ -25,16 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.modernmasters;
+package mage.sets.weatherlight;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.CostModificationType;
@@ -42,71 +43,66 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
+import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class GrandArbiterAugustinIV extends CardImpl {
-
-    private static final FilterCard filterWhite = new FilterCard("White spells");
-    private static final FilterCard filterBlue = new FilterCard("Blue spells");
+public class AuraOfSilence extends CardImpl {
+    
+    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
     static {
-        filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
-        filterBlue.add(new ColorPredicate(ObjectColor.BLUE));
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
-    public GrandArbiterAugustinIV(UUID ownerId) {
-        super(ownerId, 176, "Grand Arbiter Augustin IV", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
-        this.expansionSetCode = "MMA";
-        this.supertype.add("Legendary");
-        this.subtype.add("Human");
-        this.subtype.add("Advisor");
+    public AuraOfSilence(UUID ownerId) {
+        super(ownerId, 123, "Aura of Silence", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
+        this.expansionSetCode = "WTH";
 
-        this.color.setBlue(true);
         this.color.setWhite(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
 
-        // White spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filterWhite, 1)));
-        // Blue spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filterBlue, 1)));
-        // Spells your opponents cast cost {1} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GrandArbiterAugustinIVCostIncreaseEffect()));
+        // Artifact and enchantment spells your opponents cast cost {2} more to cast.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AuraOfSilenceCostModificationEffect()));
+        
+        // Sacrifice Aura of Silence: Destroy target artifact or enchantment.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new SacrificeSourceCost());
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
     }
 
-    public GrandArbiterAugustinIV(final GrandArbiterAugustinIV card) {
+    public AuraOfSilence(final AuraOfSilence card) {
         super(card);
     }
 
     @Override
-    public GrandArbiterAugustinIV copy() {
-        return new GrandArbiterAugustinIV(this);
+    public AuraOfSilence copy() {
+        return new AuraOfSilence(this);
     }
 }
 
-class GrandArbiterAugustinIVCostIncreaseEffect extends CostModificationEffectImpl {
+class AuraOfSilenceCostModificationEffect extends CostModificationEffectImpl {
 
-    private static final String effectText = "Spells your opponents cast cost {1} more to cast";
-
-    GrandArbiterAugustinIVCostIncreaseEffect() {
+    AuraOfSilenceCostModificationEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        staticText = effectText;
+        staticText = "Artifact and enchantment spells your opponents cast cost {2} more to cast";
     }
 
-    GrandArbiterAugustinIVCostIncreaseEffect(GrandArbiterAugustinIVCostIncreaseEffect effect) {
+    AuraOfSilenceCostModificationEffect(AuraOfSilenceCostModificationEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        CardUtil.adjustCost(spellAbility, -1);
+        CardUtil.adjustCost(spellAbility, -2);
         return true;
     }
 
@@ -114,15 +110,17 @@ class GrandArbiterAugustinIVCostIncreaseEffect extends CostModificationEffectImp
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
             if (game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
-                return true;
+                Card card = game.getCard(abilityToModify.getSourceId());
+                if (card != null && (card.getCardType().contains(CardType.ARTIFACT) || card.getCardType().contains(CardType.ENCHANTMENT))) {
+                    return true;
+                }
             }
         }
         return false;
     }
 
     @Override
-    public GrandArbiterAugustinIVCostIncreaseEffect copy() {
-        return new GrandArbiterAugustinIVCostIncreaseEffect(this);
+    public AuraOfSilenceCostModificationEffect copy() {
+        return new AuraOfSilenceCostModificationEffect(this);
     }
-
 }

@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -55,11 +56,11 @@ public class CopyEffect extends ContinuousEffectImpl {
     private UUID sourceId;
     private int zoneChangeCounter;
 
-    public CopyEffect(Permanent target, UUID sourceId) {
+    public CopyEffect(MageObject target, UUID sourceId) {
         this(Duration.Custom, target, sourceId);
     }
     
-    public CopyEffect(Duration duration, Permanent target, UUID sourceId) {
+    public CopyEffect(Duration duration, MageObject target, UUID sourceId) {
         super(duration, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
         this.target = target;
         this.sourceId = sourceId;
@@ -105,7 +106,7 @@ public class CopyEffect extends ContinuousEffectImpl {
         }
         permanent.removeAllAbilities(source.getSourceId(), game);
         for (Ability ability: target.getAbilities()) {
-             permanent.addAbility(ability, game);
+             permanent.addAbility(ability, source.getSourceId(), game);
         }
         permanent.getPower().setValue(target.getPower().getValue());
         permanent.getToughness().setValue(target.getToughness().getValue());
@@ -121,9 +122,9 @@ public class CopyEffect extends ContinuousEffectImpl {
         if (target instanceof PermanentCard) {
             permanent.setCardNumber(((PermanentCard) target).getCard().getCardNumber());
             permanent.setExpansionSetCode(((PermanentCard) target).getCard().getExpansionSetCode());
-        } else if (target instanceof PermanentToken) {
-            permanent.setCardNumber(((PermanentToken) target).getCardNumber());
-            permanent.setExpansionSetCode(((PermanentToken) target).getExpansionSetCode());
+        } else if (target instanceof PermanentToken || target instanceof Card) {
+            permanent.setCardNumber(((Card) target).getCardNumber());
+            permanent.setExpansionSetCode(((Card) target).getExpansionSetCode());
         }
 
         permanent.setCopy(true);
