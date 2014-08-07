@@ -306,7 +306,7 @@ public abstract class TournamentImpl implements Tournament {
             matchResult.append(mp1.getPlayer().hasIdleTimeout()? "I" :(mp1.getPlayer().hasTimerTimeout()?"T":"Q"));
         }
         if (match.getDraws() > 0) {
-            matchResult.append(match.getDraws()).append("-");
+            matchResult.append("-").append(match.getDraws());
         }
         matchResult.append("-").append(mp2.getWins());
         if (mp2.hasQuit()) {
