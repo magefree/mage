@@ -129,13 +129,12 @@ public class CardPluginImpl implements CardPlugin {
                 MagePermanent firstPanel = stack.get(0);
                 if (firstPanel.getOriginal().getName().equals(permanent.getOriginal().getName())) {
 
-                    if (!empty(firstPanel.getLinks())) {
+                    if (!empty(firstPanel.getOriginalPermanent().getAttachments())) {
                         // Put this land to the left of lands with the same name and attachments.
                         insertIndex = i;
                         break;
                     }
-
-                    if (!empty(permanent.getLinks()) || stack.size() == landStackMax) {
+                    if (!empty(permanent.getOriginalPermanent().getAttachments()) || stack.size() == landStackMax) {
                         // If this land has attachments or the stack is full, put it to the right.
                         insertIndex = i + 1;
                         continue;
