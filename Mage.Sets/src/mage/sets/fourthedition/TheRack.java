@@ -161,6 +161,7 @@ class TheRackEffect extends OneShotEffect {
             if (damage > 0) {
                 chosenPlayer.damage(damage, source.getSourceId(), game, false, true);
             }
+            return true;
         }
 
         return false;
