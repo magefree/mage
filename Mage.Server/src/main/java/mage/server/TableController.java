@@ -470,6 +470,7 @@ public class TableController {
                 } else {
                     User user = UserManager.getInstance().getUser(userId);
                     logger.info("MATCH started [" + match.getName() + "] " + match.getId() + "(" + user.getName() +")");
+                    logger.debug("- " + match.getOptions().getGameType() + " - " + match.getOptions().getDeckType());
                 }
                 match.startMatch();
                 startGame(null);

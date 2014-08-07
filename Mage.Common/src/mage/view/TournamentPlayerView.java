@@ -29,7 +29,6 @@
 package mage.view;
 
 import java.io.Serializable;
-import mage.constants.TournamentPlayerState;
 import mage.game.tournament.TournamentPlayer;
 
 /**

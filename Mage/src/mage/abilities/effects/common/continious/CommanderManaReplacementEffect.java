@@ -35,7 +35,6 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.command.CommandObject;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
 import org.apache.log4j.Logger;
