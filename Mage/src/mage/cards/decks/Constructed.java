@@ -37,6 +37,7 @@ import java.util.Map.Entry;
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.constants.Rarity;
 
 /**
  *
@@ -44,9 +45,10 @@ import mage.cards.repository.CardRepository;
  */
 public class Constructed extends DeckValidator {
 
-    protected List<String> banned = new ArrayList<String>();
-    protected List<String> restricted = new ArrayList<String>();
-    protected List<String> setCodes = new ArrayList<String>();
+    protected List<String> banned = new ArrayList<>();
+    protected List<String> restricted = new ArrayList<>();
+    protected List<String> setCodes = new ArrayList<>();
+    protected List<Rarity> rarities = new ArrayList<>();
 
     public Constructed() {
         super("Constructed");
@@ -70,9 +72,9 @@ public class Constructed extends DeckValidator {
             valid = false;
         }
 
-        List<String> basicLandNames = new ArrayList<String>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains",
+        List<String> basicLandNames = new ArrayList<>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains",
                                       "Snow-Covered Forest", "Snow-Covered Island", "Snow-Covered Mountain", "Snow-Covered Swamp", "Snow-Covered Plains"));
-        Map<String, Integer> counts = new HashMap<String, Integer>();
+        Map<String, Integer> counts = new HashMap<>();
         countCards(counts, deck.getCards());
         countCards(counts, deck.getSideboard());
         for (Entry<String, Integer> entry: counts.entrySet()) {
@@ -99,6 +101,22 @@ public class Constructed extends DeckValidator {
                 }
             }
         }
+
+        if (!rarities.isEmpty()) {
+            for (Card card: deck.getCards()) {
+                if (!rarities.contains(card.getRarity())) {
+                    invalid.put(card.getName(), "Invalid rarity: " + card.getRarity());
+                    valid = false;
+                }
+            }            
+            for (Card card: deck.getSideboard()) {
+                if (!rarities.contains(card.getRarity())) {
+                    invalid.put(card.getName(), "Invalid rarity: " + card.getRarity());
+                    valid = false;
+                }
+            }                        
+        }
+
         if (!setCodes.isEmpty()) {
             for (Card card: deck.getCards()) {
                 if (!setCodes.contains(card.getExpansionSetCode())) {

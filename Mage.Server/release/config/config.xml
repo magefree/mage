@@ -44,6 +44,7 @@
         <deckType name="Constructed - Modern" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Modern"/>
         <deckType name="Constructed - Vintage" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Vintage"/>
         <deckType name="Constructed - Legacy" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Legacy"/>
+        <deckType name="Constructed - Pauper" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Pauper"/>
         <deckType name="Block Constructed - Innistrad" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.InnistradBlock"/>
         <deckType name="Block Constructed - Kamigawa" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.KamigawaBlock"/>
         <deckType name="Block Constructed - Return to Ravnica" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.ReturnToRavnicaBlock"/>
