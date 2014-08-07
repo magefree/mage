@@ -105,6 +105,7 @@ class PhyrexianMetamorphEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (player != null && sourcePermanent != null) {
             Target target = new TargetPermanent(filter);
+            target.setNotTarget(true);
             if (target.canChoose(source.getControllerId(), game)) {
                 player.choose(Outcome.Copy, target, source.getSourceId(), game);
                 Permanent copyFromPermanent = game.getPermanent(target.getFirstTarget());

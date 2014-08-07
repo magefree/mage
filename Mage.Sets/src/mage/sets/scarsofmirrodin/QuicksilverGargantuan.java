@@ -45,13 +45,12 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+import mage.target.Target;
 
 /**
  * @author ayratn
  */
 public class QuicksilverGargantuan extends CardImpl {
-
-    private static final String text = "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's still 7/7";
 
     public QuicksilverGargantuan(UUID ownerId) {
         super(ownerId, 39, "Quicksilver Gargantuan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
@@ -61,8 +60,11 @@ public class QuicksilverGargantuan extends CardImpl {
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 
-        Ability ability = new EntersBattlefieldAbility(new QuicksilverGargantuanCopyEffect(), text);
-        ability.addTarget(new TargetCreaturePermanent());
+        Ability ability = new EntersBattlefieldAbility(new QuicksilverGargantuanCopyEffect(), 
+                "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's still 7/7");
+        Target target = new TargetCreaturePermanent();
+        target.setNotTarget(true);
+        ability.addTarget(target);
         this.addAbility(ability);
     }
 
