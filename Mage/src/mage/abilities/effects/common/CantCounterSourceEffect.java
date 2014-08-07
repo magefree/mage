@@ -28,7 +28,6 @@
 
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.cards.Card;
@@ -37,6 +36,8 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+
+import java.util.UUID;
 
 /**
  *
@@ -68,7 +69,7 @@ public class CantCounterSourceEffect extends ContinuousRuleModifiyingEffectImpl 
         if (event.getType() == EventType.COUNTER) {
             Card card = game.getCard(source.getSourceId());
             if (card != null) {
-                UUID spellId = card.getSpellAbility().getId();
+                UUID spellId = card.getSpellAbility().getSourceId();
                 if (event.getTargetId().equals(spellId)) {
                     return true;
                 }
