@@ -28,15 +28,14 @@
 
 package mage.abilities.mana;
 
-import mage.constants.AbilityType;
-import mage.constants.Zone;
+import java.util.UUID;
 import mage.Mana;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.common.ManaEffect;
+import mage.constants.AbilityType;
+import mage.constants.Zone;
 import mage.game.Game;
-
-import java.util.UUID;
 
 /**
  *
@@ -72,6 +71,6 @@ public abstract class ManaAbility extends ActivatedAbilityImpl {
     }
 
     public Mana getNetMana(Game game) {
-        return netMana;
+        return netMana.copy();
     }
 }
