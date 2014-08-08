@@ -119,10 +119,10 @@ class ThadaAdelAcquisitorEffect extends OneShotEffect {
 
 class ThadaAdelPlayFromExileEffect extends AsThoughEffectImpl {
 
-    private UUID cardId;
+    private final UUID cardId;
 
     public ThadaAdelPlayFromExileEffect(UUID cardId) {
-        super(AsThoughEffectType.CAST, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may play this card from exile";
         this.cardId = cardId;
     }
@@ -147,15 +147,7 @@ class ThadaAdelPlayFromExileEffect extends AsThoughEffectImpl {
         if (sourceId.equals(this.cardId)) {
             Card card = game.getCard(this.cardId);
             if (card != null && game.getState().getZone(this.cardId) == Zone.EXILED) {
-                Player you = game.getPlayer(source.getControllerId());
-                if (you != null && you.chooseUse(Outcome.Benefit, "Play the card?", game)) {
-                    if (card.getCardType().contains(CardType.LAND)) {
-                        you.playLand(card, game);
-                    } else {
-                        you.cast(card.getSpellAbility(), game, false);
-                    }
-                }
-                return false;
+                return true;
             }
         }
         return false;

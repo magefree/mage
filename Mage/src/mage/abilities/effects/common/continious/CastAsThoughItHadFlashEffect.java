@@ -54,7 +54,7 @@ public class CastAsThoughItHadFlashEffect extends AsThoughEffectImpl {
     }
 
     public CastAsThoughItHadFlashEffect(Duration duration, FilterCard filter, boolean anyPlayer) {
-        super(AsThoughEffectType.CAST, duration, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_AS_INSTANT, duration, Outcome.Benefit);
         this.filter = filter;
         this.anyPlayer = anyPlayer;
         staticText = setText();

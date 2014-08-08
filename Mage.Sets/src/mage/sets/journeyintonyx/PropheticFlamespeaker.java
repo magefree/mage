@@ -123,7 +123,7 @@ class PropheticFlamespeakerCastFromExileEffect extends AsThoughEffectImpl {
     private final UUID cardId;
 
     public PropheticFlamespeakerCastFromExileEffect(UUID cardId) {
-        super(AsThoughEffectType.CAST, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may play card from exile";
         this.cardId = cardId;
     }

@@ -145,7 +145,7 @@ class DaxosOfMeletisCastFromExileEffect extends AsThoughEffectImpl {
     private UUID exileId;
 
     public DaxosOfMeletisCastFromExileEffect(UUID cardId, UUID exileId) {
-        super(AsThoughEffectType.CAST, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it";
         this.cardId = cardId;
         this.exileId = exileId;

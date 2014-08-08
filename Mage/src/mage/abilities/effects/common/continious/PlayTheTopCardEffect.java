@@ -52,7 +52,7 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
     }
     
     public PlayTheTopCardEffect(FilterCard filter) {
-        super(AsThoughEffectType.CAST, Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         this.filter = filter;
         staticText = "You may play the top card of your library if it's a " + filter.getMessage();
     }

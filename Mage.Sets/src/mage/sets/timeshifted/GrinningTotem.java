@@ -37,6 +37,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.Card;
@@ -54,6 +55,7 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
@@ -67,12 +69,12 @@ public class GrinningTotem extends CardImpl {
         this.expansionSetCode = "TSB";
 
         // {2}, {tap}, Sacrifice Grinning Totem: Search target opponent's library for a card and exile it. Then that player shuffles his or her library.
+        // Until the beginning of your next upkeep, you may play that card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrinningTotemSearchAndExileEffect(), new ManaCostsImpl("{2}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetOpponent());
-        // Until the beginning of your next upkeep, you may play that card.
-        ability.addEffect(new GrinningTotemMayPlayEffect());
+//        ability.addEffect(new GrinningTotemMayPlayEffect());
         // At the beginning of your next upkeep, if you haven't played it, put it into its owner's graveyard.
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new GrinningTotemDelayedTriggeredAbility()));
         
@@ -93,7 +95,7 @@ class GrinningTotemSearchAndExileEffect extends OneShotEffect {
 
     public GrinningTotemSearchAndExileEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Search target opponent's library for a card and exile it. Then that player shuffles his or her library.";
+        this.staticText = "Search target opponent's library for a card and exile it. Then that player shuffles his or her library. Until the beginning of your next upkeep, you may play that card";
     }
     
     public GrinningTotemSearchAndExileEffect(final GrinningTotemSearchAndExileEffect effect) {
@@ -117,7 +119,10 @@ class GrinningTotemSearchAndExileEffect extends OneShotEffect {
                     Card card = targetOpponent.getLibrary().remove(targetCard.getFirstTarget(), game);
                     if (card != null) {
                         you.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourcObject != null ? sourcObject.getName() : "", source.getSourceId(), game, Zone.LIBRARY);
-                    }
+                        ContinuousEffect effect = new GrinningTotemMayPlayEffect();
+                        effect.setTargetPointer(new FixedTarget(card.getId()));
+                        game.addEffect(effect, source);
+                    }                    
                 }
             }
             targetOpponent.shuffleLibrary(game);
@@ -131,7 +136,7 @@ class GrinningTotemSearchAndExileEffect extends OneShotEffect {
 class GrinningTotemMayPlayEffect extends AsThoughEffectImpl {
 
     public GrinningTotemMayPlayEffect() {
-        super(AsThoughEffectType.CAST, Duration.Custom, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         this.staticText = "Until the beginning of your next upkeep, you may play that card.";
     }
     
@@ -161,25 +166,10 @@ class GrinningTotemMayPlayEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, Game game) {
-        // implementation from NightveilSpecterEffect
-        Card card = game.getCard(sourceId);
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
-            ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-            if (zone != null && zone.contains(card.getId())) {
-                if (card.getCardType().contains(CardType.LAND)) {
-                    // If the revealed card is a land, you can play it only if it's your turn and you haven't yet played a land this turn.
-                    if (game.getActivePlayerId().equals(source.getControllerId()) && controller.canPlayLand()) {
-                        return true;
-                    }
-                } else {
-                    if (card.getSpellAbility().spellCanBeActivatedRegularlyNow(source.getControllerId(), game)) {
-                        return true;
-                    }
-                }
-            }
+        if (targetPointer.getTargets(game, source).contains(sourceId)) {
+            return game.getState().getZone(sourceId).equals(Zone.EXILED);
         }
-        return false;
+        return false;        
     }
     
 }
@@ -196,8 +186,8 @@ class GrinningTotemDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, this.getSourceId()));
-        return zone.getCards(game).size() > 0;
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, this.getSourceId()));        
+        return exileZone != null && exileZone.getCards(game).size() > 0;
     }
 
     @Override
@@ -207,10 +197,7 @@ class GrinningTotemDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && game.getActivePlayerId().equals(this.getControllerId())) {
-            return true;
-        }
-        return false;
+        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && game.getActivePlayerId().equals(this.getControllerId());
     }
 
     @Override

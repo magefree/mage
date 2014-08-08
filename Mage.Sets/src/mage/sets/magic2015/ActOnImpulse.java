@@ -120,7 +120,7 @@ class ActOnImpulseMayPlayExiledEffect extends AsThoughEffectImpl {
     public List<UUID> cards = new ArrayList<>();
     
     public ActOnImpulseMayPlayExiledEffect(List<UUID> cards) {
-        super(AsThoughEffectType.CAST, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         this.cards.addAll(cards);
     }
     
@@ -145,16 +145,7 @@ class ActOnImpulseMayPlayExiledEffect extends AsThoughEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && card != null && game.getState().getZone(sourceId) == Zone.EXILED) {
             if (cards.contains(sourceId)) {
-                if (card.getCardType().contains(CardType.LAND)) {
-                    // If the revealed card is a land, you can play it only if it's your turn and you haven't yet played a land this turn.
-                    if (game.getActivePlayerId().equals(source.getControllerId()) && controller.canPlayLand()) {
-                        return true;
-                    }
-                } else {
-                    if (card.getSpellAbility().spellCanBeActivatedRegularlyNow(source.getControllerId(), game)) {
-                        return true;
-                    }
-                }
+                return true;
             }
         }
         return false;

@@ -159,7 +159,7 @@ class PsychicIntrusionCastFromExileEffect extends AsThoughEffectImpl {
     private UUID exileId;
 
     public PsychicIntrusionCastFromExileEffect(UUID cardId, UUID exileId) {
-        super(AsThoughEffectType.CAST, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell";
         this.cardId = cardId;
         this.exileId = exileId;

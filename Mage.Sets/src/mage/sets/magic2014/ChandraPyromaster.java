@@ -229,7 +229,7 @@ class ChandraPyromasterEffect2 extends OneShotEffect {
 class ChandraPyromasterCastFromExileEffect extends AsThoughEffectImpl {
 
     public ChandraPyromasterCastFromExileEffect() {
-        super(AsThoughEffectType.CAST, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may play the card from exile this turn";
     }
 

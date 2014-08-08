@@ -82,7 +82,7 @@ class QuickenAsThoughEffect extends AsThoughEffectImpl {
     private int zoneChangeCounter;
 
     public QuickenAsThoughEffect() {
-        super(AsThoughEffectType.CAST, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_AS_INSTANT, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "The next sorcery card you cast this turn can be cast as though it had flash";
     }
 
@@ -128,7 +128,7 @@ class QuickenAsThoughEffect extends AsThoughEffectImpl {
 
 class QuickenWatcher extends Watcher {
 
-    public List<String> activeQuickenSpells = new ArrayList<String>();
+    public List<String> activeQuickenSpells = new ArrayList<>();
 
     public QuickenWatcher() {
         super("consumeQuickenWatcher", WatcherScope.PLAYER);

@@ -125,11 +125,11 @@ class KnacksawCliqueEffect extends OneShotEffect {
 
 class KnacksawCliqueCastFromExileEffect extends AsThoughEffectImpl {
 
-    private UUID cardId;
-    private UUID exileId;
+    private final UUID cardId;
+    private final UUID exileId;
 
     public KnacksawCliqueCastFromExileEffect(UUID cardId, UUID exileId) {
-        super(AsThoughEffectType.CAST, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Until end of turn, you may play that card";
         this.cardId = cardId;
         this.exileId = exileId;
@@ -155,12 +155,8 @@ class KnacksawCliqueCastFromExileEffect extends AsThoughEffectImpl {
     public boolean applies(UUID sourceId, Ability source, Game game) {
         if (sourceId.equals(this.cardId)) {
             Card card = game.getCard(this.cardId);
-            if (card != null 
-                    && game.getState().getExile().getExileZone(exileId).contains(cardId)) {
-                if (card.getSpellAbility() != null 
-                        && card.getSpellAbility().spellCanBeActivatedRegularlyNow(source.getControllerId(), game)) {
-                    return true;
-                }
+            if (card != null && game.getState().getExile().getExileZone(exileId).contains(cardId)) {
+                return true;
             }
         }
         return false;

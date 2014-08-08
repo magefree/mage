@@ -78,7 +78,7 @@ public class NightveilSpecter extends CardImpl {
       // Flying
       this.addAbility(FlyingAbility.getInstance());
 
-      // Whenever Nightveil Specter deals combat damage to a player, that player exiles the top card of his or her library.
+      // Whenever Nightveil Specter deals combat damage to a player, that player exiles the top card of his or her library.     
       this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new NightveilSpecterExileEffect(),false, true));
 
       // You may play cards exiled with Nightveil Specter.
@@ -129,7 +129,7 @@ class NightveilSpecterExileEffect extends OneShotEffect {
 class NightveilSpecterEffect extends AsThoughEffectImpl {
 
     public NightveilSpecterEffect() {
-      super(AsThoughEffectType.CAST, Duration.EndOfGame, Outcome.Benefit);
+      super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
       staticText = "You may play cards exiled with {this}";
     }
 
@@ -154,18 +154,7 @@ class NightveilSpecterEffect extends AsThoughEffectImpl {
       Player controller = game.getPlayer(source.getControllerId());
       if (controller != null && card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
           ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-          if (zone != null && zone.contains(card.getId())) {
-                if (card.getCardType().contains(CardType.LAND)) {
-                    // If the revealed card is a land, you can play it only if it's your turn and you haven't yet played a land this turn.
-                    if (game.getActivePlayerId().equals(source.getControllerId()) && controller.canPlayLand()) {
-                        return true;
-                    }
-                } else {
-                    if (card.getSpellAbility().spellCanBeActivatedRegularlyNow(source.getControllerId(), game)) {
-                        return true;
-                    }
-                }
-          }
+          return zone != null && zone.contains(card.getId());
       }
       return false;
     }

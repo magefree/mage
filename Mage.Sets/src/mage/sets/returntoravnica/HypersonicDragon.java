@@ -38,7 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
@@ -46,7 +46,8 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class HypersonicDragon extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("sorcery spells");
+    private static final FilterCard filter = new FilterCard("sorcery spells");
+    
     static {
         filter.add(new CardTypePredicate(CardType.SORCERY));
     }

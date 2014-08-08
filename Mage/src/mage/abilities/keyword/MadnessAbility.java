@@ -71,7 +71,7 @@ public class MadnessAbility extends StaticAbility {
  * It checks:
  * 1. That card is in Exile zone
  * 2. It is being cast by owner
- * 3. It been discarded so it contains 'madness' mark stored in game state
+ * 3. It has been discarded so it contains 'madness' mark stored in game state
  *
  */
 class MadnessPlayEffect extends AsThoughEffectImpl {
@@ -79,7 +79,7 @@ class MadnessPlayEffect extends AsThoughEffectImpl {
     private Cost cost;
 
     public MadnessPlayEffect(Cost cost) {
-        super(AsThoughEffectType.CAST, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_AS_INSTANT, Duration.EndOfGame, Outcome.Benefit);
         staticText = null;
         this.cost = cost;
     }

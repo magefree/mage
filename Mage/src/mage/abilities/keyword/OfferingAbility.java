@@ -70,14 +70,17 @@ import mage.util.CardUtil;
  *   match colored mana in the colored mana cost of the card with offering, or is in excess
  *   of the card's colored mana cost, reduces that much generic mana in the total cost. #
  *
- * @param subtype name of the subtype that can be offered
  *
  * @author LevelX2
  */
 public class OfferingAbility extends StaticAbility {
 
     private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-
+    
+    /**
+    * 
+    * @param subtype name of the subtype that can be offered
+    */
     public OfferingAbility(String subtype) {
         super(Zone.ALL, null);
         filter.add(new SubtypePredicate(subtype));
@@ -109,7 +112,7 @@ public class OfferingAbility extends StaticAbility {
 class OfferingAsThoughEffect extends AsThoughEffectImpl {
 
     public OfferingAsThoughEffect() {
-        super(AsThoughEffectType.CAST, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_AS_INSTANT, Duration.EndOfGame, Outcome.Benefit);
     }
 
     public OfferingAsThoughEffect(final OfferingAsThoughEffect effect) {

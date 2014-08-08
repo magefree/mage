@@ -117,7 +117,7 @@ class PraetorsGraspPlayEffect extends AsThoughEffectImpl {
     private UUID cardId;
 
     public PraetorsGraspPlayEffect(UUID cardId) {
-        super(AsThoughEffectType.CAST, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         this.cardId = cardId;
         staticText = "You may look at and play that card for as long as it remains exiled";
     }
@@ -143,9 +143,7 @@ class PraetorsGraspPlayEffect extends AsThoughEffectImpl {
             Card card = game.getCard(cardId);
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null && card != null && game.getState().getZone(cardId) == Zone.EXILED) {
-                if (card.getCardType().contains(CardType.INSTANT) || game.canPlaySorcery(source.getControllerId())) {
-                        return true;
-                }
+                return true;
             }
         }
         return false;
@@ -155,7 +153,7 @@ class PraetorsGraspPlayEffect extends AsThoughEffectImpl {
 
 class PraetorsGraspRevealEffect extends AsThoughEffectImpl {
 
-    private UUID cardId;
+    private final UUID cardId;
 
     public PraetorsGraspRevealEffect(UUID cardId) {
         super(AsThoughEffectType.REVEAL_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
