@@ -125,9 +125,10 @@ public class UserManager {
     public void removeUser(UUID userId, DisconnectReason reason) {
         User user = users.get(userId);
         if (user != null) {
-            logger.debug(user.getName() + " removed (" + reason.toString() + ")  userId: " + userId);
+            logger.debug("User " + user.getName() + " will be removed (" + reason.toString() + ")  userId: " + userId);
             user.kill(reason);
             users.remove(userId);
+            logger.debug("User " + user.getName() + " removed");
         } else {
             logger.warn(new StringBuilder("Trying to remove userId: ").append(userId).append(" but it does not exist."));
         }
@@ -153,7 +154,6 @@ public class UserManager {
                     @Override
                     public void run() {
                         try {
-                            logger.debug("checkExpired - start");
                             Calendar expired = Calendar.getInstance();
                             expired.add(Calendar.MINUTE, -3);
                             List<User> usersToCheck = new ArrayList<>();
@@ -165,7 +165,6 @@ public class UserManager {
                                     removeUser(user.getId(), DisconnectReason.SessionExpired);
                                 }
                             }
-                            logger.debug("checkExpired - end");
                         } catch (Exception ex) {
                             handleException(ex);
                         }
