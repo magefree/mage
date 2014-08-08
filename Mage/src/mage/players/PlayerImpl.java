@@ -882,13 +882,13 @@ public abstract class PlayerImpl implements Player, Serializable {
             result = playManaAbility((ManaAbility)ability.copy(), game);
         }
         else if (ability instanceof FlashbackAbility){
-            result = playAbility((ActivatedAbility)ability.copy(), game);
+            result = playAbility(ability.copy(), game);
         }
         else if (ability instanceof SpellAbility) {
             result = cast((SpellAbility)ability, game, false);
         }
         else {
-            result = playAbility((ActivatedAbility)ability.copy(), game);
+            result = playAbility(ability.copy(), game);
         }
 
         //if player has taken an action then reset all player passed flags

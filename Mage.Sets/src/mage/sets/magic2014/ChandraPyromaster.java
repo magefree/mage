@@ -33,10 +33,10 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -110,7 +110,7 @@ class ChandraPyromasterEffect1 extends OneShotEffect {
 
     public ChandraPyromasterEffect1() {
         super(Outcome.Damage);
-        staticText = "Chandra, Pyromaster deals 1 damage to target player and 1 damage to up to one target creature that player controls. That creature can't block this turn";
+        staticText = "{this} deals 1 damage to target player and 1 damage to up to one target creature that player controls. That creature can't block this turn";
     }
 
     public ChandraPyromasterEffect1(final ChandraPyromasterEffect1 effect) {
@@ -162,7 +162,7 @@ class ChandraPyromasterTarget extends TargetPermanent {
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
-        Set<UUID> possibleTargets = new HashSet<UUID>();
+        Set<UUID> possibleTargets = new HashSet<>();
         MageObject object = game.getObject(sourceId);
 
         for (StackObject item : game.getState().getStack()) {
@@ -210,13 +210,15 @@ class ChandraPyromasterEffect2 extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you != null && you.getLibrary().size() > 0) {
-            Library library = you.getLibrary();
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && controller.getLibrary().size() > 0) {
+            Library library = controller.getLibrary();
             Card card = library.removeFromTop(game);
             if (card != null) {
-                card.moveToExile(source.getSourceId(), "Chandra Pyromaster <this card may be played the turn it was exiled>", source.getSourceId(), game);
-                game.addEffect(new ChandraPyromasterCastFromExileEffect(card.getId()), source);
+                controller.moveCardToExileWithInfo(card, source.getSourceId(), "Chandra Pyromaster <this card may be played the turn it was exiled>", source.getSourceId(), game, Zone.LIBRARY);
+                ContinuousEffect effect = new ChandraPyromasterCastFromExileEffect(); 
+                effect.setTargetPointer(new FixedTarget(card.getId()));
+                game.addEffect(effect, source);
             }
             return true;
         }
@@ -226,17 +228,13 @@ class ChandraPyromasterEffect2 extends OneShotEffect {
 
 class ChandraPyromasterCastFromExileEffect extends AsThoughEffectImpl {
 
-    private UUID cardId;
-
-    public ChandraPyromasterCastFromExileEffect(UUID cardId) {
+    public ChandraPyromasterCastFromExileEffect() {
         super(AsThoughEffectType.CAST, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "You may play card from exile";
-        this.cardId = cardId;
+        staticText = "You may play the card from exile this turn";
     }
 
     public ChandraPyromasterCastFromExileEffect(final ChandraPyromasterCastFromExileEffect effect) {
         super(effect);
-        cardId = effect.cardId;
     }
 
     @Override
@@ -251,24 +249,8 @@ class ChandraPyromasterCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, Game game) {
-        if (sourceId.equals(this.cardId)) {
-            Card card = game.getCard(this.cardId);
-            if (card != null && game.getState().getZone(this.cardId) == Zone.EXILED) {
-                Player player = game.getPlayer(source.getControllerId());
-                if (player != null && player.chooseUse(Outcome.Benefit, "Play this card?", game)) {
-                    if (card.getCardType().contains(CardType.LAND)) {
-                        // If the revealed card is a land, you can play it only if it's your turn and you haven't yet played a land this turn.
-                        if (game.getActivePlayerId().equals(player.getId()) && player.getLandsPlayed() < player.getLandsPerTurn()) {
-                            return player.playLand(card, game);
-                        }
-                    } else {
-                        Ability ability = card.getSpellAbility();
-                        if (ability != null && ability instanceof SpellAbility) {
-                            return player.cast((SpellAbility) ability, game, false);
-                        }
-                    }
-                }
-            }
+        if (targetPointer.getTargets(game, source).contains(sourceId)) {
+            return game.getState().getZone(sourceId).equals(Zone.EXILED);
         }
         return false;
     }
