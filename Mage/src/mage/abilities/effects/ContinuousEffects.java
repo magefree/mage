@@ -139,9 +139,6 @@ public class ContinuousEffects implements Serializable {
         allEffectsLists.add(requirementEffects);
         allEffectsLists.add(restrictionEffects);
         allEffectsLists.add(restrictionUntapNotMoreThanEffects);
-        for(ContinuousEffectsList asThoughtlist :asThoughEffectsMap.values()) {
-            allEffectsLists.add(asThoughtlist);
-        }
         allEffectsLists.add(costModificationEffects);
         allEffectsLists.add(spliceCardEffects);
     }
@@ -894,6 +891,7 @@ public class ContinuousEffects implements Serializable {
                 AsThoughEffect newAsThoughEffect = (AsThoughEffect)effect;
                 if (!asThoughEffectsMap.containsKey(newAsThoughEffect.getAsThoughEffectType())) {
                     ContinuousEffectsList<AsThoughEffect> list = new ContinuousEffectsList<>();
+                    allEffectsLists.add(list);
                     asThoughEffectsMap.put(newAsThoughEffect.getAsThoughEffectType(), list);
                 }
                 asThoughEffectsMap.get(newAsThoughEffect.getAsThoughEffectType()).addEffect(newAsThoughEffect, source);
