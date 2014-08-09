@@ -433,7 +433,14 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 
         public AbilityPickerAction(UUID id, String choice) {
             this.id = id;
-            putValue(Action.NAME, choice);
+            putValue(Action.NAME, capitalizeFirstLetter(choice));
+        }
+
+        private String capitalizeFirstLetter(String choice) {
+            if (choice == null || choice.isEmpty()) {
+                return choice;
+            }
+            return choice.substring(0, 1).toUpperCase() + choice.substring(1);
         }
 
         @Override
