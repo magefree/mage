@@ -127,7 +127,7 @@ class SageOfHoursCost extends CostImpl {
 class SageOfHoursEffect extends OneShotEffect {
 
     public SageOfHoursEffect() {
-        super(Outcome.GainLife);
+        super(Outcome.AIDontUseIt); // AI uses it endless therefore deactivated
         this.staticText = "For each five counters removed this way, take an extra turn after this one";
     }
 
