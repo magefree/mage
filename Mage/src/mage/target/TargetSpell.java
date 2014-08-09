@@ -91,13 +91,12 @@ public class TargetSpell extends TargetObject {
 
     @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        return canChoose(sourceControllerId, game);
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
         int count = 0;
         for (StackObject stackObject: game.getStack()) {
+            // rule 114.4. A spell or ability on the stack is an illegal target for itself.
+            if (sourceId != null && sourceId.equals(stackObject.getSourceId())) {
+                continue;
+            }
             if (canBeChosen(stackObject, sourceControllerId, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
@@ -106,6 +105,11 @@ public class TargetSpell extends TargetObject {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean canChoose(UUID sourceControllerId, Game game) {
+        return canChoose(null, sourceControllerId, game);
     }
 
     @Override
