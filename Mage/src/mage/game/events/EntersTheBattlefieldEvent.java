@@ -39,7 +39,7 @@ import mage.game.permanent.Permanent;
  */
 public class EntersTheBattlefieldEvent extends GameEvent {
 
-    private Zone fromZone;
+    private final Zone fromZone;
     private Permanent target;
 
     public EntersTheBattlefieldEvent(Permanent target, UUID sourceId, UUID playerId, Zone fromZone) {

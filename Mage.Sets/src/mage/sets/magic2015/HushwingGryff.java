@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -41,6 +41,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
@@ -77,9 +78,10 @@ public class HushwingGryff extends CardImpl {
     }
 }
 
-class HushwingGryffEffect extends ReplacementEffectImpl {
+class HushwingGryffEffect extends ContinuousRuleModifiyingEffectImpl {
+
     HushwingGryffEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment, false);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment, false, false);
         staticText = "Creatures entering the battlefield don't cause abilities to trigger";
     }
 
@@ -87,16 +89,15 @@ class HushwingGryffEffect extends ReplacementEffectImpl {
         super(effect);
     }
 
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            Permanent p = game.getPermanent(event.getTargetId());
-            if (p != null && p.getCardType().contains(CardType.CREATURE)) {
+            Permanent permanent = ((EntersTheBattlefieldEvent)event).getTarget();
+            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
+                // Because replacement events have to be executed 
+                // call replaceEvent here without calling the triggering event after
+                game.getContinuousEffects().replaceEvent(event, game);
                 return true;
             }
         }

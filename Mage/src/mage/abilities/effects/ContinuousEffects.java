@@ -636,9 +636,6 @@ public class ContinuousEffects implements Serializable {
     }
     
     public boolean replaceEvent(GameEvent event, Game game) {
-        if (preventedByRuleModification(event, game, false)) {
-            return true;
-        }
         boolean caught = false;
         HashMap<UUID, HashSet<UUID>> consumed = new HashMap<>();
         do {

@@ -537,6 +537,9 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public boolean replaceEvent(GameEvent event, Game game) {
+        if (effects.preventedByRuleModification(event, game, false)) {
+            return true;
+        }
         return effects.replaceEvent(event, game);
     }
 
