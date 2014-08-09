@@ -46,8 +46,6 @@ import java.util.UUID;
  */
 public class WarmongersChariot extends CardImpl {
 
-    private static final String staticText = "As long as equipped creature has defender, it can attack as though it didn't have defender";
-
     public WarmongersChariot(UUID ownerId) {
         super(ownerId, 226, "Warmonger's Chariot", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "ROE";
@@ -95,7 +93,7 @@ class WarmongersChariotEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         Permanent equipment = game.getPermanent(source.getSourceId());
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent creature = game.getPermanent(equipment.getAttachedTo());

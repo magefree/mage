@@ -276,10 +276,10 @@ public class GameSession extends GameWatcher {
 
     public void kill() {
         if (game != null) {
-            logger.debug("GameSession.kill before player quit for game");
+            logger.debug("before game.quit playerId:" + playerId);
             game.quit(playerId);
         } else {
-            logger.error("GameSession.kill game object missing   playerId: " + (playerId == null ? "[null]":playerId));
+            logger.error("game object missing   playerId: " + (playerId == null ? "[null]":playerId));
         }
     }
 

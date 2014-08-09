@@ -56,16 +56,16 @@ public class ServerMessagesUtil {
     private static final String SERVER_MSG_TXT_FILE = "server.msg.txt";
     private static ScheduledExecutorService updateExecutor;
 
-    private List<String> messages = new ArrayList<String>();
-    private ReadWriteLock lock = new ReentrantReadWriteLock();
+    private final List<String> messages = new ArrayList<>();
+    private final ReadWriteLock lock = new ReentrantReadWriteLock();
 
     private static String pathToExternalMessages = null;
 
     private static boolean ignore = false;
 
     private static long startDate;
-    private static AtomicInteger gamesStarted = new AtomicInteger(0);
-    private static AtomicInteger tournamentsStarted = new AtomicInteger(0);
+    private static final AtomicInteger gamesStarted = new AtomicInteger(0);
+    private static final AtomicInteger tournamentsStarted = new AtomicInteger(0);
 
     static {
         pathToExternalMessages = System.getProperty("messagesPath");
@@ -97,7 +97,7 @@ public class ServerMessagesUtil {
     private void reloadMessages() {
         log.debug("Reading server messages...");
         List<String> motdMessages = readFromFile();
-        List<String> newMessages = new ArrayList<String>();
+        List<String> newMessages = new ArrayList<>();
         if (motdMessages != null) {
             newMessages.addAll(motdMessages);
         }
@@ -154,14 +154,14 @@ public class ServerMessagesUtil {
             return null;
         }
         Scanner scanner = new Scanner(is);
-        List<String> messages = new ArrayList<String>();
+        List<String> newMessages = new ArrayList<>();
         while (scanner.hasNextLine()) {
             String message = scanner.nextLine();
             if (!message.trim().isEmpty()) {
-                messages.add(message.trim());
+                newMessages.add(message.trim());
             }
         }
-        return messages;
+        return newMessages;
     }
 
     private String getServerStatistics() {

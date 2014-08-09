@@ -62,7 +62,7 @@ public class CanAttackAsThoughtItDidntHaveDefenderEffect extends AsThoughEffectI
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         return sourceId.equals(source.getSourceId());
     }
 

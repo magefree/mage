@@ -118,7 +118,7 @@ class FiendOfTheShadowsEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         Card card = game.getCard(sourceId);
         if (card != null) {
             ExileZone zone = game.getExile().getExileZone(exileId);

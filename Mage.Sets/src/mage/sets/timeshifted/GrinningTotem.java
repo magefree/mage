@@ -74,7 +74,6 @@ public class GrinningTotem extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetOpponent());
-//        ability.addEffect(new GrinningTotemMayPlayEffect());
         // At the beginning of your next upkeep, if you haven't played it, put it into its owner's graveyard.
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new GrinningTotemDelayedTriggeredAbility()));
         
@@ -165,7 +164,7 @@ class GrinningTotemMayPlayEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         if (targetPointer.getTargets(game, source).contains(sourceId)) {
             return game.getState().getZone(sourceId).equals(Zone.EXILED);
         }

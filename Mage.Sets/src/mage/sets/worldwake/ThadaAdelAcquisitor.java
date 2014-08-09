@@ -28,20 +28,27 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.AsThoughEffectType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -81,7 +88,7 @@ class ThadaAdelAcquisitorEffect extends OneShotEffect {
 
     ThadaAdelAcquisitorEffect() {
         super(Outcome.Exile);
-        staticText = "search that player's library for an artifact card and exile it.  Then that player shuffles his or her library.  Until end of turn, you may play that card";
+        staticText = "search that player's library for an artifact card and exile it. Then that player shuffles his or her library. Until end of turn, you may play that card";
     }
 
     ThadaAdelAcquisitorEffect(final ThadaAdelAcquisitorEffect effect) {
@@ -90,20 +97,21 @@ class ThadaAdelAcquisitorEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Player damagedPlayer = game.getPlayer(targetPointer.getFirst(game, source));
-        if (you == null || damagedPlayer == null) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller == null || damagedPlayer == null || sourceObject == null) {
             return false;
         }
         TargetCardInLibrary target = new TargetCardInLibrary(new FilterArtifactCard());
-        you.searchLibrary(target, game, damagedPlayer.getId());
-        if (you.searchLibrary(target, game)) {
+        if (controller.searchLibrary(target, game, damagedPlayer.getId())) {
             if (target.getTargets().size() > 0) {
-                UUID cardId = target.getTargets().get(0);
-                Card card = damagedPlayer.getLibrary().remove(cardId, game);
+                Card card = damagedPlayer.getLibrary().remove(target.getFirstTarget(), game);
                 if (card != null) {
-                    card.moveToExile(source.getSourceId(), "Thada Adel", source.getId(), game);
-                    game.addEffect(new ThadaAdelPlayFromExileEffect(card.getId()), source);
+                    controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getLogName(), source.getSourceId(), game, Zone.LIBRARY);
+                    ContinuousEffect effect = new ThadaAdelPlayFromExileEffect();
+                    effect.setTargetPointer(new FixedTarget(card.getId()));
+                    game.addEffect(effect, source);
                 }
             }
         }
@@ -119,17 +127,13 @@ class ThadaAdelAcquisitorEffect extends OneShotEffect {
 
 class ThadaAdelPlayFromExileEffect extends AsThoughEffectImpl {
 
-    private final UUID cardId;
-
-    public ThadaAdelPlayFromExileEffect(UUID cardId) {
+    public ThadaAdelPlayFromExileEffect() {
         super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may play this card from exile";
-        this.cardId = cardId;
     }
 
     public ThadaAdelPlayFromExileEffect(final ThadaAdelPlayFromExileEffect effect) {
         super(effect);
-        cardId = effect.cardId;
     }
 
     @Override
@@ -143,13 +147,7 @@ class ThadaAdelPlayFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
-        if (sourceId.equals(this.cardId)) {
-            Card card = game.getCard(this.cardId);
-            if (card != null && game.getState().getZone(this.cardId) == Zone.EXILED) {
-                return true;
-            }
-        }
-        return false;
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        return sourceId.equals(getTargetPointer().getFirst(game, source)) && game.getState().getZone(sourceId) == Zone.EXILED;
     }
 }

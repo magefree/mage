@@ -57,7 +57,7 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
    
     @Override
     public boolean applies(UUID sourceId, Ability affectedAbility, Ability source, Game game) {
-        return applies(sourceId, source, game);
+        return applies(sourceId, source, affectedAbility.getControllerId(), game);
     }
 
     @Override

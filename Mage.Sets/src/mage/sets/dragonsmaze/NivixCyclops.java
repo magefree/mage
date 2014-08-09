@@ -113,7 +113,7 @@ class AsThoughNoDefenderEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         Permanent nivixCyclops = game.getPermanent(source.getSourceId());
         if (nivixCyclops != null
                 && nivixCyclops.getAbilities().containsKey(DefenderAbility.getInstance().getId())) {

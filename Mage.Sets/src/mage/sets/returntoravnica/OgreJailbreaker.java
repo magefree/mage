@@ -104,7 +104,7 @@ class OgreJailbreakerEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         if (sourceId.equals(source.getSourceId()) && gateCondition.apply(game, source))  {
             return true;
         }

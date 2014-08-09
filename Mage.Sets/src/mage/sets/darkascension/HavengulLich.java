@@ -114,16 +114,8 @@ class HavengulLichPlayEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
-        if (targetPointer.getFirst(game, source).equals(sourceId)) {
-            if (game.getState().getZone(sourceId) == Zone.GRAVEYARD) {
-                Card card = game.getCard(sourceId);
-                if (card != null && card.getSpellAbility() != null && card.getSpellAbility().spellCanBeActivatedRegularlyNow(source.getControllerId(), game)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        return targetPointer.getFirst(game, source).equals(sourceId) && game.getState().getZone(sourceId) == Zone.GRAVEYARD;
     }
 }
 

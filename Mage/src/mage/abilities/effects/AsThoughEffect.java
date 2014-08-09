@@ -40,7 +40,7 @@ import mage.game.Game;
 public interface AsThoughEffect extends ContinuousEffect {
 
     boolean applies(UUID sourceId, Ability affectedAbility, Ability source, Game game);
-    boolean applies(UUID sourceId, Ability source, Game game);
+    boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game);
     AsThoughEffectType getAsThoughEffectType();
 
     @Override

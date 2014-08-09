@@ -77,7 +77,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
                 try {
                     update();
                 } catch (Exception ex) {
-                    logger.fatal("Games room update exception!", ex);
+                    logger.fatal("Games room update exception! " + ex.toString(), ex);
                 }
                 
             }

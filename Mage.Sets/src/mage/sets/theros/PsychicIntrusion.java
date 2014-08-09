@@ -30,6 +30,7 @@ package mage.sets.theros;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -44,6 +45,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
@@ -100,13 +102,13 @@ class PsychicIntrusionExileEffect extends OneShotEffect {
         Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
         if (opponent != null) {
             opponent.revealCards("Psychic Intrusion", opponent.getHand(), game);
-            Player you = game.getPlayer(source.getControllerId());
-            if (you != null) {
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null) {
                 int cardsGraveyard = opponent.getGraveyard().count(filter, game);
                 int cardsHand = opponent.getHand().count(filter, game);
                 boolean fromHand = false;
                 if (cardsGraveyard > 0 && cardsHand > 0) {
-                    if (you.chooseUse(Outcome.Detriment, "Exile card from opponents Hand?", game)) {
+                    if (controller.chooseUse(Outcome.Detriment, "Exile card from opponents Hand?", game)) {
                         fromHand = true;
                     }
                 } else {
@@ -117,15 +119,15 @@ class PsychicIntrusionExileEffect extends OneShotEffect {
 
                 Card card = null;
                 if (cardsHand > 0 && fromHand) {
-                    TargetCard target = new TargetCard(Zone.PICK, filter);
-                    if (you.choose(Outcome.Benefit, opponent.getHand(), target, game)) {
+                    TargetCard target = new TargetCard(Zone.HAND, filter);
+                    if (controller.choose(Outcome.Benefit, opponent.getHand(), target, game)) {
                         card = opponent.getHand().get(target.getFirstTarget(), game);
 
                     }
                 }
                 if (cardsGraveyard > 0 && !fromHand) {
-                    TargetCard target = new TargetCard(Zone.PICK, filter);
-                    if (you.choose(Outcome.Benefit, opponent.getGraveyard(), target, game)) {
+                    TargetCard target = new TargetCard(Zone.GRAVEYARD, filter);
+                    if (controller.choose(Outcome.Benefit, opponent.getGraveyard(), target, game)) {
                         card = opponent.getGraveyard().get(target.getFirstTarget(), game);
 
                     }
@@ -133,18 +135,15 @@ class PsychicIntrusionExileEffect extends OneShotEffect {
                 if (card != null) {
                     // move card to exile
                     UUID exileId = CardUtil.getCardExileZoneId(game, source);
-                    card.moveToExile(exileId, "Psychic Intrusion", source.getSourceId(), game);
+                    controller.moveCardToExileWithInfo(card, exileId,  "Psychic Intrusion",  source.getSourceId(), game, fromHand ? Zone.HAND:Zone.GRAVEYARD);
                     // allow to cast the card
-                    game.addEffect(new PsychicIntrusionCastFromExileEffect(card.getId(), exileId), source);
+                    ContinuousEffect effect = new PsychicIntrusionCastFromExileEffect();
+                    effect.setTargetPointer(new FixedTarget(card.getId()));
+                    game.addEffect(effect, source);
                     // and you may spend mana as though it were mana of any color to cast it
-                    game.addEffect(new PsychicIntrusionSpendAnyManaEffect(card.getId()), source);
-                    game.informPlayers(new StringBuilder("Psychic Intrusion: ")
-                            .append(you.getName())
-                            .append(" exiles ")
-                            .append(card.getName())
-                            .append(" from")
-                            .append(fromHand ? " hand":" graveyard").toString());
-
+                    effect = new PsychicIntrusionSpendAnyManaEffect();
+                    effect.setTargetPointer(new FixedTarget(card.getId()));
+                    game.addEffect(effect, source);
                 }
                 return true;
             }
@@ -155,20 +154,13 @@ class PsychicIntrusionExileEffect extends OneShotEffect {
 
 class PsychicIntrusionCastFromExileEffect extends AsThoughEffectImpl {
 
-    private UUID cardId;
-    private UUID exileId;
-
-    public PsychicIntrusionCastFromExileEffect(UUID cardId, UUID exileId) {
-        super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+    public PsychicIntrusionCastFromExileEffect() {
+        super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         staticText = "You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell";
-        this.cardId = cardId;
-        this.exileId = exileId;
     }
 
     public PsychicIntrusionCastFromExileEffect(final PsychicIntrusionCastFromExileEffect effect) {
         super(effect);
-        this.cardId = effect.cardId;
-        this.exileId = effect.exileId;
     }
 
     @Override
@@ -182,13 +174,12 @@ class PsychicIntrusionCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
-        if (sourceId.equals(this.cardId)) {
-            Card card = game.getCard(this.cardId);
-            if (card != null && game.getState().getExile().getExileZone(exileId).contains(cardId)) {
-                if (card.getSpellAbility().spellCanBeActivatedRegularlyNow(source.getControllerId(), game)) {
-                    return true;
-                }
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        if (sourceId.equals(getTargetPointer().getFirst(game, source))) {
+            if (game.getState().getZone(sourceId).equals(Zone.EXILED)) {
+                return true;
+            } else {
+                discard();
             }
         }
         return false;
@@ -197,17 +188,13 @@ class PsychicIntrusionCastFromExileEffect extends AsThoughEffectImpl {
 
 class PsychicIntrusionSpendAnyManaEffect extends AsThoughEffectImpl {
 
-    private UUID cardId;
-
-    public PsychicIntrusionSpendAnyManaEffect(UUID cardId) {
-        super(AsThoughEffectType.SPEND_ANY_MANA, Duration.EndOfGame, Outcome.Benefit);
+    public PsychicIntrusionSpendAnyManaEffect() {
+        super(AsThoughEffectType.SPEND_ANY_MANA, Duration.Custom, Outcome.Benefit);
         staticText = "you may spend mana as though it were mana of any color to cast it";
-        this.cardId = cardId;
     }
 
     public PsychicIntrusionSpendAnyManaEffect(final PsychicIntrusionSpendAnyManaEffect effect) {
         super(effect);
-        this.cardId = effect.cardId;
     }
 
     @Override
@@ -221,9 +208,13 @@ class PsychicIntrusionSpendAnyManaEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
-        if (sourceId.equals(this.cardId)) {
-            return true;
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        if (sourceId.equals(getTargetPointer().getFirst(game, source))) {
+            if (game.getState().getZone(sourceId).equals(Zone.EXILED)) {
+                return true;
+            } else {
+                discard();
+            }
         }
         return false;
     }

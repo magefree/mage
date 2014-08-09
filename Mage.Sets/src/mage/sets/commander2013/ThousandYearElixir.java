@@ -99,7 +99,7 @@ class ThousandYearElixirEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         Permanent permanent = game.getPermanent(sourceId);
         return permanent != null
                 && permanent.getCardType().contains(CardType.CREATURE)

@@ -479,4 +479,13 @@ public interface Player extends MageItem, Copyable<Player> {
      *  Free resources on match end
      */
     void cleanUpOnMatchEnd();
+
+    /**
+     * If the next cast spell has the set sourceId, the spell will
+     * be cast without mana.
+     *
+     * @param sourceId the source that can be cast without mana
+     */
+    void setCastSourceIdWithoutMana(UUID sourceId);
+    UUID getCastSourceIdWithoutMana();
 }

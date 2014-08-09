@@ -134,7 +134,7 @@ class OrnateKanzashiCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         if (sourceId.equals(this.cardId)) {
             Card card = game.getCard(this.cardId);
             if (card != null && game.getState().getZone(this.cardId) == Zone.EXILED) {

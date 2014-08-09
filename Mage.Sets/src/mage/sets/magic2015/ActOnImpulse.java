@@ -140,7 +140,7 @@ class ActOnImpulseMayPlayExiledEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         Card card = game.getCard(sourceId);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && card != null && game.getState().getZone(sourceId) == Zone.EXILED) {

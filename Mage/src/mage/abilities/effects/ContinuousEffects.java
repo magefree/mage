@@ -440,7 +440,7 @@ public class ContinuousEffects implements Serializable {
             for (Ability ability : abilities) {
                 if (controllerId.equals(ability.getControllerId())) {
                     if (affectedAbility == null) {
-                        if (effect.applies(objectId, ability, game)) {
+                        if (effect.applies(objectId, ability, controllerId, game)) {
                             return true;
                         }                        
                     } else {

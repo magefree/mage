@@ -68,9 +68,9 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
     protected int maxThink;
     protected int nodeCount = 0;
     protected long thinkTime = 0;
-    protected transient LinkedList<Ability> actions = new LinkedList<Ability>();
-    protected transient List<UUID> targets = new ArrayList<UUID>();
-    protected transient List<String> choices = new ArrayList<String>();
+    protected transient LinkedList<Ability> actions = new LinkedList<>();
+    protected transient List<UUID> targets = new ArrayList<>();
+    protected transient List<String> choices = new ArrayList<>();
     protected transient Combat combat;
     protected int currentScore;
     protected transient SimulationNode root;
@@ -86,8 +86,9 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
         super(player);
         this.maxDepth = player.maxDepth;
         this.currentScore = player.currentScore;
-        if (player.combat != null)
+        if (player.combat != null) {
             this.combat = player.combat.copy();
+        }
         this.actions.addAll(player.actions);
         this.targets.addAll(player.targets);
         this.choices.addAll(player.choices);

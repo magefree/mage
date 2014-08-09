@@ -89,7 +89,7 @@ class GravecrawlerPlayEffect extends AsThoughEffectImpl {
 
     public GravecrawlerPlayEffect() {
         super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "You may cast Gravecrawler from your graveyard as long as you control a Zombie";
+        staticText = "You may cast {this} from your graveyard as long as you control a Zombie";
     }
 
     public GravecrawlerPlayEffect(final GravecrawlerPlayEffect effect) {
@@ -107,10 +107,10 @@ class GravecrawlerPlayEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
-        if (sourceId.equals(source.getSourceId())) {
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        if (sourceId.equals(source.getSourceId()) && source.getControllerId().equals(affectedControllerId)) {
             Card card = game.getCard(source.getSourceId());
-            if (card != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD && game.canPlaySorcery(source.getControllerId())) {
+            if (card != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
                 if (game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0) {
                     return true;
                 }

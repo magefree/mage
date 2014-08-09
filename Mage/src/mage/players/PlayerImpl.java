@@ -163,6 +163,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     // They neither expire immediately nor last indefinitely.
     protected boolean reachedNextTurnAfterLeaving = false;
 
+    // indicates that a sourceId will be cast without paying mana
+    protected UUID castSourceIdWithoutMana;
+
     protected UserData userData;
 
     /**
@@ -247,6 +250,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.passedAllTurns = player.passedAllTurns;
         this.priorityTimeLeft = player.getPriorityTimeLeft();
         this.reachedNextTurnAfterLeaving = player.reachedNextTurnAfterLeaving;
+
+        this.castSourceIdWithoutMana = player.castSourceIdWithoutMana;
     }
 
     @Override
@@ -303,6 +308,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.passed = player.isPassed();
         this.priorityTimeLeft = player.getPriorityTimeLeft();
         this.reachedNextTurnAfterLeaving = player.hasReachedNextTurnAfterLeaving();
+        this.castSourceIdWithoutMana = player.getCastSourceIdWithoutMana();
     }
 
     @Override
@@ -354,7 +360,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.topCardRevealed = false;
         this.setLife(game.getLife(), game);
         this.setReachedNextTurnAfterLeaving(false);
-        game.getState().getWatchers().add(new BloodthirstWatcher(playerId));  
+        game.getState().getWatchers().add(new BloodthirstWatcher(playerId));
+        this.castSourceIdWithoutMana = null;
     }
     /**
      * called before apply effects
@@ -375,6 +382,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canPlayCardsFromGraveyard = false;
         this.topCardRevealed = false;
         this.alternativeSourceCosts.clear();
+        this.castSourceIdWithoutMana = null;
     }
 
     @Override
@@ -734,6 +742,15 @@ public abstract class PlayerImpl implements Player, Serializable {
         return true;
     }
 
+    @Override
+    public void setCastSourceIdWithoutMana(UUID sourceId) {
+        castSourceIdWithoutMana = sourceId;
+    }
+
+    public UUID getCastSourceIdWithoutMana() {
+        return castSourceIdWithoutMana;
+    }
+
 
     @Override
     public boolean cast(SpellAbility ability, Game game, boolean noMana) {
@@ -751,6 +768,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                 Zone fromZone = game.getState().getZone(card.getId());
                 card.cast(game, fromZone, ability, playerId);
                 Spell spell = game.getStack().getSpell(ability.getId());
+                // some effects set sourceId to cast without paying mana costs
+                if (ability.getSourceId().equals(getCastSourceIdWithoutMana())) {
+                    noMana = true;
+                }
+                setCastSourceIdWithoutMana(null);
                 if (spell.activate(game, noMana)) {
                     GameEvent event = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST, spell.getSpellAbility().getId(), spell.getSpellAbility().getSourceId(), playerId);
                     event.setZone(fromZone);

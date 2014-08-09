@@ -34,7 +34,6 @@ import mage.abilities.condition.FixedCondition;
 import mage.abilities.effects.AsThoughEffect;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.constants.Duration;
-import mage.constants.EffectType;
 import mage.game.Game;
 
 /**
@@ -100,17 +99,17 @@ public class ConditionalAsThoughEffect extends AsThoughEffectImpl  {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         if (lockedInCondition && !(condition instanceof FixedCondition)) {
             condition = new FixedCondition(condition.apply(game, source));
         }
         conditionState = condition.apply(game, source);
         if (conditionState) {
             effect.setTargetPointer(this.targetPointer);
-            return effect.applies(sourceId, source,game);
+            return effect.applies(sourceId, source, affectedControllerId, game);
         } else if (otherwiseEffect != null) {
             otherwiseEffect.setTargetPointer(this.targetPointer);
-            return otherwiseEffect.applies(sourceId, source, game);
+            return otherwiseEffect.applies(sourceId, source, affectedControllerId, game);
         }
         return false;
     }

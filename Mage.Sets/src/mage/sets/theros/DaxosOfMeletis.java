@@ -34,6 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.Card;
@@ -49,6 +50,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
@@ -129,7 +131,9 @@ class DaxosOfMeletisEffect extends OneShotEffect {
                         // allow to cast the card
                         game.addEffect(new DaxosOfMeletisCastFromExileEffect(card.getId(), exileId), source);
                         // and you may spend mana as though it were mana of any color to cast it
-                        game.addEffect(new DaxosOfMeletisSpendAnyManaEffect(card.getId()), source);
+                        ContinuousEffect effect = new DaxosOfMeletisSpendAnyManaEffect();
+                        effect.setTargetPointer(new FixedTarget(card.getId()));
+                        game.addEffect(effect, source);
                     }
                 }
                 return true;
@@ -168,32 +172,20 @@ class DaxosOfMeletisCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
-        if (sourceId.equals(this.cardId)) {
-            Card card = game.getCard(this.cardId);
-            if (card != null && game.getState().getExile().getExileZone(exileId).contains(cardId)) {
-                if (card.getSpellAbility() != null && card.getSpellAbility().spellCanBeActivatedRegularlyNow(source.getControllerId(), game)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        return sourceId.equals(cardId) && game.getState().getExile().getExileZone(exileId).contains(cardId);
     }
 }
 
 class DaxosOfMeletisSpendAnyManaEffect extends AsThoughEffectImpl {
 
-    private final UUID cardId;
-
-    public DaxosOfMeletisSpendAnyManaEffect(UUID cardId) {
+    public DaxosOfMeletisSpendAnyManaEffect() {
         super(AsThoughEffectType.SPEND_ANY_MANA, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "you may spend mana as though it were mana of any color to cast it";
-        this.cardId = cardId;
     }
 
     public DaxosOfMeletisSpendAnyManaEffect(final DaxosOfMeletisSpendAnyManaEffect effect) {
         super(effect);
-        this.cardId = effect.cardId;
     }
 
     @Override
@@ -207,7 +199,7 @@ class DaxosOfMeletisSpendAnyManaEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
-        return sourceId.equals(this.cardId);
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        return sourceId.equals(getTargetPointer().getFirst(game, source));
     }
 }

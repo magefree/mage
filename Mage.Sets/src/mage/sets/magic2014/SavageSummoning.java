@@ -128,7 +128,7 @@ class SavageSummoningAsThoughEffect extends AsThoughEffectImpl {
 
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         if (watcher.isSavageSummoningSpellActive()) {
             Card card = game.getCard(sourceId);
             if (card != null && card.getCardType().contains(CardType.CREATURE) && card.getOwnerId().equals(source.getControllerId())) {

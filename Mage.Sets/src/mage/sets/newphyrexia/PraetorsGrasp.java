@@ -138,7 +138,7 @@ class PraetorsGraspPlayEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         if (sourceId.equals(cardId)) {
             Card card = game.getCard(cardId);
             Player controller = game.getPlayer(source.getControllerId());
@@ -177,7 +177,7 @@ class PraetorsGraspRevealEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         if (sourceId.equals(cardId)) {
             Card card = game.getCard(cardId);
             Card sourceCard = game.getCard(source.getSourceId());

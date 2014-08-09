@@ -40,6 +40,8 @@ import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
+import mage.abilities.effects.ContinuousEffect;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -86,20 +88,22 @@ class StolenGoodsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null && player.getLibrary().size() > 0) {
-            Library library = player.getLibrary();
+        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        if (opponent != null && opponent.getLibrary().size() > 0) {
+            Library library = opponent.getLibrary();
             Card card;
             do {
                 card = library.removeFromTop(game);
                 if (card != null) {
-                    card.moveToExile(source.getId(), "Stolen Goods", source.getSourceId(), game);
+                    opponent.moveCardToExileWithInfo(card, source.getId(),  "Stolen Goods", source.getSourceId(), game, Zone.LIBRARY);
                 }
             } while (library.size() > 0 && card != null && card.getCardType().contains(CardType.LAND));
 
             if (card != null) {
-                player.revealCards("Card to cast", new CardsImpl(card), game);
-                game.addEffect(new StolenGoodsCastFromExileEffect(card.getId()), source);
+                opponent.revealCards("Card to cast", new CardsImpl(card), game);
+                ContinuousEffect effect = new StolenGoodsCastFromExileEffect();
+                effect.setTargetPointer(new FixedTarget(card.getId()));
+                game.addEffect(effect, source);
             }
             return true;
         }
@@ -109,17 +113,13 @@ class StolenGoodsEffect extends OneShotEffect {
 
 class StolenGoodsCastFromExileEffect extends AsThoughEffectImpl {
 
-    private final UUID cardId;
-
-    public StolenGoodsCastFromExileEffect(UUID cardId) {
+    public StolenGoodsCastFromExileEffect() {
         super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may cast card from exile";
-        this.cardId = cardId;
     }
 
     public StolenGoodsCastFromExileEffect(final StolenGoodsCastFromExileEffect effect) {
         super(effect);
-        cardId = effect.cardId;
     }
 
     @Override
@@ -133,14 +133,12 @@ class StolenGoodsCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
-        if (sourceId.equals(this.cardId)) {
-            Card card = game.getCard(this.cardId);
-            if (card != null && game.getState().getZone(this.cardId) == Zone.EXILED) {
-                Player player = game.getPlayer(source.getControllerId());
-                if (player != null && player.chooseUse(Outcome.Benefit, "Cast the card without paying cost?", game)) {
-                    player.cast(card.getSpellAbility(), game, true);
-                }
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        if (getTargetPointer().getFirst(game, source).equals(sourceId) && affectedControllerId.equals(source.getControllerId())) {
+            Card card = game.getCard(sourceId);
+            if (card != null && game.getState().getZone(sourceId) == Zone.EXILED) {
+                Player player = game.getPlayer(affectedControllerId);
+                player.setCastSourceIdWithoutMana(sourceId);
                 return true;
             }
         }

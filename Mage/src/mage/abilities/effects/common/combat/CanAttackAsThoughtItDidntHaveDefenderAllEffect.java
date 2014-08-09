@@ -72,7 +72,7 @@ public class CanAttackAsThoughtItDidntHaveDefenderAllEffect extends AsThoughEffe
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         Permanent permanent = game.getPermanent(sourceId);
         if (permanent != null && filter.match(permanent, game)) {
             return true;

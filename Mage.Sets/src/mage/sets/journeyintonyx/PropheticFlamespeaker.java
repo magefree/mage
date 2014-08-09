@@ -30,9 +30,9 @@ package mage.sets.journeyintonyx;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -42,13 +42,13 @@ import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.PhaseStep;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Library;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -110,7 +110,9 @@ class PropheticFlamespeakerExileEffect extends OneShotEffect {
             if (card != null) {
                 String exileName = new StringBuilder(sourcePermanent.getName()).append(" <this card may be played the turn it was exiled>").toString();
                 controller.moveCardToExileWithInfo(card, source.getSourceId(), exileName, source.getSourceId(), game, Zone.LIBRARY);
-                game.addEffect(new PropheticFlamespeakerCastFromExileEffect(card.getId()), source);
+                ContinuousEffect effect = new PropheticFlamespeakerCastFromExileEffect();
+                effect.setTargetPointer(new FixedTarget(card.getId()));
+                game.addEffect(effect, source);
             }
             return true;
         }
@@ -120,17 +122,13 @@ class PropheticFlamespeakerExileEffect extends OneShotEffect {
 
 class PropheticFlamespeakerCastFromExileEffect extends AsThoughEffectImpl {
 
-    private final UUID cardId;
-
-    public PropheticFlamespeakerCastFromExileEffect(UUID cardId) {
+    public PropheticFlamespeakerCastFromExileEffect() {
         super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may play card from exile";
-        this.cardId = cardId;
     }
 
     public PropheticFlamespeakerCastFromExileEffect(final PropheticFlamespeakerCastFromExileEffect effect) {
         super(effect);
-        cardId = effect.cardId;
     }
 
     @Override
@@ -144,32 +142,7 @@ class PropheticFlamespeakerCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
-        if (sourceId.equals(this.cardId)) {
-            Card card = game.getCard(this.cardId);
-            if (card != null && game.getState().getZone(this.cardId) == Zone.EXILED) {
-                Player player = game.getPlayer(source.getControllerId());
-                if (player != null ) {
-                    if (card.getCardType().contains(CardType.LAND)) {
-                        // If the revealed card is a land, you can play it only if it's your turn and you can play still a land this turn.
-                        if (player.canPlayLand() 
-                                && game.getActivePlayerId().equals(player.getId())
-                                && game.getStack().isEmpty() 
-                                && (game.getStep().getType().equals(PhaseStep.PRECOMBAT_MAIN) || game.getStep().getType().equals(PhaseStep.POSTCOMBAT_MAIN))
-                                && player.chooseUse(Outcome.Benefit, "Play this card?", game)) {
-                            return player.playLand(card, game);
-                        }
-                    } else {
-                        Ability ability = card.getSpellAbility();
-                        if (ability != null && ability instanceof SpellAbility 
-                                && ((SpellAbility)ability).spellCanBeActivatedRegularlyNow(player.getId(), game) 
-                                && player.chooseUse(Outcome.Benefit, "Play this card?", game)) {
-                            return player.cast((SpellAbility) ability, game, false);
-                        }
-                    }
-                }
-            }
-        }
-        return false;
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        return sourceId.equals(getTargetPointer().getFirst(game, source)) && game.getState().getZone(sourceId) == Zone.EXILED;
     }
 }
