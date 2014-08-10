@@ -53,10 +53,40 @@ public class BloodMoonTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 
-        // check that the +1/+1 counter was added to the token
+        // Check that the land is tapped
         Permanent grassland = getPermanent("Grasslands", playerA.getId());
-
         Assert.assertEquals("Grasslands is not tapped but is has to be from ETB replacement effect", true, grassland.isTapped());
+
+    }
+
+    @Test
+    public void testBloodMoonDoesNotPreventETBReplacementButPreventsTriggeredEffects() {
+        // Blood Moon   2R
+        // Enchantment
+        // Nonbasic lands are Mountains
+        addCard(Zone.BATTLEFIELD, playerA, "Blood Moon");
+
+        /**
+         * Kabira Crossroads
+         * Land
+         * Kabira Crossroads enters the battlefield tapped.
+         * When Kabira Crossroads enters the battlefield, you gain 2 life.
+         * {W}: Add to your mana pool.
+         *
+         */
+        addCard(Zone.HAND, playerA, "Kabira Crossroads");
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kabira Crossroads");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        // Check that the land is tapped
+        Permanent grassland = getPermanent("Kabira Crossroads", playerA.getId());
+        Assert.assertEquals("Kabira Crossroads is not tapped but is has to be from ETB replacement effect", true, grassland.isTapped());
+
+        assertLife(playerA, 20); // Trigger may not trigger because of Blood Moon so the 2 life were not added
+        assertLife(playerB, 20);
+
 
     }
 }

@@ -29,10 +29,6 @@
 package mage.sets.magic2011;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -42,10 +38,16 @@ import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+
+
 
 /**
  *
@@ -83,12 +85,12 @@ public class HoardingDragon extends CardImpl {
 
 class HoardingDragonEffect extends OneShotEffect {
 
-    private UUID exileId;
+    private final UUID exileId;
 
     public HoardingDragonEffect(UUID exileId) {
         super(Outcome.Exile);
         this.exileId = exileId;
-        this.staticText = "When {this} enters the battlefield, you may search your library for an artifact card, exile it, then shuffle your library";
+        this.staticText = "you may search your library for an artifact card, exile it, then shuffle your library";
     }
 
     public HoardingDragonEffect(final HoardingDragonEffect effect) {
@@ -105,14 +107,13 @@ class HoardingDragonEffect extends OneShotEffect {
                 if (target.getTargets().size() > 0) {
                     Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
                     if (card != null) {
-                        card.moveToExile(exileId, "Hoarding Dragon exile", source.getSourceId(), game);
+                        card.moveToExile(exileId, "Hoarding Dragon", source.getSourceId(), game);
                     }
                 }
             }
             player.shuffleLibrary(game);
             return true;
-        }
-        player.shuffleLibrary(game);
+        }       
         return false;
     }
 
