@@ -33,7 +33,6 @@
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
         </dependency>
         <dependency>
             <groupId>net.sf.trove4j</groupId>
@@ -73,7 +72,6 @@
        <dependency>
            <groupId>junit</groupId>
            <artifactId>junit</artifactId>
-           <version>4.11</version>
            <type>jar</type>
            <scope>test</scope>
        </dependency>
