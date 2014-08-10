@@ -195,20 +195,16 @@ public class Session {
     public void  userLostConnection() {
         User user = UserManager.getInstance().getUser(userId);
         if (user == null) {
-            logger.error("Session.userLostConnection  user for session not found  sessionId: " + sessionId + "  userId: " +userId);
+            logger.error("User for session not found  sessionId: " + sessionId + "  userId: " +userId);
+            // can happen if user from same host sign in multiple time with multiple clients, after he disconnects with one client
             return;
         }
         if (user.getSessionId().isEmpty()) {
-            logger.debug("Session.userLostConnection  user was already disconnected  sessionId: " + sessionId + "  userId: " +userId);
+            logger.debug("User was already disconnected  sessionId: " + sessionId + "  userId: " +userId);
             return;
         }
         if (logger.isInfoEnabled()) {
-            StringBuilder sb = new StringBuilder("user ");
-            if (user == null) {
-                sb.append("[user not found]");
-            } else {
-                sb.append(user.getName());
-            }
+            StringBuilder sb = new StringBuilder(user.getName());
             sb.append(" lost connection - userId: ").append(userId);
             sb.append(" sessionId: ").append(sessionId);
             logger.info(sb);

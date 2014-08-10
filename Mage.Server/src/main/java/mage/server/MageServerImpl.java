@@ -636,8 +636,13 @@ public class MageServerImpl implements MageServer {
         return executeWithResult("sendCardPick", sessionId, new ActionWithNullNegativeResult<DraftPickView>() {
             @Override
             public DraftPickView execute() {
-                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-                return DraftManager.getInstance().sendCardPick(draftId, userId, cardPick);
+                Session session = SessionManager.getInstance().getSession(sessionId);
+                if (session != null) {
+                    return DraftManager.getInstance().sendCardPick(draftId, session.getUserId(), cardPick);
+                } else{
+                    logger.error("Session not found sessionId: "+ sessionId + "  draftId:" + draftId);
+                }
+                return null;
             }
         });
     }
@@ -658,8 +663,12 @@ public class MageServerImpl implements MageServer {
         execute("concedeGame", sessionId, new Action() {
             @Override
             public void execute() {
-                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-                GameManager.getInstance().concedeGame(gameId, userId);
+                Session session = SessionManager.getInstance().getSession(sessionId);
+                if (session != null) {
+                    GameManager.getInstance().concedeGame(gameId, session.getUserId());
+                } else{
+                    logger.error("Session not found sessionId: "+ sessionId + "  gameId:" +gameId);
+                }
             }
         });
     }
@@ -669,8 +678,12 @@ public class MageServerImpl implements MageServer {
         execute("quitMatch", sessionId, new Action() {
             @Override
             public void execute() {
-                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-                GameManager.getInstance().quitMatch(gameId, userId);
+                Session session = SessionManager.getInstance().getSession(sessionId);
+                if (session != null) {
+                    GameManager.getInstance().quitMatch(gameId, session.getUserId());
+                } else{
+                    logger.error("Session not found sessionId: "+ sessionId + "  gameId:" +gameId);
+                }
             }
         });
     }
@@ -680,8 +693,12 @@ public class MageServerImpl implements MageServer {
         execute("quitTournament", sessionId, new Action() {
             @Override
             public void execute() {
-                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-                TournamentManager.getInstance().quit(tournamentId, userId);
+                Session session = SessionManager.getInstance().getSession(sessionId);
+                if (session != null) {
+                    TournamentManager.getInstance().quit(tournamentId, session.getUserId());
+                }else{
+                    logger.error("Session not found sessionId: "+ sessionId + "  tournamentId:" + tournamentId);
+                }
             }
         });
     }
@@ -691,12 +708,16 @@ public class MageServerImpl implements MageServer {
         execute("quitDraft", sessionId, new Action() {
             @Override
             public void execute() {
+                Session session = SessionManager.getInstance().getSession(sessionId);
+                if (session == null) {
+                    logger.error("Session not found sessionId: "+ sessionId + "  draftId:" + draftId);
+                    return;
+                }
                 UUID tableId = DraftManager.getInstance().getControllerByDraftId(draftId).getTableId();
-                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 Table table = TableManager.getInstance().getTable(tableId);
                 if (table.isTournament()) {
                     UUID tournamentId = table.getTournament().getId();
-                    TournamentManager.getInstance().quit(tournamentId, userId);
+                    TournamentManager.getInstance().quit(tournamentId, session.getUserId());
                 }
             }
         });
@@ -707,8 +728,12 @@ public class MageServerImpl implements MageServer {
         execute("undo", sessionId, new Action() {
             @Override
             public void execute() {
-                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-                GameManager.getInstance().undo(gameId, userId);
+                Session session = SessionManager.getInstance().getSession(sessionId);
+                if (session == null) {
+                    logger.error("Session not found sessionId: "+ sessionId + "  gameId:" + gameId);
+                    return;
+                }
+                GameManager.getInstance().undo(gameId, session.getUserId());
             }
         });
     }
@@ -718,8 +743,12 @@ public class MageServerImpl implements MageServer {
         execute("passPriorityUntilNextYourTurn", sessionId, new Action() {
             @Override
             public void execute() {
-                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-                GameManager.getInstance().passPriorityUntilNextYourTurn(gameId, userId);
+                Session session = SessionManager.getInstance().getSession(sessionId);
+                if (session == null) {
+                    logger.error("Session not found sessionId: "+ sessionId + "  gameId:" + gameId);
+                    return;
+                }
+                GameManager.getInstance().passPriorityUntilNextYourTurn(gameId, session.getUserId());
             }
         });
     }
@@ -729,8 +758,12 @@ public class MageServerImpl implements MageServer {
         execute("passTurnPriority", sessionId, new Action() {
             @Override
             public void execute() {
-                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-                GameManager.getInstance().passTurnPriority(gameId, userId);
+                Session session = SessionManager.getInstance().getSession(sessionId);
+                if (session == null) {
+                    logger.error("Session not found sessionId: "+ sessionId + "  gameId:" + gameId);
+                    return;
+                }
+                GameManager.getInstance().passTurnPriority(gameId, session.getUserId());
             }
         });
     }
@@ -740,8 +773,12 @@ public class MageServerImpl implements MageServer {
         execute("restorePriority", sessionId, new Action() {
             @Override
             public void execute() {
-                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-                GameManager.getInstance().restorePriority(gameId, userId);
+                Session session = SessionManager.getInstance().getSession(sessionId);
+                if (session == null) {
+                    logger.error("Session not found sessionId: "+ sessionId + "  gameId:" + gameId);
+                    return;
+                }
+                GameManager.getInstance().restorePriority(gameId,  session.getUserId());
             }
         });
     }
