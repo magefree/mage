@@ -104,21 +104,28 @@ class NecroticOozeEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent perm = game.getPermanent(source.getSourceId());
-        if (perm != null) {
-            for (Player player: game.getPlayers().values()) {
-                for (Card card: player.getGraveyard().getCards(game)) {
-                    if (card.getCardType().contains(CardType.CREATURE)) {
-                        for (Ability ability: card.getAbilities()) {
-                            if (ability instanceof ActivatedAbility) {
-                                perm.addAbility(ability, game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Permanent perm = game.getPermanent(source.getSourceId());
+            if (perm != null) {
+                for (UUID playerId: controller.getInRange()) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null) {
+                        for (Card card: player.getGraveyard().getCards(game)) {
+                            if (card.getCardType().contains(CardType.CREATURE)) {
+                                for (Ability ability: card.getAbilities()) {
+                                    if (ability instanceof ActivatedAbility) {
+                                        perm.addAbility(ability, game);
+                                    }
+                                }
                             }
                         }
                     }
                 }
             }
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override

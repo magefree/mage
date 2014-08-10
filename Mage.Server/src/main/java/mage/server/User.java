@@ -366,34 +366,38 @@ public class User {
         }
         int draft = 0, match = 0, sideboard = 0, tournament = 0, construct = 0;
         for (Map.Entry<UUID, Table> tableEntry : tables.entrySet()) {
-            Table table = tableEntry.getValue();
-            if (table.isTournament()) {
-                if (!table.getTournament().getPlayer(tableEntry.getKey()).isEliminated()) {
-                    switch (table.getState()) {
-                        case CONSTRUCTING:
-                            construct++;
-                            break;
-                        case DRAFTING:
-                            draft++;
-                            break;
-                        case DUELING:
-                            tournament++;
-                            break;
-                    }
-                    if (!isConnected()) {
-                        table.getTournament().getPlayer(tableEntry.getKey()).setDisconnectInfo(disconnectInfo);
+            if (tableEntry != null) {
+                Table table = tableEntry.getValue();
+                if (table != null) {
+                    if (table.isTournament()) {
+                        if (!table.getTournament().getPlayer(tableEntry.getKey()).isEliminated()) {
+                            switch (table.getState()) {
+                                case CONSTRUCTING:
+                                    construct++;
+                                    break;
+                                case DRAFTING:
+                                    draft++;
+                                    break;
+                                case DUELING:
+                                    tournament++;
+                                    break;
+                            }
+                            if (!isConnected()) {
+                                table.getTournament().getPlayer(tableEntry.getKey()).setDisconnectInfo(disconnectInfo);
+                            } else {
+                                table.getTournament().getPlayer(tableEntry.getKey()).setDisconnectInfo("");
+                            }
+                        }
                     } else {
-                        table.getTournament().getPlayer(tableEntry.getKey()).setDisconnectInfo("");
+                        switch (table.getState()) {
+                            case SIDEBOARDING:
+                                sideboard++;
+                                break;
+                            case DUELING:
+                                match++;
+                                break;
+                        }
                     }
-                }
-            } else {
-                switch (table.getState()) {
-                    case SIDEBOARDING:
-                        sideboard++;
-                        break;
-                    case DUELING:
-                        match++;
-                        break;
                 }
             }
         }
@@ -415,7 +419,6 @@ public class User {
         if (watchedGames.size() > 0) {
             sb.append("Watch: ").append(watchedGames.size()).append(" ");
         }
-
         sb.append(disconnectInfo);
         return sb.toString();
     }

@@ -153,6 +153,7 @@ public class TournamentSession {
     private synchronized void cancelTimeout() {
         if (futureTimeout != null) {
             futureTimeout.cancel(false);
+            logger.debug("Timeout is Done: " + futureTimeout.isDone() + "  userId: " + userId);
         }
     }
 
