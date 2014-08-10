@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Random;
 import mage.Mana;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
@@ -202,6 +203,10 @@ public class DeckBuilder {
         // Add optimal basic lands to deck.
         while (deck.getCards().size() < deckSize) {
             ColoredManaSymbol bestColor = null;
+            //Default to a color in the allowed colors
+            if (allowedColors != null && !allowedColors.isEmpty()) {
+                bestColor = allowedColors.get(new Random().nextInt(allowedColors.size()));
+            }
             int lowestRatio = Integer.MAX_VALUE;
             for (final ColoredManaSymbol color : ColoredManaSymbol.values()) {
 
