@@ -125,6 +125,8 @@ public class LookLibraryControllerEffect extends OneShotEffect {
         }
 
         // take cards from library and look at them
+        boolean topCardRevealed = player.isTopCardRevealed();
+        player.setTopCardRevealed(false);
         Cards cards = new CardsImpl(Zone.PICK);
         int count = Math.min(player.getLibrary().size(), this.numberOfCards.calculate(game, source));
         for (int i = 0; i < count; i++) {
@@ -140,6 +142,8 @@ public class LookLibraryControllerEffect extends OneShotEffect {
         this.actionWithSelectedCards(cards, game, source, windowName);
 
         this.putCardsBack(source, player, cards, game);
+
+        player.setTopCardRevealed(topCardRevealed);
 
         this.mayShuffle(player, game);
 
