@@ -28,17 +28,14 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.LandfallAbility;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.LandfallAbility;
-import mage.abilities.effects.EntersBattlefieldEffect;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.CardImpl;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -87,13 +84,10 @@ class EternityVesselEffect extends OneShotEffect {
         Permanent vessel = game.getPermanent(source.getSourceId());
         Player you = game.getPlayer(source.getControllerId());
         if (vessel != null && you != null) {
-            Object obj = getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (obj != null && obj instanceof SpellAbility) {
-                int amount = you.getLife();
-                if (amount > 0) {
-                    vessel.addCounters(CounterType.CHARGE.createInstance(amount), game);
-                    return true;
-                }
+            int amount = you.getLife();
+            if (amount > 0) {
+                vessel.addCounters(CounterType.CHARGE.createInstance(amount), game);
+                return true;
             }
         }
         return true;
@@ -108,7 +102,7 @@ class EternityVesselEffect extends OneShotEffect {
 class EternityVesselEffect2 extends OneShotEffect {
     public EternityVesselEffect2() {
         super(Outcome.Benefit);
-        staticText = "you may have your life total become the number of charge counters on Eternity Vessel";
+        staticText = "you may have your life total become the number of charge counters on {this}";
     }
 
     public EternityVesselEffect2(final EternityVesselEffect2 effect) {
