@@ -78,6 +78,7 @@ public enum CounterType {
     THEFT("Theft"),
     TIME("Time"),
     TOWER("Tower"),
+    VELOCITY("Velocity"),
     VILE("Vile"),
     WISH("Wish");
 
