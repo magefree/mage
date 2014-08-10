@@ -535,7 +535,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             game.addPermanent(permanent);
             game.setZone(objectId, Zone.BATTLEFIELD);
             game.setScopeRelevant(true);
-            game.applyEffects(); 
+            //game.applyEffects(); // issue #493
             permanent.setTapped(tapped);
             permanent.entersBattlefield(sourceId, game, event.getFromZone(), true);
             game.setScopeRelevant(false);

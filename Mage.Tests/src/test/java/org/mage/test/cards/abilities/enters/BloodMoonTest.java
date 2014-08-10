@@ -39,7 +39,7 @@ public class BloodMoonTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Blood Moon");
 
         /**
-         * Grasslands
+         * Grasslands 
          * Land
          * Grasslands enters the battlefield tapped.
          * {T}, Sacrifice Grasslands: Search your library for a Forest or Plains card and put it onto the battlefield. Then shuffle your library.
