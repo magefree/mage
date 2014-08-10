@@ -25,54 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.sets.invasion;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DestroyTargetEffect;
+
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.BlockedByIdPredicate;
-import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.common.FilterCreatureCard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
  * @author dustinconrad
  */
-public class KnightOfDusk extends CardImpl {
+public class Recover extends CardImpl {
 
-    public KnightOfDusk(UUID ownerId) {
-        super(ownerId, 34, "Knight of Dusk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.expansionSetCode = "TMP";
-        this.subtype.add("Human");
-        this.subtype.add("Knight");
+    private static FilterCreatureCard filter = new FilterCreatureCard("creature card from your graveyard");
+
+    public Recover(UUID ownerId) {
+        super(ownerId, 122, "Recover", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
+        this.expansionSetCode = "INV";
 
         this.color.setBlack(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
 
-        // {B}{B}: Destroy target creature blocking Knight of Dusk.
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature blocking {this}");
-        filter.add(new BlockingAttackerIdPredicate(this.getId()));
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{B}{B}"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(ability);
+        // Return target creature card from your graveyard to your hand.
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        // Draw a card.
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public KnightOfDusk(final KnightOfDusk card) {
+    public Recover(final Recover card) {
         super(card);
     }
 
     @Override
-    public KnightOfDusk copy() {
-        return new KnightOfDusk(this);
+    public Recover copy() {
+        return new Recover(this);
     }
 }

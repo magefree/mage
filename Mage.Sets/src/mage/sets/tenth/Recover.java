@@ -33,20 +33,20 @@ import java.util.UUID;
  *
  * @author dustinconrad
  */
-public class KnightOfDusk extends mage.sets.tempest.KnightOfDusk {
+public class Recover extends mage.sets.invasion.Recover {
 
-    public KnightOfDusk(UUID ownerId) {
+    public Recover(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 152;
+        this.cardNumber = 172;
         this.expansionSetCode = "10E";
     }
 
-    public KnightOfDusk(final KnightOfDusk card) {
+    public Recover(final Recover card) {
         super(card);
     }
 
     @Override
-    public KnightOfDusk copy() {
-        return new KnightOfDusk(this);
+    public Recover copy() {
+        return new Recover(this);
     }
 }
