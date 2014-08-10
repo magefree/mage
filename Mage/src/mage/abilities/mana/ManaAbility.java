@@ -67,7 +67,7 @@ public abstract class ManaAbility extends ActivatedAbilityImpl {
             return false;
         }
         //20091005 - 605.3a
-        return costs.canPay(sourceId, controllerId, game);
+        return costs.canPay(this, sourceId, controllerId, game);
     }
 
     public Mana getNetMana(Game game) {

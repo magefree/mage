@@ -97,7 +97,7 @@ class TectonicEdgeCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         for (UUID opponentId: game.getOpponents(controllerId)) {
             if (game.getBattlefield().countAll(filter, opponentId, game) > 3) {
                 return true;

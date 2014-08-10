@@ -132,7 +132,7 @@ public class ProwlAbility extends StaticAbility implements AlternativeSourceCost
             if (canProwl) {
                 this.resetProwl();
                 for (AlternativeCost2 prowlCost: prowlCosts) {
-                    if (prowlCost.canPay(sourceId, controllerId, game) &&
+                    if (prowlCost.canPay(ability, sourceId, controllerId, game) &&
                           player.chooseUse(Outcome.Benefit, new StringBuilder("Cast for ").append(PROWL_KEYWORD).append(" cost ").append(prowlCost.getText(true)).append(" ?").toString(), game)) {
                         prowlCost.activate();
                         ability.getManaCostsToPay().clear();

@@ -48,7 +48,7 @@ public class DoIfCostPaid extends OneShotEffect {
                 message = chooseUseText;
             }
             message = CardUtil.replaceSourceName(message, mageObject.getName());
-            if (cost.canPay(source.getSourceId(), player.getId(), game) && player.chooseUse(executingEffect.getOutcome(), message, game)) {
+            if (cost.canPay(source, source.getSourceId(), player.getId(), game) && player.chooseUse(executingEffect.getOutcome(), message, game)) {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                     executingEffect.setTargetPointer(this.targetPointer);

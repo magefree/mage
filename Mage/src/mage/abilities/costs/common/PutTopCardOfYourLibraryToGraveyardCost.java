@@ -80,7 +80,7 @@ public class PutTopCardOfYourLibraryToGraveyardCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         Player player = game.getPlayer(controllerId);
         if (player != null && player.getLibrary().size() >= numberOfCards) {
             return true;

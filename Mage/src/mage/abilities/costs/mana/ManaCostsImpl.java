@@ -373,9 +373,9 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     }
 
     @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         for (T cost : this) {
-            if (!cost.canPay(sourceId, controllerId, game)) {
+            if (!cost.canPay(ability, sourceId, controllerId, game)) {
                 return false;
             }
         }

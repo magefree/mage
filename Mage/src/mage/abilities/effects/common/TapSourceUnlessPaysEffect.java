@@ -60,7 +60,7 @@ public class TapSourceUnlessPaysEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) { 
-            if (cost.canPay(source.getSourceId(), source.getControllerId(), game)
+            if (cost.canPay(source, source.getSourceId(), source.getControllerId(), game)
                     && player.chooseUse(Outcome.Benefit, cost.getText() + "? (otherwise " + permanent.getName() + " becomes tapped)", game)) {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {

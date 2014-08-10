@@ -1902,14 +1902,14 @@ public abstract class PlayerImpl implements Player, Serializable {
             MageObject object = game.getObject(ability.getSourceId());
             for (Ability objectAbility :object.getAbilities()) {
                 if (objectAbility instanceof AlternativeCostSourceAbility) {
-                    if (objectAbility.getCosts().canPay(ability.getSourceId(), playerId, game)) {
+                    if (objectAbility.getCosts().canPay(ability, ability.getSourceId(), playerId, game)) {
                         return true;
                     }
                 }                
             }
             
             for (AlternativeCost cost: ability.getAlternativeCosts()) {
-                if (cost.isAvailable(game, ability) && cost.canPay(ability.getSourceId(), playerId, game)) {
+                if (cost.isAvailable(game, ability) && cost.canPay(ability, ability.getSourceId(), playerId, game)) {
                     return true;
                 }
             }

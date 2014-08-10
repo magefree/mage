@@ -25,7 +25,7 @@ public class AlternativeCostImpl extends CostsImpl implements AlternativeCost {
     public boolean isAvailable(Game game, Ability source) {
         for (int x=0; x < ((Costs) this).size(); x++) {
             Cost cost = (Cost) ((Costs) this).get(x);
-            if (!cost.canPay(source.getSourceId(), source.getControllerId(), game)) {
+            if (!cost.canPay(source, source.getSourceId(), source.getControllerId(), game)) {
                 return false;
             }
         }

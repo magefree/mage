@@ -127,13 +127,13 @@ class SilvergillAdeptCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         Player player = game.getPlayer(controllerId);
         if (player != null && player.getHand().count(filter, game) > 0) {
             return true;
         }
 
-        if (mana.canPay(sourceId, controllerId, game)) {
+        if (mana.canPay(ability, sourceId, controllerId, game)) {
             return true;
         }
 

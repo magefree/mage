@@ -519,7 +519,7 @@ public class HumanPlayer extends PlayerImpl {
                 for (ManaCost cost : costs.getUnpaid()) {
                     if (cost instanceof PhyrexianManaCost) {
                         PhyrexianManaCost ph = (PhyrexianManaCost)cost;
-                        if (ph.canPay(null, playerId, game)) {
+                        if (ph.canPay(null, null, playerId, game)) {
                             ((PhyrexianManaCost)cost).pay(null, game, null, playerId, false);
                         }
                         break;

@@ -134,7 +134,7 @@ class ElephantGrassReplacementEffect2 extends ReplacementEffectImpl {
             Player player = game.getPlayer(event.getPlayerId());
             if ( player != null && event.getTargetId().equals(source.getControllerId())) {
                 ManaCostsImpl attackCost = new ManaCostsImpl("{2}");
-                if ( attackCost.canPay(source.getSourceId(), event.getPlayerId(), game) &&
+                if ( attackCost.canPay(source, source.getSourceId(), event.getPlayerId(), game) &&
                      player.chooseUse(Outcome.Benefit, "Pay {2} to attack player?", game) ) {
                     if (attackCost.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
                         return false;

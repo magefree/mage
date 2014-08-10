@@ -103,7 +103,7 @@ class LeoninArbiterReplacementEffect extends ReplacementEffectImpl {
 
             if ( player != null ) {
                 ManaCostsImpl arbiterTax = new ManaCostsImpl("{2}");
-                if ( arbiterTax.canPay(source.getSourceId(), event.getPlayerId(), game) &&
+                if ( arbiterTax.canPay(source, source.getSourceId(), event.getPlayerId(), game) &&
                      player.chooseUse(Outcome.Neutral, "Pay {2} to search your library?", game) )
                 {
                     if (arbiterTax.payOrRollback(source, game, source.getSourceId(), event.getPlayerId()) ) {

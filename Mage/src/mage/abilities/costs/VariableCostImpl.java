@@ -120,7 +120,7 @@ public abstract class VariableCostImpl implements Cost, VariableCost {
     }
 
     @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         return true; /* not used */
     }
 

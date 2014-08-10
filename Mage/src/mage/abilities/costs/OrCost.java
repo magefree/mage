@@ -74,18 +74,18 @@ public class OrCost implements Cost {
     }
 
     @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-        return firstCost.canPay(sourceId, controllerId, game) || secondCost.canPay(sourceId, controllerId, game);
+    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+        return firstCost.canPay(ability, sourceId, controllerId, game) || secondCost.canPay(ability, sourceId, controllerId, game);
     }
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         selectedCost = null;
         // if only one can be paid select it
-        if (!firstCost.canPay(sourceId, controllerId, game)) {
+        if (!firstCost.canPay(ability, sourceId, controllerId, game)) {
             selectedCost = secondCost;
         }
-        if (!secondCost.canPay(sourceId, controllerId, game)) {
+        if (!secondCost.canPay(ability, sourceId, controllerId, game)) {
             selectedCost = firstCost;
         }
         // if both can be paid player has to select

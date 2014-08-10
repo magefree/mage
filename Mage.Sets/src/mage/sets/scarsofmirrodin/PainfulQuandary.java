@@ -120,7 +120,7 @@ class PainfulQuandryEffect extends OneShotEffect {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
             Cost cost = new DiscardTargetCost(new TargetCardInHand());
-            if (cost.canPay(player.getId(), player.getId(), game)) {
+            if (cost.canPay(source, player.getId(), player.getId(), game)) {
                 if (!cost.pay(source, game, player.getId(), player.getId(), false)) {
                     player.loseLife(5, game);
                 }

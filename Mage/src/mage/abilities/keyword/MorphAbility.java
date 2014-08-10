@@ -184,7 +184,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
             if (player != null) {
                 this.resetMorph();
                 for (AlternativeCost2 alternateCastingCost: alternateCosts) {
-                    if (alternateCastingCost.canPay(sourceId, controllerId, game) &&
+                    if (alternateCastingCost.canPay(ability, sourceId, controllerId, game) &&
                           player.chooseUse(Outcome.Benefit, new StringBuilder("Cast this card as a 2/2 face-down creature for ").append(alternateCastingCost.getText(true)).append(" ?").toString(), game)) {
 
                         Spell spell = game.getStack().getSpell(ability.getId());

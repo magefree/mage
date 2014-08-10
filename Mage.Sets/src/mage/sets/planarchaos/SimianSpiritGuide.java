@@ -95,7 +95,7 @@ class ExileSourceFromHandCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         Player player = game.getPlayer(controllerId);
         if (player != null && player.getHand().contains(sourceId)) {
             return true;

@@ -97,7 +97,7 @@ class WarCadenceReplacementEffect extends ReplacementEffectImpl {
             if (amount > 0) {
                 String mana = new StringBuilder("{").append(amount).append("}").toString();
                 ManaCostsImpl cost = new ManaCostsImpl(mana);
-                if ( cost.canPay(source.getSourceId(), event.getPlayerId(), game) &&
+                if ( cost.canPay(source, source.getSourceId(), event.getPlayerId(), game) &&
                     player.chooseUse(Outcome.Benefit, new StringBuilder("Pay ").append(mana).append(" to declare blocker?").toString(), game) ) {
                     if (cost.payOrRollback(source, game, source.getSourceId(), event.getPlayerId())) {
                         return false;

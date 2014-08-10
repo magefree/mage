@@ -92,7 +92,7 @@ class GemstoneCavernsEffect extends OneShotEffect {
                     if (permanent != null) {
                         permanent.addCounters(CounterType.LUCK.createInstance(), game);
                         Cost cost = new ExileFromHandCost(new TargetCardInHand());
-                        if (cost.canPay(source.getSourceId(), source.getControllerId(), game)) {
+                        if (cost.canPay(source, source.getSourceId(), source.getControllerId(), game)) {
                             cost.pay(source, game, source.getSourceId(), source.getControllerId(), true);
                         }
                     }

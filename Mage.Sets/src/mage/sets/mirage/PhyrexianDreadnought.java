@@ -110,7 +110,7 @@ class PhyrexianDreadnoughtSacrificeCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         int sumPower = 0;
         for (Permanent permanent :game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), controllerId, game)) {
             if (!permanent.getId().equals(sourceId)) {

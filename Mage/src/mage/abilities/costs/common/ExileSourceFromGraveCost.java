@@ -63,7 +63,7 @@ public class ExileSourceFromGraveCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         Card card = game.getCard(sourceId);
         if (card != null && game.getState().getZone(sourceId).equals(Zone.GRAVEYARD)) {
             return true;

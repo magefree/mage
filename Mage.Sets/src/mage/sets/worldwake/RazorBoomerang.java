@@ -104,7 +104,7 @@ class UnattachCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         Permanent permanent = game.getPermanent(sourceId);
         if (permanent != null) {
             Permanent attachment = game.getPermanent(attachmentid);
