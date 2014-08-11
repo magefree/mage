@@ -59,8 +59,8 @@ public class PlayerView implements Serializable {
     private final boolean hasPriority;
     private final boolean hasLeft;
     private final ManaPoolView manaPool;
-    private final SimpleCardsView graveyard = new SimpleCardsView();
-    private final SimpleCardsView exile = new SimpleCardsView();
+    private final CardsView graveyard = new CardsView();
+    private final CardsView exile = new CardsView();
     private final Map<UUID, PermanentView> battlefield = new LinkedHashMap<>();
     private final CardView topCard;
     private final UserDataView userDataView;
@@ -81,14 +81,14 @@ public class PlayerView implements Serializable {
         this.hasPriority = player.getId().equals(state.getPriorityPlayerId());
         this.hasLeft = player.hasLeft();
         for (Card card: player.getGraveyard().getCards(game)) {
-            graveyard.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.isFaceDown(), card.getTokenSetCode()));
+            graveyard.put(card.getId(), new CardView(card));
         }
         for (ExileZone exileZone : game.getExile().getExileZones()) {
             for (Card card : exileZone.getCards(game)) {
                 if (!player.getId().equals(card.getOwnerId())) {
                     break;
                 }
-                exile.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.isFaceDown(), card.getTokenSetCode()));
+                exile.put(card.getId(), new CardView(card));
             }
         }
         for (Permanent permanent: state.getBattlefield().getAllPermanents()) {
@@ -171,11 +171,11 @@ public class PlayerView implements Serializable {
         return this.manaPool;
     }
 
-    public SimpleCardsView getGraveyard() {
+    public CardsView getGraveyard() {
         return this.graveyard;
     }
 
-    public SimpleCardsView getExile() {
+    public CardsView getExile() {
         return exile;
     }
 

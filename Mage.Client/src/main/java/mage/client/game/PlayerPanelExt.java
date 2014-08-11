@@ -783,7 +783,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             graveyard = new ShowCardsDialog();
         }*/
         //graveyard.loadCards(player.getName() + " graveyard", player.getGraveyard(), bigCard, Config.dimensions, gameId, false);
-        DialogManager.getManager(gameId).showGraveyardDialog(CardsViewUtil.convertSimple(player.getGraveyard(), MageFrame.getGame(gameId).getLoadedCards()), bigCard, gameId);
+        DialogManager.getManager(gameId).showGraveyardDialog(player.getGraveyard(), bigCard, gameId);
     }
 
     private void btnCommandZoneActionPerformed(java.awt.event.ActionEvent evt) {
@@ -791,7 +791,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     }
 
     private void btnExileZoneActionPerformed(java.awt.event.ActionEvent evt) {
-        DialogManager.getManager(gameId).showExileDialog(CardsViewUtil.convertSimple(player.getExile(), MageFrame.getGame(gameId).getLoadedCards()), bigCard, gameId);
+        DialogManager.getManager(gameId).showExileDialog(player.getExile(), bigCard, gameId);
     }
 
     private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheatActionPerformed

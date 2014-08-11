@@ -5,11 +5,11 @@ import mage.cards.action.TransferData;
 import mage.client.MageFrame;
 import mage.client.game.PlayAreaPanel;
 import mage.client.game.PlayerPanelExt;
+import mage.view.CardsView;
 import mage.view.PlayerView;
-import mage.view.SimpleCardsView;
 
 import java.awt.*;
-import java.util.*;
+import java.util.UUID;
 
 /**
  * @author noxx
@@ -98,7 +98,7 @@ public class ArrowUtil {
 
                 PlayerView view = panel.getPlayerPanel().getPlayer();
                 if (view != null) {
-                    SimpleCardsView graveyard = view.getGraveyard();
+                    CardsView graveyard = view.getGraveyard();
                     if (graveyard.containsKey(uuid)) {
                         p = MageFrame.getGame(data.gameId).getPlayers().get(view.getPlayerId());
                         if (p != null) {
