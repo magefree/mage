@@ -25,40 +25,27 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
-
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.LoseHalfLifeEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
+package mage.sets.portal;
 
 import java.util.UUID;
 
 /**
- *
- * @author Plopman
+ * @author magenoxx
  */
-public class InfernalContract extends CardImpl {
+public class CruelBargain extends mage.sets.vintagemasters.CruelBargain {
 
-    public InfernalContract(UUID ownerId) {
-        super(ownerId, 143, "Infernal Contract", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}{B}{B}");
-        this.expansionSetCode = "7ED";
-
-        this.color.setBlack(true);
-
-        // Draw four cards. You lose half your life, rounded up.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(4));
-        this.getSpellAbility().addEffect(new LoseHalfLifeEffect());
+    public CruelBargain(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 8;
+        this.expansionSetCode = "POR";
     }
 
-    public InfernalContract(final InfernalContract card) {
+    public CruelBargain(final CruelBargain card) {
         super(card);
     }
 
     @Override
-    public InfernalContract copy() {
-        return new InfernalContract(this);
+    public CruelBargain copy() {
+        return new CruelBargain(this);
     }
 }
-
