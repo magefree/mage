@@ -157,13 +157,6 @@ public class TournamentSession {
         }
     }
 
-    public void removeTournamentForUser() {
-        User user = UserManager.getInstance().getUser(userId);
-        if (user != null) {
-            user.removeTournament(playerId);
-        }
-    }
-
     private TournamentView getTournamentView() {
         return new TournamentView(tournament);
     }
@@ -172,8 +165,27 @@ public class TournamentSession {
         return tournament.getId();
     }
 
-    void tournamentOver() {
-
+    public void tournamentOver() {
+        cleanUp();
+        removeTournamentForUser();
     }
 
+    public void quit() {
+        cleanUp();
+        removeTournamentForUser();
+    }
+    
+    private void cleanUp() {
+        if (!futureTimeout.isDone()) {
+            futureTimeout.cancel(true);
+        }
+    }
+    
+    private void removeTournamentForUser() {
+        User user = UserManager.getInstance().getUser(userId);
+        if (user != null) {
+            user.removeTournament(playerId);
+        }        
+    }
+    
 }

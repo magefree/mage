@@ -203,9 +203,9 @@ public class TournamentController {
     }
 
     private synchronized void startTournament() {
-        for (final Entry<UUID, TournamentSession> entry: tournamentSessions.entrySet()) {
-            if (!entry.getValue().init()) {
-                logger.fatal("Unable to initialize client");
+        for (final TournamentSession tournamentSession: tournamentSessions.values()) {
+            if (!tournamentSession.init()) {
+                logger.fatal("Unable to initialize client userId: "  + tournamentSession.userId + "  tournamentId " + tournament.getId());
                 //TODO: generate client error message
                 return;
             }
@@ -220,7 +220,6 @@ public class TournamentController {
         }
         for (final TournamentSession tournamentSession: tournamentSessions.values()) {
             tournamentSession.tournamentOver();
-            tournamentSession.removeTournamentForUser();
         }
         this.tournamentSessions.clear();
         TableManager.getInstance().endTournament(tableId, tournament);
@@ -344,6 +343,9 @@ public class TournamentController {
                         }
                         tPlayer.setQuit(info);
                         tournament.quit(playerId);
+                        if (tournamentSessions.containsKey(playerId)) {
+                            tournamentSessions.get(tPlayer.getPlayer().getId()).quit();
+                        }
                     }
                 } else {
                     tournament.leave(playerId);

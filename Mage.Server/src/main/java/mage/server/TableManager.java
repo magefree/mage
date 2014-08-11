@@ -230,7 +230,7 @@ public class TableManager {
                 removeTable(tableId);
 
             } else {
-                logger.debug("TableManager.leaveTable leaveTable");
+                logger.debug("TABLE leave - userId: " + userId + "  tableId: " + tableId);
                 tableController.leaveTable(userId);
             }
         }

@@ -156,7 +156,9 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
     public Targets getTargets() {
         Targets targets = new Targets();
         for (T cost: this) {
-            targets.addAll(cost.getTargets());
+            if (cost.getTargets() != null) {
+                targets.addAll(cost.getTargets());
+            }
         }
         return targets;
     }
