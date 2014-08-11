@@ -60,7 +60,7 @@ public class TestamentOfFaith extends CardImpl {
 
         this.color.setWhite(true);
 
-        // {X}: Testament of Faith becomes an X/X Wall creature with defender until end of turn. It's still an enchantment.
+        // {X}: Testament of Faith becomes an X/X Wall creature with defender in addition to its other types until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TestamentOfFaithBecomesCreatureSourceEffect(new TestamentOfFaithToken(), "enchantment", Duration.EndOfTurn), new VariableManaCost()));
     }
 
@@ -172,12 +172,7 @@ class TestamentOfFaithBecomesCreatureSourceEffect extends ContinuousEffectImpl i
     }
 
     private void setText() {
-        if (type.length() > 0) {
-            staticText = duration.toString() + " {this} becomes a " + token.getDescription() + " that's still a " + this.type;
-        }
-        else {
-            staticText = duration.toString() + " {this} becomes a " + token.getDescription();
-        }
+        staticText = "{this} becomes an X/X Wall creature with defender in addition to its other types until end of turn";
     }
 
     @Override
@@ -190,7 +185,7 @@ class TestamentOfFaithBecomesCreatureSourceEffect extends ContinuousEffectImpl i
 
 class TestamentOfFaithToken extends Token {
     TestamentOfFaithToken() {
-        super("Wall", "a X/X Wall creature with defender");
+        super("Wall", "an X/X Wall creature with defender");
         cardType.add(CardType.CREATURE);
         this.subtype.add("Wall");
         color = ObjectColor.WHITE;

@@ -65,10 +65,10 @@ public class DarksteelMutation extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Enchanted creature is a 0/1 Insect artifact creature with indestructible and loses all other abilities, card types, and creature types.
+        // Enchanted creature is an Insect artifact creature with base power and toughness 0/1 and has indestructible, and it loses all other abilities, card types, and creature types.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
                 new BecomesCreatureAttachedEffect(new DarksteelMutationInsectToken(),
-                "Enchanted creature is a 0/1 Insect artifact creature with indestructible and loses all other abilities, card types, and creature types", 
+                "Enchanted creature is an Insect artifact creature with base power and toughness 0/1 and has indestructible, and it loses all other abilities, card types, and creature types.", 
                 Duration.WhileOnBattlefield, true)));
 
     }
@@ -86,7 +86,7 @@ public class DarksteelMutation extends CardImpl {
 class DarksteelMutationInsectToken extends Token {
 
     public DarksteelMutationInsectToken() {
-        super("Insect", "0/1 Insect artifact creature with indestructible");
+        super("Insect", "Insect artifact creature with base power and toughness 0/1");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add("Insect");

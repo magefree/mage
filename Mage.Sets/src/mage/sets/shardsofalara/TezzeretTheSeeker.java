@@ -27,6 +27,8 @@
  */
 package mage.sets.shardsofalara;
 
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -38,7 +40,13 @@ import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterArtifactCard;
@@ -49,8 +57,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetCardInLibrary;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -72,7 +78,7 @@ public class TezzeretTheSeeker extends CardImpl {
         this.addAbility(ability);
         // -X: Search your library for an artifact card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library.
         this.addAbility(new LoyaltyAbility(new TezzeretTheSeekerEffect2()));
-        // -5: Artifacts you control become 5/5 artifact creatures until end of turn.
+        // -5: Artifacts you control become artifact creatures with base power and toughness 5/5 until end of turn.
         this.addAbility(new LoyaltyAbility(new TezzeretTheSeekerEffect3(), -5));
     }
 
@@ -137,7 +143,7 @@ class TezzeretTheSeekerEffect3 extends ContinuousEffectImpl {
 
     public TezzeretTheSeekerEffect3() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
-        this.staticText = "Artifacts you control become 5/5 artifact creatures until end of turn";
+        this.staticText = "Artifacts you control become artifact creatures with base power and toughness 5/5 until end of turn";
     }
 
     public TezzeretTheSeekerEffect3(final TezzeretTheSeekerEffect3 effect) {

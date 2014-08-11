@@ -28,10 +28,6 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -44,6 +40,10 @@ import mage.abilities.effects.common.continious.AddCardTypeTargetEffect;
 import mage.abilities.effects.common.continious.SetPowerToughnessTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
@@ -75,12 +75,12 @@ public class TezzeretAgentOfBolas extends CardImpl {
         // +1: Look at the top five cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
         this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(5, 1, filter, true), 1));
 
-        // -1: Target artifact becomes a 5/5 artifact creature.
+        // -1: Target artifact becomes an artifact creature with base power and toughness 5/5.
         Effect effect = new AddCardTypeTargetEffect(CardType.CREATURE, Duration.EndOfGame);
         effect.setText("");
         LoyaltyAbility ability1 = new LoyaltyAbility(effect, -1);
         effect = new SetPowerToughnessTargetEffect(5,5, Duration.EndOfGame);
-        effect.setText("Target artifact becomes a 5/5 artifact creature");
+        effect.setText("Target artifact becomes an artifact creature with base power and toughness 5/5");
         ability1.addEffect(effect);
         ability1.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability1);

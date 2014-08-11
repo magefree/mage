@@ -28,6 +28,7 @@
 package mage.sets.limitedalpha;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.discard.DiscardHandAllEffect;
 import mage.cards.CardImpl;
@@ -45,9 +46,12 @@ public class WheelOfFortune extends CardImpl {
 
         this.color.setRed(true);
 
-        // Each player discards his or her hand and draws seven cards.
+        // Each player discards his or her hand,
         this.getSpellAbility().addEffect(new DiscardHandAllEffect());
-        this.getSpellAbility().addEffect(new DrawCardAllEffect(7));
+        // then draws seven cards.
+        Effect effect = new DrawCardAllEffect(7);
+        effect.setText(", then draws seven cards");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public WheelOfFortune(final WheelOfFortune card) {

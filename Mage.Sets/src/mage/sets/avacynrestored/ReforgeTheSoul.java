@@ -28,15 +28,15 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MiracleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -52,7 +52,7 @@ public class ReforgeTheSoul extends CardImpl {
 
         this.color.setRed(true);
 
-        // Each player discards his or her hand and draws seven cards.
+        // Each player discards his or her hand, then draws seven cards.
         this.getSpellAbility().addEffect(new ReforgeTheSoulEffect());
 
         this.addAbility(new MiracleAbility(new ManaCostsImpl("{1}{R}")));
@@ -72,7 +72,7 @@ class ReforgeTheSoulEffect extends OneShotEffect {
 
     public ReforgeTheSoulEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Each player discards his or her hand and draws seven cards";
+        this.staticText = "Each player discards his or her hand, then draws seven cards";
     }
 
     public ReforgeTheSoulEffect(final ReforgeTheSoulEffect effect) {

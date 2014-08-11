@@ -69,7 +69,7 @@ public class GodheadOfAwe extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Other creatures are 1/1.
+        // Other creatures have base power and toughness 1/1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
     }
 

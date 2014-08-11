@@ -68,28 +68,28 @@ public class FigureOfDestiny extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {RW}: Figure of Destiny becomes a 2/2 Kithkin Spirit.
+        // {RW}: Figure of Destiny becomes a Kithkin Spirit with base power and toughness 2/2.
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BecomesCreatureSourceEffect(new FigureOfDestiny.FigureOfDestinyToken1(), "", Duration.Custom),
                 new ManaCostsImpl("{R/W}")));
-        // {RW}{RW}{RW}: If Figure of Destiny is a Spirit, it becomes a 4/4 Kithkin Spirit Warrior.
+        // {RW}{RW}{RW}: If Figure of Destiny is a Spirit, it becomes a Kithkin Spirit Warrior with base power and toughness 4/4.
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new ConditionalContinousEffect(
                     new BecomesCreatureSourceEffect(new FigureOfDestiny.FigureOfDestinyToken2(), "", Duration.Custom),
                     new SourceMatchesFilterCondition(filter2),
-                    "If Figure of Destiny is a Spirit, it becomes a 4/4 Kithkin Spirit Warrior",
+                    "If {this} is a Spirit, it becomes a Kithkin Spirit Warrior with base power and toughness 4/4",
                     true),
                 new ManaCostsImpl("{R/W}{R/W}{R/W}")                
                 ));
-        // {RW}{RW}{RW}{RW}{RW}{RW}: If Figure of Destiny is a Warrior, it becomes an 8/8 Kithkin Spirit Warrior Avatar with flying and first strike.
+        // {RW}{RW}{RW}{RW}{RW}{RW}: If Figure of Destiny is a Warrior, it becomes a Kithkin Spirit Warrior Avatar with base power and toughness 8/8, flying, and first strike.
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new ConditionalContinousEffect(
                     new BecomesCreatureSourceEffect(new FigureOfDestiny.FigureOfDestinyToken3(), "", Duration.Custom),
                     new SourceMatchesFilterCondition(filter3),
-                    "If Figure of Destiny is a Warrior, it becomes an 8/8 Kithkin Spirit Warrior Avatar with flying and first strike",
+                    "If {this} is a Warrior, it becomes a Kithkin Spirit Warrior Avatar with base power and toughness 8/8, flying, and first strike",
                     true),
                 new ManaCostsImpl("{R/W}{R/W}{R/W}{R/W}{R/W}{R/W}")                
                 ));
@@ -107,7 +107,7 @@ public class FigureOfDestiny extends CardImpl {
     private class FigureOfDestinyToken1 extends Token {
 
         public FigureOfDestinyToken1() {
-            super("Figure of Destiny", "2/2 Kithkin Spirit");
+            super("Figure of Destiny", "Kithkin Spirit with base power and toughness 2/2");
             this.cardType.add(CardType.CREATURE);
             this.subtype.add("Kithkin");
             this.subtype.add("Spirit");
@@ -122,7 +122,7 @@ public class FigureOfDestiny extends CardImpl {
     private class FigureOfDestinyToken2 extends Token {
 
         public FigureOfDestinyToken2() {
-            super("Figure of Destiny", "4/4 Kithkin Spirit Warrior");
+            super("Figure of Destiny", "Kithkin Spirit Warrior with base power and toughness 4/4");
             this.cardType.add(CardType.CREATURE);
             this.subtype.add("Kithkin");
             this.subtype.add("Spirit");
@@ -138,7 +138,7 @@ public class FigureOfDestiny extends CardImpl {
     private class FigureOfDestinyToken3 extends Token {
 
         public FigureOfDestinyToken3() {
-            super("Figure of Destiny", "8/8 Kithkin Spirit Warrior Avatar with flying and first strike");
+            super("Figure of Destiny", "Kithkin Spirit Warrior Avatar with base power and toughness 8/8, flying, and first strike");
             this.cardType.add(CardType.CREATURE);
             this.subtype.add("Kithkin");
             this.subtype.add("Spirit");

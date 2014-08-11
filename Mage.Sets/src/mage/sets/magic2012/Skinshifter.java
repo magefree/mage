@@ -28,10 +28,6 @@
 package mage.sets.magic2012;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -41,6 +37,10 @@ import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 
 /**
@@ -86,7 +86,7 @@ public class Skinshifter extends CardImpl {
     private class RhinoToken extends Token {
 
         public RhinoToken() {
-            super("Rhino", "4/4 Rhino with trample");
+            super("Rhino", "Rhino with base power and toughness 4/4 and gains trample");
             this.cardType.add(CardType.CREATURE);
             this.subtype.add("Rhino");
 
@@ -100,7 +100,7 @@ public class Skinshifter extends CardImpl {
     private class BirdToken extends Token {
 
         public BirdToken() {
-            super("Bird", "2/2 Bird with flying");
+            super("Bird", "Bird with base power and toughness 2/2 and gains flying");
             this.cardType.add(CardType.CREATURE);
             this.subtype.add("Bird");
 
@@ -114,7 +114,7 @@ public class Skinshifter extends CardImpl {
     private class PlantToken extends Token {
 
         public PlantToken() {
-            super("Plant", "0/8 Plant");
+            super("Plant", "Plant with base power and toughness 0/8");
             this.cardType.add(CardType.CREATURE);
             this.subtype.add("Plant");
 

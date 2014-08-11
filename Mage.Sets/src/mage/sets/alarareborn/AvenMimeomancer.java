@@ -28,9 +28,6 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -39,7 +36,14 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -65,7 +69,7 @@ public class AvenMimeomancer extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // At the beginning of your upkeep, you may put a feather counter on target creature. If you do, that creature is 3/1 and has flying for as long as it has a feather counter on it.
+        // At the beginning of your upkeep, you may put a feather counter on target creature. If you do, that creature has base power and toughness 3/1 and has flying for as long as it has a feather counter on it.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.FEATHER.createInstance()), TargetController.YOU, true);
         ability.addTarget(new TargetCreaturePermanent());
         ability.addEffect(new AvenEffect());
@@ -121,7 +125,7 @@ class AvenEffect extends ContinuousEffectImpl {
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        sb.append("If you do, that creature is 3/1 and has flying for as long as it has a feather counter on it");
+        sb.append("If you do, that creature has base power and toughness 3/1 and has flying for as long as it has a feather counter on it");
         return sb.toString();
     }
 }

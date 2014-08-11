@@ -56,7 +56,7 @@ public class ShorecrasherMimic extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
-    private String rule = "Whenever you cast a spell that's both green and blue, {this} becomes 5/3 and gains trample until end of turn.";
+    private String rule = "Whenever you cast a spell that's both green and blue, {this} has base power and toughness 5/3 until end of turn and gains trample until end of turn";
 
     public ShorecrasherMimic(UUID ownerId) {
         super(ownerId, 159, "Shorecrasher Mimic", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G/U}");
@@ -68,7 +68,7 @@ public class ShorecrasherMimic extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Whenever you cast a spell that's both green and blue, Shorecrasher Mimic becomes 5/3 and gains trample until end of turn.
+        // Whenever you cast a spell that's both green and blue, Shorecrasher Mimic has base power and toughness 5/3 until end of turn and gains trample until end of turn.
         Ability ability = new SpellCastControllerTriggeredAbility(new SetPowerToughnessSourceEffect(5, 3, Duration.EndOfTurn), filter, false, rule);
         ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, false, true));
         this.addAbility(ability);

@@ -28,10 +28,6 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.effects.Effect;
@@ -39,6 +35,9 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.continious.LoseAllAbilitiesTargetEffect;
 import mage.cards.SplitCard;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
@@ -57,16 +56,20 @@ public class TurnBurn extends SplitCard {
         this.color.setRed(true);
 
         // Turn
-        // Target creature loses all abilities and becomes a 0/1 red Weird until end of turn.
+        // Until end of turn, target creature loses all abilities and becomes a red Weird with base power and toughness 0/1.
         getLeftHalfCard().getColor().setBlue(true);
-        getLeftHalfCard().getSpellAbility().addEffect(new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn));
-        getLeftHalfCard().getSpellAbility().addEffect(new BecomesCreatureTargetEffect(new WeirdToken(),null, Duration.EndOfTurn));
+        Effect effect = new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn);
+        effect.setText("Until end of turn, target creature loses all abilities");
+        getLeftHalfCard().getSpellAbility().addEffect(effect);
+        effect = new BecomesCreatureTargetEffect(new WeirdToken(), null, Duration.EndOfTurn);
+        effect.setText("and becomes a red Weird with base power and toughness 0/1");
+        getLeftHalfCard().getSpellAbility().addEffect(effect);
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Burn
         // Burn deals 2 damage to target creature or player.
         getRightHalfCard().getColor().setRed(true);
-        Effect effect = new DamageTargetEffect(2);
+        effect = new DamageTargetEffect(2);
         effect.setText("Burn deals 2 damage to target creature or player");
         getRightHalfCard().getSpellAbility().addEffect(effect);
         getRightHalfCard().getSpellAbility().addTarget(new TargetCreatureOrPlayer());
@@ -85,7 +88,7 @@ public class TurnBurn extends SplitCard {
     private class WeirdToken extends Token {
 
         private WeirdToken() {
-            super("Weird", "0/1 red Weird");
+            super("Weird", "a red Weird with base power and toughness 0/1");
             cardType.add(CardType.CREATURE);
             color = ObjectColor.RED;
             subtype.add("Weird");

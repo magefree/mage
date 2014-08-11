@@ -30,15 +30,15 @@ package mage.abilities.effects.common.continious;
 
 import java.util.Locale;
 import java.util.UUID;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -124,9 +124,9 @@ public class SetPowerToughnessAllEffect extends ContinuousEffectImpl {
         StringBuilder sb = new StringBuilder();
         sb.append(filter.getMessage());
         if (filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("Each ")) {
-            sb.append(" becomes ");
+            sb.append(" has base power and toughness ");
         } else {
-            sb.append(" become ");
+            sb.append(" have base power and toughness ");
         }
         sb.append(power).append("/").append(toughness);
         if (!duration.toString().isEmpty()) {

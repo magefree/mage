@@ -56,7 +56,7 @@ public class NightskyMimic extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    private String rule = "Whenever you cast a spell that's both white and black, {this} becomes 4/4 and gains flying until end of turn.";
+    private String rule = "Whenever you cast a spell that's both white and black, {this} has base power and toughness 4/4 until end of turn and gains flying until end of turn";
 
     public NightskyMimic(UUID ownerId) {
         super(ownerId, 91, "Nightsky Mimic", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W/B}");
@@ -68,7 +68,7 @@ public class NightskyMimic extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Whenever you cast a spell that's both white and black, Nightsky Mimic becomes 4/4 and gains flying until end of turn.
+        // Whenever you cast a spell that's both white and black, Nightsky Mimic has base power and toughness 4/4 until end of turn and gains flying until end of turn.
         Ability ability = new SpellCastControllerTriggeredAbility(new SetPowerToughnessSourceEffect(4, 4, Duration.EndOfTurn), filter, false, rule);
         ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, false, true));
         this.addAbility(ability);

@@ -79,13 +79,13 @@ public class Gigantiform extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        // Enchanted creature is 8/8 and has trample.
+        // Enchanted creature has base power and toughness 8/8 and has trample.
         this.addAbility(new GigantiformAbility());
         // When Gigantiform enters the battlefield, if it was kicked, you may search your library for a card named Gigantiform, put it onto the battlefield, then shuffle your library.
         this.addAbility(new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GigantiformEffect(), true),
                 KickedCondition.getInstance(),
-                "When Gigantiform enters the battlefield, if it was kicked, you may search your library for a card named Gigantiform, put it onto the battlefield, then shuffle your library."));
+                "When {this} enters the battlefield, if it was kicked, you may search your library for a card named Gigantiform, put it onto the battlefield, then shuffle your library."));
     }
 
     public Gigantiform(final Gigantiform card) {
@@ -117,7 +117,7 @@ class GigantiformAbility extends StaticAbility {
 
     @Override
     public String getRule() {
-        return "Enchanted creature is 8/8 and has trample.";
+        return "Enchanted creature has base power and toughness 8/8 and has trample";
     }
 }
 

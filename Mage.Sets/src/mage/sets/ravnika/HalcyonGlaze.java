@@ -28,15 +28,15 @@
 package mage.sets.ravnika;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.Token;
@@ -59,8 +59,10 @@ public class HalcyonGlaze extends CardImpl {
 
         this.color.setBlue(true);
 
-        // Whenever you cast a creature spell, Halcyon Glaze becomes a 4/4 Illusion creature with flying until end of turn. It's still an enchantment.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new BecomesCreatureSourceEffect(new HalcyonGlazeToken(), "enchantment", Duration.EndOfTurn), filter, false));
+        // Whenever you cast a creature spell, Halcyon Glaze becomes a 4/4 Illusion creature with flying in addition to its other types until end of turn.
+        Effect effect = new BecomesCreatureSourceEffect(new HalcyonGlazeToken(), "enchantment", Duration.EndOfTurn);
+        effect.setText("Whenever you cast a creature spell, {this} becomes a 4/4 Illusion creature with flying in addition to its other types until end of turn");
+        this.addAbility(new SpellCastControllerTriggeredAbility(effect, filter, false));
     }
 
     public HalcyonGlaze(final HalcyonGlaze card) {

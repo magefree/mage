@@ -65,10 +65,10 @@ public class Lignify extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Enchanted creature is a 0/4 Treefolk with no abilities.
+        // Enchanted creature is a Treefolk with base power and toughness 0/4 and loses all abilities.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
                 new BecomesCreatureAttachedEffect(new LignifyTreefolkToken(),
-                "Enchanted creature is a 0/4 Treefolk with no abilities",
+                "Enchanted creature is a Treefolk with base power and toughness 0/4 and loses all abilities",
                 Duration.WhileOnBattlefield, true)));
 
     }
@@ -86,7 +86,7 @@ public class Lignify extends CardImpl {
 class LignifyTreefolkToken extends Token {
 
     public LignifyTreefolkToken() {
-        super("Treefolk", "0/4 Treefolk with no abilities");
+        super("Treefolk", "a Treefolk with base power and toughness 0/4 with no abilities");
         cardType.add(CardType.CREATURE);
         subtype.add("Treefolk");
         power = new MageInt(0);

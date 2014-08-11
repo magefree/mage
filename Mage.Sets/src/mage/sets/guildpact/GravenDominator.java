@@ -28,15 +28,15 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continious.SetPowerToughnessAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HauntAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
@@ -63,7 +63,7 @@ public class GravenDominator extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Haunt
-        // When Graven Dominator enters the battlefield or the creature it haunts dies, each other creature becomes 1/1 until end of turn.
+        // When Graven Dominator enters the battlefield or the creature it haunts dies, each other creature has base power and toughness 1/1 until end of turn.
         Ability ability = new HauntAbility(this, new SetPowerToughnessAllEffect(1,1, Duration.EndOfTurn, filter, true));
         this.addAbility(ability);
 

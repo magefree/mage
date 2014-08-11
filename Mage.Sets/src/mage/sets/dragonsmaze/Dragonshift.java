@@ -28,13 +28,10 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BecomesCreatureAllEffect;
 import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.continious.LoseAllAbilitiesAllEffect;
@@ -42,6 +39,9 @@ import mage.abilities.effects.common.continious.LoseAllAbilitiesTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -67,9 +67,13 @@ public class Dragonshift extends CardImpl {
         this.color.setRed(true);
         this.color.setBlue(true);
 
-        // Until end of turn, target creature you control becomes a 4/4 blue and red Dragon, loses all abilities, and gains flying.
-        this.getSpellAbility().addEffect(new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(new DragonToken(), null, Duration.EndOfTurn));
+        // Until end of turn, target creature you control becomes a blue and red Dragon with base power and toughness 4/4, loses all abilities, and gains flying.
+        Effect effect = new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn);
+        effect.setText("");
+        this.getSpellAbility().addEffect(effect);
+        effect = new BecomesCreatureTargetEffect(new DragonToken(), null, Duration.EndOfTurn);
+        effect.setText("Until end of turn, target creature you control becomes a blue and red Dragon with base power and toughness 4/4, loses all abilities, and gains flying.");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // Overload {3}{U}{U}{R}{R}
@@ -90,7 +94,7 @@ public class Dragonshift extends CardImpl {
     private class DragonToken extends Token {
 
         public DragonToken() {
-            super("Dragon", "4/4 blue and red Dragon with flying");
+            super("Dragon", "blue and red Dragon with base power and toughness 4/4 and with flying");
             cardType.add(CardType.CREATURE);
             color.setBlue(true);
             color.setRed(true);

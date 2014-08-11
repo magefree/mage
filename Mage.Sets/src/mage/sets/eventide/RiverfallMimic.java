@@ -56,7 +56,7 @@ public class RiverfallMimic extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
     
-    private String rule = "Whenever you cast a spell that's both blue and red, {this} becomes 3/3 and is unblockable until end of turn.";
+    private String rule = "Whenever you cast a spell that's both blue and red, {this} has base power and toughness 3/3 until end of turn and can't be blocked this turn.";
 
     public RiverfallMimic(UUID ownerId) {
         super(ownerId, 111, "Riverfall Mimic", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U/R}");
@@ -68,7 +68,7 @@ public class RiverfallMimic extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Whenever you cast a spell that's both blue and red, Riverfall Mimic becomes 3/3 and is unblockable until end of turn.
+        // Whenever you cast a spell that's both blue and red, Riverfall Mimic has base power and toughness 3/3 until end of turn and can't be blocked this turn.
         Ability ability = new SpellCastControllerTriggeredAbility(new SetPowerToughnessSourceEffect(3, 3, Duration.EndOfTurn), filter, false, rule);
         ability.addEffect(new GainAbilitySourceEffect(new UnblockableAbility(), Duration.EndOfTurn, false, true));
         this.addAbility(ability);

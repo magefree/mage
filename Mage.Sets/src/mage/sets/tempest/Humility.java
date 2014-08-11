@@ -58,7 +58,7 @@ public class Humility extends CardImpl {
 
         this.color.setWhite(true);
 
-        // All creatures lose all abilities and are 1/1.
+        // All creatures lose all abilities and have base power and toughness 1/1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HumilityEffect(Duration.WhileOnBattlefield)));
 
     }
@@ -77,7 +77,7 @@ class HumilityEffect extends ContinuousEffectImpl {
 
     public HumilityEffect(Duration duration) {
         super(duration, Outcome.LoseAbility);
-        staticText = "All creatures lose all abilities and are 1/1";
+        staticText = "All creatures lose all abilities and have base power and toughness 1/1";
     }
 
     public HumilityEffect(final HumilityEffect effect) {

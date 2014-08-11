@@ -56,7 +56,7 @@ public class WoodlurkerMimic extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    private String rule = "Whenever you cast a spell that's both black and green, {this} becomes 4/5 and gains wither until end of turn.";
+    private String rule = "Whenever you cast a spell that's both black and green, {this} has base power and toughness 4/5 until end of turn and gains wither until end of turn.";
     
     public WoodlurkerMimic(UUID ownerId) {
         super(ownerId, 130, "Woodlurker Mimic", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B/G}");
@@ -68,7 +68,7 @@ public class WoodlurkerMimic extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Whenever you cast a spell that's both black and green, Woodlurker Mimic becomes 4/5 and gains wither until end of turn.
+        // Whenever you cast a spell that's both black and green, Woodlurker Mimic has base power and toughness 4/5 until end of turn and gains wither until end of turn.
         Ability ability = new SpellCastControllerTriggeredAbility(new SetPowerToughnessSourceEffect(4, 5, Duration.EndOfTurn), filter, false, rule);
         ability.addEffect(new GainAbilitySourceEffect(WitherAbility.getInstance(), Duration.EndOfTurn, false, true));
         this.addAbility(ability);

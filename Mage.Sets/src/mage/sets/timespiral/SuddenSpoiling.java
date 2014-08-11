@@ -28,17 +28,16 @@
 package mage.sets.timespiral;
 
 import java.util.UUID;
-
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.keyword.SplitSecondAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.keyword.SplitSecondAbility;
-import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -59,7 +58,7 @@ public class SuddenSpoiling extends CardImpl {
 
         // Split second
         this.addAbility(new SplitSecondAbility());
-        // Creatures target player controls become 0/2 and lose all abilities until end of turn.
+        // Until end of turn, creatures target player controls lose all abilities and have base power and toughness 0/2.
         this.getSpellAbility().addEffect(new SuddenSpoilingEffect(Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetPlayer());
 
@@ -79,7 +78,7 @@ class SuddenSpoilingEffect extends ContinuousEffectImpl {
 
     public SuddenSpoilingEffect(Duration duration) {
         super(duration, Outcome.LoseAbility);
-        staticText = "Creatures target player controls become 0/2 and lose all abilities until end of turn";
+        staticText = "Until end of turn, creatures target player controls lose all abilities and have base power and toughness 0/2";
     }
 
     public SuddenSpoilingEffect(final SuddenSpoilingEffect effect) {
