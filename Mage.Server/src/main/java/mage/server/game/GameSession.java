@@ -235,7 +235,7 @@ public class GameSession extends GameWatcher {
         Player player = game.getPlayer(playerId);
         player.setUserData(this.userData);
         GameView gameView = new GameView(game.getState(), game, playerId);
-        gameView.setHand(new SimpleCardsView(player.getHand().getCards(game)));
+        gameView.setHand(new CardsView(player.getHand().getCards(game)));
         gameView.setCanPlayInHand(player.getPlayableInHand(game));
 
         processControlledPlayers(player, gameView);

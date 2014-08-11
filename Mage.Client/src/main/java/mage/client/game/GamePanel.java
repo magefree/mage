@@ -458,7 +458,7 @@ public final class GamePanel extends javax.swing.JPanel {
             this.handContainer.setVisible(false);
         } else {
             handCards.clear();
-            handCards.put(YOUR_HAND, CardsViewUtil.convertSimple(game.getHand(), loadedCards));
+            handCards.put(YOUR_HAND, game.getHand());
 
             // Mark playable
             if (game.getCanPlayInHand() != null) {

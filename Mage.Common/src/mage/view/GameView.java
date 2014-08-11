@@ -45,10 +45,10 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.players.Player;
+import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
-import org.apache.log4j.Logger;
 
 
 /**
@@ -62,7 +62,7 @@ public class GameView implements Serializable {
 
     private final int priorityTime;
     private final List<PlayerView> players = new ArrayList<>();
-    private SimpleCardsView hand;
+    private CardsView hand;
     private Set<UUID> canPlayInHand;
     private Map<String, SimpleCardsView> opponentHands;
     private final CardsView stack = new CardsView();
@@ -206,11 +206,11 @@ public class GameView implements Serializable {
         return players;
     }
 
-    public SimpleCardsView getHand() {
+    public CardsView getHand() {
         return hand;
     }
 
-    public void setHand(SimpleCardsView hand) {
+    public void setHand(CardsView hand) {
         this.hand = hand;
     }
 

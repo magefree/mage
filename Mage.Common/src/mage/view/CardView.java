@@ -35,10 +35,7 @@ import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.Card;
 import mage.cards.SplitCard;
-import mage.constants.CardType;
-import mage.constants.MageObjectType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.command.Emblem;
@@ -53,7 +50,6 @@ import mage.target.Targets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.constants.AbilityType;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -196,24 +192,21 @@ public class CardView extends SimpleCardView {
         if (card instanceof Permanent) {
             this.mageObjectType = MageObjectType.PERMANENT;
             Permanent permanent = (Permanent)card;
-            this.power = Integer.toString(card.getPower().getValue());
-            this.toughness = Integer.toString(card.getToughness().getValue());
             this.loyalty = Integer.toString(permanent.getCounters().getCount(CounterType.LOYALTY));
             this.pairedCard = permanent.getPairedCard();
             if (!permanent.getControllerId().equals(permanent.getOwnerId())) {
                 controlledByOwner = false;
             }
         } else {
-
             if (card.isCopy()) {
                 this.mageObjectType = MageObjectType.COPY_CARD;
             } else {
                 this.mageObjectType = MageObjectType.CARD;
             }
-            this.power = card.getPower().toString();
-            this.toughness = card.getToughness().toString();
             this.loyalty = "";
         }
+        this.power = Integer.toString(card.getPower().getValue());
+        this.toughness = Integer.toString(card.getToughness().getValue());
         this.cardTypes = card.getCardType();
         this.subTypes = card.getSubtype();
         this.superTypes = card.getSupertype();
