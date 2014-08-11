@@ -439,7 +439,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         }
 
         if (canAttack) {
-            g2d.setColor(new Color(0, 0, 150, 180));
+            g2d.setColor(new Color(255, 0, 0, 230));
             g2d.fillRoundRect(cardXOffset + 1, cardYOffset + 1, cardWidth - 2, cardHeight - 2, cornerSize, cornerSize);
         }
 
