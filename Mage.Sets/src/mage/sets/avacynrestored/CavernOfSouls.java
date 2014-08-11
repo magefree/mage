@@ -81,7 +81,7 @@ public class CavernOfSouls extends CardImpl {
         // {tap}: Add one mana of any color to your mana pool. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.
         this.addAbility(new ConditionalAnyColorManaAbility(1, new CavernOfSoulsManaBuilder()));
         this.addWatcher(new CavernOfSoulsWatcher());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CavernOfSoulsCantCounterEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CavernOfSoulsCantCounterEffect()));
     }
 
     public CavernOfSouls(final CavernOfSouls card) {
@@ -211,7 +211,7 @@ class CavernOfSoulsWatcher extends Watcher {
 class CavernOfSoulsCantCounterEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public CavernOfSoulsCantCounterEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.EndOfGame, Outcome.Benefit);
         staticText = null;
     }
 
