@@ -222,7 +222,7 @@ public class MageServerImpl implements MageServer {
                 if (logger.isDebugEnabled()) {
                     User user = UserManager.getInstance().getUser(userId);
                     if (user != null) {
-                        logger.debug("join tourn. tableId: " + tableId + " " + user.getName());
+                        logger.debug("join tourn. tableId: " + tableId + " " + name);
                     }
                 }                
                 if (userId == null) {
