@@ -1238,7 +1238,7 @@ public final class GamePanel extends javax.swing.JPanel {
                                         //.addPreferredGap(ComponentPlacement.RELATED)
                                 .addGroup(gl_jPanel3.createParallelGroup(Alignment.LEADING)
                                         .addGroup(gl_jPanel3.createSequentialGroup()
-                                                .addGap(80)
+                                                .addGap(75)
                                                 .addComponent(stack, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         )
                                         .addGroup(gl_jPanel3.createSequentialGroup()
