@@ -349,6 +349,8 @@ public class TournamentController {
                     tournament.leave(playerId);
                 }
             }
+        } else {
+            logger.debug("UserId not found " + userId + " tournId: " + tournament.getId());
         }
     }
 
