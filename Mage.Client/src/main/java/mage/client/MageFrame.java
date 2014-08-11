@@ -104,6 +104,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static final Logger logger = Logger.getLogger(MageFrame.class);
     private static final String liteModeArg = "-lite";
     private static final String grayModeArg = "-gray";
+    private static final String fullscreenArg = "-fullscreen";
 
     private static MageFrame instance;
 
@@ -120,6 +121,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static boolean liteMode = false;
     //TODO: make gray theme, implement theme selector in preferences dialog
     private static boolean grayMode = false;
+    private static boolean fullscreenMode = false;
 
     private static final Map<UUID, ChatPanel> chats = new HashMap<>();
     private static final Map<UUID, GamePanel> games = new HashMap<>();
@@ -317,6 +319,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         if (SystemUtil.isMacOSX()) {
             SystemUtil.enableMacOSFullScreenMode(this);
+            if (fullscreenMode) {
+                SystemUtil.toggleMacOSFullScreenMode(this);
+            }
         }
     }
 
@@ -1102,6 +1107,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                     }
                     if (arg.startsWith(grayModeArg)) {
                         grayMode = true;
+                    }
+                    if (arg.startsWith(fullscreenArg)) {
+                        fullscreenMode = true;
                     }
                 }
                 if (!liteMode) {

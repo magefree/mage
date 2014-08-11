@@ -32,6 +32,25 @@ public class SystemUtil {
         }
     }
 
+    public static void toggleMacOSFullScreenMode(Window window) {
+        String className = "com.apple.eawt.Application";
+        String methodName = "getApplication";
+        String methodName2 = "requestToggleFullScreen";
+
+        try {
+            Class<?> clazz = Class.forName(className);
+            Method method = clazz.getMethod(methodName);
+            Object appInstance = method.invoke(clazz);
+
+            Class params[] = new Class[]{Window.class};
+            method = clazz.getMethod(methodName2, params);
+            method.invoke(appInstance, window);
+        } catch (Throwable t) {
+            System.err.println("Full screen mode is not supported");
+            t.printStackTrace();
+        }
+    }
+
     public static void main(String... args) {
         System.out.println(isMacOSX());
     }
