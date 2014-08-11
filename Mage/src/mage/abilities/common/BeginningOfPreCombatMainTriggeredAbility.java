@@ -87,7 +87,7 @@ public class BeginningOfPreCombatMainTriggeredAbility extends TriggeredAbilityIm
             case OPPONENT:
                 return "At the beginning of each opponent's precombat main phase, " + generateZoneString() + getEffects().getText(modes.getMode());
             case ANY:
-                return "At the beginning of each precombat main phase, " + generateZoneString() + getEffects().getText(modes.getMode());
+                return "At the beginning of each player's precombat main phase, " + generateZoneString() + getEffects().getText(modes.getMode());
         }
         return "";
     }
