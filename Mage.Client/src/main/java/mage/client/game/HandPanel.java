@@ -17,6 +17,7 @@ public class HandPanel extends JPanel {
 
     private static final int CARD_WIDTH = 75;
     private static final double ASPECT_RATIO = 3.5 / 2.5;
+    private static final int HAND_MIN_CARDS_OFFSET_Y = -10;
 
     private boolean smallMode = false;
     private Dimension handCardDimensionBig;
@@ -31,6 +32,7 @@ public class HandPanel extends JPanel {
     public void initComponents() {
         hand = new mage.client.cards.Cards(true);
         hand.setCardDimension(getHandCardDimension());
+        hand.setMinOffsetY(HAND_MIN_CARDS_OFFSET_Y);
 
         jPanel = new JPanel();
         jScrollPane1 = new JScrollPane(jPanel);

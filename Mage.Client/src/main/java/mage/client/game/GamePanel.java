@@ -76,7 +76,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private static final Logger logger = Logger.getLogger(GamePanel.class);
     private static final String YOUR_HAND = "Your hand";
     private static final int X_PHASE_WIDTH = 55;
-    public static final int STACK_MIN_CARDS_OFFSET_Y = 7;
+    private static final int STACK_MIN_CARDS_OFFSET_Y = 7;
     private final Map<UUID, PlayAreaPanel> players = new HashMap<>();
     private final Map<UUID, ExileZoneDialog> exiles = new HashMap<>();
     private final Map<String, ShowCardsDialog> revealed = new HashMap<>();
@@ -1238,7 +1238,7 @@ public final class GamePanel extends javax.swing.JPanel {
                                         //.addPreferredGap(ComponentPlacement.RELATED)
                                 .addGroup(gl_jPanel3.createParallelGroup(Alignment.LEADING)
                                         .addGroup(gl_jPanel3.createSequentialGroup()
-                                                .addGap(85)
+                                                .addGap(80)
                                                 .addComponent(stack, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         )
                                         .addGroup(gl_jPanel3.createSequentialGroup()
