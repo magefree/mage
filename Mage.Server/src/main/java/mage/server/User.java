@@ -39,6 +39,7 @@ import java.util.concurrent.TimeUnit;
 import mage.cards.decks.Deck;
 import mage.constants.ManaType;
 import mage.game.Table;
+import mage.game.tournament.TournamentPlayer;
 import mage.interfaces.callback.ClientCallback;
 import mage.players.net.UserData;
 import mage.server.draft.DraftSession;
@@ -73,7 +74,7 @@ public class User {
     private final Map<UUID, TournamentSession> constructing;
     private final Map<UUID, Deck> sideboarding;
     private final List<UUID> watchedGames;
-    
+    private final ArrayList<UUID> tablesToRemove = new ArrayList<>();
     private String sessionId;
     private String info;
     private Date lastActivity;
@@ -365,28 +366,37 @@ public class User {
             disconnectInfo = new StringBuilder(" (discon. ").append(getDisconnectDuration()).append(")").toString();
         }
         int draft = 0, match = 0, sideboard = 0, tournament = 0, construct = 0;
+
         for (Map.Entry<UUID, Table> tableEntry : tables.entrySet()) {
             if (tableEntry != null) {
                 Table table = tableEntry.getValue();
                 if (table != null) {
                     if (table.isTournament()) {
-                        if (!table.getTournament().getPlayer(tableEntry.getKey()).isEliminated()) {
-                            switch (table.getState()) {
-                                case CONSTRUCTING:
-                                    construct++;
-                                    break;
-                                case DRAFTING:
-                                    draft++;
-                                    break;
-                                case DUELING:
-                                    tournament++;
-                                    break;
-                            }
-                            if (!isConnected()) {
-                                table.getTournament().getPlayer(tableEntry.getKey()).setDisconnectInfo(disconnectInfo);
+                        if (tableEntry.getKey() != null) {
+                            TournamentPlayer tournamentPlayer = table.getTournament().getPlayer(tableEntry.getKey());
+                            if (tournamentPlayer != null &&  !tournamentPlayer.isEliminated()) {
+                                switch (table.getState()) {
+                                    case CONSTRUCTING:
+                                        construct++;
+                                        break;
+                                    case DRAFTING:
+                                        draft++;
+                                        break;
+                                    case DUELING:
+                                        tournament++;
+                                        break;
+                                }
+                                if (!isConnected()) {
+                                    table.getTournament().getPlayer(tableEntry.getKey()).setDisconnectInfo(disconnectInfo);
+                                } else {
+                                    table.getTournament().getPlayer(tableEntry.getKey()).setDisconnectInfo("");
+                                }
                             } else {
-                                table.getTournament().getPlayer(tableEntry.getKey()).setDisconnectInfo("");
+                                tablesToRemove.add(tableEntry.getKey());
+                                logger.error(getName() + " tournament player missing - tournamentId:" + table.getId(), null);
                             }
+                        } else {
+                            logger.error(getName() + " tournament key missing - tournamentId: " + table.getId(), null);
                         }
                     } else {
                         switch (table.getState()) {
@@ -400,6 +410,12 @@ public class User {
                     }
                 }
             }
+        }
+        if (!tablesToRemove.isEmpty()) {
+            for (UUID tableKey : tablesToRemove) {
+                tables.remove(tableKey);
+            }
+            tablesToRemove.clear();
         }
         if (match > 0) {
             sb.append("Match: ").append(match).append(" ");
