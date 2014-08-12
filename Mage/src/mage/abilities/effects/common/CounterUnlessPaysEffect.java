@@ -32,6 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
@@ -85,8 +86,14 @@ public class CounterUnlessPaysEffect extends OneShotEffect {
                 } else  {
                     costToPay = new GenericManaCost(genericMana.calculate(game, source));
                 }
+                String message;
+                if (costToPay instanceof ManaCost) {
+                    message = "Would you like to pay " + costToPay.getText() + " to prevent counter effect?";
+                } else {
+                    message = costToPay.getText() + " to prevent counter effect?";
+                }
                 costToPay.clearPaid();
-                if (!costToPay.pay(source, game, spell.getSourceId(), spell.getControllerId(), false)) {
+                if (!(player.chooseUse(Outcome.Benefit, message, game) && costToPay.pay(source, game, spell.getSourceId(), spell.getControllerId(), false))) {
                     return game.getStack().counter(spell.getId(), source.getSourceId(), game);
                 }
                 return true;
@@ -97,6 +104,10 @@ public class CounterUnlessPaysEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+
         StringBuilder sb = new StringBuilder();
         if (mode.getTargets().size() == 0) {
             sb.append("counter it");
