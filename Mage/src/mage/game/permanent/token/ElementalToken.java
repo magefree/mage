@@ -46,7 +46,7 @@ public class ElementalToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(1);
 
-        this.setOriginalExpansionSetCode("");
+        this.setOriginalExpansionSetCode("CON");
     }
 
 }
