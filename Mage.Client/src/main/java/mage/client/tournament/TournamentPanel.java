@@ -192,7 +192,6 @@ public class TournamentPanel extends javax.swing.JPanel {
     }
 
     public void update(TournamentView tournament) {
-
         if (!firstInitDone) {
             Component c = this.getParent();
             while (c != null && !(c instanceof TournamentPane)) {
@@ -689,7 +688,7 @@ class UpdateTournamentTask extends SwingWorker<Void, TournamentView> {
 
     @Override
     protected void process(List<TournamentView> view) {
-        if (view != null) { // if user disconnects, view can be null for a short time
+        if (view != null && view.size() > 0) { // if user disconnects, view can be null for a short time
             panel.update(view.get(0));
         }
     }
