@@ -132,7 +132,7 @@ class ResearchEffect extends OneShotEffect {
                 if (player.choose(Outcome.Benefit, filteredCards, target, game)) {
                     Card card = player.getSideboard().get(target.getFirstTarget(), game);
                     if (card != null) {
-                        card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
                         count++;
                         textToAsk = new StringBuilder(choiceText);
                         textToAsk.append(" (");

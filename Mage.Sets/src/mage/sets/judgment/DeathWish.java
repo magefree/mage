@@ -27,23 +27,23 @@
  */
 package mage.sets.judgment;
 
-import java.util.Set;
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -118,8 +118,7 @@ class DeathWishEffect extends OneShotEffect {
                 if (player.choose(Outcome.Benefit, filteredCards, target, game)) {
                     Card card = player.getSideboard().get(target.getFirstTarget(), game);
                     if (card != null) {
-
-                        card.moveToZone(Zone.HAND, source.getId(), game, false);
+                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                     }
                 }
             }
