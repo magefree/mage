@@ -638,7 +638,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             // So discard is also successful if card is moved to another zone by replacement effect!
             card.moveToZone(Zone.GRAVEYARD, source==null?null:source.getSourceId(), game, false);
             game.informPlayers(new StringBuilder(name).append(" discards ").append(card.getName()).toString());
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, card.getId(), source==null?null:source.getId(), playerId));
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, card.getId(), source==null?null:source.getSourceId(), playerId));
             return true;
         }
         return false;
