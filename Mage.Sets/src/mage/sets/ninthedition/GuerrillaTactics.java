@@ -27,9 +27,6 @@
  */
 package mage.sets.ninthedition;
 
-import java.util.UUID;
-import mage.MageObject;
-
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -38,8 +35,9 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.stack.StackObject;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -88,16 +86,9 @@ class GuerrillaTacticsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (GameEvent.EventType.DISCARDED_CARD.equals(event.getType()) 
-                && event.getSourceId() != null // can be null if e.g. discard down to hand limit
-                && event.getTargetId().equals(getSourceId())
-                && event.getPlayerId().equals(getControllerId())) {
-            MageObject mageObject = game.getObject(event.getSourceId());
-            if (mageObject != null && (mageObject instanceof StackObject)) {
-                return game.getOpponents(this.getControllerId()).contains(((StackObject)mageObject).getControllerId());
-            }
-        }
-        return false;
+        return GameEvent.EventType.DISCARDED_CARD.equals(event.getType()) &&
+                game.getOpponents(this.getControllerId()).contains(game.getControllerId(event.getSourceId())) &&
+                getSourceId().equals(event.getTargetId());
     }
 
     @Override
