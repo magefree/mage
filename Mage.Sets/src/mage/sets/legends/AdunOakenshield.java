@@ -63,6 +63,7 @@ public class AdunOakenshield extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
+        //{B}{R}{G}, {T}: Return target creature card from your graveyard to your hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(),new ManaCostsImpl("{B}{R}{G}"));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         ability.addCost(new TapSourceCost());
