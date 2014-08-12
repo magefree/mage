@@ -52,14 +52,6 @@ import mage.players.Player;
  */
 public class LoxodonSmiter extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
-    }
-
     public LoxodonSmiter(UUID ownerId) {
         super(ownerId, 178, "Loxodon Smiter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
         this.expansionSetCode = "RTR";
@@ -71,10 +63,10 @@ public class LoxodonSmiter extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // Flying
+        // Loxodon Smiter can't be countered.
         this.addAbility(new CantCounterAbility());
 
-        // Sacrifice Judge's Familiar: Counter target instant or sorcery spell unless its controller pays {1}.
+        // If a spell or ability an opponent controls causes you to discard Loxodon Smiter, put it onto the battlefield instead of putting it into your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.HAND, new LoxodonSmiterEffect()));
     }
 

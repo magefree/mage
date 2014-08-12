@@ -28,11 +28,12 @@
 package mage.sets.morningtide;
 
 import java.util.UUID;
+
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.EvokeAbility;
@@ -58,7 +59,7 @@ public class Nevermaker extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Nevermaker leaves the battlefield, put target nonland permanent on top of its owner's library.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new PutOnLibraryTargetEffect(true), false);
+        Ability ability = new LeavesBattlefieldTriggeredAbility(new PutOnLibraryTargetEffect(true), false);
         Target target = new TargetNonlandPermanent();
         ability.addTarget(target);
         this.addAbility(ability);
