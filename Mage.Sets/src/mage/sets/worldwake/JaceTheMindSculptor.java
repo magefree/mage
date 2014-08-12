@@ -64,18 +64,21 @@ public class JaceTheMindSculptor extends CardImpl {
         this.color.setBlue(true);
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
-
+        // +2: Look at the top card of target player's library. You may put that card on the bottom of that player's library.
         LoyaltyAbility ability1 = new LoyaltyAbility(new JaceTheMindSculptorEffect1(), 2);
         ability1.addTarget(new TargetPlayer());
         this.addAbility(ability1);
 
+        // 0: Draw three cards, then put two cards from your hand on top of your library in any order.
         LoyaltyAbility ability2 = new LoyaltyAbility(new JaceTheMindSculptorEffect2(), 0);
         this.addAbility(ability2);
 
+        // −1: Return target creature to its owner's hand.
         LoyaltyAbility ability3 = new LoyaltyAbility(new ReturnToHandTargetEffect(), -1);
         ability3.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability3);
-
+        
+        // −12: Exile all cards from target player's library, then that player shuffles his or her hand into his or her library.
         LoyaltyAbility ability4 = new LoyaltyAbility(new JaceTheMindSculptorEffect3(), -12);
         ability4.addTarget(new TargetPlayer());
         this.addAbility(ability4);
@@ -114,16 +117,15 @@ class JaceTheMindSculptorEffect1 extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(source.getFirstTarget());
         if (controller != null && player != null) {
-            Card c = player.getLibrary().getFromTop(game);
-            if (c != null) {
+            Card card = player.getLibrary().getFromTop(game);
+            if (card != null) {
                 Cards cards = new CardsImpl();
-                cards.add(c);
+                cards.add(card);
                 controller.lookAtCards("Jace, the Mind Sculptor", cards, game);
                 if (controller.chooseUse(outcome, "Do you wish to put card on the bottom of player's library?", game)) {
-                    Card card = player.getLibrary().removeFromTop(game);
-                    if (card != null) {
                         controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, false, false);
-                    }
+                } else {
+                    game.informPlayers(controller.getName() + " puts the card back on top of the library.");
                 }
                 return true;
             }
