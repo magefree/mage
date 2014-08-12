@@ -44,7 +44,7 @@ import java.util.UUID;
 
 /**
  *
- * @author Alec
+ * @author shieldal
  */
 public class AdunOakenshield extends CardImpl {
 
@@ -67,7 +67,6 @@ public class AdunOakenshield extends CardImpl {
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-
     }
 
     public AdunOakenshield(final AdunOakenshield card) {
