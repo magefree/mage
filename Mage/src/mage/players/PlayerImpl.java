@@ -2400,7 +2400,15 @@ public abstract class PlayerImpl implements Player, Serializable {
                     sb.append("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ");
                 }
             }
-            sb.append("to the ").append(toTop ? "top":"bottom").append(" of his or her library");
+            sb.append("to the ").append(toTop ? "top":"bottom");
+            if (card.getOwnerId().equals(getId())) {
+                sb.append(" of his or her library");
+            } else {
+                Player player = game.getPlayer(card.getOwnerId());
+                if (player != null) {
+                    sb.append(" of ").append(player.getName()).append("'s library");
+                }
+            }
             game.informPlayers(sb.toString());
             result = true;
         }
