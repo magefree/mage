@@ -82,7 +82,7 @@ public class HushwingGryff extends CardImpl {
 class HushwingGryffEffect extends ContinuousRuleModifiyingEffectImpl {
 
     HushwingGryffEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment, false, false);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment, false, true);
         staticText = "Creatures entering the battlefield don't cause abilities to trigger";
     }
 
