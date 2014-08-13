@@ -25,56 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.sets.starter2000;
 
 import java.util.UUID;
 
-import mage.abilities.effects.common.TapEnchantedEffect;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.SkipEnchantedUntapEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.FlashAbility;
+import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterCreatureCard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
- * @author LevelX
+ *
+ * @author dustinconrad
  */
-public class MysticRestraints extends CardImpl {
+public class BreathOfLife extends CardImpl {
 
-    public MysticRestraints(UUID ownerId) {
-        super(ownerId, 76, "Mystic Restraints", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Aura");
+    public BreathOfLife(UUID ownerId) {
+        super(ownerId, 2, "Breath of Life", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{W}");
+        this.expansionSetCode = "S00";
 
-        this.color.setBlue(true);
+        this.color.setWhite(true);
 
-        // Flash
-        this.addAbility(FlashAbility.getInstance());
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        // When Mystic Restraints enters the battlefield, tap enchanted creature.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()));
-        // Enchanted creature doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipEnchantedUntapEffect()));
+        // Return target creature card from your graveyard to the battlefield.
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
     }
 
-    public MysticRestraints(final MysticRestraints card) {
+    public BreathOfLife(final BreathOfLife card) {
         super(card);
     }
 
     @Override
-    public MysticRestraints copy() {
-        return new MysticRestraints(this);
+    public BreathOfLife copy() {
+        return new BreathOfLife(this);
     }
 }

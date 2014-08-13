@@ -25,56 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.sets.vintagemasters;
 
 import java.util.UUID;
-
-import mage.abilities.effects.common.TapEnchantedEffect;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.SkipEnchantedUntapEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.FlashAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.SacrificeEffect;
+import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TimingRule;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
- * @author LevelX
+ *
+ * @author dustinconrad
  */
-public class MysticRestraints extends CardImpl {
+public class ChainersEdict extends CardImpl {
 
-    public MysticRestraints(UUID ownerId) {
-        super(ownerId, 76, "Mystic Restraints", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Aura");
+    public ChainersEdict(UUID ownerId) {
+        super(ownerId, 108, "Chainer's Edict", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
+        this.expansionSetCode = "VMA";
 
-        this.color.setBlue(true);
+        this.color.setBlack(true);
 
-        // Flash
-        this.addAbility(FlashAbility.getInstance());
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        // When Mystic Restraints enters the battlefield, tap enchanted creature.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()));
-        // Enchanted creature doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipEnchantedUntapEffect()));
+        // Target player sacrifices a creature.
+        // Flashback {5}{B}{B}
+        this.getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target player"));
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{B}{B}"), TimingRule.SORCERY));
     }
 
-    public MysticRestraints(final MysticRestraints card) {
+    public ChainersEdict(final ChainersEdict card) {
         super(card);
     }
 
     @Override
-    public MysticRestraints copy() {
-        return new MysticRestraints(this);
+    public ChainersEdict copy() {
+        return new ChainersEdict(this);
     }
 }
