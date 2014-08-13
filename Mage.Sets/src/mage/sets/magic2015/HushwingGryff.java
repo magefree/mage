@@ -29,6 +29,7 @@ package mage.sets.magic2015;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
@@ -89,6 +90,15 @@ class HushwingGryffEffect extends ContinuousRuleModifiyingEffectImpl {
         super(effect);
     }
 
+    @Override
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
+        MageObject mageObject = game.getObject(event.getSourceId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (mageObject != null && sourceObject != null) {
+            return sourceObject + " prevented ability of " + mageObject + " to trigger";
+        }
+        return null;
+    }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
