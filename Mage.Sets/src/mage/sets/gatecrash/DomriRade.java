@@ -80,7 +80,7 @@ public class DomriRade extends CardImpl {
         // -2: Target creature you control fights another target creature.
         LoyaltyAbility ability2 = new LoyaltyAbility(new FightTargetsEffect(), -2);
         ability2.addTarget(new TargetControlledCreaturePermanent());
-        ability2.addTarget(new TargetOtherCreaturePermanent());
+        ability2.addTarget(new DomriRadeTargetOtherCreaturePermanent());
         this.addAbility(ability2);
 
         // -7: You get an emblem with "Creatures you control have double strike, trample, hexproof and haste."
@@ -153,13 +153,13 @@ class DomriRadeEmblem extends Emblem {
     }
 }
 
-class TargetOtherCreaturePermanent extends TargetCreaturePermanent {
+class DomriRadeTargetOtherCreaturePermanent extends TargetCreaturePermanent {
     
-    public TargetOtherCreaturePermanent() {
+    public DomriRadeTargetOtherCreaturePermanent() {
         super();
     }
 
-    public TargetOtherCreaturePermanent(final TargetOtherCreaturePermanent target) {
+    public DomriRadeTargetOtherCreaturePermanent(final DomriRadeTargetOtherCreaturePermanent target) {
         super(target);
     }
 
@@ -172,8 +172,8 @@ class TargetOtherCreaturePermanent extends TargetCreaturePermanent {
     }
 
     @Override
-    public TargetOtherCreaturePermanent copy() {
-        return new TargetOtherCreaturePermanent(this);
+    public DomriRadeTargetOtherCreaturePermanent copy() {
+        return new DomriRadeTargetOtherCreaturePermanent(this);
     }
 
 }

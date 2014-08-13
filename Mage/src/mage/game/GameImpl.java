@@ -430,7 +430,7 @@ public abstract class GameImpl implements Game, Serializable {
             boolean result = checkIfGameIsOver();
             return result;
         }  else {
-            logger.debug("game.gameOver -> player leaves " + playerId );
+            logger.debug("Game over for player Id: " + playerId + " gameId " + getId());
             leave(playerId);
             return true;
         }
@@ -455,7 +455,7 @@ public abstract class GameImpl implements Game, Serializable {
             end();
             for (Player player: state.getPlayers().values()) {
                 if (!player.hasLeft() && !player.hasLost()) {
-                    logger.debug(new StringBuilder("game.checkIfGameIsOver ->Player ").append(player.getName()).append(" won the game ").append(this.getId()));
+                    logger.debug(new StringBuilder("Player ").append(player.getName()).append(" has won gameId: ").append(this.getId()));
                     player.won(this);
                 }
             }            
@@ -820,16 +820,15 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     protected UUID findWinnersAndLosers() {
-        logger.debug(new StringBuilder("GameImpl.findWinnersAndLosers start gameId ").append(this.getId()));
         UUID winnerIdFound = null;
         for (Player player: state.getPlayers().values()) {
             if (player.hasWon()) {
-                logger.debug(new StringBuilder("GameImpl.findWinnersAndLosers playerHasWon ").append(player.getId()));
+                logger.debug(player.getName() + " has won gameId: " + getId());
                 winnerIdFound = player.getId();
                 break;
             }
             if (!player.hasLost() && !player.hasLeft()) {
-                logger.debug(new StringBuilder("GameImpl.findWinnersAndLosers player ").append(player.getId()));
+                logger.debug(player.getName() + " has not lost so he won gameId: " + this.getId());
                 player.won(this);
                 winnerIdFound = player.getId();
                 break;
