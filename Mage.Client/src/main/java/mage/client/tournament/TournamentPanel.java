@@ -192,6 +192,9 @@ public class TournamentPanel extends javax.swing.JPanel {
     }
 
     public void update(TournamentView tournament) {
+        if (tournament == null) {
+            return;
+        }
         if (!firstInitDone) {
             Component c = this.getParent();
             while (c != null && !(c instanceof TournamentPane)) {
