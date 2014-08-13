@@ -139,7 +139,9 @@ public class MageServerImpl implements MageServer {
                 if (logger.isDebugEnabled()) {
                     User user = UserManager.getInstance().getUser(userId);
                     if (user != null) {
-                        logger.debug(user.getName() + " created tableId: " + table.getTableId());
+                        logger.debug("TABLE created - tableId: " + table.getTableId());
+                        logger.debug("- " + user.getName() + " userId: " + user.getId());
+                        logger.debug("- chatId: " + TableManager.getInstance().getChatId(table.getTableId()));                        
                     }
                 }
                 LogServiceImpl.instance.log(LogKeys.KEY_TABLE_CREATED, sessionId, userId.toString(), table.getTableId().toString());

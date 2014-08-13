@@ -65,7 +65,7 @@ public class ChatManager {
         if (chatSessions.containsKey(chatId)) {
             chatSessions.get(chatId).join(userId);
         } else {
-            logger.warn("User could not join chatId: " + chatId +" userId: " + userId);
+            logger.trace("User could not join chatId: " + chatId +" userId: " + userId);
         }        
         
     }
@@ -81,7 +81,7 @@ public class ChatManager {
             chatSessions.remove(chatId);
             logger.debug("Chat removed - chatId: " + chatId);
         } else {
-            logger.warn("Chat to destroy does not exist - chatId: " + chatId);
+            logger.trace("Chat to destroy does not exist - chatId: " + chatId);
         } 
     }
 

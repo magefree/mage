@@ -415,7 +415,7 @@ public class HumanPlayer extends PlayerImpl {
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
         updateGameStatePriority("chooseTargetAmount", game);
         while (!abort) {
-            game.fireSelectTargetEvent(playerId, target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), target.possibleTargets(source==null?null:source.getId(), playerId, game), target.isRequired(source), null);
+            game.fireSelectTargetEvent(playerId, target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), target.possibleTargets(source==null?null:source.getSourceId(), playerId, game), target.isRequired(source), null);
             waitForResponse(game);
             if (response.getUUID() != null) {
                 if (target.canTarget(response.getUUID(), source, game)) {
