@@ -104,7 +104,7 @@ public class PutTopCardOfLibraryIntoGraveEachPlayerEffect extends OneShotEffect 
             for (int i = 0; i < cardsCount; i++) {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getId(), game, true);
+                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
                 }
             }
         }

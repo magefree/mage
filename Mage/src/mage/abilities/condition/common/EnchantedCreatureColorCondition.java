@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
 
 public class EnchantedCreatureColorCondition implements Condition {
     
-    private FilterPermanent filter = new FilterCreaturePermanent();
+    private final FilterPermanent filter = new FilterCreaturePermanent();
 
     public EnchantedCreatureColorCondition(ObjectColor color){
         filter.add(new ColorPredicate(color));
@@ -53,11 +53,11 @@ public class EnchantedCreatureColorCondition implements Condition {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent enchantement = game.getPermanent(source.getSourceId());
-        if (enchantement != null) {
-            Permanent creature = game.getPermanent(enchantement.getAttachedTo());
+        Permanent enchantment = game.getPermanent(source.getSourceId());
+        if (enchantment != null) {
+            Permanent creature = game.getPermanent(enchantment.getAttachedTo());
             if (creature != null) {
-                if(filter.match(creature, source.getId(), enchantement.getControllerId(), game)){
+                if(filter.match(creature, source.getSourceId(), enchantment.getControllerId(), game)){
                     return true;
                 }
             }

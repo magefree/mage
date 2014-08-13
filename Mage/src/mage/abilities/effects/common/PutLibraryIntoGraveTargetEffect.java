@@ -80,7 +80,7 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect {
             for (int i = 0; i < cardsCount; i++) {
                 Card card = player.getLibrary().getFromTop(game);
                 if (card != null) {
-                    player.moveCardToGraveyardWithInfo(card, source.getId(), game, Zone.LIBRARY);
+                    player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                 }
                 else {
                     break;

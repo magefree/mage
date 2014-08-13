@@ -63,7 +63,7 @@ public class ReturnToBattlefieldUnderYourControlAttachedEffect extends OneShotEf
             Card card = game.getCard(((Permanent)object).getId());
             if (card != null) {
                 Zone currentZone = game.getState().getZone(card.getId());
-                if (card.putOntoBattlefield(game, currentZone, source.getId(), source.getControllerId())) {
+                if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), source.getControllerId())) {
                     return true;
                 }
             }

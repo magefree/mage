@@ -60,7 +60,7 @@ public class ReturnToBattlefieldUnderYourControlSourceEffect extends OneShotEffe
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
             Zone currentZone = game.getState().getZone(card.getId());
-            if (card.putOntoBattlefield(game, currentZone, source.getId(), source.getControllerId())) {
+            if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), source.getControllerId())) {
                 return true;
             }
         }

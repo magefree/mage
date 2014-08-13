@@ -87,7 +87,7 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
                         return false;
                     }
                     game.informPlayers(controller.getName() + " moves " + card.getLogName() + " to " + zone.toString().toLowerCase());
-                    card.moveToZone(zone, source.getId(), game, tapped);
+                    card.moveToZone(zone, source.getSourceId(), game, tapped);
                 }
                 exile.clear();
             }

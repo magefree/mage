@@ -63,6 +63,7 @@ public class TargetActivatedOrTriggeredAbility extends TargetObject {
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
+        // rule 114.4. A spell or ability on the stack is an illegal target for itself.
         if (source != null && source.getId().equals(id)) {
             return false;
         }

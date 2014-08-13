@@ -56,10 +56,10 @@ public class ControlsBiggestOrTiedCreatureCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Set<UUID> controllers = new HashSet<UUID>();
+        Set<UUID> controllers = new HashSet<>();
         Integer maxPower = null;
 
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getId(), game);
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
         for (Permanent permanent : permanents) {
             if (permanent == null) {
                 continue;

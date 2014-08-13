@@ -41,7 +41,7 @@ public class ReturnToHandSpellEffect extends PostResolveEffect implements MageSi
 
     @Override
     public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
-        card.moveToZone(Zone.HAND, source.getId(), game, false);
+        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
     }
 }
 

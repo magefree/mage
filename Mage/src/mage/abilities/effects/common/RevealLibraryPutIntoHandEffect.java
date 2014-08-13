@@ -93,7 +93,7 @@ public class RevealLibraryPutIntoHandEffect extends OneShotEffect {
         Set<Card> cardsList = cards.getCards(game);
         for (Card card : cardsList) {
             if (filter.match(card, game)) {
-                card.moveToZone(Zone.HAND, source.getId(), game, true);
+                card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                 cards.remove(card);
             }
         }
@@ -109,13 +109,13 @@ public class RevealLibraryPutIntoHandEffect extends OneShotEffect {
             }
             if (card != null) {
                 cards.remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
             }
         }
 
         if (cards.size() == 1) {
             Card card = cards.get(cards.iterator().next(), game);
-            card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
         }
 
         return true;

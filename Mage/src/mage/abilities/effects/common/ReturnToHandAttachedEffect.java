@@ -62,7 +62,7 @@ public class ReturnToHandAttachedEffect extends OneShotEffect {
         if (object != null && object instanceof Permanent) {
             Card card = game.getCard(((Permanent)object).getId());
             if (card != null) {
-                if (card.moveToZone(Zone.HAND, source.getId(), game, false)) {
+                if (card.moveToZone(Zone.HAND, source.getSourceId(), game, false)) {
                     return true;
                 }
             }

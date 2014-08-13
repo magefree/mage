@@ -173,20 +173,20 @@ public class LookLibraryControllerEffect extends OneShotEffect {
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {
                         cards.remove(card);
-                        card.moveToZone(targetZoneLookedCards, source.getId(), game, putOnTop);
+                        card.moveToZone(targetZoneLookedCards, source.getSourceId(), game, putOnTop);
                         game.informPlayers(player.getName() + " moves a card to " + targetZoneLookedCards.toString());
                     }
                     target.clearChosen();
                 }
                 if (cards.size() == 1) {
                     Card card = cards.get(cards.iterator().next(), game);
-                    card.moveToZone(targetZoneLookedCards, source.getId(), game, putOnTop);
+                    card.moveToZone(targetZoneLookedCards, source.getSourceId(), game, putOnTop);
                     game.informPlayers(player.getName() + " moves a card to " + targetZoneLookedCards.toString());
                 }
                 break;
             case GRAVEYARD: 
                 for (Card card : cards.getCards(game)) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getId(), game, true);
+                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
                 }
                 break;
             default:

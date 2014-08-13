@@ -124,7 +124,7 @@ class NinjutsuEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId());
+            card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), source.getControllerId());
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
                 UUID defendingPlayerId = null;

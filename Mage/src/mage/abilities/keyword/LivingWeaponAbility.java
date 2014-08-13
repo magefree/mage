@@ -46,7 +46,7 @@ class LivingWeaponEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             GermToken token = new GermToken();
-            token.putOntoBattlefield(1, game, source.getId(), source.getControllerId());
+            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
             Permanent p = game.getPermanent(token.getLastAddedToken());
             if (p != null) {
                  p.addAttachment(source.getSourceId(), game);

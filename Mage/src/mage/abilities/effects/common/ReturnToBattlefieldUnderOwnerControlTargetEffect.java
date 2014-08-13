@@ -60,7 +60,7 @@ public class ReturnToBattlefieldUnderOwnerControlTargetEffect extends OneShotEff
         Card card = game.getCard(targetPointer.getFirst(game, source));
         if (card != null) {
             Zone currentZone = game.getState().getZone(card.getId());
-            if (card.putOntoBattlefield(game, currentZone, source.getId(), card.getOwnerId())) {
+            if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), card.getOwnerId())) {
                 return true;
             }
         }

@@ -309,7 +309,7 @@ public class ManaPool implements Serializable {
             } else {
                 this.manaItems.add(new ManaPoolItem(mana.getRed(), mana.getGreen(), mana.getBlue(), mana.getWhite(), mana.getBlack(), mana.getColorless(), source.getSourceId(), mana.getFlag()));
             }
-            GameEvent event = GameEvent.getEvent(GameEvent.EventType.MANA_ADDED, source.getSourceId(), source.getId(), source.getControllerId());
+            GameEvent event = GameEvent.getEvent(GameEvent.EventType.MANA_ADDED, source.getId(), source.getSourceId(), source.getControllerId());
             event.setData(mana.toString());
             game.fireEvent(event);
         }

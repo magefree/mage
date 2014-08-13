@@ -64,7 +64,7 @@ public class ReturnToBattlefieldUnderOwnerControlAttachedEffect extends OneShotE
             Card card = game.getCard(((Permanent) object).getId());
             if (card != null) {
                 Zone currentZone = game.getState().getZone(card.getId());
-                if (card.putOntoBattlefield(game, currentZone, source.getId(), card.getOwnerId())) {
+                if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), card.getOwnerId())) {
                     return true;
                 }
             }

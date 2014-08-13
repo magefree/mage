@@ -267,12 +267,12 @@ public abstract class TargetImpl implements Target {
             amount += targets.get(id);
         }
         if (source != null && !skipEvent) {
-            if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getId(), source.getControllerId()))) {
+            if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getSourceId(), source.getControllerId()))) {
                 targets.put(id, amount);
                 rememberZoneChangeCounter(id, game);
                 chosen = targets.size() >= minNumberOfTargets;
                 if (!skipEvent) {
-                    game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getId(), source.getControllerId()));
+                    game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getSourceId(), source.getControllerId()));
                 }
             }
         } else {
@@ -336,7 +336,7 @@ public abstract class TargetImpl implements Target {
                     continue; // it's not legal so continue to have a look at other targeted objects
                 }
             }
-            if (!notTarget && game.replaceEvent(GameEvent.getEvent(EventType.TARGET, targetId, source.getId(), source.getControllerId()))) {
+            if (!notTarget && game.replaceEvent(GameEvent.getEvent(EventType.TARGET, targetId, source.getSourceId(), source.getControllerId()))) {
                 replacedTargets++;
                 continue;
             }

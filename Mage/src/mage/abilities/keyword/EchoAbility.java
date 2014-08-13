@@ -144,7 +144,7 @@ class EchoEffect extends OneShotEffect {
         if (player != null && permanent != null) { 
             if (player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() /* + " or sacrifice " + permanent.getName() */ + "?", game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getId(), source.getControllerId(), false)) {
+                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                     return true;
                                 }
             }
