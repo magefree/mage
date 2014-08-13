@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -53,7 +54,7 @@ public class LifesLegacy extends CardImpl {
         this.color.setGreen(true);
 
         // As an additional cost to cast Life's Legacy, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));
         // Draw cards equal to the sacrificed creature's power.
         this.getSpellAbility().addEffect(new LifesLegacyEffect());
 

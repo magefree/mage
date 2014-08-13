@@ -29,19 +29,20 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
+import mage.abilities.LoyaltyAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.Effects;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.TrampleAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.Effects;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.effects.common.UntapTargetEffect;
-import mage.abilities.keyword.TrampleAbility;
-import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.BeastToken;
@@ -60,18 +61,25 @@ public class GarrukWildspeaker extends CardImpl {
         this.expansionSetCode = "M10";
         this.subtype.add("Garruk");
         this.color.setGreen(true);
+
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
-
+        // +1: Untap two target lands.
         LoyaltyAbility ability1 = new LoyaltyAbility(new UntapTargetEffect(), 1);
         ability1.addTarget(new TargetLandPermanent(2));
         this.addAbility(ability1);
 
+        // −1: Put a 3/3 green Beast creature token onto the battlefield.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(beastToken), -1));
 
+        // −4: Creatures you control get +3/+3 and gain trample until end of turn.
         Effects effects1 = new Effects();
-        effects1.add(new BoostControlledEffect(3, 3, Duration.EndOfTurn));
-        effects1.add(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
+        Effect effect = new BoostControlledEffect(3, 3, Duration.EndOfTurn);
+        effect.setText("Creatures you control get +3/+3");
+        effects1.add(effect);
+        effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent());
+        effect.setText("and gain trample until end of turn");
+        effects1.add(effect);
         this.addAbility(new LoyaltyAbility(effects1, -4));
     }
 

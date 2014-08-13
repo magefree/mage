@@ -64,9 +64,16 @@ public class ProteanHydra extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
+
+        // Protean Hydra enters the battlefield with X +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new ProteanHydraEffect1(), "with X +1/+1 counters on it"));
-        this.addAbility(new ProteanHydraAbility());
+        
+        // If damage would be dealt to Protean Hydra, prevent that damage and remove that many +1/+1 counters from it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProteanHydraEffect2()));
+
+        // Whenever a +1/+1 counter is removed from Protean Hydra, put two +1/+1 counters on it at the beginning of the next end step.
+        this.addAbility(new ProteanHydraAbility());
+
     }
 
     public ProteanHydra(final ProteanHydra card) {
@@ -115,11 +122,11 @@ public class ProteanHydra extends CardImpl {
 
         public ProteanHydraEffect2() {
             super(Duration.WhileOnBattlefield);
+            staticText = "If damage would be dealt to {this}, prevent that damage and remove that many +1/+1 counters from it";
         }
 
         public ProteanHydraEffect2(final ProteanHydraEffect2 effect) {
-            super(effect);
-            staticText = "If damage would be dealt to {this}, prevent that damage and remove that many +1/+1 counters from it";
+            super(effect);            
         }
 
         @Override

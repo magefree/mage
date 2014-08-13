@@ -28,6 +28,7 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -51,8 +52,12 @@ public class RangersGuile extends CardImpl {
 
         // Target creature you control gets +1/+1 and gains hexproof until end of turn.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.EndOfTurn));
+        Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
+        effect.setText("Target creature you control gets +1/+1");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains hexproof until end of turn");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public RangersGuile(final RangersGuile card) {
