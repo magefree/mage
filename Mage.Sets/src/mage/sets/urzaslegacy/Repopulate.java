@@ -92,7 +92,7 @@ class RepopulateEffect extends OneShotEffect {
             Set<Card> cards = player.getGraveyard().getCards(new FilterCreatureCard(), game);
             for(Card card : cards)
             {
-                card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
             }
             player.shuffleLibrary(game);
             return true;

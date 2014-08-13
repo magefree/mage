@@ -111,7 +111,7 @@ class CitanulFluteSearchEffect extends OneShotEffect {
                 Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
                 Cards cards = new CardsImpl();
                 if (card != null){
-                    card.moveToZone(Zone.HAND, source.getId(), game, false);
+                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                     cards.add(card);
                 }
                 String name = "Reveal";

@@ -100,7 +100,7 @@ class TreefolkMysticEffect extends OneShotEffect {
                 Permanent aura = game.getPermanent(uuid);
                 if(aura != null && aura.getSubtype().contains("Aura"))
                 {
-                    aura.destroy(source.getId(), game, false);
+                    aura.destroy(source.getSourceId(), game, false);
                 }
             }
         }

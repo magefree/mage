@@ -107,7 +107,7 @@ class RelicOfProgenitusEffect extends OneShotEffect {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     targetPlayer.getGraveyard().remove(card);
-                    card.moveToExile(null, null, source.getId(), game);
+                    card.moveToExile(null, null, source.getSourceId(), game);
                 }
                 return true;
             }
@@ -145,7 +145,7 @@ class RelicOfProgenitusEffect2 extends OneShotEffect {
                 for (UUID cid : player.getGraveyard().copy()) {
                     Card card = game.getCard(cid);
                     if (card != null) {
-                        card.moveToExile(null, null, source.getId(), game);
+                        card.moveToExile(null, null, source.getSourceId(), game);
                     }
                 }
             }

@@ -104,7 +104,7 @@ class MoldgrafMonstrosityEffect extends OneShotEffect {
             for (int i = 0; i < 2; i++) {
                 Card card = getRandomCard(cards);
                 if (card != null) {
-                    returned |= card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId());
+                    returned |= card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
                     cards.remove(card);
                 }
             }

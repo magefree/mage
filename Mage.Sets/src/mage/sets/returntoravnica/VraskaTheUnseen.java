@@ -183,11 +183,11 @@ class VraskaTheUnseenTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER && ((DamagedPlaneswalkerEvent) event).isCombatDamage() && event.getTargetId() == sourceId) {
 
-            Permanent damageSource = game.getPermanent(event.getSourceId());
-            if (damageSource != null && damageSource.getCardType().contains(CardType.CREATURE)) {
-                    Effect effect = this.getEffects().get(0);
-                    effect.setTargetPointer(new FixedTarget(damageSource.getId()));
-                    return true;
+            Permanent sourceOfDamage = game.getPermanent(event.getSourceId());
+            if (sourceOfDamage != null && sourceOfDamage.getCardType().contains(CardType.CREATURE)) {
+                Effect effect = this.getEffects().get(0);
+                effect.setTargetPointer(new FixedTarget(sourceOfDamage.getId()));
+                return true;
             }
         }
         return false;

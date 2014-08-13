@@ -102,7 +102,7 @@ class LairDelveEffect extends OneShotEffect {
         Set<Card> cardsList = cards.getCards(game);
         for (Card card : cardsList) {
             if (card.getCardType().contains(CardType.CREATURE) || card.getCardType().contains(CardType.LAND)) {
-                card.moveToZone(Zone.HAND, source.getId(), game, true);
+                card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                 cards.remove(card);
             }
         }
@@ -113,13 +113,13 @@ class LairDelveEffect extends OneShotEffect {
             Card card = cards.get(target.getFirstTarget(), game);
             if (card != null) {
                 cards.remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
             }
             target.clearChosen();
         }
         if (cards.size() == 1) {
             Card card = cards.get(cards.iterator().next(), game);
-            card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
         }
 
         return true;

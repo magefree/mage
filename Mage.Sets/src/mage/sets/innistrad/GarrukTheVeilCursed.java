@@ -180,7 +180,7 @@ class GarrukTheVeilCursedEffect extends OneShotEffect {
                 for (UUID cardId : targetInLibrary.getTargets()) {
                     Card card = player.getLibrary().remove(cardId, game);
                     if (card != null) {
-                        card.moveToZone(Zone.HAND, source.getId(), game, false);
+                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                         cards.add(card);
                     }
                 }

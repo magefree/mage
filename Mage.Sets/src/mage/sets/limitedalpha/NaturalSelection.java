@@ -114,13 +114,13 @@ class  NaturalSelectionEffect extends OneShotEffect {
             Card card = cards.get(target.getFirstTarget(), game);
             if (card != null) {
                 cards.remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
             }
             target.clearChosen();
         }
         if (cards.size() == 1) {
             Card card = cards.get(cards.iterator().next(), game);
-            card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
         }
         if (you.chooseUse(Outcome.Neutral, "You may have that player shuffle his or her library", game)){
             player.shuffleLibrary(game);

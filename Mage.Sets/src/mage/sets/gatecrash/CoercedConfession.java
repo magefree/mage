@@ -97,7 +97,7 @@ class CoercedConfessionMillEffect extends OneShotEffect {
                     if (card.getCardType().contains(CardType.CREATURE)) {
                         ++foundCreatures;
                     }
-                    card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
                 }
             }
             if (foundCreatures > 0) {

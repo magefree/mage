@@ -109,7 +109,7 @@ class GallowsAtWillowHillEffect extends OneShotEffect {
                 Permanent permanent = game.getPermanent(permanentId);
                 if (permanent != null) {
                     Player controller = game.getPlayer(permanent.getControllerId());
-                    permanent.destroy(source.getId(), game, false);
+                    permanent.destroy(source.getSourceId(), game, false);
                     if (controller != null) {
                         Token spirit = new SpiritWhiteToken("AVR", 1);
                         spirit.putOntoBattlefield(1, game, source.getSourceId(), controller.getId());

@@ -109,14 +109,14 @@ class AncestralMemoriesEffect extends OneShotEffect {
                     for (UUID targetId : (List<UUID>)target.getTargets()) {
                         Card card = cards.get(targetId, game);
                         if (card != null) {
-                            card.moveToZone(Zone.HAND, source.getId(), game, false);
+                            card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                             cards.remove(card);
                         }   
                     }
                 }
 
                 for (Card card : cards.getCards(game)) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getId(), game, true);
+                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
                 }
             }
             return true;

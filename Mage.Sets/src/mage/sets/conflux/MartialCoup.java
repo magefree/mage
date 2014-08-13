@@ -90,7 +90,7 @@ class MartialCoupEffect extends OneShotEffect {
                 permanent.destroy(source.getSourceId(), game, false);
             }
         }
-        token.putOntoBattlefield(amount, game, source.getId(), source.getControllerId());
+        token.putOntoBattlefield(amount, game, source.getSourceId(), source.getControllerId());
         return true;
     }
 

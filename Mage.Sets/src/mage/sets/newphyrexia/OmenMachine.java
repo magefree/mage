@@ -156,9 +156,9 @@ class OmenMachineEffect2 extends OneShotEffect {
         if (player != null) {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
-                card.moveToExile(source.getSourceId(), "Omen Machine Exile", source.getId(), game);
+                card.moveToExile(source.getSourceId(), "Omen Machine Exile", source.getSourceId(), game);
                 if (card.getCardType().contains(CardType.LAND)) {
-                    card.putOntoBattlefield(game, Zone.EXILED, source.getId(), player.getId());
+                    card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), player.getId());
                 }
                 else {
                     player.cast(card.getSpellAbility(), game, true);

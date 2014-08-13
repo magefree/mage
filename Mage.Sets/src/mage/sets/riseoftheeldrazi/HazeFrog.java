@@ -98,7 +98,7 @@ class HazeFrogEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
+        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
         if (!game.replaceEvent(preventEvent)) {
             int damage = event.getAmount();
             Permanent permanent = game.getPermanent(event.getSourceId());
@@ -109,7 +109,7 @@ class HazeFrogEffect extends PreventionEffectImpl {
             message.insert(0, "Damage").append(" has been prevented: ").append(damage);
             event.setAmount(0);
             game.informPlayers(message.toString());
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), damage));
         }
         return false;
     }

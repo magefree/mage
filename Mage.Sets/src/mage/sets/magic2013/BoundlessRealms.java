@@ -105,7 +105,7 @@ class BoundlessRealmsEffect extends OneShotEffect {
             for (UUID cardId : target.getTargets()) {
                 Card card = player.getLibrary().getCard(cardId, game);
                 if (card != null) {
-                    if (card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId())) {
+                    if (card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId())) {
                         Permanent permanent = game.getPermanent(card.getId());
                         if (permanent != null) {
                             permanent.setTapped(true);

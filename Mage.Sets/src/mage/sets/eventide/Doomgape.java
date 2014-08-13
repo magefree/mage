@@ -102,10 +102,10 @@ class DoomgapeEffect extends OneShotEffect {
         if (you != null) {
             Target target = new TargetControlledCreaturePermanent();
             target.setNotTarget(true);
-            if (you.choose(Outcome.Sacrifice, target, source.getId(), game)) {
+            if (you.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
                 Permanent creature = game.getPermanent(target.getFirstTarget());
                 if (creature != null) {
-                    if (creature.sacrifice(source.getId(), game)) {
+                    if (creature.sacrifice(source.getSourceId(), game)) {
                         you.gainLife(creature.getToughness().getValue(), game);
                         return true;
                     }

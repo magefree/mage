@@ -107,10 +107,10 @@ class ConundrumSphinxEffect extends OneShotEffect {
                 cards.add(card);
                 player.revealCards("Conundrum Sphinx", cards, game);
                 if (card.getName().equals(cardName)) {
-                    card.moveToZone(Zone.HAND, source.getId(), game, true);
+                    card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                 }
                 else {
-                    card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
                 }
             }
         }

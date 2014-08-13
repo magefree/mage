@@ -118,7 +118,7 @@ class ElspethTirelThirdEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (Permanent perm: game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
             if (!perm.getId().equals(source.getSourceId()) && !(perm instanceof PermanentToken) && ! (perm.getCardType().contains(CardType.LAND)))
-                perm.destroy(source.getId(), game, false);
+                perm.destroy(source.getSourceId(), game, false);
         }
         return true;
     }

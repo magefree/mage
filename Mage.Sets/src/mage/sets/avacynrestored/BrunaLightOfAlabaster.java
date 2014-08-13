@@ -145,7 +145,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
                 Card aura = game.getCard(targetAura.getFirstTarget());
                 if (aura != null) {
                     game.getState().setValue("attachTo:" + aura.getId(), permanent);
-                    aura.putOntoBattlefield(game, Zone.HAND, source.getId(), player.getId());
+                    aura.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), player.getId());
                     permanent.addAttachment(aura.getId(), game);
                 }
             }
@@ -159,7 +159,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
                 Card aura = game.getCard(targetAura.getFirstTarget());
                 if (aura != null) {
                     game.getState().setValue("attachTo:" + aura.getId(), permanent);
-                    aura.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), player.getId());
+                    aura.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), player.getId());
                     permanent.addAttachment(aura.getId(), game);
                 }
             }

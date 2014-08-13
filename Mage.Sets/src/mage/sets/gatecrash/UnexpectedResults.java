@@ -122,8 +122,8 @@ class UnexpectedResultEffect extends OneShotEffect {
             if (card.getCardType().contains(CardType.LAND)) {
                 String message = "Put " + card.getName() + " onto the battlefield?";
                 if (controller.chooseUse(Outcome.PutLandInPlay, message, game)) {
-                    card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
-                    return sourceCard.moveToZone(Zone.HAND, source.getId(), game, false);
+                    card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
+                    return sourceCard.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                 }
             } else {
                 if (controller.chooseUse(outcome, new StringBuilder("Cast ").append(card.getName()).append(" without paying its mana cost?").toString(), game)) {

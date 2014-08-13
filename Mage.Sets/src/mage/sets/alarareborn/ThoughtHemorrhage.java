@@ -104,22 +104,22 @@ class ThoughtHemorrhageEffect extends OneShotEffect {
             targetPlayer.revealCards("hand of target player", targetPlayer.getHand(), game);
             for (Card card : targetPlayer.getHand().getCards(game)) {
                 if (card.getName().equals(cardName)) {
-                    targetPlayer.damage(3, source.getId(), game, false, true);
+                    targetPlayer.damage(3, source.getSourceId(), game, false, true);
                 }
             }
             for (Card card : targetPlayer.getGraveyard().getCards(game)) {
                 if (card.getName().equals(cardName)) {
-                    card.moveToExile(null, "", source.getId(), game);
+                    card.moveToExile(null, "", source.getSourceId(), game);
                 }
             }
             for (Card card : targetPlayer.getHand().getCards(game)) {
                 if (card.getName().equals(cardName)) {
-                    card.moveToExile(null, "", source.getId(), game);
+                    card.moveToExile(null, "", source.getSourceId(), game);
                 }
             }
             for (Card card : targetPlayer.getLibrary().getCards(game)) {
                 if (card.getName().equals(cardName)) {
-                    card.moveToExile(null, "", source.getId(), game);
+                    card.moveToExile(null, "", source.getSourceId(), game);
                 }
             }
             targetPlayer.shuffleLibrary(game);

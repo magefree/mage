@@ -94,7 +94,7 @@ class MyrsmithEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Cost cost = new GenericManaCost(1);
         cost.clearPaid();
-        if (cost.pay(source, game, source.getId(), source.getControllerId(), false)) {
+        if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
             new MyrToken().putOntoBattlefield(1, game, source.getControllerId(), source.getControllerId());
         }
         return true;

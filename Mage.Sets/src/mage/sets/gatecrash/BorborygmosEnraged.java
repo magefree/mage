@@ -120,9 +120,9 @@ class BorborygmosEnragedEffect extends OneShotEffect {
                     cards.add(card);
                     game.setZone(card.getId(), Zone.PICK);
                     if (card.getCardType().contains(CardType.LAND)) {
-                        card.moveToZone(Zone.HAND, source.getId(), game, true);
+                        card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                     } else {
-                        card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+                        card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
                     }
                 }
             }

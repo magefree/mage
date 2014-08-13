@@ -134,14 +134,14 @@ class VengefulPharaohEffect extends OneShotEffect {
         boolean applied = false;
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            permanent.destroy(source.getId(), game, false);
+            permanent.destroy(source.getSourceId(), game, false);
             applied = true;
         }
         Player player = game.getPlayer(source.getControllerId());
         Card card = game.getCard(source.getSourceId());
         if (card != null && player != null) {
             player.getGraveyard().remove(card);
-            card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
             applied = true;
         }
         return applied;

@@ -96,19 +96,19 @@ class LichsMirrorEffect extends ReplacementEffectImpl {
             for (UUID uuid : player.getHand().copy()) {
                 Card card = game.getCard(uuid);
                 if (card != null) {
-                    card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                 }
             }
         
             for (UUID uuid : player.getGraveyard().copy()) {
                 Card card = game.getCard(uuid);
                 if (card != null) {
-                    card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                 }
             }
             
             for(Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)){
-                permanent.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
             }
             player.shuffleLibrary(game);
             

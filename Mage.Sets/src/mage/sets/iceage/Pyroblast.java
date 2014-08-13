@@ -124,7 +124,7 @@ class DestroyTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getTargets().getFirstTarget());
         if (permanent != null && permanent.getColor().isBlue()) {
-            permanent.destroy(source.getId(), game, false);
+            permanent.destroy(source.getSourceId(), game, false);
         }
         return true;
     }

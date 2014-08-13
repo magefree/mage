@@ -90,7 +90,7 @@ class ManabondEffect extends OneShotEffect {
                 Card card = game.getCard(uuid);
                 if(card != null){
                     if(card.getCardType().contains(CardType.LAND)){
-                        card.moveToZone(Zone.BATTLEFIELD, source.getId(), game, false);
+                        card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
                     }
                     else{
                         player.discard(card, source, game);

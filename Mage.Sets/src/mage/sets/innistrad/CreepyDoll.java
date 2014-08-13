@@ -126,7 +126,7 @@ class CreepyDollEffect extends OneShotEffect {
                 UUID targetId = getTargetPointer().getFirst(game, source);
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null) {
-                    permanent.destroy(source.getId(), game, false);
+                    permanent.destroy(source.getSourceId(), game, false);
                 }
             }
         }

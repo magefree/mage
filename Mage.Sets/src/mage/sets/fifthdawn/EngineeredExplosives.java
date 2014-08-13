@@ -102,7 +102,7 @@ class EngineeredExplosivesEffect extends OneShotEffect {
             int count = ((Permanent)engineeredExplosives).getCounters().getCount(CounterType.CHARGE);
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 if(permanent.getManaCost().convertedManaCost() == count){
-                    permanent.destroy(source.getId(), game, false);
+                    permanent.destroy(source.getSourceId(), game, false);
                 }
             }
             return true;

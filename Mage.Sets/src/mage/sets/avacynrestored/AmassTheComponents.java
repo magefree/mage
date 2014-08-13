@@ -100,7 +100,7 @@ class AmassTheComponentsEffect extends OneShotEffect {
                 Card card = player.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
                     player.removeFromHand(card, game);
-                    card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
                 }
             }
         }

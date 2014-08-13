@@ -86,7 +86,7 @@ class SorcerersStrongboxEffect extends OneShotEffect {
             if (player.flipCoin(game)) {
                 Permanent perm = game.getPermanent(source.getSourceId());
                 if (perm != null) {
-                    perm.sacrifice(source.getId(), game);
+                    perm.sacrifice(source.getSourceId(), game);
                 }
                 player.drawCards(3, game);
                 return true;

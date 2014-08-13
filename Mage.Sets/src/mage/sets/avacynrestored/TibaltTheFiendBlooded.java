@@ -149,7 +149,7 @@ class TibaltTheFiendBloodedThirdEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getId(), game);
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game);
         for (Permanent permanent : permanents) {
             permanent.untap(game);
 

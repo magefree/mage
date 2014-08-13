@@ -110,7 +110,7 @@ class DesertionEffect extends OneShotEffect {
                 if (!((Spell) stackObject).isCopiedSpell() && filter.match(stackObject, source.getControllerId(), game)) {
                     MageObject card = game.getObject(stackObject.getSourceId());
                     if (card instanceof Card) {
-                        ((Card) card).putOntoBattlefield(game, Zone.STACK, source.getId(), source.getControllerId());
+                        ((Card) card).putOntoBattlefield(game, Zone.STACK, source.getSourceId(), source.getControllerId());
                     }
                 } else {
                     stackObject.counter(sourceId, game);

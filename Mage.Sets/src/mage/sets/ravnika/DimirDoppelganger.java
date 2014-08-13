@@ -103,7 +103,7 @@ class DimirDoppelgangerEffect extends ContinuousEffectImpl {
         if (card == null || permanent == null) {
             return false;
         }
-        card.moveToExile(null, "Dimir Doppelganger", source.getId(), game);
+        card.moveToExile(null, "Dimir Doppelganger", source.getSourceId(), game);
         Card cardToCopy = card.copy();
         cardToCopy.assignNewId();
         permanent.setName(cardToCopy.getName());

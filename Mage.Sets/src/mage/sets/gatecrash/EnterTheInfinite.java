@@ -126,7 +126,7 @@ class PutCardOnLibraryEffect extends OneShotEffect {
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {
                 player.getHand().remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
             }
             return true;
         }

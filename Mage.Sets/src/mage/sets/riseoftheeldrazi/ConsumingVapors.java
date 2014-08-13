@@ -106,7 +106,7 @@ class ConsumingVaporsEffect extends OneShotEffect {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if ( permanent != null ) {
                 controller.gainLife(permanent.getToughness().getValue(), game);
-                return permanent.sacrifice(source.getId(), game);
+                return permanent.sacrifice(source.getSourceId(), game);
             }
             return true;
         }

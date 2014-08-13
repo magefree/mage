@@ -118,7 +118,7 @@ class CommuneWithTheGodsEffect extends OneShotEffect {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         cards.remove(card);
-                        card.moveToZone(Zone.HAND, source.getId(), game, false);
+                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                     }
 
                 }
@@ -126,7 +126,7 @@ class CommuneWithTheGodsEffect extends OneShotEffect {
                 for (UUID cardId : cards) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
-                        card.moveToZone(Zone.GRAVEYARD, source.getId(), game, true);
+                        card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
                     }
                 }
             }

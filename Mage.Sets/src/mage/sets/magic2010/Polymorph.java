@@ -113,7 +113,7 @@ class PolymorphEffect extends OneShotEffect {
                     }
 
                     if (card.getCardType().contains(CardType.CREATURE)) {
-                        card.putOntoBattlefield(game, Zone.PICK, source.getId(), player.getId());
+                        card.putOntoBattlefield(game, Zone.PICK, source.getSourceId(), player.getId());
                     }
 
                     if (cards.size() > 0) {

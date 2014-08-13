@@ -104,7 +104,7 @@ class BrilliantUltimatumEffect extends OneShotEffect {
         for (int i = 0; i < max; i++) {
             Card card = you.getLibrary().removeFromTop(game);
             if (card != null) {
-                card.moveToExile(source.getSourceId(), "Brilliant Ultimatum", source.getId(), game);
+                card.moveToExile(source.getSourceId(), "Brilliant Ultimatum", source.getSourceId(), game);
                 pile2.add(card);
             }
         }

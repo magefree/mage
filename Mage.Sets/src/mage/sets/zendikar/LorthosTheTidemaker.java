@@ -105,7 +105,7 @@ class LorthosTheTideMakerEffect extends OneShotEffect {
             Cost cost = new ManaCostsImpl("{8}");
             if (player.chooseUse(Outcome.Tap, "Pay " + cost.getText() + " and " + staticText, game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getId(), source.getControllerId(), false)) {
+                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                     for (UUID target : this.targetPointer.getTargets(game, source)) {
                         Permanent permanent = game.getPermanent(target);
                         if (permanent != null) {

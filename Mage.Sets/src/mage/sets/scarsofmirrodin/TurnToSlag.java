@@ -89,9 +89,9 @@ class TurnToSlagEffect extends OneShotEffect {
                 }
             }
             for (Permanent p : attachments) {
-                p.destroy(source.getId(), game, false);
+                p.destroy(source.getSourceId(), game, false);
             }
-            target.damage(5, source.getId(), game, false, false);
+            target.damage(5, source.getSourceId(), game, false, false);
             return true;
         }
         return false;

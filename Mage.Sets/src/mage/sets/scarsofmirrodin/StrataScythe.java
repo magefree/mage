@@ -99,7 +99,7 @@ class StrataScytheImprintEffect extends OneShotEffect {
                 UUID cardId = target.getTargets().get(0);
                 Card card = player.getLibrary().remove(cardId, game);
                 if (card != null) {
-                    card.moveToExile(source.getSourceId(), "Strata Scythe", source.getId(), game);
+                    card.moveToExile(source.getSourceId(), "Strata Scythe", source.getSourceId(), game);
                     Permanent permanent = game.getPermanent(source.getSourceId());
                     if (permanent != null) {
                         permanent.imprint(card.getId(), game);

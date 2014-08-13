@@ -97,7 +97,7 @@ class MindshriekerEffect extends OneShotEffect {
         if (player != null && player.getLibrary().size() > 0) {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
-                card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+                card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
                 int amount = card.getManaCost().convertedManaCost();
                 if (amount > 0)
                     game.addEffect(new BoostSourceEffect(amount, amount, Duration.EndOfTurn), source);

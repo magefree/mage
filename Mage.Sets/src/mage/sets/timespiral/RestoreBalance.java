@@ -102,7 +102,7 @@ class RestoreBalanceEffect extends OneShotEffect {
             for(UUID playerId : controller.getInRange()){
                 Player player = game.getPlayer(playerId);
                 if(player != null){
-                    int count = game.getBattlefield().getActivePermanents(new FilterControlledLandPermanent(), player.getId(), source.getId(), game).size();
+                    int count = game.getBattlefield().getActivePermanents(new FilterControlledLandPermanent(), player.getId(), source.getSourceId(), game).size();
                     if(count < minLand){
                         minLand = count;
                     }
@@ -113,8 +113,8 @@ class RestoreBalanceEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if(player != null){
                     TargetControlledPermanent target = new TargetControlledPermanent(minLand, minLand, new FilterControlledLandPermanent(), true);
-                    if(target.choose(Outcome.Benefit, player.getId(), source.getId(), game)){
-                        for(Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledLandPermanent(), player.getId(), source.getId(), game)){
+                    if(target.choose(Outcome.Benefit, player.getId(), source.getSourceId(), game)){
+                        for(Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledLandPermanent(), player.getId(), source.getSourceId(), game)){
                             if(permanent != null && !target.getTargets().contains(permanent.getId())){
                                 permanent.sacrifice(source.getSourceId(), game);
                             }
@@ -128,7 +128,7 @@ class RestoreBalanceEffect extends OneShotEffect {
             for(UUID playerId : controller.getInRange()){
                 Player player = game.getPlayer(playerId);
                 if(player != null){
-                    int count = game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), player.getId(), source.getId(), game).size();
+                    int count = game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), player.getId(), source.getSourceId(), game).size();
                     if(count < minCreature){
                         minCreature = count;
                     }
@@ -139,8 +139,8 @@ class RestoreBalanceEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if(player != null){
                     TargetControlledPermanent target = new TargetControlledPermanent(minCreature, minCreature, new FilterControlledCreaturePermanent(), true);
-                    if(target.choose(Outcome.Benefit, player.getId(), source.getId(), game)){
-                        for(Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), player.getId(), source.getId(), game)){
+                    if(target.choose(Outcome.Benefit, player.getId(), source.getSourceId(), game)){
+                        for(Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), player.getId(), source.getSourceId(), game)){
                             if(permanent != null && !target.getTargets().contains(permanent.getId())){
                                 permanent.sacrifice(source.getSourceId(), game);
                             }
@@ -164,7 +164,7 @@ class RestoreBalanceEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if(player != null){
                     TargetCardInHand target = new TargetCardInHand(minCard, new FilterCard());
-                    if(target.choose(Outcome.Benefit, player.getId(), source.getId(), game)){
+                    if(target.choose(Outcome.Benefit, player.getId(), source.getSourceId(), game)){
                         Cards cards =  player.getHand().copy();
                         for(UUID cardUUID : cards){
                             Card card = player.getHand().get(cardUUID, game);

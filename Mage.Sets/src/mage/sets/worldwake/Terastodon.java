@@ -104,7 +104,7 @@ class TerastodonEffect extends OneShotEffect {
         for (UUID targetID : this.targetPointer.getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetID);
             if (permanent != null) {
-                if (permanent.destroy(source.getId(), game, false)) {
+                if (permanent.destroy(source.getSourceId(), game, false)) {
                     if (game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) {
                         Player controller = game.getPlayer(permanent.getControllerId());
                         ElephantToken elephantToken = new ElephantToken();

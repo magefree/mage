@@ -101,10 +101,10 @@ class CometStormEffect extends OneShotEffect {
                 Permanent permanent = game.getPermanent(uuid);
                 Player player = game.getPlayer(uuid);
                 if (permanent != null) {
-                    permanent.damage(damage, source.getId(), game, false, true);
+                    permanent.damage(damage, source.getSourceId(), game, false, true);
                 }
                 if (player != null) {
-                    player.damage(damage, source.getId(), game, true, false);
+                    player.damage(damage, source.getSourceId(), game, true, false);
                 }
             }
             return true;

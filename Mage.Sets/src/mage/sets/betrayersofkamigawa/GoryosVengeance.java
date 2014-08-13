@@ -112,7 +112,7 @@ class GoryosVengeanceEffect extends OneShotEffect {
         if (controller != null) {
             Card card = game.getCard(targetPointer.getFirst(game, source));
             if (card != null) {
-                if (controller.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getId())) {
+                if (controller.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId())) {
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent != null) {
                         // Haste

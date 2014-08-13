@@ -199,7 +199,7 @@ public class NightDealings extends CardImpl {
             if (player.searchLibrary(target, game)) {
                 Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
                 if (card != null) {
-                    card.moveToZone(Zone.HAND, source.getId(), game, false);    
+                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);    
                     
                     String name = "Reveal";
                     Cards cards = new CardsImpl();

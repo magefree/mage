@@ -109,7 +109,7 @@ class VoidEffect extends OneShotEffect {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
             if ((permanent.getCardType().contains(CardType.ARTIFACT) || permanent.getCardType().contains(CardType.CREATURE))
                     && permanent.getManaCost().convertedManaCost() == number) {
-                permanent.destroy(source.getId(), game, false);
+                permanent.destroy(source.getSourceId(), game, false);
             }
         }
         FilterCard filterCard = new FilterCard();
@@ -121,7 +121,7 @@ class VoidEffect extends OneShotEffect {
             targetPlayer.revealCards("Void", targetPlayer.getHand(), game);
             for (Card card : targetPlayer.getHand().getCards(game)) {
                 if (filterCard.match(card, game)) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
                 }
             }
         } else {

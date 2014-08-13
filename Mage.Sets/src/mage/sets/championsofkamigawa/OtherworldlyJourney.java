@@ -90,7 +90,7 @@ class OtherworldlyJourneyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            if (permanent.moveToExile(source.getSourceId(), "Otherworldly Journey", source.getId(), game)) {
+            if (permanent.moveToExile(source.getSourceId(), "Otherworldly Journey", source.getSourceId(), game)) {
                 ExileZone exile = game.getExile().getExileZone(source.getSourceId());
                 // only if permanent is in exile (tokens would be stop to exist)
                 if (exile != null && !exile.isEmpty()) {

@@ -102,7 +102,7 @@ class RagDealerExileEffect extends OneShotEffect {
         for (UUID targetID : source.getTargets().get(0).getTargets()) {
             Card card = game.getCard(targetID);
             if (card != null) {
-                card.moveToExile(null, "", source.getId(), game);
+                card.moveToExile(null, "", source.getSourceId(), game);
             }
         }
         return true;

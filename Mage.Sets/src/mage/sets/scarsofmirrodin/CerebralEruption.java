@@ -94,11 +94,11 @@ class CerebralEruptionEffect1 extends OneShotEffect {
             Cards cards = new CardsImpl();
             cards.add(card);
             player.revealCards("Cerebral Eruption", cards, game);
-            game.getState().setValue(source.getId().toString(), card);
+            game.getState().setValue(source.getSourceId().toString(), card);
             int damage = card.getManaCost().convertedManaCost();
-            player.damage(damage, source.getId(), game, false, true);
+            player.damage(damage, source.getSourceId(), game, false, true);
             for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
-                perm.damage(damage, source.getId(), game, false, true);
+                perm.damage(damage, source.getSourceId(), game, false, true);
             }
             return true;
         }
@@ -124,12 +124,12 @@ class CerebralEruptionEffect2 extends PostResolveEffect {
 
     @Override
     public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
-        Card revealed = (Card) game.getState().getValue(source.getId().toString());
+        Card revealed = (Card) game.getState().getValue(source.getSourceId().toString());
         if (revealed != null && revealed.getCardType().contains(CardType.LAND)) {
-            card.moveToZone(Zone.HAND, source.getId(), game, false);
+            card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
         }
         else {
-            card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+            card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
         }
     }
 

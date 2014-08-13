@@ -97,7 +97,7 @@ class GoblinAssaultEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (filter.match(permanent, source.getId(), source.getControllerId(), game)) {
+        if (filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
             return true;
         }
         return false;

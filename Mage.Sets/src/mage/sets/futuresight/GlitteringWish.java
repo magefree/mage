@@ -135,7 +135,7 @@ class GlitteringWishEffect extends OneShotEffect {
                     Card card = player.getSideboard().get(target.getFirstTarget(), game);
                     if (card != null) {
 
-                        card.moveToZone(Zone.HAND, source.getId(), game, false);
+                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                         Cards revealCard = new CardsImpl();
                         revealCard.add(card);
                         player.revealCards("Glittering Wish", revealCard, game);
@@ -146,7 +146,7 @@ class GlitteringWishEffect extends OneShotEffect {
             Card cardToExile = game.getCard(source.getSourceId());
             if(cardToExile != null)
             {
-                cardToExile.moveToExile(null, "", source.getId(), game);
+                cardToExile.moveToExile(null, "", source.getSourceId(), game);
             }
         }
         return true;

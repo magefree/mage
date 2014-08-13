@@ -117,7 +117,7 @@ class AgadeemOccultistEffect extends OneShotEffect {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         if (card.getManaCost().convertedManaCost() <= allycount) {
-                            card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId());
+                            card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
                             return true;
                         }
                     }

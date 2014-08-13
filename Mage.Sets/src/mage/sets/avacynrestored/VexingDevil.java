@@ -99,7 +99,7 @@ class VexingDevilEffect extends OneShotEffect {
                     int dealt = opponent.damage(4, permanent.getId(), game, false, true);
                     if (dealt == 4) {
                         game.informPlayers(opponent.getName() + " was dealt 4 damage so " + permanent.getName() + " will be sacrificed.");
-                        permanent.sacrifice(source.getId(), game);
+                        permanent.sacrifice(source.getSourceId(), game);
                         return true;
                     } else {
                         game.informPlayers("4 damage wasn't dealt so " + permanent.getName() + " won't be sacrificed.");

@@ -161,13 +161,13 @@ class FactOrFictionEffect extends OneShotEffect {
             for (UUID cardUuid : pile1) {
                 Card card = pile1.get(cardUuid, game);
                 if (card != null) {
-                    card.moveToZone(pile1Zone, source.getId(), game, false);
+                    card.moveToZone(pile1Zone, source.getSourceId(), game, false);
                 }
             }
             for (UUID cardUuid : cards) {
                 Card card = cards.get(cardUuid, game);
                 if (card != null) {
-                    card.moveToZone(pile2Zone, source.getId(), game, false);
+                    card.moveToZone(pile2Zone, source.getSourceId(), game, false);
                 }
             }
         }

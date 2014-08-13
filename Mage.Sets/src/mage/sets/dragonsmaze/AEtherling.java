@@ -101,7 +101,7 @@ class AEherlingRemovingEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            if (permanent.moveToExile(source.getSourceId(), "AEherling Exile", source.getId(), game)) {
+            if (permanent.moveToExile(source.getSourceId(), "AEherling Exile", source.getSourceId(), game)) {
                 //create delayed triggered ability
                 AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(
                         new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));

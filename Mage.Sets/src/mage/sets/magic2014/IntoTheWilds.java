@@ -104,7 +104,7 @@ class IntoTheWildsEffect extends OneShotEffect {
             if (filter.match(card, game)) {
                 String message = "Put " + card.getName() + " onto the battlefield?";
                 if (player.chooseUse(outcome, message, game)) {
-                    return card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId(), false);
+                    return card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId(), false);
                 }
             }
         }

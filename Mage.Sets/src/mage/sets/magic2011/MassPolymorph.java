@@ -86,7 +86,7 @@ class MassPolymorphEffect extends OneShotEffect {
         List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
         count = creatures.size();
         for (Permanent creature: creatures) {
-            creature.moveToExile(null, null, source.getId(), game);
+            creature.moveToExile(null, null, source.getSourceId(), game);
         }
         Cards revealed = new CardsImpl();
         Cards creatureCards = new CardsImpl();
@@ -103,7 +103,7 @@ class MassPolymorphEffect extends OneShotEffect {
         }
         player.revealCards("Mass Polymorph", revealed, game);
         for (Card creatureCard: creatureCards.getCards(game)) {
-            creatureCard.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
+            creatureCard.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
         }
         player.getLibrary().addAll(nonCreatureCards.getCards(game), game);
         player.shuffleLibrary(game);

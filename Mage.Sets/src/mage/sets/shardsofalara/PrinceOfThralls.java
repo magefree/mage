@@ -144,7 +144,7 @@ class PrinceOfThrallsEffect extends OneShotEffect {
             PayLifeCost cost = new PayLifeCost(3);
             if (opponent.chooseUse(Outcome.Neutral, cost.getText() + " or " + permanent.getName() + " comes back into the battlefield under opponents control", game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getId(), opponent.getId(), true)) {
+                if (cost.pay(source, game, source.getSourceId(), opponent.getId(), true)) {
                     return true;
                 }
             }

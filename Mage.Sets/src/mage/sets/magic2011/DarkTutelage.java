@@ -85,7 +85,7 @@ class DarkTutelageEffect extends OneShotEffect {
         if (player != null && player.getLibrary().size() > 0) {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
-                card.moveToZone(Zone.HAND, source.getId(), game, false);
+                card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                 player.loseLife(card.getManaCost().convertedManaCost(), game);
                 Cards cards = new CardsImpl();
                 cards.add(card);

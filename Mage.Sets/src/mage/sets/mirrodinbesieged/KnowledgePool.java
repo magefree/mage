@@ -93,7 +93,7 @@ class KnowledgePoolEffect1 extends OneShotEffect {
             if (player != null) {
                 int amount = Math.min(3, player.getLibrary().size());
                 for (int i = 0; i < amount; i++) {
-                    player.getLibrary().removeFromTop(game).moveToExile(source.getSourceId(), "Knowledge Pool Exile", source.getId(), game);
+                    player.getLibrary().removeFromTop(game).moveToExile(source.getSourceId(), "Knowledge Pool Exile", source.getSourceId(), game);
                 }
             }
         }

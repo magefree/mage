@@ -123,7 +123,7 @@ class VeteranExplorerEffect extends OneShotEffect {
                     for (UUID cardId: (List<UUID>)target.getTargets()) {
                         Card card = player.getLibrary().getCard(cardId, game);
                         if (card != null) {
-                            card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), player.getId());
+                            card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId());
                         }
                     }
                 }

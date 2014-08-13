@@ -126,11 +126,11 @@ class MagebaneArmorPreventionEffect extends PreventionEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent equipment = game.getPermanent(source.getSourceId());
         if (equipment != null && equipment.getAttachedTo() != null) {
-            GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, equipment.getAttachedTo(), source.getId(), source.getControllerId(), event.getAmount(), false);
+            GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, equipment.getAttachedTo(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
             if (!game.replaceEvent(preventEvent)) {
                 int damage = event.getAmount();
                 event.setAmount(0);
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, equipment.getAttachedTo(), source.getId(), source.getControllerId(), damage));
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, equipment.getAttachedTo(), source.getSourceId(), source.getControllerId(), damage));
                 return true;
             }
         }

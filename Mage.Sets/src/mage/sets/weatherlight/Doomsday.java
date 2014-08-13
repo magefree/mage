@@ -106,7 +106,7 @@ class DoomsdayEffect extends OneShotEffect {
                     if(!target.getTargets().contains(uuid)){
                         Card card = game.getCard(uuid);
                         if(card != null){
-                            card.moveToExile(null, "Doomsday", source.getId(), game);
+                            card.moveToExile(null, "Doomsday", source.getSourceId(), game);
                         }      
                     }
                     else{
@@ -121,13 +121,13 @@ class DoomsdayEffect extends OneShotEffect {
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {
                         cards.remove(card);
-                        card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                     }
                     target.clearChosen();
                 }
                 if (cards.size() == 1) {
                     Card card = cards.get(cards.iterator().next(), game);
-                    card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                 }
             }
             

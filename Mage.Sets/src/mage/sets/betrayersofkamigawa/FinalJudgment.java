@@ -85,7 +85,7 @@ class FinalJudgmentEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.moveToExile(null, null,source.getId(), game);
+            permanent.moveToExile(null, null,source.getSourceId(), game);
         }
         return true;
     }

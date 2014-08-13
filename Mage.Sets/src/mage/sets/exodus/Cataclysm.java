@@ -165,7 +165,7 @@ class CataclysmEffect extends OneShotEffect {
 
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
             if (!chosen.contains(permanent)) {
-                permanent.sacrifice(source.getId(), game);
+                permanent.sacrifice(source.getSourceId(), game);
             }
         }
         return true;

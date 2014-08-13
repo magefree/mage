@@ -136,7 +136,7 @@ class DemigodOfRevengeReturnEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             for (Card creature : player.getGraveyard().getCards(filter, game)) {
-                creature.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId());
+                creature.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
             }
             return true;
         }

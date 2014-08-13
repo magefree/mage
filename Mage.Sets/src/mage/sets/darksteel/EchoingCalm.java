@@ -94,7 +94,7 @@ class EchoingCalmEffect extends OneShotEffect {
         permanent.destroy(source.getSourceId(), game, false);
         for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
             if (perm.getName().equals(name) && perm.getCardType().contains(CardType.ENCHANTMENT))
-                perm.destroy(source.getId(), game, false);
+                perm.destroy(source.getSourceId(), game, false);
         }
 
         return true;

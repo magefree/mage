@@ -95,9 +95,9 @@ class ViewFromAboveEffect extends PostResolveEffect {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
 
         if (game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0) {
-            card.moveToZone(Zone.HAND, source.getId(), game, false);
+            card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
         } else {
-            card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+            card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
         }
     }
 }

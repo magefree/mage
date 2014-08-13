@@ -99,7 +99,7 @@ class DiabolicRevelationEffect extends OneShotEffect {
             for (UUID cardId : target.getTargets()) {
                 Card card = player.getLibrary().remove(cardId, game);
                 if (card != null) {
-                    card.moveToZone(Zone.HAND, source.getId(), game, false);
+                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                 }
             }
         }

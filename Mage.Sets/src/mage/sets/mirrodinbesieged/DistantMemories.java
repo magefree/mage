@@ -93,7 +93,7 @@ class DistantMemoriesEffect extends OneShotEffect {
         if (player.searchLibrary(target, game)) {
             Card card = player.getLibrary().remove(target.getFirstTarget(), game);
             if (card != null) {
-                card.moveToZone(Zone.EXILED, source.getId(), game, false);
+                card.moveToZone(Zone.EXILED, source.getSourceId(), game, false);
                 player.shuffleLibrary(game);
 
                 StringBuilder sb = new StringBuilder();
@@ -111,7 +111,7 @@ class DistantMemoriesEffect extends OneShotEffect {
 
                 if (putInHand) {
                     game.getExile().getPermanentExile().remove(card);
-                    card.moveToZone(Zone.HAND, source.getId(), game, false);
+                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                 } else {
                     player.drawCards(3, game);
                 }

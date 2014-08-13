@@ -112,13 +112,13 @@ class ForbiddenAlchemyEffect extends OneShotEffect {
                 if (player.choose(Outcome.Benefit, cards, target, game)) {
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {
-                        card.moveToZone(Zone.HAND, source.getId(), game, false);
+                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                         cards.remove(card);
                     }
                 }
 
                 for (Card card : cards.getCards(game)) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getId(), game, true);
+                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
                 }
             }
             return true;

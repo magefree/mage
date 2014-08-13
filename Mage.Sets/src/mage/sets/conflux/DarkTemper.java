@@ -98,7 +98,7 @@ class DarkTemperEffect extends OneShotEffect {
         if (game.getBattlefield().countAll(filter, source.getControllerId(), game) == 0) {
             permanent.damage(2, source.getSourceId(), game, false, true);
         } else {
-            permanent.destroy(source.getId(), game, false);
+            permanent.destroy(source.getSourceId(), game, false);
         }
         return true;
     }

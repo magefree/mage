@@ -122,13 +122,13 @@ class HarmonicConvergenceEffect extends OneShotEffect {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     cards.remove(permanent);
-                    permanent.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                    permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                 }
                 target.clearChosen();
             }
             if (cards.size() == 1) {
                 Permanent permanent = game.getPermanent(cards.iterator().next());
-                permanent.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
             }
         }
 

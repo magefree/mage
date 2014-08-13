@@ -115,14 +115,14 @@ class SecurityBlockadePreventionEffect extends PreventionEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE,
-            source.getControllerId(), source.getId(), source.getControllerId(), event.getAmount(), false);
+            source.getControllerId(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
         if (!game.replaceEvent(preventEvent)) {
             int damage = event.getAmount();
             if (damage > 0) {
                 event.setAmount(damage - 1);
                 this.used = true;
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE,
-                        source.getControllerId(), source.getId(), source.getControllerId(), 1));
+                        source.getControllerId(), source.getSourceId(), source.getControllerId(), 1));
             }
         }
         return false;

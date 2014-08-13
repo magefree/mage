@@ -90,7 +90,7 @@ class SenseisDiviningTopEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            return permanent.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+            return permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
         }
         return false;
     }

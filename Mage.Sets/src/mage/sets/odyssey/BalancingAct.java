@@ -97,7 +97,7 @@ class BalancingActEffect extends OneShotEffect {
             for(UUID playerId : controller.getInRange()){
                 Player player = game.getPlayer(playerId);
                 if(player != null){
-                    int count = game.getBattlefield().getActivePermanents(new FilterControlledPermanent(), player.getId(), source.getId(), game).size();
+                    int count = game.getBattlefield().getActivePermanents(new FilterControlledPermanent(), player.getId(), source.getSourceId(), game).size();
                     if(count < minPermanent){
                         minPermanent = count;
                     }
@@ -108,8 +108,8 @@ class BalancingActEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if(player != null){
                     TargetControlledPermanent target = new TargetControlledPermanent(minPermanent, minPermanent, new FilterControlledPermanent(), true);
-                    if(target.choose(Outcome.Benefit, player.getId(), source.getId(), game)){
-                        for(Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledPermanent(), player.getId(), source.getId(), game)){
+                    if(target.choose(Outcome.Benefit, player.getId(), source.getSourceId(), game)){
+                        for(Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledPermanent(), player.getId(), source.getSourceId(), game)){
                             if(permanent != null && !target.getTargets().contains(permanent.getId())){
                                 permanent.sacrifice(source.getSourceId(), game);
                             }
@@ -134,7 +134,7 @@ class BalancingActEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if(player != null){
                     TargetCardInHand target = new TargetCardInHand(minCard, new FilterCard());
-                    if(target.choose(Outcome.Benefit, player.getId(), source.getId(), game)){
+                    if(target.choose(Outcome.Benefit, player.getId(), source.getSourceId(), game)){
                         Cards cards =  player.getHand().copy();
                         for(UUID cardUUID : cards){
                             Card card = player.getHand().get(cardUUID, game);

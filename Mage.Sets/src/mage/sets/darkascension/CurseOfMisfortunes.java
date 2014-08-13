@@ -121,7 +121,7 @@ class CurseOfMisfortunesEffect extends OneShotEffect {
                         this.setTargetPointer(new FixedTarget(targetPlayer.getId()));
                         game.getState().setValue("attachTo:" + card.getId(), targetPlayer.getId());
                         player.shuffleLibrary(game);
-                        return card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
+                        return card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
                     }
                 }
                 player.shuffleLibrary(game);

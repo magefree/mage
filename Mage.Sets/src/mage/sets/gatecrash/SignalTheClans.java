@@ -112,12 +112,12 @@ class SignalTheClansEffect extends SearchEffect {
                 if(cardsArray.length == 3 && !cardsArray[0].getName().equals(cardsArray[1]) && !cardsArray[0].getName().equals(cardsArray[2]) && !cardsArray[1].getName().equals(cardsArray[2])){
                     //Choose one of them at random and put that card into your hand
                     Card randomCard = cards.getRandom(game);
-                    randomCard.moveToZone(Zone.HAND, source.getId(), game, true);
+                    randomCard.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                     cards.remove(randomCard);
                 }
                 //Shuffle the rest into your library
                 for(Card card : cards.getCards(game)){
-                    card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                 }
             }
             player.shuffleLibrary(game);

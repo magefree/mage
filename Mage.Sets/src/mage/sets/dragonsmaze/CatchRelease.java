@@ -207,7 +207,7 @@ class ReleaseSacrificeEffect extends OneShotEffect {
         for (UUID uuid : chosen) {
             Permanent permanent = game.getPermanent(uuid);
             if (permanent != null) {
-                permanent.sacrifice(source.getId(), game);
+                permanent.sacrifice(source.getSourceId(), game);
             }
         }
         return true;

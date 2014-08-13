@@ -176,7 +176,7 @@ class MindbreakEffect extends OneShotEffect{
             for (UUID spellId : targetPointer.getTargets(game, source)) {
                 Spell spell = game.getStack().getSpell(spellId);
                 if (spell != null) {
-                    spell.moveToExile(null, null, source.getId(), game);
+                    spell.moveToExile(null, null, source.getSourceId(), game);
                     affectedTargets++;
                 }
             }

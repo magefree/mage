@@ -108,7 +108,7 @@ class RememberTheFallenEffect extends OneShotEffect {
             for (UUID targetId : targets) {
                 Card card = game.getCard(targetId);
                 if (card != null) {
-                    card.moveToZone(Zone.HAND, source.getId(), game, true);
+                    card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                 }
             }
         }

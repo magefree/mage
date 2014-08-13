@@ -119,10 +119,10 @@ class GiselaBladeOfGoldnightDoubleDamageEffect extends ReplacementEffectImpl {
 
     private void preventDamage(GameEvent event, Ability source, UUID target, Game game) {
         int amount = (int)Math.ceil(event.getAmount() / 2.0);
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, target, source.getId(), source.getControllerId(), amount, false);
+        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, target, source.getSourceId(), source.getControllerId(), amount, false);
         if (!game.replaceEvent(preventEvent)) {
             event.setAmount(event.getAmount() - amount);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, target, source.getId(), source.getControllerId(), amount));
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, target, source.getSourceId(), source.getControllerId(), amount));
         }
     }
 

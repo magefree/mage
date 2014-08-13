@@ -90,7 +90,7 @@ class AcidicSoilEffect extends OneShotEffect {
                     }
                 }
                 if (amount > 0) {
-                    player.damage(amount, source.getId(), game, false, true);
+                    player.damage(amount, source.getSourceId(), game, false, true);
                 }
             }
         }

@@ -146,7 +146,7 @@ class CrownOfConvergenceEffect extends OneShotEffect {
         if (you != null) {
             Card card = you.getLibrary().removeFromTop(game);
             if (card != null) {
-                card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
             }
             return true;
         }

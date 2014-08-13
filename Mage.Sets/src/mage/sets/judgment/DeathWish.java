@@ -132,7 +132,7 @@ class DeathWishEffect extends OneShotEffect {
             Card cardToExile = game.getCard(source.getSourceId());
             if(cardToExile != null)
             {
-                cardToExile.moveToExile(null, "", source.getId(), game);
+                cardToExile.moveToExile(null, "", source.getSourceId(), game);
             }
         }
         return true;

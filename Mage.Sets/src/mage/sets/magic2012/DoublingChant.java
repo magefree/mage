@@ -122,7 +122,7 @@ class DoublingChantEffect extends OneShotEffect {
         }
 
         for (Card card : chosenCards) {
-            card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
+            card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
         }
         player.shuffleLibrary(game);
         return true;

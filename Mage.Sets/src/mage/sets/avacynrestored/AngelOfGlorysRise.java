@@ -108,10 +108,10 @@ class AngelOfGlorysRiseEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             for (Permanent zombie : game.getBattlefield().getActivePermanents(filterZombie, source.getControllerId(), source.getSourceId(), game)) {
-                zombie.moveToExile(source.getId(), zombie.getName(), source.getSourceId(), game);
+                zombie.moveToExile(source.getSourceId(), zombie.getName(), source.getSourceId(), game);
             }
             for (Card human : player.getGraveyard().getCards(filterHuman, game)) {
-                human.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId());
+                human.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
             }
         }
         return true;

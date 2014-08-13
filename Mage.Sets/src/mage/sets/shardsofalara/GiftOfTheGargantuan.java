@@ -121,7 +121,7 @@ class GiftOfTheGargantuanEffect extends OneShotEffect {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
-                    card.moveToZone(Zone.HAND, source.getId(), game, false);
+                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                     revealedCards.add(card);
                 }
             }
@@ -131,7 +131,7 @@ class GiftOfTheGargantuanEffect extends OneShotEffect {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
-                    card.moveToZone(Zone.HAND, source.getId(), game, false);
+                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                     revealedCards.add(card);
                 }
             }
@@ -147,13 +147,13 @@ class GiftOfTheGargantuanEffect extends OneShotEffect {
             Card card = cards.get(target.getFirstTarget(), game);
             if (card != null) {
                 cards.remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
             }
             target.clearChosen();
         }
         if (cards.size() == 1) {
             Card card = cards.get(cards.iterator().next(), game);
-            card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
         }
 
         return true;

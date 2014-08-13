@@ -140,7 +140,7 @@ class TuktukScrapperEffect extends OneShotEffect {
         TargetArtifactPermanent target = new TargetArtifactPermanent();
         Player you = game.getPlayer(source.getControllerId());
         if (you != null) {
-            if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.DestroyPermanent, source.getControllerId(), source.getId(), game)) {
+            if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.DestroyPermanent, source.getControllerId(), source.getSourceId(), game)) {
                 Permanent targetedArtifact = game.getPermanent(target.getFirstTarget());
                 if (targetedArtifact != null) {
                     Card artifact = game.getCard(targetedArtifact.getId());

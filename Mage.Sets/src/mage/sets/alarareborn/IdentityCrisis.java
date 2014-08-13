@@ -84,13 +84,13 @@ class IdentityCrisisEffect extends OneShotEffect {
             for (UUID cid : player.getHand().copy()) {
                 Card c = game.getCard(cid);
                 if (c != null) {
-                    c.moveToExile(null, null, source.getId(), game);
+                    c.moveToExile(null, null, source.getSourceId(), game);
                 }
             }
             for (UUID cid : player.getGraveyard().copy()) {
                 Card c = game.getCard(cid);
                 if (c != null) {
-                    c.moveToExile(null, null, source.getId(), game);
+                    c.moveToExile(null, null, source.getSourceId(), game);
                 }
             }
             return true;

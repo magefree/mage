@@ -102,17 +102,17 @@ class MemoricideEffect extends OneShotEffect {
             game.informPlayers("Memoricide, named card: [" + cardName + "]");
             for (Card card: player.getGraveyard().getCards(game)) {
                 if (card.getName().equals(cardName)) {
-                    card.moveToExile(null, "", source.getId(), game);                    
+                    card.moveToExile(null, "", source.getSourceId(), game);                    
                 }
             }
             for (Card card: player.getHand().getCards(game)) {
                 if (card.getName().equals(cardName)) {
-                    card.moveToExile(null, "", source.getId(), game);                    
+                    card.moveToExile(null, "", source.getSourceId(), game);                    
                 }
             }
             for (Card card: player.getLibrary().getCards(game)) {
                 if (card.getName().equals(cardName)) {
-                    card.moveToExile(null, "", source.getId(), game);                    
+                    card.moveToExile(null, "", source.getSourceId(), game);                    
                 }
             }
             controller.lookAtCards("Memoricide Hand", player.getHand(), game);

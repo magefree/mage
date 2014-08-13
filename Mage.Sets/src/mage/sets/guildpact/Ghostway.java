@@ -91,7 +91,7 @@ class GhostwayEffect extends OneShotEffect {
         if (exileId != null) {
             for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
                 if (creature != null) {
-                    if (creature.moveToExile(source.getSourceId(), "Ghostway Exile", source.getId(), game)) {
+                    if (creature.moveToExile(source.getSourceId(), "Ghostway Exile", source.getSourceId(), game)) {
                         AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD, true));
                         delayedAbility.setSourceId(source.getSourceId());
                         delayedAbility.setControllerId(source.getControllerId());

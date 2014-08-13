@@ -99,7 +99,7 @@ class InquisitorsSnareEffect extends OneShotEffect {
             game.addEffect(new PreventAllDamageByAllEffect(filter, Duration.EndOfTurn, false), source);
             if (targetCreature.getColor().contains(ObjectColor.BLACK)
                     || targetCreature.getColor().contains(ObjectColor.RED)) {
-                return targetCreature.destroy(source.getId(), game, false);
+                return targetCreature.destroy(source.getSourceId(), game, false);
             }
         }
         return false;

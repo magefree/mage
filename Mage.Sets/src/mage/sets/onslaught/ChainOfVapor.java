@@ -104,7 +104,7 @@ class ChainOfVaporEffect extends OneShotEffect {
                 if (player.chooseTarget(Outcome.Sacrifice, target, source, game)){
                     Permanent land = game.getPermanent(target.getFirstTarget());
                     if(land != null){
-                        if(land.sacrifice(source.getId(), game)){
+                        if(land.sacrifice(source.getSourceId(), game)){
                             Spell spell = game.getStack().getSpell(source.getSourceId());
                             if (spell != null) {
                                 Spell copy = spell.copySpell();

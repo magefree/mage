@@ -119,7 +119,7 @@ class ChandraAblazeEffect1 extends OneShotEffect {
             if (card != null) {
                 player.discard(card, source, game);
                 source.getEffects().get(1).setValue("discardedCard", card);
-                game.getState().setValue(source.getId().toString(), card);
+                game.getState().setValue(source.getSourceId().toString(), card);
                 return true;
             }
         }

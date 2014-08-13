@@ -149,7 +149,7 @@ class BlindZealotEffect extends OneShotEffect {
 
         if (sourcePermanent != null && targetPermanent != null) {
             if (sourcePermanent.sacrifice(source.getSourceId(), game)) {
-                targetPermanent.destroy(source.getId(), game, false);
+                targetPermanent.destroy(source.getSourceId(), game, false);
             }
         }
 

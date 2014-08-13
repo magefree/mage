@@ -95,9 +95,9 @@ class SeverTheBloodlineEffect extends OneShotEffect {
         if (targetPermanent != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(new NamePredicate(targetPermanent.getName()));
-            List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getId(), game);
+            List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
             for (Permanent permanent : permanents) {
-                permanent.moveToExile(null, "", source.getId(), game);
+                permanent.moveToExile(null, "", source.getSourceId(), game);
             }
             return true;
         }

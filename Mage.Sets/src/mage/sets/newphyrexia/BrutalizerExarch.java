@@ -120,7 +120,7 @@ class BrutalizerExarchEffect1 extends OneShotEffect {
                 }
                 player.shuffleLibrary(game);
                 if (card != null)
-                    card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                 return true;
             }
             player.shuffleLibrary(game);
@@ -154,7 +154,7 @@ class BrutalizerExarchEffect2 extends OneShotEffect {
                 return false;
             }
 
-            return permanent.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+            return permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
         }
         return false;
     }

@@ -101,11 +101,11 @@ class GhostlyFlickerEffect extends OneShotEffect {
         for (UUID permanentId : targetPointer.getTargets(game, source)) {
             Permanent target = game.getPermanent(permanentId);
             if (target != null) {
-                target.moveToExile(exileId, "Ghostly Flicker", source.getId(), game);
+                target.moveToExile(exileId, "Ghostly Flicker", source.getSourceId(), game);
                 Card card = game.getCard(target.getId());
                 if (card != null) {
                     Zone currentZone = game.getState().getZone(card.getId());
-                    card.putOntoBattlefield(game, currentZone, source.getId(), source.getControllerId());
+                    card.putOntoBattlefield(game, currentZone, source.getSourceId(), source.getControllerId());
                 }
             }
         }

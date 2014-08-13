@@ -153,7 +153,7 @@ class WerewolfRansackerEffect extends OneShotEffect {
             for (UUID permanentId : targetPointer.getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(permanentId);
                 if (permanent != null) {
-                    if (permanent.destroy(source.getId(), game, false)) {
+                    if (permanent.destroy(source.getSourceId(), game, false)) {
                         affectedTargets++;
                         if (game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) {
                             Player player = game.getPlayer(permanent.getControllerId());

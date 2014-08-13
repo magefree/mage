@@ -103,7 +103,7 @@ class WoodlandSleuthEffect extends OneShotEffect {
             if (cards.length > 0) {
                 Random rnd = new Random();
                 Card card = cards[rnd.nextInt(cards.length)];
-                card.moveToZone(Zone.HAND, source.getId(), game, true);
+                card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                 game.informPlayers(card.getName() + " returned to the hand of " + player.getName());
                 return true;
             }

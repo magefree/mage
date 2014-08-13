@@ -118,7 +118,7 @@ class GemOfBecomingEffect extends OneShotEffect {
         if (player.searchLibrary(target, game)) {
             Card card = player.getLibrary().remove(target.getFirstTarget(), game);
             if (card != null) {
-                card.moveToZone(Zone.HAND, source.getId(), game, false);
+                card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                 cards.add(card);
             }
         }

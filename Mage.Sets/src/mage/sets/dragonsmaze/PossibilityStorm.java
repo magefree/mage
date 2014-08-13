@@ -154,7 +154,7 @@ class PossibilityStormEffect extends OneShotEffect {
                         while (exile.size() > 0) {
                             card = exile.getRandom(game);
                             exile.remove(card.getId());
-                            card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+                            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
                         }
                     }
 

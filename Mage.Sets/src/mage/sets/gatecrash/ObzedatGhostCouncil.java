@@ -118,7 +118,7 @@ class ObzedatGhostCouncilExileSourceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            return permanent.moveToExile(source.getSourceId(),permanent.getName(), source.getId(), game);
+            return permanent.moveToExile(source.getSourceId(),permanent.getName(), source.getSourceId(), game);
         }
         return false;
     }

@@ -153,7 +153,7 @@ class SteamAuguryEffect extends OneShotEffect {
                     if (i < pile1CardsIds.size()) {
                         sb.append(", ");
                     }
-                    card.moveToZone(pile1Zone, source.getId(), game, false);
+                    card.moveToZone(pile1Zone, source.getSourceId(), game, false);
                 }
             }
             game.informPlayers(sb.toString());
@@ -168,7 +168,7 @@ class SteamAuguryEffect extends OneShotEffect {
                     if (i < pile2CardsIds.size()) {
                         sb.append(", ");
                     }
-                    card.moveToZone(pile2Zone, source.getId(), game, false);
+                    card.moveToZone(pile2Zone, source.getSourceId(), game, false);
                 }
             }
             game.informPlayers(sb.toString());

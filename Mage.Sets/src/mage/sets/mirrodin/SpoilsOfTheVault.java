@@ -123,7 +123,7 @@ class SpoilsOfTheVaultEffect extends OneShotEffect {
                     break;
                 }
                 else{
-                    card.moveToExile(null, sourceCard.getName(), source.getId(), game);
+                    card.moveToExile(null, sourceCard.getName(), source.getSourceId(), game);
                 }
             }
             else{

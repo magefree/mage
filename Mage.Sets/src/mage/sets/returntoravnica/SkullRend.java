@@ -86,7 +86,7 @@ public class SkullRend extends CardImpl {
                         Player opponent = game.getPlayer(playerId);
                         if (opponent != null) {
                             // damage
-                            opponent.damage(2, source.getId(), game, false, true);
+                            opponent.damage(2, source.getSourceId(), game, false, true);
                             // discard 2 cards at random
                             int amount = Math.min(2, opponent.getHand().size());
                             for (int i = 0; i < amount; i++) {

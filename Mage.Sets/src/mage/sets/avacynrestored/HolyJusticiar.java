@@ -94,7 +94,7 @@ class HolyJusticiarEffect extends OneShotEffect {
         if (creature != null) {
             if (creature.hasSubtype("Zombie")) {
                 creature.tap(game);
-                creature.moveToExile(source.getId(), creature.getName(), source.getSourceId(), game);
+                creature.moveToExile(source.getSourceId(), creature.getName(), source.getSourceId(), game);
             } else {
                 creature.tap(game);
             }

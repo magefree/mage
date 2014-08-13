@@ -109,7 +109,7 @@ class SaplingOfColfenorEffect extends OneShotEffect {
             if (card.getCardType().contains(CardType.CREATURE)) {
                 you.gainLife(card.getToughness().getValue(), game);
                 you.loseLife(card.getPower().getValue(), game);
-                return card.moveToZone(Zone.HAND, source.getId(), game, false);
+                return card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
             }
         }
         return false;

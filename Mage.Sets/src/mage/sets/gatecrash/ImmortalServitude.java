@@ -93,7 +93,7 @@ class ImmortalServitudeEffect extends OneShotEffect {
         for (Card card : cards) {
             if (card.getManaCost().convertedManaCost() == count
                     && card != null) {
-                card.moveToZone(Zone.BATTLEFIELD, source.getId(), game, false);
+                card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
             }
         }
         return true;

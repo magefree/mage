@@ -102,13 +102,13 @@ class DayOfTheDragonsEntersEffect extends OneShotEffect {
         if (exileId != null) {
             for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
                 if (creature != null) {
-                    if (creature.moveToExile(exileId, "Day of the Dragons", source.getId(), game)) {
+                    if (creature.moveToExile(exileId, "Day of the Dragons", source.getSourceId(), game)) {
                         creaturesExiled++;
                     }
                 }
             }
             DragonToken token = new DragonToken();
-            token.putOntoBattlefield(creaturesExiled, game, source.getId(), source.getControllerId());
+            token.putOntoBattlefield(creaturesExiled, game, source.getSourceId(), source.getControllerId());
             return true;
         }
         return false;
@@ -143,7 +143,7 @@ class DayOfTheDragonsLeavesEffect extends OneShotEffect {
         UUID exileId = source.getSourceId();
         for (Permanent dragon : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             if (dragon != null) {
-                dragon.sacrifice(source.getId(), game);
+                dragon.sacrifice(source.getSourceId(), game);
             }
         }
         ExileZone exile = game.getExile().getExileZone(exileId);
@@ -151,7 +151,7 @@ class DayOfTheDragonsLeavesEffect extends OneShotEffect {
             exile = exile.copy();
             for (UUID cardId : exile) {
                 Card card = game.getCard(cardId);
-                card.putOntoBattlefield(game, Zone.EXILED, source.getId(), source.getControllerId());
+                card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), source.getControllerId());
             }
             game.getExile().getExileZone(exileId).clear();
             return true;

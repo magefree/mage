@@ -104,7 +104,7 @@ class DeadbridgeChantEffect extends OneShotEffect {
                     targetZone = Zone.BATTLEFIELD;
                     text = " put onto battlefield for ";
                 }
-                card.moveToZone(targetZone, source.getId(), game, false);
+                card.moveToZone(targetZone, source.getSourceId(), game, false);
                 game.informPlayers(new StringBuilder("Deadbridge Chant: ").append(card.getName()).append(text).append(player.getName()).toString());
                 return true;
             }

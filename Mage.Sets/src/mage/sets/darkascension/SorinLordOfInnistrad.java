@@ -155,7 +155,7 @@ class SorinLordOfInnistradEffect extends OneShotEffect {
                 if (game.getState().getZone(targetId) == Zone.GRAVEYARD) {
                     Card card = game.getCard(targetId);
                     if (card != null) {
-                        card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), player.getId());
+                        card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), player.getId());
                     }
                 }
             }

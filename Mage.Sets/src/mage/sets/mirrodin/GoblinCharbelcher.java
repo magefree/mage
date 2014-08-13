@@ -140,7 +140,7 @@ class GoblinCharbelcherEffect extends OneShotEffect {
             Card card = cards.get(target.getFirstTarget(), game);
             if (card != null) {
                 cards.remove(card);
-                card.moveToZone(Zone.PICK, source.getId(), game, false);
+                card.moveToZone(Zone.PICK, source.getSourceId(), game, false);
             }
             target.clearChosen();
         }

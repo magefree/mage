@@ -88,7 +88,7 @@ class RealitySpasmTapEffect extends OneShotEffect {
         int numberToTap = source.getManaCostsToPay().getX();
         numberToTap = Math.min(game.getBattlefield().getAllActivePermanents().size(), numberToTap);
         TargetPermanent target = new TargetPermanent(numberToTap, filter);
-        if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getId(), game)) {
+        if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), game)) {
             if (!target.getTargets().isEmpty()) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
@@ -128,7 +128,7 @@ class RealitySpasmUntapEffect extends OneShotEffect {
         int numberToTap = source.getManaCostsToPay().getX();
         numberToTap = Math.min(game.getBattlefield().getAllActivePermanents().size(), numberToTap);
         TargetPermanent target = new TargetPermanent(numberToTap, filter);
-        if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Untap, source.getControllerId(), source.getId(), game)) {
+        if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Untap, source.getControllerId(), source.getSourceId(), game)) {
             if (!target.getTargets().isEmpty()) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {

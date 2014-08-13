@@ -85,7 +85,7 @@ public class HeedTheMists extends CardImpl {
                     Card card = player.getLibrary().removeFromTop(game);
                     if (card != null) {
                         int cmc = card.getManaCost().convertedManaCost();
-                        result = card.moveToZone(Zone.GRAVEYARD, source.getId(), game, true);
+                        result = card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
                         player.drawCards(cmc, game);
                     }
                 } 

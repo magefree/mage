@@ -96,7 +96,7 @@ class ManaSeismEffect extends OneShotEffect {
             for(Object uuid : sacrificeLand.getTargets()){
                 Permanent land = game.getPermanent((UUID)uuid);
                 if(land != null){
-                    land.sacrifice(source.getId(), game);
+                    land.sacrifice(source.getSourceId(), game);
                     amount++;
                 }
             }

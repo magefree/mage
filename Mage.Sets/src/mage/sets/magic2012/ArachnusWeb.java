@@ -104,7 +104,7 @@ class ArachnusWebEffect2 extends OneShotEffect {
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
             if (permanent != null && permanent.getPower().getValue() >= 4) {
-                enchantment.destroy(source.getId(), game, false);
+                enchantment.destroy(source.getSourceId(), game, false);
                 return true;
             }
         }

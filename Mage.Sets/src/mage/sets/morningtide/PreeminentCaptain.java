@@ -105,7 +105,7 @@ class PreeminentCaptainEffect extends OneShotEffect {
                 UUID cardId = target.getFirstTarget();
                 Card card = player.getHand().get(cardId, game);
                 if (card != null) {
-                    if (card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId(), true)) {
+                    if (card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), source.getControllerId(), true)) {
                         Permanent permanent = game.getPermanent(card.getId());
                         game.getCombat().addAttackingCreature(permanent.getId(), game);
                     }

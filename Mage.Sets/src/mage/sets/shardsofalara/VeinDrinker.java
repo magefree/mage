@@ -97,12 +97,12 @@ class VeinDrinkerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creatureSource = game.getPermanent(source.getSourceId());
-        Permanent creatureTarget = game.getPermanent(source.getTargets().get(0).getFirstTarget());
-        if (creatureSource != null && creatureTarget != null) {
-            if (creatureSource.getCardType().contains(CardType.CREATURE) && creatureTarget.getCardType().contains(CardType.CREATURE)) {
-                creatureSource.damage(creatureTarget.getPower().getValue(), creatureTarget.getId(), game, false, true);
-                creatureTarget.damage(creatureSource.getPower().getValue(), creatureSource.getId(), game, false, true);
+        Permanent sourceCreature = game.getPermanent(source.getSourceId());
+        Permanent targetCreature = game.getPermanent(source.getTargets().get(0).getFirstTarget());
+        if (sourceCreature != null && targetCreature != null) {
+            if (sourceCreature.getCardType().contains(CardType.CREATURE) && targetCreature.getCardType().contains(CardType.CREATURE)) {
+                sourceCreature.damage(targetCreature.getPower().getValue(), targetCreature.getId(), game, false, true);
+                targetCreature.damage(sourceCreature.getPower().getValue(), sourceCreature.getId(), game, false, true);
                 return true;
             }
         }

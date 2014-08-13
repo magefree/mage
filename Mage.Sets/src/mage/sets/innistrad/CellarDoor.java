@@ -93,7 +93,7 @@ class CellarDoorEffect extends OneShotEffect {
         if (player != null && player.getLibrary().size() > 0) {
             Card card = player.getLibrary().removeFromBottom(game);
             if (card != null) {
-                card.moveToZone(Zone.GRAVEYARD, source.getId(), game, true);
+                card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
                 if (card.getCardType().contains(CardType.CREATURE)) {
                     ZombieToken token = new ZombieToken("ISD");
                     token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());

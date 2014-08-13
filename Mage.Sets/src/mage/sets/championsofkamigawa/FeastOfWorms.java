@@ -105,7 +105,7 @@ class FeastOfWormsEffect extends OneShotEffect {
 
                     Permanent land = game.getPermanent(target.getFirstTarget());
                     if (land != null) {
-                        return land.sacrifice(source.getId(), game);
+                        return land.sacrifice(source.getSourceId(), game);
                     }
                     return true;
                 }

@@ -112,7 +112,7 @@ class WordsOfWindEffect extends ReplacementEffectImpl {
                     }
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     if (permanent != null) {
-                        permanent.moveToZone(Zone.HAND, source.getId(), game, false);
+                        permanent.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                     }
                 }
             }

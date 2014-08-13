@@ -93,7 +93,7 @@ public class RatchetBomb extends CardImpl {
             int count = p.getCounters().getCount(CounterType.CHARGE);
             for (Permanent perm: game.getBattlefield().getAllActivePermanents()) {
                 if (perm.getManaCost().convertedManaCost() == count && !(perm.getCardType().contains(CardType.LAND))) {
-                    perm.destroy(source.getId(), game, false);
+                    perm.destroy(source.getSourceId(), game, false);
                 }
             }
 

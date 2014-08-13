@@ -79,12 +79,12 @@ public class PhyrexianRebirth extends CardImpl {
         public boolean apply(Game game, Ability source) {
             int count = 0;
             for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
-                count += permanent.destroy(source.getId(), game, false) ? 1 : 0;
+                count += permanent.destroy(source.getSourceId(), game, false) ? 1 : 0;
             }
             HorrorToken horrorToken = new HorrorToken();
             horrorToken.getPower().initValue(count);
             horrorToken.getToughness().initValue(count);
-            horrorToken.putOntoBattlefield(1, game, source.getId(), source.getControllerId());
+            horrorToken.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
             return true;
         }
 

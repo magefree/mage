@@ -118,7 +118,7 @@ class GenesisWaveEffect extends OneShotEffect {
         while (cards.size() > 0) {
             Card card = cards.get(cards.iterator().next(), game);
             cards.remove(card);
-            controller.moveCardToGraveyardWithInfo(card, source.getId(), game, Zone.LIBRARY);
+            controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
         }
         return true;
     }

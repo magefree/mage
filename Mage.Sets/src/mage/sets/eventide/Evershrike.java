@@ -140,7 +140,7 @@ class EvershrikeEffect extends OneShotEffect {
 
                 }
                 if (exiled) {
-                    return evershrikePermanent.moveToExile(source.getSourceId(), "Evershrike Exile", source.getId(), game);
+                    return evershrikePermanent.moveToExile(source.getSourceId(), "Evershrike Exile", source.getSourceId(), game);
                 }
                 return true;
             }

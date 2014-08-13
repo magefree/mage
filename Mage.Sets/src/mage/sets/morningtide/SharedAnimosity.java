@@ -120,7 +120,7 @@ class SharedAnimosityEffect extends ContinuousEffectImpl {
                 filter.add(Predicates.or(predicateList));
             }
             
-            power = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getId(), game).size();
+            power = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game).size();
         }
     }
 

@@ -152,7 +152,7 @@ class WorldQuellerEffect extends OneShotEffect {
                 // you always go first
                 if (target.canChoose(you.getId(), game)) {
                     while (you.isInGame() && !target.isChosen() && target.canChoose(you.getId(), game)) {
-                        you.choose(Outcome.Sacrifice, target, source.getId(), game);
+                        you.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                     }
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     if (permanent != null) {
@@ -168,7 +168,7 @@ class WorldQuellerEffect extends OneShotEffect {
                         Player player = game.getPlayer(playerId);
                         if (target.canChoose(playerId, game)) {
                             while (!target.isChosen() && target.canChoose(playerId, game)) {
-                                player.choose(Outcome.Sacrifice, target, source.getId(), game);
+                                player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                             }
                             Permanent permanent = game.getPermanent(target.getFirstTarget());
                             if (permanent != null) {
@@ -182,7 +182,7 @@ class WorldQuellerEffect extends OneShotEffect {
                 // all chosen permanents are sacrificed together
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
                     if (chosen.contains(permanent)) {
-                        permanent.sacrifice(source.getId(), game);
+                        permanent.sacrifice(source.getSourceId(), game);
                     }
                 }
                 return true;

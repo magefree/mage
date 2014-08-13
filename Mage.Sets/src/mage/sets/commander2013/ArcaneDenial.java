@@ -42,7 +42,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetSpell;
 import mage.target.targetpointer.FixedTarget;
@@ -101,7 +100,7 @@ class ArcaneDenialEffect extends OneShotEffect {
             controller = game.getPlayer(game.getControllerId(targetId));
         }
         if (targetId != null
-                && game.getStack().counter(targetId, source.getId(), game)) {
+                && game.getStack().counter(targetId, source.getSourceId(), game)) {
             countered = true;
         }
         if (controller != null) {

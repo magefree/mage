@@ -99,11 +99,11 @@ class PeelFromRealityEffect extends OneShotEffect {
 
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            result |= permanent.moveToZone(Zone.HAND, source.getId(), game, false);
+            result |= permanent.moveToZone(Zone.HAND, source.getSourceId(), game, false);
         }
         permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (permanent != null) {
-            result |= permanent.moveToZone(Zone.HAND, source.getId(), game, false);
+            result |= permanent.moveToZone(Zone.HAND, source.getSourceId(), game, false);
         }
 
         return result;

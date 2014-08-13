@@ -122,7 +122,7 @@ class DarkSupplicantEffect extends OneShotEffect {
                     for (UUID cardId : (List<UUID>) target.getTargets()) {
                         Card card = player.getLibrary().getCard(cardId, game);
                         if (card != null) {
-                            if (card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId())) {
+                            if (card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId())) {
                                 return true;
                             }
                         }
@@ -137,7 +137,7 @@ class DarkSupplicantEffect extends OneShotEffect {
             for (UUID card : graveyard) {
                 Card checkCard = game.getCard(card);
                 if (checkCard.getName().equals("Scion of Darkness")) {
-                    checkCard.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId());
+                    checkCard.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
                     return true;
                 }
             }
@@ -148,7 +148,7 @@ class DarkSupplicantEffect extends OneShotEffect {
             for (UUID card : hand) {
                 Card checkCard = game.getCard(card);
                 if (checkCard.getName().equals("Scion of Darkness")) {
-                    checkCard.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId());
+                    checkCard.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), source.getControllerId());
                     return true;
                 }
             }

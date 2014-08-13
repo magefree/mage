@@ -101,7 +101,7 @@ class UrgeToFeedEffect extends OneShotEffect {
         TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
         while (true) {
             target.clearChosen();
-            if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getId(), game)) {
+            if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), game)) {
                 UUID vampire = target.getFirstTarget();
                 if (vampire != null) {
                     game.getPermanent(vampire).tap(game);

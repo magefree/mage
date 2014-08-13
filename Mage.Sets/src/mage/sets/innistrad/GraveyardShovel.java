@@ -98,7 +98,7 @@ class GraveyardShovelEffect extends OneShotEffect {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     targetPlayer.getGraveyard().remove(card);
-                    card.moveToExile(null, "", source.getId(), game);
+                    card.moveToExile(null, "", source.getSourceId(), game);
                     if (card.getCardType().contains(CardType.CREATURE)) {
                         controller.gainLife(2, game);
                     }

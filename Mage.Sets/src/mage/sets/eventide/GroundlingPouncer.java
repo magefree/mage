@@ -106,7 +106,7 @@ class GroundingPouncerCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         ActivatedAbilityUsedThisTurnWatcher watcher = (ActivatedAbilityUsedThisTurnWatcher) game.getState().getWatchers().get("ActivatedAbilityUsedThisTurn");
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            if (game.getBattlefield().countAll(filter, opponentId, game) > 0 && !watcher.getActivatedThisTurn().contains(source.getId())) {
+            if (game.getBattlefield().countAll(filter, opponentId, game) > 0 && !watcher.getActivatedThisTurn().contains(source.getSourceId())) {
                 return true;
             }
         }

@@ -92,7 +92,7 @@ class GazeOfGraniteEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
             if (!permanent.getCardType().contains(CardType.LAND) && permanent.getManaCost().convertedManaCost() <= source.getManaCostsToPay().getX()) {
-                permanent.destroy(source.getId(), game, false);
+                permanent.destroy(source.getSourceId(), game, false);
             }
         }
         return true;

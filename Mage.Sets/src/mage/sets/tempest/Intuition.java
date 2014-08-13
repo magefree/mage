@@ -118,12 +118,12 @@ class IntuitionEffect extends SearchEffect {
                 Card card = cards.get(targetCard.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
-                    card.moveToZone(Zone.HAND, source.getId(), game, false);
+                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                 }
                 
                 for(UUID uuid : cards){
                     card = cards.get(uuid, game);
-                    card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
                 }
                 
             }

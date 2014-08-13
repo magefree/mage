@@ -283,7 +283,7 @@ class ChandraPyromasterEffect3 extends OneShotEffect {
         for (int i = 0; i < max; i++) {
             Card card = you.getLibrary().removeFromTop(game);
             if (card != null) {
-                card.moveToExile(source.getSourceId(), "Chandra Pyromaster", source.getId(), game);
+                card.moveToExile(source.getSourceId(), "Chandra Pyromaster", source.getSourceId(), game);
                 cards.add(card);
             }
         }

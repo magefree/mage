@@ -129,7 +129,7 @@ class KillingWaveEffect extends OneShotEffect {
             }
 
             for (Permanent creature : sacrifices) {
-                creature.sacrifice(source.getId(), game);
+                creature.sacrifice(source.getSourceId(), game);
             }
         }
         return true;

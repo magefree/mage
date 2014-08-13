@@ -106,7 +106,7 @@ class DestroyEnchantedEffect extends OneShotEffect {
                 creature = game.getPermanent(enchantment.getAttachedTo());
             }
             if (creature != null) {
-                return creature.destroy(source.getId(), game, false);
+                return creature.destroy(source.getSourceId(), game, false);
             }
         }
         return false;

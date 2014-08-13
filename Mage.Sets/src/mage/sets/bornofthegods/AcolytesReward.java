@@ -111,7 +111,7 @@ class AcolytesRewardEffect extends PreventionEffectImpl {
         } else {
             amount = 0;
         }
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getControllerId(), source.getId(), source.getControllerId(), toPrevent, false);
+        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getControllerId(), source.getSourceId(), source.getControllerId(), toPrevent, false);
         if (!game.replaceEvent(preventEvent)) {
             Permanent targetCreature = game.getPermanent(source.getFirstTarget());
             if (targetCreature != null) {

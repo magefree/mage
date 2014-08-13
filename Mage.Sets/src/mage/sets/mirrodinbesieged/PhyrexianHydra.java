@@ -97,11 +97,11 @@ class PhyrexianHydraEffect extends PreventionEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         boolean retValue = false;
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
+        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
         int damage = event.getAmount();
         if (!game.replaceEvent(preventEvent)) {
             event.setAmount(0);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), damage));
             retValue = true;
         }
         Permanent permanent = game.getPermanent(source.getSourceId());

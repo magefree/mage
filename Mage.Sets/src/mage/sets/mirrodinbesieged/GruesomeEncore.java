@@ -99,7 +99,7 @@ class GruesomeEncoreEffect extends OneShotEffect {
         Card card = game.getCard(source.getFirstTarget());
         if (card != null) {
             card.addAbility(HasteAbility.getInstance());
-            card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId());
+            card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
 
             ExileTargetEffect exileEffect = new ExileTargetEffect();
             exileEffect.setTargetPointer(new FixedTarget(card.getId()));
@@ -135,7 +135,7 @@ class GruesomeEncoreReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(source.getFirstTarget());
         if (card != null) {
-            card.moveToExile(null, "", source.getId(), game);
+            card.moveToExile(null, "", source.getSourceId(), game);
         }
         return true;
     }

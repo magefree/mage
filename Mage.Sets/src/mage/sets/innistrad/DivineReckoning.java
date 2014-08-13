@@ -117,7 +117,7 @@ class DivineReckoningEffect extends OneShotEffect {
 
             for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
                 if (!chosen.contains(permanent)) {
-                    permanent.destroy(source.getId(), game, false);
+                    permanent.destroy(source.getSourceId(), game, false);
                 }
             }
             return true;

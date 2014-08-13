@@ -111,7 +111,7 @@ class MindsparkerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         if (targetPlayer != null) {
-            targetPlayer.damage(2, source.getId(), game, false, true);
+            targetPlayer.damage(2, source.getSourceId(), game, false, true);
             return true;
         }
         return false;

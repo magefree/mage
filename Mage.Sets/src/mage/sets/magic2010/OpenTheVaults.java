@@ -108,10 +108,10 @@ class OpenTheVaultsEffect extends OneShotEffect {
             }
 
             for (Card card : enchantments) {
-                card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), card.getOwnerId());
+                card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), card.getOwnerId());
             }
             for (Card card : artifacts) {
-                card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), card.getOwnerId());
+                card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), card.getOwnerId());
             }
         }
         return false;

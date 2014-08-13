@@ -106,7 +106,7 @@ class GaeasBlessingEffect extends OneShotEffect {
                 if (card != null) {
                     if (player.getGraveyard().contains(card.getId())) {
                         player.getGraveyard().remove(card);
-                        card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                         shuffle = true;
                     }
                 }

@@ -129,13 +129,13 @@ class DimirCharmEffect extends OneShotEffect {
                 if(controller.chooseTarget(Outcome.Benefit, cards, target, source, game)){
                     Card card = cards.get(target.getFirstTarget(), game);
                     if(card != null){
-                        card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                         cards.remove(card);
                     }
                     
                     for(Card card2 : cards.getCards(game)){
                         if(card2 != null){
-                            card2.moveToZone(Zone.GRAVEYARD, source.getId(), game, true);
+                            card2.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
                         }
                     }
                 }

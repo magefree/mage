@@ -105,10 +105,10 @@ class SpelltwineEffect extends OneShotEffect {
         Card cardTwo = game.getCard(source.getTargets().get(1).getFirstTarget());
         if (you != null) {
             if (cardOne != null) {
-                cardOne.moveToExile(null, null, source.getId(), game);
+                cardOne.moveToExile(null, null, source.getSourceId(), game);
             }
             if (cardTwo != null) {
-                cardTwo.moveToExile(null, null, source.getId(), game);
+                cardTwo.moveToExile(null, null, source.getSourceId(), game);
             }
 
             boolean castCardOne = true;

@@ -99,7 +99,7 @@ class ChaoticBacklashEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         if (targetPlayer != null) {
             int amount = 2 * game.getBattlefield().countAll(filter, targetPlayer.getId(), game);
-            targetPlayer.damage(amount, source.getId(), game, false, true);
+            targetPlayer.damage(amount, source.getSourceId(), game, false, true);
             return true;
         }
         return false;

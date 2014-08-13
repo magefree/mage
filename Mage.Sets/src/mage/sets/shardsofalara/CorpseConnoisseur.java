@@ -109,7 +109,7 @@ class SearchLibraryPutInGraveyard extends SearchEffect {
                 for (UUID cardId: (List<UUID>)target.getTargets()) {
                     Card card = player.getLibrary().remove(cardId, game);
                     if (card != null){
-                        card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+                        card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
                     }
                 }
             }

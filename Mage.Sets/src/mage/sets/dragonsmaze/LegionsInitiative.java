@@ -168,7 +168,7 @@ class LegionsInitiativeReturnFromExileEffect extends OneShotEffect {
             exile = exile.copy();
             for (UUID cardId: exile) {
                 Card card = game.getCard(cardId);
-                card.moveToZone(Zone.BATTLEFIELD, source.getId(), game, false);
+                card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
                 Permanent returnedCreature = game.getPermanent(cardId);
                 if (returnedCreature != null) {
                     ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);

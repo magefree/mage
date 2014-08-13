@@ -104,7 +104,7 @@ class DestroyTheEvidenceEffect extends OneShotEffect {
             while (player.getLibrary().size() > 0 && !landFound) {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
                     if (card.getCardType().contains(CardType.LAND)) {
                         landFound = true;
                     }

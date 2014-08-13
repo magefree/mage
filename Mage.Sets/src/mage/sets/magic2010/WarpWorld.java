@@ -114,7 +114,7 @@ class WarpWorldEffect extends OneShotEffect {
             if (list != null) {
                 count = list.size();
                 for (Permanent permanent : list) {
-                    permanent.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                    permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                 }
             }
 

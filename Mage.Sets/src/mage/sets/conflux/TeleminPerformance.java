@@ -100,7 +100,7 @@ class TeleminPerformanceEffect extends OneShotEffect {
                 }
                 if (!creatureFound) {
                     cards.add(card);
-                    card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
                 }
             }
         }

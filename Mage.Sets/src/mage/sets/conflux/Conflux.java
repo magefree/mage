@@ -176,7 +176,7 @@ class ConfluxEffect extends OneShotEffect {
         if (you != null) {
             you.revealCards("Conflux", cards, game);
             for (Card card : cards.getCards(game)) {
-                card.moveToZone(Zone.HAND, source.getId(), game, true);
+                card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
             }
             you.shuffleLibrary(game);
         }

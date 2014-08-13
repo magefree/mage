@@ -89,7 +89,7 @@ class PsychicMiasmaEffect1 extends OneShotEffect {
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {
                 player.discard(card, source, game);
-                game.getState().setValue(source.getId().toString(), card);
+                game.getState().setValue(source.getSourceId().toString(), card);
                 return true;
             }
         }
@@ -120,12 +120,12 @@ class PsychicMiasmaEffect2 extends PostResolveEffect {
 
     @Override
     public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
-        Card discard = (Card) game.getState().getValue(source.getId().toString());
+        Card discard = (Card) game.getState().getValue(source.getSourceId().toString());
         if (discard != null && discard.getCardType().contains(CardType.LAND)) {
-            card.moveToZone(Zone.HAND, source.getId(), game, false);
+            card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
         }
         else {
-            card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+            card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
         }
     }
 

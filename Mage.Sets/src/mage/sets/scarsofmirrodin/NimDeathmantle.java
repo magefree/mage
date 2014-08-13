@@ -157,14 +157,14 @@ class NimDeathmantleEffect extends OneShotEffect {
         if (player != null && equipment != null) {
             if (player.chooseUse(Outcome.Benefit, equipment.getName() + " - Pay " + cost.getText() + "?", game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getId(), source.getControllerId(), false)) {
+                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                     UUID target = targetPointer.getFirst(game, source);
                     if (target != null && equipment != null) {
                         Card card = game.getCard(target);
                         // check if it's still in graveyard
                         if (card != null && game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
                             Player owner = game.getPlayer(card.getOwnerId());
-                            if (card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId())) {
+                            if (card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId())) {
                                 Permanent permanent = game.getPermanent(card.getId());
                                 if (permanent != null) {
                                     permanent.addAttachment(equipment.getId(), game);

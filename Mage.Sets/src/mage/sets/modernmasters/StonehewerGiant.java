@@ -114,7 +114,7 @@ class StonehewerGiantEffect extends OneShotEffect {
         if (player.searchLibrary(target, game)) {
             Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
             if (card != null) {
-                card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
+                card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
                 Permanent equipment = game.getPermanent(card.getId());
 
                 Target targetCreature = new TargetControlledCreaturePermanent();

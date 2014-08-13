@@ -123,7 +123,7 @@ class WorldslayerEffect extends OneShotEffect {
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(source.getControllerId(), game);
         for (Permanent permanent : permanents) {
             if (permanent.getId() != source.getSourceId()) {
-                permanent.destroy(source.getId(), game, false);
+                permanent.destroy(source.getSourceId(), game, false);
             }
         }
         return true;

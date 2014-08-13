@@ -91,7 +91,7 @@ class RapidHybridizationEffect extends OneShotEffect {
         Permanent permanent = (Permanent) game.getPermanentOrLKIBattlefield(targetPointer.getFirst(game, source));
         if (permanent != null) {
             RapidHybridizationToken token = new RapidHybridizationToken();
-            token.putOntoBattlefield(1, game, source.getId(), permanent.getControllerId());
+            token.putOntoBattlefield(1, game, source.getSourceId(), permanent.getControllerId());
         }
         return true;
     }

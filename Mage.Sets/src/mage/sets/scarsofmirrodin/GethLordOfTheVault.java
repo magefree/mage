@@ -119,7 +119,7 @@ class GethLordOfTheVaultEffect extends OneShotEffect {
             // if still in graveyard
             if (game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
                 Player player = game.getPlayer(card.getOwnerId());
-                if (card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId())) {
+                if (card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId())) {
 
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent != null) {
@@ -132,7 +132,7 @@ class GethLordOfTheVaultEffect extends OneShotEffect {
                     for (int i = 0; i < cardsCount; i++) {
                         Card removedCard = player.getLibrary().getFromTop(game);
                         if (removedCard != null) {
-                            removedCard.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+                            removedCard.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
                         } else {
                             break;
                         }

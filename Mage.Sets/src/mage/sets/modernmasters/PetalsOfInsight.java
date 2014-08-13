@@ -111,13 +111,13 @@ class PetalsOfInsightEffect extends OneShotEffect {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
-                    card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
                 }
                 target.clearChosen();
             }
             if (cards.size() == 1) {
                 Card card = cards.get(cards.iterator().next(), game);
-                card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
             }
             game.getState().setValue(source.getSourceId().toString(), Boolean.TRUE);
         } else {
@@ -157,10 +157,10 @@ class PetalsOfInsightReturnEffect extends PostResolveEffect {
                 returnToHand = Boolean.FALSE;
             }
             if (returnToHand) {
-                card.moveToZone(Zone.HAND, source.getId(), game, false);
+                card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
             }
             else {
-                card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+                card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
                 controller.drawCards(3, game);
             }
         }

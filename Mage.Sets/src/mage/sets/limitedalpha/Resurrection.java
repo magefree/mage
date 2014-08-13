@@ -91,7 +91,7 @@ class ResurrectionEffect extends OneShotEffect {
         Card card = game.getCard(source.getFirstTarget());
         Player player = game.getPlayer(card.getOwnerId());
         if (card != null && player != null) {
-            card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId());
+            card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
             return true;
         }
 

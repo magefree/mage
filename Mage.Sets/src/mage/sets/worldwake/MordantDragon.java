@@ -100,7 +100,7 @@ class MordantDragonEffect extends OneShotEffect {
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + player.getName() + " controls");
                 filter.add(new ControllerIdPredicate(player.getId()));
                 TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-                if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Damage, source.getControllerId(), source.getId(), game)) {
+                if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Damage, source.getControllerId(), source.getSourceId(), game)) {
                     UUID creature = target.getFirstTarget();
                     if (creature != null) {
                         game.getPermanent(creature).damage(amount, source.getSourceId(), game, false, true);

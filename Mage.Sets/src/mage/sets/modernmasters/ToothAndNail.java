@@ -107,7 +107,7 @@ class ToothAndNailPutCreatureOnBattlefieldEffect extends OneShotEffect {
             for (UUID targetId: target.getTargets()) {
                 Card card = game.getCard(targetId);
                 if (card != null) {
-                    card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId());
+                    card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), source.getControllerId());
                 }
             }
             return true;

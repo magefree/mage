@@ -112,7 +112,7 @@ class SarkhanTheMadRevealAndDrawEffect extends OneShotEffect {
             Card card = player.getLibrary().removeFromTop(game);
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (card != null) {
-                card.moveToZone(Zone.HAND, source.getId(), game, false);
+                card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                 permanent.damage(card.getManaCost().convertedManaCost(), this.getId(), game, false, false);
                 Cards cards = new CardsImpl();
                 cards.add(card);

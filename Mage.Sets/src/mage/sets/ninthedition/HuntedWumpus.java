@@ -103,7 +103,7 @@ class HuntedWumpusEffect extends OneShotEffect {
                                 && player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
                             Card card = game.getCard(target.getFirstTarget());
                             if (card != null) {
-                                card.putOntoBattlefield(game, Zone.HAND, source.getId(), player.getId());
+                                card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), player.getId());
                             }
                         }
                     }

@@ -100,10 +100,10 @@ class CruelRevivalEffect extends OneShotEffect {
         Permanent targetDestroy = game.getPermanent(source.getFirstTarget());
         Card targetRetrieve = game.getCard(source.getTargets().get(1).getFirstTarget());
         if (targetDestroy != null) {
-            targetDestroy.destroy(source.getId(), game, true);
+            targetDestroy.destroy(source.getSourceId(), game, true);
         }
         if (targetRetrieve != null) {
-            targetRetrieve.moveToZone(Zone.HAND, source.getId(), game, true);
+            targetRetrieve.moveToZone(Zone.HAND, source.getSourceId(), game, true);
         }
         return true;
     }

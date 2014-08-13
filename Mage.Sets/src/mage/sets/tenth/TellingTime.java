@@ -107,17 +107,17 @@ class TellingTimeEffect extends OneShotEffect {
 
         Card card = pickCard(game, player, cards, "card to put in your hand");
         if (card != null) {
-            card.moveToZone(Zone.HAND, source.getId(), game, false);
+            card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
         }
 
         card = pickCard(game, player, cards, "card to put on top of your library");
         if (card != null) {
-            card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
         }
 
         if (!cards.isEmpty()) {
             card = cards.getRandom(game);
-            card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
         }
 
         return true;

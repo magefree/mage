@@ -95,7 +95,7 @@ class BlasphemousActEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
         for (Permanent permanent : permanents) {
-            permanent.damage(13, source.getId(), game, false, true);
+            permanent.damage(13, source.getSourceId(), game, false, true);
         }
         return true;
     }

@@ -93,7 +93,7 @@ class DruidicSatchelEffect extends OneShotEffect {
             }
             if (card.getCardType().contains(CardType.LAND)) {
                 player.getLibrary().getCard(card.getId(), game);
-                card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
+                card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
             }
             if (!card.getCardType().contains(CardType.CREATURE) && !card.getCardType().contains(CardType.LAND)) {
                 player.gainLife(2, game);

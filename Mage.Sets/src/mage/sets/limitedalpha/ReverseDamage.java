@@ -100,7 +100,7 @@ class ReverseDamageEffect extends PreventionEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         this.used = true;
         int damageAmount = event.getAmount();
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getControllerId(), source.getId(), source.getControllerId(), damageAmount, false);
+        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getControllerId(), source.getSourceId(), source.getControllerId(), damageAmount, false);
         if (!game.replaceEvent(preventEvent)) {
             event.setAmount(0);
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getControllerId(), source.getSourceId(), source.getControllerId(), damageAmount));

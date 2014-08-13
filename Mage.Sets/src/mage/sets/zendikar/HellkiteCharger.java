@@ -99,7 +99,7 @@ class HellkiteChargerEffect extends OneShotEffect {
             ManaCosts cost = new ManaCostsImpl("{5}{R}{R}");
             if (player.chooseUse(Outcome.Damage, "Pay " + cost.getText() + "?", game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getId(), source.getControllerId(), false)) {
+                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                     new UntapAllControllerEffect(new FilterAttackingCreature(),"").apply(game, source);
                     game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), TurnPhase.COMBAT, null, false));
                     return true;

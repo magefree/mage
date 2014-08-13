@@ -82,7 +82,7 @@ class SwayOfTheStarsEffect extends OneShotEffect {
         Player sourcePlayer = game.getPlayer(source.getControllerId());
 
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            permanent.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+            permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
         }
 
         for (UUID playerId: sourcePlayer.getInRange()) {

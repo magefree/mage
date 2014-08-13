@@ -98,13 +98,13 @@ class SereneRemembranceEffect extends OneShotEffect {
                     if (player.getGraveyard().contains(card.getId())) {
                         graveyardPlayer = player;
                         player.getGraveyard().remove(card);
-                        result |= card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                        result |= card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                     }
                 }
             }            
         }
         Card card = game.getCard(source.getSourceId());
-        result |= card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+        result |= card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
         Player player = game.getPlayer(card.getOwnerId());
         if (player != null){
             player.shuffleLibrary(game);

@@ -57,6 +57,7 @@ import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -115,18 +116,18 @@ class DomriRadeEffect1 extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.getLibrary().size() > 0) {
-            Card card = player.getLibrary().getFromTop(game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && controller.getLibrary().size() > 0) {
+            Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
                 CardsImpl cards = new CardsImpl();
                 cards.add(card);
-                player.lookAtCards("Domri Rade", cards, game);
+                controller.lookAtCards("Domri Rade", cards, game);
                 if (card.getCardType().contains(CardType.CREATURE)) {
-                    if (player.chooseUse(outcome, new StringBuilder("Reveal ").append(card.getName()).append(" and put it into your hand?").toString(), game)) {
-                        card = player.getLibrary().removeFromTop(game);
-                        card.moveToZone(Zone.HAND, source.getId(), game, true);
-                        player.revealCards("Domri Rade", cards, game);
+                    if (controller.chooseUse(outcome, new StringBuilder("Reveal ").append(card.getName()).append(" and put it into your hand?").toString(), game)) {
+                        card = controller.getLibrary().removeFromTop(game);
+                        controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                        controller.revealCards("Domri Rade", cards, game);
                     }
                 }
                 return true;
@@ -150,4 +151,29 @@ class DomriRadeEmblem extends Emblem {
         ability.addEffect(effect);
         this.getAbilities().add(ability);
     }
+}
+
+class TargetOtherCreaturePermanent extends TargetCreaturePermanent {
+    
+    public TargetOtherCreaturePermanent() {
+        super();
+    }
+
+    public TargetOtherCreaturePermanent(final TargetOtherCreaturePermanent target) {
+        super(target);
+    }
+
+    @Override
+    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
+        if (source.getTargets().get(0).getTargets().contains(id)) {
+            return false;
+        }
+        return super.canTarget(controllerId, id, source, game);
+    }
+
+    @Override
+    public TargetOtherCreaturePermanent copy() {
+        return new TargetOtherCreaturePermanent(this);
+    }
+
 }

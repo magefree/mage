@@ -106,7 +106,7 @@ class ScalpelexisEffect extends OneShotEffect {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
                     namesFiltered.add(card.getName());
-                    card.moveToExile(id, "Moved these cards to exile", source.getId(), game);
+                    card.moveToExile(id, "Moved these cards to exile", source.getSourceId(), game);
                 }
             }
         }

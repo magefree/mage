@@ -188,12 +188,12 @@ class VolatileRigEffect2 extends OneShotEffect {
 
                 List<Permanent> permanents = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
                 for (Permanent permanent: permanents) {
-                    permanent.damage(4, source.getId(), game, false, true);
+                    permanent.damage(4, source.getSourceId(), game, false, true);
                 }
                 for (UUID playerId: player.getInRange()) {
                     Player damageToPlayer = game.getPlayer(playerId);
                     if (damageToPlayer != null) {
-                        damageToPlayer.damage(4, source.getId(), game, false, true);
+                        damageToPlayer.damage(4, source.getSourceId(), game, false, true);
                     }
                 }
                 return true;

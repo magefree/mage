@@ -96,7 +96,7 @@ class DryadMilitantReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(event.getTargetId());
         if (card != null) {
-            return card.moveToExile(null, "", source.getId(), game);
+            return card.moveToExile(null, "", source.getSourceId(), game);
         }
         return false;
     }

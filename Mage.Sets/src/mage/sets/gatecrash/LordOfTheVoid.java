@@ -110,7 +110,7 @@ class LordOfTheVoidEffect extends OneShotEffect {
         for(int i = 0; i < max; i++){
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
-                card.moveToExile(null, "", source.getId(), game);
+                card.moveToExile(null, "", source.getSourceId(), game);
                 cards.add(card);
             }
         }
@@ -119,7 +119,7 @@ class LordOfTheVoidEffect extends OneShotEffect {
             if(controller.chooseTarget(Outcome.PutCreatureInPlay, cards, target, source, game)){
                 Card card = cards.get(target.getFirstTarget(), game);
                 if(card != null){
-                    card.putOntoBattlefield(game, Zone.EXILED, source.getId(), source.getControllerId());
+                    card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), source.getControllerId());
                 }
             }
         }

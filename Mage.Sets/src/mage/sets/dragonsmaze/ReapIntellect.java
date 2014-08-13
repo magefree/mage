@@ -109,7 +109,7 @@ class ReapIntellectEffect extends OneShotEffect {
                     for (UUID cardId : (List<UUID>) target.getTargets()) {
                         Card chosenCard = game.getCard(cardId);
                         if (chosenCard != null) {
-                            if (chosenCard.moveToExile(source.getSourceId(), "Reap Intellect", source.getId(), game)) {
+                            if (chosenCard.moveToExile(source.getSourceId(), "Reap Intellect", source.getSourceId(), game)) {
                                 exiledCards.add(chosenCard);
                             }
                         }
@@ -138,18 +138,18 @@ class ReapIntellectEffect extends OneShotEffect {
 
                                 for (Card checkCard : cardsInGraveyard.getCards(game)) {
                                     if (checkCard.getName().equals(card.getName())) {
-                                        checkCard.moveToExile(source.getSourceId(), "Graveyard", source.getId(), game);
+                                        checkCard.moveToExile(source.getSourceId(), "Graveyard", source.getSourceId(), game);
                                     }
                                 }
                                 for (Card checkCard : cardsInHand.getCards(game)) {
                                     if (checkCard.getName().equals(card.getName())) {
-                                        checkCard.moveToExile(source.getSourceId(), "Hand", source.getId(), game);
+                                        checkCard.moveToExile(source.getSourceId(), "Hand", source.getSourceId(), game);
                                     }
                                 }
 
                                 for (Card checkCard : cardsInLibrary.getCards(game)) {
                                     if (checkCard.getName().equals(card.getName())) {
-                                        checkCard.moveToExile(source.getSourceId(), "Library", source.getId(), game);
+                                        checkCard.moveToExile(source.getSourceId(), "Library", source.getSourceId(), game);
                                     }
                                 }
                             }

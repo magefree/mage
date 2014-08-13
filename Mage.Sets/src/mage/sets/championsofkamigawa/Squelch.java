@@ -91,7 +91,7 @@ class ActivatedAbilityTarget extends TargetObject {
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
-        if (source != null && source.getId().equals(id)) {
+        if (source != null && source.getSourceId().equals(id)) {
             return false;
         }
 
