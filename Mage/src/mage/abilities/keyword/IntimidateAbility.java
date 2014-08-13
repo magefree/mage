@@ -46,7 +46,7 @@ public class IntimidateAbility extends EvasionAbility implements MageSingleton  
 
 class IntimidateEffect extends RestrictionEffect implements MageSingleton {
     public IntimidateEffect() {
-        super(Duration.WhileOnBattlefield);
+        super(Duration.EndOfGame);
     }
 
     public IntimidateEffect(final IntimidateEffect effect) {
