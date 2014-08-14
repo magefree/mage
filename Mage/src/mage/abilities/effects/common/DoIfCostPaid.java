@@ -14,7 +14,7 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 public class DoIfCostPaid extends OneShotEffect {
-    private final Effect executingEffect;
+    protected final Effect executingEffect;
     private final Cost cost;
     private String chooseUseText;
 
@@ -38,7 +38,7 @@ public class DoIfCostPaid extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player player = getPayingPlayer(game, source);
         MageObject mageObject = game.getObject(source.getSourceId());
         if (player != null && mageObject != null) {
             String message;
@@ -50,7 +50,7 @@ public class DoIfCostPaid extends OneShotEffect {
             message = CardUtil.replaceSourceName(message, mageObject.getName());
             if (cost.canPay(source, source.getSourceId(), player.getId(), game) && player.chooseUse(executingEffect.getOutcome(), message, game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+                if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
                     executingEffect.setTargetPointer(this.targetPointer);
                     if (executingEffect instanceof OneShotEffect) {
                         if (!(executingEffect instanceof PostResolveEffect)) {
@@ -67,6 +67,10 @@ public class DoIfCostPaid extends OneShotEffect {
         return false;
     }
 
+    protected Player getPayingPlayer(Game game, Ability source) {
+        return game.getPlayer(source.getControllerId());
+    }
+
     @Override
     public String getText(Mode mode) {
         if (!staticText.isEmpty()) {
@@ -75,7 +79,7 @@ public class DoIfCostPaid extends OneShotEffect {
         return new StringBuilder("you may ").append(getCostText()).append(". If you do, ").append(executingEffect.getText(mode)).toString();
     }
 
-    private String getCostText() {
+    protected String getCostText() {
         StringBuilder sb = new StringBuilder();
         String costText = cost.getText();
         if (costText != null &&
