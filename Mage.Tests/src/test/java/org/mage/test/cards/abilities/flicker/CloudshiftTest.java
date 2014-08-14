@@ -125,4 +125,24 @@ public class CloudshiftTest extends CardTestPlayerBase {
 
     }
 
+    @Test
+    public void testThatCardIsHandledAsNewInstanceAfterCloudshift() {
+        addCard(Zone.BATTLEFIELD, playerA, "Trostani, Selesnya's Voice");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.HAND, playerA, "Grizzly Bears");
+        addCard(Zone.HAND, playerA, "Giant Growth");
+        addCard(Zone.HAND, playerA, "Cloudshift");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Giant Growth", "Grizzly Bears", "you gain life equal to that creature's toughness");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cloudshift", "Grizzly Bears", null, "you gain life equal to that creature's toughness");
+        
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        
+        execute();
+        
+        assertLife(playerA, 27);
+    }
+    
 }
