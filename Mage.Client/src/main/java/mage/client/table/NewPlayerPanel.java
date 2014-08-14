@@ -63,7 +63,7 @@ public class NewPlayerPanel extends javax.swing.JPanel {
             }
         }
         this.txtPlayerDeck.setText(deckPath);
-        if (Config.defaultComputerName != null) {
+        if (!Config.defaultComputerName.equals("")) {
             this.txtPlayerName.setText(Config.defaultComputerName);
         }
         if (cbLevel.getModel().getSize() > 0) {
@@ -143,6 +143,12 @@ public class NewPlayerPanel extends javax.swing.JPanel {
 
         lblPlayerName.setText("Name:");
 
+        txtPlayerName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPlayerNameActionPerformed(evt);
+            }
+        });
+
         lblPlayerDeck.setText("Deck:");
 
         btnPlayerDeck.setText("...");
@@ -212,6 +218,10 @@ public class NewPlayerPanel extends javax.swing.JPanel {
     private void btnGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateActionPerformed
         generateDeck();
     }//GEN-LAST:event_btnGenerateActionPerformed
+
+    private void txtPlayerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPlayerNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPlayerNameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

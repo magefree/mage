@@ -75,7 +75,18 @@ public class NewTableDialog extends MageDialog {
         session = MageFrame.getSession();
         lastSessionId = "";
         initComponents();
-        player1Panel.showLevel(false);
+        player1Panel.init(1, "Human");
+        player1Panel.isLocalHuman(true);
+        player1Panel.addPlayerTypeEventListener(
+                    new Listener<Event> () {
+                        @Override
+                        public void event(Event event) {
+                            drawPlayers();
+                        }
+                    }
+                );
+   //     player1Panel.showLevel(true);
+        
         this.spnNumWins.setModel(new SpinnerNumberModel(1, 1, 5, 1));
         this.spnFreeMulligans.setModel(new SpinnerNumberModel(0, 0, 5, 1));
         MageFrame.getUI().addButton(MageComponents.NEW_TABLE_OK_BUTTON, btnOK);        
@@ -110,13 +121,13 @@ public class NewTableDialog extends MageDialog {
         spnNumWins = new javax.swing.JSpinner();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
-        player1Panel = new mage.client.table.NewPlayerPanel();
         jSeparator3 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         pnlOtherPlayers = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         btnOK = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
+        player1Panel = new mage.client.table.TablePlayerPanel();
 
         setTitle("New Table");
 
@@ -193,6 +204,7 @@ public class NewTableDialog extends MageDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(player1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblName)
@@ -204,7 +216,7 @@ public class NewTableDialog extends MageDialog {
                                 .addComponent(cbGameType, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(lblFreeMulligans)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
                                 .addComponent(spnFreeMulligans, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(cbDeckType, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -213,8 +225,6 @@ public class NewTableDialog extends MageDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cbTimeLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtName, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnOK)
@@ -237,14 +247,18 @@ public class NewTableDialog extends MageDialog {
                             .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNumWins)))
                     .addComponent(jSeparator2)
-                    .addComponent(player1Panel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 746, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         layout.setVerticalGroup(
@@ -289,14 +303,14 @@ public class NewTableDialog extends MageDialog {
                         .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addGap(0, 0, 0)
-                .addComponent(player1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                .addComponent(player1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -308,7 +322,7 @@ public class NewTableDialog extends MageDialog {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(201, 201, 201)
                     .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(285, Short.MAX_VALUE)))
+                    .addContainerGap(301, Short.MAX_VALUE)))
         );
 
         pack();
@@ -323,7 +337,7 @@ public class NewTableDialog extends MageDialog {
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         GameTypeView gameType = (GameTypeView) cbGameType.getSelectedItem();
         MatchOptions options = new MatchOptions(this.txtName.getText(), gameType.getName());
-        options.getPlayerTypes().add("Human");
+        options.getPlayerTypes().add(this.player1Panel.getPlayerType());
         for (TablePlayerPanel player: players) {
             options.getPlayerTypes().add(player.getPlayerType());
         }
@@ -334,15 +348,15 @@ public class NewTableDialog extends MageDialog {
         options.setRange((RangeOfInfluence) this.cbRange.getSelectedItem());
         options.setWinsNeeded((Integer)this.spnNumWins.getValue());
         options.setFreeMulligans((Integer)this.spnFreeMulligans.getValue());
-        saveGameSettingsToPrefs(options, this.player1Panel.getDeckFile());
-
+        saveGameSettingsToPrefs(options, this.player1Panel.getPlayerDeck());
+        
         table = session.createTable(roomId, options);
         if (table == null) {
             JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error creating table.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         try {
-            if (session.joinTable(roomId, table.getTableId(), this.player1Panel.getPlayerName(), "Human", 1, DeckImporterUtil.importDeck(this.player1Panel.getDeckFile()))) {
+            if (session.joinTable(roomId, table.getTableId(), this.player1Panel.getPlayerName(), this.player1Panel.getPlayerType(), 1, DeckImporterUtil.importDeck(this.player1Panel.getPlayerDeck()))) {
                 for (TablePlayerPanel player: players) {
                     if (!player.getPlayerType().equals("Human")) {
                         if (!player.joinTable(roomId, table.getTableId())) {
@@ -581,7 +595,7 @@ public class NewTableDialog extends MageDialog {
     private javax.swing.JLabel lblNumPlayers;
     private javax.swing.JLabel lblNumWins;
     private javax.swing.JLabel lblRange;
-    private mage.client.table.NewPlayerPanel player1Panel;
+    private mage.client.table.TablePlayerPanel player1Panel;
     private javax.swing.JPanel pnlOtherPlayers;
     private javax.swing.JSpinner spnFreeMulligans;
     private javax.swing.JSpinner spnNumPlayers;

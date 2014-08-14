@@ -52,7 +52,7 @@ import mage.remote.Session;
 public class TablePlayerPanel extends javax.swing.JPanel {
 
     protected PlayerTypeEventSource playerTypeEventSource = new PlayerTypeEventSource();
-
+    private boolean localPlayer= false;
     private Session session;
 
     /** Creates new form TablePlayerPanel */
@@ -78,6 +78,12 @@ public class TablePlayerPanel extends javax.swing.JPanel {
             this.cbPlayerType.setSelectedItem(playerType);
         } 
     }
+    
+    public void isLocalHuman(boolean v)
+    {
+        localPlayer = v;
+        this.newPlayerPanel.setVisible(v);
+    }
 
     public boolean joinTable(UUID roomId, UUID tableId) throws FileNotFoundException, IOException, ClassNotFoundException {
         if (!this.cbPlayerType.getSelectedItem().equals("Human")) {
@@ -88,6 +94,23 @@ public class TablePlayerPanel extends javax.swing.JPanel {
 
     public String getPlayerType() {
         return (String) this.cbPlayerType.getSelectedItem();
+    }
+    
+    public String getPlayerDeck() {
+        return (String) this.newPlayerPanel.getDeckFile();
+    }
+    
+    public String getPlayerName() {
+        return (String) this.newPlayerPanel.getName();
+    }
+    
+    public void setPlayerName(String name) {
+            this.newPlayerPanel.setName(name);
+    }
+    
+    public void setDeckFile(String deck)
+    {
+        this.newPlayerPanel.setDeckFile(deck);
     }
 
     public void addPlayerTypeEventListener(Listener<Event> listener) {
@@ -159,7 +182,7 @@ public class TablePlayerPanel extends javax.swing.JPanel {
             this.newPlayerPanel.setVisible(true);
         }
         else {
-            this.newPlayerPanel.setVisible(false);
+            this.newPlayerPanel.setVisible(localPlayer || false);
         }
         this.revalidate();
         this.repaint();
