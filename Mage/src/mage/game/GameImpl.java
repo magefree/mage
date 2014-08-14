@@ -459,7 +459,6 @@ public abstract class GameImpl implements Game, Serializable {
                     player.won(this);
                 }
             }            
-            endTime = new Date();
             return true;
         }
         return false;
@@ -869,6 +868,7 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public void end() {
         if (!state.isGameOver()) {
+            endTime = new Date();
             state.endGame();
             for (Player player: state.getPlayers().values()) {
                 player.abort();

@@ -66,7 +66,11 @@ public class Biovisionary extends CardImpl {
         this.toughness = new MageInt(3);
 
         //At the beginning of the end step, if you control four or more creatures named Biovisionary, you win the game.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new WinGameSourceControllerEffect(), TargetController.ANY, new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 3), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                Zone.BATTLEFIELD, new WinGameSourceControllerEffect(), 
+                TargetController.ANY, 
+                new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 3), 
+                false));
     }
 
     public Biovisionary(final Biovisionary card) {
