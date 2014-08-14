@@ -172,7 +172,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         setTitle("XMage, version " + version);
         clientId = UUID.randomUUID();
-
+        // Workaround for #451
+        System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
+        
         EDTExceptionHandler.registerExceptionHandler();
         addWindowListener(new WindowAdapter() {
             @Override
