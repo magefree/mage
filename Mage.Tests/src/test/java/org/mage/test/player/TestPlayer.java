@@ -115,7 +115,7 @@ public class TestPlayer extends ComputerPlayer {
                     String command = action.getAction();
                     command = command.substring(command.indexOf("activate:") + 9);
                     String[] groups = command.split(";");
-                    if (!checkSpellOnStackCondition(groups, game)) {
+                    if (!checkSpellOnStackCondition(groups, game) || !checkSpellOnTopOfStackCondition(groups, game)) {
                         break;
                     }
                     for (Ability ability: this.getPlayable(game, true)) {
@@ -371,7 +371,21 @@ public class TestPlayer extends ComputerPlayer {
         if (groups.length > 2 && groups[2].startsWith("spellOnStack=")) {
             String spellOnStack = groups[2].substring(13);
             for (StackObject stackObject: game.getStack()) {
-                if (stackObject.getStackAbility().toString().equals(spellOnStack)) {
+                if (stackObject.getStackAbility().toString().indexOf(spellOnStack) >= 0) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return true;
+    }
+
+    private boolean checkSpellOnTopOfStackCondition(String[] groups, Game game) {
+        if (groups.length > 2 && groups[2].startsWith("spellOnTopOfStack=")) {
+            String spellOnTopOFStack = groups[2].substring(18);
+            if (game.getStack().size() > 0) {
+                StackObject stackObject = game.getStack().getFirst();
+                if (stackObject != null && stackObject.getStackAbility().toString().indexOf(spellOnTopOFStack) >= 0) {
                     return true;
                 }
             }
@@ -384,7 +398,7 @@ public class TestPlayer extends ComputerPlayer {
         boolean result = true;
         for (int i = 1; i < groups.length; i++) {
             String group = groups[i];
-            if (group.startsWith("spellOnStack")) {
+            if (group.startsWith("spellOnStack") || group.startsWith("spellOnTopOfStack")) {
                 break;
             }
             if (ability instanceof SpellAbility && ((SpellAbility) ability).getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
