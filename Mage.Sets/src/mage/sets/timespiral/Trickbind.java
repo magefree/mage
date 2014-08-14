@@ -116,10 +116,7 @@ class TrickbindCantActivateEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (getTargetPointer().getFirst(game, source).equals(permanent.getId())) {
-            return true;
-        }
-        return false;
+        return getTargetPointer().getFirst(game, source).equals(permanent.getId());
     }
 
     @Override

@@ -33,8 +33,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.TriggeredAbility;
+import mage.constants.AbilityType;
 import mage.filter.Filter;
 import mage.filter.FilterAbility;
 import mage.game.Game;
@@ -69,10 +68,7 @@ public class TargetActivatedOrTriggeredAbility extends TargetObject {
         }
 
         StackObject stackObject = game.getStack().getStackObject(id);
-        if (stackObject.getStackAbility() != null && (stackObject.getStackAbility() instanceof ActivatedAbility || stackObject.getStackAbility() instanceof TriggeredAbility)) {
-            return true;
-        }
-        return false;
+        return isActivatedOrTriggeredAbility(stackObject);
     }
 
     @Override
@@ -82,11 +78,11 @@ public class TargetActivatedOrTriggeredAbility extends TargetObject {
 
     @Override
     public boolean canChoose(UUID sourceControllerId, Game game) {
-        for (StackObject stackObject :  game.getStack()) {
-            if (stackObject.getStackAbility() != null && (stackObject.getStackAbility() instanceof ActivatedAbility || stackObject.getStackAbility() instanceof TriggeredAbility) && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getStackAbility().getControllerId())) {
-                    return true;
-                }
+        for (StackObject stackObject : game.getStack()) {
+            if (isActivatedOrTriggeredAbility(stackObject)) {
+                return true;
             }
+        }
         return false;
     }
 
@@ -99,7 +95,7 @@ public class TargetActivatedOrTriggeredAbility extends TargetObject {
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         for (StackObject stackObject :  game.getStack()) {
-            if (stackObject.getStackAbility() != null && (stackObject.getStackAbility() instanceof ActivatedAbility || stackObject.getStackAbility() instanceof TriggeredAbility) && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getStackAbility().getControllerId())) {
+            if (isActivatedOrTriggeredAbility(stackObject)) {
                 possibleTargets.add(stackObject.getStackAbility().getId());
             }
         }
@@ -116,4 +112,15 @@ public class TargetActivatedOrTriggeredAbility extends TargetObject {
         return new FilterAbility();
     }
 
+    static boolean isActivatedOrTriggeredAbility(StackObject stackObject) {
+        if (stackObject == null) {
+            return false;
+        }
+        if (stackObject instanceof Ability) {
+            Ability ability = (Ability)stackObject;
+            return ability.getAbilityType().equals(AbilityType.TRIGGERED) 
+               || ability.getAbilityType().equals(AbilityType.ACTIVATED);
+        }
+        return false;
+    }
 }

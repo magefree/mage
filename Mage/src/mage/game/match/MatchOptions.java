@@ -49,7 +49,7 @@ public class MatchOptions implements Serializable {
     protected String gameType;
     protected String deckType;
     protected boolean limited;
-    protected List<String> playerTypes = new ArrayList<String>();
+    protected List<String> playerTypes = new ArrayList<>();
     /**
      * Time each player has during the game to play using his\her priority.
      */

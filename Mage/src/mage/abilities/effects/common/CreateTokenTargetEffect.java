@@ -80,11 +80,7 @@ public class CreateTokenTargetEffect extends OneShotEffect {
             return staticText;
         }
         StringBuilder sb = new StringBuilder("put ");
-        if (amount.toString().equals("1")) {
-            sb.append("a");
-        } else {
-            sb.append(amount.toString());
-        }
+        sb.append(CardUtil.numberToText(amount.toString(), "a"));
         sb.append(" ").append(token.getDescription()).append(" onto the battlefield");
         if (tapped) {
             sb.append(" tapped");
