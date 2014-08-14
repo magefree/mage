@@ -1923,8 +1923,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         if (!shouldSkipGettingPlayable(game)) {
 
-            ManaOptions available = getManaAvailable(game);
-            available.addMana(manaPool.getMana());
+            ManaOptions availableMana = getManaAvailable(game);
+            availableMana.addMana(manaPool.getMana());
 
             if (hidden) {
                 for (Card card : hand.getUniqueCards(game)) {
@@ -1934,24 +1934,26 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 break;
                             }
                         }
-                        if (canPlay(ability, available, game)) {
+                        if (canPlay(ability, availableMana, game)) {
                             playable.add(ability);
                         }
                     }
                 }
             }
             for (Card card : graveyard.getUniqueCards(game)) {
-                for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.GRAVEYARD)) {
-                    if (canPlay(ability, available, game)) {
+                boolean asThoughtCast = game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, this.getId(), game);
+                for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.ALL)) {
+                    boolean possible = false;
+                    if (ability.getZone().match(Zone.GRAVEYARD)) {
+                        possible = true;
+                    } else if (ability.getZone().match(Zone.HAND) && (ability instanceof SpellAbility || ability instanceof PlayLandAbility)) {
+                        if (asThoughtCast || canPlayCardsFromGraveyard()) {
+                            possible = true;
+                        }                        
+                    } 
+                    if (possible && canPlay(ability, availableMana, game)) {
                         playable.add(ability);
-                    }
-                }
-                if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, this.getId(), game)) {
-                    for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {
-                        if (ability instanceof SpellAbility || ability instanceof PlayLandAbility) {
-                            playable.add(ability);
-                        }
-                    }
+                    }                    
                 }
             }
             for (ExileZone exile : game.getExile().getExileZones()) {
@@ -1986,7 +1988,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
                 for (ActivatedAbility ability : permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
                     if (!playableActivated.containsKey(ability.toString())) {
-                        if (canPlay(ability, available, game)) {
+                        if (canPlay(ability, availableMana, game)) {
                             playableActivated.put(ability.toString(), ability);
                         }
                     }
@@ -1999,7 +2001,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     MageObject object = game.getObject(this.getCommanderId());
                     if (object != null) {
                         for (ActivatedAbility ability : ((Commander) object).getAbilities().getActivatedAbilities(Zone.COMMAND)) {
-                            if (canPlay(ability, available, game)) {
+                            if (canPlay(ability, availableMana, game)) {
                                 playableActivated.put(ability.toString(), ability);
                             }
                         }
