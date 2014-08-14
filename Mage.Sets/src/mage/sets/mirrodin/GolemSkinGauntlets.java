@@ -32,6 +32,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
@@ -78,7 +79,7 @@ class GolemSkinGauntletsAttachedCount implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability source) {
+    public int calculate(Game game, Ability source, Effect effect) {
         int count = 0;
         Permanent equipment = game.getPermanent(source.getSourceId());
         if (equipment != null) {

@@ -31,6 +31,7 @@ package mage.abilities.dynamicvalue.common;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
@@ -47,7 +48,7 @@ public class SunburstCount  implements DynamicValue{
     }
     
     @Override
-    public int calculate(Game game, Ability source) {
+    public int calculate(Game game, Ability source, Effect effect) {
         int count = 0;
         if (!game.getStack().isEmpty()) {
             StackObject spell = game.getStack().getFirst();

@@ -102,7 +102,7 @@ class ShieldOfTheAvatarPreventionEffect extends PreventionEffectImpl {
         boolean result = false;
         Permanent equipment = game.getPermanent(source.getSourceId());
         if (equipment != null && equipment.getAttachedTo() != null) {
-            int numberOfCreaturesControlled = new PermanentsOnBattlefieldCount(filter).calculate(game, source);
+            int numberOfCreaturesControlled = new PermanentsOnBattlefieldCount(filter).calculate(game, source, this);
             int toPrevent = Math.min(numberOfCreaturesControlled, event.getAmount());
             GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, equipment.getAttachedTo(), source.getSourceId(), source.getControllerId(), toPrevent, false);
             if (!game.replaceEvent(preventEvent)) {

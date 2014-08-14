@@ -2,12 +2,13 @@ package mage.abilities.dynamicvalue.common;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.players.Player;
 
 public class CardsInControllerHandCount implements DynamicValue {
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         if (sourceAbility != null) {
             Player controller = game.getPlayer(sourceAbility.getControllerId());
             if (controller != null) {

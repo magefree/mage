@@ -27,15 +27,17 @@
  */
 package mage.sets.urzaslegacy;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
+
+import java.util.UUID;
 
 /**
  *
@@ -66,7 +68,7 @@ public class BlessedReversal extends CardImpl {
 class BlessedReversalCount implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int count = 0;
         for (CombatGroup combatGroup : game.getCombat().getGroups()) {
             if (combatGroup.getDefenderId().equals(sourceAbility.getControllerId())) {

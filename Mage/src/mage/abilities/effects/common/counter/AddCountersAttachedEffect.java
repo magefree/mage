@@ -82,7 +82,7 @@ public class AddCountersAttachedEffect extends OneShotEffect {
             Permanent attachedTo = game.getPermanent(permanent.getAttachedTo());
             if (attachedTo != null && counter != null) {
                 Counter newCounter = counter.copy();
-                newCounter.add(amount.calculate(game, source));
+                newCounter.add(amount.calculate(game, source, this));
                 attachedTo.addCounters(newCounter, game);
             }
             return true;

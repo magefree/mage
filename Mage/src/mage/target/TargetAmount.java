@@ -28,13 +28,14 @@
 
 package mage.target;
 
-import java.util.*;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.*;
 
 /**
  *
@@ -95,7 +96,7 @@ public abstract class TargetAmount extends TargetImpl {
     } 
     
     public void setAmount(Ability source, Game game) {
-        remainingAmount = amount.calculate(game, source);
+        remainingAmount = amount.calculate(game, source, null);
         amountWasSet = true;
     }
 

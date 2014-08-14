@@ -27,17 +27,18 @@
  */
 package mage.sets.innistrad;
 
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -85,7 +86,7 @@ public class RunechantersPike extends CardImpl {
 class RunechantersPikeValue implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Player player = game.getPlayer(sourceAbility.getControllerId());
         if (player != null) {
             return player.getGraveyard().getCards(RunechantersPike.filterCard, game).size();

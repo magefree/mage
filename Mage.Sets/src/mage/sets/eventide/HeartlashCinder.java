@@ -27,13 +27,13 @@
  */
 package mage.sets.eventide;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
@@ -43,6 +43,8 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -86,7 +88,7 @@ class ChromaHeartlashCinderCount implements DynamicValue {
     private int chroma;
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         chroma = 0;
         for (Card card : game.getBattlefield().getAllActivePermanents(new FilterControlledPermanent(), sourceAbility.getControllerId(), game)) {
             chroma += card.getManaCost().getMana().getRed();

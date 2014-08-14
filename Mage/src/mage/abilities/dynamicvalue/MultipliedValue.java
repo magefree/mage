@@ -29,6 +29,7 @@
 package mage.abilities.dynamicvalue;
 
 import mage.abilities.Ability;
+import mage.abilities.effects.Effect;
 import mage.game.Game;
 
 /**
@@ -51,8 +52,8 @@ public class MultipliedValue implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
-        return multplier * value.calculate(game, sourceAbility);
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        return multplier * value.calculate(game, sourceAbility, effect);
     }
 
     @Override

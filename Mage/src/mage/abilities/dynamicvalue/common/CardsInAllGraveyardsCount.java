@@ -4,13 +4,15 @@
  */
 package mage.abilities.dynamicvalue.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.players.PlayerList;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +35,7 @@ public class CardsInAllGraveyardsCount implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int amount = 0;
         PlayerList playerList = game.getPlayerList();
         for (UUID playerUUID : playerList) {

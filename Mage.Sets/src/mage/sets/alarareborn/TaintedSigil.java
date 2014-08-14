@@ -27,12 +27,12 @@
  */
 package mage.sets.alarareborn;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -40,6 +40,8 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.watchers.common.PlayerLostLifeWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -77,7 +79,7 @@ public class TaintedSigil extends CardImpl {
 class AllPlayersLostLifeCount implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return this.calculate(game, sourceAbility.getControllerId());
     }
 

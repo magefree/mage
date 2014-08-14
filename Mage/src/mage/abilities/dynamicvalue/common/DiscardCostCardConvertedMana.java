@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.game.Game;
 
@@ -13,7 +14,7 @@ import mage.game.Game;
 public class DiscardCostCardConvertedMana implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         for (Cost cost: sourceAbility.getCosts()) {
             if (cost instanceof DiscardCardCost) {
                 DiscardCardCost discardCost = (DiscardCardCost) cost;

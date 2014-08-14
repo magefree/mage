@@ -128,7 +128,7 @@ public class LookLibraryControllerEffect extends OneShotEffect {
         boolean topCardRevealed = player.isTopCardRevealed();
         player.setTopCardRevealed(false);
         Cards cards = new CardsImpl(Zone.PICK);
-        int count = Math.min(player.getLibrary().size(), this.numberOfCards.calculate(game, source));
+        int count = Math.min(player.getLibrary().size(), this.numberOfCards.calculate(game, source, this));
         for (int i = 0; i < count; i++) {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {

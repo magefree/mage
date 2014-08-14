@@ -27,7 +27,6 @@
  */
 package mage.sets.conflux;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -37,11 +36,7 @@ import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -49,6 +44,8 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -94,7 +91,7 @@ class testCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Spell spell = (Spell) game.getStack().getStackObject(source.getSourceId());
         if (spell != null) {
-            return (xValue.calculate(game, spell.getSpellAbility()) >= limit);
+            return (xValue.calculate(game, spell.getSpellAbility(), null) >= limit);
         }
         return false;
 

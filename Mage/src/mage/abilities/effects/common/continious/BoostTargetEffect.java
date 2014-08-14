@@ -89,8 +89,8 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (lockedIn) {
-            power = new StaticValue(power.calculate(game, source));
-            toughness = new StaticValue(toughness.calculate(game, source));
+            power = new StaticValue(power.calculate(game, source, this));
+            toughness = new StaticValue(toughness.calculate(game, source, this));
         }
     }
 
@@ -100,8 +100,8 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
         for (UUID permanentId : targetPointer.getTargets(game, source)) {
             Permanent target = game.getPermanent(permanentId);
             if (target != null) {
-                target.addPower(power.calculate(game, source));
-                target.addToughness(toughness.calculate(game, source));
+                target.addPower(power.calculate(game, source, this));
+                target.addToughness(toughness.calculate(game, source, this));
                 affectedTargets++;
             }
         }

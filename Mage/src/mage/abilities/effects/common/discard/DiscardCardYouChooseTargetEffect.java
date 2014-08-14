@@ -129,7 +129,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
             if (revealAllCards) {
                 this.numberCardsToReveal = new StaticValue(player.getHand().size());
             }
-            int numberToReveal = this.numberCardsToReveal.calculate(game, source);
+            int numberToReveal = this.numberCardsToReveal.calculate(game, source, this);
             if (numberToReveal > 0) {
                 Cards revealedCards = new CardsImpl(Zone.HAND);                
                 numberToReveal = Math.min(player.getHand().size(), numberToReveal);
@@ -155,7 +155,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
                 
                 boolean result = true;
                 int filteredCardsCount = revealedCards.count(filter, source.getSourceId(), source.getControllerId(), game);
-                int numberToDiscard = Math.min(this.numberCardsToDiscard.calculate(game, source), filteredCardsCount);
+                int numberToDiscard = Math.min(this.numberCardsToDiscard.calculate(game, source, this), filteredCardsCount);
                 if (numberToDiscard > 0) {
                     TargetCard target = new TargetCard(numberToDiscard, Zone.HAND, filter);
                     if (controller.choose(Outcome.Benefit, revealedCards, target, game)) {

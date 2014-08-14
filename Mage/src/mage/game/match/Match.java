@@ -28,15 +28,16 @@
 
 package mage.game.match;
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 import mage.cards.decks.Deck;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.events.Listener;
 import mage.game.events.TableEvent;
 import mage.players.Player;
+
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *

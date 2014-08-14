@@ -27,7 +27,6 @@
  */
 package mage.sets.theros;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -42,6 +41,8 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -73,7 +74,7 @@ public class MogissMarauder extends CardImpl {
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof EntersBattlefieldTriggeredAbility) {
             ability.getTargets().clear();
-            int numbTargets = new DevotionCount(ColoredManaSymbol.B).calculate(game, ability);
+            int numbTargets = new DevotionCount(ColoredManaSymbol.B).calculate(game, ability, null);
             if (numbTargets > 0) {
                 ability.addTarget(new TargetCreaturePermanent(0,numbTargets));
             }

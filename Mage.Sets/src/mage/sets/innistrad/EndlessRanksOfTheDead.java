@@ -27,10 +27,10 @@
  */
 package mage.sets.innistrad;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -40,6 +40,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.ZombieToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -79,7 +81,7 @@ class HalfZombiesCount implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int amount = game.getBattlefield().countAll(filter, sourceAbility.getControllerId(), game) / 2;
         return amount;
     }

@@ -27,19 +27,20 @@
  */
 package mage.sets.alarareborn;
 
-import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.constants.*;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -75,7 +76,7 @@ public class DemonspineWhip extends CardImpl {
 class XPaid implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int paid = sourceAbility.getManaCostsToPay().getX();
         return paid;
     }

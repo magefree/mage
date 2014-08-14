@@ -27,17 +27,16 @@
  */
 package mage.sets.commander;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SacrificeCostCreaturesPower;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -54,6 +53,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -158,7 +159,7 @@ class VishKalBloodArbiterDynamicValue implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability source) {
+    public int calculate(Game game, Ability source, Effect effect) {
         int count = 0;
         for(Cost cost : source.getCosts()){
             if(cost instanceof VishKalBloodArbiterCost){

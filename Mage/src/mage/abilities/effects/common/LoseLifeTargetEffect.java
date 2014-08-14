@@ -68,7 +68,7 @@ public class LoseLifeTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-            player.loseLife(amount.calculate(game, source), game);
+            player.loseLife(amount.calculate(game, source, this), game);
             return true;
         }
         return false;

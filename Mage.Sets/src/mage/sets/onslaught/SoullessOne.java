@@ -27,23 +27,24 @@
  */
 package mage.sets.onslaught;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -78,7 +79,7 @@ public class SoullessOne extends CardImpl {
 class SoullessOneDynamicCount implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         FilterPermanent zombiesBattlefield = new FilterPermanent("Zombies on the battlefield");
         FilterCard zombiesInGraveyard = new FilterCard("Zombie cards in all graveyards");
         zombiesBattlefield.add(new SubtypePredicate("Zombie"));

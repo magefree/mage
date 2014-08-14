@@ -27,21 +27,22 @@
  */
 package mage.sets.urzaslegacy;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -77,7 +78,7 @@ public class MultaniMaroSorcerer extends CardImpl {
 
 class CardsInHandCount implements DynamicValue {
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int count = 0;
         for (UUID playerId: game.getPlayer(sourceAbility.getControllerId()).getInRange()) {
             Player player = game.getPlayer(playerId);

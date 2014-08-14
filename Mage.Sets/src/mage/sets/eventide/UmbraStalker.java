@@ -81,7 +81,7 @@ class ChromaUmbraStalkerCount implements DynamicValue {
     private int chroma;
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         chroma = 0;
         Player you = game.getPlayer(sourceAbility.getControllerId());
         if (you == null) {

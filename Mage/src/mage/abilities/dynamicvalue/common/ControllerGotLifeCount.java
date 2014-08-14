@@ -28,14 +28,16 @@
 
 package mage.abilities.dynamicvalue.common;
 
-import java.io.ObjectStreamException;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.watchers.common.PlayerGainedLifeWatcher;
+
+import java.io.ObjectStreamException;
+import java.util.UUID;
 
 /**
  * Amount of life the controller got this turn.
@@ -57,7 +59,7 @@ public class ControllerGotLifeCount implements DynamicValue, MageSingleton {
     }
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return this.calculate(game, sourceAbility.getControllerId());
     }
 

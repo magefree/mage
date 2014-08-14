@@ -29,8 +29,6 @@
  */
 package mage.abilities.effects.common;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -44,6 +42,9 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -116,7 +117,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
     }
     @Override
     protected void cardLooked(Card card, Game game, Ability source) {
-        if (numberToPick.calculate(game, source) > 0 && filter.match(card, game)) {
+        if (numberToPick.calculate(game, source, this) > 0 && filter.match(card, game)) {
             ++foundCardsToPick;
         }
     }
@@ -128,7 +129,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
             if (!optional || player.chooseUse(Outcome.DrawCard, getMayText(), game)) {
                 FilterCard pickFilter = filter.copy();
                 pickFilter.setMessage(getPickText());
-                TargetCard target = new TargetCard((upTo ? 0:numberToPick.calculate(game, source)),numberToPick.calculate(game, source), Zone.PICK, pickFilter);
+                TargetCard target = new TargetCard((upTo ? 0:numberToPick.calculate(game, source, this)),numberToPick.calculate(game, source, this), Zone.PICK, pickFilter);
                 if (player.choose(Outcome.DrawCard, cards, target, game)) {
                     Cards reveal = new CardsImpl();
                     for (UUID cardId : (List<UUID>)target.getTargets()) {
@@ -202,7 +203,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        if (numberToPick.calculate(null, null) > 0) {
+        if (numberToPick.calculate(null, null, this) > 0) {
             
                 if (revealPickedCards) {
                     sb.append(". You may reveal ");

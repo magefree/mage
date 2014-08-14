@@ -27,7 +27,6 @@
  */
 package mage.sets.bornofthegods;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -47,6 +46,8 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -95,7 +96,7 @@ public class ChampionOfStraySouls extends CardImpl {
         if (ability instanceof SimpleActivatedAbility) {
             for (Effect effect : ability.getEffects()) {
                 if (effect instanceof ReturnFromGraveyardToBattlefieldTargetEffect) {
-                    int xValue = new GetXValue().calculate(game, ability);
+                    int xValue = new GetXValue().calculate(game, ability, null);
                     ability.getTargets().clear();
                     ability.addTarget(new TargetCardInYourGraveyard(xValue,xValue, new FilterCreatureCard("creature cards from your graveyard")));
                 }

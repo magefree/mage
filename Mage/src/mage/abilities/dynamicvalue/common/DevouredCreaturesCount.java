@@ -60,14 +60,14 @@ public class DevouredCreaturesCount implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Permanent sourcePermanent = game.getPermanent(sourceAbility.getSourceId());
         if (sourcePermanent != null) {
             for (Ability ability : sourcePermanent.getAbilities()) {
                 if (ability instanceof DevourAbility) {
-                    for (Effect effect: ability.getEffects()) {
-                        if (effect instanceof DevourEffect) {
-                            DevourEffect devourEffect = (DevourEffect) effect;
+                    for (Effect abilityEffect: ability.getEffects()) {
+                        if (abilityEffect instanceof DevourEffect) {
+                            DevourEffect devourEffect = (DevourEffect) abilityEffect;
                             return devourEffect.getDevouredCreaturesAmount(game, sourcePermanent.getId()) * multiplier;
                         }
                     }

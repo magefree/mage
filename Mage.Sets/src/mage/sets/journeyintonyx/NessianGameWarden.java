@@ -110,7 +110,7 @@ class NessianGameWardenEffect extends OneShotEffect {
         }
 
         Cards cards = new CardsImpl();
-        int count = new PermanentsOnBattlefieldCount(filter).calculate(game, source);
+        int count = new PermanentsOnBattlefieldCount(filter).calculate(game, source, this);
         count = Math.min(player.getLibrary().size(), count);
         for (int i = 0; i < count; i++) {
             Card card = player.getLibrary().removeFromTop(game);

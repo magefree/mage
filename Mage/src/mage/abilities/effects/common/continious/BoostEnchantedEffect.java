@@ -84,8 +84,8 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Permanent creature = game.getPermanent(enchantment.getAttachedTo());
             if (creature != null) {
-                creature.addPower(power.calculate(game, source));
-                creature.addToughness(toughness.calculate(game, source));
+                creature.addPower(power.calculate(game, source, this));
+                creature.addToughness(toughness.calculate(game, source, this));
             }
         }
         return true;

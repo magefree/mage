@@ -71,7 +71,7 @@ public class PredatorsRapport extends CardImpl {
 class TargetPermanentPowerPlusToughnessCount implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Permanent sourcePermanent = game.getPermanent(sourceAbility.getFirstTarget());
         if (sourcePermanent != null) {
             return sourcePermanent.getPower().getValue() + sourcePermanent.getToughness().getValue();

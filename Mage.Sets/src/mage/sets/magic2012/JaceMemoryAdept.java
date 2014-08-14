@@ -102,7 +102,7 @@ class JaceMemoryAdeptEffect extends DrawCardTargetEffect {
         for (UUID target : targetPointer.getTargets(game, source)) {
             Player player = game.getPlayer(target);
             if (player != null) {
-                player.drawCards(amount.calculate(game, source), game);
+                player.drawCards(amount.calculate(game, source, this), game);
             }
         }
         return true;

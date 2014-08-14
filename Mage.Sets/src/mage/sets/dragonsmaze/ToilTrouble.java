@@ -87,7 +87,7 @@ public class ToilTrouble extends SplitCard {
 class TargetPlayerCardsInHandCount implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Player targetPlayer = game.getPlayer(sourceAbility.getFirstTarget());
         if (targetPlayer != null) {
             return targetPlayer.getHand().size();

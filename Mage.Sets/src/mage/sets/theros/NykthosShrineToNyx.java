@@ -136,15 +136,15 @@ class NykthosDynamicManaEffect extends ManaEffect {
             if (choice != null && choice instanceof ChoiceColor && choice.getChoice() != null) {
                 String color = choice.getChoice();
                 if (color.equals("Red")) {
-                    computedMana.setRed(new DevotionCount(ColoredManaSymbol.R).calculate(game, source));
+                    computedMana.setRed(new DevotionCount(ColoredManaSymbol.R).calculate(game, source, this));
                 } else if (color.equals("Blue")) {
-                    computedMana.setBlue(new DevotionCount(ColoredManaSymbol.U).calculate(game, source));
+                    computedMana.setBlue(new DevotionCount(ColoredManaSymbol.U).calculate(game, source, this));
                 } else if (color.equals("White")) {
-                    computedMana.setWhite(new DevotionCount(ColoredManaSymbol.W).calculate(game, source));
+                    computedMana.setWhite(new DevotionCount(ColoredManaSymbol.W).calculate(game, source, this));
                 } else if (color.equals("Black")) {
-                    computedMana.setBlack(new DevotionCount(ColoredManaSymbol.B).calculate(game, source));
+                    computedMana.setBlack(new DevotionCount(ColoredManaSymbol.B).calculate(game, source, this));
                 } else if (color.equals("Green")) {
-                    computedMana.setGreen(new DevotionCount(ColoredManaSymbol.G).calculate(game, source));
+                    computedMana.setGreen(new DevotionCount(ColoredManaSymbol.G).calculate(game, source, this));
                 }
             }
         }

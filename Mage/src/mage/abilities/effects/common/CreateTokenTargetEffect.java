@@ -58,7 +58,7 @@ public class CreateTokenTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int value = amount.calculate(game, source);
+        int value = amount.calculate(game, source, this);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             if (value < 1) {

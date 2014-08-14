@@ -27,30 +27,27 @@
  */
 package mage.sets.ravnika;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.condition.common.TopLibraryCardTypeCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.cards.Card;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.players.Player;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.constants.Zone;
-import mage.abilities.effects.common.continious.PlayWithTheTopCardRevealedEffect;
-import static mage.abilities.condition.common.TopLibraryCardTypeCondition.CheckType.*;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.TopLibraryCardTypeCondition;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostAllEffect;
+import mage.abilities.effects.common.continious.PlayWithTheTopCardRevealedEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
+
+import java.util.UUID;
+
+import static mage.abilities.condition.common.TopLibraryCardTypeCondition.CheckType.CREATURE;
 
 /**
  *
@@ -108,8 +105,8 @@ class CrownOfConvergenceColorBoostEffect extends BoostAllEffect  {
             for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 if (permanent.getColor().shares(topCard.getColor()) && !permanent.getColor().isColorless()) {
                     if (!this.affectedObjectsSet || objects.contains(permanent.getId())) {
-                        permanent.addPower(power.calculate(game, source));
-                            permanent.addToughness(toughness.calculate(game, source));
+                        permanent.addPower(power.calculate(game, source, this));
+                        permanent.addToughness(toughness.calculate(game, source, this));
                     }
                 }
             }

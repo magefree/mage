@@ -27,10 +27,6 @@
  */
 package mage.sets.urzaslegacy;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,15 +35,20 @@ import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -148,7 +149,7 @@ class MotltenHydraDynamicValue implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability source) {
+    public int calculate(Game game, Ability source, Effect effect) {
         int count = 0;
         for(Cost cost : source.getCosts()){
             if(cost instanceof RemoveAllCountersSourceCost){

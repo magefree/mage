@@ -93,7 +93,7 @@ class BoundlessRealmsEffect extends OneShotEffect {
         FilterLandPermanent filter = new FilterLandPermanent();
         filter.add(new ControllerPredicate(TargetController.YOU));
 
-        int amount = new PermanentsOnBattlefieldCount(filter).calculate(game, source);
+        int amount = new PermanentsOnBattlefieldCount(filter).calculate(game, source, this);
         TargetCardInLibrary target = new TargetCardInLibrary(0, amount, new FilterBasicLandCard());
 
         Player player = game.getPlayer(source.getControllerId());

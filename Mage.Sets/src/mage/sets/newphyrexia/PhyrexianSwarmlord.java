@@ -27,22 +27,24 @@
  */
 package mage.sets.newphyrexia;
 
-import java.util.Set;
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.InsectInfectToken;
 import mage.players.Player;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -78,7 +80,7 @@ public class PhyrexianSwarmlord extends CardImpl {
 class OpponentsPoisonCountersCount implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int amount = 0;
         Set<UUID> playerList = game.getOpponents(sourceAbility.getControllerId());
         for (UUID playerUUID : playerList) {

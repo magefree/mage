@@ -90,7 +90,7 @@ class KindleCardsInAllGraveyardsCount implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int amount = 0;
         PlayerList playerList = game.getPlayerList();
         for (UUID playerUUID : playerList) {

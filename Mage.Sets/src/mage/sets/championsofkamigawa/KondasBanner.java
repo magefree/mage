@@ -140,8 +140,8 @@ class KondasBannerTypeBoostEffect extends BoostAllEffect  {
                     for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                             if (CardUtil.shareSubtypes(perm, equipedCreature) || perm.getAbilities().contains(ChangelingAbility.getInstance())) {
                                     if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
-                                            perm.addPower(power.calculate(game, source));
-                                            perm.addToughness(toughness.calculate(game, source));
+                                            perm.addPower(power.calculate(game, source, this));
+                                            perm.addToughness(toughness.calculate(game, source, this));
                                     }
 
                             }
@@ -183,8 +183,8 @@ class KondasBannerColorBoostEffect extends BoostAllEffect  {
                 for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                         if (equipedCreature.getColor().shares(perm.getColor())) {
                         if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
-                    perm.addPower(power.calculate(game, source));
-                    perm.addToughness(toughness.calculate(game, source));
+                    perm.addPower(power.calculate(game, source, this));
+                    perm.addToughness(toughness.calculate(game, source, this));
                                 }
 
                         }

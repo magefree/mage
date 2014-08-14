@@ -86,7 +86,7 @@ public class DrawCardTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-            int cardsToDraw = amount.calculate(game, source);
+            int cardsToDraw = amount.calculate(game, source, this);
             if (upTo) {
                 cardsToDraw = player.getAmount(0, cardsToDraw, "Draw how many cards?", game);
             }

@@ -27,12 +27,10 @@
  */
 package mage.sets.odyssey;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
@@ -45,6 +43,8 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -134,8 +134,8 @@ class SkeletalScryingEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
             if ( controller != null ) {
-                controller.drawCards(amount.calculate(game, source), game);
-                controller.loseLife(amount.calculate(game, source), game);
+                controller.drawCards(amount.calculate(game, source, this), game);
+                controller.loseLife(amount.calculate(game, source, this), game);
                 return true;
             }
         return false;

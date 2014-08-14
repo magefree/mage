@@ -90,7 +90,7 @@ public class AddCountersTargetEffect extends OneShotEffect {
                 if (permanent != null) {
                     if (counter != null) {
                         Counter newCounter = counter.copy();
-                        newCounter.add(amount.calculate(game, source));
+                        newCounter.add(amount.calculate(game, source, this));
                         permanent.addCounters(newCounter, game);
                         affectedTargets ++;
                         game.informPlayers(new StringBuilder(sourceObject.getLogName()).append(": ")
@@ -102,7 +102,7 @@ public class AddCountersTargetEffect extends OneShotEffect {
                     Player player = game.getPlayer(uuid);
                     if (player != null) {
                         Counter newCounter = counter.copy();
-                        newCounter.add(amount.calculate(game, source));
+                        newCounter.add(amount.calculate(game, source, this));
                         player.addCounters(newCounter, game);
                         affectedTargets ++;
                         game.informPlayers(new StringBuilder(sourceObject.getLogName()).append(": ")

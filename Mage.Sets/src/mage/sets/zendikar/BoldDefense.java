@@ -27,7 +27,6 @@
  */
 package mage.sets.zendikar;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.LockedInCondition;
@@ -35,6 +34,7 @@ import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -45,6 +45,8 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
+
+import java.util.UUID;
 
 
 /**
@@ -87,7 +89,7 @@ class BoldDefensePTCount implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         if (condition.apply(game, sourceAbility)) {
             return 2;
         } else {

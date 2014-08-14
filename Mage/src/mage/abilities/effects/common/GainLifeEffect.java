@@ -74,7 +74,7 @@ public class GainLifeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.gainLife(life.calculate(game, source), game);
+            player.gainLife(life.calculate(game, source, this), game);
         }
         return true;
     }

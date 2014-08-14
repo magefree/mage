@@ -27,7 +27,6 @@
  */
 package mage.sets.invasion;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -35,6 +34,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -50,6 +50,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.SaprolingToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -103,7 +105,7 @@ class GetKickerXValue implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability source) {
+    public int calculate(Game game, Ability source, Effect effect) {
         int count = 0;
         Card card = game.getCard(source.getSourceId());
         if (card != null) {

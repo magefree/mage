@@ -98,10 +98,10 @@ class SunburstEffect extends OneShotEffect {
         if (permanent != null) {
             Counter counter;
             if(permanent.getCardType().contains(CardType.CREATURE)){
-                counter = CounterType.P1P1.createInstance(amount.calculate(game, source)); 
+                counter = CounterType.P1P1.createInstance(amount.calculate(game, source, this)); 
             }
             else{
-                counter = CounterType.CHARGE.createInstance(amount.calculate(game, source)); 
+                counter = CounterType.CHARGE.createInstance(amount.calculate(game, source, this)); 
             }
             if (counter != null) {
                

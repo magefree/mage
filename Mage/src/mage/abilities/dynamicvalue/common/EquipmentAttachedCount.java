@@ -29,6 +29,7 @@ package mage.abilities.dynamicvalue.common;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -56,7 +57,7 @@ public class EquipmentAttachedCount implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability source) {
+    public int calculate(Game game, Ability source, Effect effect) {
         int count = 0;
         Permanent permanent = game.getPermanent(source.getSourceId()); // don't change this - may affect other cards
         if (permanent != null) {

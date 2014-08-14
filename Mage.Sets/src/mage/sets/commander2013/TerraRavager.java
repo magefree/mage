@@ -27,12 +27,12 @@
  */
 package mage.sets.commander2013;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -42,6 +42,8 @@ import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -76,7 +78,7 @@ public class TerraRavager extends CardImpl {
 class TerraRavagerLandCount implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         for (CombatGroup group :game.getCombat().getGroups()) {
             if (group.getAttackers().contains(sourceAbility.getSourceId())) {
                 UUID defenderId = group.getDefenderId();

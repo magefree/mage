@@ -102,7 +102,7 @@ class DamageOpponentsEffect extends OneShotEffect {
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                player.damage(amount.calculate(game, source), source.getSourceId(), game, false, true);
+                player.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, true);
             }
         }
         return true;

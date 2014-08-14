@@ -30,11 +30,11 @@ package mage.abilities.costs.common;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.game.Game;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
 
 /**
  *
@@ -65,7 +65,7 @@ public class PayLifeCost extends CostImpl {
         //the player may do so only if his or her life total is greater than or equal to the 
         //amount of the payment. If a player pays life, the payment is subtracted from his or 
         //her life total; in other words, the player loses that much life. (Players can always pay 0 life.)
-        int lifeToPayAmount = amount.calculate(game, ability);
+        int lifeToPayAmount = amount.calculate(game, ability, null);
         if (lifeToPayAmount > 0 && !game.getPlayer(controllerId).canPayLifeCost()) {
             return false;
         }
@@ -74,7 +74,7 @@ public class PayLifeCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        int lifeToPayAmount = amount.calculate(game, ability);
+        int lifeToPayAmount = amount.calculate(game, ability, null);
         this.paid = game.getPlayer(controllerId).loseLife(lifeToPayAmount, game) == lifeToPayAmount;
         return paid;
     }

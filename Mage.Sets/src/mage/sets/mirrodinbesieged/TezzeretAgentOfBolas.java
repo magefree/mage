@@ -27,7 +27,6 @@
  */
 package mage.sets.mirrodinbesieged;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -52,6 +51,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetArtifactPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -128,7 +129,7 @@ class TezzeretAgentOfBolasEffect2 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         DynamicValue value = new PermanentsOnBattlefieldCount(filter);
-        int count = value.calculate(game, source) * 2;
+        int count = value.calculate(game, source, this) * 2;
 
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {

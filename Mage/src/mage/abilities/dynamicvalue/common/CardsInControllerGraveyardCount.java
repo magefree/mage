@@ -2,6 +2,7 @@ package mage.abilities.dynamicvalue.common;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -34,7 +35,7 @@ public class CardsInControllerGraveyardCount implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Player player = game.getPlayer(sourceAbility.getControllerId());
         if (player != null) {
             return amount * player.getGraveyard().count(filter, game);

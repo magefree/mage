@@ -28,12 +28,14 @@
 
 package mage.abilities.dynamicvalue.common;
 
-import java.io.ObjectStreamException;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.io.ObjectStreamException;
 
 /**
  *
@@ -53,7 +55,7 @@ public class SourcePermanentToughnessValue implements DynamicValue {
     }
     
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Permanent sourcePermanent = game.getPermanent(sourceAbility.getSourceId());
         if (sourcePermanent == null) {
             sourcePermanent = (Permanent) game.getLastKnownInformation(sourceAbility.getSourceId(), Zone.BATTLEFIELD);

@@ -31,6 +31,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.constants.Duration;
 import mage.game.Game;
@@ -65,8 +66,8 @@ public class BushidoAbility extends BlocksOrBecomesBlockedTriggeredAbility {
         return new BushidoAbility(this);
     }
 
-    public int getValue(Ability source, Game game) {
-        return value.calculate(game, source);
+    public int getValue(Ability source, Game game, Effect effect) {
+        return value.calculate(game, source, effect);
     }
 
     @Override

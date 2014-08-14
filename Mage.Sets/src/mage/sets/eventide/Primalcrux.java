@@ -84,7 +84,7 @@ class ChromaPrimalcruxCount implements DynamicValue {
     private int chroma;
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         chroma = 0;
         for (Card card : game.getBattlefield().getAllActivePermanents(new FilterControlledPermanent(), sourceAbility.getControllerId(), game)) {
             chroma += card.getManaCost().getMana().getGreen();

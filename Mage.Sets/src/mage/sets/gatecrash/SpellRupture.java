@@ -27,24 +27,25 @@
  */
 package mage.sets.gatecrash;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -96,7 +97,7 @@ class SpellRuptureCounterUnlessPaysEffect extends OneShotEffect {
             Player controller = game.getPlayer(source.getControllerId());
             MageObject sourceObject = game.getObject(source.getSourceId());
             if (player != null && controller != null && sourceObject != null) {
-                int amount = new greatestPowerCountCreatureYouControl().calculate(game, source);
+                int amount = new greatestPowerCountCreatureYouControl().calculate(game, source, this);
                 GenericManaCost cost = new GenericManaCost(amount);
                 StringBuilder sb = new StringBuilder("Pay {").append(amount).append("}? (otherwise ").append(spell.getName()).append(" will be countered)");
                 if (player.chooseUse(Outcome.Benefit, sb.toString(), game)) {
@@ -123,7 +124,7 @@ class SpellRuptureCounterUnlessPaysEffect extends OneShotEffect {
 class greatestPowerCountCreatureYouControl implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int value = 0;
         for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), sourceAbility.getControllerId(), game)) {
             if (creature != null && creature.getPower().getValue() > value) {

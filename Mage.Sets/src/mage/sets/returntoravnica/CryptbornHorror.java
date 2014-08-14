@@ -91,7 +91,7 @@ class CryptbornHorrorEffect extends OneShotEffect {
         if (permanent != null) {
             OpponentsLostLifeCount dynamicValue = new OpponentsLostLifeCount();
             if (dynamicValue != null) {
-                int oll = dynamicValue.calculate(game, source);
+                int oll = dynamicValue.calculate(game, source, this);
                 if (oll > 0) {
                     permanent.addCounters(CounterType.P1P1.createInstance(oll), game);
                 }

@@ -113,7 +113,7 @@ class SpringjackPastureEffect extends OneShotEffect {
         Player you = game.getPlayer(source.getControllerId());
         ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
         if (you != null && choice != null) {
-            int count = new GetXValue().calculate(game, source);
+            int count = new GetXValue().calculate(game, source, this);
             if (choice.getColor().isBlack()) {
                 you.getManaPool().addMana(new Mana(0, 0, 0, 0, count, 0, 0), game, source);
             } else if (choice.getColor().isBlue()) {

@@ -27,17 +27,18 @@
  */
 package mage.abilities.effects.common;
 
-import java.util.UUID;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
+
+import java.util.UUID;
 
 /**
  *
@@ -79,7 +80,7 @@ public class DamageTargetEffect extends OneShotEffect {
 
     public int getAmount() {
         if (amount instanceof StaticValue) {
-            return amount.calculate(null, null);
+            return amount.calculate(null, null, this);
         } else {
             return 0;
         }
@@ -108,11 +109,11 @@ public class DamageTargetEffect extends OneShotEffect {
                 for (UUID targetId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent != null) {
-                        permanent.damage(amount.calculate(game, source), source.getSourceId(), game, false, preventable);
+                        permanent.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, preventable);
                     }
                     Player player = game.getPlayer(targetId);
                     if (player != null) {
-                        player.damage(amount.calculate(game, source), source.getSourceId(), game, false, preventable);
+                        player.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, preventable);
                     }
                 }
             }
@@ -121,11 +122,11 @@ public class DamageTargetEffect extends OneShotEffect {
         for (UUID targetId :this.getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
-                permanent.damage(amount.calculate(game, source), source.getSourceId(), game, false, preventable);
+                permanent.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, preventable);
             } else {
                 Player player = game.getPlayer(targetId);
                 if (player != null) {
-                    player.damage(amount.calculate(game, source), source.getSourceId(), game, false, preventable);
+                    player.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, preventable);
                 }
             }
         }

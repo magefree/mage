@@ -102,7 +102,7 @@ class FettergeistUnlessPaysEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
             PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filter, 1);
-            int count = amount.calculate(game, source);
+            int count = amount.calculate(game, source, this);
             if (count == 0) {
                 return true;
             }

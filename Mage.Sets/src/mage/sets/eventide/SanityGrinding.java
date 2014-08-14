@@ -27,9 +27,9 @@
  */
 package mage.sets.eventide;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -42,6 +42,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -98,7 +100,7 @@ class SanityGrindingEffect extends OneShotEffect {
         }
         you.revealCards("Sanity Grinding", revealed, game);
         if (targetOpponent != null) {
-            amount = (Math.min(targetOpponent.getLibrary().size(), new ChromaSanityGrindingCount(revealed).calculate(game, source)));
+            amount = (Math.min(targetOpponent.getLibrary().size(), new ChromaSanityGrindingCount(revealed).calculate(game, source, this)));
             for (int i = 0; i < amount; i++) {
                 targetOpponent.getLibrary().removeFromTop(game).moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
             }
@@ -125,7 +127,7 @@ class ChromaSanityGrindingCount implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int chroma = 0;
         for (Card card : revealed.getCards(game)) {
             chroma += card.getManaCost().getMana().getBlue();

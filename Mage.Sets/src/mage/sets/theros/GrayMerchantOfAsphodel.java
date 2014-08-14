@@ -91,7 +91,7 @@ class GrayMerchantOfAsphodelEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int lifeLost = 0;
-            int damage = new DevotionCount(ColoredManaSymbol.B).calculate(game, source);
+            int damage = new DevotionCount(ColoredManaSymbol.B).calculate(game, source, this);
             if (damage > 0) {
                 for (UUID playerId : game.getOpponents(source.getControllerId())) {
                     Player opponent = game.getPlayer(playerId);

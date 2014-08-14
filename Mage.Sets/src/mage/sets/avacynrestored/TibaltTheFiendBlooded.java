@@ -197,7 +197,7 @@ class TibaltTheFiendBloodedControlEffect extends ContinuousEffectImpl {
 class CardsInTargetHandCount implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         if (sourceAbility != null) {
             Player player = game.getPlayer(sourceAbility.getFirstTarget());
             if (player != null) {

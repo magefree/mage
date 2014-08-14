@@ -28,23 +28,24 @@
 
 package mage.sets.championsofkamigawa;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.WatcherScope;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.watchers.Watcher;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -114,7 +115,7 @@ class ZuberasDiedWatcher extends Watcher {
 class ZuberasDiedDynamicValue implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         ZuberasDiedWatcher watcher = (ZuberasDiedWatcher) game.getState().getWatchers().get("ZuberasDied");
         return watcher.zuberasDiedThisTurn;
     }

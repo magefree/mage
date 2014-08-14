@@ -27,20 +27,21 @@
  */
 package mage.sets.gatecrash;
 
-import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.turn.Step;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
  *
@@ -75,7 +76,7 @@ public class EnterTheInfinite extends CardImpl {
 
 class CardsInControllerLibraryCount implements DynamicValue {
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         if (sourceAbility != null) {
             Player controller = game.getPlayer(sourceAbility.getControllerId());
             if (controller != null) {

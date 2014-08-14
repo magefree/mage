@@ -87,8 +87,8 @@ public class BoostSourceEffect extends ContinuousEffectImpl implements SourceEff
         super.init(source, game);
         getAffectedObjects().add(source.getSourceId());
         if (lockedIn) {
-            power = new StaticValue(power.calculate(game, source));
-            toughness = new StaticValue(toughness.calculate(game, source));
+            power = new StaticValue(power.calculate(game, source, this));
+            toughness = new StaticValue(toughness.calculate(game, source, this));
         }
     }
 
@@ -96,8 +96,8 @@ public class BoostSourceEffect extends ContinuousEffectImpl implements SourceEff
     public boolean apply(Game game, Ability source) {
         Permanent target = game.getPermanent(source.getSourceId());
         if (target != null) {
-            target.addPower(power.calculate(game, source));
-            target.addToughness(toughness.calculate(game, source));
+            target.addPower(power.calculate(game, source, this));
+            target.addToughness(toughness.calculate(game, source, this));
             return true;
         }
         return false;

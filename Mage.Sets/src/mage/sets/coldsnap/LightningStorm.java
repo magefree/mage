@@ -97,7 +97,7 @@ class LightningStormCountCondition implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Spell spell = game.getStack().getSpell(sourceAbility.getSourceId());
         if (spell != null) {
             return spell.getCounters().getCount(counter) + 3;

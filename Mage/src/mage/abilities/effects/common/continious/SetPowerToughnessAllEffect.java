@@ -93,15 +93,15 @@ public class SetPowerToughnessAllEffect extends ContinuousEffectImpl {
             }
         }
         if (lockedInPT) {
-            power = new StaticValue(power.calculate(game, source));
-            toughness = new StaticValue(toughness.calculate(game, source));
+            power = new StaticValue(power.calculate(game, source, this));
+            toughness = new StaticValue(toughness.calculate(game, source, this));
         }
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int newPower = power.calculate(game, source);
-        int newToughness = toughness.calculate(game, source);
+        int newPower = power.calculate(game, source, this);
+        int newToughness = toughness.calculate(game, source, this);
         if (affectedObjectsSet) {
             for (UUID permanentId :objects) {
                 Permanent permanent = game.getPermanent(permanentId);

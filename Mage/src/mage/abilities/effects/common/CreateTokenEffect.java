@@ -91,7 +91,7 @@ public class CreateTokenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int value = amount.calculate(game, source);
+        int value = amount.calculate(game, source, this);
         Token tokenCopy = token.copy();
         tokenCopy.getAbilities().newId(); // neccessary if token has ability like DevourAbility()
         tokenCopy.putOntoBattlefield(value, game, source.getSourceId(), source.getControllerId(), tapped, attacking);

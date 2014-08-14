@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -13,7 +14,7 @@ import mage.game.permanent.Permanent;
 public class SacrificeCostCreaturesToughness implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         for (Cost cost: sourceAbility.getCosts()) {
             if (cost instanceof SacrificeTargetCost) {
                 SacrificeTargetCost sacrificeCost = (SacrificeTargetCost) cost;

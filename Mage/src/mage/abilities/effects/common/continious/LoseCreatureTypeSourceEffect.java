@@ -75,7 +75,7 @@ public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl implement
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        if (dynamicValue.calculate(game, source) >= lessThan) {
+        if (dynamicValue.calculate(game, source, this) >= lessThan) {
             return false;
         }
         Permanent permanent = game.getPermanent(source.getSourceId());

@@ -4,14 +4,16 @@
  */
 package mage.abilities.dynamicvalue.common;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Each colored mana symbol (e.g. {U}) in the mana costs of permanents you control counts toward your devotion to that color.
@@ -31,7 +33,7 @@ public class DevotionCount implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int devotion = 0;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(sourceAbility.getControllerId())) {
             for(ManaCost manaCost :permanent.getManaCost()) {

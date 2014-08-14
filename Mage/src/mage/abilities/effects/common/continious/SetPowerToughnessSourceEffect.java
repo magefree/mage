@@ -80,7 +80,7 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl {
             return false;
         }
         if (amount != null) {
-            int value = amount.calculate(game, source);
+            int value = amount.calculate(game, source, this);
             mageObject.getPower().setValue(value);
             mageObject.getToughness().setValue(value);
             return true;

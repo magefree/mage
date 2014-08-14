@@ -99,7 +99,7 @@ class OrcishSettlersEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = new ManacostVariableValue().calculate(game, source);
+        int amount = new ManacostVariableValue().calculate(game, source, this);
         TargetLandPermanent target = new TargetLandPermanent(amount);
 
         Player player = game.getPlayer(source.getControllerId());

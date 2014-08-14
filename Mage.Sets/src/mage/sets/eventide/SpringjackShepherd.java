@@ -80,7 +80,7 @@ public class SpringjackShepherd extends CardImpl {
 class ChromaSpringjackShepherdCount implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int chroma = 0;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterPermanent(), sourceAbility.getControllerId(), game)) {
             chroma += permanent.getManaCost().getMana().getWhite();

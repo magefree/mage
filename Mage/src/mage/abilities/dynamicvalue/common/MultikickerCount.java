@@ -29,6 +29,7 @@ package mage.abilities.dynamicvalue.common;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.game.Game;
@@ -43,7 +44,7 @@ public class MultikickerCount implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability source) {
+    public int calculate(Game game, Ability source, Effect effect) {
         int count = 0;
         Card card = game.getCard(source.getSourceId());
         if (card != null) {

@@ -102,7 +102,7 @@ class DisruptingShoalCounterTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         DynamicValue amount = new ExileFromHandCostCardConvertedMana();
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-        if (spell != null && spell.getConvertedManaCost() == amount.calculate(game, source)) {
+        if (spell != null && spell.getConvertedManaCost() == amount.calculate(game, source, this)) {
             return game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
         }
         return false;

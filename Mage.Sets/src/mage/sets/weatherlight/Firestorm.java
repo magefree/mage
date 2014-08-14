@@ -27,7 +27,6 @@
  */
 package mage.sets.weatherlight;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.DiscardXTargetCost;
 import mage.abilities.dynamicvalue.common.GetXValue;
@@ -42,6 +41,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -67,7 +68,7 @@ public class Firestorm extends CardImpl {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = new GetXValue().calculate(game, ability);
+        int xValue = new GetXValue().calculate(game, ability, null);
         if (xValue > 0) {
             Target target = new TargetCreatureOrPlayer(xValue);
             ability.addTarget(target);
@@ -94,7 +95,7 @@ class FirestormEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
-        int amount = (new GetXValue()).calculate(game, source);
+        int amount = (new GetXValue()).calculate(game, source, this);
         if (you != null) {
             if (source.getTargets().size() > 0) {
                 for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {

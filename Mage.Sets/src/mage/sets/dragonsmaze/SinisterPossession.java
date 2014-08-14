@@ -27,11 +27,6 @@
  */
 package mage.sets.dragonsmaze;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksEnchantedTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -40,11 +35,17 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -119,7 +120,7 @@ class LoseLifeControllerAttachedEffect extends OneShotEffect {
             if (creature != null) {
                 Player player = game.getPlayer(creature.getControllerId());
                 if (player != null) {
-                    player.loseLife(amount.calculate(game, source), game);
+                    player.loseLife(amount.calculate(game, source, this), game);
                     return true;
                 }
             }

@@ -27,10 +27,10 @@
  */
 package mage.sets.gatecrash;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -43,6 +43,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -81,18 +83,17 @@ public class MurderInvestigation extends CardImpl {
 class AttachedPermanentPowerCount implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Permanent attachmentPermanent = game.getPermanent(sourceAbility.getSourceId());
         if (attachmentPermanent == null) {
             attachmentPermanent = (Permanent) game.getLastKnownInformation(sourceAbility.getSourceId(), Zone.BATTLEFIELD);
         }
         if (attachmentPermanent != null && attachmentPermanent.getAttachedTo() != null) {
-            Permanent attached = game.getPermanent(attachmentPermanent.getAttachedTo());
-            if (attached == null) {
-                attached = (Permanent) game.getLastKnownInformation(attachmentPermanent.getAttachedTo(), Zone.BATTLEFIELD);
-            }
-            if (attached != null) {
-                return attached.getPower().getValue();
+            if (effect.getValue("attachedTo") != null) {
+                Permanent attached = (Permanent)effect.getValue("attachedTo");
+                if (attached != null) {
+                    return attached.getPower().getValue();
+                }
             }
         }
         return 0;

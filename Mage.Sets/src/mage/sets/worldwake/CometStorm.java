@@ -27,20 +27,21 @@
  */
 package mage.sets.worldwake;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -70,7 +71,7 @@ public class CometStorm extends CardImpl {
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
             ability.getTargets().clear();
-            int numbTargets = new MultikickerCount().calculate(game, ability) + 1;
+            int numbTargets = new MultikickerCount().calculate(game, ability, null) + 1;
             ability.addTarget(new TargetCreatureOrPlayer(numbTargets));
         }
     }

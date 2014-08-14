@@ -70,7 +70,7 @@ public class PutTopCardOfLibraryIntoGraveTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-            int cardsCount = Math.min(numberCards.calculate(game, source), player.getLibrary().size());
+            int cardsCount = Math.min(numberCards.calculate(game, source, this), player.getLibrary().size());
             for (int i = 0; i < cardsCount; i++) {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {

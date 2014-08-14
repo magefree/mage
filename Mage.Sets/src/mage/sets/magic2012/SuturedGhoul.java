@@ -27,17 +27,18 @@
  */
 package mage.sets.magic2012;
 
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -143,7 +144,7 @@ class SuturedGhoulPowerCount implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int amount = 0;
         Permanent permanent = game.getPermanent(sourceAbility.getSourceId());
         if (permanent != null) {
@@ -185,7 +186,7 @@ class SuturedGhoulToughnessCount implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int amount = 0;
         Permanent permanent = game.getPermanent(sourceAbility.getSourceId());
         if (permanent != null) {

@@ -111,7 +111,7 @@ class ShiningShoalPreventDamageTargetEffect extends PreventionEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        this.amount = dynamicAmount.calculate(game, source);
+        this.amount = dynamicAmount.calculate(game, source, this);
     }
 
     @Override

@@ -27,7 +27,6 @@
  */
 package mage.sets.torment;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.DiscardXTargetCost;
 import mage.abilities.dynamicvalue.common.GetXValue;
@@ -41,6 +40,8 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -71,7 +72,7 @@ public class NostalgicDreams extends CardImpl {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = new GetXValue().calculate(game, ability);
+        int xValue = new GetXValue().calculate(game, ability, null);
 //        if (xValue > 0) {
             Target target = new TargetCardInYourGraveyard(xValue, new FilterCard("card from your graveyard"));
             ability.addTarget(target);

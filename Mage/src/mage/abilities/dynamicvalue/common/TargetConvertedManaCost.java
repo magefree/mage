@@ -29,6 +29,7 @@ package mage.abilities.dynamicvalue.common;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.game.Game;
 
@@ -39,7 +40,7 @@ import mage.game.Game;
 public class TargetConvertedManaCost implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability source) {
+    public int calculate(Game game, Ability source, Effect effect) {
         Card card = game.getCard(source.getFirstTarget());
         if (card != null) {
             return card.getManaCost().convertedManaCost();

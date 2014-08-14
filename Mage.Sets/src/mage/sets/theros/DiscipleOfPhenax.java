@@ -102,7 +102,7 @@ class DiscipleOfPhenaxEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int devotion = new DevotionCount(ColoredManaSymbol.B).calculate(game, source);
+        int devotion = new DevotionCount(ColoredManaSymbol.B).calculate(game, source, this);
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         if (devotion > 0 && targetPlayer != null) {
             Cards revealedCards = new CardsImpl(Zone.PICK);

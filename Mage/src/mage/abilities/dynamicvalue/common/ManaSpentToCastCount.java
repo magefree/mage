@@ -29,6 +29,7 @@ package mage.abilities.dynamicvalue.common;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
@@ -43,7 +44,7 @@ public class ManaSpentToCastCount  implements DynamicValue{
     }
 
     @Override
-    public int calculate(Game game, Ability source) {
+    public int calculate(Game game, Ability source, Effect effect) {
         if (!game.getStack().isEmpty()) {
             for (StackObject stackObject : game.getStack()) {
                 if (stackObject instanceof Spell && ((Spell)stackObject).getSourceId().equals(source.getSourceId())) {

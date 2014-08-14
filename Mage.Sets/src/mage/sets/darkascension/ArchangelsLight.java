@@ -83,7 +83,7 @@ class ArchangelsLightEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         DynamicValue value = new CardsInControllerGraveyardCount();
         if (player != null) {
-            player.gainLife(value.calculate(game, source) * 2, game);
+            player.gainLife(value.calculate(game, source, this) * 2, game);
             player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
             player.getGraveyard().clear();
             player.shuffleLibrary(game);

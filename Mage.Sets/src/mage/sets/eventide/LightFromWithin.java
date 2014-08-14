@@ -108,8 +108,8 @@ class LightFromWithinEffect extends ContinuousEffectImpl {
             if (creature != null) {
                 Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null) {
-                    creature.addPower(new ChromaLightFromWithinCount(creature).calculate(game, source));
-                    creature.addToughness(new ChromaLightFromWithinCount(creature).calculate(game, source));
+                    creature.addPower(new ChromaLightFromWithinCount(creature).calculate(game, source, this));
+                    creature.addToughness(new ChromaLightFromWithinCount(creature).calculate(game, source, this));
                     boosted = true;
                 }
             }
@@ -131,7 +131,7 @@ class ChromaLightFromWithinCount implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int chroma = 0;
         chroma += permanent.getManaCost().getMana().getWhite();
         return chroma;

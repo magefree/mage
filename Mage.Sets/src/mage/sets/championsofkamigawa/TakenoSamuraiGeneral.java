@@ -28,24 +28,19 @@
 
 package mage.sets.championsofkamigawa;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.BushidoAbility;
 import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -121,7 +116,7 @@ class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl {
                 if (!perm.getId().equals(source.getSourceId())) {
                     for (Ability ability : perm.getAbilities()) {
                         if (ability instanceof BushidoAbility) {
-                            int value = ((BushidoAbility) ability).getValue(source, game);
+                            int value = ((BushidoAbility) ability).getValue(source, game, this);
                             perm.addPower(value);
                             perm.addToughness(value);
                         }

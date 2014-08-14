@@ -82,7 +82,7 @@ public class DiscardControllerEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             if (randomDiscard) {
-                int maxAmount = Math.min(amount.calculate(game, source), player.getHand().size());
+                int maxAmount = Math.min(amount.calculate(game, source, this), player.getHand().size());
                 for (int i = 0; i < maxAmount; i++) {
                     Card card = player.getHand().getRandom(game);
                     if (card != null) {
@@ -90,7 +90,7 @@ public class DiscardControllerEffect extends OneShotEffect {
                     }
                 }
             } else {
-                player.discard(amount.calculate(game, source), source, game);
+                player.discard(amount.calculate(game, source, this), source, game);
                 result = true;
             }
         }

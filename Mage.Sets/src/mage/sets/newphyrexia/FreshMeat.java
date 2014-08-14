@@ -27,23 +27,25 @@
  */
 package mage.sets.newphyrexia;
 
-import java.util.UUID;
+import mage.MageObject;
+import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.cards.Card;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
-import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.BeastToken;
 import mage.watchers.Watcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -114,7 +116,7 @@ class FreshMeatWatcher extends Watcher {
 class FreshMeatDynamicValue implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         FreshMeatWatcher watcher = (FreshMeatWatcher) game.getState().getWatchers().get("YourCreaturesDied", sourceAbility.getControllerId());
         if (watcher != null) {
             return watcher.getCreaturesCount();

@@ -107,8 +107,8 @@ public class BoostEquippedEffect extends ContinuousEffectImpl {
         }
 
         if (creature != null) {
-            creature.addPower(power.calculate(game, source));
-            creature.addToughness(toughness.calculate(game, source));
+            creature.addPower(power.calculate(game, source, this));
+            creature.addToughness(toughness.calculate(game, source, this));
         }
 
         return true;

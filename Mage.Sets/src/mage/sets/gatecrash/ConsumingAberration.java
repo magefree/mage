@@ -27,26 +27,23 @@
  */
 package mage.sets.gatecrash;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.constants.Duration;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -138,7 +135,7 @@ class CardsInOpponentsGraveyardsCount implements DynamicValue {
         super();
     }
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int amount = 0;
         for (UUID playerUUID : game.getOpponents(sourceAbility.getControllerId())) {
             Player player = game.getPlayer(playerUUID);

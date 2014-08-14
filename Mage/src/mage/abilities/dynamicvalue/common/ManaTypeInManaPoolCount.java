@@ -1,8 +1,9 @@
 package mage.abilities.dynamicvalue.common;
 
-import mage.constants.ManaType;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
+import mage.constants.ManaType;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -23,7 +24,7 @@ public class ManaTypeInManaPoolCount implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int amount = 0;
         Player player = game.getPlayer(sourceAbility.getControllerId());
         if (player != null) {

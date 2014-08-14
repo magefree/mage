@@ -27,10 +27,6 @@
  */
 package mage.sets.worldwake;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -41,9 +37,13 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -78,7 +78,7 @@ public class VoyagerDrake extends CardImpl {
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof ConditionalTriggeredAbility) {
             ability.getTargets().clear();
-            int numbTargets = new MultikickerCount().calculate(game, ability);
+            int numbTargets = new MultikickerCount().calculate(game, ability, null);
             if (numbTargets > 0) {
                 ability.addTarget(new TargetCreaturePermanent(0,numbTargets));
             }

@@ -90,7 +90,7 @@ class MarshmistTitanCostReductionEffect extends CostModificationEffectImpl {
         SpellAbility spellAbility = (SpellAbility)abilityToModify;
         Mana mana = spellAbility.getManaCostsToPay().getMana();
         if (mana.getColorless() > 0) {
-            int count = new DevotionCount(ColoredManaSymbol.B).calculate(game, source);
+            int count = new DevotionCount(ColoredManaSymbol.B).calculate(game, source, this);
             int newCount = mana.getColorless() - count;
             if (newCount < 0) {
                 newCount = 0;

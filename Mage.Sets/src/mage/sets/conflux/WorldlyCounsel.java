@@ -94,7 +94,7 @@ class WorldlyCounselEffect extends OneShotEffect {
         }
 
         Cards cards = new CardsImpl(Zone.PICK);
-        int count = (new DomainValue()).calculate(game, source);
+        int count = (new DomainValue()).calculate(game, source, this);
         count = Math.min(player.getLibrary().size(), count);
         for (int i = 0; i < count; i++) {
             Card card = player.getLibrary().removeFromTop(game);

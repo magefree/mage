@@ -93,7 +93,7 @@ class AcolytesRewardEffect extends PreventionEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        amount = new DevotionCount(ColoredManaSymbol.W).calculate(game, source);
+        amount = new DevotionCount(ColoredManaSymbol.W).calculate(game, source, this);
     }
 
     @Override

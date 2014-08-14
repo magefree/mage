@@ -27,9 +27,6 @@
  */
 package mage.sets.iceage;
 
-import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,6 +38,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.PreventAllDamageToControllerEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -50,6 +48,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -112,7 +112,7 @@ class SacrificeControllerEffect extends OneShotEffect{
 
         filter.add(new ControllerPredicate(TargetController.YOU));
 
-        int amount = count.calculate(game, source);
+        int amount = count.calculate(game, source, this);
         int realCount = game.getBattlefield().countAll(filter, player.getId(), game);
         amount = Math.min(amount, realCount);
 

@@ -93,7 +93,7 @@ class WarCadenceReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
         if (player != null) {
-            int amount = xCosts.calculate(game, source);
+            int amount = xCosts.calculate(game, source, this);
             if (amount > 0) {
                 String mana = new StringBuilder("{").append(amount).append("}").toString();
                 ManaCostsImpl cost = new ManaCostsImpl(mana);

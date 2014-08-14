@@ -27,15 +27,16 @@
  */
 package mage.sets.zendikar;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.WatcherScope;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -80,7 +81,7 @@ public class RuneflareTrap extends CardImpl {
 class TargetPlayerCardsInHandCount implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Player targetPlayer = game.getPlayer(sourceAbility.getFirstTarget());
         if (targetPlayer != null) {
             return targetPlayer.getHand().size();

@@ -28,11 +28,13 @@
 
 package mage.abilities.dynamicvalue.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.watchers.common.PlayerLostLifeWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +44,7 @@ import mage.watchers.common.PlayerLostLifeWatcher;
 public class OpponentsLostLifeCount implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return this.calculate(game, sourceAbility.getControllerId());
     }
 

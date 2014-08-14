@@ -30,6 +30,7 @@ package mage.abilities.dynamicvalue.common;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 
@@ -57,7 +58,7 @@ public class AttackingCreatureCount implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int count = 0;
         for (CombatGroup combatGroup : game.getCombat().getGroups()) {
             count += combatGroup.getAttackers().size();

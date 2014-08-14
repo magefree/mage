@@ -27,21 +27,23 @@
  */
 package mage.sets.newphyrexia;
 
-import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continious.BoostAllEffect;
+import mage.cards.Card;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.common.continious.BoostAllEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -75,7 +77,7 @@ public class IchorExplosion extends CardImpl {
 
 class IchorExplosionDynamicValue implements DynamicValue {
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Card sourceCard = game.getCard(sourceAbility.getSourceId());
         if (sourceCard != null) {
             for (Object cost: sourceAbility.getCosts()) {

@@ -27,17 +27,19 @@
  */
 package mage.sets.shardsofalara;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -70,7 +72,7 @@ public class ViciousShadows extends CardImpl {
 class TargetPlayerCardsInHandCount implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Player targetPlayer = game.getPlayer(sourceAbility.getFirstTarget());
         if (targetPlayer != null) {
             return targetPlayer.getHand().size();

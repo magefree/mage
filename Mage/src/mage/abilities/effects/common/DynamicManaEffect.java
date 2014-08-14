@@ -85,7 +85,7 @@ public class DynamicManaEffect extends BasicManaEffect {
 
     public Mana computeMana(Game game, Ability source){
         this.computedMana.clear();
-        int count = amount.calculate(game, source);
+        int count = amount.calculate(game, source, this);
         if (mana.getBlack() > 0) {
             computedMana.setBlack(count);
         } else if (mana.getBlue() > 0) {

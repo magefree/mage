@@ -27,7 +27,6 @@
  */
 package mage.sets.commander2013;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -56,6 +55,8 @@ import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -159,7 +160,7 @@ class MarathWillOfTheWildCreateTokenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            int amount = new ManacostVariableValue().calculate(game, source);
+            int amount = new ManacostVariableValue().calculate(game, source, this);
             Token token = new MarathWillOfTheWildElementalToken();
             token.getPower().initValue(amount);
             token.getToughness().initValue(amount);
@@ -203,7 +204,7 @@ class MarathWillOfTheWildRemoveCountersCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        int amount = new ManacostVariableValue().calculate(game, ability);
+        int amount = new ManacostVariableValue().calculate(game, ability, null);
         Permanent permanent = game.getPermanent(sourceId);
         if (permanent != null && permanent.getCounters().getCount(CounterType.P1P1) >= amount) {
             permanent.removeCounters(CounterType.P1P1.getName(), amount, game);

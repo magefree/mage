@@ -113,7 +113,7 @@ class RakdosLordOfRiotsCantCastEffect extends ContinuousRuleModifiyingEffectImpl
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.CAST_SPELL && event.getSourceId().equals(source.getSourceId())) {
-            if (new OpponentsLostLifeCount().calculate(game, source) == 0) {
+            if (new OpponentsLostLifeCount().calculate(game, source, this) == 0) {
                 return true;
             }
         }
@@ -137,7 +137,7 @@ class RakdosLordOfRiotsCostReductionEffect extends CostModificationEffectImpl {
         Ability spellAbility = (SpellAbility) abilityToModify;
         if (spellAbility != null) {
             OpponentsLostLifeCount dynamicValue = new OpponentsLostLifeCount();
-            int amount = dynamicValue.calculate(game, source);
+            int amount = dynamicValue.calculate(game, source, this);
             if (amount > 0) {
                 CardUtil.reduceCost(spellAbility, amount);
                 return true;

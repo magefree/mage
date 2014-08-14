@@ -99,7 +99,7 @@ class CantBeBlockedByCreaturesWithLessPowerEffect extends RestrictionEffect {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return blocker.getPower().getValue() >= dynamicValue.calculate(game, source);
+        return blocker.getPower().getValue() >= dynamicValue.calculate(game, source, this);
     }
 
     @Override

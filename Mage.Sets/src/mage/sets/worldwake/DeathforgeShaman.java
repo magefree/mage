@@ -27,10 +27,6 @@
  */
 package mage.sets.worldwake;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -39,9 +35,14 @@ import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -97,7 +98,7 @@ class DeathforgeShamanEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         DynamicValue value = new MultikickerCount();
-        int damage = value.calculate(game, source) * 2;
+        int damage = value.calculate(game, source, this) * 2;
 
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {

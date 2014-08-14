@@ -27,7 +27,6 @@
  */
 package mage.sets.worldwake;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -38,17 +37,15 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -91,7 +88,7 @@ public class MarshalsAnthem extends CardImpl {
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof ConditionalTriggeredAbility) {
             ability.getTargets().clear();
-            int numbTargets = new MultikickerCount().calculate(game, ability);
+            int numbTargets = new MultikickerCount().calculate(game, ability, null);
             if (numbTargets > 0) {
                 ability.addTarget(new TargetCardInYourGraveyard(0, numbTargets, filterCard));
             }

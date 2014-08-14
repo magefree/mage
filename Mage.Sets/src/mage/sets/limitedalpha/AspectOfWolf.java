@@ -27,11 +27,10 @@
  */
 package mage.sets.limitedalpha;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -42,6 +41,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -86,7 +87,7 @@ class HalfForestsDownCount implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int amount = game.getBattlefield().countAll(filter, sourceAbility.getControllerId(), game) / 2;
         return amount;
     }
@@ -116,7 +117,7 @@ class HalfForestsUpCount implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int amount = (int) Math.ceil(game.getBattlefield().countAll(filter, sourceAbility.getControllerId(), game) / 2f);
         return amount;
     }

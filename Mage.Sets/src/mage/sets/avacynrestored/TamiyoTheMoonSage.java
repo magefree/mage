@@ -27,18 +27,13 @@
  */
 package mage.sets.avacynrestored;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -49,6 +44,7 @@ import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect.
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -60,6 +56,8 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 
 /**
@@ -112,7 +110,7 @@ class TappedCreaturesControlledByTargetCount implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return game.getBattlefield().countAll(filter, sourceAbility.getFirstTarget(), game);
     }
 

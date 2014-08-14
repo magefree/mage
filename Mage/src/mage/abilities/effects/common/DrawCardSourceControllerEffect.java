@@ -69,7 +69,7 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.drawCards(amount.calculate(game, source), game);
+            player.drawCards(amount.calculate(game, source, this), game);
             return true;
         }
         return false;
@@ -77,7 +77,7 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        boolean oneCard = (amount instanceof StaticValue && amount.calculate(null, null) == 1) 
+        boolean oneCard = (amount instanceof StaticValue && amount.calculate(null, null, this) == 1)
                                 || amount instanceof PermanentsOnBattlefieldCount || amount.toString().equals("1");
         sb.append("draw ").append(oneCard ? "a" : CardUtil.numberToText(amount.toString())).append(" card");
         if (!oneCard) {

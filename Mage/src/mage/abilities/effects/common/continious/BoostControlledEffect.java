@@ -119,8 +119,8 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
             }
         }
         if (this.lockedIn) {
-            power = new StaticValue(power.calculate(game, source));
-            toughness = new StaticValue(toughness.calculate(game, source));
+            power = new StaticValue(power.calculate(game, source, this));
+            toughness = new StaticValue(toughness.calculate(game, source, this));
         }
     }
 
@@ -129,8 +129,8 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
         for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
             if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
-                    perm.addPower(power.calculate(game, source));
-                    perm.addToughness(toughness.calculate(game, source));
+                    perm.addPower(power.calculate(game, source, this));
+                    perm.addToughness(toughness.calculate(game, source, this));
                 }
             }
         }

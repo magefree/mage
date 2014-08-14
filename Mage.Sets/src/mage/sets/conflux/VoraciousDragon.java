@@ -27,10 +27,6 @@
  */
 package mage.sets.conflux;
 
-import java.util.ArrayList;
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -42,9 +38,14 @@ import mage.abilities.effects.common.DevourEffect.DevourFactor;
 import mage.abilities.keyword.DevourAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  *
@@ -86,14 +87,14 @@ public class VoraciousDragon extends CardImpl {
 class TwiceDevouredGoblins implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability sourceAbility) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Permanent sourcePermanent = game.getPermanent(sourceAbility.getSourceId());
         if (sourcePermanent != null) {
             for (Ability ability : sourcePermanent.getAbilities()) {
                 if (ability instanceof DevourAbility) {
-                    for (Effect effect: ability.getEffects()) {
-                        if (effect instanceof DevourEffect) {
-                            DevourEffect devourEffect = (DevourEffect) effect;
+                    for (Effect abilityEffect: ability.getEffects()) {
+                        if (abilityEffect instanceof DevourEffect) {
+                            DevourEffect devourEffect = (DevourEffect) abilityEffect;
                             int amountGoblins = 0;
                             for (ArrayList<String> subtypesItem :devourEffect.getSubtypes(game, sourcePermanent.getId())) {
                                 if (subtypesItem.contains("Goblin")) {

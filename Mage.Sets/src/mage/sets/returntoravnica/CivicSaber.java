@@ -26,20 +26,21 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 package mage.sets.returntoravnica;
- 
-import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
  
 /**
  *
@@ -77,7 +78,7 @@ class CivicSaberColorCount implements DynamicValue {
     }
  
     @Override
-    public int calculate(Game game, Ability source) {
+    public int calculate(Game game, Ability source, Effect effect) {
         int count = 0;
         Permanent equipment = game.getPermanent(source.getSourceId());
         if (equipment != null) {
