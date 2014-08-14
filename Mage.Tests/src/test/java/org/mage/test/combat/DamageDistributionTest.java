@@ -136,6 +136,7 @@ public class DamageDistributionTest extends CardTestPlayerBase {
         assertLife(playerA, 14);
         assertLife(playerB, 20);
 
+        assertPermanentCount(playerA, "Leyline of Sanctity", 1);
         assertPermanentCount(playerB, "Battle Mastery", 1);
         // no creatures dies
         assertPermanentCount(playerA, "Heliod, God of the Sun", 1);

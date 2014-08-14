@@ -37,7 +37,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
@@ -47,7 +47,8 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class LeylineOfAnticipation extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("nonland cards");
+    private static final FilterCard filter = new FilterCard("nonland cards");
+
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
     }
@@ -55,8 +56,13 @@ public class LeylineOfAnticipation extends CardImpl {
     public LeylineOfAnticipation(UUID ownerId) {
         super(ownerId, 61, "Leyline of Anticipation", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
         this.expansionSetCode = "M11";
+        
         this.color.setBlue(true);
+        
+        // If Leyline of Anticipation is in your opening hand, you may begin the game with it on the battlefield.
         this.addAbility(LeylineAbility.getInstance());
+        
+        // You may cast nonland cards as though they had flash. (You may cast them any time you could cast an instant.)        
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashEffect(Duration.WhileOnBattlefield, filter)));
     }
 

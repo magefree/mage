@@ -37,7 +37,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -77,17 +76,10 @@ public class CastAsThoughItHadFlashEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        Card card = game.getCard(sourceId);
-        if (card != null && filter.match(card, game) && card.getSpellAbility().isInUseableZone(game, card, false)) {
-            if (anyPlayer) {
-                Player controller = game.getPlayer(source.getControllerId());
-                if (controller != null) {
-                    return controller.getInRange().contains(card.getOwnerId());
-                }
-            } else {
-                return card.getOwnerId().equals(source.getControllerId());
-            }
+    public boolean applies(UUID affectedSpellId, Ability source, UUID affectedControllerId, Game game) {
+        if (anyPlayer || source.getControllerId().equals(affectedControllerId)) {
+            Card card = game.getCard(affectedSpellId);
+            return card != null && filter.match(card, game);
         }
         return false;
     }
