@@ -28,8 +28,6 @@
 package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -37,9 +35,10 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.common.FilterSpiritOrArcaneCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -47,13 +46,6 @@ import mage.target.TargetPermanent;
  * @author Loki
  */
 public class NikkoOnna extends CardImpl {
-
-    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();    
-    private static final FilterPermanent filterTarget = new FilterPermanent("enchantment");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-    }
 
     public NikkoOnna(UUID ownerId) {
         super(ownerId, 21, "Nikko-Onna", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -65,10 +57,11 @@ public class NikkoOnna extends CardImpl {
 
         // When Nikko-Onna enters the battlefield, destroy target enchantment.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        ability.addTarget(new TargetPermanent(filterTarget));
+        ability.addTarget(new TargetPermanent(new FilterEnchantmentPermanent()));
         this.addAbility(ability);
+
         // Whenever you cast a Spirit or Arcane spell, you may return Nikko-Onna to its owner's hand.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(), new FilterSpiritOrArcaneCard(), true));
     }
 
     public NikkoOnna(final NikkoOnna card) {
