@@ -199,12 +199,15 @@ public class Main {
                 }
                 sessionInfo.append(" at ").append(session.getHost()).append(" sessionId: ").append(session.getId());
                 if (throwable instanceof ClientDisconnectedException) {
-                    SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.Disconnected);
-                    logger.debug("Client disconnected - " + sessionInfo);
+                    // Seems like the random diconnects from public server land here and should not be handled as explicit disconnects
+                    // So it should be possible to reconnect to server and continue games if DisconnectReason is set to LostConnection
+                    //SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.Disconnected);
+                    SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.LostConnection);
+                    logger.debug("Client disconnected - " + sessionInfo + " throwable: " + throwable == null ? "null" :throwable.getMessage());
                 }
                 else {
                     SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.LostConnection);
-                    logger.info("Connection to client lost - " + sessionInfo);
+                    logger.info("Connection to client lost - " + sessionInfo + " throwable: " + (throwable == null ? "null" :throwable.getMessage()));
                 }
             }
         }

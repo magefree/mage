@@ -174,7 +174,7 @@ public class TournamentController {
             ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has joined the tournament", MessageColor.BLACK, true, MessageType.STATUS);
             checkStart();
         } else {
-            logger.error("TournamentController.join  user not found  uderId: " +userId  + "   tournamentId: " + tournament.getId());
+            logger.error("User not found  userId: " + userId  + "   tournamentId: " + tournament.getId());
         }
     }
 
