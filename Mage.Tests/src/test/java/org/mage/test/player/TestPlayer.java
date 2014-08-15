@@ -85,6 +85,11 @@ public class TestPlayer extends ComputerPlayer {
         actions.add(new PlayerAction(turnNum, step, action));
     }
 
+    @Override
+    public int getActionCount() {
+        return actions.size();
+    }
+
     public void addChoice(String choice) {
         choices.add(choice);
     }
@@ -366,7 +371,7 @@ public class TestPlayer extends ComputerPlayer {
         if (groups.length > 2 && groups[2].startsWith("spellOnStack=")) {
             String spellOnStack = groups[2].substring(13);
             for (StackObject stackObject: game.getStack()) {
-                if (stackObject.getStackAbility().toString().indexOf(spellOnStack) >= 0) {
+                if (stackObject.getStackAbility().toString().contains(spellOnStack)) {
                     return true;
                 }
             }
@@ -374,7 +379,7 @@ public class TestPlayer extends ComputerPlayer {
         } else if (groups.length > 2 && groups[2].startsWith("!spellOnStack=")) {
             String spellNotOnStack = groups[2].substring(14);
             for (StackObject stackObject: game.getStack()) {
-                if (stackObject.getStackAbility().toString().equals(spellNotOnStack)) {
+                if (stackObject.getStackAbility().toString().contains(spellNotOnStack)) {
                     return false;
                 }
             }
@@ -388,7 +393,7 @@ public class TestPlayer extends ComputerPlayer {
             String spellOnTopOFStack = groups[2].substring(18);
             if (game.getStack().size() > 0) {
                 StackObject stackObject = game.getStack().getFirst();
-                if (stackObject != null && stackObject.getStackAbility().toString().indexOf(spellOnTopOFStack) >= 0) {
+                if (stackObject != null && stackObject.getStackAbility().toString().contains(spellOnTopOFStack)) {
                     return true;
                 }
             }

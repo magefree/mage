@@ -51,6 +51,7 @@ public class LastKnownInformationTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
+        assertActionCount(playerB, 0);
         assertPermanentCount(playerA, "Safehold Elite", 1);
         assertPowerToughness(playerA, "Safehold Elite", 1, 1);
         // because enchanted Safehold Elite's P/T was 2/2, Murder Investigation has to put 2 Soldier onto the battlefield

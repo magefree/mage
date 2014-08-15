@@ -204,6 +204,7 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean isTestMode();
     void setTestMode(boolean value);
     void addAction(String action);
+    int getActionCount();
     void setAllowBadMoves(boolean allowBadMoves);
 
     void init(Game game);

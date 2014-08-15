@@ -2221,6 +2221,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public int getActionCount() {
+        return 0;
+    }
+
+    @Override
     public void setAllowBadMoves(boolean allowBadMoves) {
         // do nothing
     }

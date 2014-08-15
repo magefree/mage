@@ -621,6 +621,15 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Assert.assertEquals("(Graveyard) Card counts are not equal (" + cardName + ")", count, actualCount);
     }
 
+    /**
+     * Asserts added actions count. Usefull to make sure that all actions were executed.
+     * @param player
+     * @param count
+     */
+    public void assertActionCount(TestPlayer player, int count) {
+        Assert.assertEquals("Actions left are not equal: ", count, player.getActionCount());
+    }
+
     public Permanent getPermanent(String cardName, Player player) {
         return getPermanent(cardName, player.getId());
     }

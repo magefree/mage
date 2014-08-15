@@ -91,5 +91,4 @@ public class PersistTest extends CardTestPlayerBase {
     }
 
     // some tests were moved to LastKnownInformationTest
-
 }
