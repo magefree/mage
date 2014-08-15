@@ -371,6 +371,14 @@ public class TestPlayer extends ComputerPlayer {
                 }
             }
             return false;
+        } else if (groups.length > 2 && groups[2].startsWith("!spellOnStack=")) {
+            String spellNotOnStack = groups[2].substring(14);
+            for (StackObject stackObject: game.getStack()) {
+                if (stackObject.getStackAbility().toString().equals(spellNotOnStack)) {
+                    return false;
+                }
+            }
+            return true;
         }
         return true;
     }
@@ -385,14 +393,6 @@ public class TestPlayer extends ComputerPlayer {
                 }
             }
             return false;
-        } else if (groups.length > 2 && groups[2].startsWith("!spellOnStack=")) {
-            String spellNotOnStack = groups[2].substring(14);
-            for (StackObject stackObject: game.getStack()) {
-                if (stackObject.getStackAbility().toString().equals(spellNotOnStack)) {
-                    return false;
-                }
-            }
-            return true;
         }
         return true;
     }
@@ -401,7 +401,7 @@ public class TestPlayer extends ComputerPlayer {
         boolean result = true;
         for (int i = 1; i < groups.length; i++) {
             String group = groups[i];
-            if (group.startsWith("spellOnStack") || group.startsWith("spellOnTopOfStack")) {
+            if (group.startsWith("spellOnStack") || group.startsWith("spellOnTopOfStack") || group.startsWith("!spellOnStack")) {
                 break;
             }
             if (ability instanceof SpellAbility && ((SpellAbility) ability).getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {

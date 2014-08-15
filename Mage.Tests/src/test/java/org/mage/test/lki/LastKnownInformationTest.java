@@ -105,7 +105,7 @@ public class LastKnownInformationTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Grizzly Bears", 1);
-        assertLife(playerA, 27);
+        assertLife(playerA, 24);
     }
 
     /**
@@ -137,43 +137,5 @@ public class LastKnownInformationTest extends CardTestPlayerBase {
 
     }
 
-    @Test
-    public void testCardTestPlayerAPIImpl1() {
-        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
-
-        addCard(Zone.HAND, playerA, "Last Breath");
-        addCard(Zone.HAND, playerA, "Shock");
-
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Last Breath", "Grizzly Bears");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", "Grizzly Bears");
-
-        setStopAt(1, PhaseStep.END_TURN);
-        execute();
-
-        assertPermanentCount(playerA, "Grizzly Bears", 0);
-        assertLife(playerA, 20);
-    }
-
-    @Test
-    public void testCardTestPlayerAPIImpl2() {
-        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
-
-        addCard(Zone.HAND, playerA, "Last Breath");
-        addCard(Zone.HAND, playerA, "Shock");
-
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Last Breath", "Grizzly Bears");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", "Grizzly Bears", "Last Breath",
-                StackClause.WHILE_NOT_ON_STACK);
-
-        setStopAt(1, PhaseStep.END_TURN);
-        execute();
-
-        assertPermanentCount(playerA, "Grizzly Bears", 0);
-        assertLife(playerA, 24);
-    }
 
 }
