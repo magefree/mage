@@ -285,21 +285,23 @@ public class TestPlayer extends ComputerPlayer {
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
         if (!targets.isEmpty()) {
             if (target instanceof TargetPermanent) {
-                for (Permanent permanent : game.getBattlefield().getAllActivePermanents((FilterPermanent)target.getFilter(), game)) {
-                    for (String _target: targets) {
-                        if (permanent.getName().equals(_target)) {
-                            if (((TargetPermanent)target).canTarget(playerId, permanent.getId(), null, game) && !target.getTargets().contains(permanent.getId())) {
-                                target.add(permanent.getId(), game);
-                                targets.remove(_target);
-                                return true;
-                            }
-                        } else if ((permanent.getName()+"-"+permanent.getExpansionSetCode()).equals(_target)) {
-                            if (((TargetPermanent)target).canTarget(playerId, permanent.getId(), null, game) && !target.getTargets().contains(permanent.getId())) {
-                                target.add(permanent.getId(), game);
-                                targets.remove(_target);
-                                return true;
+                for (String targetDefinition: targets) {
+                    String[] targetList = targetDefinition.split("\\^");
+                    boolean targetFound = false;
+                    for (String targetName: targetList) {
+                        for (Permanent permanent : game.getBattlefield().getAllActivePermanents((FilterPermanent)target.getFilter(), game)) {
+                            if (permanent.getName().equals(targetName) || (permanent.getName()+"-"+permanent.getExpansionSetCode()).equals(targetName)) {
+                                if (((TargetPermanent)target).canTarget(source.getControllerId(), permanent.getId(), source, game) && !target.getTargets().contains(permanent.getId())) {
+                                    target.add(permanent.getId(), game);
+                                    targetFound = true;
+                                    break;
+                                }
                             }
                         }
+                    }
+                    if (targetFound) {
+                        targets.remove(targetDefinition);
+                        return true;
                     }
                 }
             }
