@@ -44,7 +44,7 @@ public class CantBeBlockedByCreaturesSourceEffect extends RestrictionEffect {
     private final FilterCreaturePermanent filter;
 
     public CantBeBlockedByCreaturesSourceEffect(FilterCreaturePermanent filter, Duration duration) {
-        super(Duration.WhileOnBattlefield);
+        super(duration);
         this.filter = filter;
         staticText = new StringBuilder("{this} can't be blocked ")
                 .append(filter.getMessage().startsWith("except by") ? "":"by ").append(filter.getMessage()).toString();

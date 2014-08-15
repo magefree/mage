@@ -25,61 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.combat.CantBlockCreaturesSourceEffect;
-import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
- * @author Quercitron
+ * @author dustinconrad
  */
-public class Sunweb extends CardImpl {
+public class BrassclawOrcs extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or less");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or greater");
     static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
+        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 1));
     }
 
-    public Sunweb(UUID ownerId) {
-        super(ownerId, 51, "Sunweb", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "7ED";
-        this.subtype.add("Wall");
+    public BrassclawOrcs(UUID ownerId) {
+        super(ownerId, 100, "Brassclaw Orcs", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "FEM";
+        this.subtype.add("Orc");
 
-        this.color.setWhite(true);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(6);
+        this.color.setRed(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
 
-        // Defender
-        this.addAbility(DefenderAbility.getInstance());
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Sunweb can't block creatures with power 2 or less.
+        // Brassclaw Orcs can't block creatures with power 2 or greater.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockCreaturesSourceEffect(filter)));
+
     }
 
-    public Sunweb(final Sunweb card) {
+    public BrassclawOrcs(final BrassclawOrcs card) {
         super(card);
     }
 
     @Override
-    public Sunweb copy() {
-        return new Sunweb(this);
+    public BrassclawOrcs copy() {
+        return new BrassclawOrcs(this);
     }
 }
