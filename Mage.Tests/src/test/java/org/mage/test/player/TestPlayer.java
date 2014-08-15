@@ -28,24 +28,29 @@
 
 package org.mage.test.player;
 
+import mage.MageObject;
+import mage.abilities.*;
+import mage.abilities.costs.VariableCost;
+import mage.choices.Choice;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
-import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.choices.Choice;
 import mage.constants.RangeOfInfluence;
+import mage.constants.SpellAbilityType;
 import mage.counters.Counter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterCreatureForCombat;
+import mage.filter.common.FilterCreatureForCombatBlock;
+import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.stack.StackObject;
 import mage.player.ai.ComputerPlayer;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanentAmount;
 import org.junit.Ignore;
 
@@ -54,16 +59,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import mage.abilities.Mode;
-import mage.abilities.Modes;
-import mage.abilities.SpellAbility;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.costs.VariableCost;
-import mage.constants.SpellAbilityType;
-import mage.filter.common.FilterCreatureForCombatBlock;
-import mage.filter.common.FilterPlaneswalkerPermanent;
-import mage.game.stack.StackObject;
-import mage.target.TargetPlayer;
 
 /**
  *
@@ -390,6 +385,14 @@ public class TestPlayer extends ComputerPlayer {
                 }
             }
             return false;
+        } else if (groups.length > 2 && groups[2].startsWith("!spellOnStack=")) {
+            String spellNotOnStack = groups[2].substring(14);
+            for (StackObject stackObject: game.getStack()) {
+                if (stackObject.getStackAbility().toString().equals(spellNotOnStack)) {
+                    return false;
+                }
+            }
+            return true;
         }
         return true;
     }

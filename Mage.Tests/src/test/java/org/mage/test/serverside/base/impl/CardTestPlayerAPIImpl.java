@@ -1,7 +1,5 @@
 package org.mage.test.serverside.base.impl;
 
-import mage.constants.CardType;
-import mage.constants.PhaseStep;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
@@ -9,9 +7,13 @@ import mage.cards.decks.importer.DeckImporterUtil;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.CardScanner;
+import mage.constants.CardType;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.Filter;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.GameException;
@@ -26,8 +28,6 @@ import org.mage.test.serverside.base.MageTestPlayerBase;
 
 import java.util.List;
 import java.util.UUID;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.NamePredicate;
 
 /**
  * API for test initialization and asserting the test results.
@@ -657,6 +657,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player.addAction(turnNum, step, "activate:Cast " + cardName + ";target=" + targetName);
     }
 
+    public enum StackClause {
+        WHILE_ON_STACK,
+        WHILE_NOT_ON_STACK;
+    }
+
     /**
      * Spell will only be cast, if a spell / ability with the given name is on the stack
      * 
@@ -668,7 +673,26 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param spellOnStack 
      */
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName, String spellOnStack) {
-        player.addAction(turnNum, step, "activate:Cast " + cardName + ";target=" + targetName + ";spellOnStack=" + spellOnStack);
+        castSpell(turnNum, step, player, cardName, targetName, spellOnStack, StackClause.WHILE_ON_STACK);
+    }
+
+    /**
+     * Spell will only be cast, if a spell / ability with the given name IS or IS NOT on the stack
+     *
+     * @param turnNum
+     * @param step
+     * @param player
+     * @param cardName
+     * @param targetName
+     * @param spellOnStack
+     * @param clause
+     */
+    public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName, String spellOnStack, StackClause clause) {
+        if (StackClause.WHILE_ON_STACK.equals(clause)) {
+            player.addAction(turnNum, step, "activate:Cast " + cardName + ";target=" + targetName + ";spellOnStack=" + spellOnStack);
+        } else {
+            player.addAction(turnNum, step, "activate:Cast " + cardName + ";target=" + targetName + ";!spellOnStack=" + spellOnStack);
+        }
     }
 
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName, String spellOnStack, String spellOnTopOfStack) {

@@ -90,45 +90,6 @@ public class PersistTest extends CardTestPlayerBase {
 
     }
 
-
-    /**
-     * see here for more information
-     * http://www.slightlymagic.net/forum/viewtopic.php?f=116&t=14516
-     * 
-     * Tests Safehold Elite with persist returns to battlefield with -1/-1 counter
-     * Murder Investigation puts 2 tokens onto battlefield because enchanted Safehold Elite
-     * was 2/2
-     *
-     */
-    @Test
-    public void testUndyingTriggersInTime() {
-        // Safehold Elite {1}{G/W}
-        // Creature - Elf Scout
-        // 2/2
-        // Persist
-
-        addCard(Zone.BATTLEFIELD, playerA, "Safehold Elite");
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
-        addCard(Zone.HAND, playerA, "Murder Investigation",2);
-
-        addCard(Zone.HAND, playerB, "Lightning Bolt",2);
-        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
-
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Murder Investigation", "Safehold Elite");
-
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Safehold Elite");
-        // choose triggered ability order
-        playerA.addChoice("When enchanted creature dies, put X 1/1 red and white Soldier creature token with haste onto the battlefield, where X is its power.");
-        //castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Safehold Elite", "When enchanted creature dies, put X 1/1 red and white Soldier creature token with haste onto the battlefield, where X is its power");
-
-        setStopAt(1, PhaseStep.END_TURN);
-        execute();
-
-        assertPermanentCount(playerA, "Safehold Elite", 1);
-        assertPowerToughness(playerA, "Safehold Elite", 1, 1);
-        // because enchanted Safehold Elite's P/T was 2/2, Murder Investigation has to put 2 Soldier onto the battlefield
-        assertPermanentCount(playerA, "Soldier", 2);
-
-    }
+    // some tests were moved to LastKnownInformationTest
 
 }
