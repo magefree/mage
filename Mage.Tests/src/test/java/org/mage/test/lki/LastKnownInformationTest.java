@@ -28,7 +28,7 @@ public class LastKnownInformationTest extends CardTestPlayerBase {
      * @author LevelX
      */
     @Test
-    public void testUndyingTriggersInTime() {
+    public void testPersistTriggersInTime() {
         // Safehold Elite {1}{G/W}
         // Creature - Elf Scout
         // 2/2
@@ -52,8 +52,7 @@ public class LastKnownInformationTest extends CardTestPlayerBase {
         execute();
 
         assertActionCount(playerB, 0);
-        assertPermanentCount(playerA, "Safehold Elite", 1);
-        assertPowerToughness(playerA, "Safehold Elite", 1, 1);
+        assertPermanentCount(playerA, "Safehold Elite", 0);
         // because enchanted Safehold Elite's P/T was 2/2, Murder Investigation has to put 2 Soldier onto the battlefield
         assertPermanentCount(playerA, "Soldier", 2);
 
