@@ -25,85 +25,78 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author LevelX
+ * @author dustinconrad
  */
-public class HorobiDeathsWail extends CardImpl {
+public class RustmouthOgre extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Demon");
-    static {
-        filter.add(new SubtypePredicate("Demon"));
-    }
+    public RustmouthOgre(UUID ownerId) {
+        super(ownerId, 103, "Rustmouth Ogre", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Ogre");
 
-    public HorobiDeathsWail(UUID ownerId) {
-        super(ownerId, 117, "Horobi, Death's Wail", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Spirit");
-
-        this.color.setBlack(true);
-        this.power = new MageInt(4);
+        this.color.setRed(true);
+        this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Whenever a creature becomes the target of a spell or ability, destroy that creature.
-        this.addAbility(new HorobiDeathsWailAbility(new DestroyTargetEffect()));
+        // Whenever Rustmouth Ogre deals combat damage to a player, you may destroy target artifact that player controls.
+        this.addAbility(new RustmouthOgreTriggeredAbility());
     }
 
-    public HorobiDeathsWail(final HorobiDeathsWail card) {
+    public RustmouthOgre(final RustmouthOgre card) {
         super(card);
     }
 
     @Override
-    public HorobiDeathsWail copy() {
-        return new HorobiDeathsWail(this);
-    }    
-
+    public RustmouthOgre copy() {
+        return new RustmouthOgre(this);
+    }
 }
 
-class HorobiDeathsWailAbility extends TriggeredAbilityImpl {
+class RustmouthOgreTriggeredAbility extends TriggeredAbilityImpl {
 
-    public HorobiDeathsWailAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect);
+    RustmouthOgreTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
     }
 
-    public HorobiDeathsWailAbility(final HorobiDeathsWailAbility ability) {
+    RustmouthOgreTriggeredAbility(final RustmouthOgreTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public HorobiDeathsWailAbility copy() {
-        return new HorobiDeathsWailAbility(this);
+    public RustmouthOgreTriggeredAbility copy() {
+        return new RustmouthOgreTriggeredAbility(this);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.TARGETED) {
-            Permanent creature = game.getPermanent(event.getTargetId());
-            if (creature != null && creature.getCardType().contains(CardType.CREATURE)) {
-                getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
+        if (event instanceof DamagedPlayerEvent) {
+            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
+            if (damageEvent.isCombatDamage() && event.getSourceId().equals(this.getSourceId())) {
+                FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact that player controls");
+                filter.add(new ControllerIdPredicate(event.getPlayerId()));
+                filter.setMessage("artifact controlled by " + game.getPlayer(event.getTargetId()).getName());
+
+                this.getTargets().clear();
+                this.addTarget(new TargetPermanent(filter));
                 return true;
             }
         }
@@ -112,6 +105,6 @@ class HorobiDeathsWailAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature becomes the target of a spell or ability, destroy that creature.";
+        return "Whenever {this} deals combat damage to a player, you may destroy target artifact that player controls.";
     }
 }

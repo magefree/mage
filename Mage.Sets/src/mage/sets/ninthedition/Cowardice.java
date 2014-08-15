@@ -25,84 +25,64 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.sets.ninthedition;
 
 import java.util.UUID;
-import mage.MageInt;
+
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+import mage.game.stack.StackObject;
 import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author LevelX
+ * @author dustinconrad
  */
-public class HorobiDeathsWail extends CardImpl {
+public class Cowardice extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Demon");
-    static {
-        filter.add(new SubtypePredicate("Demon"));
+    public Cowardice(UUID ownerId) {
+        super(ownerId, 70, "Cowardice", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
+        this.expansionSetCode = "9ED";
+
+        this.color.setBlue(true);
+
+        // Whenever a creature becomes the target of a spell or ability, return that creature to its owner's hand.
+        this.addAbility(new CowardiceTriggeredAbility());
     }
 
-    public HorobiDeathsWail(UUID ownerId) {
-        super(ownerId, 117, "Horobi, Death's Wail", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Spirit");
-
-        this.color.setBlack(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Whenever a creature becomes the target of a spell or ability, destroy that creature.
-        this.addAbility(new HorobiDeathsWailAbility(new DestroyTargetEffect()));
-    }
-
-    public HorobiDeathsWail(final HorobiDeathsWail card) {
+    public Cowardice(final Cowardice card) {
         super(card);
     }
 
     @Override
-    public HorobiDeathsWail copy() {
-        return new HorobiDeathsWail(this);
-    }    
-
+    public Cowardice copy() {
+        return new Cowardice(this);
+    }
 }
 
-class HorobiDeathsWailAbility extends TriggeredAbilityImpl {
+class CowardiceTriggeredAbility extends TriggeredAbilityImpl {
 
-    public HorobiDeathsWailAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect);
+    public CowardiceTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect());
     }
 
-    public HorobiDeathsWailAbility(final HorobiDeathsWailAbility ability) {
+    public CowardiceTriggeredAbility(CowardiceTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public HorobiDeathsWailAbility copy() {
-        return new HorobiDeathsWailAbility(this);
-    }
-
-    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.TARGETED) {
-            Permanent creature = game.getPermanent(event.getTargetId());
-            if (creature != null && creature.getCardType().contains(CardType.CREATURE)) {
+        if (GameEvent.EventType.TARGETED.equals(event.getType())) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE) &&
+                    StackObject.class.isInstance(game.getObject(event.getSourceId()))) {
                 getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
                 return true;
             }
@@ -112,6 +92,11 @@ class HorobiDeathsWailAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature becomes the target of a spell or ability, destroy that creature.";
+        return "Whenever a creature becomes the target of a spell or ability, return that creature to its owner's hand";
+    }
+
+    @Override
+    public CowardiceTriggeredAbility copy() {
+        return new CowardiceTriggeredAbility(this);
     }
 }
