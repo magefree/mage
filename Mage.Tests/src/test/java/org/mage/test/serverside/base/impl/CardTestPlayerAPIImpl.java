@@ -765,7 +765,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     * Set target Permanents
+     * Set target permanents
      *
      * @param player
      * @param target you can add multiple targets by seperating them by the "^" character
@@ -776,4 +776,15 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void addTarget(TestPlayer player, String target) {
         player.addTarget(target);
     }
+    
+    /**
+     * Sets a player as target
+     * 
+     * @param player
+     * @param targetPlayer 
+     */
+    public void addTarget(TestPlayer player, TestPlayer targetPlayer) {
+        player.addTarget("targetPlayer="+targetPlayer.getName());
+    }
+
 }

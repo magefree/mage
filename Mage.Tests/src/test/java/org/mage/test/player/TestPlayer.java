@@ -305,6 +305,21 @@ public class TestPlayer extends ComputerPlayer {
                     }
                 }
             }
+            if (target instanceof TargetPlayer) {
+                for (String targetDefinition: targets) {
+                    if (targetDefinition.startsWith("targetPlayer=")) {
+                        String playerName = targetDefinition.substring(targetDefinition.indexOf("targetPlayer=") + 13);
+                        for (Player player: game.getPlayers().values()) {
+                            if (player.getName().equals(playerName)
+                                    && ((TargetPlayer) target).canTarget(playerId, player.getId(), source, game)) {
+                                target.add(player.getId(), game);
+                                return true;
+                            }
+                        }
+                    }
+                }
+                
+            }
         }
         return super.chooseTarget(outcome, target, source, game);
     }

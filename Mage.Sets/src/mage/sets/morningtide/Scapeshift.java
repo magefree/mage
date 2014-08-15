@@ -112,7 +112,7 @@ class ScapeshiftEffect extends OneShotEffect {
                 for (UUID cardId: (List<UUID>)target.getTargets()) {
                     Card card = player.getLibrary().getCard(cardId, game);
                     if (card != null) {
-                        card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId(), true);
+                        player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getControllerId(), true);
                     }
                 }
             }
