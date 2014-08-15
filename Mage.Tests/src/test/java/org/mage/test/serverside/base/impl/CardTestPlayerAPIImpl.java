@@ -764,6 +764,15 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player.addModeChoice(choice);
     }
 
+    /**
+     * Set target Permanents
+     *
+     * @param player
+     * @param target you can add multiple targets by seperating them by the "^" character
+     *               e.g.    "creatureName1^creatureName2"
+     *               you can qualify the target additional by setcode
+     *               e.g. "creatureName-M15"
+     */
     public void addTarget(TestPlayer player, String target) {
         player.addTarget(target);
     }

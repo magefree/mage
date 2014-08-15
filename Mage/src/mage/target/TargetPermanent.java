@@ -87,9 +87,13 @@ public class TargetPermanent extends TargetObject {
                 //2. We need to check both source.getId() and source.getSourceId()
                 // first for protection from spells or abilities (e.g. protection from colored spells, r1753)
                 // second for protection from sources (e.g. protection from artifacts + equip ability)
-                return permanent.canBeTargetedBy(game.getObject(source.getId()), controllerId, game)
-                        && permanent.canBeTargetedBy(game.getObject(source.getSourceId()), controllerId, game)
-                        && filter.match(permanent, source.getSourceId(), controllerId, game);
+                if (!isNotTarget()) {
+                    if (!permanent.canBeTargetedBy(game.getObject(source.getId()), controllerId, game) || 
+                            !permanent.canBeTargetedBy(game.getObject(source.getSourceId()), controllerId, game)) { 
+                        return false;
+                    }
+                }
+                return filter.match(permanent, source.getSourceId(), controllerId, game);
             } else {
                 return filter.match(permanent, null, controllerId, game);
             }
