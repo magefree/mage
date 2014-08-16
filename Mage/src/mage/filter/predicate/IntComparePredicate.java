@@ -34,6 +34,7 @@ import mage.game.Game;
 /**
  *
  * @author North
+ * @param <T>
  */
 public abstract class IntComparePredicate<T extends MageObject> implements Predicate<T> {
 

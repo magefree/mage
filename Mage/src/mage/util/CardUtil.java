@@ -28,7 +28,9 @@
 
 package mage.util;
 
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 
@@ -46,9 +48,11 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.cards.Card;
+import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
+import mage.game.stack.Spell;
 import mage.util.functions.CopyFunction;
 import mage.util.functions.CopyTokenFunction;
 
@@ -514,5 +518,33 @@ public class CardUtil {
      */
     public static String addToolTipMarkTags(String text) {
         return "<font color = 'blue'>" + text + "</font>";
+    }
+
+    public static boolean convertedManaCostsIsEqual(MageObject object1, MageObject object2) {
+        Set<Integer> cmcObject1 = getCMC(object1);
+        Set<Integer> cmcObject2 = getCMC(object2);
+        for (Integer integer :cmcObject1) {
+            if (cmcObject2.contains(integer)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static Set<Integer> getCMC(MageObject object) {
+        Set<Integer> cmcObject = new HashSet<>();
+        if (object instanceof Card) {
+            Card card = (Card) object;
+            if (card instanceof SplitCard) {
+                SplitCard splitCard = (SplitCard) card;
+                cmcObject.add(splitCard.getLeftHalfCard().getManaCost().convertedManaCost());
+                cmcObject.add(splitCard.getRightHalfCard().getManaCost().convertedManaCost());
+            } else {
+                cmcObject.add(card.getManaCost().convertedManaCost());
+            }
+        } else if (object instanceof Spell) {
+                cmcObject.add(((Spell)object).getConvertedManaCost());
+        } 
+        return cmcObject;
     }
 }

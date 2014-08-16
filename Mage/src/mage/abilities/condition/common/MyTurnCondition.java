@@ -32,7 +32,7 @@ import mage.abilities.condition.Condition;
 import mage.game.Game;
 
 public class MyTurnCondition implements Condition {
-    private static MyTurnCondition fInstance = new MyTurnCondition();
+    private final static MyTurnCondition fInstance = new MyTurnCondition();
 
     public static Condition getInstance() {
         return fInstance;

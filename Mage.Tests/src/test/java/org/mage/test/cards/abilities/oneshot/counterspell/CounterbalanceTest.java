@@ -76,4 +76,37 @@ public class CounterbalanceTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Test that if the top cardis a split card, both casting costs of the split cards
+     * count to counter the spell. If one of the split cards halfes has the equal casting
+     * cost, the spell is countered.
+     *
+     */
+
+    @Test
+    public void testSplitCard() {
+        addCard(Zone.HAND, playerA, "Typhoid Rats");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Counterbalance");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+
+        addCard(Zone.LIBRARY, playerB, "Wear // Tear"); // CMC 2 and 1
+        skipInitShuffling(); // so the set to top card stays at top
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Typhoid Rats");
+        setChoice(playerB, "Yes");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerA, "Typhoid Rats", 0);
+        assertGraveyardCount(playerA, "Typhoid Rats", 1);
+        assertGraveyardCount(playerA, 1);
+        assertGraveyardCount(playerB, 0);
+
+    }
 }

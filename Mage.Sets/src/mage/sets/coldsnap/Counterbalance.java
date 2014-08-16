@@ -44,6 +44,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -99,7 +100,7 @@ class CounterbalanceEffect extends OneShotEffect {
                     CardsImpl cards = new CardsImpl();
                     cards.add(topcard);
                     controller.revealCards(sourcePermanent.getName(), cards, game);
-                    if (topcard.getManaCost().convertedManaCost() == spell.getConvertedManaCost()) {
+                    if (CardUtil.convertedManaCostsIsEqual(topcard, spell)) {
                         return game.getStack().counter(spell.getId(), source.getSourceId(), game);
                     }
                 }
@@ -108,4 +109,6 @@ class CounterbalanceEffect extends OneShotEffect {
         }
         return false;
     }
+
+
 }

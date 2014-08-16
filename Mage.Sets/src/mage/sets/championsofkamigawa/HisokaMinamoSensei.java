@@ -48,6 +48,7 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
 
 /**
  * @author LevelX
@@ -85,7 +86,7 @@ public class HisokaMinamoSensei extends CardImpl {
 
 class HisokaMinamoSenseiDiscardTargetCost extends CostImpl {
 
-    protected int convertedManaCosts = 0;
+    protected Card card = null;
 
     public HisokaMinamoSenseiDiscardTargetCost(TargetCardInHand target) {
         this.addTarget(target);
@@ -101,11 +102,10 @@ class HisokaMinamoSenseiDiscardTargetCost extends CostImpl {
         if (targets.choose(Outcome.Discard, controllerId, sourceId, game)) {
             Player player = game.getPlayer(controllerId);
             for (UUID targetId: targets.get(0).getTargets()) {
-                Card card = player.getHand().get(targetId, game);
+                card = player.getHand().get(targetId, game);
                 if (card == null) {
                     return false;
                 }
-                convertedManaCosts = card.getManaCost().convertedManaCost();
                 paid |= player.discard(card, null, game);
 
             }
@@ -123,8 +123,8 @@ class HisokaMinamoSenseiDiscardTargetCost extends CostImpl {
         return new HisokaMinamoSenseiDiscardTargetCost(this);
     }
 
-    public int getConvertedCosts() {
-        return convertedManaCosts;
+    public Card getDiscardedCard() {
+        return card;
     }
 
 }
@@ -144,7 +144,7 @@ class HisokaMinamoSenseiCounterEffect extends OneShotEffect {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
         if (spell != null) {
             HisokaMinamoSenseiDiscardTargetCost cost = (HisokaMinamoSenseiDiscardTargetCost) source.getCosts().get(0);
-            if (cost != null && cost.getConvertedCosts() == spell.getConvertedManaCost()) {
+            if (cost != null && CardUtil.convertedManaCostsIsEqual(cost.getDiscardedCard(), spell)) {
                 return game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game);
             }
         }
