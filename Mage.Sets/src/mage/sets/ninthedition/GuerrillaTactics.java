@@ -27,6 +27,7 @@
  */
 package mage.sets.ninthedition;
 
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -35,6 +36,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.stack.StackObject;
 import mage.target.common.TargetCreatureOrPlayer;
 
 import java.util.UUID;
@@ -88,6 +90,7 @@ class GuerrillaTacticsTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return GameEvent.EventType.DISCARDED_CARD.equals(event.getType()) &&
                 game.getOpponents(this.getControllerId()).contains(game.getControllerId(event.getSourceId())) &&
+                StackObject.class.isInstance(game.getObject(event.getSourceId())) &&
                 getSourceId().equals(event.getTargetId());
     }
 
