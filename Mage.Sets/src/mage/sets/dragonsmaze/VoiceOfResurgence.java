@@ -28,9 +28,6 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
@@ -40,12 +37,15 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 
@@ -102,19 +102,16 @@ class VoiceOfResurgenceTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         // Voice Of Resurgence Dies
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            if (super.getSourceId().equals(event.getTargetId())) {
-                MageObject before = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-                Zone after = game.getState().getZone(event.getTargetId());
-                return before != null && after != null && Zone.GRAVEYARD.match(after);
-            }
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && getSourceId().equals(event.getTargetId())) {
+            ZoneChangeEvent zce = (ZoneChangeEvent) event;
+            return zce.getFromZone().equals(Zone.BATTLEFIELD) && zce.getToZone().equals(Zone.GRAVEYARD);
         }
         return false;
     }
 
     @Override
     public String getRule() {
-        return "Whenever an opponent casts a spell during your turn or when Voice of Resurgence dies, put a green and white Elemental creature token onto the battlefield with \"This creature's power and toughness are each equal to the number of creatures you control.";
+        return "Whenever an opponent casts a spell during your turn or when {this} dies, put a green and white Elemental creature token onto the battlefield with \"This creature's power and toughness are each equal to the number of creatures you control.";
     }
 
     @Override
@@ -125,17 +122,24 @@ class VoiceOfResurgenceTriggeredAbility extends TriggeredAbilityImpl {
 
 class VoiceOfResurgenceToken extends Token {
 
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("creatures you control");
+    private static final DynamicValue creaturesControlled = new PermanentsOnBattlefieldCount(filter);
+
+    static {
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+    }
+
     public VoiceOfResurgenceToken() {
         super("Elemental", "X/X green and white Elemental creature with with \"This creature's power and toughness are each equal to the number of creatures you control.");
+        setOriginalExpansionSetCode("DGM");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         color.setWhite(true);
         subtype.add("Elemental");
-        power = new MageInt(0);
+
+        power = new MageInt(0);        
         toughness = new MageInt(0);
-        FilterControlledPermanent filter = new FilterControlledPermanent("creatures you control");
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-        DynamicValue creaturesControlled = new PermanentsOnBattlefieldCount(filter);
+
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(creaturesControlled, Duration.EndOfGame)));
     }
 }
