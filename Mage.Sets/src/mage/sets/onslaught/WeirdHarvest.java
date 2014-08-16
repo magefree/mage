@@ -25,23 +25,22 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.sets.onslaught;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -50,85 +49,87 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class VeteranExplorer extends CardImpl {
+public class WeirdHarvest extends CardImpl {
 
-    public VeteranExplorer(UUID ownerId) {
-        super(ownerId, 177, "Veteran Explorer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "CMD";
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
-        this.subtype.add("Scout");
+    public WeirdHarvest(UUID ownerId) {
+        super(ownerId, 299, "Weird Harvest", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}{G}");
+        this.expansionSetCode = "ONS";
 
         this.color.setGreen(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
 
-        // When Veteran Explorer dies, each player may search his or her library for up to two basic land cards and put them onto the battlefield. Then each player who searched his or her library this way shuffles it.
-        this.addAbility(new DiesTriggeredAbility(new VeteranExplorerEffect()));
+        // Each player may search his or her library for up to X creature cards, reveal those cards, and put them into his or her hand. Then each player who searched his or her library this way shuffles it.
+        getSpellAbility().addEffect(new WeirdHarvestEffect());
     }
 
-    public VeteranExplorer(final VeteranExplorer card) {
+    public WeirdHarvest(final WeirdHarvest card) {
         super(card);
     }
 
     @Override
-    public VeteranExplorer copy() {
-        return new VeteranExplorer(this);
+    public WeirdHarvest copy() {
+        return new WeirdHarvest(this);
     }
 }
-class VeteranExplorerEffect extends OneShotEffect {
 
-    public VeteranExplorerEffect() {
+class WeirdHarvestEffect extends OneShotEffect {
+
+    public WeirdHarvestEffect() {
         super(Outcome.Detriment);
-        this.staticText = "each player may search his or her library for up to two basic land cards and put them onto the battlefield. Then each player who searched his or her library this way shuffles it";
+        this.staticText = "Each player may search his or her library for up to X creature cards, reveal those cards, and put them into his or her hand. Then each player who searched his or her library this way shuffles it";
     }
 
-    public VeteranExplorerEffect(final VeteranExplorerEffect effect) {
+    public WeirdHarvestEffect(final WeirdHarvestEffect effect) {
         super(effect);
     }
 
     @Override
-    public VeteranExplorerEffect copy() {
-        return new VeteranExplorerEffect(this);
+    public WeirdHarvestEffect copy() {
+        return new WeirdHarvestEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            List<Player> usingPlayers = new ArrayList<>();
-            this.chooseAndSearchLibrary(usingPlayers, controller, source, game);
-            for (UUID playerId: controller.getInRange()) {
-                if (!playerId.equals(controller.getId())) {
-                    Player player = game.getPlayer(playerId);
-                    if (player != null) {
-                        this.chooseAndSearchLibrary(usingPlayers, player, source, game);
+            int xValue = source.getManaCostsToPay().getX();
+            if (xValue > 0) {
+                List<Player> usingPlayers = new ArrayList<>();
+                this.chooseAndSearchLibrary(usingPlayers, controller, xValue, source, game);
+                for (UUID playerId: controller.getInRange()) {
+                    if (!playerId.equals(controller.getId())) {
+                        Player player = game.getPlayer(playerId);
+                        if (player != null) {
+                            this.chooseAndSearchLibrary(usingPlayers, player, xValue, source, game);
+                        }
                     }
                 }
+                for (Player player: usingPlayers) {
+                    player.shuffleLibrary(game);
+                }
+                return true;
             }
-            for (Player player: usingPlayers) {
-                player.shuffleLibrary(game);
-            }
-            return true;
         }
         return false;
     }
 
-    private void chooseAndSearchLibrary(List<Player> usingPlayers, Player player, Ability source, Game game) {
-        if (player.chooseUse(Outcome.PutCardInPlay, "Search your library for up to two basic land cards and put them onto the battlefield?", game)) {
+    private void chooseAndSearchLibrary(List<Player> usingPlayers, Player player, int xValue, Ability source, Game game) {
+        if (player.chooseUse(Outcome.PutCardInPlay, "Search your library for up " + xValue + " creature cards and put them into your hand?", game)) {
             usingPlayers.add(player);
-            TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterBasicLandCard());
+            TargetCardInLibrary target = new TargetCardInLibrary(0, xValue, new FilterCreatureCard());
             if (player.searchLibrary(target, game)) {
                 if (target.getTargets().size() > 0) {
+                    Cards cards = new CardsImpl();
                     for (UUID cardId: (List<UUID>)target.getTargets()) {
                         Card card = player.getLibrary().getCard(cardId, game);
                         if (card != null) {
-                            card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId());
+                            cards.add(card);
+                            player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                         }
                     }
+                    player.revealCards("Weird Harvest", cards, game);
                 }
             }
         }
     }
-    
+
 }
