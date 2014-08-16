@@ -6,6 +6,7 @@ import mage.constants.Duration;
 import mage.filter.common.FilterAttackingCreature;
 
 public class BattleCryAbility extends AttacksTriggeredAbility {
+
     public BattleCryAbility() {
         super(new BoostControlledEffect(1, 0, Duration.EndOfTurn, new FilterAttackingCreature(), true), false);
     }

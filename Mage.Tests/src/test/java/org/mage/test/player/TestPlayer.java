@@ -59,6 +59,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.AttackingPredicate;
 
 /**
  *
@@ -178,6 +180,7 @@ public class TestPlayer extends ComputerPlayer {
                 }
                 FilterCreatureForCombat filter = new FilterCreatureForCombat();
                 filter.add(new NamePredicate(groups[0]));
+                filter.add(Predicates.not(new AttackingPredicate()));
                 Permanent attacker = findPermanent(filter, playerId, game);
                 if (attacker != null && attacker.canAttack(defenderId, game)) {
                     this.declareAttacker(attacker.getId(), defenderId, game, false);

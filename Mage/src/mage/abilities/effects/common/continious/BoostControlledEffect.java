@@ -28,6 +28,10 @@
 
 package mage.abilities.effects.common.continious;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -126,13 +130,25 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-            if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
+        if (this.affectedObjectsSet) {
+            for (Iterator<UUID> it = objects.iterator(); it.hasNext();) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
+                UUID permanentId = it.next();
+                Permanent permanent = game.getPermanent(permanentId);
+                if (permanent != null) {
+                    permanent.addPower(power.calculate(game, source, this));
+                    permanent.addToughness(toughness.calculate(game, source, this));
+                } else {
+                    it.remove(); // no longer on the battlefield, remove reference to object
+                }
+            }
+        } else {
+            for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
                     perm.addPower(power.calculate(game, source, this));
                     perm.addToughness(toughness.calculate(game, source, this));
                 }
             }
+
         }
         return true;
     }
