@@ -143,7 +143,7 @@ public class ChatManager {
             message += new StringBuilder("\nList of commands:")
                     .append("\n\\info <text> - set a info text to your player")
                     .append("\n\\list - Show a list of commands")
-                    .append("\n\\whisper <player name> <text> - Whiper to a player").toString();
+                    .append("\n\\whisper <player name> <text> - whisper to the player with the given name").toString();
             chatSessions.get(chatId).broadcastInfoToUser(user,message);
             return true;
         }
