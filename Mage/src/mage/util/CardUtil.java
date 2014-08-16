@@ -30,6 +30,7 @@ package mage.util;
 
 import java.util.Iterator;
 import java.util.UUID;
+import mage.MageObject;
 
 import mage.Mana;
 import mage.abilities.Ability;

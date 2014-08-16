@@ -92,4 +92,9 @@ public class AddManaOfAnyColorEffect extends ManaEffect {
 
         return false;
     }
+
+    public int getAmount() {
+        return amount;
+    }
+    
 }

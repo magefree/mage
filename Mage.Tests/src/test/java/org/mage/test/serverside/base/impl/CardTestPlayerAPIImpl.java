@@ -727,6 +727,17 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player.addAction(turnNum, step, "activate:" + ability + ";target=" + targetName);
     }
 
+    public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String targetName, String spellOnStack) {
+        StringBuilder sb = new StringBuilder("activate:").append(ability);
+        if (targetName != null && !targetName.isEmpty()) {
+            sb.append(";target=" ).append(targetName);
+        }
+        if (spellOnStack != null && !spellOnStack.isEmpty()) {
+            sb.append(";spellOnStack=").append(spellOnStack);
+        }
+        player.addAction(turnNum, step, sb.toString());
+    }
+
     public void addCounters(int turnNum, PhaseStep step, TestPlayer player, String cardName, CounterType type, int count) {
         player.addAction(turnNum, step, "addCounters:" + cardName + ";" + type.getName() + ";" + count);
     }

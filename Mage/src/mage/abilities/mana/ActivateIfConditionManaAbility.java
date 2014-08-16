@@ -43,7 +43,7 @@ import mage.game.Game;
 
 public class ActivateIfConditionManaAbility extends ManaAbility {
 
-    private Condition condition;
+    private final Condition condition;
 
     public ActivateIfConditionManaAbility(Zone zone, BasicManaEffect effect, Cost cost, Condition condition) {
         super(zone, effect, cost);

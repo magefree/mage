@@ -53,8 +53,9 @@ public class ManaOptions extends ArrayList<Mana> {
     }
 
     public void addMana(List<ManaAbility> abilities, Game game) {
-        if (isEmpty())
+        if (isEmpty()) {
             this.add(new Mana());
+        }
         if (!abilities.isEmpty()) {
             if (abilities.size() == 1) {
                 //if there is only one mana option available add it to all the existing options

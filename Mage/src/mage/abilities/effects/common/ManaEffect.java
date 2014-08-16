@@ -28,8 +28,8 @@
 
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 
 /**
  *

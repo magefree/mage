@@ -801,7 +801,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
 
-       @Override
+    @Override
     public boolean activateAbility(ActivatedAbility ability, Game game) {
         for (Target target: ability.getModes().getMode().getTargets()) {
             for (UUID targetId: target.getTargets()) {
@@ -883,8 +883,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 for (Mana avail: available) {
                     if (mana.enough(avail)) {
                         SpellAbility ability = card.getSpellAbility();
-                        if (ability != null && ability.canActivate(playerId, game) && game.getContinuousEffects().
-                                preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getSourceId(), ability.getSourceId(), playerId), game, true)) {
+                        if (ability != null && ability.canActivate(playerId, game) &&
+                                game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getSourceId(), ability.getSourceId(), playerId), game, true)) {
                             if (card.getCardType().contains(CardType.INSTANT)
                                     || card.hasAbility(FlashAbility.getInstance().getId(), game)) {
                                 playableInstant.add(card);
