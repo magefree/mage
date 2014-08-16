@@ -195,7 +195,7 @@ public class CardUtil {
     
     private static ManaCosts<ManaCost> adjustCost(ManaCosts<ManaCost> manaCosts, int reduceCount) {
         int restToReduce = reduceCount;
-        ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<>();
+        ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<>();        
         boolean updated = false;
         for (ManaCost manaCost : manaCosts) {
             Mana mana = manaCost.getOptions().get(0);
@@ -217,7 +217,7 @@ public class CardUtil {
         if (!updated && reduceCount < 0) {
             adjustedCost.add(new GenericManaCost(-reduceCount));
         }
-        
+        adjustedCost.setSourceFilter(manaCosts.getSourceFilter());
         return adjustedCost;
     }
 
@@ -255,7 +255,7 @@ public class CardUtil {
      */
     public static void adjustCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce, boolean convertToGeneric) {
         ManaCosts<ManaCost> previousCost = spellAbility.getManaCostsToPay();
-        ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<>();
+        ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<>();        
         // save X value (e.g. convoke ability)
         for (VariableCost vCost: previousCost.getVariableCosts()) {
             if (vCost instanceof VariableManaCost) {
@@ -352,7 +352,7 @@ public class CardUtil {
                 adjustedCost.add(0, new GenericManaCost(mana.count()));
             }
         }
-
+        adjustedCost.setSourceFilter(previousCost.getSourceFilter());  // keep mana source restrictions
         spellAbility.getManaCostsToPay().clear();
         spellAbility.getManaCostsToPay().addAll(adjustedCost);
     }

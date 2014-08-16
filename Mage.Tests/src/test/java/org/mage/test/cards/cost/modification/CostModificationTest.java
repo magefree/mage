@@ -45,4 +45,51 @@ public class CostModificationTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, 1);
     }
 
+    /**
+     * Test that cost reduction also works with mana source restriction
+     * Myr Superion
+     * Spend only mana produced by creatures to cast Myr Superion
+     *
+     * Etherium Sculptor    {1}{U}
+     * Artifact Creature - Vedalken Artificer
+     * 1/2
+     * Artifact spells you cast cost {1} less to cast.
+     */
+
+    @Test
+    public void testCostReductionWithManaSourceRestrictionWorking() {
+        addCard(Zone.BATTLEFIELD, playerA, "Etherium Sculptor");
+        addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+
+        addCard(Zone.HAND, playerA, "Myr Superion");
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Add {G} to your mana pool.");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Myr Superion");
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerA, "Myr Superion", 1); // Can be cast because mana was produced by a creature
+    }
+
+    @Test
+    public void testCostReductionWithManaSourceRestrictionNotWorking() {
+        addCard(Zone.BATTLEFIELD, playerA, "Etherium Sculptor");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+
+        addCard(Zone.HAND, playerA, "Myr Superion");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Myr Superion");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerA, "Myr Superion", 0); // Can't be cast because mana was not produced by a creature
+        assertHandCount(playerA, "Myr Superion", 1); // Can't be cast because mana was not produced by a creature
+    }
+
 }

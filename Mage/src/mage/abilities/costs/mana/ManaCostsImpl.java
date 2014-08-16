@@ -422,7 +422,12 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
     @Override
     public Filter getSourceFilter() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        for (T cost : this) {
+            if (cost.getSourceFilter() != null) {
+                return cost.getSourceFilter();
+            }
+        }
+        return null;
     }
 
     @Override

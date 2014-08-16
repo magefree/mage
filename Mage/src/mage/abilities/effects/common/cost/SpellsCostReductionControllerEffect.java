@@ -102,7 +102,7 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
                 if (spell != null) {
                     return this.filter.match(spell, game);
                 } else {
-                    // used at least for flashback ability because Flashback ability doesn't use stack
+                    // used at least for flashback ability because Flashback ability doesn't use stack or for getPlayables where spell is not cast yet
                     Card sourceCard = game.getCard(abilityToModify.getSourceId());
                     return sourceCard != null && this.filter.match(sourceCard, game);
                 }
