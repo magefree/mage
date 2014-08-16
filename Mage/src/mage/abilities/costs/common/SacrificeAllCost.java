@@ -35,7 +35,6 @@ import mage.abilities.costs.CostImpl;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -43,8 +42,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class SacrificeAllCost extends CostImpl {
 
-    private FilterPermanent filter;
-    private List<Permanent> permanents = new ArrayList<Permanent>();
+    private final FilterPermanent filter;
+    private final List<Permanent> permanents = new ArrayList<>();
 
     public SacrificeAllCost(FilterPermanent filter) {
         this.filter = filter;
