@@ -28,16 +28,15 @@
 
 package mage.abilities.effects.common;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
-import mage.cards.Card;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-
-import java.util.UUID;
+import mage.game.stack.StackObject;
 
 /**
  *
@@ -46,7 +45,7 @@ import java.util.UUID;
 public class CantCounterSourceEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public CantCounterSourceEffect() {
-        super(Duration.WhileOnStack, Outcome.Benefit);
+        super(Duration.WhileOnStack, Outcome.Benefit, false, true);
         staticText = "{this} can't be countered";
     }
 
@@ -65,12 +64,21 @@ public class CantCounterSourceEffect extends ContinuousRuleModifiyingEffectImpl 
     }
 
     @Override
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
+        StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (stackObject != null && sourceObject != null) {
+            return sourceObject.getLogName() + " can't be countered by " + stackObject.getName();
+        }
+        return staticText;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.COUNTER) {
-            Card card = game.getCard(source.getSourceId());
-            if (card != null) {
-                UUID spellId = card.getSpellAbility().getSourceId();
-                if (event.getTargetId().equals(spellId)) {
+            StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
+            if (stackObject != null) {
+                if (stackObject.getSourceId().equals(source.getSourceId())) {
                     return true;
                 }
             }
