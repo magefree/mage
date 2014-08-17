@@ -81,7 +81,10 @@ public class UserManager {
     }
 
     public User getUser(UUID userId) {
-        return users.get(userId);
+        if (userId != null) {
+            return users.get(userId);
+        }
+        return null;
     }
 
     public User findUser(String userName) {

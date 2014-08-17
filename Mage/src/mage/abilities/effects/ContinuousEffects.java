@@ -865,6 +865,9 @@ public class ContinuousEffects implements Serializable {
     }
 
     public void addEffect(ContinuousEffect effect, Ability source) {
+        if (source == null && effect != null) {
+            logger.warn("Adding effect without ability : " +effect.toString());
+        }
         switch (effect.getEffectType()) {
             case REPLACEMENT:
             case REDIRECTION:

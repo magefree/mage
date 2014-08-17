@@ -510,8 +510,11 @@ public class TableController {
                         }
                     }
                     else {
-                        logger.error("Unable to find player " + entry.getKey());
-                        match.getPlayer(entry.getValue()).setQuit(true);
+                        logger.error("Unable to find user: " + entry.getKey() + "  playerId: " + entry.getValue());
+                        MatchPlayer matchPlayer = match.getPlayer(entry.getValue());
+                        if (matchPlayer != null && !matchPlayer.hasQuit()) {
+                            matchPlayer.setQuit(true);
+                        }
                     }
                 }
             }
@@ -526,11 +529,16 @@ public class TableController {
             }
             ServerMessagesUtil.getInstance().incGamesStarted();
 
+
             // log about game started
             logger.info("GAME started [" + match.getName() +"] "+ creator + " - " + opponent.toString());
             logger.debug("- matchId: " + match.getId() + " [" + match.getName() + "]");
-            logger.debug("- gameId:  " + match.getGame().getId());
-            logger.debug("- chatId:  " + GameManager.getInstance().getChatId(match.getGame().getId()));            
+            if (match.getGame() != null) {
+                logger.debug("- gameId:  " + match.getGame().getId());
+                logger.debug("- chatId:  " + GameManager.getInstance().getChatId(match.getGame().getId()));
+            } else {
+                logger.debug("- no valid game object");
+            }
             LogServiceImpl.instance.log(LogKeys.KEY_GAME_STARTED, String.valueOf(userPlayerMap.size()), creator, opponent.toString());
         }
         catch (Exception ex) {
@@ -622,6 +630,9 @@ public class TableController {
      */
     public boolean endGameAndStartNextGame() {
         // get player that chooses who goes first
+        if (match.getGame() == null) {
+            return true;
+        }
         UUID choosingPlayerId = match.getChooser();
         match.endGame();
         if (ConfigSettings.getInstance().isSaveGameActivated() && !match.getGame().isSimulation()) {

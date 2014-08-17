@@ -934,7 +934,7 @@ public abstract class GameImpl implements Game, Serializable {
     public void quit(UUID playerId) {
         if (state != null) {
             Player player = state.getPlayer(playerId);
-            if (player != null) {
+            if (player != null && player.isInGame()) {
                 player.quit(this);
             }
         }

@@ -117,26 +117,32 @@ class XenagosManaEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if(player != null){
+        if (player != null){
             int x = game.getBattlefield().count(new FilterControlledCreaturePermanent(), source.getSourceId(), source.getControllerId(), game);
             Choice manaChoice = new ChoiceImpl();
-            Set<String> choices = new LinkedHashSet<String>();
+            Set<String> choices = new LinkedHashSet<>();
             choices.add("Red");
             choices.add("Green");
             manaChoice.setChoices(choices);
             manaChoice.setMessage("Select color of mana to add");
 
-            for(int i = 0; i < x; i++){
+            for (int i = 0; i < x; i++){
                 Mana mana = new Mana();
                 while (!player.choose(Outcome.Benefit, manaChoice, game)) {
                     if (!player.isInGame()) {
                         return false;
                     }
                 }
-                if (manaChoice.getChoice().equals("Green")) {
-                    mana.addGreen();
-                } else if (manaChoice.getChoice().equals("Red")) {
-                    mana.addRed();
+                if (manaChoice.getChoice() == null) {  // can happen if player leaves game
+                    return false;
+                }
+                switch (manaChoice.getChoice()) {
+                    case "Green":
+                        mana.addGreen();
+                        break;
+                    case "Red":
+                        mana.addRed();
+                        break;
                 }
                 player.getManaPool().addMana(mana, game, source);
             }

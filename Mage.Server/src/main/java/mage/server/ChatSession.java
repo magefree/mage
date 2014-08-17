@@ -72,10 +72,14 @@ public class ChatSession {
     public void  kill(UUID userId, DisconnectReason reason) {
 
         try {
-            if (userId != null && clients.containsKey(userId)) {
+            if (reason == null) {
+                logger.fatal("User kill without disconnect reason  userId: " + userId) ;
+                reason = DisconnectReason.Undefined;
+            }
+            if (reason != null && userId != null && clients.containsKey(userId)) {
                 String userName = clients.get(userId);
                 clients.remove(userId);
-                logger.debug(userName + (reason == null?"null":"(" + reason.toString() +")") + " removed from chatId " + chatId) ;
+                logger.debug(userName + "(" + reason.toString() +")" + " removed from chatId " + chatId) ;
                 String message;
                 switch (reason) {
                     case Disconnected:
@@ -85,7 +89,7 @@ public class ChatSession {
                         message = " has lost connection";
                         break;
                      default:
-                        message = reason == null ? " left (unknown reason) ": " left (" + reason.toString() +")";
+                        message = " left (" + reason.toString() +")";
                 }
                 if (message != null) {
                     broadcast(null, new StringBuilder(userName).append(message).toString(), MessageColor.BLUE, true, MessageType.STATUS);
