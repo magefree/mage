@@ -100,7 +100,7 @@ class ChaosWarpShuffleIntoLibraryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (permanent != null) {
-            if (game.getPlayer(permanent.getOwnerId()).moveCardToLibrary(permanent)) {
+            if (game.getPlayer(permanent.getOwnerId()).moveCardToLibraryWithInfo(permanent, source.getSourceID(), game, null, true, true)) {
                 game.getPlayer(permanent.getOwnerId()).shuffleLibrary(game);
                 return true;
             }
