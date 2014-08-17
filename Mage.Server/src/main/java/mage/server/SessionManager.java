@@ -174,15 +174,17 @@ public class SessionManager {
     }
 
     public User getUser(String sessionId) {
-        if (sessions.containsKey(sessionId)) {
+        Session session = sessions.get(sessionId);
+        if (session != null) { 
             return UserManager.getInstance().getUser(sessions.get(sessionId).getUserId());
         }
         return null;
     }
 
-    public boolean extendUserSession(String sessionId) {
-        if (sessions.containsKey(sessionId)) {
-            return UserManager.getInstance().extendUserSession(sessions.get(sessionId).getUserId());
+    public boolean extendUserSession(String sessionId) {        
+        Session session = sessions.get(sessionId);
+        if (session != null) {
+            return UserManager.getInstance().extendUserSession(session.getUserId());
         }
         return false;
     }

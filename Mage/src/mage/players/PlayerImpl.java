@@ -747,6 +747,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         castSourceIdWithoutMana = sourceId;
     }
 
+    @Override
     public UUID getCastSourceIdWithoutMana() {
         return castSourceIdWithoutMana;
     }
@@ -1116,7 +1117,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         // create list of all "notMoreThan" effects to track which one are consumed
         HashMap<Entry<RestrictionUntapNotMoreThanEffect, HashSet<Ability>>, Integer> notMoreThanEffectsUsage = new HashMap<>();
         for (Entry<RestrictionUntapNotMoreThanEffect, HashSet<Ability>> restrictionEffect: game.getContinuousEffects().getApplicableRestrictionUntapNotMoreThanEffects(this, game).entrySet()) {
-            notMoreThanEffectsUsage.put(restrictionEffect, new Integer(restrictionEffect.getKey().getNumber()));
+            notMoreThanEffectsUsage.put(restrictionEffect, restrictionEffect.getKey().getNumber());
         }
 
         if (!notMoreThanEffectsUsage.isEmpty()) {
@@ -1141,7 +1142,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 // select permanents to untap to consume the "notMoreThan" effects
                 for(Map.Entry<Entry<RestrictionUntapNotMoreThanEffect, HashSet<Ability>>, Integer> handledEntry: notMoreThanEffectsUsage.entrySet()) {
                     // select a permanent to untap for this entry
-                    int numberToUntap = handledEntry.getValue().intValue();
+                    int numberToUntap = handledEntry.getValue();
                     if (numberToUntap > 0) {
 
                         List<Permanent> leftForUntap = getPermanentsThatCanBeUntapped(game, canBeUntapped, handledEntry.getKey().getKey(), notMoreThanEffectsUsage);
@@ -1178,8 +1179,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                                     filter.add(Predicates.not(new PermanentIdPredicate(selectedPermanent.getId())));
                                     // reduce available untap numbers from other "UntapNotMoreThan" effects if selected permanent applies to their filter too
                                     for (Entry<Entry<RestrictionUntapNotMoreThanEffect, HashSet<Ability>>, Integer> notMoreThanEffect : notMoreThanEffectsUsage.entrySet()) {
-                                        if (notMoreThanEffect.getValue().intValue() > 0 && notMoreThanEffect.getKey().getKey().getFilter().match(selectedPermanent, game)) {
-                                            notMoreThanEffect.setValue(new Integer(notMoreThanEffect.getValue().intValue() - 1));
+                                        if (notMoreThanEffect.getValue() > 0 && notMoreThanEffect.getKey().getKey().getFilter().match(selectedPermanent, game)) {
+                                            notMoreThanEffect.setValue(notMoreThanEffect.getValue() - 1);
                                         }
                                     }
                                     // update the left for untap list
@@ -1250,7 +1251,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 boolean canBeSelected = true;
                 // check if the permanent is restriced by another restriction that has left no permanent
                 for (Entry<Entry<RestrictionUntapNotMoreThanEffect, HashSet<Ability>>, Integer> notMoreThanEffect : notMoreThanEffectsUsage.entrySet()) {
-                    if (notMoreThanEffect.getKey().getKey().getFilter().match(permanent, game) && notMoreThanEffect.getValue().intValue() == 0) {
+                    if (notMoreThanEffect.getKey().getKey().getFilter().match(permanent, game) && notMoreThanEffect.getValue() == 0) {
                         canBeSelected = false;
                         break;
                     }
@@ -1540,10 +1541,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void quit(Game game) {
-        log.debug("PlayerImpl.quit start " + getName() + " quits game " + game.getId());       
         game.informPlayers(new StringBuilder(getName()).append(" quits the match.").toString());
         quit = true;
-        log.debug("PlayerImpl.quit before concede" + getName() + " quits game " + game.getId());
         this.concede(game);
     }
 
@@ -1614,21 +1613,21 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void lost(Game game) {
-        log.debug("player lost -> start: " + this.getName());
-        if (canLose(game)) {
-            this.loses = true;
+        log.debug(this.getName() + " has lost gameId: " + game.getId());
+        if (canLose(game)) {            
             //20100423 - 603.9
             if (!this.wins) {
+                this.loses = true;
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST, null, null, playerId));
                 game.informPlayers(new StringBuilder(this.getName()).append(" has lost the game.").toString());
             } else {
-                log.debug("player.lost -> stop setting lost because he already has won!: " + this.getName());
+                log.debug(this.getName() + " has already won - stop lost");
             }
-            // for draw first all players that have lost have to be set to lost
-//            if (!hasLeft()) {
-//                log.debug("player.lost -> calling leave");
-//                game.gameOver(playerId);
-//            }
+            // for draw - first all players that have lost have to be set to lost
+            if (!hasLeft()) {
+                log.debug("Game over playerId: " + playerId);
+                game.gameOver(playerId);
+            }
         }
     }
 

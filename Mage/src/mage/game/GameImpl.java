@@ -118,7 +118,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     private static Random rnd = new Random();
 
-    
+
     private transient Object customData;
     protected boolean simulation = false;
 
@@ -127,7 +127,7 @@ public abstract class GameImpl implements Game, Serializable {
     protected transient TableEventSource tableEventSource = new TableEventSource();
     protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
 
-    protected Map<UUID, Card> gameCards = new HashMap<>();    
+    protected Map<UUID, Card> gameCards = new HashMap<>();
     protected Map<Zone,HashMap<UUID, MageObject>> lki = new EnumMap<>(Zone.class);
     protected Map<Zone,HashMap<UUID, MageObject>> shortLivingLKI = new EnumMap<>(Zone.class);
 
@@ -436,7 +436,7 @@ public abstract class GameImpl implements Game, Serializable {
         }
     }
 
-    
+
     private boolean checkIfGameIsOver() {
         if (state.isGameOver()) {
             return true;
@@ -458,7 +458,7 @@ public abstract class GameImpl implements Game, Serializable {
                     logger.debug(new StringBuilder("Player ").append(player.getName()).append(" has won gameId: ").append(this.getId()));
                     player.won(this);
                 }
-            }            
+            }
             return true;
         }
         return false;
@@ -473,7 +473,7 @@ public abstract class GameImpl implements Game, Serializable {
     public boolean isADraw() {
         return hasEnded() && winnerId == null;
     }
-    
+
     @Override
     public String getWinner() {
         if (winnerId == null) {
@@ -705,7 +705,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (choosingPlayer == null) {
             choosingPlayer = getPlayer(pickChoosingPlayer());
         }
-        
+
         if (choosingPlayer != null && choosingPlayer.choose(Outcome.Benefit, targetPlayer, null, this)) {
             startingPlayerId = ((List<UUID>)targetPlayer.getTargets()).get(0);
             Player startingPlayer = state.getPlayer(startingPlayerId);
@@ -716,7 +716,7 @@ public abstract class GameImpl implements Game, Serializable {
                 message.append(startingPlayer.getName());
             }
             message.append(" takes the first turn");
-            
+
             this.informPlayers(message.toString());
         } else {
             // not possible to choose starting player, stop here
@@ -901,7 +901,7 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public void endMulligan(UUID playerId){
     }
-    
+
     @Override
     public void mulligan(UUID playerId) {
         Player player = getPlayer(playerId);
@@ -912,14 +912,14 @@ public abstract class GameImpl implements Game, Serializable {
         int deduction = 1;
         if (freeMulligans > 0) {
             if (usedFreeMulligans != null && usedFreeMulligans.containsKey(player.getId())) {
-                int used = usedFreeMulligans.get(player.getId()).intValue();
+                int used = usedFreeMulligans.get(player.getId());
                 if (used < freeMulligans ) {
                     deduction = 0;
-                    usedFreeMulligans.put(player.getId(), new Integer(used+1));
+                    usedFreeMulligans.put(player.getId(), used+1);
                 }
             } else {
                 deduction = 0;
-                usedFreeMulligans.put(player.getId(), new Integer(1));
+                usedFreeMulligans.put(player.getId(), 1);
             }
         }
         fireInformEvent(new StringBuilder(player.getName())
@@ -931,20 +931,13 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public synchronized void quit(UUID playerId) {
-        logger.debug("GameImpl.quit start " + playerId);
+    public void quit(UUID playerId) {
         if (state != null) {
             Player player = state.getPlayer(playerId);
             if (player != null) {
-                logger.debug("GameImpl.quit " + player.getName() + " quits the game");
                 player.quit(this);
-            }else {
-                logger.error(new StringBuilder("GameImpl.quit - player not found - playerId: ").append(playerId));
             }
-        } else {
-            logger.error(new StringBuilder("GameImpl.quit - state not found - playerId: ").append(playerId));
         }
-        logger.debug("GameImpl.quit end " + playerId);
     }
 
     @Override
@@ -1112,11 +1105,11 @@ public abstract class GameImpl implements Game, Serializable {
             top = state.getStack().peek();
             top.resolve(this);
         } finally {
-            if (top != null) {
+            if (top != null) {                
                 if (!getTurn().isEndTurnRequested()) {
                     while (state.hasSimultaneousEvents()) {
                         state.handleSimultaneousEvent(this);
-                        checkTriggered();                    
+                        checkTriggered();
                     }
                 }
                 state.getStack().remove(top);
@@ -1182,8 +1175,8 @@ public abstract class GameImpl implements Game, Serializable {
         }
         state.addCommandObject(newEmblem);
     }
-    
-    
+
+
     @Override
     public void addCommander(Commander commander){
         state.addCommandObject(commander);
@@ -1294,7 +1287,12 @@ public abstract class GameImpl implements Game, Serializable {
         }
         return somethingHappened;
     }
-
+    /**
+     * Sets the waiting triggered abilities (if there are any)
+     * to the stack in the choosen order by player
+     *
+     * @return
+     */
     public boolean checkTriggered() {
         boolean played = false;
         for (UUID playerId: state.getPlayerList(state.getActivePlayerId())) {
@@ -1311,7 +1309,7 @@ public abstract class GameImpl implements Game, Serializable {
                         state.removeTriggeredAbility(triggeredAbility);
                         played |= player.triggerAbility(triggeredAbility, this);
                         it.remove();
-                    }                    
+                    }
                 }
                 if (abilities.isEmpty()) {
                     break;
@@ -1320,7 +1318,7 @@ public abstract class GameImpl implements Game, Serializable {
                     state.removeTriggeredAbility(abilities.get(0));
                     played |= player.triggerAbility(abilities.get(0), this);
                 }
-                else {                    
+                else {
                     TriggeredAbility ability = player.chooseTriggeredAbility(abilities, this);
                     if (ability != null) {
                         state.removeTriggeredAbility(ability);
@@ -1497,12 +1495,12 @@ public abstract class GameImpl implements Game, Serializable {
                 }
             }
             //20091005 - 704.5q If a creature is attached to an object or player, it becomes unattached and remains on the battlefield.
-            // Similarly, if a permanent thats neither an Aura, an Equipment, nor a Fortification is attached to an object or player, 
+            // Similarly, if a permanent thats neither an Aura, an Equipment, nor a Fortification is attached to an object or player,
             // it becomes unattached and remains on the battlefield.
             if (perm.getAttachments().size() > 0) {
                 for (UUID attachmentId : perm.getAttachments()) {
                     Permanent attachment = getPermanent(attachmentId);
-                    if (attachment != null && 
+                    if (attachment != null &&
                             (attachment.getCardType().contains(CardType.CREATURE) ||
                             !(attachment.getSubtype().contains("Aura")
                                || attachment.getSubtype().contains("Equipment")
@@ -1599,9 +1597,9 @@ public abstract class GameImpl implements Game, Serializable {
                     .append(" is put into graveyard from battlefield").toString());
             result = true;
         }
-        return result;        
+        return result;
     }
-    
+
     @Override
     public void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener) {
         playerQueryEventSource.addListener(listener);
@@ -1853,25 +1851,25 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     /**
-     * 800.4a When a player leaves the game, all objects (see rule 109) owned by that player leave 
-     * the game and any effects which give that player control of any objects or players end. Then, 
-     * if that player controlled any objects on the stack not represented by cards, those objects 
+     * 800.4a When a player leaves the game, all objects (see rule 109) owned by that player leave
+     * the game and any effects which give that player control of any objects or players end. Then,
+     * if that player controlled any objects on the stack not represented by cards, those objects
      * cease to exist. Then, if there are any objects still controlled by that player, those objects
      * are exiled. This is not a state-based action. It happens as soon as the player leaves the game.
      * If the player who left the game had priority at the time he or she left, priority passes to
      * the next player in turn order who's still in the game. #
-     * 
-     * @param playerId 
+     *
+     * @param playerId
      */
 
     protected void leave(UUID playerId) {
 
         Player player = getPlayer(playerId);
         if (player == null || player.hasLeft()) {
-            logger.debug("game.leave -> player already left " + (player != null ? player.getName():playerId));
+            logger.debug("Player already left " + (player != null ? player.getName():playerId));
             return;
         }
-        logger.debug("game.leave -> start  player: " + player.getName());
+        logger.debug("Start leave game: " + player.getName());
         player.leave();
         if (checkIfGameIsOver()) {
             // no need to remove objects if only one player is left so the game is over
@@ -1924,7 +1922,7 @@ public abstract class GameImpl implements Game, Serializable {
             Card card = entry.getValue();
             if (card.getOwnerId().equals(playerId)) {
                 it.remove();
-            }            
+            }
         }
 
         // Update players in range of
@@ -1978,7 +1976,7 @@ public abstract class GameImpl implements Game, Serializable {
             result.setReplaced(true);
             return result;
         }
-        
+
         if (event.getAmount() > amountToPrevent) {
             result.setPreventedDamage(amountToPrevent);
             damageEvent.setAmount(event.getAmount() - amountToPrevent);
@@ -1986,11 +1984,11 @@ public abstract class GameImpl implements Game, Serializable {
             result.setPreventedDamage(event.getAmount());
             damageEvent.setAmount(0);
 
-        } 
+        }
         if (amountToPrevent != Integer.MAX_VALUE) {
             // set remaining amount
             result.setRemainingAmount(amountToPrevent -= result.getPreventedDamage());
-        }            
+        }
         MageObject damageSource = game.getObject(damageEvent.getSourceId());
         MageObject preventionSource = game.getObject(source.getSourceId());
 
@@ -2329,7 +2327,7 @@ public abstract class GameImpl implements Game, Serializable {
     public void setScopeRelevant(boolean scopeRelevant) {
         this.scopeRelevant = scopeRelevant;
     }
-    
+
     /**
      * @return - true if only self scope replacement effects have to be applied
      */
@@ -2342,13 +2340,13 @@ public abstract class GameImpl implements Game, Serializable {
     public boolean isSaveGame() {
         return saveGame;
     }
-    
+
     @Override
     public void setSaveGame(boolean saveGame) {
         this.saveGame = saveGame;
     }
 
-    
+
     public void setStartMessage(String startMessage) {
         this.startMessage = startMessage;
     }
