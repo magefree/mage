@@ -172,6 +172,10 @@ class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect {
             if (player.chooseTarget(Outcome.PutCreatureInPlay, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null && player.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId())) {
+                    Permanent permanent = game.getPermanent(card.getId());
+                    if (permanent != null) {
+                        permanent.changeControllerId(source.getControllerId(), game);
+                    }
                     ContinuousEffectImpl effect = new AshiokNightmareWeaverAddTypeEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId()));
                     game.addEffect(effect, source);
