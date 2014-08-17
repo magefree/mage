@@ -376,7 +376,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 if (attackerExists) {
                     if (group.getBlockers().size() > 0) {
                         sb.append("blocked by ");
-                        for (UUID blockingCreatureId : group.getBlockers()) {
+                        for (UUID blockingCreatureId : group.getBlockerOrder()) {
                             Permanent blockingCreature = game.getPermanent(blockingCreatureId);
                             if (blockingCreature != null) {
                                 sb.append(blockingCreature.getLogName()).append(" (");
