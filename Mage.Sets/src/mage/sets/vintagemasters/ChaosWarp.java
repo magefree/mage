@@ -44,6 +44,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -97,7 +100,7 @@ class ChaosWarpShuffleIntoLibraryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (permanent != null) {
-            if (permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true) ) {
+            if (game.getPlayer(permanent.getOwnerId()).moveCardToLibrary(permanent)) {
                 game.getPlayer(permanent.getOwnerId()).shuffleLibrary(game);
                 return true;
             }
@@ -136,9 +139,7 @@ public ChaosWarpRevealEffect() {
             player.revealCards("Chaos Warp", cards, game);
 
             if (card != null) {
-            	if ((cardType.contains(CardType.ARTIFACT) || cardType.contains(CardType.CREATURE)
-                        || cardType.contains(CardType.ENCHANTMENT) || cardType.contains(CardType.LAND)
-                        || cardType.contains(CardType.PLANESWALKER)))) {
+            	if (card.FilterPermanentCard.match()) {
                     card = player.getLibrary().removeFromTop(game);
                     card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), source.getControllerId());
                 }
