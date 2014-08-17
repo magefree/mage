@@ -27,11 +27,17 @@
  */
 package mage.abilities.effects.common.counter;
 
-import mage.constants.Outcome;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.Outcome;
 import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -39,8 +45,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetPermanentOrPlayerWithCounter;
 
-import java.io.Serializable;
-import java.util.*;
 
 /**
  * @author nantuko
@@ -84,7 +88,7 @@ public class ProliferateEffect extends OneShotEffect {
                             }
                         } else {
                             Choice choice = new ChoiceImpl(true);
-                            Set<String> choices = new HashSet<String>();
+                            Set<String> choices = new HashSet<>();
                             for (Counter counter : permanent.getCounters().values()) {
                                 choices.add(counter.getName());
                             }
@@ -110,7 +114,7 @@ public class ProliferateEffect extends OneShotEffect {
                                 }
                             } else {
                                 Choice choice = new ChoiceImpl(true);
-                                Set<String> choices = new HashSet<String>();
+                                Set<String> choices = new HashSet<>();
                                 for (Counter counter : player.getCounters().values()) {
                                     choices.add(counter.getName());
                                 }

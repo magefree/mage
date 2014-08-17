@@ -198,7 +198,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<UUID>();
+        Set<UUID> possibleTargets = new HashSet<>();
         MageObject targetSource = game.getObject(sourceId);
         for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
             Player player = game.getPlayer(playerId);
@@ -206,7 +206,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
                 possibleTargets.add(playerId);
             }
         }
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
+        for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterPermanent(), sourceControllerId, game)) {
             if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, game)) {
                 possibleTargets.add(permanent.getId());
             }
@@ -216,7 +216,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<UUID>();
+        Set<UUID> possibleTargets = new HashSet<>();
         for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
             Player player = game.getPlayer(playerId);
             if (player != null && filter.match(player, game)) {

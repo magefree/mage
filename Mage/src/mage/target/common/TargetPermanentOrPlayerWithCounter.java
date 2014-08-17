@@ -59,7 +59,7 @@ public class TargetPermanentOrPlayerWithCounter extends TargetPermanentOrPlayer 
     }
 
     public TargetPermanentOrPlayerWithCounter(int minNumTargets, int maxNumTargets, boolean notTarget) {
-           this(minNumTargets, maxNumTargets);
+        this(minNumTargets, maxNumTargets);
         this.notTarget = notTarget;
     }
 
