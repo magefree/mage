@@ -1388,5 +1388,55 @@ public class ComputerPlayer6 extends ComputerPlayer implements Player {
         super.cleanUpOnMatchEnd();
     }
 
+    @Override
+    public UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup, List<UUID> blockerOrder, Game game) {
+        if (combatGroup.getAttackers().size() == 1) {
+            Permanent attacker = game.getPermanent(combatGroup.getAttackers().get(0));
+            boolean attackerDeathtouch = attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId());
+            // boolean attackerFirstStrike = attacker.getAbilities().containsKey(FirstStrikeAbility.getInstance().getId());
+            List<Permanent> blockerAlreadySet = getAlreadyBlockingPermanents(blockerOrder, game);
+            int powerAlreadyNeeded = getPowerAlreadyNeeded(blockerAlreadySet, attackerDeathtouch);
+            int powerLeftToKill = attacker.getPower().getValue() - powerAlreadyNeeded;
+            // no possible damage left, order doesn't matter
+            if (powerLeftToKill <= 0) {
+                return blockers.iterator().next().getId();
+            }
+            for (Permanent blocker: blockers) {
+                if (attackerDeathtouch || powerLeftToKill >= blocker.getToughness().getValue()) {
+                    if (!blocker.getAbilities().containsKey(IndestructibleAbility.getInstance().getId())) {
+                        return blocker.getId();
+                    }
+                }
+            }
+            // Can't kill a blocker so it doesn't matter
+            return blockers.iterator().next().getId();
+        } else { // multiple attackers (like banding)
+            //TODO: improve this
+            return blockers.iterator().next().getId();
+        }
+    }
+
+    private List<Permanent> getAlreadyBlockingPermanents(List<UUID> blockerOrder, Game game) {
+        List<Permanent> blockerAlreadySet = new ArrayList<>();
+        for (UUID uuid :blockerOrder) {
+            Permanent permanent = game.getPermanent(uuid);
+            if (permanent != null) {
+                blockerAlreadySet.add(permanent);
+            }
+        }
+        return blockerAlreadySet;
+    }
+
+    private int getPowerAlreadyNeeded(List<Permanent> blockerAlreadySet, boolean attackerDeathtouch) {
+        int toughnessAlreadyNeeded = 0;
+        if (attackerDeathtouch) {
+            return blockerAlreadySet.size();
+        }
+        for (Permanent creature : blockerAlreadySet) {
+            toughnessAlreadyNeeded += creature.getToughness().getValue();
+        }
+        return toughnessAlreadyNeeded;
+    }
+
 
 }

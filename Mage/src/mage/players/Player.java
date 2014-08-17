@@ -59,6 +59,7 @@ import mage.util.Copyable;
 
 import java.io.Serializable;
 import java.util.*;
+import mage.game.combat.CombatGroup;
 
 /**
  *
@@ -312,7 +313,15 @@ public interface Player extends MageItem, Copyable<Player> {
     void selectAttackers(Game game, UUID attackingPlayerId);
     void selectBlockers(Game game, UUID defendingPlayerId);
     UUID chooseAttackerOrder(List<Permanent> attacker, Game game);
-    UUID chooseBlockerOrder(List<Permanent> blockers, Game game);
+    /**
+     * Choose the order in which blockers get damage assigned to
+     * @param blockers list of blockers where to choose the next one from
+     * @param combatGroup the concerning combat group
+     * @param blockerOrder the already set order of blockers
+     * @param game
+     * @return blocker next to add to the blocker order
+     */
+    UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup, List<UUID> blockerOrder, Game game);
     void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID sourceId, Game game);
     int getAmount(int min, int max, String message, Game game);
     void sideboard(Match match, Deck deck);

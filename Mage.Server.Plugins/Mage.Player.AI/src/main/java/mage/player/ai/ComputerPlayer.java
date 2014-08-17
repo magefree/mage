@@ -82,6 +82,7 @@ import java.util.*;
 import java.util.HashSet;
 import java.util.Map.Entry;
 import mage.abilities.costs.VariableCost;
+import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
@@ -1388,7 +1389,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public UUID chooseBlockerOrder(List<Permanent> blockers, Game game) {
+    public UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup, List<UUID> blockerOrder, Game game) {        
         //TODO: improve this
         return blockers.iterator().next().getId();
     }

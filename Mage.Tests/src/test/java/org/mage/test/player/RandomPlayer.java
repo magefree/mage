@@ -384,7 +384,7 @@ public class RandomPlayer extends ComputerPlayer {
     }
 
     @Override
-    public UUID chooseBlockerOrder(List<Permanent> blockers, Game game) {
+    public UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup, List<UUID> blockerOrder, Game game) {
         return blockers.get(rnd.nextInt(blockers.size())).getId();
     }
 

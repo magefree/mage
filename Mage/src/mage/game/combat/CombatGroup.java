@@ -304,12 +304,16 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 }
                 if (damage > 0 && hasTrample(attacker)) {
                     defenderDamage(attacker, damage, game);
+                } else {
+                    // Assign the damge left to first blocker
+                    int alreadyAssigned = assigned.get(blockerOrder.get(0));
+                    assigned.replace(blockerOrder.get(0), damage + alreadyAssigned);
                 }
             }
             for (UUID blockerId: blockerOrder) {
                 Integer power = blockerPower.get(blockerId);
                 if (power != null) {
-                    attacker.markDamage(power.intValue(), blockerId, game, true, true);
+                    attacker.markDamage(power, blockerId, game, true, true);
                 }
             }
             for (Map.Entry<UUID, Integer> entry : assigned.entrySet()) {
@@ -448,7 +452,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 for (UUID blockerId: blockerList) {
                     blockerPerms.add(game.getPermanent(blockerId));
                 }
-                UUID blockerId = player.chooseBlockerOrder(blockerPerms, game);
+                UUID blockerId = player.chooseBlockerOrder(blockerPerms, this, blockerOrder, game);
                 blockerOrder.add(blockerId);
                 blockerList.remove(blockerId);
             }

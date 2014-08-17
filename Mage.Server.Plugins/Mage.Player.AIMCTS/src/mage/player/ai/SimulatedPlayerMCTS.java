@@ -353,8 +353,9 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public boolean choosePile(Outcome outcome, String message, List<? extends Card> pile1, List<? extends Card> pile2, Game game) {
-        if (this.isHuman())
+        if (this.isHuman()) {
             return rnd.nextBoolean();
+        }
         return super.choosePile(outcome, message, pile1, pile2, game);
     }
 
@@ -408,16 +409,18 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public UUID chooseAttackerOrder(List<Permanent> attackers, Game game) {
-        if (this.isHuman())
+        if (this.isHuman()) {
             return attackers.get(rnd.nextInt(attackers.size())).getId();
+        }
         return super.chooseAttackerOrder(attackers, game);
     }
 
     @Override
-    public UUID chooseBlockerOrder(List<Permanent> blockers, Game game) {
-        if (this.isHuman())
+    public UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup, List<UUID> blockerOrder, Game game) {
+        if (this.isHuman()) {
             return blockers.get(rnd.nextInt(blockers.size())).getId();
-        return super.chooseBlockerOrder(blockers, game);
+        }
+        return super.chooseBlockerOrder(blockers, combatGroup, blockerOrder, game);
     }
 
     @Override
@@ -450,14 +453,16 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
                 targets.remove(targetId);
             }
         }
-        else
+        else {
             super.assignDamage(damage, targets, singleTargetName, sourceId, game);
+        }
     }
 
     @Override
     public int getAmount(int min, int max, String message, Game game) {
-        if (this.isHuman())
+        if (this.isHuman()) {
             return rnd.nextInt(max - min) + min;
+        }
         return super.getAmount(min, max, message, game);
     }
 

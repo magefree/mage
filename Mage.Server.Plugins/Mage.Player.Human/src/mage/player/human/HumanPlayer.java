@@ -764,7 +764,7 @@ public class HumanPlayer extends PlayerImpl {
 
 
     @Override
-    public UUID chooseBlockerOrder(List<Permanent> blockers, Game game) {
+    public UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup, List<UUID> blockerOrder, Game game) {
         updateGameStatePriority("chooseBlockerOrder", game);
         while (!abort) {
             game.fireSelectTargetEvent(playerId, "Pick blocker", blockers, true);
