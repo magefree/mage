@@ -58,7 +58,7 @@ public class CounterbalanceTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Counterbalance");
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
 
-        addCard(Zone.LIBRARY, playerB, "Desert Twister"); // cmc = 6 ({G}{G}{4} because DeatGrasp = 2 + 4 (of X) = 6
+        addCard(Zone.LIBRARY, playerB, "Desert Twister"); // cmc = 6 ({G}{G}{4} because DeathGrasp = 2 + 4 (of X) = 6
         skipInitShuffling(); // so the set to top card stays at top
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Death Grasp", "targetPlayer=PlayerB");
