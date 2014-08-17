@@ -30,27 +30,18 @@ package mage.sets.legends;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PreventAllDamageByAllEffect;
-import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
-import mage.abilities.Mode;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.PhaseStep;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.game.events.DamageEvent;
-import mage.game.events.GameEvent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
