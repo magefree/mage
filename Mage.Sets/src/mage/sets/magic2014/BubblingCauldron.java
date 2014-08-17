@@ -43,6 +43,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
+import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -96,7 +97,8 @@ class BubblingCauldronEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int damage = 0;
         for (UUID opponentId: game.getOpponents(source.getControllerId())) {
-            damage += game.getPlayer(opponentId).damage(4, source.getSourceId(), game, false, true);
+            Player opponent = game.getPlayer(opponentId);
+            damage += opponent.loseLife(4, game);
         }
         game.getPlayer(source.getControllerId()).gainLife(damage, game);
         return true;
