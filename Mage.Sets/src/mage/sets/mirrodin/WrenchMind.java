@@ -35,12 +35,9 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetDiscard;
 
 /**

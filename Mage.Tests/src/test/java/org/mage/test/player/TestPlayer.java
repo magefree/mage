@@ -61,6 +61,7 @@ import java.util.Map;
 import java.util.UUID;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AttackingPredicate;
+import mage.filter.predicate.permanent.BlockingPredicate;
 
 /**
  *
@@ -199,6 +200,7 @@ public class TestPlayer extends ComputerPlayer {
                 String[] groups = command.split(";");
                 FilterCreatureForCombatBlock filterBlocker = new FilterCreatureForCombatBlock();
                 filterBlocker.add(new NamePredicate(groups[0]));
+                filterBlocker.add(Predicates.not(new BlockingPredicate()));
                 Permanent blocker = findPermanent(filterBlocker, playerId, game);
                 if (blocker != null) {
                     FilterAttackingCreature filterAttacker = new FilterAttackingCreature();

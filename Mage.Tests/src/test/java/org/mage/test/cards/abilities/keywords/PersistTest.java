@@ -10,6 +10,7 @@ import junit.framework.Assert;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.Filter;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -89,6 +90,78 @@ public class PersistTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Safehold Elite", 0);
 
     }
+
+    @Test
+    public void testInteractionWithLifelink() {
+
+        // Kitchen Finks 3/2   {1}{G/W}{G/W}
+        // Creature - Ouphe
+        // When Kitchen Finks enters the battlefield, you gain 2 life.
+        // Persist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
+        //
+        // Persist
+        addCard(Zone.BATTLEFIELD, playerA, "Kitchen Finks", 1);
+
+        /**
+         * Deathtouch, lifelink
+         * When Wurmcoil Engine dies, put a 3/3 colorless Wurm artifact creature token with
+         * deathtouch and a 3/3 colorless Wurm artifact creature token with lifelink onto the battlefield.
+         */
+        addCard(Zone.BATTLEFIELD, playerB, "Wurmcoil Engine",1);
+
+        attack(2, playerB, "Wurmcoil Engine");
+        block(2, playerA, "Kitchen Finks", "Wurmcoil Engine");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerB, "Wurmcoil Engine", 1);
+        assertPermanentCount(playerA, "Kitchen Finks", 1);
+        assertPowerToughness(playerA, "Kitchen Finks", 2,1);
+
+        assertLife(playerA, 22); // Kitchen Finks +2 life
+        assertLife(playerB, 26); // Wurmcoil Engine +6 ife
+
+    }
+
+
+    @Test
+    public void testInteractionWithToporOrb() {
+
+        // Kitchen Finks 3/2   {1}{G/W}{G/W}
+        // Creature - Ouphe
+        // When Kitchen Finks enters the battlefield, you gain 2 life.
+        // Persist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
+        //
+        // Persist
+        addCard(Zone.BATTLEFIELD, playerA, "Kitchen Finks", 2);
+
+        /**
+         * Deathtouch, lifelink
+         * When Wurmcoil Engine dies, put a 3/3 colorless Wurm artifact creature token with
+         * deathtouch and a 3/3 colorless Wurm artifact creature token with lifelink onto the battlefield.
+         */
+        addCard(Zone.BATTLEFIELD, playerB, "Wurmcoil Engine",1);
+        addCard(Zone.BATTLEFIELD, playerB, "Torpor Orb",1);
+
+        attack(2, playerB, "Wurmcoil Engine");
+        block(2, playerA, "Kitchen Finks", "Wurmcoil Engine");
+        block(2, playerA, "Kitchen Finks", "Wurmcoil Engine");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerB, "Wurmcoil Engine", 0);
+        assertPermanentCount(playerB, "Wurm", 2);
+        assertPermanentCount(playerA, "Kitchen Finks", 2);
+        assertPowerToughness(playerA, "Kitchen Finks", 2,1, Filter.ComparisonScope.Any);
+        assertPowerToughness(playerA, "Kitchen Finks", 3,2, Filter.ComparisonScope.Any);
+
+        assertLife(playerA, 20); // No life from Kitchen Finks ETB becaus of Torpor Orb
+        assertLife(playerB, 22); // AI assigns damage only 2 damage to one blocker so only 2 life link (It's a kind of bug (or bad play) of AI)
+
+    }
+
 
     // some tests were moved to LastKnownInformationTest
 }
