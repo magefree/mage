@@ -31,11 +31,13 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.PreventAllDamageByAllEffect;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
 import mage.abilities.Mode;
@@ -70,9 +72,9 @@ public class AngusMackenzie extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {G}{W}{U}, {tap}: Prevent all combat damage that would be dealt this turn. Activate this ability only before the combat damage step.
-        Ability ability = new AngusMackenzieActivateIfConditionActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD, 
-                new AngusMackenziePreventAllCombatDamage(Duration.EndOfTurn),
+                new PreventAllDamageByAllEffect(Duration.EndOfTurn, true),
                 new ManaCostsImpl("{G}{W}{U}"), 
                 BeforeCombatDamageCondition.getInstance()
         );
@@ -88,63 +90,6 @@ public class AngusMackenzie extends CardImpl {
     public AngusMackenzie copy() {
         return new AngusMackenzie(this);
     }
-}
-
-class AngusMackenzieActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
-
-    private final Condition condition;
-
-    public AngusMackenzieActivateIfConditionActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition) {
-        super(zone, effect, cost);
-        this.condition = condition;
-    }
-
-    public AngusMackenzieActivateIfConditionActivatedAbility(AngusMackenzieActivateIfConditionActivatedAbility ability) {
-        super(ability);
-        this.condition = ability.condition;
-    }
-
-    @Override
-    public boolean canActivate(UUID playerId, Game game) {
-        if (condition.apply(game, this)) {
-            return super.canActivate(playerId, game);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean activate(Game game, boolean noMana) {
-        if (canActivate(this.controllerId, game)) {
-            return super.activate(game, noMana);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean resolve(Game game) {
-        if (super.resolve(game)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        StringBuilder sb = new StringBuilder(super.getRule());
-        sb.append(" Activate this ability only ");
-        if (condition.toString() != null) {
-            sb.append(condition.toString()).append(".");
-        } else {
-            sb.append(" [Condition toSting() == null] ");
-        }
-        return sb.toString();
-    }
-
-    @Override
-    public AngusMackenzieActivateIfConditionActivatedAbility copy() {
-        return new AngusMackenzieActivateIfConditionActivatedAbility(this);
-    }
-
 }
 
 class BeforeCombatDamageCondition implements Condition {
@@ -166,47 +111,5 @@ class BeforeCombatDamageCondition implements Condition {
     @Override
     public String toString() {
 	return "before the combat damage step";
-    }
-}
-class AngusMackenziePreventAllCombatDamage extends PreventionEffectImpl {
-
-    private FilterPermanent filter;
-
-    public AngusMackenziePreventAllCombatDamage(Duration duration) {
-        super(duration);
-    }
-
-    public AngusMackenziePreventAllCombatDamage(final AngusMackenziePreventAllCombatDamage effect) {
-        super(effect);
-        if (effect.filter != null) {
-            this.filter = effect.filter.copy();
-        }
-    }
-
-    @Override
-    public AngusMackenziePreventAllCombatDamage copy() {
-        return new AngusMackenziePreventAllCombatDamage(this);
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game) && event instanceof DamageEvent && event.getAmount() > 0) {
-            DamageEvent damageEvent = (DamageEvent) event;
-            if (damageEvent.isCombatDamage()) {
-                if (filter == null) {
-                    return true;
-                }
-                Permanent permanent = game.getPermanent(damageEvent.getSourceId());
-                if (permanent != null && filter.match(permanent, game)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Prevent all combat damage that would be dealt this turn";
     }
 }
