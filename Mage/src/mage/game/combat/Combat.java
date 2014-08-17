@@ -88,6 +88,17 @@ public class Combat implements Serializable, Copyable<Combat> {
             blockingGroups.put(group.getKey(), group.getValue());
         }
         this.useToughnessForDamage = combat.useToughnessForDamage;
+        for (Map.Entry<UUID, Set<UUID>> group : combat.numberCreaturesDefenderAttackedBy.entrySet()) {
+            this.numberCreaturesDefenderAttackedBy.put(group.getKey(), group.getValue());
+        }        
+        
+        for (Map.Entry<UUID, Set<UUID>> group : combat.creatureMustBlockAttackers.entrySet()) {
+            this.creatureMustBlockAttackers.put(group.getKey(), group.getValue());
+        }
+        for (Map.Entry<UUID, Set<UUID>> group : combat.creaturesForcedToAttack.entrySet()) {
+            this.creaturesForcedToAttack.put(group.getKey(), group.getValue());
+        }
+        this.maxAttackers = combat.maxAttackers;
     }
 
     public List<CombatGroup> getGroups() {
