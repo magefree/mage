@@ -1,12 +1,10 @@
-/*
+    /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package mage.abilities.decorator;
 
 import java.util.UUID;
-
-import mage.constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -15,6 +13,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.constants.EffectType;
+import mage.constants.Zone;
 import mage.game.Game;
 
 /**

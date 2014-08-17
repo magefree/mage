@@ -34,6 +34,7 @@ import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PreventAllDamageByAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -62,10 +63,12 @@ public class AngusMackenzie extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
+        Effect effect = new PreventAllDamageByAllEffect(Duration.EndOfTurn, true);
+        effect.setText("Prevent all combat damage that would be dealt this turn");
         // {G}{W}{U}, {tap}: Prevent all combat damage that would be dealt this turn. Activate this ability only before the combat damage step.
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD, 
-                new PreventAllDamageByAllEffect(Duration.EndOfTurn, true),
+                effect,
                 new ManaCostsImpl("{G}{W}{U}"), 
                 BeforeCombatDamageCondition.getInstance()
         );
