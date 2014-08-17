@@ -652,6 +652,24 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return target.isChosen();
         }
 
+        if (target instanceof TargetCardInExile) {
+            List<Card> cards = new ArrayList<>();
+            for (UUID uuid: ((TargetCardInExile) target).possibleTargets(source.getSourceId(), source.getControllerId(), game)) {
+                Card card = game.getCard(uuid);
+                if (card != null) {
+                    cards.add(card);
+                }
+            }
+            while(!target.isChosen() && !cards.isEmpty()) {
+                Card pick = pickTarget(cards, outcome, target, source, game);
+                if (pick != null) {
+                    target.addTarget(pick.getId(), source, game);
+                }
+            }
+            return target.isChosen();
+        }
+
+
         throw new IllegalStateException("Target wasn't handled. class:" + target.getClass().toString());
     }
 
