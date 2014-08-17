@@ -151,15 +151,14 @@ public class PersistTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
+        assertLife(playerA, 20); // No life from Kitchen Finks ETB becaus of Torpor Orb
+        assertLife(playerB, 26); // +6 from lifelink of Wurmcoil
+
         assertPermanentCount(playerB, "Wurmcoil Engine", 0);
         assertPermanentCount(playerB, "Wurm", 2);
         assertPermanentCount(playerA, "Kitchen Finks", 2);
-        assertPowerToughness(playerA, "Kitchen Finks", 2,1, Filter.ComparisonScope.Any);
-        assertPowerToughness(playerA, "Kitchen Finks", 3,2, Filter.ComparisonScope.Any);
-
-        assertLife(playerA, 20); // No life from Kitchen Finks ETB becaus of Torpor Orb
-        assertLife(playerB, 22); // AI assigns only 2 damage to one blocker so only 2 life link (It's a kind of bug (or bad play) of AI)
-
+        assertPowerToughness(playerA, "Kitchen Finks", 2,1, Filter.ComparisonScope.All);
+ 
     }
 
 
