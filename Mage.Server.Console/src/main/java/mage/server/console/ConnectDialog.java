@@ -34,12 +34,7 @@
 
 package mage.server.console;
 
-import mage.remote.Connection;
-import mage.remote.Connection.ProxyType;
-import org.apache.log4j.Logger;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Cursor;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -48,6 +43,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
+import mage.remote.Connection;
+import mage.remote.Connection.ProxyType;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -380,10 +382,11 @@ public class ConnectDialog extends JDialog {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         ConsoleFrame.getPreferences().put("autoConnect", Boolean.toString(chkAutoConnect.isSelected()));
-        if (task != null && !task.isDone())
+        if (task != null && !task.isDone()) {
             task.cancel(true);
-        else
+        } else {
             this.setVisible(false);
+        }
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
@@ -467,8 +470,9 @@ public class ConnectDialog extends JDialog {
 
     private void keyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_keyTyped
         char c = evt.getKeyChar();
-        if (!Character.isDigit(c))
+        if (!Character.isDigit(c)) {
             evt.consume();
+        }
     }//GEN-LAST:event_keyTyped
 
     private void chkAutoConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAutoConnectActionPerformed
@@ -486,14 +490,14 @@ public class ConnectDialog extends JDialog {
             URL serverListURL = new URL("http://download.magefree.com/files/server-list.txt");
             in = new BufferedReader(new InputStreamReader(serverListURL.openStream()));
 
-            List<String> servers = new ArrayList<String>();
+            List<String> servers = new ArrayList<>();
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
                 System.out.println("Found server: "+inputLine);
                 servers.add(inputLine);
             }
 
-            if (servers.size() == 0) {
+            if (servers.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Couldn't find any server.");
                 return;
             }
@@ -516,7 +520,9 @@ public class ConnectDialog extends JDialog {
         } catch(Exception ex) {
             logger.error(ex,ex);
         } finally {
-            if (in != null) try { in.close(); } catch (Exception e) {}
+            if (in != null) {
+                try { in.close(); } catch (Exception e) {}
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -38,6 +38,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import mage.server.util.ThreadExecutor;
+import mage.view.ChatMessage;
 import org.apache.log4j.Logger;
 
 /**

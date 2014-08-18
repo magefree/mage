@@ -204,8 +204,10 @@ public class SessionImpl implements Session {
             if (registerResult) {
                 sessionState = SessionState.CONNECTED;
                 serverState = server.getServerState();
-                updateDatabase();
-                logger.info("Connected as " + this.getUserName() == null ? "":this.getUserName() + " to MAGE server at " + connection.getHost() + ":" + connection.getPort());
+                if (!connection.getUsername().equals("Admin")) {
+                    updateDatabase();
+                }
+                logger.info("Connected as " + (this.getUserName() == null ? "":this.getUserName()) + " to MAGE server at " + connection.getHost() + ":" + connection.getPort());
                 client.connected(this.getUserName() == null ? "":this.getUserName() +"@" + connection.getHost() + ":" + connection.getPort() +" ");
                 return true;
             }

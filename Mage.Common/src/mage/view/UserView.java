@@ -36,10 +36,10 @@ import java.util.Date;
  */
 public class UserView implements Serializable {
 
-    private String userName;
-    private String host;
-    private String sessionId;
-    private Date timeConnected;
+    private final String userName;
+    private final String host;
+    private final String sessionId;
+    private final Date timeConnected;
 
     public UserView(String userName, String host, String sessionId, Date timeConnected) {
         this.userName = userName;

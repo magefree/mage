@@ -33,18 +33,19 @@
  */
 package mage.server.console;
 
-import mage.remote.Session;
-import mage.view.TableView;
-import mage.view.UserView;
-import org.apache.log4j.Logger;
-
-import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
+import javax.swing.SwingWorker;
+import javax.swing.table.AbstractTableModel;
+import mage.remote.Session;
+import mage.view.TableView;
+import mage.view.UserView;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -54,8 +55,8 @@ public class ConsolePanel extends javax.swing.JPanel {
 
     private static final Logger logger = Logger.getLogger(ConsolePanel.class);
 
-    private TableUserModel tableUserModel;
-    private TableTableModel tableTableModel;
+    private final TableUserModel tableUserModel;
+    private final TableTableModel tableTableModel;
     private UpdateUsersTask updateUsersTask;
     private UpdateTablesTask updateTablesTask;
 
@@ -91,10 +92,12 @@ public class ConsolePanel extends javax.swing.JPanel {
     }
 
     public void stop() {
-        if (updateUsersTask != null && !updateUsersTask.isDone())
+        if (updateUsersTask != null && !updateUsersTask.isDone()) {
             updateUsersTask.cancel(true);
-        if (updateTablesTask != null && !updateTablesTask.isDone())
+        }
+        if (updateTablesTask != null && !updateTablesTask.isDone()) {
             updateTablesTask.cancel(true);
+        }
     }
 
     /** This method is called from within the constructor to
@@ -289,8 +292,9 @@ public class ConsolePanel extends javax.swing.JPanel {
 }
 
 class TableUserModel extends AbstractTableModel {
-    private String[] columnNames = new String[]{"User Name", "Host", "Time Connected"};
+    private final String[] columnNames = new String[]{"User Name", "Host", "Time Connected"};
     private UserView[] users = new UserView[0];
+    private static final DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
 
     public void loadData(List<UserView> users) {
         this.users = users.toArray(new UserView[0]);
@@ -315,7 +319,7 @@ class TableUserModel extends AbstractTableModel {
             case 1:
                 return users[arg0].getHost();
             case 2:
-                return users[arg0].getConnectionTime().toString();
+                return formatter.format(users[arg0].getConnectionTime());
             case 3:
                 return users[arg0].getSessionId();
         }
@@ -326,8 +330,9 @@ class TableUserModel extends AbstractTableModel {
     public String getColumnName(int columnIndex) {
         String colName = "";
 
-        if (columnIndex <= getColumnCount())
+        if (columnIndex <= getColumnCount()) {
             colName = columnNames[columnIndex];
+        }
 
         return colName;
     }
@@ -345,7 +350,7 @@ class TableUserModel extends AbstractTableModel {
 }
 
 class TableTableModel extends AbstractTableModel {
-    private String[] columnNames = new String[]{"Table Name", "Owner", "Game Type", "Deck Type", "Status"};
+    private final String[] columnNames = new String[]{"Table Name", "Owner", "Game Type", "Deck Type", "Status"};
     private TableView[] tables = new TableView[0];
 
 
@@ -372,16 +377,17 @@ class TableTableModel extends AbstractTableModel {
             case 1:
                 return tables[arg0].getControllerName();
             case 2:
-                return tables[arg0].getGameType().toString();
+                return tables[arg0].getGameType();
             case 3:
-                return tables[arg0].getDeckType().toString();
+                return tables[arg0].getDeckType();
             case 4:
                 return tables[arg0].getTableState().toString();
             case 5:
                 return tables[arg0].isTournament();
             case 6:
-                if (!tables[arg0].getGames().isEmpty())
+                if (!tables[arg0].getGames().isEmpty()) {
                     return tables[arg0].getGames().get(0);
+        }
                 return null;
             case 7:
                 return tables[arg0].getTableId();
@@ -393,8 +399,9 @@ class TableTableModel extends AbstractTableModel {
     public String getColumnName(int columnIndex) {
         String colName = "";
 
-        if (columnIndex <= getColumnCount())
+        if (columnIndex <= getColumnCount()) {
             colName = columnNames[columnIndex];
+        }
 
         return colName;
     }
@@ -406,8 +413,9 @@ class TableTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        if (columnIndex != 5)
+        if (columnIndex != 5) {
             return false;
+        }
         return true;
     }
 
@@ -415,8 +423,8 @@ class TableTableModel extends AbstractTableModel {
 
 class UpdateUsersTask extends SwingWorker<Void, List<UserView>> {
 
-    private Session session;
-    private ConsolePanel panel;
+    private final Session session;
+    private final ConsolePanel panel;
     private List<UserView> previousUsers;
 
     private static final Logger logger = Logger.getLogger(UpdateUsersTask.class);
@@ -484,9 +492,9 @@ class UpdateUsersTask extends SwingWorker<Void, List<UserView>> {
 
 class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 
-    private Session session;
-    private UUID roomId;
-    private ConsolePanel panel;
+    private final Session session;
+    private final UUID roomId;
+    private final ConsolePanel panel;
 
     private static final Logger logger = Logger.getLogger(UpdateTablesTask.class);
 

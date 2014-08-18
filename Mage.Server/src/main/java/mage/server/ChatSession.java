@@ -69,33 +69,39 @@ public class ChatSession {
         }
     }
 
-    public void  kill(UUID userId, DisconnectReason reason) {
+    public void kill(UUID userId, DisconnectReason reason) {
 
         try {
             if (reason == null) {
-                logger.fatal("User kill without disconnect reason  userId: " + userId) ;
+                logger.fatal("User kill without disconnect reason  userId: " + userId);
                 reason = DisconnectReason.Undefined;
             }
             if (reason != null && userId != null && clients.containsKey(userId)) {
                 String userName = clients.get(userId);
                 clients.remove(userId);
-                logger.debug(userName + "(" + reason.toString() +")" + " removed from chatId " + chatId) ;
+                logger.debug(userName + "(" + reason.toString() + ")" + " removed from chatId " + chatId);
                 String message;
                 switch (reason) {
                     case Disconnected:
                         message = " has left XMage";
                         break;
-                     case LostConnection:
+                    case LostConnection:
                         message = " has lost connection";
                         break;
-                     default:
-                        message = " left (" + reason.toString() +")";
+                    case SessionExpired:
+                        message = " session expired";
+                        break;
+                    case CleaningUp:
+                        message = null;
+                        break;
+                    default:
+                        message = " left (" + reason.toString() + ")";
                 }
                 if (message != null) {
-                    broadcast(null, new StringBuilder(userName).append(message).toString(), MessageColor.BLUE, true, MessageType.STATUS);
+                    broadcast(null, userName + message, MessageColor.BLUE, true, MessageType.STATUS);
                 }
             }
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             logger.fatal("exception: " + ex.toString());
         }
     }

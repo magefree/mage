@@ -967,7 +967,7 @@ public class MageServerImpl implements MageServer {
             public List<UserView> execute() throws MageException {
                 List<UserView> users = new ArrayList<>();
                 for (User user : UserManager.getInstance().getUsers()) {
-                    users.add(new UserView(user.getName(), "", user.getSessionId(), user.getConnectionTime()));
+                    users.add(new UserView(user.getName(), user.getHost(), user.getSessionId(), user.getConnectionTime()));
                 }
                 return users;
             }

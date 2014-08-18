@@ -34,6 +34,8 @@
 
 package mage.server.console;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -80,6 +82,14 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
 
     /** Creates new form ConsoleFrame */
     public ConsoleFrame() {
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                exitApp();
+            }
+        });
+
         initComponents();
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -136,7 +146,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
         lblStatus = new javax.swing.JLabel();
         consolePanel1 = new mage.server.console.ConsolePanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
@@ -213,6 +223,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
         logger.info("Logging level: " + logger.getEffectiveLevel());
 
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new ConsoleFrame().setVisible(true);
                 logger.info("Started MAGE server console");
@@ -302,4 +313,18 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     public void processCallback(ClientCallback callback) {
     }
 
+    public void exitApp() {
+        if (session.isConnected()) {
+            if (JOptionPane.showConfirmDialog(this, "You are currently connected.  Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+                return;
+            }
+            session.disconnect(false);
+        } else {
+            if (JOptionPane.showConfirmDialog(this, "Are you sure you want to exit?", "Confirm exit", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+                return;
+            }
+        }
+        dispose();
+        System.exit(0);
+    }
 }

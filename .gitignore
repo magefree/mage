@@ -12,6 +12,7 @@ Mage.Plugins/Mage.Counter.Plugin/target
 Mage.Plugins/Mage.Theme.Plugin/target
 Mage.Plugins/Mage.Rating.Plugin/target
 Mage.Server.Console/target/
+Mage.Server.Console/mageadmin.log
 Mage.Server.Plugins/Mage.Deck.Constructed/target
 Mage.Server.Plugins/Mage.Deck.Limited/target
 Mage.Server.Plugins/Mage.Game.CommanderDuel/target
