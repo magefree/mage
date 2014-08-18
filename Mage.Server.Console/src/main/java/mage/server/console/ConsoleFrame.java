@@ -34,6 +34,9 @@
 
 package mage.server.console;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import mage.interfaces.MageClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
@@ -57,7 +60,8 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     private ConnectDialog connectDialog;
     private static final Preferences prefs = Preferences.userNodeForPackage(ConsoleFrame.class);
     private static final MageVersion version = new MageVersion(1, 3, 0, MageVersion.MAGE_VERSION_INFO);
-
+    
+    private static final ScheduledExecutorService pingTaskExecutor = Executors.newSingleThreadScheduledExecutor();
     /**
      * @return the session
      */
@@ -84,6 +88,13 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
         } catch (Exception ex) {
             logger.fatal("", ex);
         }
+        
+        pingTaskExecutor.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                session.ping();
+            }
+        }, 60, 60, TimeUnit.SECONDS);        
     }
 
    public boolean connect(Connection connection) {

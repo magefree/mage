@@ -125,6 +125,9 @@ public class Session {
             user = UserManager.getInstance().findUser("Admin");
         }
         user.setUserData(new UserData(UserGroup.ADMIN, 0, false));
+        if (!UserManager.getInstance().connectToSession(sessionId, user.getId())) {
+               logger.info("Error connecting Admin!");
+        }        
         this.userId = user.getId();
     }
 
