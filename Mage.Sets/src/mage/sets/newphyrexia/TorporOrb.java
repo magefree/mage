@@ -27,19 +27,17 @@
  */
 package mage.sets.newphyrexia;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -65,9 +63,10 @@ public class TorporOrb extends CardImpl {
     }
 }
 
-class TorporOrbEffect extends ReplacementEffectImpl {
+class TorporOrbEffect extends ContinuousRuleModifiyingEffectImpl {
+
     TorporOrbEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment, false);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment, false, true);
         staticText = "Creatures entering the battlefield don't cause abilities to trigger";
     }
 
@@ -76,16 +75,14 @@ class TorporOrbEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            Permanent p = game.getPermanent(event.getTargetId());
-            if (p != null && p.getCardType().contains(CardType.CREATURE)) {
-                return true;
+            Ability ability = (Ability) getValue("targetAbility");
+            if (ability != null && ability instanceof TriggeredAbility) {
+                Permanent p = game.getPermanent(event.getTargetId());
+                if (p != null && p.getCardType().contains(CardType.CREATURE)) {
+                    return true;
+                }
             }
         }
         return false;
