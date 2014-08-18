@@ -148,6 +148,9 @@ public class PersistTest extends CardTestPlayerBase {
         block(2, playerA, "Kitchen Finks", "Wurmcoil Engine");
         block(2, playerA, "Kitchen Finks", "Wurmcoil Engine");
 
+        setChoice(playerB, "Creatures entering the battlefield don't cause abilities to trigger");
+        setChoice(playerB, "Creatures entering the battlefield don't cause abilities to trigger");
+
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
@@ -157,7 +160,7 @@ public class PersistTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Wurmcoil Engine", 0);
         assertPermanentCount(playerB, "Wurm", 2);
         assertPermanentCount(playerA, "Kitchen Finks", 2);
-        assertPowerToughness(playerA, "Kitchen Finks", 2,1, Filter.ComparisonScope.All);
+        assertPowerToughness(playerA, "Kitchen Finks", 2, 1, Filter.ComparisonScope.All);
  
     }
 

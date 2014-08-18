@@ -129,6 +129,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     protected Map<UUID, Card> gameCards = new HashMap<>();
     protected Map<Zone,HashMap<UUID, MageObject>> lki = new EnumMap<>(Zone.class);
+    protected Map<UUID, Map<Integer, MageObject>> lkiExtended = new HashMap<>();
     protected Map<Zone,HashMap<UUID, MageObject>> shortLivingLKI = new EnumMap<>(Zone.class);
 
     protected GameState state;
@@ -190,6 +191,7 @@ public abstract class GameImpl implements Game, Serializable {
         this.simulation = game.simulation;
         this.gameOptions = game.gameOptions;
         this.lki.putAll(game.lki);
+        this.lkiExtended.putAll(game.lkiExtended);
         this.shortLivingLKI.putAll(game.shortLivingLKI);
         if (logger.isDebugEnabled()) {
             copyCount++;
@@ -2061,6 +2063,22 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
+    public MageObject getLastKnownInformation(UUID objectId, Zone zone, int zoneChangeCounter) {
+        if (zone.equals(Zone.BATTLEFIELD)) {
+            Map<Integer, MageObject> lkiMapExtended = lkiExtended.get(objectId);
+
+            if (lkiMapExtended != null) {
+                MageObject object = lkiMapExtended.get(zoneChangeCounter);
+                if (object != null) {
+                    return object.copy();
+                }
+            }
+        }
+
+        return getLastKnownInformation(objectId, zone);
+    }
+
+    @Override
     public MageObject getShortLivingLKI(UUID objectId, Zone zone) {
         Map<UUID, MageObject> shortLivingLkiMap = shortLivingLKI.get(zone);
         if (shortLivingLkiMap != null) {
@@ -2101,6 +2119,17 @@ public abstract class GameImpl implements Game, Serializable {
                 newMap.put(objectId, copy);
                 shortLivingLKI.put(zone, newMap);
             }
+
+            if (object instanceof Permanent) {
+                Map<Integer, MageObject> lkiExtendedMap = lkiExtended.get(objectId);
+                if (lkiExtendedMap != null) {
+                    lkiExtendedMap.put(((Permanent) object).getZoneChangeCounter(), copy);
+                } else {
+                    lkiExtendedMap = new HashMap<>();
+                    lkiExtendedMap.put(((Permanent) object).getZoneChangeCounter(), copy);
+                    lkiExtended.put(objectId, lkiExtendedMap);
+                }
+            }
         }
     }
 
@@ -2110,6 +2139,7 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public void resetLKI() {
         lki.clear();
+        lkiExtended.clear();
     }
 
     @Override

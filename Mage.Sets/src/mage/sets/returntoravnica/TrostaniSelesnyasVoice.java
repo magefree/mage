@@ -28,11 +28,6 @@
 
 package mage.sets.returntoravnica;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -43,11 +38,16 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PopulateEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -103,6 +103,7 @@ class TrostaniSelesnyasVoiceTriggeredAbility extends TriggeredAbilityImpl {
                     && event.getTargetId() != this.getSourceId()) {
                 Effect effect = this.getEffects().get(0);
                 effect.setValue("lifeSource", event.getTargetId());
+                effect.setValue("zoneChangeCounter", permanent.getZoneChangeCounter());
                 return true;
             }
         }
@@ -139,9 +140,10 @@ class TrostaniSelesnyasVoiceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         UUID creatureId = (UUID) getValue("lifeSource");
+        Integer zoneChangeCounter = (Integer) getValue("zoneChangeCounter");
         Permanent creature = game.getPermanent(creatureId);
-        if (creature == null) {
-            creature = (Permanent) game.getLastKnownInformation(creatureId, Zone.BATTLEFIELD);
+        if (creature == null || creature.getZoneChangeCounter() != zoneChangeCounter) {
+            creature = (Permanent) game.getLastKnownInformation(creatureId, Zone.BATTLEFIELD, zoneChangeCounter);
         }
         if (creature != null) {
             int amount = creature.getToughness().getValue();
