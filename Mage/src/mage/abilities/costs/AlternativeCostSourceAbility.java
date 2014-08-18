@@ -29,12 +29,14 @@ package mage.abilities.costs;
 
 import java.util.Iterator;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCost;
+import mage.cards.Card;
+import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -47,6 +49,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
     Costs<AlternativeCost2> alternateCosts = new CostsImpl<>();
     protected Condition condition;
     protected String rule;
+    protected FilterCard filter;
 
     public AlternativeCostSourceAbility(Cost cost) {
         this(cost, null);
@@ -61,11 +64,24 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
     }
 
     public AlternativeCostSourceAbility(Cost cost, Condition condition, String rule) {
+        this(cost, condition, rule, null);
+    }
+
+    public AlternativeCostSourceAbility(Cost cost, Condition condition, String rule, FilterCard filter) {
         super(Zone.ALL, null);
         this.convertToAlternativeCostAndAdd(cost);
         this.setRuleAtTheTop(true);
         this.condition = condition;
         this.rule = rule;
+        this.filter = filter;
+    }
+
+    public AlternativeCostSourceAbility(final AlternativeCostSourceAbility ability) {
+        super(ability);
+        this.alternateCosts = ability.alternateCosts;
+        this.condition = ability.condition;
+        this.rule = ability.rule;
+        this.filter = ability.filter;
     }
 
     @Override
@@ -78,13 +94,6 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
             AlternativeCost2 alternativeCost = new AlternativeCost2Impl(null, null, cost);
             this.alternateCosts.add(alternativeCost);
         }
-    }
-
-    public AlternativeCostSourceAbility(final AlternativeCostSourceAbility ability) {
-        super(ability);
-        this.alternateCosts = ability.alternateCosts;
-        this.condition = ability.condition;
-        this.rule = ability.rule;
     }
 
     @Override
@@ -102,7 +111,13 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
 
     @Override
     public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
+        if (ability != null && AbilityType.SPELL.equals(ability.getAbilityType())) {
+            if (filter != null) {
+                Card card = game.getCard(ability.getSourceId());
+                if (!filter.match(card, ability.getSourceId(), ability.getControllerId(), game)) {
+                    return false;
+                }
+            }
             Player player = game.getPlayer(ability.getControllerId());
             if (player != null) {
                 if (alternateCosts.canPay(ability, ability.getSourceId(), ability.getControllerId(), game) &&

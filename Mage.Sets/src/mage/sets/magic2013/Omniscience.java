@@ -27,22 +27,22 @@
  */
 package mage.sets.magic2013;
 
-import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.keyword.FlashbackAbility;
-import mage.abilities.keyword.RetraceAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.constants.*;
-import mage.game.Game;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
-import mage.players.Player;
-
 import java.util.UUID;
-import mage.util.CardUtil;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.AlternativeCostSourceAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
+import mage.filter.common.FilterNonlandCard;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
@@ -57,7 +57,7 @@ public class Omniscience extends CardImpl {
         this.color.setBlue(true);
 
         // You may cast nonland cards from your hand without paying their mana costs.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OmniscienceEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OmniscienceCastingEffect()));
     }
 
     public Omniscience(final Omniscience card) {
@@ -70,49 +70,90 @@ public class Omniscience extends CardImpl {
     }
 }
 
-class OmniscienceEffect extends CostModificationEffectImpl {
+//class OmniscienceEffect extends CostModificationEffectImpl {
+//
+//    public OmniscienceEffect() {
+//        super(Duration.WhileOnBattlefield, Outcome.PlayForFree, CostModificationType.SET_COST);
+//        this.staticText = "You may cast nonland cards from your hand without paying their mana costs";
+//    }
+//
+//    private OmniscienceEffect(final OmniscienceEffect effect) {
+//        super(effect);
+//    }
+//
+//    @Override
+//    public boolean apply(Game game, Ability source, Ability abilityToModify) {
+//        SpellAbility spellAbility = (SpellAbility) abilityToModify;
+//        spellAbility.getManaCostsToPay().clear();
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean applies(Ability abilityToModify, Ability source, Game game) {
+//        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility) {
+//            Card sourceCard = game.getCard(abilityToModify.getSourceId());
+//            StackObject stackObject = game.getStack().getStackObject(abilityToModify.getSourceId());
+//            if (stackObject != null && stackObject instanceof Spell) {
+//                Zone zone = ((Spell)stackObject).getFromZone();
+//                if (zone != null && zone.equals(Zone.HAND)) {
+//                    if (sourceCard != null && sourceCard.getOwnerId().equals(source.getControllerId())
+//                            && !sourceCard.getCardType().contains(CardType.LAND)) {
+//                        Player player = game.getPlayer(source.getControllerId());
+//                        String message = "Cast " + sourceCard.getName() + " without paying its mana costs?";
+//                        if (player != null &&
+//                                (CardUtil.isCheckPlayableMode(abilityToModify) || player.chooseUse(outcome, message, game))) {
+//                            return true;
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        return false;
+//    }
+//
+//    @Override
+//    public OmniscienceEffect copy() {
+//        return new OmniscienceEffect(this);
+//    }
+//}
 
-    public OmniscienceEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.PlayForFree, CostModificationType.SET_COST);
-        this.staticText = "You may cast nonland cards from your hand without paying their mana costs";
+
+class OmniscienceCastingEffect extends ContinuousEffectImpl {
+
+    static AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(
+            null, null, null, new FilterNonlandCard());
+
+    public OmniscienceCastingEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        staticText = "You may cast nonland cards from your hand without paying their mana costs";
     }
 
-    private OmniscienceEffect(final OmniscienceEffect effect) {
+    public OmniscienceCastingEffect(final OmniscienceCastingEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        spellAbility.getManaCostsToPay().clear();
-        return true;
+    public OmniscienceCastingEffect copy() {
+        return new OmniscienceCastingEffect(this);
     }
 
     @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility) {
-            Card sourceCard = game.getCard(abilityToModify.getSourceId());
-            StackObject stackObject = game.getStack().getStackObject(abilityToModify.getSourceId());
-            if (stackObject != null && stackObject instanceof Spell) {
-                Zone zone = ((Spell)stackObject).getFromZone();
-                if (zone != null && zone.equals(Zone.HAND)) {
-                    if (sourceCard != null && sourceCard.getOwnerId().equals(source.getControllerId())
-                            && !sourceCard.getCardType().contains(CardType.LAND)) {
-                        Player player = game.getPlayer(source.getControllerId());
-                        String message = "Cast " + sourceCard.getName() + " without paying its mana costs?";
-                        if (player != null && 
-                                (CardUtil.isCheckPlayableMode(abilityToModify) || player.chooseUse(outcome, message, game))) {
-                            return true;
-                        }
-                    }
-                }
-            }
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            controller.getAlternativeSourceCosts().add(alternativeCastingCostAbility);
+            return true;
         }
         return false;
     }
 
     @Override
-    public OmniscienceEffect copy() {
-        return new OmniscienceEffect(this);
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
+
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.RulesEffects;
     }
 }
