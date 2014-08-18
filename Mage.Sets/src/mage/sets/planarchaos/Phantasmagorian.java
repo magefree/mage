@@ -106,7 +106,7 @@ class CounterSourceEffect extends OneShotEffect {
         if(spell != null){
             for(UUID uuid : game.getPlayerList()){
                 Player player = game.getPlayer(uuid);
-                if(player.chooseUse(Outcome.Detriment, "Discard tree cards to counter " + spell.getName() + "?", game)){
+                if(player.chooseUse(Outcome.Detriment, "Discard three cards to counter " + spell.getName() + "?", game)){
                     DiscardTargetCost cost = new DiscardTargetCost(new TargetCardInHand(3, 3, new FilterCard()));
                     if(cost.pay(source, game, source.getSourceId(), uuid, false)){
                         game.informPlayers(player.getName() + " discards 3 cards to counter " + spell.getName() + ".");

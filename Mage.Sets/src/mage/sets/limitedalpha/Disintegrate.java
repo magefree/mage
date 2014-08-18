@@ -25,70 +25,69 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.sets.limitedalpha;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TimingRule;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
+import mage.target.common.TargetCreatureOrPlayer;
 import mage.watchers.common.DamagedByWatcher;
 
 /**
  *
- * @author cbt33, North
+ * @author dustinconrad
  */
-public class EngulfingFlames extends CardImpl {
+public class Disintegrate extends CardImpl {
 
-    public EngulfingFlames(UUID ownerId) {
-        super(ownerId, 191, "Engulfing Flames", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "ODY";
+    public Disintegrate(UUID ownerId) {
+        super(ownerId, 141, "Disintegrate", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{X}{R}");
+        this.expansionSetCode = "LEA";
 
         this.color.setRed(true);
 
-        // Engulfing Flames deals 1 damage to target creature. It can't be regenerated this turn.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(1));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new EngulfingFlamesEffect());
-        this.addWatcher(new DamagedByWatcher());
-        // Flashback {3}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{R}"), TimingRule.INSTANT));
+        // Disintegrate deals X damage to target creature or player. That creature can't be regenerated this turn. If the creature would die this turn, exile it instead.
+        this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new DisintegrateCantRegenerateEffect());
+        this.getSpellAbility().addEffect(new DisintegrateExileEffect());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
-    public EngulfingFlames(final EngulfingFlames card) {
+    public Disintegrate(final Disintegrate card) {
         super(card);
     }
 
     @Override
-    public EngulfingFlames copy() {
-        return new EngulfingFlames(this);
+    public Disintegrate copy() {
+        return new Disintegrate(this);
     }
 }
 
-class EngulfingFlamesEffect extends ReplacementEffectImpl {
+class DisintegrateCantRegenerateEffect extends ReplacementEffectImpl {
 
-    public EngulfingFlamesEffect() {
+    public DisintegrateCantRegenerateEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
-        staticText = "It can't be regenerated this turn";
+        staticText = "That creature can't be regenerated this turn";
     }
 
-    public EngulfingFlamesEffect(final EngulfingFlamesEffect effect) {
+    public DisintegrateCantRegenerateEffect(final DisintegrateCantRegenerateEffect effect) {
         super(effect);
     }
 
     @Override
-    public EngulfingFlamesEffect copy() {
-        return new EngulfingFlamesEffect(this);
+    public DisintegrateCantRegenerateEffect copy() {
+        return new DisintegrateCantRegenerateEffect(this);
     }
 
     @Override
@@ -112,4 +111,45 @@ class EngulfingFlamesEffect extends ReplacementEffectImpl {
         return false;
     }
 }
-    
+
+class DisintegrateExileEffect extends ReplacementEffectImpl {
+
+    public DisintegrateExileEffect() {
+        super(Duration.EndOfTurn, Outcome.Exile);
+        staticText = "If the creature would die this turn, exile it instead";
+    }
+
+    public DisintegrateExileEffect(final DisintegrateExileEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public DisintegrateExileEffect copy() {
+        return new DisintegrateExileEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Permanent permanent = ((ZoneChangeEvent) event).getTarget();
+        if (permanent != null) {
+            return permanent.moveToExile(null, "", source.getSourceId(), game);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (GameEvent.EventType.ZONE_CHANGE.equals(event.getType()) && ((ZoneChangeEvent) event).isDiesEvent()) {
+            UUID targetId = getTargetPointer().getFirst(game, source);
+            if (targetId != null) {
+                return targetId.equals(event.getTargetId());
+            }
+        }
+        return false;
+    }
+}
