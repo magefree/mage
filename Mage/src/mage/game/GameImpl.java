@@ -1034,8 +1034,9 @@ public abstract class GameImpl implements Game, Serializable {
                 Player player;
                 while (!isPaused() && !gameOver(null)) {
                     try {
-                        //if (bookmark == 0)
-                            //bookmark = bookmarkState();
+                        if (bookmark == 0) {
+                            bookmark = bookmarkState();
+                        }
                         player = getPlayer(state.getPlayerList().get());
                         state.setPriorityPlayerId(player.getId());
                         while (!player.isPassed() && player.isInGame() && !isPaused() && !gameOver(null)) {
@@ -1073,7 +1074,6 @@ public abstract class GameImpl implements Game, Serializable {
                                 resetShortLivingLKI();
                                 break;
                             } else {
-                                //removeBookmark(bookmark);
                                 resetLKI();
                                 return;
                             }
@@ -1083,20 +1083,19 @@ public abstract class GameImpl implements Game, Serializable {
                         logger.fatal("Game exception ", ex);
                         ex.printStackTrace();
                         this.fireErrorEvent("Game exception occurred: ", ex);
-                        //restoreState(bookmark);
+                        restoreState(bookmark);
                         bookmark = 0;
                         continue;
                     }
                     state.getPlayerList().getNext();
                 }
-                //removeBookmark(bookmark);
-                bookmark = 0;
             }
         } catch (Exception ex) {
             logger.fatal("Game exception ", ex);
             this.fireErrorEvent("Game exception occurred: ", ex);
         } finally {
             resetLKI();
+            clearAllBookmarks();
         }
     }
 
