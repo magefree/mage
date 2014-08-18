@@ -28,6 +28,7 @@
 package mage.sets.vintagemasters;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -94,10 +95,11 @@ class ChaosWarpShuffleIntoLibraryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        Player owner = game.getPlayer(permanent.getOwnerId());
-        if (permanent != null && owner != null) {
-            if (owner.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, true, true)) {
+        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));        
+        if (permanent != null) {
+            Player owner = game.getPlayer(permanent.getOwnerId());            
+            if (owner != null) {
+                owner.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, true, true);
                 owner.shuffleLibrary(game);
                 return true;
             }
@@ -125,24 +127,26 @@ public ChaosWarpRevealEffect() {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
+        if (permanent == null) {
+            return false;
+        }
         Player owner = game.getPlayer(permanent.getOwnerId());
-        if (owner == null) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (owner == null || sourceObject == null) {
             return false;
         }
 
         if (owner.getLibrary().size() > 0) {
             Card card = owner.getLibrary().getFromTop(game);
-            Cards cards = new CardsImpl();
-            cards.add(card);
-            owner.revealCards(card.getName(), cards, game);
-
             if (card != null) {
+                Cards cards = new CardsImpl();
+                cards.add(card);
+                owner.revealCards(sourceObject.getLogName(), cards, game);
             	if (new FilterPermanentCard().match(card, game)) {
-                    card = owner.getLibrary().removeFromTop(game);
-                    card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), owner.getId());
+                    owner.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
                 }
             }
         }
-        return false;
+        return true;
     }
 }
