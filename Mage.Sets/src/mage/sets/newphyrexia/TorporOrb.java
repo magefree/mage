@@ -27,17 +27,21 @@
  */
 package mage.sets.newphyrexia;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.cards.CardImpl;
-import mage.constants.*;
+import mage.constants.AbilityType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -78,7 +82,7 @@ class TorporOrbEffect extends ContinuousRuleModifiyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Ability ability = (Ability) getValue("targetAbility");
-            if (ability != null && ability instanceof TriggeredAbility) {
+            if (ability != null && AbilityType.TRIGGERED.equals(ability.getAbilityType())) {
                 Permanent p = game.getPermanent(event.getTargetId());
                 if (p != null && p.getCardType().contains(CardType.CREATURE)) {
                     return true;

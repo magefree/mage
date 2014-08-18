@@ -601,7 +601,7 @@ public class ContinuousEffects implements Serializable {
      * @param event
      * @param targetAbility ability the event is attached to. can be null.
      * @param game
-     * @param checkPlayableMode true if the event does not really happen but it#s checked if the event would be replaced
+     * @param checkPlayableMode true if the event does not really happen but it's checked if the event would be replaced
      * @return 
      */
     public boolean preventedByRuleModification(GameEvent event, Ability targetAbility, Game game, boolean checkPlayableMode) {
