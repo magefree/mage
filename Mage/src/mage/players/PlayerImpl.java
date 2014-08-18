@@ -1929,7 +1929,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 for (Card card : hand.getUniqueCards(game)) {
                     for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {
                         if (ability instanceof PlayLandAbility) {
-                            if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(), ability.getSourceId(), playerId), game, true)) {
+                            if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(), ability.getSourceId(), playerId), ability, game, true)) {
                                 break;
                             }
                         }
@@ -2029,7 +2029,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 for (Card card : hand.getCards(game)) {
                     for (ActivatedAbility ability : card.getAbilities().getPlayableAbilities(Zone.HAND)) {
                         if (ability instanceof PlayLandAbility) {
-                            if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(), ability.getSourceId(), playerId), game, true)) {
+                            if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(), ability.getSourceId(), playerId), ability, game, true)) {
                                 break;
                             }
                         }

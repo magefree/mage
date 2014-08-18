@@ -31,22 +31,18 @@ package mage.player.ai;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.*;
+import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
-import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.abilities.keyword.EquipAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.*;
 import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
-import mage.cards.repository.CardCriteria;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
+import mage.cards.repository.*;
 import mage.choices.Choice;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
@@ -77,15 +73,8 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.lang.String;
 import java.util.*;
-import java.util.HashSet;
 import java.util.Map.Entry;
-import mage.abilities.costs.VariableCost;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.FlashAbility;
-import mage.cards.repository.ExpansionInfo;
-import mage.cards.repository.ExpansionRepository;
 
 
 /**
@@ -835,7 +824,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         Set<Card> lands = new LinkedHashSet<>();
         for (Card landCard:  hand.getCards(new FilterLandCard(), game)) {
             // remove lands that can not be played
-            if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, landCard.getId(), landCard.getId(), playerId), game, true)) {
+            if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, landCard.getId(), landCard.getId(), playerId), null, game, true)) {
                 break;
             }
             lands.add(landCard);
@@ -903,7 +892,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     if (mana.enough(avail)) {
                         SpellAbility ability = card.getSpellAbility();
                         if (ability != null && ability.canActivate(playerId, game) &&
-                                game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getSourceId(), ability.getSourceId(), playerId), game, true)) {
+                                game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getSourceId(), ability.getSourceId(), playerId), ability, game, true)) {
                             if (card.getCardType().contains(CardType.INSTANT)
                                     || card.hasAbility(FlashAbility.getInstance().getId(), game)) {
                                 playableInstant.add(card);

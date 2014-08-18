@@ -753,7 +753,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             }
             // needed to get the correct possible targets if target rule modification effects are active
             // e.g. Fiendslayer Paladin tried to target with Ultimate Price
-            if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(EventType.TARGET, this.getId(), source.getId(), sourceControllerId), game, true)) {
+            if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(EventType.TARGET, this.getId(), source.getId(), sourceControllerId), null, game, true)) {
                 return false;
             }
         }

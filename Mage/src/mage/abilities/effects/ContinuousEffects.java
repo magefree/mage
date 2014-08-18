@@ -596,21 +596,23 @@ public class ContinuousEffects implements Serializable {
     }
 
     /**
-     * Checks if an event wont't happen because of an rule modifying effect
+     * Checks if an event won't happen because of an rule modifying effect
      * 
      * @param event
+     * @param targetAbility ability the event is attached to. can be null.
      * @param game
      * @param checkPlayableMode true if the event does not really happen but it#s checked if the event would be replaced
      * @return 
      */
-    public boolean preventedByRuleModification(GameEvent event, Game game, boolean checkPlayableMode) {
+    public boolean preventedByRuleModification(GameEvent event, Ability targetAbility, Game game, boolean checkPlayableMode) {
        for (ContinuousRuleModifiyingEffect effect: continuousRuleModifyingEffects) {
-            for (Ability ability : continuousRuleModifyingEffects.getAbility(effect.getId())) {
-                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, false)) {
+            for (Ability sourceAbility : continuousRuleModifyingEffects.getAbility(effect.getId())) {
+                if (!(sourceAbility instanceof StaticAbility) || sourceAbility.isInUseableZone(game, null, false)) {
                     if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
-                        if (effect.applies(event, ability, game)) {
+                        effect.setValue("targetAbility", targetAbility);
+                        if (effect.applies(event, sourceAbility, game)) {
                             if (!checkPlayableMode) {
-                                String message = effect.getInfoMessage(ability, event, game);
+                                String message = effect.getInfoMessage(sourceAbility, event, game);
                                 if (message != null && !message.isEmpty()) {
                                     if (effect.sendMessageToUser()) {
                                         Player player = game.getPlayer(event.getPlayerId());

@@ -28,25 +28,8 @@
 
 package mage.game;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageObject;
-import mage.abilities.Abilities;
-import mage.abilities.AbilitiesImpl;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.DelayedTriggeredAbilities;
-import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.Mode;
-import mage.abilities.SpecialActions;
-import mage.abilities.StaticAbility;
-import mage.abilities.TriggeredAbilities;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.*;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
@@ -72,6 +55,9 @@ import mage.target.Target;
 import mage.util.Copyable;
 import mage.watchers.Watcher;
 import mage.watchers.Watchers;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
 *
@@ -537,7 +523,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public boolean replaceEvent(GameEvent event, Game game) {
-        if (effects.preventedByRuleModification(event, game, false)) {
+        if (effects.preventedByRuleModification(event, null, game, false)) {
             return true;
         }
         return effects.replaceEvent(event, game);
