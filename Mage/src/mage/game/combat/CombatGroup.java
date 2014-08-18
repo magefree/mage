@@ -306,8 +306,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     defenderDamage(attacker, damage, game);
                 } else {
                     // Assign the damge left to first blocker
-                    int alreadyAssigned = assigned.get(blockerOrder.get(0));
-                    assigned.replace(blockerOrder.get(0), damage + alreadyAssigned);
+                    assigned.put(blockerOrder.get(0), assigned.get(blockerOrder.get(0)) + damage);
                 }
             }
             for (UUID blockerId: blockerOrder) {
