@@ -27,15 +27,15 @@
  */
 package mage.sets.conflux;
 
-import java.util.UUID;
 import mage.ConditionalMana;
-import mage.Mana;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
-import mage.abilities.mana.conditional.CreatureCastManaCondition;
+import mage.abilities.mana.conditional.CreatureCastConditionalMana;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+
+import java.util.UUID;
 
 /**
  *
@@ -65,7 +65,7 @@ public class AncientZiggurat extends CardImpl {
 class AncientZigguratManaBuilder extends ConditionalManaBuilder {
     @Override
     public ConditionalMana build(Object... options) {
-        return new AncientZigguratConditionalMana(this.mana);
+        return new CreatureCastConditionalMana(this.mana);
     }
 
     @Override
@@ -74,12 +74,4 @@ class AncientZigguratManaBuilder extends ConditionalManaBuilder {
     }
 }
 
-class AncientZigguratConditionalMana extends ConditionalMana {
-
-    public AncientZigguratConditionalMana(Mana mana) {
-        super(mana);
-        staticText = "Spend this mana only to cast a creature spell";
-        addCondition(new CreatureCastManaCondition());
-    }
-}
 
