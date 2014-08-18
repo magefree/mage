@@ -34,7 +34,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.game.Game;
 import mage.players.Player;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -42,11 +41,8 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterPermanentCard;
 
 /**
  *
@@ -66,7 +62,7 @@ public class ChaosWarp extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent());
         //then reveals the top card of his or her library. 
         //If it's a permanent card, he or she puts it onto the battlefield.
-        this.getSpellAbility().addEffect(new ChaosWarpRevealEffect())
+        this.getSpellAbility().addEffect(new ChaosWarpRevealEffect());
         
     }
 
@@ -101,7 +97,7 @@ class ChaosWarpShuffleIntoLibraryEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         Player owner = game.getPlayer(permanent.getOwnerId());
         if (permanent != null && owner != null) {
-            if (owner.moveCardToLibrary(permanent, source.getSourceID(), game, Zone.Battlefield, true, true) {
+            if (owner.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, true, true)) {
                 owner.shuffleLibrary(game);
                 return true;
             }
@@ -114,7 +110,7 @@ class ChaosWarpRevealEffect extends OneShotEffect {
 	   
 public ChaosWarpRevealEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "That player reveals the top card of his or her library. If it's a permanent card, he or she puts it onto the battlefield.";
+        this.staticText = "then reveals the top card of his or her library. If it's a permanent card, he or she puts it onto the battlefield.";
     }
 
     public ChaosWarpRevealEffect(final ChaosWarpRevealEffect effect) {
@@ -128,21 +124,22 @@ public ChaosWarpRevealEffect() {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Permanent permanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
+        Player owner = game.getPlayer(permanent.getOwnerId());
+        if (owner == null) {
             return false;
         }
 
-        if (player.getLibrary().size() > 0) {
-            Card card = player.getLibrary().getFromTop(game);
+        if (owner.getLibrary().size() > 0) {
+            Card card = owner.getLibrary().getFromTop(game);
             Cards cards = new CardsImpl();
             cards.add(card);
-            player.revealCards("Chaos Warp", cards, game);
+            owner.revealCards(card.getName(), cards, game);
 
             if (card != null) {
-            	if (card.FilterPermanentCard.match()) {
-                    card = player.getLibrary().removeFromTop(game);
-                    card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), source.getControllerId());
+            	if (new FilterPermanentCard().match(card, game)) {
+                    card = owner.getLibrary().removeFromTop(game);
+                    card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), owner.getId());
                 }
             }
         }

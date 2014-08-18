@@ -101,7 +101,7 @@ class CausticWaspsTriggeredAbility extends TriggeredAbilityImpl {
             if (player != null) {
                 FilterPermanent filter = new FilterPermanent("an artifact controlled by " + player.getName());
                 filter.add(Predicates.or(
-                    new CardTypePredicate(CardType.ARTIFACT),
+                    new CardTypePredicate(CardType.ARTIFACT)));
                 filter.add(new ControllerIdPredicate(event.getTargetId()));
 
                 this.getTargets().clear();
