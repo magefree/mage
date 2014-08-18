@@ -42,7 +42,10 @@ import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterCreatureForCombat;
 import mage.filter.common.FilterCreatureForCombatBlock;
 import mage.filter.common.FilterPlaneswalkerPermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.permanent.AttackingPredicate;
+import mage.filter.predicate.permanent.BlockingPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
@@ -59,9 +62,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.AttackingPredicate;
-import mage.filter.predicate.permanent.BlockingPredicate;
 
 /**
  *
@@ -244,6 +244,21 @@ public class TestPlayer extends ComputerPlayer {
             }
         }
         return super.choose(outcome, choice, game);
+    }
+
+    @Override
+    public int chooseEffect(List<String> rEffects, Game game) {
+        if (!choices.isEmpty()) {
+            for (String choice: choices) {
+                for (int index = 0; index < rEffects.size(); index++) {
+                    if (choice.equals(rEffects.get(index))) {
+                        choices.remove(choice);
+                        return index;
+                    }
+                }
+            }
+        }
+        return super.chooseEffect(rEffects, game);
     }
 
     @Override
