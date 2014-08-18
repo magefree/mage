@@ -99,4 +99,30 @@ public class OmniscienceTest extends CardTestPlayerBase {
         assertTapped("Mountain", false);
     }
 
+    @Test
+    public void testCastingShrapnelBlast() {
+        addCard(Zone.BATTLEFIELD, playerA, "Omniscience");
+
+        /* player.getPlayable does not take alternate
+           casting costs in account, so for the test the mana has to be available
+           but won't be used
+        */
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Ornithopter", 1);
+
+        addCard(Zone.HAND, playerA, "Shrapnel Blast", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shrapnel Blast");
+        setChoice(playerA, "Yes");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 15);
+
+        assertGraveyardCount(playerA, "Ornithopter", 1);
+        assertTapped("Mountain", false);
+    }
+
 }
