@@ -692,7 +692,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
         UUID opponentId = game.getOpponents(playerId).iterator().next();
         if (target instanceof TargetCreatureOrPlayerAmount) {
-            if (game.getPlayer(opponentId).getLife() <= target.getAmountRemaining()) {
+            if (outcome.equals(Outcome.Damage) && game.getPlayer(opponentId).getLife() <= target.getAmountRemaining()) {
                 target.addTarget(opponentId, target.getAmountRemaining(), source, game);
                 return true;
             }
@@ -710,6 +710,17 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                         return true;
                     }
                 }
+            }
+            if (outcome.isGood() && target.canTarget(playerId, playerId, source, game)) {
+                target.addTarget(opponentId, target.getAmountRemaining(), source, game);
+                return true;
+            } else if (target.canTarget(playerId, opponentId, source, game)){
+                // no permanent target so take opponent
+                target.addTarget(opponentId, target.getAmountRemaining(), source, game);
+                return true;
+            } else if (target.canTarget(playerId, playerId, source, game)) {
+                target.addTarget(opponentId, target.getAmountRemaining(), source, game);
+                return true;
             }
         }
         return false;
