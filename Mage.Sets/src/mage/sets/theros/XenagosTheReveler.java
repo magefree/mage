@@ -200,17 +200,16 @@ class XenagosExileEffect extends OneShotEffect {
             FilterCard filter = new FilterCard("creature and/or land cards to put onto the battlefield");
             filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE),
                                      new CardTypePredicate(CardType.LAND)));
-
-            TargetCard target1 = new TargetCard(Zone.EXILED, filter);
-            while (cards.size() > 0
+            TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.EXILED, filter);
+            if (cards.size() > 0
                     && target1.canChoose(source.getSourceId(), source.getControllerId(), game)
                     && player.choose(Outcome.PutCardInPlay, cards, target1, game)) {
-                Card card = cards.get(target1.getFirstTarget(), game);
-                if (card != null) {
-                    cards.remove(card);
-                    card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), source.getControllerId());
+                for (UUID targetId: target1.getTargets()) {
+                    Card card = cards.get(targetId, game);
+                    if (card != null) {
+                        player.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
+                    }
                 }
-                target1.clearChosen();
             }
             return true;
         }
