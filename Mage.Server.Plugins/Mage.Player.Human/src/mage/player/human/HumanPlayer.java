@@ -338,11 +338,8 @@ public class HumanPlayer extends PlayerImpl {
                 options = new HashMap<>(1);
             }
 
-            if (target.getTargets().size() > 0) {
-                List<UUID> chosen = (List<UUID>)target.getTargets();
-                options.put("chosen", (Serializable)chosen);
-            }
-
+            List<UUID> chosen = target.getTargets();
+            options.put("chosen", (Serializable)chosen);
             List<UUID> choosable = new ArrayList<>();
             for (UUID cardId : cards) {
                 if (target.canTarget(cardId, cards, game)) {
@@ -356,9 +353,13 @@ public class HumanPlayer extends PlayerImpl {
             waitForResponse(game);
             if (response.getUUID() != null) {
                 if (target.canTarget(response.getUUID(), cards, game)) {
-                    target.add(response.getUUID(), game);
-                    if(target.doneChosing()){
-                        return true;
+                    if (target.getTargets().contains(response.getUUID())) { // if already included remove it with 
+                        target.remove(response.getUUID());
+                    } else {
+                        target.add(response.getUUID(), game);
+                        if (target.doneChosing()) {
+                            return true;
+                        }
                     }
                 }
             } else {

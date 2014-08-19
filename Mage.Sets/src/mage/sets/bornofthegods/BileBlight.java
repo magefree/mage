@@ -29,14 +29,11 @@ package mage.sets.bornofthegods;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -68,20 +65,11 @@ public class BileBlight extends CardImpl {
     }
 }
 
-class BileBlightEffect extends ContinuousEffectImpl {
+class BileBlightEffect extends BoostAllEffect {
 
     public BileBlightEffect() {
-        super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.UnboostCreature);
+        super(-3, -3, Duration.EndOfTurn);
         staticText = "Target creature and all creatures with the same name as that creature get -3/-3 until end of turn";
-    }
-
-    public BileBlightEffect(final BileBlightEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BileBlightEffect copy() {
-        return new BileBlightEffect(this);
     }
 
     @Override
@@ -89,6 +77,7 @@ class BileBlightEffect extends ContinuousEffectImpl {
         super.init(source, game);
 
         if (this.affectedObjectsSet) {
+            this.objects.clear();
             UUID permanentId = targetPointer.getFirst(game, source);
             Permanent target = game.getPermanent(permanentId);
             if (target != null) {
@@ -100,16 +89,5 @@ class BileBlightEffect extends ContinuousEffectImpl {
                 }
             }
         }
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
-                perm.addPower(-3);
-                perm.addToughness(-3);
-            }
-        }
-        return true;
     }
 }
