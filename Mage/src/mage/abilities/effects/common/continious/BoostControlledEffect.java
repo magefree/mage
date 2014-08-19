@@ -28,9 +28,7 @@
 
 package mage.abilities.effects.common.continious;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.UUID;
 import mage.constants.Duration;
 import mage.constants.Layer;

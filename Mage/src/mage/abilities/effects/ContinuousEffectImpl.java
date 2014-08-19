@@ -137,7 +137,9 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     public void init(Ability source, Game game) {
         targetPointer.init(game, source);
         //20100716 - 611.2c
-        if (AbilityType.ACTIVATED.equals(source.getAbilityType())  || AbilityType.TRIGGERED.equals(source.getAbilityType())) {
+        if (AbilityType.ACTIVATED.equals(source.getAbilityType())  
+                || AbilityType.SPELL.equals(source.getAbilityType())
+                || AbilityType.TRIGGERED.equals(source.getAbilityType())) {
             if (layer != null) {
                 switch (layer) {
                     case CopyEffects_1:
