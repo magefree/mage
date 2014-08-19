@@ -70,58 +70,10 @@ public class Omniscience extends CardImpl {
     }
 }
 
-//class OmniscienceEffect extends CostModificationEffectImpl {
-//
-//    public OmniscienceEffect() {
-//        super(Duration.WhileOnBattlefield, Outcome.PlayForFree, CostModificationType.SET_COST);
-//        this.staticText = "You may cast nonland cards from your hand without paying their mana costs";
-//    }
-//
-//    private OmniscienceEffect(final OmniscienceEffect effect) {
-//        super(effect);
-//    }
-//
-//    @Override
-//    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-//        SpellAbility spellAbility = (SpellAbility) abilityToModify;
-//        spellAbility.getManaCostsToPay().clear();
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-//        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility) {
-//            Card sourceCard = game.getCard(abilityToModify.getSourceId());
-//            StackObject stackObject = game.getStack().getStackObject(abilityToModify.getSourceId());
-//            if (stackObject != null && stackObject instanceof Spell) {
-//                Zone zone = ((Spell)stackObject).getFromZone();
-//                if (zone != null && zone.equals(Zone.HAND)) {
-//                    if (sourceCard != null && sourceCard.getOwnerId().equals(source.getControllerId())
-//                            && !sourceCard.getCardType().contains(CardType.LAND)) {
-//                        Player player = game.getPlayer(source.getControllerId());
-//                        String message = "Cast " + sourceCard.getName() + " without paying its mana costs?";
-//                        if (player != null &&
-//                                (CardUtil.isCheckPlayableMode(abilityToModify) || player.chooseUse(outcome, message, game))) {
-//                            return true;
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        return false;
-//    }
-//
-//    @Override
-//    public OmniscienceEffect copy() {
-//        return new OmniscienceEffect(this);
-//    }
-//}
-
-
 class OmniscienceCastingEffect extends ContinuousEffectImpl {
 
     static AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(
-            null, null, null, new FilterNonlandCard());
+            null, null, null, new FilterNonlandCard(), true);
 
     public OmniscienceCastingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

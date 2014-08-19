@@ -50,6 +50,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
     protected Condition condition;
     protected String rule;
     protected FilterCard filter;
+    protected boolean onlyMana;
 
     public AlternativeCostSourceAbility(Cost cost) {
         this(cost, null);
@@ -64,16 +65,25 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
     }
 
     public AlternativeCostSourceAbility(Cost cost, Condition condition, String rule) {
-        this(cost, condition, rule, null);
+        this(cost, condition, rule, null, true);
     }
 
-    public AlternativeCostSourceAbility(Cost cost, Condition condition, String rule, FilterCard filter) {
+    /**
+     * 
+     * @param cost alternate cost to pay
+     * @param condition only if the condition is true it's possible to use the alternate costs
+     * @param rule if set used as rule text
+     * @param filter filters the cards this alternate cost can be applied to
+     * @param onlyMana if true only the mana costs are replaced by this costs, other costs stay untouched 
+     */
+    public AlternativeCostSourceAbility(Cost cost, Condition condition, String rule, FilterCard filter, boolean onlyMana) {
         super(Zone.ALL, null);
         this.convertToAlternativeCostAndAdd(cost);
         this.setRuleAtTheTop(true);
         this.condition = condition;
         this.rule = rule;
         this.filter = filter;
+        this.onlyMana = onlyMana;
     }
 
     public AlternativeCostSourceAbility(final AlternativeCostSourceAbility ability) {
@@ -82,6 +92,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
         this.condition = ability.condition;
         this.rule = ability.rule;
         this.filter = ability.filter;
+        this.onlyMana = ability.onlyMana;
     }
 
     @Override
@@ -123,7 +134,9 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
                 if (alternateCosts.canPay(ability, ability.getSourceId(), ability.getControllerId(), game) &&
                         player.chooseUse(Outcome.Detriment, alternateCosts.isEmpty() ? "Cast without paying its mana cost?":"Pay alternative costs? (" + alternateCosts.getText() +")", game)) {
                     ability.getManaCostsToPay().clear();
-                    ability.getCosts().clear();
+                    if(!onlyMana) {
+                        ability.getCosts().clear();
+                    }
                     for (Cost cost : alternateCosts) {
                         AlternativeCost2 alternateCost = (AlternativeCost2) cost;
                         alternateCost.activate();
