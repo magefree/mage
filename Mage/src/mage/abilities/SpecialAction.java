@@ -38,7 +38,11 @@ import mage.constants.Zone;
 public abstract class SpecialAction extends ActivatedAbilityImpl {
 
     public SpecialAction() {
-        super(AbilityType.SPECIAL_ACTION, Zone.ALL);
+        this(Zone.ALL);
+    }
+
+    public SpecialAction(Zone zone) {
+        super(AbilityType.SPECIAL_ACTION, zone);
         this.usesStack = false;
     }
 

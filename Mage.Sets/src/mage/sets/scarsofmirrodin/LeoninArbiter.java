@@ -27,30 +27,28 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import java.util.*;
+
+import mage.abilities.SpecialAction;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.*;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.players.Player;
+import mage.game.permanent.Permanent;
 
 /**
  *
- * @author maurer.it_at_gmail.com
+ * @author maurer.it_at_gmail.com, dustinconrad
  */
 public class LeoninArbiter extends CardImpl {
+
+    private static final String keyString = "_ignoreEffectForTurn";
 
     public LeoninArbiter(UUID ownerId) {
         super(ownerId, 14, "Leonin Arbiter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -62,8 +60,10 @@ public class LeoninArbiter extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Players can't search libraries. Any player may pay {2} for that player to ignore this effect until end of turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeoninArbiterReplacementEffect()));
+        // Players can't search libraries.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeoninArbiterCantSearchEffect(keyString)));
+        //  Any player may pay {2} for that player to ignore this effect until end of turn.
+        this.addAbility(new LeoninArbiterSpecialAction(keyString));
     }
 
     public LeoninArbiter(final LeoninArbiter card) {
@@ -76,61 +76,103 @@ public class LeoninArbiter extends CardImpl {
     }
 }
 
-class LeoninArbiterReplacementEffect extends ReplacementEffectImpl {
+class LeoninArbiterSpecialAction extends SpecialAction {
 
-    private static final String effectText = "Players can't search libraries. Any player may pay {2} for that player to ignore this effect until end of turn";
-    private final List<UUID> paidPlayers = new ArrayList<>();
-
-    LeoninArbiterReplacementEffect ( ) {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        staticText = effectText;
+    public LeoninArbiterSpecialAction(final String keyString) {
+        super(Zone.BATTLEFIELD);
+        this.addCost(new ManaCostsImpl("{2}"));
+        this.addEffect(new LeoninArbiterIgnoreEffect(keyString));
+        this.setMayActivate(TargetController.ANY);
     }
 
-    LeoninArbiterReplacementEffect ( LeoninArbiterReplacementEffect effect ) {
+    public LeoninArbiterSpecialAction(final LeoninArbiterSpecialAction ability) {
+        super(ability);
+    }
+
+    @Override
+    public LeoninArbiterSpecialAction copy() {
+        return new LeoninArbiterSpecialAction(this);
+    }
+}
+
+class LeoninArbiterIgnoreEffect extends OneShotEffect {
+
+    private final String keyString;
+
+    public LeoninArbiterIgnoreEffect(final String keyString) {
+        super(Outcome.Benefit);
+        this.keyString = keyString;
+        this.staticText = "Any player may pay {2} for that player to ignore this effect until end of turn";
+    }
+
+    public LeoninArbiterIgnoreEffect(final LeoninArbiterIgnoreEffect effect) {
         super(effect);
-        this.paidPlayers.addAll(effect.paidPlayers);
+        this.keyString = effect.keyString;
+    }
+
+    @Override
+    public LeoninArbiterIgnoreEffect copy() {
+        return new LeoninArbiterIgnoreEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        throw new UnsupportedOperationException("Not supported.");
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        String key = permanent.getId() + keyString;
+
+        // Using a Map.Entry since there is no pair class
+        long zoneChangeCount = permanent.getZoneChangeCounter();
+        long turnNum = game.getTurnNum();
+        Long activationState =  zoneChangeCount << 32 | turnNum & 0xFFFFFFFFL;
+
+        Map.Entry<Long, Set<UUID>> turnIgnoringPlayersPair = (Map.Entry<Long, Set<UUID>>) game.getState().getValue(key);
+        if (turnIgnoringPlayersPair == null || !activationState.equals(turnIgnoringPlayersPair.getKey())) {
+            turnIgnoringPlayersPair = new AbstractMap.SimpleImmutableEntry<Long, Set<UUID>>(activationState, new HashSet<UUID>());
+            game.getState().setValue(key, turnIgnoringPlayersPair);
+        }
+
+        turnIgnoringPlayersPair.getValue().add(game.getActivePlayerId());
+        return true;
+    }
+}
+
+class LeoninArbiterCantSearchEffect extends ContinuousRuleModifiyingEffectImpl {
+
+    private final String keyString;
+
+    public LeoninArbiterCantSearchEffect(final String keyString) {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        this.staticText = "Players can't search libraries.";
+        this.keyString = keyString;
     }
 
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if ( event.getType() == EventType.SEARCH_LIBRARY && !paidPlayers.contains(event.getPlayerId()) ) {
-            Player player = game.getPlayer(event.getPlayerId());
-
-            if ( player != null ) {
-                ManaCostsImpl arbiterTax = new ManaCostsImpl("{2}");
-                if ( arbiterTax.canPay(source, source.getSourceId(), event.getPlayerId(), game) &&
-                     player.chooseUse(Outcome.Neutral, "Pay {2} to search your library?", game) )
-                {
-                    if (arbiterTax.payOrRollback(source, game, source.getSourceId(), event.getPlayerId()) ) {
-                        paidPlayers.add(event.getPlayerId());
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
+    public LeoninArbiterCantSearchEffect(LeoninArbiterCantSearchEffect effect) {
+        super(effect);
+        this.keyString = effect.keyString;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if ( event.getType() == EventType.SEARCH_LIBRARY ) {
-            return true;
+        boolean applies = false;
+        if (EventType.SEARCH_LIBRARY.equals(event.getType())) {
+            applies = true;
+            Permanent permanent = game.getPermanent(source.getSourceId());
+            String key = permanent.getId() + keyString;
+            Map.Entry<Long, Set<UUID>> turnIgnoringPlayersPair = (Map.Entry<Long, Set<UUID>>) game.getState().getValue(key);
+            if (turnIgnoringPlayersPair != null) {
+                long zoneChangeCount = permanent.getZoneChangeCounter();
+                long turnNum = game.getTurnNum();
+                Long activationState =  zoneChangeCount << 32 | turnNum & 0xFFFFFFFFL;
+                if (activationState.equals(turnIgnoringPlayersPair.getKey())) {
+                    applies = !turnIgnoringPlayersPair.getValue().contains(event.getPlayerId());
+                }
+            }
         }
-        if ( event.getType() == EventType.END_PHASE_POST) {
-            this.paidPlayers.clear();
-        }
-        return false;
+        return applies;
     }
 
     @Override
-    public LeoninArbiterReplacementEffect copy() {
-        return new LeoninArbiterReplacementEffect(this);
+    public LeoninArbiterCantSearchEffect copy() {
+        return new LeoninArbiterCantSearchEffect(this);
     }
-
 }
