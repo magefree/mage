@@ -111,7 +111,7 @@ public class TestOfFaithTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Soulmender", 1);
         assertPowerToughness(playerA, "Soulmender", 2, 2); // one damage was prevented so Soulmender got +1/+1
         assertPermanentCount(playerA, "Elvish Mystic", 1);
-        assertPowerToughness(playerA, "Elvish Mystic", 2, 2); // two damage were prevented so Elvish Mystic got +2/+2
+        assertPowerToughness(playerA, "Elvish Mystic", 3, 3); // two damage were prevented so Elvish Mystic got +2/+2
 
         assertPermanentCount(playerB, "Kalonian Tusker", 1); // only 2 damage to Kalonian Tusker so he still lives
     }
