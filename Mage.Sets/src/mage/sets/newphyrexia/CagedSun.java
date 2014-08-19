@@ -169,10 +169,7 @@ class CagedSunTriggeredAbility extends TriggeredManaAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.MANA_ADDED && event.getPlayerId().equals(controllerId)) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent == null) {
-                permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            }
+            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
             if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
                 ObjectColor color = (ObjectColor) game.getState().getValue(this.sourceId + "_color");
                 if (color != null && event.getData().contains(color.toString())) {
