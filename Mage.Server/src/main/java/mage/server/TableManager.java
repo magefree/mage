@@ -65,7 +65,7 @@ public class TableManager {
 
     private static final TableManager INSTANCE = new TableManager();
     private static final Logger logger = Logger.getLogger(TableManager.class);
-    private static final DateFormat formatter = new SimpleDateFormat("hh:mm:ss");
+    private static final DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
     
     private final ConcurrentHashMap<UUID, TableController> controllers = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<>();
