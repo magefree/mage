@@ -95,6 +95,12 @@ public class DiscardTargetCost extends CostImpl {
     }
 
     @Override
+    public void clearPaid() {
+        super.clearPaid(); 
+        cards.clear();
+    }
+
+    @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         return targets.canChoose(sourceId, controllerId, game);
     }

@@ -25,13 +25,13 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect {
 
     public SacrificeSourceUnlessPaysEffect(final SacrificeSourceUnlessPaysEffect effect) {
         super(effect);
-        this.cost = effect.cost;
+        this.cost = effect.cost.copy();
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (player != null && permanent != null) { 
             StringBuilder sb = new StringBuilder(cost.getText()).append("?");
             if (!sb.toString().toLowerCase().startsWith("exile ") && !sb.toString().toLowerCase().startsWith("return ") ) {
