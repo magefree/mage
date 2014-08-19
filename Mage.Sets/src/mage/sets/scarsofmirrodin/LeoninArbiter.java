@@ -131,7 +131,7 @@ class LeoninArbiterIgnoreEffect extends OneShotEffect {
             game.getState().setValue(key, turnIgnoringPlayersPair);
         }
 
-        turnIgnoringPlayersPair.getValue().add(game.getActivePlayerId());
+        turnIgnoringPlayersPair.getValue().add(game.getPriorityPlayerId());
         return true;
     }
 }
