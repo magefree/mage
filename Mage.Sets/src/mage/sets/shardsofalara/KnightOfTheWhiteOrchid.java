@@ -30,18 +30,16 @@ package mage.sets.shardsofalara;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.ZoneChangeTriggeredAbility;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.common.OpponentControllsMoreCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterBySubtypeCard;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -59,8 +57,15 @@ public class KnightOfTheWhiteOrchid extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new KnightOfTheWhiteOrchidAbility());
+        // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
+        
+        // When Knight of the White Orchid enters the battlefield, if an opponent controls more lands than you, you may search your library for a Plains card, put it onto the battlefield, then shuffle your library.
+        this.addAbility(new ConditionalTriggeredAbility(
+                new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, new FilterBySubtypeCard("Plains")), true), true),
+                new OpponentControllsMoreCondition(new FilterLandPermanent("lands")),
+                "When {this} enters the battlefield, if an opponent controls more lands than you, you may search your library for a Plains card, put it onto the battlefield, then shuffle your library"));
+        
     }
 
     public KnightOfTheWhiteOrchid(final KnightOfTheWhiteOrchid card) {
@@ -70,43 +75,6 @@ public class KnightOfTheWhiteOrchid extends CardImpl {
     @Override
     public KnightOfTheWhiteOrchid copy() {
         return new KnightOfTheWhiteOrchid(this);
-    }
-
-}
-
-class KnightOfTheWhiteOrchidAbility extends ZoneChangeTriggeredAbility {
-
-    private static final FilterCard filter1 = new FilterCard("Plains");
-    private static final FilterLandPermanent filter2 = new FilterLandPermanent();
-
-    static {
-        filter1.add(new SubtypePredicate("Plains"));
-    }
-
-    public KnightOfTheWhiteOrchidAbility() {
-        super(Zone.BATTLEFIELD, null, "When {this} enters the battlefield, if an opponent controls more lands than you, you may ", true);
-        TargetCardInLibrary target = new TargetCardInLibrary(filter1);
-        addEffect(new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay));
-    }
-
-    public KnightOfTheWhiteOrchidAbility(final KnightOfTheWhiteOrchidAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public KnightOfTheWhiteOrchidAbility copy() {
-        return new KnightOfTheWhiteOrchidAbility(this);
-    }
-
-    @Override
-    public boolean checkInterveningIfClause(Game game) {
-        int numLands = game.getBattlefield().countAll(filter2, this.controllerId, game);
-        for (UUID opponentId: game.getOpponents(this.controllerId)) {
-            if (numLands < game.getBattlefield().countAll(filter2, opponentId, game)) {
-                return true;
-            }
-        }
-        return false;
     }
 
 }

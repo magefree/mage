@@ -35,6 +35,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.OpponentControllsMoreCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
@@ -67,7 +68,7 @@ public class WeatheredWayfarer extends CardImpl {
                 Zone.BATTLEFIELD,
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterLandCard()), true, true),
                 new ManaCostsImpl("{W}"),
-                new OpponentControllsMoreLandCondition());
+                new OpponentControllsMoreCondition(new FilterLandPermanent("lands")));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -79,26 +80,5 @@ public class WeatheredWayfarer extends CardImpl {
     @Override
     public WeatheredWayfarer copy() {
         return new WeatheredWayfarer(this);
-    }
-}
-
-class OpponentControllsMoreLandCondition implements Condition {
-
-    private static final FilterPermanent filter = new FilterLandPermanent();
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int numLands = game.getBattlefield().countAll(filter, source.getControllerId(), game);
-        for (UUID opponentId: game.getOpponents(source.getControllerId())) {
-            if (numLands < game.getBattlefield().countAll(filter, opponentId, game)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "an opponent controls more lands than you";
     }
 }

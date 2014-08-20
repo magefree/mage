@@ -95,7 +95,7 @@ class HushwingGryffEffect extends ContinuousRuleModifiyingEffectImpl {
         MageObject mageObject = game.getObject(event.getSourceId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (mageObject != null && sourceObject != null) {
-            return sourceObject + " prevented ability of " + mageObject + " to trigger";
+            return sourceObject.getLogName() + " prevented ability of " + mageObject.getLogName() + " to trigger";
         }
         return null;
     }

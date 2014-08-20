@@ -29,7 +29,6 @@ package mage.sets.tempest;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -46,7 +45,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.game.permanent.token.SaprolingToken;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 

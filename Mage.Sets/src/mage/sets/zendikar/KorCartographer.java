@@ -34,8 +34,7 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.common.FilterBySubtypeCard;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -43,12 +42,6 @@ import mage.target.common.TargetCardInLibrary;
  * @author North
  */
 public class KorCartographer extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("Plains card");
-
-    static {
-        filter.add(new SubtypePredicate("Plains"));
-    }
 
     public KorCartographer(UUID ownerId) {
         super(ownerId, 18, "Kor Cartographer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
@@ -60,7 +53,8 @@ public class KorCartographer extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true), true));
+        // When Kor Cartographer enters the battlefield, you may search your library for a Plains card, put it onto the battlefield tapped, then shuffle your library.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBySubtypeCard("Plains")), true), true));
     }
 
     public KorCartographer(final KorCartographer card) {
