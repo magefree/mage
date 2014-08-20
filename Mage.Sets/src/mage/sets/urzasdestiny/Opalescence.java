@@ -41,11 +41,10 @@ import static mage.constants.Layer.TypeChangingEffects_4;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.AnotherPredicate;
 
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -79,10 +78,9 @@ public class Opalescence extends CardImpl {
 
 class OpalescenceEffect extends ContinuousEffectImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("Each other non-Aura enchantment");
+    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Each other non-Aura enchantment");
     static {
         filter.add(Predicates.not(new SubtypePredicate("Aura")));
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
     
     public OpalescenceEffect() {

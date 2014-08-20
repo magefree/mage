@@ -116,7 +116,7 @@ class OrcishLibrarianEffect extends OneShotEffect {
                     if (cards.size() > 0)
                     {
                         Card card = cards.getRandom(game);
-                        card.moveToExile(null, null, source.getSourceId(), game);
+                        player.moveCardToExileWithInfo(card, null, null, source.getId(), game, Zone.LIBRARY);
                         cards.remove(card);
                     }
                 }

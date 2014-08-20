@@ -30,13 +30,10 @@ package mage.sets.darksteel;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-
+import mage.abilities.common.DiscardsACardOpponentTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.cards.CardImpl;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *
@@ -48,8 +45,10 @@ public class GethsGrimoire extends CardImpl {
         super(ownerId, 123, "Geth's Grimoire", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "DST";
 
+        Effect drawTrigger = new DrawCardSourceControllerEffect(1);
+        drawTrigger.setText("You may draw a card.");
         // Whenever an opponent discards a card, you may draw a card.
-        this.addAbility(new GethsGrimoireTriggeredAbility());
+        this.addAbility(new DiscardsACardOpponentTriggeredAbility(drawTrigger, true));
     }
 
     public GethsGrimoire(final GethsGrimoire card) {
@@ -59,33 +58,5 @@ public class GethsGrimoire extends CardImpl {
     @Override
     public GethsGrimoire copy() {
         return new GethsGrimoire(this);
-    }
-}
-
-class GethsGrimoireTriggeredAbility extends TriggeredAbilityImpl {
-    GethsGrimoireTriggeredAbility() {
-    	super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
-    }
-
-    GethsGrimoireTriggeredAbility(final GethsGrimoireTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GethsGrimoireTriggeredAbility copy() {
-        return new GethsGrimoireTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DISCARDED_CARD && game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever an opponent discards a card, you may draw a card.";
     }
 }
