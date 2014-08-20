@@ -52,7 +52,7 @@ public class BeastToken extends Token {
             setTokenType(tokenType);
         }
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.GREEN;
+        color.setGreen(true);
         subtype.add("Beast");
         power = new MageInt(3);
         toughness = new MageInt(3);

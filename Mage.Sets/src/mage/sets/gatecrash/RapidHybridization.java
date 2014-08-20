@@ -105,7 +105,7 @@ class RapidHybridizationToken extends Token {
         this.setOriginalExpansionSetCode("GTC");
         cardType.add(CardType.CREATURE);
         
-        color = ObjectColor.GREEN;
+        color.setGreen(true);
         
         subtype.add("Frog");
         subtype.add("Lizard");

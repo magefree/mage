@@ -76,7 +76,7 @@ class AerieWorshippersBirdToken extends Token {
         super("Bird", "2/2 blue Bird enchantment creature token with flying");
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.BLUE;
+        color.setBlue(true);
         subtype.add("Bird");
         power = new MageInt(2);
         toughness = new MageInt(2);

@@ -86,7 +86,7 @@ class FaerieToken extends Token {
     FaerieToken() {
         super("Faerie", "1/1 blue Faerie creature tokens with flying");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.BLUE;
+        color.setBlue(true);
         subtype.add("Faerie");
         power = new MageInt(1);
         toughness = new MageInt(1);

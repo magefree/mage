@@ -194,7 +194,7 @@ class KioraKrakenToken extends Token {
     public KioraKrakenToken() {
         super("Kraken", "9/9 blue Kraken creature token");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.BLUE;
+        color.setBlue(true);
         subtype.add("Kraken");
         power = new MageInt(9);
         toughness = new MageInt(9);

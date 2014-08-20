@@ -99,7 +99,7 @@ class HippoToken extends Token {
     public HippoToken() {
         super("Hippo", "1/1 green Hippo creature token");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.GREEN;
+        color.setGreen(true);
         subtype.add("Hippo");
         power = new MageInt(1);
         toughness = new MageInt(1);

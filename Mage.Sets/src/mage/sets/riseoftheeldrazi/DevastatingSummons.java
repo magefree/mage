@@ -104,7 +104,7 @@ class ElementalToken extends Token {
     public ElementalToken() {
         super("Elemental", "X/X red Elemental creature");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.RED;
+        color.setRed(true);
         subtype.add("Elemental");
     }
 }

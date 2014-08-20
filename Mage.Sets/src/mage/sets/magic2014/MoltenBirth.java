@@ -110,7 +110,7 @@ class ElementalToken extends Token {
         this.setOriginalExpansionSetCode("M14");
         this.setTokenType(new Random().nextInt(2) + 1);
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.RED;
+        color.setRed(true);
         subtype.add("Elemental");
         power = new MageInt(1);
         toughness = new MageInt(1);

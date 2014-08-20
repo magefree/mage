@@ -41,7 +41,7 @@ public class BearToken extends Token {
     public BearToken() {
         super("Beast", "2/2 green Bear creature token");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.GREEN;
+        color.setGreen(true);
         subtype.add("Bear");
         power = new MageInt(2);
         toughness = new MageInt(2);

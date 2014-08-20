@@ -49,7 +49,7 @@ public class WolfToken extends Token {
             setTokenType(Type.SECOND.code);
         }
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.GREEN;
+        color.setGreen(true);
         subtype.add("Wolf");
         power = new MageInt(2);
         toughness = new MageInt(2);

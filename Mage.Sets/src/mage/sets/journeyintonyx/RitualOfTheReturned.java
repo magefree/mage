@@ -109,7 +109,7 @@ class RitualOfTheReturnedZombieToken extends Token {
         super("Zombie", "black Zombie creature token onto the battlefield with power equal to the exiled card's power and toughness equal to the exiled card's toughness");
         this.setOriginalExpansionSetCode("JOU");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.BLACK;
+        color.setBlack(true);
         subtype.add("Zombie");
         this.power = new MageInt(power);
         this.toughness = new MageInt(toughness);

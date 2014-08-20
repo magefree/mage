@@ -107,7 +107,7 @@ class HydraBroodmasterToken extends Token {
         super("Hydra", "green Hydra creature token");
         this.setOriginalExpansionSetCode("JOU");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.GREEN;
+        color.setGreen(true);
         subtype.add("Hydra");
         this.power = new MageInt(power);
         this.toughness = new MageInt(toughness);

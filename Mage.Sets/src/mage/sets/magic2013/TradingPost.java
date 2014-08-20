@@ -113,7 +113,8 @@ class GoatToken extends Token {
     public GoatToken() {
         super("Goat", "a 0/1 white Goat creature token");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.WHITE;
+        color.setWhite(true);
+        
         subtype.add("Goat");
         power = new MageInt(0);
         toughness = new MageInt(1);

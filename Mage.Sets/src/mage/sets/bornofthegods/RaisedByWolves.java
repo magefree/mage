@@ -100,7 +100,7 @@ class WolfToken extends Token {
         super("Wolf", "2/2 green Wolf creature token");
         this.setOriginalExpansionSetCode("BNG");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.GREEN;
+        color.setGreen(true);
         subtype.add("Wolf");
         power = new MageInt(2);
         toughness = new MageInt(2);

@@ -92,7 +92,7 @@ class KalonianTwingroveTreefolkWarriorToken extends Token {
         super("Treefolk Warrior", "green Treefolk Warrior creature token onto the battlefield with \"This creature's power and toughness are each equal to the number of Forests you control.\"");
         this.setOriginalExpansionSetCode("M15");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.GREEN;
+        color.setGreen(true);
         subtype.add("Treefolk");
         subtype.add("Warrior");
         power = new MageInt(0);

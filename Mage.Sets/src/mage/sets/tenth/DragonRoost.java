@@ -68,7 +68,7 @@ class DragonToken2 extends Token {
     DragonToken2() {
         super("Dragon", "5/5 red Dragon creature token with flying");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.RED;
+        color.setRed(true);
         subtype.add("Dragon");
         power = new MageInt(5);
         toughness = new MageInt(5);

@@ -78,7 +78,7 @@ class IllusionToken extends Token {
     public IllusionToken() {
         super("Illusion", "2/2 blue Illusion creature token");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.BLUE;
+        color.setBlue(true);
 
         subtype.add("Illusion");
         power = new MageInt(2);

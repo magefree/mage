@@ -83,7 +83,7 @@ class ZombieToken extends Token {
         subtype.add("Zombie");
         subtype.add("Giant");
 
-        color = ObjectColor.BLACK;
+        color.setBlack(true);
         power = new MageInt(5);
         toughness = new MageInt(5);
     }

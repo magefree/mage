@@ -79,7 +79,7 @@ class OneDozenEyesBeastToken extends Token {
     public OneDozenEyesBeastToken() {
         super("Beast", "5/5 green Beast creature token");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.GREEN;
+        color.setGreen(true);
         subtype.add("Beast");
         power = new MageInt(5);
         toughness = new MageInt(5);

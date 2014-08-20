@@ -186,7 +186,8 @@ class AkroanHorseSoldierToken extends Token {
     public AkroanHorseSoldierToken() {
         super("Soldier", "1/1 white Soldier creature token");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.WHITE;
+        color.setWhite(true);
+        
         subtype.add("Soldier");
         power = new MageInt(1);
         toughness = new MageInt(1);

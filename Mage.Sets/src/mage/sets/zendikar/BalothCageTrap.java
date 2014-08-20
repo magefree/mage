@@ -147,7 +147,7 @@ class BeastGreenToken extends Token {
     public BeastGreenToken() {
         super("Beast", "4/4 green Beast creature token");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.GREEN;
+        color.setGreen(true);
         subtype.add("Beast");
         power = new MageInt(4);
         toughness = new MageInt(4);

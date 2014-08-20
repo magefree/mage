@@ -113,7 +113,7 @@ class CatToken extends Token {
     public CatToken() {
         super("Cat", "1/1 green Cat creature token");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.GREEN;
+        color.setGreen(true);
         subtype.add("Cat");
         power = new MageInt(1);
         toughness = new MageInt(1);

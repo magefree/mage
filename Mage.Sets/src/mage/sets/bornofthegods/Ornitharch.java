@@ -83,7 +83,8 @@ class BirdToken extends Token {
         super("Bird", "1/1 white Bird creature tokens with flying");
         this.setOriginalExpansionSetCode("BNG");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.WHITE;
+        color.setWhite(true);
+        
         subtype.add("Bird");
         power = new MageInt(1);
         toughness = new MageInt(1);

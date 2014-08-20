@@ -46,7 +46,7 @@ public class RatToken extends Token {
         super("Rat", "1/1 black Rat creature token");
         this.setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.BLACK;
+        color.setBlack(true);
         subtype.add("Rat");
         power = new MageInt(1);
         toughness = new MageInt(1);

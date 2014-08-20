@@ -67,7 +67,7 @@ class GoblinToken extends Token {
     public GoblinToken() {
         super("Goblin", "1/1 red Goblin creature token");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.RED;
+        color.setRed(true);
         subtype.add("Goblin");
         power = new MageInt(1);
         toughness = new MageInt(1);

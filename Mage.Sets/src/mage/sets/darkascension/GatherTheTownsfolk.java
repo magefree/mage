@@ -71,7 +71,8 @@ class HumanToken extends Token {
     public HumanToken() {
         super("Human", "1/1 white Human creature token");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.WHITE;
+        color.setWhite(true);
+        
         subtype.add("Human");
         power = new MageInt(1);
         toughness = new MageInt(1);

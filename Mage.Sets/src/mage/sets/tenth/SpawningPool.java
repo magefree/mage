@@ -71,7 +71,7 @@ class SkeletonToken extends Token {
         super("Skeleton", "a 1/1 black Skeleton creature with \"{B}: Regenerate this creature\"");
         cardType.add(CardType.CREATURE);
         this.subtype.add("Skeleton");
-        color = ObjectColor.BLACK;
+        color.setBlack(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.B)));

@@ -42,7 +42,7 @@ public class WolfTokenWithDeathtouch extends Token {
     public WolfTokenWithDeathtouch() {
         super("Wolf", "1/1 black Wolf creature token with deathtouch");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.BLACK;
+        color.setBlack(true);
         subtype.add("Wolf");
         power = new MageInt(1);
         toughness = new MageInt(1);

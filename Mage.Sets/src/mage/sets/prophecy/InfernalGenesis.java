@@ -104,7 +104,7 @@ class MinionToken extends Token {
 
     public MinionToken() {
         super("Minion", "1/1 black Minion creature token");
-        color = ObjectColor.BLACK;
+        color.setBlack(true);
         cardType.add(CardType.CREATURE);
         this.subtype.add("Minion");
         power = new MageInt(1);

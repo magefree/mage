@@ -79,7 +79,7 @@ class SatyrNyxSmithElementalToken extends Token {
         super("Elemental", "3/1 red Elemental enchantment creature token with haste");
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.RED;
+        color.setRed(true);
         subtype.add("Elemental");
         power = new MageInt(3);
         toughness = new MageInt(1);

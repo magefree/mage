@@ -50,7 +50,7 @@ public class ZombieToken extends Token {
             this.setTokenType(new Random().nextInt(3) + 1);
         }
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.BLACK;
+        color.setBlack(true);
         subtype.add("Zombie");
         power = new MageInt(2);
         toughness = new MageInt(2);

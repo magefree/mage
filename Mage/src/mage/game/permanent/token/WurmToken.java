@@ -39,7 +39,7 @@ public class WurmToken extends Token {
     public WurmToken() {
         super("Wurm", "a 6/6 green Wurm creature token");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.GREEN;
+        color.setGreen(true);
         subtype.add("Wurm");
         power = new MageInt(6);
         toughness = new MageInt(6);

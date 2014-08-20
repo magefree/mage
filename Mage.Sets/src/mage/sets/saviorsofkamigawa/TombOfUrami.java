@@ -126,7 +126,7 @@ class UramiToken extends Token {
         supertype.add("Legendary");
         
 
-        color = ObjectColor.BLACK;
+        color.setBlack(true);
         power = new MageInt(5);
         toughness = new MageInt(5);
         

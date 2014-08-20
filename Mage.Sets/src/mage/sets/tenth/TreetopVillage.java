@@ -73,7 +73,7 @@ class ApeToken extends Token {
         super("Ape", "a 3/3 green Ape creature with trample");
         cardType.add(CardType.CREATURE);
         this.subtype.add("Ape");
-        color = ObjectColor.GREEN;
+        color.setGreen(true);
         power = new MageInt(3);
         toughness = new MageInt(3);
         this.addAbility(TrampleAbility.getInstance());

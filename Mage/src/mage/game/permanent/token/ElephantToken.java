@@ -41,7 +41,7 @@ public class ElephantToken extends Token {
     public ElephantToken() {
         super("Elephant", "3/3 green Elephant creature token");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.GREEN;
+        color.setGreen(true);
         subtype.add("Elephant");
         power = new MageInt(3);
         toughness = new MageInt(3);

@@ -81,7 +81,7 @@ class OphiomancerSnakeToken extends Token {
     public OphiomancerSnakeToken() {
         super("Snake", "1/1 black Snake creature token with deathtouch");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.BLACK;
+        color.setBlack(true);
         subtype.add("Snake");
         power = new MageInt(1);
         toughness = new MageInt(1);

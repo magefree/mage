@@ -114,7 +114,7 @@ class HourOfNeedSphinxToken extends Token {
         super("Sphinx", "4/4 blue Sphinx creature token with flying");
         this.setOriginalExpansionSetCode("JOU");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.BLUE;
+        color.setBlue(true);
         subtype.add("Sphinx");
         power = new MageInt(4);
         toughness = new MageInt(4);

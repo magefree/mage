@@ -122,7 +122,7 @@ class GoblinAssaultToken extends Token {
         cardType.add(CardType.CREATURE);
         subtype.add("Goblin");
 
-        color = ObjectColor.RED;
+        color.setRed(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());

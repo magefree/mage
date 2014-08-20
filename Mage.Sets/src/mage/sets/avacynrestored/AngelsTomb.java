@@ -70,7 +70,8 @@ class AngelTombToken extends Token {
         super("", "a 3/3 white Angel artifact creature with flying");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.WHITE;
+        color.setWhite(true);
+        
         subtype.add("Angel");
         power = new MageInt(3);
         toughness = new MageInt(3);

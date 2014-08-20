@@ -74,7 +74,8 @@ class EvangelOfHeliodSoldierToken extends Token {
     public EvangelOfHeliodSoldierToken() {
         super("Soldier", "1/1 white Soldier creature tokens");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.WHITE;
+        color.setWhite(true);
+        
         subtype.add("Soldier");
         power = new MageInt(1);
         toughness = new MageInt(1);

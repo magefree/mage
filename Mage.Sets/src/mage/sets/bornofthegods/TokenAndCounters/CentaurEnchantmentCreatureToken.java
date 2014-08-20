@@ -42,7 +42,7 @@ public class CentaurEnchantmentCreatureToken extends Token {
         super("Centaur", "3/3 green Centaur enchantment creature token");
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.GREEN;
+        color.setGreen(true);
         subtype.add("Centaur");
         power = new MageInt(3);
         toughness = new MageInt(3);

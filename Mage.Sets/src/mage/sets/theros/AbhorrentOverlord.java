@@ -85,7 +85,7 @@ class AbhorrentOverlordHarpyToken extends Token {
     public AbhorrentOverlordHarpyToken() {
         super("Harpy", "1/1 black Harpy creature tokens with flying");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.BLACK;
+        color.setBlack(true);
         subtype.add("Harpy");
         power = new MageInt(1);
         toughness = new MageInt(1);

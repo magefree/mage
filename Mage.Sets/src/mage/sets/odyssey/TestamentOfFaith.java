@@ -188,7 +188,7 @@ class TestamentOfFaithToken extends Token {
         super("Wall", "an X/X Wall creature with defender");
         cardType.add(CardType.CREATURE);
         this.subtype.add("Wall");
-        color = ObjectColor.WHITE;
+        color.setWhite(true);
         this.addAbility(DefenderAbility.getInstance());
     }
 }

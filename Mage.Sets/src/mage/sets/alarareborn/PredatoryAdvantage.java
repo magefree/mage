@@ -129,7 +129,7 @@ class LizardToken extends Token {
     public LizardToken() {
         super("Lizard", "2/2 green Lizard creature token onto the battlefield");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.GREEN;
+        color.setGreen(true);
         subtype.add("Lizard");
         power = new MageInt(2);
         toughness = new MageInt(2);

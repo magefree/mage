@@ -92,7 +92,7 @@ class HomunculusToken extends Token {
         super("Homunculus", "0/1 blue Homunculus artifact creature token");
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
-        color = ObjectColor.BLUE;
+        color.setBlue(true);
         subtype.add("Homunculus");
         power = new MageInt(0);
         toughness = new MageInt(1);

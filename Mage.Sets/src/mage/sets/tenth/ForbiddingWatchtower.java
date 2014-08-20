@@ -72,7 +72,8 @@ class ForbiddingWatchtowerToken extends Token {
         super("Soldier", "a 1/5 white Soldier creature");
         cardType.add(CardType.CREATURE);
         this.subtype.add("Soldier");
-        color = ObjectColor.WHITE;
+        color.setWhite(true);
+        
         power = new MageInt(1);
         toughness = new MageInt(5);
     }

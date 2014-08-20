@@ -29,7 +29,6 @@ package mage.sets.bornofthegods;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -75,7 +74,8 @@ class SoldierToken extends Token {
         super("Soldier", "1/1 white Soldier enchantment creature token");
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.WHITE;
+        color.setWhite(true);
+        
         subtype.add("Soldier");
         power = new MageInt(1);
         toughness = new MageInt(1);

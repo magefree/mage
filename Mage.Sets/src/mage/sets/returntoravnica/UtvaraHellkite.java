@@ -80,7 +80,7 @@ public class UtvaraHellkite extends CardImpl {
         private UtvaraHellkiteDragonToken() {
             super("Dragon", "6/6 red Dragon creature token with flying");
             cardType.add(CardType.CREATURE);
-            color = ObjectColor.RED;
+            color.setRed(true);
             subtype.add("Dragon");
             power = new MageInt(6);
             toughness = new MageInt(6);

@@ -67,7 +67,7 @@ class GermToken extends Token {
         super("Germ", "a 0/0 black Germ creature token");
         this.setOriginalExpansionSetCode("MBS");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.BLACK;
+        color.setBlack(true);
         subtype.add("Germ");
         power = new MageInt(0);
         toughness = new MageInt(0);

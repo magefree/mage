@@ -74,7 +74,7 @@ class KormusBellToken extends Token {
         cardType.add(CardType.CREATURE);
         power = new MageInt(1);
         toughness = new MageInt(1);
-        color = ObjectColor.BLACK; //Check Oracle, yes they are black
+        color.setBlack(true); //Check Oracle, yes they are black
     }
 
 }

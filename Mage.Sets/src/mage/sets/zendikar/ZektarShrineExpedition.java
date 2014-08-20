@@ -119,7 +119,7 @@ class ElementalToken extends Token {
     public ElementalToken() {
         super("Elemental", "7/1 red Elemental creature token with trample and haste");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.RED;
+        color.setRed(true);
         subtype.add("Elemental");
         power = new MageInt(7);
         toughness = new MageInt(1);

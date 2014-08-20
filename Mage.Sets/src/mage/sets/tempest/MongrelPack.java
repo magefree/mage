@@ -103,7 +103,7 @@ class HoundToken extends Token {
         cardType.add(CardType.CREATURE);
         subtype.add("Hound");
 
-        color = ObjectColor.GREEN;
+        color.setGreen(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
     }

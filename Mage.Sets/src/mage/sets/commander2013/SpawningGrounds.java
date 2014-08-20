@@ -91,7 +91,7 @@ class SpawningGroundsBeastToken extends Token {
     public SpawningGroundsBeastToken() {
         super("Beast", "5/5 green Beast creature token with trample");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.GREEN;
+        color.setGreen(true);
         subtype.add("Beast");
         power = new MageInt(5);
         toughness = new MageInt(5);

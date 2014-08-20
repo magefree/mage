@@ -42,7 +42,7 @@ public class InsectInfectToken extends Token {
     public InsectInfectToken() {
         super("Insect", "1/1 green Insect creature token with infect");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.GREEN;
+        color.setGreen(true);
         subtype.add("Insect");
         power = new MageInt(1);
         toughness = new MageInt(1);

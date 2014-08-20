@@ -79,7 +79,8 @@ class KithkinSoldierToken extends Token {
     public KithkinSoldierToken() {
         super("Kithkin Soldier", "1/1 white Kithkin Soldier creature token");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.WHITE;
+        color.setWhite(true);
+        
         subtype.add("Soldier");
         power = new MageInt(1);
         toughness = new MageInt(1);

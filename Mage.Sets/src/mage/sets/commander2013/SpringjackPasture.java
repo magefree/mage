@@ -143,7 +143,8 @@ class GoatToken extends Token {
         super("Goat", "0/1 white Goat creature token");
         setOriginalExpansionSetCode("EVE");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.WHITE;
+        color.setWhite(true);
+        
         subtype.add("Goat");
         power = new MageInt(0);
         toughness = new MageInt(1);

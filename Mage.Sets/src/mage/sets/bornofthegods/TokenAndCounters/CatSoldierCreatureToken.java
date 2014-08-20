@@ -28,7 +28,6 @@
 package mage.sets.bornofthegods.TokenAndCounters;
 
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.constants.CardType;
 import mage.game.permanent.token.Token;
@@ -42,7 +41,8 @@ public class CatSoldierCreatureToken extends Token {
     public CatSoldierCreatureToken() {
         super("Cat Soldier", "1/1 white Cat Soldier creature token with vigilance");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.WHITE;
+        color.setWhite(true);
+        
         subtype.add("Cat");
         subtype.add("Soldier");
         power = new MageInt(1);

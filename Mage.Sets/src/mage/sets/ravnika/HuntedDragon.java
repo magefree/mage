@@ -81,7 +81,8 @@ class KnightToken extends Token {
     KnightToken() {
         super("Knight", "2/2 white Knight creature tokens with first strike");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.WHITE;
+        color.setWhite(true);
+        
         subtype.add("Knight");
         power = new MageInt(2);
         toughness = new MageInt(2);

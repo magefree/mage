@@ -75,7 +75,7 @@ class SoldierToken extends Token {
         super("Soldier", "1/1 red Soldier creature token with haste");
         setTokenType(3);
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.RED;
+        color.setRed(true);
         subtype.add("Soldier");
         power = new MageInt(1);
         toughness = new MageInt(1);

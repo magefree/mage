@@ -77,7 +77,7 @@ public class ArmadaWurm extends CardImpl {
         private ArmadaWurmToken() {
             super("Wurm", "a 5/5 green Wurm creature token with trample");
             cardType.add(CardType.CREATURE);
-            color = ObjectColor.GREEN;
+            color.setGreen(true);
             subtype.add("Wurm");
             power = new MageInt(5);
             toughness = new MageInt(5);

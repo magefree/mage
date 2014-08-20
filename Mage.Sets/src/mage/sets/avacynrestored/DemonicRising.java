@@ -74,7 +74,7 @@ class DemonToken extends Token {
     public DemonToken() {
         super("Demon", "a 5/5 black Demon creature token with flying");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.BLACK;
+        color.setBlack(true);
         subtype.add("Demon");
         power = new MageInt(5);
         toughness = new MageInt(5);

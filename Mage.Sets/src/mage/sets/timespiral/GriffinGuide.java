@@ -92,7 +92,8 @@ class GriffinToken extends Token {
     public GriffinToken() {
         super("Griffin", "2/2 white Griffin creature token with flying");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.WHITE;
+        color.setWhite(true);
+        
         subtype.add("Soldier");
         power = new MageInt(2);
         toughness = new MageInt(2);

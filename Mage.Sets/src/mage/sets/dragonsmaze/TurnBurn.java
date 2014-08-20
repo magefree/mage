@@ -90,7 +90,7 @@ public class TurnBurn extends SplitCard {
         private WeirdToken() {
             super("Weird", "a red Weird with base power and toughness 0/1");
             cardType.add(CardType.CREATURE);
-            color = ObjectColor.RED;
+            color.setRed(true);
             subtype.add("Weird");
             power = new MageInt(0);
             toughness = new MageInt(1);

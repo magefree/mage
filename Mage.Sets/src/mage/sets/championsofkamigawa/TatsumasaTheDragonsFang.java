@@ -157,7 +157,7 @@ class TatsumaDragonToken extends Token {
     public TatsumaDragonToken() {
         super("Dragon Spirit", "5/5 blue Dragon Spirit creature token with flying");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.BLUE;
+        color.setBlue(true);
         subtype.add("Dragon");
         subtype.add("Spirit");
         power = new MageInt(5);

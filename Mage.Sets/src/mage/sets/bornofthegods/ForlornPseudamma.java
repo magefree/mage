@@ -77,7 +77,7 @@ class ForlornPseudammaZombieToken extends Token {
         super("Zombie", "2/2 black Zombie enchantment creature token");
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.BLACK;
+        color.setBlack(true);
         subtype.add("Zombie");
         power = new MageInt(2);
         toughness = new MageInt(2);

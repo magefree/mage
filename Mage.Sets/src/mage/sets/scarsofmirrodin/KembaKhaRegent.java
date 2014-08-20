@@ -76,7 +76,8 @@ class CatToken extends Token {
     public CatToken() {
         super("Cat", "a 2/2 white Cat creature token");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.WHITE;
+        color.setWhite(true);
+        
         subtype.add("Cat");
         power = new MageInt(2);
         toughness = new MageInt(2);

@@ -96,7 +96,7 @@ class BatToken extends Token {
     BatToken() {
         super("Bat", "1/1 black Bat creature token with flying");
         cardType.add(CardType.CREATURE);
-        color = ObjectColor.BLACK;
+        color.setBlack(true);
         subtype.add("Bat");
         power = new MageInt(1);
         toughness = new MageInt(1);
