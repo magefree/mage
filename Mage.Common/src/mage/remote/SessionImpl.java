@@ -36,6 +36,7 @@ import mage.cards.repository.CardRepository;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
 import mage.constants.Constants.SessionState;
+import mage.constants.ManaType;
 import mage.game.GameException;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
@@ -56,7 +57,6 @@ import org.jboss.remoting.transporter.TransporterClient;
 
 import java.net.*;
 import java.util.*;
-import mage.constants.ManaType;
 
 /**
  *
@@ -159,6 +159,8 @@ public class SessionImpl implements Session {
                  * the server, and on the server side an org.jboss.remoting.Lease informs registered listeners 
                  * if the PING doesn't arrive withing the specified timeout period. */
             clientMetadata.put(Client.ENABLE_LEASE, "true");
+            clientMetadata.put("numberOfCallRetries", "1");
+
             // Indicated the max number of threads used within oneway thread pool.
             clientMetadata.put(Client.MAX_NUM_ONEWAY_THREADS, "10");
             clientMetadata.put(Remoting.USE_CLIENT_CONNECTION_IDENTITY, "true");

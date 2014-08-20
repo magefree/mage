@@ -54,6 +54,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -321,6 +323,8 @@ public class ConnectDialog extends MageDialog {
 
         private boolean result = false;
 
+        private static final int CONNECTION_TIMEOUT_MS = 2100;
+
         @Override
         protected Boolean doInBackground() throws Exception {
             lblStatus.setText("Connecting...");
@@ -332,7 +336,7 @@ public class ConnectDialog extends MageDialog {
         @Override
         protected void done() {
             try {
-                get();
+                get(CONNECTION_TIMEOUT_MS, TimeUnit.MILLISECONDS);
                 setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
                 if (result) {
                     lblStatus.setText("");                    
@@ -348,8 +352,10 @@ public class ConnectDialog extends MageDialog {
             } catch (CancellationException ex) {
                 logger.info("Connect was canceled");
                 lblStatus.setText("Connect was canceled");
-                MageFrame.stopConnecting();
+            } catch (TimeoutException ex) {
+                logger.fatal("Connection timeout: ", ex);
             } finally {
+                MageFrame.stopConnecting();
                 btnConnect.setEnabled(true);
             }
         }
