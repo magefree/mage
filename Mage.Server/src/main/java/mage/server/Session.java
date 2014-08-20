@@ -97,12 +97,13 @@ public class Session {
         if (user == null) {  // user already exists
             user = UserManager.getInstance().findUser(userName);
             if (user.getHost().equals(host)) {
+                user.updateLastActivity();  // minimizes possible expiration 
                 if (user.getSessionId().isEmpty()) {
                     // TODO Send Chat message to tables (user is not registered yet)
                     // ChatManager.getInstance().broadcast([CHAT ID TABLES], "has reconnected", ChatMessage.MessageColor.GREEN);
                     logger.info("Reconnecting session for " + userName);
                 } else {
-                        //throw new MageException("This machine is already connected");
+                    //throw new MageException("This machine is already connected");
                     //disconnect previous one
                     logger.info("Disconnecting another user instance: " + userName);
                     UserManager.getInstance().disconnect(user.getId(), DisconnectReason.ConnectingOtherInstance);
@@ -113,7 +114,7 @@ public class Session {
         }
         if (!UserManager.getInstance().connectToSession(sessionId, user.getId())) {
             return new StringBuilder("Error connecting ").append(userName).toString();
-        }
+        }        
         this.userId = user.getId();
         return null;
     }

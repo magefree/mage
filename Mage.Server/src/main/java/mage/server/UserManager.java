@@ -38,7 +38,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import mage.server.util.ThreadExecutor;
-import mage.view.ChatMessage;
 import org.apache.log4j.Logger;
 
 /**
@@ -102,17 +101,20 @@ public class UserManager {
     }
 
     public boolean connectToSession(String sessionId, UUID userId) {
-        if (users.containsKey(userId)) {
-            users.get(userId).setSessionId(sessionId);
+        if (userId != null) {
+            User user = users.get(userId);
+            if (user != null) {
+                user.setSessionId(sessionId);
                 return true;
             }
+        }
         return false;
     }
 
     public void disconnect(UUID userId, DisconnectReason reason) {
         if (userId != null) {
-            if (users.containsKey(userId)) {
-                User user = users.get(userId);
+            User user = users.get(userId);
+            if (user != null) {                
                 user.setSessionId(""); // Session will be set again with new id if user reconnects
             }
             ChatManager.getInstance().removeUser(userId, reason);
@@ -120,28 +122,36 @@ public class UserManager {
     }
 
     public boolean isAdmin(UUID userId) {
-        if (users.containsKey(userId)) {
-            return users.get(userId).getName().equals("Admin");
+        if (userId != null) {
+            User user = users.get(userId);
+            if (user != null) {                
+                return user.getName().equals("Admin");
+            }
         }
         return false;
     }
 
     public void removeUser(UUID userId, DisconnectReason reason) {
-        User user = users.get(userId);
-        if (user != null) {
-            logger.debug("User " + user.getName() + " will be removed (" + reason.toString() + ")  userId: " + userId);
-            user.kill(reason);
-            users.remove(userId);
-            logger.debug("User " + user.getName() + " removed");
-        } else {
-            logger.warn(new StringBuilder("Trying to remove userId: ").append(userId).append(" but it does not exist."));
+        if (userId != null) {
+            User user = users.get(userId);
+            if (user != null) {
+                logger.debug("User " + user.getName() + " will be removed (" + reason.toString() + ")  userId: " + userId);
+                user.kill(reason);
+                users.remove(userId);
+                logger.debug("User " + user.getName() + " removed");
+            } else {
+                logger.warn(new StringBuilder("Trying to remove userId: ").append(userId).append(" but it does not exist."));
+            }
         }
     }
 
     public boolean extendUserSession(UUID userId) {
-        if (users.containsKey(userId)) {
-            users.get(userId).updateLastActivity();
-            return true;
+        if (userId != null) {
+            User user = users.get(userId);
+            if (user != null) {  
+                user.updateLastActivity();
+                return true;
+            }
         }
         return false;
     }

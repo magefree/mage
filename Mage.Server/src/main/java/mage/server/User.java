@@ -74,7 +74,6 @@ public class User {
     private final Map<UUID, TournamentSession> constructing;
     private final Map<UUID, Deck> sideboarding;
     private final List<UUID> watchedGames;
-    private final ArrayList<UUID> tablesToRemove = new ArrayList<>();
     private String sessionId;
     private String info;
     private Date lastActivity;
@@ -387,16 +386,16 @@ public class User {
                                         break;
                                 }
                                 if (!isConnected()) {
-                                    table.getTournament().getPlayer(tableEntry.getKey()).setDisconnectInfo(disconnectInfo);
+                                    tournamentPlayer.setDisconnectInfo(disconnectInfo);
                                 } else {
-                                    table.getTournament().getPlayer(tableEntry.getKey()).setDisconnectInfo("");
+                                    tournamentPlayer.setDisconnectInfo("");
                                 }
                             } else {
-                                tablesToRemove.add(tableEntry.getKey());
-                                logger.error(getName() + " tournament player missing - tournamentId:" + table.getId(), null);
+                                // can happen if tournamet has just ended
+                                logger.debug(getName() + " tournament player missing - tableId:" + table.getId(), null);
                             }
                         } else {
-                            logger.error(getName() + " tournament key missing - tournamentId: " + table.getId(), null);
+                            logger.error(getName() + " tournament key missing - tableId: " + table.getId(), null);
                         }
                     } else {
                         switch (table.getState()) {
@@ -410,12 +409,6 @@ public class User {
                     }
                 }
             }
-        }
-        if (!tablesToRemove.isEmpty()) {
-            for (UUID tableKey : tablesToRemove) {
-                tables.remove(tableKey);
-            }
-            tablesToRemove.clear();
         }
         if (match > 0) {
             sb.append("Match: ").append(match).append(" ");
