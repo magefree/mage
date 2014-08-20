@@ -76,7 +76,7 @@ public class DecoratedGriffin extends CardImpl {
 class DecoratedGriffinPreventEffect extends PreventionEffectImpl {
 
     public DecoratedGriffinPreventEffect() {
-        super(Duration.EndOfTurn);
+        super(Duration.EndOfTurn, 1, false, true);
         this.staticText = "Prevent the next 1 damage that would be dealt to you this turn";
     }
 
@@ -95,24 +95,8 @@ class DecoratedGriffinPreventEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE,
-                source.getControllerId(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            int damage = event.getAmount();
-            if (damage > 0) {
-                event.setAmount(damage - 1);
-                this.used = true;
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE,
-                        source.getControllerId(), source.getSourceId(), source.getControllerId(), 1));
-            }
-        }
-        return false;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used && super.applies(event, source, game) && event.getTargetId().equals(source.getControllerId())) {
+        if (super.applies(event, source, game) && event.getTargetId().equals(source.getControllerId())) {
             return true;
         }
         return false;
