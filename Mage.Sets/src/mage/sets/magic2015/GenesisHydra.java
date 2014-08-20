@@ -27,7 +27,6 @@
  */
 package mage.sets.magic2015;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -54,6 +53,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
+
+import java.util.UUID;
 
 
 
@@ -165,14 +166,20 @@ class GenesisHydraPutOntoBattlefieldEffect extends OneShotEffect {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
         filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, count + 1));
         TargetCard target1 = new TargetCard(Zone.LIBRARY, filter);
-        if (cards.count(filter, controller.getId(), source.getSourceId(), game) > 0
-                && controller.choose(Outcome.PutCardInPlay, cards, target1, game)) {
-            Card card = cards.get(target1.getFirstTarget(), game);
-            if (card != null) {
-                cards.remove(card);
-                controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+        target1.setRequired(false);
+        if (cards.count(filter, controller.getId(), source.getSourceId(), game) > 0) {
+            if (controller.choose(Outcome.PutCardInPlay, cards, target1, game)) {
+                Card card = cards.get(target1.getFirstTarget(), game);
+                if (card != null) {
+                    cards.remove(card);
+                    controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                }
+                target1.clearChosen();
+            } else {
+                game.informPlayers(controller.getName() + " didn't choose anything");
             }
-            target1.clearChosen();
+        } else {
+            game.informPlayers("No nonland permanent card with converted mana cost " + count + " or less to choose.");
         }
         while (cards.size() > 0) {
             Card card = cards.get(cards.iterator().next(), game);
