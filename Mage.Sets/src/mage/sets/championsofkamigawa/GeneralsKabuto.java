@@ -28,26 +28,20 @@
 
 package mage.sets.championsofkamigawa;
 
-/**
- *
- * @author Ludwig
- */
 import java.util.UUID;
-
-import mage.constants.*;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.PreventAllDamageToAttachedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.DamageEvent;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
@@ -56,7 +50,7 @@ import mage.game.permanent.Permanent;
 public class GeneralsKabuto extends CardImpl {
 
     public GeneralsKabuto (UUID ownerId) {
-        super(ownerId, 251, "General's Kabuto", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
+        super(ownerId, 251, "General's Kabuto", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Equipment");
 
