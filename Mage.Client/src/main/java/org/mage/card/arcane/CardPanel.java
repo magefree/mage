@@ -32,6 +32,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.view.CounterView;
 
 /**
  * Main class for drawing Mage card object.
@@ -72,8 +73,9 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     public ImagePanel overlayPanel;
     public JPanel buttonPanel;
     public JPanel iconPanel;
-    public JPanel copyIconPanel;
-
+    public JPanel copyIconPanel;    
+    public JLabel counterLabel;
+    
     private GlowText titleText;
     private GlowText ptText;
     private boolean displayEnabled = true;
@@ -306,6 +308,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         // this holds reference to ActionCallback forever so set it to null to prevent
         this.callback = null;
         this.data = null;
+        this.counterLabel = null;
     }
 
     private void setText(CardView card) {
@@ -736,6 +739,31 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                 dayNightButton.setIcon(new ImageIcon(transformIcon));
             }
         }
+        
+        
+//        if (card.getCounters() != null && !card.getCounters().isEmpty()) {           
+//            ImageIcon image = new ImageIcon(ImageManagerImpl.getInstance().getCounterImage());
+//            String amount = "";
+//            String name = "";
+//            for (CounterView counterView:card.getCounters()) {
+//                amount = Integer.toString(counterView.getCount());
+//                name = counterView.getName();
+//                break;
+//            }
+//            if (counterLabel == null) {
+//                counterLabel = new JLabel(amount, image, JLabel.CENTER);            
+//            }
+//            counterLabel.setToolTipText(name);
+//            counterLabel.setLocation(50,50);
+//            
+//            this.add(counterLabel);   
+//            counterLabel.setVisible(true);
+//        } else {
+//            if (counterLabel != null) {
+//                this.remove(counterLabel);
+//                counterLabel = null;
+//            }
+//        }       
         repaint();
     }
 

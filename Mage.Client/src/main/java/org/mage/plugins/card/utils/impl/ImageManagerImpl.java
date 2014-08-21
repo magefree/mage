@@ -134,6 +134,15 @@ public class ImageManagerImpl implements ImageManager {
     }
 
     @Override
+    public BufferedImage getCounterImage() {
+        if (imageCounter == null) {
+            Image image = getImageFromResourceTransparent("/card/counter_green.png", Color.WHITE, new Rectangle(32, 32));
+            imageCounter = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+        }
+        return imageCounter;
+    }
+
+    @Override
     public Image getDlgCancelButtonImage() {
         if (imageDlgCancelButton == null) {
             imageDlgCancelButton = getBufferedImageFromResource("/dlg/dlg.cancel.png");
@@ -256,6 +265,7 @@ public class ImageManagerImpl implements ImageManager {
     private static BufferedImage triggeredAbilityIcon;
     private static BufferedImage activatedAbilityIcon;
     private static BufferedImage imageCopyIcon;
+    private static BufferedImage imageCounter;
 
     private static BufferedImage imageDlgAcceptButton;
     private static BufferedImage imageDlgActiveAcceptButton;

@@ -16,6 +16,7 @@ public interface ImageManager {
     Image getTriggeredAbilityImage();
     Image getActivatedAbilityImage();
     Image getCopyInformIconImage();
+    Image getCounterImage();
 
     Image getDlgAcceptButtonImage();
     Image getDlgActiveAcceptButtonImage();
