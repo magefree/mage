@@ -1,9 +1,9 @@
 package org.mage.plugins.card.utils;
 
-import de.schlichtherle.truezip.file.TFile;
 import java.util.HashMap;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
+import net.java.truevfs.access.TFile;
 import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.properties.SettingsManager;
 

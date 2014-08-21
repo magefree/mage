@@ -1,6 +1,5 @@
 package org.mage.card.arcane;
 
-import de.schlichtherle.truezip.file.TFile;
 import mage.cards.MagePermanent;
 import mage.cards.TextPopup;
 import mage.cards.action.ActionCallback;
@@ -32,6 +31,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import net.java.truevfs.access.TFile;
 
 /**
  * Main class for drawing Mage card object.
