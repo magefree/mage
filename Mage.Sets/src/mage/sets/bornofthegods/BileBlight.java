@@ -90,4 +90,9 @@ class BileBlightEffect extends BoostAllEffect {
             }
         }
     }
+
+    @Override
+    public BileBlightEffect copy() {
+        return new BileBlightEffect();
+    }
 }
