@@ -108,6 +108,7 @@ public class GainControlDiedCastAgainTest extends CardTestPlayerBase {
 
         // Destroy all creatures, enchantments and artifacts
         castSpell(4, PhaseStep.POSTCOMBAT_MAIN, playerB, "Akroma's Vengeance");
+        
         // Put Elesh Norn back on library
         activateAbility(5, PhaseStep.END_TURN, playerB, "{1}{B},{T}: Put target creature card from your graveyard on top of it's owner's library.", "Elesh Norn, Grand Cenobite");
 

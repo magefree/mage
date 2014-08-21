@@ -104,10 +104,12 @@ public class PutOnLibraryTargetEffect extends OneShotEffect {
             if (target.getMaxNumberOfTargets() == 0) {
                 sb.append("any number of ");
             } else {
-                if (target.getMaxNumberOfTargets() > target.getNumberOfTargets()) {
-                    sb.append("up to ");
+                if (target.getMaxNumberOfTargets() != 1 || target.getNumberOfTargets() != 1) {
+                    if (target.getMaxNumberOfTargets() > target.getNumberOfTargets()) {
+                        sb.append("up to ");
+                    }
+                    sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" ");
                 }
-                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets(), "a")).append(" ");
             }
             sb.append("target ").append(mode.getTargets().get(0).getTargetName()).append(" on ");
             sb.append(onTop ? "top" : "the bottom").append(" of it's owner's library");
