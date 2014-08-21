@@ -38,6 +38,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.UUID;
+import mage.target.Target;
+import mage.util.CardUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -97,9 +99,15 @@ public class PutOnLibraryTargetEffect extends OneShotEffect {
         if (this.staticText != null && !this.staticText.isEmpty()) {
             sb.append(staticText);
         } else {
+            Target target = mode.getTargets().get(0);
             sb.append("Put ");
-            if (mode.getTargets().get(0).getMaxNumberOfTargets() == 0) {
+            if (target.getMaxNumberOfTargets() == 0) {
                 sb.append("any number of ");
+            } else {
+                if (target.getMaxNumberOfTargets() > target.getNumberOfTargets()) {
+                    sb.append("up to ");
+                }
+                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets(), "a")).append(" ");
             }
             sb.append("target ").append(mode.getTargets().get(0).getTargetName()).append(" on ");
             sb.append(onTop ? "top" : "the bottom").append(" of it's owner's library");

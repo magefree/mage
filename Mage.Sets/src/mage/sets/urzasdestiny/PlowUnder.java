@@ -28,10 +28,11 @@
 package mage.sets.urzasdestiny;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterLandPermanent;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -48,7 +49,7 @@ public class PlowUnder extends CardImpl {
 
         // Put two target lands on top of their owners' libraries.
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetLandPermanent(2));
+        this.getSpellAbility().addTarget(new TargetLandPermanent(2,2, new FilterLandPermanent("lands"), false));
     }
 
     public PlowUnder(final PlowUnder card) {
