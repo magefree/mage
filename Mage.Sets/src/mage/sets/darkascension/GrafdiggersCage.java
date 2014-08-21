@@ -71,7 +71,7 @@ public class GrafdiggersCage extends CardImpl {
     }
 }
 
-class GrafdiggersCageEffect extends ReplacementEffectImpl {
+class GrafdiggersCageEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public GrafdiggersCageEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
@@ -93,14 +93,9 @@ class GrafdiggersCageEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event instanceof ZoneChangeEvent) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getToZone() == Zone.BATTLEFIELD && (zEvent.getFromZone() == Zone.GRAVEYARD || zEvent.getFromZone() == Zone.LIBRARY)) {
                 Card card = game.getCard(zEvent.getTargetId());
                 if (card != null && card.getCardType().contains(CardType.CREATURE)) {
