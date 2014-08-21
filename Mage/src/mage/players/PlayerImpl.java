@@ -631,13 +631,14 @@ public abstract class PlayerImpl implements Player, Serializable {
                    the moment before the cost was paid (see rule 717, "Handling Illegal Actions").
         */
         if (card != null) {
+            // write info to game log first so game log infos from triggered or replacement effects follow in the game log
+            game.informPlayers(new StringBuilder(name).append(" discards ").append(card.getName()).toString());
             /* If a card is discarded while Rest in Peace is on the battlefield, abilities that function
              * when a card is discarded (such as madness) still work, even though that card never reaches
              * a graveyard. In addition, spells or abilities that check the characteristics of a discarded
-             * card (such as Chandra Ablaze's first ability) can find that card in exile. */
+             * card (such as Chandra Ablaze's first ability) can find that card in exile. */            
+            card.moveToZone(Zone.GRAVEYARD, source==null?null:source.getSourceId(), game, false);            
             // So discard is also successful if card is moved to another zone by replacement effect!
-            card.moveToZone(Zone.GRAVEYARD, source==null?null:source.getSourceId(), game, false);
-            game.informPlayers(new StringBuilder(name).append(" discards ").append(card.getName()).toString());
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, card.getId(), source==null?null:source.getSourceId(), playerId));
             return true;
         }

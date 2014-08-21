@@ -33,19 +33,11 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromAnywhereTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.PutIntoGraveFromAnywhereAbility;
+import mage.abilities.effects.common.RevealAndShuffleIntoLibrarySourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  * @author Loki
@@ -58,9 +50,15 @@ public class DarksteelColossus extends CardImpl {
         this.subtype.add("Golem");
         this.power = new MageInt(11);
         this.toughness = new MageInt(11);
+
+        // Trample
         this.addAbility(TrampleAbility.getInstance());
+        
+        // Darksteel Colossus is indestructible.
         this.addAbility(IndestructibleAbility.getInstance());
-        this.addAbility(new PutIntoGraveFromAnywhereTriggeredAbility(new DarksteelColossusEffect(), false));
+
+        // If Darksteel Colossus would be put into a graveyard from anywhere, reveal Darksteel Colossus and shuffle it into its owner's library instead.        
+        this.addAbility(new PutIntoGraveFromAnywhereAbility(new RevealAndShuffleIntoLibrarySourceEffect()));
     }
 
     public DarksteelColossus(final DarksteelColossus card) {
@@ -70,40 +68,6 @@ public class DarksteelColossus extends CardImpl {
     @Override
     public DarksteelColossus copy() {
         return new DarksteelColossus(this);
-    }
-
-}
-
-class DarksteelColossusEffect extends OneShotEffect {
-    DarksteelColossusEffect() {
-        super(Outcome.Benefit);
-        staticText = "reveal {this} and shuffle it into its owner's library instead";
-    }
-
-    DarksteelColossusEffect(final DarksteelColossusEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Card c = game.getCard(source.getSourceId());
-        if (c != null) {
-            Player player = game.getPlayer(c.getOwnerId());
-            if (player != null) {
-                Cards cards = new CardsImpl();
-                cards.add(c);
-                player.revealCards("Blightsteel Colossus", cards, game);
-                c.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                player.shuffleLibrary(game);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public DarksteelColossusEffect copy() {
-        return new DarksteelColossusEffect(this);
     }
 
 }

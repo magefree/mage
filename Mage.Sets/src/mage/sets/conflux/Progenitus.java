@@ -30,21 +30,14 @@ package mage.sets.conflux;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromAnywhereTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.PutIntoGraveFromAnywhereAbility;
+import mage.abilities.effects.common.RevealAndShuffleIntoLibrarySourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -72,10 +65,11 @@ public class Progenitus extends CardImpl {
         //               spells or abilities, and all damage that would be dealt to Progenitus is prevented.
         //     2/1/2009: Progenitus can still be affected by effects that don't target it or deal damage
         //               to it (such as Day of Judgment).
+        
         // Protection from everything
         this.addAbility(new ProgenitusProtectionAbility());
         // If Progenitus would be put into a graveyard from anywhere, reveal Progenitus and shuffle it into its owner's library instead.
-        this.addAbility(new PutIntoGraveFromAnywhereTriggeredAbility(new ProgenitusEffect()));
+        this.addAbility(new PutIntoGraveFromAnywhereAbility(new RevealAndShuffleIntoLibrarySourceEffect()));
     }
 
     public Progenitus(final Progenitus card) {
@@ -110,40 +104,6 @@ class ProgenitusProtectionAbility extends ProtectionAbility {
 
     @Override
     public boolean canTarget(MageObject source, Game game) {
-        return false;
-    }
-}
-
-class ProgenitusEffect extends OneShotEffect {
-
-    public ProgenitusEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "reveal {this} and shuffle it into its owner's library instead";
-    }
-
-    public ProgenitusEffect(final ProgenitusEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ProgenitusEffect copy() {
-        return new ProgenitusEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getSourceId());
-        if (card != null) {
-            Player player = game.getPlayer(card.getOwnerId());
-            if (player != null) {
-                Cards cards = new CardsImpl();
-                cards.add(card);
-                player.revealCards("Progenitus", cards, game);
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                player.shuffleLibrary(game);
-                return true;
-            }
-        }
         return false;
     }
 }

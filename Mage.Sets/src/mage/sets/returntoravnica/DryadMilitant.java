@@ -104,7 +104,7 @@ class DryadMilitantReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD) {
-            Card card = (Card) game.getCard(event.getTargetId());
+            Card card = game.getCard(event.getTargetId());
             if (card != null && (card.getCardType().contains(CardType.SORCERY) || card.getCardType().contains(CardType.INSTANT))) {
                 return true;
             }

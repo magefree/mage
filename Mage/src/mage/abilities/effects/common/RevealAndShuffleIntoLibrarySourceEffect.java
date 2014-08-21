@@ -26,50 +26,57 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.abilities.effects.common;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromAnywhereAbility;
-import mage.abilities.effects.common.RevealAndShuffleIntoLibrarySourceEffect;
-import mage.abilities.keyword.IndestructibleAbility;
-import mage.abilities.keyword.InfectAbility;
-import mage.abilities.keyword.TrampleAbility;
-import mage.cards.CardImpl;
+import mage.MageObject;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
- * @author Loki
+ *
+ * @author LevelX2
  */
-public class BlightsteelColossus extends CardImpl {
 
-    public BlightsteelColossus(UUID ownerId) {
-        super(ownerId, 99, "Blightsteel Colossus", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{12}");
-        this.expansionSetCode = "MBS";
-        this.subtype.add("Golem");
-        this.power = new MageInt(11);
-        this.toughness = new MageInt(11);
-        
-        // Trample, infect
-        this.addAbility(TrampleAbility.getInstance());
-        this.addAbility(InfectAbility.getInstance());
-
-        // Blightsteel Colossus is indestructible.
-        this.addAbility(IndestructibleAbility.getInstance());
-        
-        // If Blightsteel Colossus would be put into a graveyard from anywhere, reveal Blightsteel Colossus and shuffle it into its owner's library instead.
-        this.addAbility(new PutIntoGraveFromAnywhereAbility(new RevealAndShuffleIntoLibrarySourceEffect()));
+public class RevealAndShuffleIntoLibrarySourceEffect extends OneShotEffect {
+    
+    public RevealAndShuffleIntoLibrarySourceEffect() {
+        super(Outcome.Neutral);
+        staticText = "reveal {this} and shuffle it into its owner's library instead";
     }
 
-    public BlightsteelColossus(final BlightsteelColossus card) {
-        super(card);
+    public RevealAndShuffleIntoLibrarySourceEffect(final RevealAndShuffleIntoLibrarySourceEffect effect) {
+        super(effect);
     }
 
     @Override
-    public BlightsteelColossus copy() {
-        return new BlightsteelColossus(this);
+    public boolean apply(Game game, Ability source) {
+        Card sourceCard = game.getCard(source.getSourceId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (sourceCard != null) {
+            Player player = game.getPlayer(sourceCard.getOwnerId());
+            if (player != null) {
+                Zone fromZone = game.getState().getZone(sourceCard.getId());
+                Cards cards = new CardsImpl();
+                cards.add(sourceCard);
+                player.revealCards(sourceObject.getLogName(), cards, game);
+                player.moveCardToLibraryWithInfo(sourceCard, source.getSourceId(), game, fromZone, true, true);
+                player.shuffleLibrary(game);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public RevealAndShuffleIntoLibrarySourceEffect copy() {
+        return new RevealAndShuffleIntoLibrarySourceEffect(this);
     }
 
 }

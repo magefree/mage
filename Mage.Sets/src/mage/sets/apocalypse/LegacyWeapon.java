@@ -29,21 +29,14 @@ package mage.sets.apocalypse;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromAnywhereTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromAnywhereAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.RevealAndShuffleIntoLibrarySourceEffect;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 
 /**
@@ -64,7 +57,7 @@ public class LegacyWeapon extends CardImpl {
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
         // If Legacy Weapon would be put into a graveyard from anywhere, reveal Legacy Weapon and shuffle it into its owner's library instead.
-        this.addAbility(new PutIntoGraveFromAnywhereTriggeredAbility(new LegacyWeaponEffect()));
+        this.addAbility(new PutIntoGraveFromAnywhereAbility(new RevealAndShuffleIntoLibrarySourceEffect()));
     }
 
     public LegacyWeapon(final LegacyWeapon card) {
@@ -74,39 +67,5 @@ public class LegacyWeapon extends CardImpl {
     @Override
     public LegacyWeapon copy() {
         return new LegacyWeapon(this);
-    }
-}
-
-class LegacyWeaponEffect extends OneShotEffect {
-
-    public LegacyWeaponEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "reveal {this} and shuffle it into its owner's library instead";
-    }
-
-    public LegacyWeaponEffect(final LegacyWeaponEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LegacyWeaponEffect copy() {
-        return new LegacyWeaponEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getSourceId());
-        if (card != null) {
-            Player player = game.getPlayer(card.getOwnerId());
-            if (player != null) {
-                Cards cards = new CardsImpl();
-                cards.add(card);
-                player.revealCards("Legacy Weapon", cards, game);
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                player.shuffleLibrary(game);
-                return true;
-            }
-        }
-        return false;
     }
 }
