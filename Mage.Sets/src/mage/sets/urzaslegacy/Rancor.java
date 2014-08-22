@@ -67,6 +67,7 @@ public class Rancor extends CardImpl {
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 0));
         Effect effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has trample");
+        ability.addEffect(effect);
         this.addAbility(ability);
 
         // When Rancor is put into a graveyard from the battlefield, return Rancor to its owner's hand.
