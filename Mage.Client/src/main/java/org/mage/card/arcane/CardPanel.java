@@ -830,6 +830,9 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             loyaltyCounterLabel.setVisible(false);
             otherCounterLabel.setVisible(false);
             for (CounterView counterView:card.getCounters()) {
+                if (counterView.getCount() == 0) {
+                    continue;
+                }
                 switch(counterView.getName()) {
                     case "+1/+1":
                         if (counterView.getCount() != plusCounter) {
