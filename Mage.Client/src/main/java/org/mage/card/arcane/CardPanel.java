@@ -1,6 +1,5 @@
 package org.mage.card.arcane;
 
-import de.schlichtherle.truezip.file.TFile;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -46,6 +45,7 @@ import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
 import mage.view.StackAbilityView;
+import net.java.truevfs.access.TFile;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.ScaledImagePanel.MultipassType;
 import org.mage.card.arcane.ScaledImagePanel.ScalingType;
