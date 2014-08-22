@@ -129,5 +129,72 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Zombie", 0); // Progenitus never touches graveyard - so no Zombie tokes is created
         
     }
+    
+    // Have Progenitus and Humility on the battlefield. Destroy Progenitus. Progenitus should go to the graveyard
+    // since it doesn't have any replacement effect. Currently, it gets shuffled into the library.
+
+
+    @Test
+    public void testHumilityDeactivatesReplacementEffectAbilities() {
+        addCard(Zone.BATTLEFIELD, playerA, "Progenitus");
+        // Enchantment  {2}{W}{W}
+        // All creatures lose all abilities and are 1/1.
+        addCard(Zone.BATTLEFIELD, playerA, "Humility");
+        // Diabolic Edict - Instant - {1}{B}
+        // Target player sacrifices a creature.
+        addCard(Zone.HAND, playerA, "Diabolic Edict");
+
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+                
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA,  "Diabolic Edict", playerA);
+        setChoice(playerA, "Progenitus");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Progenitus", 0);
+        assertGraveyardCount(playerA, "Progenitus", 1);
+        assertGraveyardCount(playerA, 2); // Diabolic Edict + Progenitus
+        
+        
+    }
+    
+    @Test
+    public void testHumilityAndKumano() {
+        // Enchantment  {2}{W}{W}
+        // All creatures lose all abilities and are 1/1.
+        addCard(Zone.BATTLEFIELD, playerA, "Humility");
+
+        // 3/3
+        // If a creature dealt damage by Kumano's Pupils this turn would die, exile it instead.
+        addCard(Zone.BATTLEFIELD, playerA, "Kumano's Pupils");
+
+        // Instant {1}{G}
+        // Target creature gets +1/+1 until end of turn.
+        // Draw a card.
+        addCard(Zone.HAND, playerA, "Aggressive Urge");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        // 2/2
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+        
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Aggressive Urge", "Kumano's Pupils");
+        
+        attack(2, playerB, "Silvercoat Lion");
+        block(2, playerA, "Kumano's Pupils", "Silvercoat Lion");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        
+        assertPermanentCount(playerA, "Kumano's Pupils", 1);
+        assertPermanentCount(playerA, "Silvercoat Lion", 0);
+        
+        assertExileCount("Silvercoat Lion", 0);
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);        
+        
+    }  
+   
 }
 
