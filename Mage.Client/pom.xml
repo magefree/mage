@@ -97,15 +97,20 @@
             <version>1.5.2</version>
         </dependency>
         <dependency>
-            <groupId>de.schlichtherle.truezip</groupId>
-            <artifactId>truezip-file</artifactId>
-            <version>7.7.5</version>
-        </dependency>
-        <dependency>
-            <groupId>de.schlichtherle.truezip</groupId>
-            <artifactId>truezip-driver-zip</artifactId>
-            <version>7.7.5</version>
-            <!--<scope>runtime</scope>-->
+            <artifactId>truevfs-profile-base</artifactId>
+            <groupId>net.java.truevfs</groupId>
+            <type>jar</type>
+            <version>0.10.6</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>truevfs-access-swing</artifactId>
+                    <groupId>net.java.truevfs</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>truecommons-key-swing</artifactId>
+                    <groupId>net.java.truecommons</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.googlecode.soundlibs</groupId>

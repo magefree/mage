@@ -1,9 +1,5 @@
 package org.mage.plugins.card.images;
 
-import de.schlichtherle.truezip.file.TFile;
-import de.schlichtherle.truezip.file.TFileOutputStream;
-import de.schlichtherle.truezip.file.TVFS;
-import de.schlichtherle.truezip.fs.FsSyncException;
 import mage.cards.repository.CardInfo;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.sets.ConstructedFormats;
@@ -12,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.dl.sources.CardImageSource;
 import org.mage.plugins.card.dl.sources.MagicCardsImageSource;
+import org.mage.plugins.card.dl.sources.MtgImageSource;
 import org.mage.plugins.card.dl.sources.WizardCardsImageSource;
 import org.mage.plugins.card.properties.SettingsManager;
 import org.mage.plugins.card.utils.CardImageUtils;
@@ -37,7 +34,10 @@ import java.net.URLConnection;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import org.mage.plugins.card.dl.sources.MtgImageSource;
+import net.java.truevfs.access.TFile;
+import net.java.truevfs.access.TFileOutputStream;
+import net.java.truevfs.access.TVFS;
+import net.java.truevfs.kernel.spec.FsSyncException;
 
 public class DownloadPictures extends DefaultBoundedRangeModel implements Runnable {
 

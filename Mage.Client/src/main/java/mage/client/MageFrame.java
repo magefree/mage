@@ -27,9 +27,6 @@
 */
 package mage.client;
 
-import de.schlichtherle.truezip.file.TArchiveDetector;
-import de.schlichtherle.truezip.file.TConfig;
-import de.schlichtherle.truezip.fs.FsOutputOption;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -95,6 +92,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.prefs.Preferences;
+import net.java.truevfs.access.TArchiveDetector;
+import net.java.truevfs.access.TConfig;
+import net.java.truevfs.kernel.spec.FsAccessOption;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -183,9 +183,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             }
         });
 
-        TConfig config = TConfig.get();
+        TConfig config = TConfig.current();
         config.setArchiveDetector(new TArchiveDetector("zip"));
-        config.getOutputPreferences().set(FsOutputOption.STORE);
+        config.setAccessPreference(FsAccessOption.STORE, true);
 
         try {
             UIManager.put("desktop", new Color(0, 0, 0, 0));
