@@ -16,7 +16,10 @@ public interface ImageManager {
     Image getTriggeredAbilityImage();
     Image getActivatedAbilityImage();
     Image getCopyInformIconImage();
-    Image getCounterImage();
+    Image getCounterImageViolet();
+    Image getCounterImageRed();
+    Image getCounterImageGreen();
+    Image getCounterImageGrey();
 
     Image getDlgAcceptButtonImage();
     Image getDlgActiveAcceptButtonImage();

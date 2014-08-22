@@ -1,12 +1,40 @@
 package org.mage.card.arcane;
 
 import de.schlichtherle.truezip.file.TFile;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import mage.cards.MagePermanent;
 import mage.cards.TextPopup;
 import mage.cards.action.ActionCallback;
 import mage.cards.action.TransferData;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
+import mage.client.util.ImageHelper;
 import mage.client.util.audio.AudioManager;
 import mage.components.ImagePanel;
 import mage.constants.AbilityType;
@@ -15,6 +43,7 @@ import mage.constants.EnlargeMode;
 import mage.utils.CardUtil;
 import mage.view.AbilityView;
 import mage.view.CardView;
+import mage.view.CounterView;
 import mage.view.PermanentView;
 import mage.view.StackAbilityView;
 import org.apache.log4j.Logger;
@@ -23,16 +52,6 @@ import org.mage.card.arcane.ScaledImagePanel.ScalingType;
 import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.images.ImageCache;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import mage.view.CounterView;
 
 /**
  * Main class for drawing Mage card object.
@@ -45,6 +64,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     private static final Logger log = Logger.getLogger(CardPanel.class);
 
+    private static final int WIDTH_LIMIT = 90; // card width limit to create smaller counter
     public static final double TAPPED_ANGLE = Math.PI / 2;
     public static final double FLIPPED_ANGLE = Math.PI;
     public static final float ASPECT_RATIO = 3.5f / 2.5f;
@@ -71,11 +91,27 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     public double flippedAngle = 0;
     public final ScaledImagePanel imagePanel;
     public ImagePanel overlayPanel;
+
     public JPanel buttonPanel;
-    public JPanel iconPanel;
+    private JButton dayNightButton;
+
     public JPanel copyIconPanel;    
-    public JLabel counterLabel;
+    private JButton showCopySourceButton;
     
+    public JPanel iconPanel;
+    private JButton typeButton;
+    
+    public JPanel counterPanel;
+    private JLabel loyaltyCounterLabel;
+    private JLabel plusCounterLabel;
+    private JLabel otherCounterLabel;
+    private JLabel minusCounterLabel;
+    private int loyaltyCounter;
+    private int plusCounter;
+    private int otherCounter;
+    private int minusCounter;
+    private int lastCardWidth;
+
     private GlowText titleText;
     private GlowText ptText;
     private boolean displayEnabled = true;
@@ -105,10 +141,6 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     private boolean transformed;
     private boolean animationInProgress = false;
-
-    private JButton dayNightButton;
-    private JButton typeButton;
-    private JButton showCopySourceButton;
 
     private boolean displayTitleAnyway;
 
@@ -158,6 +190,29 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                 }
             });
         }
+
+        // panel to show counters on the card
+        counterPanel = new JPanel();
+        counterPanel.setLayout(null);
+        counterPanel.setOpaque(false);
+        add(counterPanel);
+
+        plusCounterLabel = new JLabel("");
+        plusCounterLabel.setToolTipText("+1/+1");
+        counterPanel.add(plusCounterLabel);
+
+        minusCounterLabel = new JLabel("");
+        minusCounterLabel.setToolTipText("-1/-1");
+        counterPanel.add(minusCounterLabel);
+
+        loyaltyCounterLabel = new JLabel("");
+        loyaltyCounterLabel.setToolTipText("Loyalty");
+        counterPanel.add(loyaltyCounterLabel);
+
+        otherCounterLabel = new JLabel("");
+        counterPanel.add(otherCounterLabel);
+
+        counterPanel.setVisible(false);
 
         if (newGameCard.isAbility()) {
             if (AbilityType.TRIGGERED.equals(newGameCard.getAbilityType())) {
@@ -308,7 +363,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         // this holds reference to ActionCallback forever so set it to null to prevent
         this.callback = null;
         this.data = null;
-        this.counterLabel = null;
+        this.counterPanel = null;
     }
 
     private void setText(CardView card) {
@@ -495,6 +550,26 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         if (copyIconPanel != null) {
             copyIconPanel.setLocation(cardXOffset + borderSize, cardYOffset + borderSize);
             copyIconPanel.setSize(cardWidth - borderSize * 2, cardHeight - borderSize * 2);
+        }
+        if (counterPanel != null) {
+            counterPanel.setLocation(cardXOffset + borderSize, cardYOffset + borderSize);
+            counterPanel.setSize(cardWidth - borderSize * 2, cardHeight - borderSize * 2);
+            int size = cardWidth > WIDTH_LIMIT ? 40: 20;
+
+
+            minusCounterLabel.setLocation(counterPanel.getWidth() - size, counterPanel.getHeight() - size * 2);
+            minusCounterLabel.setSize(size, size);
+
+            plusCounterLabel.setLocation(5, counterPanel.getHeight() - size * 2);
+            plusCounterLabel.setSize(size, size);
+
+            loyaltyCounterLabel.setLocation(counterPanel.getWidth() - size, counterPanel.getHeight() - size);
+            loyaltyCounterLabel.setSize(size, size);
+
+            otherCounterLabel.setLocation(5, counterPanel.getHeight() - size);
+            otherCounterLabel.setSize(size, size);
+
+
         }
         int fontHeight = Math.round(cardHeight * (27f / 680));
         boolean showText = (!isAnimationPanel && fontHeight < 12);
@@ -741,30 +816,77 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         }
         
         
-//        if (card.getCounters() != null && !card.getCounters().isEmpty()) {           
-//            ImageIcon image = new ImageIcon(ImageManagerImpl.getInstance().getCounterImage());
-//            String amount = "";
-//            String name = "";
-//            for (CounterView counterView:card.getCounters()) {
-//                amount = Integer.toString(counterView.getCount());
-//                name = counterView.getName();
-//                break;
-//            }
-//            if (counterLabel == null) {
-//                counterLabel = new JLabel(amount, image, JLabel.CENTER);            
-//            }
-//            counterLabel.setToolTipText(name);
-//            counterLabel.setLocation(50,50);
-//            
-//            this.add(counterLabel);   
-//            counterLabel.setVisible(true);
-//        } else {
-//            if (counterLabel != null) {
-//                this.remove(counterLabel);
-//                counterLabel = null;
-//            }
-//        }       
+        if (card.getCounters() != null && !card.getCounters().isEmpty()) {
+            String name = "";
+            if (lastCardWidth != cardWidth) {
+                lastCardWidth = cardWidth;
+                plusCounter = 0;
+                minusCounter = 0;
+                otherCounter = 0;
+                loyaltyCounter = 0;
+            }
+            plusCounterLabel.setVisible(false);
+            minusCounterLabel.setVisible(false);
+            loyaltyCounterLabel.setVisible(false);
+            otherCounterLabel.setVisible(false);
+            for (CounterView counterView:card.getCounters()) {
+                switch(counterView.getName()) {
+                    case "+1/+1":
+                        if (counterView.getCount() != plusCounter) {
+                            plusCounter = counterView.getCount();
+                            plusCounterLabel.setIcon(getCounterImageWithAmount(plusCounter, ImageManagerImpl.getInstance().getCounterImageGreen(), cardWidth));
+                        }
+                        plusCounterLabel.setVisible(true);
+                        break;
+                    case "-1/-1":
+                        if (counterView.getCount() != minusCounter) {
+                            minusCounter = counterView.getCount();
+                            minusCounterLabel.setIcon(getCounterImageWithAmount(minusCounter, ImageManagerImpl.getInstance().getCounterImageRed(), cardWidth));
+                        }
+                        minusCounterLabel.setVisible(true);
+                        break;
+                    case "Loyalty":
+                        if (counterView.getCount() != loyaltyCounter) {
+                            loyaltyCounter = counterView.getCount();
+                            loyaltyCounterLabel.setIcon(getCounterImageWithAmount(loyaltyCounter, ImageManagerImpl.getInstance().getCounterImageViolet(), cardWidth));
+                        }
+                        loyaltyCounterLabel.setVisible(true);
+                        break;
+                    default:
+                        if (name.isEmpty()) { // only first other counter is shown
+                            name = counterView.getName();
+                            otherCounter = counterView.getCount();
+                            otherCounterLabel.setToolTipText(name);
+                            otherCounterLabel.setIcon(getCounterImageWithAmount(otherCounter, ImageManagerImpl.getInstance().getCounterImageGrey(), cardWidth));
+                            otherCounterLabel.setVisible(true);
+                        }
+                }
+            }            
+            
+            counterPanel.setVisible(true);
+        } else {
+            plusCounterLabel.setVisible(false);
+            minusCounterLabel.setVisible(false);
+            loyaltyCounterLabel.setVisible(false);
+            otherCounterLabel.setVisible(false);
+            counterPanel.setVisible(false);
+        }       
         repaint();
+    }
+
+    private static ImageIcon getCounterImageWithAmount(int amount, BufferedImage image, int cardWidth) {
+        int factor = cardWidth > WIDTH_LIMIT ? 2 :1;
+        BufferedImage newImage;
+        if (cardWidth > WIDTH_LIMIT) {
+            newImage = ImageManagerImpl.deepCopy(image);
+        } else {
+            newImage = ImageHelper.getResizedImage(image, 20, 20);
+        }
+        Graphics graphics = newImage.getGraphics();
+        graphics.setColor(Color.BLACK);
+        graphics.setFont(new Font("Arial Black", Font.BOLD, factor * 9 ));
+        graphics.drawString(Integer.toString(amount), 4 * factor, 11 * factor);
+        return new ImageIcon(newImage);
     }
 
     @Override

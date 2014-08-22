@@ -1,17 +1,21 @@
 package org.mage.plugins.card.utils.impl;
 
-import mage.client.util.gui.BufferedImageBuilder;
-import org.mage.plugins.card.utils.ImageManager;
-import org.mage.plugins.card.utils.Transparency;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
+import java.awt.image.WritableRaster;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import javax.imageio.ImageIO;
+import mage.client.util.gui.BufferedImageBuilder;
+import org.mage.plugins.card.utils.ImageManager;
+import org.mage.plugins.card.utils.Transparency;
 
 public class ImageManagerImpl implements ImageManager {
 
@@ -134,12 +138,39 @@ public class ImageManagerImpl implements ImageManager {
     }
 
     @Override
-    public BufferedImage getCounterImage() {
-        if (imageCounter == null) {
-            Image image = getImageFromResourceTransparent("/card/counter_green.png", Color.WHITE, new Rectangle(32, 32));
-            imageCounter = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+    public BufferedImage getCounterImageViolet() {
+        if (imageCounterViolet == null) {
+            Image image = getImageFromResourceTransparent("/card/counter_violet.png", Color.WHITE, new Rectangle(32, 32));
+            imageCounterViolet = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
         }
-        return imageCounter;
+        return imageCounterViolet;
+    }
+
+    @Override
+    public BufferedImage getCounterImageGreen() {
+        if (imageCounterGreen == null) {
+            Image image = getImageFromResourceTransparent("/card/counter_green.png", Color.WHITE, new Rectangle(32, 32));
+            imageCounterGreen = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+        }
+        return imageCounterGreen;
+    }
+
+    @Override
+    public BufferedImage getCounterImageRed() {
+        if (imageCounterRed == null) {
+            Image image = getImageFromResourceTransparent("/card/counter_red.png", Color.WHITE, new Rectangle(32, 32));
+            imageCounterRed = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+        }
+        return imageCounterRed;
+    }
+
+    @Override
+    public BufferedImage getCounterImageGrey() {
+        if (imageCounterGrey == null) {
+            Image image = getImageFromResourceTransparent("/card/counter_grey.png", Color.WHITE, new Rectangle(32, 32));
+            imageCounterGrey = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+        }
+        return imageCounterGrey;
     }
 
     @Override
@@ -253,6 +284,13 @@ public class ImageManagerImpl implements ImageManager {
         return image;
     }
 
+    public static BufferedImage deepCopy(BufferedImage bi) {
+        ColorModel cm = bi.getColorModel();
+        boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+        WritableRaster raster = bi.copyData(null);
+        return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
+    }
+
     private static BufferedImage appImage;
     private static BufferedImage appSmallImage;
     private static BufferedImage appImageFlashed;
@@ -265,7 +303,10 @@ public class ImageManagerImpl implements ImageManager {
     private static BufferedImage triggeredAbilityIcon;
     private static BufferedImage activatedAbilityIcon;
     private static BufferedImage imageCopyIcon;
-    private static BufferedImage imageCounter;
+    private static BufferedImage imageCounterGreen;
+    private static BufferedImage imageCounterGrey;
+    private static BufferedImage imageCounterRed;
+    private static BufferedImage imageCounterViolet;
 
     private static BufferedImage imageDlgAcceptButton;
     private static BufferedImage imageDlgActiveAcceptButton;
