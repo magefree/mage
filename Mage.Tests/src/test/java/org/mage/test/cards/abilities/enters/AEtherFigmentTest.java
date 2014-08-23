@@ -13,6 +13,14 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class AEtherFigmentTest extends CardTestPlayerBase {
 
+    /*
+        AEther Figment   {1}{U}
+        Creature - Illusion
+        1/1
+        Kicker {3} (You may pay an additional as you cast this spell.)
+        AEther Figment is unblockable.
+        If AEther Figment was kicked, it enters the battlefield with two +1/+1 counters on it.
+    */
     @Test
     public void testEnteringWithCounters() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
@@ -26,9 +34,6 @@ public class AEtherFigmentTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertPermanentCount(playerA, "AEther Figment", 1);
-
-        Permanent aetherFigment = getPermanent("AEther Figment", playerA.getId());
-        Assert.assertEquals(3, aetherFigment.getPower().getValue());
-        Assert.assertEquals(3, aetherFigment.getToughness().getValue());
+        assertPowerToughness(playerA,  "AEther Figment", 3, 3);
     }
 }
