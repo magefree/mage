@@ -531,6 +531,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             }
             updateZoneChangeCounter();
             PermanentCard permanent = new PermanentCard(this, controllerId);
+            // reset is done to end continuous effects from previous instances of that permanent (e.g undying)
             game.resetForSourceId(permanent.getId());
             game.addPermanent(permanent);
             game.setZone(objectId, Zone.BATTLEFIELD);

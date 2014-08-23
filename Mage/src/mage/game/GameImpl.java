@@ -2149,7 +2149,7 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public void resetForSourceId(UUID sourceId) {
         // make sure that all effects don't touch this card once it returns back to battlefield
-        // e.g. this prevents effects affect creature with undying return from graveyard
+        // e.g. this prevents that effects affect creature with undying return from graveyard
         for (ContinuousEffect effect : getContinuousEffects().getLayeredEffects(this)) {
             if (effect.getAffectedObjects().contains(sourceId)) {
                 effect.getAffectedObjects().remove(sourceId);
