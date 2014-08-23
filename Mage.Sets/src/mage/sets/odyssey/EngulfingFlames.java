@@ -28,19 +28,15 @@
 package mage.sets.odyssey;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.ruleModifying.CantRegenerateTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TimingRule;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -58,7 +54,7 @@ public class EngulfingFlames extends CardImpl {
         // Engulfing Flames deals 1 damage to target creature. It can't be regenerated this turn.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new EngulfingFlamesEffect());
+        this.getSpellAbility().addEffect(new CantRegenerateTargetEffect(Duration.EndOfTurn, "It"));
         // Flashback {3}{R}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{R}"), TimingRule.INSTANT));
     }
@@ -72,42 +68,3 @@ public class EngulfingFlames extends CardImpl {
         return new EngulfingFlames(this);
     }
 }
-
-class EngulfingFlamesEffect extends ReplacementEffectImpl {
-
-    public EngulfingFlamesEffect() {
-        super(Duration.EndOfTurn, Outcome.Detriment);
-        staticText = "It can't be regenerated this turn";
-    }
-
-    public EngulfingFlamesEffect(final EngulfingFlamesEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public EngulfingFlamesEffect copy() {
-        return new EngulfingFlamesEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (GameEvent.EventType.REGENERATE.equals(event.getType())) {
-            UUID targetId = getTargetPointer().getFirst(game, source);
-            if (targetId != null) {
-                return targetId.equals(event.getTargetId());
-            }
-        }
-        return false;
-    }
-}
-    

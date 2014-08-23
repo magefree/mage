@@ -35,6 +35,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
+import mage.abilities.effects.common.ruleModifying.CantRegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -58,7 +59,7 @@ public class Disintegrate extends CardImpl {
 
         // Disintegrate deals X damage to target creature or player. That creature can't be regenerated this turn. If the creature would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
-        this.getSpellAbility().addEffect(new DisintegrateCantRegenerateEffect());
+        this.getSpellAbility().addEffect(new CantRegenerateTargetEffect(Duration.EndOfTurn, "That creature"));
         Effect effect = new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn);
         effect.setText("If the creature would die this turn, exile it instead");
         this.getSpellAbility().addEffect(effect);
@@ -72,43 +73,5 @@ public class Disintegrate extends CardImpl {
     @Override
     public Disintegrate copy() {
         return new Disintegrate(this);
-    }
-}
-
-class DisintegrateCantRegenerateEffect extends ReplacementEffectImpl {
-
-    public DisintegrateCantRegenerateEffect() {
-        super(Duration.EndOfTurn, Outcome.Detriment);
-        staticText = "That creature can't be regenerated this turn";
-    }
-
-    public DisintegrateCantRegenerateEffect(final DisintegrateCantRegenerateEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DisintegrateCantRegenerateEffect copy() {
-        return new DisintegrateCantRegenerateEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (GameEvent.EventType.REGENERATE.equals(event.getType())) {
-            UUID targetId = getTargetPointer().getFirst(game, source);
-            if (targetId != null) {
-                return targetId.equals(event.getTargetId());
-            }
-        }
-        return false;
     }
 }

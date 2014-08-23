@@ -25,52 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+
+package mage.abilities.effects.common.ruleModifying;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.ScryEffect;
-import mage.abilities.effects.common.ruleModifying.CantRegenerateTargetEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.common.DamagedByWatcher;
 
 /**
  *
  * @author LevelX2
  */
-public class RageOfPurphoros extends CardImpl {
 
-    public RageOfPurphoros(UUID ownerId) {
-        super(ownerId, 137, "Rage of Purphoros", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
-        this.expansionSetCode = "THS";
+public class CantRegenerateTargetEffect extends ContinuousRuleModifiyingEffectImpl {
 
-        this.color.setRed(true);
-
-        // Rage of Purphoros deals 4 damage to target creature. It can't be regenerated this turn. Scry 1.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new CantRegenerateTargetEffect(Duration.EndOfTurn, "It"));
-        this.getSpellAbility().addEffect(new ScryEffect(1));
-
-        this.addWatcher(new DamagedByWatcher());
+    public CantRegenerateTargetEffect(Duration duration, String objectText) {
+        super(duration, Outcome.Detriment);
+        staticText = objectText + " can't be regenerated this turn";
     }
 
-    public RageOfPurphoros(final RageOfPurphoros card) {
-        super(card);
+    public CantRegenerateTargetEffect(final CantRegenerateTargetEffect effect) {
+        super(effect);
     }
 
     @Override
-    public RageOfPurphoros copy() {
-        return new RageOfPurphoros(this);
+    public CantRegenerateTargetEffect copy() {
+        return new CantRegenerateTargetEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (GameEvent.EventType.REGENERATE.equals(event.getType())) {
+            UUID targetId = getTargetPointer().getFirst(game, source);
+            if (targetId != null) {
+                return targetId.equals(event.getTargetId());
+            }
+        }
+        return false;
     }
 }

@@ -30,7 +30,7 @@ package mage.sets.darksteel;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -80,7 +80,7 @@ public class Flamebreak extends CardImpl {
     }
 }
 
-class FlamebreakCantRegenerateEffect extends ReplacementEffectImpl {
+class FlamebreakCantRegenerateEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public FlamebreakCantRegenerateEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
@@ -102,16 +102,11 @@ class FlamebreakCantRegenerateEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.REGENERATE) {
             DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
             if (watcher != null) {
-                return watcher.damagedCreatures.contains(event.getTargetId());
+                return watcher.wasDamaged(event.getTargetId(), game);
             }
         }
         return false;
