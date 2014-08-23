@@ -31,8 +31,10 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -40,10 +42,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreatureOrPlayer;
-import mage.watchers.common.DamagedByWatcher;
 
 /**
  *
@@ -60,7 +59,9 @@ public class Disintegrate extends CardImpl {
         // Disintegrate deals X damage to target creature or player. That creature can't be regenerated this turn. If the creature would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addEffect(new DisintegrateCantRegenerateEffect());
-        this.getSpellAbility().addEffect(new DisintegrateExileEffect());
+        Effect effect = new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn);
+        effect.setText("If the creature would die this turn, exile it instead");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
@@ -103,48 +104,6 @@ class DisintegrateCantRegenerateEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (GameEvent.EventType.REGENERATE.equals(event.getType())) {
-            UUID targetId = getTargetPointer().getFirst(game, source);
-            if (targetId != null) {
-                return targetId.equals(event.getTargetId());
-            }
-        }
-        return false;
-    }
-}
-
-class DisintegrateExileEffect extends ReplacementEffectImpl {
-
-    public DisintegrateExileEffect() {
-        super(Duration.EndOfTurn, Outcome.Exile);
-        staticText = "If the creature would die this turn, exile it instead";
-    }
-
-    public DisintegrateExileEffect(final DisintegrateExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DisintegrateExileEffect copy() {
-        return new DisintegrateExileEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = ((ZoneChangeEvent) event).getTarget();
-        if (permanent != null) {
-            return permanent.moveToExile(null, "", source.getSourceId(), game);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (GameEvent.EventType.ZONE_CHANGE.equals(event.getType()) && ((ZoneChangeEvent) event).isDiesEvent()) {
             UUID targetId = getTargetPointer().getFirst(game, source);
             if (targetId != null) {
                 return targetId.equals(event.getTargetId());

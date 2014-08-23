@@ -27,15 +27,17 @@
  */
 package mage.watchers.common;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+import mage.MageObject;
+import mage.MageObjectReference;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -43,7 +45,7 @@ import java.util.UUID;
  */
 public class DamagedByWatcher extends Watcher {
 
-    public List<UUID> damagedCreatures = new ArrayList<>();
+    public Set<MageObjectReference> damagedCreatures = new HashSet<>();
 
     public DamagedByWatcher() {
         super("DamagedByWatcher", WatcherScope.CARD);
@@ -61,9 +63,10 @@ public class DamagedByWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.DAMAGED_CREATURE) {
-            if (sourceId.equals(event.getSourceId()) && !damagedCreatures.contains(event.getTargetId())) {
-                damagedCreatures.add(event.getTargetId());
+        if (event.getType() == EventType.DAMAGED_CREATURE && sourceId.equals(event.getSourceId())) {
+            MageObjectReference mor = new MageObjectReference(event.getTargetId(), game);
+            if (!damagedCreatures.contains(mor)) {
+                damagedCreatures.add(mor);
             }
         }
     }
@@ -74,4 +77,15 @@ public class DamagedByWatcher extends Watcher {
         damagedCreatures.clear();
     }
 
+    public boolean wasDamaged(UUID sourceId, Game game) {
+        MageObject mageObject = game.getObject(sourceId);
+        if (mageObject instanceof Permanent) {
+            return wasDamaged((Permanent) mageObject);
+        }
+        return false;
+    }
+
+    public boolean wasDamaged(Permanent permanent) {
+        return damagedCreatures.contains(new MageObjectReference(permanent));
+    }
 }

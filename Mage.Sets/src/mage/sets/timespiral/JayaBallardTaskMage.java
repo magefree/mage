@@ -35,6 +35,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -111,7 +112,7 @@ public class JayaBallardTaskMage extends CardImpl {
     }
 }
 
-class CantRegenerateEffect extends ReplacementEffectImpl {
+class CantRegenerateEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public CantRegenerateEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
@@ -133,16 +134,11 @@ class CantRegenerateEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.REGENERATE) {
             DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
             if (watcher != null) {
-                return watcher.damagedCreatures.contains(event.getTargetId());
+                return watcher.wasDamaged(event.getTargetId(), game);
             } 
         }
         return false;

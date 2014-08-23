@@ -40,7 +40,6 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.watchers.common.DamagedByWatcher;
 
 /**
  *

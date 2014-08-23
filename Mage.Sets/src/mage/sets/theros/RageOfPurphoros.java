@@ -29,7 +29,7 @@ package mage.sets.theros;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ScryEffect;
 import mage.cards.CardImpl;
@@ -74,7 +74,7 @@ public class RageOfPurphoros extends CardImpl {
     }
 }
 
-class RageOfPurphorosEffect extends ReplacementEffectImpl {
+class RageOfPurphorosEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public RageOfPurphorosEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
@@ -96,16 +96,11 @@ class RageOfPurphorosEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.REGENERATE) {
             DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
             if (watcher != null) {
-                return watcher.damagedCreatures.contains(event.getTargetId());
+                return watcher.wasDamaged(event.getTargetId(), game);
             }
         }
         return false;

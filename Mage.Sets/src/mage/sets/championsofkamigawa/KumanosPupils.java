@@ -29,24 +29,14 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
-import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
-import mage.watchers.common.DamagedByWatcher;
-
-
 
 /**
  * @author LevelX
@@ -63,9 +53,7 @@ public class KumanosPupils extends CardImpl {
         this.toughness = new MageInt(3);
 
         // If a creature dealt damage by Kumano's Pupils this turn would die, exile it instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KumanosPupilsEffect()));
-
-        this.addWatcher(new DamagedByWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DealtDamageToCreatureBySourceDies(this, Duration.WhileOnBattlefield)));
     }
 
     public KumanosPupils(final KumanosPupils card) {
@@ -75,48 +63,6 @@ public class KumanosPupils extends CardImpl {
     @Override
     public KumanosPupils copy() {
         return new KumanosPupils(this);
-    }
-
-}
-class KumanosPupilsEffect extends ReplacementEffectImpl {
-
-    public KumanosPupilsEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Exile);
-        staticText = "If a creature dealt damage by {this} this turn would die, exile it instead";
-    }
-
-    public KumanosPupilsEffect(final KumanosPupilsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public KumanosPupilsEffect copy() {
-        return new KumanosPupilsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = ((ZoneChangeEvent)event).getTarget();
-        if (permanent != null) {
-            return permanent.moveToExile(null, "", source.getSourceId(), game);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
-            DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
-                if (watcher != null) {
-                    return watcher.damagedCreatures.contains(event.getTargetId());
-                }
-        }
-        return false;
     }
 
 }

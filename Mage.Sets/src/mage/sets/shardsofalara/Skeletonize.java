@@ -46,6 +46,7 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
@@ -124,10 +125,13 @@ class SkeletonizeDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
-            DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", this.getSourceId());
-            if (watcher != null) {
-                return watcher.damagedCreatures.contains(event.getTargetId());
+        if (event.getType().equals(EventType.ZONE_CHANGE)) {
+            ZoneChangeEvent  zce = (ZoneChangeEvent) event;
+            if (zce.isDiesEvent()) {
+                DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", this.getSourceId());
+                if (watcher != null) {
+                    return watcher.wasDamaged(zce.getTarget());
+                }
             }
         }
         return false;

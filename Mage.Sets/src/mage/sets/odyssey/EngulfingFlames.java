@@ -42,7 +42,6 @@ import mage.constants.TimingRule;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.common.DamagedByWatcher;
 
 /**
  *
@@ -60,7 +59,6 @@ public class EngulfingFlames extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new EngulfingFlamesEffect());
-        this.addWatcher(new DamagedByWatcher());
         // Flashback {3}{R}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{R}"), TimingRule.INSTANT));
     }

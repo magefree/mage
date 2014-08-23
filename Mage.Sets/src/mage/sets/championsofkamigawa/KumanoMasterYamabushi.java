@@ -31,28 +31,19 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
-import mage.watchers.common.DamagedByWatcher;
-
-
 
 /**
  * @author LevelX
@@ -72,10 +63,10 @@ public class KumanoMasterYamabushi extends CardImpl {
         // {{1}{R}: Kumano, Master Yamabushi deals 1 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}{R}") );
         ability.addTarget(new TargetCreatureOrPlayer());
-        // If a creature dealt damage by Kumano this turn would die, exile it instead.
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KumanaoMasterYamabushiEffect()));
-        this.addWatcher(new DamagedByWatcher());
+        // If a creature dealt damage by Kumano this turn would die, exile it instead.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DealtDamageToCreatureBySourceDies(this, Duration.WhileOnBattlefield)));
+        
     }
 
     public KumanoMasterYamabushi(final KumanoMasterYamabushi card) {
@@ -85,48 +76,6 @@ public class KumanoMasterYamabushi extends CardImpl {
     @Override
     public KumanoMasterYamabushi copy() {
         return new KumanoMasterYamabushi(this);
-    }
-
-}
-class KumanaoMasterYamabushiEffect extends ReplacementEffectImpl {
-
-    public KumanaoMasterYamabushiEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Exile);
-        staticText = "If a creature dealt damage by {this} this turn would die, exile it instead";
-    }
-
-    public KumanaoMasterYamabushiEffect(final KumanaoMasterYamabushiEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public KumanaoMasterYamabushiEffect copy() {
-        return new KumanaoMasterYamabushiEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = ((ZoneChangeEvent)event).getTarget();
-        if (permanent != null) {
-            return permanent.moveToExile(null, "", source.getSourceId(), game);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
-            DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
-            if (watcher != null) {
-                return watcher.damagedCreatures.contains(event.getTargetId());
-            }
-        }
-        return false;
     }
 
 }

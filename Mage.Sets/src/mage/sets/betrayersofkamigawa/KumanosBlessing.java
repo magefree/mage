@@ -27,9 +27,10 @@
  */
 package mage.sets.betrayersofkamigawa;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -123,10 +124,13 @@ class KumanosBlessingEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
-            DamagedByEnchantedWatcher watcher = (DamagedByEnchantedWatcher) game.getState().getWatchers().get("DamagedByEnchantedWatcher", source.getSourceId());
-            if (watcher != null) {
-                return watcher.damagedCreatures.contains(event.getTargetId());
+        if (event.getType() == EventType.ZONE_CHANGE) {
+            ZoneChangeEvent  zce = (ZoneChangeEvent) event;
+            if (zce.isDiesEvent()) {
+                DamagedByEnchantedWatcher watcher = (DamagedByEnchantedWatcher) game.getState().getWatchers().get("DamagedByEnchantedWatcher", source.getSourceId());
+                if (watcher != null) {
+                    return watcher.wasDamaged(zce.getTarget());
+                }
             }
         }
         return false;
@@ -136,7 +140,7 @@ class KumanosBlessingEffect extends ReplacementEffectImpl {
 
 class DamagedByEnchantedWatcher extends Watcher {
 
-    public List<UUID> damagedCreatures = new ArrayList<>();
+    private final Set<MageObjectReference> damagedCreatures = new HashSet<>();
 
     public DamagedByEnchantedWatcher() {
         super("DamagedByEnchantedWatcher", WatcherScope.CARD);
@@ -157,8 +161,11 @@ class DamagedByEnchantedWatcher extends Watcher {
         if (event.getType() == EventType.DAMAGED_CREATURE) {
             Permanent enchantment = game.getPermanent(this.getSourceId());
             if (enchantment != null && enchantment.getAttachedTo() != null) {
-                if (enchantment.getAttachedTo().equals(event.getSourceId()) && !damagedCreatures.contains(event.getTargetId())) {
-                    damagedCreatures.add(event.getTargetId());
+                if (enchantment.getAttachedTo().equals(event.getSourceId())) {
+                    MageObjectReference mor = new MageObjectReference(event.getTargetId(), game);
+                    if (!damagedCreatures.contains(mor)) {
+                        damagedCreatures.add(mor);
+                    }
                 }
             }
         }
@@ -170,4 +177,7 @@ class DamagedByEnchantedWatcher extends Watcher {
         damagedCreatures.clear();
     }
 
+    public boolean wasDamaged(Permanent permanent) {
+        return damagedCreatures.contains(new MageObjectReference(permanent));
+    }
 }

@@ -28,21 +28,14 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ShuffleSpellEffect;
+import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.watchers.common.DamagedByWatcher;
 
@@ -56,9 +49,10 @@ public class RedSunsZenith extends CardImpl {
         super(ownerId, 74, "Red Sun's Zenith", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");
         this.expansionSetCode = "MBS";
         this.color.setRed(true);
+
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
-        this.getSpellAbility().addEffect(new RedSunsZenithEffect());
+        this.getSpellAbility().addEffect(new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
         this.addWatcher(new DamagedByWatcher());
     }
@@ -70,48 +64,6 @@ public class RedSunsZenith extends CardImpl {
     @Override
     public RedSunsZenith copy() {
         return new RedSunsZenith(this);
-    }
-
-}
-
-class RedSunsZenithEffect extends ReplacementEffectImpl {
-
-    public RedSunsZenithEffect() {
-        super(Duration.EndOfTurn, Outcome.Exile);
-        staticText = "If a creature dealt damage this way would die this turn, exile it instead";
-    }
-
-    public RedSunsZenithEffect(final RedSunsZenithEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RedSunsZenithEffect copy() {
-        return new RedSunsZenithEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = ((ZoneChangeEvent)event).getTarget();
-        if (permanent != null) {
-            return permanent.moveToExile(null, "", source.getSourceId(), game);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
-            DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
-            if (watcher != null)
-                return watcher.damagedCreatures.contains(event.getTargetId());
-        }
-        return false;
     }
 
 }

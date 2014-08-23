@@ -35,6 +35,7 @@ import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -60,8 +61,7 @@ public class PillarOfFlame extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         // If a creature dealt damage this way would die this turn, exile it instead.
-        this.getSpellAbility().addEffect(new PillarOfFlameEffect());
-        this.addWatcher(new DamagedByWatcher());
+        this.getSpellAbility().addEffect(new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn));
     }
 
     public PillarOfFlame(final PillarOfFlame card) {

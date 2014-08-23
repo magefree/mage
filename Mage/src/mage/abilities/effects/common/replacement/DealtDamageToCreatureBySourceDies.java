@@ -25,65 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenth;
 
-import java.util.UUID;
+package mage.abilities.effects.common.replacement;
+
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.CardImpl;
+import mage.abilities.effects.ReplacementEffectImpl;
+import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.watchers.common.DamagedByWatcher;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class Incinerate extends CardImpl {
 
-    public Incinerate(UUID ownerId) {
-        super(ownerId, 213, "Incinerate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "10E";
+public class DealtDamageToCreatureBySourceDies extends ReplacementEffectImpl {
 
-        this.color.setRed(true);
-
-        this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-        this.getSpellAbility().addEffect(new IncinerateEffect());
-        this.addWatcher(new DamagedByWatcher());
+    public DealtDamageToCreatureBySourceDies(Card card, Duration duration) {
+        super(Duration.WhileOnBattlefield, Outcome.Exile);
+        card.addWatcher(new DamagedByWatcher());
+        if (card.getCardType().contains(CardType.CREATURE)) {
+            staticText = "If a creature dealt damage by {this} this turn would die, exile it instead";
+        } else {
+            staticText = "If a creature dealt damage this way would die this turn, exile it instead";
+        }
     }
 
-    public Incinerate(final Incinerate card) {
-        super(card);
-    }
-
-    @Override
-    public Incinerate copy() {
-        return new Incinerate(this);
-    }
-}
-
-class IncinerateEffect extends ContinuousRuleModifiyingEffectImpl {
-
-    public IncinerateEffect() {
-        super(Duration.EndOfTurn, Outcome.Detriment, true, false);
-        staticText = "A creature dealt damage this way can't be regenerated this turn";
-    }
-
-    public IncinerateEffect(final IncinerateEffect effect) {
+    public DealtDamageToCreatureBySourceDies(final DealtDamageToCreatureBySourceDies effect) {
         super(effect);
     }
 
     @Override
-    public IncinerateEffect copy() {
-        return new IncinerateEffect(this);
+    public DealtDamageToCreatureBySourceDies copy() {
+        return new DealtDamageToCreatureBySourceDies(this);
     }
 
     @Override
@@ -92,11 +75,24 @@ class IncinerateEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Permanent permanent = ((ZoneChangeEvent)event).getTarget();
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && permanent != null) {
+            return controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD);
+        }
+        return false;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.REGENERATE) {
-            DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
-            if (watcher != null) {
-                return watcher.wasDamaged(event.getTargetId(), game);
+        if (event.getType().equals(EventType.ZONE_CHANGE)) {
+            ZoneChangeEvent  zce = (ZoneChangeEvent) event;
+            if (zce.isDiesEvent()) {
+                DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
+                if (watcher != null) {
+                    return watcher.wasDamaged(zce.getTarget());
+                }
             }
         }
         return false;

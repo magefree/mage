@@ -28,21 +28,14 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.common.DamagedByWatcher;
 
 /**
  *
@@ -60,8 +53,9 @@ public class MagmaSpray extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // If that creature would die this turn, exile it instead.
-        this.getSpellAbility().addEffect(new MagmaSprayEffect());
-        this.addWatcher(new DamagedByWatcher());
+        Effect effect = new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn);
+        effect.setText("If that creature would die this turn, exile it instead");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public MagmaSpray(final MagmaSpray card) {
@@ -71,47 +65,5 @@ public class MagmaSpray extends CardImpl {
     @Override
     public MagmaSpray copy() {
         return new MagmaSpray(this);
-    }
-}
-
-class MagmaSprayEffect extends ReplacementEffectImpl {
-
-    public MagmaSprayEffect() {
-        super(Duration.EndOfTurn, Outcome.Exile);
-        staticText = "If that creature would die this turn, exile it instead";
-    }
-
-    public MagmaSprayEffect(final MagmaSprayEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MagmaSprayEffect copy() {
-        return new MagmaSprayEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = ((ZoneChangeEvent) event).getTarget();
-        if (permanent != null) {
-            return permanent.moveToExile(null, "", source.getSourceId(), game);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
-            DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
-            if (watcher != null) {
-                return watcher.damagedCreatures.contains(event.getTargetId());
-            }
-        }
-        return false;
     }
 }
