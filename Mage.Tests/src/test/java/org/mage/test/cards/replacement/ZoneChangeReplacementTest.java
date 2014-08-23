@@ -187,14 +187,103 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
-        
+
+        assertGraveyardCount(playerA, "Aggressive Urge", 1);
         assertPermanentCount(playerA, "Kumano's Pupils", 1);
-        assertPermanentCount(playerA, "Silvercoat Lion", 0);
+        assertPowerToughness(playerA, "Kumano's Pupils", 2, 2);
+        assertPermanentCount(playerB, "Silvercoat Lion", 0);
         
         assertExileCount("Silvercoat Lion", 0);
-        assertGraveyardCount(playerA, "Silvercoat Lion", 1);        
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
         
     }  
-   
+
+
+    // A creature gets damage from Kumano's Pupils and is destroyed after.
+    // The creature has to go to exile.
+
+    @Test
+    public void testCreatureGetsExiledByKumano() {
+        // 3/3
+        // If a creature dealt damage by Kumano's Pupils this turn would die, exile it instead.
+        addCard(Zone.BATTLEFIELD, playerA, "Kumano's Pupils");
+        // 2/4
+        addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox", 1);
+
+        // Terminate - Instant {R}{B}
+        // Destroy target creature. It can't be regenerated.
+        addCard(Zone.HAND, playerA, "Terminate");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+
+        attack(2, playerB, "Pillarfield Ox");
+        block(2, playerA, "Kumano's Pupils", "Pillarfield Ox");
+
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Terminate", "Pillarfield Ox");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerB, "Pillarfield Ox", 0);
+        assertGraveyardCount(playerA, "Terminate", 1);
+
+        assertExileCount("Pillarfield Ox", 1);
+        assertGraveyardCount(playerB, "Pillarfield Ox", 0);
+
+    }
+
+
+
+    // A creature gets damage from Kumano's Pupils and returns to hand after.
+    // Then it's cast again. This new permanent instance is destroyed. It may not
+    // got to exile because only previous instance was damgaged by Kumano's Pupils.
+
+    @Test
+    public void testPermanentNewInstanceAndKumano() {
+        // 3/3
+        // If a creature dealt damage by Kumano's Pupils this turn would die, exile it instead.
+        addCard(Zone.BATTLEFIELD, playerA, "Kumano's Pupils");
+        // 2/4
+        addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox", 1);
+
+        // Unsummon - Instant {U}
+        // Return target creature to its owner's hand.
+        addCard(Zone.HAND, playerA, "Unsummon");
+        // Terminate - Instant {R}{B}
+        // Destroy target creature. It can't be regenerated.
+        addCard(Zone.HAND, playerA, "Terminate");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 4);
+
+
+        attack(2, playerB, "Pillarfield Ox");
+        block(2, playerA, "Kumano's Pupils", "Pillarfield Ox");
+        
+        castSpell(2, PhaseStep.COMBAT_DAMAGE, playerA, "Unsummon", "Pillarfield Ox");
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Pillarfield Ox");
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Terminate", "Pillarfield Ox");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerB, "Pillarfield Ox", 0);
+        assertPermanentCount(playerA, "Kumano's Pupils", 1);
+        assertPowerToughness(playerA, "Kumano's Pupils", 3, 3);
+        assertGraveyardCount(playerA, "Unsummon", 1);
+        assertGraveyardCount(playerA, "Terminate", 1);
+
+        assertExileCount("Pillarfield Ox", 0);
+        assertGraveyardCount(playerB, "Pillarfield Ox", 1);
+
+    }
+
 }
 

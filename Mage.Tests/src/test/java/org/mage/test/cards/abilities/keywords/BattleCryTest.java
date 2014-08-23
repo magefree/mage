@@ -30,6 +30,7 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.filter.Filter;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -64,7 +65,7 @@ public class BattleCryTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerB, "Signal Pest", 3);
-        assertPowerToughness(playerB, "Signal Pest", 2,1); // two other Signal Pest atack, so it get +2 power
+        assertPowerToughness(playerB, "Signal Pest", 2,1, Filter.ComparisonScope.All); // two other Signal Pest atack, so it get +2 power
     }
 
     /**
