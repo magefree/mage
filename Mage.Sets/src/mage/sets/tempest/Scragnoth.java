@@ -29,12 +29,14 @@ package mage.sets.tempest;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.CantCounterAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.FilterCard;
+import mage.filter.FilterObject;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -42,7 +44,10 @@ import mage.filter.FilterCard;
  */
 public class Scragnoth extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Blue");
+    private static final FilterObject filter = new FilterObject("from blue");
+    static {
+        filter.add(new ColorPredicate(ObjectColor.BLUE));
+    }
     
     public Scragnoth(UUID ownerId) {
         super(ownerId, 147, "Scragnoth", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
