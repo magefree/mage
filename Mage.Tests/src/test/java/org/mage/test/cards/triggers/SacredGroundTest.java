@@ -49,7 +49,7 @@ public class SacredGroundTest extends CardTestPlayerBase {
      * Destroyed land returns to battlefield
      */
     @Test
-    public void landReturnsToBattlefield() {
+    public void testSpellDestroyLandReturnsToBattlefield() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         // Destroy target land. If that land was nonbasic, Molten Rain deals 2 damage to the land's controller.
         addCard(Zone.HAND, playerA, "Molten Rain");
@@ -73,6 +73,75 @@ public class SacredGroundTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 22); // + 2 * 2 life from  Kabira Crossroads - 2 Life from Molten Rain
+    }
+
+    /**
+     * Sacred Ground {1}{W}
+     * Enchantment
+     * Whenever a spell or ability an opponent controls causes a land to be put into your
+     * graveyard from the battlefield, return that card to the battlefield.
+     *
+     *
+     * Destroyed land returns to battlefield
+     */
+    @Test
+    public void testSpellSacrificeLandReturnsToBattlefield() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        // Each player loses 1 life, discards a card, sacrifices a creature, then sacrifices a land.
+        addCard(Zone.HAND, playerA, "Smallpox");
+
+        // Kabira Crossroads Land
+        // Kabira Crossroads enters the battlefield tapped.
+        // When Kabira Crossroads enters the battlefield, you gain 2 life.
+        // {T}: Add {W}to your mana pool.
+        addCard(Zone.HAND, playerB, "Kabira Crossroads");
+        addCard(Zone.BATTLEFIELD, playerB, "Sacred Ground");
+        playLand(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Kabira Crossroads");
+
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Smallpox");
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Smallpox", 1);
+        assertPermanentCount(playerB, "Kabira Crossroads", 1);
+
+        assertLife(playerA, 19);
+        assertLife(playerB, 23);
+    }
+
+    /**
+     * Sacred Ground {1}{W}
+     * Enchantment
+     * Whenever a spell or ability an opponent controls causes a land to be put into your
+     * graveyard from the battlefield, return that card to the battlefield.
+     *
+     *
+     * Destroyed land returns to battlefield
+     */
+    @Test
+    public void testTriggeredAbilityReturnedToBattlefield() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
+        // When Faultgrinder enters the battlefield, destroy target land.
+        addCard(Zone.HAND, playerA, "Faultgrinder");
+
+        // Kabira Crossroads Land
+        // Kabira Crossroads enters the battlefield tapped.
+        // When Kabira Crossroads enters the battlefield, you gain 2 life.
+        // {T}: Add {W}to your mana pool.
+        addCard(Zone.HAND, playerB, "Kabira Crossroads");
+        addCard(Zone.BATTLEFIELD, playerB, "Sacred Ground");
+        playLand(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Kabira Crossroads");
+
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Faultgrinder");
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerB, "Kabira Crossroads", 1);
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 24); // + 2 * 2 life from  Kabira Crossroads
     }
 
 }

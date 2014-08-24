@@ -42,6 +42,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.game.stack.StackAbility;
+import mage.game.stack.StackObject;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -94,7 +96,7 @@ class SacredGroundTriggeredAbility extends TriggeredAbilityImpl {
                 Permanent targetPermanent = zce.getTarget();
                 if (targetPermanent.getCardType().contains(CardType.LAND) && targetPermanent.getControllerId().equals(getControllerId())) {
                     MageObject mageObject = game.getShortLivingLKI(event.getSourceId(), Zone.STACK);
-                    if ((mageObject instanceof Spell) || (mageObject instanceof ActivatedAbility)) {
+                    if (mageObject instanceof StackObject) {
                         getEffects().get(0).setTargetPointer(new FixedTarget(targetPermanent.getId()));
                         return true;
                     }
