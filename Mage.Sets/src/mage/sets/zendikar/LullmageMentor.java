@@ -145,8 +145,7 @@ class MerfolkToken extends Token {
 
 class CastedSpellsWithSpellTarget extends Watcher {
 
-    // <SourceId_TargetSpellId, controllerId>
-    private Map<String, UUID> casted = new HashMap<String, UUID>();
+    private final Map<String, UUID> casted = new HashMap<>();
 
     public CastedSpellsWithSpellTarget() {
         super("CastedSpellsWithSpellTarget", WatcherScope.GAME);

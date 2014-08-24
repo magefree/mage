@@ -30,8 +30,8 @@ package mage.sets.stronghold;
 import java.util.UUID;
 
 import mage.MageObject;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -41,7 +41,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
+import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -88,13 +88,17 @@ class SacredGroundTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (GameEvent.EventType.ZONE_CHANGE.equals(event.getType()) &&
-                game.getObject(event.getSourceId()) instanceof StackObject &&
                 game.getOpponents(this.getControllerId()).contains(game.getControllerId(event.getSourceId()))) {
             ZoneChangeEvent zce = (ZoneChangeEvent) event;
             if (Zone.BATTLEFIELD.equals(zce.getFromZone()) && Zone.GRAVEYARD.equals(zce.getToZone())) {
-                Permanent targetCard = zce.getTarget();
-                getEffects().get(0).setTargetPointer(new FixedTarget(targetCard.getId()));
-                return targetCard.getCardType().contains(CardType.LAND) && targetCard.getControllerId().equals(getControllerId());
+                Permanent targetPermanent = zce.getTarget();
+                if (targetPermanent.getCardType().contains(CardType.LAND) && targetPermanent.getControllerId().equals(getControllerId())) {
+                    MageObject mageObject = game.getShortLivingLKI(event.getSourceId(), Zone.STACK);
+                    if ((mageObject instanceof Spell) || (mageObject instanceof ActivatedAbility)) {
+                        getEffects().get(0).setTargetPointer(new FixedTarget(targetPermanent.getId()));
+                        return true;
+                    }
+                }
             }
         }
         return false;

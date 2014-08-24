@@ -1106,14 +1106,15 @@ public abstract class GameImpl implements Game, Serializable {
             top = state.getStack().peek();
             top.resolve(this);
         } finally {
-            if (top != null) {                
+            if (top != null) {
+                state.getStack().remove(top);
+                rememberLKI(top.getSourceId(), Zone.STACK, top);
                 if (!getTurn().isEndTurnRequested()) {
                     while (state.hasSimultaneousEvents()) {
                         state.handleSimultaneousEvent(this);
                         checkTriggered();
                     }
-                }
-                state.getStack().remove(top);
+                }                
             }
         }
     }
