@@ -524,16 +524,16 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public Collection<UsersView> getConnectedPlayers(UUID roomId) throws MageRemoteException {
+    public Collection<RoomUsersView> getRoomUsers(UUID roomId) throws MageRemoteException {
         try {
             if (isConnected()) {
-                return server.getConnectedPlayers(roomId);
+                return server.getRoomUsers(roomId);
             }
         } catch (MageException ex) {
             handleMageException(ex);
             throw new MageRemoteException();
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return null;
     }

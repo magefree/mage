@@ -81,6 +81,7 @@ import mage.game.match.MatchOptions;
 import mage.remote.MageRemoteException;
 import mage.remote.Session;
 import mage.view.MatchView;
+import mage.view.RoomUsersView;
 import mage.view.TableView;
 import mage.view.UsersView;
 import org.apache.log4j.Logger;
@@ -855,7 +856,7 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 
 }
 
-class UpdatePlayersTask extends SwingWorker<Void, Collection<UsersView>> {
+class UpdatePlayersTask extends SwingWorker<Void, Collection<RoomUsersView>> {
 
     private final Session session;
     private final UUID roomId;
@@ -872,15 +873,15 @@ class UpdatePlayersTask extends SwingWorker<Void, Collection<UsersView>> {
     @Override
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
-            this.publish(session.getConnectedPlayers(roomId));
-            Thread.sleep(1000);
+            this.publish(session.getRoomUsers(roomId));
+            Thread.sleep(3000);
         }
         return null;
     }
 
     @Override
-    protected void process(List<Collection<UsersView>> players) {
-        chat.setPlayers(players);
+    protected void process(List<Collection<RoomUsersView>> roomUserInfo) {
+        chat.setRoomUserInfo(roomUserInfo);
     }
 
     @Override
@@ -1015,7 +1016,7 @@ class UpdateMatchesTask extends SwingWorker<Void, Collection<MatchView>> {
             if (matches != null) {
                 this.publish(matches);
             }
-            Thread.sleep(5000);
+            Thread.sleep(10000);
         }
         return null;
     }

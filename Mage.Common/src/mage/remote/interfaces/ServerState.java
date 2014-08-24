@@ -35,6 +35,7 @@ import mage.view.UserView;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+import mage.view.RoomUsersView;
 import mage.view.UsersView;
 
 /**
@@ -46,8 +47,8 @@ public interface ServerState {
 
     List<UserView> getUsers();
 
-    Collection<UsersView> getConnectedPlayers(UUID roomId) throws MageRemoteException;
-
+    Collection<RoomUsersView> getRoomUsers (UUID roomId) throws MageRemoteException;
+    
     List<String> getServerMessages();
 
     Collection<TableView> getTables(UUID roomId) throws MageRemoteException;

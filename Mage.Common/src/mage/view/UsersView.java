@@ -37,9 +37,9 @@ public class UsersView implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String userName;
-    private String infoState;
-    private String infoGames;
+    private final String userName;
+    private final String infoState;
+    private final String infoGames;
 
     public UsersView(String userName, String infoState, String infoGames) {
         this.userName = userName;

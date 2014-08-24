@@ -51,6 +51,7 @@ import mage.remote.MageRemoteException;
 import mage.remote.Session;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
+import mage.view.RoomUsersView;
 import mage.view.UsersView;
 
 /**
@@ -303,12 +304,13 @@ public class ChatPanel extends javax.swing.JPanel {
         private final String[] columnNames = new String[]{"Players", "Info", "Games"};
         private UsersView[] players = new UsersView[0];
 
-        public void loadData(Collection<UsersView> players) throws MageRemoteException {
-            this.players = players.toArray(new UsersView[0]);
+        public void loadData(Collection<RoomUsersView> roomUserInfoList) throws MageRemoteException {
+            RoomUsersView roomUserInfo = roomUserInfoList.iterator().next();
+            this.players = roomUserInfo.getUsersView().toArray(new UsersView[0]);
             JTableHeader th = jTablePlayers.getTableHeader();
             TableColumnModel tcm = th.getColumnModel();
-            TableColumn tc = tcm.getColumn(0);
-            tc.setHeaderValue(new StringBuilder("Players").append(" (").append(this.players.length).append(")").toString());
+            tcm.getColumn(0).setHeaderValue(new StringBuilder("Players").append(" (").append(this.players.length).append(")").toString());
+            tcm.getColumn(2).setHeaderValue(new StringBuilder("Games").append(" (").append(roomUserInfo.getNumberActiveGames()).append(")").toString());
             th.repaint();
             this.fireTableDataChanged();
         }
@@ -462,8 +464,7 @@ public class ChatPanel extends javax.swing.JPanel {
         }
 }//GEN-LAST:event_txtMessageKeyTyped
 
-    // public void setPlayers(Collection<String> players) {
-    public void setPlayers(List<Collection<UsersView>> view) {
+    public void setRoomUserInfo(List<Collection<RoomUsersView>> view) {
         try {
             tableModel.loadData(view.get(0));
         } catch (Exception ex) {

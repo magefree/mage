@@ -45,6 +45,7 @@ import mage.view.MatchView;
 import mage.view.TableView;
 import mage.view.TournamentView;
 import mage.view.UserDataView;
+import mage.view.RoomUsersView;
 import mage.view.UserView;
 import mage.view.UsersView;
 
@@ -70,7 +71,7 @@ public interface MageServer {
 
     // server state methods
     ServerState getServerState() throws MageException;
-    List<UsersView> getConnectedPlayers(UUID roomId) throws MageException;
+    List<RoomUsersView> getRoomUsers(UUID roomId) throws MageException;
     List<MatchView> getFinishedMatches(UUID roomId) throws MageException;
     Object getServerMessagesCompressed(String sessionId) throws MageException;     // messages of the day
 

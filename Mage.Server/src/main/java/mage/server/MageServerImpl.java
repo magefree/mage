@@ -297,12 +297,11 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    //FIXME: why no sessionId here???
-    public List<UsersView> getConnectedPlayers(UUID roomId) throws MageException {
+    public List<RoomUsersView> getRoomUsers(UUID roomId) throws MageException {
         try {
             GamesRoom room = GamesRoomManager.getInstance().getRoom(roomId);
             if (room != null) {
-                return room.getPlayers();
+                return room.getRoomUsersInfo();
             } else {
                 return null;
             }

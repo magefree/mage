@@ -51,6 +51,7 @@ import mage.server.User;
 import mage.server.UserManager;
 import mage.server.tournament.TournamentManager;
 import mage.view.MatchView;
+import mage.view.RoomUsersView;
 import mage.view.TableView;
 import mage.view.UsersView;
 import org.apache.log4j.Logger;
@@ -66,7 +67,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     private static final ScheduledExecutorService updateExecutor = Executors.newSingleThreadScheduledExecutor();
     private static List<TableView> tableView = new ArrayList<>();
     private static List<MatchView> matchView = new ArrayList<>();
-    private static List<UsersView> usersView = new ArrayList<>();
+    private static List<RoomUsersView> roomUsersView = new ArrayList<>();
 
     private final ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<>();
 
@@ -124,8 +125,10 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
             }
         }
 
-        Collections.sort(users, new UserNameSorter());
-        usersView = users;
+        Collections.sort(users, new UserNameSorter());                
+        List<RoomUsersView> roomUserInfo = new ArrayList<>();
+        roomUserInfo.add(new RoomUsersView(users, GameManager.getInstance().getNumberActiveGames()));
+        roomUsersView = roomUserInfo;
     }
 
     @Override
@@ -201,8 +204,8 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     }
 
     @Override
-    public List<UsersView> getPlayers() {
-        return usersView;
+    public List<RoomUsersView> getRoomUsersInfo() {
+        return roomUsersView;
     }
 
 }

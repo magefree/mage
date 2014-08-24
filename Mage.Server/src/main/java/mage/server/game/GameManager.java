@@ -210,4 +210,7 @@ public class GameManager {
         return null;
     }
 
+    public int getNumberActiveGames() {
+        return gameControllers.size();
+    }
 }
