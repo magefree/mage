@@ -237,11 +237,6 @@ class IllusionistsGambitRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game) {
-        return false;
-    }
-
-    @Override
     public boolean canAttack(UUID defenderId, Ability source, Game game) {
         if (defenderId.equals(source.getControllerId()) ) {
             return false;
@@ -253,16 +248,6 @@ class IllusionistsGambitRestrictionEffect extends RestrictionEffect {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
-    }
-
-    @Override
-    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
-        return false;
     }
 
     @Override
