@@ -28,11 +28,14 @@
 
 package mage.client.game;
 
-
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagLayout;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import mage.client.components.MageTextArea;
-
-import javax.swing.*;
-import java.awt.*;
 
 /**
  * Panel with buttons that copy the state of feedback panel.
@@ -99,9 +102,20 @@ public class HelperPanel extends JPanel {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if (linkLeft != null) {{
-                    setState("",false,"",false);
-                    setSpecial("", false);
-                    linkLeft.doClick();
+                    Thread worker = new Thread(){
+                        @Override
+                        public void run(){
+                            SwingUtilities.invokeLater(new Runnable(){
+                                @Override
+                                public void run(){
+                                    setState("",false,"",false);
+                                    setSpecial("", false);
+                                    linkLeft.doClick();
+                                }
+                            });
+                        }
+                    };
+                    worker.start();
                 }}
             }
         });
@@ -109,11 +123,22 @@ public class HelperPanel extends JPanel {
         btnRight.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                if (linkRight != null) {{
-                    setState("",false,"",false);
-                    setSpecial("", false);
-                    linkRight.doClick();
-                }}
+                if (linkRight != null) {
+                    Thread worker = new Thread(){
+                        @Override
+                        public void run(){
+                            SwingUtilities.invokeLater(new Runnable(){
+                                @Override
+                                public void run(){
+                                    setState("",false,"",false);
+                                    setSpecial("", false);
+                                    linkRight.doClick();
+                                }
+                            });
+                        }
+                    };
+                    worker.start();
+                }
             }
         });
 
@@ -121,9 +146,20 @@ public class HelperPanel extends JPanel {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if (linkSpecial != null) {{
-                    setState("",false,"",false);
-                    setSpecial("", false);
-                    linkSpecial.doClick();
+                    Thread worker = new Thread(){
+                        @Override
+                        public void run(){
+                            SwingUtilities.invokeLater(new Runnable(){
+                                @Override
+                                public void run(){
+                                    setState("",false,"",false);
+                                    setSpecial("", false);
+                                    linkSpecial.doClick();
+                                }
+                            });
+                        }
+                    };
+                    worker.start();
                 }}
             }
         });
@@ -132,7 +168,18 @@ public class HelperPanel extends JPanel {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if (linkUndo != null) {{
-                    linkUndo.doClick();
+                    Thread worker = new Thread(){
+                        @Override
+                        public void run(){
+                            SwingUtilities.invokeLater(new Runnable(){
+                                @Override
+                                public void run(){
+                                    linkUndo.doClick();
+                                }
+                            });
+                        }
+                    };
+                    worker.start();
                 }}
             }
         });
