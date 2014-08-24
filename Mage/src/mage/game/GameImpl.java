@@ -1278,6 +1278,7 @@ public abstract class GameImpl implements Game, Serializable {
         //20091005 - 115.5
         while (!isPaused() && !gameOver(null)) {
             if (!checkStateBasedActions() ) {
+                // nothing happened so check triggers
                 if (trigger) {
                     state.handleSimultaneousEvent(this);
                 }
@@ -1285,6 +1286,7 @@ public abstract class GameImpl implements Game, Serializable {
                     break;
                 }
             }
+            applyEffects(); // needed e.g if boost effects end and cause creatures to die
             somethingHappened = true;
         }
         return somethingHappened;

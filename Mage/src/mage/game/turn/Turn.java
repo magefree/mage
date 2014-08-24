@@ -284,7 +284,7 @@ public class Turn implements Serializable {
         
         // 3) State-based actions are checked. No player gets priority, and no triggered abilities are put onto the stack.         
         
-        game.checkStateAndTriggered(); // triggered effects don't go to steck because check of endTurnRequested
+        game.checkStateAndTriggered(); // triggered effects don't go to stack because check of endTurnRequested
         
         // 4) The current phase and/or step ends. 
         // The game skips straight to the cleanup step. The cleanup step happens in its entirety.

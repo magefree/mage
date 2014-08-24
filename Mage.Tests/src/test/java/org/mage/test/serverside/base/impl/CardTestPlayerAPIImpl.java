@@ -224,7 +224,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     @Override
     public void setStopOnTurn(int turn) {
-        stopOnTurn = turn == -1 ? null : Integer.valueOf(turn);
+        stopOnTurn = turn == -1 ? null : turn;
         stopAtStep = PhaseStep.UNTAP;
     }
 
@@ -236,7 +236,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     @Override
     public void setStopAt(int turn, PhaseStep step) {
-        stopOnTurn = turn == -1 ? null : Integer.valueOf(turn);
+        stopOnTurn = turn == -1 ? null : turn;
         stopAtStep = step;
     }
 
