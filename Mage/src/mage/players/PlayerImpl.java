@@ -1049,9 +1049,11 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     protected LinkedHashMap<UUID, ManaAbility> getUseableManaAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ManaAbility> useable = new LinkedHashMap<>();
-        for (ManaAbility ability: object.getAbilities().getManaAbilities(zone)) {
-            if (ability.canActivate(playerId, game)) {
-                useable.put(ability.getId(), ability);
+        if (!(object instanceof Permanent) || ((Permanent)object).canUseActivatedAbilities(game)) {
+            for (ManaAbility ability: object.getAbilities().getManaAbilities(zone)) {
+                if (ability.canActivate(playerId, game)) {
+                    useable.put(ability.getId(), ability);
+                }
             }
         }
         return useable;
