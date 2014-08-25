@@ -99,6 +99,10 @@ public class MageObjectReference implements Comparable<MageObjectReference> {
         return hash;
     }
 
+    public boolean refersTo(UUID id, Game game) {
+        return refersTo(game.getObject(id));
+    }
+
     public boolean refersTo(Permanent permanent) {
         return permanent.getZoneChangeCounter()== zoneChangeCounter && permanent.getId().equals(sourceId);
     }

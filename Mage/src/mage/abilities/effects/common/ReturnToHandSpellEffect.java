@@ -9,6 +9,7 @@ import mage.game.Game;
 
 import java.io.ObjectStreamException;
 import java.util.UUID;
+import mage.players.Player;
 
 /**
  *
@@ -41,7 +42,10 @@ public class ReturnToHandSpellEffect extends PostResolveEffect implements MageSi
 
     @Override
     public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
-        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+        Player controller = game.getPlayer(controllerId);
+        if (controller != null) {
+            controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.STACK);
+        }
     }
 }
 

@@ -73,6 +73,9 @@ public class SpellStack extends ArrayDeque<StackObject> {
     }
 
     public boolean counter(UUID objectId, UUID sourceId, Game game) {
+        // the counter logic is copied by some spells to handle replacement effects of the countered spell
+        // so if logic is changed here check those spells for needed changes too 
+        // Concerned cards to check: Hinder, Spell Crumple
         StackObject stackObject = getStackObject(objectId);
         MageObject sourceObject = game.getObject(sourceId);
         if (stackObject != null && sourceObject != null) {
@@ -81,7 +84,7 @@ public class SpellStack extends ArrayDeque<StackObject> {
                     game.rememberLKI(objectId, Zone.STACK, (Spell)stackObject);
                 }
                 this.remove(stackObject);
-                stackObject.counter(sourceId, game);
+                stackObject.counter(sourceId, game); // tries to move to graveyard
                 game.informPlayers(new StringBuilder(stackObject.getName()).append(" is countered by ").append(sourceObject.getLogName()).toString());
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, objectId, sourceId, stackObject.getControllerId()));
             } else {

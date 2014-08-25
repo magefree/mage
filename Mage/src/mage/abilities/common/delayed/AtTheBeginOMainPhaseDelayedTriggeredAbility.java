@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.common.delayed;
 
 import mage.constants.TargetController;
@@ -33,35 +32,57 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
  *
  * @author LevelX2
  */
+public class AtTheBeginOMainPhaseDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-public class AtTheBeginOfPreCombatMainDelayedTriggeredAbility extends DelayedTriggeredAbility {
+    public enum PhaseSelection {
 
-    private TargetController targetController;
+        NEXT_PRECOMBAT_MAIN("next precombat"),
+        NEXT_POSTCOMAT_MAIN("next postcombat"),
+        NEXT_MAIN("next");
 
-    public AtTheBeginOfPreCombatMainDelayedTriggeredAbility(Effect effect, TargetController targetController) {
-        super(effect);
-        this.targetController = targetController;
+        private final String text;
+
+        PhaseSelection(String text) {
+            this.text = text;
+        }
+
+        @Override
+        public String toString() {
+            return text;
+        }
     }
 
-    public AtTheBeginOfPreCombatMainDelayedTriggeredAbility(AtTheBeginOfPreCombatMainDelayedTriggeredAbility ability) {
+    private final TargetController targetController;
+    private final PhaseSelection phaseSelection;
+
+    public AtTheBeginOMainPhaseDelayedTriggeredAbility(Effect effect, TargetController targetController, PhaseSelection phaseSelection) {
+        super(effect);
+        this.targetController = targetController;
+        this.phaseSelection = phaseSelection;
+
+    }
+
+    public AtTheBeginOMainPhaseDelayedTriggeredAbility(final AtTheBeginOMainPhaseDelayedTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
+        this.phaseSelection = ability.phaseSelection;
     }
 
     @Override
-    public AtTheBeginOfPreCombatMainDelayedTriggeredAbility copy() {
-        return new AtTheBeginOfPreCombatMainDelayedTriggeredAbility(this);
+    public AtTheBeginOMainPhaseDelayedTriggeredAbility copy() {
+        return new AtTheBeginOMainPhaseDelayedTriggeredAbility(this);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.PRECOMBAT_MAIN_PHASE_PRE) {
+        if (checkPhase(event.getType())) {
             switch (targetController) {
                 case ANY:
                     return true;
@@ -87,21 +108,34 @@ public class AtTheBeginOfPreCombatMainDelayedTriggeredAbility extends DelayedTri
         return false;
     }
 
+    private boolean checkPhase(EventType eventType) {
+        switch (phaseSelection) {
+            case NEXT_MAIN:
+                return EventType.PRECOMBAT_MAIN_PHASE_PRE.equals(eventType) || EventType.PRECOMBAT_MAIN_PHASE_POST.equals(eventType);
+            case NEXT_POSTCOMAT_MAIN:
+                return EventType.PRECOMBAT_MAIN_PHASE_POST.equals(eventType);
+            case NEXT_PRECOMBAT_MAIN:
+                return EventType.PRECOMBAT_MAIN_PHASE_PRE.equals(eventType);
+            default:
+                return false;
+        }
+    }
+
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder();
         switch (targetController) {
             case YOU:
-                sb.append("At the beginning of your next precombat main phase, ");
+                sb.append("At the beginning of your ").append(phaseSelection.toString()).append(" main phase, ");
                 break;
             case OPPONENT:
-                sb.append("At the beginning of an opponent's next precombat main phase, ");
+                sb.append("At the beginning of an opponent's ").append(phaseSelection.toString()).append(" main phase, ");
                 break;
             case ANY:
-                sb.append("At the beginning of the next precombat main phase, ");
+                sb.append("At the beginning of the ").append(phaseSelection.toString()).append(" main phase, ");
                 break;
             case CONTROLLER_ATTACHED_TO:
-                sb.append("At the beginning of the next precombat main phase of enchanted creature's controller, ");
+                sb.append("At the beginning of the ").append(phaseSelection.toString()).append(" main phase of enchanted creature's controller, ");
                 break;
         }
         sb.append(getEffects().getText(modes.getMode()));

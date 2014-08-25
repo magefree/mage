@@ -25,21 +25,22 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.sets.commander;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.ReturnToLibrarySpellEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.PhaseStep;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -52,52 +53,53 @@ import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class Hinder extends CardImpl {
+public class SpellCrumple extends CardImpl {
 
-    public Hinder(UUID ownerId) {
-        super(ownerId, 65, "Hinder", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
-        this.expansionSetCode = "CHK";
+    public SpellCrumple(UUID ownerId) {
+        super(ownerId, 63, "Spell Crumple", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
+        this.expansionSetCode = "CMD";
 
         this.color.setBlue(true);
 
-        // Counter target spell. If that spell is countered this way, put that card on the top or bottom of its owner's library instead of into that player's graveyard.
-        this.getSpellAbility().addEffect(new HinderEffect());
+        // Counter target spell. If that spell is countered this way, put it on the bottom of its owner's library instead of into that player's graveyard. Put Spell Crumple on the bottom of its owner's library.
         this.getSpellAbility().addTarget(new TargetSpell());
+        this.getSpellAbility().addEffect(new SpellCrumpleCounterEffect());    
+        this.getSpellAbility().addEffect(new ReturnToLibrarySpellEffect(false));
     }
 
-    public Hinder(final Hinder card) {
+    public SpellCrumple(final SpellCrumple card) {
         super(card);
     }
 
     @Override
-    public Hinder copy() {
-        return new Hinder(this);
+    public SpellCrumple copy() {
+        return new SpellCrumple(this);
     }
 }
 
-class HinderEffect extends OneShotEffect {
+class SpellCrumpleCounterEffect extends OneShotEffect {
 
-    public HinderEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "Counter target spell. If that spell is countered this way, put that card on the top or bottom of its owner's library instead of into that player's graveyard";
+    public SpellCrumpleCounterEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "Counter target spell. If that spell is countered this way, put it on the bottom of its owner's library instead of into that player's graveyard";
     }
 
-    public HinderEffect(final HinderEffect effect) {
+    public SpellCrumpleCounterEffect(final SpellCrumpleCounterEffect effect) {
         super(effect);
     }
 
     @Override
-    public HinderEffect copy() {
-        return new HinderEffect(this);
+    public SpellCrumpleCounterEffect copy() {
+        return new SpellCrumpleCounterEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         UUID objectId = source.getFirstTarget();
         UUID sourceId = source.getSourceId();
-        // counter code from Spellstack
+        // counter code from SpellStack
         StackObject stackObject = game.getStack().getStackObject(objectId);
         MageObject sourceObject = game.getObject(sourceId);
         if (stackObject != null && sourceObject != null) {
@@ -105,11 +107,11 @@ class HinderEffect extends OneShotEffect {
                 if ( stackObject instanceof Spell ) {
                     game.rememberLKI(objectId, Zone.STACK, (Spell)stackObject);
                 }                
-                // Hinder specific code
-                ReplacementEffectImpl effect = new HinderReplacementEffect();
+                // Spell Crumple specific code
+                ReplacementEffectImpl effect = new SpellCrumpleReplacementEffect();
                 effect.setTargetPointer(new FixedTarget(stackObject.getId()));
                 game.addEffect(effect, source);
-                // Hinder specific code end
+                // Spell Crumple specific code end
                 game.informPlayers(new StringBuilder(stackObject.getName()).append(" is countered by ").append(sourceObject.getLogName()).toString());
                 game.getStack().remove(stackObject);
                 stackObject.counter(sourceId, game); // tries to move to graveyard                
@@ -120,28 +122,28 @@ class HinderEffect extends OneShotEffect {
             return true;
         }
         return false;        
-        // counter code from Spellstack end
+        // counter code from SpellStack end
     }
 }
 
-class HinderReplacementEffect extends ReplacementEffectImpl {
+class SpellCrumpleReplacementEffect extends ReplacementEffectImpl {
 
     private PhaseStep phaseStep;
     
-    public HinderReplacementEffect() {
+    public SpellCrumpleReplacementEffect() {
         super(Duration.OneUse, Outcome.Benefit);
-        staticText = "If that spell is countered this way, put that card on the top or bottom of its owner's library instead of into that player's graveyard";
+        staticText = "If that spell is countered this way, put it on the bottom of its owner's library instead of into that player's graveyard";
         phaseStep = null;
     }
 
-    public HinderReplacementEffect(final HinderReplacementEffect effect) {
+    public SpellCrumpleReplacementEffect(final SpellCrumpleReplacementEffect effect) {
         super(effect);
         phaseStep = effect.phaseStep;
     }
 
     @Override
-    public HinderReplacementEffect copy() {
-        return new HinderReplacementEffect(this);
+    public SpellCrumpleReplacementEffect copy() {
+        return new SpellCrumpleReplacementEffect(this);
     }
 
     @Override
@@ -168,11 +170,10 @@ class HinderReplacementEffect extends ReplacementEffectImpl {
         MageObject targetObject = game.getObject(event.getTargetId());
         if (targetObject instanceof Card) {
             Card card = (Card) targetObject;
-            Player player = game.getPlayer(source.getControllerId());
-            if (player != null) {                
-                boolean top = player.chooseUse(Outcome.Neutral, "Put " + card.getName() + " on top of the library? Otherwise it will be put on the bottom.", game);
-                if (card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, top, event.getAppliedEffects())) {
-                    game.informPlayers(player.getName() + " has put " + card.getName() + " on " + (top ? "top" : "the bottom") + " of the library.");
+            if (card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false, event.getAppliedEffects())) {            
+                Player controller = game.getPlayer(source.getControllerId());
+                if (controller != null) {
+                    game.informPlayers(controller.getName() + " has put " + card.getName() + " on the bottom of the library.");
                 }
                 return true;
             }

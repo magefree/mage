@@ -25,46 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.sets.legends;
 
 import java.util.UUID;
-import mage.MageInt;
-import static mage.Mana.GreenMana;
-import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
-import mage.abilities.effects.common.AddManaToManaPoolEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 
 /**
  *
  * @author LevelX2
  */
-public class MagusOfTheVineyard extends CardImpl {
+public class ManaDrain extends mage.sets.vintagemasters.ManaDrain {
 
-    public MagusOfTheVineyard(UUID ownerId) {
-        super(ownerId, 166, "Magus of the Vineyard", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "CMD";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-
-        this.color.setGreen(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // At the beginning of each player's precombat main phase, add {G}{G} to that player's mana pool.
-        this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(
-                Zone.BATTLEFIELD, new AddManaToManaPoolEffect(GreenMana(2), "that player's"), TargetController.ANY, false, true));        
+    public ManaDrain(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 65;
+        this.expansionSetCode = "LEG";
+        this.rarity = Rarity.UNCOMMON;
     }
 
-    public MagusOfTheVineyard(final MagusOfTheVineyard card) {
+    public ManaDrain(final ManaDrain card) {
         super(card);
     }
 
     @Override
-    public MagusOfTheVineyard copy() {
-        return new MagusOfTheVineyard(this);
+    public ManaDrain copy() {
+        return new ManaDrain(this);
     }
 }

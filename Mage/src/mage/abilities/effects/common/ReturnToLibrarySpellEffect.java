@@ -25,46 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.abilities.effects.common;
 
 import java.util.UUID;
-import mage.MageInt;
-import static mage.Mana.GreenMana;
-import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
-import mage.abilities.effects.common.AddManaToManaPoolEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.TargetController;
+import mage.abilities.Ability;
+import mage.abilities.effects.PostResolveEffect;
+import mage.cards.Card;
 import mage.constants.Zone;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
  * @author LevelX2
  */
-public class MagusOfTheVineyard extends CardImpl {
+public class ReturnToLibrarySpellEffect extends PostResolveEffect {
 
-    public MagusOfTheVineyard(UUID ownerId) {
-        super(ownerId, 166, "Magus of the Vineyard", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "CMD";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
+    private final boolean toTop;
 
-        this.color.setGreen(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // At the beginning of each player's precombat main phase, add {G}{G} to that player's mana pool.
-        this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(
-                Zone.BATTLEFIELD, new AddManaToManaPoolEffect(GreenMana(2), "that player's"), TargetController.ANY, false, true));        
+    public ReturnToLibrarySpellEffect(boolean top) {
+        staticText = "Put {this} on "+ (top ? "top":"the bottom") + " of its owner's library";
+        this.toTop = top;
     }
 
-    public MagusOfTheVineyard(final MagusOfTheVineyard card) {
-        super(card);
+    public ReturnToLibrarySpellEffect(final ReturnToLibrarySpellEffect effect) {
+        super(effect);
+        this.toTop = effect.toTop;
     }
 
     @Override
-    public MagusOfTheVineyard copy() {
-        return new MagusOfTheVineyard(this);
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public ReturnToLibrarySpellEffect copy() {
+        return new ReturnToLibrarySpellEffect(this);
+    }
+
+    @Override
+    public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
+        Player controller = game.getPlayer(controllerId);
+        if (controller != null) {
+            controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.STACK, toTop, true);
+        }
     }
 }

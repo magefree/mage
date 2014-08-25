@@ -35,7 +35,8 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.delayed.AtTheBeginOfPreCombatMainDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOMainPhaseDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOMainPhaseDelayedTriggeredAbility.PhaseSelection;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.cards.CardImpl;
@@ -91,18 +92,19 @@ class PlasmCaptureCounterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean result = false;
         Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell != null) {
-            result = game.getStack().counter(getTargetPointer().getFirst(game, source), source.getSourceId(), game);
+            game.getStack().counter(getTargetPointer().getFirst(game, source), source.getSourceId(), game);
+            // mana gets added also if counter is not successful
             int mana = spell.getConvertedManaCost();
-            AtTheBeginOfPreCombatMainDelayedTriggeredAbility delayedAbility =
-                    new AtTheBeginOfPreCombatMainDelayedTriggeredAbility(new PlasmCaptureManaEffect(mana), TargetController.YOU);
+            AtTheBeginOMainPhaseDelayedTriggeredAbility delayedAbility =
+                    new AtTheBeginOMainPhaseDelayedTriggeredAbility(new PlasmCaptureManaEffect(mana), TargetController.YOU, PhaseSelection.NEXT_PRECOMBAT_MAIN);
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
             game.addDelayedTriggeredAbility(delayedAbility);
+            return true;
         }
-        return result;
+        return false;
     }
 }
 
@@ -152,11 +154,8 @@ class PlasmCaptureManaEffect extends ManaEffect {
                 }
             }
 
-
-            if (mana != null) {
-                player.getManaPool().addMana(mana, game, source);
-                return true;
-            }
+            player.getManaPool().addMana(mana, game, source);
+            return true;
 
         }
         return false;

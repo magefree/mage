@@ -51,7 +51,7 @@ public class EladamrisVineyard extends CardImpl {
 
         // At the beginning of each player's precombat main phase, add {G}{G} to that player's mana pool.
         this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(
-                Zone.BATTLEFIELD, new AddManaToManaPoolEffect(GreenMana(2)), TargetController.ANY, false, true));          
+                Zone.BATTLEFIELD, new AddManaToManaPoolEffect(GreenMana(2), "that player's"), TargetController.ANY, false, true));          
     }
 
     public EladamrisVineyard(final EladamrisVineyard card) {

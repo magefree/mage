@@ -22,10 +22,10 @@ public class AddManaToManaPoolEffect extends OneShotEffect {
 
     protected Mana mana;
     
-    public AddManaToManaPoolEffect(Mana mana) {
+    public AddManaToManaPoolEffect(Mana mana, String textManaPoolOwner) {
         super(Outcome.PutManaInPool);
         this.mana = mana;
-        this.staticText = "add " + mana.toString() + " to that player's mana pool";
+        this.staticText = "add " + mana.toString() + " to " + textManaPoolOwner + " mana pool";
     }
 
     public AddManaToManaPoolEffect(final AddManaToManaPoolEffect effect) {
