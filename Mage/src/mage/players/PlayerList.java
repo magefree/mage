@@ -45,9 +45,7 @@ public class PlayerList extends CircularList<UUID> {
     }
 
     public Player getCurrent(Game game) {
-        Player player = null;
-        game.getPlayer(this.get());
-        return player;
+        return game.getPlayer(this.get());
     }
     
     public Player getNextInRange(Player basePlayer, Game game) {

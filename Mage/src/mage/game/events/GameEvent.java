@@ -82,6 +82,7 @@ public class GameEvent {
         DRAW_CARD, DREW_CARD,
         DISCARDED_CARD,
         CYCLE_CARD, CYCLED_CARD,
+        CLASH, CLASHED,
         DAMAGE_PLAYER, DAMAGED_PLAYER,
         DAMAGE_CAUSES_LIFE_LOSS,
         PLAYER_LIFE_CHANGE,
