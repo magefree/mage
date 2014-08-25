@@ -25,47 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.sets.seventhedition;
 
 import java.util.UUID;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.CardImpl;
-import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
-
 /**
- * @author anonymous
+ *
+ * @author dustinconrad
  */
-public class ShrapnelBlast extends CardImpl {
+public class ArcaneLaboratory extends mage.sets.urzassaga.ArcaneLaboratory {
 
-    private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("an artifact");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+    public ArcaneLaboratory(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 60;
+        this.expansionSetCode = "7ED";
     }
 
-    public ShrapnelBlast(UUID ownerId) {
-        super(ownerId, 106, "Shrapnel Blast", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "MRD";
-
-        this.color.setRed(true);
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
-        this.getSpellAbility().addEffect(new DamageTargetEffect(5));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-    }
-
-    public ShrapnelBlast(final ShrapnelBlast card) {
+    public ArcaneLaboratory(final ArcaneLaboratory card) {
         super(card);
     }
 
     @Override
-    public ShrapnelBlast copy() {
-        return new ShrapnelBlast(this);
+    public ArcaneLaboratory copy() {
+        return new ArcaneLaboratory(this);
     }
 }
