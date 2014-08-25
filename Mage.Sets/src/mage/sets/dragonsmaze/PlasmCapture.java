@@ -98,7 +98,7 @@ class PlasmCaptureCounterEffect extends OneShotEffect {
             // mana gets added also if counter is not successful
             int mana = spell.getConvertedManaCost();
             AtTheBeginOMainPhaseDelayedTriggeredAbility delayedAbility =
-                    new AtTheBeginOMainPhaseDelayedTriggeredAbility(new PlasmCaptureManaEffect(mana), TargetController.YOU, PhaseSelection.NEXT_PRECOMBAT_MAIN);
+                    new AtTheBeginOMainPhaseDelayedTriggeredAbility(new PlasmCaptureManaEffect(mana), false, TargetController.YOU, PhaseSelection.NEXT_PRECOMBAT_MAIN);
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
             game.addDelayedTriggeredAbility(delayedAbility);

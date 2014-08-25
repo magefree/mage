@@ -28,85 +28,75 @@
 package mage.sets.commander;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DoIfClashWonEffect;
-import mage.abilities.effects.common.PreventAllDamageByAllEffect;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.ClashEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.PhaseStep;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class PollenLullaby extends CardImpl {
+public class LashOut extends CardImpl {
 
-    public PollenLullaby(UUID ownerId) {
-        super(ownerId, 26, "Pollen Lullaby", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
+    public LashOut(UUID ownerId) {
+        super(ownerId, 127, "Lash Out", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "CMD";
 
-        this.color.setWhite(true);
+        this.color.setRed(true);
 
-        // Prevent all combat damage that would be dealt this turn. Clash with an opponent. If you win, creatures that player controls don't untap during the player's next untap step.
-        this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn, true));
-        this.getSpellAbility().addEffect(new DoIfClashWonEffect(new PollenLullabyEffect(), true, null));
+        // Lash Out deals 3 damage to target creature. Clash with an opponent. If you win, Lash Out deals 3 damage to that creature's controller.
+        this.getSpellAbility().addEffect(new LashOutEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public PollenLullaby(final PollenLullaby card) {
+    public LashOut(final LashOut card) {
         super(card);
     }
 
     @Override
-    public PollenLullaby copy() {
-        return new PollenLullaby(this);
+    public LashOut copy() {
+        return new LashOut(this);
     }
 }
 
-class PollenLullabyEffect extends OneShotEffect {
+class LashOutEffect extends OneShotEffect {
 
-    public PollenLullabyEffect() {
-        super(Outcome.Tap);
-        staticText = "creatures that player controls don't untap during the player's next untap step";
+    public LashOutEffect() {
+        super(Outcome.Damage);
+        this.staticText = "Lash Out deals 3 damage to target creature. Clash with an opponent. If you win, Lash Out deals 3 damage to that creature's controller";
     }
 
-    public PollenLullabyEffect(final PollenLullabyEffect effect) {
+    public LashOutEffect(final LashOutEffect effect) {
         super(effect);
     }
 
     @Override
+    public LashOutEffect copy() {
+        return new LashOutEffect(this);
+    }
+
+    @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (player != null) {
-            for (Permanent creature: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
-                creature.tap(game);
-                ContinuousEffect effect = new SkipNextUntapTargetEffect("This creature");
-                effect.setTargetPointer(new FixedTarget(creature.getId()));
-                game.addEffect(effect, source);
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (controller != null && creature != null) {
+            creature.damage(3, source.getSourceId(), game, false, true);
+            if (ClashEffect.getInstance().apply(game, source)) {
+                Player creaturesController = game.getPlayer(creature.getControllerId());
+                if (creaturesController != null) {
+                    creaturesController.damage(3, source.getSourceId(), game, false, true);
+                }
             }
             return true;
         }
         return false;
     }
-
-    @Override
-    public PollenLullabyEffect copy() {
-        return new PollenLullabyEffect(this);
-    }
-
 }
-

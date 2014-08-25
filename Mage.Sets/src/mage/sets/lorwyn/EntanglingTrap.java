@@ -25,78 +25,81 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.sets.lorwyn;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DoIfClashWonEffect;
-import mage.abilities.effects.common.PreventAllDamageByAllEffect;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class PollenLullaby extends CardImpl {
+public class EntanglingTrap extends CardImpl {
 
-    public PollenLullaby(UUID ownerId) {
-        super(ownerId, 26, "Pollen Lullaby", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "CMD";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+
+    static {
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+    }
+
+    public EntanglingTrap(UUID ownerId) {
+        super(ownerId, 13, "Entangling Trap", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
+        this.expansionSetCode = "LRW";
 
         this.color.setWhite(true);
 
-        // Prevent all combat damage that would be dealt this turn. Clash with an opponent. If you win, creatures that player controls don't untap during the player's next untap step.
-        this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn, true));
-        this.getSpellAbility().addEffect(new DoIfClashWonEffect(new PollenLullabyEffect(), true, null));
+        // Whenever you clash, tap target creature an opponent controls. If you won, that creature doesn't untap during its controller's next untap step.
+        Ability ability = new EntanglingClashTriggeredAbility();
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addEffect(new TapTargetEffect());
+        this.addAbility(ability);
+
     }
 
-    public PollenLullaby(final PollenLullaby card) {
+    public EntanglingTrap(final EntanglingTrap card) {
         super(card);
     }
 
     @Override
-    public PollenLullaby copy() {
-        return new PollenLullaby(this);
+    public EntanglingTrap copy() {
+        return new EntanglingTrap(this);
     }
 }
 
-class PollenLullabyEffect extends OneShotEffect {
+class EntanglingClashTriggeredAbility extends TriggeredAbilityImpl {
 
-    public PollenLullabyEffect() {
-        super(Outcome.Tap);
-        staticText = "creatures that player controls don't untap during the player's next untap step";
+    public EntanglingClashTriggeredAbility() {
+        super(Zone.BATTLEFIELD, null, false);
     }
 
-    public PollenLullabyEffect(final PollenLullabyEffect effect) {
-        super(effect);
+    public EntanglingClashTriggeredAbility(final EntanglingClashTriggeredAbility ability) {
+        super(ability);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (player != null) {
-            for (Permanent creature: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
-                creature.tap(game);
-                ContinuousEffect effect = new SkipNextUntapTargetEffect("This creature");
-                effect.setTargetPointer(new FixedTarget(creature.getId()));
-                game.addEffect(effect, source);
+    public EntanglingClashTriggeredAbility copy() {
+        return new EntanglingClashTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (EventType.CLASHED.equals(event.getType()) && event.getPlayerId().equals(getControllerId())) {
+            if (event.getFlag()) { // clash won
+                addEffect(new SkipNextUntapTargetEffect("that creature"));
             }
             return true;
         }
@@ -104,9 +107,7 @@ class PollenLullabyEffect extends OneShotEffect {
     }
 
     @Override
-    public PollenLullabyEffect copy() {
-        return new PollenLullabyEffect(this);
+    public String getRule() {
+        return "Whenever you clash, tap target creature an opponent controls. If you won, that creature doesn't untap during its controller's next untap step.";
     }
-
 }
-

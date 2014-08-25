@@ -28,9 +28,9 @@
 
 package mage.abilities;
 
+import mage.abilities.effects.Effect;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.abilities.effects.Effect;
 
 /**
  *
@@ -48,9 +48,12 @@ public abstract class DelayedTriggeredAbility extends TriggeredAbilityImpl {
     public DelayedTriggeredAbility(Effect effect, Duration duration) {
         this(effect, duration, true);
     }
-
     public DelayedTriggeredAbility(Effect effect, Duration duration, Boolean triggerOnlyOnce) {
-        super(Zone.ALL, effect);
+        this(effect, duration, triggerOnlyOnce, false);
+    }
+
+    public DelayedTriggeredAbility(Effect effect, Duration duration, Boolean triggerOnlyOnce, boolean optional) {
+        super(Zone.ALL, effect, optional);
         this.duration = duration;
         this.triggerOnlyOnce = triggerOnlyOnce;
     }

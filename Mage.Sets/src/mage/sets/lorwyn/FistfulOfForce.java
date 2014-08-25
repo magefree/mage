@@ -25,88 +25,86 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.sets.lorwyn;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DoIfClashWonEffect;
-import mage.abilities.effects.common.PreventAllDamageByAllEffect;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.ClashEffect;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.PhaseStep;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
  *
  * @author LevelX2
  */
-public class PollenLullaby extends CardImpl {
+public class FistfulOfForce extends CardImpl {
 
-    public PollenLullaby(UUID ownerId) {
-        super(ownerId, 26, "Pollen Lullaby", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "CMD";
+    public FistfulOfForce(UUID ownerId) {
+        super(ownerId, 212, "Fistful of Force", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
+        this.expansionSetCode = "LRW";
 
-        this.color.setWhite(true);
+        this.color.setGreen(true);
 
-        // Prevent all combat damage that would be dealt this turn. Clash with an opponent. If you win, creatures that player controls don't untap during the player's next untap step.
-        this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn, true));
-        this.getSpellAbility().addEffect(new DoIfClashWonEffect(new PollenLullabyEffect(), true, null));
+        // Target creature gets +2/+2 until end of turn. Clash with an opponent. If you win, that creature gets an additional +2/+2 and gains trample until end of turn.
+        this.getSpellAbility().addEffect(new FistfulOfForceEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public PollenLullaby(final PollenLullaby card) {
+    public FistfulOfForce(final FistfulOfForce card) {
         super(card);
     }
 
     @Override
-    public PollenLullaby copy() {
-        return new PollenLullaby(this);
+    public FistfulOfForce copy() {
+        return new FistfulOfForce(this);
     }
 }
 
-class PollenLullabyEffect extends OneShotEffect {
+class FistfulOfForceEffect extends OneShotEffect {
 
-    public PollenLullabyEffect() {
-        super(Outcome.Tap);
-        staticText = "creatures that player controls don't untap during the player's next untap step";
+    public FistfulOfForceEffect() {
+        super(Outcome.BoostCreature);
+        this.staticText = "Target creature gets +2/+2 until end of turn. Clash with an opponent. If you win, that creature gets an additional +2/+2 and gains trample until end of turn";
     }
 
-    public PollenLullabyEffect(final PollenLullabyEffect effect) {
+    public FistfulOfForceEffect(final FistfulOfForceEffect effect) {
         super(effect);
     }
 
     @Override
+    public FistfulOfForceEffect copy() {
+        return new FistfulOfForceEffect(this);
+    }
+
+    @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (player != null) {
-            for (Permanent creature: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
-                creature.tap(game);
-                ContinuousEffect effect = new SkipNextUntapTargetEffect("This creature");
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (controller != null && creature != null) {
+            ContinuousEffect effect = new BoostTargetEffect(2,2,Duration.EndOfTurn);
+            effect.setTargetPointer(new FixedTarget(creature.getId()));
+            game.addEffect(effect, source);
+            if (ClashEffect.getInstance().apply(game, source)) {
+                game.addEffect(effect.copy(), source);
+                effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
                 effect.setTargetPointer(new FixedTarget(creature.getId()));
-                game.addEffect(effect, source);
+                game.addEffect(effect.copy(), source);
             }
             return true;
         }
         return false;
     }
-
-    @Override
-    public PollenLullabyEffect copy() {
-        return new PollenLullabyEffect(this);
-    }
-
 }
-

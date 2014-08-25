@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.sets.commander;
 
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOMainPhaseDelayedTriggeredAbility;
-import mage.abilities.common.delayed.AtTheBeginOMainPhaseDelayedTriggeredAbility.PhaseSelection;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AddManaToManaPoolEffect;
+import mage.abilities.effects.common.ClashEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -42,6 +42,7 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.stack.Spell;
+import mage.players.Player;
 import mage.target.TargetSpell;
 import mage.target.targetpointer.FixedTarget;
 
@@ -49,59 +50,61 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class ManaDrain extends CardImpl {
+public class ScatteringStroke extends CardImpl {
 
-    public ManaDrain(UUID ownerId) {
-        super(ownerId, 78, "Mana Drain", Rarity.MYTHIC, new CardType[]{CardType.INSTANT}, "{U}{U}");
-        this.expansionSetCode = "VMA";
+    public ScatteringStroke(UUID ownerId) {
+        super(ownerId, 60, "Scattering Stroke", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
+        this.expansionSetCode = "CMD";
 
         this.color.setBlue(true);
 
-        // Counter target spell. At the beginning of your next main phase, add {X} to your mana pool, where X is that spell's converted mana cost.
+        // Counter target spell. Clash with an opponent. If you win, at the beginning of your next main phase, you may add {X} to your mana pool, where X is that spell's converted mana cost.
+        this.getSpellAbility().addEffect(new ScatteringStrokeEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
-        this.getSpellAbility().addEffect(new ManaDrainCounterEffect());        
     }
 
-    public ManaDrain(final ManaDrain card) {
+    public ScatteringStroke(final ScatteringStroke card) {
         super(card);
     }
 
     @Override
-    public ManaDrain copy() {
-        return new ManaDrain(this);
+    public ScatteringStroke copy() {
+        return new ScatteringStroke(this);
     }
 }
 
-class ManaDrainCounterEffect extends OneShotEffect {
 
-    public ManaDrainCounterEffect() {
+class ScatteringStrokeEffect extends OneShotEffect {
+
+    public ScatteringStrokeEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Counter target spell. At the beginning of your next main phase, add {X} to your mana pool, where X is that spell's converted mana cost";
+        this.staticText = "Counter target spell. Clash with an opponent. If you win, at the beginning of your next main phase, you may add {X} to your mana pool, where X is that spell's converted mana cost";
     }
 
-    public ManaDrainCounterEffect(final ManaDrainCounterEffect effect) {
+    public ScatteringStrokeEffect(final ScatteringStrokeEffect effect) {
         super(effect);
     }
 
     @Override
-    public ManaDrainCounterEffect copy() {
-        return new ManaDrainCounterEffect(this);
+    public ScatteringStrokeEffect copy() {
+        return new ScatteringStrokeEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
-        if (spell != null) {
-            game.getStack().counter(getTargetPointer().getFirst(game, source), source.getSourceId(), game);
-            // mana gets added also if counter is not successful
-            int cmc = spell.getConvertedManaCost();
-            Effect effect = new AddManaToManaPoolEffect(new Mana(0,0,0,0,0,cmc,0), "your");
-            effect.setTargetPointer(new FixedTarget(source.getControllerId()));
-            AtTheBeginOMainPhaseDelayedTriggeredAbility delayedAbility =
-                    new AtTheBeginOMainPhaseDelayedTriggeredAbility(effect, false, TargetController.YOU, PhaseSelection.NEXT_MAIN);
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            game.addDelayedTriggeredAbility(delayedAbility);
+        Spell spell = (Spell) game.getStack().getStackObject(getTargetPointer().getFirst(game, source));
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && spell != null) {
+            game.getStack().counter(spell.getId(), source.getSourceId(), game);
+            if (ClashEffect.getInstance().apply(game, source)) {
+                Effect effect = new AddManaToManaPoolEffect(new Mana(0,0,0,0,0,spell.getConvertedManaCost(),0), "your");
+                effect.setTargetPointer(new FixedTarget(source.getControllerId()));
+                AtTheBeginOMainPhaseDelayedTriggeredAbility delayedAbility =
+                        new AtTheBeginOMainPhaseDelayedTriggeredAbility(effect, true, TargetController.YOU, AtTheBeginOMainPhaseDelayedTriggeredAbility.PhaseSelection.NEXT_MAIN);
+                delayedAbility.setSourceId(source.getSourceId());
+                delayedAbility.setControllerId(source.getControllerId());
+                game.addDelayedTriggeredAbility(delayedAbility);
+            }
             return true;
         }
         return false;

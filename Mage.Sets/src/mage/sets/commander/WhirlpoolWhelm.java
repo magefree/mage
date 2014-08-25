@@ -28,85 +28,78 @@
 package mage.sets.commander;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DoIfClashWonEffect;
-import mage.abilities.effects.common.PreventAllDamageByAllEffect;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.ClashEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.PhaseStep;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class PollenLullaby extends CardImpl {
+public class WhirlpoolWhelm extends CardImpl {
 
-    public PollenLullaby(UUID ownerId) {
-        super(ownerId, 26, "Pollen Lullaby", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
+    public WhirlpoolWhelm(UUID ownerId) {
+        super(ownerId, 69, "Whirlpool Whelm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "CMD";
 
-        this.color.setWhite(true);
+        this.color.setBlue(true);
 
-        // Prevent all combat damage that would be dealt this turn. Clash with an opponent. If you win, creatures that player controls don't untap during the player's next untap step.
-        this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn, true));
-        this.getSpellAbility().addEffect(new DoIfClashWonEffect(new PollenLullabyEffect(), true, null));
+        // Clash with an opponent, then return target creature to its owner's hand. If you win, you may put that creature on top of its owner's library instead.
+        this.getSpellAbility().addEffect(new WhirlpoolWhelmEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public PollenLullaby(final PollenLullaby card) {
+    public WhirlpoolWhelm(final WhirlpoolWhelm card) {
         super(card);
     }
 
     @Override
-    public PollenLullaby copy() {
-        return new PollenLullaby(this);
+    public WhirlpoolWhelm copy() {
+        return new WhirlpoolWhelm(this);
     }
 }
 
-class PollenLullabyEffect extends OneShotEffect {
+class WhirlpoolWhelmEffect extends OneShotEffect {
 
-    public PollenLullabyEffect() {
-        super(Outcome.Tap);
-        staticText = "creatures that player controls don't untap during the player's next untap step";
+    public WhirlpoolWhelmEffect() {
+        super(Outcome.ReturnToHand);
+        this.staticText = "Clash with an opponent, then return target creature to its owner's hand. If you win, you may put that creature on top of its owner's library instead";
     }
 
-    public PollenLullabyEffect(final PollenLullabyEffect effect) {
+    public WhirlpoolWhelmEffect(final WhirlpoolWhelmEffect effect) {
         super(effect);
     }
 
     @Override
+    public WhirlpoolWhelmEffect copy() {
+        return new WhirlpoolWhelmEffect(this);
+    }
+
+    @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (player != null) {
-            for (Permanent creature: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
-                creature.tap(game);
-                ContinuousEffect effect = new SkipNextUntapTargetEffect("This creature");
-                effect.setTargetPointer(new FixedTarget(creature.getId()));
-                game.addEffect(effect, source);
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (controller != null) {
+            boolean topOfLibrary = false;
+            if (ClashEffect.getInstance().apply(game, source)) {
+                topOfLibrary = controller.chooseUse(outcome, "Put " + creature.getLogName() + " to top of libraray instead?" , game);
+            }
+            if (topOfLibrary) {
+                controller.moveCardToHandWithInfo(creature, source.getSourceId(), game, Zone.BATTLEFIELD);
+            } else {
+                controller.moveCardToLibraryWithInfo(creature, source.getSourceId(), game, Zone.BATTLEFIELD, true, true);
             }
             return true;
         }
         return false;
     }
-
-    @Override
-    public PollenLullabyEffect copy() {
-        return new PollenLullabyEffect(this);
-    }
-
 }
-

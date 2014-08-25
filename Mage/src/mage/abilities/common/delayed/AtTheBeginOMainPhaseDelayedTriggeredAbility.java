@@ -30,6 +30,7 @@ package mage.abilities.common.delayed;
 import mage.constants.TargetController;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -62,8 +63,9 @@ public class AtTheBeginOMainPhaseDelayedTriggeredAbility extends DelayedTriggere
     private final TargetController targetController;
     private final PhaseSelection phaseSelection;
 
-    public AtTheBeginOMainPhaseDelayedTriggeredAbility(Effect effect, TargetController targetController, PhaseSelection phaseSelection) {
-        super(effect);
+
+    public AtTheBeginOMainPhaseDelayedTriggeredAbility(Effect effect, boolean optional, TargetController targetController, PhaseSelection phaseSelection) {
+        super(effect, Duration.EndOfGame, true, optional);
         this.targetController = targetController;
         this.phaseSelection = phaseSelection;
 
