@@ -53,6 +53,7 @@
         <module>Mage.Server.Console</module>
         <module>Mage.Tests</module>
         <module>Mage.Updater</module>
+        <module>Mage.Stats</module>
     </modules>
 
     <repositories>
