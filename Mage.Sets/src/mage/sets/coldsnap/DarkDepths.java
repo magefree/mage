@@ -29,10 +29,10 @@ package mage.sets.coldsnap;
 
 import java.util.UUID;
 
+import mage.abilities.Ability;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -81,11 +81,42 @@ public class DarkDepths extends CardImpl {
     }
 }
 
+class DarkDepthsSacrificeEffect extends SacrificeSourceEffect {
+
+    private boolean sacrificed = false;
+
+    public DarkDepthsSacrificeEffect(){
+        super();
+    }
+
+    public DarkDepthsSacrificeEffect(final DarkDepthsSacrificeEffect effect) {
+        super(effect);
+        this.sacrificed = effect.sacrificed;
+    }
+
+    @Override
+    public DarkDepthsSacrificeEffect copy() {
+        return new DarkDepthsSacrificeEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        sacrificed = super.apply(game, source);
+        if (sacrificed) {
+            new CreateTokenEffect(new MaritLageToken()).apply(game, source);
+        }
+        return sacrificed;
+    }
+
+    public boolean isSacrificed() {
+        return sacrificed;
+    }
+}
+
 class DarkDepthsAbility extends StateTriggeredAbility {
 
     public DarkDepthsAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
-        this.addEffect(new CreateTokenEffect(new MaritLageToken()));
+        super(Zone.BATTLEFIELD, new DarkDepthsSacrificeEffect());
     }
 
     public DarkDepthsAbility(final DarkDepthsAbility ability) {
@@ -100,10 +131,7 @@ class DarkDepthsAbility extends StateTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(getSourceId());
-        if(permanent != null && permanent.getCounters().getCount(CounterType.ICE) == 0){
-            return true;
-        }
-        return false;
+        return permanent != null && permanent.getCounters().getCount(CounterType.ICE) == 0;
     }
 
     @Override
