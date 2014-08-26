@@ -77,6 +77,14 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
         this.graveyardExileOptional = effect.graveyardExileOptional;
     }
 
+    /**
+     * 
+     * @param game
+     * @param source
+     * @param cardName name of the card to exile
+     * @param targetPlayerId id of the target player to exile card name from his or her zones
+     * @return 
+     */
     public boolean applySearchAndExile(Game game, Ability source, String cardName, UUID targetPlayerId) {
         Player controller = game.getPlayer(source.getControllerId());
         if (cardName != null && controller != null) {

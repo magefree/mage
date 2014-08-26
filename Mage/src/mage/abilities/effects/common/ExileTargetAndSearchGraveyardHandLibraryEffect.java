@@ -58,38 +58,24 @@ public class ExileTargetAndSearchGraveyardHandLibraryEffect extends SearchTarget
     @Override
     public boolean apply(Game game, Ability source) {
         boolean result = false;
-        String cardName = "";
         UUID targetPlayerId = null;
-        // define cardName
-        if (source instanceof SpellAbility) {
-            Card sourceCard = game.getCard(source.getSourceId());
-            if (sourceCard != null) {
-                cardName = sourceCard.getName();
-            }
-        } else {
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-            if (sourcePermanent != null) {
-                cardName = sourcePermanent.getName();
-            }
-        }
         // get Target to exile
         Target exileTarget = null;
         for (Target target : source.getTargets()) {
-            if (!(target instanceof TargetPlayer)) {
+            if (target instanceof TargetPermanent) {
                 exileTarget = target;
                 break;
             }
-        }
-        
-        if (exileTarget != null && exileTarget instanceof TargetPermanent) {
+        }        
+        if (exileTarget != null) {
             Permanent permanentToExile = game.getPermanent(exileTarget.getFirstTarget());
             if (permanentToExile != null) {
                 targetPlayerId = permanentToExile.getControllerId();
                 result = permanentToExile.moveToExile(null, "", source.getSourceId(), game);
+                this.applySearchAndExile(game, source, permanentToExile.getName(), targetPlayerId);                
             }
         }
 
-        this.applySearchAndExile(game, source, cardName, targetPlayerId);
 
         return result;
     }
