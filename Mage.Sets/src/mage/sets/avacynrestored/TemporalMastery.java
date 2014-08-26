@@ -30,7 +30,7 @@ package mage.sets.avacynrestored;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ExileSpellEffect;
+import mage.abilities.effects.postresolve.ExileSpellEffect;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.abilities.keyword.MiracleAbility;
 import mage.cards.CardImpl;

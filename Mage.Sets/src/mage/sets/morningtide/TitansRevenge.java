@@ -32,14 +32,13 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.PostResolveEffect;
 import mage.abilities.effects.common.ClashEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.postresolve.ClashWinReturnToHandSpellEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -60,9 +59,8 @@ public class TitansRevenge extends CardImpl {
 
         // Titan's Revenge deals X damage to target creature or player. Clash with an opponent. If you win, return Titan's Revenge to its owner's hand.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
-        this.getSpellAbility().addEffect(TitansRevengeReturnToHandSpellEffect.getInstance());
-        
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addEffect(ClashWinReturnToHandSpellEffect.getInstance());
     }
 
     public TitansRevenge(final TitansRevenge card) {
@@ -72,44 +70,5 @@ public class TitansRevenge extends CardImpl {
     @Override
     public TitansRevenge copy() {
         return new TitansRevenge(this);
-    }
-}
-
-class TitansRevengeReturnToHandSpellEffect extends PostResolveEffect implements MageSingleton {
-    private static final TitansRevengeReturnToHandSpellEffect fINSTANCE =  new TitansRevengeReturnToHandSpellEffect();
-
-        private Object readResolve() throws ObjectStreamException {
-            return fINSTANCE;
-        }
-
-        private TitansRevengeReturnToHandSpellEffect() {
-            staticText = "Clash with an opponent. If you win, return {this} to its owner's hand";
-        }
-
-        public static TitansRevengeReturnToHandSpellEffect getInstance() {
-            return fINSTANCE;
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            return true;
-        }
-
-        @Override
-        public TitansRevengeReturnToHandSpellEffect copy() {
-            return fINSTANCE;
-        }
-
-    @Override
-    public boolean isActive(Ability source, Game game) {
-        return ClashEffect.getInstance().apply(game, source);
-    }
-
-    @Override
-    public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
-        Player controller = game.getPlayer(controllerId);
-        if (controller != null) {
-            controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.STACK);
-        }
     }
 }

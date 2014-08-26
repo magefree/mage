@@ -34,7 +34,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileSpellEffect;
+import mage.abilities.effects.postresolve.ExileSpellEffect;
 import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect;
 import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect.HandSizeModification;
 import mage.cards.Card;

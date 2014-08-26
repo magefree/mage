@@ -25,62 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.sets.morningtide;
 
-import mage.abilities.Ability;
-import mage.abilities.costs.common.DiscardXTargetCost;
-import mage.abilities.dynamicvalue.common.GetXValue;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.postresolve.ExileSpellEffect;
-import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import java.util.UUID;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.postresolve.ClashWinReturnToHandSpellEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.target.Target;
-import mage.target.common.TargetCardInYourGraveyard;
-
-import java.util.UUID;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
  * @author LevelX2
  */
-public class NostalgicDreams extends CardImpl {
+public class ReleaseTheAnts extends CardImpl {
 
-    public NostalgicDreams(UUID ownerId) {
-        super(ownerId, 135, "Nostalgic Dreams", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}{G}");
-        this.expansionSetCode = "TOR";
+    public ReleaseTheAnts(UUID ownerId) {
+        super(ownerId, 98, "Release the Ants", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
+        this.expansionSetCode = "MOR";
 
-        this.color.setGreen(true);
+        this.color.setRed(true);
 
-        // As an additional cost to cast Nostalgic Dreams, discard X cards.
-        this.getSpellAbility().addCost(new DiscardXTargetCost(new FilterCard("cards"), true));
-        // Return X target cards from your graveyard to your hand. Exile Nostalgic Dreams.
-        Effect effect = new ReturnFromGraveyardToHandTargetEffect();
-        effect.setText("Return X target cards from your graveyard to your hand");
-        this.getSpellAbility().addEffect(effect);        
-        
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
-
+        // Release the Ants deals 1 damage to target creature or player. Clash with an opponent. If you win, return Release the Ants to its owner's hand.
+        this.getSpellAbility().addEffect(new DamageTargetEffect(1));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addEffect(ClashWinReturnToHandSpellEffect.getInstance());
     }
 
-    public NostalgicDreams(final NostalgicDreams card) {
+    public ReleaseTheAnts(final ReleaseTheAnts card) {
         super(card);
     }
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int xValue = new GetXValue().calculate(game, ability, null);
-//        if (xValue > 0) {
-            Target target = new TargetCardInYourGraveyard(xValue, new FilterCard("card from your graveyard"));
-            ability.addTarget(target);
-//        }
-    }
-
-    @Override
-    public NostalgicDreams copy() {
-        return new NostalgicDreams(this);
+    public ReleaseTheAnts copy() {
+        return new ReleaseTheAnts(this);
     }
 }

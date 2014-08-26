@@ -149,6 +149,7 @@ public class Main {
                 server = new MageTransporterServer(serverLocator, new MageServerImpl(adminPassword, testMode), MageServer.class.getName(), new MageServerInvocationHandler());
                 server.start();
                 logger.info("Started MAGE server - listening on " + connection.toString());
+                
                 if (testMode) {
                     logger.info("MAGE server running in test mode");
                 }

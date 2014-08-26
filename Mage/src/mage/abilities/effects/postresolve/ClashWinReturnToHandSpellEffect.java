@@ -25,40 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.abilities.effects.postresolve;
 
+import java.io.ObjectStreamException;
 import java.util.UUID;
-import mage.abilities.effects.postresolve.ExileSpellEffect;
-import mage.abilities.effects.common.turn.ControlTargetPlayerNextTurnEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.target.TargetPlayer;
+import mage.abilities.Ability;
+import mage.abilities.MageSingleton;
+import mage.abilities.effects.PostResolveEffect;
+import mage.abilities.effects.common.ClashEffect;
+import mage.cards.Card;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
  * @author LevelX2
  */
-public class WorstFears extends CardImpl {
+public class ClashWinReturnToHandSpellEffect extends PostResolveEffect implements MageSingleton {
 
-    public WorstFears(UUID ownerId) {
-        super(ownerId, 87, "Worst Fears", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{7}{B}");
-        this.expansionSetCode = "JOU";
+    private static final ClashWinReturnToHandSpellEffect fINSTANCE = new ClashWinReturnToHandSpellEffect();
 
-        this.color.setBlack(true);
-
-        // You control target player during that player's next turn. Exile Worst Fears. (You see all cards that player could see and make all decisions for that player.)
-        this.getSpellAbility().addEffect(new ControlTargetPlayerNextTurnEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
     }
 
-    public WorstFears(final WorstFears card) {
-        super(card);
+    private ClashWinReturnToHandSpellEffect() {
+        staticText = "Clash with an opponent. If you win, return {this} to its owner's hand";
+    }
+
+    public static ClashWinReturnToHandSpellEffect getInstance() {
+        return fINSTANCE;
     }
 
     @Override
-    public WorstFears copy() {
-        return new WorstFears(this);
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public ClashWinReturnToHandSpellEffect copy() {
+        return fINSTANCE;
+    }
+
+    @Override
+    public boolean isActive(Ability source, Game game) {
+        return ClashEffect.getInstance().apply(game, source);
+    }
+
+    @Override
+    public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
+        Player controller = game.getPlayer(controllerId);
+        if (controller != null) {
+            controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.STACK);
+        }
     }
 }
