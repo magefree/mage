@@ -52,6 +52,10 @@ public abstract class PostResolveEffect extends OneShotEffect {
         return true;
     }
 
+    public boolean isActive() {
+        return true;
+    }
+    
     public abstract void postResolve(Card card, Ability source, UUID controllerId, Game game);
 
 }

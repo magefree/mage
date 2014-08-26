@@ -199,8 +199,10 @@ public class Spell implements StackObject, Card {
                 if (!copiedSpell) {
                     for (Effect effect : ability.getEffects()) {
                         if (effect instanceof PostResolveEffect) {
-                            ((PostResolveEffect) effect).postResolve(card, ability, controllerId, game);
-                            return result;
+                            if (((PostResolveEffect) effect).isActive()) {
+                                ((PostResolveEffect) effect).postResolve(card, ability, controllerId, game);
+                                return result;
+                            }
                         }
                     }
                     if (!card.isCopy() && game.getState().getZone(card.getId()) == Zone.STACK) {
