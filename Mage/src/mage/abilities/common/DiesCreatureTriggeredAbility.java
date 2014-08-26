@@ -47,6 +47,7 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     public DiesCreatureTriggeredAbility(DiesCreatureTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
+        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
