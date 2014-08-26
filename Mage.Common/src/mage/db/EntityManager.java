@@ -5,12 +5,14 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import mage.db.model.Feedback;
+import mage.db.model.Log;
+import mage.utils.properties.PropertiesUtil;
+
 import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import mage.db.model.Feedback;
-import mage.db.model.Log;
 
 /**
  * @author noxx, North
@@ -18,9 +20,6 @@ import mage.db.model.Log;
 public enum EntityManager {
 
     instance;
-
-    private static final String LOG_JDBC_URL = "jdbc:h2:file:./db/mage.h2;AUTO_SERVER=TRUE";
-    private static final String FEEDBACK_JDBC_URL = "jdbc:h2:file:./db/feedback.h2;AUTO_SERVER=TRUE";
 
     private Dao<Log, Object> logDao;
     private Dao<Feedback, Object> feedbackDao;
@@ -31,14 +30,15 @@ public enum EntityManager {
             file.mkdirs();
         }
         try {
-            ConnectionSource logConnectionSource = new JdbcConnectionSource(LOG_JDBC_URL);
+            ConnectionSource logConnectionSource = new JdbcConnectionSource(PropertiesUtil.getDBLogUrl());
             TableUtils.createTableIfNotExists(logConnectionSource, Log.class);
             logDao = DaoManager.createDao(logConnectionSource, Log.class);
 
-            ConnectionSource feedbackConnectionSource = new JdbcConnectionSource(FEEDBACK_JDBC_URL);
+            ConnectionSource feedbackConnectionSource = new JdbcConnectionSource(PropertiesUtil.getDBFeedbackUrl());
             TableUtils.createTableIfNotExists(feedbackConnectionSource, Feedback.class);
             feedbackDao = DaoManager.createDao(feedbackConnectionSource, Feedback.class);
         } catch (SQLException ex) {
+            ex.printStackTrace();
         }
     }
 
