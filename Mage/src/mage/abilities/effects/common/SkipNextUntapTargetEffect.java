@@ -89,8 +89,8 @@ public class SkipNextUntapTargetEffect extends ContinuousRuleModifiyingEffectImp
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        // the check for turn number is needed if multiple effects are added to prevent untap in next untap step
-        // if we don't check for turn number, every turn only one effect would be used instead of correctly only one time
+        // the check for turn number is needed if multiple effects are added to prevent untap in next untap step of controller
+        // if we don't check for turn number, every untap step of a turn only one effect would be used instead of correctly only one time
         // to skip the untap effect.
         
         // Discard effect if related to previous turn

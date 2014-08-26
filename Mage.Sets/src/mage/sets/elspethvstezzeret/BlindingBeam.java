@@ -30,8 +30,8 @@ package mage.sets.elspethvstezzeret;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.EntwineAbility;
 import mage.cards.CardImpl;
@@ -102,7 +102,7 @@ class BlindingBeamEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (player != null) {
+        if (player != null) {                
             game.addEffect(new BlindingBeamEffect2(player.getId()), source);
             return true;
         }
@@ -116,11 +116,11 @@ class BlindingBeamEffect extends OneShotEffect {
 
 }
 
-class BlindingBeamEffect2 extends ReplacementEffectImpl {
+class BlindingBeamEffect2 extends ContinuousRuleModifiyingEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
-    private UUID targetPlayerId;
+    private final UUID targetPlayerId;
 
     public BlindingBeamEffect2(UUID targetPlayerId) {
         super(Duration.Custom, Outcome.Detriment);
@@ -143,14 +143,9 @@ class BlindingBeamEffect2 extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
     public boolean isInactive(Ability source, Game game) {
-        if (game.getPhase().getStep().getType() == PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE)
-        {
+        // the PRE step part is directly after the UNTAP events for permanents
+        if (game.getPhase().getStep().getType() == PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE) {
             if (game.getActivePlayerId().equals(targetPlayerId) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving()) {
                 return true;
             }
@@ -160,8 +155,8 @@ class BlindingBeamEffect2 extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        // replace untap event of creatures of target player
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == EventType.UNTAP) {
+        // prevent untap event of creatures of target player
+        if (game.getTurn().getStepType().equals(PhaseStep.UNTAP) && event.getType().equals(EventType.UNTAP)) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && permanent.getControllerId().equals(targetPlayerId) && filter.match(permanent, game)) {
                 return true;

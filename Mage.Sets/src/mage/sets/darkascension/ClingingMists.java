@@ -45,6 +45,9 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 import java.util.UUID;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -94,7 +97,9 @@ class ClingingMistsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (Permanent creature: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             creature.tap(game);
-            game.addEffect(new ClingingMistsEffect2(creature.getId()), source);
+            ContinuousEffect effect = new SkipNextUntapTargetEffect();
+            effect.setTargetPointer(new FixedTarget(creature.getId()));
+            game.addEffect(effect, source);                
         }
         return true;
     }
@@ -102,48 +107,6 @@ class ClingingMistsEffect extends OneShotEffect {
     @Override
     public ClingingMistsEffect copy() {
         return new ClingingMistsEffect(this);
-    }
-
-}
-
-class ClingingMistsEffect2 extends ReplacementEffectImpl {
-
-    protected UUID creatureId;
-
-    public ClingingMistsEffect2(UUID creatureId) {
-        super(Duration.OneUse, Outcome.Detriment);
-        this.creatureId = creatureId;
-    }
-
-    public ClingingMistsEffect2(final ClingingMistsEffect2 effect) {
-        super(effect);
-        creatureId = effect.creatureId;
-    }
-
-    @Override
-    public ClingingMistsEffect2 copy() {
-        return new ClingingMistsEffect2(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        used = true;
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP &&
-                event.getType() == GameEvent.EventType.UNTAP &&
-                event.getTargetId().equals(creatureId)) {
-            return true;
-        }
-        return false;
     }
 
 }

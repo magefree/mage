@@ -48,8 +48,8 @@ import mage.filter.FilterMana;
 
 public class Commander extends DeckValidator {
 
-    protected List<String> banned = new ArrayList<String>();
-    protected List<String> bannedCommander = new ArrayList<String>();
+    protected List<String> banned = new ArrayList<>();
+    protected List<String> bannedCommander = new ArrayList<>();
     
     private static final String regexBlack = ".*\\x7b.{0,2}B.{0,2}\\x7d.*";
     private static final String regexBlue  = ".*\\x7b.{0,2}U.{0,2}\\x7d.*";

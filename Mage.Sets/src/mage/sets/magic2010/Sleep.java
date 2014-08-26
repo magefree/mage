@@ -30,21 +30,19 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.PhaseStep;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.SkipNextUntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -87,7 +85,9 @@ class SleepEffect extends OneShotEffect {
         if (player != null) {
             for (Permanent creature: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
                 creature.tap(game);
-                game.addEffect(new SleepEffect2(creature.getId()), source);
+                ContinuousEffect effect = new SkipNextUntapTargetEffect();
+                effect.setTargetPointer(new FixedTarget(creature.getId()));
+                game.addEffect(effect, source);                
             }
             return true;
         }
@@ -97,48 +97,6 @@ class SleepEffect extends OneShotEffect {
     @Override
     public SleepEffect copy() {
         return new SleepEffect(this);
-    }
-
-}
-
-class SleepEffect2 extends ReplacementEffectImpl {
-
-    protected UUID creatureId;
-
-    public SleepEffect2(UUID creatureId) {
-        super(Duration.OneUse, Outcome.Detriment);
-        this.creatureId = creatureId;
-    }
-
-    public SleepEffect2(final SleepEffect2 effect) {
-        super(effect);
-        creatureId = effect.creatureId;
-    }
-
-    @Override
-    public SleepEffect2 copy() {
-        return new SleepEffect2(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        used = true;
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP &&
-                event.getType() == EventType.UNTAP &&
-                event.getTargetId().equals(creatureId)) {
-            return true;
-        }
-        return false;
     }
 
 }

@@ -29,22 +29,21 @@ package mage.sets.portalthreekingdoms;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.SkipNextUntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.PhaseStep;
 import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -100,49 +99,12 @@ class ExhaustionEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
-                game.addEffect(new ExhaustionReplacementEffect(permanent.getId()), source);
+                ContinuousEffect effect = new SkipNextUntapTargetEffect();
+                effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                game.addEffect(effect, source);                      
             }
             return true;
         }
         return false;
     }
-}
-
-class ExhaustionReplacementEffect extends ReplacementEffectImpl {
-
-    protected UUID permanentId;
-
-    ExhaustionReplacementEffect(UUID permanentId) {
-        super(Duration.OneUse, Outcome.Detriment);
-        this.permanentId = permanentId;
-    }
-
-    ExhaustionReplacementEffect(final ExhaustionReplacementEffect effect) {
-        super(effect);
-        permanentId = effect.permanentId;
-    }
-
-    @Override
-    public ExhaustionReplacementEffect copy() {
-        return new ExhaustionReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        used = true;
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return game.getTurn().getStepType() == PhaseStep.UNTAP &&
-                event.getType() == GameEvent.EventType.UNTAP &&
-                event.getTargetId().equals(permanentId);
-    }
-
 }
