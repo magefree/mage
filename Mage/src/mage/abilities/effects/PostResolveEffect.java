@@ -52,7 +52,7 @@ public abstract class PostResolveEffect extends OneShotEffect {
         return true;
     }
 
-    public boolean isActive() {
+    public boolean isActive(Ability source, Game game) {
         return true;
     }
     
