@@ -88,7 +88,7 @@ class SaffiEriksdotterEffect extends OneShotEffect {
 
     public SaffiEriksdotterEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "When target creature other than Adarkar Valkyrie dies this turn, return that card to the battlefield under your control";
+        this.staticText = "When target creature is put into your graveyard from the battlefield this turn, return that card to the battlefield";
     }
 
     public SaffiEriksdotterEffect(final SaffiEriksdotterEffect effect) {
@@ -135,7 +135,9 @@ class SaffiEriksdotterDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
             if (fixedTarget.getFirst(game, this).equals(event.getTargetId())) {
-                return true;
+                if(this.getControllerId().equals(event.getPlayerId())){
+                    return true;
+                }
             }
         }
         return false;
@@ -143,7 +145,7 @@ class SaffiEriksdotterDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When target creature other than Adarkar Valkyrie dies this turn, " + super.getRule();
+        return "When target creature is put into your graveyard from the battlefield this turn, " + super.getRule();
     }
 }
 
