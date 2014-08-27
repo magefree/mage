@@ -28,10 +28,6 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -39,6 +35,10 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
@@ -107,6 +107,7 @@ class SpellskiteEffect extends OneShotEffect {
             } else {
                 return false;
             }
+            boolean twoTimesTarget = false;
             if (targets.size() == 1 && targets.get(0).getTargets().size() == 1) {
                 Target target = targets.get(0);
                 if (target.canTarget(stackObject.getControllerId(), source.getSourceId(), sourceAbility, game)) {
@@ -127,6 +128,11 @@ class SpellskiteEffect extends OneShotEffect {
                         } else {
                             name = object.getName();
                         }
+                        if (!targetId.equals(source.getSourceId()) && target.getTargets().contains(source.getSourceId())) {
+                            // you can't change this target to Spellskite because Spellskite is already another targetId of that target.
+                            twoTimesTarget = true;
+                            continue;
+                        }
                         if (name != null && player.chooseUse(Outcome.Neutral, new StringBuilder("Change target from ").append(name).append(" to ").append(sourceObject.getName()).append("?").toString(), game)) {
                             if (target.canTarget(stackObject.getControllerId(), source.getSourceId(), sourceAbility, game)) {
                                 oldTarget = game.getObject(targets.getFirstTarget());
@@ -141,7 +147,11 @@ class SpellskiteEffect extends OneShotEffect {
             if (oldTarget != null) {
                 game.informPlayers(new StringBuilder(sourceObject.getName()).append(": Changed target of ").append(stackObject.getName()).append(" from ").append(oldTarget.getName()).append(" to ").append(sourceObject.getName()).toString());
             } else {
-                game.informPlayers(sourceObject.getLogName() + ": Target not changed to " + sourceObject.getLogName() + " because its no valid target for " + stackObject.getName());
+                if (twoTimesTarget) {
+                    game.informPlayers(sourceObject.getLogName() + ": Target not changed to " + sourceObject.getLogName() + " because its not valid to target it twice for " + stackObject.getName());
+                } else {
+                    game.informPlayers(sourceObject.getLogName() + ": Target not changed to " + sourceObject.getLogName() + " because its no valid target for " + stackObject.getName());
+                }
             }
             return true;
         }
