@@ -268,13 +268,31 @@ public class GameController implements GameCallback {
 
     public void join(UUID userId) {
         UUID playerId = userPlayerMap.get(userId);
-        GameSession gameSession = new GameSession(game, userId, playerId, useTimeout);
-        gameSessions.put(playerId, gameSession);
         User user = UserManager.getInstance().getUser(userId);
-        gameSession.setUserData(user.getUserData());
+        if (userId == null || playerId == null) {
+            logger.fatal("Join game failed!");
+            logger.fatal("- gameId: " +  game.getId());
+            logger.fatal("- userId: " +  userId);
+            return;
+        }
+        Player player = game.getPlayer(playerId);
+        if (player == null) {
+            logger.fatal("Player not found - playerId: " +playerId);
+            return;
+        }
+        GameSession gameSession = gameSessions.get(playerId);
+        String joinType;
+        if (gameSession == null) {
+            gameSession = new GameSession(game, userId, playerId, useTimeout);
+            gameSessions.put(playerId, gameSession);
+            gameSession.setUserData(user.getUserData());
+            joinType = "joined";
+        } else {
+            joinType = "rejoined";
+        }
         user.addGame(playerId, gameSession);
-        logger.debug(new StringBuilder("Player ").append(playerId).append(" has joined game ").append(game.getId()).toString());
-        ChatManager.getInstance().broadcast(chatId, "", new StringBuilder(game.getPlayer(playerId).getName()).append(" has joined the game").toString(), MessageColor.ORANGE, true, MessageType.GAME);
+        logger.debug("Player " + playerId + " has " + joinType + " gameId: " + game.getId());
+        ChatManager.getInstance().broadcast(chatId, "", game.getPlayer(playerId).getName() + " has " + joinType + " the game", MessageColor.ORANGE, true, MessageType.GAME);
         checkStart();
     }
 
@@ -417,11 +435,10 @@ public class GameController implements GameCallback {
 
     public void timeout(UUID userId) {
         if (userPlayerMap.containsKey(userId)) {
-            StringBuilder sb = new StringBuilder(game.getPlayer(userPlayerMap.get(userId)).getName())
-                    .append(" has timed out (player had priority and was not active for ")
-                    .append(ConfigSettings.getInstance().getMaxSecondsIdle())
-                    .append(" seconds ) - Auto concede.");
-            ChatManager.getInstance().broadcast(chatId, "", sb.toString() , MessageColor.BLACK, true, MessageType.STATUS);
+            String sb = game.getPlayer(userPlayerMap.get(userId)).getName() +
+                    " has timed out (player had priority and was not active for " +
+                    ConfigSettings.getInstance().getMaxSecondsIdle() + " seconds ) - Auto concede.";
+            ChatManager.getInstance().broadcast(chatId, "", sb, MessageColor.BLACK, true, MessageType.STATUS);
             game.idleTimeout(getPlayerId(userId));
         }
     }
