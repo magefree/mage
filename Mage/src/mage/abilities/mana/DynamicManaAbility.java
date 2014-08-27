@@ -27,12 +27,12 @@
  */
 package mage.abilities.mana;
 
-import mage.constants.Zone;
 import mage.Mana;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.common.DynamicManaEffect;
+import mage.constants.Zone;
 import mage.game.Game;
 
 /**
@@ -46,6 +46,8 @@ public class DynamicManaAbility extends ManaAbility {
 
     /**
      * TapSourceCost added by default
+     * @param mana
+     * @param amount
      */
     public DynamicManaAbility(Mana mana, DynamicValue amount) {
         this(mana, amount, new TapSourceCost());

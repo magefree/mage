@@ -879,6 +879,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     private static ImageIcon getCounterImageWithAmount(int amount, BufferedImage image, int cardWidth) {
         int factor = cardWidth > WIDTH_LIMIT ? 2 :1;
+        int xOffset = amount > 9 ? 2 : 5;
+        int fontSize = amount < 10 ? 9 : amount < 100 ? 9 : 8;
         BufferedImage newImage;
         if (cardWidth > WIDTH_LIMIT) {
             newImage = ImageManagerImpl.deepCopy(image);
@@ -887,8 +889,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         }
         Graphics graphics = newImage.getGraphics();
         graphics.setColor(Color.BLACK);
-        graphics.setFont(new Font("Arial Black", Font.BOLD, factor * 9 ));
-        graphics.drawString(Integer.toString(amount), 4 * factor, 11 * factor);
+        graphics.setFont(new Font("Arial Black", Font.BOLD, factor * fontSize ));
+        graphics.drawString(Integer.toString(amount), xOffset * factor, 11 * factor);
         return new ImageIcon(newImage);
     }
 
