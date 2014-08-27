@@ -40,12 +40,13 @@ import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.abilities.Ability;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
@@ -86,7 +87,7 @@ public class JaceArchitectOfThought extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 
         // +1: Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.
-        this.addAbility(new LoyaltyAbility(new JaceArchitectOfThoughtGainAbilityEffect(new JaceArchitectOfThoughtTriggeredAbility()),1));
+        this.addAbility(new LoyaltyAbility(new CreateDelayedTriggeredAbilityEffect(new JaceArchitectOfThoughtDelayedTriggeredAbility()),1));
 
         // -2: Reveal the top three cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other on the bottom of your library in any order.
         this.addAbility(new LoyaltyAbility(new JaceArchitectOfThoughtEffect2(), -2));
@@ -106,61 +107,16 @@ public class JaceArchitectOfThought extends CardImpl {
     }
 }
 
-class JaceArchitectOfThoughtGainAbilityEffect extends ContinuousEffectImpl {
+class JaceArchitectOfThoughtDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    protected Ability ability;
-
-    public JaceArchitectOfThoughtGainAbilityEffect(Ability ability) {
-        super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.ability = ability;
-        staticText = "Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn";
+    private int startingTurn;
+            
+    public JaceArchitectOfThoughtDelayedTriggeredAbility() {
+        super(new BoostTargetEffect(-1,0, Duration.EndOfTurn), Duration.Custom, false);
     }
 
-    public JaceArchitectOfThoughtGainAbilityEffect(final JaceArchitectOfThoughtGainAbilityEffect effect) {
-        super(effect);
-        this.ability = effect.ability.copy();
-    }
-
-    @Override
-    public JaceArchitectOfThoughtGainAbilityEffect copy() {
-        return new JaceArchitectOfThoughtGainAbilityEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            permanent.addAbility(ability, game);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean isInactive(Ability source, Game game) {
-        if (game.getPhase().getStep().getType() == PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE)
-        {
-            if (game.getActivePlayerId().equals(source.getControllerId())) {
-                return true;
-            }
-        }
-        return false;
-    }
-}
-
-class JaceArchitectOfThoughtTriggeredAbility extends TriggeredAbilityImpl {
-
-    public JaceArchitectOfThoughtTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new JaceArchitectOfThoughtEffectUnboostEffect(-1,0, Duration.EndOfTurn));
-    }
-
-    public JaceArchitectOfThoughtTriggeredAbility(final JaceArchitectOfThoughtTriggeredAbility ability) {
+    public JaceArchitectOfThoughtDelayedTriggeredAbility(JaceArchitectOfThoughtDelayedTriggeredAbility ability) {
         super(ability);
-    }
-
-    @Override
-    public JaceArchitectOfThoughtTriggeredAbility copy() {
-        return new JaceArchitectOfThoughtTriggeredAbility(this);
     }
 
     @Override
@@ -177,40 +133,24 @@ class JaceArchitectOfThoughtTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public JaceArchitectOfThoughtDelayedTriggeredAbility copy() {
+        return new JaceArchitectOfThoughtDelayedTriggeredAbility(this);
+    }
+
+    @Override
+    public void init(Game game) {
+        startingTurn = game.getTurnNum();
+    }
+
+    
+    @Override
+    public boolean isInactive(Game game) {
+        return game.getActivePlayerId().equals(getControllerId()) && game.getTurnNum() != startingTurn;
+    }
+
+    @Override
     public String getRule() {
         return "Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.";
-    }
-}
-
-/*
- * effect only applies if creature continues to attack (if it's left the combat, it's no longer attacking
- */
-class JaceArchitectOfThoughtEffectUnboostEffect extends BoostTargetEffect {
-
-    public JaceArchitectOfThoughtEffectUnboostEffect(int power, int toughness, Duration duration) {
-        super(power, toughness, duration);
-    }
-
-
-    public JaceArchitectOfThoughtEffectUnboostEffect (final  JaceArchitectOfThoughtEffectUnboostEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public  JaceArchitectOfThoughtEffectUnboostEffect copy() {
-        return new JaceArchitectOfThoughtEffectUnboostEffect(this);
-    }
-
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID permanentId : targetPointer.getTargets(game, source)) {
-            Permanent target = (Permanent) game.getPermanent(permanentId);
-            if (target != null && target.isAttacking()) {
-                return super.apply(game, source);
-            }
-        }
-        return false;
     }
 }
 
