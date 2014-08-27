@@ -28,19 +28,17 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromAnywhereTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.ControllerLifeCount;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.players.Player;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
@@ -59,8 +57,9 @@ public class SerraAvatar extends CardImpl {
 
         // Serra Avatar's power and toughness are each equal to your life total.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new ControllerLifeCount(), Duration.EndOfGame)));
+        
         // When Serra Avatar is put into a graveyard from anywhere, shuffle it into its owner's library.
-        this.addAbility(new PutIntoGraveFromAnywhereTriggeredAbility(new SerraAvatarEffect()));
+        this.addAbility(new PutIntoGraveFromAnywhereTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));
     }
 
     public SerraAvatar(final SerraAvatar card) {
@@ -70,37 +69,5 @@ public class SerraAvatar extends CardImpl {
     @Override
     public SerraAvatar copy() {
         return new SerraAvatar(this);
-    }
-}
-
-class SerraAvatarEffect extends OneShotEffect {
-    SerraAvatarEffect() {
-        super(Outcome.ReturnToHand);
-        staticText = "shuffle it into its owner's library";
-    }
-
-    SerraAvatarEffect(final SerraAvatarEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Card c = player.getGraveyard().get(source.getSourceId(), game);
-            if (c != null) {
-                player.getGraveyard().remove(c);
-                player.getLibrary().putOnTop(c, game);
-                player.shuffleLibrary(game);
-                return true;
-            }
-
-        }
-        return false;
-    }
-
-    @Override
-    public SerraAvatarEffect copy() {
-        return new SerraAvatarEffect(this);
     }
 }

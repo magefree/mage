@@ -29,93 +29,72 @@ package mage.sets.onslaught;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetNonlandPermanent;
 
 /**
  *
  * @author emerald000
  */
-public class WordsOfWar extends CardImpl {
+public class Oblation extends CardImpl {
 
-    public WordsOfWar(UUID ownerId) {
-        super(ownerId, 244, "Words of War", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
+    public Oblation(UUID ownerId) {
+        super(ownerId, 46, "Oblation", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "ONS";
 
-        this.color.setRed(true);
+        this.color.setWhite(true);
 
-        // {1}: The next time you would draw a card this turn, Words of War deals 2 damage to target creature or player instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WordsOfWarEffect(), new GenericManaCost(1));
-        ability.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(ability);
+        // The owner of target nonland permanent shuffles it into his or her library, then draws two cards.
+        this.getSpellAbility().addEffect(new OblationEffect());
+        this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
 
-    public WordsOfWar(final WordsOfWar card) {
+    public Oblation(final Oblation card) {
         super(card);
     }
 
     @Override
-    public WordsOfWar copy() {
-        return new WordsOfWar(this);
+    public Oblation copy() {
+        return new Oblation(this);
     }
 }
 
-class WordsOfWarEffect extends ReplacementEffectImpl {
+class OblationEffect extends OneShotEffect {
     
-    WordsOfWarEffect() {
-        super(Duration.EndOfTurn, Outcome.Damage);
-        staticText = "The next time you would draw a card this turn, {this} deals 2 damage to target creature or player instead.";
+    OblationEffect() {
+        super(Outcome.Removal);
+        this.staticText = "The owner of target nonland permanent shuffles it into his or her library, then draws two cards";
     }
     
-    WordsOfWarEffect(final WordsOfWarEffect effect) {
+    OblationEffect(final OblationEffect effect) {
         super(effect);
     }
     
     @Override
-    public WordsOfWarEffect copy() {
-        return new WordsOfWarEffect(this);
+    public OblationEffect copy() {
+        return new OblationEffect(this);
     }
     
     @Override
     public boolean apply(Game game, Ability source) {
-        return true;
-    }
-    
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        if (permanent != null) {
+            Player player = game.getPlayer(permanent.getOwnerId());
             if (player != null) {
-                player.damage(2, source.getSourceId(), game, false, true);
-                used = true;
-                return true;
-            }
-            Permanent permanent = game.getPermanent(source.getFirstTarget());
-            if (permanent != null) {
-                permanent.damage(2, source.getSourceId(), game, false, true);
-                used = true;
+                player.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, true, true);
+                player.shuffleLibrary(game);
+                player.drawCards(2, game);
                 return true;
             }
         }
         return false;
-    }
-    
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType() == EventType.DRAW_CARD && source.getControllerId().equals(event.getPlayerId()) && used == false;
     }
 }

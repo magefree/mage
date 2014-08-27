@@ -28,22 +28,16 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromAnywhereTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.constants.Outcome;
-import mage.game.Game;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.game.permanent.token.Token;
-import mage.players.Player;
 
 /**
  *
@@ -62,10 +56,12 @@ public class WorldspineWurm extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
+        
         // When Worldspine Wurm dies, put three 5/5 green Wurm creature tokens with trample onto the battlefield.
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new WorldspineWurmToken(), 3)));
+        
         // When Worldspine Wurm is put into a graveyard from anywhere, shuffle it into its owner's library.
-        this.addAbility(new PutIntoGraveFromAnywhereTriggeredAbility(new WorldspineWurmEffect()));
+        this.addAbility(new PutIntoGraveFromAnywhereTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));
     }
 
     public WorldspineWurm(final WorldspineWurm card) {
@@ -77,40 +73,6 @@ public class WorldspineWurm extends CardImpl {
         return new WorldspineWurm(this);
     }
 }
-
-
-class WorldspineWurmEffect extends OneShotEffect {
-    WorldspineWurmEffect() {
-        super(Outcome.Neutral);
-        staticText = "shuffle it into its owner's library";
-    }
-
-    WorldspineWurmEffect(final WorldspineWurmEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Card c = player.getGraveyard().get(source.getSourceId(), game);
-            if (c != null) {
-                player.getGraveyard().remove(c);
-                player.getLibrary().putOnTop(c, game);
-                player.shuffleLibrary(game);
-                return true;
-            }
-
-        }
-        return false;
-    }
-
-    @Override
-    public WorldspineWurmEffect copy() {
-        return new WorldspineWurmEffect(this);
-    }
-}
-
 
 class WorldspineWurmToken extends Token {
 
