@@ -39,7 +39,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
@@ -125,9 +125,10 @@ class KikiJikiMirrorBreakerEffect extends OneShotEffect {
             token.addAbility(HasteAbility.getInstance());
             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
 
-            ExileTargetEffect exileEffect = new ExileTargetEffect();
-            exileEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
-            DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(exileEffect);
+            SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect();
+            sacrificeEffect.setText("Sacrifice the token at the beginning of the next end step");
+            sacrificeEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
+            DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(sacrificeEffect);
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
             game.addDelayedTriggeredAbility(delayedAbility);
