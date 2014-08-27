@@ -6,6 +6,7 @@ import mage.constants.Rarity;
 import mage.interfaces.plugin.CardPlugin;
 import mage.utils.CardUtil;
 import mage.view.CardView;
+import mage.view.CounterView;
 import mage.view.PermanentView;
 import net.xeoh.plugins.base.annotations.PluginImplementation;
 import net.xeoh.plugins.base.annotations.events.Init;
@@ -134,8 +135,21 @@ public class CardPluginImpl implements CardPlugin {
                         insertIndex = i;
                         break;
                     }
+                    List<CounterView> counters = firstPanel.getOriginalPermanent().getCounters();
+                    if (counters != null && counters.size() > 0) {
+                        // don't put to first panel if it has counters
+                        insertIndex = i;
+                        break;
+                    }
+
                     if (!empty(permanent.getOriginalPermanent().getAttachments()) || stack.size() == landStackMax) {
                         // If this land has attachments or the stack is full, put it to the right.
+                        insertIndex = i + 1;
+                        continue;
+                    }
+                    counters = permanent.getOriginalPermanent().getCounters();
+                    if (counters != null && counters.size() > 0) {
+                        // if a land has counter, put it to the right
                         insertIndex = i + 1;
                         continue;
                     }
