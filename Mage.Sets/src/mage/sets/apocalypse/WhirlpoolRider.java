@@ -94,12 +94,9 @@ class WhirlpoolRiderTriggeredEffect extends OneShotEffect {
         if (controller != null) {
             int cardsHand = controller.getHand().size();
             if (cardsHand > 0) {
-                Cards cards = controller.getHand().copy();
-                for (UUID cardId: cards) {
-                    Card card = game.getCard(cardId);
+                for (Card card: controller.getHand().getCards(game)) {
                     if (card != null) {
-                        controller.removeFromHand(card, game);
-                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+                        controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.HAND, true, false);
                     }
                 }
                 controller.shuffleLibrary(game);
