@@ -1258,7 +1258,7 @@ public abstract class GameImpl implements Game, Serializable {
             manaAbiltiy.resolve(this);
         }
         else {
-            TriggeredAbility newAbility = (TriggeredAbility) ability.copy();
+            TriggeredAbility newAbility = ability.copy();
             newAbility.newId();
             state.addTriggeredAbility(newAbility);
         }
@@ -1268,6 +1268,7 @@ public abstract class GameImpl implements Game, Serializable {
     public void addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility) {
         DelayedTriggeredAbility newAbility = delayedAbility.copy();
         newAbility.newId();
+        newAbility.init(this);
         state.addDelayedTriggeredAbility(newAbility);
     }
 

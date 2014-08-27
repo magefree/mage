@@ -31,6 +31,7 @@ package mage.abilities;
 import mage.abilities.effects.Effect;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.game.Game;
 
 /**
  *
@@ -73,5 +74,11 @@ public abstract class DelayedTriggeredAbility extends TriggeredAbilityImpl {
 
     public Boolean getTriggerOnlyOnce() {
         return triggerOnlyOnce;
+    }
+    
+    public void init(Game game) {};
+    
+    public boolean isInactive(Game game) {
+        return false;
     }
 }

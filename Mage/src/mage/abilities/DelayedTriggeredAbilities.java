@@ -54,6 +54,12 @@ import mage.game.events.GameEvent;
         if (this.size() > 0) {
             for (Iterator<DelayedTriggeredAbility> it = this.iterator();it.hasNext();) {
                 DelayedTriggeredAbility ability = it.next();
+                if (ability.getDuration().equals(Duration.Custom)){
+                    if (ability.isInactive(game)) {
+                        it.remove();
+                        continue;
+                    }
+                }
                 if (ability.checkTrigger(event, game)) {
                     ability.trigger(game, ability.controllerId);
                     if (ability.getTriggerOnlyOnce()) {
