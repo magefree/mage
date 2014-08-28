@@ -136,6 +136,18 @@ public class SessionImpl implements Session {
             InvokerLocator clientLocator = new InvokerLocator(connection.getURI());
             
             Map<String, String> metadata = new HashMap<>();
+            /*
+            5.8.3.1.1. Write timeouts
+            The socket timeout facility offered by the JDK applies only to read operations on the socket. As of release 2.5.2,
+            the socket and bisocket (and also sslsocket and sslbisocket) transports offer a write timeout facility. When a client
+            or server is configured, in any of the usual ways, with the parameter org.jboss.remoting.transport.socket.SocketWrapper.WRITE_TIMEOUT
+            (actual value "writeTimeout") set to a positive value (in milliseconds), all write operations will time out if they do 
+            not complete within the configured period. When a write operation times out, the socket upon which the write was invoked
+            will be closed, which is likely to result in a java.net.SocketException.
+            Note. A SocketException is considered to be a "retriable" exception, so, if the parameter "numberOfCallRetries" is set 
+            to a value greater than 1, an invocation interrupted by a write timeout can be retried.
+            Note. The write timeout facility applies to writing of both invocations and responses. It applies to push callbacks as well.
+            */            
             metadata.put(SocketWrapper.WRITE_TIMEOUT, "2000");
             metadata.put("generalizeSocketException", "true");
             server = (MageServer) TransporterClient.createTransporterClient(clientLocator.getLocatorURI(), MageServer.class, metadata);
@@ -159,6 +171,25 @@ public class SessionImpl implements Session {
                  * the server, and on the server side an org.jboss.remoting.Lease informs registered listeners 
                  * if the PING doesn't arrive withing the specified timeout period. */
             clientMetadata.put(Client.ENABLE_LEASE, "true");
+            /*
+            When the socket client invoker makes its first invocation, it will check to see if there is an available
+            socket connection in its pool. Since is the first invocation, there will not be and will create a new socket
+            connection and use it for making the invocation. Then when finished making invocation, will return the still
+            active socket connection to the pool. As more client invocations are made, is possible for the number of
+            socket connections to reach the maximum allowed (which is controlled by 'clientMaxPoolSize' property). At this
+            point, when the next client invocation is made, it will wait up to some configured number of milliseconds, at 
+            which point it will throw an org.jboss.remoting.CannotConnectException. The number of milliseconds is given by 
+            the parameter MicroSocketClientInvoker.CONNECTION_WAIT (actual value "connectionWait"), with a default of
+            30000 milliseconds. Note that if more than one call retry is configured (see next paragraph), 
+            the CannotConnectException will be swallowed.
+            Once the socket client invoker get an available socket connection from the pool, are not out of the woods yet.
+            For example, a network problem could cause a java.net.SocketException. There is also a possibility that the socket
+            connection, while still appearing to be valid, has "gone stale" while sitting in the pool. For example, a ServerThread
+            on the other side of the connection could time out and close its socket. If the attempt to complete an invocation
+            fails, then MicroSocketClientInvoker will make a number of attempts, according to the parameter "numberOfCallRetries",
+            with a default value of 3. Once the configured number of retries has been exhausted,
+            an org.jboss.remoting.InvocationFailureException will be thrown.
+            */            
             clientMetadata.put("numberOfCallRetries", "1");
 
             // Indicated the max number of threads used within oneway thread pool.

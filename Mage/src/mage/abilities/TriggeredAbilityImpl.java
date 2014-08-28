@@ -157,6 +157,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         return sourceObject;
     }
 
+    @Override
     public void setSourceObject(MageObject sourceObject) {
         this.sourceObject = sourceObject;
     }

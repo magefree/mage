@@ -47,9 +47,17 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
-import mage.target.Target;
 
 /**
+ * 702.32. Flashback
+ *
+ * 702.32a. Flashback appears on some instants and sorceries. It represents two static abilities: 
+ * one that functions while the card is in a player‘s graveyard and the other that functions 
+ * while the card is on the stack. Flashback [cost] means, "You may cast this card from your 
+ * graveyard by paying [cost] rather than paying its mana cost" and, "If the flashback cost 
+ * was paid, exile this card instead of putting it anywhere else any time it would leave the 
+ * stack." Casting a spell using its flashback ability follows the rules for paying alternative 
+ * costs in rules 601.2b and 601.2e–g.
  *
  * @author nantuko
  */

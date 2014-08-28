@@ -171,7 +171,7 @@ public class Main {
     }
 
     static boolean isAlreadyRunning(InvokerLocator serverLocator) {
-        Map<String, String> metadata = new HashMap<String, String>();
+        Map<String, String> metadata = new HashMap<>();
         metadata.put(SocketWrapper.WRITE_TIMEOUT, "2000");
         metadata.put("generalizeSocketException", "true");
         try {

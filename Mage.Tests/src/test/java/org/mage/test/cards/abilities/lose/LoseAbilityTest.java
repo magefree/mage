@@ -97,12 +97,20 @@ public class LoseAbilityTest extends CardTestPlayerBase {
         // should NOT have flying
         Assert.assertFalse(airElemental.getAbilities().contains(FlyingAbility.getInstance()));
     }
+    
     /**
      * Tests that gaining two times a triggered ability and losing one will result in only one triggering
      */
     @Test
     public void testMultiGainTriggeredVsLoseAbility() {
         addCard(Zone.BATTLEFIELD, playerA, "Sublime Archangel",2);
+        /*
+         * Sublime Archangel English
+         * Creature — Angel 4/3, 2WW
+         * Flying
+         * Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
+         * Other creatures you control have exalted. (If a creature has multiple instances of exalted, each triggers separately.)
+        */
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
@@ -110,6 +118,7 @@ public class LoseAbilityTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 5);
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Turn to Frog", "Sublime Archangel");
+        
         attack(3, playerA, "Silvercoat Lion");
 
         setStopAt(3, PhaseStep.END_COMBAT);
