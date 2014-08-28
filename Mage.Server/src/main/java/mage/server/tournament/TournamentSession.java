@@ -176,7 +176,7 @@ public class TournamentSession {
     }
     
     private void cleanUp() {
-        if (!futureTimeout.isDone()) {
+        if (futureTimeout != null && !futureTimeout.isDone()) {
             futureTimeout.cancel(true);
         }
     }

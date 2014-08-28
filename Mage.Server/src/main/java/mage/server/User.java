@@ -155,7 +155,7 @@ public class User {
         return connectionTime;
     }
 
-    public synchronized void fireCallback(final ClientCallback call) {
+    public void fireCallback(final ClientCallback call) {
         if (isConnected()) {
             Session session = SessionManager.getInstance().getSession(sessionId);
             if (session != null) {
@@ -373,22 +373,25 @@ public class User {
                     if (table.isTournament()) {
                         if (tableEntry.getKey() != null) {
                             TournamentPlayer tournamentPlayer = table.getTournament().getPlayer(tableEntry.getKey());
-                            if (tournamentPlayer != null &&  !tournamentPlayer.isEliminated()) {
-                                switch (table.getState()) {
-                                    case CONSTRUCTING:
-                                        construct++;
-                                        break;
-                                    case DRAFTING:
-                                        draft++;
-                                        break;
-                                    case DUELING:
-                                        tournament++;
-                                        break;
-                                }
-                                if (!isConnected()) {
-                                    tournamentPlayer.setDisconnectInfo(disconnectInfo);
-                                } else {
-                                    tournamentPlayer.setDisconnectInfo("");
+                            if (tournamentPlayer != null) {
+                                if (!tournamentPlayer.isEliminated()) {
+                                    switch (table.getState()) {
+                                        case CONSTRUCTING:
+                                            construct++;
+                                            break;
+                                        case DRAFTING:
+                                            draft++;
+                                            break;
+                                        case DUELING:
+                                            tournament++;
+                                            break;
+                                    }
+
+                                    if (!isConnected()) {
+                                        tournamentPlayer.setDisconnectInfo(disconnectInfo);
+                                    } else {
+                                        tournamentPlayer.setDisconnectInfo("");
+                                    }
                                 }
                             } else {
                                 // can happen if tournamet has just ended

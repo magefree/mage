@@ -63,10 +63,11 @@ public class TournamentManager {
     }
 
     public void quit(UUID tournamentId, UUID userId) {
-        if (controllers.containsKey(tournamentId)) {
-            controllers.get(tournamentId).quit(userId);
+        TournamentController tournamentController = controllers.get(tournamentId);
+        if (tournamentController != null) {
+            tournamentController.quit(userId);
         } else {
-            Logger.getLogger(TournamentManager.class).error("TournamentManager.quit tournament controller missing  tournamentid: " + tournamentId + " userId: " + userId);
+            Logger.getLogger(TournamentManager.class).error("Tournament controller missing  tournamentid: " + tournamentId + " userId: " + userId);
         }
     }
 

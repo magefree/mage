@@ -171,6 +171,17 @@ public class ChatManager {
         }
     }
 
+    public void sendReconnectMessage(UUID userId) {
+        User user = UserManager.getInstance().getUser(userId);
+        if (user != null) {
+            for (ChatSession chat: chatSessions.values()) {
+                if (chat.hasUser(userId)) {
+                    chat.broadcast(null, user.getName() + " has reconnected", MessageColor.BLUE, true, MessageType.STATUS);
+                }            
+            }        
+        }
+    }
+    
     public void removeUser(UUID userId, DisconnectReason reason) {
         for (ChatSession chat: chatSessions.values()) {
             chat.kill(userId, reason);

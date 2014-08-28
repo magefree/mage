@@ -184,7 +184,7 @@ public class TableController {
 
             return true;
         } else {
-            throw new GameException("Playertype " + seat.getPlayerType().toString() + " could not be created.");
+            throw new GameException("Playertype " + seat.getPlayerType() + " could not be created.");
         }
     }
 

@@ -67,9 +67,6 @@ public class CandelabraOfTawnos extends CardImpl {
     }
 }
 
-
-
-
 class CandelabraOfTawnosAbility extends ActivatedAbilityImpl implements AdjustingSourceCosts{
     public CandelabraOfTawnosAbility(){
         super(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
@@ -109,10 +106,5 @@ class CandelabraOfTawnosAbility extends ActivatedAbilityImpl implements Adjustin
     public String getRule(String source) {
         return "{X}, {T}: Untap X target lands";
     }
-
-
-
-    
-    
-    
+        
 }

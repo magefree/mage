@@ -88,6 +88,7 @@ public class TournamentPlayer {
     }
 
     public void setEliminated() {
+        this.setDisconnectInfo("");
         this.setState(TournamentPlayerState.ELIMINATED);
         this.eliminated = true;
     }

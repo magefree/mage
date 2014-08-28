@@ -455,6 +455,12 @@ public abstract class GameImpl implements Game, Serializable {
         }
         if (remainingPlayers <= 1 || numLosers >= state.getPlayers().size() - 1) {
             end();
+            if (remainingPlayers == 0 && logger.isDebugEnabled()) {
+                logger.debug("DRAW for gameId: " + getId());
+                for (Player player: state.getPlayers().values()) {
+                    logger.debug("-- " + player.getName() + " left: " + (player.hasLeft() ? "Y":"N") + " lost: " + (player.hasLost()? "Y":"N"));
+                }                
+            }
             for (Player player: state.getPlayers().values()) {
                 if (!player.hasLeft() && !player.hasLost()) {
                     logger.debug(new StringBuilder("Player ").append(player.getName()).append(" has won gameId: ").append(this.getId()));

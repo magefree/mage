@@ -98,9 +98,10 @@ public class Session {
             user = UserManager.getInstance().findUser(userName);
             if (user.getHost().equals(host)) {
                 user.updateLastActivity();  // minimizes possible expiration 
+                this.userId = user.getId();
                 if (user.getSessionId().isEmpty()) {
                     // TODO Send Chat message to tables (user is not registered yet)
-                    // ChatManager.getInstance().broadcast([CHAT ID TABLES], "has reconnected", ChatMessage.MessageColor.GREEN);
+                    ChatManager.getInstance().sendReconnectMessage(user.getId());
                     logger.info("Reconnecting session for " + userName);
                 } else {
                     //throw new MageException("This machine is already connected");
@@ -195,24 +196,13 @@ public class Session {
         return sessionId;
     }
 
-    //synchronized public void  userLostConnection() {
-    public void  userLostConnection() {
+    // because different threads can activate this
+    synchronized public void  userLostConnection() {
         User user = UserManager.getInstance().getUser(userId);
-        if (user == null) {
-            logger.error("User for session not found  sessionId: " + sessionId + "  userId: " +userId);
-            // can happen if user from same host sign in multiple time with multiple clients, after he disconnects with one client
-            return;
+        if (user == null || !user.isConnected()) {
+            return; //user was already disconnected by other thread
         }
-        if (user.getSessionId().isEmpty()) {
-            logger.debug("User was already disconnected  sessionId: " + sessionId + "  userId: " +userId);
-            return;
-        }
-        if (logger.isInfoEnabled()) {
-            StringBuilder sb = new StringBuilder(user.getName());
-            sb.append(" lost connection - userId: ").append(userId);
-            sb.append(" sessionId: ").append(sessionId);
-            logger.info(sb);
-        }
+        logger.info("LOST CONNECTION - " + user.getName());
         UserManager.getInstance().disconnect(userId, DisconnectReason.LostConnection);
     }
 
@@ -225,7 +215,10 @@ public class Session {
             call.setMessageId(messageId++);
             callbackHandler.handleCallbackOneway(new Callback(call));
         } catch (HandleCallbackException ex) {
-            logger.info(new StringBuilder("Session of userId ").append(userId).append(" callback exception: ").append(ex.getMessage()).toString());
+            logger.info("CALLBACK EXCEPTION - userId " + userId, ex);
+            if (logger.isDebugEnabled()) {
+                ex.printStackTrace();
+            }
             userLostConnection();
         }
     }

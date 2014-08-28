@@ -64,7 +64,7 @@ public class ChatSession {
         if (user != null && !clients.containsKey(userId)) {
             String userName = user.getName();
             clients.put(userId, userName);
-            broadcast(null, new StringBuilder(userName).append(" has joined").toString(), MessageColor.BLUE, true, MessageType.STATUS);
+            broadcast(null, userName + " has joined", MessageColor.BLUE, true, MessageType.STATUS);
             logger.debug(userName + " joined chat " + chatId);
         }
     }
@@ -78,8 +78,10 @@ public class ChatSession {
             }
             if (reason != null && userId != null && clients.containsKey(userId)) {
                 String userName = clients.get(userId);
-                clients.remove(userId);
-                logger.debug(userName + "(" + reason.toString() + ")" + " removed from chatId " + chatId);
+                if (!reason.equals(DisconnectReason.LostConnection)) { // for lost connection the user will be reconnected or session expire so no remove of chat yet                    
+                    clients.remove(userId);
+                    logger.debug(userName + "(" + reason.toString() + ")" + " removed from chatId " + chatId);                    
+                }
                 String message;
                 switch (reason) {
                     case Disconnected:
@@ -151,8 +153,7 @@ public class ChatSession {
                     user.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color, messageType, soundToPlay)));
                 }
                 else {
-                    logger.debug("user not found - killed from chat session - userId: " + userId +"  chatId: " +chatId);
-                    kill(userId, DisconnectReason.CleaningUp);
+                    logger.debug("user not found but chat still exists - userId: " + userId +"  chatId: " +chatId);
                 }
             }
         }

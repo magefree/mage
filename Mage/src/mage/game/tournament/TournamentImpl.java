@@ -444,7 +444,7 @@ public abstract class TournamentImpl implements Tournament {
 
     protected void winners() {
         List<TournamentPlayer> winners = new ArrayList<>();
-        int pointsWinner = Integer.MIN_VALUE;
+        int pointsWinner = 1; // with less than 1 point you can't win
         for(TournamentPlayer tournamentPlayer: this.getPlayers()) {
             if (pointsWinner < tournamentPlayer.getPoints()) {
                 winners.clear();
@@ -454,7 +454,7 @@ public abstract class TournamentImpl implements Tournament {
                 winners.add(tournamentPlayer);
             }
         }
-        // set winner state for the players with the most points
+        // set winner state for the players with the most points > 0
         for (TournamentPlayer tournamentPlayer: winners) {
             tournamentPlayer.setStateInfo("Winner");
         }
