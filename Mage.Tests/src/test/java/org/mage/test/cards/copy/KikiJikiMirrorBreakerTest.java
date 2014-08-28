@@ -56,7 +56,7 @@ public class KikiJikiMirrorBreakerTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testSimpleCopyExiledAtEnd() {
+    public void testSimpleCopySacrificeAtEnd() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Kiki-Jiki, Mirror Breaker", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Voice of Resurgence", 1);
@@ -68,7 +68,7 @@ public class KikiJikiMirrorBreakerTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
-        assertPermanentCount(playerA, "Elemental", 0); // because the copy was exiled
+        assertPermanentCount(playerA, "Elemental", 1); // because the copy was sacrificed
         assertPermanentCount(playerA, "Voice of Resurgence", 1);
     }
 
