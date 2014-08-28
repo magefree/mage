@@ -64,7 +64,9 @@ public class Earthcraft extends CardImpl {
         super(ownerId, 116, "Earthcraft", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "TMP";
         this.color.setGreen(true);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filterCreature, false)));
+
+        // Tap an untapped creature you control: Untap target basic land.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filterCreature, true)));
         ability.addTarget(new TargetControlledPermanent(filterLand));
         this.addAbility(ability);
     }
