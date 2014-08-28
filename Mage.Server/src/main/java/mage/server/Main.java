@@ -213,7 +213,11 @@ public class Main {
                     SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.LostConnection);                    
                     logger.info("CONNECTION LOST - " + sessionInfo, throwable);
                     if (logger.isDebugEnabled()) {
-                        throwable.printStackTrace();
+                        if (throwable == null) {
+                            logger.debug("Lease expired");
+                        } else {
+                            throwable.printStackTrace();
+                        }
                     }                    
                 }
             }

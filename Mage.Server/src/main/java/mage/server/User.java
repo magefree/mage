@@ -240,6 +240,9 @@ public class User {
 
     public void updateLastActivity() {
         lastActivity = new Date();
+        if (userState == UserState.Disconnected) { // this can happen if user reconnects very fast after disconnect
+            userState = UserState.Reconnected;
+        }
     }
 
     public boolean isExpired(Date expired) {

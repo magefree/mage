@@ -38,6 +38,7 @@ import mage.MageException;
 import mage.interfaces.callback.ClientCallback;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
+import mage.server.game.GamesRoomManager;
 import mage.server.util.ConfigSettings;
 import mage.view.UserDataView;
 import org.apache.log4j.Logger;
@@ -94,20 +95,19 @@ public class Session {
             return new StringBuilder("User name '").append(userName).append("' includes not allowed characters: use a-z, A-Z and 0-9").toString();
         }
         User user = UserManager.getInstance().createUser(userName, host);
+        boolean reconnect = false;
         if (user == null) {  // user already exists
             user = UserManager.getInstance().findUser(userName);
             if (user.getHost().equals(host)) {
                 user.updateLastActivity();  // minimizes possible expiration 
                 this.userId = user.getId();
                 if (user.getSessionId().isEmpty()) {
-                    // TODO Send Chat message to tables (user is not registered yet)
-                    ChatManager.getInstance().sendReconnectMessage(user.getId());
                     logger.info("Reconnecting session for " + userName);
+                    reconnect = true;
                 } else {
-                    //throw new MageException("This machine is already connected");
-                    //disconnect previous one
+                    //disconnect previous session
                     logger.info("Disconnecting another user instance: " + userName);
-                    UserManager.getInstance().disconnect(user.getId(), DisconnectReason.ConnectingOtherInstance);
+                    SessionManager.getInstance().disconnect(user.getSessionId(), DisconnectReason.ConnectingOtherInstance);
                 }
             } else {
                 return new StringBuilder("User name ").append(userName).append(" already in use (or your IP address changed)").toString();
@@ -117,6 +117,13 @@ public class Session {
             return new StringBuilder("Error connecting ").append(userName).toString();
         }        
         this.userId = user.getId();
+        if (reconnect) { // must be connected to receive the message
+            UUID chatId = GamesRoomManager.getInstance().getRoom(GamesRoomManager.getInstance().getMainRoomId()).getChatId();
+            if (chatId != null) {
+                ChatManager.getInstance().joinChat(chatId, userId);
+            }
+            ChatManager.getInstance().sendReconnectMessage(userId);
+        }        
         return null;
     }
 
@@ -201,6 +208,11 @@ public class Session {
         User user = UserManager.getInstance().getUser(userId);
         if (user == null || !user.isConnected()) {
             return; //user was already disconnected by other thread
+        }
+        if (!user.getSessionId().equals(sessionId)) {
+            // user already reconnected with another instance
+            logger.info("OLD SESSION IGNORED - " + user.getName());
+            return;
         }
         logger.info("LOST CONNECTION - " + user.getName());
         UserManager.getInstance().disconnect(userId, DisconnectReason.LostConnection);

@@ -62,10 +62,11 @@ public class ChatManager {
     }
 
     public void joinChat(UUID chatId, UUID userId) {
-        if (chatSessions.containsKey(chatId)) {
-            chatSessions.get(chatId).join(userId);
+        ChatSession chatSession = chatSessions.get(chatId);
+        if (chatSession != null) {
+            chatSession.join(userId);
         } else {
-            logger.trace("User could not join chatId: " + chatId +" userId: " + userId);
+            logger.trace("Chat to join not found - chatId: " + chatId +" userId: " + userId);
         }        
         
     }
@@ -77,12 +78,19 @@ public class ChatManager {
     }
 
     public void destroyChatSession(UUID chatId) {
-        if (chatId != null && chatSessions.containsKey(chatId)) {
-            chatSessions.remove(chatId);
-            logger.debug("Chat removed - chatId: " + chatId);
-        } else {
-            logger.trace("Chat to destroy does not exist - chatId: " + chatId);
-        } 
+        if (chatId != null) {
+            ChatSession chatSession = chatSessions.get(chatId);
+            if (chatSession != null) {
+                synchronized (chatSession) {
+                    if (chatSessions.containsKey(chatId)) {
+                        chatSessions.remove(chatId);
+                        logger.debug("Chat removed - chatId: " + chatId);
+                    } else {
+                        logger.trace("Chat to destroy does not exist - chatId: " + chatId);
+                    } 
+                }
+            }
+        }
     }
 
     public void broadcast(UUID chatId, String userName, String message, MessageColor color) {
