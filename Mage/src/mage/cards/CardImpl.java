@@ -41,6 +41,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.PlayLandAbility;
 import mage.abilities.SpellAbility;
+import mage.abilities.common.ZoneChangeAllTriggeredAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -337,6 +338,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                         break;
                 }
                 game.rememberLKI(objectId, event.getFromZone(), this);
+            }
+            if (isFaceDown() && !event.getToZone().equals(Zone.BATTLEFIELD)) { // to battlefield is possible because of Morph
+                setFaceDown(false);
             }
             updateZoneChangeCounter();
             switch (event.getToZone()) {
