@@ -47,6 +47,8 @@ public class InsectileAberration extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Insect");
 
+        this.color.setBlue(true);
+        
         // this card is the second face of double-faced card Delver of Secrets
         this.nightCard = true;
 
