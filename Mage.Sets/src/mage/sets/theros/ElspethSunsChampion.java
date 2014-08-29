@@ -65,7 +65,7 @@ public class ElspethSunsChampion extends CardImpl {
     public ElspethSunsChampion(UUID ownerId) {
         super(ownerId, 9, "Elspeth, Sun's Champion", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{4}{W}{W}");
         this.expansionSetCode = "THS";
-        this.subtype.add("Elsepth");
+        this.subtype.add("Elspeth");
 
         this.color.setWhite(true);
 
