@@ -47,7 +47,7 @@ public class ConditionalMana extends Mana implements Serializable {
     /**
      * Conditions that should be met (all or any depending on comparison scope) to allow spending {@link Mana} mana.
      */
-    private List<Condition> conditions = new ArrayList<Condition>();
+    private List<Condition> conditions = new ArrayList<>();
 
     /**
      * Text displayed as a description for conditional mana.
@@ -74,6 +74,7 @@ public class ConditionalMana extends Mana implements Serializable {
         conditions = conditionalMana.conditions;
         scope = conditionalMana.scope;
         staticText = conditionalMana.staticText;
+        manaProducerId = conditionalMana.manaProducerId;
     }
 
     public void addCondition(Condition condition) {

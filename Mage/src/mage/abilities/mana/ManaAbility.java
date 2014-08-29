@@ -71,6 +71,6 @@ public abstract class ManaAbility extends ActivatedAbilityImpl {
     }
 
     public Mana getNetMana(Game game) {
-        return netMana.copy();
+        return netMana;
     }
 }

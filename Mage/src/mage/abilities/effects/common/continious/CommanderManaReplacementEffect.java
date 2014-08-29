@@ -81,7 +81,7 @@ public class CommanderManaReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Mana mana = ((ManaEvent) event).getMana();
+        Mana mana = ((ManaEvent) event).getMana().copy();
         if (mana.getBlack() > 0 && commanderMana.getBlack() == 0) {
             for (int i = 0; i < mana.getBlack(); i++) {
                 mana.addColorless();
@@ -112,6 +112,7 @@ public class CommanderManaReplacementEffect extends ReplacementEffectImpl {
             }
             mana.setWhite(0);
         }
+        ((ManaEvent) event).setMana(mana);
         return false;
     }
 
