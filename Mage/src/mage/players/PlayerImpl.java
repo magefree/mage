@@ -1957,6 +1957,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                         playable.add(ability);
                     }                    
                 }
+                LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
+                getOtherUseableActivatedAbilities(card, Zone.GRAVEYARD, game, useable);
+                for (Ability ability: useable.values()) {
+                    playable.add(ability);
+                }
             }
             for (ExileZone exile : game.getExile().getExileZones()) {
                 for (Card card : exile.getCards(game)) {

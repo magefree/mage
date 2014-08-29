@@ -61,7 +61,7 @@ public class PillarOfWar extends CardImpl {
         // As long as Pillar of War is enchanted, it can attack as though it didn't have defender.
         Effect effect = new ConditionalAsThoughEffect(
                 new CanAttackAsThoughtItDidntHaveDefenderEffect(Duration.WhileOnBattlefield),
-                new EnchantedCondition(), false);
+                new EnchantedCondition());
         effect.setText("As long as {this} is enchanted, it can attack as though it didn't have defender");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));        
         

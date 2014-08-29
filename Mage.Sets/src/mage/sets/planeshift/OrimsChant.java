@@ -30,17 +30,17 @@ package mage.sets.planeshift;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.combat.CantAttackAllAnyPlayerEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -65,7 +65,7 @@ public class OrimsChant extends CardImpl {
         this.getSpellAbility().addEffect(new OrimsChantCantCastEffect());
 
         // If Orim's Chant was kicked, creatures can't attack this turn.
-        this.getSpellAbility().addEffect(new OrimsChantCantAttackEffect());
+        this.getSpellAbility().addEffect(new OrimsChantEffect());
     }
 
     public OrimsChant(final OrimsChant card) {
@@ -77,6 +77,32 @@ public class OrimsChant extends CardImpl {
         return new OrimsChant(this);
     }
 
+}
+
+class OrimsChantEffect extends OneShotEffect {
+
+    public OrimsChantEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "If {this} was kicked, creatures can't attack this turn";
+    }
+
+    public OrimsChantEffect(final OrimsChantEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public OrimsChantEffect copy() {
+        return new OrimsChantEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && KickedCondition.getInstance().apply(game, source)) {
+            game.addEffect(new CantAttackAllAnyPlayerEffect(Duration.EndOfTurn, new FilterCreaturePermanent("creatures")), source);
+        }
+        return false;
+    }
 }
 
 class OrimsChantCantCastEffect extends ContinuousRuleModifiyingEffectImpl {
@@ -110,47 +136,4 @@ class OrimsChantCantCastEffect extends ContinuousRuleModifiyingEffectImpl {
         }
         return false;
     }
-}
-
-class OrimsChantCantAttackEffect extends ReplacementEffectImpl {
-
-    private static final String effectText = "If {this} was kicked, creatures can't attack this turn";
-    private Condition condition = new LockedInCondition(KickedCondition.getInstance());
-
-    OrimsChantCantAttackEffect ( ) {
-        super(Duration.EndOfTurn, Outcome.Benefit);
-        staticText = effectText;
-    }
-
-    OrimsChantCantAttackEffect (final OrimsChantCantAttackEffect effect ) {
-        super(effect);
-        this.condition = effect.condition;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        throw new UnsupportedOperationException("Not supported.");
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER && condition.apply(game, source)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public OrimsChantCantAttackEffect copy() {
-        return new OrimsChantCantAttackEffect(this);
-    }
-
 }

@@ -30,6 +30,7 @@ package mage.sets.eventide;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinousEffect;
@@ -78,9 +79,8 @@ public class FigureOfDestiny extends CardImpl {
                 Zone.BATTLEFIELD,
                 new ConditionalContinousEffect(
                     new BecomesCreatureSourceEffect(new FigureOfDestiny.FigureOfDestinyToken2(), "", Duration.Custom),
-                    new SourceMatchesFilterCondition(filter2),
-                    "If {this} is a Spirit, it becomes a Kithkin Spirit Warrior with base power and toughness 4/4",
-                    true),
+                    new LockedInCondition(new SourceMatchesFilterCondition(filter2)),
+                    "If {this} is a Spirit, it becomes a Kithkin Spirit Warrior with base power and toughness 4/4"),
                 new ManaCostsImpl("{R/W}{R/W}{R/W}")                
                 ));
         // {RW}{RW}{RW}{RW}{RW}{RW}: If Figure of Destiny is a Warrior, it becomes a Kithkin Spirit Warrior Avatar with base power and toughness 8/8, flying, and first strike.
@@ -88,9 +88,8 @@ public class FigureOfDestiny extends CardImpl {
                 Zone.BATTLEFIELD,
                 new ConditionalContinousEffect(
                     new BecomesCreatureSourceEffect(new FigureOfDestiny.FigureOfDestinyToken3(), "", Duration.Custom),
-                    new SourceMatchesFilterCondition(filter3),
-                    "If {this} is a Warrior, it becomes a Kithkin Spirit Warrior Avatar with base power and toughness 8/8, flying, and first strike",
-                    true),
+                    new LockedInCondition(new SourceMatchesFilterCondition(filter3)),
+                    "If {this} is a Warrior, it becomes a Kithkin Spirit Warrior Avatar with base power and toughness 8/8, flying, and first strike"),
                 new ManaCostsImpl("{R/W}{R/W}{R/W}{R/W}{R/W}{R/W}")                
                 ));
     }

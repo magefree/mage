@@ -37,7 +37,7 @@ import mage.watchers.Watcher;
  */
 public class MorbidCondition implements Condition {
 
-    private static MorbidCondition fInstance = new MorbidCondition();
+    private static final MorbidCondition fInstance = new MorbidCondition();
 
     public static Condition getInstance() {
         return fInstance;
@@ -48,4 +48,5 @@ public class MorbidCondition implements Condition {
         Watcher watcher = game.getState().getWatchers().get("Morbid");
         return watcher.conditionMet();
     }
+
 }

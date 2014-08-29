@@ -31,13 +31,14 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl {
         this.text = text;
     }
 
-    public ConditionalTriggeredAbility(ConditionalTriggeredAbility triggered) {
+    public ConditionalTriggeredAbility(final ConditionalTriggeredAbility triggered) {
         super(triggered);
         this.ability = triggered.ability;
         this.condition = triggered.condition;
         this.text = triggered.text;
     }
-    
+
+
     @Override
     public boolean checkInterveningIfClause(Game game) {
         return condition.apply(game, this);

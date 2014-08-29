@@ -28,6 +28,7 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
+import mage.abilities.condition.LockedInCondition;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -53,7 +54,8 @@ public class MirranMettle extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
 
-        this.getSpellAbility().addEffect(new ConditionalContinousEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn), MetalcraftCondition.getInstance(), effectText, true));
+        this.getSpellAbility().addEffect(new ConditionalContinousEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn), 
+                new LockedInCondition(MetalcraftCondition.getInstance()), effectText));
     }
 
     public MirranMettle(final MirranMettle card) {

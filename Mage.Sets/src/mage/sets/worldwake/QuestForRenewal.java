@@ -62,7 +62,7 @@ public class QuestForRenewal extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
                 new UntapAllDuringEachOtherPlayersUntapStepEffect(filter),
                 new SourceHasCounterCondition(CounterType.QUEST, 4),
-                "As long as there are four or more quest counters on {this}, untap all creatures you control during each other player's untap step.", false)));        
+                "As long as there are four or more quest counters on {this}, untap all creatures you control during each other player's untap step.")));        
     }
 
     public QuestForRenewal(final QuestForRenewal card) {

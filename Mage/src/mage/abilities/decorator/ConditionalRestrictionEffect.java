@@ -31,6 +31,7 @@ package mage.abilities.decorator;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.FixedCondition;
+import mage.abilities.condition.LockedInCondition;
 import mage.abilities.effects.RestrictionEffect;
 import mage.constants.Duration;
 import mage.constants.EffectType;
@@ -47,20 +48,20 @@ public class ConditionalRestrictionEffect extends RestrictionEffect  {
     protected RestrictionEffect effect;
     protected RestrictionEffect otherwiseEffect;
     protected Condition condition;
-    protected boolean lockedInCondition;
     protected boolean conditionState;
+    protected Condition baseCondition;
+    protected boolean initDone = false;
 
     public ConditionalRestrictionEffect(RestrictionEffect effect, Condition condition) {
-        this(Duration.WhileOnBattlefield, effect, condition, null, false);
+        this(Duration.WhileOnBattlefield, effect, condition, null);
     }
     
-    public ConditionalRestrictionEffect(Duration duration, RestrictionEffect effect, Condition condition, RestrictionEffect otherwiseEffect, boolean lockedInCondition) {
+    public ConditionalRestrictionEffect(Duration duration, RestrictionEffect effect, Condition condition, RestrictionEffect otherwiseEffect) {
         super(duration);
         this.effectType = EffectType.RESTRICTION;
         this.effect = effect;
-        this.condition = condition;
+        this.baseCondition = condition;
         this.otherwiseEffect = otherwiseEffect;
-        this.lockedInCondition = lockedInCondition;
     }
 
     public ConditionalRestrictionEffect(final ConditionalRestrictionEffect effect) {
@@ -70,14 +71,33 @@ public class ConditionalRestrictionEffect extends RestrictionEffect  {
             this.otherwiseEffect = (RestrictionEffect) effect.otherwiseEffect.copy();
         }
         this.condition = effect.condition;
-        this.lockedInCondition = effect.lockedInCondition;
         this.conditionState = effect.conditionState;
+        this.baseCondition = effect.baseCondition;
+        this.initDone = effect.initDone;
     }
 
     @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (baseCondition instanceof LockedInCondition) {
+            condition = new FixedCondition(((LockedInCondition) baseCondition).getBaseCondition().apply(game, source));
+        } else {
+            condition = baseCondition;
+        }
+        effect.setTargetPointer(this.targetPointer);
+        effect.init(source, game);
+        if (otherwiseEffect != null) {
+            otherwiseEffect.setTargetPointer(this.targetPointer);
+            otherwiseEffect.init(source, game);
+        }
+        initDone = true;
+    }
+
+
+    @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (lockedInCondition && !(condition instanceof FixedCondition)) {
-            condition = new FixedCondition(condition.apply(game, source));
+        if (!initDone) { // if simpleStaticAbility, init won't be called
+            init(source, game);
         }
         conditionState = condition.apply(game, source);
         if (conditionState) {

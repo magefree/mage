@@ -29,6 +29,7 @@ package mage.sets.eventide;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.decorator.ConditionalReplacementEffect;
@@ -61,7 +62,7 @@ public class BatwingBrume extends CardImpl {
 
         // Prevent all combat damage that would be dealt this turn if {W} was spent to cast Batwing Brume. Each player loses 1 life for each attacking creature he or she controls if {B} was spent to cast Batwing Brume.
         Effect effect = new ConditionalReplacementEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn, true),
-                new ManaWasSpentCondition(ColoredManaSymbol.W), true);
+                new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.W)));
         effect.setText("Prevent all combat damage that would be dealt this turn if {W} was spent to cast {this}");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

@@ -74,7 +74,7 @@ public class ColossusOfAkros extends CardImpl {
                 MonstrousCondition.getInstance(),
                 "As long as {this} is monstrous, it has trample"));
         Effect effect = new ConditionalAsThoughEffect(new CanAttackAsThoughtItDidntHaveDefenderEffect(Duration.WhileOnBattlefield),
-                MonstrousCondition.getInstance(), false);
+                MonstrousCondition.getInstance());
         effect.setText("and can attack as though it didn't have defender");
         ability.addEffect(effect);
         this.addAbility(ability);

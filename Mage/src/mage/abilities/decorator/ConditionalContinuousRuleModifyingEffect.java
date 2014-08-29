@@ -31,6 +31,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.FixedCondition;
+import mage.abilities.condition.LockedInCondition;
 import mage.abilities.effects.ContinuousRuleModifiyingEffect;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.game.Game;
@@ -45,19 +46,18 @@ public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModi
     protected ContinuousRuleModifiyingEffect effect;
     protected ContinuousRuleModifiyingEffect otherwiseEffect;
     protected Condition condition;
-    protected boolean lockedInCondition;
-    protected boolean conditionState;
+    protected Condition baseCondition;
+    protected boolean initDone = false;
 
-    public ConditionalContinuousRuleModifyingEffect(ContinuousRuleModifiyingEffect effect, Condition condition, boolean lockedInCondition) {
-        this(effect, condition, null, lockedInCondition);
+    public ConditionalContinuousRuleModifyingEffect(ContinuousRuleModifiyingEffect effect, Condition condition) {
+        this(effect, condition, null);
     }
 
-    public ConditionalContinuousRuleModifyingEffect(ContinuousRuleModifiyingEffect effect, Condition condition, ContinuousRuleModifiyingEffect otherwiseEffect, boolean lockedInCondition) {
+    public ConditionalContinuousRuleModifyingEffect(ContinuousRuleModifiyingEffect effect, Condition condition, ContinuousRuleModifiyingEffect otherwiseEffect) {
         super(effect.getDuration(), effect.getOutcome());
         this.effect = effect;
-        this.condition = condition;
+        this.baseCondition = condition;
         this.otherwiseEffect = otherwiseEffect;
-        this.lockedInCondition = lockedInCondition;
     }
 
     public ConditionalContinuousRuleModifyingEffect(final ConditionalContinuousRuleModifyingEffect effect) {
@@ -67,9 +67,27 @@ public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModi
             this.otherwiseEffect = (ContinuousRuleModifiyingEffect) effect.otherwiseEffect.copy();
         }
         this.condition = effect.condition;
-        this.lockedInCondition = effect.lockedInCondition;
-        this.conditionState = effect.conditionState;
+        this.baseCondition = effect.baseCondition;
+        this.initDone = effect.initDone;
     }
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (baseCondition instanceof LockedInCondition) {
+            condition = new FixedCondition(((LockedInCondition) baseCondition).getBaseCondition().apply(game, source));
+        } else {
+            condition = baseCondition;
+        }
+        effect.setTargetPointer(this.targetPointer);
+        effect.init(source, game);
+        if (otherwiseEffect != null) {
+            otherwiseEffect.setTargetPointer(this.targetPointer);
+            otherwiseEffect.init(source, game);
+        }
+        initDone = true;
+    }
+
 
     @Override
     public boolean isDiscarded() {
@@ -83,11 +101,10 @@ public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModi
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (lockedInCondition && !(condition instanceof FixedCondition)) {
-            condition = new FixedCondition(condition.apply(game, source));
+        if (!initDone) { // if simpleStaticAbility, init won't be called
+            init(source, game);
         }
-        conditionState = condition.apply(game, source);
-        if (conditionState) {
+        if (condition.apply(game, source)) {
             effect.setTargetPointer(this.targetPointer);
             return effect.applies(event, source, game);
         } else if (otherwiseEffect != null) {

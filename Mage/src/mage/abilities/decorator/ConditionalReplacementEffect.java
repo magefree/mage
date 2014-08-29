@@ -31,6 +31,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.FixedCondition;
+import mage.abilities.condition.LockedInCondition;
 import mage.abilities.effects.ReplacementEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.constants.Duration;
@@ -45,20 +46,20 @@ public class ConditionalReplacementEffect extends ReplacementEffectImpl  {
 
     protected ReplacementEffect effect;
     protected ReplacementEffect otherwiseEffect;
+    protected Condition baseCondition;
     protected Condition condition;
-    protected boolean lockedInCondition;
     protected boolean conditionState;
+    protected boolean initDone = false;
 
-    public ConditionalReplacementEffect(ReplacementEffect effect, Condition condition, boolean lockedInCondition) {
-        this(effect, condition, null, lockedInCondition);
+    public ConditionalReplacementEffect(ReplacementEffect effect, Condition condition) {
+        this(effect, condition, null);
     }
 
-    public ConditionalReplacementEffect(ReplacementEffect effect, Condition condition, ReplacementEffect otherwiseEffect, boolean lockedInCondition) {
+    public ConditionalReplacementEffect(ReplacementEffect effect, Condition condition, ReplacementEffect otherwiseEffect) {
         super(effect.getDuration(), effect.getOutcome());
         this.effect = effect;
-        this.condition = condition;
+        this.baseCondition = condition;
         this.otherwiseEffect = otherwiseEffect;
-        this.lockedInCondition = lockedInCondition;
     }
 
     public ConditionalReplacementEffect(final ConditionalReplacementEffect effect) {
@@ -68,13 +69,31 @@ public class ConditionalReplacementEffect extends ReplacementEffectImpl  {
             this.otherwiseEffect = (ReplacementEffect) effect.otherwiseEffect.copy();
         }
         this.condition = effect.condition;
-        this.lockedInCondition = effect.lockedInCondition;
         this.conditionState = effect.conditionState;
+        this.baseCondition = effect.baseCondition;
+        this.initDone = effect.initDone;
     }
 
     @Override
     public boolean isDiscarded() {
         return effect.isDiscarded() || (otherwiseEffect != null && otherwiseEffect.isDiscarded());
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (baseCondition instanceof LockedInCondition) {
+            condition = new FixedCondition(((LockedInCondition) baseCondition).getBaseCondition().apply(game, source));
+        } else {
+            condition = baseCondition;
+        }
+        effect.setTargetPointer(this.targetPointer);
+        effect.init(source, game);
+        if (otherwiseEffect != null) {
+            otherwiseEffect.setTargetPointer(this.targetPointer);
+            otherwiseEffect.init(source, game);
+        }
+        initDone = true;
     }
 
     @Override
@@ -102,8 +121,8 @@ public class ConditionalReplacementEffect extends ReplacementEffectImpl  {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (lockedInCondition && !(condition instanceof FixedCondition)) {
-            condition = new FixedCondition(condition.apply(game, source));
+        if (!initDone) { // if simpleStaticAbility, init won't be called
+            init(source, game);
         }
         conditionState = condition.apply(game, source);
         if (conditionState) {

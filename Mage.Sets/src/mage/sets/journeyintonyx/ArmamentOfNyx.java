@@ -85,7 +85,7 @@ public class ArmamentOfNyx extends CardImpl {
                 condition, "Enchanted creature has double strike as long as it's an enchantment"));
         ReplacementEffect effect = new PreventAllDamageByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", false);
         effect.setText("Otherwise, prevent all damage that would be dealt by enchanted creature");
-        ability.addEffect(new ConditionalReplacementEffect(effect, new InvertCondition(condition), false));
+        ability.addEffect(new ConditionalReplacementEffect(effect, new InvertCondition(condition)));
         this.addAbility(ability);
     }
 

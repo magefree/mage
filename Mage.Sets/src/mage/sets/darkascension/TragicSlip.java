@@ -28,7 +28,6 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.abilities.condition.FixedCondition;
 import mage.abilities.condition.LockedInCondition;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -57,8 +56,7 @@ public class TragicSlip extends CardImpl {
                 new BoostTargetEffect(-13, -13, Duration.EndOfTurn),
                 new BoostTargetEffect(-1, -1, Duration.EndOfTurn),
                 new LockedInCondition(MorbidCondition.getInstance()),
-                "Target creature gets -1/-1 until end of turn. Morbid - That creature gets -13/-13 until end of turn instead if a creature died this turn",
-                true));
+                "Target creature gets -1/-1 until end of turn. Morbid - That creature gets -13/-13 until end of turn instead if a creature died this turn"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

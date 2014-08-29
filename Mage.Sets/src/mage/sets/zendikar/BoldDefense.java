@@ -27,14 +27,10 @@
  */
 package mage.sets.zendikar;
 
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -42,19 +38,16 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-
-import java.util.UUID;
-
+import mage.players.Player;
 
 /**
  * @author nantuko, Loki
  */
 public class BoldDefense extends CardImpl {
-
-    private final String staticText = "If {this]} was kicked, instead creatures you control get +2/+2 and gain first strike until end of turn";
 
     public BoldDefense(UUID ownerId) {
         super(ownerId, 3, "Bold Defense", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
@@ -65,10 +58,7 @@ public class BoldDefense extends CardImpl {
         this.addAbility(new KickerAbility("{3}{W}"));
 
         // Creatures you control get +1/+1 until end of turn. If Bold Defense was kicked, instead creatures you control get +2/+2 and gain first strike until end of turn.
-        DynamicValue dn = new BoldDefensePTCount();
-        this.getSpellAbility().addEffect(new BoostControlledEffect(dn, dn, Duration.EndOfTurn));
-        ContinuousEffect effect = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent(), false);
-        this.getSpellAbility().addEffect(new ConditionalContinousEffect(effect, KickedCondition.getInstance(), staticText, true));
+        this.getSpellAbility().addEffect(new BoldDefenseEffect());
     }
 
     public BoldDefense(final BoldDefense card) {
@@ -81,39 +71,33 @@ public class BoldDefense extends CardImpl {
     }
 }
 
-class BoldDefensePTCount implements DynamicValue {
+class BoldDefenseEffect extends OneShotEffect {
 
-    private Condition condition = new LockedInCondition(KickedCondition.getInstance());
+    public BoldDefenseEffect() {
+        super(Outcome.BoostCreature);
+        this.staticText = "Creatures you control get +1/+1 until end of turn. If {this} was kicked, instead creatures you control get +2/+2 and gain first strike until end of turn";
+    }
 
-    public BoldDefensePTCount() {
+    public BoldDefenseEffect(final BoldDefenseEffect effect) {
+        super(effect);
     }
 
     @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        if (condition.apply(game, sourceAbility)) {
-            return 2;
-        } else {
-            return 1;
+    public BoldDefenseEffect copy() {
+        return new BoldDefenseEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            if (KickedCondition.getInstance().apply(game, source)) {
+                game.addEffect(new BoostControlledEffect(2, 2, Duration.EndOfTurn), source);
+                game.addEffect(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent(), false), source);
+            } else {
+                game.addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn), source);
+            }
         }
-    }
-
-    public BoldDefensePTCount(final BoldDefensePTCount dynamicValue) {
-        this.condition = dynamicValue.condition;
-
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return new BoldDefensePTCount(this);
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return "1";
+        return false;
     }
 }

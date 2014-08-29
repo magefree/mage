@@ -28,6 +28,7 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
+import mage.abilities.condition.LockedInCondition;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -57,8 +58,8 @@ public class BreakOfDay extends CardImpl {
         // Fateful hour - If you have 5 or less life, those creatures also are indestructible this turn.
         this.getSpellAbility().addEffect(new ConditionalContinousEffect(
                 new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("creatures you control"), false),
-                FatefulHourCondition.getInstance(),
-                "If you have 5 or less life, those creatures also are indestructible this turn", true));
+                new LockedInCondition(FatefulHourCondition.getInstance()),
+                "If you have 5 or less life, those creatures also are indestructible this turn"));
     }
 
     public BreakOfDay(final BreakOfDay card) {

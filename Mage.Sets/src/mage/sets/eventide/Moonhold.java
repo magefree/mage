@@ -30,6 +30,7 @@ package mage.sets.eventide;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
 import mage.abilities.effects.ContinuousRuleModifiyingEffect;
@@ -65,10 +66,10 @@ public class Moonhold extends CardImpl {
         effect2.setText("and can't play creature cards this turn if {W} was spent to cast it.");
         this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(
                 effect,
-                new ManaWasSpentCondition(ColoredManaSymbol.R), false));
+                new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.R))));
         this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(
                 effect2,
-                new ManaWasSpentCondition(ColoredManaSymbol.W), false));
+                new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.W))));
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.addInfo("Info1", "<i>(Do both if {R}{W} was spent.)</i>");
     }

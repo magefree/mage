@@ -80,15 +80,13 @@ public class RepentantVampire extends CardImpl {
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
                 new SetCardColorSourceEffect(ObjectColor.WHITE, Duration.WhileOnBattlefield),
                 new CardsInControllerGraveCondition(7),
-                "<i>Threshold</i> - As long as seven or more cards are in your graveyard, {this} is white",
-                false));
+                "<i>Threshold</i> - As long as seven or more cards are in your graveyard, {this} is white"));
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
         gainedAbility.addTarget(new TargetCreaturePermanent(filter));
         ability.addEffect(new ConditionalContinousEffect(
                 new GainAbilitySourceEffect(gainedAbility, Duration.WhileOnBattlefield),
                 new CardsInControllerGraveCondition(7),
-                "and has \"{t}: Destroy target black creature.\"",
-                false));
+                "and has \"{t}: Destroy target black creature.\""));
         this.addAbility(ability);
     }
 

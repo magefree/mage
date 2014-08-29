@@ -40,6 +40,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -107,16 +108,18 @@ class BrainMaggotExileEffect extends OneShotEffect {
         Player opponent = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && opponent != null && sourcePermanent != null) {
-            opponent.revealCards(sourcePermanent.getName(), opponent.getHand(), game);
+            opponent.revealCards(sourcePermanent.getLogName(), opponent.getHand(), game);
 
-            TargetCard target = new TargetCard(Zone.HAND, new FilterNonlandCard("nonland card to exile"));
-            if (controller.choose(Outcome.Exile, opponent.getHand(), target, game)) {
+            FilterCard filter = new FilterNonlandCard("nonland card to exile");
+            TargetCard target = new TargetCard(Zone.HAND, filter);
+            if (opponent.getHand().count(filter, game) > 0 && controller.choose(Outcome.Exile, opponent.getHand(), target, game)) {
                 Card card = opponent.getHand().get(target.getFirstTarget(), game);
                 // If source permanent leaves the battlefield before its triggered ability resolves, the target card won't be exiled.
                 if (card != null && game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
                     controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourcePermanent.getName(), source.getSourceId(), game, Zone.HAND);
                 }
-            }            
+            }
+            return true;
         }
         return false;
 

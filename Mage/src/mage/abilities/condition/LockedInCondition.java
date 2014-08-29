@@ -31,8 +31,14 @@ import mage.abilities.Ability;
 import mage.game.Game;
 
 /**
- * A simple {@link Condition} to check the condition only one time at the start (result locked in).
- * All subsequent checks return the first result.
+ * The use of this class must be handled carefully because conditions don't
+ * have a copy method, the condition state is kept when the effect or ability
+ * is copied that uses the condition.
+ * So if you use this class, you have to do it like in ConditionalContinuousEffect,
+ * where always a new FixedCondition(condition.apply(...)) is used if a
+ * LockedInCondition is given.
+ *
+ * Needs probably some redesign, don't like it the way it's done now.
  *
  * @author LevelX2
  */
@@ -40,7 +46,7 @@ public class LockedInCondition implements Condition {
 
     private boolean conditionChecked = false;
     private boolean result;
-    private Condition condition;
+    private final Condition condition;
 
     public LockedInCondition ( Condition condition ) {
         this.condition = condition;
@@ -56,6 +62,10 @@ public class LockedInCondition implements Condition {
             conditionChecked = true;
         }
         return result;
+    }
+
+    public Condition getBaseCondition() {
+        return condition;
     }
 
 }

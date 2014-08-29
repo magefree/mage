@@ -74,26 +74,22 @@ public class WaywardAngel extends CardImpl {
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
                 new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield),
                 new CardsInControllerGraveCondition(7),
-                "<i>Threshold</i> - As long as seven or more cards are in your graveyard, {this} gets +3/+3,",
-                false));
+                "<i>Threshold</i> - As long as seven or more cards are in your graveyard, {this} gets +3/+3,"));
         ability.addEffect(new ConditionalContinousEffect(
                 new SetCardColorSourceEffect(ObjectColor.BLACK, Duration.WhileOnBattlefield),
                 new CardsInControllerGraveCondition(7),
-                " is black,",
-                false));
+                " is black,"));
         ability.addEffect(new ConditionalContinousEffect(
                 new GainAbilitySourceEffect(TrampleAbility.getInstance()),
                 new CardsInControllerGraveCondition(7),
-                " has trample,",
-                false));
+                " has trample,"));
         
         Ability gainedAbility = new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(new FilterControlledCreaturePermanent(), 1, ""), TargetController.YOU, false);
         
         ability.addEffect(new ConditionalContinousEffect(
                 new GainAbilitySourceEffect(gainedAbility),
                 new CardsInControllerGraveCondition(7),
-                " and has \"At the beginning of your upkeep, sacrifice a creature.\" ",
-                false));
+                " and has \"At the beginning of your upkeep, sacrifice a creature.\" "));
         
         this.addAbility(ability);
     }

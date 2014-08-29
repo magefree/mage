@@ -28,6 +28,7 @@
 package mage.sets.timespiral;
 
 import java.util.UUID;
+import mage.abilities.condition.LockedInCondition;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -53,9 +54,8 @@ public class MightOfOldKrosa extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalContinousEffect(
                 new BoostTargetEffect(4,4, Duration.EndOfTurn),
                 new BoostTargetEffect(2, 2, Duration.EndOfTurn),
-                MyMainPhaseCondition.getInstance(),
-                "Target creature gets +2/+2 until end of turn. If you cast this spell during your main phase, that creature gets +4/+4 until end of turn instead",
-                true));
+                new LockedInCondition(MyMainPhaseCondition.getInstance()),
+                "Target creature gets +2/+2 until end of turn. If you cast this spell during your main phase, that creature gets +4/+4 until end of turn instead"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

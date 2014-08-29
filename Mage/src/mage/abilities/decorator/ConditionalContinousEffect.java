@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.FixedCondition;
+import mage.abilities.condition.LockedInCondition;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -20,16 +21,13 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl {
 
     protected ContinuousEffect effect;
     protected ContinuousEffect otherwiseEffect;
+    protected Condition baseCondition;
     protected Condition condition;
-    protected boolean lockedInCondition;
     protected boolean initDone = false;
+
 
     public ConditionalContinousEffect(ContinuousEffect effect, Condition condition, String text) {
         this(effect, null, condition, text);
-    }
-
-    public ConditionalContinousEffect(ContinuousEffect effect, Condition condition, String text, boolean lockedInCondition) {
-        this(effect, null, condition, text, lockedInCondition);
     }
 
     /**
@@ -41,25 +39,11 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl {
      * @param text
      */
     public ConditionalContinousEffect(ContinuousEffect effect, ContinuousEffect otherwiseEffect, Condition condition, String text) {
-        this(effect, otherwiseEffect, condition, text, false);
-    }
-
-    /**
-     * Only use this if both effects have the same layers
-     *
-     * @param effect
-     * @param otherwiseEffect
-     * @param condition
-     * @param text
-     * @param lockedInCondition
-     */
-    public ConditionalContinousEffect(ContinuousEffect effect, ContinuousEffect otherwiseEffect, Condition condition, String text, boolean lockedInCondition) {
         super(effect.getDuration(), effect.getLayer(), effect.getSublayer(), effect.getOutcome());
         this.effect = effect;
         this.otherwiseEffect = otherwiseEffect;
-        this.condition = condition;
+        this.baseCondition = condition;
         this.staticText = text;
-        this.lockedInCondition = lockedInCondition;
     }
 
     public ConditionalContinousEffect(final ConditionalContinousEffect effect) {
@@ -69,7 +53,7 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl {
             this.otherwiseEffect = (ContinuousEffect) effect.otherwiseEffect.copy();
         }
         this.condition = effect.condition;
-        this.lockedInCondition = effect.lockedInCondition;
+        this.baseCondition = effect.baseCondition;
         this.initDone = effect.initDone;
     }
 
@@ -80,8 +64,10 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl {
     
     @Override
     public void init(Ability source, Game game) {
-        if (lockedInCondition) {
-            condition = new FixedCondition(condition.apply(game, source));
+        if (baseCondition instanceof LockedInCondition) {
+            condition = new FixedCondition(((LockedInCondition) baseCondition).getBaseCondition().apply(game, source));
+        } else {
+            condition = baseCondition;
         }
         effect.setTargetPointer(this.targetPointer);
         effect.init(source, game);        

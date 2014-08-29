@@ -45,19 +45,17 @@ public class ConditionalAsThoughEffect extends AsThoughEffectImpl  {
     protected AsThoughEffect effect;
     protected AsThoughEffect otherwiseEffect;
     protected Condition condition;
-    protected boolean lockedInCondition;
     protected boolean conditionState;
 
-    public ConditionalAsThoughEffect(AsThoughEffect effect, Condition condition, boolean lockedInCondition) {
-        this(effect, condition, null, lockedInCondition);
+    public ConditionalAsThoughEffect(AsThoughEffect effect, Condition condition) {
+        this(effect, condition, null);
     }
 
-    public ConditionalAsThoughEffect(AsThoughEffect effect, Condition condition, AsThoughEffect otherwiseEffect, boolean lockedInCondition) {
+    public ConditionalAsThoughEffect(AsThoughEffect effect, Condition condition, AsThoughEffect otherwiseEffect) {
         super(effect.getAsThoughEffectType(), effect.getDuration(), effect.getOutcome());
         this.effect = effect;
         this.condition = condition;
         this.otherwiseEffect = otherwiseEffect;
-        this.lockedInCondition = lockedInCondition;
     }
 
     public ConditionalAsThoughEffect(final ConditionalAsThoughEffect effect) {
@@ -67,7 +65,6 @@ public class ConditionalAsThoughEffect extends AsThoughEffectImpl  {
             this.otherwiseEffect = (AsThoughEffect) effect.otherwiseEffect.copy();
         }
         this.condition = effect.condition;
-        this.lockedInCondition = effect.lockedInCondition;
         this.conditionState = effect.conditionState;
     }
 
@@ -78,9 +75,6 @@ public class ConditionalAsThoughEffect extends AsThoughEffectImpl  {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (lockedInCondition && !(condition instanceof FixedCondition)) {
-            condition = new FixedCondition(condition.apply(game, source));
-        }
         conditionState = condition.apply(game, source);
         if (conditionState) {
             effect.setTargetPointer(this.targetPointer);
@@ -100,9 +94,6 @@ public class ConditionalAsThoughEffect extends AsThoughEffectImpl  {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (lockedInCondition && !(condition instanceof FixedCondition)) {
-            condition = new FixedCondition(condition.apply(game, source));
-        }
         conditionState = condition.apply(game, source);
         if (conditionState) {
             effect.setTargetPointer(this.targetPointer);
