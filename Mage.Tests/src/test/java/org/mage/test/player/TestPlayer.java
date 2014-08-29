@@ -62,6 +62,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import mage.abilities.mana.ManaAbility;
+import mage.constants.Zone;
 
 /**
  *
@@ -114,6 +116,7 @@ public class TestPlayer extends ComputerPlayer {
     public boolean priority(Game game) {
         for (PlayerAction action: actions) {
             if (action.getTurnNum() == game.getTurnNum() && action.getStep() == game.getStep().getType()) {
+
                 if (action.getAction().startsWith("activate:")) {
                     String command = action.getAction();
                     command = command.substring(command.indexOf("activate:") + 9);
@@ -135,7 +138,26 @@ public class TestPlayer extends ComputerPlayer {
                             return true;
                         }
                     }                    
-                }
+                } else
+                
+                if (action.getAction().startsWith("manaActivate:")) {
+                    String command = action.getAction();
+                    command = command.substring(command.indexOf("manaActivate:") + 13);
+                    String[] groups = command.split(";");
+                    List<Permanent> manaPerms = this.getAvailableManaProducers(game);
+                    for (Permanent perm: manaPerms) {
+                        for (Ability manaAbility: perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+                            if (manaAbility.toString().startsWith(groups[0])) {                                
+                                Ability newManaAbility = manaAbility.copy();                                
+                                this.activateAbility((ActivatedAbility)newManaAbility, game);
+                                actions.remove(action);
+                                return true;
+                            }                            
+                        }
+                        
+                    }
+                } else 
+                
                 if (action.getAction().startsWith("addCounters:")) {
                     String command = action.getAction();
                     command = command.substring(command.indexOf("addCounters:") + 12);

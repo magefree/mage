@@ -78,8 +78,9 @@ public class ManaOptions extends ArrayList<Mana> {
     }
 
     public void addManaWithCost(List<ManaAbility> abilities, Game game) {
-        if (isEmpty())
+        if (isEmpty()) {
             this.add(new Mana());
+        }
         if (!abilities.isEmpty()) {
             if (abilities.size() == 1) {
                 //if there is only one mana option available add it to all the existing options
@@ -121,16 +122,18 @@ public class ManaOptions extends ArrayList<Mana> {
     }
 
     public void addMana(Mana addMana) {
-        if (isEmpty())
+        if (isEmpty()) {
             this.add(new Mana());
+        }
         for (Mana mana: this) {
             mana.add(addMana);
         }
     }
 
     public void addMana(ManaOptions options) {
-        if (isEmpty())
+        if (isEmpty()) {
             this.add(new Mana());
+        }
         if (!options.isEmpty()) {
             if (options.size() == 1) {
                 //if there is only one mana option available add it to all the existing options
@@ -157,8 +160,9 @@ public class ManaOptions extends ArrayList<Mana> {
     }
 
     public void addMana(Mana cost, Mana addMana) {
-        if (isEmpty())
+        if (isEmpty()) {
             this.add(new Mana());
+        }
         for (Mana mana: this) {
             if (mana.contains(cost)) {
                 mana.subtract(cost);

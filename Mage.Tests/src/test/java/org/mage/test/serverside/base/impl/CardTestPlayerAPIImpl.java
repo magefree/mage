@@ -734,6 +734,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player.addAction(turnNum, step, action);
     }
 
+    public void activateManaAbility(int turnNum, PhaseStep step, TestPlayer player, String ability) {
+        player.addAction(turnNum, step, "manaActivate:" + ability);
+    }
+
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability) {
         player.addAction(turnNum, step, "activate:" + ability);
     }

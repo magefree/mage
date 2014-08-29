@@ -136,4 +136,54 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Azure Drake", 1);
         assertPermanentCount(playerA, "Azure Drake", 0);
     }
+    
+    /**
+     * Tests conditional mana from Cavern in pool will still work if Cavern got back to hand and is played again with other creature type
+     */
+    @Test
+    public void testConditionlManaWorksIfCavernIsReplayed() {
+        addCard(Zone.HAND, playerA, "Cavern of Souls");
+        addCard(Zone.HAND, playerA, "Gladecover Scout"); // Elf costing {G}
+        // addCard(Zone.HAND, playerA, "Fume Spitter"); // Horror costing {B}
+        
+        // Instant - {U}{U} - Return target permanent to its owner's hand.
+        addCard(Zone.HAND, playerB, "Boomerang");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cavern of Souls");
+        setChoice(playerA, "Elf");
+        
+        // getting green mana for Elf into pool
+        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add 1 mana of any one color to your mana pool. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.");
+        setChoice(playerA, "Green");        
+        
+        // return cavern to hand
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerB, "Boomerang", "Cavern of Souls");
+        
+        // playing the cavern again choose different creature type
+        playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cavern of Souls");
+        setChoice(playerA, "Horror");
+
+        // the green mana usable for Elf should be in the mana pool 
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Gladecover Scout");
+
+        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add 1 mana of any one color to your mana pool. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.");
+        setChoice(playerA, "Black");        
+
+        // the black mana usable for Horror should be in the mana pool 
+        // castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Fume Spitter");
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        
+        assertGraveyardCount(playerB, "Boomerang", 1);
+        assertPermanentCount(playerA, "Cavern of Souls", 1);
+        
+        // Check the elf was cast
+        assertPermanentCount(playerA, "Gladecover Scout", 1);
+        // Check Horror on the Battlefield
+        // assertPermanentCount(playerA, "Fume Spitter", 1);
+    }    
+    
 }

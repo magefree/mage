@@ -119,8 +119,8 @@ class CavernOfSoulsEffect extends OneShotEffect {
                 }
             }
             game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());
-            game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice().toString());
-            permanent.addInfo("chosen type", CardUtil.addToolTipMarkTags("Chosen type: " + typeChoice.getChoice().toString()));
+            game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice());
+            permanent.addInfo("chosen type", CardUtil.addToolTipMarkTags("Chosen type: " + typeChoice.getChoice()));
         }
         return false;
     }
@@ -133,10 +133,21 @@ class CavernOfSoulsEffect extends OneShotEffect {
 
 class CavernOfSoulsManaBuilder extends ConditionalManaBuilder {
 
+    String creatuerType;
+    
+    @Override
+    public ConditionalManaBuilder setMana(Mana mana, Ability source, Game game) {
+        Object value = game.getState().getValue(source.getSourceId() + "_type");
+        if (value != null && value instanceof String) {
+            creatuerType = (String) value;
+        }         
+        return super.setMana(mana, source, game); 
+    }
+
     @Override
     public ConditionalMana build(Object... options) {
         this.mana.setFlag(true); // indicates that the mana is from second ability
-        return new CavernOfSoulsConditionalMana(this.mana);
+        return new CavernOfSoulsConditionalMana(this.mana, creatuerType);
     }
 
     @Override
@@ -147,26 +158,29 @@ class CavernOfSoulsManaBuilder extends ConditionalManaBuilder {
 
 class CavernOfSoulsConditionalMana extends ConditionalMana {
 
-    public CavernOfSoulsConditionalMana(Mana mana) {
+    public CavernOfSoulsConditionalMana(Mana mana, String creatureType) {
         super(mana);
         staticText = "Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered";
-        addCondition(new CavernOfSoulsManaCondition());
+        addCondition(new CavernOfSoulsManaCondition(creatureType));
     }
 }
 
 class CavernOfSoulsManaCondition extends CreatureCastManaCondition {
 
+    String creatureType;
+    
+    CavernOfSoulsManaCondition(String creatureType) {
+        this.creatureType = creatureType;
+    }
+    
     @Override
     public boolean apply(Game game, Ability source, UUID manaProducer) {
         // check: ... to cast a creature spell
         if (super.apply(game, source)) {
             // check: ... of the chosen type
-            Object value = game.getState().getValue(manaProducer + "_type");
-            if (value != null && value instanceof String) {
-                MageObject object = game.getObject(source.getSourceId());
-                if (object.hasSubtype((String) value)) {
-                    return true;
-                }
+            MageObject object = game.getObject(source.getSourceId());
+            if (creatureType != null && object.hasSubtype(creatureType)) {
+                return true;
             }
         }
         return false;

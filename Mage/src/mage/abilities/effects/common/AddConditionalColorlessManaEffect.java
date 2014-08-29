@@ -44,7 +44,7 @@ public class AddConditionalColorlessManaEffect extends ManaEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.getManaPool().addMana(manaBuilder.setMana(Mana.ColorlessMana(amount)).build(), game, source);
+            player.getManaPool().addMana(manaBuilder.setMana(Mana.ColorlessMana(amount), source, game).build(), game, source);
             return true;
         }
         return false;

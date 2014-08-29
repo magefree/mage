@@ -117,19 +117,19 @@ class FoodChainManaEffect extends ManaEffect {
         ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
         Mana mana = null;
         if (choice.getColor().isBlack()) {
-            mana = new FoodChainManaBuilder().setMana(Mana.BlackMana(manaCostExiled + 1)).build();
+            mana = new FoodChainManaBuilder().setMana(Mana.BlackMana(manaCostExiled + 1), source, game).build();
         }
         else if (choice.getColor().isBlue()) {
-            mana = new FoodChainManaBuilder().setMana(Mana.BlueMana(manaCostExiled + 1)).build();
+            mana = new FoodChainManaBuilder().setMana(Mana.BlueMana(manaCostExiled + 1), source, game).build();
         }
         else if (choice.getColor().isRed()) {
-            mana = new FoodChainManaBuilder().setMana(Mana.RedMana(manaCostExiled + 1)).build();
+            mana = new FoodChainManaBuilder().setMana(Mana.RedMana(manaCostExiled + 1), source, game).build();
         }
         else if (choice.getColor().isGreen()) {
-            mana = new FoodChainManaBuilder().setMana(Mana.GreenMana(manaCostExiled + 1)).build();
+            mana = new FoodChainManaBuilder().setMana(Mana.GreenMana(manaCostExiled + 1), source, game).build();
         }
         else if (choice.getColor().isWhite()) {
-            mana = new FoodChainManaBuilder().setMana(Mana.WhiteMana(manaCostExiled + 1)).build();
+            mana = new FoodChainManaBuilder().setMana(Mana.WhiteMana(manaCostExiled + 1), source, game).build();
         }
         
         Player player = game.getPlayer(source.getControllerId());
