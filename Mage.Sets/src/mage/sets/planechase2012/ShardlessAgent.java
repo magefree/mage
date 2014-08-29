@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 public class ShardlessAgent extends CardImpl {
 
     public ShardlessAgent(UUID ownerId) {
-       super(ownerId, 104, "Shardless Agent", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
+       super(ownerId, 104, "Shardless Agent", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT,CardType.CREATURE}, "{1}{G}{U}");
        this.expansionSetCode = "PC2";
        this.subtype.add("Human");
        this.subtype.add("Rogue");
