@@ -88,6 +88,6 @@ public class DynamicManaAbility extends ManaAbility {
         if (game == null) {
             return new Mana();
         }
-        return new Mana(manaEffect.computeMana(game, this));
+        return new Mana(manaEffect.computeMana(true, game, this));
     }
 }

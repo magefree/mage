@@ -28,31 +28,30 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.mana.SimpleManaAbility;
+import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
  * @author Plopman
  */
 public class AxebaneGuardian extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creatures with defender you control");
+
+    static{
+        filter.add(new AbilityPredicate(DefenderAbility.class));
+    }
 
     public AxebaneGuardian(UUID ownerId) {
         super(ownerId, 115, "Axebane Guardian", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
@@ -66,8 +65,10 @@ public class AxebaneGuardian extends CardImpl {
 
         // Defender
         this.addAbility(DefenderAbility.getInstance());
+
         // {tap}: Add X mana in any combination of colors to your mana pool, where X is the number of creatures with defender you control.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AxebaneGuardianManaEffect(), new TapSourceCost()));
+        this.addAbility(new DynamicManaAbility(new Mana(0,0,0,0,0,0,1), new PermanentsOnBattlefieldCount(filter), new TapSourceCost(),
+        "Add X mana in any combination of colors to your mana pool, where X is the number of creatures with defender you control."));
     }
 
     public AxebaneGuardian(final AxebaneGuardian card) {
@@ -77,63 +78,5 @@ public class AxebaneGuardian extends CardImpl {
     @Override
     public AxebaneGuardian copy() {
         return new AxebaneGuardian(this);
-    }
-}
-
-
-class AxebaneGuardianManaEffect extends ManaEffect {
-
-
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creatures with defender you control");
-    static{
-        filter.add(new AbilityPredicate(DefenderAbility.class));
-    }
-    public AxebaneGuardianManaEffect() {
-        super();
-        this.staticText = "Add X mana in any combination of colors to your mana pool, where X is the number of creatures with defender you control";
-    }
-
-    public AxebaneGuardianManaEffect(final AxebaneGuardianManaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AxebaneGuardianManaEffect copy() {
-        return new AxebaneGuardianManaEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if(player != null){
-                int x = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
-
-            Mana mana = new Mana();
-            for(int i = 0; i < x; i++){
-                ChoiceColor choiceColor = new ChoiceColor();
-                while (!player.choose(Outcome.Benefit, choiceColor, game)) {
-                    if (!player.isInGame()) {
-                        return false;
-                    }
-                }
-                
-                if (choiceColor.getColor().isBlack()) {
-                    mana.addBlack();
-                } else if (choiceColor.getColor().isBlue()) {
-                    mana.addBlue();
-                } else if (choiceColor.getColor().isRed()) {
-                    mana.addRed();
-                } else if (choiceColor.getColor().isGreen()) {
-                    mana.addGreen();
-                } else if (choiceColor.getColor().isWhite()) {
-                    mana.addWhite();
-                }
-            }
-
-            player.getManaPool().addMana(mana, game, source);
-            return true;
-
-        }
-        return false;
     }
 }

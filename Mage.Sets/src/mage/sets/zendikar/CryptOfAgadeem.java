@@ -58,8 +58,11 @@ public class CryptOfAgadeem extends CardImpl {
         super(ownerId, 212, "Crypt of Agadeem", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "ZEN";
 
+        // Crypt of Agadeem enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
+        // {T}: Add {B} to your mana pool.
         this.addAbility(new BlackManaAbility());
+        // {2}, {T}: Add {B} to your mana pool for each black creature card in your graveyard.
         DynamicManaAbility ability = new DynamicManaAbility(Mana.BlackMana, new CardsInControllerGraveyardCount(filter), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

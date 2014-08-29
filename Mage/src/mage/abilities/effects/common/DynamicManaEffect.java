@@ -31,7 +31,10 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.choices.ChoiceColor;
+import mage.constants.Outcome;
 import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
@@ -70,7 +73,7 @@ public class DynamicManaEffect extends BasicManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        computeMana(game, source);
+        computeMana(false, game, source);
         game.getPlayer(source.getControllerId()).getManaPool().addMana(computedMana, game, source);
         return true;
     }
@@ -83,7 +86,7 @@ public class DynamicManaEffect extends BasicManaEffect {
         return super.getText(mode) + " for each " + amount.getMessage();
     }
 
-    public Mana computeMana(Game game, Ability source){
+    public Mana computeMana(boolean netMana ,Game game, Ability source){
         this.computedMana.clear();
         int count = amount.calculate(game, source, this);
         if (mana.getBlack() > 0) {
@@ -96,6 +99,33 @@ public class DynamicManaEffect extends BasicManaEffect {
             computedMana.setRed(count);
         } else if (mana.getWhite() > 0) {
             computedMana.setWhite(count);
+        } else if (mana.getAny() > 0) {
+            if (netMana) {
+                computedMana.setAny(count);
+            } else {
+                Player controller = game.getPlayer(source.getControllerId());
+                if (controller != null) {
+                    for(int i = 0; i < count; i++){
+                        ChoiceColor choiceColor = new ChoiceColor();
+                        while (!controller.choose(Outcome.Benefit, choiceColor, game)) {
+                            if (!controller.isInGame()) {
+                                return computedMana;
+                            }
+                        }
+                        if (choiceColor.getColor().isBlack()) {
+                            computedMana.addBlack();
+                        } else if (choiceColor.getColor().isBlue()) {
+                            computedMana.addBlue();
+                        } else if (choiceColor.getColor().isRed()) {
+                            computedMana.addRed();
+                        } else if (choiceColor.getColor().isGreen()) {
+                            computedMana.addGreen();
+                        } else if (choiceColor.getColor().isWhite()) {
+                            computedMana.addWhite();
+                        }
+                    }
+                }
+            }            
         } else {
             computedMana.setColorless(count);
         }
