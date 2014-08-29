@@ -70,7 +70,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class VenserTheSojourner extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("permanent you own");
+    private static final FilterPermanent filter = new FilterPermanent("permanent you own");
 
     static {
         filter.add(new OwnerPredicate(TargetController.YOU));
