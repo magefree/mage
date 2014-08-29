@@ -48,8 +48,4 @@ public class ManaEvent extends GameEvent {
         return mana;
     }
 
-    public void setMana(Mana mana) {
-        this.mana = mana;
-    }
-
 }

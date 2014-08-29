@@ -302,7 +302,8 @@ public class ManaPool implements Serializable {
         return m;
     }
 
-    public void addMana(Mana mana, Game game, Ability source) {
+    public void addMana(Mana manaToAdd, Game game, Ability source) {
+        Mana mana = manaToAdd.copy();
         if (!game.replaceEvent(new ManaEvent(EventType.ADD_MANA, source.getId(), source.getSourceId(), source.getControllerId(), mana))) {
             if (mana instanceof ConditionalMana) {
                 this.manaItems.add(new ManaPoolItem((ConditionalMana)mana, source.getSourceId()));

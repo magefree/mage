@@ -112,7 +112,6 @@ public class CommanderManaReplacementEffect extends ReplacementEffectImpl {
             }
             mana.setWhite(0);
         }
-        ((ManaEvent) event).setMana(mana);
         return false;
     }
 
