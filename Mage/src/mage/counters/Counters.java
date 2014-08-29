@@ -89,6 +89,9 @@ public class Counters extends HashMap<String, Counter> implements Serializable {
     public void removeCounter(String name, int amount) {
         if (this.containsKey(name)) {
             this.get(name).remove(amount);
+            if (this.get(name).getCount() == 0) {
+                this.remove(name);
+            }
         }
     }
 
