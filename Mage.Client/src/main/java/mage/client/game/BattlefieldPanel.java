@@ -44,6 +44,7 @@ import mage.client.util.layout.CardLayoutStrategy;
 import mage.client.util.layout.impl.OldCardLayoutStrategy;
 import mage.constants.CardType;
 import mage.utils.CardUtil;
+import mage.view.CounterView;
 import mage.view.PermanentView;
 
 import javax.swing.*;
@@ -155,6 +156,15 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
                         UUID u2 = permanent.getAttachedTo();
                         if (u1 == null && u2 != null || u2 == null && u1 != null
                                 || (u1 != null && !u1.equals(u2)) ) {
+                            changed = true;
+                        }
+                    }
+                    if (!changed) {
+                        List<CounterView> counters1 = oldMagePermanent.getOriginalPermanent().getCounters();
+                        List<CounterView> counters2 = permanent.getCounters();
+                        if (counters1 == null && counters2 != null || counters1 != null && counters2 == null) {
+                            changed = true;
+                        } else if (counters1 != null && counters1.size() != counters2.size()) {
                             changed = true;
                         }
                     }
