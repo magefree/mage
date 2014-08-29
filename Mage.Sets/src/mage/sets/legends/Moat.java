@@ -53,7 +53,7 @@ public class Moat extends CardImpl {
     }
 
     public Moat(UUID ownerId) {
-        super(ownerId, 12, "Moat", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
+        super(ownerId, 197, "Moat", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         this.expansionSetCode = "LEG";
 
         this.color.setWhite(true);
