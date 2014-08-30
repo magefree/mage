@@ -78,12 +78,6 @@ public class AcademyResearchers extends CardImpl {
 
 class AcademyResearchersEffect extends OneShotEffect {
     
-    private static final FilterCard filter = new FilterCard();
-    
-    static {
-        filter.add(new SubtypePredicate("Aura"));
-    }
-    
     AcademyResearchersEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "you may put an Aura card from your hand onto the battlefield attached to {this}.";
@@ -103,13 +97,17 @@ class AcademyResearchersEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null){
+            FilterCard filter = new FilterCard();
+            filter.add(new SubtypePredicate("Aura"));
             filter.add(new AuraCardCanAttachToPermanentId(permanent.getId()));
             TargetCardInHand target = new TargetCardInHand(0, 1, filter);
             if (player.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
                 Card auraInHand = game.getCard(target.getFirstTarget());
                 if (auraInHand != null) {
-                    player.putOntoBattlefieldWithInfo(auraInHand, game, Zone.HAND, source.getSourceId());
-                    permanent.addAttachment(auraInHand.getId(), game);
+                    game.getState().setValue("attachTo:" + auraInHand.getId(), permanent);
+                    if (player.putOntoBattlefieldWithInfo(auraInHand, game, Zone.HAND, source.getSourceId())) {
+                        permanent.addAttachment(auraInHand.getId(), game);
+                    }
                 }
             }
             return true;
