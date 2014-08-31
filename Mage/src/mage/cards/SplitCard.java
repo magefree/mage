@@ -105,7 +105,7 @@ public abstract class SplitCard extends CardImpl {
     
     @Override
     public Abilities<Ability> getAbilities(){
-        Abilities<Ability> allAbilites = new AbilitiesImpl<Ability>();
+        Abilities<Ability> allAbilites = new AbilitiesImpl<>();
         for (Ability ability : super.getAbilities()) {
             if (ability instanceof SpellAbility && !((SpellAbility)ability).getSpellAbilityType().equals(SpellAbilityType.SPLIT)) {
                 allAbilites.add(ability);

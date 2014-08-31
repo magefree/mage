@@ -48,15 +48,25 @@ import mage.cards.repository.ExpansionRepository;
 public class TxtDeckImporter extends DeckImporter {
 
     public static final String[] SET_VALUES = new String[] { "lands", "creatures", "planeswalkers","other spells","sideboard cards" };
-    public static final Set<String> IGNORE_NAMES = new HashSet<String>(Arrays.asList(SET_VALUES));
+    public static final Set<String> IGNORE_NAMES = new HashSet<>(Arrays.asList(SET_VALUES));
     
     private boolean sideboard = false;
+    private int emptyLinesInARow = 0;
 
 
     @Override
     protected void readLine(String line, DeckCardLists deckList) {
-        if (line.length() == 0 || line.startsWith("//")) {
+        if (line.startsWith("//")) {
             return;
+        }
+        if (line.length() == 0) {
+            emptyLinesInARow++;
+            if (emptyLinesInARow > 1) {
+                sideboard = true;
+            }
+            return;
+        } else {
+            emptyLinesInARow = 0;
         }
 
         if (line.toLowerCase().startsWith("sideboard")) {
@@ -70,6 +80,7 @@ public class TxtDeckImporter extends DeckImporter {
         }
         String lineNum = line.substring(0, delim).trim();
         String lineName = line.substring(delim).replace("’","\'").trim();
+        lineName = lineName.replace("&amp;","//");
         if (IGNORE_NAMES.contains(lineName)) {
             return;
         }
