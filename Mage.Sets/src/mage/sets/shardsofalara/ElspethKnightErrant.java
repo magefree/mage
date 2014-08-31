@@ -105,6 +105,7 @@ public class ElspethKnightErrant extends CardImpl {
 class ElspethKnightErrantEmblem extends Emblem {
 
     public ElspethKnightErrantEmblem() {
+        this.setName("EMBLEM: Elspeth, Knight-Errant");
         FilterControlledPermanent filter = new FilterControlledPermanent("Artifacts, creatures, enchantments, and lands you control");
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.ARTIFACT),

@@ -195,6 +195,7 @@ class TamiyoTheMoonSageEffect extends OneShotEffect {
 class TamiyoTheMoonSageEmblem extends Emblem {
 
     public TamiyoTheMoonSageEmblem() {
+        this.setName("EMBLEM: Tamiyo, the Moon Sage");
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.EndOfGame, HandSizeModification.SET));
         this.getAbilities().add(ability);
         this.getAbilities().add(new TamiyoTheMoonSageTriggeredAbility());

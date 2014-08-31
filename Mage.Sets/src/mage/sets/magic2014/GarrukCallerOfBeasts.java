@@ -36,7 +36,6 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
-import mage.abilities.effects.common.PutOntoBattlefieldTargetEffect;
 import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
@@ -109,6 +108,7 @@ class GarrukCallerOfBeastsEmblem extends Emblem {
     }
 
     public GarrukCallerOfBeastsEmblem() {
+        this.setName("EMBLEM: Garruk, Caller of Beasts");
         Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterCreatureCard("creature card")),false, true, Outcome.PutCreatureInPlay);
         Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, effect, filter, true, false);
         this.getAbilities().add(ability);

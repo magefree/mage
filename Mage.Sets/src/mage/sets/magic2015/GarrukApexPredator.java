@@ -167,7 +167,8 @@ class GarrukApexPredatorBeastToken extends Token {
  */
 class GarrukApexPredatorEmblem extends Emblem {
 
-    public GarrukApexPredatorEmblem() {       
+    public GarrukApexPredatorEmblem() {
+        setName("EMBLEM: Garruk, Apex Predator");
         Effect effect = new BoostTargetEffect(5,5,Duration.EndOfTurn);
         effect.setText("it gets +5/+5");
         Ability ability = new AttackedByCreatureTriggeredAbility(Zone.COMMAND, effect, false, true);

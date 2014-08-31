@@ -121,7 +121,7 @@ class KothOfTheHammerToken extends Token {
 class KothOfTheHammerEmblem extends Emblem {
     // "Mountains you control have '{T}: This land deals 1 damage to target creature or player.'"
     public KothOfTheHammerEmblem() {
-        this.setName("Kothe of the Hammer Emblem");
+        this.setName("EMBLEM: Kothe of the Hammer");
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new KothOfTheHammerThirdEffect()));
     }
 }

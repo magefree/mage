@@ -160,6 +160,7 @@ class LilianaOfTheDarkRealmsEmblem extends Emblem {
     }
 
     public LilianaOfTheDarkRealmsEmblem() {
+        this.setName("EMBLEM: Liliana of the Dark Realms");
         SimpleManaAbility manaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(4), new TapSourceCost());
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new GainAbilityControlledEffect(manaAbility, Duration.WhileOnBattlefield, filter));
         this.getAbilities().add(ability);

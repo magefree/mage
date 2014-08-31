@@ -95,6 +95,7 @@ class ElspethSunsChampionEmblem extends Emblem {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures");
 
     public ElspethSunsChampionEmblem() {
+        this.setName("EMBLEM: Elspeth, Sun's Champion");
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new BoostControlledEffect(2,2, Duration.WhileOnBattlefield, filter, false));
         ability.addEffect(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter));
         this.getAbilities().add(ability);

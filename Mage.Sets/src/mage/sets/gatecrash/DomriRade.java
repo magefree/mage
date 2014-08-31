@@ -140,6 +140,7 @@ class DomriRadeEffect1 extends OneShotEffect {
 class DomriRadeEmblem extends Emblem {
     // "Creatures you control have double strike, trample, hexproof and haste."
     public DomriRadeEmblem() {
+        this.setName("EMBLEM: Domri Rade");
         FilterPermanent filter = new FilterControlledCreaturePermanent("Creatures");
         GainAbilityControlledEffect effect = new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfGame, filter);
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, effect);

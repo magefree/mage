@@ -119,6 +119,7 @@ class VampireToken extends Token {
 class SorinEmblem extends Emblem {
 
     public SorinEmblem() {
+        this.setName("EMBLEM: Sorin, Lord of Innistrad");
         BoostControlledEffect effect = new BoostControlledEffect(1, 0, Duration.EndOfGame);
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, effect);
         this.getAbilities().add(ability);
