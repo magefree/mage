@@ -77,6 +77,7 @@ public class RemoveCounterCost extends CostImpl {
         this.target = cost.target.copy();
         this.name = cost.name;
         this.countersToRemove = cost.countersToRemove;
+        this.counterTypeToRemove = cost.counterTypeToRemove;
     }
 
     @Override
