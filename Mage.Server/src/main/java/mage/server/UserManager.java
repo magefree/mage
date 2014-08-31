@@ -145,11 +145,11 @@ public class UserManager {
         }
     }
 
-    public boolean extendUserSession(UUID userId) {
+    public boolean extendUserSession(UUID userId, String pingInfo) {
         if (userId != null) {
             User user = users.get(userId);
             if (user != null) {  
-                user.updateLastActivity();
+                user.updateLastActivity(pingInfo);
                 return true;
             }
         }

@@ -62,10 +62,6 @@ public class GameManager {
         }
     }
 
-//    public void destroyChatSession(UUID gameId) {
-//        gameControllers.remove(gameId);
-//    }
-
     public UUID getChatId(UUID gameId) {
         if (gameControllers.containsKey(gameId)) {
             return gameControllers.get(gameId).getChatId();
@@ -212,5 +208,9 @@ public class GameManager {
 
     public int getNumberActiveGames() {
         return gameControllers.size();
+    }
+    
+    public ConcurrentHashMap<UUID, GameController> getGameController() {
+        return gameControllers;
     }
 }

@@ -826,4 +826,17 @@ public class GameController implements GameCallback {
         }
         return gameSessions.get(playerId);
     }
+
+    public String getPlayerNameList() {
+        StringBuilder sb = new StringBuilder(" [");
+        for (UUID playerId: userPlayerMap.values()) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                sb.append(player.getName()).append("(Left=").append(player.hasLeft() ? "Y":"N").append(") ");
+            } else {
+                sb.append("player missing: ").append(playerId).append(" ");
+            }
+        }
+        return sb.append("]").toString();
+    }
 }

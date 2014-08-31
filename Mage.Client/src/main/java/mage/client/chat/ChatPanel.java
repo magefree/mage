@@ -46,6 +46,7 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableRowSorter;
 import mage.client.MageFrame;
 import mage.remote.MageRemoteException;
 import mage.remote.Session;
@@ -152,6 +153,7 @@ public class ChatPanel extends javax.swing.JPanel {
         initComponents();
         jTablePlayers.setBackground(new Color(0, 0, 0, 0));
         jTablePlayers.setForeground(Color.white);
+        jTablePlayers.setRowSorter(new TableRowSorter(tableModel));
         setBackground(new Color(0, 0, 0, 100));
         if (jScrollPaneTxt != null) {
             jScrollPaneTxt.setBackground(new Color(0, 0, 0, 100));
@@ -301,7 +303,7 @@ public class ChatPanel extends javax.swing.JPanel {
 
     class TableModel extends AbstractTableModel {
 
-        private final String[] columnNames = new String[]{"Players", "Info", "Games"};
+        private final String[] columnNames = new String[]{"Players", "Info", "Games", "Connection"};
         private UsersView[] players = new UsersView[0];
 
         public void loadData(Collection<RoomUsersView> roomUserInfoList) throws MageRemoteException {
@@ -334,6 +336,8 @@ public class ChatPanel extends javax.swing.JPanel {
                     return players[arg0].getInfoState();
                 case 2:
                     return players[arg0].getInfoGames();
+                case 3:
+                    return players[arg0].getInfoPing();
             }
             return "";
         }

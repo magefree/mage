@@ -99,7 +99,7 @@ public class Session {
         if (user == null) {  // user already exists
             user = UserManager.getInstance().findUser(userName);
             if (user.getHost().equals(host)) {
-                user.updateLastActivity();  // minimizes possible expiration 
+                user.updateLastActivity(null);  // minimizes possible expiration
                 this.userId = user.getId();
                 if (user.getSessionId().isEmpty()) {
                     logger.info("Reconnecting session for " + userName);

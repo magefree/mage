@@ -40,11 +40,13 @@ public class UsersView implements Serializable {
     private final String userName;
     private final String infoState;
     private final String infoGames;
+    private final String infoPing;
 
-    public UsersView(String userName, String infoState, String infoGames) {
+    public UsersView(String userName, String infoState, String infoGames, String infoPing) {
         this.userName = userName;
         this.infoState = infoState;
         this.infoGames = infoGames;
+        this.infoPing = infoPing;
     }
 
     public String getUserName() {
@@ -57,6 +59,10 @@ public class UsersView implements Serializable {
 
     public String getInfoGames() {
         return infoGames;
+    }
+
+    public String getInfoPing() {
+        return infoPing;
     }
 
 }

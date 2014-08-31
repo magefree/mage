@@ -152,11 +152,33 @@ public class SessionManager {
         return map;
     }
 
+    /**
+     * Admin requested the disconnect of a user
+     * @param sessionId
+     * @param userSessionId
+     */
     public void disconnectUser(String sessionId, String userSessionId) {
         if (isAdmin(sessionId)) {
-            disconnect(userSessionId, DisconnectReason.AdminDisconnect);
-            LogServiceImpl.instance.log(LogKeys.KEY_SESSION_DISCONNECTED_BY_ADMIN, sessionId, userSessionId);
+            User userAdmin, user;
+            if ((userAdmin = getUserFromSession(sessionId)) != null) {
+                if ((user = getUserFromSession(userSessionId)) != null) {
+                    user.showUserMessage("Admin operation","Your session was disconnected by Admin.");
+                    userAdmin.showUserMessage("Admin action", "User" + user.getName() + " was disconnected.");
+                    disconnect(userSessionId, DisconnectReason.AdminDisconnect);
+                    LogServiceImpl.instance.log(LogKeys.KEY_SESSION_DISCONNECTED_BY_ADMIN, sessionId, userSessionId);
+                } else {
+                    userAdmin.showUserMessage("Admin operation","User with sessionId " + userSessionId + " could not be found!");
+                }
+            }
         }
+    }
+
+    private User getUserFromSession(String sessionId) {
+        Session session = getSession(sessionId);
+        if (session == null) {
+            return null;
+        }
+        return UserManager.getInstance().getUser(session.getUserId());
     }
 
     public void endUserSession(String sessionId, String userSessionId) {
@@ -186,10 +208,10 @@ public class SessionManager {
         return null;
     }
 
-    public boolean extendUserSession(String sessionId) {        
+    public boolean extendUserSession(String sessionId, String pingInfo) {
         Session session = sessions.get(sessionId);
         if (session != null) {
-            return UserManager.getInstance().extendUserSession(session.getUserId());
+            return UserManager.getInstance().extendUserSession(session.getUserId(), pingInfo);
         }
         return false;
     }

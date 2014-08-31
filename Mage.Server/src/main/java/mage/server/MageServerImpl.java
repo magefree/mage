@@ -330,8 +330,8 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public boolean ping(String sessionId) {
-        return SessionManager.getInstance().extendUserSession(sessionId);
+    public boolean ping(String sessionId, String pingInfo) {
+        return SessionManager.getInstance().extendUserSession(sessionId, pingInfo);
     }
 
 //    @Override
@@ -959,6 +959,13 @@ public class MageServerImpl implements MageServer {
         });
     }
 
+    /**
+     * Get user data for admin console
+     *
+     * @param sessionId
+     * @return
+     * @throws MageException
+     */
     @Override
     public List<UserView> getUsers(String sessionId) throws MageException {
         return executeWithResult("getUsers", sessionId, new ActionWithNullNegativeResult<List<UserView>>() {
@@ -966,7 +973,8 @@ public class MageServerImpl implements MageServer {
             public List<UserView> execute() throws MageException {
                 List<UserView> users = new ArrayList<>();
                 for (User user : UserManager.getInstance().getUsers()) {
-                    users.add(new UserView(user.getName(), user.getHost(), user.getSessionId(), user.getConnectionTime()));
+
+                    users.add(new UserView(user.getName(), user.getHost(), user.getSessionId(), user.getConnectionTime(), user.getGameInfo()));
                 }
                 return users;
             }

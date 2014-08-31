@@ -57,6 +57,8 @@ import org.jboss.remoting.transporter.TransporterClient;
 
 import java.net.*;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
+
 
 /**
  *
@@ -75,7 +77,9 @@ public class SessionImpl implements Session {
     private ServerState serverState;
     private SessionState sessionState = SessionState.DISCONNECTED;
     private Connection connection;
-
+    private final static int PING_CYCLES = 10;
+    private final LinkedList<Long> pingTime = new LinkedList<>();
+    private String pingInfo = "";    
     private static boolean debugMode = false;
 
     private boolean canceled = false;
@@ -303,11 +307,11 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public synchronized void disconnect(boolean showMessage) {
+    public synchronized void disconnect(boolean errorCall) {
         if (isConnected()) {
             sessionState = SessionState.DISCONNECTING;
         }
-        if (connection == null) {
+        if (connection == null || sessionState == SessionState.DISCONNECTED) {
             return;
         }
         try {
@@ -320,10 +324,11 @@ public class SessionImpl implements Session {
         if (sessionState == SessionState.DISCONNECTING || sessionState == SessionState.CONNECTING) {
             sessionState = SessionState.DISCONNECTED;
             logger.info("Disconnected ... ");
-        }
-        client.disconnected();
-        if (showMessage) {
-            client.showError("Network error.  You have been disconnected");
+            client.disconnected();
+            if (errorCall) {
+                client.showError("Network error.  You have been disconnected");
+            }
+            pingTime.clear();
         }
     }
 
@@ -1305,7 +1310,6 @@ public class SessionImpl implements Session {
 
     private void handleThrowable(Throwable t) {
         logger.fatal("Communication error", t);
-        sessionState = SessionState.SERVER_UNAVAILABLE;
         disconnect(true);
     }
 
@@ -1350,13 +1354,27 @@ public class SessionImpl implements Session {
     public boolean ping() {
         try {
             if (isConnected()) {
-                if (!server.ping(sessionId)) {
+                long startTime = System.nanoTime();
+                if (!server.ping(sessionId, pingInfo)) {
                     logger.error(new StringBuilder("Ping failed: ").append(this.getUserName()).append(" Session: ").append(sessionId).append(" to MAGE server at ").append(connection.getHost()).append(":").append(connection.getPort()).toString());
+                    throw new MageException("Ping failed");
                 }
+                pingTime.add(System.nanoTime() - startTime);
+                long milliSeconds = TimeUnit.MILLISECONDS.convert(pingTime.getLast(), TimeUnit.NANOSECONDS);
+                String lastPing = milliSeconds > 0 ? milliSeconds+"ms" : "<1ms";
+                if (pingTime.size() > PING_CYCLES) {
+                    pingTime.poll();
+                }
+                long sum = 0;
+                for (Long time :pingTime) {
+                    sum += time;
+                }
+                milliSeconds = TimeUnit.MILLISECONDS.convert(sum / pingTime.size(), TimeUnit.NANOSECONDS);
+                pingInfo = lastPing + " (Av: " + (milliSeconds > 0 ? milliSeconds + "ms":"<1ms")+")";
             }
             return true;
         } catch (MageException ex) {
-            handleMageException(ex);
+                handleMageException(ex);
         } catch (Throwable t) {
             handleThrowable(t);
         }

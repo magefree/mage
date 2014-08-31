@@ -39,6 +39,11 @@ import java.awt.event.WindowEvent;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.prefs.Preferences;
+import javax.swing.Box;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import mage.interfaces.MageClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
@@ -46,9 +51,6 @@ import mage.remote.Session;
 import mage.remote.SessionImpl;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
-
-import javax.swing.*;
-import java.util.prefs.Preferences;
 
 /**
  *
@@ -121,7 +123,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
 
     public void enableButtons() {
         btnConnect.setEnabled(true);
-        btnConnect.setText("Disconnect");
+        btnConnect.setText("Disconnect & Close");
         btnSendMessage.setEnabled(true);
     }
 

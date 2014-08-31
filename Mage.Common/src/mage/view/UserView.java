@@ -31,6 +31,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * Admin Console View
  *
  * @author BetaSteward_at_googlemail.com
  */
@@ -40,12 +41,14 @@ public class UserView implements Serializable {
     private final String host;
     private final String sessionId;
     private final Date timeConnected;
+    private final String gameInfo;
 
-    public UserView(String userName, String host, String sessionId, Date timeConnected) {
+    public UserView(String userName, String host, String sessionId, Date timeConnected, String gameInfo) {
         this.userName = userName;
         this.host = host;
         this.sessionId = sessionId;
         this.timeConnected = timeConnected;
+        this.gameInfo = gameInfo;
     }
 
     public String getUserName() {
@@ -62,6 +65,10 @@ public class UserView implements Serializable {
 
     public Date getConnectionTime() {
         return timeConnected;
+    }
+
+    public String getGameInfo() {
+        return gameInfo;
     }
 
 }

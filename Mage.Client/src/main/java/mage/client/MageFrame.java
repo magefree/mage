@@ -1233,17 +1233,17 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                        disableButtons();
+                    setStatusText("Not connected");
+                    disableButtons();
+                    hideGames();
+                    hideTables();
                     if (JOptionPane.showConfirmDialog(MageFrame.this, "The connection to server was lost. Reconnect?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                        session.disconnect(false);
-                        tablesPane.clearChat();
+                        // session.disconnect(false);
+                        // tablesPane.clearChat();
                         if (performConnect()) {
                             enableButtons();
                         }
-                    } else {
-                        setStatusText("Not connected");
-                        hideGames();
-                        hideTables();
+//                    } else {
                     }
                 }
             });

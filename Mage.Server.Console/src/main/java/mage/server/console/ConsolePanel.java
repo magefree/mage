@@ -40,8 +40,11 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
+import static javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN;
+import static javax.swing.JTable.AUTO_RESIZE_OFF;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableRowSorter;
 import mage.remote.Session;
 import mage.view.TableView;
 import mage.view.UserView;
@@ -66,7 +69,12 @@ public class ConsolePanel extends javax.swing.JPanel {
         this.tableTableModel = new TableTableModel();
         initComponents();
         this.tblUsers.createDefaultColumnsFromModel();
+        this.tblUsers.setRowSorter(new TableRowSorter(tableUserModel));
+        this.tblUsers.setAutoResizeMode(AUTO_RESIZE_OFF);
+
         this.tblTables.createDefaultColumnsFromModel();
+        this.tblTables.setRowSorter(new TableRowSorter(tableTableModel));
+        this.tblUsers.setAutoResizeMode(AUTO_RESIZE_NEXT_COLUMN);
     }
 
     public void update(List<UserView> users) {
@@ -259,17 +267,17 @@ public class ConsolePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisconnectActionPerformed
-        int row = this.tblUsers.getSelectedRow();
+        int row = this.tblUsers.convertRowIndexToModel(tblUsers.getSelectedRow());
         ConsoleFrame.getSession().disconnectUser((String)tableUserModel.getValueAt(row, 3));
     }//GEN-LAST:event_btnDisconnectActionPerformed
 
     private void btnRemoveTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveTableActionPerformed
-        int row = this.tblTables.getSelectedRow();
+        int row = this.tblTables.convertRowIndexToModel(tblTables.getSelectedRow());
         ConsoleFrame.getSession().removeTable((UUID)tableTableModel.getValueAt(row, 7));
     }//GEN-LAST:event_btnRemoveTableActionPerformed
 
     private void btnEndSessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndSessionActionPerformed
-        int row = this.tblUsers.getSelectedRow();
+        int row = this.tblUsers.convertRowIndexToModel(tblUsers.getSelectedRow());
         ConsoleFrame.getSession().endUserSession((String) tableUserModel.getValueAt(row, 3));
     }//GEN-LAST:event_btnEndSessionActionPerformed
 
@@ -292,7 +300,7 @@ public class ConsolePanel extends javax.swing.JPanel {
 }
 
 class TableUserModel extends AbstractTableModel {
-    private final String[] columnNames = new String[]{"User Name", "Host", "Time Connected"};
+    private final String[] columnNames = new String[]{"User Name", "Host", "Time Connected", "SessionId", "Gameinfo"};
     private UserView[] users = new UserView[0];
     private static final DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
 
@@ -322,6 +330,8 @@ class TableUserModel extends AbstractTableModel {
                 return formatter.format(users[arg0].getConnectionTime());
             case 3:
                 return users[arg0].getSessionId();
+            case 4:
+                return users[arg0].getGameInfo();
         }
         return "";
     }
@@ -438,12 +448,13 @@ class UpdateUsersTask extends SwingWorker<Void, List<UserView>> {
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
             List<UserView> users = session.getUsers();
+
             if (previousUsers == null || checkUserListChanged(users)) {
                 logger.debug("Need to update the user list");
                 this.publish(users);
                 previousUsers = users;
             }
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         }
         return null;
     }
@@ -508,7 +519,7 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
             this.publish(session.getTables(roomId));
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         }
         return null;
     }

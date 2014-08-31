@@ -47,7 +47,6 @@ import mage.view.TournamentView;
 import mage.view.UserDataView;
 import mage.view.RoomUsersView;
 import mage.view.UserView;
-import mage.view.UsersView;
 
 /**
  *
@@ -76,7 +75,7 @@ public interface MageServer {
     Object getServerMessagesCompressed(String sessionId) throws MageException;     // messages of the day
 
     // ping - extends session
-    boolean ping(String sessionId) throws MageException;
+    boolean ping(String sessionId, String pingInfo) throws MageException;
 
     //table methods
     TableView createTable(String sessionId, UUID roomId, MatchOptions matchOptions) throws MageException;

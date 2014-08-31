@@ -74,7 +74,7 @@ public final class Constants {
     public static final int PRIORITY_TIME_SEC = 1200;
 
     public enum SessionState {
-        DISCONNECTED, CONNECTED, CONNECTING, DISCONNECTING, SERVER_UNAVAILABLE, SERVER_STARTING;
+        DISCONNECTED, CONNECTED, CONNECTING, DISCONNECTING, SERVER_STARTING;
     }
 
     public enum Option {

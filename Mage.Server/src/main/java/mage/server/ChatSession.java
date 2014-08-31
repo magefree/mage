@@ -93,6 +93,12 @@ public class ChatSession {
                     case SessionExpired:
                         message = " session expired";
                         break;
+                    case AdminDisconnect:
+                        message = " was disconnected by the Admin";
+                        break;
+                    case ConnectingOtherInstance:
+                        message = " reconnected and replaced still active old session";
+                        break;
                     case CleaningUp:
                         message = null;
                         break;

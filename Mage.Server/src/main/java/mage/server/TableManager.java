@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
@@ -51,6 +52,7 @@ import mage.game.match.MatchOptions;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentOptions;
 import mage.players.Player;
+import mage.server.game.GameController;
 import mage.server.game.GameManager;
 import mage.server.game.GamesRoomManager;
 import org.apache.log4j.Logger;
@@ -378,12 +380,18 @@ public class TableManager {
         logger.debug("------- Tables: " + tables.size() + " --------------------------------------------");
         for (Table table: tables.values()) {
             logger.debug(table.getId() + " [" + table.getName()+ "] " + formatter.format(table.getStartTime()) +" (" + table.getState().toString() + ")");
-        }        
+        }
+        logger.debug("------- Games: " + GameManager.getInstance().getNumberActiveGames() + " --------------------------------------------");
+        for (Entry<UUID, GameController> entry: GameManager.getInstance().getGameController().entrySet()) {
+            logger.debug(entry.getKey() + entry.getValue().getPlayerNameList());
+        }
         logger.debug("--- Server state END ------------------------------------------");
     }
     
     private void checkExpired() {
-        debugServerState();
+        if (logger.isDebugEnabled()) {
+            debugServerState();
+        }
         Date now = new Date();
         List<UUID> toRemove = new ArrayList<>();
         for (Table table : tables.values()) {

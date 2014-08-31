@@ -75,7 +75,8 @@ public class User {
     private final Map<UUID, Deck> sideboarding;
     private final List<UUID> watchedGames;
     private String sessionId;
-    private String info;
+    private String info = "";
+    private String pingInfo = "";
     private Date lastActivity;
     private UserState userState;
     private UserData userData;
@@ -238,7 +239,10 @@ public class User {
         GameManager.getInstance().sendPlayerInteger(gameId, userId, data);
     }
 
-    public void updateLastActivity() {
+    public void updateLastActivity(String pingInfo) {
+        if (pingInfo != null) {
+            this.pingInfo = pingInfo;
+        }
         lastActivity = new Date();
         if (userState == UserState.Disconnected) { // this can happen if user reconnects very fast after disconnect
             userState = UserState.Reconnected;
@@ -456,6 +460,10 @@ public class User {
 
     public UserState getUserState() {
         return userState;
+    }
+
+    public String getPingInfo() {
+        return pingInfo;
     }
     
 }
