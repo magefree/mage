@@ -51,6 +51,7 @@ open (DATA, $setsFile) || die "can't open $setsFile";
 while(my $line = <DATA>) {
     my @data = split('\\|', $line);
     $sets{$data[0]}= $data[1];
+    #print "$data[0]--$data[1]\n"
 }
 close(DATA);
 
@@ -258,5 +259,7 @@ foreach my $setName (keys %{$cards{$cardName}}) {
         close CARD;
 
         print "$vars{'set'}.$vars{'className'}\n";
+    } else {
+        print "Set not found in known sets: $setName\n";
     }
 }

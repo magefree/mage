@@ -58,6 +58,7 @@ Innistrad|ISD|
 Invasion|INV|
 Journey into Nyx|JOU|
 Judgment|JUD|
+Khans of Tarkir|KTK|
 Limited Edition Alpha|LEA|
 Limited Edition Beta|LEB|
 Legends|LEG|

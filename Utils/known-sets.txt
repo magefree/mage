@@ -2,6 +2,7 @@ Alara Reborn|alarareborn|
 Alliances|alliances|
 Antiquities|antiquities|
 Apocalypse|apocalypse|
+Archenemy|archenemy|
 Arabian Nights|arabiannights|
 Avacyn Restored|avacynrestored|
 Betrayers of Kamigawa|betrayersofkamigawa|
@@ -41,6 +42,7 @@ Innistrad|innistrad|
 Invasion|invasion|
 Journey into Nyx|journeyintonyx|
 Judgment|judgment|
+Khans of Tarkir|khansoftarkir|
 Legends|legends|
 Legions|legions|
 Limited Edition Alpha|limitedalpha|
