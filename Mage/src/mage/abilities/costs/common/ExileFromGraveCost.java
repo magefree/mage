@@ -70,7 +70,7 @@ public class ExileFromGraveCost extends CostImpl {
     }
 
 
-    public ExileFromGraveCost(ExileFromGraveCost cost) {
+    public ExileFromGraveCost(final ExileFromGraveCost cost) {
         super(cost);
     }
 

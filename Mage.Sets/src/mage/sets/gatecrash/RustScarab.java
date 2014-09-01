@@ -69,11 +69,6 @@ public class RustScarab extends CardImpl {
 
     }
 
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-
-    }
-
     public RustScarab(final RustScarab card) {
         super(card);
     }

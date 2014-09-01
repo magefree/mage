@@ -22,6 +22,12 @@ public class AddManaToManaPoolEffect extends OneShotEffect {
 
     protected Mana mana;
     
+    /**
+     * Adds mana to the mana pool of target pointer player
+     * 
+     * @param mana mana that will be added to the pool
+     * @param textManaPoolOwner text that references to the mana pool owner (e.g. "damaged player's")
+     */
     public AddManaToManaPoolEffect(Mana mana, String textManaPoolOwner) {
         super(Outcome.PutManaInPool);
         this.mana = mana;

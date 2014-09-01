@@ -49,6 +49,7 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.constants.AbilityType;
 import mage.constants.CostModificationType;
 
 /**
@@ -106,9 +107,11 @@ class AdjustingCostsAbility extends SimpleStaticAbility implements AdjustingSour
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        Player player = game.getPlayer(ability.getControllerId());
-        if (player != null && player.getLife() < 4) {
-            CardUtil.adjustCost((SpellAbility)ability, 6);
+        if (ability.getAbilityType().equals(AbilityType.SPELL)) {
+            Player player = game.getPlayer(ability.getControllerId());
+            if (player != null && player.getLife() < 4) {
+                CardUtil.adjustCost((SpellAbility)ability, 6);
+            }
         }
     }
 }

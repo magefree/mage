@@ -39,11 +39,9 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.watchers.Watcher;
+import mage.watchers.common.PlayerAttackedWatcher;
 
 /**
  *
@@ -65,7 +63,7 @@ public class WindbriskHeights extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);     
         
-        this.addWatcher(new WindbriskHeightsWatcher());
+        this.addWatcher(new PlayerAttackedWatcher());
 
     }
 
@@ -79,41 +77,6 @@ public class WindbriskHeights extends CardImpl {
     }
 }
 
-class WindbriskHeightsWatcher extends Watcher {
-
-    private int numberOfattackers;
-
-    public WindbriskHeightsWatcher() {
-        super("WindbriskHeightsAttackersWatcher", WatcherScope.PLAYER);
-    }
-
-    public WindbriskHeightsWatcher(final WindbriskHeightsWatcher watcher) {
-        super(watcher);
-        this.numberOfattackers = watcher.numberOfattackers;
-    }
-
-    @Override
-    public WindbriskHeightsWatcher copy() {
-        return new WindbriskHeightsWatcher(this);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARED_ATTACKERS && game.getActivePlayerId().equals(this.getControllerId())) {
-            numberOfattackers += game.getCombat().getAttackers().size(); // because there are more than one attack phase possible, sum up the attackers
-            if (numberOfattackers > 2) {
-                condition = true;
-            }
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        numberOfattackers = 0;
-    }
-}
-
 class WindbriskHeightsAttackersCondition implements Condition {
 
     private static final WindbriskHeightsAttackersCondition fInstance = new WindbriskHeightsAttackersCondition();
@@ -124,8 +87,8 @@ class WindbriskHeightsAttackersCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Watcher watcher = game.getState().getWatchers().get("WindbriskHeightsAttackersWatcher", source.getControllerId());
-        return watcher != null && watcher.conditionMet();
+        PlayerAttackedWatcher watcher = (PlayerAttackedWatcher) game.getState().getWatchers().get("PlayerAttackedWatcher");
+        return watcher != null && watcher.getNumberOfAttackersCurrentTurn(source.getControllerId()) >= 3;
     }
 
     @Override
