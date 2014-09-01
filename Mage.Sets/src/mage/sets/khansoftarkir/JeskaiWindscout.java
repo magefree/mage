@@ -25,32 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.khansoftarkir;
 
-package mage.constants;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.ProwessAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
  * @author LevelX2
  */
-public enum AbilityWord {
-    BLOODRUSH("Bloodrush"),
-    CONSTELLATION("Constellation"),
-    HELLBENT("Hellbent"),
-    HEROIC("Heroic"),
-    LANDFALL("Landfall"),
-    METALCRAFT("Metalcraft"),
-    GRANDEUR("Grandeur"),
-    RAID("Raid");
+public class JeskaiWindscout extends CardImpl {
 
-    private final String text;
+    public JeskaiWindscout(UUID ownerId) {
+        super(ownerId, 44, "Jeskai Windscout", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "KTK";
+        this.subtype.add("Bird");
+        this.subtype.add("Scout");
 
-    AbilityWord(String text) {
-        this.text = text;
+        this.color.setBlue(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Prowess <em>(Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)</em>
+        this.addAbility(new ProwessAbility());
+    }
+
+    public JeskaiWindscout(final JeskaiWindscout card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return text;
+    public JeskaiWindscout copy() {
+        return new JeskaiWindscout(this);
     }
-
 }

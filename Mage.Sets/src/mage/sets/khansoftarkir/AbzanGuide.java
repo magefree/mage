@@ -25,32 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.khansoftarkir;
 
-package mage.constants;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.keyword.MorphAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
  * @author LevelX2
  */
-public enum AbilityWord {
-    BLOODRUSH("Bloodrush"),
-    CONSTELLATION("Constellation"),
-    HELLBENT("Hellbent"),
-    HEROIC("Heroic"),
-    LANDFALL("Landfall"),
-    METALCRAFT("Metalcraft"),
-    GRANDEUR("Grandeur"),
-    RAID("Raid");
+public class AbzanGuide extends CardImpl {
 
-    private final String text;
+    public AbzanGuide(UUID ownerId) {
+        super(ownerId, 162, "Abzan Guide", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{B}{G}");
+        this.expansionSetCode = "KTK";
+        this.subtype.add("Human");
+        this.subtype.add("Warrior");
 
-    AbilityWord(String text) {
-        this.text = text;
+        this.color.setGreen(true);
+        this.color.setBlack(true);
+        this.color.setWhite(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+
+        // Lifelink
+        this.addAbility(LifelinkAbility.getInstance());
+        // Morph {2}{W}{B}{G}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{W}{B}{G}")));
+    }
+
+    public AbzanGuide(final AbzanGuide card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return text;
+    public AbzanGuide copy() {
+        return new AbzanGuide(this);
     }
-
 }

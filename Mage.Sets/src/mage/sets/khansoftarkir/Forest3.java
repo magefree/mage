@@ -25,32 +25,27 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.khansoftarkir;
 
-package mage.constants;
+import java.util.UUID;
 
 /**
  *
  * @author LevelX2
  */
-public enum AbilityWord {
-    BLOODRUSH("Bloodrush"),
-    CONSTELLATION("Constellation"),
-    HELLBENT("Hellbent"),
-    HEROIC("Heroic"),
-    LANDFALL("Landfall"),
-    METALCRAFT("Metalcraft"),
-    GRANDEUR("Grandeur"),
-    RAID("Raid");
+public class Forest3 extends mage.cards.basiclands.Forest {
 
-    private final String text;
+    public Forest3(UUID ownerId) {
+        super(ownerId, 268);
+        this.expansionSetCode = "KTK";
+    }
 
-    AbilityWord(String text) {
-        this.text = text;
+    public Forest3(final Forest3 card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return text;
+    public Forest3 copy() {
+        return new Forest3(this);
     }
-
 }

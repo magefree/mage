@@ -25,32 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.khansoftarkir;
 
-package mage.constants;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.abilityword.RaidAbility;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
  * @author LevelX2
  */
-public enum AbilityWord {
-    BLOODRUSH("Bloodrush"),
-    CONSTELLATION("Constellation"),
-    HELLBENT("Hellbent"),
-    HEROIC("Heroic"),
-    LANDFALL("Landfall"),
-    METALCRAFT("Metalcraft"),
-    GRANDEUR("Grandeur"),
-    RAID("Raid");
+public class MarduHeartPiercer extends CardImpl {
 
-    private final String text;
+    public MarduHeartPiercer(UUID ownerId) {
+        super(ownerId, 9993, "Mardu Heart-Piercer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        this.expansionSetCode = "KTK";
+        this.subtype.add("Human");
+        this.subtype.add("Archer");
 
-    AbilityWord(String text) {
-        this.text = text;
+        this.color.setRed(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
+
+        // <em>Raid</em> - When Mardu Heart-Piercer enters the battlefield, if you attacked with a creature this turn, Mardu Heart-Piercer deals 2 damage to target creature or player.
+        Ability ability = new RaidAbility(this, new DamageTargetEffect(2));
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
+
+    }
+
+    public MarduHeartPiercer(final MarduHeartPiercer card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return text;
+    public MarduHeartPiercer copy() {
+        return new MarduHeartPiercer(this);
     }
-
 }

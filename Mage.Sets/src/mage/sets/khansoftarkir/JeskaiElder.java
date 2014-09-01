@@ -25,32 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.khansoftarkir;
 
-package mage.constants;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DrawDiscardControllerEffect;
+import mage.abilities.keyword.ProwessAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
  * @author LevelX2
  */
-public enum AbilityWord {
-    BLOODRUSH("Bloodrush"),
-    CONSTELLATION("Constellation"),
-    HELLBENT("Hellbent"),
-    HEROIC("Heroic"),
-    LANDFALL("Landfall"),
-    METALCRAFT("Metalcraft"),
-    GRANDEUR("Grandeur"),
-    RAID("Raid");
+public class JeskaiElder extends CardImpl {
 
-    private final String text;
+    public JeskaiElder(UUID ownerId) {
+        super(ownerId, 9990, "Jeskai Elder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        this.expansionSetCode = "KTK";
+        this.subtype.add("Human");
+        this.subtype.add("Monk");
 
-    AbilityWord(String text) {
-        this.text = text;
+        this.color.setBlue(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
+
+        // Prowess <em>(Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)</em>
+        this.addAbility(new ProwessAbility());
+
+        // Whenever Jeskai Elder deals combat damage to a player, you may draw a card. If you do, discard a card.
+        Effect effect = new DrawDiscardControllerEffect();
+        effect.setText("you may draw a card. If you do, discard a card");
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(effect, true));
+
+    }
+
+    public JeskaiElder(final JeskaiElder card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return text;
+    public JeskaiElder copy() {
+        return new JeskaiElder(this);
     }
-
 }

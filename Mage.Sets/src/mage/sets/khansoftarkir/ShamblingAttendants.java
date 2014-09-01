@@ -25,32 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.khansoftarkir;
 
-package mage.constants;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.DelveAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
  * @author LevelX2
  */
-public enum AbilityWord {
-    BLOODRUSH("Bloodrush"),
-    CONSTELLATION("Constellation"),
-    HELLBENT("Hellbent"),
-    HEROIC("Heroic"),
-    LANDFALL("Landfall"),
-    METALCRAFT("Metalcraft"),
-    GRANDEUR("Grandeur"),
-    RAID("Raid");
+public class ShamblingAttendants extends CardImpl {
 
-    private final String text;
+    public ShamblingAttendants(UUID ownerId) {
+        super(ownerId, 89, "Shambling Attendants", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{7}{B}");
+        this.expansionSetCode = "KTK";
+        this.subtype.add("Zombie");
 
-    AbilityWord(String text) {
-        this.text = text;
+        this.color.setBlack(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(5);
+
+        // Delve
+        this.addAbility(new DelveAbility());
+        // Deathtouch
+        this.addAbility(DeathtouchAbility.getInstance());
+    }
+
+    public ShamblingAttendants(final ShamblingAttendants card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return text;
+    public ShamblingAttendants copy() {
+        return new ShamblingAttendants(this);
     }
-
 }

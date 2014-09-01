@@ -25,32 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.khansoftarkir;
 
-package mage.constants;
+import java.util.UUID;
+import mage.MageInt;
+import mage.Mana;
+import mage.abilities.common.TurnedFaceUpTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.AddManaToControllersManaPoolEffect;
+import mage.abilities.keyword.MorphAbility;
+import mage.abilities.mana.BlueManaAbility;
+import mage.abilities.mana.GreenManaAbility;
+import mage.abilities.mana.RedManaAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
  * @author LevelX2
  */
-public enum AbilityWord {
-    BLOODRUSH("Bloodrush"),
-    CONSTELLATION("Constellation"),
-    HELLBENT("Hellbent"),
-    HEROIC("Heroic"),
-    LANDFALL("Landfall"),
-    METALCRAFT("Metalcraft"),
-    GRANDEUR("Grandeur"),
-    RAID("Raid");
+public class RattleclawMystic extends CardImpl {
 
-    private final String text;
+    public RattleclawMystic(UUID ownerId) {
+        super(ownerId, 144, "Rattleclaw Mystic", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "KTK";
+        this.subtype.add("Human");
+        this.subtype.add("Shaman");
 
-    AbilityWord(String text) {
-        this.text = text;
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+
+        // {T}: Add {G}, {U}, or {R} to your mana pool.
+        this.addAbility(new GreenManaAbility());
+        this.addAbility(new BlueManaAbility());
+        this.addAbility(new RedManaAbility());
+
+        // Morph {2}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}")));
+        
+        // When Rattleclaw Mystic is turned face up, add {G}{U}{R} to your mana pool.
+        this.addAbility(new TurnedFaceUpTriggeredAbility(new AddManaToControllersManaPoolEffect(new Mana(1,1,1,0,0,0,0))));
+
+    }
+
+    public RattleclawMystic(final RattleclawMystic card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return text;
+    public RattleclawMystic copy() {
+        return new RattleclawMystic(this);
     }
-
 }

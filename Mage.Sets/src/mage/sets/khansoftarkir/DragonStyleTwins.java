@@ -25,32 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.khansoftarkir;
 
-package mage.constants;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.keyword.DoubleStrikeAbility;
+import mage.abilities.keyword.ProwessAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
  * @author LevelX2
  */
-public enum AbilityWord {
-    BLOODRUSH("Bloodrush"),
-    CONSTELLATION("Constellation"),
-    HELLBENT("Hellbent"),
-    HEROIC("Heroic"),
-    LANDFALL("Landfall"),
-    METALCRAFT("Metalcraft"),
-    GRANDEUR("Grandeur"),
-    RAID("Raid");
+public class DragonStyleTwins extends CardImpl {
 
-    private final String text;
+    public DragonStyleTwins(UUID ownerId) {
+        super(ownerId, 108, "Dragon-Style Twins", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
+        this.expansionSetCode = "KTK";
+        this.subtype.add("Human");
+        this.subtype.add("Monk");
 
-    AbilityWord(String text) {
-        this.text = text;
+        this.color.setRed(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // Double strike
+        this.addAbility(DoubleStrikeAbility.getInstance());
+        // Prowess <em>(Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)</em>
+        this.addAbility(new ProwessAbility());
+    }
+
+    public DragonStyleTwins(final DragonStyleTwins card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return text;
+    public DragonStyleTwins copy() {
+        return new DragonStyleTwins(this);
     }
-
 }

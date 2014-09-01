@@ -25,32 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.khansoftarkir;
 
-package mage.constants;
+import java.util.UUID;
 
 /**
  *
  * @author LevelX2
  */
-public enum AbilityWord {
-    BLOODRUSH("Bloodrush"),
-    CONSTELLATION("Constellation"),
-    HELLBENT("Hellbent"),
-    HEROIC("Heroic"),
-    LANDFALL("Landfall"),
-    METALCRAFT("Metalcraft"),
-    GRANDEUR("Grandeur"),
-    RAID("Raid");
+public class PollutedDelta extends mage.sets.onslaught.PollutedDelta {
 
-    private final String text;
+    public PollutedDelta(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 239;
+        this.expansionSetCode = "KTK";
+    }
 
-    AbilityWord(String text) {
-        this.text = text;
+    public PollutedDelta(final PollutedDelta card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return text;
+    public PollutedDelta copy() {
+        return new PollutedDelta(this);
     }
-
 }

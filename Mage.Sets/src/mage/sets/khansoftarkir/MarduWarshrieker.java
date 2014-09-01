@@ -25,32 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.khansoftarkir;
 
-package mage.constants;
+import java.util.UUID;
+import mage.MageInt;
+import mage.Mana;
+import mage.abilities.abilityword.RaidAbility;
+import mage.abilities.effects.common.AddManaToControllersManaPoolEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
  * @author LevelX2
  */
-public enum AbilityWord {
-    BLOODRUSH("Bloodrush"),
-    CONSTELLATION("Constellation"),
-    HELLBENT("Hellbent"),
-    HEROIC("Heroic"),
-    LANDFALL("Landfall"),
-    METALCRAFT("Metalcraft"),
-    GRANDEUR("Grandeur"),
-    RAID("Raid");
+public class MarduWarshrieker extends CardImpl {
 
-    private final String text;
+    public MarduWarshrieker(UUID ownerId) {
+        super(ownerId, 117, "Mardu Warshrieker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        this.expansionSetCode = "KTK";
+        this.subtype.add("Orc");
+        this.subtype.add("Shaman");
 
-    AbilityWord(String text) {
-        this.text = text;
+        this.color.setRed(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // <em>Raid</em> - When Mardu Warshrieker enters the battlefield, if you attacked with a creature this turn, add {R}{W}{B} to your mana pool.
+        this.addAbility(new RaidAbility(this, new AddManaToControllersManaPoolEffect(new Mana(1,0,0,1,1,0,0))));
+    }
+
+    public MarduWarshrieker(final MarduWarshrieker card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return text;
+    public MarduWarshrieker copy() {
+        return new MarduWarshrieker(this);
     }
-
 }

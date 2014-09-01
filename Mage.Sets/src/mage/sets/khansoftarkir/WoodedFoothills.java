@@ -25,32 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.khansoftarkir;
 
-package mage.constants;
+import java.util.UUID;
 
 /**
  *
  * @author LevelX2
  */
-public enum AbilityWord {
-    BLOODRUSH("Bloodrush"),
-    CONSTELLATION("Constellation"),
-    HELLBENT("Hellbent"),
-    HEROIC("Heroic"),
-    LANDFALL("Landfall"),
-    METALCRAFT("Metalcraft"),
-    GRANDEUR("Grandeur"),
-    RAID("Raid");
+public class WoodedFoothills extends mage.sets.onslaught.WoodedFoothills {
 
-    private final String text;
+    public WoodedFoothills(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 249;
+        this.expansionSetCode = "KTK";
+    }
 
-    AbilityWord(String text) {
-        this.text = text;
+    public WoodedFoothills(final WoodedFoothills card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return text;
+    public WoodedFoothills copy() {
+        return new WoodedFoothills(this);
     }
-
 }

@@ -25,32 +25,27 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.khansoftarkir;
 
-package mage.constants;
+import java.util.UUID;
 
 /**
  *
  * @author LevelX2
  */
-public enum AbilityWord {
-    BLOODRUSH("Bloodrush"),
-    CONSTELLATION("Constellation"),
-    HELLBENT("Hellbent"),
-    HEROIC("Heroic"),
-    LANDFALL("Landfall"),
-    METALCRAFT("Metalcraft"),
-    GRANDEUR("Grandeur"),
-    RAID("Raid");
+public class Swamp2 extends mage.cards.basiclands.Swamp {
 
-    private final String text;
+    public Swamp2(UUID ownerId) {
+        super(ownerId, 259);
+        this.expansionSetCode = "KTK";
+    }
 
-    AbilityWord(String text) {
-        this.text = text;
+    public Swamp2(final Swamp2 card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return text;
+    public Swamp2 copy() {
+        return new Swamp2(this);
     }
-
 }

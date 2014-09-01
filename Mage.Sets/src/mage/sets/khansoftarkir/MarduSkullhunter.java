@@ -25,32 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.khansoftarkir;
 
-package mage.constants;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.abilityword.RaidAbility;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.target.common.TargetOpponent;
 
 /**
  *
  * @author LevelX2
  */
-public enum AbilityWord {
-    BLOODRUSH("Bloodrush"),
-    CONSTELLATION("Constellation"),
-    HELLBENT("Hellbent"),
-    HEROIC("Heroic"),
-    LANDFALL("Landfall"),
-    METALCRAFT("Metalcraft"),
-    GRANDEUR("Grandeur"),
-    RAID("Raid");
+public class MarduSkullhunter extends CardImpl {
 
-    private final String text;
+    public MarduSkullhunter(UUID ownerId) {
+        super(ownerId, 9992, "Mardu Skullhunter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        this.expansionSetCode = "KTK";
+        this.subtype.add("Human");
+        this.subtype.add("Warrior");
 
-    AbilityWord(String text) {
-        this.text = text;
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+
+        // Mardu Skullhunter enters the battlefield tapped.
+        this.addAbility(new EntersBattlefieldTappedAbility());
+        // <em>Raid</em> - When Mardu Skullhunter enters the battlefield, if you attacked with a creature this turn, target opponent discards a card.
+        Ability ability = new RaidAbility(this, new DiscardTargetEffect(1), false);
+        ability.addTarget(new TargetOpponent());
+        this.addAbility(ability);
+
+    }
+
+    public MarduSkullhunter(final MarduSkullhunter card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return text;
+    public MarduSkullhunter copy() {
+        return new MarduSkullhunter(this);
     }
-
 }
