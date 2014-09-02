@@ -44,7 +44,7 @@ import mage.constants.Rarity;
 public class JeskaiElder extends CardImpl {
 
     public JeskaiElder(UUID ownerId) {
-        super(ownerId, 9990, "Jeskai Elder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        super(ownerId, 43, "Jeskai Elder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "KTK";
         this.subtype.add("Human");
         this.subtype.add("Monk");

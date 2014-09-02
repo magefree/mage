@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class MarduHeartPiercer extends CardImpl {
 
     public MarduHeartPiercer(UUID ownerId) {
-        super(ownerId, 9993, "Mardu Heart-Piercer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        super(ownerId, 116, "Mardu Heart-Piercer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "KTK";
         this.subtype.add("Human");
         this.subtype.add("Archer");

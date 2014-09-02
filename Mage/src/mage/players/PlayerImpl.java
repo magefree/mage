@@ -28,9 +28,31 @@
 
 package mage.players;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
-import mage.abilities.*;
+import mage.abilities.Abilities;
+import mage.abilities.AbilitiesImpl;
+import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
+import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.Mode;
+import mage.abilities.PlayLandAbility;
+import mage.abilities.SpecialAction;
+import mage.abilities.SpellAbility;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.common.delayed.AtTheEndOfTurnStepPostDelayedTriggeredAbility;
 import mage.abilities.costs.AdjustingSourceCosts;
@@ -40,7 +62,13 @@ import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.RestrictionUntapNotMoreThanEffect;
 import mage.abilities.effects.common.LoseControlOnOtherPlayersControllerEffect;
-import mage.abilities.keyword.*;
+import mage.abilities.keyword.ConvokeAbility;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.keyword.InfectAbility;
+import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.ProtectionAbility;
+import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.ManaOptions;
 import mage.actions.MageDrawAction;
@@ -49,7 +77,15 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.SplitCard;
 import mage.cards.decks.Deck;
-import mage.constants.*;
+import mage.constants.AsThoughEffectType;
+import mage.constants.CardType;
+import mage.constants.ManaType;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
+import mage.constants.RangeOfInfluence;
+import mage.constants.SpellAbilityType;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
@@ -82,10 +118,6 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetDiscard;
 import mage.watchers.common.BloodthirstWatcher;
 import org.apache.log4j.Logger;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
 
 public abstract class PlayerImpl implements Player, Serializable {
 

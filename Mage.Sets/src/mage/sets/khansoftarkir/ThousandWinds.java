@@ -55,7 +55,7 @@ public class ThousandWinds extends CardImpl {
     }
 
     public ThousandWinds(UUID ownerId) {
-        super(ownerId, 9991, "Thousand Winds", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
+        super(ownerId, 58, "Thousand Winds", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         this.expansionSetCode = "KTK";
         this.subtype.add("Elemental");
 

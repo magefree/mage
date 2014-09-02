@@ -132,6 +132,9 @@ public class PermanentCard extends PermanentImpl {
         Zone fromZone = game.getState().getZone(objectId);
         Player controller = game.getPlayer(controllerId);
         if (controller != null && controller.removeFromBattlefield(this, game)) {
+            if (isFaceDown()) {
+                setFaceDown(false);
+            }
             ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, controllerId, fromZone, toZone, appliedEffects);
             if (!game.replaceEvent(event)) {
                 Player owner = game.getPlayer(ownerId);
@@ -237,6 +240,14 @@ public class PermanentCard extends PermanentImpl {
     @Override
     public void adjustChoices(Ability ability, Game game) {
         card.adjustChoices(ability, game);
+    }
+
+    @Override
+    public void setFaceDown(boolean value) {
+        super.setFaceDown(value);
+        if (card != null) {
+            card.setFaceDown(value);
+        }   
     }
     
 }

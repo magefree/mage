@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
 public class MarduSkullhunter extends CardImpl {
 
     public MarduSkullhunter(UUID ownerId) {
-        super(ownerId, 9992, "Mardu Skullhunter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        super(ownerId, 78, "Mardu Skullhunter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.expansionSetCode = "KTK";
         this.subtype.add("Human");
         this.subtype.add("Warrior");

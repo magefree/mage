@@ -82,15 +82,29 @@ public class NecropolisFiend extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(1,1,new FilterCard("cards")), "Exile X cards from your graveyard"));
+        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(1,1,new FilterCard("cards from your graveyard")), "Exile X cards from your graveyard"));
         this.addAbility(ability);
 
     }
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {
+    public void adjustChoices(Ability ability, Game game) {
         if (ability instanceof SimpleActivatedAbility) {
-            int xValue = ability.getManaCosts().getX();
+            Player controller = game.getPlayer(ability.getControllerId());
+            if (controller != null) {
+                for (VariableCost variableCost: ability.getManaCostsToPay().getVariableCosts()) {
+                    if (variableCost instanceof VariableManaCost) {
+                        ((VariableManaCost)variableCost).setMaxX(controller.getGraveyard().size());
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        if (ability instanceof SimpleActivatedAbility) {
+            int xValue = ability.getManaCostsToPay().getX();
             for(Cost cost: ability.getCosts()) {
                 if (cost instanceof ExileFromGraveCost) {
                     ExileFromGraveCost exileCost = (ExileFromGraveCost) cost;
@@ -101,21 +115,6 @@ public class NecropolisFiend extends CardImpl {
                         }
                     }
 
-                }
-            }
-        }
-    }
-
-
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        if (ability instanceof SimpleActivatedAbility) {
-            Player controller = game.getPlayer(ability.getControllerId());
-            if (controller != null) {
-                for (VariableCost variableCost: ability.getManaCosts().getVariableCosts()) {
-                    if (variableCost instanceof VariableManaCost) {
-                        ((VariableManaCost)variableCost).setMaxX(controller.getGraveyard().size());
-                    }
                 }
             }
         }
