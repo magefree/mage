@@ -6,7 +6,8 @@ package mage.constants;
  */
 public enum TableState {
     WAITING ("Waiting for players"),
-    STARTING ("Waiting to start"),
+    READY_TO_START("Waiting to start"),
+    STARTING ("Starting"),
     DRAFTING ("Drafting"),
     DUELING ("Dueling"),
     SIDEBOARDING ("Sideboarding"),

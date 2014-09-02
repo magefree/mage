@@ -66,6 +66,7 @@ import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import mage.constants.ManaType;
+import mage.constants.TableState;
 
 /**
  *
@@ -346,7 +347,10 @@ public class MageServerImpl implements MageServer {
 //    }
 
     @Override
-    public void startMatch(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
+    public boolean startMatch(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
+        if (!TableManager.getInstance().getController(tableId).changeTableState(TableState.STARTING)) {
+            return false;
+        }
         execute("startMatch", sessionId, new Action() {
             @Override
             public void execute() {
@@ -354,6 +358,7 @@ public class MageServerImpl implements MageServer {
                 TableManager.getInstance().startMatch(userId, roomId, tableId);
             }
         });
+        return true;
     }
 
 //    @Override
@@ -368,7 +373,10 @@ public class MageServerImpl implements MageServer {
 //    }
 
     @Override
-    public void startTournament(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
+    public boolean startTournament(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
+        if (!TableManager.getInstance().getController(tableId).changeTableState(TableState.STARTING)) {
+            return false;
+        }
         execute("startTournament", sessionId, new Action() {
             @Override
             public void execute() {
@@ -376,6 +384,7 @@ public class MageServerImpl implements MageServer {
                 TableManager.getInstance().startTournament(userId, roomId, tableId);
             }
         });
+        return true;
     }
 
     @Override
@@ -477,7 +486,12 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public void leaveTable(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
+    public boolean leaveTable(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
+        TableState tableState = TableManager.getInstance().getController(tableId).getTableState();
+        if (!tableState.equals(TableState.WAITING) && !tableState.equals(TableState.READY_TO_START)) {
+            // table was already started, so player can't leave anymore now
+            return false;
+        }
         execute("leaveTable", sessionId, new Action() {
             @Override
             public void execute() {
@@ -485,6 +499,7 @@ public class MageServerImpl implements MageServer {
                 GamesRoomManager.getInstance().getRoom(roomId).leaveTable(userId, tableId);
             }
         });
+        return true;
     }
 
     @Override

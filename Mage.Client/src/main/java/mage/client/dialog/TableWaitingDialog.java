@@ -82,7 +82,7 @@ public class TableWaitingDialog extends MageDialog {
         try {
             if (table != null) {
                 switch (table.getTableState()) {
-                    case STARTING:
+                    case READY_TO_START:
                         this.btnStart.setEnabled(true);
                         this.btnMoveDown.setEnabled(true);
                         this.btnMoveUp.setEnabled(true);
@@ -245,12 +245,15 @@ public class TableWaitingDialog extends MageDialog {
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         if (!isTournament) {
-            session.startMatch(roomId, tableId);
+            if (session.startMatch(roomId, tableId)) {
+                closeDialog();
+            }
         }
         else {
-            session.startTournament(roomId, tableId);
-        }
-        closeDialog();
+            if (session.startTournament(roomId, tableId)) {
+                closeDialog();
+            }
+        }            
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -258,7 +261,9 @@ public class TableWaitingDialog extends MageDialog {
             if (session.isTableOwner(roomId, tableId)) {
                 session.removeTable(roomId, tableId);
             } else {
-                session.leaveTable(roomId, tableId);
+                if (!session.leaveTable(roomId, tableId)) {
+                    return; // already started, so leave no more possible
+                }
             }
         } catch (Exception e) {
             //swallow exception

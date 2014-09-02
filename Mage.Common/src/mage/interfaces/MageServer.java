@@ -86,7 +86,7 @@ public interface MageServer {
     void updateDeck(String sessionId, UUID tableId, DeckCardLists deckList) throws MageException, GameException;
     boolean watchTable(String sessionId, UUID roomId, UUID tableId) throws MageException;
     boolean watchTournamentTable(String sessionId, UUID tableId) throws MageException;
-    void leaveTable(String sessionId, UUID roomId, UUID tableId) throws MageException;
+    boolean leaveTable(String sessionId, UUID roomId, UUID tableId) throws MageException;
     void swapSeats(String sessionId, UUID roomId, UUID tableId, int seatNum1, int seatNum2) throws MageException;
     void removeTable(String sessionId, UUID roomId, UUID tableId) throws MageException;
     boolean isTableOwner(String sessionId, UUID roomId, UUID tableId) throws MageException;
@@ -106,7 +106,7 @@ public interface MageServer {
     UUID getMainRoomId() throws MageException;
 
     //game methods
-    void startMatch(String sessionId, UUID roomId, UUID tableId) throws MageException;
+    boolean startMatch(String sessionId, UUID roomId, UUID tableId) throws MageException;
     void joinGame(UUID gameId, String sessionId) throws MageException;
     void watchGame(UUID gameId, String sessionId) throws MageException;
     void stopWatching(UUID gameId, String sessionId) throws MageException;
@@ -127,7 +127,7 @@ public interface MageServer {
     void restorePriority(UUID gameId, String sessionId) throws MageException;
 
     //tournament methods
-    void startTournament(String sessionId, UUID roomId, UUID tableId) throws MageException;
+    boolean startTournament(String sessionId, UUID roomId, UUID tableId) throws MageException;
     void joinTournament(UUID draftId, String sessionId) throws MageException;
     void quitTournament(UUID tournamentId, String sessionId) throws MageException;
     TournamentView getTournament(UUID tournamentId) throws MageException;

@@ -125,6 +125,7 @@ public class TableView implements Serializable {
             StringBuilder sb = new StringBuilder("Seats: ").append(table.getTournament().getPlayers().size()).append("/").append(table.getNumberOfSeats());
             switch (table.getState()) {
                 case WAITING:
+                case READY_TO_START:
                 case STARTING:
                     sb.append(" Constr. Time: ").append(table.getTournament().getOptions().getLimitedOptions().getConstructionTime()/60).append(" Min.");
                     break;

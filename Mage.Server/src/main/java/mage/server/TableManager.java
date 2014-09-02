@@ -223,18 +223,7 @@ public class TableManager {
     public void leaveTable(UUID userId, UUID tableId) {
         TableController tableController = controllers.get(tableId);
         if (tableController != null) {
-            // table not started yet and user is the owner, remove the table
-            Table table = getTable(tableId);
-            if (table != null
-                    && isTableOwner(tableId, userId)
-                    && (table.getState().equals(TableState.WAITING)
-                    || table.getState().equals(TableState.STARTING))) {
-                removeTable(tableId);
-
-            } else {
-                logger.debug("TABLE leave - userId: " + userId + "  tableId: " + tableId);
-                tableController.leaveTable(userId);
-            }
+            tableController.leaveTable(userId);
         }
     }
 
@@ -275,9 +264,9 @@ public class TableManager {
     public void startTournament(UUID userId, UUID roomId, UUID tableId) {
         if (controllers.containsKey(tableId)) {
             controllers.get(tableId).startTournament(userId);
-            ChatManager.getInstance().destroyChatSession(controllers.get(tableId).getChatId());     
+                ChatManager.getInstance().destroyChatSession(controllers.get(tableId).getChatId());
+            }
         }
-    }
 
     public void startDraft(UUID tableId, Draft draft) {
         if (controllers.containsKey(tableId)) {

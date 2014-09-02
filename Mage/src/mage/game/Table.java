@@ -172,7 +172,7 @@ public class Table implements Serializable {
         }
         seat.setPlayer(player);
         if (isReady()) {
-            setState(TableState.STARTING);
+            setState(TableState.READY_TO_START);
         }
         return seat.getPlayer().getId();
     }
@@ -208,7 +208,7 @@ public class Table implements Serializable {
             Player player = seats[i].getPlayer();
             if (player != null && player.getId().equals(playerId)) {
                 seats[i].setPlayer(null);
-                if (getState().equals(TableState.STARTING)) {
+                if (getState().equals(TableState.READY_TO_START)) {
                     setState(TableState.WAITING);
                 }
                 break;
@@ -216,14 +216,14 @@ public class Table implements Serializable {
         }
     }
 
-    final public void setState(TableState state) {
+    final public synchronized void setState(TableState state) {
         this.state = state;
         if (isTournament()) {
             getTournament().setTournamentState(state.toString());
         }
     }
 
-    public TableState getState() {
+    public synchronized TableState getState() {
         return state;
     }
 

@@ -219,15 +219,15 @@ class TableListSorter implements Comparator<Table> {
     @Override
     public int compare(Table one, Table two) {
         // priority 1 - Not started yet
-        if (one.getState().equals(TableState.STARTING) || one.getState().equals(TableState.WAITING)) {
-            if (two.getState().equals(TableState.STARTING) || two.getState().equals(TableState.WAITING)) {
+        if (one.getState().equals(TableState.READY_TO_START) || one.getState().equals(TableState.WAITING)) {
+            if (two.getState().equals(TableState.READY_TO_START) || two.getState().equals(TableState.WAITING)) {
                 return two.getCreateTime().compareTo(one.getCreateTime());
             } else {
                 return -1; // one has higher priority
             }
         }
         // priority 2 - Not finished yet -> Sorted by time started
-        if (two.getState().equals(TableState.STARTING) || two.getState().equals(TableState.WAITING)) {
+        if (two.getState().equals(TableState.READY_TO_START) || two.getState().equals(TableState.WAITING)) {
             return 1; // two has higher priority
         } else if (one.getEndTime() == null) {
             if (two.getEndTime() == null) {                    

@@ -28,6 +28,20 @@
 
 package mage.remote;
 
+import java.net.Authenticator;
+import java.net.ConnectException;
+import java.net.MalformedURLException;
+import java.net.PasswordAuthentication;
+import java.net.SocketException;
+import java.net.SocketTimeoutException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.InvalidDeckException;
@@ -45,20 +59,28 @@ import mage.interfaces.MageServer;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
 import mage.utils.CompressUtil;
-import mage.view.*;
+import mage.view.DraftPickView;
+import mage.view.GameTypeView;
+import mage.view.MatchView;
+import mage.view.RoomUsersView;
+import mage.view.TableView;
+import mage.view.TournamentTypeView;
+import mage.view.TournamentView;
+import mage.view.UserDataView;
+import mage.view.UserView;
 import org.apache.log4j.Logger;
-import org.jboss.remoting.*;
+import org.jboss.remoting.CannotConnectException;
+import org.jboss.remoting.Client;
+import org.jboss.remoting.ConnectionListener;
+import org.jboss.remoting.ConnectionValidator;
+import org.jboss.remoting.InvokerLocator;
+import org.jboss.remoting.Remoting;
 import org.jboss.remoting.callback.Callback;
 import org.jboss.remoting.callback.HandleCallbackException;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 import org.jboss.remoting.transport.bisocket.Bisocket;
 import org.jboss.remoting.transport.socket.SocketWrapper;
 import org.jboss.remoting.transporter.TransporterClient;
-
-import java.net.*;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-
 
 /**
  *
@@ -924,8 +946,7 @@ public class SessionImpl implements Session {
     @Override
     public boolean leaveTable(UUID roomId, UUID tableId) {
         try {
-            if (isConnected()) {
-                server.leaveTable(sessionId, roomId, tableId);
+            if (isConnected() && server.leaveTable(sessionId, roomId, tableId)) {
                 return true;
             }
         } catch (MageException ex) {
@@ -940,8 +961,7 @@ public class SessionImpl implements Session {
     public boolean startMatch(UUID roomId, UUID tableId) {
         try {
             if (isConnected()) {
-                server.startMatch(sessionId, roomId, tableId);
-                return true;
+                return (server.startMatch(sessionId, roomId, tableId));
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -952,8 +972,7 @@ public class SessionImpl implements Session {
     @Override
     public boolean startTournament(UUID roomId, UUID tableId) {
         try {
-            if (isConnected()) {
-                server.startTournament(sessionId, roomId, tableId);
+            if (isConnected() && server.startTournament(sessionId, roomId, tableId)) {
                 return true;
             }
         } catch (MageException ex) {

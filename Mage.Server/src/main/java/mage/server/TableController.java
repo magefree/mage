@@ -28,12 +28,20 @@
 
 package mage.server;
 
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.InvalidDeckException;
 import mage.constants.RangeOfInfluence;
 import mage.constants.TableState;
+import mage.game.Game;
 import mage.game.GameException;
 import mage.game.Seat;
 import mage.game.Table;
@@ -41,6 +49,7 @@ import mage.game.draft.Draft;
 import mage.game.draft.DraftPlayer;
 import mage.game.events.Listener;
 import mage.game.events.TableEvent;
+import static mage.game.events.TableEvent.EventType.SIDEBOARD;
 import mage.game.match.Match;
 import mage.game.match.MatchOptions;
 import mage.game.match.MatchPlayer;
@@ -60,18 +69,8 @@ import mage.server.tournament.TournamentManager;
 import mage.server.util.ConfigSettings;
 import mage.server.util.ServerMessagesUtil;
 import mage.server.util.ThreadExecutor;
-import org.apache.log4j.Logger;
-
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
-import mage.game.Game;
 import mage.view.ChatMessage;
-
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -377,45 +376,52 @@ public class TableController {
             logger.error("No tournament object - userId: " + userId + "  table: " + table.getId());
             return;
         }
-        UUID playerId = userPlayerMap.get(userId);        
-        if (playerId != null) {
-            if (table.getState() == TableState.WAITING || table.getState() == TableState.STARTING) {
-                table.leaveNotStartedTable(playerId);
-                if (table.isTournament()) {
-                    tournament.removePlayer(playerId);
-                } else {
-                    match.leave(playerId);
-                }
-                User user = UserManager.getInstance().getUser(userId);
-                if (user != null) {
-                    ChatManager.getInstance().broadcast(chatId, user.getName(), "has left the table", ChatMessage.MessageColor.BLUE, true, ChatMessage.MessageType.STATUS, ChatMessage.SoundToPlay.PlayerLeft);
-                    user.removeTable(playerId);
-                } else {
-                    logger.debug("User not found - userId: " + userId + " tableId:" + table.getId());
-                }
-                userPlayerMap.remove(userId);
-            } else if (!table.getState().equals(TableState.FINISHED)) {
-                if (table.isTournament()) {
-                    logger.debug("Quit tournament sub tables for userId: " + userId);
-                    TableManager.getInstance().userQuitTournamentSubTables(userId);
-                    logger.debug("Quit tournament  Id: " + table.getTournament().getId());
-                    TournamentManager.getInstance().quit(tournament.getId(), userId);
-                } else {
-                    MatchPlayer matchPlayer = match.getPlayer(playerId);
-                    if (matchPlayer != null) {
-                        if (table.getState().equals(TableState.SIDEBOARDING)) {
-                            // submit deck to finish sideboarding and trigger match start / end
-                            matchPlayer.submitDeck(matchPlayer.getDeck());
-                        }
-                        matchPlayer.setQuit(true);
-                    }
-                    match.leave(playerId);
-                }
-            }
+        if (table != null
+                && this.userId.equals(userId)
+                && (table.getState().equals(TableState.WAITING)
+                || table.getState().equals(TableState.READY_TO_START))) {
+            // table not started yet and user is the owner, remove the table
+            TableManager.getInstance().removeTable(table.getId());
         } else {
-            logger.error("No playerId found for userId: " + userId);
+            UUID playerId = userPlayerMap.get(userId);
+            if (playerId != null) {
+                if (table.getState() == TableState.WAITING || table.getState() == TableState.READY_TO_START) {
+                    table.leaveNotStartedTable(playerId);
+                    if (table.isTournament()) {
+                        tournament.removePlayer(playerId);
+                    } else {
+                        match.leave(playerId);
+                    }
+                    User user = UserManager.getInstance().getUser(userId);
+                    if (user != null) {
+                        ChatManager.getInstance().broadcast(chatId, user.getName(), "has left the table", ChatMessage.MessageColor.BLUE, true, ChatMessage.MessageType.STATUS, ChatMessage.SoundToPlay.PlayerLeft);
+                        user.removeTable(playerId);
+                    } else {
+                        logger.debug("User not found - userId: " + userId + " tableId:" + table.getId());
+                    }
+                    userPlayerMap.remove(userId);
+                } else if (!table.getState().equals(TableState.FINISHED)) {
+                    if (table.isTournament()) {
+                        logger.debug("Quit tournament sub tables for userId: " + userId);
+                        TableManager.getInstance().userQuitTournamentSubTables(userId);
+                        logger.debug("Quit tournament  Id: " + table.getTournament().getId());
+                        TournamentManager.getInstance().quit(tournament.getId(), userId);
+                    } else {
+                        MatchPlayer matchPlayer = match.getPlayer(playerId);
+                        if (matchPlayer != null) {
+                            if (table.getState().equals(TableState.SIDEBOARDING)) {
+                                // submit deck to finish sideboarding and trigger match start / end
+                                matchPlayer.submitDeck(matchPlayer.getDeck());
+                            }
+                            matchPlayer.setQuit(true);
+                        }
+                        match.leave(playerId);
+                    }
+                }
+            } else {
+                logger.error("No playerId found for userId: " + userId);
+            }
         }
-
     }
 
 
@@ -463,7 +469,7 @@ public class TableController {
     }
 
     public synchronized void startMatch() {
-        if (table.getState() == TableState.STARTING) {
+        if (table.getState().equals(TableState.STARTING)) {
             try {
                 if (table.isTournamentSubTable()) {
                     logger.info("Tourn. match started id:" + match.getId() + " tournId: " + table.getTournament().getId());
@@ -556,8 +562,8 @@ public class TableController {
     }
 
     public synchronized void startTournament(UUID userId) {
-        try {
-            if (userId.equals(this.userId) && table.getState() == TableState.STARTING) {
+        try {            
+            if (userId.equals(this.userId) && table.getState().equals(TableState.STARTING)) {
                 TournamentManager.getInstance().createTournamentSession(tournament, userPlayerMap, table.getId());
                 for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
                     User user = UserManager.getInstance().getUser(entry.getKey());
@@ -745,7 +751,7 @@ public class TableController {
     }
 
     public void swapSeats(int seatNum1, int seatNum2) {
-        if (table.getState() == TableState.STARTING) {
+        if (table.getState().equals(TableState.READY_TO_START)) {
             if (seatNum1 >= 0 && seatNum2 >= 0 && seatNum1 < table.getSeats().length && seatNum2 < table.getSeats().length) {
                 Player swapPlayer = table.getSeats()[seatNum1].getPlayer();
                 String swapType = table.getSeats()[seatNum1].getPlayerType();
@@ -790,7 +796,7 @@ public class TableController {
                     humanPlayers++;
                     if (!matchPlayer.hasQuit()) {
                         User user = UserManager.getInstance().getUser(userPlayerEntry.getKey());
-                        if (user != null) {
+                        if (user != null && user.isExpired(null)) {
                             validHumanPlayers++;
                         }
                     }
@@ -804,5 +810,28 @@ public class TableController {
     
     void cleanUp() {
         ChatManager.getInstance().destroyChatSession(chatId);
+    }
+
+    public synchronized TableState getTableState() {
+        return getTable().getState();
+    }
+            
+    public synchronized boolean changeTableState(TableState newTableState) {
+        switch (newTableState) {
+            case WAITING:
+                if (getTable().getState().equals(TableState.STARTING)){
+                    // tournament already started
+                    return false;
+                }
+                break;
+            case STARTING:
+                if (!getTable().getState().equals(TableState.READY_TO_START)){
+                    // tournament is not ready, can't start
+                    return false;
+                }
+                break;
+        }
+        getTable().setState(newTableState);
+        return true;
     }
 }
