@@ -296,10 +296,8 @@ public abstract class AbilityImpl implements Ability {
             if (getTargets().size() > 0 && getTargets().chooseTargets(getEffects().get(0).getOutcome(), this.controllerId, this, game) == false) {
                 if (variableManaCost != null || announceString != null) {
                     game.informPlayer(controller, new StringBuilder(sourceObject != null ? sourceObject.getLogName(): "").append(": no valid targets with this value of X").toString());
-                } else {
-                    logger.debug("activate failed - target");
                 }
-                return false;
+                return false; // when activation of ability is canceled during target selection 
             }
         } // end modes
 
@@ -344,8 +342,7 @@ public abstract class AbilityImpl implements Ability {
 
             //20100716 - 601.2f  (noMana is not used here, because mana costs were cleared for this ability before adding additional costs and applying cost modification effects)
             if (!manaCostsToPay.pay(this, game, sourceId, activatorId, false)) {
-                logger.debug("activate failed - mana");
-                return false;
+                return false; // cancel during mana payment
             }
         }
 

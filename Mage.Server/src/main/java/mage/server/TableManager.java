@@ -79,20 +79,6 @@ public class TableManager {
      */
     private static final int EXPIRE_CHECK_PERIOD = 5;
     
-    /**
-     * This parameters defines when table can be counted as expired.
-     * Uses EXPIRE_TIME_UNIT_VALUE as unit of measurement.
-     *
-     * The time pass is calculated as (table_created_at - now) / EXPIRE_TIME_UNIT_VALUE.
-     * Then this values is compared to EXPIRE_TIME.
-     */
-    private static final int EXPIRE_TIME = 3;
-
-    /**
-     * Defines unit of measurement for expiration time of tables created.
-     */
-    private static final int EXPIRE_TIME_UNIT_VALUE = 1000 * 60 * 60; // 1 hour
-
     public static TableManager getInstance() {
         return INSTANCE;
     }
@@ -101,7 +87,12 @@ public class TableManager {
         expireExecutor.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                checkExpired();
+                try {
+                    checkTableHealthState();
+                } catch(Exception ex) {
+                    logger.fatal("Check table health state job error:");
+                    ex.printStackTrace();
+                }
             }
         }, EXPIRE_CHECK_PERIOD, EXPIRE_CHECK_PERIOD, TimeUnit.MINUTES);
     }
@@ -344,7 +335,7 @@ public class TableManager {
             Table table = tables.get(tableId);
             tables.remove(tableId);
             
-            // If table is not finished, the table has to be removed completly (if finished it will be removed in GamesRoomImpl.Update())
+            // If table is not finished, the table has to be removed completly because it's not a normal state (if finished it will be removed in GamesRoomImpl.Update())
             if (!table.getState().equals(TableState.FINISHED)) {
                 GamesRoomManager.getInstance().removeTable(tableId);
             }
@@ -366,10 +357,6 @@ public class TableManager {
         for (ChatSession chatSession: chatSessions) {
             logger.debug(chatSession.getChatId() + " " +formatter.format(chatSession.getCreateTime()) +" " + chatSession.getInfo()+ " "+ chatSession.getClients().values().toString());
         }
-        logger.debug("------- Tables: " + tables.size() + " --------------------------------------------");
-        for (Table table: tables.values()) {
-            logger.debug(table.getId() + " [" + table.getName()+ "] " + formatter.format(table.getStartTime()) +" (" + table.getState().toString() + ")");
-        }
         logger.debug("------- Games: " + GameManager.getInstance().getNumberActiveGames() + " --------------------------------------------");
         for (Entry<UUID, GameController> entry: GameManager.getInstance().getGameController().entrySet()) {
             logger.debug(entry.getKey() + entry.getValue().getPlayerNameList());
@@ -377,26 +364,26 @@ public class TableManager {
         logger.debug("--- Server state END ------------------------------------------");
     }
     
-    private void checkExpired() {
+    private void checkTableHealthState() {
         if (logger.isDebugEnabled()) {
             debugServerState();
         }
-        Date now = new Date();
+        logger.debug("TABLE HEALTH CHECK");
         List<UUID> toRemove = new ArrayList<>();
         for (Table table : tables.values()) {
             if (!table.getState().equals(TableState.FINISHED)) {
-                // remove all not finished tables created more than expire_time ago
-                long diff = (now.getTime() - table.getCreateTime().getTime()) / EXPIRE_TIME_UNIT_VALUE;
-                if (diff >= EXPIRE_TIME) {
-                    logger.warn("Table expired: id = " + table.getId() + ", created_by=" + table.getControllerName() + ". Removing...");
-                    toRemove.add(table.getId());
-                }
-                // remove tables not valid anymore
-                else if (!table.isTournament()) {
-                    TableController tableController = getController(table.getId());
-                    if (!tableController.isMatchTableStillValid()) {
-                        logger.warn("Table with no active human player: id = " + table.getId() + ", created_by=" + table.getControllerName() + ". Removing...");
-                        toRemove.add(table.getId());
+                // remove tables and games not valid anymore
+                logger.debug(table.getId() + " [" + table.getName()+ "] " + formatter.format(table.getStartTime()) +" (" + table.getState().toString() + ") " + (table.isTournament() ? "- Tournament":""));
+                TableController tableController = getController(table.getId());
+                if (tableController != null) {
+                    if (table.isTournament()) {
+                        if (!tableController.isTournamentStillValid()) {
+                            toRemove.add(table.getId());
+                        }
+                    } else {
+                        if (!tableController.isMatchTableStillValid()) {
+                            toRemove.add(table.getId());
+                        }
                     }
                 }
             }
@@ -408,6 +395,7 @@ public class TableManager {
                 logger.error(e);
             }
         }
+        logger.debug("TABLE HEALTH CHECK - END");
 
     }
 }
