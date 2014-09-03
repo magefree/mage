@@ -132,8 +132,8 @@ public class TournamentPanel extends javax.swing.JPanel {
     private void saveDividerLocations() {
         // save panel sizes and divider locations.
         Rectangle rec = MageFrame.getDesktop().getBounds();
-        StringBuilder sb = new StringBuilder(Double.toString(rec.getWidth())).append("x").append(Double.toString(rec.getHeight()));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, sb.toString());
+        String sb = Double.toString(rec.getWidth()) + "x" + Double.toString(rec.getHeight());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, sb);
         PreferencesDialog.saveValue(PreferencesDialog.KEY_TOURNAMENT_DIVIDER_LOCATION_1, Integer.toString(this.jSplitPane1.getDividerLocation()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_TOURNAMENT_DIVIDER_LOCATION_2, Integer.toString(this.jSplitPane2.getDividerLocation()));
     }
@@ -142,9 +142,9 @@ public class TournamentPanel extends javax.swing.JPanel {
         Rectangle rec = MageFrame.getDesktop().getBounds();
         if (rec != null) {
             String size = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, null);
-            StringBuilder sb = new StringBuilder(Double.toString(rec.getWidth())).append("x").append(Double.toString(rec.getHeight()));
+            String sb = Double.toString(rec.getWidth()) + "x" + Double.toString(rec.getHeight());
             // use divider positions only if screen size is the same as it was the time the settings were saved
-            if (size != null && size.equals(sb.toString())) {
+            if (size != null && size.equals(sb)) {
                 String location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TOURNAMENT_DIVIDER_LOCATION_1, null);
                 if (location != null && jSplitPane1 != null) {
                     jSplitPane1.setDividerLocation(Integer.parseInt(location));
@@ -213,11 +213,17 @@ public class TournamentPanel extends javax.swing.JPanel {
         }
         switch (tournament.getTournamentState()) {
             case "Constructing":
-                String constructionTime = Format.getDuration(tournament.getConstructionTime() - (tournament.getServerTime().getTime() - tournament.getStepStartTime().getTime())/1000);
+                String constructionTime = "";
+                if (tournament.getStepStartTime() != null) {
+                    constructionTime = Format.getDuration(tournament.getConstructionTime() - (tournament.getServerTime().getTime() - tournament.getStepStartTime().getTime())/1000);
+                }
                 txtTournamentState.setText(new StringBuilder(tournament.getTournamentState()).append(" (").append(constructionTime).append(")").toString());
                 break;
             case "Dueling":
-                String duelingTime = Format.getDuration((tournament.getServerTime().getTime() - tournament.getStepStartTime().getTime())/1000);
+                String duelingTime = "";
+                if (tournament.getStepStartTime() != null) {
+                    duelingTime = Format.getDuration((tournament.getServerTime().getTime() - tournament.getStepStartTime().getTime())/1000);
+                }
                 txtTournamentState.setText(new StringBuilder(tournament.getTournamentState()).append(" (").append(duelingTime).append(")").toString());
                 break;
             default:

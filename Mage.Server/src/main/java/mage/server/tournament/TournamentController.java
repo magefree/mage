@@ -33,6 +33,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.MageException;
 import mage.cards.decks.Deck;
+import mage.constants.TableState;
 import mage.constants.TournamentPlayerState;
 import mage.game.GameException;
 import mage.game.Table;
@@ -233,10 +234,12 @@ public class TournamentController {
             Table table = tableManager.createTable(GamesRoomManager.getInstance().getMainRoomId(), matchOptions);
             table.setTournamentSubTable(true);
             table.setTournament(tournament);
+            table.setState(TableState.WAITING);
             TournamentPlayer player1 = pair.getPlayer1();
             TournamentPlayer player2 = pair.getPlayer2();
             tableManager.addPlayer(getPlayerUserId(player1.getPlayer().getId()), table.getId(), player1.getPlayer(), player1.getPlayerType(), player1.getDeck());
             tableManager.addPlayer(getPlayerUserId(player2.getPlayer().getId()), table.getId(), player2.getPlayer(), player2.getPlayerType(), player2.getDeck());
+            table.setState(TableState.STARTING);
             tableManager.startTournamentSubMatch(null, table.getId());
             pair.setMatch(tableManager.getMatch(table.getId()));
             pair.setTableId(table.getId());
@@ -256,7 +259,9 @@ public class TournamentController {
     }
 
     private void initTournament() {
-        TableManager.getInstance().initTournament(tableId);
+        if (!TableManager.getInstance().getTable(tableId).getState().equals(TableState.DUELING)) {
+            TableManager.getInstance().initTournament(tableId);
+        }
     }
 
     private void construct(UUID playerId, int timeout) throws MageException {
