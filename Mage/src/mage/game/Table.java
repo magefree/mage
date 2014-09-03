@@ -216,14 +216,14 @@ public class Table implements Serializable {
         }
     }
 
-    final public synchronized void setState(TableState state) {
+    final public void setState(TableState state) {
         this.state = state;
         if (isTournament()) {
             getTournament().setTournamentState(state.toString());
         }
     }
 
-    public synchronized TableState getState() {
+    public TableState getState() {
         return state;
     }
 

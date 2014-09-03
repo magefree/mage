@@ -728,7 +728,14 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     @Override
     public boolean priority(Game game) {
+        game.resumeTimer(playerId);
         log.debug("priority");
+        boolean result = priorityPlay(game);
+        game.pauseTimer(playerId);
+        return result;
+    }
+
+    private boolean priorityPlay(Game game) {
         UUID opponentId = game.getOpponents(playerId).iterator().next();
         if (game.getActivePlayerId().equals(playerId)) {
             if (game.isMainPhase() && game.getStack().isEmpty()) {
@@ -815,10 +822,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     break;
             }
         }
-        pass(game);
+        pass(game); 
         return true;
     }
-
 
     @Override
     public boolean activateAbility(ActivatedAbility ability, Game game) {

@@ -93,9 +93,16 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
 
     @Override
     public boolean priority(Game game) {
+        game.resumeTimer(playerId);
+        boolean result = priorityPlay(game);
+        game.pauseTimer(playerId);
+        return result;
+    }
+
+    private boolean priorityPlay(Game game) {
         if (lastLoggedTurn != game.getTurnNum()) {
             lastLoggedTurn = game.getTurnNum();
-            logger.info(new StringBuilder("======================= ").append("Turn: ").append(game.getTurnNum()).append(" [").append(game.getPlayer(game.getActivePlayerId()).getName()).append("] =========================================").toString());
+            logger.info("======================= Turn: "+ game.getTurnNum() + " ["+ game.getPlayer(game.getActivePlayerId()).getName() +"] =========================================");
         }
         logState(game);
         logger.debug("Priority -- Step: " + (game.getTurn().getStepType() + "                       ").substring(0,25) + " ActivePlayer-" + game.getPlayer(game.getActivePlayerId()).getName() + " PriorityPlayer-" + name);

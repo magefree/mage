@@ -98,7 +98,7 @@ public class GameController implements GameCallback {
         this.choosingPlayerId = choosingPlayerId;
         for (Player player: game.getPlayers().values()) {
             if (!player.isHuman()) {
-                useTimeout = false;
+                useTimeout = false; // no timeout because of beeing idle if playing against AI
                 break;
             }
         }
@@ -421,14 +421,19 @@ public class GameController implements GameCallback {
     }
 
     public void kill(UUID userId) {
-        if (userPlayerMap.containsKey(userId)) {
-            gameSessions.get(userPlayerMap.get(userId)).setKilled();
-            gameSessions.remove(userPlayerMap.get(userId));
-            leave(userId);
-            userPlayerMap.remove(userId);
+        UUID playerId = userPlayerMap.get(userId);
+        if (playerId != null) {
+            GameSession gameSession = gameSessions.get(playerId);
+            if (gameSession != null) {
+                gameSession.setKilled();
+                gameSessions.remove(playerId);
+                leave(userId);
+                userPlayerMap.remove(userId);
+            }
         }
-        if (watchers.containsKey(userId)) {
-            watchers.get(userId).setKilled();
+        GameWatcher gameWatcher = watchers.get(userId);
+        if (gameWatcher != null) {
+            gameWatcher.setKilled();
             watchers.remove(userId);
         }
     }
