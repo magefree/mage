@@ -125,13 +125,13 @@ class IbHalfheartGoblinTacticianEffect extends OneShotEffect {
             // it can't be sacrificed, nothing happens
             return true;
         }
-        if (blockedCreature.sacrifice(source.getSourceId(), game)) {
-            Set<UUID> blockingCreatures = new HashSet<>();
-            for (CombatGroup combatGroup : game.getCombat().getGroups()) {
-                if (combatGroup.getAttackers().contains(blockedCreature.getId())) {
-                    blockingCreatures.addAll(combatGroup.getBlockers());
-                }
+        Set<UUID> blockingCreatures = new HashSet<>();
+        for (CombatGroup combatGroup : game.getCombat().getGroups()) {
+            if (combatGroup.getAttackers().contains(blockedCreature.getId())) {
+                blockingCreatures.addAll(combatGroup.getBlockers());
             }
+        }
+        if (blockedCreature.sacrifice(source.getSourceId(), game)) {
             for (UUID blockerId : blockingCreatures) {
                 Permanent blockingCreature = game.getPermanent(blockerId);
                 if (blockingCreature != null) {
