@@ -251,7 +251,7 @@ public class User {
 
     public boolean isExpired(Date expired) {
         if (lastActivity.before(expired)) {
-            logger.debug(new StringBuilder(userName).append(" is expired!"));
+            logger.debug(userName + " is expired!");
             return true;
         }
         logger.trace(new StringBuilder("isExpired: User ").append(userName).append(" lastActivity: ").append(lastActivity).append(" expired: ").append(expired).toString());
