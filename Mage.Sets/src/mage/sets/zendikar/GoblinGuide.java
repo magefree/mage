@@ -92,7 +92,7 @@ class GoblinGuideEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID defenderId = game.getCombat().getDefenderId(source.getSourceId());
+        UUID defenderId = game.getCombat().getDefendingPlayerId(source.getSourceId(), game);
         Player defender = game.getPlayer(defenderId);
         if (defender != null) {
             Cards cards = new CardsImpl();
@@ -101,7 +101,6 @@ class GoblinGuideEffect extends OneShotEffect {
                 cards.add(card);
                 defender.revealCards("Goblin Guide", cards, game);
                 if (card.getCardType().contains(CardType.LAND)) {
-                    defender.getLibrary().removeFromTop(game);
                     defender.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                 }
             }
