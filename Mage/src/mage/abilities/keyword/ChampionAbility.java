@@ -29,9 +29,6 @@ package mage.abilities.keyword;
 
 import java.util.ArrayList;
 import java.util.UUID;
-
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
@@ -41,14 +38,17 @@ import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.Card;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.constants.Outcome;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.players.Player;
+import mage.target.common.TargetControlledPermanent;
 
 /*
  * @author LevelX2
@@ -96,13 +96,13 @@ public class ChampionAbility extends StaticAbility {
             i++;
         }
         this.objectDescription = sb.toString();
-        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(objectDescription);
+        FilterControlledPermanent filter = new FilterControlledPermanent(objectDescription);
         filter.add(Predicates.or(subtypesPredicates));
         filter.add(new AnotherPredicate());
 
         // When this permanent enters the battlefield, sacrifice it unless you exile another [object] you control.
         Ability ability1 = new EntersBattlefieldTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new ChampionExileCost(filter, new StringBuilder(card.getName()).append(" championed creatures").toString())),false);
+                new SacrificeSourceUnlessPaysEffect(new ChampionExileCost(filter, new StringBuilder(card.getName()).append(" championed permanents").toString())),false);
         ability1.setRuleVisible(false);
         card.addAbility(ability1);
 
@@ -137,8 +137,8 @@ class ChampionExileCost extends CostImpl {
 
     private String exileZone = null;
 
-    public ChampionExileCost(FilterControlledCreaturePermanent filter, String exileZone) {
-        this.addTarget(new TargetControlledCreaturePermanent(1,1,filter, true));
+    public ChampionExileCost(FilterControlledPermanent filter, String exileZone) {
+        this.addTarget(new TargetControlledPermanent(1,1,filter, true));
         this.text = "exile " + filter.getMessage() + " you control";
         this.exileZone = exileZone;
     }
@@ -150,13 +150,16 @@ class ChampionExileCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        if (targets.choose(Outcome.Exile, controllerId, sourceId, game)) {
-            for (UUID targetId: targets.get(0).getTargets()) {
-                Permanent permanent = game.getPermanent(targetId);
-                if (permanent == null) {
-                    return false;
+        Player controller = game.getPlayer(controllerId);
+        if (controller != null) {
+            if (targets.choose(Outcome.Exile, controllerId, sourceId, game)) {
+                for (UUID targetId: targets.get(0).getTargets()) {
+                    Permanent permanent = game.getPermanent(targetId);
+                    if (permanent == null) {
+                        return false;
+                    }
+                    paid |= controller.moveCardToExileWithInfo(permanent, sourceId, exileZone, sourceId, game, Zone.BATTLEFIELD);
                 }
-                paid |= permanent.moveToExile(sourceId, exileZone, sourceId, game);
             }
         }
         return paid;
