@@ -350,10 +350,13 @@ public abstract class MatchImpl implements Match {
         sb.append("\nGame has started\n");
         return sb.toString();
     }
-    
+
     @Override
     public Date getStartTime() {
-        return new Date(startTime.getTime());
+        if (startTime != null) {
+            return new Date(startTime.getTime());
+        }
+        return null;
     }
 
     @Override

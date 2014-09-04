@@ -67,7 +67,9 @@ public class TableView implements Serializable {
         this.tableName = table.getName();
         this.controllerName = table.getControllerName();
         this.tableState = table.getState();
-        if (table.getState().equals(TableState.WAITING) || table.getState().equals(TableState.WAITING)) {
+        if (table.getState().equals(TableState.WAITING) || 
+                table.getState().equals(TableState.READY_TO_START) ||
+                table.getState().equals(TableState.STARTING) ) {
             this.createTime = table.getCreateTime();
         } else {
             if (table.isTournament()) {
