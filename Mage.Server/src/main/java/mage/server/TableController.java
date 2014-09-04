@@ -188,6 +188,10 @@ public class TableController {
         }
     }
 
+    public boolean isPlayer(UUID userId) {
+        return userPlayerMap.containsKey(userId);
+    }
+
     public synchronized boolean replaceDraftPlayer(Player oldPlayer, String name, String playerType, int skill) {
         Player newPlayer = createPlayer(name, playerType, skill);
         if (newPlayer == null || table.getState() != TableState.DRAFTING) {
@@ -404,7 +408,7 @@ public class TableController {
                 } else if (!table.getState().equals(TableState.FINISHED)) {
                     if (table.isTournament()) {
                         logger.debug("Quit tournament sub tables for userId: " + userId);
-                        TableManager.getInstance().userQuitTournamentSubTables(userId);
+                        TableManager.getInstance().userQuitTournamentSubTables(tournament.getId(), userId);
                         logger.debug("Quit tournament  Id: " + table.getTournament().getId());
                         TournamentManager.getInstance().quit(tournament.getId(), userId);
                     } else {

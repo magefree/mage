@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.game.Game;
 import mage.game.GameState;
+import mage.game.Table;
 import mage.game.match.Match;
 import mage.game.match.MatchPlayer;
 import mage.players.Player;
@@ -57,7 +58,7 @@ public class GameEndView implements Serializable {
     private int loses;
     private final int winsNeeded;
 
-    public GameEndView(GameState state, Game game, UUID playerId, Match match) {
+    public GameEndView(GameState state, Game game, UUID playerId, Table table) {
         startTime = game.getStartTime();
         endTime = game.getEndTime();
 
@@ -85,8 +86,9 @@ public class GameEndView implements Serializable {
                 gameInfo = new StringBuilder("Game is a draw on Turn ").append(game.getTurnNum()).append(".").toString();
             }
         }
-        matchView = new MatchView(match);
+        matchView = new MatchView(table);
 
+        Match match = table.getMatch();
         MatchPlayer matchWinner = null;
         winsNeeded = match.getOptions().getWinsNeeded();
         StringBuilder additonalText = new StringBuilder();

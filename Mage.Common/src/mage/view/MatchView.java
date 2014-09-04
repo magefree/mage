@@ -45,24 +45,33 @@ import mage.game.tournament.TournamentPlayer;
 public class MatchView implements Serializable {
 
     private final UUID tableId;
-    private final UUID matchId;
-    private final String matchName;
+    private UUID matchId;
+    private String matchName;
     private String gameType;
-    private final String deckType;
+    private String deckType;
 
     private final List<UUID> games = new ArrayList<>();
-    private final String result;
-    private final String players;
+    private String result;
+    private String players;
     
-    private final Date startTime;
-    private final Date endTime;
-    private final boolean replayAvailable;
+    private Date startTime;
+    private Date endTime;
+    private boolean replayAvailable;
     private final boolean isTournament;
 
+    public MatchView(Table table) {
+        this.tableId = table.getId();
+        this.isTournament = table.isTournament();
+        if (table.isTournament()) {
+            initTournamentTable(table);
+        } else {
+            initMatchTable(table);
+        }
+    }
+
     // used for matches
-    public MatchView(Match match) {
-        this.tableId = null;
-        this.isTournament = false;
+    private void initMatchTable(Table table) {
+        Match match = table.getMatch();
         this.matchId = match.getId();
         this.matchName = match.getName();
         this.gameType = match.getOptions().getGameType();
@@ -102,9 +111,7 @@ public class MatchView implements Serializable {
     }
 
     // used for tournaments
-    public MatchView(Table table) {
-        this.tableId = table.getId();
-        this.isTournament = true;
+    private void initTournamentTable(Table table) {
         this.matchId = table.getTournament().getId();
         this.matchName = table.getName();
         this.gameType = table.getGameType();

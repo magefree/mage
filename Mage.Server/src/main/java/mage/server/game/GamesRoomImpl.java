@@ -103,7 +103,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
                  if (table.isTournament()) {
                     matchList.add(new MatchView(table));
                 } else {
-                    matchList.add(new MatchView(table.getMatch()));
+                    matchList.add(new MatchView(table));
                 }
             } else {
                 // more since 50 matches finished since this match so remove it

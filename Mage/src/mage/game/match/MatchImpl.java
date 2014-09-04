@@ -63,7 +63,7 @@ public abstract class MatchImpl implements Match {
 
     public MatchImpl(MatchOptions options) {
         this.options = options;
-        startTime = new Date();
+        startTime = null;
         replayAvailable = false;
         draws = 0;
     }
@@ -93,7 +93,7 @@ public abstract class MatchImpl implements Match {
     public boolean leave(UUID playerId) {
         MatchPlayer mPlayer = getPlayer(playerId);
         if (mPlayer != null) {
-            if (startedGames == 0) {
+            if (!hasStarted()) {
                 return players.remove(mPlayer);
             }
             mPlayer.setQuit(true);
@@ -129,7 +129,12 @@ public abstract class MatchImpl implements Match {
     @Override
     public boolean hasEnded() {
         return endTime != null;
-    };
+    }
+
+    @Override
+    public boolean hasStarted() {
+        return startTime != null;
+    }
 
     @Override
     public boolean checkIfMatchEnds() {

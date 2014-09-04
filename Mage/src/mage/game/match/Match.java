@@ -50,6 +50,7 @@ public interface Match {
     UUID getId();
     String getName();
     boolean hasEnded();
+    boolean hasStarted();
     boolean checkIfMatchEnds();
     List<MatchPlayer> getPlayers();
     MatchPlayer getPlayer(UUID playerId);

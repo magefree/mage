@@ -536,7 +536,7 @@ public class GameController implements GameCallback {
         if (table != null) {
             if (table.getMatch() != null) {
                 for (final GameSession gameSession: gameSessions.values()) {
-                    gameSession.endGameInfo(table.getMatch());
+                    gameSession.endGameInfo(table);
                 }
             }
         }

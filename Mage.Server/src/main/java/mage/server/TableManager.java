@@ -181,10 +181,12 @@ public class TableManager {
     public void userQuitTournamentSubTables(UUID tournamentId, UUID userId) {
         for (TableController controller: controllers.values()) {
             if (controller.getTable().isTournamentSubTable() && controller.getTable().getTournament().getId().equals(tournamentId)) {
-                Match match = controller.getTable().getMatch();
-                if (match != null) {
-                    if (match.getGame() != null) {
-                        GameManager.getInstance().quitMatch(match.getGame().getId(), userId);
+                if (controller.isPlayer(userId)) {
+                    Match match = controller.getTable().getMatch();
+                    if (match != null) {
+                        if (!match.hasEnded() && match.getGame() != null) {
+                            GameManager.getInstance().quitMatch(match.getGame().getId(), userId);
+                        }
                     }
                 }
             }

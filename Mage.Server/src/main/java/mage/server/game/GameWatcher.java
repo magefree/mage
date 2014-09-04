@@ -30,7 +30,7 @@ package mage.server.game;
 
 import java.util.UUID;
 import mage.game.Game;
-import mage.game.match.Match;
+import mage.game.Table;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.User;
 import mage.server.UserManager;
@@ -123,8 +123,8 @@ public class GameWatcher {
         return new GameView(game.getState(), game, null);
     }
     
-    public GameEndView getGameEndView(UUID playerId, Match match) {
-        return new GameEndView(game.getState(), game, playerId, match);
+    public GameEndView getGameEndView(UUID playerId, Table table) {
+        return new GameEndView(game.getState(), game, playerId, table);
     }
 
     public boolean isPlayer() {

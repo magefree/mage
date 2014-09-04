@@ -48,6 +48,7 @@ import java.util.Map.Entry;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import mage.game.Table;
 
 /**
  *
@@ -161,11 +162,11 @@ public class GameSession extends GameWatcher {
         }
     }
 
-    public void endGameInfo(Match match) {
+    public void endGameInfo(Table table) {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-                user.fireCallback(new ClientCallback("endGameInfo", game.getId(), getGameEndView(playerId, match)));
+                user.fireCallback(new ClientCallback("endGameInfo", game.getId(), getGameEndView(playerId, table)));
             }
         }
     }
