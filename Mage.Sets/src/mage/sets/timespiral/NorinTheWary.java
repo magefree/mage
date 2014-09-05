@@ -133,9 +133,9 @@ class NorinTheWaryRemovingEffect extends OneShotEffect {
                     delayedAbility.setSourceId(source.getSourceId());
                     delayedAbility.setControllerId(source.getControllerId());
                     game.addDelayedTriggeredAbility(delayedAbility);
-                    return true;
                 }
-            }            
+            }
+            return true;
         }
         return false;
     }

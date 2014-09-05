@@ -93,7 +93,7 @@ class SkymarkRocAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls with toughness 2 or less");
-            UUID defenderId = game.getCombat().getDefenderId(sourceId);
+            UUID defenderId = game.getCombat().getDefendingPlayerId(sourceId, game);
             filter.add(new ControllerIdPredicate(defenderId));
             filter.add(new ToughnessPredicate(Filter.ComparisonType.LessThan, 3));
 
