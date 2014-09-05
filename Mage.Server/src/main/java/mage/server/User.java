@@ -367,10 +367,6 @@ public class User {
     public String getGameInfo() {
         StringBuilder sb = new StringBuilder();
 
-        String disconnectInfo = "";
-        if (!isConnected()) {
-            disconnectInfo = new StringBuilder(" (discon. ").append(getDisconnectDuration()).append(")").toString();
-        }
         int draft = 0, match = 0, sideboard = 0, tournament = 0, construct = 0;
 
         for (Map.Entry<UUID, Table> tableEntry : tables.entrySet()) {
@@ -395,7 +391,7 @@ public class User {
                                     }
 
                                     if (!isConnected()) {
-                                        tournamentPlayer.setDisconnectInfo(disconnectInfo);
+                                        tournamentPlayer.setDisconnectInfo(" (discon. "+ getDisconnectDuration() + ")");
                                     } else {
                                         tournamentPlayer.setDisconnectInfo("");
                                     }
@@ -438,7 +434,6 @@ public class User {
         if (watchedGames.size() > 0) {
             sb.append("Watch: ").append(watchedGames.size()).append(" ");
         }
-        sb.append(disconnectInfo);
         return sb.toString();
     }
 
@@ -463,7 +458,11 @@ public class User {
     }
 
     public String getPingInfo() {
-        return pingInfo;
+        if (isConnected()) {
+            return pingInfo;
+        } else {
+            return " (discon. "+ getDisconnectDuration() + ")";
+        }
     }
     
 }
