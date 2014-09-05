@@ -121,7 +121,7 @@ import org.apache.log4j.Logger;
 
 public abstract class PlayerImpl implements Player, Serializable {
 
-    private static final transient Logger log = Logger.getLogger(PlayerImpl.class);
+    private static final transient Logger logger = Logger.getLogger(PlayerImpl.class);
 
     private static Random rnd = new Random();
 
@@ -957,7 +957,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean triggerAbility(TriggeredAbility source, Game game) {
         if (source == null) {
-            log.warn("Null source in triggerAbility method");
+            logger.warn("Null source in triggerAbility method");
             throw new IllegalArgumentException("source TriggeredAbility  must not be null");
         }
         //20091005 - 603.3c, 603.3d
@@ -1576,14 +1576,15 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void quit(Game game) {
-        game.informPlayers(new StringBuilder(getName()).append(" quits the match.").toString());
+        logger.debug(getName() + " quits the match.");
+        game.informPlayers(getName() + " quits the match.");
         quit = true;
         this.concede(game);
     }
 
     @Override
     public void timerTimeout(Game game) {
-        game.informPlayers(new StringBuilder(getName()).append(" has run out of time. Loosing the Match.").toString());
+        game.informPlayers(getName() + " has run out of time. Loosing the Match.");
         quit = true;
         timerTimeout = true;
         this.concede(game);
@@ -1599,11 +1600,11 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void concede(Game game) {        
-        log.debug(this.getName() + (" concedes gameId:" +game.getId()));
+        logger.debug(this.getName() + (" concedes gameId:" +game.getId()));
         game.gameOver(playerId);
-        log.debug("Before lost " + this.getName());
+        logger.debug("Before lost " + this.getName());
         lost(game);
-        log.debug("After lost " + this.getName());
+        logger.debug("After lost " + this.getName());
         this.left = true;
     }
 
@@ -1612,21 +1613,21 @@ public abstract class PlayerImpl implements Player, Serializable {
         passedTurn = true;
         passedAllTurns = true;
         this.skip();
-        log.trace("Passed priority for turns");
+        logger.trace("Passed priority for turns");
     }
 
     @Override
     public void passTurnPriority(Game game) {
         passedTurn = true;
         this.skip();
-        log.trace("Passed priority for turn");
+        logger.trace("Passed priority for turn");
     }
 
     @Override
     public void restorePriority(Game game) {
         passedAllTurns = false;
         passedTurn = false;
-        log.trace("Restore priority");
+        logger.trace("Restore priority");
     }
 
     @Override
@@ -1648,7 +1649,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void lost(Game game) {
-        log.debug(this.getName() + " has lost gameId: " + game.getId());
+        logger.debug(this.getName() + " has lost gameId: " + game.getId());
         if (canLose(game)) {            
             //20100423 - 603.9
             if (!this.wins) {
@@ -1656,11 +1657,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST, null, null, playerId));
                 game.informPlayers(new StringBuilder(this.getName()).append(" has lost the game.").toString());
             } else {
-                log.debug(this.getName() + " has already won - stop lost");
+                logger.debug(this.getName() + " has already won - stop lost");
             }
             // for draw - first all players that have lost have to be set to lost
             if (!hasLeft()) {
-                log.debug("Game over playerId: " + playerId);
+                logger.debug("Game over playerId: " + playerId);
                 game.gameOver(playerId);
             }
         }
@@ -1673,7 +1674,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void won(Game game) {
-        log.debug("player won -> start: " + this.getName());
+        logger.debug("player won -> start: " + this.getName());
         if (!game.replaceEvent(new GameEvent(GameEvent.EventType.WINS, null, null, playerId))) {
             if (!this.loses) {
                 //20130501 - 800.7, 801.16
@@ -1681,7 +1682,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 for (UUID opponentId: game.getOpponents(playerId)) {
                     Player opponent = game.getPlayer(opponentId);
                     if (opponent != null && !opponent.hasLost()) {
-                        log.debug("player won -> calling opponent lost: " + this.getName() + "  opponent: " + opponent.getName());
+                        logger.debug("player won -> calling opponent lost: " + this.getName() + "  opponent: " + opponent.getName());
                         opponent.lost(game);
                     }
                 }
@@ -1694,13 +1695,13 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
                 if (opponentsAlive == 0 && !hasWon()) {
-                    log.debug("player won -> No more oppononets alive game won: " + this.getName());
+                    logger.debug("player won -> No more oppononets alive game won: " + this.getName());
                     game.informPlayers(new StringBuilder(this.getName()).append(" has won the game").toString());
                     this.wins = true;
                     game.end();
                 }
             } else {
-                log.debug("player won -> but already lost before: " + this.getName());
+                logger.debug("player won -> but already lost before: " + this.getName());
             }
         }
     }

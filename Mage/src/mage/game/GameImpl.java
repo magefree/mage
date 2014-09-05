@@ -1086,7 +1086,7 @@ public abstract class GameImpl implements Game, Serializable {
                         }
                     }
                     catch (Exception ex) {
-                        logger.fatal("Game exception ", ex);
+                        logger.fatal("Game exception gameId: " + getId(), ex);
                         ex.printStackTrace();
                         this.fireErrorEvent("Game exception occurred: ", ex);
                         restoreState(bookmark);

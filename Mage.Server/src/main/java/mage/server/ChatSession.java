@@ -159,7 +159,7 @@ public class ChatSession {
                     user.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color, messageType, soundToPlay)));
                 }
                 else {
-                    logger.debug("user not found but chat still exists - userId: " + userId +"  chatId: " +chatId);
+                    logger.error("User not found but connected to chat - userId: " + userId + "  chatId: " + chatId);
                 }
             }
         }

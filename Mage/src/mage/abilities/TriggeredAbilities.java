@@ -59,7 +59,8 @@ public class TriggeredAbilities extends HashMap<String, TriggeredAbility> {
     }
 
     public void checkTriggers(GameEvent event, Game game) {
-        for (TriggeredAbility ability: this.values()) {
+        for (Iterator<TriggeredAbility> it = this.values().iterator(); it.hasNext();) {
+            TriggeredAbility ability = it.next();
             // for effects like when leaves battlefield use ShortLKI to check if permanent was in the correct zone before (e.g. Oblivion Ring)
             if (ability.isInUseableZone(game, null, event.getType().equals(GameEvent.EventType.ZONE_CHANGE))) {
                 if (!game.getContinuousEffects().preventedByRuleModification(event, ability, game, false)) {
