@@ -67,7 +67,6 @@ public class KhalniGem extends CardImpl {
         this.addAbility(etbAbility);
         // {tap}: Add two mana of any one color to your mana pool.
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(2), new TapSourceCost());
-        ability.addChoice(new ChoiceColor());
         this.addAbility(ability);
     }
 

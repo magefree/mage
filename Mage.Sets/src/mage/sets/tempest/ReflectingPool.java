@@ -96,7 +96,7 @@ class ReflectingPoolEffect extends ManaEffect {
                 types.add(ability.getNetMana(game));
             }
         }
-        Choice choice = new ChoiceImpl(true);
+        Choice choice = new ChoiceImpl(false);
         choice.setMessage("Pick a mana color");
         if (types.getBlack() > 0) {
             choice.getChoices().add("Black");

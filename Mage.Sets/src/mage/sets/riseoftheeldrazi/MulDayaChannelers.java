@@ -79,7 +79,6 @@ public class MulDayaChannelers extends CardImpl {
 
         // As long as the top card of your library is a land card, Mul Daya Channelers has "T: Add two mana of any one color to your mana pool."
         SimpleManaAbility manaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(2), new TapSourceCost());
-        manaAbility.addChoice(new ChoiceColor());
         effect = new ConditionalContinousEffect(new GainAbilitySourceEffect(manaAbility, Duration.WhileOnBattlefield),
                 new TopLibraryCardTypeCondition(TopLibraryCardTypeCondition.CheckType.LAND),
                 "As long as the top card of your library is a land card, Mul Daya Channelers has \"{T}: Add two mana of any one color to your mana pool.\"");

@@ -52,9 +52,7 @@ public class LotusCobra extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        LandfallAbility ability = new LandfallAbility(new AddManaOfAnyColorEffect(), false);
-        ability.addChoice(new ChoiceColor());
-        this.addAbility(ability);
+        this.addAbility(new LandfallAbility(new AddManaOfAnyColorEffect(), false));
     }
 
     public LotusCobra(final LotusCobra card) {

@@ -853,13 +853,12 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATE_ABILITY, ability.getId(), ability.getSourceId(), playerId))) {
             int bookmark = game.bookmarkState();
             if (ability.activate(game, false)) {
-                ability.resolve(game);
-                // #169
-                if (storedBookmark == -1 || storedBookmark > bookmark) { // e.g. userfull for undo Nykthos, Shrine to Nyx
-                    setStoredBookmark(bookmark);
+                if (ability.resolve(game)) {
+                    if (storedBookmark == -1 || storedBookmark > bookmark) { // e.g. usefull for undo Nykthos, Shrine to Nyx
+                        setStoredBookmark(bookmark);
+                    }
+                    return true;
                 }
-                //game.removeBookmark(bookmark);
-                return true;
             }
             game.restoreState(bookmark);
         }

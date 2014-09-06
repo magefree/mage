@@ -83,7 +83,6 @@ class FertileGroundTriggeredAbility extends TriggeredManaAbility {
    
     public FertileGroundTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect());
-        this.addChoice(new ChoiceColor());
     }
 
     public FertileGroundTriggeredAbility(FertileGroundTriggeredAbility ability) {

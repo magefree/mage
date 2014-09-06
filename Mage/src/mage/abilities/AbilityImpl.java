@@ -155,14 +155,16 @@ public abstract class AbilityImpl implements Ability {
                         boolean effectResult = effect.apply(game, this);
                         result &= effectResult;
                         if (logger.isDebugEnabled()) {
-                            if (!effectResult) {
-                                if (this.getSourceId() != null) {
-                                    MageObject mageObject = game.getObject(this.getSourceId());
-                                    if (mageObject != null) {
-                                        logger.debug("AbilityImpl.resolve: object: " + mageObject.getName());
+                            if (!this.getAbilityType().equals(AbilityType.MANA)) {
+                                if (!effectResult) {
+                                    if (this.getSourceId() != null) {
+                                        MageObject mageObject = game.getObject(this.getSourceId());
+                                        if (mageObject != null) {
+                                            logger.debug("AbilityImpl.resolve: object: " + mageObject.getName());
+                                        }
                                     }
+                                    logger.debug("AbilityImpl.resolve: effect returned false -" + effect.getText(this.getModes().getMode()));
                                 }
-                                logger.debug("AbilityImpl.resolve: effect returned false -" + effect.getText(this.getModes().getMode()));
                             }
                         }
                     }

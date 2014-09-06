@@ -72,8 +72,6 @@ class LionsEyeDiamondAbility extends ManaAbility {
     public LionsEyeDiamondAbility() {
         super(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new SacrificeSourceCost());
         this.addCost(new DiscardHandCost());
-        this.addChoice(new ChoiceColor());
-        this.timing = TimingRule.INSTANT;
     }
 
     public LionsEyeDiamondAbility(Zone zone, Mana mana, Cost cost) {

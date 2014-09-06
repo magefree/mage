@@ -73,7 +73,6 @@ public class ManaBloom extends CardImpl {
 
         // Remove a charge counter from Mana Bloom: Add one mana of any color to your mana pool. Activate this ability only once each turn.
         Ability ability = new ActivateOncePerTurnManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
-        ability.addChoice(new ChoiceColor());
         this.addAbility(ability);
 
         // At the beginning of your upkeep, if Mana Bloom has no charge counters on it, return it to its owner's hand.

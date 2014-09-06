@@ -48,8 +48,6 @@ public class GoldToken extends Token {
         this.setOriginalExpansionSetCode("BNG");
         cardType.add(CardType.ARTIFACT);
 
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new SacrificeSourceCost());
-        ability.addChoice(new ChoiceColor());
-        this.addAbility(ability);
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new SacrificeSourceCost()));
     }
 }
