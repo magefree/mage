@@ -28,19 +28,32 @@
 
 package mage.abilities.effects;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.MageSingleton;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.constants.*;
+import mage.constants.AbilityType;
+import mage.constants.Duration;
+import mage.constants.EffectType;
+import mage.constants.Layer;
+import static mage.constants.Layer.AbilityAddingRemovingEffects_6;
+import static mage.constants.Layer.ColorChangingEffects_5;
+import static mage.constants.Layer.ControlChangingEffects_2;
+import static mage.constants.Layer.CopyEffects_1;
+import static mage.constants.Layer.PTChangingEffects_7;
+import static mage.constants.Layer.TextChangingEffects_3;
+import static mage.constants.Layer.TypeChangingEffects_4;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.game.Game;
-
-import java.util.*;
-
 
 /**
  *
@@ -57,6 +70,9 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     protected boolean affectedObjectsSet = false;
     protected List<UUID> objects = new ArrayList<>();
     protected Map<UUID, Integer> metadata = new HashMap<>();
+    // until your next turn
+    protected int startingTurn;
+    protected UUID startingControllerId;
 
     public ContinuousEffectImpl(Duration duration, Outcome outcome) {
         super(outcome);
@@ -160,10 +176,15 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
                 }
             }
         }
+        startingTurn = game.getTurnNum();
+        startingControllerId = source.getControllerId();
     }
 
     @Override
     public boolean isInactive(Ability source, Game game) {
+        if (duration.equals(Duration.UntilYourNextTurn)) {
+            return game.getActivePlayerId().equals(startingControllerId) && game.getTurnNum() != startingTurn;
+        }
         return false;
     }
 

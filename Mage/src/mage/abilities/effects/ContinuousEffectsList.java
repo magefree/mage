@@ -115,6 +115,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
                         }
                         break;
                     case Custom:
+                    case UntilYourNextTurn:
                         if (effect.isInactive(ability , game)) {
                                it.remove();
                         }

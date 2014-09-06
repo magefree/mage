@@ -11,6 +11,7 @@ public enum Duration {
     WhileOnStack(""),
     WhileInGraveyard(""),
     EndOfTurn("until end of turn"),
+    UntilYourNextTurn("until your next turn"),
     EndOfCombat("until end of combat"),
     Custom("");
 
