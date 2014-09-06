@@ -28,8 +28,10 @@
 
 package mage.abilities.decorator;
 
+import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.game.Game;
 
@@ -41,15 +43,15 @@ import mage.game.Game;
 
 public class ConditionalManaEffect extends ManaEffect {
 
-    private ManaEffect effect;
-    private ManaEffect otherwiseEffect;
+    private BasicManaEffect effect;
+    private BasicManaEffect otherwiseEffect;
     private Condition condition;
 
-    public ConditionalManaEffect(ManaEffect effect, Condition condition, String text) {
+    public ConditionalManaEffect(BasicManaEffect effect, Condition condition, String text) {
         this(effect, null, condition, text);
     }
 
-    public ConditionalManaEffect(ManaEffect effect, ManaEffect otherwiseEffect, Condition condition, String text) {
+    public ConditionalManaEffect(BasicManaEffect effect, BasicManaEffect otherwiseEffect, Condition condition, String text) {
         super();
         this.effect = effect;
         this.otherwiseEffect = otherwiseEffect;
@@ -59,9 +61,9 @@ public class ConditionalManaEffect extends ManaEffect {
 
     public ConditionalManaEffect(ConditionalManaEffect effect) {
         super(effect);
-        this.effect = (ManaEffect) effect.effect.copy();
+        this.effect = (BasicManaEffect) effect.effect.copy();
         if (effect.otherwiseEffect != null) {
-            this.otherwiseEffect = (ManaEffect) effect.otherwiseEffect.copy();
+            this.otherwiseEffect = (BasicManaEffect) effect.otherwiseEffect.copy();
         }
         this.condition = effect.condition;
     }
@@ -83,4 +85,12 @@ public class ConditionalManaEffect extends ManaEffect {
         return new ConditionalManaEffect(this);
     }
 
+    public Mana getMana(Game game, Ability source) {
+        if (condition.apply(game, source)) {
+            return effect.getMana();
+        } else if (otherwiseEffect != null) {
+            return otherwiseEffect.getMana();
+        }
+        return null;
+    }
 }

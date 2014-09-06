@@ -36,6 +36,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalManaEffect;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.mana.ConditionalManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
@@ -59,14 +60,13 @@ public class GemstoneCaverns extends CardImpl {
         this.addAbility(new GemstoneCavernsAbility());
         
         // {tap}: Add {1} to your mana pool. If Gemstone Caverns has a luck counter on it, instead add one mana of any color to your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD,
+        Ability ability = new ConditionalManaAbility(Zone.BATTLEFIELD,
                 new ConditionalManaEffect(
                     new AddManaOfAnyColorEffect(),
                     new BasicManaEffect(Mana.ColorlessMana),    
                     new SourceHasCounterCondition(CounterType.LUCK), 
-                    "Add {1} to your mana pool. If Gemstone Caverns has a luck counter on it, instead add one mana of any color to your mana pool."), 
-                new TapSourceCost());
-        ability.addChoice(new ChoiceColor());
+                    "Add {1} to your mana pool. If {this} has a luck counter on it, instead add one mana of any color to your mana pool."),
+                new TapSourceCost());        
         this.addAbility(ability);
     }
 

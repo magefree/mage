@@ -37,7 +37,7 @@ import mage.util.CardUtil;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class AddManaOfAnyColorEffect extends ManaEffect {
+public class AddManaOfAnyColorEffect extends BasicManaEffect {
 
     protected int amount;
 
@@ -46,7 +46,7 @@ public class AddManaOfAnyColorEffect extends ManaEffect {
     }
 
     public AddManaOfAnyColorEffect(final int amount) {
-        super();
+        super(new Mana(0,0,0,0,0,0,1));
         this.amount = amount;
         this.staticText = new StringBuilder("add ")
                 .append(CardUtil.numberToText(amount))
@@ -67,34 +67,39 @@ public class AddManaOfAnyColorEffect extends ManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
-        if (choice == null || choice.getColor() == null) {
-            return false;
-        }
-        Mana mana = null;
-        if (choice.getColor().isBlack()) {
-            mana = Mana.BlackMana(amount);
-        } else if (choice.getColor().isBlue()) {
-            mana = Mana.BlueMana(amount);
-        } else if (choice.getColor().isRed()) {
-            mana = Mana.RedMana(amount);
-        } else if (choice.getColor().isGreen()) {
-            mana = Mana.GreenMana(amount);
-        } else if (choice.getColor().isWhite()) {
-            mana = Mana.WhiteMana(amount);
-        }
-        
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null && mana != null) {
-            player.getManaPool().addMana(mana, game, source);
-            return true;
-        }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            ChoiceColor choice = new ChoiceColor(false);
 
+            if (controller.choose(outcome, choice, game)) {
+                Mana createdMana = null;
+                if (choice.getColor().isBlack()) {
+                    createdMana = Mana.BlackMana(amount);
+                } else if (choice.getColor().isBlue()) {
+                    createdMana = Mana.BlueMana(amount);
+                } else if (choice.getColor().isRed()) {
+                    createdMana = Mana.RedMana(amount);
+                } else if (choice.getColor().isGreen()) {
+                    createdMana = Mana.GreenMana(amount);
+                } else if (choice.getColor().isWhite()) {
+                    createdMana = Mana.WhiteMana(amount);
+                }
+                if (createdMana != null) {
+                    controller.getManaPool().addMana(createdMana, game, source);
+                }
+                return true;
+            }
+        }
         return false;
     }
 
     public int getAmount() {
         return amount;
+    }
+
+    @Override
+    public Mana getMana() {
+        return (new Mana(0,0,0,0,0,0,amount));
     }
     
 }

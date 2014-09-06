@@ -25,49 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+package mage.abilities.mana;
+
 import mage.Mana;
-import mage.abilities.condition.common.LandfallCondition;
-import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.Cost;
 import mage.abilities.decorator.ConditionalManaEffect;
-import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.mana.ConditionalManaAbility;
-import mage.cards.CardImpl;
-import mage.watchers.common.LandfallWatcher;
+import mage.constants.Zone;
+import mage.game.Game;
 
 /**
  *
  * @author LevelX2
  */
-public class RiverOfTears extends CardImpl {
 
-    public RiverOfTears(UUID ownerId) {
-        super(ownerId, 179, "River of Tears", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "FUT";
+public class ConditionalManaAbility extends ManaAbility {
 
-        // {tap}: Add {U} to your mana pool. If you played a land this turn, add {B} to your mana pool instead.
-        this.addAbility(new ConditionalManaAbility(Zone.BATTLEFIELD, new ConditionalManaEffect(
-                new BasicManaEffect(Mana.BlackMana),
-                new BasicManaEffect(Mana.BlueMana),
-                LandfallCondition.getInstance(),
-                "Add {U} to your mana pool. If you played a land this turn, add {B} to your mana pool instead"),
-            new TapSourceCost()));
-        
-        
-        this.addWatcher(new LandfallWatcher());
+    ConditionalManaEffect conditionalManaEffect;
+
+    public ConditionalManaAbility(Zone zone, ConditionalManaEffect effect, Cost cost) {
+        super(zone, effect, cost);
+        this.conditionalManaEffect = effect;
     }
 
-    public RiverOfTears(final RiverOfTears card) {
-        super(card);
+    public ConditionalManaAbility(final ConditionalManaAbility ability) {
+        super(ability);
+        this.conditionalManaEffect = ability.conditionalManaEffect;
     }
 
     @Override
-    public RiverOfTears copy() {
-        return new RiverOfTears(this);
+    public ConditionalManaAbility copy() {
+        return new ConditionalManaAbility(this);
+    }
+
+    @Override
+    public Mana getNetMana(Game game) {
+        return conditionalManaEffect.getMana(game, this);
     }
 }
