@@ -67,6 +67,7 @@ public class SearchLibraryPutOnLibraryEffect extends SearchEffect {
     public SearchLibraryPutOnLibraryEffect(final SearchLibraryPutOnLibraryEffect effect) {
         super(effect);
         this.reveal = effect.reveal;
+        this.forceShuffle = effect.forceShuffle;
     }
 
     @Override
