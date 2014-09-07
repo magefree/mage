@@ -100,6 +100,7 @@ class AcademyRectorEffect extends OneShotEffect {
         Player you = game.getPlayer(source.getControllerId());
         if (you != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
+            target.setNotTarget(true);
             you.searchLibrary(target, game);
             Card targetCard = game.getCard(target.getFirstTarget());
             if (targetCard == null) {
