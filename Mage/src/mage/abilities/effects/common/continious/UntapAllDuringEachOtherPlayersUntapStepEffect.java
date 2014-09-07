@@ -51,7 +51,7 @@ public class UntapAllDuringEachOtherPlayersUntapStepEffect extends ContinuousEff
     public UntapAllDuringEachOtherPlayersUntapStepEffect(FilterPermanent filter) {
         super(Duration.WhileOnBattlefield, Outcome.Untap);
         this.filter = filter;
-        staticText = new StringBuilder("Untap all ").append(filter.getMessage()).append(" during each other player's untap step").toString();
+        staticText = setStaticText();
     }
 
     public UntapAllDuringEachOtherPlayersUntapStepEffect(final UntapAllDuringEachOtherPlayersUntapStepEffect effect) {
@@ -99,5 +99,15 @@ public class UntapAllDuringEachOtherPlayersUntapStepEffect extends ContinuousEff
     @Override
     public boolean hasLayer(Layer layer) {
         return layer == Layer.RulesEffects;
+    }
+
+    private String setStaticText() {
+        StringBuilder sb = new StringBuilder("Untap ");
+        if (!filter.getMessage().startsWith("each")) {
+            sb.append("all ");
+        }
+        sb.append(filter.getMessage());
+        sb.append(" during each other player's untap step");
+        return sb.toString();
     }
 }

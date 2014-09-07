@@ -100,7 +100,7 @@ class DingusEggTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a land is put into a graveyard from the battlefield, Dingus Egg deals 2 damage to that land's controller";
+        return "Whenever a land is put into a graveyard from the battlefield, {this} deals 2 damage to that land's controller";
     }
 
     @Override
