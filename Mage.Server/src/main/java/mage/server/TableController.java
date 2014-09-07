@@ -700,39 +700,41 @@ public class TableController {
     }
 
     private void matchEnd() {
-        for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
-            MatchPlayer matchPlayer = match.getPlayer(entry.getValue());
-            // opponent(s) left during sideboarding
-            if (matchPlayer != null) {
-                if(!matchPlayer.hasQuit()) {
-                    User user = UserManager.getInstance().getUser(entry.getKey());
-                    if (user != null) {
-                        if (table.getState().equals(TableState.SIDEBOARDING)) {
-                            StringBuilder sb = new StringBuilder();
-                            if (table.isTournamentSubTable()) {
-                                sb.append("Your tournament match of round ");
-                                sb.append(table.getTournament().getRounds().size());
-                                sb.append(" is over. ");
-                            } else {
-                                sb.append("Match [").append(match.getName()).append("] is over. ");
+        if (match != null) {
+            for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
+                MatchPlayer matchPlayer = match.getPlayer(entry.getValue());
+                // opponent(s) left during sideboarding
+                if (matchPlayer != null) {
+                    if(!matchPlayer.hasQuit()) {
+                        User user = UserManager.getInstance().getUser(entry.getKey());
+                        if (user != null) {
+                            if (table.getState().equals(TableState.SIDEBOARDING)) {
+                                StringBuilder sb = new StringBuilder();
+                                if (table.isTournamentSubTable()) {
+                                    sb.append("Your tournament match of round ");
+                                    sb.append(table.getTournament().getRounds().size());
+                                    sb.append(" is over. ");
+                                } else {
+                                    sb.append("Match [").append(match.getName()).append("] is over. ");
+                                }
+                                if (match.getPlayers().size() > 2) {
+                                    sb.append("All your opponents have lost or quit the match.");
+                                } else {
+                                    sb.append("Your opponent has quit the match.");
+                                }
+                                user.showUserMessage("Match info", sb.toString());
                             }
-                            if (match.getPlayers().size() > 2) {
-                                sb.append("All your opponents have lost or quit the match.");
-                            } else {
-                                sb.append("Your opponent has quit the match.");
+                            // remove table from user - table manager holds table for display of finished matches
+                            if (!table.isTournamentSubTable()) {
+                                user.removeTable(entry.getValue());
                             }
-                            user.showUserMessage("Match info", sb.toString());
-                        }
-                        // remove table from user - table manager holds table for display of finished matches
-                        if (!table.isTournamentSubTable()) {
-                            user.removeTable(entry.getValue());
                         }
                     }
-                }                
-            }           
+                }
+            }
+            // free resources no longer needed
+            match.cleanUpOnMatchEnd(ConfigSettings.getInstance().isSaveGameActivated());
         }
-        // free resources no longer needed
-        match.cleanUpOnMatchEnd(ConfigSettings.getInstance().isSaveGameActivated());
     }
 
     private synchronized void setupTimeout(int seconds) {

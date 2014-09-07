@@ -230,7 +230,12 @@ class TableListSorter implements Comparator<Table> {
         if (two.getState().equals(TableState.READY_TO_START) || two.getState().equals(TableState.WAITING) || two.getState().equals(TableState.STARTING)) {
             return 1; // two has higher priority
         } else if (one.getEndTime() == null) {
-            if (two.getEndTime() == null) {                    
+            if (two.getEndTime() == null) {
+                if (two.getStartTime() == null) {
+                    return -1;
+                } else if (one.getStartTime() == null) {
+                    return 1;
+                }
                 return two.getStartTime().compareTo(one.getStartTime());
             } else {
                 return -1;
