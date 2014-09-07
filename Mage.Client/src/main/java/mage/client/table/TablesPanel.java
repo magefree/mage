@@ -747,12 +747,12 @@ class TableTableModel extends AbstractTableModel {
             case 9:
                 switch (tables[arg0].getTableState()) {
 
-//                    case WAITING:
-//                        String owner = tables[arg0].getControllerName();
-//                        if (session != null && owner.equals(session.getUserName())) {
-//                            return "Remove";
-//                        }
-//                        return "Join";
+                    case WAITING:
+                        String owner = tables[arg0].getControllerName();
+                        if (session != null && owner.equals(session.getUserName())) {
+                            return "";
+                        }
+                        return "Join";
                     case CONSTRUCTING:
                     case DRAFTING:
                         if (tables[arg0].isTournament()) {
@@ -762,10 +762,10 @@ class TableTableModel extends AbstractTableModel {
                         if (tables[arg0].isTournament()) {
                             return "Show";
                         } else {
-//                            String owner = tables[arg0].getControllerName();
-//                            if (session != null && owner.equals(session.getUserName())) {
-//                                return "Remove";
-//                            }
+                            owner = tables[arg0].getControllerName();
+                            if (session != null && owner.equals(session.getUserName())) {
+                                  return "";
+                            }
                             return "Watch";
                         }                        
                     default:

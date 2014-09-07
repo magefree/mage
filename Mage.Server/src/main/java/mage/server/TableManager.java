@@ -207,7 +207,7 @@ public class TableManager {
     }
 
     public boolean removeTable(UUID userId, UUID tableId) {
-        if (UserManager.getInstance().isAdmin(userId)) {
+        if (isTableOwner(tableId, userId) || UserManager.getInstance().isAdmin(userId)) {
             logger.debug("Table remove request - userId: " + userId + " tableId: " + tableId);
             TableController tableController = controllers.get(tableId);
             if (tableController != null) {
@@ -386,7 +386,7 @@ public class TableManager {
             try {
                 if (!table.getState().equals(TableState.FINISHED)) {
                     // remove tables and games not valid anymore
-                    logger.debug(table.getId() + " [" + table.getName()+ "] " + formatter.format(table.getStartTime()) +" (" + table.getState().toString() + ") " + (table.isTournament() ? "- Tournament":""));
+                    logger.debug(table.getId() + " [" + table.getName()+ "] " + formatter.format(table.getStartTime() == null ? table.getCreateTime() : table.getCreateTime()) +" (" + table.getState().toString() + ") " + (table.isTournament() ? "- Tournament":""));
                     TableController tableController = getController(table.getId());
                     if (tableController != null) {
                         if (table.isTournament()) {
