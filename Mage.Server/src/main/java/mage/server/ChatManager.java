@@ -72,8 +72,9 @@ public class ChatManager {
     }
 
     public void leaveChat(UUID chatId, UUID userId) {
-        if (chatSessions.containsKey(chatId)) {
-            chatSessions.get(chatId).kill(userId, DisconnectReason.CleaningUp);
+        ChatSession chatSession = chatSessions.get(chatId);
+        if (chatSession != null && chatSession.hasUser(userId)) {
+            chatSession.kill(userId, DisconnectReason.CleaningUp);
         } 
     }
 
@@ -106,30 +107,33 @@ public class ChatManager {
     }
 
     public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
-        if (message.startsWith("\\")) {
-            User user = UserManager.getInstance().findUser(userName);
-            if (user != null && performUserCommand(user, message, chatId)) {
-                return;
+        ChatSession chatSession = chatSessions.get(chatId);
+        if (chatSession != null) {
+            if (message.startsWith("\\") || message.startsWith("/")) {
+                User user = UserManager.getInstance().findUser(userName);
+                if (user != null && performUserCommand(user, message, chatId)) {
+                    return;
+                }
             }
+            chatSession.broadcast(userName, message, color, withTime, messageType, soundToPlay);
         }
-        chatSessions.get(chatId).broadcast(userName, message, color, withTime, messageType, soundToPlay);
     }
 
 
     private boolean performUserCommand(User user, String message, UUID chatId) {
-        String command = message.trim().toUpperCase(Locale.ENGLISH);
-        if (command.equals("\\I") || command.equals("\\INFO")) {            
+        String command = message.substring(1).trim().toUpperCase(Locale.ENGLISH);
+        if (command.equals("I") || command.equals("INFO")) {            
             user.setInfo("");
             chatSessions.get(chatId).broadcastInfoToUser(user,message);
             return true;
         }
-        if (command.startsWith("\\I ") || command.startsWith("\\INFO ")) {
-            user.setInfo(message.substring(command.startsWith("\\I ") ? 3 : 6));
+        if (command.startsWith("I ") || command.startsWith("INFO ")) {
+            user.setInfo(message.substring(command.startsWith("I ") ? 3 : 6));
             chatSessions.get(chatId).broadcastInfoToUser(user,message);
             return true;
         }
-        if (command.startsWith("\\W ") || command.startsWith("\\WHISPER ") || command.startsWith("/W ") || command.startsWith("/WHISPER ")) {
-            String rest = message.substring(command.startsWith("\\W ") || command.startsWith("/W ")? 3 : 9);
+        if (command.startsWith("W ") || command.startsWith("WHISPER ")) {
+            String rest = message.substring(command.startsWith("W ")? 3 : 9);
             int first = rest.indexOf(" ");
             if (first > 1) {
                 String userToName = rest.substring(0,first);
@@ -147,7 +151,7 @@ public class ChatManager {
                 return true;
             }
         }
-        if (command.equals("\\L") || command.equals("\\LIST")) {
+        if (command.equals("L") || command.equals("LIST")) {
             message += new StringBuilder("\nList of commands:")
                     .append("\n\\info <text> - set a info text to your player")
                     .append("\n\\list - Show a list of commands")
@@ -191,8 +195,10 @@ public class ChatManager {
     }
     
     public void removeUser(UUID userId, DisconnectReason reason) {
-        for (ChatSession chat: chatSessions.values()) {
-            chat.kill(userId, reason);
+        for (ChatSession chatSession: chatSessions.values()) {
+            if (chatSession.hasUser(userId)) {
+                chatSession.kill(userId, reason);
+            }
         }
     }
 

@@ -1648,8 +1648,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void lost(Game game) {
-        logger.debug(this.getName() + " has lost gameId: " + game.getId());
-        if (canLose(game)) {            
+        if (canLose(game)) {
+            logger.debug(this.getName() + " has lost gameId: " + game.getId());
             //20100423 - 603.9
             if (!this.wins) {
                 this.loses = true;
@@ -1672,9 +1672,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void won(Game game) {
-        logger.debug("player won -> start: " + this.getName());
+    public void won(Game game) {        
         if (!game.replaceEvent(new GameEvent(GameEvent.EventType.WINS, null, null, playerId))) {
+            logger.debug("player won -> start: " + this.getName());
             if (!this.loses) {
                 //20130501 - 800.7, 801.16
                 // all opponents in range loose the game

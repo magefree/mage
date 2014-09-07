@@ -372,6 +372,13 @@ public class TableController {
         return player;
     }
 
+    public void leaveTableAll() {
+        for (UUID leavingUserId: userPlayerMap.keySet()) {
+            leaveTable(leavingUserId);
+        }
+        closeTable();
+    }
+    
     public synchronized void leaveTable(UUID userId) {
         if (table == null) {
             logger.error("No table object - userId: " + userId);
@@ -413,14 +420,23 @@ public class TableController {
                         TournamentManager.getInstance().quit(tournament.getId(), userId);
                     } else {
                         MatchPlayer matchPlayer = match.getPlayer(playerId);
-                        if (matchPlayer != null) {
-                            if (table.getState().equals(TableState.SIDEBOARDING)) {
-                                // submit deck to finish sideboarding and trigger match start / end
-                                matchPlayer.submitDeck(matchPlayer.getDeck());
+                        if (matchPlayer != null && !match.hasEnded() && !matchPlayer.hasQuit()) {
+                            Game game = match.getGame();
+                            if (game != null && !game.hasEnded()){
+                                Player player = match.getPlayer(playerId).getPlayer();
+                                if (player != null && player.isInGame()) {
+                                    GameManager.getInstance().quitMatch(game.getId(), userId);
+                                }
+                            } else {                                
+                                if (table.getState().equals(TableState.SIDEBOARDING)) {
+                                    if (!matchPlayer.isDoneSideboarding()) {
+                                        // submit deck to finish sideboarding and trigger match start / end
+                                        matchPlayer.submitDeck(matchPlayer.getDeck());
+                                    }
+                                }
+                                match.leave(playerId);
                             }
-                            matchPlayer.setQuit(true);
                         }
-                        match.leave(playerId);
                     }
                 }
             } else {
@@ -829,11 +845,11 @@ public class TableController {
                     continue;
                 }
                 if (matchPlayer.getPlayer().isHuman()) {
-                    humanPlayers++;
-                    User user = UserManager.getInstance().getUser(userPlayerEntry.getKey());
+                    humanPlayers++;                    
                     if (!matchPlayer.hasQuit()) {
+                        User user = UserManager.getInstance().getUser(userPlayerEntry.getKey());
                         if (user == null) {
-                            logger.debug("- Active user of match is missing:");
+                            logger.debug("- Active user of match is missing: " + matchPlayer.getName());
                             logger.debug("-- matchId:" + match.getId());
                             logger.debug("-- userId:" + userPlayerEntry.getKey());
                             logger.debug("-- playerId:" + userPlayerEntry.getValue());
@@ -869,8 +885,12 @@ public class TableController {
                 }
                 break;
             case STARTING:
-                if (!getTable().getState().equals(TableState.READY_TO_START)){
+                if (!getTable().getState().equals(TableState.READY_TO_START)) {
                     // tournament is not ready, can't start
+                    return false;
+                }
+                if (!table.allSeatsAreOccupied()) {
+                    logger.debug("Not alle Seats are occupied: stop start tableId:" + table.getId());
                     return false;
                 }
                 break;

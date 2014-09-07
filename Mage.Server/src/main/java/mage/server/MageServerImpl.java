@@ -1016,6 +1016,13 @@ public class MageServerImpl implements MageServer {
         });
     }
 
+    /**
+     * Admin console - Remove table 
+     * 
+     * @param sessionId
+     * @param tableId
+     * @throws MageException 
+     */
     @Override
     public void removeTable(final String sessionId, final UUID tableId) throws MageException {
         execute("removeTable", sessionId, new Action() {

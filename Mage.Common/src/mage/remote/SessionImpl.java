@@ -218,6 +218,24 @@ public class SessionImpl implements Session {
             */            
             clientMetadata.put("numberOfCallRetries", "1");
 
+
+            /**
+             * I'll explain the meaning of "secondaryBindPort" and "secondaryConnectPort", and maybe that will help.
+             * The Remoting bisocket transport creates two ServerSockets on the server. The "primary" ServerSocket is used to create
+             * connections used for ordinary invocations, e.g., a request to create a JMS consumer, and the "secondary" ServerSocket
+             * is used to create "control" connections for internal Remoting messages. The port for the primary ServerSocket is configured
+             * by the "serverBindPort" parameter, and the port for the secondary ServerSocket is, by default, chosen randomly.
+             * The "secondaryBindPort" parameter can be used to assign a specific port to the secondary ServerSocket. Now, if there is a
+             * translating firewall between the client and server, the client should be given the value of the port that is translated
+             * to the actual binding port of the secondary ServerSocket.
+             * For example, your configuration will tell the secondary ServerSocket to bind to port 14000, and it will tell the client to
+             * connect to port 14001. It assumes that there is a firewall which will translate 14001 to 14000. Apparently, that's not happening.
+             */
+            // secondaryBindPort - the port to which the secondary server socket is to be bound. By default, an arbitrary port is selected.
+
+            // secondaryConnectPort - the port clients are to use to connect to the secondary server socket.
+            // By default, the value of secondaryBindPort is used. secondaryConnectPort is useful if the server is behind a translating firewall.           
+
             // Indicated the max number of threads used within oneway thread pool.
             clientMetadata.put(Client.MAX_NUM_ONEWAY_THREADS, "10");
             clientMetadata.put(Remoting.USE_CLIENT_CONNECTION_IDENTITY, "true");
@@ -913,6 +931,11 @@ public class SessionImpl implements Session {
         return false;
     }
 
+    /**
+     * Remove table - called from admin console
+     * @param tableId
+     * @return
+     */
     @Override
     public boolean removeTable(UUID tableId) {
         try {

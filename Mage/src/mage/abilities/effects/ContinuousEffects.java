@@ -983,15 +983,18 @@ public class ContinuousEffects implements Serializable {
     public List<String> getReplacementEffectsTexts(HashMap<ReplacementEffect, HashSet<Ability>> rEffects, Game game) {
         List<String> texts = new ArrayList<>();
         for (Map.Entry<ReplacementEffect, HashSet<Ability>> entry : rEffects.entrySet()) {
-            for (Ability ability :entry.getValue()) {
-                MageObject object = game.getObject(ability.getSourceId());
-                if (object != null) {
-                    texts.add(ability.getRule(object.getLogName()));
-                } else {
-                    texts.add(entry.getKey().getText(null));
+            if (entry.getValue() != null) {
+                for (Ability ability :entry.getValue()) {
+                    MageObject object = game.getObject(ability.getSourceId());
+                    if (object != null) {
+                        texts.add(ability.getRule(object.getLogName()));
+                    } else {
+                        texts.add(entry.getKey().getText(null));
+                    }
                 }
+            } else {
+                logger.error("Replacement effect without ability: " + entry.getKey().toString());
             }
-
         }
         return texts;
     }

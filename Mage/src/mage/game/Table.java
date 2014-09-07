@@ -203,6 +203,15 @@ public class Table implements Serializable {
         return null;
     }
 
+    public boolean allSeatsAreOccupied() {
+        for (int i = 0; i < numSeats; i++ ) {
+            if (seats[i].getPlayer() == null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void leaveNotStartedTable(UUID playerId) {
         for (int i = 0; i < numSeats; i++ ) {
             Player player = seats[i].getPlayer();

@@ -31,8 +31,8 @@ package mage.server;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.UUID;
@@ -155,7 +155,13 @@ public class TableManager {
         if (controllers.containsKey(tableId)) {
             return controllers.get(tableId).submitDeck(userId, deckList);
         }
-        return false;
+        User user = UserManager.getInstance().getUser(userId);
+        if (user != null) {
+            user.removeSideboarding(tableId);
+            user.showUserMessage("Submit deck", "Table no longer active");
+        }
+        // return true so the panel closes
+        return true;
     }
 
     public void updateDeck(UUID userId, UUID tableId, DeckCardLists deckList) throws MageException {
@@ -201,10 +207,11 @@ public class TableManager {
     }
 
     public boolean removeTable(UUID userId, UUID tableId) {
-        if (isTableOwner(tableId, userId) || UserManager.getInstance().isAdmin(userId)) {
-            leaveTable(userId, tableId);
+        if (UserManager.getInstance().isAdmin(userId)) {
+            logger.debug("Table remove request - userId: " + userId + " tableId: " + tableId);
             TableController tableController = controllers.get(tableId);
             if (tableController != null) {
+                tableController.leaveTableAll();
                 ChatManager.getInstance().destroyChatSession(tableController.getChatId());
                 removeTable(tableId);
             }
@@ -372,22 +379,30 @@ public class TableManager {
         }
         logger.debug("TABLE HEALTH CHECK");
         List<UUID> toRemove = new ArrayList<>();
-        for (Table table : tables.values()) {
-            if (!table.getState().equals(TableState.FINISHED)) {
-                // remove tables and games not valid anymore
-                logger.debug(table.getId() + " [" + table.getName()+ "] " + formatter.format(table.getStartTime()) +" (" + table.getState().toString() + ") " + (table.isTournament() ? "- Tournament":""));
-                TableController tableController = getController(table.getId());
-                if (tableController != null) {
-                    if (table.isTournament()) {
-                        if (!tableController.isTournamentStillValid()) {
-                            toRemove.add(table.getId());
-                        }
-                    } else {
-                        if (!tableController.isMatchTableStillValid()) {
-                            toRemove.add(table.getId());
+
+        ArrayList<Table> tableCopy = new ArrayList<>();
+        tableCopy.addAll(tables.values());
+        for (Table table : tableCopy) {
+            try {
+                if (!table.getState().equals(TableState.FINISHED)) {
+                    // remove tables and games not valid anymore
+                    logger.debug(table.getId() + " [" + table.getName()+ "] " + formatter.format(table.getStartTime()) +" (" + table.getState().toString() + ") " + (table.isTournament() ? "- Tournament":""));
+                    TableController tableController = getController(table.getId());
+                    if (tableController != null) {
+                        if (table.isTournament()) {
+                            if (!tableController.isTournamentStillValid()) {
+                                toRemove.add(table.getId());
+                            }
+                        } else {
+                            if (!tableController.isMatchTableStillValid()) {
+                                toRemove.add(table.getId());
+                            }
                         }
                     }
                 }
+            } catch (Exception ex) {
+                logger.debug("Table Health check error tableId: " + table.getId());
+                logger.debug(Arrays.toString(ex.getStackTrace()));
             }
         }
         for (UUID tableId : toRemove) {

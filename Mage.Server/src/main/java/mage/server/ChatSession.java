@@ -31,6 +31,7 @@ package mage.server;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.interfaces.callback.ClientCallback;
@@ -52,6 +53,7 @@ public class ChatSession {
     private final Date createTime;
     private final String info;
     private final DateFormat timeFormatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT);
+    private final HashSet<UUID> clientsToRemove = new HashSet<>();
 
     public ChatSession(String info) {
         chatId = UUID.randomUUID();
@@ -148,7 +150,8 @@ public class ChatSession {
     }
 
     public void broadcast(String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
-        if (!message.isEmpty()) {            
+        if (!message.isEmpty()) {
+            boolean remove = false;
             final String msg = message;
             final String time = (withTime ? timeFormatter.format(new Date()):"");
             final String username = userName;
@@ -160,7 +163,15 @@ public class ChatSession {
                 }
                 else {
                     logger.error("User not found but connected to chat - userId: " + userId + "  chatId: " + chatId);
+                    clientsToRemove.add(userId);
+                    remove = true;
                 }
+            }
+            if (remove) {
+                for (UUID userIdToRemove: clientsToRemove) {
+                    clients.remove(userIdToRemove);
+                }
+                clientsToRemove.clear();
             }
         }
     }

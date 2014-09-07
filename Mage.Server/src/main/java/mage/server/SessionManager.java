@@ -59,7 +59,7 @@ public class SessionManager {
         if (session != null && session.getUserId() != null && UserManager.getInstance().getUser(session.getUserId()) == null) {
             logger.error("User for session " + sessionId + " with userId " + session.getUserId() + " is missing. Session removed.");
             // can happen if user from same host signs in multiple time with multiple clients, after he disconnects with one client
-            disconnect(sessionId, DisconnectReason.LostConnection);
+            disconnect(sessionId, DisconnectReason.ConnectingOtherInstance);
             return null;
         }
         return session;

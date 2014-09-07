@@ -193,7 +193,7 @@ public class UserManager {
 
     public void handleException(Exception ex) {
         if (ex != null) {
-            logger.fatal("User manager exception" + (ex.getMessage() == null ? "null":ex.getMessage()));
+            logger.fatal("User manager exception " + (ex.getMessage() == null ? "null":ex.getMessage()));
             if (ex.getCause() != null) {
                 logger.debug("- Cause: " + (ex.getCause().getMessage() == null ? "null":ex.getCause().getMessage()));
             }
