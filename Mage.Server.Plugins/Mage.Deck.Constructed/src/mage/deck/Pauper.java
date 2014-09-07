@@ -21,6 +21,7 @@ public class Pauper extends Constructed {
         //TODO: Add only Magic Online sets for pauper
 
         rarities.add(Rarity.COMMON);
+        rarities.add(Rarity.LAND);
 
         banned.add("Cloudpost");
         banned.add("Cranial Plating");
