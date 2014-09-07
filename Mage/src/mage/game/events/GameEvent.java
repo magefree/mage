@@ -125,6 +125,7 @@ public class GameEvent {
         ATTACH, ATTACHED,
         UNATTACH, UNATTACHED,
         ADD_COUNTER, COUNTER_ADDED,
+        ADD_COUNTERS, COUNTERS_ADDED, /* COUNTERS_ADDED not implemented yet */
         COUNTER_REMOVED,
         LOSE_CONTROL, LOST_CONTROL,
         GAIN_CONTROL, GAINED_CONTROL,

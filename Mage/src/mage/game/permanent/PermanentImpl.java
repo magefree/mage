@@ -227,27 +227,35 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public void addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects) {
-        for (int i = 0; i < amount; i++) {
-            GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, controllerId, name, 1);
-            event.setAppliedEffects(appliedEffects);
-            if (!game.replaceEvent(event)) {
-                counters.addCounter(name, 1);
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, controllerId, name, 1));
+        GameEvent countersEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, controllerId, name, amount);
+        countersEvent.setAppliedEffects(appliedEffects);
+        if (!game.replaceEvent(countersEvent)) {
+            for (int i = 0; i < countersEvent.getAmount(); i++) {
+                GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, controllerId, name, 1);
+                event.setAppliedEffects(appliedEffects);
+                if (!game.replaceEvent(event)) {
+                    counters.addCounter(name, 1);
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, controllerId, name, 1));
+                }
             }
         }
     }
 
     @Override
     public void addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects) {
-        int amount = counter.getCount();
-        for (int i = 0; i < amount; i++) {
-            Counter eventCounter = counter.copy();
-            eventCounter.remove(amount - 1);
-            GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, controllerId, counter.getName(), 1);
-            event.setAppliedEffects(appliedEffects);
-            if (!game.replaceEvent(event)) {
-                counters.addCounter(eventCounter);
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, controllerId, counter.getName(), 1));
+        GameEvent countersEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, controllerId, counter.getName(), counter.getCount());
+        countersEvent.setAppliedEffects(appliedEffects);
+        if (!game.replaceEvent(countersEvent)) {
+            int amount = countersEvent.getAmount();
+            for (int i = 0; i < amount; i++) {
+                Counter eventCounter = counter.copy();
+                eventCounter.remove(eventCounter.getCount() - 1);
+                GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, controllerId, counter.getName(), 1);
+                event.setAppliedEffects(appliedEffects);
+                if (!game.replaceEvent(event)) {
+                    counters.addCounter(eventCounter);
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, controllerId, counter.getName(), 1));
+                }
             }
         }
     }

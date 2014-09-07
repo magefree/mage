@@ -678,12 +678,16 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public void addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects) {
-        for (int i = 0; i < amount; i++) {
-            GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, ownerId, name, amount);
-            event.setAppliedEffects(appliedEffects);
-            if (!game.replaceEvent(event)) {
-                counters.addCounter(name, amount);
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, ownerId, name, amount));
+        GameEvent countersEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, ownerId, name, amount);
+        countersEvent.setAppliedEffects(appliedEffects);
+        if (!game.replaceEvent(countersEvent)) {
+            for (int i = 0; i < countersEvent.getAmount(); i++) {
+                GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, ownerId, name, 1);
+                event.setAppliedEffects(appliedEffects);
+                if (!game.replaceEvent(event)) {
+                    counters.addCounter(name, 1);
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, ownerId, name, 1));
+                }
             }
         }
     }
@@ -695,15 +699,19 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public void addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects) {
-        int amount = counter.getCount();
-        for (int i = 0; i < amount; i++) {
+        GameEvent countersEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, ownerId, counter.getName(), counter.getCount());
+        countersEvent.setAppliedEffects(appliedEffects);
+        if (!game.replaceEvent(countersEvent)) {
+            int amount = countersEvent.getAmount();
             Counter eventCounter = counter.copy();
             eventCounter.remove(amount - 1);
-            GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, ownerId, counter.getName(), counter.getCount());
-            event.setAppliedEffects(appliedEffects);
-            if (!game.replaceEvent(event)) {
-                counters.addCounter(eventCounter);
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, ownerId, counter.getName(), counter.getCount()));
+            for (int i = 0; i < amount; i++) {
+                GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, ownerId, counter.getName(), 1);
+                event.setAppliedEffects(appliedEffects);
+                if (!game.replaceEvent(event)) {
+                    counters.addCounter(eventCounter);
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, ownerId, counter.getName(), 1));
+                }
             }
         }
     }
