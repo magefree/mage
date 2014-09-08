@@ -102,8 +102,13 @@ public class MatchView implements Serializable {
             }
             sb2.append(lostGames).append("], ");
         }
-        players = sb1.substring(0, sb1.length() - 2);
-        result = sb2.substring(0, sb2.length() - 2);
+        if (sb1.length() > 2) {
+            players = sb1.substring(0, sb1.length() - 2);
+            result = sb2.substring(0, sb2.length() - 2);
+        } else {
+            players = "[no players]";
+            result = "";
+        }
         this.startTime = match.getStartTime();
         this.endTime = match.getEndTime();
         this.replayAvailable = match.isReplayAvailable();
