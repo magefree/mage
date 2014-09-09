@@ -63,7 +63,7 @@ public abstract class MatchImpl implements Match {
 
     public MatchImpl(MatchOptions options) {
         this.options = options;
-        startTime = null;
+        this.startTime = new Date(); // to avaoid null pointer exceptions
         replayAvailable = false;
         draws = 0;
     }
@@ -133,7 +133,7 @@ public abstract class MatchImpl implements Match {
 
     @Override
     public boolean hasStarted() {
-        return startTime != null;
+        return startedGames > 0;
     }
 
     @Override

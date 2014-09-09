@@ -932,7 +932,11 @@ class MatchesTableModel extends AbstractTableModel {
             case 4:
                 return matches[arg0].getResult();
             case 5:
-                return timeFormatter.format(matches[arg0].getStartTime());
+                if (matches[arg0].getStartTime() != null) {
+                    return timeFormatter.format(matches[arg0].getStartTime());
+                } else {
+                    return "";
+                }
             case 6:
                 if (matches[arg0].getEndTime() != null) {
                     return timeFormatter.format(matches[arg0].getEndTime());

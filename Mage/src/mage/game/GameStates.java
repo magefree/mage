@@ -61,7 +61,7 @@ public class GameStates implements Serializable {
                 states.remove(states.size() - 1);
             }
 //            return new Copier<GameState>().uncompressCopy(states.get(index));
-            logger.debug("Rolling back state: " + index);
+            logger.trace("Rolling back state: " + index);
             return states.get(index);
         }
         return null;

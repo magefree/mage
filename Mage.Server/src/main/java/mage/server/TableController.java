@@ -821,19 +821,18 @@ public class TableController {
             int humanPlayers = 0;
             int aiPlayers = 0 ;
             int validHumanPlayers = 0;
-            if (match == null && !(table.getState().equals(TableState.WAITING) ||
-                                   table.getState().equals(TableState.STARTING) ||
-                                   table.getState().equals(TableState.READY_TO_START) )) {
-                logger.debug("- Match table with no match:");
-                logger.debug("-- matchId:" + match.getId() + " [" + match.getName() + "]");
-                // return false;
-            }
-            if (match.isDoneSideboarding()) {
-                if (match.getGame() == null) {
-                    // no sideboarding and not active game -> match seems to hang (maybe the Draw bug)
-                    logger.debug("- Match with no active game and not in sideboard state:");
+            if (!(table.getState().equals(TableState.WAITING) || table.getState().equals(TableState.STARTING) || table.getState().equals(TableState.READY_TO_START))) {
+                if (match == null) {
+                    logger.debug("- Match table with no match:");
                     logger.debug("-- matchId:" + match.getId() + " [" + match.getName() + "]");
                     // return false;
+                } else {
+                    if (match.isDoneSideboarding() && match.getGame() == null) {
+                        // no sideboarding and not active game -> match seems to hang (maybe the Draw bug)
+                        logger.debug("- Match with no active game and not in sideboard state:");
+                        logger.debug("-- matchId:" + match.getId() + " [" + match.getName() + "]");
+                        // return false;
+                    }
                 }
             }
             // check for active players
