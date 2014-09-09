@@ -36,6 +36,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPlayer;
 
 /**
  *
@@ -49,9 +50,11 @@ public class ChainersEdict extends CardImpl {
 
         this.color.setBlack(true);
 
-        // Target player sacrifices a creature.
-        // Flashback {5}{B}{B}
+        // Target player sacrifices a creature.        
         this.getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target player"));
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        
+        // Flashback {5}{B}{B}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{B}{B}"), TimingRule.SORCERY));
     }
 
