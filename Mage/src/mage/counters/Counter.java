@@ -49,7 +49,7 @@ public class Counter implements Serializable {
         this.count = count;
     }
 
-    public Counter(Counter counter) {
+    public Counter(final Counter counter) {
         this.name = counter.name;
         this.count = counter.count;
     }
