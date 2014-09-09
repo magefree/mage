@@ -29,6 +29,7 @@ package mage.sets.limitedalpha;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -71,7 +72,7 @@ class ReverseDamageEffect extends PreventionEffectImpl {
     private final TargetSource target;
     
     public ReverseDamageEffect() {
-        super(Duration.EndOfTurn);
+        super(Duration.EndOfTurn, Integer.MAX_VALUE, false, false);
         this.staticText = "The next time a source of your choice would deal damage to you this turn, prevent that damage. You gain life equal to the damage prevented this way.";
         this.target = new TargetSource();
     }
@@ -98,21 +99,16 @@ class ReverseDamageEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        PreventionEffectData preventionData = preventDamageAction(event, source, game);
         this.used = true;
-        int damageAmount = event.getAmount();
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getControllerId(), source.getSourceId(), source.getControllerId(), damageAmount, false);
-        if (!game.replaceEvent(preventEvent)) {
-            event.setAmount(0);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getControllerId(), source.getSourceId(), source.getControllerId(), damageAmount));
-            
+        this.discard(); // only one use
+        if (preventionData.getPreventedDamage() > 0) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
-                player.gainLife(damageAmount, game);
-            }
-            
-            return true;
-        }
-        return false;
+                player.gainLife(preventionData.getPreventedDamage(), game);
+            }            
+        }        
+        return true;
     }
 
     @Override

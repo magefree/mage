@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -49,6 +50,7 @@ public class CreateTokenEffect extends OneShotEffect {
     private boolean tapped;
     private boolean attacking;
     private UUID lastAddedTokenId;
+    private ArrayList<UUID> lastAddedTokenIds = new ArrayList<>();
 
     public CreateTokenEffect(Token token) {
         this(token, new StaticValue(1));
@@ -82,6 +84,7 @@ public class CreateTokenEffect extends OneShotEffect {
         this.tapped = effect.tapped;
         this.attacking = effect.attacking;
         this.lastAddedTokenId = effect.lastAddedTokenId;
+        this.lastAddedTokenIds.addAll(effect.lastAddedTokenIds);
     }
 
     @Override
@@ -96,6 +99,7 @@ public class CreateTokenEffect extends OneShotEffect {
         tokenCopy.getAbilities().newId(); // neccessary if token has ability like DevourAbility()
         tokenCopy.putOntoBattlefield(value, game, source.getSourceId(), source.getControllerId(), tapped, attacking);
         this.lastAddedTokenId = tokenCopy.getLastAddedToken();
+        this.lastAddedTokenIds = tokenCopy.getLastAddedTokenIds();
         return true;
     }
 
@@ -103,6 +107,10 @@ public class CreateTokenEffect extends OneShotEffect {
         return lastAddedTokenId;
     }
         
+    public ArrayList<UUID> getLastAddedTokenIds() {
+        return lastAddedTokenIds;
+    }
+
     private void setText() {
         StringBuilder sb = new StringBuilder("put ");
         if (amount.toString().equals("1")) {

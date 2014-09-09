@@ -28,6 +28,7 @@
 
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.constants.CardType;
@@ -49,6 +50,7 @@ import mage.util.CardUtil;
 public class Token extends MageObjectImpl {
 
     protected String description;
+    private ArrayList<UUID> lastAddedTokenIds = new ArrayList<>();
     private UUID lastAddedTokenId;
     private int tokenType;
     private int originalCardNumber;
@@ -91,6 +93,7 @@ public class Token extends MageObjectImpl {
         this.description = token.description;
         this.tokenType = token.tokenType;
         this.lastAddedTokenId = token.lastAddedTokenId;
+        this.lastAddedTokenIds.addAll(token.lastAddedTokenIds);
         this.originalCardNumber =  token.originalCardNumber;
         this.originalExpansionSetCode = token.originalExpansionSetCode;
     }
@@ -101,6 +104,12 @@ public class Token extends MageObjectImpl {
 
     public UUID getLastAddedToken() {
         return lastAddedTokenId;
+    }
+
+    public ArrayList<UUID> getLastAddedTokenIds() {
+        ArrayList<UUID> ids = new ArrayList<>();
+        ids.addAll(lastAddedTokenIds);
+        return ids;
     }
 
     public void addAbility(Ability ability) {
@@ -122,6 +131,7 @@ public class Token extends MageObjectImpl {
         if (controller == null) {
             return false;
         }
+        lastAddedTokenIds.clear();
         Card source = game.getCard(sourceId);
         String setCode;
         if (this.getOriginalExpansionSetCode() != null && !this.getOriginalExpansionSetCode().isEmpty()) {
@@ -139,6 +149,7 @@ public class Token extends MageObjectImpl {
                 if (tapped) {
                     newToken.setTapped(true);
                 }
+                this.lastAddedTokenIds.add(newToken.getId());
                 this.lastAddedTokenId = newToken.getId();
                 game.setScopeRelevant(true);
                 game.applyEffects();

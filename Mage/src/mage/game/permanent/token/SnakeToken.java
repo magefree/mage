@@ -28,9 +28,8 @@
 
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
 import mage.MageInt;
-import mage.ObjectColor;
+import mage.constants.CardType;
 
 /**
  *
@@ -39,7 +38,12 @@ import mage.ObjectColor;
 public class SnakeToken extends Token {
 
     public SnakeToken() {
+        this("ZEN");
+    }
+    
+    public SnakeToken(String setCode) {
         super("Snake", "1/1 green Snake creature token");
+        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add("Snake");
