@@ -29,10 +29,10 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -44,7 +44,7 @@ public class GoblinPiker extends CardImpl {
         super(ownerId, 209, "Goblin Piker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "10E";
         this.subtype.add("Goblin");
-        this.subtype.add("Warrier");
+        this.subtype.add("Warrior");
         this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
