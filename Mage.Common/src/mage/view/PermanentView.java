@@ -119,7 +119,7 @@ public class PermanentView extends CardView {
                         if (permanentAbility instanceof TurnFaceUpAbility && !permanentAbility.getRuleVisible()) {
                             this.rules.add(permanentAbility.getRule(true));
                         }
-                        if (permanentAbility instanceof TurnedFaceUpTriggeredAbility) {
+                        if (permanentAbility.getWorksFaceDown()) {
                             this.rules.add(permanentAbility.getRule());
                         }
                     }

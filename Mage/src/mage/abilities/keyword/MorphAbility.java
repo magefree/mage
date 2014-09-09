@@ -48,6 +48,7 @@ import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.AsTurnedFaceUpEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continious.SourceEffect;
 import mage.cards.Card;
@@ -301,7 +302,7 @@ class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implements Sour
                     List<Ability> abilities = new ArrayList<>();
                     for (Ability ability : permanent.getAbilities()) {
                         // TODO: Add flag "works also face down" to ability and use it to control ability removement instead of instanceof check
-                        if (ability instanceof TurnedFaceUpTriggeredAbility) {
+                        if (ability.getWorksFaceDown()) {
                             ability.setRuleVisible(false);
                             continue;
                         }

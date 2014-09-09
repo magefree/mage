@@ -83,6 +83,7 @@ public abstract class AbilityImpl implements Ability {
     protected boolean ruleAdditionalCostsVisible = true;
     protected boolean costModificationActive = true;
     protected boolean activated = false;
+    protected boolean worksFaceDown = false;
 
     public AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
@@ -117,6 +118,7 @@ public abstract class AbilityImpl implements Ability {
         this.ruleVisible = ability.ruleVisible;
         this.ruleAdditionalCostsVisible = ability.ruleAdditionalCostsVisible;
         this.costModificationActive = ability.costModificationActive;
+        this.worksFaceDown = ability.worksFaceDown;
     }
 
     @Override
@@ -944,6 +946,18 @@ public abstract class AbilityImpl implements Ability {
     public void setCostModificationActive(boolean active) {
         this.costModificationActive = active;
     }
+
+    @Override
+    public boolean getWorksFaceDown() {
+        return worksFaceDown;
+    }
+
+    @Override
+    public void setWorksFaceDown(boolean worksFaceDown) {
+        this.worksFaceDown = worksFaceDown;
+    }
+
+
 
 }
 

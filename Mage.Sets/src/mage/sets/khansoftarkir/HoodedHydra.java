@@ -82,8 +82,9 @@ public class HoodedHydra extends CardImpl {
         Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(5));
         effect.setText("put five +1/+1 counters on it");
         // TODO: Does not work because the ability is still removed from permanent while the effect checks if the ability still exosts.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new AsTurnedFaceUpEffect(effect, false)));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new AsTurnedFaceUpEffect(effect, false));
+        ability.setWorksFaceDown(true);
+        this.addAbility(ability);
     }
 
     public HoodedHydra(final HoodedHydra card) {

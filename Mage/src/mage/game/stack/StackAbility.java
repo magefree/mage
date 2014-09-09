@@ -451,6 +451,16 @@ public class StackAbility implements StackObject, Ability {
     public void setCostModificationActive(boolean active) {
         throw new UnsupportedOperationException("Not supported. Only neede for flashbacked spells"); 
     }
+
+    @Override
+    public boolean getWorksFaceDown() {
+        return this.ability.getWorksFaceDown();
+    }
+
+    @Override
+    public void setWorksFaceDown(boolean worksFaceDown) {
+        this.ability.setWorksFaceDown(worksFaceDown);
+    }
     
     
 }

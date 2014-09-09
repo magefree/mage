@@ -134,6 +134,7 @@ public class PermanentCard extends PermanentImpl {
         if (controller != null && controller.removeFromBattlefield(this, game)) {
             if (isFaceDown()) {
                 setFaceDown(false);
+                game.getCard(this.getId()).setFaceDown(false); //TODO: Do this in a better way
             }
             ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, controllerId, fromZone, toZone, appliedEffects);
             if (!game.replaceEvent(event)) {

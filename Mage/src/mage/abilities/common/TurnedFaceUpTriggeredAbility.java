@@ -22,6 +22,8 @@ public class TurnedFaceUpTriggeredAbility extends TriggeredAbilityImpl {
 
     public TurnedFaceUpTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
+        // has to be set so the ability triggers if card is turn faced up
+        this.setWorksFaceDown(true);
     }
 
     public TurnedFaceUpTriggeredAbility(final TurnedFaceUpTriggeredAbility ability) {

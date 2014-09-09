@@ -385,6 +385,24 @@ public interface Ability extends Controllable, Serializable {
      */
     void setRuleAtTheTop(boolean ruleAtTheTop);
 
+    
+    /**
+     * Returns true if this ability has to work also with face down object
+     * (set to not visible normally).
+     *
+     * @return
+     */
+    boolean getWorksFaceDown();
+
+    /**
+     * Sets the value for the worksFaceDown flag
+     *
+     * true = the ability works also if the object is face down
+     *
+     * @param worksFaceDown
+     */
+    void setWorksFaceDown(boolean worksFaceDown);
+
     /**
      * Returns true if this ability's rule is visible on the card tooltip
      *
@@ -450,7 +468,7 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * Used to deactivate cost modification logic of ability activation for some special handling
-     * (e.g. FlashbackAbility gets cost modifiaction twice because of how it#s ahndled now)
+     * (e.g. FlashbackAbility gets cost modifiaction twice because of how it's handled now)
      *
      * @param active execute no cost modification
      */

@@ -571,6 +571,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         if (!game.replaceEvent(event)) {
             setFaceDown(false);
             game.getCard(objectId).setFaceDown(false); // Another instance?
+            for (Ability ability :abilities) { // abilities that were set to not visible face down must be set to visible again
+                if (ability.getWorksFaceDown() && !ability.getRuleVisible()) {
+                    ability.setRuleVisible(true);
+                }
+            }
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TURNEDFACEUP, getId(), playerId));
             return true;
         }
@@ -703,9 +708,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         countersEvent.setAppliedEffects(appliedEffects);
         if (!game.replaceEvent(countersEvent)) {
             int amount = countersEvent.getAmount();
-            Counter eventCounter = counter.copy();
-            eventCounter.remove(amount - 1);
             for (int i = 0; i < amount; i++) {
+                Counter eventCounter = counter.copy();
+                eventCounter.remove(amount - 1);
                 GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, ownerId, counter.getName(), 1);
                 event.setAppliedEffects(appliedEffects);
                 if (!game.replaceEvent(event)) {
