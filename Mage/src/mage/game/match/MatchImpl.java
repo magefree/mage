@@ -334,20 +334,20 @@ public abstract class MatchImpl implements Match {
 
     protected String createGameStartMessage() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\nMatch score:\n");
+        sb.append("<br/><b>Match score:</b><br/>");
         for (MatchPlayer mp :this.getPlayers()) {
             sb.append("   ").append(mp.getName());
             sb.append(" - ").append(mp.getWins()).append(mp.getWins()==1?" win":" wins");
             if (mp.hasQuit()) {
                 sb.append(" QUITTED");
             }
-            sb.append("\n");
+            sb.append("<br/>");
         }
         if (getDraws() > 0) {
-            sb.append("   Draws: ").append(getDraws()).append("\n");
+            sb.append("   Draws: ").append(getDraws()).append("<br/>");
         }
-        sb.append("\n").append("You have to win ").append(this.getWinsNeeded()).append(this.getWinsNeeded() == 1 ? " game":" games").append(" to win the complete match\n");
-        sb.append("\nGame has started\n");
+        sb.append("<br/>").append("You have to win ").append(this.getWinsNeeded()).append(this.getWinsNeeded() == 1 ? " game":" games").append(" to win the complete match<br/>");
+        sb.append("<br/>Game has started<br/><br/>");
         return sb.toString();
     }
 

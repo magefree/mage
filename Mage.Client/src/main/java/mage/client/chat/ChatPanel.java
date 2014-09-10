@@ -37,14 +37,11 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
 import mage.client.MageFrame;
@@ -54,6 +51,7 @@ import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import mage.view.RoomUsersView;
 import mage.view.UsersView;
+import org.mage.card.arcane.ManaSymbols;
 
 /**
  *
@@ -63,32 +61,32 @@ public class ChatPanel extends javax.swing.JPanel {
 
     private UUID chatId;
     private Session session;
-    private final List<String> players = new ArrayList<String>();
+    private final List<String> players = new ArrayList<>();
     private final TableModel tableModel;
     /**
      * Chat message color for opponents.
      */
-    private static final Color OPPONENT_COLOR = new Color(238, 230, 133);
+    private static final String OPPONENT_COLOR =  "#FF7F50";
     /**
      * Chat message color for client player.
      */
-    private static final Color MY_COLOR = new Color(0, 230, 64);
+    private static final String MY_COLOR = "#7FFFD4";
     /**
      * Chat message color for timestamps.
      */
-    private static final Color TIMESTAMP_COLOR = new Color(255, 255, 0, 120);
+    private static final String TIMESTAMP_COLOR = "#87CEFA";
     /**
      * Chat message color for messages.
      */
-    private static final Color MESSAGE_COLOR = Color.white;
+    private static final String MESSAGE_COLOR = "White";
     /**
      * Chat message color for personal infos.
      */
-    private static final Color USER_INFO_COLOR = Color.YELLOW;
+    private static final String USER_INFO_COLOR = "Yellow";
     /**
      * Chat message color for status infos.
      */
-    private static final Color STATUS_COLOR = Color.CYAN;
+    private static final String STATUS_COLOR = "#CD853F";
     /**
      * This will be a chat that will be connected to {this} and will handle
      * redirected messages; Mostly used to redirect user messages to another
@@ -120,19 +118,19 @@ public class ChatPanel extends javax.swing.JPanel {
         DEFAULT, GAME, TABLES, TOURNAMENT
     }
     private boolean startMessageDone = false;
-    /**
-     * Maps message colors to {@link Color}.
-     */
-    private static final Map<MessageColor, Color> colorMap = new EnumMap<>(MessageColor.class);
-
-    static {
-        colorMap.put(MessageColor.BLACK, Color.black);
-        colorMap.put(MessageColor.GREEN, Color.green);
-        colorMap.put(MessageColor.ORANGE, Color.orange);
-        colorMap.put(MessageColor.BLUE, Color.blue);
-        colorMap.put(MessageColor.RED, Color.red);
-        colorMap.put(MessageColor.YELLOW, Color.YELLOW);
-    }
+//    /**
+//     * Maps message colors to {@link Color}.
+//     */
+//    private static final Map<MessageColor, Color> colorMap = new EnumMap<>(MessageColor.class);
+//
+//    static {
+//        colorMap.put(MessageColor.BLACK, Color.black);
+//        colorMap.put(MessageColor.GREEN, Color.green);
+//        colorMap.put(MessageColor.ORANGE, Color.orange);
+//        colorMap.put(MessageColor.BLUE, Color.blue);
+//        colorMap.put(MessageColor.RED, Color.red);
+//        colorMap.put(MessageColor.YELLOW, Color.YELLOW);
+//    }
 
     /**
      * Creates new form ChatPanel
@@ -210,11 +208,13 @@ public class ChatPanel extends javax.swing.JPanel {
      * @param color Preferred color. Not used.
      */
     public void receiveMessage(String username, String message, String time, MessageType messageType, MessageColor color) {
+        StringBuilder text = new StringBuilder();
         if (time != null) {
-            this.txtConversation.append(TIMESTAMP_COLOR, time + " ");
+            text.append(getColoredText(TIMESTAMP_COLOR, time + ": "));
+            //this.txtConversation.append(TIMESTAMP_COLOR, time + " ");
         }
-        Color userColor;
-        Color textColor;
+        String userColor;
+        String textColor;
         String userSeparator = " ";
         switch (messageType) {
             case STATUS: // a message to all chat user
@@ -235,18 +235,27 @@ public class ChatPanel extends javax.swing.JPanel {
                 userSeparator = ": ";
         }
         if (color.equals(MessageColor.ORANGE)) {
-            textColor = Color.ORANGE;
+            textColor = "Orange";
         }
         if (color.equals(MessageColor.YELLOW)) {
-            textColor = Color.YELLOW;
+            textColor = "Yellow";
         }
         if (username != null && !username.isEmpty()) {
-            this.txtConversation.append(userColor, username);
-            this.txtConversation.append(userColor, userSeparator);
-        }
-        this.txtConversation.append(textColor, message + "\n");
+            text.append(getColoredText(userColor, username + userSeparator));
+        }              
+        text.append(getColoredText(textColor, ManaSymbols.replaceSymbolsWithHTML(message, ManaSymbols.Type.PAY) + "\n"));
+        this.txtConversation.append(text.toString());
     }
 
+    private String getColoredText(String color, String text) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<font color='");
+        sb.append(color);
+        sb.append("'>");
+        sb.append(text);
+        sb.append("</font>");
+        return sb.toString();
+    }
     public String getText() {
         return txtConversation.getText();
     }
