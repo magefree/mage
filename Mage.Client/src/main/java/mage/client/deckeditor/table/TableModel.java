@@ -64,6 +64,8 @@ import mage.view.CardView;
 import mage.view.CardsView;
 import org.apache.log4j.Logger;
 import org.jdesktop.swingx.JXPanel;
+import org.mage.card.arcane.ManaSymbols;
+import org.mage.card.arcane.UI;
 
 /**
  * Table Model for card list.
@@ -249,15 +251,13 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
         case 1:
             return c.getName();
         case 2:
-            StringBuilder s = new StringBuilder();
-            for (String cost : c.getManaCost()) {
-                s.append(cost);
+            String manaCost = "";
+            for (String m : c.getManaCost()) {
+                manaCost += m;
             }
-            String cost = s.toString();
-            if (cost.isEmpty()) {
-                return "0";
-            }
-            return cost;
+            String castingCost = UI.getDisplayManaCost(manaCost);
+            castingCost = ManaSymbols.replaceSymbolsWithHTML(castingCost, ManaSymbols.Type.PAY);            
+            return "<html>" + castingCost + "</html>";
         case 3:
             return CardHelper.getColor(c);
         case 4:
