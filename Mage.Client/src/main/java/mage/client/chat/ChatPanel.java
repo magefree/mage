@@ -74,7 +74,7 @@ public class ChatPanel extends javax.swing.JPanel {
     /**
      * Chat message color for timestamps.
      */
-    private static final String TIMESTAMP_COLOR = "#87CEFA";
+    private static final String TIMESTAMP_COLOR = "#CCCC33";
     /**
      * Chat message color for messages.
      */
@@ -86,7 +86,7 @@ public class ChatPanel extends javax.swing.JPanel {
     /**
      * Chat message color for status infos.
      */
-    private static final String STATUS_COLOR = "#CD853F";
+    private static final String STATUS_COLOR = "#FFCC33";
     /**
      * This will be a chat that will be connected to {this} and will handle
      * redirected messages; Mostly used to redirect user messages to another
