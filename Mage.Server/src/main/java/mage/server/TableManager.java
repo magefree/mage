@@ -333,17 +333,14 @@ public class TableManager {
     }
 
     public void removeTable(UUID tableId) {
-        if (tables.containsKey(tableId)) {
-            
-            TableController tableController = controllers.get(tableId);            
-            if (tableController != null) {
-                controllers.remove(tableId);
-                tableController.cleanUp();            
-            }
+        TableController tableController = controllers.get(tableId);            
+        if (tableController != null) {
+            controllers.remove(tableId);
+            tableController.cleanUp();  // deletes the table chat and references to users           
             
             Table table = tables.get(tableId);
             tables.remove(tableId);
-            
+                        
             // If table is not finished, the table has to be removed completly because it's not a normal state (if finished it will be removed in GamesRoomImpl.Update())
             if (!table.getState().equals(TableState.FINISHED)) {
                 GamesRoomManager.getInstance().removeTable(tableId);

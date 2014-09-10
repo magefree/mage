@@ -136,7 +136,7 @@ public class UserManager {
             User user = users.get(userId);
             if (user != null) {
                 logger.debug("User " + user.getName() + " will be removed (" + reason.toString() + ")  userId: " + userId);
-                user.kill(reason);
+                user.remove(reason);
                 users.remove(userId);
                 logger.debug("User " + user.getName() + " removed");
             } else {

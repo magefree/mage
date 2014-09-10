@@ -31,6 +31,7 @@ package mage.server.util;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -55,10 +56,13 @@ public class ThreadExecutor {
     static {
         ((ThreadPoolExecutor)callExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
         ((ThreadPoolExecutor)callExecutor).allowCoreThreadTimeOut(true);
+        ((ThreadPoolExecutor)callExecutor).setThreadFactory(new XMageThreadFactory("CALL"));
         ((ThreadPoolExecutor)gameExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
         ((ThreadPoolExecutor)gameExecutor).allowCoreThreadTimeOut(true);
+        ((ThreadPoolExecutor)callExecutor).setThreadFactory(new XMageThreadFactory("GAME"));
         ((ThreadPoolExecutor)timeoutExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
         ((ThreadPoolExecutor)timeoutExecutor).allowCoreThreadTimeOut(true);
+        ((ThreadPoolExecutor)callExecutor).setThreadFactory(new XMageThreadFactory("TIME"));
     }
 
     private static final ThreadExecutor INSTANCE = new ThreadExecutor();
@@ -81,4 +85,19 @@ public class ThreadExecutor {
         return timeoutExecutor;
     }
 
+}
+
+class XMageThreadFactory implements ThreadFactory {
+   
+    private final String prefix;
+    
+    XMageThreadFactory(String prefix) {
+        this.prefix = prefix;
+    }
+    @Override
+    public Thread newThread(Runnable r) {
+        Thread thread = new Thread(r);
+        thread.setName(prefix + " " + thread.getThreadGroup().getName() + "-" + thread.getId());
+        return thread;
+   }
 }

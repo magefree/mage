@@ -333,26 +333,26 @@ public class User {
         sideboarding.remove(tableId);
     }
 
-    public void kill(DisconnectReason reason) {
-        logger.debug("Game sessions: " + gameSessions.size() );
+    public void remove(DisconnectReason reason) {
+        logger.debug("REMOVE " + getName() + " Game sessions: " + gameSessions.size() );
         for (GameSession gameSession: gameSessions.values()) {
             logger.debug("-- kill game session of gameId: " + gameSession.getGameId() );
             gameSession.kill();
         }
-        logger.debug("Draft sessions " + draftSessions.size());
+        logger.debug("REMOVE " + getName() + " Draft sessions " + draftSessions.size());
         for (DraftSession draftSession: draftSessions.values()) {
             draftSession.setKilled();
         }
-        logger.debug("Tournament sessions " + tournamentSessions.size());
+        logger.debug("REMOVE " + getName() + " Tournament sessions " + tournamentSessions.size());
         for (TournamentSession tournamentSession: tournamentSessions.values()) {
             tournamentSession.setKilled();
         }
-        logger.debug("Tables " + tables.size());
+        logger.debug("REMOVE " + getName() + " Tables " + tables.size());
         for (Entry<UUID, Table> entry: tables.entrySet()) {
             logger.debug("-- leave tableId: " + entry.getValue().getId());
             TableManager.getInstance().leaveTable(userId, entry.getValue().getId());
         }
-        logger.debug("Chat remove user");
+        logger.debug("REMOVE " + getName() + " Chats ");
         ChatManager.getInstance().removeUser(userId, reason);
     }
 

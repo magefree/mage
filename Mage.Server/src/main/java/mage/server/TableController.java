@@ -725,9 +725,7 @@ public class TableController {
                                 user.showUserMessage("Match info", sb.toString());
                             }
                             // remove table from user - table manager holds table for display of finished matches
-                            if (!table.isTournamentSubTable()) {
-                                user.removeTable(entry.getValue());
-                            }
+                            user.removeTable(entry.getValue());
                         }
                     }
                 }
@@ -870,6 +868,12 @@ public class TableController {
     }
     
     void cleanUp() {
+        for(Map.Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
+            User user = UserManager.getInstance().getUser(entry.getKey());
+            if (user != null) {
+                user.removeTable(entry.getValue());
+            }            
+        }
         ChatManager.getInstance().destroyChatSession(chatId);
     }
 
