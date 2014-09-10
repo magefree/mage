@@ -372,10 +372,10 @@ public class CallbackClientImpl implements CallbackClient {
                 usedPanel.receiveMessage("", new StringBuilder("You may use hot keys to play faster:")
                         .append("<br/>Turn mousewheel up (ALT-e) - enlarge image of card the mousepointer hovers over")
                         .append("<br/>Turn mousewheel down (ALT-s) - enlarge original/alternate image of card the mousepointer hovers over")
-                        .append("<br/><b>F2<b/> - Confirm \"Ok\", \"Yes\" or \"Done\" button")
-                        .append("<br/><b>F4<b/> - Skip current turn but stop on declare attackers/blockers and something on the stack")
-                        .append("<br/><b>F9<b/> - Skip everything until your next turn")
-                        .append("<br/><b>F3<b/> - Undo F4/F9").toString(),
+                        .append("<br/><b>F2</b> - Confirm \"Ok\", \"Yes\" or \"Done\" button")
+                        .append("<br/><b>F4</b> - Skip current turn but stop on declare attackers/blockers and something on the stack")
+                        .append("<br/><b>F9</b> - Skip everything until your next turn")
+                        .append("<br/><b>F3</b> - Undo F4/F9").toString(),
                         null, MessageType.USER_INFO, ChatMessage.MessageColor.ORANGE);
                 break;
             case TOURNAMENT:
