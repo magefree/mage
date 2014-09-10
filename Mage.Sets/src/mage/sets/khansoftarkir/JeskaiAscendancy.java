@@ -25,44 +25,65 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.abilities.keyword.BasicLandcyclingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class GleamOfResistance extends CardImpl {
+public class JeskaiAscendancy extends CardImpl {
 
-    public GleamOfResistance(UUID ownerId) {
-        super(ownerId, 8, "Gleam of Resistance", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{W}");
-        this.expansionSetCode = "CON";
+    private static final FilterSpell filterNonCreature = new FilterSpell("a noncreature spell");
 
-        this.color.setWhite(true);
-
-        // Creatures you control get +1/+2 until end of turn. Untap those creatures.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 2, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new UntapAllControllerEffect(new FilterCreaturePermanent(),"Untap those creatures"));
-        // Basic landcycling {1}{W}({1}{W}, Discard this card: Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.)
-        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{1}{W}")));
+    static {
+        filterNonCreature.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
-    public GleamOfResistance(final GleamOfResistance card) {
+    public JeskaiAscendancy(UUID ownerId) {
+        super(ownerId, 180, "Jeskai Ascendancy", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{U}{R}{W}");
+        this.expansionSetCode = "KTK";
+
+        this.color.setRed(true);
+        this.color.setBlue(true);
+        this.color.setWhite(true);
+
+        // Whenever you cast a noncreature spell, creatures you control get +1/+1 until end of turn. Untap those creatures.
+        Effect effect = new BoostControlledEffect(1,1,Duration.EndOfTurn);
+        Ability ability = new SpellCastControllerTriggeredAbility(effect, filterNonCreature, false);
+        effect = new UntapAllControllerEffect(new FilterCreaturePermanent(),"Untap those creatures");
+        ability.addEffect(effect);
+        this.addAbility(ability);
+
+        // Whenever you cast a noncreature spell, you may draw a card. If you do, discard a card.
+        effect = new DrawDiscardControllerEffect(1,1);
+        effect.setText("you may draw a card. If you do, discard a card");
+        ability = new SpellCastControllerTriggeredAbility(effect, filterNonCreature, true);
+        this.addAbility(ability);
+    }
+
+    public JeskaiAscendancy(final JeskaiAscendancy card) {
         super(card);
     }
 
     @Override
-    public GleamOfResistance copy() {
-        return new GleamOfResistance(this);
+    public JeskaiAscendancy copy() {
+        return new JeskaiAscendancy(this);
     }
 }

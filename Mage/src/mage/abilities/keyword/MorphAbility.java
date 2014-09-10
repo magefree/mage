@@ -118,6 +118,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
     public MorphAbility(Card card, Costs morphCosts) {
         super(Zone.HAND, null);
         card.setMorphCard(true);
+        this.setWorksFaceDown(true);
         name = ABILITY_KEYWORD;
         StringBuilder sb = new StringBuilder();
         sb.append(ABILITY_KEYWORD).append(" ");

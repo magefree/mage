@@ -25,127 +25,127 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
-
-import mage.constants.*;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.TrampleAbility;
-import mage.cards.CardImpl;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.TargetPermanent;
+package mage.sets.khansoftarkir;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.VigilanceAbility;
+import mage.cards.CardImpl;
+import mage.choices.Choice;
+import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.game.Game;
+import mage.players.Player;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
- * @author nantuko
+ *
+ * @author LevelX2
  */
-public class GolemArtisan extends CardImpl {
+public class ButcherOfTheHorde extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact creature");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(new AnotherPredicate());
     }
 
-    public GolemArtisan(UUID ownerId) {
-        super(ownerId, 159, "Golem Artisan", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
-        this.expansionSetCode = "SOM";
-        this.subtype.add("Golem");
+    public ButcherOfTheHorde(UUID ownerId) {
+        super(ownerId, 168, "Butcher of the Horde", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{W}{B}");
+        this.expansionSetCode = "KTK";
+        this.subtype.add("Demon");
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        this.color.setRed(true);
+        this.color.setBlack(true);
+        this.color.setWhite(true);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(4);
 
-        // {2}: Target artifact creature gets +1/+1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new GenericManaCost(2));
-        Target target = new TargetPermanent(filter);
-        ability.addTarget(target);
-        this.addAbility(ability);
-
-        // {2}: Target artifact creature gains your choice of flying, trample, or haste until end of turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GolemArtisanEffect(), new GenericManaCost(2));
-        target = new TargetPermanent(filter);
-        ability.addTarget(target);
-        this.addAbility(ability);
-
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Sacrifice another creature: Butcher of the Horde gains your choice of vigilance, lifelink, or haste until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new ButcherOfTheHordeEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filter, false))));
     }
 
-    public GolemArtisan(final GolemArtisan card) {
+    public ButcherOfTheHorde(final ButcherOfTheHorde card) {
         super(card);
     }
 
     @Override
-    public GolemArtisan copy() {
-        return new GolemArtisan(this);
+    public ButcherOfTheHorde copy() {
+        return new ButcherOfTheHorde(this);
     }
 }
 
-class GolemArtisanEffect extends OneShotEffect {
-    GolemArtisanEffect() {
+class ButcherOfTheHordeEffect extends OneShotEffect {
+    ButcherOfTheHordeEffect() {
         super(Outcome.AddAbility);
-        staticText = "Target artifact creature gains your choice of flying, trample, or haste until end of turn";
+        staticText = "{this} gains your choice of vigilance, lifelink, or haste until end of turn";
     }
 
-    GolemArtisanEffect(final GolemArtisanEffect effect) {
+    ButcherOfTheHordeEffect(final ButcherOfTheHordeEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         Player playerControls = game.getPlayer(source.getControllerId());
-        if (permanent != null && playerControls != null) {
+        if (playerControls != null) {
             Choice abilityChoice = new ChoiceImpl();
             abilityChoice.setMessage("Choose an ability to add");
 
             Set<String> abilities = new HashSet<>();
-            abilities.add(FlyingAbility.getInstance().getRule());
-            abilities.add(TrampleAbility.getInstance().getRule());
+            abilities.add(VigilanceAbility.getInstance().getRule());
+            abilities.add(LifelinkAbility.getInstance().getRule());
             abilities.add(HasteAbility.getInstance().getRule());
             abilityChoice.setChoices(abilities);
-            playerControls.choose(Outcome.AddAbility, abilityChoice, game);
+            while (!abilityChoice.isChosen()) {
+                playerControls.choose(Outcome.AddAbility, abilityChoice, game);
+                if (!playerControls.isInGame()) {
+                    return false;
+                }
+            }
 
             String chosen = abilityChoice.getChoice();
             Ability ability = null;
-            if (FlyingAbility.getInstance().getRule().equals(chosen)) {
-                ability = FlyingAbility.getInstance();
-            } else if (TrampleAbility.getInstance().getRule().equals(chosen)) {
-                ability = TrampleAbility.getInstance();
+            if (VigilanceAbility.getInstance().getRule().equals(chosen)) {
+                ability = VigilanceAbility.getInstance();
+            } else if (LifelinkAbility.getInstance().getRule().equals(chosen)) {
+                ability = LifelinkAbility.getInstance();
             } else if (HasteAbility.getInstance().getRule().equals(chosen)) {
                 ability = HasteAbility.getInstance();
             }
 
             if (ability != null) {
-                ContinuousEffect effect = new GainAbilityTargetEffect(ability, Duration.EndOfTurn);
+                ContinuousEffect effect = new GainAbilitySourceEffect(ability, Duration.EndOfTurn);
                 game.addEffect(effect, source);
                 return true;
             }
         }
-
         return false;
     }
 
     @Override
-    public GolemArtisanEffect copy() {
-        return new GolemArtisanEffect(this);
+    public ButcherOfTheHordeEffect copy() {
+        return new ButcherOfTheHordeEffect(this);
     }
 
 }
