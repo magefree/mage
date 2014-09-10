@@ -155,7 +155,10 @@ public class Table implements Serializable {
     }
 
     public String getDeckType() {
-        return validator.getName();
+        if (validator != null) {
+            return validator.getName();
+        }
+        return "<deckt type missing>";
     }
 
     public Date getCreateTime() {
