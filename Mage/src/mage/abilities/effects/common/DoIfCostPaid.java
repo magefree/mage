@@ -6,6 +6,7 @@ import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.PostResolveEffect;
 import mage.constants.Outcome;
@@ -14,7 +15,7 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 public class DoIfCostPaid extends OneShotEffect {
-    protected final Effect executingEffect;
+    protected Effects executingEffects = new Effects();
     private final Cost cost;
     private String chooseUseText;
 
@@ -24,18 +25,22 @@ public class DoIfCostPaid extends OneShotEffect {
 
     public DoIfCostPaid(Effect effect, Cost cost, String chooseUseText) {
         super(Outcome.Benefit);
-        this.executingEffect = effect;
+        this.executingEffects.add(effect);
         this.cost = cost;
         this.chooseUseText = chooseUseText;
     }
 
     public DoIfCostPaid(final DoIfCostPaid effect) {
         super(effect);
-        this.executingEffect = effect.executingEffect.copy();
+        this.executingEffects = effect.executingEffects.copy();
         this.cost = effect.cost.copy();
         this.chooseUseText = effect.chooseUseText;
     }
 
+    public void addEffect(Effect effect) {
+        executingEffects.add(effect);
+    }
+    
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = getPayingPlayer(game, source);
@@ -43,26 +48,30 @@ public class DoIfCostPaid extends OneShotEffect {
         if (player != null && mageObject != null) {
             String message;
             if (chooseUseText == null) {
-                message = new StringBuilder(getCostText()).append(" and ").append(executingEffect.getText(source.getModes().getMode())).append("?").toString();
+                message = new StringBuilder(getCostText()).append(" and ").append(executingEffects.getText(source.getModes().getMode())).append("?").toString();
             } else {
                 message = chooseUseText;
             }
             message = CardUtil.replaceSourceName(message, mageObject.getName());
-            if (cost.canPay(source, source.getSourceId(), player.getId(), game) && player.chooseUse(executingEffect.getOutcome(), message, game)) {
+            boolean result = true;
+            if (cost.canPay(source, source.getSourceId(), player.getId(), game) && player.chooseUse(executingEffects.get(0).getOutcome(), message, game)) {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
-                    executingEffect.setTargetPointer(this.targetPointer);
-                    if (executingEffect instanceof OneShotEffect) {
-                        if (!(executingEffect instanceof PostResolveEffect)) {
-                            return executingEffect.apply(game, source);
+                    
+                    for(Effect effect: executingEffects) {
+                        effect.setTargetPointer(this.targetPointer);
+                        if (effect instanceof OneShotEffect) {
+                            if (!(effect instanceof PostResolveEffect)) {
+                                result &= effect.apply(game, source);
+                            }
                         }
-                    }
-                    else {
-                        game.addEffect((ContinuousEffect) executingEffect, source);
+                        else {
+                            game.addEffect((ContinuousEffect) effect, source);
+                        }
                     }
                 }
             }
-            return true;
+            return result;
         }
         return false;
     }
@@ -76,7 +85,7 @@ public class DoIfCostPaid extends OneShotEffect {
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        return new StringBuilder("you may ").append(getCostText()).append(". If you do, ").append(executingEffect.getText(mode)).toString();
+        return new StringBuilder("you may ").append(getCostText()).append(". If you do, ").append(executingEffects.getText(mode)).toString();
     }
 
     protected String getCostText() {

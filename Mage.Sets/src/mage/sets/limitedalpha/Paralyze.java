@@ -107,6 +107,6 @@ class ParalyzeEffect extends DoIfCostPaid {
     @Override
     public String getText(Mode mode) {
         return new StringBuilder("that player may ").append(getCostText())
-                .append(". If he or she does, ").append(executingEffect.getText(mode)).toString();
+                .append(". If he or she does, ").append(executingEffects.getText(mode)).toString();
     }
 }
