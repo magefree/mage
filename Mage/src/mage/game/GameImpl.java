@@ -604,6 +604,7 @@ public abstract class GameImpl implements Game, Serializable {
             PlayerList players = state.getPlayerList(nextPlayerId);
             Player player = getPlayer(players.get());
             while (!isPaused() && !gameOver(null)) {
+                playExtraTurns(player);
                 GameEvent event = new GameEvent(GameEvent.EventType.PLAY_TURN, null, null, player.getId());
                 if (!replaceEvent(event)) {
                     if (!playTurn(player)) {
@@ -611,21 +612,7 @@ public abstract class GameImpl implements Game, Serializable {
                     }
                     state.setTurnNum(state.getTurnNum() + 1);
                 }
-
-                //20091005 - 500.7
-                UUID extraTurnId = getNextExtraTurn(player.getId());
-                while (extraTurnId != null) {
-                    event = new GameEvent(GameEvent.EventType.PLAY_TURN, null, null, player.getId());
-                        if (!replaceEvent(event)) {
-                        state.setExtraTurn(true);
-                        state.setTurnId(extraTurnId);
-                        playTurn(player);
-                        state.setTurnNum(state.getTurnNum() + 1);
-                    }
-                    extraTurnId = getNextExtraTurn(player.getId());
-                }
-                state.setTurnId(null);
-                state.setExtraTurn(false);
+                playExtraTurns(player);
                 player = players.getNext(this);
             }
         }
@@ -635,6 +622,25 @@ public abstract class GameImpl implements Game, Serializable {
         }
     }
 
+    private void playExtraTurns(Player player) {
+        //20091005 - 500.7
+        UUID extraTurnId = getNextExtraTurn(player.getId());
+        while (extraTurnId != null) {
+            GameEvent event = new GameEvent(GameEvent.EventType.PLAY_TURN, null, null, player.getId());
+            if (!replaceEvent(event)) {
+                state.setExtraTurn(true);
+                state.setTurnId(extraTurnId);
+                informPlayers(player.getName() + " takes an extra turn");
+                playTurn(player);
+                state.setTurnNum(state.getTurnNum() + 1);
+            }
+            extraTurnId = getNextExtraTurn(player.getId());
+        }
+        state.setTurnId(null);
+        state.setExtraTurn(false);
+        
+    }
+    
     private UUID getNextExtraTurn(UUID playerId) {
         Player player = this.getPlayer(playerId);
         if (player != null) {            
