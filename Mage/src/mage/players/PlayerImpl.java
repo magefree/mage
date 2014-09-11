@@ -1116,17 +1116,24 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void revealCards(String name, Cards cards, Game game) {
+        revealCards(name, cards, game, true);
+    }
+
+    @Override
+    public void revealCards(String name, Cards cards, Game game, boolean postToLog) {
         game.getState().getRevealed().add(name, cards);
-        StringBuilder sb = new StringBuilder(this.getName()).append(" reveals ");
-        int current = 0, last = cards.size();        
-        for (Card card :cards.getCards(game)) {
-            current++;
-            sb.append(card.getName());
-            if (current < last) {
-                sb.append(", ");
+        if (postToLog) {
+            StringBuilder sb = new StringBuilder(this.getName()).append(" reveals ");
+            int current = 0, last = cards.size();
+            for (Card card :cards.getCards(game)) {
+                current++;
+                sb.append(card.getName());
+                if (current < last) {
+                    sb.append(", ");
+                }
             }
+            game.informPlayers(sb.toString());
         }
-        game.informPlayers(sb.toString());
     }
 
     @Override

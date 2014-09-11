@@ -36,6 +36,7 @@ import mage.game.Game;
 import mage.players.Player;
 
 import java.util.UUID;
+import mage.MageObject;
 
 /**
  *
@@ -76,12 +77,13 @@ class OpponentsPlayWithTheTopCardRevealedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            for (UUID opponentId : game.getOpponents(player.getId())) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null) {
+            for (UUID opponentId : game.getOpponents(controller.getId())) {
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null) {
-                    opponent.setTopCardRevealed(true);
+                    controller.revealCards(sourceObject.getName() + " " + opponent.getName(), opponent.getHand(), game, false);
                 }
             }
             return true;

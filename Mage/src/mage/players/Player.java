@@ -265,6 +265,7 @@ public interface Player extends MageItem, Copyable<Player> {
     void resetStoredBookmark(Game game);
 
     void revealCards(String name, Cards cards, Game game);
+    void revealCards(String name, Cards cards, Game game, boolean postToLog);
     void lookAtCards(String name, Cards cards, Game game);
 
     @Override
