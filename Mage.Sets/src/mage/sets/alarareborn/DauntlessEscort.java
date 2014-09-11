@@ -61,7 +61,7 @@ public class DauntlessEscort extends CardImpl {
 
         // Sacrifice Dauntless Escort: Creatures you control are indestructible this turn.
         FilterPermanent filter = new FilterControlledCreaturePermanent("Creatures you control");
-        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter, false);
+        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, filter, false);
         effect.setText("Creatures you control are indestructible this turn");
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new SacrificeSourceCost()));
     }
