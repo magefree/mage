@@ -28,91 +28,92 @@
 package mage.sets.khansoftarkir;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.TurnedFaceUpTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
+import mage.abilities.effects.common.DamagePlayersEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 
 /**
  *
  * @author emerald000
  */
-public class BitterRevelation extends CardImpl {
+public class AshcloudPhoenix extends CardImpl {
 
-    public BitterRevelation(UUID ownerId) {
-        super(ownerId, 65, "Bitter Revelation", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
+    public AshcloudPhoenix(UUID ownerId) {
+        super(ownerId, 99, "Ashcloud Phoenix", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.expansionSetCode = "KTK";
+        this.subtype.add("Phoenix");
 
-        this.color.setBlack(true);
+        this.color.setRed(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(1);
 
-        // Look at the top four cards of your library. Put two of them into your hand and the rest into your graveyard. You lose 2 life.
-        this.getSpellAbility().addEffect(new BitterRevelationEffect());
-        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        
+        // When Ashcloud Phoenix dies, return it to the battlefield face down.
+        this.addAbility(new DiesTriggeredAbility(new AshcloudPhoenixEffect()));
+        
+        // Morph {4}{R}{R}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{4}{R}{R}")));
+        
+        // When Ashcloud Phoenix is turned face up, it deals 2 damage to each player.
+        Effect effect = new DamagePlayersEffect(2, TargetController.ANY);
+        effect.setText("it deals 2 damage to each player");
+        this.addAbility(new TurnedFaceUpTriggeredAbility(effect));
     }
 
-    public BitterRevelation(final BitterRevelation card) {
+    public AshcloudPhoenix(final AshcloudPhoenix card) {
         super(card);
     }
 
     @Override
-    public BitterRevelation copy() {
-        return new BitterRevelation(this);
+    public AshcloudPhoenix copy() {
+        return new AshcloudPhoenix(this);
     }
 }
 
-class BitterRevelationEffect extends OneShotEffect {
+class AshcloudPhoenixEffect extends OneShotEffect {
     
-    BitterRevelationEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Look at the top four cards of your library. Put two of them into your hand and the rest into your graveyard. ";
+    AshcloudPhoenixEffect() {
+        super(Outcome.PutCreatureInPlay);
+        this.staticText = "return it to the battlefield face down";
     }
     
-    BitterRevelationEffect(final BitterRevelationEffect effect) {
+    AshcloudPhoenixEffect(final AshcloudPhoenixEffect effect) {
         super(effect);
     }
     
     @Override
-    public BitterRevelationEffect copy() {
-        return new BitterRevelationEffect(this);
+    public AshcloudPhoenixEffect copy() {
+        return new AshcloudPhoenixEffect(this);
     }
     
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            Cards cards = new CardsImpl(Zone.LIBRARY);
-            int cardsCount = Math.min(4, player.getLibrary().size());
-            for (int i = 0; i < cardsCount; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                }
-            }
-            if (cards.size() > 0) {
-                player.lookAtCards("Bitter Revelation", cards, game);
-                TargetCard target = new TargetCard(Math.min(2, cards.size()), Zone.PICK, new FilterCard("two cards to put in your hand"));
-                if (player.choose(Outcome.DrawCard, cards, target, game)) {
-                    for (UUID targetId : target.getTargets()) {
-                        Card card = cards.get(targetId, game);
-                        if (card != null) {
-                            player.putInHand(card, game);
-                            cards.remove(card);
-                        }   
-                    }
-                }
-                for (Card card : cards.getCards(game)) {
-                    player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+            Card card = game.getCard(source.getSourceId());
+            if (card != null) {
+                Player owner = game.getPlayer(card.getOwnerId());
+                if (owner != null && owner.getGraveyard().contains(card.getId())) {
+                    card.setFaceDown(true);
+                    player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
                 }
             }
             return true;
