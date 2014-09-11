@@ -38,7 +38,6 @@ import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.TurnFaceUpAbility;
-import mage.abilities.common.TurnedFaceUpTriggeredAbility;
 import mage.abilities.costs.AlternativeCost2;
 import mage.abilities.costs.AlternativeCost2Impl;
 import mage.abilities.costs.AlternativeSourceCosts;
@@ -48,7 +47,6 @@ import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.AsTurnedFaceUpEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continious.SourceEffect;
 import mage.cards.Card;
@@ -187,7 +185,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
                 this.resetMorph();
                 for (AlternativeCost2 alternateCastingCost: alternateCosts) {
                     if (alternateCastingCost.canPay(ability, sourceId, controllerId, game) &&
-                          player.chooseUse(Outcome.Benefit, new StringBuilder("Cast this card as a 2/2 face-down creature for ").append(alternateCastingCost.getText(true)).append(" ?").toString(), game)) {
+                        player.chooseUse(Outcome.Benefit, new StringBuilder("Cast this card as a 2/2 face-down creature for ").append(alternateCastingCost.getText(true)).append(" ?").toString(), game)) {
 
                         Spell spell = game.getStack().getSpell(ability.getId());
                         if (spell != null) {

@@ -28,62 +28,43 @@
 package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.keyword.HasteAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.permanent.token.Token;
+import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
- * @author emerald000
+ * @author LevelX2
  */
-public class Goblinslide extends CardImpl {
+public class AltarOfTheBrood extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("noncreature spell");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another permanent");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(new AnotherPredicate());
     }
 
-    public Goblinslide(UUID ownerId) {
-        super(ownerId, 109, "Goblinslide", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
+    public AltarOfTheBrood(UUID ownerId) {
+        super(ownerId, 216, "Altar of the Brood", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "KTK";
 
-        this.color.setRed(true);
-
-        // Whenever you cast a noncreature spell, you may pay {1}. If you do, put a 1/1 red Goblin creature token with haste onto the battlefield.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new CreateTokenEffect(new GoblinslideGoblinToken()), new GenericManaCost(1)), filter, false));
+        // Whenever another permanent enters the battlefield under your control, each opponent puts the top card of his or her library into his or her graveyard.
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
+                new PutTopCardOfLibraryIntoGraveEachPlayerEffect(1, TargetController.OPPONENT), filter, false));
     }
 
-    public Goblinslide(final Goblinslide card) {
+    public AltarOfTheBrood(final AltarOfTheBrood card) {
         super(card);
     }
 
     @Override
-    public Goblinslide copy() {
-        return new Goblinslide(this);
-    }
-}
-
-class GoblinslideGoblinToken extends Token {
-
-    GoblinslideGoblinToken() {
-        super("Goblin", "1/1 red Goblin creature token with haste");
-        this.setOriginalExpansionSetCode("KTK");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Goblin");
-        color.setRed(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        addAbility(HasteAbility.getInstance());
+    public AltarOfTheBrood copy() {
+        return new AltarOfTheBrood(this);
     }
 }

@@ -65,6 +65,7 @@ public class BrimazKingOfOreskos extends CardImpl {
 
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
+        
         // Whenever Brimaz, King of Oreskos attacks, put a 1/1 white Cat Soldier creature token with vigilance onto the battlefield attacking.
         this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new CatSoldierCreatureToken(), 1, false, true), false));
         

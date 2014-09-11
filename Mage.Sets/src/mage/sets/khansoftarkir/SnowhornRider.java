@@ -29,61 +29,44 @@ package mage.sets.khansoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.permanent.token.Token;
 
 /**
  *
- * @author emerald000
+ * @author LevelX2
  */
-public class Goblinslide extends CardImpl {
+public class SnowhornRider extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("noncreature spell");
-
-    static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
-    }
-
-    public Goblinslide(UUID ownerId) {
-        super(ownerId, 109, "Goblinslide", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
+    public SnowhornRider(UUID ownerId) {
+        // TODO: Check Rarity
+        super(ownerId, 201, "Snowhorn Rider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{U}{R}");
         this.expansionSetCode = "KTK";
+        this.subtype.add("Human");
+        this.subtype.add("Warrior");
 
         this.color.setRed(true);
+        this.color.setBlue(true);
+        this.color.setGreen(true);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
 
-        // Whenever you cast a noncreature spell, you may pay {1}. If you do, put a 1/1 red Goblin creature token with haste onto the battlefield.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new CreateTokenEffect(new GoblinslideGoblinToken()), new GenericManaCost(1)), filter, false));
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        // Morph {2}{G}{U}{R}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{G}{U}{R}")));
     }
 
-    public Goblinslide(final Goblinslide card) {
+    public SnowhornRider(final SnowhornRider card) {
         super(card);
     }
 
     @Override
-    public Goblinslide copy() {
-        return new Goblinslide(this);
-    }
-}
-
-class GoblinslideGoblinToken extends Token {
-
-    GoblinslideGoblinToken() {
-        super("Goblin", "1/1 red Goblin creature token with haste");
-        this.setOriginalExpansionSetCode("KTK");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Goblin");
-        color.setRed(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        addAbility(HasteAbility.getInstance());
+    public SnowhornRider copy() {
+        return new SnowhornRider(this);
     }
 }

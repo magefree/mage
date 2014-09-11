@@ -30,82 +30,68 @@ package mage.sets.khansoftarkir;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.game.permanent.token.GoblinToken;
 
 /**
  *
  * @author LevelX2
  */
-public class EfreetWeaponmaster extends CardImpl {
+public class PonybackBrigade extends CardImpl {
 
-    public EfreetWeaponmaster(UUID ownerId) {
-        super(ownerId, 175, "Efreet Weaponmaster", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{R}{W}");
+    public PonybackBrigade(UUID ownerId) {
+        super(ownerId, 191, "Ponyback Brigade", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{W}{B}");
         this.expansionSetCode = "KTK";
-        this.subtype.add("Efreet");
-        this.subtype.add("Monk");
+        this.subtype.add("Goblin");
+        this.subtype.add("Warrior");
 
         this.color.setRed(true);
-        this.color.setBlue(true);
+        this.color.setBlack(true);
         this.color.setWhite(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(3);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // First strike
-        this.addAbility(FirstStrikeAbility.getInstance());
-        
-        // When Efreet Weaponmaster enters the battlefield or is turned face up, another target creature you control gets +3/+0 until end of turn.
-        this.addAbility(new EfreetWeaponmasterAbility());
+        // When Ponyback Brigade enters the battlefield or is turned face up, put three 1/1 red Goblin creature tokens onto the battlefield.
+        this.addAbility(new PonybackBrigadeAbility());
 
-        // Morph {2}{U}{R}{W}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{U}{R}{W}")));
+        // Morph {2}{R}{W}{B}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{R}{W}{B}")));
     }
 
-    public EfreetWeaponmaster(final EfreetWeaponmaster card) {
+    public PonybackBrigade(final PonybackBrigade card) {
         super(card);
     }
 
     @Override
-    public EfreetWeaponmaster copy() {
-        return new EfreetWeaponmaster(this);
+    public PonybackBrigade copy() {
+        return new PonybackBrigade(this);
     }
 }
 
-class EfreetWeaponmasterAbility extends TriggeredAbilityImpl {
+class PonybackBrigadeAbility extends TriggeredAbilityImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
-
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
-    public EfreetWeaponmasterAbility() {
-        super(Zone.BATTLEFIELD, new BoostTargetEffect(3,0, Duration.EndOfTurn), false);
-        this.addTarget(new TargetControlledCreaturePermanent(filter));
+    public PonybackBrigadeAbility() {
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new GoblinToken("KTK"), 3), false);
         this.setWorksFaceDown(true);
     }
 
-    public EfreetWeaponmasterAbility(final EfreetWeaponmasterAbility ability) {
+    public PonybackBrigadeAbility(final PonybackBrigadeAbility ability) {
         super(ability);
     }
 
     @Override
-    public EfreetWeaponmasterAbility copy() {
-        return new EfreetWeaponmasterAbility(this);
+    public PonybackBrigadeAbility copy() {
+        return new PonybackBrigadeAbility(this);
     }
 
     @Override
@@ -126,5 +112,4 @@ class EfreetWeaponmasterAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "When {this} enters the battlefield or is turned face up, " + super.getRule();
     }
-
 }
