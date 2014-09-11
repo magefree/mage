@@ -52,6 +52,8 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentImpl;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
@@ -207,6 +209,8 @@ class KarnLiberatedDelayedEffect extends OneShotEffect {
             cards.addAll(exile);
             for (Card card: cards.getCards(game)) {
                 card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), source.getControllerId());
+                Permanent permanent = game.getPermanent(card.getId());
+                ((PermanentImpl)permanent).removeSummoningSickness();
             }
             return true;
         }
