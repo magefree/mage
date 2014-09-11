@@ -54,7 +54,7 @@ import mage.players.Player;
 public class DreamHalls extends CardImpl {
 
     public DreamHalls(UUID ownerId) {
-        super(ownerId, 28, "Dream Halls", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
+        super(ownerId, 28, "Dream Halls", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
         this.expansionSetCode = "STH";
 
         this.color.setBlue(true);
