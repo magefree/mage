@@ -46,15 +46,15 @@ import mage.target.TargetSpell;
  *
  * @author emerald000
  */
-public class StubbornRefusal extends CardImpl {
+public class StubbornDenial extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("noncreature spell");
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
     
-    public StubbornRefusal(UUID ownerId) {
-        super(ownerId, 56, "Stubborn Refusal", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");
+    public StubbornDenial(UUID ownerId) {
+        super(ownerId, 56, "Stubborn Denial", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "KTK";
 
         this.color.setBlue(true);
@@ -72,12 +72,12 @@ public class StubbornRefusal extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public StubbornRefusal(final StubbornRefusal card) {
+    public StubbornDenial(final StubbornDenial card) {
         super(card);
     }
 
     @Override
-    public StubbornRefusal copy() {
-        return new StubbornRefusal(this);
+    public StubbornDenial copy() {
+        return new StubbornDenial(this);
     }
 }
