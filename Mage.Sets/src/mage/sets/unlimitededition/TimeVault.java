@@ -86,8 +86,7 @@ class TimeVaultReplacementEffect extends ReplacementEffectImpl {
     
     TimeVaultReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Untap);
-        staticText = "If you would begin your turn while {this} is tapped, you may skip that turn instead. If you do, untap Time Vault.";
-        
+        staticText = "If you would begin your turn while {this} is tapped, you may skip that turn instead. If you do, untap Time Vault.";        
     }
     
     TimeVaultReplacementEffect(final TimeVaultReplacementEffect effect) {
@@ -101,7 +100,7 @@ class TimeVaultReplacementEffect extends ReplacementEffectImpl {
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.BEGINNING_PHASE && source.getControllerId().equals(event.getPlayerId())) {
+        if (event.getType() == EventType.PLAY_TURN && source.getControllerId().equals(event.getPlayerId())) {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null && permanent.isTapped()) {
                 return true;
@@ -122,7 +121,7 @@ class TimeVaultReplacementEffect extends ReplacementEffectImpl {
         if (player != null && permanent != null) {
             if (player.chooseUse(Outcome.Untap, "Skip your turn to untap " + permanent.getName() + "?", game)) {
                 permanent.untap(game);
-                game.endTurn();
+                game.informPlayers(player.getName() + " skips his or her turn to untap " + permanent.getLogName());
                 return true;
             }
         }
