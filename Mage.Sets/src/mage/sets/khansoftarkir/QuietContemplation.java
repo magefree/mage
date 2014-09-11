@@ -70,6 +70,7 @@ public class QuietContemplation extends CardImpl {
         DoIfCostPaid doIfCostPaid = new DoIfCostPaid(new TapTargetEffect(), new GenericManaCost(1),"Tap creature?");        
         Effect effect = new SkipNextUntapTargetEffect();
         effect.setText("and it doesn't untap during its controller's next untap step");
+        doIfCostPaid.addEffect(effect);
         Ability ability = new SpellCastControllerTriggeredAbility(doIfCostPaid, filterNonCreature, false);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);        
