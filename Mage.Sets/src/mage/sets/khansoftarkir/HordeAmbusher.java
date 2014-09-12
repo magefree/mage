@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.BlocksTriggeredAbility;
-import mage.abilities.common.TurnedFaceUpTriggeredAbility;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageControllerEffect;
@@ -77,7 +77,7 @@ public class HordeAmbusher extends CardImpl {
         // When Horde Ambusher is turned face up, target creature can't block this turn.
         Effect effect = new CantBlockTargetEffect(Duration.EndOfTurn);
         effect.setText("target creature can't block this turn");
-        Ability ability = new TurnedFaceUpTriggeredAbility(effect);
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(effect);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

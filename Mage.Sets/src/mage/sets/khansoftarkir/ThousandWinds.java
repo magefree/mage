@@ -29,7 +29,7 @@ package mage.sets.khansoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.TurnedFaceUpTriggeredAbility;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -68,7 +68,7 @@ public class ThousandWinds extends CardImpl {
         // Morph {5}{U}{U}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{5}{U}{U}")));
         // When Thousand Winds is turned face up, return all other tapped creatures to their owners' hands.
-        this.addAbility(new TurnedFaceUpTriggeredAbility(new ReturnToHandFromBattlefieldAllEffect(filter)));
+        this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new ReturnToHandFromBattlefieldAllEffect(filter)));
     }
 
     public ThousandWinds(final ThousandWinds card) {

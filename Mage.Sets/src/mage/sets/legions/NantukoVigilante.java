@@ -30,7 +30,7 @@ package mage.sets.legions;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.TurnedFaceUpTriggeredAbility;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.MorphAbility;
@@ -70,7 +70,7 @@ public class NantukoVigilante extends CardImpl {
         // Morph {1}{G}
         this.addAbility(new MorphAbility(this,new ManaCostsImpl("{1}{G}")));
         // When Nantuko Vigilante is turned face up, destroy target artifact or enchantment.
-        Ability ability = new TurnedFaceUpTriggeredAbility(new DestroyTargetEffect());
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new DestroyTargetEffect());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

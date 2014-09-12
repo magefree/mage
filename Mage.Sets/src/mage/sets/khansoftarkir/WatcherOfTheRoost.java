@@ -30,7 +30,7 @@ package mage.sets.khansoftarkir;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.TurnedFaceUpTriggeredAbility;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -73,7 +73,7 @@ public class WatcherOfTheRoost extends CardImpl {
         // When Watcher of the Roost is turned face up, you gain 2 life.
         Effect effect = new GainLifeEffect(2);
         effect.setText("you gain 2 life");
-        this.addAbility(new TurnedFaceUpTriggeredAbility(effect));
+        this.addAbility(new TurnedFaceUpSourceTriggeredAbility(effect));
     }
 
     public WatcherOfTheRoost(final WatcherOfTheRoost card) {

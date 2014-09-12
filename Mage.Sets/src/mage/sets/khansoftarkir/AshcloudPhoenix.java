@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.common.TurnedFaceUpTriggeredAbility;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -75,7 +75,7 @@ public class AshcloudPhoenix extends CardImpl {
         // When Ashcloud Phoenix is turned face up, it deals 2 damage to each player.
         Effect effect = new DamagePlayersEffect(2, TargetController.ANY);
         effect.setText("it deals 2 damage to each player");
-        this.addAbility(new TurnedFaceUpTriggeredAbility(effect));
+        this.addAbility(new TurnedFaceUpSourceTriggeredAbility(effect));
     }
 
     public AshcloudPhoenix(final AshcloudPhoenix card) {

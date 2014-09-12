@@ -30,7 +30,7 @@ package mage.sets.khansoftarkir;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.TurnedFaceUpTriggeredAbility;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -70,7 +70,7 @@ public class IcefeatherAven extends CardImpl {
         // Morph {1}{G}{U}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{G}{U}")));
         // When Icefeather Aven is turned face up, you may return another target creature to its owner's hand.
-        Ability ability = new TurnedFaceUpTriggeredAbility(new ReturnToHandTargetEffect());
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new ReturnToHandTargetEffect());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
 

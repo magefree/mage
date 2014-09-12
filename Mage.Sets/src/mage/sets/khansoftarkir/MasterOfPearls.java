@@ -29,7 +29,7 @@ package mage.sets.khansoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.TurnedFaceUpTriggeredAbility;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.MorphAbility;
@@ -58,7 +58,7 @@ public class MasterOfPearls extends CardImpl {
         // Morph {3}{W}{W}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{W}{W}")));
         // When Master of Pearls is turned face up, creatures you control get +2/+2 until end of turn.
-        this.addAbility(new TurnedFaceUpTriggeredAbility(new BoostControlledEffect(2,2, Duration.EndOfTurn, new FilterCreaturePermanent("creatures"))));
+        this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new BoostControlledEffect(2,2, Duration.EndOfTurn, new FilterCreaturePermanent("creatures"))));
     }
 
     public MasterOfPearls(final MasterOfPearls card) {

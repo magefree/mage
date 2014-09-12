@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.TurnedFaceUpTriggeredAbility;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.MorphAbility;
@@ -70,7 +70,7 @@ public class TemurCharger extends CardImpl {
         this.addAbility(new MorphAbility(this, new RevealTargetFromHandCost(new TargetCardInHand(filter))));
 
         // When Temur Charger is turned face up, target creature gains trample until end of turn.
-        Ability ability = new TurnedFaceUpTriggeredAbility(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)); 
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)); 
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

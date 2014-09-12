@@ -30,7 +30,7 @@ package mage.view;
 
 import mage.abilities.Ability;
 import mage.abilities.common.TurnFaceUpAbility;
-import mage.abilities.common.TurnedFaceUpTriggeredAbility;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.cards.Card;
 import mage.constants.Rarity;
 import mage.game.Game;

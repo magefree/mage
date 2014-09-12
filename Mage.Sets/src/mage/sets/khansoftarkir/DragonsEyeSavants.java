@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.TurnedFaceUpTriggeredAbility;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LookAtTargetPlayerHandEffect;
@@ -71,7 +71,7 @@ public class DragonsEyeSavants extends CardImpl {
         // When Dragon's Eye Savants is turned face up, look at target opponent's hand.
         Effect effect = new LookAtTargetPlayerHandEffect();
         effect.setText("look at target opponent's hand");
-        Ability ability = new TurnedFaceUpTriggeredAbility(effect);
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(effect);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

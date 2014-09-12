@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.TurnedFaceUpTriggeredAbility;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
@@ -75,7 +75,7 @@ public class RuthlessRipper extends CardImpl {
         // When Ruthless Ripper is turned face up, target player loses 2 life.
         Effect effect = new LoseLifeTargetEffect(2);
         effect.setText("target player loses 2 life");
-        Ability ability = new TurnedFaceUpTriggeredAbility(effect);
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(effect);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

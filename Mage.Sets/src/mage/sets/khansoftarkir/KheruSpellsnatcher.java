@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.TurnedFaceUpTriggeredAbility;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -73,7 +73,7 @@ public class KheruSpellsnatcher extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{4}{U}{U}")));
         
         // When Kheru Spellthief is turned face up, counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard. You may cast that card without paying its mana cost as long as it remains exiled.
-        Ability ability = new TurnedFaceUpTriggeredAbility(new KheruSpellsnatcherEffect());
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new KheruSpellsnatcherEffect());
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
     }

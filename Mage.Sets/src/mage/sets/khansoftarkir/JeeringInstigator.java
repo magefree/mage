@@ -30,7 +30,7 @@ package mage.sets.khansoftarkir;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.TurnedFaceUpTriggeredAbility;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinousEffect;
@@ -72,7 +72,7 @@ public class JeeringInstigator extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{2}{R}")));
         
         // When Jeering Instigator is turned face up, if it's your turn, gain control of another target creature until end of turn. Untap it. That creature gains haste until end of turn.
-        Ability ability = new TurnedFaceUpTriggeredAbility(new ConditionalContinousEffect(new GainControlTargetEffect(Duration.EndOfTurn), MyTurnCondition.getInstance(), "if it's your turn, gain control of another target creature until end of turn. Untap it. That creature gains haste until end of turn."));
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new ConditionalContinousEffect(new GainControlTargetEffect(Duration.EndOfTurn), MyTurnCondition.getInstance(), "if it's your turn, gain control of another target creature until end of turn. Untap it. That creature gains haste until end of turn."));
         ability.addEffect(new UntapTargetEffect());
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent(filter));
