@@ -29,8 +29,8 @@ package mage.sets.khansoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.keyword.MorphAbility;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -39,28 +39,27 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class WoollyLoxodon extends CardImpl {
+public class HighlandGame extends CardImpl {
 
-    public WoollyLoxodon(UUID ownerId) {
-        super(ownerId, 158, "Woolly Loxodon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
+    public HighlandGame(UUID ownerId) {
+        super(ownerId, 135, "Highland Game", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "KTK";
-        this.subtype.add("Elephant");
-        this.subtype.add("Warrior");
+        this.subtype.add("Elk");
 
         this.color.setGreen(true);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(7);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-        // Morph 5G
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{5}{G}")));
+        // When Highland Game dies, you gain 2 life.
+        this.addAbility(new DiesTriggeredAbility(new GainLifeEffect(2)));
     }
 
-    public WoollyLoxodon(final WoollyLoxodon card) {
+    public HighlandGame(final HighlandGame card) {
         super(card);
     }
 
     @Override
-    public WoollyLoxodon copy() {
-        return new WoollyLoxodon(this);
+    public HighlandGame copy() {
+        return new HighlandGame(this);
     }
 }

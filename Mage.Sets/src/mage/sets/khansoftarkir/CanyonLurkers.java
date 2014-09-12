@@ -52,7 +52,7 @@ public class CanyonLurkers extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Morph 3R
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{R}")));
     }
 
     public CanyonLurkers(final CanyonLurkers card) {

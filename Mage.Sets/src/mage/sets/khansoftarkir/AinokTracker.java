@@ -55,7 +55,7 @@ public class AinokTracker extends CardImpl {
         // First Strike
         this.addAbility(FirstStrikeAbility.getInstance());
         // Morph 4R
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{R}")));
     }
 
     public AinokTracker(final AinokTracker card) {

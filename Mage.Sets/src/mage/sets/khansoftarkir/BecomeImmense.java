@@ -28,39 +28,39 @@
 package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.keyword.MorphAbility;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.keyword.DelveAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class WoollyLoxodon extends CardImpl {
+public class BecomeImmense extends CardImpl {
 
-    public WoollyLoxodon(UUID ownerId) {
-        super(ownerId, 158, "Woolly Loxodon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
+    public BecomeImmense(UUID ownerId) {
+        super(ownerId, 130, "Become Immense", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{5}{G}");
         this.expansionSetCode = "KTK";
-        this.subtype.add("Elephant");
-        this.subtype.add("Warrior");
 
         this.color.setGreen(true);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(7);
 
-        // Morph 5G
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{5}{G}")));
+        // Delve
+        this.addAbility(new DelveAbility());
+        // Target creature gets +6/+6 until end of turn
+        this.getSpellAbility().addEffect(new BoostTargetEffect(6,6,Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public WoollyLoxodon(final WoollyLoxodon card) {
+    public BecomeImmense(final BecomeImmense card) {
         super(card);
     }
 
     @Override
-    public WoollyLoxodon copy() {
-        return new WoollyLoxodon(this);
+    public BecomeImmense copy() {
+        return new BecomeImmense(this);
     }
 }

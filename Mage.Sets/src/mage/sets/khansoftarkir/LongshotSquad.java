@@ -29,38 +29,61 @@ package mage.sets.khansoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.keyword.MorphAbility;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
+import mage.abilities.keyword.OutlastAbility;
+import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.predicate.permanent.CounterPredicate;
 
 /**
  *
  * @author LevelX2
  */
-public class WoollyLoxodon extends CardImpl {
+public class LongshotSquad extends CardImpl {
 
-    public WoollyLoxodon(UUID ownerId) {
-        super(ownerId, 158, "Woolly Loxodon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
-        this.expansionSetCode = "KTK";
-        this.subtype.add("Elephant");
-        this.subtype.add("Warrior");
+    private static final FilterPermanent filter = new FilterPermanent();
 
-        this.color.setGreen(true);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(7);
-
-        // Morph 5G
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{5}{G}")));
+    static {
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(new CounterPredicate(CounterType.P1P1));
     }
 
-    public WoollyLoxodon(final WoollyLoxodon card) {
+    public LongshotSquad(UUID ownerId) {
+        super(ownerId, 140, "Longshot Squad", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "KTK";
+        this.subtype.add("Hound");
+        this.subtype.add("Archer");
+
+        this.color.setGreen(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // Outlast 1G
+        this.addAbility(new OutlastAbility(new ManaCostsImpl("{1}{G}")));
+        // Each creature you control with a +1/+1 counter on it has reach.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ReachAbility.getInstance(), Duration.WhileOnBattlefield, filter, 
+                "Each creature you control with a +1/+1 counter on it has reach")));
+
+    }
+
+    public LongshotSquad(final LongshotSquad card) {
         super(card);
     }
 
     @Override
-    public WoollyLoxodon copy() {
-        return new WoollyLoxodon(this);
+    public LongshotSquad copy() {
+        return new LongshotSquad(this);
     }
 }

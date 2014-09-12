@@ -29,38 +29,51 @@ package mage.sets.khansoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.keyword.MorphAbility;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.filter.Filter;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
  * @author LevelX2
  */
-public class WoollyLoxodon extends CardImpl {
+public class SultaiFlayer extends CardImpl {
 
-    public WoollyLoxodon(UUID ownerId) {
-        super(ownerId, 158, "Woolly Loxodon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
-        this.expansionSetCode = "KTK";
-        this.subtype.add("Elephant");
-        this.subtype.add("Warrior");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control with toughness 4 or greater");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(7);
-
-        // Morph 5G
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{5}{G}")));
+    static {
+        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public WoollyLoxodon(final WoollyLoxodon card) {
+    public SultaiFlayer(UUID ownerId) {
+        super(ownerId, 152, "Sultai Flayer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "KTK";
+        this.subtype.add("Naga");
+        this.subtype.add("Shaman");
+
+        this.color.setGreen(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(4);
+
+        // Whenever a creature you control with toughness 4 or greater dies, you gain 4 life.
+        this.addAbility(new DiesCreatureTriggeredAbility(new GainLifeEffect(4), false, filter));
+
+    }
+
+    public SultaiFlayer(final SultaiFlayer card) {
         super(card);
     }
 
     @Override
-    public WoollyLoxodon copy() {
-        return new WoollyLoxodon(this);
+    public SultaiFlayer copy() {
+        return new SultaiFlayer(this);
     }
 }

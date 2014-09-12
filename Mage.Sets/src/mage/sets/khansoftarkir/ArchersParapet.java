@@ -29,38 +29,47 @@ package mage.sets.khansoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.keyword.MorphAbility;
+import mage.abilities.effects.common.LoseLifeOpponentsEffect;
+import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
  * @author LevelX2
  */
-public class WoollyLoxodon extends CardImpl {
+public class ArchersParapet extends CardImpl {
 
-    public WoollyLoxodon(UUID ownerId) {
-        super(ownerId, 158, "Woolly Loxodon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
+    public ArchersParapet(UUID ownerId) {
+        super(ownerId, 128, "Archers' Parapet", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "KTK";
-        this.subtype.add("Elephant");
-        this.subtype.add("Warrior");
+        this.subtype.add("Wall");
 
         this.color.setGreen(true);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(7);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(5);
 
-        // Morph 5G
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{5}{G}")));
+        // Defender
+        this.addAbility(DefenderAbility.getInstance());
+        // 1B, T: Each opponent loses 1 life.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(1), new ManaCostsImpl("{1}{B}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+
     }
 
-    public WoollyLoxodon(final WoollyLoxodon card) {
+    public ArchersParapet(final ArchersParapet card) {
         super(card);
     }
 
     @Override
-    public WoollyLoxodon copy() {
-        return new WoollyLoxodon(this);
+    public ArchersParapet copy() {
+        return new ArchersParapet(this);
     }
 }

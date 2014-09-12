@@ -28,39 +28,41 @@
 package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.keyword.MorphAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.counters.CounterType;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class WoollyLoxodon extends CardImpl {
+public class DragonscaleBoon extends CardImpl {
 
-    public WoollyLoxodon(UUID ownerId) {
-        super(ownerId, 158, "Woolly Loxodon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
+    public DragonscaleBoon(UUID ownerId) {
+        super(ownerId, 131, "Dragonscale Boon", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
         this.expansionSetCode = "KTK";
-        this.subtype.add("Elephant");
-        this.subtype.add("Warrior");
 
         this.color.setGreen(true);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(7);
 
-        // Morph 5G
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{5}{G}")));
+        // Put two +1/+1 counters on target creature and untap it
+        this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)));
+        Effect effect = new UntapTargetEffect();
+        effect.setText("and untap it");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public WoollyLoxodon(final WoollyLoxodon card) {
+    public DragonscaleBoon(final DragonscaleBoon card) {
         super(card);
     }
 
     @Override
-    public WoollyLoxodon copy() {
-        return new WoollyLoxodon(this);
+    public DragonscaleBoon copy() {
+        return new DragonscaleBoon(this);
     }
 }

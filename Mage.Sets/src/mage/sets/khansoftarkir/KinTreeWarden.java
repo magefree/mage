@@ -29,38 +29,44 @@ package mage.sets.khansoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
  * @author LevelX2
  */
-public class WoollyLoxodon extends CardImpl {
+public class KinTreeWarden extends CardImpl {
 
-    public WoollyLoxodon(UUID ownerId) {
-        super(ownerId, 158, "Woolly Loxodon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
+    public KinTreeWarden(UUID ownerId) {
+        super(ownerId, 139, "Kin-Tree Warden", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
         this.expansionSetCode = "KTK";
-        this.subtype.add("Elephant");
+        this.subtype.add("Human");
         this.subtype.add("Warrior");
 
         this.color.setGreen(true);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(7);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Morph 5G
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{5}{G}")));
+        // {2}: Regenerate Kin-Tree Warden
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new GenericManaCost(2)));
+        // Morph {G}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{G}")));
     }
 
-    public WoollyLoxodon(final WoollyLoxodon card) {
+    public KinTreeWarden(final KinTreeWarden card) {
         super(card);
     }
 
     @Override
-    public WoollyLoxodon copy() {
-        return new WoollyLoxodon(this);
+    public KinTreeWarden copy() {
+        return new KinTreeWarden(this);
     }
 }

@@ -28,9 +28,13 @@
 package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.keyword.MorphAbility;
+import mage.abilities.condition.InvertCondition;
+import mage.abilities.condition.common.FerociousCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.dynamicvalue.IntPlusDynamicValue;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -39,28 +43,34 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class WoollyLoxodon extends CardImpl {
+public class FeedTheClan extends CardImpl {
 
-    public WoollyLoxodon(UUID ownerId) {
-        super(ownerId, 158, "Woolly Loxodon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
+    public FeedTheClan(UUID ownerId) {
+        super(ownerId, 132, "Feed the Clan", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "KTK";
-        this.subtype.add("Elephant");
-        this.subtype.add("Warrior");
 
         this.color.setGreen(true);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(7);
 
-        // Morph 5G
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{5}{G}")));
+        // You gain 5 life.
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
+                new GainLifeEffect(5),
+                new InvertCondition(FerociousCondition.getInstance()),
+                "You gain 5 life"));
+
+        // Ferocious - You gain 10 life instead if you control a creature with power 4 or greater.
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
+                new GainLifeEffect(10),
+                FerociousCondition.getInstance(),
+                "<br><br><i>Ferocious</i> - You gain 10 life instead if you control a creature with power 4 or greater"));
+
     }
 
-    public WoollyLoxodon(final WoollyLoxodon card) {
+    public FeedTheClan(final FeedTheClan card) {
         super(card);
     }
 
     @Override
-    public WoollyLoxodon copy() {
-        return new WoollyLoxodon(this);
+    public FeedTheClan copy() {
+        return new FeedTheClan(this);
     }
 }
