@@ -25,45 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.khansoftarkir;
 
-package mage.abilities.effects.common;
-
-import java.util.ArrayList;
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
+import mage.abilities.costs.common.DiscardTargetCost;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.target.common.TargetCardInHand;
 
 /**
  *
  * @author LevelX2
  */
+public class TormentingVoice extends CardImpl {
 
-public class ExileGraveyardAllTargetPlayerEffect extends OneShotEffect {
+    public TormentingVoice(UUID ownerId) {
+        super(ownerId, 123, "Tormenting Voice", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
+        this.expansionSetCode = "KTK";
 
-    public ExileGraveyardAllTargetPlayerEffect() {
-        super(Outcome.Exile);
-        staticText = "exile all cards from target player's graveyard";
+        this.color.setRed(true);
+
+        // As an additional cost to cast Tormenting Voice, discard a card.
+        this.getSpellAbility().addCost(new DiscardTargetCost(new TargetCardInHand()));
+        // Draw two cards.
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
+    }
+
+    public TormentingVoice(final TormentingVoice card) {
+        super(card);
     }
 
     @Override
-    public ExileGraveyardAllTargetPlayerEffect copy() {
-        return new ExileGraveyardAllTargetPlayerEffect();
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (targetPlayer != null) {
-            ArrayList<UUID> graveyard = new ArrayList<>(targetPlayer.getGraveyard());
-            for (UUID cardId : graveyard) {
-                game.getCard(cardId).moveToZone(Zone.EXILED, cardId, game, false);
-            }
-            return true;
-        }
-        return false;
+    public TormentingVoice copy() {
+        return new TormentingVoice(this);
     }
 }

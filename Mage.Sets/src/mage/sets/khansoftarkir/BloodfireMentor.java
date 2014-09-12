@@ -25,45 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.khansoftarkir;
 
-package mage.abilities.effects.common;
-
-import java.util.ArrayList;
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DrawDiscardControllerEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
  * @author LevelX2
  */
+public class BloodfireMentor extends CardImpl {
 
-public class ExileGraveyardAllTargetPlayerEffect extends OneShotEffect {
+    public BloodfireMentor(UUID ownerId) {
+        super(ownerId, 102, "Bloodfire Mentor", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "KTK";
+        this.subtype.add("Efreet");
+        this.subtype.add("Shaman");
 
-    public ExileGraveyardAllTargetPlayerEffect() {
-        super(Outcome.Exile);
-        staticText = "exile all cards from target player's graveyard";
+        this.color.setRed(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(5);
+
+        // {2}{U}, T: Draw a card, then discard a card.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(1,1), new ManaCostsImpl("{2}{U}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+
+    }
+
+    public BloodfireMentor(final BloodfireMentor card) {
+        super(card);
     }
 
     @Override
-    public ExileGraveyardAllTargetPlayerEffect copy() {
-        return new ExileGraveyardAllTargetPlayerEffect();
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (targetPlayer != null) {
-            ArrayList<UUID> graveyard = new ArrayList<>(targetPlayer.getGraveyard());
-            for (UUID cardId : graveyard) {
-                game.getCard(cardId).moveToZone(Zone.EXILED, cardId, game, false);
-            }
-            return true;
-        }
-        return false;
+    public BloodfireMentor copy() {
+        return new BloodfireMentor(this);
     }
 }

@@ -25,45 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.khansoftarkir;
 
-package mage.abilities.effects.common;
-
-import java.util.ArrayList;
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
  * @author LevelX2
  */
+public class LeapingMaster extends CardImpl {
 
-public class ExileGraveyardAllTargetPlayerEffect extends OneShotEffect {
+    public LeapingMaster(UUID ownerId) {
+        super(ownerId, 114, "Leaping Master", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.expansionSetCode = "KTK";
+        this.subtype.add("Human");
+        this.subtype.add("Monk");
 
-    public ExileGraveyardAllTargetPlayerEffect() {
-        super(Outcome.Exile);
-        staticText = "exile all cards from target player's graveyard";
+        this.color.setRed(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+
+        // {2}{W}: Leaping Master gains flying until end of turn
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
+                new ManaCostsImpl("{2}{W}")));
+    }
+
+    public LeapingMaster(final LeapingMaster card) {
+        super(card);
     }
 
     @Override
-    public ExileGraveyardAllTargetPlayerEffect copy() {
-        return new ExileGraveyardAllTargetPlayerEffect();
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (targetPlayer != null) {
-            ArrayList<UUID> graveyard = new ArrayList<>(targetPlayer.getGraveyard());
-            for (UUID cardId : graveyard) {
-                game.getCard(cardId).moveToZone(Zone.EXILED, cardId, game, false);
-            }
-            return true;
-        }
-        return false;
+    public LeapingMaster copy() {
+        return new LeapingMaster(this);
     }
 }

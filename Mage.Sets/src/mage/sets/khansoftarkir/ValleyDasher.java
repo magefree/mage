@@ -25,45 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.khansoftarkir;
 
-package mage.abilities.effects.common;
-
-import java.util.ArrayList;
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
+import mage.MageInt;
+import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.keyword.HasteAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
  * @author LevelX2
  */
+public class ValleyDasher extends CardImpl {
 
-public class ExileGraveyardAllTargetPlayerEffect extends OneShotEffect {
+    public ValleyDasher(UUID ownerId) {
+        super(ownerId, 125, "Valley Dasher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.expansionSetCode = "KTK";
+        this.subtype.add("Human");
+        this.subtype.add("Berserker");
 
-    public ExileGraveyardAllTargetPlayerEffect() {
-        super(Outcome.Exile);
-        staticText = "exile all cards from target player's graveyard";
+        this.color.setRed(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Haste
+        this.addAbility(HasteAbility.getInstance());
+        // Valley Dasher attacks each turn if able
+        this.addAbility(new AttacksEachTurnStaticAbility());
+    }
+
+    public ValleyDasher(final ValleyDasher card) {
+        super(card);
     }
 
     @Override
-    public ExileGraveyardAllTargetPlayerEffect copy() {
-        return new ExileGraveyardAllTargetPlayerEffect();
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (targetPlayer != null) {
-            ArrayList<UUID> graveyard = new ArrayList<>(targetPlayer.getGraveyard());
-            for (UUID cardId : graveyard) {
-                game.getCard(cardId).moveToZone(Zone.EXILED, cardId, game, false);
-            }
-            return true;
-        }
-        return false;
+    public ValleyDasher copy() {
+        return new ValleyDasher(this);
     }
 }

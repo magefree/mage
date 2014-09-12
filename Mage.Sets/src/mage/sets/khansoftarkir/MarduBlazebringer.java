@@ -25,45 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.khansoftarkir;
 
-package mage.abilities.effects.common;
-
-import java.util.ArrayList;
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
+import mage.MageInt;
+import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
+import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
  * @author LevelX2
  */
+public class MarduBlazebringer extends CardImpl {
 
-public class ExileGraveyardAllTargetPlayerEffect extends OneShotEffect {
+    public MarduBlazebringer(UUID ownerId) {
+        super(ownerId, 115, "Mardu Blazebringer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "KTK";
+        this.subtype.add("Ogre");
+        this.subtype.add("Warrior");
 
-    public ExileGraveyardAllTargetPlayerEffect() {
-        super(Outcome.Exile);
-        staticText = "exile all cards from target player's graveyard";
+        this.color.setRed(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+
+        // When Mardu Blazebringer attacks or blocks, sacrifice it at end of combat.
+        this.addAbility(new AttacksOrBlocksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
+                new AtTheEndOfCombatDelayedTriggeredAbility(new SacrificeSourceEffect())), false));
+    }
+
+    public MarduBlazebringer(final MarduBlazebringer card) {
+        super(card);
     }
 
     @Override
-    public ExileGraveyardAllTargetPlayerEffect copy() {
-        return new ExileGraveyardAllTargetPlayerEffect();
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (targetPlayer != null) {
-            ArrayList<UUID> graveyard = new ArrayList<>(targetPlayer.getGraveyard());
-            for (UUID cardId : graveyard) {
-                game.getCard(cardId).moveToZone(Zone.EXILED, cardId, game, false);
-            }
-            return true;
-        }
-        return false;
+    public MarduBlazebringer copy() {
+        return new MarduBlazebringer(this);
     }
 }

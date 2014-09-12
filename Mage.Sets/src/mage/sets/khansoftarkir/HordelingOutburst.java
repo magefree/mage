@@ -25,45 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.khansoftarkir;
 
-package mage.abilities.effects.common;
-
-import java.util.ArrayList;
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.game.permanent.token.GoblinToken;
 
 /**
  *
  * @author LevelX2
  */
+public class HordelingOutburst extends CardImpl {
 
-public class ExileGraveyardAllTargetPlayerEffect extends OneShotEffect {
+    public HordelingOutburst(UUID ownerId) {
+        super(ownerId, 111, "Hordeling Outburst", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
+        this.expansionSetCode = "KTK";
 
-    public ExileGraveyardAllTargetPlayerEffect() {
-        super(Outcome.Exile);
-        staticText = "exile all cards from target player's graveyard";
+        this.color.setRed(true);
+
+        // Put 3 1/1 red Goblin creature tokens onto the battlefield.
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken("KTK"), 3));
+    }
+
+    public HordelingOutburst(final HordelingOutburst card) {
+        super(card);
     }
 
     @Override
-    public ExileGraveyardAllTargetPlayerEffect copy() {
-        return new ExileGraveyardAllTargetPlayerEffect();
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (targetPlayer != null) {
-            ArrayList<UUID> graveyard = new ArrayList<>(targetPlayer.getGraveyard());
-            for (UUID cardId : graveyard) {
-                game.getCard(cardId).moveToZone(Zone.EXILED, cardId, game, false);
-            }
-            return true;
-        }
-        return false;
+    public HordelingOutburst copy() {
+        return new HordelingOutburst(this);
     }
 }

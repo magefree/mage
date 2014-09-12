@@ -25,44 +25,67 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.khansoftarkir;
 
-package mage.abilities.effects.common;
-
-import java.util.ArrayList;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.abilities.condition.Condition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.counters.CounterType;
 import mage.game.Game;
-import mage.players.Player;
+import mage.game.permanent.Permanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
+public class BringLow extends CardImpl {
 
-public class ExileGraveyardAllTargetPlayerEffect extends OneShotEffect {
+    public BringLow(UUID ownerId) {
+        super(ownerId, 103, "Bring Low", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
+        this.expansionSetCode = "KTK";
 
-    public ExileGraveyardAllTargetPlayerEffect() {
-        super(Outcome.Exile);
-        staticText = "exile all cards from target player's graveyard";
+        this.color.setRed(true);
+
+        // Bring Low deals 3 damage to target creature. If that creature has a +1/+1 counter on it, Bring Low deals 5 damage to it instead.
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
+                new DamageTargetEffect(5),
+                new DamageTargetEffect(3),
+                new TargetHasCounterCondition(CounterType.P1P1),
+                "{this} deals 3 damage to target creature. If that creature has a +1/+1 counter on it, Bring Low deals 5 damage to it instead"));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+    }
+
+    public BringLow(final BringLow card) {
+        super(card);
     }
 
     @Override
-    public ExileGraveyardAllTargetPlayerEffect copy() {
-        return new ExileGraveyardAllTargetPlayerEffect();
+    public BringLow copy() {
+        return new BringLow(this);
+    }
+}
+
+class TargetHasCounterCondition implements Condition {
+
+    private final CounterType counterType;
+
+    public TargetHasCounterCondition(CounterType counterType) {
+        this.counterType = counterType;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (targetPlayer != null) {
-            ArrayList<UUID> graveyard = new ArrayList<>(targetPlayer.getGraveyard());
-            for (UUID cardId : graveyard) {
-                game.getCard(cardId).moveToZone(Zone.EXILED, cardId, game, false);
+        if (!source.getTargets().isEmpty()) {
+            Permanent permanent = game.getPermanent(source.getFirstTarget());
+            if (permanent != null) {
+                return permanent.getCounters().containsKey(counterType);
             }
-            return true;
         }
         return false;
     }
