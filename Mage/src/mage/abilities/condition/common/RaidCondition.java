@@ -41,8 +41,6 @@ public class RaidCondition implements Condition {
 
     private static RaidCondition fInstance = null;
 
-    private RaidCondition() {}
-
     public static Condition getInstance() {
         if (fInstance == null) {
             fInstance = new RaidCondition();
@@ -50,9 +48,11 @@ public class RaidCondition implements Condition {
         return fInstance;
     }
 
+    private RaidCondition() {}
+
     @Override
     public boolean apply(Game game, Ability source) {
         PlayerAttackedWatcher watcher = (PlayerAttackedWatcher) game.getState().getWatchers().get("PlayerAttackedWatcher");
-        return watcher != null && watcher.getNumberOfAttackersCurrentTurn(source.getSourceId()) > 0;
+        return watcher != null && watcher.getNumberOfAttackersCurrentTurn(source.getControllerId()) > 0;
     }
 }

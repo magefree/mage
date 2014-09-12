@@ -29,8 +29,10 @@ package mage.sets.khansoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.abilityword.RaidAbility;
 import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.common.RaidCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.common.AttackingCreatureCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -40,6 +42,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.game.permanent.token.Token;
+import mage.watchers.common.PlayerAttackedWatcher;
 
 /**
  *
@@ -60,8 +63,9 @@ public class WingmateRoc extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // <em>Raid</em> - When Wingmate Roc enters the battlefield, if you attacked with a creature this turn, put a 3/4 white Bird creature token with flying onto the battlefield.
-        this.addAbility(new RaidAbility(this, new CreateTokenEffect(new WingmateRocToken())));
-        
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new CreateTokenEffect(new WingmateRocToken()), RaidCondition.getInstance(), "if you attacked with a creature this turn, put a 3/4 white Bird creature token with flying onto the battlefield")));
+        this.addWatcher(new PlayerAttackedWatcher());
+
         // Whenever Wingmate Roc attacks, you gain 1 life for each attacking creature.
         Effect effect = new GainLifeEffect(new AttackingCreatureCount());
         effect.setText("you gain 1 life for each attacking creature");

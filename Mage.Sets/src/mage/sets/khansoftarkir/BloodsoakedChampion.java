@@ -30,45 +30,53 @@ package mage.sets.khansoftarkir;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.CantBlockAbility;
 import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.constants.Zone;
 import mage.watchers.common.PlayerAttackedWatcher;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class MarduHeartPiercer extends CardImpl {
+public class BloodsoakedChampion extends CardImpl {
 
-    public MarduHeartPiercer(UUID ownerId) {
-        super(ownerId, 116, "Mardu Heart-Piercer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+    public BloodsoakedChampion(UUID ownerId) {
+        super(ownerId, 66, "Bloodsoaked Champion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}");
         this.expansionSetCode = "KTK";
         this.subtype.add("Human");
-        this.subtype.add("Archer");
+        this.subtype.add("Warrior");
 
-        this.color.setRed(true);
+        this.color.setBlack(true);
         this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+        this.toughness = new MageInt(1);
 
-        // <em>Raid</em> - When Mardu Heart-Piercer enters the battlefield, if you attacked with a creature this turn, Mardu Heart-Piercer deals 2 damage to target creature or player.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new DamageTargetEffect(2), RaidCondition.getInstance(), "if you attacked with a creature this turn, {this} deals 2 damage to target creature or player"));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        // Bloodstained Brave can't block.
+        this.addAbility(new CantBlockAbility());
+        
+        // <i>Raid</i> - {1}{B}: Return Bloodstained Brave from your graveyard to the battlefield. Activate this ability only if you attacked with a creature this turn.
+        Ability ability = new ConditionalActivatedAbility(
+                Zone.GRAVEYARD, 
+                new ReturnSourceFromGraveyardToBattlefieldEffect(), 
+                new ManaCostsImpl<>("{1}{B}"), 
+                RaidCondition.getInstance(), 
+                "<i>Raid</i> - {1}{B}: Return Bloodstained Brave from your graveyard to the battlefield. Activate this ability only if you attacked with a creature this turn");
         this.addAbility(ability);
         this.addWatcher(new PlayerAttackedWatcher());
     }
 
-    public MarduHeartPiercer(final MarduHeartPiercer card) {
+    public BloodsoakedChampion(final BloodsoakedChampion card) {
         super(card);
     }
 
     @Override
-    public MarduHeartPiercer copy() {
-        return new MarduHeartPiercer(this);
+    public BloodsoakedChampion copy() {
+        return new BloodsoakedChampion(this);
     }
 }

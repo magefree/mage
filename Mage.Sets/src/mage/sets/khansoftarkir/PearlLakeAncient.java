@@ -67,7 +67,7 @@ public class PearlLakeAncient extends CardImpl {
         this.addAbility(new ProwessAbility());
         
         // Return three lands you control to their owner's hand: Return Pearl Lake Ancient to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), 
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), 
                 new ReturnToHandTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledLandPermanent("lands"), true))));
     }
 

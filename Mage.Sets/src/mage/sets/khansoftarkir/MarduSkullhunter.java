@@ -30,13 +30,16 @@ package mage.sets.khansoftarkir;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.abilityword.RaidAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.common.RaidCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.target.common.TargetOpponent;
+import mage.watchers.common.PlayerAttackedWatcher;
 
 /**
  *
@@ -56,11 +59,12 @@ public class MarduSkullhunter extends CardImpl {
 
         // Mardu Skullhunter enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
+        
         // <em>Raid</em> - When Mardu Skullhunter enters the battlefield, if you attacked with a creature this turn, target opponent discards a card.
-        Ability ability = new RaidAbility(this, new DiscardTargetEffect(1), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new DiscardTargetEffect(1), RaidCondition.getInstance(), "if you attacked with a creature this turn, target opponent discards a card"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
-
+        this.addWatcher(new PlayerAttackedWatcher());
     }
 
     public MarduSkullhunter(final MarduSkullhunter card) {

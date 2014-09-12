@@ -29,46 +29,61 @@ package mage.sets.khansoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.constants.Zone;
+import mage.counters.CounterType;
+import mage.filter.Filter;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.watchers.common.PlayerAttackedWatcher;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class MarduHeartPiercer extends CardImpl {
+public class WarNameAspirant extends CardImpl {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 1 or less");
+    static {
+        filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 2));
+    }
 
-    public MarduHeartPiercer(UUID ownerId) {
-        super(ownerId, 116, "Mardu Heart-Piercer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+    public WarNameAspirant(UUID ownerId) {
+        super(ownerId, 126, "War-Name Aspirant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "KTK";
         this.subtype.add("Human");
-        this.subtype.add("Archer");
+        this.subtype.add("Warrior");
 
         this.color.setRed(true);
         this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+        this.toughness = new MageInt(1);
 
-        // <em>Raid</em> - When Mardu Heart-Piercer enters the battlefield, if you attacked with a creature this turn, Mardu Heart-Piercer deals 2 damage to target creature or player.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new DamageTargetEffect(2), RaidCondition.getInstance(), "if you attacked with a creature this turn, {this} deals 2 damage to target creature or player"));
-        ability.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(ability);
+        // <i>Raid</i> - War-Name Aspirant enters the battlefield with a +1/+1 counter on it if you attacked with a creature this turn.
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1), false), 
+                RaidCondition.getInstance(), 
+                true, 
+                "<i>Raid</i> - {this} enters the battlefield with a +1/+1 counter on it if you attacked with a creature this turn", 
+                "{this} enters the battlefield with a +1/+1 counter"));
         this.addWatcher(new PlayerAttackedWatcher());
+
+        // War-Name Aspirant can't be blocked by creatures with power 1 or less.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public MarduHeartPiercer(final MarduHeartPiercer card) {
+    public WarNameAspirant(final WarNameAspirant card) {
         super(card);
     }
 
     @Override
-    public MarduHeartPiercer copy() {
-        return new MarduHeartPiercer(this);
+    public WarNameAspirant copy() {
+        return new WarNameAspirant(this);
     }
 }
