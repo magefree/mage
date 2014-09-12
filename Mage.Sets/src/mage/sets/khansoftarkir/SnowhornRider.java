@@ -43,7 +43,6 @@ import mage.constants.Rarity;
 public class SnowhornRider extends CardImpl {
 
     public SnowhornRider(UUID ownerId) {
-        // TODO: Check Rarity
         super(ownerId, 201, "Snowhorn Rider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{U}{R}");
         this.expansionSetCode = "KTK";
         this.subtype.add("Human");

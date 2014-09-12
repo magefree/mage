@@ -58,7 +58,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class BribersPurse extends CardImpl {
 
     public BribersPurse(UUID ownerId) {
-        super(ownerId, 217, "Briber's Purse", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{X}");
+        super(ownerId, 217, "Briber's Purse", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{X}");
         this.expansionSetCode = "KTK";
 
         // Briber's Purse enters the battlefield with X gem counters on it.

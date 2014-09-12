@@ -49,7 +49,6 @@ import mage.game.permanent.token.Token;
 public class KinTreeInvocation extends CardImpl {
 
     public KinTreeInvocation(UUID ownerId) {
-        // TODO: Check rarity
         super(ownerId, 183, "Kin-Tree Invocation", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}{G}");
         this.expansionSetCode = "KTK";
 

@@ -51,7 +51,7 @@ public class AltarOfTheBrood extends CardImpl {
     }
 
     public AltarOfTheBrood(UUID ownerId) {
-        super(ownerId, 216, "Altar of the Brood", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
+        super(ownerId, 216, "Altar of the Brood", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "KTK";
 
         // Whenever another permanent enters the battlefield under your control, each opponent puts the top card of his or her library into his or her graveyard.

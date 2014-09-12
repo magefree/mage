@@ -60,7 +60,6 @@ public class RideDown extends CardImpl {
     }
 
     public RideDown(UUID ownerId) {
-        // TODO: Check Rarity
         super(ownerId, 194, "Ride Down", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{W}");
         this.expansionSetCode = "KTK";
 
