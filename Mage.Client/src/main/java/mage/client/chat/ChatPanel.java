@@ -244,7 +244,10 @@ public class ChatPanel extends javax.swing.JPanel {
             text.append(getColoredText(userColor, username + userSeparator));
         }              
         text.append(getColoredText(textColor, ManaSymbols.replaceSymbolsWithHTML(message, ManaSymbols.Type.PAY) + "\n"));
+
+        this.txtConversation.setEditable(true);
         this.txtConversation.append(text.toString());
+        this.txtConversation.setEditable(false);
     }
 
     private String getColoredText(String color, String text) {
