@@ -29,68 +29,48 @@ package mage.sets.khansoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.dynamicvalue.common.AttackingCreatureCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.game.permanent.token.Token;
-import mage.watchers.common.PlayerAttackedWatcher;
 
 /**
  *
  * @author emerald000
  */
-public class WingmateRoc extends CardImpl {
+public class TakeUpArms extends CardImpl {
 
-    public WingmateRoc(UUID ownerId) {
-        super(ownerId, 31, "Wingmate Roc", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
+    public TakeUpArms(UUID ownerId) {
+        super(ownerId, 26, "Take Up Arms", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{W}");
         this.expansionSetCode = "KTK";
-        this.subtype.add("Bird");
 
         this.color.setWhite(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        
-        // <em>Raid</em> - When Wingmate Roc enters the battlefield, if you attacked with a creature this turn, put a 3/4 white Bird creature token with flying onto the battlefield.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new CreateTokenEffect(new WingmateRocToken()), RaidCondition.getInstance(), "if you attacked with a creature this turn, put a 3/4 white Bird creature token with flying onto the battlefield"), false, "<em>Raid</em> - "));
-        this.addWatcher(new PlayerAttackedWatcher());
-
-        // Whenever Wingmate Roc attacks, you gain 1 life for each attacking creature.
-        Effect effect = new GainLifeEffect(new AttackingCreatureCount());
-        effect.setText("you gain 1 life for each attacking creature");
-        this.addAbility(new AttacksTriggeredAbility(effect, false));
+        // Put three 1/1 white Warrior creature tokens onto the battlefield.
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new TakeUpArmsToken(), 3));
     }
 
-    public WingmateRoc(final WingmateRoc card) {
+    public TakeUpArms(final TakeUpArms card) {
         super(card);
     }
 
     @Override
-    public WingmateRoc copy() {
-        return new WingmateRoc(this);
+    public TakeUpArms copy() {
+        return new TakeUpArms(this);
     }
 }
 
-class WingmateRocToken extends Token {
+class TakeUpArmsToken extends Token {
 
-    WingmateRocToken() {
-        super("Bird", "3/4 white Bird creature token with flying");
+    TakeUpArmsToken() {
+        super("Warrior", "1/1 white Warrior creature token");
+        this.setOriginalExpansionSetCode("KTK");
         cardType.add(CardType.CREATURE);
-        subtype.add("Bird");
+        subtype.add("Warrior");
+
         color.setWhite(true);
-        power = new MageInt(3);
-        toughness = new MageInt(4);
-        addAbility(FlyingAbility.getInstance());
+        power = new MageInt(1);
+        toughness = new MageInt(1);
     }
 }

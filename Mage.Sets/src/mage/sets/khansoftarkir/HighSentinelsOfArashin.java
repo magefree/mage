@@ -29,31 +29,43 @@ package mage.sets.khansoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.dynamicvalue.common.AttackingCreatureCount;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.game.permanent.token.Token;
-import mage.watchers.common.PlayerAttackedWatcher;
+import mage.constants.Zone;
+import mage.counters.CounterType;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.CounterPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author emerald000
  */
-public class WingmateRoc extends CardImpl {
+public class HighSentinelsOfArashin extends CardImpl {
+    
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creature you control with a +1/+1 counter on it");
+    static {
+        filter.add(new AnotherPredicate());
+        filter.add(new CounterPredicate(CounterType.P1P1));
+    }
 
-    public WingmateRoc(UUID ownerId) {
-        super(ownerId, 31, "Wingmate Roc", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
+    public HighSentinelsOfArashin(UUID ownerId) {
+        super(ownerId, 13, "High Sentinels of Arashin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.expansionSetCode = "KTK";
         this.subtype.add("Bird");
+        this.subtype.add("Soldier");
 
         this.color.setWhite(true);
         this.power = new MageInt(3);
@@ -62,35 +74,22 @@ public class WingmateRoc extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         
-        // <em>Raid</em> - When Wingmate Roc enters the battlefield, if you attacked with a creature this turn, put a 3/4 white Bird creature token with flying onto the battlefield.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new CreateTokenEffect(new WingmateRocToken()), RaidCondition.getInstance(), "if you attacked with a creature this turn, put a 3/4 white Bird creature token with flying onto the battlefield"), false, "<em>Raid</em> - "));
-        this.addWatcher(new PlayerAttackedWatcher());
-
-        // Whenever Wingmate Roc attacks, you gain 1 life for each attacking creature.
-        Effect effect = new GainLifeEffect(new AttackingCreatureCount());
-        effect.setText("you gain 1 life for each attacking creature");
-        this.addAbility(new AttacksTriggeredAbility(effect, false));
+        // High Sentinels of Arashin gets +1/+1 for each other creature you control with a +1/+1 counter on it.
+        DynamicValue count = new PermanentsOnBattlefieldCount(filter);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
+        
+        // {3}{W}: Put a +1/+1 counter on target creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{3}{W}"));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public WingmateRoc(final WingmateRoc card) {
+    public HighSentinelsOfArashin(final HighSentinelsOfArashin card) {
         super(card);
     }
 
     @Override
-    public WingmateRoc copy() {
-        return new WingmateRoc(this);
-    }
-}
-
-class WingmateRocToken extends Token {
-
-    WingmateRocToken() {
-        super("Bird", "3/4 white Bird creature token with flying");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Bird");
-        color.setWhite(true);
-        power = new MageInt(3);
-        toughness = new MageInt(4);
-        addAbility(FlyingAbility.getInstance());
+    public HighSentinelsOfArashin copy() {
+        return new HighSentinelsOfArashin(this);
     }
 }

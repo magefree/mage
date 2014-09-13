@@ -64,7 +64,6 @@ public class KheruBloodsucker extends CardImpl {
 
     static {
         anotherFilter.add(new AnotherPredicate());
-        toughnessFilter.add(new AnotherPredicate());
         toughnessFilter.add(new ControllerPredicate(TargetController.YOU));
         toughnessFilter.add(new ToughnessPredicate(ComparisonType.GreaterThan, 3));
     }
