@@ -43,12 +43,17 @@ public class DrawDiscardControllerEffect extends OneShotEffect {
 
     private int cardsToDraw;
     private int cardsToDiscard;
+    private boolean optional;
 
     public DrawDiscardControllerEffect() {
         this(1,1);
     }
-
+    
     public DrawDiscardControllerEffect(int cardsToDraw, int cardsToDiscard) {
+        this(cardsToDraw, cardsToDiscard, false);
+    }
+
+    public DrawDiscardControllerEffect(int cardsToDraw, int cardsToDiscard, boolean optional) {
         super(Outcome.DrawCard);
         this.cardsToDraw = cardsToDraw;
         this.cardsToDiscard = cardsToDiscard;
@@ -64,6 +69,7 @@ public class DrawDiscardControllerEffect extends OneShotEffect {
         super(effect);
         this.cardsToDraw = effect.cardsToDraw;
         this.cardsToDiscard = effect.cardsToDiscard;
+        this.optional = effect.optional;
     }
 
     @Override
@@ -75,8 +81,10 @@ public class DrawDiscardControllerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.drawCards(cardsToDraw, game);
-            player.discard(cardsToDiscard, source, game);
+            if (!optional || player.chooseUse(outcome, "User draw, then discard effect?", game)) {
+                player.drawCards(cardsToDraw, game);
+                player.discard(cardsToDiscard, source, game);
+            }
             return true;
         }
         return false;
