@@ -794,9 +794,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         //20091005 - 601.2a
         Card card = game.getCard(ability.getSourceId());
         if (card != null) {
-            if (card.isMorphCard() && !noMana) { //TODO: move to other place
-                card.setFaceDown(true);
-            }
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getId(), ability.getSourceId(), playerId))) {
                 int bookmark = game.bookmarkState();
                 Zone fromZone = game.getState().getZone(card.getId());

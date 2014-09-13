@@ -113,15 +113,18 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
         this(card, createCosts(morphCost));
     }
 
-    public MorphAbility(Card card, Costs morphCosts) {
+    public MorphAbility(Card card, Costs<Cost> morphCosts) {
         super(Zone.HAND, null);
         card.setMorphCard(true);
         this.setWorksFaceDown(true);
         name = ABILITY_KEYWORD;
         StringBuilder sb = new StringBuilder();
         sb.append(ABILITY_KEYWORD).append(" ");
-        if (!(morphCosts instanceof ManaCosts)) {
-            sb.append("- ");
+        for (Cost cost :morphCosts) {
+            if (!(cost instanceof ManaCosts)) {
+                sb.append("- ");
+                break;
+            }
         }
         sb.append(morphCosts.getText()).append(" ");
         sb.append(REMINDER_TEXT);
@@ -181,16 +184,14 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
     public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
             Player player = game.getPlayer(controllerId);
-            if (player != null) {
+            Spell spell = game.getStack().getSpell(ability.getId());
+            if (player != null && spell != null) {
                 this.resetMorph();
+                spell.setFaceDown(true); // so only the back is visible
                 for (AlternativeCost2 alternateCastingCost: alternateCosts) {
                     if (alternateCastingCost.canPay(ability, sourceId, controllerId, game) &&
                         player.chooseUse(Outcome.Benefit, new StringBuilder("Cast this card as a 2/2 face-down creature for ").append(alternateCastingCost.getText(true)).append(" ?").toString(), game)) {
-
-                        Spell spell = game.getStack().getSpell(ability.getId());
-                        if (spell != null) {
-                            spell.setFaceDown(true);
-                        }                        activateMorph(alternateCastingCost, game);
+                        activateMorph(alternateCastingCost, game);
                         ability.getManaCostsToPay().clear();
                         ability.getCosts().clear();
                         for (Iterator it = ((Costs) alternateCastingCost).iterator(); it.hasNext();) {
@@ -202,14 +203,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
                             }
                         }
                     } else {
-                        Card card = game.getCard(getSourceId()); // face down was set to true in PlayerImpl.cast, reset it here if not cast face down
-                        if (card != null) {
-                            card.setFaceDown(false);
-                        }
-                        Spell spell = game.getStack().getSpell(ability.getId());
-                        if (spell != null) {
-                            spell.setFaceDown(false);
-                        }
+                        spell.setFaceDown(false);
                     }
                 }
             }

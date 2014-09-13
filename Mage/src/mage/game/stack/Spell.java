@@ -79,6 +79,7 @@ public class Spell implements StackObject, Card {
 
     private UUID controllerId;
     private boolean copiedSpell;
+    private boolean faceDown;
 
     public Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone) {
         this.card = card;
@@ -119,6 +120,7 @@ public class Spell implements StackObject, Card {
         this.controllerId = spell.controllerId;
         this.fromZone = spell.fromZone;
         this.copiedSpell = spell.copiedSpell;
+        this.faceDown = spell.faceDown;
     }
 
 
@@ -255,6 +257,9 @@ public class Spell implements StackObject, Card {
             }
         } else {
             updateOptionalCosts(0);
+            if (isFaceDown()) {
+                card.setFaceDown(true);
+            }
             result = card.putOntoBattlefield(game, fromZone, ability.getId(), controllerId);
             return result;
         }
@@ -680,22 +685,24 @@ public class Spell implements StackObject, Card {
 
     @Override
     public void setFaceDown(boolean value) {
-        card.setFaceDown(value);
+        faceDown = value;
     }
 
     @Override
     public boolean turnFaceUp(Game game, UUID playerId) {
-        return card.turnFaceUp(game, playerId);
+        setFaceDown(false);
+        return true;
     }
 
     @Override
     public boolean turnFaceDown(Game game, UUID playerId) {
-        return card.turnFaceDown(game, playerId);
+        setFaceDown(true);
+        return true;
     }
 
     @Override
     public boolean isFaceDown() {
-        return card.isFaceDown();
+        return faceDown;
     }
 
     @Override
