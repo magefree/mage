@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class SecretPlan extends CardImpl {
+public class SecretPlans extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Face-down creatures you control");
 
@@ -56,8 +56,8 @@ public class SecretPlan extends CardImpl {
         filter.add(new FaceDownPredicate());
     }
 
-    public SecretPlan(UUID ownerId) {
-        super(ownerId, 198, "Secret Plan", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}{U}");
+    public SecretPlans(UUID ownerId) {
+        super(ownerId, 198, "Secret Plans", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}{U}");
         this.expansionSetCode = "KTK";
 
         this.color.setBlue(true);
@@ -71,13 +71,13 @@ public class SecretPlan extends CardImpl {
 
     }
 
-    public SecretPlan(final SecretPlan card) {
+    public SecretPlans(final SecretPlans card) {
         super(card);
     }
 
     @Override
-    public SecretPlan copy() {
-        return new SecretPlan(this);
+    public SecretPlans copy() {
+        return new SecretPlans(this);
     }
 }
 
