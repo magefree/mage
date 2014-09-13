@@ -61,8 +61,9 @@ public class CracklingDoom extends CardImpl {
         this.color.setBlack(true);
         this.color.setWhite(true);
 
-        // Crackling Doom deals 2 damage to each opponent.  Each opponent sacrifices a creature with the greatest power among creatures he or she controls.
+        // Crackling Doom deals 2 damage to each opponent. Each opponent sacrifices a creature with the greatest power among creatures he or she controls.
         this.getSpellAbility().addEffect(new DamagePlayersEffect(2, TargetController.OPPONENT));
+        this.getSpellAbility().addEffect(new CracklingDoomEffect());
 
     }
 
