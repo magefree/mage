@@ -29,15 +29,14 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continious.GainProtectionFromColorTargetEffect;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -52,7 +51,6 @@ public class SejiriSteppe extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), false);
         ability.addTarget(new TargetControlledCreaturePermanent());
-        ability.addChoice(new ChoiceColor());
         this.addAbility(ability);
         this.addAbility(new WhiteManaAbility());
     }

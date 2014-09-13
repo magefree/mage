@@ -28,15 +28,13 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continious.GainProtectionFromColorTargetEffect;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -58,7 +56,6 @@ public class MidvastProtector extends CardImpl {
         // When Midvast Protector enters the battlefield, target creature you control gains protection from the color of your choice until end of turn.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), false);
         ability.addTarget(new TargetControlledCreaturePermanent());
-        ability.addChoice(new ChoiceColor());
         this.addAbility(ability);
     }
 

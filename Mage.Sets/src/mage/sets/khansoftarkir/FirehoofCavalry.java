@@ -25,41 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.abilities.effects.common.ScryEffect;
-import mage.abilities.effects.common.continious.GainProtectionFromColorTargetEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.constants.Zone;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class GodsWilling extends CardImpl {
+public class FirehoofCavalry extends CardImpl {
 
-    public GodsWilling(UUID ownerId) {
-        super(ownerId, 16, "Gods Willing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "THS";
+    public FirehoofCavalry(UUID ownerId) {
+        super(ownerId, 11, "Firehoof Cavalry", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+        this.expansionSetCode = "KTK";
+        this.subtype.add("Human");
+        this.subtype.add("Berserker");
 
         this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Target creature you control gains protection from the color of your choice until end of turn. Scry 1.
-        this.getSpellAbility().addEffect(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addEffect(new ScryEffect(1));
+        // {3}{R}: Firehoof Cavalry gets +2/+0 and gains trample until end of turn.
+        Effect effect = new BoostSourceEffect(2, 0, Duration.EndOfTurn);
+        effect.setText("{this} gets +2/+0");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{3}{R}"));
+        effect = new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains trample until end of turn");
+        ability.addEffect(effect);
+        this.addAbility(ability);
     }
 
-    public GodsWilling(final GodsWilling card) {
+    public FirehoofCavalry(final FirehoofCavalry card) {
         super(card);
     }
 
     @Override
-    public GodsWilling copy() {
-        return new GodsWilling(this);
+    public FirehoofCavalry copy() {
+        return new FirehoofCavalry(this);
     }
 }

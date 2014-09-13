@@ -28,62 +28,59 @@
 package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.GainAbilityAllEffect;
-import mage.abilities.keyword.LifelinkAbility;
-import mage.abilities.keyword.OutlastAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.RegenerateSourceEffect;
+import mage.abilities.effects.common.continious.BoostEnchantedEffect;
+import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.filter.predicate.permanent.CounterPredicate;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class AbzanBattlePriest extends CardImpl {
+public class MoltingSnakeskin extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent();
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new CounterPredicate(CounterType.P1P1));
-    }
-
-    final String rule = "Each creature you control with a +1/+1 counter on it has lifelink";
-
-    public AbzanBattlePriest(UUID ownerId) {
-        super(ownerId, 1, "Abzan Battle Priest", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+    public MoltingSnakeskin(UUID ownerId) {
+        super(ownerId, 80, "Molting Snakeskin", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "KTK";
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
+        this.subtype.add("Aura");
 
-        this.color.setWhite(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(2);
+        this.color.setBlack(true);
 
-        // Outlast {W}
-        this.addAbility(new OutlastAbility(new ManaCostsImpl<>("{W}")));
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
         
-        // Each creature you control with a +1/+1 counter on it has lifelink.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, filter, rule)));
+        // Enchanted creature gets +2/+0 and has "{2}{B}: Regenerate this creature."
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 0));
+        Effect effect = new GainAbilityAttachedEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{2}{B}")), AttachmentType.AURA);
+        effect.setText("and has \"{2}{B}: Regenerate this creature.\"");
+        ability.addEffect(effect);
+        this.addAbility(ability);
     }
 
-    public AbzanBattlePriest(final AbzanBattlePriest card) {
+    public MoltingSnakeskin(final MoltingSnakeskin card) {
         super(card);
     }
 
     @Override
-    public AbzanBattlePriest copy() {
-        return new AbzanBattlePriest(this);
+    public MoltingSnakeskin copy() {
+        return new MoltingSnakeskin(this);
     }
 }

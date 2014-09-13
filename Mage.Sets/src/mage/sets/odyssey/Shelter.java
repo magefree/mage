@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.GainProtectionFromColorTargetEffect;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -51,7 +50,6 @@ public class Shelter extends CardImpl {
 
         // Target creature you control gains protection from the color of your choice until end of turn.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addChoice(new ChoiceColor());
         this.getSpellAbility().addEffect(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));
         // 
         // Draw a card.

@@ -28,13 +28,11 @@
 package mage.sets.magic2012;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continious.GainProtectionFromColorTargetEffect;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -52,7 +50,6 @@ public class StaveOff extends CardImpl {
         // Target creature gains protection from the color of your choice until end of turn.
         this.getSpellAbility().addEffect(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addChoice(new ChoiceColor());
     }
 
     public StaveOff(final StaveOff card) {

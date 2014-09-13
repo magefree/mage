@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
-import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.OutlastAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -48,10 +48,10 @@ import mage.filter.predicate.permanent.CounterPredicate;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class AbzanBattlePriest extends CardImpl {
-
+public class MerEkNightblade extends CardImpl {
+    
     private static final FilterPermanent filter = new FilterPermanent();
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
@@ -59,31 +59,29 @@ public class AbzanBattlePriest extends CardImpl {
         filter.add(new CounterPredicate(CounterType.P1P1));
     }
 
-    final String rule = "Each creature you control with a +1/+1 counter on it has lifelink";
-
-    public AbzanBattlePriest(UUID ownerId) {
-        super(ownerId, 1, "Abzan Battle Priest", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+    public MerEkNightblade(UUID ownerId) {
+        super(ownerId, 79, "Mer-Ek Nightblade", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "KTK";
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
+        this.subtype.add("Orc");
+        this.subtype.add("Assassin");
 
-        this.color.setWhite(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(2);
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-        // Outlast {W}
-        this.addAbility(new OutlastAbility(new ManaCostsImpl<>("{W}")));
+        // Outlast {B}
+        this.addAbility(new OutlastAbility(new ManaCostsImpl<>("{B}")));
         
-        // Each creature you control with a +1/+1 counter on it has lifelink.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, filter, rule)));
+        // Each creature you control with a +1/+1 counter on it has deathtouch.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, filter, "Each creature you control with a +1/+1 counter on it has deathtouch")));
     }
 
-    public AbzanBattlePriest(final AbzanBattlePriest card) {
+    public MerEkNightblade(final MerEkNightblade card) {
         super(card);
     }
 
     @Override
-    public AbzanBattlePriest copy() {
-        return new AbzanBattlePriest(this);
+    public MerEkNightblade copy() {
+        return new MerEkNightblade(this);
     }
 }

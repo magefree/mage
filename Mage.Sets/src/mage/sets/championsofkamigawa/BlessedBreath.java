@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.abilities.effects.common.continious.GainProtectionFromColorTargetEffect;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -52,7 +51,6 @@ public class BlessedBreath extends CardImpl {
 
         // Target creature you control gains protection from the color of your choice until end of turn.
         this.getSpellAbility().addEffect(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addChoice(new ChoiceColor());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // Splice onto Arcane {W}

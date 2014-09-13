@@ -25,41 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.abilities.effects.common.ScryEffect;
-import mage.abilities.effects.common.continious.GainProtectionFromColorTargetEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.constants.Zone;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class GodsWilling extends CardImpl {
+public class DazzlingRamparts extends CardImpl {
 
-    public GodsWilling(UUID ownerId) {
-        super(ownerId, 16, "Gods Willing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "THS";
+    public DazzlingRamparts(UUID ownerId) {
+        super(ownerId, 6, "Dazzling Ramparts", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "KTK";
+        this.subtype.add("Wall");
 
         this.color.setWhite(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(7);
 
-        // Target creature you control gains protection from the color of your choice until end of turn. Scry 1.
-        this.getSpellAbility().addEffect(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addEffect(new ScryEffect(1));
+        // Defender
+        this.addAbility(DefenderAbility.getInstance());
+        
+        // {1}{W}, {T}: Tap target creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{1}{W}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public GodsWilling(final GodsWilling card) {
+    public DazzlingRamparts(final DazzlingRamparts card) {
         super(card);
     }
 
     @Override
-    public GodsWilling copy() {
-        return new GodsWilling(this);
+    public DazzlingRamparts copy() {
+        return new DazzlingRamparts(this);
     }
 }

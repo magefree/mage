@@ -28,28 +28,34 @@
 
 package mage.abilities.effects.common.continious;
 
-import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.choices.ChoiceColor;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect {
+    
+    protected ChoiceColor choice;
 
     public GainProtectionFromColorTargetEffect(Duration duration) {
         super(new ProtectionAbility(new FilterCard()), duration);
+        choice = new ChoiceColor();
     }
 
     public GainProtectionFromColorTargetEffect(final GainProtectionFromColorTargetEffect effect) {
         super(effect);
+        choice = effect.choice;
     }
 
     @Override
@@ -60,8 +66,11 @@ public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanent(source.getFirstTarget());
-        if (creature != null) {
-            ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
+        Player player = game.getPlayer(source.getControllerId());
+        if (creature != null && player != null) {
+            while (!choice.isChosen()) {
+                player.choose(Outcome.Protect, choice, game);
+            }
             FilterCard protectionFilter = (FilterCard)((ProtectionAbility)ability).getFilter();
             protectionFilter.add(new ColorPredicate(choice.getColor()));
             protectionFilter.setMessage(choice.getChoice());
@@ -74,6 +83,11 @@ public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect
 
     @Override
     public String getText(Mode mode) {
-        return "target creature you control gains protection from the color of your choice " + duration.toString();
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        else {
+            return "target creature you control gains protection from the color of your choice " + duration.toString();
+        }
     }
 }

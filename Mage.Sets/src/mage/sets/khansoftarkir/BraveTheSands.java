@@ -25,41 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.abilities.effects.common.ScryEffect;
-import mage.abilities.effects.common.continious.GainProtectionFromColorTargetEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.combat.CanBlockAdditionalCreatureAllEffect;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class GodsWilling extends CardImpl {
+public class BraveTheSands extends CardImpl {
 
-    public GodsWilling(UUID ownerId) {
-        super(ownerId, 16, "Gods Willing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "THS";
+    public BraveTheSands(UUID ownerId) {
+        super(ownerId, 5, "Brave the Sands", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
+        this.expansionSetCode = "KTK";
 
         this.color.setWhite(true);
 
-        // Target creature you control gains protection from the color of your choice until end of turn. Scry 1.
-        this.getSpellAbility().addEffect(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addEffect(new ScryEffect(1));
+        // Creatures you control have vigilance.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures"))));
+        
+        // Each creature you control can block an additional creature.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureAllEffect(1, new FilterControlledCreaturePermanent("Each creature you control"), Duration.WhileOnBattlefield)));
     }
 
-    public GodsWilling(final GodsWilling card) {
+    public BraveTheSands(final BraveTheSands card) {
         super(card);
     }
 
     @Override
-    public GodsWilling copy() {
-        return new GodsWilling(this);
+    public BraveTheSands copy() {
+        return new BraveTheSands(this);
     }
 }

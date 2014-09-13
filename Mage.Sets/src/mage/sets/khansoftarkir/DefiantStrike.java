@@ -25,41 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.abilities.effects.common.ScryEffect;
-import mage.abilities.effects.common.continious.GainProtectionFromColorTargetEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class GodsWilling extends CardImpl {
+public class DefiantStrike extends CardImpl {
 
-    public GodsWilling(UUID ownerId) {
-        super(ownerId, 16, "Gods Willing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "THS";
+    public DefiantStrike(UUID ownerId) {
+        super(ownerId, 7, "Defiant Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
+        this.expansionSetCode = "KTK";
 
         this.color.setWhite(true);
 
-        // Target creature you control gains protection from the color of your choice until end of turn. Scry 1.
-        this.getSpellAbility().addEffect(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addEffect(new ScryEffect(1));
+        // Target creature gets +1/+0 until end of turn.
+        this.getSpellAbility().addEffect(new BoostTargetEffect(1, 0, Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        
+        // Draw a card.
+        Effect effect = new DrawCardSourceControllerEffect(1);
+        effect.setText("<br><br>Draw a card");
+        this.getSpellAbility().addEffect(effect);
     }
 
-    public GodsWilling(final GodsWilling card) {
+    public DefiantStrike(final DefiantStrike card) {
         super(card);
     }
 
     @Override
-    public GodsWilling copy() {
-        return new GodsWilling(this);
+    public DefiantStrike copy() {
+        return new DefiantStrike(this);
     }
 }

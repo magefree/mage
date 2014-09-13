@@ -29,61 +29,61 @@ package mage.sets.khansoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.GainAbilityAllEffect;
-import mage.abilities.keyword.LifelinkAbility;
-import mage.abilities.keyword.OutlastAbility;
+import mage.abilities.dynamicvalue.common.SacrificeCostCreaturesToughness;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.filter.predicate.permanent.CounterPredicate;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class AbzanBattlePriest extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent();
+public class KheruDreadmaw extends CardImpl {
+    
+    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("another creature");
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new CounterPredicate(CounterType.P1P1));
+        filter.add(new AnotherPredicate());
     }
 
-    final String rule = "Each creature you control with a +1/+1 counter on it has lifelink";
-
-    public AbzanBattlePriest(UUID ownerId) {
-        super(ownerId, 1, "Abzan Battle Priest", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+    public KheruDreadmaw(UUID ownerId) {
+        super(ownerId, 76, "Kheru Dreadmaw", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.expansionSetCode = "KTK";
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
+        this.subtype.add("Zombie");
+        this.subtype.add("Crocodile");
 
-        this.color.setWhite(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(2);
+        this.color.setBlack(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-        // Outlast {W}
-        this.addAbility(new OutlastAbility(new ManaCostsImpl<>("{W}")));
+        // Defender
+        this.addAbility(DefenderAbility.getInstance());
         
-        // Each creature you control with a +1/+1 counter on it has lifelink.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, filter, rule)));
+        // {1}{G}, Sacrifice another creature: You gain life equal to the sacrificed creature's toughness.
+        Effect effect = new GainLifeEffect(new SacrificeCostCreaturesToughness());
+        effect.setText("You gain life equal to the sacrificed creature's toughness");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{G}"));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        this.addAbility(ability);
     }
 
-    public AbzanBattlePriest(final AbzanBattlePriest card) {
+    public KheruDreadmaw(final KheruDreadmaw card) {
         super(card);
     }
 
     @Override
-    public AbzanBattlePriest copy() {
-        return new AbzanBattlePriest(this);
+    public KheruDreadmaw copy() {
+        return new KheruDreadmaw(this);
     }
 }

@@ -25,41 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.abilities.effects.common.ScryEffect;
-import mage.abilities.effects.common.continious.GainProtectionFromColorTargetEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class GodsWilling extends CardImpl {
+public class RakshasasSecret extends CardImpl {
 
-    public GodsWilling(UUID ownerId) {
-        super(ownerId, 16, "Gods Willing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "THS";
+    public RakshasasSecret(UUID ownerId) {
+        super(ownerId, 84, "Rakshasa's Secret", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
+        this.expansionSetCode = "KTK";
 
-        this.color.setWhite(true);
+        this.color.setBlack(true);
 
-        // Target creature you control gains protection from the color of your choice until end of turn. Scry 1.
-        this.getSpellAbility().addEffect(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addEffect(new ScryEffect(1));
+        // Target opponent discards two cards. Put the top two cards of your library into your graveyard.
+        this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
+        this.getSpellAbility().addTarget(new TargetOpponent());
+        Effect effect = new PutTopCardOfLibraryIntoGraveControllerEffect(2);
+        effect.setText("Put the top two cards of your library into your graveyard");
+        this.getSpellAbility().addEffect(effect);
     }
 
-    public GodsWilling(final GodsWilling card) {
+    public RakshasasSecret(final RakshasasSecret card) {
         super(card);
     }
 
     @Override
-    public GodsWilling copy() {
-        return new GodsWilling(this);
+    public RakshasasSecret copy() {
+        return new RakshasasSecret(this);
     }
 }

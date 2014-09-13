@@ -68,7 +68,6 @@ public class ResilientWanderer extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
         // Discard a card: Resilient Wanderer gains protection from the color of your choice until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorSourceEffect(), new DiscardCardCost());
-        ability.addChoice(new ChoiceColor());
         this.addAbility(ability);
     }
 

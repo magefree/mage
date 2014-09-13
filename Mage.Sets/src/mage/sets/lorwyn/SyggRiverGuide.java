@@ -28,9 +28,6 @@
 package mage.sets.lorwyn;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,8 +35,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.GainProtectionFromColorTargetEffect;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -74,7 +72,6 @@ public class SyggRiverGuide extends CardImpl {
         this.addAbility(new IslandwalkAbility());
         // {1}{W}: Target Merfolk you control gains protection from the color of your choice until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{W}"));
-        ability.addChoice(new ChoiceColor());
         Target target = new TargetControlledCreaturePermanent(1,1,filter, false);
         ability.addTarget(target);
         this.addAbility(ability);

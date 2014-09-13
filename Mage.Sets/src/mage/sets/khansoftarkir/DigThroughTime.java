@@ -25,41 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.abilities.effects.common.ScryEffect;
-import mage.abilities.effects.common.continious.GainProtectionFromColorTargetEffect;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.keyword.DelveAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.constants.Zone;
+import mage.filter.FilterCard;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class GodsWilling extends CardImpl {
+public class DigThroughTime extends CardImpl {
 
-    public GodsWilling(UUID ownerId) {
-        super(ownerId, 16, "Gods Willing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "THS";
+    public DigThroughTime(UUID ownerId) {
+        super(ownerId, 36, "Dig Through Time", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{6}{U}{U}");
+        this.expansionSetCode = "KTK";
 
-        this.color.setWhite(true);
+        this.color.setBlue(true);
 
-        // Target creature you control gains protection from the color of your choice until end of turn. Scry 1.
-        this.getSpellAbility().addEffect(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addEffect(new ScryEffect(1));
+        // Delve
+        this.addAbility(new DelveAbility());
+        
+        // Look at the top seven cards of your library. Put two of them into your hand and the rest on the bottom of your library in any order.
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(7), false, new StaticValue(2), new FilterCard(), Zone.LIBRARY, false, false));
     }
 
-    public GodsWilling(final GodsWilling card) {
+    public DigThroughTime(final DigThroughTime card) {
         super(card);
     }
 
     @Override
-    public GodsWilling copy() {
-        return new GodsWilling(this);
+    public DigThroughTime copy() {
+        return new DigThroughTime(this);
     }
 }

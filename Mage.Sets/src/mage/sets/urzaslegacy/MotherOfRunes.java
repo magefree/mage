@@ -28,17 +28,15 @@
 package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continious.GainProtectionFromColorTargetEffect;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -60,7 +58,6 @@ public class MotherOfRunes extends CardImpl {
 
         // {tap}: Target creature you control gains protection from the color of your choice until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), new TapSourceCost());
-        ability.addChoice(new ChoiceColor());
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

@@ -25,41 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.abilities.effects.common.ScryEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.GainProtectionFromColorTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.counters.CounterType;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class GodsWilling extends CardImpl {
+public class FeatOfResistance extends CardImpl {
 
-    public GodsWilling(UUID ownerId) {
-        super(ownerId, 16, "Gods Willing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "THS";
+    public FeatOfResistance(UUID ownerId) {
+        super(ownerId, 10, "Feat of Resistance", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
+        this.expansionSetCode = "KTK";
 
         this.color.setWhite(true);
 
-        // Target creature you control gains protection from the color of your choice until end of turn. Scry 1.
-        this.getSpellAbility().addEffect(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));
+        // Put a +1/+1 counter on target creature you control. It gains protection from the color of your choice until end of turn.
+        this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addEffect(new ScryEffect(1));
+        Effect effect = new GainProtectionFromColorTargetEffect(Duration.EndOfTurn);
+        effect.setText("It gains protection from the color of your choice until end of turn");
+        this.getSpellAbility().addEffect(effect);
     }
 
-    public GodsWilling(final GodsWilling card) {
+    public FeatOfResistance(final FeatOfResistance card) {
         super(card);
     }
 
     @Override
-    public GodsWilling copy() {
-        return new GodsWilling(this);
+    public FeatOfResistance copy() {
+        return new FeatOfResistance(this);
     }
 }

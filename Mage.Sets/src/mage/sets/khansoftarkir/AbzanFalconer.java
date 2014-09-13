@@ -25,41 +25,64 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.abilities.effects.common.ScryEffect;
-import mage.abilities.effects.common.continious.GainProtectionFromColorTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.OutlastAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.predicate.permanent.CounterPredicate;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class GodsWilling extends CardImpl {
-
-    public GodsWilling(UUID ownerId) {
-        super(ownerId, 16, "Gods Willing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "THS";
-
-        this.color.setWhite(true);
-
-        // Target creature you control gains protection from the color of your choice until end of turn. Scry 1.
-        this.getSpellAbility().addEffect(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addEffect(new ScryEffect(1));
+public class AbzanFalconer extends CardImpl {
+    
+    private static final FilterPermanent filter = new FilterPermanent();
+    static {
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(new CounterPredicate(CounterType.P1P1));
     }
 
-    public GodsWilling(final GodsWilling card) {
+    public AbzanFalconer(UUID ownerId) {
+        super(ownerId, 2, "Abzan Falconer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        this.expansionSetCode = "KTK";
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
+
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
+
+        // Outlast {W}
+        this.addAbility(new OutlastAbility(new ColoredManaCost(ColoredManaSymbol.W)));
+        
+        // Each creature you control with a +1/+1 counter on it has flying.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter, "Each creature you control with a +1/+1 counter on it has flying")));
+    }
+
+    public AbzanFalconer(final AbzanFalconer card) {
         super(card);
     }
 
     @Override
-    public GodsWilling copy() {
-        return new GodsWilling(this);
+    public AbzanFalconer copy() {
+        return new AbzanFalconer(this);
     }
 }
