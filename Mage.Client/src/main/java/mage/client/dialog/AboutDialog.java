@@ -90,7 +90,7 @@ public class AboutDialog extends MageDialog {
 
         jLabel2.setText("Courtesy: BetaSteward@googlemail.com. Site: http://XMage.info/");
 
-        jLabel3.setText("Devs: BetaSteward, Noxx, Eugen.Rivniy, North, LevelX2, Jeff, Plopman. ");
+        jLabel3.setText("Devs: BetaSteward, Noxx, Eugen.Rivniy, North, LevelX2, Jeff, Plopman, dustinconrad, emerald000. ");
 
         jLabel4.setText("Thanks: maurer.it, Rafbill, Alvin, cbt33, Quercitron.");
 
@@ -124,7 +124,7 @@ public class AboutDialog extends MageDialog {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addComponent(btnOk)
                 .addContainerGap())
         );
