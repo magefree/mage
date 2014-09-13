@@ -114,6 +114,7 @@ class HeraldOfAnafenzaWarriorToken extends Token {
     public HeraldOfAnafenzaWarriorToken() {
         super("Warrior", "1/1 white Warrior creature token");
         this.setOriginalExpansionSetCode("KTK");
+        this.setTokenType(1);
         cardType.add(CardType.CREATURE);
         subtype.add("Warrior");
 

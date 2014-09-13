@@ -143,6 +143,7 @@ class MarduCharmWarriorToken extends Token {
     public MarduCharmWarriorToken() {
         super("Warrior", "1/1 white Warrior creature token");
         this.setOriginalExpansionSetCode("KTK");
+        this.setTokenType(2);
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add("Warrior");
