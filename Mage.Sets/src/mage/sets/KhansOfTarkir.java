@@ -51,7 +51,7 @@ public class KhansOfTarkir extends ExpansionSet {
         this.hasBoosters = true;
         this.hasBasicLands = true;
         this.numBoosterLands = 1;
-        this.numBoosterCommon = 9;
+        this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;

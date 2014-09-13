@@ -35,7 +35,6 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.FatefulHourCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.effects.common.continious.GainAbilityControllerEffect;
 import mage.abilities.effects.common.continious.GainProtectionFromColorTargetEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
@@ -64,7 +63,6 @@ public class FaithsShield extends CardImpl {
         // Fateful hour - If you have 5 or less life, instead you and each permanent you control gain protection from the color of your choice until end of turn.
         this.getSpellAbility().addEffect(new FaithsShieldEffect());
         this.getSpellAbility().addTarget(new TargetControlledPermanent());
-        this.getSpellAbility().addChoice(new ChoiceColor());        
     }
 
     public FaithsShield(final FaithsShield card) {
@@ -98,12 +96,11 @@ class FaithsShieldEffect extends OneShotEffect {
 
             Ability ability = new ProtectionAbility(filter) ;
             game.addEffect(new GainAbilityControlledEffect(ability, Duration.EndOfTurn), source);
-            game.addEffect(new GainAbilityControllerEffect(ability, Duration.EndOfTurn), source);
         }
         else {
             game.addEffect(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), source);
         }
-        return false;
+        return true;
     }
 
     @Override

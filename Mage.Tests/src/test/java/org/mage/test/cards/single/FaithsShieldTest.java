@@ -14,6 +14,11 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class FaithsShieldTest extends CardTestPlayerBase {
 
+    /*
+    Target permanent you control gains protection from the color of your choice until end of turn.
+    Fateful hour - If you have 5 or less life, instead you and each permanent you control
+                    gain protection from the color of your choice until end of turn.
+    */
     @Test
     public void testCard() {
         addCard(Zone.BATTLEFIELD, playerA, "White Knight");

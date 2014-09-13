@@ -50,7 +50,7 @@ import mage.game.permanent.token.GoblinToken;
 public class PonybackBrigade extends CardImpl {
 
     public PonybackBrigade(UUID ownerId) {
-        super(ownerId, 191, "Ponyback Brigade", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{W}{B}");
+        super(ownerId, 191, "Ponyback Brigade", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{W}{B}");
         this.expansionSetCode = "KTK";
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");

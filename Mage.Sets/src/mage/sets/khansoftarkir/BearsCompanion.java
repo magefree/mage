@@ -28,7 +28,6 @@
 package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import static javafx.scene.paint.Color.color;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
