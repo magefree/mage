@@ -47,10 +47,10 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class MisfireWeaver extends CardImpl {
+public class MistfireWeaver extends CardImpl {
 
-    public MisfireWeaver(UUID ownerId) {
-        super(ownerId, 46, "Misfire Weaver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+    public MistfireWeaver(UUID ownerId) {
+        super(ownerId, 46, "Mistfire Weaver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.expansionSetCode = "KTK";
         this.subtype.add("Djinn");
         this.subtype.add("Wizard");
@@ -71,12 +71,12 @@ public class MisfireWeaver extends CardImpl {
 
     }
 
-    public MisfireWeaver(final MisfireWeaver card) {
+    public MistfireWeaver(final MistfireWeaver card) {
         super(card);
     }
 
     @Override
-    public MisfireWeaver copy() {
-        return new MisfireWeaver(this);
+    public MistfireWeaver copy() {
+        return new MistfireWeaver(this);
     }
 }
