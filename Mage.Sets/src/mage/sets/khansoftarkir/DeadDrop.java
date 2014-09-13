@@ -25,39 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.abilities.effects.common.SacrificeEffect;
+import mage.abilities.keyword.DelveAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreatureCard;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class MorbidPlunder extends CardImpl {
+public class DeadDrop extends CardImpl {
 
-    public MorbidPlunder(UUID ownerId) {
-        super(ownerId, 47, "Morbid Plunder", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
-        this.expansionSetCode = "MBS";
+    public DeadDrop(UUID ownerId) {
+        super(ownerId, 67, "Dead Drop", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{9}{B}");
+        this.expansionSetCode = "KTK";
 
         this.color.setBlack(true);
 
-        // Return up to two target creature cards from your graveyard to your hand.
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, new FilterCreatureCard("creature cards from your graveyard")));
+        // Delve
+        this.addAbility(new DelveAbility());
+        // Target player sacrifices two creatures
+        this.getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 2, "Target player"));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public MorbidPlunder(final MorbidPlunder card) {
+    public DeadDrop(final DeadDrop card) {
         super(card);
     }
 
     @Override
-    public MorbidPlunder copy() {
-        return new MorbidPlunder(this);
+    public DeadDrop copy() {
+        return new DeadDrop(this);
     }
 }

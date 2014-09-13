@@ -25,39 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreatureCard;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.constants.Zone;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class MorbidPlunder extends CardImpl {
+public class UnyieldingKrumar extends CardImpl {
 
-    public MorbidPlunder(UUID ownerId) {
-        super(ownerId, 47, "Morbid Plunder", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
-        this.expansionSetCode = "MBS";
+    public UnyieldingKrumar(UUID ownerId) {
+        super(ownerId, 94, "Unyielding Krumar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.expansionSetCode = "KTK";
+        this.subtype.add("Orc");
+        this.subtype.add("Warrior");
 
         this.color.setBlack(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // Return up to two target creature cards from your graveyard to your hand.
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, new FilterCreatureCard("creature cards from your graveyard")));
+        // {1}{W}: Unyielding Krumar gains first strike until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{W}")));
+
     }
 
-    public MorbidPlunder(final MorbidPlunder card) {
+    public UnyieldingKrumar(final UnyieldingKrumar card) {
         super(card);
     }
 
     @Override
-    public MorbidPlunder copy() {
-        return new MorbidPlunder(this);
+    public UnyieldingKrumar copy() {
+        return new UnyieldingKrumar(this);
     }
 }

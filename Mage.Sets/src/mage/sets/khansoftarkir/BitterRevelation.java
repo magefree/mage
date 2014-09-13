@@ -75,7 +75,7 @@ class BitterRevelationEffect extends OneShotEffect {
     
     BitterRevelationEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Look at the top four cards of your library. Put two of them into your hand and the rest into your graveyard. ";
+        this.staticText = "Look at the top four cards of your library. Put two of them into your hand and the rest into your graveyard";
     }
     
     BitterRevelationEffect(final BitterRevelationEffect effect) {

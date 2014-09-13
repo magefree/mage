@@ -25,39 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreatureCard;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.counters.CounterType;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class MorbidPlunder extends CardImpl {
+public class SwarmOfBloodflies extends CardImpl {
 
-    public MorbidPlunder(UUID ownerId) {
-        super(ownerId, 47, "Morbid Plunder", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
-        this.expansionSetCode = "MBS";
+    public SwarmOfBloodflies(UUID ownerId) {
+        super(ownerId, 92, "Swarm of Bloodflies", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
+        this.expansionSetCode = "KTK";
+        this.subtype.add("Insect");
 
         this.color.setBlack(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
 
-        // Return up to two target creature cards from your graveyard to your hand.
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, new FilterCreatureCard("creature cards from your graveyard")));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Swarm of Bloodflies enters the battlefield with two +1/+1 counters on it.
+        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(2), true);
+        effect.setText("with two +1/+1 counters on it");
+        this.addAbility(new EntersBattlefieldAbility(effect));
+        // Whenever another creature dies, put a +1/+1 counter on Swarm of Bloodflies
+        this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, true));
     }
 
-    public MorbidPlunder(final MorbidPlunder card) {
+    public SwarmOfBloodflies(final SwarmOfBloodflies card) {
         super(card);
     }
 
     @Override
-    public MorbidPlunder copy() {
-        return new MorbidPlunder(this);
+    public SwarmOfBloodflies copy() {
+        return new SwarmOfBloodflies(this);
     }
 }

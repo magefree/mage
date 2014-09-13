@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.khansoftarkir;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
@@ -37,13 +37,13 @@ import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class MorbidPlunder extends CardImpl {
+public class DutifulReturn extends CardImpl {
 
-    public MorbidPlunder(UUID ownerId) {
-        super(ownerId, 47, "Morbid Plunder", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
-        this.expansionSetCode = "MBS";
+    public DutifulReturn(UUID ownerId) {
+        super(ownerId, 71, "Dutiful Return", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
+        this.expansionSetCode = "KTK";
 
         this.color.setBlack(true);
 
@@ -52,12 +52,12 @@ public class MorbidPlunder extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, new FilterCreatureCard("creature cards from your graveyard")));
     }
 
-    public MorbidPlunder(final MorbidPlunder card) {
+    public DutifulReturn(final DutifulReturn card) {
         super(card);
     }
 
     @Override
-    public MorbidPlunder copy() {
-        return new MorbidPlunder(this);
+    public DutifulReturn copy() {
+        return new DutifulReturn(this);
     }
 }

@@ -25,39 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.InvertCondition;
+import mage.abilities.condition.common.RaidCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreatureCard;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.watchers.common.PlayerAttackedWatcher;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class MorbidPlunder extends CardImpl {
+public class BellowingSaddlebrute extends CardImpl {
 
-    public MorbidPlunder(UUID ownerId) {
-        super(ownerId, 47, "Morbid Plunder", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
-        this.expansionSetCode = "MBS";
+    public BellowingSaddlebrute(UUID ownerId) {
+        super(ownerId, 64, "Bellowing Saddlebrute", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.expansionSetCode = "KTK";
+        this.subtype.add("Orc");
+        this.subtype.add("Warrior");
 
         this.color.setBlack(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(5);
 
-        // Return up to two target creature cards from your graveyard to your hand.
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, new FilterCreatureCard("creature cards from your graveyard")));
+        // Raid - When Bellowing Saddlebrute enters the battlefield, you lose 4 life unless you attacked with a creature this turn
+        this.addAbility(new ConditionalTriggeredAbility(
+                new EntersBattlefieldTriggeredAbility(new LoseLifeSourceControllerEffect(4)),
+                new InvertCondition(RaidCondition.getInstance()),
+                "<i>Raid</i> - When {this} enters the battlefield, you lose 4 life unless you attacked with a creature this turn"
+        ));
+        this.addWatcher(new PlayerAttackedWatcher());
     }
 
-    public MorbidPlunder(final MorbidPlunder card) {
+    public BellowingSaddlebrute(final BellowingSaddlebrute card) {
         super(card);
     }
 
     @Override
-    public MorbidPlunder copy() {
-        return new MorbidPlunder(this);
+    public BellowingSaddlebrute copy() {
+        return new BellowingSaddlebrute(this);
     }
 }

@@ -43,7 +43,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
