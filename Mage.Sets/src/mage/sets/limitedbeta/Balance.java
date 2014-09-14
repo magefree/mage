@@ -25,20 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.sets.limitedbeta;
 
 import java.util.HashMap;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.SuspendAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.FilterCard;
@@ -52,45 +49,44 @@ import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author Plopman
+ * @author emerald000
  */
-public class RestoreBalance extends CardImpl {
+public class Balance extends CardImpl {
 
-    public RestoreBalance(UUID ownerId) {
-        super(ownerId, 38, "Restore Balance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "");
-        this.expansionSetCode = "TSP";
+    public Balance(UUID ownerId) {
+        super(ownerId, 188, "Balance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{W}");
+        this.expansionSetCode = "LEB";
 
-        // Suspend 6-{W}
-        this.addAbility(new SuspendAbility(6, new ColoredManaCost(ColoredManaSymbol.W), this));
-        // Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players sacrifice creatures and discard cards the same way.
-        this.getSpellAbility().addEffect(new RestoreBalanceEffect());
+        this.color.setWhite(true);
+
+        // Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players discard cards and sacrifice creatures the same way.
+        this.getSpellAbility().addEffect(new BalanceEffect());
     }
 
-    public RestoreBalance(final RestoreBalance card) {
+    public Balance(final Balance card) {
         super(card);
     }
 
     @Override
-    public RestoreBalance copy() {
-        return new RestoreBalance(this);
+    public Balance copy() {
+        return new Balance(this);
     }
 }
 
+class BalanceEffect extends OneShotEffect {
 
-class RestoreBalanceEffect extends OneShotEffect {
-
-    RestoreBalanceEffect() {
+    BalanceEffect() {
         super(Outcome.Sacrifice);
         staticText = "Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players sacrifice creatures and discard cards the same way";
     }
 
-    RestoreBalanceEffect(final RestoreBalanceEffect effect) {
+    BalanceEffect(final BalanceEffect effect) {
         super(effect);
     }
 
     @Override
-    public RestoreBalanceEffect copy() {
-        return new RestoreBalanceEffect(this);
+    public BalanceEffect copy() {
+        return new BalanceEffect(this);
     }
 
     @Override
