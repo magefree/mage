@@ -70,6 +70,9 @@ public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect
         if (creature != null && player != null) {
             while (!choice.isChosen()) {
                 player.choose(Outcome.Protect, choice, game);
+                if (!player.isInGame()) {
+                    return false;
+                }
             }
             FilterCard protectionFilter = (FilterCard)((ProtectionAbility)ability).getFilter();
             protectionFilter.add(new ColorPredicate(choice.getColor()));

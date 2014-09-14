@@ -93,6 +93,9 @@ public class TargetSource extends TargetObject {
             else {
                 addTarget(id, source, game, notTarget);
             }
+            if (object != null) {                
+                game.informPlayers("Selected " + object.getLogName() + " as source");
+            }
         }
         
     }

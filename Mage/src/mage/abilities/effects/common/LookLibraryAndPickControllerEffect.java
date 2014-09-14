@@ -45,6 +45,7 @@ import mage.target.TargetCard;
 
 import java.util.List;
 import java.util.UUID;
+import mage.util.CardUtil;
 
 /**
  *
@@ -216,7 +217,22 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
                         }
                         sb.append("put ").append(filter.getMessage()).append(" from among them onto the ");
                     } else {
-                        sb.append(". Put one of them into your ");
+                        sb.append(". Put ");
+                        if (numberToPick.calculate(null, null, this) > 1 ) {
+                            if (upTo) {
+                                if (numberToPick.calculate(null, null, this) == (numberOfCards.calculate(null, null, this))) {
+                                    sb.append("any number");
+                                } else {
+                                    sb.append("up to ").append(CardUtil.numberToText(numberToPick.calculate(null, null, this)));
+                                }
+                            } else{
+                                sb.append(CardUtil.numberToText(numberToPick.calculate(null, null, this)));
+                            }
+                        } else {
+                            sb.append("one");
+                        }
+
+                        sb.append(" of them into your ");
                     }
                 }
                 sb.append(targetPickedCards.toString().toLowerCase());
