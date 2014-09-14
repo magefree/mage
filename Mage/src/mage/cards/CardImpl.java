@@ -213,7 +213,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public List<String> getRules() {
         try {
-            List<String> rules = abilities.getRules(this.name);
+            List<String> rules = abilities.getRules(this.getLogName());
             if (info != null) {
                 for (String data : info.values()) {
                     rules.add(data);

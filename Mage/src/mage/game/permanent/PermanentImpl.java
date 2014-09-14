@@ -51,6 +51,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.keyword.WitherAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
@@ -798,18 +799,23 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean destroy(UUID sourceId, Game game, boolean noRegen) {
         //20091005 - 701.6
-        //TODO: handle noRegen
-        
         if(abilities.containsKey(IndestructibleAbility.getInstance().getId())) {
             return false;
         }
         
         if (!game.replaceEvent(GameEvent.getEvent(EventType.DESTROY_PERMANENT, objectId, sourceId, controllerId, noRegen ? 1 : 0))) {
             if (moveToZone(Zone.GRAVEYARD, sourceId, game, false)) {
-                if (this.getCardType().contains(CardType.CREATURE)) {
-                    game.informPlayers(new StringBuilder(this.getLogName()).append(" died").toString());
+                String logName;
+                Card card = game.getCard(this.getId());
+                if (card != null) {
+                    logName = card.getLogName();
                 } else {
-                    game.informPlayers(new StringBuilder(this.getLogName()).append(" was destroyed").toString());
+                    logName = this.getLogName();
+                }
+                if (this.getCardType().contains(CardType.CREATURE)) {
+                    game.informPlayers(logName +" died");
+                } else {
+                    game.informPlayers(logName + " was destroyed");
                 }
                 game.fireEvent(GameEvent.getEvent(EventType.DESTROYED_PERMANENT, objectId, sourceId, controllerId));
                 return true;

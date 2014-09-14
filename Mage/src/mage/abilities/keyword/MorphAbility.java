@@ -142,6 +142,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
        super(ability);
        this.alternateCosts.addAll(ability.alternateCosts);
        this.zoneChangeCounter = ability.zoneChangeCounter;
+       this.ruleText = ability.ruleText;
     }
 
     private static Costs createCosts(Cost cost) {
@@ -225,6 +226,11 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
     }
 
     @Override
+    public String getRule(boolean all) {
+        return getRule();
+    }
+
+    @Override
     public String getRule() {
         return ruleText;
     }
@@ -292,8 +298,13 @@ class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implements Sour
                     permanent.getColor().setColor(new ObjectColor());
                     break;
                 case AbilityAddingRemovingEffects_6:
+                    Card card = game.getCard(permanent.getId()); //  
                     List<Ability> abilities = new ArrayList<>();
                     for (Ability ability : permanent.getAbilities()) {
+                        if (card != null && !card.getAbilities().contains(ability)) {
+                            // gained abilities from other sources won't be removed
+                            continue;
+                        }
                         // TODO: Add flag "works also face down" to ability and use it to control ability removement instead of instanceof check
                         if (ability.getWorksFaceDown()) {
                             ability.setRuleVisible(false);
