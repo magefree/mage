@@ -32,13 +32,12 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 
 /**
  *
@@ -59,9 +58,10 @@ public class SiegeRhino extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
+        
         // When Siege Rhino enters the battlefield, each opponent loses 3 life and you gain 3 life.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamagePlayersEffect(3, TargetController.OPPONENT));
-        Effect effect  = new GainLifeEffect(3);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new LoseLifeOpponentsEffect(3));
+        Effect effect = new GainLifeEffect(3);
         effect.setText("and you gain 3 life");
         ability.addEffect(effect);        
         this.addAbility(ability);
