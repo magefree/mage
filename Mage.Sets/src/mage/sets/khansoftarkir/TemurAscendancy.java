@@ -28,7 +28,7 @@
 package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
@@ -50,7 +50,6 @@ import mage.filter.predicate.mageobject.PowerPredicate;
 public class TemurAscendancy extends CardImpl {
 
     final private static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 4 or greater");
-
     static {
         filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
     }
@@ -65,8 +64,9 @@ public class TemurAscendancy extends CardImpl {
 
         // Creatures you control have haste.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures"))));
+        
         // Whenever a creature with power 4 or greater enters the battlefield under your control, you may draw a card.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), filter, true));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), filter, true));
     }
 
     public TemurAscendancy(final TemurAscendancy card) {
