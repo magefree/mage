@@ -61,7 +61,7 @@ public class LensOfClarity extends CardImpl {
         this.expansionSetCode = "KTK";
 
         // You may look at the top card of your library and at face-down creatures you don't control.
-        // TODO: this should be a static ability
+        // TODO: this efffects should be a static abilities and not use activated abilities (because it could than be restriced)
         this.addAbility(new LensOfClarityLookLibraryAbility());
         this.addAbility(new LensOfClarityLookFaceDownAbility());
     }
@@ -112,17 +112,18 @@ class LensOfClarityLookLibraryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getObject(source.getSourceId());
-        if (player == null || mageObject == null) {
+        if (controller == null || mageObject == null) {
             return false;
         }
 
-        Card card = player.getLibrary().getFromTop(game);
+        Card card = controller.getLibrary().getFromTop(game);
         if (card != null) {
             Cards cards = new CardsImpl();
             cards.add(card);
-            player.lookAtCards("top card of library - " + player.getName(), cards, game);
+            controller.lookAtCards("top card of library - " + controller.getName(), cards, game);
+            game.informPlayers(controller.getName() + " looks at the top card of his or her library");
         } else {
             return false;
         }
@@ -175,9 +176,9 @@ class LensOfClarityLookFaceDownEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller=  game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getObject(source.getSourceId());
-        if (player == null || mageObject == null) {
+        if (controller == null || mageObject == null) {
             return false;
         }
         Permanent faceDownCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
@@ -186,7 +187,11 @@ class LensOfClarityLookFaceDownEffect extends OneShotEffect {
             copyFaceDown.setFaceDown(false);
             Cards cards = new CardsImpl();
             cards.add(copyFaceDown);
-            player.lookAtCards("face down card - " + mageObject.getLogName(), cards, game);
+            Player player = game.getPlayer(faceDownCreature.getControllerId());
+            controller.lookAtCards("face down card - " + mageObject.getLogName(), cards, game);
+            if (player != null) {
+                game.informPlayers(controller.getName() + " looks at a face down creature of " + player.getName());
+            }
         } else {
             return false;
         }
