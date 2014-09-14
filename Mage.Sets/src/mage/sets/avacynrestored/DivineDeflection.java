@@ -27,21 +27,19 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageObject;
+import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetSource;
 import mage.target.common.TargetCreatureOrPlayer;
-
-import java.util.UUID;
 
 /**
  * @author noxx
@@ -56,7 +54,6 @@ public class DivineDeflection extends CardImpl {
 
         // Prevent the next X damage that would be dealt to you and/or permanents you control this turn. If damage is prevented this way, Divine Deflection deals that much damage to target creature or player.
         this.getSpellAbility().addEffect(new DivineDeflectionPreventDamageTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetSource());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
@@ -72,16 +69,13 @@ public class DivineDeflection extends CardImpl {
 
 class DivineDeflectionPreventDamageTargetEffect extends PreventionEffectImpl {
 
-    private int amount = -1;
-
     public DivineDeflectionPreventDamageTargetEffect(Duration duration) {
-        super(duration);
+        super(duration, Integer.MIN_VALUE, false, true);
         staticText = "Prevent the next X damage that would be dealt to you and/or permanents you control this turn. If damage is prevented this way, {this} deals that much damage to target creature or player";
     }
 
     public DivineDeflectionPreventDamageTargetEffect(final DivineDeflectionPreventDamageTargetEffect effect) {
         super(effect);
-        this.amount = effect.amount;
     }
 
     @Override
@@ -96,42 +90,48 @@ class DivineDeflectionPreventDamageTargetEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, event.getTargetId(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            if (amount == -1) {
-                // define once
-                amount = source.getManaCostsToPay().getX();
-            }
-            int prevented;
-            if (event.getAmount() >= this.amount) {
-                int damage = amount;
-                event.setAmount(event.getAmount() - amount);
-                this.used = true;
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, event.getTargetId(), source.getSourceId(), source.getControllerId(), damage));
-                prevented = damage;
-            } else {
-                int damage = event.getAmount();
-                event.setAmount(0);
-                amount -= damage;
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, event.getTargetId(), source.getSourceId(), source.getControllerId(), damage));
-                prevented = damage;
-            }
+        /*
+        If damage is dealt to multiple permanents you control, or is dealt to you and at least
+        one permanent you control, you choose which of that damage to prevent if the chosen value
+        for X won't prevent all the damage. For example, if 3 damage would be dealt to you and to
+        each of two creatures you control, and Divine Deflection will prevent the next 3 damage,
+        you might choose to prevent the next 2 damage it would deal to you and the next 1 damage
+        it would deal to one of the creatures, among other choices. You don't decide until the
+        point at which the damage would be dealt.
+        TODO: Support to select which damage to prevent
+        */
 
-            // deal damage now
-            if (prevented > 0) {
-                UUID redirectTo = source.getTargets().get(1).getFirstTarget();
-                Permanent permanent = game.getPermanent(redirectTo);
-                if (permanent != null) {
-                    game.informPlayers("Dealing " + prevented + " to " + permanent.getName() + " instead");
-                    // keep the original source id as it is redirecting
-                    permanent.damage(prevented, event.getSourceId(), game, false, true);
-                }
-                Player player = game.getPlayer(redirectTo);
-                if (player != null) {
-                    game.informPlayers("Dealing " + prevented + " to " + player.getName() + " instead");
-                    // keep the original source id as it is redirecting
-                    player.damage(prevented, event.getSourceId(), game, false, true);
-                }
+        PreventionEffectData preventionData = preventDamageAction(event, source, game);
+        /*
+        Divine Deflection's effect is not a redirection effect. If it prevents damage,
+        Divine Deflection (not the original source) deals damage to the targeted creature
+        or player as part of that prevention effect. Divine Deflection is the source of
+        the new damage, so the characteristics of the original source (such as its color,
+        or whether it had lifelink or deathtouch) don't affect this damage. The new damage
+        is not combat damage, even if the prevented damage was. Since you control the source
+        of the new damage, if you targeted an opponent with Divine Deflection, you may
+        have Divine Deflection deal its damage to a planeswalker that opponent controls.
+        */
+        // deal damage now
+        int prevented = preventionData.getPreventedDamage();
+        if (prevented > 0) {
+            UUID dealDamageTo = source.getFirstTarget();
+            /*
+          	Whether the targeted creature or player is still a legal target is not checked after
+            Divine Deflection resolves. For example, if a creature targeted by Divine Deflection
+            gains shroud after Divine Deflection resolves, Divine Deflection can still deal damage
+            to that creature.
+            */
+
+            Permanent permanent = game.getPermanent(dealDamageTo);
+            if (permanent != null) {
+                game.informPlayers("Dealing " + prevented + " to " + permanent.getName() + " instead");
+                permanent.damage(prevented, source.getSourceId(), game, false, true);
+            }
+            Player player = game.getPlayer(dealDamageTo);
+            if (player != null) {
+                game.informPlayers("Dealing " + prevented + " to " + player.getName() + " instead");
+                player.damage(prevented, source.getSourceId(), game, false, true);
             }
         }
         return false;
@@ -140,30 +140,18 @@ class DivineDeflectionPreventDamageTargetEffect extends PreventionEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!this.used && super.applies(event, source, game)) {
-
-            // check source
-            MageObject object = game.getObject(event.getSourceId());
-            if (object == null) {
-                game.informPlayers("Couldn't find source of damage");
-                return false;
+            if (amountToPrevent == Integer.MIN_VALUE) {
+                amountToPrevent = source.getManaCostsToPay().getX();
             }
-
-            if (!object.getId().equals(source.getFirstTarget())) {
-                return false;
-            }
-
-            // check target
             //   check permanent first
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null) {
                 if (permanent.getControllerId().equals(source.getControllerId())) {
-                    // it's your permanent
                     return true;
                 }
             }
             //   check player
             if (source.getControllerId().equals(event.getTargetId())) {
-                // it is you
                 return true;
             }
         }
