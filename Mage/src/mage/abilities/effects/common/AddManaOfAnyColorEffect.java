@@ -72,6 +72,9 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
             ChoiceColor choice = new ChoiceColor(false);
 
             if (controller.choose(outcome, choice, game)) {
+                if (choice.getColor() == null) {
+                    return false; // it happenes, don't know how
+                }
                 Mana createdMana = null;
                 if (choice.getColor().isBlack()) {
                     createdMana = Mana.BlackMana(amount);
