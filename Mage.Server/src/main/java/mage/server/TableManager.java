@@ -356,7 +356,7 @@ public class TableManager {
         Collection<User> users = UserManager.getInstance().getUsers();
         logger.debug("--------User: " + users.size() + " [userId | since | name -----------------------");
         for (User user :users) {
-            logger.debug(user.getId() + " | " + formatter.format(user.getConnectionTime()) + " | " + user.getName() +" (" +user.getUserState().toString() +")");
+            logger.debug(user.getId() + " | " + formatter.format(user.getConnectionTime()) + " | " + user.getName() +" (" +user.getUserState().toString() + " - " + user.getPingInfo() + ")");
         }
         ArrayList<ChatSession> chatSessions = ChatManager.getInstance().getChatSessions();
         logger.debug("------- ChatSessions: " + chatSessions.size() + " ----------------------------------");
