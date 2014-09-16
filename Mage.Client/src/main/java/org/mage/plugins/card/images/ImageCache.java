@@ -130,7 +130,15 @@ public class ImageCache {
             }
         });
     }
-    
+
+    public static BufferedImage getMorphImage() {
+        CardDownloadData info = new CardDownloadData("Morph", "KTK", 0, false, 0, "KTK");
+        info.setToken(true);
+        String path = CardImageUtils.generateTokenImagePath(info);
+        TFile file = new TFile(path);
+        return loadImage(file);
+    }
+
     private static String buildThumbnailPath(String path) {
         String thumbnailPath;
         if (PreferencesDialog.isSaveImagesToZip()) {

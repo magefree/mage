@@ -50,7 +50,9 @@ import org.apache.log4j.Logger;
 import org.mage.card.arcane.ScaledImagePanel.MultipassType;
 import org.mage.card.arcane.ScaledImagePanel.ScalingType;
 import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
+import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.images.ImageCache;
+import org.mage.plugins.card.utils.CardImageUtils;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 /**
@@ -304,8 +306,19 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                     }
                     BufferedImage srcImage;
                     if (gameCard.isFaceDown()) {
-                        TFile file = new TFile(DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename);
-                        srcImage = ImageCache.loadImage(file);
+                        boolean morphedCard = false;
+                        for (String rule:gameCard.getRules()) {
+                            if (rule.startsWith("Morph ") ||
+                                    rule.equals("You may cast this card as a 2/2 face-down creature, with no text, no name, no subtypes, and no mana cost by paying {3} rather than paying its mana cost.")) {
+                                morphedCard = true;
+                            }
+                        }
+                        if (morphedCard) {
+                            srcImage = ImageCache.getMorphImage();
+                        }else {
+                            TFile file = new TFile(DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename);
+                            srcImage = ImageCache.loadImage(file);
+                        }
                     } else {
                         srcImage = ImageCache.getImage(gameCard, getCardWidth(), getCardHeight());
                     }

@@ -1,5 +1,7 @@
 package org.mage.plugins.card.images;
 
+import java.util.Objects;
+
 /**
  *
  * @author North
@@ -68,7 +70,7 @@ public class CardDownloadData {
         if ((this.set == null) ? (other.set != null) : !this.set.equals(other.set)) {
             return false;
         }
-        if (this.collectorId != other.collectorId && (this.collectorId == null || !this.collectorId.equals(other.collectorId))) {
+        if (!Objects.equals(this.collectorId, other.collectorId) && (this.collectorId == null || !this.collectorId.equals(other.collectorId))) {
             return false;
         }
         if (this.token != other.token) {
