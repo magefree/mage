@@ -100,7 +100,7 @@ class DrainingWhelkEffect extends CounterTargetEffect {
     public boolean apply(Game game, Ability source) {
         Spell targetSpell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (targetSpell != null) {
-            int spellCMC = targetSpell.getManaCost().convertedManaCost();
+            int spellCMC = targetSpell.getConvertedManaCost();
             super.apply(game, source);
             new AddCountersSourceEffect(CounterType.P1P1.createInstance(spellCMC)).apply(game, source);
             return true;
