@@ -97,11 +97,6 @@ class TrailOfMysteryTriggeredAbility extends TurnedFaceUpAllTriggeredAbility {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return false;
-    }
-
-    @Override
     public String getRule() {
         return "Whenever a permanent you control is turned face up, if it's a creature, it gets +2/+2 until end of turn";
     }
