@@ -37,7 +37,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CantCounterSourceEffect;
-import mage.abilities.effects.common.CantTargetSourceEffect;
+import mage.abilities.effects.common.CantBeTargetedSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterStackObject;
@@ -66,7 +66,7 @@ public class GaeasRevenge extends CardImpl {
 
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantCounterSourceEffect()));
         this.addAbility(HasteAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantTargetSourceEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeTargetedSourceEffect(filter, Duration.WhileOnBattlefield)));
 
     }
 

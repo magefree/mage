@@ -42,24 +42,24 @@ import mage.game.stack.StackObject;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CantTargetSourceEffect extends ContinuousRuleModifiyingEffectImpl {
+public class CantBeTargetedSourceEffect extends ContinuousRuleModifiyingEffectImpl {
 
     private final FilterStackObject filterSource;
 
-    public CantTargetSourceEffect(FilterStackObject filterSource, Duration duration) {
+    public CantBeTargetedSourceEffect(FilterStackObject filterSource, Duration duration) {
         super(duration, Outcome.Benefit);
         this.filterSource = filterSource;
         setText();
     }
 
-    public CantTargetSourceEffect(final CantTargetSourceEffect effect) {
+    public CantBeTargetedSourceEffect(final CantBeTargetedSourceEffect effect) {
         super(effect);
         this.filterSource = effect.filterSource.copy();
     }
 
     @Override
-    public CantTargetSourceEffect copy() {
-        return new CantTargetSourceEffect(this);
+    public CantBeTargetedSourceEffect copy() {
+        return new CantBeTargetedSourceEffect(this);
     }
 
     @Override
