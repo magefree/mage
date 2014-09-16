@@ -28,6 +28,7 @@
 package mage.sets.khansoftarkir;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -58,7 +59,7 @@ public class ScoutTheBorders extends CardImpl {
         this.color.setGreen(true);
 
         // Reveal the top five cards of your library. You may put a creature or land card from among them into your hand. Put the rest into your graveyard.
-        this.getSpellAbility().addEffect(new GrislySalvageEffect());
+        this.getSpellAbility().addEffect(new  ScoutTheBordersEffect());
     }
 
     public ScoutTheBorders(final ScoutTheBorders card) {
@@ -71,32 +72,33 @@ public class ScoutTheBorders extends CardImpl {
     }
 }
 
-class GrislySalvageEffect extends OneShotEffect {
+class  ScoutTheBordersEffect extends OneShotEffect {
 
     private static final FilterCard filterPutInHand = new FilterCard("creature or land card to put in hand");
     static {
         filterPutInHand.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.LAND)));
     }
 
-    public GrislySalvageEffect() {
+    public  ScoutTheBordersEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Reveal the top five cards of your library. You may put a creature or land card from among them into your hand. Put the rest into your graveyard";
     }
 
-    public GrislySalvageEffect(final GrislySalvageEffect effect) {
+    public  ScoutTheBordersEffect(final  ScoutTheBordersEffect effect) {
         super(effect);
     }
 
     @Override
-    public GrislySalvageEffect copy() {
-        return new GrislySalvageEffect(this);
+    public  ScoutTheBordersEffect copy() {
+        return new  ScoutTheBordersEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Cards cards = new CardsImpl(Zone.PICK);
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
+            Cards cards = new CardsImpl();
 
             boolean properCardFound = false;
             int count = Math.min(controller.getLibrary().size(), 5);
@@ -111,12 +113,13 @@ class GrislySalvageEffect extends OneShotEffect {
             }
 
             if (!cards.isEmpty()) {
-                controller.revealCards("Scout the Borders", cards, game);
-                TargetCard target = new TargetCard(Zone.PICK, filterPutInHand);
+                controller.revealCards(sourceObject.getLogName(), cards, game);
+                TargetCard target = new TargetCard(Zone.LIBRARY, filterPutInHand);
                 if (properCardFound && controller.choose(Outcome.DrawCard, cards, target, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                        cards.remove(card);
                     }
 
                 }
