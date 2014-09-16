@@ -73,7 +73,7 @@ public class SetessanTactics extends CardImpl {
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new FightTargetSourceEffect(), new TapSourceCost());
         gainedAbility.addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(gainedAbility, Duration.EndOfTurn,
-                "and gain \"T: This creature fights another target creature"));
+                "and gain \"T: This creature fights another target creature.\""));
     }
 
     public SetessanTactics(final SetessanTactics card) {

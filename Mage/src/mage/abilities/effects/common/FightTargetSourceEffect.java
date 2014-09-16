@@ -30,7 +30,6 @@ package mage.abilities.effects.common;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -52,22 +51,23 @@ public class FightTargetSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getSourceId());
-        if (card != null) {
+        Permanent originalPermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (originalPermanent != null) {
+            Permanent sourcePermanent  = game.getPermanent(source.getSourceId());
             // only if target is legal the effect will be applied
             if (source.getTargets().get(0).isLegal(source, game)) {
                 Permanent creature1 = game.getPermanent(source.getTargets().get(0).getFirstTarget());
-                Permanent creature2 = game.getPermanent(source.getSourceId());
+
                 // 20110930 - 701.10
-                if (creature1 != null && creature2 != null) {
-                    if (creature1.getCardType().contains(CardType.CREATURE) && creature2.getCardType().contains(CardType.CREATURE)) {
-                        creature1.damage(creature2.getPower().getValue(), creature2.getId(), game, false, true);
-                        creature2.damage(creature1.getPower().getValue(), creature1.getId(), game, false, true);
+                if (creature1 != null && sourcePermanent != null) {
+                    if (creature1.getCardType().contains(CardType.CREATURE) && sourcePermanent.getCardType().contains(CardType.CREATURE)) {
+                        creature1.damage(sourcePermanent.getPower().getValue(), sourcePermanent.getId(), game, false, true);
+                        sourcePermanent.damage(creature1.getPower().getValue(), creature1.getId(), game, false, true);
                         return true;
                     }
                 }
             }
-            game.informPlayers(card.getName() + ": Fighting effect has been fizzled.");
+            game.informPlayers(originalPermanent.getLogName() + ": Fighting effect has been fizzled.");
         }
         return false;
     }
