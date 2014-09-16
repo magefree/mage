@@ -1348,6 +1348,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public void initLife(int life) {
+        this.life = life;
+    }
+    
+    @Override
     public void setLife(int life, Game game) {
         // rule 118.5
         if (life > this.life) {

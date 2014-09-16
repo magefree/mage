@@ -746,7 +746,7 @@ public abstract class GameImpl implements Game, Serializable {
         }
 
         if (choosingPlayer != null && choosingPlayer.choose(Outcome.Benefit, targetPlayer, null, this)) {
-            startingPlayerId = ((List<UUID>)targetPlayer.getTargets()).get(0);
+            startingPlayerId = targetPlayer.getTargets().get(0);
             Player startingPlayer = state.getPlayer(startingPlayerId);
             StringBuilder message = new StringBuilder(choosingPlayer.getName()).append(" chooses that ");
             if (choosingPlayer.getId().equals(startingPlayerId)) {
@@ -767,7 +767,7 @@ public abstract class GameImpl implements Game, Serializable {
         for (UUID playerId: state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
             if (!gameOptions.testMode || player.getLife() == 0) {
-                player.setLife(this.getLife(), this);
+                player.initLife(this.getLife());
             }
             if (!gameOptions.testMode) {
                 player.drawCards(7, this);

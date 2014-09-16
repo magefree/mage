@@ -77,6 +77,7 @@ public interface Player extends MageItem, Copyable<Player> {
     void addAbility(Ability ability);
     Counters getCounters();
     int getLife();
+    void initLife(int life);
     void setLife(int life, Game game);
     int loseLife(int amount, Game game);
     int gainLife(int amount, Game game);
