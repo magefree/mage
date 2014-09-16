@@ -28,16 +28,17 @@
 package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.MageInt;
+import mage.ObjectColor;
+import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -46,12 +47,16 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.game.Game;
 import mage.game.command.Emblem;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -68,7 +73,7 @@ public class SarkhanTheDragonspeaker extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 
         // +1: Until end of turn, Sarkhan, the Dragonspeaker becomes a legendary 4/4 red Dragon creature with flying, indestructible, and haste.
-        this.addAbility(new LoyaltyAbility(new BecomesCreatureSourceEffect(new SarkhanTheDragonspeakerToken(), "", Duration.EndOfTurn), 1));
+        this.addAbility(new LoyaltyAbility(new SarkhanTheDragonspeakerEffect(), 1));
         
         // -3: Sarkhan, the Dragonspeaker deals 4 damage to target creature.
         LoyaltyAbility ability = new LoyaltyAbility(new DamageTargetEffect(4), -3);
@@ -91,20 +96,79 @@ public class SarkhanTheDragonspeaker extends CardImpl {
     }
 }
 
-class SarkhanTheDragonspeakerToken extends Token {
+class SarkhanTheDragonspeakerEffect extends ContinuousEffectImpl {
+    
+    protected int zoneChangeCounter;
 
-    SarkhanTheDragonspeakerToken() {
-        super("", "legendary 4/4 red Dragon creature with flying, indestructible, and haste");
-        supertype.add("Legendary");
-        power = new MageInt(4);
-        toughness = new MageInt(4);
-        color.setRed(true);
-        subtype.add("Dragon");
-        cardType.add(CardType.CREATURE);
-        
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(IndestructibleAbility.getInstance());
-        this.addAbility(HasteAbility.getInstance());
+    SarkhanTheDragonspeakerEffect() {
+        super(Duration.EndOfTurn, Outcome.BecomeCreature);
+        staticText = "Until end of turn, Sarkhan, the Dragonspeaker becomes a legendary 4/4 red Dragon creature with flying, indestructible, and haste.";
+    }
+
+    SarkhanTheDragonspeakerEffect(final SarkhanTheDragonspeakerEffect effect) {
+        super(effect);
+        this.zoneChangeCounter = effect.zoneChangeCounter;
+    }
+
+    @Override
+    public SarkhanTheDragonspeakerEffect copy() {
+        return new SarkhanTheDragonspeakerEffect(this);
+    }
+    
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        this.getAffectedObjects().add(source.getSourceId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            this.zoneChangeCounter = permanent.getZoneChangeCounter();
+        }
+    }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null && permanent.getZoneChangeCounter() == this.zoneChangeCounter) {
+            switch (layer) {
+                case TypeChangingEffects_4:
+                    if (sublayer == SubLayer.NA) {
+                        permanent.getCardType().clear();
+                        permanent.getCardType().add(CardType.CREATURE);
+                        permanent.getSubtype().clear();
+                        permanent.getSubtype().add("Dragon");
+                        permanent.getSupertype().clear();
+                        permanent.getSupertype().add("Legendary");
+                    }
+                    break;
+                case ColorChangingEffects_5:
+                    permanent.getColor().setColor(ObjectColor.RED);
+                    break;
+                case AbilityAddingRemovingEffects_6:
+                    if (sublayer == SubLayer.NA) {
+                        permanent.addAbility(FlyingAbility.getInstance(), source.getSourceId(), game);
+                        permanent.addAbility(IndestructibleAbility.getInstance(), source.getSourceId(), game);
+                        permanent.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
+                    }
+                    break;
+                case PTChangingEffects_7:
+                    if (sublayer == SubLayer.SetPT_7b) {
+                        permanent.getPower().setValue(4);
+                        permanent.getToughness().setValue(4);
+                    }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
+
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
     }
 }
 
