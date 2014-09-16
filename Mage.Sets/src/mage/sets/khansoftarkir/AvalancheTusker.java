@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.combat.BlocksIfAbleTargetEffect;
+import mage.abilities.effects.common.combat.MustBeBlockedByTargetSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -60,7 +61,7 @@ public class AvalancheTusker extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);
 
-        // Whenever Avalanche Tusker attacks, target creature defending player controls blocks this turn if able.
+        // Whenever Avalanche Tusker attacks, target creature defending player controls blocks it this turn if able.
         this.addAbility(new AvalancheTuskerAbility());
     }
 
@@ -77,7 +78,7 @@ public class AvalancheTusker extends CardImpl {
 class AvalancheTuskerAbility extends TriggeredAbilityImpl {
 
     public AvalancheTuskerAbility() {
-        super(Zone.BATTLEFIELD, new BlocksIfAbleTargetEffect(Duration.EndOfTurn), true);
+        super(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(Duration.EndOfCombat), true);
     }
 
     public AvalancheTuskerAbility(final AvalancheTuskerAbility ability) {
@@ -101,7 +102,7 @@ class AvalancheTuskerAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} attacks, target creature defending player controls blocks this turn if able.";
+        return "Whenever {this} attacks, target creature defending player controls blocks it this combat if able.";
     }
 
     @Override
