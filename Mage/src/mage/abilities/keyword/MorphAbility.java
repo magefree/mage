@@ -50,6 +50,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continious.SourceEffect;
 import mage.cards.Card;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -291,6 +292,9 @@ class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implements Sour
             switch (layer) {
                 case TypeChangingEffects_4:
                     permanent.setName("");
+                    permanent.getSupertype().clear();
+                    permanent.getCardType().clear();
+                    permanent.getCardType().add(CardType.CREATURE);
                     permanent.getSubtype().clear();
                     permanent.getManaCost().clear();
                     break;
