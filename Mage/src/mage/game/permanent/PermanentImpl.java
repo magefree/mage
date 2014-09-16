@@ -621,7 +621,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 damageDone = damageCreature(damageAmount, sourceId, game, preventable, combat, markDamage, appliedEffects);
             }
             if (damageDone > 0) {
-                Permanent source = game.getPermanent(sourceId);
+                Permanent source = game.getPermanentOrLKIBattlefield(sourceId);
                 if (source != null && source.getAbilities().containsKey(LifelinkAbility.getInstance().getId())) {
                     Player player = game.getPlayer(source.getControllerId());
                     player.gainLife(damageAmount, game);
