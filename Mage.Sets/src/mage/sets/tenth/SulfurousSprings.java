@@ -28,14 +28,16 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
+import mage.Mana;
+import mage.abilities.Ability;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DamageControllerEffect;
+import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.ColorlessManaAbility;
-import mage.abilities.mana.RedManaAbility;
-import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -46,11 +48,13 @@ public class SulfurousSprings extends CardImpl {
     public SulfurousSprings(UUID ownerId) {
         super(ownerId, 359, "Sulfurous Springs", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "10E";
+
         this.addAbility(new ColorlessManaAbility());
-        Ability blackManaAbility = new BlackManaAbility();
+
+        Ability blackManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana, new TapSourceCost());
         blackManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(blackManaAbility);
-        Ability redManaAbility = new RedManaAbility();
+        Ability redManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana, new TapSourceCost());
         redManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(redManaAbility);
     }

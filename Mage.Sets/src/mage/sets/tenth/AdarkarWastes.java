@@ -28,15 +28,16 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
-
+import mage.Mana;
+import mage.abilities.Ability;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DamageControllerEffect;
+import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.mana.BlueManaAbility;
-import mage.abilities.mana.ColorlessManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
-import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -47,11 +48,13 @@ public class AdarkarWastes extends CardImpl {
     public AdarkarWastes(UUID ownerId) {
         super(ownerId, 347, "Adarkar Wastes", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "10E";
+
         this.addAbility(new ColorlessManaAbility());
-        Ability whiteManaAbility = new WhiteManaAbility();
+
+        Ability whiteManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana, new TapSourceCost());
         whiteManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(whiteManaAbility);
-        Ability blueManaAbility = new BlueManaAbility();
+        Ability blueManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana, new TapSourceCost());
         blueManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(blueManaAbility);
     }

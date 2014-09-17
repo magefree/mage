@@ -28,14 +28,16 @@
 package mage.sets.apocalypse;
 
 import java.util.UUID;
+import mage.Mana;
+import mage.abilities.Ability;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DamageControllerEffect;
+import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.ColorlessManaAbility;
-import mage.abilities.mana.GreenManaAbility;
-import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -46,11 +48,15 @@ public class LlanowarWastes extends CardImpl {
     public LlanowarWastes(UUID ownerId) {
         super(ownerId, 141, "Llanowar Wastes", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "APC";
+
+        // Tap: Add 1 to your mana pool.
         this.addAbility(new ColorlessManaAbility());
-        Ability blackManaAbility = new BlackManaAbility();
+
+        // Tap: Add Black or Green to your mana pool. Llanowar Wastes deals 1 damage to you.
+        Ability blackManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana, new TapSourceCost());
         blackManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(blackManaAbility);
-        Ability greenManaAbility = new GreenManaAbility();
+        Ability greenManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana, new TapSourceCost());
         greenManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(greenManaAbility);
     }

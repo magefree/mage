@@ -28,14 +28,16 @@
 package mage.sets.apocalypse;
 
 import java.util.UUID;
+import mage.Mana;
+import mage.abilities.Ability;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DamageControllerEffect;
+import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.mana.BlueManaAbility;
-import mage.abilities.mana.ColorlessManaAbility;
-import mage.abilities.mana.GreenManaAbility;
-import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -46,11 +48,15 @@ public class YavimayaCoast extends CardImpl {
     public YavimayaCoast(UUID ownerId) {
         super(ownerId, 143, "Yavimaya Coast", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "APC";
+
+        // Tap: Add 1 to your mana pool.
         this.addAbility(new ColorlessManaAbility());
-        Ability greenManaAbility = new GreenManaAbility();
+
+        // Tap: Add Green or Blue to your mana pool. Yavimaya Coast deals 1 damage to you.
+        Ability greenManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana, new TapSourceCost());
         greenManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(greenManaAbility);
-        Ability blueManaAbility = new BlueManaAbility();
+        Ability blueManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana, new TapSourceCost());
         blueManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(blueManaAbility);
     }

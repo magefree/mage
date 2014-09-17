@@ -28,14 +28,16 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.mana.ColorlessManaAbility;
-import mage.abilities.mana.GreenManaAbility;
-import mage.abilities.mana.RedManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
@@ -46,11 +48,13 @@ public class KarplusanForest extends CardImpl {
     public KarplusanForest(UUID ownerId) {
         super(ownerId, 354, "Karplusan Forest", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "10E";
+        
         this.addAbility(new ColorlessManaAbility());
-        Ability redManaAbility = new RedManaAbility();
+
+        Ability redManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana, new TapSourceCost());
         redManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(redManaAbility);
-        Ability greenManaAbility = new GreenManaAbility();
+        Ability greenManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana, new TapSourceCost());
         greenManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(greenManaAbility);
     }

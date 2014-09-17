@@ -28,14 +28,16 @@
 package mage.sets.apocalypse;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.mana.ColorlessManaAbility;
-import mage.abilities.mana.RedManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
@@ -46,13 +48,15 @@ public class BattlefieldForge extends CardImpl {
     public BattlefieldForge(UUID ownerId) {
         super(ownerId, 139, "Battlefield Forge", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "APC";
+        
+        // Tap: Add 1 to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
-        Ability redManaAbility = new RedManaAbility();
+        // Tap: Add Red or White to your mana pool. Battlefield Forge deals 1 damage to you.
+        Ability redManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana, new TapSourceCost());
         redManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(redManaAbility);
-
-        Ability whiteManaAbility = new WhiteManaAbility();
+        Ability whiteManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana, new TapSourceCost());
         whiteManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(whiteManaAbility);
     }

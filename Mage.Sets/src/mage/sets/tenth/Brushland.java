@@ -28,14 +28,16 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.mana.ColorlessManaAbility;
-import mage.abilities.mana.GreenManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
@@ -47,10 +49,11 @@ public class Brushland extends CardImpl {
         super(ownerId, 349, "Brushland", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "10E";
         this.addAbility(new ColorlessManaAbility());
-        Ability greenManaAbility = new GreenManaAbility();
+
+        Ability greenManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana, new TapSourceCost());
         greenManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(greenManaAbility);
-        Ability whiteManaAbility = new WhiteManaAbility();
+        Ability whiteManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana, new TapSourceCost());
         whiteManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(whiteManaAbility);
     }

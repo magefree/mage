@@ -28,14 +28,16 @@
 package mage.sets.apocalypse;
 
 import java.util.UUID;
+import mage.Mana;
+import mage.abilities.Ability;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DamageControllerEffect;
+import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.ColorlessManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
-import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -46,11 +48,16 @@ public class CavesOfKoilos extends CardImpl {
     public CavesOfKoilos(UUID ownerId) {
         super(ownerId, 140, "Caves of Koilos", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "APC";
+
+
+        // Tap: Add 1 to your mana pool.
         this.addAbility(new ColorlessManaAbility());
-        Ability whiteManaAbility = new WhiteManaAbility();
+
+        // Tap: Add White or Black to your mana pool. Caves of Koilos deals 1 damage to you.
+        Ability whiteManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana, new TapSourceCost());
         whiteManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(whiteManaAbility);
-        Ability blackManaAbility = new BlackManaAbility();
+        Ability blackManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana, new TapSourceCost());
         blackManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(blackManaAbility);
     }
