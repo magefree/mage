@@ -86,7 +86,7 @@ public class GoblinRabblemaster extends CardImpl {
         this.addAbility(new BeginningOfCombatTriggeredAbility(new CreateTokenEffect(new GoblinToken()), TargetController.YOU, false));
         
         // When Goblin Rabblemaster attacks, it gets +1/+0 until end of turn for each other attacking Goblin.
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(new PermanentsOnBattlefieldCount(attackingFilter), new StaticValue(0), Duration.EndOfTurn), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(new PermanentsOnBattlefieldCount(attackingFilter), new StaticValue(0), Duration.EndOfTurn, true), false));
     }
 
     public GoblinRabblemaster(final GoblinRabblemaster card) {
