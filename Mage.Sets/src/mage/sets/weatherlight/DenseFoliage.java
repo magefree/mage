@@ -29,7 +29,7 @@ package mage.sets.weatherlight;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.CantTargetEffect;
+import mage.abilities.effects.common.CantBeTargetedAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -51,7 +51,7 @@ public class DenseFoliage extends CardImpl {
         this.color.setGreen(true);
 
         // Creatures can't be the targets of spells.
-        CantTargetEffect cantTargetEffect = new CantTargetEffect(new FilterCreaturePermanent("Creatures"), new FilterSpell("spells"), Duration.WhileOnBattlefield);
+        CantBeTargetedAllEffect cantTargetEffect = new CantBeTargetedAllEffect(new FilterCreaturePermanent("Creatures"), new FilterSpell("spells"), Duration.WhileOnBattlefield);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, cantTargetEffect));
     }
 

@@ -38,12 +38,14 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.effects.common.CantBeTargetedAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
+import mage.filter.FilterStackObject;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -56,6 +58,12 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class CanopyCover extends CardImpl {
 
+    private static final FilterStackObject filter = new FilterStackObject("spells or abilities your opponents control");
+
+    static {
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+    }
+    
     public CanopyCover(UUID ownerId) {
         super(ownerId, 98, "Canopy Cover", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "WWK";
@@ -74,7 +82,7 @@ public class CanopyCover extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OrchardSpiritEffect()));
 
         // Enchanted creature can't be the target of spells or abilities your opponents control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeTargetedAttachedEffect(filter, Duration.WhileOnBattlefield, AttachmentType.AURA)));
     }
 
     public CanopyCover(final CanopyCover card) {
@@ -112,10 +120,7 @@ class OrchardSpiritEffect extends RestrictionEffect {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (blocker.getAbilities().contains(FlyingAbility.getInstance()) || blocker.getAbilities().contains(ReachAbility.getInstance())) {
-            return true;
-        }
-        return false;
+        return blocker.getAbilities().contains(FlyingAbility.getInstance()) || blocker.getAbilities().contains(ReachAbility.getInstance());
     }
 
     @Override

@@ -44,16 +44,16 @@ import mage.game.stack.StackObject;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CantTargetEffect extends ContinuousRuleModifiyingEffectImpl {
+public class CantBeTargetedAllEffect extends ContinuousRuleModifiyingEffectImpl {
 
     private FilterPermanent filterTarget;
     private FilterStackObject filterSource;
 
-    public CantTargetEffect(FilterPermanent filterTarget, Duration duration) {
+    public CantBeTargetedAllEffect(FilterPermanent filterTarget, Duration duration) {
         this(filterTarget, null, duration);
     }
 
-    public CantTargetEffect(FilterPermanent filterTarget, FilterStackObject filterSource, Duration duration) {
+    public CantBeTargetedAllEffect(FilterPermanent filterTarget, FilterStackObject filterSource, Duration duration) {
         super(duration, Outcome.Benefit);
         this.filterTarget = filterTarget;
         this.filterSource = filterSource;
@@ -61,7 +61,7 @@ public class CantTargetEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
 
-    public CantTargetEffect(final CantTargetEffect effect) {
+    public CantBeTargetedAllEffect(final CantBeTargetedAllEffect effect) {
         super(effect);
         if (effect.filterTarget != null) {
             this.filterTarget = effect.filterTarget.copy();
@@ -72,8 +72,8 @@ public class CantTargetEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
-    public CantTargetEffect copy() {
-        return new CantTargetEffect(this);
+    public CantBeTargetedAllEffect copy() {
+        return new CantBeTargetedAllEffect(this);
     }
 
     @Override

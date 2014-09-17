@@ -29,7 +29,6 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.condition.LockedInCondition;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -38,14 +37,10 @@ import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.CantBeTargetedTargetEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.constants.TargetController;
 import mage.filter.FilterStackObject;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
