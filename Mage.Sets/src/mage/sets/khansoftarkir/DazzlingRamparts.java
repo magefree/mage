@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class DazzlingRamparts extends CardImpl {
 
     public DazzlingRamparts(UUID ownerId) {
-        super(ownerId, 6, "Dazzling Ramparts", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        super(ownerId, 6, "Dazzling Ramparts", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
         this.expansionSetCode = "KTK";
         this.subtype.add("Wall");
 
