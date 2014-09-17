@@ -124,7 +124,7 @@ class PropheticFlamespeakerCastFromExileEffect extends AsThoughEffectImpl {
 
     public PropheticFlamespeakerCastFromExileEffect() {
         super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "You may play card from exile";
+        staticText = "You may play the card from exile";
     }
 
     public PropheticFlamespeakerCastFromExileEffect(final PropheticFlamespeakerCastFromExileEffect effect) {
@@ -142,7 +142,8 @@ class PropheticFlamespeakerCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        return sourceId.equals(getTargetPointer().getFirst(game, source)) && game.getState().getZone(sourceId) == Zone.EXILED;
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        return source.getControllerId().equals(affectedControllerId) &&
+                objectId.equals(getTargetPointer().getFirst(game, source));
     }
 }

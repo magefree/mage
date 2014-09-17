@@ -435,7 +435,7 @@ public class ContinuousEffects implements Serializable {
         for (AsThoughEffect effect: asThoughEffectsList) {
             HashSet<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
             for (Ability ability : abilities) {
-                if (controllerId.equals(ability.getControllerId())) {
+                //if (controllerId.equals(ability.getControllerId())) { must be checked in the applies method
                     if (affectedAbility == null) {
                         if (effect.applies(objectId, ability, controllerId, game)) {
                             return true;
@@ -445,7 +445,7 @@ public class ContinuousEffects implements Serializable {
                             return true;
                         }
                     }
-                }
+                //}
             }
         }
         return false;

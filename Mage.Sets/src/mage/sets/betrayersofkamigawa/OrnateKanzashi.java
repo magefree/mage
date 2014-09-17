@@ -29,22 +29,27 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.*;
+import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.CardsImpl;
+import mage.constants.AsThoughEffectType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Library;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -92,15 +97,18 @@ class OrnateKanzashiEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null && player.getLibrary().size() > 0) {
-            Library library = player.getLibrary();
-            Card card = library.removeFromTop(game);
-            card.moveToExile(source.getSourceId(), "Ornate Kanzashi", source.getSourceId(), game);
-
-            if (card != null) {
-                player.revealCards("Card to play", new CardsImpl(card), game);
-                game.addEffect(new OrnateKanzashiCastFromExileEffect(card.getId()), source);
+        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        MageObject sourceObject = game.getObject(source.getSourceId());        
+        if (sourceObject != null && opponent != null) {
+            if (opponent.getLibrary().size() > 0) {
+                Library library = opponent.getLibrary();
+                Card card = library.getFromTop(game);
+                if (card != null) {
+                    opponent.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getLogName(), source.getSourceId(), game, Zone.LIBRARY);
+                    ContinuousEffect effect = new OrnateKanzashiCastFromExileEffect(card.getId());
+                    effect.setTargetPointer(new FixedTarget(card.getId()));
+                    game.addEffect(effect, source);
+                }
             }
             return true;
         }
@@ -110,17 +118,13 @@ class OrnateKanzashiEffect extends OneShotEffect {
 
 class OrnateKanzashiCastFromExileEffect extends AsThoughEffectImpl {
 
-    private UUID cardId;
-
     public OrnateKanzashiCastFromExileEffect(UUID cardId) {
         super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "You may play card from exile";
-        this.cardId = cardId;
+        staticText = "You may play that card from exile this turn";
     }
 
     public OrnateKanzashiCastFromExileEffect(final OrnateKanzashiCastFromExileEffect effect) {
         super(effect);
-        cardId = effect.cardId;
     }
 
     @Override
@@ -134,26 +138,7 @@ class OrnateKanzashiCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (sourceId.equals(this.cardId)) {
-            Card card = game.getCard(this.cardId);
-            if (card != null && game.getState().getZone(this.cardId) == Zone.EXILED) {
-                Player player = game.getPlayer(source.getControllerId());
-                if (player != null && player.chooseUse(Outcome.Benefit, "Play this card?", game)) {
-                    if (card.getCardType().contains(CardType.LAND)) {
-                        // If the revealed card is a land, you can play it only if it's your turn and you haven't yet played a land this turn.
-                        if (game.getActivePlayerId().equals(player.getId()) && player.getLandsPlayed() < player.getLandsPerTurn()) {
-                            return player.playLand(card, game);
-                        }
-                    } else {
-                        Ability ability = card.getSpellAbility();
-                        if (ability != null && ability instanceof SpellAbility) {
-                            return player.cast((SpellAbility) ability, game, false);
-                        }
-                    }
-                }
-            }
-        }
-        return false;
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {        
+        return source.getControllerId().equals(affectedControllerId) && objectId.equals(getTargetPointer().getFirst(game, source));
     }
 }

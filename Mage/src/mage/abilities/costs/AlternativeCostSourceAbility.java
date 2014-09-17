@@ -72,7 +72,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
      * 
      * @param cost alternate cost to pay
      * @param condition only if the condition is true it's possible to use the alternate costs
-     * @param rule if set used as rule text
+     * @param rule if != null used as rule text
      * @param filter filters the cards this alternate cost can be applied to
      * @param onlyMana if true only the mana costs are replaced by this costs, other costs stay untouched 
      */

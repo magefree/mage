@@ -40,7 +40,6 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.ExileFromZoneTargetEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -118,16 +117,12 @@ class FiendOfTheShadowsEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        Card card = game.getCard(sourceId);
-        if (card != null) {
-            ExileZone zone = game.getExile().getExileZone(exileId);
-            if (zone != null && zone.contains(card.getId())) {
-                if (card.getCardType().contains(CardType.INSTANT) || game.canPlaySorcery(source.getControllerId())) {
-                    card.setControllerId(source.getControllerId());
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        if (affectedControllerId.equals(source.getControllerId())) {
+                ExileZone zone = game.getExile().getExileZone(exileId);
+                if (zone != null && zone.contains(objectId)) {
                     return true;
                 }
-            }
         }
         return false;
     }

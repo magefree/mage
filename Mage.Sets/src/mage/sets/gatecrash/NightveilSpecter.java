@@ -149,10 +149,9 @@ class NightveilSpecterEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-      Card card = game.getCard(sourceId);
-      Player controller = game.getPlayer(source.getControllerId());
-      if (controller != null && card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+      Card card = game.getCard(objectId);
+      if (affectedControllerId.equals(source.getControllerId()) && card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
           ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
           return zone != null && zone.contains(card.getId());
       }

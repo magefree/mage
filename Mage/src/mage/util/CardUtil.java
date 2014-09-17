@@ -490,7 +490,7 @@ public class CardUtil {
             uniqueString.append(text);
         }
         uniqueString.append(cardId);
-        Card card = game.getCard(cardId);
+        Card card = game.getCard(cardId); // if called for a token, the id is enough
         if (card != null) {
             uniqueString.append(card.getZoneChangeCounter());
         }

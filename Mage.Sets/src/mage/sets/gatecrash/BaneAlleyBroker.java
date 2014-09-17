@@ -37,6 +37,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -56,6 +57,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
 
 /**
  * Gatecrash FAQ (01.2013)
@@ -99,12 +101,11 @@ public class BaneAlleyBroker extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 
-        // {tap}: Draw a card, then exile a card from your hand face down.
-        
+        // {tap}: Draw a card, then exile a card from your hand face down.        
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BaneAlleyBrokerDrawExileEffect(), new TapSourceCost()));
         
         // You may look at cards exiled with Bane Alley Broker.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BaneAlleyBrokerLookAtCardEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new BaneAlleyBrokerLookAtCardEffect()));
 
         // {U}{B}, {tap}: Return a card exiled with Bane Alley Broker to its owner's hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{U}{B}"));
@@ -143,15 +144,10 @@ class BaneAlleyBrokerDrawExileEffect extends OneShotEffect {
           Target target = new TargetCardInHand(new FilterCard("card to exile"));
           if (player.chooseTarget(outcome, target, source, game)) {
               Card card = game.getCard(target.getFirstTarget());
-              Card sourceCard = game.getCard(source.getSourceId());
-              if (card != null && sourceCard != null) {
+              MageObject sourceObject = game.getObject(source.getSourceId());              
+              if (card != null && sourceObject != null) {
                   card.setFaceDown(true);
-                  UUID exileId = (UUID) game.getState().getValue(new StringBuilder("exileZone").append(source.getSourceId()).append(sourceCard.getZoneChangeCounter()).toString());
-                  if (exileId == null) {
-                      exileId = UUID.randomUUID();
-                      game.getState().setValue(new StringBuilder("exileZone").append(source.getSourceId()).append(sourceCard.getZoneChangeCounter()).toString(), exileId);
-                  }
-                  return card.moveToExile(exileId, new StringBuilder(sourceCard.getName()).append("(").append(sourceCard.getZoneChangeCounter()).append(")").toString(), source.getSourceId(), game);
+                  return card.moveToExile(CardUtil.getCardExileZoneId(game, source), new StringBuilder(sourceObject.getLogName()).toString(), source.getSourceId(), game);
               }
           }
       }
@@ -176,10 +172,10 @@ class TargetCardInBaneAlleyBrokerExile extends TargetCard {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<UUID>();
+        Set<UUID> possibleTargets = new HashSet<>();
         Card sourceCard = game.getCard(sourceId);
         if (sourceCard != null) {
-            UUID exileId = (UUID) game.getState().getValue(new StringBuilder("exileZone").append(sourceId).append(sourceCard.getZoneChangeCounter()).toString());
+            UUID exileId = CardUtil.getCardExileZoneId(game, sourceId);
             ExileZone exile = game.getExile().getExileZone(exileId);
             if (exile != null && exile.size() > 0) {
                 possibleTargets.addAll(exile);
@@ -192,7 +188,7 @@ class TargetCardInBaneAlleyBrokerExile extends TargetCard {
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         Card sourceCard = game.getCard(sourceId);
         if (sourceCard != null) {
-            UUID exileId = (UUID) game.getState().getValue(new StringBuilder("exileZone").append(sourceId).append(sourceCard.getZoneChangeCounter()).toString());
+            UUID exileId = CardUtil.getCardExileZoneId(game, sourceId);
             ExileZone exile = game.getExile().getExileZone(exileId);
             if (exile != null && exile.size() > 0) {
                 return true;
@@ -208,7 +204,7 @@ class TargetCardInBaneAlleyBrokerExile extends TargetCard {
             ExileZone exile = null;
             Card sourceCard = game.getCard(source.getSourceId());
             if (sourceCard != null) {
-                UUID exileId = (UUID) game.getState().getValue(new StringBuilder("exileZone").append(source.getSourceId()).append(sourceCard.getZoneChangeCounter()).toString());
+                UUID exileId = CardUtil.getCardExileZoneId(game, source);
                 exile = game.getExile().getExileZone(exileId);
             }
             if (exile != null && exile.contains(id)) {
@@ -246,20 +242,22 @@ class BaneAlleyBrokerLookAtCardEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        Card card = game.getCard(sourceId);
-        if (card != null && game.getState().getZone(sourceId) == Zone.EXILED) {
-            Card sourceCard = game.getCard(source.getSourceId());
-            if (sourceCard == null) {
-                return false;
-            }
-            UUID exileId = (UUID) game.getState().getValue(new StringBuilder("exileZone").append(source.getSourceId()).append(sourceCard.getZoneChangeCounter()).toString());
-            ExileZone exile = game.getExile().getExileZone(exileId);
-            if (exile != null && exile.contains(sourceId)) {
-                Cards cards = new CardsImpl(card);
-                Player controller = game.getPlayer(source.getControllerId());
-                if (controller != null) {
-                    controller.lookAtCards("Exiled with " + sourceCard.getName(), cards, game);
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        if (affectedControllerId.equals(source.getControllerId())) {
+            Card card = game.getCard(objectId);
+            if (card != null) {
+                MageObject sourceObject = game.getObject(source.getSourceId());
+                if (sourceObject == null) {
+                    return false;
+                }
+                UUID exileId = CardUtil.getCardExileZoneId(game, source);
+                ExileZone exile = game.getExile().getExileZone(exileId);
+                if (exile != null && exile.contains(objectId)) {
+                    Cards cards = new CardsImpl(card);
+                    Player controller = game.getPlayer(source.getControllerId());
+                    if (controller != null) {
+                        controller.lookAtCards("Exiled with " + sourceObject.getLogName(), cards, game);
+                    }
                 }
             }
         }

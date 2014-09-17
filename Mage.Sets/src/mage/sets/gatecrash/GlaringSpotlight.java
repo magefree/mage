@@ -112,10 +112,12 @@ class GlaringSpotlightEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        Permanent creature = game.getPermanent(sourceId);
-        if (creature != null) {
-            if (game.getOpponents(source.getControllerId()).contains(creature.getControllerId())) {
-                return true;
+        if (affectedControllerId.equals(source.getControllerId())) {
+            Permanent creature = game.getPermanent(sourceId);
+            if (creature != null) {
+                if (game.getOpponents(source.getControllerId()).contains(creature.getControllerId())) {
+                    return true;
+                }
             }
         }
         return false;
