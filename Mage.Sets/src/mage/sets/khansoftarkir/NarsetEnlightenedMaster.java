@@ -102,12 +102,12 @@ class NarsetEnlightenedMasterExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (player != null && sourceObject != null) {
             for (int i = 0; i < 4; i++) {
                 if (player.getLibrary().size() > 0) {
-                    Card card = player.getLibrary().removeFromTop(game);
-                    MageObject sourceObject = game.getObject(source.getSourceId());
-                    if (card != null && sourceObject != null) {
+                    Card card = player.getLibrary().getFromTop(game);
+                    if (card != null) {
                         player.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourceObject.getLogName(), source.getSourceId(), game, Zone.LIBRARY);
                         if (!card.getCardType().contains(CardType.CREATURE)) {
                             ContinuousEffect effect = new NarsetEnlightenedMasterCastFromExileEffect();
@@ -150,12 +150,12 @@ class NarsetEnlightenedMasterCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (getTargetPointer().getFirst(game, source).equals(sourceId) && affectedControllerId.equals(source.getControllerId())) {
-            Card card = game.getCard(sourceId);
-            if (card != null && game.getState().getZone(sourceId) == Zone.EXILED) {
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        if (objectId.equals(getTargetPointer().getFirst(game, source)) && affectedControllerId.equals(source.getControllerId())) {
+            Card card = game.getCard(objectId);
+            if (card != null && game.getState().getZone(objectId) == Zone.EXILED) {
                 Player player = game.getPlayer(affectedControllerId);
-                player.setCastSourceIdWithoutMana(sourceId);
+                player.setCastSourceIdWithoutMana(objectId);
                 return true;
             }
         }
