@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -66,8 +66,8 @@ public class TimelyHordemate extends CardImpl {
         this.toughness = new MageInt(2);
 
         // <i>Raid</i> - When Timely Hordemate enters the battlefield, if you attacked this turn, return target creature card with converted mana cost 2 or less from your graveyard to the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new ReturnFromGraveyardToBattlefieldTargetEffect(), RaidCondition.getInstance(),
-                "if you attacked with a creature this turn, {this} deals 2 damage to target creature or player"), false, "<i>Raid</i> - ");
+        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect()), RaidCondition.getInstance(), 
+                 "<i>Raid</i> - When {this} enters the battlefield, if you attacked with a creature this turn, {this} deals 2 damage to target creature or player.", false);        
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
         this.addWatcher(new PlayerAttackedWatcher());

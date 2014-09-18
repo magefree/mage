@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.AddManaToControllersManaPoolEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -56,7 +56,8 @@ public class MarduWarshrieker extends CardImpl {
         this.toughness = new MageInt(3);
 
         // <em>Raid</em> - When Mardu Warshrieker enters the battlefield, if you attacked with a creature this turn, add {R}{W}{B} to your mana pool.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new AddManaToControllersManaPoolEffect(new Mana(1,0,0,1,1,0,0)), RaidCondition.getInstance(), "if you attacked with a creature this turn, add {R}{W}{B} to your mana pool")));
+        this.addAbility(new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new AddManaToControllersManaPoolEffect(new Mana(1,0,0,1,1,0,0))), RaidCondition.getInstance(), 
+                 "<i>Raid</i> -  When {this} enters the battlefield, if you attacked with a creature this turn, add {R}{W}{B} to your mana pool.", false));
         this.addWatcher(new PlayerAttackedWatcher());
     }
 

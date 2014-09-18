@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -56,7 +56,9 @@ public class MarduHordechief extends CardImpl {
         this.toughness = new MageInt(3);
 
         // <i>Raid</i> - When Mardu Hordechief enters the battlefield, if you attacked with a creature this turn, put a 1/1 white Warrior creature token onto the battlefield
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new CreateTokenEffect(new MarduHordechiefToken()), RaidCondition.getInstance(), "if you attacked with a creature this turn, put a 1/1 white Warrior creature token onto the battlefield"), false, "<em>Raid</em> - "));
+        this.addAbility(new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new MarduHordechiefToken())), RaidCondition.getInstance(), 
+                 "<i>Raid</i> -  When {this} enters the battlefield, if you attacked with a creature this turn, put a 1/1 white Warrior creature token onto the battlefield.", false));
+
         this.addWatcher(new PlayerAttackedWatcher());
     }
 
