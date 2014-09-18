@@ -37,7 +37,7 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -49,7 +49,7 @@ public class SultaiFlayer extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control with toughness 4 or greater");
 
     static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
+        filter.add(new ToughnessPredicate(Filter.ComparisonType.GreaterThan, 3));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
