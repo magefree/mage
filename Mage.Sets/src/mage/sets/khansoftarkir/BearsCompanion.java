@@ -70,7 +70,7 @@ public class BearsCompanion extends CardImpl {
 class BearsCompanionBearToken extends Token {
 
     public BearsCompanionBearToken() {
-        super("Beast", "4/4 green Bear creature token");
+        super("Bear", "4/4 green Bear creature token");
         setOriginalExpansionSetCode("KTK");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
