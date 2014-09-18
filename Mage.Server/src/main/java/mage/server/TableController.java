@@ -521,12 +521,15 @@ public class TableController {
                     if (user != null) {
                         if (!user.isConnected()) {
                             // if the user is not connected but exits, the user is currently disconnected. So it's neccessary
-                            // to join the user to the game here, so he can join the game, if he reconnects in time.
+                            // to join the user to the game here (instead the client does it) , so he can join the game, if he reconnects in time.
                             // remove an existing constructing for the player if it exists
                             user.removeConstructing(match.getPlayer(entry.getValue()).getPlayer().getId());
                             GameManager.getInstance().joinGame(match.getGame().getId(), user.getId());
+                            logger.debug("Joined currently not connected user " + user.getName() + "  matchId: " + match.getId());                            
+                        } else {
+                            user.gameStarted(match.getGame().getId(), entry.getValue());
                         }
-                        user.gameStarted(match.getGame().getId(), entry.getValue());
+                        
                         if (creator == null) {
                             creator = user.getName();
                         } else {
@@ -543,6 +546,9 @@ public class TableController {
                             matchPlayer.setQuit(true);
                         }
                     }
+                } else {
+                    // Match player has already quit
+                    throw new MageException("Can't start game - user already quit userId " + entry.getKey());
                 }
             }
             // Append AI opponents to the log file

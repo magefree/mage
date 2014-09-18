@@ -59,10 +59,10 @@ public class ThreadExecutor {
         ((ThreadPoolExecutor)callExecutor).setThreadFactory(new XMageThreadFactory("CALL"));
         ((ThreadPoolExecutor)gameExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
         ((ThreadPoolExecutor)gameExecutor).allowCoreThreadTimeOut(true);
-        ((ThreadPoolExecutor)callExecutor).setThreadFactory(new XMageThreadFactory("GAME"));
+        ((ThreadPoolExecutor)gameExecutor).setThreadFactory(new XMageThreadFactory("GAME"));
         ((ThreadPoolExecutor)timeoutExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
         ((ThreadPoolExecutor)timeoutExecutor).allowCoreThreadTimeOut(true);
-        ((ThreadPoolExecutor)callExecutor).setThreadFactory(new XMageThreadFactory("TIME"));
+        ((ThreadPoolExecutor)timeoutExecutor).setThreadFactory(new XMageThreadFactory("TIME"));
     }
 
     private static final ThreadExecutor INSTANCE = new ThreadExecutor();
@@ -73,10 +73,17 @@ public class ThreadExecutor {
 
     private ThreadExecutor() {}
 
+    public int getActiveThreads(ExecutorService executerService) {
+        if (executerService instanceof ThreadPoolExecutor) {
+            return ((ThreadPoolExecutor)executerService).getActiveCount();
+        }
+        return -1;
+    }
+    
     public ExecutorService getCallExecutor() {
         return callExecutor;
     }
-
+    
     public ExecutorService getGameExecutor() {
         return gameExecutor;
     }
@@ -84,7 +91,7 @@ public class ThreadExecutor {
     public ScheduledExecutorService getTimeoutExecutor() {
         return timeoutExecutor;
     }
-
+    
 }
 
 class XMageThreadFactory implements ThreadFactory {

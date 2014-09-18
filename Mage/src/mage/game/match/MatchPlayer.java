@@ -45,7 +45,7 @@ public class MatchPlayer {
     private final String name;
     
     private boolean quit;
-    private boolean timerTimeout;
+    private final boolean timerTimeout;
     private boolean doneSideboarding;
     private int priorityTimeLeft;
 

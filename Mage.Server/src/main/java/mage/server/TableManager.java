@@ -44,6 +44,7 @@ import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.constants.TableState;
+import mage.game.Game;
 import mage.game.GameException;
 import mage.game.Table;
 import mage.game.draft.Draft;
@@ -55,6 +56,7 @@ import mage.players.Player;
 import mage.server.game.GameController;
 import mage.server.game.GameManager;
 import mage.server.game.GamesRoomManager;
+import mage.server.util.ThreadExecutor;
 import org.apache.log4j.Logger;
 
 /**
@@ -65,6 +67,8 @@ public class TableManager {
 
     protected static ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
 
+    // protected static ScheduledExecutorService expireExecutor = ThreadExecutor.getInstance().getExpireExecutor();
+    
     private static final TableManager INSTANCE = new TableManager();
     private static final Logger logger = Logger.getLogger(TableManager.class);
     private static final DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
@@ -77,7 +81,7 @@ public class TableManager {
      *
      * In minutes.
      */
-    private static final int EXPIRE_CHECK_PERIOD = 5;
+    private static final int EXPIRE_CHECK_PERIOD = 1;
     
     public static TableManager getInstance() {
         return INSTANCE;
@@ -340,14 +344,23 @@ public class TableManager {
             
             Table table = tables.get(tableId);
             tables.remove(tableId);
+            Match match = table.getMatch();
+            Game game = null;
+            if (match != null) {
+                game = match.getGame();
+                if (game != null && !game.hasEnded()) {
+                    game.end();
+                }                
+            }
                         
             // If table is not finished, the table has to be removed completly because it's not a normal state (if finished it will be removed in GamesRoomImpl.Update())
             if (!table.getState().equals(TableState.FINISHED)) {
+                if (game != null) {
+                    GameManager.getInstance().removeGame(game.getId());
+                }
                 GamesRoomManager.getInstance().removeTable(tableId);
             }
-            if (table.getMatch() != null && table.getMatch().getGame() != null) {
-                table.getMatch().getGame().end();
-            }
+            
         }
     }
 
@@ -364,6 +377,7 @@ public class TableManager {
             logger.debug(chatSession.getChatId() + " " +formatter.format(chatSession.getCreateTime()) +" " + chatSession.getInfo()+ " "+ chatSession.getClients().values().toString());
         }
         logger.debug("------- Games: " + GameManager.getInstance().getNumberActiveGames() + " --------------------------------------------");
+        logger.debug(" Active Game Worker: " + ThreadExecutor.getInstance().getActiveThreads(ThreadExecutor.getInstance().getGameExecutor()));
         for (Entry<UUID, GameController> entry: GameManager.getInstance().getGameController().entrySet()) {
             logger.debug(entry.getKey() + entry.getValue().getPlayerNameList());
         }
@@ -404,6 +418,7 @@ public class TableManager {
         }
         for (UUID tableId : toRemove) {
             try {
+                logger.warn("Removing unhealthy tableId " + tableId);
                 removeTable(tableId);
             } catch (Exception e) {
                 logger.error(e);

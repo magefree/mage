@@ -302,6 +302,7 @@ public class GameController implements GameCallback {
                 if (!entry.getValue().init()) {
                     logger.fatal("Unable to initialize client");
                     //TODO: generate client error message
+                    GameManager.getInstance().removeGame(game.getId());
                     return;
                 }
             }

@@ -72,18 +72,20 @@ public class Round {
     public boolean isRoundOver() {
         boolean roundIsOver = true;
         for (TournamentPairing pair: pairs) {
-            if (pair.getMatch() != null && !pair.getMatch().hasEnded()) {
-                roundIsOver = false;
-            } else {
-                if (!pair.isAlreadyPublished()) {
-                    tournament.updateResults();
-                    pair.setAlreadyPublished(true);
-                    if (tournament instanceof TournamentSingleElimination) {
-                        pair.eliminatePlayers();
-                    }
-                    // if it's the last round, finish all players for the tournament if their match is finished
-                    if (getRoundNumber() == tournament.getNumberRounds()) {
-                        pair.finishPlayersThatPlayedLastRound();
+            if (pair.getMatch() != null) {
+                if (!pair.getMatch().hasEnded()) {
+                    roundIsOver = false;
+                } else {
+                    if (!pair.isAlreadyPublished()) {
+                        tournament.updateResults();
+                        pair.setAlreadyPublished(true);
+                        if (tournament instanceof TournamentSingleElimination) {
+                            pair.eliminatePlayers();
+                        }
+                        // if it's the last round, finish all players for the tournament if their match is finished
+                        if (getRoundNumber() == tournament.getNumberRounds()) {
+                            pair.finishPlayersThatPlayedLastRound();
+                        }
                     }
                 }
             }

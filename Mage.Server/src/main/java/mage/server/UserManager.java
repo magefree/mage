@@ -54,6 +54,7 @@ public class UserManager {
     private static final Logger logger = Logger.getLogger(UserManager.class);
 
     private final ConcurrentHashMap<UUID, User> users = new ConcurrentHashMap<>();
+    
     private static final ExecutorService callExecutor = ThreadExecutor.getInstance().getCallExecutor();
 
     private static final UserManager INSTANCE = new UserManager();
@@ -131,18 +132,29 @@ public class UserManager {
         return false;
     }
 
-    public void removeUser(UUID userId, DisconnectReason reason) {
+    public void removeUser(final UUID userId, final DisconnectReason reason) {        
         if (userId != null) {
-            User user = users.get(userId);
+            final User user = users.get(userId);
             if (user != null) {
-                logger.debug("User " + user.getName() + " will be removed (" + reason.toString() + ")  userId: " + userId);
-                user.remove(reason);
-                users.remove(userId);
-                logger.debug("User " + user.getName() + " removed");
+                callExecutor.execute(
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                logger.debug("User " + user.getName() + " will be removed (" + reason.toString() + ")  userId: " + userId);
+                                user.remove(reason);
+                                users.remove(userId);
+                                logger.debug("User " + user.getName() + " removed");
+                            } catch (Exception ex) {
+                                handleException(ex);
+                            }
+                        }
+                    }
+                );
             } else {
                 logger.warn(new StringBuilder("Trying to remove userId: ").append(userId).append(" but it does not exist."));
             }
-        }
+        }        
     }
 
     public boolean extendUserSession(UUID userId, String pingInfo) {
@@ -160,34 +172,16 @@ public class UserManager {
      * Is the connection lost for more than 3 minutes, the user will be removed (within 3 minutes the user can reconnect)
      */
     private void checkExpired() {
-        // calling this with executer saves the sceduled job to be dying becuase of exception.
-        // Also exceptions were not reported as now with this handling
-        try {
-            callExecutor.execute(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Calendar expired = Calendar.getInstance();
-                            expired.add(Calendar.MINUTE, -3);
-                            List<User> usersToCheck = new ArrayList<>();
-                            usersToCheck.addAll(users.values());
-                            for (User user : usersToCheck) {
-                                if (user.isExpired(expired.getTime())) {
-                                    logger.info(new StringBuilder(user.getName()).append(": session expired userId: ").append(user.getId())
-                                            .append(" Host: ").append(user.getHost()));
-                                    removeUser(user.getId(), DisconnectReason.SessionExpired);
-                                }
-                            }
-                        } catch (Exception ex) {
-                            handleException(ex);
-                        }
-                    }
-                }
-            );
-            
-        } catch (Exception ex) {
-            handleException(ex);
+        Calendar expired = Calendar.getInstance();
+        expired.add(Calendar.MINUTE, -3);
+        List<User> usersToCheck = new ArrayList<>();
+        usersToCheck.addAll(users.values());
+        for (User user : usersToCheck) {
+            if (user.isExpired(expired.getTime())) {
+                logger.info(new StringBuilder(user.getName()).append(": session expired userId: ").append(user.getId())
+                        .append(" Host: ").append(user.getHost()));
+                removeUser(user.getId(), DisconnectReason.SessionExpired);
+            }
         }
     }
 

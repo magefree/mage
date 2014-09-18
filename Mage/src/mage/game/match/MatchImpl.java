@@ -38,6 +38,7 @@ import mage.game.events.TableEventSource;
 import mage.players.Player;
 
 import java.util.*;
+import org.apache.log4j.Logger;
 
 
 /**
@@ -46,6 +47,8 @@ import java.util.*;
  */
 public abstract class MatchImpl implements Match {
 
+    private static final Logger logger = Logger.getLogger(MatchImpl.class);
+    
     protected UUID id = UUID.randomUUID();
     protected List<MatchPlayer> players = new ArrayList<>();
     protected List<Game> games = new ArrayList<>();
@@ -128,6 +131,19 @@ public abstract class MatchImpl implements Match {
 
     @Override
     public boolean hasEnded() {
+        // Some workarounds to end match if for unknown reason the match was not ended regularly
+        if (getGame() == null && isDoneSideboarding()) {
+            checkIfMatchEnds();
+        }
+        if (getGame() != null && getGame().hasEnded()) {            
+            for (MatchPlayer matchPlayer:players) {
+                if (matchPlayer.getPlayer().hasQuit() && !matchPlayer.hasQuit()) {
+                    logger.warn("MatchPlayer was not set to quit matchId " + this.getId()+ " - " + matchPlayer.getName());
+                    matchPlayer.setQuit(true);
+                }
+            }
+            checkIfMatchEnds();
+        }
         return endTime != null;
     }
 
