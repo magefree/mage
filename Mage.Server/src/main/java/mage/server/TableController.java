@@ -402,7 +402,7 @@ public class TableController {
                     if (table.isTournament()) {
                         tournament.removePlayer(playerId);
                     } else {
-                        match.leave(playerId);
+                        match.quitMatch(playerId);
                     }
                     User user = UserManager.getInstance().getUser(userId);
                     if (user != null) {
@@ -434,7 +434,7 @@ public class TableController {
                                         matchPlayer.submitDeck(matchPlayer.getDeck());
                                     }
                                 }
-                                match.leave(playerId);
+                                match.quitMatch(playerId);
                             }
                         }
                     }
@@ -526,9 +526,8 @@ public class TableController {
                             user.removeConstructing(match.getPlayer(entry.getValue()).getPlayer().getId());
                             GameManager.getInstance().joinGame(match.getGame().getId(), user.getId());
                             logger.debug("Joined currently not connected user " + user.getName() + "  matchId: " + match.getId());                            
-                        } else {
-                            user.gameStarted(match.getGame().getId(), entry.getValue());
-                        }
+                        } 
+                        user.gameStarted(match.getGame().getId(), entry.getValue());                        
                         
                         if (creator == null) {
                             creator = user.getName();
@@ -663,17 +662,18 @@ public class TableController {
      */
     public boolean endGameAndStartNextGame() {
         // get player that chooses who goes first
-        if (match.getGame() == null) {
+        Game game = match.getGame();
+        if (game == null) {
             return true;
         }
         UUID choosingPlayerId = match.getChooser();
         match.endGame();
-        if (ConfigSettings.getInstance().isSaveGameActivated() && !match.getGame().isSimulation()) {
-            if (GameManager.getInstance().saveGame(match.getGame().getId())) {
+        if (ConfigSettings.getInstance().isSaveGameActivated() && !game.isSimulation()) {
+            if (GameManager.getInstance().saveGame(game.getId())) {
                 match.setReplayAvailable(true);
             }
         }
-        GameManager.getInstance().removeGame(match.getGame().getId());
+        GameManager.getInstance().removeGame(game.getId());
         try {
             if (!match.hasEnded()) {
                 table.sideboard();

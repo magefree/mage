@@ -839,7 +839,12 @@ public class MageServerImpl implements MageServer {
             @Override
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-                GameManager.getInstance().stopWatching(gameId, userId);
+                User user = UserManager.getInstance().getUser(userId);
+                if (user != null) {
+                    GameManager.getInstance().stopWatching(gameId, userId);
+                    user.removeGameWatchInfo(gameId);
+                }
+
             }
         });
     }

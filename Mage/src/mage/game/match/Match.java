@@ -56,7 +56,7 @@ public interface Match {
     MatchPlayer getPlayer(UUID playerId);
 
     void addPlayer(Player player, Deck deck);
-    boolean leave(UUID playerId);
+    boolean quitMatch(UUID playerId);
 
     void submitDeck(UUID playerId, Deck deck);
     void updateDeck(UUID playerId, Deck deck);

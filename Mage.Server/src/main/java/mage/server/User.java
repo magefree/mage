@@ -352,6 +352,10 @@ public class User {
             logger.debug("-- leave tableId: " + entry.getValue().getId());
             TableManager.getInstance().leaveTable(userId, entry.getValue().getId());
         }
+        logger.debug("REMOVE " + getName() + " watched Games " + watchedGames.size());
+        for (UUID gameId: watchedGames) {
+            GameManager.getInstance().stopWatching(gameId, userId);
+        }
         logger.debug("REMOVE " + getName() + " Chats ");
         ChatManager.getInstance().removeUser(userId, reason);
     }

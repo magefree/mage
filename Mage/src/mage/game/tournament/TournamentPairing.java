@@ -76,7 +76,7 @@ public class TournamentPairing {
      * Called by eliminate tournaments after each match
      */
     public void eliminatePlayers() {
-        if (match.hasEnded()) {
+        if (match != null && match.hasEnded()) {
             MatchPlayer mPlayer1 = match.getPlayer(player1.getPlayer().getId());
             MatchPlayer mPlayer2 = match.getPlayer(player2.getPlayer().getId());
             if (mPlayer1.hasQuit() || !mPlayer1.isMatchWinner()) {
@@ -88,7 +88,7 @@ public class TournamentPairing {
         }
     }
     public void finishPlayersThatPlayedLastRound() {
-        if (match.hasEnded()) {
+        if (match != null && match.hasEnded()) {
             if (!player1.isEliminated()) {
                 player1.setEliminated();
                 player1.setState(TournamentPlayerState.FINISHED);

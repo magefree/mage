@@ -141,18 +141,19 @@ public class UserManager {
                         @Override
                         public void run() {
                             try {
-                                logger.debug("User " + user.getName() + " will be removed (" + reason.toString() + ")  userId: " + userId);
+                                logger.debug("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId);
                                 user.remove(reason);
-                                users.remove(userId);
-                                logger.debug("User " + user.getName() + " removed");
+                                logger.debug("USER REMOVE END - " + user.getName());
                             } catch (Exception ex) {
                                 handleException(ex);
+                            } finally {
+                                users.remove(userId);
                             }
                         }
                     }
                 );
             } else {
-                logger.warn(new StringBuilder("Trying to remove userId: ").append(userId).append(" but it does not exist."));
+                logger.warn("Trying to remove userId: " + userId + " - but it does not exist.");
             }
         }        
     }

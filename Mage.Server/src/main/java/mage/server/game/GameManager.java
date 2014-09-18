@@ -123,7 +123,7 @@ public class GameManager {
     public void quitMatch(UUID gameId, UUID userId) {
         GameController gameController = gameControllers.get(gameId);
         if (gameController != null) {
-            gameController.quit(userId);
+            gameController.quitMatch(userId);
         }
     }
 
@@ -175,12 +175,12 @@ public class GameManager {
 //        }
 //    }
 
-    public void kill(UUID gameId, UUID userId) {
-        GameController gameController = gameControllers.get(gameId);
-        if (gameController != null) {
-            gameController.kill(userId);
-        }
-    }
+//    public void kill(UUID gameId, UUID userId) {
+//        GameController gameController = gameControllers.get(gameId);
+//        if (gameController != null) {
+//            gameController.kill(userId);
+//        }
+//    }
 
     public void cheat(UUID gameId, UUID userId, UUID playerId, DeckCardLists deckList) {
         GameController gameController = gameControllers.get(gameId);

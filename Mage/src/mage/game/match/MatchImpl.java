@@ -93,7 +93,7 @@ public abstract class MatchImpl implements Match {
     }
 
     @Override
-    public boolean leave(UUID playerId) {
+    public boolean quitMatch(UUID playerId) {
         MatchPlayer mPlayer = getPlayer(playerId);
         if (mPlayer != null) {
             if (!hasStarted()) {

@@ -355,7 +355,6 @@ public class GameController implements GameCallback {
         watchers.remove(userId);
         User user = UserManager.getInstance().getUser(userId);
         if (user != null) {
-            user.removeGameWatchInfo(game.getId());
             ChatManager.getInstance().broadcast(chatId, user.getName(), " has stopped watching", MessageColor.BLUE, true, ChatMessage.MessageType.STATUS);
         }
     }
@@ -368,7 +367,25 @@ public class GameController implements GameCallback {
         game.setManaPoolMode(getPlayerId(userId), autoPayment);
     }
 
-    public void quit(UUID userId) {
+//    public void removeUser(UUID userId) {
+//        UUID playerId = userPlayerMap.get(userId);
+//        if (playerId != null) {
+//            GameSession gameSession = gameSessions.get(playerId);
+//            if (gameSession != null) {
+//                gameSession.setKilled();
+//                gameSessions.remove(playerId);
+//                quitMatch(userId);
+//                userPlayerMap.remove(userId);
+//            }
+//        }
+//        GameWatcher gameWatcher = watchers.get(userId);
+//        if (gameWatcher != null) {
+//            gameWatcher.setKilled();
+//            watchers.remove(userId);
+//        }
+//    }
+
+    public void quitMatch(UUID userId) {
         game.quit(getPlayerId(userId));
     }
 
@@ -388,9 +405,6 @@ public class GameController implements GameCallback {
         game.restorePriority(getPlayerId(userId));
     }
 
-    private void leave(UUID userId) {
-        game.quit(getPlayerId(userId));
-    }
 
     public void cheat(UUID userId, UUID playerId, DeckCardLists deckList) {
         Deck deck;
@@ -418,24 +432,6 @@ public class GameController implements GameCallback {
             return true;
         } else {
             return false;
-        }
-    }
-
-    public void kill(UUID userId) {
-        UUID playerId = userPlayerMap.get(userId);
-        if (playerId != null) {
-            GameSession gameSession = gameSessions.get(playerId);
-            if (gameSession != null) {
-                gameSession.setKilled();
-                gameSessions.remove(playerId);
-                leave(userId);
-                userPlayerMap.remove(userId);
-            }
-        }
-        GameWatcher gameWatcher = watchers.get(userId);
-        if (gameWatcher != null) {
-            gameWatcher.setKilled();
-            watchers.remove(userId);
         }
     }
 

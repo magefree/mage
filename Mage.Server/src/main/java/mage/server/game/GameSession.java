@@ -31,7 +31,6 @@ package mage.server.game;
 import mage.cards.Cards;
 import mage.constants.ManaType;
 import mage.game.Game;
-import mage.game.match.Match;
 import mage.interfaces.callback.ClientCallback;
 import mage.players.Player;
 import mage.players.net.UserData;
