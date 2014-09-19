@@ -43,6 +43,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.NameACardEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -76,7 +77,7 @@ public class CouncilOfTheAbsolute extends CardImpl {
         this.toughness = new MageInt(4);
 
         // As Council of the Absolute enters the battlefield, name a card other than a creature or a land card.
-        this.addAbility(new AsEntersBattlefieldAbility(new CouncilOfTheAbsoluteChooseCardEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new NameACardEffect(NameACardEffect.TypeOfName.NON_LAND_AND_NON_CREATURE_NAME)));
         // Your opponents can't cast the chosen card.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CouncilOfTheAbsoluteReplacementEffect()));
         // Spells with the chosen name cost 2 less for you to cast.
@@ -92,46 +93,6 @@ public class CouncilOfTheAbsolute extends CardImpl {
     @Override
     public CouncilOfTheAbsolute copy() {
         return new CouncilOfTheAbsolute(this);
-    }
-
-}
-
-class CouncilOfTheAbsoluteChooseCardEffect extends OneShotEffect {
-
-    public CouncilOfTheAbsoluteChooseCardEffect() {
-        super(Outcome.Detriment);
-        staticText = "name a card other than a creature or a land card";
-    }
-
-    public CouncilOfTheAbsoluteChooseCardEffect(final CouncilOfTheAbsoluteChooseCardEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (controller != null && permanent != null) {
-            Choice cardChoice = new ChoiceImpl();
-            cardChoice.setChoices(CardRepository.instance.getNonLandAndNonCreatureNames());
-            cardChoice.clearChoice();
-            while (!controller.choose(Outcome.Detriment, cardChoice, game)) {
-                if (!controller.isInGame()) {
-                    return false;
-                }
-            }
-            String cardName = cardChoice.getChoice();
-            game.informPlayers(permanent.getLogName() + ", named card: [" + cardName + "]");
-            game.getState().setValue(source.getSourceId().toString(), cardName);
-            permanent.addInfo("named card", CardUtil.addToolTipMarkTags("Named card: [" + cardName +"]"));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public CouncilOfTheAbsoluteChooseCardEffect copy() {
-        return new CouncilOfTheAbsoluteChooseCardEffect(this);
     }
 
 }
@@ -170,7 +131,7 @@ class CouncilOfTheAbsoluteReplacementEffect extends ContinuousRuleModifiyingEffe
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.CAST_SPELL && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             MageObject object = game.getObject(event.getSourceId());
-            if (object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString()))) {
+            if (object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY))) {
                 return true;
             }
         }
@@ -200,7 +161,7 @@ class CouncilOfTheAbsoluteCostReductionEffect extends CostModificationEffectImpl
         if ((abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility)
                 && abilityToModify.getControllerId().equals(source.getControllerId())) {
             Card card = game.getCard(abilityToModify.getSourceId());
-            return card.getName().equals(game.getState().getValue(source.getSourceId().toString()));
+            return card.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY));
         }
         return false;
     }

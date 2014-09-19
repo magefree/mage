@@ -28,16 +28,16 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.NameACardEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -57,6 +57,7 @@ public class ThoughtHemorrhage extends CardImpl {
 
         // Name a nonland card. Target player reveals his or her hand. Thought Hemorrhage deals 3 damage to that player for each card with that name revealed this way. Search that player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles his or her library.
         this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addEffect(new NameACardEffect(NameACardEffect.TypeOfName.NON_LAND_NAME));
         this.getSpellAbility().addEffect(new ThoughtHemorrhageEffect());
     }
 
@@ -72,8 +73,7 @@ public class ThoughtHemorrhage extends CardImpl {
 
 class ThoughtHemorrhageEffect extends OneShotEffect {
 
-    String cardName;
-    final String rule = "Name a nonland card. Target player reveals his or her hand. Thought Hemorrhage deals 3 damage to that player for each card with that name revealed this way. Search that player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles his or her library";
+    final String rule = "Target player reveals his or her hand. {this} deals 3 damage to that player for each card with that name revealed this way. Search that player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles his or her library";
 
     public ThoughtHemorrhageEffect() {
         super(Outcome.Detriment);
@@ -86,44 +86,40 @@ class ThoughtHemorrhageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you != null) {
-            Choice cardChoice = new ChoiceImpl();
-            cardChoice.setChoices(CardRepository.instance.getNonLandNames());
-            cardChoice.clearChoice();
-            while (!you.choose(Outcome.Detriment, cardChoice, game)) {
-                if (!you.isInGame()) {
-                    return false;
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
+        if (sourceObject != null && controller != null && cardName != null && !cardName.isEmpty()) {        
+            Player targetPlayer = game.getPlayer(source.getFirstTarget());
+            if (targetPlayer != null) {
+                targetPlayer.revealCards("hand of " + targetPlayer.getName(), targetPlayer.getHand(), game);
+                int cardsFound = 0;
+                for (Card card : targetPlayer.getHand().getCards(game)) {
+                    if (card.getName().equals(cardName)) {
+                        cardsFound++;
+                    }
                 }
-            }
-            cardName = cardChoice.getChoice();
-            game.informPlayers("Thought Hemorrhage, named card: [" + cardName + "]");
-        }
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if (targetPlayer != null) {
-            targetPlayer.revealCards("hand of target player", targetPlayer.getHand(), game);
-            for (Card card : targetPlayer.getHand().getCards(game)) {
-                if (card.getName().equals(cardName)) {
-                    targetPlayer.damage(3, source.getSourceId(), game, false, true);
+                if (cardsFound > 0) {
+                    targetPlayer.damage(3 * cardsFound, source.getSourceId(), game, false, true);
                 }
-            }
-            for (Card card : targetPlayer.getGraveyard().getCards(game)) {
-                if (card.getName().equals(cardName)) {
-                    card.moveToExile(null, "", source.getSourceId(), game);
+                for (Card card : targetPlayer.getGraveyard().getCards(game)) {
+                    if (card.getName().equals(cardName)) {
+                        controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD);                        
+                    }
                 }
-            }
-            for (Card card : targetPlayer.getHand().getCards(game)) {
-                if (card.getName().equals(cardName)) {
-                    card.moveToExile(null, "", source.getSourceId(), game);
+                for (Card card : targetPlayer.getHand().getCards(game)) {
+                    if (card.getName().equals(cardName)) {
+                        controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.HAND);
+                    }
                 }
-            }
-            for (Card card : targetPlayer.getLibrary().getCards(game)) {
-                if (card.getName().equals(cardName)) {
-                    card.moveToExile(null, "", source.getSourceId(), game);
+                for (Card card : targetPlayer.getLibrary().getCards(game)) {
+                    if (card.getName().equals(cardName)) {
+                        controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY);
+                    }
                 }
+                targetPlayer.shuffleLibrary(game);
+                return true;
             }
-            targetPlayer.shuffleLibrary(game);
-            return true;
         }
         return false;
     }

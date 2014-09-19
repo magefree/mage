@@ -40,6 +40,7 @@ import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.NameACardEffect;
 import mage.cards.CardImpl;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
@@ -69,7 +70,7 @@ public class MeddlingMage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // As Meddling Mage enters the battlefield, name a nonland card.
-        this.addAbility(new AsEntersBattlefieldAbility(new MeddlingMageChooseCardEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new NameACardEffect(NameACardEffect.TypeOfName.NON_LAND_NAME)));
 
         //The named card can't be cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MeddlingMageReplacementEffect()));
@@ -83,46 +84,6 @@ public class MeddlingMage extends CardImpl {
     public MeddlingMage copy() {
         return new MeddlingMage(this);
     }
-}
-
-class MeddlingMageChooseCardEffect extends OneShotEffect {
-
-    public MeddlingMageChooseCardEffect() {
-        super(Outcome.Detriment);
-        staticText = "name a nonland card";
-    }
-
-    public MeddlingMageChooseCardEffect(final MeddlingMageChooseCardEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (controller != null && permanent != null) {
-            Choice cardChoice = new ChoiceImpl();
-            cardChoice.setChoices(CardRepository.instance.getNonLandNames());
-            cardChoice.clearChoice();
-            while (!controller.choose(Outcome.Detriment, cardChoice, game)) {
-                if (!controller.isInGame()) {
-                    return false;
-                }
-            }
-            String cardName = cardChoice.getChoice();
-            game.informPlayers(permanent.getLogName() + ", named card: [" + cardName + "]");
-            game.getState().setValue(source.getSourceId().toString(), cardName);
-            permanent.addInfo("named card", CardUtil.addToolTipMarkTags("Named card: [" + cardName +"]"));
-            return true;
-        }        
-        return false;
-    }
-
-    @Override
-    public MeddlingMageChooseCardEffect copy() {
-        return new MeddlingMageChooseCardEffect(this);
-    }
-
 }
 
 class MeddlingMageReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
@@ -159,7 +120,7 @@ class MeddlingMageReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.CAST_SPELL) {
             MageObject object = game.getObject(event.getSourceId());
-            if (object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString()))) {
+            if (object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY))) {
                 return true;
             }
         }

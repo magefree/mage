@@ -28,6 +28,7 @@
 package mage.sets.tempest;
 
 import java.util.UUID;
+import mage.MageObject;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -36,13 +37,11 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.NameACardEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -62,7 +61,8 @@ public class CursedScroll extends CardImpl {
         this.expansionSetCode = "TMP";
 
         // {3}, {tap}: Name a card. Reveal a card at random from your hand. If it's the named card, Cursed Scroll deals 2 damage to target creature or player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CursedScrollEffect(), new ManaCostsImpl("{3}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NameACardEffect(NameACardEffect.TypeOfName.ALL), new ManaCostsImpl("{3}"));
+        ability.addEffect(new CursedScrollEffect());
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
@@ -82,7 +82,7 @@ class CursedScrollEffect extends OneShotEffect {
 
     public CursedScrollEffect() {
         super(Outcome.Neutral);
-        staticText = "Name a card. Reveal a card at random from your hand. If it's the named card, {this} deals 2 damage to target creature or player";
+        staticText = "Reveal a card at random from your hand. If it's the named card, {this} deals 2 damage to target creature or player";
     }
 
     public CursedScrollEffect(final CursedScrollEffect effect) {
@@ -92,22 +92,14 @@ class CursedScrollEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
-        if (you != null) {
-            Choice cardChoice = new ChoiceImpl();
-            cardChoice.setChoices(CardRepository.instance.getNames());
-            cardChoice.clearChoice();
-            while (!you.choose(Outcome.Damage, cardChoice, game)) {
-                if (!you.isInGame()) {
-                    return false;
-                }
-            }
-            String cardName = cardChoice.getChoice();
-            game.informPlayers("Cursed Scroll, named card: [" + cardName + "]");
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
+        if (sourceObject != null && you != null && cardName != null && !cardName.isEmpty()) {
             if (you.getHand().size() > 0) {
                 Cards revealed = new CardsImpl();
                 Card card = you.getHand().getRandom(game);
                 revealed.add(card);
-                you.revealCards("Cursed Scroll", revealed, game);
+                you.revealCards(sourceObject.getLogName(), revealed, game);
                 if (card.getName().equals(cardName)) {
                     Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
                     if (creature != null) {

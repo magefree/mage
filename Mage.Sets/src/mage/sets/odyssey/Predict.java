@@ -30,6 +30,7 @@ package mage.sets.odyssey;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.NameACardEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.repository.CardRepository;
@@ -56,6 +57,7 @@ public class Predict extends CardImpl {
         this.color.setBlue(true);
 
         // Name a card, then target player puts the top card of his or her library into his or her graveyard. If that card is the named card, you draw two cards. Otherwise, you draw a card.
+        this.getSpellAbility().addEffect(new NameACardEffect(NameACardEffect.TypeOfName.ALL));
         this.getSpellAbility().addEffect(new PredictEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -74,7 +76,7 @@ class PredictEffect extends OneShotEffect {
 
     public PredictEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Name a card, then target player puts the top card of his or her library into his or her graveyard. "
+        this.staticText = ", then target player puts the top card of his or her library into his or her graveyard. "
                 + "If that card is the named card, you draw two cards. Otherwise, you draw a card.";
     }
     
@@ -90,24 +92,13 @@ class PredictEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player target = game.getPlayer(source.getFirstTarget());
-        if (controller != null && target != null) {
-            Choice cardChoice = new ChoiceImpl();
-            cardChoice.setChoices(CardRepository.instance.getNames());
-            cardChoice.clearChoice();
-            while (!controller.choose(Outcome.Detriment, cardChoice, game)) {
-                if (!controller.isInGame()) {
-                    return false;
-                }
-            }
-            String cardName = cardChoice.getChoice();
-            game.informPlayers("Predict, named card: [" + cardName + "]");
-            
-            int amount = 1;
-            
-            Card card = target.getLibrary().removeFromTop(game);
+        Player targetPlayer = game.getPlayer(source.getFirstTarget());
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
+        if (controller != null && targetPlayer != null && cardName != null && !cardName.isEmpty()) {            
+            int amount = 1;            
+            Card card = targetPlayer.getLibrary().getFromTop(game);
             if (card != null) {
-                if (target.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY)) {
+                if (targetPlayer.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY)) {
                     if (card.getName().equals(cardName)) {
                         amount = 2;
                     }

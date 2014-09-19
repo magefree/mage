@@ -28,19 +28,17 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.NameACardEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -58,6 +56,7 @@ public class SpoilsOfTheVault extends CardImpl {
         this.color.setBlack(true);
 
         // Name a card. Reveal cards from the top of your library until you reveal the named card, then put that card into your hand. Exile all other cards revealed this way, and you lose 1 life for each of the exiled cards.
+        this.getSpellAbility().addEffect(new NameACardEffect(NameACardEffect.TypeOfName.ALL));
         this.getSpellAbility().addEffect(new SpoilsOfTheVaultEffect());
     }
 
@@ -76,7 +75,7 @@ class SpoilsOfTheVaultEffect extends OneShotEffect {
 
     public SpoilsOfTheVaultEffect() {
         super(Outcome.Damage);
-        this.staticText = "Name a card. Reveal cards from the top of your library until you reveal the named card, then put that card into your hand. Exile all other cards revealed this way, and you lose 1 life for each of the exiled cards";
+        this.staticText = "Reveal cards from the top of your library until you reveal the named card, then put that card into your hand. Exile all other cards revealed this way, and you lose 1 life for each of the exiled cards";
     }
 
     public SpoilsOfTheVaultEffect(final SpoilsOfTheVaultEffect effect) {
@@ -90,40 +89,24 @@ class SpoilsOfTheVaultEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        String cardName;
+        MageObject sourceObject = game.getObject(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
+        if (sourceObject == null || controller == null || cardName == null || cardName.isEmpty()) {
             return false;
         }
-        else{
-            Choice cardChoice = new ChoiceImpl();
-            cardChoice.setChoices(CardRepository.instance.getNames());
-            cardChoice.clearChoice();
-            while (!controller.choose(Outcome.Detriment, cardChoice, game)) {
-                if (!controller.isInGame()) {
-                    return false;
-                }
-            }
-            cardName = cardChoice.getChoice();
-            game.informPlayers("Spoils of the Vault, named card: [" + cardName + "]");
-        }        
-        Card sourceCard = game.getCard(source.getSourceId());
-        
-        if (cardName == null || sourceCard == null) {
-            return false;
-        }
-        
-        Cards cards = new CardsImpl(Zone.PICK);
+               
+        Cards cards = new CardsImpl();
         while (controller.getLibrary().size() > 0) {
             Card card = controller.getLibrary().removeFromTop(game);
             if (card != null) {
                 cards.add(card);
                 if(card.getName().equals(cardName)){
-                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                    controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                     break;
                 }
                 else{
-                    card.moveToExile(null, sourceCard.getName(), source.getSourceId(), game);
+                    controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY);
                 }
             }
             else{
@@ -131,7 +114,7 @@ class SpoilsOfTheVaultEffect extends OneShotEffect {
             }
         }
         
-        controller.revealCards(sourceCard.getName(), cards, game);
+        controller.revealCards(sourceObject.getLogName(), cards, game);
         controller.loseLife(cards.size(), game);
         
         return true;

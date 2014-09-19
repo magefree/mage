@@ -33,11 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.NameACardEffect;
 import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -46,7 +43,6 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.players.Player;
 
 /**
  *
@@ -59,7 +55,7 @@ public class PithingNeedle extends CardImpl {
         this.expansionSetCode = "SOK";
 
         // As Pithing Needle enters the battlefield, name a card.
-        this.addAbility(new AsEntersBattlefieldAbility(new NameCard()));
+        this.addAbility(new AsEntersBattlefieldAbility(new NameACardEffect(NameACardEffect.TypeOfName.ALL)));
         
         // Activated abilities of sources with the chosen name can't be activated unless they're mana abilities.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PithingNeedleEffect()));
@@ -73,43 +69,6 @@ public class PithingNeedle extends CardImpl {
     public PithingNeedle copy() {
         return new PithingNeedle(this);
     }
-}
-
-class NameCard extends OneShotEffect {
-
-    public NameCard() {
-        super(Outcome.Detriment);
-        staticText = "name a card";
-    }
-
-    public NameCard(final NameCard effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Choice cardChoice = new ChoiceImpl();
-            cardChoice.setChoices(CardRepository.instance.getNames());
-            cardChoice.clearChoice();
-            while (!controller.choose(Outcome.Detriment, cardChoice, game)) {
-                if (!controller.isInGame()) {
-                    return false;
-                }
-            }
-            String cardName = cardChoice.getChoice();
-            game.informPlayers("Pithing Needle, named card: [" + cardName + "]");
-            game.getState().setValue(source.getSourceId().toString(), cardName);
-        }        
-        return false;
-    }
-
-    @Override
-    public NameCard copy() {
-        return new NameCard(this);
-    }
-
 }
 
 class PithingNeedleEffect extends ContinuousRuleModifiyingEffectImpl {
@@ -140,7 +99,7 @@ class PithingNeedleEffect extends ContinuousRuleModifiyingEffectImpl {
             Ability ability = game.getAbility(event.getTargetId(), event.getSourceId());
             if (ability != null && object != null) {
                 if (ability.getAbilityType() != AbilityType.MANA &&
-                    object.getName().equals(game.getState().getValue(source.getSourceId().toString()))) {
+                    object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY))) {
                         return true;
                 }
             }

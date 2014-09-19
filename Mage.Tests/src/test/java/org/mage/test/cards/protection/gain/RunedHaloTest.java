@@ -25,51 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.common;
+package org.mage.test.cards.protection.gain;
 
-import mage.abilities.StaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.EntersBattlefieldEffect;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class AsEntersBattlefieldAbility extends StaticAbility {
+public class RunedHaloTest extends CardTestPlayerBase {
 
-    public AsEntersBattlefieldAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(effect));
-    }
-
-    public AsEntersBattlefieldAbility(Effect effect, String text) {
-        super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(effect, text));
-    }
-
-    public AsEntersBattlefieldAbility(AsEntersBattlefieldAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public void addEffect(Effect effect) {
-        if (!getEffects().isEmpty()) {
-            Effect entersEffect = this.getEffects().get(0);
-            if (entersEffect instanceof EntersBattlefieldEffect) {
-                ((EntersBattlefieldEffect) entersEffect).addEffect(effect);
-                return;
-            }
-        }
-        super.addEffect(effect); 
-    }
-
+    // As Runed Halo enters the battlefield, name a card.
+    // You have protection from the chosen name.
     
-    @Override
-    public AsEntersBattlefieldAbility copy() {
-        return new AsEntersBattlefieldAbility(this);
-    }
+    @Test
+    public void testGainProtectionFromAttackingCreature() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.HAND, playerA, "Runed Halo");
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
 
-    @Override
-    public String getRule() {
-        return "As {this} enters the battlefield, " + super.getRule();
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Runed Halo");
+        setChoice(playerA, "Silvercoat Lion");
+        
+        attack(2, playerB, "Silvercoat Lion");
+        
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20); // because he has protecion from Silvercoat Lion
     }
+ 
 }
+
