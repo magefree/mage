@@ -258,12 +258,8 @@ public class TableWaitingDialog extends MageDialog {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         try {
-            if (session.isTableOwner(roomId, tableId)) {
-                session.removeTable(roomId, tableId);
-            } else {
-                if (!session.leaveTable(roomId, tableId)) {
-                    return; // already started, so leave no more possible
-                }
+            if (!session.leaveTable(roomId, tableId)) {
+                return; // already started, so leave no more possible
             }
         } catch (Exception e) {
             //swallow exception

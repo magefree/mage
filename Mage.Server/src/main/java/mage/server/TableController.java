@@ -231,6 +231,10 @@ public class TableController {
             }
             sb.append("\n\nSelect a deck that is appropriate for the selected format and try again!");
             user.showUserMessage("Join Table", sb.toString());
+            if (isOwner(userId)) {
+                logger.debug("New table removed because owner submitted invalid deck tableId " + table.getId());
+                TableManager.getInstance().removeTable(table.getId());
+            }
             return false;
         }
 
