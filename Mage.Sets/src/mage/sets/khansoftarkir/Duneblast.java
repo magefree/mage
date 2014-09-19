@@ -90,7 +90,7 @@ class DuneblastEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Target target = new TargetCreaturePermanent(1,1,new FilterCreaturePermanent("creature to keep"), true);
+            Target target = new TargetCreaturePermanent(0,1,new FilterCreaturePermanent("creature to keep"), true);
             target.setRequired(true);
             Permanent creatureToKeep = null;
             if (controller.choose(outcome, target, source.getSourceId(), game)) {
