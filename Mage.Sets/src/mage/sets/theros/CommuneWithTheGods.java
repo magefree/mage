@@ -28,6 +28,7 @@
 package mage.sets.theros;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -95,14 +96,15 @@ class CommuneWithTheGodsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Cards cards = new CardsImpl(Zone.PICK);
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (sourceObject != null && controller != null) {
+            Cards cards = new CardsImpl();
 
             boolean properCardFound = false;
-            int count = Math.min(player.getLibrary().size(), 5);
+            int count = Math.min(controller.getLibrary().size(), 5);
             for (int i = 0; i < count; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
+                Card card = controller.getLibrary().removeFromTop(game);
                 if (card != null) {
                     cards.add(card);
                     if (filterPutInHand.match(card, source.getSourceId(), source.getControllerId(), game)) {
@@ -112,13 +114,13 @@ class CommuneWithTheGodsEffect extends OneShotEffect {
             }
 
             if (!cards.isEmpty()) {
-                player.revealCards("Commune with the Gods", cards, game);
-                TargetCard target = new TargetCard(Zone.PICK, filterPutInHand);
-                if (properCardFound && player.choose(Outcome.DrawCard, cards, target, game)) {
+                controller.revealCards(sourceObject.getLogName(), cards, game);
+                TargetCard target = new TargetCard(0, 1, Zone.LIBRARY, filterPutInHand);
+                if (properCardFound && controller.choose(Outcome.DrawCard, cards, target, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         cards.remove(card);
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                        controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                     }
 
                 }
@@ -126,7 +128,7 @@ class CommuneWithTheGodsEffect extends OneShotEffect {
                 for (UUID cardId : cards) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
-                        card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
+                        controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                     }
                 }
             }
