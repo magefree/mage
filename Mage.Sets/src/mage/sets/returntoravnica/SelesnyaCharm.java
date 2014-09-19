@@ -28,10 +28,10 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Mode;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
@@ -52,6 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class SelesnyaCharm extends CardImpl {
 
     static private final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 5 or greater");
+    
     static {
         filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 4));
     }
@@ -64,8 +65,12 @@ public class SelesnyaCharm extends CardImpl {
         this.color.setWhite(true);
        
         // Choose one — Target creature gets +2/+2 and gains trample until end of turn;
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new BoostTargetEffect(2,2, Duration.EndOfTurn));
+        Effect effect = new BoostTargetEffect(2,2, Duration.EndOfTurn);
+        effect.setText("Target creature gets +2/+2");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains trample until end of turn");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().getTargets().add(new TargetCreaturePermanent());
 
         // or exile target creature with power 5 or greater;
