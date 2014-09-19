@@ -41,6 +41,7 @@ import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
@@ -48,15 +49,21 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class DarkslickShores extends CardImpl {
 
-    private static FilterLandPermanent filter = new FilterLandPermanent();
+    private final static FilterLandPermanent filter = new FilterLandPermanent();
+    
+    static {
+        filter.add(new AnotherPredicate());
+    }
 
     public DarkslickShores (UUID ownerId) {
         super(ownerId, 226, "Darkslick Shores", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "SOM";
 
-        Condition controls = new InvertCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.FEWER_THAN, 4));
-        String abilityText = "tap it unless you control fewer than 3 lands";
+        // Darkslick Shores enters the battlefield tapped unless you control two or fewer other lands.
+        Condition controls = new InvertCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.FEWER_THAN, 3));
+        String abilityText = "tapped unless you control two or fewer other lands";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
+        
         this.addAbility(new BlueManaAbility());
         this.addAbility(new BlackManaAbility());
     }
