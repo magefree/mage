@@ -67,7 +67,7 @@ public class TimelyHordemate extends CardImpl {
 
         // <i>Raid</i> - When Timely Hordemate enters the battlefield, if you attacked this turn, return target creature card with converted mana cost 2 or less from your graveyard to the battlefield.
         Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect()), RaidCondition.getInstance(), 
-                 "<i>Raid</i> - When {this} enters the battlefield, if you attacked with a creature this turn, {this} deals 2 damage to target creature or player.", false);        
+                 "<i>Raid</i> - When {this} enters the battlefield, if you attacked with a creature this turn, return target creature card with converted mana cost 2 or less from your graveyard to the battlefield.", false);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
         this.addWatcher(new PlayerAttackedWatcher());
