@@ -49,7 +49,7 @@ public class TormentedHero extends CardImpl {
         super(ownerId, 108, "Tormented Hero", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");
         this.expansionSetCode = "THS";
         this.subtype.add("Human");
-        this.subtype.add("Warior");
+        this.subtype.add("Warrior");
 
         this.color.setBlack(true);
         this.power = new MageInt(2);
