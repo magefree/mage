@@ -47,6 +47,19 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
+ * As Meandering Towershell returns to the battlefield because of the delayed triggered ability,
+ * you choose which opponent or opposing planeswalker it’s attacking. It doesn’t have to attack
+ * the same opponent or opposing planeswalker that it was when it was exiled.
+ *
+ * If Meandering Towershell enters the battlefield attacking, it wasn’t declared as an attacking
+ * creature that turn. Abilities that trigger when a creature attacks, including its own triggered
+ * ability, won’t trigger.
+ *
+ * On the turn Meandering Towershell attacks and is exiled, raid abilities will see it as a creature
+ * that attacked. Conversely, on the turn Meandering Towershell enters the battlefield attacking,
+ * raid abilities will not.
+ *
+ * If you attack with a Meandering Towershell that you don’t own, you’ll control it when it returns to the battlefield.
  *
  * @author LevelX2
  */

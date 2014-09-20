@@ -52,9 +52,6 @@ public class DeclareAttackersStep extends Step {
 
     @Override
     public boolean skipStep(Game game, UUID activePlayerId) {
-        if (game.getPlayer(activePlayerId).getAvailableAttackers(game).isEmpty()) {
-            return true;
-        }
         return super.skipStep(game, activePlayerId);
     }
 

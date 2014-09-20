@@ -195,7 +195,9 @@ public class Combat implements Serializable, Copyable<Combat> {
             Player player = game.getPlayer(attackerId);
             //20101001 - 508.1d
             checkAttackRequirements(player, game);
-            player.selectAttackers(game, attackerId);
+            if (!game.getPlayer(game.getActivePlayerId()).getAvailableAttackers(game).isEmpty()) {
+                player.selectAttackers(game, attackerId);
+            }
             if (game.isPaused() || game.gameOver(null)) {
                 return;
             }
