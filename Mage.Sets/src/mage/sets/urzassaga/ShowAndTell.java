@@ -27,6 +27,8 @@
  */
 package mage.sets.urzassaga;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -41,6 +43,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
+import mage.players.PlayerList;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -101,19 +104,28 @@ class ShowAndTellEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-
-        for (UUID playerId : controller.getInRange()) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                if (player.chooseUse(outcome, "Put an artifact, creature, enchantment, or land card from hand onto the battlefield?", game)) {
-                    TargetCardInHand target = new TargetCardInHand(filter);
-                    if (player.choose(outcome, target, source.getSourceId(), game)) {
-                        Card card = game.getCard(target.getFirstTarget());
-                        if (card != null) {
-                            player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
-                        }
+        List<Card> cardsToPutIntoPlay = new ArrayList<>();
+        TargetCardInHand target = new TargetCardInHand(filter);
+        PlayerList playerList = game.getPlayerList().copy();
+        playerList.setCurrent(game.getActivePlayerId());
+        Player player = game.getPlayer(game.getActivePlayerId());
+        do {
+            if (player.chooseUse(outcome, "Put an artifact, creature, enchantment, or land card from hand onto the battlefield?", game)) {
+                target.clearChosen();
+                if (player.chooseTarget(outcome, target, source, game)) {
+                    Card card = game.getCard(target.getFirstTarget());
+                    if (card != null) {
+                        cardsToPutIntoPlay.add(card);
                     }
                 }
+            }
+            player = playerList.getNextInRange(controller, game);
+        } while (!player.getId().equals(game.getActivePlayerId()));
+
+        for (Card card: cardsToPutIntoPlay) {
+            player = game.getPlayer(card.getOwnerId());
+            if (player != null) {
+                player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
             }
         }
         return true;

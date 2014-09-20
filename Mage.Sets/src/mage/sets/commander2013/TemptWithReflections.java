@@ -39,9 +39,9 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.EmptyToken;
 import mage.players.Player;
 import mage.players.PlayerList;
-import mage.game.permanent.token.EmptyToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
 
@@ -100,7 +100,7 @@ class TemptWithReflectionsEffect extends OneShotEffect {
             CardUtil.copyTo(token).from(permanent);
             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
 
-            Set<UUID> playersSaidYes = new HashSet<UUID>();
+            Set<UUID> playersSaidYes = new HashSet<>();
             PlayerList playerList = game.getPlayerList().copy();
             playerList.setCurrent(game.getActivePlayerId());
             Player player = game.getPlayer(game.getActivePlayerId());
