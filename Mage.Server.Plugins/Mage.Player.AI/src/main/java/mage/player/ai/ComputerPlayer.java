@@ -315,7 +315,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
         if (target instanceof TargetCardInYourGraveyard) {
             List<UUID> alreadyTargetted = target.getTargets();
-            List<Card> cards = new ArrayList<Card>(game.getPlayer(playerId).getGraveyard().getCards(game));
+            List<Card> cards = new ArrayList<>(game.getPlayer(playerId).getGraveyard().getCards(game));
             while(!cards.isEmpty()) {
                 Card card = pickTarget(cards, outcome, target, null, game);
                 if (card != null && alreadyTargetted != null && !alreadyTargetted.contains(card.getId())) {
@@ -324,6 +324,27 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
             return false;
+        }
+        if (target instanceof TargetSource) {
+            Set<UUID> targets;
+            TargetSource t = ((TargetSource) target);
+            targets = t.possibleTargets(sourceId, playerId, game);
+            for (UUID targetId : targets) {
+                MageObject targetObject = game.getObject(targetId);
+                if (targetObject != null) {
+                    List<UUID> alreadyTargetted = target.getTargets();
+                    if (t.canTarget(targetObject.getId(), game)) {
+                        if (alreadyTargetted != null && !alreadyTargetted.contains(targetObject.getId())) {
+                            target.add(targetObject.getId(), game);
+                            return true;
+                        }
+                    }
+                }
+            }
+            if (!target.isRequired(sourceId, game)) {
+                return false;
+            }
+            throw new IllegalStateException("TargetSource wasn't handled. class:" + target.getClass().toString());
         }
 
         throw new IllegalStateException("Target wasn't handled. class:" + target.getClass().toString());

@@ -40,6 +40,7 @@ import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSource;
 
@@ -112,6 +113,8 @@ class DeflectingPalmEffect extends PreventionEffectImpl {
                 objectControllerId = ((Permanent) damageDealingObject).getControllerId();
             } else if (damageDealingObject instanceof Ability) {
                 objectControllerId = ((Ability) damageDealingObject).getControllerId();
+            } else if (damageDealingObject instanceof Spell) {
+                objectControllerId = ((Spell) damageDealingObject).getControllerId();
             }
             if (objectControllerId != null) {
                 Player objectController = game.getPlayer(objectControllerId);

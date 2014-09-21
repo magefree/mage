@@ -61,9 +61,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
-import mage.abilities.mana.ManaAbility;
 import mage.constants.Zone;
+import mage.target.TargetSource;
 
 /**
  *
@@ -318,7 +319,28 @@ public class TestPlayer extends ComputerPlayer {
                     }
                 }
             }
-            
+            if (target instanceof TargetSource) {
+                Set<UUID> possibleTargets;
+                TargetSource t = ((TargetSource) target);
+                possibleTargets = t.possibleTargets(sourceId, playerId, game);
+                for (UUID targetId : possibleTargets) {
+                    MageObject targetObject = game.getObject(targetId);
+                    if (targetObject != null) {
+                        for (String choose2: choices) {
+                            if (targetObject.getName().equals(choose2)) {
+                                List<UUID> alreadyTargetted = target.getTargets();
+                                if (t.canTarget(targetObject.getId(), game)) {
+                                    if (alreadyTargetted != null && !alreadyTargetted.contains(targetObject.getId())) {
+                                        target.add(targetObject.getId(), game);
+                                        choices.remove(choose2);
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
         return super.choose(outcome, target, sourceId, game, options);
     }
@@ -511,6 +533,9 @@ public class TestPlayer extends ComputerPlayer {
     
     private boolean handleNonPlayerTargetTarget(String target, Ability ability, Game game) {
         boolean result = true;
+        if (target.isEmpty()) {
+            return true; // needed if spell has no target but waits until spell is on the stack
+        }
         String[] targetList = target.split("\\^");
         int index = 0;
         int targetsSet = 0;
