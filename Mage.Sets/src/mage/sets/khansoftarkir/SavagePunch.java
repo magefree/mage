@@ -28,6 +28,8 @@
 package mage.sets.khansoftarkir;
 
 import java.util.UUID;
+import mage.abilities.condition.FixedCondition;
+import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
@@ -65,7 +67,7 @@ public class SavagePunch extends CardImpl {
         // <i>Ferocious</i> - The creature you control gets +2/+2 until end of turn before it fights if you control a creature with power 4 or greater.
         Effect effect = new ConditionalContinousEffect(
                 new BoostTargetEffect(2,2,Duration.EndOfTurn),
-                FerociousCondition.getInstance(),
+                new LockedInCondition(FerociousCondition.getInstance()),
                 "<i>Ferocious</i> - The creature you control gets +2/+2 until end of turn before it fights if you control a creature with power 4 or greater");
         effect.setApplyEffectsAfter();
         this.getSpellAbility().addEffect(effect);
