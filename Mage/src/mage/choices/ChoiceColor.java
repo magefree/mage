@@ -60,6 +60,9 @@ public class ChoiceColor extends ChoiceImpl {
     }
 
     public ObjectColor getColor() {
+        if (choice == null) {
+            return null;
+        }
         ObjectColor color = new ObjectColor();
         switch (choice) {
             case "Black":

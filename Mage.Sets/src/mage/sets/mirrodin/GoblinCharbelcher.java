@@ -28,10 +28,6 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -41,6 +37,9 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -101,7 +100,7 @@ class GoblinCharbelcherEffect extends OneShotEffect {
         if (player == null || sourceCard == null) {
             return false;
         }
-        Cards cards = new CardsImpl(Zone.PICK);
+        Cards cards = new CardsImpl();
         while (player.getLibrary().size() > 0) {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
@@ -134,13 +133,12 @@ class GoblinCharbelcherEffect extends OneShotEffect {
             }
         }
         
-        TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
+        TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put on the bottom of your library"));
         while (player.isInGame() && cards.size() > 1) {
             player.choose(Outcome.Neutral, cards, target, game);
             Card card = cards.get(target.getFirstTarget(), game);
             if (card != null) {
-                cards.remove(card);
-                card.moveToZone(Zone.PICK, source.getSourceId(), game, false);
+                player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, false, true);
             }
             target.clearChosen();
         }

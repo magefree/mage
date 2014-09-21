@@ -14,7 +14,7 @@
 * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
 * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
 * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL  , EXEMPLARY, OR
 * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
 * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
 * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
@@ -27,11 +27,16 @@
 */
 package mage.abilities.effects;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.game.Game;
-
-import java.util.*;
 import mage.constants.Duration;
+import mage.game.Game;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -39,6 +44,8 @@ import mage.constants.Duration;
  * @param <T>
  */
 public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList<T> {
+    
+    private static final Logger logger = Logger.getLogger(ContinuousEffectsList.class);
 
     // the effectAbilityMap holds for each effect all abilities that are connected (used) with this effect
     private final Map<UUID, HashSet<Ability>> effectAbilityMap = new HashMap<>();
@@ -95,6 +102,10 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
 
     private boolean isInactive(T effect, Game game) {
         HashSet<Ability> set = effectAbilityMap.get(effect.getId());
+        if (set == null) {
+            logger.debug("No abilities for effect found: " + effect.toString());
+            return false;
+        }
         Iterator<Ability> it = set.iterator();
         while (it.hasNext()) {
             Ability ability = it.next();

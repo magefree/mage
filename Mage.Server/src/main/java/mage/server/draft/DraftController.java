@@ -152,7 +152,7 @@ public class DraftController {
     private synchronized void startDraft() {
         for (final Entry<UUID, DraftSession> entry: draftSessions.entrySet()) {
             if (!entry.getValue().init()) {
-                logger.fatal("Unable to initialize client");
+                logger.fatal("Unable to initialize client for playerId " + entry.getKey());
                 //TODO: generate client error message
                 return;
             }
