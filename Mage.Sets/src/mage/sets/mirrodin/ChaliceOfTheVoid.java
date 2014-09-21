@@ -139,7 +139,7 @@ class ChaliceOfTheVoidTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a player casts a spell with converted mana cost equal to the number of charge counters on Chalice of the Void, counter that spell.";
+        return "Whenever a player casts a spell with converted mana cost equal to the number of charge counters on {this}, counter that spell.";
     }
 }
 

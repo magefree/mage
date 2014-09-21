@@ -606,9 +606,18 @@ public class Spell implements StackObject, Card {
      * @return
      */
     public int getConvertedManaCost() {
-        int cmc = 0;
+        int cmc = 0;        
         for (Ability spellAbility: spellAbilities) {
-            cmc += spellAbility.getManaCosts().convertedManaCost() + spellAbility.getManaCostsToPay().getX();
+            int xMultiplier = 0;
+            for (String symbolString :spellAbility.getManaCosts().getSymbols()) {
+                int index = symbolString.indexOf("{X}");
+                while (index != -1) {
+                    xMultiplier++;
+                    symbolString = symbolString.substring(index + 3);
+                    index = symbolString.indexOf("{X}");
+                }
+            }
+            cmc += spellAbility.getManaCosts().convertedManaCost() + spellAbility.getManaCostsToPay().getX() * xMultiplier;
         }
         return cmc;
     }
