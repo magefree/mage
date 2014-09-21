@@ -38,6 +38,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
@@ -88,13 +89,21 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
                 }
             }
         } else {
-            Card card = game.getCard(event.getTargetId());
+            Card card = null;
+            if (((ZoneChangeEvent)event).getFromZone().equals(Zone.STACK)) {
+                Spell spell = game.getStack().getSpell(event.getTargetId());
+                if (spell != null) {
+                    card = game.getCard(spell.getSourceId());
+                }
+            } else {
+                card = game.getCard(event.getTargetId());
+            }
+            
             if (card != null) {
-
                 Player player = game.getPlayer(card.getOwnerId());
                 if (player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", game)){
-                    boolean result  = card.moveToZone(Zone.COMMAND, source.getSourceId(), game, false);
-                    return result;
+                    game.informPlayers(player.getName() + " moved his commander to the command zone instead");
+                    return card.moveToZone(Zone.COMMAND, source.getSourceId(), game, false);
                 }
             }
         }
@@ -104,8 +113,18 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && (((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD || ((ZoneChangeEvent)event).getToZone() == Zone.EXILED)) {
-            if(commanderId != null && commanderId.equals(event.getTargetId())){
-                return true;
+            if (commanderId != null) {
+                if (((ZoneChangeEvent)event).getFromZone().equals(Zone.STACK)) {
+                    Spell spell = game.getStack().getSpell(event.getTargetId());
+                    if (spell != null) {
+                        if (commanderId.equals(spell.getSourceId())) {
+                            return true;
+                        }
+                    }
+                }
+                if(commanderId.equals(event.getTargetId())){
+                    return true;
+                }
             }
         }
         return false;

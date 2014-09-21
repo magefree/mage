@@ -64,6 +64,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
@@ -325,6 +326,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                         game.getState().getCommand().remove((Commander)game.getObject(objectId));
                         break;
                     case STACK:
+                        StackObject stackObject = game.getStack().getStackObject(getId());
+                        if (stackObject != null) {
+                            game.getStack().remove(stackObject);
+                        }
+                        break;
                     case PICK:
                     case BATTLEFIELD: // for sacrificing permanents
                         break;

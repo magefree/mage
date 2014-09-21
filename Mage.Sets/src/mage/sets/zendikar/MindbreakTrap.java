@@ -31,20 +31,22 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.WatcherScope;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
+import mage.players.Player;
 import mage.target.TargetSpell;
 import mage.watchers.Watcher;
 
@@ -84,7 +86,7 @@ public class MindbreakTrap extends CardImpl {
 
 class MindbreakTrapWatcher extends Watcher {
 
-    private Map<UUID, Integer> counts = new HashMap<UUID, Integer>();
+    private Map<UUID, Integer> counts = new HashMap<>();
 
     public MindbreakTrapWatcher() {
         super("opponent cast three or more spells", WatcherScope.PLAYER);
@@ -112,8 +114,9 @@ class MindbreakTrapWatcher extends Watcher {
             int count = 1;
             if (counts.containsKey(event.getPlayerId())) {
                 count += counts.get(event.getPlayerId());
-                if (count >= 3)
+                if (count >= 3) {
                     condition = true;
+                }
             }
             counts.put(event.getPlayerId(), count);
         }
@@ -130,7 +133,7 @@ class MindbreakTrapWatcher extends Watcher {
 class MindbreakTrapAlternativeCost extends AlternativeCostImpl {
 
     public MindbreakTrapAlternativeCost() {
-        super("you may pay {0} rather than pay Mindbreak Trap's mana cost");
+        super("you may pay {0} rather than pay {this}'s mana cost");
         this.add(new GenericManaCost(0));
     }
 
@@ -154,7 +157,7 @@ class MindbreakTrapAlternativeCost extends AlternativeCostImpl {
 
     @Override
     public String getText() {
-        return "If an opponent cast three or more spells this turn, you may pay {0} rather than pay Mindbreak Trap's mana cost";
+        return "If an opponent cast three or more spells this turn, you may pay {0} rather than pay {this}'s mana cost";
     }
 }
 
@@ -171,17 +174,21 @@ class MindbreakEffect extends OneShotEffect{
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int affectedTargets = 0;
-        if (targetPointer.getTargets(game, source).size() > 0) {
-            for (UUID spellId : targetPointer.getTargets(game, source)) {
-                Spell spell = game.getStack().getSpell(spellId);
-                if (spell != null) {
-                    spell.moveToExile(null, null, source.getSourceId(), game);
-                    affectedTargets++;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            int affectedTargets = 0;
+            if (targetPointer.getTargets(game, source).size() > 0) {
+                for (UUID spellId : targetPointer.getTargets(game, source)) {
+                    Spell spell = game.getStack().getSpell(spellId);
+                    if (spell != null) {
+                        controller.moveCardToExileWithInfo(spell, null, "", source.getSourceId(), game, Zone.STACK);
+                        affectedTargets++;
+                    }
                 }
             }
+            return affectedTargets > 0;
         }
-        return affectedTargets > 0;
+        return false;
     }
 
     @Override
