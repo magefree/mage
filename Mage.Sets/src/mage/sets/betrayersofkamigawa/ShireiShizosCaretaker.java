@@ -65,7 +65,7 @@ public class ShireiShizosCaretaker extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever a creature with power 1 or less is put into your graveyard from the battlefield, you may return that card to the battlefield under your control at the beginning of the next end step if Shirei, Shizo's Caretaker is still on the battlefield.
+        // Whenever a creature with power 1 or less is put into your graveyard from the battlefield, you may return that card to the battlefield at the beginning of the next end step if Shirei, Shizo's Caretaker is still on the battlefield.
         this.addAbility(new ShireiShizosCaretakerTriggeredAbility(this.getId()));
     }
 
@@ -118,7 +118,7 @@ class ShireiShizosCaretakerTriggeredAbility extends TriggeredAbilityImpl {
     
     @Override
     public String getRule() {
-        return "Whenever a creature with power 1 or less is put into your graveyard from the battlefield, you may return that card to the battlefield under your control at the beginning of the next end step if Shirei, Shizo's Caretaker is still on the battlefield.";
+        return "Whenever a creature with power 1 or less is put into your graveyard from the battlefield, you may return that card to the battlefield at the beginning of the next end step if Shirei, Shizo's Caretaker is still on the battlefield.";
     }
 }
 
@@ -128,7 +128,7 @@ class ShireiShizosCaretakerEffect extends OneShotEffect {
     
     ShireiShizosCaretakerEffect(UUID shireiId) {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "you may return that card to the battlefield under your control at the beginning of the next end step if Shirei, Shizo's Caretaker is still on the battlefield.";
+        this.staticText = "you may return that card to the battlefield at the beginning of the next end step if Shirei, Shizo's Caretaker is still on the battlefield.";
         this.shireiId = shireiId;
     }
     
@@ -147,7 +147,7 @@ class ShireiShizosCaretakerEffect extends OneShotEffect {
         Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
         if (card != null) {
             Effect effect = new ShireiShizosCaretakerReturnEffect(shireiId);
-            effect.setText("return that card to the battlefield under your control if Shirei, Shizo's Caretaker is still on the battlefield");
+            effect.setText("return that card to the battlefield if Shirei, Shizo's Caretaker is still on the battlefield");
             DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(effect);
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
