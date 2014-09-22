@@ -72,7 +72,7 @@ public class LeechBonder extends CardImpl {
         // Leech Bonder enters the battlefield with two -1/-1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(2))));
 
-        // {U}, {untap}: Move a counter from target creature onto another target creature.
+        // {U}, {untap}: Move a counter from target creature onto a second target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LeechBonderEffect(), new ManaCostsImpl("{U}"));
         ability.addCost(new UntapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature to remove counter from")));
@@ -95,7 +95,7 @@ class LeechBonderEffect extends OneShotEffect {
 
     public LeechBonderEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Move a counter from target creature onto another target creature";
+        this.staticText = "Move a counter from target creature onto a second target creature";
     }
 
     public LeechBonderEffect(final LeechBonderEffect effect) {

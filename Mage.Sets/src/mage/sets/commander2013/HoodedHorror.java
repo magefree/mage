@@ -56,7 +56,7 @@ public class HoodedHorror extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // Hooded Horror can't be blocked if defending player controls the most creatures or is tied for the most.
+        // Hooded Horror can't be blocked as long as defending player controls the most creatures or is tied for the most.
       this.addAbility(new SimpleEvasionAbility(new HoodedHorrorCantBeBlockedEffect()));
     }
 
@@ -76,7 +76,7 @@ class HoodedHorrorCantBeBlockedEffect extends RestrictionEffect {
 
     public HoodedHorrorCantBeBlockedEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "{this} can't be blocked if defending player controls the most creatures or is tied for the most";
+        staticText = "{this} can't be blocked as long as defending player controls the most creatures or is tied for the most";
     }
 
     public HoodedHorrorCantBeBlockedEffect(final HoodedHorrorCantBeBlockedEffect effect) {
