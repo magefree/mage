@@ -1,3 +1,28 @@
+|Generate|TOK:M15|Sliver|
+|Generate|TOK:M15|Soldier|
+|Generate|TOK:M15|Zombie|
+|Generate|TOK:M15|Goblin|
+|Generate|TOK:M15|Beast 1|
+|Generate|TOK:M15|Insect|
+|Generate|TOK:M15|Spirit|
+|Generate|TOK:M15|Squid|
+|Generate|TOK:M15|Beast 2|
+|Generate|TOK:M15|Dragon|
+|Generate|TOK:M15|Treefolk Warrior|
+|Generate|TOK:M15|Land Mine|
+|Generate|EMBLEM!:M15|Emblem Ajani|
+|Generate|EMBLEM!:M15|Emblem Garruk|
+
+|Generate|TOK:CNS|Zombie|
+|Generate|TOK:CNS|Spirit|
+|Generate|TOK:CNS|Demon|
+|Generate|TOK:CNS|Ogre|
+|Generate|TOK:CNS|Elephant|
+|Generate|TOK:CNS|Squirrel|
+|Generate|TOK:CNS|Wolf|
+|Generate|TOK:CNS|Construct|
+|Generate|EMBLEM!:CNS|Emblem Dack Fayden|
+
 |Generate|TOK:JOU|Sphinx|
 |Generate|TOK:JOU|Zombie|
 |Generate|TOK:JOU|Minotaur|

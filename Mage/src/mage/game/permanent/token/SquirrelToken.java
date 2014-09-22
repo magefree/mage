@@ -27,9 +27,8 @@
  */
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
 import mage.MageInt;
-import mage.ObjectColor;
+import mage.constants.CardType;
 
 /**
  *
@@ -38,7 +37,11 @@ import mage.ObjectColor;
 public class SquirrelToken extends Token {
 
     public SquirrelToken() {
+        this("CNS");
+    }
+    public SquirrelToken(String setCode) {
         super("Squirrel", "1/1 green Squirrel creature token");
+        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         subtype.add("Squirrel");
 
