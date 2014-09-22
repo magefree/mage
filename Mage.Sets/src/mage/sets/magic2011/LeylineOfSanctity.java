@@ -57,7 +57,11 @@ public class LeylineOfSanctity extends CardImpl {
         super(ownerId, 21, "Leyline of Sanctity", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         this.expansionSetCode = "M11";
         this.color.setWhite(true);
+
+        // If Leyline of Sanctity is in your opening hand, you may begin the game with it on the battlefield.
         this.addAbility(LeylineAbility.getInstance());
+
+        // You have hexproof. (You can't be the target of spells or abilities your opponents control.)
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControllerEffect(HexproofAbility.getInstance())));
     }
 
