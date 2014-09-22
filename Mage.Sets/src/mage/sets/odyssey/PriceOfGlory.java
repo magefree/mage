@@ -39,6 +39,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -86,7 +87,8 @@ class PriceOfGloryAbility extends TriggeredAbilityImpl {
             if (permanent == null) {
                 permanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
             }
-            if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
+            if (permanent != null && permanent.getCardType().contains(CardType.LAND)  
+                    && !permanent.getControllerId().equals(game.getActivePlayerId())) { // intervening if clause
                 getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
                 return true;
             }
@@ -118,9 +120,12 @@ class PriceOfGloryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent land = game.getPermanent(this.targetPointer.getFirst(game, source));
-        if (land != null && !land.getControllerId().equals(game.getActivePlayerId())) {
-            land.destroy(source.getSourceId(), game, false);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Permanent land = game.getPermanentOrLKIBattlefield(this.targetPointer.getFirst(game, source));
+            if (land != null &&  !land.getControllerId().equals(game.getActivePlayerId())) { // intervening if clause has to be checked again
+                land.destroy(source.getSourceId(), game, false);
+            }
             return true;
         }
         return false;
