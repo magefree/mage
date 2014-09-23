@@ -52,7 +52,7 @@ public class DoIfCostPaid extends OneShotEffect {
             } else {
                 message = chooseUseText;
             }
-            message = CardUtil.replaceSourceName(message, mageObject.getName());
+            message = CardUtil.replaceSourceName(message, mageObject.getLogName());
             boolean result = true;
             if (cost.canPay(source, source.getSourceId(), player.getId(), game) && player.chooseUse(executingEffects.get(0).getOutcome(), message, game)) {
                 cost.clearPaid();

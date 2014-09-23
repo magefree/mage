@@ -127,7 +127,7 @@ class DoUnlessTargetPaysCost extends OneShotEffect {
             if (message == null) {
                 message = new StringBuilder(getCostText()).append(" to prevent ").append(executingEffect.getText(source.getModes().getMode())).append("?").toString();
             }
-            message = CardUtil.replaceSourceName(message, mageObject.getName());
+            message = CardUtil.replaceSourceName(message, mageObject.getLogName());
             cost.clearPaid();
             if (cost.canPay(source, source.getSourceId(), player.getId(), game) && player.chooseUse(executingEffect.getOutcome(), message, game)) {
                 cost.pay(source, game, source.getSourceId(), player.getId(), false);

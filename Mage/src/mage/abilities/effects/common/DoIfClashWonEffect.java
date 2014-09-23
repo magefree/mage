@@ -77,7 +77,7 @@ public class DoIfClashWonEffect extends OneShotEffect {
             String message = null;
             if (chooseUseText != null) {
                 message = chooseUseText;
-                message = CardUtil.replaceSourceName(message, mageObject.getName());
+                message = CardUtil.replaceSourceName(message, mageObject.getLogName());
             }
             
             if (chooseUseText == null || player.chooseUse(executingEffect.getOutcome(), message, game)) {

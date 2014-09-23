@@ -816,7 +816,7 @@ public abstract class AbilityImpl implements Ability {
             logger.warn("Could get no object: " + this.toString());
         }
         return new StringBuilder(" activates: ")
-                .append(object != null ? this.formatRule(modes.getText(), object.getName()) :modes.getText())
+                .append(object != null ? this.formatRule(modes.getText(), object.getLogName()) :modes.getText())
                 .append(" from ")
                 .append(getMessageText(game)).toString();
     }
