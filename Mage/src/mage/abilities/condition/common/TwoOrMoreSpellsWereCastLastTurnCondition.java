@@ -52,7 +52,7 @@ public class TwoOrMoreSpellsWereCastLastTurnCondition implements Condition {
                 return true;
             }
         }
-        // no one cast two or more spells this turn
+        // no one cast two or more spells last turn
         return false;
     }
 }

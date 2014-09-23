@@ -70,9 +70,9 @@ public class CastSpellLastTurnWatcher extends Watcher {
            if (playerId != null) {
                Integer amount = amountOfSpellsCastOnCurrentTurn.get(playerId);
                if (amount == null) {
-                   amount = Integer.valueOf(1);
+                   amount = 1;
                } else {
-                   amount = Integer.valueOf(amount+1);
+                   amount = amount+1;
                }
                amountOfSpellsCastOnCurrentTurn.put(playerId, amount);
            }
@@ -98,7 +98,7 @@ public class CastSpellLastTurnWatcher extends Watcher {
     public int getAmountOfSpellsPlayerCastOnCurrentTurn(UUID playerId) {
        Integer value = amountOfSpellsCastOnCurrentTurn.get(playerId);
        if (value != null) {
-           return value.intValue();
+           return value;
        } else {
            return 0;
        }

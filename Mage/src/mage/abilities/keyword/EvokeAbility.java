@@ -41,6 +41,7 @@ import mage.abilities.costs.AlternativeCost2Impl;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
+import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -190,4 +191,11 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
         }
         return sb.toString();
     }
+    
+    @Override
+    public Costs<Cost> getCosts() {
+        Costs<Cost> alterCosts = new CostsImpl<>();
+        alterCosts.addAll(evokeCosts);
+        return alterCosts;
+    }    
 }

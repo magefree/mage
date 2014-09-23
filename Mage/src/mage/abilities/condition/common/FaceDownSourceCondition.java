@@ -25,51 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.costs;
+package mage.abilities.condition.common;
 
+import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
+import mage.cards.Card;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
- * Interface for abilities that add alternative costs to the source.
- *
- * Example of such additional source costs: {@link mage.abilities.keyword.KickerAbility}
  *
  * @author LevelX2
  */
-public interface AlternativeSourceCosts {
 
-    /**
-     * Ask the player if he wants to use the alternative costs
-     * 
-     * @param ability ability the alternative cost is activated for
-     * @param game
-     * @return 
-     */
-    boolean askToActivateAlternativeCosts(Ability ability, Game game);
-    
-    /**
-     * Is the alternative spell cost currently available
-     * 
-     * @param source spell ability the alternative costs can be paid for
-     * @param game
-     * @return 
-     */
-    boolean isAvailable(Ability source, Game game);
-    
-    /**
-     * Was the alternative cost activated
-     * @param game
-     * @param source
-     * @return
-     */
-    boolean isActivated(Ability source, Game game);
-    
-    /**
-     * Suffix string to use for game log
-     * @param game
-     * @return 
-     */
-    String getCastMessageSuffix(Game game);      
-    
+public class FaceDownSourceCondition implements Condition {
+
+    private final static FaceDownSourceCondition fInstance = new FaceDownSourceCondition();
+
+    public static Condition getInstance() {
+        return fInstance;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        MageObject mageObject = game.getObject(source.getSourceId());
+        if (mageObject != null) {
+            if (mageObject instanceof Permanent) {
+                return ((Permanent)mageObject).isFaceDown();
+            }
+            if (mageObject instanceof Card) {
+                return ((Card)mageObject).isFaceDown();
+            }
+        }
+        return false;
+    }
 }

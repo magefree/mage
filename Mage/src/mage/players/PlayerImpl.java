@@ -1907,7 +1907,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         return result;
     }
 
-    protected boolean canPlay(ActivatedAbility ability, ManaOptions available, Game game) {
+    protected boolean canPlay(ActivatedAbility ability, ManaOptions available, MageObject sourceObject, Game game) {
         if (!(ability instanceof ManaAbility)) {
             ActivatedAbility copy = ability.copy();     
             copy.setCheckPlayableMode(); // prevents from endless loops for asking player to use effects by checking this mode
@@ -1956,6 +1956,20 @@ public abstract class PlayerImpl implements Player, Serializable {
                     return true;
                 }
             }
+            
+            if (!(sourceObject instanceof Permanent)) {
+                for (Ability alternateSourceCostsAbility : sourceObject.getAbilities()) {
+                    // if cast for noMana no Alternative costs are allowed
+                    if (alternateSourceCostsAbility instanceof AlternativeSourceCosts) {                     
+                        if (((AlternativeSourceCosts)alternateSourceCostsAbility).isAvailable(ability, game)) {
+                            if (alternateSourceCostsAbility.getCosts().canPay(ability, playerId, playerId, game)) {
+                                return true;
+                            }
+                        }   
+                    }
+                }
+            }
+            
         }
         return false;
     }
@@ -1971,14 +1985,19 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             if (hidden) {
                 for (Card card : hand.getUniqueCards(game)) {
-                    for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {
-                        if (ability instanceof PlayLandAbility) {
-                            if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(), ability.getSourceId(), playerId), ability, game, true)) {
-                                break;
+                    for (Ability ability : card.getAbilities()) {
+                        if (ability instanceof ActivatedAbility) {
+                            if (ability instanceof PlayLandAbility) {
+                                if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(), ability.getSourceId(), playerId), ability, game, true)) {
+                                    break;
+                                }
+                            }
+                            if (canPlay((ActivatedAbility) ability, availableMana, card, game)) {
+                                playable.add(ability);
                             }
                         }
-                        if (canPlay(ability, availableMana, game)) {
-                            playable.add(ability);
+                        if (ability instanceof AlternativeSourceCosts) {
+                            
                         }
                     }
                 }
@@ -1994,7 +2013,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             possible = true;
                         }                        
                     } 
-                    if (possible && canPlay(ability, availableMana, game)) {
+                    if (possible && canPlay(ability, availableMana, card, game)) {
                         playable.add(ability);
                     }                    
                 }
@@ -2036,7 +2055,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
                 for (ActivatedAbility ability : permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
                     if (!playableActivated.containsKey(ability.toString())) {
-                        if (canPlay(ability, availableMana, game)) {
+                        if (canPlay(ability, availableMana, permanent, game)) {
                             playableActivated.put(ability.toString(), ability);
                         }
                     }
@@ -2049,7 +2068,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     MageObject object = game.getObject(this.getCommanderId());
                     if (object != null) {
                         for (ActivatedAbility ability : ((Commander) object).getAbilities().getActivatedAbilities(Zone.COMMAND)) {
-                            if (canPlay(ability, availableMana, game)) {
+                            if (canPlay(ability, availableMana, object, game)) {
                                 playableActivated.put(ability.toString(), ability);
                             }
                         }
@@ -2082,13 +2101,13 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 break;
                             }
                         }
-                        if (canPlay(ability, available, game)) {
+                        if (canPlay(ability, available, card, game)) {
                             playable.add(card.getId());
                             break;
                         }
                     }
                     for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {
-                        if (!playable.contains(ability.getSourceId()) && canPlay(ability, available, game)) {
+                        if (!playable.contains(ability.getSourceId()) && canPlay(ability, available, card, game)) {
                             playable.add(card.getId());
                             break;
                         }

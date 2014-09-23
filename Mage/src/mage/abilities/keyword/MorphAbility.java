@@ -30,7 +30,6 @@ package mage.abilities.keyword;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -38,13 +37,13 @@ import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.TurnFaceUpAbility;
-import mage.abilities.costs.AlternativeCost2;
 import mage.abilities.costs.AlternativeCost2Impl;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -54,6 +53,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -105,7 +105,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
     protected static final String ABILITY_KEYWORD = "Morph";
     protected static final String REMINDER_TEXT = "(You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)";
     protected String ruleText;
-    protected List<AlternativeCost2> alternateCosts = new LinkedList<>();
+    protected AlternativeCost2Impl alternateCosts = new AlternativeCost2Impl(ABILITY_KEYWORD, REMINDER_TEXT, new GenericManaCost(3));
 
     // needed to check activation status, if card changes zone after casting it
     private   int zoneChangeCounter = 0;
@@ -131,8 +131,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
         sb.append(REMINDER_TEXT);
         ruleText = sb.toString();
 
-        alternateCosts.add(new AlternativeCost2Impl(ABILITY_KEYWORD, REMINDER_TEXT, new GenericManaCost(3)));
-
+        // alternateCosts.add(new AlternativeCost2Impl(ABILITY_KEYWORD, REMINDER_TEXT, new GenericManaCost(3)));
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesFaceDownCreatureEffect(morphCosts));
         ability.setRuleVisible(false);
         card.addAbility(ability);
@@ -141,13 +140,13 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
 
     public MorphAbility(final MorphAbility ability) {
        super(ability);
-       this.alternateCosts.addAll(ability.alternateCosts);
        this.zoneChangeCounter = ability.zoneChangeCounter;
        this.ruleText = ability.ruleText;
+       this.alternateCosts = ability.alternateCosts.copy();
     }
 
-    private static Costs createCosts(Cost cost) {
-        Costs costs = new CostsImpl();
+    private static Costs<Cost> createCosts(Cost cost) {
+        Costs<Cost> costs = new CostsImpl<>();
         costs.add(cost);
         return costs;
     }
@@ -158,9 +157,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
     }
 
     public void resetMorph() {
-        for (AlternativeCost2 cost: alternateCosts) {
-            cost.reset();
-        }
+        alternateCosts.reset();        
         zoneChangeCounter = 0;
     }
 
@@ -168,11 +165,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
     public boolean isActivated(Ability ability, Game game) {
         Card card = game.getCard(sourceId);
         if (card != null && card.getZoneChangeCounter() <= zoneChangeCounter +1) {
-            for (AlternativeCost2 cost: alternateCosts) {
-                if(cost.isActivated(game)) {
-                    return true;
-                }
-            }
+            return alternateCosts.isActivated(game);
         }
         return false;
     }
@@ -190,20 +183,27 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
             if (player != null && spell != null) {
                 this.resetMorph();
                 spell.setFaceDown(true); // so only the back is visible
-                for (AlternativeCost2 alternateCastingCost: alternateCosts) {
-                    if (alternateCastingCost.canPay(ability, sourceId, controllerId, game) &&
-                        player.chooseUse(Outcome.Benefit, new StringBuilder("Cast this card as a 2/2 face-down creature for ").append(alternateCastingCost.getText(true)).append(" ?").toString(), game)) {
-                        activateMorph(alternateCastingCost, game);
+                if (alternateCosts.canPay(ability, sourceId, controllerId, game)) {
+                    if (player.chooseUse(Outcome.Benefit, new StringBuilder("Cast this card as a 2/2 face-down creature for ").append(getCosts().getText()).append(" ?").toString(), game)) {
+                        activateMorph(game);
+                        // change mana costs
                         ability.getManaCostsToPay().clear();
                         ability.getCosts().clear();
-                        for (Iterator it = ((Costs) alternateCastingCost).iterator(); it.hasNext();) {
+                        for (Iterator it = this.alternateCosts.iterator(); it.hasNext();) {
                             Cost cost = (Cost) it.next();
-                            if (cost instanceof ManaCosts) {
-                                ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
+                            if (cost instanceof ManaCost) {
+                                ability.getManaCostsToPay().add((ManaCost)cost.copy());
                             } else {
                                 ability.getCosts().add(cost.copy());
                             }
                         }
+                        // change spell colors
+                        ObjectColor spellColor = spell.getColor();
+                        spellColor.setBlack(false);
+                        spellColor.setRed(false);
+                        spellColor.setGreen(false);
+                        spellColor.setWhite(false);
+                        spellColor.setBlue(false);
                     } else {
                         spell.setFaceDown(false);
                     }
@@ -213,8 +213,8 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
         return isActivated(ability, game);
     }
 
-    private void activateMorph(AlternativeCost2 cost, Game game) {
-        cost.activate();
+    private void activateMorph(Game game) {
+        alternateCosts.activate();
         // remember zone change counter
         if (zoneChangeCounter == 0) {
             Card card = game.getCard(getSourceId());
@@ -240,13 +240,30 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
     public String getCastMessageSuffix(Game game) {
         StringBuilder sb = new StringBuilder();
         int position = 0;
-        for (AlternativeCost2 cost : alternateCosts) {
-            if (cost.isActivated(game)) {
-                sb.append(cost.getCastSuffixMessage(position));
-                ++position;
-            }
-        }
+        sb.append(alternateCosts.getCastSuffixMessage(position));
         return sb.toString();
+    }
+
+    @Override
+    @SuppressWarnings({"unchecked"})
+    public Costs<Cost> getCosts() {
+        return alternateCosts;
+    }
+    
+    public static void setPermanentToMorph(Permanent permanent) {
+        permanent.getPower().initValue(2);
+        permanent.getToughness().initValue(2);
+        permanent.getAbilities().clear();
+        permanent.getColor().setColor(new ObjectColor());
+        permanent.setName("");
+        permanent.getCardType().clear();
+        permanent.getCardType().add(CardType.CREATURE);
+        permanent.getSubtype().clear();
+        permanent.getSupertype().clear();
+        permanent.getManaCost().clear();
+        permanent.setExpansionSetCode("KTK");
+        permanent.setRarity(Rarity.NA);
+        
     }
 }
 
@@ -348,3 +365,4 @@ class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implements Sour
     }
 
 }
+

@@ -93,6 +93,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
+import mage.abilities.keyword.MorphAbility;
 
 public abstract class GameImpl implements Game, Serializable {
 
@@ -1237,6 +1238,9 @@ public abstract class GameImpl implements Game, Serializable {
 
         //getState().addCard(permanent);
         permanent.reset(this);
+        if (copyFromPermanent.isMorphCard()) {
+            MorphAbility.setPermanentToMorph(permanent);
+        }
         permanent.assignNewId();
         if (copyFromPermanent.isTransformed()) {
             TransformAbility.transform(permanent, copyFromPermanent.getSecondCardFace(), this);
