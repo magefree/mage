@@ -28,11 +28,11 @@
 package mage.sets.fallenempires;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
-import mage.target.common.TargetOpponent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.target.TargetPlayer;
 
 /**
  *
@@ -48,7 +48,7 @@ public class HymnToTourach extends CardImpl {
 
         // Target player discards two cards at random.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2, true));
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public HymnToTourach(final HymnToTourach card) {
