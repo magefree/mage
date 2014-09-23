@@ -73,6 +73,7 @@ public class Spell implements StackObject, Card {
     private final List<SpellAbility> spellAbilities = new ArrayList<>();
 
     private final Card card;
+    private final ObjectColor color;
     private final SpellAbility ability;
     private final Zone fromZone;
     private final UUID id;
@@ -83,6 +84,7 @@ public class Spell implements StackObject, Card {
 
     public Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone) {
         this.card = card;
+        this.color = card.getColor().copy();
         id = ability.getId();
         this.ability = ability;
         this.ability.setControllerId(controllerId);
@@ -121,6 +123,7 @@ public class Spell implements StackObject, Card {
         this.fromZone = spell.fromZone;
         this.copiedSpell = spell.copiedSpell;
         this.faceDown = spell.faceDown;
+        this.color = spell.color.copy();
     }
 
 
@@ -376,7 +379,7 @@ public class Spell implements StackObject, Card {
      * targets will be, the copy is put onto the stack with those targets.
      *
      * @param game
-     * @param playerId
+     * @param playerId - player that can/has to change the taregt of the spell
      * @param forceChange - does only work for targets with maximum of one
      * targetId
      * @param onlyOneTarget - 114.6b one target must be changed to another
@@ -414,7 +417,7 @@ public class Spell implements StackObject, Card {
     /**
      * Handles the change of one target instance of a mode
      * 
-     * @param player
+     * @param player - player that can choose the new target
      * @param spellAbility
      * @param mode
      * @param target
@@ -431,7 +434,7 @@ public class Spell implements StackObject, Card {
             if (targetNames != null
                     && (forceChange || player.chooseUse(mode.getEffects().get(0).getOutcome(), "Change this target: " + targetNames + "?", game))) {               
                 // choose exactly one other target
-                if (forceChange && target.possibleTargets(this.getSourceId(), player.getId(), game).size() > 1) {
+                if (forceChange && target.possibleTargets(this.getSourceId(), getControllerId(), game).size() > 1) { // controller of spell must be used (e.g. TargetOpponent)
                     int iteration = 0;
                     do {
                         if (iteration > 0) {
@@ -439,7 +442,8 @@ public class Spell implements StackObject, Card {
                         }
                         iteration++;
                         newTarget.clearChosen();
-                        newTarget.chooseTarget(mode.getEffects().get(0).getOutcome(), player.getId(), spellAbility, game);
+                        // TODO: Distinction between "spell controller" and "player that can change the target" - here player is used for both 
+                        newTarget.chooseTarget(mode.getEffects().get(0).getOutcome(), player.getId(), spellAbility, game); 
                     } while (player.isInGame() && (targetId.equals(newTarget.getFirstTarget()) || newTarget.getTargets().size() != 1));
                 // choose a new target
                 } else {
@@ -591,7 +595,7 @@ public class Spell implements StackObject, Card {
 
     @Override
     public ObjectColor getColor() {
-        return card.getColor();
+        return color;
     }
 
     @Override
