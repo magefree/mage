@@ -127,14 +127,13 @@ public class LookLibraryControllerEffect extends OneShotEffect {
         // take cards from library and look at them
         boolean topCardRevealed = player.isTopCardRevealed();
         player.setTopCardRevealed(false);
-        Cards cards = new CardsImpl(Zone.PICK);
+        Cards cards = new CardsImpl();
         int count = Math.min(player.getLibrary().size(), this.numberOfCards.calculate(game, source, this));
         for (int i = 0; i < count; i++) {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
                 cards.add(card);
                 this.cardLooked(card, game, source);
-                game.setZone(card.getId(), Zone.PICK);
             }
         }
         player.lookAtCards(windowName, cards, game);
@@ -167,25 +166,25 @@ public class LookLibraryControllerEffect extends OneShotEffect {
     protected void putCardsBack(Ability source, Player player, Cards cards, Game game) {
         switch(targetZoneLookedCards) {
             case LIBRARY: 
-                TargetCard target = new TargetCard(Zone.PICK, new FilterCard(this.getPutBackText()));
+                TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard(this.getPutBackText()));
                 while (player.isInGame() && cards.size() > 1) {
                     player.choose(Outcome.Neutral, cards, target, game);
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {
                         cards.remove(card);
-                        card.moveToZone(targetZoneLookedCards, source.getSourceId(), game, putOnTop);
-                        game.informPlayers(player.getName() + " moves a card to " + targetZoneLookedCards.toString());
+                        player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, putOnTop, false);
                     }
                     target.clearChosen();
                 }
                 if (cards.size() == 1) {
                     Card card = cards.get(cards.iterator().next(), game);
-                    card.moveToZone(targetZoneLookedCards, source.getSourceId(), game, putOnTop);
-                    game.informPlayers(player.getName() + " moves a card to " + targetZoneLookedCards.toString());
+                    player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, putOnTop, false);
                 }
                 break;
             case GRAVEYARD: 
                 for (Card card : cards.getCards(game)) {
+                    player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+
                     card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
                 }
                 break;

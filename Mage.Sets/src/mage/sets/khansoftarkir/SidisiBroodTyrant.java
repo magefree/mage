@@ -135,8 +135,11 @@ class SidisiBroodTyrantTriggeredAbility extends ZoneChangeTriggeredAbility {
                 Card card = game.getCard(event.getTargetId());
                 if (card != null && card.getOwnerId().equals(getControllerId()) && card.getCardType().contains(CardType.CREATURE)) {
                     StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
+                    if (stackObject == null) {
+                        stackObject = (StackObject) game.getLastKnownInformation(event.getSourceId(), Zone.STACK);
+                    }
                     if (stackObject != null) {
-                        if (lastStackObjectId.equals(stackObject.getId())) {
+                        if (stackObject.getId().equals(lastStackObjectId)) {
                             return false; // was already handled
                         }
                         lastStackObjectId = stackObject.getId();
