@@ -68,6 +68,7 @@ import mage.util.functions.ApplyToPermanent;
 
 import java.io.Serializable;
 import java.util.*;
+import mage.constants.PlayerAction;
 
 public interface Game extends MageItem, Serializable {
 
@@ -233,10 +234,8 @@ public interface Game extends MageItem, Serializable {
     void addCommander(Commander commander);
     void addPermanent(Permanent permanent);
 
-    // priority methods
-    void passPriorityUntilNextYourTurn(UUID userId);
-    void passTurnPriority(UUID userId);
-    void restorePriority(UUID userId);
+    // priority method
+    void sendPlayerAction(PlayerAction playerAction, UUID playerId);    
 
     /**
      * This version supports copying of copies of any depth.

@@ -81,6 +81,7 @@ import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
+import mage.constants.PlayerAction;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
 import mage.constants.SpellAbilityType;
@@ -149,17 +150,21 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected int maxHandSize = 7;
     protected int maxAttackedBy = Integer.MAX_VALUE;
     protected ManaPool manaPool;
+    // priority control
     protected boolean passed; // player passed priority
-    protected boolean passedTurn;
+    protected boolean passedTurn; // F4
+    protected boolean passedUntilEndOfTurn; // F5
+    /**
+     * This indicates that player passed all turns until his own turn starts (F9).
+     * Note! This differs from passedTurn as it doesn't care about spells and abilities in the stack and will pass them as well.
+     */
+    protected boolean passedAllTurns;
+    
     protected int turns;
     protected int storedBookmark = -1;
     protected int priorityTimeLeft = Integer.MAX_VALUE;
 
-    /**
-     * This indicates that player passed all turns until his own turn starts.
-     * Note! This differs from passedTurn as it doesn't care about spells and abilities in the stack and will pass them as well.
-     */
-    protected boolean passedAllTurns;
+
 
     // conceded or connection lost game
     protected boolean left;
@@ -279,7 +284,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.passed = player.passed;
         
         this.passedTurn = player.passedTurn;
+        this.passedUntilEndOfTurn = player.passedUntilEndOfTurn;
         this.passedAllTurns = player.passedAllTurns;
+        
         this.priorityTimeLeft = player.getPriorityTimeLeft();
         this.reachedNextTurnAfterLeaving = player.reachedNextTurnAfterLeaving;
 
@@ -386,6 +393,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.playersUnderYourControl.clear();
         this.passed = false;
         this.passedTurn = false;
+        this.passedUntilEndOfTurn = false;
         this.passedAllTurns = false;
         this.canGainLife = true;
         this.canLoseLife = true;
@@ -533,6 +541,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void endOfTurn(Game game) {
         this.passedTurn = false;
+        if (!game.getActivePlayerId().equals(playerId)) {
+            this.passedUntilEndOfTurn = false;
+        }
     }
 
     @Override
@@ -1617,25 +1628,28 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void passPriorityUntilNextYourTurn(Game game) {
-        passedTurn = true;
-        passedAllTurns = true;
-        this.skip();
-        logger.trace("Passed priority for turns");
-    }
-
-    @Override
-    public void passTurnPriority(Game game) {
-        passedTurn = true;
-        this.skip();
-        logger.trace("Passed priority for turn");
-    }
-
-    @Override
-    public void restorePriority(Game game) {
-        passedAllTurns = false;
-        passedTurn = false;
-        logger.trace("Restore priority");
+    public void sendPlayerAction(PlayerAction passPriorityAction, Game game) {
+        switch(passPriorityAction) {
+            case PASS_PRIORITY_UNTIL_MY_NEXT_TURN:
+                passedTurn = true;
+                passedAllTurns = true;
+                this.skip();                
+                break;
+            case PASS_PRIORITY_UNTIL_OPPONENTS_TURN_END_STEP:
+                passedUntilEndOfTurn = true;
+                this.skip();
+                break;
+            case PASS_PRIORITY_UNTIL_NEXT_TURN:
+                passedTurn = true;
+                this.skip();
+                break;
+            case PASS_PRIORITY_CANCEL_ALL_ACTIONS:
+                passedAllTurns = false;
+                passedTurn = false;
+                passedUntilEndOfTurn = false;                
+                break;
+        }
+        logger.trace("PASS Priority: " + passPriorityAction.toString());
     }
 
     @Override

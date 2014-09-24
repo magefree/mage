@@ -32,6 +32,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.cards.decks.DeckCardLists;
 import mage.constants.ManaType;
+import mage.constants.PlayerAction;
 import mage.game.Game;
 import mage.view.GameView;
 
@@ -106,52 +107,17 @@ public class GameManager {
         }
     }
 
-    public void setManaPoolMode(UUID gameId, UUID userId, boolean autoPayment) {
-        GameController gameController = gameControllers.get(gameId);
-        if (gameController != null) {
-            gameController.setManaPoolMode(userId, autoPayment);
-        }
-    }
-
-    public void concedeGame(UUID gameId, UUID userId) {
-        GameController gameController = gameControllers.get(gameId);
-        if (gameController != null) {
-            gameController.concede(userId);
-        }
-    }
-
     public void quitMatch(UUID gameId, UUID userId) {
         GameController gameController = gameControllers.get(gameId);
         if (gameController != null) {
             gameController.quitMatch(userId);
         }
     }
-
-    public void undo(UUID gameId, UUID userId) {
+   
+    public void sendPlayerAction(PlayerAction playerAction, UUID gameId, UUID userId) {
         GameController gameController = gameControllers.get(gameId);
-        if (gameController != null) {
-            gameController.undo(userId);
-        }
-    }
-
-    public void passPriorityUntilNextYourTurn(UUID gameId, UUID userId) {
-        GameController gameController = gameControllers.get(gameId);
-        if (gameController != null) {
-            gameController.passPriorityUntilNextYourTurn(userId);
-        }
-    }
-
-    public void passTurnPriority(UUID gameId, UUID userId) {
-        GameController gameController = gameControllers.get(gameId);
-        if (gameController != null) {
-            gameController.passTurnPriority(userId);
-        }
-    }
-
-    public void restorePriority(UUID gameId, UUID userId) {
-        GameController gameController = gameControllers.get(gameId);
-        if (gameController != null) {
-            gameController.restorePriority(userId);
+        if (gameController != null) {        
+            gameController.sendPlayerAction(playerAction, userId);
         }
     }
 

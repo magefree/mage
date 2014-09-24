@@ -51,6 +51,7 @@ import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
 import mage.constants.Constants.SessionState;
 import mage.constants.ManaType;
+import mage.constants.PlayerAction;
 import mage.game.GameException;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
@@ -1055,21 +1056,6 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean concedeGame(UUID gameId) {
-        try {
-            if (isConnected()) {
-                server.concedeGame(gameId, sessionId);
-                return true;
-            }
-        } catch (MageException ex) {
-            handleMageException(ex);
-        } catch (Throwable t) {
-            handleThrowable(t);        
-        }
-        return false;
-    }
-
-    @Override
     public boolean quitMatch(UUID gameId) {
         try {
             if (isConnected()) {
@@ -1113,10 +1099,10 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean undo(UUID gameId) {
+    public boolean sendPlayerAction(PlayerAction passPriorityAction, UUID gameId) {
         try {
             if (isConnected()) {
-                server.undo(gameId, sessionId);
+                server.sendPlayerAction(passPriorityAction, gameId, sessionId);
                 return true;
             }
         } catch (MageException ex) {
@@ -1126,52 +1112,7 @@ public class SessionImpl implements Session {
         }
         return false;
     }
-
-    @Override
-    public boolean passPriorityUntilNextYourTurn(UUID gameId) {
-        try {
-            if (isConnected()) {
-                server.passPriorityUntilNextYourTurn(gameId, sessionId);
-                return true;
-            }
-        } catch (MageException ex) {
-            handleMageException(ex);
-        } catch (Throwable t) {
-            handleThrowable(t);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean passTurnPriority(UUID gameId) {
-        try {
-            if (isConnected()) {
-                server.passTurnPriority(gameId, sessionId);
-                return true;
-            }
-        } catch (MageException ex) {
-            handleMageException(ex);
-        } catch (Throwable t) {
-            handleThrowable(t);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean restorePriority(UUID gameId) {
-        try {
-            if (isConnected()) {
-                server.restorePriority(gameId, sessionId);
-                return true;
-            }
-        } catch (MageException ex) {
-            handleMageException(ex);
-        } catch (Throwable t) {
-            handleThrowable(t);
-        }
-        return false;
-    }
-
+    
     @Override
     public boolean stopWatching(UUID gameId) {
         try {
@@ -1258,21 +1199,6 @@ public class SessionImpl implements Session {
             handleMageException(ex);
         } catch (Throwable t) {
             handleThrowable(t);        
-        }
-        return false;
-    }
-
-    @Override
-    public boolean setManaPoolMode(boolean autoPayment, UUID gameId) {
-        try {
-            if (isConnected()) {
-                server.setManaPoolMode(gameId, sessionId, autoPayment);
-                return true;
-            }
-        } catch (MageException ex) {
-            handleMageException(ex);
-        } catch (Throwable t) {
-            handleThrowable(t);
         }
         return false;
     }

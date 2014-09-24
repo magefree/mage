@@ -1022,36 +1022,21 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
     }
-
+   
     @Override
-    public synchronized void passPriorityUntilNextYourTurn(UUID playerId) {
+    public void sendPlayerAction(PlayerAction playerAction, UUID playerId) {
         Player player = state.getPlayer(playerId);
         if (player != null) {
-            player.passPriorityUntilNextYourTurn(this);
-        }
+            player.sendPlayerAction(playerAction, this);
+        }                    
     }
-
-    @Override
-    public synchronized void passTurnPriority(UUID playerId) {
-        Player player = state.getPlayer(playerId);
-        if (player != null) {
-            player.passTurnPriority(this);
-        }
-    }
+    
 
     @Override
     public synchronized void setManaPoolMode(UUID playerId, boolean autoPayment) {
         Player player = state.getPlayer(playerId);
         if (player != null) {
             player.getManaPool().setAutoPayment(autoPayment);
-        }
-    }
-
-    @Override
-    public synchronized void restorePriority(UUID playerId) {
-        Player player = state.getPlayer(playerId);
-        if (player != null) {
-            player.restorePriority(this);
         }
     }
 

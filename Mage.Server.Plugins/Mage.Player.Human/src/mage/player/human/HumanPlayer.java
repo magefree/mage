@@ -444,6 +444,11 @@ public class HumanPlayer extends PlayerImpl {
                 pass(game);
                 return false;
             }
+            if (passedUntilEndOfTurn && game.getStack().isEmpty() &&                     
+                    (!game.getTurn().getStepType().equals(PhaseStep.END_TURN) || playerId.equals(game.getActivePlayerId()))) {
+                pass(game);
+                return false;
+            }
             updateGameStatePriority("priority", game);
             game.firePriorityEvent(playerId);
             waitForResponse(game);

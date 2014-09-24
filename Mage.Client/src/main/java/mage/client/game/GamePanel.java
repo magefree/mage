@@ -66,6 +66,7 @@ import java.util.*;
 import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
+import mage.constants.PlayerAction;
 
 /**
  *
@@ -942,6 +943,15 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
 
+        ks = KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0);
+        this.getInputMap(c).put(ks, "F5_PRESS");
+        this.getActionMap().put("F5_PRESS", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                btnUntilEndOfTurnActionPerformed(null);
+            }
+        });
+
         KeyStroke ks9 = KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0);
         this.getInputMap(c).put(ks9, "F9_PRESS");
         this.getActionMap().put("F9_PRESS", new AbstractAction() {
@@ -1345,25 +1355,31 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private void btnConcedeActionPerformed(java.awt.event.ActionEvent evt) {
         if (modalQuestion("Are you sure you want to concede?", "Confirm concede") == JOptionPane.YES_OPTION) {
-            session.concedeGame(gameId);
+            session.sendPlayerAction(PlayerAction.CONCEDE, gameId);
         }
     }
 
     private void btnEndTurnActionPerformed(java.awt.event.ActionEvent evt) {
         if (feedbackPanel != null && FeedbackMode.SELECT.equals(feedbackPanel.getMode())) {
-            session.passTurnPriority(gameId);
+            session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN, gameId);
+        }
+    }
+
+    private void btnUntilEndOfTurnActionPerformed(java.awt.event.ActionEvent evt) {
+        if (feedbackPanel != null && FeedbackMode.SELECT.equals(feedbackPanel.getMode())) {
+            session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_OPPONENTS_TURN_END_STEP, gameId);            
         }
     }
 
     private void btnPassPriorityUntilNextYourTurnActionPerformed(java.awt.event.ActionEvent evt) {
         if (feedbackPanel != null && FeedbackMode.SELECT.equals(feedbackPanel.getMode())) {
-            session.passPriorityUntilNextYourTurn(gameId);
+            session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN, gameId);
         }
     }
 
     private void restorePriorityActionPerformed(java.awt.event.ActionEvent evt) {
         if (feedbackPanel != null) {
-            session.restorePriority(gameId);
+            session.sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, gameId);
         }
     }
 

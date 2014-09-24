@@ -50,6 +50,7 @@ import javax.swing.event.ChangeListener;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
+import mage.constants.PlayerAction;
 import mage.view.PlayerView;
 
 /**
@@ -149,7 +150,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gamePanel.getSession().restorePriority(gameId);
+                gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, gameId);
             }
         });
 
@@ -162,7 +163,18 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gamePanel.getSession().passTurnPriority(gameId);
+                gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN, gameId);
+            }
+        });
+
+        menuItem = new JMenuItem("F5 - Skip phases until opponent's end step (stop on stack/attack/block)");
+        popupMenu.add(menuItem);
+
+        // Skip to next end step of turn (F5)
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_OPPONENTS_TURN_END_STEP, gameId);
             }
         });
 
@@ -173,7 +185,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gamePanel.getSession().passPriorityUntilNextYourTurn(gameId);
+                gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN, gameId);
             }
         });
 
@@ -190,7 +202,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
                 boolean manaPoolAutomatic = ((JCheckBoxMenuItem)e.getSource()).getState();
                 gamePanel.setMenuStates(manaPoolAutomatic);
-                gamePanel.getSession().setManaPoolMode(manaPoolAutomatic, gameId);
+                gamePanel.getSession().sendPlayerAction(manaPoolAutomatic ? PlayerAction.MANA_AUTO_PAYMENT_ON: PlayerAction.MANA_AUTO_PAYMENT_OFF, gameId);
             }
         });
 
@@ -204,7 +216,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (JOptionPane.showConfirmDialog(PlayAreaPanel.this, "Are you sure you want to concede the game?", "Confirm concede game", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    MageFrame.getSession().concedeGame(gameId);
+                    MageFrame.getSession().sendPlayerAction(PlayerAction.CONCEDE, gameId);
                 }
             }
         });

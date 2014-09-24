@@ -30,6 +30,7 @@ package mage.remote.interfaces;
 import java.util.UUID;
 import mage.cards.decks.DeckCardLists;
 import mage.constants.ManaType;
+import mage.constants.PlayerAction;
 import mage.view.DraftPickView;
 
 /**
@@ -53,8 +54,6 @@ public interface GamePlay {
 
     boolean sendPlayerManaType(UUID gameId, UUID playerId, ManaType data);
 
-    boolean concedeGame(UUID gameId);
-
     boolean quitMatch(UUID gameId);
 
     boolean quitTournament(UUID tournamentId);
@@ -67,47 +66,18 @@ public interface GamePlay {
 
     DraftPickView sendCardPick(UUID draftId, UUID cardId);
 
-    boolean undo(UUID gameId);
-
-    /*** Separate methods for priority handling ***/
     /**
      * magenoxx:
      *   it should be done separately as sendPlayer* methods calls are injected into the game flow
      *   - this is similar to concedeGame method
-     */
-
-    /**
-     * Pass priority until next your turn.
-     * Don't stop at all even if something happens.
-     *
-     * @param gameId
-     * @return
-     */
-    boolean passPriorityUntilNextYourTurn(UUID gameId);
-
-    /**
-     * Passes current turn but stop on pre combat phase.
-     *
-     * @param gameId
-     * @return
-     */
-    boolean passTurnPriority(UUID gameId);
-
-    /**
-     * This method cancels all other calls made before.
-     *
-     * @param gameId
-     * @return
-     */
-    boolean restorePriority(UUID gameId);
-
-    /**
-     * This method toggles usage of mana pool 
      * 
-     * @param automatic true mana in pool will be used automatically
+     * This method sends player actions for a game
+     * priority handling, undo
+     *
+     * @param passPriorityAction
      * @param gameId
-     * @return 
+     * @return
      */
-    boolean setManaPoolMode(boolean automatic, UUID gameId);
+    boolean sendPlayerAction(PlayerAction passPriorityAction, UUID gameId);
 
 }

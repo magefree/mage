@@ -48,6 +48,7 @@ import mage.client.components.MageTextArea;
 import mage.client.dialog.MageDialog;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.ArrowBuilder;
+import mage.constants.PlayerAction;
 import mage.remote.Session;
 import org.apache.log4j.Logger;
 
@@ -304,7 +305,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSpecialActionPerformed
 
     private void btnUndoActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        session.undo(gameId);
+        session.sendPlayerAction(PlayerAction.UNDO, gameId);
     }
 
     public void setHelperPanel(HelperPanel helper) {

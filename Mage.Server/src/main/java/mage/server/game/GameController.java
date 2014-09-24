@@ -65,6 +65,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.zip.GZIPOutputStream;
+import mage.constants.PlayerAction;
 
 /**
  *
@@ -359,14 +360,6 @@ public class GameController implements GameCallback {
         }
     }
 
-    public void concede(UUID userId) {
-        game.concede(getPlayerId(userId));
-    }
-
-    public void setManaPoolMode(UUID userId, boolean autoPayment) {
-        game.setManaPoolMode(getPlayerId(userId), autoPayment);
-    }
-
 //    public void removeUser(UUID userId) {
 //        UUID playerId = userPlayerMap.get(userId);
 //        if (playerId != null) {
@@ -389,22 +382,25 @@ public class GameController implements GameCallback {
         game.quit(getPlayerId(userId));
     }
 
-    public void undo(UUID userId) {
-        game.undo(getPlayerId(userId));
+    public void sendPlayerAction(PlayerAction playerAction, UUID userId) {
+        switch(playerAction) {
+            case UNDO:
+                game.undo(getPlayerId(userId));
+                break;
+            case CONCEDE:
+                game.concede(getPlayerId(userId));
+                break;
+            case MANA_AUTO_PAYMENT_OFF:
+                game.setManaPoolMode(getPlayerId(userId), false);
+                break;
+            case MANA_AUTO_PAYMENT_ON:
+                game.setManaPoolMode(getPlayerId(userId), true);
+                break;
+            default:        
+                game.sendPlayerAction(playerAction, getPlayerId(userId));
+        }
     }
-
-    public void passPriorityUntilNextYourTurn(UUID userId) {
-        game.passPriorityUntilNextYourTurn(getPlayerId(userId));
-    }
-
-    public void passTurnPriority(UUID userId) {
-        game.passTurnPriority(getPlayerId(userId));
-    }
-
-    public void restorePriority(UUID userId) {
-        game.restorePriority(getPlayerId(userId));
-    }
-
+    
 
     public void cheat(UUID userId, UUID playerId, DeckCardLists deckList) {
         Deck deck;

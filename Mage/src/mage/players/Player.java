@@ -59,6 +59,7 @@ import mage.util.Copyable;
 
 import java.io.Serializable;
 import java.util.*;
+import mage.constants.PlayerAction;
 import mage.game.combat.CombatGroup;
 
 /**
@@ -256,10 +257,8 @@ public interface Player extends MageItem, Copyable<Player> {
     void abort();
     void skip();
 
-    //priority methods
-    void passPriorityUntilNextYourTurn(Game game);
-    void passTurnPriority(Game game);
-    void restorePriority(Game game);
+    // priority, undo, ...
+    void sendPlayerAction(PlayerAction passPriorityAction, Game game);
     
     int getStoredBookmark();
     void setStoredBookmark(int bookmark);

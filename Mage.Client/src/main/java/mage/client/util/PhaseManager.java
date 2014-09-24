@@ -63,7 +63,7 @@ public class PhaseManager {
 
     private static final Preferences prefs = MageFrame.getPreferences();
 
-    private static Map<String, String> mapYou = new HashMap<String, String>() {{
+    private static final Map<String, String> mapYou = new HashMap<String, String>() {{
         put("Upkeep - play instants and activated abilities.", UPKEEP_YOU);
         put("Draw - play instants and activated abilities.", DRAW_YOU);
         put("Precombat Main - play spells and abilities.", MAIN_YOU);
@@ -73,7 +73,7 @@ public class PhaseManager {
         put("End Turn - play instants and activated abilities.", END_OF_TURN_YOU);
     }};
 
-    private static Map<String, String> mapOthers = new HashMap<String, String>() {{
+    private static final Map<String, String> mapOthers = new HashMap<String, String>() {{
         put("Upkeep - play instants and activated abilities.", UPKEEP_OTHERS);
         put("Draw - play instants and activated abilities.", DRAW_OTHERS);
         put("Precombat Main - play instants and activated abilities.", MAIN_OTHERS);

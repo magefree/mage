@@ -66,6 +66,7 @@ import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import mage.constants.ManaType;
+import mage.constants.PlayerAction;
 import mage.constants.TableState;
 
 /**
@@ -664,32 +665,6 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public void setManaPoolMode(final UUID gameId, final String sessionId, final boolean autoPayment) throws MageException {
-        execute("setManaPoolMode", sessionId, new Action() {
-            @Override
-            public void execute() {
-                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-                GameManager.getInstance().setManaPoolMode(gameId, userId, autoPayment);
-            }
-        });
-    }
-
-    @Override
-    public void concedeGame(final UUID gameId, final String sessionId) throws MageException {
-        execute("concedeGame", sessionId, new Action() {
-            @Override
-            public void execute() {
-                Session session = SessionManager.getInstance().getSession(sessionId);
-                if (session != null) {
-                    GameManager.getInstance().concedeGame(gameId, session.getUserId());
-                } else{
-                    logger.error("Session not found sessionId: "+ sessionId + "  gameId:" +gameId);
-                }
-            }
-        });
-    }
-
-    @Override
     public void quitMatch(final UUID gameId, final String sessionId) throws MageException {
         execute("quitMatch", sessionId, new Action() {
             @Override
@@ -740,8 +715,8 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public void undo(final UUID gameId, final String sessionId) throws MageException {
-        execute("undo", sessionId, new Action() {
+    public void sendPlayerAction(final PlayerAction playerAction, final UUID gameId, final String sessionId) throws MageException {
+        execute("setdPlayerAction", sessionId, new Action() {
             @Override
             public void execute() {
                 Session session = SessionManager.getInstance().getSession(sessionId);
@@ -749,57 +724,11 @@ public class MageServerImpl implements MageServer {
                     logger.error("Session not found sessionId: "+ sessionId + "  gameId:" + gameId);
                     return;
                 }
-                GameManager.getInstance().undo(gameId, session.getUserId());
+                GameManager.getInstance().sendPlayerAction(playerAction, gameId, session.getUserId());
             }
         });
     }
-
-    @Override
-    public void passPriorityUntilNextYourTurn(final UUID gameId, final String sessionId) throws MageException {
-        execute("passPriorityUntilNextYourTurn", sessionId, new Action() {
-            @Override
-            public void execute() {
-                Session session = SessionManager.getInstance().getSession(sessionId);
-                if (session == null) {
-                    logger.error("Session not found sessionId: "+ sessionId + "  gameId:" + gameId);
-                    return;
-                }
-                GameManager.getInstance().passPriorityUntilNextYourTurn(gameId, session.getUserId());
-            }
-        });
-    }
-
-    @Override
-    public void passTurnPriority(final UUID gameId, final String sessionId) throws MageException {
-        execute("passTurnPriority", sessionId, new Action() {
-            @Override
-            public void execute() {
-                Session session = SessionManager.getInstance().getSession(sessionId);
-                if (session == null) {
-                    logger.error("Session not found sessionId: "+ sessionId + "  gameId:" + gameId);
-                    return;
-                }
-                GameManager.getInstance().passTurnPriority(gameId, session.getUserId());
-            }
-        });
-    }
-
-    @Override
-    public void restorePriority(final UUID gameId, final String sessionId) throws MageException {
-        execute("restorePriority", sessionId, new Action() {
-            @Override
-            public void execute() {
-                Session session = SessionManager.getInstance().getSession(sessionId);
-                if (session == null) {
-                    logger.error("Session not found sessionId: "+ sessionId + "  gameId:" + gameId);
-                    return;
-                }
-                GameManager.getInstance().restorePriority(gameId,  session.getUserId());
-            }
-        });
-    }
-
-
+            
     @Override
     public boolean watchTable(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
         return executeWithResult("setUserData", sessionId, new ActionWithBooleanResult() {

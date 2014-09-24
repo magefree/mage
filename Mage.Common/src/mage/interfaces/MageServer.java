@@ -35,6 +35,7 @@ import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.ExpansionInfo;
 import mage.constants.ManaType;
+import mage.constants.PlayerAction;
 import mage.game.GameException;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
@@ -115,16 +116,10 @@ public interface MageServer {
     void sendPlayerBoolean(UUID gameId, String sessionId, Boolean data) throws MageException;
     void sendPlayerInteger(UUID gameId, String sessionId, Integer data) throws MageException;
     void sendPlayerManaType(UUID gameId, UUID playerId, String sessionId, ManaType data) throws MageException;
-    void concedeGame(UUID gameId, String sessionId) throws MageException;
     void quitMatch(UUID gameId, String sessionId) throws MageException;
-    void undo(UUID gameId, String sessionId) throws MageException;
-    void setManaPoolMode(UUID gameId, String sessionId, boolean autoPayment) throws MageException;
     GameView getGameView(UUID gameId, String sessionId, UUID playerId) throws MageException;
-
-    //priority methods
-    void passPriorityUntilNextYourTurn(UUID gameId, String sessionId) throws MageException;
-    void passTurnPriority(UUID gameId, String sessionId) throws MageException;
-    void restorePriority(UUID gameId, String sessionId) throws MageException;
+    // priority, undo, concede, mana pool
+    void sendPlayerAction(PlayerAction playerAction, UUID gameId, String sessionId) throws MageException;
 
     //tournament methods
     boolean startTournament(String sessionId, UUID roomId, UUID tableId) throws MageException;
