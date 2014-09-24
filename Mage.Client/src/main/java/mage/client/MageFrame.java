@@ -714,6 +714,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             connection.setProxyPassword(proxyPassword);
             connection.setAvatarId(avatarId);
             connection.setShowAbilityPickerForced(showAbilityPickerForced);
+            connection.setUserSkipPrioritySteps(PreferencesDialog.getUserSkipPrioritySteps());
             logger.debug("connecting (auto): " + proxyType + " " + proxyServer + " " + proxyPort + " " + proxyUsername);
             if (MageFrame.connect(connection)) {  
                 showGames(false);                

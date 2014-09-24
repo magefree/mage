@@ -59,6 +59,9 @@ import mage.abilities.costs.AdjustingSourceCosts;
 import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.AlternativeSourceCosts;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.RestrictionUntapNotMoreThanEffect;
 import mage.abilities.effects.common.LoseControlOnOtherPlayersControllerEffect;
@@ -1977,7 +1980,25 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (alternateSourceCostsAbility instanceof AlternativeSourceCosts) {                     
                         if (((AlternativeSourceCosts)alternateSourceCostsAbility).isAvailable(ability, game)) {
                             if (alternateSourceCostsAbility.getCosts().canPay(ability, playerId, playerId, game)) {
-                                return true;
+                                ManaCostsImpl manaCosts = new ManaCostsImpl();
+                                for(Cost cost:alternateSourceCostsAbility.getCosts()) {
+                                    if (cost instanceof ManaCost) {
+                                       manaCosts.add(cost);
+                                    }
+                                }
+
+                                if (manaCosts.size() == 0) {
+                                    return true;
+                                }
+                                else {
+                                    for (Mana mana: manaCosts.getOptions()) {
+                                        for (Mana avail: available) {
+                                            if (mana.enough(avail)) {
+                                                return true;
+                                            }
+                                        }
+                                    }
+                                }                                
                             }
                         }   
                     }

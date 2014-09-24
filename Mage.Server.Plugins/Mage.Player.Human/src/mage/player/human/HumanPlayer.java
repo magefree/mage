@@ -449,6 +449,11 @@ public class HumanPlayer extends PlayerImpl {
                 pass(game);
                 return false;
             }
+            if (checkPassStep(game) && game.getStack().isEmpty()) {
+                pass(game);
+                return false;
+            }
+            
             updateGameStatePriority("priority", game);
             game.firePriorityEvent(playerId);
             waitForResponse(game);
@@ -488,6 +493,14 @@ public class HumanPlayer extends PlayerImpl {
             return true;
         }
         return false;
+    }
+
+    private boolean checkPassStep(Game game) {
+        if (game.getActivePlayerId().equals(playerId)) {
+            return !this.getUserData().getUserSkipPrioritySteps().getYourTurn().isPhaseStepSet(game.getStep().getType());
+        } else {
+            return !this.getUserData().getUserSkipPrioritySteps().getOpponentTurn().isPhaseStepSet(game.getStep().getType());
+        }
     }
 
     @Override
@@ -558,7 +571,7 @@ public class HumanPlayer extends PlayerImpl {
         game.fireGetAmountEvent(playerId, message, min, max);
         waitForIntegerResponse(game);
         if (response != null && response.getInteger() != null) {
-            xValue =  response.getInteger().intValue();
+            xValue =  response.getInteger();
         }
         return xValue;
     }
@@ -570,7 +583,7 @@ public class HumanPlayer extends PlayerImpl {
         game.fireGetAmountEvent(playerId, message, min, max);
         waitForIntegerResponse(game);
         if (response != null && response.getInteger() != null) {
-            xValue =  response.getInteger().intValue();
+            xValue =  response.getInteger();
         }
         return xValue;
     }

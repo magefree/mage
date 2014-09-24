@@ -62,10 +62,10 @@ import javax.swing.filechooser.FileFilter;
 import mage.client.MageFrame;
 import mage.client.util.Config;
 import mage.client.util.ImageHelper;
-import mage.client.util.PhaseManager;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
+import mage.players.net.UserSkipPrioritySteps;
 import org.apache.log4j.Logger;
 
 /**
@@ -104,9 +104,26 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_BIG_CARD_TOGGLED = "bigCardToggled";
 
 
-    // Size of frame to check if divider locations should be used 
-    public static final String KEY_MAGE_PANEL_LAST_SIZE = "gamepanelLastSize";
+    // Phases
+    public static String UPKEEP_YOU = "upkeepYou";
+    public static String DRAW_YOU = "drawYou";
+    public static String MAIN_YOU = "mainYou";
+    public static String BEFORE_COMBAT_YOU = "beforeCombatYou";
+    public static String END_OF_COMBAT_YOU = "endOfCombatYou";
+    public static String MAIN_2_YOU = "main2You";
+    public static String END_OF_TURN_YOU = "endOfTurnYou";
 
+    public static String UPKEEP_OTHERS = "upkeepOthers";
+    public static String DRAW_OTHERS = "drawOthers";
+    public static String MAIN_OTHERS = "mainOthers";
+    public static String BEFORE_COMBAT_OTHERS = "beforeCombatOthers";
+    public static String END_OF_COMBAT_OTHERS = "endOfCombatOthers";
+    public static String MAIN_2_OTHERS = "main2Others";
+    public static String END_OF_TURN_OTHERS = "endOfTurnOthers";
+
+    // Size of frame to check if divider locations should be used
+    public static final String KEY_MAGE_PANEL_LAST_SIZE = "gamepanelLastSize";
+    
     // positions of divider bars
     public static final String KEY_TABLES_DIVIDER_LOCATION_1 = "tablePanelDividerLocation1";
     public static final String KEY_TABLES_DIVIDER_LOCATION_2 = "tablePanelDividerLocation2";
@@ -188,7 +205,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     public static final String OPEN_CONNECTION_TAB = "Open-Connection-Tab";
 
-    
+    public static String PHASE_ON = "on";
+    public static String PHASE_OFF = "off";
 
     public static final int DEFAULT_AVATAR_ID = 51;
     private static int selectedAvatarId = DEFAULT_AVATAR_ID;
@@ -1355,21 +1373,21 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.cbGameLogAutoSave, KEY_GAME_LOG_AUTO_SAVE, "true", "false", UPDATE_CACHE_POLICY);
 
         // Phases
-        save(prefs, dialog.checkBoxUpkeepYou, PhaseManager.UPKEEP_YOU);
-        save(prefs, dialog.checkBoxDrawYou, PhaseManager.DRAW_YOU);
-        save(prefs, dialog.checkBoxMainYou, PhaseManager.MAIN_YOU);
-        save(prefs, dialog.checkBoxBeforeCYou, PhaseManager.BEFORE_COMBAT_YOU);
-        save(prefs, dialog.checkBoxEndOfCYou, PhaseManager.END_OF_COMBAT_YOU);
-        save(prefs, dialog.checkBoxMain2You, PhaseManager.MAIN_2_YOU);
-        save(prefs, dialog.checkBoxEndTurnYou, PhaseManager.END_OF_TURN_YOU);
+        save(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU);
+        save(prefs, dialog.checkBoxDrawYou, DRAW_YOU);
+        save(prefs, dialog.checkBoxMainYou, MAIN_YOU);
+        save(prefs, dialog.checkBoxBeforeCYou, BEFORE_COMBAT_YOU);
+        save(prefs, dialog.checkBoxEndOfCYou, END_OF_COMBAT_YOU);
+        save(prefs, dialog.checkBoxMain2You, MAIN_2_YOU);
+        save(prefs, dialog.checkBoxEndTurnYou, END_OF_TURN_YOU);
 
-        save(prefs, dialog.checkBoxUpkeepOthers, PhaseManager.UPKEEP_OTHERS);
-        save(prefs, dialog.checkBoxDrawOthers, PhaseManager.DRAW_OTHERS);
-        save(prefs, dialog.checkBoxMainOthers, PhaseManager.MAIN_OTHERS);
-        save(prefs, dialog.checkBoxBeforeCOthers, PhaseManager.BEFORE_COMBAT_OTHERS);
-        save(prefs, dialog.checkBoxEndOfCOthers, PhaseManager.END_OF_COMBAT_OTHERS);
-        save(prefs, dialog.checkBoxMain2Others, PhaseManager.MAIN_2_OTHERS);
-        save(prefs, dialog.checkBoxEndTurnOthers, PhaseManager.END_OF_TURN_OTHERS);
+        save(prefs, dialog.checkBoxUpkeepOthers, UPKEEP_OTHERS);
+        save(prefs, dialog.checkBoxDrawOthers, DRAW_OTHERS);
+        save(prefs, dialog.checkBoxMainOthers, MAIN_OTHERS);
+        save(prefs, dialog.checkBoxBeforeCOthers, BEFORE_COMBAT_OTHERS);
+        save(prefs, dialog.checkBoxEndOfCOthers, END_OF_COMBAT_OTHERS);
+        save(prefs, dialog.checkBoxMain2Others, MAIN_2_OTHERS);
+        save(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
 
         // images
         save(prefs, dialog.cbUseDefaultImageFolder, KEY_CARD_IMAGES_USE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
@@ -1408,7 +1426,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         try {
             MageFrame.getSession().updatePreferencesForServer(
                         getSelectedAvatar(),
-                        dialog.showAbilityPickerForced.isSelected());
+                        dialog.showAbilityPickerForced.isSelected(),
+                        getUserSkipPrioritySteps());
 
             prefs.flush();
         } catch (BackingStoreException ex) {
@@ -1688,21 +1707,21 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void loadPhases(Preferences prefs) {
-        load(prefs, dialog.checkBoxUpkeepYou, PhaseManager.UPKEEP_YOU);
-        load(prefs, dialog.checkBoxDrawYou, PhaseManager.DRAW_YOU);
-        load(prefs, dialog.checkBoxMainYou, PhaseManager.MAIN_YOU);
-        load(prefs, dialog.checkBoxBeforeCYou, PhaseManager.BEFORE_COMBAT_YOU);
-        load(prefs, dialog.checkBoxEndOfCYou, PhaseManager.END_OF_COMBAT_YOU);
-        load(prefs, dialog.checkBoxMain2You, PhaseManager.MAIN_2_YOU);
-        load(prefs, dialog.checkBoxEndTurnYou, PhaseManager.END_OF_TURN_YOU);
+        load(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU);
+        load(prefs, dialog.checkBoxDrawYou, DRAW_YOU);
+        load(prefs, dialog.checkBoxMainYou, MAIN_YOU);
+        load(prefs, dialog.checkBoxBeforeCYou, BEFORE_COMBAT_YOU);
+        load(prefs, dialog.checkBoxEndOfCYou, END_OF_COMBAT_YOU);
+        load(prefs, dialog.checkBoxMain2You, MAIN_2_YOU);
+        load(prefs, dialog.checkBoxEndTurnYou, END_OF_TURN_YOU);
 
-        load(prefs, dialog.checkBoxUpkeepOthers, PhaseManager.UPKEEP_OTHERS);
-        load(prefs, dialog.checkBoxDrawOthers, PhaseManager.DRAW_OTHERS);
-        load(prefs, dialog.checkBoxMainOthers, PhaseManager.MAIN_OTHERS);
-        load(prefs, dialog.checkBoxBeforeCOthers, PhaseManager.BEFORE_COMBAT_OTHERS);
-        load(prefs, dialog.checkBoxEndOfCOthers, PhaseManager.END_OF_COMBAT_OTHERS);
-        load(prefs, dialog.checkBoxMain2Others, PhaseManager.MAIN_2_OTHERS);
-        load(prefs, dialog.checkBoxEndTurnOthers, PhaseManager.END_OF_TURN_OTHERS);
+        load(prefs, dialog.checkBoxUpkeepOthers, UPKEEP_OTHERS);
+        load(prefs, dialog.checkBoxDrawOthers, DRAW_OTHERS);
+        load(prefs, dialog.checkBoxMainOthers, MAIN_OTHERS);
+        load(prefs, dialog.checkBoxBeforeCOthers, BEFORE_COMBAT_OTHERS);
+        load(prefs, dialog.checkBoxEndOfCOthers, END_OF_COMBAT_OTHERS);
+        load(prefs, dialog.checkBoxMain2Others, MAIN_2_OTHERS);
+        load(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
 
         load(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true");
         load(prefs, dialog.showToolTipsInAnyZone, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true");
@@ -1824,6 +1843,31 @@ public class PreferencesDialog extends javax.swing.JDialog {
         return selectedAvatarId;
     }
 
+    public static UserSkipPrioritySteps getUserSkipPrioritySteps() {
+        if (!dialog.isVisible()) {
+            loadPhases(MageFrame.getPreferences());
+        }
+        UserSkipPrioritySteps userSkipPrioritySteps = new UserSkipPrioritySteps();
+        
+        userSkipPrioritySteps.getYourTurn().setUpkeep(dialog.checkBoxUpkeepYou.isSelected());
+        userSkipPrioritySteps.getYourTurn().setDraw(dialog.checkBoxDrawYou.isSelected());
+        userSkipPrioritySteps.getYourTurn().setMain1(dialog.checkBoxMainYou.isSelected());
+        userSkipPrioritySteps.getYourTurn().setBeforeCombat(dialog.checkBoxBeforeCYou.isSelected());
+        userSkipPrioritySteps.getYourTurn().setEndOfCombat(dialog.checkBoxEndOfCYou.isSelected());
+        userSkipPrioritySteps.getYourTurn().setMain2(dialog.checkBoxMain2You.isSelected());
+        userSkipPrioritySteps.getYourTurn().setEndOfTurn(dialog.checkBoxEndTurnYou.isSelected());
+
+        userSkipPrioritySteps.getOpponentTurn().setUpkeep(dialog.checkBoxUpkeepOthers.isSelected());
+        userSkipPrioritySteps.getOpponentTurn().setDraw(dialog.checkBoxDrawOthers.isSelected());
+        userSkipPrioritySteps.getOpponentTurn().setMain1(dialog.checkBoxMainOthers.isSelected());
+        userSkipPrioritySteps.getOpponentTurn().setBeforeCombat(dialog.checkBoxBeforeCOthers.isSelected());
+        userSkipPrioritySteps.getOpponentTurn().setEndOfCombat(dialog.checkBoxEndOfCOthers.isSelected());
+        userSkipPrioritySteps.getOpponentTurn().setMain2(dialog.checkBoxMain2Others.isSelected());
+        userSkipPrioritySteps.getOpponentTurn().setEndOfTurn(dialog.checkBoxEndTurnOthers.isSelected());
+
+        return userSkipPrioritySteps;
+    }
+
     private static void openTab(int index) {
         try {
             if (index > 0) {
@@ -1885,11 +1929,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void load(Preferences prefs, JCheckBox checkBox, String propName) {
-        load(prefs, checkBox, propName, PhaseManager.PHASE_ON);
+        load(prefs, checkBox, propName, PHASE_ON);
     }
 
     private static void save(Preferences prefs, JCheckBox checkBox, String propName) {
-        save(prefs, checkBox, propName, PhaseManager.PHASE_ON, PhaseManager.PHASE_OFF, false);
+        save(prefs, checkBox, propName, PHASE_ON, PHASE_OFF, false);
     }
 
     private static void save(Preferences prefs, JCheckBox checkBox, String propName, String yesValue, String noValue, boolean updateCache) {
@@ -2000,7 +2044,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 public void mousePressed(MouseEvent e) {
                     if (selectedAvatarId != id) {
                         setSelectedId(id);
-                        MageFrame.getSession().updatePreferencesForServer(id, PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_ANY_ZONE, "true").equals("true"));
+                        MageFrame.getSession().updatePreferencesForServer(
+                                id,
+                                PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_ANY_ZONE, "true").equals("true"),
+                                getUserSkipPrioritySteps());
                     }
                 }
             });

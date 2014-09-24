@@ -60,6 +60,7 @@ import mage.interfaces.MageServer;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
 import mage.utils.CompressUtil;
+import mage.players.net.UserSkipPrioritySteps;
 import mage.view.DraftPickView;
 import mage.view.GameTypeView;
 import mage.view.MatchView;
@@ -270,7 +271,9 @@ public class SessionImpl implements Session {
             this.sessionId = callbackClient.getSessionId();
             boolean registerResult;
             if (connection.getPassword() == null) {
-                UserDataView userDataView = new UserDataView(connection.getAvatarId(), connection.isShowAbilityPickerForced());
+                UserDataView userDataView = new UserDataView(connection.getAvatarId(), 
+                        connection.isShowAbilityPickerForced(),
+                        connection.getUserSkipPrioritySteps());
                 // for backward compatibility. don't remove twice call - first one does nothing but for version checking
                 registerResult = server.registerClient(connection.getUsername(), sessionId, client.getVersion());
                 if (registerResult) {
@@ -1303,10 +1306,10 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean updatePreferencesForServer(int avatarId, boolean showAbilityPickerForced) {
+    public boolean updatePreferencesForServer(int avatarId, boolean showAbilityPickerForced, UserSkipPrioritySteps userSkipPrioritySteps) {
         try {
             if (isConnected()) {
-                UserDataView userDataView = new UserDataView(avatarId, showAbilityPickerForced);
+                UserDataView userDataView = new UserDataView(avatarId, showAbilityPickerForced, userSkipPrioritySteps);
                 server.setUserData(connection.getUsername(), sessionId, userDataView);
             }
             return true;

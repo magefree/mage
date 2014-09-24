@@ -44,7 +44,6 @@ import mage.client.plugins.impl.Plugins;
 import mage.client.util.CardsViewUtil;
 import mage.client.util.Config;
 import mage.client.util.GameManager;
-import mage.client.util.PhaseManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.constants.Constants;
 import mage.constants.EnlargeMode;
@@ -735,13 +734,6 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         }
         this.feedbackPanel.getFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), panelOptions, messageId);
-        if (PhaseManager.getInstance().isSkip(gameView, message)) {
-            this.feedbackPanel.doClick();
-            logger.debug(new StringBuilder("Phase skipped: ").append(message).append(" id: ").append(messageId));
-        } else {
-            logger.debug(new StringBuilder("Phase not skipped: ").append(message).append(" id: ").append(messageId));
-        }
-
     }
 
     public void playMana(String message, GameView gameView, int messageId) {

@@ -25,13 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.utils;
+package mage.players.net;
+
+import mage.players.net.SkipPrioritySteps;
 
 /**
  *
  * @author LevelX2
  */
+
 public class UserSkipPrioritySteps {
-    SkipPrioritySteps you;
-    SkipPrioritySteps opponent;    
+    SkipPrioritySteps yourTurn;
+    SkipPrioritySteps opponentTurn;
+
+    public UserSkipPrioritySteps() {
+        yourTurn = new SkipPrioritySteps();
+        opponentTurn = new SkipPrioritySteps();
+    }
+
+    public SkipPrioritySteps getYourTurn() {
+        return yourTurn;
+    }
+
+    public SkipPrioritySteps getOpponentTurn() {
+        return opponentTurn;
+    }
+
 }

@@ -12,12 +12,13 @@ public class UserData implements Serializable {
     protected int groupId;
     protected int avatarId;
     protected boolean showAbilityPickerForced;
-    protected String privateKey;
+    protected UserSkipPrioritySteps userSkipPrioritySteps;
 
-    public UserData(UserGroup userGroup, int avatarId, boolean showAbilityPickerForced) {
+    public UserData(UserGroup userGroup, int avatarId, boolean showAbilityPickerForced, UserSkipPrioritySteps userSkipPrioritySteps) {
         this.groupId = userGroup.getGroupId();
         this.avatarId = avatarId;
         this.showAbilityPickerForced = showAbilityPickerForced;
+        this.userSkipPrioritySteps = userSkipPrioritySteps;
     }
 
     public void setGroupId(int groupId) {
@@ -42,6 +43,14 @@ public class UserData implements Serializable {
 
     public void setShowAbilityPickerForced(boolean showAbilityPickerForced) {
         this.showAbilityPickerForced = showAbilityPickerForced;
+    }
+
+    public UserSkipPrioritySteps getUserSkipPrioritySteps() {
+        return userSkipPrioritySteps;
+    }
+
+    public void setUserSkipPrioritySteps(UserSkipPrioritySteps userSkipPrioritySteps) {
+        this.userSkipPrioritySteps = userSkipPrioritySteps;
     }
     
 }

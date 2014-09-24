@@ -34,6 +34,7 @@ import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
+import mage.players.net.UserSkipPrioritySteps;
 
 /**
  *
@@ -53,6 +54,7 @@ public class Connection {
 
     private int avatarId;
     private boolean showAbilityPickerForced;
+    private UserSkipPrioritySteps userSkipPrioritySteps;
 
     private static final String serialization = "?serializationtype=jboss";
     private static final String transport = "bisocket";
@@ -217,6 +219,14 @@ public class Connection {
 
     public void setShowAbilityPickerForced(boolean showAbilityPickerForced) {
         this.showAbilityPickerForced = showAbilityPickerForced;
+    }
+
+    public UserSkipPrioritySteps getUserSkipPrioritySteps() {
+        return userSkipPrioritySteps;
+    }
+
+    public void setUserSkipPrioritySteps(UserSkipPrioritySteps userSkipPrioritySteps) {
+        this.userSkipPrioritySteps = userSkipPrioritySteps;
     }
 
 }

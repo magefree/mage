@@ -3,6 +3,7 @@ package mage.view;
 import mage.players.net.UserData;
 
 import java.io.Serializable;
+import mage.players.net.UserSkipPrioritySteps;
 
 /**
  * Transfer object for {@link mage.players.net.UserData}
@@ -14,10 +15,12 @@ public class UserDataView implements Serializable {
     protected int avatarId;
     protected int userGroup;
     protected boolean showAbilityPickerForced;
+    protected UserSkipPrioritySteps userSkipPrioritySteps;
 
-    public UserDataView(int avatarId, boolean showAbilityPickerForced) {
+    public UserDataView(int avatarId, boolean showAbilityPickerForced, UserSkipPrioritySteps userSkipPrioritySteps) {
         this.avatarId = avatarId;
         this.showAbilityPickerForced = showAbilityPickerForced;
+        this.userSkipPrioritySteps = userSkipPrioritySteps;
     }
 
     public UserDataView(UserData userData) {
@@ -31,6 +34,10 @@ public class UserDataView implements Serializable {
 
     public boolean isShowAbilityPickerForced() {
         return showAbilityPickerForced;
+    }
+
+    public UserSkipPrioritySteps getUserSkipPrioritySteps() {
+        return userSkipPrioritySteps;
     }
     
 }

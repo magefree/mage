@@ -25,7 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.utils;
+package mage.players.net;
+
+import mage.constants.PhaseStep;
 
 /**
  *
@@ -95,6 +97,26 @@ public class SkipPrioritySteps {
     public void setEndOfTurn(boolean endOfTurn) {
         this.endOfTurn = endOfTurn;
     }
-    
+
+    public boolean isPhaseStepSet(PhaseStep phaseStep) {
+        switch(phaseStep) {
+            case UPKEEP:
+                return isUpkeep();
+            case DRAW:
+                return isDraw();
+            case PRECOMBAT_MAIN:
+                return isMain1();
+            case BEGIN_COMBAT:
+                return isBeforeCombat();
+            case END_COMBAT:
+                return isEndOfCombat();
+            case POSTCOMBAT_MAIN:
+                return isMain2();
+            case END_TURN:
+                return isEndOfTurn();
+            default:
+                return true;
+        }
+    }
     
 }

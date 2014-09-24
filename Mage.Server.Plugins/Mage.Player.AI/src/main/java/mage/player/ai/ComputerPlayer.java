@@ -96,7 +96,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     public ComputerPlayer(String name, RangeOfInfluence range) {
         super(name, range);
         human = false;
-        userData = new UserData(UserGroup.COMPUTER, 64, false);
+        userData = new UserData(UserGroup.COMPUTER, 64, false, null);
         pickedCards = new ArrayList<>();
     }
 
@@ -1365,7 +1365,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
         log.debug("chooseMode");
-        if (modes.getMode() != null) {
+        if (modes.getMode() != null && modes.getMaxModes() == modes.getSelectedModes().size()) {
             // mode was already set by the AI
             return modes.getMode();
         }
