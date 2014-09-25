@@ -108,6 +108,8 @@ class GenesisHydraEntersBattlefieldEffect extends OneShotEffect {
         if (permanent != null) {
             Object obj = getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
             if (obj != null && obj instanceof SpellAbility) {
+                // delete to prevent using it again if put into battlefield from other effect
+                setValue(mage.abilities.effects.EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY, null);
                 SpellAbility spellAbility = (SpellAbility) obj;
                 if (spellAbility.getSourceId().equals(source.getSourceId())) { // put into play by normal cast
                     int amount = spellAbility.getManaCostsToPay().getX();

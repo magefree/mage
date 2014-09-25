@@ -106,6 +106,8 @@ class ManaBloomEffect extends OneShotEffect {
         if (permanent != null) {
             Object obj = getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
             if (obj != null && obj instanceof SpellAbility) {
+                // delete to prevent using it again if put into battlefield from other effect
+                setValue(mage.abilities.effects.EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY, null);
                 int amount = ((SpellAbility) obj).getManaCostsToPay().getX();
                 if (amount > 0) {
                     permanent.addCounters(CounterType.CHARGE.createInstance(amount), game);
