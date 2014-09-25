@@ -109,6 +109,7 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
@@ -2469,7 +2470,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
         boolean result = false;
         if (card.moveToZone(Zone.HAND, sourceId, game, false)) {
-            if (card instanceof Permanent) {
+            if (card instanceof PermanentCard) {
                 card = game.getCard(card.getId());
             }            
             game.informPlayers(new StringBuilder(this.getName())
@@ -2485,7 +2486,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public boolean moveCardToGraveyardWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
         boolean result = false;
         if (card.moveToZone(Zone.GRAVEYARD, sourceId, game, fromZone != null ? fromZone.equals(Zone.BATTLEFIELD) : false)) {
-            if (card instanceof Permanent) {
+            if (card instanceof PermanentCard) {
                 card = game.getCard(card.getId());
             }            
             StringBuilder sb = new StringBuilder(this.getName())
@@ -2506,7 +2507,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public boolean moveCardToLibraryWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean toTop, boolean withName) {
         boolean result = false;
         if (card.moveToZone(Zone.LIBRARY, sourceId, game, toTop)) {
-            if (card instanceof Permanent) {
+            if (card instanceof PermanentCard) {
                 card = game.getCard(card.getId());
             }            
             StringBuilder sb = new StringBuilder(this.getName())
@@ -2537,7 +2538,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, UUID sourceId, Game game, Zone fromZone) {
         boolean result = false;
         if (card.moveToExile(exileId, exileName, sourceId, game)) {
-            if (card instanceof Permanent) {
+            if (card instanceof PermanentCard) {
                 card = game.getCard(card.getId());
             }
             game.informPlayers(new StringBuilder(this.getName())
