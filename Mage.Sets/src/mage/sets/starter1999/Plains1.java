@@ -36,7 +36,7 @@ import java.util.UUID;
 public class Plains1 extends mage.cards.basiclands.Plains {
 
     public Plains1(UUID ownerId) {
-        super(ownerId, 166);
+        super(ownerId, 154);
         this.expansionSetCode = "S99";
     }
 
