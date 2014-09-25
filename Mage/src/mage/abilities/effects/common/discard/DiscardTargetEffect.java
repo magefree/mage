@@ -27,7 +27,6 @@
  */
 package mage.abilities.effects.common.discard;
 
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -35,6 +34,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -115,6 +115,9 @@ public class DiscardTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         if(mode.getTargets().isEmpty()){
             sb.append("that player");

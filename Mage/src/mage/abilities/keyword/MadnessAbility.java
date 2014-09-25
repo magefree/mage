@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -11,13 +12,15 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
-import mage.constants.*;
+import mage.constants.AsThoughEffectType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.watchers.Watcher;
-
-import java.util.UUID;
 
 /**
  * 702.33. Madness
@@ -136,6 +139,7 @@ class MadnessTriggeredAbility extends TriggeredAbilityImpl {
 
     MadnessTriggeredAbility() {
         super(Zone.GRAVEYARD, new MadnessExileEffect(), true);
+        this.setRuleVisible(false);
     }
 
     MadnessTriggeredAbility(final MadnessTriggeredAbility ability) {
