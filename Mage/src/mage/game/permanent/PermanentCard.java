@@ -129,10 +129,10 @@ public class PermanentCard extends PermanentImpl {
 
     @Override
     public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects) {
-        Zone fromZone = game.getState().getZone(objectId);
+        Zone fromZone = game.getState().getZone(objectId);        
         Player controller = game.getPlayer(controllerId);
         if (controller != null && controller.removeFromBattlefield(this, game)) {
-            if (isFaceDown()) {
+            if (isFaceDown() && isMorphCard()) {
                 setFaceDown(false);
                 game.getCard(this.getId()).setFaceDown(false); //TODO: Do this in a better way
             }
@@ -183,6 +183,10 @@ public class PermanentCard extends PermanentImpl {
     @Override
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
+        if (isMorphCard() && isFaceDown()) {
+            setFaceDown(false);
+            game.getCard(this.getId()).setFaceDown(false); //TODO: Do this in a better way
+        }
         Player controller = game.getPlayer(controllerId);
         if (controller != null && controller.removeFromBattlefield(this, game)) {
             ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, ownerId, fromZone, Zone.EXILED, appliedEffects);

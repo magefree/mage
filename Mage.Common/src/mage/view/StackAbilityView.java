@@ -35,6 +35,7 @@ import mage.MageObject;
 import mage.abilities.Modes;
 import mage.abilities.effects.Effect;
 import mage.constants.AbilityType;
+import mage.constants.CardType;
 import mage.constants.MageObjectType;
 import mage.game.Game;
 import mage.game.stack.StackAbility;
@@ -58,16 +59,37 @@ public class StackAbilityView extends CardView {
         this.sourceCard = sourceCard;
         this.sourceCard.setMageObjectType(mageObjectType);
         this.name = "Ability";
-        this.rules = new ArrayList<>();
-        rules.add(ability.getRule(sourceName));
-        this.power = ability.getPower().toString();
-        this.toughness = ability.getToughness().toString();
         this.loyalty = "";
+
         this.cardTypes = ability.getCardType();
         this.subTypes = ability.getSubtype();
         this.superTypes = ability.getSupertype();
         this.color = ability.getColor();
         this.manaCost = ability.getManaCost().getSymbols();
+        this.cardTypes = ability.getCardType();
+        this.subTypes = ability.getSubtype();
+        this.superTypes = ability.getSupertype();
+        this.color = ability.getColor();
+        this.manaCost = ability.getManaCost().getSymbols();
+        this.power = ability.getPower().toString();
+        this.toughness = ability.getToughness().toString();                   
+        String nameToShow;
+        if (sourceCard.isMorphCard() && sourceCard.isFaceDown()) {
+            CardView tmpSourceCard = this.getSourceCard();
+            tmpSourceCard.displayName =  "Face Down";
+            tmpSourceCard.superTypes.clear();
+            tmpSourceCard.subTypes.clear();
+            tmpSourceCard.cardTypes.clear();
+            tmpSourceCard.cardTypes.add(CardType.CREATURE);
+            tmpSourceCard.manaCost.clear();
+            tmpSourceCard.power = "2";
+            tmpSourceCard.toughness = "2";
+            nameToShow = "creature without name";
+        } else {         
+            nameToShow = sourceName;
+        }
+        this.rules = new ArrayList<>();
+        rules.add(ability.getRule(nameToShow));
         this.counters = sourceCard.getCounters();
 
         updateTargets(game, ability);
@@ -117,6 +139,7 @@ public class StackAbilityView extends CardView {
         return this.sourceCard;
     }
 
+    @Override
     public AbilityType getAbilityType() {
         return abilityType;
     }

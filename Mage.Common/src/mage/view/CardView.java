@@ -50,6 +50,7 @@ import mage.target.Targets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.game.permanent.PermanentCard;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -86,7 +87,8 @@ public class CardView extends SimpleCardView {
     protected boolean transformed;
 
     protected boolean flipCard;
-
+    protected boolean morphCard;
+    
     protected String alternateName;
     protected String originalName;
 
@@ -130,14 +132,14 @@ public class CardView extends SimpleCardView {
      */
     public CardView(Card card, UUID cardId, boolean controlled) {
         super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown(), card.getUsesVariousArt(), card.getTokenSetCode());
-
+        this.morphCard = card.isMorphCard();
         // no information available for face down cards as long it's not a controlled face down morph card
         // TODO: Better handle this in Framework (but currently I'm not sure how to do it there) LevelX2
         if (card.isFaceDown()) {            
             if (card.isMorphCard()) {
                 // special handling for Morph cards
                 this.fillEmpty(card, controlled);
-                if (card instanceof Spell) {
+                if (card instanceof Spell /*|| card instanceof Card*/) {
                     if (controlled) {
                         this.name = card.getName();
                         this.displayName = card.getName();
@@ -214,6 +216,7 @@ public class CardView extends SimpleCardView {
         this.canTransform = card.canTransform();
         this.flipCard = card.isFlipCard();
 
+        
         if (card instanceof PermanentToken) {
             this.isToken = true;
             this.mageObjectType = MageObjectType.TOKEN;
@@ -668,6 +671,10 @@ public class CardView extends SimpleCardView {
 
     public boolean isFlipCard() {
         return flipCard;
+    }
+
+    public boolean isMorphCard() {
+        return morphCard;
     }
 
     public boolean isToRotate() {

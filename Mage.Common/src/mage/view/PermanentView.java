@@ -30,7 +30,6 @@ package mage.view;
 
 import mage.abilities.Ability;
 import mage.abilities.common.TurnFaceUpAbility;
-import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.cards.Card;
 import mage.constants.Rarity;
 import mage.game.Game;
@@ -59,7 +58,7 @@ public class PermanentView extends CardView {
     private final boolean copy;
     private final String nameOwner; // only filled if != controller
     private final boolean controlled;
-    private UUID attachedTo;
+    private final UUID attachedTo;
 
     public PermanentView(Permanent permanent, Card card, UUID createdForPlayerId, Game game) {
         super(permanent, null, permanent.getControllerId().equals(createdForPlayerId));
@@ -79,8 +78,7 @@ public class PermanentView extends CardView {
             original = new CardView(((PermanentToken)permanent).getToken());
             original.expansionSetCode = permanent.getExpansionSetCode();
             tokenSetCode = original.getTokenSetCode();
-        }
-        else {
+        } else {
             if (card != null) {
                 original = new CardView(card);
             } else {
@@ -96,8 +94,10 @@ public class PermanentView extends CardView {
                 this.alternateName = permanent.getFlipCardName();
                 this.originalName = this.getName();
             } else {
-                this.alternateName = original.getName();
-                this.originalName = this.getName();
+                if (!this.isMorphCard() || controlled) {
+                    this.alternateName = original.getName();
+                    this.originalName = this.getName();
+                }
             }
         }
         if (!permanent.getOwnerId().equals(permanent.getControllerId())) {
@@ -130,7 +130,6 @@ public class PermanentView extends CardView {
                     this.rules.add("If the controller has priority, he or she may turn this permanent face up." +
                         " This is a special action; it doesnt use the stack. To do this he or she pays the morph costs," +
                         " then turns this permanent face up.");
-                    this.rarity = Rarity.COMMON;
                 }
 
             }

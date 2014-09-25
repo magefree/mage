@@ -274,8 +274,8 @@ public class GuiDisplayUtil {
 //                        legal = legal.replaceAll("#([^#]+)#", "<i>$1</i>");
 //                        legal = legal.replaceAll("\\s*//\\s*", "<hr width='50%'>");
 //                        legal = legal.replace("\r\n", "<div style='font-size:5pt'></div>");
-            legal = legal.replaceAll("\\{this\\}", card.getName());
-            legal = legal.replaceAll("\\{source\\}", card.getName());
+            legal = legal.replaceAll("\\{this\\}", card.getName().isEmpty() ? "this":card.getName());
+            legal = legal.replaceAll("\\{source\\}", card.getName().isEmpty() ? "this":card.getName());
             buffer.append(ManaSymbols.replaceSymbolsWithHTML(legal, ManaSymbols.Type.CARD));
         }
 

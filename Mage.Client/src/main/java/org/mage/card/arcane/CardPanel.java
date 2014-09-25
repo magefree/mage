@@ -50,9 +50,7 @@ import org.apache.log4j.Logger;
 import org.mage.card.arcane.ScaledImagePanel.MultipassType;
 import org.mage.card.arcane.ScaledImagePanel.ScalingType;
 import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
-import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.images.ImageCache;
-import org.mage.plugins.card.utils.CardImageUtils;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 /**
@@ -306,18 +304,10 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                     }
                     BufferedImage srcImage;
                     if (gameCard.isFaceDown()) {
-                        boolean morphedCard = false;
-                        for (String rule:gameCard.getRules()) {
-                            if (rule.startsWith("Morph ") ||
-                                    rule.equals("You may cast this card as a 2/2 face-down creature, with no text, no name, no subtypes, and no mana cost by paying {3} rather than paying its mana cost.")) {
-                                morphedCard = true;
-                            }
-                        }
-                        if (morphedCard) {
+                        if (gameCard.isMorphCard()) {
                             srcImage = ImageCache.getMorphImage();
                         }else {
-                            TFile file = new TFile(DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename);
-                            srcImage = ImageCache.loadImage(file);
+                            srcImage = ImageCache.loadImage(new TFile(DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename));
                         }
                     } else {
                         srcImage = ImageCache.getImage(gameCard, getCardWidth(), getCardHeight());
@@ -909,11 +899,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     public boolean contains(int x, int y) {
-        if (containsThis(x, y, true)) {
-            return true;
-        }
-
-        return false;
+        return containsThis(x, y, true);
     }
 
     public boolean containsThis(int x, int y, boolean root) {
@@ -929,10 +915,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             cw = getCardHeight();
         }
 
-        if (x >= cx && x <= cx + cw && y >= cy && y <= cy + ch) {
-            return true;
-        }
-        return false;
+        return x >= cx && x <= cx + cw && y >= cy && y <= cy + ch;
     }
 
     @Override
@@ -943,7 +926,11 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     @Override
     public Image getImage() {
         if (this.hasImage) {
-            return ImageCache.getImageOriginal(gameCard);
+            if (gameCard.isMorphCard() && gameCard.isFaceDown()) {
+                return ImageCache.getMorphImage();
+            } else {
+                return ImageCache.getImageOriginal(gameCard);
+            }
         }
         return null;
     }
