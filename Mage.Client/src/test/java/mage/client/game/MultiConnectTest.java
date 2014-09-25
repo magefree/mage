@@ -70,7 +70,7 @@ public class MultiConnectTest {
         }
 
         @Override
-        public void disconnected() {
+        public void disconnected(boolean errorCall) {
             logger.info("disconnected");
         }
 
@@ -106,11 +106,13 @@ public class MultiConnectTest {
 
     private void connect(final int index) throws Exception {
         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            @Override
             public void uncaughtException(Thread t, Throwable e) {
                 logger.fatal(null, e);
             }
         });
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 String username = "player" + index;
                 ClientMock client = new ClientMock(username);

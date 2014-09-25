@@ -34,6 +34,7 @@ import java.net.MalformedURLException;
 import java.net.PasswordAuthentication;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -310,7 +311,12 @@ public class SessionImpl implements Session {
             logger.fatal("Unable to connect to server - ", t);
             if (!canceled) {
                 disconnect(false);
-                client.showMessage("Unable to connect to server.  "  + t.getMessage());
+                StringBuilder sb = new StringBuilder();
+                sb.append("Unable to connect to server.\n");
+                for (StackTraceElement element :t.getStackTrace()) {
+                    sb.append(element.toString()).append("\n");
+                }
+                client.showMessage(sb.toString());
             }
         }
         return false;
@@ -368,7 +374,7 @@ public class SessionImpl implements Session {
         if (sessionState == SessionState.DISCONNECTING || sessionState == SessionState.CONNECTING) {
             sessionState = SessionState.DISCONNECTED;
             logger.info("Disconnected ... ");
-            client.disconnected();
+            client.disconnected(errorCall);
             if (errorCall) {
                 client.showError("Network error.  You have been disconnected");
             }

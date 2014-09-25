@@ -263,7 +263,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     }
 
     @Override
-    public void disconnected() {
+    public void disconnected(boolean errorCall) {
         if (SwingUtilities.isEventDispatchThread()) {
             consolePanel1.stop();
             setStatusText("Not connected");

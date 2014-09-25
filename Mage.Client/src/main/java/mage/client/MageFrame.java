@@ -1224,7 +1224,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     @Override
-    public void disconnected() {
+    public void disconnected(final boolean errorCall) {
         if (SwingUtilities.isEventDispatchThread()) {
             setStatusText("Not connected");
             disableButtons();
@@ -1238,13 +1238,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                     disableButtons();
                     hideGames();
                     hideTables();
-                    if (JOptionPane.showConfirmDialog(MageFrame.this, "The connection to server was lost. Reconnect?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                        // session.disconnect(false);
-                        // tablesPane.clearChat();
+                    if (errorCall && JOptionPane.showConfirmDialog(MageFrame.this, "The connection to server was lost. Reconnect?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                         if (performConnect()) {
                             enableButtons();
                         }
-//                    } else {
                     }
                 }
             });

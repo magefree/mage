@@ -38,7 +38,7 @@ public class SimpleMageClient implements MageClient {
     }
 
     @Override
-    public void disconnected() {
+    public void disconnected(boolean errorCall) {
         // do nothing
     }
 
