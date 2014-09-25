@@ -30,9 +30,7 @@ package mage.abilities.effects;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
@@ -69,7 +67,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     protected boolean discarded = false; // for manual effect discard
     protected boolean affectedObjectsSet = false;
     protected List<UUID> objects = new ArrayList<>();
-    protected Map<UUID, Integer> metadata = new HashMap<>();
+    // protected Map<UUID, Integer> metadata = new HashMap<>();
     // until your next turn
     protected int startingTurn;
     protected UUID startingControllerId;
@@ -97,6 +95,8 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.discarded = effect.discarded;
         this.affectedObjectsSet = effect.affectedObjectsSet;
         this.objects.addAll(effect.objects);
+        this.startingTurn = effect.startingTurn;
+        this.startingControllerId = effect.startingControllerId;
     }
 
     @Override
