@@ -39,8 +39,14 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 public class KarmicJusticeTest extends CardTestPlayerBase {
 
+    /*
+    Karmic Justice
+    Whenever a spell or ability an opponent controls destroys a noncreature permanent you control, 
+    you may destroy target permanent that opponent controls.
+    */
+    
     /**
-     * Karmic Justice triggers for its own destroyment
+     * Karmic Justice should triggers for its own destroyment
      */
     @Test
     public void testFirstTriggeredAbility() {
@@ -59,6 +65,43 @@ public class KarmicJusticeTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Naturalize", 1);
         assertGraveyardCount(playerA, "Karmic Justice", 1);
         assertPermanentCount(playerB, "Forest", 1);
+
+    }
+
+    /**
+     * Karmic Justice should triggers for each destroyed permanent
+     */
+    @Test
+    public void testMultiplePermanentsDestroyedTriggeredAbility() {
+        // At the beginning of each upkeep, if you lost life last turn, put a 1/1 white Soldier creature token onto the battlefield.
+        addCard(Zone.BATTLEFIELD, playerA, "First Response",2);
+        addCard(Zone.BATTLEFIELD, playerA, "Karmic Justice");
+
+        // Planar Cleansing {3}{W}{W}{W}
+        // Sorcery
+        // Destroy all nonland permanents.
+        addCard(Zone.HAND, playerB, "Planar Cleansing");
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 4);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Planar Cleansing");
+        setChoice(playerA, "Yes");
+        addTarget(playerA, "Plains");
+        setChoice(playerA, "Yes");
+        addTarget(playerA, "Swamp");
+        setChoice(playerA, "Yes");
+        addTarget(playerA, "Mountain");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, "Planar Cleansing", 1);
+        assertGraveyardCount(playerA, "Karmic Justice", 1);
+        assertGraveyardCount(playerA, "First Response", 2);
+        assertGraveyardCount(playerB, "Mountain", 1);
+        assertGraveyardCount(playerB, "Swamp", 1);
+        assertGraveyardCount(playerB, "Plains", 1);
 
     }
 

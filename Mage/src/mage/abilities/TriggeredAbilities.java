@@ -37,6 +37,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 
 import java.util.*;
+import mage.game.events.GameEvent.EventType;
 
 
 /**
@@ -61,8 +62,8 @@ public class TriggeredAbilities extends HashMap<String, TriggeredAbility> {
     public void checkTriggers(GameEvent event, Game game) {
         for (Iterator<TriggeredAbility> it = this.values().iterator(); it.hasNext();) {
             TriggeredAbility ability = it.next();
-            // for effects like when leaves battlefield use ShortLKI to check if permanent was in the correct zone before (e.g. Oblivion Ring)
-            if (ability.isInUseableZone(game, null, event.getType().equals(GameEvent.EventType.ZONE_CHANGE))) {
+            // for effects like when leaves battlefield or destroyed use ShortLKI to check if permanent was in the correct zone before (e.g. Oblivion Ring or Karmic Justice)
+            if (ability.isInUseableZone(game, null, event.getType().equals(EventType.ZONE_CHANGE) || event.getType().equals(EventType.DESTROYED_PERMANENT))) {
                 if (!game.getContinuousEffects().preventedByRuleModification(event, ability, game, false)) {
 
                     MageObject object = null;
@@ -89,7 +90,7 @@ public class TriggeredAbilities extends HashMap<String, TriggeredAbility> {
             }
         }
     }
-
+  
     private boolean checkAbilityStillExists(TriggeredAbility ability, GameEvent event, MageObject object) {
         boolean exists = true;
         if (!object.getAbilities().contains(ability)) {
