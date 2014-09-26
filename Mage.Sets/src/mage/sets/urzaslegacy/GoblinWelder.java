@@ -137,6 +137,9 @@ public class GoblinWelder extends CardImpl {
         @Override
         public boolean canTarget(UUID id, Ability source, Game game) {
             Permanent artifact = game.getPermanent(source.getFirstTarget());
+            if (artifact == null) {
+                return false;
+            }
             Player player = game.getPlayer(artifact.getControllerId());
             Card card = game.getCard(id);
             if (card != null && player != null && player.getGraveyard().contains(id)) {
