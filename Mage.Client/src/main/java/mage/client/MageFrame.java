@@ -976,13 +976,19 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public void showGames(boolean setActive) {        
-        MagePane topPane = getTopMost(tablesPane);
-        this.tablesPane.setVisible(true);
-        this.tablesPane.showTables();
-        setActive(tablesPane);
-        if (!setActive && topPane != null) {            
-            setActive(topPane);
+        MagePane topPanebefore = getTopMost(tablesPane);
+        if (!tablesPane.isVisible()) {
+            this.tablesPane.setVisible(true);
+            this.tablesPane.showTables();
         }
+        if (setActive) {
+            setActive(tablesPane);
+        } else {
+            // if other panel was already shown, mamke sure it's topmost again
+            if (topPanebefore != null) {
+                setActive(topPanebefore);
+            }
+        }        
     }
     
     public void hideGames() {
