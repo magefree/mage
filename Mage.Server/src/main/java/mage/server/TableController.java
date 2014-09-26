@@ -420,7 +420,7 @@ public class TableController {
                     if (table.isTournament()) {
                         logger.debug("Quit tournament sub tables for userId: " + userId);
                         TableManager.getInstance().userQuitTournamentSubTables(tournament.getId(), userId);
-                        logger.debug("Quit tournament  Id: " + table.getTournament().getId());
+                        logger.debug("Quit tournament  Id: " + table.getTournament().getId() + "(" +table.getTournament().getTournamentState() + ")");
                         TournamentManager.getInstance().quit(tournament.getId(), userId);
                     } else {
                         MatchPlayer matchPlayer = match.getPlayer(playerId);

@@ -173,12 +173,12 @@ public class UserManager {
      * Is the connection lost for more than 3 minutes, the user will be removed (within 3 minutes the user can reconnect)
      */
     private void checkExpired() {
-        Calendar expired = Calendar.getInstance();
-        expired.add(Calendar.MINUTE, -3);
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MINUTE, -3);
         List<User> usersToCheck = new ArrayList<>();
         usersToCheck.addAll(users.values());
         for (User user : usersToCheck) {
-            if (user.isExpired(expired.getTime())) {
+            if (user.isExpired(calendar.getTime())) {
                 logger.info(new StringBuilder(user.getName()).append(": session expired userId: ").append(user.getId())
                         .append(" Host: ").append(user.getHost()));
                 removeUser(user.getId(), DisconnectReason.SessionExpired);

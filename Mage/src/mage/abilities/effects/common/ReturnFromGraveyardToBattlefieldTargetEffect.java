@@ -70,23 +70,22 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean result = false;
-        for (UUID targetId: getTargetPointer().getTargets(game, source)) {
-            Card card = game.getCard(targetId);
-            if (card != null) {
-                Player player = game.getPlayer(source.getControllerId());
-                if (player != null) {
-                    if (player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId(), tapped)){
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            for (UUID targetId : getTargetPointer().getTargets(game, source)) {
+                Card card = game.getCard(targetId);
+                if (card != null) {
+                    if (player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId(), tapped)) {
                         Permanent permanent = game.getPermanent(source.getSourceId());
                         if (permanent != null) {
                             permanent.changeControllerId(source.getControllerId(), game);
-                            result = true;
                         }
                     }
                 }
             }
+            return true;
         }
-        return result;
+        return false;
     }
 
     @Override

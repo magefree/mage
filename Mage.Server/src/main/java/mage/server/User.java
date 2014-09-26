@@ -60,7 +60,7 @@ public class User {
     private static final Logger logger = Logger.getLogger(User.class);
 
     public enum UserState {
-        Created, Connected, Disconnected, Reconnected;
+        Created, Connected, Disconnected, Reconnected, Expired;
     }
 
     private final UUID userId;
@@ -252,6 +252,7 @@ public class User {
     public boolean isExpired(Date expired) {
         if (lastActivity.before(expired)) {
             logger.debug(userName + " is expired!");
+            userState = UserState.Expired;
             return true;
         }
         logger.trace(new StringBuilder("isExpired: User ").append(userName).append(" lastActivity: ").append(lastActivity).append(" expired: ").append(expired).toString());
