@@ -79,6 +79,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     
     public static final String KEY_SHOW_TOOLTIPS_ANY_ZONE = "showTooltipsInAnyZone";
     public static final String KEY_HAND_USE_BIG_CARDS = "handUseBigCards";
+    public static final String KEY_SHOW_CARD_NAMES = "showCardNames";
     public static final String KEY_PERMANENTS_IN_ONE_PILE = "nonLandPermanentsInOnePile";
     public static final String KEY_SHOW_PLAYER_NAMES_PERMANENTLY = "showPlayerNamesPermanently";
     public static final String KEY_SHOW_ABILITY_PICKER_FORCED = "showAbilityPicker";
@@ -300,6 +301,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         main_card = new javax.swing.JPanel();
         displayBigCardsInHand = new javax.swing.JCheckBox();
         showToolTipsInAnyZone = new javax.swing.JCheckBox();
+        showCardName = new javax.swing.JCheckBox();
         main_game = new javax.swing.JPanel();
         nonLandPermanentsInOnePile = new javax.swing.JCheckBox();
         showPlayerNamesPermanently = new javax.swing.JCheckBox();
@@ -421,6 +423,18 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
         main_card.add(showToolTipsInAnyZone, java.awt.BorderLayout.CENTER);
 
+        showCardName.setSelected(true);
+        showCardName.setText("Show card name on card panel");
+        showCardName.setToolTipText("Write the card's name on the card to make the card name more recognizable.");
+        showCardName.setActionCommand("");
+        showCardName.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        showCardName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showCardNameActionPerformed(evt);
+            }
+        });
+        main_card.add(showCardName, java.awt.BorderLayout.PAGE_END);
+
         main_game.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Game"));
         main_game.setLayout(new java.awt.BorderLayout());
 
@@ -477,7 +491,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(tabMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(main_card, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(main_game, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+                    .addComponent(main_game, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(main_gamelog, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -485,12 +499,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
             tabMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(main_card, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(main_card, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(main_game, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(main_gamelog, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         main_card.getAccessibleContext().setAccessibleName("Game panel");
@@ -830,7 +844,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addComponent(panelCardImages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelBackgroundImages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Images", tabImages);
@@ -1365,8 +1379,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         Preferences prefs = MageFrame.getPreferences();
 
         // main
-        save(prefs, dialog.showToolTipsInAnyZone, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.showCardName, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.showCardName, KEY_SHOW_CARD_NAMES, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.showPlayerNamesPermanently, KEY_SHOW_PLAYER_NAMES_PERMANENTLY, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.showAbilityPickerForced, KEY_SHOW_ABILITY_PICKER_FORCED, "true", "false", UPDATE_CACHE_POLICY);
@@ -1630,9 +1645,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     }//GEN-LAST:event_displayBigCardsInHandActionPerformed
 
-    private void showToolTipsInAnyZoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showToolTipsInAnyZoneActionPerformed
+    private void showCardNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showCardNameActionPerformed
 
-    }//GEN-LAST:event_showToolTipsInAnyZoneActionPerformed
+    }//GEN-LAST:event_showCardNameActionPerformed
 
     private void showAbilityPickerForcedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showAbilityPickerForcedActionPerformed
         // TODO add your handling code here:
@@ -1641,6 +1656,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private void cbEnableOtherSoundsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEnableOtherSoundsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbEnableOtherSoundsActionPerformed
+
+    private void showToolTipsInAnyZoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showToolTipsInAnyZoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_showToolTipsInAnyZoneActionPerformed
 
     private void showProxySettings() {
         if (cbProxyType.getSelectedItem() == Connection.ProxyType.SOCKS) {
@@ -1724,7 +1743,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
 
         load(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true");
-        load(prefs, dialog.showToolTipsInAnyZone, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true");
+        load(prefs, dialog.showCardName, KEY_SHOW_CARD_NAMES, "true");
+        load(prefs, dialog.showCardName, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true");
         load(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true");
         load(prefs, dialog.showPlayerNamesPermanently, KEY_SHOW_PLAYER_NAMES_PERMANENTLY, "true");
         load(prefs, dialog.showAbilityPickerForced, KEY_SHOW_ABILITY_PICKER_FORCED, "true");
@@ -2134,6 +2154,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox rememberPswd;
     private javax.swing.JButton saveButton;
     private javax.swing.JCheckBox showAbilityPickerForced;
+    private javax.swing.JCheckBox showCardName;
     private javax.swing.JCheckBox showPlayerNamesPermanently;
     private javax.swing.JCheckBox showToolTipsInAnyZone;
     private javax.swing.JPanel sounds_backgroundMusic;

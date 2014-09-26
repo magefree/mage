@@ -31,6 +31,7 @@ import mage.cards.MagePermanent;
 import mage.cards.TextPopup;
 import mage.cards.action.ActionCallback;
 import mage.cards.action.TransferData;
+import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.ImageHelper;
@@ -259,6 +260,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         addMouseMotionListener(this);
         addMouseWheelListener(this);
 
+        displayTitleAnyway = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_ANY_ZONE, "true").equals("true");
         titleText = new GlowText();
         setText(gameCard);
         titleText.setFont(getFont().deriveFont(Font.BOLD, 13f));
@@ -266,7 +268,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         titleText.setGlow(Color.black, TEXT_GLOW_SIZE, TEXT_GLOW_INTENSITY);
         titleText.setWrap(true);
         add(titleText);
-
+        
         ptText = new GlowText();
         if (CardUtil.isCreature(gameCard)) {
             ptText.setText(gameCard.getPower() + "/" + gameCard.getToughness());
@@ -580,8 +582,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         ptText.setVisible(showText);
 
         int titleX = Math.round(cardWidth * (20f / 480));
-        int titleY = Math.round(cardHeight * (9f / 680));
-        titleText.setBounds(cardXOffset + titleX, cardYOffset + titleY, cardWidth - titleX, cardHeight);
+        int titleY = Math.round(cardHeight * (9f / 680)) + 10;
+        titleText.setBounds(cardXOffset + titleX, cardYOffset + titleY, cardWidth - titleX, cardHeight - titleY);
 
         Dimension ptSize = ptText.getPreferredSize();
         ptText.setSize(ptSize.width, ptSize.height);

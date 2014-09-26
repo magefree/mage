@@ -72,7 +72,7 @@ public class HandPanel extends JPanel {
     }
 
     private Dimension getHandCardDimension() {
-        String useBigCards = MageFrame.getPreferences().get(PreferencesDialog.KEY_HAND_USE_BIG_CARDS, "false");
+        String useBigCards = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_HAND_USE_BIG_CARDS, "true");
         if (!smallMode && useBigCards.equals("true")) {
             return handCardDimensionBig;
         }
