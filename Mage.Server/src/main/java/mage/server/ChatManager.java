@@ -141,21 +141,21 @@ public class ChatManager {
                 User userTo = UserManager.getInstance().findUser(userToName);
                 if (userTo != null) {
                     if (!chatSessions.get(chatId).broadcastWhisperToUser(user, userTo, rest)) {
-                        message += new StringBuilder("\nUser ").append(userToName).append(" not found").toString();
+                        message += new StringBuilder("<br/>User ").append(userToName).append(" not found").toString();
                         chatSessions.get(chatId).broadcastInfoToUser(user,message);
                     }
                 } else {
-                    message += new StringBuilder("\nUser ").append(userToName).append(" not found").toString();
+                    message += new StringBuilder("<br/>User ").append(userToName).append(" not found").toString();
                     chatSessions.get(chatId).broadcastInfoToUser(user,message);
                 }
                 return true;
             }
         }
         if (command.equals("L") || command.equals("LIST")) {
-            message += new StringBuilder("\nList of commands:")
-                    .append("\n\\info <text> - set a info text to your player")
-                    .append("\n\\list - Show a list of commands")
-                    .append("\n\\whisper <player name> <text> - whisper to the player with the given name").toString();
+            message += new StringBuilder("<br/>List of commands:")
+                    .append("<br/>\\info [text] - set a info text to your player")
+                    .append("<br/>\\list - Show a list of commands")
+                    .append("<br/>\\whisper [player name] [text] - whisper to the player with the given name").toString();
             chatSessions.get(chatId).broadcastInfoToUser(user,message);
             return true;
         }

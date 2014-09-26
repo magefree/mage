@@ -28,12 +28,20 @@
 
 package mage.server;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
+import java.util.concurrent.ExecutorService;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
+import mage.constants.ManaType;
+import mage.constants.PlayerAction;
+import mage.constants.TableState;
 import mage.game.GameException;
 import mage.game.Table;
 import mage.game.match.MatchOptions;
@@ -46,7 +54,13 @@ import mage.interfaces.callback.ClientCallback;
 import mage.remote.MageVersionException;
 import mage.server.draft.CubeFactory;
 import mage.server.draft.DraftManager;
-import mage.server.game.*;
+import mage.server.game.DeckValidatorFactory;
+import mage.server.game.GameFactory;
+import mage.server.game.GameManager;
+import mage.server.game.GamesRoom;
+import mage.server.game.GamesRoomManager;
+import mage.server.game.PlayerFactory;
+import mage.server.game.ReplayManager;
 import mage.server.services.LogKeys;
 import mage.server.services.impl.FeedbackServiceImpl;
 import mage.server.services.impl.LogServiceImpl;
@@ -55,19 +69,23 @@ import mage.server.tournament.TournamentManager;
 import mage.server.util.ConfigSettings;
 import mage.server.util.ServerMessagesUtil;
 import mage.server.util.ThreadExecutor;
-import mage.utils.*;
-import mage.view.*;
+import mage.utils.ActionWithBooleanResult;
+import mage.utils.ActionWithNullNegativeResult;
+import mage.utils.ActionWithTableViewResult;
+import mage.utils.CompressUtil;
+import mage.utils.MageVersion;
+import mage.view.ChatMessage;
 import mage.view.ChatMessage.MessageColor;
+import mage.view.DraftPickView;
+import mage.view.GameView;
+import mage.view.MatchView;
+import mage.view.RoomUsersView;
+import mage.view.TableView;
+import mage.view.TournamentView;
+import mage.view.UserDataView;
+import mage.view.UserView;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.log4j.Logger;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
-import java.util.concurrent.ExecutorService;
-import mage.constants.ManaType;
-import mage.constants.PlayerAction;
-import mage.constants.TableState;
 
 /**
  *
@@ -408,7 +426,7 @@ public class MageServerImpl implements MageServer {
                 new Runnable() {
                     @Override
                     public void run() {
-                        ChatManager.getInstance().broadcast(chatId, userName, message, MessageColor.BLUE);
+                        ChatManager.getInstance().broadcast(chatId, userName, StringEscapeUtils.escapeHtml4(message), MessageColor.BLUE);
                     }
                 }
             );

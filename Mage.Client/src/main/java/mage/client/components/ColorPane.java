@@ -38,9 +38,13 @@ public class ColorPane extends JTextPane {
 
     public void append(String s) {
         try {
+            setEditable(true);
             kit.insertHTML(doc, doc.getLength(), s, 0, 0, null);
+            int len = getDocument().getLength();
+            setCaretPosition(len);
+            setEditable(false);
             
-//            setEditable(true);
+//            
 //            
 //            StyleContext sc = StyleContext.getDefaultStyleContext();
 //            AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, color);
@@ -51,7 +55,7 @@ public class ColorPane extends JTextPane {
 //            setCharacterAttributes(aset, false);
 //            replaceSelection(s);
 //
-//            setEditable(false);
+//           
         } catch (Exception e) {
             e.printStackTrace();
         }

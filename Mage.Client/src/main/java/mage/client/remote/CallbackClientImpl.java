@@ -377,17 +377,17 @@ public class CallbackClientImpl implements CallbackClient {
                         .append("<br/><b>F5</b> - Skip to next end step of opponent's turn but stop on declare attackers/blockers and something on the stack")
                         .append("<br/><b>F9</b> - Skip everything until your next turn")
                         .append("<br/><b>F3</b> - Undo F4/F5/F9").toString(),
-                        null, MessageType.USER_INFO, ChatMessage.MessageColor.ORANGE);
+                        null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;
             case TOURNAMENT:
                 usedPanel.receiveMessage("", new StringBuilder("On this panel you can see the players, their state and the results of the games of the tournament. Also you can chat with the competitors of the tournament.").toString(),
-                        null,  MessageType.USER_INFO, ChatMessage.MessageColor.ORANGE);
+                        null,  MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;
             case TABLES:
                 usedPanel.receiveMessage("", new StringBuilder("Download card images by using the \"Images\" menu to the top right .")
                         .append("<br/>Download icons and symbols by using the \"Symbols\" menu to the top right.")
                         .append("<br/>\\list - Show a list of available chat commands.").toString(),
-                        null, MessageType.USER_INFO, ChatMessage.MessageColor.ORANGE);
+                        null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;
 
         }

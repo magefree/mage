@@ -118,19 +118,6 @@ public class ChatPanel extends javax.swing.JPanel {
         DEFAULT, GAME, TABLES, TOURNAMENT
     }
     private boolean startMessageDone = false;
-//    /**
-//     * Maps message colors to {@link Color}.
-//     */
-//    private static final Map<MessageColor, Color> colorMap = new EnumMap<>(MessageColor.class);
-//
-//    static {
-//        colorMap.put(MessageColor.BLACK, Color.black);
-//        colorMap.put(MessageColor.GREEN, Color.green);
-//        colorMap.put(MessageColor.ORANGE, Color.orange);
-//        colorMap.put(MessageColor.BLUE, Color.blue);
-//        colorMap.put(MessageColor.RED, Color.red);
-//        colorMap.put(MessageColor.YELLOW, Color.YELLOW);
-//    }
 
     /**
      * Creates new form ChatPanel
@@ -243,11 +230,9 @@ public class ChatPanel extends javax.swing.JPanel {
         if (username != null && !username.isEmpty()) {
             text.append(getColoredText(userColor, username + userSeparator));
         }              
-        text.append(getColoredText(textColor, ManaSymbols.replaceSymbolsWithHTML(message, ManaSymbols.Type.PAY) + "\n"));
+        text.append(getColoredText(textColor, ManaSymbols.replaceSymbolsWithHTML(message, ManaSymbols.Type.PAY) + "<br/>"));
 
-        this.txtConversation.setEditable(true);
         this.txtConversation.append(text.toString());
-        this.txtConversation.setEditable(false);
     }
 
     private String getColoredText(String color, String text) {
