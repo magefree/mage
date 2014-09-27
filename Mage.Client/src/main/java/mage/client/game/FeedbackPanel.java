@@ -34,7 +34,7 @@
 
 package mage.client.game;
 
-import java.awt.*;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import java.util.Map;
@@ -51,7 +51,6 @@ import mage.client.util.gui.ArrowBuilder;
 import mage.constants.PlayerAction;
 import mage.remote.Session;
 import org.apache.log4j.Logger;
-
 
 /**
  *
@@ -87,8 +86,6 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }
 
     public void getFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options, int messageId) {
-        logger.debug("text: " + message);
-
         synchronized (this) {
             if (messageId < this.lastMessageId) {
                 logger.warn("ignoring message from later source: " + messageId + ", text=" + message);
@@ -152,8 +149,6 @@ public class FeedbackPanel extends javax.swing.JPanel {
             this.btnSpecial.setText("Pay 2 life");
             this.helper.setSpecial("Pay 2 life", true);
         }
-
-        //boolean yourTurn = options != null && options.containsKey("your_turn");
 
         requestFocusIfPossible();
         handleOptions(options);
@@ -220,7 +215,6 @@ public class FeedbackPanel extends javax.swing.JPanel {
         this.btnRight.setVisible(false);
         this.btnSpecial.setVisible(false);
         this.lblMessage.setText("");
-        logger.debug("feedback - clear");
     }
 
     private void customInitComponents() {
@@ -341,7 +335,6 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnSpecial;
     private javax.swing.JButton btnUndo;
     private javax.swing.JScrollPane jScrollPane1;
-    //private javax.swing.JTextArea lblMessage;
     private MageTextArea lblMessage;
     private HelperPanel helper;
 }
