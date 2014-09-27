@@ -77,8 +77,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private static final transient Logger log = Logger.getLogger(PreferencesDialog.class);
     
-    public static final String KEY_SHOW_TOOLTIPS_ANY_ZONE = "showTooltipsInAnyZone";
     public static final String KEY_HAND_USE_BIG_CARDS = "handUseBigCards";
+    public static final String KEY_SHOW_TOOLTIPS_ANY_ZONE = "showTooltipsInAnyZone";
     public static final String KEY_SHOW_CARD_NAMES = "showCardNames";
     public static final String KEY_PERMANENTS_IN_ONE_PILE = "nonLandPermanentsInOnePile";
     public static final String KEY_SHOW_PLAYER_NAMES_PERMANENTLY = "showPlayerNamesPermanently";
@@ -404,6 +404,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         displayBigCardsInHand.setText("Use big images (for high resolution screens)");
         displayBigCardsInHand.setToolTipText("Changes the size of the cards shown in hand. Switch this option off if you have a small screen size.");
+        displayBigCardsInHand.setActionCommand("");
         displayBigCardsInHand.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         displayBigCardsInHand.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -415,6 +416,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         showToolTipsInAnyZone.setSelected(true);
         showToolTipsInAnyZone.setText("Show card tooltips while hoovering with the mouse pointer over a card");
         showToolTipsInAnyZone.setToolTipText("");
+        showToolTipsInAnyZone.setActionCommand("");
         showToolTipsInAnyZone.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         showToolTipsInAnyZone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1379,8 +1381,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         Preferences prefs = MageFrame.getPreferences();
 
         // main
-        save(prefs, dialog.showCardName, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.showToolTipsInAnyZone, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.showCardName, KEY_SHOW_CARD_NAMES, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.showPlayerNamesPermanently, KEY_SHOW_PLAYER_NAMES_PERMANENTLY, "true", "false", UPDATE_CACHE_POLICY);
@@ -1743,8 +1745,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
 
         load(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true");
+        load(prefs, dialog.showToolTipsInAnyZone, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true");
         load(prefs, dialog.showCardName, KEY_SHOW_CARD_NAMES, "true");
-        load(prefs, dialog.showCardName, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true");
         load(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true");
         load(prefs, dialog.showPlayerNamesPermanently, KEY_SHOW_PLAYER_NAMES_PERMANENTLY, "true");
         load(prefs, dialog.showAbilityPickerForced, KEY_SHOW_ABILITY_PICKER_FORCED, "true");
