@@ -302,7 +302,7 @@ public class SessionImpl implements Session {
             if (!canceled) {
                 client.showMessage("Unable to connect to server. "  + ex.getMessage());
             }
-            // TODO: download client that matches server version
+            disconnect(false);
         } catch (CannotConnectException ex) {
             if (!canceled) {
                 handleCannotConnectException(ex);
@@ -340,20 +340,28 @@ public class SessionImpl implements Session {
         String message = "";
         while (t != null) {
             if (t instanceof ConnectException) {
-                message = "Server is likely offline.";
+                message = "Server is likely offline." + message;
                 break;
             }
             if (t instanceof SocketException) {
-                message = "Check your internet connection.";
+                message = "Check your internet connection." + message;
                 break;
             }
             if (t instanceof SocketTimeoutException) {
-                message = "Server is not responding.";
+                message = "Server is not responding." + message;
                 break;
             }
+            if (t.getCause() != null && logger.isDebugEnabled()) {
+                message = "\n" + t.getCause().getMessage() + message;
+                logger.debug(t.getCause().getMessage());
+            }
+
             t = t.getCause();
         }
         client.showMessage("Unable to connect to server. " + message);
+        if (logger.isTraceEnabled()) {
+            t.printStackTrace();
+        }
     }
 
     @Override
@@ -407,7 +415,9 @@ public class SessionImpl implements Session {
         @Override
         public void handleConnectionException(Throwable throwable, Client client) {
             logger.info("connection to server lost - " + throwable.getMessage());
-            disconnect(true);
+            throwable.printStackTrace();
+            // that's maybe not correct to disconnect here.
+            // disconnect(true);
         }
     }
 
