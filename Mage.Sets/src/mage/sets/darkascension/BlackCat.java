@@ -50,7 +50,7 @@ public class BlackCat extends CardImpl {
         super(ownerId, 54, "Black Cat", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.expansionSetCode = "DKA";
         this.subtype.add("Zombie");
-        this.subtype.add("Car");
+        this.subtype.add("Cat");
 
         this.color.setBlack(true);
         this.power = new MageInt(1);
