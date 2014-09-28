@@ -169,7 +169,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected int priorityTimeLeft = Integer.MAX_VALUE;
 
 
-
+    //
     // conceded or connection lost game
     protected boolean left;
     // set if the player quits the complete match
@@ -1599,30 +1599,30 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void quit(Game game) {
-        logger.debug(getName() + " quits the match.");
-        game.informPlayers(getName() + " quits the match.");
         quit = true;
         this.concede(game);
+        logger.debug(getName() + " quits the match.");
+        game.informPlayers(getName() + " quits the match.");
     }
 
     @Override
     public void timerTimeout(Game game) {
-        game.informPlayers(getName() + " has run out of time. Loosing the Match.");
         quit = true;
         timerTimeout = true;
         this.concede(game);
+        game.informPlayers(getName() + " has run out of time. Loosing the Match.");        
     }
 
     @Override
     public void idleTimeout(Game game) {
-        game.informPlayers(new StringBuilder(getName()).append(" was idle for too long. Loosing the Match.").toString());
         quit = true;
         idleTimeout = true;
         this.concede(game);
+        game.informPlayers(new StringBuilder(getName()).append(" was idle for too long. Loosing the Match.").toString());        
     }
 
     @Override
-    public void concede(Game game) {        
+    public void concede(Game game) {
         logger.debug(this.getName() + (" concedes gameId:" +game.getId()));
         game.gameOver(playerId);
         logger.debug("Before lost " + this.getName());
@@ -1681,7 +1681,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!this.wins) {
                 this.loses = true;
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST, null, null, playerId));
-                game.informPlayers(new StringBuilder(this.getName()).append(" has lost the game.").toString());
+                game.informPlayers(this.getName()+ " has lost the game.");
             } else {
                 logger.debug(this.getName() + " has already won - stop lost");
             }
@@ -1738,7 +1738,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
     @Override
     public boolean isInGame() {
-        return !hasLost() && !hasWon() && !hasLeft();
+        return !hasQuit() && !hasLost() && !hasWon() && !hasLeft();
     }
 
     @Override

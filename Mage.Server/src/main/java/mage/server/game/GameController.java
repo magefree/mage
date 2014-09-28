@@ -379,7 +379,13 @@ public class GameController implements GameCallback {
 //    }
 
     public void quitMatch(UUID userId) {
-        game.quit(getPlayerId(userId));
+        UUID playerId = getPlayerId(userId);
+        if (playerId != null) {
+            GameSession gameSession = gameSessions.get(playerId);
+            if (gameSession != null) {
+                gameSession.quitGame();
+            }
+        }
     }
 
     public void sendPlayerAction(PlayerAction playerAction, UUID userId) {

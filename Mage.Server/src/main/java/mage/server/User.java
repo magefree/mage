@@ -338,25 +338,30 @@ public class User {
         logger.debug("REMOVE " + getName() + " Game sessions: " + gameSessions.size() );
         for (GameSession gameSession: gameSessions.values()) {
             logger.debug("-- kill game session of gameId: " + gameSession.getGameId() );
-            gameSession.kill();
+            gameSession.quitGame();
         }
+        gameSessions.clear();
         logger.debug("REMOVE " + getName() + " Draft sessions " + draftSessions.size());
         for (DraftSession draftSession: draftSessions.values()) {
             draftSession.setKilled();
         }
+        draftSessions.clear();
         logger.debug("REMOVE " + getName() + " Tournament sessions " + tournamentSessions.size());
         for (TournamentSession tournamentSession: tournamentSessions.values()) {
             tournamentSession.setKilled();
         }
+        tournamentSessions.clear();
         logger.debug("REMOVE " + getName() + " Tables " + tables.size());
         for (Entry<UUID, Table> entry: tables.entrySet()) {
             logger.debug("-- leave tableId: " + entry.getValue().getId());
             TableManager.getInstance().leaveTable(userId, entry.getValue().getId());
         }
+        tables.clear();
         logger.debug("REMOVE " + getName() + " watched Games " + watchedGames.size());
         for (UUID gameId: watchedGames) {
             GameManager.getInstance().stopWatching(gameId, userId);
         }
+        watchedGames.clear();
         logger.debug("REMOVE " + getName() + " Chats ");
         ChatManager.getInstance().removeUser(userId, reason);
     }
