@@ -42,6 +42,8 @@ public interface Connect {
 
     void disconnect(boolean showMessage);
 
+    void reconnect(Throwable throwable);
+        
     boolean ping();
 
     boolean isConnected();

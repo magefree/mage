@@ -43,6 +43,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+import javax.swing.SwingUtilities;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.InvalidDeckException;
@@ -364,14 +365,20 @@ public class SessionImpl implements Session {
         }
     }
 
+    /**
+     *
+     * @param errorCall - was connection lost because of error
+     */
     @Override
     public synchronized void disconnect(boolean errorCall) {
         if (isConnected()) {
+            logger.info("DISCONNECT still connected");
             sessionState = SessionState.DISCONNECTING;
         }
         if (connection == null || sessionState == SessionState.DISCONNECTED) {
             return;
         }
+        
         try {
             callbackClient.removeListener(callbackHandler);
             callbackClient.disconnect();
@@ -379,15 +386,22 @@ public class SessionImpl implements Session {
         } catch (Throwable ex) {
             logger.fatal("Error disconnecting ...", ex);
         }
+
         if (sessionState == SessionState.DISCONNECTING || sessionState == SessionState.CONNECTING) {
             sessionState = SessionState.DISCONNECTED;
             logger.info("Disconnected ... ");
-            client.disconnected(errorCall);
             if (errorCall) {
                 client.showError("Network error.  You have been disconnected");
             }
+            client.disconnected(errorCall); // MageFrame with check to reconnect
             pingTime.clear();
         }
+    }
+
+    @Override
+    public synchronized void reconnect(Throwable throwable) {
+        logger.info("RECONNECT - Connected: " + isConnected());
+        client.disconnected(true);
     }
 
     @Override
@@ -412,12 +426,14 @@ public class SessionImpl implements Session {
     }
 
     class ClientConnectionListener implements ConnectionListener {
+        // http://docs.jboss.org/jbossremoting/2.5.3.SP1/html/chapter-connection-failure.html
+
         @Override
         public void handleConnectionException(Throwable throwable, Client client) {
             logger.info("connection to server lost - " + throwable.getMessage());
             throwable.printStackTrace();
-            // that's maybe not correct to disconnect here.
-            // disconnect(true);
+
+            reconnect(throwable);
         }
     }
 
