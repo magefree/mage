@@ -260,7 +260,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         addMouseMotionListener(this);
         addMouseWheelListener(this);
 
-        displayTitleAnyway = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_ANY_ZONE, "true").equals("true");
+        displayTitleAnyway = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_CARD_NAMES, "true").equals("true");
         titleText = new GlowText();
         setText(gameCard);
         titleText.setFont(getFont().deriveFont(Font.BOLD, 13f));
