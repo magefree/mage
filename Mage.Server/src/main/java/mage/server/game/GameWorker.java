@@ -42,14 +42,14 @@ public class GameWorker implements Callable {
 
     private static final Logger logger = Logger.getLogger(GameWorker.class);
 
-    private final GameCallback result;
+    private final GameCallback gameController;
     private final Game game;
     private final UUID choosingPlayerId;
 
-    public GameWorker(Game game, UUID choosingPlayerId, GameCallback result) {
+    public GameWorker(Game game, UUID choosingPlayerId, GameCallback gameController) {
         this.game = game;
         this.choosingPlayerId = choosingPlayerId;
-        this.result = result;
+        this.gameController = gameController;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class GameWorker implements Callable {
             logger.debug("GameWorker started gameId "+ game.getId());
             game.start(choosingPlayerId);
             game.fireUpdatePlayersEvent();
-            result.gameResult(game.getWinner());
+            gameController.gameResult(game.getWinner());
             game.cleanUp();
         } catch (MageException ex) {
             logger.fatal("GameWorker mage error [" + game.getId() + "]" +ex, ex);

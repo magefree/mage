@@ -37,6 +37,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import mage.server.User.UserState;
 import mage.server.util.ThreadExecutor;
 import org.apache.log4j.Logger;
 
@@ -178,9 +179,8 @@ public class UserManager {
         List<User> usersToCheck = new ArrayList<>();
         usersToCheck.addAll(users.values());
         for (User user : usersToCheck) {
-            if (user.isExpired(calendar.getTime())) {
-                logger.info(new StringBuilder(user.getName()).append(": session expired userId: ").append(user.getId())
-                        .append(" Host: ").append(user.getHost()));
+            if (!user.getUserState().equals(UserState.Expired) && user.isExpired(calendar.getTime())) {
+                logger.info(user.getName() + ": session expired userId: "+ user.getId() + " Host: " + user.getHost());
                 removeUser(user.getId(), DisconnectReason.SessionExpired);
             }
         }

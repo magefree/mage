@@ -619,7 +619,22 @@ public abstract class GameImpl implements Game, Serializable {
         }
         if (gameOver(null)) {
             winnerId = findWinnersAndLosers();
-            logger.info("GAME ended  gameId: " + this.getId());
+            StringBuilder sb = new StringBuilder("GAME ended  gameId: ").append(this.getId()).append(" ");
+            int count = 0;
+            for (Player player: this.getState().getPlayers().values()) {
+                if (count > 0) {
+                    sb.append(" - ");
+                }
+                sb.append("[").append(player.getName()).append(" => ");
+                sb.append(player.hasWon() ? "W":"");
+                sb.append(player.hasLost()? "L":"");
+                sb.append(player.hasQuit() ? "Q":"");
+                sb.append(player.hasIdleTimeout() ? "I":"");
+                sb.append(player.hasTimerTimeout() ? "T":"");
+                sb.append("]");
+                count++;
+            }
+            logger.info(sb.toString());
         }
     }
 
