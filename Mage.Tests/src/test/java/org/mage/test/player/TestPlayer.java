@@ -63,6 +63,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import mage.abilities.mana.ManaAbility;
 import mage.constants.Zone;
 import mage.target.TargetSource;
 
@@ -154,8 +155,18 @@ public class TestPlayer extends ComputerPlayer {
                                 actions.remove(action);
                                 return true;
                             }                            
-                        }
-                        
+                        }                        
+                    }
+                    List<Permanent> manaPermsWithCost = this.getAvailableManaProducersWithCost(game);
+                    for (Permanent perm: manaPermsWithCost) {
+                        for (ManaAbility manaAbility: perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+                            if (manaAbility.toString().startsWith(groups[0]) && manaAbility.canActivate(playerId, game)) {                                
+                                Ability newManaAbility = manaAbility.copy();                                
+                                this.activateAbility((ActivatedAbility)newManaAbility, game);
+                                actions.remove(action);
+                                return true;
+                            }                            
+                        }                     
                     }
                 } else 
                 
