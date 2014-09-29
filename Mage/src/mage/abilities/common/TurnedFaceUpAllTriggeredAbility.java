@@ -54,7 +54,7 @@ public class TurnedFaceUpAllTriggeredAbility extends TriggeredAbilityImpl {
 
     public TurnedFaceUpAllTriggeredAbility(Effect effect, FilterPermanent filter,  boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect);
-        // has to be set so the ability triggers if card is turn faced up
+        // has to be set so the ability triggers if card itself is turn faced up
         this.setWorksFaceDown(true);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
@@ -75,6 +75,18 @@ public class TurnedFaceUpAllTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (EventType.TURNEDFACEUP.equals(event.getType())) {
+            if (!event.getTargetId().equals(getSourceId())) {
+                Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(getSourceId());
+                if (sourcePermanent != null) {
+                    if (sourcePermanent.isFaceDown()) {
+                        // if face down and it's not itself that is turned face up, it does not trigger
+                        return false;
+                    }
+                } else {
+                    // Permanent is and was not on the battlefield
+                    return false;
+                }
+            }
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
                 if (setTargetPointer) {

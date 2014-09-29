@@ -26,9 +26,13 @@ public class TurnedFaceUpSourceTriggeredAbility extends TriggeredAbilityImpl {
     public TurnedFaceUpSourceTriggeredAbility(Effect effect) {
         this(effect, false);
     }
-
+    
     public TurnedFaceUpSourceTriggeredAbility(Effect effect, boolean setTargetPointer) {
-        super(Zone.BATTLEFIELD, effect);
+        this(effect, setTargetPointer, false);
+    }
+
+    public TurnedFaceUpSourceTriggeredAbility(Effect effect, boolean setTargetPointer, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
         // has to be set so the ability triggers if card is turn faced up
         this.setWorksFaceDown(true);
         this.setTargetPointer = setTargetPointer;

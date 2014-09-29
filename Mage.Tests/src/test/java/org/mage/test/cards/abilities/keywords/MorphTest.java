@@ -89,7 +89,7 @@ public class MorphTest extends CardTestPlayerBase {
      * Test triggered turn face up ability of Pine Walker
      */
     @Test
-    public void testCopyFaceDwonMorphCreature() {
+    public void testTurnFaceUpTrigger() {
         addCard(Zone.HAND, playerA, "Pine Walker");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
         
@@ -110,6 +110,42 @@ public class MorphTest extends CardTestPlayerBase {
         assertTapped("Pine Walker", false);
 
     }
+    
+    /**
+     * Test triggered turn face up ability of Pine Walker did not trigger as
+     * long as Pine Walker is not turned face up.
+     * 
+     */
+    @Test
+    public void testDoesNotTriggerFaceDown() {
+        addCard(Zone.HAND, playerA, "Pine Walker");
+        addCard(Zone.HAND, playerA, "Icefeather Aven");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Icefeather Aven");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+        
+        attack(3, playerA, "");
+        attack(3, playerA, "");
+        activateAbility(3, PhaseStep.DECLARE_BLOCKERS, playerA, "{1}{G}{U}: Turn this face-down permanent face up.");
+        setChoice(playerA, "No"); // Don't use return permanent to hand effect
+        
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerB, 16);
+        
+        assertHandCount(playerA, "Pine Walker", 0);
+        assertHandCount(playerA, "Icefeather Aven", 0);
+        assertPermanentCount(playerA, "", 1);
+        assertPermanentCount(playerA, "Icefeather Aven", 1);        
+        assertTapped("Icefeather Aven", true);
+
+    }
+
     /**
      * Test that Morph creature do not trigger abilities with their face up attributes
      * 
