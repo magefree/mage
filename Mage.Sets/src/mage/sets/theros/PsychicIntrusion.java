@@ -28,6 +28,7 @@
 package mage.sets.theros;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -100,8 +101,9 @@ class PsychicIntrusionExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
-        if (opponent != null) {
-            opponent.revealCards("Psychic Intrusion", opponent.getHand(), game);
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (opponent != null && sourceObject != null) {
+            opponent.revealCards(sourceObject.getLogName(), opponent.getHand(), game);
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
                 int cardsGraveyard = opponent.getGraveyard().count(filter, game);
@@ -135,7 +137,7 @@ class PsychicIntrusionExileEffect extends OneShotEffect {
                 if (card != null) {
                     // move card to exile
                     UUID exileId = CardUtil.getCardExileZoneId(game, source);
-                    controller.moveCardToExileWithInfo(card, exileId,  "Psychic Intrusion",  source.getSourceId(), game, fromHand ? Zone.HAND:Zone.GRAVEYARD);
+                    controller.moveCardToExileWithInfo(card, exileId, sourceObject.getLogName(),  source.getSourceId(), game, fromHand ? Zone.HAND:Zone.GRAVEYARD);
                     // allow to cast the card
                     ContinuousEffect effect = new PsychicIntrusionCastFromExileEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId()));
@@ -174,14 +176,17 @@ class PsychicIntrusionCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (sourceId.equals(getTargetPointer().getFirst(game, source))) {
-            if (game.getState().getZone(sourceId).equals(Zone.EXILED)) {
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        if (objectId.equals(getTargetPointer().getFirst(game, source))) {
+            if (affectedControllerId.equals(source.getControllerId())) {
                 return true;
-            } else {
-                discard();
+            }            
+        } else {
+            if (((FixedTarget)getTargetPointer()).getTarget().equals(objectId)) {
+                // object has moved zone so effect can be discarted
+                this.discard();
             }
-        }
+        }            
         return false;
     }
 }
@@ -208,12 +213,15 @@ class PsychicIntrusionSpendAnyManaEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (sourceId.equals(getTargetPointer().getFirst(game, source))) {
-            if (game.getState().getZone(sourceId).equals(Zone.EXILED)) {
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        if (objectId.equals(getTargetPointer().getFirst(game, source))) {
+            if (affectedControllerId.equals(source.getControllerId())) {
                 return true;
-            } else {
-                discard();
+            }            
+        } else {
+            if (((FixedTarget)getTargetPointer()).getTarget().equals(objectId)) {
+                // object has moved zone so effect can be discarted
+                this.discard();
             }
         }
         return false;
