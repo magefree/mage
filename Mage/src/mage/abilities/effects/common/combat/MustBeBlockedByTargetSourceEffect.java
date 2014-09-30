@@ -34,6 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.watchers.common.BlockedAttackerWatcher;
 
 /**
  *
@@ -58,8 +59,16 @@ public class MustBeBlockedByTargetSourceEffect extends RequirementEffect {
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getFirstTarget())) {
             Permanent blocker = game.getPermanent(source.getFirstTarget());
-            if (blocker != null && blocker.canBlock(source.getSourceId(), game)) {
-                return true;
+            if (blocker != null && blocker.canBlock(source.getSourceId(), game)) {              
+                Permanent attacker = game.getPermanent(source.getSourceId());
+                if (attacker != null) {
+                    BlockedAttackerWatcher blockedAttackerWatcher = (BlockedAttackerWatcher) game.getState().getWatchers().get("BlockedAttackerWatcher");
+                    if (blockedAttackerWatcher != null && blockedAttackerWatcher.creatureHasBlockedAttacker(attacker, blocker)) {
+                        // has already blocked this turn, so no need to do again
+                        return false;
+                    }                
+                    return true;
+                }
             }
         }
         return false;
@@ -76,7 +85,7 @@ public class MustBeBlockedByTargetSourceEffect extends RequirementEffect {
     }
 
     @Override
-    public UUID mustBlockAttacker(Ability source, Game game) {
+    public UUID mustBlockAttacker(Ability source, Game game) {  
         return source.getSourceId();
     }
 

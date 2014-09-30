@@ -837,6 +837,7 @@ public abstract class GameImpl implements Game, Serializable {
         state.getWatchers().add(new MiracleWatcher());
         state.getWatchers().add(new SoulbondWatcher());
         state.getWatchers().add(new PlayerLostLifeWatcher());
+        state.getWatchers().add(new BlockedAttackerWatcher());
 
         //20100716 - 103.5
         for (UUID playerId: state.getPlayerList(startingPlayerId)) {

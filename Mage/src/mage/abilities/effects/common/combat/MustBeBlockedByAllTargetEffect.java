@@ -31,9 +31,11 @@ package mage.abilities.effects.common.combat;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
+import mage.constants.AbilityType;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.watchers.common.BlockedAttackerWatcher;
 
 /**
  *
@@ -53,9 +55,16 @@ public class MustBeBlockedByAllTargetEffect extends RequirementEffect {
     }
 
     @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent sourceCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        if (sourceCreature != null && sourceCreature.isAttacking()) {
+    public boolean applies(Permanent permanent, Ability source, Game game) {        
+        Permanent attackingCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+        if (attackingCreature != null && attackingCreature.isAttacking()) {
+            if (!source.getAbilityType().equals(AbilityType.STATIC)) {
+                BlockedAttackerWatcher blockedAttackerWatcher = (BlockedAttackerWatcher) game.getState().getWatchers().get("BlockedAttackerWatcher");
+                if (blockedAttackerWatcher != null && blockedAttackerWatcher.creatureHasBlockedAttacker(attackingCreature, permanent)) {
+                    // has already blocked this turn, so no need to do again
+                    return false;
+                }
+            }
             return permanent.canBlock(this.getTargetPointer().getFirst(game, source), game);
         }
         return false;
