@@ -95,16 +95,19 @@ class MindswipeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            MageObject object = game.getLastKnownInformation(getTargetPointer().getFirst(game, source), Zone.STACK);
-            if (object instanceof Spell) {
+            MageObject object = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
+            if (object == null) {
+                object = game.getLastKnownInformation(getTargetPointer().getFirst(game, source), Zone.STACK);
+            }
+            if (object != null && object instanceof Spell) {
                 Spell spell = (Spell) object;
                 Player spellController = game.getPlayer(spell.getControllerId());
                 if (spellController != null) {
                     int damage = new ManacostVariableValue().calculate(game, source, this);
                     spellController.damage(damage, source.getSourceId(), game, false, true);
                 }
+                return true;
             }
-            return true;
         }
         return false;
     }
