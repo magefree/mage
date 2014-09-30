@@ -40,7 +40,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class NykthosShrineToNyxTest extends CardTestPlayerBase {
 
     @Test
-    public void testNoManaToCast() {
+    public void testNormalUse() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Nykthos, Shrine to Nyx", 1);
         // Kiora's Follower {G}{U}
@@ -58,8 +58,36 @@ public class NykthosShrineToNyxTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
         
-        Assert.assertEquals("message", 6, playerA.getManaPool().getGreen()); // 5 green mana
+        Assert.assertEquals("message", 6, playerA.getManaPool().getGreen()); // 6 green mana
         assertPowerToughness(playerA, "Omnath, Locus of Mana", 7, 7);
+    }
+
+    @Test
+    public void testDoubleUse() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Nykthos, Shrine to Nyx", 1);
+        // Kiora's Follower {G}{U}
+        // Creature - Merfolk
+        // {T}: Untap another target permanent.
+        addCard(Zone.BATTLEFIELD, playerA, "Kiora's Follower");
+        addCard(Zone.BATTLEFIELD, playerA, "Kalonian Tusker", 2);
+        // Green mana doesn't empty from your mana pool as steps and phases end.
+        // Omnath, Locus of Mana gets +1/+1 for each green mana in your mana pool.
+        addCard(Zone.BATTLEFIELD, playerA, "Omnath, Locus of Mana", 1);
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color. <i>(Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)</i>.");
+        setChoice(playerA, "Green");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Untap another target permanent.","Nykthos, Shrine to Nyx");
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color. <i>(Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)</i>.");
+        setChoice(playerA, "Green");
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        Assert.assertEquals("amount of green mana", 10, playerA.getManaPool().getGreen()); // 6G - 2G = 4G + 6G = 10G
+        assertPowerToughness(playerA, "Omnath, Locus of Mana", 11,11);
     }
 
 }
