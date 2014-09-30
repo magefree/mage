@@ -28,6 +28,7 @@
 package mage.sets.journeyintonyx;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.AttachEffect;
@@ -134,12 +135,18 @@ class MarketFestivalManaEffect extends ManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if(controller != null){
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if(controller != null && sourceObject != null){
                 int x = 2;
 
             Mana mana = new Mana();
             for(int i = 0; i < x; i++){
                 ChoiceColor choiceColor = new ChoiceColor();
+                if (i == 0) {
+                    choiceColor.setMessage("First mana color for " + sourceObject.getLogName());
+                } else {
+                    choiceColor.setMessage("Second mana color for " + sourceObject.getLogName());
+                }
                 while (!controller.choose(Outcome.Benefit, choiceColor, game)) {
                     if (!controller.isInGame()) {
                         return false;

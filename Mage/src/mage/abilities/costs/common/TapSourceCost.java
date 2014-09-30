@@ -29,12 +29,10 @@
 package mage.abilities.costs.common;
 
 import java.util.UUID;
-import mage.constants.AbilityType;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.constants.AsThoughEffectType;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
@@ -56,9 +54,6 @@ public class TapSourceCost extends CostImpl {
         Permanent permanent = game.getPermanent(sourceId);
         if (permanent != null) {
             paid = permanent.tap(game);
-            if (paid && ability.getAbilityType().equals(AbilityType.MANA)) {
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TAPPED_FOR_MANA, sourceId, sourceId, controllerId));
-            }
         }
         return paid;
     }

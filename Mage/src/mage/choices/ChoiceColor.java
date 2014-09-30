@@ -28,6 +28,7 @@
 
 package mage.choices;
 
+import java.util.ArrayList;
 import mage.ObjectColor;
 
 /**
@@ -36,17 +37,22 @@ import mage.ObjectColor;
  */
 public class ChoiceColor extends ChoiceImpl {
 
+    public static final ArrayList<String> colorChoices = new ArrayList<>();
+    static {
+        colorChoices.add("Green");
+        colorChoices.add("Blue");
+        colorChoices.add("Black");
+        colorChoices.add("Red");
+        colorChoices.add("White");
+    }
+    
     public ChoiceColor() {
         this(true);
     }
 
     public ChoiceColor(boolean required) {
         super(required);
-        this.choices.add("Black");
-        this.choices.add("Blue");
-        this.choices.add("Green");
-        this.choices.add("Red");
-        this.choices.add("White");
+        this.choices.addAll(colorChoices);
         this.message = "Choose color";
     }
 

@@ -54,6 +54,8 @@ import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.game.events.GameEvent;
 
 /**
  *
@@ -365,6 +367,15 @@ public abstract class AbilityImpl implements Ability {
             game.informPlayers(new StringBuilder(controller.getName()).append(" announces a value of ").append(xValue).append(" for ").append(variableManaCost.getText()).toString());
         }
         activated = true;
+        // fire if tapped for mana (may only fires now because else costs of ability itself can be payed with mana of abilities that trigger for that event
+        if (this.getAbilityType().equals(AbilityType.MANA)) {
+            for (Cost cost: costs) {
+                if (cost instanceof TapSourceCost) {
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TAPPED_FOR_MANA, sourceId, sourceId, controllerId));
+                    break;
+                }
+            }
+        }
         return true;
     }
     

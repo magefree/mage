@@ -27,6 +27,7 @@
  */
 package mage.sets.theros;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -74,7 +75,7 @@ public class NykthosShrineToNyx extends CardImpl {
 }
 
 class NykthosShrineToNyxManaAbility extends ManaAbility {
-
+   
     public NykthosShrineToNyxManaAbility() {
         super(Zone.BATTLEFIELD, new NykthosDynamicManaEffect(), new GenericManaCost(2));
         this.addCost(new TapSourceCost());
@@ -94,8 +95,16 @@ class NykthosShrineToNyxManaAbility extends ManaAbility {
         if (game == null) {
             return new Mana();
         }
-        // TODO: Give back a list with t he 5 different mana options
-        return new Mana(((NykthosDynamicManaEffect)this.getEffects().get(0)).computeMana("Green", game, this));
+        // TODO: Give back at least the highest amount   (https://github.com/magefree/mage/issues/585)     
+        int amount = 0;
+        for (String colorChoice :ChoiceColor.colorChoices) {
+            Mana newMana = ((NykthosDynamicManaEffect)this.getEffects().get(0)).computeMana(colorChoice, game, this);
+            if (newMana.count() > amount) {
+                netMana = newMana;
+                amount = newMana.count();
+            }            
+        }
+        return netMana;
     }
 }
 
