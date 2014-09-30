@@ -89,5 +89,35 @@ public class NykthosShrineToNyxTest extends CardTestPlayerBase {
         Assert.assertEquals("amount of green mana", 10, playerA.getManaPool().getGreen()); // 6G - 2G = 4G + 6G = 10G
         assertPowerToughness(playerA, "Omnath, Locus of Mana", 11,11);
     }
+    /*
+        Use Nykthos together with Kruphix, God of Horizons to save mana as colorless mana
+    */
+    
+    @Test
+    public void testDoubleUseWithKruphix() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2); // to use Nykthos
+        addCard(Zone.BATTLEFIELD, playerA, "Nykthos, Shrine to Nyx", 1);
+        // Kiora's Follower {G}{U}
+        // Creature - Merfolk
+        // {T}: Untap another target permanent.
+        addCard(Zone.BATTLEFIELD, playerA, "Kiora's Follower"); // 1 G devotion
+        addCard(Zone.BATTLEFIELD, playerA, "Kalonian Tusker", 2); // 4 G devotion
+        // Kruphix, God of Horizons {3}{G}{U}
+        // If unused mana would empty from your mana pool, that mana becomes colorless instead.
+        addCard(Zone.BATTLEFIELD, playerA, "Kruphix, God of Horizons", 1); // 1 G devotion
 
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color. <i>(Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)</i>.");
+        setChoice(playerA, "Green");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Untap another target permanent.","Nykthos, Shrine to Nyx");
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color. <i>(Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)</i>.");
+        setChoice(playerA, "Green");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        Assert.assertEquals("amount of colorless mana", 10, playerA.getManaPool().getColorless()); // 6 - 2 (2.Activation) = 4 + 6  = 10 colorless mana 
+        assertPowerToughness(playerA, "Kruphix, God of Horizons", 4,7);
+    }
 }

@@ -164,7 +164,9 @@ public class ManaPool implements Serializable {
             for (ManaType manaType: manaTypeArray) {
                 if (item.get(manaType) > 0) {
                     total += item.get(manaType);
-                    item.remove(manaType);
+                    while (item.get(manaType) > 0) {
+                        item.remove(manaType);
+                    }
                 }
             }
             if (item.count() == 0) {

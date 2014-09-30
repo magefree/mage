@@ -7,7 +7,7 @@ package mage.constants;
 public enum ManaType {
     BLACK ("black"),
     BLUE  ("blue"),
-    GREEN ("greeen"),
+    GREEN ("green"),
     RED   ("red"),
     WHITE ("white"),
     COLORLESS("colorless");
