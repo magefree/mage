@@ -42,7 +42,7 @@ import mage.game.tournament.TournamentPairing;
 public class RoundView implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    List<TournamentGameView> games = new ArrayList<TournamentGameView>();
+    List<TournamentGameView> games = new ArrayList<>();
 
     public RoundView(Round round) {
         for (TournamentPairing pair: round.getPairs()) {

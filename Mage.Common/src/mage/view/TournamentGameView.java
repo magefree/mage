@@ -29,9 +29,11 @@
 package mage.view;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.UUID;
 import mage.game.Game;
 import mage.game.tournament.TournamentPairing;
+import mage.utils.DateFormat;
 
 /**
  *
@@ -54,15 +56,22 @@ public class TournamentGameView implements Serializable {
         this.matchId = pair.getMatch().getId();
         this.gameId = game.getId();
         this.players = pair.getPlayer1().getPlayer().getName() + " - " + pair.getPlayer2().getPlayer().getName();
+        String duelingTime = "";
+        
         if (game.hasEnded()) {
-            this.state = "Finished";
+            if (game.getEndTime() != null) {
+                duelingTime = " (" + DateFormat.getDuration((game.getEndTime().getTime() - game.getStartTime().getTime())/1000) + ")";
+            }
+            this.state = "Finished" + duelingTime;
             this.result = game.getWinner();
         } 
         else {
-            this.state = "Dueling";
+            duelingTime = " (" + DateFormat.getDuration((new Date().getTime() - game.getStartTime().getTime())/1000) + ")";
+            this.state = "Dueling" + duelingTime;            
             this.result = "";
         }
         this.tableId = pair.getTableId();
+        
     }
 
     public int getRoundNum() {
@@ -92,5 +101,5 @@ public class TournamentGameView implements Serializable {
     public UUID getTableId() {
         return tableId;
     }
-    
+
 }
