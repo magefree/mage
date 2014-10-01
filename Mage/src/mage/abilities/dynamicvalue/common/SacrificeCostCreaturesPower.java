@@ -35,7 +35,7 @@ public class SacrificeCostCreaturesPower implements DynamicValue {
 
     @Override
     public String toString() {
-        return "";
+        return "X";
     }
 
 
