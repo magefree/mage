@@ -33,7 +33,7 @@ import java.util.Date;
 import java.util.UUID;
 import mage.game.Game;
 import mage.game.tournament.TournamentPairing;
-import mage.utils.DateFormat;
+import mage.util.DateFormat;
 
 /**
  *
@@ -51,6 +51,16 @@ public class TournamentGameView implements Serializable {
     private final String players;
     private final UUID tableId;
 
+    TournamentGameView(int roundNum, UUID matchId, UUID gameId, String state, String result, String players, UUID tableId) {
+        this.roundNum = roundNum;
+        this.matchId = matchId;
+        this.gameId = gameId;
+        this.state = state;
+        this.result = result;
+        this.players = players;
+        this.tableId = tableId;
+    }
+
     TournamentGameView(int roundNum, TournamentPairing pair, Game game) {
         this.roundNum = roundNum;
         this.matchId = pair.getMatch().getId();
@@ -66,7 +76,9 @@ public class TournamentGameView implements Serializable {
             this.result = game.getWinner();
         } 
         else {
-            duelingTime = " (" + DateFormat.getDuration((new Date().getTime() - game.getStartTime().getTime())/1000) + ")";
+            if (game.getStartTime() != null) {
+                duelingTime = " (" + DateFormat.getDuration((new Date().getTime() - game.getStartTime().getTime())/1000) + ")";
+            }
             this.state = "Dueling" + duelingTime;            
             this.result = "";
         }

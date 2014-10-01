@@ -89,7 +89,11 @@ public class TournamentManager {
     }
 
     public TournamentView getTournamentView(UUID tournamentId) {
-        return controllers.get(tournamentId).getTournamentView();
+        TournamentController tournamentController =  controllers.get(tournamentId);
+        if (tournamentController != null) {
+            return tournamentController.getTournamentView();
+        }
+        return null;
     }
 
     public UUID getChatId(UUID tournamentId) {

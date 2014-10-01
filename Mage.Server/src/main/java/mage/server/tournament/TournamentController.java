@@ -42,6 +42,7 @@ import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
 import static mage.game.events.TableEvent.EventType.CONSTRUCT;
+import mage.game.match.Match;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentPairing;
@@ -241,7 +242,9 @@ public class TournamentController {
             tableManager.addPlayer(getPlayerUserId(player2.getPlayer().getId()), table.getId(), player2.getPlayer(), player2.getPlayerType(), player2.getDeck());
             table.setState(TableState.STARTING);
             tableManager.startTournamentSubMatch(null, table.getId());
-            pair.setMatch(tableManager.getMatch(table.getId()));
+            Match match = tableManager.getMatch(table.getId());
+            match.setTableId(tableId);
+            pair.setMatch(match);
             pair.setTableId(table.getId());
             player1.setState(TournamentPlayerState.DUELING);
             player2.setState(TournamentPlayerState.DUELING);

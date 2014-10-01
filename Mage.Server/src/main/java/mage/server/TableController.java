@@ -741,7 +741,7 @@ public class TableController {
                 }
             }
             // free resources no longer needed
-            match.cleanUpOnMatchEnd(ConfigSettings.getInstance().isSaveGameActivated());
+            match.cleanUpOnMatchEnd(ConfigSettings.getInstance().isSaveGameActivated(), table.isTournament());
         }
     }
 

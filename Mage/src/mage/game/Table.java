@@ -148,7 +148,7 @@ public class Table implements Serializable {
      */
     public void cleanUp() {
         if (match != null) {
-            match.cleanUpOnMatchEnd(isTournament);
+            match.cleanUpOnMatchEnd(false, false);
         }
     }
 

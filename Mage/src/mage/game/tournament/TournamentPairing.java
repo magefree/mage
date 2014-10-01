@@ -45,7 +45,7 @@ public class TournamentPairing {
     private final TournamentPlayer player1;
     private final TournamentPlayer player2;
     private boolean alreadyPublished;
-
+    
     public TournamentPairing(TournamentPlayer player1, TournamentPlayer player2) {
         this.player1 = player1;
         this.player2 = player2;

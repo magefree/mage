@@ -57,8 +57,7 @@ public class TournamentView implements Serializable {
 
     private final List<RoundView> rounds = new ArrayList<>();
     private final List<TournamentPlayerView> players = new ArrayList<>();
-
-    @SuppressWarnings("unchecked")
+    
     public TournamentView(Tournament tournament) {
 
         tournamentName = tournament.getOptions().getName();

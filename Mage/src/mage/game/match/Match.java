@@ -38,6 +38,7 @@ import mage.players.Player;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import mage.game.GameInfo;
 
 /**
  *
@@ -95,12 +96,19 @@ public interface Match {
      * information purpose.
      * 
      * @param isSaveGameActivated
+     * @param isTournament
      */
-    void cleanUpOnMatchEnd(boolean isSaveGameActivated);
+    void cleanUpOnMatchEnd(boolean isSaveGameActivated, boolean isTournament);
 
     /**
      * Free all possible resources
      */
     void cleanUp();
-    
+
+    GameInfo createGameInfo(Game game);
+
+    List<GameInfo> getGamesInfo();
+
+    void setTableId(UUID tableId);
+    void setTournamentRound(int round);
 }
