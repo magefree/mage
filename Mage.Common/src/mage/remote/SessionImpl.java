@@ -251,8 +251,8 @@ public class SessionImpl implements Session {
                 listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_PERIOD, "1000000");
                 listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_TIMEOUT, "900000");
             } else {
-                listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_PERIOD, "10000");
-                listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_TIMEOUT, "9000");
+                listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_PERIOD, "15000");
+                listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_TIMEOUT, "13000");
             }
             callbackClient.connect(new ClientConnectionListener(), listenerMetadata);
 

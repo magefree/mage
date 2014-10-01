@@ -1232,7 +1232,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     @Override
     public void disconnected(final boolean errorCall) {
         if (SwingUtilities.isEventDispatchThread()) { // Returns true if the current thread is an AWT event dispatching thread.
-            logger.info("DISCONNECTED (Event Dispacth Thread)");
+            logger.info("DISCONNECTED (Event Dispatch Thread)");
             setStatusText("Not connected");
             disableButtons();
             hideGames();
@@ -1250,6 +1250,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                         if (performConnect()) {
                             enableButtons();
                         }
+                    } else {
+                        session.disconnect(false);
                     }
                 }
             });

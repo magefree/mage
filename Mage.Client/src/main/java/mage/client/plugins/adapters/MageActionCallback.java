@@ -305,7 +305,7 @@ public class MageActionCallback implements ActionCallback {
     }
 
     private void sort(CardPanel card, JPanel container, boolean sortSource) {
-        java.util.List<CardPanel> cards = new ArrayList<CardPanel>();
+        java.util.List<CardPanel> cards = new ArrayList<>();
         for (Component component : container.getComponents()) {
             if (component instanceof CardPanel) {
                 if (!component.equals(card)) {
