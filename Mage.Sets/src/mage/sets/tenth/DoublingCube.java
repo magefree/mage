@@ -30,16 +30,17 @@ package mage.sets.tenth;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.players.ManaPool;
 import mage.players.Player;
 
 /**
@@ -53,7 +54,7 @@ public class DoublingCube extends CardImpl {
         this.expansionSetCode = "10E";
 
         // {3}, {tap}: Double the amount of each type of mana in your mana pool.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DoublingCubeEffect(), new ManaCostsImpl("{3}"));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new DoublingCubeEffect(), new ManaCostsImpl("{3}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         
@@ -69,10 +70,10 @@ public class DoublingCube extends CardImpl {
     }
 }
 
-class DoublingCubeEffect extends OneShotEffect {
+class DoublingCubeEffect extends ManaEffect {
 
     DoublingCubeEffect() {
-        super(Outcome.Benefit);
+        super();
         staticText = "Double the amount of each type of mana in your mana pool";
     }
 
@@ -86,31 +87,14 @@ class DoublingCubeEffect extends OneShotEffect {
         if (you == null) {
             return false;
         }
-        int blackMana = you.getManaPool().getBlack() * 2;
-        int whiteMana = you.getManaPool().getWhite() * 2;
-        int blueMana = you.getManaPool().getBlue() * 2;
-        int greenMana = you.getManaPool().getGreen() * 2;
-        int redMana = you.getManaPool().getRed() * 2;
-        int colorlessMana = you.getManaPool().getColorless() * 2;
-        
-        for (int i=0; i<blackMana; i++) {
-            you.getManaPool().addMana(Mana.BlackMana, game, source);
-        }
-        for (int i=0; i<whiteMana; i++) {
-            you.getManaPool().addMana(Mana.WhiteMana, game, source);
-        }
-        for (int i=0; i<blueMana; i++) {
-            you.getManaPool().addMana(Mana.BlueMana, game, source);
-        }
-        for (int i=0; i<greenMana; i++) {
-            you.getManaPool().addMana(Mana.GreenMana, game, source);
-        }
-        for (int i=0; i<redMana; i++) {
-            you.getManaPool().addMana(Mana.RedMana, game, source);
-        }
-        for (int i=0; i<colorlessMana; i++) {
-            you.getManaPool().addMana(Mana.ColorlessMana, game, source);
-        }
+        ManaPool pool = you.getManaPool();
+        int blackMana = pool.getBlack();
+        int whiteMana = pool.getWhite();
+        int blueMana = pool.getBlue();
+        int greenMana = pool.getGreen();
+        int redMana = pool.getRed();
+        int colorlessMana = pool.getColorless();        
+        pool.addMana(new Mana(redMana, greenMana, blueMana, whiteMana, blackMana, colorlessMana, 0), game, source);
         return true;
     }
 
