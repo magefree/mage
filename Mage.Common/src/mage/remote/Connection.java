@@ -56,9 +56,19 @@ public class Connection {
     private boolean showAbilityPickerForced;
     private UserSkipPrioritySteps userSkipPrioritySteps;
 
-    private static final String serialization = "?serializationtype=jboss";
+    private static final String serialization = "?serializationtype=jboss";    
     private static final String transport = "bisocket";
 
+    private final String parameter; 
+    
+    public Connection() {
+        this("");
+    }
+    
+    public Connection(String parameter) {
+        this.parameter = parameter;
+    }
+    
     @Override
     public int hashCode() {
         return (transport + host + Integer.toString(port) + proxyType.toString()).hashCode();    
@@ -75,7 +85,7 @@ public class Connection {
 
     @Override
     public String toString() {
-        return host + ":" + Integer.toString(port) + "/" + serialization;
+        return host + ":" + Integer.toString(port) + "/" + serialization + parameter;
     }
 
     public String getURI() {
@@ -83,13 +93,13 @@ public class Connection {
             try {
                 InetAddress inet = getLocalAddress();
                 if (inet != null) {
-                    return transport + "://" + inet.getHostAddress() + ":" + port + "/" + serialization;
+                    return transport + "://" + inet.getHostAddress() + ":" + port + "/" + serialization + parameter;
                 }
             } catch (SocketException ex) {
                 // just use localhost if can't find local ip
             }
         }
-        return transport + "://" + host + ":" + port + "/" + serialization;
+        return transport + "://" + host + ":" + port + "/" + serialization + parameter;
     }
 
     public ProxyType getProxyType() {

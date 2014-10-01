@@ -63,6 +63,7 @@ import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
+import org.jboss.remoting.transport.bisocket.BisocketServerInvoker;
 
 
 /**
@@ -106,7 +107,7 @@ public class Main {
                 fastDbMode = Boolean.valueOf(arg.replace(fastDBModeArg, ""));
             }
         }
-
+        
         logger.info("Loading cards...");
         if (fastDbMode) {
             CardScanner.scanned = true;
@@ -140,11 +141,18 @@ public class Main {
         logger.info("Config - max user name l.: " + config.getMaxUserNameLength());
         logger.info("Config - save game active: " + (config.isSaveGameActivated() ? "True":"false"));
         
-        Connection connection = new Connection();
+        logger.info("Config - backlog size    : " + config.getBacklogSize());
+        logger.info("Config - lease period    : " + config.getLeasePeriod());
+        logger.info("Config - max pool size   : " + config.getMaxPoolSize());
+        logger.info("Config - num accp.threads: " + config.getNumAcceptThreads());
+        logger.info("Config - second.bind port: " + config.getSecondaryBindPort());
+        
+        Connection connection = new Connection("&maxPoolSize=" + config.getMaxPoolSize());
         connection.setHost(config.getServerAddress());
         connection.setPort(config.getPort());
         try {
-            InvokerLocator serverLocator = new InvokerLocator(connection.getURI());
+            // Parameter: serializationtype => jboss
+            InvokerLocator serverLocator = new InvokerLocator(connection.getURI());                
             if (!isAlreadyRunning(serverLocator)) {
                 server = new MageTransporterServer(serverLocator, new MageServerImpl(adminPassword, testMode), MageServer.class.getName(), new MageServerInvocationHandler());
                 server.start();
@@ -231,7 +239,7 @@ public class Main {
         public MageTransporterServer(InvokerLocator locator, Object target, String subsystem, MageServerInvocationHandler callback) throws Exception {
             super(locator, target, subsystem);
             connector.addInvocationHandler("callback", callback);
-            connector.setLeasePeriod(5000);
+            connector.setLeasePeriod(ConfigSettings.getInstance().getLeasePeriod());
             connector.addConnectionListener(new ClientConnectionListener());
         }
 
@@ -250,10 +258,16 @@ public class Main {
     static class MageServerInvocationHandler implements ServerInvocationHandler {
 
         @Override
-        public void setMBeanServer(MBeanServer server) {}
+        public void setMBeanServer(MBeanServer server) {
+            
+        }
 
         @Override
-        public void setInvoker(ServerInvoker invoker) {}
+        public void setInvoker(ServerInvoker invoker) {            
+            ((BisocketServerInvoker) invoker).setSecondaryBindPort(ConfigSettings.getInstance().getSecondaryBindPort());
+            ((BisocketServerInvoker) invoker).setBacklog(ConfigSettings.getInstance().getBacklogSize());                        
+            ((BisocketServerInvoker) invoker).setNumAcceptThreads(ConfigSettings.getInstance().getNumAcceptThreads());            
+        }
 
         @Override
         public Object invoke(final InvocationRequest invocation) throws Throwable {

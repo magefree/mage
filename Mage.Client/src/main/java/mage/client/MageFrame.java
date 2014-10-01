@@ -695,7 +695,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         String server = prefs.get("serverAddress", "");
         int port = Integer.parseInt(prefs.get("serverPort", ""));
         String proxyServer = prefs.get("proxyAddress", "");
-        int proxyPort = Integer.parseInt(prefs.get("proxyPort", ""));
+        int proxyPort = Integer.parseInt(prefs.get("proxyPort", "0"));
         ProxyType proxyType = ProxyType.valueByText(prefs.get("proxyType", "None"));
         String proxyUsername = prefs.get("proxyUsername", "");
         String proxyPassword = prefs.get("proxyPassword", "");

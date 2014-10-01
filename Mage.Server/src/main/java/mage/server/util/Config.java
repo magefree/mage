@@ -48,6 +48,12 @@ public class Config {
             logger.fatal("Config error", ex);
         }
         port = Integer.parseInt(p.getProperty("port"));
+        secondaryBindPort = Integer.parseInt(p.getProperty("secondaryBindPort"));
+        backlogSize = Integer.parseInt(p.getProperty("backlogSize"));
+        numAcceptThreads = Integer.parseInt(p.getProperty("numAcceptThreads"));
+        maxPoolSize = Integer.parseInt(p.getProperty("numPoolSize"));
+        leasePeriod = Integer.parseInt(p.getProperty("leasePeriod"));
+        
         remoteServer = p.getProperty("remote-server");
         maxGameThreads = Integer.parseInt(p.getProperty("max-game-threads"));
         maxSecondsIdle = Integer.parseInt(p.getProperty("max-seconds-idle"));
@@ -59,6 +65,11 @@ public class Config {
 
     public static final String remoteServer;
     public static final int port;
+    public static final int secondaryBindPort;
+    public static final int backlogSize;
+    public static final int numAcceptThreads;
+    public static final int maxPoolSize;
+    public static final int leasePeriod;
     public static final int maxGameThreads;
     public static final int maxSecondsIdle;
     public static final int minUserNameLength;
