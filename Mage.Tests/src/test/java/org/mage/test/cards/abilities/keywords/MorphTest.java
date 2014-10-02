@@ -29,6 +29,7 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.filter.Filter;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -212,4 +213,83 @@ public class MorphTest extends CardTestPlayerBase {
 
     }    
     
+    /**
+     * 
+     * 
+     */
+    @Test
+    public void testPineWalkerWithUnboostEffect() {
+        addCard(Zone.HAND, playerA, "Pine Walker");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 8);
+        
+        // Doomwake Giant  {4}{B}
+        // Creature - Giant
+        // 4/6
+        // Constellation - When Doomwake Giant or another enchantment enters the battlefield under your control, creatures your opponents control get -1/-1 until end of turn.
+        addCard(Zone.HAND, playerB, "Doomwake Giant", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 5);
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+        
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Doomwake Giant");
+
+        // activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}{R}{W}{B}: Turn this face-down permanent face up.");
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{4}{G}: Turn this face-down permanent face up.");
+        
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20);
+        
+        assertHandCount(playerA, "Pine Walker", 0);        
+        assertHandCount(playerB, "Doomwake Giant", 0);
+        assertPermanentCount(playerA, "", 0);
+        assertPermanentCount(playerB, "Doomwake Giant", 1);
+        assertPermanentCount(playerA, "Pine Walker", 1);
+        assertPowerToughness(playerA, "Pine Walker", 4,4);
+
+    }    
+/**
+     * If a morph is on the table and an enemy Doomwake Giant comes down, the morph goes 
+     * down to 1/1 correctly. If you unmorph the 2/2 and is also a 2/2 after umorphing, 
+     * the morph will be erroneously reduced to 0/0 and die.
+     * 
+     */
+    @Test
+    public void testDoomwakeGiantEffect() {
+        addCard(Zone.HAND, playerA, "Ponyback Brigade");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        
+        // Doomwake Giant  {4}{B}
+        // Creature - Giant
+        // 4/6
+        // Constellation - When Doomwake Giant or another enchantment enters the battlefield under your control, creatures your opponents control get -1/-1 until end of turn.
+        addCard(Zone.HAND, playerB, "Doomwake Giant", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 5);
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ponyback Brigade");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+        
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Doomwake Giant");
+
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}{R}{W}{B}: Turn this face-down permanent face up.");
+        
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20);
+        
+        assertHandCount(playerA, "Ponyback Brigade", 0);        
+        assertHandCount(playerB, "Doomwake Giant", 0);
+        assertPermanentCount(playerA, "", 0);
+        assertPermanentCount(playerA, "Goblin", 3);
+        assertPowerToughness(playerA, "Goblin", 1,1,Filter.ComparisonScope.Any);
+        assertPermanentCount(playerB, "Doomwake Giant", 1);
+        assertPermanentCount(playerA, "Ponyback Brigade", 1);
+        assertPowerToughness(playerA, "Ponyback Brigade", 1,1);
+
+    }        
 }
