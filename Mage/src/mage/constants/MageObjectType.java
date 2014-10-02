@@ -32,7 +32,8 @@ public enum MageObjectType {
     SPELL ("Spell", false, true),
     PERMANENT ("Permanent", true, true),
     EMBLEM ("Emblem", false, false),
-    COMMANDER ("Commander", false, false);
+    COMMANDER ("Commander", false, false),
+    NULL("NullObject", false, false);
 
     private final String text;
     private final boolean permanent;

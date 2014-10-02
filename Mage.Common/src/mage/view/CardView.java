@@ -50,7 +50,6 @@ import mage.target.Targets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.game.permanent.PermanentCard;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -73,7 +72,7 @@ public class CardView extends SimpleCardView {
     protected int convertedManaCost;
     protected Rarity rarity;
 
-    protected MageObjectType mageObjectType;
+    protected MageObjectType mageObjectType = MageObjectType.NULL;
 
     protected boolean isAbility;
     protected AbilityType abilityType;

@@ -1,23 +1,18 @@
 package mage.client.util.gui;
 
-import java.awt.*;
-import java.util.ArrayList;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import mage.client.cards.Permanent;
-
 import mage.constants.CardType;
 import mage.constants.MageObjectType;
 import mage.utils.CardUtil;
 import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
-
 import org.jdesktop.swingx.JXPanel;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.UI;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
 
 public class GuiDisplayUtil {
     private static final Font cardNameFont = new Font("Calibri", Font.BOLD, 15);
@@ -228,8 +223,10 @@ public class GuiDisplayUtil {
                 buffer.append("[only controlled] ");
             }
         }
-        buffer.append(card.getMageObjectType().toString()).append("</td>");
-        buffer.append("</tr></table>");
+        if (!card.getMageObjectType().equals(MageObjectType.NULL)) {
+            buffer.append(card.getMageObjectType().toString());
+        }
+        buffer.append("</td></tr></table>");
 
         StringBuilder rule = new StringBuilder("<br/>");
         if (card.isSplitCard()) {
