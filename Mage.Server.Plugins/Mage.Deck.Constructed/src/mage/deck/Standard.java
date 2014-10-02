@@ -46,7 +46,8 @@ public class Standard extends Constructed {
         super("Constructed - Standard");
         GregorianCalendar current = new GregorianCalendar();
         GregorianCalendar cutoff;
-        if (current.get(Calendar.MONTH) > 9) {
+        // month is zero based so January = 0
+        if (current.get(Calendar.MONTH) > 8) {
             cutoff = new GregorianCalendar(current.get(Calendar.YEAR) - 1, Calendar.SEPTEMBER, 1);
         }
         else {

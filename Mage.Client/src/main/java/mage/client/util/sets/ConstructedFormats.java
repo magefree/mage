@@ -1,10 +1,14 @@
 package mage.client.util.sets;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
 import mage.constants.SetType;
-
-import java.util.*;
 
 /**
  * Utility class for constructed formats (expansions and other editions).
@@ -12,6 +16,9 @@ import java.util.*;
  * @author nantuko
  */
 public class ConstructedFormats {
+
+    private static GregorianCalendar calendar = new GregorianCalendar();
+    
 
     public static final String ALL = "- All Sets";
     public static final String STANDARD = "- Standard";
@@ -489,9 +496,18 @@ public class ConstructedFormats {
     }
 
     private static void buildLists() {
+        GregorianCalendar cutoff;
+        // month is zero based so January = 0
+        if (calendar.get(Calendar.MONTH) > 8) {
+            cutoff = new GregorianCalendar(calendar.get(Calendar.YEAR) - 1, Calendar.SEPTEMBER, 1);
+        }
+        else {
+            cutoff = new GregorianCalendar(calendar.get(Calendar.YEAR) - 2, Calendar.SEPTEMBER, 1);
+        }
+        
         for (ExpansionInfo set : ExpansionRepository.instance.getAll()) {
             if (!set.getType().equals(SetType.REPRINT) && !set.getType().equals(SetType.JOKESET)) {
-                if (set.getReleaseDate().after(standardDate)) {
+                if (set.getReleaseDate().after(cutoff.getTime())) {
                     standard.add(set.getCode());
                 }
                 if (set.getReleaseDate().after(extendedDate)) {
@@ -505,8 +521,7 @@ public class ConstructedFormats {
     }
 
     private static final List<String> standard = new ArrayList<>();
-    private static final Date standardDate = new GregorianCalendar(2012, 9, 28).getTime();
-
+    
     private static final List<String> extended = new ArrayList<>();
     private static final Date extendedDate = new GregorianCalendar(2009, 8, 20).getTime();
 
