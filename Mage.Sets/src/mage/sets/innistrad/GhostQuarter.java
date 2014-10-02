@@ -28,10 +28,6 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -41,6 +37,10 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -96,15 +96,15 @@ class GhostQuarterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
+        Permanent permanent = (Permanent) game.getPermanentOrLKIBattlefield(source.getFirstTarget()); // if indestructible effect should work also
         if (permanent != null) {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player.chooseUse(Outcome.PutLandInPlay, "Do you wish to search for a basic land, put it onto the battlefield and then shuffle your library?", game)) {
                 TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
                 if (player.searchLibrary(target, game)) {
                     Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
-                    if (card != null) {
-                        card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId());
+                    if (card != null)  {
+                        player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
                     }
                 }
                 player.shuffleLibrary(game);
