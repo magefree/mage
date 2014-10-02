@@ -53,7 +53,11 @@ public class ChasmDrake extends CardImpl {
         this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
+        
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+        
+        // Whenever Chasm Drake attacks, target creature you control gains flying until end of turn.
         Ability ability = new AttacksTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), false);
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

@@ -58,8 +58,11 @@ public class AbyssalPersecutor extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
+        // Flying, trample
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(TrampleAbility.getInstance());
+        
+        // You can't win the game and your opponents can't lose the game.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AbyssalPersecutorCannotWinEffect()));
     }
 

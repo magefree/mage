@@ -33,6 +33,7 @@ import java.util.UUID;
 
 import mage.constants.*;
 import mage.abilities.Ability;
+import mage.abilities.common.EmptyEffect;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
@@ -68,7 +69,7 @@ public class KondasBanner extends CardImpl {
         this.subtype.add("Equipment");
 
         // Konda's Banner can be attached only to a legendary creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EmptyEffect("{this} can be attached only to a legendary creature")));
 
         // Creatures that share a color with equipped creature get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KondasBannerColorBoostEffect()));
@@ -92,28 +93,6 @@ public class KondasBanner extends CardImpl {
     public KondasBanner copy() {
         return new KondasBanner(this);
     }        
-}
-
-class InfoEffect extends OneShotEffect {
-
-    public InfoEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "{this} can be attached only to a legendary creature";
-    }
-
-    public InfoEffect(final InfoEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public InfoEffect copy() {
-        return new InfoEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
 }
 
 class KondasBannerTypeBoostEffect extends BoostAllEffect  {

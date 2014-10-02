@@ -35,6 +35,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
@@ -55,8 +56,14 @@ public class SeizanPerverterOfTruth extends CardImpl {
         this.color.setBlack(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DrawCardTargetEffect(2), TargetController.ANY, false);
-        ability.addEffect(new LoseLifeTargetEffect(2));
+        
+        // At the beginning of each player's upkeep, that player loses 2 life and draws two cards.
+        Effect effect = new LoseLifeTargetEffect(2);
+        effect.setText("that player loses 2 life");
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.ANY, false);
+        effect = new DrawCardTargetEffect(2);
+        effect.setText("and draws two cards");
+        ability.addEffect(effect);
         this.addAbility(ability);
 
     }

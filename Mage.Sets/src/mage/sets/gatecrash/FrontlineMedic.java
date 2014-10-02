@@ -71,12 +71,12 @@ public class FrontlineMedic extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Battalion - Whenever Frontline Medic and at least two other creatures attack, creatures you control are indestructible this turn.
+        // Battalion - Whenever Frontline Medic and at least two other creatures attack, creatures you control gain indestructible until end of turn.
         Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent(), false);
-        effect.setText("creatures you control are indestructible this turn");
+        effect.setText("creatures you control gain indestructible until end of turn");
         this.addAbility(new BattalionAbility(effect));
 
-        // Sacrifice Frontline Medic: Counter target spell with {X} in its mana cost unless its controller pays 3.
+        // Sacrifice Frontline Medic: Counter target spell with {X} in its mana cost unless its controller pays {3}.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(3)), new SacrificeSourceCost());
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);
