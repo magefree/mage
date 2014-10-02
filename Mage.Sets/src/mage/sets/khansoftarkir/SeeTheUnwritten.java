@@ -30,6 +30,7 @@ package mage.sets.khansoftarkir;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -46,6 +47,7 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
 
 
 
@@ -62,15 +64,13 @@ public class SeeTheUnwritten extends CardImpl {
         this.color.setGreen(true);
 
         // Reveal the top eight cards of your library. You may put a creature card from among them onto the battlefield. Put the rest into your graveyard.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new SeeTheUnwrittenEffect(1),
-                new InvertCondition(FerociousCondition.getInstance()),
-                "Reveal the top eight cards of your library. You may put a creature card from among them onto the battlefield. Put the rest into your graveyard"));
         // <i>Ferocious</i> - If you control a creature with power 4 or greater, you may put two creature cards onto the battlefield instead of one.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
+                new SeeTheUnwrittenEffect(1),
                 new SeeTheUnwrittenEffect(2), 
-                FerociousCondition.getInstance(),
-                "<br/><br/><i>Ferocious</i> - If you control a creature with power 4 or greater, you may put two creature cards onto the battlefield instead of one"));
+                new InvertCondition(FerociousCondition.getInstance()),
+                "Reveal the top eight cards of your library. You may put a creature card from among them onto the battlefield. Put the rest into your graveyard" +
+                 "<br/><br/><i>Ferocious</i> - If you control a creature with power 4 or greater, you may put two creature cards onto the battlefield instead of one"       ));
     }
 
     public SeeTheUnwritten(final SeeTheUnwritten card) {
@@ -92,7 +92,9 @@ class SeeTheUnwrittenEffect extends OneShotEffect {
     public SeeTheUnwrittenEffect(int numberOfCardsToPutIntoPlay) {
         super(Outcome.DrawCard);
         this.numberOfCardsToPutIntoPlay = numberOfCardsToPutIntoPlay;
-        this.staticText = "Reveal the top eight cards of your library. You may put a creature card from among them onto the battlefield. Put the rest into your graveyard";
+        this.staticText = "Reveal the top eight cards of your library. You may put " +
+                (numberOfCardsToPutIntoPlay == 1 ? "a creature card":"two creature cards") +
+                " from among them onto the battlefield. Put the rest into your graveyard";
     }
 
     public SeeTheUnwrittenEffect(final SeeTheUnwrittenEffect effect) {
@@ -149,4 +151,5 @@ class SeeTheUnwrittenEffect extends OneShotEffect {
         }
         return false;
     }
+    
 }
