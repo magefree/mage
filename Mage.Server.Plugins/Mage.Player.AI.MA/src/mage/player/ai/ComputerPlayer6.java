@@ -564,6 +564,9 @@ public class ComputerPlayer6 extends ComputerPlayer implements Player {
                 }
 
                 if (currentPlayer.getId().equals(playerId)) {
+                    if (action instanceof PassAbility) {
+                        val = val -15; // passivity penalty
+                    }
                     if (val > alpha) {
                         alpha = val;
                         bestNode = newNode;
