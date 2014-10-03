@@ -13,7 +13,14 @@ public class ArrogantBloodlordTest extends CardTestPlayerBase {
     // blocked trigger
     @Test
     public void testCardBlocked() {
+        // Arrogant Bloodlord
+        // 4/4
+        // Whenever Arrogant Bloodlord blocks or becomes blocked by a creature with power 1 or less,
+        // destroy Arrogant Bloodlord at end of combat.
         addCard(Zone.BATTLEFIELD, playerA, "Arrogant Bloodlord");
+        // Wall of Air
+        // 1/5
+        // Defender, flying
         addCard(Zone.BATTLEFIELD, playerB, "Wall of Air");
 
         attack(1, playerA, "Arrogant Bloodlord");
@@ -26,7 +33,7 @@ public class ArrogantBloodlordTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
         assertPermanentCount(playerA, "Arrogant Bloodlord", 0);
         assertPermanentCount(playerB, "Wall of Air", 1);
-    }
+    } 
     // blocks trigger
     @Test
     public void testCardBlocker() {

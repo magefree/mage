@@ -38,7 +38,7 @@ import mage.constants.Zone;
 public abstract class EvasionAbility extends StaticAbility {
 
     public EvasionAbility() {
-        super(AbilityType.EVASION, Zone.BATTLEFIELD);
+        super(AbilityType.EVASION, Zone.ALL); 
     }
 
     public EvasionAbility(final EvasionAbility ability) {

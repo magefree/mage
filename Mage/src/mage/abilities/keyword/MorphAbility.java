@@ -45,7 +45,6 @@ import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continious.SourceEffect;
 import mage.cards.Card;
@@ -131,7 +130,6 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
         sb.append(REMINDER_TEXT);
         ruleText = sb.toString();
 
-        // alternateCosts.add(new AlternativeCost2Impl(ABILITY_KEYWORD, REMINDER_TEXT, new GenericManaCost(3)));
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesFaceDownCreatureEffect(morphCosts));
         ability.setRuleVisible(false);
         card.addAbility(ability);

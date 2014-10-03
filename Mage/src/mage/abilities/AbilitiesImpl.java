@@ -133,7 +133,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
     public Abilities<ActivatedAbility> getPlayableAbilities(Zone zone) {
         Abilities<ActivatedAbility> zonedAbilities = new AbilitiesImpl<>();
         for (T ability: this) {
-            if (((ability instanceof SpellAbility) || (ability instanceof PlayLandAbility))
+            if ((ability instanceof ActivatedAbility || (ability instanceof PlayLandAbility))
                     && ability.getZone().match(zone)) {
                 zonedAbilities.add((ActivatedAbility)ability);
             }
