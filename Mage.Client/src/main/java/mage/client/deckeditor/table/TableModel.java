@@ -58,7 +58,6 @@ import mage.client.util.Event;
 import mage.client.util.ImageHelper;
 import mage.client.util.Listener;
 import mage.client.util.gui.GuiDisplayUtil;
-import mage.constants.CardType;
 import mage.constants.EnlargeMode;
 import mage.view.CardView;
 import mage.view.CardsView;
@@ -87,8 +86,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
     private Dimension cardDimension;
 
     private boolean displayNoCopies = false;
-    private UpdateCountsCallback updateCountsCallback;
-
+    
     private final String column[] = { "Qty", "Name", "Cost", "Color", "Type", "Stats", "Rarity", "Set" };
 
     private SortSetting sortSetting;
@@ -133,23 +131,6 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
             for (CardView card : showCards.values()) {
                 if (!cards.containsKey(card.getId())) {
                     addCard(card, bigCard, gameId);
-                }
-                if (updateCountsCallback != null) {
-                    if (card.getCardTypes().contains(CardType.LAND)) {
-                        landCount++;
-                    }
-                    if (card.getCardTypes().contains(CardType.CREATURE)) {
-                        creatureCount++;
-                    }
-                    if (card.getCardTypes().contains(CardType.INSTANT)) {
-                        instantCount++;
-                    }
-                    if (card.getCardTypes().contains(CardType.SORCERY)) {
-                        sorceryCount++;
-                    }
-                    if (card.getCardTypes().contains(CardType.ENCHANTMENT)) {
-                        enchantmentCount++;
-                    }
                 }
             }
 
@@ -197,10 +178,6 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
                         }
                     }
                 }
-            }
-
-            if (updateCountsCallback != null) {
-                updateCountsCallback.update(cards.size(), creatureCount, landCount, sorceryCount, instantCount, enchantmentCount);
             }
         }
 
@@ -451,10 +428,6 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 
     public void setDisplayNoCopies(boolean value) {
         this.displayNoCopies = value;
-    }
-
-    public void setUpdateCountsCallback(UpdateCountsCallback callback) {
-        this.updateCountsCallback = callback;
     }
 
     public void setNumberEditable(boolean numberEditable) {

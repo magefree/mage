@@ -37,40 +37,24 @@ package mage.client.cards;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.beans.Beans;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
-import mage.cards.MageCard;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.constants.Constants.SortBy;
-import static mage.client.constants.Constants.SortBy.CASTING_COST;
-import static mage.client.constants.Constants.SortBy.COLOR;
-import static mage.client.constants.Constants.SortBy.COLOR_DETAILED;
-import static mage.client.constants.Constants.SortBy.RARITY;
 import mage.client.deckeditor.SortSetting;
 import mage.client.deckeditor.table.TableModel;
-import mage.client.deckeditor.table.UpdateCountsCallback;
 import mage.client.dialog.PreferencesDialog;
-import mage.client.plugins.impl.Plugins;
-import mage.client.util.CardViewColorComparator;
-import mage.client.util.CardViewColorDetailedComparator;
-import mage.client.util.CardViewCostComparator;
-import mage.client.util.CardViewNameComparator;
-import mage.client.util.CardViewRarityComparator;
 import mage.client.util.Config;
 import mage.client.util.Event;
 import mage.client.util.Listener;
@@ -84,12 +68,9 @@ import org.mage.card.arcane.CardPanel;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CardsList extends javax.swing.JPanel implements MouseListener, ICardGrid {
+public class CardsList extends javax.swing.JPanel implements ICardGrid {
    
-    protected CardEventSource cardEventSource = new CardEventSource();
-    private Dimension cardDimension;
     private CardsView cards;
-    private Map<UUID, MageCard> mageCards = new LinkedHashMap<>();
     protected BigCard bigCard;
     protected UUID gameId;
     private SortSetting sortSetting;
@@ -127,7 +108,6 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
                 ((CardPanel)comp).cleanUp();
             }
         }
-        mageCards.clear();
         cardArea.removeAll();
         this.bigCard = null;
 
@@ -170,7 +150,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
             chkPiles.setEnabled(false);
         } else {
             jToggleCardView.setSelected(true);
-            currentView = this;
+            currentView = cardArea;
             panelCardArea.setViewportView(cardArea);
             cbSortBy.setEnabled(true);
             chkPiles.setEnabled(true);
@@ -190,7 +170,6 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
             }
         });
 
-        mainModel.setUpdateCountsCallback(new UpdateCountsCallback(lblCount, lblCreatureCount, lblLandCount, lblSorceryCount, lblInstantCount, lblEnchantmentCount));
     }
 
     // if you use the deck ediot to build a free deck, numbers can be set directly in deck and sideboard
@@ -266,107 +245,17 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
                 mainTable.setRowSelectionInterval(selectedRow, selectedRow);
             }
         }
+        updateCounts();
     }
 
     private void redrawCards() {
         if (cards == null) {
             cards = new CardsView();
         }
-           currentView.loadCards(cards, sortSetting, bigCard, gameId);
-    }
-
-    @Override
-    public void drawCards(SortSetting sortSetting) {
-        int maxWidth = this.getParent().getWidth();
-        int numColumns = maxWidth / Config.dimensions.frameWidth;
-        int curColumn = 0;
-        int curRow = 0;
-        int maxRow = 0;
-        int maxColumn = 0;
-        Comparator<CardView> comparator = null;
-        Map<UUID, MageCard> oldMageCards = mageCards;
-        mageCards = new LinkedHashMap<>();
-        
-        //Find card view
-        for(UUID uuid : cards.keySet()){
-            if(oldMageCards.containsKey(uuid)){
-                mageCards.put(uuid, oldMageCards.get(uuid));
-                oldMageCards.remove(uuid);
-            }
-            else{
-                mageCards.put(uuid, addCard(cards.get(uuid), bigCard, gameId));
-            }
-        }
-        //Remove unused cards
-        for(MageCard card : oldMageCards.values()){
-            cardArea.remove(card);
-        }
-        
-        if (cards != null && cards.size() > 0) {
-            Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-            List<CardView> sortedCards = new ArrayList<>(cards.values());
-            switch (sortSetting.getSortBy()) {
-                case NAME:
-                    comparator = new CardViewNameComparator();
-                    break;
-                case RARITY:
-                    comparator = new CardViewRarityComparator();
-                    break;
-                case COLOR:
-                    comparator = new CardViewColorComparator();
-                    break;
-                case COLOR_DETAILED:
-                    comparator = new CardViewColorDetailedComparator();
-                    break;
-                case CASTING_COST:
-                    comparator = new CardViewCostComparator();
-                    break;
-            }
-            if(comparator != null){
-                Collections.sort(sortedCards, new CardViewNameComparator());
-                Collections.sort(sortedCards, comparator);
-            }
-            CardView lastCard = null;
-            for (CardView card: sortedCards) {
-                if (sortSetting.isPilesToggle()) {
-                    if (lastCard == null) {
-                        lastCard = card;
-                    }
-                    if(comparator != null){
-                        if(comparator.compare(card, lastCard) > 0){
-                            curColumn++;
-                            maxRow = Math.max(maxRow, curRow);
-                            curRow = 0;
-                        }
-                    }
-                    rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
-                    setCardBounds(mageCards.get(card.getId()), rectangle);
-                    
-                    curRow++;
-                    lastCard = card;
-                } else {
-                    rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
-                    setCardBounds(mageCards.get(card.getId()), rectangle);
-                    curColumn++;
-                    if (curColumn == numColumns) {
-                        maxColumn = Math.max(maxColumn, curColumn);
-                        curColumn = 0;
-                        curRow++;
-                    }
-                }
-            }
-        }
-        maxRow = Math.max(maxRow, curRow);
-        maxColumn = Math.max(maxColumn, curColumn);
-        updateCounts();
-        cardArea.setPreferredSize(new Dimension((maxColumn+1) * Config.dimensions.frameWidth, Config.dimensions.frameHeight + maxRow*20));
-        cardArea.revalidate();
-        this.revalidate();
-        this.repaint();
-        this.setVisible(true);
+        currentView.loadCards(cards, sortSetting, bigCard, gameId);
     }
     
-    private void updateCounts(){
+  private void updateCounts(){   
         int landCount = 0;
         int creatureCount = 0;
         int sorceryCount = 0;
@@ -398,28 +287,16 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         this.lblInstantCount.setText(Integer.toString(instantCount));
         this.lblEnchantmentCount.setText(Integer.toString(enchantmentCount));
     }
-
-    private MageCard addCard(CardView card, BigCard bigCard, UUID gameId) {
-        if (cardDimension == null) {
-            cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-        }
-        MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, cardDimension, gameId, true);
-        cardArea.add(cardImg);
-        cardImg.update(card);
-        cardImg.addMouseListener(this);
-        return cardImg;
+  
+  
+    @Override
+    public void drawCards(SortSetting sortSetting) {
+        currentView.drawCards(sortSetting);
     }
     
-
-    private void setCardBounds(MageCard card, Rectangle rectangle) {
-        card.setBounds(rectangle);
-        card.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-        cardArea.moveToFront(card);
-    }
-
     @Override
     public void addCardEventListener(Listener<Event> listener) {
-        cardEventSource.addListener(listener);
+        cardArea.addCardEventListener(listener);
         mainModel.addCardEventListener(listener);
     }
 
@@ -434,6 +311,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         this.bigCard = bigCard;
         this.gameId = gameId;
         drawCards(sortSetting);
+        updateCounts();
     }
 
     @Override
@@ -443,7 +321,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 
     @Override
     public void clearCardEventListeners() {
-        cardEventSource.clearListeners();
+        cardArea.clearCardEventListeners();
         mainModel.clearCardEventListeners();
     }
 
@@ -469,7 +347,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         jToggleListView = new javax.swing.JToggleButton();
         jToggleCardView = new javax.swing.JToggleButton();
         panelCardArea = new javax.swing.JScrollPane();
-        cardArea = new javax.swing.JLayeredPane();
+        cardArea = new mage.client.cards.CardGrid();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setMinimumSize(new java.awt.Dimension(30, 30));
@@ -621,7 +499,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
                 .addComponent(jToggleListView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jToggleCardView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 55, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelControlLayout.setVerticalGroup(
             panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -644,6 +522,18 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         jToggleListView.getAccessibleContext().setAccessibleDescription("Switch between image and table view.");
 
         panelCardArea.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+
+        javax.swing.GroupLayout cardAreaLayout = new javax.swing.GroupLayout(cardArea);
+        cardArea.setLayout(cardAreaLayout);
+        cardAreaLayout.setHorizontalGroup(
+            cardAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 612, Short.MAX_VALUE)
+        );
+        cardAreaLayout.setVerticalGroup(
+            cardAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 257, Short.MAX_VALUE)
+        );
+
         panelCardArea.setViewportView(cardArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -661,7 +551,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelControl, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(panelCardArea, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE))
+                .addComponent(panelCardArea, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -685,7 +575,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
     }//GEN-LAST:event_chkPilesActionPerformed
 
     private void jToggleCardViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleCardViewActionPerformed
-        currentView = this;
+        currentView = cardArea;
         panelCardArea.setViewportView(cardArea);
         cbSortBy.setEnabled(true);
         chkPiles.setEnabled(true);
@@ -695,7 +585,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgView;
-    private javax.swing.JLayeredPane cardArea;
+    private mage.client.cards.CardGrid cardArea;
     private javax.swing.JComboBox<SortBy> cbSortBy;
     private javax.swing.JCheckBox chkPiles;
     private javax.swing.JToggleButton jToggleCardView;
@@ -710,44 +600,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
     private javax.swing.JPanel panelControl;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        if (e.getClickCount() == 2 && !e.isConsumed()) {
-            e.consume();
-            Object obj = e.getSource();
-            if (obj instanceof Card) {
-                if (e.isAltDown()) {
-                    cardEventSource.altDoubleClick(((Card)obj).getOriginal(), "alt-double-click");
-                }
-                else {
-                    cardEventSource.doubleClick(((Card)obj).getOriginal(), "double-click");
-                }
-            } else if (obj instanceof MageCard) {
-                if (e.isAltDown()) {
-                    cardEventSource.altDoubleClick(((MageCard)obj).getOriginal(), "alt-double-click");
-                }
-                else {
-                    cardEventSource.doubleClick(((MageCard)obj).getOriginal(), "double-click");
-                }
-            }
-        }
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-    }
+   
 
     public void setDisplayNoCopies(boolean value) {
         mainModel.setDisplayNoCopies(value);
