@@ -68,6 +68,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     protected BigCard bigCard;
     protected UUID gameId;
     private final Map<UUID, MageCard> cards = new HashMap<>();
+    private List<List<UUID>> cardsPosition = new ArrayList<>();
     private Dimension cardDimension;
 
     /**
@@ -134,95 +135,102 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         add(cardImg);
         cardImg.update(card);
         cards.put(card.getId(), cardImg);
+        if(cardsPosition.size() > 0){
+            cardsPosition.add(new ArrayList<UUID>());
+        }
+        cardsPosition.get(0).add(card.getId());
     }
 
     @Override
     public void drawCards(SortSetting sortSetting) {
-        int maxWidth = this.getParent().getWidth();
-        int numColumns = maxWidth / Config.dimensions.frameWidth;
         int curColumn = 0;
         int curRow = 0;
-        if (cards.size() > 0) {
-            Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-            List<MageCard> sortedCards = new ArrayList<MageCard>(cards.values());
-            switch (sortSetting.getSortBy()) {
-                case NAME:
-                    Collections.sort(sortedCards, new CardNameComparator());
-                    break;
-                case RARITY:
-                    Collections.sort(sortedCards, new CardRarityComparator());
-                    break;
-                case COLOR:
-                    Collections.sort(sortedCards, new CardColorComparator());
-                    break;
-                case COLOR_DETAILED:
-                    Collections.sort(sortedCards, new CardColorDetailedComparator());
-                    break;
-                case CASTING_COST:
-                    Collections.sort(sortedCards, new CardCostComparator());
-                    break;
-            }
-            MageCard lastCard = null;
-            for (MageCard cardImg: sortedCards) {
-                if (sortSetting.isPilesToggle()) {
-                    if (lastCard == null) {
-                        lastCard = cardImg;
-                    }
-                    switch (sortSetting.getSortBy()) {
-                        case NAME:
-                            if (!cardImg.getOriginal().getName().equals(lastCard.getOriginal().getName())) {
-                                curColumn++;
-                                curRow = 0;
-                            }
-                            break;
-                        case RARITY:
-                            if (!cardImg.getOriginal().getRarity().equals(lastCard.getOriginal().getRarity())) {
-                                curColumn++;
-                                curRow = 0;
-                            }
-                            break;
-                        case COLOR:
-                            if (cardImg.getOriginal().getColor().compareTo(lastCard.getOriginal().getColor()) != 0) {
-                                curColumn++;
-                                curRow = 0;
-                            }
-                            break;
-                        case COLOR_DETAILED:
-                            if (cardImg.getOriginal().getColor().hashCode() !=  lastCard.getOriginal().getColor().hashCode()) {
-                                curColumn++;
-                                curRow = 0;
-                            }
-                            break;
-                        case CASTING_COST:
-                            if (cardImg.getOriginal().getConvertedManaCost() != lastCard.getOriginal().getConvertedManaCost()) {
-                                curColumn++;
-                                curRow = 0;
-                            }
-                            break;
-                    }
+        //Sort Cards
+        sortCards(sortSetting);
+        
+        Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+        //Draw cars
+        for(List<UUID> list : cardsPosition){
+            for(UUID card : list){
+                MageCard cardImg = cards.get(card);
+                if(cardImg != null)
+                {
                     rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
                     cardImg.setBounds(rectangle);
                     cardImg.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
                     moveToFront(cardImg);
                     curRow++;
-                    lastCard = cardImg;
                 }
-                else {
-                    rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
-                    cardImg.setBounds(rectangle);
-                    cardImg.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-                    moveToFront(cardImg);
-                    curColumn++;
-                    if (curColumn == numColumns) {
-                        curColumn = 0;
-                        curRow++;
+                
+            }
+            curColumn++;
+            curRow = 0;
+        }
+            
+        resizeArea();
+        revalidate();
+        repaint();
+    }
+    
+    private void sortCards(SortSetting sortSetting)
+    {
+        cardsPosition.clear();
+        if (cards.size() > 0) {
+            //Choose comparator
+            Comparator<MageCard> comparator;
+            switch (sortSetting.getSortBy()) {
+                case NAME:
+                    comparator = new CardNameComparator();
+                    break;
+                case RARITY:
+                    comparator = new CardRarityComparator();
+                    break;
+                case COLOR:
+                    comparator = new CardColorComparator();
+                    break;
+                case COLOR_DETAILED:
+                    comparator = new CardColorDetailedComparator();
+                    break;
+                case CASTING_COST:
+                    comparator = new CardCostComparator();
+                    break;
+                case UNSORTED:
+                    comparator = new UnsortdComparator();
+                    break;
+                default:
+                    comparator = new CardNameComparator();
+                    break;
+            }
+            //Sort cards
+            List<MageCard> sortedCards = new ArrayList<>(cards.values());
+            Collections.sort(sortedCards, new CardNameComparator());
+            Collections.sort(sortedCards, comparator);
+            //Put cards in piles
+            if (sortSetting.isPilesToggle()) {
+                MageCard lastCard = null;
+                ArrayList<UUID> list = new ArrayList<>();
+                for (MageCard cardImg: sortedCards) {
+                    if(lastCard == null || comparator.compare(lastCard, cardImg) < 0){
+                        list = new ArrayList<>();
+                        cardsPosition.add(list);
                     }
+                    lastCard = cardImg;
+                    list.add(cardImg.getOriginal().getId());
+                }
+            }
+            else
+            {
+                int maxWidth = this.getParent().getWidth();
+                int numColumns = maxWidth / Config.dimensions.frameWidth;
+                for (int i = 0; i < sortedCards.size(); i++) {
+                    if(cardsPosition.size() <= i % numColumns)
+                    {
+                        cardsPosition.add(new ArrayList<UUID>());
+                    } 
+                    cardsPosition.get(i % numColumns).add(sortedCards.get(i).getOriginal().getId());
                 }
             }
         }
-        resizeArea();
-           revalidate();
-           repaint();
     }
 
     private void clearCards() {
@@ -256,6 +264,11 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
                     remove(comp);
                     comp = null;
                 }
+            }
+        }
+        for(List<UUID> list : cardsPosition){
+            if(list.contains(cardId)){
+                list.remove(cardId);
             }
         }
     }
@@ -376,13 +389,8 @@ class CardRarityComparator implements Comparator<MageCard> {
 
     @Override
     public int compare(MageCard o1, MageCard o2) {
-        int val = o1.getOriginal().getRarity().compareTo(o2.getOriginal().getRarity());
-        if (val == 0) {
-            return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
-        }
-        else {
-            return val;
-        }
+        return o1.getOriginal().getRarity().compareTo(o2.getOriginal().getRarity());
+        
     }
 
 }
@@ -391,13 +399,7 @@ class CardCostComparator implements Comparator<MageCard> {
 
     @Override
     public int compare(MageCard o1, MageCard o2) {
-        int val = Integer.valueOf(o1.getOriginal().getConvertedManaCost()).compareTo(Integer.valueOf(o2.getOriginal().getConvertedManaCost()));
-        if (val == 0) {
-            return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
-        }
-        else {
-            return val;
-        }
+        return Integer.valueOf(o1.getOriginal().getConvertedManaCost()).compareTo(Integer.valueOf(o2.getOriginal().getConvertedManaCost()));
     }
 
 }
@@ -406,13 +408,7 @@ class CardColorComparator implements Comparator<MageCard> {
 
     @Override
     public int compare(MageCard o1, MageCard o2) {
-        int val = o1.getOriginal().getColor().compareTo(o2.getOriginal().getColor());
-        if (val == 0) {
-            return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
-        }
-        else {
-            return val;
-        }
+        return o1.getOriginal().getColor().compareTo(o2.getOriginal().getColor());
     }
 
 }
@@ -421,13 +417,15 @@ class CardColorDetailedComparator implements Comparator<MageCard> {
 
     @Override
     public int compare(MageCard o1, MageCard o2) {
-        int val = o1.getOriginal().getColor().hashCode() - o2.getOriginal().getColor().hashCode();
-        if (val == 0) {
-            return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
-        }
-        else {
-            return val;
-        }
+        return o1.getOriginal().getColor().hashCode() - o2.getOriginal().getColor().hashCode();
+    }
+}
+    
+class UnsortdComparator implements Comparator<MageCard> {
+
+    @Override
+    public int compare(MageCard o1, MageCard o2) {
+        return 0;
     }
 
 }
