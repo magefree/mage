@@ -288,13 +288,21 @@ public class HumanPlayer extends PlayerImpl {
                 if (possibleTargets.contains(response.getUUID())) {
                     if (target instanceof TargetPermanent) {
                         if (((TargetPermanent)target).canTarget(playerId, response.getUUID(), source, game)) {
-                            target.addTarget(response.getUUID(), source, game);
-                            if(target.doneChosing()){
-                                return true;
+                            if (target.getTargets().contains(response.getUUID())) { // if already included remove it with
+                                target.remove(response.getUUID());
+                            } else {
+                                target.addTarget(response.getUUID(), source, game);
+                                if(target.doneChosing()){
+                                    return true;
+                                }
                             }
                         }
                     } else if (target.canTarget(playerId, response.getUUID(), source, game)) {
-                        target.addTarget(response.getUUID(), source, game);
+                        if (target.getTargets().contains(response.getUUID())) { // if already included remove it with 
+                            target.remove(response.getUUID());
+                        } else {
+                            target.addTarget(response.getUUID(), source, game);
+                        }
                         if(target.doneChosing()){
                             return true;
                         }
