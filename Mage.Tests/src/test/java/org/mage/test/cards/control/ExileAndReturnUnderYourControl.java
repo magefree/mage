@@ -2,6 +2,7 @@ package org.mage.test.cards.control;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -33,4 +34,39 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Elite Vanguard", 1);
     }
+
+    @Test
+    public void testVillainousWealthExilesCourser() {
+        // Villainous Wealth {X}{B}{G}{U}
+        // Target opponent exiles the top X cards of his or her library. You may cast any number
+        // of nonland cards with converted mana cost X or less from among them without paying
+        // their mana costs.
+        addCard(Zone.HAND, playerA, "Villainous Wealth");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+
+        // Courser of Kruphix {1}{G}{G}
+        // Play with the top card of your library revealed.
+        // You may play the top card of your library if it's a land card.
+        // Whenever a land enters the battlefield under your control, you gain 1 life.
+        addCard(Zone.LIBRARY, playerB, "Courser of Kruphix");
+        skipInitShuffling(); // to keep this card on top of library
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Villainous Wealth", playerB);
+        setChoice(playerA, "X=3");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Courser of Kruphix");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Villainous Wealth", 1);
+        assertExileCount(playerB, 2);
+        assertExileCount("Courser of Kruphix", 0);
+        assertPermanentCount(playerA, "Courser of Kruphix", 1);
+        Assert.assertTrue("player A should play with top card revealed", playerA.isTopCardRevealed());
+        Assert.assertFalse("player B should play NOT with top card revealed", playerB.isTopCardRevealed());
+    }
+    
+
 }
