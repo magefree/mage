@@ -34,6 +34,7 @@
 
 package mage.client.cards;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Rectangle;
@@ -56,6 +57,7 @@ import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.view.CardView;
 import mage.view.CardsView;
+import org.jdesktop.swingx.JXPanel;
 import org.mage.card.arcane.CardPanel;
 
 /**
@@ -71,6 +73,11 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     private List<List<UUID>> cardsPosition = new ArrayList<>();
     private List<UUID> selectedCards = new ArrayList<>();
     private Dimension cardDimension;
+    
+    private JXPanel selectionRectangle;
+
+    private int selectionAreaX;
+    private int selectionAreaY;
 
     /**
      * Max amount of cards in card grid for which card images will be drawn.
@@ -82,6 +89,14 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         initComponents();
         setOpaque(false);
         this.addMouseListener(this);
+        
+        //Create selection Rectangle
+        selectionRectangle = new JXPanel();
+        selectionRectangle.setBackground(Color.BLUE);
+        selectionRectangle.setBorder(javax.swing.BorderFactory.createLineBorder(Color.BLUE, 3));
+        this.add(selectionRectangle);
+        selectionRectangle.setAlpha(0.7f);
+        selectionRectangle.setOpaque(false);
     }
 
     public void clear() {
@@ -314,6 +329,12 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -326,6 +347,51 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        int x = (int) Math.min(evt.getX(), selectionAreaX);
+        int y = (int) Math.min(evt.getY(), selectionAreaY);
+        int w = (int)Math.abs(evt.getX() - selectionAreaX);
+        int h = (int)Math.abs(evt.getY() - selectionAreaY);
+       
+        //cardArea.moveToFront(selectionArea);
+        selectionRectangle.setBounds(x, y, w, h);
+        
+        for(Component c : getComponents())
+        {
+            if(c instanceof MageCard){
+                ((MageCard)c).setSelected(false);
+            }
+        }
+        int minColunm = x / (Config.dimensions.frameWidth);
+        int maxColunm = (x + w) /(Config.dimensions.frameWidth);
+        
+        int minRow = y/20;
+        int maxRow = (y+h)/20;
+        
+        deselectAllCards();
+        
+        for(int column = 0; column < cardsPosition.size(); column++)
+        {
+            if(column >= minColunm && column <= maxColunm){
+                List<UUID> list = cardsPosition.get(column);
+                for(int row = 0; row < list.size() -1; row++){
+                    if(row >= minRow && row <= maxRow){
+                        cards.get(list.get(row)).setSelected(true);
+                        selectedCards.add(list.get(row));
+                    }
+                }
+                if(list.size() > 0){
+                   int row =  list.size() -1;
+                   if(row*20 + Config.dimensions.frameHeight >= y && row*20 <= y+h){
+                        cards.get(list.get(row)).setSelected(true);
+                        selectedCards.add(list.get(row));
+                   }
+                }
+            }
+        }
+        repaint();
+    }//GEN-LAST:event_formMouseDragged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
@@ -333,9 +399,6 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getClickCount() == 1 && !e.isConsumed()){
-            if(e.getSource() == this){
-                deselectAllCards();
-            }
             if (e.getSource() instanceof MageCard){
                 MageCard card = (MageCard)e.getSource();
                 if(!e.isControlDown()){
@@ -380,10 +443,23 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {
+        if(e.getSource() == this){
+            deselectAllCards();
+            selectionRectangle.setVisible(true);
+            selectionAreaX = e.getX();
+            selectionAreaY = e.getY();
+            selectionRectangle.setBounds(e.getX(), e.getY(), 0, 0);
+            moveToFront(selectionRectangle);
+        }
+    }
 
     @Override
-    public void mouseReleased(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {
+        if(e.getSource() == this){
+            selectionRectangle.setVisible(false);
+        }
+    }
 
     @Override
     public void mouseEntered(MouseEvent e) {}
