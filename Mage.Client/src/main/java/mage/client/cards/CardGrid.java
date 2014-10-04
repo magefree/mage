@@ -69,6 +69,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     protected UUID gameId;
     private final Map<UUID, MageCard> cards = new HashMap<>();
     private List<List<UUID>> cardsPosition = new ArrayList<>();
+    private List<UUID> selectedCards = new ArrayList<>();
     private Dimension cardDimension;
 
     /**
@@ -80,6 +81,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     public CardGrid() {
         initComponents();
         setOpaque(false);
+        this.addMouseListener(this);
     }
 
     public void clear() {
@@ -89,6 +91,10 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         this.clearCardEventListeners();
         this.clearCards();
         this.bigCard = null;
+    }
+    
+    public List<UUID> getSelectedCards() {
+        return selectedCards;
     }
 
     @Override
@@ -135,7 +141,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         add(cardImg);
         cardImg.update(card);
         cards.put(card.getId(), cardImg);
-        if(cardsPosition.size() > 0){
+        if(cardsPosition.size() == 0){
             cardsPosition.add(new ArrayList<UUID>());
         }
         cardsPosition.get(0).add(card.getId());
@@ -276,6 +282,17 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     public void removeCard(UUID cardId) {
         removeCardImg(cardId);
         cards.remove(cardId);
+        selectedCards.remove(cardId);
+    }
+    
+    public void deselectAllCards(){
+        for(UUID uuid : selectedCards){
+            MageCard unselectCard = cards.get(uuid);
+            if(unselectCard != null){
+                unselectCard.setSelected(false);
+            }
+        }
+        selectedCards.clear();
     }
 
     @Override
@@ -315,7 +332,35 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e.getClickCount() == 2 && !e.isConsumed()) {
+        if(e.getClickCount() == 1 && !e.isConsumed()){
+            if(e.getSource() == this){
+                deselectAllCards();
+            }
+            if (e.getSource() instanceof MageCard){
+                MageCard card = (MageCard)e.getSource();
+                if(!e.isControlDown()){
+                    //Remove selected cards
+                    deselectAllCards();
+                    card.setSelected(true);
+                    selectedCards.add(card.getOriginal().getId());
+                }
+                else{
+                    //Select card
+                    if(!selectedCards.contains(card.getOriginal().getId())){
+                        card.setSelected(true);
+                        selectedCards.add(card.getOriginal().getId());
+                    }
+                    //Disselect card
+                    else{
+                        card.setSelected(false);
+                        selectedCards.remove(card.getOriginal().getId());
+                    }
+                }
+            }
+            revalidate();
+            repaint();
+        }
+        else if (e.getClickCount() == 2 && !e.isConsumed()) {
             e.consume();
             Object obj = e.getSource();
             if (obj instanceof Card) {
