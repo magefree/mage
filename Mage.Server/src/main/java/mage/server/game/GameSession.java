@@ -289,12 +289,13 @@ public class GameSession extends GameWatcher {
                             } catch (Exception ex) {
                                 if (ex != null) {
                                     logger.fatal("Game session game quit exception " + (ex.getMessage() == null ? "null":ex.getMessage()));
+                                    logger.debug("- gameId:" + game.getId() +"  playerId: " + playerId);
                                     if (ex.getCause() != null) {
                                         logger.debug("- Cause: " + (ex.getCause().getMessage() == null ? "null":ex.getCause().getMessage()));
                                     }
                                     ex.printStackTrace();
                                 }else {
-                                    logger.fatal("Game session game quit exception - null");
+                                    logger.fatal("Game session game quit exception - null  gameId:" + game.getId() +"  playerId: " + playerId);
                                 }
                             }
                         }

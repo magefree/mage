@@ -431,6 +431,7 @@ public class TableController {
                                 if (player != null && player.isInGame()) {
                                     GameManager.getInstance().quitMatch(game.getId(), userId);
                                 }
+                                match.quitMatch(playerId);
                             } else {                                
                                 if (table.getState().equals(TableState.SIDEBOARDING)) {
                                     if (!matchPlayer.isDoneSideboarding()) {
@@ -519,8 +520,10 @@ public class TableController {
             GameManager.getInstance().createGameSession(match.getGame(), userPlayerMap, table.getId(), choosingPlayerId);
             String creator = null;
             StringBuilder opponent = new StringBuilder();
+            int activePlayers = 0;
             for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
                 if (!match.getPlayer(entry.getValue()).hasQuit()) {
+                    activePlayers++;
                     User user = UserManager.getInstance().getUser(entry.getKey());
                     if (user != null) {
                         if (!user.isConnected()) {
@@ -549,10 +552,10 @@ public class TableController {
                             matchPlayer.setQuit(true);
                         }
                     }
-                } else {
-                    // Match player has already quit
-                    throw new MageException("Can't start game - user already quit userId " + entry.getKey());
                 }
+            }
+            if (activePlayers < 2) {
+                throw new MageException("Can't start game - Less than two players active - " +activePlayers);
             }
             // Append AI opponents to the log file
             for (MatchPlayer mPlayer :match.getPlayers()) {
@@ -855,7 +858,7 @@ public class TableController {
                 }
                 if (matchPlayer.getPlayer().isHuman()) {
                     humanPlayers++;                    
-                    if (!matchPlayer.hasQuit()) {
+                    if (!matchPlayer.hasQuit() && match.getGame() != null && matchPlayer.getPlayer().isInGame()) {
                         User user = UserManager.getInstance().getUser(userPlayerEntry.getKey());
                         if (user == null) {
                             logger.debug("- Active user of match is missing: " + matchPlayer.getName());
