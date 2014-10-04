@@ -29,22 +29,27 @@
 
 package mage.abilities;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import mage.MageObject;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
-
-import java.util.*;
-import mage.game.events.GameEvent.EventType;
-
 
 /**
 *
 * @author BetaSteward_at_googlemail.com
 */
-public class TriggeredAbilities extends HashMap<String, TriggeredAbility> {
+public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbility> {
 
     private final Map<String, List<UUID>> sources = new HashMap<>();
 
