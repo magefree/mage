@@ -110,7 +110,7 @@ public class TournamentPanel extends javax.swing.JPanel {
 //                    logger.info("Replaying game " + gameId);
 //                    session.replayGame(gameId);
 //                }
-                if (state.equals("Dueling") && actionText.equals("Watch")) {
+                if (state.startsWith("Dueling") && actionText.equals("Watch")) {
                     logger.info("Watching game " + gameId);
                     session.watchTournamentTable(tableId);
                 }
@@ -634,7 +634,7 @@ class TournamentMatchesTableModel extends AbstractTableModel {
 //                if (games[arg0].getState().equals("Finished")) {
 //                    return "Replay";
 //                }
-                if (watchingAllowed && games[arg0].getState().equals("Dueling")) {
+                if (watchingAllowed && games[arg0].getState().startsWith("Dueling")) {
                     return "Watch";
                 }
                 return "";
