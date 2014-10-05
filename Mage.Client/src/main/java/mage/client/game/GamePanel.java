@@ -931,7 +931,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.getActionMap().put("F4_PRESS", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                btnEndTurnActionPerformed(null);
+                btnEndTurnActionPerformed(actionEvent);
             }
         });
 
@@ -940,7 +940,16 @@ public final class GamePanel extends javax.swing.JPanel {
         this.getActionMap().put("F5_PRESS", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                btnUntilEndOfTurnActionPerformed(null);
+                btnUntilEndOfTurnActionPerformed(actionEvent);
+            }
+        });
+
+        ks = KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0);
+        this.getInputMap(c).put(ks, "F7_PRESS");
+        this.getActionMap().put("F7_PRESS", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                btnUntilNextMainPhaseActionPerformed(actionEvent);
             }
         });
 
@@ -1170,12 +1179,19 @@ public final class GamePanel extends javax.swing.JPanel {
         jPhases.setLayout(null);
         jPhases.setPreferredSize(new Dimension(X_PHASE_WIDTH, 450));
 
+        MouseAdapter phasesMouseAdapter = new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                mouseClickPhaseBar(evt);
+            }
+        };
         String[] phases = {"Untap", "Upkeep", "Draw", "Main1",
                 "Combat_Start", "Combat_Attack", "Combat_Block", "Combat_Damage", "Combat_End",
                 "Main2", "Cleanup", "Next_Turn"};
         for (String name : phases) {
-            createPhaseButton(name);
+            createPhaseButton(name, phasesMouseAdapter);
         }
+
 
         int i = 0;
         for (String name : hoverButtons.keySet()) {
@@ -1185,6 +1201,7 @@ public final class GamePanel extends javax.swing.JPanel {
             jPhases.add(hoverButton);
             i++;
         }
+        jPhases.addMouseListener(phasesMouseAdapter);
 
         pnlReplay.setOpaque(false);
         HelperPanel helper = new HelperPanel();
@@ -1199,7 +1216,7 @@ public final class GamePanel extends javax.swing.JPanel {
         phasesContainer = new JPanel();
         phasesContainer.setLayout(new RelativeLayout(RelativeLayout.Y_AXIS));
         phasesContainer.setBackground(new Color(0, 0, 0, 0));
-        Float ratio = new Float(1);
+        Float ratio = (float) 1;
         JPanel empty1 = new JPanel();
         empty1.setBackground(new Color(0, 0, 0, 0));
         phasesContainer.add(empty1, ratio);
@@ -1307,6 +1324,15 @@ public final class GamePanel extends javax.swing.JPanel {
         for (MouseListener ml :this.btnSwitchHands.getMouseListeners()) {
             this.btnSwitchHands.removeMouseListener(ml);
         }
+        for (MouseListener ml :this.jPhases.getMouseListeners()) {
+            this.jPhases.removeMouseListener(ml);
+        }
+        for (String name : hoverButtons.keySet()) {
+            HoverButton hoverButton = hoverButtons.get(name);
+            for (MouseListener ml :hoverButton.getMouseListeners()) {
+                hoverButton.removeMouseListener(ml);
+            }
+        }
         for (ActionListener al :this.btnPlay.getActionListeners()) {
             this.btnPlay.removeActionListener(al);
         }
@@ -1359,7 +1385,13 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private void btnUntilEndOfTurnActionPerformed(java.awt.event.ActionEvent evt) {
         if (feedbackPanel != null && FeedbackMode.SELECT.equals(feedbackPanel.getMode())) {
-            session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_OPPONENTS_TURN_END_STEP, gameId);            
+            session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId);            
+        }
+    }
+
+    private void btnUntilNextMainPhaseActionPerformed(java.awt.event.ActionEvent evt) {
+        if (feedbackPanel != null && FeedbackMode.SELECT.equals(feedbackPanel.getMode())) {
+            session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE, gameId);
         }
     }
 
@@ -1375,7 +1407,13 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
 
-    private void btnSwitchHandActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void mouseClickPhaseBar(MouseEvent evt) {
+        if (evt.getButton() == MouseEvent.BUTTON1) { // Left button
+            PreferencesDialog.main(new String[]{PreferencesDialog.OPEN_PHASES_TAB});
+        }
+    }
+
+    private void btnSwitchHandActionPerformed(java.awt.event.ActionEvent evt) {
         String[] choices = handCards.keySet().toArray(new String[0]);
 
         String newChosenHandKey = (String) JOptionPane.showInputDialog(
@@ -1439,7 +1477,7 @@ public final class GamePanel extends javax.swing.JPanel {
         abilityPicker.setVisible(false);
     }
 
-    private void createPhaseButton(String name) {
+    private void createPhaseButton(String name, MouseAdapter mouseAdapter) {
         if (hoverButtons == null) {
             hoverButtons = new LinkedHashMap<>();
         }
@@ -1447,6 +1485,7 @@ public final class GamePanel extends javax.swing.JPanel {
         HoverButton button = new HoverButton("", ImageManagerImpl.getInstance().getPhaseImage(name), rect);
         button.setToolTipText(name.replaceAll("_", " "));
         button.setPreferredSize(new Dimension(36, 36));
+        button.addMouseListener(mouseAdapter);
         hoverButtons.put(name, button);
     }
 

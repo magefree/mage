@@ -521,7 +521,7 @@ public class TableController {
             String creator = null;
             StringBuilder opponent = new StringBuilder();
             int activePlayers = 0;
-            for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
+            for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) { // no AI players
                 if (!match.getPlayer(entry.getValue()).hasQuit()) {
                     activePlayers++;
                     User user = UserManager.getInstance().getUser(entry.getKey());
@@ -544,8 +544,7 @@ public class TableController {
                             }
                             opponent.append(user.getName());
                         }
-                    }
-                    else {
+                    } else {
                         logger.error("Unable to find user: " + entry.getKey() + "  playerId: " + entry.getValue());
                         MatchPlayer matchPlayer = match.getPlayer(entry.getValue());
                         if (matchPlayer != null && !matchPlayer.hasQuit()) {
@@ -554,17 +553,18 @@ public class TableController {
                     }
                 }
             }
-            if (activePlayers < 2) {
-                throw new MageException("Can't start game - Less than two players active - " +activePlayers);
-            }
             // Append AI opponents to the log file
             for (MatchPlayer mPlayer :match.getPlayers()) {
                 if (!mPlayer.getPlayer().isHuman()) {
+                    activePlayers++;
                     if (opponent.length() > 0) {
                         opponent.append(" - ");
                     }
                     opponent.append(mPlayer.getName());
                 }
+            }
+            if (activePlayers < 2) {
+                throw new MageException("Can't start game - Less than two players active - " +activePlayers);
             }
             ServerMessagesUtil.getInstance().incGamesStarted();
 

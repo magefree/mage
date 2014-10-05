@@ -158,6 +158,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean passed; // player passed priority
     protected boolean passedTurn; // F4
     protected boolean passedUntilEndOfTurn; // F5
+    protected boolean passedUntilNextMain; // F6
+    protected boolean skippedAtLeastOnce; // used to track if passed started in specific phase
     /**
      * This indicates that player passed all turns until his own turn starts (F9).
      * Note! This differs from passedTurn as it doesn't care about spells and abilities in the stack and will pass them as well.
@@ -289,6 +291,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         
         this.passedTurn = player.passedTurn;
         this.passedUntilEndOfTurn = player.passedUntilEndOfTurn;
+        this.passedUntilNextMain = player.passedUntilNextMain;
+        this.skippedAtLeastOnce = player.skippedAtLeastOnce;
         this.passedAllTurns = player.passedAllTurns;
         
         this.priorityTimeLeft = player.getPriorityTimeLeft();
@@ -398,6 +402,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.passed = false;
         this.passedTurn = false;
         this.passedUntilEndOfTurn = false;
+        this.passedUntilNextMain = false;
+        this.skippedAtLeastOnce = false;
         this.passedAllTurns = false;
         this.canGainLife = true;
         this.canLoseLife = true;
@@ -545,9 +551,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void endOfTurn(Game game) {
         this.passedTurn = false;
-        if (!game.getActivePlayerId().equals(playerId)) {
-            this.passedUntilEndOfTurn = false;
-        }
     }
 
     @Override
@@ -1634,24 +1637,41 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void sendPlayerAction(PlayerAction passPriorityAction, Game game) {
         switch(passPriorityAction) {
-            case PASS_PRIORITY_UNTIL_MY_NEXT_TURN:
-                passedTurn = true;
+            case PASS_PRIORITY_UNTIL_MY_NEXT_TURN: // F9
+                passedUntilNextMain = false;
+                passedUntilEndOfTurn = false;
+                passedTurn = false;
                 passedAllTurns = true;
                 this.skip();                
                 break;
-            case PASS_PRIORITY_UNTIL_OPPONENTS_TURN_END_STEP:
+            case PASS_PRIORITY_UNTIL_TURN_END_STEP: // F5
+                passedUntilNextMain = false;
+                passedTurn = false;
+                passedAllTurns = false;
                 passedUntilEndOfTurn = true;
+                skippedAtLeastOnce = !game.getTurn().getStepType().equals(PhaseStep.END_TURN);
                 this.skip();
                 break;
-            case PASS_PRIORITY_UNTIL_NEXT_TURN:
+            case PASS_PRIORITY_UNTIL_NEXT_TURN: // F4
+                passedUntilNextMain = false;
+                passedAllTurns = false;
+                passedUntilEndOfTurn = false;
                 passedTurn = true;
+                this.skip();
+                break;
+            case PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE: //F7
+                passedAllTurns = false;
+                passedTurn = false;
+                passedUntilEndOfTurn = false;
+                passedUntilNextMain = true;
+                skippedAtLeastOnce = !(game.getTurn().getStepType().equals(PhaseStep.POSTCOMBAT_MAIN) || game.getTurn().getStepType().equals(PhaseStep.PRECOMBAT_MAIN));
                 this.skip();
                 break;
             case PASS_PRIORITY_CANCEL_ALL_ACTIONS:
                 passedAllTurns = false;
                 passedTurn = false;
-                passedUntilEndOfTurn = false;                
-                break;
+                passedUntilEndOfTurn = false;
+                passedUntilNextMain = false;
         }
         logger.trace("PASS Priority: " + passPriorityAction.toString());
     }
@@ -2032,10 +2052,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 playable.add(ability);
                             }
                         }
-                        if (ability instanceof AlternativeSourceCosts) {
-                            // something missing here
-                            int test = 6;
-                        }
+//                        if (ability instanceof AlternativeSourceCosts) {
+//
+//                        }
                     }
                 }
             }

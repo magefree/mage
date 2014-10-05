@@ -72,7 +72,7 @@ public class CallbackClientImpl implements CallbackClient {
     private static final Logger logger = Logger.getLogger(CallbackClientImpl.class);
     private final MageFrame frame;
     private int messageId = 0;
-    private int gameInformMessageId = 0;
+//    private int gameInformMessageId = 0;
 
     public CallbackClientImpl(MageFrame frame) {
         this.frame = frame;
@@ -292,16 +292,20 @@ public class CallbackClientImpl implements CallbackClient {
                                 JOptionPane.showMessageDialog(null, messageData.get(1), messageData.get(0), JOptionPane.WARNING_MESSAGE);
                             }   break;
                         case "gameInform":
-                            if (callback.getMessageId() > gameInformMessageId) {
+//                            if (callback.getMessageId() > gameInformMessageId) {
+                            {
                                 GameClientMessage message = (GameClientMessage) callback.getData();
                                 GamePanel panel = MageFrame.getGame(callback.getObjectId());
                                 if (panel != null) {
                                     panel.inform(message.getMessage(), message.getGameView(), callback.getMessageId());
                                 }
-                            } else {
-                                logger.warn(new StringBuilder("message out of sequence - ignoring").append("MessageId = ").append(callback.getMessageId()).append(" method = ").append(callback.getMethod()));
-                                //logger.warn("message out of sequence - ignoring");
-                            }   gameInformMessageId = messageId;
+                            }
+// no longer needed because phase skip handling on server side now
+//                            } else {
+//                                logger.warn(new StringBuilder("message out of sequence - ignoring").append("MessageId = ").append(callback.getMessageId()).append(" method = ").append(callback.getMethod()));
+//                                //logger.warn("message out of sequence - ignoring");
+//                            }
+//                            gameInformMessageId = messageId;
                             break;
                         case "gameInformPersonal":
                             {
@@ -347,14 +351,18 @@ public class CallbackClientImpl implements CallbackClient {
                                 DraftPanel panel = MageFrame.getDraft(callback.getObjectId());
                                 if (panel != null) {
                                     panel.updateDraft((DraftView) callback.getData());
-                                }       break;
+                                }
+                                break;
                             }
                         case "draftInform":
-                            if (callback.getMessageId() > messageId) {
+//                            if (callback.getMessageId() > messageId) {
+                            {
                                 DraftClientMessage message = (DraftClientMessage) callback.getData();
-                            } else {
-                                logger.warn("message out of sequence - ignoring");
-                            }   break;
+                            }
+//                            } else {
+//                                logger.warn("message out of sequence - ignoring");
+//                            }
+//                            break;
                         case "draftInit":
                             {
                                 DraftClientMessage message = (DraftClientMessage) callback.getData();
@@ -387,9 +395,10 @@ public class CallbackClientImpl implements CallbackClient {
                         .append("<br/>Turn mousewheel down (ALT-s) - enlarge original/alternate image of card the mousepointer hovers over")
                         .append("<br/><b>F2</b> - Confirm \"Ok\", \"Yes\" or \"Done\" button")
                         .append("<br/><b>F4</b> - Skip current turn but stop on declare attackers/blockers and something on the stack")
-                        .append("<br/><b>F5</b> - Skip to next end step of opponent's turn but stop on declare attackers/blockers and something on the stack")
+                        .append("<br/><b>F5</b> - Skip to next end step but stop on declare attackers/blockers and something on the stack")
+                        .append("<br/><b>F7</b> - Skip to next main phase but stop on declare attackers/blockers and something on the stack")
                         .append("<br/><b>F9</b> - Skip everything until your next turn")
-                        .append("<br/><b>F3</b> - Undo F4/F5/F9").toString(),
+                        .append("<br/><b>F3</b> - Undo F4/F5/F6/F9").toString(),
                         null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;
             case TOURNAMENT:

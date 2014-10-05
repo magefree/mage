@@ -444,24 +444,55 @@ public class HumanPlayer extends PlayerImpl {
     public boolean priority(Game game) {
         passed = false;
         if (!abort) {
+            boolean dontCheckPassStep = false;
             if (passedAllTurns) {
                 pass(game);
                 return false;
             }
-            if (passedTurn && game.getStack().isEmpty()) {
+            if (game.getStack().isEmpty()) {
+                if (passedTurn) {
+                    pass(game);
+                    return false;
+                }
+                if (passedUntilNextMain) {
+                    if (game.getTurn().getStepType().equals(PhaseStep.POSTCOMBAT_MAIN) || game.getTurn().getStepType().equals(PhaseStep.PRECOMBAT_MAIN)) {
+                        // it's a main phase
+                        if (!skippedAtLeastOnce || (!playerId.equals(game.getActivePlayerId()) && !this.getUserData().getUserSkipPrioritySteps().isStopOnAllMainPhases())) {
+                            skippedAtLeastOnce = true;
+                            pass(game);
+                            return false;
+                        } else {
+                            dontCheckPassStep = true;
+                            passedUntilNextMain = false; // reset skip action
+                        }
+                    } else {
+                        skippedAtLeastOnce = true;
+                        pass(game);
+                        return false;
+                    }
+                }
+                if (passedUntilEndOfTurn) {
+                    if (game.getTurn().getStepType().equals(PhaseStep.END_TURN)) {
+                        // It's end of turn phase
+                        if (!skippedAtLeastOnce || (playerId.equals(game.getActivePlayerId()) && !this.getUserData().getUserSkipPrioritySteps().isStopOnAllEndPhases())) {
+                            skippedAtLeastOnce = true;
+                            pass(game);
+                            return false;
+                        } else {
+                            dontCheckPassStep = true;
+                            passedUntilEndOfTurn = false;
+                        }
+                    } else {
+                        skippedAtLeastOnce = true;
+                        pass(game);
+                        return false;
+                    }
+                }
+            }
+            if (!dontCheckPassStep && checkPassStep(game)) {
                 pass(game);
                 return false;
             }
-            if (passedUntilEndOfTurn && game.getStack().isEmpty() &&                     
-                    (!game.getTurn().getStepType().equals(PhaseStep.END_TURN) || playerId.equals(game.getActivePlayerId()))) {
-                pass(game);
-                return false;
-            }
-            if (checkPassStep(game) && game.getStack().isEmpty()) {
-                pass(game);
-                return false;
-            }
-            
             updateGameStatePriority("priority", game);
             game.firePriorityEvent(playerId);
             waitForResponse(game);
@@ -618,13 +649,13 @@ public class HumanPlayer extends PlayerImpl {
         FilterCreatureForCombat filter = filterCreatureForCombat.copy();
         filter.add(new ControllerIdPredicate(attackingPlayerId));
         while (!abort) {
-            if (passedAllTurns /*|| passedTurn*/) {
+            if (passedAllTurns || 
+               (!getUserData().getUserSkipPrioritySteps().isStopOnDeclareAttackersDuringSkipAction() && (passedTurn || passedUntilEndOfTurn || passedUntilNextMain) )) {
                 return;
             }
             Map<String, Serializable> options = new HashMap<>();
 
             List<UUID> possibleAttackers = new ArrayList<>();
-
             for (Permanent possibleAttacker : game.getBattlefield().getActivePermanents(filter, attackingPlayerId, game)) {
                 if (possibleAttacker.canAttack(game)) {
                     possibleAttackers.add(possibleAttacker.getId());
@@ -744,6 +775,9 @@ public class HumanPlayer extends PlayerImpl {
         updateGameStatePriority("selectBlockers", game);
         FilterCreatureForCombatBlock filter = filterCreatureForCombatBlock.copy();
         filter.add(new ControllerIdPredicate(defendingPlayerId));
+        if (game.getBattlefield().count(filter, null, playerId, game) == 0 && !getUserData().getUserSkipPrioritySteps().isStopOnDeclareBlockerIfNoneAvailable()) {
+            return;
+        }
         while (!abort) {
             game.fireSelectEvent(playerId, "Select blockers");
             waitForResponse(game);

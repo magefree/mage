@@ -27,8 +27,6 @@
  */
 package mage.players.net;
 
-import mage.players.net.SkipPrioritySteps;
-
 /**
  *
  * @author LevelX2
@@ -37,6 +35,11 @@ import mage.players.net.SkipPrioritySteps;
 public class UserSkipPrioritySteps {
     SkipPrioritySteps yourTurn;
     SkipPrioritySteps opponentTurn;
+
+    boolean stopOnDeclareAttackersDuringSkipAction;
+    boolean stopOnDeclareBlockerIfNoneAvailable;
+    boolean stopOnAllMainPhases;
+    boolean stopOnAllEndPhases;
 
     public UserSkipPrioritySteps() {
         yourTurn = new SkipPrioritySteps();
@@ -49,6 +52,38 @@ public class UserSkipPrioritySteps {
 
     public SkipPrioritySteps getOpponentTurn() {
         return opponentTurn;
+    }
+
+    public boolean isStopOnDeclareBlockerIfNoneAvailable() {
+        return stopOnDeclareBlockerIfNoneAvailable;
+    }
+
+    public void setStopOnDeclareBlockerIfNoneAvailable(boolean stopOnDeclareBlockerIfNoneAvailable) {
+        this.stopOnDeclareBlockerIfNoneAvailable = stopOnDeclareBlockerIfNoneAvailable;
+    }
+
+    public boolean isStopOnDeclareAttackersDuringSkipAction() {
+        return stopOnDeclareAttackersDuringSkipAction;
+    }
+
+    public void setStopOnDeclareAttackersDuringSkipActions(boolean stopOnDeclareAttackersDuringSkipActions) {
+        this.stopOnDeclareAttackersDuringSkipAction = stopOnDeclareAttackersDuringSkipActions;
+    }
+
+    public boolean isStopOnAllMainPhases() {
+        return stopOnAllMainPhases;
+    }
+
+    public void setStopOnAllMainPhases(boolean stopOnAllMainPhases) {
+        this.stopOnAllMainPhases = stopOnAllMainPhases;
+    }
+
+    public boolean isStopOnAllEndPhases() {
+        return stopOnAllEndPhases;
+    }
+
+    public void setStopOnAllEndPhases(boolean stopOnAllEndPhases) {
+        this.stopOnAllEndPhases = stopOnAllEndPhases;
     }
 
 }

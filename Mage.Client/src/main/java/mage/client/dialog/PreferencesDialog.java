@@ -63,9 +63,9 @@ import mage.client.MageFrame;
 import mage.client.util.Config;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
+import mage.players.net.UserSkipPrioritySteps;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
-import mage.players.net.UserSkipPrioritySteps;
 import org.apache.log4j.Logger;
 
 /**
@@ -106,21 +106,26 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
 
     // Phases
-    public static String UPKEEP_YOU = "upkeepYou";
-    public static String DRAW_YOU = "drawYou";
-    public static String MAIN_YOU = "mainYou";
-    public static String BEFORE_COMBAT_YOU = "beforeCombatYou";
-    public static String END_OF_COMBAT_YOU = "endOfCombatYou";
-    public static String MAIN_2_YOU = "main2You";
-    public static String END_OF_TURN_YOU = "endOfTurnYou";
+    public static final String UPKEEP_YOU = "upkeepYou";
+    public static final String DRAW_YOU = "drawYou";
+    public static final String MAIN_YOU = "mainYou";
+    public static final String BEFORE_COMBAT_YOU = "beforeCombatYou";
+    public static final String END_OF_COMBAT_YOU = "endOfCombatYou";
+    public static final String MAIN_2_YOU = "main2You";
+    public static final String END_OF_TURN_YOU = "endOfTurnYou";
 
-    public static String UPKEEP_OTHERS = "upkeepOthers";
-    public static String DRAW_OTHERS = "drawOthers";
-    public static String MAIN_OTHERS = "mainOthers";
-    public static String BEFORE_COMBAT_OTHERS = "beforeCombatOthers";
-    public static String END_OF_COMBAT_OTHERS = "endOfCombatOthers";
-    public static String MAIN_2_OTHERS = "main2Others";
-    public static String END_OF_TURN_OTHERS = "endOfTurnOthers";
+    public static final String UPKEEP_OTHERS = "upkeepOthers";
+    public static final String DRAW_OTHERS = "drawOthers";
+    public static final String MAIN_OTHERS = "mainOthers";
+    public static final String BEFORE_COMBAT_OTHERS = "beforeCombatOthers";
+    public static final String END_OF_COMBAT_OTHERS = "endOfCombatOthers";
+    public static final String MAIN_2_OTHERS = "main2Others";
+    public static final String END_OF_TURN_OTHERS = "endOfTurnOthers";
+
+    public static final String KEY_STOP_ATTACK = "stopDeclareAttacksStep";
+    public static final String KEY_STOP_BLOCK = "stopDeclareBlockersStep";
+    public static final String KEY_STOP_ALL_MAIN_PHASES = "stopOnAllMainPhases";
+    public static final String KEY_STOP_ALL_END_PHASES = "stopOnAllEndPhases";
 
     // Size of frame to check if divider locations should be used
     public static final String KEY_MAGE_PANEL_LAST_SIZE = "gamepanelLastSize";
@@ -205,6 +210,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private static final Boolean UPDATE_CACHE_POLICY = Boolean.TRUE;
 
     public static final String OPEN_CONNECTION_TAB = "Open-Connection-Tab";
+    public static final String OPEN_PHASES_TAB = "Open-Phases-Tab";
 
     public static String PHASE_ON = "on";
     public static String PHASE_OFF = "off";
@@ -309,30 +315,35 @@ public class PreferencesDialog extends javax.swing.JDialog {
         main_gamelog = new javax.swing.JPanel();
         cbGameLogAutoSave = new javax.swing.JCheckBox();
         tabPhases = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        jLabelHeadLine = new javax.swing.JLabel();
+        jLabelYourTurn = new javax.swing.JLabel();
+        jLabelOpponentsTurn = new javax.swing.JLabel();
+        jLabelUpkeep = new javax.swing.JLabel();
         checkBoxUpkeepYou = new javax.swing.JCheckBox();
-        checkBoxDrawYou = new javax.swing.JCheckBox();
-        checkBoxMainYou = new javax.swing.JCheckBox();
-        checkBoxBeforeCYou = new javax.swing.JCheckBox();
-        checkBoxEndOfCYou = new javax.swing.JCheckBox();
-        checkBoxMain2You = new javax.swing.JCheckBox();
-        checkBoxEndTurnYou = new javax.swing.JCheckBox();
         checkBoxUpkeepOthers = new javax.swing.JCheckBox();
+        jLabelDraw = new javax.swing.JLabel();
+        checkBoxDrawYou = new javax.swing.JCheckBox();
         checkBoxDrawOthers = new javax.swing.JCheckBox();
+        jLabelMain1 = new javax.swing.JLabel();
+        checkBoxMainYou = new javax.swing.JCheckBox();
         checkBoxMainOthers = new javax.swing.JCheckBox();
+        jLabelBeforeCombat = new javax.swing.JLabel();
+        checkBoxBeforeCYou = new javax.swing.JCheckBox();
         checkBoxBeforeCOthers = new javax.swing.JCheckBox();
+        jLabelEndofCombat = new javax.swing.JLabel();
+        checkBoxEndOfCYou = new javax.swing.JCheckBox();
         checkBoxEndOfCOthers = new javax.swing.JCheckBox();
+        jLabelMain2 = new javax.swing.JLabel();
+        checkBoxMain2You = new javax.swing.JCheckBox();
         checkBoxMain2Others = new javax.swing.JCheckBox();
+        jLabelEndOfTurn = new javax.swing.JLabel();
+        checkBoxEndTurnYou = new javax.swing.JCheckBox();
         checkBoxEndTurnOthers = new javax.swing.JCheckBox();
+        phases_stopSettings = new javax.swing.JPanel();
+        cbStopAttack = new javax.swing.JCheckBox();
+        cbStopBlock = new javax.swing.JCheckBox();
+        cbStopOnAllMain = new javax.swing.JCheckBox();
+        cbStopOnAllEnd = new javax.swing.JCheckBox();
         tabImages = new javax.swing.JPanel();
         panelCardImages = new javax.swing.JPanel();
         cbUseDefaultImageFolder = new javax.swing.JCheckBox();
@@ -501,37 +512,82 @@ public class PreferencesDialog extends javax.swing.JDialog {
             tabMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(main_card, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(main_card, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(main_game, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(main_game, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(main_gamelog, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(main_gamelog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(132, Short.MAX_VALUE))
         );
 
         main_card.getAccessibleContext().setAccessibleName("Game panel");
 
         tabsPanel.addTab("Main", tabMain);
 
-        jLabel1.setText("Choose phases MAGE will stop on:");
+        jLabelHeadLine.setText("Choose phases your game will stop on:");
 
-        jLabel2.setText("Upkeep:");
+        jLabelYourTurn.setText("Your turn");
 
-        jLabel3.setText("Draw:");
+        jLabelOpponentsTurn.setText("Opponent(s) turn");
 
-        jLabel4.setText("Main:");
+        jLabelUpkeep.setText("Upkeep:");
 
-        jLabel5.setText("Before combat:");
+        jLabelDraw.setText("Draw:");
 
-        jLabel6.setText("End of combat:");
+        jLabelMain1.setText("Main:");
 
-        jLabel7.setText("Main 2:");
+        jLabelBeforeCombat.setText("Before combat:");
 
-        jLabel8.setText("End of turn:");
+        jLabelEndofCombat.setText("End of combat:");
 
-        jLabel9.setText("Your turn");
+        jLabelMain2.setText("Main 2:");
 
-        jLabel10.setText("Opponent(s) turn");
+        jLabelEndOfTurn.setText("End of turn:");
+
+        phases_stopSettings.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Stop settings"));
+        phases_stopSettings.setLayout(new java.awt.GridLayout(4, 1));
+
+        cbStopAttack.setSelected(true);
+        cbStopAttack.setText("Stop on declare attackers step if you skip steps (F4/F5/F7) and attackers are available");
+        cbStopAttack.setToolTipText("If you use F4, F5 or F7 to skip steps, you stop on declare attackers step if attackers are available. If this option is not activated, you also skip the declare attackers step with this actions. F9 does always skip the declare attackers step.");
+        cbStopAttack.setActionCommand("");
+        cbStopAttack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbStopAttackActionPerformed(evt);
+            }
+        });
+        phases_stopSettings.add(cbStopAttack);
+
+        cbStopBlock.setText("Stop on your declare blockers step also if no blockers available");
+        cbStopBlock.setToolTipText("Also if you have no blockers to declare, the game stops at the declare blockers step.");
+        cbStopBlock.setActionCommand("");
+        cbStopBlock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbStopBlockActionPerformed(evt);
+            }
+        });
+        phases_stopSettings.add(cbStopBlock);
+
+        cbStopOnAllMain.setText("Skip with F7 to next main phase (if not activated skip always to your next main phase)");
+        cbStopOnAllMain.setToolTipText("If activated F7 skips to next main phases (regardless of the active players).");
+        cbStopOnAllMain.setActionCommand("");
+        cbStopOnAllMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbStopOnAllMainActionPerformed(evt);
+            }
+        });
+        phases_stopSettings.add(cbStopOnAllMain);
+
+        cbStopOnAllEnd.setText("Skip with F5 to next end step (if not activated only to end steps of opponents)");
+        cbStopOnAllEnd.setToolTipText("If activated - F5 skips to the next end step (regardless of the current player)");
+        cbStopOnAllEnd.setActionCommand("");
+        cbStopOnAllEnd.setPreferredSize(new java.awt.Dimension(300, 25));
+        cbStopOnAllEnd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbStopOnAllEndActionPerformed(evt);
+            }
+        });
+        phases_stopSettings.add(cbStopOnAllEnd);
 
         javax.swing.GroupLayout tabPhasesLayout = new javax.swing.GroupLayout(tabPhases);
         tabPhases.setLayout(tabPhasesLayout);
@@ -540,48 +596,54 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGroup(tabPhasesLayout.createSequentialGroup()
                 .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(tabPhasesLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
                         .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(tabPhasesLayout.createSequentialGroup()
-                                .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8))
-                                .addGap(77, 77, 77)
+                                .addGap(20, 20, 20)
                                 .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(tabPhasesLayout.createSequentialGroup()
-                                        .addGap(2, 2, 2)
-                                        .addComponent(jLabel9)
-                                        .addGap(32, 32, 32)
-                                        .addComponent(jLabel10))
-                                    .addGroup(tabPhasesLayout.createSequentialGroup()
-                                        .addGap(13, 13, 13)
-                                        .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(checkBoxDrawYou)
-                                            .addComponent(checkBoxUpkeepYou)
-                                            .addComponent(checkBoxMainYou)
-                                            .addComponent(checkBoxBeforeCYou)
-                                            .addComponent(checkBoxEndOfCYou)
-                                            .addComponent(checkBoxMain2You)
-                                            .addComponent(checkBoxEndTurnYou))
-                                        .addGap(78, 78, 78)
-                                        .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(checkBoxUpkeepOthers)
-                                            .addComponent(checkBoxBeforeCOthers)
-                                            .addComponent(checkBoxMainOthers)
-                                            .addComponent(checkBoxEndOfCOthers)
-                                            .addComponent(checkBoxDrawOthers)
-                                            .addComponent(checkBoxMain2Others)
-                                            .addComponent(checkBoxEndTurnOthers)))))
-                            .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                        .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabelUpkeep)
+                                            .addComponent(jLabelBeforeCombat)
+                                            .addComponent(jLabelEndofCombat)
+                                            .addComponent(jLabelMain2)
+                                            .addComponent(jLabelEndOfTurn))
+                                        .addGap(77, 77, 77)
+                                        .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(tabPhasesLayout.createSequentialGroup()
+                                                .addGap(2, 2, 2)
+                                                .addComponent(jLabelYourTurn)
+                                                .addGap(32, 32, 32)
+                                                .addComponent(jLabelOpponentsTurn))
+                                            .addGroup(tabPhasesLayout.createSequentialGroup()
+                                                .addGap(13, 13, 13)
+                                                .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(checkBoxDrawYou)
+                                                    .addComponent(checkBoxUpkeepYou)
+                                                    .addComponent(checkBoxMainYou)
+                                                    .addComponent(checkBoxBeforeCYou)
+                                                    .addComponent(checkBoxEndOfCYou)
+                                                    .addComponent(checkBoxMain2You)
+                                                    .addComponent(checkBoxEndTurnYou))
+                                                .addGap(78, 78, 78)
+                                                .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(checkBoxUpkeepOthers)
+                                                    .addComponent(checkBoxBeforeCOthers)
+                                                    .addComponent(checkBoxMainOthers)
+                                                    .addComponent(checkBoxEndOfCOthers)
+                                                    .addComponent(checkBoxDrawOthers)
+                                                    .addComponent(checkBoxMain2Others)
+                                                    .addComponent(checkBoxEndTurnOthers)))))
+                                    .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jLabelMain1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabelDraw, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(tabPhasesLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabelHeadLine)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(tabPhasesLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1)))
-                .addContainerGap(187, Short.MAX_VALUE))
+                        .addComponent(phases_stopSettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         tabPhasesLayout.setVerticalGroup(
             tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -589,54 +651,56 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(tabPhasesLayout.createSequentialGroup()
-                        .addComponent(jLabel10)
+                        .addComponent(jLabelOpponentsTurn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(checkBoxUpkeepOthers))
                     .addGroup(tabPhasesLayout.createSequentialGroup()
                         .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(tabPhasesLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
+                                .addComponent(jLabelHeadLine)
                                 .addGap(20, 20, 20))
-                            .addComponent(jLabel9))
+                            .addComponent(jLabelYourTurn))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(checkBoxUpkeepYou)
-                            .addComponent(jLabel2))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabelUpkeep))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
+                    .addComponent(jLabelDraw)
                     .addComponent(checkBoxDrawYou)
                     .addComponent(checkBoxDrawOthers))
-                .addGap(4, 4, 4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
+                    .addComponent(jLabelMain1)
                     .addComponent(checkBoxMainYou)
                     .addComponent(checkBoxMainOthers))
                 .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(tabPhasesLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelBeforeCombat, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(checkBoxBeforeCYou, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(tabPhasesLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(checkBoxBeforeCOthers)))
-                .addGap(7, 7, 7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
+                    .addComponent(jLabelEndofCombat)
                     .addComponent(checkBoxEndOfCYou)
                     .addComponent(checkBoxEndOfCOthers))
-                .addGap(9, 9, 9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7)
+                    .addComponent(jLabelMain2)
                     .addComponent(checkBoxMain2You)
                     .addComponent(checkBoxMain2Others))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(checkBoxEndTurnYou)
-                    .addComponent(jLabel8)
+                    .addComponent(jLabelEndOfTurn)
                     .addComponent(checkBoxEndTurnOthers))
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(phases_stopSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Phases", tabPhases);
@@ -796,7 +860,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                         .addComponent(txtBackgroundImagePath, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBrowseBackgroundImage)))
-                .addGap(0, 21, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(panelBackgroundImagesLayout.createSequentialGroup()
                 .addGroup(panelBackgroundImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbUseRandomBattleImage)
@@ -907,7 +971,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtBattlefieldIBGMPath, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+                .addComponent(txtBattlefieldIBGMPath, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBattlefieldBGMBrowse))
             .addGroup(sounds_backgroundMusicLayout.createSequentialGroup()
@@ -932,18 +996,18 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGroup(tabSoundsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(tabSoundsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sounds_clips, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
-                    .addComponent(sounds_backgroundMusic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(sounds_clips, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
+                    .addComponent(sounds_backgroundMusic, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         tabSoundsLayout.setVerticalGroup(
             tabSoundsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabSoundsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(sounds_clips, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sounds_clips, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sounds_backgroundMusic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addContainerGap(235, Short.MAX_VALUE))
         );
 
         sounds_clips.getAccessibleContext().setAccessibleDescription("");
@@ -1013,7 +1077,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(txtPasswordField, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txtProxyUserName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtProxyServer, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE))
+                    .addComponent(txtProxyServer, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlProxyLayout.setVerticalGroup(
@@ -1083,7 +1147,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addComponent(cbProxyType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlProxySettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
 
         pnlProxySettings.getAccessibleContext().setAccessibleDescription("");
@@ -1289,7 +1353,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                             .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1328,16 +1392,17 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tabAvatars.setLayout(tabAvatarsLayout);
         tabAvatarsLayout.setHorizontalGroup(
             tabAvatarsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
         );
         tabAvatarsLayout.setVerticalGroup(
             tabAvatarsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
         );
 
         tabsPanel.addTab("Avatars", tabAvatars);
 
         saveButton.setLabel("Save");
+        saveButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveButtonActionPerformed(evt);
@@ -1345,6 +1410,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
 
         exitButton.setLabel("Exit");
+        exitButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitButtonActionPerformed(evt);
@@ -1366,12 +1432,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(tabsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tabsPanel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(exitButton)
                     .addComponent(saveButton))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -1405,6 +1471,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.checkBoxEndOfCOthers, END_OF_COMBAT_OTHERS);
         save(prefs, dialog.checkBoxMain2Others, MAIN_2_OTHERS);
         save(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
+
+        save(prefs, dialog.cbStopAttack, KEY_STOP_ATTACK, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbStopBlock, KEY_STOP_BLOCK, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbStopOnAllMain, KEY_STOP_ALL_MAIN_PHASES, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbStopOnAllEnd, KEY_STOP_ALL_END_PHASES, "true", "false", UPDATE_CACHE_POLICY);
 
         // images
         save(prefs, dialog.cbUseDefaultImageFolder, KEY_CARD_IMAGES_USE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
@@ -1663,6 +1734,22 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_showToolTipsInAnyZoneActionPerformed
 
+    private void cbStopAttackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStopAttackActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbStopAttackActionPerformed
+
+    private void cbStopBlockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStopBlockActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbStopBlockActionPerformed
+
+    private void cbStopOnAllMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStopOnAllMainActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbStopOnAllMainActionPerformed
+
+    private void cbStopOnAllEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStopOnAllEndActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbStopOnAllEndActionPerformed
+
     private void showProxySettings() {
         if (cbProxyType.getSelectedItem() == Connection.ProxyType.SOCKS) {
             this.pnlProxy.setVisible(true);
@@ -1688,7 +1775,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         if (args.length > 0) {
             String param1 = args[0];
             if (param1.equals(OPEN_CONNECTION_TAB)) {
-                param = 3;
+                param = 4;
+            }
+            if (param1.equals(OPEN_PHASES_TAB)) {
+                param = 1;
             }
         }
         final int openedTab = param;
@@ -1698,7 +1788,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 if (!dialog.isVisible()) {
                     Preferences prefs = MageFrame.getPreferences();
 
-                    // Phases
+                    // Main & Phases
                     loadPhases(prefs);
 
                     // Images
@@ -1713,11 +1803,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     // Selected avatar
                     loadSelectedAvatar(prefs);
 
+                    dialog.reset();
                     // open specified tab before displaying
                     openTab(openedTab);
 
                     dialog.setLocation(300, 200);
-                    dialog.reset();
 
                     dialog.setVisible(true);
                 } else {
@@ -1728,29 +1818,35 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void loadPhases(Preferences prefs) {
-        load(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU);
-        load(prefs, dialog.checkBoxDrawYou, DRAW_YOU);
-        load(prefs, dialog.checkBoxMainYou, MAIN_YOU);
-        load(prefs, dialog.checkBoxBeforeCYou, BEFORE_COMBAT_YOU);
-        load(prefs, dialog.checkBoxEndOfCYou, END_OF_COMBAT_YOU);
-        load(prefs, dialog.checkBoxMain2You, MAIN_2_YOU);
-        load(prefs, dialog.checkBoxEndTurnYou, END_OF_TURN_YOU);
-
-        load(prefs, dialog.checkBoxUpkeepOthers, UPKEEP_OTHERS);
-        load(prefs, dialog.checkBoxDrawOthers, DRAW_OTHERS);
-        load(prefs, dialog.checkBoxMainOthers, MAIN_OTHERS);
-        load(prefs, dialog.checkBoxBeforeCOthers, BEFORE_COMBAT_OTHERS);
-        load(prefs, dialog.checkBoxEndOfCOthers, END_OF_COMBAT_OTHERS);
-        load(prefs, dialog.checkBoxMain2Others, MAIN_2_OTHERS);
-        load(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
-
-        load(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true");
+        load(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true","true");
         load(prefs, dialog.showToolTipsInAnyZone, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true");
         load(prefs, dialog.showCardName, KEY_SHOW_CARD_NAMES, "true");
         load(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true");
         load(prefs, dialog.showPlayerNamesPermanently, KEY_SHOW_PLAYER_NAMES_PERMANENTLY, "true");
         load(prefs, dialog.showAbilityPickerForced, KEY_SHOW_ABILITY_PICKER_FORCED, "true");
         load(prefs, dialog.cbGameLogAutoSave, KEY_GAME_LOG_AUTO_SAVE, "true");
+
+        load(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU, "on","off");
+        load(prefs, dialog.checkBoxDrawYou, DRAW_YOU, "on","off");
+        load(prefs, dialog.checkBoxMainYou, MAIN_YOU, "on","on");
+        load(prefs, dialog.checkBoxBeforeCYou, BEFORE_COMBAT_YOU, "on","off");
+        load(prefs, dialog.checkBoxEndOfCYou, END_OF_COMBAT_YOU, "on","off");
+        load(prefs, dialog.checkBoxMain2You, MAIN_2_YOU, "on","on");
+        load(prefs, dialog.checkBoxEndTurnYou, END_OF_TURN_YOU, "on","off");
+
+        load(prefs, dialog.checkBoxUpkeepOthers, UPKEEP_OTHERS, "on","off");
+        load(prefs, dialog.checkBoxDrawOthers, DRAW_OTHERS, "on","off");
+        load(prefs, dialog.checkBoxMainOthers, MAIN_OTHERS, "on","on");
+        load(prefs, dialog.checkBoxBeforeCOthers, BEFORE_COMBAT_OTHERS, "on","on");
+        load(prefs, dialog.checkBoxEndOfCOthers, END_OF_COMBAT_OTHERS, "on","off");
+        load(prefs, dialog.checkBoxMain2Others, MAIN_2_OTHERS, "on","on");
+        load(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS, "on","on");
+
+        load(prefs, dialog.cbStopAttack, KEY_STOP_ATTACK, "true", "true");
+        load(prefs, dialog.cbStopBlock, KEY_STOP_BLOCK, "true", "true");
+        load(prefs, dialog.cbStopOnAllMain, KEY_STOP_ALL_MAIN_PHASES, "true", "false");
+        load(prefs, dialog.cbStopOnAllEnd, KEY_STOP_ALL_END_PHASES, "true", "false");
+
     }
 
     private static void loadImagesSettings(Preferences prefs) {
@@ -1886,6 +1982,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         userSkipPrioritySteps.getOpponentTurn().setEndOfCombat(dialog.checkBoxEndOfCOthers.isSelected());
         userSkipPrioritySteps.getOpponentTurn().setMain2(dialog.checkBoxMain2Others.isSelected());
         userSkipPrioritySteps.getOpponentTurn().setEndOfTurn(dialog.checkBoxEndTurnOthers.isSelected());
+        
+        userSkipPrioritySteps.setStopOnDeclareAttackersDuringSkipActions(dialog.cbStopAttack.isSelected());
+        userSkipPrioritySteps.setStopOnDeclareBlockerIfNoneAvailable(dialog.cbStopBlock.isSelected());
+        userSkipPrioritySteps.setStopOnAllEndPhases(dialog.cbStopOnAllEnd.isSelected());
+        userSkipPrioritySteps.setStopOnAllMainPhases(dialog.cbStopOnAllMain.isSelected());
 
         return userSkipPrioritySteps;
     }
@@ -1893,7 +1994,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private static void openTab(int index) {
         try {
             if (index > 0) {
-                dialog.tabsPanel.setSelectedIndex(3);
+                dialog.tabsPanel.setSelectedIndex(index);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -2089,6 +2190,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbPreferedImageLanguage;
     private javax.swing.JComboBox<ProxyType> cbProxyType;
     private javax.swing.JCheckBox cbSaveToZipFiles;
+    private javax.swing.JCheckBox cbStopAttack;
+    private javax.swing.JCheckBox cbStopBlock;
+    private javax.swing.JCheckBox cbStopOnAllEnd;
+    private javax.swing.JCheckBox cbStopOnAllMain;
     private javax.swing.JCheckBox cbUseDefaultBackground;
     private javax.swing.JCheckBox cbUseDefaultBattleImage;
     private javax.swing.JCheckBox cbUseDefaultImageFolder;
@@ -2109,22 +2214,22 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox checkBoxUpkeepYou;
     private javax.swing.JCheckBox displayBigCardsInHand;
     private javax.swing.JButton exitButton;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelBeforeCombat;
+    private javax.swing.JLabel jLabelDraw;
+    private javax.swing.JLabel jLabelEndOfTurn;
+    private javax.swing.JLabel jLabelEndofCombat;
+    private javax.swing.JLabel jLabelHeadLine;
+    private javax.swing.JLabel jLabelMain1;
+    private javax.swing.JLabel jLabelMain2;
+    private javax.swing.JLabel jLabelOpponentsTurn;
+    private javax.swing.JLabel jLabelUpkeep;
+    private javax.swing.JLabel jLabelYourTurn;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
@@ -2151,6 +2256,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox nonLandPermanentsInOnePile;
     private javax.swing.JPanel panelBackgroundImages;
     private javax.swing.JPanel panelCardImages;
+    private javax.swing.JPanel phases_stopSettings;
     private javax.swing.JPanel pnlProxy;
     private javax.swing.JPanel pnlProxySettings;
     private javax.swing.JCheckBox rememberPswd;

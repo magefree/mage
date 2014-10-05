@@ -167,17 +167,27 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             }
         });
 
-        menuItem = new JMenuItem("F5 - Skip phases until opponent's end step (stop on stack/attack/block)");
+        menuItem = new JMenuItem("F5 - Skip phases until next end step (stop on stack/attack/block)");
         popupMenu.add(menuItem);
 
         // Skip to next end step of turn (F5)
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_OPPONENTS_TURN_END_STEP, gameId);
+                gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId);
             }
         });
 
+        menuItem = new JMenuItem("F7 - Skip phases until begin of next main phase (stop on stack/attack/block)");
+        popupMenu.add(menuItem);
+
+        // Skip to next main phase (F7)
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE, gameId);
+            }
+        });
         menuItem = new JMenuItem("F9 - Skip everything until own next turn (stop on attack/block)");
         popupMenu.add(menuItem);
 
