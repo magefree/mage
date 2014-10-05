@@ -2456,4 +2456,10 @@ public abstract class GameImpl implements Game, Serializable {
     public void setPriorityTime(int priorityTime) {
         this.priorityTime = priorityTime;
     }
+
+    @Override
+    public UUID getStartingPlayerId() {
+        return startingPlayerId;
+    }
+
 }

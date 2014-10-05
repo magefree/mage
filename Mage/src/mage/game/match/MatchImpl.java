@@ -44,6 +44,7 @@ import mage.game.events.TableEvent;
 import mage.game.events.TableEvent.EventType;
 import mage.game.events.TableEventSource;
 import mage.players.Player;
+import mage.players.PlayerList;
 import mage.util.DateFormat;
 import org.apache.log4j.Logger;
 
@@ -275,13 +276,19 @@ public abstract class MatchImpl implements Match {
     public GameInfo createGameInfo(Game game) {
         StringBuilder playersInfo = new StringBuilder();
         int counter = 0;
-        for(MatchPlayer matchPlayer: players) {
+
+        PlayerList playerList =  game.getPlayerList();
+        playerList.setCurrent(game.getStartingPlayerId());
+        Player currentPlayer = game.getPlayer(game.getStartingPlayerId());
+        do {
             if (counter > 0) {
                 playersInfo.append(" - ");
             }
-            playersInfo.append(matchPlayer.getName());
+            playersInfo.append(currentPlayer.getName());
             counter++;
-        }
+            currentPlayer = game.getPlayer(playerList.getNext());
+        } while(!currentPlayer.getId().equals(game.getStartingPlayerId()));
+
         String state;
         String result;
         String duelingTime = "";
