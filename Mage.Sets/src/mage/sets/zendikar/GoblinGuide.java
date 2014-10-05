@@ -35,7 +35,8 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
@@ -43,7 +44,10 @@ import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -59,8 +63,12 @@ public class GoblinGuide extends CardImpl {
         this.subtype.add("Scout");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+
+        // Haste
         this.addAbility(HasteAbility.getInstance());
-        this.addAbility(new AttacksTriggeredAbility(new GoblinGuideEffect(), false));
+        // Whenever Goblin Guide attacks, defending player reveals the top card of his or her library.
+        // If it's a land card, that player puts it into his or her hand.
+        this.addAbility(new GoblinGuideTriggeredAbility(new GoblinGuideEffect(), false));
     }
 
     public GoblinGuide(final GoblinGuide card) {
@@ -74,6 +82,54 @@ public class GoblinGuide extends CardImpl {
 
 }
 
+class GoblinGuideTriggeredAbility extends TriggeredAbilityImpl {
+
+    protected String text;
+
+    public GoblinGuideTriggeredAbility(Effect effect, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
+    }
+
+    public GoblinGuideTriggeredAbility(Effect effect, boolean optional, String text) {
+        super(Zone.BATTLEFIELD, effect, optional);
+        this.text = text;
+    }
+
+    public GoblinGuideTriggeredAbility(final GoblinGuideTriggeredAbility ability) {
+        super(ability);
+        this.text = ability.text;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId()) ) {
+            UUID defenderId = game.getCombat().getDefendingPlayerId(getSourceId(), game);
+            if (defenderId != null) {
+                for (Effect effect :this.getEffects()) {
+                    // set here because attacking creature can be removed until effect resolves
+                    effect.setTargetPointer(new FixedTarget(defenderId));
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        if (text == null || text.isEmpty()) {
+            return "When {this} attacks, " + super.getRule();
+        }
+        return text;
+    }
+
+    @Override
+    public GoblinGuideTriggeredAbility copy() {
+        return new GoblinGuideTriggeredAbility(this);
+    }
+
+
+}
 class GoblinGuideEffect extends OneShotEffect {
 
     public GoblinGuideEffect() {
@@ -91,9 +147,8 @@ class GoblinGuideEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        UUID defenderId = game.getCombat().getDefendingPlayerId(source.getSourceId(), game);
-        Player defender = game.getPlayer(defenderId);
+    public boolean apply(Game game, Ability source) {        
+        Player defender = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (defender != null) {
             Cards cards = new CardsImpl();
             Card card = defender.getLibrary().getFromTop(game);
