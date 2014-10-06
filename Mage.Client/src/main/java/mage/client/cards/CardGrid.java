@@ -58,6 +58,7 @@ import mage.client.util.Listener;
 import mage.view.CardView;
 import mage.view.CardsView;
 import org.jdesktop.swingx.JXPanel;
+import org.jdesktop.swingx.painter.MattePainter;
 import org.mage.card.arcane.CardPanel;
 
 /**
@@ -92,10 +93,11 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         
         //Create selection Rectangle
         selectionRectangle = new JXPanel();
-        selectionRectangle.setBackground(Color.BLUE);
+        MattePainter p = new MattePainter(Color.BLUE);
+        selectionRectangle.setBackgroundPainter(p);
         selectionRectangle.setBorder(javax.swing.BorderFactory.createLineBorder(Color.BLUE, 3));
         this.add(selectionRectangle);
-        selectionRectangle.setAlpha(0.7f);
+        selectionRectangle.setAlpha(0.6f);
         selectionRectangle.setOpaque(false);
     }
 
