@@ -251,6 +251,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         }
 
         this.btnPlayer.setText(player.getName());
+        this.btnPlayer.setToolTipText("Life: " + player.getLife());
         if (player.isActive()) {
             this.avatar.setBorder(greenBorder);
             this.btnPlayer.setBorder(greenBorder);
