@@ -65,7 +65,10 @@ public class SnowManaCost extends ManaCostImpl {
     
     @Override
     public boolean isPaid() {
-        return paid | payment.getColorless() == 1;
+        if (paid) {
+            return true;
+        }
+        return this.isColorlessPaid(1);
     }
 
     @Override
