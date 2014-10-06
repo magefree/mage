@@ -38,6 +38,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -62,7 +63,7 @@ public class KreshTheBloodbraided extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever another creature dies, you may put X +1/+1 counters on Kresh the Bloodbraided, where X is that creature's power.
-        this.addAbility(new DiesCreatureTriggeredAbility(new KreshTheBloodbraidedEffect(), true, true));
+        this.addAbility(new DiesCreatureTriggeredAbility(new KreshTheBloodbraidedEffect(), true, true, true));
     }
 
     public KreshTheBloodbraided(final KreshTheBloodbraided card) {
@@ -79,7 +80,7 @@ class KreshTheBloodbraidedEffect extends OneShotEffect {
 
     KreshTheBloodbraidedEffect() {
         super(Outcome.BoostCreature);
-        staticText = "you may put X +1/+1 counters on Kresh the Bloodbraided, where X is that creature's power";
+        staticText = "you may put X +1/+1 counters on {this}, where X is that creature's power";
     }
 
     KreshTheBloodbraidedEffect(final KreshTheBloodbraidedEffect effect) {
@@ -88,11 +89,13 @@ class KreshTheBloodbraidedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card creature = game.getCard(targetPointer.getFirst(game, source));
-        Permanent KreshTheBloodbraided = game.getPermanent(source.getSourceId());
-
-        if (creature != null && KreshTheBloodbraided != null) {
-            KreshTheBloodbraided.addCounters(CounterType.P1P1.createInstance(creature.getPower().getValue()), game);
+        Permanent permanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
+        Permanent kreshTheBloodbraided = game.getPermanent(source.getSourceId());
+        if (permanent != null && kreshTheBloodbraided != null) {
+            int amount = permanent.getPower().getValue();
+            if (amount > 0) {
+                kreshTheBloodbraided.addCounters(CounterType.P1P1.createInstance(amount), game);
+            }
             return true;
         }
         return false;
