@@ -33,14 +33,12 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -98,21 +96,11 @@ class KalitasDestroyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID permanentId : targetPointer.getTargets(game, source)) {
-            Permanent permanent = game.getPermanent(permanentId);
-            if (permanent != null) {
-                Card card = game.getCard(permanent.getId());
-                int zoneChangeCounter = card.getZoneChangeCounter();
-                if (permanent.destroy(source.getSourceId(), game, false)) {
-                    if (card != null && game.getPlayer(permanent.getOwnerId()).getGraveyard().contains(card.getId()) &&
-                        card.getZoneChangeCounter() == zoneChangeCounter)
-                    {
-                        return new CreateTokenEffect(new VampireToken(permanent.getPower().getValue(), permanent.getToughness().getValue())).apply(game, source);
-                    }
-                }
-            }
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (permanent != null && permanent.destroy(source.getSourceId(), game, false)) { // if not destroyed or moved to other zone (replacement effect) it returns false
+            new CreateTokenEffect(new VampireToken(permanent.getPower().getValue(), permanent.getToughness().getValue())).apply(game, source);
         }
-        return false;
+        return true;
     }
 }
 
