@@ -30,11 +30,16 @@ package mage.sets.saviorsofkamigawa;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -52,8 +57,9 @@ public class EbonyOwlNetsuke extends CardImpl {
         this.expansionSetCode = "SOK";
 
         // At the beginning of each opponent's upkeep, if that player has seven or more cards in hand, Ebony Owl Netsuke deals 4 damage to him or her.
-        this.addAbility(new EbonyOwlNetsukeTriggeredAbility());
+        this.addAbility(new EbonyOwlNetsukeTriggeredAbility(new DamageTargetEffect(4, true)));
     }
+
 
     public EbonyOwlNetsuke(final EbonyOwlNetsuke card) {
         super(card);
@@ -67,8 +73,8 @@ public class EbonyOwlNetsuke extends CardImpl {
 
 class EbonyOwlNetsukeTriggeredAbility extends TriggeredAbilityImpl {
     
-    EbonyOwlNetsukeTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null, false);
+    EbonyOwlNetsukeTriggeredAbility(Effect effect) {
+        super(Zone.BATTLEFIELD, effect, false);
     }
     
     EbonyOwlNetsukeTriggeredAbility(final EbonyOwlNetsukeTriggeredAbility ability) {
@@ -85,9 +91,9 @@ class EbonyOwlNetsukeTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Player player = game.getPlayer(event.getPlayerId());
             if (player != null) {
-                EbonyOwlNetsukeEffect effect = new EbonyOwlNetsukeEffect();
-                effect.setTargetPointer(new FixedTarget(player.getId()));
-                this.addEffect(effect);
+                for (Effect effect: getEffects() ) {
+                    effect.setTargetPointer(new FixedTarget(player.getId()));
+                }
                 return true;
             }
         }
@@ -103,32 +109,5 @@ class EbonyOwlNetsukeTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "At the beginning of each opponent's upkeep, if that player has seven or more cards in hand, {this} deals 4 damage to him or her.";
-    }
-}
-
-class EbonyOwlNetsukeEffect extends OneShotEffect {
-    
-    EbonyOwlNetsukeEffect() {
-        super(Outcome.Damage);
-        this.staticText = "{this} deals 4 damage to him or her";
-    }
-    
-    EbonyOwlNetsukeEffect(final EbonyOwlNetsukeEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public EbonyOwlNetsukeEffect copy() {
-        return new EbonyOwlNetsukeEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null) {
-            player.damage(4, source.getSourceId(), game, false, true);
-            return true;
-        }
-        return false;
     }
 }
