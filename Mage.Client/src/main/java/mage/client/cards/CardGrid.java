@@ -40,6 +40,7 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -155,6 +156,14 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, cardDimension, gameId, drawImage);
         cards.put(card.getId(), cardImg);
         cardImg.addMouseListener(this);
+        cardImg.addMouseMotionListener(new MouseMotionAdapter() {
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                dragCard(e);
+            }
+            
+        });
         add(cardImg);
         cardImg.update(card);
         cards.put(card.getId(), cardImg);
@@ -166,11 +175,15 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
 
     @Override
     public void drawCards(SortSetting sortSetting) {
-        int curColumn = 0;
-        int curRow = 0;
         //Sort Cards
         sortCards(sortSetting);
         
+        drawCards();
+    }
+    
+    public void drawCards(){
+        int curColumn = 0;
+        int curRow = 0;
         Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
         //Draw cars
         for(List<UUID> list : cardsPosition){
@@ -398,6 +411,64 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 
+    public void dragCard(MouseEvent e){
+        MageCard card = (MageCard)e.getSource();
+        UUID cardID = card.getOriginal().getId();
+        if(!selectedCards.contains(cardID))
+        {
+            if(!e.isControlDown()){
+                deselectAllCards();
+            }
+            selectedCards.add(cardID);
+            card.setSelected(true);
+        }
+        //Move selected card in front
+        if(selectedCards.get(0) != cardID){
+            selectedCards.remove(cardID);
+            selectedCards.add(0,cardID);
+        }
+        e.translatePoint(e.getComponent().getLocation().x, e.getComponent().getLocation().y);
+        int culomn = e.getX()/Config.dimensions.frameWidth;
+        int row = e.getY()/20;
+        //Remove cards
+        for(List<UUID> l : cardsPosition){
+            l.removeAll(selectedCards);
+        }
+        
+        //Select column
+        List<UUID> selectedColumn = null;
+        if(culomn < 0){
+            selectedColumn = cardsPosition.get(0);
+        }
+        else if (culomn >= cardsPosition.size()){
+            selectedColumn = new ArrayList<>();
+            cardsPosition.add(selectedColumn);
+        }
+        else{
+            selectedColumn = cardsPosition.get(culomn);
+        }
+        //Select row
+        row = Math.min(row, selectedColumn.size());
+        row = Math.max(row, 0);
+        //Add selected cards
+        for(UUID id : selectedCards){
+            selectedColumn.add(row, id);
+            row++;
+        }
+        //Draw cards
+        drawCards();
+
+        //Move selected cards for drag effect
+        e.translatePoint(-Config.dimensions.frameWidth/2, -10);
+        for(UUID id : selectedCards){
+            MageCard selectedCard = cards.get(id);
+            if(selectedCard != null){
+                selectedCard.setCardBounds(e.getX(), e.getY(),Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+                e.translatePoint(0, 20);
+            }
+        }
+    }
+    
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getClickCount() == 1 && !e.isConsumed()){
@@ -415,7 +486,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
                         card.setSelected(true);
                         selectedCards.add(card.getOriginal().getId());
                     }
-                    //Disselect card
+                    //Deselect card
                     else{
                         card.setSelected(false);
                         selectedCards.remove(card.getOriginal().getId());
@@ -461,6 +532,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         if(e.getSource() == this){
             selectionRectangle.setVisible(false);
         }
+        drawCards();
     }
 
     @Override
