@@ -286,14 +286,19 @@ public abstract class MatchImpl implements Match {
         if (currentPlayer == null) {
             currentPlayer = playerList.getCurrent(game);
         }
-        do {
-            if (counter > 0) {
-                playersInfo.append(" - ");
-            }
-            playersInfo.append(currentPlayer.getName());
-            counter++;
-            currentPlayer = game.getPlayer(playerList.getNext());
-        } while(!currentPlayer.getId().equals(game.getStartingPlayerId()));
+        if (currentPlayer != null) {
+            do {
+                if (counter > 0) {
+                    playersInfo.append(" - ");
+                }
+                playersInfo.append(currentPlayer.getName());
+                counter++;
+                currentPlayer = game.getPlayer(playerList.getNext());
+
+            } while(!currentPlayer.getId().equals(game.getStartingPlayerId()));
+        } else {
+            playersInfo.append("[got no players]");
+        }
 
         String state;
         String result;
