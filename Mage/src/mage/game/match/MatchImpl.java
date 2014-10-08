@@ -277,9 +277,15 @@ public abstract class MatchImpl implements Match {
         StringBuilder playersInfo = new StringBuilder();
         int counter = 0;
 
+        Player currentPlayer = null;
         PlayerList playerList =  game.getPlayerList();
-        playerList.setCurrent(game.getStartingPlayerId());
-        Player currentPlayer = game.getPlayer(game.getStartingPlayerId());
+        if (game.getStartingPlayerId() != null) {
+            playerList.setCurrent(game.getStartingPlayerId());
+            currentPlayer = game.getPlayer(game.getStartingPlayerId());
+        }
+        if (currentPlayer == null) {
+            currentPlayer = playerList.getCurrent(game);
+        }
         do {
             if (counter > 0) {
                 playersInfo.append(" - ");
