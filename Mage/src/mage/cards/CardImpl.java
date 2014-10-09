@@ -326,7 +326,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                         game.getState().getCommand().remove((Commander)game.getObject(objectId));
                         break;
                     case STACK:
-                        StackObject stackObject = game.getStack().getStackObject(getId());
+                        StackObject stackObject = game.getStack().getSpell(getId());
                         if (stackObject != null) {
                             game.getStack().remove(stackObject);
                         }
