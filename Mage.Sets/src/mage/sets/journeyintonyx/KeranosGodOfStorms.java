@@ -104,6 +104,7 @@ class KeranosGodOfStormsTriggeredAbility extends TriggeredAbilityImpl {
 
     KeranosGodOfStormsTriggeredAbility(final KeranosGodOfStormsTriggeredAbility ability) {
         super(ability);
+        this.lastTriggeredTurn = ability.lastTriggeredTurn;
     }
 
     @Override
