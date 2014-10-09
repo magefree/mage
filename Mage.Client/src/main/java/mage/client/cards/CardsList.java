@@ -53,6 +53,7 @@ import javax.swing.table.TableColumnModel;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.constants.Constants.SortBy;
 import mage.client.deckeditor.SortSetting;
+import mage.client.deckeditor.SortSettingBase;
 import mage.client.deckeditor.table.TableModel;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.Config;
@@ -290,8 +291,13 @@ public class CardsList extends javax.swing.JPanel implements ICardGrid {
   
   
     @Override
-    public void drawCards(SortSetting sortSetting) {
-        currentView.drawCards(sortSetting);
+    public void drawCards() {
+        currentView.drawCards();
+    }
+    
+    @Override
+    public void sortCards(SortSetting sortSetting) {
+        currentView.sortCards(sortSetting);
     }
     
     @Override
@@ -310,7 +316,7 @@ public class CardsList extends javax.swing.JPanel implements ICardGrid {
         cards = showCards;
         this.bigCard = bigCard;
         this.gameId = gameId;
-        drawCards(sortSetting);
+        drawCards();
         updateCounts();
     }
 
@@ -429,9 +435,9 @@ public class CardsList extends javax.swing.JPanel implements ICardGrid {
         chkPiles.setText("Piles");
         chkPiles.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         chkPiles.setMargin(new java.awt.Insets(3, 2, 2, 2));
-        chkPiles.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkPilesActionPerformed(evt);
+        chkPiles.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                chkPilesItemStateChanged(evt);
             }
         });
 
@@ -442,9 +448,9 @@ public class CardsList extends javax.swing.JPanel implements ICardGrid {
         cbSortBy.setName("SortBy"); // NOI18N
         cbSortBy.setOpaque(false);
         cbSortBy.setPreferredSize(new java.awt.Dimension(120, 20));
-        cbSortBy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbSortByActionPerformed(evt);
+        cbSortBy.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbSortByItemStateChanged(evt);
             }
         });
 
@@ -499,7 +505,7 @@ public class CardsList extends javax.swing.JPanel implements ICardGrid {
                 .addComponent(jToggleListView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jToggleCardView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 55, Short.MAX_VALUE))
         );
         panelControlLayout.setVerticalGroup(
             panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -551,7 +557,7 @@ public class CardsList extends javax.swing.JPanel implements ICardGrid {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelControl, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(panelCardArea, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE))
+                .addComponent(panelCardArea, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -564,16 +570,6 @@ public class CardsList extends javax.swing.JPanel implements ICardGrid {
         redrawCards();        
     }//GEN-LAST:event_jToggleListViewActionPerformed
 
-    private void cbSortByActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSortByActionPerformed
-        sortSetting.setSortBy((SortBy) cbSortBy.getSelectedItem());
-        drawCards(sortSetting);
-    }//GEN-LAST:event_cbSortByActionPerformed
-
-    private void chkPilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPilesActionPerformed
-        sortSetting.setPilesToggle(chkPiles.isSelected());
-        drawCards(sortSetting);
-    }//GEN-LAST:event_chkPilesActionPerformed
-
     private void jToggleCardViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleCardViewActionPerformed
         currentView = cardArea;
         panelCardArea.setViewportView(cardArea);
@@ -582,6 +578,20 @@ public class CardsList extends javax.swing.JPanel implements ICardGrid {
         PreferencesDialog.saveValue(PreferencesDialog.KEY_DRAFT_VIEW, "cardView");  
         redrawCards();    
     }//GEN-LAST:event_jToggleCardViewActionPerformed
+
+    private void cbSortByItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbSortByItemStateChanged
+        if(sortSetting != null){
+            sortSetting.setSortBy((SortBy) cbSortBy.getSelectedItem());
+            sortCards(sortSetting);
+        }
+    }//GEN-LAST:event_cbSortByItemStateChanged
+
+    private void chkPilesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chkPilesItemStateChanged
+        if(sortSetting != null){
+            sortSetting.setPilesToggle(chkPiles.isSelected());
+            sortCards(sortSetting);
+        }
+    }//GEN-LAST:event_chkPilesItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgView;

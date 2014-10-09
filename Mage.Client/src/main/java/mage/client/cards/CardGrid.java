@@ -145,7 +145,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
             }
         }
         // System.gc();
-        drawCards(sortSetting);
+        drawCards();
         this.setVisible(true);
     }
 
@@ -174,13 +174,6 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     }
 
     @Override
-    public void drawCards(SortSetting sortSetting) {
-        //Sort Cards
-        sortCards(sortSetting);
-        
-        drawCards();
-    }
-    
     public void drawCards(){
         int curColumn = 0;
         int curRow = 0;
@@ -208,7 +201,8 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         repaint();
     }
     
-    private void sortCards(SortSetting sortSetting)
+    @Override
+    public void sortCards(SortSetting sortSetting)
     {
         cardsPosition.clear();
         if (cards.size() > 0) {
@@ -267,6 +261,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
                 }
             }
         }
+        drawCards();
     }
 
     private void clearCards() {

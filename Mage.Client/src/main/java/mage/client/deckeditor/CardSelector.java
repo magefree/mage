@@ -187,7 +187,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         jButtonAddToSideboard.setEnabled(false);
         filterCards();
         chkPiles.setSelected(true);
-        this.currentView.drawCards(sortSetting);
+        this.currentView.drawCards();
     }
 
     public void loadSideboard(List<Card> sideboard, BigCard bigCard) {
@@ -954,7 +954,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         if (cbSortBy.getSelectedItem() instanceof SortBy) {
             if (this.currentView != null) {
                 sortSetting.setSortBy((SortBy) cbSortBy.getSelectedItem());
-                this.currentView.drawCards(sortSetting);
+                this.currentView.sortCards(sortSetting);
             }
         }
     }//GEN-LAST:event_cbSortByActionPerformed
@@ -963,7 +963,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         if (cbSortBy.getSelectedItem() instanceof SortBy) {
             if (this.currentView != null) {
                 sortSetting.setPilesToggle(chkPiles.isSelected());
-                this.currentView.drawCards(sortSetting);
+                this.currentView.sortCards(sortSetting);
             }
         }
     }//GEN-LAST:event_chkPilesActionPerformed
@@ -1179,28 +1179,28 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     @Override
     public void componentResized(ComponentEvent e) {
         if (cbSortBy.getSelectedItem() instanceof SortBy) {
-            this.currentView.drawCards(sortSetting);
+            this.currentView.drawCards();
         }
     }
 
     @Override
     public void componentMoved(ComponentEvent e) {
         if (cbSortBy.getSelectedItem() instanceof SortBy) {
-            this.currentView.drawCards(sortSetting);
+            this.currentView.drawCards();
         }
     }
 
     @Override
     public void componentShown(ComponentEvent e) {
         if (cbSortBy.getSelectedItem() instanceof SortBy) {
-            this.currentView.drawCards(sortSetting);
+            this.currentView.drawCards();
         }
     }
 
     @Override
     public void componentHidden(ComponentEvent e) {
         if (cbSortBy.getSelectedItem() instanceof SortBy) {
-            this.currentView.drawCards(sortSetting);
+            this.currentView.drawCards();
         }
     }
 

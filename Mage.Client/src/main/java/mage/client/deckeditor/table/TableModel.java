@@ -117,11 +117,6 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
         }
         this.bigCard = bigCard;
         this.gameId = gameId;
-        int landCount = 0;
-        int creatureCount = 0;
-        int instantCount = 0;
-        int sorceryCount = 0;
-        int enchantmentCount = 0;
         if (!merge) {
             this.clearCards();
             for (CardView card : showCards.values()) {
@@ -182,7 +177,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
         }
 
         sort(this.sortSetting.getSortIndex(), this.sortSetting.isAscending());
-        drawCards(sortSetting);
+        drawCards();
     }
 
     @Override
@@ -273,10 +268,16 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
     }
 
     @Override
-    public void drawCards(SortSetting sortSetting) {
+    public void drawCards() {
         fireTableDataChanged();
     }
-
+    
+    @Override
+    public void sortCards(SortSetting sortSetting) {
+        this.sortSetting = sortSetting;
+        sort(sortSetting.getSortIndex(), sortSetting.isAscending());
+    }
+    
     public void removeCard(UUID cardId) {
         cards.remove(cardId);
         for (CardView cv : view) {
@@ -446,6 +447,6 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
         }
         return super.isCellEditable(row, col); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+
+
 }

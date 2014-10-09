@@ -43,7 +43,8 @@ import mage.view.CardsView;
 public interface ICardGrid {
     void clearCardEventListeners();
     void addCardEventListener(Listener<Event> listener);
-    void drawCards(SortSetting sortSetting);
+    void drawCards();
+    void sortCards(SortSetting sortSetting);
     void loadCards(CardsView showCards, SortSetting sortSetting, BigCard bigCard, UUID gameId);
     void loadCards(CardsView showCards, SortSetting sortSetting, BigCard bigCard, UUID gameId, boolean merge);
     void refresh();
