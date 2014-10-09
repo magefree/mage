@@ -44,6 +44,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -71,6 +72,7 @@ public class HundredTalonStrike extends CardImpl {
         effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains first strike until end of turn");
         this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Splice onto Arcane-Tap an untapped white creature you control.
         this.addAbility(new SpliceOntoArcaneAbility(new TapTargetCost(new TargetControlledCreaturePermanent(1,1,filter,false))));
     }
