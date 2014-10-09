@@ -35,6 +35,7 @@ $zip->addTree("client", "mage-client");
 $zip->addTree("server", "mage-server");
 $zip->addFile("startMage.bat");
 $zip->addFile("startMageWin7.bat");
+$zip->addFile("startMage.sh");
 $zip->writeToFileNamed("../mage-bundle.zip");
 chdir("..");
 
