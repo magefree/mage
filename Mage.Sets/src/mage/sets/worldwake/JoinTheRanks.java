@@ -30,11 +30,10 @@ package mage.sets.worldwake;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.SoldierToken;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.game.permanent.token.Token;
 
 /**
@@ -49,7 +48,7 @@ public class JoinTheRanks extends CardImpl {
         this.color.setWhite(true);        
         
         // Put two 1/1 white Soldier Ally creature tokens onto the battlefield.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new SoldierToken(), 2));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new JoinTheRanksSoldierToken(), 2));
     }
 
     public JoinTheRanks (final JoinTheRanks card) {
