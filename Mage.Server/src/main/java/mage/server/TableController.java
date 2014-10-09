@@ -858,7 +858,9 @@ public class TableController {
                 }
                 if (matchPlayer.getPlayer().isHuman()) {
                     humanPlayers++;                    
-                    if (!match.isDoneSideboarding() || (!matchPlayer.hasQuit() && match.getGame() != null && matchPlayer.getPlayer().isInGame())) {
+                    if ((table.getState().equals(TableState.WAITING) || table.getState().equals(TableState.STARTING) || table.getState().equals(TableState.READY_TO_START)) ||
+                            !match.isDoneSideboarding() || 
+                            (!matchPlayer.hasQuit() && match.getGame() != null && matchPlayer.getPlayer().isInGame())) {
                         User user = UserManager.getInstance().getUser(userPlayerEntry.getKey());
                         if (user == null) {
                             logger.debug("- Active user of match is missing: " + matchPlayer.getName());
