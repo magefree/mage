@@ -58,7 +58,7 @@ public class IzzetStaticaster extends CardImpl {
         super(ownerId, 173, "Izzet Staticaster", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Human");
-        this.subtype.add("Wizzard");
+        this.subtype.add("Wizard");
         this.color.setBlue(true);
         this.color.setRed(true);
         this.power = new MageInt(0);
