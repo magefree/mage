@@ -444,12 +444,12 @@ public class HumanPlayer extends PlayerImpl {
     public boolean priority(Game game) {
         passed = false;
         if (!abort) {
-            boolean dontCheckPassStep = false;
             if (passedAllTurns) {
                 pass(game);
                 return false;
             }
             if (game.getStack().isEmpty()) {
+                boolean dontCheckPassStep = false;
                 if (passedTurn) {
                     pass(game);
                     return false;
@@ -488,10 +488,10 @@ public class HumanPlayer extends PlayerImpl {
                         return false;
                     }
                 }
-            }
-            if (!dontCheckPassStep && checkPassStep(game)) {
-                pass(game);
-                return false;
+                if (!dontCheckPassStep && checkPassStep(game)) {
+                    pass(game);
+                    return false;
+                }                
             }
             updateGameStatePriority("priority", game);
             game.firePriorityEvent(playerId);
