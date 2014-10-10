@@ -27,18 +27,26 @@
  */
 package mage.sets.magic2015;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.players.Player;
+import mage.players.PlayerList;
+import mage.target.TargetCard;
 
 /**
  *
@@ -92,30 +100,103 @@ class AEtherspoutsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean result = true;
         game.getPlayerList();
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (Permanent permanent:game.getState().getBattlefield().getActivePermanents(new FilterAttackingCreature(), source.getControllerId(), source.getSourceId(), game)) {
-                Player owner = game.getPlayer(permanent.getOwnerId());
-                if (owner != null) {
-                    owner.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD,
-                            owner.chooseUse(Outcome.ReturnToHand, "Put " + permanent.getLogName() + " to the top? (else it goes to bottom)", game), true);
-                } else {
-                    result = false;
+            PlayerList playerList = game.getPlayerList();
+            playerList.setCurrent(game.getActivePlayerId());
+            Player player = game.getPlayer(game.getActivePlayerId());
+            do {
+                ArrayList<Permanent> permanentsToTop = new ArrayList<>();
+                ArrayList<Permanent> permanentsToBottom = new ArrayList<>();
+                for (Permanent permanent:game.getState().getBattlefield().getActivePermanents(new FilterAttackingCreature(), player.getId(), source.getSourceId(), game)) {
+                    if (permanent.getOwnerId().equals(player.getId())) {
+                        if (player.chooseUse(outcome, "Put " + permanent.getLogName() + " to the top? (else it goes to bottom)", game)) {
+                            permanentsToTop.add(permanent);
+                            game.informPlayers(permanent.getLogName() + " goes to the top of " + player.getName() + "'s library");
+                        } else {
+                            permanentsToBottom.add(permanent);
+                            game.informPlayers(permanent.getLogName() + " goes to the bottom of " + player.getName() + "'s library");
+                        }
+                    }
                 }
-            }
-            return result;
-
-
-//            PlayerList playerList = game.getPlayerList();
-//            playerList.setCurrent(game.getActivePlayerId());
-//            Player player = game.getPlayer(game.getActivePlayerId());
-//            do {
-//                player = playerList.getNext(game);
-            
-//            } while (!player.getId().equals(game.getActivePlayerId()));
-
+                // cards to top
+                Cards cards = new CardsImpl();
+                ArrayList<Permanent> toLibrary = new ArrayList<>();
+                for (Permanent permanent: permanentsToTop) {
+                    if (permanent instanceof PermanentToken) {
+                        toLibrary.add(permanent);
+                    } else {
+                        Card card = game.getCard(permanent.getId());
+                        if (card != null) {
+                            cards.add(card);
+                        }
+                    }
+                }
+                TargetCard target = new TargetCard(Zone.BATTLEFIELD, new FilterCard("order to put on the top of library (last choosen will be the top most)"));
+                while (player.isInGame() && cards.size() > 1) {
+                    player.choose(Outcome.Neutral, cards, target, game);
+                    Card card = cards.get(target.getFirstTarget(), game);
+                    if (card != null) {
+                        cards.remove(card);
+                        Permanent permanent = game.getPermanent(card.getId());
+                        if (permanent != null) {
+                            toLibrary.add(permanent);
+                        }
+                    }
+                    target.clearChosen();
+                }
+                if (cards.size() == 1) {
+                    Card card = cards.get(cards.iterator().next(), game);
+                    Permanent permanent = game.getPermanent(card.getId());
+                    if (permanent != null) {
+                        toLibrary.add(permanent);
+                    }
+                }
+                // move all permanents to lib at the same time
+                for(Permanent permanent: toLibrary) {
+                    player.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, true, false);
+                }
+                // cards to bottom
+                cards.clear();
+                toLibrary.clear();
+                for (Permanent permanent: permanentsToBottom) {
+                    if (permanent instanceof PermanentToken) {
+                        toLibrary.add(permanent);
+                    } else {
+                        Card card = game.getCard(permanent.getId());
+                        if (card != null) {
+                            cards.add(card);
+                        }
+                    }
+                }
+                target = new TargetCard(Zone.BATTLEFIELD, new FilterCard("order to put on bottom of library (last choosen will be bottommost card)"));
+                while (player.isInGame() && cards.size() > 1) {
+                    player.choose(Outcome.Neutral, cards, target, game);
+                    Card card = cards.get(target.getFirstTarget(), game);
+                    if (card != null) {
+                        cards.remove(card);
+                        Permanent permanent = game.getPermanent(card.getId());
+                        if (permanent != null) {
+                            toLibrary.add(permanent);
+                        }
+                    }
+                    target.clearChosen();
+                }
+                if (cards.size() == 1) {
+                    Card card = cards.get(cards.iterator().next(), game);
+                    Permanent permanent = game.getPermanent(card.getId());
+                    if (permanent != null) {                    
+                        toLibrary.add(permanent);
+                    }
+                }
+                // move all permanents to lib at the same time
+                for(Permanent permanent: toLibrary) {
+                    player.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, false, false);
+                }
+                player = playerList.getNext(game);            
+            } while (!player.getId().equals(game.getActivePlayerId()));
+            return true;
         }
         return false;
     }

@@ -1024,8 +1024,13 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean removeFromCombat(Game game) {
+        return removeFromCombat(game, true);
+    }
+
+    @Override
+    public boolean removeFromCombat(Game game, boolean withInfo) {
         if (this.isAttacking() || this.blocking > 0) {
-            if (game.getCombat().removeFromCombat(objectId, game)) {
+            if (game.getCombat().removeFromCombat(objectId, game) && withInfo) {
                 game.informPlayers(new StringBuilder(this.getLogName()).append(" removed from combat").toString());
             }
         }

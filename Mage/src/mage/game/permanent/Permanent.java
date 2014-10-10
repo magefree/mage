@@ -170,6 +170,7 @@ public interface Permanent extends Card, Controllable {
     boolean canUseActivatedAbilities(Game game);
 
     boolean removeFromCombat(Game game);
+    boolean removeFromCombat(Game game, boolean withInfo);
     boolean isDeathtouched();
 
     /**
