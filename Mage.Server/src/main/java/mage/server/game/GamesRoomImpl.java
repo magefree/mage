@@ -50,6 +50,8 @@ import mage.server.TableManager;
 import mage.server.User;
 import mage.server.UserManager;
 import mage.server.tournament.TournamentManager;
+import mage.server.util.ConfigSettings;
+import mage.server.util.ThreadExecutor;
 import mage.view.MatchView;
 import mage.view.RoomUsersView;
 import mage.view.TableView;

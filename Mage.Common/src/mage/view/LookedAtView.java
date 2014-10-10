@@ -40,8 +40,8 @@ import java.io.Serializable;
  */
 public class LookedAtView implements Serializable {
 
-    private String name;
-    private SimpleCardsView cards = new SimpleCardsView();
+    private final String name;
+    private final SimpleCardsView cards = new SimpleCardsView();
 
     public LookedAtView(String name, Cards cards, Game game) {
         this.name = name;

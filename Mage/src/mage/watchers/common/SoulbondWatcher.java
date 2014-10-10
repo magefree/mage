@@ -76,7 +76,7 @@ public class SoulbondWatcher extends Watcher {
                 if (permanent.getAbilities().contains(SoulbondAbility.getInstance())) {
                     Player controller = game.getPlayer(permanent.getControllerId());
                     if (controller != null) {
-                        Cards cards = new CardsImpl(Zone.PICK);
+                        Cards cards = new CardsImpl();
                         cards.add(permanent);
                         controller.lookAtCards("Soulbond", cards, game);
                         if (controller.chooseUse(Outcome.Benefit, "Use Soulbond?", game)) {
@@ -106,7 +106,7 @@ public class SoulbondWatcher extends Watcher {
                                 controller = game.getPlayer(permanent.getControllerId());
                             }
                             if (controller != null) {
-                                Cards cards = new CardsImpl(Zone.PICK);
+                                Cards cards = new CardsImpl();
                                 cards.add(chosen);
                                 controller.lookAtCards("Soulbond", cards, game);
                                 if (controller.chooseUse(Outcome.Benefit, "Use Soulbond for recent " + permanent.getLogName() + "?", game)) {

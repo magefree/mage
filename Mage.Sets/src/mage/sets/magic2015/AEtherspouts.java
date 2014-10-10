@@ -66,6 +66,14 @@ public class AEtherspouts extends CardImpl {
     }
 }
 
+/*
+7/18/2014 	The owner of each attacking creature chooses whether to put it on the top or bottom
+            of his or her library. The active player (the player whose turn it is) makes all of
+            his or her choices first, followed by each other player in turn order.
+7/18/2014 	If an effect puts two or more cards on the top or bottom of a library at the same time,
+            the owner of those cards may arrange them in any order. That library’s owner doesn’t reveal
+            the order in which the cards go into his or her library.
+*/
 class AEtherspoutsEffect extends OneShotEffect {
 
     public AEtherspoutsEffect() {
@@ -85,6 +93,7 @@ class AEtherspoutsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean result = true;
+        game.getPlayerList();
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for (Permanent permanent:game.getState().getBattlefield().getActivePermanents(new FilterAttackingCreature(), source.getControllerId(), source.getSourceId(), game)) {
@@ -97,6 +106,16 @@ class AEtherspoutsEffect extends OneShotEffect {
                 }
             }
             return result;
+
+
+//            PlayerList playerList = game.getPlayerList();
+//            playerList.setCurrent(game.getActivePlayerId());
+//            Player player = game.getPlayer(game.getActivePlayerId());
+//            do {
+//                player = playerList.getNext(game);
+            
+//            } while (!player.getId().equals(game.getActivePlayerId()));
+
         }
         return false;
     }

@@ -40,8 +40,8 @@ import mage.game.Game;
 public class ExileView extends CardsView {
     private static final long serialVersionUID = 1L;
 
-    private String name;
-    private UUID id;
+    private final String name;
+    private final UUID id;
 
     public ExileView(ExileZone exileZone, Game game) {
         this.name = exileZone.getName();

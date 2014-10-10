@@ -140,7 +140,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests Soulbond effect disabling when Soulbond creture changes its controller and then returns back.
+     * Tests Soulbond effect disabling when Soulbond creature changes its controller and then returns back.
      * Effect should not be restored.
      */
     @Test

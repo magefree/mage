@@ -28,17 +28,21 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.players.Player;
 
 /**
  *
@@ -94,9 +98,12 @@ class DryadMilitantReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Card card = game.getCard(event.getTargetId());
-        if (card != null) {
-            return card.moveToExile(null, "", source.getSourceId(), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Card card = game.getCard(event.getTargetId());
+            if (card != null) {
+                return controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, null);
+            }
         }
         return false;
     }
