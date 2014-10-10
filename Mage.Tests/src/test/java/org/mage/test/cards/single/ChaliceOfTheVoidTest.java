@@ -46,7 +46,7 @@ public class ChaliceOfTheVoidTest extends CardTestPlayerBase {
      */
 
     @Test
-    public void testCopiedSteelHellkite() {
+    public void testX1CountsFor2CMC() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
         addCard(Zone.HAND, playerA, "Chalice of the Void", 2);
 
@@ -56,10 +56,34 @@ public class ChaliceOfTheVoidTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chalice of the Void");
         setChoice(playerA, "X=1");
 
-        setStopAt(4, PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Chalice of the Void", 2);
 
     }
+    
+    /*
+    If X=1 the cmc of Chalice on the stack is 2. So it can't be countered by Mental Misstep
+    */
+    @Test
+    public void testCantBeCounteredByMentalMisstep() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.HAND, playerA, "Chalice of the Void", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
+        addCard(Zone.HAND, playerB, "Mental Misstep", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chalice of the Void");
+        setChoice(playerA, "X=1");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Mental Misstep", "Chalice of the Void", "Chalice of the Void");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertHandCount(playerB, "Mental Misstep", 1); // cannot be cast because no legal target exists
+        assertPermanentCount(playerA, "Chalice of the Void", 1); // was not countered
+
+    }
+    
 }

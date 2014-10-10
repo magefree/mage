@@ -40,6 +40,7 @@ public interface StackObject extends MageObject, Controllable {
     UUID getSourceId();
     void counter(UUID sourceId, Game game);
     Ability getStackAbility();
+    int getConvertedManaCost();
     @Override
     StackObject copy();
 }

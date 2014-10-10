@@ -609,6 +609,7 @@ public class Spell implements StackObject, Card {
      *  treated as the number chosen for it while the object is on the stack.
      * @return
      */
+    @Override
     public int getConvertedManaCost() {
         int cmc = 0;        
         for (Ability spellAbility: spellAbilities) {

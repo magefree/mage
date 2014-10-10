@@ -209,6 +209,14 @@ public class StackAbility implements StackObject, Ability {
     }
 
     @Override
+    public int getConvertedManaCost() {
+        // Activated abilities have an "activation cost" but they don't have a characteristic related to that while on the stack. 
+        // There are certain effects that interact with the cost to activate an ability (e.g., Training Grounds, Power Artifact)
+        // but nothing that looks for that quality of an ability once it's on the stack. 
+        return 0;
+    }
+
+    @Override
     public Effects getEffects() {
         return ability.getEffects();
     }
