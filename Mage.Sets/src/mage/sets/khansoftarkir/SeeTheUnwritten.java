@@ -30,7 +30,6 @@ package mage.sets.khansoftarkir;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -47,7 +46,6 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.util.CardUtil;
 
 
 
@@ -114,32 +112,34 @@ class SeeTheUnwrittenEffect extends OneShotEffect {
         if (player != null && sourceObject != null) {
             Cards cards = new CardsImpl(Zone.LIBRARY);
 
-            boolean properCardFound = false;
+            int creatureCardsFound = 0;
             int count = Math.min(player.getLibrary().size(), 8);
             for (int i = 0; i < count; i++) {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
                     cards.add(card);
                     if (filter.match(card, source.getSourceId(), source.getControllerId(), game)) {
-                        properCardFound = true;
+                        creatureCardsFound++;
                     }
                 }
             }
 
             if (!cards.isEmpty()) {
                 player.revealCards(sourceObject.getLogName(), cards, game);
-                TargetCard target = new TargetCard(numberOfCardsToPutIntoPlay, numberOfCardsToPutIntoPlay, Zone.LIBRARY, filter);
-                if (properCardFound && player.choose(Outcome.PutCreatureInPlay, cards, target, game)) {
-                    for(UUID creatureId: target.getTargets()) {
-                        Card card = game.getCard(creatureId);
-                        if (card != null) {
-                            cards.remove(card);
-                            player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                if (creatureCardsFound > 0 && player.chooseUse(outcome, "Put creature(s) into play?", game)) {
+                    int cardsToChoose = Math.min(numberOfCardsToPutIntoPlay, creatureCardsFound); 
+                    TargetCard target = new TargetCard(cardsToChoose, cardsToChoose, Zone.LIBRARY, filter);
+                    if (player.choose(Outcome.PutCreatureInPlay, cards, target, game)) {
+                        for(UUID creatureId: target.getTargets()) {
+                            Card card = game.getCard(creatureId);
+                            if (card != null) {
+                                cards.remove(card);
+                                player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                            }
                         }
+
                     }
-
                 }
-
                 for (UUID cardId : cards) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
