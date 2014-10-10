@@ -22,6 +22,7 @@ move("../Mage.Client/target/mage-client.zip", "client.zip");
 move("../Mage.Server/target/mage-server.zip", "server.zip");
 copy("../Utils/release/startMage.bat", "startMage.bat");
 copy("../Utils/release/startMageWin7.bat", "startMageWin7.bat");
+copy("../Utils/release/startMage.sh", "startMage.sh");
 
 my $f = Archive::Extract->new( archive => "client.zip");
 $f->extract( to => "client/");
