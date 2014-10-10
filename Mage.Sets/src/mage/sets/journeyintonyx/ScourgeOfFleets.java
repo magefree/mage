@@ -42,8 +42,8 @@ import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -107,7 +107,7 @@ class ScourgeOfFleetsEffect extends OneShotEffect {
             int islands = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
             FilterPermanent creatureFilter = new FilterCreaturePermanent();
             creatureFilter.add(new ControllerPredicate(TargetController.OPPONENT));
-            creatureFilter.add(new PowerPredicate(Filter.ComparisonType.LessThan, islands +1));
+            creatureFilter.add(new ToughnessPredicate(Filter.ComparisonType.LessThan, islands +1));
             for (Permanent permanent: game.getBattlefield().getActivePermanents(creatureFilter, source.getControllerId(), source.getSourceId(), game)) {
                 controller.moveCardToHandWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD);
             }
