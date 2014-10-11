@@ -662,7 +662,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         if (info == null) {
             info = new HashMap<>();
         }
-        info.put(key, value);
+        if (value == null || value.isEmpty()) {
+            info.remove(key);
+        } else {
+            info.put(key, value);
+        }
     }
 
     @Override
