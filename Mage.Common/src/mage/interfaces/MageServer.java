@@ -81,7 +81,7 @@ public interface MageServer {
     //table methods
     TableView createTable(String sessionId, UUID roomId, MatchOptions matchOptions) throws MageException;
     TableView createTournamentTable(String sessionId, UUID roomId, TournamentOptions tournamentOptions) throws MageException;
-    boolean joinTable(String sessionId, UUID roomId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException, GameException;
+    boolean joinTable(String sessionId, UUID roomId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) throws MageException, GameException;
     boolean joinTournamentTable(String sessionId, UUID roomId, UUID tableId, String name, String playerType, int skill) throws MageException, GameException;
     boolean submitDeck(String sessionId, UUID tableId, DeckCardLists deckList) throws MageException, GameException;
     void updateDeck(String sessionId, UUID tableId, DeckCardLists deckList) throws MageException, GameException;

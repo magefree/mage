@@ -139,9 +139,9 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     }
 
     @Override
-    public boolean joinTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException {
+    public boolean joinTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) throws MageException {
         if (tables.containsKey(tableId)) {
-            return TableManager.getInstance().joinTable(userId, tableId, name, playerType, skill, deckList);
+            return TableManager.getInstance().joinTable(userId, tableId, name, playerType, skill, deckList, password);
         } else {
             return false;
         }

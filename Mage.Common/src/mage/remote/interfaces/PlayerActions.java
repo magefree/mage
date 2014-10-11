@@ -69,7 +69,7 @@ public interface PlayerActions {
 
     boolean watchTournamentTable(UUID tableId);
 
-    boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList);
+    boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList, String password);
 
     TableView getTable(UUID roomId, UUID tableId);
 

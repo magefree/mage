@@ -570,10 +570,10 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList) {
+    public boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList, String password) {
         try {
             if (isConnected()) {
-                return server.joinTable(sessionId, roomId, tableId, playerName, playerType, skill, deckList);
+                return server.joinTable(sessionId, roomId, tableId, playerName, playerType, skill, deckList, password);
             }
         } catch (InvalidDeckException iex) {
             handleInvalidDeckException(iex);

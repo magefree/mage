@@ -105,7 +105,7 @@ public class LoadTest {
 
             TableView table = session.createTable(roomId, options);
 
-            if (!session.joinTable(roomId, table.getTableId(), TEST_USER_NAME + i, "Human", 1, deckList)) {
+            if (!session.joinTable(roomId, table.getTableId(), TEST_USER_NAME + i, "Human", 1, deckList,"")) {
                 log.error("Error while joining table");
                 Assert.assertTrue("Error while joining table", false);
                 return;
@@ -119,7 +119,7 @@ public class LoadTest {
             UUID roomId2 = session2.getMainRoomId();
 
             // connect to the table with the same deck
-            if (!session2.joinTable(roomId2, table.getTableId(), TEST_USER_NAME_2 + i, "Human", 1, deckList)) {
+            if (!session2.joinTable(roomId2, table.getTableId(), TEST_USER_NAME_2 + i, "Human", 1, deckList,"")) {
                 log.error("Error while joining table");
                 Assert.assertTrue("Error while joining table", false);
                 return;
@@ -180,7 +180,7 @@ public class LoadTest {
 
         TableView table = session.createTable(roomId, options);
 
-        if (!session.joinTable(roomId, table.getTableId(), TEST_USER_NAME + i, "Human", 1, deckList)) {
+        if (!session.joinTable(roomId, table.getTableId(), TEST_USER_NAME + i, "Human", 1, deckList,"")) {
             log.error("Error while joining table");
             Assert.assertTrue("Error while joining table", false);
             return true;
@@ -196,7 +196,7 @@ public class LoadTest {
         UUID roomId2 = session2.getMainRoomId();
 
         // connect to the table with the same deck
-        if (!session2.joinTable(roomId2, table.getTableId(), TEST_USER_NAME_2 + i, "Human", 1, deckList)) {
+        if (!session2.joinTable(roomId2, table.getTableId(), TEST_USER_NAME_2 + i, "Human", 1, deckList,"")) {
             log.error("Error while joining table");
             Assert.assertTrue("Error while joining table", false);
             return true;

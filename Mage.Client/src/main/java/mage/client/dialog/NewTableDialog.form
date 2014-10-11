@@ -40,14 +40,22 @@
                               <EmptySpace pref="12" max="32767" attributes="0"/>
                               <Component id="spnFreeMulligans" min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="cbDeckType" min="-2" pref="338" max="-2" attributes="1"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="txtName" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="cbDeckType" alignment="0" pref="338" max="32767" attributes="1"/>
+                              </Group>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="lbTimeLimit" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lbTimeLimit" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPassword" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="cbTimeLimit" min="-2" pref="126" max="-2" attributes="1"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtPassword" min="-2" pref="125" max="-2" attributes="0"/>
+                                  <Component id="cbTimeLimit" min="-2" pref="126" max="-2" attributes="1"/>
+                              </Group>
                           </Group>
-                          <Component id="txtName" alignment="1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -102,6 +110,8 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtName" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPassword" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -155,7 +165,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pnlOtherPlayers" pref="185" max="32767" attributes="0"/>
+              <Component id="pnlOtherPlayers" pref="189" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -186,6 +196,16 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtName">
     </Component>
+    <Component class="javax.swing.JLabel" name="lblPassword">
+      <Properties>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="txtName"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Password:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtPassword">
+    </Component>
     <Component class="javax.swing.JLabel" name="lbDeckType">
       <Properties>
         <Property name="text" type="java.lang.String" value="Deck Type:"/>
@@ -196,7 +216,7 @@
     <Component class="javax.swing.JLabel" name="lbTimeLimit">
       <Properties>
         <Property name="text" type="java.lang.String" value="Time Limit:"/>
-        <Property name="toolTipText" type="java.lang.String" value="The activie time a player may use to finish the match. If the time runs out, the player looses the current game."/>
+        <Property name="toolTipText" type="java.lang.String" value="The active time a player may use to finish the match. If his or her time runs out, the player looses the current game."/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbTimeLimit">

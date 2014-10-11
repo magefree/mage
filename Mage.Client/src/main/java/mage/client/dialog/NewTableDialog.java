@@ -92,6 +92,8 @@ public class NewTableDialog extends MageDialog {
 
         lblName = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
+        lblPassword = new javax.swing.JLabel();
+        txtPassword = new javax.swing.JTextField();
         lbDeckType = new javax.swing.JLabel();
         cbDeckType = new javax.swing.JComboBox();
         lbTimeLimit = new javax.swing.JLabel();
@@ -123,10 +125,13 @@ public class NewTableDialog extends MageDialog {
         lblName.setLabelFor(txtName);
         lblName.setText("Name:");
 
+        lblPassword.setLabelFor(txtName);
+        lblPassword.setText("Password:");
+
         lbDeckType.setText("Deck Type:");
 
         lbTimeLimit.setText("Time Limit:");
-        lbTimeLimit.setToolTipText("The activie time a player may use to finish the match. If the time runs out, the player looses the current game.");
+        lbTimeLimit.setToolTipText("The active time a player may use to finish the match. If his or her time runs out, the player looses the current game.");
 
         lblGameType.setText("Game Type:");
 
@@ -206,13 +211,18 @@ public class NewTableDialog extends MageDialog {
                                 .addComponent(lblFreeMulligans)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                                 .addComponent(spnFreeMulligans, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(cbDeckType, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtName, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbDeckType, javax.swing.GroupLayout.Alignment.LEADING, 0, 338, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lbTimeLimit)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbTimeLimit, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblPassword, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbTimeLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtName, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbTimeLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -253,7 +263,9 @@ public class NewTableDialog extends MageDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblName))
+                    .addComponent(lblName)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPassword))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbDeckType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -296,7 +308,7 @@ public class NewTableDialog extends MageDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -334,6 +346,7 @@ public class NewTableDialog extends MageDialog {
         options.setRange((RangeOfInfluence) this.cbRange.getSelectedItem());
         options.setWinsNeeded((Integer)this.spnNumWins.getValue());
         options.setFreeMulligans((Integer)this.spnFreeMulligans.getValue());
+        options.setPassword(this.txtPassword.getText());
         saveGameSettingsToPrefs(options, this.player1Panel.getDeckFile());
 
         table = session.createTable(roomId, options);
@@ -342,7 +355,14 @@ public class NewTableDialog extends MageDialog {
             return;
         }
         try {
-            if (session.joinTable(roomId, table.getTableId(), this.player1Panel.getPlayerName(), "Human", 1, DeckImporterUtil.importDeck(this.player1Panel.getDeckFile()))) {
+            if (session.joinTable(
+                    roomId,
+                    table.getTableId(),
+                    this.player1Panel.getPlayerName(),
+                    "Human", 1,
+                    DeckImporterUtil.importDeck(this.player1Panel.getDeckFile()),
+                    this.txtPassword.getText())
+                ) {
                 for (TablePlayerPanel player: players) {
                     if (!player.getPlayerType().equals("Human")) {
                         if (!player.joinTable(roomId, table.getTableId())) {
@@ -488,6 +508,7 @@ public class NewTableDialog extends MageDialog {
      */
     private void setGameSettingsFromPrefs () {
         txtName.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NAME, "Game"));
+        txtPassword.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD, ""));
 
         String playerTypes = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_PLAYER_TYPES, "Human");
         prefPlayerTypes.clear();
@@ -539,6 +560,7 @@ public class NewTableDialog extends MageDialog {
      */
     private void saveGameSettingsToPrefs(MatchOptions options, String deckFile) {
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NAME, options.getName());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD, options.getPassword());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_DECK_TYPE, options.getDeckType());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_TIME_LIMIT, Integer.toString(options.getPriorityTime()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_GAME_TYPE, options.getGameType());
@@ -580,6 +602,7 @@ public class NewTableDialog extends MageDialog {
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblNumPlayers;
     private javax.swing.JLabel lblNumWins;
+    private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblRange;
     private mage.client.table.NewPlayerPanel player1Panel;
     private javax.swing.JPanel pnlOtherPlayers;
@@ -587,6 +610,7 @@ public class NewTableDialog extends MageDialog {
     private javax.swing.JSpinner spnNumPlayers;
     private javax.swing.JSpinner spnNumWins;
     private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtPassword;
     // End of variables declaration//GEN-END:variables
 
 }

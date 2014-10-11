@@ -632,8 +632,8 @@ public class TablesPanel extends javax.swing.JPanel {
                 options.setFreeMulligans(2);
                 table = session.createTable(roomId,    options);
 
-                session.joinTable(roomId, table.getTableId(), "Human", "Human", 1, DeckImporterUtil.importDeck("test.dck"));
-                session.joinTable(roomId, table.getTableId(), "Computer", "Computer - mad", 5, DeckImporterUtil.importDeck("test.dck"));
+                session.joinTable(roomId, table.getTableId(), "Human", "Human", 1, DeckImporterUtil.importDeck("test.dck"),"");
+                session.joinTable(roomId, table.getTableId(), "Computer", "Computer - mad", 5, DeckImporterUtil.importDeck("test.dck"),"");
                 session.startMatch(roomId, table.getTableId());
             } catch (HeadlessException ex) {
                 handleError(ex);

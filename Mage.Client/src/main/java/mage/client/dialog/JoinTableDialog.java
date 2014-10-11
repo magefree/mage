@@ -50,6 +50,7 @@ public class JoinTableDialog extends MageDialog {
     public JoinTableDialog() {
         initComponents();
         newPlayerPanel.showLevel(false);
+        txtPassword.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD, ""));
     }
 
     public void showDialog(UUID roomId, UUID tableId) {
@@ -74,6 +75,8 @@ public class JoinTableDialog extends MageDialog {
         btnCancel = new javax.swing.JButton();
         btnOK = new javax.swing.JButton();
         newPlayerPanel = new mage.client.table.NewPlayerPanel();
+        lblPassword = new javax.swing.JLabel();
+        txtPassword = new javax.swing.JTextField();
 
         setTitle("Join Table");
 
@@ -91,6 +94,10 @@ public class JoinTableDialog extends MageDialog {
             }
         });
 
+        lblPassword.setText("Password:");
+
+        txtPassword.setText("password");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -99,10 +106,16 @@ public class JoinTableDialog extends MageDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnOK)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancel))
-                    .addComponent(newPlayerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE))
+                    .addComponent(newPlayerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblPassword)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -110,6 +123,10 @@ public class JoinTableDialog extends MageDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(newPlayerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPassword)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel)
@@ -128,7 +145,8 @@ public class JoinTableDialog extends MageDialog {
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         Session session = MageFrame.getSession();
         try {
-            joined = session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), "Human", 1, DeckImporterUtil.importDeck(this.newPlayerPanel.getDeckFile()));
+            PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD, txtPassword.getText());
+            joined = session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), "Human", 1, DeckImporterUtil.importDeck(this.newPlayerPanel.getDeckFile()), this.txtPassword.getText());
         } catch (Exception ex) {
             handleError(ex);
         }
@@ -151,7 +169,9 @@ public class JoinTableDialog extends MageDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnOK;
+    private javax.swing.JLabel lblPassword;
     private mage.client.table.NewPlayerPanel newPlayerPanel;
+    private javax.swing.JTextField txtPassword;
     // End of variables declaration//GEN-END:variables
 
 }

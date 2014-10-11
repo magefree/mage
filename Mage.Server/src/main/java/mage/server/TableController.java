@@ -208,7 +208,7 @@ public class TableController {
         return true;
     }
 
-    public synchronized boolean joinTable(UUID userId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException {
+    public synchronized boolean joinTable(UUID userId, String name, String playerType, int skill, DeckCardLists deckList, String password) throws MageException {
         User user = UserManager.getInstance().getUser(userId);
         if (user == null) {
             return false;
@@ -216,6 +216,13 @@ public class TableController {
         if (table.getState() != TableState.WAITING) {
             user.showUserMessage("Join Table", "No available seats.");
             return false;
+        }
+        // check password
+        if (!table.getMatch().getOptions().getPassword().isEmpty()) {
+            if (!table.getMatch().getOptions().getPassword().equals(password)) {
+                user.showUserMessage("Join Table", "Wrong password.");
+                return false;
+            }
         }
         Seat seat = table.getNextAvailableSeat(playerType);
         if (seat == null) {
@@ -240,7 +247,7 @@ public class TableController {
 
         Player player = createPlayer(name, seat.getPlayerType(), skill);
         if (player == null) {
-            String message = new StringBuilder("Could not create player ").append(name).append(" of type ").append(seat.getPlayerType().toString()).toString();
+            String message = new StringBuilder("Could not create player ").append(name).append(" of type ").append(seat.getPlayerType()).toString();
             logger.warn(new StringBuilder("User: ").append(user.getName()).append(" => ").append(message).toString());
             user.showUserMessage("Join Table",message);
             return false;
