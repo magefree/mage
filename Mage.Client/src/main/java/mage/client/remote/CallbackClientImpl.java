@@ -398,7 +398,7 @@ public class CallbackClientImpl implements CallbackClient {
                         .append("<br/><b>F5</b> - Skip to next end step but stop on declare attackers/blockers and something on the stack")
                         .append("<br/><b>F7</b> - Skip to next main phase but stop on declare attackers/blockers and something on the stack")
                         .append("<br/><b>F9</b> - Skip everything until your next turn")
-                        .append("<br/><b>F3</b> - Undo F4/F5/F6/F9").toString(),
+                        .append("<br/><b>F3</b> - Undo F4/F5/F7/F9").toString(),
                         null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;
             case TOURNAMENT:
