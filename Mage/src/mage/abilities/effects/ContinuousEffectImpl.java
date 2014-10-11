@@ -52,6 +52,7 @@ import static mage.constants.Layer.TypeChangingEffects_4;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
@@ -183,7 +184,14 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     @Override
     public boolean isInactive(Ability source, Game game) {
         if (duration.equals(Duration.UntilYourNextTurn)) {
-            return game.getActivePlayerId().equals(startingControllerId) && game.getTurnNum() != startingTurn;
+            Player player = game.getPlayer(startingControllerId);
+            if (player != null) {
+                if (player.isInGame()) {
+                    return game.getActivePlayerId().equals(startingControllerId) && game.getTurnNum() != startingTurn;
+                }
+                return player.hasReachedNextTurnAfterLeaving();
+            }
+            return true;
         }
         return false;
     }
