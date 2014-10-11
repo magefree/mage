@@ -195,7 +195,7 @@ class AEtherspoutsEffect extends OneShotEffect {
                     player.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, false, false);
                 }
                 player = playerList.getNext(game);            
-            } while (!player.getId().equals(game.getActivePlayerId()));
+            } while (player != null && !player.getId().equals(game.getActivePlayerId()));
             return true;
         }
         return false;
