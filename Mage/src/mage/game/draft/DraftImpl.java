@@ -64,6 +64,7 @@ public abstract class DraftImpl implements Draft {
     protected int[] times = {75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5};
 
     protected boolean abort = false;
+    protected boolean started = false;
 
     protected transient TableEventSource tableEventSource = new TableEventSource();
     protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
@@ -338,6 +339,16 @@ public abstract class DraftImpl implements Draft {
     @Override
     public void setAbort(boolean abort) {
         this.abort = abort;
+    }
+
+    @Override
+    public boolean isStarted() {
+        return started;
+    }
+
+    @Override
+    public void setStarted() {
+        started = true;
     }
 
 }

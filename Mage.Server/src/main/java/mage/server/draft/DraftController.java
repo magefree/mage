@@ -149,19 +149,9 @@ public class DraftController {
         return false;
     }
 
-    private synchronized void startDraft() {
-        for (final Entry<UUID, DraftSession> entry: draftSessions.entrySet()) {
-            if (!entry.getValue().init()) {
-                logger.fatal("Unable to initialize client for playerId " + entry.getKey());
-                //TODO: generate client error message
-                return;
-            }
-        }
-        draft.start();
-    }
-
-    private void checkStart() {
-        if (allJoined()) {
+    private synchronized void checkStart() {
+        if (!draft.isStarted() && allJoined()) {
+            draft.setStarted();
             ThreadExecutor.getInstance().getCallExecutor().execute(
                 new Runnable() {
                     @Override
@@ -170,6 +160,17 @@ public class DraftController {
                     }
             });
         }
+    }
+
+    private void startDraft() {
+        for (final Entry<UUID, DraftSession> entry: draftSessions.entrySet()) {
+            if (!entry.getValue().init()) {
+                logger.fatal("Unable to initialize client for playerId " + entry.getKey());
+                //TODO: generate client error message
+                return;
+            }
+        }
+        draft.start();
     }
 
     private boolean allJoined() {
