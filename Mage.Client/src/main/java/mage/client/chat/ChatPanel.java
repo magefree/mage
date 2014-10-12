@@ -230,9 +230,10 @@ public class ChatPanel extends javax.swing.JPanel {
         if (username != null && !username.isEmpty()) {
             text.append(getColoredText(userColor, username + userSeparator));
         }              
-        text.append(getColoredText(textColor, ManaSymbols.replaceSymbolsWithHTML(message, ManaSymbols.Type.PAY) + "<br/>"));
-
+        text.append(getColoredText(textColor, ManaSymbols.replaceSymbolsWithHTML(message, ManaSymbols.Type.PAY)));
         this.txtConversation.append(text.toString());
+        this.txtConversation.requestFocusInWindow();
+        this.txtMessage.requestFocusInWindow();
     }
 
     private String getColoredText(String color, String text) {
@@ -279,8 +280,9 @@ public class ChatPanel extends javax.swing.JPanel {
     public void useExtendedView(VIEW_MODE extendedViewMode) {
         this.extendedViewMode = extendedViewMode;
         this.txtConversation.setExtBackgroundColor(new Color(0, 0, 0, 100));
-        this.txtConversation.setBackground(new Color(0, 0, 0, 0));
-        this.txtConversation.setForeground(new Color(255, 255, 255));
+        // this.txtConversation.setBackground(new Color(0, 0, 0, 0));
+        // this.txtConversation.setForeground(new Color(255, 255, 255));
+        this.txtConversation.setSelectionColor(Color.LIGHT_GRAY);
         this.jScrollPaneTxt.setOpaque(false);
         this.jScrollPaneTxt.getViewport().setOpaque(false);
     }
