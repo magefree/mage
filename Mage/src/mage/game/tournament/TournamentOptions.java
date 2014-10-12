@@ -40,12 +40,13 @@ import mage.game.match.MatchOptions;
 public class TournamentOptions implements Serializable {
 
     protected String name;
-    protected String tournamentType;;
+    protected String tournamentType;
     protected List<String> playerTypes = new ArrayList<>();
     protected MatchOptions matchOptions = new MatchOptions("", "Two Player Duel");
     protected LimitedOptions limitedOptions;
     protected boolean watchingAllowed = true;
     protected int numberRounds;
+    protected String password;
 
     public TournamentOptions(String name) {
         this.name = name;
@@ -93,6 +94,14 @@ public class TournamentOptions implements Serializable {
 
     public void setNumberRounds(int numberRounds) {
         this.numberRounds = numberRounds;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }

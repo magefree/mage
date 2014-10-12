@@ -32,7 +32,7 @@ import java.lang.reflect.Constructor;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-import mage.cards.decks.*;
+import mage.cards.decks.DeckValidator;
 import org.apache.log4j.Logger;
 
 /**
@@ -44,7 +44,7 @@ public class DeckValidatorFactory {
     private static final DeckValidatorFactory INSTANCE = new DeckValidatorFactory();
     private static final Logger logger = Logger.getLogger(DeckValidatorFactory.class);
 
-    private Map<String, Class> deckTypes = new LinkedHashMap<String, Class>();
+    private final Map<String, Class> deckTypes = new LinkedHashMap<>();
 
     public static DeckValidatorFactory getInstance() {
         return INSTANCE;

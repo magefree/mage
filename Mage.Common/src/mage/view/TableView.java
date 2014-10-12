@@ -109,7 +109,7 @@ public class TableView implements Serializable {
             StringBuilder addInfo = new StringBuilder();
             if (table.getMatch().getGames().isEmpty()) {
                 if (!table.getMatch().getOptions().getPassword().isEmpty()) {
-                    addInfo.append("PW -");
+                    addInfo.append("PW-");
                 }
                 addInfo.append("Timer: ").append(table.getMatch().getOptions().getMatchTimeLimit().toString());
             } else {
@@ -129,12 +129,18 @@ public class TableView implements Serializable {
                 }
             }
             this.controllerName += sb1.toString();
-            StringBuilder sb = new StringBuilder("Seats: ").append(table.getTournament().getPlayers().size()).append("/").append(table.getNumberOfSeats());
+            StringBuilder sb = new StringBuilder();
+            if (!table.getTournament().getOptions().getPassword().isEmpty()) {
+                sb.append("PW-");
+            }
+            sb.append("Seats: ").append(table.getTournament().getPlayers().size()).append("/").append(table.getNumberOfSeats());
             switch (table.getState()) {
                 case WAITING:
                 case READY_TO_START:
                 case STARTING:
-                    sb.append(" Constr. Time: ").append(table.getTournament().getOptions().getLimitedOptions().getConstructionTime()/60).append(" Min.");
+                    if (table.getTournament().getTournamentType().isLimited()) {
+                        sb.append(" Constr. Time: ").append(table.getTournament().getOptions().getLimitedOptions().getConstructionTime()/60).append(" Min.");
+                    }
                     break;
                 case DUELING:
                     sb.append(" - Running round: ").append(table.getTournament().getRounds().size());

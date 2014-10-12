@@ -61,12 +61,14 @@ public class TournamentView implements Serializable {
     public TournamentView(Tournament tournament) {
 
         tournamentName = tournament.getOptions().getName();
-
-        if (tournament.getNumberRounds() > 0) {
-            tournamentType = tournament.getOptions().getTournamentType() + " " + tournament.getNumberRounds()+ " rounds";
-        } else {
-            tournamentType = tournament.getOptions().getTournamentType();
+        StringBuilder typeText = new StringBuilder(tournament.getOptions().getTournamentType());
+        if (!tournament.getTournamentType().isLimited()) {
+            typeText.append(" / ").append(tournament.getOptions().getMatchOptions().getDeckType());
         }
+        if (tournament.getNumberRounds() > 0) {
+            typeText.append(" ").append(tournament.getNumberRounds()).append(" rounds");
+        } 
+        tournamentType = typeText.toString();
         startTime = tournament.getStartTime();
         endTime = tournament.getEndTime();
         stepStartTime = tournament.getStepStartTime();

@@ -29,6 +29,7 @@
 package mage.interfaces;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import mage.utils.MageVersion;
 import mage.view.GameTypeView;
@@ -60,6 +61,16 @@ public class ServerState implements Serializable {
 
     public List<GameTypeView> getGameTypes() {
         return gameTypes;
+    }
+
+    public List<GameTypeView> getTournamentGameTypes() {
+        List<GameTypeView> tournamentGameTypes = new ArrayList<>();
+        for(GameTypeView gameTypeView: gameTypes) {
+            if (gameTypeView.getMinPlayers() == 2 && gameTypeView.getMaxPlayers() == 2) {
+                tournamentGameTypes.add(gameTypeView);
+            }
+        }
+        return tournamentGameTypes;
     }
 
     public List<TournamentTypeView> getTournamentTypes() {

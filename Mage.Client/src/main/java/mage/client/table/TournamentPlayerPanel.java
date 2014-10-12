@@ -37,6 +37,8 @@ package mage.client.table;
 import java.util.UUID;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import mage.cards.decks.DeckCardLists;
+import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
 import mage.remote.Session;
 
@@ -64,9 +66,16 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
         return this.cbPlayerType;
     }
 
-    public boolean joinTournamentTable(UUID roomId, UUID tableId) {
+    public boolean joinTournamentTable(UUID roomId, UUID tableId, DeckCardLists deckCardLists) {
         if (!this.cbPlayerType.getSelectedItem().equals("Human")) {
-            return session.joinTournamentTable(roomId, tableId, this.txtPlayerName.getText(), (String)this.cbPlayerType.getSelectedItem(), Integer.valueOf((String)this.cbLevel.getSelectedItem()));
+            return session.joinTournamentTable(
+                    roomId,
+                    tableId,
+                    this.txtPlayerName.getText(),
+                    (String)this.cbPlayerType.getSelectedItem(),
+                    Integer.valueOf((String)this.cbLevel.getSelectedItem()),
+                    deckCardLists,
+                    "");
          }
         return true;
     }

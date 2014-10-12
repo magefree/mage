@@ -1,5 +1,5 @@
 /*
- *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -34,15 +34,15 @@ import mage.game.tournament.TournamentType;
  * @author LevelX2
  */
 
-public class ConstructedEliminationTournamentType extends TournamentType {
+public class ConstructedSwissTournamentType extends TournamentType {
 
-    public ConstructedEliminationTournamentType() {
-        this.name = "Constructed Elimination";
+    public ConstructedSwissTournamentType() {
+        this.name = "Constructed Swiss";
         this.maxPlayers = 16;
         this.minPlayers = 4;
         this.numBoosters = 0;
         this.draft = false;
         this.limited = false;
-        this.elimination = true;
+        this.elimination = false;
     }
 }

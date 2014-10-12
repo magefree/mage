@@ -149,10 +149,11 @@ public class TableController {
         );
     }
 
-    public synchronized boolean joinTournament(UUID userId, String name, String playerType, int skill) throws GameException {
+    public synchronized boolean joinTournament(UUID userId, String name, String playerType, int skill, DeckCardLists deckList, String password) throws GameException {
         if (table.getState() != TableState.WAITING) {
             return false;
         }
+
         Seat seat = table.getNextAvailableSeat(playerType);
         if (seat == null) {
             throw new GameException("No available seats.");
@@ -162,10 +163,36 @@ public class TableController {
             logger.fatal(new StringBuilder("couldn't get user ").append(name).append(" for join tournament userId = ").append(userId).toString());
             return false;
         }
+        // check password
+        if (!table.getTournament().getOptions().getPassword().isEmpty() && playerType.equals("Human")) {
+            if (!table.getTournament().getOptions().getPassword().equals(password)) {
+                user.showUserMessage("Join Table", "Wrong password.");
+                return false;
+            }
+        }
         if (userPlayerMap.containsKey(userId) && playerType.equals("Human")){
             user.showUserMessage("Join Table", new StringBuilder("You can join a table only one time.").toString());
             return false;
         }
+        Deck deck = null;
+        if (deckList != null) {
+            deck = Deck.load(deckList, false, false);
+
+            if (!Main.isTestMode() && !table.getValidator().validate(deck)) {
+                StringBuilder sb = new StringBuilder("You (").append(name).append(") have an invalid deck for the selected ").append(table.getValidator().getName()).append(" Format. \n\n");
+                for (Map.Entry<String, String> entry : table.getValidator().getInvalid().entrySet()) {
+                    sb.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+                }
+                sb.append("\n\nSelect a deck that is appropriate for the selected format and try again!");
+                user.showUserMessage("Join Table", sb.toString());
+                if (isOwner(userId)) {
+                    logger.debug("New table removed because owner submitted invalid deck tableId " + table.getId());
+                    TableManager.getInstance().removeTable(table.getId());
+                }
+                return false;
+            }
+        }
+
         Player player = createPlayer(name, seat.getPlayerType(), skill);
         if (player != null) {
             if (!player.canJoinTable(table)) {
@@ -173,6 +200,10 @@ public class TableController {
                 return false;
             }
             tournament.addPlayer(player, seat.getPlayerType());
+            TournamentPlayer tournamentPlayer = tournament.getPlayer(player.getId());
+            if (deck != null && tournamentPlayer != null) {
+                tournamentPlayer.submitDeck(deck);
+            } 
             table.joinTable(player, seat);            
             logger.trace("player " + player.getName() + " joined tableId: " + table.getId());
             //only inform human players and add them to sessionPlayerMap

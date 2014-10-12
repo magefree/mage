@@ -69,13 +69,13 @@ public class TournamentFactory {
             tournament = con.newInstance(new Object[] {options});
             // transfer set information, create short info string for included sets
             tournament.setTournamentType(tournamentTypes.get(tournamentType));
-            Map<String,Integer> setInfo = new LinkedHashMap<>();
-            for (String setCode: options.getLimitedOptions().getSetCodes()) {
-                tournament.getSets().add(Sets.findSet(setCode));
-                int count = setInfo.containsKey(setCode) ? setInfo.get(setCode) : 0;
-                setInfo.put(setCode, count + 1);
-            }
             if (tournament.getTournamentType().isLimited()) {
+                Map<String,Integer> setInfo = new LinkedHashMap<>();
+                for (String setCode: options.getLimitedOptions().getSetCodes()) {
+                    tournament.getSets().add(Sets.findSet(setCode));
+                    int count = setInfo.containsKey(setCode) ? setInfo.get(setCode) : 0;
+                    setInfo.put(setCode, count + 1);
+                }
                 tournament.getOptions().getLimitedOptions().setNumberBoosters(tournament.getTournamentType().getNumBoosters());
                 if (tournament.getTournamentType().isCubeBooster()) {
                     tournament.getOptions().getLimitedOptions().setDraftCube(CubeFactory.getInstance().createDraftCube(tournament.getOptions().getLimitedOptions().getDraftCubeName()));
@@ -87,14 +87,15 @@ public class TournamentFactory {
                     }
                     tournament.setBoosterInfo(sb.toString());
                 }
-
+            } else {
+                tournament.setBoosterInfo("");
             }
 
         } catch (Exception ex) {
             logger.fatal("TournamentFactory error ", ex);
             return null;
         }
-        logger.debug("Tournament created: " + tournamentType); // + game.getId().toString());
+        logger.debug("Tournament created: " + tournamentType + " " + tournament.getId()); 
 
         return tournament;
     }

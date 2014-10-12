@@ -148,9 +148,9 @@ public class TableManager {
         return false;
     }
 
-    public boolean joinTournament(UUID userId, UUID tableId, String name, String playerType, int skill) throws GameException {
+    public boolean joinTournament(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) throws GameException {
         if (controllers.containsKey(tableId)) {
-            return controllers.get(tableId).joinTournament(userId, name, playerType, skill);
+            return controllers.get(tableId).joinTournament(userId, name, playerType, skill, deckList, password);
         }
         return false;
     }

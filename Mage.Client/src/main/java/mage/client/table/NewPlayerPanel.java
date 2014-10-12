@@ -123,6 +123,13 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         this.lblLevel.setVisible(show);
     }
 
+    public void showDeckElements(boolean show) {
+        this.lblPlayerDeck.setVisible(show);
+        this.txtPlayerDeck.setVisible(show);
+        this.btnGenerate.setVisible(show);
+        this.btnPlayerDeck.setVisible(show);
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

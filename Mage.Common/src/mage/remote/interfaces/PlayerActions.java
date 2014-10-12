@@ -63,7 +63,7 @@ public interface PlayerActions {
 
     // boolean startChallenge(UUID roomId, UUID tableId, UUID challengeId);
 
-    boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill);
+    boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList, String password);
 
     boolean watchTable(UUID roomId, UUID tableId);
 

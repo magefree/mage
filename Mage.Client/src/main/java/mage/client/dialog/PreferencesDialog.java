@@ -158,6 +158,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     // pref setting for new tournament dialog
     public static final String KEY_NEW_TOURNAMENT_NAME = "newTournamentName";
+    public static final String KEY_NEW_TOURNAMENT_PASSWORD = "newTournamentPassword";
     public static final String KEY_NEW_TOURNAMENT_TIME_LIMIT = "newTournamentTimeLimit";
     public static final String KEY_NEW_TOURNAMENT_CONSTR_TIME = "newTournamentConstructionTime";
     public static final String KEY_NEW_TOURNAMENT_TYPE = "newTournamentType";
@@ -169,6 +170,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TOURNAMENT_PLAYERS_DRAFT = "newTournamentPlayersDraft";
     public static final String KEY_NEW_TOURNAMENT_DRAFT_TIMING = "newTournamentDraftTiming";
     public static final String KEY_NEW_TOURNAMENT_ALLOW_SPECTATORS = "newTournamentAllowSpectators";
+    public static final String KEY_NEW_TOURNAMENT_DECK_FILE = "newTournamentDeckFile";
 
     // pref setting for deck generator
     public static final String KEY_NEW_DECK_GENERATOR_DECK_SIZE = "newDeckGeneratorDeckSize";

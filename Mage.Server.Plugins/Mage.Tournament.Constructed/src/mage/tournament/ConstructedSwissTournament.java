@@ -1,5 +1,5 @@
 /*
- *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -27,22 +27,40 @@
  */
 package mage.tournament;
 
-import mage.game.tournament.TournamentType;
+import mage.game.tournament.TournamentOptions;
+import mage.game.tournament.TournamentSwiss;
 
 /**
  *
  * @author LevelX2
  */
 
-public class ConstructedEliminationTournamentType extends TournamentType {
+public class ConstructedSwissTournament extends TournamentSwiss {
 
-    public ConstructedEliminationTournamentType() {
-        this.name = "Constructed Elimination";
-        this.maxPlayers = 16;
-        this.minPlayers = 4;
-        this.numBoosters = 0;
-        this.draft = false;
-        this.limited = false;
-        this.elimination = true;
+    protected enum TournamentStep {
+        START, COMPETE, WINNERS
     }
+
+    protected TournamentStep currentStep;
+
+    public ConstructedSwissTournament(TournamentOptions options) {
+        super(options);
+        currentStep = TournamentStep.START;
+    }
+
+    @Override
+    public void nextStep() {
+        switch (currentStep) {
+            case START:
+                currentStep = TournamentStep.COMPETE;
+                runTournament();
+                break;
+            case COMPETE:
+                currentStep = TournamentStep.WINNERS;
+                winners();
+                end();
+                break;
+        }
+    }
+
 }

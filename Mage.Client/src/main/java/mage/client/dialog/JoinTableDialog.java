@@ -45,6 +45,7 @@ public class JoinTableDialog extends MageDialog {
     private UUID tableId;
     private UUID roomId;
     private boolean joined = false;
+    private boolean isTournament;
 
     /** Creates new form JoinTableDialog */
     public JoinTableDialog() {
@@ -53,10 +54,12 @@ public class JoinTableDialog extends MageDialog {
         txtPassword.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD, ""));
     }
 
-    public void showDialog(UUID roomId, UUID tableId) {
+    public void showDialog(UUID roomId, UUID tableId, boolean isTournament, boolean isLimited) {
         this.roomId = roomId;
         this.tableId = tableId;
+        this.isTournament = isTournament;
         this.newPlayerPanel.setPlayerName(MageFrame.getSession().getUserName());
+        this.newPlayerPanel.showDeckElements(isLimited);
         this.setModal(true);
         this.setLocation(100, 100);
         this.setVisible(true);
@@ -146,7 +149,12 @@ public class JoinTableDialog extends MageDialog {
         Session session = MageFrame.getSession();
         try {
             PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD, txtPassword.getText());
-            joined = session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), "Human", 1, DeckImporterUtil.importDeck(this.newPlayerPanel.getDeckFile()), this.txtPassword.getText());
+            if (isTournament) {
+                joined = session.joinTournamentTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), "Human", 1, DeckImporterUtil.importDeck(this.newPlayerPanel.getDeckFile()), this.txtPassword.getText());
+            } else {
+                joined = session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), "Human", 1, DeckImporterUtil.importDeck(this.newPlayerPanel.getDeckFile()), this.txtPassword.getText());
+            }
+            
         } catch (Exception ex) {
             handleError(ex);
         }

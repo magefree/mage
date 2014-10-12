@@ -143,6 +143,8 @@ public class TablesPanel extends javax.swing.JPanel {
                 UUID tableId = (UUID)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 3);
                 UUID gameId = (UUID)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 2);
                 String action = (String)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN);
+                String deckType = (String)tableModel.getValueAt(modelRow, TableTableModel.COLUMN_DECK_TYPE);
+                String info = (String)tableModel.getValueAt(modelRow, TableTableModel.COLUMN_INFO);
                 boolean isTournament = (Boolean)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 1);
                 String owner = (String)tableModel.getValueAt(modelRow, 1);
                 switch (action) {
@@ -170,10 +172,18 @@ public class TablesPanel extends javax.swing.JPanel {
                         }
                         if (isTournament) {
                             logger.info("Joining tournament " + tableId);
-                            session.joinTournamentTable(roomId, tableId, session.getUserName(), "Human", 1);
+                            if (deckType.startsWith("Limited")) {
+                                if (!info.startsWith("PW")) {
+                                    session.joinTournamentTable(roomId, tableId, session.getUserName(), "Human", 1, null, "");
+                                } else {
+                                    joinTableDialog.showDialog(roomId, tableId, true, deckType.startsWith("Limited"));
+                                }
+                            } else {
+                                joinTableDialog.showDialog(roomId, tableId, true, deckType.startsWith("Limited"));
+                            }
                         } else {
                             logger.info("Joining table " + tableId);
-                            joinTableDialog.showDialog(roomId, tableId);
+                            joinTableDialog.showDialog(roomId, tableId, false, false);
                         }  
                         break;
                     case "Remove":
@@ -696,6 +706,8 @@ private void chkShowCompletedActionPerformed(java.awt.event.ActionEvent evt) {//
 
 class TableTableModel extends AbstractTableModel {
 
+    public static final int COLUMN_DECK_TYPE = 5; // column the deck type is located (starting with 0)
+    public static final int COLUMN_INFO = 6;
     public static final int ACTION_COLUMN = 9; // column the action is located (starting with 0)
 
     private final String[] columnNames = new String[]{"Match Name", "Owner / Players", "Game Type", "Wins", "Free Mulligans", "Deck Type", "Info", "Status", "Created / Started", "Action"};

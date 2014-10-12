@@ -454,6 +454,11 @@ public class SessionImpl implements Session {
     }
 
     @Override
+    public List<GameTypeView> getTournamentGameTypes() {
+        return serverState.getTournamentGameTypes();
+    }
+
+    @Override
     public String[] getDeckTypes() {
         return serverState.getDeckTypes();
     }
@@ -588,10 +593,10 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill) {
+    public boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList, String password) {
         try {
             if (isConnected()) {
-                return server.joinTournamentTable(sessionId, roomId, tableId, playerName, playerType, skill);
+                return server.joinTournamentTable(sessionId, roomId, tableId, playerName, playerType, skill, deckList, password);
             }
         } catch (GameException ex) {
             handleGameException(ex);

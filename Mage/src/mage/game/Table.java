@@ -160,7 +160,7 @@ public class Table implements Serializable {
         if (validator != null) {
             return validator.getName();
         }
-        return "<deckt type missing>";
+        return "<deck type missing>";
     }
 
     public Date getCreateTime() {
