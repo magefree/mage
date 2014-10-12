@@ -83,7 +83,6 @@ import mage.remote.Session;
 import mage.view.MatchView;
 import mage.view.RoomUsersView;
 import mage.view.TableView;
-import mage.view.UsersView;
 import org.apache.log4j.Logger;
 
 /**

@@ -249,7 +249,7 @@ public class TableController {
             return false;
         }
         // check password
-        if (!table.getMatch().getOptions().getPassword().isEmpty()) {
+        if (!table.getMatch().getOptions().getPassword().isEmpty() && playerType.equals("Human")) {
             if (!table.getMatch().getOptions().getPassword().equals(password)) {
                 user.showUserMessage("Join Table", "Wrong password.");
                 return false;

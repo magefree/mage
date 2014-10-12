@@ -212,21 +212,26 @@
     <Component class="javax.swing.JLabel" name="lbTimeLimit">
       <Properties>
         <Property name="text" type="java.lang.String" value="Time Limit:"/>
+        <Property name="toolTipText" type="java.lang.String" value="The time a player has for the whole match. If a player runs out of time during a game, he loses the complete match. "/>
       </Properties>
       <BindingProperties>
         <BindingProperty name="labelFor" source="cbTimeLimit" target="lbTimeLimit" targetPath="labelFor" updateStrategy="0" immediately="false"/>
       </BindingProperties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbTimeLimit">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="The time a player has for the whole match. If a player runs out of time during a game, he loses the complete match. "/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblPassword">
       <Properties>
         <Property name="text" type="java.lang.String" value="Password:"/>
+        <Property name="toolTipText" type="java.lang.String" value="Players have to enter the password to be able to join this table."/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtPassword">
       <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="Players have to enter this password to be able to enter the created table."/>
+        <Property name="toolTipText" type="java.lang.String" value="Players have to enter the password to be able to join this table."/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblTournamentType">
@@ -284,6 +289,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="spnNumWins">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="To win a match a player has to win this number of games."/>
+      </Properties>
       <Events>
         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spnNumWinsnumPlayersChanged"/>
       </Events>
@@ -311,9 +319,13 @@
     <Component class="javax.swing.JLabel" name="lblNumRounds">
       <Properties>
         <Property name="text" type="java.lang.String" value="Number of Swiss Rounds:"/>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;The number of rounds the swiss tournament has in total.&lt;br&gt;&#xa;The tournaments ends after that number of rounds or&lt;br&gt; &#xa;if there are less than two players left in the tournament."/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="spnNumRounds">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;The number of rounds the swiss tournament has in total.&lt;br&gt;&#xa;The tournaments ends after that number of rounds or&lt;br&gt; &#xa;if there are less than two players left in the tournament."/>
+      </Properties>
       <Events>
         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spnNumRoundsnumPlayersChanged"/>
       </Events>
@@ -403,6 +415,7 @@
     <Component class="javax.swing.JCheckBox" name="cbAllowSpectators">
       <Properties>
         <Property name="text" type="java.lang.String" value="Allow spectators"/>
+        <Property name="toolTipText" type="java.lang.String" value="Allow other players to watch the games of this table."/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblPlayer1">

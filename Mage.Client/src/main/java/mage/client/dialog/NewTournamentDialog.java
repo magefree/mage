@@ -170,13 +170,17 @@ public class NewTournamentDialog extends MageDialog {
         lblName.setText("Name:");
 
         lbTimeLimit.setText("Time Limit:");
+        lbTimeLimit.setToolTipText("The time a player has for the whole match. If a player runs out of time during a game, he loses the complete match. ");
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, cbTimeLimit, org.jdesktop.beansbinding.ObjectProperty.create(), lbTimeLimit, org.jdesktop.beansbinding.BeanProperty.create("labelFor"));
         bindingGroup.addBinding(binding);
 
-        lblPassword.setText("Password:");
+        cbTimeLimit.setToolTipText("The time a player has for the whole match. If a player runs out of time during a game, he loses the complete match. ");
 
-        txtPassword.setToolTipText("Players have to enter this password to be able to enter the created table.");
+        lblPassword.setText("Password:");
+        lblPassword.setToolTipText("Players have to enter the password to be able to join this table.");
+
+        txtPassword.setToolTipText("Players have to enter the password to be able to join this table.");
 
         lblTournamentType.setText("Tournament Type:");
 
@@ -205,6 +209,7 @@ public class NewTournamentDialog extends MageDialog {
 
         lblNumWins.setText("Wins:");
 
+        spnNumWins.setToolTipText("To win a match a player has to win this number of games.");
         spnNumWins.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 spnNumWinsnumPlayersChanged(evt);
@@ -221,7 +226,9 @@ public class NewTournamentDialog extends MageDialog {
         });
 
         lblNumRounds.setText("Number of Swiss Rounds:");
+        lblNumRounds.setToolTipText("<html>The number of rounds the swiss tournament has in total.<br>\nThe tournaments ends after that number of rounds or<br> \nif there are less than two players left in the tournament.");
 
+        spnNumRounds.setToolTipText("<html>The number of rounds the swiss tournament has in total.<br>\nThe tournaments ends after that number of rounds or<br> \nif there are less than two players left in the tournament.");
         spnNumRounds.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 spnNumRoundsnumPlayersChanged(evt);
@@ -272,6 +279,7 @@ public class NewTournamentDialog extends MageDialog {
         );
 
         cbAllowSpectators.setText("Allow spectators");
+        cbAllowSpectators.setToolTipText("Allow other players to watch the games of this table.");
 
         lblPlayer1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPlayer1.setText("Player 1 (You)");

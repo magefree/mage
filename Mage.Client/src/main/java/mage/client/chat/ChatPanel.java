@@ -283,8 +283,8 @@ public class ChatPanel extends javax.swing.JPanel {
         // this.txtConversation.setBackground(new Color(0, 0, 0, 0));
         // this.txtConversation.setForeground(new Color(255, 255, 255));
         this.txtConversation.setSelectionColor(Color.LIGHT_GRAY);
-        this.jScrollPaneTxt.setOpaque(false);
-        this.jScrollPaneTxt.getViewport().setOpaque(false);
+        this.jScrollPaneTxt.setOpaque(!chatType.equals(ChatType.TABLES));
+        this.jScrollPaneTxt.getViewport().setOpaque(!chatType.equals(ChatType.TABLES));
     }
 
     public void setSplitDividerLocation(int location) {
@@ -310,8 +310,11 @@ public class ChatPanel extends javax.swing.JPanel {
             this.players = roomUserInfo.getUsersView().toArray(new UsersView[0]);
             JTableHeader th = jTablePlayers.getTableHeader();
             TableColumnModel tcm = th.getColumnModel();
-            tcm.getColumn(0).setHeaderValue(new StringBuilder("Players").append(" (").append(this.players.length).append(")").toString());
-            tcm.getColumn(2).setHeaderValue(new StringBuilder("Games").append(" (").append(roomUserInfo.getNumberActiveGames()).append(")").toString());
+            tcm.getColumn(0).setHeaderValue("Players (" + this.players.length + ")");
+            tcm.getColumn(2).setHeaderValue(
+                    "Games (" + roomUserInfo.getNumberActiveGames() +
+                    (roomUserInfo.getNumberActiveGames() != roomUserInfo.getNumberGameThreads() ? " T:" + roomUserInfo.getNumberGameThreads():"") +
+                    " max: " + roomUserInfo.getNumberMaxGames() + ")");
             th.repaint();
             this.fireTableDataChanged();
         }

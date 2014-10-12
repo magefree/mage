@@ -57,6 +57,7 @@ public class TournamentView implements Serializable {
 
     private final List<RoundView> rounds = new ArrayList<>();
     private final List<TournamentPlayerView> players = new ArrayList<>();
+    private final String runningInfo;
     
     public TournamentView(Tournament tournament) {
 
@@ -77,6 +78,11 @@ public class TournamentView implements Serializable {
         serverTime = new Date();
         tournamentState = tournament.getTournamentState();
 
+        if (tournament.getTournamentState().equals("Drafting") && tournament.getDraft() != null) {
+            runningInfo = "booster/card: " + tournament.getDraft().getBoosterNum() +"/" + (tournament.getDraft().getCardNum() -1);
+        } else {
+            runningInfo = "";
+        }
         for (TournamentPlayer player: tournament.getPlayers()) {
             players.add(new TournamentPlayerView(player));
         }
@@ -131,6 +137,10 @@ public class TournamentView implements Serializable {
 
     public Date getServerTime() {
         return serverTime;
+    }
+
+    public String getRunningInfo() {
+        return runningInfo;
     }
     
 }
