@@ -75,11 +75,11 @@ public class VileRequiem extends CardImpl {
         // {1}{B}, Sacrifice Vile Requiem: Destroy up to X target nonblack creatures, where X is the number of verse counters on Vile Requiem. They can't be regenerated.
         Effect effect = new DestroyTargetEffect(true);
         effect.setText("Destroy up to X target nonblack creatures, where X is the number of verse counters on {this}. They can't be regenerated");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{B}"));
-        originalId = ability.getOriginalId();
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{B}"));        
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent(0,0,filter, false));
         this.addAbility(ability);
+        originalId = ability.getOriginalId();
 
     }
 
@@ -99,6 +99,7 @@ public class VileRequiem extends CardImpl {
 
     public VileRequiem(final VileRequiem card) {
         super(card);
+        this.originalId = card.originalId;
     }
 
     @Override
