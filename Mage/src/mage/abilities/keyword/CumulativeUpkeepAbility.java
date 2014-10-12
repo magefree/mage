@@ -131,7 +131,7 @@ class CumulativeUpkeepEffect extends OneShotEffect {
                         return true;
                     }
                     else{
-                        game.restoreState(bookmark);
+                        game.restoreState(bookmark, source.getRule());
                     }
                 }
                 permanent.sacrifice(source.getSourceId(), game);

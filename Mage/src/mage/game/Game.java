@@ -264,7 +264,7 @@ public interface Game extends MageItem, Serializable {
     //game transaction methods
     void saveState(boolean bookmark);
     int bookmarkState();
-    void restoreState(int bookmark);
+    void restoreState(int bookmark, String context);
     void removeBookmark(int bookmark);
     int getSavedStateSize();
     boolean isSaveGame();

@@ -837,7 +837,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     resetStoredBookmark(game);
                     return true;
                 }
-                game.restoreState(bookmark);
+                game.restoreState(bookmark, ability.getRule());
             }
         }
         return false;
@@ -881,7 +881,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     return true;
                 }
             }
-            game.restoreState(bookmark);
+            game.restoreState(bookmark, ability.getRule());
         }
         return false;
     }
@@ -900,7 +900,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     resetStoredBookmark(game);
                     return true;
                 }
-                game.restoreState(bookmark);
+                game.restoreState(bookmark, ability.getRule());
             }
         } else {
             int bookmark = game.bookmarkState();
@@ -910,7 +910,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 resetStoredBookmark(game);
                 return true;
             }
-            game.restoreState(bookmark);
+            game.restoreState(bookmark, ability.getRule());
         }
         return false;
     }
@@ -928,7 +928,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     return true;
                 }
             }
-            game.restoreState(bookmark);
+            game.restoreState(bookmark, action.getRule());
         }
         return false;
     }
@@ -998,7 +998,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 return true;
             }
         }
-        game.restoreState(bookmark);
+        game.restoreState(bookmark, source.getRule());
         return false;
     }
 
