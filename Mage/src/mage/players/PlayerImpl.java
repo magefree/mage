@@ -1632,11 +1632,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void concede(Game game) {
-        logger.debug(this.getName() + (" concedes gameId:" +game.getId()));
         game.gameOver(playerId);
-        logger.debug("Before lost " + this.getName());
         lost(game);
-        logger.debug("After lost " + this.getName());
         this.left = true;
     }
 
