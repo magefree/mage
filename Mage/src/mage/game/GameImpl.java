@@ -834,7 +834,6 @@ public abstract class GameImpl implements Game, Serializable {
         }
         state.getWatchers().add(new MorbidWatcher());
         state.getWatchers().add(new CastSpellLastTurnWatcher());
-        state.getWatchers().add(new MiracleWatcher());
         state.getWatchers().add(new SoulbondWatcher());
         state.getWatchers().add(new PlayerLostLifeWatcher());
         state.getWatchers().add(new BlockedAttackerWatcher());

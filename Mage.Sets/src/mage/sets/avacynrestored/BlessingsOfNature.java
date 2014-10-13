@@ -58,7 +58,7 @@ public class BlessingsOfNature extends CardImpl {
         this.getSpellAbility().addEffect(new BlessingsOfNatureEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(4));
 
-        this.addAbility(new MiracleAbility(new ManaCostsImpl("{G}")));
+        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{G}")));
     }
 
     public BlessingsOfNature(final BlessingsOfNature card) {

@@ -65,7 +65,8 @@ public class RevengeOfTheHunted extends CardImpl {
         effect.setText("and all creatures able to block it this turn do so");
         this.getSpellAbility().addEffect(effect);
 
-        this.addAbility(new MiracleAbility(new ManaCostsImpl("{G}")));
+        // Miracle {G}
+        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{G}")));
     }
 
     public RevengeOfTheHunted(final RevengeOfTheHunted card) {

@@ -81,6 +81,7 @@ public class GameEvent {
         //player events
         ZONE_CHANGE,
         DRAW_CARD, DREW_CARD,
+        MIRACLE_CARD_REVEALED,
         DISCARDED_CARD,
         CYCLE_CARD, CYCLED_CARD,
         CLASH, CLASHED,

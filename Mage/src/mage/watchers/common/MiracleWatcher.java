@@ -32,22 +32,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
-import mage.constants.Outcome;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.MiracleAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.watchers.Watcher;
-
-
 
 /**
  * Counts amount of cards drawn this turn by players.
@@ -80,9 +75,9 @@ public class MiracleWatcher extends Watcher {
             if (playerId != null) {
                 Integer amount = amountOfCardsDrawnThisTurn.get(playerId);
                 if (amount == null) {
-                    amount = Integer.valueOf(1);
+                    amount = 1;
                 } else {
-                    amount = Integer.valueOf(amount + 1);
+                    amount++;
                 }
                 amountOfCardsDrawnThisTurn.put(playerId, amount);
                 if (amount == 1) {
@@ -99,30 +94,12 @@ public class MiracleWatcher extends Watcher {
                 if (ability instanceof MiracleAbility) {
                     Player controller = game.getPlayer(ability.getControllerId());
                     if (controller != null) {
-                        // FIXME: I don't like that I need to call it manually
-                        // it's the place for bugs
-                        game.getContinuousEffects().costModification(ability, game);
-                        ManaCosts<ManaCost> manaCostsToPay = ability.getManaCostsToPay();
-                        Cards cards = new CardsImpl(Zone.PICK);
+                        Cards cards = new CardsImpl();
                         cards.add(card);
                         controller.lookAtCards("Miracle", cards, game);
-                        if (controller.chooseUse(Outcome.Benefit, "Use Miracle " + manaCostsToPay.getText() + "?", game)) {
+                        if (controller.chooseUse(Outcome.Benefit, "Reveal card to be able to use Miracle?", game)) {
                             controller.revealCards("Miracle", cards, game);
-
-                            ManaCosts costRef = card.getSpellAbility().getManaCostsToPay();
-                            // replace with the new cost
-                            costRef.clear();
-                            for (ManaCost manaCost : manaCostsToPay) {
-                                costRef.add(manaCost);
-                            }
-                            controller.cast(card.getSpellAbility(), game, false);
-
-                            // Reset the casting costs (in case the player cancels cast and plays the card later)
-                            costRef.clear();
-                            for (ManaCost manaCost : card.getSpellAbility().getManaCosts()) {
-                                costRef.add(manaCost);
-                            }
-
+                            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.MIRACLE_CARD_REVEALED, card.getId(), card.getId(),controller.getId()));
                             break;
                         }
                     }
