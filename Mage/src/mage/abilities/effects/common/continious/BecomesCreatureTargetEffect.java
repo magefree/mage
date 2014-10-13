@@ -82,17 +82,17 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
+                            permanent.getSubtype().clear();
+                            if (token.getSubtype().size() > 0) {
+                                permanent.getSubtype().addAll(token.getSubtype());
+                            }
                             if (type == null) {
-                                permanent.getSubtype().clear();
-                                if (token.getSubtype().size() > 0) {
-                                    permanent.getSubtype().addAll(token.getSubtype());
-                                }
-                            } else {
-                                if (token.getCardType().size() > 0) {
-                                    for (CardType t : token.getCardType()) {
-                                        if (!permanent.getCardType().contains(t)) {
-                                            permanent.getCardType().add(t);
-                                        }
+                                permanent.getCardType().clear();
+                            }
+                            if (token.getCardType().size() > 0) {
+                                for (CardType t : token.getCardType()) {
+                                    if (!permanent.getCardType().contains(t)) {
+                                        permanent.getCardType().add(t);
                                     }
                                 }
                             }
