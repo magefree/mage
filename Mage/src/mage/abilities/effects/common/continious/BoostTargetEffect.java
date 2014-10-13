@@ -121,7 +121,10 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
             }
             sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName()).append(" get ");
         } else {
-            sb.append("Target ").append(target.getTargetName()).append(" gets ");
+            if (!target.getTargetName().toUpperCase().startsWith("ANOTHER")) {
+                sb.append("Target ");
+            }
+            sb.append(target.getTargetName()).append(" gets ");
         }
         String p = power.toString();
         if(!p.startsWith("-")) {
