@@ -28,26 +28,28 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledPermanent;
+
+
 
 /**
  *
@@ -69,7 +71,7 @@ public class VastwoodAnimist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Target land you control becomes an X/X Elemental creature until end of turn, where X is the number of Allies you control. It's still a land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new ElementalLandToken(), "land", Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VastwoodAnimistEffect(), new TapSourceCost());
         ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);
     }
@@ -84,21 +86,45 @@ public class VastwoodAnimist extends CardImpl {
     }
 }
 
-class ElementalLandToken extends Token {
+class VastwoodAnimistEffect extends OneShotEffect {
 
     final static FilterControlledPermanent filterAllies = new FilterControlledPermanent("allies you control");
-
     static {
         filterAllies.add(new SubtypePredicate("Ally"));
     }
 
-    ElementalLandToken() {
+    public VastwoodAnimistEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "Target land you control becomes an X/X Elemental creature until end of turn, where X is the number of Allies you control. It's still a land.";
+    }
+
+    public VastwoodAnimistEffect(final VastwoodAnimistEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public VastwoodAnimistEffect copy() {
+        return new VastwoodAnimistEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        int amount = new PermanentsOnBattlefieldCount(filterAllies).calculate(game, source, this);
+        ContinuousEffect effect = new BecomesCreatureTargetEffect(new VastwoodAnimistElementalToken(amount), "land", Duration.EndOfTurn);
+        effect.setTargetPointer(targetPointer);
+        game.addEffect(effect, source);
+        return false;
+    }
+}
+
+class VastwoodAnimistElementalToken extends Token {
+
+
+    VastwoodAnimistElementalToken(int amount) {
         super("", "X/X Elemental creature, where X is the number of Allies you control");
         cardType.add(CardType.CREATURE);
         subtype.add("Elemental");
-        power = new MageInt(0);
-        toughness = new MageInt(0);
-        DynamicValue controlledAllies = new PermanentsOnBattlefieldCount(filterAllies);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(controlledAllies, controlledAllies, Duration.WhileOnBattlefield)));
+        power = new MageInt(amount);
+        toughness = new MageInt(amount);
     }
 }
