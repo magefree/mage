@@ -139,6 +139,8 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
                 }
             }
         } else {
+            deselectAllCards();
+            cardsPosition.clear();
             this.clearCards();
             for (CardView card: showCards.values()) {
                 addCard(card, bigCard, gameId, drawImage);
@@ -204,6 +206,8 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     @Override
     public void sortCards(SortSetting sortSetting)
     {
+        deselectAllCards();
+        
         cardsPosition.clear();
         if (cards.size() > 0) {
             //Choose comparator
@@ -308,6 +312,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         removeCardImg(cardId);
         cards.remove(cardId);
         selectedCards.remove(cardId);
+        drawCards();
     }
     
     public void deselectAllCards(){

@@ -385,7 +385,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             if (currentView instanceof CardGrid && filteredCards.size() > CardGrid.MAX_IMAGES) {
                 this.toggleViewMode();
             }
-            this.currentView.loadCards(new CardsView(filteredCards), sortSetting, bigCard, null, false);
+            this.currentView.loadCards(new CardsView(filteredCards), sortSetting, bigCard, null, true);
             this.cardCount.setText(String.valueOf(filteredCards.size()));
         }
         finally {
