@@ -1378,25 +1378,25 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void btnEndTurnActionPerformed(java.awt.event.ActionEvent evt) {
-        if (feedbackPanel != null && FeedbackMode.SELECT.equals(feedbackPanel.getMode())) {
+        if (feedbackPanel != null) {
             session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN, gameId);
         }
     }
 
     private void btnUntilEndOfTurnActionPerformed(java.awt.event.ActionEvent evt) {
-        if (feedbackPanel != null && FeedbackMode.SELECT.equals(feedbackPanel.getMode())) {
+        if (feedbackPanel != null) {
             session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId);            
         }
     }
 
     private void btnUntilNextMainPhaseActionPerformed(java.awt.event.ActionEvent evt) {
-        if (feedbackPanel != null && FeedbackMode.SELECT.equals(feedbackPanel.getMode())) {
+        if (feedbackPanel != null) {
             session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE, gameId);
         }
     }
 
     private void btnPassPriorityUntilNextYourTurnActionPerformed(java.awt.event.ActionEvent evt) {
-        if (feedbackPanel != null && FeedbackMode.SELECT.equals(feedbackPanel.getMode())) {
+        if (feedbackPanel != null) {
             session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN, gameId);
         }
     }
