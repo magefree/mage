@@ -25,93 +25,73 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.sets.venservskoth;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
-import mage.abilities.keyword.TrampleAbility;
-import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class RoonOfTheHiddenRealm extends CardImpl {
+public class GalepowderMage extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
-    static {
-        filter.add(new AnotherPredicate());
-    }
+    public GalepowderMage(UUID ownerId) {
+        super(ownerId, 12, "Galepowder Mage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        this.expansionSetCode = "DDI";
+        this.subtype.add("Kithkin");
+        this.subtype.add("Wizard");
 
-    public RoonOfTheHiddenRealm(UUID ownerId) {
-        super(ownerId, 206, "Roon of the Hidden Realm", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{W}{U}");
-        this.expansionSetCode = "C13";
-        this.supertype.add("Legendary");
-        this.subtype.add("Rhino");
-        this.subtype.add("Soldier");
-
-        this.color.setBlue(true);
-        this.color.setGreen(true);
         this.color.setWhite(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // Vigilance
-        this.addAbility(VigilanceAbility.getInstance());
-        // Trample
-        this.addAbility(TrampleAbility.getInstance());
-        // {2}, {tap}: Exile another target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RoonOfTheHiddenRealmEffect(), new GenericManaCost(2));
-        ability.addTarget(new TargetCreaturePermanent(filter));
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
-
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Whenever Galepowder Mage attacks, exile another target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step.
+        this.addAbility(new AttacksTriggeredAbility(new GalepowderMageEffect(), false));
     }
 
-    public RoonOfTheHiddenRealm(final RoonOfTheHiddenRealm card) {
+    public GalepowderMage(final GalepowderMage card) {
         super(card);
     }
 
     @Override
-    public RoonOfTheHiddenRealm copy() {
-        return new RoonOfTheHiddenRealm(this);
+    public GalepowderMage copy() {
+        return new GalepowderMage(this);
     }
 }
 
-class RoonOfTheHiddenRealmEffect extends OneShotEffect {
+class GalepowderMageEffect extends OneShotEffect {
 
-    public RoonOfTheHiddenRealmEffect() {
+    public GalepowderMageEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Exile another target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step";
+        this.staticText = "exile another target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step";
     }
 
-    public RoonOfTheHiddenRealmEffect(final RoonOfTheHiddenRealmEffect effect) {
+    public GalepowderMageEffect(final GalepowderMageEffect effect) {
         super(effect);
     }
 
     @Override
-    public RoonOfTheHiddenRealmEffect copy() {
-        return new RoonOfTheHiddenRealmEffect(this);
+    public GalepowderMageEffect copy() {
+        return new GalepowderMageEffect(this);
     }
 
     @Override
