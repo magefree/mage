@@ -237,6 +237,7 @@ public class ImageHelper {
         }
 
         try {
+            ImageIO.setUseCache(false);
             BufferedImage image = ImageIO.read(stream);
             return image;
         } catch (IOException e) {
