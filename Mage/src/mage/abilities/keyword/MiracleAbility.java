@@ -30,7 +30,6 @@ package mage.abilities.keyword;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.OneShotEffect;
@@ -97,8 +96,9 @@ public class MiracleAbility extends TriggeredAbilityImpl {
     private static final String staticRule = " <i>(You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)<i/>";
     private String ruleText;
     
+    @SuppressWarnings("unchecked")
     public MiracleAbility(Card card, ManaCosts miracleCosts) {
-            super(Zone.HAND, new MiracleEffect(miracleCosts), true);
+            super(Zone.HAND, new MiracleEffect((ManaCosts<ManaCost>)miracleCosts), true);
             card.addWatcher(new MiracleWatcher());
             ruleText = "Miracle " + miracleCosts.getText() + staticRule;
     }
@@ -133,9 +133,9 @@ public class MiracleAbility extends TriggeredAbilityImpl {
 
 class MiracleEffect extends OneShotEffect {
 
-    private final ManaCosts miracleCosts;
+    private final ManaCosts<ManaCost> miracleCosts;
 
-    public MiracleEffect(ManaCosts miracleCosts) {
+    public MiracleEffect(ManaCosts<ManaCost> miracleCosts) {
         super(Outcome.Benefit);
         this.staticText = "cast this card for it's miracle cost";
         this.miracleCosts = miracleCosts;
@@ -157,7 +157,7 @@ class MiracleEffect extends OneShotEffect {
         // use target pointer here, so it's the same card that triggered the event (not gone back to library e.g.)
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (controller != null && card != null) {
-            ManaCosts costRef = card.getSpellAbility().getManaCostsToPay();
+            ManaCosts<ManaCost> costRef = card.getSpellAbility().getManaCostsToPay();
             // replace with the new cost
             costRef.clear();
             costRef.add(miracleCosts);

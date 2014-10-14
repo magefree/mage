@@ -988,7 +988,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.getStack().push(new StackAbility(ability, playerId));
             }
             if (ability.activate(game, false)) {
-                if (ability.getRuleVisible()) {
+                if (ability.isUsesStack() || ability.getRuleVisible()) {
                     game.informPlayers(ability.getGameLogMessage(game));
                 }
                 if (!ability.isUsesStack()) {

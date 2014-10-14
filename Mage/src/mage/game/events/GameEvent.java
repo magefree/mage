@@ -82,6 +82,7 @@ public class GameEvent {
         ZONE_CHANGE,
         DRAW_CARD, DREW_CARD,
         MIRACLE_CARD_REVEALED,
+        MADNESS_CARD_EXILED,
         DISCARDED_CARD,
         CYCLE_CARD, CYCLED_CARD,
         CLASH, CLASHED,
