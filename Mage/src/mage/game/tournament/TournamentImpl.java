@@ -392,17 +392,11 @@ public abstract class TournamentImpl implements Tournament {
             if (options.getLimitedOptions().getDraftCube() != null) {
                 DraftCube cube = options.getLimitedOptions().getDraftCube();
                 for (int i = 0; i < options.getLimitedOptions().getNumberBoosters(); i++) {
-                    List<Card> booster = cube.createBooster();
-                    for (Card card: booster) {
-                        player.getDeck().getSideboard().add(card);
-                    }
+                    player.getDeck().getSideboard().addAll(cube.createBooster());
                 }
             } else {
                 for (ExpansionSet set: sets) {
-                    List<Card> booster = set.createBooster();
-                    for (Card card: booster) {
-                        player.getDeck().getSideboard().add(card);
-                    }
+                    player.getDeck().getSideboard().addAll(set.createBooster());
                 }
             }
         }

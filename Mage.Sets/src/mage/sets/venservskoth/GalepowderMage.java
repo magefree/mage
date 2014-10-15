@@ -42,9 +42,12 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -52,6 +55,12 @@ import mage.players.Player;
  */
 public class GalepowderMage extends CardImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
+    
+    static {
+        filter.add(new AnotherPredicate());
+    }
+    
     public GalepowderMage(UUID ownerId) {
         super(ownerId, 12, "Galepowder Mage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.expansionSetCode = "DDI";
@@ -65,7 +74,9 @@ public class GalepowderMage extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Galepowder Mage attacks, exile another target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step.
-        this.addAbility(new AttacksTriggeredAbility(new GalepowderMageEffect(), false));
+        Ability ability = new AttacksTriggeredAbility(new GalepowderMageEffect(), false);
+        ability.addTarget(new TargetCreaturePermanent(filter));                
+        this.addAbility(ability);
     }
 
     public GalepowderMage(final GalepowderMage card) {
