@@ -33,7 +33,7 @@ import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
@@ -77,7 +77,7 @@ public class OgreJailbreaker extends CardImpl {
 class OgreJailbreakerEffect extends AsThoughEffectImpl {
 
     private static final FilterPermanent filter = new FilterPermanent();
-    private ControlsPermanentCondition gateCondition;
+    private PermanentsOnTheBattlefieldCondition gateCondition;
     static {
         filter.add(new SubtypePredicate("Gate"));
     }
@@ -85,7 +85,7 @@ class OgreJailbreakerEffect extends AsThoughEffectImpl {
     public OgreJailbreakerEffect() {
         super(AsThoughEffectType.ATTACK, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "{this} can attack as though it didn't have defender as long as you control a Gate";
-        gateCondition = new ControlsPermanentCondition(filter);
+        gateCondition = new PermanentsOnTheBattlefieldCondition(filter);
     }
 
     public OgreJailbreakerEffect(final OgreJailbreakerEffect effect) {

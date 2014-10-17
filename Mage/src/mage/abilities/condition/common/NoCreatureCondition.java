@@ -36,7 +36,8 @@ import mage.game.Game;
  * @author nantuko
  */
 public class NoCreatureCondition implements Condition {
-    private static NoCreatureCondition fInstance = new NoCreatureCondition();
+    
+    private static final NoCreatureCondition fInstance = new NoCreatureCondition();
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

@@ -39,7 +39,7 @@ import mage.game.Game;
  */
 public class DefendingPlayerControlsCondition implements Condition {
 
-    private FilterPermanent filter;
+    private final FilterPermanent filter;
 
     public DefendingPlayerControlsCondition(FilterPermanent filter) {
         this.filter = filter;

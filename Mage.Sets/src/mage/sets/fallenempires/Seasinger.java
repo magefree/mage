@@ -35,7 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SkipUntapOptionalAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalContinousEffect;
@@ -89,7 +89,7 @@ public class Seasinger extends CardImpl {
         // {tap}: Gain control of target creature whose controller controls an Island for as long as you control Seasinger and Seasinger remains tapped.
         ConditionalContinousEffect effect = new ConditionalContinousEffect(
                 new GainControlTargetEffect(Duration.Custom),
-                new ControlsPermanentCondition(seasinger, ControlsPermanentCondition.CountType.EQUAL_TO, 1, SourceTappedCondition.getInstance()), rule);
+                new PermanentsOnTheBattlefieldCondition(seasinger, PermanentsOnTheBattlefieldCondition.CountType.EQUAL_TO, 1, SourceTappedCondition.getInstance()), rule);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         creatureWhoseControllerControlsIsland.add(new ControllerControlsIslandPredicate());
         ability.addTarget(new TargetCreaturePermanent(creatureWhoseControllerControlsIsland));

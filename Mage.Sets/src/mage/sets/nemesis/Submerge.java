@@ -30,7 +30,7 @@ package mage.sets.nemesis;
 import java.util.UUID;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
@@ -64,7 +64,7 @@ public class Submerge extends CardImpl {
         // If an opponent controls a Forest and you control an Island, you may cast Submerge without paying its mana cost.
         Condition condition = new CompoundCondition("If an opponent controls a Forest and you control an Island", 
                 new OpponentControlsPermanentCondition(filterForest),
-                new ControlsPermanentCondition(filterIsland));
+                new PermanentsOnTheBattlefieldCondition(filterIsland));
         this.addAbility(new AlternativeCostSourceAbility(null, condition));        
         // Put target creature on top of its owner's library.
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));

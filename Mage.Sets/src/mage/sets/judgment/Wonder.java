@@ -31,7 +31,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
@@ -77,7 +77,7 @@ public class Wonder extends CardImpl {
         ContinuousEffect effect = new GainAbilityControlledEffect(FlyingAbility.getInstance(),
                 Duration.WhileOnBattlefield, new FilterCreaturePermanent());
         ConditionalContinousEffect wonderEffect = new ConditionalContinousEffect(effect,
-                new ControlsPermanentCondition(filter), ruleText);
+                new PermanentsOnTheBattlefieldCondition(filter), ruleText);
         this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, wonderEffect));
     }
 

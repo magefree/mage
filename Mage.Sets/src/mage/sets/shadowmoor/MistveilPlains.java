@@ -36,7 +36,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -75,7 +75,7 @@ public class MistveilPlains extends CardImpl {
                 Zone.BATTLEFIELD, 
                 new MistveilPlainsGraveyardToLibraryEffect(), 
                 new ManaCostsImpl("{W}"), 
-                new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 1));
+                new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 1));
         ability.addTarget(new TargetCardInYourGraveyard());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

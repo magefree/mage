@@ -29,7 +29,7 @@ package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
 import mage.ObjectColor;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -70,7 +70,7 @@ public class HorobisWhisper extends CardImpl {
 
         // If you control a Swamp, destroy target nonblack creature.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DestroyTargetEffect(), 
-                new ControlsPermanentCondition(filterCondition),"If you control a Swamp, destroy target nonblack creature"));
+                new PermanentsOnTheBattlefieldCondition(filterCondition),"If you control a Swamp, destroy target nonblack creature"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterTarget) );
 
         // Splice onto Arcane-Exile four cards from your graveyard.

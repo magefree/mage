@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
@@ -67,18 +67,16 @@ public class EmberWeaver extends CardImpl {
 
         this.addAbility(ReachAbility.getInstance());
         // As long as you control a red permanent, Ember Weaver gets +1/+0 and has first strike.
-        this.addAbility(
-                new SimpleStaticAbility(
+        this.addAbility(new SimpleStaticAbility(
                         Zone.BATTLEFIELD,
                         new ConditionalContinousEffect(
                                 new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield),
-                                new ControlsPermanentCondition(redPermanentFilter), "{this} gets +1/+0 as long as you control a red permanent")));
-        this.addAbility(
-                new SimpleStaticAbility(
+                                new PermanentsOnTheBattlefieldCondition(redPermanentFilter), "{this} gets +1/+0 as long as you control a red permanent")));
+        this.addAbility(new SimpleStaticAbility(
                         Zone.BATTLEFIELD,
                         new ConditionalContinousEffect(
                                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
-                                new ControlsPermanentCondition(redPermanentFilter), "{this} has first strike as long as you control a red permanent")));
+                                new PermanentsOnTheBattlefieldCondition(redPermanentFilter), "{this} has first strike as long as you control a red permanent")));
 
     }
 

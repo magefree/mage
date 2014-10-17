@@ -87,7 +87,6 @@ class YouGainedLifeCondition extends IntCompareCondition {
     
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("if you gained 4 or more life this turn ");
-        return sb.toString();
+        return "if you gained 4 or more life this turn ";
     }
 }

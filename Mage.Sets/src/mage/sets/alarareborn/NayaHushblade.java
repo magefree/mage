@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
@@ -73,11 +73,11 @@ public class NayaHushblade extends CardImpl {
         // As long as you control another multicolored permanent, Naya Hushblade gets +1/+1 and has shroud.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
                 new BoostSourceEffect(1,1, Duration.WhileOnBattlefield),
-                new ControlsPermanentCondition(filter),
+                new PermanentsOnTheBattlefieldCondition(filter),
                 "As long as you control another multicolored permanent, Naya Hushblade gets +1/+1"));
         ability.addEffect(new ConditionalContinousEffect(
                 new GainAbilitySourceEffect(ShroudAbility.getInstance()),
-                new ControlsPermanentCondition(filter),
+                new PermanentsOnTheBattlefieldCondition(filter),
                 " and has shroud"));
         this.addAbility(ability);
     }

@@ -37,7 +37,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -75,7 +75,7 @@ public class OrochiEggwatcher extends CardImpl {
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SnakeToken()),new ManaCostsImpl("{2}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new ConditionalOneShotEffect(new FlipSourceEffect(new ShidakoBroodmistress()),
-                new ControlsPermanentCondition(new FilterControlledCreaturePermanent(),ControlsPermanentCondition.CountType.MORE_THAN, 9),"If you control ten or more creatures, flip {this}"));
+                new PermanentsOnTheBattlefieldCondition(new FilterControlledCreaturePermanent(),PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 9),"If you control ten or more creatures, flip {this}"));
         this.addAbility(ability);
     }
 

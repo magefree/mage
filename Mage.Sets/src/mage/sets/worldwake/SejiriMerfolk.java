@@ -32,7 +32,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -67,9 +67,9 @@ public class SejiriMerfolk extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new GainAbilitySourceEffect(LifelinkAbility.getInstance()), new ControlsPermanentCondition(filter), rule1);
+        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new GainAbilitySourceEffect(LifelinkAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filter), rule1);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect1));
-        ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), new ControlsPermanentCondition(filter), rule2);
+        ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filter), rule2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
 
     }

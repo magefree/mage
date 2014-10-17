@@ -29,8 +29,8 @@ package mage.sets.mercadianmasques;
 
 import java.util.UUID;
 import mage.ObjectColor;
-import mage.abilities.condition.common.ControlsPermanentCondition;
-import mage.abilities.condition.common.ControlsPermanentCondition.CountType;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -67,7 +67,7 @@ public class SnuffOut extends CardImpl {
         // If you control a Swamp, you may pay 4 life rather than pay Snuff Out's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(
                 new PayLifeCost(4),
-                new ControlsPermanentCondition(filterSwamp, CountType.MORE_THAN, 0), null));
+                new PermanentsOnTheBattlefieldCondition(filterSwamp, CountType.MORE_THAN, 0), null));
         // 
         // Destroy target nonblack creature. It can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));

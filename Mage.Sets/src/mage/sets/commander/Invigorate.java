@@ -28,7 +28,7 @@
 package mage.sets.commander;
 
 import java.util.UUID;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.GainLifeOpponentCost;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
@@ -59,7 +59,7 @@ public class Invigorate extends CardImpl {
         this.color.setGreen(true);
 
         // If you control a Forest, rather than pay Invigorate's mana cost, you may have an opponent gain 3 life.
-        this.addAbility(new AlternativeCostSourceAbility(new GainLifeOpponentCost(3), new ControlsPermanentCondition(filter)));    
+        this.addAbility(new AlternativeCostSourceAbility(new GainLifeOpponentCost(3), new PermanentsOnTheBattlefieldCondition(filter)));    
         // Target creature gets +4/+4 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(4,4,Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

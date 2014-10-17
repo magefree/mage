@@ -31,8 +31,8 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
-import mage.abilities.condition.common.ControlsPermanentCondition.CountType;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
@@ -75,12 +75,12 @@ public class DuergarHedgeMage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Duergar Hedge-Mage enters the battlefield, if you control two or more Mountains, you may destroy target artifact.
-        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true), new ControlsPermanentCondition(filter, CountType.MORE_THAN, 1), rule1);
+        Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true), new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 1), rule1);
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
 
         // When Duergar Hedge-Mage enters the battlefield, if you control two or more Plains, you may destroy target enchantment.
-        Ability ability2 = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true), new ControlsPermanentCondition(filter2, CountType.MORE_THAN, 1), rule2);
+        Ability ability2 = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true), new PermanentsOnTheBattlefieldCondition(filter2, CountType.MORE_THAN, 1), rule2);
         ability2.addTarget(new TargetPermanent(filter3));
         this.addAbility(ability2);
 

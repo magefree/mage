@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -66,7 +66,7 @@ public class LoamLion extends CardImpl {
         // Loam Lion gets +1/+2 as long as you control a Forest.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinousEffect(new BoostSourceEffect(1, 2, Duration.WhileOnBattlefield),
-                new ControlsPermanentCondition(filter), rule)));
+                new PermanentsOnTheBattlefieldCondition(filter), rule)));
     }
 
     public LoamLion(final LoamLion card) {
