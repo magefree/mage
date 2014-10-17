@@ -29,8 +29,6 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.game.permanent.Permanent;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -89,21 +87,22 @@ public class DeathtouchTest extends CardTestPlayerBase {
 
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN , playerA, "Marath, Will of the Wild");
+        
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {2}", "Marath, Will of the Wild");
 
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{X},Remove X +1/+1 counters from Marath: Choose one - Put X +1/+1 counters on target creature; or {source} deals X damage to target creature or player; or put an X/X green Elemental creature token onto the battlefield.", "Archangel of Thune");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{X},Remove X +1/+1 counters from Marath: Choose one - <br>&bull  Put X +1/+1 counters on target creature.<br>&bull  {source} deals X damage to target creature or player.<br>&bull  Put an X/X green Elemental creature token onto the battlefield.<br>", "Archangel of Thune");
         setChoice(playerA, "X=3");
         setModeChoice(playerA, "2"); // Marath deals X damage to target creature or player
-        
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertLife(playerA, 23);
+        assertPermanentCount(playerA, "Marath, Will of the Wild", 0); // died because all +1/+1 counters are removed
+        assertPermanentCount(playerB, "Archangel of Thune", 0); // died from deathtouch
+
+        assertLife(playerA, 23); // +3 from lifelink doing 3 damage with Marath to Archangel
         assertLife(playerB, 20);
 
-        assertPermanentCount(playerA, "Marath, Will of the Wild", 0);
-        assertPermanentCount(playerB, "Archangel of Thune", 0);
     }
     
 
