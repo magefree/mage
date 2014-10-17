@@ -177,36 +177,25 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     }
 
     public String getText() {
-        String andOr = "";
+        if (this.size() <= 1) {
+            return this.getMode().getEffects().getText(this.getMode());
+        } 
         StringBuilder sb = new StringBuilder();
-        if (this.size() > 1) {
-            if (this.getMinModes() == 1 && this.getMaxModes() == 3) {
-                sb.append("Choose one or more - ");
-                andOr = "; and/or ";
-            }else if (this.getMinModes() == 1 && this.getMaxModes() == 2) {
-                sb.append("Choose one or both - ");
-                andOr = "; and/or ";
-            } else if (this.getMinModes() == 2 && this.getMaxModes() == 2) {
-                sb.append("Choose two - ");
-                andOr = "; or ";
-            } else {
-                sb.append("Choose one - ");
-                andOr = "; or ";
-            }
+        if (this.getMinModes() == 1 && this.getMaxModes() == 3) {
+            sb.append("choose one or more - ");
+        }else if (this.getMinModes() == 1 && this.getMaxModes() == 2) {
+            sb.append("choose one or both - ");
+        } else if (this.getMinModes() == 2 && this.getMaxModes() == 2) {
+            sb.append("choose two - ");
+        } else {
+            sb.append("choose one - ");
         }
+        sb.append("<br>");            
         for (Mode mode: this.values()) {
-            sb.append(mode.getEffects().getText(mode));
-            if (this.size() > 1) {
-                if (sb.length() > 2 && sb.substring(sb.length()-1, sb.length()).equals(".")) {
-                    sb.delete(sb.length()-1, sb.length());
-                }
-                sb.append(andOr);
-            }
-        }
-        if (this.size() > 1) {
-            sb.delete(sb.length() - andOr.length(), sb.length());
-            sb.append(".");
-        }
+            sb.append("&bull  ");
+            sb.append(mode.getEffects().getTextStartingUpperCase(mode));
+            sb.append("<br>");
+        }        
         return sb.toString();
     }
 

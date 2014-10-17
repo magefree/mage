@@ -37,6 +37,7 @@ public class SystemUtil {
      *   3b. Parse next line (go to 2.), If EOF go to 4.<br/>
      * 4. Log message to all players that cards were added (to prevent unfair play).<br/>
      * 5. Exit<br/>
+     * @param game
      */
     public static void addCardsForTesting(Game game) {
         try {

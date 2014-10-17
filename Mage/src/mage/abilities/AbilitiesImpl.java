@@ -74,11 +74,16 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                 continue;
             }
             if (!(ability instanceof SpellAbility || ability instanceof PlayLandAbility)) {
-                if (ability.getRuleAtTheTop()) {
-                    rules.add(0, ability.getRule());
-                } else {
-                    rules.add(ability.getRule());
+                String rule = ability.getRule();
+                if (rule.length() > 3) {
+                    rule = Character.toUpperCase(rule.charAt(0)) + rule.substring(1);
+                    if (ability.getRuleAtTheTop()) {
+                        rules.add(0, rule);
+                    } else {
+                        rules.add(rule);
+                    }
                 }
+                continue;
             }
             if (ability instanceof SpellAbility) {
                 if (ability.getAlternativeCosts().size() > 0) {
@@ -86,11 +91,11 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                     for (AlternativeCost cost: ability.getAlternativeCosts()) {
                         if (cost.getClass().getName().equals("mage.abilities.costs.AlternativeCostImpl")) 
                         { // if the template class is used, the rule is in the getName() instead in the getText()
-                            sbRule.append(cost.getName()).append(".\n");
+                            sbRule.append(cost.getName()).append(".<br>");
                         }
                         else
                         {
-                            sbRule.append(cost.getText()).append(".\n");
+                            sbRule.append(cost.getText()).append(".<br>");
                         }
                     }
                     rules.add(sbRule.toString());
@@ -102,17 +107,16 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                             if (!cost.getText().startsWith("As an additional cost")) {
                                 sbRule.append("As an additional cost to cast {this}, ");
                             }
-                            sbRule.append(cost.getText()).append(".\n");
+                            sbRule.append(cost.getText()).append(".<br>");
                         }
                     }
                     rules.add(sbRule.toString());
                 }
                 String rule = ability.getRule();
-                if (rule.length() > 1) {
-                    rule = rule.substring(0, 1).toUpperCase() + rule.substring(1);
-                }
-                rules.add(rule); 
-            }
+                if (rule.length() > 0) {
+                    rules.add(Character.toUpperCase(rule.charAt(0)) + rule.substring(1)); 
+                }                   
+            }           
         }
 
         return rules;

@@ -612,7 +612,6 @@ public abstract class AbilityImpl implements Ability {
                 sbRule.append(text);
             }
         }
-
         return sbRule.toString();
     }
 
