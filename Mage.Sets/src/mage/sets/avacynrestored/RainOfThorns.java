@@ -55,6 +55,8 @@ public class RainOfThorns extends CardImpl {
         // Choose one or more - Destroy target artifact; destroy target enchantment; and/or destroy target land.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
+        this.getSpellAbility().getModes().setMaxModes(1);
+        this.getSpellAbility().getModes().setMaxModes(3);
 
         Mode mode1 = new Mode();
         mode1.getEffects().add(new DestroyTargetEffect());
@@ -65,24 +67,6 @@ public class RainOfThorns extends CardImpl {
         mode2.getEffects().add(new DestroyTargetEffect());
         mode2.getTargets().add(new TargetPermanent(new FilterLandPermanent()));
         this.getSpellAbility().addMode(mode2);
-
-        Mode mode3 = new Mode();
-        mode3.getEffects().add(new DestroyTargetEffect("Destroy target artifact, then destroy target enchantment"));
-        mode3.getTargets().add(new TargetArtifactPermanent());
-        mode3.getTargets().add(new TargetPermanent(new FilterEnchantment()));
-        this.getSpellAbility().addMode(mode3);
-
-        Mode mode4 = new Mode();
-        mode4.getEffects().add(new DestroyTargetEffect("Destroy target artifact, then destroy target land"));
-        mode4.getTargets().add(new TargetArtifactPermanent());
-        mode4.getTargets().add(new TargetPermanent(new FilterLandPermanent()));
-        this.getSpellAbility().addMode(mode4);
-
-        Mode mode5 = new Mode();
-        mode5.getEffects().add(new DestroyTargetEffect("Destroy target enchantment, then destroy target land"));
-        mode5.getTargets().add(new TargetPermanent(new FilterEnchantment()));
-        mode5.getTargets().add(new TargetPermanent(new FilterLandPermanent()));
-        this.getSpellAbility().addMode(mode5);
     }
 
     public RainOfThorns(final RainOfThorns card) {

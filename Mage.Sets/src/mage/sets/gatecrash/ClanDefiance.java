@@ -92,10 +92,4 @@ public class ClanDefiance extends CardImpl {
         return new ClanDefiance(this);
     }
     
-    @Override
-    public List<String> getRules() {
-        List<String> rules = new ArrayList<String>();
-        rules.add("Choose one or more - Clan Defiance deals X damage to target creature with flying; Clan Defiance deals X damage to target creature without flying; and/or Clan Defiance deals X damage to target player.");
-        return rules;
-    }
 }
