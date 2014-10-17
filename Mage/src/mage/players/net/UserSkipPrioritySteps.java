@@ -27,12 +27,14 @@
  */
 package mage.players.net;
 
+import java.io.Serializable;
+
 /**
  *
  * @author LevelX2
  */
 
-public class UserSkipPrioritySteps {
+public class UserSkipPrioritySteps implements Serializable {
     SkipPrioritySteps yourTurn;
     SkipPrioritySteps opponentTurn;
 
