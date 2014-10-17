@@ -131,18 +131,8 @@ class GoblinCharbelcherEffect extends OneShotEffect {
             if (targetPlayer != null) {
                 targetPlayer.damage(damage, source.getSourceId(), game, false, true);
             }
-        }
-        
-        TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put on the bottom of your library"));
-        while (player.isInGame() && cards.size() > 1) {
-            player.choose(Outcome.Neutral, cards, target, game);
-            Card card = cards.get(target.getFirstTarget(), game);
-            if (card != null) {
-                player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, false, true);
-            }
-            target.clearChosen();
-        }
-       
+        }        
+        player.putCardsOnBottomOfLibrary(cards, game, source, true);
         return true;
     }
 }
