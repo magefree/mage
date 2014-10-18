@@ -65,6 +65,7 @@ import java.util.*;
 import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
+import javax.swing.border.EmptyBorder;
 import mage.constants.PlayerAction;
 
 /**
@@ -219,8 +220,8 @@ public final class GamePanel extends javax.swing.JPanel {
     private void saveDividerLocations() {
         // save panel sizes and divider locations.
         Rectangle rec = MageFrame.getDesktop().getBounds();
-        StringBuilder sb = new StringBuilder(Double.toString(rec.getWidth())).append("x").append(Double.toString(rec.getHeight()));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, sb.toString());
+        String sb = Double.toString(rec.getWidth()) + "x" + Double.toString(rec.getHeight());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, sb);
         PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_0, Integer.toString(this.jSplitPane0.getDividerLocation()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_1, Integer.toString(this.jSplitPane1.getDividerLocation()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_2, Integer.toString(this.jSplitPane2.getDividerLocation()));
@@ -230,9 +231,9 @@ public final class GamePanel extends javax.swing.JPanel {
         Rectangle rec = MageFrame.getDesktop().getBounds();
         if (rec != null) {
             String size = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, null);
-            StringBuilder sb = new StringBuilder(Double.toString(rec.getWidth())).append("x").append(Double.toString(rec.getHeight()));
+            String sb = Double.toString(rec.getWidth()) + "x" + Double.toString(rec.getHeight());
             // use divider positions only if screen size is the same as it was the time the settings were saved
-            if (size != null && size.equals(sb.toString())) {
+            if (size != null && size.equals(sb)) {
 
                 String location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_0, null);
                 if (location != null && jSplitPane0 != null) {
@@ -260,8 +261,8 @@ public final class GamePanel extends javax.swing.JPanel {
                 bigCard.setMaximumSize(bbDimension);
                 bigCard.setMinimumSize(bbDimension);
                 bigCard.setPreferredSize(bbDimension);
-                pnlGameInfo.revalidate();
-                pnlGameInfo.repaint();
+                pnlShortCuts.revalidate();
+                pnlShortCuts.repaint();
                 //this.handContainer.sizeHand(0.8, smallMode);
                 for (PlayAreaPanel p: players.values()) {
                     p.sizePlayer(smallMode);
@@ -275,8 +276,8 @@ public final class GamePanel extends javax.swing.JPanel {
                 bigCard.setMaximumSize(bbDimension);
                 bigCard.setMinimumSize(bbDimension);
                 bigCard.setPreferredSize(bbDimension);
-                pnlGameInfo.revalidate();
-                pnlGameInfo.repaint();
+                pnlShortCuts.revalidate();
+                pnlShortCuts.repaint();
                 this.handContainer.sizeHand(1, smallMode);
                 for (PlayAreaPanel p: players.values()) {
                     p.sizePlayer(smallMode);
@@ -300,11 +301,19 @@ public final class GamePanel extends javax.swing.JPanel {
         this.feedbackPanel.init(gameId);
         this.feedbackPanel.clear();
         this.abilityPicker.init(session, gameId);
+
         this.btnConcede.setVisible(true);
-        this.btnEndTurn.setVisible(true);
-        this.btnSwitchHands.setVisible(false);
-        this.pnlReplay.setVisible(false);
         this.btnStopWatching.setVisible(false);
+        this.btnSwitchHands.setVisible(false);
+        this.btnCancelSkip.setVisible(true);
+
+        this.btnSkipToNextTurn.setVisible(true);
+        this.btnSkipToEndTurn.setVisible(true);
+        this.btnSkipToNextMain.setVisible(true);
+        this.btnSkipToYourTurn.setVisible(true);
+        
+        this.pnlReplay.setVisible(false);
+        
         this.gameChatPanel.clear();
         this.gameChatPanel.connect(session.getGameChatId(gameId));
         if (!session.joinGame(gameId)) {
@@ -320,10 +329,18 @@ public final class GamePanel extends javax.swing.JPanel {
         MageFrame.addGame(gameId, this);
         this.feedbackPanel.init(gameId);
         this.feedbackPanel.clear();
+
         this.btnConcede.setVisible(false);
-        this.btnEndTurn.setVisible(false);
-        this.btnSwitchHands.setVisible(false);
         this.btnStopWatching.setVisible(true);
+        this.btnSwitchHands.setVisible(false);
+        this.btnCancelSkip.setVisible(false);
+
+        this.btnSkipToNextTurn.setVisible(false);
+        this.btnSkipToEndTurn.setVisible(false);
+        this.btnSkipToNextMain.setVisible(false);
+        this.btnSkipToYourTurn.setVisible(false);
+        
+        
         this.pnlReplay.setVisible(false);
         this.gameChatPanel.clear();
         this.gameChatPanel.connect(session.getGameChatId(gameId));
@@ -343,7 +360,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.feedbackPanel.init(gameId);
         this.feedbackPanel.clear();
         this.btnConcede.setVisible(false);
-        this.btnEndTurn.setVisible(false);
+        this.btnSkipToNextTurn.setVisible(false);
         this.btnSwitchHands.setVisible(false);
         this.btnStopWatching.setVisible(false);
         this.pnlReplay.setVisible(true);
@@ -489,7 +506,7 @@ public final class GamePanel extends javax.swing.JPanel {
             if (previous != visible) {
                 btnSwitchHands.setVisible(visible);
                 if (visible) {
-                    JOptionPane.showMessageDialog(null, "You control other player's turn. \nUse \"Switch Hand\" on the bottom to switch between cards in different hands.");
+                    JOptionPane.showMessageDialog(null, "You control other player's turn. \nUse \"Switch Hand\" button to switch between cards in different hands.");
                 } else {
                     JOptionPane.showMessageDialog(null, "You lost control on other player's turn.");
                 }
@@ -809,7 +826,7 @@ public final class GamePanel extends javax.swing.JPanel {
         jSplitPane0 = new javax.swing.JSplitPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        pnlGameInfo = new javax.swing.JPanel();
+        pnlShortCuts = new javax.swing.JPanel();
         lblPhase = new javax.swing.JLabel();
         txtPhase = new javax.swing.JLabel();
         lblStep = new javax.swing.JLabel();
@@ -822,11 +839,13 @@ public final class GamePanel extends javax.swing.JPanel {
         lblPriority = new javax.swing.JLabel();
         feedbackPanel = new mage.client.game.FeedbackPanel();
 
-        btnConcede = new javax.swing.JButton();
-        btnEndTurn = new javax.swing.JButton();
-        btnCancelSkip = new javax.swing.JButton();
-        btnSkipToYourTurn = new javax.swing.JButton();
+        btnCancelSkip = new javax.swing.JButton(); // F3
+        btnSkipToNextTurn = new javax.swing.JButton(); // F4
+        btnSkipToEndTurn = new javax.swing.JButton(); // F5
+        btnSkipToNextMain = new javax.swing.JButton(); // F7
+        btnSkipToYourTurn = new javax.swing.JButton(); // F9
 
+        btnConcede = new javax.swing.JButton();
         btnSwitchHands = new javax.swing.JButton();
 
         btnStopWatching = new javax.swing.JButton();
@@ -867,8 +886,8 @@ public final class GamePanel extends javax.swing.JPanel {
 
         restoreDividerLocations();
 
-        pnlGameInfo.setOpaque(false);
-        pnlGameInfo.setPreferredSize(new Dimension(400, 60));
+        pnlShortCuts.setOpaque(false);
+        pnlShortCuts.setPreferredSize(new Dimension(400, 60));
         lblPhase.setLabelFor(txtPhase);
         lblPhase.setText("Phase:");
 
@@ -921,56 +940,33 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
         
-        btnCancelSkip.setText("F3");
-        btnCancelSkip.setToolTipText("Cancel all skip actions (F3)");
-        btnCancelSkip.setFocusable(true);
+        btnCancelSkip.setContentAreaFilled(false);
+        btnCancelSkip.setBorder(new EmptyBorder(0,0,0,0));
+        btnCancelSkip.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getCancelSkipButtonImage()));
+        btnCancelSkip.setToolTipText("Cancel all skip actions (F3).");
+        btnCancelSkip.setFocusable(false);
         btnCancelSkip.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                restorePriorityActionPerformed(null);
+                if (evt.getButton() == MouseEvent.BUTTON1) {
+                    restorePriorityActionPerformed(null);
+                }
             }
         });
 
-        KeyStroke ks9 = KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0);
-        this.getInputMap(c).put(ks9, "F9_PRESS");
-        this.getActionMap().put("F9_PRESS", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                btnPassPriorityUntilNextYourTurnActionPerformed(actionEvent);
-            }
-        });
-        
-        btnSkipToYourTurn.setText("F9");
-        btnSkipToYourTurn.setToolTipText("Skip to your next turn (F9)");
-        btnSkipToYourTurn.setFocusable(true);
-        btnSkipToYourTurn.addMouseListener(new MouseAdapter() {
+        btnSkipToNextTurn.setContentAreaFilled(false);
+        btnSkipToNextTurn.setBorder(new EmptyBorder(0,0,0,0));
+        btnSkipToNextTurn.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipNextTurnButtonImage()));
+        btnSkipToNextTurn.setToolTipText("Skip to next turn (F4).");
+        btnSkipToNextTurn.setFocusable(false);
+        btnSkipToNextTurn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                btnPassPriorityUntilNextYourTurnActionPerformed(null);
+                if (evt.getButton() == MouseEvent.BUTTON1) {
+                    btnEndTurnActionPerformed(null);
+                }
             }
         });
-        
-        btnConcede.setText("Concede");
-        btnConcede.setToolTipText("Concede the current game");
-        btnConcede.setFocusable(false);
-        btnConcede.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                btnConcedeActionPerformed(null);
-            }
-        });
-
-        btnEndTurn.setText("F4");
-        btnEndTurn.setToolTipText("End This Turn (F4)");
-        btnEndTurn.setFocusable(false);
-        btnEndTurn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                btnEndTurnActionPerformed(null);
-            }
-        });
-
-        
 
         KeyStroke ks = KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0);
         this.getInputMap(c).put(ks, "F4_PRESS");
@@ -978,6 +974,20 @@ public final class GamePanel extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 btnEndTurnActionPerformed(actionEvent);
+            }
+        });
+
+        btnSkipToEndTurn.setContentAreaFilled(false);
+        btnSkipToEndTurn.setBorder(new EmptyBorder(0,0,0,0));
+        btnSkipToEndTurn.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipEndTurnButtonImage()));
+        btnSkipToEndTurn.setToolTipText("Skip to (opponents/next) end of turn step (F5) - adjust using preferences.");
+        btnSkipToEndTurn.setFocusable(false);
+        btnSkipToEndTurn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                if (evt.getButton() == MouseEvent.BUTTON1) {
+                    btnUntilEndOfTurnActionPerformed(null);
+                }
             }
         });
 
@@ -990,6 +1000,20 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
 
+        btnSkipToNextMain.setContentAreaFilled(false);
+        btnSkipToNextMain.setBorder(new EmptyBorder(0,0,0,0));
+        btnSkipToNextMain.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipMainButtonImage()));
+        btnSkipToNextMain.setToolTipText("Skip to (your) next main phase (F7) - adjust using preferences.");
+        btnSkipToNextMain.setFocusable(false);
+        btnSkipToNextMain.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                if (evt.getButton() == MouseEvent.BUTTON1) {
+                    btnUntilNextMainPhaseActionPerformed(null);
+                }
+            }
+        });
+
         ks = KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0);
         this.getInputMap(c).put(ks, "F7_PRESS");
         this.getActionMap().put("F7_PRESS", new AbstractAction() {
@@ -999,6 +1023,42 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
 
+        btnSkipToYourTurn.setContentAreaFilled(false);
+        btnSkipToYourTurn.setBorder(new EmptyBorder(0,0,0,0));
+        btnSkipToYourTurn.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipYourNextTurnButtonImage()));
+        btnSkipToYourTurn.setToolTipText("Skip to your next turn (F9).");
+        btnSkipToYourTurn.setFocusable(false);
+        btnSkipToYourTurn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                if (evt.getButton() == MouseEvent.BUTTON1) {
+                    btnPassPriorityUntilNextYourTurnActionPerformed(null);
+                }
+            }
+        });
+
+        KeyStroke ks9 = KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0);
+        this.getInputMap(c).put(ks9, "F9_PRESS");
+        this.getActionMap().put("F9_PRESS", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                btnPassPriorityUntilNextYourTurnActionPerformed(actionEvent);
+            }
+        });
+               
+        btnConcede.setContentAreaFilled(false);
+        btnConcede.setBorder(new EmptyBorder(0,0,0,0));
+        btnConcede.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getConcedeButtonImage()));
+        btnConcede.setToolTipText("Concede the current game.");
+        btnConcede.setFocusable(false);
+        btnConcede.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                if (evt.getButton() == MouseEvent.BUTTON1) {
+                    btnConcedeActionPerformed(null);
+                }
+            }
+        });
 
 
         KeyStroke ks2 = KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0);
@@ -1077,20 +1137,31 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
 
-
-        btnSwitchHands.setText("Switch Hands");
+        btnSwitchHands.setContentAreaFilled(false);
+        btnSwitchHands.setBorder(new EmptyBorder(0,0,0,0));
+        btnSwitchHands.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSwitchHandsButtonImage()));
+        btnSwitchHands.setFocusable(false);
+        btnSwitchHands.setToolTipText("Switch between your hand cards and hand cards of controlled players.");
         btnSwitchHands.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                btnSwitchHandActionPerformed(null);
+                if (evt.getButton() == MouseEvent.BUTTON1) {
+                    btnSwitchHandActionPerformed(null);
+                }
             }
         });
 
-        btnStopWatching.setText("Stop Watching");
-        btnStopWatching.addActionListener(new java.awt.event.ActionListener() {
+        btnStopWatching.setContentAreaFilled(false);
+        btnStopWatching.setBorder(new EmptyBorder(0,0,0,0));
+        btnStopWatching.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getStopWatchButtonImage()));
+        btnStopWatching.setFocusable(false);
+        btnSwitchHands.setToolTipText("Stop watching this game.");
+        btnStopWatching.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnStopWatchingActionPerformed(evt);
+            public void mouseClicked(MouseEvent evt) {
+                if (evt.getButton() == MouseEvent.BUTTON1) {
+                    btnStopWatchingActionPerformed(null);
+                }
             }
         });
 
@@ -1163,35 +1234,32 @@ public final class GamePanel extends javax.swing.JPanel {
         );
 
         // Game info panel (buttons on the right panel)
-        javax.swing.GroupLayout gl_pnlGameInfo = new javax.swing.GroupLayout(pnlGameInfo);
-        pnlGameInfo.setLayout(gl_pnlGameInfo);
-        gl_pnlGameInfo.setHorizontalGroup(
-                gl_pnlGameInfo.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(gl_pnlGameInfo.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(btnConcede)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCancelSkip)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEndTurn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        javax.swing.GroupLayout gl_pnlShortCuts = new javax.swing.GroupLayout(pnlShortCuts);
+        pnlShortCuts.setLayout(gl_pnlShortCuts);
+        gl_pnlShortCuts.setHorizontalGroup(gl_pnlShortCuts.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(gl_pnlShortCuts.createSequentialGroup()
+                                .addComponent(btnSkipToNextTurn)
+                                .addComponent(btnSkipToEndTurn)
+                                .addComponent(btnSkipToNextMain)
                                 .addComponent(btnSkipToYourTurn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        )
+                        .addGroup(gl_pnlShortCuts.createSequentialGroup()
                                 .addComponent(btnSwitchHands)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCancelSkip)
+                                .addComponent(btnConcede)
                                 .addComponent(btnStopWatching)
-                                .addContainerGap(62, Short.MAX_VALUE))
+                        )
                                 //.addComponent(bigCard, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
                                 //.addComponent(feedbackPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
                                 //.addComponent(stack, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-                        .addGroup(gl_pnlGameInfo.createSequentialGroup()
+
+                        .addGroup(gl_pnlShortCuts.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(pnlReplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(51, Short.MAX_VALUE))
         );
-        gl_pnlGameInfo.setVerticalGroup(
-            gl_pnlGameInfo.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(gl_pnlGameInfo.createSequentialGroup()
+        gl_pnlShortCuts.setVerticalGroup(gl_pnlShortCuts.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gl_pnlShortCuts.createSequentialGroup()
                     //.addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     //.addGap(1, 1, 1)
                             //.addComponent(feedbackPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1199,13 +1267,20 @@ public final class GamePanel extends javax.swing.JPanel {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
                     .addComponent(pnlReplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(gl_pnlGameInfo.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnConcede)
-                            .addComponent(btnCancelSkip)
-                            .addComponent(btnEndTurn)
+
+                    .addGroup(gl_pnlShortCuts.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnSkipToNextTurn)
+                            .addComponent(btnSkipToEndTurn)
+                            .addComponent(btnSkipToNextMain)
                             .addComponent(btnSkipToYourTurn)
+                    )
+                    .addGroup(gl_pnlShortCuts.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnSwitchHands)
-                            .addComponent(btnStopWatching)))
+                            .addComponent(btnCancelSkip)
+                            .addComponent(btnConcede)
+                            .addComponent(btnStopWatching)
+                    )
+            )
         );
 
         pnlBattlefield.setLayout(new java.awt.GridBagLayout());
@@ -1273,7 +1348,7 @@ public final class GamePanel extends javax.swing.JPanel {
                                             .addComponent(handContainer, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         )
                                         .addGroup(gl_jPanel3.createParallelGroup(Alignment.LEADING)                                        
-                                            .addComponent(pnlGameInfo, 400, 400, 400)
+                                            .addComponent(pnlShortCuts, 400, 400, 400)
                                             .addComponent(stack, 400, 400, 400)
                                         )
                                 )
@@ -1294,7 +1369,7 @@ public final class GamePanel extends javax.swing.JPanel {
                                         //.addPreferredGap(ComponentPlacement.RELATED)
                                 .addGroup(gl_jPanel3.createParallelGroup(Alignment.LEADING)
                                         .addGroup(gl_jPanel3.createSequentialGroup()
-                                                .addComponent(pnlGameInfo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(pnlShortCuts, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                                 .addGap(0)
                                                 .addComponent(stack, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         )
@@ -1321,16 +1396,6 @@ public final class GamePanel extends javax.swing.JPanel {
         gbc.weightx = 1.0; gbc.weighty = 1.0;
         gbl.setConstraints( bigCard, gbc );
         jPanel2.add( bigCard );
-
-//        GridBagConstraints gbc2 = new GridBagConstraints();
-//        gbc2.fill = GridBagConstraints.NONE;
-//        gbc2.gridx = 0; gbc2.gridy = GridBagConstraints.RELATIVE;
-//        gbc2.gridwidth = 1; gbc2.gridheight = 1; //size 1/5
-//        gbc2.weightx = 0.0; gbc2.weighty = 0.0;
-//        gl_jPanel3.setConstraints( pnlGameInfo, gbc2 );
-        
-//        gbl.setConstraints( pnlGameInfo, gbc2 );        
-//        jPanel2.add( pnlGameInfo );
 
         jPanel2.setOpaque(false);
 
@@ -1364,11 +1429,20 @@ public final class GamePanel extends javax.swing.JPanel {
         for (MouseListener ml :this.btnSkipToYourTurn.getMouseListeners()) {
             this.btnSkipToYourTurn.removeMouseListener(ml);
         }
-        for (MouseListener ml :this.btnEndTurn.getMouseListeners()) {
-            this.btnEndTurn.removeMouseListener(ml);
+        for (MouseListener ml :this.btnSkipToEndTurn.getMouseListeners()) {
+            this.btnSkipToEndTurn.removeMouseListener(ml);
+        }
+        for (MouseListener ml :this.btnSkipToNextMain.getMouseListeners()) {
+            this.btnSkipToNextMain.removeMouseListener(ml);
+        }
+        for (MouseListener ml :this.btnSkipToNextTurn.getMouseListeners()) {
+            this.btnSkipToNextTurn.removeMouseListener(ml);
         }
         for (MouseListener ml :this.btnSwitchHands.getMouseListeners()) {
             this.btnSwitchHands.removeMouseListener(ml);
+        }
+        for (MouseListener ml :this.btnStopWatching.getMouseListeners()) {
+            this.btnStopWatching.removeMouseListener(ml);
         }
         for (MouseListener ml :this.jPhases.getMouseListeners()) {
             this.jPhases.removeMouseListener(ml);
@@ -1381,9 +1455,6 @@ public final class GamePanel extends javax.swing.JPanel {
         }
         for (ActionListener al :this.btnPlay.getActionListeners()) {
             this.btnPlay.removeActionListener(al);
-        }
-        for (ActionListener al :this.btnStopWatching.getActionListeners()) {
-            this.btnStopWatching.removeActionListener(al);
         }
         for (ActionListener al :this.btnStopReplay.getActionListeners()) {
             this.btnStopReplay.removeActionListener(al);
@@ -1557,12 +1628,15 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private mage.client.components.ability.AbilityPicker abilityPicker;
     private mage.client.cards.BigCard bigCard;
-    
+
+//    private JPanel cancelSkipPanel;
     private javax.swing.JButton btnCancelSkip;
+    private javax.swing.JButton btnSkipToNextTurn; // F4
+    private javax.swing.JButton btnSkipToEndTurn; // F5
+    private javax.swing.JButton btnSkipToNextMain; // F7
+    private javax.swing.JButton btnSkipToYourTurn; // F9
+
     private javax.swing.JButton btnConcede;
-    private javax.swing.JButton btnEndTurn;
-    private javax.swing.JButton btnSkipToYourTurn;
-    
     private javax.swing.JButton btnSwitchHands;
     
     private javax.swing.JButton btnNextPlay;
@@ -1586,7 +1660,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblStep;
     private javax.swing.JLabel lblTurn;
     private javax.swing.JPanel pnlBattlefield;
-    private javax.swing.JPanel pnlGameInfo;
+    private javax.swing.JPanel pnlShortCuts;
     private javax.swing.JPanel pnlReplay;
     private javax.swing.JLabel txtActivePlayer;
     private javax.swing.JLabel txtPhase;
