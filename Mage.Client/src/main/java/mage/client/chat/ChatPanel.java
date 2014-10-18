@@ -312,9 +312,9 @@ public class ChatPanel extends javax.swing.JPanel {
             TableColumnModel tcm = th.getColumnModel();
             tcm.getColumn(0).setHeaderValue("Players (" + this.players.length + ")");
             tcm.getColumn(2).setHeaderValue(
-                    "Games (" + roomUserInfo.getNumberActiveGames() +
-                    (roomUserInfo.getNumberActiveGames() != roomUserInfo.getNumberGameThreads() ? " T:" + roomUserInfo.getNumberGameThreads():"") +
-                    " max: " + roomUserInfo.getNumberMaxGames() + ")");
+                    "Games " + roomUserInfo.getNumberActiveGames() +
+                    (roomUserInfo.getNumberActiveGames() != roomUserInfo.getNumberGameThreads() ? " (T:" + roomUserInfo.getNumberGameThreads():" (") +
+                    " limit: " + roomUserInfo.getNumberMaxGames() + ")");
             th.repaint();
             this.fireTableDataChanged();
         }
