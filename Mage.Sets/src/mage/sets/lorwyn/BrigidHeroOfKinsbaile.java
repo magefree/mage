@@ -28,9 +28,6 @@
 package mage.sets.lorwyn;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,7 +35,9 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -70,7 +69,7 @@ public class BrigidHeroOfKinsbaile extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
 
-        // {tap}: Brigid, Hero of Kinsbaile deals 2 damage to each attacking or blocking creature target player controls.
+        // {t}: Brigid, Hero of Kinsbaile deals 2 damage to each attacking or blocking creature target player controls.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BrigidHeroOfKinsbaileEffect(), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -114,7 +113,7 @@ class BrigidHeroOfKinsbaileEffect extends OneShotEffect {
         if (targetPlayer != null) {
             for (Permanent creature : game.getBattlefield().getActivePermanents(filter, targetPlayer.getId(), game)) {
                 if (creature != null) {
-                    creature.damage(2, id, game, false, false);
+                    creature.damage(2, source.getSourceId(), game, false, true);
                 }
             }
             return true;

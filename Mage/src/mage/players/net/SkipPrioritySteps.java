@@ -27,13 +27,14 @@
  */
 package mage.players.net;
 
+import java.io.Serializable;
 import mage.constants.PhaseStep;
 
 /**
  *
  * @author LevelX2
  */
-public class SkipPrioritySteps {
+public class SkipPrioritySteps implements Serializable {
     boolean upkeep;
     boolean draw;
     boolean main1;

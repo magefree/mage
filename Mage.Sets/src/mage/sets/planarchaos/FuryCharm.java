@@ -83,8 +83,12 @@ public class FuryCharm extends CardImpl {
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
         // or target creature gets +1/+1 and gains trample until end of turn;
         Mode mode = new Mode();
-        mode.getEffects().add(new BoostTargetEffect(1,1, Duration.EndOfTurn));
-        mode.getEffects().add(new GainAbilityTargetEffect(TrampleAbility.getInstance(),Duration.EndOfTurn));
+        Effect effect = new BoostTargetEffect(1,1, Duration.EndOfTurn);
+        effect.setText("target creature gets +1/+1");
+        mode.getEffects().add(effect);
+        effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(),Duration.EndOfTurn);
+        effect.setText("and gains trample until end of turn");
+        mode.getEffects().add(effect);
         mode.getTargets().add(new TargetCreaturePermanent());
         this.getSpellAbility().getModes().addMode(mode);
         // or remove two time counters from target permanent or suspended card.

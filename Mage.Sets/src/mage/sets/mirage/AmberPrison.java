@@ -79,7 +79,6 @@ public class AmberPrison extends CardImpl {
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
         this.addAbility(new AmberPrisonUntapTriggeredAbility());
-
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AmberPrisonRestrictionEffect()));
     }
 
@@ -179,10 +178,7 @@ class AmberPrisonUntapTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.UNTAPPED) && event.getTargetId().equals(this.getSourceId())) {
-            return true;
-        }
-        return false;
+        return event.getType().equals(GameEvent.EventType.UNTAPPED) && event.getTargetId().equals(this.getSourceId());
     }
     
 }

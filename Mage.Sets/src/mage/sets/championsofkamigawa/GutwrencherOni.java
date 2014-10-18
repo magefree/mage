@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -71,7 +71,7 @@ public class GutwrencherOni extends CardImpl {
         // At the beginning of your upkeep, discard a card if you don't control an Ogre.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ConditionalOneShotEffect(
                 new DiscardControllerEffect(1),
-                new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.EQUAL_TO, 0),
+                new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.EQUAL_TO, 0),
                 "discard a card if you don't control an Ogre"), TargetController.YOU, false));
 
     }

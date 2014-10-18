@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.TargetController;
@@ -69,7 +69,7 @@ public class Biovisionary extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD, new WinGameSourceControllerEffect(), 
                 TargetController.ANY, 
-                new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 3), 
+                new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 3), 
                 false));
     }
 

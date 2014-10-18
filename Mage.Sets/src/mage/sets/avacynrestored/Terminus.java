@@ -58,7 +58,7 @@ public class Terminus extends CardImpl {
         // Put all creatures on the bottom of their owners' libraries.
         this.getSpellAbility().addEffect(new TerminusEffect());
 
-        this.addAbility(new MiracleAbility(new ManaCostsImpl("{W}")));
+        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{W}")));
     }
 
     public Terminus(final Terminus card) {

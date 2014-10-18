@@ -29,7 +29,7 @@ package mage.sets.nemesis;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.GainLifePlayersCost;
 import mage.cards.CardImpl;
@@ -60,7 +60,7 @@ public class SkyshroudCutter extends CardImpl {
         this.toughness = new MageInt(2);
 
         // If you control a Forest, rather than pay Skyshroud Cutter's mana cost, you may have each other player gain 5 life.
-        this.addAbility(new AlternativeCostSourceAbility(new GainLifePlayersCost(6), new ControlsPermanentCondition(filter)));        
+        this.addAbility(new AlternativeCostSourceAbility(new GainLifePlayersCost(6), new PermanentsOnTheBattlefieldCondition(filter)));        
     }
 
     public SkyshroudCutter(final SkyshroudCutter card) {

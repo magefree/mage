@@ -53,25 +53,36 @@ public class Effects extends ArrayList<Effect> {
         return new Effects(this);
     }
 
+    public String getTextStartingUpperCase(Mode mode) {
+        String text = getText(mode);
+        if (text.length() > 3) {
+            return Character.toUpperCase(text.charAt(0)) + text.substring(1);
+        }
+        return text;
+    }
+
     public String getText(Mode mode) {
         StringBuilder sbText = new StringBuilder();
-        String rule = null;
+        String lastRule = null;
         for (Effect effect: this) {
-            String endString = "";
-            if (rule != null && rule.length()> 3 && !rule.endsWith(".")) {
-                endString = ". ";
-            }
-            rule = effect.getText(mode);
-            if (rule != null) {
-                if (rule.startsWith("and ") || rule.startsWith("with ")) {
+            String endString = "";            
+            String nextRule = effect.getText(mode);
+            if (nextRule != null) {
+                if (nextRule.startsWith("and ") || nextRule.startsWith("with ")) {
                     endString = " ";
-                } else if (rule.startsWith(",")) {
+                } else if (nextRule.startsWith(",")) {
                     endString = "";
+                } else if (lastRule != null && lastRule.length()> 3 && !lastRule.endsWith(".")) {
+                    endString = ". ";
+                    if (nextRule.length() > 3) {
+                        nextRule = Character.toUpperCase(nextRule.charAt(0)) + nextRule.substring(1);
+                    }
                 }
-                sbText.append(endString).append(rule);
+                sbText.append(endString).append(nextRule);
             }
+            lastRule = nextRule;
         }
-        if (rule != null && rule.length()> 3 && !rule.endsWith(".") && !rule.endsWith("\"") && !rule.startsWith("<b>Level ")) {
+        if (lastRule != null && lastRule.length()> 3 && !lastRule.endsWith(".") && !lastRule.endsWith("\"") && !lastRule.startsWith("<b>Level ")) {
             sbText.append(".");
         }
         return sbText.toString();
@@ -91,7 +102,7 @@ public class Effects extends ArrayList<Effect> {
         for (Effect effect: this) {
             outcomes.add(effect.getOutcome());
         }
-        return new ArrayList(outcomes);
+        return new ArrayList<>(outcomes);
     }
 
     public int getOutcomeTotal() {

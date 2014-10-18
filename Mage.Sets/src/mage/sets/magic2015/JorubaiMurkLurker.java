@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
@@ -72,7 +72,7 @@ public class JorubaiMurkLurker extends CardImpl {
         // Jorubai Murk Lurker gets +1/+1 as long as you control a Swamp.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
-                new ControlsPermanentCondition(filter), rule)));
+                new PermanentsOnTheBattlefieldCondition(filter), rule)));
 
         // {1}{B}: Target creature gains lifelink until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 

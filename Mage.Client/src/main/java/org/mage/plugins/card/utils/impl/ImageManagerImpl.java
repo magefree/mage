@@ -237,9 +237,73 @@ public class ImageManagerImpl implements ImageManager {
         return imageDlgActiveNextButton;
     }
 
+    @Override
+    public Image getConcedeButtonImage() {
+        if (imageConcedeButton == null) {
+            imageConcedeButton = getBufferedImageFromResource("/buttons/concede.png");
+        }
+        return imageConcedeButton;
+    }
+
+    @Override
+    public Image getSwitchHandsButtonImage() {
+        if (imageSwitchHandsButton == null) {
+            imageSwitchHandsButton = getBufferedImageFromResource("/buttons/switch_hands.png");
+        }
+        return imageSwitchHandsButton;
+    }
+
+    @Override
+    public Image getStopWatchButtonImage() {
+        if (imageStopWatchingButton == null) {
+            imageStopWatchingButton = getBufferedImageFromResource("/buttons/stop_watching.png");
+        }
+        return imageStopWatchingButton;
+    }
+
+    @Override
+    public Image getCancelSkipButtonImage() {
+        if (imageCancelSkipButton == null) {
+            imageCancelSkipButton = getBufferedImageFromResource("/buttons/cancel_skip.png");
+        }
+        return imageCancelSkipButton;
+    }
+
+    @Override
+    public Image getSkipNextTurnButtonImage() {
+        if (imageSkipNextTurnButton == null) {
+            imageSkipNextTurnButton = getBufferedImageFromResource("/buttons/skip_turn.png");
+        }
+        return imageSkipNextTurnButton;
+    }
+
+    @Override
+    public Image getSkipEndTurnButtonImage() {
+        if (imageSkipToEndTurnButton == null) {
+            imageSkipToEndTurnButton = getBufferedImageFromResource("/buttons/skip_to_end.png");
+        }
+        return imageSkipToEndTurnButton;
+    }
+
+    @Override
+    public Image getSkipMainButtonImage() {
+        if (imageSkipToMainButton == null) {
+            imageSkipToMainButton = getBufferedImageFromResource("/buttons/skip_to_main.png");
+        }
+        return imageSkipToMainButton;
+    }
+
+    @Override
+    public Image getSkipYourNextTurnButtonImage() {
+        if (imageSkipYourNextTurnButton == null) {
+            imageSkipYourNextTurnButton = getBufferedImageFromResource("/buttons/skip_all.png");
+        }
+        return imageSkipYourNextTurnButton;
+    }
+
     protected static Image getImageFromResourceTransparent(String path, Color mask, Rectangle rec) {
-        BufferedImage image = null;
-        Image imageCardTransparent = null;
+        BufferedImage image;
+        Image imageCardTransparent;
         Image resized = null;
 
         URL imageURL = ImageManager.class.getResource(path);
@@ -316,6 +380,15 @@ public class ImageManagerImpl implements ImageManager {
     private static BufferedImage imageDlgActivePrevButton;
     private static BufferedImage imageDlgNextButton;
     private static BufferedImage imageDlgActiveNextButton;
+
+    private static BufferedImage imageCancelSkipButton;
+    private static BufferedImage imageSwitchHandsButton;
+    private static BufferedImage imageStopWatchingButton;
+    private static BufferedImage imageConcedeButton;
+    private static BufferedImage imageSkipNextTurnButton;
+    private static BufferedImage imageSkipToEndTurnButton;
+    private static BufferedImage imageSkipToMainButton;
+    private static BufferedImage imageSkipYourNextTurnButton;
 
     private static Map<String, Image> phasesImages;
 }

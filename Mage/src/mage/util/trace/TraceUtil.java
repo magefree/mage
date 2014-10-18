@@ -1,5 +1,8 @@
 package mage.util.trace;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
@@ -123,48 +126,69 @@ public class TraceUtil {
     }
     
     private static void traceCombat(Game game, Permanent attacker, Permanent blocker) {
-        String uuid = "[" + UUID.randomUUID() + "] ";
-        log.error(uuid+"Tracing game state...");
+        String prefix = "> ";
+        log.error(prefix+"Tracing game state...");
         if (blocker != null) {
-            log.error(uuid+blocker.getLogName() + " could block " + attacker.getLogName());
+            log.error(prefix+blocker.getLogName() + " could block " + attacker.getLogName());
         }
 
-        log.error(uuid);
-        log.error(uuid+"Attacker abilities: ");
+        log.error(prefix);
+        log.error(prefix+"Attacker abilities: ");
         for (Ability ability : attacker.getAbilities()) {
-            log.error(uuid+"     " + ability.toString() + ", id=" + ability.getId());
+            log.error(prefix+"     " + ability.toString() + ", id=" + ability.getId());
         }
         if (blocker != null) {
-            log.error(uuid+"Blocker abilities: ");
+            log.error(prefix+"Blocker abilities: ");
             for (Ability ability : blocker.getAbilities()) {
-                log.error(uuid+"     " + ability.toString() + ", id=" + ability.getId());
+                log.error(prefix+"     " + ability.toString() + ", id=" + ability.getId());
             }
         }
 
-        log.error(uuid);
-        log.error(uuid+"Flying ability id: " + FlyingAbility.getInstance().getId());
-        log.error(uuid+"Reach ability id: " + ReachAbility.getInstance().getId());
-        log.error(uuid+"Intimidate ability id: " + IntimidateAbility.getInstance().getId());
-        log.error(uuid);
+        log.error(prefix);
+        log.error(prefix+"Flying ability id: " + FlyingAbility.getInstance().getId());
+        log.error(prefix+"Reach ability id: " + ReachAbility.getInstance().getId());
+        log.error(prefix+"Intimidate ability id: " + IntimidateAbility.getInstance().getId());
+        log.error(prefix);
 
-        log.error(uuid+"Restriction effects:");
-        Ability ability = attacker.getAbilities().size() > 0 ? attacker.getAbilities().get(0) : null;
-        ContinuousEffectsList<RestrictionEffect> restrictionEffects = (ContinuousEffectsList<RestrictionEffect>) game.getContinuousEffects().getRestrictionEffects();
-        for (RestrictionEffect effect : restrictionEffects) {
-            log.error(uuid+"    " + effect);
-            log.error(uuid+"        id=" + effect.getId());
-            log.error(uuid+"        applies to attacker=" + effect.applies(attacker, ability, game));
-            if (blocker != null) {            
-                log.error(uuid+"        applies to blocker=" + effect.applies(blocker, ability, game));
+        log.error(prefix+"Restriction effects:");
+        log.error(prefix+"  Applied to ATTACKER:");
+        HashMap<RestrictionEffect, HashSet<Ability>> attackerResEffects = game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game);
+        for (Map.Entry<RestrictionEffect, HashSet<Ability>> entry : attackerResEffects.entrySet()) {
+            log.error(prefix+"    " + entry.getKey());
+            log.error(prefix+"        id=" + entry.getKey().getId());
+            for (Ability ability: entry.getValue()) {
+                log.error(prefix+"        ability=" + ability);                
             }
         }
-
-        traceForPermanent(game, attacker, uuid, restrictionEffects);
+        log.error(prefix+"  Applied to BLOCKER:");
         if (blocker != null) {
-            traceForPermanent(game, blocker, uuid, restrictionEffects);
+            HashMap<RestrictionEffect, HashSet<Ability>> blockerResEffects = game.getContinuousEffects().getApplicableRestrictionEffects(blocker, game);
+            for (Map.Entry<RestrictionEffect, HashSet<Ability>> entry : blockerResEffects.entrySet()) {
+                log.error(prefix+"    " + entry.getKey());
+                log.error(prefix+"        id=" + entry.getKey().getId());
+                for (Ability ability: entry.getValue()) {
+                    log.error(prefix+"        ability=" + ability);                
+                }
+            }
+        }
+        ContinuousEffectsList<RestrictionEffect> restrictionEffects = (ContinuousEffectsList<RestrictionEffect>) game.getContinuousEffects().getRestrictionEffects();
+        log.error(prefix);
+        log.error(prefix+"  List of all restriction effects:");
+        for (RestrictionEffect effect : restrictionEffects) {
+            log.error(prefix+"    " + effect);
+            log.error(prefix+"        id=" + effect.getId());
         }
 
-        log.error(uuid);
+        log.error(prefix);
+        log.error(prefix+"  Trace Attacker:");
+        traceForPermanent(game, attacker, prefix, restrictionEffects);
+        if (blocker != null) {
+            log.error(prefix);
+            log.error(prefix+"  Trace Blocker:");            
+            traceForPermanent(game, blocker, prefix, restrictionEffects);
+        }
+
+        log.error(prefix);
     }
 
     private static void traceForPermanent(Game game, Permanent permanent, String uuid, ContinuousEffectsList<RestrictionEffect> restrictionEffects) {

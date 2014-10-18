@@ -249,7 +249,7 @@ public class TableController {
             return false;
         }
         // check password
-        if (!table.getMatch().getOptions().getPassword().isEmpty()) {
+        if (!table.getMatch().getOptions().getPassword().isEmpty() && playerType.equals("Human")) {
             if (!table.getMatch().getOptions().getPassword().equals(password)) {
                 user.showUserMessage("Join Table", "Wrong password.");
                 return false;
@@ -608,10 +608,9 @@ public class TableController {
 
 
             // log about game started
-            logger.info("GAME started [" + match.getName() +"] "+ creator + " - " + opponent.toString());
+            logger.info("GAME started " + match.getGame().getId() + " [" + match.getName() +"] "+ creator + " - " + opponent.toString());
             logger.debug("- matchId: " + match.getId() + " [" + match.getName() + "]");
             if (match.getGame() != null) {
-                logger.debug("- gameId:  " + match.getGame().getId());
                 logger.debug("- chatId:  " + GameManager.getInstance().getChatId(match.getGame().getId()));
             } else {
                 logger.debug("- no valid game object");

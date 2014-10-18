@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.decorator.ConditionalGainActivatedAbility;
@@ -68,11 +68,11 @@ public class VillainousOgre extends CardImpl {
         this.addAbility(new CantBlockAbility());
 
         // As long as you control a Demon, Villainous Ogre has "{B}: Regenerate Villainous Ogre.
-        this.addAbility( new ConditionalGainActivatedAbility(
+        this.addAbility(new ConditionalGainActivatedAbility(
                 Zone.BATTLEFIELD,
                 new RegenerateSourceEffect(), 
                 new ColoredManaCost(ColoredManaSymbol.B),
-                new ControlsPermanentCondition(filter), 
+                new PermanentsOnTheBattlefieldCondition(filter), 
                 rule));        
     }
 

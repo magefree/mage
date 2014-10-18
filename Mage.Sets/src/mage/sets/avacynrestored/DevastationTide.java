@@ -58,7 +58,7 @@ public class DevastationTide extends CardImpl {
         this.getSpellAbility().addEffect(new DevastationTideEffect());
 
         // Miracle {1}{U}
-        this.addAbility(new MiracleAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{1}{U}")));
     }
 
     public DevastationTide(final DevastationTide card) {

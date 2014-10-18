@@ -837,7 +837,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     resetStoredBookmark(game);
                     return true;
                 }
-                game.restoreState(bookmark);
+                game.restoreState(bookmark, ability.getRule());
             }
         }
         return false;
@@ -881,7 +881,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     return true;
                 }
             }
-            game.restoreState(bookmark);
+            game.restoreState(bookmark, ability.getRule());
         }
         return false;
     }
@@ -900,7 +900,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     resetStoredBookmark(game);
                     return true;
                 }
-                game.restoreState(bookmark);
+                game.restoreState(bookmark, ability.getRule());
             }
         } else {
             int bookmark = game.bookmarkState();
@@ -910,7 +910,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 resetStoredBookmark(game);
                 return true;
             }
-            game.restoreState(bookmark);
+            game.restoreState(bookmark, ability.getRule());
         }
         return false;
     }
@@ -928,7 +928,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     return true;
                 }
             }
-            game.restoreState(bookmark);
+            game.restoreState(bookmark, action.getRule());
         }
         return false;
     }
@@ -988,7 +988,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.getStack().push(new StackAbility(ability, playerId));
             }
             if (ability.activate(game, false)) {
-                if (ability.getRuleVisible()) {
+                if (ability.isUsesStack() || ability.getRuleVisible()) {
                     game.informPlayers(ability.getGameLogMessage(game));
                 }
                 if (!ability.isUsesStack()) {
@@ -998,7 +998,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 return true;
             }
         }
-        game.restoreState(bookmark);
+        game.restoreState(bookmark, source.getRule());
         return false;
     }
 
@@ -1632,11 +1632,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void concede(Game game) {
-        logger.debug(this.getName() + (" concedes gameId:" +game.getId()));
         game.gameOver(playerId);
-        logger.debug("Before lost " + this.getName());
         lost(game);
-        logger.debug("After lost " + this.getName());
         this.left = true;
     }
 

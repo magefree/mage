@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
@@ -73,11 +73,11 @@ public class EsperStormblade extends CardImpl {
         // As long as you control another multicolored permanent, Esper Stormblade gets +1/+1 and has flying.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
                 new BoostSourceEffect(1,1, Duration.WhileOnBattlefield),
-                new ControlsPermanentCondition(filter),
+                new PermanentsOnTheBattlefieldCondition(filter),
                 "As long as you control another multicolored permanent, {this} gets +1/+1"));
         ability.addEffect(new ConditionalContinousEffect(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance()),
-                new ControlsPermanentCondition(filter),
+                new PermanentsOnTheBattlefieldCondition(filter),
                 "and has flying"));
         this.addAbility(ability);
     }

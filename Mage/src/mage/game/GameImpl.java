@@ -510,11 +510,11 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void restoreState(int bookmark) {
+    public void restoreState(int bookmark, String context) {
         if (!simulation && !this.hasEnded()) { // if player left or game is over no undo is possible - this could lead to wrong winner
             if (bookmark != 0) {
                 if (!savedStates.contains(bookmark - 1)) {
-                    throw new UnsupportedOperationException("It was not possible to do the requested undo operation (bookmark " + (bookmark -1) + " does not exist)");
+                    throw new UnsupportedOperationException("It was not possible to do the requested undo operation (bookmark " + (bookmark -1) + " does not exist) context: " + context);
                 }
                 int stateNum = savedStates.get(bookmark - 1);
                 removeBookmark(bookmark);
@@ -834,7 +834,6 @@ public abstract class GameImpl implements Game, Serializable {
         }
         state.getWatchers().add(new MorbidWatcher());
         state.getWatchers().add(new CastSpellLastTurnWatcher());
-        state.getWatchers().add(new MiracleWatcher());
         state.getWatchers().add(new SoulbondWatcher());
         state.getWatchers().add(new PlayerLostLifeWatcher());
         state.getWatchers().add(new BlockedAttackerWatcher());
@@ -1032,7 +1031,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (player != null) {
             int bookmark = player.getStoredBookmark();
             if (bookmark != -1) {
-                restoreState(bookmark);
+                restoreState(bookmark, "undo");
                 player.setStoredBookmark(-1);
                 fireUpdatePlayersEvent();
             }
@@ -1122,7 +1121,7 @@ public abstract class GameImpl implements Game, Serializable {
                         logger.fatal("Game exception gameId: " + getId(), ex);
                         ex.printStackTrace();
                         this.fireErrorEvent("Game exception occurred: ", ex);
-                        restoreState(bookmark);
+                        restoreState(bookmark, "");
                         bookmark = 0;
                         continue;
                     }

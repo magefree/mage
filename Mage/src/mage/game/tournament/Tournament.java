@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
+import mage.game.draft.Draft;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
@@ -93,4 +94,5 @@ public interface Tournament {
     void cleanUpOnTournamentEnd();
     boolean isAbort();
     void setAbort(boolean abort);
+    Draft getDraft();
 }

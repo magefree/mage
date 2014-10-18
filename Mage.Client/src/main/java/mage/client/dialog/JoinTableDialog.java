@@ -59,7 +59,7 @@ public class JoinTableDialog extends MageDialog {
         this.tableId = tableId;
         this.isTournament = isTournament;
         this.newPlayerPanel.setPlayerName(MageFrame.getSession().getUserName());
-        this.newPlayerPanel.showDeckElements(isLimited);
+        this.newPlayerPanel.showDeckElements(!isLimited);
         this.setModal(true);
         this.setLocation(100, 100);
         this.setVisible(true);

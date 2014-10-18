@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
@@ -67,11 +67,11 @@ public class ScrapyardMongrel extends CardImpl {
         // As long as you control an artifact, Scrapyard Mongrel gets +2/+0 and has trample.
         Effect boostEffect = new ConditionalContinousEffect(
                 new BoostSourceEffect(2, 0, Duration.WhileOnBattlefield),
-                new ControlsPermanentCondition(filter),
+                new PermanentsOnTheBattlefieldCondition(filter),
                 "As long as you control an artifact, {this} gets +2/+0");
         Effect gainAbilityEffect = new ConditionalContinousEffect(
                 new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield),
-                new ControlsPermanentCondition(filter),
+                new PermanentsOnTheBattlefieldCondition(filter),
                 "and has trample");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, boostEffect);
         ability.addEffect(gainAbilityEffect);

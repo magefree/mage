@@ -33,7 +33,7 @@ import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.abilities.Ability;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.WhileConditionContiniousEffect;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -50,7 +50,7 @@ public class BoostSourceWhileControlsEffect extends WhileConditionContiniousEffe
     private final String filterDescription;
 
     public BoostSourceWhileControlsEffect(FilterPermanent filter, int power, int toughness) {
-        super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, new ControlsPermanentCondition(filter), Outcome.BoostCreature);
+        super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, new PermanentsOnTheBattlefieldCondition(filter), Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
         this.filterDescription = filter.getMessage();

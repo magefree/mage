@@ -60,6 +60,7 @@ public class MatchOptions implements Serializable {
     public MatchOptions(String name, String gameType) {
         this.name = name;
         this.gameType = gameType;
+        this.password = "";
     }
 
     public String getName() {

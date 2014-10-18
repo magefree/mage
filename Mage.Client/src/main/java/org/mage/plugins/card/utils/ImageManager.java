@@ -30,5 +30,15 @@ public interface ImageManager {
     Image getDlgNextButtonImage();
     Image getDlgActiveNextButtonImage();
 
+    Image getSwitchHandsButtonImage();
+    Image getStopWatchButtonImage();
+    Image getConcedeButtonImage();
+    Image getCancelSkipButtonImage();
+    Image getSkipNextTurnButtonImage();
+    Image getSkipEndTurnButtonImage();
+    Image getSkipMainButtonImage();
+    Image getSkipYourNextTurnButtonImage();
+
+
     Image getPhaseImage(String phase);
 }

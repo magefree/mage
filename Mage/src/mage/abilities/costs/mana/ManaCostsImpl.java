@@ -144,7 +144,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
             game.removeBookmark(bookmark);
             return true;
         }
-        game.restoreState(bookmark);
+        game.restoreState(bookmark, ability.getRule());
         return false;
     }
 

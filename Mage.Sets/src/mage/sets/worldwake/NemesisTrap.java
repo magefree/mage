@@ -34,7 +34,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -74,7 +74,7 @@ public class NemesisTrap extends CardImpl {
         this.color.setBlack(true);
 
         // If a white creature is attacking, you may pay {B}{B} rather than pay Nemesis Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{B}{B}"), new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0, false)));
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{B}{B}"), new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 0, false)));
 
         // Exile target attacking creature. Put a token that's a copy of that creature onto the battlefield. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new NemesisTrapEffect());

@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
@@ -59,7 +59,7 @@ public class WoodbornBehemoth extends CardImpl {
         this.toughness = new MageInt(4);
 
         // As long as you control eight or more lands, Woodborn Behemoth gets +4/+4 and has trample.
-        ControlsPermanentCondition eightOrMoreLandCondition = new ControlsPermanentCondition(new FilterLandPermanent(), ControlsPermanentCondition.CountType.MORE_THAN,7);
+        PermanentsOnTheBattlefieldCondition eightOrMoreLandCondition = new PermanentsOnTheBattlefieldCondition(new FilterLandPermanent(), PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN,7);
         ConditionalContinousEffect effect1 = new ConditionalContinousEffect(
                 new BoostSourceEffect(4,4, Duration.WhileOnBattlefield), eightOrMoreLandCondition,
                 "As long as you control eight or more lands, {this} gets +4/+4");

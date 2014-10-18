@@ -83,7 +83,6 @@ import mage.remote.Session;
 import mage.view.MatchView;
 import mage.view.RoomUsersView;
 import mage.view.TableView;
-import mage.view.UsersView;
 import org.apache.log4j.Logger;
 
 /**
@@ -252,8 +251,8 @@ public class TablesPanel extends javax.swing.JPanel {
     private void saveDividerLocations() {
         // save panel sizes and divider locations.
         Rectangle rec = MageFrame.getDesktop().getBounds();
-        StringBuilder sb = new StringBuilder(Double.toString(rec.getWidth())).append("x").append(Double.toString(rec.getHeight()));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, sb.toString());
+        String sb = Double.toString(rec.getWidth()) + "x" + Double.toString(rec.getHeight());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, sb);
         PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_1, Integer.toString(this.jSplitPane1.getDividerLocation()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_2, Integer.toString(this.jSplitPane2.getDividerLocation()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_3, Integer.toString(chatPanel.getSplitDividerLocation()));
@@ -263,9 +262,9 @@ public class TablesPanel extends javax.swing.JPanel {
         Rectangle rec = MageFrame.getDesktop().getBounds();
         if (rec != null) {
             String size = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, null);
-            StringBuilder sb = new StringBuilder(Double.toString(rec.getWidth())).append("x").append(Double.toString(rec.getHeight()));
+            String sb = Double.toString(rec.getWidth()) + "x" + Double.toString(rec.getHeight());
             // use divider positions only if screen size is the same as it was the time the settings were saved
-            if (size != null && size.equals(sb.toString())) {
+            if (size != null && size.equals(sb)) {
                 String location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_1, null);
                 if (location != null && jSplitPane1 != null) {
                     jSplitPane1.setDividerLocation(Integer.parseInt(location));

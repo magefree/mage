@@ -61,7 +61,7 @@ public class BonfireOfTheDamned extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Miracle {X}{R}
-        this.addAbility(new MiracleAbility(new ManaCostsImpl("{X}{R}")));
+        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{X}{R}")));
     }
 
     public BonfireOfTheDamned(final BonfireOfTheDamned card) {

@@ -1,4 +1,4 @@
-/*
+    /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
@@ -58,12 +58,18 @@ public class CleanupStep extends Step {
         game.getState().setPriorityPlayerId(activePlayer.getId());
         //20091005 - 514.1
         if (activePlayer.isInGame()) {
-            activePlayer.discardToMax(game);
-            activePlayer.setGameUnderYourControl(true);
+            activePlayer.discardToMax(game);            
         }
         //20100423 - 514.2
         game.getBattlefield().endOfTurn(activePlayerId, game);
         game.getState().removeEotEffects(game);
+    }
+
+    @Override
+    public void endStep(Game game, UUID activePlayerId) {
+        Player activePlayer = game.getPlayer(activePlayerId);
+        activePlayer.setGameUnderYourControl(true);
+        super.endStep(game, activePlayerId);         
     }
 
     @Override

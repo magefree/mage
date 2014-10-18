@@ -45,7 +45,7 @@ public class ReplayManager {
 
     private ReplayManager() {}
 
-    private final ConcurrentHashMap<String, ReplaySession> replaySessions = new ConcurrentHashMap<String, ReplaySession>();
+    private final ConcurrentHashMap<String, ReplaySession> replaySessions = new ConcurrentHashMap<>();
 
     public void replayGame(UUID gameId, UUID userId) {
         ReplaySession replaySession = new ReplaySession(gameId, userId);

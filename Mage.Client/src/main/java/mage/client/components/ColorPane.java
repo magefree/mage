@@ -1,7 +1,16 @@
 package mage.client.components;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Graphics;
+import static javafx.scene.paint.Color.color;
+import javax.swing.JEditorPane;
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
 
@@ -10,14 +19,14 @@ import javax.swing.text.html.HTMLEditorKit;
  *
  * @author nantuko
  */
-public class ColorPane extends JTextPane {
+public class ColorPane extends JEditorPane {
 
     HTMLEditorKit kit = new HTMLEditorKit();
-    HTMLDocument doc = new HTMLDocument();
+    HTMLDocument doc =  new HTMLDocument();
     
     public ColorPane() {
         this.setEditorKit(kit);
-        this.setDocument(doc);        
+        this.setDocument(doc);
     }
     /**
      * This method solves the known issue with Nimbus LAF background transparency and background color.
@@ -36,26 +45,14 @@ public class ColorPane extends JTextPane {
         super.setText(string); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void append(String s) {
+    public void append(String text) {
         try {
             setEditable(true);
-            kit.insertHTML(doc, doc.getLength(), s, 0, 0, null);
+            kit.insertHTML(doc, doc.getLength(), text, 0, 0, null);
+            setEditable(false);
             int len = getDocument().getLength();
             setCaretPosition(len);
-            setEditable(false);
-            
-//            
-//            
-//            StyleContext sc = StyleContext.getDefaultStyleContext();
-//            AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, color);
-//
-//            int len = getDocument().getLength();
-//
-//            setCaretPosition(len);
-//            setCharacterAttributes(aset, false);
-//            replaceSelection(s);
-//
-//           
+
         } catch (Exception e) {
             e.printStackTrace();
         }

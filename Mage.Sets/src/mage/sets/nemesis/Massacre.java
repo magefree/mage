@@ -30,7 +30,7 @@ package mage.sets.nemesis;
 import java.util.UUID;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.effects.common.continious.BoostAllEffect;
@@ -64,7 +64,7 @@ public class Massacre extends CardImpl {
         // If an opponent controls a Plains and you control a Swamp, you may cast Massacre without paying its mana cost.
         Condition condition = new CompoundCondition("If an opponent controls a Plains and you control a Swamp", 
                 new OpponentControlsPermanentCondition(filterPlains),
-                new ControlsPermanentCondition(filterSwamp));
+                new PermanentsOnTheBattlefieldCondition(filterSwamp));
         this.addAbility(new AlternativeCostSourceAbility(null, condition));
         // All creatures get -2/-2 until end of turn.
         this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn));

@@ -32,8 +32,8 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.ControlsPermanentCondition;
-import mage.abilities.condition.common.ControlsPermanentCondition.CountType;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -71,7 +71,7 @@ public class AshenmoorCohort extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Ashenmoor Cohort gets +1/+1 as long as you control another black creature.
-        Condition condition = new ControlsPermanentCondition(filter, CountType.MORE_THAN, 0);
+        Condition condition = new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0);
         ConditionalContinousEffect effect = new ConditionalContinousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), condition, rule);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 

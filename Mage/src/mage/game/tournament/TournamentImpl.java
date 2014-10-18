@@ -41,6 +41,7 @@ import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
 import mage.constants.TournamentPlayerState;
+import mage.game.draft.Draft;
 import mage.game.draft.DraftCube;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
@@ -77,9 +78,11 @@ public abstract class TournamentImpl implements Tournament {
     protected Date stepStartTime;
     protected boolean abort;
     protected String tournamentState;
-   
+    protected Draft draft;
+
     public TournamentImpl(TournamentOptions options) {
         this.options = options;
+        draft = null;
         startTime = new Date();
         abort = false;
     }
@@ -389,17 +392,11 @@ public abstract class TournamentImpl implements Tournament {
             if (options.getLimitedOptions().getDraftCube() != null) {
                 DraftCube cube = options.getLimitedOptions().getDraftCube();
                 for (int i = 0; i < options.getLimitedOptions().getNumberBoosters(); i++) {
-                    List<Card> booster = cube.createBooster();
-                    for (Card card: booster) {
-                        player.getDeck().getSideboard().add(card);
-                    }
+                    player.getDeck().getSideboard().addAll(cube.createBooster());
                 }
             } else {
                 for (ExpansionSet set: sets) {
-                    List<Card> booster = set.createBooster();
-                    for (Card card: booster) {
-                        player.getDeck().getSideboard().add(card);
-                    }
+                    player.getDeck().getSideboard().addAll(set.createBooster());
                 }
             }
         }
@@ -501,5 +498,9 @@ public abstract class TournamentImpl implements Tournament {
         this.stepStartTime = stepStartTime;
     }
 
+    @Override
+    public Draft getDraft() {
+        return draft;
+    }
 
 }

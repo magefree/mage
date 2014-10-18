@@ -56,6 +56,9 @@ public interface Draft extends MageItem, Serializable {
     int getCardNum();
     boolean addPick(UUID playerId, UUID cardId);
     void start();
+    boolean isStarted();
+    void setStarted();
+
     boolean allJoined();
     void leave(UUID playerId);
     void autoPick(UUID playerId);
@@ -68,4 +71,5 @@ public interface Draft extends MageItem, Serializable {
 
     boolean isAbort();
     void setAbort(boolean abort);
+
 }

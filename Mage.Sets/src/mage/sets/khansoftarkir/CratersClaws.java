@@ -28,15 +28,17 @@
 package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.abilities.condition.InvertCondition;
+import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.condition.common.FerociousCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.game.Game;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -52,17 +54,9 @@ public class CratersClaws extends CardImpl {
         this.color.setRed(true);
 
         // Crater's Claws deals X damage to target creature or player.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DamageTargetEffect(new ManacostVariableValue()),
-                new InvertCondition(FerociousCondition.getInstance()),
-                "{this} deals X damage to target creature or player."));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-        
         // <i>Ferocious</i> - Crater's Claws deals X plus 2 damage to that creature or player instead if you control a creature with power 4 or greater.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DamageTargetEffect(new IntPlusDynamicValue(2, new ManacostVariableValue())),
-                FerociousCondition.getInstance(),
-                "<br><br><i>Ferocious</i> - Crater's Claws deals X plus 2 damage to that creature or player instead if you control a creature with power 4 or greater"));
+        this.getSpellAbility().addEffect(new CratersClawsDamageTargetEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
     public CratersClaws(final CratersClaws card) {
@@ -73,4 +67,36 @@ public class CratersClaws extends CardImpl {
     public CratersClaws copy() {
         return new CratersClaws(this);
     }
+}
+
+class CratersClawsDamageTargetEffect extends DamageTargetEffect {
+
+
+    public CratersClawsDamageTargetEffect(DynamicValue amount) {
+        super(amount, false);
+    }
+
+    public CratersClawsDamageTargetEffect(final CratersClawsDamageTargetEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public CratersClawsDamageTargetEffect copy() {
+        return new CratersClawsDamageTargetEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (FerociousCondition.getInstance().apply(game, source)) {
+            amount = new IntPlusDynamicValue(2, new ManacostVariableValue());
+        }
+        return super.apply(game, source);
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        return "{this} deals X damage to target creature or player." +
+                "<br><br><i>Ferocious</i> - {this} deals X plus 2 damage to that creature or player instead if you control a creature with power 4 or greater";
+    }
+
 }

@@ -30,7 +30,7 @@ package mage.sets.magic2015;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -60,7 +60,7 @@ public class AeronautTinkerer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Aeronaut Tinkerer has flying as long as you control an artifact.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield), new ControlsPermanentCondition(new FilterControlledArtifactPermanent()), rule)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield), new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent()), rule)));
 
     }
 

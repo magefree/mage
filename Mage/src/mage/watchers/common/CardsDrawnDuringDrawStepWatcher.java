@@ -70,9 +70,9 @@ public class CardsDrawnDuringDrawStepWatcher extends Watcher {
             if (playerId != null) {
                 Integer amount = amountOfCardsDrawnThisTurn.get(playerId);
                 if (amount == null) {
-                    amount = Integer.valueOf(1);
+                    amount = 1;
                 } else {
-                    amount = Integer.valueOf(amount + 1);
+                    amount++;
                 }
                 amountOfCardsDrawnThisTurn.put(playerId, amount);
             }
@@ -82,7 +82,7 @@ public class CardsDrawnDuringDrawStepWatcher extends Watcher {
     public int getAmountCardsDrawn(UUID playerId) {
         Integer amount = amountOfCardsDrawnThisTurn.get(playerId);
         if (amount != null) {
-            return amount.intValue();
+            return amount;
         }
         return 0;
     }

@@ -30,19 +30,14 @@ package mage.sets.urzaslegacy;
 import java.util.UUID;
 
 import mage.constants.*;
-import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -57,7 +52,7 @@ public class EngineeredPlague extends CardImpl {
         this.color.setBlack(true);
 
         // As Engineered Plague enters the battlefield, choose a creature type.
-        this.addAbility(new AsEntersBattlefieldAbility(new EngineeredPlagueEntersBattlefieldEffect(), "choose a creature type"));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.UnboostCreature)));
         // All creatures of the chosen type get -1/-1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Duration.WhileOnBattlefield, new FilterEngineeredPlague(), false)));
     }
@@ -69,43 +64,6 @@ public class EngineeredPlague extends CardImpl {
     @Override
     public EngineeredPlague copy() {
         return new EngineeredPlague(this);
-    }
-    
-    class EngineeredPlagueEntersBattlefieldEffect extends OneShotEffect {
-
-        public EngineeredPlagueEntersBattlefieldEffect() {
-            super(Outcome.Benefit);
-            staticText = "As {this} enters the battlefield, choose a creature type";
-        }
-
-        public EngineeredPlagueEntersBattlefieldEffect(final EngineeredPlagueEntersBattlefieldEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Player player = game.getPlayer(source.getControllerId());
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (player != null && permanent != null) {
-                Choice typeChoice = new ChoiceImpl(true);
-                typeChoice.setMessage("Choose creature type");
-                typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
-                while (!player.choose(Outcome.Detriment, typeChoice, game)) {
-                    if (!player.isInGame()) {
-                        return false;
-                    }                }
-                game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());
-                game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice().toString());
-                permanent.addInfo("chosen type", "<i>Chosen type: " + typeChoice.getChoice() + "</i>");
-            }
-            return false;
-        }
-
-        @Override
-        public EngineeredPlagueEntersBattlefieldEffect copy() {
-            return new EngineeredPlagueEntersBattlefieldEffect(this);
-        }
-
     }
     
     class FilterEngineeredPlague extends FilterCreaturePermanent {
@@ -133,11 +91,7 @@ public class EngineeredPlague extends CardImpl {
             }
             return false;
         }
-
-           
-
+         
     }
-
     
 }
-

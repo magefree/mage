@@ -342,6 +342,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         typeButton.setLocation(2, 2);
         typeButton.setSize(25, 25);
 
+
         iconPanel.setVisible(true);
         typeButton.setIcon(new ImageIcon(bufferedImage));
         if (toolTipText != null) {

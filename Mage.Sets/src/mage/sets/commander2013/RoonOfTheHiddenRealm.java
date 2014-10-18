@@ -29,6 +29,7 @@ package mage.sets.commander2013;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
@@ -48,6 +49,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -114,21 +116,26 @@ class RoonOfTheHiddenRealmEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (getTargetPointer().getFirst(game, source) != null) {
-            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-            Card card = game.getCard(getTargetPointer().getFirst(game, source));
-            if (permanent != null) {
-                if (permanent.moveToExile(source.getSourceId(), "Roon of the Hidden Realm", source.getSourceId(), game)) {
-                    if (card != null) {
-                        AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
-                        delayedAbility.setSourceId(source.getSourceId());
-                        delayedAbility.setControllerId(card.getOwnerId());
-                        game.addDelayedTriggeredAbility(delayedAbility);
-                        return true;
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
+            if (getTargetPointer().getFirst(game, source) != null) {
+                Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+                Card card = game.getCard(getTargetPointer().getFirst(game, source));
+                if (permanent != null) {
+                    UUID exileId = UUID.randomUUID();
+                    if (controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getName(), source.getSourceId(), game, Zone.BATTLEFIELD)) {
+                        if (card != null) {
+                            AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(exileId, Zone.BATTLEFIELD));
+                            delayedAbility.setSourceId(source.getSourceId());
+                            delayedAbility.setControllerId(card.getOwnerId());
+                            game.addDelayedTriggeredAbility(delayedAbility);
+                        }
                     }
                 }
-            }
-        }
+            }            
+            return true;
+        }        
         return false;
     }
 }

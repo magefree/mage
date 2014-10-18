@@ -55,7 +55,8 @@ public class ReforgeTheSoul extends CardImpl {
         // Each player discards his or her hand, then draws seven cards.
         this.getSpellAbility().addEffect(new ReforgeTheSoulEffect());
 
-        this.addAbility(new MiracleAbility(new ManaCostsImpl("{1}{R}")));
+        // Miracle {1}{R}
+        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{1}{R}")));
     }
 
     public ReforgeTheSoul(final ReforgeTheSoul card) {

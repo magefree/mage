@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
@@ -69,7 +69,7 @@ public class SedraxisAlchemist extends CardImpl {
         // When Sedraxis Alchemist enters the battlefield, if you control a blue permanent, return target nonland permanent to its owner's hand.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
         ability.addTarget(new TargetNonlandPermanent());
-        this.addAbility(new ConditionalTriggeredAbility(ability, new ControlsPermanentCondition(filter), rule));
+        this.addAbility(new ConditionalTriggeredAbility(ability, new PermanentsOnTheBattlefieldCondition(filter), rule));
         
     }
 

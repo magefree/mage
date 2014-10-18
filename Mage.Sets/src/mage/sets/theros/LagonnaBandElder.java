@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
@@ -58,7 +58,7 @@ public class LagonnaBandElder extends CardImpl {
         // When Lagonna-Band Elder enters the battlefield, if you control an enchantment, you gain 3 life.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3), false),
-                new ControlsPermanentCondition(new FilterEnchantmentPermanent(), ControlsPermanentCondition.CountType.MORE_THAN, 0),
+                new PermanentsOnTheBattlefieldCondition(new FilterEnchantmentPermanent(), PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 0),
                 "When Lagonna-Band Elder enters the battlefield, if you control an enchantment, you gain 3 life");
         this.addAbility(ability);
     }

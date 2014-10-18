@@ -96,21 +96,19 @@ class AcademyRectorEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean applied = false;
-        Player you = game.getPlayer(source.getControllerId());
-        if (you != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             target.setNotTarget(true);
-            you.searchLibrary(target, game);
+            controller.searchLibrary(target, game);
             Card targetCard = game.getCard(target.getFirstTarget());
-            if (targetCard == null) {
-                applied = false;
-            } else{
-                applied = you.putOntoBattlefieldWithInfo(targetCard, game, Zone.LIBRARY, source.getSourceId());
-                you.shuffleLibrary(game);
+            if (targetCard != null) {
+                controller.putOntoBattlefieldWithInfo(targetCard, game, Zone.LIBRARY, source.getSourceId());
             }
+            controller.shuffleLibrary(game);
+            return true;
         }
-        return applied;
+        return false;
     }
 
     @Override

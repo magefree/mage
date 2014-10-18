@@ -36,7 +36,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
@@ -81,7 +81,7 @@ public class WayOfTheThief extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
 
         // Enchanted creature is unblockable as long as you control a Gate.
-        Effect effect = new ConditionalRestrictionEffect(new UnblockableAttachedEffect(AttachmentType.AURA), new ControlsPermanentCondition(filter));
+        Effect effect = new ConditionalRestrictionEffect(new UnblockableAttachedEffect(AttachmentType.AURA), new PermanentsOnTheBattlefieldCondition(filter));
         effect.setText(rule);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

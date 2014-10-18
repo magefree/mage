@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.InvertCondition;
-import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -45,6 +45,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 
@@ -58,6 +59,7 @@ public class SpiritMirror extends CardImpl {
 
     static {
         filter.add(new NamePredicate("Reflection"));
+        filter.add(new TokenPredicate());
     }
 
     public SpiritMirror(UUID ownerId) {
@@ -69,7 +71,7 @@ public class SpiritMirror extends CardImpl {
         // At the beginning of your upkeep, if there are no Reflection tokens on the battlefield, put a 2/2 white Reflection creature token onto the battlefield.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new ReflectionToken()), TargetController.YOU, false),
-                new InvertCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0)),
+                new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.EQUAL_TO, 0, false),
                 "At the beginning of your upkeep, if there are no Reflection tokens on the battlefield, put a 2/2 white Reflection creature token onto the battlefield"));
 
         // {0}: Destroy target Reflection.
