@@ -28,16 +28,15 @@
 package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.abilities.condition.InvertCondition;
+import mage.abilities.Ability;
 import mage.abilities.condition.common.FerociousCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.dynamicvalue.IntPlusDynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
@@ -52,16 +51,8 @@ public class FeedTheClan extends CardImpl {
         this.color.setGreen(true);
 
         // You gain 5 life.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new GainLifeEffect(5),
-                new InvertCondition(FerociousCondition.getInstance()),
-                "You gain 5 life"));
-
-        // Ferocious - You gain 10 life instead if you control a creature with power 4 or greater.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new GainLifeEffect(10),
-                FerociousCondition.getInstance(),
-                "<br><br><i>Ferocious</i> - You gain 10 life instead if you control a creature with power 4 or greater"));
+        // Ferocious - You gain 10 life instead if you control a creature with power 4 or greater
+        this.getSpellAbility().addEffect(new FeedTheClanEffect());
 
     }
 
@@ -72,5 +63,36 @@ public class FeedTheClan extends CardImpl {
     @Override
     public FeedTheClan copy() {
         return new FeedTheClan(this);
+    }
+}
+
+class FeedTheClanEffect extends OneShotEffect {
+
+    public FeedTheClanEffect() {
+        super(Outcome.GainLife);
+        this.staticText = "You gain 5 life. <br><br><i>Ferocious</i> - You gain 10 life instead if you control a creature with power 4 or greater";
+    }
+
+    public FeedTheClanEffect(final FeedTheClanEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public FeedTheClanEffect copy() {
+        return new FeedTheClanEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            if (FerociousCondition.getInstance().apply(game, source)) {
+                controller.gainLife(10, game);
+            } else {
+                controller.gainLife(5, game);
+            }
+            return true;
+        }
+        return false;
     }
 }
