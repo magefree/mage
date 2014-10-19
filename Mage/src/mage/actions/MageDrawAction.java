@@ -24,7 +24,7 @@ public class MageDrawAction extends MageAction {
     private final Player player;
     private final int amount;
     private final ArrayList<UUID> appliedEffects;
-    private List<Card> drawnCards;
+    private final List<Card> drawnCards;
 
     private static final int NEGATIVE_VALUE = -1000000;
 
@@ -32,6 +32,7 @@ public class MageDrawAction extends MageAction {
         this.player = player;
         this.amount = amount;
         this.appliedEffects = appliedEffects;
+        this.drawnCards = new ArrayList<>();
     }
 
     /**
@@ -52,7 +53,7 @@ public class MageDrawAction extends MageAction {
             numDrawn++;
             score += value;
         }
-        if (numDrawn > 0) {
+        if (!player.isTopCardRevealed() && numDrawn > 0) {
             game.fireInformEvent(player.getName() + " draws " + CardUtil.numberToText(numDrawn, "a") + " card" + (numDrawn > 1 ? "s" : ""));
         }
         if (player.isEmptyDraw()) {
@@ -78,7 +79,12 @@ public class MageDrawAction extends MageAction {
         if (!game.replaceEvent(event)) {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
+                drawnCards.add(card);
                 card.moveToZone(Zone.HAND, null, game, false);
+                if (player.isTopCardRevealed()) {
+                    game.fireInformEvent(player.getName() + " draws a revealed card  (" + card.getLogName() + ")");
+                }
+
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DREW_CARD, card.getId(), player.getId()));
                 return ArtificialScoringSystem.inst.getCardScore(card);
             }
