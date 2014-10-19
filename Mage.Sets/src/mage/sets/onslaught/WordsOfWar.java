@@ -104,7 +104,7 @@ class WordsOfWarEffect extends ReplacementEffectImpl {
                 used = true;
                 return true;
             }
-            Permanent permanent = game.getPermanent(source.getFirstTarget());
+            Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
             if (permanent != null) {
                 permanent.damage(2, source.getSourceId(), game, false, true);
                 used = true;

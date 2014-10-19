@@ -25,54 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
+import mage.abilities.keyword.SoulshiftAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
-import mage.cards.CardImpl;
-import mage.filter.common.FilterArtifactCard;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class KuldothaForgemaster extends CardImpl {
+public class KodamaOfTheCenterTree extends CardImpl {
 
-    private static final FilterArtifactCard filterArtifactCard = new FilterArtifactCard();
-    private static final FilterArtifactPermanent filterArtifactPermanent = new FilterArtifactPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Spirits you control");
 
-    public KuldothaForgemaster(UUID ownerId) {
-        super(ownerId, 169, "Kuldotha Forgemaster", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
-        this.expansionSetCode = "SOM";
-        this.subtype.add("Construct");
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(5);
-
-        // {T}, Sacrifice three artifacts: Search your library for an artifact card and put it onto the battlefield. Then shuffle your library.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filterArtifactCard)),
-                new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, filterArtifactPermanent, false)));
-        this.addAbility(ability);
+    static {
+        filter.add(new SubtypePredicate("Spirit"));
     }
 
-    public KuldothaForgemaster(final KuldothaForgemaster card) {
+    public KodamaOfTheCenterTree(UUID ownerId) {
+        super(ownerId, 131, "Kodama of the Center Tree", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}");
+        this.expansionSetCode = "BOK";
+        this.supertype.add("Legendary");
+        this.subtype.add("Spirit");
+
+        this.color.setGreen(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
+
+        // Kodama of the Center Tree's power and toughness are each equal to the number of Spirits you control.
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
+        
+        // Kodama of the Center Tree has soulshift X, where X is the number of Spirits you control.
+        this.addAbility(new SoulshiftAbility(new PermanentsOnBattlefieldCount(filter)));
+    }
+
+    public KodamaOfTheCenterTree(final KodamaOfTheCenterTree card) {
         super(card);
     }
 
     @Override
-    public KuldothaForgemaster copy() {
-        return new KuldothaForgemaster(this);
+    public KodamaOfTheCenterTree copy() {
+        return new KodamaOfTheCenterTree(this);
     }
 }

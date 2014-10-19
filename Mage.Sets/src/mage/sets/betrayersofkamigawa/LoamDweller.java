@@ -25,56 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.betrayersofkamigawa;
 
-package mage.abilities.effects.common;
-
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.effects.common.PutLandFromHandOntoBattlefieldEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterSpiritOrArcaneCard;
 
 /**
  *
  * @author LevelX2
  */
-public class PutLandFromHandOntoBattlefieldEffect extends OneShotEffect {
+public class LoamDweller extends CardImpl {
 
-    private boolean tapped;
+    public LoamDweller(UUID ownerId) {
+        super(ownerId, 134, "Loam Dweller", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "BOK";
+        this.subtype.add("Spirit");
 
-    public PutLandFromHandOntoBattlefieldEffect() {
-        this(false);
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Whenever you cast a Spirit or Arcane spell, you may put a land card from your hand onto the battlefield tapped.
+        this.addAbility(new SpellCastControllerTriggeredAbility(new PutLandFromHandOntoBattlefieldEffect(true), new FilterSpiritOrArcaneCard(), true));
+
     }
-    public PutLandFromHandOntoBattlefieldEffect(boolean tapped) {
-        super(Outcome.PutLandInPlay);
-        staticText = "you may put a land card from your hand onto the battlefield" + (tapped ? " tapped":"");
-    }
 
-    public PutLandFromHandOntoBattlefieldEffect(final PutLandFromHandOntoBattlefieldEffect effect) {
-        super(effect);
-        this.tapped = effect.tapped;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Card card = game.getCard(targetPointer.getFirst(game, source));
-            if (card != null) {
-                controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId(), tapped);
-            }
-            return true;
-
-        }
-        return false;
-
+    public LoamDweller(final LoamDweller card) {
+        super(card);
     }
 
     @Override
-    public PutLandFromHandOntoBattlefieldEffect copy() {
-        return new PutLandFromHandOntoBattlefieldEffect(this);
+    public LoamDweller copy() {
+        return new LoamDweller(this);
     }
-
- }
+}

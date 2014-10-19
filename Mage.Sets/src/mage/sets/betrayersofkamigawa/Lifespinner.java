@@ -25,54 +25,61 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterArtifactCard;
-import mage.filter.common.FilterArtifactPermanent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterPermanentCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class KuldothaForgemaster extends CardImpl {
+public class Lifespinner extends CardImpl {
 
-    private static final FilterArtifactCard filterArtifactCard = new FilterArtifactCard();
-    private static final FilterArtifactPermanent filterArtifactPermanent = new FilterArtifactPermanent();
+    private static final FilterPermanentCard filter = new FilterPermanentCard("legendary Spirit permanent card");
 
-    public KuldothaForgemaster(UUID ownerId) {
-        super(ownerId, 169, "Kuldotha Forgemaster", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
-        this.expansionSetCode = "SOM";
-        this.subtype.add("Construct");
+    static {
+        filter.add(new SupertypePredicate("Legendary"));
+        filter.add(new SubtypePredicate("Spirit"));
+    }
 
+    public Lifespinner(UUID ownerId) {
+        super(ownerId, 133, "Lifespinner", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "BOK";
+        this.subtype.add("Spirit");
+
+        this.color.setGreen(true);
         this.power = new MageInt(3);
-        this.toughness = new MageInt(5);
+        this.toughness = new MageInt(3);
 
-        // {T}, Sacrifice three artifacts: Search your library for an artifact card and put it onto the battlefield. Then shuffle your library.
+        // {t}, Sacrifice three Spirits: Search your library for a legendary Spirit permanent card and put it onto the battlefield. Then shuffle your library.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filterArtifactCard)),
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)),
                 new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, filterArtifactPermanent, false)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, new FilterCreaturePermanent("Spirit", "three Spirits"), false)));
         this.addAbility(ability);
     }
 
-    public KuldothaForgemaster(final KuldothaForgemaster card) {
+    public Lifespinner(final Lifespinner card) {
         super(card);
     }
 
     @Override
-    public KuldothaForgemaster copy() {
-        return new KuldothaForgemaster(this);
+    public Lifespinner copy() {
+        return new Lifespinner(this);
     }
 }
