@@ -232,8 +232,6 @@ public class ChatPanel extends javax.swing.JPanel {
         }              
         text.append(getColoredText(textColor, ManaSymbols.replaceSymbolsWithHTML(message, ManaSymbols.Type.PAY)));
         this.txtConversation.append(text.toString());
-        this.txtConversation.requestFocusInWindow();
-        this.txtMessage.requestFocusInWindow();
     }
 
     private String getColoredText(String color, String text) {
