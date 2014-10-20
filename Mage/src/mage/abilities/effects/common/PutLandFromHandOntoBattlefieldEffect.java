@@ -33,8 +33,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.Target;
+import mage.target.common.TargetCardInHand;
 
 /**
  *
@@ -61,12 +64,15 @@ public class PutLandFromHandOntoBattlefieldEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card card = game.getCard(targetPointer.getFirst(game, source));
-            if (card != null) {
-                controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId(), tapped);
+            Target target = new TargetCardInHand(new FilterLandCard("land card"));
+            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
+                    && controller.choose(outcome, target, source.getSourceId(), game)) {
+                Card card = game.getCard(target.getFirstTarget());
+                if (card != null) {
+                    controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId(), tapped);
+                }
             }
             return true;
-
         }
         return false;
 
