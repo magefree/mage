@@ -433,6 +433,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.topCardRevealed = false;
         this.alternativeSourceCosts.clear();
         this.castSourceIdWithoutMana = null;
+        this.getManaPool().clearEmptyManaPoolRules();
     }
 
     @Override

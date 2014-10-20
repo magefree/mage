@@ -21,22 +21,30 @@ import mage.players.Player;
 public class AddManaToManaPoolEffect extends OneShotEffect {
 
     protected Mana mana;
+    protected boolean emptyOnlyOnTurnsEnd;
     
+    public AddManaToManaPoolEffect(Mana mana, String textManaPoolOwner) {
+        this(mana, textManaPoolOwner, false);
+    }
     /**
      * Adds mana to the mana pool of target pointer player
      * 
      * @param mana mana that will be added to the pool
      * @param textManaPoolOwner text that references to the mana pool owner (e.g. "damaged player's")
-     */
-    public AddManaToManaPoolEffect(Mana mana, String textManaPoolOwner) {
+     * @param emptyOnTurnsEnd if set, the mana will empty only on end of turnstep
+     * 
+     */     
+    public AddManaToManaPoolEffect(Mana mana, String textManaPoolOwner, boolean emptyOnTurnsEnd) {
         super(Outcome.PutManaInPool);
         this.mana = mana;
+        this.emptyOnlyOnTurnsEnd = emptyOnTurnsEnd;
         this.staticText = "add " + mana.toString() + " to " + textManaPoolOwner + " mana pool";
     }
 
     public AddManaToManaPoolEffect(final AddManaToManaPoolEffect effect) {
         super(effect);
         this.mana = effect.mana;
+        this.emptyOnlyOnTurnsEnd = effect.emptyOnlyOnTurnsEnd;
     }
 
     @Override
@@ -48,7 +56,7 @@ public class AddManaToManaPoolEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
-            player.getManaPool().addMana(mana, game, source);
+            player.getManaPool().addMana(mana, game, source, emptyOnlyOnTurnsEnd);
             return true;
         }
         return false;

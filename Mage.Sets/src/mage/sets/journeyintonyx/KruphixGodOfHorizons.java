@@ -97,15 +97,6 @@ public class KruphixGodOfHorizons extends CardImpl {
 
 class KruphixGodOfHorizonsEffect extends ReplacementEffectImpl {
 
-    private static final List<ManaType> manaTypes =  new ArrayList<>();
-    static {
-        manaTypes.add(ManaType.BLACK);
-        manaTypes.add(ManaType.BLUE);
-        manaTypes.add(ManaType.RED);
-        manaTypes.add(ManaType.WHITE);
-        manaTypes.add(ManaType.GREEN);
-    }
-
     public KruphixGodOfHorizonsEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If unused mana would empty from your mana pool, that mana becomes colorless instead";
@@ -127,15 +118,7 @@ class KruphixGodOfHorizonsEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(event.getPlayerId());
-        if (player != null){
-            ManaPool pool = player.getManaPool();
-            int coloredMana = pool.getGreen() + pool.getBlack() + pool.getBlue()+ pool.getWhite()+ pool.getRed();
-            player.getManaPool().emptyManaType(manaTypes);
-            pool.addMana(Mana.ColorlessMana(coloredMana), game, source);
-            return true;
-        }
-        return false;
+        return true;
     }
 
     @Override

@@ -31,6 +31,7 @@ import java.io.Serializable;
 import java.util.UUID;
 import mage.ConditionalMana;
 import mage.Mana;
+import mage.constants.Duration;
 import mage.constants.ManaType;
 
 /**
@@ -48,6 +49,7 @@ public class ManaPoolItem implements Serializable {
     private ConditionalMana conditionalMana;
     private UUID sourceId;
     private boolean flag = false;
+    private Duration duration;
 
     public ManaPoolItem() {}
 
@@ -60,6 +62,7 @@ public class ManaPoolItem implements Serializable {
         this.colorless = colorless;
         this.sourceId = sourceId;
         this.flag = flag;
+        this.duration = Duration.EndOfStep;
     }
 
     public ManaPoolItem(ConditionalMana conditionalMana, UUID sourceId) {
@@ -67,6 +70,7 @@ public class ManaPoolItem implements Serializable {
         this.sourceId = sourceId;
         this.conditionalMana.setManaProducerId(sourceId);
         this.flag = conditionalMana.getFlag();
+        this.duration = Duration.EndOfStep;        
     }
 
     public ManaPoolItem(final ManaPoolItem item) {
@@ -81,6 +85,7 @@ public class ManaPoolItem implements Serializable {
         }
         this.sourceId = item.sourceId;
         this.flag = item.flag;
+        this.duration = item.duration;
     }
 
     public ManaPoolItem copy() {
@@ -242,4 +247,59 @@ public class ManaPoolItem implements Serializable {
                 break;
         }
     }
+    
+    public void clear(ManaType manaType) {
+       switch(manaType) {
+            case BLACK:
+                black = 0;
+                break;
+            case BLUE:
+                blue = 0;
+                break;
+            case GREEN:
+                green = 0;
+                break;
+            case RED:
+                red = 0;
+                break;
+            case WHITE:
+                white = 0;
+                break;
+            case COLORLESS:
+                colorless = 0;
+                break;
+        }        
+    }
+    
+    public void add(ManaType manaType, int amount) {
+       switch(manaType) {
+            case BLACK:
+                black += amount;
+                break;
+            case BLUE:
+                blue += amount;;
+                break;
+            case GREEN:
+                green += amount;;
+                break;
+            case RED:
+                red  += amount;;
+                break;
+            case WHITE:
+                white += amount;;
+                break;
+            case COLORLESS:
+                colorless += amount;;
+                break;
+        }        
+    }    
+
+    public Duration getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
+    }
+        
 }

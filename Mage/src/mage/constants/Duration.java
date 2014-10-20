@@ -13,6 +13,7 @@ public enum Duration {
     EndOfTurn("until end of turn"),
     UntilYourNextTurn("until your next turn"),
     EndOfCombat("until end of combat"),
+    EndOfStep("until end of phase step"),
     Custom("");
 
     private final String text;

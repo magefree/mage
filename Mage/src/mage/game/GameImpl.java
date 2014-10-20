@@ -1168,11 +1168,9 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public void emptyManaPools() {
-        if (!replaceEvent(new GameEvent(GameEvent.EventType.EMPTY_MANA_POOLS, null, null, null))) {
-            for (Player player: getPlayers().values()) {
-                if (!replaceEvent(new GameEvent(GameEvent.EventType.EMPTY_MANA_POOL, player.getId(), null, player.getId()))) {
-                    player.getManaPool().emptyPool();
-                }
+        for (Player player: getPlayers().values()) {
+            if (!replaceEvent(new GameEvent(GameEvent.EventType.EMPTY_MANA_POOL, player.getId(), null, player.getId()))) {
+                player.getManaPool().emptyPool(this);
             }
         }
     }
@@ -1186,7 +1184,7 @@ public abstract class GameImpl implements Game, Serializable {
     public void addEffect(ContinuousEffect continuousEffect, Ability source) {
         Ability newAbility = source.copy();
 
-        ContinuousEffect newEffect = (ContinuousEffect)continuousEffect.copy();
+        ContinuousEffect newEffect = continuousEffect.copy();
         newEffect.newId();
         newEffect.setTimestamp();
         newEffect.init(newAbility, this);

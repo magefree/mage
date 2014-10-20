@@ -27,21 +27,24 @@
  */
 package mage.sets.worldwake;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManaTypeInManaPoolCount;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.ManaType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.players.Player;
 
 /**
@@ -60,7 +63,7 @@ public class OmnathLocusOfMana extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Green mana doesn't empty from your mana pool as steps and phases end.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OmnathReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OmnathRuleEffect()));
 
         // Omnath, Locus of Mana gets +1/+1 for each green mana in your mana pool
         DynamicValue boost = new ManaTypeInManaPoolCount(ManaType.GREEN);
@@ -78,30 +81,29 @@ public class OmnathLocusOfMana extends CardImpl {
     }
 }
 
-class OmnathReplacementEffect extends ReplacementEffectImpl {
-    
-    private static final List<ManaType> manaTypes =  new ArrayList<>();
-    static {
-        manaTypes.add(ManaType.BLACK);
-        manaTypes.add(ManaType.BLUE);
-        manaTypes.add(ManaType.RED);
-        manaTypes.add(ManaType.WHITE);
-        manaTypes.add(ManaType.COLORLESS);
-    }
+class OmnathRuleEffect extends ContinuousEffectImpl {
 
-    public OmnathReplacementEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+    public OmnathRuleEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Green mana doesn't empty from your mana pool as steps and phases end";
     }
 
-    public OmnathReplacementEffect(final OmnathReplacementEffect effect) {
+    public OmnathRuleEffect(final OmnathRuleEffect effect) {
         super(effect);
     }
 
     @Override
-    public OmnathReplacementEffect copy() {
-        return new OmnathReplacementEffect(this);
+    public OmnathRuleEffect copy() {
+        return new OmnathRuleEffect(this);
     }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null){
+            player.getManaPool().addDoNotEmptyManaType(ManaType.GREEN);
+        }
+        return false;    }
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -109,19 +111,7 @@ class OmnathReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(event.getPlayerId());
-        if (player != null){
-            player.getManaPool().emptyManaType(manaTypes);
-        }
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.EMPTY_MANA_POOL && event.getPlayerId().equals(source.getControllerId())) {
-            return true;
-        }
-        return false;
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.RulesEffects;
     }
 }

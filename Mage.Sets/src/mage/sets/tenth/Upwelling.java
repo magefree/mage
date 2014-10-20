@@ -30,15 +30,19 @@ package mage.sets.tenth;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.players.ManaPool;
+import mage.players.Player;
 
 /**
  *
@@ -53,7 +57,7 @@ public class Upwelling extends CardImpl {
         this.color.setGreen(true);
 
         // Mana pools don't empty as steps and phases end.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UpwellingReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UpwellingRuleEffect()));
 
     }
 
@@ -67,20 +71,41 @@ public class Upwelling extends CardImpl {
     }
 }
 
-class UpwellingReplacementEffect extends ReplacementEffectImpl {
+class UpwellingRuleEffect extends ContinuousEffectImpl {
 
-    public UpwellingReplacementEffect() {
+    public UpwellingRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Mana pools don't empty as steps and phases end";
     }
 
-    public UpwellingReplacementEffect(final UpwellingReplacementEffect effect) {
+    public UpwellingRuleEffect(final UpwellingRuleEffect effect) {
         super(effect);
     }
 
     @Override
-    public UpwellingReplacementEffect copy() {
-        return new UpwellingReplacementEffect(this);
+    public UpwellingRuleEffect copy() {
+        return new UpwellingRuleEffect(this);
+    }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (UUID playerId: controller.getInRange()) {
+                Player player = game.getPlayer(playerId);
+                if (player != null){
+                    ManaPool pool = player.getManaPool();
+                    pool.addDoNotEmptyManaType(ManaType.WHITE);
+                    pool.addDoNotEmptyManaType(ManaType.GREEN);
+                    pool.addDoNotEmptyManaType(ManaType.BLUE);
+                    pool.addDoNotEmptyManaType(ManaType.RED);
+                    pool.addDoNotEmptyManaType(ManaType.BLACK);
+                    pool.addDoNotEmptyManaType(ManaType.COLORLESS);
+                }                
+            }
+            return true;
+        }
+        return false;    
     }
 
     @Override
@@ -89,15 +114,7 @@ class UpwellingReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.EMPTY_MANA_POOLS) {
-            return true;
-        }
-        return false;
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.RulesEffects;
     }
 }
