@@ -49,6 +49,7 @@ public class CopyPermanentEffect extends OneShotEffect {
     private FilterPermanent filter;
     private ApplyToPermanent applier;
     private Permanent bluePrintPermanent;
+    private boolean notTarget;
 
     public CopyPermanentEffect() {
         this(new FilterCreaturePermanent());
@@ -63,9 +64,13 @@ public class CopyPermanentEffect extends OneShotEffect {
     }
 
     public CopyPermanentEffect(FilterPermanent filter, ApplyToPermanent applier) {
+        this(filter, applier, true);
+    }
+    public CopyPermanentEffect(FilterPermanent filter, ApplyToPermanent applier, boolean notTarget) {
         super(Outcome.Copy);
         this.applier = applier;
         this.filter = filter;
+        this.notTarget = notTarget;
         this.staticText = "You may have {this} enter the battlefield as a copy of any " + filter.getMessage() + " on the battlefield";
     }
 
@@ -74,6 +79,7 @@ public class CopyPermanentEffect extends OneShotEffect {
         this.filter = effect.filter.copy();
         this.applier = effect.applier;
         this.bluePrintPermanent = effect.bluePrintPermanent;
+        this.notTarget = effect.notTarget;
     }
 
     @Override
@@ -82,7 +88,7 @@ public class CopyPermanentEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (player != null && sourcePermanent != null) {
             Target target = new TargetPermanent(filter);
-            target.setNotTarget(true);
+            target.setNotTarget(notTarget);
             if (target.canChoose(source.getControllerId(), game)) {
                 player.choose(Outcome.Copy, target, source.getSourceId(), game);
                 Permanent copyFromPermanent = game.getPermanent(target.getFirstTarget());

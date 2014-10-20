@@ -35,6 +35,7 @@ import mage.abilities.keyword.HeroicAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.functions.ApplyToPermanent;
@@ -56,7 +57,7 @@ public class ArtisanOfForms extends CardImpl {
         this.toughness = new MageInt(1);
 
         // <i>Heroic</i> - Whenever you cast a spell that targets Artisan of Forms, you may have Artisan of Forms become a copy of target creature and gain this ability.
-        Effect effect = new CopyPermanentEffect(new ArtisanOfFormsApplyToPermanent());
+        Effect effect = new CopyPermanentEffect(new FilterCreaturePermanent(), new ArtisanOfFormsApplyToPermanent(), false);
         effect.setText("have {this} become a copy of target creature and gain this ability");
         this.addAbility(new HeroicAbility(effect, true));
     }
