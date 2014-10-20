@@ -1169,9 +1169,7 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public void emptyManaPools() {
         for (Player player: getPlayers().values()) {
-            if (!replaceEvent(new GameEvent(GameEvent.EventType.EMPTY_MANA_POOL, player.getId(), null, player.getId()))) {
-                player.getManaPool().emptyPool(this);
-            }
+            player.getManaPool().emptyPool(this);
         }
     }
 

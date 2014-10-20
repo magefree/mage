@@ -126,7 +126,7 @@ class PowerSinkCounterUnlessPaysEffect extends OneShotEffect {
                     }
 
                     // ...and empties his or her mana pool
-                    player.getManaPool().emptyPool();
+                    player.getManaPool().emptyPool(game);
                 }
                 return true;
             }

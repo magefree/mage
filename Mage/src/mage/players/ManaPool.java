@@ -34,6 +34,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -54,6 +55,8 @@ import mage.game.events.ManaEvent;
  */
 public class ManaPool implements Serializable {
 
+    private final UUID playerId;
+
     private final List<ManaPoolItem> manaItems = new ArrayList<>();
 
     private boolean autoPayment; // auto payment from mana pool: true - mode is active
@@ -61,12 +64,14 @@ public class ManaPool implements Serializable {
     
     private final Set<ManaType> doNotEmptyManaTypes = new HashSet<>();
 
-    public ManaPool() {
+    public ManaPool(UUID playerId) {
+        this.playerId = playerId;
         autoPayment = true;
         unlockedManaType = null;
     }
 
     public ManaPool(final ManaPool pool) {
+        this.playerId = pool.playerId;
         for (ManaPoolItem item: pool.manaItems) {
             manaItems.add(item.copy());
         }
@@ -179,7 +184,7 @@ public class ManaPool implements Serializable {
             for (ManaType manaType : ManaType.values()) {
                 if (item.get(manaType) > 0 && !doNotEmptyManaTypes.contains(manaType)) {
                     if (!item.getDuration().equals(Duration.EndOfTurn) || game.getPhase().getType().equals(TurnPhase.END)) {
-                         if (game.replaceEvent(new GameEvent(GameEvent.EventType.EMPTY_MANA_POOL, null, null, null))) {
+                         if (game.replaceEvent(new GameEvent(GameEvent.EventType.EMPTY_MANA_POOL, playerId, null, playerId))) {
                             int amount = item.get(manaType);
                             item.clear(manaType);
                             item.add(ManaType.COLORLESS, amount);                        
@@ -189,6 +194,9 @@ public class ManaPool implements Serializable {
                         }
                     }
                 }
+            }
+            if (item.count() == 0) {
+                it.remove();
             }
         }        
         return total;            

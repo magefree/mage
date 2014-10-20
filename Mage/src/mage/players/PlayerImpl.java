@@ -226,7 +226,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         graveyard = new CardsImpl(Zone.GRAVEYARD);
         abilities = new AbilitiesImpl<>();
         counters = new Counters();
-        manaPool = new ManaPool();
+        manaPool = new ManaPool(playerId);
         library = new Library(playerId);
         sideboard = new CardsImpl(Zone.OUTSIDE);
     }

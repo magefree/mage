@@ -97,7 +97,7 @@ class ManaShortEffect extends OneShotEffect {
                 land.tap(game);
             }
             
-            targetPlayer.getManaPool().emptyPool();
+            targetPlayer.getManaPool().emptyPool(game);
             
             return true;
         }
