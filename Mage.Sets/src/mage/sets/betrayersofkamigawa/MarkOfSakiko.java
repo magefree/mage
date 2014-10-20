@@ -46,9 +46,9 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -109,6 +109,7 @@ class MarkOfSakikoTriggeredAbility extends TriggeredAbilityImpl {
                 if (event.getSourceId().equals(getSourceId())) {
                     this.getEffects().clear();
                     Effect effect = new AddManaToManaPoolEffect(new Mana(0,event.getAmount(),0,0,0,0,0), "that player", true);
+                    effect.setTargetPointer(new FixedTarget(getControllerId()));
                     effect.setText("add that much {G} to your mana pool. Until end of turn, this mana doesn't empty from your mana pool as steps and phases end");        
                     this.addEffect(effect);
                     return true;

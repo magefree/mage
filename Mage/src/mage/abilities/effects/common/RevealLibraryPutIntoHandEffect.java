@@ -93,7 +93,7 @@ public class RevealLibraryPutIntoHandEffect extends OneShotEffect {
         Set<Card> cardsList = cards.getCards(game);
         for (Card card : cardsList) {
             if (filter.match(card, game)) {
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                 cards.remove(card);
             }
         }

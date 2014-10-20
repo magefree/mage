@@ -27,11 +27,8 @@
  */
 package mage.sets.journeyintonyx;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
@@ -44,14 +41,11 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
-import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.players.ManaPool;
-import mage.players.Player;
 
 /**
  *
