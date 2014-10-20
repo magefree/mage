@@ -29,16 +29,16 @@ package mage.abilities.effects.common;
 
 import java.util.Set;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.util.CardUtil;
 
 /**
@@ -48,15 +48,15 @@ import mage.util.CardUtil;
 
 public class RevealLibraryPutIntoHandEffect extends OneShotEffect {
 
-    private int amountCards;
+    private DynamicValue amountCards;
     private FilterCard filter;
     private boolean anyOrder;
 
-    public RevealLibraryPutIntoHandEffect(int amountCards) {
-        this(amountCards, new FilterCard("cards"), true);
+    public RevealLibraryPutIntoHandEffect(int amountCards, FilterCard filter, boolean anyOrder) {
+        this(new StaticValue(amountCards), filter, anyOrder);
     }
 
-    public RevealLibraryPutIntoHandEffect(int amountCards, FilterCard filter, boolean anyOrder) {
+    public RevealLibraryPutIntoHandEffect(DynamicValue amountCards, FilterCard filter, boolean anyOrder) {
         super(Outcome.DrawCard);
         this.amountCards = amountCards;
         this.filter = filter;
@@ -84,7 +84,7 @@ public class RevealLibraryPutIntoHandEffect extends OneShotEffect {
         }
 
         CardsImpl cards = new CardsImpl();
-        int amount = Math.min(amountCards, player.getLibrary().size());
+        int amount = Math.min(amountCards.calculate(game, source, this), player.getLibrary().size());
         for (int i = 0; i < amount; i++) {
             cards.add(player.getLibrary().removeFromTop(game));
         }
@@ -98,32 +98,13 @@ public class RevealLibraryPutIntoHandEffect extends OneShotEffect {
             }
         }
 
-        while (player.isInGame() && cards.size() > 1) {
-            Card card;
-            if (anyOrder) {
-                TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
-                player.choose(Outcome.Neutral, cards, target, game);
-                card = cards.get(target.getFirstTarget(), game);
-            } else {
-                card = cards.get(cards.iterator().next(),game);
-            }
-            if (card != null) {
-                cards.remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
-            }
-        }
-
-        if (cards.size() == 1) {
-            Card card = cards.get(cards.iterator().next(), game);
-            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
-        }
-
+        player.putCardsOnBottomOfLibrary(cards, game, source, anyOrder);
         return true;
     }
 
     private String setText() {
         StringBuilder sb = new StringBuilder("Reveal the top ");
-        sb.append(CardUtil.numberToText(amountCards)).append(" cards of your library. Put all ");
+        sb.append(CardUtil.numberToText(amountCards.toString())).append(" cards of your library. Put all ");
         sb.append(filter.getMessage());
         sb.append(" revealed this way into your hand and the rest on the bottom of your library");
         if (anyOrder) {

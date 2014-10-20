@@ -28,72 +28,47 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.MageInt;
+import mage.Mana;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.AddManaToManaPoolEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.SubLayer;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.Game;
 
 /**
  *
  * @author LevelX2
  */
-public class MirrorGallery extends CardImpl {
+public class ShizukoCallerOfAutumn extends CardImpl {
 
-    public MirrorGallery(UUID ownerId) {
-        super(ownerId, 154, "Mirror Gallery", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
+    public ShizukoCallerOfAutumn(UUID ownerId) {
+        super(ownerId, 144, "Shizuko, Caller of Autumn", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
         this.expansionSetCode = "BOK";
+        this.supertype.add("Legendary");
+        this.subtype.add("Snake");
+        this.subtype.add("Shaman");
 
-        // The "legend rule" doesn't apply.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MirrorGalleryRuleEffect()));
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
+
+        // At the beginning of each player's upkeep, that player adds {G}{G}{G} to his or her mana pool. Until end of turn, this mana doesn't empty from that player's mana pool as steps and phases end.
+        Effect effect = new AddManaToManaPoolEffect(new Mana(0,3,0,0,0,0,0), "that player", true);
+        effect.setText("that player adds {G}{G}{G} to his or her mana pool. Until end of turn, this mana doesn't empty from that player's mana pool as steps and phases end");        
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.ANY, false));
+        
     }
 
-    public MirrorGallery(final MirrorGallery card) {
+    public ShizukoCallerOfAutumn(final ShizukoCallerOfAutumn card) {
         super(card);
     }
 
     @Override
-    public MirrorGallery copy() {
-        return new MirrorGallery(this);
-    }
-}
-
-class MirrorGalleryRuleEffect extends ContinuousEffectImpl {
-
-    public MirrorGalleryRuleEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "The \"legend rule\" doesn't apply";
-    }
-
-    public MirrorGalleryRuleEffect(final MirrorGalleryRuleEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MirrorGalleryRuleEffect copy() {
-        return new MirrorGalleryRuleEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        game.getState().setLegendaryRuleActive(false);
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
+    public ShizukoCallerOfAutumn copy() {
+        return new ShizukoCallerOfAutumn(this);
     }
 }

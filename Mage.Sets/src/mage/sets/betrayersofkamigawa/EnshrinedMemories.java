@@ -28,72 +28,35 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
-import mage.game.Game;
+import mage.filter.common.FilterCreatureCard;
 
 /**
  *
  * @author LevelX2
  */
-public class MirrorGallery extends CardImpl {
+public class EnshrinedMemories extends CardImpl {
 
-    public MirrorGallery(UUID ownerId) {
-        super(ownerId, 154, "Mirror Gallery", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
+    public EnshrinedMemories(UUID ownerId) {
+        super(ownerId, 124, "Enshrined Memories", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}");
         this.expansionSetCode = "BOK";
 
-        // The "legend rule" doesn't apply.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MirrorGalleryRuleEffect()));
+        this.color.setGreen(true);
+
+        // Reveal the top X cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order.
+        this.getSpellAbility().addEffect(new RevealLibraryPutIntoHandEffect(new ManacostVariableValue(), new FilterCreatureCard("all creature cards"),true));
     }
 
-    public MirrorGallery(final MirrorGallery card) {
+    public EnshrinedMemories(final EnshrinedMemories card) {
         super(card);
     }
 
     @Override
-    public MirrorGallery copy() {
-        return new MirrorGallery(this);
-    }
-}
-
-class MirrorGalleryRuleEffect extends ContinuousEffectImpl {
-
-    public MirrorGalleryRuleEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "The \"legend rule\" doesn't apply";
-    }
-
-    public MirrorGalleryRuleEffect(final MirrorGalleryRuleEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MirrorGalleryRuleEffect copy() {
-        return new MirrorGalleryRuleEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        game.getState().setLegendaryRuleActive(false);
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
+    public EnshrinedMemories copy() {
+        return new EnshrinedMemories(this);
     }
 }
