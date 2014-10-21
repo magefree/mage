@@ -44,20 +44,20 @@ import mage.util.CardUtil;
  * @author LevelX2
  */
 
-public class PutCopySourceTokenOntoBattlefield extends OneShotEffect {
+public class PutTokenOntoBattlefieldCopySource extends OneShotEffect {
 
-    public PutCopySourceTokenOntoBattlefield() {
+    public PutTokenOntoBattlefieldCopySource() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "put a token that's a copy of {this} onto the battlefield";
     }
 
-    public PutCopySourceTokenOntoBattlefield(final PutCopySourceTokenOntoBattlefield effect) {
+    public PutTokenOntoBattlefieldCopySource(final PutTokenOntoBattlefieldCopySource effect) {
         super(effect);
     }
 
     @Override
-    public PutCopySourceTokenOntoBattlefield copy() {
-        return new PutCopySourceTokenOntoBattlefield(this);
+    public PutTokenOntoBattlefieldCopySource copy() {
+        return new PutTokenOntoBattlefieldCopySource(this);
     }
 
     @Override

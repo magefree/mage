@@ -31,15 +31,17 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
+import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -90,15 +92,11 @@ class TemptWithReflectionsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        if (permanent == null) {
-            permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        }
-
+        Permanent permanent = game.getPermanentOrLKIBattlefield(this.getTargetPointer().getFirst(game, source));
         if (permanent != null) {
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(permanent);
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+            Effect effect = new PutTokenOntoBattlefieldCopyTargetEffect();
+            effect.setTargetPointer(getTargetPointer());
+            effect.apply(game, source);
 
             Set<UUID> playersSaidYes = new HashSet<>();
             PlayerList playerList = game.getPlayerList().copy();
@@ -119,15 +117,15 @@ class TemptWithReflectionsEffect extends OneShotEffect {
             } while (!player.getId().equals(game.getActivePlayerId()));
 
             for (UUID playerId: playersSaidYes) {
-                token = new EmptyToken();
-                CardUtil.copyTo(token).from(permanent);
-                token.putOntoBattlefield(1, game, source.getSourceId(), playerId);
+                effect = new PutTokenOntoBattlefieldCopyTargetEffect(playerId);
+                effect.setTargetPointer(getTargetPointer());
+                effect.apply(game, source);                
             }
 
             if (playersSaidYes.size() > 0) {
-                token = new EmptyToken();
-                CardUtil.copyTo(token).from(permanent);
-                token.putOntoBattlefield(playersSaidYes.size(), game, source.getSourceId(), source.getControllerId());
+                effect = new PutTokenOntoBattlefieldCopyTargetEffect();
+                effect.setTargetPointer(getTargetPointer());
+                effect.apply(game, source);                
             }
             return true;
         }

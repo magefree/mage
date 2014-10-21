@@ -28,21 +28,14 @@
 package mage.sets.bornofthegods;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.abilities.effects.common.ScryEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.util.CardUtil;
 
 /**
  *
@@ -57,7 +50,7 @@ public class FatedInfatuation extends CardImpl {
         this.color.setBlue(true);
 
         // Put a token onto the battlefield that's a copy of target creature you control. If it's your turn, scry 2.
-        this.getSpellAbility().addEffect(new FatedInfatuationCopyEffect());
+        this.getSpellAbility().addEffect(new PutTokenOntoBattlefieldCopyTargetEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ScryEffect(2), MyTurnCondition.getInstance(), "If it's your turn, scry 2"));
     }
@@ -69,37 +62,5 @@ public class FatedInfatuation extends CardImpl {
     @Override
     public FatedInfatuation copy() {
         return new FatedInfatuation(this);
-    }
-}
-
-class FatedInfatuationCopyEffect extends OneShotEffect {
-
-    public FatedInfatuationCopyEffect() {
-        super(Outcome.PutCreatureInPlay);
-        staticText = "Put a token onto the battlefield that's a copy of target creature you control";
-    }
-
-    public FatedInfatuationCopyEffect(final FatedInfatuationCopyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent == null) {
-            permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        }
-        if (permanent != null) {
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(permanent);
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public FatedInfatuationCopyEffect copy() {
-        return new FatedInfatuationCopyEffect(this);
     }
 }

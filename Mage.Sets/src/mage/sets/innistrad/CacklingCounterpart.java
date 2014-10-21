@@ -29,20 +29,13 @@ package mage.sets.innistrad;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TimingRule;
-import mage.constants.Zone;
-import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.util.CardUtil;
 
 /**
  * @author nantuko
@@ -56,7 +49,7 @@ public class CacklingCounterpart extends CardImpl {
         this.color.setBlue(true);
 
         // Put a token onto the battlefield that's a copy of target creature you control.
-        this.getSpellAbility().addEffect(new CacklingCounterpartEffect());
+        this.getSpellAbility().addEffect(new PutTokenOntoBattlefieldCopyTargetEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // Flashback {5}{U}{U}
@@ -70,38 +63,6 @@ public class CacklingCounterpart extends CardImpl {
     @Override
     public CacklingCounterpart copy() {
         return new CacklingCounterpart(this);
-    }
-}
-
-class CacklingCounterpartEffect extends OneShotEffect {
-
-    public CacklingCounterpartEffect() {
-        super(Outcome.PutCreatureInPlay);
-        staticText = "Put a token onto the battlefield that's a copy of target creature you control";
-    }
-
-    public CacklingCounterpartEffect(final CacklingCounterpartEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent == null) {
-            permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        }
-        if (permanent != null) {
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(permanent);
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public CacklingCounterpartEffect copy() {
-        return new CacklingCounterpartEffect(this);
     }
 }
 

@@ -1248,8 +1248,9 @@ public abstract class GameImpl implements Game, Serializable {
         CopyEffect newEffect = new CopyEffect(duration, permanent, copyToPermanent.getId());
         newEffect.newId();
         newEffect.setTimestamp();
+        newEffect.setApplier(applier);
         newEffect.init(newAbility, this);
-
+        
         // handle copies of copies
         for (Effect effect : getState().getContinuousEffects().getLayeredEffects(this)) {
             if (effect instanceof CopyEffect) {

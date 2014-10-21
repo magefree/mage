@@ -30,6 +30,7 @@ package mage.abilities.effects.common;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.abilities.Ability;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -41,6 +42,7 @@ import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 
@@ -91,13 +93,11 @@ public class PopulateEffect extends OneShotEffect {
             if (target.canChoose(source.getControllerId(), game)) {
                 player.choose(Outcome.Copy, target, source.getSourceId(), game);
                 Permanent tokenToCopy = game.getPermanent(target.getFirstTarget());
-                if (tokenToCopy != null && tokenToCopy instanceof PermanentToken) {
-                    Token newToken = new Token("","");
-                    CardUtil.copyTo(newToken).from(tokenToCopy);
-                    if (newToken != null ) {
-                        game.informPlayers("Token selected for populate: " + newToken.getName());
-                        return newToken.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-                    }
+                if (tokenToCopy != null) {
+                    game.informPlayers("Token selected for populate: " + tokenToCopy.getLogName());
+                    Effect effect = new PutTokenOntoBattlefieldCopyTargetEffect();
+                    effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
+                    return effect.apply(game, source);
                 }
             }
         }

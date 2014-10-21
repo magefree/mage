@@ -42,6 +42,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
+import mage.util.functions.ApplyToPermanent;
 
 /**
  *
@@ -55,7 +56,8 @@ public class CopyEffect extends ContinuousEffectImpl {
     private MageObject target;
     private UUID sourceId;
     private int zoneChangeCounter;
-
+    private ApplyToPermanent applier;
+    
     public CopyEffect(MageObject target, UUID sourceId) {
         this(Duration.Custom, target, sourceId);
     }
@@ -71,6 +73,7 @@ public class CopyEffect extends ContinuousEffectImpl {
         this.target = effect.target.copy();
         this.sourceId = effect.sourceId;
         this.zoneChangeCounter = effect.zoneChangeCounter;
+        this.applier = effect.applier;
     }
 
     @Override
@@ -155,4 +158,14 @@ public class CopyEffect extends ContinuousEffectImpl {
     public UUID getSourceId() {
         return sourceId;
     }
+
+    public ApplyToPermanent getApplier() {
+        return applier;
+    }
+
+    public void setApplier(ApplyToPermanent applier) {
+        this.applier = applier;
+    }
+    
+    
 }
