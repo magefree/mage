@@ -49,7 +49,6 @@ import mage.filter.FilterMana;
 public class Commander extends DeckValidator {
 
     protected List<String> banned = new ArrayList<>();
-    protected List<String> bannedCommander = new ArrayList<>();
     
     private static final String regexBlack = ".*\\x7b.{0,2}B.{0,2}\\x7d.*";
     private static final String regexBlue  = ".*\\x7b.{0,2}U.{0,2}\\x7d.*";
@@ -64,16 +63,17 @@ public class Commander extends DeckValidator {
          banned.add("Balance");
          banned.add("Biorhythm");
          banned.add("Black Lotus");
+         banned.add("Braids, Cabal Minion");
          banned.add("Channel");
          banned.add("Coalition Victory");
          banned.add("Emrakul, the Aeons Torn");
+         banned.add("Erayo, Soratami Ascendant");   
          banned.add("Fastbond");
          banned.add("Gifts Ungiven");
          banned.add("Griselbrand");
          banned.add("Karakas");
          banned.add("Library of Alexandria");
          banned.add("Limited Resources");
-         banned.add("Metalworker");
          banned.add("Mox Emerald");
          banned.add("Mox Jet");
          banned.add("Mox Pearl");
@@ -84,6 +84,7 @@ public class Commander extends DeckValidator {
          banned.add("Primeval Titan");
          banned.add("Protean Hulk");
          banned.add("Recurring Nightmare");
+         banned.add("Rofellos, Llanowar Emissary");         
          banned.add("Sundering Titan");
          banned.add("Sway of the Stars");
          banned.add("Sylvan Primordial");
@@ -96,12 +97,6 @@ public class Commander extends DeckValidator {
          banned.add("Worldfire");
          banned.add("Yawgmoth's Bargain");
          
-         
-         bannedCommander.add("Braids, Cabal Minion");
-         bannedCommander.add("Erayo, Soratami Ascendant");
-         bannedCommander.add("Kokusho, The Evening Star");
-         bannedCommander.add("Rofellos, Llanowar Emissary");
-
     }
     
     
