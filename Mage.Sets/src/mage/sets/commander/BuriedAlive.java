@@ -92,7 +92,7 @@ class BuriedAliveEffect extends SearchEffect {
         if (player != null) {
             if (player.searchLibrary(target, game)) {
                 if (target.getTargets().size() > 0) {
-                    for (UUID cardId: (List<UUID>)target.getTargets()) {
+                    for (UUID cardId: target.getTargets()) {
                         Card card = player.getLibrary().remove(cardId, game);
                         if (card != null){
                             card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);

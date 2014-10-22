@@ -106,7 +106,7 @@ class ReapIntellectEffect extends OneShotEffect {
                 TargetCard target = new TargetCard(0, xCost, Zone.PICK, filter);
                 target.setNotTarget(true);
                 if (you.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
-                    for (UUID cardId : (List<UUID>) target.getTargets()) {
+                    for (UUID cardId : target.getTargets()) {
                         Card chosenCard = game.getCard(cardId);
                         if (chosenCard != null) {
                             if (chosenCard.moveToExile(source.getSourceId(), "Reap Intellect", source.getSourceId(), game)) {
@@ -116,41 +116,39 @@ class ReapIntellectEffect extends OneShotEffect {
                     }
                     for (UUID cardId : exiledCards) {
                         if (cardId != null) {
-                            if (targetPlayer != null) {
-                                Card card = game.getCard(cardId);
+                            Card card = game.getCard(cardId);
 
-                                // cards in Graveyard
-                                Cards cardsInGraveyard = new CardsImpl(Zone.GRAVEYARD);
-                                cardsInGraveyard.addAll(targetPlayer.getGraveyard());
-                                you.lookAtCards("Reap Intellect search of Graveyard", cardsInGraveyard, game);
-                                
-                                // cards in Hand
-                                Cards cardsInHand = new CardsImpl(Zone.HAND);
-                                cardsInHand.addAll(targetPlayer.getHand());
-                                you.lookAtCards("Reap Intellect search of Hand", cardsInHand, game);
+                            // cards in Graveyard
+                            Cards cardsInGraveyard = new CardsImpl(Zone.GRAVEYARD);
+                            cardsInGraveyard.addAll(targetPlayer.getGraveyard());
+                            you.lookAtCards("Reap Intellect search of Graveyard", cardsInGraveyard, game);
 
-                                //cards in Library
-                                Cards cardsInLibrary = new CardsImpl(Zone.LIBRARY);
-                                cardsInLibrary.addAll(targetPlayer.getLibrary().getCards(game));
-                                you.lookAtCards("Reap Intellect search of Library", cardsInLibrary, game);
+                            // cards in Hand
+                            Cards cardsInHand = new CardsImpl(Zone.HAND);
+                            cardsInHand.addAll(targetPlayer.getHand());
+                            you.lookAtCards("Reap Intellect search of Hand", cardsInHand, game);
 
-                                // exile same named cards from zones
+                            //cards in Library
+                            Cards cardsInLibrary = new CardsImpl(Zone.LIBRARY);
+                            cardsInLibrary.addAll(targetPlayer.getLibrary().getCards(game));
+                            you.lookAtCards("Reap Intellect search of Library", cardsInLibrary, game);
 
-                                for (Card checkCard : cardsInGraveyard.getCards(game)) {
-                                    if (checkCard.getName().equals(card.getName())) {
-                                        checkCard.moveToExile(source.getSourceId(), "Graveyard", source.getSourceId(), game);
-                                    }
+                            // exile same named cards from zones
+
+                            for (Card checkCard : cardsInGraveyard.getCards(game)) {
+                                if (checkCard.getName().equals(card.getName())) {
+                                    checkCard.moveToExile(source.getSourceId(), "Graveyard", source.getSourceId(), game);
                                 }
-                                for (Card checkCard : cardsInHand.getCards(game)) {
-                                    if (checkCard.getName().equals(card.getName())) {
-                                        checkCard.moveToExile(source.getSourceId(), "Hand", source.getSourceId(), game);
-                                    }
+                            }
+                            for (Card checkCard : cardsInHand.getCards(game)) {
+                                if (checkCard.getName().equals(card.getName())) {
+                                    checkCard.moveToExile(source.getSourceId(), "Hand", source.getSourceId(), game);
                                 }
+                            }
 
-                                for (Card checkCard : cardsInLibrary.getCards(game)) {
-                                    if (checkCard.getName().equals(card.getName())) {
-                                        checkCard.moveToExile(source.getSourceId(), "Library", source.getSourceId(), game);
-                                    }
+                            for (Card checkCard : cardsInLibrary.getCards(game)) {
+                                if (checkCard.getName().equals(card.getName())) {
+                                    checkCard.moveToExile(source.getSourceId(), "Library", source.getSourceId(), game);
                                 }
                             }
                         }

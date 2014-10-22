@@ -124,7 +124,7 @@ class SurgicalExtractionEffect extends OneShotEffect {
                         for (UUID targetId : targets) {
                             Card targetCard = targetPlayer.getGraveyard().get(targetId, game);
                             if (targetCard != null) {
-                                targetCard.moveToExile(null, null, source.getSourceId(), game);
+                                player.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.GRAVEYARD);
                             }
                         }
                     }
@@ -140,7 +140,7 @@ class SurgicalExtractionEffect extends OneShotEffect {
                         for (UUID targetId : targets) {
                             Card targetCard = targetPlayer.getHand().get(targetId, game);
                             if (targetCard != null) {
-                                targetCard.moveToExile(null, null, source.getSourceId(), game);
+                                player.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.HAND);                                
                             }
                         }
                     }
@@ -153,12 +153,12 @@ class SurgicalExtractionEffect extends OneShotEffect {
                 if (cardsCount > 0) {
                     filter.setMessage("card named " + card.getName() + " in the library of " + targetPlayer.getName());
                     TargetCardInLibrary target = new TargetCardInLibrary(0, cardsCount, filter);
-                    if (player.choose(Outcome.Exile, cardsInLibrary, target, game)) {
+                    if (player.searchLibrary(target, game, targetPlayer.getId())) {
                         List<UUID> targets = target.getTargets();
                         for (UUID targetId : targets) {
                             Card targetCard = targetPlayer.getLibrary().getCard(targetId, game);
                             if (targetCard != null) {
-                                targetCard.moveToExile(null, null, source.getSourceId(), game);
+                                player.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.LIBRARY);                                
                             }
                         }
                     }

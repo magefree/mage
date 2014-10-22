@@ -115,7 +115,7 @@ class FiremindsForesightSearchEffect extends  OneShotEffect {
             if (cardsCount > 0) {
                 TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
                 if (player.searchLibrary(target, game)) {
-                    for (UUID cardId: (List<UUID>)target.getTargets()) {
+                    for (UUID cardId: target.getTargets()) {
                         Card card = player.getLibrary().remove(cardId, game);
                         if (card != null){
                             card.moveToZone(Zone.HAND, source.getSourceId(), game, false);

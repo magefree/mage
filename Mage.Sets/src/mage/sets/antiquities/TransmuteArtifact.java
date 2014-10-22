@@ -92,15 +92,15 @@ class TransmuteArtifactEffect extends SearchEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
         //Sacrifice an artifact. 
         int convertedManaCost = 0;
         boolean sacrifice = false;
         TargetControlledPermanent targetArtifact = new TargetControlledPermanent(new FilterControlledArtifactPermanent());
-        if(player.chooseTarget(Outcome.Sacrifice, targetArtifact, source, game)){
+        if(controller.chooseTarget(Outcome.Sacrifice, targetArtifact, source, game)){
             Permanent permanent = game.getPermanent(targetArtifact.getFirstTarget());
             if(permanent != null){
                 convertedManaCost = permanent.getManaCost().convertedManaCost();
@@ -112,34 +112,34 @@ class TransmuteArtifactEffect extends SearchEffect {
             return true;
         }
         //If you do, search your library for an artifact card. 
-        if (sacrifice && player.searchLibrary(target, game)) {
+        if (sacrifice && controller.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
-                for (UUID cardId: (List<UUID>)target.getTargets()) {
-                    Card card = player.getLibrary().getCard(cardId, game);
+                for (UUID cardId: target.getTargets()) {
+                    Card card = controller.getLibrary().getCard(cardId, game);
                     if (card != null) {
                         //If that card's converted mana cost is less than or equal to the sacrificed artifact's converted mana cost, put it onto the battlefield. 
                         if(card.getManaCost().convertedManaCost() <= convertedManaCost){
-                            card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId(), false);
+                            controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
                         }
                         else
                         {
                             //If it's greater, you may pay {X}, where X is the difference. If you do, put it onto the battlefield. 
                             GenericManaCost cost = new GenericManaCost(card.getManaCost().convertedManaCost() - convertedManaCost);
                             if(cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)){
-                                card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId(), false);
+                                controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());                                
                             }
                             else{
                                 //If you don't, put it into its owner's graveyard. Then shuffle your library
-                                card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
+                                controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                             }
                         }
                     }
                 }
             }
-            player.shuffleLibrary(game);
+            controller.shuffleLibrary(game);
             return true;
         }
-        player.shuffleLibrary(game);
+        controller.shuffleLibrary(game);
         return false;
     }
 

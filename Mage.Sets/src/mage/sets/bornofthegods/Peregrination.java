@@ -103,7 +103,7 @@ class PeregrinationEffect extends OneShotEffect {
         if (player.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
                 Cards revealed = new CardsImpl();
-                for (UUID cardId: (List<UUID>)target.getTargets()) {
+                for (UUID cardId: target.getTargets()) {
                     Card card = player.getLibrary().getCard(cardId, game);
                     revealed.add(card);
                 }
@@ -113,23 +113,14 @@ class PeregrinationEffect extends OneShotEffect {
                     player.choose(Outcome.Benefit, revealed, target2, game);
                     Card card = revealed.get(target2.getFirstTarget(), game);
 
-                    player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
-
+                    player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId(), true);
                     revealed.remove(card);
-                    Permanent permanent = game.getPermanent(card.getId());
-                    if (permanent != null) {
-                        permanent.setTapped(true);
-                    }
                     card = revealed.getCards(game).iterator().next();
                     player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                 }
                 else if (target.getTargets().size() == 1) {
                     Card card = revealed.getCards(game).iterator().next();
-                    player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
-                    Permanent permanent = game.getPermanent(card.getId());
-                    if (permanent != null) {
-                        permanent.setTapped(true);
-                    }
+                    player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId(), true);
                 }
 
             }
