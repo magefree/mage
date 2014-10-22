@@ -37,7 +37,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
@@ -49,7 +49,7 @@ public class Scrivener extends CardImpl {
     private static final FilterCard filter = new FilterCard("instant card from your graveyard");
     
     static{
-    filter.add(new CardTypePredicate(CardType.INSTANT));
+        filter.add(new CardTypePredicate(CardType.INSTANT));
     }       
     
     public Scrivener(UUID ownerId) {
@@ -64,7 +64,7 @@ public class Scrivener extends CardImpl {
 
         // When Scrivener enters the battlefield, you may return target instant card from your graveyard to your hand.
        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), true);
-       ability.addTarget(new TargetCardInGraveyard(filter));
+       ability.addTarget(new TargetCardInYourGraveyard(filter));
        this.addAbility(ability);
         
     }
