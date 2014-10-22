@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -42,58 +42,61 @@ import mage.players.Player;
 
 /**
  *
- * @author jeffwadsworth
- *
+ * @author LevelX2
  */
-public class JackalPup extends CardImpl {
+public class ShinkaGatekeeper extends CardImpl {
 
-    public JackalPup(UUID ownerId) {
-        super(ownerId, 183, "Jackal Pup", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "TMP";
-        this.subtype.add("Hound");
+    public ShinkaGatekeeper(UUID ownerId) {
+        super(ownerId, 117, "Shinka Gatekeeper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "BOK";
+        this.subtype.add("Ogre");
+        this.subtype.add("Warrior");
 
         this.color.setRed(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
 
-        // Whenever Jackal Pup is dealt damage, it deals that much damage to you.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new JackalPupEffect(), false));
-
+        // Whenever Shinka Gatekeeper is dealt damage, it deals that much damage to you.
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new ShinkaGatekeeperDealDamageEffect(), false));
     }
 
-    public JackalPup(final JackalPup card) {
+    public ShinkaGatekeeper(final ShinkaGatekeeper card) {
         super(card);
     }
 
     @Override
-    public JackalPup copy() {
-        return new JackalPup(this);
+    public ShinkaGatekeeper copy() {
+        return new ShinkaGatekeeper(this);
     }
 }
 
-class JackalPupEffect extends OneShotEffect {
 
-    public JackalPupEffect() {
+class ShinkaGatekeeperDealDamageEffect extends OneShotEffect {
+
+    public ShinkaGatekeeperDealDamageEffect() {
         super(Outcome.Damage);
-        staticText = "it deals that much damage to you";
+        this.staticText = "it deals that much damage to you";
     }
 
-    public JackalPupEffect(final JackalPupEffect effect) {
+    public ShinkaGatekeeperDealDamageEffect(final ShinkaGatekeeperDealDamageEffect effect) {
         super(effect);
     }
 
     @Override
-    public JackalPupEffect copy() {
-        return new JackalPupEffect(this);
+    public ShinkaGatekeeperDealDamageEffect copy() {
+        return new ShinkaGatekeeperDealDamageEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you != null) {
-            you.damage((Integer) this.getValue("damage"), source.getSourceId(), game, false, true);
+        int amount = (Integer) getValue("damage");
+        if (amount > 0) {
+            Player player = game.getPlayer(source.getControllerId());
+            if (player != null) {
+                player.damage(amount, source.getSourceId(), game, false, true);
+                return true;
+            }
         }
-        return true;
+        return false;
     }
-
 }

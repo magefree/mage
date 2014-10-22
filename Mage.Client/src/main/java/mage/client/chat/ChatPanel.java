@@ -277,7 +277,7 @@ public class ChatPanel extends javax.swing.JPanel {
 
     public void useExtendedView(VIEW_MODE extendedViewMode) {
         this.extendedViewMode = extendedViewMode;
-        this.txtConversation.setExtBackgroundColor(new Color(0, 0, 0, 100));
+        this.txtConversation.setExtBackgroundColor(new Color(0, 0, 0, 255)); // Alpha = 255 not transparent
         // this.txtConversation.setBackground(new Color(0, 0, 0, 0));
         // this.txtConversation.setForeground(new Color(255, 255, 255));
         this.txtConversation.setSelectionColor(Color.LIGHT_GRAY);

@@ -81,6 +81,7 @@ public class FiredrinkerSatyr extends CardImpl {
         return new FiredrinkerSatyr(this);
     }
 }
+
 class FiredrinkerSatyrDealDamageEffect extends OneShotEffect {
 
     public FiredrinkerSatyrDealDamageEffect() {

@@ -100,7 +100,7 @@ class HarmsWayPreventDamageTargetEffect extends PreventionEffectImpl {
             UUID redirectTo = source.getTargets().get(1).getFirstTarget();
             Permanent permanent = game.getPermanent(redirectTo);
             if (permanent != null) {
-                game.informPlayers("Dealing " + preventionData.getPreventedDamage() + " to " + permanent.getName() + " instead");
+                game.informPlayers("Dealing " + preventionData.getPreventedDamage() + " to " + permanent.getLogName() + " instead");
                 // keep the original source id as it is redirecting
                 permanent.damage(preventionData.getPreventedDamage(), event.getSourceId(), game, false, true);
             }
@@ -110,14 +110,13 @@ class HarmsWayPreventDamageTargetEffect extends PreventionEffectImpl {
                 // keep the original source id as it is redirecting
                 player.damage(preventionData.getPreventedDamage(), event.getSourceId(), game, false, true);
             }
-        }        
+        }
         return false;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!this.used && super.applies(event, source, game)) {
-
             // check source
             MageObject object = game.getObject(event.getSourceId());
             if (object == null) {
@@ -125,8 +124,8 @@ class HarmsWayPreventDamageTargetEffect extends PreventionEffectImpl {
                 return false;
             }
 
-            if (!object.getId().equals(source.getFirstTarget()) &&
-                (!(object instanceof Spell) || !((Spell) object).getSourceId().equals(source.getFirstTarget()))) {
+            if (!object.getId().equals(source.getFirstTarget())
+                    && (!(object instanceof Spell) || !((Spell) object).getSourceId().equals(source.getFirstTarget()))) {
                 return false;
             }
 
@@ -152,3 +151,4 @@ class HarmsWayPreventDamageTargetEffect extends PreventionEffectImpl {
     }
 
 }
+
