@@ -175,9 +175,13 @@ public class TableController {
             return false;
         }
         Deck deck = null;
-        if (deckList != null) {
-            deck = Deck.load(deckList, false, false);
-
+        if (!table.getTournament().getTournamentType().isLimited()) {
+            if  (deckList != null) {
+                deck = Deck.load(deckList, false, false);
+            } else {
+                user.showUserMessage("Join Table", "No valid deck selected!");
+                return false;
+            }
             if (!Main.isTestMode() && !table.getValidator().validate(deck)) {
                 StringBuilder sb = new StringBuilder("You (").append(name).append(") have an invalid deck for the selected ").append(table.getValidator().getName()).append(" Format. \n\n");
                 for (Map.Entry<String, String> entry : table.getValidator().getInvalid().entrySet()) {
