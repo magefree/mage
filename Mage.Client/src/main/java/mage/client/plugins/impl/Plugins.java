@@ -1,5 +1,14 @@
 package mage.client.plugins.impl;
 
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+import javax.swing.JComponent;
 import mage.cards.MageCard;
 import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
@@ -23,12 +32,6 @@ import org.apache.log4j.Logger;
 import org.mage.plugins.card.CardPluginImpl;
 import org.mage.plugins.theme.ThemePluginImpl;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.*;
-
 
 public class Plugins implements MagePlugins {
 
@@ -42,7 +45,7 @@ public class Plugins implements MagePlugins {
     private CardPlugin cardPlugin = null;
     private CounterPlugin counterPlugin = null;
     private static final MageActionCallback mageActionCallback = new MageActionCallback();
-    private Map<String, String> sortingOptions = new HashMap<String, String>();
+    private final Map<String, String> sortingOptions = new HashMap<>();
 
     public static MagePlugins getInstance() {
         return fINSTANCE;
