@@ -23,7 +23,7 @@
         <dependency>
             <groupId>com.googlecode.jspf</groupId>
             <artifactId>jspf-core</artifactId>
-            <version>0.9.1</version>
+            <version>0.9.1</version>            
         </dependency>
         <dependency>
             <groupId>org.jboss.remoting</groupId>
@@ -52,7 +52,14 @@
         </dependency>
 
     </dependencies>
-
+    <!-- to get the reference to local repository with com\googlecode\jspf\jspf-core\0.9.1\ -->
+    <repositories>
+        <repository>
+            <id>local-project-repo</id>
+            <url>file://${project.basedir}/../repository</url>
+        </repository>
+    </repositories>
+    
     <build>
         <sourceDirectory>src</sourceDirectory>
         <plugins>

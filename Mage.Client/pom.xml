@@ -128,7 +128,15 @@
             <version>0.3.6</version>
         </dependency>
     </dependencies>
-
+    
+    <!-- to get the reference to local repository with com\googlecode\jspf\jspf-core\0.9.1\ -->
+    <repositories>
+        <repository>
+            <id>local-project-repo</id>
+            <url>file://${project.basedir}/../repository</url>
+        </repository>
+    </repositories>
+    
     <build>
         <plugins>
             <plugin>
