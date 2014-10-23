@@ -102,7 +102,7 @@ class DescendantsPathEffect extends OneShotEffect {
                 if (card.getCardType().contains(CardType.CREATURE)) {
                     FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
-                    ArrayList<Predicate<MageObject>> subtypes = new ArrayList<Predicate<MageObject>>();
+                    ArrayList<Predicate<MageObject>> subtypes = new ArrayList<>();
                     for (String subtype: card.getSubtype()) {
                         subtypes.add(new SubtypePredicate(subtype));
                     }

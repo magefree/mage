@@ -38,9 +38,13 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetCardInHand;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
@@ -102,23 +106,42 @@ class ThoughtHemorrhageEffect extends OneShotEffect {
                 if (cardsFound > 0) {
                     targetPlayer.damage(3 * cardsFound, source.getSourceId(), game, false, true);
                 }
-                for (Card card : targetPlayer.getGraveyard().getCards(game)) {
-                    if (card.getName().equals(cardName)) {
-                        controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD);                        
+                // Exile all cards with the same name
+                // Building a card filter with the name
+                FilterCard filterNamedCards = new FilterCard();
+                filterNamedCards.add(new NamePredicate(cardName));
+
+                // The cards you're searching for must be found and exiled if they're in the graveyard because it's a public zone.
+                // Finding those cards in the hand and library is optional, because those zones are hidden (even if the hand is temporarily revealed).
+                // search cards in graveyard
+                for (Card checkCard : targetPlayer.getGraveyard().getCards(game)) {
+                    if (checkCard.getName().equals(cardName)) {
+                        controller.moveCardToExileWithInfo(checkCard, null, "", source.getSourceId(), game, Zone.GRAVEYARD);
                     }
                 }
-                for (Card card : targetPlayer.getHand().getCards(game)) {
-                    if (card.getName().equals(cardName)) {
+
+                // search cards in hand
+                TargetCardInHand targetCardsHand = new TargetCardInHand(0, Integer.MAX_VALUE, filterNamedCards);
+                controller.chooseTarget(outcome, targetPlayer.getGraveyard(), targetCardsHand, source, game);
+                for(UUID cardId:  targetCardsHand.getTargets()) {
+                    Card card = game.getCard(cardId);
+                    if (card != null) {
                         controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.HAND);
                     }
                 }
-                for (Card card : targetPlayer.getLibrary().getCards(game)) {
-                    if (card.getName().equals(cardName)) {
+
+                // search cards in Library
+                // If the player has no nonland cards in his or her hand, you can still search that player's library and have him or her shuffle it.
+                TargetCardInLibrary targetCardsLibrary = new TargetCardInLibrary(0, Integer.MAX_VALUE, filterNamedCards);
+                controller.searchLibrary(targetCardsLibrary, game, targetPlayer.getId());
+                for(UUID cardId:  targetCardsLibrary.getTargets()) {
+                    Card card = game.getCard(cardId);
+                    if (card != null) {
                         controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY);
                     }
                 }
                 targetPlayer.shuffleLibrary(game);
-                return true;
+                return true;     
             }
         }
         return false;
