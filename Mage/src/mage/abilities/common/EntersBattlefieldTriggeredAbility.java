@@ -56,7 +56,7 @@ public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public EntersBattlefieldTriggeredAbility(Effect effect, boolean optional, String rulePrefix) {
-        super(Zone.BATTLEFIELD, effect, optional);
+        super(Zone.ALL, effect, optional); // Zone.All because a creature with trigger can be put into play and be sacrificed during the resolution of an effect (discard Obstinate Baloth with Smallpox)
         this.rulePrefix = rulePrefix;
     }
 
