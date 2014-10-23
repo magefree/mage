@@ -63,7 +63,10 @@ public class ObstinateBaloth extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
+        // When Obstinate Baloth enters the battlefield, you gain 4 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4), false));
+        
+        // If a spell or ability an opponent controls causes you to discard Obstinate Baloth, put it onto the battlefield instead of putting it into your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.HAND, new ObstinateBalothEffect()));
     }
 
@@ -112,10 +115,10 @@ class ObstinateBalothEffect extends ReplacementEffectImpl {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            Player player = game.getPlayer(card.getOwnerId());
-            if (player != null) {
-                if (card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), player.getId())) {
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, card.getId(), source.getSourceId(), player.getId()));
+            Player owner = game.getPlayer(card.getOwnerId());
+            if (owner != null) {                
+                if (owner.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId())) {
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, card.getId(), source.getSourceId(), owner.getId()));
                     return true;
                 }
             }

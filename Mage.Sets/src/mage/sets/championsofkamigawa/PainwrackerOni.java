@@ -31,19 +31,17 @@ package mage.sets.championsofkamigawa;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.Ability;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -62,8 +60,9 @@ public class PainwrackerOni extends CardImpl {
 
         // Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)
         this.addAbility(FearAbility.getInstance());
+        
         // At the beginning of your upkeep, sacrifice a creature if you don't control an Ogre.
-        this.addAbility(new PainwrackerOniTriggeredAbility1(new SacrificeControllerEffect(new FilterControlledCreaturePermanent(), 1, "")));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PainwrackerOniEffect(new FilterControlledCreaturePermanent(), 1, ""), TargetController.YOU, false));
     }
 
     public PainwrackerOni (final PainwrackerOni card) {
@@ -77,42 +76,27 @@ public class PainwrackerOni extends CardImpl {
 
 }
 
-class PainwrackerOniTriggeredAbility1 extends TriggeredAbilityImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent();
-
-    static {
-        filter.add(new SubtypePredicate("Ogre"));
+class PainwrackerOniEffect extends SacrificeControllerEffect {
+    
+    public PainwrackerOniEffect(FilterPermanent filter, int count, String preText) {
+        super(filter, count, preText);
+        this.staticText = "sacrifice a creature if you don't control an Ogre";
     }
-
-    public PainwrackerOniTriggeredAbility1(Effect effect) {
-        super(Zone.BATTLEFIELD, effect, false);
+    
+    public PainwrackerOniEffect(final PainwrackerOniEffect effect) {
+        super(effect);
     }
-
-    public PainwrackerOniTriggeredAbility1(final PainwrackerOniTriggeredAbility1 ability) {
-        super(ability);
-    }
-
+    
     @Override
-    public PainwrackerOniTriggeredAbility1 copy() {
-        return new PainwrackerOniTriggeredAbility1(this);
+    public PainwrackerOniEffect copy() {
+        return new PainwrackerOniEffect(this);
     }
-
+    
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
-            return true;
+    public boolean apply(Game game, Ability source) {
+        if (game.getBattlefield().countAll(new FilterCreaturePermanent("Oger", "Oger"), source.getControllerId(), game) < 1) {
+            return super.apply(game, source);
         }
-        return false;
-    }
-
-    @Override
-    public boolean checkInterveningIfClause(Game game) {
-        return game.getBattlefield().countAll(filter, this.controllerId, game) < 1;
-    }
-
-    @Override
-    public String getRule() {
-        return "At the beginning of your upkeep, sacrifice a creature if you don't control an Ogre.";
+        return true;
     }
 }
