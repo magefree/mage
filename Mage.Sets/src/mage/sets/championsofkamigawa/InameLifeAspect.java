@@ -33,7 +33,8 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.ExileSourceEffect;
+import mage.abilities.costs.common.ExileSourceFromGraveCost;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
@@ -62,8 +63,7 @@ public class InameLifeAspect extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Iname, Life Aspect dies, you may exile it. If you do, return any number of target Spirit cards from your graveyard to your hand.
-        Ability ability = new DiesTriggeredAbility(new ExileSourceEffect(), true);
-        ability.addEffect(new ReturnToHandTargetEffect());
+        Ability ability = new DiesTriggeredAbility(new DoIfCostPaid(new ReturnToHandTargetEffect(), new ExileSourceFromGraveCost(), "Exile to return Spirit cards?"), false);
         ability.addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, filter));
         this.addAbility(ability);
     }
