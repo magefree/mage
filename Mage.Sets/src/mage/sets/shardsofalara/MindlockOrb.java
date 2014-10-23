@@ -35,7 +35,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -54,7 +54,7 @@ public class MindlockOrb extends CardImpl {
         this.color.setBlue(true);
 
         // Players can't search libraries.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MindlockOrbReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MindlockRuleModifyingEffect()));
 
     }
 
@@ -68,16 +68,14 @@ public class MindlockOrb extends CardImpl {
     }
 }
 
-class MindlockOrbReplacementEffect extends ReplacementEffectImpl {
-
-    private static final String effectText = "Players can't search libraries";
+class MindlockRuleModifyingEffect extends ContinuousRuleModifiyingEffectImpl {
     
-    MindlockOrbReplacementEffect ( ) {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        staticText = effectText;
+    MindlockRuleModifyingEffect ( ) {
+        super(Duration.WhileOnBattlefield, Outcome.Neutral, true, false);
+        staticText = "Players can't search libraries";
     }
 
-    MindlockOrbReplacementEffect ( MindlockOrbReplacementEffect effect ) {
+    MindlockRuleModifyingEffect ( MindlockRuleModifyingEffect effect ) {
         super(effect);
     }
 
@@ -87,24 +85,13 @@ class MindlockOrbReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if ( event.getType() == EventType.SEARCH_LIBRARY) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if ( event.getType() == EventType.SEARCH_LIBRARY ) {
-            return true;
-        }
-        return false;
+        return event.getType() == EventType.SEARCH_LIBRARY;
     }
 
     @Override
-    public MindlockOrbReplacementEffect copy() {
-        return new MindlockOrbReplacementEffect(this);
+    public MindlockRuleModifyingEffect copy() {
+        return new MindlockRuleModifyingEffect(this);
     }
 
 }
