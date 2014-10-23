@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.costs.common.ExileSourceCost;
+import mage.abilities.costs.common.ExileSourceFromGraveCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.Card;
@@ -63,7 +64,7 @@ public class AcademyRector extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Academy Rector dies, you may exile it. If you do, search your library for an enchantment card, put that card onto the battlefield, then shuffle your library.
-        Ability ability = new DiesTriggeredAbility(new DoIfCostPaid(new AcademyRectorEffect(), new ExileSourceCost(), "Exile to search enchantment?"), false);
+        Ability ability = new DiesTriggeredAbility(new DoIfCostPaid(new AcademyRectorEffect(), new ExileSourceFromGraveCost(), "Exile to search enchantment?"), false);
         this.addAbility(ability);
     }
 
@@ -87,7 +88,7 @@ class AcademyRectorEffect extends OneShotEffect {
 
     public AcademyRectorEffect() {
         super(Outcome.Benefit);
-        staticText = "Search your library for an enchantment card and put it onto the battlefield. Then shuffle your library";
+        staticText = "search your library for an enchantment card and put it onto the battlefield. Then shuffle your library";
     }
 
     public AcademyRectorEffect(final AcademyRectorEffect effect) {

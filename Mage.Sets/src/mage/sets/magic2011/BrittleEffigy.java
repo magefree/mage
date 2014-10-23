@@ -34,6 +34,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.ExileSourceCost;
@@ -52,11 +53,11 @@ public class BrittleEffigy extends CardImpl {
     public BrittleEffigy(UUID ownerId) {
         super(ownerId, 202, "Brittle Effigy", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "M11";
-        Costs costs = new CostsImpl();
-        costs.add(new TapSourceCost());
-        costs.add(new ExileSourceCost());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), costs);
-        ability.addManaCost(new GenericManaCost(4));
+        
+        // {4}, {T}, Exile Brittle Effigy: Exile target creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new GenericManaCost(4));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new ExileSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
