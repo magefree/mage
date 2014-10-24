@@ -72,6 +72,10 @@ class BileBlightEffect extends BoostAllEffect {
         staticText = "Target creature and all creatures with the same name as that creature get -3/-3 until end of turn";
     }
 
+    public BileBlightEffect(final BileBlightEffect effect) {
+        super(effect);
+    }
+
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
@@ -93,6 +97,6 @@ class BileBlightEffect extends BoostAllEffect {
 
     @Override
     public BileBlightEffect copy() {
-        return new BileBlightEffect();
+        return new BileBlightEffect(this);
     }
 }
