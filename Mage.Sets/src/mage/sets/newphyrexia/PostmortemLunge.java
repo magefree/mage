@@ -35,15 +35,15 @@ import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
-import mage.abilities.costs.VariableCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -61,6 +61,7 @@ public class PostmortemLunge extends CardImpl {
 
         this.color.setBlack(true);
 
+        // Return target creature card with converted mana cost X from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new PostmortemLungeEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
     }
@@ -75,18 +76,12 @@ public class PostmortemLunge extends CardImpl {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-        Card card = game.getCard(ability.getFirstTarget());
-        if (card != null) {
-            // insert at the beginning (so it will be {2}{B}, not {B}{2})
-            ability.getManaCostsToPay().add(0, new GenericManaCost(card.getManaCost().convertedManaCost()));
-        }
-        // no {X} anymore as we already have chosen the target with defined manacost
-        for (ManaCost cost : ability.getManaCostsToPay()) {
-            if (cost instanceof VariableCost) {
-                cost.setPaid();
-            }
-        }
+    public void adjustTargets(Ability ability, Game game) {
+        ability.getTargets().clear();
+        int xValue = ability.getManaCostsToPay().getX();
+        FilterCard filter = new FilterCreatureCard("creature card with converted mana cost " + xValue +  " or less from your graveyard");
+        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, xValue + 1));
+        ability.getTargets().add(new TargetCardInYourGraveyard(filter));
     }
 }
 
@@ -109,8 +104,12 @@ class PostmortemLungeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getFirstTarget());
-        Player player = game.getPlayer(card.getOwnerId());
-        if (card != null && player != null) {
+        
+        if (card != null) {
+            Player player = game.getPlayer(card.getOwnerId());
+            if (player == null) {
+                return false;
+            }
             card.addAbility(HasteAbility.getInstance());
             card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
 

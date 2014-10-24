@@ -25,80 +25,89 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.sets.betrayersofkamigawa;
 
 import java.util.List;
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.BoostAllEffect;
+import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
  *
- * @author Plopman
+ * @author LevelX2
  */
-public class DeathPitOffering extends CardImpl {
+public class YukoraThePrisoner extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    
-    static{
-        filter.add(new ControllerPredicate(TargetController.YOU));
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Ogre creatures");
+
+    static {
+        filter.add(Predicates.not(new SubtypePredicate("Ogre")));
     }
-    
-    public DeathPitOffering(UUID ownerId) {
-        super(ownerId, 56, "Death Pit Offering", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
-        this.expansionSetCode = "NMS";
+
+    public YukoraThePrisoner(UUID ownerId) {
+        super(ownerId, 90, "Yukora, the Prisoner", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        this.expansionSetCode = "BOK";
+        this.supertype.add("Legendary");
+        this.subtype.add("Demon");
+        this.subtype.add("Spirit");
 
         this.color.setBlack(true);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
 
-        // When Death Pit Offering enters the battlefield, sacrifice all creatures you control.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DeathPitOfferingEffect()));
-        // Creatures you control get +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false)));
+        // When Yukora, the Prisoner leaves the battlefield, sacrifice all non-Ogre creatures you control.
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new YukoraThePrisonerEffect(), false));
+
     }
 
-    public DeathPitOffering(final DeathPitOffering card) {
+    public YukoraThePrisoner(final YukoraThePrisoner card) {
         super(card);
     }
 
     @Override
-    public DeathPitOffering copy() {
-        return new DeathPitOffering(this);
+    public YukoraThePrisoner copy() {
+        return new YukoraThePrisoner(this);
     }
 }
 
-class DeathPitOfferingEffect extends OneShotEffect {
+class YukoraThePrisonerEffect extends OneShotEffect {
 
-    public DeathPitOfferingEffect() {
-        super(Outcome.Sacrifice);
-        this.staticText = "sacrifice all creatures you control";
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Ogre creatures");
+
+    static {
+        filter.add(Predicates.not(new SubtypePredicate("Ogre")));
     }
 
-    public DeathPitOfferingEffect(final DeathPitOfferingEffect effect) {
+    public YukoraThePrisonerEffect() {
+        super(Outcome.Sacrifice);
+        this.staticText = "sacrifice all non-Ogre creatures you control";
+    }
+
+    public YukoraThePrisonerEffect(final YukoraThePrisonerEffect effect) {
         super(effect);
     }
 
     @Override
-    public DeathPitOfferingEffect copy() {
-        return new DeathPitOfferingEffect(this);
+    public YukoraThePrisonerEffect copy() {
+        return new YukoraThePrisonerEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
+        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game);
         for (Permanent permanent : permanents) {
             permanent.sacrifice(source.getSourceId(), game);
         }
