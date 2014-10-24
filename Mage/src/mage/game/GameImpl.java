@@ -2099,6 +2099,14 @@ public abstract class GameImpl implements Game, Serializable {
             if (object != null) {
                 return object.copy();
             }
+            for (MageObject mageObject:lkiMap.values()) {
+                if (mageObject instanceof Spell) {
+                    if (((Spell)mageObject).getCard().getId().equals(objectId)) {
+                        return mageObject;
+                    }
+                }
+
+            }
         }
         return null;
     }
