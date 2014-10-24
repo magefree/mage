@@ -48,7 +48,7 @@ public class ManaSpentToCastCount  implements DynamicValue{
         if (!game.getStack().isEmpty()) {
             for (StackObject stackObject : game.getStack()) {
                 if (stackObject instanceof Spell && ((Spell)stackObject).getSourceId().equals(source.getSourceId())) {
-                    return ((Spell)stackObject).getSpellAbility().getManaCostsToPay().convertedManaCost();
+                    return ((Spell)stackObject).getConvertedManaCost();
                 }                
             }
         }
