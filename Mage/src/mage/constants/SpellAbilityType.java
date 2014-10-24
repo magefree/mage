@@ -6,6 +6,7 @@ package mage.constants;
  */
 public enum SpellAbilityType {
     BASE("Basic SpellAbility"),
+    BASE_ALTERNATE("Basic SpellAbility Alternate"), // used for Overload, Flashback to know they must be handled as Alternate casting costs
     SPLIT("Split SpellAbility"),
     SPLIT_FUSED("Split SpellAbility"),
     SPLIT_LEFT("LeftSplit SpellAbility"),
@@ -13,7 +14,7 @@ public enum SpellAbilityType {
     MODE("Mode SpellAbility"),
     SPLICE("Spliced SpellAbility");
 
-    private String text;
+    private final String text;
 
     SpellAbilityType(String text) {
         this.text = text;

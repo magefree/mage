@@ -63,7 +63,6 @@ import mage.players.Player;
  */
 public class FlashbackAbility extends SpellAbility {
 
-    private SpellAbilityType spellAbilityType;
     private String abilityName;
 
     public FlashbackAbility(Cost cost, TimingRule timingRule) {
@@ -74,7 +73,7 @@ public class FlashbackAbility extends SpellAbility {
         this.addCost(cost);
         this.timing = timingRule;
         this.usesStack = false;
-        this.spellAbilityType = SpellAbilityType.BASE;
+        this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
         this.addEffect(new CreateDelayedTriggeredAbilityEffect(new FlashbackTriggeredAbility()));
     }
 

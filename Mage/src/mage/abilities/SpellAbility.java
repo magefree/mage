@@ -37,6 +37,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 import java.util.UUID;
+import mage.players.Player;
 
 /**
  *
@@ -44,7 +45,7 @@ import java.util.UUID;
  */
 public class SpellAbility extends ActivatedAbilityImpl {
 
-    private SpellAbilityType spellAbilityType;
+    protected SpellAbilityType spellAbilityType;
 
     public SpellAbility(ManaCost cost, String cardName) {
         this(cost, cardName, Zone.HAND);
@@ -102,7 +103,13 @@ public class SpellAbility extends ActivatedAbilityImpl {
                     return false;
                 }
             }
-            
+            // Alternate spell abilities (Flashback, Overload) can't be cast with no mana to pay option
+            if (getSpellAbilityType().equals(SpellAbilityType.BASE_ALTERNATE)) {
+                Player player = game.getPlayer(playerId);
+                if (player != null && getSourceId().equals(player.getCastSourceIdWithoutMana())) {
+                    return false;
+                }
+            }
             if (costs.canPay(this, sourceId, controllerId, game)) {
                 if (getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
                     SplitCard splitCard = (SplitCard) game.getCard(getSourceId());
