@@ -58,7 +58,6 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.TargetCard;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -138,34 +137,16 @@ class PutCardsFromGraveyardToLibraryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Cards cards = new CardsImpl(Zone.PICK);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Cards cards = new CardsImpl();
             for (UUID cardId : this.getTargetPointer().getTargets(game, source)) {
-                Card card = player.getGraveyard().get(cardId, game);
+                Card card = controller.getGraveyard().get(cardId, game);
                 if (card != null) {
                     cards.add(card);
-                    game.setZone(card.getId(), Zone.PICK);
-                }
-
-            }
-            if (!cards.isEmpty()) {
-                TargetCard target = new TargetCard(Zone.PICK, new FilterCard("on bottom of your library (last chosen will be on bottom)"));
-                while (player.isInGame() && cards.size() > 1) {
-                    player.choose(Outcome.Neutral, cards, target, game);
-                    Card card = cards.get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        cards.remove(card);
-                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
-                    }
-                    target.clearChosen();
-                }
-                if (cards.size() == 1) {
-                    Card card = cards.get(cards.iterator().next(), game);
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
                 }
             }
-            return true;
+            return controller.putCardsOnBottomOfLibrary(cards, game, source, true);
         }
         return false;
     }
