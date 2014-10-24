@@ -227,7 +227,7 @@ public class LookLibraryControllerEffect extends OneShotEffect {
         } catch (NumberFormatException e) {
             numberLook = 0;
         }
-        StringBuilder sb = new StringBuilder("Look at the top ");
+        StringBuilder sb = new StringBuilder("look at the top ");
         switch (numberLook) {
             case 0:
                 sb.append(" X ");

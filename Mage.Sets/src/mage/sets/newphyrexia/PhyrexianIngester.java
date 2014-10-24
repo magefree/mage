@@ -48,6 +48,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPermanent;
 
 /**
@@ -107,12 +108,15 @@ class PhyrexianIngesterImprintEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
-        if (targetPermanent != null) {
-            targetPermanent.moveToExile(getId(), "Phyrexian Ingester (Imprint)", source.getSourceId(), game);
-            sourcePermanent.imprint(targetPermanent.getId(), game);
-            return true;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
+            if (targetPermanent != null) {
+                controller.moveCardToExileWithInfo(targetPermanent, getId(), "Phyrexian Ingester (Imprint)",  source.getSourceId(), game, Zone.BATTLEFIELD);
+                sourcePermanent.imprint(targetPermanent.getId(), game);
+                return true;
+            }            
         }
         return false;
     }

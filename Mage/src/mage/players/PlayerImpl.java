@@ -775,25 +775,29 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!anyOrder) {
                 for (UUID cardId : cards) {
                     Card card =game.getCard(cardId);
+                    
                     if (card != null) {
-                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
+                        Zone fromZone = game.getState().getZone(cardId);
+                        this.moveCardToLibraryWithInfo(card, source.getSourceId(), game, fromZone, false, false);
                     }
                 }
             } else {
-                TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
+                TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library (last one chosen will be bottommost)"));
                 target.setRequired(true);
                 while (isInGame() && cards.size() > 1) {
                     this.choose(Outcome.Neutral, cards, target, game);
                     Card chosenCard = cards.get(target.getFirstTarget(), game);
                     if (chosenCard != null) {
                         cards.remove(chosenCard);
-                        chosenCard.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
+                        Zone fromZone = game.getState().getZone(chosenCard.getId());
+                        this.moveCardToLibraryWithInfo(chosenCard, source.getSourceId(), game, fromZone, false, false);
                     }
                     target.clearChosen();
                 }
                 if (cards.size() == 1) {
                     Card chosenCard = cards.get(cards.iterator().next(), game);
-                    chosenCard.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
+                    Zone fromZone = game.getState().getZone(chosenCard.getId());
+                    this.moveCardToLibraryWithInfo(chosenCard, source.getSourceId(), game, fromZone, false, false);
                 }
             }
         }

@@ -95,10 +95,10 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
                 if (spell != null) {
                     card = game.getCard(spell.getSourceId());
                 }
-            } else {
-                card = game.getCard(event.getTargetId());
             }
-            
+            if (card == null) {
+                card = game.getCard(event.getTargetId());
+            }           
             if (card != null) {
                 Player player = game.getPlayer(card.getOwnerId());
                 if (player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", game)){
