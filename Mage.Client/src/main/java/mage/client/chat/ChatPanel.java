@@ -88,6 +88,10 @@ public class ChatPanel extends javax.swing.JPanel {
      */
     private static final String STATUS_COLOR = "#FFCC33";
     /**
+     * Alpha value for transparency (255 = not transparent)
+     */
+    private static final int ALPHA = 80;
+    /**
      * This will be a chat that will be connected to {this} and will handle
      * redirected messages; Mostly used to redirect user messages to another
      * window.
@@ -136,17 +140,17 @@ public class ChatPanel extends javax.swing.JPanel {
     public ChatPanel(boolean addPlayersTab) {
         tableModel = new TableModel();
         initComponents();
-        jTablePlayers.setBackground(new Color(0, 0, 0, 0));
+        setBackground(new Color(0, 0, 0, ALPHA));
+        jTablePlayers.setBackground(new Color(0, 0, 0, ALPHA));
         jTablePlayers.setForeground(Color.white);
-        jTablePlayers.setRowSorter(new TableRowSorter(tableModel));
-        setBackground(new Color(0, 0, 0, 100));
+        jTablePlayers.setRowSorter(new TableRowSorter(tableModel));       
         if (jScrollPaneTxt != null) {
-            jScrollPaneTxt.setBackground(new Color(0, 0, 0, 100));
-            jScrollPaneTxt.getViewport().setBackground(new Color(0, 0, 0, 100));
+            jScrollPaneTxt.setBackground(new Color(0, 0, 0, ALPHA));
+            jScrollPaneTxt.getViewport().setBackground(new Color(0, 0, 0, ALPHA));
         }
         if (jScrollPanePlayers != null) {
-            jScrollPanePlayers.setBackground(new Color(0, 0, 0, 100));
-            jScrollPanePlayers.getViewport().setBackground(new Color(0, 0, 0, 100));
+            jScrollPanePlayers.setBackground(new Color(0, 0, 0, ALPHA));
+            jScrollPanePlayers.getViewport().setBackground(new Color(0, 0, 0, ALPHA));
         }
         if (!addPlayersTab) {
             simplifyComponents();
@@ -277,11 +281,18 @@ public class ChatPanel extends javax.swing.JPanel {
 
     public void useExtendedView(VIEW_MODE extendedViewMode) {
         this.extendedViewMode = extendedViewMode;
-        this.txtConversation.setExtBackgroundColor(new Color(0, 0, 0, 255)); // Alpha = 255 not transparent
+        int alpha = 255;
+        switch (chatType) {
+            case GAME:
+            case TABLES:
+            case DEFAULT:
+                alpha = ALPHA;
+        }
+        this.txtConversation.setExtBackgroundColor(new Color(0, 0, 0, alpha)); // Alpha = 255 not transparent
         // this.txtConversation.setBackground(new Color(0, 0, 0, 0));
         // this.txtConversation.setForeground(new Color(255, 255, 255));
         this.txtConversation.setSelectionColor(Color.LIGHT_GRAY);
-        this.jScrollPaneTxt.setOpaque(!chatType.equals(ChatType.TABLES));
+        this.jScrollPaneTxt.setOpaque(alpha == 255);
         this.jScrollPaneTxt.getViewport().setOpaque(!chatType.equals(ChatType.TABLES));
     }
 
