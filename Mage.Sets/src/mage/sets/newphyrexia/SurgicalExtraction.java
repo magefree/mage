@@ -105,6 +105,9 @@ class SurgicalExtractionEffect extends OneShotEffect {
         Card card = game.getCard(source.getFirstTarget());
         Player player = game.getPlayer(source.getControllerId());
 
+        // 6/1/2011 	"Any number of cards" means just that. If you wish, you can choose to
+        //              leave some or all of the cards with the same name as the targeted card,
+        //              including that card, in the zone they're in.
         if (card != null && player != null) {
             Player targetPlayer = game.getPlayer(card.getOwnerId());
             if (targetPlayer != null) {

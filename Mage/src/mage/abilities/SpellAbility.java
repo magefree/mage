@@ -28,15 +28,19 @@
 
 package mage.abilities;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.SplitCard;
-import mage.constants.*;
+import mage.constants.AbilityType;
+import mage.constants.AsThoughEffectType;
+import mage.constants.SpellAbilityType;
+import static mage.constants.SpellAbilityType.SPLIT_FUSED;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-
-import java.util.UUID;
 import mage.players.Player;
 
 /**
@@ -46,6 +50,7 @@ import mage.players.Player;
 public class SpellAbility extends ActivatedAbilityImpl {
 
     protected SpellAbilityType spellAbilityType;
+    protected String cardName;
 
     public SpellAbility(ManaCost cost, String cardName) {
         this(cost, cardName, Zone.HAND);
@@ -57,6 +62,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
 
     public SpellAbility(ManaCost cost, String cardName, Zone zone, SpellAbilityType spellAbilityType) {
         super(AbilityType.SPELL, zone);
+        this.cardName = cardName;
         this.spellAbilityType = spellAbilityType;
         this.addManaCost(cost);
         switch(spellAbilityType) {
@@ -72,6 +78,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
     public SpellAbility(SpellAbility ability) {
         super(ability);
         this.spellAbilityType = ability.spellAbilityType;
+        this.cardName = ability.cardName;
     }
 
     public boolean spellCanBeActivatedRegularlyNow(UUID playerId, Game game) {
@@ -169,6 +176,10 @@ public class SpellAbility extends ActivatedAbilityImpl {
 
     public void setSpellAbilityType(SpellAbilityType spellAbilityType) {
         this.spellAbilityType = spellAbilityType;
+    }
+
+    public String getCardName() {
+        return cardName;
     }
 
 }
