@@ -54,7 +54,7 @@ public class LocustMiser extends CardImpl {
     }
 
     public LocustMiser(UUID ownerId) {
-        super(ownerId, 80, "Locust Miser", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        super(ownerId, 80, "Locust Miser", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.expansionSetCode = "SOK";
         this.subtype.add("Rat");
         this.subtype.add("Shaman");

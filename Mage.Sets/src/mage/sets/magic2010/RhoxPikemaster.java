@@ -54,7 +54,7 @@ public class RhoxPikemaster extends CardImpl {
     }
 
     public RhoxPikemaster(UUID ownerId) {
-        super(ownerId, 26, "Rhox Pikemaster", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+        super(ownerId, 26, "Rhox Pikemaster", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         this.expansionSetCode = "M10";
         this.color.setWhite(true);
         this.subtype.add("Rhino");
