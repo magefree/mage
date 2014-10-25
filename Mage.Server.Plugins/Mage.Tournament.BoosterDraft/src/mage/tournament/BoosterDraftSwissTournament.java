@@ -55,7 +55,7 @@ public class BoosterDraftSwissTournament extends TournamentSwiss {
     }
 
     protected void draft() {
-        Draft draft = new BoosterDraft((DraftOptions) options.getLimitedOptions(), getSets());
+        draft = new BoosterDraft((DraftOptions) options.getLimitedOptions(), getSets());
         for (TournamentPlayer player: players.values()) {
             draft.addPlayer(player.getPlayer());
             player.setState(TournamentPlayerState.DRAFTING);
