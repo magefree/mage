@@ -115,7 +115,7 @@ class RoarOfJukaiEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             if (new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0).apply(game, source)) {
-                for(Permanent permanent : game.getBattlefield().getActivePermanents(new FilterBlockingCreature(), source.getControllerId(), source.getSourceId(), game)) {
+                for(Permanent permanent : game.getBattlefield().getActivePermanents(filterBlocked, source.getControllerId(), source.getSourceId(), game)) {
                     ContinuousEffect effect = new BoostTargetEffect(2,2, Duration.EndOfTurn);
                     effect.setTargetPointer(new FixedTarget(permanent.getId()));
                     game.addEffect(effect, source);
