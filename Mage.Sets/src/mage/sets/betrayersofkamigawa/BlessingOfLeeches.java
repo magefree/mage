@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class BlessingOfLeeches extends CardImpl {
 
     public BlessingOfLeeches(UUID ownerId) {
-        super(ownerId, 62, "Blessing of Leeches", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
+        super(ownerId, 62, "Blessing of Leeches", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.expansionSetCode = "BOK";
         this.color.setBlack(true);
         this.subtype.add("Aura");

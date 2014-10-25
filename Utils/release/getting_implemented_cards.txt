@@ -59,6 +59,12 @@ git log b76102b0cdb911c7217fc2f510b4de86651f91d2..HEAD --diff-filter=A --name-st
 since 1.3.0-2014-10-05
 git log 8121849a185b913ef2de59fff2f3d9a6c9b3a613..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
 
+since 1.3.0-2014-10-18v1
+git log 58bbe60c724c7940996cf33db690d5eb1abfce0a..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
+since 1.3.0-2014-10-18v2 (2014-10-20)
+git log 974cb4435bb826769b935aaffc8335eeaa83d53f..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
+since 1.3.0-2014-10-18v3 (2014-10-25)
+git log 26b5a277c4404a93e3b41ba477c5ec58dedcf826..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
 
 3. Copy added_cards.txt to trunk\Utils folder
 4. Run script:

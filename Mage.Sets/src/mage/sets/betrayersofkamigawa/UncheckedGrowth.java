@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class UncheckedGrowth extends CardImpl {
 
     public UncheckedGrowth(UUID ownerId) {
-        super(ownerId, 148, "Unchecked Growth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
+        super(ownerId, 148, "Unchecked Growth", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
         this.color.setGreen(true);

@@ -51,7 +51,7 @@ import mage.players.Player;
 public class KamiOfTheHonoredDead extends CardImpl {
 
     public KamiOfTheHonoredDead(UUID ownerId) {
-        super(ownerId, 12, "Kami of the Honored Dead", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
+        super(ownerId, 12, "Kami of the Honored Dead", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Spirit");
         this.color.setWhite(true);

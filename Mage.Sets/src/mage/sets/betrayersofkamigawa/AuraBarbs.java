@@ -49,7 +49,7 @@ import mage.players.Player;
 public class AuraBarbs extends CardImpl {
 
     public AuraBarbs(UUID ownerId) {
-        super(ownerId, 94, "Aura Barbs", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
+        super(ownerId, 94, "Aura Barbs", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
         this.color.setRed(true);
