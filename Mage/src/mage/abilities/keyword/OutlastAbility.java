@@ -59,7 +59,7 @@ public class OutlastAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder("Outcast ").append(manaCosts.getText());
+        StringBuilder sb = new StringBuilder("Outlast ").append(manaCosts.getText());
         sb.append(" <i>(").append(getManaCosts().getText()).append(", ").append(getCosts().getText()).append(":  Put a +1/+1 counter on this creature. Outlast only as a sorcery.)</i>").toString();
         return sb.toString();
     }
