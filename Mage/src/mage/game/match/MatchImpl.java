@@ -277,37 +277,12 @@ public abstract class MatchImpl implements Match {
         StringBuilder playersInfo = new StringBuilder();
         int counter = 0;
 
-        Player currentPlayer = null;
-        PlayerList playerList =  game.getPlayerList();
-        if (game.getStartingPlayerId() != null) {
-            playerList.setCurrent(game.getStartingPlayerId());
-            currentPlayer = game.getPlayer(game.getStartingPlayerId());
-        }
-        if (currentPlayer == null) {
-            currentPlayer = playerList.getCurrent(game);
-        }
-        if (currentPlayer != null) {
-            do {
-                if (counter > 0) {
-                    playersInfo.append(" - ");
-                }
-                playersInfo.append(currentPlayer.getName());
-                counter++;
-                currentPlayer = game.getPlayer(playerList.getNext());
-                if (counter > 10) {
-                    logger.error("Can't get no correct player info from game");
-                    logger.debug("- matchId: " + this.getId());
-                    logger.debug("- gameId: " + game.getId());
-                    StringBuilder sb = new StringBuilder();
-                    for (MatchPlayer matchPlayer:this.getPlayers()) {
-                        sb.append(matchPlayer.getName()).append(" - " );
-                    }
-                    logger.debug("- players: " + sb.toString());
-                    break;
-                }
-            } while(!currentPlayer.getId().equals(game.getStartingPlayerId()));
-        } else {
-            playersInfo.append("[got no players]");
+        for (MatchPlayer matchPlayer: getPlayers()) {
+            if (counter > 0) {
+                playersInfo.append(" - ");
+            }
+            playersInfo.append(matchPlayer.getName());
+            counter++;
         }
 
         String state;
