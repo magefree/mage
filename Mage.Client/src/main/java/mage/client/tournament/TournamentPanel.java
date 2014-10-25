@@ -306,7 +306,6 @@ public class TournamentPanel extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(908, 580));
 
-        actionPanel.setBackground(java.awt.SystemColor.controlHighlight);
         actionPanel.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 
         txtName.setEditable(false);
@@ -447,7 +446,6 @@ public class TournamentPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jSplitPane2.setBackground(java.awt.SystemColor.controlHighlight);
         jSplitPane2.setResizeWeight(1.0);
         jSplitPane2.setToolTipText("");
 
