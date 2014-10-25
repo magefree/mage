@@ -111,7 +111,11 @@ public abstract class TournamentSwiss extends TournamentImpl {
                 } else {
                     // player free round - add to bye players of this round
                     round.getPlayerByes().add(player1);
-                    player1.setState(TournamentPlayerState.WAITING);
+                    if (round.getRoundNumber() == getNumberRounds()) {
+                        player1.setState(TournamentPlayerState.FINISHED);
+                    } else {
+                        player1.setState(TournamentPlayerState.WAITING);
+                    }
                     player1.setStateInfo("Round Bye");
                     updateResults();
                 }

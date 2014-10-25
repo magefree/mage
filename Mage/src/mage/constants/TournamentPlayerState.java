@@ -16,7 +16,7 @@ public enum TournamentPlayerState {
     CANCELED ("Canceled"),
     FINISHED ("Finished"); // winner or player in swiss style
 
-    private String text;
+    private final String text;
 
     TournamentPlayerState(String text) {
         this.text = text;

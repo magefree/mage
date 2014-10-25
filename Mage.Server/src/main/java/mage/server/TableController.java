@@ -223,7 +223,7 @@ public class TableController {
         }
     }
 
-    public boolean isPlayer(UUID userId) {
+    public boolean hasPlayer(UUID userId) {
         return userPlayerMap.containsKey(userId);
     }
 
@@ -331,6 +331,12 @@ public class TableController {
                 if (mPlayer == null || mPlayer.hasQuit()) {
                     return true; // so the construct panel closes after submit
                 }
+                if (table.isTournamentSubTable()) {
+                    TournamentPlayer tournamentPlayer = table.getTournament().getPlayer(mPlayer.getPlayer().getId());
+                    if (tournamentPlayer != null) {
+                        tournamentPlayer.setStateInfo(""); // reset sideboarding state
+                    }
+                }
             }
         }
         if (table.getState() != TableState.SIDEBOARDING && table.getState() != TableState.CONSTRUCTING) {
@@ -435,7 +441,7 @@ public class TableController {
             return;
         }
         if (table != null
-                && this.userId.equals(userId)
+                && this.userId != null && this.userId.equals(userId) // tourn. sub tables have no creator user
                 && (table.getState().equals(TableState.WAITING)
                 || table.getState().equals(TableState.READY_TO_START))) {
             // table not started yet and user is the owner, remove the table
@@ -565,9 +571,9 @@ public class TableController {
             int activePlayers = 0;
             for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) { // no AI players
                 if (!match.getPlayer(entry.getValue()).hasQuit()) {
-                    activePlayers++;
                     User user = UserManager.getInstance().getUser(entry.getKey());
                     if (user != null) {
+                        activePlayers++;
                         if (!user.isConnected()) {
                             // if the user is not connected but exits, the user is currently disconnected. So it's neccessary
                             // to join the user to the game here (instead the client does it) , so he can join the game, if he reconnects in time.
@@ -724,10 +730,7 @@ public class TableController {
         GameManager.getInstance().removeGame(game.getId());
         try {
             if (!match.hasEnded()) {
-                table.sideboard();
-                setupTimeout(Match.SIDEBOARD_TIME);
-                match.sideboard();
-                cancelTimeout();
+                sideboard();
                 if (!match.hasEnded()) {
                     startGame(choosingPlayerId);
                 } else {
@@ -743,6 +746,30 @@ public class TableController {
         return match.hasEnded();
     }
 
+    private void sideboard() {
+        table.sideboard();
+        setupTimeout(Match.SIDEBOARD_TIME);
+        if (table.isTournamentSubTable()) {
+            for (MatchPlayer matchPlayer :match.getPlayers()) {
+                if (!matchPlayer.hasQuit()) {
+                    TournamentPlayer tournamentPlayer = table.getTournament().getPlayer(matchPlayer.getPlayer().getId());
+                    if (tournamentPlayer != null) {
+                        tournamentPlayer.setStateInfo("sideboarding");
+                    }
+                }
+            }
+        }
+        match.sideboard();
+        cancelTimeout();
+        if (table.isTournamentSubTable()) {
+            for (MatchPlayer matchPlayer :match.getPlayers()) {
+                TournamentPlayer tournamentPlayer = table.getTournament().getPlayer(matchPlayer.getPlayer().getId());
+                if (tournamentPlayer != null && tournamentPlayer.getStateInfo().equals("sideboarding")) {
+                    tournamentPlayer.setStateInfo("");
+                }
+            }
+        }
+    }
     /**
      * Tables of normal matches or tournament sub tables are no longer
      * needed, if the match ends.
