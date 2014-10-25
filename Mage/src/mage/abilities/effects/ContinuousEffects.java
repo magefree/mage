@@ -826,10 +826,6 @@ public class ContinuousEffects implements Serializable {
         layer = filterLayeredEffects(layerEffects, Layer.PTChangingEffects_7);
         for (ContinuousEffect effect: layer) {
             HashSet<Ability> abilities = layeredEffects.getAbility(effect.getId());
-            if (abilities == null) { // Added because of #602 - can be removed if cause is removed
-                logger.error("Effect not connected to an ability: " + effect.toString());
-                continue;
-            }
             for (Ability ability : abilities) {
                 effect.apply(Layer.PTChangingEffects_7, SubLayer.SetPT_7b, ability, game);
             }
