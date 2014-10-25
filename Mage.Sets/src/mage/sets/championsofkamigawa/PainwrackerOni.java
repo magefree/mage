@@ -29,14 +29,14 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -94,7 +94,7 @@ class PainwrackerOniEffect extends SacrificeControllerEffect {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        if (game.getBattlefield().countAll(new FilterCreaturePermanent("Oger", "Oger"), source.getControllerId(), game) < 1) {
+        if (game.getBattlefield().countAll(new FilterCreaturePermanent("Ogre", "Ogre"), source.getControllerId(), game) < 1) {
             return super.apply(game, source);
         }
         return true;
