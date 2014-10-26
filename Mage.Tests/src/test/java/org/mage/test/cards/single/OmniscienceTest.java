@@ -124,5 +124,33 @@ public class OmniscienceTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Ornithopter", 1);
         assertTapped("Mountain", false);
     }
+    /**
+     * Spell get cast for 0 if Omniscience is being in play.
+     * But with Trinisphere it costs at least {3}.
+     * Cost/alternate cost (Omniscience) + additional costs - cost reductions + minimum cost (Trinishpere) = total cost.
+     */
 
+    @Test
+    public void testCastingWithTrinisphere() {
+        addCard(Zone.BATTLEFIELD, playerA, "Omniscience");
+        addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        // As long as Trinisphere is untapped, each spell that would cost less than three mana
+        // to cast costs three mana to cast. (Additional mana in the cost may be paid with any
+        // color of mana or colorless mana. For example, a spell that would cost {1}{B} to cast
+        // costs {2}{B} to cast instead.)
+        addCard(Zone.BATTLEFIELD, playerB, "Trinisphere", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        setChoice(playerA, "Yes");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+        assertTapped("Plains", true); // plains have to be tapped because {3} have to be paid
+    }
 }
