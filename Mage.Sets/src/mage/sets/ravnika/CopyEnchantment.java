@@ -31,10 +31,8 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.AuraReplacementEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.EntersBattlefieldEffect;
-import mage.abilities.effects.ReplacementEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
@@ -45,7 +43,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.game.Game;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
@@ -97,31 +94,36 @@ class CopyEnchantmentEffect extends CopyPermanentEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
             if (super.apply(game, source)) {
-                Target target = getBluePrintPermanent().getSpellAbility().getTargets().get(0);
-                Outcome auraOutcome = Outcome.BoostCreature;
-                Ability: for (Ability ability: getBluePrintPermanent().getAbilities()) {
-                    if (ability instanceof SpellAbility) {
-                        for (Effect effect: ability.getEffects()) {
-                            if (effect instanceof AttachEffect) {
-                                auraOutcome = effect.getOutcome();
-                                break Ability;
+                Permanent permanentToCopy = getBluePrintPermanent();
+                if (permanentToCopy != null) {
+                    if (permanentToCopy.getSubtype().contains("Aura")) {
+                        Target target = getBluePrintPermanent().getSpellAbility().getTargets().get(0);
+                        Outcome auraOutcome = Outcome.BoostCreature;
+                        Ability: for (Ability ability: getBluePrintPermanent().getAbilities()) {
+                            if (ability instanceof SpellAbility) {
+                                for (Effect effect: ability.getEffects()) {
+                                    if (effect instanceof AttachEffect) {
+                                        auraOutcome = effect.getOutcome();
+                                        break Ability;
+                                    }
+                                }
+                            }
+                        }
+                        if (controller.choose(auraOutcome, target, source.getSourceId(), game)) {
+                            UUID targetId = target.getFirstTarget();
+                            Permanent targetPermanent = game.getPermanent(targetId);
+                            Player targetPlayer = game.getPlayer(targetId);
+                            if (targetPermanent != null) {
+                                targetPermanent.addAttachment(sourcePermanent.getId(), game);
+                            } else if (targetPlayer != null) {
+                                targetPlayer.addAttachment(sourcePermanent.getId(), game);
+                            } else {
+                                return false;
                             }
                         }
                     }
+                    return true;
                 }
-                if (controller.choose(auraOutcome, target, source.getSourceId(), game)) {
-                    UUID targetId = target.getFirstTarget();
-                    Permanent targetPermanent = game.getPermanent(targetId);
-                    Player targetPlayer = game.getPlayer(targetId);            
-                    if (targetPermanent != null) {
-                        targetPermanent.addAttachment(sourcePermanent.getId(), game);
-                    } else if (targetPlayer != null) {
-                        targetPlayer.addAttachment(sourcePermanent.getId(), game);
-                    } else {
-                        return false;
-                    }           
-                }            
-                return true;            
             }
         }
         return false;
