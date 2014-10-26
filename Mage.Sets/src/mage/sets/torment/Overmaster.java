@@ -28,9 +28,21 @@
 package mage.sets.torment;
 
 import java.util.UUID;
+import mage.MageObject;
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.WatcherScope;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -45,7 +57,13 @@ public class Overmaster extends CardImpl {
         this.color.setRed(true);
 
         // The next instant or sorcery spell you cast this turn can't be countered by spells or abilities.
+        this.getSpellAbility().addEffect(new OvermasterEffect());
+        this.addWatcher(new OvermasterWatcher());
+        
         // Draw a card.
+        Effect effect = new DrawCardSourceControllerEffect(1);
+        effect.setText("<br><br>Draw a card");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public Overmaster(final Overmaster card) {
@@ -55,5 +73,104 @@ public class Overmaster extends CardImpl {
     @Override
     public Overmaster copy() {
         return new Overmaster(this);
+    }
+}
+
+class OvermasterEffect extends ContinuousRuleModifiyingEffectImpl {
+    
+    OvermasterEffect() {
+        super(Duration.EndOfTurn, Outcome.Benefit);
+        staticText = "The next instant or sorcery spell you cast this turn can't be countered by spells or abilities";
+    }
+
+    OvermasterEffect(final OvermasterEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public OvermasterEffect copy() {
+        return new OvermasterEffect(this);
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        OvermasterWatcher watcher = (OvermasterWatcher) game.getState().getWatchers().get("overmasterWatcher", source.getControllerId());
+            if (watcher != null) {
+                game.informPlayers("F");
+                watcher.setReady();
+            }
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (sourceObject != null) {
+            return "This spell can't be countered (" + sourceObject.getName() + ").";
+        }
+        return null;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == GameEvent.EventType.COUNTER) {
+            game.informPlayers("D");
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            OvermasterWatcher watcher = (OvermasterWatcher) game.getState().getWatchers().get("overmasterWatcher", source.getControllerId());
+            if (spell != null && watcher != null && watcher.isUncounterable(spell.getId())) {
+                game.informPlayers("E");
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+class OvermasterWatcher extends Watcher {
+
+    protected boolean ready = false;
+    protected UUID uncounterableSpell;
+
+    OvermasterWatcher() {
+        super("overmasterWatcher", WatcherScope.PLAYER);
+    }
+
+    OvermasterWatcher(final OvermasterWatcher watcher) {
+        super(watcher);
+        this.uncounterableSpell = watcher.uncounterableSpell;
+    }
+
+    @Override
+    public OvermasterWatcher copy() {
+        return new OvermasterWatcher(this);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST && ready) {
+            game.informPlayers("A");
+            if (uncounterableSpell == null && event.getPlayerId().equals(this.getControllerId())) {
+                game.informPlayers("B");
+                Spell spell = game.getStack().getSpell(event.getTargetId());
+                if (spell != null && (spell.getCardType().contains(CardType.SORCERY) || spell.getCardType().contains(CardType.INSTANT))) {                    
+                    game.informPlayers("C");
+                    uncounterableSpell = spell.getId();
+                    ready = false;
+                }
+            }
+        }
+    }
+
+    public boolean isUncounterable(UUID spellId) {
+        return spellId.equals(uncounterableSpell);
+    }
+    
+    public void setReady() {
+        ready = true;
     }
 }
