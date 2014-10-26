@@ -97,7 +97,6 @@ class OvermasterEffect extends ContinuousRuleModifiyingEffectImpl {
         super.init(source, game);
         OvermasterWatcher watcher = (OvermasterWatcher) game.getState().getWatchers().get("overmasterWatcher", source.getControllerId());
             if (watcher != null) {
-                game.informPlayers("F");
                 watcher.setReady();
             }
     }
@@ -119,11 +118,9 @@ class OvermasterEffect extends ContinuousRuleModifiyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.COUNTER) {
-            game.informPlayers("D");
             Spell spell = game.getStack().getSpell(event.getTargetId());
             OvermasterWatcher watcher = (OvermasterWatcher) game.getState().getWatchers().get("overmasterWatcher", source.getControllerId());
             if (spell != null && watcher != null && watcher.isUncounterable(spell.getId())) {
-                game.informPlayers("E");
                 return true;
             }
         }
@@ -153,12 +150,9 @@ class OvermasterWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST && ready) {
-            game.informPlayers("A");
             if (uncounterableSpell == null && event.getPlayerId().equals(this.getControllerId())) {
-                game.informPlayers("B");
                 Spell spell = game.getStack().getSpell(event.getTargetId());
                 if (spell != null && (spell.getCardType().contains(CardType.SORCERY) || spell.getCardType().contains(CardType.INSTANT))) {                    
-                    game.informPlayers("C");
                     uncounterableSpell = spell.getId();
                     ready = false;
                 }
