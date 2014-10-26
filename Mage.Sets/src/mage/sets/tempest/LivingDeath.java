@@ -28,6 +28,7 @@
 package mage.sets.tempest;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -38,6 +39,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -85,13 +87,14 @@ class LivingDeathEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
             // move creature cards from graveyard to exile
             for (UUID playerId: controller.getInRange()){
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     for (Card card :player.getGraveyard().getCards(new FilterCreatureCard(), game)) {
-                        card.moveToExile(source.getSourceId(), "Living End", source.getSourceId(), game);
+                        controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getLogName(), source.getSourceId(), game, Zone.GRAVEYARD);
                     }
                 }
             }
@@ -100,8 +103,11 @@ class LivingDeathEffect extends OneShotEffect {
                 permanent.sacrifice(source.getSourceId(), game);
             }
             // put exiled cards to battlefield
-            for (Card card : game.getState().getExile().getExileZone(source.getSourceId()).getCards(game)) {
-                card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), card.getOwnerId());
+            ExileZone exileZone = game.getState().getExile().getExileZone(source.getSourceId());
+            if (exileZone != null) {
+                for (Card card : exileZone.getCards(game)) {
+                    controller.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
+                }
             }
             return true;
         }

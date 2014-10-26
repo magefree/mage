@@ -28,6 +28,7 @@
 package mage.sets.timespiral;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -93,13 +94,14 @@ class LivingEndEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
             // move creature cards from graveyard to exile
             for (UUID playerId: controller.getInRange()){
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     for (Card card :player.getGraveyard().getCards(new FilterCreatureCard(), game)) {
-                        card.moveToExile(source.getSourceId(), "Living End", source.getSourceId(), game);
+                        controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getLogName(), source.getSourceId(), game, Zone.GRAVEYARD);
                     }
                 }
             }
@@ -111,7 +113,7 @@ class LivingEndEffect extends OneShotEffect {
             ExileZone exileZone = game.getState().getExile().getExileZone(source.getSourceId());
             if (exileZone != null) {
                 for (Card card : exileZone.getCards(game)) {
-                    card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), card.getOwnerId());
+                    controller.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
                 }
             }
             return true;

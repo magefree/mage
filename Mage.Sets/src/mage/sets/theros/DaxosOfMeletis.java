@@ -48,6 +48,7 @@ import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -173,7 +174,11 @@ class DaxosOfMeletisCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        return sourceId.equals(cardId) && game.getState().getExile().getExileZone(exileId).contains(cardId);
+        if (sourceId.equals(cardId)) {
+            ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
+            return exileZone != null && exileZone.contains(cardId);
+        }
+        return false;
     }
 }
 
