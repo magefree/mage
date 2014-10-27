@@ -52,7 +52,7 @@ class AcquireEffect extends OneShotEffect {
     }
 
     public AcquireEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.PutCardInPlay);
         staticText = "Search target opponent's library for an artifact card and put that card onto the battlefield under your control. Then that player shuffles his or her library";
     }
 
@@ -62,19 +62,19 @@ class AcquireEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean applied = false;
         Player opponent = game.getPlayer(source.getFirstTarget());
-        Player you = game.getPlayer(source.getControllerId());
-        if (opponent != null && you != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (opponent != null && controller != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            you.searchLibrary(target, game, opponent.getId());
+            controller.searchLibrary(target, game, opponent.getId());
             Card targetCard = game.getCard(target.getFirstTarget());
             if (targetCard != null) {
-                applied = you.putOntoBattlefieldWithInfo(targetCard, game, Zone.LIBRARY, source.getSourceId());
+                controller.putOntoBattlefieldWithInfo(targetCard, game, Zone.LIBRARY, source.getSourceId());
             }
             opponent.shuffleLibrary(game);
+            return true;
         }
-        return applied;
+        return false;
     }
 
     @Override

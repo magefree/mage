@@ -28,19 +28,16 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.ControlEnchantedEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
-import mage.constants.*;
-import mage.game.permanent.token.SquirrelToken;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -60,13 +57,12 @@ public class Annex extends CardImpl {
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
         // You control enchanted land.
-        Ability controlAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect());
-        this.addAbility(controlAbility);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
     }
 
     public Annex(final Annex card) {

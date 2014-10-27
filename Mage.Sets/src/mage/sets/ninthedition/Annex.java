@@ -31,7 +31,7 @@ import java.util.UUID;
 
 /**
  *
- * @author anonymous
+ * @author andyfries
  */
 public class Annex extends mage.sets.onslaught.Annex {
 
