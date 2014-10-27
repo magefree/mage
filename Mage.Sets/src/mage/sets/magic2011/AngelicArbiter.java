@@ -28,13 +28,9 @@
 
 package mage.sets.magic2011;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -42,11 +38,18 @@ import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
+import mage.watchers.common.CastSpellLastTurnWatcher;
 
 /**
  *
@@ -67,7 +70,7 @@ public class AngelicArbiter extends CardImpl {
         
         // Each opponent who cast a spell this turn can't attack with creatures.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AngelicArbiterCantAttackTargetEffect(Duration.WhileOnBattlefield)));
-        this.addWatcher(new AngelicArbiterWatcher1());
+
         // Each opponent who attacked with a creature this turn can't cast spells.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AngelicArbiterEffect2()));
         this.addWatcher(new AngelicArbiterWatcher2());
@@ -84,41 +87,17 @@ public class AngelicArbiter extends CardImpl {
 
 }
 
-class AngelicArbiterWatcher1 extends Watcher {
-
-    public AngelicArbiterWatcher1() {
-        super("OpponentCastSpell", WatcherScope.PLAYER);
-    }
-
-    public AngelicArbiterWatcher1(final AngelicArbiterWatcher1 watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public AngelicArbiterWatcher1 copy() {
-        return new AngelicArbiterWatcher1(this);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (condition == true) { //no need to check - condition has already occured
-            return;
-        }
-        if (event.getType() == EventType.SPELL_CAST && game.getActivePlayerId().equals(event.getPlayerId()) && game.getOpponents(controllerId).contains(event.getPlayerId())) {
-            condition = true;
-        }
-    }
-
-}
-
 class AngelicArbiterWatcher2 extends Watcher {
 
+    private final Set<UUID> playersThatAttackedThisTurn = new HashSet<>();
+
     public AngelicArbiterWatcher2() {
-        super("OpponentAttacked", WatcherScope.PLAYER);
+        super("PlayerAttacked", WatcherScope.GAME);
     }
 
     public AngelicArbiterWatcher2(final AngelicArbiterWatcher2 watcher) {
         super(watcher);
+        this.playersThatAttackedThisTurn.addAll(watcher.playersThatAttackedThisTurn);
     }
 
     @Override
@@ -128,9 +107,24 @@ class AngelicArbiterWatcher2 extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.DECLARED_ATTACKERS && game.getActivePlayerId().equals(event.getPlayerId()) && game.getOpponents(controllerId).contains(event.getPlayerId())) {
-            condition = true;
+        if (event.getType() == EventType.DECLARED_ATTACKERS
+                && game.getActivePlayerId().equals(event.getPlayerId())
+                && game.getOpponents(controllerId).contains(event.getPlayerId())
+                && game.getCombat().getAttackerId().equals(event.getPlayerId())
+                && game.getCombat().getAttackers().size() > 0) {
+            playersThatAttackedThisTurn.add(event.getPlayerId());
         }
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        playersThatAttackedThisTurn.clear();
+    }
+
+
+    public boolean hasPlayerAttackedThisTurn(UUID playerId) {
+        return playersThatAttackedThisTurn.contains(playerId);
     }
 }
 
@@ -148,8 +142,8 @@ class AngelicArbiterCantAttackTargetEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (game.getActivePlayerId().equals(permanent.getControllerId()) && game.getOpponents(source.getControllerId()).contains(permanent.getControllerId())) {
-            Watcher watcher = game.getState().getWatchers().get("OpponentCastSpell", source.getControllerId());
-            if (watcher != null && watcher.conditionMet()) {
+            CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
+            if (watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(permanent.getControllerId()) > 0) {
                 return true;
             }
         }
@@ -191,8 +185,8 @@ class AngelicArbiterEffect2 extends ContinuousRuleModifiyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.CAST_SPELL && game.getActivePlayerId().equals(event.getPlayerId()) && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            Watcher watcher = game.getState().getWatchers().get("OpponentAttacked", source.getControllerId());
-            if (watcher != null && watcher.conditionMet()) {
+            AngelicArbiterWatcher2 watcher = (AngelicArbiterWatcher2) game.getState().getWatchers().get("PlayerAttacked");
+            if (watcher != null && watcher.hasPlayerAttackedThisTurn(event.getPlayerId())) {
                 return true;
             }
         }
