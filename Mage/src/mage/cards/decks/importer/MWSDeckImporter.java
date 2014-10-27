@@ -63,15 +63,15 @@ public class MWSDeckImporter extends DeckImporter {
         String lineName = line.substring(delim + 1).trim();
         try {
             int num = Integer.parseInt(lineNum);
-
-            CardCriteria criteria = new CardCriteria();
-            criteria.name(lineName);
-            criteria.setCodes(setCode);
-            List<CardInfo> cards = CardRepository.instance.findCards(criteria);
-            if (cards.isEmpty()) {
-                criteria = new CardCriteria();
+            List<CardInfo> cards = null;
+            if (!setCode.isEmpty()) {
+                CardCriteria criteria = new CardCriteria();
                 criteria.name(lineName);
+                criteria.setCodes(setCode);
                 cards = CardRepository.instance.findCards(criteria);
+            }
+            if (cards == null || cards.isEmpty()) {
+                cards = CardRepository.instance.findCards(lineName);
             }
 
             if (cards.isEmpty()) {
