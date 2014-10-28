@@ -288,10 +288,13 @@ public class GameSession extends GameWatcher {
                                 player.quit(game);
                             } catch (Exception ex) {
                                 if (ex != null) {
+                                    // It seems this can happen if two threads try to end the game at the exact same time (one wins and one ends here)
                                     logger.fatal("Game session game quit exception " + (ex.getMessage() == null ? "null":ex.getMessage()));
                                     logger.debug("- gameId:" + game.getId() +"  playerId: " + playerId);
                                     if (ex.getCause() != null) {
                                         logger.debug("- Cause: " + (ex.getCause().getMessage() == null ? "null":ex.getCause().getMessage()));
+                                    } else {
+                                        logger.debug("- ex: " + ex.toString());
                                     }
                                     ex.printStackTrace();
                                 }else {

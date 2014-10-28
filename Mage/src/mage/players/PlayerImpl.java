@@ -1749,7 +1749,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
                 if (opponentsAlive == 0 && !hasWon()) {
-                    logger.debug("player won -> No more oppononets alive game won: " + this.getName());
+                    logger.debug("player won -> No more opponents alive game won: " + this.getName());
                     game.informPlayers(new StringBuilder(this.getName()).append(" has won the game").toString());
                     this.wins = true;
                     game.end();
