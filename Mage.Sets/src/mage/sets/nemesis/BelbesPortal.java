@@ -37,6 +37,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.effects.common.PutCreatureOnBattlefieldEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -63,7 +64,7 @@ public class BelbesPortal extends CardImpl {
         this.expansionSetCode = "NMS";
 
         // As Belbe's Portal enters the battlefield, choose a creature type.
-        this.addAbility(new AsEntersBattlefieldAbility(new BelbesPortalEnterBattlefieldEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.PutCreatureInPlay)));
         // {3}, {tap}: You may put a creature card of the chosen type from your hand onto the battlefield.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BelbesPortalPutCreatureOnBattlefieldEffect(),
@@ -79,43 +80,6 @@ public class BelbesPortal extends CardImpl {
     @Override
     public BelbesPortal copy() {
         return new BelbesPortal(this);
-    }
-}
-
-class BelbesPortalEnterBattlefieldEffect extends OneShotEffect {
-
-    BelbesPortalEnterBattlefieldEffect() {
-        super(Outcome.PutCreatureInPlay);
-        staticText = "choose a creature type";
-    }
-
-    BelbesPortalEnterBattlefieldEffect(final BelbesPortalEnterBattlefieldEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BelbesPortalEnterBattlefieldEffect copy() {
-        return new BelbesPortalEnterBattlefieldEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            Choice typeChoice = new ChoiceImpl(true);
-            typeChoice.setMessage("Choose a creature type:");
-            typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
-            while (!player.choose(Outcome.PutCreatureInPlay, typeChoice, game)) {
-                if (!player.isInGame()) {
-                    return false;
-                }
-            }
-            game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());
-            game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice());
-            permanent.addInfo("chosen type", "<i>Chosen type: " + typeChoice.getChoice() + "</i>");
-        }
-        return false;
     }
 }
 
@@ -143,24 +107,23 @@ class BelbesPortalPutCreatureOnBattlefieldEffect extends OneShotEffect {
                 Player player = game.getPlayer(source.getControllerId());
                 String choiceText = "Put a " + subtype.toLowerCase() + " creature card from your hand onto the battlefield?";
 
-                if (player == null || !player.chooseUse(Outcome.PutCreatureInPlay, choiceText, game)) {
-                    return false;
-                }
-                FilterCreatureCard creatureTypeFilter = new FilterCreatureCard();
-                creatureTypeFilter.add(new SubtypePredicate(subtype));
+                if (player != null) {
+                    if (player.chooseUse(Outcome.PutCreatureInPlay, choiceText, game)) {
+                        FilterCreatureCard creatureTypeFilter = new FilterCreatureCard();
+                        creatureTypeFilter.add(new SubtypePredicate(subtype));
 
-                TargetCardInHand target = new TargetCardInHand(creatureTypeFilter);
-                if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
-                    Card card = game.getCard(target.getFirstTarget());
-                    if (card != null) {
-                        player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
-                        return true;
+                        TargetCardInHand target = new TargetCardInHand(creatureTypeFilter);
+                        if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+                            Card card = game.getCard(target.getFirstTarget());
+                            if (card != null) {
+                                player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
+                            }
+                        }
                     }
-                } else {
-                    return false;
+                    return true;
                 }
             }
         }
-        return true;
+        return false;
     }
 }
