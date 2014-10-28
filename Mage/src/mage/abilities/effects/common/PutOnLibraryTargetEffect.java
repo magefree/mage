@@ -81,11 +81,13 @@ public class PutOnLibraryTargetEffect extends OneShotEffect {
                         if (permanent != null) {
                             result |= controller.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, onTop, true);
                         }
+                        break;
                     case GRAVEYARD:
                         Card card = game.getCard(targetId);
                         if (card != null && game.getState().getZone(targetId).equals(Zone.GRAVEYARD)) {
                             result |= controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD, onTop, true);
                         }
+                        break;
                 }
             }
         }
