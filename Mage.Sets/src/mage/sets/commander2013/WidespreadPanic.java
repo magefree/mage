@@ -128,7 +128,8 @@ class WidespreadPanicEffect extends OneShotEffect {
                 shuffler.choose(Outcome.Detriment, target, source.getSourceId(), game);
                 Card card = shuffler.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
-                    return card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+                    shuffler.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.HAND, true, false);
+
                 }
             }
             return true;
