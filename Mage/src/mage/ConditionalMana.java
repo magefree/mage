@@ -34,6 +34,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.mana.conditional.ManaCondition;
+import mage.constants.ManaType;
 import mage.filter.Filter;
 import mage.filter.FilterMana;
 import mage.game.Game;
@@ -152,5 +153,51 @@ public class ConditionalMana extends Mana implements Serializable {
 
     public void setManaProducerId(UUID manaProducerId) {
         this.manaProducerId = manaProducerId;
+    }
+    
+    public void clear(ManaType manaType) {
+       switch(manaType) {
+            case BLACK:
+                black = 0;
+                break;
+            case BLUE:
+                blue = 0;
+                break;
+            case GREEN:
+                green = 0;
+                break;
+            case RED:
+                red = 0;
+                break;
+            case WHITE:
+                white = 0;
+                break;
+            case COLORLESS:
+                colorless = 0;
+                break;
+        }
+    }
+    
+    public void add(ManaType manaType, int amount) {
+       switch(manaType) {
+            case BLACK:
+                black += amount;
+                break;
+            case BLUE:
+                blue += amount;;
+                break;
+            case GREEN:
+                green += amount;;
+                break;
+            case RED:
+                red  += amount;;
+                break;
+            case WHITE:
+                white += amount;;
+                break;
+            case COLORLESS:
+                colorless += amount;;
+                break;
+        }
     }
 }
