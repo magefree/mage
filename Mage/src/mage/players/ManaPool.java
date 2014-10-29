@@ -181,16 +181,33 @@ public class ManaPool implements Serializable {
         Iterator<ManaPoolItem> it = manaItems.iterator();
         while (it.hasNext()) {
             ManaPoolItem item = it.next();
+            ConditionalMana conditionalItem = item.getConditionalMana();
             for (ManaType manaType : ManaType.values()) {
-                if (item.get(manaType) > 0 && !doNotEmptyManaTypes.contains(manaType)) {
-                    if (!item.getDuration().equals(Duration.EndOfTurn) || game.getPhase().getType().equals(TurnPhase.END)) {
-                         if (game.replaceEvent(new GameEvent(GameEvent.EventType.EMPTY_MANA_POOL, playerId, null, playerId))) {
-                            int amount = item.get(manaType);
-                            item.clear(manaType);
-                            item.add(ManaType.COLORLESS, amount);                        
-                        } else {
-                            total += item.get(manaType);
-                            item.clear(manaType);                        
+                if (!doNotEmptyManaTypes.contains(manaType)) {
+                    if (item.get(manaType) > 0) {
+                        if (!item.getDuration().equals(Duration.EndOfTurn) || game.getPhase().getType().equals(TurnPhase.END)) {
+                             if (game.replaceEvent(new GameEvent(GameEvent.EventType.EMPTY_MANA_POOL, playerId, null, playerId))) {
+                                int amount = item.get(manaType);
+                                item.clear(manaType);
+                                item.add(ManaType.COLORLESS, amount);
+                            } else {
+                                total += item.get(manaType);
+                                item.clear(manaType);
+                            }
+                        }
+                    }
+                    if (conditionalItem != null) {
+                        if (conditionalItem.get(manaType) > 0) {
+                            if (!item.getDuration().equals(Duration.EndOfTurn) || game.getPhase().getType().equals(TurnPhase.END)) {
+                                 if (game.replaceEvent(new GameEvent(GameEvent.EventType.EMPTY_MANA_POOL, playerId, null, playerId))) {
+                                    int amount = conditionalItem.get(manaType);
+                                    conditionalItem.clear(manaType);
+                                    conditionalItem.add(ManaType.COLORLESS, amount);
+                                } else {
+                                    total += conditionalItem.get(manaType);
+                                    conditionalItem.clear(manaType);
+                                }
+                            }
                         }
                     }
                 }

@@ -30,7 +30,6 @@ package mage.sets.vintagemasters;
 import java.util.UUID;
 import mage.ConditionalMana;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ArtifactCastConditionalMana;
