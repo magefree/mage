@@ -41,6 +41,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.SetTargetPointer;
+import mage.constants.Zone;
+import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
@@ -66,7 +69,7 @@ public class ChancellorOfTheAnnex extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever an opponent casts a spell, counter it unless that player pays {1}.
-        this.addAbility(new SpellCastOpponentTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(1)), false));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(1)), new FilterSpell(), false, SetTargetPointer.SPELL));
     }
 
     public ChancellorOfTheAnnex(final ChancellorOfTheAnnex card) {
@@ -110,14 +113,14 @@ class ChancellorOfTheAnnexEffect extends OneShotEffect {
 
 class ChancellorOfTheAnnexDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    private UUID playerId;
+    private final UUID playerId;
 
     ChancellorOfTheAnnexDelayedTriggeredAbility (UUID playerId) {
         super(new CounterUnlessPaysEffect(new GenericManaCost(1)));
         this.playerId = playerId;
     }
 
-    ChancellorOfTheAnnexDelayedTriggeredAbility(ChancellorOfTheAnnexDelayedTriggeredAbility ability) {
+    ChancellorOfTheAnnexDelayedTriggeredAbility(final ChancellorOfTheAnnexDelayedTriggeredAbility ability) {
         super(ability);
         this.playerId = ability.playerId;
     }
