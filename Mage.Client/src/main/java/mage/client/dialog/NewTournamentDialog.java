@@ -41,6 +41,7 @@ import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.cards.repository.ExpansionInfo;
@@ -594,23 +595,33 @@ public class NewTournamentDialog extends MageDialog {
         // this.cbRange.setEnabled(gameType.isUseRange());
         createPlayers((Integer) spnNumPlayers.getValue() - 1);
     }
-    private void setTournamentOptions(int numbPlayers) {
+    private void setTournamentOptions(int numPlayers) {
         TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
         activatePanelElements(tournamentType);
 
-        if (numbPlayers < tournamentType.getMinPlayers() || numbPlayers > tournamentType.getMaxPlayers()) {
-            numbPlayers = tournamentType.getMinPlayers();
-            createPlayers(numbPlayers - 1);
+        if (numPlayers < tournamentType.getMinPlayers() || numPlayers > tournamentType.getMaxPlayers()) {
+            numPlayers = tournamentType.getMinPlayers();
+            createPlayers(numPlayers - 1);
         }
-        this.spnNumPlayers.setModel(new SpinnerNumberModel(numbPlayers, tournamentType.getMinPlayers(), tournamentType.getMaxPlayers(), 1));
+        this.spnNumPlayers.setModel(new SpinnerNumberModel(numPlayers, tournamentType.getMinPlayers(), tournamentType.getMaxPlayers(), 1));
         this.spnNumPlayers.setEnabled(tournamentType.getMinPlayers() != tournamentType.getMaxPlayers());
-
+        createPlayers((Integer) spnNumPlayers.getValue() - 1);
+        
         if (tournamentType.isLimited()) {
             createPacks(tournamentType.getNumBoosters());
         }
 
     }
 
+    private void setNumberOfSwissRoundsMin(int numPlayers) {
+        // set the number of minimum swiss rounds related to the number of players
+        int minRounds =  (int) Math.ceil(Math.log(numPlayers + 1) / Math.log(2));
+        int newValue = Math.max((Integer)spnNumRounds.getValue(), minRounds);
+        this.spnNumRounds.setModel(new SpinnerNumberModel(newValue, minRounds, 10, 1));
+        this.pack();
+        this.revalidate();
+        this.repaint();
+    }
     /**
      * Sets elements of the panel to visible or not visible
      * 
@@ -705,6 +716,9 @@ public class NewTournamentDialog extends MageDialog {
             }
         }
         drawPlayers();
+
+        setNumberOfSwissRoundsMin(numPlayers);
+
     }
 
     private void drawPlayers() {
