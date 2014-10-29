@@ -65,9 +65,14 @@ public class LighthouseChronologist extends LevelerCard {
 
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{U}")));
 
-        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
+        // LEVEL 4-6
+        // 2/4
+        Abilities<Ability> abilities1 = new AbilitiesImpl<>();
 
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
+        // LEVEL 7+
+        // 3/5
+        // At the beginning of each end step, if it's not your turn, take an extra turn after this one.
+        Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         abilities2.add(new LighthouseChronologistAbility());
 
         LevelerCardBuilder.construct(this,

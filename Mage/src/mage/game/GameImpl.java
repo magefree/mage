@@ -28,6 +28,23 @@
 
 package mage.game;
 
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
+import java.util.Set;
+import java.util.Stack;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -42,6 +59,7 @@ import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.continious.SourceEffect;
 import mage.abilities.keyword.LeylineAbility;
+import mage.abilities.keyword.MorphAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.DelayedTriggeredManaAbility;
 import mage.abilities.mana.TriggeredManaAbility;
@@ -52,7 +70,14 @@ import mage.cards.CardsImpl;
 import mage.cards.SplitCard;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.MultiplayerAttackOption;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
+import mage.constants.PlayerAction;
+import mage.constants.RangeOfInfluence;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
@@ -67,8 +92,14 @@ import mage.game.combat.Combat;
 import mage.game.command.CommandObject;
 import mage.game.command.Commander;
 import mage.game.command.Emblem;
-import mage.game.events.*;
+import mage.game.events.DamageEvent;
+import mage.game.events.GameEvent;
+import mage.game.events.Listener;
+import mage.game.events.PlayerQueryEvent;
+import mage.game.events.PlayerQueryEventSource;
+import mage.game.events.TableEvent;
 import mage.game.events.TableEvent.EventType;
+import mage.game.events.TableEventSource;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -79,6 +110,7 @@ import mage.game.stack.StackObject;
 import mage.game.turn.Phase;
 import mage.game.turn.Step;
 import mage.game.turn.Turn;
+import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.players.Players;
@@ -86,14 +118,13 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.util.functions.ApplyToPermanent;
-import mage.watchers.common.*;
+import mage.watchers.common.BlockedAttackerWatcher;
+import mage.watchers.common.CastSpellLastTurnWatcher;
+import mage.watchers.common.MorbidWatcher;
+import mage.watchers.common.PlayerDamagedBySourceWatcher;
+import mage.watchers.common.PlayerLostLifeWatcher;
+import mage.watchers.common.SoulbondWatcher;
 import org.apache.log4j.Logger;
-
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
-import mage.abilities.keyword.MorphAbility;
 
 public abstract class GameImpl implements Game, Serializable {
 
@@ -603,18 +634,18 @@ public abstract class GameImpl implements Game, Serializable {
     protected void play(UUID nextPlayerId) {
         if (!isPaused() && !gameOver(null)) {
             PlayerList players = state.getPlayerList(nextPlayerId);
-            Player player = getPlayer(players.get());
+            Player playerByOrder = getPlayer(players.get());
             while (!isPaused() && !gameOver(null)) {
-                playExtraTurns(player);
-                GameEvent event = new GameEvent(GameEvent.EventType.PLAY_TURN, null, null, player.getId());
+                playExtraTurns();
+                GameEvent event = new GameEvent(GameEvent.EventType.PLAY_TURN, null, null, playerByOrder.getId());
                 if (!replaceEvent(event)) {
-                    if (!playTurn(player)) {
+                    if (!playTurn(playerByOrder)) {
                         break;
                     }
                     state.setTurnNum(state.getTurnNum() + 1);
                 }
-                playExtraTurns(player);
-                player = players.getNext(this);
+                playExtraTurns();
+                playerByOrder = players.getNext(this);
             }
         }
         if (gameOver(null)) {
@@ -638,42 +669,39 @@ public abstract class GameImpl implements Game, Serializable {
         }
     }
 
-    private void playExtraTurns(Player player) {
+    private void playExtraTurns() {
         //20091005 - 500.7
-        UUID extraTurnId = getNextExtraTurn(player.getId());
-        while (extraTurnId != null) {
-            GameEvent event = new GameEvent(GameEvent.EventType.PLAY_TURN, null, null, player.getId());
+        TurnMod extraTurn = getNextExtraTurn();
+        while (extraTurn != null) {
+            GameEvent event = new GameEvent(GameEvent.EventType.PLAY_TURN, null, null, extraTurn.getPlayerId());
             if (!replaceEvent(event)) {
-                state.setExtraTurn(true);
-                state.setTurnId(extraTurnId);
-                informPlayers(player.getName() + " takes an extra turn");
-                playTurn(player);
-                state.setTurnNum(state.getTurnNum() + 1);
+                Player extraPlayer = this.getPlayer(extraTurn.getPlayerId());
+                if (extraPlayer != null && extraPlayer.isInGame()) {
+                    state.setExtraTurn(true);
+                    state.setTurnId(extraTurn.getId());
+                    informPlayers(extraPlayer.getName() + " takes an extra turn");
+                    playTurn(extraPlayer);
+                    state.setTurnNum(state.getTurnNum() + 1);
+                }
             }
-            extraTurnId = getNextExtraTurn(player.getId());
+            extraTurn = getNextExtraTurn();
         }
         state.setTurnId(null);
         state.setExtraTurn(false);
         
     }
     
-    private UUID getNextExtraTurn(UUID playerId) {
-        Player player = this.getPlayer(playerId);
-        if (player != null) {            
-            boolean checkForExtraTurn = true;
-            while(checkForExtraTurn) {
-                UUID extraTurnId = getState().getTurnMods().getExtraTurn(playerId);
-                if (extraTurnId != null) {
-                    GameEvent event = new GameEvent(GameEvent.EventType.EXTRA_TURN, extraTurnId, null, playerId);
-                    if (!replaceEvent(event)) {
-                        return extraTurnId;
-                    }                    
-                } else {
-                    checkForExtraTurn = false;
+    private TurnMod getNextExtraTurn() {
+        boolean checkForExtraTurn = true;
+        while(checkForExtraTurn) {
+            TurnMod extraTurn = getState().getTurnMods().getNextExtraTurn();
+            if (extraTurn != null) {
+                GameEvent event = new GameEvent(GameEvent.EventType.EXTRA_TURN, extraTurn.getId(), null, extraTurn.getPlayerId());
+                if (!replaceEvent(event)) {
+                    return extraTurn;
                 }
-                if (!player.isInGame()) {
-                    return null;
-                }
+            } else {
+                checkForExtraTurn = false;
             }
         }
         return null;

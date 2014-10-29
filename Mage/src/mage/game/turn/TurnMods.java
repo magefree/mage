@@ -61,6 +61,18 @@ public class TurnMods extends ArrayList<TurnMod> {
         return null;
     }
 
+    public TurnMod getNextExtraTurn() {
+        ListIterator<TurnMod> it = this.listIterator(this.size());
+        while (it.hasPrevious()) {
+            TurnMod turnMod = it.previous();
+            if (turnMod.isExtraTurn() == true) {
+                it.remove();
+                return turnMod;
+            }
+        }
+        return null;
+    }
+
     public boolean skipTurn(UUID playerId) {
         ListIterator<TurnMod> it = this.listIterator(this.size());
         while (it.hasPrevious()) {
