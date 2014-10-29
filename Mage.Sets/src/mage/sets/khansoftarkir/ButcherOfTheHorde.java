@@ -31,6 +31,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -107,8 +108,9 @@ class ButcherOfTheHordeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player playerControls = game.getPlayer(source.getControllerId());
-        if (playerControls != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (sourceObject != null && controller != null) {
             Choice abilityChoice = new ChoiceImpl();
             abilityChoice.setMessage("Choose an ability to add");
 
@@ -118,8 +120,8 @@ class ButcherOfTheHordeEffect extends OneShotEffect {
             abilities.add(HasteAbility.getInstance().getRule());
             abilityChoice.setChoices(abilities);
             while (!abilityChoice.isChosen()) {
-                playerControls.choose(Outcome.AddAbility, abilityChoice, game);
-                if (!playerControls.isInGame()) {
+                controller.choose(Outcome.AddAbility, abilityChoice, game);
+                if (!controller.isInGame()) {
                     return false;
                 }
             }
@@ -135,6 +137,7 @@ class ButcherOfTheHordeEffect extends OneShotEffect {
             }
 
             if (ability != null) {
+                game.informPlayers(sourceObject.getLogName() + ": " + controller.getName() + " has chosen: " + chosen);
                 ContinuousEffect effect = new GainAbilitySourceEffect(ability, Duration.EndOfTurn);
                 game.addEffect(effect, source);
                 return true;
