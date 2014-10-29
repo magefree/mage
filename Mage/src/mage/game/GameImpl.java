@@ -1262,7 +1262,7 @@ public abstract class GameImpl implements Game, Serializable {
 
         //getState().addCard(permanent);
         permanent.reset(this);
-        if (copyFromPermanent.isMorphCard()) {
+        if (copyFromPermanent.isMorphCard() && copyFromPermanent.isFaceDown()) {
             MorphAbility.setPermanentToMorph(permanent);
         }
         permanent.assignNewId();

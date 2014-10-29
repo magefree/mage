@@ -250,7 +250,7 @@ public class MorphTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Pine Walker", 4,4);
 
     }    
-/**
+    /**
      * If a morph is on the table and an enemy Doomwake Giant comes down, the morph goes 
      * down to 1/1 correctly. If you unmorph the 2/2 and is also a 2/2 after umorphing, 
      * the morph will be erroneously reduced to 0/0 and die.
@@ -291,5 +291,38 @@ public class MorphTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Ponyback Brigade", 1);
         assertPowerToughness(playerA, "Ponyback Brigade", 1,1);
 
-    }        
+    }
+    /**
+     * Clone a Morph creature that was cast face down and meanwhile was turned face up
+     *
+     */
+    @Test
+    public void testCloneFaceUpMorphEffect() {
+        // Sagu Mauler 6/6 - Creature - Beast
+        // Trample, hexproof
+        // Morph {3}{G}{B} (You may cast this card face down as a 2/2 creature for . Turn it face up any time for its morph cost.)
+        addCard(Zone.HAND, playerA, "Sagu Mauler");
+        addCard(Zone.HAND, playerA, "Clone");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sagu Mauler");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}{G}{U}: Turn this face-down permanent face up.");
+        castSpell(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
+        setChoice(playerA, "Sagu Mauler");
+
+        setStopAt(5, PhaseStep.END_COMBAT);
+        execute();
+
+        assertLife(playerB, 20);
+
+        assertHandCount(playerA, "Sagu Mauler", 0);
+        assertHandCount(playerA, "Clone", 0);
+
+        assertPermanentCount(playerA, "Sagu Mauler", 2);
+        assertPowerToughness(playerA, "Sagu Mauler", 6,6,Filter.ComparisonScope.Any);
+
+    }
+
 }
