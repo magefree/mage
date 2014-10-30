@@ -43,7 +43,10 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class ScalebanesElite extends CardImpl {
 
-    static final FilterCard filter = new FilterCard("black");
+    private static final FilterCard filter = new FilterCard("Black");
+    static {
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
+    }
 
     public ScalebanesElite(UUID ownerId) {
         super(ownerId, 135, "Scalebane's Elite", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{W}");
