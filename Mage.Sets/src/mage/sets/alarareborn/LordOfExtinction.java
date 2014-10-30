@@ -27,6 +27,7 @@
  */
 package mage.sets.alarareborn;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,8 +41,6 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *
@@ -60,7 +59,7 @@ public class LordOfExtinction extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Lord of Extinction's power and toughness are each equal to the number of cards in all graveyards.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(new LordOfExtinctionDynamicCount(), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new LordOfExtinctionDynamicCount(), Duration.WhileOnBattlefield)));
     }
 
     public LordOfExtinction(final LordOfExtinction card) {
