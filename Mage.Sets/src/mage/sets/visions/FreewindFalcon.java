@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class FreewindFalcon extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Red");
+    private static final FilterCard filter = new FilterCard("red");
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
