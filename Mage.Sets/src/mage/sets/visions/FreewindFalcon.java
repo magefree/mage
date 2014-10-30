@@ -45,7 +45,10 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class FreewindFalcon extends CardImpl {
 
-    static final FilterCard filter = new FilterCard("red");
+    private static final FilterCard filter = new FilterCard("Red");
+    static {
+        filter.add(new ColorPredicate(ObjectColor.RED));
+    }
 
     public FreewindFalcon(UUID ownerId) {
         super(ownerId, 105, "Freewind Falcon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
