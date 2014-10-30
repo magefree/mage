@@ -37,6 +37,7 @@ import mage.game.permanent.Permanent;
 
 import java.io.Serializable;
 import java.util.*;
+import mage.choices.Choice;
 
 /**
  *
@@ -45,7 +46,7 @@ import java.util.*;
 public class PlayerQueryEvent extends EventObject implements ExternalEvent, Serializable {
 
     public enum QueryType {
-        ASK, CHOOSE, CHOOSE_ABILITY, CHOOSE_MODE, PICK_TARGET, PICK_ABILITY, SELECT, PLAY_MANA, PLAY_X_MANA, AMOUNT, PICK_CARD, CONSTRUCT, CHOOSE_PILE, PERSONAL_MESSAGE
+        ASK, CHOOSE_CHOICE, CHOOSE_ABILITY, CHOOSE_MODE, PICK_TARGET, PICK_ABILITY, SELECT, PLAY_MANA, PLAY_X_MANA, AMOUNT, PICK_CARD, CONSTRUCT, CHOOSE_PILE, PERSONAL_MESSAGE
     }
 
     private String message;
@@ -63,7 +64,8 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
     private Map<String, Serializable> options;
     private Map<UUID, String> modes;
     private List<? extends Card> pile1;
-    private List<? extends Card> pile2;    
+    private List<? extends Card> pile2;
+    private Choice choice;
 
 
     private PlayerQueryEvent(UUID playerId, String message, List<? extends Ability> abilities, Set<String> choices, Set<UUID> targets, Cards cards, QueryType queryType, int min, int max, boolean required, Map<String, Serializable> options) {
@@ -135,6 +137,13 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
         this.playerId = playerId;
     }
 
+    private PlayerQueryEvent(UUID playerId, Choice choice) {
+        super(playerId);
+        this.queryType = QueryType.CHOOSE_CHOICE;
+        this.choice = choice;
+        this.playerId = playerId;
+    }
+
     public static PlayerQueryEvent askEvent(UUID playerId, String message) {
         return new PlayerQueryEvent(playerId, message, null, null, null, null, QueryType.ASK, 0, 0, false);
     }
@@ -142,7 +151,7 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
     public static PlayerQueryEvent chooseAbilityEvent(UUID playerId, String message, String objectName, List<? extends ActivatedAbility> choices) {
         Set<String> nameAsSet = null;
         if (objectName != null) {
-            nameAsSet = new HashSet<String>();
+            nameAsSet = new HashSet<>();
             nameAsSet.add(objectName);
         }
         return new PlayerQueryEvent(playerId, message, choices, nameAsSet, null, null, QueryType.CHOOSE_ABILITY, 0, 0, false);
@@ -156,8 +165,8 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
         return new PlayerQueryEvent(playerId, message, modes);
     }
 
-    public static PlayerQueryEvent chooseEvent(UUID playerId, String message, Set<String> choices) {
-        return new PlayerQueryEvent(playerId, message, null, choices, null, null, QueryType.CHOOSE, 0, 0, false);
+    public static PlayerQueryEvent chooseChoiceEvent(UUID playerId, Choice choice) {
+        return new PlayerQueryEvent(playerId, choice);
     }
 
     public static PlayerQueryEvent targetEvent(UUID playerId, String message, Set<UUID> targets, boolean required) {
@@ -274,6 +283,10 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 
     public List<? extends Card> getPile2() {
         return pile2;
+    }
+
+    public Choice getChoice() {
+        return choice;
     }
 
 }

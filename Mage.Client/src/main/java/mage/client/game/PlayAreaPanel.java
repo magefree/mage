@@ -216,6 +216,19 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             }
         });
 
+
+        menuItem = new JMenuItem("Replacement effects - reset auto select");
+        menuItem.setMnemonic(KeyEvent.VK_R);
+        menuItem.setToolTipText("Reset all effects that were added to the list of auto select replacement effects this game.");
+        popupMenu.add(menuItem);
+        // Reset the replacement effcts that were auto selected for the game
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gamePanel.getSession().sendPlayerAction(PlayerAction.RESET_AUTO_SELECT_REPLACEMENT_EFFECTS, gameId);
+            }
+        });
+
         popupMenu.addSeparator();
 
         menuItem = new JMenuItem("Concede game");

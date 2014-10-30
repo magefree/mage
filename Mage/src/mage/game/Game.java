@@ -153,7 +153,7 @@ public interface Game extends MageItem, Serializable {
     void addTableEventListener(Listener<TableEvent> listener);
     void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener);
     void fireAskPlayerEvent(UUID playerId, String message);
-    void fireChooseEvent(UUID playerId, Choice choice);
+    void fireChooseChoiceEvent(UUID playerId, Choice choice);
     void fireSelectTargetEvent(UUID playerId, String message, Set<UUID> targets, boolean required, Map<String, Serializable> options);
     void fireSelectTargetEvent(UUID playerId, String message, Cards cards, boolean required, Map<String, Serializable> options);
     void fireSelectTargetEvent(UUID playerId, String message, List<TriggeredAbility> abilities);

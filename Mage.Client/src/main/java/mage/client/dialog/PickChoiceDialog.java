@@ -34,12 +34,14 @@
 
 package mage.client.dialog;
 
+import java.awt.Point;
+import java.util.Map;
+import java.util.UUID;
+import javax.swing.JLayeredPane;
+import mage.choices.Choice;
 import mage.client.MageFrame;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
-
-import javax.swing.*;
-import java.awt.*;
 
 /**
  *
@@ -52,10 +54,28 @@ public class PickChoiceDialog extends MageDialog {
         initComponents();
         this.setModal(true);
     }
+    Choice choice;
+    boolean autoSelect;
 
-    public void showDialog(String message, String[] choices) {
-        this.lblMessage.setText(message);
-        this.lstChoices.setListData(choices);
+    public void showDialog(Choice choice, UUID objectId) {
+        this.lblMessage.setText("<html>" + choice.getMessage());
+        this.choice = choice;
+        this.autoSelect = false;
+        btnAutoSelect.setVisible(choice.isKeyChoice());
+        
+        if (choice.isKeyChoice()){
+
+            ComboItem[] comboItems = new ComboItem[choice.getKeyChoices().size()];
+            int count = 0;
+            for (Map.Entry<String, String> entry : choice.getKeyChoices().entrySet()) {
+                comboItems[count] = new ComboItem(entry.getKey(), entry.getValue());
+                count++;
+            }
+            this.lstChoices.setListData(comboItems);
+        } else {
+             this.lstChoices.setListData(choice.getChoices().toArray());
+        }
+        
         MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
 
         Point centered = SettingsManager.getInstance().getComponentPosition(getWidth(), getHeight());
@@ -65,8 +85,21 @@ public class PickChoiceDialog extends MageDialog {
         this.setVisible(true);
     }
 
-    public String getChoice() {
-        return (String)this.lstChoices.getSelectedValue();
+    public boolean isAutoSelect() {
+        return autoSelect;
+    }
+
+    public void setChoice() {
+        if (this.lstChoices.getSelectedValue() == null) {
+            choice.clearChoice();
+        }
+        
+        if (choice.isKeyChoice()) {
+            ComboItem item = (ComboItem)this.lstChoices.getSelectedValue();
+            choice.setChoiceByKey(item.getValue());
+        } else {
+            choice.setChoice((String)this.lstChoices.getSelectedValue());
+        }
     }
 
     /** This method is called from within the constructor to
@@ -78,11 +111,24 @@ public class PickChoiceDialog extends MageDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnAutoSelect = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         btnOk = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstChoices = new javax.swing.JList();
         lblMessage = new javax.swing.JLabel();
+
+        setResizable(true);
+        setMinimumSize(new java.awt.Dimension(280, 200));
+        setName(""); // NOI18N
+
+        btnAutoSelect.setText("Auto select");
+        btnAutoSelect.setToolTipText("If you select an effect with \"Auto select\", this effect will be selected the next time automatically first.");
+        btnAutoSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAutoSelectActionPerformed(evt);
+            }
+        });
 
         btnCancel.setText("Cancel");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +163,9 @@ public class PickChoiceDialog extends MageDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAutoSelect)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnOk)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancel))
@@ -126,30 +175,40 @@ public class PickChoiceDialog extends MageDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblMessage)
+                .addGap(6, 6, 6)
+                .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel)
-                    .addComponent(btnOk))
-                .addContainerGap())
+                    .addComponent(btnOk)
+                    .addComponent(btnAutoSelect))
+                .addGap(10, 10, 10))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+        setChoice();
         this.hideDialog();
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.lstChoices.clearSelection();
+        this.choice.clearChoice();
         this.hideDialog();
     }//GEN-LAST:event_btnCancelActionPerformed
 
+    private void btnAutoSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutoSelectActionPerformed
+        this.autoSelect = true;
+        setChoice();
+        this.hideDialog();
+    }//GEN-LAST:event_btnAutoSelectActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAutoSelect;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnOk;
     private javax.swing.JScrollPane jScrollPane1;
@@ -158,3 +217,26 @@ public class PickChoiceDialog extends MageDialog {
     // End of variables declaration//GEN-END:variables
 
 }
+  class ComboItem {
+
+        private final String value;
+        private final String label;
+
+        public ComboItem(String value, String label) {
+            this.value = value;
+            this.label = label;
+        }
+
+        public String getValue() {
+            return this.value;
+        }
+
+        public String getLabel() {
+            return this.label;
+        }
+
+        @Override
+        public String toString() {
+            return label;
+        }
+    }

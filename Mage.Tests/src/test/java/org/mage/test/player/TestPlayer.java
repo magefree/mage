@@ -283,7 +283,7 @@ public class TestPlayer extends ComputerPlayer {
     }
 
     @Override
-    public int chooseEffect(List<String> rEffects, Game game) {
+    public int chooseReplacementEffect(Map<String, String> rEffects, Game game) {
         if (!choices.isEmpty()) {
             for (String choice: choices) {
                 for (int index = 0; index < rEffects.size(); index++) {
@@ -294,7 +294,7 @@ public class TestPlayer extends ComputerPlayer {
                 }
             }
         }
-        return super.chooseEffect(rEffects, game);
+        return super.chooseReplacementEffect(rEffects, game);
     }
 
     @Override

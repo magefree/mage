@@ -308,7 +308,7 @@ public interface Player extends MageItem, Copyable<Player> {
     // set the value for non mana X costs
     int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variableCost);
 
-    int chooseEffect(List<String> rEffects, Game game);
+    int chooseReplacementEffect(Map<String, String> abilityMap, Game game);
     TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game);
     Mode chooseMode(Modes modes, Ability source, Game game);
     void selectAttackers(Game game, UUID attackingPlayerId);

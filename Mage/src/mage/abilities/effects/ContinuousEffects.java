@@ -37,6 +37,7 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -675,7 +676,7 @@ public class ContinuousEffects implements Serializable {
             } else {
                 //20100716 - 616.1c
                 Player player = game.getPlayer(event.getPlayerId());
-                index = player.chooseEffect(getReplacementEffectsTexts(rEffects, game), game);
+                index = player.chooseReplacementEffect(getReplacementEffectsTexts(rEffects, game), game);
             }
             // get the selected effect
             int checked = 0;
@@ -867,7 +868,10 @@ public class ContinuousEffects implements Serializable {
     }
 
     public void addEffect(ContinuousEffect effect, Ability source) {
-        if (source == null && effect != null) {
+        if (effect == null) {
+            logger.error("Effect is null: " + source.toString());
+            return;
+        } else if (source == null) {
             logger.warn("Adding effect without ability : " +effect.toString());
         }
         switch (effect.getEffectType()) {
@@ -980,16 +984,17 @@ public class ContinuousEffects implements Serializable {
         return effects;
     }
 
-    public List<String> getReplacementEffectsTexts(HashMap<ReplacementEffect, HashSet<Ability>> rEffects, Game game) {
-        List<String> texts = new ArrayList<>();
+
+    public Map<String, String> getReplacementEffectsTexts(HashMap<ReplacementEffect, HashSet<Ability>> rEffects, Game game) {
+        Map<String, String> texts = new LinkedHashMap<>();
         for (Map.Entry<ReplacementEffect, HashSet<Ability>> entry : rEffects.entrySet()) {
             if (entry.getValue() != null) {
                 for (Ability ability :entry.getValue()) {
                     MageObject object = game.getObject(ability.getSourceId());
                     if (object != null) {
-                        texts.add(ability.getRule(object.getLogName()));
+                        texts.put(ability.getId().toString() + "_" + entry.getKey().getId().toString(), ability.getRule(object.getLogName()));
                     } else {
-                        texts.add(entry.getKey().getText(null));
+                        texts.put(ability.getId().toString() + "_" + entry.getKey().getId().toString(), entry.getKey().getText(null));
                     }
                 }
             } else {

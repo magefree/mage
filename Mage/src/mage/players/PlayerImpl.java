@@ -1643,8 +1643,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void sendPlayerAction(PlayerAction passPriorityAction, Game game) {
-        switch(passPriorityAction) {
+    public void sendPlayerAction(PlayerAction playerAction, Game game) {
+        switch(playerAction) {
             case PASS_PRIORITY_UNTIL_MY_NEXT_TURN: // F9
                 passedUntilNextMain = false;
                 passedUntilEndOfTurn = false;
@@ -1681,7 +1681,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 passedUntilEndOfTurn = false;
                 passedUntilNextMain = false;
         }
-        logger.trace("PASS Priority: " + passPriorityAction.toString());
+        logger.trace("PASS Priority: " + playerAction.toString());
     }
 
     @Override

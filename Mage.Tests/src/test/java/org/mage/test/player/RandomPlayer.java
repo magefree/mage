@@ -356,7 +356,7 @@ public class RandomPlayer extends ComputerPlayer {
     }
 
     @Override
-    public int chooseEffect(List<String> rEffects, Game game) {
+    public int chooseReplacementEffect(Map<String, String> rEffects, Game game) {
         return rnd.nextInt(rEffects.size());
     }
 

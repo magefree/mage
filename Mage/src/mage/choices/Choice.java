@@ -28,6 +28,7 @@
 
 package mage.choices;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -42,9 +43,13 @@ public interface Choice {
     String getMessage();
     void setMessage(String message);
     void setChoice(String choice);
+    void setChoiceByKey(String choiceKey);
     Set<String> getChoices();
+    Map<String,String> getKeyChoices();
     void setChoices(Set<String> choices);
+    void setKeyChoices(Map<String, String> choices);
     String getChoice();
-
+    String getChoiceKey();
+    boolean isKeyChoice();
     Choice copy();
 }

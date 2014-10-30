@@ -1794,11 +1794,11 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void fireChooseEvent(UUID playerId, Choice choice) {
+    public void fireChooseChoiceEvent(UUID playerId, Choice choice) {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.choose(playerId, choice.getMessage(), choice.getChoices());
+        playerQueryEventSource.chooseChoice(playerId, choice);
     }
 
     @Override

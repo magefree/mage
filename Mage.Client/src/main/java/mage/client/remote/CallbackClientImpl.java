@@ -32,6 +32,7 @@ import java.util.UUID;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import mage.cards.decks.Deck;
+import mage.choices.Choice;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
 import static mage.client.chat.ChatPanel.ChatType.TABLES;
@@ -72,7 +73,7 @@ public class CallbackClientImpl implements CallbackClient {
     private static final Logger logger = Logger.getLogger(CallbackClientImpl.class);
     private final MageFrame frame;
     private int messageId = 0;
-//    private int gameInformMessageId = 0;
+    private int gameInformMessageId = 0;
 
     public CallbackClientImpl(MageFrame frame) {
         this.frame = frame;
@@ -244,12 +245,13 @@ public class CallbackClientImpl implements CallbackClient {
                                     panel.pickPile(message.getMessage(), message.getPile1(), message.getPile2());
                                 }       break;
                             }
-                        case "gameChoose":
+                        case "gameChooseChoice":
                             {
                                 GameClientMessage message = (GameClientMessage) callback.getData();
                                 GamePanel panel = MageFrame.getGame(callback.getObjectId());
+
                                 if (panel != null) {
-                                    panel.getChoice(message.getMessage(), message.getStrings());
+                                    panel.getChoice(message.getChoice(), callback.getObjectId());
                                 }       break;
                             }
                         case "gamePlayMana":
@@ -292,20 +294,20 @@ public class CallbackClientImpl implements CallbackClient {
                                 JOptionPane.showMessageDialog(null, messageData.get(1), messageData.get(0), JOptionPane.WARNING_MESSAGE);
                             }   break;
                         case "gameInform":
-//                            if (callback.getMessageId() > gameInformMessageId) {
-                            {
-                                GameClientMessage message = (GameClientMessage) callback.getData();
-                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                                if (panel != null) {
-                                    panel.inform(message.getMessage(), message.getGameView(), callback.getMessageId());
+                            if (callback.getMessageId() > gameInformMessageId) {
+                                {
+                                    GameClientMessage message = (GameClientMessage) callback.getData();
+                                    GamePanel panel = MageFrame.getGame(callback.getObjectId());
+                                    if (panel != null) {
+                                        panel.inform(message.getMessage(), message.getGameView(), callback.getMessageId());
+                                    }
                                 }
-                            }
 // no longer needed because phase skip handling on server side now
-//                            } else {
-//                                logger.warn(new StringBuilder("message out of sequence - ignoring").append("MessageId = ").append(callback.getMessageId()).append(" method = ").append(callback.getMethod()));
-//                                //logger.warn("message out of sequence - ignoring");
-//                            }
-//                            gameInformMessageId = messageId;
+                            } else {
+                                logger.warn(new StringBuilder("message out of sequence - ignoring").append("MessageId = ").append(callback.getMessageId()).append(" method = ").append(callback.getMethod()));
+                                //logger.warn("message out of sequence - ignoring");
+                            }
+                            gameInformMessageId = messageId;
                             break;
                         case "gameInformPersonal":
                             {

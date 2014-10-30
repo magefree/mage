@@ -12,6 +12,8 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -60,7 +62,7 @@ import org.mage.plugins.card.utils.impl.ImageManagerImpl;
  * @author arcane, nantuko, noxx
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
-public class CardPanel extends MagePermanent implements MouseListener, MouseMotionListener, MouseWheelListener {
+public class CardPanel extends MagePermanent implements MouseListener, MouseMotionListener, MouseWheelListener, ComponentListener {
     private static final long serialVersionUID = -3272134219262184410L;
 
     private static final Logger log = Logger.getLogger(CardPanel.class);
@@ -83,6 +85,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     private static final float ROT_CENTER_TO_BOTTOM_CORNER = 0.7071067811865475244008443621048f;
 
     public CardView gameCard;
+    public CardView updateCard;
 
     // for two faced cards
     public CardView temporary;
@@ -259,7 +262,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         addMouseListener(this);
         addMouseMotionListener(this);
         addMouseWheelListener(this);
-
+        addComponentListener(this);
+        
         displayTitleAnyway = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_CARD_NAMES, "true").equals("true");
         titleText = new GlowText();
         setText(gameCard);
@@ -532,7 +536,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     }
 
     @Override
-    public void layout() {
+    public void doLayout() {
         int borderSize = Math.round(cardWidth * BLACK_BORDER_SIZE);
         imagePanel.setLocation(cardXOffset + borderSize, cardYOffset + borderSize);
         imagePanel.setSize(cardWidth - borderSize * 2, cardHeight - borderSize * 2);
@@ -764,6 +768,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     public void update(CardView card) {
+        this.updateCard = card;
         if (isPermanent && (card instanceof PermanentView)) {
             boolean needsTapping = isTapped() != ((PermanentView) card).isTapped();
             boolean needsFlipping = isFlipped() != ((PermanentView) card).isFlipped();
@@ -886,7 +891,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     private static ImageIcon getCounterImageWithAmount(int amount, BufferedImage image, int cardWidth) {
         int factor = cardWidth > WIDTH_LIMIT ? 2 :1;
         int xOffset = amount > 9 ? 2 : 5;
-        int fontSize = amount < 10 ? 9 : amount < 100 ? 9 : 8;
+        int fontSize = factor == 1 ? amount < 10 ? 12 : amount < 100 ? 10 : amount < 1000 ? 7: 6
+                                    :amount < 10 ? 19 : amount < 100 ? 15 : amount < 1000 ? 12: amount < 10000 ?9 : 8;
         BufferedImage newImage;
         if (cardWidth > WIDTH_LIMIT) {
             newImage = ImageManagerImpl.deepCopy(image);
@@ -895,7 +901,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         }
         Graphics graphics = newImage.getGraphics();
         graphics.setColor(Color.BLACK);
-        graphics.setFont(new Font("Arial Black", Font.BOLD, factor * fontSize ));
+        graphics.setFont(new Font("Arial Black", amount > 100 ? Font.PLAIN : Font.BOLD, fontSize ));
         graphics.drawString(Integer.toString(amount), xOffset * factor, 11 * factor);
         return new ImageIcon(newImage);
     }
@@ -1151,4 +1157,26 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     public JPanel getCardArea() {
         return cardArea;
     }
+
+    @Override
+    public void componentResized(ComponentEvent ce) {
+        doLayout();
+        if (updateCard != null) {
+            update(updateCard);
+        }
+    }
+
+    @Override
+    public void componentMoved(ComponentEvent ce) {
+    }
+
+    @Override
+    public void componentShown(ComponentEvent ce) {
+    }
+
+    @Override
+    public void componentHidden(ComponentEvent ce) {
+    }
+
+
 }

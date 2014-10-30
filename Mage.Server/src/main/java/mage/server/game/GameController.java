@@ -65,6 +65,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.zip.GZIPOutputStream;
+import mage.choices.Choice;
 import mage.constants.PlayerAction;
 
 /**
@@ -215,8 +216,8 @@ public class GameController implements GameCallback {
                             case CHOOSE_MODE:
                                 chooseMode(event.getPlayerId(), event.getModes());
                                 break;
-                            case CHOOSE:
-                                choose(event.getPlayerId(), event.getMessage(), event.getChoices());
+                            case CHOOSE_CHOICE:
+                                chooseChoice(event.getPlayerId(), event.getChoice());
                                 break;
                             case AMOUNT:
                                 amount(event.getPlayerId(), event.getMessage(), event.getMin(), event.getMax());
@@ -582,11 +583,11 @@ public class GameController implements GameCallback {
         });
     }
 
-    private synchronized void choose(UUID playerId, final String message, final Set<String> choices) throws MageException {
+    private synchronized void chooseChoice(UUID playerId, final Choice choice) throws MageException {
         perform(playerId, new Command() {
             @Override
             public void execute(UUID playerId) {
-                getGameSession(playerId).choose(message, choices);
+                getGameSession(playerId).chooseChoice(choice);
             }
         });
     }

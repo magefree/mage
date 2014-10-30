@@ -29,7 +29,9 @@
 package mage.choices;
 
 import java.io.Serializable;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -41,7 +43,9 @@ public class ChoiceImpl implements Choice, Serializable {
     protected boolean chosen;
     protected boolean required;
     protected String choice;
+    protected String choiceKey;
     protected Set<String> choices = new LinkedHashSet<>();
+    protected Map<String, String> keyChoices = new LinkedHashMap<>();
     protected String message;
 
     public ChoiceImpl() {
@@ -58,6 +62,8 @@ public class ChoiceImpl implements Choice, Serializable {
         this.required = choice.required;
         this.message = choice.message;
         this.choices.addAll(choice.choices);
+        this.choiceKey = choice.choiceKey;
+        this.keyChoices = choice.keyChoices; // list should never change for the same object so copy by reference
     }
 
     @Override
@@ -112,6 +118,35 @@ public class ChoiceImpl implements Choice, Serializable {
     @Override
     public ChoiceImpl copy() {
         return new ChoiceImpl(this);
+    }
+
+    @Override
+    public Map<String, String> getKeyChoices() {
+        return keyChoices;
+    }
+
+    @Override
+    public void setKeyChoices(Map<String, String> choices) {
+        keyChoices = choices;
+    }
+
+    @Override
+    public String getChoiceKey() {
+        return choiceKey;
+    }
+
+    @Override
+    public void setChoiceByKey(String choiceKey) {
+        String choiceToSet = keyChoices.get(choiceKey);
+        if (choiceToSet != null) {
+            this.choice = choiceToSet;
+            this.choiceKey = choiceKey;
+        }
+    }
+
+    @Override
+    public boolean isKeyChoice() {
+        return !keyChoices.isEmpty();
     }
 
 }

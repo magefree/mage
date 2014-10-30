@@ -1336,8 +1336,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public int chooseEffect(List<String> rEffects, Game game) {
-        log.debug("chooseEffect");
+    public int chooseReplacementEffect(Map<String, String> rEffects, Game game) {
+        log.debug("chooseReplacementEffect");
         //TODO: implement this
         return 0;
     }

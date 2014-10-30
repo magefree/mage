@@ -36,6 +36,7 @@ import mage.game.permanent.Permanent;
 
 import java.io.Serializable;
 import java.util.*;
+import mage.choices.Choice;
 
 /**
  *
@@ -107,8 +108,8 @@ public class PlayerQueryEventSource implements EventSource<PlayerQueryEvent>, Se
         dispatcher.fireEvent(PlayerQueryEvent.amountEvent(playerId, message, min, max));
     }
 
-    public void choose(UUID playerId, String message, Set<String> choices) {
-        dispatcher.fireEvent(PlayerQueryEvent.chooseEvent(playerId, message, choices));
+    public void chooseChoice(UUID playerId, Choice choice) {
+        dispatcher.fireEvent(PlayerQueryEvent.chooseChoiceEvent(playerId, choice));
     }
 
     public void playXMana(UUID playerId, String message) {

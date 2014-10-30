@@ -82,6 +82,7 @@ public class HumanPlayer extends PlayerImpl {
     protected static FilterAttackingCreature filterAttack = new FilterAttackingCreature();
     protected static FilterBlockingCreature filterBlock = new FilterBlockingCreature();
     protected static final Choice replacementEffectChoice = new ChoiceImpl(true);
+
     private static final Map<String, Serializable> staticOptions = new HashMap<>();
 
     private static final Logger log = Logger.getLogger(HumanPlayer.class);
@@ -90,6 +91,8 @@ public class HumanPlayer extends PlayerImpl {
         replacementEffectChoice.setMessage("Choose replacement effect to resolve first");
         staticOptions.put("UI.right.btn.text", "Done");
     }
+
+    protected HashSet<String> autoSelectReplacementEffects = new HashSet<>();
 
     public HumanPlayer(String name, RangeOfInfluence range, int skill) {
         super(name, range);
@@ -167,29 +170,43 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public int chooseEffect(List<String> rEffects, Game game) {
+    public int chooseReplacementEffect(Map<String, String> rEffects, Game game) {
         updateGameStatePriority("chooseEffect", game);
-        replacementEffectChoice.getChoices().clear();
-        int count = 1;
-        for (String effectText: rEffects) {
-            replacementEffectChoice.getChoices().add(count + ". " + effectText);
-            count++;
-        }
-        if (replacementEffectChoice.getChoices().size() == 1) {
+        if (rEffects.size() == 1) {
             return 0;
         }
+        if (!autoSelectReplacementEffects.isEmpty()) {
+            for (String autoKey :autoSelectReplacementEffects) {
+                int count = 0;
+                for (String effectKey : rEffects.keySet()) {
+                    if (effectKey.equals(autoKey)) {
+                        return count;
+                    }
+                    count++;
+                }
+            }
+        }
+
+        replacementEffectChoice.getChoices().clear();
+        replacementEffectChoice.setKeyChoices(rEffects);
+
         while (!abort) {
-            game.fireChooseEvent(playerId, replacementEffectChoice);
+            game.fireChooseChoiceEvent(playerId, replacementEffectChoice);
             waitForResponse(game);
             log.debug("Choose effect: " + response.getString());
             if (response.getString() != null) {
-                replacementEffectChoice.setChoice(response.getString());
-                count = 1;
-                for (int i = 0; i < rEffects.size(); i++) {
-                    if (replacementEffectChoice.getChoice().equals(count + ". " + rEffects.get(i))) {
-                        return i;
+                if (response.getString().startsWith("#")) {
+                    autoSelectReplacementEffects.add(response.getString().substring(1));
+                    replacementEffectChoice.setChoiceByKey(response.getString().substring(1));
+                } else {
+                    replacementEffectChoice.setChoiceByKey(response.getString());
+                }
+                int index = 0;
+                for (String key : rEffects.keySet()) {
+                    if (replacementEffectChoice.getChoiceKey().equals(key)) {
+                        return index;
                     }
-                    count++;
+                    index++;
                 }
             }
         }
@@ -200,7 +217,7 @@ public class HumanPlayer extends PlayerImpl {
     public boolean choose(Outcome outcome, Choice choice, Game game) {
         updateGameStatePriority("choose(3)", game);
         while (!abort) {
-            game.fireChooseEvent(playerId, choice);
+            game.fireChooseChoiceEvent(playerId, choice);
             waitForResponse(game);
             if (response.getString() != null) {
                 choice.setChoice(response.getString());
@@ -895,7 +912,7 @@ public class HumanPlayer extends PlayerImpl {
         game.fireGetAmountEvent(playerId, message, min, max);
         waitForIntegerResponse(game);
         if (response != null && response.getInteger() != null) {
-            return response.getInteger().intValue();
+            return response.getInteger();
         } else {
             return 0;
         }
@@ -1106,5 +1123,12 @@ public class HumanPlayer extends PlayerImpl {
         game.getState().setPriorityPlayerId(getId());
     }
 
-
+    @Override
+    public void sendPlayerAction(PlayerAction playerAction, Game game) {
+        if (PlayerAction.RESET_AUTO_SELECT_REPLACEMENT_EFFECTS.equals(playerAction)) {
+            autoSelectReplacementEffects.clear();
+        } else {
+            super.sendPlayerAction(playerAction, game);
+        }
+    }
 }

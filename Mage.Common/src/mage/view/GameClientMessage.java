@@ -32,6 +32,7 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import mage.choices.Choice;
 
 /**
  *
@@ -50,6 +51,7 @@ public class GameClientMessage implements Serializable {
     private int min;
     private int max;
     private Map<String, Serializable> options;
+    private Choice choice;
 
     public GameClientMessage(GameView gameView) {
         this.gameView = gameView;
@@ -101,6 +103,10 @@ public class GameClientMessage implements Serializable {
         this.message = name;
     }
 
+    public GameClientMessage(Choice choice) {
+        this.choice = choice;
+    }
+
     public GameView getGameView() {
         return gameView;
     }
@@ -144,4 +150,9 @@ public class GameClientMessage implements Serializable {
     public Map<String, Serializable> getOptions() {
         return options;
     }
+
+    public Choice getChoice() {
+        return choice;
+    }
+
 }

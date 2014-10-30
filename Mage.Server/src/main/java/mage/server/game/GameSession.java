@@ -48,6 +48,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import mage.choices.Choice;
 import mage.game.Table;
 
 /**
@@ -123,12 +124,12 @@ public class GameSession extends GameWatcher {
         }
     }
 
-    public void choose(final String message, final Set<String> choices) {
+    public void chooseChoice(final Choice choice) {
         if (!killed) {
             setupTimeout();
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-                user.fireCallback(new ClientCallback("gameChoose", game.getId(), new GameClientMessage(choices.toArray(new String[choices.size()]), message)));
+                user.fireCallback(new ClientCallback("gameChooseChoice", game.getId(), new GameClientMessage(choice)));
             }
         }
     }
