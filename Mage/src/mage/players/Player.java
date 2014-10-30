@@ -124,6 +124,11 @@ public interface Player extends MageItem, Copyable<Player> {
     void pass(Game game);
     void resetPassed();
 
+    boolean getPassedTurn();
+    boolean getPassedUntilEndOfTurn();
+    boolean getPassedUntilNextMain();
+    boolean getPassedAllTurns();
+
     boolean hasLost();
     boolean hasWon();
     boolean hasQuit();

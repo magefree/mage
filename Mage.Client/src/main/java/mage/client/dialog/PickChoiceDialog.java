@@ -96,7 +96,11 @@ public class PickChoiceDialog extends MageDialog {
         
         if (choice.isKeyChoice()) {
             ComboItem item = (ComboItem)this.lstChoices.getSelectedValue();
-            choice.setChoiceByKey(item.getValue());
+            if (item != null) {
+                choice.setChoiceByKey(item.getValue());
+            } else {
+                choice.clearChoice();
+            }
         } else {
             choice.setChoice((String)this.lstChoices.getSelectedValue());
         }

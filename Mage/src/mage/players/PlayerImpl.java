@@ -164,7 +164,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * This indicates that player passed all turns until his own turn starts (F9).
      * Note! This differs from passedTurn as it doesn't care about spells and abilities in the stack and will pass them as well.
      */
-    protected boolean passedAllTurns;
+    protected boolean passedAllTurns; // F9
     
     protected int turns;
     protected int storedBookmark = -1;
@@ -2606,5 +2606,24 @@ public abstract class PlayerImpl implements Player, Serializable {
         
     }
 
+    @Override
+    public boolean getPassedAllTurns() {
+        return passedAllTurns;
+    }
+
+    @Override
+    public boolean getPassedUntilNextMain() {
+        return passedUntilNextMain;
+    }
+
+    @Override
+    public boolean getPassedUntilEndOfTurn() {
+        return passedUntilEndOfTurn;
+    }
+
+    @Override
+    public boolean getPassedTurn() {
+        return passedTurn;
+    }
    
 }

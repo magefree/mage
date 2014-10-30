@@ -74,6 +74,7 @@ public class ChoiceImpl implements Choice, Serializable {
     @Override
     public void clearChoice() {
         choice = null;
+        choiceKey = null;
         chosen = false;
     }
 

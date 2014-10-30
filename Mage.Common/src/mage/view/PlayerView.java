@@ -68,6 +68,10 @@ public class PlayerView implements Serializable {
     private final List<UUID> attachments = new ArrayList<>();
     private final int statesSavedSize;
     private final int priorityTimeLeft;
+    private final boolean passedTurn; // F4
+    private final boolean passedUntilEndOfTurn; // F5
+    private final boolean passedUntilNextMain; // F6
+    private final boolean passedAllTurns; // F9
 
     public PlayerView(Player player, GameState state, Game game, UUID createdForPlayerId) {
         this.playerId = player.getId();
@@ -131,6 +135,11 @@ public class PlayerView implements Serializable {
 
         this.statesSavedSize = player.getStoredBookmark();
         this.priorityTimeLeft = player.getPriorityTimeLeft();
+
+        this.passedTurn = player.getPassedTurn();
+        this.passedUntilEndOfTurn = player.getPassedUntilEndOfTurn();
+        this.passedUntilNextMain = player.getPassedUntilNextMain();
+        this.passedAllTurns = player.getPassedAllTurns();
     }
 
     private boolean showInBattlefield(Permanent permanent, GameState state) {
@@ -229,4 +238,21 @@ public class PlayerView implements Serializable {
     public boolean hasPriority() {
         return hasPriority;
     }
+
+    public boolean isPassedTurn() {
+        return passedTurn;
+    }
+
+    public boolean isPassedUntilEndOfTurn() {
+        return passedUntilEndOfTurn;
+    }
+
+    public boolean isPassedUntilNextMain() {
+        return passedUntilNextMain;
+    }
+
+    public boolean isPassedAllTurns() {
+        return passedAllTurns;
+    }
+
 }

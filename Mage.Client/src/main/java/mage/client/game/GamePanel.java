@@ -94,6 +94,7 @@ import mage.client.plugins.impl.Plugins;
 import mage.client.util.CardsViewUtil;
 import mage.client.util.Config;
 import mage.client.util.GameManager;
+import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.constants.Constants;
 import mage.constants.EnlargeMode;
@@ -140,7 +141,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private final Map<String, ShowCardsDialog> lookedAt = new HashMap<>();
     private final ArrayList<ShowCardsDialog> pickTarget = new ArrayList<>();
     private UUID gameId;
-    private UUID playerId;
+    private UUID playerId; // playerId of the player
     private Session session;
     GamePane gamePane;
     private ReplayTask replayTask;
@@ -603,6 +604,9 @@ public final class GamePanel extends javax.swing.JPanel {
                     }
                 }
                 players.get(player.getPlayerId()).update(player);
+                if (player.getPlayerId().equals(playerId)) {
+                    updateSkipButtons(player.isPassedTurn(), player.isPassedUntilEndOfTurn(), player.isPassedUntilNextMain(), player.isPassedAllTurns());
+                }
             } else {
                 logger.warn("Couldn't find player.");
                 logger.warn("   uuid:" + player.getPlayerId());
@@ -656,6 +660,32 @@ public final class GamePanel extends javax.swing.JPanel {
 
         this.revalidate();
         this.repaint();
+    }
+    
+    static final int BORDER_SIZE = 2;
+
+    private void updateSkipButtons(boolean turn, boolean endOfTurn, boolean nextMain, boolean allTurns) {
+        if (turn) { //F4
+            btnSkipToNextTurn.setBorder(new LineBorder(Color.red, BORDER_SIZE));
+        } else {
+            btnSkipToNextTurn.setBorder(new EmptyBorder(BORDER_SIZE,BORDER_SIZE,BORDER_SIZE,BORDER_SIZE));
+        }
+        if (endOfTurn) { // F5
+            btnSkipToEndTurn.setBorder(new LineBorder(Color.red, BORDER_SIZE));
+        } else {
+            btnSkipToEndTurn.setBorder(new EmptyBorder(BORDER_SIZE,BORDER_SIZE,BORDER_SIZE,BORDER_SIZE));
+        }
+        if (nextMain) { // F7
+            btnSkipToNextMain.setBorder(new LineBorder(Color.red, BORDER_SIZE));
+        } else {
+            btnSkipToNextMain.setBorder(new EmptyBorder(BORDER_SIZE,BORDER_SIZE,BORDER_SIZE,BORDER_SIZE));
+        }
+        if (allTurns) { // F9
+            btnSkipToYourTurn.setBorder(new LineBorder(Color.red, BORDER_SIZE));
+        } else {
+            btnSkipToYourTurn.setBorder(new EmptyBorder(BORDER_SIZE,BORDER_SIZE,BORDER_SIZE,BORDER_SIZE));
+        }
+
     }
 
     /**
@@ -951,7 +981,7 @@ public final class GamePanel extends javax.swing.JPanel {
         restoreDividerLocations();
 
         pnlShortCuts.setOpaque(false);
-        pnlShortCuts.setPreferredSize(new Dimension(400, 60));
+        pnlShortCuts.setPreferredSize(new Dimension(400, 72));
         lblPhase.setLabelFor(txtPhase);
         lblPhase.setText("Phase:");
 
@@ -1005,7 +1035,7 @@ public final class GamePanel extends javax.swing.JPanel {
         });
         
         btnCancelSkip.setContentAreaFilled(false);
-        btnCancelSkip.setBorder(new EmptyBorder(0,0,0,0));
+        btnCancelSkip.setBorder(new EmptyBorder(BORDER_SIZE,BORDER_SIZE,BORDER_SIZE, BORDER_SIZE));
         btnCancelSkip.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getCancelSkipButtonImage()));
         btnCancelSkip.setToolTipText("Cancel all skip actions (F3).");
         btnCancelSkip.setFocusable(false);
@@ -1019,7 +1049,7 @@ public final class GamePanel extends javax.swing.JPanel {
         });
 
         btnSkipToNextTurn.setContentAreaFilled(false);
-        btnSkipToNextTurn.setBorder(new EmptyBorder(0,0,0,0));
+        btnSkipToNextTurn.setBorder(new EmptyBorder(BORDER_SIZE,BORDER_SIZE,BORDER_SIZE, BORDER_SIZE));
         btnSkipToNextTurn.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipNextTurnButtonImage()));
         btnSkipToNextTurn.setToolTipText("Skip to next turn (F4).");
         btnSkipToNextTurn.setFocusable(false);
@@ -1042,7 +1072,7 @@ public final class GamePanel extends javax.swing.JPanel {
         });
 
         btnSkipToEndTurn.setContentAreaFilled(false);
-        btnSkipToEndTurn.setBorder(new EmptyBorder(0,0,0,0));
+        btnSkipToEndTurn.setBorder(new EmptyBorder(BORDER_SIZE,BORDER_SIZE,BORDER_SIZE, BORDER_SIZE));
         btnSkipToEndTurn.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipEndTurnButtonImage()));
         btnSkipToEndTurn.setToolTipText("Skip to (opponents/next) end of turn step (F5) - adjust using preferences.");
         btnSkipToEndTurn.setFocusable(false);
@@ -1065,7 +1095,7 @@ public final class GamePanel extends javax.swing.JPanel {
         });
 
         btnSkipToNextMain.setContentAreaFilled(false);
-        btnSkipToNextMain.setBorder(new EmptyBorder(0,0,0,0));
+        btnSkipToNextMain.setBorder(new EmptyBorder(BORDER_SIZE,BORDER_SIZE,BORDER_SIZE, BORDER_SIZE));
         btnSkipToNextMain.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipMainButtonImage()));
         btnSkipToNextMain.setToolTipText("Skip to (your) next main phase (F7) - adjust using preferences.");
         btnSkipToNextMain.setFocusable(false);
@@ -1088,7 +1118,7 @@ public final class GamePanel extends javax.swing.JPanel {
         });
 
         btnSkipToYourTurn.setContentAreaFilled(false);
-        btnSkipToYourTurn.setBorder(new EmptyBorder(0,0,0,0));
+        btnSkipToYourTurn.setBorder(new EmptyBorder(BORDER_SIZE,BORDER_SIZE,BORDER_SIZE, BORDER_SIZE));
         btnSkipToYourTurn.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipYourNextTurnButtonImage()));
         btnSkipToYourTurn.setToolTipText("Skip to your next turn (F9).");
         btnSkipToYourTurn.setFocusable(false);
@@ -1111,7 +1141,7 @@ public final class GamePanel extends javax.swing.JPanel {
         });
                
         btnConcede.setContentAreaFilled(false);
-        btnConcede.setBorder(new EmptyBorder(0,0,0,0));
+        btnConcede.setBorder(new EmptyBorder(BORDER_SIZE,BORDER_SIZE,BORDER_SIZE, BORDER_SIZE));
         btnConcede.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getConcedeButtonImage()));
         btnConcede.setToolTipText("Concede the current game.");
         btnConcede.setFocusable(false);
@@ -1559,33 +1589,33 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void btnEndTurnActionPerformed(java.awt.event.ActionEvent evt) {
-        if (feedbackPanel != null) {
-            session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN, gameId);
-        }
+        session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN, gameId);
+        AudioManager.playNextPhase();
+        updateSkipButtons(true, false, false, false);
     }
 
     private void btnUntilEndOfTurnActionPerformed(java.awt.event.ActionEvent evt) {
-        if (feedbackPanel != null) {
-            session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId);            
-        }
+        session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId);
+        AudioManager.playNextPhase();
+        updateSkipButtons(false, true, false, false);
     }
 
     private void btnUntilNextMainPhaseActionPerformed(java.awt.event.ActionEvent evt) {
-        if (feedbackPanel != null) {
-            session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE, gameId);
-        }
+        session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE, gameId);
+        AudioManager.playNextPhase();
+        updateSkipButtons(false, false, true, false);
     }
 
     private void btnPassPriorityUntilNextYourTurnActionPerformed(java.awt.event.ActionEvent evt) {
-        if (feedbackPanel != null) {
-            session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN, gameId);
-        }
+        session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN, gameId);
+        AudioManager.playNextPhase();
+        updateSkipButtons(false, false, false, true);
     }
 
     private void restorePriorityActionPerformed(java.awt.event.ActionEvent evt) {
-        if (feedbackPanel != null) {
-            session.sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, gameId);
-        }
+        session.sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, gameId);
+        AudioManager.playButtonCancel();
+        updateSkipButtons(false, false, false, false);
     }
 
     private void mouseClickPhaseBar(MouseEvent evt) {
