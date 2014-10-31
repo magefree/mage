@@ -28,9 +28,9 @@
 
 package mage.abilities.common;
 
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -59,7 +59,8 @@ public class AttacksTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId()) ) {
+        if (event.getType() == EventType.DECLARED_ATTACKERS
+                && game.getCombat().getAttackers().contains(this.getSourceId()) ) {
             return true;
         }
         return false;
@@ -77,6 +78,5 @@ public class AttacksTriggeredAbility extends TriggeredAbilityImpl {
     public AttacksTriggeredAbility copy() {
         return new AttacksTriggeredAbility(this);
     }
-
 
 }
