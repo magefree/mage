@@ -29,6 +29,7 @@ package mage.sets.elvesvsgoblins;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -86,6 +87,12 @@ public class SkirkDrillSergeant extends CardImpl {
 
 class SkirkDrillSergeantEffect extends OneShotEffect {
 
+    private static final FilterPermanentCard filter = new FilterPermanentCard("Goblin permanent card");
+
+    static {
+        filter.add(new SubtypePredicate("Goblin"));
+    }
+
     public SkirkDrillSergeantEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "reveal the top card of your library. If it's a Goblin permanent card, put it onto the battlefield. Otherwise, put it into your graveyard";
@@ -103,8 +110,8 @@ class SkirkDrillSergeantEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Card sourceCard = game.getCard(source.getSourceId());
-        if (player == null || sourceCard == null) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (player == null || sourceObject == null) {
             return false;
         }
 
@@ -112,16 +119,16 @@ class SkirkDrillSergeantEffect extends OneShotEffect {
             Card card = player.getLibrary().getFromTop(game);
             Cards cards = new CardsImpl();
             cards.add(card);
-            player.revealCards(sourceCard.getName(), cards, game);
+            player.revealCards(sourceObject.getLogName(), cards, game);
 
             if (card != null) {
-                if (new FilterPermanentCard().match(card, game)) {
+                if (filter.match(card, game)) {
                     player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
                 } else {
                     player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                 }
             }
         }
-        return false;
+        return true;
     }
 }
