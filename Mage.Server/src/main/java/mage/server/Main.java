@@ -73,7 +73,7 @@ import org.jboss.remoting.transport.bisocket.BisocketServerInvoker;
 public class Main {
 
     private static final Logger logger = Logger.getLogger(Main.class);
-    private static final MageVersion version = new MageVersion(1, 3, 0, MageVersion.MAGE_VERSION_INFO);
+    private static final MageVersion version = new MageVersion(MageVersion.MAGE_VERSION_MAJOR, MageVersion.MAGE_VERSION_MINOR, MageVersion.MAGE_VERSION_PATCH,  MageVersion.MAGE_VERSION_MINOR_PATCH, MageVersion.MAGE_VERSION_INFO);
 
     private static final String testModeArg = "-testMode=";
     private static final String fastDBModeArg = "-fastDbMode=";

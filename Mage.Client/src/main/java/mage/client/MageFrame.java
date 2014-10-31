@@ -101,6 +101,8 @@ import net.java.truevfs.kernel.spec.FsAccessOption;
  */
 public class MageFrame extends javax.swing.JFrame implements MageClient {
 
+    private static final String TITLE_NAME = "XMage";
+
     private static final Logger logger = Logger.getLogger(MageFrame.class);
     private static final String liteModeArg = "-lite";
     private static final String grayModeArg = "-gray";
@@ -115,7 +117,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static final Preferences prefs = Preferences.userNodeForPackage(MageFrame.class);
     private JLabel title;
     private Rectangle titleRectangle;
-    private static final MageVersion version = new MageVersion(1, 3, 0, MageVersion.MAGE_VERSION_INFO);
+    private static final MageVersion version = new MageVersion(MageVersion.MAGE_VERSION_MAJOR, MageVersion.MAGE_VERSION_MINOR, MageVersion.MAGE_VERSION_PATCH,  MageVersion.MAGE_VERSION_MINOR_PATCH, MageVersion.MAGE_VERSION_INFO);
     private UUID clientId;
     private static MagePane activeFrame;
     private static boolean liteMode = false;
@@ -169,8 +171,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
      * Creates new form MageFrame
      */
     public MageFrame() {
-
-        setTitle("XMage, version " + version);
+        setWindowTitle();
+        
         clientId = UUID.randomUUID();
         EDTExceptionHandler.registerExceptionHandler();
         addWindowListener(new WindowAdapter() {
@@ -322,6 +324,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 SystemUtil.toggleMacOSFullScreenMode(this);
             }
         }
+    }
+
+    public void setWindowTitle() {
+        setTitle(TITLE_NAME + "  Client: " + version.toString() + "  Server: " + ((session != null && session.isConnected()) ? session.getVersionInfo():"<not connected>"));
     }
 
     private void addTooltipContainer() {
@@ -674,7 +680,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public static boolean connect(Connection connection) {
-        return session.connect(connection);
+        boolean result = session.connect(connection);
+        MageFrame.getInstance().setWindowTitle();
+        return result;
     }
 
     public static boolean stopConnecting() {
@@ -905,7 +913,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             if (JOptionPane.showConfirmDialog(this, "Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 session.disconnect(false);
                 tablesPane.clearChat();
-                showMessage("You have disconnected");
+                setWindowTitle();
+                showMessage("You have disconnected");                
             }
         } else {
             connectDialog.showDialog();

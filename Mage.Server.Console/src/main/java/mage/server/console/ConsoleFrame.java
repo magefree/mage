@@ -63,7 +63,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     private static Session session;
     private ConnectDialog connectDialog;
     private static final Preferences prefs = Preferences.userNodeForPackage(ConsoleFrame.class);
-    private static final MageVersion version = new MageVersion(1, 3, 0, MageVersion.MAGE_VERSION_INFO);
+    private static final MageVersion version = new MageVersion(MageVersion.MAGE_VERSION_MAJOR, MageVersion.MAGE_VERSION_MINOR, MageVersion.MAGE_VERSION_PATCH, MageVersion.MAGE_VERSION_MINOR_PATCH, MageVersion.MAGE_VERSION_INFO);
     
     private static final ScheduledExecutorService pingTaskExecutor = Executors.newSingleThreadScheduledExecutor();
     /**

@@ -1386,7 +1386,15 @@ public class SessionImpl implements Session {
         }
         return false;
     }
+
+    @Override
+    public String getVersionInfo() {
+        return serverState.getVersion().toString();
+    }
+
 }
+
+
 class MageAuthenticator extends Authenticator {
 
     private final String username;
