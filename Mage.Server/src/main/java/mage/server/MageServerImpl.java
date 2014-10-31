@@ -683,6 +683,21 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
+    public void sendCardMark(final UUID draftId, final String sessionId, final UUID cardPick) throws MageException {
+        execute("sendCardMark", sessionId, new Action() {
+            @Override
+            public void execute() {
+                Session session = SessionManager.getInstance().getSession(sessionId);
+                if (session != null) {
+                    DraftManager.getInstance().sendCardMark(draftId, session.getUserId(), cardPick);
+                } else{
+                    logger.error("Session not found sessionId: "+ sessionId + "  draftId:" + draftId);
+                }
+            }
+        });
+    }
+
+    @Override
     public void quitMatch(final UUID gameId, final String sessionId) throws MageException {
         execute("quitMatch", sessionId, new Action() {
             @Override

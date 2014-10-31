@@ -48,6 +48,7 @@ import mage.client.plugins.impl.Plugins;
 import mage.client.util.CardViewRarityComparator;
 import mage.client.util.Event;
 import mage.client.util.Listener;
+import mage.client.util.audio.AudioManager;
 import mage.constants.Constants;
 import mage.view.CardView;
 import mage.view.CardsView;
@@ -63,13 +64,18 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
 
     protected CardEventSource cardEventSource = new CardEventSource();
     protected BigCard bigCard;
+    protected MageCard markedCard;
+    protected boolean noSound;
 
     /** Creates new form DraftGrid */
     public DraftGrid() {
         initComponents();
+        markedCard = null;
+        noSound= true;
     }
 
     public void clear() {
+        markedCard = null;
         this.clearCardEventListeners();
         for (Component comp: getComponents()) {
             if (comp instanceof Card || comp instanceof MageCard) {
@@ -79,6 +85,14 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
     }
 
     public void loadBooster(CardsView booster, BigCard bigCard) {
+        if (booster instanceof CardsView && booster.size() == 0) {
+            noSound = true;
+        } else {
+            if (!noSound) {
+                AudioManager.playOnDraftSelect();
+            }
+            noSound = false;
+        }
         this.bigCard = bigCard;
         this.removeAll();
 
@@ -111,7 +125,7 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
             Rectangle rectangle = new Rectangle(cardDimension.frameWidth, cardDimension.frameHeight);
             Dimension dimension = new Dimension(cardDimension.frameWidth, cardDimension.frameHeight);
 
-            List<CardView> sortedCards = new ArrayList<CardView>(booster.values());
+            List<CardView> sortedCards = new ArrayList<>(booster.values());
             Collections.sort(sortedCards, new CardViewRarityComparator());
             for (CardView card: sortedCards) {
                 MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, dimension, null, true);
@@ -173,11 +187,27 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        Object obj = e.getSource();
-        if (obj instanceof MageCard) {
-            this.cardEventSource.doubleClick(((MageCard)obj).getOriginal(), "pick-a-card");
-            this.hidePopup();
+        if (e.getButton() == MouseEvent.BUTTON1) { // only left click select
+            Object obj = e.getSource();
+            if (obj instanceof MageCard) {
+                this.cardEventSource.doubleClick(((MageCard)obj).getOriginal(), "pick-a-card");
+                this.hidePopup();
+                AudioManager.playOnDraftSelect();
+            }
         }
+        if (e.getButton() == MouseEvent.BUTTON3) { // only right click mark
+            Object obj = e.getSource();
+            if (obj instanceof MageCard) {
+                if (this.markedCard != null) {
+                    markedCard.setSelected(false);
+                }
+                this.cardEventSource.doubleClick(((MageCard)obj).getOriginal(), "mark-a-card");
+                markedCard = ((MageCard)obj);
+                markedCard.setSelected(true);
+                repaint();
+            }
+        }
+
     }
 
     @Override

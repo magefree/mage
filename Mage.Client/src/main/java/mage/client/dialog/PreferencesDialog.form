@@ -24,7 +24,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="tabsPanel" alignment="0" max="32767" attributes="0"/>
+          <Component id="tabsPanel" alignment="0" pref="566" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Component id="saveButton" min="-2" max="-2" attributes="0"/>
@@ -885,7 +885,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="sounds_clips" pref="537" max="32767" attributes="0"/>
+                          <Component id="sounds_clips" max="32767" attributes="0"/>
                           <Component id="sounds_backgroundMusic" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -899,7 +899,7 @@
                       <Component id="sounds_clips" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="sounds_backgroundMusic" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="235" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -921,7 +921,10 @@
                 <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
               </AccessibilityProperties>
 
-              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                <Property name="columns" type="int" value="0"/>
+                <Property name="rows" type="int" value="4"/>
+              </Layout>
               <SubComponents>
                 <Component class="javax.swing.JCheckBox" name="cbEnableGameSounds">
                   <Properties>
@@ -931,11 +934,24 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbEnableGameSoundsActionPerformed"/>
                   </Events>
-                  <Constraints>
-                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                      <BorderConstraints direction="First"/>
-                    </Constraint>
-                  </Constraints>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbEnableDraftSounds">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Enable draft sounds"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Sounds that will be played during drafting for card picking or warining if time runs out."/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbEnableDraftSoundsActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbEnableSkipButtonsSounds">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Enable skip button sounds"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Sounds that will be played if a priority skip action (F4/F5/F7/F9) or cancel skip action (F3) is used."/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbEnableSkipButtonsSoundsActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbEnableOtherSounds">
                   <Properties>
@@ -945,11 +961,6 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbEnableOtherSoundsActionPerformed"/>
                   </Events>
-                  <Constraints>
-                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                      <BorderConstraints direction="Last"/>
-                    </Constraint>
-                  </Constraints>
                 </Component>
               </SubComponents>
             </Container>
@@ -973,7 +984,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtBattlefieldIBGMPath" pref="301" max="32767" attributes="0"/>
+                          <Component id="txtBattlefieldIBGMPath" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnBattlefieldBGMBrowse" min="-2" max="-2" attributes="0"/>
                       </Group>

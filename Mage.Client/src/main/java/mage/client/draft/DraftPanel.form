@@ -68,10 +68,13 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="lblPack1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtPack1" max="32767" attributes="0"/>
+                                  <Component id="txtPack1" min="-2" pref="165" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="lblPack3" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lblPack3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblTimeRemaining" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="txtCardNo" alignment="0" max="32767" attributes="0"/>
@@ -80,15 +83,24 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="chkPack3" min="-2" max="-2" attributes="0"/>
-                              <Component id="chkPack2" min="-2" max="-2" attributes="0"/>
-                              <Component id="chkPack1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="chkPack3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="chkPack2" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="chkPack1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="lblMessage" pref="236" max="32767" attributes="0"/>
+                          <Component id="lblMessage" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -97,7 +109,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="bigCard" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                           <Component id="btnQuitTournament" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -110,10 +122,12 @@
               <Group type="102" alignment="1" attributes="0">
                   <Component id="btnQuitTournament" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblPack1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtPack1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="chkPack1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="chkPack1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblPack1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtPack1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -133,7 +147,10 @@
                       <Component id="txtCardNo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtTimeRemaining" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtTimeRemaining" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblTimeRemaining" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblMessage" pref="24" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -208,6 +225,11 @@
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblTimeRemaining">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Time:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtTimeRemaining">

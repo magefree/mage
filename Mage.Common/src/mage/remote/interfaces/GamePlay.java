@@ -65,6 +65,7 @@ public interface GamePlay {
     boolean updateDeck(UUID tableId, DeckCardLists deck);
 
     DraftPickView sendCardPick(UUID draftId, UUID cardId);
+    DraftPickView sendCardMark(UUID draftId, UUID cardId);
 
     /**
      * magenoxx:

@@ -772,6 +772,20 @@ public class SessionImpl implements Session {
     }
 
     @Override
+    public DraftPickView sendCardMark(UUID draftId, UUID cardId) {
+        try {
+            if (isConnected()) {
+                server.sendCardMark(draftId, sessionId, cardId);
+            }
+        } catch (MageException ex) {
+            handleMageException(ex);
+        } catch (Throwable t) {
+            handleThrowable(t);
+        }
+        return null;
+    }
+
+    @Override
     public boolean joinChat(UUID chatId) {
         try {
             if (isConnected()) {

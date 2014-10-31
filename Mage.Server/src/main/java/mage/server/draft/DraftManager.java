@@ -66,6 +66,10 @@ public class DraftManager {
         return draftControllers.get(draftId).sendCardPick(userId, cardId);
     }
 
+    public void sendCardMark(UUID draftId, UUID userId, UUID cardId) {
+        draftControllers.get(draftId).sendCardMark(userId, cardId);
+    }
+
     public void removeSession(UUID userId) {
         for (DraftController controller: draftControllers.values()) {
             controller.kill(userId);

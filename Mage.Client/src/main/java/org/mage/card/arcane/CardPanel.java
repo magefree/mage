@@ -428,6 +428,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         this.isSelected = isSelected;
         if (isSelected) {
             this.titleText.setGlowColor(Color.green);
+        } else {
+            this.titleText.setGlowColor(Color.black);
         }
         // noxx: bad idea is to call repaint in setter method
         ////repaint();

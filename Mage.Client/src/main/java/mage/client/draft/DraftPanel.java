@@ -46,6 +46,7 @@ import mage.client.plugins.impl.Plugins;
 import mage.client.util.CardsViewUtil;
 import mage.client.util.Event;
 import mage.client.util.Listener;
+import mage.client.util.audio.AudioManager;
 import mage.remote.Session;
 import mage.view.CardsView;
 import mage.view.DraftPickView;
@@ -140,6 +141,10 @@ public class DraftPanel extends javax.swing.JPanel {
                             setMessage("Waiting for other players");
                         }
                     }
+                    if (event.getEventName().equals("mark-a-card")) {
+                        SimpleCardView source = (SimpleCardView) event.getSource();
+                        session.sendCardMark(draftId, source.getId());
+                    }
                 }
             }
         );
@@ -167,6 +172,9 @@ public class DraftPanel extends javax.swing.JPanel {
             text = text + Integer.toString(second);
         }
         this.txtTimeRemaining.setText(text);
+        if (s==6) {
+            AudioManager.playOnCountdown1();
+        }
     }
 
     public void hideDraft() {
@@ -206,6 +214,7 @@ public class DraftPanel extends javax.swing.JPanel {
         chkPack3 = new javax.swing.JCheckBox();
         lblCardNo = new javax.swing.JLabel();
         txtCardNo = new javax.swing.JTextField();
+        lblTimeRemaining = new javax.swing.JLabel();
         txtTimeRemaining = new javax.swing.JTextField();
         lblMessage = new javax.swing.JLabel();
         bigCard = new mage.client.cards.BigCard();
@@ -244,6 +253,8 @@ public class DraftPanel extends javax.swing.JPanel {
         txtCardNo.setEditable(false);
         txtCardNo.setEnabled(false);
 
+        lblTimeRemaining.setText("Time:");
+
         txtTimeRemaining.setEditable(false);
         txtTimeRemaining.setForeground(java.awt.Color.red);
         txtTimeRemaining.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -268,27 +279,35 @@ public class DraftPanel extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, draftLeftPaneLayout.createSequentialGroup()
                                 .addComponent(lblPack1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPack1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(txtPack1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, draftLeftPaneLayout.createSequentialGroup()
-                                .addComponent(lblPack3)
+                                .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblPack3)
+                                    .addComponent(lblTimeRemaining))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtCardNo)
                                     .addComponent(txtPack3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtTimeRemaining))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chkPack3)
-                            .addComponent(chkPack2)
-                            .addComponent(chkPack1)))
+                            .addGroup(draftLeftPaneLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(chkPack3)
+                                    .addComponent(chkPack2))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, draftLeftPaneLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(chkPack1)
+                                .addContainerGap())))
                     .addGroup(draftLeftPaneLayout.createSequentialGroup()
-                        .addComponent(lblMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                        .addComponent(lblMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
             .addGroup(draftLeftPaneLayout.createSequentialGroup()
                 .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(draftLeftPaneLayout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(64, 64, 64)
                         .addComponent(btnQuitTournament)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -297,10 +316,11 @@ public class DraftPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, draftLeftPaneLayout.createSequentialGroup()
                 .addComponent(btnQuitTournament)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPack1)
-                    .addComponent(txtPack1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chkPack1))
+                .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(chkPack1)
+                    .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblPack1)
+                        .addComponent(txtPack1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPack2)
@@ -316,7 +336,9 @@ public class DraftPanel extends javax.swing.JPanel {
                     .addComponent(lblCardNo)
                     .addComponent(txtCardNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTimeRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTimeRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTimeRemaining))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -379,6 +401,7 @@ public class DraftPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblPack1;
     private javax.swing.JLabel lblPack2;
     private javax.swing.JLabel lblPack3;
+    private javax.swing.JLabel lblTimeRemaining;
     private javax.swing.JTextField txtCardNo;
     private javax.swing.JTextField txtPack1;
     private javax.swing.JTextField txtPack2;

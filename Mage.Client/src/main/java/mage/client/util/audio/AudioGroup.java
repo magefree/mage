@@ -7,5 +7,7 @@ package mage.client.util.audio;
  */
 public enum AudioGroup {
     GameSounds,
+    DraftSounds,
+    SkipSounds,
     OtherSounds;
 }

@@ -60,12 +60,14 @@ public class DraftController {
     private final UUID draftSessionId;
     private final Draft draft;
     private final UUID tableId;
+    private UUID markedCard;
 
     public DraftController(Draft draft, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
         draftSessionId = UUID.randomUUID();
         this.userPlayerMap = userPlayerMap;
         this.draft = draft;
         this.tableId = tableId;
+        this.markedCard = null;
         init();
     }
 
@@ -208,6 +210,14 @@ public class DraftController {
 
     public void timeout(UUID userId) {
         if (userPlayerMap.containsKey(userId)) {
+            DraftSession draftSession = draftSessions.get(userPlayerMap.get(userId));
+            if (draftSession != null) {
+                UUID cardId = draftSession.getMarkedCard();
+                if (cardId != null) {
+                    sendCardPick(userId, cardId);
+                    return;
+                }
+            }
             draft.autoPick(userPlayerMap.get(userId));
             logger.debug("Draft pick timeout - autopick for player: " + userPlayerMap.get(userId));
         }
@@ -218,7 +228,16 @@ public class DraftController {
     }
 
     public DraftPickView sendCardPick(UUID userId, UUID cardId) {
-        return draftSessions.get(userPlayerMap.get(userId)).sendCardPick(cardId);
+        DraftSession draftSession = draftSessions.get(userPlayerMap.get(userId));
+        if (draftSession != null) {
+            draftSession.setMarkedCard(null);
+            return draftSession.sendCardPick(cardId);
+        }
+        return null;
+    }
+
+    public void sendCardMark(UUID userId, UUID cardId) {
+        draftSessions.get(userPlayerMap.get(userId)).setMarkedCard(cardId);
     }
 
     private synchronized void updateDraft() throws MageException {

@@ -55,6 +55,7 @@ public class DraftSession {
     protected UUID playerId;
     protected Draft draft;
     protected boolean killed = false;
+    protected UUID markedCard;
 
     private ScheduledFuture<?> futureTimeout;
     protected static ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
@@ -63,6 +64,7 @@ public class DraftSession {
         this.userId = userId;
         this.draft = draft;
         this.playerId = playerId;
+        this.markedCard = null;
     }
 
     public boolean init() {
@@ -173,6 +175,14 @@ public class DraftSession {
 
     public UUID getDraftId() {
         return draft.getId();
+    }
+
+    public UUID getMarkedCard() {
+        return markedCard;
+    }
+
+    public void setMarkedCard(UUID markedCard) {
+        this.markedCard = markedCard;
     }
 
 }

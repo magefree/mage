@@ -98,6 +98,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_BATTLEFIELD_IMAGE_DEFAULT = "battlefieldImageDefault"; 
 
     public static final String KEY_SOUNDS_GAME_ON = "soundsOn";
+    public static final String KEY_SOUNDS_DRAFT_ON = "soundsDraftOn";
+    public static final String KEY_SOUNDS_SKIP_BUTTONS_ON = "soundsSkipButtonsOn";
     public static final String KEY_SOUNDS_OTHER_ON = "soundsOtherOn";
     public static final String KEY_SOUNDS_MATCH_MUSIC_ON = "soundsMatchMusicOn";
     public static final String KEY_SOUNDS_MATCH_MUSIC_PATH = "soundsMatchMusicPath";
@@ -369,6 +371,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tabSounds = new javax.swing.JPanel();
         sounds_clips = new javax.swing.JPanel();
         cbEnableGameSounds = new javax.swing.JCheckBox();
+        cbEnableDraftSounds = new javax.swing.JCheckBox();
+        cbEnableSkipButtonsSounds = new javax.swing.JCheckBox();
         cbEnableOtherSounds = new javax.swing.JCheckBox();
         sounds_backgroundMusic = new javax.swing.JPanel();
         cbEnableBattlefieldBGM = new javax.swing.JCheckBox();
@@ -919,7 +923,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tabsPanel.addTab("Images", tabImages);
 
         sounds_clips.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Clips"));
-        sounds_clips.setLayout(new java.awt.BorderLayout());
+        sounds_clips.setLayout(new java.awt.GridLayout(4, 0));
 
         cbEnableGameSounds.setText("Enable game sounds");
         cbEnableGameSounds.setToolTipText("Sounds that will be played for certain actions (e.g. play land, attack, etc.) during the game.");
@@ -928,7 +932,25 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 cbEnableGameSoundsActionPerformed(evt);
             }
         });
-        sounds_clips.add(cbEnableGameSounds, java.awt.BorderLayout.PAGE_START);
+        sounds_clips.add(cbEnableGameSounds);
+
+        cbEnableDraftSounds.setText("Enable draft sounds");
+        cbEnableDraftSounds.setToolTipText("Sounds that will be played during drafting for card picking or warining if time runs out.");
+        cbEnableDraftSounds.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEnableDraftSoundsActionPerformed(evt);
+            }
+        });
+        sounds_clips.add(cbEnableDraftSounds);
+
+        cbEnableSkipButtonsSounds.setText("Enable skip button sounds");
+        cbEnableSkipButtonsSounds.setToolTipText("Sounds that will be played if a priority skip action (F4/F5/F7/F9) or cancel skip action (F3) is used.");
+        cbEnableSkipButtonsSounds.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEnableSkipButtonsSoundsActionPerformed(evt);
+            }
+        });
+        sounds_clips.add(cbEnableSkipButtonsSounds);
 
         cbEnableOtherSounds.setText("Enable other sounds");
         cbEnableOtherSounds.setToolTipText("Sounds that will be played for actions outside of games (e.g. whisper, player joins your game, player submits a deck ...).");
@@ -937,7 +959,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 cbEnableOtherSoundsActionPerformed(evt);
             }
         });
-        sounds_clips.add(cbEnableOtherSounds, java.awt.BorderLayout.PAGE_END);
+        sounds_clips.add(cbEnableOtherSounds);
 
         sounds_backgroundMusic.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Music"));
 
@@ -974,7 +996,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtBattlefieldIBGMPath, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                .addComponent(txtBattlefieldIBGMPath)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBattlefieldBGMBrowse))
             .addGroup(sounds_backgroundMusicLayout.createSequentialGroup()
@@ -999,7 +1021,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGroup(tabSoundsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(tabSoundsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sounds_clips, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
+                    .addComponent(sounds_clips, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(sounds_backgroundMusic, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -1010,7 +1032,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addComponent(sounds_clips, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sounds_backgroundMusic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         sounds_clips.getAccessibleContext().setAccessibleDescription("");
@@ -1424,7 +1446,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabsPanel)
+            .addComponent(tabsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(saveButton)
@@ -1493,6 +1515,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         // sounds
         save(prefs, dialog.cbEnableGameSounds, KEY_SOUNDS_GAME_ON, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbEnableDraftSounds, KEY_SOUNDS_DRAFT_ON, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbEnableSkipButtonsSounds, KEY_SOUNDS_SKIP_BUTTONS_ON, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbEnableOtherSounds, KEY_SOUNDS_OTHER_ON, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbEnableBattlefieldBGM, KEY_SOUNDS_MATCH_MUSIC_ON, "true", "false", UPDATE_CACHE_POLICY);
         saveSoundPath(prefs);
@@ -1753,6 +1777,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbStopOnAllEndActionPerformed
 
+    private void cbEnableDraftSoundsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEnableDraftSoundsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbEnableDraftSoundsActionPerformed
+
+    private void cbEnableSkipButtonsSoundsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEnableSkipButtonsSoundsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbEnableSkipButtonsSoundsActionPerformed
+
     private void showProxySettings() {
         if (cbProxyType.getSelectedItem() == Connection.ProxyType.SOCKS) {
             this.pnlProxy.setVisible(true);
@@ -1829,19 +1861,19 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.showAbilityPickerForced, KEY_SHOW_ABILITY_PICKER_FORCED, "true");
         load(prefs, dialog.cbGameLogAutoSave, KEY_GAME_LOG_AUTO_SAVE, "true");
 
-        load(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU, "on","off");
-        load(prefs, dialog.checkBoxDrawYou, DRAW_YOU, "on","off");
+        load(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU, "on","on");
+        load(prefs, dialog.checkBoxDrawYou, DRAW_YOU, "on","on");
         load(prefs, dialog.checkBoxMainYou, MAIN_YOU, "on","on");
-        load(prefs, dialog.checkBoxBeforeCYou, BEFORE_COMBAT_YOU, "on","off");
-        load(prefs, dialog.checkBoxEndOfCYou, END_OF_COMBAT_YOU, "on","off");
+        load(prefs, dialog.checkBoxBeforeCYou, BEFORE_COMBAT_YOU, "on","on");
+        load(prefs, dialog.checkBoxEndOfCYou, END_OF_COMBAT_YOU, "on","on");
         load(prefs, dialog.checkBoxMain2You, MAIN_2_YOU, "on","on");
-        load(prefs, dialog.checkBoxEndTurnYou, END_OF_TURN_YOU, "on","off");
+        load(prefs, dialog.checkBoxEndTurnYou, END_OF_TURN_YOU, "on","on");
 
-        load(prefs, dialog.checkBoxUpkeepOthers, UPKEEP_OTHERS, "on","off");
-        load(prefs, dialog.checkBoxDrawOthers, DRAW_OTHERS, "on","off");
+        load(prefs, dialog.checkBoxUpkeepOthers, UPKEEP_OTHERS, "on","on");
+        load(prefs, dialog.checkBoxDrawOthers, DRAW_OTHERS, "on","on");
         load(prefs, dialog.checkBoxMainOthers, MAIN_OTHERS, "on","on");
         load(prefs, dialog.checkBoxBeforeCOthers, BEFORE_COMBAT_OTHERS, "on","on");
-        load(prefs, dialog.checkBoxEndOfCOthers, END_OF_COMBAT_OTHERS, "on","off");
+        load(prefs, dialog.checkBoxEndOfCOthers, END_OF_COMBAT_OTHERS, "on","on");
         load(prefs, dialog.checkBoxMain2Others, MAIN_2_OTHERS, "on","on");
         load(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS, "on","on");
 
@@ -1905,26 +1937,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void loadSoundSettings(Preferences prefs) {
-        String prop = prefs.get(KEY_SOUNDS_GAME_ON, "true");
-        if (prop.equals("true")) {
-            dialog.cbEnableGameSounds.setSelected(true);
-        } else {
-            dialog.cbEnableGameSounds.setSelected(false);
-        }
-        prop = prefs.get(KEY_SOUNDS_OTHER_ON, "true");
-        if (prop.equals("true")) {
-            dialog.cbEnableOtherSounds.setSelected(true);
-        } else {
-            dialog.cbEnableOtherSounds.setSelected(false);
-        }
+        dialog.cbEnableGameSounds.setSelected(prefs.get(KEY_SOUNDS_GAME_ON, "true").equals("true"));
+        dialog.cbEnableDraftSounds.setSelected(prefs.get(KEY_SOUNDS_DRAFT_ON, "true").equals("true"));
+        dialog.cbEnableSkipButtonsSounds.setSelected(prefs.get(KEY_SOUNDS_SKIP_BUTTONS_ON, "true").equals("true"));
+        dialog.cbEnableOtherSounds.setSelected(prefs.get(KEY_SOUNDS_OTHER_ON, "true").equals("true"));
 
         // Match music
-        prop = prefs.get(KEY_SOUNDS_MATCH_MUSIC_ON, "true");
-        if (prop.equals("true")) {
-            dialog.cbEnableBattlefieldBGM.setSelected(true);
-        } else {
-            dialog.cbEnableBattlefieldBGM.setSelected(false);
-        }
+        dialog.cbEnableBattlefieldBGM.setSelected(prefs.get(KEY_SOUNDS_MATCH_MUSIC_ON, "true").equals("true"));
         dialog.txtBattlefieldIBGMPath.setEnabled(dialog.cbEnableBattlefieldBGM.isSelected());
         dialog.btnBattlefieldBGMBrowse.setEnabled(dialog.cbEnableBattlefieldBGM.isSelected());
         // load and save the path always, so you can reactivate music without selecting path again
@@ -2187,8 +2206,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnBrowseImageLocation;
     private javax.swing.JCheckBox cbCheckForNewImages;
     private javax.swing.JCheckBox cbEnableBattlefieldBGM;
+    private javax.swing.JCheckBox cbEnableDraftSounds;
     private javax.swing.JCheckBox cbEnableGameSounds;
     private javax.swing.JCheckBox cbEnableOtherSounds;
+    private javax.swing.JCheckBox cbEnableSkipButtonsSounds;
     private javax.swing.JCheckBox cbGameLogAutoSave;
     private javax.swing.JComboBox<String> cbPreferedImageLanguage;
     private javax.swing.JComboBox<ProxyType> cbProxyType;

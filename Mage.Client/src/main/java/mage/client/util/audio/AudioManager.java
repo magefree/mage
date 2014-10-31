@@ -37,6 +37,12 @@ public class AudioManager {
     private MageClip updateStackClip = null;
     private MageClip onHover = null;
 
+    private MageClip onSkipButton = null;
+    private MageClip onSkipButtonCancel = null;
+
+    private MageClip onCountdown1 = null;
+    private MageClip onDraftSelect = null;
+
     private MageClip playerJoinedTable = null;
     private MageClip playerSubmittedDeck = null;
     private MageClip playerWhispered = null;
@@ -137,7 +143,7 @@ public class AudioManager {
     public static void playButtonCancel() {
         if (audioManager.buttonCancelClip == null) {
             audioManager.buttonCancelClip = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnButtonCancel.wav"),
-                            AudioGroup.GameSounds);
+                            AudioGroup.SkipSounds);
 
         }        
         checkAndPlayClip(getManager().buttonCancelClip);
@@ -189,6 +195,38 @@ public class AudioManager {
                             AudioGroup.GameSounds);
         }        
         checkAndPlayClip(getManager().onHover);
+    }
+
+    public static void playOnCountdown1() {
+        if (audioManager.onCountdown1 == null) {
+            audioManager.onCountdown1 = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnCountdown1.wav"),
+                            AudioGroup.DraftSounds);
+        }
+        checkAndPlayClip(getManager().onCountdown1);
+    }
+
+    public static void playOnDraftSelect() {
+        if (audioManager.onDraftSelect == null) {
+            audioManager.onDraftSelect = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnDraftSelect.wav"),
+                            AudioGroup.DraftSounds);
+        }
+        checkAndPlayClip(getManager().onDraftSelect);
+    }
+
+    public static void playOnSkipButton() {
+        if (audioManager.onSkipButton == null) {
+            audioManager.onSkipButton = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnSkipButton.wav"),
+                            AudioGroup.SkipSounds);
+        }
+        checkAndPlayClip(getManager().onSkipButton);
+    }
+
+    public static void playOnSkipButtonCancel() {
+        if (audioManager.onSkipButtonCancel == null) {
+            audioManager.onSkipButtonCancel = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnSkipButtonCancel.wav"),
+                            AudioGroup.SkipSounds);
+        }
+        checkAndPlayClip(getManager().onSkipButtonCancel);
     }
 
     public static void playPlayerJoinedTable() {
@@ -254,6 +292,12 @@ public class AudioManager {
                 switch (mageClip.getAudioGroup()) {
                     case GameSounds:
                         playSound = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_GAME_ON, "true").equals("true");
+                        break;
+                    case DraftSounds:
+                        playSound = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_DRAFT_ON, "true").equals("true");
+                        break;
+                    case SkipSounds:
+                        playSound = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_SKIP_BUTTONS_ON, "true").equals("true");
                         break;
                     case OtherSounds:
                         playSound = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_OTHER_ON, "true").equals("true");

@@ -1590,31 +1590,31 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private void btnEndTurnActionPerformed(java.awt.event.ActionEvent evt) {
         session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN, gameId);
-        AudioManager.playNextPhase();
+        AudioManager.playOnSkipButton();
         updateSkipButtons(true, false, false, false);
     }
 
     private void btnUntilEndOfTurnActionPerformed(java.awt.event.ActionEvent evt) {
         session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId);
-        AudioManager.playNextPhase();
+        AudioManager.playOnSkipButton();
         updateSkipButtons(false, true, false, false);
     }
 
     private void btnUntilNextMainPhaseActionPerformed(java.awt.event.ActionEvent evt) {
         session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE, gameId);
-        AudioManager.playNextPhase();
+        AudioManager.playOnSkipButton();
         updateSkipButtons(false, false, true, false);
     }
 
     private void btnPassPriorityUntilNextYourTurnActionPerformed(java.awt.event.ActionEvent evt) {
         session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN, gameId);
-        AudioManager.playNextPhase();
+        AudioManager.playOnSkipButton();
         updateSkipButtons(false, false, false, true);
     }
 
     private void restorePriorityActionPerformed(java.awt.event.ActionEvent evt) {
         session.sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, gameId);
-        AudioManager.playButtonCancel();
+        AudioManager.playOnSkipButtonCancel();
         updateSkipButtons(false, false, false, false);
     }
 

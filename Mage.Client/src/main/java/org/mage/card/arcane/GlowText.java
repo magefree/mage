@@ -30,6 +30,7 @@ public class GlowText extends JLabel {
         this.wrap = wrap;
     }
 
+    @Override
     public Dimension getPreferredSize () {
         Dimension size = super.getPreferredSize();
         size.width += glowSize;
@@ -37,12 +38,16 @@ public class GlowText extends JLabel {
         return size;
     }
 
+    @Override
     public void setText (String text) {
         super.setText(text);
     }
 
+    @Override
     public void paint (Graphics g) {
-        if (getText().length() == 0) return;
+        if (getText().length() == 0) {
+            return;
+        }
 
         Graphics2D g2d = (Graphics2D)g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -62,14 +67,17 @@ public class GlowText extends JLabel {
         while (measurer.getPosition() < charIterator.getEndIndex()) {
             //TextLayout textLayout = measurer.nextLayout(wrapWidth);
             lineCount++;
-            if (lineCount > 2) break;
+            if (lineCount > 2) {
+                break;
+            }
         }
         charIterator.first();
         // Use char wrap if word wrap would cause more than two lines of text.
-        if (lineCount > 2)
+        if (lineCount > 2) {
             measurer = new LineBreakMeasurer(charIterator, BreakIterator.getCharacterInstance(Locale.ENGLISH), fontContext);
-        else
+        } else {
             measurer.setPosition(0);
+        }
         while (measurer.getPosition() < charIterator.getEndIndex()) {
             TextLayout textLayout = measurer.nextLayout(wrapWidth);
             float ascent = textLayout.getAscent();
