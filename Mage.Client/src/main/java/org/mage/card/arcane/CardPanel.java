@@ -1163,7 +1163,10 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     @Override
     public void componentResized(ComponentEvent ce) {
         doLayout();
-        if (updateCard != null) {
+        // this update removes the isChoosable mark from targetCardsInLibrary
+        // so only done for permanents because it's needed to redraw counters in different size, if window size was changed
+        // no perfect solution yet (maybe also other not wanted effects for PermanentView objects)
+        if (updateCard != null && (updateCard instanceof PermanentView)) {
             update(updateCard);
         }
     }

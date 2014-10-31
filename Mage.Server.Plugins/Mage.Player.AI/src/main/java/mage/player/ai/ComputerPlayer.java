@@ -1249,7 +1249,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return true;
         }
 
-        ArrayList<Card> cardChoices = new ArrayList<Card>(cards.getCards(target.getFilter(), game));
+        ArrayList<Card> cardChoices = new ArrayList<>(cards.getCards(target.getFilter(), game));
         while (!target.doneChosing()) {
             Card card = pickTarget(cardChoices, outcome, target, source, game);
             if (card != null) {
