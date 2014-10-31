@@ -80,7 +80,10 @@ public class TxtDeckImporter extends DeckImporter {
         }
         String lineNum = line.substring(0, delim).trim();
         String lineName = line.substring(delim).replace("’","\'").trim();
-        lineName = lineName.replace("&amp;","//");
+        lineName = lineName.replace("&amp;","//").replace("Ã†", "AE").replace("Ã¶", "ö");
+        if (lineName.contains("//") && !lineName.contains(" // ")) {
+            lineName = lineName.replace("//"," // ");
+        }
         if (IGNORE_NAMES.contains(lineName)) {
             return;
         }
