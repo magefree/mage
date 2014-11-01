@@ -30,6 +30,7 @@ package mage.game.draft;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -52,7 +53,7 @@ import mage.players.PlayerList;
 public abstract class DraftImpl implements Draft {
 
     protected final UUID id;
-    protected final Map<UUID, DraftPlayer> players = new HashMap<>();
+    protected final Map<UUID, DraftPlayer> players = new LinkedHashMap<>();
     protected final PlayerList table = new PlayerList();
     protected int numberBoosters;
     protected DraftCube draftCube;
@@ -96,8 +97,7 @@ public abstract class DraftImpl implements Draft {
             DraftPlayer newDraftPlayer = new DraftPlayer(newPlayer);
             DraftPlayer oldDraftPlayer = players.get(oldPlayer.getId());
             newDraftPlayer.setBooster(oldDraftPlayer.getBooster());
-            Map<UUID, DraftPlayer> newPlayers = new HashMap<>();
-            PlayerList newTable = new PlayerList();
+            Map<UUID, DraftPlayer> newPlayers = new LinkedHashMap<>();            
             synchronized (players) {
                 for(Map.Entry<UUID, DraftPlayer> entry :players.entrySet()) {
                     if (entry.getKey().equals(oldPlayer.getId())) {
@@ -112,15 +112,15 @@ public abstract class DraftImpl implements Draft {
                 }
             }
             synchronized (table) {
-                for(UUID playerId :table) {
-                    if (playerId.equals(oldPlayer.getId())) {
-                        newTable.add(newPlayer.getId());
-                    } else {
-                        newTable.add(playerId);
-                    }
+                UUID currentId = table.get();
+                if (currentId.equals(oldPlayer.getId())) {
+                    currentId = newPlayer.getId();
                 }
                 table.clear();
-                table.addAll(newTable);
+                for(UUID playerId : players.keySet()) {
+                    table.add(playerId);
+                }
+                table.setCurrent(currentId);
             }
             if (oldDraftPlayer.isPicking()) {
                 newDraftPlayer.setPicking();
