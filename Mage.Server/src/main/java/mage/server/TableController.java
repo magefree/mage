@@ -248,6 +248,10 @@ public class TableController {
         if (user == null) {
             return false;
         }
+        if (userPlayerMap.containsKey(userId) && playerType.equals("Human")){
+            user.showUserMessage("Join Table", new StringBuilder("You can join a table only one time.").toString());
+            return false;
+        }
         if (table.getState() != TableState.WAITING) {
             user.showUserMessage("Join Table", "No available seats.");
             return false;
@@ -644,6 +648,7 @@ public class TableController {
     public synchronized void startTournament(UUID userId) {
         try {            
             if (userId.equals(this.userId) && table.getState().equals(TableState.STARTING)) {
+                tournament.setStartTime();
                 TournamentManager.getInstance().createTournamentSession(tournament, userPlayerMap, table.getId());
                 for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
                     User user = UserManager.getInstance().getUser(entry.getKey());

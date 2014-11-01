@@ -75,7 +75,12 @@ public class MatchView implements Serializable {
         this.matchId = match.getId();
         this.matchName = match.getName();
         this.gameType = match.getOptions().getGameType();
-        this.deckType = match.getOptions().getDeckType();
+
+        if (table.getName() != null && !table.getName().isEmpty()) {
+            this.deckType = match.getOptions().getDeckType() + " [" +  table.getName() + "]";
+        }  else {
+            this.deckType = match.getOptions().getDeckType();
+        }
         
         for (Game game: match.getGames()) {
             games.add(game.getId());
@@ -123,8 +128,14 @@ public class MatchView implements Serializable {
         if (table.getTournament().getOptions().getNumberRounds() > 0) {
             this.gameType = new StringBuilder(this.gameType).append(" ").append(table.getTournament().getOptions().getNumberRounds()).append(" Rounds").toString();
         }
-        this.deckType = new StringBuilder(table.getDeckType()).append(" ").append(table.getTournament().getBoosterInfo()).toString();
-
+        StringBuilder sbDeckType = new StringBuilder(table.getDeckType());
+        if (!table.getTournament().getBoosterInfo().isEmpty()) {
+            sbDeckType.append(" ").append(table.getTournament().getBoosterInfo());
+        }
+        if (table.getName() != null && !table.getName().isEmpty()) {
+            sbDeckType.append(table.getDeckType()).append(" [").append(table.getName()).append("]");
+        }
+        this.deckType = sbDeckType.toString();
         StringBuilder sb1 = new StringBuilder();
         for (TournamentPlayer tPlayer : table.getTournament().getPlayers()) {
             sb1.append(tPlayer.getPlayer().getName()).append(" (").append(tPlayer.getPoints()).append(" P.) ");

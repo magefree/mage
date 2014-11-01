@@ -77,6 +77,7 @@ public interface Tournament {
     TournamentOptions getOptions();
     
     // tournament times
+    void setStartTime();
     Date getStartTime();
     Date getEndTime();
 

@@ -30,7 +30,6 @@ package mage.tournament;
 
 import mage.constants.TournamentPlayerState;
 import mage.game.draft.BoosterDraft;
-import mage.game.draft.Draft;
 import mage.game.draft.DraftOptions;
 import mage.game.events.TableEvent.EventType;
 import mage.game.tournament.TournamentOptions;

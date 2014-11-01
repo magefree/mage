@@ -224,36 +224,33 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 class TableListSorter implements Comparator<Table> {
     @Override
     public int compare(Table one, Table two) {
-        // priority 1 - Not started yet
-        if (one.getState().equals(TableState.READY_TO_START) || one.getState().equals(TableState.WAITING) || one.getState().equals(TableState.STARTING)) {
-            if (two.getState().equals(TableState.READY_TO_START) || two.getState().equals(TableState.WAITING) || two.getState().equals(TableState.STARTING)) {
-                return two.getCreateTime().compareTo(one.getCreateTime());
-            } else {
-                return -1; // one has higher priority
+        if (!one.getState().equals(TableState.SIDEBOARDING) && !one.getState().equals(TableState.DUELING)) {
+            if (one.getState().compareTo(two.getState()) != 0 ) {
+                return one.getState().compareTo(two.getState());
             }
         }
-        // priority 2 - Not finished yet -> Sorted by time started
-        if (two.getState().equals(TableState.READY_TO_START) || two.getState().equals(TableState.WAITING) || two.getState().equals(TableState.STARTING)) {
-            return 1; // two has higher priority
-        } else if (one.getEndTime() == null) {
-            if (two.getEndTime() == null) {
-                if (two.getStartTime() == null) {
-                    return -1;
-                } else if (one.getStartTime() == null) {
-                    return 1;
-                }
-                return two.getStartTime().compareTo(one.getStartTime());
+        if (two.getEndTime() != null) {
+            if (one.getEndTime() == null) {
+                return 1;
             } else {
-                return -1;
-            }                
+                return two.getEndTime().compareTo(one.getEndTime());
+            }
         }
-        // priority 3 - Finished tables -> Sorted by time finished       
-        if (two.getEndTime() == null) {
-            return 1;
-        } else {
-            return two.getEndTime().compareTo(one.getEndTime());
+        if (two.getStartTime() != null) {
+            if (one.getStartTime() == null) {
+                return 1;
+            } else {
+                return two.getStartTime().compareTo(one.getStartTime());
+            }
         }
-        
+        if (two.getCreateTime() != null) {
+            if (one.getCreateTime() == null) {
+                return 1;
+            } else {
+                return two.getCreateTime().compareTo(one.getCreateTime());
+            }
+        }
+        return 0;
     }
 }
 

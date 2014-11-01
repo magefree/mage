@@ -73,6 +73,7 @@ import mage.client.dialog.NewTournamentDialog;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.dialog.TableWaitingDialog;
 import mage.client.util.ButtonColumn;
+import mage.client.util.MageTableRowSorter;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
@@ -120,6 +121,10 @@ public class TablesPanel extends javax.swing.JPanel {
         chkShowCompleted.setVisible(true);
 
         tableTables.createDefaultColumnsFromModel();
+        tableTables.setRowSorter(new MageTableRowSorter(tableModel));
+
+        tableCompleted.setRowSorter(new MageTableRowSorter(matchesModel));
+
         chatPanel.useExtendedView(ChatPanel.VIEW_MODE.NONE);
         chatPanel.setBorder(null);
         chatPanel.setChatType(ChatPanel.ChatType.TABLES);
@@ -705,13 +710,13 @@ private void chkShowCompletedActionPerformed(java.awt.event.ActionEvent evt) {//
 
 class TableTableModel extends AbstractTableModel {
 
-    public static final int COLUMN_DECK_TYPE = 5; // column the deck type is located (starting with 0)
-    public static final int COLUMN_INFO = 6;
-    public static final int ACTION_COLUMN = 9; // column the action is located (starting with 0)
+    public static final int COLUMN_DECK_TYPE = 0; // column the deck type is located (starting with 0) Start string is used to check for Limited
+    public static final int COLUMN_INFO = 3;
+    public static final int ACTION_COLUMN = 6; // column the action is located (starting with 0)
 
-    private final String[] columnNames = new String[]{"Match Name", "Owner / Players", "Game Type", "Wins", "Free Mulligans", "Deck Type", "Info", "Status", "Created / Started", "Action"};
+    private final String[] columnNames = new String[]{"Deck Type", "Owner / Players", "Game Type", "Info", "Status", "Created / Started", "Action"};
     private TableView[] tables = new TableView[0];
-    private static final DateFormat timeFormatter = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
+    private static final DateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss");;
 
     private Session session;
     
@@ -738,24 +743,18 @@ class TableTableModel extends AbstractTableModel {
     public Object getValueAt(int arg0, int arg1) {
         switch (arg1) {
             case 0:
-                return tables[arg0].getTableName();
+                return tables[arg0].getDeckType();
             case 1:
                 return tables[arg0].getControllerName();
             case 2:
                 return tables[arg0].getGameType();
             case 3:
-                return Integer.toString(tables[arg0].getWins());
-            case 4:
-                return Integer.toString(tables[arg0].getFreeMulligans());
-            case 5:
-                return tables[arg0].getDeckType();
-            case 6:
                 return tables[arg0].getAdditionalInfo();
-            case 7:
-                return tables[arg0].getTableState().toString();
-            case 8:
+            case 4:
+                return tables[arg0].getTableStateText();
+            case 5:
                 return timeFormatter.format(tables[arg0].getCreateTime());
-            case 9:
+            case 6:
                 switch (tables[arg0].getTableState()) {
 
                     case WAITING:
@@ -782,14 +781,14 @@ class TableTableModel extends AbstractTableModel {
                     default:
                         return "";
                 }
-            case 10:
+            case 7:
                 return tables[arg0].isTournament();
-            case 11:
+            case 8:
                 if (!tables[arg0].getGames().isEmpty()) {
                     return tables[arg0].getGames().get(0);
                 }
                 return null;
-            case 12:
+            case 9:
                 return tables[arg0].getTableId();
         }
         return "";
@@ -908,9 +907,9 @@ class UpdatePlayersTask extends SwingWorker<Void, Collection<RoomUsersView>> {
 
 class MatchesTableModel extends AbstractTableModel {
 
-    public static final int ACTION_COLUMN = 7; // column the action is located (starting with 0)
-    public static final int GAMES_LIST_COLUMN = 8;
-    private final String[] columnNames = new String[]{"Match Name", "Game Type", "Deck Type", "Players", "Result", "Start Time", "End Time","Action"};
+    public static final int ACTION_COLUMN = 6; // column the action is located (starting with 0)
+    public static final int GAMES_LIST_COLUMN = 7;
+    private final String[] columnNames = new String[]{"Deck Type", "Players", "Game Type", "Result", "Start Time", "End Time","Action"};
     private MatchView[] matches = new MatchView[0];
     private static final DateFormat timeFormatter = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
 
@@ -933,28 +932,26 @@ class MatchesTableModel extends AbstractTableModel {
     public Object getValueAt(int arg0, int arg1) {
         switch (arg1) {
             case 0:
-                return matches[arg0].getName();
-            case 1:
-                return matches[arg0].getGameType();
-            case 2:
                 return matches[arg0].getDeckType();
-            case 3:
+            case 1:
                 return matches[arg0].getPlayers();
-            case 4:
+            case 2:
+                return matches[arg0].getGameType();
+            case 3:
                 return matches[arg0].getResult();
-            case 5:
+            case 4:
                 if (matches[arg0].getStartTime() != null) {
                     return timeFormatter.format(matches[arg0].getStartTime());
                 } else {
                     return "";
                 }
-            case 6:
+            case 5:
                 if (matches[arg0].getEndTime() != null) {
                     return timeFormatter.format(matches[arg0].getEndTime());
                 } else {
                     return "";
                 }
-            case 7:
+            case 6:
                 if (matches[arg0].isTournament()) {
                     return "Show";
                 } else {
@@ -964,7 +961,7 @@ class MatchesTableModel extends AbstractTableModel {
                         return "None";
                     }
                 }               
-            case 8:
+            case 7:
                 return matches[arg0].getGames();
         }
         return "";

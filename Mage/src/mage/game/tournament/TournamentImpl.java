@@ -493,6 +493,12 @@ public abstract class TournamentImpl implements Tournament {
     }
 
     @Override
+    public void setStartTime() {
+        this.stepStartTime = new Date();
+    }
+
+
+    @Override
     public void setStepStartTime(Date stepStartTime) {
         this.stepStartTime = stepStartTime;
     }

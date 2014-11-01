@@ -80,7 +80,7 @@ class BonfireOfTheDamnedEffect extends OneShotEffect {
 
     public BonfireOfTheDamnedEffect() {
         super(Outcome.Damage);
-        staticText = "Bonfire of the Damned deals X damage to target player and each creature he or she controls";
+        staticText = "{this} deals X damage to target player and each creature he or she controls";
     }
 
     public BonfireOfTheDamnedEffect(final BonfireOfTheDamnedEffect effect) {
@@ -97,8 +97,8 @@ class BonfireOfTheDamnedEffect extends OneShotEffect {
                 for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
                     perm.damage(damage, source.getSourceId(), game, false, true);
                 }
-                return true;
             }
+            return true;
         }
         return false;
     }

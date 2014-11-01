@@ -377,7 +377,7 @@ public class User {
     public String getGameInfo() {
         StringBuilder sb = new StringBuilder();
 
-        int draft = 0, match = 0, sideboard = 0, tournament = 0, construct = 0;
+        int draft = 0, match = 0, sideboard = 0, tournament = 0, construct = 0, waiting = 0;
 
         for (Map.Entry<UUID, Table> tableEntry : tables.entrySet()) {
             if (tableEntry != null) {
@@ -389,6 +389,11 @@ public class User {
                             if (tournamentPlayer != null) {
                                 if (!tournamentPlayer.isEliminated()) {
                                     switch (table.getState()) {
+                                        case WAITING:
+                                        case STARTING:
+                                        case READY_TO_START:
+                                            waiting++;
+                                            break;
                                         case CONSTRUCTING:
                                             construct++;
                                             break;
@@ -415,6 +420,11 @@ public class User {
                         }
                     } else {
                         switch (table.getState()) {
+                            case WAITING:
+                            case STARTING:
+                            case READY_TO_START:
+                                waiting++;
+                                break;
                             case SIDEBOARDING:
                                 sideboard++;
                                 break;
@@ -425,6 +435,9 @@ public class User {
                     }
                 }
             }
+        }
+        if (waiting > 0) {
+            sb.append("Wait: ").append(waiting).append(" ");
         }
         if (match > 0) {
             sb.append("Match: ").append(match).append(" ");

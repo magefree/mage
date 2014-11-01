@@ -9,9 +9,9 @@ public enum TableState {
     READY_TO_START("Waiting to start"),
     STARTING ("Starting"),
     DRAFTING ("Drafting"),
-    DUELING ("Dueling"),
-    SIDEBOARDING ("Sideboarding"),
     CONSTRUCTING ("Constructing"),
+    DUELING ("Dueling"),
+    SIDEBOARDING ("Sideboarding"),   
     FINISHED ("Finished");
 
     private final String text;

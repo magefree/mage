@@ -43,8 +43,8 @@ import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
-import javax.swing.table.TableRowSorter;
 import mage.client.MageFrame;
+import mage.client.util.MageTableRowSorter;
 import mage.remote.MageRemoteException;
 import mage.remote.Session;
 import mage.view.ChatMessage.MessageColor;
@@ -143,7 +143,7 @@ public class ChatPanel extends javax.swing.JPanel {
         setBackground(new Color(0, 0, 0, ALPHA));
         jTablePlayers.setBackground(new Color(0, 0, 0, ALPHA));
         jTablePlayers.setForeground(Color.white);
-        jTablePlayers.setRowSorter(new TableRowSorter(tableModel));       
+        jTablePlayers.setRowSorter(new MageTableRowSorter(tableModel));
         if (jScrollPaneTxt != null) {
             jScrollPaneTxt.setBackground(new Color(0, 0, 0, ALPHA));
             jScrollPaneTxt.getViewport().setBackground(new Color(0, 0, 0, ALPHA));
