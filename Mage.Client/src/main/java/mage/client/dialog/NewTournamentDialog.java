@@ -80,6 +80,8 @@ public class NewTournamentDialog extends MageDialog {
     private final int CONSTRUCTION_TIME_MIN = 6;
     private final int CONSTRUCTION_TIME_MAX = 30;
 
+    private boolean automaticChange = false;
+
     /** Creates new form NewTournamentDialog */
     public NewTournamentDialog() {
         initComponents();
@@ -728,7 +730,9 @@ public class NewTournamentDialog extends MageDialog {
             panel.getPlayerType().addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    playerActionPerformed(evt);
+                    if (!automaticChange) {
+                        playerActionPerformed(evt);
+                    }
                 }
             });
         }
@@ -740,6 +744,7 @@ public class NewTournamentDialog extends MageDialog {
     private void playerActionPerformed(java.awt.event.ActionEvent evt) {
         boolean start = false;
         int selectedIndex = 0;
+        automaticChange = true;
         for (TournamentPlayerPanel player: players) {
             if (!start) {
                 if (evt.getSource().equals(player.getPlayerType())) {
@@ -751,6 +756,7 @@ public class NewTournamentDialog extends MageDialog {
                 player.getPlayerType().setSelectedIndex(selectedIndex);
             }
         }
+        automaticChange = false;
     }
 
 
