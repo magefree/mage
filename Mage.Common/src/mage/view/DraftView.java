@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import mage.cards.ExpansionSet;
 import mage.game.draft.Draft;
+import mage.game.draft.DraftPlayer;
 
 /**
  *
@@ -41,9 +42,10 @@ import mage.game.draft.Draft;
 public class DraftView implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private List<String> sets = new ArrayList<String>();
-    private int boosterNum;
-    private int cardNum;
+    private final List<String> sets = new ArrayList<>();
+    private final int boosterNum;
+    private final int cardNum;
+    private final List<String> players = new ArrayList<>();
 
     public DraftView(Draft draft) {
         if (draft.getDraftCube() != null) {
@@ -57,10 +59,17 @@ public class DraftView implements Serializable {
         }
         this.boosterNum = draft.getBoosterNum();
         this.cardNum = draft.getCardNum();
+        for(DraftPlayer draftPlayer :draft.getPlayers()) {
+            players.add(draftPlayer.getPlayer().getName());
+        }
     }
 
     public List<String> getSets() {
         return sets;
+    }
+
+    public List<String> getPlayers() {
+        return players;
     }
 
     public int getBoosterNum() {

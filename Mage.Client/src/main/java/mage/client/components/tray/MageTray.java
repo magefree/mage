@@ -40,6 +40,7 @@ public class MageTray {
             trayIcon.setImageAutoSize(true);
 
             trayIcon.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     stopBlink();
                     MageFrame frame = MageFrame.getInstance();

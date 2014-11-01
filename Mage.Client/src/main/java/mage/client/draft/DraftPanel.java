@@ -35,18 +35,25 @@
 package mage.client.draft;
 
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.util.UUID;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import mage.client.MageFrame;
+import mage.client.components.tray.MageTray;
 import mage.client.deckeditor.SortSettingDraft;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.CardsViewUtil;
 import mage.client.util.Event;
+import mage.client.util.ImageHelper;
 import mage.client.util.Listener;
 import mage.client.util.audio.AudioManager;
+import mage.client.util.gui.BufferedImageBuilder;
 import mage.remote.Session;
 import mage.view.CardsView;
 import mage.view.DraftPickView;
@@ -121,6 +128,84 @@ public class DraftPanel extends javax.swing.JPanel {
         this.chkPack2.setSelected(draftView.getBoosterNum() > 1);
         this.chkPack3.setSelected(draftView.getBoosterNum() > 2);
         this.txtCardNo.setText(Integer.toString(draftView.getCardNum()));
+
+        int right = draftView.getPlayers().size() / 2;
+        int left = draftView.getPlayers().size() - right;
+        int height = left * 18;
+        lblTableImage.setSize(new Dimension(lblTableImage.getWidth(), height));
+        Image tableImage = ImageHelper.getImageFromResources(draftView.getBoosterNum() == 2 ? "/draft/table_right.png":"/draft/table_left.png");
+        BufferedImage resizedTable = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(tableImage, BufferedImage.TYPE_INT_ARGB), lblTableImage.getWidth());
+        lblTableImage.setIcon(new ImageIcon(resizedTable));
+        
+        int count = 0;
+        int numberPlayers = draftView.getPlayers().size();
+        for(String playerName: draftView.getPlayers()) {
+            count++;
+            setPlayerNameToLabel(playerName, count, numberPlayers);
+        }
+    }
+
+    private void setPlayerNameToLabel(String name, int index, int players) {
+        int tablePosition;
+        int right = players / 2;
+        int left = players - right;
+        if (index <= left) {
+            // left side up (8 - 1)         
+            tablePosition = (9 - index) - (8- left);
+        } else {
+            // right side down (9-18)
+            tablePosition = 8 + (index  - left);
+        }
+        switch(tablePosition) {
+            case 1:
+                lblPlayer01.setText(name);
+                break;
+            case 2:
+                lblPlayer02.setText(name);
+                break;
+            case 3:
+                lblPlayer03.setText(name);
+                break;
+            case 4:
+                lblPlayer04.setText(name);
+                break;
+            case 5:
+                lblPlayer05.setText(name);
+                break;
+            case 6:
+                lblPlayer06.setText(name);
+                break;
+            case 7:
+                lblPlayer07.setText(name);
+                break;
+            case 8:
+                lblPlayer08.setText(name);
+                break;
+            case 9:
+                lblPlayer09.setText(name);
+                break;
+            case 10:
+                lblPlayer10.setText(name);
+                break;
+            case 11:
+                lblPlayer11.setText(name);
+                break;
+            case 12:
+                lblPlayer12.setText(name);
+                break;
+            case 13:
+                lblPlayer13.setText(name);
+                break;
+            case 14:
+                lblPlayer14.setText(name);
+                break;
+            case 15:
+                lblPlayer15.setText(name);
+                break;
+            case 16:
+                lblPlayer16.setText(name);
+                break;
+        }
     }
 
     public void loadBooster(DraftPickView draftPickView) {
@@ -149,6 +234,10 @@ public class DraftPanel extends javax.swing.JPanel {
             }
         );
         setMessage("Pick a card");
+        if (!MageFrame.getInstance().isActive()) {
+            MageTray.getInstance().displayMessage("Pick the next card.");
+            MageTray.getInstance().blink();
+        }
         countdown.stop();
         this.timeout = draftPickView.getTimeout();
         setTimeout(timeout);
@@ -214,14 +303,36 @@ public class DraftPanel extends javax.swing.JPanel {
         chkPack3 = new javax.swing.JCheckBox();
         lblCardNo = new javax.swing.JLabel();
         txtCardNo = new javax.swing.JTextField();
-        lblTimeRemaining = new javax.swing.JLabel();
         txtTimeRemaining = new javax.swing.JTextField();
         lblMessage = new javax.swing.JLabel();
         bigCard = new mage.client.cards.BigCard();
+        jPanel1 = new javax.swing.JPanel();
+        pnlLeft = new javax.swing.JPanel();
+        lblPlayer01 = new javax.swing.JLabel();
+        lblPlayer02 = new javax.swing.JLabel();
+        lblPlayer03 = new javax.swing.JLabel();
+        lblPlayer04 = new javax.swing.JLabel();
+        lblPlayer05 = new javax.swing.JLabel();
+        lblPlayer06 = new javax.swing.JLabel();
+        lblPlayer07 = new javax.swing.JLabel();
+        lblPlayer08 = new javax.swing.JLabel();
+        lblTableImage = new javax.swing.JLabel();
+        pnlRight = new javax.swing.JPanel();
+        lblPlayer09 = new javax.swing.JLabel();
+        lblPlayer10 = new javax.swing.JLabel();
+        lblPlayer11 = new javax.swing.JLabel();
+        lblPlayer12 = new javax.swing.JLabel();
+        lblPlayer13 = new javax.swing.JLabel();
+        lblPlayer14 = new javax.swing.JLabel();
+        lblPlayer15 = new javax.swing.JLabel();
+        lblPlayer16 = new javax.swing.JLabel();
         draftPicks = new mage.client.cards.CardsList();
         draftBooster = new mage.client.cards.DraftGrid();
 
         draftLeftPane.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        draftLeftPane.setFocusable(false);
+        draftLeftPane.setRequestFocusEnabled(false);
+        draftLeftPane.setVerifyInputWhenFocusTarget(false);
 
         btnQuitTournament.setText("Quit Tournament");
         btnQuitTournament.addActionListener(new java.awt.event.ActionListener() {
@@ -253,68 +364,216 @@ public class DraftPanel extends javax.swing.JPanel {
         txtCardNo.setEditable(false);
         txtCardNo.setEnabled(false);
 
-        lblTimeRemaining.setText("Time:");
-
         txtTimeRemaining.setEditable(false);
         txtTimeRemaining.setForeground(java.awt.Color.red);
         txtTimeRemaining.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtTimeRemaining.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         lblMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMessage.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblMessage.setOpaque(true);
+
+        bigCard.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jPanel1.setOpaque(false);
+        jPanel1.setLayout(null);
+
+        pnlLeft.setFocusable(false);
+        pnlLeft.setMaximumSize(new java.awt.Dimension(80, 132));
+        pnlLeft.setMinimumSize(new java.awt.Dimension(80, 132));
+        pnlLeft.setOpaque(false);
+        pnlLeft.setPreferredSize(new java.awt.Dimension(80, 132));
+        pnlLeft.setRequestFocusEnabled(false);
+        pnlLeft.setVerifyInputWhenFocusTarget(false);
+        pnlLeft.setLayout(new java.awt.GridLayout(8, 1));
+
+        lblPlayer01.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer01.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblPlayer01.setFocusable(false);
+        lblPlayer01.setRequestFocusEnabled(false);
+        lblPlayer01.setVerifyInputWhenFocusTarget(false);
+        pnlLeft.add(lblPlayer01);
+        lblPlayer01.getAccessibleContext().setAccessibleName("");
+
+        lblPlayer02.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer02.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblPlayer02.setFocusable(false);
+        lblPlayer02.setRequestFocusEnabled(false);
+        lblPlayer02.setVerifyInputWhenFocusTarget(false);
+        pnlLeft.add(lblPlayer02);
+
+        lblPlayer03.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer03.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblPlayer03.setFocusable(false);
+        lblPlayer03.setRequestFocusEnabled(false);
+        lblPlayer03.setVerifyInputWhenFocusTarget(false);
+        pnlLeft.add(lblPlayer03);
+
+        lblPlayer04.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer04.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblPlayer04.setFocusable(false);
+        lblPlayer04.setRequestFocusEnabled(false);
+        lblPlayer04.setVerifyInputWhenFocusTarget(false);
+        pnlLeft.add(lblPlayer04);
+
+        lblPlayer05.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer05.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblPlayer05.setFocusable(false);
+        lblPlayer05.setRequestFocusEnabled(false);
+        lblPlayer05.setVerifyInputWhenFocusTarget(false);
+        pnlLeft.add(lblPlayer05);
+
+        lblPlayer06.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer06.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblPlayer06.setFocusable(false);
+        lblPlayer06.setRequestFocusEnabled(false);
+        lblPlayer06.setVerifyInputWhenFocusTarget(false);
+        pnlLeft.add(lblPlayer06);
+
+        lblPlayer07.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer07.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblPlayer07.setFocusable(false);
+        lblPlayer07.setRequestFocusEnabled(false);
+        lblPlayer07.setVerifyInputWhenFocusTarget(false);
+        pnlLeft.add(lblPlayer07);
+
+        lblPlayer08.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer08.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblPlayer08.setFocusable(false);
+        lblPlayer08.setRequestFocusEnabled(false);
+        lblPlayer08.setVerifyInputWhenFocusTarget(false);
+        pnlLeft.add(lblPlayer08);
+
+        jPanel1.add(pnlLeft);
+        pnlLeft.setBounds(0, 5, 90, 136);
+
+        lblTableImage.setBackground(new java.awt.Color(51, 102, 255));
+        lblTableImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTableImage.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblTableImage.setFocusable(false);
+        lblTableImage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblTableImage.setOpaque(true);
+        lblTableImage.setRequestFocusEnabled(false);
+        lblTableImage.setVerifyInputWhenFocusTarget(false);
+        jPanel1.add(lblTableImage);
+        lblTableImage.setBounds(95, 5, 40, 136);
+
+        pnlRight.setFocusable(false);
+        pnlRight.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        pnlRight.setMaximumSize(new java.awt.Dimension(80, 132));
+        pnlRight.setMinimumSize(new java.awt.Dimension(80, 132));
+        pnlRight.setOpaque(false);
+        pnlRight.setPreferredSize(new java.awt.Dimension(80, 132));
+        pnlRight.setRequestFocusEnabled(false);
+        pnlRight.setVerifyInputWhenFocusTarget(false);
+        pnlRight.setLayout(new java.awt.GridLayout(8, 1));
+
+        lblPlayer09.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer09.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblPlayer09.setFocusable(false);
+        lblPlayer09.setRequestFocusEnabled(false);
+        lblPlayer09.setVerifyInputWhenFocusTarget(false);
+        pnlRight.add(lblPlayer09);
+
+        lblPlayer10.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblPlayer10.setFocusable(false);
+        lblPlayer10.setRequestFocusEnabled(false);
+        lblPlayer10.setVerifyInputWhenFocusTarget(false);
+        pnlRight.add(lblPlayer10);
+
+        lblPlayer11.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblPlayer11.setFocusable(false);
+        lblPlayer11.setRequestFocusEnabled(false);
+        lblPlayer11.setVerifyInputWhenFocusTarget(false);
+        pnlRight.add(lblPlayer11);
+
+        lblPlayer12.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblPlayer12.setFocusable(false);
+        lblPlayer12.setRequestFocusEnabled(false);
+        lblPlayer12.setVerifyInputWhenFocusTarget(false);
+        pnlRight.add(lblPlayer12);
+
+        lblPlayer13.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblPlayer13.setFocusable(false);
+        lblPlayer13.setRequestFocusEnabled(false);
+        lblPlayer13.setVerifyInputWhenFocusTarget(false);
+        pnlRight.add(lblPlayer13);
+
+        lblPlayer14.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblPlayer14.setFocusable(false);
+        lblPlayer14.setRequestFocusEnabled(false);
+        lblPlayer14.setVerifyInputWhenFocusTarget(false);
+        pnlRight.add(lblPlayer14);
+
+        lblPlayer15.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblPlayer15.setFocusable(false);
+        lblPlayer15.setRequestFocusEnabled(false);
+        lblPlayer15.setVerifyInputWhenFocusTarget(false);
+        pnlRight.add(lblPlayer15);
+
+        lblPlayer16.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblPlayer16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblPlayer16.setFocusable(false);
+        lblPlayer16.setRequestFocusEnabled(false);
+        lblPlayer16.setVerifyInputWhenFocusTarget(false);
+        pnlRight.add(lblPlayer16);
+
+        jPanel1.add(pnlRight);
+        pnlRight.setBounds(140, 5, 90, 136);
 
         javax.swing.GroupLayout draftLeftPaneLayout = new javax.swing.GroupLayout(draftLeftPane);
         draftLeftPane.setLayout(draftLeftPaneLayout);
         draftLeftPaneLayout.setHorizontalGroup(
             draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(draftLeftPaneLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCardNo)
                     .addGroup(draftLeftPaneLayout.createSequentialGroup()
-                        .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, draftLeftPaneLayout.createSequentialGroup()
-                                .addComponent(lblPack2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPack2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, draftLeftPaneLayout.createSequentialGroup()
-                                .addComponent(lblPack1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPack1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, draftLeftPaneLayout.createSequentialGroup()
-                                .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblPack3)
-                                    .addComponent(lblTimeRemaining))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCardNo)
-                                    .addComponent(txtPack3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtTimeRemaining))))
+                        .addContainerGap()
                         .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCardNo)
                             .addGroup(draftLeftPaneLayout.createSequentialGroup()
+                                .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, draftLeftPaneLayout.createSequentialGroup()
+                                        .addComponent(lblPack2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtPack2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, draftLeftPaneLayout.createSequentialGroup()
+                                        .addComponent(lblPack1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtPack1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, draftLeftPaneLayout.createSequentialGroup()
+                                        .addComponent(lblPack3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtCardNo)
+                                            .addComponent(txtPack3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(chkPack3)
-                                    .addComponent(chkPack2))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, draftLeftPaneLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(chkPack1)
-                                .addContainerGap())))
-                    .addGroup(draftLeftPaneLayout.createSequentialGroup()
-                        .addComponent(lblMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
-            .addGroup(draftLeftPaneLayout.createSequentialGroup()
-                .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(draftLeftPaneLayout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(btnQuitTournament)))
+                                    .addComponent(chkPack2)
+                                    .addComponent(chkPack1)))
+                            .addGroup(draftLeftPaneLayout.createSequentialGroup()
+                                .addComponent(btnQuitTournament)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtTimeRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblMessage, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE))))
+                    .addComponent(bigCard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         draftLeftPaneLayout.setVerticalGroup(
             draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, draftLeftPaneLayout.createSequentialGroup()
-                .addComponent(btnQuitTournament)
+                .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnQuitTournament)
+                    .addComponent(txtTimeRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(chkPack1)
@@ -336,12 +595,10 @@ public class DraftPanel extends javax.swing.JPanel {
                     .addComponent(lblCardNo)
                     .addComponent(txtCardNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(draftLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTimeRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTimeRemaining))
+                .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -351,11 +608,11 @@ public class DraftPanel extends javax.swing.JPanel {
         draftBooster.setLayout(draftBoosterLayout);
         draftBoosterLayout.setHorizontalGroup(
             draftBoosterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 580, Short.MAX_VALUE)
+            .addGap(0, 738, Short.MAX_VALUE)
         );
         draftBoosterLayout.setVerticalGroup(
             draftBoosterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 452, Short.MAX_VALUE)
+            .addGap(0, 439, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -366,15 +623,15 @@ public class DraftPanel extends javax.swing.JPanel {
                 .addComponent(draftLeftPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(draftPicks, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
+                    .addComponent(draftPicks, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
                     .addComponent(draftBooster, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(draftLeftPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(draftLeftPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(draftPicks, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
+                .addComponent(draftPicks, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(draftBooster, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -395,13 +652,32 @@ public class DraftPanel extends javax.swing.JPanel {
     private mage.client.cards.DraftGrid draftBooster;
     private javax.swing.JPanel draftLeftPane;
     private mage.client.cards.CardsList draftPicks;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblCardNo;
     private javax.swing.JLabel lblMessage;
     private javax.swing.JLabel lblPack1;
     private javax.swing.JLabel lblPack2;
     private javax.swing.JLabel lblPack3;
-    private javax.swing.JLabel lblTimeRemaining;
+    private javax.swing.JLabel lblPlayer01;
+    private javax.swing.JLabel lblPlayer02;
+    private javax.swing.JLabel lblPlayer03;
+    private javax.swing.JLabel lblPlayer04;
+    private javax.swing.JLabel lblPlayer05;
+    private javax.swing.JLabel lblPlayer06;
+    private javax.swing.JLabel lblPlayer07;
+    private javax.swing.JLabel lblPlayer08;
+    private javax.swing.JLabel lblPlayer09;
+    private javax.swing.JLabel lblPlayer10;
+    private javax.swing.JLabel lblPlayer11;
+    private javax.swing.JLabel lblPlayer12;
+    private javax.swing.JLabel lblPlayer13;
+    private javax.swing.JLabel lblPlayer14;
+    private javax.swing.JLabel lblPlayer15;
+    private javax.swing.JLabel lblPlayer16;
+    private javax.swing.JLabel lblTableImage;
+    private javax.swing.JPanel pnlLeft;
+    private javax.swing.JPanel pnlRight;
     private javax.swing.JTextField txtCardNo;
     private javax.swing.JTextField txtPack1;
     private javax.swing.JTextField txtPack2;
