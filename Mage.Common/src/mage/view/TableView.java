@@ -118,7 +118,7 @@ public class TableView implements Serializable {
             StringBuilder addInfo = new StringBuilder();
             if (table.getMatch().getGames().isEmpty()) {
                 addInfo.append("Wins:").append(table.getMatch().getWinsNeeded());
-                addInfo.append(" Timer: ").append(table.getMatch().getOptions().getMatchTimeLimit().toString());
+                addInfo.append(" Time: ").append(table.getMatch().getOptions().getMatchTimeLimit().toString());
                 if (table.getMatch().getFreeMulligans() > 0) {
                     addInfo.append(" Free Mul.: ").append(table.getMatch().getFreeMulligans());
                 }
@@ -151,12 +151,12 @@ public class TableView implements Serializable {
                     }
                 case READY_TO_START:
                 case STARTING:
-                    infoText.append(" Timer: ").append(table.getTournament().getOptions().getMatchOptions().getMatchTimeLimit().toString());
+                    infoText.append(" Time: ").append(table.getTournament().getOptions().getMatchOptions().getMatchTimeLimit().toString());
                     if (table.getTournament().getOptions().getMatchOptions().getFreeMulligans() > 0) {
                         infoText.append(" Fr.Mul: ").append(table.getTournament().getOptions().getMatchOptions().getFreeMulligans());
                     }
                     if (table.getTournament().getTournamentType().isLimited()) {
-                        infoText.append(" Constr. Time: ").append(table.getTournament().getOptions().getLimitedOptions().getConstructionTime()/60).append(" Min.");
+                        infoText.append(" Constr.: ").append(table.getTournament().getOptions().getLimitedOptions().getConstructionTime()/60).append(" Min.");
                     }
                     break;
                 case DUELING:
