@@ -228,6 +228,10 @@ class TableListSorter implements Comparator<Table> {
             if (one.getState().compareTo(two.getState()) != 0 ) {
                 return one.getState().compareTo(two.getState());
             }
+        } else if (!two.getState().equals(TableState.SIDEBOARDING) && !two.getState().equals(TableState.DUELING)) {
+            if (one.getState().compareTo(two.getState()) != 0 ) {
+                return one.getState().compareTo(two.getState());
+            }
         }
         if (two.getEndTime() != null) {
             if (one.getEndTime() == null) {
