@@ -90,7 +90,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
+        System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
         logger.info("Starting MAGE server version " + version);
         logger.info("Logging level: " + logger.getEffectiveLevel());
 
@@ -266,7 +266,7 @@ public class Main {
         public void setInvoker(ServerInvoker invoker) {            
             ((BisocketServerInvoker) invoker).setSecondaryBindPort(ConfigSettings.getInstance().getSecondaryBindPort());
             ((BisocketServerInvoker) invoker).setBacklog(ConfigSettings.getInstance().getBacklogSize());                        
-            ((BisocketServerInvoker) invoker).setNumAcceptThreads(ConfigSettings.getInstance().getNumAcceptThreads());            
+            ((BisocketServerInvoker) invoker).setNumAcceptThreads(ConfigSettings.getInstance().getNumAcceptThreads());
         }
 
         @Override
