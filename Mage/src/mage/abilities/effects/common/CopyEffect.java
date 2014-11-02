@@ -137,7 +137,7 @@ public class CopyEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        // The copy effect is added, if the copy takes place. If source left battlefield, the copy effect must cease to exist
+        // The copy effect is added, if the copy takes place. If source left battlefield, the copy effect has cease to exist
         Permanent permanent = game.getPermanent(this.sourceId);
         return permanent == null || permanent.getZoneChangeCounter() != this.zoneChangeCounter;
     }
