@@ -261,7 +261,7 @@ public class DraftPanel extends javax.swing.JPanel {
             text = text + Integer.toString(second);
         }
         this.txtTimeRemaining.setText(text);
-        if (s==6) {
+        if (s==6 && !draftBooster.isEmptyGrid()) {
             AudioManager.playOnCountdown1();
         }
     }

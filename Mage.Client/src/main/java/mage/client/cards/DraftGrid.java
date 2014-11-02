@@ -65,13 +65,13 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
     protected CardEventSource cardEventSource = new CardEventSource();
     protected BigCard bigCard;
     protected MageCard markedCard;
-    protected boolean noSound;
+    protected boolean emptyGrid;
 
     /** Creates new form DraftGrid */
     public DraftGrid() {
         initComponents();
         markedCard = null;
-        noSound= true;
+        emptyGrid= true;
     }
 
     public void clear() {
@@ -86,12 +86,12 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
 
     public void loadBooster(CardsView booster, BigCard bigCard) {
         if (booster instanceof CardsView && booster.size() == 0) {
-            noSound = true;
+            emptyGrid = true;
         } else {
-            if (!noSound) {
+            if (!emptyGrid) {
                 AudioManager.playOnDraftSelect();
             }
-            noSound = false;
+            emptyGrid = false;
         }
         this.bigCard = bigCard;
         this.removeAll();
@@ -208,6 +208,10 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
             }
         }
 
+    }
+
+    public boolean isEmptyGrid() {
+        return emptyGrid;
     }
 
     @Override
