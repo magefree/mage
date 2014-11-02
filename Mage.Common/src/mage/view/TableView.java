@@ -141,21 +141,19 @@ public class TableView implements Serializable {
             this.controllerName += sb1.toString();
             StringBuilder infoText = new StringBuilder();
             StringBuilder stateText = new StringBuilder(table.getState().toString());
-            infoText.append("Wins:").append(table.getTournament().getOptions().getMatchOptions().getWinsNeeded()).append(" ");
-            if (!table.getState().equals(TableState.WAITING)) {
-                infoText.append("Seats: ").append(table.getTournament().getPlayers().size()).append("/").append(table.getNumberOfSeats());
-            }
-
+            infoText.append("Wins:").append(table.getTournament().getOptions().getMatchOptions().getWinsNeeded());
+            infoText.append(" Seats: ").append(table.getTournament().getPlayers().size()).append("/").append(table.getNumberOfSeats());
             switch (table.getState()) {
                 case WAITING:
                     stateText.append(" (").append(table.getTournament().getPlayers().size()).append("/").append(table.getNumberOfSeats()).append(")");
                     if (!table.getTournament().getOptions().getPassword().isEmpty()) {
-                        infoText.append(" PW");
+                        stateText.append(" PW");
                     }
                 case READY_TO_START:
                 case STARTING:
+                    infoText.append(" Timer: ").append(table.getTournament().getOptions().getMatchOptions().getMatchTimeLimit().toString());
                     if (table.getTournament().getOptions().getMatchOptions().getFreeMulligans() > 0) {
-                        infoText.append(" Free Mul.: ").append(table.getTournament().getOptions().getMatchOptions().getFreeMulligans());
+                        infoText.append(" Fr.Mul: ").append(table.getTournament().getOptions().getMatchOptions().getFreeMulligans());
                     }
                     if (table.getTournament().getTournamentType().isLimited()) {
                         infoText.append(" Constr. Time: ").append(table.getTournament().getOptions().getLimitedOptions().getConstructionTime()/60).append(" Min.");
