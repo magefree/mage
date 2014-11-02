@@ -82,7 +82,7 @@ public abstract class TournamentImpl implements Tournament {
     public TournamentImpl(TournamentOptions options) {
         this.options = options;
         draft = null;
-        startTime = new Date();
+        startTime = new Date(); // will be overwritten again as the tournament really starts
         abort = false;
     }
 
@@ -494,7 +494,7 @@ public abstract class TournamentImpl implements Tournament {
 
     @Override
     public void setStartTime() {
-        this.stepStartTime = new Date();
+        this.startTime = new Date();
     }
 
 
