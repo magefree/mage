@@ -33,7 +33,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.SuspendAbility;
@@ -42,6 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -65,7 +65,7 @@ public class AeonChronicler extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInControllerHandCount(), Duration.EndOfGame)));
         
         // Suspend X-{X}{3}{U}. X can't be 0.
-        this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl("{X}{3}"), this, true));
+        this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl("{3}{U}"), this, true));
         
         // Whenever a time counter is removed from Aeon Chronicler while it's exiled, draw a card.
         this.addAbility(new AeonChroniclerTriggeredAbility());
@@ -83,27 +83,27 @@ public class AeonChronicler extends CardImpl {
 
 class AeonChroniclerTriggeredAbility extends TriggeredAbilityImpl {
 
-        public AeonChroniclerTriggeredAbility() {
-            super(Zone.EXILED, new DrawCardSourceControllerEffect(1), false);
-        }
-
-        public AeonChroniclerTriggeredAbility(final AeonChroniclerTriggeredAbility ability) {
-            super(ability);
-        }
-
-        @Override
-        public AeonChroniclerTriggeredAbility copy() {
-            return new AeonChroniclerTriggeredAbility(this);
-        }
-
-        @Override
-        public boolean checkTrigger(GameEvent event, Game game) {
-            return  EventType.COUNTER_REMOVED.equals(event.getType()) && event.getData().equals("time") && event.getTargetId().equals(this.getSourceId());
-        }
-
-        @Override
-        public String getRule() {
-            return "Whenever a time counter is removed from {this} while it's exiled, " + super.getRule();
-        }
-
+    public AeonChroniclerTriggeredAbility() {
+        super(Zone.EXILED, new DrawCardSourceControllerEffect(1), false);
     }
+
+    public AeonChroniclerTriggeredAbility(final AeonChroniclerTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public AeonChroniclerTriggeredAbility copy() {
+        return new AeonChroniclerTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return EventType.COUNTER_REMOVED.equals(event.getType()) && event.getData().equals(CounterType.TIME.getName()) && event.getTargetId().equals(this.getSourceId());
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever a time counter is removed from {this} while it's exiled, " + super.getRule();
+    }
+
+}

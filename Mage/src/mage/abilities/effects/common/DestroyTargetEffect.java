@@ -107,7 +107,7 @@ public class DestroyTargetEffect extends OneShotEffect {
             sb.append("destroy that creature"); //TODO add possibility to specify text with targetPointer usage
         } else if (mode.getTargets().get(0).getNumberOfTargets() == 1) {
             String targetName = mode.getTargets().get(0).getTargetName();
-            sb.append("Destroy ");
+            sb.append("destroy ");
             if (!targetName.startsWith("another")) {
                 sb.append("target ");
             }

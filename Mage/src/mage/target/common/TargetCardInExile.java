@@ -71,7 +71,7 @@ public class TargetCardInExile extends TargetCard {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<UUID>();
+        Set<UUID> possibleTargets = new HashSet<>();
         if (allExileZones) {
             for (Card card : game.getExile().getAllCards(game)) {
                 if (filter.match(card, sourceControllerId, game)) {

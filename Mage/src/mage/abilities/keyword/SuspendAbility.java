@@ -165,12 +165,12 @@ public class SuspendAbility extends ActivatedAbilityImpl {
         }
         StringBuilder sb = new StringBuilder("Suspend ");
         if (cost != null) {
-            sb.append(suspend).append(" - ").append(cost.getText());
+            sb.append(suspend == Integer.MAX_VALUE ? "X":suspend).append(" - ").append(cost.getText());
             if (!shortRule) {
                 sb.append(" <i>(Rather than cast this card from your hand, pay ")
                 .append(cost.getText())
                 .append(" and exile it with ")
-                .append((suspend == 1 ? "a time counter": suspend == Integer.MAX_VALUE ? "X time counters": suspend + " time counters"))
+                .append((suspend == 1 ? "a time counter": (suspend == Integer.MAX_VALUE ? "X time counters": suspend + " time counters")))
                 .append(" on it.")
                 .append(" At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.")
                 .append(card.getCardType().contains(CardType.CREATURE)? " If you play it this way and it's a creature, it gains haste until you lose control of it.":"")
@@ -223,7 +223,7 @@ class SuspendExileEffect extends OneShotEffect {
 
     public SuspendExileEffect(int suspend) {
         super(Outcome.PutCardInPlay);
-        this.staticText = new StringBuilder("Suspend ").append(suspend).toString();
+        this.staticText = new StringBuilder("Suspend ").append(suspend == Integer.MAX_VALUE ? "X":suspend).toString();
         this.suspend = suspend;
     }
 

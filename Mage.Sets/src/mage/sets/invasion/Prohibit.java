@@ -49,7 +49,7 @@ import mage.target.TargetSpell;
 public class Prohibit extends CardImpl {
 
     private static final FilterSpell filter2 = new FilterSpell("spell if its converted mana cost is 2 or less");
-    private static final FilterSpell filter4 = new FilterSpell("spell if its converted mana cost is 5 or less");
+    private static final FilterSpell filter4 = new FilterSpell("spell if its converted mana cost is 4 or less");
 
     static {
         filter2.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 3));
@@ -67,15 +67,15 @@ public class Prohibit extends CardImpl {
 
         // Counter target spell if its converted mana cost is 2 or less. If Prohibit was kicked, counter that spell if its converted mana cost is 4 or less instead.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addTarget(new TargetSpell(filter2));
+        this.getSpellAbility().addTarget(new TargetSpell(filter4));
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
-            if (KickedCondition.getInstance().apply(game, ability)) {
+            if (!KickedCondition.getInstance().apply(game, ability)) {
                 ability.getTargets().clear();
-                ability.getTargets().add(new TargetSpell(filter4));
+                ability.getTargets().add(new TargetSpell(filter2));
             }
         }
     }

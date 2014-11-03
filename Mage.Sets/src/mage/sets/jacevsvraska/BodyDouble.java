@@ -98,7 +98,7 @@ class BodyDoubleCopyEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (player != null && sourcePermanent != null) {
-            Target target = new TargetCardInGraveyard(new FilterCreatureCard());
+            Target target = new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard"));
             target.setNotTarget(true);
             if (target.canChoose(source.getControllerId(), game)) {
                 player.choose(outcome, target, source.getSourceId(), game);
