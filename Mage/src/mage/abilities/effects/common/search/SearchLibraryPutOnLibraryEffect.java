@@ -115,7 +115,13 @@ public class SearchLibraryPutOnLibraryEffect extends SearchEffect {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Search your library for a ").append(target.getTargetName()).append(", then shuffle your library and put that card on top of it");
+        sb.append("Search your library for a ").append(target.getTargetName());
+        if (reveal) {
+            sb.append("and reveal that card. Shuffle");
+        } else {
+            sb.append(", then shuffle");
+        }
+        sb.append(" your library and put that card on top of it");
         staticText = sb.toString();
     }
 
