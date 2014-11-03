@@ -38,6 +38,8 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.SuspendedCondition;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -140,12 +142,11 @@ public class SuspendAbility extends ActivatedAbilityImpl {
 
     private String ruleText;
     private boolean gainedTemporary;
-    private boolean shortRule;
 
     /**
     * Gives the card the SuspendAbility
     *
-    * @param suspend - amount of time counters
+    * @param suspend - amount of time counters, if Integer.MAX_VALUE is set there will be {X} costs and X counters added
     * @param cost - null is used for temporary gained suspend ability
     * @param card - card that has the suspend ability
     */
@@ -156,7 +157,12 @@ public class SuspendAbility extends ActivatedAbilityImpl {
     public SuspendAbility(int suspend, ManaCost cost, Card card, boolean shortRule) {
         super(Zone.HAND, new SuspendExileEffect(suspend), cost);
         this.usesStack = false;
-        this.shortRule = shortRule;
+        if (suspend == Integer.MAX_VALUE) {
+            VariableManaCost xCosts = new VariableManaCost();
+            xCosts.setMinX(1);
+            this.addManaCost(xCosts);
+            cost = new ManaCostsImpl("{X}" + cost.getText());
+        }
         StringBuilder sb = new StringBuilder("Suspend ");
         if (cost != null) {
             sb.append(suspend).append(" - ").append(cost.getText());
@@ -164,7 +170,7 @@ public class SuspendAbility extends ActivatedAbilityImpl {
                 sb.append(" <i>(Rather than cast this card from your hand, pay ")
                 .append(cost.getText())
                 .append(" and exile it with ")
-                .append(suspend == 1 ? "a time counter":suspend + " time counters")
+                .append((suspend == 1 ? "a time counter": suspend == Integer.MAX_VALUE ? "X time counters": suspend + " time counters"))
                 .append(" on it.")
                 .append(" At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.")
                 .append(card.getCardType().contains(CardType.CREATURE)? " If you play it this way and it's a creature, it gains haste until you lose control of it.":"")
@@ -185,7 +191,6 @@ public class SuspendAbility extends ActivatedAbilityImpl {
         super(ability);
         this.ruleText = ability.getRule();
         this.gainedTemporary = ability.gainedTemporary;
-        this.shortRule = ability.shortRule;
     }
 
     @Override
@@ -249,6 +254,9 @@ class SuspendExileEffect extends OneShotEffect {
                 game.getState().setValue("SuspendExileId" + source.getControllerId().toString(), exileId);
             }
             if (card.moveToExile(exileId, new StringBuilder("Suspended cards of ").append(controller.getName()).toString() , source.getSourceId(), game)) {
+                if (suspend == Integer.MAX_VALUE) {
+                    suspend = source.getManaCostsToPay().getX();
+                }
                 card.addCounters(CounterType.TIME.createInstance(suspend), game);
                 game.informPlayers(new StringBuilder(controller.getName()).append(" suspends (").append(suspend).append(") ").append(card.getName()).toString());
                 return true;
