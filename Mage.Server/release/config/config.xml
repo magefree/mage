@@ -41,12 +41,13 @@
         <tournamentType name="Sealed Swiss (Cube)" jar="mage-tournament-sealed-${project.version}.jar" className="mage.tournament.SealedSwissTournament" typeName="mage.tournament.SealedSwissCubeTournamentType"/>
     </tournamentTypes>
     <draftCubes>
-        <draftCube name="MTGO Holiday Cube 2013" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.HolidayCube2013"/>
+        <draftCube name="Ben's Cube (720 cards)" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.BensCube"/>
         <draftCube name="Cube Tutor 360 Pauper" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.CubeTutor360Pauper"/>
         <draftCube name="Cube Tutor 720" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.CubeTutor720"/>
-        <draftCube name="MTGO Cube March 2014" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.MTGOMarchCube2014"/>
         <draftCube name="Mono Blue Cube" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.MonoBlueCube"/>
-        <draftCube name="Ben's Cube (720 cards)" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.BensCube"/>
+        <draftCube name="MTGO Holiday Cube 2013" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.HolidayCube2013"/>
+        <draftCube name="MTGO Cube March 2014" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.MTGOMarchCube2014"/>
+        <draftCube name="MTGO Legacy Cube (600 cards)" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.MTGOLegacyCube"/>
         <draftCube name="www.MTGCube.com (502 cards)" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.MTGCube"/>
     </draftCubes>
     <deckTypes>
