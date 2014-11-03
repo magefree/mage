@@ -50,8 +50,8 @@ public class CardScanner {
         }
         scanned = true;
 
-        List<CardInfo> cardsToAdd = new ArrayList<CardInfo>();
-        List<String> packages = new ArrayList<String>();
+        List<CardInfo> cardsToAdd = new ArrayList<>();
+        List<String> packages = new ArrayList<>();
 
         for (ExpansionSet set : Sets.getInstance().values()) {
             packages.add(set.getPackageName());

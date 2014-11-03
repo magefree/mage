@@ -44,6 +44,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.Callable;
 import mage.constants.CardType;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -94,6 +95,7 @@ public enum CardRepository {
                             }
                         }
                     } catch (SQLException ex) {
+                        Logger.getLogger(CardRepository.class).error("Error adding cards to DB: " + ex.getCause());
                     }
                     return null;
                 }

@@ -311,7 +311,11 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         }
         if (this.tbPlaneswalkers.isSelected()) {
             criteria.types(CardType.PLANESWALKER);
-        }
+        }        
+        // criteria.types(CardType.TRIBAL);
+        // criteria.types(CardType.CONSPIRACY);
+        
+        
 
         if (this.cbExpansionSet.isVisible()) {
             String expansionSelection = this.cbExpansionSet.getSelectedItem().toString();

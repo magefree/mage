@@ -219,7 +219,7 @@ public class CardCriteria {
         }
 
 
-        if (types.size() != 9) { //if all types selected - no selection needed
+        if (types.size() != 7) { //if all types selected - no selection needed (Tribal and Conspiracy not selectable yet)
             for (CardType type : types) {
                 where.like("types", new SelectArg('%' + type.name() + '%'));
             }
