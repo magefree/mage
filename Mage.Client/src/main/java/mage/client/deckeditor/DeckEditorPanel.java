@@ -67,6 +67,7 @@ import mage.client.dialog.AddLandDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Event;
 import mage.client.util.Listener;
+import mage.client.util.audio.AudioManager;
 import mage.components.CardInfoPane;
 import mage.game.GameException;
 import mage.remote.Session;
@@ -481,6 +482,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             text = text + Integer.toString(second);
         }
         this.txtTimeRemaining.setText(text);
+        if (s==60) {
+            AudioManager.playOnCountdown1();
+        }
     }
 
     private void initComponents() {
