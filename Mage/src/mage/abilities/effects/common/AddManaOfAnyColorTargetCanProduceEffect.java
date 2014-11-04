@@ -91,6 +91,9 @@ public class AddManaOfAnyColorTargetCanProduceEffect extends ManaEffect {
                 } else {
                     player.choose(outcome, choice, game);
                 }
+                if (choice.getChoice() == null) {
+                    return false;
+                }
                 switch (choice.getChoice()) {
                     case "Black":
                         player.getManaPool().addMana(Mana.BlackMana, game, source);
