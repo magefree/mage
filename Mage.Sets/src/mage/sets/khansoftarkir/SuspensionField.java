@@ -69,7 +69,7 @@ public class SuspensionField extends CardImpl {
         this.color.setWhite(true);
 
         // When Suspension Field enters the battlefield, you may exile target creature with toughness 3 or greater until Suspension Field leaves the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SuspensionFieldExileEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new SuspensionFieldExileEffect(), true);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
         // Implemented as triggered effect that doesn't uses the stack (implementation with watcher does not work correctly because if the returned creature
