@@ -33,7 +33,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.filter.Filter;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.common.TargetOpponent;
 
@@ -43,7 +43,8 @@ import mage.target.common.TargetOpponent;
  */
 public class AppetiteForBrains extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("a card from it with converted mana cost 4 or greater");
+    private static final FilterCard filter = new FilterCard("a card from it with converted mana cost 4 or greater");
+    
     static {
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.GreaterThan, 3));
     }
