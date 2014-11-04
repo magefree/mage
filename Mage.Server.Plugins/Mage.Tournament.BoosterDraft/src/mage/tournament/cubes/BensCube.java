@@ -149,7 +149,7 @@ public class BensCube extends DraftCube {
         cubeCards.add(new CardIdentity("Phantasmal Image", ""));
         cubeCards.add(new CardIdentity("Snapcaster Mage", ""));
         cubeCards.add(new CardIdentity("Waterfront Bouncer", ""));
-        cubeCards.add(new CardIdentity("Aether Adept", ""));
+        cubeCards.add(new CardIdentity("AEther Adept", ""));
         cubeCards.add(new CardIdentity("Kira, Great Glass-Spinner", ""));
         cubeCards.add(new CardIdentity("Man-o'-War", ""));
         cubeCards.add(new CardIdentity("Sea Gate Oracle", ""));
@@ -167,7 +167,7 @@ public class BensCube extends DraftCube {
         cubeCards.add(new CardIdentity("Prognostic Sphinx", ""));
         cubeCards.add(new CardIdentity("Riftwing Cloudskate", ""));
         cubeCards.add(new CardIdentity("Vesuvan Shapeshifter", ""));
-        cubeCards.add(new CardIdentity("Aetherling", ""));
+        cubeCards.add(new CardIdentity("AEtherling", ""));
         cubeCards.add(new CardIdentity("Brine Elemental", ""));
         cubeCards.add(new CardIdentity("Consecrated Sphinx", ""));
         cubeCards.add(new CardIdentity("Frost Titan", ""));
@@ -683,7 +683,7 @@ public class BensCube extends DraftCube {
         cubeCards.add(new CardIdentity("Mox Pearl", ""));
         cubeCards.add(new CardIdentity("Mox Ruby", ""));
         cubeCards.add(new CardIdentity("Mox Sapphire", ""));
-        cubeCards.add(new CardIdentity("Aether Vial", ""));
+        cubeCards.add(new CardIdentity("AEther Vial", ""));
         cubeCards.add(new CardIdentity("Basilisk Collar", ""));
         cubeCards.add(new CardIdentity("Bonesplitter", ""));
         cubeCards.add(new CardIdentity("Cursed Scroll", ""));
