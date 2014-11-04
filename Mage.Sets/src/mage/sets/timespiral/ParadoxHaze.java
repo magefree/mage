@@ -82,7 +82,7 @@ public class ParadoxHaze extends CardImpl {
 
 class ParadoxHazeTriggeredAbility extends TriggeredAbilityImpl {
     
-    int lastTriggerTurnNumber;
+    protected int lastTriggerTurnNumber;
     
     ParadoxHazeTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ParadoxHazeEffect(), false);
@@ -90,6 +90,7 @@ class ParadoxHazeTriggeredAbility extends TriggeredAbilityImpl {
     
     ParadoxHazeTriggeredAbility(final ParadoxHazeTriggeredAbility ability) {
         super(ability);
+        lastTriggerTurnNumber = ability.lastTriggerTurnNumber;
     }
     
     @Override
