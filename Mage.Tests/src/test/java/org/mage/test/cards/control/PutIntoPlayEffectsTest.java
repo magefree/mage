@@ -27,7 +27,6 @@
  */
 package org.mage.test.cards.control;
 
-import mage.abilities.keyword.HasteAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Assert;
@@ -96,4 +95,43 @@ public class PutIntoPlayEffectsTest extends CardTestPlayerBase {
         Assert.assertTrue("Top card of the library of player B should be reveled.", playerB.isTopCardRevealed());
         Assert.assertFalse("Top card of the library of player A should not be reveled.", playerA.isTopCardRevealed());
     }
+    
+    /**
+     * A Silvercoat Lion from opponents deck will be put into play with Bribery. Than the opponent bounces this card
+     * back to hand and cast the spell itself.
+     */
+    @Test
+    public void bribery1() {
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        // Bribery - Sorcery {3}{U}{U}
+        // Search target opponent's library for a creature card and put that card onto the battlefield
+        // under your control. Then that player shuffles his or her library.
+        addCard(Zone.HAND, playerA, "Bribery");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+        // Eye of Nowhere - Sorcery - Arcane - {U}{U}
+        // Return target permanent to its owner's hand.
+        addCard(Zone.HAND, playerB, "Eye of Nowhere");
+        addCard(Zone.LIBRARY, playerB, "Silvercoat Lion", 1);
+        skipInitShuffling();
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bribery", playerB);        
+        setChoice(playerA, "Silvercoat Lion");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Eye of Nowhere", "Silvercoat Lion");        
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Silvercoat Lion");        
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+
+        assertGraveyardCount(playerA, "Bribery", 1);
+        
+        assertGraveyardCount(playerB, "Eye of Nowhere", 1);
+        assertHandCount(playerB, "Silvercoat Lion", 0);        
+        assertPermanentCount(playerB, "Silvercoat Lion", 1);
+
+    }    
 }
