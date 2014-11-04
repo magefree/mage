@@ -428,6 +428,7 @@ public class Battlefield implements Serializable {
      * control changed events after all control change effects have been applied
      * 
      * @param game 
+     * @return
      */
     public boolean fireControlChangeEvents(Game game) {
         boolean controlChanged = false;

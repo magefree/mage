@@ -47,6 +47,9 @@ public class PutIntoPlayEffectsTest extends CardTestPlayerBase {
     @Test
     public void testLordOfTheVoid() {
         skipInitShuffling();
+        // You may play an additional land on each of your turns.
+        // Play with the top card of your library revealed.
+        // You may play the top card of your library if it's a land card.
         addCard(Zone.LIBRARY, playerA, "Oracle of Mul Daya", 4);
         // Whenever Lord of the Void deals combat damage to a player, exile the top seven cards 
         // of that player's library, then put a creature card from among them 
@@ -63,8 +66,9 @@ public class PutIntoPlayEffectsTest extends CardTestPlayerBase {
         assertLife(playerA, 13);
         assertPermanentCount(playerB, "Oracle of Mul Daya", 1);
 
-        Assert.assertTrue("Top card of the library of player B should be reveled.", playerB.isTopCardRevealed());
         Assert.assertFalse("Top card of the library of player A should not be reveled.", playerA.isTopCardRevealed());
+        Assert.assertTrue("Top card of the library of player B should be reveled.", playerB.isTopCardRevealed());
+        
     }
     
     /*
