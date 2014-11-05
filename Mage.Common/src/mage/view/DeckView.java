@@ -27,18 +27,17 @@
  */
 package mage.view;
 
-import mage.cards.decks.Deck;
-
 import java.io.Serializable;
+import mage.cards.decks.Deck;
 
 /**
  * @author nantuko
  */
 public class DeckView implements Serializable {
 
-    private String name;
-    private SimpleCardsView cards;
-    private SimpleCardsView sideboard;
+    private final String name;
+    private final SimpleCardsView cards;
+    private final SimpleCardsView sideboard;
 
     public DeckView(Deck deck) {
         name = deck.getName();

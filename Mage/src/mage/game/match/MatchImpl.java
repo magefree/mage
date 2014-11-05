@@ -344,8 +344,12 @@ public abstract class MatchImpl implements Match {
     public void sideboard() {
         for (MatchPlayer player: this.players) {
             if (!player.hasQuit()) {
-                player.setSideboarding();
-                player.getPlayer().sideboard(this, player.getDeck());
+                if (player.getDeck() != null) {
+                    player.setSideboarding();
+                    player.getPlayer().sideboard(this, player.getDeck());
+                } else {
+                    logger.error("Player " + player.getName() + " has no deck: " + player.getPlayer().getId());
+                }
             }
         }
         synchronized(this) {
