@@ -156,35 +156,29 @@ public class Commander extends DeckValidator {
     public FilterMana getColorIdentity(Card card){
         FilterMana mana = new FilterMana();
         mana.setBlack(card.getManaCost().getText().matches(regexBlack));
+        mana.setBlue(card.getManaCost().getText().matches(regexBlue));
+        mana.setGreen(card.getManaCost().getText().matches(regexGreen));
+        mana.setRed(card.getManaCost().getText().matches(regexRed));
+        mana.setWhite(card.getManaCost().getText().matches(regexWhite));
+        
         for(String rule : card.getRules()){
+            rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
             if(rule.matches(regexBlack)){
                 mana.setBlack(true);
             }
-        }
-        mana.setBlue(card.getManaCost().getText().matches(regexBlue));
-        for(String rule : card.getRules()){
             if(rule.matches(regexBlue)){
                 mana.setBlue(true);
             }
-        }
-        mana.setGreen(card.getManaCost().getText().matches(regexGreen));
-        for(String rule : card.getRules()){
             if(rule.matches(regexGreen)){
                 mana.setGreen(true);
             }
-        }
-        mana.setRed(card.getManaCost().getText().matches(regexRed));
-        for(String rule : card.getRules()){
             if(rule.matches(regexRed)){
                 mana.setRed(true);
             }
-        }
-        mana.setWhite(card.getManaCost().getText().matches(regexWhite));
-        for(String rule : card.getRules()){
             if(rule.matches(regexWhite)){
                 mana.setWhite(true);
-            }
-        }
+            }            
+        }        
         return mana;
     }
     
