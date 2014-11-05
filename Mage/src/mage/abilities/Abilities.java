@@ -35,7 +35,6 @@ import mage.constants.Zone;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.game.Game;
-import mage.players.Player;
 
 /**
  * Represents a collection of {@link Ability Abilities}.  This is the top most

@@ -91,10 +91,11 @@ class GuardianOfTheAgesTriggerAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game){
         if(event.getType() == GameEvent.EventType.ATTACKER_DECLARED){
             Permanent creature = game.getPermanent(event.getSourceId());
-           if(creature != null && filter.match(creature, game)
+            if(creature != null && filter.match(creature, game)
                    && game.getOpponents(this.getControllerId()).contains(creature.getControllerId())
-                   && game.getPermanent(this.getSourceId()).getAbilities().contains(DefenderAbility.getInstance())) 
-            return true;
+                   && game.getPermanent(this.getSourceId()).getAbilities().contains(DefenderAbility.getInstance())) {
+               return true;
+            }
         }
         return false;
     }

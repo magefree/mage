@@ -45,12 +45,13 @@ public class LoseAbilitySourceEffect extends ContinuousEffectImpl{
     @Override
     public boolean apply(Game game, Ability source){
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if(permanent != null){
-            while(permanent.getAbilities().contains(ability)){
-                if (!permanent.getAbilities().remove(ability)) {
-                          logger.warn("ability" + ability.getRule() + "couldn't be removed.");
-                }
-            }
+        if (permanent != null){
+            permanent.getAbilities().remove(ability);
+//            while(permanent.getAbilities().contains(ability)){
+//                if (!permanent.getAbilities().remove(ability)) {
+//                    logger.warn("ability " + ability.getRule() + " couldn't be removed.");
+//                }
+//            }
         }
         return true;
     }
