@@ -60,7 +60,8 @@ public class LivingEnd extends CardImpl {
 
         // Suspend 3-{2}{B}{B}
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{2}{B}{B}"), this));
-        // Each player exiles all creature cards from his or her graveyard, then sacrifices all creatures he or she controls, then puts all cards he or she  onto the battlefield.
+        // Each player exiles all creature cards from his or her graveyard, then sacrifices all creatures
+        // he or she controls, then puts all cards he or she exiled this way onto the battlefield.
         this.getSpellAbility().addEffect(new LivingEndEffect());
         
     }
@@ -113,7 +114,10 @@ class LivingEndEffect extends OneShotEffect {
             ExileZone exileZone = game.getState().getExile().getExileZone(source.getSourceId());
             if (exileZone != null) {
                 for (Card card : exileZone.getCards(game)) {
-                    controller.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
+                    Player player = game.getPlayer(card.getOwnerId());
+                    if (player != null) {
+                        player.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
+                    }
                 }
             }
             return true;

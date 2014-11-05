@@ -106,7 +106,10 @@ class LivingDeathEffect extends OneShotEffect {
             ExileZone exileZone = game.getState().getExile().getExileZone(source.getSourceId());
             if (exileZone != null) {
                 for (Card card : exileZone.getCards(game)) {
-                    controller.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
+                    Player player = game.getPlayer(card.getOwnerId());
+                    if (player != null) {
+                        player.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
+                    }
                 }
             }
             return true;
