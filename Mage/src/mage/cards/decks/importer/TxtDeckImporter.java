@@ -74,6 +74,7 @@ public class TxtDeckImporter extends DeckImporter {
             return;
         }
 
+        line = line.replace("\t"," "); // changing tabs to blanks as delimiter
         int delim = line.indexOf(' ');
         if (delim < 0) {
             return;
