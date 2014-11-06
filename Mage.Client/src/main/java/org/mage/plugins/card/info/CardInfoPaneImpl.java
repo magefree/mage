@@ -1,7 +1,9 @@
 package org.mage.plugins.card.info;
 
+
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import javax.swing.JEditorPane;
 import javax.swing.SwingUtilities;
 import mage.client.util.gui.GuiDisplayUtil;
@@ -49,7 +51,13 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
                                 return;
                             }
                             StringBuilder buffer = GuiDisplayUtil.getRulefromCardView(card); 
-                            resizeTooltipIfNeeded(buffer, container);
+                            int ruleLength = 0;
+                            int rules = 0;
+                            for (String rule :card.getRules()) {
+                                ruleLength += rule.length();
+                                rules++;
+                            }
+                            resizeTooltipIfNeeded(container, ruleLength, rules);
                             setText(buffer.toString());
                             setCaretPosition(0);
                         }
@@ -62,24 +70,19 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
         });
     }
 
-    private void resizeTooltipIfNeeded(StringBuilder buffer, Component container) {
+    private void resizeTooltipIfNeeded(Component container, int ruleLength, int rules) {
         if (container == null) {
             return;
         }
-        int i = buffer.indexOf("</p>");
-        int count = 0;
-        while (i != -1) {
-            count++;
-            i = buffer.indexOf("</p>", i+1);
-        }
-        if (count > 5 && this.type == 0) {
+        boolean makeBig = (rules > 5 || ruleLength > 450);
+        if (makeBig && type == 0) {
             type = 1;
             container.setSize(
                 org.mage.plugins.card.constants.Constants.TOOLTIP_WIDTH_MIN + org.mage.plugins.card.constants.Constants.TOOLTIP_BORDER_WIDTH,
                 org.mage.plugins.card.constants.Constants.TOOLTIP_HEIGHT_MAX + org.mage.plugins.card.constants.Constants.TOOLTIP_BORDER_WIDTH
             );
             this.setSize(org.mage.plugins.card.constants.Constants.TOOLTIP_WIDTH_MIN, org.mage.plugins.card.constants.Constants.TOOLTIP_HEIGHT_MAX);
-        } else if (count < 6 && type == 1) {
+        } else if (!makeBig && type == 1) {
             type = 0;
             container.setSize(
                     org.mage.plugins.card.constants.Constants.TOOLTIP_WIDTH_MIN + org.mage.plugins.card.constants.Constants.TOOLTIP_BORDER_WIDTH,

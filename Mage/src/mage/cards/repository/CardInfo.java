@@ -77,7 +77,7 @@ public class CardInfo {
     protected String supertypes;
     @DatabaseField
     protected String manaCosts;
-    @DatabaseField(dataType = DataType.STRING, width = 500)
+    @DatabaseField(dataType = DataType.STRING, width = 800)
     protected String rules;
     @DatabaseField
     protected boolean black;

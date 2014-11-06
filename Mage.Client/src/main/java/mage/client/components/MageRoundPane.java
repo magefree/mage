@@ -1,12 +1,13 @@
 package mage.client.components;
 
+import static com.sun.glass.ui.Cursor.setVisible;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
 import org.jdesktop.swingx.graphics.ShadowRenderer;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-
 import javax.swing.JPanel;
+
 
 /**
  * Mage round pane with transparency.
@@ -19,8 +20,8 @@ public class MageRoundPane extends JPanel {
     private int X_OFFSET = 30;
     private int Y_OFFSET = 30;
     private BufferedImage shadow = null;
-    private Color backgroundColor = new Color(255, 255, 255, 200);
-    private int alpha = 0;
+    private final Color backgroundColor = new Color(255, 255, 255, 200);
+    private final int alpha = 0;
 
     @Override
     protected void paintComponent(Graphics g) {
