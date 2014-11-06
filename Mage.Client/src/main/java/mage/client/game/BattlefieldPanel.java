@@ -41,7 +41,6 @@ import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.layout.CardLayoutStrategy;
-import mage.client.util.layout.impl.OldCardLayoutStrategy;
 import mage.constants.CardType;
 import mage.utils.CardUtil;
 import mage.view.CounterView;
@@ -56,6 +55,7 @@ import java.awt.event.ComponentEvent;
 import java.util.*;
 import java.util.List;
 import java.util.Map.Entry;
+import mage.client.util.layout.impl.OldCardLayoutStrategy;
 
 /**
  *
@@ -75,7 +75,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
     private JScrollPane jScrollPane;
     private int width;
 
-    private CardLayoutStrategy layoutStrategy = new OldCardLayoutStrategy();
+    private final CardLayoutStrategy layoutStrategy = new OldCardLayoutStrategy();
 
     //private static int iCounter = 0;
 
@@ -137,7 +137,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
                         if (s1 != s2) {
                             changed = true;
                         } else if (s1 > 0) {
-                            Set<UUID> attachmentIds = new HashSet<UUID>();
+                            Set<UUID> attachmentIds = new HashSet<>();
                             attachmentIds.addAll(permanent.getAttachments());
                             for (MagePermanent magePermanent : oldMagePermanent.getLinks()) {
                                 if (!attachmentIds.contains(magePermanent.getOriginalPermanent().getId())) {
@@ -164,7 +164,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
                         List<CounterView> counters2 = permanent.getCounters();
                         if (counters1 == null && counters2 != null || counters1 != null && counters2 == null) {
                             changed = true;
-                        } else if (counters1 != null && counters1.size() != counters2.size()) {
+                        } else if (counters1 != null && counters2 != null && counters1.size() != counters2.size()) {
                             changed = true;
                         }
                     }

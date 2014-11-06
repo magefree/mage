@@ -29,24 +29,27 @@ package mage.sets.limitedalpha;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.StaticAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceOnBattelfieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
+import mage.abilities.effects.common.continious.SourceEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.other.AuraPermanentCanAttachToPermanentId;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -72,15 +75,17 @@ public class AnimateDead extends CardImpl {
         TargetCardInGraveyard auraTarget = new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard"));
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AnimateDeadAttachEffect(Outcome.PutCreatureInPlay));
-        Ability enchantAbility = new AnimateDeadEnchantAbility(auraTarget.getTargetName());
+        Ability enchantAbility = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(enchantAbility);        
         // When Animate Dead enters the battlefield, if it's on the battlefield, it loses "enchant creature card in a graveyard" 
         // and gains "enchant creature put onto the battlefield with Animate Dead." Return enchanted creature card to the battlefield 
         // under your control and attach Animate Dead to it. When Animate Dead leaves the battlefield, that creature's controller sacrifices it.
-        this.addAbility(new ConditionalTriggeredAbility(
+        Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new AnimateDeadReAttachEffect(), false),
                 SourceOnBattelfieldCondition.getInstance(),
-                "When Animate Dead enters the battlefield, if it's on the battlefield, it loses \"enchant creature card in a graveyard\" and gains \"enchant creature put onto the battlefield with Animate Dead.\" Return enchanted creature card to the battlefield under your control and attach Animate Dead to it."));
+                "When Animate Dead enters the battlefield, if it's on the battlefield, it loses \"enchant creature card in a graveyard\" and gains \"enchant creature put onto the battlefield with Animate Dead.\" Return enchanted creature card to the battlefield under your control and attach Animate Dead to it.");
+        ability.addEffect(new AnimateDeadChangeAbilityEffect());
+        this.addAbility(ability);
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new AnimateDeadLeavesBattlefieldTriggeredEffect(), false));        
         
         // Enchanted creature gets -1/-0.
@@ -102,7 +107,7 @@ class AnimateDeadReAttachEffect extends OneShotEffect {
     
     public AnimateDeadReAttachEffect() {
         super(Outcome.Benefit);
-        this.staticText = "if it's on the battlefield, it loses \"enchant creature card in a graveyard\" and gains \"enchant creature put onto the battlefield with Animate Dead.\" Return enchanted creature card to the battlefield under your control and attach Animate Dead to it";
+        this.staticText = "Return enchanted creature card to the battlefield under your control and attach {this} to it";
     }
     
     public AnimateDeadReAttachEffect(final AnimateDeadReAttachEffect effect) {
@@ -129,20 +134,10 @@ class AnimateDeadReAttachEffect extends OneShotEffect {
             controller.putOntoBattlefieldWithInfo(cardInGraveyard, game, Zone.GRAVEYARD, source.getSourceId());
             Permanent enchantedCreature = game.getPermanent(cardInGraveyard.getId());
             
-            AnimateDeadEnchantAbility enchantAbility = null;
-            for (Ability ability : enchantment.getAbilities()) {
-                if (ability instanceof AnimateDeadEnchantAbility) {
-                    enchantAbility = (AnimateDeadEnchantAbility) ability;
-                    break;
-                }
-            }
-            if (enchantAbility == null) {
-                return false;
-            }
             FilterCreaturePermanent filter = new FilterCreaturePermanent("enchant creature put onto the battlefield with Animate Dead");
             filter.add(new PermanentIdPredicate(cardInGraveyard.getId()));
             Target target = new TargetCreaturePermanent(filter);
-            enchantAbility.setTargetName(target.getTargetName());
+            //enchantAbility.setTargetName(target.getTargetName());
             if (enchantedCreature != null) {
                 target.addTarget(enchantedCreature.getId(), source, game);
                 enchantment.getSpellAbility().getTargets().clear();
@@ -225,36 +220,51 @@ class AnimateDeadAttachEffect extends OneShotEffect {
 
 }
 
-class AnimateDeadEnchantAbility extends StaticAbility {
+class AnimateDeadChangeAbilityEffect extends ContinuousEffectImpl implements SourceEffect {
 
-    protected String targetName;
-
-    public AnimateDeadEnchantAbility(String targetName) {
-        super(Zone.BATTLEFIELD, null);
-        this.targetName = targetName;
+    private final static Ability newAbility = new EnchantAbility("creature put onto the battlefield with Animate Dead");
+    
+    static {
+        newAbility.setRuleAtTheTop(true);
+    }
+    
+    public AnimateDeadChangeAbilityEffect() {
+        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        staticText = "it loses \"enchant creature card in a graveyard\" and gains \"enchant creature put onto the battlefield with Animate Dead\"";
     }
 
-    public AnimateDeadEnchantAbility(final AnimateDeadEnchantAbility ability) {
-        super(ability);
-        this.targetName = ability.targetName;
-    }
 
-    @Override
-    public AnimateDeadEnchantAbility copy() {
-        return new AnimateDeadEnchantAbility(this);
-    }
-
-    public void setTargetName(String name) {
-        this.targetName = name;
+    public AnimateDeadChangeAbilityEffect(final AnimateDeadChangeAbilityEffect effect) {
+        super(effect);
     }
 
     @Override
-    public String getRule() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Enchant ").append(targetName);
-        if (!this.getEffects().isEmpty()) {
-            sb.append(". ").append(super.getRule());
-        }
-        return sb.toString();
+    public AnimateDeadChangeAbilityEffect copy() {
+        return new AnimateDeadChangeAbilityEffect(this);
+    }
+    
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        getAffectedObjects().add(source.getSourceId());
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            Ability abilityToRemove = null;
+            for (Ability ability: permanent.getAbilities()) {
+                if (ability instanceof EnchantAbility) {
+                    abilityToRemove = ability;
+                }
+            }
+            if (abilityToRemove != null) {
+                permanent.getAbilities().remove(abilityToRemove);
+            }
+            permanent.addAbility(newAbility, source.getSourceId(), game);
+            return true;
+        }           
+        return false;
     }
 }

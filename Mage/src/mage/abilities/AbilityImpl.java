@@ -471,6 +471,7 @@ public abstract class AbilityImpl implements Ability {
         return variableManaCost;
     }
 
+    // called at end of turn for each Permanent
     @Override
     public void reset(Game game) {}
 
