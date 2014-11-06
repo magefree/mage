@@ -563,7 +563,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public void attachTo(UUID permanentId, Game game) {
-        if (this.attachedTo != null) {
+        if (this.attachedTo != null && this.attachedTo!= permanentId) {
             Permanent attachment = game.getPermanent(this.attachedTo);
             if (attachment != null) {
                 attachment.removeAttachment(this.objectId, game);

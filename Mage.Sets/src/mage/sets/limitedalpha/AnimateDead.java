@@ -29,6 +29,7 @@ package mage.sets.limitedalpha;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.StaticAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -36,9 +37,6 @@ import mage.abilities.condition.common.SourceOnBattelfieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.effects.common.continious.LoseAbilitySourceEffect;
-import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -46,14 +44,16 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.AuraPermanentCanAttachToPermanentId;
+import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -72,7 +72,7 @@ public class AnimateDead extends CardImpl {
         TargetCardInGraveyard auraTarget = new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard"));
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AnimateDeadAttachEffect(Outcome.PutCreatureInPlay));
-        Ability enchantAbility = new EnchantAbility(auraTarget.getTargetName());
+        Ability enchantAbility = new AnimateDeadEnchantAbility(auraTarget.getTargetName());
         this.addAbility(enchantAbility);        
         // When Animate Dead enters the battlefield, if it's on the battlefield, it loses "enchant creature card in a graveyard" 
         // and gains "enchant creature put onto the battlefield with Animate Dead." Return enchanted creature card to the battlefield 
@@ -127,29 +127,28 @@ class AnimateDeadReAttachEffect extends OneShotEffect {
             
             // put card into play
             controller.putOntoBattlefieldWithInfo(cardInGraveyard, game, Zone.GRAVEYARD, source.getSourceId());
-            Ability abilityToLose = null;
+            Permanent enchantedCreature = game.getPermanent(cardInGraveyard.getId());
+            
+            AnimateDeadEnchantAbility enchantAbility = null;
             for (Ability ability : enchantment.getAbilities()) {
-                if (ability instanceof EnchantAbility) {
-                    abilityToLose = ability; 
+                if (ability instanceof AnimateDeadEnchantAbility) {
+                    enchantAbility = (AnimateDeadEnchantAbility) ability;
                     break;
                 }
             }
-            if (abilityToLose == null) {
+            if (enchantAbility == null) {
                 return false;
             }
-            Filter filter = new FilterCreaturePermanent();
-            filter.add(new AuraPermanentCanAttachToPermanentId(cardInGraveyard.getId()));
-
-            Ability newEnchantAbility = new EnchantAbility("enchant creature put onto the battlefield with Animate Dead");
-            GainAbilitySourceEffect gainAbilitySourceEffect = new GainAbilitySourceEffect(newEnchantAbility, Duration.WhileOnBattlefield);
-            game.addEffect(gainAbilitySourceEffect, source);
-            
-            enchantment.attachTo(cardInGraveyard.getId(), game);
-            
-            // remove enchant card in graveyard
-            LoseAbilitySourceEffect loseAbilitySourceEffect = new LoseAbilitySourceEffect(abilityToLose, Duration.WhileOnBattlefield);
-            game.addEffect(loseAbilitySourceEffect, source);
-            
+            FilterCreaturePermanent filter = new FilterCreaturePermanent("enchant creature put onto the battlefield with Animate Dead");
+            filter.add(new PermanentIdPredicate(cardInGraveyard.getId()));
+            Target target = new TargetCreaturePermanent(filter);
+            enchantAbility.setTargetName(target.getTargetName());
+            if (enchantedCreature != null) {
+                target.addTarget(enchantedCreature.getId(), source, game);
+                enchantment.getSpellAbility().getTargets().clear();
+                enchantment.getSpellAbility().getTargets().add(target);
+                enchantedCreature.addAttachment(enchantment.getId(), game);
+            }
             return true;
         }
         
@@ -224,4 +223,38 @@ class AnimateDeadAttachEffect extends OneShotEffect {
         return false;
     }
 
+}
+
+class AnimateDeadEnchantAbility extends StaticAbility {
+
+    protected String targetName;
+
+    public AnimateDeadEnchantAbility(String targetName) {
+        super(Zone.BATTLEFIELD, null);
+        this.targetName = targetName;
+    }
+
+    public AnimateDeadEnchantAbility(final AnimateDeadEnchantAbility ability) {
+        super(ability);
+        this.targetName = ability.targetName;
+    }
+
+    @Override
+    public AnimateDeadEnchantAbility copy() {
+        return new AnimateDeadEnchantAbility(this);
+    }
+
+    public void setTargetName(String name) {
+        this.targetName = name;
+    }
+
+    @Override
+    public String getRule() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Enchant ").append(targetName);
+        if (!this.getEffects().isEmpty()) {
+            sb.append(". ").append(super.getRule());
+        }
+        return sb.toString();
+    }
 }
