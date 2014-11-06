@@ -53,13 +53,16 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -83,7 +86,8 @@ public class Necromancy extends CardImpl {
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new NecromancyReAttachEffect(), false),
                 SourceOnBattelfieldCondition.getInstance(),
-                "When {this} enters the battlefield, if it's on the battlefield,  it becomes an Aura with \"enchant creature put onto the battlefield with {this}.\" Put target creature card from a graveyard onto the battlefield under your control and attach {this} to it.");        
+                "When {this} enters the battlefield, if it's on the battlefield,  it becomes an Aura with \"enchant creature put onto the battlefield with {this}.\" Put target creature card from a graveyard onto the battlefield under your control and attach {this} to it.");
+        ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
         this.addAbility(ability);
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new NecromancyLeavesBattlefieldTriggeredEffect(), false));     
     }
@@ -109,7 +113,7 @@ class CastSourceAsThoughItHadFlashEffect extends AsThoughEffectImpl {
         if (sacrificeIfCastAsInstant) {
             card.addAbility(new CastAtInstantTimeTriggeredAbility());
         }
-        setText();
+        staticText = "You may cast {this} as though it had flash";
     }
 
 
@@ -133,18 +137,11 @@ class CastSourceAsThoughItHadFlashEffect extends AsThoughEffectImpl {
         return source.getSourceId().equals(affectedSpellId);
     }
 
-    private String setText() {
-        StringBuilder sb = new StringBuilder("You may cast  {this} as though it had flash");
-        if (sacrificeIfCastAsInstant) {
-            sb.append(". If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step");
-        } 
-        return sb.toString();
-    }
 }
 
 class CastAtInstantTimeTriggeredAbility extends TriggeredAbilityImpl {
     public CastAtInstantTimeTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextCleanupDelayedTriggeredAbility(new SacrificeSourceEffect())));
+        super(Zone.STACK, new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextCleanupDelayedTriggeredAbility(new SacrificeSourceEffect())));
     }
 
     public CastAtInstantTimeTriggeredAbility(final CastAtInstantTimeTriggeredAbility ability) {
@@ -161,8 +158,11 @@ class CastAtInstantTimeTriggeredAbility extends TriggeredAbilityImpl {
         // The sacrifice occurs only if you cast it using its own ability. If you cast it using some other
         // effect (for instance, if it gained flash from Vedalken Orrery), then it won't be sacrificed.
         // CHECK
-        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getSourceId().equals(getSourceId())) {
-           return !game.canPlaySorcery(event.getPlayerId());
+        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null && spell.getSourceId().equals(getSourceId())) {
+                return !(game.isMainPhase() && game.getActivePlayerId().equals(event.getPlayerId()) && game.getStack().size() == 1);
+            }
         }
         return false;
     }
@@ -193,26 +193,19 @@ class NecromancyReAttachEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent enchantment = game.getPermanent(source.getSourceId());
-        
-        if (controller != null && enchantment != null) {
-            Card cardInGraveyard = game.getCard(enchantment.getAttachedTo());
-            if (cardInGraveyard == null) {
-                return true;
-            }
-            game.addEffect(new NecromancyChangeAbilityEffect(), source);
+        Card cardInGraveyard = game.getCard(getTargetPointer().getFirst(game, source));
+        if (controller != null && enchantment != null && cardInGraveyard != null) {
             // put card into play
             controller.putOntoBattlefieldWithInfo(cardInGraveyard, game, Zone.GRAVEYARD, source.getSourceId());
             Permanent enchantedCreature = game.getPermanent(cardInGraveyard.getId());
-            
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("enchant creature put onto the battlefield with Necromancy");
-            filter.add(new PermanentIdPredicate(cardInGraveyard.getId()));
-            Target target = new TargetCreaturePermanent(filter);
-            //enchantAbility.setTargetName(target.getTargetName());
+
             if (enchantedCreature != null) {
-                target.addTarget(enchantedCreature.getId(), source, game);
-                enchantment.getSpellAbility().getTargets().clear();
-                enchantment.getSpellAbility().getTargets().add(target);
                 enchantedCreature.addAttachment(enchantment.getId(), game);
+                FilterCreaturePermanent filter = new FilterCreaturePermanent("enchant creature put onto the battlefield with Necromancy");
+                filter.add(new PermanentIdPredicate(cardInGraveyard.getId()));
+                Target target = new TargetCreaturePermanent(filter);
+                target.addTarget(enchantedCreature.getId(), source, game);
+                game.addEffect(new NecromancyChangeAbilityEffect(target), source);
             }
             return true;
         }
@@ -297,15 +290,19 @@ class NecromancyChangeAbilityEffect extends ContinuousEffectImpl implements Sour
     static {
         newAbility.setRuleAtTheTop(true);
     }
-    
-    public NecromancyChangeAbilityEffect() {
+
+    Target target;
+
+    public NecromancyChangeAbilityEffect(Target target) {
         super(Duration.Custom, Outcome.AddAbility);
         staticText = "it becomes an Aura with \"enchant creature put onto the battlefield with {this}\"";
+        this.target = target;
     }
 
 
     public NecromancyChangeAbilityEffect(final NecromancyChangeAbilityEffect effect) {
         super(effect);
+        this.target = effect.target;
     }
 
     @Override
@@ -320,7 +317,7 @@ class NecromancyChangeAbilityEffect extends ContinuousEffectImpl implements Sour
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             switch (layer) {
@@ -333,12 +330,19 @@ class NecromancyChangeAbilityEffect extends ContinuousEffectImpl implements Sour
                     break;
                 case AbilityAddingRemovingEffects_6:
                     if (sublayer == SubLayer.NA) {
-                        permanent.addAbility(newAbility, source.getSourceId(), game);                    
+                        permanent.addAbility(newAbility, source.getSourceId(), game);
+                        permanent.getSpellAbility().getTargets().clear();
+                        permanent.getSpellAbility().getTargets().add(target);
                     }
             }
             return true;            
         }   
         this.discard();
+        return false;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
         return false;
     }
 
