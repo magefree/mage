@@ -39,6 +39,7 @@ import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
  *
@@ -68,6 +69,7 @@ public class Firespout extends CardImpl {
                 new DamageAllEffect(3, filter2),
                 new ManaWasSpentCondition(ColoredManaSymbol.G), " And 3 damage to each creature with flying if {G} was spent to cast it"));
         this.addInfo("Info1", "<i>(Do both if {R}{G} was spent.)</i>");
+        this.addWatcher(new ManaSpentToCastWatcher());
 
 
 

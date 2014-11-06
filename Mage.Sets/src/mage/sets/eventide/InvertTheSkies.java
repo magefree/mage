@@ -47,6 +47,7 @@ import mage.constants.SubLayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
  *
@@ -72,6 +73,7 @@ public class InvertTheSkies extends CardImpl {
                 new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.U)),
                 "and creatures you control gain flying until end of turn if {U} was spent to cast it"));
         this.addInfo("Info1", "<i>(Do both if {G}{U} was spent.)<i>");
+        this.addWatcher(new ManaSpentToCastWatcher());
     }
 
     public InvertTheSkies(final InvertTheSkies card) {

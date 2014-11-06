@@ -39,6 +39,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
+import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
  *
@@ -62,6 +63,7 @@ public class DawnglowInfusion extends CardImpl {
                 new GainLifeEffect(xValue),
                 new ManaWasSpentCondition(ColoredManaSymbol.W), " And X life if {W} was spent to cast it"));
         this.addInfo("Info1", "<i>(Do both if {G}{W} was spent.)</i>");
+        this.addWatcher(new ManaSpentToCastWatcher());
 
 
     }

@@ -45,6 +45,7 @@ import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.players.Player;
+import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
  *
@@ -69,6 +70,7 @@ public class BatwingBrume extends CardImpl {
                 new BatwingBrumeEffect(),
                 new ManaWasSpentCondition(ColoredManaSymbol.B), "Each player loses 1 life for each attacking creature he or she controls if {B} was spent to cast {this}"));
         this.addInfo("Info1", "<i>(Do both if {W}{B} was spent.)<i>");
+        this.addWatcher(new ManaSpentToCastWatcher());
 
     }
 

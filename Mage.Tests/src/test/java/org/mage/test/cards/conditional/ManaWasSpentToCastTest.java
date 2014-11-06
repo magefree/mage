@@ -25,52 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package org.mage.test.cards.conditional;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.ManaWasSpentCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
-import mage.target.common.TargetArtifactPermanent;
-import mage.watchers.common.ManaSpentToCastWatcher;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
  * @author LevelX2
  */
-public class TinStreetHooligan extends CardImpl {
 
-    public TinStreetHooligan(UUID ownerId) {
-        super(ownerId, 78, "Tin Street Hooligan", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "GPT";
-        this.subtype.add("Goblin");
-        this.subtype.add("Rogue");
-
-        this.color.setRed(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
-
+public class ManaWasSpentToCastTest extends CardTestPlayerBase {
+    
+    @Test
+    public void testArtifactWillBeDestroyed() {
+        // Tin Street Hooligan - Creature 2/1   {1}{R}
         // When Tin Street Hooligan enters the battlefield, if {G} was spent to cast Tin Street Hooligan, destroy target artifact.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new DestroyTargetEffect(), new ManaWasSpentCondition(ColoredManaSymbol.G),
-                "if {G} was spent to cast {this}, destroy target artifact"), false);
-        ability.addTarget(new TargetArtifactPermanent());        
-        this.addAbility(ability);
-        this.addWatcher(new ManaSpentToCastWatcher());
+        addCard(Zone.HAND, playerA, "Tin Street Hooligan");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Abzan Banner");
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tin Street Hooligan");
+        addTarget(playerA, "Abzan Banner");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Tin Street Hooligan", 1);
+        assertPermanentCount(playerB, "Abzan Banner", 0);
     }
 
-    public TinStreetHooligan(final TinStreetHooligan card) {
-        super(card);
-    }
+    @Test
+    public void testArtifactWontBeDestroyed() {
+        // Tin Street Hooligan - Creature 2/1   {1}{R}
+        // When Tin Street Hooligan enters the battlefield, if {G} was spent to cast Tin Street Hooligan, destroy target artifact.
+        addCard(Zone.HAND, playerA, "Tin Street Hooligan");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Abzan Banner");
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tin Street Hooligan");
+        addTarget(playerA, "Abzan Banner");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
 
-    @Override
-    public TinStreetHooligan copy() {
-        return new TinStreetHooligan(this);
+        assertPermanentCount(playerA, "Tin Street Hooligan", 1);
+        assertPermanentCount(playerB, "Abzan Banner", 1);
     }
+    
 }
