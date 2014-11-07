@@ -30,7 +30,7 @@ package mage.sets.shardsofalara;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInGraveyard;
 
 /**
  *
- * @author jonubuu
+ * @author jonubuu 
  */
 public class RelicOfProgenitus extends CardImpl {
 
@@ -64,7 +64,7 @@ public class RelicOfProgenitus extends CardImpl {
         this.addAbility(firstAbility);
         // {1}, Exile Relic of Progenitus: Exile all cards from all graveyards. Draw a card.
         Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RelicOfProgenitusEffect2(),new GenericManaCost(1));
-        secondAbility.addCost(new SacrificeSourceCost());
+        secondAbility.addCost(new ExileSourceCost());
         secondAbility.addEffect(new DrawCardSourceControllerEffect(1));
         this.addAbility(secondAbility);
 
