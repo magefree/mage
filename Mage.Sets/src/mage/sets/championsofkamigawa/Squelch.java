@@ -38,6 +38,7 @@ import mage.abilities.ActivatedAbility;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.constants.AbilityType;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterAbility;
@@ -96,10 +97,7 @@ class ActivatedAbilityTarget extends TargetObject {
         }
 
         StackObject stackObject = game.getStack().getStackObject(id);
-        if (stackObject.getStackAbility() != null && (stackObject.getStackAbility() instanceof ActivatedAbility)) {
-            return true;
-        }
-        return false;
+        return stackObject != null && stackObject.getStackAbility() != null && stackObject.getStackAbility().getAbilityType().equals(AbilityType.ACTIVATED);
     }
 
     @Override
@@ -110,7 +108,9 @@ class ActivatedAbilityTarget extends TargetObject {
     @Override
     public boolean canChoose(UUID sourceControllerId, Game game) {
         for (StackObject stackObject :  game.getStack()) {
-            if (stackObject.getStackAbility() != null && (stackObject.getStackAbility() instanceof ActivatedAbility) && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getStackAbility().getControllerId())) {
+            if (stackObject.getStackAbility() != null 
+                    && stackObject.getStackAbility().getAbilityType().equals(AbilityType.ACTIVATED)
+                    && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getStackAbility().getControllerId())) {
                     return true;
                 }
             }
@@ -126,7 +126,7 @@ class ActivatedAbilityTarget extends TargetObject {
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         for (StackObject stackObject :  game.getStack()) {
-            if (stackObject.getStackAbility() != null && (stackObject.getStackAbility() instanceof ActivatedAbility) && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getStackAbility().getControllerId())) {
+            if (stackObject.getStackAbility().getAbilityType().equals(AbilityType.ACTIVATED) && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getStackAbility().getControllerId())) {
                 possibleTargets.add(stackObject.getStackAbility().getId());
             }
         }
