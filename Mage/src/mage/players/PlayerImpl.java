@@ -1744,7 +1744,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 int opponentsAlive = 0;
                 for (UUID opponentId: game.getOpponents(playerId)) {
                     Player opponent = game.getPlayer(opponentId);
-                    if (!opponent.hasLost()) {
+                    if (opponent != null && !opponent.hasLost()) {
                         opponentsAlive++;
                     }
                 }
