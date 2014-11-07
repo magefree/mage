@@ -43,6 +43,7 @@ public class CommanderDuelType extends MatchType {
         this.numTeams = 0;
         this.useAttackOption = false;
         this.useRange = false;
+        this.sideboardingAllowed = false;
     }
 
     protected CommanderDuelType(final CommanderDuelType matchType) {

@@ -735,7 +735,9 @@ public class TableController {
         GameManager.getInstance().removeGame(game.getId());
         try {
             if (!match.hasEnded()) {
-                sideboard();
+                if (match.getGame().getGameType().isSideboardingAllowed()) {
+                    sideboard();
+                }
                 if (!match.hasEnded()) {
                     startGame(choosingPlayerId);
                 } else {

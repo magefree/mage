@@ -43,6 +43,7 @@ public class TwoPlayerDuelType extends MatchType {
         this.numTeams = 0;
         this.useAttackOption = false;
         this.useRange = false;
+        this.sideboardingAllowed = true;
     }
 
     protected TwoPlayerDuelType(final TwoPlayerDuelType matchType) {

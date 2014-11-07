@@ -44,6 +44,7 @@ public class CommanderFreeForAllType extends MatchType {
         this.numTeams = 0;
         this.useAttackOption = true;
         this.useRange = true;
+        this.sideboardingAllowed = false;
     }
 
     protected CommanderFreeForAllType(final CommanderFreeForAllType matchType) {

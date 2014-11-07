@@ -43,6 +43,7 @@ public abstract class MatchType implements Serializable {
     protected int playersPerTeam;
     protected boolean useRange;
     protected boolean useAttackOption;
+    protected boolean sideboardingAllowed;
 
     protected MatchType() {}
 
@@ -54,6 +55,7 @@ public abstract class MatchType implements Serializable {
         this.playersPerTeam = matchType.playersPerTeam;
         this.useRange = matchType.useRange;
         this.useAttackOption = matchType.useAttackOption;
+        this.sideboardingAllowed = matchType.sideboardingAllowed;
     }
 
     public abstract MatchType copy();
@@ -89,6 +91,10 @@ public abstract class MatchType implements Serializable {
 
     public boolean isUseAttackOption() {
         return useAttackOption;
+    }
+
+    public boolean isSideboardingAllowed() {
+        return sideboardingAllowed;
     }
 
 }

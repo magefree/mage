@@ -43,6 +43,7 @@ public class FreeForAllType extends MatchType {
         this.numTeams = 0;
         this.useAttackOption = true;
         this.useRange = true;
+        this.sideboardingAllowed = true;
     }
 
     protected FreeForAllType(final FreeForAllType matchType) {
