@@ -28,6 +28,7 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -57,6 +58,10 @@ public class GenesisWave extends CardImpl {
         super(ownerId, 122, "Genesis Wave", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}{G}{G}");
         this.expansionSetCode = "SOM";
         this.color.setGreen(true);
+        
+        // Reveal the top X cards of your library. You may put any number of permanent cards with converted mana
+        // cost X or less from among them onto the battlefield. Then put all cards revealed this way that weren't
+        // put onto the battlefield into your graveyard.
         this.getSpellAbility().addEffect(new GenesisWaveEffect());
     }
 
@@ -85,7 +90,8 @@ class GenesisWaveEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller == null || sourceObject == null) {
             return false;
         }
         Cards cards = new CardsImpl(Zone.LIBRARY);
@@ -95,30 +101,33 @@ class GenesisWaveEffect extends OneShotEffect {
             Card card = controller.getLibrary().removeFromTop(game);
             cards.add(card);
         }
-        FilterCard filter = new FilterCard("card with converted mana cost " + xValue + " or less to put onto the battlefield");
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, xValue + 1));
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
-                                 new CardTypePredicate(CardType.CREATURE),
-                                 new CardTypePredicate(CardType.ENCHANTMENT),
-                                 new CardTypePredicate(CardType.LAND),
-                                 new CardTypePredicate(CardType.PLANESWALKER)
-                ));
-        TargetCard target1 = new TargetCard(Zone.LIBRARY, filter);
-        while (cards.size() > 0 && controller.choose(Outcome.PutCardInPlay, cards, target1, game)) {
-            Card card = cards.get(target1.getFirstTarget(), game);
-            if (card != null) {
+        if (cards.size() > 0) {
+            controller.revealCards(sourceObject.getLogName(), cards, game);
+            FilterCard filter = new FilterCard("cards with converted mana cost " + xValue + " or less to put onto the battlefield");
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, xValue + 1));
+            filter.add(
+                    Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
+                                     new CardTypePredicate(CardType.CREATURE),
+                                     new CardTypePredicate(CardType.ENCHANTMENT),
+                                     new CardTypePredicate(CardType.LAND),
+                                     new CardTypePredicate(CardType.PLANESWALKER)
+                    ));
+            TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, filter);
+            target1.setRequired(false);
+
+            controller.choose(Outcome.PutCardInPlay, cards, target1, game);
+            for (UUID cardId: target1.getTargets()) {
+                Card card = cards.get(cardId, game);
+                if (card != null) {
+                    cards.remove(card);
+                    controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                }
+            }
+            while (cards.size() > 0) {
+                Card card = cards.get(cards.iterator().next(), game);
                 cards.remove(card);
-                controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
             }
-            target1.clearChosen();
-            if (!controller.isInGame()) {
-                break;
-            }
-        }
-        while (cards.size() > 0) {
-            Card card = cards.get(cards.iterator().next(), game);
-            cards.remove(card);
-            controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
         }
         return true;
     }
