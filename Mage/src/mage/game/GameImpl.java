@@ -1436,6 +1436,12 @@ public abstract class GameImpl implements Game, Serializable {
                     this.unloadCard(card);
                 }
             }
+            for (Card card: player.getGraveyard().getCards(this)) {
+                if (card.isCopy()) {
+                    player.getGraveyard().remove(card);
+                    this.unloadCard(card);
+                }
+            }
         }
         // (Isochron Scepter) 12/1/2004: If you don't want to cast the copy, you can choose not to; the copy ceases to exist the next time state-based actions are checked.
         for (Card card: this.getState().getExile().getAllCards(this)) {

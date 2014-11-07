@@ -210,7 +210,7 @@ public class Spell implements StackObject, Card {
                             }
                         }
                     }
-                    if (!card.isCopy() && game.getState().getZone(card.getId()) == Zone.STACK) {
+                    if (game.getState().getZone(card.getId()) == Zone.STACK) {
                         card.moveToZone(Zone.GRAVEYARD, ability.getId(), game, false);
                     }
                 }
