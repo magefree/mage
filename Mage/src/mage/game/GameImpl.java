@@ -291,6 +291,20 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
+    public void unloadCard(Card card) {
+        gameCards.remove(card.getId());
+        state.removeCard(card);
+        if (card.isSplitCard()) {
+            Card leftCard = ((SplitCard)card).getLeftHalfCard();
+            gameCards.remove(leftCard.getId());
+            state.removeCard(leftCard);
+            Card rightCard = ((SplitCard)card).getRightHalfCard();
+            gameCards.remove(rightCard.getId());
+            state.removeCard(rightCard);
+        }                
+    }
+
+    @Override
     public Collection<Card> getCards() {
         return gameCards.values();
     }
@@ -1414,6 +1428,25 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
 
+        // 704.5e
+        for (Player player: getPlayers().values()) {
+            for (Card card: player.getHand().getCards(this)) {
+                if (card.isCopy()) {
+                    player.getHand().remove(card);
+                    this.unloadCard(card);
+                }
+            }
+        }
+        // (Isochron Scepter) 12/1/2004: If you don't want to cast the copy, you can choose not to; the copy ceases to exist the next time state-based actions are checked.
+        for (Card card: this.getState().getExile().getAllCards(this)) {
+            if (card.isCopy()) {
+                this.getState().getExile().removeCard(card, this);
+                this.unloadCard(card);                
+            }
+        }   
+        // TODO Library + graveyard
+        
+        
         List<Permanent> planeswalkers = new ArrayList<>();
         List<Permanent> legendary = new ArrayList<>();
         for (Permanent perm: getBattlefield().getAllActivePermanents()) {
@@ -1649,13 +1682,6 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
 
-        // (Isochron Scepter) 12/1/2004: If you don't want to cast the copy, you can choose not to; the copy ceases to exist the next time state-based actions are checked.
-        for(Card card: this.getState().getExile().getAllCards(this)) {
-            if (card.isCopy()) {
-                this.getState().getExile().removeCard(card, this);
-                this.removeCard(card.getId());
-            }
-        }
         //TODO: implement the rest
 
         return somethingHappened;

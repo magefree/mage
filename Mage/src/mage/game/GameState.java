@@ -539,9 +539,15 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (Ability ability: card.getAbilities()) {
             addAbility(ability, card);
         }
+    }
+    
+    public void removeCard(Card card) {
+        zones.remove(card.getId());
+        // TODO Watchers?
+        // TODO Abilities?
         if (card.isSplitCard()) {
-            addCard( ((SplitCard)card).getLeftHalfCard());
-            addCard( ((SplitCard)card).getRightHalfCard());
+            removeCard( ((SplitCard)card).getLeftHalfCard());
+            removeCard( ((SplitCard)card).getRightHalfCard());
         }
     }
 

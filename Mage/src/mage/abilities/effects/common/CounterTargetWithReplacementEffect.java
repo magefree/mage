@@ -39,6 +39,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
+import mage.players.Player;
 
 /**
  * @author nantuko, North
@@ -78,25 +79,40 @@ public class CounterTargetWithReplacementEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         UUID objectId = source.getFirstTarget();
         UUID sourceId = source.getSourceId();
-
-        StackObject stackObject = game.getStack().getStackObject(objectId);
-        if (stackObject != null && !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, objectId, sourceId, stackObject.getControllerId()))) {
-            boolean spell = false;
-            if (stackObject instanceof Spell) {
-                game.rememberLKI(objectId, Zone.STACK, stackObject);
-                spell = true;
-            }
-            game.getStack().remove(stackObject);
-            if (spell && !((Spell) stackObject).isCopiedSpell()) {
-                MageObject card = game.getObject(stackObject.getSourceId());
-                if (card instanceof Card) {
-                    ((Card) card).moveToZone(targetZone, sourceId, game, flag);
-                } else {
-                    game.informPlayers("Server: Couldn't move card to zone = " + targetZone + " as it has other than Card type.");
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            StackObject stackObject = game.getStack().getStackObject(objectId);
+            if (stackObject != null && !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, objectId, sourceId, stackObject.getControllerId()))) {
+                boolean spell = false;
+                if (stackObject instanceof Spell) {
+                    game.rememberLKI(objectId, Zone.STACK, stackObject);
+                    spell = true;
                 }
-            }
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, objectId, sourceId, stackObject.getControllerId()));
-            return true;
+                game.getStack().remove(stackObject);
+                if (spell && !((Spell) stackObject).isCopiedSpell()) {
+                    MageObject mageObject = game.getObject(stackObject.getSourceId());
+                    if (mageObject instanceof Card) {
+                        Card card = (Card) mageObject;
+                        switch (targetZone) {
+                            case HAND:
+                                controller.moveCardToHandWithInfo(card, sourceId, game, Zone.STACK);
+                                break;
+                            case LIBRARY:
+                                controller.moveCardToLibraryWithInfo(card, sourceId, game, Zone.STACK, flag, true);
+                                break;
+                            case EXILED:
+                                controller.moveCardToExileWithInfo(card, null, "", sourceId, game, Zone.STACK);
+                                break;
+                            default:
+                                card.moveToZone(targetZone, sourceId, game, flag);
+                        }                        
+                    } else {
+                        return false;
+                    }
+                }
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, objectId, sourceId, stackObject.getControllerId()));
+                return true;
+            }            
         }
         return false;
     }
