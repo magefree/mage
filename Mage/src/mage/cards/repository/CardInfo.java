@@ -54,7 +54,7 @@ import org.apache.log4j.Logger;
 @DatabaseTable(tableName = "card")
 public class CardInfo {
 
-    private static final int MAX_RULE_LENGTH = 500;
+    private static final int MAX_RULE_LENGTH = 700;
 
     private static final String SEPARATOR = "@@@";
     @DatabaseField
