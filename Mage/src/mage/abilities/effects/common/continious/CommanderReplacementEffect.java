@@ -54,17 +54,20 @@ import mage.players.Player;
 public class CommanderReplacementEffect extends ReplacementEffectImpl {
 
     private final UUID commanderId;
+    private final boolean alsoLibrary;
 
-    public CommanderReplacementEffect(UUID commanderId) {
+    public CommanderReplacementEffect(UUID commanderId, boolean alsoLibrary) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If a commander would be put into its owner’s graveyard from anywhere, that player may put it into the command zone instead. If a commander would be put into the exile zone from anywhere, its owner may put it into the command zone instead.";
         this.commanderId = commanderId;
         this.duration = Duration.EndOfGame;
+        this.alsoLibrary = alsoLibrary;
     }
 
     public CommanderReplacementEffect(final CommanderReplacementEffect effect) {
         super(effect);
         this.commanderId = effect.commanderId;
+        this.alsoLibrary = effect.alsoLibrary;
     }
 
     @Override
@@ -112,7 +115,11 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && (((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD || ((ZoneChangeEvent)event).getToZone() == Zone.EXILED)) {
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && (
+                ((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD ||
+                ((ZoneChangeEvent)event).getToZone() == Zone.EXILED ||
+                (alsoLibrary && ((ZoneChangeEvent)event).getToZone() == Zone.LIBRARY))
+                ) {
             if (commanderId != null) {
                 if (((ZoneChangeEvent)event).getFromZone().equals(Zone.STACK)) {
                     Spell spell = game.getStack().getSpell(event.getTargetId());

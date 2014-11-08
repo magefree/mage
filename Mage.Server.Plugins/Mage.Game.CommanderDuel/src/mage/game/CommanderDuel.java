@@ -34,8 +34,8 @@ import mage.game.match.MatchType;
 
 public class CommanderDuel extends GameCommanderImpl {
    
-    public CommanderDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans) {
-        super(attackOption, range, freeMulligans);
+    public CommanderDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
+        super(attackOption, range, freeMulligans, startLife);
     }
 
     public CommanderDuel(final CommanderDuel game) {

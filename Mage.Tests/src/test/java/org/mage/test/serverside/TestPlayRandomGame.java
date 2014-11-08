@@ -39,7 +39,7 @@ public class TestPlayRandomGame extends MageTestBase {
     }
 
     private void playOneGame() throws GameException, FileNotFoundException, IllegalArgumentException {
-        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, 0);
+        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, 0, 20);
 
         Player computerA = createRandomPlayer("ComputerA");
         Deck deck = generateRandomDeck();

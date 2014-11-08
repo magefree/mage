@@ -44,8 +44,8 @@ public class FreeForAll extends GameImpl {
 
     private int numPlayers;
 
-    public FreeForAll(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans) {
-        super(attackOption, range, freeMulligans);
+    public FreeForAll(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
+        super(attackOption, range, freeMulligans, startLife);
     }
 
     public FreeForAll(final FreeForAll game) {
@@ -65,11 +65,6 @@ public class FreeForAll extends GameImpl {
 
     public void setNumPlayers(int numPlayers) {
         this.numPlayers = numPlayers;
-    }
-
-    @Override
-    public int getLife() {
-        return 20;
     }
 
     @Override

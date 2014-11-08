@@ -32,7 +32,7 @@ public class PlayGameTest extends MageTestBase {
     @Ignore
     @Test
     public void playOneGame() throws GameException, FileNotFoundException, IllegalArgumentException {
-        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, 0);
+        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, 0, 20);
 
         Player computerA = createPlayer("ComputerA", "Computer - minimax hybrid");
 //        Player playerA = createPlayer("ComputerA", "Computer - mad");

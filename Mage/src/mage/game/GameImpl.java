@@ -194,12 +194,15 @@ public abstract class GameImpl implements Game, Serializable {
     private boolean saveGame = false;
     private int priorityTime;
 
-    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans) {
+    private final int startLife;
+
+    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
         this.id = UUID.randomUUID();
         this.range = range;
         this.freeMulligans = freeMulligans;
         this.attackOption = attackOption;
         this.state = new GameState();
+        this.startLife = startLife;
         // this.actions = new LinkedList<MageAction>();
     }
 
@@ -235,6 +238,7 @@ public abstract class GameImpl implements Game, Serializable {
         this.scopeRelevant = game.scopeRelevant;
         this.priorityTime = game.priorityTime;
         this.saveGame = game.saveGame;
+        this.startLife = game.startLife;
     }
 
     @Override
@@ -2524,6 +2528,11 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public UUID getStartingPlayerId() {
         return startingPlayerId;
+    }
+    
+    @Override
+    public int getLife() {
+        return startLife;
     }
 
 }

@@ -44,7 +44,6 @@ import mage.game.events.TableEvent;
 import mage.game.events.TableEvent.EventType;
 import mage.game.events.TableEventSource;
 import mage.players.Player;
-import mage.players.PlayerList;
 import mage.util.DateFormat;
 import org.apache.log4j.Logger;
 

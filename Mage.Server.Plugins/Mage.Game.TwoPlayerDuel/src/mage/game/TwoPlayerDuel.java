@@ -40,8 +40,8 @@ import mage.players.Player;
 
 public class TwoPlayerDuel extends GameImpl {
 
-    public TwoPlayerDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans) {
-        super(attackOption, range, freeMulligans);
+    public TwoPlayerDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
+        super(attackOption, range, freeMulligans, startLife);
     }
 
     public TwoPlayerDuel(final TwoPlayerDuel game) {
@@ -56,11 +56,6 @@ public class TwoPlayerDuel extends GameImpl {
     @Override
     public int getNumPlayers() {
         return 2;
-    }
-
-    @Override
-    public int getLife() {
-        return 20;
     }
 
     @Override

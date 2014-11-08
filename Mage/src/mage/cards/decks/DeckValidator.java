@@ -41,7 +41,7 @@ public abstract class DeckValidator implements Serializable {
 
     protected String name;
 
-    protected Map<String, String> invalid = new HashMap<String, String>();
+    protected Map<String, String> invalid = new HashMap<>();
 
     public DeckValidator(String name) {
         this.name = name;

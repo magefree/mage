@@ -43,8 +43,15 @@ public class CommanderFreeForAllMatch extends MatchImpl {
 
     @Override
     public void startGame() throws GameException {
-        CommanderFreeForAll game = new CommanderFreeForAll(options.getAttackOption(), options.getRange(), options.getFreeMulligans());
+        int startLife = 40;
+        boolean alsoLibrary = false;
+        if (options.getDeckType().equals("Duel Commander")) {
+            startLife = 30;
+            alsoLibrary = true;
+        }
+        CommanderFreeForAll game = new CommanderFreeForAll(options.getAttackOption(), options.getRange(), options.getFreeMulligans(), startLife);
         game.setStartMessage(this.createGameStartMessage());
+        game.setAlsoLibrary(alsoLibrary);
         initGame(game);
         games.add(game);
     }

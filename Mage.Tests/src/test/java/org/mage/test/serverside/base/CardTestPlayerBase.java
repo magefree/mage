@@ -55,7 +55,7 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
             System.gc();
         }
 
-        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ONE, 0);
+        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ONE, 0, 20);
 
         playerA = createNewPlayer("PlayerA");
         playerA.setTestMode(true);
@@ -110,7 +110,7 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
             System.gc();
         }
 
-        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, 0);
+        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, 0, 20);
 
         playerA = createNewPlayer("ComputerA");
         playerA.setTestMode(true);

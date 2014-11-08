@@ -57,21 +57,15 @@ public abstract class GameCommanderImpl extends GameImpl {
 
     private final Map<UUID, Cards> mulliganedCards = new HashMap<>();
     private final Set<CommanderCombatDamageWatcher> commanderCombatWatcher = new HashSet<>();
+    
+    protected boolean alsoLibrary; // replace also commander going to library
 
-    public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans) {
-        super(attackOption, range, freeMulligans);
+    public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
+        super(attackOption, range, freeMulligans, startLife);
     }
 
     public GameCommanderImpl(final GameCommanderImpl game) {
         super(game);
-    }
-
-	// MTG Rules 20121001
-	// 903.7. Once the starting player has been determined, each player sets his or her life total to 40 and
-	// draws a hand of seven cards.
-    @Override
-    public int getLife() {
-        return 40;
     }
 
     @Override
@@ -87,10 +81,10 @@ public abstract class GameCommanderImpl extends GameImpl {
                     if (commander != null) {
                         player.setCommanderId(commander.getId());
                         commander.moveToZone(Zone.COMMAND, null, this, true);
-                        ability.addEffect(new CommanderReplacementEffect(commander.getId()));
+                        ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoLibrary));
                         ability.addEffect(new CommanderCostModification(commander.getId()));
                         ability.addEffect(new CommanderManaReplacementEffect(player.getId(), commander.getSpellAbility().getManaCosts().getMana()));
-                        getState().setValue(commander.getId() + "_castCount", new Integer(0));
+                        getState().setValue(commander.getId() + "_castCount", 0);
                         CommanderCombatDamageWatcher watcher = new CommanderCombatDamageWatcher(commander.getId());
                         getState().getWatchers().add(watcher);
                         this.commanderCombatWatcher.add(watcher);
@@ -135,16 +129,16 @@ public abstract class GameCommanderImpl extends GameImpl {
             int deduction = 1;
             if (freeMulligans > 0) {
                 if (usedFreeMulligans != null && usedFreeMulligans.containsKey(player.getId())) {
-                    int used = usedFreeMulligans.get(player.getId()).intValue();
+                    int used = usedFreeMulligans.get(player.getId());
                     if (used < freeMulligans ) {
                         deduction = 0;
-                        usedFreeMulligans.put(player.getId(), new Integer(used+1));
+                        usedFreeMulligans.put(player.getId(), used+1);
                     }
                 } else {
                     deduction = 0;{
 
                 }
-                    usedFreeMulligans.put(player.getId(), new Integer(1));
+                    usedFreeMulligans.put(player.getId(), 1);
                 }
             }
             player.drawCards(numCards - deduction, this);
@@ -210,4 +204,9 @@ public abstract class GameCommanderImpl extends GameImpl {
     public boolean isOpponent(Player player, UUID playerToCheck) {
        return !player.getId().equals(playerToCheck);
     }
+
+    public void setAlsoLibrary(boolean alsoLibrary) {
+        this.alsoLibrary = alsoLibrary;
+    }
+
 }
