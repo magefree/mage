@@ -31,6 +31,7 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,6 +45,7 @@ import mage.cards.CardImpl;
 import mage.cards.mock.MockCard;
 import mage.cards.mock.MockSplitCard;
 import mage.constants.SpellAbilityType;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -51,6 +53,8 @@ import mage.constants.SpellAbilityType;
  */
 @DatabaseTable(tableName = "card")
 public class CardInfo {
+
+    private static final int MAX_RULE_LENGTH = 500;
 
     private static final String SEPARATOR = "@@@";
     @DatabaseField
@@ -77,7 +81,7 @@ public class CardInfo {
     protected String supertypes;
     @DatabaseField
     protected String manaCosts;
-    @DatabaseField(dataType = DataType.STRING, width = 800)
+    @DatabaseField(dataType = DataType.STRING, width = MAX_RULE_LENGTH)
     protected String rules;
     @DatabaseField
     protected boolean black;
@@ -138,7 +142,28 @@ public class CardInfo {
         this.setSubtypes(card.getSubtype());
         this.setSuperTypes(card.getSupertype());
         this.setManaCosts(card.getManaCost().getSymbols());
-        this.setRules(card.getRules());
+
+        int length = 0;
+        for (String rule :card.getRules()) {
+            length += rule.length();
+        }
+        if (length > MAX_RULE_LENGTH) {
+            length = 0;
+            ArrayList<String> shortRules = new ArrayList<>();
+            for (String rule :card.getRules()) {
+                if (length + rule.length() + 3 <= MAX_RULE_LENGTH) {
+                    shortRules.add(rule);
+                    length += rule.length() + 3;
+                } else {
+                    shortRules.add(rule.substring(0, MAX_RULE_LENGTH - (length + 3)));
+                    break;
+                }
+            }
+            Logger.getLogger(CardInfo.class).warn("Card rule text was cut - cardname: " + card.getName());
+            this.setRules(shortRules);
+        } else {
+            this.setRules(card.getRules());
+        }
 
         SpellAbility spellAbility = card.getSpellAbility();
         if (spellAbility != null) {
