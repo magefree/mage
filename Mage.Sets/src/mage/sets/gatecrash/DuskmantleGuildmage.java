@@ -107,7 +107,7 @@ class CardPutIntoOpponentGraveThisTurn extends DelayedTriggeredAbility {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             UUID cardId = event.getTargetId();
             Card card = game.getCard(cardId);
-            if (zEvent.getToZone() == Zone.GRAVEYARD && !card.isCopy()
+            if (card != null && zEvent.getToZone() == Zone.GRAVEYARD && !card.isCopy()
                     && game.getOpponents(controllerId).contains(card.getOwnerId())) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(card.getOwnerId()));
