@@ -97,7 +97,7 @@ class VulturousZombieTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null
+            if (card != null && !card.isCopy()
                     && game.getOpponents(controllerId).contains(card.getOwnerId())) {
                 return true;
             }

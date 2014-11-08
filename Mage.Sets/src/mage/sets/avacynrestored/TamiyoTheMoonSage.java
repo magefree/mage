@@ -149,7 +149,7 @@ class TamiyoTheMoonSageTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null && card.getOwnerId().equals(this.getControllerId())) {
+            if (card != null && !card.isCopy() && card.getOwnerId().equals(this.getControllerId())) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(card.getId()));
                 return true;
             }
