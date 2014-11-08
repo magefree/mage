@@ -47,6 +47,7 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
+import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
@@ -100,6 +101,14 @@ public class CardUtil {
             throw new IllegalArgumentException("Params can't be null");
         }
 
+        if (card1.getCardType().contains(CardType.CREATURE) && card2.getCardType().contains(CardType.CREATURE)) {
+            if (card1.getAbilities().contains(ChangelingAbility.getInstance()) ||
+                    card1.getSubtype().contains(ChangelingAbility.ALL_CREATURE_TYPE) ||
+                    card2.getAbilities().contains(ChangelingAbility.getInstance()) ||
+                    card2.getSubtype().contains(ChangelingAbility.ALL_CREATURE_TYPE)) {
+                return true;
+            }
+        }
         for (String subtype : card1.getSubtype()) {
             if (card2.getSubtype().contains(subtype)) {
                 return true;
