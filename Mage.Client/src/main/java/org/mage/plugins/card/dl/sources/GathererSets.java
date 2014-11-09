@@ -38,7 +38,7 @@ public class GathererSets implements Iterable<DownloadJob> {
                                                  "ALA", "CON", "ARB",
                                                  "ZEN", "WWK", "ROE", 
                                                  "SOM", "MBS", "NPH",
-                                                 "CMD", "PC2",
+                                                 "CMD", "C13", "C14", "PC2",
                                                  "ISD", "DKA", "AVR", 
                                                  "RTR", "GTC", "DGM",
                                                  "MMA",

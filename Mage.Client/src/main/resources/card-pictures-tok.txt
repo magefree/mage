@@ -1,3 +1,18 @@
+
+|Generate|TOK:KTK|Bear|
+|Generate|TOK:KTK|Bird|
+|Generate|TOK:KTK|Goblin|
+|Generate|TOK:KTK|Morph|
+|Generate|TOK:KTK|Snake|
+|Generate|TOK:KTK|Spirit Warrior|
+|Generate|TOK:KTK|Spirit|
+|Generate|TOK:KTK|Vampire|
+|Generate|TOK:KTK|Warrior 1|
+|Generate|TOK:KTK|Warrior 2|
+|Generate|TOK:KTK|Zombie|
+|Generate|EMBLEM!:KTK|Emblem Sarkhan, the Dragonspeaker|
+|Generate|EMBLEM!:KTK|Emblem Sorin, Solemn Visitor|
+
 |Generate|TOK:M15|Sliver|
 |Generate|TOK:M15|Soldier|
 |Generate|TOK:M15|Zombie|

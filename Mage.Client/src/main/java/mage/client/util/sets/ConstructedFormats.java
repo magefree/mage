@@ -17,7 +17,7 @@ import mage.constants.SetType;
  */
 public class ConstructedFormats {
 
-    private static GregorianCalendar calendar = new GregorianCalendar();
+    private static final GregorianCalendar calendar = new GregorianCalendar();
     
 
     public static final String ALL = "- All Sets";
@@ -66,6 +66,7 @@ public class ConstructedFormats {
             "Vintage Masters",
             "Conspiracy",
             "Modern Masters",
+            "Commander 2014 Edition",
             "Commander 2013 Edition",
             "Commander",
             "Planechase 2012",
@@ -416,6 +417,9 @@ public class ConstructedFormats {
         }
         if (format.equals("Commander 2013 Edition")) {
             return Arrays.asList("C13");
+        }
+        if (format.equals("Commander 2014 Edition")) {
+            return Arrays.asList("C14");
         }
         if (format.equals("Planechase 2012")) {
             return Arrays.asList("PC2");
