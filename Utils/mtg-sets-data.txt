@@ -22,6 +22,7 @@ Born of the Gods|BNG|
 Champions of Kamigawa|CHK|
 Chronicles|CHR|
 Commander 2013 Edition|C13|
+Commander 2014 Edition|C14|
 Conflux|CON|
 Coldsnap|CSP|
 Dark Ascension|DKA|

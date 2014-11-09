@@ -11,6 +11,7 @@ Champions of Kamigawa|championsofkamigawa|
 Classic Sixth Edition|sixthedition|
 Coldsnap|coldsnap|
 Commander 2013 Edition|commander2013|
+Commander 2014 Edition|commander2014|
 Conflux|conflux|
 Dark Ascension|darkascension|
 Darksteel|darksteel|
