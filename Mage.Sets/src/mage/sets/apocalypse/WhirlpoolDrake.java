@@ -100,9 +100,7 @@ class WhirlpoolSDrakeTriggeredEffect extends OneShotEffect {
         if (controller != null) {
             int cardsHand = controller.getHand().size();
             if (cardsHand > 0){
-                Cards cards = controller.getHand();
-                for (UUID cardId: cards) {
-                    Card card = game.getCard(cardId);
+                for (Card card: controller.getHand().getCards(game)) {
                     if (card != null) {
                         controller.removeFromHand(card, game);
                         card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);

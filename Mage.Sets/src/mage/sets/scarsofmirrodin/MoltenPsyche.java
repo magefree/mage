@@ -90,10 +90,9 @@ class MoltenPsycheEffect extends OneShotEffect {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 int count = player.getHand().size();
-                for (UUID cardId: player.getHand()) {
-                    Card card = game.getCard(cardId);
+                for (Card card: player.getHand().getCards(game)) {
                     if (card != null) {
-                        player.removeFromHand(card, game);                                
+                        player.removeFromHand(card, game);
                         card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                     }
                 }
