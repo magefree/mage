@@ -25,49 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.sets.vintagemasters;
 
 import java.util.UUID;
-
-import mage.constants.*;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.UnattachedTriggeredAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.SacrificeEquippedEffect;
-import mage.abilities.effects.common.continious.BoostEquippedEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EquipAbility;
-import mage.abilities.keyword.InfectAbility;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.costs.common.ExileFromGraveCost;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author nantuko
+ * @author LevelX2
  */
-public class GraftedExoskeleton extends CardImpl {
+public class Psychatog extends CardImpl {
 
-    public GraftedExoskeleton(UUID ownerId) {
-        super(ownerId, 162, "Grafted Exoskeleton", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "SOM";
-        this.subtype.add("Equipment");
+    public Psychatog(UUID ownerId) {
+        super(ownerId, 258, "Psychatog", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
+        this.expansionSetCode = "VMA";
+        this.subtype.add("Atog");
+
+        this.color.setBlue(true);
+        this.color.setBlack(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
+
+        // Discard a card: Psychatog gets +1/+1 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,1,Duration.EndOfTurn), new DiscardCardCost()));
         
-        // Equipped creature gets +2/+2 and has infect.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(InfectAbility.getInstance(), AttachmentType.EQUIPMENT)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
+        // Exile two cards from your graveyard: Psychatog gets +1/+1 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,1,Duration.EndOfTurn), new ExileFromGraveCost(new TargetCardInYourGraveyard(2, new FilterCard("cards from your graveyard")))));
 
-        // Whenever Grafted Exoskeleton becomes unattached from a permanent, sacrifice that permanent.
-        this.addAbility(new UnattachedTriggeredAbility(new SacrificeEquippedEffect(), false));
-
-        // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public GraftedExoskeleton(final GraftedExoskeleton card) {
+    public Psychatog(final Psychatog card) {
         super(card);
     }
 
     @Override
-    public GraftedExoskeleton copy() {
-        return new GraftedExoskeleton(this);
+    public Psychatog copy() {
+        return new Psychatog(this);
     }
 }

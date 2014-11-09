@@ -50,8 +50,12 @@ public class WarlordsAxe extends CardImpl {
         super(ownerId, 220, "Warlord's Axe", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "M11";
         this.subtype.add("Equipment");
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
+
+        // Equipped creature gets +3/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 1)));
+
+        // Equip {4}
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
     }
 
     protected WarlordsAxe(WarlordsAxe me) {

@@ -25,49 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.sets.odyssey;
 
 import java.util.UUID;
 
-import mage.constants.*;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.UnattachedTriggeredAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.SacrificeEquippedEffect;
-import mage.abilities.effects.common.continious.BoostEquippedEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EquipAbility;
-import mage.abilities.keyword.InfectAbility;
-import mage.cards.CardImpl;
-
 /**
  *
- * @author nantuko
+ * @author LevelX2
  */
-public class GraftedExoskeleton extends CardImpl {
+public class Psychatog extends mage.sets.vintagemasters.Psychatog {
 
-    public GraftedExoskeleton(UUID ownerId) {
-        super(ownerId, 162, "Grafted Exoskeleton", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "SOM";
-        this.subtype.add("Equipment");
-        
-        // Equipped creature gets +2/+2 and has infect.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(InfectAbility.getInstance(), AttachmentType.EQUIPMENT)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
-
-        // Whenever Grafted Exoskeleton becomes unattached from a permanent, sacrifice that permanent.
-        this.addAbility(new UnattachedTriggeredAbility(new SacrificeEquippedEffect(), false));
-
-        // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+    public Psychatog(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 292;
+        this.expansionSetCode = "ODY";
     }
 
-    public GraftedExoskeleton(final GraftedExoskeleton card) {
+    public Psychatog(final Psychatog card) {
         super(card);
     }
 
     @Override
-    public GraftedExoskeleton copy() {
-        return new GraftedExoskeleton(this);
+    public Psychatog copy() {
+        return new Psychatog(this);
     }
 }
