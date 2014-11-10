@@ -38,7 +38,6 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.Card;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.game.Game;
 
 import java.util.List;

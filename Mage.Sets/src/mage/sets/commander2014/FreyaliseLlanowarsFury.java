@@ -32,14 +32,17 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -71,6 +74,8 @@ public class FreyaliseLlanowarsFury extends CardImpl {
 
         this.color.setGreen(true);
 
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
+        
         // +2: Put a 1/1 green Elf Druid creature token onto the battlefield with "{tap}: Add {G} to your mana pool."
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new FreyaliseLlanowarsFuryToken()), 2));
         // -2: Destroy target artifact or enchantment.
@@ -78,7 +83,7 @@ public class FreyaliseLlanowarsFury extends CardImpl {
         loyaltyAbility.addTarget(new TargetPermanent(filter));
         this.addAbility(loyaltyAbility);
         // -6: Draw a card for each green creature you control.
-        this.addAbility(new LoyaltyAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)), -6));
+        this.addAbility(new LoyaltyAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filterGreen)), -6));
 
         // Freyalise, Llanowar's Fury can be your commander.
         this.addAbility(CanBeYourCommanderAbility.getInstance());
