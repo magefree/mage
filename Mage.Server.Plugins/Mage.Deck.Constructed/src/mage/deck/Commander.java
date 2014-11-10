@@ -32,6 +32,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
@@ -130,21 +131,26 @@ public class Commander extends DeckValidator {
 
         if (deck.getSideboard().size() == 1) {
             Card commander = (Card) deck.getSideboard().toArray()[0];
-            if (commander != null && commander.getCardType().contains(CardType.CREATURE) && commander.getSupertype().contains("Legendary")) {
+            if (commander == null) {
+                invalid.put("Commander", "Commander invalide ");
+                return false;
+            }
+            if ((commander.getCardType().contains(CardType.CREATURE) && commander.getSupertype().contains("Legendary")) ||
+                    (commander.getCardType().contains(CardType.PLANESWALKER) && commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
                 if (!bannedCommander.contains(commander.getName())) {
                     FilterMana color = getColorIdentity(commander);
                     for (Card card : deck.getCards()) {
                         if (!cardHasValideColor(color, card)) {
-                            invalid.put(card.getName(), "Invalid color");
+                            invalid.put(card.getName(), "Invalid color (" + commander.getName() +")");
                             valid = false;
                         }
                     }
                 } else {
-                    invalid.put("Commander", "Commander banned");
+                    invalid.put("Commander", "Commander banned (" + commander.getName() +")");
                     valid = false;
                 }
             } else {
-                invalid.put("Commander", "Commander invalide");
+                invalid.put("Commander", "Commander invalide (" + commander.getName() +")");
                 valid = false;
             }
         } else {

@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
 public class Modes extends LinkedHashMap<UUID, Mode> {
 
     private UUID modeId;
-    private final Set<UUID> selectedModes = new LinkedHashSet<UUID>();
+    private final Set<UUID> selectedModes = new LinkedHashSet<>();
     private int minModes;
     private int maxModes;
     private TargetController modeChooser;

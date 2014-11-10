@@ -30,6 +30,7 @@ package mage.abilities.effects.common.continious;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.mana.BlackManaAbility;
@@ -83,19 +84,32 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
             Permanent land = game.getPermanent(enchantment.getAttachedTo());
             if (land != null) {
                 switch (layer) {
+                    case ColorChangingEffects_5:
+                        land.getColor().setWhite(false);
+                        land.getColor().setGreen(false);
+                        land.getColor().setBlack(false);
+                        land.getColor().setBlue(false);
+                        land.getColor().setRed(false);
+                        break;
                     case AbilityAddingRemovingEffects_6:
                         land.removeAllAbilities(source.getSourceId(), game);
                         for (String landType : landTypes)  {
-                            if (landType.equals("Swamp")) {
-                                land.addAbility(new BlackManaAbility(), source.getSourceId(), game);                                
-                            } else if (landType.equals("Mountain")) {
-                                land.addAbility(new RedManaAbility(), source.getSourceId(), game);
-                            } else if (landType.equals("Forest")) {
-                                land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
-                            } else if (landType.equals("Island")) {
-                                land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
-                            } else if (landType.equals("Plains")) {
-                                land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
+                            switch (landType) {
+                                case "Swamp":
+                                    land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
+                                    break;
+                                case "Mountain":
+                                    land.addAbility(new RedManaAbility(), source.getSourceId(), game);
+                                    break;
+                                case "Forest":
+                                    land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
+                                    break;
+                                case "Island":
+                                    land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
+                                    break;
+                                case "Plains":
+                                    land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
+                                    break;
                             }
                         }
                         break;
