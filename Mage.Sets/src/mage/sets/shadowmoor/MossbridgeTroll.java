@@ -64,7 +64,7 @@ public class MossbridgeTroll extends CardImpl {
     }
 
     public MossbridgeTroll(UUID ownerId) {
-        super(ownerId, 123, "Mossbridge Troll", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
+        super(ownerId, 123, "Mossbridge Troll", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
         this.expansionSetCode = "SHM";
         this.subtype.add("Troll");
 

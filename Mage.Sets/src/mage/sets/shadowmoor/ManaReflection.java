@@ -42,6 +42,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
+import mage.watchers.common.PermanentTappedForManaWatcher;
 
 /**
  *
@@ -50,13 +51,14 @@ import mage.game.events.ManaEvent;
 public class ManaReflection extends CardImpl {
 
     public ManaReflection(UUID ownerId) {
-        super(ownerId, 122, "Mana Reflection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");
+        super(ownerId, 122, "Mana Reflection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");
         this.expansionSetCode = "SHM";
 
         this.color.setGreen(true);
 
         // If you tap a permanent for mana, it produces twice as much of that mana instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ManaReflectionReplacementEffect()));
+        this.addWatcher(new PermanentTappedForManaWatcher());
 
     }
 
@@ -115,7 +117,14 @@ class ManaReflectionReplacementEffect extends ReplacementEffectImpl {
         if (event.getType() == GameEvent.EventType.ADD_MANA
                 && event.getPlayerId().equals(source.getControllerId())
                 && game.getPermanentOrLKIBattlefield(event.getSourceId()) != null) {
-            return true;
+            UUID permanentId = game.getPermanentOrLKIBattlefield(event.getSourceId()).getId();
+            PermanentTappedForManaWatcher watcher = (PermanentTappedForManaWatcher) game.getState().getWatchers().get("PermanentTappedForMana");
+            if (watcher != null) {
+                if (watcher.permanentId.contains(permanentId)) {
+                    watcher.permanentId.remove(permanentId);
+                    return true;
+                }
+            }
         }
         return false;
     }
@@ -124,5 +133,4 @@ class ManaReflectionReplacementEffect extends ReplacementEffectImpl {
     public ManaReflectionReplacementEffect copy() {
         return new ManaReflectionReplacementEffect(this);
     }
-
 }
