@@ -209,7 +209,7 @@ public class TestPlayer extends ComputerPlayer {
                     if (group.startsWith("planeswalker=")) {
                         String planeswalkerName = group.substring(group.indexOf("planeswalker=") + 13);
                         for (Permanent permanent :game.getBattlefield().getAllActivePermanents(new FilterPlaneswalkerPermanent(), game)) {
-                            if (permanent.getName().equals(planeswalkerName)) {
+                            if (permanent.getLogName().equals(planeswalkerName)) {
                                 defenderId = permanent.getId();                                        
                             }
                         }

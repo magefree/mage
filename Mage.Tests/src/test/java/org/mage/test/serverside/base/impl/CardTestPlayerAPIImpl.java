@@ -320,7 +320,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         int foundToughness = 0;
         int found = 0;
         for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {
-            if (permanent.getName().equals(cardName) && permanent.getControllerId().equals(player.getId())) {
+            if (permanent.getLogName().equals(cardName) && permanent.getControllerId().equals(player.getId())) {
                 count++;
                 if (scope.equals(Filter.ComparisonScope.All)) {
                     Assert.assertEquals("Power is not the same (" + power + " vs. " + permanent.getPower().getValue() + ")",
@@ -449,7 +449,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         int actualCount = 0;
         for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {
             if (permanent.getControllerId().equals(player.getId())) {
-                if (permanent.getName().equals(cardName)) {
+                if (permanent.getLogName().equals(cardName)) {
                     actualCount++;
                 }
             }
