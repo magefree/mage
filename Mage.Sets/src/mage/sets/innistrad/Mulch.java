@@ -28,16 +28,17 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -85,27 +86,24 @@ class MulchEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Cards cards = new CardsImpl(Zone.PICK);
-            int count = Math.min(player.getLibrary().size(), 4);
-            for (int i = 0; i < count; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
+            Cards cards = new CardsImpl();
+            int count = Math.min(controller.getLibrary().size(), 4);
+            cards.addAll(controller.getLibrary().getTopCards(game, count));
+            if (!cards.isEmpty()) {
+                for (Card card: cards.getCards(game)) {
                     cards.add(card);
-                    game.setZone(card.getId(), Zone.PICK);
                     if (card.getCardType().contains(CardType.LAND)) {
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                        controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                     } else {
-                        card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
+                        controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                     }
                 }
+                controller.revealCards(sourceObject.getLogName(), cards, game);
             }
-            Card sourceCard = game.getCard(source.getSourceId());
-            if (!cards.isEmpty() && sourceCard != null) {
-                player.revealCards(sourceCard.getName(), cards, game);
-                return true;
-            }
+            return true;
         }
         return false;
     }
