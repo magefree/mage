@@ -30,7 +30,6 @@ package mage.sets.mercadianmasques;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
@@ -38,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.filter.common.FilterLandCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -49,6 +49,11 @@ import mage.target.common.TargetCardInLibrary;
 public class LandGrant extends CardImpl {
 
     private static final FilterLandCard filter = new FilterLandCard("Forest card");
+    
+    static {
+        filter.add(new SubtypePredicate("Forest"));
+    }
+    
     public LandGrant(UUID ownerId) {
         super(ownerId, 255, "Land Grant", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "MMQ";
@@ -57,7 +62,7 @@ public class LandGrant extends CardImpl {
 
         // If you have no land cards in hand, you may reveal your hand rather than pay Land Grant's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new LandGrantReavealCost(), new LandGrantCondition(),
-            "If you have no land cards in hand, you may reveal your hand rather than pay Land Grant's mana cost."));
+            "If you have no land cards in hand, you may reveal your hand rather than pay {this}'s mana cost."));
 
         // Search your library for a Forest card, reveal that card, and put it into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true));
