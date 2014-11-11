@@ -28,7 +28,6 @@
 package mage.filter.predicate.mageobject;
 
 import mage.MageObject;
-import mage.abilities.keyword.ChangelingAbility;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 
