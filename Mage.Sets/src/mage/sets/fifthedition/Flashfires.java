@@ -44,7 +44,7 @@ public class Flashfires extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Plains");
     
     static{
-        filter.add(new SubtypePredicate("Plain"));
+        filter.add(new SubtypePredicate("Plains"));
     }
     
     public Flashfires(UUID ownerId) {
