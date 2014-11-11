@@ -176,7 +176,7 @@ public class Library implements Serializable {
     }
 
     public List<Card> getCards(Game game) {
-        List<Card> cards = new ArrayList<Card>();
+        List<Card> cards = new ArrayList<>();
         for (UUID cardId: library) {
             cards.add(game.getCard(cardId));
         }
@@ -184,7 +184,7 @@ public class Library implements Serializable {
     }
 
     public List<Card> getTopCards(Game game, int amount) {
-        List<Card> cards = new ArrayList<Card>();
+        List<Card> cards = new ArrayList<>();
         Iterator<UUID> it = library.iterator();
         int count = 0;
         while(it.hasNext() && count < amount) {
@@ -199,7 +199,7 @@ public class Library implements Serializable {
     }
 
     public Collection<Card> getUniqueCards(Game game) {
-        Map<String, Card> cards = new HashMap<String, Card>();
+        Map<String, Card> cards = new HashMap<>();
         for (UUID cardId: library) {
             Card card = game.getCard(cardId);
             if (!cards.containsKey(card.getName())) {

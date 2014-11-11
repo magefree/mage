@@ -611,7 +611,10 @@ public class Spell implements StackObject, Card {
      */
     @Override
     public int getConvertedManaCost() {
-        int cmc = 0;        
+        int cmc = 0;
+        if (this.isMorphCard() && this.isFaceDown()) {
+            return 0;
+        }
         for (Ability spellAbility: spellAbilities) {
             int xMultiplier = 0;
             for (String symbolString :spellAbility.getManaCosts().getSymbols()) {
