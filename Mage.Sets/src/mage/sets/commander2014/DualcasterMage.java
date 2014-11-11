@@ -25,56 +25,62 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenth;
+package mage.sets.commander2014;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.TargetSpell;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class DoomedNecromancer extends CardImpl {
+public class DualcasterMage extends CardImpl {
 
-    public DoomedNecromancer(UUID ownerId) {
-        super(ownerId, 137, "Doomed Necromancer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "10E";
+    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
+
+    static {
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)));
+    }
+
+    public DualcasterMage(UUID ownerId) {
+        super(ownerId, 34, "Dualcaster Mage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
+        this.expansionSetCode = "C14";
         this.subtype.add("Human");
-        this.subtype.add("Cleric");
-        this.subtype.add("Mercenary");
-        this.color.setBlack(true);
+        this.subtype.add("Wizard");
+
+        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {B}, {tap}, Sacrifice Doomed Necromancer: Return target creature card from your graveyard to the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ColoredManaCost(ColoredManaSymbol.B));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
-        this.addAbility(ability);
+        // Flash
+        this.addAbility(FlashAbility.getInstance());
         
+        // When Dualcaster Mage enters the battlefield, copy target instant or sorcery spell. You may choose new targets for the copy.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new CopyTargetSpellEffect(), false);
+        ability.addTarget(new TargetSpell(filter));
+        this.addAbility(ability);
+
     }
 
-    public DoomedNecromancer(final DoomedNecromancer card) {
+    public DualcasterMage(final DualcasterMage card) {
         super(card);
     }
 
     @Override
-    public DoomedNecromancer copy() {
-        return new DoomedNecromancer(this);
+    public DualcasterMage copy() {
+        return new DualcasterMage(this);
     }
 }

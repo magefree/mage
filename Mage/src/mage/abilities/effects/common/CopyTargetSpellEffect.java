@@ -83,7 +83,7 @@ public class CopyTargetSpellEffect extends OneShotEffect {
    @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Copy target ").append(mode.getTargets().get(0).getTargetName()).append(". You may choose new targets for the copy");
+        sb.append("copy target ").append(mode.getTargets().get(0).getTargetName()).append(". You may choose new targets for the copy");
         return sb.toString();
     }
 }
