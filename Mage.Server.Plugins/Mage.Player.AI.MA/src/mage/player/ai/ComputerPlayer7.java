@@ -185,10 +185,24 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 root = root.children.get(0);
                 // int bestScore = root.getScore();
                 // if (bestScore > currentScore || allowBadMoves) {
-                actions = new LinkedList<>(root.abilities);
-                combat = root.combat;
-                for (Ability ability : actions) {
-                    actionCache.add(ability.getRule() + "_" + ability.getSourceId());
+                
+                // prevent repeating always the same action with no cost
+                boolean doThis = true;
+                if (root.abilities.size() == 1) {
+                    for (Ability ability:root.abilities) {
+                        if (ability.getManaCosts().convertedManaCost() == 0 && ability.getCosts().isEmpty()) {
+                            if (actionCache.contains(ability.getRule() + "_" + ability.getSourceId())) {
+                                doThis = false; // don't do it again
+                            }
+                        }
+                    }
+                }
+                if (doThis) {
+                    actions = new LinkedList<>(root.abilities);
+                    combat = root.combat;
+                    for (Ability ability : actions) {
+                        actionCache.add(ability.getRule() + "_" + ability.getSourceId());
+                    }
                 }
             } else {
                 logger.info("[" + game.getPlayer(playerId).getName() + "][pre] Action: skip");
