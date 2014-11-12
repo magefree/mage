@@ -805,6 +805,41 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public boolean putCardsOnTopOfLibrary(Cards cards, Game game, Ability source, boolean anyOrder) {
+        if (cards.size() != 0) {
+            if (!anyOrder) {
+                for (UUID cardId : cards) {
+                    Card card =game.getCard(cardId);
+
+                    if (card != null) {
+                        Zone fromZone = game.getState().getZone(cardId);
+                        this.moveCardToLibraryWithInfo(card, source.getSourceId(), game, fromZone, true, false);
+                    }
+                }
+            } else {
+                TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the top of your library (last one chosen will be topmost)"));
+                target.setRequired(true);
+                while (isInGame() && cards.size() > 1) {
+                    this.choose(Outcome.Neutral, cards, target, game);
+                    Card chosenCard = cards.get(target.getFirstTarget(), game);
+                    if (chosenCard != null) {
+                        cards.remove(chosenCard);
+                        Zone fromZone = game.getState().getZone(chosenCard.getId());
+                        this.moveCardToLibraryWithInfo(chosenCard, source.getSourceId(), game, fromZone, true, false);
+                    }
+                    target.clearChosen();
+                }
+                if (cards.size() == 1) {
+                    Card chosenCard = cards.get(cards.iterator().next(), game);
+                    Zone fromZone = game.getState().getZone(chosenCard.getId());
+                    this.moveCardToLibraryWithInfo(chosenCard, source.getSourceId(), game, fromZone, true, false);
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
     public void setCastSourceIdWithoutMana(UUID sourceId) {
         castSourceIdWithoutMana = sourceId;
     }

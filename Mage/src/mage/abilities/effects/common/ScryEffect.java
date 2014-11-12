@@ -49,7 +49,6 @@ import mage.util.CardUtil;
 public class ScryEffect extends OneShotEffect {
 
     protected static FilterCard filter1 = new FilterCard("card to put on the bottom of your library");
-    protected static FilterCard filter2 = new FilterCard("card to put on the top of your library (last chosen will be on top)");
 
     protected int scryNumber;
 
@@ -91,22 +90,7 @@ public class ScryEffect extends OneShotEffect {
                 target1.clearChosen();
             }
             // move cards to the top of the library
-            if (cards.size() > 1) {
-                TargetCard target2 = new TargetCard(Zone.LIBRARY, filter2);
-                while (player.isInGame() && cards.size() > 1) {
-                    player.choose(Outcome.Benefit, cards, target2, game);
-                    Card card = cards.get(target2.getFirstTarget(), game);
-                    if (card != null) {
-                        cards.remove(card);
-                        player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, true, false);
-                    }
-                    target2.clearChosen();
-                }
-            }
-            if (cards.size() == 1) {
-                Card card = cards.get(cards.iterator().next(), game);
-                player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, true, false);
-            }
+            player.putCardsOnTopOfLibrary(cards, game, source, true);
             game.fireEvent(new GameEvent(GameEvent.EventType.SCRY, source.getControllerId(), source.getSourceId(), source.getControllerId()));
             player.setTopCardRevealed(revealed);
             return true;

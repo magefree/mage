@@ -74,8 +74,8 @@ public abstract class DraftCube {
     private final String name;
     private final int boosterSize = 15;
 
-    protected List<CardIdentity> cubeCards = new ArrayList<CardIdentity>();
-    protected List<CardIdentity> leftCubeCards = new ArrayList<CardIdentity>();
+    protected List<CardIdentity> cubeCards = new ArrayList<>();
+    protected List<CardIdentity> leftCubeCards = new ArrayList<>();
 
     public DraftCube(String name) {
         this.name = name;
@@ -90,7 +90,7 @@ public abstract class DraftCube {
     }
     
     public List<Card> createBooster() {
-        List<Card> booster = new ArrayList<Card>();
+        List<Card> booster = new ArrayList<>();
         if (leftCubeCards.isEmpty()) {
             leftCubeCards.addAll(cubeCards);
         }

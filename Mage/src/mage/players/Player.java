@@ -297,7 +297,7 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean playMana(ManaCost unpaid, Game game);
 
     /**
-     * Moves the cards form <cards> to the bottom of the players library.
+     * Moves the cards from cards to the bottom of the players library.
      *
      * @param cards - list of cards that have to be moved
      * @param game - game
@@ -306,6 +306,17 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     boolean putCardsOnBottomOfLibrary(Cards cards, Game game, Ability source, boolean anyOrder);
+
+    /**
+     * Moves the cards from cards to the top of players library.
+     *
+     * @param cards - list of cards that have to be moved
+     * @param game - game
+     * @param anyOrder - true if player can determine the order of the cards
+     * @param source - source ability
+     * @return
+     */
+    boolean putCardsOnTopOfLibrary(Cards cards, Game game, Ability source, boolean anyOrder);
 
     // set the value for X mana spells and abilities
     int announceXMana(int min, int max, String message, Game game, Ability ability);
