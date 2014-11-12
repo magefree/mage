@@ -28,17 +28,12 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageMultiEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.CardImpl;
-import mage.constants.Outcome;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetCreatureOrPlayerAmount;
 
 /**
  *
@@ -53,8 +48,11 @@ public class ForkedBolt extends CardImpl {
         this.color.setRed(true);
 
         // Forked Bolt deals 2 damage divided as you choose among one or two target creatures and/or players.
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(1, 2));
-        this.getSpellAbility().addEffect(new ForkedBoltEffect());
+        Effect effect = new DamageMultiEffect(2);
+        effect.setText("{this} deals 2 damage divided as you choose among one or two target creatures and/or players");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayerAmount(2));
+        
     }
 
     public ForkedBolt(final ForkedBolt card) {
@@ -65,47 +63,4 @@ public class ForkedBolt extends CardImpl {
     public ForkedBolt copy() {
         return new ForkedBolt(this);
     }
-}
-
-class ForkedBoltEffect extends OneShotEffect {
-
-    public ForkedBoltEffect() {
-        super(Outcome.Damage);
-        staticText = "{this} deals 2 damage divided as you choose among one or two target creatures and/or players";
-    }
-
-    public ForkedBoltEffect(final ForkedBoltEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int numTargets = targetPointer.getTargets(game, source).size();
-        int damage = 2;
-        if (numTargets > 0) {
-            int damagePer = damage/numTargets;
-            if (damagePer > 0) {
-                for (UUID targetId: targetPointer.getTargets(game, source)) {
-                    Permanent permanent = game.getPermanent(targetId);
-                    if (permanent != null) {
-                        permanent.damage(damagePer, source.getSourceId(), game, false, true);
-                    }
-                    else {
-                        Player player = game.getPlayer(targetId);
-                        if (player != null) {
-                            player.damage(damagePer, source.getSourceId(), game, false, true);
-                        }
-                    }
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public ForkedBoltEffect copy() {
-        return new ForkedBoltEffect(this);
-    }
-
 }
