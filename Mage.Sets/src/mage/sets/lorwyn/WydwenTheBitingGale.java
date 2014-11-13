@@ -60,8 +60,9 @@ public class WydwenTheBitingGale extends CardImpl {
         this.toughness = new MageInt(3);
         this.addAbility(FlashAbility.getInstance());
         this.addAbility(FlyingAbility.getInstance());
+        
         // {U}{B}, Pay 1 life: Return Wydwen, the Biting Gale to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new ManaCostsImpl("{U}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{U}{B}"));
         ability.addCost(new PayLifeCost(1));
         this.addAbility(ability);
     }

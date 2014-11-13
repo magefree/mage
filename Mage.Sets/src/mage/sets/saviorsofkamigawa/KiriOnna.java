@@ -61,7 +61,7 @@ public class KiriOnna extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // Whenever you cast a Spirit or Arcane spell, you may return Kiri-Onna to its owner's hand.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(true), filter, true));
     }
 
     public KiriOnna(final KiriOnna card) {

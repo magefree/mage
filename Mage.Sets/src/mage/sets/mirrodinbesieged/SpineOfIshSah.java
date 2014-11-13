@@ -32,6 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
@@ -47,10 +48,13 @@ public class SpineOfIshSah extends CardImpl {
         super(ownerId, 136, "Spine of Ish Sah", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{7}");
         this.expansionSetCode = "MBS";
 
+        // When Spine of Ish Sah enters the battlefield, destroy target permanent.        
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
-        this.addAbility(new DiesTriggeredAbility(new ReturnToHandSourceEffect()));
+        
+        // When Spine of Ish Sah is put into a graveyard from the battlefield, return Spine of Ish Sah to its owner's hand
+        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
     public SpineOfIshSah(final SpineOfIshSah card) {

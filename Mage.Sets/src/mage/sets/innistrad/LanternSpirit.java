@@ -55,7 +55,7 @@ public class LanternSpirit extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         // {U}: Return Lantern Spirit to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{U}")));
     }
 
     public LanternSpirit(final LanternSpirit card) {

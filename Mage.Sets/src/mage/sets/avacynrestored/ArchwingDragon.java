@@ -56,7 +56,7 @@ public class ArchwingDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
         // At the beginning of the end step, return Archwing Dragon to its owner's hand.
-        this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", new ReturnToHandSourceEffect(), false));
+        this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", new ReturnToHandSourceEffect(true), false));
     }
 
     public ArchwingDragon(final ArchwingDragon card) {

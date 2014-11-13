@@ -68,7 +68,7 @@ public class Suncrusher extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
          // {2}, Remove a +1/+1 counter from Suncrusher: Return Suncrusher to its owner's hand.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new GenericManaCost(2));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new GenericManaCost(2));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
         this.addAbility(ability);
     }

@@ -76,7 +76,7 @@ public class CavernHarpy extends CardImpl {
         ability.addTarget(new TargetControlledCreaturePermanent(1,1,filter, false));
         this.addAbility(ability);        
         // Pay 1 life: Return Cavern Harpy to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new PayLifeCost(1)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new PayLifeCost(1)));
     }
 
     public CavernHarpy(final CavernHarpy card) {

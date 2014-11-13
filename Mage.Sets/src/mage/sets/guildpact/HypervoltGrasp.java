@@ -56,15 +56,22 @@ public class HypervoltGrasp extends CardImpl {
         this.expansionSetCode = "GPT";
         this.subtype.add("Aura");
         this.color.setRed(true);
+        
+        
+        // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+        
+        // Enchanted creature has "Tap: This creature deals 1 damage to target creature or player."
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         gainedAbility.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)));
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new ManaCostsImpl("{1}{U}")));
+        
+        // {1}{U}: Return Hypervolt Grasp to its owner's hand.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{1}{U}")));
     }
 
     public HypervoltGrasp(final HypervoltGrasp card) {

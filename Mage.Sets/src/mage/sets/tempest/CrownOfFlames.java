@@ -48,17 +48,23 @@ import mage.target.common.TargetCreaturePermanent;
 public class CrownOfFlames extends CardImpl {
 
     public CrownOfFlames(UUID ownerId) {
-        super(ownerId, 169, "Crown of Flames", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
+            super(ownerId, 169, "Crown of Flames", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Aura");
         this.color.setRed(true);
+        
+        // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+        
+        // {R}: Enchanted creature gets +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new ColoredManaCost(ColoredManaSymbol.R)));
+
+        // {R}: Return Crown of Flames to its owner's hand.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
     public CrownOfFlames(final CrownOfFlames card) {

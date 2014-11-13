@@ -58,13 +58,21 @@ public class GlisteningOil extends CardImpl {
         this.expansionSetCode = "NPH";
         this.subtype.add("Aura");
         this.color.setBlack(true);
+        
+        // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+        
+        // Enchanted creature has infect.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(InfectAbility.getInstance(), AttachmentType.AURA)));
+        
+        // At the beginning of your upkeep, put a -1/-1 counter on enchanted creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GlisteningOilEffect(), TargetController.YOU, false));
+        
+        // When Glistening Oil is put into a graveyard from the battlefield, return Glistening Oil to its owner's hand.
         this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 

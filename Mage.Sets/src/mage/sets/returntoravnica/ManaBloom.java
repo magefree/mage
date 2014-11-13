@@ -76,7 +76,7 @@ public class ManaBloom extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, if Mana Bloom has no charge counters on it, return it to its owner's hand.
-        TriggeredAbility triggeredAbility = new BeginningOfUpkeepTriggeredAbility(new ReturnToHandSourceEffect(), TargetController.YOU, false);
+        TriggeredAbility triggeredAbility = new BeginningOfUpkeepTriggeredAbility(new ReturnToHandSourceEffect(true), TargetController.YOU, false);
         this.addAbility(new ConditionalTriggeredAbility(triggeredAbility, new SourceHasCounterCondition(CounterType.CHARGE, 0,0), "At the beginning of your upkeep, if Mana Bloom has no charge counters on it, return it to its owner's hand."));
 
     }

@@ -61,7 +61,7 @@ public class KemuriOnna extends CardImpl {
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // Whenever you cast a Spirit or Arcane spell, you may return Kemuri-Onna to its owner's hand.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(true), filter, true));
     }
 
     public KemuriOnna(final KemuriOnna card) {

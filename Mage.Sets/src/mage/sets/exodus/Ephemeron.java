@@ -59,7 +59,7 @@ public class Ephemeron extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Discard a card: Return Ephemeron to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new DiscardTargetCost(new TargetCardInHand())));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new DiscardTargetCost(new TargetCardInHand())));
     }
 
     public Ephemeron(final Ephemeron card) {

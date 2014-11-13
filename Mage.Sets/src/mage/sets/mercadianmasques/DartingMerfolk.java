@@ -53,7 +53,7 @@ public class DartingMerfolk extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {U}: Return Darting Merfolk to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{U}")));
     }
 
     public DartingMerfolk(final DartingMerfolk card) {

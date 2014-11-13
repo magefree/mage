@@ -33,6 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.cards.CardImpl;
@@ -59,7 +60,9 @@ public class HibernationSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // All Slivers have "Pay 2 life: Return this permanent to its owner's hand."
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new PayLifeCost(2));
+        Effect effect = new ReturnToHandSourceEffect(true);
+        effect.setText("Return this permanent to its owner's hand");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new PayLifeCost(2));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, new FilterPermanent("Sliver", "All Slivers"), "All Slivers have \"Pay 2 life: Return this permanent to its owner's hand")));
     }
 

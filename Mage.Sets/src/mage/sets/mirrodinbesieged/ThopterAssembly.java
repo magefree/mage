@@ -86,7 +86,7 @@ class ThopterAssemblyTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     ThopterAssemblyTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ReturnToHandSourceEffect());
+        super(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true));
         this.addEffect(new CreateTokenEffect(new ThopterToken(), 5));
     }
 

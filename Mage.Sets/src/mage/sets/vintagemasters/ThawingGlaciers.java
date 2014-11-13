@@ -62,7 +62,7 @@ public class ThawingGlaciers extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true, Outcome.PutLandInPlay), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextCleanupDelayedTriggeredAbility(new ReturnToHandSourceEffect())));
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextCleanupDelayedTriggeredAbility(new ReturnToHandSourceEffect(true))));
 
         this.addAbility(ability);
     }

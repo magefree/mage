@@ -54,8 +54,12 @@ public class CoastalDrake extends CardImpl {
         this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
+        
+        // Flying        
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new ManaCostsImpl("{1}{U}"));
+        
+        // {1}{U}, {T} : Return target Kavu to its owner's hand.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{1}{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

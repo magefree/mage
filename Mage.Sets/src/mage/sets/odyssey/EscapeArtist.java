@@ -61,7 +61,7 @@ public class EscapeArtist extends CardImpl {
         // Escape Artist is unblockable.
         this.addAbility(new UnblockableAbility());
         // {U}, Discard a card: Return Escape Artist to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{U}"));
         ability.addCost(new DiscardTargetCost(new TargetCardInHand()));
         this.addAbility(ability);
     }

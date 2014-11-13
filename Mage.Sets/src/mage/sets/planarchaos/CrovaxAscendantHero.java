@@ -73,7 +73,7 @@ public class CrovaxAscendantHero extends CardImpl {
         // Nonwhite creatures get -1/-1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Duration.WhileOnBattlefield, filter2, false)));
         // Pay 2 life: Return Crovax, Ascendant Hero to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new PayLifeCost(2)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new PayLifeCost(2)));
     }
 
     public CrovaxAscendantHero(final CrovaxAscendantHero card) {

@@ -62,8 +62,12 @@ public class NeurokProdigy extends CardImpl {
         this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
+        
+        // Flying        
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new DiscardTargetCost(new TargetCardInHand(filter))));
+        
+        // Discard an artifact card: Return Neurok Prodigy to its owner's hand.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new DiscardTargetCost(new TargetCardInHand(filter))));
     }
 
     public NeurokProdigy(final NeurokProdigy card) {

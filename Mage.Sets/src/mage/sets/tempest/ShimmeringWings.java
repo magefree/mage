@@ -54,13 +54,19 @@ public class ShimmeringWings extends CardImpl {
         this.expansionSetCode = "TMP";
         this.subtype.add("Aura");
         this.color.setBlue(true);
+        
+        // Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+        
+        // Enchanted creature has flying. (It can't be blocked except by creatures with flying or reach.)
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new ColoredManaCost(ColoredManaSymbol.U)));
+        
+        // {U}: Return Shimmering Wings to its owner's hand.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ColoredManaCost(ColoredManaSymbol.U)));
     }
 
     public ShimmeringWings(final ShimmeringWings card) {

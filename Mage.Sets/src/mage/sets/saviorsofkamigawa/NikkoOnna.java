@@ -61,7 +61,7 @@ public class NikkoOnna extends CardImpl {
         this.addAbility(ability);
 
         // Whenever you cast a Spirit or Arcane spell, you may return Nikko-Onna to its owner's hand.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(), new FilterSpiritOrArcaneCard(), true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(true), new FilterSpiritOrArcaneCard(), true));
     }
 
     public NikkoOnna(final NikkoOnna card) {

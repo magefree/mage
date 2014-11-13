@@ -70,7 +70,7 @@ public class FieldOfReality extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new FieldOfRealityEvasionAbility(), AttachmentType.AURA )));
         // {1}{U}: Return Field of Reality to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{1}{U}")));
     }
 
     public FieldOfReality(final FieldOfReality card) {
