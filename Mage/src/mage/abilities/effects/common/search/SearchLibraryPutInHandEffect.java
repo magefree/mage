@@ -89,6 +89,7 @@ public class SearchLibraryPutInHandEffect extends SearchEffect {
         if (player == null) {
             return false;
         }
+        target.clearChosen();
         if (player.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
                 Cards cards = new CardsImpl();
