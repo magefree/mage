@@ -31,17 +31,23 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.combat.CantBlockAttackActivateAttachedEffect;
+import mage.abilities.effects.common.combat.CantAttackBlockAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.AbilityType;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -66,11 +72,11 @@ public class FaithsFetters extends CardImpl {
         // When Faith's Fetters enters the battlefield, you gain 4 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4)));
         // Enchanted permanent's activated abilities can't be activated unless they're mana abilities. If enchanted permanent is a creature, it can't attack or block.
-        Effect effect = new CantBlockAttackActivateAttachedEffect();
-        effect.setText("Enchanted permanent's activated abilities can't be activated unless they're mana abilities. If enchanted permanent is a creature, it can't attack or block");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
-
-
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new FaithsFettersEffect());
+        Effect effect = new CantAttackBlockAttachedEffect(AttachmentType.AURA);
+        effect.setText("If enchanted permanent is a creature, it can't attack or block");
+        ability.addEffect(effect);
+        this.addAbility(ability);
     }
 
     public FaithsFetters(final FaithsFetters card) {
@@ -80,5 +86,43 @@ public class FaithsFetters extends CardImpl {
     @Override
     public FaithsFetters copy() {
         return new FaithsFetters(this);
+    }
+}
+
+class FaithsFettersEffect extends ContinuousRuleModifiyingEffectImpl {
+
+    public FaithsFettersEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        staticText = "Enchanted permanent's activated abilities can't be activated unless they're mana abilities";
+    }
+
+    public FaithsFettersEffect(final FaithsFettersEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public FaithsFettersEffect copy() {
+        return new FaithsFettersEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
+            Permanent enchantment = game.getPermanent(source.getSourceId());
+            if (enchantment != null && enchantment.getAttachedTo().equals(event.getSourceId())) {
+                Ability ability = game.getAbility(event.getTargetId(), event.getSourceId());
+                if (ability != null) {
+                    if (ability.getAbilityType() != AbilityType.MANA) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }
