@@ -51,7 +51,7 @@ public class ReachAbility extends StaticAbility implements MageSingleton {
     }
 
     private ReachAbility() {
-        super(Zone.BATTLEFIELD, null);
+        super(Zone.ALL, null);
     }
 
     @Override
