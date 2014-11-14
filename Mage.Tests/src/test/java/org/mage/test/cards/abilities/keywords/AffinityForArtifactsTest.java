@@ -14,16 +14,17 @@ public class AffinityForArtifactsTest extends CardTestPlayerBase {
     @Test
     public void testCastForCheaperCost() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        // Myr Enforcer Artifact Creature — Myr  {7} 
+        // Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)
         addCard(Zone.HAND, playerA, "Myr Enforcer");
 
         addCard(Zone.BATTLEFIELD, playerA, "Myr Enforcer", 3);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Myr Enforcer");
-
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-       assertPermanentCount(playerA, "Myr Enforcer", 4);
+        assertPermanentCount(playerA, "Myr Enforcer", 4);
     }
 
     /**

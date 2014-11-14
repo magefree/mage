@@ -76,7 +76,7 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pallid Mycoderm");
 
-        activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Remove three Spore counters from {this}: Put a 1/1 green Saproling creature token onto the battlefield.");
+        activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Remove three spore counters from {this}: Put a 1/1 green Saproling creature token onto the battlefield.");
 
         setStopAt(5, PhaseStep.END_TURN);
         execute();
