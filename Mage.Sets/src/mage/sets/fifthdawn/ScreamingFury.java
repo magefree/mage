@@ -28,9 +28,15 @@
 package mage.sets.fifthdawn;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -45,6 +51,13 @@ public class ScreamingFury extends CardImpl {
         this.color.setRed(true);
 
         // Target creature gets +5/+0 and gains haste until end of turn.
+        Effect effect = new BoostTargetEffect(5,0, Duration.EndOfTurn);
+        effect.setText("Target creature gets +5/+0");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains haste until end of turn");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public ScreamingFury(final ScreamingFury card) {
