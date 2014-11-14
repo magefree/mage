@@ -57,11 +57,11 @@ public class CardInfo {
     private static final int MAX_RULE_LENGTH = 700;
 
     private static final String SEPARATOR = "@@@";
-    @DatabaseField
+    @DatabaseField(indexName = "name_index")
     protected String name;
-    @DatabaseField(indexName = "name_cardNumber_index")
+    @DatabaseField(indexName = "setCode_cardNumber_index")
     protected int cardNumber;
-    @DatabaseField(indexName = "name_cardNumber_index")
+    @DatabaseField(indexName = "setCode_cardNumber_index")
     protected String setCode;
     @DatabaseField(unique = true)
     protected String className;
@@ -101,7 +101,7 @@ public class CardInfo {
     protected boolean flipCard;
     @DatabaseField
     protected boolean doubleFaced;
-    @DatabaseField(indexName = "name_cardNumber_index")
+    @DatabaseField(indexName = "name_index")
     protected boolean nightCard;
     @DatabaseField
     protected String flipCardName;
