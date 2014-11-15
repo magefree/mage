@@ -63,7 +63,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     protected Duration duration;
     protected Layer layer;
     protected SubLayer sublayer;
-    protected Date timestamp;
+    protected long order;
     protected boolean used = false;
     protected boolean discarded = false; // for manual effect discard
     protected boolean affectedObjectsSet = false;
@@ -76,7 +76,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     public ContinuousEffectImpl(Duration duration, Outcome outcome) {
         super(outcome);
         this.duration = duration;
-        this.timestamp = new Date();
+        this.order = 0;
         this.effectType = EffectType.CONTINUOUS;
     }
 
@@ -91,7 +91,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.duration = effect.duration;
         this.layer = effect.layer;
         this.sublayer = effect.sublayer;
-        this.timestamp = new Date(effect.timestamp.getTime());
+        this.order = effect.order;
         this.used = effect.used;
         this.discarded = effect.discarded;
         this.affectedObjectsSet = effect.affectedObjectsSet;
@@ -114,13 +114,13 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     }
 
     @Override
-    public Date getTimestamp() {
-        return timestamp;
+    public long getOrder() {
+        return order;
     }
 
     @Override
-    public void setTimestamp() {
-        this.timestamp = new Date();
+    public void setOrder(long order) {
+        this.order = order;
     }
 
     @Override

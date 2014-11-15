@@ -666,7 +666,7 @@ public abstract class GameImpl implements Game, Serializable {
                 playerByOrder = players.getNext(this);
             }
         }
-        if (gameOver(null)) {
+        if (gameOver(null) && !isSimulation()) {
             winnerId = findWinnersAndLosers();
             StringBuilder sb = new StringBuilder("GAME ended  gameId: ").append(this.getId()).append(" ");
             int count = 0;
@@ -1230,7 +1230,6 @@ public abstract class GameImpl implements Game, Serializable {
 
         ContinuousEffect newEffect = continuousEffect.copy();
         newEffect.newId();
-        newEffect.setTimestamp();
         newEffect.init(newAbility, this);
 
         state.addEffect(newEffect, newAbility);
@@ -1293,7 +1292,6 @@ public abstract class GameImpl implements Game, Serializable {
 
         CopyEffect newEffect = new CopyEffect(duration, permanent, copyToPermanent.getId());
         newEffect.newId();
-        newEffect.setTimestamp();
         newEffect.setApplier(applier);
         newEffect.init(newAbility, this);
         

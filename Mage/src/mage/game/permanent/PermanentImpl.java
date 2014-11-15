@@ -573,11 +573,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         for (Ability ability : this.getAbilities()) {
             for (Iterator<Effect> ite = ability.getEffects(game, EffectType.CONTINUOUS).iterator(); ite.hasNext();) {
                 ContinuousEffect effect = (ContinuousEffect) ite.next();
-                game.getContinuousEffects().setUniqueTimesstamp(effect);
+                game.getContinuousEffects().setOrder(effect);
                 // It's important is to update timestamp of the copied effect in ContinuousEffects because it does the action
                 for (ContinuousEffect conEffect: game.getContinuousEffects().getLayeredEffects(game)) {
                     if (conEffect.getId().equals(effect.getId())) {
-                        game.getContinuousEffects().setUniqueTimesstamp(conEffect);
+                        game.getContinuousEffects().setOrder(conEffect);
                     }
                 }
             }

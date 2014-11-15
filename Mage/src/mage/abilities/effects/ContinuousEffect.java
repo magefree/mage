@@ -48,8 +48,8 @@ public interface ContinuousEffect extends Effect {
     boolean isDiscarded();
     void discard();
     Duration getDuration();
-    Date getTimestamp();
-    void setTimestamp();
+    long getOrder();
+    void setOrder(long order);
     boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game);
     boolean hasLayer(Layer layer);
     boolean isInactive(Ability source, Game game);

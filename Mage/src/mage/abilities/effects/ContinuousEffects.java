@@ -32,7 +32,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -77,7 +76,7 @@ public class ContinuousEffects implements Serializable {
 
     private static final transient Logger logger = Logger.getLogger(ContinuousEffects.class);
 
-    private Date lastSetTimestamp;
+    private long order = 0;
 
     //transient Continuous effects
     private ContinuousEffectsList<ContinuousEffect> layeredEffects = new ContinuousEffectsList<>();
@@ -100,6 +99,7 @@ public class ContinuousEffects implements Serializable {
 
     // effect.id -> sourceId - which effect was added by which sourceId
     private final Map<UUID, UUID> sources = new HashMap<>();
+    private final ContinuousEffectSorter sorter = new ContinuousEffectSorter();
 
     public ContinuousEffects() {
         applyCounters = new ApplyCountersEffect();
@@ -120,16 +120,14 @@ public class ContinuousEffects implements Serializable {
         restrictionEffects = effect.restrictionEffects.copy();
         restrictionUntapNotMoreThanEffects = effect.restrictionUntapNotMoreThanEffects.copy();
         for (Map.Entry<AsThoughEffectType, ContinuousEffectsList<AsThoughEffect>> entry : effect.asThoughEffectsMap.entrySet()) {
-            asThoughEffectsMap.put(entry.getKey(), entry.getValue());
+            asThoughEffectsMap.put(entry.getKey(), entry.getValue().copy());
         }
 
         costModificationEffects = effect.costModificationEffects.copy();
         spliceCardEffects = effect.spliceCardEffects.copy();
-        for (Map.Entry<UUID, UUID> entry : effect.sources.entrySet()) {
-            sources.put(entry.getKey(), entry.getValue());
-        }
+        sources.putAll(effect.sources);
         collectAllEffects();
-        lastSetTimestamp = effect.lastSetTimestamp;
+        order = effect.order;
     }
 
     private void collectAllEffects() {
@@ -222,7 +220,7 @@ public class ContinuousEffects implements Serializable {
 
         updateTimestamps(layerEffects);
 
-        Collections.sort(layerEffects, new TimestampSorter());
+        Collections.sort(layerEffects, sorter);
         return layerEffects;
     }
 
@@ -234,21 +232,17 @@ public class ContinuousEffects implements Serializable {
      */
     private void updateTimestamps(List<ContinuousEffect> layerEffects) {
         for (ContinuousEffect continuousEffect : layerEffects) {
-            // check if it's new, then set timestamp
+            // check if it's new, then set order
             if (!previous.contains(continuousEffect)) {
-                setUniqueTimesstamp(continuousEffect);
+                setOrder(continuousEffect);
             }
         }
         previous.clear();
         previous.addAll(layerEffects);
     }
 
-    public void setUniqueTimesstamp(ContinuousEffect effect) {
-        do {
-            effect.setTimestamp();
-        }
-        while (effect.getTimestamp().equals(lastSetTimestamp)); // prevent to set the same timestamp so logical order is saved
-        lastSetTimestamp = effect.getTimestamp();
+    public void setOrder(ContinuousEffect effect) {
+        effect.setOrder(order++);
     }
 
     private List<ContinuousEffect> filterLayeredEffects(List<ContinuousEffect> effects, Layer layer) {
@@ -1008,9 +1002,10 @@ public class ContinuousEffects implements Serializable {
         return !requirementEffects.isEmpty();
     }
 }
-class TimestampSorter implements Comparator<ContinuousEffect> {
+
+class ContinuousEffectSorter implements Comparator<ContinuousEffect> {
     @Override
     public int compare(ContinuousEffect one, ContinuousEffect two) {
-        return one.getTimestamp().compareTo(two.getTimestamp());
+        return Long.compare(one.getOrder(), two.getOrder());
     }
 }
