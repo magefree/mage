@@ -644,25 +644,48 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void discard(int amount, Ability source, Game game) {
-        if (amount >= hand.size()) {
-            while (hand.size() > 0) {
-                discard(hand.get(hand.iterator().next(), game), source, game);
+        discard(amount, false, source, game);
+    }
+
+    @Override
+    public Card discardOne(boolean random, Ability source, Game game) {
+        Cards cards = discard(1, random, source, game);
+        if (cards.isEmpty()) {
+            return null;
+        }
+        return cards.getRandom(game);
+    }
+    
+    @Override
+    public Cards discard(int amount, boolean random, Ability source, Game game) {
+        Cards discardedCards = new CardsImpl();
+        if (amount >= this.getHand().size()) {
+            discardedCards.addAll(this.getHand());
+            while (this.getHand().size() > 0) {
+                discard(this.getHand().get(this.getHand().iterator().next(), game), source, game);
             }
-            return;
+            return discardedCards;
         }
         int numDiscarded = 0;
         while (isInGame() && numDiscarded < amount) {
-            if (hand.size() == 0) {
+            if (this.getHand().size() == 0) {
                 break;
             }
-            TargetDiscard target = new TargetDiscard(playerId);
-            choose(Outcome.Discard, target, source.getSourceId(), game);
-            Card card = hand.get(target.getFirstTarget(), game);
+            Card card;
+            if (random) {
+                card = this.getHand().getRandom(game);
+            } else {
+                TargetDiscard target = new TargetDiscard(playerId);
+                choose(Outcome.Discard, target, source.getSourceId(), game);
+                card = this.getHand().get(target.getFirstTarget(), game);
+            }
             if (card != null) {
                 numDiscarded++;
+                discardedCards.add(card);
                 discard(card, source, game);
             }
         }
+        return discardedCards;
     }
 
     @Override

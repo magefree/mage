@@ -27,27 +27,17 @@
  */
 package mage.sets.apocalypse;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.discard.DiscardTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.WatcherScope;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.watchers.Watcher;
 
 /**
  *
@@ -63,10 +53,8 @@ public class GerrardsVerdict extends CardImpl {
         this.color.setWhite(true);
 
         // Target player discards two cards. You gain 3 life for each land card discarded this way.
-        this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
         this.getSpellAbility().addEffect(new GerrardsVerdictEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.addWatcher(new GerrardsVerdictWatcher());
 
     }
 
@@ -84,7 +72,7 @@ class GerrardsVerdictEffect extends OneShotEffect {
 
     public GerrardsVerdictEffect() {
         super(Outcome.Benefit);
-        this.staticText = "You gain 3 life for each land card discarded this way";
+        this.staticText = "Target player discards two cards. You gain 3 life for each land card discarded this way";
     }
 
     public GerrardsVerdictEffect(final GerrardsVerdictEffect effect) {
@@ -99,67 +87,11 @@ class GerrardsVerdictEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            GerrardsVerdictWatcher watcher = (GerrardsVerdictWatcher) game.getState().getWatchers().get("GerrardsVerdictWatcher");
-            if (watcher != null) {
-                Cards cards = watcher.getCardsDiscardedBySource(source.getSourceId());
-                int life = cards.count(new FilterLandCard(), game) * 3;
-                controller.gainLife(life, game);
-                return true;
-            }
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (controller != null && targetPlayer != null) {
+            controller.gainLife(targetPlayer.discard(2, false, source, game).count(new FilterLandCard(), game) * 3, game);
+            return true;
         }
         return false;
-    }
-}
-
-class GerrardsVerdictWatcher extends Watcher {
-
-    private final Map<UUID, Cards> cardsDiscardedBySource = new HashMap<>();
-
-    public GerrardsVerdictWatcher() {
-        super("GerrardsVerdictWatcher", WatcherScope.GAME);
-    }
-
-    public GerrardsVerdictWatcher(final GerrardsVerdictWatcher watcher) {
-        super(watcher);
-        for (Entry<UUID, Cards> entry : watcher.cardsDiscardedBySource.entrySet()) {
-            cardsDiscardedBySource.put(entry.getKey(), entry.getValue());
-        }
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DISCARDED_CARD) {
-            Card card = game.getCard(event.getTargetId());
-            if (card != null) {
-                Cards cards = cardsDiscardedBySource.get(event.getSourceId());
-                if (cards == null) {
-                    cards = new CardsImpl();
-                    cardsDiscardedBySource.put(event.getSourceId(), cards);
-                }
-                cards.add(card);
-            }
-        }
-    }
-
-    /**
-     * get and remove the cards discarded by a sourceId
-     * @param sourceId
-     * @return
-     */
-    public Cards getCardsDiscardedBySource(UUID sourceId) {
-        Cards cards = cardsDiscardedBySource.get(sourceId);
-        cardsDiscardedBySource.remove(sourceId);
-        return cards;
-    }
-
-    @Override
-    public void reset() {
-        cardsDiscardedBySource.clear();
-    }
-
-    @Override
-    public GerrardsVerdictWatcher copy() {
-        return new GerrardsVerdictWatcher(this);
     }
 }

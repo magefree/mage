@@ -85,12 +85,9 @@ class ForgetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         if (targetPlayer != null) {
-            int count = Math.min(2, targetPlayer.getHand().size());
-            targetPlayer.discard(2, source, game);
-            targetPlayer.drawCards(count, game);
+            targetPlayer.drawCards(targetPlayer.discard(2, false, source, game).size(), game);
             return true;
         }
         return false;
-    }
-    
+    }    
 }

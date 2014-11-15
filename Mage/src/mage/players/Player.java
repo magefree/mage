@@ -252,7 +252,10 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean hasProtectionFrom(MageObject source, Game game);
     boolean flipCoin(Game game);
     boolean flipCoin(Game game, ArrayList<UUID> appliedEffects);
+    @Deprecated
     void discard(int amount, Ability source, Game game);
+    Card discardOne(boolean random, Ability source, Game game);
+    Cards discard(int amount, boolean random, Ability source, Game game);
     void discardToMax(Game game);
     boolean discard(Card card, Ability source, Game game);
     void lost(Game game);
