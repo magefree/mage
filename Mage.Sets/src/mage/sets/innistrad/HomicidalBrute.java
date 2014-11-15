@@ -104,7 +104,7 @@ class HomicidalBruteTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "At the beginning of your end step, if Homicidal Brute didn't attack this turn, tap Homicidal Brute, then transform it";
+        return "At the beginning of your end step, if {this} didn't attack this turn, tap {this}, then transform it";
     }
 }
 

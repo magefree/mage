@@ -27,7 +27,7 @@
  */
 package mage.sets.innistrad;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -36,13 +36,15 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetDiscard;
-
-import java.util.UUID;
-import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
 
 /**
@@ -66,7 +68,6 @@ public class CivilizedScholar extends CardImpl {
         // {tap}: Draw a card, then discard a card. If a creature card is discarded this way, untap Civilized Scholar, then transform it.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CivilizedScholarEffect(), new TapSourceCost()));
         this.addAbility(new TransformAbility());
-
         this.addWatcher(new HomicidalBruteWatcher());
     }
 
@@ -97,8 +98,9 @@ class HomicidalBruteWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (condition == true)
+        if (condition == true) {
             return;
+        }
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED && event.getSourceId().equals(sourceId)) {
             condition = true;
         }
@@ -109,7 +111,7 @@ class CivilizedScholarEffect extends OneShotEffect {
 
     public CivilizedScholarEffect() {
         super(Outcome.DrawCard);
-        staticText = "Draw a card, then discard a card";
+        staticText = "Draw a card, then discard a card. If a creature card is discarded this way, untap {this}, then transform it";
     }
 
     public CivilizedScholarEffect(final CivilizedScholarEffect effect) {
@@ -126,21 +128,15 @@ class CivilizedScholarEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             player.drawCards(1, game);
-            TargetDiscard target = new TargetDiscard(player.getId());
-            player.choose(Outcome.Discard, target, source.getSourceId(), game);
-            Card card = player.getHand().get(target.getFirstTarget(), game);
-            if (card != null) {
-                player.discard(card, source, game);
-                if (card.getCardType().contains(CardType.CREATURE)) {
-                    Permanent permanent = game.getPermanent(source.getSourceId());
-                    if (permanent != null) {
-                        permanent.untap(game);
-                        permanent.transform(game);
-                    }
+            Card card = player.discardOne(false, source, game);
+            if (card != null && card.getCardType().contains(CardType.CREATURE)) {
+                Permanent permanent = game.getPermanent(source.getSourceId());
+                if (permanent != null) {
+                    permanent.untap(game);
+                    permanent.transform(game);
                 }
-                return true;
             }
-            return false;
+            return true;
         }
         return false;
     }
