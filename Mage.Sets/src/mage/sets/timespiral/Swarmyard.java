@@ -25,60 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracy;
+package mage.sets.timespiral;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.effects.common.RegenerateTargetEffect;
+import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.permanent.token.SquirrelToken;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetLandPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author emerald000
+ * @author LevelX2
  */
-public class SquirrelNest extends CardImpl {
+public class Swarmyard extends CardImpl {
 
-    public SquirrelNest(UUID ownerId) {
-        super(ownerId, 180, "Squirrel Nest", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
-        this.expansionSetCode = "CNS";
-        this.subtype.add("Aura");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Insect, Rat, Spider, or Squirrel");
 
-        this.color.setGreen(true);
-
-        // Enchant land
-        TargetPermanent auraTarget = new TargetLandPermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-        
-        // Enchanted land has "{tap}: Put a 1/1 green Squirrel creature token onto the battlefield."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SquirrelToken()), new TapSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted land has \"{T}: Put a 1/1 green Squirrel creature token onto the battlefield.\"")));
+    static {
+        filter.add(Predicates.or(
+            new SubtypePredicate("Insect"),
+            new SubtypePredicate("Rat"),
+            new SubtypePredicate("Spider"),
+            new SubtypePredicate("Squirrel")
+        ));
     }
 
-    public SquirrelNest(final SquirrelNest card) {
+    public Swarmyard(UUID ownerId) {
+        super(ownerId, 278, "Swarmyard", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "TSP";
+
+        // {tap}: Add {1} to your mana pool.
+        this.addAbility(new ColorlessManaAbility());
+        
+        // {tap}: Regenerate target Insect, Rat, Spider, or Squirrel.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+
+    }
+
+    public Swarmyard(final Swarmyard card) {
         super(card);
     }
 
     @Override
-    public SquirrelNest copy() {
-        return new SquirrelNest(this);
+    public Swarmyard copy() {
+        return new Swarmyard(this);
     }
 }

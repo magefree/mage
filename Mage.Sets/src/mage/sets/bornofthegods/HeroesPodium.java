@@ -59,10 +59,13 @@ import mage.target.TargetCard;
  * @author LevelX2
  */
 public class HeroesPodium extends CardImpl {
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each legendary creature you control");
+
     static {
         filter.add(new SupertypePredicate("Legendary"));
     }
+    
     public HeroesPodium(UUID ownerId) {
         super(ownerId, 159, "Heroes' Podium", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
         this.expansionSetCode = "BNG";

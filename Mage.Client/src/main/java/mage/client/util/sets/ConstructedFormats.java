@@ -66,6 +66,7 @@ public class ConstructedFormats {
             "Vintage Masters",
             "Conspiracy",
             "Modern Masters",
+            "Archenemy",
             "Commander 2014 Edition",
             "Commander 2013 Edition",
             "Commander",
@@ -408,6 +409,9 @@ public class ConstructedFormats {
         }
         if (format.equals("Magic 2015")) {
             return Arrays.asList("M15");
+        }
+        if (format.equals("Archenemy")) {
+            return Arrays.asList("ARC");
         }
         if (format.equals("Planechase")) {
             return Arrays.asList("HOP");

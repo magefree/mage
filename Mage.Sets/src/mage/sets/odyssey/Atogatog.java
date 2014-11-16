@@ -25,60 +25,67 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracy;
+package mage.sets.odyssey;
 
 import java.util.UUID;
-import mage.abilities.Ability;
+import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.SacrificeCostCreaturesPower;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.permanent.token.SquirrelToken;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetLandPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author emerald000
+ * @author LevelX2
  */
-public class SquirrelNest extends CardImpl {
+public class Atogatog extends CardImpl {
 
-    public SquirrelNest(UUID ownerId) {
-        super(ownerId, 180, "Squirrel Nest", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
-        this.expansionSetCode = "CNS";
-        this.subtype.add("Aura");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an Atog creature");
 
-        this.color.setGreen(true);
-
-        // Enchant land
-        TargetPermanent auraTarget = new TargetLandPermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-        
-        // Enchanted land has "{tap}: Put a 1/1 green Squirrel creature token onto the battlefield."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SquirrelToken()), new TapSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted land has \"{T}: Put a 1/1 green Squirrel creature token onto the battlefield.\"")));
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(new SubtypePredicate("Atog"));
     }
 
-    public SquirrelNest(final SquirrelNest card) {
+    public Atogatog(UUID ownerId) {
+        super(ownerId, 286, "Atogatog", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
+        this.expansionSetCode = "ODY";
+        this.supertype.add("Legendary");
+        this.subtype.add("Atog");
+
+        this.color.setRed(true);
+        this.color.setBlue(true);
+        this.color.setGreen(true);
+        this.color.setBlack(true);
+        this.color.setWhite(true);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
+
+        DynamicValue xValue = new SacrificeCostCreaturesPower();
+        // Sacrifice an Atog creature: Atogatog gets +X/+X until end of turn, where X is the sacrificed creature's power.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new BoostSourceEffect(xValue, xValue,Duration.EndOfTurn),
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,new FilterControlledCreaturePermanent("Atog", "an Atog creature"), false))));
+        
+    }
+
+    public Atogatog(final Atogatog card) {
         super(card);
     }
 
     @Override
-    public SquirrelNest copy() {
-        return new SquirrelNest(this);
+    public Atogatog copy() {
+        return new Atogatog(this);
     }
 }

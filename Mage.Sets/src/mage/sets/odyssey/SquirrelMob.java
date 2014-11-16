@@ -25,60 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracy;
+package mage.sets.odyssey;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.permanent.token.SquirrelToken;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetLandPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.PermanentIdPredicate;
 
 /**
  *
- * @author emerald000
+ * @author LevelX2
  */
-public class SquirrelNest extends CardImpl {
+public class SquirrelMob extends CardImpl {
 
-    public SquirrelNest(UUID ownerId) {
-        super(ownerId, 180, "Squirrel Nest", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
-        this.expansionSetCode = "CNS";
-        this.subtype.add("Aura");
+    public SquirrelMob(UUID ownerId) {
+        super(ownerId, 273, "Squirrel Mob", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
+        this.expansionSetCode = "ODY";
+        this.subtype.add("Squirrel");
 
         this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Enchant land
-        TargetPermanent auraTarget = new TargetLandPermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-        
-        // Enchanted land has "{tap}: Put a 1/1 green Squirrel creature token onto the battlefield."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SquirrelToken()), new TapSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted land has \"{T}: Put a 1/1 green Squirrel creature token onto the battlefield.\"")));
+        // Squirrel Mob gets +1/+1 for each other Squirrel on the battlefield.
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("other Squirrel");
+        filter.add(new SubtypePredicate("Squirrel"));
+        filter.add(Predicates.not(new PermanentIdPredicate(this.getId())));
+        DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+        Effect effect = new BoostSourceEffect(xValue, xValue, Duration.WhileOnBattlefield, false);
+        effect.setText("{this} gets +1/+1 for each other Squirrel on the battlefield");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public SquirrelNest(final SquirrelNest card) {
+    public SquirrelMob(final SquirrelMob card) {
         super(card);
     }
 
     @Override
-    public SquirrelNest copy() {
-        return new SquirrelNest(this);
+    public SquirrelMob copy() {
+        return new SquirrelMob(this);
     }
 }

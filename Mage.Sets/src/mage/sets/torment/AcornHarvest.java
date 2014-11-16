@@ -25,60 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracy;
+package mage.sets.torment;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.constants.TimingRule;
 import mage.game.permanent.token.SquirrelToken;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author emerald000
+ * @author LevelX2
  */
-public class SquirrelNest extends CardImpl {
+public class AcornHarvest extends CardImpl {
 
-    public SquirrelNest(UUID ownerId) {
-        super(ownerId, 180, "Squirrel Nest", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
-        this.expansionSetCode = "CNS";
-        this.subtype.add("Aura");
+    public AcornHarvest(UUID ownerId) {
+        super(ownerId, 118, "Acorn Harvest", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
+        this.expansionSetCode = "TOR";
 
         this.color.setGreen(true);
 
-        // Enchant land
-        TargetPermanent auraTarget = new TargetLandPermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        // Put two 1/1 green Squirrel creature tokens onto the battlefield.
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SquirrelToken(), 2));
+
+        // Flashback-{1}{G} - Pay 3 life.
+        FlashbackAbility ability = new FlashbackAbility(new ManaCostsImpl("{1}{G}"), TimingRule.SORCERY);
+        ability.addCost(new PayLifeCost(3));
         this.addAbility(ability);
         
-        // Enchanted land has "{tap}: Put a 1/1 green Squirrel creature token onto the battlefield."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SquirrelToken()), new TapSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted land has \"{T}: Put a 1/1 green Squirrel creature token onto the battlefield.\"")));
     }
 
-    public SquirrelNest(final SquirrelNest card) {
+    public AcornHarvest(final AcornHarvest card) {
         super(card);
     }
 
     @Override
-    public SquirrelNest copy() {
-        return new SquirrelNest(this);
+    public AcornHarvest copy() {
+        return new AcornHarvest(this);
     }
 }

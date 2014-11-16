@@ -25,60 +25,64 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracy;
+package mage.sets.prophecy;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.SquirrelToken;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetLandPermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author emerald000
+ * @author LevelX2
  */
-public class SquirrelNest extends CardImpl {
+public class SquirrelWrangler extends CardImpl {
 
-    public SquirrelNest(UUID ownerId) {
-        super(ownerId, 180, "Squirrel Nest", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
-        this.expansionSetCode = "CNS";
-        this.subtype.add("Aura");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Squirrel", "Squirrel creatures");
+
+    public SquirrelWrangler(UUID ownerId) {
+        super(ownerId, 127, "Squirrel Wrangler", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+        this.expansionSetCode = "PCY";
+        this.subtype.add("Human");
+        this.subtype.add("Druid");
 
         this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Enchant land
-        TargetPermanent auraTarget = new TargetLandPermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        // {1}{G}, Sacrifice a land: Put two 1/1 green Squirrel creature tokens onto the battlefield.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SquirrelToken(), 2), new ManaCostsImpl("{1}{G}"));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
         this.addAbility(ability);
-        
-        // Enchanted land has "{tap}: Put a 1/1 green Squirrel creature token onto the battlefield."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SquirrelToken()), new TapSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted land has \"{T}: Put a 1/1 green Squirrel creature token onto the battlefield.\"")));
+
+        // {1}{G}, Sacrifice a land: Squirrel creatures get +1/+1 until end of turn.
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1,1,Duration.EndOfTurn, filter), new ManaCostsImpl("{1}{G}"));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
+        this.addAbility(ability);
+
     }
 
-    public SquirrelNest(final SquirrelNest card) {
+    public SquirrelWrangler(final SquirrelWrangler card) {
         super(card);
     }
 
     @Override
-    public SquirrelNest copy() {
-        return new SquirrelNest(this);
+    public SquirrelWrangler copy() {
+        return new SquirrelWrangler(this);
     }
 }

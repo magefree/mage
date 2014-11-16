@@ -25,60 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracy;
+package mage.sets.odyssey;
 
 import java.util.UUID;
-import mage.abilities.Ability;
+import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.permanent.token.SquirrelToken;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetLandPermanent;
+import mage.filter.common.FilterControlledEnchantmentPermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author emerald000
+ * @author LevelX2
  */
-public class SquirrelNest extends CardImpl {
+public class Phantatog extends CardImpl {
 
-    public SquirrelNest(UUID ownerId) {
-        super(ownerId, 180, "Squirrel Nest", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
-        this.expansionSetCode = "CNS";
-        this.subtype.add("Aura");
+    public Phantatog(UUID ownerId) {
+        super(ownerId, 291, "Phantatog", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
+        this.expansionSetCode = "ODY";
+        this.subtype.add("Atog");
 
-        this.color.setGreen(true);
+        this.color.setBlue(true);
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
 
-        // Enchant land
-        TargetPermanent auraTarget = new TargetLandPermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-        
-        // Enchanted land has "{tap}: Put a 1/1 green Squirrel creature token onto the battlefield."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SquirrelToken()), new TapSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted land has \"{T}: Put a 1/1 green Squirrel creature token onto the battlefield.\"")));
+        // Sacrifice an enchantment: Phantatog gets +1/+1 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new BoostSourceEffect(1,1, Duration.EndOfTurn),
+                new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledEnchantmentPermanent("enchantment")))));
+        // Discard a card: Phantatog gets +1/+1 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new BoostSourceEffect(1,1, Duration.EndOfTurn),
+                new DiscardCardCost()));
     }
 
-    public SquirrelNest(final SquirrelNest card) {
+    public Phantatog(final Phantatog card) {
         super(card);
     }
 
     @Override
-    public SquirrelNest copy() {
-        return new SquirrelNest(this);
+    public Phantatog copy() {
+        return new Phantatog(this);
     }
 }

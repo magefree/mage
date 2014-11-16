@@ -25,60 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracy;
+package mage.sets.odyssey;
 
 import java.util.UUID;
-import mage.abilities.Ability;
+import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.costs.common.ExileFromGraveCost;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.permanent.token.SquirrelToken;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetLandPermanent;
+import mage.filter.FilterCard;
+import mage.filter.common.FilterControlledArtifactPermanent;
+import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author emerald000
+ * @author LevelX2
  */
-public class SquirrelNest extends CardImpl {
+public class Sarcatog extends CardImpl {
 
-    public SquirrelNest(UUID ownerId) {
-        super(ownerId, 180, "Squirrel Nest", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
-        this.expansionSetCode = "CNS";
-        this.subtype.add("Aura");
+    public Sarcatog(UUID ownerId) {
+        super(ownerId, 293, "Sarcatog", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
+        this.expansionSetCode = "ODY";
+        this.subtype.add("Atog");
 
-        this.color.setGreen(true);
+        this.color.setRed(true);
+        this.color.setBlack(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
 
-        // Enchant land
-        TargetPermanent auraTarget = new TargetLandPermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-        
-        // Enchanted land has "{tap}: Put a 1/1 green Squirrel creature token onto the battlefield."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SquirrelToken()), new TapSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted land has \"{T}: Put a 1/1 green Squirrel creature token onto the battlefield.\"")));
+        // Exile two cards from your graveyard: Sarcatog gets +1/+1 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new BoostSourceEffect(1,1, Duration.EndOfTurn),
+                new ExileFromGraveCost(new TargetCardInYourGraveyard(2,new FilterCard("cards")))));
+
+        // Sacrifice an artifact: Sarcatog gets +1/+1 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new BoostSourceEffect(1,1, Duration.EndOfTurn),
+                new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("artifact")))));
     }
 
-    public SquirrelNest(final SquirrelNest card) {
+    public Sarcatog(final Sarcatog card) {
         super(card);
     }
 
     @Override
-    public SquirrelNest copy() {
-        return new SquirrelNest(this);
+    public Sarcatog copy() {
+        return new Sarcatog(this);
     }
 }
