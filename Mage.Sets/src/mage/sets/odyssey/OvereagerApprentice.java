@@ -31,10 +31,10 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -57,7 +57,7 @@ public class OvereagerApprentice extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Discard a card, Sacrifice Overeager Apprentice: Add {B}{B}{B} to your mana pool.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 0, 0, 3, 0, 0)), new DiscardCardCost());
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 0, 0, 3, 0, 0)), new DiscardCardCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
