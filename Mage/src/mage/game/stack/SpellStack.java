@@ -29,6 +29,7 @@
 package mage.game.stack;
 
 import java.util.ArrayDeque;
+import java.util.Date;
 import java.util.UUID;
 import mage.MageObject;
 import mage.constants.Zone;
@@ -40,6 +41,8 @@ import mage.game.events.GameEvent;
  * @author BetaSteward_at_googlemail.com
  */
 public class SpellStack extends ArrayDeque<StackObject> {
+
+    protected Date dateLastAdded;
 
     public SpellStack () {}
 
@@ -123,4 +126,15 @@ public class SpellStack extends ArrayDeque<StackObject> {
     public SpellStack copy() {
         return new SpellStack(this);
     }
+
+    @Override
+    public void push(StackObject e) {
+        super.push(e);
+        this.dateLastAdded = new Date();
+    }
+
+    public Date getDateLastAdded() {
+        return dateLastAdded;
+    }
+
 }

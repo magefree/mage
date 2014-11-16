@@ -127,6 +127,7 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean getPassedTurn();
     boolean getPassedUntilEndOfTurn();
     boolean getPassedUntilNextMain();
+    boolean getPassedUntilStackResolved();
     boolean getPassedAllTurns();
 
     boolean hasLost();

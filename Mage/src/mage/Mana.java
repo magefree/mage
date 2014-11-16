@@ -210,7 +210,9 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     @Override
     public String toString() {
         StringBuilder sbMana = new StringBuilder();
-
+        if (colorless > 0) {
+            sbMana.append("{").append(Integer.toString(colorless)).append("}");
+        }
         for (int i = 0; i < red; i++) {
             sbMana.append("{R}");
         }
@@ -220,17 +222,14 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         for (int i = 0; i < blue; i++) {
             sbMana.append("{U}");
         }
-        for (int i = 0; i < black; i++) {
-            sbMana.append("{B}");
-        }
         for (int i = 0; i < white; i++) {
             sbMana.append("{W}");
         }
+        for (int i = 0; i < black; i++) {
+            sbMana.append("{B}");
+        }
         for (int i = 0; i < any; i++) {
             sbMana.append("{Any}");
-        }
-        if (colorless > 0) {
-            sbMana.append("{").append(Integer.toString(colorless)).append("}");
         }
         return sbMana.toString();
     }
