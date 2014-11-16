@@ -25,38 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.commander2014;
 
 import java.util.UUID;
-
+import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.PutOnLibraryTargetEffect;
-import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
+import mage.filter.common.FilterCreatureSpell;
+import mage.target.TargetSpell;
 
 /**
- * @author Loki
+ *
+ * @author LevelX2
  */
-public class TemporalSpring extends CardImpl {
+public class Exclude extends CardImpl {
 
-    public TemporalSpring(UUID ownerId) {
-        super(ownerId, 125, "Temporal Spring", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}{U}");
-        this.expansionSetCode = "APC";
+    public Exclude(UUID ownerId) {
+        super(ownerId, 108, "Exclude", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
+        this.expansionSetCode = "C14";
+
         this.color.setBlue(true);
-        this.color.setGreen(true);
 
-        // Put target permanent on top of its owner's library.
-        this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetPermanent());
+        // Counter target creature spell.
+        this.getSpellAbility().addEffect(new CounterTargetEffect());
+        this.getSpellAbility().addTarget(new TargetSpell(new FilterCreatureSpell()));
+
+        // Draw a card.
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public TemporalSpring(final TemporalSpring card) {
+    public Exclude(final Exclude card) {
         super(card);
     }
 
     @Override
-    public TemporalSpring copy() {
-        return new TemporalSpring(this);
+    public Exclude copy() {
+        return new Exclude(this);
     }
 }

@@ -84,9 +84,9 @@ public class ChooseNewTargetsTargetEffect extends OneShotEffect {
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
         if (forceChange) {
-            sb.append("Change the target of target ");
+            sb.append("change the target of target ");
         } else {
-            sb.append("You may choose new targets for target ");
+            sb.append("you may choose new targets for target ");
         }
         sb.append(mode.getTargets().get(0).getTargetName());
         return sb.toString();

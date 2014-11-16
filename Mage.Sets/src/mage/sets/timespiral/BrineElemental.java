@@ -25,38 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.timespiral;
 
 import java.util.UUID;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.effects.common.PutOnLibraryTargetEffect;
-import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
-
 /**
- * @author Loki
+ *
+ * @author LevelX2
  */
-public class TemporalSpring extends CardImpl {
+public class BrineElemental extends mage.sets.commander2014.BrineElemental {
 
-    public TemporalSpring(UUID ownerId) {
-        super(ownerId, 125, "Temporal Spring", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}{U}");
-        this.expansionSetCode = "APC";
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-
-        // Put target permanent on top of its owner's library.
-        this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetPermanent());
+    public BrineElemental(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 50;
+        this.expansionSetCode = "TSP";
     }
 
-    public TemporalSpring(final TemporalSpring card) {
+    public BrineElemental(final BrineElemental card) {
         super(card);
     }
 
     @Override
-    public TemporalSpring copy() {
-        return new TemporalSpring(this);
+    public BrineElemental copy() {
+        return new BrineElemental(this);
     }
 }

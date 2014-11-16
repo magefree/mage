@@ -25,38 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.commander2014;
 
 import java.util.UUID;
-
+import mage.abilities.common.BeginningOfDrawTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.DrawCardTargetEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.PutOnLibraryTargetEffect;
-import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
+import mage.constants.TargetController;
 
 /**
- * @author Loki
+ *
+ * @author LevelX2
  */
-public class TemporalSpring extends CardImpl {
+public class WellOfIdeas extends CardImpl {
 
-    public TemporalSpring(UUID ownerId) {
-        super(ownerId, 125, "Temporal Spring", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}{U}");
-        this.expansionSetCode = "APC";
+    public WellOfIdeas(UUID ownerId) {
+        super(ownerId, 20, "Well of Ideas", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}");
+        this.expansionSetCode = "C14";
+
         this.color.setBlue(true);
-        this.color.setGreen(true);
 
-        // Put target permanent on top of its owner's library.
-        this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetPermanent());
+        // When Well of Ideas enters the battlefield, draw two cards.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(2), false));
+
+        // At the beginning of each other player's draw step, that player draws an additional card.
+        Effect effect  = new DrawCardTargetEffect(1);
+        effect.setText("that player draws an additional card");
+        this.addAbility(new BeginningOfDrawTriggeredAbility(effect, TargetController.NOT_YOU, false));
+
+        // At the beginning of your draw step, draw two additional cards.
+        effect  = new DrawCardTargetEffect(2);
+        effect.setText("draw two additional cards");
+        this.addAbility(new BeginningOfDrawTriggeredAbility(effect , TargetController.YOU, false));
     }
 
-    public TemporalSpring(final TemporalSpring card) {
+    public WellOfIdeas(final WellOfIdeas card) {
         super(card);
     }
 
     @Override
-    public TemporalSpring copy() {
-        return new TemporalSpring(this);
+    public WellOfIdeas copy() {
+        return new WellOfIdeas(this);
     }
 }

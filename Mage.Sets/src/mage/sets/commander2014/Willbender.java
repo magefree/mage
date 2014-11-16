@@ -25,38 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.commander2014;
 
 import java.util.UUID;
-
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
+import mage.abilities.keyword.MorphAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.PutOnLibraryTargetEffect;
-import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.NumberOfTargetsPredicate;
+import mage.target.TargetStackObject;
 
 /**
- * @author Loki
+ *
+ * @author LevelX2
  */
-public class TemporalSpring extends CardImpl {
+public class Willbender extends CardImpl {
 
-    public TemporalSpring(UUID ownerId) {
-        super(ownerId, 125, "Temporal Spring", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}{U}");
-        this.expansionSetCode = "APC";
-        this.color.setBlue(true);
-        this.color.setGreen(true);
+    private static final FilterSpell filter = new FilterSpell("spell with a single target");
 
-        // Put target permanent on top of its owner's library.
-        this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetPermanent());
+    static {
+        filter.add(new NumberOfTargetsPredicate(1));
     }
 
-    public TemporalSpring(final TemporalSpring card) {
+    public Willbender(UUID ownerId) {
+        super(ownerId, 131, "Willbender", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        this.expansionSetCode = "C14";
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
+
+        this.color.setBlue(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
+
+        // Morph {1}{U}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{U}")));
+        // When Willbender is turned face up, change the target of target spell or ability with a single target.
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new ChooseNewTargetsTargetEffect(true, true));
+        ability.addTarget(new TargetStackObject(filter));
+        this.addAbility(ability);
+
+    }
+
+    public Willbender(final Willbender card) {
         super(card);
     }
 
     @Override
-    public TemporalSpring copy() {
-        return new TemporalSpring(this);
+    public Willbender copy() {
+        return new Willbender(this);
     }
 }

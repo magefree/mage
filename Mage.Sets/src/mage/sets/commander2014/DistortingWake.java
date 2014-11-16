@@ -25,38 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.commander2014;
 
 import java.util.UUID;
-
+import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.PutOnLibraryTargetEffect;
-import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
+import mage.filter.common.FilterNonlandPermanent;
+import mage.game.Game;
+import mage.target.Target;
+import mage.target.common.TargetNonlandPermanent;
 
 /**
- * @author Loki
+ *
+ * @author LevelX2
  */
-public class TemporalSpring extends CardImpl {
+public class DistortingWake extends CardImpl {
 
-    public TemporalSpring(UUID ownerId) {
-        super(ownerId, 125, "Temporal Spring", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}{U}");
-        this.expansionSetCode = "APC";
+    public DistortingWake(UUID ownerId) {
+        super(ownerId, 107, "Distorting Wake", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{U}{U}{U}");
+        this.expansionSetCode = "C14";
+
         this.color.setBlue(true);
-        this.color.setGreen(true);
 
-        // Put target permanent on top of its owner's library.
-        this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetPermanent());
+        // Return X target nonland permanents to their owners' hands.
+        Effect effect = new ReturnToHandTargetEffect();
+        effect.setText("Return X target nonland permanents to their owners' hands");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
 
-    public TemporalSpring(final TemporalSpring card) {
+    public DistortingWake(final DistortingWake card) {
         super(card);
     }
 
     @Override
-    public TemporalSpring copy() {
-        return new TemporalSpring(this);
+    public DistortingWake copy() {
+        return new DistortingWake(this);
     }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof SpellAbility) {
+            int xValue = ability.getManaCostsToPay().getX();
+            Target target = new TargetNonlandPermanent(xValue, xValue,
+                    new FilterNonlandPermanent(xValue + " target nonland permanent(s)"), false);
+            ability.getTargets().clear();
+            ability.getTargets().add(target);
+        }
+    }
+
 }

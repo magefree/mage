@@ -25,38 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.abilities.condition.common;
 
-import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
+import mage.game.Game;
+import mage.players.Player;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.effects.common.PutOnLibraryTargetEffect;
-import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
 
 /**
- * @author Loki
+ * Checks if the player has its commander in play
+ *
+ * @author LevelX2
  */
-public class TemporalSpring extends CardImpl {
+public class CommanderInPlayCondition implements Condition {
 
-    public TemporalSpring(UUID ownerId) {
-        super(ownerId, 125, "Temporal Spring", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}{U}");
-        this.expansionSetCode = "APC";
-        this.color.setBlue(true);
-        this.color.setGreen(true);
+    private static CommanderInPlayCondition fInstance = null;
 
-        // Put target permanent on top of its owner's library.
-        this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetPermanent());
-    }
+    private CommanderInPlayCondition() {}
 
-    public TemporalSpring(final TemporalSpring card) {
-        super(card);
+    public static Condition getInstance() {
+        if (fInstance == null) {
+            fInstance = new CommanderInPlayCondition();
+        }
+        return fInstance;
     }
 
     @Override
-    public TemporalSpring copy() {
-        return new TemporalSpring(this);
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            return game.getPermanent(controller.getCommanderId()) != null;
+        }
+        return false;
     }
+
+    @Override
+    public String toString() {
+        return "As long as you control your commander";
+    }
+
 }

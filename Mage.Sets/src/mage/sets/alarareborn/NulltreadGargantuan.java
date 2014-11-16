@@ -53,6 +53,8 @@ public class NulltreadGargantuan extends CardImpl {
         this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
+
+        // When Nulltread Gargantuan enters the battlefield, put a creature you control on top of its owner's library.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PutOnLibraryTargetEffect(true), false);
         Target target = new TargetControlledCreaturePermanent();
         target.setNotTarget(true);

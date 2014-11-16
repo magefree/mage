@@ -55,10 +55,14 @@ public class Rootrunner extends CardImpl {
         this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
+
+        //{G}{G}, Sacrifice Rootrunner: Put target land on top of its owner's library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(true), new ManaCostsImpl("{G}{G}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
+
+        // Soulshift 3 (When this creature dies, you may return target Spirit card with converted mana cost 3 or less from your graveyard to your hand.)
         this.addAbility(new SoulshiftAbility(3));
     }
 

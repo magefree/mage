@@ -117,8 +117,11 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
             sb.append("up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName()).append(" to their owners' hand");
             return sb.toString();
         } else {
+            if (target.getNumberOfTargets() > 1) {
+                sb.append(CardUtil.numberToText(target.getNumberOfTargets())).append(" ");
+            }
             if (!target.getTargetName().startsWith("another")) {
-                sb.append(" target ");
+                sb.append("target ");
             }
             sb.append(target.getTargetName()).append(" to it's owner's hand").toString();
             return sb.toString();

@@ -25,38 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.commander2014;
 
 import java.util.UUID;
-
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.discard.DiscardControllerEffect;
+import mage.abilities.keyword.MorphAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.PutOnLibraryTargetEffect;
-import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
 
 /**
- * @author Loki
+ *
+ * @author LevelX2
  */
-public class TemporalSpring extends CardImpl {
+public class RiptideSurvivor extends CardImpl {
 
-    public TemporalSpring(UUID ownerId) {
-        super(ownerId, 125, "Temporal Spring", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}{U}");
-        this.expansionSetCode = "APC";
+    public RiptideSurvivor(UUID ownerId) {
+        super(ownerId, 121, "Riptide Survivor", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "C14";
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
+
         this.color.setBlue(true);
-        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-        // Put target permanent on top of its owner's library.
-        this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetPermanent());
+        // Morph {1}{U}{U}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{U}{U}")));
+        // When Riptide Survivor is turned face up, discard two cards, then draw three cards.
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new DiscardControllerEffect(2));
+        Effect effect = new DrawCardSourceControllerEffect(3);
+        effect.setText("then draw three cards");
+        ability.addEffect(effect);
+        this.addAbility(ability);
     }
 
-    public TemporalSpring(final TemporalSpring card) {
+    public RiptideSurvivor(final RiptideSurvivor card) {
         super(card);
     }
 
     @Override
-    public TemporalSpring copy() {
-        return new TemporalSpring(this);
+    public RiptideSurvivor copy() {
+        return new RiptideSurvivor(this);
     }
 }
+
