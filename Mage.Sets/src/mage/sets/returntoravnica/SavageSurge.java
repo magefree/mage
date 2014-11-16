@@ -28,6 +28,7 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -52,7 +53,9 @@ public class SavageSurge extends CardImpl {
         // Target creature gets +2/+2 until end of turn. Untap that creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new UntapTargetEffect());
+        Effect effect = new UntapTargetEffect();
+        effect.setText("Untap that creature");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public SavageSurge(final SavageSurge card) {

@@ -35,7 +35,6 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
-import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.ExileCardFromOwnGraveyardControllerEffect;
@@ -49,8 +48,6 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *

@@ -73,6 +73,9 @@ public class PreventDamageToTargetEffect extends PreventionEffectImpl {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         if (amountToPrevent == Integer.MAX_VALUE) {
             sb.append("Prevent all damage that would be dealt to target ");

@@ -68,29 +68,26 @@ public class DiscardTargetCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        this.cards.clear();
         Player player = game.getPlayer(controllerId);
-        if (randomDiscard) {
-            int amount = this.getTargets().get(0).getMaxNumberOfTargets();
-            int maxAmount = Math.min(amount, player.getHand().size());
-            for (int i = 0; i < maxAmount; i++) {
-                Card card = player.getHand().getRandom(game);
-                if (card != null) {
-                    paid |= player.discard(card, null, game);
-                }
-            }
+        if (player == null) {
+            return false;
+        }
+        int amount = this.getTargets().get(0).getNumberOfTargets();
+        if (randomDiscard) {            
+            this.cards.addAll(player.discard(amount, true, ability, game).getCards(game));
         } else {
-            if (targets.choose(Outcome.Discard, controllerId, sourceId, game)) {
-            
+            if (targets.choose(Outcome.Discard, controllerId, sourceId, game)) {            
                 for (UUID targetId: targets.get(0).getTargets()) {
                     Card card = player.getHand().get(targetId, game);
                     if (card == null) {
                         return false;
                     }
                     this.cards.add(card.copy());
-                    paid |= player.discard(card, ability, game);
                 }
             }
         }
+        paid = cards.size() >= amount;
         return paid;
     }
 

@@ -81,7 +81,7 @@ public class ExileCardFromOwnGraveyardControllerEffect extends OneShotEffect {
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("Exile ");
+        StringBuilder sb = new StringBuilder("exile ");
         if (amount == 1) {
             sb.append(" a card ");
         } else {

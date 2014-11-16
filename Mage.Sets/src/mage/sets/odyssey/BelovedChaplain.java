@@ -29,10 +29,10 @@ package mage.sets.odyssey;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.keyword.ProtectionAbility;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
@@ -41,12 +41,12 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  * @author cbt33, BetaSteward (Black Knight)
  */
 public class BelovedChaplain extends CardImpl {
-    
-    public static final FilterCard filter = new FilterCard("creature");
-            
-            static {
-                filter.add(new CardTypePredicate(CardType.CREATURE));
-                                }
+
+    public static final FilterCard filter = new FilterCard("creatures");
+
+    static {
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+    }
 
     public BelovedChaplain(UUID ownerId) {
         super(ownerId, 11, "Beloved Chaplain", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
