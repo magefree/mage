@@ -466,6 +466,7 @@ public class HumanPlayer extends PlayerImpl {
                 return false;
             }
             if (game.getStack().isEmpty()) {
+                passedUntilStackResolved = false;
                 boolean dontCheckPassStep = false;
                 if (passedTurn) {
                     pass(game);
@@ -509,6 +510,14 @@ public class HumanPlayer extends PlayerImpl {
                     pass(game);
                     return false;
                 }                
+            } else if (passedUntilStackResolved) {
+                if (dateLastAddedToStack == game.getStack().getDateLastAdded()) {
+                    dateLastAddedToStack = game.getStack().getDateLastAdded();
+                    pass(game);
+                    return false;
+                } else {
+                    passedUntilStackResolved = false;
+                }
             }
             updateGameStatePriority("priority", game);
             game.firePriorityEvent(playerId);

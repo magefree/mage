@@ -294,6 +294,14 @@ public class ImageManagerImpl implements ImageManager {
     }
 
     @Override
+    public Image getSkipStackButtonImage() {
+        if (imageSkipStackButton == null) {
+            imageSkipStackButton = getBufferedImageFromResource("/buttons/skip_stack.png");
+        }
+        return imageSkipStackButton;
+    }
+
+    @Override
     public Image getSkipYourNextTurnButtonImage() {
         if (imageSkipYourNextTurnButton == null) {
             imageSkipYourNextTurnButton = getBufferedImageFromResource("/buttons/skip_all.png");
@@ -388,6 +396,7 @@ public class ImageManagerImpl implements ImageManager {
     private static BufferedImage imageSkipNextTurnButton;
     private static BufferedImage imageSkipToEndTurnButton;
     private static BufferedImage imageSkipToMainButton;
+    private static BufferedImage imageSkipStackButton;
     private static BufferedImage imageSkipYourNextTurnButton;
 
     private static Map<String, Image> phasesImages;

@@ -71,6 +71,7 @@ public class PlayerView implements Serializable {
     private final boolean passedTurn; // F4
     private final boolean passedUntilEndOfTurn; // F5
     private final boolean passedUntilNextMain; // F6
+    private final boolean passedUntilStackResolved; // F8
     private final boolean passedAllTurns; // F9
 
     public PlayerView(Player player, GameState state, Game game, UUID createdForPlayerId) {
@@ -140,6 +141,7 @@ public class PlayerView implements Serializable {
         this.passedUntilEndOfTurn = player.getPassedUntilEndOfTurn();
         this.passedUntilNextMain = player.getPassedUntilNextMain();
         this.passedAllTurns = player.getPassedAllTurns();
+        this.passedUntilStackResolved = player.getPassedUntilStackResolved();
     }
 
     private boolean showInBattlefield(Permanent permanent, GameState state) {
@@ -255,4 +257,7 @@ public class PlayerView implements Serializable {
         return passedAllTurns;
     }
 
+    public boolean isPassedUntilStackResolved() {
+        return passedUntilStackResolved;
+    }
 }

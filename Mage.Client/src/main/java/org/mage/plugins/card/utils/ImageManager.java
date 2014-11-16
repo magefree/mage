@@ -37,6 +37,7 @@ public interface ImageManager {
     Image getSkipNextTurnButtonImage();
     Image getSkipEndTurnButtonImage();
     Image getSkipMainButtonImage();
+    Image getSkipStackButtonImage();
     Image getSkipYourNextTurnButtonImage();
 
 
