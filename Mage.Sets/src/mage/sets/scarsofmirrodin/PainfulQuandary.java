@@ -28,22 +28,18 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -55,7 +51,9 @@ public class PainfulQuandary extends CardImpl {
         super(ownerId, 73, "Painful Quandary", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
         this.expansionSetCode = "SOM";
         this.color.setBlack(true);
-        this.addAbility(new PainfulQuandryAbility());
+
+        // Whenever an opponent casts a spell, that player loses 5 life unless he or she discards a card.
+        this.addAbility(new SpellCastOpponentTriggeredAbility(new PainfulQuandryEffect(), false));
     }
 
     public PainfulQuandary(final PainfulQuandary card) {
@@ -69,41 +67,11 @@ public class PainfulQuandary extends CardImpl {
 
 }
 
-class PainfulQuandryAbility extends TriggeredAbilityImpl {
-
-    public PainfulQuandryAbility() {
-        super(Zone.BATTLEFIELD, new PainfulQuandryEffect());
-    }
-
-    public PainfulQuandryAbility(final PainfulQuandryAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public PainfulQuandryAbility copy() {
-        return new PainfulQuandryAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.SPELL_CAST && game.getOpponents(controllerId).contains(event.getPlayerId())) {
-            this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever an opponent casts a spell, that player loses 5 life unless he or she discards a card.";
-    }
-}
-
 class PainfulQuandryEffect extends OneShotEffect {
 
     public PainfulQuandryEffect() {
-        super(Outcome.Damage);
-        staticText = "player loses 5 life unless he or she discards a card";
+        super(Outcome.LoseLife);
+        staticText = "that player loses 5 life unless he or she discards a card";
     }
 
     public PainfulQuandryEffect(final PainfulQuandryEffect effect) {
@@ -119,13 +87,16 @@ class PainfulQuandryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
+            boolean paid = false;
             Cost cost = new DiscardTargetCost(new TargetCardInHand());
-            if (cost.canPay(source, player.getId(), player.getId(), game)) {
-                if (!cost.pay(source, game, player.getId(), player.getId(), false)) {
-                    player.loseLife(5, game);
-                }
-                return true;
+            if (cost.canPay(source, player.getId(), player.getId(), game)
+                    && player.chooseUse(Outcome.Detriment, "Discard a card (otherwise you lose 5 life)?", game)) {
+                paid = cost.pay(source, game, source.getSourceId(), player.getId(), false);
             }
+            if (!paid) {
+                player.loseLife(5, game);
+            }
+            return true;
         }
         return false;
     }
