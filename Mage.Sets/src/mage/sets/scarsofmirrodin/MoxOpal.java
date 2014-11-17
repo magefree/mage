@@ -32,10 +32,15 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.MetalcraftCost;
-import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 
 import java.util.UUID;
+import mage.abilities.condition.common.MetalcraftCondition;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.AddManaOfAnyColorEffect;
+import mage.abilities.mana.ActivateIfConditionManaAbility;
+import mage.constants.AbilityWord;
+import mage.constants.Zone;
 
 /**
  *
@@ -48,8 +53,12 @@ public class MoxOpal extends CardImpl {
         this.supertype.add("Legendary");
         this.expansionSetCode = "SOM";
 
-        Ability ability = new AnyColorManaAbility();
-        ability.addCost(new MetalcraftCost());
+        Ability ability = new ActivateIfConditionManaAbility(
+                Zone.BATTLEFIELD, 
+                new AddManaOfAnyColorEffect(), 
+                new TapSourceCost(),
+                MetalcraftCondition.getInstance());
+        ability.setAbilityWord(AbilityWord.METALCRAFT);
         this.addAbility(ability);
     }
 

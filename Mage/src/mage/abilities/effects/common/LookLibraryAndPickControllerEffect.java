@@ -133,7 +133,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
                 TargetCard target = new TargetCard((upTo ? 0:numberToPick.calculate(game, source, this)),numberToPick.calculate(game, source, this), Zone.PICK, pickFilter);
                 if (player.choose(Outcome.DrawCard, cards, target, game)) {
                     Cards reveal = new CardsImpl();
-                    for (UUID cardId : (List<UUID>)target.getTargets()) {
+                    for (UUID cardId : target.getTargets()) {
                         Card card = cards.get(cardId, game);
                         if (card != null) {
                             cards.remove(card);

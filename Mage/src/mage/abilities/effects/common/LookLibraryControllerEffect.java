@@ -210,7 +210,7 @@ public class LookLibraryControllerEffect extends OneShotEffect {
         if (putOnTop) {
             sb.append("on your library (last chosen will be on top)");
         } else {
-            sb.append("on bottom of your library (last chosen will be on bottom)");
+            sb.append("on bottom of your library (last chosen will be mostbottom)");
         }
         return sb.toString();
     }
