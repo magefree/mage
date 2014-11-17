@@ -130,8 +130,8 @@ class VedalkenEngineerAbility extends ManaAbility {
 
 class VedalkenEngineerEffect extends ManaEffect {
 
-    private int amount;
-    private ConditionalManaBuilder manaBuilder;
+    private final int amount;
+    private final ConditionalManaBuilder manaBuilder;
 
     public VedalkenEngineerEffect(int amount, ConditionalManaBuilder manaBuilder) {
         super();

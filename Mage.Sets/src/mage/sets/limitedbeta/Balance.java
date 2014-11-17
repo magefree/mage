@@ -192,7 +192,7 @@ class BalanceEffect extends OneShotEffect {
             
             for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
-                if (player != null) {
+                if (player != null && cardsToDiscard.get(playerId) != null) {
                     for (UUID cardId : cardsToDiscard.get(playerId)) {
                         Card card = game.getCard(cardId);
                         if (card != null) {

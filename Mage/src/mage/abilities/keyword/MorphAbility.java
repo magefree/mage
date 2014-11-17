@@ -102,7 +102,7 @@ import mage.players.Player;
 public class MorphAbility extends StaticAbility implements AlternativeSourceCosts {
 
     protected static final String ABILITY_KEYWORD = "Morph";
-    protected static final String REMINDER_TEXT = "(You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)";
+    protected static final String REMINDER_TEXT = "<i>(You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)</i>";
     protected String ruleText;
     protected AlternativeCost2Impl alternateCosts = new AlternativeCost2Impl(ABILITY_KEYWORD, REMINDER_TEXT, new GenericManaCost(3));
 
