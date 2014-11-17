@@ -40,6 +40,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -58,7 +59,11 @@ public class FiligreeAngel extends CardImpl {
         this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+
+        // When Filigree Angel enters the battlefield, you gain 3 life for each artifact you control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new FiligreeAngelEffect()));
     }
 
@@ -73,7 +78,8 @@ public class FiligreeAngel extends CardImpl {
 }
 
 class FiligreeAngelEffect extends OneShotEffect {
-    private static final FilterPermanent filter = new FilterPermanent();
+    
+    private static final FilterPermanent filter = new FilterControlledPermanent();
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
