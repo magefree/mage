@@ -854,14 +854,26 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (chosenCard != null) {
                         cards.remove(chosenCard);
                         Zone fromZone = game.getState().getZone(chosenCard.getId());
-                        this.moveCardToLibraryWithInfo(chosenCard, source.getSourceId(), game, fromZone, true, false);
+                        if (fromZone.equals(Zone.BATTLEFIELD)) {
+                            Permanent permanent = game.getPermanent(chosenCard.getId());
+                            this.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, fromZone, true, false);
+                        } else {
+                            this.moveCardToLibraryWithInfo(chosenCard, source.getSourceId(), game, fromZone, true, false);
+                        }
                     }
                     target.clearChosen();
                 }
                 if (cards.size() == 1) {
-                    Card chosenCard = cards.get(cards.iterator().next(), game);
-                    Zone fromZone = game.getState().getZone(chosenCard.getId());
-                    this.moveCardToLibraryWithInfo(chosenCard, source.getSourceId(), game, fromZone, true, false);
+                    // Card chosenCard = cards.get(cards.iterator().next(), game);
+                    UUID cardId = cards.iterator().next();
+                    Zone fromZone = game.getState().getZone(cardId);
+                    if (fromZone.equals(Zone.BATTLEFIELD)) {
+                        Permanent permanent = game.getPermanent(cardId);
+                        this.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, fromZone, true, false);
+                    } else {
+                        Card chosenCard = cards.get(cardId, game);
+                        this.moveCardToLibraryWithInfo(chosenCard, source.getSourceId(), game, fromZone, true, false);
+                    }
                 }
             }
         }

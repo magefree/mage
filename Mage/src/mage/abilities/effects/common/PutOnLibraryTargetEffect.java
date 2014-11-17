@@ -27,6 +27,9 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.abilities.Ability;
@@ -38,6 +41,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.UUID;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.target.Target;
 import mage.util.CardUtil;
 
@@ -71,27 +76,61 @@ public class PutOnLibraryTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean result = false;
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
+            List<Card> cards = new ArrayList<>();
+            List<Permanent> permanents = new ArrayList<>();
             for (UUID targetId : targetPointer.getTargets(game, source)) {
                 switch (game.getState().getZone(targetId)) {
                     case BATTLEFIELD:
                         Permanent permanent = game.getPermanent(targetId);
                         if (permanent != null) {
-                            result |= controller.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, onTop, true);
+                            permanents.add(permanent);
                         }
                         break;
                     case GRAVEYARD:
                         Card card = game.getCard(targetId);
                         if (card != null && game.getState().getZone(targetId).equals(Zone.GRAVEYARD)) {
-                            result |= controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD, onTop, true);
+                            cards.add(card);
                         }
                         break;
                 }
             }
+            // Plow Under
+            // 10/4/2004 	The owner decides the order the two lands are stacked there.
+            while (!cards.isEmpty()) {
+                Card card = cards.iterator().next();
+                if (card != null) {
+                    Player owner = game.getPlayer(card.getOwnerId());
+                    Cards cardsPlayer = new CardsImpl();
+                    for (Iterator<Card> iterator = cards.iterator(); iterator.hasNext();) {
+                        Card next = iterator.next();
+                        if (next.getOwnerId().equals(owner.getId())) {
+                            cardsPlayer.add(next);
+                            iterator.remove();
+                        }
+                    }
+                    owner.putCardsOnTopOfLibrary(cardsPlayer, game, source, true);
+                }
+            }
+            while (!permanents.isEmpty()) {
+                Permanent permanent = permanents.iterator().next();
+                if (permanent != null) {
+                    Player owner = game.getPlayer(permanent.getOwnerId());
+                    Cards cardsPlayer = new CardsImpl();
+                    for (Iterator<Permanent> iterator = permanents.iterator(); iterator.hasNext();) {
+                        Permanent next = iterator.next();
+                        if (next.getOwnerId().equals(owner.getId())) {
+                            cardsPlayer.add(next);
+                            iterator.remove();
+                        }
+                    }
+                    owner.putCardsOnTopOfLibrary(cardsPlayer, game, source, true);
+                }
+            }
+            return true;
         }
-        return result;
+        return false;
 
     }
 
