@@ -62,7 +62,7 @@ class SolRingAbility extends BasicManaAbility {
 
     public SolRingAbility() {
         super(new BasicManaEffect(Mana.ColorlessMana(2)));
-        this.netMana.setColorless(2);
+        this.netMana.add(new Mana(0,0,0,0,0,2,0));
     }
 
     public SolRingAbility(final SolRingAbility ability) {

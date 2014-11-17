@@ -28,6 +28,8 @@
 
 package mage.abilities.mana;
 
+import java.util.ArrayList;
+import java.util.List;
 import mage.Mana;
 import mage.abilities.costs.Cost;
 import mage.abilities.decorator.ConditionalManaEffect;
@@ -59,7 +61,9 @@ public class ConditionalManaAbility extends ManaAbility {
     }
 
     @Override
-    public Mana getNetMana(Game game) {
-        return conditionalManaEffect.getMana(game, this);
+    public List<Mana> getNetMana(Game game) {
+        List<Mana> newNetMana = new ArrayList<>();
+        newNetMana.add(conditionalManaEffect.getMana(game, this));
+        return newNetMana;
     }
 }

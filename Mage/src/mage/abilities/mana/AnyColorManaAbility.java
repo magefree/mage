@@ -27,6 +27,7 @@
 */
 package mage.abilities.mana;
 
+import mage.Mana;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
@@ -39,7 +40,7 @@ public class AnyColorManaAbility extends ManaAbility {
 
     public AnyColorManaAbility(Cost cost) {
         super(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), cost);
-        this.netMana.setAny(1);
+        this.netMana.add(new Mana(0,0,0,0,0,0,1));
     }
 
     public AnyColorManaAbility(final AnyColorManaAbility ability) {

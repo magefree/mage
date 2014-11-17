@@ -70,7 +70,7 @@ class EldraziTempleManaAbility extends BasicManaAbility {
 
     EldraziTempleManaAbility ( ) {
         super(new BasicManaEffect(new EldraziConditionalMana()));
-        this.netMana.setColorless(2);
+        this.netMana.add(new Mana(0,0,0,0,0,2,0));
     }
 
     EldraziTempleManaAbility ( EldraziTempleManaAbility ability ) {

@@ -88,7 +88,7 @@ class MyrReservoirManaAbility extends BasicManaAbility {
 
     MyrReservoirManaAbility() {
         super(new BasicManaEffect(new MyrConditionalMana()));
-        this.netMana.setColorless(2);
+        this.netMana.add(new Mana(0,0,0,0,0,2,0));
     }
 
     MyrReservoirManaAbility(MyrReservoirManaAbility ability) {

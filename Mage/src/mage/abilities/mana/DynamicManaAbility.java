@@ -27,6 +27,8 @@
  */
 package mage.abilities.mana;
 
+import java.util.ArrayList;
+import java.util.List;
 import mage.Mana;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -84,10 +86,11 @@ public class DynamicManaAbility extends ManaAbility {
     }
 
     @Override
-    public Mana getNetMana(Game game) {
-        if (game == null) {
-            return new Mana();
-        }
-        return new Mana(manaEffect.computeMana(true, game, this));
+    public List<Mana> getNetMana(Game game) {
+        List<Mana> newNetMana = new ArrayList<>();
+        if (game != null) {
+            newNetMana.add(manaEffect.computeMana(true, game, this));
+        }        
+        return newNetMana;        
     }
 }

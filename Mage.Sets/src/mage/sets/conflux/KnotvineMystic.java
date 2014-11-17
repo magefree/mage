@@ -55,6 +55,8 @@ public class KnotvineMystic extends CardImpl{
         this.subtype.add("Druid");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+        
+        // {1}, {T}: Add {R}{G}{W} to your mana pool.
         Ability ability = new KnotvineMysticManaAbility();
         ability.addManaCost(new GenericManaCost(1));
         this.addAbility(ability);
@@ -75,9 +77,7 @@ class KnotvineMysticManaAbility extends BasicManaAbility {
 
     public KnotvineMysticManaAbility() {
         super(new BasicManaEffect(new Mana(1, 1, 0, 1, 0, 0, 0)));
-        this.netMana.setGreen(1);
-        this.netMana.setRed(1);
-        this.netMana.setWhite(1);
+        this.netMana.add(new Mana(1, 1, 0, 1, 0, 0, 0));
     }
 
     public KnotvineMysticManaAbility(final KnotvineMysticManaAbility ability) {

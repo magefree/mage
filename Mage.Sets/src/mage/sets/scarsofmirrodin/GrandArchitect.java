@@ -148,7 +148,7 @@ class GrandArchitectManaAbility extends ManaAbility {
 
     GrandArchitectManaAbility ( ) {
         super(Zone.BATTLEFIELD, new BasicManaEffect(new GrandArchitectConditionalMana()), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
-        this.netMana.setColorless(2);
+        this.netMana.add(new Mana(0,0,0,0,0,2,0));
     }
 
     GrandArchitectManaAbility ( GrandArchitectManaAbility ability ) {

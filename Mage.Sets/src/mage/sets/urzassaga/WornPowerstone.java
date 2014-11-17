@@ -64,7 +64,7 @@ class WornPowerstoneAbility extends BasicManaAbility {
 
     public WornPowerstoneAbility() {
         super(new BasicManaEffect(Mana.ColorlessMana(2)));
-        this.netMana.setColorless(2);
+        this.netMana.add(new Mana(0,0,0,0,0,2,0));
     }
 
     public WornPowerstoneAbility(final WornPowerstoneAbility ability) {

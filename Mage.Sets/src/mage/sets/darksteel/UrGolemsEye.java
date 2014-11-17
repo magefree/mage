@@ -64,7 +64,7 @@ class UrGolemsEyeAbility extends BasicManaAbility {
 
     public UrGolemsEyeAbility() {
         super(new BasicManaEffect(new Mana(0, 0, 0, 0, 0, 2, 0)));
-        this.netMana.setColorless(2);
+        this.netMana.add(new Mana(0, 0, 0, 0, 0, 2, 0));
     }
 
     public UrGolemsEyeAbility(final UrGolemsEyeAbility ability) {

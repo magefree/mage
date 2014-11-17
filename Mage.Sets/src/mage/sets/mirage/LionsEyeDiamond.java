@@ -76,7 +76,7 @@ class LionsEyeDiamondAbility extends ManaAbility {
 
     public LionsEyeDiamondAbility(Zone zone, Mana mana, Cost cost) {
         super(zone, new BasicManaEffect(mana), cost);
-        this.netMana = mana.copy();
+        this.netMana.add(mana.copy());
     }
 
     public LionsEyeDiamondAbility(final LionsEyeDiamondAbility ability) {

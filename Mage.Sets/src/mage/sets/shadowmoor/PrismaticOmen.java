@@ -80,7 +80,7 @@ public class PrismaticOmen extends CardImpl {
 
 class BecomesBasicLandTypeAllEffect extends ContinuousEffectImpl {
 
-    protected ArrayList<String> landTypes = new ArrayList();
+    protected ArrayList<String> landTypes = new ArrayList<>();
 
     public BecomesBasicLandTypeAllEffect(String... landNames) {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
@@ -112,7 +112,9 @@ class BecomesBasicLandTypeAllEffect extends ContinuousEffectImpl {
                         Mana mana = new Mana();
                         for (Ability ability : land.getAbilities()){
                             if (ability instanceof BasicManaAbility) {
-                                mana.add(((BasicManaAbility)ability ).getNetMana(game));
+                                for (Mana netMana: ((BasicManaAbility)ability ).getNetMana(game)) {
+                                    mana.add(netMana);
+                                }                
                             }
                         }
                         if (mana.getGreen() == 0 && landTypes.contains("Forest")) {

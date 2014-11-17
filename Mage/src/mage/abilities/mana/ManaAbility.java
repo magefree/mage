@@ -28,6 +28,8 @@
 
 package mage.abilities.mana;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.ActivatedAbilityImpl;
@@ -43,7 +45,7 @@ import mage.game.Game;
  */
 public abstract class ManaAbility extends ActivatedAbilityImpl {
 
-    protected Mana netMana = new Mana();
+    protected List<Mana> netMana = new ArrayList<>();
 
     public ManaAbility(Zone zone, ManaEffect effect, Cost cost) {
         super(AbilityType.MANA, zone);
@@ -58,7 +60,7 @@ public abstract class ManaAbility extends ActivatedAbilityImpl {
 
     public ManaAbility(ManaAbility ability) {
         super(ability);
-        this.netMana = ability.netMana.copy();
+        this.netMana.addAll(ability.netMana);
     }
 
     @Override
@@ -70,7 +72,14 @@ public abstract class ManaAbility extends ActivatedAbilityImpl {
         return costs.canPay(this, sourceId, controllerId, game);
     }
 
-    public Mana getNetMana(Game game) {
+    /**
+     * Used to check the possible mana production to determine
+     * which spells and/or abilities can be used. (player.getPlayable()).
+     * 
+     * @param game
+     * @return 
+     */
+    public List<Mana> getNetMana(Game game) {
         return netMana;
-    }
+    }        
 }

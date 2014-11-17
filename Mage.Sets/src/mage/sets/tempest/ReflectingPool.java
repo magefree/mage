@@ -93,7 +93,9 @@ class ReflectingPoolEffect extends ManaEffect {
         for (Permanent land : lands) {
             Abilities<ManaAbility> mana = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
             for (ManaAbility ability : mana) {
-                types.add(ability.getNetMana(game));
+                for (Mana netMana: ability.getNetMana(game)) {
+                    types.add(netMana);
+                }                
             }
         }
         Choice choice = new ChoiceImpl(false);

@@ -59,18 +59,35 @@ public class ManaOptions extends ArrayList<Mana> {
         if (!abilities.isEmpty()) {
             if (abilities.size() == 1) {
                 //if there is only one mana option available add it to all the existing options
-                addMana(abilities.get(0).getNetMana(game));
+                List<Mana> netManas =  abilities.get(0).getNetMana(game);
+                if (netManas.size() == 1) {
+                    addMana(netManas.get(0));
+                } else {
+                    List<Mana> copy = copy();
+                    this.clear();
+                    for (Mana netMana: netManas) {
+                        for (Mana mana: copy) {
+                            Mana newMana = new Mana();
+                            newMana.add(mana);
+                            newMana.add(netMana);
+                            this.add(newMana);
+                        }                        
+                    }                    
+                }
+                
             }
             else if (abilities.size() > 1) {
                 //perform a union of all existing options and the new options
                 List<Mana> copy = copy();
                 this.clear();
                 for (ManaAbility ability: abilities) {
-                    for (Mana mana: copy) {
-                        Mana newMana = new Mana();
-                        newMana.add(mana);
-                        newMana.add(ability.getNetMana(game));
-                        this.add(newMana);
+                    for (Mana netMana: ability.getNetMana(game)) {
+                        for (Mana mana: copy) {
+                            Mana newMana = new Mana();
+                            newMana.add(mana);
+                            newMana.add(netMana);
+                            this.add(newMana);
+                        }
                     }
                 }
             }
@@ -85,11 +102,38 @@ public class ManaOptions extends ArrayList<Mana> {
             if (abilities.size() == 1) {
                 //if there is only one mana option available add it to all the existing options
                 ManaAbility ability = abilities.get(0);
+                List<Mana> netManas =  abilities.get(0).getNetMana(game);
                 if (ability.getManaCosts().isEmpty()) {
-                    addMana(ability.getNetMana(game));
+                    if (netManas.size() == 1) {
+                        addMana(netManas.get(0));
+                    } else {
+                        List<Mana> copy = copy();
+                        this.clear();
+                        for (Mana netMana: netManas) {
+                            for (Mana mana: copy) {
+                                Mana newMana = new Mana();
+                                newMana.add(mana);
+                                newMana.add(netMana);
+                                this.add(newMana);
+                            }                        
+                        }                    
+                    }                    
                 }
-                else {
-                    addMana(ability.getManaCosts().getMana(), ability.getNetMana(game));
+                else {                    
+                    if (netManas.size() == 1) {
+                        addMana(ability.getManaCosts().getMana(), netManas.get(0));
+                    } else {
+                        List<Mana> copy = copy();
+                        this.clear();
+                        for (Mana netMana: netManas) {
+                            for (Mana mana: copy) {
+                                Mana newMana = new Mana();
+                                newMana.add(mana);
+                                newMana.add(netMana);
+                                addMana(ability.getManaCosts().getMana(), netMana);
+                            }                        
+                        }                    
+                    }                                        
                 }
             }
             else if (abilities.size() > 1) {
@@ -97,23 +141,28 @@ public class ManaOptions extends ArrayList<Mana> {
                 List<Mana> copy = copy();
                 this.clear();
                 for (ManaAbility ability: abilities) {
+                    List<Mana> netManas =  ability.getNetMana(game);
                     if (ability.getManaCosts().isEmpty()) {
-                        for (Mana mana: copy) {
-                            Mana newMana = new Mana();
-                            newMana.add(mana);
-                            newMana.add(ability.getNetMana(game));
-                            this.add(newMana);
+                        for (Mana netMana: netManas) {
+                            for (Mana mana: copy) {
+                                Mana newMana = new Mana();
+                                newMana.add(mana);
+                                newMana.add(netMana);
+                                this.add(newMana);
+                            }
                         }
                     }
                     else {
-                        for (Mana mana: copy) {
-                            Mana newMana = new Mana();
-                            newMana.add(mana);
-                            if (mana.contains(ability.getManaCosts().getMana())) {
-                                newMana.subtract(ability.getManaCosts().getMana());
-                                newMana.add(ability.getNetMana(game));
+                        for (Mana netMana: netManas) {
+                            for (Mana mana: copy) {                            
+                                Mana newMana = new Mana();
+                                newMana.add(mana);
+                                if (mana.contains(ability.getManaCosts().getMana())) {
+                                    newMana.subtract(ability.getManaCosts().getMana());
+                                    newMana.add(netMana);
+                                }
+                                this.add(newMana);
                             }
-                            this.add(newMana);
                         }
                     }
                 }

@@ -39,7 +39,7 @@ public class ColorlessManaAbility extends BasicManaAbility {
 
     public ColorlessManaAbility() {
         super(new BasicManaEffect(Mana.ColorlessMana));
-        this.netMana.setColorless(1);
+        this.netMana.add(new Mana(0,0,0,0,0,1,0));
     }
 
     public ColorlessManaAbility(ColorlessManaAbility ability) {

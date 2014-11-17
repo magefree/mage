@@ -97,7 +97,9 @@ class ExoticOrchardEffect extends ManaEffect {
         for (Permanent land : lands) {
             Abilities<ManaAbility> mana = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
             for (ManaAbility ability : mana) {
-                types.add(ability.getNetMana(game));
+                for (Mana netMana: ability.getNetMana(game)) {
+                    types.add(netMana);
+                }                
             }
         }
         Choice choice = new ChoiceImpl(true);
@@ -131,16 +133,22 @@ class ExoticOrchardEffect extends ManaEffect {
             } else {
                 player.choose(outcome, choice, game);
             }
-            if (choice.getChoice().equals("Black")) {
-                player.getManaPool().addMana(Mana.BlackMana, game, source);
-            } else if (choice.getChoice().equals("Blue")) {
-                player.getManaPool().addMana(Mana.BlueMana, game, source);
-            } else if (choice.getChoice().equals("Red")) {
-                player.getManaPool().addMana(Mana.RedMana, game, source);
-            } else if (choice.getChoice().equals("Green")) {
-                player.getManaPool().addMana(Mana.GreenMana, game, source);
-            } else if (choice.getChoice().equals("White")) {
-                player.getManaPool().addMana(Mana.WhiteMana, game, source);
+            switch (choice.getChoice()) {
+                case "Black":
+                    player.getManaPool().addMana(Mana.BlackMana, game, source);
+                    break;
+                case "Blue":
+                    player.getManaPool().addMana(Mana.BlueMana, game, source);
+                    break;
+                case "Red":
+                    player.getManaPool().addMana(Mana.RedMana, game, source);
+                    break;
+                case "Green":
+                    player.getManaPool().addMana(Mana.GreenMana, game, source);
+                    break;
+                case "White":
+                    player.getManaPool().addMana(Mana.WhiteMana, game, source);
+                    break;
             }
         }
         return true;

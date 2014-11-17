@@ -27,6 +27,7 @@
 */
 package mage.abilities.mana;
 
+import mage.Mana;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.AddConditionalManaOfAnyColorEffect;
@@ -62,7 +63,7 @@ public class ConditionalAnyColorManaAbility extends ManaAbility {
         for (int i = 0; i < choices; i++) {
             this.addChoice(new ChoiceColor());
         }
-        this.netMana.setAny(amount);
+        this.netMana.add(new Mana(0,0,0,0,0,0,amount));
     }
 
     public ConditionalAnyColorManaAbility(final ConditionalAnyColorManaAbility ability) {

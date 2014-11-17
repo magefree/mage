@@ -883,10 +883,12 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         for (Mana mana: unplayable.keySet()) {
             for (Card card: lands) {
                 for (ManaAbility ability: card.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
-                    if (ability.getNetMana(game).enough(mana)) {
-                        this.playLand(card, game);
-                        lands.remove(card);
-                        return;
+                    for (Mana netMana: ability.getNetMana(game)) {
+                        if (netMana.enough(mana)) {
+                            this.playLand(card, game);
+                            lands.remove(card);
+                            return;
+                        }
                     }
                 }
             }
@@ -895,10 +897,12 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         for (Mana mana: unplayable.keySet()) {
             for (Card card: lands) {
                 for (ManaAbility ability: card.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
-                    if (mana.contains(ability.getNetMana(game))) {
-                        this.playLand(card, game);
-                        lands.remove(card);
-                        return;
+                    for (Mana netMana: ability.getNetMana(game)) {
+                        if (mana.contains(netMana)) {
+                            this.playLand(card, game);
+                            lands.remove(card);
+                            return;
+                        }
                     }
                 }
             }
@@ -1018,9 +1022,11 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             // pay all colored costs first
             for (ManaAbility ability: perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (cost instanceof ColoredManaCost) {
-                    if (cost.testPay(ability.getNetMana(game))) {
-                        if (activateAbility(ability, game)) {
-                            return true;
+                    for (Mana netMana: ability.getNetMana(game)) {
+                        if (cost.testPay(netMana)) {
+                            if (activateAbility(ability, game)) {
+                                return true;
+                            }
                         }
                     }
                 }
@@ -1028,9 +1034,11 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             // then pay hybrid
             for (ManaAbility ability: perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (cost instanceof HybridManaCost) {
-                    if (cost.testPay(ability.getNetMana(game))) {
-                        if (activateAbility(ability, game)) {
-                            return true;
+                    for (Mana netMana: ability.getNetMana(game)) {
+                        if (cost.testPay(netMana)) {
+                            if (activateAbility(ability, game)) {
+                                return true;
+                            }
                         }
                     }
                 }
@@ -1038,9 +1046,11 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             // then pay mono hybrid
             for (ManaAbility ability: perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (cost instanceof MonoHybridManaCost) {
-                    if (cost.testPay(ability.getNetMana(game))) {
-                        if (activateAbility(ability, game)) {
-                            return true;
+                    for (Mana netMana: ability.getNetMana(game)) {
+                        if (cost.testPay(netMana)) {
+                            if (activateAbility(ability, game)) {
+                                return true;
+                            }
                         }
                     }
                 }
@@ -1048,9 +1058,11 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             // finally pay generic
             for (ManaAbility ability: perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (cost instanceof GenericManaCost) {
-                    if (cost.testPay(ability.getNetMana(game))) {
-                        if (activateAbility(ability, game)) {
-                            return true;
+                    for (Mana netMana: ability.getNetMana(game)) {
+                        if (cost.testPay(netMana)) {
+                            if (activateAbility(ability, game)) {
+                                return true;
+                            }
                         }
                     }
                 }
@@ -1080,14 +1092,17 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     private List<Permanent> getSortedProducers(ManaCosts<ManaCost> unpaid, Game game) {
         List<Permanent> unsorted = this.getAvailableManaProducers(game);
         unsorted.addAll(this.getAvailableManaProducersWithCost(game));
-        Map<Permanent, Integer> scored = new HashMap<Permanent, Integer>();
+        Map<Permanent, Integer> scored = new HashMap<>();
         for (Permanent permanent: unsorted) {
             int score = 0;
             for (ManaCost cost: unpaid) {
+                Abilities:
                 for (ManaAbility ability: permanent.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
-                    if (cost.testPay(ability.getNetMana(game))) {
-                        score++;
-                        break;
+                    for (Mana netMana: ability.getNetMana(game)) {
+                        if (cost.testPay(netMana)) {
+                            score++;
+                            break Abilities;
+                        }
                     }
                 }
             }
@@ -1107,14 +1122,14 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     private List<Permanent> sortByValue(Map<Permanent, Integer> map) {
-        List<Entry<Permanent, Integer>> list = new LinkedList<Entry<Permanent, Integer>>(map.entrySet());
+        List<Entry<Permanent, Integer>> list = new LinkedList<>(map.entrySet());
         Collections.sort(list, new Comparator<Entry<Permanent, Integer>>() {
             @Override
             public int compare(Entry<Permanent, Integer> o1, Entry<Permanent, Integer> o2) {
                 return (o1.getValue().compareTo(o2.getValue()));
             }
         });
-        List<Permanent> result = new ArrayList<Permanent>();
+        List<Permanent> result = new ArrayList<>();
         for (Entry<Permanent, Integer> entry : list) {
             result.add(entry.getKey());
         }
@@ -1937,7 +1952,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     protected void logState(Game game) {
         if (log.isTraceEnabled()) {
-            logList(new StringBuilder("Computer player ").append(name).append(" hand: ").toString(), new ArrayList(hand.getCards(game)));
+            logList("Computer player " + name + " hand: ", new ArrayList(hand.getCards(game)));
         }
     }
 

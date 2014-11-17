@@ -27,6 +27,8 @@
  */
 package mage.sets.bornofthegods;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -127,11 +129,12 @@ class AstralCornucopiaManaAbility extends ManaAbility {
     }
 
     @Override
-    public Mana getNetMana(Game game) {
-        if (game == null) {
-            return new Mana();
-        }
-        return new Mana(((AstralCornucopiaManaEffect)this.getEffects().get(0)).computeMana(game, this));
+    public List<Mana> getNetMana(Game game) {
+        List<Mana> newNetMana = new ArrayList<>();
+        if (game != null) {
+            newNetMana.add(new Mana(((AstralCornucopiaManaEffect)this.getEffects().get(0)).computeMana(game, this)));
+        }        
+        return newNetMana;  
     }
 }
 

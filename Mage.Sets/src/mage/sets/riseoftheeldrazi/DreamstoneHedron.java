@@ -73,7 +73,7 @@ public class DreamstoneHedron extends CardImpl {
 
     public DreamstoneHedronFirstManaAbility() {
         super(new BasicManaEffect(new Mana(0, 0, 0, 0, 0, 3, 0)));
-        this.netMana.setColorless(3);
+        this.netMana.add(new Mana(0,0,0,0,0,3,0));
     }
 
     public DreamstoneHedronFirstManaAbility(final DreamstoneHedronFirstManaAbility ability) {

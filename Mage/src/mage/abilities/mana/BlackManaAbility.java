@@ -30,6 +30,7 @@ package mage.abilities.mana;
 
 import mage.Mana;
 import mage.abilities.effects.common.BasicManaEffect;
+import mage.constants.ColoredManaSymbol;
 
 /**
  *
@@ -39,7 +40,7 @@ public class BlackManaAbility extends BasicManaAbility {
 
     public BlackManaAbility() {
         super(new BasicManaEffect(Mana.BlackMana));
-        this.netMana.setBlack(1);
+        this.netMana.add(new Mana(ColoredManaSymbol.B));
     }
 
     public BlackManaAbility(BlackManaAbility ability) {

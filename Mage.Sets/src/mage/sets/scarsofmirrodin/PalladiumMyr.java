@@ -67,7 +67,7 @@ class PalladiumMyrAbility extends BasicManaAbility {
 
     public PalladiumMyrAbility() {
         super(new BasicManaEffect(Mana.ColorlessMana(2)));
-        this.netMana.setColorless(2);
+        this.netMana.add(new Mana(0,0,0,0,0,2,0));
     }
 
     public PalladiumMyrAbility(final PalladiumMyrAbility ability) {

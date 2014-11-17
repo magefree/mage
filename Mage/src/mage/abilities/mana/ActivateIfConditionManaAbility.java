@@ -29,6 +29,7 @@
 package mage.abilities.mana;
 
 import java.util.UUID;
+import mage.Mana;
 import mage.constants.Zone;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -47,7 +48,7 @@ public class ActivateIfConditionManaAbility extends ManaAbility {
 
     public ActivateIfConditionManaAbility(Zone zone, BasicManaEffect effect, Cost cost, Condition condition) {
         super(zone, effect, cost);
-        this.netMana = effect.getMana();
+        this.netMana.add(effect.getMana());
         this.condition = condition;
     }
 

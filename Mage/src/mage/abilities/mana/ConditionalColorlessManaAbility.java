@@ -6,6 +6,7 @@
 
 package mage.abilities.mana;
 
+import mage.Mana;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.AddConditionalColorlessManaEffect;
@@ -24,8 +25,8 @@ public class ConditionalColorlessManaAbility extends ManaAbility {
     }
 
     public ConditionalColorlessManaAbility(Cost cost, int amount, ConditionalManaBuilder manaBuilder) {
-        super(Zone.BATTLEFIELD, new AddConditionalColorlessManaEffect(amount, manaBuilder), cost);        
-        this.netMana.setColorless(amount);
+        super(Zone.BATTLEFIELD, new AddConditionalColorlessManaEffect(amount, manaBuilder), cost); 
+        this.netMana.add(new Mana(0,0,0,0,0,amount,0));
     }
 
     public ConditionalColorlessManaAbility(final ConditionalColorlessManaAbility ability) {

@@ -46,7 +46,7 @@ public class SimpleManaAbility extends ManaAbility {
 
     public SimpleManaAbility(Zone zone, Mana mana, Cost cost) {
         super(zone, new BasicManaEffect(mana), cost);
-        this.netMana = mana.copy();
+        this.netMana.add(mana.copy());
     }
 
     public SimpleManaAbility(final SimpleManaAbility ability) {

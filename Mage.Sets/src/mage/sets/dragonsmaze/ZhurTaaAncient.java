@@ -133,7 +133,9 @@ class ZhurTaaAncientEffect extends ManaEffect {
         Abilities<ManaAbility> mana = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
         Mana types = new Mana();
         for (ManaAbility ability : mana) {
-            types.add(ability.getNetMana(game));
+            for (Mana netMana: ability.getNetMana(game)) {
+                types.add(netMana);
+            }                
         }
         Choice choice = new ChoiceImpl(true);
         choice.setMessage("Pick a mana color");
