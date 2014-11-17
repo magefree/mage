@@ -27,21 +27,21 @@
  */
 package mage.sets.tempest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.ManaAbility;
-import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -60,7 +60,7 @@ public class ReflectingPool extends CardImpl {
         this.expansionSetCode = "TMP";
 
         // {T}: Add to your mana pool one mana of any type that a land you control could produce.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new ReflectingPoolEffect(), new TapSourceCost()));
+        this.addAbility(new ReflectingPoolManaAbility());
     }
 
     public ReflectingPool(final ReflectingPool card) {
@@ -70,6 +70,27 @@ public class ReflectingPool extends CardImpl {
     @Override
     public ReflectingPool copy() {
         return new ReflectingPool(this);
+    }
+}
+
+class ReflectingPoolManaAbility extends ManaAbility {
+
+    public ReflectingPoolManaAbility() {
+        super(Zone.BATTLEFIELD, new ReflectingPoolEffect(),new TapSourceCost());
+    }
+
+    public ReflectingPoolManaAbility(final ReflectingPoolManaAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public ReflectingPoolManaAbility copy() {
+        return new ReflectingPoolManaAbility(this);
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game) {
+        return ((ReflectingPoolEffect)getEffects().get(0)).getNetMana(game, this);
     }
 }
 
@@ -88,16 +109,7 @@ class ReflectingPoolEffect extends ManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> lands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
-        Mana types = new Mana();
-        for (Permanent land : lands) {
-            Abilities<ManaAbility> mana = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
-            for (ManaAbility ability : mana) {
-                for (Mana netMana: ability.getNetMana(game)) {
-                    types.add(netMana);
-                }                
-            }
-        }
+        Mana types = getManaTypes(game, source);
         Choice choice = new ChoiceImpl(false);
         choice.setMessage("Pick a mana color");
         if (types.getBlack() > 0) {
@@ -159,6 +171,46 @@ class ReflectingPoolEffect extends ManaEffect {
             return false;
         }
         return true;
+    }
+
+    public  List<Mana> getNetMana(Game game, Ability source) {
+        List<Mana> netManas = new ArrayList<>();
+        Mana types = getManaTypes(game, source);
+        if (types.getBlack() > 0) {
+            netManas.add(new Mana(ColoredManaSymbol.B));
+        }
+        if (types.getRed() > 0) {
+            netManas.add(new Mana(ColoredManaSymbol.R));
+        }
+        if (types.getBlue() > 0) {
+            netManas.add(new Mana(ColoredManaSymbol.U));
+        }
+        if (types.getGreen() > 0) {
+            netManas.add(new Mana(ColoredManaSymbol.G));
+        }
+        if (types.getWhite() > 0) {
+            netManas.add(new Mana(ColoredManaSymbol.W));
+        }
+        if (types.getColorless() > 0) {
+            netManas.add(new Mana(0,0,0,0,0,1,0));
+        }
+        return netManas;
+    }
+
+    private Mana getManaTypes(Game game, Ability source) {
+        List<Permanent> lands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
+        Mana types = new Mana();
+        for (Permanent land : lands) {
+            Abilities<ManaAbility> manaAbilities = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
+            for (ManaAbility ability : manaAbilities) {
+                if (!ability.equals(source) && ability.definesMana()) {
+                    for (Mana netMana: ability.getNetMana(game)) {
+                        types.add(netMana);
+                    }
+                }
+            }
+        }
+        return types;
     }
 
     @Override

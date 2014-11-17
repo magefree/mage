@@ -27,29 +27,12 @@
  */
 package mage.sets.fifthdawn;
 
-import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
-import mage.Mana;
-import mage.abilities.Abilities;
-import mage.abilities.Ability;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.mana.ManaAbility;
-import mage.abilities.mana.SimpleManaAbility;
+import mage.abilities.mana.AnyColorOpponentLandsProduceManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -67,8 +50,8 @@ public class SylvokExplorer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {tap}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new SylvokExplorerEffect(), new TapSourceCost()));
+        // {T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
+        this.addAbility(new AnyColorOpponentLandsProduceManaAbility());
     }
 
     public SylvokExplorer(final SylvokExplorer card) {
@@ -78,85 +61,5 @@ public class SylvokExplorer extends CardImpl {
     @Override
     public SylvokExplorer copy() {
         return new SylvokExplorer(this);
-    }
-}
-
-class SylvokExplorerEffect extends ManaEffect {
-
-    private static final FilterPermanent filter = new FilterLandPermanent();
-    static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
-    }
-
-    public SylvokExplorerEffect() {
-        super();
-        staticText = "Add to your mana pool one mana of any color that a land an opponent controls could produce";
-    }
-
-    public SylvokExplorerEffect(final SylvokExplorerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        List<Permanent> lands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
-        Mana types = new Mana();
-        for (Permanent land : lands) {
-            Abilities<ManaAbility> mana = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
-            for (ManaAbility ability : mana) {
-                for (Mana netMana: ability.getNetMana(game)) {
-                    types.add(netMana);
-                }                
-            }
-        }
-        Choice choice = new ChoiceImpl(true);
-        choice.setMessage("Pick a mana color");
-        if (types.getBlack() > 0) {
-            choice.getChoices().add("Black");
-        }
-        if (types.getRed() > 0) {
-            choice.getChoices().add("Red");
-        }
-        if (types.getBlue() > 0) {
-            choice.getChoices().add("Blue");
-        }
-        if (types.getGreen() > 0) {
-            choice.getChoices().add("Green");
-        }
-        if (types.getWhite() > 0) {
-            choice.getChoices().add("White");
-        }
-        if (types.getAny() > 0) {
-            choice.getChoices().add("Black");
-            choice.getChoices().add("Red");
-            choice.getChoices().add("Blue");
-            choice.getChoices().add("Green");
-            choice.getChoices().add("White");
-        }
-        if (choice.getChoices().size() > 0) {
-            Player player = game.getPlayer(source.getControllerId());
-            if (choice.getChoices().size() == 1) {
-                choice.setChoice(choice.getChoices().iterator().next());
-            } else {
-                player.choose(outcome, choice, game);
-            }
-            if (choice.getChoice().equals("Black")) {
-                player.getManaPool().addMana(Mana.BlackMana, game, source);
-            } else if (choice.getChoice().equals("Blue")) {
-                player.getManaPool().addMana(Mana.BlueMana, game, source);
-            } else if (choice.getChoice().equals("Red")) {
-                player.getManaPool().addMana(Mana.RedMana, game, source);
-            } else if (choice.getChoice().equals("Green")) {
-                player.getManaPool().addMana(Mana.GreenMana, game, source);
-            } else if (choice.getChoice().equals("White")) {
-                player.getManaPool().addMana(Mana.WhiteMana, game, source);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public SylvokExplorerEffect copy() {
-        return new SylvokExplorerEffect(this);
     }
 }

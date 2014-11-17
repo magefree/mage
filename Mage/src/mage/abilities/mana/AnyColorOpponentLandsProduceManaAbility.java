@@ -25,118 +25,72 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.abilities.mana;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageInt;
+import java.util.ArrayList;
+import java.util.List;
 import mage.Mana;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.mana.ManaAbility;
-import mage.abilities.mana.TriggeredManaAbility;
-import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LevelX2
  */
-public class ZhurTaaAncient extends CardImpl {
 
-    public ZhurTaaAncient(UUID ownerId) {
-        super(ownerId, 119, "Zhur-Taa Ancient", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");
-        this.expansionSetCode = "DGM";
-        this.subtype.add("Beast");
+public class AnyColorOpponentLandsProduceManaAbility extends ManaAbility {
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.power = new MageInt(7);
-        this.toughness = new MageInt(5);
-
-        // Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced.
-        this.addAbility(new ZhurTaaAncientAbility());
+    public AnyColorOpponentLandsProduceManaAbility() {
+        super(Zone.BATTLEFIELD, new AnyColorOpponentLandsProduceManaEffect(),new TapSourceCost());
     }
 
-    public ZhurTaaAncient(final ZhurTaaAncient card) {
-        super(card);
-    }
-
-    @Override
-    public ZhurTaaAncient copy() {
-        return new ZhurTaaAncient(this);
-    }
-}
-
-class ZhurTaaAncientAbility extends TriggeredManaAbility {
-
-    private static final String staticText = "Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced.";
-
-    public ZhurTaaAncientAbility() {
-        super(Zone.BATTLEFIELD, new ZhurTaaAncientEffect());
-    }
-
-    public ZhurTaaAncientAbility(ZhurTaaAncientAbility ability) {
+    public AnyColorOpponentLandsProduceManaAbility(final AnyColorOpponentLandsProduceManaAbility ability) {
         super(ability);
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent == null) {
-                permanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
-            }
-            if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
-                getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
-                return true;
-            }
-        }
-        return false;
+    public AnyColorOpponentLandsProduceManaAbility copy() {
+        return new AnyColorOpponentLandsProduceManaAbility(this);
     }
 
     @Override
-    public ZhurTaaAncientAbility copy() {
-        return new ZhurTaaAncientAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return staticText;
+    public List<Mana> getNetMana(Game game) {
+        return ((AnyColorOpponentLandsProduceManaEffect)getEffects().get(0)).getNetMana(game, this);
     }
 }
 
-class ZhurTaaAncientEffect extends ManaEffect {
+class AnyColorOpponentLandsProduceManaEffect extends ManaEffect {
 
-    public ZhurTaaAncientEffect() {
-        super();
-        staticText = "that player adds one mana to his or her mana pool of any type that land produced";
+    private static final FilterPermanent filter = new FilterLandPermanent();
+    static {
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public ZhurTaaAncientEffect(final ZhurTaaAncientEffect effect) {
+    public AnyColorOpponentLandsProduceManaEffect() {
+        super();
+        staticText = "Add to your mana pool one mana of any color that a land an opponent controls could produce";
+    }
+
+    public AnyColorOpponentLandsProduceManaEffect(final AnyColorOpponentLandsProduceManaEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent land = game.getPermanent(this.targetPointer.getFirst(game, source));
-        Abilities<ManaAbility> mana = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
-        Mana types = new Mana();
-        for (ManaAbility ability : mana) {
-            for (Mana netMana: ability.getNetMana(game)) {
-                types.add(netMana);
-            }                
-        }
+        Mana types = getManaTypes(game, source);
         Choice choice = new ChoiceImpl(true);
         choice.setMessage("Pick a mana color");
         if (types.getBlack() > 0) {
@@ -154,11 +108,15 @@ class ZhurTaaAncientEffect extends ManaEffect {
         if (types.getWhite() > 0) {
             choice.getChoices().add("White");
         }
-        if (types.getColorless() > 0) {
-            choice.getChoices().add("Colorless");
+        if (types.getAny() > 0) {
+            choice.getChoices().add("Black");
+            choice.getChoices().add("Red");
+            choice.getChoices().add("Blue");
+            choice.getChoices().add("Green");
+            choice.getChoices().add("White");
         }
         if (choice.getChoices().size() > 0) {
-            Player player = game.getPlayer(land.getControllerId());
+            Player player = game.getPlayer(source.getControllerId());
             if (choice.getChoices().size() == 1) {
                 choice.setChoice(choice.getChoices().iterator().next());
             } else {
@@ -167,29 +125,66 @@ class ZhurTaaAncientEffect extends ManaEffect {
             switch (choice.getChoice()) {
                 case "Black":
                     player.getManaPool().addMana(Mana.BlackMana, game, source);
-                    return true;
+                    break;
                 case "Blue":
                     player.getManaPool().addMana(Mana.BlueMana, game, source);
-                    return true;
+                    break;
                 case "Red":
                     player.getManaPool().addMana(Mana.RedMana, game, source);
-                    return true;
+                    break;
                 case "Green":
                     player.getManaPool().addMana(Mana.GreenMana, game, source);
-                    return true;
+                    break;
                 case "White":
                     player.getManaPool().addMana(Mana.WhiteMana, game, source);
-                    return true;
-                case "Colorless":
-                    player.getManaPool().addMana(Mana.ColorlessMana, game, source);
-                    return true;
+                    break;
             }
         }
         return true;
     }
 
+    private Mana getManaTypes(Game game, Ability source) {
+        List<Permanent> lands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
+        Mana types = new Mana();
+        for (Permanent land : lands) {
+            Abilities<ManaAbility> mana = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
+            for (ManaAbility ability : mana) {
+                if (!ability.equals(source) && ability.definesMana()) {
+                    for (Mana netMana: ability.getNetMana(game)) {
+                        types.add(netMana);
+                    }
+                }
+            }
+        }
+        return types;
+    }
+
+    public  List<Mana> getNetMana(Game game, Ability source) {
+        List<Mana> netManas = new ArrayList<>();
+        Mana types = getManaTypes(game, source);
+        if (types.getBlack() > 0) {
+            netManas.add(new Mana(ColoredManaSymbol.B));
+        }
+        if (types.getRed() > 0) {
+            netManas.add(new Mana(ColoredManaSymbol.R));
+        }
+        if (types.getBlue() > 0) {
+            netManas.add(new Mana(ColoredManaSymbol.U));
+        }
+        if (types.getGreen() > 0) {
+            netManas.add(new Mana(ColoredManaSymbol.G));
+        }
+        if (types.getWhite() > 0) {
+            netManas.add(new Mana(ColoredManaSymbol.W));
+        }
+        if (types.getColorless() > 0) {
+            netManas.add(new Mana(0,0,0,0,0,1,0));
+        }
+        return netManas;
+    }
+
     @Override
-    public ZhurTaaAncientEffect copy() {
-        return new ZhurTaaAncientEffect(this);
+    public AnyColorOpponentLandsProduceManaEffect copy() {
+        return new AnyColorOpponentLandsProduceManaEffect(this);
     }
 }

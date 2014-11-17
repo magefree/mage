@@ -81,5 +81,15 @@ public abstract class ManaAbility extends ActivatedAbilityImpl {
      */
     public List<Mana> getNetMana(Game game) {
         return netMana;
-    }        
+    }
+
+    /**
+     * Used to check if the ability itself defines mana types
+     * it can produce.
+     *
+     * @return
+     */
+    public boolean definesMana() {
+        return netMana.size() > 0;
+    }
 }

@@ -83,6 +83,8 @@ public class PutIntoPlayEffectsTest extends CardTestPlayerBase {
         // onto the battlefield under your control.
         addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
         addCard(Zone.BATTLEFIELD, playerB, "Lord of the Void");
+
+        // Put target creature on top of its owner's library.
         addCard(Zone.HAND, playerB, "Griptide");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Griptide", "Oracle of Mul Daya");
@@ -96,8 +98,8 @@ public class PutIntoPlayEffectsTest extends CardTestPlayerBase {
         assertLife(playerA, 13);
         assertPermanentCount(playerB, "Oracle of Mul Daya", 1);
 
-        Assert.assertTrue("Top card of the library of player B should be reveled.", playerB.isTopCardRevealed());
-        Assert.assertFalse("Top card of the library of player A should not be reveled.", playerA.isTopCardRevealed());
+        Assert.assertTrue("Top card of the library of player B should be revealed.", playerB.isTopCardRevealed());
+        Assert.assertFalse("Top card of the library of player A should not be revealed.", playerA.isTopCardRevealed());
     }
     
     /**

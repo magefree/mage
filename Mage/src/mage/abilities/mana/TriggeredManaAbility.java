@@ -27,9 +27,9 @@
  */
 package mage.abilities.mana;
 
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ManaEffect;
+import mage.constants.Zone;
 
 /**
  * see 20110715 - 605.1b
@@ -43,6 +43,7 @@ public abstract class TriggeredManaAbility extends TriggeredAbilityImpl {
 
     public TriggeredManaAbility(Zone zone, ManaEffect effect, boolean optional) {
         super(zone, effect, optional);
+        this.usesStack = false;
     }
 
     public TriggeredManaAbility(final TriggeredManaAbility ability) {

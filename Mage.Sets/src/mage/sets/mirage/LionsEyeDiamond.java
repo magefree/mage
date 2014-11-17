@@ -28,10 +28,6 @@
 package mage.sets.mirage;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.TimingRule;
-import mage.constants.Zone;
 import mage.Mana;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardHandCost;
@@ -40,7 +36,9 @@ import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
@@ -72,11 +70,12 @@ class LionsEyeDiamondAbility extends ManaAbility {
     public LionsEyeDiamondAbility() {
         super(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new SacrificeSourceCost());
         this.addCost(new DiscardHandCost());
+        this.netMana.add(new Mana(0,0,0,0,0,0,3));
     }
 
     public LionsEyeDiamondAbility(Zone zone, Mana mana, Cost cost) {
         super(zone, new BasicManaEffect(mana), cost);
-        this.netMana.add(mana.copy());
+        
     }
 
     public LionsEyeDiamondAbility(final LionsEyeDiamondAbility ability) {
