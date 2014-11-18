@@ -58,7 +58,7 @@ public class Soilshaper extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you cast a Spirit or Arcane spell, target land becomes a 3/3 creature until end of turn. It's still a land.
-        Ability ability = new SpellCastControllerTriggeredAbility(new BecomesCreatureTargetEffect(new SoilshaperToken(), "land", Duration.EndOfTurn), filter, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new BecomesCreatureTargetEffect(new SoilshaperToken(), false, true, Duration.EndOfTurn), filter, false);
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }

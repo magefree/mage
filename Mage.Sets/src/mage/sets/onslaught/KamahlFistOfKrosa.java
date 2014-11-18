@@ -62,7 +62,7 @@ public class KamahlFistOfKrosa extends CardImpl {
 
 		// {G}: Target land becomes a 1/1 creature until end of turn. It's still a land.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BecomesCreatureTargetEffect(new KamahlFistOfKrosaLandToken(), "land", Duration.EndOfTurn),
+                new BecomesCreatureTargetEffect(new KamahlFistOfKrosaLandToken(), false, true, Duration.EndOfTurn),
                 new ManaCostsImpl("{G}"));
 		ability.addTarget(new TargetLandPermanent());
 		this.addAbility(ability);

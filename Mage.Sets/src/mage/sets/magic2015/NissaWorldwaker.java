@@ -84,7 +84,7 @@ public class NissaWorldwaker extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
         
         // +1: Target land you control becomes a 4/4 Elemental creature with trample.  It's still a land.
-        LoyaltyAbility ability = new LoyaltyAbility(new BecomesCreatureTargetEffect(new NissaWorldwakerToken(), "land", Duration.Custom), 1);
+        LoyaltyAbility ability = new LoyaltyAbility(new BecomesCreatureTargetEffect(new NissaWorldwakerToken(), false, true, Duration.Custom), 1);
         ability.addTarget(new TargetLandPermanent(filter));
         this.addAbility(ability);
 
@@ -136,7 +136,7 @@ class NissaWorldwakerSearchEffect extends OneShotEffect {
                     Card card = player.getLibrary().getCard(cardId, game);
                     if (card != null) {
                         if (player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId())) {
-                            ContinuousEffect effect = new BecomesCreatureTargetEffect(new NissaWorldwakerToken(), "land", Duration.Custom);
+                            ContinuousEffect effect = new BecomesCreatureTargetEffect(new NissaWorldwakerToken(), false, true, Duration.Custom);
                             effect.setTargetPointer(new FixedTarget(card.getId()));
                             game.addEffect(effect, source);                                                    
                         }                                             

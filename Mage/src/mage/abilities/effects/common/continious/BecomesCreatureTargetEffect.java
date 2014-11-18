@@ -48,24 +48,28 @@ import mage.util.CardUtil;
 public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
 
     protected Token token;
-    protected String type;
+    protected boolean loseAllAbilities;
+    protected boolean addStillALandText;
 
     /**
      *
      * @param token
-     * @param type
+     * @param loseAllAbilities loses all subtypes and colors
+     * @param stillALand add rule text, "it's still a land"
      * @param duration
      */
-    public BecomesCreatureTargetEffect(Token token, String type, Duration duration) {
+    public BecomesCreatureTargetEffect(Token token, boolean loseAllAbilities, boolean stillALand, Duration duration) {
         super(duration, Outcome.BecomeCreature);
         this.token = token;
-        this.type = type;
+        this.loseAllAbilities = loseAllAbilities;
+        this.addStillALandText = stillALand;
     }
 
     public BecomesCreatureTargetEffect(final BecomesCreatureTargetEffect effect) {
         super(effect);
         token = effect.token.copy();
-        type = effect.type;
+        this.loseAllAbilities = effect.loseAllAbilities;
+        this.addStillALandText = effect.addStillALandText;
     }
 
     @Override
@@ -82,10 +86,9 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
-                            if (type == null) {
+                            if (loseAllAbilities) {
                                 permanent.getSubtype().clear();
                                 permanent.getSubtype().addAll(token.getSubtype());
-                                permanent.getCardType().clear();
                             } else {
                                 if (token.getSubtype().size() > 0) {
                                     for (String subtype :token.getSubtype()) {
@@ -107,12 +110,22 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                         break;
                     case ColorChangingEffects_5:
                         if (sublayer == SubLayer.NA) {
+                            if (loseAllAbilities) {
+                                permanent.getColor().setBlack(false);
+                                permanent.getColor().setGreen(false);
+                                permanent.getColor().setBlue(false);
+                                permanent.getColor().setWhite(false);
+                                permanent.getColor().setBlack(false);
+                            }
                             if (token.getColor().hasColor()) {
                                 permanent.getColor().setColor(token.getColor());
                             }
                         }
                         break;
                     case AbilityAddingRemovingEffects_6:
+                        if (loseAllAbilities) {
+                            permanent.removeAllAbilities(source.getSourceId(), game);
+                        }
                         if (sublayer == SubLayer.NA) {
                             if (token.getAbilities().size() > 0) {
                                 for (Ability ability : token.getAbilities()) {
@@ -155,19 +168,27 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
         Target target = mode.getTargets().get(0);
         if(target.getMaxNumberOfTargets() > 1){
             if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
-                sb.append("Up to ");
+                sb.append("up to ");
             }
-            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName()).append("  each become ");
+            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName());
+            if (loseAllAbilities) {
+                sb.append(" lose all their abilities and ");
+            }
+            sb.append("  each become ");
         } else {
-            sb.append("Target ").append(target.getTargetName()).append(" becomes a ");
+            sb.append("target ").append(target.getTargetName());
+            if (loseAllAbilities) {
+                sb.append(" loses all abilities and ");
+            }
+            sb.append(" becomes a ");
         }
         sb.append(token.getDescription());
         sb.append(" ").append(duration.toString());
-        if (type != null && type.length() > 0) {
+        if (addStillALandText) {
             if (target.getMaxNumberOfTargets() > 1) {
-                sb.append(". They're still ").append(type);
+                sb.append(". They're still lands");
             } else {
-                sb.append(". It's still a ").append(type);
+                sb.append(". It's still a land");
             }
         }
         return sb.toString();

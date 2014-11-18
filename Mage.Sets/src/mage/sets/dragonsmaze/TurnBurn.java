@@ -58,11 +58,8 @@ public class TurnBurn extends SplitCard {
         // Turn
         // Until end of turn, target creature loses all abilities and becomes a red Weird with base power and toughness 0/1.
         getLeftHalfCard().getColor().setBlue(true);
-        Effect effect = new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn);
-        effect.setText("Until end of turn, target creature loses all abilities");
-        getLeftHalfCard().getSpellAbility().addEffect(effect);
-        effect = new BecomesCreatureTargetEffect(new WeirdToken(), null, Duration.EndOfTurn);
-        effect.setText("and becomes a red Weird with base power and toughness 0/1");
+        Effect effect = new BecomesCreatureTargetEffect(new WeirdToken(), true, false, Duration.EndOfTurn);
+        effect.setText("Until end of turn, target creature loses all abilities and becomes a red Weird with base power and toughness 0/1");
         getLeftHalfCard().getSpellAbility().addEffect(effect);
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 

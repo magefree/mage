@@ -110,7 +110,7 @@ class ElvishBranchbenderEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int xValue = new PermanentsOnBattlefieldCount(filter).calculate(game, source, this);
-        ContinuousEffect effect = new BecomesCreatureTargetEffect(new ElvishBranchbenderToken(xValue), "", Duration.EndOfTurn);
+        ContinuousEffect effect = new BecomesCreatureTargetEffect(new ElvishBranchbenderToken(xValue), false, false, Duration.EndOfTurn);
         effect.setTargetPointer(targetPointer);
         game.addEffect(effect, source);
         return false;

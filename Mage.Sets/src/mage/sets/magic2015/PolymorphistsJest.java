@@ -109,6 +109,11 @@ class PolymorphistsJestEffect extends ContinuousEffectImpl {
                     for(UUID uuid : objects){
                         Permanent permanent = game.getPermanent(uuid);
                         if (permanent != null){
+                            permanent.getColor().setBlack(false);
+                            permanent.getColor().setGreen(false);
+                            permanent.getColor().setBlue(false);
+                            permanent.getColor().setWhite(false);
+                            permanent.getColor().setBlack(false);
                             permanent.getColor().setColor(ObjectColor.BLUE);
                         }
                     }

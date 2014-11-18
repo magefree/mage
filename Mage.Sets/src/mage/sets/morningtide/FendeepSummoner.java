@@ -63,7 +63,9 @@ public class FendeepSummoner extends CardImpl {
         this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new FendeepSummonerToken(), "land", Duration.EndOfTurn), new TapSourceCost());
+
+        // {T}: Up to two target Swamps each become 3/5 Treefolk Warrior creatures in addition to their other types until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new FendeepSummonerToken(), false, false, Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetLandPermanent(0, 2, filter, false));
         this.addAbility(ability);
     }

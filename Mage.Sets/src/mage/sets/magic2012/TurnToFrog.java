@@ -51,11 +51,8 @@ public class TurnToFrog extends CardImpl {
         this.color.setBlue(true);
 
         // Until end of turn, target creature loses all abilities and becomes a blue Frog with base power and toughness 1/1.
-        Effect effect = new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn);
-        effect.setText("Until end of turn, target creature loses all abilities");
-        this.getSpellAbility().addEffect(effect);
-        effect = new BecomesCreatureTargetEffect(new FrogToken(), null, Duration.EndOfTurn);
-        effect.setText("and becomes a blue Frog with base power and toughness 1/1");
+        Effect effect = new BecomesCreatureTargetEffect(new FrogToken(), true, false, Duration.EndOfTurn);
+        effect.setText("Until end of turn, target creature loses all abilities and becomes a blue Frog with base power and toughness 1/1");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

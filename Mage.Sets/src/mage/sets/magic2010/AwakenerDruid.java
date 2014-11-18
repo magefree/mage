@@ -88,7 +88,7 @@ public class AwakenerDruid extends CardImpl {
 class AwakenerDruidBecomesCreatureEffect extends BecomesCreatureTargetEffect {
 
     public AwakenerDruidBecomesCreatureEffect() {
-        super(new AwakenerDruidToken(), "land", Duration.WhileOnBattlefield);
+        super(new AwakenerDruidToken(), false, true, Duration.WhileOnBattlefield);
     }
 
     public AwakenerDruidBecomesCreatureEffect(final AwakenerDruidBecomesCreatureEffect effect) {
@@ -112,7 +112,7 @@ class AwakenerDruidBecomesCreatureEffect extends BecomesCreatureTargetEffect {
 
     @Override
     public String getText(Mode mode) {
-        return "target Forest becomes a 4/5 green Treefolk creature for as long as Awakener Druid remains on the battlefield. It's still a land";
+        return "target Forest becomes a 4/5 green Treefolk creature for as long as {this} remains on the battlefield. It's still a land";
     }
 }
 
