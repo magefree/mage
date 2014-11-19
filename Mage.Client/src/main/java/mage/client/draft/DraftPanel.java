@@ -133,7 +133,7 @@ public class DraftPanel extends javax.swing.JPanel {
         int left = draftView.getPlayers().size() - right;
         int height = left * 18;
         lblTableImage.setSize(new Dimension(lblTableImage.getWidth(), height));
-        Image tableImage = ImageHelper.getImageFromResources(draftView.getBoosterNum() == 2 ? "/draft/table_right.png":"/draft/table_left.png");
+        Image tableImage = ImageHelper.getImageFromResources(draftView.getBoosterNum() == 2 ? "/draft/table_left.png":"/draft/table_right.png");
         BufferedImage resizedTable = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(tableImage, BufferedImage.TYPE_INT_ARGB), lblTableImage.getWidth());
         lblTableImage.setIcon(new ImageIcon(resizedTable));
         
@@ -150,11 +150,11 @@ public class DraftPanel extends javax.swing.JPanel {
         int right = players / 2;
         int left = players - right;
         if (index <= left) {
-            // left side up (8 - 1)         
-            tablePosition = (9 - index) - (8- left);
+            // left side down (1 - 8)         
+            tablePosition = index;
         } else {
-            // right side down (9-18)
-            tablePosition = 8 + (index  - left);
+            // right side up (16 - 9)
+            tablePosition = 9 + right - (index - left);
         }
         switch(tablePosition) {
             case 1:
