@@ -31,13 +31,12 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -83,10 +82,10 @@ public class SwansOfBrynArgoll extends CardImpl {
     }
 }
 
-class SwansOfBrynArgollEffect extends ReplacementEffectImpl {
+class SwansOfBrynArgollEffect extends PreventionEffectImpl {
 
     SwansOfBrynArgollEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.PreventDamage);
+        super(Duration.WhileOnBattlefield);
         staticText = "If a source would deal damage to {this}, prevent that damage. The source's controller draws cards equal to the damage prevented this way";
     }
 
@@ -124,7 +123,7 @@ class SwansOfBrynArgollEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType() == EventType.DAMAGE_CREATURE 
+        return event.getType() == EventType.DAMAGE_CREATURE
                 && event.getTargetId().equals(source.getSourceId());
     }
 
