@@ -36,6 +36,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.postresolve.ExileSpellEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -100,30 +101,29 @@ class SpelltwineEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Card cardOne = game.getCard(source.getTargets().get(0).getFirstTarget());
         Card cardTwo = game.getCard(source.getTargets().get(1).getFirstTarget());
-        if (you != null) {
+        if (controller != null) {
             if (cardOne != null) {
-                cardOne.moveToExile(null, null, source.getSourceId(), game);
+                controller.moveCardToExileWithInfo(cardOne, null, "", source.getSourceId(), game, Zone.GRAVEYARD);
             }
             if (cardTwo != null) {
-                cardTwo.moveToExile(null, null, source.getSourceId(), game);
+                controller.moveCardToExileWithInfo(cardTwo, null, "", source.getSourceId(), game, Zone.GRAVEYARD);
             }
-
             boolean castCardOne = true;
-            if (cardOne != null && you.chooseUse(Outcome.Neutral, "Cast the copy of " + cardOne.getName() + " first?", game)) {
-                Card copyOne = game.copyCard(cardOne, source, you.getId());
-                you.cast(copyOne.getSpellAbility(), game, true);
+            if (cardOne != null && controller.chooseUse(Outcome.Neutral, "Cast the copy of " + cardOne.getName() + " first?", game)) {
+                Card copyOne = game.copyCard(cardOne, source, controller.getId());
+                controller.cast(copyOne.getSpellAbility(), game, true);
                 castCardOne = false;
             }
             if (cardTwo != null) {
-                Card copyTwo = game.copyCard(cardTwo, source, you.getId());
-                you.cast(copyTwo.getSpellAbility(), game, true);
+                Card copyTwo = game.copyCard(cardTwo, source, controller.getId());
+                controller.cast(copyTwo.getSpellAbility(), game, true);
             }
             if (cardOne != null && castCardOne) {
-                Card copyOne = game.copyCard(cardOne, source, you.getId());
-                you.cast(copyOne.getSpellAbility(), game, true);
+                Card copyOne = game.copyCard(cardOne, source, controller.getId());
+                controller.cast(copyOne.getSpellAbility(), game, true);
             }
             return true;
         }
