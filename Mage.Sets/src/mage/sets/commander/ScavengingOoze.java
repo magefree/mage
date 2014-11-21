@@ -28,17 +28,19 @@
 package mage.sets.commander;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -63,9 +65,10 @@ public class ScavengingOoze extends CardImpl {
         // {G}: Exile target card from a graveyard. If it was a creature card, put a +1/+1 counter on Scavenging Ooze and you gain 1 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScavengingOozeEffect(), new ManaCostsImpl("{G}"));
         ability.addTarget(new TargetCardInGraveyard());
+        Effect effect = new GainLifeEffect(1);
+        effect.setText("and you gain 1 life");
+        ability.addEffect(effect);
         this.addAbility(ability);
-
-
     }
 
     public ScavengingOoze(final ScavengingOoze card) {
@@ -82,7 +85,7 @@ class ScavengingOozeEffect extends OneShotEffect {
 
     public ScavengingOozeEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Exile target card from a graveyard. If it was a creature card, put a +1/+1 counter on Scavenging Ooze and you gain 1 life";
+        this.staticText = "Exile target card from a graveyard. If it was a creature card, put a +1/+1 counter on {this}";
     }
 
     public ScavengingOozeEffect(final ScavengingOozeEffect effect) {
@@ -97,16 +100,13 @@ class ScavengingOozeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (card != null) {
-            card.moveToExile(null, null, source.getSourceId(), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && card != null) {
+            controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD);
             if (card.getCardType().contains(CardType.CREATURE)) {
                 Permanent sourcePermanent = game.getPermanent(source.getSourceId());
                 if (sourcePermanent != null) {
                     sourcePermanent.addCounters(CounterType.P1P1.createInstance(), game);
-                    Player controller = game.getPlayer(source.getControllerId());
-                    if (controller != null) {
-                        controller.gainLife(1, game);
-                    }
                 }
             }
             return true;
