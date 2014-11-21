@@ -114,7 +114,7 @@ class SwansOfBrynArgollEffect extends PreventionEffectImpl {
                     passed = true;
                 }
                 if (!passed) {
-                    // I'm not sure if this is needed - When does a card directly do damage without beeing a spell or a permanent?
+                    // Needed for cards that do damage from hand e.g. Gempalm Incinerator
                     Card cardSource = game.getCard(event.getSourceId());
                     if (cardSource != null) {
                         Player owner = game.getPlayer(cardSource.getOwnerId());
