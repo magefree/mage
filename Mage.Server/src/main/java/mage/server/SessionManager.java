@@ -114,31 +114,33 @@ public class SessionManager {
     public void disconnect(String sessionId, DisconnectReason reason) {
         Session session = sessions.get(sessionId);     
         if (session != null) {
-            synchronized (session) { 
-                if (!sessions.containsKey(sessionId)) {
-                    // session was removed meanwhile by another thread so we can return
-                    return;
-                }     
-                sessions.remove(sessionId);
-                switch (reason) {
-                    case Disconnected:
-                        session.kill(reason);
-                        LogServiceImpl.instance.log(LogKeys.KEY_SESSION_KILLED, sessionId);
-                        break;
-                    case SessionExpired:
-                        session.kill(reason);
-                        LogServiceImpl.instance.log(LogKeys.KEY_SESSION_EXPIRED, sessionId);
-                        break;
-                    case AdminDisconnect:
-                        session.kill(reason);
-                        break;
-                    case LostConnection:
-                        session.userLostConnection();
-                        LogServiceImpl.instance.log(LogKeys.KEY_SESSION_DISCONNECTED, sessionId);
-                        break;
-                    default:
-                        logger.error("endSession: unexpected reason  " + reason.toString() + " - sessionId: "+ sessionId);
+            if (!reason.equals(DisconnectReason.AdminDisconnect)) {
+                synchronized (session) {
+                    if (!sessions.containsKey(sessionId)) {
+                        // session was removed meanwhile by another thread so we can return
+                        return;
+                    }
+                    sessions.remove(sessionId);
+                    switch (reason) {
+                        case Disconnected:
+                            session.kill(reason);
+                            LogServiceImpl.instance.log(LogKeys.KEY_SESSION_KILLED, sessionId);
+                            break;
+                        case SessionExpired:
+                            session.kill(reason);
+                            LogServiceImpl.instance.log(LogKeys.KEY_SESSION_EXPIRED, sessionId);
+                            break;
+                        case LostConnection:
+                            session.userLostConnection();
+                            LogServiceImpl.instance.log(LogKeys.KEY_SESSION_DISCONNECTED, sessionId);
+                            break;
+                        default:
+                            logger.error("endSession: unexpected reason  " + reason.toString() + " - sessionId: "+ sessionId);
+                    }
                 }
+            } else {
+                sessions.remove(sessionId);
+                session.kill(reason);
             }
         } 
 
