@@ -207,6 +207,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_PROXY_REMEMBER = "proxyRemember";
     public static final String KEY_PROXY_TYPE = "proxyType";
     public static final String KEY_PROXY_PSWD = "proxyPassword";
+    public static final String KEY_CONNECTION_URL_SERVER_LIST = "connectionURLServerList";
 
     public static final String KEY_AVATAR = "selectedId";
 
@@ -379,21 +380,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jLabel16 = new javax.swing.JLabel();
         txtBattlefieldIBGMPath = new javax.swing.JTextField();
         btnBattlefieldBGMBrowse = new javax.swing.JButton();
-        tabConnection = new javax.swing.JPanel();
-        lblProxyType = new javax.swing.JLabel();
-        cbProxyType = new javax.swing.JComboBox<ProxyType>();
-        pnlProxySettings = new javax.swing.JPanel();
-        pnlProxy = new javax.swing.JPanel();
-        lblProxyServer = new javax.swing.JLabel();
-        txtProxyServer = new javax.swing.JTextField();
-        lblProxyPort = new javax.swing.JLabel();
-        txtProxyPort = new javax.swing.JTextField();
-        lblProxyUserName = new javax.swing.JLabel();
-        txtProxyUserName = new javax.swing.JTextField();
-        lblProxyPassword = new javax.swing.JLabel();
-        txtPasswordField = new javax.swing.JPasswordField();
-        rememberPswd = new javax.swing.JCheckBox();
-        jLabel11 = new javax.swing.JLabel();
         tabAvatars = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel9 = new javax.swing.JPanel();
@@ -411,6 +397,25 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel19 = new javax.swing.JPanel();
         jPanel20 = new javax.swing.JPanel();
         jPanel21 = new javax.swing.JPanel();
+        tabConnection = new javax.swing.JPanel();
+        lblProxyType = new javax.swing.JLabel();
+        cbProxyType = new javax.swing.JComboBox<ProxyType>();
+        pnlProxySettings = new javax.swing.JPanel();
+        pnlProxy = new javax.swing.JPanel();
+        lblProxyServer = new javax.swing.JLabel();
+        txtProxyServer = new javax.swing.JTextField();
+        lblProxyPort = new javax.swing.JLabel();
+        txtProxyPort = new javax.swing.JTextField();
+        lblProxyUserName = new javax.swing.JLabel();
+        txtProxyUserName = new javax.swing.JTextField();
+        lblProxyPassword = new javax.swing.JLabel();
+        txtPasswordField = new javax.swing.JPasswordField();
+        rememberPswd = new javax.swing.JCheckBox();
+        jLabel11 = new javax.swing.JLabel();
+        connection_servers = new javax.swing.JPanel();
+        lblURLServerList = new javax.swing.JLabel();
+        txtURLServerList = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
         saveButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
 
@@ -524,7 +529,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addComponent(main_game, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(main_gamelog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addContainerGap(145, Short.MAX_VALUE))
         );
 
         main_card.getAccessibleContext().setAccessibleName("Game panel");
@@ -707,7 +712,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addComponent(checkBoxEndTurnOthers))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(phases_stopSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Phases", tabPhases);
@@ -1039,146 +1044,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         tabsPanel.addTab("Sounds", tabSounds);
 
-        lblProxyType.setText("Proxy:");
-
-        cbProxyType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbProxyTypeActionPerformed(evt);
-            }
-        });
-
-        pnlProxySettings.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        lblProxyServer.setText("Server:");
-
-        lblProxyPort.setText("Port:");
-
-        txtProxyPort.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtProxyPortkeyTyped(evt);
-            }
-        });
-
-        lblProxyUserName.setText("User Name:");
-
-        lblProxyPassword.setText("Password:");
-
-        txtPasswordField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPasswordFieldActionPerformed(evt);
-            }
-        });
-
-        rememberPswd.setText("Remember Password");
-        rememberPswd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rememberPswdActionPerformed(evt);
-            }
-        });
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 2, 10)); // NOI18N
-        jLabel11.setText("Note: password won't be encrypted!");
-
-        javax.swing.GroupLayout pnlProxyLayout = new javax.swing.GroupLayout(pnlProxy);
-        pnlProxy.setLayout(pnlProxyLayout);
-        pnlProxyLayout.setHorizontalGroup(
-            pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlProxyLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(rememberPswd)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel11)
-                .addGap(34, 34, 34))
-            .addGroup(pnlProxyLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblProxyPort)
-                    .addComponent(lblProxyPassword)
-                    .addComponent(lblProxyServer)
-                    .addComponent(lblProxyUserName))
-                .addGap(19, 19, 19)
-                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtProxyPort, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtPasswordField, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtProxyUserName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtProxyServer, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        pnlProxyLayout.setVerticalGroup(
-            pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlProxyLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtProxyServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblProxyServer))
-                .addGap(8, 8, 8)
-                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblProxyPort)
-                    .addComponent(txtProxyPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtProxyUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblProxyUserName))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblProxyPassword))
-                .addGap(18, 18, 18)
-                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rememberPswd)
-                    .addComponent(jLabel11))
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout pnlProxySettingsLayout = new javax.swing.GroupLayout(pnlProxySettings);
-        pnlProxySettings.setLayout(pnlProxySettingsLayout);
-        pnlProxySettingsLayout.setHorizontalGroup(
-            pnlProxySettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlProxySettingsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlProxy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        pnlProxySettingsLayout.setVerticalGroup(
-            pnlProxySettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlProxySettingsLayout.createSequentialGroup()
-                .addComponent(pnlProxy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout tabConnectionLayout = new javax.swing.GroupLayout(tabConnection);
-        tabConnection.setLayout(tabConnectionLayout);
-        tabConnectionLayout.setHorizontalGroup(
-            tabConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tabConnectionLayout.createSequentialGroup()
-                .addGroup(tabConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tabConnectionLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(lblProxyType)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbProxyType, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(tabConnectionLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(pnlProxySettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        tabConnectionLayout.setVerticalGroup(
-            tabConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tabConnectionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(tabConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblProxyType)
-                    .addComponent(cbProxyType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlProxySettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(163, Short.MAX_VALUE))
-        );
-
-        pnlProxySettings.getAccessibleContext().setAccessibleDescription("");
-
-        tabsPanel.addTab("Connection", tabConnection);
-
         jPanel10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
@@ -1417,14 +1282,198 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tabAvatars.setLayout(tabAvatarsLayout);
         tabAvatarsLayout.setHorizontalGroup(
             tabAvatarsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
         );
         tabAvatarsLayout.setVerticalGroup(
             tabAvatarsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
         );
 
         tabsPanel.addTab("Avatars", tabAvatars);
+
+        lblProxyType.setText("Proxy:");
+
+        cbProxyType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbProxyTypeActionPerformed(evt);
+            }
+        });
+
+        pnlProxySettings.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lblProxyServer.setText("Server:");
+
+        lblProxyPort.setText("Port:");
+
+        txtProxyPort.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtProxyPortkeyTyped(evt);
+            }
+        });
+
+        lblProxyUserName.setText("User Name:");
+
+        lblProxyPassword.setText("Password:");
+
+        txtPasswordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordFieldActionPerformed(evt);
+            }
+        });
+
+        rememberPswd.setText("Remember Password");
+        rememberPswd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rememberPswdActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 2, 10)); // NOI18N
+        jLabel11.setText("Note: password won't be encrypted!");
+
+        javax.swing.GroupLayout pnlProxyLayout = new javax.swing.GroupLayout(pnlProxy);
+        pnlProxy.setLayout(pnlProxyLayout);
+        pnlProxyLayout.setHorizontalGroup(
+            pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlProxyLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlProxyLayout.createSequentialGroup()
+                        .addComponent(rememberPswd)
+                        .addGap(47, 47, 47)
+                        .addComponent(jLabel11)
+                        .addGap(34, 34, 34))
+                    .addGroup(pnlProxyLayout.createSequentialGroup()
+                        .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblProxyPort)
+                            .addComponent(lblProxyPassword)
+                            .addComponent(lblProxyServer)
+                            .addComponent(lblProxyUserName))
+                        .addGap(19, 19, 19)
+                        .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtProxyPort, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtPasswordField, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtProxyUserName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtProxyServer))
+                        .addContainerGap())))
+        );
+        pnlProxyLayout.setVerticalGroup(
+            pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlProxyLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtProxyServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblProxyServer))
+                .addGap(8, 8, 8)
+                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblProxyPort)
+                    .addComponent(txtProxyPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtProxyUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblProxyUserName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblProxyPassword))
+                .addGap(18, 18, 18)
+                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rememberPswd)
+                    .addComponent(jLabel11))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout pnlProxySettingsLayout = new javax.swing.GroupLayout(pnlProxySettings);
+        pnlProxySettings.setLayout(pnlProxySettingsLayout);
+        pnlProxySettingsLayout.setHorizontalGroup(
+            pnlProxySettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlProxySettingsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlProxy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnlProxySettingsLayout.setVerticalGroup(
+            pnlProxySettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlProxySettingsLayout.createSequentialGroup()
+                .addComponent(pnlProxy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        connection_servers.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Servers"));
+
+        lblURLServerList.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblURLServerList.setText("URL server list:");
+        lblURLServerList.setToolTipText("");
+        lblURLServerList.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        lblURLServerList.setPreferredSize(new java.awt.Dimension(110, 16));
+        lblURLServerList.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        txtURLServerList.setToolTipText("The URL XMage tries to read a server list from.");
+        txtURLServerList.setPreferredSize(new java.awt.Dimension(300, 22));
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 2, 10)); // NOI18N
+        jLabel17.setText("e.g.: http://XMage.info/files/server-list.txt");
+
+        javax.swing.GroupLayout connection_serversLayout = new javax.swing.GroupLayout(connection_servers);
+        connection_servers.setLayout(connection_serversLayout);
+        connection_serversLayout.setHorizontalGroup(
+            connection_serversLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(connection_serversLayout.createSequentialGroup()
+                .addGroup(connection_serversLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(connection_serversLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblURLServerList, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtURLServerList, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(connection_serversLayout.createSequentialGroup()
+                        .addGap(141, 141, 141)
+                        .addComponent(jLabel17)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        connection_serversLayout.setVerticalGroup(
+            connection_serversLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(connection_serversLayout.createSequentialGroup()
+                .addGroup(connection_serversLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblURLServerList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtURLServerList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel17))
+        );
+
+        javax.swing.GroupLayout tabConnectionLayout = new javax.swing.GroupLayout(tabConnection);
+        tabConnection.setLayout(tabConnectionLayout);
+        tabConnectionLayout.setHorizontalGroup(
+            tabConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabConnectionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(tabConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tabConnectionLayout.createSequentialGroup()
+                        .addComponent(lblProxyType)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbProxyType, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(pnlProxySettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(connection_servers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        tabConnectionLayout.setVerticalGroup(
+            tabConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabConnectionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(connection_servers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(tabConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblProxyType)
+                    .addComponent(cbProxyType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(pnlProxySettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(92, Short.MAX_VALUE))
+        );
+
+        pnlProxySettings.getAccessibleContext().setAccessibleDescription("");
+
+        tabsPanel.addTab("Connection", tabConnection);
 
         saveButton.setLabel("Save");
         saveButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
@@ -1446,7 +1495,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+            .addComponent(tabsPanel)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(saveButton)
@@ -1531,6 +1580,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             char[] input = txtPasswordField.getPassword();
             prefs.put(KEY_PROXY_PSWD, new String(input));
         }
+        save(prefs, dialog.txtURLServerList, KEY_CONNECTION_URL_SERVER_LIST);
 
         // Avatar
         if (available_avatars.contains(selectedAvatarId)) {
@@ -1963,6 +2013,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         if (dialog.rememberPswd.isSelected()) {
             load(prefs, dialog.txtPasswordField, KEY_PROXY_PSWD, "");
         }
+        load(prefs, dialog.txtURLServerList, KEY_CONNECTION_URL_SERVER_LIST, "http://XMage.info/files/server-list.txt");
     }
 
     private static void loadSelectedAvatar(Preferences prefs) {
@@ -2236,6 +2287,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox checkBoxMainYou;
     private javax.swing.JCheckBox checkBoxUpkeepOthers;
     private javax.swing.JCheckBox checkBoxUpkeepYou;
+    private javax.swing.JPanel connection_servers;
     private javax.swing.JCheckBox displayBigCardsInHand;
     private javax.swing.JButton exitButton;
     private javax.swing.JLabel jLabel11;
@@ -2244,6 +2296,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabelBeforeCombat;
     private javax.swing.JLabel jLabelDraw;
     private javax.swing.JLabel jLabelEndOfTurn;
@@ -2274,6 +2327,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel lblProxyServer;
     private javax.swing.JLabel lblProxyType;
     private javax.swing.JLabel lblProxyUserName;
+    private javax.swing.JLabel lblURLServerList;
     private javax.swing.JPanel main_card;
     private javax.swing.JPanel main_game;
     private javax.swing.JPanel main_gamelog;
@@ -2306,6 +2360,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JTextField txtProxyPort;
     private javax.swing.JTextField txtProxyServer;
     private javax.swing.JTextField txtProxyUserName;
+    private javax.swing.JTextField txtURLServerList;
     // End of variables declaration//GEN-END:variables
 
     private static final PreferencesDialog dialog = new PreferencesDialog(new javax.swing.JFrame(), true);

@@ -45,10 +45,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.InputStreamReader;
+import java.io.Writer;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -370,8 +377,9 @@ public class ConnectDialog extends MageDialog {
 
     private void keyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_keyTyped
         char c = evt.getKeyChar();
-        if (!Character.isDigit(c))
+        if (!Character.isDigit(c)) {
             evt.consume();
+        }
     }//GEN-LAST:event_keyTyped
 
     private void chkAutoConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAutoConnectActionPerformed
@@ -382,11 +390,10 @@ public class ConnectDialog extends MageDialog {
     private void findPublicServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         BufferedReader in = null;
         try {
-            // URL serverListURL = new URL("http://download.magefree.com/files/server-list.txt");
-            URL serverListURL = new URL("http://176.31.186.181/files/server-list.txt");
+            
+            URL serverListURL = new URL(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONNECTION_URL_SERVER_LIST, "http://176.31.186.181/files/server-list.txt"));
 
             Connection.ProxyType configProxyType = Connection.ProxyType.valueByText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_TYPE, "None"));
-
             Proxy p = null;
             Proxy.Type type = Proxy.Type.DIRECT;
             switch (configProxyType) {
@@ -417,16 +424,45 @@ public class ConnectDialog extends MageDialog {
                 return;
             }
 
-            in = new BufferedReader(new InputStreamReader(serverListURL.openConnection(p).getInputStream()));
-
-            List<String> servers = new ArrayList<String>();
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                logger.info("Found server: " + inputLine);
-                servers.add(inputLine);
+            boolean URLNotFound = false;
+            try {
+                in = new BufferedReader(new InputStreamReader(serverListURL.openConnection(p).getInputStream()));
+            } catch (FileNotFoundException| UnknownHostException ex ) {
+                logger.info("Could not read serverlist from: " + serverListURL.toString());
+                File f = new File("serverlist.txt");
+                if (f.exists() && !f.isDirectory()) {
+                    logger.info("Using buffered serverlist: serverlist.txt");
+                    URLNotFound = true;                    
+                    in = new BufferedReader(new FileReader("serverlist.txt"));
+                }
             }
+            List<String> servers = new ArrayList<>();
+            if (in != null) {
+                Writer output = null;
+                if (!URLNotFound) {
+                    // write serverlist to be able to read if URL is not available
+                    File file = new File("serverlist.txt");
+                    if (file.exists() && !file.isDirectory()) {
+                        file.delete();
+                    }
+                    output = new BufferedWriter(new FileWriter(file));
+                }
 
-            if (servers.size() == 0) {
+                String inputLine;
+                while ((inputLine = in.readLine()) != null) {
+                    logger.info("Found server: " + inputLine);
+                    servers.add(inputLine);
+                    if (output != null) {
+                        output.append(inputLine).append('\n');
+
+                    }
+                }
+                if (output != null) {
+                    output.close();
+                }
+                in.close();
+            }
+            if (servers.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Couldn't find any server.");
                 return;
             }
@@ -444,14 +480,15 @@ public class ConnectDialog extends MageDialog {
                     JOptionPane.showMessageDialog(null, "Wrong server data format.");
                 }
             }
-
-            in.close();
+            
         } catch (Exception ex) {
             logger.error(ex, ex);
         } finally {
-            if (in != null) try {
-                in.close();
-            } catch (Exception e) {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (Exception e) {
+                }
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
