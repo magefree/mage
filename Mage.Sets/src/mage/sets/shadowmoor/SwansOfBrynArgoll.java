@@ -29,8 +29,10 @@ package mage.sets.shadowmoor;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
@@ -40,7 +42,6 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
@@ -85,7 +86,7 @@ public class SwansOfBrynArgoll extends CardImpl {
 class SwansOfBrynArgollEffect extends PreventionEffectImpl {
 
     SwansOfBrynArgollEffect() {
-        super(Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false, false);
         staticText = "If a source would deal damage to {this}, prevent that damage. The source's controller draws cards equal to the damage prevented this way";
     }
 
@@ -95,30 +96,36 @@ class SwansOfBrynArgollEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Boolean passed = false;
-        DamageEvent damageEvent = (DamageEvent) event;
-        Card sourceOfDamage = game.getCard(event.getSourceId());
-        if (sourceOfDamage != null) {
-            Spell spell = game.getStack().getSpell(sourceOfDamage.getId());
-            Permanent permanent = game.getPermanentOrLKIBattlefield(sourceOfDamage.getId());
-            if (spell != null) {
-                Player controllerOfSpell = game.getPlayer(spell.getControllerId());
-                controllerOfSpell.drawCards(damageEvent.getAmount(), game);
-                passed = true;
-            }
-            if (permanent != null) {
-                Player controllerOfPermanent = game.getPlayer(permanent.getControllerId());
-                controllerOfPermanent.drawCards(damageEvent.getAmount(), game);
-                passed = true;
-            }
-            if (!passed) {
-                Player owner = game.getPlayer(sourceOfDamage.getOwnerId());
-                if (owner != null) {
-                    owner.drawCards(damageEvent.getAmount(), game);
+        PreventionEffectData preventionEffectData = preventDamageAction(event, source, game);
+        if (preventionEffectData.getPreventedDamage() > 0) {
+            Boolean passed = false;
+            MageObject sourceOfDamage = game.getObject(event.getSourceId());
+            if (sourceOfDamage != null) {
+                Spell spell = game.getStack().getSpell(sourceOfDamage.getId());
+                Permanent permanent = game.getPermanentOrLKIBattlefield(sourceOfDamage.getId());
+                if (spell != null) {
+                    Player controllerOfSpell = game.getPlayer(spell.getControllerId());
+                    controllerOfSpell.drawCards(preventionEffectData.getPreventedDamage(), game);
+                    passed = true;
+                }
+                if (permanent != null) {
+                    Player controllerOfPermanent = game.getPlayer(permanent.getControllerId());
+                    controllerOfPermanent.drawCards(preventionEffectData.getPreventedDamage(), game);
+                    passed = true;
+                }
+                if (!passed) {
+                    // I'm not sure if this is needed - When does a card directly do damage without beeing a spell or a permanent?
+                    Card cardSource = game.getCard(event.getSourceId());
+                    if (cardSource != null) {
+                        Player owner = game.getPlayer(cardSource.getOwnerId());
+                        if (owner != null) {
+                            owner.drawCards(preventionEffectData.getPreventedDamage(), game);
+                        }
+                    }
                 }
             }
         }
-        return true;
+        return preventionEffectData.isReplaced();
     }
 
     @Override
