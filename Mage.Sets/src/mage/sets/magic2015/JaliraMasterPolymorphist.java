@@ -144,7 +144,7 @@ class JaliraMasterPolymorphistEffect extends OneShotEffect {
                 card = cards.getRandom(game);
                 if (card != null) {
                     cards.remove(card);
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
+                    controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.HAND, false, false);
                 }
             }
             return true;

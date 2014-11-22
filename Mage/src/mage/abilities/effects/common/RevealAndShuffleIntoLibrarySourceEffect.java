@@ -37,6 +37,8 @@ import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 
 /**
@@ -57,19 +59,37 @@ public class RevealAndShuffleIntoLibrarySourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card sourceCard = game.getCard(source.getSourceId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (sourceCard != null) {
-            Player player = game.getPlayer(sourceCard.getOwnerId());
-            if (player != null) {
-                Zone fromZone = game.getState().getZone(sourceCard.getId());
-                Cards cards = new CardsImpl();
-                cards.add(sourceCard);
-                player.revealCards(sourceObject.getLogName(), cards, game);
-                player.moveCardToLibraryWithInfo(sourceCard, source.getSourceId(), game, fromZone, true, true);
-                player.shuffleLibrary(game);
-                return true;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (sourceObject != null && controller != null) {
+            Player owner = null;
+            Cards cards = new CardsImpl();
+            Permanent permanent = null;
+            if (sourceObject instanceof Permanent) {
+                permanent = (Permanent) sourceObject;
+                owner = game.getPlayer(permanent.getOwnerId());
+                if (sourceObject instanceof PermanentCard) {
+                    cards.add(permanent);
+                }
+            } else if (sourceObject instanceof Card) {
+                owner = game.getPlayer(((Card)sourceObject).getOwnerId());
+                cards.add((Card)sourceObject);
             }
+            if (owner != null) {
+                Zone fromZone = game.getState().getZone(sourceObject.getId());
+                if (!cards.isEmpty()) {
+                    controller.revealCards(sourceObject.getLogName(), cards, game);
+                }
+                if (permanent != null) {
+                    controller.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, fromZone, true, true);
+                } else {
+                    controller.moveCardToLibraryWithInfo((Card)sourceObject, source.getSourceId(), game, fromZone, true, true);
+                }
+                if (!cards.isEmpty()) {
+                    controller.shuffleLibrary(game);
+                }
+            }
+            return true;
         }
         return false;
     }
