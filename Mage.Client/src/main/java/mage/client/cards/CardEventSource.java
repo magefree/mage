@@ -28,6 +28,7 @@
 
 package mage.client.cards;
 
+import java.awt.Component;
 import mage.client.util.Event;
 import mage.client.util.EventDispatcher;
 import mage.client.util.EventSource;
@@ -68,6 +69,11 @@ public class CardEventSource implements EventSource<Event>, Serializable {
     public void removeFromSideboardEvent(String message) {
         dispatcher.fireEvent(new Event(null, message));
     }
+
+    public void showPopupMenuEvent(SimpleCardView card, Component component, int x, int y, String message) {
+        dispatcher.fireEvent(new Event(card, message, x, y, component));
+    }
+
 
     @Override
     public void clearListeners() {

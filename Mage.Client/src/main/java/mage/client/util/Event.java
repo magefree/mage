@@ -28,6 +28,7 @@
 
 package mage.client.util;
 
+import java.awt.Component;
 import java.io.Serializable;
 
 /**
@@ -36,8 +37,11 @@ import java.io.Serializable;
  */
 public class Event implements Serializable {
     private final Object source;
+    private final Component component;
     private final String eventName;
     private final int number;
+    private final int xPos;
+    private final int yPos;
 
     public Event(Object source, String eventName) {
         this(source, eventName, 0);
@@ -47,6 +51,18 @@ public class Event implements Serializable {
         this.source = source;
         this.eventName = eventName;
         this.number = number;
+        this.xPos = 0;
+        this.yPos = 0;
+        this.component = null;
+    }
+
+    public Event(Object source, String eventName, int xPos, int yPos, Component component) {
+        this.source = source;
+        this.eventName = eventName;
+        this.number =0;
+        this.xPos = xPos;
+        this.yPos = yPos;
+        this.component = component;
     }
 
     public Object getSource() {
@@ -59,6 +75,18 @@ public class Event implements Serializable {
 
     public int getNumber() {
         return number;
+    }
+
+    public int getxPos() {
+        return xPos;
+    }
+
+    public int getyPos() {
+        return yPos;
+    }
+
+    public Component getComponent() {
+        return component;
     }
     
 }

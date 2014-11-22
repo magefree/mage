@@ -39,10 +39,19 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
+import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
+import javax.swing.KeyStroke;
 import javax.swing.Timer;
 import mage.client.MageFrame;
 import mage.client.components.tray.MageTray;
@@ -59,6 +68,7 @@ import mage.view.CardsView;
 import mage.view.DraftPickView;
 import mage.view.DraftView;
 import mage.view.SimpleCardView;
+import mage.view.SimpleCardsView;
 
 /**
  *
@@ -70,7 +80,19 @@ public class DraftPanel extends javax.swing.JPanel {
     private Session session;
     private Timer countdown;
     private int timeout;
-    private boolean picked;
+
+    // popup menu area picked cards
+    private final JPopupMenu popupMenuPickedArea;
+    // popup menu for a card
+    private final JPopupMenu popupMenuCardPanel;
+    // cards hidden in the picked cards area
+    private final Set<UUID> cardsHidden = new HashSet<>();
+    // all cards picked
+    protected SimpleCardsView pickedCards;
+    // all cards picked
+    protected SimpleCardsView pickedCardsShown = new SimpleCardsView();
+    // id of card with popup menu
+    protected UUID cardIdPopupMenu;
 
     private static final CardsView emptyView = new CardsView();
 
@@ -81,6 +103,15 @@ public class DraftPanel extends javax.swing.JPanel {
         draftBooster.setOpaque(false);
         draftPicks.setSortSetting(SortSettingDraft.getInstance());
         draftPicks.setOpaque(false);
+        
+        popupMenuPickedArea = new JPopupMenu();
+        addPopupMenuPickArea();
+        this.add(popupMenuPickedArea);
+
+        popupMenuCardPanel = new JPopupMenu();
+        addPopupMenuCardPanel();
+        this.add(popupMenuCardPanel);
+
         draftLeftPane.setOpaque(false);
 
         countdown = new Timer(1000,
@@ -209,8 +240,29 @@ public class DraftPanel extends javax.swing.JPanel {
     }
 
     public void loadBooster(DraftPickView draftPickView) {
+        // upper area that shows the picks
+        loadCardsToPickedCardsArea(draftPickView.getPicks());
+
+        this.draftPicks.clearCardEventListeners();
+        this.draftPicks.addCardEventListener(new Listener<Event> () {
+                @Override
+                public void event(Event event) {
+                    if (event.getEventName().equals("show-popup-menu")) {
+                        if (event.getSource() != null) {
+                            // Popup Menu Card
+                            cardIdPopupMenu = ((SimpleCardView)event.getSource()).getId();
+                            popupMenuCardPanel.show(event.getComponent(), event.getxPos(), event.getyPos());
+                        } else {
+                            // Popup Menu area
+                            popupMenuPickedArea.show(event.getComponent(), event.getxPos(), event.getyPos());
+                        }
+                    }
+                }
+            }
+        );
+
+        // lower area that shows the booster
         draftBooster.loadBooster(CardsViewUtil.convertSimple(draftPickView.getBooster()), bigCard);
-        draftPicks.loadCards(CardsViewUtil.convertSimple(draftPickView.getPicks()), bigCard, null);
         this.draftBooster.clearCardEventListeners();
         this.draftBooster.addCardEventListener(
             new Listener<Event> () {
@@ -220,8 +272,8 @@ public class DraftPanel extends javax.swing.JPanel {
                         SimpleCardView source = (SimpleCardView) event.getSource();
                         DraftPickView view = session.sendCardPick(draftId, source.getId());
                         if (view != null) {
-                            draftBooster.loadBooster(emptyView, bigCard);
-                            draftPicks.loadCards(CardsViewUtil.convertSimple(view.getPicks()), bigCard, null);
+                            loadCardsToPickedCardsArea(view.getPicks());
+                            draftBooster.loadBooster(emptyView, bigCard);                            
                             Plugins.getInstance().getActionCallback().hidePopup();
                             setMessage("Waiting for other players");
                         }
@@ -245,7 +297,17 @@ public class DraftPanel extends javax.swing.JPanel {
             countdown.start();
         }
     }
-    
+
+    private void loadCardsToPickedCardsArea(SimpleCardsView pickedCards) {
+        this.pickedCards = pickedCards;
+        for (Map.Entry<UUID,SimpleCardView> entry: pickedCards.entrySet()) {
+            if (!cardsHidden.contains(entry.getKey())) {
+                pickedCardsShown.put(entry.getKey(), entry.getValue());
+            }
+        }
+        draftPicks.loadCards(CardsViewUtil.convertSimple(pickedCardsShown), bigCard, null);
+    }
+
     private void setTimeout(int s){
         int minute = s/60;
         int second = s - (minute*60);
@@ -278,6 +340,64 @@ public class DraftPanel extends javax.swing.JPanel {
 
     protected void setMessage(String message) {
         this.lblMessage.setText(message);
+    }
+
+    private void addPopupMenuPickArea() {
+        int c = JComponent.WHEN_IN_FOCUSED_WINDOW;
+
+        KeyStroke ks9 = KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0);
+        this.getInputMap(c).put(ks9, "F9_PRESS");
+        this.getActionMap().put("F9_PRESS", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                showAgainAllHiddenCards();
+            }
+        });
+
+        JMenuItem menuItem;
+
+        menuItem = new JMenuItem("F9 - Show all hidden cards");
+        popupMenuPickedArea.add(menuItem);
+
+        // Confirm (F9)
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showAgainAllHiddenCards();
+            }
+        });
+
+        // popupMenuPickedArea.addSeparator();
+
+    }
+
+    private void addPopupMenuCardPanel() {
+
+        JMenuItem menuItem;
+
+        menuItem = new JMenuItem("Hide this card");
+        popupMenuCardPanel.add(menuItem);
+
+        // Hide Card
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Add the card to the hidden cards
+                cardsHidden.add(cardIdPopupMenu);
+                pickedCardsShown.remove(cardIdPopupMenu);
+                draftPicks.loadCards(CardsViewUtil.convertSimple(pickedCardsShown), bigCard, null);
+            }
+        });
+
+        // popupMenuCardPanel.addSeparator();
+
+    }
+
+
+    private void showAgainAllHiddenCards() {
+        // show again all hidden cards
+        cardsHidden.clear();
+        draftPicks.loadCards(CardsViewUtil.convertSimple(pickedCards), bigCard, null);
     }
 
     /** This method is called from within the constructor to

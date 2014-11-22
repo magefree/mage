@@ -78,6 +78,7 @@ import mage.client.util.gui.TableSpinnerEditor;
 import mage.constants.CardType;
 import mage.view.CardView;
 import mage.view.CardsView;
+import mage.view.SimpleCardView;
 import org.mage.card.arcane.CardPanel;
 
 /**
@@ -113,6 +114,11 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         if (mainModel != null) {
             mainModel.removeTableModelListener(mainTable);
             mainModel.clear();
+        }
+        if(cardArea != null) {
+            for(MouseListener ml: cardArea.getMouseListeners()) {
+                cardArea.removeMouseListener(ml);
+            }
         }
         if(mainTable != null) {
             for(MouseListener ml: mainTable.getMouseListeners()) {
@@ -175,6 +181,9 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
             cbSortBy.setEnabled(true);
             chkPiles.setEnabled(true);
         }
+
+        cardArea.addMouseListener(this);
+
         mainTable.setOpaque(false);
         mainTable.addMouseListener(new MouseAdapter() {
             @Override
@@ -621,7 +630,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
                 .addComponent(jToggleListView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jToggleCardView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 55, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelControlLayout.setVerticalGroup(
             panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -661,7 +670,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelControl, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(panelCardArea, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE))
+                .addComponent(panelCardArea, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -716,29 +725,51 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (e.getClickCount() == 2 && !e.isConsumed()) {
-            e.consume();
+        if (e.getClickCount() >= 1 && !e.isConsumed()) {            
             Object obj = e.getSource();
-            if (obj instanceof Card) {
-                if (e.isAltDown()) {
-                    cardEventSource.altDoubleClick(((Card)obj).getOriginal(), "alt-double-click");
+            if (e.getClickCount() == 2) {
+                e.consume();
+                if (obj instanceof Card) {
+                    if (e.isAltDown()) {
+                        cardEventSource.altDoubleClick(((Card)obj).getOriginal(), "alt-double-click");
+                    }
+                    else {
+                        cardEventSource.doubleClick(((Card)obj).getOriginal(), "double-click");
+                    }
+                } else if (obj instanceof MageCard) {
+                    if (e.isAltDown()) {
+                        cardEventSource.altDoubleClick(((MageCard)obj).getOriginal(), "alt-double-click");
+                    }
+                    else {
+                        cardEventSource.doubleClick(((MageCard)obj).getOriginal(), "double-click");
+                    }
                 }
-                else {
-                    cardEventSource.doubleClick(((Card)obj).getOriginal(), "double-click");
-                }
-            } else if (obj instanceof MageCard) {
-                if (e.isAltDown()) {
-                    cardEventSource.altDoubleClick(((MageCard)obj).getOriginal(), "alt-double-click");
-                }
-                else {
-                    cardEventSource.doubleClick(((MageCard)obj).getOriginal(), "double-click");
-                }
+            }
+            if (obj instanceof MageCard) {
+                checkMenu(e, ((MageCard)obj).getOriginal());
+            } else {
+                checkMenu(e, null);
             }
         }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        if (!e.isConsumed()) {
+            Object obj = e.getSource();
+            if (obj instanceof MageCard) {
+                checkMenu(e, ((MageCard)obj).getOriginal());
+            } else {
+                checkMenu(e, null);
+            }
+        }
+    }
+
+    private void checkMenu(MouseEvent Me, SimpleCardView card){
+        if (Me.isPopupTrigger()) {
+            Me.consume();
+            cardEventSource.showPopupMenuEvent(card, Me.getComponent(), Me.getX(), Me.getY(), "show-popup-menu");
+        }
     }
 
     @Override
