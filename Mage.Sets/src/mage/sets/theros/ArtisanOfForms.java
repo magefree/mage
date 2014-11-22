@@ -29,6 +29,7 @@ package mage.sets.theros;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.abilities.keyword.HeroicAbility;
@@ -38,6 +39,7 @@ import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.common.TargetCreaturePermanent;
 import mage.util.functions.ApplyToPermanent;
 
 /**
@@ -57,9 +59,11 @@ public class ArtisanOfForms extends CardImpl {
         this.toughness = new MageInt(1);
 
         // <i>Heroic</i> - Whenever you cast a spell that targets Artisan of Forms, you may have Artisan of Forms become a copy of target creature and gain this ability.
-        Effect effect = new CopyPermanentEffect(new FilterCreaturePermanent(), new ArtisanOfFormsApplyToPermanent(), false);
+        Effect effect = new CopyPermanentEffect(new FilterCreaturePermanent(), new ArtisanOfFormsApplyToPermanent(), true);
         effect.setText("have {this} become a copy of target creature and gain this ability");
-        this.addAbility(new HeroicAbility(effect, true));
+        Ability ability = new HeroicAbility(effect, true);
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
     public ArtisanOfForms(final ArtisanOfForms card) {

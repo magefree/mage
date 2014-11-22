@@ -49,7 +49,7 @@ public class CopyPermanentEffect extends OneShotEffect {
     private FilterPermanent filter;
     private ApplyToPermanent applier;
     private Permanent bluePrintPermanent;
-    private boolean notTarget;
+    private boolean useTargetOfAbility;
 
     public CopyPermanentEffect() {
         this(new FilterCreaturePermanent());
@@ -64,13 +64,13 @@ public class CopyPermanentEffect extends OneShotEffect {
     }
 
     public CopyPermanentEffect(FilterPermanent filter, ApplyToPermanent applier) {
-        this(filter, applier, true);
+        this(filter, applier, false);
     }
-    public CopyPermanentEffect(FilterPermanent filter, ApplyToPermanent applier, boolean notTarget) {
+    public CopyPermanentEffect(FilterPermanent filter, ApplyToPermanent applier, boolean useTarget) {
         super(Outcome.Copy);
         this.applier = applier;
         this.filter = filter;
-        this.notTarget = notTarget;
+        this.useTargetOfAbility = useTarget;
         this.staticText = "You may have {this} enter the battlefield as a copy of any " + filter.getMessage() + " on the battlefield";
     }
 
@@ -79,7 +79,7 @@ public class CopyPermanentEffect extends OneShotEffect {
         this.filter = effect.filter.copy();
         this.applier = effect.applier;
         this.bluePrintPermanent = effect.bluePrintPermanent;
-        this.notTarget = effect.notTarget;
+        this.useTargetOfAbility = effect.useTargetOfAbility;
     }
 
     @Override
@@ -87,16 +87,21 @@ public class CopyPermanentEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (player != null && sourcePermanent != null) {
-            Target target = new TargetPermanent(filter);
-            target.setNotTarget(notTarget);
-            if (target.canChoose(source.getControllerId(), game)) {
-                player.choose(Outcome.Copy, target, source.getSourceId(), game);
-                Permanent copyFromPermanent = game.getPermanent(target.getFirstTarget());
-                if (copyFromPermanent != null) {
-                    bluePrintPermanent = game.copyPermanent(copyFromPermanent, sourcePermanent, source, applier);
-                    return true;
+            Permanent copyFromPermanent = null;
+            if (useTargetOfAbility) {
+                copyFromPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+            } else {
+                Target target = new TargetPermanent(filter);
+                target.setNotTarget(true);
+                if (target.canChoose(source.getControllerId(), game)) {
+                    player.choose(Outcome.Copy, target, source.getSourceId(), game);
+                    copyFromPermanent = game.getPermanent(target.getFirstTarget());
                 }
             }
+            if (copyFromPermanent != null) {
+                bluePrintPermanent = game.copyPermanent(copyFromPermanent, sourcePermanent, source, applier);
+            }
+            return true;
         }
         return false;
     }
