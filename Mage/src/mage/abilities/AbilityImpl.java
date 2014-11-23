@@ -74,7 +74,6 @@ public abstract class AbilityImpl implements Ability {
     protected ManaCosts<ManaCost> manaCostsToPay;
     protected Costs<Cost> costs;
     protected ArrayList<AlternativeCost> alternativeCosts = new ArrayList<>();
-    protected Costs<Cost> optionalCosts;
     protected Modes modes;
     protected Zone zone;
     protected String name;
@@ -95,7 +94,6 @@ public abstract class AbilityImpl implements Ability {
         this.manaCosts = new ManaCostsImpl<>();
         this.manaCostsToPay = new ManaCostsImpl<>();
         this.costs = new CostsImpl<>();
-        this.optionalCosts = new CostsImpl<>();
         this.modes = new Modes();
     }
 
@@ -111,7 +109,6 @@ public abstract class AbilityImpl implements Ability {
         this.manaCosts = ability.manaCosts;
         this.manaCostsToPay = ability.manaCostsToPay.copy();
         this.costs = ability.costs.copy();
-        this.optionalCosts = ability.optionalCosts.copy();
         for (AlternativeCost cost: ability.alternativeCosts) {
             this.alternativeCosts.add((AlternativeCost)cost.copy());
         }
@@ -307,15 +304,6 @@ public abstract class AbilityImpl implements Ability {
             }
         } // end modes
 
-        // TODO: Handle optionalCosts at the same time as already OptionalAdditionalSourceCosts are handled.
-        for (Cost cost : optionalCosts) {
-              if (cost instanceof ManaCost) {
-                cost.clearPaid();
-                if (controller.chooseUse(Outcome.Benefit, "Pay optional cost " + cost.getText() + "?", game)) {
-                    manaCostsToPay.add((ManaCost) cost);
-                }
-            }
-        }
         //20100716 - 601.2e
         if (sourceObject != null) {
             sourceObject.adjustCosts(this, game);
@@ -540,11 +528,6 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public Costs<Cost> getOptionalCosts() {
-        return optionalCosts;
-    }
-
-    @Override
     public Effects getEffects() {
         return modes.getMode().getEffects();
     }
@@ -654,13 +637,6 @@ public abstract class AbilityImpl implements Ability {
     public void addAlternativeCost(AlternativeCost cost) {
         if (cost != null) {
             this.alternativeCosts.add(cost);
-        }
-    }
-
-    @Override
-    public void addOptionalCost(Cost cost) {
-        if (cost != null) {
-            this.optionalCosts.add(cost);
         }
     }
 

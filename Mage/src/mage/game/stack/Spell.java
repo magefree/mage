@@ -192,9 +192,6 @@ public class Spell implements StackObject, Card {
                         for (UUID modeId :spellAbility.getModes().getSelectedModes()) {
                             spellAbility.getModes().setMode(spellAbility.getModes().get(modeId));
                             if (spellAbility.getTargets().stillLegal(spellAbility, game)) {
-                                if (!spellAbility.getSpellAbilityType().equals(SpellAbilityType.SPLICE)) {
-                                    updateOptionalCosts(index);
-                                }
                                 result |= spellAbility.resolve(game);
                             }
                         }
@@ -222,7 +219,6 @@ public class Spell implements StackObject, Card {
             return false;
         } else if (this.getCardType().contains(CardType.ENCHANTMENT) && this.getSubtype().contains("Aura")) {
             if (ability.getTargets().stillLegal(ability, game)) {
-                updateOptionalCosts(0);
                 boolean bestow = this.getSpellAbility() instanceof BestowAbility;
                 if (bestow) { 
                     // Must be removed first time, after that will be removed by continous effect
@@ -249,7 +245,6 @@ public class Spell implements StackObject, Card {
             }
             // Aura has no legal target and its a bestow enchantment -> Add it to battlefield as creature
             if (this.getSpellAbility() instanceof BestowAbility) { 
-                updateOptionalCosts(0);
                 result = card.putOntoBattlefield(game, fromZone, ability.getId(), controllerId);
                 return result;
             } else {
@@ -259,7 +254,6 @@ public class Spell implements StackObject, Card {
                 return false;
             }
         } else {
-            updateOptionalCosts(0);
             if (isFaceDown()) {
                 card.setFaceDown(true);
             }
@@ -290,29 +284,6 @@ public class Spell implements StackObject, Card {
         }
     }
     
-    /**
-     * As we have ability in the stack, we need to update optional costs in original card.
-     * This information will be used later by effects, e.g. to determine whether card was kicked or not.
-     * E.g. Desolation Angel
-     */
-    private void updateOptionalCosts(int index) {
-        Ability abilityOrig = spellCards.get(index).getAbilities().get(spellAbilities.get(index).getId());
-        if (abilityOrig != null) {
-            for (Object object : spellAbilities.get(index).getOptionalCosts()) {
-                Cost cost = (Cost) object;
-                for (Cost costOrig : abilityOrig.getOptionalCosts()) {
-                    if (cost.getId().equals(costOrig.getId())) {
-                        if (cost.isPaid()) {
-                            costOrig.setPaid();
-                        } else {
-                            costOrig.clearPaid();
-                        }
-                        break;
-                    }
-                }
-            }
-        }
-    }
 
     /**
      * Choose new targets for the spell
