@@ -32,6 +32,9 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import mage.MageException;
@@ -63,11 +66,14 @@ public class Session {
     private boolean isAdmin = false;
     private final AsynchInvokerCallbackHandler callbackHandler;
 
+    private final ReentrantLock lock;
+
     public Session(String sessionId, InvokerCallbackHandler callbackHandler) {
         this.sessionId = sessionId;
         this.callbackHandler = (AsynchInvokerCallbackHandler) callbackHandler;
         this.isAdmin = false;
         this.timeConnected = new Date();
+        this.lock = new ReentrantLock();
     }
 
     public String registerUser(String userName) throws MageException {
@@ -205,34 +211,58 @@ public class Session {
     }
 
     // because different threads can activate this
-    synchronized public void  userLostConnection() {
-        User user = UserManager.getInstance().getUser(userId);
-        if (user == null || !user.isConnected()) {
-            return; //user was already disconnected by other thread
+    public void  userLostConnection() {
+        try {
+            if(lock.tryLock(5, TimeUnit.SECONDS)) {
+                User user = UserManager.getInstance().getUser(userId);
+                if (user == null || !user.isConnected()) {
+                    return; //user was already disconnected by other thread
+                }
+                if (!user.getSessionId().equals(sessionId)) {
+                    // user already reconnected with another instance
+                    logger.info("OLD SESSION IGNORED - " + user.getName());
+                    return;
+                }
+                logger.info("LOST CONNECTION - " + user.getName());
+                UserManager.getInstance().disconnect(userId, DisconnectReason.LostConnection);
+            } else {
+                logger.error("SESSION LOCK - userId " + userId);
+            }
+        } catch (InterruptedException ex) {
+            logger.error("SESSION LOCK - userId " + userId, ex);
         }
-        if (!user.getSessionId().equals(sessionId)) {
-            // user already reconnected with another instance
-            logger.info("OLD SESSION IGNORED - " + user.getName());
-            return;
+        finally {
+           lock.unlock();
         }
-        logger.info("LOST CONNECTION - " + user.getName());
-        UserManager.getInstance().disconnect(userId, DisconnectReason.LostConnection);
+
     }
 
     public void kill(DisconnectReason reason) {
         UserManager.getInstance().removeUser(userId, reason);
     }
 
-    synchronized void fireCallback(final ClientCallback call) {
+    public void fireCallback(final ClientCallback call) {
         try {
-            call.setMessageId(messageId++);
-            callbackHandler.handleCallbackOneway(new Callback(call));
+            boolean tryLock;
+            if (lock.tryLock(5, TimeUnit.SECONDS)) {
+                call.setMessageId(messageId++);
+                callbackHandler.handleCallbackOneway(new Callback(call));
+            } else {
+                logger.error("CALLBACK LOCK - userId " + userId);
+                logger.error(" - method: " + call.getMethod());
+            }
         } catch (HandleCallbackException ex) {
             logger.info("CALLBACK EXCEPTION - userId " + userId, ex);
             if (logger.isDebugEnabled()) {
                 ex.printStackTrace();
             }
             userLostConnection();
+        } catch (InterruptedException ex) {
+            logger.error("CALLBACK LOCK EXCEPTION - userId " + userId, ex);
+            logger.error(" - method: " + call.getMethod());
+        }
+        finally {
+           lock.unlock();
         }
     }
 

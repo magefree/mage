@@ -73,7 +73,7 @@ public class ChatSession {
 
     public void kill(UUID userId, DisconnectReason reason) {
 
-        try {
+        try {            
             if (reason == null) {
                 logger.fatal("User kill without disconnect reason  userId: " + userId);
                 reason = DisconnectReason.Undefined;
