@@ -401,7 +401,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (!phasedIn) {
             if (!replaceEvent(EventType.PHASE_IN, game)) {
                 this.phasedIn = true;
-                fireEvent(EventType.PHASED_IN, game);
+                game.informPlayers(getLogName() + " phased in");
+                fireEvent(EventType.PHASED_IN, game);                
                 return true;
             }
         }
@@ -413,7 +414,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (phasedIn) {
             if (!replaceEvent(EventType.PHASE_OUT, game)) {
                 this.phasedIn = false;
-                fireEvent(EventType.PHASED_OUT, game);
+                game.informPlayers(getLogName() + " phased out");
+                fireEvent(EventType.PHASED_OUT, game);                
                 return true;
             }
         }

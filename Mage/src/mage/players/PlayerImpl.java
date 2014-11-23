@@ -1247,10 +1247,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void phasing(Game game) {
         //20091005 - 502.1
+        List<Permanent> phasedOut = game.getBattlefield().getPhasedOut(playerId);
         for (Permanent permanent: game.getBattlefield().getPhasedIn(playerId)) {
             permanent.phaseOut(game);
         }
-        for (Permanent permanent: game.getBattlefield().getPhasedOut(playerId)) {
+        for (Permanent permanent: phasedOut) {
             permanent.phaseIn(game);
         }
     }

@@ -29,14 +29,19 @@
 package mage.game.permanent;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.UUID;
+import mage.abilities.keyword.PhasingAbility;
 import mage.constants.CardType;
 import mage.constants.RangeOfInfluence;
-import mage.abilities.keyword.PhasingAbility;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
-
 
 /**
  *
@@ -82,7 +87,7 @@ public class Battlefield implements Serializable {
     public int countAll(FilterPermanent filter, UUID controllerId, Game game) {
         int count = 0;
         for (Permanent permanent: field.values()) {
-            if (permanent.getControllerId().equals(controllerId) && filter.match(permanent, game)) {
+            if (permanent.getControllerId().equals(controllerId) && filter.match(permanent, game) && permanent.isPhasedIn()) {
                 count++;
             }
         }
@@ -104,7 +109,7 @@ public class Battlefield implements Serializable {
         int count = 0;
         if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
             for (Permanent permanent: field.values()) {
-                if (filter.match(permanent, sourceId, sourcePlayerId, game)) {
+                if (filter.match(permanent, sourceId, sourcePlayerId, game)  && permanent.isPhasedIn()) {
                     count++;
                 }
             }
@@ -112,7 +117,7 @@ public class Battlefield implements Serializable {
         else {
             Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
             for (Permanent permanent: field.values()) {
-                if (range.contains(permanent.getControllerId()) && filter.match(permanent, sourceId, sourcePlayerId, game)) {
+                if (range.contains(permanent.getControllerId()) && filter.match(permanent, sourceId, sourcePlayerId, game)  && permanent.isPhasedIn()) {
                     count++;
                 }
             }
@@ -133,7 +138,7 @@ public class Battlefield implements Serializable {
     public boolean contains(FilterPermanent filter, int num, Game game) {
         int count = 0;
         for (Permanent permanent: field.values()) {
-            if (filter.match(permanent, game)) {
+            if (filter.match(permanent, game) && permanent.isPhasedIn()) {
                 count++;
                 if (num == count) {
                     return true;
@@ -157,7 +162,7 @@ public class Battlefield implements Serializable {
     public boolean contains(FilterPermanent filter, UUID controllerId, int num, Game game) {
         int count = 0;
         for (Permanent permanent: field.values()) {
-            if (permanent.getControllerId().equals(controllerId) && filter.match(permanent, game)) {
+            if (permanent.getControllerId().equals(controllerId) && filter.match(permanent, game) && permanent.isPhasedIn()) {
                 count++;
                 if (num == count) {
                     return true;
@@ -182,7 +187,7 @@ public class Battlefield implements Serializable {
         int count = 0;
         if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
             for (Permanent permanent: field.values()) {
-                if (filter.match(permanent, null, sourcePlayerId, game)) {
+                if (filter.match(permanent, null, sourcePlayerId, game) && permanent.isPhasedIn()) {
                     count++;
                     if (num == count) {
                         return true;
@@ -193,7 +198,7 @@ public class Battlefield implements Serializable {
         else {
             Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
             for (Permanent permanent: field.values()) {
-                if (range.contains(permanent.getControllerId()) && filter.match(permanent, null, sourcePlayerId, game)) {
+                if (range.contains(permanent.getControllerId()) && filter.match(permanent, null, sourcePlayerId, game) && permanent.isPhasedIn()) {
                     count++;
                     if (num == count) {
                         return true;

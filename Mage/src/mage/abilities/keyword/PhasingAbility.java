@@ -28,11 +28,10 @@
 
 package mage.abilities.keyword;
 
-import mage.constants.Zone;
+import java.io.ObjectStreamException;
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
-
-import java.io.ObjectStreamException;
+import mage.constants.Zone;
 
 /**
  *
@@ -56,7 +55,7 @@ public class PhasingAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public String getRule() {
-        return "Phasing";
+        return "Phasing <i>(This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)</i>";
     }
 
     @Override

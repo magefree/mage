@@ -124,6 +124,9 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 
         List<PermanentView> permanentsToAdd = new ArrayList<>();
         for (PermanentView permanent: battlefield.values()) {
+            if (!permanent.isPhasedIn()) {
+                continue;
+            }
             MagePermanent oldMagePermanent = permanents.get(permanent.getId());
             if (oldMagePermanent == null) {
                 permanentsToAdd.add(permanent);
@@ -193,7 +196,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 
         for (Iterator<Entry<UUID, MagePermanent>> iterator = permanents.entrySet().iterator(); iterator.hasNext();) {
             Entry<UUID, MagePermanent> entry = iterator.next();
-            if (!battlefield.containsKey(entry.getKey())) {
+            if (!battlefield.containsKey(entry.getKey()) || !battlefield.get(entry.getKey()).isPhasedIn()) {
                 removePermanent(entry.getKey(), 1);
                 iterator.remove();
                 changed = true;
