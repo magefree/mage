@@ -270,7 +270,7 @@ public class DraftPanel extends javax.swing.JPanel {
                 public void event(Event event) {
                     if (event.getEventName().equals("pick-a-card")) {
                         SimpleCardView source = (SimpleCardView) event.getSource();
-                        DraftPickView view = session.sendCardPick(draftId, source.getId());
+                        DraftPickView view = session.sendCardPick(draftId, source.getId(), cardsHidden);
                         if (view != null) {
                             loadCardsToPickedCardsArea(view.getPicks());
                             draftBooster.loadBooster(emptyView, bigCard);                            

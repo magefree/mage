@@ -30,6 +30,7 @@ package mage.server.draft;
 
 import java.io.File;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.MageException;
@@ -60,7 +61,7 @@ public class DraftController {
     private final UUID draftSessionId;
     private final Draft draft;
     private final UUID tableId;
-    private UUID markedCard;
+    private final UUID markedCard;
 
     public DraftController(Draft draft, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
         draftSessionId = UUID.randomUUID();
@@ -214,7 +215,7 @@ public class DraftController {
             if (draftSession != null) {
                 UUID cardId = draftSession.getMarkedCard();
                 if (cardId != null) {
-                    sendCardPick(userId, cardId);
+                    sendCardPick(userId, cardId, null);
                     return;
                 }
             }
@@ -227,11 +228,11 @@ public class DraftController {
         return this.draftSessionId;
     }
 
-    public DraftPickView sendCardPick(UUID userId, UUID cardId) {
+    public DraftPickView sendCardPick(UUID userId, UUID cardId, Set<UUID> hiddenCards) {
         DraftSession draftSession = draftSessions.get(userPlayerMap.get(userId));
         if (draftSession != null) {
             draftSession.setMarkedCard(null);
-            return draftSession.sendCardPick(cardId);
+            return draftSession.sendCardPick(cardId, hiddenCards);
         }
         return null;
     }

@@ -27,6 +27,7 @@
 */
 package mage.remote.interfaces;
 
+import java.util.Set;
 import java.util.UUID;
 import mage.cards.decks.DeckCardLists;
 import mage.constants.ManaType;
@@ -64,7 +65,7 @@ public interface GamePlay {
 
     boolean updateDeck(UUID tableId, DeckCardLists deck);
 
-    DraftPickView sendCardPick(UUID draftId, UUID cardId);
+    DraftPickView sendCardPick(UUID draftId, UUID cardId, Set<UUID> hiddenCards);
     DraftPickView sendCardMark(UUID draftId, UUID cardId);
 
     /**

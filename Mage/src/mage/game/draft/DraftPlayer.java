@@ -29,7 +29,9 @@
 package mage.game.draft;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
@@ -48,11 +50,13 @@ public class DraftPlayer {
     protected List<Card> booster;
     protected boolean picking;
     protected boolean joined = false;
+    protected Set<UUID> hiddenCards;
 
     public DraftPlayer(Player player) {
         id = UUID.randomUUID();
         this.player = player;
         this.deck = new Deck();
+        hiddenCards = new HashSet<>();
     }
 
     public UUID getId() {
@@ -63,12 +67,30 @@ public class DraftPlayer {
         return player;
     }
 
+    public void prepareDeck() {
+        if (!hiddenCards.isEmpty()) {
+            Set<Card> cardsToDeck = new HashSet<>();
+            for(Card card: deck.getSideboard()) {
+                if (!hiddenCards.contains(card.getId())) {
+                    cardsToDeck.add(card);
+                }
+            }
+            for(Card card: cardsToDeck) {
+                deck.getSideboard().remove(card);
+                deck.getCards().add(card);
+            }
+        }
+    }
+
     public Deck getDeck() {
         return deck;
     }
 
-    public void addPick(Card card) {
+    public void addPick(Card card, Set<UUID> hiddenCards) {
         deck.getSideboard().add(card);
+        if (hiddenCards != null) {
+            this.hiddenCards = hiddenCards;
+        }
         synchronized(booster) {
             booster.remove(card);
         }

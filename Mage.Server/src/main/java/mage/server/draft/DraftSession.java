@@ -29,6 +29,7 @@
 package mage.server.draft;
 
 import java.rmi.RemoteException;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -150,9 +151,9 @@ public class DraftSession {
         killed = true;
     }
 
-    public DraftPickView sendCardPick(UUID cardId) {
+    public DraftPickView sendCardPick(UUID cardId, Set<UUID> hiddenCards) {
         cancelTimeout();
-        if (draft.addPick(playerId, cardId)) {
+        if (draft.addPick(playerId, cardId, hiddenCards)) {
             return getDraftPickView(0);
         }
         return null;

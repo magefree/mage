@@ -758,10 +758,10 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public DraftPickView sendCardPick(UUID draftId, UUID cardId) {
+    public DraftPickView sendCardPick(UUID draftId, UUID cardId, Set<UUID> hiddenCards) {
         try {
             if (isConnected()) {
-                return server.sendCardPick(draftId, sessionId, cardId);
+                return server.sendCardPick(draftId, sessionId, cardId, hiddenCards);
             }
         } catch (MageException ex) {
             handleMageException(ex);

@@ -32,6 +32,7 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
@@ -180,7 +181,7 @@ public abstract class DraftImpl implements Draft {
 
     @Override
     public void autoPick(UUID playerId) {
-        this.addPick(playerId, players.get(playerId).getBooster().get(0).getId());
+        this.addPick(playerId, players.get(playerId).getBooster().get(0).getId(), null);
     }
 
     protected void passLeft() {
@@ -313,12 +314,12 @@ public abstract class DraftImpl implements Draft {
     }
 
     @Override
-    public boolean addPick(UUID playerId, UUID cardId) {
+    public boolean addPick(UUID playerId, UUID cardId, Set<UUID> hiddenCards) {
         DraftPlayer player = players.get(playerId);
         if (player.isPicking()) {
             for (Card card: player.booster) {
                 if (card.getId().equals(cardId)) {
-                    player.addPick(card);
+                    player.addPick(card, hiddenCards);
                     player.booster.remove(card);
                     break;
                 }

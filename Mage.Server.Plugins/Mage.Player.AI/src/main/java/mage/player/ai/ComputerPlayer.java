@@ -1716,10 +1716,10 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
             log.debug("[DEBUG] AI picked: " + bestCard.getName() + ", score=" + maxScore + ", deck colors=" + colors);
-            draft.addPick(playerId, bestCard.getId());
+            draft.addPick(playerId, bestCard.getId(), null);
         } catch (Exception e) {
             e.printStackTrace();
-            draft.addPick(playerId, cards.get(0).getId());
+            draft.addPick(playerId, cards.get(0).getId(), null);
         }
     }
 

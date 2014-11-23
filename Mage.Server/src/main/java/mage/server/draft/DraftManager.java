@@ -28,6 +28,7 @@
 
 package mage.server.draft;
 
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.game.draft.Draft;
@@ -62,8 +63,8 @@ public class DraftManager {
         draftControllers.remove(gameId);
     }
 
-    public DraftPickView sendCardPick(UUID draftId, UUID userId, UUID cardId) {
-        return draftControllers.get(draftId).sendCardPick(userId, cardId);
+    public DraftPickView sendCardPick(UUID draftId, UUID userId, UUID cardId, Set<UUID> hiddenCards) {
+        return draftControllers.get(draftId).sendCardPick(userId, cardId, hiddenCards);
     }
 
     public void sendCardMark(UUID draftId, UUID userId, UUID cardId) {

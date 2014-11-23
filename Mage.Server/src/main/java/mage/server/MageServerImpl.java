@@ -31,6 +31,7 @@ package mage.server;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import mage.MageException;
@@ -667,13 +668,13 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public DraftPickView sendCardPick(final UUID draftId, final String sessionId, final UUID cardPick) throws MageException {
+    public DraftPickView sendCardPick(final UUID draftId, final String sessionId, final UUID cardPick, final Set<UUID> hiddenCards) throws MageException {
         return executeWithResult("sendCardPick", sessionId, new ActionWithNullNegativeResult<DraftPickView>() {
             @Override
             public DraftPickView execute() {
                 Session session = SessionManager.getInstance().getSession(sessionId);
                 if (session != null) {
-                    return DraftManager.getInstance().sendCardPick(draftId, session.getUserId(), cardPick);
+                    return DraftManager.getInstance().sendCardPick(draftId, session.getUserId(), cardPick, hiddenCards);
                 } else{
                     logger.error("Session not found sessionId: "+ sessionId + "  draftId:" + draftId);
                 }

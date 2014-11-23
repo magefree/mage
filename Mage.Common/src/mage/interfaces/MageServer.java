@@ -29,6 +29,7 @@
 package mage.interfaces;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
@@ -130,7 +131,7 @@ public interface MageServer {
     //draft methods
     void joinDraft(UUID draftId, String sessionId) throws MageException;
     void quitDraft(UUID draftId, String sessionId) throws MageException;
-    DraftPickView sendCardPick(UUID draftId, String sessionId, UUID cardId) throws MageException;
+    DraftPickView sendCardPick(UUID draftId, String sessionId, UUID cardId, Set<UUID> hiddenCards) throws MageException;
     void sendCardMark(UUID draftId, String sessionId, UUID cardId) throws MageException;
 
     //challenge methods

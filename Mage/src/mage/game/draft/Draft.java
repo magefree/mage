@@ -31,6 +31,7 @@ package mage.game.draft;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageItem;
 import mage.cards.ExpansionSet;
@@ -54,7 +55,7 @@ public interface Draft extends MageItem, Serializable {
     List<ExpansionSet> getSets();
     int getBoosterNum();
     int getCardNum();
-    boolean addPick(UUID playerId, UUID cardId);
+    boolean addPick(UUID playerId, UUID cardId, Set<UUID> hiddenCards);
     void start();
     boolean isStarted();
     void setStarted();
