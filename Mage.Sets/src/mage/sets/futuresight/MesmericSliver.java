@@ -25,44 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.sets.futuresight;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.keyword.IslandwalkAbility;
-import mage.abilities.keyword.PhasingAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
+import mage.abilities.effects.keyword.FatesealEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class MerfolkRaiders extends CardImpl {
+public class MesmericSliver extends CardImpl {
 
-    public MerfolkRaiders(UUID ownerId) {
-        super(ownerId, 75, "Merfolk Raiders", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "MIR";
-        this.subtype.add("Merfolk");
-        this.subtype.add("Soldier");
+    private static final FilterCreaturePermanent filterSliver = new FilterCreaturePermanent();
+
+    static {
+        filterSliver.add(new SubtypePredicate("Sliver"));
+    }
+
+    public MesmericSliver(UUID ownerId) {
+        super(ownerId, 53, "Mesmeric Sliver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        this.expansionSetCode = "FUT";
+        this.subtype.add("Sliver");
 
         this.color.setBlue(true);
         this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+        this.toughness = new MageInt(2);
 
-        // Phasing
-        this.addAbility(PhasingAbility.getInstance());
-        // Islandwalk
-        this.addAbility(new IslandwalkAbility());
+        // All Slivers have "When this permanent enters the battlefield, you may fateseal 1."
+        Ability ability = new EntersBattlefieldTriggeredAbility(new FatesealEffect(1), true);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield,
+                filterSliver, "All Slivers have \"When this permanent enters the battlefield, you may fateseal 1.\" <i>(To fateseal 1, its controller looks at the top card of an opponent's library, then he or she may put that card on the bottom of that library.)</i>")));
     }
 
-    public MerfolkRaiders(final MerfolkRaiders card) {
+    public MesmericSliver(final MesmericSliver card) {
         super(card);
     }
 
     @Override
-    public MerfolkRaiders copy() {
-        return new MerfolkRaiders(this);
+    public MesmericSliver copy() {
+        return new MesmericSliver(this);
     }
 }

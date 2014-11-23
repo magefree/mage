@@ -28,12 +28,14 @@
 
 package mage.abilities.effects.common;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
 
 /**
  * @author nantuko
@@ -68,8 +70,9 @@ public class PreventDamageByTargetEffect extends PreventionEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!this.used && super.applies(event, source, game)) {
-            if (!game.getState().getStack().isEmpty()) {
-                
+            MageObject mageObject = game.getObject(event.getSourceId());
+            if (mageObject instanceof Spell){
+                return this.getTargetPointer().getTargets(game, source).contains(mageObject.getId());
             }
             return this.getTargetPointer().getTargets(game, source).contains(event.getSourceId());
         }

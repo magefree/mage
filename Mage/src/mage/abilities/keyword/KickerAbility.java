@@ -204,8 +204,8 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
                     while (player.isInGame() && again) {
                         String times = "";
                         if (kickerCost.isRepeatable()) {
-                            int activated = kickerCost.getActivateCount();
-                            times = Integer.toString(activated + 1) + (activated == 0 ? " time ":" times ");
+                            int activatedCount = kickerCost.getActivateCount();
+                            times = Integer.toString(activatedCount + 1) + (activatedCount == 0 ? " time ":" times ");
                         }
                         if (kickerCost.canPay(ability, sourceId, controllerId, game) &&
                                 player.chooseUse(Outcome.Benefit, new StringBuilder("Pay ").append(times).append(kickerCost.getText(false)).append(" ?").toString(), game)) {
