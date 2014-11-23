@@ -268,7 +268,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
                     Game sim = createMCTSGame(game);
                     MCTSPlayer player = (MCTSPlayer) sim.getPlayer(playerId);
                     player.setNextAction(action);
-                    MCTSExecutor exec = new MCTSExecutor(sim, playerId, thinkTime);
+                    MCTSExecutor exec = new MCTSExecutor(sim, playerId, thinkTime, true);
                     tasks.add(exec);
                 }
 
