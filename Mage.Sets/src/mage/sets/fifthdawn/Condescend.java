@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
-import mage.abilities.effects.common.ScryEffect;
+import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.target.TargetSpell;
 

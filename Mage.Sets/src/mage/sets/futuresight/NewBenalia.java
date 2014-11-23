@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ScryEffect;
+import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 

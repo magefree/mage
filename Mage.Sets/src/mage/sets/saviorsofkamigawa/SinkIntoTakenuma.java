@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SweepNumber;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
-import mage.abilities.effects.common.SweepEffect;
+import mage.abilities.effects.keyword.SweepEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;

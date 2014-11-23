@@ -30,7 +30,7 @@ package mage.sets.bornofthegods;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.effects.common.ScryEffect;
+import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

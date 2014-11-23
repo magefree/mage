@@ -32,7 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.ScryEffect;
+import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.effects.common.combat.UnblockableAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;

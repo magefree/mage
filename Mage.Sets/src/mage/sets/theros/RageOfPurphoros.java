@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.ScryEffect;
+import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.effects.common.ruleModifying.CantRegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

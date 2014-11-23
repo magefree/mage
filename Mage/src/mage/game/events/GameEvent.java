@@ -107,7 +107,7 @@ public class GameEvent {
         SHUFFLE_LIBRARY, LIBRARY_SHUFFLED,
         ENCHANT_PLAYER, ENCHANTED_PLAYER,
         CAN_TAKE_MULLIGAN,
-        FLIP_COIN, SCRY,
+        FLIP_COIN, SCRY, FATESEAL,
 
         //permanent events
         ENTERS_THE_BATTLEFIELD,
