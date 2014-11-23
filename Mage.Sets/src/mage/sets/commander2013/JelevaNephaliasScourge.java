@@ -114,7 +114,7 @@ class JelevaNephaliasScourgeEffect extends OneShotEffect {
         if (controller != null && sourceCard != null) {
             JelevaNephaliasWatcher watcher = (JelevaNephaliasWatcher) game.getState().getWatchers().get("ManaPaidToCastJelevaNephalias", source.getSourceId());
             if (watcher != null) {
-                int xValue = watcher.getManaSpentToCastLastTime(sourceCard.getZoneChangeCounter() - 1);
+                int xValue = watcher.getManaSpentToCastLastTime(game.getZoneChangeCounter(source.getSourceId()) - 1);
                 if (xValue > 0) {
                     for (UUID playerId : controller.getInRange()) {
                         Player player = game.getPlayer(playerId);
@@ -195,9 +195,8 @@ class JelevaNephaliasWatcher extends Watcher {
             if (!game.getStack().isEmpty()) {
                 for (StackObject stackObject : game.getStack()) {
                     if (stackObject instanceof Spell && ((Spell)stackObject).getSourceId().equals(sourceId)) {
-                        Card card = game.getCard(sourceId);
-                        if (!manaSpendToCast.containsValue(card.getZoneChangeCounter())) {
-                            manaSpendToCast.put(new Integer(card.getZoneChangeCounter()), new Integer(((Spell)stackObject).getSpellAbility().getManaCostsToPay().convertedManaCost()));
+                        if (!manaSpendToCast.containsValue(game.getZoneChangeCounter(sourceId))) {
+                            manaSpendToCast.put(new Integer(game.getZoneChangeCounter(sourceId)), new Integer(((Spell)stackObject).getSpellAbility().getManaCostsToPay().convertedManaCost()));
                         }
                     }
                 }

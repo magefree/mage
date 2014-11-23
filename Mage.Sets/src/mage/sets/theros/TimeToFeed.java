@@ -120,7 +120,7 @@ class TimeToFeedTextEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (creature != null) {
-            DelayedTriggeredAbility ability = new TimeToFeedDiesTriggeredAbility(creature.getId(), creature.getZoneChangeCounter());
+            DelayedTriggeredAbility ability = new TimeToFeedDiesTriggeredAbility(creature.getId(), game.getZoneChangeCounter(creature.getId()));
             new CreateDelayedTriggeredAbilityEffect(ability, false).apply(game, source);
         }
 
@@ -155,7 +155,7 @@ class TimeToFeedDiesTriggeredAbility extends DelayedTriggeredAbility {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
             if (event.getTargetId().equals(watchedCreatureId)) {
                 Permanent creature = (Permanent) game.getLastKnownInformation(watchedCreatureId, Zone.BATTLEFIELD);
-                if (creature.getZoneChangeCounter() == this.zoneChangeCounter) {
+                if (game.getZoneChangeCounter(creature.getId()) == this.zoneChangeCounter) {
                     return true;
                 }
             }

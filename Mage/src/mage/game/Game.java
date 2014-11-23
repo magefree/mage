@@ -149,6 +149,9 @@ public interface Game extends MageItem, Serializable {
     void setStateCheckRequired();
     boolean getStateCheckRequired();
     void resetForSourceId(UUID sourceId);
+    int getZoneChangeCounter(UUID objectId);
+    void updateZoneChangeCounter(UUID objectId);
+    void setZoneChangeCounter(UUID objectId, int value);
 
     //client event methods
     void addTableEventListener(Listener<TableEvent> listener);

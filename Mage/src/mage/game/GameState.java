@@ -104,6 +104,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Map<String, Object> values = new HashMap<>();
     private Map<UUID, Zone> zones = new HashMap<>();
     private List<GameEvent> simultaneousEvents = new ArrayList<>();
+    private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
 
     public GameState() {
         players = new Players();
@@ -164,6 +165,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         this.paused = state.paused;
         this.simultaneousEvents.addAll(state.simultaneousEvents);
+        this.zoneChangeCounter.putAll(state.zoneChangeCounter);
     }
 
     @Override
@@ -179,7 +181,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     public String getValue(boolean useHidden) {
         StringBuilder sb = new StringBuilder(1024);
 
-        sb.append(turnNum).append(turn.getPhaseType()).append(turn.getStepType()).append(activePlayerId).append(priorityPlayerId);
+        sb.append(turnNum).append(":").append(turn.getPhaseType()).append(turn.getStepType());
+        sb.append(activePlayerId).append(players.get(activePlayerId).getName()).append(priorityPlayerId).append(players.get(priorityPlayerId).getName());
 
         for (Player player: players.values()) {
             sb.append("player").append(player.getLife()).append("hand");
@@ -217,7 +220,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     public String getValue(boolean useHidden, Game game) {
         StringBuilder sb = new StringBuilder(1024);
 
-        sb.append(turnNum).append(turn.getPhaseType()).append(turn.getStepType()).append(activePlayerId).append(priorityPlayerId);
+        sb.append(turnNum).append(":").append(turn.getPhaseType()).append(turn.getStepType());
+        sb.append(activePlayerId).append(players.get(activePlayerId).getName()).append(priorityPlayerId).append(players.get(priorityPlayerId).getName());
 
         for (Player player: players.values()) {
             sb.append("player").append(player.isPassed()).append(player.getLife()).append("hand");
@@ -737,6 +741,20 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void setLegendaryRuleActive(boolean legendaryRuleActive) {
         this.legendaryRuleActive = legendaryRuleActive;
+    }
+
+    public int getZoneChangeCounter(UUID objectId) {
+        return this.zoneChangeCounter.getOrDefault(objectId, 1);
+    }
+
+    public void updateZoneChangeCounter(UUID objectId) {
+        Integer value = this.zoneChangeCounter.getOrDefault(objectId, 1);
+        value++;
+        this.zoneChangeCounter.put(objectId, value);
+    }
+
+    public void setZoneChangeCounter(UUID objectId, int value) {
+        this.zoneChangeCounter.put(objectId, value);
     }
 
 }

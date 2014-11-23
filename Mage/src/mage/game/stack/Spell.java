@@ -868,11 +868,6 @@ public class Spell implements StackObject, Card {
     }
 
     @Override
-    public int getZoneChangeCounter() {
-        return card.getZoneChangeCounter();
-    }
-
-    @Override
     public void addInfo(String key, String value) {
         // do nothing
     }

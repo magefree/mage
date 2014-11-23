@@ -79,10 +79,7 @@ public class CopyEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        Permanent permanent = game.getPermanent(sourceId);
-        if (permanent != null) {
-            this.zoneChangeCounter = permanent.getZoneChangeCounter();
-        }
+        this.zoneChangeCounter = game.getZoneChangeCounter(sourceId);
     }
 
     @Override
@@ -138,8 +135,7 @@ public class CopyEffect extends ContinuousEffectImpl {
     @Override
     public boolean isInactive(Ability source, Game game) {
         // The copy effect is added, if the copy takes place. If source left battlefield, the copy effect has cease to exist
-        Permanent permanent = game.getPermanent(this.sourceId);
-        return permanent == null || permanent.getZoneChangeCounter() != this.zoneChangeCounter;
+        return game.getZoneChangeCounter(sourceId) != this.zoneChangeCounter;
     }
 
     @Override

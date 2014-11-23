@@ -94,9 +94,8 @@ class ScoutsWarningAsThoughEffect extends AsThoughEffectImpl {
     @Override
     public void init(Ability source, Game game) {
          watcher = (ScoutsWarningWatcher) game.getState().getWatchers().get("consumeScoutsWarningWatcher", source.getControllerId());
-         Card card = game.getCard(source.getSourceId());
-         if (watcher != null && card != null) {
-             zoneChangeCounter = card.getZoneChangeCounter();
+         if (watcher != null) {
+             zoneChangeCounter = game.getZoneChangeCounter(source.getSourceId());
              watcher.addScoutsWarningSpell(source.getSourceId(), zoneChangeCounter);
          }
     }

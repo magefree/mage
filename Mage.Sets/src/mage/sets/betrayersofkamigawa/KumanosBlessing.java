@@ -129,7 +129,7 @@ class KumanosBlessingEffect extends ReplacementEffectImpl {
             if (zce.isDiesEvent()) {
                 DamagedByEnchantedWatcher watcher = (DamagedByEnchantedWatcher) game.getState().getWatchers().get("DamagedByEnchantedWatcher", source.getSourceId());
                 if (watcher != null) {
-                    return watcher.wasDamaged(zce.getTarget());
+                    return watcher.wasDamaged(zce.getTarget(), game);
                 }
             }
         }
@@ -177,7 +177,7 @@ class DamagedByEnchantedWatcher extends Watcher {
         damagedCreatures.clear();
     }
 
-    public boolean wasDamaged(Permanent permanent) {
-        return damagedCreatures.contains(new MageObjectReference(permanent));
+    public boolean wasDamaged(Permanent permanent, Game game) {
+        return damagedCreatures.contains(new MageObjectReference(permanent, game));
     }
 }

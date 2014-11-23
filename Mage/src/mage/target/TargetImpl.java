@@ -250,10 +250,7 @@ public abstract class TargetImpl implements Target {
     }
 
     private void rememberZoneChangeCounter(UUID id, Game game) {
-        Card card = game.getCard(id);
-        if (card != null) {
-            zoneChangeCounters.put(id, card.getZoneChangeCounter());
-        }
+        zoneChangeCounters.put(id, game.getZoneChangeCounter(id));
     }
 
     @Override
@@ -329,12 +326,9 @@ public abstract class TargetImpl implements Target {
         Set <UUID> illegalTargets = new HashSet<>();
         int replacedTargets = 0;
         for (UUID targetId: targets.keySet()) {
-            Card card = game.getCard(targetId);
-            if (card != null) {
-                if (zoneChangeCounters.containsKey(targetId) && zoneChangeCounters.get(targetId) != card.getZoneChangeCounter()) {
-                    illegalTargets.add(targetId);
-                    continue; // it's not legal so continue to have a look at other targeted objects
-                }
+            if (zoneChangeCounters.containsKey(targetId) && zoneChangeCounters.get(targetId) != game.getZoneChangeCounter(targetId)) {
+                illegalTargets.add(targetId);
+                continue; // it's not legal so continue to have a look at other targeted objects
             }
             if (!notTarget && game.replaceEvent(GameEvent.getEvent(EventType.TARGET, targetId, source.getSourceId(), source.getControllerId()))) {
                 replacedTargets++;

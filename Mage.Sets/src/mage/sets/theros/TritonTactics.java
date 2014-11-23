@@ -127,7 +127,7 @@ class TritonTacticsUntapTargetEffect extends OneShotEffect {
             } else {
                 targetMap = new HashMap<>();
             }
-            targetMap.put(new Integer(game.getCard(source.getSourceId()).getZoneChangeCounter()), targets);
+            targetMap.put(new Integer(game.getZoneChangeCounter(source.getSourceId())), targets);
             if (object == null) {
                 game.getState().setValue("targets" + source.getSourceId().toString(), targetMap);
             }

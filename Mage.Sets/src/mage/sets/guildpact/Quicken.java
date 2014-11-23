@@ -95,9 +95,8 @@ class QuickenAsThoughEffect extends AsThoughEffectImpl {
     @Override
     public void init(Ability source, Game game) {
          quickenWatcher = (QuickenWatcher) game.getState().getWatchers().get("consumeQuickenWatcher", source.getControllerId());
-         Card card = game.getCard(source.getSourceId());
-         if (quickenWatcher != null && card != null) {
-             zoneChangeCounter = card.getZoneChangeCounter();
+         if (quickenWatcher != null) {
+             zoneChangeCounter = game.getZoneChangeCounter(source.getSourceId());
              quickenWatcher.addQuickenSpell(source.getSourceId(), zoneChangeCounter);
          }
     }

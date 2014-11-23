@@ -219,10 +219,7 @@ public abstract class GameImpl implements Game, Serializable {
         this.freeMulligans = game.freeMulligans;
         this.attackOption = game.attackOption;
         this.state = game.state.copy();
-        // Ai simulation modifies e.g. zoneChangeCounter so copy is needed if AI active
-        for (Map.Entry<UUID, Card> entry: game.gameCards.entrySet()) {
-            this.gameCards.put(entry.getKey(), entry.getValue().copy());
-        }
+        this.gameCards = game.gameCards;
         this.simulation = game.simulation;
         this.gameOptions = game.gameOptions;
         this.lki.putAll(game.lki);
@@ -450,6 +447,21 @@ public abstract class GameImpl implements Game, Serializable {
         state.setZone(objectId, zone);
     }
 
+    @Override
+    public int getZoneChangeCounter(UUID objectId) {
+        return state.getZoneChangeCounter(objectId);
+    }
+
+    @Override
+    public void updateZoneChangeCounter(UUID objectId) {
+        state.updateZoneChangeCounter(objectId);
+    }
+
+    @Override
+    public void setZoneChangeCounter(UUID objectId, int value) {
+        state.setZoneChangeCounter(objectId, value);
+    }
+    
     @Override
     public GameStates getGameStates() {
         return gameStates;
@@ -2234,10 +2246,10 @@ public abstract class GameImpl implements Game, Serializable {
             if (object instanceof Permanent) {
                 Map<Integer, MageObject> lkiExtendedMap = lkiExtended.get(objectId);
                 if (lkiExtendedMap != null) {
-                    lkiExtendedMap.put(((Permanent) object).getZoneChangeCounter(), copy);
+                    lkiExtendedMap.put(getZoneChangeCounter(object.getId()), copy);
                 } else {
                     lkiExtendedMap = new HashMap<>();
-                    lkiExtendedMap.put(((Permanent) object).getZoneChangeCounter(), copy);
+                    lkiExtendedMap.put(getZoneChangeCounter(object.getId()), copy);
                     lkiExtended.put(objectId, lkiExtendedMap);
                 }
             }

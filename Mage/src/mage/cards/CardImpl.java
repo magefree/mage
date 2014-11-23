@@ -75,7 +75,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     protected UUID ownerId;
     protected int cardNumber;
-    protected List<Watcher> watchers = new ArrayList<>();
+    protected List<Watcher> watchers;
     protected String expansionSetCode;
     protected String tokenSetCode;
     protected Rarity rarity;
@@ -86,7 +86,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected SpellAbility spellAbility;
     protected boolean flipCard;
     protected String flipCardName;
-    protected int zoneChangeCounter = 1;
     protected Map<String, String> info;
     protected boolean usesVariousArt = false;
     protected Counters counters;
@@ -125,6 +124,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         this.ownerId = ownerId;
         this.name = name;
         this.counters = new Counters();
+        this.watchers = new ArrayList<>();
     }
 
     protected CardImpl(UUID id, UUID ownerId, String name) {
@@ -132,6 +132,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         this.ownerId = ownerId;
         this.name = name;
         this.counters = new Counters();
+        this.watchers = new ArrayList<>();
     }
 
     public CardImpl(final CardImpl card) {
@@ -140,7 +141,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         cardNumber = card.cardNumber;
         expansionSetCode = card.expansionSetCode;
         rarity = card.rarity;
-        for (Watcher watcher: (List<Watcher>)card.getWatchers()) {
+        this.watchers = new ArrayList<>();
+        for (Watcher watcher: card.getWatchers()) {
             watchers.add(watcher.copy());
         }
         faceDown = card.faceDown;
@@ -150,7 +152,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             secondSideCard = card.secondSideCard;
             nightCard = card.nightCard;
         }
-        zoneChangeCounter = card.zoneChangeCounter;
         if (card.info != null) {
             info = new HashMap<>();
             info.putAll(card.info);
@@ -222,8 +223,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             }
             return rules;
         } catch (Exception e) {
-            System.out.println("Exception in rules generation for card: " + this.getName());
-            e.printStackTrace();
+            logger.error("Exception in rules generation for card: " + this.getName(), e);
         }
         ArrayList<String> rules = new ArrayList<>();
         rules.add("Exception occured in rules generation");
@@ -351,7 +351,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 setFaceDown(false);
                 game.getCard(this.getId()).setFaceDown(false);
             }
-            updateZoneChangeCounter();
+            game.updateZoneChangeCounter(objectId);
             switch (event.getToZone()) {
                 case GRAVEYARD:
                     game.getPlayer(ownerId).putInGraveyard(this, game, !flag);
@@ -484,7 +484,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             } else {
                 game.getExile().createZone(exileId, name).add(this);
             }
-            updateZoneChangeCounter();
+            game.updateZoneChangeCounter(objectId);
             game.setZone(objectId, event.getToZone());
             game.addSimultaneousEvent(event);
             return true;
@@ -542,7 +542,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     logger.warn("Couldn't find card in fromZone, card=" + getName() + ", fromZone=" + fromZone);
                 }
             }
-            updateZoneChangeCounter();
+            game.updateZoneChangeCounter(objectId);
             PermanentCard permanent = new PermanentCard(this, controllerId);
             // reset is done to end continuous effects from previous instances of that permanent (e.g undying)
             game.resetForSourceId(permanent.getId());
@@ -651,15 +651,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         return splitCard;
     }
 
-
-    @Override
-    public int getZoneChangeCounter() {
-        return zoneChangeCounter;
-    }
-
-    private void updateZoneChangeCounter() {
-        zoneChangeCounter++;
-    }
 
     @Override
     public void addInfo(String key, String value) {

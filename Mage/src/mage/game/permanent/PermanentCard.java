@@ -80,6 +80,7 @@ public class PermanentCard extends PermanentImpl {
         // when the permanent is reset, copy all original values from the card
         // must copy card each reset so that the original values don't get modified
         copyFromCard(card);
+        game.setZoneChangeCounter(objectId, game.getZoneChangeCounter(card.getId()));
         super.reset(game);
     }
 
@@ -106,7 +107,6 @@ public class PermanentCard extends PermanentImpl {
         this.rarity = card.getRarity();
         this.cardNumber = card.getCardNumber();
         this.usesVariousArt = card.getUsesVariousArt();
-        this.zoneChangeCounter = card.getZoneChangeCounter();
         
         canTransform = card.canTransform();
         if (canTransform) {
