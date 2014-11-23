@@ -62,14 +62,15 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
     protected int maxThinkTime;
     private static final transient Logger logger = Logger.getLogger(ComputerPlayerMCTS.class);
     private transient ExecutorService pool;
-    private int cores;
+    private int threads;
 
     public ComputerPlayerMCTS(String name, RangeOfInfluence range, int skill) {
         super(name, range);
         human = false;
         maxThinkTime = (int) (skill * THINK_TIME_MULTIPLIER);
-        cores = Runtime.getRuntime().availableProcessors();
-        pool = Executors.newFixedThreadPool(cores);
+        int cores = Runtime.getRuntime().availableProcessors();
+        threads = cores == 1 ? 1 : cores - 1;  // try to leave a core free for server processing
+        pool = Executors.newFixedThreadPool(threads);
     }
 
     protected ComputerPlayerMCTS(UUID id) {
@@ -263,8 +264,8 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
         logger.info("applyMCTS - Thinking for " + (endTime - startTime)/1000000000.0 + "s");
         if (thinkTime > 0) {
             if (USE_MULTIPLE_THREADS) {
-                List<MCTSExecutor> tasks = new ArrayList<MCTSExecutor>();
-                for (int i = 0; i < cores; i++) {
+                List<MCTSExecutor> tasks = new ArrayList<>();
+                for (int i = 0; i < threads; i++) {
                     Game sim = createMCTSGame(game);
                     MCTSPlayer player = (MCTSPlayer) sim.getPlayer(playerId);
                     player.setNextAction(action);
