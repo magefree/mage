@@ -35,19 +35,16 @@ import java.util.UUID;
 
 public abstract class CostImpl implements Cost {
 
-    protected UUID id;
     protected String text;
     protected boolean paid;
     protected Targets targets;
 
     public CostImpl() {
-        id = UUID.randomUUID();
         paid = false;
         targets = new Targets();
     }
 
     public CostImpl(final CostImpl cost) {
-        this.id = cost.id;
         this.text = cost.text;
         this.paid = cost.paid;
         this.targets = cost.targets.copy();
@@ -82,11 +79,6 @@ public abstract class CostImpl implements Cost {
     @Override
     public void setPaid() {
         paid = true;
-    }
-
-    @Override
-    public UUID getId() {
-        return this.id;
     }
 
 }

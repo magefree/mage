@@ -55,11 +55,9 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     private static Map<String, ManaCosts> costs = new HashMap<>();
 
     public ManaCostsImpl() {
-        this.id = UUID.randomUUID();
     }
 
     public ManaCostsImpl(String mana) {
-        this.id = UUID.randomUUID();
         load(mana);
     }
 
@@ -326,11 +324,6 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
             symbols.add(cost.getText());
         }
         return symbols;
-    }
-
-    @Override
-    public UUID getId() {
-        return this.id;
     }
 
     @Override
