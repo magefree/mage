@@ -56,9 +56,8 @@ public class PlayerLostLifeWatcher extends Watcher {
 
     public PlayerLostLifeWatcher(final PlayerLostLifeWatcher watcher) {
         super(watcher);
-        for (Entry<UUID, Integer> entry : watcher.amountOfLifeLostThisTurn.entrySet()) {
-            amountOfLifeLostThisTurn.put(entry.getKey(), entry.getValue());
-        }
+        this.amountOfLifeLostThisTurn.putAll(watcher.amountOfLifeLostThisTurn);
+        this.amountOfLifeLostLastTurn.putAll(watcher.amountOfLifeLostLastTurn);
     }
 
     @Override

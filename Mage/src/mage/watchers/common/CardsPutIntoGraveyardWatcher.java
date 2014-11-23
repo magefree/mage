@@ -59,9 +59,7 @@ public class CardsPutIntoGraveyardWatcher extends Watcher {
 
     public CardsPutIntoGraveyardWatcher(final CardsPutIntoGraveyardWatcher watcher) {
         super(watcher);
-        for (Entry<UUID, Integer> entry : watcher.amountOfCardsThisTurn.entrySet()) {
-            amountOfCardsThisTurn.put(entry.getKey(), entry.getValue());
-        }
+        this.amountOfCardsThisTurn.putAll(watcher.amountOfCardsThisTurn);
         this.cardsPutToGraveyardFromBattlefield.addAll(watcher.cardsPutToGraveyardFromBattlefield);
     }
 

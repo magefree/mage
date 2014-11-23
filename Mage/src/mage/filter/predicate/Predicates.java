@@ -244,8 +244,8 @@ public final class Predicates {
 
     private static String commaJoin(List components) {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < components.size(); i++) {
-            sb.append(components.get(i).toString());
+        for (Object component : components) {
+            sb.append(component.toString());
         }
         sb.deleteCharAt(sb.length() - 1);
         return sb.toString();

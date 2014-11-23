@@ -94,9 +94,7 @@ class MindbreakTrapWatcher extends Watcher {
 
     public MindbreakTrapWatcher(final MindbreakTrapWatcher watcher) {
         super(watcher);
-        for (Entry<UUID, Integer> entry: watcher.counts.entrySet()) {
-            counts.put(entry.getKey(), entry.getValue());
-        }
+        counts.putAll(watcher.counts);
     }
 
     @Override

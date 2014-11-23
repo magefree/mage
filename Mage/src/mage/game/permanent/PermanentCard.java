@@ -86,7 +86,7 @@ public class PermanentCard extends PermanentImpl {
     protected void copyFromCard(Card card) {
         this.name = card.getName();
         this.abilities.clear();
-        this.abilities.addAll(card.getAbilities().copy());
+        this.abilities = card.getAbilities().copy();
         this.abilities.setControllerId(this.controllerId);
         this.watchers.addAll(card.getWatchers());
         this.cardType.clear();

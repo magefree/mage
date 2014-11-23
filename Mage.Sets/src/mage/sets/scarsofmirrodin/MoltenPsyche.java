@@ -29,7 +29,6 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -128,9 +127,7 @@ class MoltenPsycheWatcher extends Watcher {
 
     public MoltenPsycheWatcher(final MoltenPsycheWatcher watcher) {
         super(watcher);
-        for (Entry<UUID, Integer> entry: watcher.draws.entrySet()) {
-            draws.put(entry.getKey(), entry.getValue());
-        }
+        this.draws.putAll(watcher.draws);
     }
 
     @Override

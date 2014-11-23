@@ -60,9 +60,7 @@ public class MiracleWatcher extends Watcher {
 
     public MiracleWatcher(final MiracleWatcher watcher) {
         super(watcher);
-        for (Entry<UUID, Integer> entry : watcher.amountOfCardsDrawnThisTurn.entrySet()) {
-            amountOfCardsDrawnThisTurn.put(entry.getKey(), entry.getValue());
-        }
+        this.amountOfCardsDrawnThisTurn.putAll(this.amountOfCardsDrawnThisTurn);
     }
 
     @Override

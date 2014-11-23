@@ -83,7 +83,7 @@ public class LavaballTrap extends CardImpl {
 
 class LavaballTrapWatcher extends Watcher {
 
-    private Map<UUID, Integer> amountOfLandsPlayedThisTurn = new HashMap<UUID, Integer>();
+    private Map<UUID, Integer> amountOfLandsPlayedThisTurn = new HashMap<>();
 
     public LavaballTrapWatcher() {
         super("LavaballTrapWatcher", WatcherScope.GAME);
@@ -91,9 +91,7 @@ class LavaballTrapWatcher extends Watcher {
 
     public LavaballTrapWatcher(final LavaballTrapWatcher watcher) {
         super(watcher);
-        for (Map.Entry<UUID, Integer> entry : watcher.amountOfLandsPlayedThisTurn.entrySet()) {
-            amountOfLandsPlayedThisTurn.put(entry.getKey(), entry.getValue());
-        }
+        this.amountOfLandsPlayedThisTurn.putAll(watcher.amountOfLandsPlayedThisTurn);
     }
 
     @Override

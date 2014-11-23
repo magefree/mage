@@ -80,7 +80,7 @@ public class WhiplashTrap extends CardImpl {
 
 class WhiplashTrapWatcher extends Watcher {
 
-    private Map<UUID, Integer> amountOfCreaturesPlayedThisTurn = new HashMap<UUID, Integer>();
+    private Map<UUID, Integer> amountOfCreaturesPlayedThisTurn = new HashMap<>();
 
     public WhiplashTrapWatcher() {
         super("WhiplashTrapWatcher", WatcherScope.GAME);
@@ -88,9 +88,7 @@ class WhiplashTrapWatcher extends Watcher {
 
     public WhiplashTrapWatcher(final WhiplashTrapWatcher watcher) {
         super(watcher);
-        for (Map.Entry<UUID, Integer> entry : watcher.amountOfCreaturesPlayedThisTurn.entrySet()) {
-            amountOfCreaturesPlayedThisTurn.put(entry.getKey(), entry.getValue());
-        }
+        this.amountOfCreaturesPlayedThisTurn.putAll(watcher.amountOfCreaturesPlayedThisTurn);
     }
 
     @Override
