@@ -54,10 +54,10 @@ import org.apache.log4j.Logger;
  */
 public class MCTSNode {
 
-    private static final double selectionCoefficient = 1.0;
+    private static final double selectionCoefficient = Math.sqrt(2.0);
     private static final double passRatioTolerance = 0.0;
     private static final transient Logger logger = Logger.getLogger(MCTSNode.class);
-
+    
     private int visits = 0;
     private int wins = 0;
     private MCTSNode parent;
@@ -190,7 +190,6 @@ public class MCTSNode {
                 }
                 break;
         }
-        game = null;
     }
 
     public int simulate(UUID playerId) {
@@ -221,6 +220,10 @@ public class MCTSNode {
 
     public boolean isLeaf() {
         return children.isEmpty();
+    }
+    
+    public boolean isRoot() {
+        return parent == null;
     }
 
     public MCTSNode bestChild() {
