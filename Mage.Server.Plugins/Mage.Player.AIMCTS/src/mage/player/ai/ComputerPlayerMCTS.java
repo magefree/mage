@@ -60,7 +60,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
 
     protected transient MCTSNode root;
     protected int maxThinkTime;
-     private static final transient Logger logger = Logger.getLogger(ComputerPlayerMCTS.class);
+    private static final transient Logger logger = Logger.getLogger(ComputerPlayerMCTS.class);
     private transient ExecutorService pool;
     private int cores;
 
@@ -96,9 +96,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
         if (ability == null)
             logger.fatal("null ability");
         activateAbility((ActivatedAbility)ability, game);
-        if (ability instanceof PassAbility)
-            return false;
-        return true;
+        return !(ability instanceof PassAbility);
     }
 
     protected void calculateActions(Game game, NextAction action) {
@@ -255,12 +253,14 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
 //    }
 
     protected void applyMCTS(final Game game, final NextAction action) {
-        int thinkTime = calculateThinkTime(game, action);
+        
+        int count = MCTSNode.cleanupCache(game.getTurnNum());
+        logger.info("Removed " + count + " cache entries");
 
+        int thinkTime = calculateThinkTime(game, action);
         long startTime = System.nanoTime();
         long endTime = startTime + (thinkTime * 1000000000l);
         logger.info("applyMCTS - Thinking for " + (endTime - startTime)/1000000000.0 + "s");
-
         if (thinkTime > 0) {
             if (USE_MULTIPLE_THREADS) {
                 List<MCTSExecutor> tasks = new ArrayList<MCTSExecutor>();
@@ -409,6 +409,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
         long mb = 1024 * 1024;
 
         logger.info("Max heap size: " + heapMaxSize/mb + " Heap size: " + heapSize/mb + " Used: " + heapUsedSize/mb);
+        logger.info(MCTSNode.getHitMiss());
     }
 
 }

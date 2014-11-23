@@ -29,8 +29,11 @@ package mage.player.ai;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.abilities.Ability;
@@ -53,12 +56,12 @@ public class MCTSNode {
 
     private static final double selectionCoefficient = 1.0;
     private static final double passRatioTolerance = 0.0;
-     private static final transient Logger logger = Logger.getLogger(MCTSNode.class);
+    private static final transient Logger logger = Logger.getLogger(MCTSNode.class);
 
     private int visits = 0;
     private int wins = 0;
     private MCTSNode parent;
-    private final List<MCTSNode> children = new ArrayList<MCTSNode>();
+    private final List<MCTSNode> children = new ArrayList<>();
     private Ability action;
     private Game game;
     private Combat combat;
@@ -141,7 +144,8 @@ public class MCTSNode {
         switch (player.getNextAction()) {
             case PRIORITY:
 //                logger.info("Priority for player:" + player.getName() + " turn: " + game.getTurnNum() + " phase: " + game.getPhase().getType() + " step: " + game.getStep().getType());
-                List<Ability> abilities = player.getPlayableOptions(game);
+                List<Ability> abilities = getPlayables(player, stateValue, game);
+                //List<Ability> abilities = player.getPlayableOptions(game);
                 for (Ability ability: abilities) {
                     Game sim = game.copy();
 //                    logger.info("expand " + ability.toString());
@@ -153,7 +157,8 @@ public class MCTSNode {
                 break;
             case SELECT_ATTACKERS:
 //                logger.info("Select attackers:" + player.getName());
-                List<List<UUID>> attacks = player.getAttacks(game);
+                List<List<UUID>> attacks = getAttacks(player, stateValue, game);
+                //List<List<UUID>> attacks = player.getAttacks(game);
                 UUID defenderId = game.getOpponents(player.getId()).iterator().next();
                 for (List<UUID> attack: attacks) {
                     Game sim = game.copy();
@@ -167,7 +172,8 @@ public class MCTSNode {
                 break;
             case SELECT_BLOCKERS:
 //                logger.info("Select blockers:" + player.getName());
-                List<List<List<UUID>>> blocks = player.getBlocks(game);
+                List<List<List<UUID>>> blocks = getBlocks(player, stateValue, game);
+                //List<List<List<UUID>>> blocks = player.getBlocks(game);
                 for (List<List<UUID>> block: blocks) {
                     Game sim = game.copy();
                     MCTSPlayer simPlayer = (MCTSPlayer) sim.getPlayer(player.getId());
@@ -356,11 +362,10 @@ public class MCTSNode {
      * performs a breadth first search for a matching game state
      * 
      * @param state - the game state that we are looking for
-     * @param nextAction - the next action that will be performed
      * @return the matching state or null if no match is found
      */
     public MCTSNode getMatchingState(String state) {
-        ArrayDeque<MCTSNode> queue = new ArrayDeque<MCTSNode>();
+        ArrayDeque<MCTSNode> queue = new ArrayDeque<>();
         queue.add(this);
 
         while (!queue.isEmpty()) {
@@ -383,7 +388,7 @@ public class MCTSNode {
         this.visits += merge.visits;
         this.wins += merge.wins;
 
-        List<MCTSNode> mergeChildren = new ArrayList<MCTSNode>();
+        List<MCTSNode> mergeChildren = new ArrayList<>();
         for (MCTSNode child: merge.children) {
             mergeChildren.add(child);
         }
@@ -447,4 +452,96 @@ public class MCTSNode {
         return num;
     }
 
+    private static final ConcurrentHashMap<String, List<Ability>> playablesCache = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, List<List<UUID>>> attacksCache = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, List<List<List<UUID>>>> blocksCache = new ConcurrentHashMap<>();
+
+    private static long playablesHit = 0;
+    private static long playablesMiss = 0;
+    private static long attacksHit = 0;
+    private static long attacksMiss = 0;
+    private static long blocksHit = 0;
+    private static long blocksMiss = 0;
+    
+    private static List<Ability> getPlayables(MCTSPlayer player, String state, Game game) {
+        if (playablesCache.containsKey(state)) {
+            playablesHit++;
+            return playablesCache.get(state);
+        }
+        else {
+            playablesMiss++;
+            List<Ability> abilities = player.getPlayableOptions(game);
+            playablesCache.put(state, abilities);
+            return abilities;
+        }
+    }
+    
+    private static List<List<UUID>> getAttacks(MCTSPlayer player, String state, Game game) {
+        if (attacksCache.containsKey(state)) {
+            attacksHit++;
+            return attacksCache.get(state);
+        }
+        else {
+            attacksMiss++;
+            List<List<UUID>> attacks = player.getAttacks(game);
+            attacksCache.put(state, attacks);
+            return attacks;
+        }
+    }
+    
+    private static List<List<List<UUID>>> getBlocks(MCTSPlayer player, String state, Game game) {
+        if (blocksCache.containsKey(state)) {
+            blocksHit++;
+            return blocksCache.get(state);
+        }
+        else {
+            blocksMiss++;
+            List<List<List<UUID>>> blocks = player.getBlocks(game);
+            blocksCache.put(state, blocks);
+            return blocks;
+        }
+    }
+    
+    public static int cleanupCache(int turnNum) {
+        Set<String> playablesKeys = playablesCache.keySet();
+        Iterator<String> playablesIterator = playablesKeys.iterator();
+        int count = 0;
+        while(playablesIterator.hasNext()) {
+            int cacheTurn = Integer.valueOf(playablesIterator.next().split(":", 2)[0]);
+            if (cacheTurn < turnNum) {
+                playablesIterator.remove();
+                count++;
+            }
+        }
+
+        Set<String> attacksKeys = attacksCache.keySet();
+        Iterator<String> attacksIterator = attacksKeys.iterator();
+        while(attacksIterator.hasNext()) {
+            int cacheTurn = Integer.valueOf(attacksIterator.next().split(":", 2)[0]);
+            if (cacheTurn < turnNum) {
+                attacksIterator.remove();
+                count++;
+            }
+        }
+        
+        Set<String> blocksKeys = blocksCache.keySet();
+        Iterator<String> blocksIterator = blocksKeys.iterator();
+        while(blocksIterator.hasNext()) {
+            int cacheTurn = Integer.valueOf(blocksIterator.next().split(":", 2)[0]);
+            if (cacheTurn < turnNum) {
+                blocksIterator.remove();
+                count++;
+            }
+        }
+
+        return count;
+    }
+    
+    public static String getHitMiss() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Playables -- Hits: ").append(playablesHit).append(" Misses: ").append(playablesMiss).append("\n");
+        sb.append("Attacks -- Hits: ").append(attacksHit).append(" Misses: ").append(attacksMiss).append("\n");
+        sb.append("Blocks -- Hits: ").append(blocksHit).append(" Misses: ").append(blocksMiss).append("\n");
+        return sb.toString();
+    }
 }
