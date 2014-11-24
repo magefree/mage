@@ -28,6 +28,12 @@
 
 package mage.view;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import mage.cards.Card;
 import mage.counters.CounterType;
 import mage.game.ExileZone;
@@ -38,9 +44,6 @@ import mage.game.command.Commander;
 import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
-import java.io.Serializable;
-import java.util.*;
 
 /**
  *
@@ -74,7 +77,7 @@ public class PlayerView implements Serializable {
     private final boolean passedUntilStackResolved; // F8
     private final boolean passedAllTurns; // F9
 
-    public PlayerView(Player player, GameState state, Game game, UUID createdForPlayerId) {
+    public PlayerView(Player player, GameState state, Game game, UUID createdForPlayerId, UUID watcherUserId) {
         this.playerId = player.getId();
         this.name = player.getName();
         this.life = player.getLife();
@@ -106,7 +109,7 @@ public class PlayerView implements Serializable {
         if (player.getUserData() != null) {
             this.userDataView = new UserDataView(player.getUserData());
         } else {
-            this.userDataView = new UserDataView(0, false, null);
+            this.userDataView = new UserDataView(0, false, false, null);
         }
         
         for (CommandObject commandObject : game.getState().getCommand()) {

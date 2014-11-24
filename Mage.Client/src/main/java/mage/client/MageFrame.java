@@ -92,6 +92,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.prefs.Preferences;
+import mage.view.UserRequestMessage;
 import net.java.truevfs.access.TArchiveDetector;
 import net.java.truevfs.access.TConfig;
 import net.java.truevfs.kernel.spec.FsAccessOption;
@@ -1057,6 +1058,24 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         } catch (PropertyVetoException ex) {
             logger.fatal(null, ex);
         }
+    }
+
+    public void showUserRequestDialog(final UserRequestMessage userRequestMessage) {
+        final UserRequestDialog userRequestDialog = new UserRequestDialog();
+        userRequestDialog.setLocation(100, 100);
+        desktopPane.add(userRequestDialog, JLayeredPane.MODAL_LAYER);
+//        ui.addComponent(MageComponents.DESKTOP_PANE, userRequestDialog);
+        if (SwingUtilities.isEventDispatchThread()) {
+            userRequestDialog.showDialog(userRequestMessage);
+        } else {
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    userRequestDialog.showDialog(userRequestMessage);
+                }
+            });
+        }
+
     }
 
     public void showErrorDialog(final String title, final String message) {

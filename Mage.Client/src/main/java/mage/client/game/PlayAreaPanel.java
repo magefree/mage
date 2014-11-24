@@ -64,7 +64,8 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     private UUID gameId;
     private boolean smallMode = false;
     private boolean playingMode = true;
-    private GamePanel gamePanel;
+    private final GamePanel gamePanel;
+    private final boolean playerItself;
 
     private JCheckBoxMenuItem manaPoolMenuItem;
     
@@ -72,23 +73,27 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     public static final int PANEL_HEIGHT_SMALL = 190;
 
     /** Creates new form PlayAreaPanel
-     * @param isPlayer */
-    public PlayAreaPanel(boolean isPlayer) {
+     * @param player
+     * @param bigCard
+     * @param gameId
+     * @param isPlayer true if the client is a player / false if the client is a watcher
+     * @param playerItself true if it's the area of the player itself
+     * @param priorityTime
+     * @param gamePanel */
+    public PlayAreaPanel(PlayerView player, BigCard bigCard, UUID gameId, boolean playerItself, int priorityTime, boolean isPlayer, GamePanel gamePanel) {
+        //this(isPlayer);
+        this.playerItself = playerItself;
         initComponents();
         setOpaque(false);
         battlefieldPanel.setOpaque(false);
-        
+
         popupMenu = new JPopupMenu();
         if (isPlayer) {
-            addPopupMenuPlayer();
+            addPopupMenuPlayer(player.getUserData().allowRequestShowHandCards());
         } else {
             addPopupMenuWatcher();
         }
         this.add(popupMenu);
-    }
-
-    public PlayAreaPanel(PlayerView player, BigCard bigCard, UUID gameId, boolean me, int priorityTime, boolean isPlayer, GamePanel gamePanel) {
-        this(isPlayer);
         this.gamePanel = gamePanel;
         init(player, bigCard, gameId, priorityTime);
         update(player);
@@ -125,7 +130,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
     }
 
-    private void addPopupMenuPlayer() {
+    private void addPopupMenuPlayer(boolean allowRequestToShowHandCards) {
 
         JMenuItem menuItem;
 
@@ -150,7 +155,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, gameId);
+                gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, gameId, null);
             }
         });
 
@@ -163,7 +168,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN, gameId);
+                gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN, gameId, null);
             }
         });
 
@@ -174,7 +179,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId);
+                gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId, null);
             }
         });
 
@@ -185,7 +190,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE, gameId);
+                gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE, gameId, null);
             }
         });
         menuItem = new JMenuItem("F9 - Skip everything until own next turn (stop on attack/block)");
@@ -195,7 +200,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN, gameId);
+                gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN, gameId, null);
             }
         });
 
@@ -212,7 +217,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
                 boolean manaPoolAutomatic = ((JCheckBoxMenuItem)e.getSource()).getState();
                 gamePanel.setMenuStates(manaPoolAutomatic);
-                gamePanel.getSession().sendPlayerAction(manaPoolAutomatic ? PlayerAction.MANA_AUTO_PAYMENT_ON: PlayerAction.MANA_AUTO_PAYMENT_OFF, gameId);
+                gamePanel.getSession().sendPlayerAction(manaPoolAutomatic ? PlayerAction.MANA_AUTO_PAYMENT_ON: PlayerAction.MANA_AUTO_PAYMENT_OFF, gameId, null);
             }
         });
 
@@ -225,10 +230,51 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gamePanel.getSession().sendPlayerAction(PlayerAction.RESET_AUTO_SELECT_REPLACEMENT_EFFECTS, gameId);
+                gamePanel.getSession().sendPlayerAction(PlayerAction.RESET_AUTO_SELECT_REPLACEMENT_EFFECTS, gameId, null);
             }
         });
 
+        popupMenu.addSeparator();
+
+        if (!playerItself) {
+            menuItem = new JMenuItem("Request permission to see hand cards");
+            popupMenu.add(menuItem);
+
+            // Request to see hand cards
+            menuItem.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    gamePanel.getSession().sendPlayerAction(PlayerAction.REQUEST_PERMISSION_TO_SEE_HAND_CARDS, gameId, playerId);
+                }
+            });
+        } else {
+            menuItem = new JCheckBoxMenuItem("Allow requests to show your hand cards", allowRequestToShowHandCards);
+            menuItem.setMnemonic(KeyEvent.VK_A);
+            menuItem.setToolTipText("If activated watchers or other players can request to see your hand cards. If you grant this to a user, it's valid for the complete match.");
+            popupMenu.add(menuItem);
+
+            // Requests allowed
+            menuItem.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    boolean requestsAllowed = ((JCheckBoxMenuItem)e.getSource()).getState();
+                    gamePanel.getSession().sendPlayerAction(requestsAllowed ? PlayerAction.PERMISSION_REQUESTS_ALLOWED_ON: PlayerAction.PERMISSION_REQUESTS_ALLOWED_OFF, gameId, null);
+                }
+            });
+
+            menuItem = new JMenuItem("Revoke all permission(s) to see your hand cards");
+            menuItem.setMnemonic(KeyEvent.VK_P);
+            menuItem.setToolTipText("Revoke already granted permission for all spectators to see your hand cards.");
+            popupMenu.add(menuItem);
+
+            // revoke permissions to see hand cards
+            menuItem.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    gamePanel.getSession().sendPlayerAction(PlayerAction.REVOKE_PERMISSIONS_TO_SEE_HAND_CARDS, gameId, null);
+                }
+            });
+        }
         popupMenu.addSeparator();
 
         menuItem = new JMenuItem("Concede game");
@@ -239,7 +285,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (JOptionPane.showConfirmDialog(PlayAreaPanel.this, "Are you sure you want to concede the game?", "Confirm concede game", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    MageFrame.getSession().sendPlayerAction(PlayerAction.CONCEDE, gameId);
+                    MageFrame.getSession().sendPlayerAction(PlayerAction.CONCEDE, gameId, null);
                 }
             }
         });
@@ -297,6 +343,18 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 }
             }
         });
+
+        menuItem = new JMenuItem("Request permission to see hand cards");
+        popupMenu.add(menuItem);
+
+        // Request to see hand cards
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gamePanel.getSession().sendPlayerAction(PlayerAction.REQUEST_PERMISSION_TO_SEE_HAND_CARDS, gameId, playerId);
+            }
+        });
+
         battlefieldPanel.getMainPanel().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent Me) {

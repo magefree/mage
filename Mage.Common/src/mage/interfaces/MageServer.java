@@ -120,7 +120,7 @@ public interface MageServer {
     void quitMatch(UUID gameId, String sessionId) throws MageException;
     GameView getGameView(UUID gameId, String sessionId, UUID playerId) throws MageException;
     // priority, undo, concede, mana pool
-    void sendPlayerAction(PlayerAction playerAction, UUID gameId, String sessionId) throws MageException;
+    void sendPlayerAction(PlayerAction playerAction, UUID gameId, String sessionId, Object data) throws MageException;
 
     //tournament methods
     boolean startTournament(String sessionId, UUID roomId, UUID tableId) throws MageException;

@@ -749,8 +749,8 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public void sendPlayerAction(final PlayerAction playerAction, final UUID gameId, final String sessionId) throws MageException {
-        execute("setdPlayerAction", sessionId, new Action() {
+    public void sendPlayerAction(final PlayerAction playerAction, final UUID gameId, final String sessionId, final Object data) throws MageException {
+        execute("sendPlayerAction", sessionId, new Action() {
             @Override
             public void execute() {
                 Session session = SessionManager.getInstance().getSession(sessionId);
@@ -758,7 +758,7 @@ public class MageServerImpl implements MageServer {
                     logger.error("Session not found sessionId: "+ sessionId + "  gameId:" + gameId);
                     return;
                 }
-                GameManager.getInstance().sendPlayerAction(playerAction, gameId, session.getUserId());
+                GameManager.getInstance().sendPlayerAction(playerAction, gameId, session.getUserId(), data);
             }
         });
     }

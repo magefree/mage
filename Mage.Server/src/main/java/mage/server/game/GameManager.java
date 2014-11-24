@@ -114,10 +114,10 @@ public class GameManager {
         }
     }
    
-    public void sendPlayerAction(PlayerAction playerAction, UUID gameId, UUID userId) {
+    public void sendPlayerAction(PlayerAction playerAction, UUID gameId, UUID userId, Object data) {
         GameController gameController = gameControllers.get(gameId);
         if (gameController != null) {        
-            gameController.sendPlayerAction(playerAction, userId);
+            gameController.sendPlayerAction(playerAction, userId, data);
         }
     }
 

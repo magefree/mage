@@ -28,15 +28,19 @@
 
 package mage.server.game;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import mage.game.Game;
 import mage.game.Table;
 import mage.interfaces.callback.ClientCallback;
+import mage.players.Player;
 import mage.server.User;
 import mage.server.UserManager;
 import mage.view.GameClientMessage;
 import mage.view.GameEndView;
 import mage.view.GameView;
+import mage.view.SimpleCardsView;
 import org.apache.log4j.Logger;
 
 /**
@@ -71,10 +75,10 @@ public class GameWatcher {
 
     public void update() {
         if (!killed) {
-                User user = UserManager.getInstance().getUser(userId);
-                if (user != null) {
-                    user.fireCallback(new ClientCallback("gameUpdate", game.getId(), getGameView()));
-                }
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null) {
+                user.fireCallback(new ClientCallback("gameUpdate", game.getId(), getGameView()));
+            }
         }
     }
 
@@ -120,9 +124,21 @@ public class GameWatcher {
     }
 
     public GameView getGameView() {
-        return new GameView(game.getState(), game, null);
+        GameView gameView = new GameView(game.getState(), game, null, userId);
+        processWatchedHands(userId, gameView);
+        return gameView;
+
     }
-    
+
+    protected void processWatchedHands(UUID userId, GameView gameView) {
+        Map<String, SimpleCardsView> handCards = new HashMap<>();
+        for (Player player: game.getPlayers().values()) {
+            if (player.hasUserPermissionToSeeHand(userId)) {
+                handCards.put(player.getName(), new SimpleCardsView(player.getHand().getCards(game)));
+                gameView.setWatchedHands(handCards);
+            }
+        }
+    }
     public GameEndView getGameEndView(UUID playerId, Table table) {
         return new GameEndView(game.getState(), game, playerId, table);
     }

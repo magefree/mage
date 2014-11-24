@@ -54,7 +54,7 @@ public class ReplaySession implements GameCallback {
         replay.start();
         User user = UserManager.getInstance().getUser(userId);
         if (user != null) {
-            user.fireCallback(new ClientCallback("replayInit", replay.getGame().getId(), new GameView(replay.next(), replay.getGame(), null)));
+            user.fireCallback(new ClientCallback("replayInit", replay.getGame().getId(), new GameView(replay.next(), replay.getGame(), null, null)));
         }
     }
 
@@ -93,7 +93,7 @@ public class ReplaySession implements GameCallback {
         else {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-                user.fireCallback(new ClientCallback("replayUpdate", replay.getGame().getId(), new GameView(state, game, null)));
+                user.fireCallback(new ClientCallback("replayUpdate", replay.getGame().getId(), new GameView(state, game, null, null)));
             }
         }
     }

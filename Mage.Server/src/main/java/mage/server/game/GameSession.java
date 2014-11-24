@@ -28,9 +28,24 @@
 
 package mage.server.game;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 import mage.cards.Cards;
+import mage.choices.Choice;
 import mage.constants.ManaType;
+import mage.constants.PlayerAction;
 import mage.game.Game;
+import mage.game.Table;
 import mage.interfaces.callback.ClientCallback;
 import mage.players.Player;
 import mage.players.net.UserData;
@@ -38,18 +53,14 @@ import mage.server.User;
 import mage.server.UserManager;
 import mage.server.util.ConfigSettings;
 import mage.server.util.ThreadExecutor;
-import mage.view.*;
+import mage.view.AbilityPickerView;
+import mage.view.CardsView;
+import mage.view.GameClientMessage;
+import mage.view.GameView;
+import mage.view.LookedAtView;
+import mage.view.SimpleCardsView;
+import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
-import mage.choices.Choice;
-import mage.game.Table;
 
 /**
  *
@@ -173,6 +184,25 @@ public class GameSession extends GameWatcher {
         }
     }
 
+    public void requestPermissionToSeeHandCards(UUID watcherId) {
+        if (!killed) {
+            User watcher = UserManager.getInstance().getUser(watcherId);
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null && watcher != null) {
+                UserRequestMessage userRequestMessage = new UserRequestMessage(
+                        "User request",
+                        "Allow user <b>" + watcher.getName() + "</b> for this match to see your hand cards?<br>" +
+                        "(You can revoke this every time using related popup menu item of your battlefield.)"
+                        , PlayerAction.REQUEST_PERMISSION_TO_SEE_HAND_CARDS);
+                userRequestMessage.setRelatedUser(watcherId, watcher.getName());
+                userRequestMessage.setGameId(game.getId());
+                userRequestMessage.setButton1("Accept", PlayerAction.ADD_PERMISSION_TO_SEE_HAND_CARDS);
+                userRequestMessage.setButton2("Reject", null);
+                user.fireCallback(new ClientCallback("userRequestDialog", game.getId(), userRequestMessage));
+            }
+        }
+    }
+
     /**
      * Reset the timeout counter after priority in game changed
      * 
@@ -237,12 +267,12 @@ public class GameSession extends GameWatcher {
     public GameView getGameView() {
         Player player = game.getPlayer(playerId);
         player.setUserData(this.userData);
-        GameView gameView = new GameView(game.getState(), game, playerId);
+        GameView gameView = new GameView(game.getState(), game, playerId, null);
         gameView.setHand(new CardsView(player.getHand().getCards(game)));
         gameView.setCanPlayInHand(player.getPlayableInHand(game));
 
         processControlledPlayers(player, gameView);
-
+        processWatchedHands(userId, gameView);
         //TODO: should player who controls another player's turn be able to look at all these cards?
 
         List<LookedAtView> list = new ArrayList<>();

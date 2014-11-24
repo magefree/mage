@@ -65,6 +65,7 @@ public class GameView implements Serializable {
     private CardsView hand;
     private Set<UUID> canPlayInHand;
     private Map<String, SimpleCardsView> opponentHands;
+    private Map<String, SimpleCardsView> watchedHands;
     private final CardsView stack = new CardsView();
     private final List<ExileView> exiles = new ArrayList<>();
     private final List<RevealedView> revealed = new ArrayList<>();
@@ -80,11 +81,11 @@ public class GameView implements Serializable {
     private final boolean isPlayer;
 
 
-    public GameView(GameState state, Game game, UUID createdForPlayerId) {
+    public GameView(GameState state, Game game, UUID createdForPlayerId, UUID watcherUserId) {
         this.isPlayer = createdForPlayerId != null;
         this.priorityTime = game.getPriorityTime();
         for (Player player: state.getPlayers().values()) {
-            players.add(new PlayerView(player, state, game, createdForPlayerId));
+            players.add(new PlayerView(player, state, game, createdForPlayerId, watcherUserId));
         }
         for (StackObject stackObject: state.getStack()) {
             if (stackObject instanceof StackAbility) {
@@ -220,6 +221,14 @@ public class GameView implements Serializable {
 
     public void setOpponentHands(Map<String, SimpleCardsView> opponentHands) {
         this.opponentHands = opponentHands;
+    }
+
+    public Map<String, SimpleCardsView> getWatchedHands() {
+        return watchedHands;
+    }
+
+    public void setWatchedHands(Map<String, SimpleCardsView> watchedHands) {
+        this.watchedHands = watchedHands;
     }
 
     public TurnPhase getPhase() {

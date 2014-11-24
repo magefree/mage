@@ -585,7 +585,9 @@ public class TableController {
                             user.removeConstructing(match.getPlayer(entry.getValue()).getPlayer().getId());
                             GameManager.getInstance().joinGame(match.getGame().getId(), user.getId());
                             logger.debug("Joined currently not connected user " + user.getName() + "  matchId: " + match.getId());                            
-                        } 
+                        }
+                        Player player = match.getPlayer(entry.getValue()).getPlayer();
+                        player.setRequestToShowHandCardsAllowed(user.getUserData().allowRequestShowHandCards());
                         user.gameStarted(match.getGame().getId(), entry.getValue());                        
                         
                         if (creator == null) {

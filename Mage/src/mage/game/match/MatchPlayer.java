@@ -49,6 +49,7 @@ public class MatchPlayer {
     private boolean doneSideboarding;
     private int priorityTimeLeft;
 
+
     public MatchPlayer(Player player, Deck deck) {
         this.player = player;
         this.deck = deck;

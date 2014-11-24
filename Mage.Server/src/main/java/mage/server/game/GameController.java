@@ -28,6 +28,24 @@
 
 package mage.server.game;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+import java.util.zip.GZIPOutputStream;
 import mage.MageException;
 import mage.abilities.Ability;
 import mage.cards.Card;
@@ -36,7 +54,9 @@ import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.choices.Choice;
 import mage.constants.ManaType;
+import mage.constants.PlayerAction;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.GameException;
@@ -47,26 +67,24 @@ import mage.game.events.TableEvent;
 import mage.game.permanent.Permanent;
 import mage.interfaces.Action;
 import mage.players.Player;
-import mage.server.*;
+import mage.server.ChatManager;
+import mage.server.Main;
+import mage.server.TableManager;
+import mage.server.User;
+import mage.server.UserManager;
 import mage.server.util.ConfigSettings;
 import mage.server.util.Splitter;
 import mage.server.util.SystemUtil;
 import mage.server.util.ThreadExecutor;
 import mage.utils.timer.PriorityTimer;
-import mage.view.*;
+import mage.view.AbilityPickerView;
+import mage.view.CardsView;
+import mage.view.ChatMessage;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
+import mage.view.GameView;
+import mage.view.PermanentView;
 import org.apache.log4j.Logger;
-
-import java.io.*;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
-import java.util.zip.GZIPOutputStream;
-import mage.choices.Choice;
-import mage.constants.PlayerAction;
 
 /**
  *
@@ -389,7 +407,7 @@ public class GameController implements GameCallback {
         }
     }
 
-    public void sendPlayerAction(PlayerAction playerAction, UUID userId) {
+    public void sendPlayerAction(PlayerAction playerAction, UUID userId, Object data) {
         switch(playerAction) {
             case UNDO:
                 game.undo(getPlayerId(userId));
@@ -403,11 +421,71 @@ public class GameController implements GameCallback {
             case MANA_AUTO_PAYMENT_ON:
                 game.setManaPoolMode(getPlayerId(userId), true);
                 break;
+            case ADD_PERMISSION_TO_SEE_HAND_CARDS:
+                if (data instanceof UUID) {
+                    UUID playerId = getPlayerId(userId);
+                    if (playerId != null) {
+                        Player player = game.getPlayer(playerId);
+                        if (player != null) {
+                            player.addPermissionToShowHandCards((UUID) data);
+                        }
+                    }
+                }
+                break;
+            case REVOKE_PERMISSIONS_TO_SEE_HAND_CARDS:
+                UUID playerId = getPlayerId(userId);
+                if (playerId != null) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null) {
+                        player.revokePermissionToSeeHandCards();
+                    }
+                }
+                break;
+            case REQUEST_PERMISSION_TO_SEE_HAND_CARDS:
+                if (data instanceof UUID) {
+                    requestPermissionToSeeHandCards(userId, (UUID) data);
+                }
+                break;
             default:        
                 game.sendPlayerAction(playerAction, getPlayerId(userId));
         }
     }
-    
+
+    private void requestPermissionToSeeHandCards(UUID userIdRequester, UUID userIdGranter) {
+        Player grantingPlayer = game.getPlayer(userIdGranter);
+        if (grantingPlayer != null) {
+            if (!grantingPlayer.getUsersAllowedToSeeHandCards().contains(userIdRequester)) {
+                if (grantingPlayer.isHuman()) {
+                    GameSession gameSession = gameSessions.get(userIdGranter);
+                    if (gameSession != null) {
+                        UUID requestingPlayer = getPlayerId(userIdRequester);
+                        if (requestingPlayer == null || !requestingPlayer.equals(grantingPlayer.getId())) { // don't allow request for your own cards
+                            if (grantingPlayer.isRequestToShowHandCardsAllowed()) {
+                                gameSession.requestPermissionToSeeHandCards(userIdRequester);
+                            } else {
+                                // player does not allow the request
+                                User requester = UserManager.getInstance().getUser(userIdRequester);
+                                if (requester != null) {
+                                    requester.showUserMessage("Request to show hand cards", "Player " + grantingPlayer.getName() + " does not allow to request to show hand cards!");
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    // Non Human players always allow to see the hand cards
+                    grantingPlayer.addPermissionToShowHandCards(userIdRequester);
+                }
+            } else {
+                // user can already see the cards
+                User requester = UserManager.getInstance().getUser(userIdRequester);
+                if (requester != null) {
+                    requester.showUserMessage("Request to show hand cards", "You can see already the hand cards of player " + grantingPlayer.getName() + "!");
+                }
+            }
+
+        }
+
+    }
 
     public void cheat(UUID userId, UUID playerId, DeckCardLists deckList) {
         Deck deck;
