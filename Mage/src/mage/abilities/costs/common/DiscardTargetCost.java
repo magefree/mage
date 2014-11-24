@@ -83,6 +83,7 @@ public class DiscardTargetCost extends CostImpl {
                     if (card == null) {
                         return false;
                     }
+                    player.discard(card, ability, game);
                     this.cards.add(card.copy());
                 }
             }
