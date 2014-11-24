@@ -70,6 +70,7 @@ public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect
         MageObject sourceObject = game.getObject(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         if (sourceObject != null && controller != null) {
+            choice.clearChoice();
             while (!choice.isChosen()) {
                 controller.choose(Outcome.Protect, choice, game);
                 if (!controller.isInGame()) {
