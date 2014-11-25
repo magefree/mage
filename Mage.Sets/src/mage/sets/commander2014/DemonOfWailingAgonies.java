@@ -29,47 +29,49 @@ package mage.sets.commander2014;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.abilityword.LieutenantAbility;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class StormsurgeKraken extends CardImpl {
+public class DemonOfWailingAgonies extends CardImpl {
 
-    public StormsurgeKraken(UUID ownerId) {
-        super(ownerId, 18, "Stormsurge Kraken", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
+    public DemonOfWailingAgonies(UUID ownerId) {
+        super(ownerId, 21, "Demon of Wailing Agonies", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.expansionSetCode = "C14";
-        this.subtype.add("Kraken");
+        this.subtype.add("Demon");
 
-        this.color.setBlue(true);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
+        this.color.setBlack(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-        // Hexproof
-        this.addAbility(HexproofAbility.getInstance());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
         
-        // Lieutenant - As long as you control your commander, Stormsurge Kraken gets +2/+2 and has "Whenever Stormsurge Kraken becomes blocked, you may draw two cards."
-        ContinuousEffect effect = new GainAbilitySourceEffect(new BecomesBlockedTriggeredAbility(new DrawCardSourceControllerEffect(2), true), Duration.WhileOnBattlefield);
-        effect.setText("and has \"Whenever Stormsurge Kraken becomes blocked, you may draw two cards.\"");
+        // Lieutenant - As long as you control your commander, Demon of Wailing Agonies gets +2/+2 and has "Whenever Demon of Wailing Agonies deals combat damage to a player, that player sacrifices a creature."
+        Ability gainedAbility = new DealsCombatDamageToAPlayerTriggeredAbility(new SacrificeEffect(new FilterControlledCreaturePermanent(), 1, "that player"), false, true);
+        ContinuousEffect effect = new GainAbilitySourceEffect(gainedAbility);
+        effect.setText("and has \"Whenever {this} deals combat damage to a player, that player sacrifices a creature.\"");
         this.addAbility(new LieutenantAbility(effect));
     }
 
-    public StormsurgeKraken(final StormsurgeKraken card) {
+    public DemonOfWailingAgonies(final DemonOfWailingAgonies card) {
         super(card);
     }
 
     @Override
-    public StormsurgeKraken copy() {
-        return new StormsurgeKraken(this);
+    public DemonOfWailingAgonies copy() {
+        return new DemonOfWailingAgonies(this);
     }
 }

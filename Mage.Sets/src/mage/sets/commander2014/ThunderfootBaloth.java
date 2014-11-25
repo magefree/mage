@@ -30,46 +30,52 @@ package mage.sets.commander2014;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.abilityword.LieutenantAbility;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.Effects;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class StormsurgeKraken extends CardImpl {
+public class ThunderfootBaloth extends CardImpl {
 
-    public StormsurgeKraken(UUID ownerId) {
-        super(ownerId, 18, "Stormsurge Kraken", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
+    public ThunderfootBaloth(UUID ownerId) {
+        super(ownerId, 49, "Thunderfoot Baloth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
         this.expansionSetCode = "C14";
-        this.subtype.add("Kraken");
+        this.subtype.add("Beast");
 
-        this.color.setBlue(true);
+        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        // Hexproof
-        this.addAbility(HexproofAbility.getInstance());
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
         
-        // Lieutenant - As long as you control your commander, Stormsurge Kraken gets +2/+2 and has "Whenever Stormsurge Kraken becomes blocked, you may draw two cards."
-        ContinuousEffect effect = new GainAbilitySourceEffect(new BecomesBlockedTriggeredAbility(new DrawCardSourceControllerEffect(2), true), Duration.WhileOnBattlefield);
-        effect.setText("and has \"Whenever Stormsurge Kraken becomes blocked, you may draw two cards.\"");
-        this.addAbility(new LieutenantAbility(effect));
+        // Lieutenant - As long as you control your commander, Thunderfoot Baloth gets +2/+2 and other creatures you control get +2/+2 and have trample.
+        Effects effects = new Effects();
+        Effect effect = new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, true);
+        effect.setText("and other creatures you control get +2/+2");
+        effects.add(effect);
+        effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent(), true);
+        effect.setText("and have trample");
+        effects.add(effect);
+        this.addAbility(new LieutenantAbility(effects));
     }
 
-    public StormsurgeKraken(final StormsurgeKraken card) {
+    public ThunderfootBaloth(final ThunderfootBaloth card) {
         super(card);
     }
 
     @Override
-    public StormsurgeKraken copy() {
-        return new StormsurgeKraken(this);
+    public ThunderfootBaloth copy() {
+        return new ThunderfootBaloth(this);
     }
 }

@@ -29,47 +29,70 @@ package mage.sets.commander2014;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.abilityword.LieutenantAbility;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.AbilityType;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.game.Game;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class StormsurgeKraken extends CardImpl {
+public class TyrantsFamiliar extends CardImpl {
 
-    public StormsurgeKraken(UUID ownerId) {
-        super(ownerId, 18, "Stormsurge Kraken", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
+    public TyrantsFamiliar(UUID ownerId) {
+        super(ownerId, 39, "Tyrant's Familiar", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
         this.expansionSetCode = "C14";
-        this.subtype.add("Kraken");
+        this.subtype.add("Dragon");
 
-        this.color.setBlue(true);
+        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        // Hexproof
-        this.addAbility(HexproofAbility.getInstance());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
         
-        // Lieutenant - As long as you control your commander, Stormsurge Kraken gets +2/+2 and has "Whenever Stormsurge Kraken becomes blocked, you may draw two cards."
-        ContinuousEffect effect = new GainAbilitySourceEffect(new BecomesBlockedTriggeredAbility(new DrawCardSourceControllerEffect(2), true), Duration.WhileOnBattlefield);
-        effect.setText("and has \"Whenever Stormsurge Kraken becomes blocked, you may draw two cards.\"");
+        // Haste
+        this.addAbility(HasteAbility.getInstance());
+        
+        // Lieutenant - As long as you control your commander, Tyrant's Familiar gets +2/+2 and has "Whenever Tyrant's Familiar attacks, it deals 7 damage to target creature defending player controls."
+        Ability gainedAbility = new AttacksTriggeredAbility(new DamageTargetEffect(7), false);
+        gainedAbility.addTarget(new TargetCreaturePermanent());
+        ContinuousEffect effect = new GainAbilitySourceEffect(gainedAbility);
+        effect.setText("and has \"Whenever {this} attacks, it deals 7 damage to target creature defending player controls\"");
         this.addAbility(new LieutenantAbility(effect));
     }
 
-    public StormsurgeKraken(final StormsurgeKraken card) {
+    public TyrantsFamiliar(final TyrantsFamiliar card) {
         super(card);
     }
 
     @Override
-    public StormsurgeKraken copy() {
-        return new StormsurgeKraken(this);
+    public TyrantsFamiliar copy() {
+        return new TyrantsFamiliar(this);
+    }
+    
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability.getAbilityType().equals(AbilityType.TRIGGERED)) {
+            ability.getTargets().clear();
+            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
+            UUID defenderId = game.getCombat().getDefenderId(ability.getSourceId());
+            filter.add(new ControllerIdPredicate(defenderId));
+            TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
+            ability.addTarget(target);
+        }
     }
 }

@@ -1,5 +1,5 @@
 /*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -25,51 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.abilityword.LieutenantAbility;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+package mage.abilities.abilityword;
+
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.CommanderInPlayCondition;
+import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.HexproofAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.Effects;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.constants.Duration;
-import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class StormsurgeKraken extends CardImpl {
 
-    public StormsurgeKraken(UUID ownerId) {
-        super(ownerId, 18, "Stormsurge Kraken", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        this.expansionSetCode = "C14";
-        this.subtype.add("Kraken");
+public class LieutenantAbility extends SimpleStaticAbility {
 
-        this.color.setBlue(true);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-
-        // Hexproof
-        this.addAbility(HexproofAbility.getInstance());
-        
-        // Lieutenant - As long as you control your commander, Stormsurge Kraken gets +2/+2 and has "Whenever Stormsurge Kraken becomes blocked, you may draw two cards."
-        ContinuousEffect effect = new GainAbilitySourceEffect(new BecomesBlockedTriggeredAbility(new DrawCardSourceControllerEffect(2), true), Duration.WhileOnBattlefield);
-        effect.setText("and has \"Whenever Stormsurge Kraken becomes blocked, you may draw two cards.\"");
-        this.addAbility(new LieutenantAbility(effect));
+    public LieutenantAbility(ContinuousEffect effect) {
+        super(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), CommanderInPlayCondition.getInstance(), "<i>Lieutenant</i> - As long as you control your commander, {this} gets +2/+2"));
+        this.addEffect(new ConditionalContinousEffect(effect, CommanderInPlayCondition.getInstance(), effect.getText(null)));
+    }
+    
+    public LieutenantAbility(Effects effects) {
+        super(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), CommanderInPlayCondition.getInstance(), "<i>Lieutenant</i> - As long as you control your commander, {this} gets +2/+2"));
+        for (Effect effect : effects) {
+            this.addEffect(new ConditionalContinousEffect((ContinuousEffect) effect, CommanderInPlayCondition.getInstance(), effect.getText(null)));
+        }
     }
 
-    public StormsurgeKraken(final StormsurgeKraken card) {
-        super(card);
+    public LieutenantAbility(final LieutenantAbility ability) {
+        super(ability);
     }
 
     @Override
-    public StormsurgeKraken copy() {
-        return new StormsurgeKraken(this);
+    public LieutenantAbility copy() {
+        return new LieutenantAbility(this);
     }
 }
