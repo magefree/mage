@@ -81,6 +81,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.SplitCard;
 import mage.cards.decks.Deck;
+import mage.constants.AbilityType;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.ManaType;
@@ -104,6 +105,7 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.Table;
 import mage.game.combat.CombatGroup;
+import mage.game.command.CommandObject;
 import mage.game.command.Commander;
 import mage.game.events.DamagePlayerEvent;
 import mage.game.events.DamagedPlayerEvent;
@@ -615,7 +617,10 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public int drawCards(int num, Game game) {
-        return game.doAction(new MageDrawAction(this, num, null));
+        if (num > 0) {
+            return game.doAction(new MageDrawAction(this, num, null));
+        }
+        return 0;
     }
 
     @Override
@@ -2228,18 +2233,29 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
             }
-            // get cast commander if available
-            if (!(this.getCommanderId() == null)) {
-                Zone zone = game.getState().getZone(this.getCommanderId());
-                if (zone != null && zone.equals(Zone.COMMAND)) {
-                    MageObject object = game.getObject(this.getCommanderId());
-                    if (object != null) {
-                        for (ActivatedAbility ability : ((Commander) object).getAbilities().getActivatedAbilities(Zone.COMMAND)) {
-                            if (canPlay(ability, availableMana, object, game)) {
-                                playableActivated.put(ability.toString(), ability);
-                            }
-                        }
+//            // get cast commander if available
+//            if (!(this.getCommanderId() == null)) {
+//                Zone zone = game.getState().getZone(this.getCommanderId());
+//                if (zone != null && zone.equals(Zone.COMMAND)) {
+//                    MageObject object = game.getObject(this.getCommanderId());
+//                    if (object != null) {
+//                        for (ActivatedAbility ability : ((Commander) object).getAbilities().getActivatedAbilities(Zone.COMMAND)) {
+//                            if (canPlay(ability, availableMana, object, game)) {
+//                                playableActivated.put(ability.toString(), ability);
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+            // activated abilities from objects in the command zone
+            for (CommandObject commandObject: game.getState().getCommand()) {
+                for (ActivatedAbility ability: commandObject.getAbilities().getActivatedAbilities(Zone.COMMAND)) {
+                    if (ability.getControllerId().equals(getId())
+                            && ability.getAbilityType().equals(AbilityType.ACTIVATED)
+                            && canPlay(ability, availableMana, game.getObject(ability.getSourceId()), game)) {
+                        playableActivated.put(ability.toString(), ability);
                     }
+
                 }
             }
             playable.addAll(playableActivated.values());

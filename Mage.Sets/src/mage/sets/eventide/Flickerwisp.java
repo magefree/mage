@@ -35,7 +35,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -104,7 +104,7 @@ class FlickerwispEffect extends OneShotEffect {
         if (controller != null && permanent != null && sourcePermanent != null) {
             if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourcePermanent.getName(), source.getSourceId(), game, Zone.BATTLEFIELD)) {
                 //create delayed triggered ability
-                AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD, false));
+                AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD, false));
                 delayedAbility.setSourceId(source.getSourceId());
                 delayedAbility.setControllerId(source.getControllerId());
                 game.addDelayedTriggeredAbility(delayedAbility);

@@ -39,20 +39,20 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class AtEndOfTurnDelayedTriggeredAbility extends DelayedTriggeredAbility {
+public class AtTheBeginOfNextEndStepDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     private TargetController targetController;
 
-    public AtEndOfTurnDelayedTriggeredAbility(Effect effect) {
+    public AtTheBeginOfNextEndStepDelayedTriggeredAbility(Effect effect) {
         this(effect, TargetController.ANY);
     }
 
-    public AtEndOfTurnDelayedTriggeredAbility(Effect effect, TargetController targetController) {
+    public AtTheBeginOfNextEndStepDelayedTriggeredAbility(Effect effect, TargetController targetController) {
         super(effect);
         this.targetController = targetController;
     }
 
-    public AtEndOfTurnDelayedTriggeredAbility(AtEndOfTurnDelayedTriggeredAbility ability) {
+    public AtTheBeginOfNextEndStepDelayedTriggeredAbility(AtTheBeginOfNextEndStepDelayedTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
     }
@@ -86,8 +86,8 @@ public class AtEndOfTurnDelayedTriggeredAbility extends DelayedTriggeredAbility 
     }
 
     @Override
-    public AtEndOfTurnDelayedTriggeredAbility copy() {
-        return new AtEndOfTurnDelayedTriggeredAbility(this);
+    public AtTheBeginOfNextEndStepDelayedTriggeredAbility copy() {
+        return new AtTheBeginOfNextEndStepDelayedTriggeredAbility(this);
     }
 
     @Override

@@ -37,7 +37,7 @@ import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
@@ -111,7 +111,7 @@ class GraveBetrayalTriggeredAbility extends TriggeredAbilityImpl {
                     Integer zoneChanges = new Integer(card.getZoneChangeCounter());
                     effect.setValue("zoneChanges", zoneChanges);
 
-                    DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(effect);
+                    DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
                     delayedAbility.setSourceId(this.getSourceId());
                     delayedAbility.setControllerId(this.getControllerId());
                     game.addDelayedTriggeredAbility(delayedAbility);

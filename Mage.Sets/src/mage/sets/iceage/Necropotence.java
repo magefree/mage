@@ -33,7 +33,7 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -141,7 +141,7 @@ class NecropotenceEffect extends OneShotEffect {
                     Effect returnToHandeffect = new ReturnToHandTargetEffect();
                     returnToHandeffect.setText("put that face down card into your hand");
                     returnToHandeffect.setTargetPointer(new FixedTarget(card.getId()));
-                    DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(returnToHandeffect, TargetController.YOU);
+                    DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(returnToHandeffect, TargetController.YOU);
                     delayedAbility.setSourceId(source.getSourceId());
                     delayedAbility.setControllerId(source.getControllerId());
                     game.addDelayedTriggeredAbility(delayedAbility);                    

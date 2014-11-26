@@ -35,7 +35,7 @@ import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
@@ -100,7 +100,7 @@ private class JunkyoBellSacrificeEffect extends OneShotEffect {
         if (creature != null) {
             SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice boosted " + creature.getName());
             sacrificeEffect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
-            DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(sacrificeEffect);
+            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
             game.addDelayedTriggeredAbility(delayedAbility);
@@ -108,5 +108,5 @@ private class JunkyoBellSacrificeEffect extends OneShotEffect {
         }
         return false;
     }
-}
+    }
 }

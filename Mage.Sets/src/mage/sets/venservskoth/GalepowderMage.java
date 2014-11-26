@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -117,7 +117,7 @@ class GalepowderMageEffect extends OneShotEffect {
                     UUID exileId = UUID.randomUUID();
                     if (controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getName(), source.getSourceId(), game, Zone.BATTLEFIELD)) {
                         if (card != null) {
-                            AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(exileId, Zone.BATTLEFIELD));
+                            AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(exileId, Zone.BATTLEFIELD));
                             delayedAbility.setSourceId(source.getSourceId());
                             delayedAbility.setControllerId(card.getOwnerId());
                             game.addDelayedTriggeredAbility(delayedAbility);

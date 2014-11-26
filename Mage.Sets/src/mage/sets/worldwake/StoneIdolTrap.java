@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -143,7 +143,7 @@ class StoneIdolTrapEffect extends OneShotEffect {
         token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
         ExileTargetEffect exileEffect = new ExileTargetEffect("exile the token");
         exileEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
-        DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(exileEffect, TargetController.YOU);
+        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect, TargetController.YOU);
         delayedAbility.setSourceId(source.getSourceId());
         delayedAbility.setControllerId(source.getControllerId());
         game.addDelayedTriggeredAbility(delayedAbility);

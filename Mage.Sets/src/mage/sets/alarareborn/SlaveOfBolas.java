@@ -30,7 +30,7 @@ package mage.sets.alarareborn;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
@@ -98,7 +98,7 @@ class SlaveOfBolasEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice this");
         sacrificeEffect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
-        DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(sacrificeEffect);
+        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
         delayedAbility.setSourceId(source.getSourceId());
         delayedAbility.setControllerId(source.getControllerId());
         game.addDelayedTriggeredAbility(delayedAbility);

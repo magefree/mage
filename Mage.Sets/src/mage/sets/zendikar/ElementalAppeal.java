@@ -34,7 +34,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
@@ -106,7 +106,7 @@ class ElementalAppealEffect extends OneShotEffect {
 
         ExileTargetEffect exileEffect = new ExileTargetEffect();
         exileEffect.setTargetPointer(fixedTarget);
-        DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(exileEffect);
+        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
         delayedAbility.setSourceId(source.getSourceId());
         delayedAbility.setControllerId(source.getControllerId());
         game.addDelayedTriggeredAbility(delayedAbility);

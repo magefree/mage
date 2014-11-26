@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -115,7 +115,7 @@ class PostmortemLungeEffect extends OneShotEffect {
 
             ExileTargetEffect exileEffect = new ExileTargetEffect();
             exileEffect.setTargetPointer(new FixedTarget(card.getId()));
-            DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(exileEffect);
+            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
             game.addDelayedTriggeredAbility(delayedAbility);

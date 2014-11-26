@@ -969,6 +969,7 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public void end() {
         if (!state.isGameOver()) {
+            logger.debug("END of gameId: " + this.getId());
             endTime = new Date();
             state.endGame();
             for (Player player: state.getPlayers().values()) {

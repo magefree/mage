@@ -210,7 +210,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         counterPanel.add(minusCounterLabel);
 
         loyaltyCounterLabel = new JLabel("");
-        loyaltyCounterLabel.setToolTipText("Loyalty");
+        loyaltyCounterLabel.setToolTipText("loyalty");
         counterPanel.add(loyaltyCounterLabel);
 
         otherCounterLabel = new JLabel("");
@@ -860,7 +860,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                         }
                         minusCounterLabel.setVisible(true);
                         break;
-                    case "Loyalty":
+                    case "loyalty":
                         if (counterView.getCount() != loyaltyCounter) {
                             loyaltyCounter = counterView.getCount();
                             loyaltyCounterLabel.setIcon(getCounterImageWithAmount(loyaltyCounter, ImageManagerImpl.getInstance().getCounterImageViolet(), cardWidth));

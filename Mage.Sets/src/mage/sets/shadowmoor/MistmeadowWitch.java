@@ -35,7 +35,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -96,7 +96,7 @@ class MistmeadowWitchEffect extends OneShotEffect {
         if (permanent != null) {
             if (permanent.moveToExile(source.getSourceId(), "Mistmeadow Witch Exile", source.getSourceId(), game)) {
                 //create delayed triggered ability
-                AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
+                AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
                 delayedAbility.setSourceId(source.getSourceId());
                 delayedAbility.setControllerId(source.getControllerId());
                 game.addDelayedTriggeredAbility(delayedAbility);

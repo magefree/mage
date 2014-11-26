@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -113,7 +113,7 @@ class SneakAttackEffect extends OneShotEffect {
                             
                             SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice " + card.getName());
                             sacrificeEffect.setTargetPointer(new FixedTarget(card.getId()));
-                            DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(sacrificeEffect);
+                            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
                             delayedAbility.setSourceId(source.getSourceId());
                             delayedAbility.setControllerId(source.getControllerId());
                             game.addDelayedTriggeredAbility(delayedAbility);

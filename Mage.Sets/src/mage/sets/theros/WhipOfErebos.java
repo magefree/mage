@@ -32,7 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -125,7 +125,7 @@ class WhipOfErebosEffect extends OneShotEffect {
                 // Exile at begin of next end step
                 ExileTargetEffect exileEffect = new ExileTargetEffect(null, null, Zone.BATTLEFIELD);
                 exileEffect.setTargetPointer(new FixedTarget(card.getId()));
-                DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(exileEffect);
+                DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
                 delayedAbility.setSourceId(source.getSourceId());
                 delayedAbility.setControllerId(source.getControllerId());
                 game.addDelayedTriggeredAbility(delayedAbility);                

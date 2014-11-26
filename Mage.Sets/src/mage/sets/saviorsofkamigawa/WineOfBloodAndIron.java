@@ -36,7 +36,7 @@ import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.dynamicvalue.common.TargetPermanentPowerCount;
@@ -97,7 +97,7 @@ class WineOfBloodAndIronEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice this");
         sacrificeEffect.setTargetPointer(new FixedTarget(source.getSourceId()));
-        DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(sacrificeEffect);
+        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
         delayedAbility.setSourceId(source.getSourceId());
         delayedAbility.setControllerId(source.getControllerId());
         game.addDelayedTriggeredAbility(delayedAbility);

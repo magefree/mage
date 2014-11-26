@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -116,7 +116,7 @@ class ElementalMasteryEffect extends OneShotEffect {
                 token.putOntoBattlefield(1, game, creatureAttached.getId(), creatureAttached.getControllerId());
                 ExileTargetEffect exileEffect = new ExileTargetEffect("exile the token");
                 exileEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
-                DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(exileEffect);
+                DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
                 delayedAbility.setSourceId(creatureAttached.getId());
                 delayedAbility.setControllerId(creatureAttached.getControllerId());
                 game.addDelayedTriggeredAbility(delayedAbility);

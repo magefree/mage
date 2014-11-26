@@ -30,7 +30,7 @@ package mage.sets.tempest;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -113,7 +113,7 @@ class CorpseDanceEffect extends OneShotEffect {
                     // Exile it at end of turn
                     ExileTargetEffect exileEffect = new ExileTargetEffect(null,"",Zone.BATTLEFIELD);
                     exileEffect.setTargetPointer(fixedTarget);
-                    DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(exileEffect);
+                    DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
                     delayedAbility.setSourceId(source.getSourceId());
                     delayedAbility.setControllerId(source.getControllerId());
                     game.addDelayedTriggeredAbility(delayedAbility);

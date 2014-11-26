@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -97,7 +97,7 @@ class LoyalCatharEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         //create delayed triggered ability
-        AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnLoyalCatharEffect(source.getSourceId()));
+        AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnLoyalCatharEffect(source.getSourceId()));
         delayedAbility.setSourceId(source.getSourceId());
         delayedAbility.setControllerId(source.getControllerId());
         game.addDelayedTriggeredAbility(delayedAbility);

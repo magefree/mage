@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -94,7 +94,7 @@ class ThatcherRevoltEffect extends OneShotEffect {
 
             SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice this token");
             sacrificeEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
-            DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(sacrificeEffect);
+            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
             game.addDelayedTriggeredAbility(delayedAbility);

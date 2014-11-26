@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleAllTriggeredAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.cards.CardImpl;
@@ -94,7 +94,7 @@ class AstralSlideEffect extends OneShotEffect {
                 UUID exileId = UUID.randomUUID();
                 if (controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getLogName(), source.getSourceId(), game, Zone.BATTLEFIELD)) {
                     //create delayed triggered ability
-                    AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(exileId, Zone.BATTLEFIELD, false));
+                    AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(exileId, Zone.BATTLEFIELD, false));
                     delayedAbility.setSourceId(source.getSourceId());
                     delayedAbility.setControllerId(source.getControllerId());
                     game.addDelayedTriggeredAbility(delayedAbility);

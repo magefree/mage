@@ -30,7 +30,7 @@ package mage.sets.betrayersofkamigawa;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -122,7 +122,7 @@ class GoryosVengeanceEffect extends OneShotEffect {
                         // Exile it at end of turn
                         Effect exileEffect = new ExileTargetEffect(new StringBuilder("Exile ").append(permanent.getName()).append(" at the beginning of the next end step").toString());
                         exileEffect.setTargetPointer(new FixedTarget(card.getId()));
-                        DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(exileEffect);
+                        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
                         delayedAbility.setSourceId(source.getSourceId());
                         delayedAbility.setControllerId(source.getControllerId());
                         game.addDelayedTriggeredAbility(delayedAbility);

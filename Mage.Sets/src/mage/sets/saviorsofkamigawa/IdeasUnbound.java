@@ -30,7 +30,7 @@ package mage.sets.saviorsofkamigawa;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -51,7 +51,7 @@ public class IdeasUnbound extends CardImpl {
 
         // Draw three cards. Discard three cards at the beginning of the next end step.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtEndOfTurnDelayedTriggeredAbility(new DiscardControllerEffect(3))));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new DiscardControllerEffect(3))));
     }
 
     public IdeasUnbound(final IdeasUnbound card) {

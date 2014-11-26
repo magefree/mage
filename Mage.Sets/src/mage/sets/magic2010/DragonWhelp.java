@@ -37,7 +37,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
@@ -100,7 +100,7 @@ class DragonWhelpEffect extends OneShotEffect {
         Integer amount = (Integer) game.getState().getValue(source.getSourceId().toString() + "DragonWhelp");
         if (amount == null) {
             amount = 0;
-            DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new DragonWhelpDelayedEffect());
+            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new DragonWhelpDelayedEffect());
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
             game.addDelayedTriggeredAbility(delayedAbility);

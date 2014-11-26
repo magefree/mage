@@ -30,7 +30,7 @@ package mage.sets.commander2013;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -132,7 +132,7 @@ class FlickerformEffect extends OneShotEffect {
                 if (!(enchantedCreature instanceof Token)) {
                 // At the beginning of the next end step, return that card to the battlefield under its owner's control.
                 // If you do, return the other cards exiled this way to the battlefield under their owners' control attached to that creature
-                    AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(
+                    AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
                             new FlickerformReturnEffect(enchantedCreature.getId(), exileZoneId));
                     delayedAbility.setSourceId(source.getSourceId());
                     delayedAbility.setControllerId(source.getControllerId());

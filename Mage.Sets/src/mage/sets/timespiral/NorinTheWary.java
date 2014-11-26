@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.cards.CardImpl;
@@ -128,7 +128,7 @@ class NorinTheWaryRemovingEffect extends OneShotEffect {
             if (permanent != null) {
                 if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), permanent.getName(), source.getSourceId(), game, Zone.BATTLEFIELD)) {
                     //create delayed triggered ability
-                    AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(
+                    AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
                             new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
                     delayedAbility.setSourceId(source.getSourceId());
                     delayedAbility.setControllerId(source.getControllerId());

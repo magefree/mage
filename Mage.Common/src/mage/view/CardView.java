@@ -326,6 +326,7 @@ public class CardView extends SimpleCardView {
     
     public CardView(EmblemView emblem) {
         this(true);
+        this.id = emblem.getId();
         this.mageObjectType = MageObjectType.EMBLEM;
         this.name = emblem.getName();
         this.displayName = name;

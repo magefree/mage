@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CipherEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
@@ -95,7 +95,7 @@ class VoidwalkEffect extends OneShotEffect {
             if (permanent != null) {
                 if (permanent.moveToExile(source.getSourceId(), "Voidwalk", source.getSourceId(), game)) {
                     if (card != null) {
-                        AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
+                        AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
                         delayedAbility.setSourceId(source.getSourceId());
                         delayedAbility.setControllerId(card.getOwnerId());
                         game.addDelayedTriggeredAbility(delayedAbility);

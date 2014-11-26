@@ -39,7 +39,7 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -133,7 +133,7 @@ class VenserTheSojournerEffect extends OneShotEffect {
                 if (permanent != null) {
                     if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourceObject.getLogName(), source.getSourceId(), game, Zone.BATTLEFIELD)) {
                         //create delayed triggered ability
-                        AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
+                        AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
                         delayedAbility.setSourceId(source.getSourceId());
                         delayedAbility.setControllerId(source.getControllerId());
                         game.addDelayedTriggeredAbility(delayedAbility);

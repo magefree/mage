@@ -36,7 +36,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -131,7 +131,7 @@ class StoneGiantEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         DestroyTargetEffect effect = new DestroyTargetEffect();
         effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
-        AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(effect);
+        AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
         delayedAbility.setSourceId(source.getSourceId());
         delayedAbility.setControllerId(source.getControllerId());
         game.addDelayedTriggeredAbility(delayedAbility);
