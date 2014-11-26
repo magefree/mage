@@ -197,12 +197,14 @@ public class HumanPlayer extends PlayerImpl {
                 } else {
                     replacementEffectChoice.setChoiceByKey(response.getString());
                 }
-                int index = 0;
-                for (String key : rEffects.keySet()) {
-                    if (replacementEffectChoice.getChoiceKey().equals(key)) {
-                        return index;
+                if (replacementEffectChoice.getChoiceKey() != null) {
+                    int index = 0;
+                    for (String key : rEffects.keySet()) {
+                        if (replacementEffectChoice.getChoiceKey().equals(key)) {
+                            return index;
+                        }
+                        index++;
                     }
-                    index++;
                 }
             }
         }
