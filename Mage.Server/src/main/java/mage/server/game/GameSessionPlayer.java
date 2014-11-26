@@ -49,6 +49,7 @@ import mage.game.Table;
 import mage.interfaces.callback.ClientCallback;
 import mage.players.Player;
 import mage.players.net.UserData;
+import mage.server.Main;
 import mage.server.User;
 import mage.server.UserManager;
 import mage.server.util.ConfigSettings;
@@ -66,9 +67,9 @@ import org.apache.log4j.Logger;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GameSession extends GameWatcher {
+public class GameSessionPlayer extends GameSessionWatcher {
 
-    private static final Logger logger = Logger.getLogger(GameSession.class);
+    private static final Logger logger = Logger.getLogger(GameSessionPlayer.class);
 
     private final UUID playerId;
     private final boolean useTimeout;
@@ -79,7 +80,7 @@ public class GameSession extends GameWatcher {
 
     private UserData userData;
 
-    public GameSession(Game game, UUID userId, UUID playerId, boolean useTimeout) {
+    public GameSessionPlayer(Game game, UUID userId, UUID playerId, boolean useTimeout) {
         super(userId, game, true);
         this.playerId = playerId;
         this.useTimeout = useTimeout;
@@ -228,7 +229,8 @@ public class GameSession extends GameWatcher {
                     }
                 }
             },
-            ConfigSettings.getInstance().getMaxSecondsIdle(), TimeUnit.SECONDS
+            Main.isTestMode() ? 3600 :ConfigSettings.getInstance().getMaxSecondsIdle(),
+            TimeUnit.SECONDS
         );
     }
 
@@ -269,7 +271,9 @@ public class GameSession extends GameWatcher {
         player.setUserData(this.userData);
         GameView gameView = new GameView(game.getState(), game, playerId, null);
         gameView.setHand(new CardsView(player.getHand().getCards(game)));
-        gameView.setCanPlayInHand(player.getPlayableInHand(game));
+        if (gameView.getPriorityPlayerName().equals(player.getName())) {
+            gameView.setCanPlayInHand(player.getPlayableInHand(game));
+        }
 
         processControlledPlayers(player, gameView);
         processWatchedHands(userId, gameView);

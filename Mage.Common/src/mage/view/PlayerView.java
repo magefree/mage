@@ -60,6 +60,7 @@ public class PlayerView implements Serializable {
     private final int handCount;
     private final boolean isActive;
     private final boolean hasPriority;
+    private final boolean timerActive;
     private final boolean hasLeft;
     private final ManaPoolView manaPool;
     private final CardsView graveyard = new CardsView();
@@ -87,6 +88,10 @@ public class PlayerView implements Serializable {
         this.manaPool = new ManaPoolView(player.getManaPool());
         this.isActive = (player.getId().equals(state.getActivePlayerId()));
         this.hasPriority = player.getId().equals(state.getPriorityPlayerId());
+        this.priorityTimeLeft = player.getPriorityTimeLeft();
+        this.timerActive = (this.hasPriority && player.isGameUnderControl()) ||
+                (player.getPlayersUnderYourControl().contains(state.getPriorityPlayerId()));
+
         this.hasLeft = player.hasLeft();
         for (Card card: player.getGraveyard().getCards(game)) {
             graveyard.put(card.getId(), new CardView(card));
@@ -138,7 +143,6 @@ public class PlayerView implements Serializable {
         }
 
         this.statesSavedSize = player.getStoredBookmark();
-        this.priorityTimeLeft = player.getPriorityTimeLeft();
 
         this.passedTurn = player.getPassedTurn();
         this.passedUntilEndOfTurn = player.getPassedUntilEndOfTurn();
@@ -242,6 +246,10 @@ public class PlayerView implements Serializable {
 
     public boolean hasPriority() {
         return hasPriority;
+    }
+
+    public boolean isTimerActive() {
+        return timerActive;
     }
 
     public boolean isPassedTurn() {

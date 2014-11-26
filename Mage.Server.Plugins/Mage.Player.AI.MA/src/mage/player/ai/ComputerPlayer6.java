@@ -68,7 +68,7 @@ import java.util.concurrent.*;
  *
  * @author nantuko
  */
-public class ComputerPlayer6 extends ComputerPlayer implements Player {
+public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
 
     private static final transient org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(ComputerPlayer6.class);
     private static final ExecutorService pool = Executors.newFixedThreadPool(1);

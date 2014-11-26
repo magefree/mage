@@ -47,16 +47,16 @@ import org.apache.log4j.Logger;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GameWatcher {
+public class GameSessionWatcher {
 
-    protected final static Logger logger = Logger.getLogger(GameWatcher.class);
+    protected final static Logger logger = Logger.getLogger(GameSessionWatcher.class);
 
     protected UUID userId;
     protected Game game;
     protected boolean killed = false;
     protected boolean isPlayer;
 
-    public GameWatcher(UUID userId, Game game, boolean isPlayer) {
+    public GameSessionWatcher(UUID userId, Game game, boolean isPlayer) {
         this.userId = userId;
         this.game = game;
         this.isPlayer = isPlayer;

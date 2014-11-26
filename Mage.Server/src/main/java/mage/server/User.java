@@ -44,7 +44,7 @@ import mage.interfaces.callback.ClientCallback;
 import mage.players.net.UserData;
 import mage.server.draft.DraftSession;
 import mage.server.game.GameManager;
-import mage.server.game.GameSession;
+import mage.server.game.GameSessionPlayer;
 import mage.server.tournament.TournamentSession;
 import mage.server.util.SystemUtil;
 import mage.view.TableClientMessage;
@@ -68,7 +68,7 @@ public class User {
     private final String host;    
     private final Date connectionTime;
     private final Map<UUID, Table> tables;
-    private final Map<UUID, GameSession> gameSessions;
+    private final Map<UUID, GameSessionPlayer> gameSessions;
     private final Map<UUID, DraftSession> draftSessions;
     private final Map<UUID, TournamentSession> tournamentSessions;
     private final Map<UUID, TournamentSession> constructing;
@@ -269,7 +269,7 @@ public class User {
             entry.getValue().update();
         }
 
-        for (Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
+        for (Entry<UUID, GameSessionPlayer> entry: gameSessions.entrySet()) {
             gameStarted(entry.getValue().getGameId(), entry.getKey());
             entry.getValue().init();
             GameManager.getInstance().sendPlayerString(entry.getValue().getGameId(), userId, "");
@@ -290,7 +290,7 @@ public class User {
         }
     }
 
-    public void addGame(UUID playerId, GameSession gameSession) {
+    public void addGame(UUID playerId, GameSessionPlayer gameSession) {
         gameSessions.put(playerId, gameSession);
     }
 
@@ -336,7 +336,7 @@ public class User {
 
     public void remove(DisconnectReason reason) {
         logger.debug("REMOVE " + getName() + " Game sessions: " + gameSessions.size() );
-        for (GameSession gameSession: gameSessions.values()) {
+        for (GameSessionPlayer gameSession: gameSessions.values()) {
             logger.debug("-- kill game session of gameId: " + gameSession.getGameId() );
             gameSession.quitGame();
         }

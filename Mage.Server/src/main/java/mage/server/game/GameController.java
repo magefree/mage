@@ -95,8 +95,8 @@ public class GameController implements GameCallback {
     private static final ExecutorService gameExecutor = ThreadExecutor.getInstance().getGameExecutor();
     private static final Logger logger = Logger.getLogger(GameController.class);
 
-    private ConcurrentHashMap<UUID, GameSession> gameSessions = new ConcurrentHashMap<>();
-    private ConcurrentHashMap<UUID, GameWatcher> watchers = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<UUID, GameSessionPlayer> gameSessions = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<UUID, GameSessionWatcher> watchers = new ConcurrentHashMap<>();
     private ConcurrentHashMap<UUID, PriorityTimer> timers = new ConcurrentHashMap<>();
     
     private ConcurrentHashMap<UUID, UUID> userPlayerMap;
@@ -300,10 +300,10 @@ public class GameController implements GameCallback {
             logger.fatal("Player not found - playerId: " +playerId);
             return;
         }
-        GameSession gameSession = gameSessions.get(playerId);
+        GameSessionPlayer gameSession = gameSessions.get(playerId);
         String joinType;
         if (gameSession == null) {
-            gameSession = new GameSession(game, userId, playerId, useTimeout);
+            gameSession = new GameSessionPlayer(game, userId, playerId, useTimeout);
             gameSessions.put(playerId, gameSession);
             gameSession.setUserData(user.getUserData());
             joinType = "joined";
@@ -318,7 +318,7 @@ public class GameController implements GameCallback {
 
     private synchronized void startGame() {
         if (gameFuture == null) {
-            for (final Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
+            for (final Entry<UUID, GameSessionPlayer> entry: gameSessions.entrySet()) {
                 if (!entry.getValue().init()) {
                     logger.fatal("Unable to initialize client");
                     //TODO: generate client error message
@@ -363,7 +363,7 @@ public class GameController implements GameCallback {
         }
         User user = UserManager.getInstance().getUser(userId);
         if (user != null) {
-            GameWatcher gameWatcher = new GameWatcher(userId, game, false);
+            GameSessionWatcher gameWatcher = new GameSessionWatcher(userId, game, false);
             watchers.put(userId, gameWatcher);
             gameWatcher.init();
             user.addGameWatchInfo(game.getId());
@@ -400,7 +400,7 @@ public class GameController implements GameCallback {
     public void quitMatch(UUID userId) {
         UUID playerId = getPlayerId(userId);
         if (playerId != null) {
-            GameSession gameSession = gameSessions.get(playerId);
+            GameSessionPlayer gameSession = gameSessions.get(playerId);
             if (gameSession != null) {
                 gameSession.quitGame();
             }
@@ -456,7 +456,7 @@ public class GameController implements GameCallback {
         if (grantingPlayer != null) {
             if (!grantingPlayer.getUsersAllowedToSeeHandCards().contains(userIdRequester)) {
                 if (grantingPlayer.isHuman()) {
-                    GameSession gameSession = gameSessions.get(userIdGranter);
+                    GameSessionPlayer gameSession = gameSessions.get(userIdGranter);
                     if (gameSession != null) {
                         UUID requestingPlayer = getPlayerId(userIdRequester);
                         if (requestingPlayer == null || !requestingPlayer.equals(grantingPlayer.getId())) { // don't allow request for your own cards
@@ -527,11 +527,11 @@ public class GameController implements GameCallback {
     }
 
     public void endGame(final String message) throws MageException {
-        for (final GameSession gameSession: gameSessions.values()) {
+        for (final GameSessionPlayer gameSession: gameSessions.values()) {
             gameSession.gameOver(message);
             gameSession.removeGame();
         }
-        for (final GameWatcher gameWatcher: watchers.values()) {
+        for (final GameSessionWatcher gameWatcher: watchers.values()) {
             gameWatcher.gameOver(message);
         }
         TableManager.getInstance().endGame(tableId);
@@ -601,10 +601,10 @@ public class GameController implements GameCallback {
                 }
             }
         }
-        for (final GameSession gameSession: gameSessions.values()) {
+        for (final GameSessionPlayer gameSession: gameSessions.values()) {
             gameSession.update();
         }
-        for (final GameWatcher gameWatcher: watchers.values()) {
+        for (final GameSessionWatcher gameWatcher: watchers.values()) {
             gameWatcher.update();
         }
     }
@@ -613,7 +613,7 @@ public class GameController implements GameCallback {
         Table table = TableManager.getInstance().getTable(tableId);
         if (table != null) {
             if (table.getMatch() != null) {
-                for (final GameSession gameSession: gameSessions.values()) {
+                for (final GameSessionPlayer gameSession: gameSessions.values()) {
                     gameSession.endGameInfo(table);
                 }
             }
@@ -741,12 +741,12 @@ public class GameController implements GameCallback {
             message.append(game.getStep().getType().toString()).append(" - ");
         }
         message.append("Waiting for ").append(game.getPlayer(playerId).getName());
-        for (final Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
+        for (final Entry<UUID, GameSessionPlayer> entry: gameSessions.entrySet()) {
             if (!entry.getKey().equals(playerId)) {
                 entry.getValue().inform(message.toString());
             }
         }
-        for (final GameWatcher watcher: watchers.values()) {
+        for (final GameSessionWatcher watcher: watchers.values()) {
             watcher.inform(message.toString());
         }
     }
@@ -761,7 +761,7 @@ public class GameController implements GameCallback {
             return;
         }
         final String message = new StringBuilder(game.getStep().getType().toString()).append(" - Waiting for ").append(controller.getName()).toString();
-        for (final Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
+        for (final Entry<UUID, GameSessionPlayer> entry: gameSessions.entrySet()) {
             boolean skip = false;
             for (UUID uuid : players) {
                 if (entry.getKey().equals(uuid)) {
@@ -773,7 +773,7 @@ public class GameController implements GameCallback {
                 entry.getValue().inform(message);
             }
         }
-        for (final GameWatcher watcher: watchers.values()) {
+        for (final GameSessionWatcher watcher: watchers.values()) {
             watcher.inform(message);
         }
     }
@@ -795,7 +795,7 @@ public class GameController implements GameCallback {
         for (StackTraceElement e: ex.getStackTrace()) {
             sb.append(e.toString()).append("\n");
         }
-        for (final Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
+        for (final Entry<UUID, GameSessionPlayer> entry: gameSessions.entrySet()) {
             entry.getValue().gameError(sb.toString());
         }
     }
@@ -898,7 +898,7 @@ public class GameController implements GameCallback {
         void execute(UUID player);
     }
 
-    private GameSession getGameSession(UUID playerId) {
+    private GameSessionPlayer getGameSession(UUID playerId) {
         if (!timers.isEmpty()) {
             Player player = game.getState().getPlayer(playerId);
             PriorityTimer timer = timers.get(playerId);

@@ -28,6 +28,7 @@
 
 package mage.target;
 
+import java.io.Serializable;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.abilities.Ability;

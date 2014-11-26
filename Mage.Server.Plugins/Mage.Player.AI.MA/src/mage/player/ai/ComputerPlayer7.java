@@ -93,9 +93,9 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
 
     @Override
     public boolean priority(Game game) {
-        game.resumeTimer(playerId);
+        game.resumeTimer(getTurnControlledBy());
         boolean result = priorityPlay(game);
-        game.pauseTimer(playerId);
+        game.pauseTimer(getTurnControlledBy());
         return result;
     }
 

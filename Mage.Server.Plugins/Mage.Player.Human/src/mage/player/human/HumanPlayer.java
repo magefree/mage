@@ -83,13 +83,9 @@ public class HumanPlayer extends PlayerImpl {
     protected static FilterBlockingCreature filterBlock = new FilterBlockingCreature();
     protected static final Choice replacementEffectChoice = new ChoiceImpl(true);
 
-    private static final Map<String, Serializable> staticOptions = new HashMap<>();
-
     private static final Logger log = Logger.getLogger(HumanPlayer.class);
-
     static {
         replacementEffectChoice.setMessage("Choose replacement effect to resolve first");
-        staticOptions.put("UI.right.btn.text", "Done");
     }
 
     protected HashSet<String> autoSelectReplacementEffects = new HashSet<>();
@@ -106,7 +102,7 @@ public class HumanPlayer extends PlayerImpl {
     protected void waitForResponse(Game game) {
         response.clear();
         log.debug("Waiting response from player: " + getId());
-        game.resumeTimer(playerId);
+        game.resumeTimer(getTurnControlledBy());
         synchronized(response) {
             try {
                 response.wait();
@@ -114,7 +110,7 @@ public class HumanPlayer extends PlayerImpl {
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             } finally {
-                game.pauseTimer(playerId);
+                game.pauseTimer(getTurnControlledBy());
             }
         }
     }
@@ -236,7 +232,10 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
-        updateGameStatePriority("choose(5)", game);
+        updateGameStatePriority("choose(5)", game); 
+        if (options == null) {
+            options = new HashMap<>();
+        }
         while (!abort) {
             Set<UUID> targetIds = target.possibleTargets(sourceId, playerId, game);
             if (targetIds == null || targetIds.isEmpty()) {
@@ -246,7 +245,11 @@ public class HumanPlayer extends PlayerImpl {
             if (target.getTargets().size() >= target.getNumberOfTargets()) {
                 required = false;
             }
-            game.fireSelectTargetEvent(playerId, target.getMessage(), targetIds, required, options);
+
+            List<UUID> chosen = target.getTargets();
+            options.put("chosen", (Serializable)chosen);
+
+            game.fireSelectTargetEvent(playerId, target.getMessage(), targetIds, required, getOptions(target, options));
             waitForResponse(game);
             if (response.getUUID() != null) {
                 if (!targetIds.contains(response.getUUID())) {
@@ -263,16 +266,24 @@ public class HumanPlayer extends PlayerImpl {
                     MageObject object = game.getObject(sourceId);
                     if (object instanceof Ability) {
                         if (target.canTarget(response.getUUID(), (Ability) object, game)) {
-                            target.add(response.getUUID(), game);
-                            if (target.doneChosing()) {
-                                return true;
+                            if (target.getTargets().contains(response.getUUID())) { // if already included remove it with
+                                target.remove(response.getUUID());
+                            } else {
+                                target.addTarget(response.getUUID(), (Ability)object, game);
+                                if(target.doneChosing()){
+                                    return true;
+                                }
                             }
                         }
                     } else {
                         if (target.canTarget(response.getUUID(), game)) {
-                            target.add(response.getUUID(), game);
-                            if (target.doneChosing()) {
-                                return true;
+                            if (target.getTargets().contains(response.getUUID())) { // if already included remove it with
+                                target.remove(response.getUUID());
+                            } else {
+                                target.addTarget(response.getUUID(), null, game);
+                                if(target.doneChosing()){
+                                    return true;
+                                }
                             }
                         }
                     }
@@ -299,7 +310,7 @@ public class HumanPlayer extends PlayerImpl {
             if (possibleTargets.isEmpty() || target.getTargets().size() >= target.getNumberOfTargets()) {
                 required = false;
             }
-            game.fireSelectTargetEvent(playerId, target.getMessage(), possibleTargets, required, getOptions(target));
+            game.fireSelectTargetEvent(playerId, target.getMessage(), possibleTargets, required, getOptions(target, null));
             waitForResponse(game);
             if (response.getUUID() != null) {
                 if (possibleTargets.contains(response.getUUID())) {
@@ -337,8 +348,15 @@ public class HumanPlayer extends PlayerImpl {
         return false;
     }
 
-    private Map<String, Serializable> getOptions(Target target) {
-        return target.getTargets().size() >= target.getNumberOfTargets() ? staticOptions : null;
+    private Map<String, Serializable> getOptions(Target target, Map<String, Serializable> options ) {
+        if (options == null) {
+            options = new HashMap<>();
+        }
+        if (target.getTargets().size() >= target.getNumberOfTargets() && !options.containsKey("UI.right.btn.text")) {
+            options.put("UI.right.btn.text", "Done");
+        }
+        options.put("targetZone", target.getZone());
+        return  options;
     }
 
     @Override
@@ -358,11 +376,7 @@ public class HumanPlayer extends PlayerImpl {
             if (target.getTargets().size() >= target.getNumberOfTargets()) {
                 required = false;
             }
-            Map<String, Serializable> options = getOptions(target);
-            if (options == null) {
-                options = new HashMap<>(1);
-            }
-
+            Map<String, Serializable> options = getOptions(target, null);
             List<UUID> chosen = target.getTargets();
             options.put("chosen", (Serializable)chosen);
             List<UUID> choosable = new ArrayList<>();
@@ -416,7 +430,7 @@ public class HumanPlayer extends PlayerImpl {
             if (target.getTargets().size() >= target.getNumberOfTargets()) {
                 required = false;
             }
-            game.fireSelectTargetEvent(playerId, target.getMessage(), cards, required, null);
+            game.fireSelectTargetEvent(playerId, target.getMessage(), cards, required, getOptions(target, null));
             waitForResponse(game);
             if (response.getUUID() != null) {
                 if (target.canTarget(response.getUUID(), cards, game)) {
@@ -441,7 +455,10 @@ public class HumanPlayer extends PlayerImpl {
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
         updateGameStatePriority("chooseTargetAmount", game);
         while (!abort) {
-            game.fireSelectTargetEvent(playerId, target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), target.possibleTargets(source==null?null:source.getSourceId(), playerId, game), target.isRequired(source), null);
+            game.fireSelectTargetEvent(playerId, target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), 
+                    target.possibleTargets(source==null?null:source.getSourceId(), playerId, game),
+                    target.isRequired(source),
+                    getOptions(target, null));
             waitForResponse(game);
             if (response.getUUID() != null) {
                 if (target.canTarget(response.getUUID(), source, game)) {
@@ -870,7 +887,7 @@ public class HumanPlayer extends PlayerImpl {
     protected void selectCombatGroup(UUID defenderId, UUID blockerId, Game game) {
         updateGameStatePriority("selectCombatGroup", game);
         TargetAttackingCreature target = new TargetAttackingCreature();
-        game.fireSelectTargetEvent(playerId, "Select attacker to block", target.possibleTargets(null, playerId, game), false, null);
+        game.fireSelectTargetEvent(playerId, "Select attacker to block", target.possibleTargets(null, playerId, game), false, getOptions(target, null));
         waitForResponse(game);
         if (response.getBoolean() != null) {
             // do nothing
@@ -1128,8 +1145,10 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     protected void updateGameStatePriority(String methodName, Game game) {
-        log.debug("Setting game priority to " + getId() + " [" + methodName + "]");
-        game.getState().setPriorityPlayerId(getId());
+        if (game.getState().getPriorityPlayerId() != null) { // don't do it if priority was set to null before (e.g. discard in cleanaup)
+            log.debug("Setting game priority to " + getId() + " [" + methodName + "]");
+            game.getState().setPriorityPlayerId(getId());
+        }
     }
 
     @Override

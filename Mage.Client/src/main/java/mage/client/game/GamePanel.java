@@ -110,6 +110,7 @@ import static mage.constants.PhaseStep.FIRST_COMBAT_DAMAGE;
 import static mage.constants.PhaseStep.UNTAP;
 import static mage.constants.PhaseStep.UPKEEP;
 import mage.constants.PlayerAction;
+import mage.constants.Zone;
 import mage.remote.Session;
 import mage.view.AbilityPickerView;
 import mage.view.CardView;
@@ -813,6 +814,26 @@ public final class GamePanel extends javax.swing.JPanel {
      */
     public void pickTarget(String message, CardsView cardView, GameView gameView, Set<UUID> targets, boolean required, Map<String, Serializable> options, int messageId) {
         ShowCardsDialog dialog = null;
+        if (options != null && options.containsKey("targetZone")) {
+            if (Zone.HAND.equals(options.get("targetZone"))) { // mark selectable target cards in hand
+                List<UUID> choosen = null;
+                if (options.containsKey("chosen")) {
+                    choosen = (List<UUID>) options.get("chosen");
+                }
+                for(CardView card: gameView.getHand().values()) {
+                    if (targets == null || targets.isEmpty()) {
+                        card.setPlayable(false);
+                        card.setChoosable(true);
+                    } else if (targets.contains(card.getId())) {
+                        card.setPlayable(false);
+                        card.setChoosable(true);
+                    }
+                    if (choosen != null && choosen.contains(card.getId())) {
+                        card.setSelected(true);
+                    }
+                }
+            }
+        }
         updateGame(gameView);
         Map<String, Serializable> options0 = options == null ? new HashMap<String, Serializable>() : options;
         if (cardView != null && cardView.size() > 0) {

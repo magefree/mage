@@ -81,7 +81,7 @@ class CragganwickCrematorEffect extends OneShotEffect {
 
     public CragganwickCrematorEffect() {
         super(Outcome.Neutral);
-        this.staticText = "discard a card at random. If you discard a creature card this way, <this> deals damage equal to that card's power to target player";
+        this.staticText = "discard a card at random. If you discard a creature card this way, {this} deals damage equal to that card's power to target player";
     }
 
     public CragganwickCrematorEffect(final CragganwickCrematorEffect effect) {
@@ -97,20 +97,14 @@ class CragganwickCrematorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
         Player targetedPlayer = game.getPlayer(source.getFirstTarget());
-        if (you != null) {
-            Effect discardEffect = new DiscardTargetEffect(1, true, true);
-            discardEffect.setTargetPointer(new FixedTarget(you.getId()));
-            if (discardEffect.apply(game, source)) {
-                Card discardedCard = game.getCard(this.getTargetPointer().getFirst(game, source));
-                if (discardedCard != null
-                        && discardedCard.getCardType().contains(CardType.CREATURE)) {
-                    int damage = discardedCard.getPower().getValue();
-                    if (targetedPlayer != null) {
-                        targetedPlayer.damage(damage, source.getSourceId(), game, false, true);
-                        return true;
-                    }
-                }
+        if (you != null && targetedPlayer != null) {
+            Card discardedCard = targetedPlayer.discardOne(true, source, game);
+            if (discardedCard != null
+                    && discardedCard.getCardType().contains(CardType.CREATURE)) {
+                int damage = discardedCard.getPower().getValue();
+                targetedPlayer.damage(damage, source.getSourceId(), game, false, true);
             }
+            return true;
         }
         return false;
     }

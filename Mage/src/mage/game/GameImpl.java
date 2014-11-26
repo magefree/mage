@@ -988,7 +988,7 @@ public abstract class GameImpl implements Game, Serializable {
         int deduction = 1;
         if (freeMulligans > 0) {
             if (usedFreeMulligans != null && usedFreeMulligans.containsKey(player.getId())) {
-                int used = usedFreeMulligans.get(player.getId()).intValue();
+                int used = usedFreeMulligans.get(player.getId());
                 if (used < freeMulligans ) {
                     deduction = 0;
                 }

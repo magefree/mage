@@ -243,7 +243,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                 this.avatar.setTopText(priorityTimeValue);
                 this.timerLabel.setText(priorityTimeValue);
             }
-            if (player.hasPriority()) {
+            if (player.isTimerActive()) {
                 this.timer.resume();
             } else {
                 this.timer.pause();

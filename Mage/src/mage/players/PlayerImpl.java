@@ -122,6 +122,7 @@ import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetDiscard;
+import mage.util.CardUtil;
 import mage.watchers.common.BloodthirstWatcher;
 import org.apache.log4j.Logger;
 
@@ -563,6 +564,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void setGameUnderYourControl(boolean value) {
         this.isGameUnderControl = value;
+        if (isGameUnderControl) {
+            this.turnController = getId();
+        }
     }
 
     @Override
@@ -623,12 +627,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public void discardToMax(Game game) {
         if (hand.size() > this.maxHandSize) {
             game.informPlayers(new StringBuilder(getName()).append(" discards down to ").append(this.maxHandSize).append(this.maxHandSize == 1?" hand card":" hand cards").toString());
-            while (isInGame() && hand.size() > this.maxHandSize) {
-                TargetDiscard target = new TargetDiscard(playerId);
-                target.setTargetName(new StringBuilder(" card to discard (").append(hand.size() - this.maxHandSize).append(" in total)").toString());
-                choose(Outcome.Discard, target, null, game);
-                discard(hand.get(target.getFirstTarget(), game), null, game);
-            }
+            discard(hand.size() - this.maxHandSize, null, game);
         }
     }
 
@@ -682,21 +681,17 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             return discardedCards;
         }
-        int numDiscarded = 0;
-        while (isInGame() && numDiscarded < amount) {
-            if (this.getHand().size() == 0) {
-                break;
+        if (random) {
+            for (int i = 0; i < amount; i++) {
+                Card card = this.getHand().getRandom(game);
+                discardedCards.add(card);
+                discard(card, source, game);
             }
-            Card card;
-            if (random) {
-                card = this.getHand().getRandom(game);
-            } else {
-                TargetDiscard target = new TargetDiscard(playerId);
-                choose(Outcome.Discard, target, source.getSourceId(), game);
-                card = this.getHand().get(target.getFirstTarget(), game);
-            }
-            if (card != null) {
-                numDiscarded++;
+        } else {
+            TargetDiscard target = new TargetDiscard(amount, amount, new FilterCard(CardUtil.numberToText(amount, "a") + " card" + (amount > 1 ?"s":"")), playerId);
+            choose(Outcome.Discard, target, source == null?null:source.getSourceId(), game);
+            for (UUID cardId: target.getTargets()) {
+                Card card = this.getHand().get(cardId, game);
                 discardedCards.add(card);
                 discard(card, source, game);
             }
@@ -2253,36 +2248,40 @@ public abstract class PlayerImpl implements Player, Serializable {
         return playable;
     }
 
+    /**
+     * Creates a list of card ids that are currently playable.<br>
+     * Used to mark the playable cards in GameView
+     *
+     * @return A Set of cardIds that are playable
+     * @see mage.server.GameSessionPlayer#getGameView()
+     *
+     * @param game
+
+     */
+
     @Override
     public Set<UUID> getPlayableInHand(Game game) {
         Set<UUID> playable = new HashSet<>();
         if (!shouldSkipGettingPlayable(game)) {
-            // for clean_up phase show all cards
-            if (game.getPhase() != null && PhaseStep.CLEANUP.equals(game.getPhase().getStep().getType())) {
-                for (Card card: hand.getCards(game)) {
-                    playable.add(card.getId());
-                }
-            } else {
-                ManaOptions available = getManaAvailable(game);
-                available.addMana(manaPool.getMana());
+            ManaOptions available = getManaAvailable(game);
+            available.addMana(manaPool.getMana());
 
-                for (Card card : hand.getCards(game)) {
-                    for (ActivatedAbility ability : card.getAbilities().getPlayableAbilities(Zone.HAND)) {
-                        if (ability instanceof PlayLandAbility) {
-                            if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(), ability.getSourceId(), playerId), ability, game, true)) {
-                                break;
-                            }
-                        }
-                        if (canPlay(ability, available, card, game)) {
-                            playable.add(card.getId());
+            for (Card card : hand.getCards(game)) {
+                for (ActivatedAbility ability : card.getAbilities().getPlayableAbilities(Zone.HAND)) {
+                    if (ability instanceof PlayLandAbility) {
+                        if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(), ability.getSourceId(), playerId), ability, game, true)) {
                             break;
                         }
                     }
-                    for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {
-                        if (!playable.contains(ability.getSourceId()) && canPlay(ability, available, card, game)) {
-                            playable.add(card.getId());
-                            break;
-                        }
+                    if (canPlay(ability, available, card, game)) {
+                        playable.add(card.getId());
+                        break;
+                    }
+                }
+                for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {
+                    if (!playable.contains(ability.getSourceId()) && canPlay(ability, available, card, game)) {
+                        playable.add(card.getId());
+                        break;
                     }
                 }
             }
