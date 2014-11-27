@@ -30,48 +30,62 @@ package mage.sets.commander2014;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.abilityword.LieutenantAbility;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.common.SacrificeEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.SacrificeCostCreaturesPower;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.game.permanent.token.ZombieToken;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author emerald000
+ * @author LevelX2
  */
-public class DemonOfWailingAgonies extends CardImpl {
+public class GhoulcallerGisa extends CardImpl {
 
-    public DemonOfWailingAgonies(UUID ownerId) {
-        super(ownerId, 21, "Demon of Wailing Agonies", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "C14";
-        this.subtype.add("Demon");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
 
-        this.color.setBlack(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        
-        // Lieutenant - As long as you control your commander, Demon of Wailing Agonies gets +2/+2 and has "Whenever Demon of Wailing Agonies deals combat damage to a player, that player sacrifices a creature."
-        Ability gainedAbility = new DealsCombatDamageToAPlayerTriggeredAbility(new SacrificeEffect(new FilterControlledCreaturePermanent("a creature"), 1, "that player"), false, true);
-        ContinuousEffect effect = new GainAbilitySourceEffect(gainedAbility);
-        effect.setText("and has \"Whenever {this} deals combat damage to a player, that player sacrifices a creature.\"");
-        this.addAbility(new LieutenantAbility(effect));
+    static {
+        filter.add(new AnotherPredicate());
     }
 
-    public DemonOfWailingAgonies(final DemonOfWailingAgonies card) {
+    public GhoulcallerGisa(UUID ownerId) {
+        super(ownerId, 23, "Ghoulcaller Gisa", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
+        this.expansionSetCode = "C14";
+        this.supertype.add("Legendary");
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
+
+        this.color.setBlack(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(4);
+
+        // {B}, {tap}, Sacrifice another creature: Put X 2/2 black Zombie creature tokens onto the battlefield, where X is the sacrificed creature's power.
+        DynamicValue xValue = new SacrificeCostCreaturesPower();
+        Effect effect = new CreateTokenEffect(new ZombieToken("C14"), xValue);
+        effect.setText("Put X 2/2 black Zombie creature tokens onto the battlefield, where X is the sacrificed creature's power");
+        Ability ability  = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{B}"));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter)));
+        this.addAbility(ability);
+    }
+
+    public GhoulcallerGisa(final GhoulcallerGisa card) {
         super(card);
     }
 
     @Override
-    public DemonOfWailingAgonies copy() {
-        return new DemonOfWailingAgonies(this);
+    public GhoulcallerGisa copy() {
+        return new GhoulcallerGisa(this);
     }
 }

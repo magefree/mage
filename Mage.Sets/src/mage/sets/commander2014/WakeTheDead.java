@@ -79,13 +79,9 @@ public class WakeTheDead extends CardImpl {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
-            for (Effect effect : ability.getEffects()) {
-                if (effect instanceof WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect) {
-                    int xValue = new GetXValue().calculate(game, ability, null);
-                    ability.getTargets().clear();
-                    ability.addTarget(new TargetCardInYourGraveyard(xValue,xValue, new FilterCreatureCard("creature cards from your graveyard")));
-                }
-            }
+            int xValue = ability.getManaCostsToPay().getX();
+            ability.getTargets().clear();
+            ability.addTarget(new TargetCardInYourGraveyard(xValue,xValue, new FilterCreatureCard("creature cards from your graveyard")));
         }
     }
 

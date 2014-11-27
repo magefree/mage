@@ -25,54 +25,66 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.OnEventTriggeredAbility;
-import mage.abilities.effects.common.DrawCardTargetEffect;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.game.events.GameEvent.EventType;
-import mage.target.TargetPlayer;
+package mage.sets.commander2014;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.predicate.permanent.TokenPredicate;
+import mage.game.permanent.token.ZombieToken;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class BloodgiftDemon extends CardImpl {
+public class OverseerOfTheDamned extends CardImpl {
 
-    public BloodgiftDemon(UUID ownerId) {
-        super(ownerId, 89, "Bloodgift Demon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "ISD";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature an opponent controls");
+
+    static {
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(Predicates.not(new TokenPredicate()));
+    }
+
+    public OverseerOfTheDamned(UUID ownerId) {
+        super(ownerId, 28, "Overseer of the Damned", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
+        this.expansionSetCode = "C14";
         this.subtype.add("Demon");
 
         this.color.setBlack(true);
         this.power = new MageInt(5);
-        this.toughness = new MageInt(4);
+        this.toughness = new MageInt(5);
 
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // At the beginning of your upkeep, target player draws a card and loses 1 life.
-        Ability ability = new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new DrawCardTargetEffect(1), false);
-        Effect effect = new LoseLifeTargetEffect(1);
-        effect.setText("and loses 1 life");
-        ability.addEffect(effect);
-        ability.addTarget(new TargetPlayer());
+        // When Overseer of the Damned enters the battlefield, you may destroy target creature.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true);
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
+        // Whenever a nontoken creature an opponent controls dies, put a 2/2 black Zombie creature token onto the battlefield tapped.
+        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new ZombieToken("C14"), 1, true, false), false, filter));
+
     }
 
-    public BloodgiftDemon(final BloodgiftDemon card) {
+    public OverseerOfTheDamned(final OverseerOfTheDamned card) {
         super(card);
     }
 
     @Override
-    public BloodgiftDemon copy() {
-        return new BloodgiftDemon(this);
+    public OverseerOfTheDamned copy() {
+        return new OverseerOfTheDamned(this);
     }
 }

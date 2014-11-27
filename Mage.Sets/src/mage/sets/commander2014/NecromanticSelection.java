@@ -112,8 +112,10 @@ class NecromanticSelectionEffect extends OneShotEffect {
         if (sourceObject != null && controller != null) {
             Cards cards = new CardsImpl();
             for(Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), controller.getId(), source.getSourceId(), game)) {
-                cards.add(permanent);
-                controller.moveCardToGraveyardWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD);
+                permanent.destroy(source.getSourceId(), game, false);
+                if (game.getState().getZone(permanent.getId()).equals(Zone.GRAVEYARD)) {
+                    cards.add(permanent);
+                }
             }
             FilterCard filter = new FilterCreatureCard("creature card put into a graveyard with " + sourceObject.getLogName());
             ArrayList<Predicate<MageObject>> cardIdPredicates = new ArrayList<>();

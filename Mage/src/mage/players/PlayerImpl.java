@@ -86,8 +86,8 @@ import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
-import mage.constants.PlayerAction;
 import mage.constants.PhaseStep;
+import mage.constants.PlayerAction;
 import mage.constants.RangeOfInfluence;
 import mage.constants.SpellAbilityType;
 import mage.constants.TimingRule;
@@ -106,7 +106,6 @@ import mage.game.Game;
 import mage.game.Table;
 import mage.game.combat.CombatGroup;
 import mage.game.command.CommandObject;
-import mage.game.command.Commander;
 import mage.game.events.DamagePlayerEvent;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -2233,21 +2232,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
             }
-//            // get cast commander if available
-//            if (!(this.getCommanderId() == null)) {
-//                Zone zone = game.getState().getZone(this.getCommanderId());
-//                if (zone != null && zone.equals(Zone.COMMAND)) {
-//                    MageObject object = game.getObject(this.getCommanderId());
-//                    if (object != null) {
-//                        for (ActivatedAbility ability : ((Commander) object).getAbilities().getActivatedAbilities(Zone.COMMAND)) {
-//                            if (canPlay(ability, availableMana, object, game)) {
-//                                playableActivated.put(ability.toString(), ability);
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-            // activated abilities from objects in the command zone
+            // activated abilities from objects in the command zone (emblems or commanders)
             for (CommandObject commandObject: game.getState().getCommand()) {
                 for (ActivatedAbility ability: commandObject.getAbilities().getActivatedAbilities(Zone.COMMAND)) {
                     if (ability.getControllerId().equals(getId())
