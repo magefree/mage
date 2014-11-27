@@ -82,16 +82,28 @@ public class SpellStack extends ArrayDeque<StackObject> {
         StackObject stackObject = getStackObject(objectId);
         MageObject sourceObject = game.getObject(sourceId);
         if (stackObject != null && sourceObject != null) {
+            MageObject targetSourceObject = game.getObject(stackObject.getSourceId());
+            String counteredObjectName, targetSourceName;
+            if (targetSourceObject == null) {
+                targetSourceName = "[Object not found]";
+            } else {
+                targetSourceName  = game.getObject(stackObject.getSourceId()).getName();
+            }
+            if (stackObject instanceof Spell) {
+                counteredObjectName = targetSourceName;
+            } else {
+                counteredObjectName = "Ability (" + stackObject.getStackAbility().getRule(targetSourceName) + ") of " + targetSourceName;
+            }
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, objectId, sourceId, stackObject.getControllerId()))) {
                 if ( stackObject instanceof Spell ) {
                     game.rememberLKI(objectId, Zone.STACK, (Spell)stackObject);
                 }
                 this.remove(stackObject);
                 stackObject.counter(sourceId, game); // tries to move to graveyard
-                game.informPlayers(new StringBuilder(stackObject.getName()).append(" is countered by ").append(sourceObject.getLogName()).toString());
+                game.informPlayers(counteredObjectName + " is countered by " + sourceObject.getLogName());
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, objectId, sourceId, stackObject.getControllerId()));
             } else {
-                game.informPlayers(new StringBuilder(stackObject.getName()).append(" could not be countered by ").append(sourceObject.getLogName()).toString());
+                game.informPlayers(counteredObjectName + " could not be countered by " + sourceObject.getLogName());
             }
             return true;
         }
