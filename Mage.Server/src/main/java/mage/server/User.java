@@ -45,6 +45,8 @@ import mage.players.net.UserData;
 import mage.server.draft.DraftSession;
 import mage.server.game.GameManager;
 import mage.server.game.GameSessionPlayer;
+import mage.server.tournament.TournamentController;
+import mage.server.tournament.TournamentManager;
 import mage.server.tournament.TournamentSession;
 import mage.server.util.SystemUtil;
 import mage.view.TableClientMessage;
@@ -348,6 +350,10 @@ public class User {
         draftSessions.clear();
         logger.debug("REMOVE " + getName() + " Tournament sessions " + tournamentSessions.size());
         for (TournamentSession tournamentSession: tournamentSessions.values()) {
+            TournamentController tournamentController = TournamentManager.getInstance().getTournamentController(tournamentSession.getTournamentId());
+            if (tournamentController != null) {
+                tournamentController.quit(userId);
+            }
             tournamentSession.setKilled();
         }
         tournamentSessions.clear();
