@@ -25,34 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.sets.commander2014;
 
 import java.util.UUID;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.mana.CommanderColorIdentityManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
  * @author LevelX2
  */
-public class CommandTower extends CardImpl {
+public class CommandersSphere extends CardImpl {
 
-    public CommandTower(UUID ownerId) {
-        super(ownerId, 281, "Command Tower", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "C13";
+    public CommandersSphere(UUID ownerId) {
+        super(ownerId, 54, "Commander's Sphere", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
+        this.expansionSetCode = "C14";
 
         // {tap}: Add to your mana pool one mana of any color in your commander's color identity.
         this.addAbility(new CommanderColorIdentityManaAbility());
+
+        // Sacrifice Commander's Sphere: Draw a card.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new SacrificeSourceCost()));
     }
 
-    public CommandTower(final CommandTower card) {
+    public CommandersSphere(final CommandersSphere card) {
         super(card);
     }
 
     @Override
-    public CommandTower copy() {
-        return new CommandTower(this);
+    public CommandersSphere copy() {
+        return new CommandersSphere(this);
     }
 }
