@@ -127,21 +127,21 @@ public abstract class SplitCard extends CardImpl {
         return rules;
     }
 
-    @Override
-    public void setControllerId(UUID controllerId) {
-        abilities.setControllerId(controllerId);
-        leftHalfCard.getAbilities().setControllerId(controllerId);
-        rightHalfCard.getAbilities().setControllerId(controllerId);
-    }
+//    @Override
+//    public void setControllerId(UUID controllerId) {
+//        abilities.setControllerId(controllerId);
+//        leftHalfCard.getAbilities().setControllerId(controllerId);
+//        rightHalfCard.getAbilities().setControllerId(controllerId);
+//    }
 
     @Override
     public void setOwnerId(UUID ownerId) {
         this.ownerId = ownerId;
         abilities.setControllerId(ownerId);
         leftHalfCard.getAbilities().setControllerId(ownerId);
-        leftHalfCard.setOwnerId(ownerId);
+//        leftHalfCard.setOwnerId(ownerId);
         rightHalfCard.getAbilities().setControllerId(ownerId);
-        rightHalfCard.setOwnerId(ownerId);
+//        rightHalfCard.setOwnerId(ownerId);
 
     }
 
@@ -175,6 +175,11 @@ class LeftHalfCard  extends CardImpl {
     @Override
     public LeftHalfCard copy() {
         return new LeftHalfCard(this);
+    }
+
+    @Override
+    public UUID getOwnerId() {
+        return splitCardParent.getOwnerId();
     }
 
     @Override
@@ -232,6 +237,11 @@ class RightHalfCard  extends CardImpl {
     @Override
     public RightHalfCard copy() {
         return new RightHalfCard(this);
+    }
+
+    @Override
+    public UUID getOwnerId() {
+        return splitCardParent.getOwnerId();
     }
 
     @Override

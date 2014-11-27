@@ -105,7 +105,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Map<UUID, Zone> zones = new HashMap<>();
     private List<GameEvent> simultaneousEvents = new ArrayList<>();
     private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
-
+    private Map<UUID, CardState> cardState = new HashMap<>();
+    
     public GameState() {
         players = new Players();
         playerList = new PlayerList();
@@ -166,6 +167,10 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.paused = state.paused;
         this.simultaneousEvents.addAll(state.simultaneousEvents);
         this.zoneChangeCounter.putAll(state.zoneChangeCounter);
+        for (Map.Entry<UUID, CardState> entry: state.cardState.entrySet()) {
+            cardState.put(entry.getKey(), entry.getValue().copy());
+        }
+
     }
 
     @Override
@@ -499,6 +504,7 @@ public class GameState implements Serializable, Copyable<GameState> {
             origPlayer.restore(copyPlayer);
         }
         this.simultaneousEvents = state.simultaneousEvents;
+        this.zoneChangeCounter = state.zoneChangeCounter;
     }
 
     public void addSimultaneousEvent(GameEvent event, Game game) {
@@ -757,4 +763,10 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.zoneChangeCounter.put(objectId, value);
     }
 
+    public CardState getCardState(UUID cardId) {
+        if (!cardState.containsKey(cardId)) {
+            cardState.putIfAbsent(cardId, new CardState());
+        }
+        return cardState.get(cardId);
+    }
 }

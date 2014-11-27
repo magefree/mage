@@ -59,6 +59,7 @@ import mage.constants.EffectType;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
+import mage.counters.Counters;
 import mage.game.Game;
 import mage.game.events.DamageCreatureEvent;
 import mage.game.events.DamagePlaneswalkerEvent;
@@ -85,6 +86,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean controlledFromStartOfControllerTurn;
     protected int turnsOnBattlefield;
     protected boolean phasedIn = true;
+    protected boolean faceDown;
     protected boolean attacking;
     protected int blocking;
     // number of creatures the permanent can block
@@ -99,6 +101,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected List<UUID> dealtDamageByThisTurn;
     protected UUID attachedTo;
     protected UUID pairedCard;
+    protected Counters counters;
     protected List<Counter> markedDamage;
     protected int timesLoyaltyUsed = 0;
 
@@ -108,12 +111,14 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         super(ownerId, name);
         this.originalControllerId = controllerId;
         this.controllerId = controllerId;
+        this.counters = new Counters();
     }
 
     public PermanentImpl(UUID id, UUID ownerId, UUID controllerId, String name) {
         super(id, ownerId, name);
         this.originalControllerId = controllerId;
         this.controllerId = controllerId;
+        this.counters = new Counters();
     }
 
     public PermanentImpl(final PermanentImpl permanent) {
@@ -134,6 +139,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         for (Map.Entry<String, List<UUID>> entry: permanent.connectedCards.entrySet()) {
             this.connectedCards.put(entry.getKey(), entry.getValue());
         }
+        this.counters = permanent.counters.copy();
         if (permanent.dealtDamageByThisTurn != null) {
             dealtDamageByThisTurn = new ArrayList<>(permanent.dealtDamageByThisTurn);
             if (permanent.markedDamage != null) {
@@ -189,6 +195,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public void setControllerId(UUID controllerId) {
+        this.controllerId = controllerId;
+        abilities.setControllerId(controllerId);
+    }
+
+    @Override
     @Deprecated
     public void addAbility(Ability ability) {
         throw new UnsupportedOperationException("Unsupported operation: use addAbility(Ability ability, Game game) instead");
@@ -225,6 +237,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         // remove gained triggered abilities
         game.getState().resetTriggersForSourceId(this.getId());
     }
+    
+    @Override
+    public Counters getCounters() {
+        return counters;
+    }
+
+    @Override
+    public void addCounters(String name, int amount, Game game) {
+        addCounters(name, amount, game, null);
+    }
 
     @Override
     public void addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects) {
@@ -240,6 +262,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 }
             }
         }
+    }
+
+    @Override
+    public void addCounters(Counter counter, Game game) {
+        addCounters(counter, game, null);
     }
 
     @Override
@@ -270,6 +297,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             game.fireEvent(event);
         }
     }
+    
+    @Override
+    public void removeCounters(Counter counter, Game game) {
+        removeCounters(counter.getName(), counter.getCount(), game);
+    }
+
     @Override
     public int getTurnsOnBattlefield() {
         return turnsOnBattlefield;
@@ -1040,6 +1073,46 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public void setFaceDown(boolean value, Game game) {
+        faceDown = value;
+        //game.getState().getCardState(objectId).setFaceDown(value);
+    }
+
+    @Override
+    public boolean isFaceDown(Game game) {
+        return faceDown;
+    }
+
+    @Override
+    public boolean turnFaceUp(Game game, UUID playerId) {
+        GameEvent event = GameEvent.getEvent(GameEvent.EventType.TURNFACEUP, getId(), playerId);
+        if (!game.replaceEvent(event)) {
+            setFaceDown(false, game);
+            //game.getCard(objectId).setFaceDown(false); // Another instance?
+            for (Ability ability :abilities) { // abilities that were set to not visible face down must be set to visible again
+                if (ability.getWorksFaceDown() && !ability.getRuleVisible()) {
+                    ability.setRuleVisible(true);
+                }
+            }
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TURNEDFACEUP, getId(), playerId));
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean turnFaceDown(Game game, UUID playerId) {
+        GameEvent event = GameEvent.getEvent(GameEvent.EventType.TURNFACEDOWN, getId(), playerId);
+        if (!game.replaceEvent(event)) {
+            setFaceDown(true, game);
+            //game.getCard(objectId).setFaceDown(true); // Another instance?
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TURNEDFACEDOWN, getId(), playerId));
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public boolean imprint(UUID imprintedCard, Game game) {
         if (connectedCards.containsKey("imprint")) {
             this.connectedCards.get("imprint").add(imprintedCard);
@@ -1112,7 +1185,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public String getLogName() {
         if (name.isEmpty()) {
-            if (isFaceDown()) {
+            if (faceDown) {
                 return "face down creature";
             } else {
                 return "a creature without name";

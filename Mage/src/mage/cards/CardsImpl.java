@@ -101,13 +101,13 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
         this.remove(card.getId());
     }
 
-    @Override
-    public void setOwner(UUID ownerId, Game game) {
-        this.ownerId = ownerId;
-        for (UUID card: this) {
-            game.getCard(card).setOwnerId(ownerId);
-        }
-    }
+//    @Override
+//    public void setOwner(UUID ownerId, Game game) {
+//        this.ownerId = ownerId;
+//        for (UUID card: this) {
+//            game.getCard(card).setOwnerId(ownerId);
+//        }
+//    }
 
     @Override
     public Card getRandom(Game game) {

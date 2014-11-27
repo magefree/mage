@@ -39,6 +39,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
+import mage.game.CardState;
 import mage.game.Game;
 import mage.watchers.Watcher;
 
@@ -46,37 +47,41 @@ public interface Card extends MageObject {
 
     UUID getOwnerId();
     int getCardNumber();
-    void setCardNumber(int cid);
+    //void setCardNumber(int cid);
     Rarity getRarity();
-    void setRarity(Rarity rarity);
-    void setControllerId(UUID controllerId);
-    void setOwnerId(UUID ownerId);
-    void addAbility(Ability ability);
-    void addWatcher(Watcher watcher);
+    //void setRarity(Rarity rarity);
+    //void setControllerId(UUID controllerId);
+    //void setOwnerId(UUID ownerId);
+    //void addAbility(Ability ability);
+    //void addWatcher(Watcher watcher);
     SpellAbility getSpellAbility();
-    List<String> getRules();
+    List<String> getRules(); // gets base card rules
+    List<String> getRules(Game game);  // gets card rules + in game modifications
     List<Watcher> getWatchers();
     String getExpansionSetCode();
     String getTokenSetCode();
-    void setExpansionSetCode(String expansionSetCode);
-    void setFaceDown(boolean value);
-    boolean isFaceDown();
+//    void setExpansionSetCode(String expansionSetCode);
+    
+//    CardState getState(Game game);
+    void setFaceDown(boolean value, Game game);
+    boolean isFaceDown(Game game);
     boolean turnFaceUp(Game game, UUID playerId);
     boolean turnFaceDown(Game game, UUID playerId);
+    
     boolean isFlipCard();
     String getFlipCardName();
-    void setFlipCard(boolean flipCard);
-    void setFlipCardName(String flipCardName);
+    //void setFlipCard(boolean flipCard);
+    //void setFlipCardName(String flipCardName);
     boolean isSplitCard();
 
     boolean canTransform();
     Card getSecondCardFace();
-    void setSecondCardFace(Card card);
+    //void setSecondCardFace(Card card);
     boolean isNightCard();
 
-    void assignNewId();
+    //void assignNewId();
 
-    void addInfo(String key, String value);
+    void addInfo(String key, String value, Game game);
 
     /**
      * Moves the card to the specified zone
@@ -116,13 +121,13 @@ public interface Card extends MageObject {
 
     void build();
 
-    void setUsesVariousArt(boolean usesVariousArt);
+    //void setUsesVariousArt(boolean usesVariousArt);
     /**
      *
      * @return true if there exists various art images for this card
      */
     boolean getUsesVariousArt();
-    Counters getCounters();
+    Counters getCounters(Game game);
 
     void addCounters(String name, int amount, Game game);
     void addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects);
@@ -132,7 +137,7 @@ public interface Card extends MageObject {
     void removeCounters(String name, int amount, Game game);
     void removeCounters(Counter counter, Game game);
     
-    void setMorphCard(boolean morphCard);
+    //void setMorphCard(boolean morphCard);
     boolean isMorphCard();
 
     @Override

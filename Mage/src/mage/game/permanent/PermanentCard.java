@@ -116,7 +116,7 @@ public class PermanentCard extends PermanentImpl {
         this.flipCard = card.isFlipCard();
         this.flipCardName = card.getFlipCardName();
         this.morphCard = card.isMorphCard();
-        this.faceDown = card.isFaceDown();
+//        this.faceDown = card.isFaceDown();
     }
 
     public Card getCard() {
@@ -132,9 +132,9 @@ public class PermanentCard extends PermanentImpl {
         Zone fromZone = game.getState().getZone(objectId);        
         Player controller = game.getPlayer(controllerId);
         if (controller != null && controller.removeFromBattlefield(this, game)) {
-            if (isFaceDown() && isMorphCard()) {
-                setFaceDown(false);
-                game.getCard(this.getId()).setFaceDown(false); //TODO: Do this in a better way
+            if (isFaceDown(game) && isMorphCard()) {
+                setFaceDown(false, game);
+                //game.getCard(this.getId()).setFaceDown(false); //TODO: Do this in a better way
             }
             ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, controllerId, fromZone, toZone, appliedEffects);
             if (!game.replaceEvent(event)) {
@@ -183,9 +183,9 @@ public class PermanentCard extends PermanentImpl {
     @Override
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
-        if (isMorphCard() && isFaceDown()) {
-            setFaceDown(false);
-            game.getCard(this.getId()).setFaceDown(false); //TODO: Do this in a better way
+        if (isMorphCard() && isFaceDown(game)) {
+            setFaceDown(false, game);
+            //game.getCard(this.getId()).setFaceDown(false); //TODO: Do this in a better way
         }
         Player controller = game.getPlayer(controllerId);
         if (controller != null && controller.removeFromBattlefield(this, game)) {
@@ -214,23 +214,23 @@ public class PermanentCard extends PermanentImpl {
         return this.maxLevelCounters;
     }
 
-    @Override
-    public boolean turnFaceUp(Game game, UUID playerId) {
-        if (super.turnFaceUp(game, playerId)) {
-            card.setFaceDown(false);
-            return true;
-        }
-        return false;
-    }
+//    @Override
+//    public boolean turnFaceUp(Game game, UUID playerId) {
+//        if (super.turnFaceUp(game, playerId)) {
+//            card.setFaceDown(false);
+//            return true;
+//        }
+//        return false;
+//    }
 
-    @Override
-    public boolean turnFaceDown(Game game, UUID playerId) {
-        if (super.turnFaceDown(game, playerId)) {
-            card.setFaceDown(true);
-            return true;
-        }
-        return false;
-    }
+//    @Override
+//    public boolean turnFaceDown(Game game, UUID playerId) {
+//        if (super.turnFaceDown(game, playerId)) {
+//            card.setFaceDown(true);
+//            return true;
+//        }
+//        return false;
+//    }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
@@ -247,12 +247,12 @@ public class PermanentCard extends PermanentImpl {
         card.adjustChoices(ability, game);
     }
 
-    @Override
-    public void setFaceDown(boolean value) {
-        super.setFaceDown(value);
-        if (card != null) {
-            card.setFaceDown(value);
-        }   
-    }
+//    @Override
+//    public void setFaceDown(boolean value) {
+//        super.setFaceDown(value);
+//        if (card != null) {
+//            card.setFaceDown(value);
+//        }   
+//    }
     
 }

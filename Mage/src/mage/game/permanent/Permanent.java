@@ -35,11 +35,14 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.Zone;
+import mage.counters.Counter;
+import mage.counters.Counters;
 import mage.game.Controllable;
 import mage.game.Game;
 
 public interface Permanent extends Card, Controllable {
 
+    void setControllerId(UUID controllerId);
     boolean isTapped();
     boolean untap(Game game);
     boolean tap(Game game);
@@ -69,6 +72,8 @@ public interface Permanent extends Card, Controllable {
 
     boolean isMonstrous();
     void setMonstrous(boolean value);
+    
+    Counters getCounters();
 
     List<UUID> getAttachments();
     UUID getAttachedTo();
@@ -108,7 +113,6 @@ public interface Permanent extends Card, Controllable {
     String getValue();
 
     @Deprecated
-    @Override
     void addAbility(Ability ability);
     @Deprecated
     void addAbility(Ability ability, Game game);

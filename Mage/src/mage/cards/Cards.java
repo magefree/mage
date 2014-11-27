@@ -41,7 +41,7 @@ public interface Cards extends Set<UUID>, Serializable {
     void add(Card card);
     Card get(UUID cardId, Game game);
     void remove(Card card);
-    void setOwner(UUID ownerId, Game game);
+//    void setOwner(UUID ownerId, Game game);
     void addAll(List<Card> createCards);
     Set<Card> getCards(Game game);
     Set<Card> getCards(FilterCard filter, Game game);
