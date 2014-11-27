@@ -19,6 +19,12 @@ public class GuiDisplayUtil {
     private static final Insets DEFAULT_INSETS = new Insets(0, 0, 70, 25);
     private static final Insets COMPONENT_INSETS = new Insets(0, 0, 40, 40);
 
+    public static class TextLines {
+        
+        public int basicTextLength;
+        public ArrayList<String> lines;
+    }
+
     public static JXPanel getDescription(CardView card, int width, int height) {
         JXPanel descriptionPanel = new JXPanel();
 
@@ -40,8 +46,9 @@ public class GuiDisplayUtil {
         cardText.setFont(cardNameFont);
         cardText.setVerticalAlignment(SwingConstants.TOP);
         j.add(cardText);
-       
-        cardText.setText(getRulefromCardView(card).toString());
+
+        TextLines textLines = GuiDisplayUtil.getTextLinesfromCardView(card);
+        cardText.setText(getRulefromCardView(card, textLines).toString());
 
         descriptionPanel.add(j);
 
@@ -100,27 +107,17 @@ public class GuiDisplayUtil {
 
         return l;
     }
-    
-    public static StringBuilder getRulefromCardView(CardView card) {
-        String manaCost = "";
-        for (String m : card.getManaCost()) {
-            manaCost += m;
+
+    public static TextLines getTextLinesfromCardView(CardView card) {
+        TextLines textLines = new TextLines();
+        textLines.lines = new ArrayList<>(card.getRules());
+        for (String rule: card.getRules()) {
+            textLines.basicTextLength +=rule.length();
         }
-        String castingCost = UI.getDisplayManaCost(manaCost);
-        castingCost = ManaSymbols.replaceSymbolsWithHTML(castingCost, ManaSymbols.Type.CARD);
-
-        int symbolCount = 0;
-        int offset = 0;
-        while ((offset = castingCost.indexOf("<img", offset) + 1) != 0) {
-            symbolCount++;
-        }
-
-        
-        ArrayList<String> rulings = new ArrayList<>(card.getRules());
-
         if (card.getMageObjectType().equals(MageObjectType.PERMANENT)) {
             if (card.getPairedCard() != null) {
-                rulings.add("<span color='green'><i>Paired with another creature</i></span>");
+                textLines.lines.add("<span color='green'><i>Paired with another creature</i></span>");
+                textLines.basicTextLength += 30;
             }
         }
         if (card.getMageObjectType().canHaveCounters()) {
@@ -128,7 +125,7 @@ public class GuiDisplayUtil {
             if (card instanceof PermanentView) {
                 if (((PermanentView) card).getCounters() != null) {
                     counters = new ArrayList<>(((PermanentView) card).getCounters());
-                }                
+                }
             } else {
                 if (card.getCounters() != null) {
                     counters = new ArrayList<>(card.getCounters());
@@ -148,14 +145,32 @@ public class GuiDisplayUtil {
                         index++;
                     }
                 }
-                rulings.add(sb.toString());
+                textLines.lines.add(sb.toString());
+                textLines.basicTextLength += 50;
             }
         }
         if (card.getMageObjectType().isPermanent() && card instanceof PermanentView) {
             int damage = ((PermanentView)card).getDamage();
             if (damage > 0) {
-                rulings.add("<span color='red'><b>Damage dealt:</b> " + damage + "</span>");
+                textLines.lines.add("<span color='red'><b>Damage dealt:</b> " + damage + "</span>");
+                textLines.basicTextLength += 50;
             }
+        }
+        return textLines;
+    }
+
+    public static StringBuilder getRulefromCardView(CardView card, TextLines textLines) {
+        String manaCost = "";
+        for (String m : card.getManaCost()) {
+            manaCost += m;
+        }
+        String castingCost = UI.getDisplayManaCost(manaCost);
+        castingCost = ManaSymbols.replaceSymbolsWithHTML(castingCost, ManaSymbols.Type.CARD);
+
+        int symbolCount = 0;
+        int offset = 0;
+        while ((offset = castingCost.indexOf("<img", offset) + 1) != 0) {
+            symbolCount++;
         }
 
         int fontSize = 11;
@@ -210,7 +225,7 @@ public class GuiDisplayUtil {
         if (CardUtil.isCreature(card)) {
             pt = card.getPower() + "/" + card.getToughness();
         } else if (CardUtil.isPlaneswalker(card)) {
-            pt = card.getLoyalty().toString();
+            pt = card.getLoyalty();
         }
 
         buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%' valign='bottom'><tr><td><b>");
@@ -257,10 +272,10 @@ public class GuiDisplayUtil {
                 }
             }
         }
-        if (rulings.size() > 0) {
-            for (String ruling : rulings) {
-                if (ruling != null && !ruling.replace(".", "").trim().isEmpty()) {
-                    rule.append("<p style='margin: 2px'>").append(ruling).append("</p>");
+        if (textLines.lines.size() > 0) {
+            for (String textLine : textLines.lines) {
+                if (textLine != null && !textLine.replace(".", "").trim().isEmpty()) {
+                    rule.append("<p style='margin: 2px'>").append(textLine).append("</p>");
                 }
             }                        
         }
