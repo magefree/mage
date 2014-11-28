@@ -105,7 +105,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
     protected static final String REMINDER_TEXT = "<i>(You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)</i>";
     protected String ruleText;
     protected AlternativeCost2Impl alternateCosts = new AlternativeCost2Impl(ABILITY_KEYWORD, REMINDER_TEXT, new GenericManaCost(3));
-
+    protected Costs<Cost> morphCosts;
     // needed to check activation status, if card changes zone after casting it
     private   int zoneChangeCounter = 0;
 
@@ -115,6 +115,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
 
     public MorphAbility(Card card, Costs<Cost> morphCosts) {
         super(Zone.HAND, null);
+        this.morphCosts = morphCosts;
         card.setMorphCard(true);
         this.setWorksFaceDown(true);
         name = ABILITY_KEYWORD;
@@ -141,6 +142,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
        this.zoneChangeCounter = ability.zoneChangeCounter;
        this.ruleText = ability.ruleText;
        this.alternateCosts = ability.alternateCosts.copy();
+       this.morphCosts = ability.morphCosts; // can't be changed
     }
 
     private static Costs<Cost> createCosts(Cost cost) {
@@ -157,6 +159,10 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
     public void resetMorph() {
         alternateCosts.reset();        
         zoneChangeCounter = 0;
+    }
+
+    public Costs<Cost> getMorphCosts() {
+        return morphCosts;
     }
 
     @Override
@@ -267,7 +273,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
 
 /**
  * This effect lets the creature always be a 2/2 face-down creature, with no text,
- * no name, no subtypes, and no mana cost, if it's fac down on the battlefield.
+ * no name, no subtypes, and no mana cost, if it's face down on the battlefield.
  * And it adds the MorphTurnFaceUpAbility ability.
  * TODO: Check if it's better to create this effect always as a creature on the battelfield turns face down or
  * a creature enters the battlefield face down. Then the effect could be removed as the permanent turns face up.

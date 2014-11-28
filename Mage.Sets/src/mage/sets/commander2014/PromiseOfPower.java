@@ -120,6 +120,7 @@ class PromiseOfPowerHorrorToken extends Token {
 
     public PromiseOfPowerHorrorToken(int xValue) {
         super("Horror", "X/X black Horror creature token with flying");
+        setOriginalExpansionSetCode("C14");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add("Horror");

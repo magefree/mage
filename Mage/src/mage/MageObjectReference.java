@@ -120,4 +120,12 @@ public class MageObjectReference implements Comparable<MageObjectReference> {
         return mageObject.getId().equals(sourceId);
     }
 
+    public Permanent getPermanent(Game game) {
+        Permanent permanent = game.getPermanent(sourceId);
+        if (permanent != null && permanent.getZoneChangeCounter() == zoneChangeCounter) {
+            return permanent;
+        }
+        return null;
+    }
+
 }

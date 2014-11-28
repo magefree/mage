@@ -145,6 +145,7 @@ class SpoilsOfBloodHorrorToken extends Token {
     
     public SpoilsOfBloodHorrorToken(int xValue) {
         super("Horror", "X/X black Horror creature token");
+        setOriginalExpansionSetCode("C14");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add("Horror");
