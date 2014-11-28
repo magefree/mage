@@ -714,10 +714,10 @@ public abstract class PlayerImpl implements Player, Serializable {
             701.7c If a card is discarded, but an effect causes it to be put into a hidden zone
                    instead of into its owners graveyard without being revealed, all values of that
                    cards characteristics are considered to be undefined.
-                   TODOD:
-                   If a card is discarded this way to pay a cost that specifies a characteristic
-                   about the discarded card, that cost payment is illegal; the game returns to
-                   the moment before the cost was paid (see rule 717, "Handling Illegal Actions").
+               TODO:
+               If a card is discarded this way to pay a cost that specifies a characteristic
+               about the discarded card, that cost payment is illegal; the game returns to
+               the moment before the cost was paid (see rule 717, "Handling Illegal Actions").
         */
         if (card != null) {
             // write info to game log first so game log infos from triggered or replacement effects follow in the game log

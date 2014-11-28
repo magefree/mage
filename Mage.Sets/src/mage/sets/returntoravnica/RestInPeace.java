@@ -28,11 +28,6 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,7 +35,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -109,19 +108,22 @@ class RestInPeaceExileAllEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getPlayerList()) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                for (UUID cid : player.getGraveyard().copy()) {
-                    Card c = game.getCard(cid);
-                    if (c != null) {
-                        c.moveToExile(null, null, source.getSourceId(), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (UUID playerId : controller.getInRange()) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    for (UUID cid : player.getGraveyard().copy()) {
+                        Card card = game.getCard(cid);
+                        if (card != null) {
+                            controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD);
+                        }
                     }
                 }
-
             }
+            return true;
         }
-        return true;
+        return false;
     }
 }
 
@@ -148,16 +150,20 @@ class RestInPeaceReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if (((ZoneChangeEvent)event).getFromZone() == Zone.BATTLEFIELD) {
-            Permanent permanent = ((ZoneChangeEvent)event).getTarget();
-            if (permanent != null) {
-                return permanent.moveToExile(null, "", source.getSourceId(), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            if (((ZoneChangeEvent)event).getFromZone() == Zone.BATTLEFIELD) {
+                Permanent permanent = ((ZoneChangeEvent)event).getTarget();
+                if (permanent != null) {
+                    return controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD);
+                }
             }
-        }
-        else {
-            Card card = game.getCard(event.getTargetId());
-            if (card != null) {
-                return card.moveToExile(null, "", source.getSourceId(), game);
+            else {
+                Card card = game.getCard(event.getTargetId());
+                if (card != null) {
+                    ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+                    return controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, zEvent.getFromZone());
+                }
             }
         }
         return false;

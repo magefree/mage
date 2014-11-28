@@ -118,7 +118,6 @@ class ObstinateBalothEffect extends ReplacementEffectImpl {
             Player owner = game.getPlayer(card.getOwnerId());
             if (owner != null) {                
                 if (owner.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId())) {
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, card.getId(), source.getSourceId(), owner.getId()));
                     return true;
                 }
             }

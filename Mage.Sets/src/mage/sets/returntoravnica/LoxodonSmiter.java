@@ -117,7 +117,6 @@ class LoxodonSmiterEffect extends ReplacementEffectImpl {
             Player player = game.getPlayer(card.getOwnerId());
             if (player != null) {
                 if (card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), player.getId())) {
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, card.getId(), source.getSourceId(), player.getId()));
                     return true;
                 }
             }
