@@ -30,7 +30,6 @@ package mage.sets.khansoftarkir;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.combat.BlocksIfAbleTargetEffect;
 import mage.abilities.effects.common.combat.MustBeBlockedByTargetSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -78,7 +77,7 @@ public class AvalancheTusker extends CardImpl {
 class AvalancheTuskerAbility extends TriggeredAbilityImpl {
 
     public AvalancheTuskerAbility() {
-        super(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(Duration.EndOfCombat), true);
+        super(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(Duration.EndOfCombat), false);
     }
 
     public AvalancheTuskerAbility(final AvalancheTuskerAbility ability) {
