@@ -69,7 +69,7 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
         if (container == null) {
             return;
         }
-        boolean makeBig = (rules > 5 || ruleLength > 450);
+        boolean makeBig = (rules > 5 || ruleLength > 350);
         if (makeBig && type == 0) {
             type = 1;
             container.setSize(
