@@ -88,7 +88,10 @@ public class PermanentToken extends PermanentImpl {
         if (!game.replaceEvent(new ZoneChangeEvent(this, this.getControllerId(), Zone.BATTLEFIELD, zone))) {
             game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
             if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
+                game.setZone(objectId, zone); // needed for triggered dies abilities
                 game.fireEvent(new ZoneChangeEvent(this, this.getControllerId(), Zone.BATTLEFIELD, zone));
+                game.getState().resetTriggersForSourceId(this.getId());// if token is gone triggered abilities no longer needed
+                game.getState().getContinuousEffects().removeGainedEffectsForSource(this.getId());
                 return true;
             }
         }
@@ -116,4 +119,14 @@ public class PermanentToken extends PermanentImpl {
         return new PermanentToken(this);
     }
 
+    @Override
+    public void addAbility(Ability ability, Game game) {
+        if (!abilities.containsKey(ability.getId())) {
+            Ability copyAbility = ability.copy();
+            copyAbility.setControllerId(controllerId);
+            copyAbility.setSourceId(objectId);
+            game.getState().addAbility(copyAbility, this.getId(), this);
+            abilities.add(copyAbility);
+        }
+    }
 }
