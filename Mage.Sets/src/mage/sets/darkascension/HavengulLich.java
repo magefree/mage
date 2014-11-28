@@ -115,9 +115,16 @@ class HavengulLichPlayEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return source.getControllerId().equals(affectedControllerId) 
-                && targetPointer.getFirst(game, source).equals(objectId) 
-                && game.getState().getZone(objectId) == Zone.GRAVEYARD;
+        UUID targetId = getTargetPointer().getFirst(game, source);
+        if (targetId != null) {
+            return targetId.equals(objectId) &&
+                source.getControllerId().equals(affectedControllerId) &&
+                Zone.GRAVEYARD.equals(game.getState().getZone(objectId));
+        } else {
+            // the target card has changed zone meanwhile, so the effect is no longer needed
+            discard();
+            return false;
+        }
     }
 }
 
@@ -135,7 +142,7 @@ class HavengulLichPlayedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        DelayedTriggeredAbility ability = new HavengulLichDelayedTriggeredAbility(targetPointer.getFirst(game, source));
+        DelayedTriggeredAbility ability = new HavengulLichDelayedTriggeredAbility(getTargetPointer().getFirst(game, source));
         ability.setSourceId(source.getSourceId());
         ability.setControllerId(source.getControllerId());
         game.addDelayedTriggeredAbility(ability);
