@@ -703,10 +703,16 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                 try {
                     tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
                     flippedAngle = isFlipped() ? CardPanel.FLIPPED_ANGLE : 0;
+                    BufferedImage srcImage;
                     if (gameCard.isFaceDown()) {
-                        return;
+                        if (gameCard.isMorphCard()) {
+                            srcImage = ImageCache.getMorphImage();
+                        } else {
+                            srcImage = ImageCache.loadImage(new TFile(DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename));
+                        }
+                    } else {
+                        srcImage = ImageCache.getThumbnail(gameCard);
                     }
-                    BufferedImage srcImage = ImageCache.getThumbnail(gameCard);
                     if (srcImage != null) {
                         hasImage = true;
                         setText(gameCard);

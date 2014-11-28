@@ -128,7 +128,7 @@ public class CardView extends SimpleCardView {
      *
      * @param card
      * @param cardId
-     * @param controlled is the card view created for the card controller - used for morph cards to know which player may see information for the card
+     * @param controlled is the card view created for the card controller - used for morph / face down cards to know which player may see information for the card
      */
     public CardView(Card card, UUID cardId, boolean controlled) {
         super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown(), card.getUsesVariousArt(), card.getTokenSetCode());
@@ -151,9 +151,17 @@ public class CardView extends SimpleCardView {
                     return;
                 }
             } else {
-                this.fillEmpty(card, false);
-                this.hideInfo = true;
-                return;
+                
+                if (card instanceof Permanent) {
+                    this.fillEmpty(card, controlled);
+                    this.power = Integer.toString(card.getPower().getValue());
+                    this.toughness = Integer.toString(card.getToughness().getValue());
+                    this.cardTypes = card.getCardType();
+                } else {
+                    this.fillEmpty(card, false);
+                    this.hideInfo = true;
+                    return;
+                }
             }
         }
 

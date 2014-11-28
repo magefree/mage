@@ -111,27 +111,33 @@ public class PermanentView extends CardView {
            this.nameOwner = ""; 
         }
         
-        if (permanent.isFaceDown() && permanent.isMorphCard()) {
-            // add morph rule text
-            if (card != null) {
-                if (controlled) {
-                    for (Ability permanentAbility : permanent.getAbilities()) {
-                        if (permanentAbility instanceof TurnFaceUpAbility && !permanentAbility.getRuleVisible()) {
-                            this.rules.add(permanentAbility.getRule(true));
+        if (permanent.isFaceDown()) {
+            if (permanent.isMorphCard()){
+                // add morph rule text
+                if (card != null) {
+                    if (controlled) {
+                        for (Ability permanentAbility : permanent.getAbilities()) {
+                            if (permanentAbility instanceof TurnFaceUpAbility && !permanentAbility.getRuleVisible()) {
+                                this.rules.add(permanentAbility.getRule(true));
+                            }
+                            if (permanentAbility.getWorksFaceDown()) {
+                                this.rules.add(permanentAbility.getRule());
+                            }
                         }
-                        if (permanentAbility.getWorksFaceDown()) {
-                            this.rules.add(permanentAbility.getRule());
-                        }
+                        this.name = card.getName();
+                        this.expansionSetCode = card.getExpansionSetCode();
+                        this.cardNumber = card.getCardNumber();
+                    } else {
+                        this.rules.add("If the controller has priority, he or she may turn this permanent face up." +
+                            " This is a special action; it doesnt use the stack. To do this he or she pays the morph costs," +
+                            " then turns this permanent face up.");
                     }
+                }                
+            } else{
+                if (controlled && card != null) {
                     this.name = card.getName();
-                    this.expansionSetCode = card.getExpansionSetCode();
-                    this.cardNumber = card.getCardNumber();
-                } else {
-                    this.rules.add("If the controller has priority, he or she may turn this permanent face up." +
-                        " This is a special action; it doesnt use the stack. To do this he or she pays the morph costs," +
-                        " then turns this permanent face up.");
-                }
-
+                    this.displayName = card.getName();
+                }                
             }
         }
         
