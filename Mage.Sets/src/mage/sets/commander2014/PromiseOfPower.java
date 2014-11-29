@@ -28,7 +28,6 @@
 package mage.sets.commander2014;
 
 import java.util.UUID;
-import static javafx.scene.paint.Color.color;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
