@@ -32,6 +32,8 @@ import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 
 /**
  *
@@ -64,4 +66,17 @@ public class DiesTriggeredAbility extends ZoneChangeTriggeredAbility {
     public DiesTriggeredAbility copy() {
         return new DiesTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (super.checkTrigger(event, game)) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+            for (Effect effect: getEffects()) {
+                effect.setValue("diedPermanent", zEvent.getTarget());
+            }
+            return true;
+        }
+        return false;
+    }
+
 }

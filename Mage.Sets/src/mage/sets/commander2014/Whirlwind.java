@@ -25,53 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.sets.commander2014;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
+import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterArtifactCard;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class SharuumTheHegemon extends CardImpl {
+public class Whirlwind extends CardImpl {
 
-    public SharuumTheHegemon(UUID ownerId) {
-        super(ownerId, 194, "Sharuum the Hegemon", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{W}{U}{B}");
-        this.expansionSetCode = "ALA";
-        this.supertype.add("Legendary");
-        this.subtype.add("Sphinx");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with flying");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-
-        // When Sharuum the Hegemon enters the battlefield, you may return target artifact card from your graveyard to the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), true);
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard")));
-        this.addAbility(ability);
+    static {
+        filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public SharuumTheHegemon(final SharuumTheHegemon card) {
+    public Whirlwind(UUID ownerId) {
+        super(ownerId, 224, "Whirlwind", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
+        this.expansionSetCode = "C14";
+
+        this.color.setGreen(true);
+
+        // Destroy all creatures with flying.
+        this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
+    }
+
+    public Whirlwind(final Whirlwind card) {
         super(card);
     }
 
     @Override
-    public SharuumTheHegemon copy() {
-        return new SharuumTheHegemon(this);
+    public Whirlwind copy() {
+        return new Whirlwind(this);
     }
 }

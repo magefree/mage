@@ -61,7 +61,7 @@ public class VileRequiem extends CardImpl {
     static {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
-    private UUID originalId;
+    private final UUID originalId;
 
     public VileRequiem(UUID ownerId) {
         super(ownerId, 167, "Vile Requiem", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");

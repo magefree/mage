@@ -25,54 +25,66 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.sets.commander2014;
 
 import java.util.UUID;
+import mage.abilities.common.AsEntersBattlefieldAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.RevealTargetFromHandCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.keyword.HasteAbility;
+import mage.abilities.mana.RedManaAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.HasteAbility;
-import mage.cards.CardImpl;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class BattleRampart extends CardImpl {
+public class FlamekinVillage extends CardImpl {
 
-    public BattleRampart(UUID ownerId) {
-        super(ownerId, 135, "Battle Rampart", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "ROE";
-        this.subtype.add("Wall");
+    private static final FilterCard filter = new FilterCard("an Elemental card from your hand");
 
-        this.color.setRed(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
-
-        // Defender
-        this.addAbility(DefenderAbility.getInstance());
-
-        // {T}: Target creature gains haste until end of turn.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn),
-                new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+    static {
+        filter.add(new SubtypePredicate("Elemental"));
     }
 
-    public BattleRampart(final BattleRampart card) {
+    public FlamekinVillage(UUID ownerId) {
+        super(ownerId, 60, "Flamekin Village", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "C14";
+
+        // As Flamekin Village enters the battlefield, you may reveal an Elemental card from your hand. If you don't, Flamekin Village enters the battlefield tapped.
+        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Merfolk card from your hand. If you don't, {this} enters the battlefield tapped"));
+
+        // {tap}: Add {R} to your mana pool.
+        this.addAbility(new RedManaAbility());
+        
+        // {R}, {tap}: Target creature gains haste until end of turn.
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn),
+                new ManaCostsImpl("{R}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
+
+    }
+
+    public FlamekinVillage(final FlamekinVillage card) {
         super(card);
     }
 
     @Override
-    public BattleRampart copy() {
-        return new BattleRampart(this);
+    public FlamekinVillage copy() {
+        return new FlamekinVillage(this);
     }
 }

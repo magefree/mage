@@ -25,53 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.filter.common.FilterArtifactCard;
-import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class SharuumTheHegemon extends CardImpl {
+public class Whirlwind extends mage.sets.commander2014.Whirlwind {
 
-    public SharuumTheHegemon(UUID ownerId) {
-        super(ownerId, 194, "Sharuum the Hegemon", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{W}{U}{B}");
-        this.expansionSetCode = "ALA";
-        this.supertype.add("Legendary");
-        this.subtype.add("Sphinx");
-
-        this.color.setBlue(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-
-        // When Sharuum the Hegemon enters the battlefield, you may return target artifact card from your graveyard to the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), true);
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard")));
-        this.addAbility(ability);
+    public Whirlwind(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 283;
+        this.expansionSetCode = "USG";
     }
 
-    public SharuumTheHegemon(final SharuumTheHegemon card) {
+    public Whirlwind(final Whirlwind card) {
         super(card);
     }
 
     @Override
-    public SharuumTheHegemon copy() {
-        return new SharuumTheHegemon(this);
+    public Whirlwind copy() {
+        return new Whirlwind(this);
     }
 }

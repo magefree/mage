@@ -25,53 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.sets.commander2014;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continious.SetPowerToughnessTargetEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterArtifactCard;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class SharuumTheHegemon extends CardImpl {
+public class Creeperhulk extends CardImpl {
 
-    public SharuumTheHegemon(UUID ownerId) {
-        super(ownerId, 194, "Sharuum the Hegemon", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{W}{U}{B}");
-        this.expansionSetCode = "ALA";
-        this.supertype.add("Legendary");
-        this.subtype.add("Sphinx");
+    public Creeperhulk(UUID ownerId) {
+        super(ownerId, 42, "Creeperhulk", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+        this.expansionSetCode = "C14";
+        this.subtype.add("Plant");
+        this.subtype.add("Elemental");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
+        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-
-        // When Sharuum the Hegemon enters the battlefield, you may return target artifact card from your graveyard to the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), true);
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard")));
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        // {1}{G}: Until end of turn, target creature you control has base power and toughness 5/5 and gains trample.
+        Effect effect = new SetPowerToughnessTargetEffect(5,5, Duration.EndOfTurn);
+        effect.setText("Until end of turn, target creature you control has base power and toughness 5/5");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{G}"));
+        ability.addTarget(new TargetControlledCreaturePermanent());
+        ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, "and gains Trample"));
         this.addAbility(ability);
+
     }
 
-    public SharuumTheHegemon(final SharuumTheHegemon card) {
+    public Creeperhulk(final Creeperhulk card) {
         super(card);
     }
 
     @Override
-    public SharuumTheHegemon copy() {
-        return new SharuumTheHegemon(this);
+    public Creeperhulk copy() {
+        return new Creeperhulk(this);
     }
 }
