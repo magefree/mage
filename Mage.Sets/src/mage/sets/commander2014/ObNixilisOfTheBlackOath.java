@@ -136,6 +136,7 @@ class ObNixilisDemonToken extends Token {
 
     ObNixilisDemonToken() {
         super("Demon", "5/5 black Demon creature token with flying");
+        setTokenType(1);
         setOriginalExpansionSetCode("C14");
         cardType.add(CardType.CREATURE);
         subtype.add("Demon");

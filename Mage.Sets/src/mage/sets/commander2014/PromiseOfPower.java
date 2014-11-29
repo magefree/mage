@@ -105,7 +105,7 @@ class PromiseOfPowerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            return new CreateTokenEffect(new PromiseOfPowerHorrorToken(controller.getHand().size())).apply(game, source);
+            return new CreateTokenEffect(new PromiseOfPowerDemonToken(controller.getHand().size())).apply(game, source);
         }
         return false;
     }
@@ -116,14 +116,15 @@ class PromiseOfPowerEffect extends OneShotEffect {
     }
 
 }
-class PromiseOfPowerHorrorToken extends Token {
+class PromiseOfPowerDemonToken extends Token {
 
-    public PromiseOfPowerHorrorToken(int xValue) {
-        super("Horror", "X/X black Horror creature token with flying");
+    public PromiseOfPowerDemonToken(int xValue) {
+        super("Demon", "X/X black Demon creature token with flying");
         setOriginalExpansionSetCode("C14");
+        setTokenType(2);
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Horror");
+        subtype.add("Demon");
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
 

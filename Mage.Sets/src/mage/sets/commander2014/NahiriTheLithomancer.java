@@ -154,6 +154,7 @@ class NahiriTheLithomancerKorSoldierToken extends Token {
 
     NahiriTheLithomancerKorSoldierToken() {
         super("Kor Soldier", "1/1 white Kor Soldier creature token");
+        setOriginalExpansionSetCode("C14");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add("Kor");

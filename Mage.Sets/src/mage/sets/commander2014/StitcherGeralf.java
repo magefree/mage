@@ -136,6 +136,7 @@ class StitcherGeralfZombieToken extends Token {
     StitcherGeralfZombieToken(int xValue) {
         super("Zombie", "an X/X blue Zombie creature token");
         setOriginalExpansionSetCode("C14");
+        setTokenType(1);
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add("Zombie");

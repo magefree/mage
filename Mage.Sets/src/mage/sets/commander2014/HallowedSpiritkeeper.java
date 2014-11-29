@@ -31,13 +31,14 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import static mage.filter.predicate.permanent.ControllerControlsIslandPredicate.filter;
-import mage.game.permanent.token.SpiritToken;
+import mage.game.permanent.token.Token;
 
 /**
  *
@@ -58,7 +59,9 @@ public class HallowedSpiritkeeper extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // When Hallowed Spiritkeeper dies, put X 1/1 white Spirit creature tokens with flying onto the battlefield, where X is the number of creature cards in your graveyard.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SpiritToken(), new CardsInControllerGraveyardCount()), false));
+        Effect effect = new CreateTokenEffect(new HallowedSpiritkeeperSpiritToken(), new CardsInControllerGraveyardCount());
+        effect.setText("put X 1/1 white Spirit creature tokens with flying onto the battlefield, where X is the number of creature cards in your graveyard");
+        this.addAbility(new DiesTriggeredAbility(effect, false));
 
     }
 
@@ -69,5 +72,21 @@ public class HallowedSpiritkeeper extends CardImpl {
     @Override
     public HallowedSpiritkeeper copy() {
         return new HallowedSpiritkeeper(this);
+    }
+}
+
+class HallowedSpiritkeeperSpiritToken extends Token {
+
+    public HallowedSpiritkeeperSpiritToken() {
+        super("Spirit", "1/1 white Spirit creature token with flying");
+        setOriginalExpansionSetCode("C14");
+        cardType.add(CardType.CREATURE);
+        color.setWhite(true);
+        subtype.add("Spirit");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+
+        addAbility(FlyingAbility.getInstance());
+
     }
 }

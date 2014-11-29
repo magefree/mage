@@ -61,7 +61,7 @@ public class DecreeOfJustice extends CardImpl {
         this.color.setWhite(true);
 
         // Put X 4/4 white Angel creature tokens with flying onto the battlefield.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new AngelToken(), new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new AngelToken("C14"), new ManacostVariableValue()));
         
         // Cycling {2}{W}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{W}")));

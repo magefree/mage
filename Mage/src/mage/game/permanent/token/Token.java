@@ -50,7 +50,7 @@ import mage.util.CardUtil;
 public class Token extends MageObjectImpl {
 
     protected String description;
-    private ArrayList<UUID> lastAddedTokenIds = new ArrayList<>();
+    private final ArrayList<UUID> lastAddedTokenIds = new ArrayList<>();
     private UUID lastAddedTokenId;
     private int tokenType;
     private int originalCardNumber;

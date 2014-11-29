@@ -44,6 +44,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.game.permanent.token.Token;
 import mage.game.permanent.token.ZombieToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -72,7 +73,9 @@ public class GhoulcallerGisa extends CardImpl {
 
         // {B}, {tap}, Sacrifice another creature: Put X 2/2 black Zombie creature tokens onto the battlefield, where X is the sacrificed creature's power.
         DynamicValue xValue = new SacrificeCostCreaturesPower();
-        Effect effect = new CreateTokenEffect(new ZombieToken("C14"), xValue);
+        Token zombie = new ZombieToken("C14");
+        zombie.setTokenType(2);
+        Effect effect = new CreateTokenEffect(zombie, xValue);
         effect.setText("Put X 2/2 black Zombie creature tokens onto the battlefield, where X is the sacrificed creature's power");
         Ability ability  = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{B}"));
         ability.addCost(new TapSourceCost());

@@ -43,6 +43,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
+import mage.game.permanent.token.Token;
 import mage.game.permanent.token.ZombieToken;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -75,7 +76,9 @@ public class OverseerOfTheDamned extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // Whenever a nontoken creature an opponent controls dies, put a 2/2 black Zombie creature token onto the battlefield tapped.
-        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new ZombieToken("C14"), 1, true, false), false, filter));
+        Token zombie = new ZombieToken("C14");
+        zombie.setTokenType(2);
+        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(zombie, 1, true, false), false, filter));
 
     }
 

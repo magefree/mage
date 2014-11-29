@@ -53,10 +53,12 @@ public class WurmcoilEngine extends CardImpl {
         this.subtype.add("Wurm");
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
+
+        
         this.addAbility(DeathtouchAbility.getInstance());
         this.addAbility(LifelinkAbility.getInstance());
-        Ability ability = new DiesTriggeredAbility(new CreateTokenEffect(new Wurm1Token()), false);
-        ability.addEffect(new CreateTokenEffect(new Wurm2Token()));
+        Ability ability = new DiesTriggeredAbility(new CreateTokenEffect(new Wurm1Token(expansionSetCode)), false);
+        ability.addEffect(new CreateTokenEffect(new Wurm2Token(expansionSetCode)));
         this.addAbility(ability);
     }
 
@@ -72,8 +74,9 @@ public class WurmcoilEngine extends CardImpl {
 }
 
 class Wurm1Token extends Token {
-    public Wurm1Token() {
+    public Wurm1Token(String setCode) {
         super("Wurm", "a 3/3 colorless Wurm artifact creature token with deathtouch");
+        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add("Wurm");
@@ -84,8 +87,9 @@ class Wurm1Token extends Token {
 }
 
 class Wurm2Token extends Token {
-    public Wurm2Token() {
+    public Wurm2Token(String setCode) {
         super("Wurm", "a 3/3 colorless Wurm artifact creature token with lifelink");
+        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add("Wurm");
