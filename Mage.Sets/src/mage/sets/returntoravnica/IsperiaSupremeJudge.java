@@ -33,9 +33,11 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.AttacksAllTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -64,7 +66,7 @@ public class IsperiaSupremeJudge extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever a creature attacks you or a planeswalker you control, you may draw a card.
-        this.addAbility(new IsperiaSupremeJudgeTriggeredAbility());
+        this.addAbility(new AttacksAllTriggeredAbility(new DrawCardSourceControllerEffect(1), true, true));
     }
 
     public IsperiaSupremeJudge(final IsperiaSupremeJudge card) {
@@ -74,42 +76,5 @@ public class IsperiaSupremeJudge extends CardImpl {
     @Override
     public IsperiaSupremeJudge copy() {
         return new IsperiaSupremeJudge(this);
-    }
-}
-
-class IsperiaSupremeJudgeTriggeredAbility extends TriggeredAbilityImpl {
-
-    public IsperiaSupremeJudgeTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
-    }
-
-    public IsperiaSupremeJudgeTriggeredAbility(final IsperiaSupremeJudgeTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public IsperiaSupremeJudgeTriggeredAbility copy() {
-        return new IsperiaSupremeJudgeTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
-            if (event.getTargetId().equals(controllerId)) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
-                return true;
-            }
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getCardType().contains(CardType.PLANESWALKER) && permanent.getControllerId().equals(controllerId)) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature attacks you or a planeswalker you control, you may draw a card.";
     }
 }
