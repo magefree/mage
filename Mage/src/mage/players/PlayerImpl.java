@@ -2167,9 +2167,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 playable.add(ability);
                             }
                         }
-//                        if (ability instanceof AlternativeSourceCosts) {
-//
-//                        }
                     }
                 }
             }
@@ -2279,12 +2276,12 @@ public abstract class PlayerImpl implements Player, Serializable {
                         break;
                     }
                 }
-                for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {
-                    if (!playable.contains(ability.getSourceId()) && canPlay(ability, available, card, game)) {
-                        playable.add(card.getId());
-                        break;
-                    }
-                }
+//                for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {
+//                    if (!playable.contains(ability.getSourceId()) && canPlay(ability, available, card, game)) {
+//                        playable.add(card.getId());
+//                        break;
+//                    }
+//                }
             }
         }
 

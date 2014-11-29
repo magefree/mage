@@ -39,6 +39,7 @@ import mage.abilities.costs.AlternativeCost2Impl;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
+import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.Card;
 import mage.constants.Outcome;
@@ -199,5 +200,14 @@ public class ProwlAbility extends StaticAbility implements AlternativeSourceCost
         sb.append(".)");
 
         reminderText = sb.toString();
+    }
+
+    @Override
+    public Costs<Cost> getCosts() {
+        Costs<Cost> alterCosts = new CostsImpl<>();
+        for (AlternativeCost2 aCost: prowlCosts) {
+            alterCosts.add(aCost.getCost());
+        }
+        return alterCosts;
     }
 }
