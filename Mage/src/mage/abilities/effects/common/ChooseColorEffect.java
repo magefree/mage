@@ -60,7 +60,7 @@ public class ChooseColorEffect extends OneShotEffect {
             while (!choice.isChosen()) {
                 controller.choose(Outcome.PutManaInPool, choice, game);
                 if (!controller.isInGame()) {
-                    return null;
+                    return false;
                 }
             }
             ChoiceColor colorChoice = new ChoiceColor();
