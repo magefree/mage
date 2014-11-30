@@ -81,44 +81,43 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
         if (enchantment != null && enchantment.getAttachedTo() != null) {
-            Permanent land = game.getPermanent(enchantment.getAttachedTo());
-            if (land != null) {
+            Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
+            if (permanent != null) {
                 switch (layer) {
                     case ColorChangingEffects_5:
-                        land.getColor().setWhite(false);
-                        land.getColor().setGreen(false);
-                        land.getColor().setBlack(false);
-                        land.getColor().setBlue(false);
-                        land.getColor().setRed(false);
+                        permanent.getColor().setWhite(false);
+                        permanent.getColor().setGreen(false);
+                        permanent.getColor().setBlack(false);
+                        permanent.getColor().setBlue(false);
+                        permanent.getColor().setRed(false);
                         break;
                     case AbilityAddingRemovingEffects_6:
-                        land.removeAllAbilities(source.getSourceId(), game);
+                        permanent.removeAllAbilities(source.getSourceId(), game);
                         for (String landType : landTypes)  {
                             switch (landType) {
                                 case "Swamp":
-                                    land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
+                                    permanent.addAbility(new BlackManaAbility(), source.getSourceId(), game);
                                     break;
                                 case "Mountain":
-                                    land.addAbility(new RedManaAbility(), source.getSourceId(), game);
+                                    permanent.addAbility(new RedManaAbility(), source.getSourceId(), game);
                                     break;
                                 case "Forest":
-                                    land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
+                                    permanent.addAbility(new GreenManaAbility(), source.getSourceId(), game);
                                     break;
                                 case "Island":
-                                    land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
+                                    permanent.addAbility(new BlueManaAbility(), source.getSourceId(), game);
                                     break;
                                 case "Plains":
-                                    land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
+                                    permanent.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
                                     break;
                             }
                         }
                         break;
                     case TypeChangingEffects_4:
-                        if (!land.getCardType().contains(CardType.LAND)) {
-                            land.getCardType().add(CardType.LAND);
-                        }
-                        land.getSubtype().clear();
-                        land.getSubtype().addAll(landTypes);
+                        permanent.getCardType().clear();
+                        permanent.getCardType().add(CardType.LAND);
+                        permanent.getSubtype().clear();
+                        permanent.getSubtype().addAll(landTypes);
                         break;
                 }
                 return true;
