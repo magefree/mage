@@ -31,11 +31,13 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.Mana;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -54,8 +56,7 @@ public class Manamorphose extends CardImpl {
 
         // Add two mana in any combination of colors to your mana pool.
         this.getSpellAbility().addEffect(new ManamorphoseEffect());
-        this.getSpellAbility().addChoice(new ChoiceColor());
-        this.getSpellAbility().addChoice(new ChoiceColor());
+
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
@@ -93,9 +94,13 @@ class ManamorphoseEffect extends ManaEffect {
             return false;
         }
 
+
         boolean result = false;
         for (int i = 0; i < 2; i++) {
-            ChoiceColor choice = (ChoiceColor) source.getChoices().get(i);
+            ChoiceColor choice = getManaChoice(player, game);
+            if (choice == null) {
+                return false;
+            }
             Mana mana = null;
             if (choice.getColor().isBlack()) {
                 mana = Mana.BlackMana(1);
@@ -116,4 +121,17 @@ class ManamorphoseEffect extends ManaEffect {
         }
         return result;
     }
+
+    private ChoiceColor getManaChoice(Player controller, Game game) {
+        ChoiceColor choice = new ChoiceColor();
+        while (!choice.isChosen()) {
+            controller.choose(Outcome.PutManaInPool, choice, game);
+            if (!controller.isInGame()) {
+                return null;
+            }
+        }
+        return choice;
+    }
+
 }
+

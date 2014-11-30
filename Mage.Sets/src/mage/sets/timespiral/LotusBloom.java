@@ -28,9 +28,6 @@
 package mage.sets.timespiral;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -39,7 +36,8 @@ import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**

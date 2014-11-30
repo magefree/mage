@@ -161,9 +161,15 @@ class CarpetOfFlowersEffect extends ManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
-        Player player = game.getPlayer(source.getControllerId());
-        if(player != null){
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null){
+            ChoiceColor choice = new ChoiceColor();
+            while (!choice.isChosen()) {
+                controller.choose(Outcome.Protect, choice, game);
+                if (!controller.isInGame()) {
+                    return false;
+                }
+            }
             int countMax = game.getBattlefield().count(filter, source.getSourceId(), source.getTargets().getFirstTarget(), game);
             ChoiceImpl choiceCount = new ChoiceImpl(true);
             LinkedHashSet<String> set = new LinkedHashSet<>();
@@ -173,22 +179,22 @@ class CarpetOfFlowersEffect extends ManaEffect {
             }
             choiceCount.setChoices(set);
             choiceCount.setMessage("Choose number of mana");
-            player.choose(Outcome.PutManaInPool, choiceCount, game);
+            controller.choose(Outcome.PutManaInPool, choiceCount, game);
             int count = Integer.parseInt(choiceCount.getChoice());
             if (choice.getColor().isBlack()) {
-                player.getManaPool().addMana(new Mana(0, 0, 0, 0, count, 0, 0), game, source);
+                controller.getManaPool().addMana(new Mana(0, 0, 0, 0, count, 0, 0), game, source);
                 return true;
             } else if (choice.getColor().isBlue()) {
-                player.getManaPool().addMana(new Mana(0, 0, count, 0, 0, 0, 0), game, source);
+                controller.getManaPool().addMana(new Mana(0, 0, count, 0, 0, 0, 0), game, source);
                 return true;
             } else if (choice.getColor().isRed()) {
-                player.getManaPool().addMana(new Mana(count, 0, 0, 0, 0, 0, 0), game, source);
+                controller.getManaPool().addMana(new Mana(count, 0, 0, 0, 0, 0, 0), game, source);
                 return true;
             } else if (choice.getColor().isGreen()) {
-                player.getManaPool().addMana(new Mana(0, count, 0, 0, 0, 0, 0), game, source);
+                controller.getManaPool().addMana(new Mana(0, count, 0, 0, 0, 0, 0), game, source);
                 return true;
             } else if (choice.getColor().isWhite()) {
-                player.getManaPool().addMana(new Mana(0, 0, 0, count, 0, 0, 0), game, source);
+                controller.getManaPool().addMana(new Mana(0, 0, 0, count, 0, 0, 0), game, source);
                 return true;
             }
         }

@@ -37,10 +37,12 @@ import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
@@ -55,7 +57,6 @@ public class AkromasBlessing extends CardImpl {
         this.color.setWhite(true);
 
         // Choose a color. Creatures you control gain protection from the chosen color until end of turn.
-        this.getSpellAbility().addChoice(new ChoiceColor());
         this.getSpellAbility().addEffect(new AcromasBlessingEffect());
         // Cycling {W}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{W}")));
@@ -94,11 +95,21 @@ class AcromasBlessingEffect extends GainAbilityControlledEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
-        filter2.add(new ColorPredicate(choice.getColor()));
-        filter2.setMessage(choice.getChoice());
-        setAbility(new ProtectionAbility(new FilterCard(filter2)));
-        return super.apply(game, source);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            ChoiceColor choice = new ChoiceColor();
+            while (!choice.isChosen()) {
+                controller.choose(Outcome.Protect, choice, game);
+                if (!controller.isInGame()) {
+                    return false;
+                }
+            }
+            filter2.add(new ColorPredicate(choice.getColor()));
+            filter2.setMessage(choice.getChoice());
+            setAbility(new ProtectionAbility(new FilterCard(filter2)));
+            return super.apply(game, source);
+        }
+        return false;
     }
 
 }

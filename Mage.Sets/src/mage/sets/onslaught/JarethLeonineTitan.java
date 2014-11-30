@@ -48,6 +48,7 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -70,7 +71,6 @@ public class JarethLeonineTitan extends CardImpl {
         this.addAbility(new BlocksTriggeredAbility(new BoostSourceEffect(7,7,Duration.EndOfTurn), false));
         // {W}: Jareth gains protection from the color of your choice until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JarethsGainProtectionFromColorSourceEffect(), new ManaCostsImpl("{W}"));
-        ability.addChoice(new ChoiceColor());
         this.addAbility(ability);
 
     }
@@ -104,9 +104,16 @@ class JarethsGainProtectionFromColorSourceEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent creature = game.getPermanent(source.getSourceId());
-        if (creature != null) {
-            ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
+        if (controller != null && creature != null) {
+            ChoiceColor choice = new ChoiceColor();
+            while (!choice.isChosen()) {
+                controller.choose(Outcome.Protect, choice, game);
+                if (!controller.isInGame()) {
+                    return false;
+                }
+            }
             protectionFilter.add(new ColorPredicate(choice.getColor()));
             protectionFilter.setMessage(choice.getChoice());
             ProtectionAbility ability = new ProtectionAbility(protectionFilter);
