@@ -102,7 +102,13 @@ class DreamHallsEffect extends ContinuousEffectImpl {
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.getAlternativeSourceCosts().add(alternativeCastingCostAbility);
+            for (UUID playerId: controller.getInRange()) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    player.getAlternativeSourceCosts().add(alternativeCastingCostAbility);
+                }
+            }
+            
             return true;
         }
         return false;
