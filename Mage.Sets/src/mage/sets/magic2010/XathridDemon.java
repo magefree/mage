@@ -84,7 +84,7 @@ class XathridDemonEffect extends OneShotEffect {
 
     public XathridDemonEffect() {
         super(Outcome.Damage);
-        this.staticText = "At the beginning of your upkeep, sacrifice a creature other than {this}, then each opponent loses life equal to the sacrificed creature's power. If you can't sacrifice a creature, tap {this} and you lose 7 life";
+        this.staticText = "sacrifice a creature other than {this}, then each opponent loses life equal to the sacrificed creature's power. If you can't sacrifice a creature, tap {this} and you lose 7 life";
     }
 
     public XathridDemonEffect(final XathridDemonEffect effect) {
@@ -98,12 +98,12 @@ class XathridDemonEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent == null) {
             sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         }
-        if (player == null || sourcePermanent == null) {
+        if (controller == null || sourcePermanent == null) {
             return false;
         }
 
@@ -111,8 +111,8 @@ class XathridDemonEffect extends OneShotEffect {
         filter.add(new AnotherPredicate());
 
         Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
-        if (target.canChoose(source.getSourceId(), player.getId(), game)) {
-            player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+        if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
+            controller.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
                 int amount = permanent.getPower().getValue();
@@ -131,7 +131,7 @@ class XathridDemonEffect extends OneShotEffect {
             }
         } else {
             sourcePermanent.tap(game);
-            player.loseLife(7, game);
+            controller.loseLife(7, game);
             return true;
         }
         return false;
