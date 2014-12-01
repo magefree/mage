@@ -78,7 +78,7 @@ public class NahiriTheLithomancer extends CardImpl {
 
         this.color.setWhite(true);
         
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(30)), false));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
         // +2: Put a 1/1 white Kor Soldier creature token onto the battlefield. You may attach an Equipment you control to it.
         this.addAbility(new LoyaltyAbility(new NahiriTheLithomancerFirstAbilityEffect(), 2));
