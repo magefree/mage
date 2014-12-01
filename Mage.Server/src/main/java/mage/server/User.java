@@ -29,6 +29,7 @@ package mage.server;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -123,14 +124,25 @@ public class User {
         this.sessionId = sessionId;
         if (sessionId.isEmpty()) {
             userState = UserState.Disconnected;
-            logger.debug("Disconnected User " + userName + " id: " + userId);
+            lostConnection();
+            logger.debug("USER - lost connection: " + userName + " id: " + userId);
+
         } else if (userState == UserState.Created) {
             userState = UserState.Connected;
-            logger.debug("Created user " + userName + " id: " + userId);
+            logger.debug("USER - created: " + userName + " id: " + userId);
         } else {
             userState = UserState.Reconnected;
             reconnect();
-            logger.info("Reconnected user " + userName + " id: " + userId);
+            logger.info("USER - reconnected: " + userName + " id: " + userId);
+        }
+    }
+
+    public void lostConnection() {
+        // Because watched games don't get restored after reconnection call stop watching
+        for (Iterator<UUID> iterator = watchedGames.iterator(); iterator.hasNext();) {
+            UUID gameId = iterator.next();
+            GameManager.getInstance().stopWatching(gameId, userId);
+            iterator.remove();
         }
     }
 

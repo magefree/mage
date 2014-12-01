@@ -33,7 +33,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -213,8 +212,10 @@ public class Session {
 
     // because different threads can activate this
     public void  userLostConnection() {
+        boolean lockSet = false;
         try {
-            if(lock.tryLock(5, TimeUnit.SECONDS)) {
+            if(lock.tryLock(500, TimeUnit.MILLISECONDS)) {
+                lockSet = true;
                 User user = UserManager.getInstance().getUser(userId);
                 if (user == null || !user.isConnected()) {
                     return; //user was already disconnected by other thread
@@ -224,46 +225,70 @@ public class Session {
                     logger.info("OLD SESSION IGNORED - " + user.getName());
                     return;
                 }
-                logger.info("LOST CONNECTION - " + user.getName());
+                logger.info("LOST CONNECTION - " + user.getName() + " id: " + userId);
                 UserManager.getInstance().disconnect(userId, DisconnectReason.LostConnection);
             } else {
-                logger.error("SESSION LOCK - userId " + userId);
+                logger.error("SESSION LOCK lost connection - userId: " + userId);
             }
         } catch (InterruptedException ex) {
-            logger.error("SESSION LOCK - userId " + userId, ex);
+            logger.error("SESSION LOCK lost connection - userId: " + userId, ex);
         }
         finally {
-           lock.unlock();
+            if (lockSet)    {
+                lock.unlock();
+            }
         }
 
     }
 
     public void kill(DisconnectReason reason) {
-        UserManager.getInstance().removeUser(userId, reason);
+        boolean lockSet = false;
+        try {
+            if(lock.tryLock(500, TimeUnit.MILLISECONDS)) {
+                lockSet = true;
+                UserManager.getInstance().removeUser(userId, reason);
+            } else {
+                logger.error("SESSION LOCK - kill: userId " + userId);
+            }
+        } catch (InterruptedException ex) {
+            logger.error("SESSION LOCK - kill: userId " + userId, ex);
+        }
+        finally {
+            if (lockSet)    {
+                lock.unlock();
+            }
+        }
+
     }
 
     public void fireCallback(final ClientCallback call) {
+        boolean lockSet = false;
         try {
-            boolean tryLock;
-            if (lock.tryLock(5, TimeUnit.SECONDS)) {
+            if (lock.tryLock(500, TimeUnit.MILLISECONDS)) {
+                lockSet = true;
                 call.setMessageId(messageId++);
                 callbackHandler.handleCallbackOneway(new Callback(call));
             } else {
-                logger.error("CALLBACK LOCK - userId " + userId);
+                logger.error("SESSION LOCK callback: userId " + userId);
                 logger.error(" - method: " + call.getMethod());
             }
         } catch (HandleCallbackException ex) {
-            logger.info("CALLBACK EXCEPTION - userId " + userId, ex);
-            if (logger.isDebugEnabled()) {
-                ex.printStackTrace();
-            }
+            User user = UserManager.getInstance().getUser(userId);
+            logger.warn("SESSION CALLBACK EXCEPTION - " + (user != null ? user.getName():"") + " userId " + userId);
+            logger.warn(" - method: " + call.getMethod());
+            logger.warn(" - cause: " + getBasicCause(ex).toString());
+            logger.trace("Stack trace:", ex);
             userLostConnection();
         } catch (InterruptedException ex) {
-            logger.error("CALLBACK LOCK EXCEPTION - userId " + userId, ex);
+            logger.error("SESSION LOCK callback -userId: " + userId);
             logger.error(" - method: " + call.getMethod());
+            logger.error(" - cause: " + getBasicCause(ex).toString());
+            logger.trace("Stack trace:", ex);
         }
         finally {
-           lock.unlock();
+            if (lockSet)    {
+                lock.unlock();
+            }
         }
     }
 
@@ -292,5 +317,16 @@ public class Session {
         messageData.add("Error while connecting to server");
         messageData.add(message);
         fireCallback(new ClientCallback("showUserMessage", null, messageData));
+    }
+
+    public static Throwable getBasicCause(Throwable cause) {
+        Throwable t = cause;
+        while (t.getCause() != null) {
+            t = t.getCause();
+            if (t == cause) {
+                throw new IllegalArgumentException("Infinite cycle detected in causal chain");
+            }
+        }
+        return t;
     }
 }
