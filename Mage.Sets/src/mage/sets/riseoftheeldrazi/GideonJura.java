@@ -34,6 +34,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.TurnPhase;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -69,16 +70,20 @@ public class GideonJura extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Gideon");
         this.color.setWhite(true);
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), false));
 
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), false));
+        
+        // +2: During target opponent's next turn, creatures that player controls attack Gideon Jura if able.
         LoyaltyAbility ability1 = new LoyaltyAbility(new GideonJuraEffect(), 2);
         ability1.addTarget(new TargetOpponent());
         this.addAbility(ability1);
 
+        // −2: Destroy target tapped creature.
         LoyaltyAbility ability2 = new LoyaltyAbility(new DestroyTargetEffect(), -2);
         ability2.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability2);
 
+        // 0: Until end of turn, Gideon Jura becomes a 6/6 Human Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
         LoyaltyAbility ability3 = new LoyaltyAbility(new BecomesCreatureSourceEffect(new GideonJuraToken(), "planeswalker", Duration.EndOfTurn), 0);
         ability3.addEffect(new PreventAllDamageToSourceEffect(Duration.EndOfTurn));
         this.addAbility(ability3);
@@ -110,6 +115,8 @@ class GideonJuraToken extends Token {
 
 class GideonJuraEffect extends RequirementEffect {
 
+    protected MageObjectReference creatingPermanent;
+
     public GideonJuraEffect() {
         super(Duration.Custom);
         staticText = "During target opponent's next turn, creatures that player controls attack {this} if able";
@@ -117,11 +124,18 @@ class GideonJuraEffect extends RequirementEffect {
 
     public GideonJuraEffect(final GideonJuraEffect effect) {
         super(effect);
+        this.creatingPermanent = effect.creatingPermanent;
     }
 
     @Override
     public GideonJuraEffect copy() {
         return new GideonJuraEffect(this);
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        creatingPermanent = new MageObjectReference(source.getSourceId(), game);
     }
 
     @Override
@@ -131,7 +145,11 @@ class GideonJuraEffect extends RequirementEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        return (game.getPhase().getType() == TurnPhase.END && game.getActivePlayerId().equals(source.getFirstTarget()));
+        return (startingTurn != game.getTurnNum() &&
+                (game.getPhase().getType() == TurnPhase.END &&
+                game.getActivePlayerId().equals(source.getFirstTarget())))
+                || // 6/15/2010: If a creature controlled by the affected player can't attack Gideon Jura (because he's no longer on the battlefield, for example), that player may have it attack you, another one of your planeswalkers, or nothing at all.
+                creatingPermanent.getPermanent(game) == null;
     }
 
     @Override
