@@ -152,16 +152,22 @@ class KheruSpellsnatcherCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (getTargetPointer().getFirst(game, source).equals(sourceId) && affectedControllerId.equals(source.getControllerId())) {
-            Card card = game.getCard(sourceId);
-            if (card != null) {
-                if (game.getState().getZone(sourceId) == Zone.EXILED) {
-                    Player player = game.getPlayer(affectedControllerId);
-                    player.setCastSourceIdWithoutMana(sourceId);
-                    return true;
-                }
-                else {
-                    this.discard();
+        if (affectedControllerId.equals(source.getControllerId())) {
+            if (getTargetPointer().getFirst(game, source) == null) {
+                this.discard();
+                return false;
+            }
+            if (sourceId.equals(getTargetPointer().getFirst(game, source))) {
+                Card card = game.getCard(sourceId);
+                if (card != null) {
+                    if (game.getState().getZone(sourceId) == Zone.EXILED) {
+                        Player player = game.getPlayer(affectedControllerId);
+                        player.setCastSourceIdWithoutMana(sourceId);
+                        return true;
+                    }
+                    else {
+                        this.discard();
+                    }
                 }
             }
         }
