@@ -10,9 +10,9 @@ public class AngelToken extends Token {
         this("M14");
     }
 
-    public AngelToken(String tokenImageSetCode) {
+    public AngelToken(String setCode) {
         super("Angel", "4/4 white Angel creature token with flying");
-        this.setOriginalExpansionSetCode(tokenImageSetCode);
+        this.setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
 

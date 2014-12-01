@@ -37,7 +37,6 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SkipNextUntapTargetEffect;
-import mage.abilities.effects.common.SkipUntapAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;

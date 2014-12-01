@@ -29,6 +29,7 @@
 package mage.sets.magic2011;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
@@ -37,6 +38,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -57,12 +59,26 @@ public class SwordOfVengeance extends CardImpl {
         super(ownerId, 216, "Sword of Vengeance", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "M11";
         this.subtype.add("Equipment");
+        
+        
+        // Equipped creature gets +2/+0 and has first strike, vigilance, trample, and haste.
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0));
+        Effect effect = new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT);
+        effect.setText("and has first strike");
+        ability.addEffect(effect);
+        effect = new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT);
+        effect.setText(", vigilance");
+        ability.addEffect(effect);
+        effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.EQUIPMENT);
+        effect.setText(", trample");
+        ability.addEffect(effect);
+        effect = new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT);
+        effect.setText(", and haste");
+        ability.addEffect(effect);
+        this.addAbility(ability);
+
+        // Equip 3
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.EQUIPMENT)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
     }
 
     protected SwordOfVengeance(SwordOfVengeance me) {
