@@ -61,7 +61,7 @@ public class MarrowGnawer extends CardImpl {
     private static final FilterControlledCreaturePermanent filterSacrifice = new FilterControlledCreaturePermanent("a Rat");
     private static final FilterControlledCreaturePermanent filter3 = new FilterControlledCreaturePermanent("the number of Rats you control");
 
-    {
+    static {
         SubtypePredicate ratPredicate = new SubtypePredicate("Rat");
         filterFear.add(ratPredicate);
         filterSacrifice.add(ratPredicate);
@@ -71,6 +71,7 @@ public class MarrowGnawer extends CardImpl {
     public MarrowGnawer (UUID ownerId) {
         super(ownerId, 124, "Marrow-Gnawer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.expansionSetCode = "CHK";
+        this.supertype.add("Legendary");
         this.subtype.add("Rat");
         this.subtype.add("Rogue");
     this.color.setBlack(true);
