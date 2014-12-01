@@ -377,7 +377,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     }
                     break;
                 case BATTLEFIELD:
-                    PermanentCard permanent = new PermanentCard(this, ownerId);
+                    PermanentCard permanent = new PermanentCard(this, event.getPlayerId()); // controller can be replaced (e.g. Gather Specimens)
                     game.resetForSourceId(permanent.getId());
                     game.addPermanent(permanent);
                     game.setZone(objectId, Zone.BATTLEFIELD);
@@ -399,7 +399,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                                 .append("] source [").append(sourceCard != null ? sourceCard.getName():"null").append("]").toString());
                     return false;
             }
-            setControllerId(ownerId);
+            setControllerId(event.getPlayerId());
             game.setZone(objectId, event.getToZone());
             game.addSimultaneousEvent(event);
             return game.getState().getZone(objectId) == toZone;
@@ -543,11 +543,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 }
             }
             updateZoneChangeCounter();
-            PermanentCard permanent = new PermanentCard(this, controllerId);
+            PermanentCard permanent = new PermanentCard(this, event.getPlayerId());
             // reset is done to end continuous effects from previous instances of that permanent (e.g undying)
             game.resetForSourceId(permanent.getId());
             // make sure the controller of all continuous effects of this card are switched to the current controller
-            game.getContinuousEffects().setController(objectId, controllerId);
+            game.getContinuousEffects().setController(objectId, event.getPlayerId());
             game.addPermanent(permanent);
             game.setZone(objectId, Zone.BATTLEFIELD);
             game.setScopeRelevant(true);
@@ -555,7 +555,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             permanent.entersBattlefield(sourceId, game, event.getFromZone(), true);
             game.setScopeRelevant(false);
             game.applyEffects();
-            game.fireEvent(new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD));
+            game.fireEvent(new ZoneChangeEvent(permanent, event.getPlayerId(), fromZone, Zone.BATTLEFIELD));
             return true;
         }
         return false;

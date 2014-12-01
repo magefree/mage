@@ -186,6 +186,10 @@ public class GameEvent {
         return sourceId;
     }
 
+    public void setPlayerId(UUID playerId) {
+        this.playerId = playerId;
+    }
+
     public UUID getPlayerId() {
         return playerId;
     }
