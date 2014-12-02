@@ -113,9 +113,9 @@ public class AtTheBeginOMainPhaseDelayedTriggeredAbility extends DelayedTriggere
     private boolean checkPhase(EventType eventType) {
         switch (phaseSelection) {
             case NEXT_MAIN:
-                return EventType.PRECOMBAT_MAIN_PHASE_PRE.equals(eventType) || EventType.PRECOMBAT_MAIN_PHASE_POST.equals(eventType);
+                return EventType.PRECOMBAT_MAIN_PHASE_PRE.equals(eventType) || EventType.POSTCOMBAT_MAIN_PHASE_PRE.equals(eventType);
             case NEXT_POSTCOMAT_MAIN:
-                return EventType.PRECOMBAT_MAIN_PHASE_POST.equals(eventType);
+                return EventType.POSTCOMBAT_MAIN_PHASE_PRE.equals(eventType);
             case NEXT_PRECOMBAT_MAIN:
                 return EventType.PRECOMBAT_MAIN_PHASE_PRE.equals(eventType);
             default:
