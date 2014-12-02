@@ -39,7 +39,7 @@ import mage.filter.predicate.other.OwnerPredicate;
 public class FilterOwnedCard extends FilterCard {
 
     public FilterOwnedCard() {
-        this("creature card");
+        this("card");
     }
 
     public FilterOwnedCard(String name) {

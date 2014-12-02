@@ -55,10 +55,11 @@ public class RuthlessCullblade extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
+        // Ruthless Cullblade gets +2/+1 as long as an opponent has 10 or less life.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(new BoostSourceEffect(2, 1, Duration.Custom),
+                new ConditionalContinousEffect(new BoostSourceEffect(2, 1, Duration.WhileOnBattlefield),
                 new TenOrLessLifeCondition(TenOrLessLifeCondition.CheckType.AN_OPPONENT),
-                "Ruthless Cullblade gets +2/+1 as long as an opponent has 10 or less life.")));
+                "{this} gets +2/+1 as long as an opponent has 10 or less life.")));
     }
 
     public RuthlessCullblade(final RuthlessCullblade card) {
