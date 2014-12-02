@@ -123,7 +123,7 @@ class PropheticFlamespeakerExileEffect extends OneShotEffect {
 class PropheticFlamespeakerCastFromExileEffect extends AsThoughEffectImpl {
 
     public PropheticFlamespeakerCastFromExileEffect() {
-        super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may play the card from exile";
     }
 

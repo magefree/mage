@@ -10,7 +10,7 @@ public enum AsThoughEffectType {
     BLOCK_TAPPED,
     BLOCK_SHADOW,
     BE_BLOCKED,    
-    CAST_FROM_NON_HAND_ZONE,
+    PLAY_FROM_NON_HAND_ZONE,
     CAST_AS_INSTANT,
     DAMAGE,
     HEXPROOF,

@@ -132,7 +132,7 @@ class KheruSpellsnatcherEffect extends OneShotEffect {
 class KheruSpellsnatcherCastFromExileEffect extends AsThoughEffectImpl {
 
     KheruSpellsnatcherCastFromExileEffect() {
-        super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.Custom, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         staticText = "You may cast that card without paying its mana cost as long as it remains exiled";
     }
 

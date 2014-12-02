@@ -109,7 +109,7 @@ class NarsetEnlightenedMasterExileEffect extends OneShotEffect {
                     Card card = player.getLibrary().getFromTop(game);
                     if (card != null) {
                         player.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourceObject.getLogName(), source.getSourceId(), game, Zone.LIBRARY);
-                        if (!card.getCardType().contains(CardType.CREATURE)) {
+                        if (!card.getCardType().contains(CardType.CREATURE) && !card.getCardType().contains(CardType.LAND)) {
                             ContinuousEffect effect = new NarsetEnlightenedMasterCastFromExileEffect();
                             effect.setTargetPointer(new FixedTarget(card.getId()));
                             game.addEffect(effect, source);
@@ -131,7 +131,7 @@ class NarsetEnlightenedMasterExileEffect extends OneShotEffect {
 class NarsetEnlightenedMasterCastFromExileEffect extends AsThoughEffectImpl {
 
     public NarsetEnlightenedMasterCastFromExileEffect() {
-        super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Until end of turn, you may cast noncreature cards exiled with {this} this turn without paying their mana costs";
     }
 

@@ -1133,7 +1133,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         }
                     }
                 }
-                if (zone != Zone.BATTLEFIELD && game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, this.getId(), game)) {
+                if (zone != Zone.BATTLEFIELD && game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, this.getId(), game)) {
                     for (Ability ability: object.getAbilities()) {
                         ability.setControllerId(this.getId());
                         if (ability instanceof ActivatedAbility && ability.getZone().match(Zone.HAND) 
@@ -2171,7 +2171,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             }
             for (Card card : graveyard.getUniqueCards(game)) {
-                boolean asThoughtCast = game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, this.getId(), game);
+                boolean asThoughtCast = game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, this.getId(), game);
                 for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.ALL)) {
                     boolean possible = false;
                     if (ability.getZone().match(Zone.GRAVEYARD)) {
@@ -2193,7 +2193,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             for (ExileZone exile : game.getExile().getExileZones()) {
                 for (Card card : exile.getCards(game)) {
-                    if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, this.getId(), game)) {
+                    if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, this.getId(), game)) {
                         for (Ability ability : card.getAbilities()) {                            
                             if (ability.getZone().match(Zone.HAND)) {
                                 ability.setControllerId(this.getId()); // controller must be set for case owner != caster   
@@ -2209,7 +2209,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             for (Cards cards : game.getState().getRevealed().values()) {
                 for (Card card : cards.getCards(game)) {
-                    if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, this.getId(), game)) {
+                    if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, this.getId(), game)) {
                         for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {
                             if (ability instanceof SpellAbility || ability instanceof PlayLandAbility) {
                                 playable.add(ability);
