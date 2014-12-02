@@ -109,13 +109,12 @@ class XathridGorgonCantActivateEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (target != null) {
-                return true;
-        } else {
-            this.discard();
-        }
-        return false;
+        return permanent.getId().equals(getTargetPointer().getFirst(game, source));
+    }
+
+    @Override
+    public boolean isInactive(Ability source, Game game) {
+        return getTargetPointer().getFirst(game, source) != null;
     }
 
     @Override
