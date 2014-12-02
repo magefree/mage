@@ -186,6 +186,7 @@ class AstralCornucopiaManaEffect extends ManaEffect {
                             break;
                     }
                 }
+                game.getPlayer(source.getControllerId()).getManaPool().addMana(computedMana, game, source);
                 return true;
             }
         }
