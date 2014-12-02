@@ -33,6 +33,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -134,7 +135,8 @@ class PutIntoYourGraveyardTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getToZone() == Zone.GRAVEYARD) {
-                if (game.getControllerId(event.getTargetId()) == this.getControllerId()){
+                Card card = game.getCard(event.getTargetId());
+                if (card != null && card.getOwnerId().equals(getControllerId())) {
                     return true;
                 }
             }
