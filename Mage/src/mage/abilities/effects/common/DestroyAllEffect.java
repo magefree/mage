@@ -48,10 +48,10 @@ public class DestroyAllEffect extends OneShotEffect {
         this.filter = filter;
         this.noRegen = noRegen;
         if (noRegen) {
-            staticText = "Destroy all " + filter.getMessage() + ". They can't be regenerated";
+            staticText = "destroy all " + filter.getMessage() + ". They can't be regenerated";
         }
         else {
-            staticText = "Destroy all " + filter.getMessage();
+            staticText = "destroy all " + filter.getMessage();
         }
     }
 

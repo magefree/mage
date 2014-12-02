@@ -94,8 +94,9 @@ public class TargetPlayer extends TargetImpl {
             if (player != null && !player.hasLeft() && filter.match(player, sourceId, sourceControllerId, game)) {
                 if (player.canBeTargetedBy(targetSource, game)) {
                     count++;
-                    if (count >= this.minNumberOfTargets)
+                    if (count >= this.minNumberOfTargets) {
                         return true;
+                    }
                 }
             }
         }
