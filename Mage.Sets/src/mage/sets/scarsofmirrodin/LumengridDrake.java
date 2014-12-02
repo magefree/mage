@@ -27,25 +27,25 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  * @author ayrat
  */
 public class LumengridDrake extends CardImpl {
 
-    private static final String text = "Metalcraft - When Lumengrid Drake enters the battlefield, if you control three or more artifacts, return target creature to its owner's hand.";
+    private static final String ruleText = "Metalcraft - When {this} enters the battlefield, if you control three or more artifacts, return target creature to its owner's hand.";
 
     public LumengridDrake(UUID ownerId) {
         super(ownerId, 36, "Lumengrid Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
@@ -56,8 +56,12 @@ public class LumengridDrake extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+
+        // Metalcraft — When Lumengrid Drake enters the battlefield, if you control three or more artifacts, return target creature to its owner's hand.
         TriggeredAbility conditional = new ConditionalTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()), MetalcraftCondition.getInstance(), text);
+                new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()), MetalcraftCondition.getInstance(), ruleText);
         conditional.addTarget(new TargetCreaturePermanent());
         this.addAbility(conditional);
     }
