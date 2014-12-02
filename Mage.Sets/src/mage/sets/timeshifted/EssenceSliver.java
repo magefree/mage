@@ -29,17 +29,19 @@ package mage.sets.timeshifted;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.GainLifeTargetEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.players.Player;
 
 /**
  *
@@ -57,7 +59,7 @@ public class EssenceSliver extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever a Sliver deals damage, its controller gains that much life.
-        this.addAbility(new DealsDamageTriggeredAbility(new GainLifeTargetEffect(0), false, true));
+        this.addAbility(new DealsDamageAllTriggeredAbility());
 
     }
 
@@ -71,23 +73,19 @@ public class EssenceSliver extends CardImpl {
     }
 }
 
-class DealsDamageTriggeredAbility extends TriggeredAbilityImpl {
+class DealsDamageAllTriggeredAbility extends TriggeredAbilityImpl {
 
-    private final boolean setTargetPointer;
-
-    public DealsDamageTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
-        super(Zone.BATTLEFIELD, effect, optional);
-        this.setTargetPointer = setTargetPointer;
+    public DealsDamageAllTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new EssenceSliverGainThatMuchLifeEffect(), false);
     }
 
-    public DealsDamageTriggeredAbility(final DealsDamageTriggeredAbility ability) {
+    public DealsDamageAllTriggeredAbility(final DealsDamageAllTriggeredAbility ability) {
         super(ability);
-        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
-    public DealsDamageTriggeredAbility copy() {
-        return new DealsDamageTriggeredAbility(this);
+    public DealsDamageAllTriggeredAbility copy() {
+        return new DealsDamageAllTriggeredAbility(this);
     }
 
     @Override
@@ -97,11 +95,8 @@ class DealsDamageTriggeredAbility extends TriggeredAbilityImpl {
                 || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER) {
             Permanent creature = game.getPermanent(event.getSourceId());
             if (creature != null && creature.hasSubtype("Sliver")) {
-                if (setTargetPointer) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(game.getControllerId(event.getSourceId())));
-                        effect.setValue("damage", event.getAmount());
-                    }
+                for (Effect effect : this.getEffects()) {
+                    effect.setValue("damage", event.getAmount());
                 }
                 return true;
             }
@@ -113,5 +108,36 @@ class DealsDamageTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever a Sliver deals damage, its controller" + super.getRule();
+    }
+}
+
+class EssenceSliverGainThatMuchLifeEffect extends OneShotEffect {
+
+    public EssenceSliverGainThatMuchLifeEffect() {
+        super(Outcome.GainLife);
+        this.staticText = "its controller gains that much life";
+    }
+
+    public EssenceSliverGainThatMuchLifeEffect(final EssenceSliverGainThatMuchLifeEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public EssenceSliverGainThatMuchLifeEffect copy() {
+        return new EssenceSliverGainThatMuchLifeEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            int amount = (Integer) getValue("damage");
+            if (amount > 0) {
+                controller.gainLife(amount, game);
+
+            }
+            return true;
+        }
+        return false;
     }
 }
