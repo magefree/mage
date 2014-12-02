@@ -36,6 +36,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
@@ -49,11 +50,10 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInOpponentsGraveyard;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -127,8 +127,12 @@ class DiluvianPrimordialEffect extends OneShotEffect {
             if (target instanceof TargetCardInOpponentsGraveyard) {
                 Card targetCard = game.getCard(target.getFirstTarget());
                 if (player != null && targetCard != null) {
-                    player.cast(targetCard.getSpellAbility(), game, true);
-                    game.addEffect(new DiluvianPrimordialReplacementEffect(targetCard.getId()), source);
+                    if (player.chooseUse(outcome, "Cast " + targetCard.getName() +"?", game)) {
+                        player.cast(targetCard.getSpellAbility(), game, true);
+                        ContinuousEffect effect = new DiluvianPrimordialReplacementEffect();
+                        effect.setTargetPointer(new FixedTarget(targetCard.getId()));
+                        game.addEffect(effect, source);
+                    }
                 }
             }
         }
@@ -138,16 +142,13 @@ class DiluvianPrimordialEffect extends OneShotEffect {
 
 class DiluvianPrimordialReplacementEffect extends ReplacementEffectImpl {
 
-    private UUID cardid;
-
-    public DiluvianPrimordialReplacementEffect(UUID cardid) {
+    public DiluvianPrimordialReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Exile);
-        this.cardid = cardid;
+        staticText = "If a card cast this way would be put into a graveyard this turn, exile it instead";
     }
 
     public DiluvianPrimordialReplacementEffect(final DiluvianPrimordialReplacementEffect effect) {
         super(effect);
-        this.cardid = effect.cardid;
     }
 
     @Override
@@ -162,14 +163,13 @@ class DiluvianPrimordialReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        UUID eventObject = ((ZoneChangeEvent) event).getTargetId();
-        StackObject card = game.getStack().getStackObject(eventObject);
-        if (card instanceof Spell) {
-            game.rememberLKI(card.getId(), Zone.STACK, (Spell) card);
-        }
-        if (card instanceof Card && card != null && eventObject == cardid) {
-            ((Card) card).moveToExile(id, "Diluvian Primordial", id, game);
-            return true;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Card card = game.getCard(getTargetPointer().getFirst(game, source));
+            if (card != null) {
+                controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.STACK);
+                return true;
+            }
         }
         return false;
     }
@@ -179,7 +179,7 @@ class DiluvianPrimordialReplacementEffect extends ReplacementEffectImpl {
         if (event.getType() == EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getToZone() == Zone.GRAVEYARD
-                    && ((ZoneChangeEvent) event).getTargetId() == cardid) {
+                    && ((ZoneChangeEvent) event).getTargetId().equals(getTargetPointer().getFirst(game, source))) {
                 return true;
             }
         }

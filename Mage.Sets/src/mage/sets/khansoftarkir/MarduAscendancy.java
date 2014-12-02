@@ -69,7 +69,7 @@ public class MarduAscendancy extends CardImpl {
         this.color.setWhite(true);
 
         // Whenever a nontoken creature you control attacks, put a 1/1 red Goblin creature token onto the battlefield tapped and attacking.
-        this.addAbility(new AttacksCreatureYourControlTriggeredAbility(new CreateTokenEffect(new GoblinToken("KTK"), 1, true, true), false, attackFilter));
+        this.addAbility(new AttacksCreatureYourControlTriggeredAbility(new CreateTokenEffect(new GoblinToken(expansionSetCode), 1, true, true), false, attackFilter));
 
         // Sacrifice Mardu Ascendancy: Creatures you control get +0/+3 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(0, 3, Duration.EndOfTurn, filter, false),

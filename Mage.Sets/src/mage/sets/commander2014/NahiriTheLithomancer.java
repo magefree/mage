@@ -27,6 +27,9 @@
  */
 package mage.sets.commander2014;
 
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -128,25 +131,33 @@ class NahiriTheLithomancerFirstAbilityEffect extends OneShotEffect {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        Token token = new NahiriTheLithomancerKorSoldierToken();
-        if (token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId())) {
-            Permanent tokenPermanent = game.getPermanent(token.getLastAddedToken());
-            if (tokenPermanent != null) {
-                //TODO: Make sure the Equipment can legally enchant the token, preferably on targetting.
-                Target target = new TargetControlledPermanent(0, 1, filter, true);
-                if (target.choose(Outcome.Neutral, source.getControllerId(), source.getSourceId(), game)) {
-                    Permanent equipmentPermanent = game.getPermanent(target.getFirstTarget());
-                    if (equipmentPermanent != null) {
-                        Permanent attachedTo = game.getPermanent(equipmentPermanent.getAttachedTo());
-                        if (attachedTo != null) {
-                            attachedTo.removeAttachment(equipmentPermanent.getId(), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Token token = new NahiriTheLithomancerKorSoldierToken();
+            if (token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId())) {
+                Permanent tokenPermanent = game.getPermanent(token.getLastAddedToken());
+                if (tokenPermanent != null) {
+                    //TODO: Make sure the Equipment can legally enchant the token, preferably on targetting.
+                    Target target = new TargetControlledPermanent(0, 1, filter, true);
+                    if (target.canChoose(source.getSourceId(), controller.getId(), game) &&
+                        controller.chooseUse(outcome, "Attach an Equipment you control to the created Token?", game)) {
+                        if (target.choose(Outcome.Neutral, source.getControllerId(), source.getSourceId(), game)) {
+                            Permanent equipmentPermanent = game.getPermanent(target.getFirstTarget());
+                            if (equipmentPermanent != null) {
+                                Permanent attachedTo = game.getPermanent(equipmentPermanent.getAttachedTo());
+                                if (attachedTo != null) {
+                                    attachedTo.removeAttachment(equipmentPermanent.getId(), game);
+                                }
+                                tokenPermanent.addAttachment(equipmentPermanent.getId(), game);
+                            }
                         }
-                        tokenPermanent.addAttachment(equipmentPermanent.getId(), game);
                     }
                 }
             }
+            return true;
+
         }
-        return true;
+        return false;
     }
 }
 
@@ -187,22 +198,22 @@ class NahiriTheLithomancerSecondAbilityEffect extends OneShotEffect {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            if (player.chooseUse(Outcome.PutCardInPlay, "Put an Equipment from hand? (No = from graveyard)", game)) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            if (controller.chooseUse(Outcome.PutCardInPlay, "Put an Equipment from hand? (No = from graveyard)", game)) {
                 Target target = new TargetCardInHand(0, 1, filter);
-                target.choose(Outcome.PutCardInPlay, source.getControllerId(), source.getSourceId(), game);
-                Card card = player.getHand().get(target.getFirstTarget(), game);
+                controller.choose(outcome, target, source.getSourceId(), game);
+                Card card = controller.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
-                    player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
+                    controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
                 }
             }
             else {
                 Target target = new TargetCardInYourGraveyard(0, 1, filter);
                 target.choose(Outcome.PutCardInPlay, source.getControllerId(), source.getSourceId(), game);
-                Card card = player.getGraveyard().get(target.getFirstTarget(), game);
+                Card card = controller.getGraveyard().get(target.getFirstTarget(), game);
                 if (card != null) {
-                    player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
+                    controller.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
                 }
             }
             return true;
