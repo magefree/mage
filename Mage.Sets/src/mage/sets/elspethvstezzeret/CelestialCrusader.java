@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.SplitSecondAbility;
@@ -49,6 +49,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author Loki
  */
 public class CelestialCrusader extends CardImpl {
+    
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white creatures");
 
     static {
@@ -64,10 +65,18 @@ public class CelestialCrusader extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
+
+        // Flash (You may cast this spell any time you could cast an instant.)
         this.addAbility(FlashAbility.getInstance());
+
+        // Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)
         this.addAbility(new SplitSecondAbility());
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+
+        // Other white creatures get +1/+1.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
     }
 
     public CelestialCrusader(final CelestialCrusader card) {
