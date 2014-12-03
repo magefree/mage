@@ -11,7 +11,8 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 
 public class AffinityEffect extends CostModificationEffectImpl {
-    private FilterControlledPermanent filter;
+    
+    private final FilterControlledPermanent filter;
 
     public AffinityEffect(FilterControlledPermanent affinityFilter) {
         super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);

@@ -29,11 +29,11 @@ package mage.sets.magic2013;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.common.ControllerLifeCount;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
@@ -67,7 +67,9 @@ public class AjaniCallerOfThePride extends CardImpl {
     public void build() {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
         // +1: Put a +1/+1 counter on up to one target creature.
-        Ability ability = new LoyaltyAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), 1);
+        Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
+        effect.setText("Put a +1/+1 counter on up to one target creature");
+        Ability ability = new LoyaltyAbility(effect, 1);
         ability.addTarget(new TargetCreaturePermanent(0,1));
         this.addAbility(ability);
         // -3: Target creature gains flying and double strike until end of turn.
