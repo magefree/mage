@@ -30,6 +30,7 @@ package mage.sets.fifthdawn;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.SourceIsSpellCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -71,7 +72,7 @@ public class FistOfSuns extends CardImpl {
 
 class FistOfSunsRuleEffect extends ContinuousEffectImpl {
 
-    static AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(new ManaCostsImpl("{W}{U}{B}{R}{G}"));
+    static AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(new ManaCostsImpl("{W}{U}{B}{R}{G}"), SourceIsSpellCondition.getInstance());
     
     public FistOfSunsRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

@@ -30,6 +30,7 @@ package mage.sets.stronghold;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.SourceIsSpellCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -82,7 +83,7 @@ class DreamHallsEffect extends ContinuousEffectImpl {
         filter.add(new SharesColorWithSourcePredicate());
     }
 
-    static AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(new DiscardCardCost(filter));
+    static AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(new DiscardCardCost(filter), SourceIsSpellCondition.getInstance());
 
     public DreamHallsEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

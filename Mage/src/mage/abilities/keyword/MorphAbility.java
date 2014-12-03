@@ -33,7 +33,6 @@ import java.util.Iterator;
 import java.util.List;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.TurnFaceUpAbility;
@@ -48,6 +47,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continious.SourceEffect;
 import mage.cards.Card;
+import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -181,7 +181,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
 
     @Override
     public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
+        if (ability.getAbilityType().equals(AbilityType.SPELL)) {
             Player player = game.getPlayer(controllerId);
             Spell spell = game.getStack().getSpell(ability.getId());
             if (player != null && spell != null) {
@@ -210,6 +210,28 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
                         spellColor.setBlue(false);
                     } else {
                         spell.setFaceDown(false);
+                    }
+                }
+            }
+        }
+       if (ability.getAbilityType().equals(AbilityType.PLAY_LAND)) {
+            Player player = game.getPlayer(controllerId);
+            if (player != null) {
+                this.resetMorph();
+                if (alternateCosts.canPay(ability, sourceId, controllerId, game)) {
+                    if (player.chooseUse(Outcome.Benefit, new StringBuilder("Cast this card as a 2/2 face-down creature for ").append(getCosts().getText()).append(" ?").toString(), game)) {
+                        activateMorph(game);
+                        // change mana costs
+                        ability.getManaCostsToPay().clear();
+                        ability.getCosts().clear();
+                        for (Iterator it = this.alternateCosts.iterator(); it.hasNext();) {
+                            Cost cost = (Cost) it.next();
+                            if (cost instanceof ManaCost) {
+                                ability.getManaCostsToPay().add((ManaCost)cost.copy());
+                            } else {
+                                ability.getCosts().add(cost.copy());
+                            }
+                        }
                     }
                 }
             }

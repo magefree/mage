@@ -61,6 +61,7 @@ import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.OptionalAdditionalSourceCosts;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RestrictionEffect;
@@ -88,6 +89,14 @@ import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.PlayerAction;
+import static mage.constants.PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS;
+import static mage.constants.PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN;
+import static mage.constants.PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE;
+import static mage.constants.PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN;
+import static mage.constants.PlayerAction.PASS_PRIORITY_UNTIL_STACK_RESOLVED;
+import static mage.constants.PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP;
+import static mage.constants.PlayerAction.PERMISSION_REQUESTS_ALLOWED_OFF;
+import static mage.constants.PlayerAction.PERMISSION_REQUESTS_ALLOWED_ON;
 import mage.constants.RangeOfInfluence;
 import mage.constants.SpellAbilityType;
 import mage.constants.TimingRule;
@@ -940,6 +949,32 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean playLand(Card card, Game game) {
+        // Check for alternate casting possibilities: e.g. land with Morph
+        ActivatedAbility playLandAbility = null;
+        boolean found = false;
+        for (Ability ability : card.getAbilities()) {
+            // if cast for noMana no Alternative costs are allowed
+            if ((ability instanceof AlternativeSourceCosts) ||(ability instanceof OptionalAdditionalSourceCosts)) {
+                found = true;
+            }
+            if (ability instanceof PlayLandAbility) {
+                playLandAbility = (ActivatedAbility) ability;
+            }
+        }
+        if (found) {
+            SpellAbility spellAbility = new SpellAbility(null, "", game.getState().getZone(card.getId()), SpellAbilityType.LAND_ALTERNATE);
+            spellAbility.setControllerId(this.getId());
+            spellAbility.setSourceId(card.getId());
+            if (cast(spellAbility, game, false)) {
+                return true;
+            }
+        }
+        if (playLandAbility == null) {
+            return false;
+        }
+        if (!playLandAbility.canActivate(this.playerId, game)) {
+            return false;
+        }
         //20091005 - 305.1
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), card.getId(), playerId))) {
             // int bookmark = game.bookmarkState();
@@ -1026,35 +1061,35 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean activateAbility(ActivatedAbility ability, Game game) {
         boolean result;
-        if (!ability.canActivate(this.playerId, game)) {
-            return false;
-        }
-
         if (ability instanceof PassAbility) {
             pass(game);
             return true;
         }
-        else if (ability instanceof PlayLandAbility) {
+        if (ability instanceof PlayLandAbility) {
             Card card = hand.get(ability.getSourceId(), game);
             if (card == null) {
                 card = game.getCard(ability.getSourceId());
             }
             result = playLand(card, game);
-        }
-        else if (ability instanceof SpecialAction) {
-            result = specialAction((SpecialAction)ability.copy(), game);
-        }
-        else if (ability instanceof ManaAbility) {
-            result = playManaAbility((ManaAbility)ability.copy(), game);
-        }
-        else if (ability instanceof FlashbackAbility){
-            result = playAbility(ability.copy(), game);
-        }
-        else if (ability instanceof SpellAbility) {
-            result = cast((SpellAbility)ability, game, false);
-        }
-        else {
-            result = playAbility(ability.copy(), game);
+        } else {
+            if (!ability.canActivate(this.playerId, game)) {
+                return false;
+            }
+            if (ability instanceof SpecialAction) {
+                result = specialAction((SpecialAction)ability.copy(), game);
+            }
+            else if (ability instanceof ManaAbility) {
+                result = playManaAbility((ManaAbility)ability.copy(), game);
+            }
+            else if (ability instanceof FlashbackAbility){
+                result = playAbility(ability.copy(), game);
+            }
+            else if (ability instanceof SpellAbility) {
+                result = cast((SpellAbility)ability, game, false);
+            }
+            else {
+                result = playAbility(ability.copy(), game);
+            }
         }
 
         //if player has taken an action then reset all player passed flags
@@ -1120,9 +1155,21 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
         if (!(object instanceof Permanent) || ((Permanent)object).canUseActivatedAbilities(game)) {
-            for (ActivatedAbility ability: object.getAbilities().getActivatedAbilities(zone)) {
-                if (ability.canActivate(playerId, game)) {
-                    useable.put(ability.getId(), ability);
+            for (Ability ability: object.getAbilities()) {
+                if (ability.getZone().match(zone)) {
+                    if (ability instanceof ActivatedAbility) {
+                        if (((ActivatedAbility)ability).canActivate(playerId, game)) {
+                            useable.put(ability.getId(), (ActivatedAbility)ability);
+                        }
+                    } else if (ability instanceof AlternativeSourceCosts){
+                        if (object.getCardType().contains(CardType.LAND)) {
+                            for (Ability ability2: object.getAbilities().copy()) {
+                                if (ability2 instanceof PlayLandAbility) {
+                                    useable.put(ability2.getId(), (ActivatedAbility)ability2);
+                                }
+                            }
+                        }
+                    }
                 }
             }
             if (zone != Zone.HAND) {
@@ -2094,9 +2141,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
             }
-
-            MageObject object = game.getObject(ability.getSourceId());
-            for (Ability objectAbility :object.getAbilities()) {
+            // old alternate costs
+            for (Ability objectAbility :sourceObject.getAbilities()) {
                 if (objectAbility instanceof AlternativeCostSourceAbility) {
                     if (objectAbility.getCosts().canPay(ability, ability.getSourceId(), playerId, game)) {
                         return true;
@@ -2109,38 +2155,79 @@ public abstract class PlayerImpl implements Player, Serializable {
                     return true;
                 }
             }
-            
-            if (!(sourceObject instanceof Permanent)) {
-                for (Ability alternateSourceCostsAbility : sourceObject.getAbilities()) {
-                    // if cast for noMana no Alternative costs are allowed
-                    if (alternateSourceCostsAbility instanceof AlternativeSourceCosts) {                     
-                        if (((AlternativeSourceCosts)alternateSourceCostsAbility).isAvailable(ability, game)) {
-                            if (alternateSourceCostsAbility.getCosts().canPay(ability, playerId, playerId, game)) {
-                                ManaCostsImpl manaCosts = new ManaCostsImpl();
-                                for(Cost cost:alternateSourceCostsAbility.getCosts()) {
-                                    if (cost instanceof ManaCost) {
-                                       manaCosts.add(cost);
-                                    }
-                                }
+            // new alternate costs
+            if(canPlayCardByAlternateCost(card, available, ability, game)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-                                if (manaCosts.size() == 0) {
-                                    return true;
+    protected boolean canPlayCardByAlternateCost(Card sourceObject, ManaOptions available, Ability ability, Game game) {
+        if (!(sourceObject instanceof Permanent)) {
+            for (Ability alternateSourceCostsAbility : sourceObject.getAbilities()) {
+                // if cast for noMana no Alternative costs are allowed
+                if (alternateSourceCostsAbility instanceof AlternativeSourceCosts) {
+                    if (((AlternativeSourceCosts)alternateSourceCostsAbility).isAvailable(ability, game)) {
+                        if (alternateSourceCostsAbility.getCosts().canPay(ability, playerId, playerId, game)) {
+                            ManaCostsImpl manaCosts = new ManaCostsImpl();
+                            for(Cost cost:alternateSourceCostsAbility.getCosts()) {
+                                if (cost instanceof ManaCost) {
+                                   manaCosts.add(cost);
                                 }
-                                else {
-                                    for (Mana mana: manaCosts.getOptions()) {
-                                        for (Mana avail: available) {
-                                            if (mana.enough(avail)) {
-                                                return true;
-                                            }
+                            }
+
+                            if (manaCosts.size() == 0) {
+                                return true;
+                            }
+                            else {
+                                for (Mana mana: manaCosts.getOptions()) {
+                                    for (Mana avail: available) {
+                                        if (mana.enough(avail)) {
+                                            return true;
                                         }
                                     }
-                                }                                
+                                }
                             }
-                        }   
+                        }
                     }
                 }
             }
-            
+        }
+        return false;
+    }
+    protected boolean canLandPlayAlternateSourceCostsAbility(Card sourceObject, ManaOptions available, Ability ability, Game game) {
+        if (!(sourceObject instanceof Permanent)) {
+            Ability sourceAbility = null;
+            for(Ability landAbility : sourceObject.getAbilities()) {
+                if (landAbility.getAbilityType().equals(AbilityType.PLAY_LAND)) {
+                    sourceAbility = landAbility;
+                    break;
+                }
+            }
+            if (sourceAbility != null && ((AlternativeSourceCosts)ability).isAvailable(sourceAbility, game)) {
+                if (ability.getCosts().canPay(ability, sourceObject.getId(), this.getId(), game)) {
+                    ManaCostsImpl manaCosts = new ManaCostsImpl();
+                    for(Cost cost:ability.getCosts()) {
+                        if (cost instanceof ManaCost) {
+                           manaCosts.add(cost);
+                        }
+                    }
+
+                    if (manaCosts.size() == 0) {
+                        return true;
+                    }
+                    else {
+                        for (Mana mana: manaCosts.getOptions()) {
+                            for (Mana avail: available) {
+                                if (mana.enough(avail)) {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
         return false;
     }
@@ -2156,15 +2243,19 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             if (hidden) {
                 for (Card card : hand.getUniqueCards(game)) {
-                    for (Ability ability : card.getAbilities().getPlayableAbilities(Zone.HAND)) { // gets this activated ability from hand? (Morph?)
-                        if (ability instanceof ActivatedAbility) { 
-                            if (ability instanceof PlayLandAbility) {
-                                if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(), ability.getSourceId(), playerId), ability, game, true)) {
-                                    break;
+                    for (Ability ability : card.getAbilities()) { // gets this activated ability from hand? (Morph?)
+                        if (ability.getZone().match(Zone.HAND)) {
+                            if (ability instanceof ActivatedAbility) {
+                                if (!(ability instanceof PlayLandAbility) ||
+                                        !game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(), ability.getSourceId(), playerId), ability, game, true)) {
+                                    if (canPlay((ActivatedAbility) ability, availableMana, card, game)) {
+                                        playable.add(ability);
+                                    }
                                 }
-                            }
-                            if (canPlay((ActivatedAbility) ability, availableMana, card, game)) {
-                                playable.add(ability);
+                            } else if (card.getCardType().contains(CardType.LAND) && ability instanceof AlternativeSourceCosts) {
+                                if (canLandPlayAlternateSourceCostsAbility(card, availableMana, ability, game)) { // e.g. Land with Morph
+                                    playable.add(ability);
+                                }
                             }
                         }
                     }
@@ -2265,23 +2356,36 @@ public abstract class PlayerImpl implements Player, Serializable {
             available.addMana(manaPool.getMana());
 
             for (Card card : hand.getCards(game)) {
-                for (ActivatedAbility ability : card.getAbilities().getPlayableAbilities(Zone.HAND)) {
-                    if (ability instanceof PlayLandAbility) {
-                        if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(), ability.getSourceId(), playerId), ability, game, true)) {
-                            break;
+                Abilities:
+                for (Ability ability : card.getAbilities()) {
+                    if (ability.getZone().match(Zone.HAND)) {
+                        switch (ability.getAbilityType()) {
+                            case PLAY_LAND:
+                                if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(), ability.getSourceId(), playerId), ability, game, true)) {
+                                    break;
+                                }
+                                if (canPlay((ActivatedAbility) ability, available, card, game)) {
+                                    playable.add(card.getId());
+                                    break Abilities;
+                                }
+                                break;
+                            case ACTIVATED:
+                            case SPELL:
+                                if (canPlay((ActivatedAbility) ability, available, card, game)) {
+                                    playable.add(card.getId());
+                                    break Abilities;
+                                }
+                                break;
+                            case STATIC:
+                                if (card.getCardType().contains(CardType.LAND) && ability instanceof AlternativeSourceCosts) {
+                                    if (canLandPlayAlternateSourceCostsAbility(card, available, ability, game)) { // e.g. Land with Morph
+                                        playable.add(card.getId());
+                                        break Abilities;
+                                    }
+                                }
                         }
                     }
-                    if (canPlay(ability, available, card, game)) {
-                        playable.add(card.getId());
-                        break;
-                    }
                 }
-//                for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {
-//                    if (!playable.contains(ability.getSourceId()) && canPlay(ability, available, card, game)) {
-//                        playable.add(card.getId());
-//                        break;
-//                    }
-//                }
             }
         }
 

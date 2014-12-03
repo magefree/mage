@@ -56,7 +56,7 @@ public class ForceOfWill extends CardImpl {
         this.color.setBlue(true);
 
         // You may pay 1 life and exile a blue card from your hand rather than pay Force of Will's mana cost.
-        FilterOwnedCard filter = new FilterOwnedCard("blue card from your hand");
+        FilterOwnedCard filter = new FilterOwnedCard("a blue card from your hand");
         filter.add(new ColorPredicate(ObjectColor.BLUE));
         filter.add(Predicates.not(new CardIdPredicate(this.getId()))); // the exile cost can never be paid with the card itself
 
