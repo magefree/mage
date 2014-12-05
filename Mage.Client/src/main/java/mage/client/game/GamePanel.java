@@ -377,6 +377,8 @@ public final class GamePanel extends javax.swing.JPanel {
         this.gameChatPanel.connect(session.getGameChatId(gameId));
         if (!session.joinGame(gameId)) {
             removeGame();
+        } else {
+            AudioManager.playYourGameStarted();
         }
     }
 
