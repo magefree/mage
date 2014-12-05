@@ -28,14 +28,14 @@
 
 package mage.sets.mirrodinbesieged;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import java.util.UUID;
 import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
-
-import java.util.UUID;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  * @author ayratn
@@ -45,8 +45,10 @@ public class IchorWellspring extends CardImpl {
     public IchorWellspring(UUID ownerId) {
         super(ownerId, 110, "Ichor Wellspring", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "MBS";
+
+        // When Ichor Wellspring enters the battlefield or is put into a graveyard from the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
-        this.addAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(1)));
+        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
     public IchorWellspring(final IchorWellspring card) {

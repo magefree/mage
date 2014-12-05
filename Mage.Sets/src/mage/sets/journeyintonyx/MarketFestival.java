@@ -165,11 +165,17 @@ class MarketFestivalManaEffect extends ManaEffect {
                     mana.addWhite();
                 }
             }
-
+            checkToFirePossibleEvents(mana, game, source);
             controller.getManaPool().addMana(mana, game, source);
             return true;
 
         }
         return false;
     }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        return null;
+    }
+
 }

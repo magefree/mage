@@ -58,7 +58,7 @@ public class BloomTender extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {tap}: For each color among permanents you control, add one mana of that color to your mana pool.
+        // {T}: For each color among permanents you control, add one mana of that color to your mana pool.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BloomTenderEffect(), new TapSourceCost()));
 
     }
@@ -91,10 +91,22 @@ class BloomTenderEffect extends ManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());        
-        if (you != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Mana mana = getMana(game, source);
+            checkToFirePossibleEvents(mana, game, source);
+            controller.getManaPool().addMana(mana, game, source);            
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             Mana mana = new Mana();
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(you.getId())) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(controller.getId())) {
                 if (mana.getBlack() == 0 && permanent.getColor().isBlack()) {
                     mana.addBlack();
                 }
@@ -111,9 +123,10 @@ class BloomTenderEffect extends ManaEffect {
                     mana.addWhite();
                 }
             }
-            you.getManaPool().addMana(mana, game, source);
-            return true;
+            return mana;
         }
-        return false;
+        return null;
     }
+
+
 }

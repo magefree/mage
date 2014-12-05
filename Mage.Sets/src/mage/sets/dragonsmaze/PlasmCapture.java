@@ -160,4 +160,10 @@ class PlasmCaptureManaEffect extends ManaEffect {
         }
         return false;
     }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        return null;
+    }
+
 }

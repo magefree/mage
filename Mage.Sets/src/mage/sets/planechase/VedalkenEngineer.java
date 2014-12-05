@@ -43,6 +43,7 @@ import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -114,7 +115,6 @@ class VedalkenEngineerAbility extends ManaAbility {
 
     public VedalkenEngineerAbility(Cost cost, int amount, ConditionalManaBuilder manaBuilder) {
         super(Zone.BATTLEFIELD, new VedalkenEngineerEffect(amount, manaBuilder), cost);
-        this.addChoice(new ChoiceColor());
         this.netMana.add(new Mana(0,0,0,0,0,0, amount));
     }
 
@@ -153,31 +153,38 @@ class VedalkenEngineerEffect extends ManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
 
-        boolean result = false;
-        for (int i = 0; i < amount; i++) {
-            ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
-            Mana mana = null;
-            if (choice.getColor().isBlack()) {
-                mana = manaBuilder.setMana(Mana.BlackMana(1), source, game).build();
-            } else if (choice.getColor().isBlue()) {
-                mana = manaBuilder.setMana(Mana.BlueMana(1), source, game).build();
-            } else if (choice.getColor().isRed()) {
-                mana = manaBuilder.setMana(Mana.RedMana(1), source, game).build();
-            } else if (choice.getColor().isGreen()) {
-                mana = manaBuilder.setMana(Mana.GreenMana(1), source, game).build();
-            } else if (choice.getColor().isWhite()) {
-                mana = manaBuilder.setMana(Mana.WhiteMana(1), source, game).build();
-            }
-            if (mana != null) {
-                player.getManaPool().addMana(mana, game, source);
-                result = true;
+        Mana mana = new Mana();
+        ChoiceColor choiceColor = (ChoiceColor) source.getChoices().get(0);
+        while (!controller.choose(Outcome.Benefit, choiceColor, game)) {
+            if (!controller.isInGame()) {
+                return false;
             }
         }
-        return result;
+        if (choiceColor.getColor().isBlack()) {
+            mana.setBlack(amount);
+        } else if (choiceColor.getColor().isBlue()) {
+            mana.setBlue(amount);
+        } else if (choiceColor.getColor().isRed()) {
+            mana.setRed(amount);
+        } else if (choiceColor.getColor().isGreen()) {
+            mana.setGreen(amount);
+        } else if (choiceColor.getColor().isWhite()) {
+            mana.setWhite(amount);
+        }
+        Mana condMana = manaBuilder.setMana(mana, source, game).build();
+        checkToFirePossibleEvents(condMana, game, source);
+        controller.getManaPool().addMana(condMana, game, source);
+        return true;
     }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        return null;
+    }
+
 }

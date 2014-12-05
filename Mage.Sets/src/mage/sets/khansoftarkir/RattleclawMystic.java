@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.AddManaToControllersManaPoolEffect;
+import mage.abilities.effects.common.AddManaToManaPoolSourceControllerEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.GreenManaAbility;
@@ -66,7 +66,7 @@ public class RattleclawMystic extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}")));
         
         // When Rattleclaw Mystic is turned face up, add {G}{U}{R} to your mana pool.
-        this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new AddManaToControllersManaPoolEffect(new Mana(1,1,1,0,0,0,0))));
+        this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new AddManaToManaPoolSourceControllerEffect(new Mana(1,1,1,0,0,0,0))));
 
     }
 

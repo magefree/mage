@@ -34,7 +34,7 @@ import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
-import mage.abilities.effects.common.ManaInAnyCombinationEffect;
+import mage.abilities.effects.common.AddManaInAnyCombinationEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -62,7 +62,7 @@ public class DreadshipReef extends CardImpl {
         this.addAbility(ability);
         // {1}, Remove X storage counters from Dreadship Reef: Add X mana in any combination of {U} and/or {B} to your mana pool.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new ManaInAnyCombinationEffect(new RemovedCountersForCostValue(), ColoredManaSymbol.U, ColoredManaSymbol.B),
+                new AddManaInAnyCombinationEffect(new RemovedCountersForCostValue(), ColoredManaSymbol.U, ColoredManaSymbol.B),
                 new GenericManaCost(1));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance()));
         this.addAbility(ability);

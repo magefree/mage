@@ -28,26 +28,17 @@
 package mage.sets.judgment;
 
 import java.util.UUID;
-import mage.Mana;
-import mage.abilities.Abilities;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.common.TapForManaAllTriggeredManaAbility;
+import mage.abilities.effects.common.AddManaOfAnyColorTargetCanProduceEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.abilities.mana.ManaAbility;
-import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
+import mage.filter.common.FilterControlledLandPermanent;
 
 /**
  *
@@ -65,7 +56,10 @@ public class MirarisWake extends CardImpl {
         // Creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1,1,Duration.WhileOnBattlefield)));
         // Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.
-        this.addAbility(new MirarisWakeManaAbility());
+        this.addAbility(new TapForManaAllTriggeredManaAbility(
+                new AddManaOfAnyColorTargetCanProduceEffect(),
+                new FilterControlledLandPermanent("you tap a land"),
+                SetTargetPointer.PERMANENT));
 
     }
 
@@ -77,118 +71,4 @@ public class MirarisWake extends CardImpl {
     public MirarisWake copy() {
         return new MirarisWake(this);
     }
-}
-class MirarisWakeManaAbility extends TriggeredManaAbility {
-
-    private static final String staticText = "Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.";
-
-    public MirarisWakeManaAbility() {
-        super(Zone.BATTLEFIELD, new MirarisWakeManaEffect());
-    }
-
-    public MirarisWakeManaAbility(MirarisWakeManaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA && event.getPlayerId().equals(controllerId)) {
-            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-            if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
-                getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public MirarisWakeManaAbility copy() {
-        return new MirarisWakeManaAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return staticText;
-    }
-}
-
-
-class MirarisWakeManaEffect extends ManaEffect {
-
-    public MirarisWakeManaEffect() {
-        super();
-        staticText = "add one mana to your mana pool of any type that land produced";
-    }
-
-    public MirarisWakeManaEffect(final MirarisWakeManaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent land = game.getPermanentOrLKIBattlefield(this.targetPointer.getFirst(game, source));
-        Abilities<ManaAbility> mana = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
-        Mana types = new Mana();
-        for (ManaAbility ability: mana) {
-            for (Mana netMana: ability.getNetMana(game)) {
-                types.add(netMana);
-            }                
-        }
-        Choice choice = new ChoiceImpl(true);
-        choice.setMessage("Pick a mana color");
-        if (types.getBlack() > 0) {
-            choice.getChoices().add("Black");
-        }
-        if (types.getRed() > 0) {
-            choice.getChoices().add("Red");
-        }
-        if (types.getBlue() > 0) {
-            choice.getChoices().add("Blue");
-        }
-        if (types.getGreen() > 0) {
-            choice.getChoices().add("Green");
-        }
-        if (types.getWhite() > 0) {
-            choice.getChoices().add("White");
-        }
-        if (types.getColorless() > 0) {
-            choice.getChoices().add("Colorless");
-        }
-        if (choice.getChoices().size() > 0) {
-            Player player = game.getPlayer(source.getControllerId());
-            if (choice.getChoices().size() == 1) {
-                choice.setChoice(choice.getChoices().iterator().next());
-            } else {
-                player.choose(outcome, choice, game);
-            }
-            switch (choice.getChoice()) {
-                case "Black":
-                    player.getManaPool().addMana(Mana.BlackMana, game, source);
-                    return true;
-                case "Blue":
-                    player.getManaPool().addMana(Mana.BlueMana, game, source);
-                    return true;
-                case "Red":
-                    player.getManaPool().addMana(Mana.RedMana, game, source);
-                    return true;
-                case "Green":
-                    player.getManaPool().addMana(Mana.GreenMana, game, source);
-                    return true;
-                case "White":
-                    player.getManaPool().addMana(Mana.WhiteMana, game, source);
-                    return true;
-                case "Colorless":
-                    player.getManaPool().addMana(Mana.ColorlessMana, game, source);
-                    return true;
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public MirarisWakeManaEffect copy() {
-        return new MirarisWakeManaEffect(this);
-    }
-
 }

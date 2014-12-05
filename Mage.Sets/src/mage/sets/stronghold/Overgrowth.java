@@ -30,8 +30,8 @@ package mage.sets.stronghold;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
@@ -42,9 +42,9 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -65,8 +65,7 @@ public class Overgrowth extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        // Whenever enchanted land is tapped for mana, its controller adds {G}{G} to his or her mana pool.
-        
+        // Whenever enchanted land is tapped for mana, its controller adds {G}{G} to his or her mana pool.        
         this.addAbility(new OvergrowthTriggeredAbility());
     }
 
@@ -84,7 +83,7 @@ class OvergrowthTriggeredAbility extends TriggeredManaAbility {
 
 
     public OvergrowthTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new OvergrowthEffect());
+        super(Zone.BATTLEFIELD, new AddManaToManaPoolTargetControllerEffect(new Mana(0,2,0,0,0,0,0), "his or her"));
     }
 
     public OvergrowthTriggeredAbility(final OvergrowthTriggeredAbility ability) {
@@ -101,7 +100,11 @@ class OvergrowthTriggeredAbility extends TriggeredManaAbility {
         Permanent enchantment = game.getPermanent(this.getSourceId());
         if(event.getType() == GameEvent.EventType.TAPPED_FOR_MANA){
             if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
-                return true;
+                Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
+                if (enchanted != null) {
+                    getEffects().get(0).setTargetPointer(new FixedTarget(enchanted.getControllerId()));
+                    return true;
+                }
             }
         }  
         return false;
@@ -111,38 +114,5 @@ class OvergrowthTriggeredAbility extends TriggeredManaAbility {
     @Override
     public String getRule() {
         return "Whenever enchanted land is tapped for mana, its controller adds {G}{G} to his or her mana pool";
-    }
-}
-
-class OvergrowthEffect extends ManaEffect {
-
-    public OvergrowthEffect() {
-        super();
-        staticText = "its controller adds {G}{G} to his or her mana pool";
-    }
-
-    public OvergrowthEffect(final OvergrowthEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if(enchantment != null){
-            Permanent land = game.getPermanent(enchantment.getAttachedTo());
-            if(land != null){
-                Player player = game.getPlayer(land.getControllerId());
-                if (player != null) {
-                    player.getManaPool().addMana(Mana.GreenMana(2), game, source);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public OvergrowthEffect copy() {
-        return new OvergrowthEffect(this);
     }
 }

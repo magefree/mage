@@ -152,6 +152,7 @@ class OpalPalaceManaEffect extends ManaEffect {
                     }
                     // set to indicate, that the mana can boost the commander
                     mana.setFlag(true);
+                    checkToFirePossibleEvents(mana, game, source);
                     controller.getManaPool().addMana(mana, game, source);
                     
                 }
@@ -160,6 +161,13 @@ class OpalPalaceManaEffect extends ManaEffect {
         }
         return false;
     }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        return null;
+    }
+
+
 }
 
 class OpalPalaceWatcher extends Watcher {

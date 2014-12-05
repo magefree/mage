@@ -115,8 +115,8 @@ class OrcishLumberjackManaEffect extends ManaEffect {
             manaChoice.setChoices(choices);
             manaChoice.setMessage("Select color of mana to add");
 
-            for(int i = 0; i < 3; i++){
-                Mana mana = new Mana();
+            Mana mana = new Mana();
+            for(int i = 0; i < 3; i++){                
                 while (!player.choose(Outcome.Benefit, manaChoice, game)) {
                     if (!player.isInGame()) {
                         return false;
@@ -130,10 +130,19 @@ class OrcishLumberjackManaEffect extends ManaEffect {
                         mana.addRed();
                         break;
                 }
-                player.getManaPool().addMana(mana, game, source);
+                
             }
+            checkToFirePossibleEvents(mana, game, source);
+            player.getManaPool().addMana(mana, game, source);
             return true;
         }
         return false;
     }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        return null;
+    }
+
+
 }

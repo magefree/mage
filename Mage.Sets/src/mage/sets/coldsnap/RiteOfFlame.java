@@ -100,4 +100,10 @@ class RiteOfFlameManaEffect extends ManaEffect {
     public RiteOfFlameManaEffect copy() {
         return new RiteOfFlameManaEffect(this);
     }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        return null;
+    }
+
 }

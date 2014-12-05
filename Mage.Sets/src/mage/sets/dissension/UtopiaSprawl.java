@@ -43,6 +43,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -180,29 +181,22 @@ class UtopiaSprawlEffect extends ManaEffect {
             if(land != null){
                 Player player = game.getPlayer(land.getControllerId());
                 if (player != null) {
-                    ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
-                    switch(color.toString()) {
-                        case "W":
-                            player.getManaPool().addMana(Mana.WhiteMana, game, source);
-                            break;
-                        case "B":
-                            player.getManaPool().addMana(Mana.BlackMana, game, source);
-                            break;
-                        case "U":
-                            player.getManaPool().addMana(Mana.BlueMana, game, source);
-                            break;
-                        case "G":
-                            player.getManaPool().addMana(Mana.GreenMana, game, source);
-                            break;
-                        case "R":
-                            player.getManaPool().addMana(Mana.RedMana, game, source);
-                            break;
-                    }
+                    player.getManaPool().addMana(getMana(game, source), game, source);
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
+        if (color != null) {
+            return new Mana(ColoredManaSymbol.lookup(color.toString().charAt(0)));
+        } else {
+            return null;
+        }
     }
 
     @Override

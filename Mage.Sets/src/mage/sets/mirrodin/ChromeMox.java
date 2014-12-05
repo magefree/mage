@@ -29,9 +29,6 @@ package mage.sets.mirrodin;
 
 import java.util.List;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -44,7 +41,9 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -168,8 +167,9 @@ class ChromeMoxManaEffect extends ManaEffect {
                     if (color.isWhite()) {
                         choice.getChoices().add("White");
                     }
-                  
+
                     if (choice.getChoices().size() > 0) {
+                        Mana mana = new Mana();
                         if (choice.getChoices().size() == 1) {
                             choice.setChoice(choice.getChoices().iterator().next());
                         } else {
@@ -188,12 +188,18 @@ class ChromeMoxManaEffect extends ManaEffect {
                         } else if (choice.getChoice().equals("Colorless")) {
                             player.getManaPool().addMana(Mana.ColorlessMana, game, source);
                         }
+                        checkToFirePossibleEvents(mana, game, source);
+                        player.getManaPool().addMana(mana, game, source);
                     }
                 }
-
             }
         }
         return true;
+    }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        return null;
     }
 
 }

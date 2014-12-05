@@ -30,26 +30,25 @@ package mage.sets.legions;
 import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.mana.SimpleManaAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
  * @author Plopman
  */
 public class WirewoodChanneler extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterPermanent("Elves");
+
+    static {
+        filter.add(new SubtypePredicate(("Elf")));
+    }
 
     public WirewoodChanneler(UUID ownerId) {
         super(ownerId, 144, "Wirewood Channeler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
@@ -61,9 +60,9 @@ public class WirewoodChanneler extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {tap}: Add X mana of any one color to your mana pool, where X is the number of Elves on the battlefield.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new WirewoodChannelerManaEffect(), new TapSourceCost());
-        ability.addChoice(new ChoiceColor());
+        // {T}: Add X mana of any one color to your mana pool, where X is the number of Elves on the battlefield.
+        DynamicManaAbility ability = new DynamicManaAbility(new Mana(0,0,0,0,0,0,1), new PermanentsOnBattlefieldCount(filter),
+                "Add X mana of any one color to your mana pool, where X is the number of Elves on the battlefield");
         this.addAbility(ability);
     }
 
@@ -74,52 +73,5 @@ public class WirewoodChanneler extends CardImpl {
     @Override
     public WirewoodChanneler copy() {
         return new WirewoodChanneler(this);
-    }
-}
-
-
-class WirewoodChannelerManaEffect extends ManaEffect {
-    private static final FilterPermanent filter = new FilterPermanent();
-
-    static {
-        filter.add(new SubtypePredicate("Elf"));
-    }
-
-    WirewoodChannelerManaEffect() {
-        super();
-        staticText = "Add X mana of any one color to your mana pool, where X is the number of Elves on the battlefield";
-    }
-
-    WirewoodChannelerManaEffect(final WirewoodChannelerManaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
-        Player player = game.getPlayer(source.getControllerId());
-        int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
-        if (choice.getColor().isBlack()) {
-            player.getManaPool().addMana(new Mana(0, 0, 0, 0, count, 0, 0), game, source);
-            return true;
-        } else if (choice.getColor().isBlue()) {
-            player.getManaPool().addMana(new Mana(0, 0, count, 0, 0, 0, 0), game, source);
-            return true;
-        } else if (choice.getColor().isRed()) {
-            player.getManaPool().addMana(new Mana(count, 0, 0, 0, 0, 0, 0), game, source);
-            return true;
-        } else if (choice.getColor().isGreen()) {
-            player.getManaPool().addMana(new Mana(0, count, 0, 0, 0, 0, 0), game, source);
-            return true;
-        } else if (choice.getColor().isWhite()) {
-            player.getManaPool().addMana(new Mana(0, 0, 0, count, 0, 0, 0), game, source);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public WirewoodChannelerManaEffect copy() {
-        return new WirewoodChannelerManaEffect(this);
     }
 }

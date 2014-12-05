@@ -142,8 +142,15 @@ public class PetalmaneBaku extends CardImpl {
         }
 
         @Override
+        public Mana getMana(Game game, Ability source) {
+            return null;
+        }
+
+        @Override
         public PetalmaneBakuManaEffect copy() {
             return new PetalmaneBakuManaEffect(this);
         }
     }
+
+
 }

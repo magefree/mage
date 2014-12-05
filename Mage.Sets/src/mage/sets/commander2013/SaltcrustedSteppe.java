@@ -34,7 +34,7 @@ import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
-import mage.abilities.effects.common.ManaInAnyCombinationEffect;
+import mage.abilities.effects.common.AddManaInAnyCombinationEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -62,7 +62,7 @@ public class SaltcrustedSteppe extends CardImpl {
         this.addAbility(ability);
         // {1}, Remove X storage counters from Saltcrusted Steppe: Add X mana in any combination of {G} and/or {W} to your mana pool.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new ManaInAnyCombinationEffect(new RemovedCountersForCostValue(), ColoredManaSymbol.G, ColoredManaSymbol.W),
+                new AddManaInAnyCombinationEffect(new RemovedCountersForCostValue(), ColoredManaSymbol.G, ColoredManaSymbol.W),
                 new GenericManaCost(1));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance()));
         this.addAbility(ability);

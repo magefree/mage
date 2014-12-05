@@ -39,6 +39,7 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -89,27 +90,19 @@ class ColdsteelHeartManaEffect extends ManaEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
-            switch(color.toString()) {
-                case "W":
-                    player.getManaPool().addMana(Mana.WhiteMana, game, source);
-                    break;
-                case "B":
-                    player.getManaPool().addMana(Mana.BlackMana, game, source);
-                    break;
-                case "U":
-                    player.getManaPool().addMana(Mana.BlueMana, game, source);
-                    break;
-                case "G":
-                    player.getManaPool().addMana(Mana.GreenMana, game, source);
-                    break;
-                case "R":
-                    player.getManaPool().addMana(Mana.RedMana, game, source);
-                    break;
-            }
-            return true;
+                player.getManaPool().addMana(getMana(game, source), game, source);
         }
-        return false;
+        return true;
+    }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
+        if (color != null) {
+            return new Mana(ColoredManaSymbol.lookup(color.toString().charAt(0)));
+        } else {
+            return null;
+        }
     }
 
     @Override

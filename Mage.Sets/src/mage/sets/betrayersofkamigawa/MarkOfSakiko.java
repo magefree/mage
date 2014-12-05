@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AddManaToManaPoolEffect;
+import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -108,7 +108,7 @@ class MarkOfSakikoTriggeredAbility extends TriggeredAbilityImpl {
             if (((DamagedPlayerEvent) event).isCombatDamage()) {
                 if (event.getSourceId().equals(getSourceId())) {
                     this.getEffects().clear();
-                    Effect effect = new AddManaToManaPoolEffect(new Mana(0,event.getAmount(),0,0,0,0,0), "that player", true);
+                    Effect effect = new AddManaToManaPoolTargetControllerEffect(new Mana(0,event.getAmount(),0,0,0,0,0), "that player", true);
                     effect.setTargetPointer(new FixedTarget(getControllerId()));
                     effect.setText("add that much {G} to your mana pool. Until end of turn, this mana doesn't empty from your mana pool as steps and phases end");        
                     this.addEffect(effect);

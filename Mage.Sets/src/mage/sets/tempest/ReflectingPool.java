@@ -146,26 +146,29 @@ class ReflectingPoolEffect extends ManaEffect {
                 player.choose(outcome, choice, game);
             }
             if (choice.getChoice() != null) {
+                Mana mana = new Mana();
                 switch (choice.getChoice()) {
                     case "Black":
-                        player.getManaPool().addMana(Mana.BlackMana, game, source);
+                        mana.setBlack(1);
                         break;
                     case "Blue":
-                        player.getManaPool().addMana(Mana.BlueMana, game, source);
+                        mana.setBlue(1);
                         break;
                     case "Red":
-                        player.getManaPool().addMana(Mana.RedMana, game, source);
+                        mana.setRed(1);
                         break;
                     case "Green":
-                        player.getManaPool().addMana(Mana.GreenMana, game, source);
+                        mana.setGreen(1);
                         break;
                     case "White":
-                        player.getManaPool().addMana(Mana.WhiteMana, game, source);
+                        mana.setWhite(1);
                         break;
                     case "Colorless":
-                        player.getManaPool().addMana(Mana.ColorlessMana, game, source);
+                        mana.setColorless(1);
                         break;
                 }
+                checkToFirePossibleEvents(mana, game, source);
+                player.getManaPool().addMana(mana, game, source);
                 return true;
             }
             return false;
@@ -211,6 +214,11 @@ class ReflectingPoolEffect extends ManaEffect {
             }
         }
         return types;
+    }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        return null;
     }
 
     @Override

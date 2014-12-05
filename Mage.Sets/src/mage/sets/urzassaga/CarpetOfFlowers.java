@@ -181,24 +181,39 @@ class CarpetOfFlowersEffect extends ManaEffect {
             choiceCount.setMessage("Choose number of mana");
             controller.choose(Outcome.PutManaInPool, choiceCount, game);
             int count = Integer.parseInt(choiceCount.getChoice());
-            if (choice.getColor().isBlack()) {
-                controller.getManaPool().addMana(new Mana(0, 0, 0, 0, count, 0, 0), game, source);
-                return true;
-            } else if (choice.getColor().isBlue()) {
-                controller.getManaPool().addMana(new Mana(0, 0, count, 0, 0, 0, 0), game, source);
-                return true;
-            } else if (choice.getColor().isRed()) {
-                controller.getManaPool().addMana(new Mana(count, 0, 0, 0, 0, 0, 0), game, source);
-                return true;
-            } else if (choice.getColor().isGreen()) {
-                controller.getManaPool().addMana(new Mana(0, count, 0, 0, 0, 0, 0), game, source);
-                return true;
-            } else if (choice.getColor().isWhite()) {
-                controller.getManaPool().addMana(new Mana(0, 0, 0, count, 0, 0, 0), game, source);
-                return true;
+            if (count > 0) {
+                Mana mana = new Mana();
+                switch (choice.getChoice()) {
+                    case "Black":
+                        mana.setBlack(count);
+                        break;
+                    case "Blue":
+                        mana.setBlue(count);
+                        break;
+                    case "Red":
+                        mana.setRed(count);
+                        break;
+                    case "Green":
+                        mana.setGreen(count);
+                        break;
+                    case "White":
+                        mana.setWhite(count);
+                        break;
+                    case "Colorless":
+                        mana.setColorless(count);
+                        break;
+                }
+                checkToFirePossibleEvents(mana, game, source);
+                controller.getManaPool().addMana(mana, game, source);
             }
+            return true;
         }
         return false;
+    }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        return null;
     }
 
     @Override

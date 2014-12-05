@@ -28,23 +28,16 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.mana.TriggeredManaAbility;
+import mage.abilities.common.TapForManaAllTriggeredManaAbility;
+import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
 import mage.cards.CardImpl;
-import mage.constants.Zone;
+import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -52,6 +45,11 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class VernalBloom extends CardImpl {
 
+    private static final FilterLandPermanent filter = new FilterLandPermanent("a Forest");
+
+    static {
+        filter.add(new SubtypePredicate("Forest"));
+    }
     public VernalBloom(UUID ownerId) {
         super(ownerId, 281, "Vernal Bloom", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
         this.expansionSetCode = "USG";
@@ -59,7 +57,9 @@ public class VernalBloom extends CardImpl {
         this.color.setGreen(true);
 
         // Whenever a Forest is tapped for mana, its controller adds {G} to his or her mana pool.
-        this.addAbility(new VernalBloomTriggeredAbility());
+        this.addAbility(new TapForManaAllTriggeredManaAbility(
+                new AddManaToManaPoolTargetControllerEffect(new Mana(ColoredManaSymbol.G), "his or her"),
+                filter, SetTargetPointer.PLAYER));
     }
 
     public VernalBloom(final VernalBloom card) {
@@ -70,74 +70,4 @@ public class VernalBloom extends CardImpl {
     public VernalBloom copy() {
         return new VernalBloom(this);
     }
-}
-
-class VernalBloomTriggeredAbility extends TriggeredManaAbility {
-
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Forest");
-    static {
-            filter.add(new SubtypePredicate("Forest"));
-    }
-
-    public VernalBloomTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddGreenToTargetEffect());
-        this.usesStack = false;
-    }
-
-    public VernalBloomTriggeredAbility(VernalBloomTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent land = game.getPermanent(event.getTargetId());
-        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA && land != null && filter.match(land, game)) {
-            for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(land.getControllerId()));
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public VernalBloomTriggeredAbility copy() {
-        return new VernalBloomTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a Forest is tapped for mana, its controller adds {G} to his or her mana pool";
-    }
-}
-
-class AddGreenToTargetEffect extends ManaEffect {
-    
-
-    public AddGreenToTargetEffect() {
-        super();
-        staticText = "its controller adds {G} to his or her mana pool";
-    }
-
-
-    public AddGreenToTargetEffect(final AddGreenToTargetEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AddGreenToTargetEffect copy() {
-        return new AddGreenToTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if(player != null)
-        {
-            player.getManaPool().addMana(Mana.GreenMana(1), game, source);
-
-        }
-        return true;
-    }
-
 }
