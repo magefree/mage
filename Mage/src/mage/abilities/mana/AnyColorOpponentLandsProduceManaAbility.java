@@ -122,25 +122,35 @@ class AnyColorOpponentLandsProduceManaEffect extends ManaEffect {
             } else {
                 player.choose(outcome, choice, game);
             }
-            switch (choice.getChoice()) {
-                case "Black":
-                    player.getManaPool().addMana(Mana.BlackMana, game, source);
-                    break;
-                case "Blue":
-                    player.getManaPool().addMana(Mana.BlueMana, game, source);
-                    break;
-                case "Red":
-                    player.getManaPool().addMana(Mana.RedMana, game, source);
-                    break;
-                case "Green":
-                    player.getManaPool().addMana(Mana.GreenMana, game, source);
-                    break;
-                case "White":
-                    player.getManaPool().addMana(Mana.WhiteMana, game, source);
-                    break;
+            if (choice.getChoice() != null) {
+                Mana mana = new Mana();
+                switch (choice.getChoice()) {
+                    case "Black":
+                        mana.setBlack(1);
+                        break;
+                    case "Blue":
+                        mana.setBlue(1);
+                        break;
+                    case "Red":
+                        mana.setRed(1);
+                        break;
+                    case "Green":
+                        mana.setGreen(1);
+                        break;
+                    case "White":
+                        mana.setWhite(1);
+                        break;
+                }                
+                checkToFirePossibleEvents(mana, game, source);
+                player.getManaPool().addMana(mana, game, source);
             }
         }
         return true;
+    }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        return null;
     }
 
     private Mana getManaTypes(Game game, Ability source) {

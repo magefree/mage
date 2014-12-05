@@ -17,24 +17,24 @@ import mage.players.Player;
  *
  * @author magenoxx
  */
-public class AddManaToControllersManaPoolEffect extends OneShotEffect {
+public class AddManaToManaPoolSourceControllerEffect extends OneShotEffect {
 
     protected Mana mana;
 
-    public AddManaToControllersManaPoolEffect(Mana mana) {
+    public AddManaToManaPoolSourceControllerEffect(Mana mana) {
         super(Outcome.PutManaInPool);
         this.mana = mana;
         this.staticText = "Add " + mana.toString() + " to your mana pool";
     }
 
-    public AddManaToControllersManaPoolEffect(final AddManaToControllersManaPoolEffect effect) {
+    public AddManaToManaPoolSourceControllerEffect(final AddManaToManaPoolSourceControllerEffect effect) {
         super(effect);
         this.mana = effect.mana;
     }
 
     @Override
-    public AddManaToControllersManaPoolEffect copy() {
-        return new AddManaToControllersManaPoolEffect(this);
+    public AddManaToManaPoolSourceControllerEffect copy() {
+        return new AddManaToManaPoolSourceControllerEffect(this);
     }
 
     @Override

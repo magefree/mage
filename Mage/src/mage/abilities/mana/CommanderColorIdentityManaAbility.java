@@ -30,14 +30,18 @@ package mage.abilities.mana;
 import java.util.List;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
 import mage.cards.Card;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.AbilityType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.ManaEvent;
 import mage.players.Player;
 
 /**
@@ -145,27 +149,35 @@ class CommanderIdentityManaEffect extends ManaEffect {
                             return false;
                         }
                     }
+                    Mana mana = new Mana();
                     switch (choice.getChoice()) {
                         case "Black":
-                            controller.getManaPool().addMana(Mana.BlackMana, game, source);
+                            mana.setBlack(1);
                             break;
                         case "Blue":
-                            controller.getManaPool().addMana(Mana.BlueMana, game, source);
+                            mana.setBlue(1);
                             break;
                         case "Red":
-                            controller.getManaPool().addMana(Mana.RedMana, game, source);
+                            mana.setRed(1);
                             break;
                         case "Green":
-                            controller.getManaPool().addMana(Mana.GreenMana, game, source);
+                            mana.setGreen(1);
                             break;
                         case "White":
-                            controller.getManaPool().addMana(Mana.WhiteMana, game, source);
+                            mana.setWhite(1);
                             break;
                     }
+                    checkToFirePossibleEvents(mana, game, source);
+                    controller.getManaPool().addMana(mana, game, source);                    
+                    return true;
                 }
-                return true;
             }
         }
         return false;
+    }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        return null;
     }
 }

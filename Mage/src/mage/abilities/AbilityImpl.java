@@ -54,8 +54,12 @@ import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.Mana;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.effects.common.DynamicManaEffect;
 import mage.game.events.GameEvent;
+import mage.game.events.ManaEvent;
 import mage.game.permanent.Permanent;
 
 /**
@@ -346,7 +350,16 @@ public abstract class AbilityImpl implements Ability {
         if (this.getAbilityType().equals(AbilityType.MANA)) {
             for (Cost cost: costs) {
                 if (cost instanceof TapSourceCost) {
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TAPPED_FOR_MANA, sourceId, sourceId, controllerId));
+                    Mana mana = null;
+                    Effect effect = getEffects().get(0);
+                    if (effect instanceof BasicManaEffect) {
+                        mana = ((BasicManaEffect)effect).getMana(game, this);
+                    } else if (effect instanceof DynamicManaEffect) {
+                        mana = ((DynamicManaEffect)effect).getMana(game, this);
+                    }
+                    if (mana != null) { // if mana == null the event has to be fires in the mana effect 
+                        game.fireEvent(new ManaEvent(GameEvent.EventType.TAPPED_FOR_MANA, sourceId, sourceId, controllerId, mana));
+                    }
                     break;
                 }
             }

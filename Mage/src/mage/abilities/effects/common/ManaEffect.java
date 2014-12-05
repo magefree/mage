@@ -28,8 +28,16 @@
 
 package mage.abilities.effects.common;
 
+import mage.Mana;
+import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.AbilityType;
 import mage.constants.Outcome;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.ManaEvent;
 
 /**
  *
@@ -45,4 +53,22 @@ public abstract class ManaEffect extends OneShotEffect {
         super(effect);
     }
 
+    public abstract Mana getMana(Game game, Ability source);
+
+    /**
+     * Only used for mana effects that decide which mana is produced during resolution of the effect.
+     * 
+     * @param mana
+     * @param game
+     * @param source
+     */
+    public void checkToFirePossibleEvents(Mana mana, Game game, Ability source) {
+        if (source.getAbilityType().equals(AbilityType.MANA)) {
+            for (Cost cost: source.getCosts()) {
+                if (cost instanceof TapSourceCost) {
+                    game.fireEvent(new ManaEvent(GameEvent.EventType.TAPPED_FOR_MANA, source.getSourceId(), source.getSourceId(), source.getControllerId(), mana));
+                }
+            }
+        }
+    }
 }

@@ -86,6 +86,11 @@ public class DynamicManaEffect extends BasicManaEffect {
         return super.getText(mode) + " for each " + amount.getMessage();
     }
 
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        return computeMana(false, game, source);
+    }
+
     public Mana computeMana(boolean netMana ,Game game, Ability source){
         this.computedMana.clear();
         int count = amount.calculate(game, source, this);
@@ -131,4 +136,5 @@ public class DynamicManaEffect extends BasicManaEffect {
         }
         return computedMana;
     }
+
 }

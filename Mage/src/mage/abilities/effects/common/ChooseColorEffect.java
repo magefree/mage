@@ -58,17 +58,15 @@ public class ChooseColorEffect extends OneShotEffect {
         if (controller != null && permanent != null) {
             ChoiceColor choice = new ChoiceColor();
             while (!choice.isChosen()) {
-                controller.choose(Outcome.PutManaInPool, choice, game);
+                controller.choose(outcome, choice, game);
                 if (!controller.isInGame()) {
                     return false;
                 }
             }
-            ChoiceColor colorChoice = new ChoiceColor();
-            if (controller.choose(outcome, colorChoice, game)) {
-                game.informPlayers(new StringBuilder(permanent.getLogName()).append(": ").append(controller.getName()).append(" has chosen ").append(colorChoice.getChoice()).toString());
-                game.getState().setValue(source.getSourceId() + "_color", colorChoice.getColor());
-                permanent.addInfo("chosen color", "<font color = 'blue'>Chosen color: " + colorChoice.getColor().getDescription() + "</font>");
-            }
+            game.informPlayers(new StringBuilder(permanent.getLogName()).append(": ").append(controller.getName()).append(" has chosen ").append(choice.getChoice()).toString());
+            game.getState().setValue(source.getSourceId() + "_color", choice.getColor());
+            permanent.addInfo("chosen color", "<font color = 'blue'>Chosen color: " + choice.getColor().getDescription() + "</font>");
+            return true;
         }
         return false;
     }

@@ -18,12 +18,12 @@ import mage.players.Player;
  * @author LevelX2
  */
 
-public class AddManaToManaPoolEffect extends OneShotEffect {
+public class AddManaToManaPoolTargetControllerEffect extends ManaEffect {
 
     protected Mana mana;
     protected boolean emptyOnlyOnTurnsEnd;
     
-    public AddManaToManaPoolEffect(Mana mana, String textManaPoolOwner) {
+    public AddManaToManaPoolTargetControllerEffect(Mana mana, String textManaPoolOwner) {
         this(mana, textManaPoolOwner, false);
     }
     /**
@@ -34,22 +34,22 @@ public class AddManaToManaPoolEffect extends OneShotEffect {
      * @param emptyOnTurnsEnd if set, the mana will empty only on end of turnstep
      * 
      */     
-    public AddManaToManaPoolEffect(Mana mana, String textManaPoolOwner, boolean emptyOnTurnsEnd) {
-        super(Outcome.PutManaInPool);
+    public AddManaToManaPoolTargetControllerEffect(Mana mana, String textManaPoolOwner, boolean emptyOnTurnsEnd) {
+        super();
         this.mana = mana;
         this.emptyOnlyOnTurnsEnd = emptyOnTurnsEnd;
-        this.staticText = "add " + mana.toString() + " to " + textManaPoolOwner + " mana pool";
+        this.staticText = (textManaPoolOwner.equals("his or her")?"that player adds":"add ") + mana.toString() + " to " + textManaPoolOwner + " mana pool";
     }
 
-    public AddManaToManaPoolEffect(final AddManaToManaPoolEffect effect) {
+    public AddManaToManaPoolTargetControllerEffect(final AddManaToManaPoolTargetControllerEffect effect) {
         super(effect);
         this.mana = effect.mana;
         this.emptyOnlyOnTurnsEnd = effect.emptyOnlyOnTurnsEnd;
     }
 
     @Override
-    public AddManaToManaPoolEffect copy() {
-        return new AddManaToManaPoolEffect(this);
+    public AddManaToManaPoolTargetControllerEffect copy() {
+        return new AddManaToManaPoolTargetControllerEffect(this);
     }
 
     @Override
@@ -61,4 +61,10 @@ public class AddManaToManaPoolEffect extends OneShotEffect {
         }
         return false;
     }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        return mana;
+    }
+
 }
