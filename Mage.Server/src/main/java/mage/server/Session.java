@@ -83,6 +83,10 @@ public class Session {
         return returnMessage;
     }
 
+    public boolean isLocked() {
+        return lock.isLocked();
+    }
+
     public String registerUserHandling(String userName) throws MageException {
         this.isAdmin = false;
         if (userName.equals("Admin")) {
@@ -216,6 +220,7 @@ public class Session {
         try {
             if(lock.tryLock(500, TimeUnit.MILLISECONDS)) {
                 lockSet = true;
+                logger.debug("SESSION LOCK SET sessionId: " + sessionId);
                 User user = UserManager.getInstance().getUser(userId);
                 if (user == null || !user.isConnected()) {
                     return; //user was already disconnected by other thread
@@ -236,6 +241,7 @@ public class Session {
         finally {
             if (lockSet)    {
                 lock.unlock();
+                logger.debug("SESSION LOCK UNLOCK sessionId: " + sessionId);
             }
         }
 
@@ -246,6 +252,7 @@ public class Session {
         try {
             if(lock.tryLock(500, TimeUnit.MILLISECONDS)) {
                 lockSet = true;
+                logger.debug("SESSION LOCK SET sessionId: " + sessionId);
                 UserManager.getInstance().removeUser(userId, reason);
             } else {
                 logger.error("SESSION LOCK - kill: userId " + userId);
@@ -256,22 +263,17 @@ public class Session {
         finally {
             if (lockSet)    {
                 lock.unlock();
+                logger.debug("SESSION LOCK UNLOCK sessionId: " + sessionId);
+
             }
         }
 
     }
 
     public void fireCallback(final ClientCallback call) {
-        boolean lockSet = false;
         try {
-            if (lock.tryLock(500, TimeUnit.MILLISECONDS)) {
-                lockSet = true;
                 call.setMessageId(messageId++);
                 callbackHandler.handleCallbackOneway(new Callback(call));
-            } else {
-                logger.error("SESSION LOCK callback: userId " + userId);
-                logger.error(" - method: " + call.getMethod());
-            }
         } catch (HandleCallbackException ex) {
             User user = UserManager.getInstance().getUser(userId);
             logger.warn("SESSION CALLBACK EXCEPTION - " + (user != null ? user.getName():"") + " userId " + userId);
@@ -279,16 +281,6 @@ public class Session {
             logger.warn(" - cause: " + getBasicCause(ex).toString());
             logger.trace("Stack trace:", ex);
             userLostConnection();
-        } catch (InterruptedException ex) {
-            logger.error("SESSION LOCK callback -userId: " + userId);
-            logger.error(" - method: " + call.getMethod());
-            logger.error(" - cause: " + getBasicCause(ex).toString());
-            logger.trace("Stack trace:", ex);
-        }
-        finally {
-            if (lockSet)    {
-                lock.unlock();
-            }
         }
     }
 

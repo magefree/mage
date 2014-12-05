@@ -213,10 +213,9 @@ public class Main {
                     // So it should be possible to reconnect to server and continue games if DisconnectReason is set to LostConnection
                     //SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.Disconnected);                    
                     SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.LostConnection);
-                    logger.info("CLIENT DISCONNECTED - " + sessionInfo, throwable);
+                    logger.info("CLIENT DISCONNECTED - " + sessionInfo);
                     logger.debug("Stack Trace", throwable);
-                }
-                else {                    
+                } else {                    
                     SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.LostConnection);                    
                     logger.info("LOST CONNECTION - " + sessionInfo);
                     if (logger.isDebugEnabled()) {
