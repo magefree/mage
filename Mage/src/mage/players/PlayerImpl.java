@@ -2706,12 +2706,13 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override 
     public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
         boolean result = false;
+        boolean faceDown = card.isFaceDown(); // move sets card to face up
         if (card.moveToZone(Zone.HAND, sourceId, game, false)) {
             if (card instanceof PermanentCard) {
                 card = game.getCard(card.getId());
             }            
             game.informPlayers(new StringBuilder(this.getName())
-                    .append(" puts ").append(card.isFaceDown() ? " a face down card":card.getLogName()).append(" ")
+                    .append(" puts ").append(faceDown ? " a face down card":card.getLogName()).append(" ")
                     .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" "):"")
                     .append(card.getOwnerId().equals(this.getId()) ? "into his or her hand":"into its owner's hand").toString());
             result = true;
