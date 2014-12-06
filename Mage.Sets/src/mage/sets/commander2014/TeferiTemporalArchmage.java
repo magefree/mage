@@ -107,7 +107,7 @@ class TeferiTemporalArchmageEmblem extends Emblem {
 class TeferiTemporalArchmageAsThoughEffect extends AsThoughEffectImpl {
 
     public TeferiTemporalArchmageAsThoughEffect() {
-        super(AsThoughEffectType.CAST_AS_INSTANT, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_AS_INSTANT, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may activate loyalty abilities of planeswalkers you control on any player's turn any time you could cast an instant";
     }
 
