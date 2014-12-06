@@ -29,7 +29,7 @@ package mage.sets.legions;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -64,7 +64,7 @@ public class WirewoodHivemaster extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever another nontoken Elf enters the battlefield, you may put a 1/1 green Insect creature token onto the battlefield.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new InsectToken(), 1), filter, true));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new InsectToken(), 1), filter, true));
     }
 
     public WirewoodHivemaster(final WirewoodHivemaster card) {
