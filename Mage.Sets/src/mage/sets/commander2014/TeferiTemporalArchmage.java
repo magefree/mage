@@ -107,7 +107,7 @@ class TeferiTemporalArchmageEmblem extends Emblem {
 class TeferiTemporalArchmageAsThoughEffect extends AsThoughEffectImpl {
 
     public TeferiTemporalArchmageAsThoughEffect() {
-        super(AsThoughEffectType.CAST_AS_INSTANT, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.ACTIVATE_AS_INSTANT, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may activate loyalty abilities of planeswalkers you control on any player's turn any time you could cast an instant";
     }
 
@@ -126,14 +126,17 @@ class TeferiTemporalArchmageAsThoughEffect extends AsThoughEffectImpl {
         return new TeferiTemporalArchmageAsThoughEffect(this);
     }
 
-
     @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        Permanent permanent= game.getPermanent(objectId);
-        if (permanent != null && permanent.getCardType().contains(CardType.PLANESWALKER) && permanent.getControllerId().equals(source.getControllerId())) {
+    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game) {
+        if (affectedAbility.getControllerId().equals(source.getControllerId()) && affectedAbility instanceof LoyaltyAbility) {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        return false; // Not used 
     }
 
 }
