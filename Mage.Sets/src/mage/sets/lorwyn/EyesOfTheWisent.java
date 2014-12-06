@@ -31,6 +31,8 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
+import mage.abilities.condition.common.MyTurnCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -59,7 +61,10 @@ public class EyesOfTheWisent extends CardImpl {
         this.color.setGreen(true);
 
         // Whenever an opponent casts a blue spell during your turn, you may put a 4/4 green Elemental creature token onto the battlefield.
-        this.addAbility(new SpellCastOpponentTriggeredAbility(new CreateTokenEffect(new EyesOfTheWisentElementalToken()), filter, true));
+        this.addAbility(new ConditionalTriggeredAbility(
+                new SpellCastOpponentTriggeredAbility(new CreateTokenEffect(new EyesOfTheWisentElementalToken()), filter, true),
+                new MyTurnCondition(),
+                "Whenever an opponent casts a blue spell during your turn, you may put a 4/4 green Elemental creature token onto the battlefield."));
     }
 
     public EyesOfTheWisent(final EyesOfTheWisent card) {
@@ -82,8 +87,6 @@ class EyesOfTheWisentElementalToken extends Token {
         subtype.add("Elemental");
         power = new MageInt(4);
         toughness = new MageInt(4);
-
-
     }
 
 }
