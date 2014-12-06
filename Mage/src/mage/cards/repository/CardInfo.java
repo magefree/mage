@@ -63,7 +63,7 @@ public class CardInfo {
     protected int cardNumber;
     @DatabaseField(indexName = "setCode_cardNumber_index")
     protected String setCode;
-    @DatabaseField(unique = true)
+    @DatabaseField(unique = true, indexName = "className_index")
     protected String className;
     @DatabaseField
     protected String power;
