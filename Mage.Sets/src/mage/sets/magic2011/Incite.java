@@ -35,7 +35,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.effects.common.combat.AttacksIfAbleTargetEffect;
-import mage.abilities.effects.common.continious.SetCardColorTargetEffect;
+import mage.abilities.effects.common.continious.BecomesColorTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -52,7 +52,7 @@ public class Incite extends CardImpl {
 
         // Target creature becomes red until end of turn and attacks this turn if able.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new SetCardColorTargetEffect(ObjectColor.RED, Duration.EndOfTurn, "Target creature becomes red until end of turn"));
+        this.getSpellAbility().addEffect(new BecomesColorTargetEffect(ObjectColor.RED, Duration.EndOfTurn, "Target creature becomes red until end of turn"));
         this.getSpellAbility().addEffect(new AttacksIfAbleTargetEffect(Duration.EndOfTurn));
     }
 

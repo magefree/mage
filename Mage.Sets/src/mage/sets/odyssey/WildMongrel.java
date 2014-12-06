@@ -36,7 +36,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
-import mage.abilities.effects.common.continious.SetCardColorTargetEffect;
+import mage.abilities.effects.common.continious.BecomesColorTargetEffect;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
@@ -101,7 +101,7 @@ class ChangeColorEffect extends OneShotEffect {
             ChoiceColor colorChoice = new ChoiceColor();
             if (player.choose(Outcome.Neutral, colorChoice, game)) {
                 game.informPlayers(wildMongrel.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
-                ContinuousEffect effect = new SetCardColorTargetEffect(colorChoice.getColor(), Duration.EndOfTurn, "is " + colorChoice.getChoice());
+                ContinuousEffect effect = new BecomesColorTargetEffect(colorChoice.getColor(), Duration.EndOfTurn, "is " + colorChoice.getChoice());
                 effect.setTargetPointer(new FixedTarget(source.getSourceId()));
                 game.addEffect(effect, source);
                 return true;

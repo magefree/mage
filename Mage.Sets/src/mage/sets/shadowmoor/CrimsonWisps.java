@@ -35,7 +35,7 @@ import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.effects.common.continious.SetCardColorTargetEffect;
+import mage.abilities.effects.common.continious.BecomesColorTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
@@ -53,7 +53,7 @@ public class CrimsonWisps extends CardImpl {
         this.color.setRed(true);
         // Target creature becomes red and gains haste until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new SetCardColorTargetEffect(ObjectColor.RED, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BecomesColorTargetEffect(ObjectColor.RED, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
 
         // Draw a card.

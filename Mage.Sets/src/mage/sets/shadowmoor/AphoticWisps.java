@@ -35,7 +35,7 @@ import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.effects.common.continious.SetCardColorTargetEffect;
+import mage.abilities.effects.common.continious.BecomesColorTargetEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
@@ -53,7 +53,7 @@ public class AphoticWisps extends CardImpl {
         this.color.setBlack(true);
         //    Target creature becomes black and gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new SetCardColorTargetEffect(ObjectColor.BLACK, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BecomesColorTargetEffect(ObjectColor.BLACK, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn));
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

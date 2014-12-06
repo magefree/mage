@@ -35,7 +35,7 @@ import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.effects.common.continious.SetCardColorTargetEffect;
+import mage.abilities.effects.common.continious.BecomesColorTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
@@ -52,7 +52,7 @@ public class NiveousWisps extends CardImpl {
         this.color.setWhite(true);
         // Target creature becomes white until end of turn. Tap that creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new SetCardColorTargetEffect(ObjectColor.WHITE, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BecomesColorTargetEffect(ObjectColor.WHITE, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new TapTargetEffect());
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

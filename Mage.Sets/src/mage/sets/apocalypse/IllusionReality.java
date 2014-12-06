@@ -30,7 +30,7 @@ package mage.sets.apocalypse;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.continious.SetCardColorTargetEffect;
+import mage.abilities.effects.common.continious.BecomesColorTargetEffect;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -56,7 +56,7 @@ public class IllusionReality extends SplitCard {
         // Illusion
         // Target spell or permanent becomes the color of your choice until end of turn.
         getLeftHalfCard().getColor().setBlue(true);
-        getLeftHalfCard().getSpellAbility().addEffect(new SetCardColorTargetEffect(Duration.EndOfTurn));
+        getLeftHalfCard().getSpellAbility().addEffect(new BecomesColorTargetEffect(Duration.EndOfTurn));
         Target target = new TargetSpellOrPermanent();
         getLeftHalfCard().getSpellAbility().addTarget(target);
 

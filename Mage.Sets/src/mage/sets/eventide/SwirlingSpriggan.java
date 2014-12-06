@@ -37,7 +37,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.SetCardColorTargetEffect;
+import mage.abilities.effects.common.continious.BecomesColorTargetEffect;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
@@ -123,7 +123,7 @@ class ChangeColorOrColorsTargetEffect extends OneShotEffect {
                 }
             }
             for (ObjectColor color : chosenColors) {
-                ContinuousEffect effect = new SetCardColorTargetEffect(color, Duration.EndOfTurn, "is " + color);
+                ContinuousEffect effect = new BecomesColorTargetEffect(color, Duration.EndOfTurn, "is " + color);
                 effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
                 game.addEffect(effect, source);
             }

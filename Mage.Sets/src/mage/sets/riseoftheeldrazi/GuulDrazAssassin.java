@@ -64,13 +64,13 @@ public class GuulDrazAssassin extends LevelerCard {
 
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}{B}")));
 
-        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2, -2, Duration.EndOfTurn), new ManaCostsImpl("{B}"));
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());
         abilities1.add(ability);
 
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-4, -4, Duration.EndOfTurn), new ManaCostsImpl("{B}"));
         ability2.addTarget(new TargetCreaturePermanent());
         ability2.addCost(new TapSourceCost());
