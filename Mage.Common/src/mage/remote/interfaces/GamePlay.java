@@ -80,6 +80,6 @@ public interface GamePlay {
      * @param gameId
      * @return
      */
-    boolean sendPlayerAction(PlayerAction passPriorityAction, UUID gameId);
+    boolean sendPlayerAction(PlayerAction passPriorityAction, UUID gameId, Object Data);
 
 }

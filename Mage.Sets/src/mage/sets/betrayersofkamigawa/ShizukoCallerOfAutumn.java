@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AddManaToManaPoolEffect;
+import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -57,7 +57,7 @@ public class ShizukoCallerOfAutumn extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of each player's upkeep, that player adds {G}{G}{G} to his or her mana pool. Until end of turn, this mana doesn't empty from that player's mana pool as steps and phases end.
-        Effect effect = new AddManaToManaPoolEffect(new Mana(0,3,0,0,0,0,0), "that player", true);
+        Effect effect = new AddManaToManaPoolTargetControllerEffect(new Mana(0,3,0,0,0,0,0), "that player", true);
         effect.setText("that player adds {G}{G}{G} to his or her mana pool. Until end of turn, this mana doesn't empty from that player's mana pool as steps and phases end");        
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.ANY, false));
         

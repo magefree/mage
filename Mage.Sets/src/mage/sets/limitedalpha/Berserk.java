@@ -30,7 +30,7 @@ package mage.sets.limitedalpha;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.dynamicvalue.common.TargetPermanentPowerCount;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
@@ -172,7 +172,7 @@ class BerserkDestroyEffect extends OneShotEffect {
             //create delayed triggered ability
             Effect effect = new BerserkDelayedDestroyEffect();
             effect.setTargetPointer(new FixedTarget(this.getTargetPointer().getFirst(game, source)));
-            AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(effect);
+            AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
             game.addDelayedTriggeredAbility(delayedAbility);

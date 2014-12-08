@@ -133,13 +133,13 @@ class QuietusSpikeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             Integer amount = (int) Math.ceil(player.getLife() / 2f);
             if (amount > 0) {
                 player.loseLife(amount, game);
-                return true;
             }
+            return true;
         }
         return false;
     }

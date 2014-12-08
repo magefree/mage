@@ -119,7 +119,7 @@ class OrnateKanzashiEffect extends OneShotEffect {
 class OrnateKanzashiCastFromExileEffect extends AsThoughEffectImpl {
 
     public OrnateKanzashiCastFromExileEffect(UUID cardId) {
-        super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may play that card from exile this turn";
     }
 

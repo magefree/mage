@@ -85,7 +85,7 @@ public class ChatManager {
                 synchronized (chatSession) {
                     if (chatSessions.containsKey(chatId)) {
                         chatSessions.remove(chatId);
-                        logger.debug("Chat removed - chatId: " + chatId);
+                        logger.trace("Chat removed - chatId: " + chatId);
                     } else {
                         logger.trace("Chat to destroy does not exist - chatId: " + chatId);
                     } 

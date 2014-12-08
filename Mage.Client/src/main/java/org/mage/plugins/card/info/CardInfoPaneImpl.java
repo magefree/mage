@@ -3,10 +3,10 @@ package org.mage.plugins.card.info;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import javax.swing.JEditorPane;
 import javax.swing.SwingUtilities;
 import mage.client.util.gui.GuiDisplayUtil;
+import mage.client.util.gui.GuiDisplayUtil.TextLines;
 import mage.components.CardInfoPane;
 import mage.utils.ThreadUtils;
 import mage.view.CardView;
@@ -50,14 +50,9 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
                             if (!card.equals(currentCard)) {
                                 return;
                             }
-                            StringBuilder buffer = GuiDisplayUtil.getRulefromCardView(card); 
-                            int ruleLength = 0;
-                            int rules = 0;
-                            for (String rule :card.getRules()) {
-                                ruleLength += rule.length();
-                                rules++;
-                            }
-                            resizeTooltipIfNeeded(container, ruleLength, rules);
+                            TextLines textLines = GuiDisplayUtil.getTextLinesfromCardView(card);
+                            StringBuilder buffer = GuiDisplayUtil.getRulefromCardView(card, textLines);
+                            resizeTooltipIfNeeded(container, textLines.basicTextLength, textLines.lines.size());
                             setText(buffer.toString());
                             setCaretPosition(0);
                         }
@@ -74,7 +69,7 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
         if (container == null) {
             return;
         }
-        boolean makeBig = (rules > 5 || ruleLength > 450);
+        boolean makeBig = (rules > 5 || ruleLength > 350);
         if (makeBig && type == 0) {
             type = 1;
             container.setSize(

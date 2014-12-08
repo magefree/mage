@@ -379,7 +379,9 @@ public class Spell implements StackObject, Card {
                 }
 
             }
-            game.informPlayers(this.getName() + " is now " + newTargetDescription.toString());
+            if (newTargetDescription.length() > 0) {
+                game.informPlayers(this.getName() + " is now " + newTargetDescription.toString());
+            }
             return true;
         }
         return false;

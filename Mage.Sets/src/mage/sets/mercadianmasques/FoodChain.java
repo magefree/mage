@@ -134,9 +134,17 @@ class FoodChainManaEffect extends ManaEffect {
         
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && mana != null) {
+            checkToFirePossibleEvents(mana, game, source);
             player.getManaPool().addMana(mana, game, source);
             return true;
         }
         return false;
     }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        return null;
+    }
+
+
 }

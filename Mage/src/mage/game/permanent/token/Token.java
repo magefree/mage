@@ -50,7 +50,7 @@ import mage.util.CardUtil;
 public class Token extends MageObjectImpl {
 
     protected String description;
-    private ArrayList<UUID> lastAddedTokenIds = new ArrayList<>();
+    private final ArrayList<UUID> lastAddedTokenIds = new ArrayList<>();
     private UUID lastAddedTokenId;
     private int tokenType;
     private int originalCardNumber;
@@ -139,11 +139,11 @@ public class Token extends MageObjectImpl {
         } else {
             setCode = source != null ? source.getExpansionSetCode() : null;
         }
-        GameEvent event = GameEvent.getEvent(EventType.CREATE_TOKEN, null, sourceId, controllerId, amount);
+        GameEvent event = new GameEvent(EventType.CREATE_TOKEN, null, sourceId, controllerId, amount, this.getCardType().contains(CardType.CREATURE));
         if (!game.replaceEvent(event)) {
             amount = event.getAmount();
             for (int i = 0; i < amount; i++) {
-                PermanentToken newToken = new PermanentToken(this, controllerId, setCode, game);
+                PermanentToken newToken = new PermanentToken(this, event.getPlayerId(), setCode, game); // use event.getPlayerId() because it can be replaced by replacement effect
                 game.getState().addCard(newToken);
                 game.addPermanent(newToken);
                 if (tapped) {
@@ -156,7 +156,7 @@ public class Token extends MageObjectImpl {
                 newToken.entersBattlefield(sourceId, game, Zone.OUTSIDE, true);
                 game.setScopeRelevant(false);
                 game.applyEffects();
-                game.fireEvent(new ZoneChangeEvent(newToken, controllerId, Zone.OUTSIDE, Zone.BATTLEFIELD));
+                game.fireEvent(new ZoneChangeEvent(newToken, event.getPlayerId(), Zone.OUTSIDE, Zone.BATTLEFIELD));
                 if (attacking && game.getCombat() != null) {
                     game.getCombat().addAttackingCreature(newToken.getId(), game);
                 }

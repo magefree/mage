@@ -63,11 +63,17 @@ public class ContestedWarZone extends CardImpl {
     public ContestedWarZone(UUID ownerId) {
         super(ownerId, 144, "Contested War Zone", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "MBS";
+
+        // Whenever a creature deals combat damage to you, that creature's controller gains control of Contested War Zone.
+        this.addAbility(new ContestedWarZoneAbility());
+
+        // {T}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
+        
+        // {1}, {T}: Attacking creatures get +1/+0 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 0, Duration.EndOfTurn, filter, false), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-        this.addAbility(new ContestedWarZoneAbility());
     }
 
     public ContestedWarZone(final ContestedWarZone card) {

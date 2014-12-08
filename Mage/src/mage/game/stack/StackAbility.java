@@ -56,6 +56,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.cards.Card;
 import mage.constants.AbilityWord;
+import mage.players.Player;
 
 /**
  *
@@ -448,6 +449,11 @@ public class StackAbility implements StackObject, Ability {
     @Override
     public void setAbilityWord(AbilityWord abilityWord) {
         throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
+    public boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, boolean noMana, Player controller, Game game) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

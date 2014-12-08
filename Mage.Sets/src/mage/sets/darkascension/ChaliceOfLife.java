@@ -94,6 +94,7 @@ class ChaliceOfLifeEffect extends OneShotEffect {
             // if you have at least 10 life more than your starting life total, transform Chalice of Life.
             if (player.getLife() >= game.getLife() + 10) {
                 permanent.transform(game);
+                game.informPlayers(new StringBuilder(permanent.getName()).append(" transforms into ").append(permanent.getSecondCardFace().getName()).toString());
             }
         }
         return false;

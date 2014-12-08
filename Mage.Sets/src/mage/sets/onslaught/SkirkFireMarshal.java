@@ -56,7 +56,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class SkirkFireMarshal extends CardImpl {
 
     private static final FilterCard filterProtection = new FilterCard("red");
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Elves you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Goblins you control");
 
     static {
         filterProtection.add(new ColorPredicate(ObjectColor.RED));

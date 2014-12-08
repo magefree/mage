@@ -32,19 +32,18 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.Mana;
-import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.DelayedTriggeredManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -77,12 +76,13 @@ public class HighTide extends CardImpl {
 class HighTideTriggeredAbility extends DelayedTriggeredManaAbility {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Island");
+    
     static {
             filter.add(new SubtypePredicate("Island"));
     }
 
     public HighTideTriggeredAbility() {
-        super(new AddBlueToTargetEffect(), Duration.EndOfTurn, false);
+        super(new AddManaToManaPoolTargetControllerEffect(new Mana(ColoredManaSymbol.U), "his or her"), Duration.EndOfTurn, false);
         this.usesStack = false;
     }
 
@@ -111,35 +111,4 @@ class HighTideTriggeredAbility extends DelayedTriggeredManaAbility {
     public String getRule() {
         return "Until end of turn, whenever a player taps an Island for mana, that player adds {U} to his or her mana pool";
     }
-}
-
-class AddBlueToTargetEffect extends ManaEffect {
-    
-
-    public AddBlueToTargetEffect() {
-        super();
-        staticText = "that player adds {U} to his or her mana pool";
-    }
-
-
-    public AddBlueToTargetEffect(final AddBlueToTargetEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AddBlueToTargetEffect copy() {
-        return new AddBlueToTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if(player != null)
-        {
-            player.getManaPool().addMana(Mana.BlueMana(1), game, source);
-
-        }
-        return true;
-    }
-
 }

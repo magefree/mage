@@ -142,7 +142,7 @@ public class UserManager {
                         @Override
                         public void run() {
                             try {
-                                logger.debug("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId);
+                                logger.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId);
                                 user.remove(reason);
                                 logger.debug("USER REMOVE END - " + user.getName());
                             } catch (Exception ex) {
@@ -180,7 +180,6 @@ public class UserManager {
         usersToCheck.addAll(users.values());
         for (User user : usersToCheck) {
             if (!user.getUserState().equals(UserState.Expired) && user.isExpired(calendar.getTime())) {
-                logger.info(user.getName() + ": session expired userId: "+ user.getId() + " Host: " + user.getHost());
                 removeUser(user.getId(), DisconnectReason.SessionExpired);
             }
         }

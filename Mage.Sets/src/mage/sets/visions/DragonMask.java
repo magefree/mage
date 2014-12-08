@@ -30,7 +30,7 @@ package mage.sets.visions;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
@@ -58,7 +58,7 @@ public class DragonMask extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 2, Duration.EndOfTurn), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
-        Effect returnEffect = new CreateDelayedTriggeredAbilityEffect(new AtEndOfTurnDelayedTriggeredAbility(new ReturnToHandTargetEffect()));
+        Effect returnEffect = new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnToHandTargetEffect()));
         returnEffect.setText("Return it to its owner's hand at the beginning of the next end step");
         ability.addEffect(returnEffect);
         this.addAbility(ability);

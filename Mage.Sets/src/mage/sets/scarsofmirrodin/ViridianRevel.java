@@ -40,6 +40,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.players.Player;
 
 /**
  *
@@ -51,6 +52,8 @@ public class ViridianRevel extends CardImpl {
         super(ownerId, 132, "Viridian Revel", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
         this.expansionSetCode = "SOM";
         this.color.setGreen(true);
+
+        // Whenever an artifact is put into an opponent's graveyard from the battlefield, you may draw a card.
         this.addAbility(new ViridianRevelTriggeredAbility());
     }
 
@@ -82,7 +85,9 @@ class ViridianRevelTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null && card.getCardType().contains(CardType.ARTIFACT)) {
+            Player controller = game.getPlayer(getControllerId());
+            if (controller != null && card != null && card.getCardType().contains(CardType.ARTIFACT)
+                    && controller.hasOpponent(card.getOwnerId(), game)) {
                 return true;
             }
         }

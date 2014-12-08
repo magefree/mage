@@ -37,10 +37,10 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.players.Player;
 
 /**
  *
@@ -71,8 +71,6 @@ public class GatherSpecimens extends CardImpl {
 
 class GatherSpecimensReplacementEffect extends ReplacementEffectImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard();
-
     public GatherSpecimensReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.GainControl);
         staticText = "If a creature would enter the battlefield under an opponent's control this turn, it enters the battlefield under your control instead";
@@ -94,23 +92,29 @@ class GatherSpecimensReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        Card card = game.getCard(((ZoneChangeEvent) event).getTargetId());
-        if (card != null) {
-            card.putOntoBattlefield(game, zEvent.getFromZone(), zEvent.getSourceId(), source.getControllerId(), zEvent.comesIntoPlayTapped(), zEvent.getAppliedEffects());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            event.setPlayerId(controller.getId());
         }
-        return true;
+        return false;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE
                 && ((ZoneChangeEvent) event).getToZone() == Zone.BATTLEFIELD) {
-            Card card = game.getCard(((ZoneChangeEvent) event).getTargetId());
-            if (card != null && filter.match(card, source.getSourceId(), source.getControllerId(), game)) {
-                if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+            Card card = game.getCard(event.getTargetId());
+            if (card.getCardType().contains(CardType.CREATURE)) { // TODO: Bestow Card cast as Enchantment probably not handled correctly
+                Player controller = game.getPlayer(source.getControllerId());
+                if (controller != null && controller.hasOpponent(event.getPlayerId(), game)) {
                     return true;
                 }
+            }
+        }
+        if (event.getType() == GameEvent.EventType.CREATE_TOKEN && event.getFlag()) { // flag indicates if it's a creature token
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null && controller.hasOpponent(event.getPlayerId(), game)) {
+                return true;
             }
         }
         return false;

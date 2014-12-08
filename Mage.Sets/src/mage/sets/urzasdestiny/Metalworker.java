@@ -114,12 +114,21 @@ class MetalworkerManaEffect extends ManaEffect {
                     cards.add(player.getHand().get(uuid, game));
                 }
                 player.revealCards("Revealed card", cards, game);
-                player.getManaPool().addMana(Mana.ColorlessMana(target.getTargets().size()*2), game, source);
+                Mana mana = Mana.ColorlessMana(target.getTargets().size()*2);
+                checkToFirePossibleEvents(mana, game, source);
+                player.getManaPool().addMana(mana, game, source);
+
             }
         } 
 
         
         return true;
     }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        return null;
+    }
+
 
 }

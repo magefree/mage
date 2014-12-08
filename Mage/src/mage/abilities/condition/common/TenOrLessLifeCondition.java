@@ -40,7 +40,7 @@ public class TenOrLessLifeCondition implements Condition {
 
     public static enum CheckType { AN_OPPONENT, CONTROLLER, TARGET_OPPONENT };
 
-    private CheckType type;
+    private final CheckType type;
 
     public TenOrLessLifeCondition ( CheckType type ) {
         this.type = type;

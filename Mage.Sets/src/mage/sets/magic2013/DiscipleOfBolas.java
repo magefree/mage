@@ -28,33 +28,30 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.Target;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
  * @author jeffwadsworth
  */
 public class DiscipleOfBolas extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(" another creature");
-
-    static {
-        filter.add(new AnotherPredicate());
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
 
     public DiscipleOfBolas(UUID ownerId) {
         super(ownerId, 88, "Disciple of Bolas", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}");
@@ -67,9 +64,7 @@ public class DiscipleOfBolas extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Disciple of Bolas enters the battlefield, sacrifice another creature. You gain X life and draw X cards, where X is that creature's power.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DiscipleOfBolasEffect());
-        ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscipleOfBolasEffect()));
     }
 
     public DiscipleOfBolas(final DiscipleOfBolas card) {
@@ -99,16 +94,23 @@ class DiscipleOfBolasEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent sacrificed = game.getPermanent(source.getFirstTarget());
-        System.out.println("The target is " + sacrificed.getName());
-        Player player = game.getPlayer(source.getControllerId());
-        if (sacrificed != null && player != null) {
-            sacrificed.sacrifice(source.getSourceId(), game);
-            Permanent lastKnownState = (Permanent) game.getLastKnownInformation(sacrificed.getId(), Zone.BATTLEFIELD);
-            int power = lastKnownState.getPower().getValue();
-            player.gainLife(power, game);
-            player.drawCards(power, game); 
+    public boolean apply(Game game, Ability source) {        
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
+            filter.add(new AnotherPredicate());
+            Target target = new TargetControlledCreaturePermanent(1,1, filter, true);
+            target.setRequired(true);
+            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+                controller.chooseTarget(outcome, target, source, game);
+                Permanent sacrificed = game.getPermanent(target.getFirstTarget());
+                if (sacrificed != null) {
+                    sacrificed.sacrifice(source.getSourceId(), game);
+                    int power = sacrificed.getPower().getValue();
+                    controller.gainLife(power, game);
+                    controller.drawCards(power, game);
+                }
+            }
             return true;
         }
         return false;

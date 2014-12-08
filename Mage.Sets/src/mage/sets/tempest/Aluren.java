@@ -30,6 +30,7 @@ package mage.sets.tempest;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.SourceIsSpellCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
@@ -103,7 +104,7 @@ class AlurenRuleEffect extends ContinuousEffectImpl {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 4));
     }
     
-    static AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(null, null, null, filter,  true);
+    static AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(null, SourceIsSpellCondition.getInstance(), null, filter,  true);
     
     public AlurenRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

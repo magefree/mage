@@ -42,6 +42,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.GoblinToken;
+import mage.game.permanent.token.Token;
 
 /**
  *
@@ -62,7 +63,7 @@ public class PonybackBrigade extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Ponyback Brigade enters the battlefield or is turned face up, put three 1/1 red Goblin creature tokens onto the battlefield.
-        this.addAbility(new PonybackBrigadeAbility());
+        this.addAbility(new PonybackBrigadeAbility(new GoblinToken(expansionSetCode)));
 
         // Morph {2}{R}{W}{B}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{R}{W}{B}")));
@@ -80,8 +81,8 @@ public class PonybackBrigade extends CardImpl {
 
 class PonybackBrigadeAbility extends TriggeredAbilityImpl {
 
-    public PonybackBrigadeAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new GoblinToken("KTK"), 3), false);
+    public PonybackBrigadeAbility(Token token) {
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(token, 3), false);
         this.setWorksFaceDown(true);
     }
 

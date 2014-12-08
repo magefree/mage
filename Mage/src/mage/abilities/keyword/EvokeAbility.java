@@ -189,7 +189,9 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
     @Override
     public Costs<Cost> getCosts() {
         Costs<Cost> alterCosts = new CostsImpl<>();
-        alterCosts.addAll(evokeCosts);
+        for (AlternativeCost2 aCost: evokeCosts) {
+            alterCosts.add(aCost.getCost());
+        }
         return alterCosts;
     }    
 }

@@ -91,9 +91,6 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
                     card = game.getCard(targetId);
                     if (card != null) {
                         controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.EXILED);
-                        if (card.isFaceDown()) {
-                            card.setFaceDown(false);
-                        }
                     } else {
                         result = false;
                     }

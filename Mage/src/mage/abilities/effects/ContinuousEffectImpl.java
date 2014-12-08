@@ -145,6 +145,10 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         return discarded;
     }
 
+    /**
+     * Sets the discarded state of the effect. So it
+     * will be removed on next check.
+     */
     @Override
     public void discard() {
         this.discarded = true;

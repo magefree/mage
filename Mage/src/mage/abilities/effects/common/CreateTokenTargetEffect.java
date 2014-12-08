@@ -64,12 +64,7 @@ public class CreateTokenTargetEffect extends OneShotEffect {
             if (value < 1) {
                 return true;
             }
-            if(token.putOntoBattlefield(value, game, source.getSourceId(), targetPointer.getFirst(game, source), tapped, attacking)) {
-                game.informPlayers(new StringBuilder(controller.getName())
-                    .append(" puts ").append(CardUtil.numberToText(value,"a")).append(" ").append(token.getName())
-                    .append(value == 1?" token":" tokens").append(" onto the Battlefield").toString());
-                return true;
-            }
+            return token.putOntoBattlefield(value, game, source.getSourceId(), targetPointer.getFirst(game, source), tapped, attacking);
         }
         return false;
     }

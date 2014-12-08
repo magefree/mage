@@ -33,6 +33,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EmptyEffect;
 import mage.abilities.common.SimpleStaticAbility;
@@ -52,6 +53,7 @@ import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.watchers.common.CommanderCombatDamageWatcher;
+import org.apache.log4j.Logger;
 
 public abstract class GameCommanderImpl extends GameImpl {
 
@@ -83,7 +85,14 @@ public abstract class GameCommanderImpl extends GameImpl {
                         commander.moveToZone(Zone.COMMAND, null, this, true);
                         ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoLibrary));
                         ability.addEffect(new CommanderCostModification(commander.getId()));
-                        ability.addEffect(new CommanderManaReplacementEffect(player.getId(), commander.getSpellAbility().getManaCosts().getMana()));
+                        Mana commanderMana;
+                        if (commander.getSpellAbility().getManaCosts() == null) {
+                            Logger.getLogger(GameCommanderImpl.class).warn("Got commander without Mana costs: " + commander.getName());
+                            commanderMana = new Mana();
+                        } else {
+                            commanderMana = commander.getSpellAbility().getManaCosts().getMana();
+                        }
+                        ability.addEffect(new CommanderManaReplacementEffect(player.getId(), commanderMana));
                         getState().setValue(commander.getId() + "_castCount", 0);
                         CommanderCombatDamageWatcher watcher = new CommanderCombatDamageWatcher(commander.getId());
                         getState().getWatchers().add(watcher);

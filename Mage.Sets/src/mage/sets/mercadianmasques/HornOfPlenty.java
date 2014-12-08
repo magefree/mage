@@ -30,7 +30,7 @@ package mage.sets.mercadianmasques;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
@@ -101,7 +101,7 @@ class HornOfPlentyEffect extends OneShotEffect {
                 if (cost.pay(source, game, source.getSourceId(), caster.getId(), false)) {
                     Effect effect = new DrawCardTargetEffect(1);
                     effect.setTargetPointer(new FixedTarget(caster.getId()));
-                    return new CreateDelayedTriggeredAbilityEffect(new AtEndOfTurnDelayedTriggeredAbility(effect, TargetController.ANY)).apply(game, source);
+                    return new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect, TargetController.ANY)).apply(game, source);
                 }
             }
             return true;

@@ -57,8 +57,9 @@ public class AddManaOfAnyColorTargetCanProduceEffect extends ManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(this.targetPointer.getFirst(game, source));
-        if (permanent != null) {
+        if (controller != null && permanent != null) {
             Abilities<ManaAbility> mana = permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
             Mana types = new Mana();
             for (ManaAbility ability : mana) {
@@ -67,7 +68,7 @@ public class AddManaOfAnyColorTargetCanProduceEffect extends ManaEffect {
                 }                
             }
             Choice choice = new ChoiceImpl(true);
-            choice.setMessage("Pick a mana color");
+            choice.setMessage("Pick the type of mana to produce");
             if (types.getBlack() > 0) {
                 choice.getChoices().add("Black");
             }
@@ -87,35 +88,37 @@ public class AddManaOfAnyColorTargetCanProduceEffect extends ManaEffect {
                 choice.getChoices().add("Colorless");
             }
             if (choice.getChoices().size() > 0) {
-                Player player = game.getPlayer(permanent.getControllerId());
                 if (choice.getChoices().size() == 1) {
                     choice.setChoice(choice.getChoices().iterator().next());
                 } else {
-                    player.choose(outcome, choice, game);
+                    controller.choose(outcome, choice, game);
                 }
                 if (choice.getChoice() == null) {
                     return false;
                 }
+                Mana newMana = new Mana();
                 switch (choice.getChoice()) {
                     case "Black":
-                        player.getManaPool().addMana(Mana.BlackMana, game, source);
+                        newMana.setBlack(1);
                         return true;
                     case "Blue":
-                        player.getManaPool().addMana(Mana.BlueMana, game, source);
+                        newMana.setBlue(1);
                         return true;
                     case "Red":
-                        player.getManaPool().addMana(Mana.RedMana, game, source);
+                        newMana.setRed(1);
                         return true;
                     case "Green":
-                        player.getManaPool().addMana(Mana.GreenMana, game, source);
+                        newMana.setGreen(1);
                         return true;
                     case "White":
-                        player.getManaPool().addMana(Mana.WhiteMana, game, source);
+                        newMana.setWhite(1);
                         return true;
                     case "Colorless":
-                        player.getManaPool().addMana(Mana.ColorlessMana, game, source);
+                        newMana.setColorless(1);
                         return true;
-                }
+                }                
+                controller.getManaPool().addMana(newMana, game, source);
+                checkToFirePossibleEvents(newMana, game, source);
             }
             return true;
         }
@@ -126,4 +129,11 @@ public class AddManaOfAnyColorTargetCanProduceEffect extends ManaEffect {
     public AddManaOfAnyColorTargetCanProduceEffect copy() {
         return new AddManaOfAnyColorTargetCanProduceEffect(this);
     }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        return null;
+    }
+
+
 }

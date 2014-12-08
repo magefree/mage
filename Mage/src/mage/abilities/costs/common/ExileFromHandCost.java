@@ -50,7 +50,7 @@ public class ExileFromHandCost extends CostImpl {
  
     public ExileFromHandCost(TargetCardInHand target) {
         this.addTarget(target);
-        this.text = "Exile " + target.getTargetName();
+        this.text = "exile " + target.getTargetName();
     }
  
     public ExileFromHandCost(ExileFromHandCost cost) {

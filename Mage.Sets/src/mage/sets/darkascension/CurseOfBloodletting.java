@@ -28,18 +28,21 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import static mage.game.events.GameEvent.EventType.DAMAGE_PLAYER;
 import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
@@ -98,11 +101,10 @@ class CurseOfBloodlettingEffect extends ReplacementEffectImpl {
         switch (event.getType()) {
             case DAMAGE_PLAYER:
                 Permanent enchantment = game.getPermanent(source.getSourceId());
-                if (enchantment != null && enchantment.getAttachedTo() != null) {
-                    Player player = game.getPlayer(enchantment.getAttachedTo());
-                    if (player != null && event.getTargetId().equals(player.getId())) {
-                        event.setAmount(event.getAmount() * 2);
-                    }
+                if (enchantment != null && 
+                        enchantment.getAttachedTo() != null &&
+                        event.getTargetId().equals(enchantment.getAttachedTo())) {
+                        return true;
                 }
         }
         return false;
@@ -115,7 +117,8 @@ class CurseOfBloodlettingEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return apply(game, source);
+        event.setAmount(event.getAmount() * 2);
+        return false;
     }
 
 }

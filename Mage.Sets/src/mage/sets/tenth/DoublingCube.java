@@ -53,7 +53,7 @@ public class DoublingCube extends CardImpl {
         super(ownerId, 321, "Doubling Cube", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "10E";
 
-        // {3}, {tap}: Double the amount of each type of mana in your mana pool.
+        // {3}, {T}: Double the amount of each type of mana in your mana pool.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new DoublingCubeEffect(), new ManaCostsImpl("{3}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -93,10 +93,18 @@ class DoublingCubeEffect extends ManaEffect {
         int blueMana = pool.getBlue();
         int greenMana = pool.getGreen();
         int redMana = pool.getRed();
-        int colorlessMana = pool.getColorless();        
-        pool.addMana(new Mana(redMana, greenMana, blueMana, whiteMana, blackMana, colorlessMana, 0), game, source);
+        int colorlessMana = pool.getColorless();
+        Mana mana = new Mana(redMana, greenMana, blueMana, whiteMana, blackMana, colorlessMana, 0);
+        checkToFirePossibleEvents(mana, game, source);
+        pool.addMana(mana, game, source);
         return true;
     }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        return null;
+    }
+
 
     @Override
     public DoublingCubeEffect copy() {

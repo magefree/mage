@@ -28,16 +28,16 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -117,8 +117,6 @@ class EnergyFieldEffect extends PreventionEffectImpl {
 
 class PutIntoYourGraveyardTriggeredAbility extends TriggeredAbilityImpl {
 
-
-
     public PutIntoYourGraveyardTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect(), false);
     }
@@ -137,7 +135,8 @@ class PutIntoYourGraveyardTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getToZone() == Zone.GRAVEYARD) {
-                if(game.getControllerId(event.getTargetId()) != this.getControllerId()){
+                Card card = game.getCard(event.getTargetId());
+                if (card != null && card.getOwnerId().equals(getControllerId())) {
                     return true;
                 }
             }

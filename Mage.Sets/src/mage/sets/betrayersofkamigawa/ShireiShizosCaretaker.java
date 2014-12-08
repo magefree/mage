@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
@@ -128,7 +128,7 @@ class ShireiShizosCaretakerEffect extends OneShotEffect {
     
     ShireiShizosCaretakerEffect(UUID shireiId) {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "you may return that card to the battlefield at the beginning of the next end step if Shirei, Shizo's Caretaker is still on the battlefield.";
+        this.staticText = "you may return that card to the battlefield at the beginning of the next end step if {this} is still on the battlefield.";
         this.shireiId = shireiId;
     }
     
@@ -147,8 +147,8 @@ class ShireiShizosCaretakerEffect extends OneShotEffect {
         Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
         if (card != null) {
             Effect effect = new ShireiShizosCaretakerReturnEffect(shireiId);
-            effect.setText("return that card to the battlefield if Shirei, Shizo's Caretaker is still on the battlefield");
-            DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(effect);
+            effect.setText("return that card to the battlefield if {this} is still on the battlefield");
+            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
             delayedAbility.getEffects().get(0).setTargetPointer(new FixedTarget(card.getId()));

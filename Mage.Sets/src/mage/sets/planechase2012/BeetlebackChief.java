@@ -52,7 +52,7 @@ public class BeetlebackChief extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Beetleback Chief enters the battlefield, put two 1/1 red Goblin creature tokens onto the battlefield.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinToken(), 2)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinToken(expansionSetCode), 2)));
 
     }
 

@@ -28,25 +28,26 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
-import mage.filter.common.FilterControlledPermanent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  * @author Loki
  */
 public class HarabazDruid extends CardImpl {
+
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Allies you control");
+
+    static {
+        filter.add(new SubtypePredicate("Ally"));
+    }
 
     public HarabazDruid(UUID ownerId) {
         super(ownerId, 105, "Harabaz Druid", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -59,8 +60,9 @@ public class HarabazDruid extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 
-        // {tap}: Add X mana of any one color to your mana pool, where X is the number of Allies you control.
-        this.addAbility(new HarabazDruidManaAbility());
+        // {T}: Add X mana of any one color to your mana pool, where X is the number of Allies you control.
+        this.addAbility(new DynamicManaAbility(new Mana(0,0,0,0,0,0,1), new PermanentsOnBattlefieldCount(filter),
+                "Add X mana of any one color to your mana pool, where X is the number of Allies you control"));
     }
 
     public HarabazDruid(final HarabazDruid card) {
@@ -70,67 +72,5 @@ public class HarabazDruid extends CardImpl {
     @Override
     public HarabazDruid copy() {
         return new HarabazDruid(this);
-    }
-}
-
-class HarabazDruidManaAbility extends BasicManaAbility {
-    HarabazDruidManaAbility() {
-        super(new HarabazDruidManaEffect());
-        this.addChoice(new ChoiceColor());
-    }
-
-    HarabazDruidManaAbility(final HarabazDruidManaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public HarabazDruidManaAbility copy() {
-        return new HarabazDruidManaAbility(this);
-    }
-}
-
-class HarabazDruidManaEffect extends ManaEffect {
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
-
-    static {
-        filter.add(new SubtypePredicate("Ally"));
-    }
-
-    HarabazDruidManaEffect() {
-        super();
-        staticText = "Add X mana of any one color to your mana pool, where X is the number of Allies you control";
-    }
-
-    HarabazDruidManaEffect(final HarabazDruidManaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
-        Player player = game.getPlayer(source.getControllerId());
-        int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
-        if (choice.getColor().isBlack()) {
-            player.getManaPool().addMana(new Mana(0, 0, 0, 0, count, 0, 0), game, source);
-            return true;
-        } else if (choice.getColor().isBlue()) {
-            player.getManaPool().addMana(new Mana(0, 0, count, 0, 0, 0, 0), game, source);
-            return true;
-        } else if (choice.getColor().isRed()) {
-            player.getManaPool().addMana(new Mana(count, 0, 0, 0, 0, 0, 0), game, source);
-            return true;
-        } else if (choice.getColor().isGreen()) {
-            player.getManaPool().addMana(new Mana(0, count, 0, 0, 0, 0, 0), game, source);
-            return true;
-        } else if (choice.getColor().isWhite()) {
-            player.getManaPool().addMana(new Mana(0, 0, 0, count, 0, 0, 0), game, source);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public HarabazDruidManaEffect copy() {
-        return new HarabazDruidManaEffect(this);
     }
 }

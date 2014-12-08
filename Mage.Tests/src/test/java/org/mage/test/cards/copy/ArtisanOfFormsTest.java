@@ -42,12 +42,12 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class ArtisanOfFormsTest extends CardTestPlayerBase {
 
     /**
-     * Targeting a Artisan of Forms triggers it Heroic ability. So it can copy a traget creature.
+     * Targeting a Artisan of Forms triggers it Heroic ability. So it can copy a target creature.
      * If Cackling Counterpart later resolves, it should copy the creature that Artisan of Forms copies, not 
      * the Artisan itself.
      */
     @Test
-    public void testCopyTrggeredByCracklingCounterpart() {
+    public void testCopyTriggeredByCracklingCounterpart() {
         // Heroic - Whenever you cast a spell that targets Artisan of Forms, you may have Artisan of Forms become a copy of target creature and gain this ability.
         addCard(Zone.BATTLEFIELD, playerA, "Artisan of Forms");
         // {1}{U}{U} Put a token onto the battlefield that's a copy of target creature you control.
@@ -84,8 +84,9 @@ public class ArtisanOfFormsTest extends CardTestPlayerBase {
      * the Artisan itself. 
      */
     @Test
-    public void testCopyTrggeredByPopulate() {
-        // Heroic - Whenever you cast a spell that targets Artisan of Forms, you may have Artisan of Forms become a copy of target creature and gain this ability.
+    public void testCopyTriggeredByPopulate() {
+        // Heroic - Whenever you cast a spell that targets Artisan of Forms, you may have
+        // Artisan of Forms become a copy of target creature and gain this ability.
         addCard(Zone.BATTLEFIELD, playerA, "Artisan of Forms");
         // {1}{U}{U} Put a token onto the battlefield that's a copy of target creature you control.
         addCard(Zone.HAND, playerA, "Cackling Counterpart");
@@ -96,9 +97,9 @@ public class ArtisanOfFormsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cackling Counterpart", "Artisan of Forms");
-        setChoice(playerA, "Silvercoat Lion");
+        addTarget(playerA, "Silvercoat Lion");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Eyes in the Skies");       
-        setChoice(playerA, "Silvercoat Lion");
+        addTarget(playerA, "Silvercoat Lion");
         
         setStopAt(1, PhaseStep.END_TURN);
         execute();

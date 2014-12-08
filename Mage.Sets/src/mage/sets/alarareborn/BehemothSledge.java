@@ -57,10 +57,12 @@ public class BehemothSledge extends CardImpl {
         this.subtype.add("Equipment");
         this.color.setGreen(true);
         this.color.setWhite(true);
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
+
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.EQUIPMENT)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.EQUIPMENT)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
+
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
     protected BehemothSledge(BehemothSledge me) {

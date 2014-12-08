@@ -29,6 +29,7 @@ package mage.server;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +45,9 @@ import mage.interfaces.callback.ClientCallback;
 import mage.players.net.UserData;
 import mage.server.draft.DraftSession;
 import mage.server.game.GameManager;
-import mage.server.game.GameSession;
+import mage.server.game.GameSessionPlayer;
+import mage.server.tournament.TournamentController;
+import mage.server.tournament.TournamentManager;
 import mage.server.tournament.TournamentSession;
 import mage.server.util.SystemUtil;
 import mage.view.TableClientMessage;
@@ -68,7 +71,7 @@ public class User {
     private final String host;    
     private final Date connectionTime;
     private final Map<UUID, Table> tables;
-    private final Map<UUID, GameSession> gameSessions;
+    private final Map<UUID, GameSessionPlayer> gameSessions;
     private final Map<UUID, DraftSession> draftSessions;
     private final Map<UUID, TournamentSession> tournamentSessions;
     private final Map<UUID, TournamentSession> constructing;
@@ -121,14 +124,25 @@ public class User {
         this.sessionId = sessionId;
         if (sessionId.isEmpty()) {
             userState = UserState.Disconnected;
-            logger.debug("Disconnected User " + userName + " id: " + userId);
+            lostConnection();
+            logger.trace("USER - lost connection: " + userName + " id: " + userId);
+
         } else if (userState == UserState.Created) {
             userState = UserState.Connected;
-            logger.debug("Created user " + userName + " id: " + userId);
+            logger.trace("USER - created: " + userName + " id: " + userId);
         } else {
             userState = UserState.Reconnected;
             reconnect();
-            logger.info("Reconnected user " + userName + " id: " + userId);
+            logger.trace("USER - reconnected: " + userName + " id: " + userId);
+        }
+    }
+
+    public void lostConnection() {
+        // Because watched games don't get restored after reconnection call stop watching
+        for (Iterator<UUID> iterator = watchedGames.iterator(); iterator.hasNext();) {
+            UUID gameId = iterator.next();
+            GameManager.getInstance().stopWatching(gameId, userId);
+            iterator.remove();
         }
     }
 
@@ -137,7 +151,7 @@ public class User {
     }
 
     public String getDisconnectDuration() {
-        long secondsDisconnected = SystemUtil.getDateDiff(lastActivity, new Date(), TimeUnit.SECONDS);
+        long secondsDisconnected = getSecondsDisconnected();
         long secondsLeft;
         String sign = "";
         if (secondsDisconnected > (3 * 60)) {            
@@ -150,6 +164,10 @@ public class User {
         int minutes = (int) secondsLeft / 60;
         int seconds = (int) secondsLeft % 60;
         return new StringBuilder(sign).append(Integer.toString(minutes)).append(":").append(seconds > 9 ? seconds: "0" + Integer.toString(seconds)).toString();
+    }
+
+    public long getSecondsDisconnected() {
+        return SystemUtil.getDateDiff(lastActivity, new Date(), TimeUnit.SECONDS);
     }
 
     public Date getConnectionTime() {
@@ -251,7 +269,7 @@ public class User {
 
     public boolean isExpired(Date expired) {
         if (lastActivity.before(expired)) {
-            logger.debug(userName + " is expired!");
+            logger.trace(userName + " is expired!");
             userState = UserState.Expired;
             return true;
         }
@@ -269,7 +287,7 @@ public class User {
             entry.getValue().update();
         }
 
-        for (Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
+        for (Entry<UUID, GameSessionPlayer> entry: gameSessions.entrySet()) {
             gameStarted(entry.getValue().getGameId(), entry.getKey());
             entry.getValue().init();
             GameManager.getInstance().sendPlayerString(entry.getValue().getGameId(), userId, "");
@@ -290,7 +308,7 @@ public class User {
         }
     }
 
-    public void addGame(UUID playerId, GameSession gameSession) {
+    public void addGame(UUID playerId, GameSessionPlayer gameSession) {
         gameSessions.put(playerId, gameSession);
     }
 
@@ -335,34 +353,38 @@ public class User {
     }
 
     public void remove(DisconnectReason reason) {
-        logger.debug("REMOVE " + getName() + " Game sessions: " + gameSessions.size() );
-        for (GameSession gameSession: gameSessions.values()) {
+        logger.trace("REMOVE " + getName() + " Game sessions: " + gameSessions.size() );
+        for (GameSessionPlayer gameSession: gameSessions.values()) {
             logger.debug("-- kill game session of gameId: " + gameSession.getGameId() );
             gameSession.quitGame();
         }
         gameSessions.clear();
-        logger.debug("REMOVE " + getName() + " Draft sessions " + draftSessions.size());
+        logger.trace("REMOVE " + getName() + " Draft sessions " + draftSessions.size());
         for (DraftSession draftSession: draftSessions.values()) {
             draftSession.setKilled();
         }
         draftSessions.clear();
-        logger.debug("REMOVE " + getName() + " Tournament sessions " + tournamentSessions.size());
+        logger.trace("REMOVE " + getName() + " Tournament sessions " + tournamentSessions.size());
         for (TournamentSession tournamentSession: tournamentSessions.values()) {
+            TournamentController tournamentController = TournamentManager.getInstance().getTournamentController(tournamentSession.getTournamentId());
+            if (tournamentController != null) {
+                tournamentController.quit(userId);
+            }
             tournamentSession.setKilled();
         }
         tournamentSessions.clear();
-        logger.debug("REMOVE " + getName() + " Tables " + tables.size());
+        logger.trace("REMOVE " + getName() + " Tables " + tables.size());
         for (Entry<UUID, Table> entry: tables.entrySet()) {
             logger.debug("-- leave tableId: " + entry.getValue().getId());
             TableManager.getInstance().leaveTable(userId, entry.getValue().getId());
         }
         tables.clear();
-        logger.debug("REMOVE " + getName() + " watched Games " + watchedGames.size());
+        logger.trace("REMOVE " + getName() + " watched Games " + watchedGames.size());
         for (UUID gameId: watchedGames) {
             GameManager.getInstance().stopWatching(gameId, userId);
         }
         watchedGames.clear();
-        logger.debug("REMOVE " + getName() + " Chats ");
+        logger.trace("REMOVE " + getName() + " Chats ");
         ChatManager.getInstance().removeUser(userId, reason);
     }
 

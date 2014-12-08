@@ -128,7 +128,7 @@ class ThadaAdelAcquisitorEffect extends OneShotEffect {
 class ThadaAdelPlayFromExileEffect extends AsThoughEffectImpl {
 
     public ThadaAdelPlayFromExileEffect() {
-        super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may play this card from exile";
     }
 

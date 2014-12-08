@@ -32,7 +32,6 @@ import java.util.UUID;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import mage.cards.decks.Deck;
-import mage.choices.Choice;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
 import static mage.client.chat.ChatPanel.ChatType.TABLES;
@@ -62,6 +61,7 @@ import mage.view.GameClientMessage;
 import mage.view.GameEndView;
 import mage.view.GameView;
 import mage.view.TableClientMessage;
+import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
 
 /**
@@ -252,7 +252,8 @@ public class CallbackClientImpl implements CallbackClient {
 
                                 if (panel != null) {
                                     panel.getChoice(message.getChoice(), callback.getObjectId());
-                                }       break;
+                                }
+                                break;
                             }
                         case "gamePlayMana":
                             {
@@ -260,7 +261,8 @@ public class CallbackClientImpl implements CallbackClient {
                                 GamePanel panel = MageFrame.getGame(callback.getObjectId());
                                 if (panel != null) {
                                     panel.playMana(message.getMessage(), message.getGameView(), callback.getMessageId());
-                                }       break;
+                                }       
+                                break;
                             }
                         case "gamePlayXMana":
                             {
@@ -268,7 +270,8 @@ public class CallbackClientImpl implements CallbackClient {
                                 GamePanel panel = MageFrame.getGame(callback.getObjectId());
                                 if (panel != null) {
                                     panel.playXMana(message.getMessage(), message.getGameView(), callback.getMessageId());
-                                }       break;
+                                }
+                                break;
                             }
                         case "gameSelectAmount":
                             {
@@ -346,7 +349,8 @@ public class CallbackClientImpl implements CallbackClient {
                                 DraftPanel panel = MageFrame.getDraft(callback.getObjectId());
                                 if (panel != null) {
                                     panel.loadBooster(message.getDraftPickView());
-                                }       break;
+                                }
+                                break;
                             }
                         case "draftUpdate":
                             {
@@ -364,16 +368,20 @@ public class CallbackClientImpl implements CallbackClient {
 //                            } else {
 //                                logger.warn("message out of sequence - ignoring");
 //                            }
-//                            break;
+                            break;
                         case "draftInit":
                             {
                                 DraftClientMessage message = (DraftClientMessage) callback.getData();
                                 DraftPanel panel = MageFrame.getDraft(callback.getObjectId());
                                 if (panel != null) {
                                     panel.loadBooster(message.getDraftPickView());
-                                }       break;
+                                }
+                                break;
                             }
                         case "tournamentInit":
+                            break;
+                        case "userRequestDialog":
+                            frame.showUserRequestDialog((UserRequestMessage) callback.getData());
                             break;
                     }
                     messageId = callback.getMessageId();

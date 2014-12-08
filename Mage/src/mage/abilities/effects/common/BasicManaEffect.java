@@ -39,4 +39,9 @@ public class BasicManaEffect extends ManaEffect {
     public Mana getMana() {
         return mana;
     }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        return mana;
+    }
 }

@@ -108,7 +108,7 @@ class JhoiraOfTheGhituSuspendEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        List<Card> cards = new ArrayList<Card>();
+        List<Card> cards = new ArrayList<>();
         for (Cost cost: source.getCosts()) {
             if (cost instanceof ExileFromHandCost) {
                 cards = ((ExileFromHandCost) cost).getCards();

@@ -502,39 +502,6 @@ public class TableController {
         }
     }
 
-
-//    public synchronized void startChallenge(UUID userId, UUID challengeId) {
-//        if (userId.equals(this.userId)) {
-//            try {
-//                match.startMatch();
-//                match.startGame();
-//                table.initGame();
-//                GameOptions gameOptions = new GameOptions();
-//                gameOptions.testMode = true;
-////                match.getGame().setGameOptions(gameOptions);
-//                GameManager.getInstance().createGameSession(match.getGame(), userPlayerMap, table.getId(), null);
-//                ChallengeManager.getInstance().prepareChallenge(getPlayerId(), match);
-//                for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
-//                    UserManager.getInstance().getUser(entry.getKey()).gameStarted(match.getGame().getId(), entry.getValue());
-//                }
-//            } catch (GameException ex) {
-//                logger.fatal(null, ex);
-//            }
-//        }
-//    }
-
-//    private UUID getPlayerId() throws GameException {
-//        UUID playerId = null;
-//        for (Entry<UUID, UUID> entry : userPlayerMap.entrySet()) {
-//            playerId = entry.getValue();
-//            break;
-//        }
-//        if (playerId == null) {
-//            throw new GameException("Couldn't find a player in challenge mode.");
-//        }
-//        return playerId;
-//    }
-
     /**
      * Used from non tournament match to start
      * 
@@ -572,20 +539,14 @@ public class TableController {
             GameManager.getInstance().createGameSession(match.getGame(), userPlayerMap, table.getId(), choosingPlayerId);
             String creator = null;
             StringBuilder opponent = new StringBuilder();
-            int activePlayers = 0;
+//            int activePlayers = 0;
             for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) { // no AI players
                 if (!match.getPlayer(entry.getValue()).hasQuit()) {
                     User user = UserManager.getInstance().getUser(entry.getKey());
                     if (user != null) {
-                        activePlayers++;
-                        if (!user.isConnected()) {
-                            // if the user is not connected but exits, the user is currently disconnected. So it's neccessary
-                            // to join the user to the game here (instead the client does it) , so he can join the game, if he reconnects in time.
-                            // remove an existing constructing for the player if it exists
-                            user.removeConstructing(match.getPlayer(entry.getValue()).getPlayer().getId());
-                            GameManager.getInstance().joinGame(match.getGame().getId(), user.getId());
-                            logger.debug("Joined currently not connected user " + user.getName() + "  matchId: " + match.getId());                            
-                        } 
+//                        activePlayers++;
+                        Player player = match.getPlayer(entry.getValue()).getPlayer();
+                        player.setRequestToShowHandCardsAllowed(user.getUserData().allowRequestShowHandCards());
                         user.gameStarted(match.getGame().getId(), entry.getValue());                        
                         
                         if (creator == null) {
@@ -608,16 +569,16 @@ public class TableController {
             // Append AI opponents to the log file
             for (MatchPlayer mPlayer :match.getPlayers()) {
                 if (!mPlayer.getPlayer().isHuman()) {
-                    activePlayers++;
+//                    activePlayers++;
                     if (opponent.length() > 0) {
                         opponent.append(" - ");
                     }
                     opponent.append(mPlayer.getName());
                 }
             }
-            if (activePlayers < 2) {
-                throw new MageException("Can't start game - Less than two players active - " +activePlayers);
-            }
+//            if (activePlayers < 2) {
+//                throw new MageException("Can't start game - Less than two players active - " +activePlayers);
+//            }
             ServerMessagesUtil.getInstance().incGamesStarted();
 
 
@@ -735,7 +696,7 @@ public class TableController {
         GameManager.getInstance().removeGame(game.getId());
         try {
             if (!match.hasEnded()) {
-                if (match.getGame().getGameType().isSideboardingAllowed()) {
+                if (match.getGame() != null && match.getGame().getGameType().isSideboardingAllowed()) {
                     sideboard();
                 }
                 if (!match.hasEnded()) {

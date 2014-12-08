@@ -56,7 +56,7 @@ import mage.players.Player;
  */
 public class DjinnOfWishes extends CardImpl {
 
-    private static final String ruleText = "Djinn of Wishes enters the battlefield with three wish counters on it";
+    private static final String ruleText = "{this} enters the battlefield with three wish counters on it";
 
     public DjinnOfWishes(UUID ownerId) {
         super(ownerId, 50, "Djinn of Wishes", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

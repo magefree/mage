@@ -29,21 +29,16 @@ package mage.sets.commander2014;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
+import mage.abilities.abilityword.LieutenantAbility;
 import mage.abilities.common.BecomesBlockedTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CommanderInPlayCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.Effect;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 
 /**
  *
@@ -62,14 +57,11 @@ public class StormsurgeKraken extends CardImpl {
 
         // Hexproof
         this.addAbility(HexproofAbility.getInstance());
+        
         // Lieutenant - As long as you control your commander, Stormsurge Kraken gets +2/+2 and has "Whenever Stormsurge Kraken becomes blocked, you may draw two cards."
-        Effect effect = new ConditionalContinousEffect(new BoostSourceEffect(2,2,Duration.WhileOnBattlefield), CommanderInPlayCondition.getInstance(), 
-                "<i>Lieutenant</i> - As long as you control your commander, Stormsurge Kraken gets +2/+2");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        effect = new GainAbilitySourceEffect(new BecomesBlockedTriggeredAbility(new DrawCardSourceControllerEffect(2), true), Duration.WhileOnBattlefield);
+        ContinuousEffect effect = new GainAbilitySourceEffect(new BecomesBlockedTriggeredAbility(new DrawCardSourceControllerEffect(2), true), Duration.WhileOnBattlefield);
         effect.setText("and has \"Whenever Stormsurge Kraken becomes blocked, you may draw two cards.\"");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        this.addAbility(new LieutenantAbility(effect));
     }
 
     public StormsurgeKraken(final StormsurgeKraken card) {

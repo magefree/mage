@@ -47,7 +47,6 @@ import mage.abilities.effects.common.continious.PlayWithTheTopCardRevealedEffect
 import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.constants.Duration;
 import mage.game.Game;
 

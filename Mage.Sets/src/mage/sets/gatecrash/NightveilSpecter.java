@@ -129,7 +129,7 @@ class NightveilSpecterExileEffect extends OneShotEffect {
 class NightveilSpecterEffect extends AsThoughEffectImpl {
 
     public NightveilSpecterEffect() {
-      super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+      super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
       staticText = "You may play cards exiled with {this}";
     }
 

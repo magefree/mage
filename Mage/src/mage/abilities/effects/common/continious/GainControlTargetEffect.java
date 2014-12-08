@@ -39,6 +39,8 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.Target;
+import mage.util.CardUtil;
 
 /**
  *
@@ -100,7 +102,7 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());        
         if (controller != null) {
             boolean targetStillExists = false;
-            for (UUID permanentId: this.getTargetPointer().getTargets(game, source)) {
+            for (UUID permanentId: getTargetPointer().getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(permanentId);
                 if (permanent != null) {
                     targetStillExists = true;
@@ -113,7 +115,7 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
             }
             if (!targetStillExists) {
                 // no valid target exists, effect can be discarded
-                this.discard();
+                discard();
             }
             return true;
         }   
@@ -125,9 +127,17 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
         if (!staticText.isEmpty()) {
             return staticText;
         }
+        Target target = mode.getTargets().get(0);
         StringBuilder sb = new StringBuilder("Gain control of ");
-        if (!mode.getTargets().get(0).getTargetName().startsWith("another")) {
-            sb.append("target ");
+        if (target.getMaxNumberOfTargets() > 1){
+            if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
+                sb.append("up to ");
+            }
+            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ");
+        } else {
+            if (!target.getTargetName().startsWith("another")) {
+                sb.append("target ");
+            }
         }
         sb.append(mode.getTargets().get(0).getTargetName());
         if (!duration.toString().isEmpty()) {

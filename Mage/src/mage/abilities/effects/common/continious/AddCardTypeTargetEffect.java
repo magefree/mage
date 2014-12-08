@@ -79,7 +79,7 @@ public class AddCardTypeTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public String getText(Mode mode) {
-        if (staticText != null) {
+        if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();

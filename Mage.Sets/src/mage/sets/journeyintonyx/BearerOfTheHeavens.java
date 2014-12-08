@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
@@ -56,7 +56,7 @@ public class BearerOfTheHeavens extends CardImpl {
         this.toughness = new MageInt(10);
 
         // When Bearer of the Heavens dies, destroy all permanents at the beginning of the next end step.
-        DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new DestroyAllEffect(new FilterPermanent("permanents")));
+        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new DestroyAllEffect(new FilterPermanent("permanents")));
         Effect effect = new CreateDelayedTriggeredAbilityEffect(delayedAbility);
         effect.setText("destroy all permanents at the beginning of the next end step");
         this.addAbility(new DiesTriggeredAbility(effect, false));

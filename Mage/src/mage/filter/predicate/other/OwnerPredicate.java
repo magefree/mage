@@ -40,7 +40,7 @@ import mage.game.Game;
  */
 public class OwnerPredicate implements ObjectPlayerPredicate<ObjectPlayer<Card>> {
 
-    private TargetController targetOwner;
+    private final TargetController targetOwner;
 
     public OwnerPredicate(TargetController targetOwner) {
         this.targetOwner = targetOwner;

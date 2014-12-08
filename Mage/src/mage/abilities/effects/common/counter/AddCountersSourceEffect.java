@@ -90,48 +90,51 @@ public class AddCountersSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (putOnCard) {
-            Card card = game.getCard(source.getSourceId());
-            if (card != null) {
-                if (counter != null) {
-                    Counter newCounter = counter.copy();
-                    int countersToAdd = amount.calculate(game, source, this);
-                    if (countersToAdd > 0 && newCounter.getCount() == 1) {
-                        countersToAdd--;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            if (putOnCard) {
+                Card card = game.getCard(source.getSourceId());
+                if (card != null) {
+                    if (counter != null) {
+                        Counter newCounter = counter.copy();
+                        int countersToAdd = amount.calculate(game, source, this);
+                        if (countersToAdd > 0 && newCounter.getCount() == 1) {
+                            countersToAdd--;
+                        }
+                        newCounter.add(countersToAdd);
+                        card.addCounters(newCounter, game);
+                        if (informPlayers) {
+                            Player player = game.getPlayer(source.getControllerId());
+                            if (player != null) {
+                                game.informPlayers(new StringBuilder(player.getName()).append(" puts ").append(newCounter.getCount()).append(" ").append(newCounter.getName().toLowerCase()).append(" counter on ").append(card.getLogName()).toString());
+                            }
+                        }
                     }
-                    newCounter.add(countersToAdd);
-                    card.addCounters(newCounter, game);
-                    if (informPlayers) {
-                        Player player = game.getPlayer(source.getControllerId());
-                        if (player != null) {
-                            game.informPlayers(new StringBuilder(player.getName()).append(" puts ").append(newCounter.getCount()).append(" ").append(newCounter.getName().toLowerCase()).append(" counter on ").append(card.getLogName()).toString());
+                    return true;
+                }
+            } else {
+                Permanent permanent = game.getPermanent(source.getSourceId());
+                if (permanent != null) {
+                    if (counter != null) {
+                        Counter newCounter = counter.copy();
+                        int countersToAdd = amount.calculate(game, source, this);
+                        if (countersToAdd > 0 && newCounter.getCount() == 1) {
+                            countersToAdd--;
+                        }
+                        newCounter.add(countersToAdd);
+                        int before = permanent.getCounters().getCount(newCounter.getName());
+                        permanent.addCounters(newCounter, game);
+                        int amountAdded = permanent.getCounters().getCount(newCounter.getName()) - before;
+                        if (informPlayers) {
+                            Player player = game.getPlayer(source.getControllerId());
+                            if (player != null) {
+                                game.informPlayers(player.getName()+" puts "+amountAdded+" "+newCounter.getName().toLowerCase()+" counter on "+permanent.getLogName());
+                            }
                         }
                     }
                 }
-                return true;
             }
-        } else {
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null) {
-                if (counter != null) {
-                    Counter newCounter = counter.copy();
-                    int countersToAdd = amount.calculate(game, source, this);
-                    if (countersToAdd > 0 && newCounter.getCount() == 1) {
-                        countersToAdd--;
-                    }
-                    newCounter.add(countersToAdd);
-                    int before = permanent.getCounters().getCount(newCounter.getName());
-                    permanent.addCounters(newCounter, game);
-                    int amountAdded = permanent.getCounters().getCount(newCounter.getName()) - before;
-                    if (informPlayers) {
-                        Player player = game.getPlayer(source.getControllerId());
-                        if (player != null) {
-                            game.informPlayers(player.getName()+" puts "+amountAdded+" "+newCounter.getName().toLowerCase()+" counter on "+permanent.getLogName());
-                        }
-                    }
-                }
-                return true;
-            }
+            return true;
         }
         return false;
     }

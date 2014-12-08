@@ -119,7 +119,7 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl {
 
     @Override
     public String getText(Mode mode) {
-        if (staticText == null || staticText.isEmpty() && this.effect != null) { // usefull for conditional night/day card abilities
+        if ((staticText == null || staticText.isEmpty()) && this.effect != null) { // usefull for conditional night/day card abilities
             return effect.getText(mode);
         }
         return staticText;

@@ -29,17 +29,14 @@ package mage.sets.tenth;
 
 import java.util.UUID;
 
-import mage.constants.Zone;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.TapForManaAllTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.constants.SetTargetPointer;
+import mage.filter.common.FilterLandPermanent;
 
 /**
  *
@@ -54,7 +51,9 @@ public class Manabarbs extends CardImpl {
         this.color.setRed(true);
 
         // Whenever a player taps a land for mana, Manabarbs deals 1 damage to that player.
-        this.addAbility(new ManabarbsTriggeredAbility());
+        this.addAbility(new TapForManaAllTriggeredAbility(
+                new DamageTargetEffect(1, true, "that player"),
+                new FilterLandPermanent("a player taps a land"), SetTargetPointer.PLAYER));
     }
 
     public Manabarbs(final Manabarbs card) {
@@ -64,43 +63,5 @@ public class Manabarbs extends CardImpl {
     @Override
     public Manabarbs copy() {
         return new Manabarbs(this);
-    }
-}
-
-class ManabarbsTriggeredAbility extends TriggeredAbilityImpl {
-
-    private static final String staticText = "Whenever a player taps a land for mana, Manabarbs deals 1 damage to that player.";
-
-    public ManabarbsTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
-    }
-
-    public ManabarbsTriggeredAbility(ManabarbsTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent == null) {
-                permanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
-            }
-            if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
-                getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getControllerId()));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public ManabarbsTriggeredAbility copy() {
-        return new ManabarbsTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return staticText;
     }
 }

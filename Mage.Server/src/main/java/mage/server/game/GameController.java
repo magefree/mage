@@ -28,6 +28,27 @@
 
 package mage.server.game;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.zip.GZIPOutputStream;
 import mage.MageException;
 import mage.abilities.Ability;
 import mage.cards.Card;
@@ -36,7 +57,9 @@ import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.choices.Choice;
 import mage.constants.ManaType;
+import mage.constants.PlayerAction;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.GameException;
@@ -47,26 +70,24 @@ import mage.game.events.TableEvent;
 import mage.game.permanent.Permanent;
 import mage.interfaces.Action;
 import mage.players.Player;
-import mage.server.*;
+import mage.server.ChatManager;
+import mage.server.Main;
+import mage.server.TableManager;
+import mage.server.User;
+import mage.server.UserManager;
 import mage.server.util.ConfigSettings;
 import mage.server.util.Splitter;
 import mage.server.util.SystemUtil;
 import mage.server.util.ThreadExecutor;
 import mage.utils.timer.PriorityTimer;
-import mage.view.*;
+import mage.view.AbilityPickerView;
+import mage.view.CardsView;
+import mage.view.ChatMessage;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
+import mage.view.GameView;
+import mage.view.PermanentView;
 import org.apache.log4j.Logger;
-
-import java.io.*;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
-import java.util.zip.GZIPOutputStream;
-import mage.choices.Choice;
-import mage.constants.PlayerAction;
 
 /**
  *
@@ -77,8 +98,10 @@ public class GameController implements GameCallback {
     private static final ExecutorService gameExecutor = ThreadExecutor.getInstance().getGameExecutor();
     private static final Logger logger = Logger.getLogger(GameController.class);
 
-    private ConcurrentHashMap<UUID, GameSession> gameSessions = new ConcurrentHashMap<>();
-    private ConcurrentHashMap<UUID, GameWatcher> watchers = new ConcurrentHashMap<>();
+    protected ScheduledExecutorService joinWaitingExecutor = Executors.newSingleThreadScheduledExecutor();
+
+    private ConcurrentHashMap<UUID, GameSessionPlayer> gameSessions = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<UUID, GameSessionWatcher> watchers = new ConcurrentHashMap<>();
     private ConcurrentHashMap<UUID, PriorityTimer> timers = new ConcurrentHashMap<>();
     
     private ConcurrentHashMap<UUID, UUID> userPlayerMap;
@@ -105,6 +128,7 @@ public class GameController implements GameCallback {
             }
         }
         init();
+
     }
 
     public void cleanUp() {
@@ -232,7 +256,16 @@ public class GameController implements GameCallback {
                 }
             }
         );
-
+        joinWaitingExecutor.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    sendInfoAboutPlayersNotJoinedYet();
+                } catch(Exception ex) {
+                    logger.fatal("Send info about player not joined yet:", ex);
+                }
+            }
+        }, 15, 15, TimeUnit.SECONDS);
         checkStart();
     }
 
@@ -282,10 +315,10 @@ public class GameController implements GameCallback {
             logger.fatal("Player not found - playerId: " +playerId);
             return;
         }
-        GameSession gameSession = gameSessions.get(playerId);
+        GameSessionPlayer gameSession = gameSessions.get(playerId);
         String joinType;
         if (gameSession == null) {
-            gameSession = new GameSession(game, userId, playerId, useTimeout);
+            gameSession = new GameSessionPlayer(game, userId, playerId, useTimeout);
             gameSessions.put(playerId, gameSession);
             gameSession.setUserData(user.getUserData());
             joinType = "joined";
@@ -293,28 +326,64 @@ public class GameController implements GameCallback {
             joinType = "rejoined";
         }
         user.addGame(playerId, gameSession);
-        logger.debug("Player " + playerId + " has " + joinType + " gameId: " + game.getId());
+        logger.debug("Player " + player.getName()+ " " + playerId + " has " + joinType + " gameId: " + game.getId());
         ChatManager.getInstance().broadcast(chatId, "", game.getPlayer(playerId).getName() + " has " + joinType + " the game", MessageColor.ORANGE, true, MessageType.GAME);
         checkStart();
     }
 
     private synchronized void startGame() {
         if (gameFuture == null) {
-            for (final Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
-                if (!entry.getValue().init()) {
-                    logger.fatal("Unable to initialize client");
-                    //TODO: generate client error message
-                    GameManager.getInstance().removeGame(game.getId());
-                    return;
-                }
+            for (final Entry<UUID, GameSessionPlayer> entry: gameSessions.entrySet()) {
+                entry.getValue().init();
             }
             GameWorker worker = new GameWorker(game, choosingPlayerId, this);
             gameFuture = gameExecutor.submit(worker);
         }
     }
 
+    private void sendInfoAboutPlayersNotJoinedYet() {
+        for (Player player: game.getPlayers().values()) {
+            if (!player.hasLeft() && player.isHuman()) {                
+                User user = getUserByPlayerId(player.getId());                
+                if (user != null) {
+                    if (!user.isConnected()) {
+                        if (gameSessions.get(player.getId()) == null) {
+                                // join the game because player has not joined are was removed because of disconnect
+                                user.removeConstructing(player.getId());
+                                GameManager.getInstance().joinGame(game.getId(), user.getId());
+                                logger.debug("Player " + user.getName() + " (disconnected) has joined gameId: " +game.getId());
+                        }
+                        ChatManager.getInstance().broadcast(chatId, player.getName(), user.getPingInfo() + " is pending to join the game", MessageColor.BLUE, true, ChatMessage.MessageType.STATUS);
+                        if (user.getSecondsDisconnected() > 240) {
+                            // Cancel player join possibility lately after 4 minutes
+                            logger.debug("Player " + user.getName() + " - canceled game (after 240 seconds) gameId: " +game.getId());
+                            player.leave();
+                        }
+
+                    }
+                } else {
+                    if (!player.hasLeft()) {
+                        logger.debug("Player " + player.getName() + " canceled game (no user) gameId: " + game.getId());
+                        player.leave();
+                    }
+                }
+            }
+        }
+        checkStart();
+    }
+
+    private User getUserByPlayerId(UUID playerId) {
+        for(Map.Entry<UUID,UUID> entry: userPlayerMap.entrySet()) {
+            if (entry.getValue().equals(playerId)) {
+                return UserManager.getInstance().getUser(entry.getKey());
+            }
+        }
+        return null;
+    }
+
     private void checkStart() {
         if (allJoined()) {
+            joinWaitingExecutor.shutdownNow();
             ThreadExecutor.getInstance().getCallExecutor().execute(
                 new Runnable() {
                     @Override
@@ -327,8 +396,16 @@ public class GameController implements GameCallback {
 
     private boolean allJoined() {
         for (Player player: game.getPlayers().values()) {
-            if (player.isHuman() && gameSessions.get(player.getId()) == null) {
-                return false;
+            if (!player.hasLeft()) {
+                User user = getUserByPlayerId(player.getId());
+                if (user != null) {
+                    if (!user.isConnected()) {
+                        return false;
+                    }
+                }
+                if (player.isHuman() && gameSessions.get(player.getId()) == null) {
+                    return false;
+                }
             }
         }
         return true;
@@ -345,7 +422,7 @@ public class GameController implements GameCallback {
         }
         User user = UserManager.getInstance().getUser(userId);
         if (user != null) {
-            GameWatcher gameWatcher = new GameWatcher(userId, game, false);
+            GameSessionWatcher gameWatcher = new GameSessionWatcher(userId, game, false);
             watchers.put(userId, gameWatcher);
             gameWatcher.init();
             user.addGameWatchInfo(game.getId());
@@ -361,35 +438,28 @@ public class GameController implements GameCallback {
         }
     }
 
-//    public void removeUser(UUID userId) {
-//        UUID playerId = userPlayerMap.get(userId);
-//        if (playerId != null) {
-//            GameSession gameSession = gameSessions.get(playerId);
-//            if (gameSession != null) {
-//                gameSession.setKilled();
-//                gameSessions.remove(playerId);
-//                quitMatch(userId);
-//                userPlayerMap.remove(userId);
-//            }
-//        }
-//        GameWatcher gameWatcher = watchers.get(userId);
-//        if (gameWatcher != null) {
-//            gameWatcher.setKilled();
-//            watchers.remove(userId);
-//        }
-//    }
-
     public void quitMatch(UUID userId) {
         UUID playerId = getPlayerId(userId);
         if (playerId != null) {
-            GameSession gameSession = gameSessions.get(playerId);
-            if (gameSession != null) {
-                gameSession.quitGame();
+            if (allJoined()) {
+                GameSessionPlayer gameSession = gameSessions.get(playerId);
+                if (gameSession != null) {
+                    gameSession.quitGame();
+                }
+            } else {
+                // The player did never join the game but the game controller was started because the player was still connected as the
+                // game was started. But the Client never called the join action. So now after the user is expired, the
+                // quit match is called and has to end the game, because the player never joined the game.
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    player.leave();
+                    checkStart(); // => So the game starts and gets an result or multiplayer game starts with active players
+                }
             }
         }
     }
 
-    public void sendPlayerAction(PlayerAction playerAction, UUID userId) {
+    public void sendPlayerAction(PlayerAction playerAction, UUID userId, Object data) {
         switch(playerAction) {
             case UNDO:
                 game.undo(getPlayerId(userId));
@@ -403,11 +473,71 @@ public class GameController implements GameCallback {
             case MANA_AUTO_PAYMENT_ON:
                 game.setManaPoolMode(getPlayerId(userId), true);
                 break;
+            case ADD_PERMISSION_TO_SEE_HAND_CARDS:
+                if (data instanceof UUID) {
+                    UUID playerId = getPlayerId(userId);
+                    if (playerId != null) {
+                        Player player = game.getPlayer(playerId);
+                        if (player != null) {
+                            player.addPermissionToShowHandCards((UUID) data);
+                        }
+                    }
+                }
+                break;
+            case REVOKE_PERMISSIONS_TO_SEE_HAND_CARDS:
+                UUID playerId = getPlayerId(userId);
+                if (playerId != null) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null) {
+                        player.revokePermissionToSeeHandCards();
+                    }
+                }
+                break;
+            case REQUEST_PERMISSION_TO_SEE_HAND_CARDS:
+                if (data instanceof UUID) {
+                    requestPermissionToSeeHandCards(userId, (UUID) data);
+                }
+                break;
             default:        
                 game.sendPlayerAction(playerAction, getPlayerId(userId));
         }
     }
-    
+
+    private void requestPermissionToSeeHandCards(UUID userIdRequester, UUID userIdGranter) {
+        Player grantingPlayer = game.getPlayer(userIdGranter);
+        if (grantingPlayer != null) {
+            if (!grantingPlayer.getUsersAllowedToSeeHandCards().contains(userIdRequester)) {
+                if (grantingPlayer.isHuman()) {
+                    GameSessionPlayer gameSession = gameSessions.get(userIdGranter);
+                    if (gameSession != null) {
+                        UUID requestingPlayer = getPlayerId(userIdRequester);
+                        if (requestingPlayer == null || !requestingPlayer.equals(grantingPlayer.getId())) { // don't allow request for your own cards
+                            if (grantingPlayer.isRequestToShowHandCardsAllowed()) {
+                                gameSession.requestPermissionToSeeHandCards(userIdRequester);
+                            } else {
+                                // player does not allow the request
+                                User requester = UserManager.getInstance().getUser(userIdRequester);
+                                if (requester != null) {
+                                    requester.showUserMessage("Request to show hand cards", "Player " + grantingPlayer.getName() + " does not allow to request to show hand cards!");
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    // Non Human players always allow to see the hand cards
+                    grantingPlayer.addPermissionToShowHandCards(userIdRequester);
+                }
+            } else {
+                // user can already see the cards
+                User requester = UserManager.getInstance().getUser(userIdRequester);
+                if (requester != null) {
+                    requester.showUserMessage("Request to show hand cards", "You can see already the hand cards of player " + grantingPlayer.getName() + "!");
+                }
+            }
+
+        }
+
+    }
 
     public void cheat(UUID userId, UUID playerId, DeckCardLists deckList) {
         Deck deck;
@@ -449,11 +579,11 @@ public class GameController implements GameCallback {
     }
 
     public void endGame(final String message) throws MageException {
-        for (final GameSession gameSession: gameSessions.values()) {
+        for (final GameSessionPlayer gameSession: gameSessions.values()) {
             gameSession.gameOver(message);
             gameSession.removeGame();
         }
-        for (final GameWatcher gameWatcher: watchers.values()) {
+        for (final GameSessionWatcher gameWatcher: watchers.values()) {
             gameWatcher.gameOver(message);
         }
         TableManager.getInstance().endGame(tableId);
@@ -523,10 +653,10 @@ public class GameController implements GameCallback {
                 }
             }
         }
-        for (final GameSession gameSession: gameSessions.values()) {
+        for (final GameSessionPlayer gameSession: gameSessions.values()) {
             gameSession.update();
         }
-        for (final GameWatcher gameWatcher: watchers.values()) {
+        for (final GameSessionWatcher gameWatcher: watchers.values()) {
             gameWatcher.update();
         }
     }
@@ -535,7 +665,7 @@ public class GameController implements GameCallback {
         Table table = TableManager.getInstance().getTable(tableId);
         if (table != null) {
             if (table.getMatch() != null) {
-                for (final GameSession gameSession: gameSessions.values()) {
+                for (final GameSessionPlayer gameSession: gameSessions.values()) {
                     gameSession.endGameInfo(table);
                 }
             }
@@ -663,12 +793,12 @@ public class GameController implements GameCallback {
             message.append(game.getStep().getType().toString()).append(" - ");
         }
         message.append("Waiting for ").append(game.getPlayer(playerId).getName());
-        for (final Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
+        for (final Entry<UUID, GameSessionPlayer> entry: gameSessions.entrySet()) {
             if (!entry.getKey().equals(playerId)) {
                 entry.getValue().inform(message.toString());
             }
         }
-        for (final GameWatcher watcher: watchers.values()) {
+        for (final GameSessionWatcher watcher: watchers.values()) {
             watcher.inform(message.toString());
         }
     }
@@ -683,7 +813,7 @@ public class GameController implements GameCallback {
             return;
         }
         final String message = new StringBuilder(game.getStep().getType().toString()).append(" - Waiting for ").append(controller.getName()).toString();
-        for (final Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
+        for (final Entry<UUID, GameSessionPlayer> entry: gameSessions.entrySet()) {
             boolean skip = false;
             for (UUID uuid : players) {
                 if (entry.getKey().equals(uuid)) {
@@ -695,7 +825,7 @@ public class GameController implements GameCallback {
                 entry.getValue().inform(message);
             }
         }
-        for (final GameWatcher watcher: watchers.values()) {
+        for (final GameSessionWatcher watcher: watchers.values()) {
             watcher.inform(message);
         }
     }
@@ -717,7 +847,7 @@ public class GameController implements GameCallback {
         for (StackTraceElement e: ex.getStackTrace()) {
             sb.append(e.toString()).append("\n");
         }
-        for (final Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
+        for (final Entry<UUID, GameSessionPlayer> entry: gameSessions.entrySet()) {
             entry.getValue().gameError(sb.toString());
         }
     }
@@ -820,7 +950,7 @@ public class GameController implements GameCallback {
         void execute(UUID player);
     }
 
-    private GameSession getGameSession(UUID playerId) {
+    private GameSessionPlayer getGameSession(UUID playerId) {
         if (!timers.isEmpty()) {
             Player player = game.getState().getPlayer(playerId);
             PriorityTimer timer = timers.get(playerId);

@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AddManaToManaPoolEffect;
+import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -56,7 +56,7 @@ public class SakuraTribeSpringcaller extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, add {G} to your mana pool. Until end of turn, this mana doesn't empty from your mana pool as steps and phases end.
-        Effect effect = new AddManaToManaPoolEffect(new Mana(Mana.GreenMana), "your", true);
+        Effect effect = new AddManaToManaPoolTargetControllerEffect(new Mana(Mana.GreenMana), "your", true);
         effect.setText("add {G} to your mana pool. Until end of turn, this mana doesn't empty from your mana pool as steps and phases end");        
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, false));
     }

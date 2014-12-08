@@ -299,7 +299,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSpecialActionPerformed
 
     private void btnUndoActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        session.sendPlayerAction(PlayerAction.UNDO, gameId);
+        session.sendPlayerAction(PlayerAction.UNDO, gameId, null);
     }
 
     public void setHelperPanel(HelperPanel helper) {

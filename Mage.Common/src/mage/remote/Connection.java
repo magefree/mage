@@ -54,6 +54,7 @@ public class Connection {
 
     private int avatarId;
     private boolean showAbilityPickerForced;
+    private boolean allowRequestShowHandCards;
     private UserSkipPrioritySteps userSkipPrioritySteps;
 
     private static final String serialization = "?serializationtype=jboss";    
@@ -231,6 +232,13 @@ public class Connection {
         this.showAbilityPickerForced = showAbilityPickerForced;
     }
 
+    public boolean allowRequestShowHandCards() {
+        return allowRequestShowHandCards;
+    }
+
+    public void setAllowRequestShowHandCards(boolean allowRequestShowHandCards) {
+        this.allowRequestShowHandCards = allowRequestShowHandCards;
+    }
     public UserSkipPrioritySteps getUserSkipPrioritySteps() {
         return userSkipPrioritySteps;
     }

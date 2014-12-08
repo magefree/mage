@@ -110,6 +110,7 @@ import static mage.constants.PhaseStep.FIRST_COMBAT_DAMAGE;
 import static mage.constants.PhaseStep.UNTAP;
 import static mage.constants.PhaseStep.UPKEEP;
 import mage.constants.PlayerAction;
+import mage.constants.Zone;
 import mage.remote.Session;
 import mage.view.AbilityPickerView;
 import mage.view.CardView;
@@ -152,7 +153,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private boolean initialized = false;
     private int lastUpdatedTurn;
     private boolean menuNameSet = false;
-    
+    private boolean handCardsOfOpponentAvailable = false;
     
     private Map<String, Card> loadedCards = new HashMap<>();
 
@@ -376,6 +377,8 @@ public final class GamePanel extends javax.swing.JPanel {
         this.gameChatPanel.connect(session.getGameChatId(gameId));
         if (!session.joinGame(gameId)) {
             removeGame();
+        } else {
+            AudioManager.playYourGameStarted();
         }
     }
 
@@ -388,17 +391,18 @@ public final class GamePanel extends javax.swing.JPanel {
         this.feedbackPanel.init(gameId);
         this.feedbackPanel.clear();
 
+
         this.btnConcede.setVisible(false);
         this.btnStopWatching.setVisible(true);
         this.btnSwitchHands.setVisible(false);
+        this.chosenHandKey = "";
         this.btnCancelSkip.setVisible(false);
 
         this.btnSkipToNextTurn.setVisible(false);
         this.btnSkipToEndTurn.setVisible(false);
         this.btnSkipToNextMain.setVisible(false);
         this.btnSkipStack.setVisible(false);
-        this.btnSkipToYourTurn.setVisible(false);
-        
+        this.btnSkipToYourTurn.setVisible(false);        
         
         this.pnlReplay.setVisible(false);
         this.gameChatPanel.clear();
@@ -530,45 +534,59 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     public synchronized void updateGame(GameView game, Map<String, Serializable> options) {
-        if (playerId == null || game.getHand() == null) {
+        if (playerId == null && game.getWatchedHands() == null) {
             this.handContainer.setVisible(false);
         } else {
+            this.handContainer.setVisible(true);
             handCards.clear();
-            handCards.put(YOUR_HAND, game.getHand());
-
-            // Mark playable
-            if (game.getCanPlayInHand() != null) {
-                for (CardView card : handCards.get(YOUR_HAND).values()) {
-                    if (game.getCanPlayInHand().contains(card.getId())) {
-                        card.setPlayable(true);
-                    }
-                }
-            }
-
-            // Get opponents hand cards if available
-            if (game.getOpponentHands() != null) {
-                for (Map.Entry<String, SimpleCardsView> hand: game.getOpponentHands().entrySet()) {
+            if (game.getWatchedHands() != null) {
+                for (Map.Entry<String, SimpleCardsView> hand: game.getWatchedHands().entrySet()) {
                     handCards.put(hand.getKey(), CardsViewUtil.convertSimple(hand.getValue(), loadedCards));
                 }
             }
-
-            if (!handCards.containsKey(chosenHandKey)) {
-                chosenHandKey = YOUR_HAND;
+            if (playerId != null) {
+                handCards.put(YOUR_HAND, game.getHand());
+                // Mark playable
+                if (game.getCanPlayInHand() != null) {
+                    for (CardView card : handCards.get(YOUR_HAND).values()) {
+                        if (game.getCanPlayInHand().contains(card.getId())) {
+                            card.setPlayable(true);
+                        }
+                    }
+                }
+                // Get opponents hand cards if available (only possible for players)
+                if (game.getOpponentHands() != null) {
+                    for (Map.Entry<String, SimpleCardsView> hand: game.getOpponentHands().entrySet()) {
+                        handCards.put(hand.getKey(), CardsViewUtil.convertSimple(hand.getValue(), loadedCards));
+                    }
+                }
+                if (!handCards.containsKey(chosenHandKey)) {
+                    chosenHandKey = YOUR_HAND;
+                }
+            } else if (chosenHandKey.isEmpty() && handCards.size() > 0) {
+                chosenHandKey = handCards.keySet().iterator().next();
             }
-            handContainer.loadCards(handCards.get(chosenHandKey), bigCard, gameId);
+            if (chosenHandKey != null && handCards.containsKey(chosenHandKey)) {
+                handContainer.loadCards(handCards.get(chosenHandKey), bigCard, gameId);
+            }
 
             hideAll();
 
-            // set visible only if we have any other hand visible than ours
-            boolean previous = btnSwitchHands.isVisible();
-            boolean visible = handCards.size() > 1;
-            if (previous != visible) {
-                btnSwitchHands.setVisible(visible);
-                if (visible) {
-                    JOptionPane.showMessageDialog(null, "You control other player's turn. \nUse \"Switch Hand\" button to switch between cards in different hands.");
-                } else {
-                    JOptionPane.showMessageDialog(null, "You lost control on other player's turn.");
+
+            if (playerId != null) {
+                // set visible only if we have any other hand visible than ours
+                btnSwitchHands.setVisible(handCards.size() > 1);
+                boolean change = (handCardsOfOpponentAvailable != (game.getOpponentHands() != null));                
+                if (change) {
+                    handCardsOfOpponentAvailable = !handCardsOfOpponentAvailable;
+                    if (handCardsOfOpponentAvailable) {
+                        JOptionPane.showMessageDialog(null, "You control other player's turn. \nUse \"Switch Hand\" button to switch between cards in different hands.");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "You lost control on other player's turn.");
+                    }
                 }
+            } else {
+                btnSwitchHands.setVisible(!handCards.isEmpty());
             }
         }
 
@@ -798,6 +816,26 @@ public final class GamePanel extends javax.swing.JPanel {
      */
     public void pickTarget(String message, CardsView cardView, GameView gameView, Set<UUID> targets, boolean required, Map<String, Serializable> options, int messageId) {
         ShowCardsDialog dialog = null;
+        if (options != null && options.containsKey("targetZone")) {
+            if (Zone.HAND.equals(options.get("targetZone"))) { // mark selectable target cards in hand
+                List<UUID> choosen = null;
+                if (options.containsKey("chosen")) {
+                    choosen = (List<UUID>) options.get("chosen");
+                }
+                for(CardView card: gameView.getHand().values()) {
+                    if (targets == null || targets.isEmpty()) {
+                        card.setPlayable(false);
+                        card.setChoosable(true);
+                    } else if (targets.contains(card.getId())) {
+                        card.setPlayable(false);
+                        card.setChoosable(true);
+                    }
+                    if (choosen != null && choosen.contains(card.getId())) {
+                        card.setSelected(true);
+                    }
+                }
+            }
+        }
         updateGame(gameView);
         Map<String, Serializable> options0 = options == null ? new HashMap<String, Serializable>() : options;
         if (cardView != null && cardView.size() > 0) {
@@ -1280,7 +1318,7 @@ public final class GamePanel extends javax.swing.JPanel {
         btnStopWatching.setBorder(new EmptyBorder(0,0,0,0));
         btnStopWatching.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getStopWatchButtonImage()));
         btnStopWatching.setFocusable(false);
-        btnSwitchHands.setToolTipText("Stop watching this game.");
+        btnStopWatching.setToolTipText("Stop watching this game.");
         btnStopWatching.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
@@ -1620,42 +1658,42 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private void btnConcedeActionPerformed(java.awt.event.ActionEvent evt) {
         if (modalQuestion("Are you sure you want to concede?", "Confirm concede") == JOptionPane.YES_OPTION) {
-            session.sendPlayerAction(PlayerAction.CONCEDE, gameId);
+            session.sendPlayerAction(PlayerAction.CONCEDE, gameId, null);
         }
     }
 
     private void btnEndTurnActionPerformed(java.awt.event.ActionEvent evt) {
-        session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN, gameId);
+        session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN, gameId, null);
         AudioManager.playOnSkipButton();
         updateSkipButtons(true, false, false, false, false);
     }
 
     private void btnUntilEndOfTurnActionPerformed(java.awt.event.ActionEvent evt) {
-        session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId);
+        session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId, null);
         AudioManager.playOnSkipButton();
         updateSkipButtons(false, true, false, false, false);
     }
 
     private void btnUntilNextMainPhaseActionPerformed(java.awt.event.ActionEvent evt) {
-        session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE, gameId);
+        session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE, gameId, null);
         AudioManager.playOnSkipButton();
         updateSkipButtons(false, false, true, false, false);
     }
 
     private void btnPassPriorityUntilNextYourTurnActionPerformed(java.awt.event.ActionEvent evt) {
-        session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN, gameId);
+        session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN, gameId, null);
         AudioManager.playOnSkipButton();
         updateSkipButtons(false, false, false, true, false);
     }
 
     private void btnPassPriorityUntilStackResolvedActionPerformed(java.awt.event.ActionEvent evt) {
-        session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_STACK_RESOLVED, gameId);
+        session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_STACK_RESOLVED, gameId, null);
         AudioManager.playOnSkipButton();
         updateSkipButtons(false, false, false, false, true);
     }
 
     private void restorePriorityActionPerformed(java.awt.event.ActionEvent evt) {
-        session.sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, gameId);
+        session.sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, gameId, null);
         AudioManager.playOnSkipButtonCancel();
         updateSkipButtons(false, false, false, false, false);
     }

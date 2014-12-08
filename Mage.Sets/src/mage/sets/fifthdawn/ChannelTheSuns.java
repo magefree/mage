@@ -29,7 +29,7 @@ package mage.sets.fifthdawn;
 
 import mage.Mana;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AddManaToControllersManaPoolEffect;
+import mage.abilities.effects.common.AddManaToManaPoolSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -49,7 +49,7 @@ public class ChannelTheSuns extends CardImpl {
         this.color.setGreen(true);
 
         // Add {W}{U}{B}{R}{G} to your mana pool.
-        Effect effect = new AddManaToControllersManaPoolEffect(new Mana(1, 1, 1, 1, 1, 0, 0));
+        Effect effect = new AddManaToManaPoolSourceControllerEffect(new Mana(1, 1, 1, 1, 1, 0, 0));
         this.getSpellAbility().addEffect(effect);
     }
 

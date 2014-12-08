@@ -41,6 +41,27 @@ public class GatherSpecimensTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Memnite", 0);
 
     }
+   @Test
+    public void testTokenCreatedFromSpellEffect() {
+
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        addCard(Zone.HAND, playerA, "Gather Specimens", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 3);
+        addCard(Zone.HAND, playerB, "Spectral Procession", 1);
+
+        castSpell(2, PhaseStep.UPKEEP, playerA, "Gather Specimens");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Spectral Procession");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+
+        execute();
+
+        assertPermanentCount(playerA, "Spirit", 3);
+        assertPermanentCount(playerB, "Spirit", 0);
+
+    }
 
     @Test
     public void testFromGraveyardEffect() {
@@ -83,6 +104,7 @@ public class GatherSpecimensTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.UPKEEP, playerA, "Gather Specimens");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Oblivion Ring");
+        addTarget(playerA, "Memnite");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Disenchant", "Oblivion Ring");
 
@@ -94,4 +116,6 @@ public class GatherSpecimensTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Memnite", 0);
 
     }
+
+
 }

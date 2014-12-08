@@ -60,6 +60,7 @@ public class LordOfLineage extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Vampire");
 
+        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

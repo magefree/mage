@@ -96,7 +96,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     public ComputerPlayer(String name, RangeOfInfluence range) {
         super(name, range);
         human = false;
-        userData = new UserData(UserGroup.COMPUTER, 64, false, null);
+        userData = new UserData(UserGroup.COMPUTER, 64, false, true, null);
         pickedCards = new ArrayList<>();
     }
 
@@ -165,7 +165,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 for (int i = unplayable.size() - 1; i >= 0; i--) {
                     if (target.canTarget(unplayable.values().toArray(new Card[0])[i].getId(), game)) {
                         target.add(unplayable.values().toArray(new Card[0])[i].getId(), game);
-                        return true;
+                        if (target.isChosen()) {
+                            return true;
+                        }
                     }
                 }
             }
@@ -173,7 +175,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 for (int i = 0; i < hand.size(); i++) {
                     if (target.canTarget(hand.toArray(new UUID[0])[i], game)) {
                         target.add(hand.toArray(new UUID[0])[i], game);
-                        return true;
+                        if (target.isChosen()) {
+                            return true;
+                        }
                     }
                 }
             }
@@ -749,10 +753,10 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     @Override
     public boolean priority(Game game) {
-        game.resumeTimer(playerId);
+        game.resumeTimer(getTurnControlledBy());
         log.debug("priority");
         boolean result = priorityPlay(game);
-        game.pauseTimer(playerId);
+        game.pauseTimer(getTurnControlledBy());
         return result;
     }
 

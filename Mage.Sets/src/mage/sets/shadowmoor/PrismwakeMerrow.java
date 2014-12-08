@@ -36,7 +36,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.SetCardColorTargetEffect;
+import mage.abilities.effects.common.continious.BecomesColorTargetEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
@@ -126,7 +126,7 @@ class ChangeColorOrColorsTargetEffect extends OneShotEffect {
                 }
             }
             for (ObjectColor color : chosenColors) {
-                ContinuousEffect effect = new SetCardColorTargetEffect(color, Duration.EndOfTurn, "is " + color);
+                ContinuousEffect effect = new BecomesColorTargetEffect(color, Duration.EndOfTurn, "is " + color);
                 effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
                 game.addEffect(effect, source);
             }

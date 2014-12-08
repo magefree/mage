@@ -77,7 +77,7 @@ class AcolytesRewardEffect extends PreventionEffectImpl {
 
     public AcolytesRewardEffect() {
         super(Duration.EndOfTurn);
-        staticText = "Prevent the next X damage that would be dealt to target creature this turn, where X is your devotion to white. If damage is prevented this way, {this} deals that much damage to target creature or player.";
+        staticText = "Prevent the next X damage that would be dealt to target creature this turn, where X is your devotion to white. If damage is prevented this way, {this} deals that much damage to target creature or player";
     }
 
     public AcolytesRewardEffect(final AcolytesRewardEffect effect) {

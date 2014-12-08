@@ -94,8 +94,7 @@ public class TableManager {
                 try {
                     checkTableHealthState();
                 } catch(Exception ex) {
-                    logger.fatal("Check table health state job error:");
-                    ex.printStackTrace();
+                    logger.fatal("Check table health state job error:", ex);
                 }
             }
         }, EXPIRE_CHECK_PERIOD, EXPIRE_CHECK_PERIOD, TimeUnit.MINUTES);
@@ -362,9 +361,9 @@ public class TableManager {
     public void debugServerState() {
         logger.debug("--- Server state ----------------------------------------------");
         Collection<User> users = UserManager.getInstance().getUsers();
-        logger.debug("--------User: " + users.size() + " [userId | since | name -----------------------");
+        logger.debug("--------User: " + users.size() + " [userId | since | lock | name -----------------------");
         for (User user :users) {
-            logger.debug(user.getId() + " | " + formatter.format(user.getConnectionTime()) + " | " + user.getName() +" (" +user.getUserState().toString() + " - " + user.getPingInfo() + ")");
+            logger.debug(user.getId() + " | " + formatter.format(user.getConnectionTime()) + " | " + (SessionManager.getInstance().getSession(user.getSessionId()).isLocked()?"L":"-") + " | " + user.getName() +" (" +user.getUserState().toString() + " - " + user.getPingInfo() + ")");
         }
         ArrayList<ChatSession> chatSessions = ChatManager.getInstance().getChatSessions();
         logger.debug("------- ChatSessions: " + chatSessions.size() + " ----------------------------------");

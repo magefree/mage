@@ -88,8 +88,16 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
                 player.getManaPool().addMana(mana, game, source);
                 result = true;
             }
+
         }
 
+
         return result;
+    }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        //TODO: TAP_FOR_MANA Event does not support currently to get an amount > 1 of conditional mana
+        return null;
     }
 }

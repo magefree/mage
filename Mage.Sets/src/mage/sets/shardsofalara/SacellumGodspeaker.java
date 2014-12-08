@@ -62,7 +62,7 @@ public class SacellumGodspeaker extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {tap}: Reveal any number of creature cards with power 5 or greater from your hand. Add {G} to your mana pool for each card revealed this way.
+        // {T}: Reveal any number of creature cards with power 5 or greater from your hand. Add {G} to your mana pool for each card revealed this way.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new SacellumGodspeakerEffect(), new TapSourceCost()));
     }
 
@@ -103,9 +103,18 @@ class SacellumGodspeakerEffect extends ManaEffect {
     public boolean apply(Game game, Ability source) {
         TargetCardInHand target = new TargetCardInHand(0,Integer.MAX_VALUE, filter);
         if (target.choose(Outcome.Benefit, source.getControllerId(), source.getSourceId(), game)) {
-            game.getPlayer(source.getControllerId()).getManaPool().addMana(Mana.GreenMana(target.getTargets().size()), game, source);
+            Mana mana = Mana.GreenMana(target.getTargets().size());
+            checkToFirePossibleEvents(mana, game, source);
+            game.getPlayer(source.getControllerId()).getManaPool().addMana(mana, game, source);
             return true;
         }
         return false;
     }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        return null;
+    }
+
+
 }

@@ -34,7 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.effects.common.continious.SetCardColorTargetEffect;
+import mage.abilities.effects.common.continious.BecomesColorTargetEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -77,7 +77,7 @@ public class EightAndAHalfTails extends CardImpl {
         this.addAbility(ability);
         // {1}: Target spell or permanent becomes white until end of turn.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new SetCardColorTargetEffect(ObjectColor.WHITE, Duration.EndOfTurn, "Target spell or permanent becomes white until end of turn"), new ManaCostsImpl("{1}"));
+                new BecomesColorTargetEffect(ObjectColor.WHITE, Duration.EndOfTurn, "Target spell or permanent becomes white until end of turn"), new ManaCostsImpl("{1}"));
         target = new TargetSpellOrPermanent();
         ability.addTarget(target);
         this.addAbility(ability);

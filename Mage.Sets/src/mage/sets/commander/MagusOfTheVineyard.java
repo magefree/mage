@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import static mage.Mana.GreenMana;
 import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
-import mage.abilities.effects.common.AddManaToManaPoolEffect;
+import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -56,7 +56,7 @@ public class MagusOfTheVineyard extends CardImpl {
 
         // At the beginning of each player's precombat main phase, add {G}{G} to that player's mana pool.
         this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(
-                Zone.BATTLEFIELD, new AddManaToManaPoolEffect(GreenMana(2), "that player's"), TargetController.ANY, false, true));        
+                Zone.BATTLEFIELD, new AddManaToManaPoolTargetControllerEffect(GreenMana(2), "that player's"), TargetController.ANY, false, true));        
     }
 
     public MagusOfTheVineyard(final MagusOfTheVineyard card) {

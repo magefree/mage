@@ -47,6 +47,7 @@ import mage.constants.EffectType;
 import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
+import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
 
@@ -456,4 +457,7 @@ public interface Ability extends Controllable, Serializable {
      * @param active execute no cost modification
      */
     void setCostModificationActive(boolean active);
+
+    boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, boolean noMana, Player controller, Game game);
+
 }

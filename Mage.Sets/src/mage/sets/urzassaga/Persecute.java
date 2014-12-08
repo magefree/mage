@@ -56,7 +56,6 @@ public class Persecute extends CardImpl {
 
         // Choose a color. Target player reveals his or her hand and discards all cards of that color.
         this.getSpellAbility().addEffect(new PersecuteEffect());
-        this.getSpellAbility().addChoice(new ChoiceColor());
         this.getSpellAbility().addTarget(new TargetPlayer());
 
     }
@@ -89,18 +88,24 @@ class PersecuteEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
-            if(choice == null || choice.getColor() == null) {
+        Player controller = game.getPlayer(source.getFirstTarget());
+        if (controller != null) {
+            ChoiceColor choice = new ChoiceColor();
+            while (!choice.isChosen()) {
+                controller.choose(outcome, choice, game);
+                if (!controller.isInGame()) {
+                    return false;
+                }
+            }            
+            if (choice.getColor() == null) {
                 return false;
             }
-            Cards hand = player.getHand();
-            player.revealCards("Persecute", hand, game);
+            Cards hand = controller.getHand();
+            controller.revealCards("Persecute", hand, game);
             Set<Card> cards = hand.getCards(game);
             for (Card card : cards) {
                 if (card != null && card.getColor().shares(choice.getColor())) {
-                    player.discard(card, source, game);
+                    controller.discard(card, source, game);
                 }
             }
             return true;

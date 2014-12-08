@@ -28,18 +28,13 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.AttacksAllTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.OfferingAbility;
 import mage.cards.CardImpl;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  * @author LevelX2
@@ -59,7 +54,7 @@ public class PatronOfTheKitsune extends CardImpl {
         this.addAbility(new OfferingAbility("Fox"));
 
         // Whenever a creature attacks, you may gain 1 life.
-        this.addAbility(new PatronOfTheKitsuneTriggeredAbility());
+        this.addAbility(new AttacksAllTriggeredAbility(new GainLifeEffect(1), true));
     }
 
     public PatronOfTheKitsune(final PatronOfTheKitsune card) {
@@ -70,31 +65,4 @@ public class PatronOfTheKitsune extends CardImpl {
     public PatronOfTheKitsune copy() {
         return new PatronOfTheKitsune(this);
     }
-}
-
-class PatronOfTheKitsuneTriggeredAbility extends TriggeredAbilityImpl {
-
-    public PatronOfTheKitsuneTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
-    }
-
-    public PatronOfTheKitsuneTriggeredAbility(PatronOfTheKitsuneTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.ATTACKER_DECLARED);
-    }
-
-    @Override
-    public PatronOfTheKitsuneTriggeredAbility copy() {
-        return new PatronOfTheKitsuneTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature attacks, " + super.getRule();
-    }
-
 }

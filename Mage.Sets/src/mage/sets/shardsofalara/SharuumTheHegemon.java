@@ -57,7 +57,10 @@ public class SharuumTheHegemon extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+
+        // When Sharuum the Hegemon enters the battlefield, you may return target artifact card from your graveyard to the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), true);
         ability.addTarget(new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard")));
         this.addAbility(ability);

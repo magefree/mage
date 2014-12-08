@@ -519,4 +519,13 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     void setCastSourceIdWithoutMana(UUID sourceId);
     UUID getCastSourceIdWithoutMana();
+
+    // permission handling to show hand cards
+    void addPermissionToShowHandCards(UUID watcherUserId);
+    boolean hasUserPermissionToSeeHand(UUID userId);
+    void revokePermissionToSeeHandCards();
+    void setRequestToShowHandCardsAllowed(boolean requestAllowed);
+    boolean isRequestToShowHandCardsAllowed();
+    Set<UUID> getUsersAllowedToSeeHandCards();
+
 }

@@ -30,6 +30,7 @@ package mage.sets.magic2013;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.SourceIsSpellCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
@@ -73,7 +74,7 @@ public class Omniscience extends CardImpl {
 class OmniscienceCastingEffect extends ContinuousEffectImpl {
 
     static AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(
-            null, null, null, new FilterNonlandCard(), true);
+            null, SourceIsSpellCondition.getInstance(), null, new FilterNonlandCard(), true);
 
     public OmniscienceCastingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

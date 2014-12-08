@@ -595,6 +595,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void addCommandObject(CommandObject commandObject) {
         getCommand().add(commandObject);
+        setZone(commandObject.getId(), Zone.COMMAND);
         for (Ability ability: commandObject.getAbilities()) {
             addAbility(ability, commandObject);
         }

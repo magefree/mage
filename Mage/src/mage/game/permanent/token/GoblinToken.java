@@ -27,8 +27,10 @@
  */
 package mage.game.permanent.token;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.constants.CardType;
 
 /**
@@ -37,12 +39,22 @@ import mage.constants.CardType;
  */
 public class GoblinToken extends Token {
 
+    static List<String> imageSetCodes = Arrays.asList(
+        "M10", "C14", "KTK", "EVG"
+    );
+
     public GoblinToken() {
-        this("M10");
+        this(imageSetCodes.get(new Random().nextInt(imageSetCodes.size())));
     }
+
     public GoblinToken(String originalExpansionSetCode) {
         super("Goblin", "1/1 red Goblin creature token");
-        this.setOriginalExpansionSetCode(originalExpansionSetCode);
+        if (!imageSetCodes.contains(originalExpansionSetCode)) {
+            this.setOriginalExpansionSetCode(imageSetCodes.get(new Random().nextInt(imageSetCodes.size())));
+        } else {
+            this.setOriginalExpansionSetCode(originalExpansionSetCode);
+        }
+        
         cardType.add(CardType.CREATURE);
         subtype.add("Goblin");
 

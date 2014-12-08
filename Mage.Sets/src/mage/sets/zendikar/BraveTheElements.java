@@ -43,6 +43,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 
 import java.util.UUID;
+import mage.players.Player;
 
 /**
  *
@@ -54,7 +55,8 @@ public class BraveTheElements extends CardImpl {
         super(ownerId, 4, "Brave the Elements", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "ZEN";
         this.color.setWhite(true);
-        this.getSpellAbility().addChoice(new ChoiceColor());
+
+        // Choose a color. White creatures you control gain protection from the chosen color until end of turn.
         this.getSpellAbility().addEffect(new BraveTheElementsEffect());
     }
 
@@ -77,7 +79,7 @@ class BraveTheElementsEffect extends GainAbilityControlledEffect {
         filter1.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    private FilterCard filter2;
+    private final FilterCard filter2;
 
     public BraveTheElementsEffect() {
         super(new ProtectionAbility(new FilterCard()), Duration.EndOfTurn, filter1);
@@ -97,11 +99,24 @@ class BraveTheElementsEffect extends GainAbilityControlledEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
-        filter2.add(new ColorPredicate(choice.getColor()));
-        filter2.setMessage(choice.getChoice());
-        setAbility(new ProtectionAbility(new FilterCard(filter2)));
-        return super.apply(game, source);
+        Player controller = game.getPlayer(source.getFirstTarget());
+        if (controller != null) {
+            ChoiceColor choice = new ChoiceColor();
+            while (!choice.isChosen()) {
+                controller.choose(outcome, choice, game);
+                if (!controller.isInGame()) {
+                    return false;
+                }
+            }
+            if (choice.getColor() == null) {
+                return false;
+            }
+            filter2.add(new ColorPredicate(choice.getColor()));
+            filter2.setMessage(choice.getChoice());
+            setAbility(new ProtectionAbility(new FilterCard(filter2)));
+            return super.apply(game, source);
+        }
+        return false;
     }
 
 }

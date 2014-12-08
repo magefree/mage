@@ -36,6 +36,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 
 /**
@@ -76,9 +77,9 @@ public class CantCounterSourceEffect extends ContinuousRuleModifiyingEffectImpl 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.COUNTER) {
-            StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
-            if (stackObject != null) {
-                if (stackObject.getSourceId().equals(source.getSourceId())) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null) {
+                if (spell.getSourceId().equals(source.getSourceId())) {
                     return true;
                 }
             }

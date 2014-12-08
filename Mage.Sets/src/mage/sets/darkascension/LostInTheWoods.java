@@ -27,24 +27,24 @@
  */
 package mage.sets.darkascension;
 
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
+import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.AttacksAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
 
 /**
  *
@@ -59,7 +59,7 @@ public class LostInTheWoods extends CardImpl {
         this.color.setGreen(true);
 
         // Whenever a creature attacks you or a planeswalker you control, reveal the top card of your library. If it's a Forest card, remove that creature from combat. Then put the revealed card on the bottom of your library.
-        this.addAbility(new LostInTheWoodsTriggeredAbility());
+        this.addAbility(new AttacksAllTriggeredAbility(new LostInTheWoodsEffect(), true, new FilterCreaturePermanent(), SetTargetPointer.CREATURE, true));
     }
 
     public LostInTheWoods(final LostInTheWoods card) {
@@ -76,6 +76,7 @@ class LostInTheWoodsEffect extends OneShotEffect {
 
     public LostInTheWoodsEffect() {
         super(Outcome.PreventDamage);
+        staticText = "reveal the top card of your library. If it's a Forest card, remove that creature from combat. Then put the revealed card on the bottom of your library";
     }
 
     public LostInTheWoodsEffect(final LostInTheWoodsEffect effect) {
@@ -84,16 +85,16 @@ class LostInTheWoodsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (sourceObject == null || controller == null) {
             return false;
         }
-
-        if (player.getLibrary().size() > 0) {
-            Card card = player.getLibrary().getFromTop(game);
+        if (controller.getLibrary().size() > 0) {
+            Card card = controller.getLibrary().getFromTop(game);
             Cards cards = new CardsImpl();
             cards.add(card);
-            player.revealCards("Lost in the Woods", cards, game);
+            controller.revealCards(sourceObject.getLogName(), cards, game);
 
             if (card != null) {
                 if (card.getSubtype().contains("Forest")) {
@@ -102,11 +103,10 @@ class LostInTheWoodsEffect extends OneShotEffect {
                         permanent.removeFromCombat(game);
                     }
                 }
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
-                return true;
+                controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, false, true);
             }
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -114,41 +114,4 @@ class LostInTheWoodsEffect extends OneShotEffect {
         return new LostInTheWoodsEffect(this);
     }
 
-}
-
-class LostInTheWoodsTriggeredAbility extends TriggeredAbilityImpl {
-
-    public LostInTheWoodsTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new LostInTheWoodsEffect(), false);
-    }
-
-    public LostInTheWoodsTriggeredAbility(final LostInTheWoodsTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public LostInTheWoodsTriggeredAbility copy() {
-        return new LostInTheWoodsTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
-            if (event.getTargetId().equals(controllerId)) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
-                return true;
-            }
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getCardType().contains(CardType.PLANESWALKER) && permanent.getControllerId().equals(controllerId)) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature attacks you or a planeswalker you control, reveal the top card of your library. If it's a Forest card, remove that creature from combat. Then put the revealed card on the bottom of your library.";
-    }
 }

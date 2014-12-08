@@ -33,7 +33,7 @@ import mage.ObjectColor;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -116,7 +116,7 @@ class NemesisTrapEffect extends OneShotEffect {
             EmptyToken token = new EmptyToken();
             CardUtil.copyTo(token).from(targetedCreature);
             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-            token.addAbility(new AtEndOfTurnDelayedTriggeredAbility(new ExileSourceEffect()));
+            token.addAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ExileSourceEffect()));
             return true;
         }
         return false;

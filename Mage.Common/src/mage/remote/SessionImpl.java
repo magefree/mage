@@ -273,6 +273,7 @@ public class SessionImpl implements Session {
             if (connection.getPassword() == null) {
                 UserDataView userDataView = new UserDataView(connection.getAvatarId(), 
                         connection.isShowAbilityPickerForced(),
+                        connection.allowRequestShowHandCards(),
                         connection.getUserSkipPrioritySteps());
                 // for backward compatibility. don't remove twice call - first one does nothing but for version checking
                 registerResult = server.registerClient(connection.getUsername(), sessionId, client.getVersion());
@@ -359,18 +360,18 @@ public class SessionImpl implements Session {
         }
         client.showMessage("Unable to connect to server. " + message);
         if (logger.isTraceEnabled()) {
-            t.printStackTrace();
+            logger.trace("StackTrace", t);
         }
     }
 
     /**
      *
-     * @param errorCall - was connection lost because of error
+     * @param errorCall - was connection lost because of error - ask user if he want to try to reconnect
      */
     @Override
     public synchronized void disconnect(boolean errorCall) {
         if (isConnected()) {
-            logger.info("DISCONNECT still connected");
+            logger.info("DISCONNECT (still connected)");
             sessionState = SessionState.DISCONNECTING;
         }
         if (connection == null || sessionState == SessionState.DISCONNECTED) {
@@ -1151,10 +1152,10 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean sendPlayerAction(PlayerAction passPriorityAction, UUID gameId) {
+    public boolean sendPlayerAction(PlayerAction passPriorityAction, UUID gameId, Object data) {
         try {
             if (isConnected()) {
-                server.sendPlayerAction(passPriorityAction, gameId, sessionId);
+                server.sendPlayerAction(passPriorityAction, gameId, sessionId, data);
                 return true;
             }
         } catch (MageException ex) {
@@ -1355,10 +1356,10 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean updatePreferencesForServer(int avatarId, boolean showAbilityPickerForced, UserSkipPrioritySteps userSkipPrioritySteps) {
+    public boolean updatePreferencesForServer(int avatarId, boolean showAbilityPickerForced, boolean allowRequestShowHandCards, UserSkipPrioritySteps userSkipPrioritySteps) {
         try {
             if (isConnected()) {
-                UserDataView userDataView = new UserDataView(avatarId, showAbilityPickerForced, userSkipPrioritySteps);
+                UserDataView userDataView = new UserDataView(avatarId, showAbilityPickerForced, allowRequestShowHandCards, userSkipPrioritySteps);
                 server.setUserData(connection.getUsername(), sessionId, userDataView);
             }
             return true;
@@ -1395,6 +1396,7 @@ public class SessionImpl implements Session {
             return true;
         } catch (MageException ex) {
                 handleMageException(ex);
+                disconnect(true);
         } catch (Throwable t) {
             handleThrowable(t);
         }

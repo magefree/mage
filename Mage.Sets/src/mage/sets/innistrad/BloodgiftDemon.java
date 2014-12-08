@@ -40,6 +40,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 
 /**
  *
@@ -59,7 +60,9 @@ public class BloodgiftDemon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // At the beginning of your upkeep, target player draws a card and loses 1 life.
         Ability ability = new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new DrawCardTargetEffect(1), false);
-        ability.addEffect(new LoseLifeTargetEffect(1));
+        Effect effect = new LoseLifeTargetEffect(1);
+        effect.setText("and loses 1 life");
+        ability.addEffect(effect);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

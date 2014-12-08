@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
@@ -48,7 +49,9 @@ public class ChainReaction extends CardImpl {
         this.color.setRed(true);
 
         // Chain Reaction deals X damage to each creature, where X is the number of creatures on the battlefield.
-        this.getSpellAbility().addEffect(new DamageAllEffect(new PermanentsOnBattlefieldCount(new FilterCreaturePermanent()), new FilterCreaturePermanent()));
+        Effect effect = new DamageAllEffect(new PermanentsOnBattlefieldCount(new FilterCreaturePermanent()), new FilterCreaturePermanent());
+        effect.setText("{this} deals X damage to each creature, where X is the number of creatures on the battlefield");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public ChainReaction(final ChainReaction card) {

@@ -34,7 +34,7 @@ import mage.abilities.common.delayed.AtTheBeginOMainPhaseDelayedTriggeredAbility
 import mage.abilities.common.delayed.AtTheBeginOMainPhaseDelayedTriggeredAbility.PhaseSelection;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.AddManaToManaPoolEffect;
+import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -95,7 +95,7 @@ class ManaDrainCounterEffect extends OneShotEffect {
             game.getStack().counter(getTargetPointer().getFirst(game, source), source.getSourceId(), game);
             // mana gets added also if counter is not successful
             int cmc = spell.getConvertedManaCost();
-            Effect effect = new AddManaToManaPoolEffect(new Mana(0,0,0,0,0,cmc,0), "your");
+            Effect effect = new AddManaToManaPoolTargetControllerEffect(new Mana(0,0,0,0,0,cmc,0), "your");
             effect.setTargetPointer(new FixedTarget(source.getControllerId()));
             AtTheBeginOMainPhaseDelayedTriggeredAbility delayedAbility =
                     new AtTheBeginOMainPhaseDelayedTriggeredAbility(effect, false, TargetController.YOU, PhaseSelection.NEXT_MAIN);

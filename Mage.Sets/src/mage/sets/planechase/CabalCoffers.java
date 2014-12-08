@@ -33,12 +33,10 @@ import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.DynamicManaEffect;
-import mage.abilities.mana.SimpleManaAbility;
+import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -59,9 +57,7 @@ public class CabalCoffers extends CardImpl {
         this.expansionSetCode = "HOP";
 
         // {2}, {tap}: Add {B} to your mana pool for each Swamp you control.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD,
-                new DynamicManaEffect(Mana.BlackMana, new PermanentsOnBattlefieldCount(filter)),
-                new GenericManaCost(2));
+        Ability ability = new DynamicManaAbility(Mana.BlackMana, new PermanentsOnBattlefieldCount(filter), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

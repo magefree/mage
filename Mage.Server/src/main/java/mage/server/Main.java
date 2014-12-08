@@ -63,6 +63,7 @@ import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
+import static mage.server.Session.getBasicCause;
 import org.jboss.remoting.transport.bisocket.BisocketServerInvoker;
 
 
@@ -212,19 +213,16 @@ public class Main {
                     // So it should be possible to reconnect to server and continue games if DisconnectReason is set to LostConnection
                     //SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.Disconnected);                    
                     SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.LostConnection);
-                    logger.info("CLIENT DISCONNECTED - " + sessionInfo, throwable);
-                    if (logger.isDebugEnabled()) {
-                        throwable.printStackTrace();
-                    }                    
-                }
-                else {                    
+                    logger.info("CLIENT DISCONNECTED - " + sessionInfo);
+                    logger.debug("Stack Trace", throwable);
+                } else {                    
                     SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.LostConnection);                    
-                    logger.info("CONNECTION LOST - " + sessionInfo, throwable);
+                    logger.info("LOST CONNECTION - " + sessionInfo);
                     if (logger.isDebugEnabled()) {
                         if (throwable == null) {
-                            logger.debug("Lease expired");
+                            logger.debug("- cause: Lease expired");
                         } else {
-                            throwable.printStackTrace();
+                            logger.debug(" - cause: " + Session.getBasicCause(throwable).toString());
                         }
                     }                    
                 }

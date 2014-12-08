@@ -131,6 +131,7 @@ class NykthosDynamicManaEffect extends ManaEffect {
             choice.setMessage("Choose a color for devotion of Nykthos");
             if (controller.choose(outcome, choice, game)) {
                 computeMana(choice.getChoice(), game, source);
+                checkToFirePossibleEvents(computedMana, game, source);
                 game.getPlayer(source.getControllerId()).getManaPool().addMana(computedMana, game, source);
                 return true;
             }
@@ -138,6 +139,12 @@ class NykthosDynamicManaEffect extends ManaEffect {
         return false;
 
     }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        return null;
+    }
+
 
     public Mana computeMana(String color, Game game, Ability source){
         this.computedMana.clear();

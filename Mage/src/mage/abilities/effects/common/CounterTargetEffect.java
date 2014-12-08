@@ -56,7 +56,7 @@ public class CounterTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean countered = false;
-        for (UUID targetId : source.getTargets().get(0).getTargets()) {
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
             if (game.getStack().counter(targetId, source.getSourceId(), game)) {
                 countered = true;
             }

@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.AddManaAnyColorAttachedControllerEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
@@ -96,7 +97,7 @@ public class TraceOfAbundance extends CardImpl {
 class TraceOfAbundanceTriggeredAbility extends TriggeredManaAbility {
 
     public TraceOfAbundanceTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new TraceOfAbundanceEffect());
+        super(Zone.BATTLEFIELD, new AddManaAnyColorAttachedControllerEffect());
     }
 
     public TraceOfAbundanceTriggeredAbility(final TraceOfAbundanceTriggeredAbility ability) {
@@ -122,59 +123,5 @@ class TraceOfAbundanceTriggeredAbility extends TriggeredManaAbility {
     @Override
     public String getRule() {
         return "Whenever enchanted land is tapped for mana, its controller adds one mana of any color to his or her mana pool.";
-    }
-}
-
-class TraceOfAbundanceEffect extends ManaEffect {
-
-    public TraceOfAbundanceEffect() {
-        super();
-        staticText = "its controller adds one mana of any color to his or her mana pool";
-    }
-
-    public TraceOfAbundanceEffect(final TraceOfAbundanceEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null) {
-            Permanent land = game.getPermanent(enchantment.getAttachedTo());
-            if (land != null) {
-                Player player = game.getPlayer(land.getControllerId());
-                if (player != null) {
-                    ChoiceColor choice = new ChoiceColor();
-                    while (!player.choose(outcome, choice, game)) {
-                        if (!player.isInGame()) {
-                            return false;
-                        }
-                    }
-                    int amount = 1;
-                    Mana mana = null;
-                    if (choice.getColor().isBlack()) {
-                        mana = Mana.BlackMana(amount);
-                    } else if (choice.getColor().isBlue()) {
-                        mana = Mana.BlueMana(amount);
-                    } else if (choice.getColor().isRed()) {
-                        mana = Mana.RedMana(amount);
-                    } else if (choice.getColor().isGreen()) {
-                        mana = Mana.GreenMana(amount);
-                    } else if (choice.getColor().isWhite()) {
-                        mana = Mana.WhiteMana(amount);
-                    }
-                    if (player != null && mana != null) {
-                        player.getManaPool().addMana(mana, game, source);
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public TraceOfAbundanceEffect copy() {
-        return new TraceOfAbundanceEffect(this);
     }
 }

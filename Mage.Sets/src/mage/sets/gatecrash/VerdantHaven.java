@@ -28,25 +28,21 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.AddManaAnyColorAttachedControllerEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -90,7 +86,7 @@ public class VerdantHaven extends CardImpl {
 class VerdantHavenTriggeredAbility extends TriggeredManaAbility {
 
     public VerdantHavenTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new VerdantHavenManaEffect());
+        super(Zone.BATTLEFIELD, new AddManaAnyColorAttachedControllerEffect());
     }
 
     public VerdantHavenTriggeredAbility(final VerdantHavenTriggeredAbility ability) {
@@ -117,59 +113,5 @@ class VerdantHavenTriggeredAbility extends TriggeredManaAbility {
     @Override
     public String getRule() {
         return "Whenever enchanted land is tapped for mana, its controller adds one mana of any color to his or her mana pool.";
-    }
-}
-
-class VerdantHavenManaEffect extends ManaEffect {
-
-    public VerdantHavenManaEffect() {
-        super();
-        staticText = "its controller adds one mana of any color to his or her mana pool";
-    }
-
-    public VerdantHavenManaEffect(final VerdantHavenManaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if(enchantment != null){
-            Permanent land = game.getPermanent(enchantment.getAttachedTo());
-            if(land != null){
-                Player player = game.getPlayer(land.getControllerId());
-                if (player != null) {
-                    ChoiceColor choice = new ChoiceColor();
-                    while (!player.choose(outcome, choice, game)) {
-                        if (!player.isInGame()) {
-                            return false;
-                        }
-                    }
-                    int amount = 1;
-                    Mana mana = null;
-                    if (choice.getColor().isBlack()) {
-                        mana = Mana.BlackMana(amount);
-                    } else if (choice.getColor().isBlue()) {
-                        mana = Mana.BlueMana(amount);
-                    } else if (choice.getColor().isRed()) {
-                        mana = Mana.RedMana(amount);
-                    } else if (choice.getColor().isGreen()) {
-                        mana = Mana.GreenMana(amount);
-                    } else if (choice.getColor().isWhite()) {
-                        mana = Mana.WhiteMana(amount);
-                    }
-                    if (player != null && mana != null) {
-                        player.getManaPool().addMana(mana, game, source);
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public VerdantHavenManaEffect copy() {
-        return new VerdantHavenManaEffect(this);
     }
 }

@@ -125,7 +125,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     private boolean isSelected;
     private boolean isPlayable;
     private boolean isChoosable;
-    private boolean canAttack;
+    private boolean canAttack;    
     private boolean showCastingCost;
     private boolean hasImage = false;
     private float alpha = 1.0f;
@@ -210,7 +210,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         counterPanel.add(minusCounterLabel);
 
         loyaltyCounterLabel = new JLabel("");
-        loyaltyCounterLabel.setToolTipText("Loyalty");
+        loyaltyCounterLabel.setToolTipText("loyalty");
         counterPanel.add(loyaltyCounterLabel);
 
         otherCounterLabel = new JLabel("");
@@ -501,18 +501,16 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         } else if (isChoosable) {
             g2d.setColor(new Color(250, 250, 0, 230));
             g2d.fillRoundRect(cardXOffset + 1, cardYOffset + 1, cardWidth - 2, cardHeight - 2, cornerSize, cornerSize);
-        }
-
-        if (isPlayable) {
-            g2d.setColor(new Color(250, 250, 0, 200));
-            g2d.fillRoundRect(cardXOffset + 1, cardYOffset + 1, cardWidth - 2, cardHeight - 2, cornerSize, cornerSize);
+        } else if (isPlayable) {
+            g2d.setColor(new Color(153, 102, 204, 200));
+            //g2d.fillRoundRect(cardXOffset + 1, cardYOffset + 1, cardWidth - 2, cardHeight - 2, cornerSize, cornerSize);
+            g2d.fillRoundRect(cardXOffset, cardYOffset , cardWidth , cardHeight , cornerSize, cornerSize);
         }
 
         if (canAttack) {
-            g2d.setColor(new Color(255, 0, 0, 230));
+            g2d.setColor(new Color(0, 0, 255, 230));
             g2d.fillRoundRect(cardXOffset + 1, cardYOffset + 1, cardWidth - 2, cardHeight - 2, cornerSize, cornerSize);
         }
-
 
         //TODO:uncomment
         /*
@@ -589,7 +587,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         ptText.setVisible(showText);
 
         int titleX = Math.round(cardWidth * (20f / 480));
-        int titleY = Math.round(cardHeight * (9f / 680)) + 10;
+        int titleY = Math.round(cardHeight * (9f / 680)) + 10; // TODO: Set to 0 if it's a card selection with small card offset (ike library search)
         titleText.setBounds(cardXOffset + titleX, cardYOffset + titleY, cardWidth - titleX, cardHeight - titleY);
 
         Dimension ptSize = ptText.getPreferredSize();
@@ -705,10 +703,16 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                 try {
                     tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
                     flippedAngle = isFlipped() ? CardPanel.FLIPPED_ANGLE : 0;
+                    BufferedImage srcImage;
                     if (gameCard.isFaceDown()) {
-                        return;
+                        if (gameCard.isMorphCard()) {
+                            srcImage = ImageCache.getMorphImage();
+                        } else {
+                            srcImage = ImageCache.loadImage(new TFile(DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename));
+                        }
+                    } else {
+                        srcImage = ImageCache.getThumbnail(gameCard);
                     }
-                    BufferedImage srcImage = ImageCache.getThumbnail(gameCard);
                     if (srcImage != null) {
                         hasImage = true;
                         setText(gameCard);
@@ -803,6 +807,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         this.isPlayable = card.isPlayable();
         this.isChoosable = card.isChoosable();
         this.canAttack = card.isCanAttack();
+        this.isSelected = card.isSelected();
 
         boolean updateImage = !gameCard.getName().equals(card.getName()) || gameCard.isFaceDown() != card.isFaceDown(); // update after e.g. turning a night/day card
         this.gameCard = card;
@@ -861,7 +866,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                         }
                         minusCounterLabel.setVisible(true);
                         break;
-                    case "Loyalty":
+                    case "loyalty":
                         if (counterView.getCount() != loyaltyCounter) {
                             loyaltyCounter = counterView.getCount();
                             loyaltyCounterLabel.setIcon(getCounterImageWithAmount(loyaltyCounter, ImageManagerImpl.getInstance().getCounterImageViolet(), cardWidth));

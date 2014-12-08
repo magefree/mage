@@ -29,6 +29,7 @@
 package mage.abilities.decorator;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
@@ -43,6 +44,10 @@ public class ConditionalOneShotEffect extends OneShotEffect {
     private OneShotEffect effect;
     private OneShotEffect otherwiseEffect;
     private Condition condition;
+
+    public ConditionalOneShotEffect(OneShotEffect effect, Condition condition) {
+        this(effect, null, condition, null);
+    }
 
     public ConditionalOneShotEffect(OneShotEffect effect, Condition condition, String text) {
         this(effect, null, condition, text);
@@ -80,6 +85,17 @@ public class ConditionalOneShotEffect extends OneShotEffect {
     @Override
     public ConditionalOneShotEffect copy() {
         return new ConditionalOneShotEffect(this);
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        if (otherwiseEffect == null) {
+            return "If " + condition.toString() + ", " + effect.getText(mode);
+        }
+        return effect.getText(mode) + ". If " + condition.toString() + ", " + otherwiseEffect.getText(mode);
     }
 
 }

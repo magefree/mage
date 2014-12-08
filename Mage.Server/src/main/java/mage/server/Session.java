@@ -33,7 +33,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -82,6 +81,10 @@ public class Session {
             sendErrorMessageToClient(returnMessage);
         }
         return returnMessage;
+    }
+
+    public boolean isLocked() {
+        return lock.isLocked();
     }
 
     public String registerUserHandling(String userName) throws MageException {
@@ -139,7 +142,7 @@ public class Session {
         if (user == null) {
             user = UserManager.getInstance().findUser("Admin");
         }
-        user.setUserData(new UserData(UserGroup.ADMIN, 0, false, null));
+        user.setUserData(new UserData(UserGroup.ADMIN, 0, false, false, null));
         if (!UserManager.getInstance().connectToSession(sessionId, user.getId())) {
                logger.info("Error connecting Admin!");
         }        
@@ -151,7 +154,7 @@ public class Session {
         if (user != null) {
             UserData userData = user.getUserData();
             if (userData == null) {
-                userData = new UserData(UserGroup.PLAYER, userDataView.getAvatarId(), userDataView.isShowAbilityPickerForced(), userDataView.getUserSkipPrioritySteps());
+                userData = new UserData(UserGroup.PLAYER, userDataView.getAvatarId(), userDataView.isShowAbilityPickerForced(), userDataView.allowRequestShowHandCards(), userDataView.getUserSkipPrioritySteps());
                 user.setUserData(userData);
             } else {
                 if (userDataView.getAvatarId() == 51) { // Update special avatar if first avatar is selected
@@ -159,6 +162,7 @@ public class Session {
                 }
                 userData.setAvatarId(userDataView.getAvatarId());                
                 userData.setShowAbilityPickerForced(userDataView.isShowAbilityPickerForced());
+                userData.setAllowRequestShowHandCards(userDataView.allowRequestShowHandCards());
                 userData.setUserSkipPrioritySteps(userDataView.getUserSkipPrioritySteps());
             }
             return true;
@@ -212,8 +216,11 @@ public class Session {
 
     // because different threads can activate this
     public void  userLostConnection() {
+        boolean lockSet = false;
         try {
-            if(lock.tryLock(5, TimeUnit.SECONDS)) {
+            if(lock.tryLock(500, TimeUnit.MILLISECONDS)) {
+                lockSet = true;
+                logger.trace("SESSION LOCK SET sessionId: " + sessionId);
                 User user = UserManager.getInstance().getUser(userId);
                 if (user == null || !user.isConnected()) {
                     return; //user was already disconnected by other thread
@@ -223,46 +230,57 @@ public class Session {
                     logger.info("OLD SESSION IGNORED - " + user.getName());
                     return;
                 }
-                logger.info("LOST CONNECTION - " + user.getName());
+                // logger.info("LOST CONNECTION - " + user.getName() + " id: " + userId);
                 UserManager.getInstance().disconnect(userId, DisconnectReason.LostConnection);
             } else {
-                logger.error("SESSION LOCK - userId " + userId);
+                logger.error("CAN'T GET LOCK - userId: " + userId);
             }
         } catch (InterruptedException ex) {
-            logger.error("SESSION LOCK - userId " + userId, ex);
+            logger.error("SESSION LOCK lost connection - userId: " + userId, ex);
         }
         finally {
-           lock.unlock();
+            if (lockSet)    {
+                lock.unlock();
+                logger.trace("SESSION LOCK UNLOCK sessionId: " + sessionId);
+            }
         }
 
     }
 
     public void kill(DisconnectReason reason) {
-        UserManager.getInstance().removeUser(userId, reason);
+        boolean lockSet = false;
+        try {
+            if(lock.tryLock(500, TimeUnit.MILLISECONDS)) {
+                lockSet = true;
+                logger.debug("SESSION LOCK SET sessionId: " + sessionId);
+                UserManager.getInstance().removeUser(userId, reason);
+            } else {
+                logger.error("SESSION LOCK - kill: userId " + userId);
+            }
+        } catch (InterruptedException ex) {
+            logger.error("SESSION LOCK - kill: userId " + userId, ex);
+        }
+        finally {
+            if (lockSet)    {
+                lock.unlock();
+                logger.debug("SESSION LOCK UNLOCK sessionId: " + sessionId);
+
+            }
+        }
+
     }
 
     public void fireCallback(final ClientCallback call) {
         try {
-            boolean tryLock;
-            if (lock.tryLock(5, TimeUnit.SECONDS)) {
                 call.setMessageId(messageId++);
                 callbackHandler.handleCallbackOneway(new Callback(call));
-            } else {
-                logger.error("CALLBACK LOCK - userId " + userId);
-                logger.error(" - method: " + call.getMethod());
-            }
         } catch (HandleCallbackException ex) {
-            logger.info("CALLBACK EXCEPTION - userId " + userId, ex);
-            if (logger.isDebugEnabled()) {
-                ex.printStackTrace();
-            }
+            User user = UserManager.getInstance().getUser(userId);
+            logger.warn("SESSION CALLBACK EXCEPTION - " + (user != null ? user.getName():"") + " userId " + userId);
+            logger.warn(" - method: " + call.getMethod());
+            logger.warn(" - cause: " + getBasicCause(ex).toString());
+            logger.trace("Stack trace:", ex);
             userLostConnection();
-        } catch (InterruptedException ex) {
-            logger.error("CALLBACK LOCK EXCEPTION - userId " + userId, ex);
-            logger.error(" - method: " + call.getMethod());
-        }
-        finally {
-           lock.unlock();
         }
     }
 
@@ -291,5 +309,16 @@ public class Session {
         messageData.add("Error while connecting to server");
         messageData.add(message);
         fireCallback(new ClientCallback("showUserMessage", null, messageData));
+    }
+
+    public static Throwable getBasicCause(Throwable cause) {
+        Throwable t = cause;
+        while (t.getCause() != null) {
+            t = t.getCause();
+            if (t == cause) {
+                throw new IllegalArgumentException("Infinite cycle detected in causal chain");
+            }
+        }
+        return t;
     }
 }

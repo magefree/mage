@@ -31,7 +31,7 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -107,7 +107,7 @@ class FootstepsOfTheGoryoEffect extends OneShotEffect {
                         // Sacrifice it at end of turn
                         Effect sacrificeEffect = new SacrificeTargetEffect("Sacrifice that creature at the beginning of next end step");
                         sacrificeEffect.setTargetPointer(new FixedTarget(card.getId()));
-                        DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(sacrificeEffect);
+                        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
                         delayedAbility.setSourceId(source.getSourceId());
                         delayedAbility.setControllerId(source.getControllerId());
                         game.addDelayedTriggeredAbility(delayedAbility);

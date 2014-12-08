@@ -113,11 +113,18 @@ public class KyrenToy extends CardImpl {
                     if (cost instanceof RemoveVariableCountersSourceCost) {
                         numberOfMana = ((RemoveVariableCountersSourceCost)cost).getAmount();
                     }
-                }             
-                player.getManaPool().addMana(new Mana(0, 0, 0, 0, 0, numberOfMana + 1, 0), game, source);
+                }
+                Mana mana = new Mana(0, 0, 0, 0, 0, numberOfMana + 1, 0);
+                checkToFirePossibleEvents(mana, game, source);
+                player.getManaPool().addMana(mana, game, source);
                 return true;
             }
             return false;
+        }
+
+        @Override
+        public Mana getMana(Game game, Ability source) {
+            return null;
         }
 
         @Override

@@ -35,7 +35,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -44,7 +43,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
 
-    private FilterPermanent filter;
+    private final FilterPermanent filter;
     private boolean setTargetPointer;
 
     public PutIntoGraveFromBattlefieldAllTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter, boolean setTargetPointer) {
@@ -62,9 +61,8 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
         if (event.getType() == EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getFromZone() == Zone.BATTLEFIELD
-                    && zEvent.getToZone() == Zone.GRAVEYARD) {
-                Permanent permanent = game.getPermanent(event.getTargetId());
-                if (filter.match(permanent, this.getSourceId(), this.getControllerId(), game)) {
+                    && zEvent.getToZone() == Zone.GRAVEYARD) {                
+                if (filter.match(zEvent.getTarget(), this.getSourceId(), this.getControllerId(), game)) {
                     if (setTargetPointer) {
                         for (Effect effect :this.getEffects()) {
                             effect.setTargetPointer(new FixedTarget(event.getSourceId()));

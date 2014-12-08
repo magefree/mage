@@ -75,4 +75,10 @@ public class TargetOpponentsChoicePermanent extends TargetPermanent {
         }
         return opponentId;
     }
+
+    @Override
+    public boolean isRequired(Ability ability) {
+        return true; // opponent can't cancel the spell
+    }
+
 }

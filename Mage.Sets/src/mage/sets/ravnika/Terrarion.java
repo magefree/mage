@@ -28,23 +28,19 @@
 package mage.sets.ravnika;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.AddManaInAnyCombinationEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
-import mage.game.Game;
-import mage.players.Player;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
@@ -58,12 +54,10 @@ public class Terrarion extends CardImpl {
 
         // Terrarion enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {2}, {tap}, Sacrifice Terrarion: Add two mana in any combination of colors to your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new TerrarionManaEffect(), new GenericManaCost(2));
+        // {2}, {T}, Sacrifice Terrarion: Add two mana in any combination of colors to your mana pool.
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaInAnyCombinationEffect(2), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addChoice(new ChoiceColor());
-        ability.addChoice(new ChoiceColor());
         this.addAbility(ability);
         // When Terrarion is put into a graveyard from the battlefield, draw a card.
         this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
@@ -76,53 +70,5 @@ public class Terrarion extends CardImpl {
     @Override
     public Terrarion copy() {
         return new Terrarion(this);
-    }
-}
-
-class TerrarionManaEffect extends ManaEffect {
-
-    public TerrarionManaEffect() {
-        super();
-        this.staticText = "Add two mana in any combination of colors to your mana pool";
-    }
-
-    public TerrarionManaEffect(final TerrarionManaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TerrarionManaEffect copy() {
-        return new TerrarionManaEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-
-        boolean result = false;
-        for (int i = 0; i < 2; i++) {
-            ChoiceColor choice = (ChoiceColor) source.getChoices().get(i);
-            Mana mana = null;
-            if (choice.getColor().isBlack()) {
-                mana = Mana.BlackMana(1);
-            } else if (choice.getColor().isBlue()) {
-                mana = Mana.BlueMana(1);
-            } else if (choice.getColor().isRed()) {
-                mana = Mana.RedMana(1);
-            } else if (choice.getColor().isGreen()) {
-                mana = Mana.GreenMana(1);
-            } else if (choice.getColor().isWhite()) {
-                mana = Mana.WhiteMana(1);
-            }
-
-            if (mana != null) {
-                player.getManaPool().addMana(mana, game, source);
-                result = true;
-            }
-        }
-        return result;
     }
 }

@@ -69,7 +69,7 @@ class RevelOfTheFallenGodSatyrToken extends Token {
 
     public RevelOfTheFallenGodSatyrToken() {
         super("Satyr", "2/2 red and green Satyr creature tokens with haste");
-        this.setOriginalExpansionSetCode("JOU");
+        this.setOriginalExpansionSetCode("THS");
         cardType.add(CardType.CREATURE);
         color.setColor(ObjectColor.RED);
         color.setColor(ObjectColor.GREEN);

@@ -48,11 +48,11 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
@@ -75,7 +75,7 @@ public class TeferiTemporalArchmage extends CardImpl {
 
         // -1: Untap up to four target permanents.
         LoyaltyAbility loyaltyAbility = new LoyaltyAbility(new UntapTargetEffect(), -1); 
-        loyaltyAbility.addTarget(new TargetCreaturePermanent(0,4, new FilterCreaturePermanent(), false));
+        loyaltyAbility.addTarget(new TargetPermanent(0,4, new FilterPermanent(), false));
         this.addAbility(loyaltyAbility);
 
         // -10: You get an emblem with "You may activate loyalty abilities of planeswalkers you control on any player's turn any time you could cast an instant."
@@ -107,7 +107,7 @@ class TeferiTemporalArchmageEmblem extends Emblem {
 class TeferiTemporalArchmageAsThoughEffect extends AsThoughEffectImpl {
 
     public TeferiTemporalArchmageAsThoughEffect() {
-        super(AsThoughEffectType.CAST_AS_INSTANT, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.ACTIVATE_AS_INSTANT, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may activate loyalty abilities of planeswalkers you control on any player's turn any time you could cast an instant";
     }
 
@@ -126,14 +126,17 @@ class TeferiTemporalArchmageAsThoughEffect extends AsThoughEffectImpl {
         return new TeferiTemporalArchmageAsThoughEffect(this);
     }
 
-
     @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        Permanent permanent= game.getPermanent(objectId);
-        if (permanent != null && permanent.getCardType().contains(CardType.PLANESWALKER) && permanent.getControllerId().equals(source.getControllerId())) {
+    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game) {
+        if (affectedAbility.getControllerId().equals(source.getControllerId()) && affectedAbility instanceof LoyaltyAbility) {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        return false; // Not used 
     }
 
 }

@@ -88,7 +88,7 @@ class GravecrawlerPlayEffect extends AsThoughEffectImpl {
     }
 
     public GravecrawlerPlayEffect() {
-        super(AsThoughEffectType.CAST_FROM_NON_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast {this} from your graveyard as long as you control a Zombie";
     }
 

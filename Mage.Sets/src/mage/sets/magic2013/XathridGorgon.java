@@ -38,7 +38,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.continious.AddCardTypeTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.effects.common.continious.SetCardColorTargetEffect;
+import mage.abilities.effects.common.continious.BecomesColorTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.DefenderAbility;
@@ -80,7 +80,7 @@ public class XathridGorgon extends CardImpl {
         effect = new AddCardTypeTargetEffect(CardType.ARTIFACT, Duration.Custom);
         effect.setText("and becomes a colorless artifact in addition to its other types");
         ability.addEffect(effect);
-        ability.addEffect(new SetCardColorTargetEffect(new ObjectColor(), Duration.Custom, ""));
+        ability.addEffect(new BecomesColorTargetEffect(new ObjectColor(), Duration.Custom, ""));
         ability.addEffect(new XathridGorgonCantActivateEffect());
         this.addAbility(ability);
         
@@ -109,13 +109,12 @@ class XathridGorgonCantActivateEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (target != null) {
-                return true;
-        } else {
-            this.discard();
-        }
-        return false;
+        return permanent.getId().equals(getTargetPointer().getFirst(game, source));
+    }
+
+    @Override
+    public boolean isInactive(Ability source, Game game) {
+        return getTargetPointer().getFirst(game, source) != null;
     }
 
     @Override

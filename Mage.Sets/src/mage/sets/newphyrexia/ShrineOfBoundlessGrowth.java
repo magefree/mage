@@ -32,18 +32,16 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.effects.common.DynamicManaEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
@@ -65,12 +63,15 @@ public class ShrineOfBoundlessGrowth extends CardImpl {
         super(ownerId, 152, "Shrine of Boundless Growth", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "NPH";
 
+        // At the beginning of your upkeep or whenever you cast a green spell, put a charge counter on Shrine of Boundless Growth.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), TargetController.YOU, false));
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), filter, false));
 
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DynamicManaEffect(Mana.ColorlessMana, new CountersCount(CounterType.CHARGE)), new TapSourceCost());
+        // {T}, Sacrifice Shrine of Boundless Growth: Add {1} to your mana pool for each charge counter on Shrine of Boundless Growth.
+        Ability ability = new DynamicManaAbility(Mana.BlackMana, new CountersCount(CounterType.CHARGE), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
+
     }
 
     public ShrineOfBoundlessGrowth (final ShrineOfBoundlessGrowth card) {

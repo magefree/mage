@@ -60,7 +60,7 @@ public class SearchLibraryPutInHandEffect extends SearchEffect {
     }
 
     public SearchLibraryPutInHandEffect(TargetCardInLibrary target, boolean revealCards, boolean forceShuffle) {
-        this(target, revealCards, forceShuffle, "Search your library for ");
+        this(target, revealCards, forceShuffle, "search your library for ");
     }
 
     public SearchLibraryPutInHandEffect(TargetCardInLibrary target, boolean revealCards, boolean forceShuffle, String rulePrefix) {

@@ -416,13 +416,6 @@ public class TournamentController {
         return tournament.isAbort();
     }
 
-    public boolean isPlayerAlive(UUID playerId) {
-        if (tournamentSessions.containsKey(playerId)) {
-            return tournamentSessions.get(playerId).isKilled();
-        }
-        return false;
-    }
-
     private void checkPlayersState() {
         for (TournamentPlayer tournamentPlayer: tournament.getPlayers()) {
             if (!tournamentPlayer.isEliminated() && tournamentPlayer.getPlayer().isHuman()) {

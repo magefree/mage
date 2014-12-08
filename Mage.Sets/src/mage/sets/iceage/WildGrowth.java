@@ -33,11 +33,13 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -84,7 +86,7 @@ class WildGrowthTriggeredAbility extends TriggeredManaAbility {
 
 
     public WildGrowthTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new WildGrowthEffect());
+        super(Zone.BATTLEFIELD, new AddManaToManaPoolTargetControllerEffect(new Mana(ColoredManaSymbol.G), "his or her"));
     }
 
     public WildGrowthTriggeredAbility(final WildGrowthTriggeredAbility ability) {
@@ -111,38 +113,5 @@ class WildGrowthTriggeredAbility extends TriggeredManaAbility {
     @Override
     public String getRule() {
         return "Whenever enchanted land is tapped for mana, its controller adds {G} to his or her mana pool";
-    }
-}
-
-class WildGrowthEffect extends ManaEffect {
-
-    public WildGrowthEffect() {
-        super();
-        staticText = "its controller adds {G} to his or her mana pool";
-    }
-
-    public WildGrowthEffect(final WildGrowthEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if(enchantment != null){
-            Permanent land = game.getPermanent(enchantment.getAttachedTo());
-            if(land != null){
-                Player player = game.getPlayer(land.getControllerId());
-                if (player != null) {
-                    player.getManaPool().addMana(Mana.GreenMana, game, source);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public WildGrowthEffect copy() {
-        return new WildGrowthEffect(this);
     }
 }

@@ -54,8 +54,13 @@ import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.Mana;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.effects.common.DynamicManaEffect;
 import mage.game.events.GameEvent;
+import mage.game.events.ManaEvent;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -235,36 +240,10 @@ public abstract class AbilityImpl implements Ability {
         // as buyback, kicker, or convoke costs (see rules 117.8 and 117.9), the player announces his
         // or her intentions to pay any or all of those costs (see rule 601.2e).
         // A player can't apply two alternative methods of casting or two alternative costs to a single spell.
-        if (sourceObject != null && !(this instanceof FlashbackAbility)) {
-            boolean alternativeCostisUsed = false;
-            for (Ability ability : sourceObject.getAbilities()) {
-                // if cast for noMana no Alternative costs are allowed
-                if (!noMana && ability instanceof AlternativeSourceCosts) {
-                    AlternativeSourceCosts alternativeSpellCosts = (AlternativeSourceCosts) ability;
-                    if (alternativeSpellCosts.isAvailable(this, game)) {
-                        if (alternativeSpellCosts.askToActivateAlternativeCosts(this, game)) {
-                            // only one alternative costs may be activated
-                            alternativeCostisUsed = true;
-                            break;
-                        }
-                    }
-                }                
-                if (ability instanceof OptionalAdditionalSourceCosts) {
-                    ((OptionalAdditionalSourceCosts)ability).addOptionalAdditionalCosts(this, game);
-                }
-            }
-            // controller specific alternate spell costs
-            if (!noMana && !alternativeCostisUsed) {
-                if (this.getAbilityType().equals(AbilityType.SPELL)) {
-                    for (AlternativeSourceCosts alternativeSourceCosts: controller.getAlternativeSourceCosts()) {
-                         if (alternativeSourceCosts.isAvailable(this, game)) {
-                            if (alternativeSourceCosts.askToActivateAlternativeCosts(this, game)) {
-                                // only one alternative costs may be activated
-                                break;
-                            }
-                        }
-                    }
-                }
+        if (!activateAlternateOrAdditionalCosts(sourceObject, noMana, controller, game)){
+            if (getAbilityType().equals(AbilityType.SPELL)
+                    && ((SpellAbility) this).getSpellAbilityType().equals(SpellAbilityType.LAND_ALTERNATE)) {
+                return false;
             }
         }
 
@@ -355,11 +334,20 @@ public abstract class AbilityImpl implements Ability {
             game.informPlayers(new StringBuilder(controller.getName()).append(" announces a value of ").append(xValue).append(" for ").append(variableManaCost.getText()).toString());
         }
         activated = true;
-        // fire if tapped for mana (may only fires now because else costs of ability itself can be payed with mana of abilities that trigger for that event
+        // fire if tapped for mana (may only fire now because else costs of ability itself can be payed with mana of abilities that trigger for that event
         if (this.getAbilityType().equals(AbilityType.MANA)) {
             for (Cost cost: costs) {
                 if (cost instanceof TapSourceCost) {
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TAPPED_FOR_MANA, sourceId, sourceId, controllerId));
+                    Mana mana = null;
+                    Effect effect = getEffects().get(0);
+                    if (effect instanceof BasicManaEffect) {
+                        mana = ((BasicManaEffect)effect).getMana(game, this);
+                    } else if (effect instanceof DynamicManaEffect) {
+                        mana = ((DynamicManaEffect)effect).getMana(game, this);
+                    }
+                    if (mana != null) { // if mana == null the event has to be fires in the mana effect 
+                        game.fireEvent(new ManaEvent(GameEvent.EventType.TAPPED_FOR_MANA, sourceId, sourceId, controllerId, mana));
+                    }
                     break;
                 }
             }
@@ -370,6 +358,44 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public boolean isActivated() {
         return activated;
+    }
+
+    @Override
+    public boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, boolean noMana, Player controller, Game game) {
+        boolean alternativeCostisUsed = false;
+        if (sourceObject != null && !(sourceObject instanceof Permanent) && !(this instanceof FlashbackAbility)) {
+            for (Ability ability : sourceObject.getAbilities()) {
+                // if cast for noMana no Alternative costs are allowed
+                if (!noMana && ability instanceof AlternativeSourceCosts) {
+                    AlternativeSourceCosts alternativeSpellCosts = (AlternativeSourceCosts) ability;
+                    if (alternativeSpellCosts.isAvailable(this, game)) {
+                        if (alternativeSpellCosts.askToActivateAlternativeCosts(this, game)) {
+                            // only one alternative costs may be activated
+                            alternativeCostisUsed = true;
+                            break;
+                        }
+                    }
+                }
+                if (ability instanceof OptionalAdditionalSourceCosts) {
+                    ((OptionalAdditionalSourceCosts)ability).addOptionalAdditionalCosts(this, game);
+                }
+            }
+            // controller specific alternate spell costs
+            if (!noMana && !alternativeCostisUsed) {
+                if (this.getAbilityType().equals(AbilityType.SPELL)) {
+                    for (AlternativeSourceCosts alternativeSourceCosts: controller.getAlternativeSourceCosts()) {
+                         if (alternativeSourceCosts.isAvailable(this, game)) {
+                            if (alternativeSourceCosts.askToActivateAlternativeCosts(this, game)) {
+                                // only one alternative costs may be activated
+                                alternativeCostisUsed = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return alternativeCostisUsed;
     }
 
     /**

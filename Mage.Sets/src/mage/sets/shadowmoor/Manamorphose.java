@@ -28,16 +28,11 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.AddManaInAnyCombinationEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.ManaEffect;
-import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -53,9 +48,8 @@ public class Manamorphose extends CardImpl {
         this.color.setGreen(true);
 
         // Add two mana in any combination of colors to your mana pool.
-        this.getSpellAbility().addEffect(new ManamorphoseEffect());
-        this.getSpellAbility().addChoice(new ChoiceColor());
-        this.getSpellAbility().addChoice(new ChoiceColor());
+        this.getSpellAbility().addEffect(new AddManaInAnyCombinationEffect(2));
+
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
@@ -67,53 +61,5 @@ public class Manamorphose extends CardImpl {
     @Override
     public Manamorphose copy() {
         return new Manamorphose(this);
-    }
-}
-
-class ManamorphoseEffect extends ManaEffect {
-
-    public ManamorphoseEffect() {
-        super();
-        this.staticText = "Add two mana in any combination of colors to your mana pool";
-    }
-
-    public ManamorphoseEffect(final ManamorphoseEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ManamorphoseEffect copy() {
-        return new ManamorphoseEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-
-        boolean result = false;
-        for (int i = 0; i < 2; i++) {
-            ChoiceColor choice = (ChoiceColor) source.getChoices().get(i);
-            Mana mana = null;
-            if (choice.getColor().isBlack()) {
-                mana = Mana.BlackMana(1);
-            } else if (choice.getColor().isBlue()) {
-                mana = Mana.BlueMana(1);
-            } else if (choice.getColor().isRed()) {
-                mana = Mana.RedMana(1);
-            } else if (choice.getColor().isGreen()) {
-                mana = Mana.GreenMana(1);
-            } else if (choice.getColor().isWhite()) {
-                mana = Mana.WhiteMana(1);
-            }
-
-            if (mana != null) {
-                player.getManaPool().addMana(mana, game, source);
-                result = true;
-            }
-        }
-        return result;
     }
 }

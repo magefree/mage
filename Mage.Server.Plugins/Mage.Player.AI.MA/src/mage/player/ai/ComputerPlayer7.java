@@ -93,9 +93,9 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
 
     @Override
     public boolean priority(Game game) {
-        game.resumeTimer(playerId);
+        game.resumeTimer(getTurnControlledBy());
         boolean result = priorityPlay(game);
-        game.pauseTimer(playerId);
+        game.pauseTimer(getTurnControlledBy());
         return result;
     }
 
@@ -221,11 +221,11 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
             logger.debug("Sim Calculate post combat actions ----------------------------------------------------------------------------------------");
 
             addActionsTimed();
-            if (root.children.size() > 0) {
+            if (root != null && root.children.size() > 0) {
                 root = root.children.get(0);
                 int bestScore = root.getScore();
                 if (bestScore > currentScore || allowBadMoves) {
-                    actions = new LinkedList<Ability>(root.abilities);
+                    actions = new LinkedList<>(root.abilities);
                     combat = root.combat;
                 } else {
                     logger.debug("[" + game.getPlayer(playerId).getName() + "] no better score  current: " + currentScore + " bestScore: " + bestScore );
