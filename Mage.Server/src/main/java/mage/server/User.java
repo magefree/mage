@@ -125,15 +125,15 @@ public class User {
         if (sessionId.isEmpty()) {
             userState = UserState.Disconnected;
             lostConnection();
-            logger.debug("USER - lost connection: " + userName + " id: " + userId);
+            logger.trace("USER - lost connection: " + userName + " id: " + userId);
 
         } else if (userState == UserState.Created) {
             userState = UserState.Connected;
-            logger.debug("USER - created: " + userName + " id: " + userId);
+            logger.trace("USER - created: " + userName + " id: " + userId);
         } else {
             userState = UserState.Reconnected;
             reconnect();
-            logger.info("USER - reconnected: " + userName + " id: " + userId);
+            logger.trace("USER - reconnected: " + userName + " id: " + userId);
         }
     }
 
@@ -151,7 +151,7 @@ public class User {
     }
 
     public String getDisconnectDuration() {
-        long secondsDisconnected = SystemUtil.getDateDiff(lastActivity, new Date(), TimeUnit.SECONDS);
+        long secondsDisconnected = getSecondsDisconnected();
         long secondsLeft;
         String sign = "";
         if (secondsDisconnected > (3 * 60)) {            
@@ -164,6 +164,10 @@ public class User {
         int minutes = (int) secondsLeft / 60;
         int seconds = (int) secondsLeft % 60;
         return new StringBuilder(sign).append(Integer.toString(minutes)).append(":").append(seconds > 9 ? seconds: "0" + Integer.toString(seconds)).toString();
+    }
+
+    public long getSecondsDisconnected() {
+        return SystemUtil.getDateDiff(lastActivity, new Date(), TimeUnit.SECONDS);
     }
 
     public Date getConnectionTime() {
@@ -265,7 +269,7 @@ public class User {
 
     public boolean isExpired(Date expired) {
         if (lastActivity.before(expired)) {
-            logger.debug(userName + " is expired!");
+            logger.trace(userName + " is expired!");
             userState = UserState.Expired;
             return true;
         }
@@ -349,18 +353,18 @@ public class User {
     }
 
     public void remove(DisconnectReason reason) {
-        logger.debug("REMOVE " + getName() + " Game sessions: " + gameSessions.size() );
+        logger.trace("REMOVE " + getName() + " Game sessions: " + gameSessions.size() );
         for (GameSessionPlayer gameSession: gameSessions.values()) {
             logger.debug("-- kill game session of gameId: " + gameSession.getGameId() );
             gameSession.quitGame();
         }
         gameSessions.clear();
-        logger.debug("REMOVE " + getName() + " Draft sessions " + draftSessions.size());
+        logger.trace("REMOVE " + getName() + " Draft sessions " + draftSessions.size());
         for (DraftSession draftSession: draftSessions.values()) {
             draftSession.setKilled();
         }
         draftSessions.clear();
-        logger.debug("REMOVE " + getName() + " Tournament sessions " + tournamentSessions.size());
+        logger.trace("REMOVE " + getName() + " Tournament sessions " + tournamentSessions.size());
         for (TournamentSession tournamentSession: tournamentSessions.values()) {
             TournamentController tournamentController = TournamentManager.getInstance().getTournamentController(tournamentSession.getTournamentId());
             if (tournamentController != null) {
@@ -369,18 +373,18 @@ public class User {
             tournamentSession.setKilled();
         }
         tournamentSessions.clear();
-        logger.debug("REMOVE " + getName() + " Tables " + tables.size());
+        logger.trace("REMOVE " + getName() + " Tables " + tables.size());
         for (Entry<UUID, Table> entry: tables.entrySet()) {
             logger.debug("-- leave tableId: " + entry.getValue().getId());
             TableManager.getInstance().leaveTable(userId, entry.getValue().getId());
         }
         tables.clear();
-        logger.debug("REMOVE " + getName() + " watched Games " + watchedGames.size());
+        logger.trace("REMOVE " + getName() + " watched Games " + watchedGames.size());
         for (UUID gameId: watchedGames) {
             GameManager.getInstance().stopWatching(gameId, userId);
         }
         watchedGames.clear();
-        logger.debug("REMOVE " + getName() + " Chats ");
+        logger.trace("REMOVE " + getName() + " Chats ");
         ChatManager.getInstance().removeUser(userId, reason);
     }
 

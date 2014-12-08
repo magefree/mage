@@ -220,7 +220,7 @@ public class Session {
         try {
             if(lock.tryLock(500, TimeUnit.MILLISECONDS)) {
                 lockSet = true;
-                logger.debug("SESSION LOCK SET sessionId: " + sessionId);
+                logger.trace("SESSION LOCK SET sessionId: " + sessionId);
                 User user = UserManager.getInstance().getUser(userId);
                 if (user == null || !user.isConnected()) {
                     return; //user was already disconnected by other thread
@@ -230,10 +230,10 @@ public class Session {
                     logger.info("OLD SESSION IGNORED - " + user.getName());
                     return;
                 }
-                logger.info("LOST CONNECTION - " + user.getName() + " id: " + userId);
+                // logger.info("LOST CONNECTION - " + user.getName() + " id: " + userId);
                 UserManager.getInstance().disconnect(userId, DisconnectReason.LostConnection);
             } else {
-                logger.error("SESSION LOCK lost connection - userId: " + userId);
+                logger.error("CAN'T GET LOCK - userId: " + userId);
             }
         } catch (InterruptedException ex) {
             logger.error("SESSION LOCK lost connection - userId: " + userId, ex);
@@ -241,7 +241,7 @@ public class Session {
         finally {
             if (lockSet)    {
                 lock.unlock();
-                logger.debug("SESSION LOCK UNLOCK sessionId: " + sessionId);
+                logger.trace("SESSION LOCK UNLOCK sessionId: " + sessionId);
             }
         }
 

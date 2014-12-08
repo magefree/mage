@@ -44,7 +44,10 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.zip.GZIPOutputStream;
 import mage.MageException;
 import mage.abilities.Ability;
@@ -95,6 +98,8 @@ public class GameController implements GameCallback {
     private static final ExecutorService gameExecutor = ThreadExecutor.getInstance().getGameExecutor();
     private static final Logger logger = Logger.getLogger(GameController.class);
 
+    protected ScheduledExecutorService joinWaitingExecutor = Executors.newSingleThreadScheduledExecutor();
+
     private ConcurrentHashMap<UUID, GameSessionPlayer> gameSessions = new ConcurrentHashMap<>();
     private ConcurrentHashMap<UUID, GameSessionWatcher> watchers = new ConcurrentHashMap<>();
     private ConcurrentHashMap<UUID, PriorityTimer> timers = new ConcurrentHashMap<>();
@@ -123,6 +128,7 @@ public class GameController implements GameCallback {
             }
         }
         init();
+
     }
 
     public void cleanUp() {
@@ -250,7 +256,16 @@ public class GameController implements GameCallback {
                 }
             }
         );
-
+        joinWaitingExecutor.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    sendInfoAboutPlayersNotJoinedYet();
+                } catch(Exception ex) {
+                    logger.fatal("Send info about player not joined yet:", ex);
+                }
+            }
+        }, 15, 15, TimeUnit.SECONDS);
         checkStart();
     }
 
@@ -311,7 +326,7 @@ public class GameController implements GameCallback {
             joinType = "rejoined";
         }
         user.addGame(playerId, gameSession);
-        logger.debug("Player " + playerId + " has " + joinType + " gameId: " + game.getId());
+        logger.debug("Player " + player.getName()+ " " + playerId + " has " + joinType + " gameId: " + game.getId());
         ChatManager.getInstance().broadcast(chatId, "", game.getPlayer(playerId).getName() + " has " + joinType + " the game", MessageColor.ORANGE, true, MessageType.GAME);
         checkStart();
     }
@@ -319,20 +334,56 @@ public class GameController implements GameCallback {
     private synchronized void startGame() {
         if (gameFuture == null) {
             for (final Entry<UUID, GameSessionPlayer> entry: gameSessions.entrySet()) {
-                if (!entry.getValue().init()) {
-                    logger.fatal("Unable to initialize client");
-                    //TODO: generate client error message
-                    GameManager.getInstance().removeGame(game.getId());
-                    return;
-                }
+                entry.getValue().init();
             }
             GameWorker worker = new GameWorker(game, choosingPlayerId, this);
             gameFuture = gameExecutor.submit(worker);
         }
     }
 
+    private void sendInfoAboutPlayersNotJoinedYet() {
+        for (Player player: game.getPlayers().values()) {
+            if (!player.hasLeft() && player.isHuman()) {                
+                User user = getUserByPlayerId(player.getId());                
+                if (user != null) {
+                    if (!user.isConnected()) {
+                        if (gameSessions.get(player.getId()) == null) {
+                                // join the game because player has not joined are was removed because of disconnect
+                                user.removeConstructing(player.getId());
+                                GameManager.getInstance().joinGame(game.getId(), user.getId());
+                                logger.debug("Player " + user.getName() + " (disconnected) has joined gameId: " +game.getId());
+                        }
+                        ChatManager.getInstance().broadcast(chatId, player.getName(), user.getPingInfo() + " is pending to join the game", MessageColor.BLUE, true, ChatMessage.MessageType.STATUS);
+                        if (user.getSecondsDisconnected() > 240) {
+                            // Cancel player join possibility lately after 4 minutes
+                            logger.debug("Player " + user.getName() + " - canceled game (after 240 seconds) gameId: " +game.getId());
+                            player.leave();
+                        }
+
+                    }
+                } else {
+                    if (!player.hasLeft()) {
+                        logger.debug("Player " + player.getName() + " canceled game (no user) gameId: " + game.getId());
+                        player.leave();
+                    }
+                }
+            }
+        }
+        checkStart();
+    }
+
+    private User getUserByPlayerId(UUID playerId) {
+        for(Map.Entry<UUID,UUID> entry: userPlayerMap.entrySet()) {
+            if (entry.getValue().equals(playerId)) {
+                return UserManager.getInstance().getUser(entry.getKey());
+            }
+        }
+        return null;
+    }
+
     private void checkStart() {
         if (allJoined()) {
+            joinWaitingExecutor.shutdownNow();
             ThreadExecutor.getInstance().getCallExecutor().execute(
                 new Runnable() {
                     @Override
@@ -345,8 +396,16 @@ public class GameController implements GameCallback {
 
     private boolean allJoined() {
         for (Player player: game.getPlayers().values()) {
-            if (player.isHuman() && gameSessions.get(player.getId()) == null) {
-                return false;
+            if (!player.hasLeft()) {
+                User user = getUserByPlayerId(player.getId());
+                if (user != null) {
+                    if (!user.isConnected()) {
+                        return false;
+                    }
+                }
+                if (player.isHuman() && gameSessions.get(player.getId()) == null) {
+                    return false;
+                }
             }
         }
         return true;
@@ -379,30 +438,23 @@ public class GameController implements GameCallback {
         }
     }
 
-//    public void removeUser(UUID userId) {
-//        UUID playerId = userPlayerMap.get(userId);
-//        if (playerId != null) {
-//            GameSession gameSession = gameSessions.get(playerId);
-//            if (gameSession != null) {
-//                gameSession.setKilled();
-//                gameSessions.remove(playerId);
-//                quitMatch(userId);
-//                userPlayerMap.remove(userId);
-//            }
-//        }
-//        GameWatcher gameWatcher = watchers.get(userId);
-//        if (gameWatcher != null) {
-//            gameWatcher.setKilled();
-//            watchers.remove(userId);
-//        }
-//    }
-
     public void quitMatch(UUID userId) {
         UUID playerId = getPlayerId(userId);
         if (playerId != null) {
-            GameSessionPlayer gameSession = gameSessions.get(playerId);
-            if (gameSession != null) {
-                gameSession.quitGame();
+            if (allJoined()) {
+                GameSessionPlayer gameSession = gameSessions.get(playerId);
+                if (gameSession != null) {
+                    gameSession.quitGame();
+                }
+            } else {
+                // The player did never join the game but the game controller was started because the player was still connected as the
+                // game was started. But the Client never called the join action. So now after the user is expired, the
+                // quit match is called and has to end the game, because the player never joined the game.
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    player.leave();
+                    checkStart(); // => So the game starts and gets an result or multiplayer game starts with active players
+                }
             }
         }
     }

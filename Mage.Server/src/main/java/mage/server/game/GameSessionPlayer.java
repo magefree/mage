@@ -320,7 +320,14 @@ public class GameSessionPlayer extends GameSessionWatcher {
                         @Override
                         public void run() {
                             try {
-                                player.quit(game);
+                                if (game.getStartTime() == null) {
+                                    // gameController is still waiting to start the game
+                                    player.leave();
+                                } else {
+                                    // game was already started
+                                    player.quit(game);
+                                }
+                                
                             } catch (Exception ex) {
                                 if (ex != null) {
                                     // It seems this can happen if two threads try to end the game at the exact same time (one wins and one ends here)

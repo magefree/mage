@@ -185,7 +185,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected int priorityTimeLeft = Integer.MAX_VALUE;
 
 
-    //
     // conceded or connection lost game
     protected boolean left;
     // set if the player quits the complete match
@@ -2870,5 +2869,5 @@ public abstract class PlayerImpl implements Player, Serializable {
         return usersAllowedToSeeHandCards;
     }
 
-    
+   
 }

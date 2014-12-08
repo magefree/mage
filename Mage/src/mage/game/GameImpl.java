@@ -668,7 +668,7 @@ public abstract class GameImpl implements Game, Serializable {
         }
         if (gameOver(null) && !isSimulation()) {
             winnerId = findWinnersAndLosers();
-            StringBuilder sb = new StringBuilder("GAME ended  gameId: ").append(this.getId()).append(" ");
+            StringBuilder sb = new StringBuilder("GAME END  gameId: ").append(this.getId()).append(" ");
             int count = 0;
             for (Player player: this.getState().getPlayers().values()) {
                 if (count > 0) {
@@ -788,6 +788,10 @@ public abstract class GameImpl implements Game, Serializable {
         fireStatusEvent(startMessage, false);
 
         saveState(false);
+
+        if (gameOver(null)) {
+            return;
+        }
 
         //20091005 - 103.1
         if (!gameOptions.skipInitShuffling) { //don't shuffle in test mode for card injection on top of player's libraries

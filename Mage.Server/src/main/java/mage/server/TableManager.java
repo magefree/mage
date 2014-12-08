@@ -94,8 +94,7 @@ public class TableManager {
                 try {
                     checkTableHealthState();
                 } catch(Exception ex) {
-                    logger.fatal("Check table health state job error:");
-                    ex.printStackTrace();
+                    logger.fatal("Check table health state job error:", ex);
                 }
             }
         }, EXPIRE_CHECK_PERIOD, EXPIRE_CHECK_PERIOD, TimeUnit.MINUTES);

@@ -360,18 +360,18 @@ public class SessionImpl implements Session {
         }
         client.showMessage("Unable to connect to server. " + message);
         if (logger.isTraceEnabled()) {
-            t.printStackTrace();
+            logger.trace("StackTrace", t);
         }
     }
 
     /**
      *
-     * @param errorCall - was connection lost because of error
+     * @param errorCall - was connection lost because of error - ask user if he want to try to reconnect
      */
     @Override
     public synchronized void disconnect(boolean errorCall) {
         if (isConnected()) {
-            logger.info("DISCONNECT still connected");
+            logger.info("DISCONNECT (still connected)");
             sessionState = SessionState.DISCONNECTING;
         }
         if (connection == null || sessionState == SessionState.DISCONNECTED) {
@@ -1396,6 +1396,7 @@ public class SessionImpl implements Session {
             return true;
         } catch (MageException ex) {
                 handleMageException(ex);
+                disconnect(true);
         } catch (Throwable t) {
             handleThrowable(t);
         }

@@ -55,7 +55,7 @@ public class GameWorker implements Callable {
     @Override
     public Object call() {
         try {
-            logger.debug("GameWorker started gameId "+ game.getId());
+            logger.debug("GAME WORKER started gameId "+ game.getId());
             game.start(choosingPlayerId);
             game.fireUpdatePlayersEvent();
             gameController.gameResult(game.getWinner());
