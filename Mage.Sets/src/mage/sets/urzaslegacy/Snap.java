@@ -28,11 +28,11 @@
 package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.UntapLandsEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**

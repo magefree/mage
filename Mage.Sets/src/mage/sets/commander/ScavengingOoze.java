@@ -32,9 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -65,9 +63,6 @@ public class ScavengingOoze extends CardImpl {
         // {G}: Exile target card from a graveyard. If it was a creature card, put a +1/+1 counter on Scavenging Ooze and you gain 1 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScavengingOozeEffect(), new ManaCostsImpl("{G}"));
         ability.addTarget(new TargetCardInGraveyard());
-        Effect effect = new GainLifeEffect(1);
-        effect.setText("and you gain 1 life");
-        ability.addEffect(effect);
         this.addAbility(ability);
     }
 
@@ -85,7 +80,7 @@ class ScavengingOozeEffect extends OneShotEffect {
 
     public ScavengingOozeEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Exile target card from a graveyard. If it was a creature card, put a +1/+1 counter on {this}";
+        this.staticText = "Exile target card from a graveyard. If it was a creature card, put a +1/+1 counter on {this} and you gain 1 life";
     }
 
     public ScavengingOozeEffect(final ScavengingOozeEffect effect) {
@@ -108,6 +103,7 @@ class ScavengingOozeEffect extends OneShotEffect {
                 if (sourcePermanent != null) {
                     sourcePermanent.addCounters(CounterType.P1P1.createInstance(), game);
                 }
+                controller.gainLife(1, game);
             }
             return true;
         }
