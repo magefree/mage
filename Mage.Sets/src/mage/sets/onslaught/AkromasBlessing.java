@@ -28,9 +28,12 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
@@ -40,6 +43,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -57,7 +61,7 @@ public class AkromasBlessing extends CardImpl {
         this.color.setWhite(true);
 
         // Choose a color. Creatures you control gain protection from the chosen color until end of turn.
-        this.getSpellAbility().addEffect(new AcromasBlessingEffect());
+        this.getSpellAbility().addEffect(new AkromasBlessingChooseColorEffect());
         // Cycling {W}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{W}")));
     }
@@ -72,44 +76,45 @@ public class AkromasBlessing extends CardImpl {
     }
 }
 
+class AkromasBlessingChooseColorEffect extends OneShotEffect {
 
-class AcromasBlessingEffect extends GainAbilityControlledEffect {
-
-    private final FilterCard filter2;
-
-    public AcromasBlessingEffect() {
-        super(new ProtectionAbility(new FilterCard()), Duration.EndOfTurn);
-        filter2 = (FilterCard)((ProtectionAbility)getFirstAbility()).getFilter();
-        staticText = "Choose a color. Creatures you control gain protection from the chosen color until end of turn";
+    public AkromasBlessingChooseColorEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "Choose a color. Creatures you control gain protection from the chosen color until end of turn";
     }
 
-    public AcromasBlessingEffect(final AcromasBlessingEffect effect) {
+    public AkromasBlessingChooseColorEffect(final AkromasBlessingChooseColorEffect effect) {
         super(effect);
-        this.filter2 = effect.filter2.copy();
     }
 
     @Override
-    public AcromasBlessingEffect copy() {
-        return new AcromasBlessingEffect(this);
+    public AkromasBlessingChooseColorEffect copy() {
+        return new AkromasBlessingChooseColorEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (sourceObject != null && controller != null) {
             ChoiceColor choice = new ChoiceColor();
             while (!choice.isChosen()) {
-                controller.choose(Outcome.Protect, choice, game);
+                controller.choose(outcome, choice, game);
                 if (!controller.isInGame()) {
                     return false;
                 }
             }
-            filter2.add(new ColorPredicate(choice.getColor()));
-            filter2.setMessage(choice.getChoice());
-            setAbility(new ProtectionAbility(new FilterCard(filter2)));
-            return super.apply(game, source);
+            if (choice.getColor() == null) {
+                return false;
+            }
+            game.informPlayers(sourceObject.getName() + ": " + controller.getName() + " has chosen " + choice.getChoice());
+            FilterCard filterColor = new FilterCard();
+            filterColor.add(new ColorPredicate(choice.getColor()));
+            filterColor.setMessage(choice.getChoice());
+            ContinuousEffect effect = new GainAbilityAllEffect(new ProtectionAbility(new FilterCard(filterColor)), Duration.EndOfTurn, new FilterControlledCreaturePermanent());
+            game.addEffect(effect, source);
+            return true;
         }
         return false;
     }
-
 }

@@ -28,21 +28,25 @@
 
 package mage.sets.zendikar;
 
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
+import java.util.UUID;
+import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
-
-import java.util.UUID;
 import mage.players.Player;
 
 /**
@@ -57,7 +61,7 @@ public class BraveTheElements extends CardImpl {
         this.color.setWhite(true);
 
         // Choose a color. White creatures you control gain protection from the chosen color until end of turn.
-        this.getSpellAbility().addEffect(new BraveTheElementsEffect());
+        this.getSpellAbility().addEffect(new BraveTheElementsChooseColorEffect());
     }
 
     public BraveTheElements(final BraveTheElements card) {
@@ -71,36 +75,34 @@ public class BraveTheElements extends CardImpl {
 
 }
 
-class BraveTheElementsEffect extends GainAbilityControlledEffect {
 
-    private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent();
+class BraveTheElementsChooseColorEffect extends OneShotEffect {
+
+    private static final FilterControlledCreaturePermanent filter1 = new FilterControlledCreaturePermanent();
 
     static {
         filter1.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    private final FilterCard filter2;
-
-    public BraveTheElementsEffect() {
-        super(new ProtectionAbility(new FilterCard()), Duration.EndOfTurn, filter1);
-        filter2 = (FilterCard)((ProtectionAbility)getFirstAbility()).getFilter();
-        staticText = "Choose a color. White creatures you control gain protection from the chosen color until end of turn";
+    public BraveTheElementsChooseColorEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "Choose a color. White creatures you control gain protection from the chosen color until end of turn";
     }
 
-    public BraveTheElementsEffect(final BraveTheElementsEffect effect) {
+    public BraveTheElementsChooseColorEffect(final BraveTheElementsChooseColorEffect effect) {
         super(effect);
-        this.filter2 = effect.filter2.copy();
     }
 
     @Override
-    public BraveTheElementsEffect copy() {
-        return new BraveTheElementsEffect(this);
+    public BraveTheElementsChooseColorEffect copy() {
+        return new BraveTheElementsChooseColorEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getFirstTarget());
-        if (controller != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (sourceObject != null && controller != null) {
             ChoiceColor choice = new ChoiceColor();
             while (!choice.isChosen()) {
                 controller.choose(outcome, choice, game);
@@ -111,12 +113,14 @@ class BraveTheElementsEffect extends GainAbilityControlledEffect {
             if (choice.getColor() == null) {
                 return false;
             }
-            filter2.add(new ColorPredicate(choice.getColor()));
-            filter2.setMessage(choice.getChoice());
-            setAbility(new ProtectionAbility(new FilterCard(filter2)));
-            return super.apply(game, source);
+            game.informPlayers(sourceObject.getName() + ": " + controller.getName() + " has chosen " + choice.getChoice());
+            FilterCard filterColor = new FilterCard();
+            filterColor.add(new ColorPredicate(choice.getColor()));
+            filterColor.setMessage(choice.getChoice());
+            ContinuousEffect effect = new GainAbilityAllEffect(new ProtectionAbility(new FilterCard(filterColor)), Duration.EndOfTurn, filter1);
+            game.addEffect(effect, source);
+            return true;
         }
         return false;
     }
-
 }
