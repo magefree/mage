@@ -29,14 +29,13 @@ package mage.sets.modernmasters;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;
-import mage.abilities.keyword.SplitSecondAbility;
+import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -64,7 +63,7 @@ public class MoltenDisaster extends CardImpl {
         this.color.setRed(true);
 
         // If Molten Disaster was kicked, it has split second.
-        Ability ability = new ConditionalTriggeredAbility(new MoltenDisasterTriggeredAbility(), KickedCondition.getInstance(), "");
+        Ability ability = new SimpleStaticAbility(Zone.STACK,  new MoltenDisasterSplitSecondEffect());
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
         // Kicker {R}
@@ -83,32 +82,48 @@ public class MoltenDisaster extends CardImpl {
     }
 }
 
-class MoltenDisasterTriggeredAbility extends TriggeredAbilityImpl {
+class MoltenDisasterSplitSecondEffect extends ContinuousRuleModifiyingEffectImpl {
 
-    public MoltenDisasterTriggeredAbility() {
-        super(Zone.HAND, new GainAbilitySourceEffect(new SplitSecondAbility(), Duration.WhileOnStack), false);
+    MoltenDisasterSplitSecondEffect() {
+        super(Duration.WhileOnStack, Outcome.Detriment);
+        staticText ="If {this} was kicked, it has split second <i>(As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)</i>";
     }
 
-    public MoltenDisasterTriggeredAbility(final MoltenDisasterTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public MoltenDisasterTriggeredAbility copy() {
-        return new MoltenDisasterTriggeredAbility(this);
+    MoltenDisasterSplitSecondEffect(final MoltenDisasterSplitSecondEffect effect) {
+        super(effect);
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.CAST_SPELL) && event.getSourceId().equals(this.getSourceId())) {
-            return true;
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
+        return "You can't cast spells or activate abilities that aren't mana abilities (Split second).";
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == GameEvent.EventType.CAST_SPELL) {
+            if (KickedCondition.getInstance().apply(game, source)) {
+                return true;
+            }
+        }
+        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
+            Ability ability = game.getAbility(event.getTargetId(), event.getSourceId());
+            if (ability != null && !(ability instanceof ManaAbility)) {
+                if (KickedCondition.getInstance().apply(game, source)) {
+                    return true;
+                }
+            }
         }
         return false;
     }
 
     @Override
-    public String getRule() {
-        return "If {this} was kicked, it has split second <i>(As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)</i>";
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
+
+    @Override
+    public MoltenDisasterSplitSecondEffect copy() {
+        return new MoltenDisasterSplitSecondEffect(this);
     }
 }
 
