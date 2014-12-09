@@ -25,50 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnika;
+package mage.watchers.common;
 
-import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTappedAbility;
-import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.AddManaInAnyCombinationEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.mana.SimpleManaAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.constants.WatcherScope;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
+import mage.watchers.Watcher;
 
 /**
  *
  * @author LevelX2
  */
-public class Terrarion extends CardImpl {
 
-    public Terrarion(UUID ownerId) {
-        super(ownerId, 273, "Terrarion", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "RAV";
+public class CreaturesDiedWatcher extends Watcher {
 
-        // Terrarion enters the battlefield tapped.
-        this.addAbility(new EntersBattlefieldTappedAbility());
-        // {2}, {T}, Sacrifice Terrarion: Add two mana in any combination of colors to your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaInAnyCombinationEffect(2), new GenericManaCost(2));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability);
-        // When Terrarion is put into a graveyard from the battlefield, draw a card.
-        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DrawCardSourceControllerEffect(1)));
+    private int amountOfCreaturesThatDied;
+
+    public CreaturesDiedWatcher() {
+       super("CreaturesDiedWatcher", WatcherScope.GAME);
     }
 
-    public Terrarion(final Terrarion card) {
-        super(card);
+    public CreaturesDiedWatcher(final CreaturesDiedWatcher watcher) {
+       super(watcher);
+       this.amountOfCreaturesThatDied = watcher.amountOfCreaturesThatDied;
     }
 
     @Override
-    public Terrarion copy() {
-        return new Terrarion(this);
+    public void watch(GameEvent event, Game game) {
+       if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
+           amountOfCreaturesThatDied++;
+       }
     }
+
+    @Override
+    public void reset() {
+        amountOfCreaturesThatDied = 0;
+    }
+
+    public int getAmountOfCreaturesDiesThisTurn() {
+       return amountOfCreaturesThatDied;
+    }
+
+    @Override
+    public CreaturesDiedWatcher copy() {
+       return new CreaturesDiedWatcher(this);
+    }
+
 }

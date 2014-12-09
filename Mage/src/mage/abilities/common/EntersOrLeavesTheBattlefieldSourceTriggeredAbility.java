@@ -25,50 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnika;
+package mage.abilities.common;
 
-import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTappedAbility;
-import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.AddManaInAnyCombinationEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.mana.SimpleManaAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.constants.Zone;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
+import mage.game.events.ZoneChangeEvent;
 
 /**
  *
  * @author LevelX2
  */
-public class Terrarion extends CardImpl {
 
-    public Terrarion(UUID ownerId) {
-        super(ownerId, 273, "Terrarion", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "RAV";
+public class EntersOrLeavesTheBattlefieldSourceTriggeredAbility extends TriggeredAbilityImpl {
 
-        // Terrarion enters the battlefield tapped.
-        this.addAbility(new EntersBattlefieldTappedAbility());
-        // {2}, {T}, Sacrifice Terrarion: Add two mana in any combination of colors to your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaInAnyCombinationEffect(2), new GenericManaCost(2));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability);
-        // When Terrarion is put into a graveyard from the battlefield, draw a card.
-        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DrawCardSourceControllerEffect(1)));
+    public EntersOrLeavesTheBattlefieldSourceTriggeredAbility(Effect effect, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
     }
 
-    public Terrarion(final Terrarion card) {
-        super(card);
+    public EntersOrLeavesTheBattlefieldSourceTriggeredAbility(final EntersOrLeavesTheBattlefieldSourceTriggeredAbility ability) {
+        super(ability);
     }
 
     @Override
-    public Terrarion copy() {
-        return new Terrarion(this);
+    public EntersOrLeavesTheBattlefieldSourceTriggeredAbility copy() {
+        return new EntersOrLeavesTheBattlefieldSourceTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
+                && event.getTargetId().equals(getSourceId())) {
+            return true;
+        }
+        if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            if (zEvent.getFromZone().equals(Zone.BATTLEFIELD)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "When {this} enters the battlefield or leaves the battlefield, " + super.getRule();
     }
 }

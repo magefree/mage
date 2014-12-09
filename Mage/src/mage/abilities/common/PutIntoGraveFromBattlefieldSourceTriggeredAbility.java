@@ -11,23 +11,23 @@ import mage.game.permanent.Permanent;
 /**
  * @author nantuko, loki
  */
-public class PutIntoGraveFromBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
+public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends TriggeredAbilityImpl {
 
-    public PutIntoGraveFromBattlefieldTriggeredAbility(Effect effect) {
+    public PutIntoGraveFromBattlefieldSourceTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
-    public PutIntoGraveFromBattlefieldTriggeredAbility(Effect effect, boolean optional) {
+    public PutIntoGraveFromBattlefieldSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.ALL, effect, optional);
     }
 
-    PutIntoGraveFromBattlefieldTriggeredAbility(PutIntoGraveFromBattlefieldTriggeredAbility ability) {
+    PutIntoGraveFromBattlefieldSourceTriggeredAbility(PutIntoGraveFromBattlefieldSourceTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public PutIntoGraveFromBattlefieldTriggeredAbility copy() {
-        return new PutIntoGraveFromBattlefieldTriggeredAbility(this);
+    public PutIntoGraveFromBattlefieldSourceTriggeredAbility copy() {
+        return new PutIntoGraveFromBattlefieldSourceTriggeredAbility(this);
     }
 
     @Override

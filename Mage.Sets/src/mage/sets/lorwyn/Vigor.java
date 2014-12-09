@@ -30,7 +30,7 @@ package mage.sets.lorwyn;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromAnywhereTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromAnywhereSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
@@ -69,7 +69,7 @@ public class Vigor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VigorReplacementEffect()));
         
         // When Vigor is put into a graveyard from anywhere, shuffle it into its owner's library.
-        this.addAbility(new PutIntoGraveFromAnywhereTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));
+        this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));
     }
 
     public Vigor(final Vigor card) {

@@ -27,38 +27,38 @@
  */
 package mage.sets.avacynrestored;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.SkipNextUntapTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect;
 import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect.HandSizeModification;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.command.Emblem;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
-
 
 /**
  *
@@ -130,65 +130,6 @@ class TappedCreaturesControlledByTargetCount implements DynamicValue {
     }
 }
 
-class TamiyoTheMoonSageTriggeredAbility extends TriggeredAbilityImpl {
-
-    public TamiyoTheMoonSageTriggeredAbility() {
-        super(Zone.COMMAND, new TamiyoTheMoonSageEffect(), true);
-    }
-
-    public TamiyoTheMoonSageTriggeredAbility(final TamiyoTheMoonSageTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public TamiyoTheMoonSageTriggeredAbility copy() {
-        return new TamiyoTheMoonSageTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
-            Card card = game.getCard(event.getTargetId());
-            if (card != null && !card.isCopy() && card.getOwnerId().equals(this.getControllerId())) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(card.getId()));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a card is put into your graveyard from anywhere, you may return it to your hand.";
-    }
-}
-
-class TamiyoTheMoonSageEffect extends OneShotEffect {
-
-    public TamiyoTheMoonSageEffect() {
-        super(Outcome.ReturnToHand);
-        this.staticText = "return it to your hand";
-    }
-
-    public TamiyoTheMoonSageEffect(final TamiyoTheMoonSageEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TamiyoTheMoonSageEffect copy() {
-        return new TamiyoTheMoonSageEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(this.targetPointer.getFirst(game, source));
-        if (card != null) {
-            return card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
-        }
-        return false;
-    }
-}
-
 /**
  * Emblem with "You have no maximum hand size" and "Whenever a card is put into your graveyard from anywhere, you may return it to your hand."
  */
@@ -198,6 +139,9 @@ class TamiyoTheMoonSageEmblem extends Emblem {
         this.setName("EMBLEM: Tamiyo, the Moon Sage");
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.EndOfGame, HandSizeModification.SET));
         this.getAbilities().add(ability);
-        this.getAbilities().add(new TamiyoTheMoonSageTriggeredAbility());
+        Effect effect = new ReturnToHandTargetEffect();
+        effect.setText("return it to your hand");
+        this.getAbilities().add(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
+                Zone.COMMAND, effect, true, new FilterCard("a card"), TargetController.YOU, SetTargetPointer.CARD));
     }
 }

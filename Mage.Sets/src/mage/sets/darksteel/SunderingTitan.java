@@ -33,6 +33,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.EntersOrLeavesTheBattlefieldSourceTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -62,8 +63,7 @@ public class SunderingTitan extends CardImpl {
         this.toughness = new MageInt(10);
 
         // When Sundering Titan enters the battlefield or leaves the battlefield, choose a land of each basic land type, then destroy those lands.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SunderingTitanDestroyLandEffect(), false));
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new SunderingTitanDestroyLandEffect(), false));
+        this.addAbility(new EntersOrLeavesTheBattlefieldSourceTriggeredAbility(new SunderingTitanDestroyLandEffect(), false));
     }
 
     public SunderingTitan(final SunderingTitan card) {

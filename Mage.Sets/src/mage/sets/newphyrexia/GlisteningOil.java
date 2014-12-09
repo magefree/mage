@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -73,7 +73,7 @@ public class GlisteningOil extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GlisteningOilEffect(), TargetController.YOU, false));
         
         // When Glistening Oil is put into a graveyard from the battlefield, return Glistening Oil to its owner's hand.
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new ReturnToHandSourceEffect()));
+        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
     public GlisteningOil(final GlisteningOil card) {

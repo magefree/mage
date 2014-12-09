@@ -28,23 +28,21 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
@@ -61,7 +59,9 @@ public class QuestForAncientSecrets extends CardImpl {
         this.color.setBlue(true);
 
         // Whenever a card is put into your graveyard from anywhere, you may put a quest counter on Quest for Ancient Secrets.
-        this.addAbility(new QuestForAncientSecretsTriggeredAbility());
+        this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true, TargetController.YOU));
+
         // Remove five quest counters from Quest for Ancient Secrets and sacrifice it: Target player shuffles his or her graveyard into his or her library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new QuestForAncientSecretsEffect(),
@@ -78,38 +78,6 @@ public class QuestForAncientSecrets extends CardImpl {
     @Override
     public QuestForAncientSecrets copy() {
         return new QuestForAncientSecrets(this);
-    }
-}
-
-class QuestForAncientSecretsTriggeredAbility extends TriggeredAbilityImpl {
-
-    public QuestForAncientSecretsTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true);
-    }
-
-    public QuestForAncientSecretsTriggeredAbility(final QuestForAncientSecretsTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public QuestForAncientSecretsTriggeredAbility copy() {
-        return new QuestForAncientSecretsTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
-            Card card = game.getCard(event.getTargetId());
-            if (card != null && !card.isCopy() && card.getOwnerId().equals(this.getControllerId())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a card is put into your graveyard from anywhere, you may put a quest counter on {this}";
     }
 }
 

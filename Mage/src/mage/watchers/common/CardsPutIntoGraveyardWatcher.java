@@ -49,8 +49,8 @@ import mage.watchers.Watcher;
  */
 public class CardsPutIntoGraveyardWatcher extends Watcher {
 
-    private final Map<UUID, Integer> amountOfCardsThisTurn = new HashMap<UUID, Integer>();
-    private final Set<UUID> cardsPutToGraveyardFromBattlefield = new HashSet<UUID>();
+    private final Map<UUID, Integer> amountOfCardsThisTurn = new HashMap<>();
+    private final Set<UUID> cardsPutToGraveyardFromBattlefield = new HashSet<>();
 
 
     public CardsPutIntoGraveyardWatcher() {
@@ -75,7 +75,7 @@ public class CardsPutIntoGraveyardWatcher extends Watcher {
             if (playerId != null && game.getCard(event.getTargetId()) != null) {
                 Integer amount = amountOfCardsThisTurn.get(playerId);
                 if (amount == null) {
-                    amount = new Integer(1);
+                    amount = 1;
                 } else {
                     ++amount;
                 }
@@ -90,13 +90,13 @@ public class CardsPutIntoGraveyardWatcher extends Watcher {
     public int getAmountCardsPutToGraveyard(UUID playerId) {
         Integer amount = amountOfCardsThisTurn.get(playerId);
         if (amount != null) {
-            return amount.intValue();
+            return amount;
         }
         return 0;
     }
 
     public Set<UUID> getCardsPutToGraveyardFromBattlefield() {
-        Set<UUID> cards = new HashSet<UUID>();
+        Set<UUID> cards = new HashSet<>();
         cards.addAll(cardsPutToGraveyardFromBattlefield);
         return cards;
     }

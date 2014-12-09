@@ -29,19 +29,18 @@ package mage.sets.urzassaga;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.SacrificeSourceEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 
 /**
  *
@@ -58,7 +57,9 @@ public class EnergyField extends CardImpl {
         // Prevent all damage that would be dealt to you by sources you don't control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EnergyFieldEffect()));
         // When a card is put into your graveyard from anywhere, sacrifice Energy Field.
-        this.addAbility(new PutIntoYourGraveyardTriggeredAbility());
+        this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
+                new SacrificeSourceEffect(), false, TargetController.YOU));
+
     }
 
     public EnergyField(final EnergyField card) {
@@ -112,40 +113,5 @@ class EnergyFieldEffect extends PreventionEffectImpl {
     @Override
     public EnergyFieldEffect copy() {
         return new EnergyFieldEffect(this);
-    }
-}
-
-class PutIntoYourGraveyardTriggeredAbility extends TriggeredAbilityImpl {
-
-    public PutIntoYourGraveyardTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeSourceEffect(), false);
-    }
-
-    public PutIntoYourGraveyardTriggeredAbility(PutIntoYourGraveyardTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public PutIntoYourGraveyardTriggeredAbility copy() {
-        return new PutIntoYourGraveyardTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone() == Zone.GRAVEYARD) {
-                Card card = game.getCard(event.getTargetId());
-                if (card != null && card.getOwnerId().equals(getControllerId())) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "When a card is put into your graveyard from anywhere, " + super.getRule();
     }
 }

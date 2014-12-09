@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -62,7 +62,7 @@ public class PanicSpellbomb extends CardImpl {
         this.addAbility(ability);
 
         // When Panic Spellbomb is put into a graveyard from the battlefield, you may pay Red. If you do, draw a card.
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{R}")), false));
+        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{R}")), false));
     }
 
     public PanicSpellbomb(final PanicSpellbomb card) {

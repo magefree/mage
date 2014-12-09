@@ -28,11 +28,11 @@
 
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -44,7 +44,7 @@ public class ReturnSourceFromGraveyardToHandEffect extends OneShotEffect {
 
     public ReturnSourceFromGraveyardToHandEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Return {this} from your graveyard to your hand";
+        staticText = "return {this} from your graveyard to your hand";
     }
 
     public ReturnSourceFromGraveyardToHandEffect(final ReturnSourceFromGraveyardToHandEffect effect) {
@@ -58,12 +58,10 @@ public class ReturnSourceFromGraveyardToHandEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Card card = player.getGraveyard().get(source.getSourceId(), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        Card card = controller.getGraveyard().get(source.getSourceId(), game);
         if (card != null) {
-            player.removeFromGraveyard(card, game);
-            card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-            return true;
+            return controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD);
         }
         return false;
     }
