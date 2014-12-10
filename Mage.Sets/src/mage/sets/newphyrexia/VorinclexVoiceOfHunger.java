@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.TapForManaAllTriggeredManaAbility;
 import mage.abilities.effects.common.AddManaOfAnyColorTargetCanProduceEffect;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -87,7 +87,7 @@ class VorinclexTriggeredAbility2 extends TriggeredAbilityImpl {
     private static final String staticText = "Whenever an opponent taps a land for mana, that land doesn't untap during its controller's next untap step.";
 
     public VorinclexTriggeredAbility2() {
-        super(Zone.BATTLEFIELD, new SkipNextUntapTargetEffect());
+        super(Zone.BATTLEFIELD, new DontUntapInControllersNextUntapStepTargetEffect());
     }
 
     public VorinclexTriggeredAbility2(VorinclexTriggeredAbility2 ability) {

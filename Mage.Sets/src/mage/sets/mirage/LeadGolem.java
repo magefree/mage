@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.common.SkipNextUntapSourceEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -51,7 +51,7 @@ public class LeadGolem extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever Lead Golem attacks, it doesn't untap during its controller's next untap step.
-        Ability ability = new AttacksTriggeredAbility(new SkipNextUntapSourceEffect(), false);
+        Ability ability = new AttacksTriggeredAbility(new DontUntapInControllersNextUntapStepSourceEffect(), false);
         this.addAbility(ability);
     }
 

@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.common.PutIntoGraveFromAnywhereAbility;
+import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -57,7 +57,7 @@ public class LegacyWeapon extends CardImpl {
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
         // If Legacy Weapon would be put into a graveyard from anywhere, reveal Legacy Weapon and shuffle it into its owner's library instead.
-        this.addAbility(new PutIntoGraveFromAnywhereAbility(new RevealAndShuffleIntoLibrarySourceEffect()));
+        this.addAbility(new PutIntoGraveFromAnywhereSourceAbility(new RevealAndShuffleIntoLibrarySourceEffect()));
     }
 
     public LegacyWeapon(final LegacyWeapon card) {

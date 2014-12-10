@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.SkipUntapSourceEffect;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -60,7 +60,7 @@ public class DeepSlumberTitan extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         
         // Deep-Slumber Titan doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipUntapSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
         
         // Whenever Deep-Slumber Titan is dealt damage, untap it.
         this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), false));

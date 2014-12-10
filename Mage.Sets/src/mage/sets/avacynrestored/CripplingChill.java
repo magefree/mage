@@ -30,7 +30,7 @@ package mage.sets.avacynrestored;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
@@ -52,7 +52,7 @@ public class CripplingChill extends CardImpl {
         // Tap target creature. It doesn't untap during its controller's next untap step.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new TapTargetEffect());
-        this.getSpellAbility().addEffect(new SkipNextUntapTargetEffect());
+        this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect());
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }

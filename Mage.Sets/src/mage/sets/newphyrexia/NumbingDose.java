@@ -33,12 +33,14 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.effects.common.SkipEnchantedUntapEffect;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -68,12 +70,15 @@ public class NumbingDose extends CardImpl {
 
         this.color.setBlue(true);
 
+        // Enchant artifact or creature
         TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        EnchantAbility ability = new EnchantAbility(auraTarget.getTargetName());
-        ability.addEffect(new SkipEnchantedUntapEffect());
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+
+        // Enchanted permanent doesn't untap during its controller's untap step.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
+
         // At the beginning of the upkeep of enchanted permanent's controller, that player loses 1 life.
         this.addAbility(new NumbingDoseTriggeredAbility());
     }

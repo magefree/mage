@@ -34,7 +34,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.SkipUntapSourceEffect;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -72,7 +72,7 @@ public class ImmobilizingInk extends CardImpl {
         
         // Enchanted creature doesn't untap during its controller's untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                                                new GainAbilityAttachedEffect(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipUntapSourceEffect()),
+                                                new GainAbilityAttachedEffect(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()),
                                                     AttachmentType.AURA,
                                                     Duration.WhileOnBattlefield,"Enchanted creature doesn't untap during its controller's untap step.")));
         

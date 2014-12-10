@@ -32,7 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PreventAllDamageByAllEffect;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -101,7 +101,7 @@ class TangleEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for (Permanent permanent :game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                ContinuousEffect effect = new SkipNextUntapTargetEffect();
+                ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect();
                 effect.setTargetPointer(new FixedTarget(permanent.getId()));
                 game.addEffect(effect, source);
             }

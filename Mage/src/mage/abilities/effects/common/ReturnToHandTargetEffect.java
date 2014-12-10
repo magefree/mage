@@ -109,7 +109,7 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
             return "";
         }
         Target target = mode.getTargets().get(0);
-        StringBuilder sb = new StringBuilder("Return ");
+        StringBuilder sb = new StringBuilder("return ");
         if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
             sb.append("up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName()).append(" to their owners' hand");
             return sb.toString();

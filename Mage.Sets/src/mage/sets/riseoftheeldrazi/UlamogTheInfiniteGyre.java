@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.PutIntoGraveFromAnywhereTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromAnywhereSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
@@ -72,7 +72,7 @@ public class UlamogTheInfiniteGyre extends CardImpl {
         // Indestructible
         this.addAbility(IndestructibleAbility.getInstance());
         // When Ulamog is put into a graveyard from anywhere, its owner shuffles his or her graveyard into his or her library.
-        this.addAbility(new PutIntoGraveFromAnywhereTriggeredAbility(new UlamogTheInfiniteGyreEnterGraveyardEffect(), false));
+        this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new UlamogTheInfiniteGyreEnterGraveyardEffect(), false));
     }
 
     public UlamogTheInfiniteGyre(final UlamogTheInfiniteGyre card) {

@@ -37,7 +37,7 @@ import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.combat.MustBeBlockedByTargetSourceEffect;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
@@ -65,7 +65,7 @@ public class MatsuTribeDecoy extends CardImpl {
         // Whenever Kashi-Tribe Reaver deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
         Ability ability2;
         ability2 = new DealsDamageToACreatureTriggeredAbility(new TapTargetEffect("that creature"), true, false, true);
-        ability2.addEffect(new SkipNextUntapTargetEffect("and it"));
+        ability2.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("and it"));
         this.addAbility(ability2);
     }
 

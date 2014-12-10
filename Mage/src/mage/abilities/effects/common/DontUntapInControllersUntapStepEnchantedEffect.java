@@ -12,14 +12,14 @@ import mage.game.permanent.Permanent;
 /**
  * @author nantuko
  */
-public class SkipEnchantedUntapEffect extends ContinuousRuleModifiyingEffectImpl {
+public class DontUntapInControllersUntapStepEnchantedEffect extends ContinuousRuleModifiyingEffectImpl {
 
-    public SkipEnchantedUntapEffect() {
+    public DontUntapInControllersUntapStepEnchantedEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, false, true);
         staticText = "Enchanted permanent doesn't untap during its controller's untap step";
     }
 
-    public SkipEnchantedUntapEffect(final SkipEnchantedUntapEffect effect) {
+    public DontUntapInControllersUntapStepEnchantedEffect(final DontUntapInControllersUntapStepEnchantedEffect effect) {
         super(effect);
     }
 
@@ -29,8 +29,8 @@ public class SkipEnchantedUntapEffect extends ContinuousRuleModifiyingEffectImpl
     }
 
     @Override
-    public SkipEnchantedUntapEffect copy() {
-        return new SkipEnchantedUntapEffect(this);
+    public DontUntapInControllersUntapStepEnchantedEffect copy() {
+        return new DontUntapInControllersUntapStepEnchantedEffect(this);
     }
 
     @Override
@@ -48,11 +48,11 @@ public class SkipEnchantedUntapEffect extends ContinuousRuleModifiyingEffectImpl
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
+        if (GameEvent.EventType.UNTAP.equals(event.getType()) && PhaseStep.UNTAP.equals(game.getTurn().getStepType())) {
             Permanent enchantment = game.getPermanent(source.getSourceId());
-            if (enchantment != null && enchantment.getAttachedTo() != null) {
+            if (enchantment != null && enchantment.getAttachedTo() != null && event.getTargetId().equals(enchantment.getAttachedTo())) {
                 Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
-                if (permanent != null && event.getTargetId().equals(permanent.getId())) {
+                if (permanent != null &&  permanent.getControllerId().equals(game.getActivePlayerId())) {
                     return true;
                 }
             }

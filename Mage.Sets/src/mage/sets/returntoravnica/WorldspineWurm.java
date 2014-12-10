@@ -30,7 +30,7 @@ package mage.sets.returntoravnica;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.common.PutIntoGraveFromAnywhereTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromAnywhereSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -61,7 +61,7 @@ public class WorldspineWurm extends CardImpl {
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new WorldspineWurmToken(), 3)));
         
         // When Worldspine Wurm is put into a graveyard from anywhere, shuffle it into its owner's library.
-        this.addAbility(new PutIntoGraveFromAnywhereTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));
+        this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));
     }
 
     public WorldspineWurm(final WorldspineWurm card) {

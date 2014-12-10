@@ -29,18 +29,14 @@ package mage.sets.commander;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 
 /**
  *
@@ -64,8 +60,8 @@ public class VulturousZombie extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever a card is put into an opponent's graveyard from anywhere, put a +1/+1 counter on Vulturous Zombie.
-        this.addAbility(new VulturousZombieTriggeredAbility());
-
+        this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, TargetController.OPPONENT));
     }
 
     public VulturousZombie(final VulturousZombie card) {
@@ -75,38 +71,5 @@ public class VulturousZombie extends CardImpl {
     @Override
     public VulturousZombie copy() {
         return new VulturousZombie(this);
-    }
-}
-
-class VulturousZombieTriggeredAbility extends TriggeredAbilityImpl {
-
-    public VulturousZombieTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
-    }
-
-    public VulturousZombieTriggeredAbility(final VulturousZombieTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public VulturousZombieTriggeredAbility copy() {
-        return new VulturousZombieTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
-            Card card = game.getCard(event.getTargetId());
-            if (card != null && !card.isCopy()
-                    && game.getOpponents(controllerId).contains(card.getOwnerId())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a card is put into an opponent's graveyard from anywhere, put a +1/+1 counter on {this}.";
     }
 }

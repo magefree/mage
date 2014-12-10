@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
@@ -48,7 +48,7 @@ public class BarlsCage extends CardImpl {
         this.expansionSetCode = "DRK";
 
 		// {3}: Target creature doesn't untap during its controller's next untap step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SkipNextUntapTargetEffect("Target creature"), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DontUntapInControllersNextUntapStepTargetEffect("Target creature"), new GenericManaCost(3));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

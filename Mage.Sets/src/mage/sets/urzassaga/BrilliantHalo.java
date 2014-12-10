@@ -31,7 +31,7 @@ import java.util.UUID;
 
 import mage.constants.*;
 import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
@@ -63,7 +63,7 @@ public class BrilliantHalo extends CardImpl {
         // Enchanted creature gets +1/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield)));
         // When Brilliant Halo is put into a graveyard from the battlefield, return Brilliant Halo to its owner's hand.
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new ReturnToHandSourceEffect()));
+        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
     public BrilliantHalo(final BrilliantHalo card) {

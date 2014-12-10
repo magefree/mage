@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.common.BlocksCreatureAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -63,7 +63,7 @@ public class ShieldOfTheRighteous extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT)));
         
         // Whenever equipped creature blocks a creature, that creature doesn't untap during its controller's next untap step.
-        this.addAbility(new BlocksCreatureAttachedTriggeredAbility(new SkipNextUntapTargetEffect("that creature"), "equipped", false, false, true));
+        this.addAbility(new BlocksCreatureAttachedTriggeredAbility(new DontUntapInControllersNextUntapStepTargetEffect("that creature"), "equipped", false, false, true));
         
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), new TargetControlledCreaturePermanent()));

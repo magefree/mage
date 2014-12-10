@@ -36,7 +36,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
 import mage.abilities.effects.ContinuousRuleModifiyingEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.effects.common.SkipUntapTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
@@ -57,12 +57,13 @@ public class NekoTe extends CardImpl {
         this.subtype.add("Equipment");
 
         // Whenever equipped creature deals damage to a creature, tap that creature. That creature doesn't untap during its controller's untap step for as long as Neko-Te remains on the battlefield.
-        ContinuousRuleModifiyingEffect skipUntapEffect = new SkipUntapTargetEffect(Duration.WhileOnBattlefield);
+        ContinuousRuleModifiyingEffect skipUntapEffect = new DontUntapInControllersUntapStepTargetEffect(Duration.WhileOnBattlefield);
         skipUntapEffect.setText("That creature doesn't untap during its controller's untap step for as long as {this} remains on the battlefield");
         ConditionalContinuousRuleModifyingEffect effect = new ConditionalContinuousRuleModifyingEffect(skipUntapEffect, new SourceOnBattelfieldCondition());
         Ability ability = new DealsDamageToACreatureAttachedTriggeredAbility(new TapTargetEffect("that creature"), false, "equipped creature", false, true);
         ability.addEffect(effect);
         this.addAbility(ability);
+
         // Whenever equipped creature deals damage to a player, that player loses 1 life.
         this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new LoseLifeTargetEffect(1), "equipped creature", false, true, false));
 

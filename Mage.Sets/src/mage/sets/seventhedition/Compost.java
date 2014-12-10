@@ -28,23 +28,27 @@
 package mage.sets.seventhedition;
 
 import java.util.UUID;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.ObjectColor;
+import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
+import mage.constants.TargetController;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author emerald000
  */
 public class Compost extends CardImpl {
+
+    private static final FilterCard filter = new FilterCard("a black card");
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
+    }
 
     public Compost(UUID ownerId) {
         super(ownerId, 235, "Compost", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
@@ -53,7 +57,8 @@ public class Compost extends CardImpl {
         this.color.setGreen(true);
 
         // Whenever a black card is put into an opponent's graveyard from anywhere, you may draw a card.
-        this.addAbility(new CompostTriggeredAbility());
+        this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
+                new DrawCardSourceControllerEffect(1), true, TargetController.OPPONENT));
     }
 
     public Compost(final Compost card) {
@@ -63,37 +68,5 @@ public class Compost extends CardImpl {
     @Override
     public Compost copy() {
         return new Compost(this);
-    }
-}
-
-class CompostTriggeredAbility extends TriggeredAbilityImpl {
-    
-    CompostTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
-    }
-    
-    CompostTriggeredAbility(final CompostTriggeredAbility ability) {
-        super(ability);
-    }
-    
-    @Override
-    public CompostTriggeredAbility copy() {
-        return new CompostTriggeredAbility(this);
-    }
-    
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
-            Card card = game.getCard(event.getTargetId());
-            if (card != null && card.getColor().isBlack() && game.getOpponents(controllerId).contains(card.getOwnerId())) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    @Override
-    public String getRule() {
-        return "Whenever a black card is put into an opponent's graveyard from anywhere, you may draw a card";
     }
 }

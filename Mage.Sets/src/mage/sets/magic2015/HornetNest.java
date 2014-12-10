@@ -94,10 +94,10 @@ class HornetNestDealDamageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = (Integer) getValue("damage");
-        if (amount > 0) {
-            Player player = game.getPlayer(source.getControllerId());
-            if (player != null) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            int amount = (Integer) getValue("damage");
+            if (amount > 0) {
                 return new CreateTokenEffect(new HornetNestInsectToken(), amount).apply(game, source);
             }
         }

@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.SkipEnchantedUntapEffect;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
@@ -67,7 +67,7 @@ public class ComaVeil extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         // Enchanted permanent doesn't untap during its controller's untap step.
         EnchantAbility ability = new EnchantAbility(auraTarget.getTargetName());
-        ability.addEffect(new SkipEnchantedUntapEffect());
+        ability.addEffect(new DontUntapInControllersUntapStepEnchantedEffect());
         this.addAbility(ability);
     }
 

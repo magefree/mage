@@ -35,25 +35,26 @@ import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author North
  */
-public class SkipUntapSourceEffect extends ContinuousRuleModifiyingEffectImpl {
+public class DontUntapInControllersUntapStepSourceEffect extends ContinuousRuleModifiyingEffectImpl {
 
-    public SkipUntapSourceEffect() {
+    public DontUntapInControllersUntapStepSourceEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, false, true);
         staticText = "{this} doesn't untap during your untap step";
     }
 
-    public SkipUntapSourceEffect(final SkipUntapSourceEffect effect) {
+    public DontUntapInControllersUntapStepSourceEffect(final DontUntapInControllersUntapStepSourceEffect effect) {
         super(effect);
     }
 
     @Override
-    public SkipUntapSourceEffect copy() {
-        return new SkipUntapSourceEffect(this);
+    public DontUntapInControllersUntapStepSourceEffect copy() {
+        return new DontUntapInControllersUntapStepSourceEffect(this);
     }
 
     @Override
@@ -66,7 +67,10 @@ public class SkipUntapSourceEffect extends ContinuousRuleModifiyingEffectImpl {
         if (game.getTurn().getStepType() == PhaseStep.UNTAP
                 && event.getType() == EventType.UNTAP
                 && event.getTargetId().equals(source.getSourceId())) {
-            return true;
+            Permanent permanent = game.getPermanent(source.getSourceId());
+            if (permanent != null && permanent.getControllerId().equals(game.getActivePlayerId())) {
+                return true;
+            }
         }
         return false;
     }

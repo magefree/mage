@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
@@ -65,7 +65,7 @@ public class KorHookmaster extends CardImpl {
         // When Kor Hookmaster enters the battlefield, tap target creature an opponent controls. 
         // That creature doesn't untap during its controller's next untap step.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect());
-        ability.addEffect(new SkipNextUntapTargetEffect());
+        ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

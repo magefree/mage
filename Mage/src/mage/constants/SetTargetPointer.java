@@ -33,5 +33,5 @@ package mage.constants;
  * @author LevelX2
  */
 public enum SetTargetPointer {
-    NONE, PLAYER, SPELL, CREATURE, PERMANENT;
+    NONE, PLAYER, SPELL, CARD, PERMANENT;
 }

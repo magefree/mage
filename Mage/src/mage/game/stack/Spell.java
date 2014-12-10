@@ -572,6 +572,14 @@ public class Spell implements StackObject, Card {
 
     @Override
     public boolean hasSubtype(String subtype) {
+        if (this.getSpellAbility() instanceof BestowAbility) { // workaround for Bestow (don't like it)
+            List<String> subtypes = new ArrayList<>();
+            subtypes.addAll(card.getSubtype());
+            subtypes.add("Aura");
+            if (subtypes.contains(subtype)) {
+                return true;
+            }
+        }
         return card.hasSubtype(subtype);
     }
 

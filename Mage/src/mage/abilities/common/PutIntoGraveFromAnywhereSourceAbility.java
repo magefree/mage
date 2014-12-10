@@ -48,23 +48,23 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class PutIntoGraveFromAnywhereAbility extends SimpleStaticAbility {
+public class PutIntoGraveFromAnywhereSourceAbility extends SimpleStaticAbility {
     
-    public PutIntoGraveFromAnywhereAbility(Effect baseEffect) {
+    public PutIntoGraveFromAnywhereSourceAbility(Effect baseEffect) {
         this(baseEffect, null, "", true, false);
     }
 
-    public PutIntoGraveFromAnywhereAbility(Effect baseEffect, Condition condition, String text, boolean selfScope, boolean optional) {
+    public PutIntoGraveFromAnywhereSourceAbility(Effect baseEffect, Condition condition, String text, boolean selfScope, boolean optional) {
         super(Zone.ALL, new PutIntoGraveFromAnywhereEffect(baseEffect, condition, text, selfScope, optional));
     }
 
-    public PutIntoGraveFromAnywhereAbility(final PutIntoGraveFromAnywhereAbility ability) {
+    public PutIntoGraveFromAnywhereSourceAbility(final PutIntoGraveFromAnywhereSourceAbility ability) {
         super(ability);
     }
 
     @Override
     public SimpleStaticAbility copy() {
-        return new PutIntoGraveFromAnywhereAbility(this);
+        return new PutIntoGraveFromAnywhereSourceAbility(this);
     }
 
     @Override

@@ -90,7 +90,7 @@ public class AttacksAllTriggeredAbility extends TriggeredAbilityImpl {
                         return false;
                     }
                 }
-                if (SetTargetPointer.CREATURE.equals(setTargetPointer)) {
+                if (SetTargetPointer.PERMANENT.equals(setTargetPointer)) {
                     for (Effect effect: getEffects()) {
                         effect.setTargetPointer(new FixedTarget(permanent.getId()));
                     }

@@ -95,6 +95,7 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
         if (this.controllingPlayerId == null && fixedControl) {
             this.controllingPlayerId = source.getControllerId();
         }
+        super.init(source, game);
     }
 
     @Override

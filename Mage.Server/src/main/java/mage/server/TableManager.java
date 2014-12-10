@@ -363,7 +363,19 @@ public class TableManager {
         Collection<User> users = UserManager.getInstance().getUsers();
         logger.debug("--------User: " + users.size() + " [userId | since | lock | name -----------------------");
         for (User user :users) {
-            logger.debug(user.getId() + " | " + formatter.format(user.getConnectionTime()) + " | " + (SessionManager.getInstance().getSession(user.getSessionId()).isLocked()?"L":"-") + " | " + user.getName() +" (" +user.getUserState().toString() + " - " + user.getPingInfo() + ")");
+            Session session = SessionManager.getInstance().getSession(user.getSessionId());
+            String sessionState = "N";
+            if (session != null) {
+                if (session.isLocked()) {
+                    sessionState = "L";
+                } else {
+                    sessionState = "+";
+                }
+            }
+            logger.debug(user.getId()
+                    + " | " + formatter.format(user.getConnectionTime())
+                    + " | " + sessionState
+                    + " | " + user.getName() +" (" +user.getUserState().toString() + " - " + user.getPingInfo() + ")");
         }
         ArrayList<ChatSession> chatSessions = ChatManager.getInstance().getChatSessions();
         logger.debug("------- ChatSessions: " + chatSessions.size() + " ----------------------------------");

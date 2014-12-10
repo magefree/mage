@@ -31,7 +31,7 @@ import java.util.UUID;
 
 import mage.constants.*;
 import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -65,7 +65,7 @@ public class Cessation extends CardImpl {
         //Enchanted creature can't attack.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAttachedEffect(AttachmentType.AURA)));
         //When Cessation is put into a graveyard from the battlefield, return Cessation to its owner's hand.
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new ReturnToHandSourceEffect()));
+        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
     public Cessation(final Cessation card) {

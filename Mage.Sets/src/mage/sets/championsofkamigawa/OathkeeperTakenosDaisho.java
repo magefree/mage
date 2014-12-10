@@ -30,7 +30,7 @@ package mage.sets.championsofkamigawa;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.EquippedMatchesFilterCondition;
@@ -77,7 +77,7 @@ public class OathkeeperTakenosDaisho extends CardImpl {
                 new OathkeeperEquippedMatchesFilterCondition(filter),
                 ""));
         // When Oathkeeper, Takeno's Daisho is put into a graveyard from the battlefield, exile equipped creature.
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new ExileEquippedEffect()));
+        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ExileEquippedEffect()));
         // Equip {2}
         this.addAbility(new EquipAbility( Outcome.BoostCreature, new ManaCostsImpl("{2}")));
     }

@@ -30,7 +30,7 @@ package mage.sets.ravnika;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -60,7 +60,7 @@ public class Terrarion extends CardImpl {
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
         // When Terrarion is put into a graveyard from the battlefield, draw a card.
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
+        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
     public Terrarion(final Terrarion card) {

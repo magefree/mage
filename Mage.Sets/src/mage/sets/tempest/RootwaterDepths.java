@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.SkipNextUntapSourceEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepSourceEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
@@ -51,10 +51,10 @@ public class RootwaterDepths extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Add {U} or {B} to your mana pool. Rootwater Depths doesn't untap during your next untap step.
         Ability ability = new BlueManaAbility();
-        ability.addEffect(new SkipNextUntapSourceEffect());
+        ability.addEffect(new DontUntapInControllersNextUntapStepSourceEffect());
         this.addAbility(ability);
         ability = new BlackManaAbility();
-        ability.addEffect(new SkipNextUntapSourceEffect());
+        ability.addEffect(new DontUntapInControllersNextUntapStepSourceEffect());
         this.addAbility(ability);
     }
 

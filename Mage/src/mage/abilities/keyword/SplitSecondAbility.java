@@ -38,6 +38,8 @@ public class SplitSecondAbility extends SimpleStaticAbility  {
     }
 }
 
+// Molten Disaster has a copy of this effect in it's class, so in case this effect has to be changed check also there
+
 class SplitSecondEffect extends ContinuousRuleModifiyingEffectImpl {
 
     SplitSecondEffect() {

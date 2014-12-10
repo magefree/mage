@@ -39,6 +39,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
+import mage.abilities.effects.common.PutLandFromHandOntoBattlefieldEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -69,7 +70,7 @@ public class BudokaGardener extends CardImpl {
         this.flipCardName = "Dokai, Weaver of Life";
 
         // {T}: You may put a land card from your hand onto the battlefield. If you control ten or more lands, flip Budoka Gardener.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BudokaGardenerEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLandFromHandOntoBattlefieldEffect(), new TapSourceCost());
         ability.addEffect(new BudokaGardenerEffect());
         this.addAbility(ability);
     }

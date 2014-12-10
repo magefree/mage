@@ -33,7 +33,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromAnywhereAbility;
+import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
 import mage.abilities.effects.common.RevealAndShuffleIntoLibrarySourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.InfectAbility;
@@ -60,7 +60,7 @@ public class BlightsteelColossus extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
         
         // If Blightsteel Colossus would be put into a graveyard from anywhere, reveal Blightsteel Colossus and shuffle it into its owner's library instead.
-        this.addAbility(new PutIntoGraveFromAnywhereAbility(new RevealAndShuffleIntoLibrarySourceEffect()));
+        this.addAbility(new PutIntoGraveFromAnywhereSourceAbility(new RevealAndShuffleIntoLibrarySourceEffect()));
     }
 
     public BlightsteelColossus(final BlightsteelColossus card) {

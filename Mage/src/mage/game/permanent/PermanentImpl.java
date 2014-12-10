@@ -866,11 +866,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     protected void fireEvent(EventType eventType, Game game) {
-        game.fireEvent(GameEvent.getEvent(eventType, this.objectId, ownerId));
+        game.fireEvent(GameEvent.getEvent(eventType, this.objectId, ownerId)); // controllerId seems to me more logical (LevelX2)
     }
 
     protected boolean replaceEvent(EventType eventType, Game game) {
-        return game.replaceEvent(GameEvent.getEvent(eventType, this.objectId, ownerId));
+        return game.replaceEvent(GameEvent.getEvent(eventType, this.objectId, ownerId));// controllerId seems to me more logical (LevelX2)
     }
 
 

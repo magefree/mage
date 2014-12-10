@@ -41,7 +41,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.SkipUntapSourceEffect;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
 import mage.abilities.effects.common.UntapEnchantedEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.effects.common.continious.SourceEffect;
@@ -96,7 +96,7 @@ public class DanceOfTheDead extends CardImpl {
         
         // Enchanted creature gets +1/+1 and doesn't untap during its controller's untap step.
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield));
-        Effect effect = new SkipUntapSourceEffect();
+        Effect effect = new DontUntapInControllersUntapStepSourceEffect();
         effect.setText("and doesn't untap during its controller's untap step");
         ability.addEffect(effect);
         this.addAbility(ability);

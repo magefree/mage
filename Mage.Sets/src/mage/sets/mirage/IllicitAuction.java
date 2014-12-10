@@ -68,7 +68,7 @@ public class IllicitAuction extends CardImpl {
     }
 }
 
-// effect is based on ExchangeControlTargetEffect
+// effect is based on GainControlTargetEffect
 class IllicitAuctionEffect extends GainControlTargetEffect {
     
     public IllicitAuctionEffect() {
@@ -87,20 +87,20 @@ class IllicitAuctionEffect extends GainControlTargetEffect {
     
     @Override
     public void init(Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
-        if (targetCreature != null) {
+        if (controller != null && targetCreature != null) {
             PlayerList playerList = game.getPlayerList().copy();
             playerList.setCurrent(game.getActivePlayerId());
             
             Player winner = game.getPlayer(game.getActivePlayerId());
             int highBid = 0;
-            game.informPlayers(new StringBuilder(winner.getName()).append(" bet 0 lifes").toString());
+            game.informPlayers(new StringBuilder(winner.getName()).append(" has bet 0 lifes").toString());
             
-            Player currentPlayer = playerList.getNext(game);
+            Player currentPlayer = playerList.getNextInRange(controller, game);
             while (currentPlayer != winner) {
-                String text = new StringBuilder(winner.getName()).append(" bet ").append(highBid).append(" life")
-                        .append(highBid > 1 ? "s" : "").append(". Top the bid?").toString();
-                if (currentPlayer.chooseUse(Outcome.GainControl, text, game)) {
+                String text = winner.getName() + " has bet " + highBid + " life" + (highBid > 1 ? "s" : "") + ". Top the bid?";
+                if (currentPlayer.chooseUse(Outcome.Detriment, text, game)) {
                     int newBid = currentPlayer.getAmount(highBid + 1, Integer.MAX_VALUE, "Choose bid", game);
                     if (newBid > highBid) {
                         highBid = newBid;
@@ -109,15 +109,13 @@ class IllicitAuctionEffect extends GainControlTargetEffect {
                                 .append(newBid).append(" life").append(newBid > 1 ? "s" : "").toString());
                     }
                 }
-                currentPlayer = playerList.getNext(game);
+                currentPlayer = playerList.getNextInRange(controller, game);
             }
             
-            game.informPlayers(new StringBuilder(winner.getName()).append(" won auction with a bid of ").append(highBid).append(" life")
-                    .append(highBid > 1 ? "s" : "").toString());
+            game.informPlayers(winner.getName() + " won the auction with a bid of " + highBid + " life" + (highBid > 1 ? "s" : ""));
             winner.loseLife(highBid, game);
             super.controllingPlayerId = winner.getId();
-        }
-        
+        }        
         super.init(source, game);
     }
     

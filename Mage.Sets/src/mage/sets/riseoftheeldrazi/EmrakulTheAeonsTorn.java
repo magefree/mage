@@ -37,7 +37,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.CantCounterAbility;
-import mage.abilities.common.PutIntoGraveFromAnywhereTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromAnywhereSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -81,7 +81,7 @@ public class EmrakulTheAeonsTorn extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
         this.addAbility(new AnnihilatorAbility(6));
         // When Emrakul is put into a graveyard from anywhere, its owner shuffles his or her graveyard into his or her library.
-        this.addAbility(new PutIntoGraveFromAnywhereTriggeredAbility(new EmrakulTheAeonsTornEffect(), false));
+        this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new EmrakulTheAeonsTornEffect(), false));
     }
 
     public EmrakulTheAeonsTorn(final EmrakulTheAeonsTorn card) {

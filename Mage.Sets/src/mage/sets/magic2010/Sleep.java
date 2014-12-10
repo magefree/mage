@@ -35,7 +35,7 @@ import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -85,7 +85,7 @@ class SleepEffect extends OneShotEffect {
         if (player != null) {
             for (Permanent creature: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
                 creature.tap(game);
-                ContinuousEffect effect = new SkipNextUntapTargetEffect();
+                ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect();
                 effect.setTargetPointer(new FixedTarget(creature.getId()));
                 game.addEffect(effect, source);                
             }

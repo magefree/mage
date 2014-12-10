@@ -37,7 +37,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.PutIntoGraveFromAnywhereTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromAnywhereSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
@@ -62,7 +62,7 @@ public class KozilekButcherOfTruth extends CardImpl {
         this.toughness = new MageInt(12);
         this.addAbility(new KozilekButcherOfTruthOnCastAbility());
         this.addAbility(new AnnihilatorAbility(4));
-        this.addAbility(new PutIntoGraveFromAnywhereTriggeredAbility(new KozilekButcherOfTruthEffect(), false));
+        this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new KozilekButcherOfTruthEffect(), false));
     }
 
     public KozilekButcherOfTruth (final KozilekButcherOfTruth card) {

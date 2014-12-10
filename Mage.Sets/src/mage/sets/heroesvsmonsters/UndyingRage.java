@@ -29,7 +29,7 @@ package mage.sets.heroesvsmonsters;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
@@ -75,7 +75,7 @@ public class UndyingRage extends CardImpl {
         this.addAbility(ability);
 
         // When Undying Rage is put into a graveyard from the battlefield, return Undying Rage to its owner's hand.
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new ReturnToHandSourceEffect()));
+        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
     public UndyingRage(final UndyingRage card) {

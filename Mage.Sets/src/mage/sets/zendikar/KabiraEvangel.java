@@ -29,11 +29,11 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
@@ -72,13 +72,13 @@ public class KabiraEvangel extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        FilterPermanent filter = new FilterPermanent("Kabira Evangel or another Ally");
+        FilterPermanent filter = new FilterPermanent(getName() + " or another Ally");
         filter.add(Predicates.or(
         new CardIdPredicate(this.getId()),
         new SubtypePredicate("Ally")));
 
         // Whenever Kabira Evangel or another Ally enters the battlefield under your control, you may choose a color. If you do, Allies you control gain protection from the chosen color until end of turn.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new ChooseColorEffect(), filter, true));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new KabiraEvangelChooseColorEffect(), filter, true));
     }
 
     public KabiraEvangel(final KabiraEvangel card) {
@@ -91,39 +91,9 @@ public class KabiraEvangel extends CardImpl {
     }
 }
 
-class ChooseColorEffect extends OneShotEffect {
 
-    public ChooseColorEffect() {
-        super(Outcome.Benefit);
-        staticText = "choose a color.  All Allies you control gain protection from the chosen color until end of turn";
-    }
 
-    public ChooseColorEffect(final ChooseColorEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent perm = game.getPermanent(source.getSourceId());
-        if (player != null && perm != null) {
-            ChoiceColor colorChoice = new ChoiceColor();
-            if (player.choose(Outcome.Benefit, colorChoice, game)) {
-                game.informPlayers(perm.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
-                game.addEffect(new GainProtectionFromChosenColorEffect(colorChoice.getColor()), source);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public ChooseColorEffect copy() {
-        return new ChooseColorEffect(this);
-    }
-}
-
-class GainProtectionFromChosenColorEffect extends GainAbilityControlledEffect {
+class KabiraEvangelChooseColorEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent();
 
@@ -131,31 +101,44 @@ class GainProtectionFromChosenColorEffect extends GainAbilityControlledEffect {
         filter1.add(new ControllerPredicate(TargetController.YOU));
         filter1.add(new SubtypePredicate("Ally"));
     }
-    private final FilterCard filter2;
-    private final ObjectColor chosenColor;
 
-    public GainProtectionFromChosenColorEffect(ObjectColor chosenColor) {
-        super(new ProtectionAbility(new FilterCard()), Duration.EndOfTurn, filter1);
-        filter2 = (FilterCard) ((ProtectionAbility) getFirstAbility()).getFilter();
-        this.chosenColor = chosenColor;
+    public KabiraEvangelChooseColorEffect() {
+        super(Outcome.Benefit);
+        staticText = "choose a color.  All Allies you control gain protection from the chosen color until end of turn";
     }
 
-    public GainProtectionFromChosenColorEffect(final GainProtectionFromChosenColorEffect effect) {
+    public KabiraEvangelChooseColorEffect(final KabiraEvangelChooseColorEffect effect) {
         super(effect);
-        this.filter2 = effect.filter2.copy();
-        this.chosenColor = effect.chosenColor;
-    }
-
-    @Override
-    public GainProtectionFromChosenColorEffect copy() {
-        return new GainProtectionFromChosenColorEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        filter2.add(new ColorPredicate(chosenColor));
-        filter2.setMessage(chosenColor.getDescription());
-        setAbility(new ProtectionAbility(new FilterCard(filter2)));
-        return super.apply(game, source);
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        if (sourceObject != null && controller != null) {
+            ChoiceColor choice = new ChoiceColor();
+            while (!choice.isChosen()) {
+                controller.choose(outcome, choice, game);
+                if (!controller.isInGame()) {
+                    return false;
+                }
+            }
+            if (choice.getColor() == null) {
+                return false;
+            }
+            game.informPlayers(sourceObject.getName() + ": " + controller.getName() + " has chosen " + choice.getChoice());
+            FilterCard filterColor = new FilterCard();
+            filterColor.add(new ColorPredicate(choice.getColor()));
+            filterColor.setMessage(choice.getChoice());
+            ContinuousEffect effect = new GainAbilityAllEffect(new ProtectionAbility(new FilterCard(filterColor)), Duration.EndOfTurn, filter1);
+            game.addEffect(effect, source);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public KabiraEvangelChooseColorEffect copy() {
+        return new KabiraEvangelChooseColorEffect(this);
     }
 }

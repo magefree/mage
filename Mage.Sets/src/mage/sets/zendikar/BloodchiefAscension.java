@@ -28,21 +28,26 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.condition.common.OpponentLostLifeCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.SetTargetPointer;
 import mage.counters.CounterType;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -68,7 +73,13 @@ public class BloodchiefAscension extends CardImpl {
                 true));
 
         // Whenever a card is put into an opponent's graveyard from anywhere, if Bloodchief Ascension has three or more quest counters on it, you may have that player lose 2 life. If you do, you gain 2 life.
-        this.addAbility(new BloodchiefAscensionTriggeredAbility());
+        Ability ability = new ConditionalTriggeredAbility(
+                new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
+                        new LoseLifeTargetEffect(2), true, new FilterCard("a card"), TargetController.OPPONENT, SetTargetPointer.PLAYER),
+                new SourceHasCounterCondition(CounterType.QUEST, 3),
+                "Whenever a card is put into an opponent's graveyard from anywhere, if Bloodchief Ascension has three or more quest counters on it, you may have that player lose 2 life. If you do, you gain 2 life", true);
+        ability.addEffect(new GainLifeEffect(2));
+        this.addAbility(ability);
 
     }
 
@@ -79,49 +90,5 @@ public class BloodchiefAscension extends CardImpl {
     @Override
     public BloodchiefAscension copy() {
         return new BloodchiefAscension(this);
-    }
-}
-
-class BloodchiefAscensionTriggeredAbility extends TriggeredAbilityImpl {
-
-    private Condition condition;
-
-    public BloodchiefAscensionTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), true);
-        this.addEffect(new GainLifeEffect(2));
-        condition = new SourceHasCounterCondition(CounterType.QUEST, 3);
-    }
-
-    public BloodchiefAscensionTriggeredAbility(final BloodchiefAscensionTriggeredAbility ability) {
-        super(ability);
-        this.condition = ability.condition;
-    }
-
-    @Override
-    public BloodchiefAscensionTriggeredAbility copy() {
-        return new BloodchiefAscensionTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkInterveningIfClause(Game game) {
-        return condition.apply(game, this);
-    }
-
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
-            Card card = game.getCard(event.getTargetId());
-            if (card != null && !card.isCopy() && game.getOpponents(controllerId).contains(card.getOwnerId())) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(card.getOwnerId()));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a card is put into an opponent's graveyard from anywhere, if {this} has three or more quest counters on it, you may have that player lose 2 life. If you do, you gain 2 life.";
     }
 }

@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.EntersOrLeavesTheBattlefieldSourceTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -63,15 +63,11 @@ public class KeldonMarauders extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(2))));
         this.addAbility(new VanishingUpkeepAbility(2));
         this.addAbility(new VanishingSacrificeAbility());
+        
         // When Keldon Marauders enters the battlefield or leaves the battlefield, it deals 1 damage to target player.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1), false);
+        Ability ability = new EntersOrLeavesTheBattlefieldSourceTriggeredAbility(new DamageTargetEffect(1), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
-        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new DamageTargetEffect(1), false);
-        ability2.addTarget(new TargetPlayer());
-        this.addAbility(ability2);
-
-
     }
 
     public KeldonMarauders(final KeldonMarauders card) {

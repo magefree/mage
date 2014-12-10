@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.SkipNextUntapSourceEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepSourceEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
@@ -51,10 +51,10 @@ public class CloudcrestLake extends CardImpl {
         // {T}: Add {W} or {U} to your mana pool. Cloudcrest Lake doesn't untap during your next untap step.
         this.addAbility(new ColorlessManaAbility());
         Ability whiteManaAbility = new WhiteManaAbility();
-        whiteManaAbility.addEffect(new SkipNextUntapSourceEffect());
+        whiteManaAbility.addEffect(new DontUntapInControllersNextUntapStepSourceEffect());
         this.addAbility(whiteManaAbility);
         Ability blueManaAbility = new BlueManaAbility();
-        blueManaAbility.addEffect(new SkipNextUntapSourceEffect());
+        blueManaAbility.addEffect(new DontUntapInControllersNextUntapStepSourceEffect());
         this.addAbility(blueManaAbility);
     }
 

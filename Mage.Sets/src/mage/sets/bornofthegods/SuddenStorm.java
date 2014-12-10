@@ -29,7 +29,7 @@ package mage.sets.bornofthegods;
 
 import java.util.UUID;
 import mage.abilities.effects.keyword.ScryEffect;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -51,7 +51,7 @@ public class SuddenStorm extends CardImpl {
         // Tap up to two target creatures. Those creatures don't untap during their controllers' next untap steps. Scry 1.
         this.getSpellAbility().addEffect(new TapTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
-        this.getSpellAbility().addEffect(new SkipNextUntapTargetEffect());
+        this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect());
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 

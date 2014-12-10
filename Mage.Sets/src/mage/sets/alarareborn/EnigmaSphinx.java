@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.CascadeAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -65,7 +65,7 @@ public class EnigmaSphinx extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Enigma Sphinx is put into your graveyard from the battlefield, put it into your library third from the top.
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new EnigmaSphinxEffect()));
+        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new EnigmaSphinxEffect()));
 
         // Cascade
         this.addAbility(new CascadeAbility());

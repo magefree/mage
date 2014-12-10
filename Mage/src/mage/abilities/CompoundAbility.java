@@ -1,5 +1,6 @@
 package mage.abilities;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -14,9 +15,7 @@ public class CompoundAbility extends AbilitiesImpl<Ability> {
     }
 
     public CompoundAbility(String ruleText, Ability... abilities) {
-        for (Ability ability : abilities) {
-            add(ability);
-        }
+        addAll(Arrays.asList(abilities));
     }
 
     public CompoundAbility(final CompoundAbility compoundAbility) {

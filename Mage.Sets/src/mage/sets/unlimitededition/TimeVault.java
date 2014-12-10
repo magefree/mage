@@ -34,7 +34,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.SkipUntapSourceEffect;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -62,7 +62,7 @@ public class TimeVault extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         
         // Time Vault doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipUntapSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
         
         // If you would begin your turn while Time Vault is tapped, you may skip that turn instead. If you do, untap Time Vault.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TimeVaultReplacementEffect()));

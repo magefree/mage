@@ -36,7 +36,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -115,7 +115,7 @@ class FrostTitanAbility2 extends TriggeredAbilityImpl {
 
     public FrostTitanAbility2() {
         super(Zone.BATTLEFIELD, new TapTargetEffect(), false);
-        this.addEffect(new SkipNextUntapTargetEffect());
+        this.addEffect(new DontUntapInControllersNextUntapStepTargetEffect());
         this.addTarget(new TargetPermanent());
     }
 

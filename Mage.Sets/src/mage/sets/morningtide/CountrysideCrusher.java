@@ -34,8 +34,8 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
@@ -45,9 +45,8 @@ import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
+import mage.filter.common.FilterLandCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -70,7 +69,11 @@ public class CountrysideCrusher extends CardImpl {
         // At the beginning of your upkeep, reveal the top card of your library. If it's a land card, put it into your graveyard and repeat this process.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CountrysideCrusherEffect(), TargetController.YOU, false));
         // Whenever a land card is put into your graveyard from anywhere, put a +1/+1 counter on Countryside Crusher.
-        this.addAbility(new CountrysideCrusherTriggeredAbility());
+        this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                false, new FilterLandCard("a land card"),TargetController.YOU
+        ));
+
     }
 
     public CountrysideCrusher(final CountrysideCrusher card) {
@@ -121,38 +124,5 @@ class CountrysideCrusherEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-}
-
-
-class CountrysideCrusherTriggeredAbility extends TriggeredAbilityImpl {
-
-    public CountrysideCrusherTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
-    }
-
-    public CountrysideCrusherTriggeredAbility(final CountrysideCrusherTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public CountrysideCrusherTriggeredAbility copy() {
-        return new CountrysideCrusherTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
-            Card card = game.getCard(event.getTargetId());
-            if (card != null && card.getOwnerId().equals(this.getControllerId()) && card.getCardType().contains(CardType.LAND)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a land card is put into your graveyard from anywhere, put a +1/+1 counter on {this}";
     }
 }

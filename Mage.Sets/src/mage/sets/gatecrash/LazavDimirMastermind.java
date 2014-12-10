@@ -28,25 +28,23 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubLayer;
+import mage.constants.TargetController;
+import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 
 /**
@@ -70,7 +68,10 @@ public class LazavDimirMastermind extends CardImpl {
         this.addAbility(HexproofAbility.getInstance());
 
         // Whenever a creature card is put into an opponent's graveyard from anywhere, you may have Lazav, Dimir Mastermind become a copy of that card except its name is still Lazav, Dimir Mastermind, it's legendary in addition to its other types, and it gains hexproof and this ability.
-        this.addAbility(new CreatureCardPutOpponentGraveyardTriggeredAbility());
+        this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
+                new LazavDimirEffect(), true,
+                new FilterCreatureCard("a creature card"),
+                TargetController.OPPONENT, SetTargetPointer.CARD));
     }
 
     public LazavDimirMastermind(final LazavDimirMastermind card) {
@@ -83,45 +84,6 @@ public class LazavDimirMastermind extends CardImpl {
     }
 }
 
-class CreatureCardPutOpponentGraveyardTriggeredAbility extends TriggeredAbilityImpl {
-
-    public CreatureCardPutOpponentGraveyardTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new LazavDimirEffect(), true);
-    }
-
-    public CreatureCardPutOpponentGraveyardTriggeredAbility(final CreatureCardPutOpponentGraveyardTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public CreatureCardPutOpponentGraveyardTriggeredAbility copy() {
-        return new CreatureCardPutOpponentGraveyardTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE
-                && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
-            Card card = game.getCard(event.getTargetId());
-            if (card == null) {
-                return false;
-            }
-            if (game.getOpponents(controllerId).contains(event.getPlayerId())
-                    && card.getCardType().contains(CardType.CREATURE)) {
-                // store the card id to copy
-                game.getState().setValue(new StringBuilder("CardToCopy").append(getSourceId().toString()).toString(), card.getId());
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature card is put into an opponent's graveyard from anywhere, you may have {this} become a copy of that card except its name is still {this}, it's legendary in addition to its other types, and it gains hexproof and this ability.";
-    }
-}
-
 class LazavDimirEffect extends ContinuousEffectImpl {
 
     protected UUID IdOfCopiedCard;
@@ -129,6 +91,7 @@ class LazavDimirEffect extends ContinuousEffectImpl {
 
     public LazavDimirEffect() {
         super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
+        staticText = "have {this} become a copy of that card except its name is still {this}, it's legendary in addition to its other types, and it gains hexproof and this ability";
     }
 
     public LazavDimirEffect(final LazavDimirEffect effect) {
@@ -144,17 +107,13 @@ class LazavDimirEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Object object = game.getState().getValue(new StringBuilder("CardToCopy").append(source.getSourceId().toString()).toString());
-        Card card = null;
-        if (object instanceof UUID) {
-            card = game.getCard((UUID) object);
-        }
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (card == null || permanent == null) {
             return false;
         }
-        if (IdOfCopiedCard == null || !IdOfCopiedCard.equals((UUID) object)) {
-            IdOfCopiedCard = (UUID) object;
+        if (IdOfCopiedCard == null || !IdOfCopiedCard.equals(card.getId())) {
+            IdOfCopiedCard = card.getId();
             cardToCopy = card.copy();
             cardToCopy.assignNewId();
         }
@@ -184,7 +143,10 @@ class LazavDimirEffect extends ContinuousEffectImpl {
         }
         permanent.removeAllAbilities(source.getSourceId(), game);
         permanent.addAbility(HexproofAbility.getInstance(), source.getSourceId(), game);
-        permanent.addAbility(new CreatureCardPutOpponentGraveyardTriggeredAbility(), source.getSourceId(), game);
+        permanent.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
+                new LazavDimirEffect(), true,
+                new FilterCreatureCard("a creature card"),
+                TargetController.OPPONENT, SetTargetPointer.CARD), source.getSourceId(), game);
 
         for (Ability ability : cardToCopy.getAbilities()) {
             if (!permanent.getAbilities().contains(ability)) {

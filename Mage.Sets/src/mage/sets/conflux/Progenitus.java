@@ -30,7 +30,7 @@ package mage.sets.conflux;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
-import mage.abilities.common.PutIntoGraveFromAnywhereAbility;
+import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
 import mage.abilities.effects.common.RevealAndShuffleIntoLibrarySourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
@@ -69,7 +69,7 @@ public class Progenitus extends CardImpl {
         // Protection from everything
         this.addAbility(new ProgenitusProtectionAbility());
         // If Progenitus would be put into a graveyard from anywhere, reveal Progenitus and shuffle it into its owner's library instead.
-        this.addAbility(new PutIntoGraveFromAnywhereAbility(new RevealAndShuffleIntoLibrarySourceEffect()));
+        this.addAbility(new PutIntoGraveFromAnywhereSourceAbility(new RevealAndShuffleIntoLibrarySourceEffect()));
     }
 
     public Progenitus(final Progenitus card) {

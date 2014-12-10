@@ -36,7 +36,7 @@ import mage.abilities.condition.common.CastFromHandCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -108,7 +108,7 @@ class BreachingLeviathanEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (Permanent creature: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             creature.tap(game);
-            ContinuousEffect effect = new SkipNextUntapTargetEffect();
+            ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect();
             effect.setTargetPointer(new FixedTarget(creature.getId()));
             game.addEffect(effect, source);
         }

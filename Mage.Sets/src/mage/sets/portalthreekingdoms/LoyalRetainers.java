@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class LoyalRetainers extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("legendary creature card");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("legendary creature card from your graveyard");
 
     static {
         filter.add(new SupertypePredicate("Legendary"));
