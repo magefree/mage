@@ -218,23 +218,24 @@ public class Session {
     public void  userLostConnection() {
         boolean lockSet = false;
         try {
-            if(lock.tryLock(500, TimeUnit.MILLISECONDS)) {
+            if(lock.tryLock(5000, TimeUnit.MILLISECONDS)) {
                 lockSet = true;
-                logger.trace("SESSION LOCK SET sessionId: " + sessionId);
-                User user = UserManager.getInstance().getUser(userId);
-                if (user == null || !user.isConnected()) {
-                    return; //user was already disconnected by other thread
-                }
-                if (!user.getSessionId().equals(sessionId)) {
-                    // user already reconnected with another instance
-                    logger.info("OLD SESSION IGNORED - " + user.getName());
-                    return;
-                }
-                // logger.info("LOST CONNECTION - " + user.getName() + " id: " + userId);
-                UserManager.getInstance().disconnect(userId, DisconnectReason.LostConnection);
+                logger.debug("SESSION LOCK SET sessionId: " + sessionId);
             } else {
                 logger.error("CAN'T GET LOCK - userId: " + userId);
             }
+            User user = UserManager.getInstance().getUser(userId);
+            if (user == null || !user.isConnected()) {
+                return; //user was already disconnected by other thread
+            }
+            if (!user.getSessionId().equals(sessionId)) {
+                // user already reconnected with another instance
+                logger.info("OLD SESSION IGNORED - " + user.getName());
+                return;
+            }
+            // logger.info("LOST CONNECTION - " + user.getName() + " id: " + userId);
+            UserManager.getInstance().disconnect(userId, DisconnectReason.LostConnection);
+
         } catch (InterruptedException ex) {
             logger.error("SESSION LOCK lost connection - userId: " + userId, ex);
         }
@@ -250,13 +251,13 @@ public class Session {
     public void kill(DisconnectReason reason) {
         boolean lockSet = false;
         try {
-            if(lock.tryLock(500, TimeUnit.MILLISECONDS)) {
+            if(lock.tryLock(5000, TimeUnit.MILLISECONDS)) {
                 lockSet = true;
-                logger.debug("SESSION LOCK SET sessionId: " + sessionId);
-                UserManager.getInstance().removeUser(userId, reason);
+                logger.debug("SESSION LOCK SET sessionId: " + sessionId);                
             } else {
                 logger.error("SESSION LOCK - kill: userId " + userId);
             }
+            UserManager.getInstance().removeUser(userId, reason);
         } catch (InterruptedException ex) {
             logger.error("SESSION LOCK - kill: userId " + userId, ex);
         }
@@ -272,8 +273,8 @@ public class Session {
 
     public void fireCallback(final ClientCallback call) {
         try {
-                call.setMessageId(messageId++);
-                callbackHandler.handleCallbackOneway(new Callback(call));
+            call.setMessageId(messageId++);
+            callbackHandler.handleCallbackOneway(new Callback(call));
         } catch (HandleCallbackException ex) {
             User user = UserManager.getInstance().getUser(userId);
             logger.warn("SESSION CALLBACK EXCEPTION - " + (user != null ? user.getName():"") + " userId " + userId);
