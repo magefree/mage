@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
 
 import java.util.UUID;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -97,7 +97,7 @@ class ClingingMistsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (Permanent creature: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             creature.tap(game);
-            ContinuousEffect effect = new SkipNextUntapTargetEffect();
+            ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect();
             effect.setTargetPointer(new FixedTarget(creature.getId()));
             game.addEffect(effect, source);                
         }

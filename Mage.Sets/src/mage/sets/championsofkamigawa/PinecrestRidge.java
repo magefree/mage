@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.SkipNextUntapSourceEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepSourceEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
@@ -48,10 +48,10 @@ public class PinecrestRidge extends CardImpl {
         this.expansionSetCode = "CHK";
         this.addAbility(new ColorlessManaAbility());
         Ability redManaAbility = new RedManaAbility();
-        redManaAbility.addEffect(new SkipNextUntapSourceEffect());
+        redManaAbility.addEffect(new DontUntapInControllersNextUntapStepSourceEffect());
         this.addAbility(redManaAbility);
         Ability greenManaAbility = new GreenManaAbility();
-        greenManaAbility.addEffect(new SkipNextUntapSourceEffect());
+        greenManaAbility.addEffect(new DontUntapInControllersNextUntapStepSourceEffect());
         this.addAbility(greenManaAbility);
     }
 

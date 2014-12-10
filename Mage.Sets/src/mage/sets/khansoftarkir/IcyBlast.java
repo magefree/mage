@@ -32,7 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -83,7 +83,7 @@ public class IcyBlast extends CardImpl {
     }
 }
 
-class IcyBlastSkipNextUntapTargetEffect extends SkipNextUntapTargetEffect {
+class IcyBlastSkipNextUntapTargetEffect extends DontUntapInControllersNextUntapStepTargetEffect {
 
     public IcyBlastSkipNextUntapTargetEffect() {
         super();

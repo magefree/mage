@@ -29,13 +29,13 @@ package mage.sets.innistrad;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.SkipUntapSourceEffect;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -76,10 +76,13 @@ public class GrimgrinCorpseBorn extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Grimgrin, Corpse-Born enters the battlefield tapped and doesn't untap during your untap step.
-        this.addAbility(new EntersBattlefieldTappedAbility());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipUntapSourceEffect()));
+        Ability ability = new EntersBattlefieldTappedAbility(
+                "{this} enters the battlefield tapped and doesn't untap during your untap step.");
+        ability.addEffect(new DontUntapInControllersUntapStepSourceEffect());
+        this.addAbility(ability);
+        
         // Sacrifice another creature: Untap Grimgrin and put a +1/+1 counter on it.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(),
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(),
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
         ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
         this.addAbility(ability);

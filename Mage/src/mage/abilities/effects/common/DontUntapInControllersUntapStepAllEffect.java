@@ -41,7 +41,6 @@ import static mage.constants.TargetController.YOU;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -51,26 +50,26 @@ import mage.players.Player;
  * @author LevelX2
  */
 
-public class SkipUntapAllEffect extends ContinuousRuleModifiyingEffectImpl {
+public class DontUntapInControllersUntapStepAllEffect extends ContinuousRuleModifiyingEffectImpl {
 
     TargetController targetController;
     FilterPermanent filter;
     
-    public SkipUntapAllEffect(Duration duration, TargetController targetController, FilterPermanent filter) {
+    public DontUntapInControllersUntapStepAllEffect(Duration duration, TargetController targetController, FilterPermanent filter) {
         super(duration, Outcome.Detriment, false, false);
         this.targetController = targetController;
         this.filter = filter;
     }
 
-    public SkipUntapAllEffect(final SkipUntapAllEffect effect) {
+    public DontUntapInControllersUntapStepAllEffect(final DontUntapInControllersUntapStepAllEffect effect) {
         super(effect);
         this.targetController = effect.targetController;
         this.filter = effect.filter;
     }
 
     @Override
-    public SkipUntapAllEffect copy() {
-        return new SkipUntapAllEffect(this);
+    public DontUntapInControllersUntapStepAllEffect copy() {
+        return new DontUntapInControllersUntapStepAllEffect(this);
     }
 
     @Override
@@ -80,7 +79,7 @@ public class SkipUntapAllEffect extends ContinuousRuleModifiyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == EventType.UNTAP) {
+        if (GameEvent.EventType.UNTAP.equals(event.getType()) && PhaseStep.UNTAP.equals(game.getTurn().getStepType())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null) {
                 switch(targetController) {
@@ -100,7 +99,8 @@ public class SkipUntapAllEffect extends ContinuousRuleModifiyingEffectImpl {
                     default:
                         throw new RuntimeException("Type of TargetController not supported!");
                 }
-                if (filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
+                if (game.getActivePlayerId().equals(permanent.getControllerId()) && // controller's untap step
+                        filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
                     return true;
                 }
             }
@@ -115,17 +115,11 @@ public class SkipUntapAllEffect extends ContinuousRuleModifiyingEffectImpl {
         }
         StringBuilder sb =  new StringBuilder(filter.getMessage()).append(" don't untap during ");
         switch(targetController) {
-            case YOU:
-                sb.append("your ");
-                break;
-            case OPPONENT:
-                sb.append("your opponents' ");
-                break;
             case ANY:
-                sb.append("their controllers' ");
+                sb.append("their controller's ");
                 break;
             default:
-                throw new RuntimeException("Type of TargetController not supported!");
+                throw new RuntimeException("Type of TargetController not supported yet!");
         }        
         sb.append("untap steps");
         return sb.toString();

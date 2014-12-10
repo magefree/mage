@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -65,7 +65,7 @@ public class FrostLynx extends CardImpl {
 
         // When Frost Lynx enters the battlefield, tap target creature an opponent controls.  It doesn't untap during its controller's next untap step.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect(), false);
-        ability.addEffect(new SkipNextUntapTargetEffect("It"));
+        ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("It"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

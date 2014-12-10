@@ -34,7 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.SkipUntapAllEffect;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -54,7 +54,7 @@ public class IntruderAlarm extends CardImpl {
         this.color.setBlue(true);
 
         // Creatures don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipUntapAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, new FilterCreaturePermanent("Creatures"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, new FilterCreaturePermanent("Creatures"))));
         // Whenever a creature enters the battlefield, untap all creatures.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(new UntapAllCreatureEffect(), new FilterCreaturePermanent()));
     }

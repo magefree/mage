@@ -30,7 +30,7 @@ package mage.sets.theros;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.HeroicAbility;
 import mage.cards.CardImpl;
@@ -65,7 +65,7 @@ public class WavecrashTriton extends CardImpl {
         // Heroic - Whenever you cast a spell that targets Wavecrash Triton, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.
         Ability ability = new HeroicAbility(new TapTargetEffect());
         ability.addTarget(new TargetCreaturePermanent(filter));
-        ability.addEffect(new SkipNextUntapTargetEffect("That creature"));
+        ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("That creature"));
         this.addAbility(ability);
     }
 

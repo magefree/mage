@@ -37,7 +37,7 @@ import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DestroyAllControlledTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
@@ -68,7 +68,7 @@ public class AjaniVengeant extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
         // +1: Target permanent doesn't untap during its controller's next untap step.
-        LoyaltyAbility ability1 = new LoyaltyAbility(new SkipNextUntapTargetEffect(), 1);
+        LoyaltyAbility ability1 = new LoyaltyAbility(new DontUntapInControllersNextUntapStepTargetEffect(), 1);
         ability1.addTarget(new TargetPermanent());
         this.addAbility(ability1);
 

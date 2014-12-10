@@ -38,7 +38,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect;
 import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect.HandSizeModification;
@@ -77,7 +77,7 @@ public class TamiyoTheMoonSage extends CardImpl {
 
         // +1: Tap target permanent. It doesn't untap during its controller's next untap step.
         LoyaltyAbility ability = new LoyaltyAbility(new TapTargetEffect(), 1);
-        ability.addEffect(new SkipNextUntapTargetEffect());
+        ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect());
         Target target = new TargetPermanent();
         ability.addTarget(target);
         this.addAbility(ability);

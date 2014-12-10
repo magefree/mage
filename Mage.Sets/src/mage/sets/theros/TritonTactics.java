@@ -38,7 +38,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -190,7 +190,7 @@ class TritonTacticsEndOfCombatEffect extends OneShotEffect {
                     if (attackerSet.contains(CardUtil.getCardZoneString(null, creature.getId(), game))) {
                         // tap creature and add the not untap effect
                         creature.tap(game);
-                        ContinuousEffect effect  = new SkipNextUntapTargetEffect();
+                        ContinuousEffect effect  = new DontUntapInControllersNextUntapStepTargetEffect();
                         effect.setTargetPointer(new FixedTarget(creature.getId()));
                         game.addEffect(effect, source);
                         game.informPlayers(new StringBuilder("Triton Tactics: ").append(creature.getName()).append(" doesn't untap during its controller's next untap step").toString());

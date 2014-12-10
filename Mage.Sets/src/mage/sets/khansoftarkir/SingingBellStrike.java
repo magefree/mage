@@ -35,7 +35,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.SkipEnchantedUntapEffect;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
 import mage.abilities.effects.common.TapEnchantedEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
@@ -73,7 +73,7 @@ public class SingingBellStrike extends CardImpl {
         // When Singing Bell Strike enters the battlefield, tap enchanted creature.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()));
         // Enchanted creature doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipEnchantedUntapEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
         // Enchanted creature has "{6}: Untap this creature."
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new GenericManaCost(6));
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield);

@@ -36,7 +36,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.*;
 import mage.game.Game;
@@ -163,7 +163,7 @@ class PermafrostTrapEffect extends OneShotEffect {
             Permanent creature = game.getPermanent(targetId);
             if (creature != null) {
                 creature.tap(game);
-                SkipNextUntapTargetEffect effect = new SkipNextUntapTargetEffect();
+                DontUntapInControllersNextUntapStepTargetEffect effect = new DontUntapInControllersNextUntapStepTargetEffect();
                 effect.setTargetPointer(new FixedTarget(targetId));
                 game.addEffect(effect, source);
             }

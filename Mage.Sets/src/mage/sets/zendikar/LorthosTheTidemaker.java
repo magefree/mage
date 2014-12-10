@@ -38,7 +38,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
@@ -110,7 +110,7 @@ class LorthosTheTideMakerEffect extends OneShotEffect {
                         Permanent permanent = game.getPermanent(target);
                         if (permanent != null) {
                             permanent.tap(game);
-                            ContinuousEffect effect = new SkipNextUntapTargetEffect();
+                            ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect();
                             effect.setTargetPointer(new FixedTarget(permanent.getId()));
                             game.addEffect(effect, source);
                         }

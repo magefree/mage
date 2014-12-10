@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.CipherEffect;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.TargetController;
@@ -59,7 +59,7 @@ public class HandsOfBinding extends CardImpl {
 
         //Tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.
         this.getSpellAbility().addEffect(new TapTargetEffect());
-        this.getSpellAbility().addEffect(new SkipNextUntapTargetEffect());
+        this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         //Cipher 
         this.getSpellAbility().addEffect(new CipherEffect());

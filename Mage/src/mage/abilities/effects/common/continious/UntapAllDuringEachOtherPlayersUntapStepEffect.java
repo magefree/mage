@@ -73,13 +73,13 @@ public class UntapAllDuringEachOtherPlayersUntapStepEffect extends ContinuousEff
         if (!applied && layer.equals(Layer.RulesEffects)) {
             if (!game.getActivePlayerId().equals(source.getControllerId()) && game.getStep().getType() == PhaseStep.UNTAP) {
                 game.getState().setValue(source.getSourceId() + "applied", true);
-                for (Permanent artifact: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+                for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                     boolean untap = true;
-                    for (RestrictionEffect effect: game.getContinuousEffects().getApplicableRestrictionEffects(artifact, game).keySet()) {
-                        untap &= effect.canBeUntapped(artifact, game);
+                    for (RestrictionEffect effect: game.getContinuousEffects().getApplicableRestrictionEffects(permanent, game).keySet()) {
+                        untap &= effect.canBeUntapped(permanent, game);
                     }
                     if (untap) {
-                        artifact.untap(game);
+                        permanent.untap(game);
                     }
                 }
             }

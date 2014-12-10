@@ -33,7 +33,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfClashWonEffect;
 import mage.abilities.effects.common.PreventAllDamageByAllEffect;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -89,7 +89,7 @@ class PollenLullabyEffect extends OneShotEffect {
         if (player != null) {
             for (Permanent creature: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
                 creature.tap(game);
-                ContinuousEffect effect = new SkipNextUntapTargetEffect("This creature");
+                ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect("This creature");
                 effect.setTargetPointer(new FixedTarget(creature.getId()));
                 game.addEffect(effect, source);
             }

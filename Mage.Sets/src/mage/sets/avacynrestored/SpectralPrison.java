@@ -34,7 +34,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DestroySourceEffect;
-import mage.abilities.effects.common.SkipEnchantedUntapEffect;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
@@ -66,11 +66,10 @@ public class SpectralPrison extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        
         // Enchanted creature doesn't untap during its controller's untap step.
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipEnchantedUntapEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
 
         // When enchanted creature becomes the target of a spell, sacrifice Spectral Prison.
         this.addAbility(new SpectralPrisonAbility());

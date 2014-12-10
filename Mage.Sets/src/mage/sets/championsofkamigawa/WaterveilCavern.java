@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.SkipNextUntapSourceEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepSourceEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
@@ -46,12 +46,16 @@ public class WaterveilCavern extends CardImpl {
     public WaterveilCavern(UUID ownerId) {
         super(ownerId, 286, "Waterveil Cavern", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "CHK";
+
+        // Tap: Add 1 to your mana pool.
         this.addAbility(new ColorlessManaAbility());
+
+        // Tap: Add Blue or Black to your mana pool. Waterveil Cavern doesn't untap during your next untap step.
         Ability blueManaAbility = new BlueManaAbility();
-        blueManaAbility.addEffect(new SkipNextUntapSourceEffect());
+        blueManaAbility.addEffect(new DontUntapInControllersNextUntapStepSourceEffect());
         this.addAbility(blueManaAbility);
         Ability blackManaAbility = new BlackManaAbility();
-        blackManaAbility.addEffect(new SkipNextUntapSourceEffect());
+        blackManaAbility.addEffect(new DontUntapInControllersNextUntapStepSourceEffect());
         this.addAbility(blackManaAbility);
     }
 

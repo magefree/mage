@@ -45,8 +45,8 @@ import mage.target.targetpointer.FixedTarget;
 public class DealsDamageToACreatureAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
     private boolean combatOnly;
-    private boolean setTargetPointer;
-    private String attachedDescription;
+    private final boolean setTargetPointer;
+    private final String attachedDescription;
 
     public DealsDamageToACreatureAttachedTriggeredAbility(Effect effect, boolean combatOnly, String attachedDescription, boolean optional, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);

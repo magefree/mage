@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class SkipNextUntapTargetEffect extends ContinuousRuleModifiyingEffectImpl {
+public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousRuleModifiyingEffectImpl {
 
     private int validForTurnNum;
 
@@ -53,23 +53,23 @@ public class SkipNextUntapTargetEffect extends ContinuousRuleModifiyingEffectImp
      * If this is needed, the validForTurnNum has to be saved per controller.
      * 
      */
-    public SkipNextUntapTargetEffect() {
+    public DontUntapInControllersNextUntapStepTargetEffect() {
         super(Duration.Custom, Outcome.Detriment, false, true);
     }
 
-    public SkipNextUntapTargetEffect(String text) {
+    public DontUntapInControllersNextUntapStepTargetEffect(String text) {
         this();
         this.staticText = text;
     }
 
-    public SkipNextUntapTargetEffect(final SkipNextUntapTargetEffect effect) {
+    public DontUntapInControllersNextUntapStepTargetEffect(final DontUntapInControllersNextUntapStepTargetEffect effect) {
         super(effect);
         this.validForTurnNum = effect.validForTurnNum;
     }
 
     @Override
-    public SkipNextUntapTargetEffect copy() {
-        return new SkipNextUntapTargetEffect(this);
+    public DontUntapInControllersNextUntapStepTargetEffect copy() {
+        return new DontUntapInControllersNextUntapStepTargetEffect(this);
     }
 
     @Override
@@ -93,7 +93,7 @@ public class SkipNextUntapTargetEffect extends ContinuousRuleModifiyingEffectImp
         // if we don't check for turn number, every untap step of a turn only one effect would be used instead of correctly only one time
         // to skip the untap effect.
         
-        // Discard effect if related to previous turn
+        // Discard effect if it's related to a previous turn
         if (validForTurnNum > 0 && validForTurnNum < game.getTurnNum()) {
             discard();
             return false;
@@ -124,7 +124,10 @@ public class SkipNextUntapTargetEffect extends ContinuousRuleModifiyingEffectImp
         
         if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == EventType.UNTAP) {
             if (targetPointer.getTargets(game, source).contains(event.getTargetId())) {
-                return true;
+                Permanent permanent = game.getPermanent(event.getTargetId());
+                if (permanent != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
+                    return true;
+                }
             }
         }
         return false;

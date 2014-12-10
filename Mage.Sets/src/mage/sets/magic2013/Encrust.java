@@ -33,7 +33,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CantActivateAbilitiesAttachedEffect;
-import mage.abilities.effects.common.SkipEnchantedUntapEffect;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -74,7 +74,7 @@ public class Encrust extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted permanent doesn't untap during its controller's untap step and its activated abilities can't be activated.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipEnchantedUntapEffect());
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect());
         Effect effect = new CantActivateAbilitiesAttachedEffect();
         effect.setText("and its activated abilities can't be activated");
         ability.addEffect(effect);

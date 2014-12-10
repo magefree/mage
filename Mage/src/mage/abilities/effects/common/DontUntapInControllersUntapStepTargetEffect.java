@@ -45,19 +45,19 @@ import mage.game.permanent.Permanent;
  * 
  * @author BetaSteward_at_googlemail.com
  */
-public class SkipUntapTargetEffect extends ContinuousRuleModifiyingEffectImpl {
+public class DontUntapInControllersUntapStepTargetEffect extends ContinuousRuleModifiyingEffectImpl {
 
-    public SkipUntapTargetEffect(Duration duration) {
+    public DontUntapInControllersUntapStepTargetEffect(Duration duration) {
         super(duration, Outcome.Detriment);
     }
 
-    public SkipUntapTargetEffect(final SkipUntapTargetEffect effect) {
+    public DontUntapInControllersUntapStepTargetEffect(final DontUntapInControllersUntapStepTargetEffect effect) {
         super(effect);
     }
 
     @Override
-    public SkipUntapTargetEffect copy() {
-        return new SkipUntapTargetEffect(this);
+    public DontUntapInControllersUntapStepTargetEffect copy() {
+        return new DontUntapInControllersUntapStepTargetEffect(this);
     }
 
     @Override
@@ -77,10 +77,13 @@ public class SkipUntapTargetEffect extends ContinuousRuleModifiyingEffectImpl {
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == EventType.UNTAP) {
+        if (GameEvent.EventType.UNTAP.equals(event.getType()) && PhaseStep.UNTAP.equals(game.getTurn().getStepType())) {
             for (UUID targetId : targetPointer.getTargets(game, source)) {
                 if (event.getTargetId().equals(targetId)) {
-                    return true;
+                    Permanent permanent = game.getPermanent(targetId);
+                    if (permanent != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
+                        return true;
+                    }
                 }
             }
         }
@@ -92,9 +95,8 @@ public class SkipUntapTargetEffect extends ContinuousRuleModifiyingEffectImpl {
             if (staticText != null) {
                 return staticText;
             }
-            return new StringBuilder("Target ").append(mode.getTargets().get(0).getTargetName())
-                    .append(" doesn't untap ")
-                    .append(getDuration().toString()).toString();
+            return "Target " + mode.getTargets().get(0).getTargetName()
+                    + " doesn't untap during its controller's untap step" + (getDuration().toString().isEmpty() ? "":" " + getDuration());
     }
 
 }

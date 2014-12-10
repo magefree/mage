@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.SkipUntapSourceEffect;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.common.BecomesTargetControllerSpellTriggeredAbility;
 
@@ -61,7 +61,7 @@ public class DormantGomazoa extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // Dormant Gomazoa doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipUntapSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
 
         // Whenever you become the target of a spell, you may untap Dormant Gomazoa.
         this.addAbility(new BecomesTargetControllerSpellTriggeredAbility(new UntapSourceEffect(), true));

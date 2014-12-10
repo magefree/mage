@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.SkipNextUntapSourceEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepSourceEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
@@ -51,10 +51,10 @@ public class VecTownships extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Add {G} or {W} to your mana pool. Vec Townships doesn't untap during your next untap step.
         Ability ability = new GreenManaAbility();
-        ability.addEffect(new SkipNextUntapSourceEffect());
+        ability.addEffect(new DontUntapInControllersNextUntapStepSourceEffect());
         this.addAbility(ability);
         ability = new WhiteManaAbility();
-        ability.addEffect(new SkipNextUntapSourceEffect());
+        ability.addEffect(new DontUntapInControllersNextUntapStepSourceEffect());
         this.addAbility(ability);
     }
 

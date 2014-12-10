@@ -9,23 +9,23 @@ import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
-public class SkipNextUntapSourceEffect extends ContinuousRuleModifiyingEffectImpl {
+public class DontUntapInControllersNextUntapStepSourceEffect extends ContinuousRuleModifiyingEffectImpl {
 
     private int validForTurnNum;
     
-    public SkipNextUntapSourceEffect() {
+    public DontUntapInControllersNextUntapStepSourceEffect() {
         super(Duration.Custom, Outcome.Detriment, false, true);
         staticText = "{this} doesn't untap during your next untap step";
         validForTurnNum = 0;
     }
 
-    public SkipNextUntapSourceEffect(final SkipNextUntapSourceEffect effect) {
+    public DontUntapInControllersNextUntapStepSourceEffect(final DontUntapInControllersNextUntapStepSourceEffect effect) {
         super(effect);
     }
 
     @Override
-    public SkipNextUntapSourceEffect copy() {
-        return new SkipNextUntapSourceEffect(this);
+    public DontUntapInControllersNextUntapStepSourceEffect copy() {
+        return new DontUntapInControllersNextUntapStepSourceEffect(this);
     }
 
     @Override
@@ -46,10 +46,10 @@ public class SkipNextUntapSourceEffect extends ContinuousRuleModifiyingEffectImp
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         // the check for turn number is needed if multiple effects are added to prevent untap in next untap step
-        // if we don't check for turn number, every turn only one effect would be used instead of correctly only one time
-        // to skip the untap effect.
+        // if we don't check for turn number, every turn only one effect would be used instead of correctly consuming
+        // all existing skip the next untap step effects.
         
-        // Discard effect if related to previous turn
+        // Discard effect if related to a previous turn
         if (validForTurnNum > 0 && validForTurnNum < game.getTurnNum()) {
             discard();
             return false;
@@ -57,7 +57,7 @@ public class SkipNextUntapSourceEffect extends ContinuousRuleModifiyingEffectImp
         // remember the turn of the untap step the effect has to be applied
         if (GameEvent.EventType.UNTAP_STEP.equals(event.getType()) 
                 && game.getActivePlayerId().equals(source.getControllerId())) {
-            if (validForTurnNum == game.getTurnNum()) { // the turn has a secon untap step but the effect is already related to the first untap step
+            if (validForTurnNum == game.getTurnNum()) { // the turn has a second untap step but the effect is already related to the first untap step
                 discard();
                 return false;                
             }
@@ -66,6 +66,7 @@ public class SkipNextUntapSourceEffect extends ContinuousRuleModifiyingEffectImp
         // skip untap action
         if (game.getTurn().getStepType() == PhaseStep.UNTAP
                 && event.getType() == GameEvent.EventType.UNTAP
+                && game.getActivePlayerId().equals(source.getControllerId())
                 && event.getTargetId().equals(source.getSourceId())) {
                 discard();
             return true;

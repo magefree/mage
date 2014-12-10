@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.SkipNextUntapSourceEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepSourceEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
@@ -48,10 +48,10 @@ public class TranquilGarden extends CardImpl {
         this.expansionSetCode = "CHK";
         this.addAbility(new ColorlessManaAbility());
         Ability greenManaAbility = new GreenManaAbility();
-        greenManaAbility.addEffect(new SkipNextUntapSourceEffect());
+        greenManaAbility.addEffect(new DontUntapInControllersNextUntapStepSourceEffect());
         this.addAbility(greenManaAbility);
         Ability whiteManaAbility = new WhiteManaAbility();
-        whiteManaAbility.addEffect(new SkipNextUntapSourceEffect());
+        whiteManaAbility.addEffect(new DontUntapInControllersNextUntapStepSourceEffect());
         this.addAbility(whiteManaAbility);
     }
 

@@ -30,7 +30,7 @@ package mage.sets.lorwyn;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -99,7 +99,7 @@ class EntanglingClashTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (EventType.CLASHED.equals(event.getType()) && event.getPlayerId().equals(getControllerId())) {
             if (event.getFlag()) { // clash won
-                addEffect(new SkipNextUntapTargetEffect("that creature"));
+                addEffect(new DontUntapInControllersNextUntapStepTargetEffect("that creature"));
             }
             return true;
         }

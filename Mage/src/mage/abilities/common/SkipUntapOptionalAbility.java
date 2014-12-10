@@ -27,8 +27,8 @@
  */
 package mage.abilities.common;
 
-import mage.constants.Zone;
 import mage.abilities.effects.common.SkipUntapOptionalSourceEffect;
+import mage.constants.Zone;
 
 /**
  * Implements:
