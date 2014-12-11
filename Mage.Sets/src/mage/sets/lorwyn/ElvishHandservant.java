@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
@@ -58,7 +58,9 @@ public class ElvishHandservant extends CardImpl {
         this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), filter, true));
+
+        // Whenever a player casts a Giant spell, you may put a +1/+1 counter on Elvish Handservant.
+        this.addAbility(new SpellCastAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), filter, true));
     }
 
     public ElvishHandservant(final ElvishHandservant card) {
