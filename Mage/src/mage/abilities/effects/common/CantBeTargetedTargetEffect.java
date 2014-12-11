@@ -48,7 +48,7 @@ public class CantBeTargetedTargetEffect extends ContinuousRuleModifiyingEffectIm
     private final FilterStackObject filterSource;
 
     public CantBeTargetedTargetEffect(FilterStackObject filterSource, Duration duration) {
-        super(duration, Outcome.Benefit);
+        super(duration, Outcome.Benefit, false, false);
         this.filterSource = filterSource;
     }
 

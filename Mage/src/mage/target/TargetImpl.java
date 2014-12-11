@@ -328,7 +328,7 @@ public abstract class TargetImpl implements Target {
     public boolean isLegal(Ability source, Game game) {
         //20101001 - 608.2b
         Set <UUID> illegalTargets = new HashSet<>();
-        int replacedTargets = 0;
+//        int replacedTargets = 0;
         for (UUID targetId: targets.keySet()) {
             Card card = game.getCard(targetId);
             if (card != null) {
@@ -338,7 +338,8 @@ public abstract class TargetImpl implements Target {
                 }
             }
             if (!notTarget && game.replaceEvent(GameEvent.getEvent(EventType.TARGET, targetId, source.getSourceId(), source.getControllerId()))) {
-                replacedTargets++;
+//                replacedTargets++;
+                illegalTargets.add(targetId);
                 continue;
             }
             if (!canTarget(targetId, source, game)) {
@@ -349,9 +350,9 @@ public abstract class TargetImpl implements Target {
         for (UUID targetId: illegalTargets) {
             targets.remove(targetId);
         }
-        if (replacedTargets > 0 && replacedTargets == targets.size()) {
-            return false;
-        }
+//        if (replacedTargets > 0 && replacedTargets == targets.size()) {
+//            return false;
+//        }
         if (minNumberOfTargets == 0 && targets.isEmpty()) {
             return true;
         }
