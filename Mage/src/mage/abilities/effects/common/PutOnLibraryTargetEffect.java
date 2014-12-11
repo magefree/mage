@@ -110,7 +110,7 @@ public class PutOnLibraryTargetEffect extends OneShotEffect {
                             iterator.remove();
                         }
                     }
-                    owner.putCardsOnTopOfLibrary(cardsPlayer, game, source, true);
+                    owner.putCardsOnTopOfLibrary(cardsPlayer, game, source, onTop);
                 }
             }
             while (!permanents.isEmpty()) {
@@ -125,7 +125,7 @@ public class PutOnLibraryTargetEffect extends OneShotEffect {
                             iterator.remove();
                         }
                     }
-                    owner.putCardsOnTopOfLibrary(cardsPlayer, game, source, true);
+                    owner.putCardsOnTopOfLibrary(cardsPlayer, game, source, onTop);
                 }
             }
             return true;
