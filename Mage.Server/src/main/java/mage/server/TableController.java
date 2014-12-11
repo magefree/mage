@@ -375,14 +375,17 @@ public class TableController {
     }
 
     private void updateDeck(UUID userId, UUID playerId, Deck deck) {
-        if (table.getState() == TableState.SIDEBOARDING) {
-            match.updateDeck(playerId, deck);
-        }
-        else {
+        if (table.isTournament()) {
             if (tournament != null) {
                 TournamentManager.getInstance().updateDeck(tournament.getId(), playerId, deck);
             } else {
-                logger.fatal("Tournament == null  table: " + table.getId());
+                logger.fatal("Tournament == null  table: " + table.getId() +" userId: " + userId);
+            }
+        } else {
+            if (TableState.SIDEBOARDING.equals(table.getState())) {
+                match.updateDeck(playerId, deck);
+            } else {
+                // deck was meanwhile submitted so the autoupdate can be ignored
             }
         }
     }

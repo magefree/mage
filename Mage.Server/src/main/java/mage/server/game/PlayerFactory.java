@@ -45,7 +45,7 @@ public class PlayerFactory {
     private static final PlayerFactory INSTANCE = new PlayerFactory();
     private static final Logger logger = Logger.getLogger(PlayerFactory.class);
 
-    private Map<String, Class> playerTypes = new LinkedHashMap<String, Class>();
+    private final Map<String, Class> playerTypes = new LinkedHashMap<>();
 
     public static PlayerFactory getInstance() {
         return INSTANCE;
@@ -61,7 +61,7 @@ public class PlayerFactory {
             if (playerTypeClass != null) {
                 con = playerTypeClass.getConstructor(new Class[]{String.class, RangeOfInfluence.class, int.class});
                 player = (Player)con.newInstance(new Object[] {name, range, skill});
-                logger.debug("Player created: " + name + "-" + player.getId().toString());
+                logger.debug("Player created: " + name + " - " + player.getId());
                 return player;
             }
             else {

@@ -242,10 +242,10 @@ public class MageServerImpl implements MageServer {
             @Override
             public Boolean execute() throws MageException {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-                if (logger.isDebugEnabled()) {
+                if (logger.isTraceEnabled()) {
                     User user = UserManager.getInstance().getUser(userId);
                     if (user != null) {
-                        logger.debug("join tourn. tableId: " + tableId + " " + name);
+                        logger.trace("join tourn. tableId: " + tableId + " " + name);
                     }
                 }                
                 if (userId == null) {
