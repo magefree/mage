@@ -29,10 +29,15 @@ package mage.sets.conspiracy;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.Mana;
+import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.keyword.DethroneAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
@@ -53,6 +58,7 @@ public class TreasonousOgre extends CardImpl {
         // Dethrone
         this.addAbility(new DethroneAbility());
         // Pay 3 life: Add {R} to your mana pool.
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(ColoredManaSymbol.R), new PayLifeCost(3)));
     }
 
     public TreasonousOgre(final TreasonousOgre card) {
