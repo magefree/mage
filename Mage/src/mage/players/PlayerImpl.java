@@ -819,13 +819,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     public boolean putCardsOnBottomOfLibrary(Cards cards, Game game, Ability source, boolean anyOrder) {
         if (cards.size() != 0) {
             if (!anyOrder) {
-                for (UUID cardId : cards) {
-                    Card card =game.getCard(cardId);
-                    
-                    if (card != null) {
-                        Zone fromZone = game.getState().getZone(cardId);
-                        this.moveCardToLibraryWithInfo(card, source.getSourceId(), game, fromZone, false, false);
-                    }
+                for (UUID objectId : cards) {
+                    moveObjectToLibrary(objectId, source.getSourceId(), game, false, false);
                 }
             } else {
                 TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library (last one chosen will be bottommost)"));
@@ -835,32 +830,36 @@ public abstract class PlayerImpl implements Player, Serializable {
                     Card chosenCard = cards.get(target.getFirstTarget(), game);
                     if (chosenCard != null) {
                         cards.remove(chosenCard);
-                        Zone fromZone = game.getState().getZone(chosenCard.getId());
-                        this.moveCardToLibraryWithInfo(chosenCard, source.getSourceId(), game, fromZone, false, false);
+                        moveObjectToLibrary(chosenCard.getId(), source.getSourceId(), game, false, false);
                     }
                     target.clearChosen();
                 }
                 if (cards.size() == 1) {
                     Card chosenCard = cards.get(cards.iterator().next(), game);
-                    Zone fromZone = game.getState().getZone(chosenCard.getId());
-                    this.moveCardToLibraryWithInfo(chosenCard, source.getSourceId(), game, fromZone, false, false);
+                    moveObjectToLibrary(chosenCard.getId(), source.getSourceId(), game, false, false);
                 }
             }
         }
         return true;
     }
 
+
+
+    /**
+     * Can be cards or permanents  that go to library
+     *
+     * @param cards
+     * @param game
+     * @param source
+     * @param anyOrder
+     * @return
+     */
     @Override
     public boolean putCardsOnTopOfLibrary(Cards cards, Game game, Ability source, boolean anyOrder) {
         if (cards.size() != 0) {
             if (!anyOrder) {
                 for (UUID cardId : cards) {
-                    Card card =game.getCard(cardId);
-
-                    if (card != null) {
-                        Zone fromZone = game.getState().getZone(cardId);
-                        this.moveCardToLibraryWithInfo(card, source.getSourceId(), game, fromZone, true, false);
-                    }
+                    moveObjectToLibrary(cardId, source.getSourceId(), game, true, false);
                 }
             } else {
                 TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the top of your library (last one chosen will be topmost)"));
@@ -870,31 +869,29 @@ public abstract class PlayerImpl implements Player, Serializable {
                     Card chosenCard = cards.get(target.getFirstTarget(), game);
                     if (chosenCard != null) {
                         cards.remove(chosenCard);
-                        Zone fromZone = game.getState().getZone(chosenCard.getId());
-                        if (fromZone.equals(Zone.BATTLEFIELD)) {
-                            Permanent permanent = game.getPermanent(chosenCard.getId());
-                            this.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, fromZone, true, false);
-                        } else {
-                            this.moveCardToLibraryWithInfo(chosenCard, source.getSourceId(), game, fromZone, true, false);
-                        }
+                        moveObjectToLibrary(chosenCard.getId(), source.getSourceId(), game, true, false);
                     }
                     target.clearChosen();
                 }
                 if (cards.size() == 1) {
-                    // Card chosenCard = cards.get(cards.iterator().next(), game);
-                    UUID cardId = cards.iterator().next();
-                    Zone fromZone = game.getState().getZone(cardId);
-                    if (fromZone.equals(Zone.BATTLEFIELD)) {
-                        Permanent permanent = game.getPermanent(cardId);
-                        this.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, fromZone, true, false);
-                    } else {
-                        Card chosenCard = cards.get(cardId, game);
-                        this.moveCardToLibraryWithInfo(chosenCard, source.getSourceId(), game, fromZone, true, false);
-                    }
+                    moveObjectToLibrary(cards.iterator().next(), source.getSourceId(), game, true, false);
                 }
             }
         }
         return true;
+    }
+
+    private boolean moveObjectToLibrary(UUID objectId, UUID sourceId, Game game, boolean toTop, boolean withName) {
+        MageObject mageObject =game.getObject(objectId);
+        if (mageObject != null) {
+            Zone fromZone = game.getState().getZone(objectId);
+            if ((mageObject instanceof Permanent)) {
+                return this.moveCardToLibraryWithInfo((Permanent) mageObject, sourceId, game, fromZone, toTop, withName);
+            } else if (mageObject instanceof Card) {
+                return this.moveCardToLibraryWithInfo((Card) mageObject, sourceId, game, fromZone, toTop, withName);
+            }
+        }
+        return false;
     }
 
     @Override
