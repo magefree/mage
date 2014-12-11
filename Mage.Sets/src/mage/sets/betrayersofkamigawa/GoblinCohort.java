@@ -40,9 +40,6 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -83,13 +80,6 @@ public class GoblinCohort extends CardImpl {
 
 class GoblinCohortEffect extends RestrictionEffect {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another artifact");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(new AnotherPredicate());
-    }
-
     public GoblinCohortEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack unless you've cast a creature spell this turn";
@@ -126,7 +116,7 @@ class PlayerCastCreatureWatcher extends Watcher {
     Set<UUID> playerIds = new HashSet<>();
 
     public PlayerCastCreatureWatcher() {
-        super("CastCreature", WatcherScope.GAME);
+        super("PlayerCastCreature", WatcherScope.GAME);
     }
 
     public PlayerCastCreatureWatcher(final PlayerCastCreatureWatcher watcher) {
