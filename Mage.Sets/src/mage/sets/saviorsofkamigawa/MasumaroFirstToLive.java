@@ -33,6 +33,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -58,7 +59,9 @@ public class MasumaroFirstToLive extends CardImpl {
 
         // Masumaro, First to Live's power and toughness are each equal to twice the number of cards in your hand.
         DynamicValue xValue= new MultipliedValue(new CardsInControllerHandCount(), 2);
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
+        Effect effect = new SetPowerToughnessSourceEffect(xValue, Duration.EndOfGame);
+        effect.setText("{this}'s power and toughness are each equal to twice the number of cards in your hand");
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, effect));
 
 
     }

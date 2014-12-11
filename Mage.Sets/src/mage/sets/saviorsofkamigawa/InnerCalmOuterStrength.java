@@ -30,6 +30,7 @@ package mage.sets.saviorsofkamigawa;
 import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -52,7 +53,9 @@ public class InnerCalmOuterStrength extends CardImpl {
 
         // Target creature gets +X/+X until end of turn, where X is the number of cards in your hand.
         DynamicValue xValue= new CardsInControllerHandCount();
-        this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn));
+        Effect effect = new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true);
+        effect.setText("Target creature gets +X/+X until end of turn, where X is the number of cards in your hand");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
