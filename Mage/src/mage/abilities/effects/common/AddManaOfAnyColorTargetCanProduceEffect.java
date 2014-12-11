@@ -100,22 +100,22 @@ public class AddManaOfAnyColorTargetCanProduceEffect extends ManaEffect {
                 switch (choice.getChoice()) {
                     case "Black":
                         newMana.setBlack(1);
-                        return true;
+                        break;
                     case "Blue":
                         newMana.setBlue(1);
-                        return true;
+                        break;
                     case "Red":
                         newMana.setRed(1);
-                        return true;
+                        break;
                     case "Green":
                         newMana.setGreen(1);
-                        return true;
+                        break;
                     case "White":
                         newMana.setWhite(1);
-                        return true;
+                        break;
                     case "Colorless":
                         newMana.setColorless(1);
-                        return true;
+                        break;
                 }                
                 controller.getManaPool().addMana(newMana, game, source);
                 checkToFirePossibleEvents(newMana, game, source);
