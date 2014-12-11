@@ -73,16 +73,21 @@ public class ConstructedFormats {
             "Planechase 2012",
             "Planechase",
             "Portal", "Portal Second Age", "Portal Three Kingdoms","Starter 1999","Starter 2000",
+
             "Duel Decks: Elves vs. Goblins",
             "Duel Decks: Jace vs. Chandra",
             "Duel Decks: Divine vs. Demonic",
             "Duel Decks: Garruk vs. Liliana",
+            "Duel Decks: Phyrexia vs. the Coalition",
             "Duel Decks: Elspeth vs. Tezzeret",
             "Duel Decks: Knights vs. Dragons",
             "Duel Decks: Ajani vs. Nicol Bolas",
             "Duel Decks: Venser vs. Koth",
+            "Duel Decks: Izzet vs. Golgari",
+            "Duel Decks: Sorin vs. Tibalt",
             "Duel Decks: Heroes vs. Monsters",
             "Duel Decks: Jace vs. Vraska",
+            "Duel Decks: Speed vs. Cunning",
             "Guru",
             "Unhinged",
     };
@@ -470,6 +475,9 @@ public class ConstructedFormats {
         if (format.equals("Duel Decks: Garruk vs. Liliana")) {
             return Arrays.asList("DDD");
         }
+        if (format.equals("Duel Decks: Phyrexia vs. the Coalition")) {
+            return Arrays.asList("DDE");
+        }
         if (format.equals("Duel Decks: Elspeth vs. Tezzeret")) {
             return Arrays.asList("DDF");
         }
@@ -482,14 +490,21 @@ public class ConstructedFormats {
         if (format.equals("Duel Decks: Venser vs. Koth")) {
             return Arrays.asList("DDI");
         }
+        if (format.equals("Duel Decks: Izzet vs. Golgari")) {
+            return Arrays.asList("DDJ");
+        }
+        if (format.equals("Duel Decks: Sorin vs. Tibalt")) {
+            return Arrays.asList("DDK");
+        }
         if (format.equals("Duel Decks: Heroes vs. Monsters")) {
             return Arrays.asList("DDL");
         }
         if (format.equals("Duel Decks: Jace vs. Vraska")) {
             return Arrays.asList("DDM");
         }
-
-
+        if (format.equals("Duel Decks: Speed vs. Cunning")) {
+            return Arrays.asList("DDN");
+        }
 
         if (format.equals(STANDARD)) {
             return standard;

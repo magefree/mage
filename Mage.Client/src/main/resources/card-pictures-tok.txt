@@ -1,17 +1,18 @@
+|Generate|TOK:DDN|Goblin|
 
-|Generate|TOK:KTK|Bear|
-|Generate|TOK:KTK|Bird|
-|Generate|TOK:KTK|Goblin|
-|Generate|TOK:KTK|Morph|
-|Generate|TOK:KTK|Snake|
-|Generate|TOK:KTK|Spirit Warrior|
-|Generate|TOK:KTK|Spirit|
-|Generate|TOK:KTK|Vampire|
-|Generate|TOK:KTK|Warrior 1|
-|Generate|TOK:KTK|Warrior 2|
-|Generate|TOK:KTK|Zombie|
-|Generate|EMBLEM!:KTK|Emblem Sarkhan, the Dragonspeaker|
-|Generate|EMBLEM!:KTK|Emblem Sorin, Solemn Visitor|
+#|Generate|TOK:KTK|Bear|
+#|Generate|TOK:KTK|Bird|
+#|Generate|TOK:KTK|Goblin|
+#|Generate|TOK:KTK|Morph|
+#|Generate|TOK:KTK|Snake|
+#|Generate|TOK:KTK|Spirit Warrior|
+#|Generate|TOK:KTK|Spirit|
+#|Generate|TOK:KTK|Vampire|
+#|Generate|TOK:KTK|Warrior 1|
+#|Generate|TOK:KTK|Warrior 2|
+#|Generate|TOK:KTK|Zombie|
+#|Generate|EMBLEM!:KTK|Emblem Sarkhan, the Dragonspeaker|
+#|Generate|EMBLEM!:KTK|Emblem Sorin, Solemn Visitor|
 
 |Generate|TOK:M15|Sliver|
 |Generate|TOK:M15|Soldier|
@@ -44,6 +45,8 @@
 |Generate|TOK:JOU|Hydra|
 |Generate|TOK:JOU|Spider|
 |Generate|TOK:JOU|Snake|
+
+|Generate|TOK:DDM|Assassin|
 
 |Generate|TOK:BNG|Bird 1|
 |Generate|TOK:BNG|Cat Soldier|
@@ -105,6 +108,8 @@
 
 |Generate|TOK:DGM|Elemental|
 
+|Generate|TOK:DDK|Spirit|
+
 |Generate|TOK:GTC|Angel|
 |Generate|TOK:GTC|Rat|
 |Generate|TOK:GTC|Frog Lizard|
@@ -128,6 +133,8 @@
 |Generate|TOK:RTR|Centaur 2|
 
 |Generate|EMBLEM-:M13|Liliana of the Dark Realms|
+
+|Generate|TOK:DDJ|Saproling|
 
 |Generate|TOK:M13|Cat|
 |Generate|TOK:M13|Goat|
@@ -186,6 +193,8 @@
 |Generate|TOK:NPH|Golem|
 |Generate|TOK:NPH|Myr|
 
+|Generate|TOK:DDG|Goblin|
+
 |Generate|TOK:MBS|Germ|
 |Generate|TOK:MBS|Zombie|
 |Generate|TOK:MBS|Golem|
@@ -220,9 +229,9 @@
 |Generate|TOK:ROE|Ooze|
 |Generate|TOK:ROE|Tuktuk the Returned|
 
-|Generate|TOK:PVC|Saproling|
-|Generate|TOK:PVC|Hornet|
-|Generate|TOK:PVC|Minion|
+|Generate|TOK:DDE|Saproling|
+|Generate|TOK:DDE|Hornet|
+|Generate|TOK:DDE|Minion|
 
 |Generate|TOK:WWK|Soldier Ally|
 |Generate|TOK:WWK|Dragon|
@@ -261,10 +270,14 @@
 |Generate|TOK:ARB|Dragon|
 |Generate|TOK:ARB|Zombie Wizard|
 
+|Generate|TOK:DDC|Spirit|
+|Generate|TOK:DDC|Demon|
+|Generate|TOK:DDC|Thrull|
+
 |Generate|TOK:CON|Angel|
 |Generate|TOK:CON|Elemental|
 
-|Generate|TOK:JVC|Elemental Shaman|
+|Generate|TOK:DD2|Elemental Shaman|
 
 |Generate|TOK:ALA|Soldier|
 |Generate|TOK:ALA|Beast|

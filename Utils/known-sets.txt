@@ -23,9 +23,13 @@ Duel Decks: Elspeth vs. Tezzeret|elspethvstezzeret|
 Duel Decks: Elves vs. Goblins|elvesvsgoblins|
 Duel Decks: Garruk vs. Liliana|garrukvsliliana|
 Duel Decks: Heroes vs. Monsters|heroesvsmonsters|
+Duel Decks: Izzet vs. Golgari|izzetvsgolgari|
 Duel Decks: Jace vs. Chandra|jacevschandra|
 Duel Decks: Jace vs. Vraska|jacevsvraska|
 Duel Decks: Knights vs. Dragons|knightsvsdragons|
+Duel Decks: Phyrexia vs. the Coalition|phyrexiavsthecoalition|
+Duel Decks: Sorin vs. Tibalt|sorinvstibalt|
+Duel Decks: Speed vs. Cunning|speedvscunning|
 Duel Decks: Venser vs. Koth|venservskoth|
 Eighth Edition|eighthedition|
 Eventide|eventide|

@@ -1,11 +1,61 @@
 package org.mage.plugins.card.images;
 
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import javax.imageio.IIOImage;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.FileImageOutputStream;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultBoundedRangeModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import mage.cards.repository.CardInfo;
+import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.sets.ConstructedFormats;
 import mage.remote.Connection;
+import static mage.remote.Connection.ProxyType.HTTP;
+import static mage.remote.Connection.ProxyType.SOCKS;
+import net.java.truevfs.access.TFile;
+import net.java.truevfs.access.TFileOutputStream;
+import net.java.truevfs.access.TVFS;
+import net.java.truevfs.kernel.spec.FsSyncException;
 import org.apache.log4j.Logger;
-import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.dl.sources.CardImageSource;
 import org.mage.plugins.card.dl.sources.MagicCardsImageSource;
 import org.mage.plugins.card.dl.sources.MtgImageSource;
@@ -13,44 +63,20 @@ import org.mage.plugins.card.dl.sources.WizardCardsImageSource;
 import org.mage.plugins.card.properties.SettingsManager;
 import org.mage.plugins.card.utils.CardImageUtils;
 
-import javax.imageio.IIOImage;
-import javax.imageio.ImageIO;
-import javax.imageio.ImageWriteParam;
-import javax.imageio.ImageWriter;
-import javax.imageio.stream.FileImageOutputStream;
-import javax.swing.*;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import net.java.truevfs.access.TFile;
-import net.java.truevfs.access.TFileOutputStream;
-import net.java.truevfs.access.TVFS;
-import net.java.truevfs.kernel.spec.FsSyncException;
-
 public class DownloadPictures extends DefaultBoundedRangeModel implements Runnable {
 
+    private static final Logger logger = Logger.getLogger(DownloadPictures.class);
+
     private JProgressBar bar;
-    private JOptionPane dlg;
+    private final JOptionPane dlg;
     private boolean cancel;
-    private JButton closeButton;
+    private final JButton closeButton;
     private JButton startDownloadButton;
     private int cardIndex;
     private ArrayList<CardDownloadData> cards;
     private ArrayList<CardDownloadData> type2cards;
-    private JComboBox jComboBox1;
-    private JLabel jLabel1;
+    private final JComboBox jComboBox1;
+    private final JLabel jLabel1;
     private static boolean offlineMode = false;
     private JCheckBox checkBox;
     private final Object sync = new Object();
@@ -59,7 +85,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
     private Proxy p = Proxy.NO_PROXY;
 
-    private ExecutorService executor = Executors.newFixedThreadPool(10);
+    private final ExecutorService executor = Executors.newFixedThreadPool(10);
 
     public static void main(String[] args) {
         startDownload(null, null);
@@ -230,8 +256,10 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         /**
          * get filter for Standard Type 2 cards
          */
-        Set<String> type2SetsFilter = new HashSet<String>();
+        Set<String> type2SetsFilter = new HashSet<>();
         type2SetsFilter.addAll(ConstructedFormats.getSetsByFormat(ConstructedFormats.STANDARD));
+        
+        int numberCardImages = allCards.size();
 
         try {
             offlineMode = true;
@@ -272,19 +300,19 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 } else {
                     if (card.getCardNumber() < 1) {
                         System.err.println("There was a critical error!");
-                        log.error("Card has no collector ID and won't be sent to client: " + card);
+                        logger.error("Card has no collector ID and won't be sent to client: " + card);
                     } else if (card.getSetCode().isEmpty()) {
                         System.err.println("There was a critical error!");
-                        log.error("Card has no set name and won't be sent to client:" + card);
+                        logger.error("Card has no set name and won't be sent to client:" + card);
                     }
                 }
             }
-
             allCardsUrls.addAll(getTokenCardUrls());
-        } catch (Exception e) {
-            log.error(e);
-        }
 
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        int numberTokenImages = allCardsUrls.size() - numberCardImages;
         TFile file;
 
         /**
@@ -297,14 +325,17 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             }
         }
 
-        for (CardDownloadData card : cardsToDownload) {
-            if (card.isToken()) {
-                log.info("Card to download: " + card.getName() + " (Token) ");
-            } else {
-                try {
-                    log.info("Card to download: " + card.getName() + " (" + card.getSet() + ")");
-                } catch (Exception e) {
-                    log.error(e);
+        logger.info("Check download images (total cards: " + numberCardImages + ", total tokens: " + numberTokenImages + ") => Missing images: " + cardsToDownload.size());
+        if (logger.isDebugEnabled()) {
+            for (CardDownloadData card : cardsToDownload) {
+                if (card.isToken()) {
+                    logger.debug("Card to download: " + card.getName() + " (Token) ");
+                } else {
+                    try {
+                        logger.debug("Card to download: " + card.getName() + " (" + card.getSet() + ")");
+                    } catch (Exception e) {
+                        logger.error(e);
+                    }
                 }
             }
         }
@@ -313,11 +344,11 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
     }
 
     private static ArrayList<CardDownloadData> getTokenCardUrls() throws RuntimeException {
-        ArrayList<CardDownloadData> list = new ArrayList<CardDownloadData>();
+        ArrayList<CardDownloadData> list = new ArrayList<>();
         InputStream in = DownloadPictures.class.getClassLoader().getResourceAsStream("card-pictures-tok.txt");
 
         if (in == null) {
-            log.error("resources input stream is null");
+            logger.error("resources input stream is null");
             return list;
         }
 
@@ -352,28 +383,28 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                             list.add(card);
                         }
                     } else {
-                        log.error("wrong format for image urls: " + line);
+                        logger.error("wrong format for image urls: " + line);
                     }
                 }
                 line = reader.readLine();
             }
 
         } catch (Exception ex) {
-            log.error(ex);
+            logger.error(ex);
             throw new RuntimeException("DownloadPictures : readFile() error");
         } finally {
             if (input != null) {
                 try {
                     input.close();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.error("Input close failed:", e);
                 }
             }
             if (reader != null) {
                 try {
                     reader.close();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.error("Reader close failed:", e);
                 }
             }
 
@@ -422,7 +453,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
                     CardDownloadData card = cardsToDownload.get(i);
 
-                    log.info("Downloading card: " + card.getName() + " (" + card.getSet() + ")");
+                    logger.debug("Downloading card: " + card.getName() + " (" + card.getSet() + ")");
 
                     String url;
                     if (ignoreUrls.contains(card.getSet()) || card.isToken()) {
@@ -435,7 +466,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     }
 
                     if (url != null) {
-                        Logger.getLogger(this.getClass()).info(url);
                         Runnable task = new DownloadTask(card, new URL(url), cardsToDownload.size());
                         executor.execute(task);
                     } else {
@@ -445,7 +475,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     }
 
                 } catch (Exception ex) {
-                    log.error(ex, ex);
+                    logger.error(ex, ex);
                 }
             }
             executor.shutdown();
@@ -458,7 +488,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         try {
             TVFS.umount();
         } catch (FsSyncException e) {
-            e.printStackTrace();
+            logger.fatal("Couldn't unmount zip files", e);
             JOptionPane.showMessageDialog(null, "Couldn't unmount zip files", "Error", JOptionPane.ERROR_MESSAGE);
         }
         finally {
@@ -514,7 +544,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 // Logger.getLogger(this.getClass()).info(url.toString());
                 URLConnection httpConn = url.openConnection(p);
                 httpConn.connect();
-                if (((HttpURLConnection) httpConn).getResponseCode() == 200) {
+                int responseCode = ((HttpURLConnection) httpConn).getResponseCode();
+                if (responseCode == 200) {
                     try (BufferedInputStream in = new BufferedInputStream(((HttpURLConnection) httpConn).getInputStream())) {
                         //try (BufferedInputStream in = new BufferedInputStream(url.openConnection(p).getInputStream())) {
                         out = new BufferedOutputStream(new TFileOutputStream(temporaryFile));
@@ -558,11 +589,14 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         temporaryFile.delete();
                     }
                 } else {
-                    Logger.getLogger(this.getClass()).error(convertStreamToString(((HttpURLConnection) httpConn).getErrorStream()));
+                    logger.warn("Image download failed - responseCode: " + responseCode + " url: " + url.toString());
+                    if (logger.isDebugEnabled()) { // Shows the returned html from the request to the web server
+                        logger.debug("Return ed HTML ERROR:\n" + convertStreamToString(((HttpURLConnection) httpConn).getErrorStream()));
+                    }
                 }
 
             } catch (Exception e) {
-                log.error(e, e);
+                logger.error(e, e);
             }
 
             synchronized (sync) {
@@ -620,8 +654,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             }
         }
     }
-
-    private static final Logger log = Logger.getLogger(DownloadPictures.class);
 
     private static final long serialVersionUID = 1L;
 }

@@ -13,8 +13,8 @@ import org.mage.plugins.card.utils.CardImageUtils;
 public class MagicCardsImageSource implements CardImageSource {
 
     private static CardImageSource instance = new MagicCardsImageSource();
-    private static final Map<String, String> setNameReplacement = new HashMap<String, String>() {
-
+           
+    private static final Map<String, String> setNameTokenReplacement = new HashMap<String, String>() {
         {
             put("C14", "commander-2014-edition");
             put("KTK", "khans-of-tarkir");
@@ -66,12 +66,14 @@ public class MagicCardsImageSource implements CardImageSource {
             put("DDD", "duel-decks-garruk-vs-liliana");
             put("DDE", "duel-decks-phyrexia-vs-the-coalition");
             put("DDF", "duel-decks-elspeth-vs-tezzeret");
-            put("DDG", "duel-decks-knight-vs-dragon");
+            put("DDG", "duel-decks-knights-vs-dragons");
             put("DDH", "duel-decks-ajani-vs-nicol-bolas");
             put("DDI", "duel-decks-venser-vs-koth");
             put("DDJ", "duel-decks-izzet-vs-golgari");
             put("DDK", "duel-decks-sorin-vs-tibalt");
             put("DDL", "duel-decks-heroes-vs-monsters");
+            put("DDM", "duel-decks-jace-vs-vraska");
+            put("DDN", "duel-decks-speed-vs-cunning");
 
         }
         private static final long serialVersionUID = 1L;
@@ -92,6 +94,7 @@ public class MagicCardsImageSource implements CardImageSource {
             throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);
         }
         String set = CardImageUtils.updateSet(cardSet, true);
+
         String preferedLanguage = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PREF_LANGUAGE, "en");
                
         StringBuilder url = new StringBuilder("http://magiccards.info/scans/").append(preferedLanguage).append("/");
@@ -119,8 +122,8 @@ public class MagicCardsImageSource implements CardImageSource {
     public String generateTokenUrl(CardDownloadData card) {
         String name = card.getName().replaceAll(" ", "-").replace(",", "").toLowerCase();
         String set = "not-supported-set";
-        if (setNameReplacement.containsKey(card.getSet())) {
-            set = setNameReplacement.get(card.getSet());
+        if (setNameTokenReplacement.containsKey(card.getSet())) {
+            set = setNameTokenReplacement.get(card.getSet());
         } else {
             set += "-" + card.getSet();
         }

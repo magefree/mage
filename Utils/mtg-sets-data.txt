@@ -36,11 +36,14 @@ Duel Decks: Elves vs. Goblins|EVG|
 Duel Decks: Divine vs. Demonic|DDC|
 Duel Decks: Elspeth vs. Tezzeret|DDF|
 Duel Decks: Garruk vs. Liliana|DDD|
+Duel Decks: Izzet vs. Golgari|DDJ|
 Duel Decks: Heroes vs. Monsters|DDL|
 Duel Decks: Jace vs. Chandra|DD2|
 Duel Decks: Jace vs. Vraska|DDM|
 Duel Decks: Knights vs. Dragons|DDG|
 Duel Decks: Phyrexia vs. the Coalition|DDE|
+Duel Decks: Sorin vs. Tibalt|DDK|
+Duel Decks: Speed vs. Cunning|DDN|
 Duel Decks: Venser vs. Koth|DDI|
 Eventide|EVE|
 Exodus|EXO|
