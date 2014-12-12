@@ -43,6 +43,7 @@ import mage.abilities.PlayLandAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Rarity;
 import mage.constants.SpellAbilityType;
 import mage.constants.TimingRule;
@@ -119,6 +120,14 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         this.usesVariousArt = Character.isDigit(this.getClass().getName().charAt(this.getClass().getName().length()-1));
         this.counters = new Counters();
         this.morphCard = false;
+    }
+
+    private void setDefaultColor() {
+        this.color.setWhite(this.manaCost.containsColor(ColoredManaSymbol.W));
+        this.color.setBlue(this.manaCost.containsColor(ColoredManaSymbol.U));
+        this.color.setBlack(this.manaCost.containsColor(ColoredManaSymbol.B));
+        this.color.setRed(this.manaCost.containsColor(ColoredManaSymbol.R));
+        this.color.setGreen(this.manaCost.containsColor(ColoredManaSymbol.G));
     }
 
     protected CardImpl(UUID ownerId, String name) {
