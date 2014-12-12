@@ -104,6 +104,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         this.cardNumber = cardNumber;
         this.cardType.addAll(Arrays.asList(cardTypes));
         this.manaCost.load(costs);
+        setDefaultColor();
         if (cardType.contains(CardType.LAND)) {
             Ability ability = new PlayLandAbility(name);
             ability.setSourceId(this.getId());
