@@ -29,6 +29,7 @@
 package mage.abilities.common;
 
 import mage.abilities.effects.Effect;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -63,10 +64,10 @@ public class EntersBattlefieldControlledTriggeredAbility extends EntersBattlefie
     }
 
     public EntersBattlefieldControlledTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, String rule) {
-        this(zone, effect, filter, optional, false, rule);
+        this(zone, effect, filter, optional, SetTargetPointer.NONE, rule);
     }
 
-    public EntersBattlefieldControlledTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, boolean setTargetPointer, String rule) {
+    public EntersBattlefieldControlledTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, String rule) {
         super(zone, effect, filter, optional, setTargetPointer, rule, true);
     }
 

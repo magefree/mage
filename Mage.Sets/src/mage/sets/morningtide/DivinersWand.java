@@ -49,6 +49,7 @@ import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.SetTargetPointer;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -85,7 +86,7 @@ public class DivinersWand extends CardImpl {
         // Whenever a Wizard creature enters the battlefield, you may attach Diviner's Wand to it.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {source} to it"),
-                filter, true, true, null));
+                filter, true, SetTargetPointer.PERMANENT, null));
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }

@@ -43,6 +43,7 @@ import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.SetTargetPointer;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -71,7 +72,7 @@ public class ObsidianBattleAxe extends CardImpl {
         // Whenever a Warrior creature enters the battlefield, you may attach Obsidian Battle-Axe to it.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {source} to it"),
-                filter, true, true, null));
+                filter, true, SetTargetPointer.PERMANENT, null));
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }

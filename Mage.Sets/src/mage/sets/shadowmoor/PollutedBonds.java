@@ -35,12 +35,12 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -64,7 +64,7 @@ public class PollutedBonds extends CardImpl {
         this.color.setBlack(true);
 
         // Whenever a land enters the battlefield under an opponent's control, that player loses 2 life and you gain 2 life.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new PollutedBondsEffect(), filter, false, true, rule, true));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new PollutedBondsEffect(), filter, false, SetTargetPointer.PLAYER, rule, true));
         
     }
 
@@ -96,18 +96,15 @@ class PollutedBondsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        Player opponent = null;
-        Permanent land = game.getPermanent(targetPointer.getFirst(game, source));
-        if (land != null) {
-            opponent = game.getPlayer(land.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
+            if (opponent != null) {
+                opponent.loseLife(2, game);
+            }
+            controller.gainLife(2, game);
+            return true;
         }
-        if (opponent != null) {
-            opponent.loseLife(2, game);
-        }
-        if (you != null) {
-            you.gainLife(2, game);
-        }
-        return true;
+        return false;
     }
 }

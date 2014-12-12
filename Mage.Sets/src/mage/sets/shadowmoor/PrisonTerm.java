@@ -41,6 +41,7 @@ import mage.abilities.effects.common.combat.CantBlockAttackActivateAttachedEffec
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -82,7 +83,7 @@ public class PrisonTerm extends CardImpl {
 
         // Whenever a creature enters the battlefield under an opponent's control, you may attach Prison Term to that creature.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new PrisonTermEffect(), filter, true, true, "Whenever a creature enters the battlefield under an opponent's control, you may attach Prison Term to that creature."));
+                Zone.BATTLEFIELD, new PrisonTermEffect(), filter, true, SetTargetPointer.PERMANENT, "Whenever a creature enters the battlefield under an opponent's control, you may attach Prison Term to that creature."));
     }
 
     public PrisonTerm(final PrisonTerm card) {

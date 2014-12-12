@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -88,7 +89,7 @@ public class RikuOfTwoReflections extends CardImpl {
 
         // Whenever another nontoken creature enters the battlefield under your control, you may pay {G}{U}. If you do, put a token that's a copy of that creature onto the battlefield.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new RikuOfTwoReflectionsCopyTokenEffect(),filterPermanent, false, true,
+                Zone.BATTLEFIELD, new RikuOfTwoReflectionsCopyTokenEffect(),filterPermanent, false, SetTargetPointer.PERMANENT,
                 "Whenever another nontoken creature enters the battlefield under your control, you may pay {G}{U}. If you do, put a token that's a copy of that creature onto the battlefield.",
                 true);
         ability.addCost(new ManaCostsImpl("{G}{U}"));

@@ -40,6 +40,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.constants.SetTargetPointer;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -65,8 +66,7 @@ public class SaiOfTheShinobi extends CardImpl {
         // Whenever a creature enters the battlefield under your control, you may attach Sai of the Shinobi to it.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {source} to it"),
-                filter, true, true, 
-                null, true));
+                filter, true, SetTargetPointer.PERMANENT, null, true));
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }

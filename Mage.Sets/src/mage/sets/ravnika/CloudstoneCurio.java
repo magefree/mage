@@ -30,15 +30,16 @@ package mage.sets.ravnika;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -66,7 +67,7 @@ public class CloudstoneCurio extends CardImpl {
         this.expansionSetCode = "RAV";
 
         // Whenever a nonartifact permanent enters the battlefield under your control, you may return another permanent you control that shares a card type with it to its owner's hand.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new CloudstoneCurioEffect(), filter, true, true, "", true));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new CloudstoneCurioEffect(), filter, true, SetTargetPointer.PERMANENT, "", true));
 
 
     }
@@ -99,34 +100,31 @@ class CloudstoneCurioEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent triggeringCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (triggeringCreature == null) {
-            triggeringCreature = (Permanent) game.getLastKnownInformation(getTargetPointer().getFirst(game, source), Zone.BATTLEFIELD);
-        }
-        if (triggeringCreature != null) {
-            FilterPermanent filter = new FilterPermanent("another permanent you control that shares a card type with " + triggeringCreature.getName());
-            filter.add(Predicates.not(new PermanentIdPredicate(triggeringCreature.getId())));
-            filter.add(new ControllerPredicate(TargetController.YOU));
-            Set<CardTypePredicate> cardTypes = new HashSet<CardTypePredicate>();
-            for (CardType cardType :triggeringCreature.getCardType()) {
-                cardTypes.add(new CardTypePredicate(cardType));
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Permanent triggeringCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
+            if (triggeringCreature == null) {
+                triggeringCreature = (Permanent) game.getLastKnownInformation(getTargetPointer().getFirst(game, source), Zone.BATTLEFIELD);
             }
-            filter.add(Predicates.or(cardTypes));
-            TargetPermanent target = new TargetPermanent(1,1,filter, true);
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
+            if (triggeringCreature != null) {
+                FilterPermanent filter = new FilterPermanent("another permanent you control that shares a card type with " + triggeringCreature.getName());
+                filter.add(Predicates.not(new PermanentIdPredicate(triggeringCreature.getId())));
+                filter.add(new ControllerPredicate(TargetController.YOU));
+                Set<CardTypePredicate> cardTypes = new HashSet<>();
+                for (CardType cardType : triggeringCreature.getCardType()) {
+                    cardTypes.add(new CardTypePredicate(cardType));
+                }
+                filter.add(Predicates.or(cardTypes));
+                TargetPermanent target = new TargetPermanent(1, 1, filter, true);
+
                 if (target.canChoose(controller.getId(), game) && controller.chooseTarget(outcome, target, source, game)) {
                     Permanent returningCreature = game.getPermanent(target.getFirstTarget());
                     if (returningCreature != null) {
-                        if (returningCreature.moveToZone(Zone.HAND, source.getSourceId(), game, true)) {
-                            game.informPlayers(new StringBuilder("Cloudstone Curio: Returning ").append(returningCreature.getName()).append(" to owner's hand").toString());
-                            return true;
-                        }
-
+                        controller.moveCardToHandWithInfo(returningCreature, source.getSourceId(), game, Zone.BATTLEFIELD);
                     }
                 }
             }
-
+            return true;
         }
         return false;
     }

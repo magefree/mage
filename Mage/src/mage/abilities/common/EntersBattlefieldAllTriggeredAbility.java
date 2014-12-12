@@ -28,9 +28,11 @@
 package mage.abilities.common;
 
 import java.util.UUID;
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.SetTargetPointer;
+import static mage.constants.SetTargetPointer.PERMANENT;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -46,7 +48,7 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
     protected FilterPermanent filter;
     protected String rule;
     protected boolean controlled;
-    protected boolean setTargetPointer;
+    protected SetTargetPointer setTargetPointer;
 
     /**
      * zone = BATTLEFIELD optional = false
@@ -63,7 +65,7 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional) {
-        this(zone, effect, filter, optional, false, null, false);
+        this(zone, effect, filter, optional, SetTargetPointer.NONE, null, false);
     }
 
     public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, String rule) {
@@ -71,14 +73,14 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, String rule, boolean controlled) {
-        this(zone, effect, filter, optional, false, rule, controlled);
+        this(zone, effect, filter, optional, SetTargetPointer.NONE, rule, controlled);
     }
 
-    public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, boolean setTargetPointer, String rule) {
+    public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, String rule) {
         this(zone, effect, filter, optional, setTargetPointer, rule, false);
     }
 
-    public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, boolean setTargetPointer, String rule, boolean controlled) {
+    public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, String rule, boolean controlled) {
         super(zone, effect, optional);
         this.filter = filter;
         this.rule = rule;
@@ -100,9 +102,17 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
             UUID targetId = event.getTargetId();
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
-                if (setTargetPointer) {
+                if (!setTargetPointer.equals(SetTargetPointer.NONE)) {
                     for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                        switch(setTargetPointer) {
+                            case PERMANENT:
+                                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                                break;
+                            case PLAYER:
+                                effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));
+                                break;
+                        }
+                        
                     }
                 }
                 return true;

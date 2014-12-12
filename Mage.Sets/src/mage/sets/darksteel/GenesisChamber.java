@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -78,7 +79,7 @@ class GenesisChamberTriggeredAbility extends EntersBattlefieldAllTriggeredAbilit
     private static final String rule =  "Whenever a nontoken creature enters the battlefield, if {this} is untapped, that creature's controller puts a 1/1 colorless Myr artifact creature token onto the battlefield";
     public GenesisChamberTriggeredAbility(Effect effect, FilterPermanent filter)
     {
-        super(Zone.BATTLEFIELD, effect, filter, false, true, rule);
+        super(Zone.BATTLEFIELD, effect, filter, false, SetTargetPointer.PERMANENT, rule);
     }
     
     public GenesisChamberTriggeredAbility(final GenesisChamberTriggeredAbility ability) {
