@@ -27,7 +27,6 @@
  */
 package mage.sets.fifthedition;
 
-import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -93,22 +92,20 @@ class JestersCapEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        boolean applied = false;
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && targetPlayer != null) {
-            TargetCardInLibrary target = new TargetCardInLibrary(3, 3, new FilterCard("cards to exile"));
-                if (player.searchLibrary(target, game, targetPlayer.getId())) {
-                    List<UUID> targets = target.getTargets();
-                    for (UUID targetId : targets) {
-                        Card card = targetPlayer.getLibrary().remove(targetId, game);
-                        if (card != null) {
-                        card.moveToExile(null, "", source.getSourceId(), game);
+            TargetCardInLibrary target = new TargetCardInLibrary(3, 3, new FilterCard());
+            player.searchLibrary(target, game, targetPlayer.getId());
+                for (UUID cardId : target.getTargets()) {
+                    final Card targetCard = game.getCard(cardId);
+                    if (targetCard != null) {
+                        applied |= player.moveCardToExileWithInfo(targetCard, null, null, source.getSourceId(), game, Zone.LIBRARY);
                     }
                 }
-            }
             targetPlayer.shuffleLibrary(game);
-            return true;
-        }
-        return false;
+            }
+            return applied;
     }
 }

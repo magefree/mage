@@ -68,6 +68,7 @@
         <draftCube name="Mono Blue Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MonoBlueCube"/>
         <draftCube name="MTGO Cube March 2014" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGOMarchCube2014"/>
         <draftCube name="MTGO Holiday Cube 2013" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.HolidayCube2013"/>
+        <draftCube name="MTGO Holiday Cube 2014" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.HolidayCube2014"/>        
         <draftCube name="MTGO Legacy Cube (600 cards)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGOLegacyCube"/>
         <draftCube name="The Peasant's Toolbox (800 cards)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.PeasantsToolboxCube"/>
         <draftCube name="www.MTGCube.com (502 cards)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGCube"/>

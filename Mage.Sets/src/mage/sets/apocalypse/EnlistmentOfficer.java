@@ -29,6 +29,7 @@ package mage.sets.apocalypse;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -45,9 +46,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
-
-
 /**
  *
  * @author fireshoes
@@ -103,44 +101,21 @@ class EnlistmentOfficerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Cards cardsToReveal = new CardsImpl(Zone.PICK);
-            Cards cardsSoldier = new CardsImpl(Zone.PICK);
-            Cards cards2 = new CardsImpl(Zone.PICK);
-            int count = Math.min(player.getLibrary().size(), 4);
-            for (int i = 0; i < count; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cardsToReveal.add(card);
-                    game.setZone(card.getId(), Zone.PICK);
-                    if (filter.match(card, game)) {
-                        cardsSoldier.add(card);
-                    } else {
-                        cards2.add(card);
-                    }
-                }
-            }
-
-            Card sourceCard = game.getCard(source.getSourceId());
-            if (!cardsToReveal.isEmpty() && sourceCard != null) {
-                player.revealCards(sourceCard.getName(), cardsToReveal, game);
-            }
-
-            for (Card card: cardsSoldier.getCards(game)) {
-                player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-            }
-
-            TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
-            while (player.isInGame() && cards2.size() > 0 && player.choose(Outcome.Detriment, cards2, target, game)) {
-                Card card = cards2.get(target.getFirstTarget(), game);
-                if (card != null) {
-                    cards2.remove(card);
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
-                }
-                target.clearChosen();
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller == null || sourceObject == null) {
+            return false;
+        }
+        Cards cards = new CardsImpl();
+        cards.addAll(controller.getLibrary().getTopCards(game, 4));
+        controller.revealCards(sourceObject.getLogName(), cards, game);
+        for (Card card: cards.getCards(game)) {
+            if (filter.match(card, game)) {
+                controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                cards.remove(card);
             }
         }
+        controller.putCardsOnBottomOfLibrary(cards, game, source, true);
         return true;
     }
 }
