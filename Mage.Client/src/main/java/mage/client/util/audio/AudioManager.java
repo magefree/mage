@@ -43,6 +43,7 @@ public class AudioManager {
     private MageClip onCountdown1 = null;
     private MageClip onDraftSelect = null;
 
+    private MageClip tournamentStarted = null;
     private MageClip yourGameStarted = null;
     private MageClip playerJoinedTable = null;
     private MageClip playerSubmittedDeck = null;
@@ -232,7 +233,7 @@ public class AudioManager {
 
     public static void playPlayerJoinedTable() {
         if (audioManager.playerJoinedTable == null) {
-            audioManager.playerJoinedTable = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPlayerJoinedTable.wav"),
+            audioManager.playerJoinedTable = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPlayerJoined.wav"),
                     AudioGroup.OtherSounds);
         }
         checkAndPlayClip(getManager().playerJoinedTable);
@@ -240,12 +241,18 @@ public class AudioManager {
 
     public static void playYourGameStarted() {
         if (audioManager.yourGameStarted == null) {
-            audioManager.yourGameStarted = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnYourGameStarted.wav"),
-                    AudioGroup.GameSounds);
+            audioManager.yourGameStarted = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnGameStart.wav"),
+                    AudioGroup.OtherSounds);
         }
         checkAndPlayClip(getManager().yourGameStarted);
     }
-
+    public static void playTournamentStarted() {
+        if (audioManager.tournamentStarted == null) {
+            audioManager.tournamentStarted = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnTournamentStart.wav"),
+                    AudioGroup.OtherSounds);
+        }
+        checkAndPlayClip(getManager().tournamentStarted);
+    }
     public static void playPlayerWhispered() {
         if (audioManager.playerWhispered == null) {
             audioManager.playerWhispered = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPlayerWhispered.wav"),
@@ -328,7 +335,7 @@ public class AudioManager {
                 clip.setFramePosition(0);
                 clip.start();
             }
-        }).run();
+        }).start();
     }
 
     private Clip loadClip(String filename) {
@@ -346,8 +353,7 @@ public class AudioManager {
 
             return clip;
         } catch (Exception e) {
-            //e.printStackTrace();
-            log.error("Couldn't load sound: " + filename + ".");
+            log.error("Couldn't load sound: " + filename + ".", e);
         }
 
         return null;

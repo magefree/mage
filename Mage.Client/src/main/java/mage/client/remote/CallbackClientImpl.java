@@ -458,6 +458,7 @@ public class CallbackClientImpl implements CallbackClient {
     protected void tournamentStarted(UUID tournamentId, UUID playerId) {
         try {
             frame.showTournament(tournamentId);
+            AudioManager.playTournamentStarted();
             logger.info("Tournament " + tournamentId + " started for player " + playerId);
         } catch (Exception ex) {
             handleException(ex);
