@@ -70,14 +70,14 @@ public class TapForManaAllTriggeredManaAbility extends TriggeredManaAbility {
                 ManaEvent mEvent = (ManaEvent) event;
                 for(Effect effect:getEffects()) {
                     effect.setValue("mana", mEvent.getMana());
-                }
-                switch(setTargetPointer) {
-                    case PERMANENT:
-                        getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
-                        break;
-                    case PLAYER:
-                        getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getControllerId()));
-                        break;
+                    switch(setTargetPointer) {
+                        case PERMANENT:
+                            effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                            break;
+                        case PLAYER:
+                            effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));
+                            break;
+                    }
                 }
                 return true;
             }

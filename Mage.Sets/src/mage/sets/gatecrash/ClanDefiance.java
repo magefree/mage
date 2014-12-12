@@ -27,8 +27,6 @@
  */
 package mage.sets.gatecrash;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
