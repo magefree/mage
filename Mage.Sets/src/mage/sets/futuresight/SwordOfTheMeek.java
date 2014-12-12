@@ -41,6 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
@@ -73,7 +74,7 @@ public class SwordOfTheMeek extends CardImpl {
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
         // Whenever a 1/1 creature enters the battlefield under your control, you may return Sword of the Meek from your graveyard to the battlefield, then attach it to that creature.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.GRAVEYARD, new SwordOfTheMeekEffect(), filter, true, true, ""));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.GRAVEYARD, new SwordOfTheMeekEffect(), filter, true, SetTargetPointer.PERMANENT, ""));
     }
 
     public SwordOfTheMeek(final SwordOfTheMeek card) {

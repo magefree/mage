@@ -38,6 +38,7 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -61,11 +62,8 @@ public class CreamOfTheCrop extends CardImpl {
 
         // Whenever a creature enters the battlefield under your control, you may look at the top X cards of your library, where X is that creature's power. If you do, put one of those cards on top of your library and the rest on the bottom of your library in any order.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                Zone.BATTLEFIELD, 
-                new CreamOfTheCropEffect(), 
-                new FilterCreaturePermanent(),
-                true,
-                true,
+                Zone.BATTLEFIELD, new CreamOfTheCropEffect(), 
+                new FilterCreaturePermanent(), true, SetTargetPointer.PERMANENT,
                 "Whenever a creature enters the battlefield under your control, you may look at the top X cards of your library, where X is that creature's power. If you do, put one of those cards on top of your library and the rest on the bottom of your library in any order"));
     }
 
