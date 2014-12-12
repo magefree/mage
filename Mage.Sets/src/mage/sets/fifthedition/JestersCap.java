@@ -98,14 +98,14 @@ class JestersCapEffect extends OneShotEffect {
         if (player != null && targetPlayer != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(3, 3, new FilterCard());
             player.searchLibrary(target, game, targetPlayer.getId());
-                for (UUID cardId : target.getTargets()) {
-                    final Card targetCard = game.getCard(cardId);
-                    if (targetCard != null) {
-                        applied |= player.moveCardToExileWithInfo(targetCard, null, null, source.getSourceId(), game, Zone.LIBRARY);
-                    }
+            for (UUID cardId : target.getTargets()) {
+                final Card targetCard = game.getCard(cardId);
+                if (targetCard != null) {
+                    applied |= player.moveCardToExileWithInfo(targetCard, null, null, source.getSourceId(), game, Zone.LIBRARY);
                 }
-            targetPlayer.shuffleLibrary(game);
             }
-            return applied;
+            targetPlayer.shuffleLibrary(game);
+        }
+        return applied;
     }
 }

@@ -28,18 +28,17 @@
 package mage.sets.iceage;
 
 import java.util.UUID;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
+
 
 /**
  *
@@ -51,13 +50,12 @@ public class Icequake extends CardImpl {
         super(ownerId, 22, "Icequake", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
         this.expansionSetCode = "ICE";
 
-        this.color.setBlack(true);
-
         // Destroy target land.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetLandPermanent());
-        //  If that land was a snow land, Icequake deals 1 damage to that land's controller.
+        // If that land was a snow land, Icequake deals 1 damage to that land's controller.
         this.getSpellAbility().addEffect(new IcequakeEffect());
+        this.getSpellAbility().addTarget(new TargetLandPermanent());
+        
+        
     }
 
     public Icequake(final Icequake card) {
@@ -74,7 +72,7 @@ class IcequakeEffect extends OneShotEffect {
 
     public IcequakeEffect() {
         super(Outcome.Damage);
-        this.staticText = "If that land was a snow land, Icequake deals 1 damage to that land's controller.";
+        this.staticText = "Destroy target land.<br>If that land was a snow land, {this} deals 1 damage to that land's controller.";
     }
 
     public IcequakeEffect(final IcequakeEffect effect) {
@@ -88,13 +86,17 @@ class IcequakeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        if (permanent != null && !permanent.getSupertype().contains("Snow")) {
-            Player player = game.getPlayer(permanent.getControllerId());
-            if (player != null) {
-                player.damage(1, source.getSourceId(), game, false, true);
-                return true;
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (permanent != null && controller != null) {
+            permanent.destroy(source.getSourceId(), game, false);
+            if (permanent.getSupertype().contains("Snow")) {
+                Player player = game.getPlayer(permanent.getControllerId());
+                if (player != null) {
+                    player.damage(1, source.getSourceId(), game, false, true);
+                }                
             }
+            return true;
         }
         return false;
     }

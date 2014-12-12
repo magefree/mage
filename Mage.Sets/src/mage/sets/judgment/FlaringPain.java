@@ -30,16 +30,16 @@ package mage.sets.judgment;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.TimingRule;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.constants.TimingRule;
 
 /**
  *
@@ -69,10 +69,10 @@ public class FlaringPain extends CardImpl {
     }
 }
 
-class DamageCantBePreventedEffect extends ReplacementEffectImpl {
+class DamageCantBePreventedEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public DamageCantBePreventedEffect() {
-        super(Duration.EndOfTurn, Outcome.Benefit);
+        super(Duration.EndOfTurn, Outcome.Benefit, false, false);
         staticText = "Damage can't be prevented this turn";
     }
 
@@ -87,11 +87,6 @@ class DamageCantBePreventedEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         return true;
     }
 

@@ -55,7 +55,6 @@ public class LoxodonGatekeeper extends CardImpl {
         this.subtype.add("Elephant");
         this.subtype.add("Soldier");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
@@ -97,7 +96,10 @@ class LoxodonGatekeeperTapEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && (permanent.getCardType().contains(CardType.CREATURE) || permanent.getCardType().contains(CardType.LAND) || permanent.getCardType().contains(CardType.ARTIFACT))) {
+            if (permanent != null &&
+                   (permanent.getCardType().contains(CardType.CREATURE) ||
+                    permanent.getCardType().contains(CardType.LAND) ||
+                    permanent.getCardType().contains(CardType.ARTIFACT))) {
                 return true;
             }
         }

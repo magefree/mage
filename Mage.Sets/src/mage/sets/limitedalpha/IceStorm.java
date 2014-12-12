@@ -28,12 +28,11 @@
 package mage.sets.limitedalpha;
 
 import java.util.UUID;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.filter.common.FilterLandPermanent;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
@@ -45,11 +44,10 @@ public class IceStorm extends CardImpl {
         super(ownerId, 75, "Ice Storm", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "LEA";
 
-        this.color.setGreen(true);
-        this.getSpellAbility().addTarget(new TargetPermanent(new FilterLandPermanent()));
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-
         // Destroy target land.
+        this.getSpellAbility().addTarget(new TargetLandPermanent());
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        
     }
 
     public IceStorm(final IceStorm card) {

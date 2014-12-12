@@ -51,8 +51,6 @@ public class FrozenAEther extends CardImpl {
         super(ownerId, 54, "Frozen AEther", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
         this.expansionSetCode = "PLC";
 
-        this.color.setBlue(true);
-
         // Artifacts, creatures, and lands your opponents control enter the battlefield tapped.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FrozenAEtherTapEffect()));
     }
@@ -90,7 +88,10 @@ class FrozenAEtherTapEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && (permanent.getCardType().contains(CardType.CREATURE) || permanent.getCardType().contains(CardType.LAND) || permanent.getCardType().contains(CardType.ARTIFACT))) {
+            if (permanent != null &&
+                   (permanent.getCardType().contains(CardType.CREATURE) ||
+                    permanent.getCardType().contains(CardType.LAND) ||
+                    permanent.getCardType().contains(CardType.ARTIFACT))) {
                 return true;
             }
         }
