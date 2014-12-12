@@ -42,6 +42,7 @@ public class CrookshankKobolds extends CardImpl {
     public CrookshankKobolds(UUID ownerId) {
         super(ownerId, 220, "Crookshank Kobolds", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{0}");
         this.expansionSetCode = "LEG";
+        this.color.setRed(true);
         this.subtype.add("Kobold");
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);

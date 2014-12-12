@@ -54,6 +54,7 @@ public class HinterlandScourge extends CardImpl {
         super(ownerId, 94, "Hinterland Scourge", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "");
         this.expansionSetCode = "DKA";
         this.subtype.add("Werewolf");
+        this.color.setRed(true);
 
         // this card is the second face of double-faced card of Hinterland Hermit
         this.nightCard = true;

@@ -57,6 +57,8 @@ public class RavagerOfTheFells extends CardImpl {
         super(ownerId, 140, "Ravager of the Fells", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "");
         this.expansionSetCode = "DKA";
         this.subtype.add("Werewolf");
+        this.color.setRed(true);
+        this.color.setGreen(true);
 
         // this card is the second face of double-faced card
         this.nightCard = true;

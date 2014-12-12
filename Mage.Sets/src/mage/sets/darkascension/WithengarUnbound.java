@@ -54,6 +54,7 @@ public class WithengarUnbound extends CardImpl {
         this.expansionSetCode = "DKA";
         this.supertype.add("Legendary");
         this.subtype.add("Demon");
+        this.color.setBlack(true);
 
         // this card is the second face of double-faced card
         this.nightCard = true;

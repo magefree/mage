@@ -43,6 +43,7 @@ public class MarkovsServant extends CardImpl {
         super(ownerId, 55, "Markov's Servant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, null);
         this.expansionSetCode = "DKA";
         this.subtype.add("Vampire");
+        this.color.setBlack(true);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
