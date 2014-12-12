@@ -45,6 +45,7 @@ public class UnhallowedCathar extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Zombie");
         this.subtype.add("Soldier");
+        this.color.setBlack(true);
 
         // this card is the second face of double-faced card
         this.nightCard = true;

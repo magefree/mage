@@ -60,6 +60,8 @@ public class RestoreBalance extends CardImpl {
         super(ownerId, 38, "Restore Balance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "");
         this.expansionSetCode = "TSP";
 
+        this.color.setWhite(true);
+
         // Suspend 6-{W}
         this.addAbility(new SuspendAbility(6, new ColoredManaCost(ColoredManaSymbol.W), this));
         // Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players sacrifice creatures and discard cards the same way.

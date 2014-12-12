@@ -56,7 +56,7 @@ public class LivingEnd extends CardImpl {
         super(ownerId, 115, "Living End", Rarity.RARE, new CardType[]{CardType.SORCERY}, "");
         this.expansionSetCode = "TSP";
 
-        this.color.isBlack();
+        this.color.setBlack(true);
 
         // Suspend 3-{2}{B}{B}
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{2}{B}{B}"), this));

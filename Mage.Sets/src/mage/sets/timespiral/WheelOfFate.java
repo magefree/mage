@@ -47,6 +47,8 @@ public class WheelOfFate extends CardImpl {
         super(ownerId, 187, "Wheel of Fate", Rarity.RARE, new CardType[]{CardType.SORCERY}, "");
         this.expansionSetCode = "TSP";
 
+        this.color.setRed(true);
+
         // Suspend 4-{1}{R}
         this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{1}{R}"), this));
         // Each player discards his or her hand, then draws seven cards.

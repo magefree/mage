@@ -62,6 +62,7 @@ public class WerewolfRansacker extends CardImpl {
         super(ownerId, 81, "Werewolf Ransacker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
         this.expansionSetCode = "DKA";
         this.subtype.add("Werewolf");
+        this.color.setRed(true);
 
         // this card is the second face of double-faced card
         this.nightCard = true;

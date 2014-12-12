@@ -52,6 +52,7 @@ public class KrallenhordeKiller extends CardImpl {
         super(ownerId, 133, "Krallenhorde Killer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "");
         this.expansionSetCode = "DKA";
         this.subtype.add("Werewolf");
+        this.color.setGreen(true);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

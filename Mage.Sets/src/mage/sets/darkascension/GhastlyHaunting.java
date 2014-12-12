@@ -48,6 +48,7 @@ public class GhastlyHaunting extends CardImpl {
         super(ownerId, 50, "Ghastly Haunting", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "");
         this.expansionSetCode = "DKA";
         this.subtype.add("Aura");
+        this.color.setBlue(true);
 
         // this card is the second face of double-faced card
         this.nightCard = true;

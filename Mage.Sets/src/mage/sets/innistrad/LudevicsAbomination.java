@@ -45,6 +45,7 @@ public class LudevicsAbomination extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Lizard");
         this.subtype.add("Horror");
+        this.color.setBlue(true);
 
         // this card is the second face of double-faced card
         this.nightCard = true;

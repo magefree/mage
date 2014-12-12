@@ -53,6 +53,7 @@ public class SilverpeltWerewolf extends CardImpl {
         super(ownerId, 122, "Silverpelt Werewolf", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, null);
         this.expansionSetCode = "DKA";
         this.subtype.add("Werewolf");
+        this.color.setGreen(true);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);

@@ -42,6 +42,7 @@ public class KoboldsOfKherKeep extends CardImpl {
     public KoboldsOfKherKeep(UUID ownerId) {
         super(ownerId, 226, "Kobolds of Kher Keep", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{0}");
         this.expansionSetCode = "LEG";
+        this.color.setRed(true);
         this.subtype.add("Kobold");
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
