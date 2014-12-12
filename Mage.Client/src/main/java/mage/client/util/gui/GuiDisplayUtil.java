@@ -199,6 +199,24 @@ public class GuiDisplayUtil {
         }
         buffer.append("</td></tr></table>");
         buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%'><tr><td style='margin-left: 1px'>");
+        if(card.getColor().isWhite()) {
+            buffer.append("<img src='file:src/main/resources/card/color_ind_white.png' alt='W'>");
+        }
+        if(card.getColor().isBlue()) {
+            buffer.append("<img src='file:src/main/resources/card/color_ind_blue.png' alt='U'>");
+        }
+        if(card.getColor().isBlack()) {
+            buffer.append("<img src='file:src/main/resources/card/color_ind_black.png' alt='B'>");
+        }
+        if(card.getColor().isRed()) {
+            buffer.append("<img src='file:src/main/resources/card/color_ind_red.png' alt='R'>");
+        }
+        if(card.getColor().isGreen()) {
+            buffer.append("<img src='file:src/main/resources/card/color_ind_green.png' alt='G'>");
+        }
+        if(!card.getColor().isColorless()) {
+            buffer.append("&nbsp;&nbsp;");
+        }
         buffer.append(getTypes(card));
         buffer.append("</td><td align='right'>");
         switch (card.getRarity()) {
