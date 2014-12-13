@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -44,6 +45,7 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
@@ -94,28 +96,32 @@ class SteamAuguryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller == null || sourceObject == null) {
             return false;
         }
 
-        Cards cards = new CardsImpl(Zone.PICK);
-        int count = Math.min(player.getLibrary().size(), 5);
-        for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-                game.setZone(card.getId(), Zone.PICK);
-            }
+        Cards cards = new CardsImpl();
+        cards.addAll(controller.getLibrary().getTopCards(game, 5));
+        controller.revealCards(sourceObject.getLogName(), cards, game);
+
+        Player opponent;
+        Set<UUID> opponents = game.getOpponents(controller.getId());
+        if (opponents.size() == 1) {
+            opponent = game.getPlayer(opponents.iterator().next());
+        } else {
+            Target target = new TargetOpponent(true);
+            controller.chooseTarget(Outcome.Detriment, target, source, game);
+            opponent = game.getPlayer(target.getFirstTarget());
         }
-        player.revealCards("Steam Augury", cards, game);
-        Player opponent = game.getPlayer(this.getTargetPointer().getFirst(game, source));
+
         if (opponent != null) {
             TargetCard target = new TargetCard(0, cards.size(), Zone.PICK, new FilterCard("cards to put in the first pile"));
             List<Card> pile1 = new ArrayList<>();
             Cards pile1CardsIds = new CardsImpl();
             target.setRequired(false);
-            if (player.choose(Outcome.Neutral, cards, target, game)) {
+            if (controller.choose(Outcome.Neutral, cards, target, game)) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
                     Card card = game.getCard(targetId);
@@ -134,7 +140,7 @@ class SteamAuguryEffect extends OneShotEffect {
                     pile2CardsIds.add(card.getId());
                 }
             }
-            boolean choice = opponent.choosePile(Outcome.Detriment, new StringBuilder("Choose a pile to put into ").append(player.getName()).append("'s hand.").toString(), pile1, pile2, game);
+            boolean choice = opponent.choosePile(Outcome.Detriment, new StringBuilder("Choose a pile to put into ").append(controller.getName()).append("'s hand.").toString(), pile1, pile2, game);
 
             Zone pile1Zone = Zone.GRAVEYARD;
             Zone pile2Zone = Zone.HAND;
@@ -143,7 +149,7 @@ class SteamAuguryEffect extends OneShotEffect {
                 pile2Zone = Zone.GRAVEYARD;
             }
 
-            StringBuilder sb = new StringBuilder("Steam Augury: Pile 1, going to ").append(pile1Zone.equals(Zone.HAND)?"Hand":"Graveyard").append (": ");
+            StringBuilder sb = new StringBuilder(sourceObject.getLogName() + ": Pile 1, going to ").append(pile1Zone.equals(Zone.HAND)?"Hand":"Graveyard").append (": ");
             int i = 0;
             for (UUID cardUuid : pile1CardsIds) {
                 i++;
@@ -158,7 +164,7 @@ class SteamAuguryEffect extends OneShotEffect {
             }
             game.informPlayers(sb.toString());
 
-            sb = new StringBuilder("Steam Augury: Pile 2, going to ").append(pile2Zone.equals(Zone.HAND)?"Hand":"Graveyard").append (":");
+            sb = new StringBuilder(sourceObject.getLogName() + ": Pile 2, going to ").append(pile2Zone.equals(Zone.HAND)?"Hand":"Graveyard").append (":");
             i = 0;
             for (UUID cardUuid : pile2CardsIds) {
                 Card card = game.getCard(cardUuid);

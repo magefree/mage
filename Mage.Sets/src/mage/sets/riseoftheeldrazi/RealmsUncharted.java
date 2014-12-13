@@ -28,7 +28,9 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+import mage.MageObject;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -43,8 +45,10 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetOpponent;
 
 /**
  *
@@ -55,8 +59,6 @@ public class RealmsUncharted extends CardImpl {
     public RealmsUncharted(UUID ownerId) {
         super(ownerId, 206, "Realms Uncharted", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "ROE";
-
-        this.color.setGreen(true);
 
         // Search your library for four land cards with different names and reveal them. An opponent chooses two of those cards. Put the chosen cards into your graveyard and the rest into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new RealmsUnchartedEffect());
@@ -90,29 +92,38 @@ class RealmsUnchartedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller == null || sourceObject == null) {
             return false;
         }
 
         RealmsUnchartedTarget target = new RealmsUnchartedTarget();
-        if (player.searchLibrary(target, game)) {
+        if (controller.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
                 Cards cards = new CardsImpl();
                 for (UUID cardId : (List<UUID>) target.getTargets()) {
-                    Card card = player.getLibrary().remove(cardId, game);
+                    Card card = controller.getLibrary().getCard(cardId, game);
                     if (card != null) {
                         cards.add(card);
                     }
                 }
-                player.revealCards("Realms Uncharted", cards, game);
+                controller.revealCards(sourceObject.getLogName(), cards, game);
 
                 CardsImpl cardsToKeep = new CardsImpl();
                 if (cards.size() > 2) {
                     cardsToKeep.addAll(cards);
 
-                    Player opponent = game.getPlayer(game.getOpponents(player.getId()).iterator().next());
-                    TargetCard targetDiscard = new TargetCard(2, Zone.PICK, new FilterCard("cards to put in graveyard"));
+                    Player opponent;
+                    Set<UUID> opponents = game.getOpponents(controller.getId());
+                    if (opponents.size() == 1) {
+                        opponent = game.getPlayer(opponents.iterator().next());
+                    } else {
+                        Target targetOpponent = new TargetOpponent(true);
+                        controller.chooseTarget(Outcome.Detriment, targetOpponent, source, game);
+                        opponent = game.getPlayer(targetOpponent.getFirstTarget());
+                    }
+                    TargetCard targetDiscard = new TargetCard(2, Zone.LIBRARY, new FilterCard("cards to put in graveyard"));
                     if (opponent != null && opponent.choose(Outcome.Discard, cards, targetDiscard, game)) {
                         cardsToKeep.removeAll(targetDiscard.getTargets());
                         cards.removeAll(cardsToKeep);
@@ -122,20 +133,20 @@ class RealmsUnchartedEffect extends OneShotEffect {
                 for (UUID cardId : cards) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
-                        card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
+                        controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                     }
                 }
                 for (UUID cardId : cardsToKeep) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                        controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                     }
                 }
             }
-            player.shuffleLibrary(game);
+            controller.shuffleLibrary(game);
             return true;
         }
-        player.shuffleLibrary(game);
+        controller.shuffleLibrary(game);
         return false;
     }
 }

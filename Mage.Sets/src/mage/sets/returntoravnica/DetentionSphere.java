@@ -28,6 +28,7 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
+import mage.MageObject;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -109,11 +110,17 @@ class DetentionSphereEntersEffect extends OneShotEffect {
         UUID exileId = source.getSourceId();
         Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        if (exileId != null && targetPermanent != null && controller != null) {
-            String name = targetPermanent.getName();
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-                if (permanent != null && permanent.getName().equals(name)) {
-                    controller.moveCardToExileWithInfo(permanent, exileId, "Detention Sphere", source.getSourceId(), game, Zone.BATTLEFIELD);
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (sourceObject != null && exileId != null && targetPermanent != null && controller != null) {
+
+            if (targetPermanent.getName().isEmpty()) { // face down creature
+                controller.moveCardToExileWithInfo(targetPermanent, exileId, sourceObject.getLogName(), source.getSourceId(), game, Zone.BATTLEFIELD);
+            } else {
+                String name = targetPermanent.getLogName();
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
+                    if (permanent != null && permanent.getLogName().equals(name)) {
+                        controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getLogName(), source.getSourceId(), game, Zone.BATTLEFIELD);
+                    }
                 }
             }
             return true;

@@ -37,9 +37,12 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetNonlandPermanent;
 
@@ -52,8 +55,6 @@ public class EchoingTruth extends CardImpl {
     public EchoingTruth(UUID ownerId) {
         super(ownerId, 66, "Echoing Truth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "DDF";
-
-        this.color.setBlue(true);
 
         // Return target nonland permanent and all other permanents with the same name as that permanent to their owners' hands.
         Target target = new TargetNonlandPermanent();
@@ -88,13 +89,19 @@ class ReturnToHandAllNamedPermanentsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
+        if (controller != null && permanent != null) {
             FilterPermanent filter = new FilterPermanent();
-            filter.add(new NamePredicate(permanent.getName()));
-            for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-                perm.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+            if (permanent.getName().isEmpty()) {
+                filter.add(new PermanentIdPredicate(permanent.getId()));  // if no name (face down creature) only the creature itself is selected
+            } else {
+                filter.add(new NamePredicate(permanent.getLogName()));        
             }
+            for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+                controller.moveCardToHandWithInfo(perm, source.getSourceId(), game, Zone.BATTLEFIELD);
+            }
+            return true;
         }
         return true;
     }

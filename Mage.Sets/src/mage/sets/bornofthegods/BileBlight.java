@@ -79,16 +79,18 @@ class BileBlightEffect extends BoostAllEffect {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-
         if (this.affectedObjectsSet) {
             this.objects.clear();
-            UUID permanentId = targetPointer.getFirst(game, source);
-            Permanent target = game.getPermanent(permanentId);
+            Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (target != null) {
-                String name = target.getName();
-                for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-                    if (perm.getName().equals(name)) {
-                        this.objects.add(perm.getId());
+                if (target.getName().isEmpty()) { // face down creature
+                    this.objects.add(target.getId());
+                } else {
+                    String name = target.getLogName();
+                    for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
+                        if (perm.getLogName().equals(name)) {
+                            this.objects.add(perm.getId());
+                        }
                     }
                 }
             }

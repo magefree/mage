@@ -35,7 +35,6 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
@@ -44,6 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPermanent;
 
 /**
@@ -94,8 +94,9 @@ class ExclusionRitualImprintEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
-        if (sourcePermanent != null && targetPermanent != null) {
-            targetPermanent.moveToExile(getId(), sourcePermanent.getLogName() + " (Imprint)", source.getSourceId(), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && sourcePermanent != null && targetPermanent != null) {
+            controller.moveCardToExileWithInfo(targetPermanent, getId(), sourcePermanent.getLogName(), source.getSourceId(), game, Zone.BATTLEFIELD);
             sourcePermanent.imprint(targetPermanent.getId(), game);
         }
         return true;

@@ -359,4 +359,43 @@ public class MorphTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "face down creature", 1);
 
     }
+
+    /**
+     * Check that an effect like "arget creature and all other creatures with the same name" does
+     * only effect one face down creature, also if multiple on the battlefield. Because they have no
+     * name, they don't have the same name.
+     *
+     */
+    @Test
+    public void testEchoingDecaySameNameEffect() {
+        // Sagu Mauler 6/6 - Creature - Beast
+        // Trample, hexproof
+        // Morph {3}{G}{B} (You may cast this card face down as a 2/2 creature for . Turn it face up any time for its morph cost.)
+        addCard(Zone.HAND, playerA, "Sagu Mauler", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
+
+        // Echoing Decay {1}{B}
+        // Instant
+        // Target creature and all other creatures with the same name as that creature get -2/-2 until end of turn.
+        addCard(Zone.HAND, playerB, "Echoing Decay");
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sagu Mauler");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sagu Mauler");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Echoing Decay", "face down creature");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerB, 20);
+
+        assertHandCount(playerA, "Sagu Mauler", 0);
+        assertHandCount(playerB, "Echoing Decay", 0);
+
+        assertPermanentCount(playerA, "face down creature", 1);
+
+    }
 }

@@ -40,25 +40,20 @@ public class TraceUtil {
      * @param combat
      */
     public static void traceCombatIfNeeded(Game game, Combat combat) {
-        // trace non-flying vs flying       
+        // trace non-flying vs flying
         for (CombatGroup group : combat.getGroups()) {
             for (UUID attackerId : group.getAttackers()) {
                 Permanent attacker = game.getPermanent(attackerId);
                 if (attacker != null) {
                     if (hasFlying(attacker)) {
-//                        boolean traceDone = false;
-                        
+ // traceCombat(game, attacker, null);
                         for (UUID blockerId : group.getBlockers()) {
                             Permanent blocker = game.getPermanent(blockerId);
                             if (blocker != null && !hasFlying(blocker) && !hasReach(blocker)) {
                                 log.warn("Found non-flying non-reach creature blocking creature with flying");
                                 traceCombat(game, attacker, blocker);                                
-//                                traceDone = true;
                             }
                         }
-//                        if (!traceDone) {
-//                            traceCombat(game, attacker, null);                        
-//                        }
                     }
                     if (hasIntimidate(attacker)) {
                         for (UUID blockerId : group.getBlockers()) {
@@ -70,7 +65,6 @@ public class TraceUtil {
                             }
                         }
                     }
-
                     if (hasUnblockable(attacker)) {
                         if (group.getBlockers().size() > 0) {
                             Permanent blocker = game.getPermanent(group.getBlockers().get(0));

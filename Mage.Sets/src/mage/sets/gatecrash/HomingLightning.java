@@ -27,7 +27,6 @@
  */
 package mage.sets.gatecrash;
 
-import java.util.List;
 import java.util.UUID;
 
 import mage.constants.CardType;
@@ -38,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -82,22 +82,22 @@ class HomingLightningEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(source.getFirstTarget());
-        if (target == null) {
+        Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
+        if (targetPermanent == null) {
             return false;
         }
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new NamePredicate(target.getName()));
-        List<Permanent> creatures = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
-        if (target != null) {
-            for (Permanent creature : creatures) {
-                if (creature != null) {
-                    creature.damage(4, id, game, false, true);
-                }
-            }
-            return true;
+        if (targetPermanent.getName().isEmpty()) {
+            filter.add(new PermanentIdPredicate(targetPermanent.getId()));  // if no name (face down creature) only the creature itself is selected
+        } else {
+            filter.add(new NamePredicate(targetPermanent.getName()));
         }
-        return false;
+        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+            if (creature != null) {
+                creature.damage(4, source.getSourceId(), game, false, true);
+            }
+        }
+        return true;
     }
 
     @Override

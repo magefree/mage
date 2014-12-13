@@ -27,7 +27,6 @@
  */
 package mage.sets.innistrad;
 
-import java.util.List;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -38,10 +37,13 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -91,13 +93,17 @@ class SeverTheBloodlineEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
-        if (targetPermanent != null) {
+        if (controller != null && targetPermanent != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            filter.add(new NamePredicate(targetPermanent.getName()));
-            List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
-            for (Permanent permanent : permanents) {
-                permanent.moveToExile(null, "", source.getSourceId(), game);
+            if (targetPermanent.getName().isEmpty()) {
+                filter.add(new PermanentIdPredicate(targetPermanent.getId()));  // if no name (face down creature) only the creature itself is selected
+            } else {
+                filter.add(new NamePredicate(targetPermanent.getName()));
+            }
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD);
             }
             return true;
         }

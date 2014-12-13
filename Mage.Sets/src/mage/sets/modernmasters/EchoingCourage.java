@@ -39,6 +39,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -91,7 +92,11 @@ class EchoingCourageEffect extends OneShotEffect {
         Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (targetPermanent != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            filter.add(new NamePredicate(targetPermanent.getName()));
+            if (targetPermanent.getName().isEmpty()) {
+                filter.add(new PermanentIdPredicate(targetPermanent.getId()));  // if no name (face down creature) only the creature itself is selected
+            } else {
+                filter.add(new NamePredicate(targetPermanent.getLogName()));
+            }
             ContinuousEffect effect = new BoostAllEffect(2,2, Duration.EndOfTurn, filter, false);
             game.addEffect(effect, source);
             return true;

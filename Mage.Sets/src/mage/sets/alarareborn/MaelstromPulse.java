@@ -46,6 +46,7 @@ public class MaelstromPulse extends CardImpl {
         this.expansionSetCode = "ARB";
         
 
+        // Destroy target nonland permanent and all other permanents with the same name as that permanent.
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
         this.getSpellAbility().addEffect(new DestroyAllNamedPermanentsEffect());
     }

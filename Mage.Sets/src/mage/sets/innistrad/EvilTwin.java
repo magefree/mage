@@ -88,9 +88,11 @@ public class EvilTwin extends CardImpl {
 class EvilTwinApplyToPermanent extends ApplyToPermanent {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with the same name as this creature");
+
     static {
         filter.add(new EvilTwinPredicate());
     }
+
     @Override
     public Boolean apply(Game game, Permanent permanent) {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{U}{B}"));
@@ -107,8 +109,7 @@ class EvilTwinPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlaye
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         Permanent permanent = input.getObject();
         Permanent twin = game.getPermanent(input.getSourceId());
-
-        return permanent != null && twin != null && permanent.getName().equals(twin.getName());
+        return permanent != null && twin != null && !twin.getName().isEmpty() && permanent.getName().equals(twin.getName());
     }
 
     @Override

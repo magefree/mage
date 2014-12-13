@@ -28,10 +28,13 @@
 
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -56,16 +59,19 @@ public class DestroyAllNamedPermanentsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        String name = permanent.getName();
-
-        permanent.destroy(source.getSourceId(), game, false);
-        for (Permanent perm: game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            if (perm.getName().equals(name)) {
-                perm.destroy(source.getSourceId(), game, false);
-            }
+        Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (targetPermanent == null) {
+            return false;
         }
-
+        FilterPermanent filter = new FilterPermanent();
+        if (targetPermanent.getName().isEmpty()) {
+            filter.add(new PermanentIdPredicate(targetPermanent.getId()));  // if no name (face down creature) only the creature itself is selected
+        } else {
+            filter.add(new NamePredicate(targetPermanent.getName()));
+        }
+        for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+            perm.destroy(source.getSourceId(), game, false);
+        }
         return true;
     }
 

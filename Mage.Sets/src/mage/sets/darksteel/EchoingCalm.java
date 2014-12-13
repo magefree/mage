@@ -28,17 +28,17 @@
 package mage.sets.darksteel;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPermanent;
 
 /**
@@ -57,6 +57,7 @@ public class EchoingCalm extends CardImpl {
 
         this.color.setWhite(true);
 
+        // Destroy target enchantment and all other enchantments with the same name as that enchantment.
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new EchoingCalmEffect());
     }
@@ -88,15 +89,19 @@ class EchoingCalmEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        String name = permanent.getName();
-
-        permanent.destroy(source.getSourceId(), game, false);
-        for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            if (perm.getName().equals(name) && perm.getCardType().contains(CardType.ENCHANTMENT))
-                perm.destroy(source.getSourceId(), game, false);
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (controller != null && permanent != null) {
+            permanent.destroy(source.getSourceId(), game, false);
+            if (!permanent.getName().isEmpty()) { // in case of face down enchantment creature
+                for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
+                    if (!perm.getId().equals(permanent.getId()) && perm.getName().equals(permanent.getName()) && perm.getCardType().contains(CardType.ENCHANTMENT)) {
+                        perm.destroy(source.getSourceId(), game, false);
+                    }
+                }
+            }
+            return true;
         }
-
-        return true;
+        return false;
     }
 }
