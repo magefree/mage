@@ -15,7 +15,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 public class FilterCreatureSpell extends FilterSpell {
 
     public FilterCreatureSpell() {
-        super("creature spell");
+        this("creature spell");
     }
 
     public FilterCreatureSpell(String name) {
