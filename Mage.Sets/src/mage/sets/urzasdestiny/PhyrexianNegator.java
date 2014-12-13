@@ -53,7 +53,6 @@ public class PhyrexianNegator extends CardImpl {
         this.expansionSetCode = "UDS";
         this.subtype.add("Horror");
 
-        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
@@ -105,6 +104,6 @@ class PhyrexianNegatorTriggeredAbility extends TriggeredAbilityImpl {
     
     @Override
     public String getRule() {
-        return "Whenever Phyrexian Negator is dealt damage, sacrifice that many permanents";
+        return "Whenever {this} is dealt damage, sacrifice that many permanents.";
     }
 }

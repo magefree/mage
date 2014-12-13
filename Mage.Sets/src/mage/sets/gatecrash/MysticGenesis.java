@@ -34,8 +34,8 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.game.stack.StackObject;
@@ -51,11 +51,8 @@ public class MysticGenesis extends CardImpl {
         super(ownerId, 180, "Mystic Genesis", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{G}{U}{U}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-
         // Counter target spell. Put an X/X green Ooze creature token onto the battlefield, where X is that spell's converted mana cost.
-        this.getSpellAbility().addTarget(new TargetSpell(new FilterSpell()));
+        this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new MysticGenesisEffect());
 
     }
@@ -89,30 +86,23 @@ class MysticGenesisEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         StackObject stackObject = game.getStack().getStackObject(targetPointer.getFirst(game, source));
-        if (stackObject != null && game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game)) {
-            if ( stackObject != null ) {
-                int cmc = stackObject.getManaCost().convertedManaCost();
-                if ( cmc > 0 ) {
-                    MysticGenesisOozeToken oozeToken = new MysticGenesisOozeToken();
-                    oozeToken.getPower().initValue(cmc);
-                    oozeToken.getToughness().initValue(cmc);
-                    oozeToken.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-                }
-                return true;
-
-            }
+        if (stackObject != null) {
+            game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
+            return new CreateTokenEffect(new MysticGenesisOozeToken(stackObject.getConvertedManaCost())).apply(game, source);
         }
         return false;
     }
 }
 
 class MysticGenesisOozeToken extends Token {
-    public MysticGenesisOozeToken() {
+    
+    public MysticGenesisOozeToken(int xValue) {
         super("Ooze", "X/X green Ooze creature token");
         cardType.add(CardType.CREATURE);
+        color.setGreen(true);
         subtype.add("Ooze");
-        power = new MageInt(0);
-        toughness = new MageInt(0);
+        power = new MageInt(xValue);
+        toughness = new MageInt(xValue);
         setOriginalExpansionSetCode("RTR");
     }
 }

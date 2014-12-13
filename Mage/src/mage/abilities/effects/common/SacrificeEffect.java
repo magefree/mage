@@ -66,7 +66,7 @@ public class SacrificeEffect extends OneShotEffect{
         this(filter, new StaticValue(count), preText);
     }
 
-    public SacrificeEffect ( SacrificeEffect effect ) {
+    public SacrificeEffect ( final SacrificeEffect effect ) {
         super(effect);
         this.filter = effect.filter;
         this.count = effect.count;
