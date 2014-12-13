@@ -61,8 +61,8 @@ public class AvenMimeomancer extends CardImpl {
         this.subtype.add("Bird");
         this.subtype.add("Wizard");
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

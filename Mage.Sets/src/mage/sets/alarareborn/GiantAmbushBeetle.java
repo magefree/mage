@@ -50,9 +50,9 @@ public class GiantAmbushBeetle extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Insect");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
+
+
+        
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

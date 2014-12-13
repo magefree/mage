@@ -54,9 +54,9 @@ public class Wargate extends CardImpl {
         super(ownerId, 129, "Wargate", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}{W}{U}");
         this.expansionSetCode = "ARB";
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setWhite(true);
+
+
+
 
         // Search your library for a permanent card with converted mana cost X or less, put it onto the battlefield, then shuffle your library.
         this.getSpellAbility().addEffect(new WargateEffect());

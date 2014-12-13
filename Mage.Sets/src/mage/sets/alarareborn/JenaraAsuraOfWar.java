@@ -51,9 +51,9 @@ public class JenaraAsuraOfWar extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Angel");
         this.supertype.add("Legendary");
-        this.color.setGreen(true);
-        this.color.setWhite(true);
-        this.color.setBlack(true);
+
+
+        
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());

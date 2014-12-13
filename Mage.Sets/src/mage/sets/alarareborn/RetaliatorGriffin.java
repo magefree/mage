@@ -55,9 +55,9 @@ public class RetaliatorGriffin extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Griffin");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.color.setWhite(true);
+
+
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

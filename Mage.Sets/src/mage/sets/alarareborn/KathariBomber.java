@@ -53,8 +53,8 @@ public class KathariBomber extends CardImpl {
         this.subtype.add("Bird");
         this.subtype.add("Shaman");
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
+
+        
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

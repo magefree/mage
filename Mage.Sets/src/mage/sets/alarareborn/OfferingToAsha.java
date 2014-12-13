@@ -46,8 +46,8 @@ public class OfferingToAsha extends CardImpl {
         super(ownerId, 9, "Offering to Asha", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}{U}");
         this.expansionSetCode = "ARB";
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
+
+
 
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(4)));

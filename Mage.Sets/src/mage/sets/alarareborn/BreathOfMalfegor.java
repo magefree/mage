@@ -44,8 +44,8 @@ public class BreathOfMalfegor extends CardImpl {
         super(ownerId, 35, "Breath of Malfegor", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{B}{R}");
         this.expansionSetCode = "ARB";
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
+
+        
 
         // Breath of Malfegor deals 5 damage to each opponent.
         this.getSpellAbility().addEffect(new DamagePlayersEffect(5, TargetController.OPPONENT));

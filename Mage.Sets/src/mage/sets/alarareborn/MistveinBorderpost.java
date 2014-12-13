@@ -59,8 +59,8 @@ public class MistveinBorderpost extends CardImpl {
     public MistveinBorderpost (UUID ownerId) {
         super(ownerId, 27, "Mistvein Borderpost", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}{U}{B}");
         this.expansionSetCode = "ARB";
-        this.color.setBlue(true);
-        this.color.setBlack(true);
+
+        
 
         // You may pay {1} and return a basic land you control to its owner's hand rather than pay Mistvein Borderpost's mana cost.
         Ability ability = new AlternativeCostSourceAbility(new GenericManaCost(1));

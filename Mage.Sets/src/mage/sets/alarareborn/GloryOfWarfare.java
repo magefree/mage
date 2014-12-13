@@ -51,8 +51,8 @@ public class GloryOfWarfare extends CardImpl {
         super(ownerId, 98, "Glory of Warfare", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{W}");
         this.expansionSetCode = "ARB";
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
+
+
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
                 new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield),

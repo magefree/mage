@@ -47,8 +47,8 @@ public class EtheriumAbomination extends CardImpl {
         super(ownerId, 20, "Etherium Abomination", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{U}{B}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Horror");
-        this.color.setBlue(true);
-        this.color.setBlack(true);
+
+        
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{1}{U}{B}")));

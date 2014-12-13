@@ -66,9 +66,9 @@ public class TraceOfAbundance extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.color.setWhite(true);
+
+
+
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

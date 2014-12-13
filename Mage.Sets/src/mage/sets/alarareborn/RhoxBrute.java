@@ -45,8 +45,8 @@ public class RhoxBrute extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Rhino");
         this.subtype.add("Warrior");
-        this.color.setRed(true);
-        this.color.setGreen(true);
+
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
     }

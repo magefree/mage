@@ -46,8 +46,8 @@ public class TalonTrooper extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Bird");
         this.subtype.add("Scout");
-        this.color.setWhite(true);
-        this.color.setBlue(true);
+
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());

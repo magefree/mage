@@ -59,8 +59,8 @@ public class FirewildBorderpost extends CardImpl {
     public FirewildBorderpost (UUID ownerId) {
         super(ownerId, 54, "Firewild Borderpost", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}{R}{G}");
         this.expansionSetCode = "ARB";
-        this.color.setRed(true);
-        this.color.setGreen(true);
+
+
 
         // You may pay {1} and return a basic land you control to its owner's hand rather than pay Firewild Borderpost's mana cost.
         Ability ability = new AlternativeCostSourceAbility(new GenericManaCost(1));

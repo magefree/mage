@@ -65,8 +65,8 @@ public class QasaliPridemage extends CardImpl {
         this.subtype.add("Cat");
         this.subtype.add("Wizard");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

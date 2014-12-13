@@ -48,8 +48,8 @@ public class IgneousPouncer extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Elemental");
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
+
+        
         this.power = new MageInt(5);
         this.toughness = new MageInt(1);
 

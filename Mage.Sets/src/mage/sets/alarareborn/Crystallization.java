@@ -59,9 +59,9 @@ public class Crystallization extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Aura");
         
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setWhite(true);
+
+
+
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

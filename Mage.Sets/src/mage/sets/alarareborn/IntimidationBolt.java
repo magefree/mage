@@ -49,8 +49,8 @@ public class IntimidationBolt extends CardImpl {
         super(ownerId, 99, "Intimidation Bolt", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{W}");
         this.expansionSetCode = "ARB";
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
+
+
 
         // Intimidation Bolt deals 3 damage to target creature. Other creatures can't attack this turn.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));

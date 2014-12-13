@@ -44,8 +44,8 @@ public class Terminate extends CardImpl {
     public Terminate(UUID ownerId) {
         super(ownerId, 46, "Terminate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}{R}");
         this.expansionSetCode = "ARB";
-        this.color.setBlack(true);
-        this.color.setRed(true);
+        
+
 
         // Destroy target creature. It can't be regenerated.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

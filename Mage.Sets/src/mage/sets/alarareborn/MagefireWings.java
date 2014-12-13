@@ -57,8 +57,8 @@ public class MagefireWings extends CardImpl {
         super(ownerId, 88, "Magefire Wings", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}{R}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Aura");
-        this.color.setBlue(true);
-        this.color.setRed(true);
+
+
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);

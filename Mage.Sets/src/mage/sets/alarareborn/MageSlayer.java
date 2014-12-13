@@ -52,8 +52,8 @@ public class MageSlayer extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Equipment");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
+
+
 
         // Whenever equipped creature attacks, it deals damage equal to its power to defending player.
         this.addAbility(new AttacksAttachedTriggeredAbility(new MageSlayerEffect(), false));

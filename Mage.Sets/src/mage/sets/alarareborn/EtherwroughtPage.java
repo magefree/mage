@@ -55,9 +55,9 @@ public class EtherwroughtPage extends CardImpl {
         super(ownerId, 108, "Etherwrought Page", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}{W}{U}{B}");
         this.expansionSetCode = "ARB";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
+
+        
+
 
         // At the beginning of your upkeep, choose one - You gain 2 life; or look at the top card of your library, then you may put that card into your graveyard; or each opponent loses 1 life.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), TargetController.YOU, false);

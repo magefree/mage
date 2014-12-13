@@ -55,8 +55,8 @@ public class FiligreeAngel extends CardImpl {
         super(ownerId, 6, "Filigree Angel", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}{W}{W}{U}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Angel");
-        this.color.setWhite(true);
-        this.color.setBlue(true);
+
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

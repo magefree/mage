@@ -49,9 +49,9 @@ public class DragonAppeasement extends CardImpl {
         super(ownerId, 115, "Dragon Appeasement", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{R}{G}");
         this.expansionSetCode = "ARB";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
+
+
+        
 
         // Skip your draw step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect()));

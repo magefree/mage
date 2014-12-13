@@ -45,8 +45,8 @@ public class ZealousPersecution extends CardImpl {
         super(ownerId, 85, "Zealous Persecution", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}{B}");
         this.expansionSetCode = "ARB";
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
+        
+
 
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new BoostOpponentsEffect(-1, -1, Duration.EndOfTurn));

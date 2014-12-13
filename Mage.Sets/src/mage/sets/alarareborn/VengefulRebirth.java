@@ -54,8 +54,8 @@ public class VengefulRebirth extends CardImpl {
     public VengefulRebirth(UUID ownerId) {
         super(ownerId, 62, "Vengeful Rebirth", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{G}");
         this.expansionSetCode = "ARB";
-        this.color.setRed(true);
-        this.color.setGreen(true);
+
+
         // Return target card from your graveyard to your hand. If you return a nonland card to your hand this way, {this} deals damage equal to that card's converted mana cost to target creature or player
         Target target = new TargetCardInYourGraveyard();
         this.getSpellAbility().addTarget(target);

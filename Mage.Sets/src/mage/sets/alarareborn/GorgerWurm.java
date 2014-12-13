@@ -45,8 +45,8 @@ public class GorgerWurm extends CardImpl {
         super(ownerId, 56, "Gorger Wurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Wurm");
-        this.color.setGreen(true);
-        this.color.setRed(true);
+
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

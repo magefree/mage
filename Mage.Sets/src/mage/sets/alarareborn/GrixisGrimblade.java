@@ -64,9 +64,9 @@ public class GrixisGrimblade extends CardImpl {
         this.subtype.add("Zombie");
         this.subtype.add("Warrior");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setBlack(true);
+
+
+        
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

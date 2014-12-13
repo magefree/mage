@@ -59,8 +59,8 @@ public class VeinfireBorderpost extends CardImpl {
     public VeinfireBorderpost (UUID ownerId) {
         super(ownerId, 48, "Veinfire Borderpost", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}{B}{R}");
         this.expansionSetCode = "ARB";
-        this.color.setBlack(true);
-        this.color.setRed(true);
+        
+
 
         // You may pay {1} and return a basic land you control to its owner's hand rather than pay Veinfire Borderpost's mana cost.
         Ability ability = new AlternativeCostSourceAbility(new GenericManaCost(1));

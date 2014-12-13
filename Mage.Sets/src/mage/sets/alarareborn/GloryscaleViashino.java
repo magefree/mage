@@ -52,9 +52,9 @@ public class GloryscaleViashino extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Viashino");
         this.subtype.add("Soldier");
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.color.setWhite(true);
+
+
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(new GloryscaleViashinoAbility());

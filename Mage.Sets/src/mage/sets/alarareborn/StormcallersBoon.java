@@ -51,8 +51,8 @@ public class StormcallersBoon extends CardImpl {
         super(ownerId, 13, "Stormcaller's Boon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{U}");
         this.expansionSetCode = "ARB";
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
+
+
 
         // Sacrifice Stormcaller's Boon: Creatures you control gain flying until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures")), new SacrificeSourceCost()));

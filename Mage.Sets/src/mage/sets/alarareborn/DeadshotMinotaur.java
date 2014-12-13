@@ -59,8 +59,8 @@ public class DeadshotMinotaur extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Minotaur");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
+
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

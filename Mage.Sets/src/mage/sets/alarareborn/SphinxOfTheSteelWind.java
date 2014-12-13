@@ -56,9 +56,9 @@ public class SphinxOfTheSteelWind extends CardImpl {
         super(ownerId, 110, "Sphinx of the Steel Wind", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}{W}{U}{B}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Sphinx");
-        this.color.setWhite(true);
-        this.color.setBlue(true);
-        this.color.setBlack(true);
+
+
+        
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
         this.addAbility(FlyingAbility.getInstance());

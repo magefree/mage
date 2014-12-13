@@ -56,8 +56,8 @@ public class SpellboundDragon extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Dragon");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
+
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 

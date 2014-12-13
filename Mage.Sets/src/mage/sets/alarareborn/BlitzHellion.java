@@ -52,8 +52,8 @@ public class BlitzHellion extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Hellion");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
+
+
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

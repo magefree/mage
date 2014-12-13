@@ -48,8 +48,8 @@ public class SanctumPlowbeast extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Beast");
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);
 

@@ -56,9 +56,9 @@ public class SlaveOfBolas extends CardImpl {
         super(ownerId, 136, "Slave of Bolas", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U/R}{B}");
         this.expansionSetCode = "ARB";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setBlack(true);
+
+
+        
 
         // Gain control of target creature. Untap that creature. It gains haste until end of turn. Sacrifice it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));

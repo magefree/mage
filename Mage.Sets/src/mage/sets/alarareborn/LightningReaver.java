@@ -59,8 +59,8 @@ public class LightningReaver extends CardImpl {
         this.subtype.add("Zombie");
         this.subtype.add("Beast");
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
+
+        
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

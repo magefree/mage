@@ -64,8 +64,8 @@ public class ClovenCasting extends CardImpl {
         super(ownerId, 86, "Cloven Casting", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}{R}");
         this.expansionSetCode = "ARB";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
+
+
 
         // Whenever you cast a multicolored instant or sorcery spell, you may pay {1}. If you do, copy that spell. You may choose new targets for the copy.
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new ClovenCastingEffect(), new GenericManaCost(1)), filter, true, true));

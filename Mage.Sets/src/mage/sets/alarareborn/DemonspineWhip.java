@@ -53,8 +53,8 @@ public class DemonspineWhip extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Equipment");
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
+
+        
 
         // {X}: Equipped creature gets +X/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(new XPaid(), new StaticValue(0), Duration.EndOfTurn), new ManaCostsImpl("{X}")));

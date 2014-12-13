@@ -70,9 +70,9 @@ public class UnscytheKillerOfKings extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Equipment");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setBlack(true);
+
+
+        
 
         // Equipped creature gets +3/+3 and has first strike.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 3)));

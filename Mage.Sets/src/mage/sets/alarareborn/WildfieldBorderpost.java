@@ -59,8 +59,8 @@ public class WildfieldBorderpost extends CardImpl {
     public WildfieldBorderpost (UUID ownerId) {
         super(ownerId, 80, "Wildfield Borderpost", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}{G}{W}");
         this.expansionSetCode = "ARB";
-        this.color.setGreen(true);
-        this.color.setWhite(true);
+
+
 
         // You may pay {1} and return a basic land you control to its owner's hand rather than pay Wildfield Borderpost's mana cost.
         Ability ability = new AlternativeCostSourceAbility(new GenericManaCost(1));

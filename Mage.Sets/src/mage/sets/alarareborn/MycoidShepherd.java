@@ -53,8 +53,8 @@ public class MycoidShepherd extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Fungus");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

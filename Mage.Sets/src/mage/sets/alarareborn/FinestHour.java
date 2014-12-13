@@ -57,9 +57,9 @@ public class FinestHour extends CardImpl {
     public FinestHour(UUID ownerId) {
         super(ownerId, 126, "Finest Hour", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{W}{U}");
         this.expansionSetCode = "ARB";
-        this.color.setWhite(true);
-        this.color.setGreen(true);
-        this.color.setBlue(true);
+
+
+
 
         // Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
         this.addAbility(new ExaltedAbility());

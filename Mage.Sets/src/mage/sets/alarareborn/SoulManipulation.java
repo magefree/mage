@@ -57,8 +57,8 @@ public class SoulManipulation extends CardImpl {
         super(ownerId, 29, "Soul Manipulation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{B}");
         this.expansionSetCode = "ARB";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
+
+        
 
         // Choose one or both -
         this.getSpellAbility().getModes().setMinModes(1);

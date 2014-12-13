@@ -47,8 +47,8 @@ public class ColossalMight extends CardImpl {
     public ColossalMight (UUID ownerId) {
         super(ownerId, 51, "Colossal Might", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}{G}");
         this.expansionSetCode = "ARB";
-        this.color.setRed(true);
-        this.color.setGreen(true);
+
+
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(4, 2, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));

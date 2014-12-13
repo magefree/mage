@@ -48,8 +48,8 @@ public class DemonicDread extends CardImpl {
         super(ownerId, 38, "Demonic Dread", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{R}");
         this.expansionSetCode = "ARB";
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
+
+        
 
         // Cascade
         this.addAbility(new CascadeAbility());

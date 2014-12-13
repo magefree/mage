@@ -52,8 +52,8 @@ public class VedalkenGhoul extends CardImpl {
         this.subtype.add("Vedalken");
         this.subtype.add("Zombie");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
+
+        
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

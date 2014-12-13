@@ -44,8 +44,10 @@ public class ArdentPlea extends CardImpl {
     public ArdentPlea (UUID ownerId) {
         super(ownerId, 1, "Ardent Plea", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{U}");
         this.expansionSetCode = "ARB";
-        this.color.setWhite(true);
-        this.color.setBlue(true);
+
+
+
+
         this.addAbility(new ExaltedAbility());
         this.addAbility(new CascadeAbility());
     }

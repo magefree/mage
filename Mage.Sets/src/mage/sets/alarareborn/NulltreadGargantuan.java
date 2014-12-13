@@ -49,8 +49,8 @@ public class NulltreadGargantuan extends CardImpl {
         super(ownerId, 102, "Nulltread Gargantuan", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Beast");
-        this.color.setGreen(true);
-        this.color.setBlue(true);
+
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 

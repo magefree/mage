@@ -55,9 +55,9 @@ public class Lavalanche extends CardImpl {
         super(ownerId, 118, "Lavalanche", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}{R}{G}");
         this.expansionSetCode = "ARB";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
+
+
+        
 
         // Lavalanche deals X damage to target player and each creature he or she controls.
         this.getSpellAbility().addEffect(new LavalancheEffect(new ManacostVariableValue()));

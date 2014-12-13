@@ -56,11 +56,11 @@ public class MaelstromNexus extends CardImpl {
         super(ownerId, 130, "Maelstrom Nexus", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT}, "{W}{U}{B}{R}{G}");
         this.expansionSetCode = "ARB";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
+
+
+
+        
+
 
         // The first spell you cast each turn has cascade.
         this.addAbility(new MaelstromNexusTriggeredAbility());

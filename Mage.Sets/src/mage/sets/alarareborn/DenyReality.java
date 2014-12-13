@@ -45,8 +45,8 @@ public class DenyReality extends CardImpl {
     public DenyReality (UUID ownerId) {
         super(ownerId, 19, "Deny Reality", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}{B}");
         this.expansionSetCode = "ARB";
-        this.color.setBlue(true);
-        this.color.setBlack(true);
+
+        
         this.getSpellAbility().addTarget(new TargetPermanent());
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.addAbility(new CascadeAbility());

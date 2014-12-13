@@ -47,8 +47,8 @@ public class WallOfDenial extends CardImpl {
         super(ownerId, 16, "Wall of Denial", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Wall");
-        this.color.setWhite(true);
-        this.color.setBlue(true);
+
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(8);
         this.addAbility(DefenderAbility.getInstance());

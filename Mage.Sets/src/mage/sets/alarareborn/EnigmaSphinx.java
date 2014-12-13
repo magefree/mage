@@ -55,9 +55,9 @@ public class EnigmaSphinx extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Sphinx");
 
-        this.color.setWhite(true);
-        this.color.setBlue(true);
-        this.color.setBlack(true);
+
+
+        
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

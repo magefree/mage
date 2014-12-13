@@ -55,8 +55,8 @@ public class FightToTheDeath extends CardImpl {
         super(ownerId, 97, "Fight to the Death", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{W}");
         this.expansionSetCode = "ARB";
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
+
+
 
         // Destroy all blocking creatures and all blocked creatures.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));

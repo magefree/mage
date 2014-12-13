@@ -53,8 +53,8 @@ public class NemesisOfReason extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Leviathan");
         this.subtype.add("Horror");
-        this.color.setBlue(true);
-        this.color.setBlack(true);
+
+        
         this.power = new MageInt(3);
         this.toughness = new MageInt(7);
         this.addAbility(new NemesisOfReasonTriggeredAbility());

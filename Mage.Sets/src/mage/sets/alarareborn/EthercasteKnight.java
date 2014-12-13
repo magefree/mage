@@ -46,8 +46,8 @@ public class EthercasteKnight extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Human");
         this.subtype.add("Knight");
-        this.color.setWhite(true);
-        this.color.setBlue(true);
+
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
         this.addAbility(new ExaltedAbility());

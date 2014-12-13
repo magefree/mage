@@ -64,9 +64,9 @@ public class ThopterFoundry extends CardImpl {
         super(ownerId, 133, "Thopter Foundry", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{W/B}{U}");
         this.expansionSetCode = "ARB";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
+
+        
+
 
         // {1}, Sacrifice a nontoken artifact: Put a 1/1 blue Thopter artifact creature token with flying onto the battlefield. You gain 1 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ThopterToken()), new GenericManaCost(1));

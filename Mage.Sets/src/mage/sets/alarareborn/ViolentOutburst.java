@@ -45,8 +45,8 @@ public class ViolentOutburst extends CardImpl {
         super(ownerId, 63, "Violent Outburst", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{G}");
         this.expansionSetCode = "ARB";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
+
+
 
         this.addAbility(new CascadeAbility());
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 0, Duration.EndOfTurn));

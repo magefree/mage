@@ -55,8 +55,8 @@ public class SingeMindOgre extends CardImpl {
         this.subtype.add("Ogre");
         this.subtype.add("Mutant");
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
+
+        
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

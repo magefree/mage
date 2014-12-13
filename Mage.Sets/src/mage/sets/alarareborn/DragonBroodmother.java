@@ -51,8 +51,8 @@ public class DragonBroodmother extends CardImpl {
         super(ownerId, 53, "Dragon Broodmother", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{R}{R}{G}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Dragon");
-        this.color.setGreen(true);
-        this.color.setRed(true);
+
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

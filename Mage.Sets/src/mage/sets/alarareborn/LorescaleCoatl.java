@@ -48,8 +48,8 @@ public class LorescaleCoatl extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Snake");
 
-        this.color.setGreen(true);
-        this.color.setBlue(true);
+
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

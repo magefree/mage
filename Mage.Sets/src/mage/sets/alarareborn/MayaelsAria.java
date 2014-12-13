@@ -53,9 +53,9 @@ public class MayaelsAria extends CardImpl {
         super(ownerId, 121, "Mayael's Aria", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{R}{G}{W}");
         this.expansionSetCode = "ARB";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.color.setWhite(true);
+
+
+
 
         // At the beginning of your upkeep, put a +1/+1 counter on each creature you control if you control a creature with power 5 or greater. Then you gain 10 life if you control a creature with power 10 or greater. Then you win the game if you control a creature with power 20 or greater.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new MayaelsAriaEffect(), TargetController.YOU, false));

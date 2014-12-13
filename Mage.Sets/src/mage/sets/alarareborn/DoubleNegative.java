@@ -46,8 +46,8 @@ public class DoubleNegative extends CardImpl {
         super(ownerId, 87, "Double Negative", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{U}{R}");
         this.expansionSetCode = "ARB";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
+
+
 
         // Counter up to two target spells.
         Effect effect = new CounterTargetEffect();

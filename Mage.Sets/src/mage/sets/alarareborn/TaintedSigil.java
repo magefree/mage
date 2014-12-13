@@ -55,8 +55,8 @@ public class TaintedSigil extends CardImpl {
         super(ownerId, 83, "Tainted Sigil", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}{W}{B}");
         this.expansionSetCode = "ARB";
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
+        
+
 
         // {tap}, Sacrifice Tainted Sigil: You gain life equal to the total life lost by all players this turn.
         AllPlayersLostLifeCount totalLifeLostThisTurn = new AllPlayersLostLifeCount();

@@ -49,9 +49,9 @@ public class DrasticRevelation extends CardImpl {
         super(ownerId, 111, "Drastic Revelation", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{B}{R}");
         this.expansionSetCode = "ARB";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setBlack(true);
+
+
+        
 
         // Discard your hand. Draw seven cards, then discard three cards at random.
         this.getSpellAbility().addEffect(new DrasticRevelationEffect());

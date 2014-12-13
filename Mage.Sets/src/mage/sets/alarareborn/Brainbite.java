@@ -45,8 +45,8 @@ public class Brainbite extends CardImpl {
         super(ownerId, 18, "Brainbite", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");
         this.expansionSetCode = "ARB";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
+
+        
 
         // Target opponent reveals his or her hand. You choose a card from it. That player discards that card.
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect());

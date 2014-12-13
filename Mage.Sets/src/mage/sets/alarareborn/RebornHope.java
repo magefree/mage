@@ -52,8 +52,8 @@ public class RebornHope extends CardImpl {
         super(ownerId, 76, "Reborn Hope", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{G}{W}");
         this.expansionSetCode = "ARB";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
+
+
 
         // Return target multicolored card from your graveyard to your hand.
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));

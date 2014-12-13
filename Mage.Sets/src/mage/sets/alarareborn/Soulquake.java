@@ -53,8 +53,8 @@ public class Soulquake extends CardImpl {
         super(ownerId, 30, "Soulquake", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}{B}{B}");
         this.expansionSetCode = "ARB";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
+
+        
 
         // Return all creatures on the battlefield and all creature cards in graveyards to their owners' hands.
         this.getSpellAbility().addEffect(new SoulquakeEffect());

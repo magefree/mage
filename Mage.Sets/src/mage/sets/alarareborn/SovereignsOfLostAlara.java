@@ -62,8 +62,8 @@ public class SovereignsOfLostAlara extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Spirit");
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

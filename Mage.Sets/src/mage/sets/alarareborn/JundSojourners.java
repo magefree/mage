@@ -52,9 +52,9 @@ public class JundSojourners extends CardImpl {
         this.subtype.add("Viashino");
         this.subtype.add("Shaman");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
+
+
+        
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

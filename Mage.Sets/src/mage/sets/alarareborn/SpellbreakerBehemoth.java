@@ -60,8 +60,8 @@ public class SpellbreakerBehemoth extends CardImpl {
     public SpellbreakerBehemoth(UUID ownerId) {
         super(ownerId, 60, "Spellbreaker Behemoth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{G}");
         this.expansionSetCode = "ARB";
-        this.color.setRed(true);
-        this.color.setGreen(true);
+
+
         this.subtype.add("Beast");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

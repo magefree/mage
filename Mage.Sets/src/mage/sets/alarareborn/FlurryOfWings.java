@@ -50,9 +50,9 @@ public class FlurryOfWings extends CardImpl {
         super(ownerId, 127, "Flurry of Wings", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}{W}{U}");
         this.expansionSetCode = "ARB";
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setWhite(true);
+
+
+
 
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BirdSoldierToken(), new PermanentsOnBattlefieldCount(filter)));
     }

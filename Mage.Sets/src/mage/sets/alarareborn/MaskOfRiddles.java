@@ -50,8 +50,8 @@ public class MaskOfRiddles extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Equipment");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
+
+        
 
         // Equipped creature has fear.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FearAbility.getInstance(), AttachmentType.EQUIPMENT)));

@@ -49,8 +49,8 @@ public class PutridLeech extends CardImpl {
     public PutridLeech(UUID ownerId) {
         super(ownerId, 95, "Putrid Leech", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{G}");
         this.expansionSetCode = "ARB";
-        this.color.setBlack(true);
-        this.color.setGreen(true);
+        
+
         this.subtype.add("Zombie");
         this.subtype.add("Leech");
         this.power = new MageInt(2);

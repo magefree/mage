@@ -52,9 +52,9 @@ public class SangriteBacklash extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
+
+
+        
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

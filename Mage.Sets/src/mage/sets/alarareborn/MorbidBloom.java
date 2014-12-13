@@ -50,8 +50,8 @@ public class MorbidBloom extends CardImpl {
         super(ownerId, 94, "Morbid Bloom", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{G}");
         this.expansionSetCode = "ARB";
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
+
+        
 
         // Exile target creature card from a graveyard, then put X 1/1 green Saproling creature tokens onto the battlefield, where X is the exiled card's toughness.
         this.getSpellAbility().addEffect(new MorbidBloomEffect());

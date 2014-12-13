@@ -46,8 +46,8 @@ public class BloodbraidElf extends CardImpl {
     public BloodbraidElf(UUID ownerId) {
         super(ownerId, 50, "Bloodbraid Elf", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
         this.expansionSetCode = "ARB";
-        this.color.setRed(true);
-        this.color.setGreen(true);
+
+
         this.subtype.add("Elf");
         this.subtype.add("Berserker");
         this.power = new MageInt(3);

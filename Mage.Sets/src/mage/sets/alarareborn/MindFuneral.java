@@ -52,8 +52,8 @@ public class MindFuneral extends CardImpl {
         super(ownerId, 26, "Mind Funeral", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{U}{B}");
         this.expansionSetCode = "ARB";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
+
+        
 
         // Target opponent reveals cards from the top of his or her library until four land cards are revealed. That player puts all cards revealed this way into his or her graveyard.
         this.getSpellAbility().addEffect(new MindFuneralEffect());

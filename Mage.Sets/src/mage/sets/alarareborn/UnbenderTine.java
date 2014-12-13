@@ -60,8 +60,8 @@ public class UnbenderTine extends CardImpl {
         super(ownerId, 15, "Unbender Tine", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}{W}{U}");
         this.expansionSetCode = "ARB";
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
+
+
 
         // {tap}: Untap another target permanent.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UnbenderTineEffect(), new TapSourceCost());

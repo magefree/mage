@@ -47,9 +47,9 @@ public class SewnEyeDrake extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Zombie");
         this.subtype.add("Drake");
-        this.color.setBlack(true);
-        this.color.setBlue(true);
-        this.color.setRed(true);
+        
+
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

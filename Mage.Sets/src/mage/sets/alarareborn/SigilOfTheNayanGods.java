@@ -58,8 +58,8 @@ public class SigilOfTheNayanGods extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
+
+
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);

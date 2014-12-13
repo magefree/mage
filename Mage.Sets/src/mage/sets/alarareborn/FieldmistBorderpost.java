@@ -59,8 +59,8 @@ public class FieldmistBorderpost extends CardImpl {
     public FieldmistBorderpost (UUID ownerId) {
         super(ownerId, 5, "Fieldmist Borderpost", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}{W}{U}");
         this.expansionSetCode = "ARB";
-        this.color.setWhite(true);
-        this.color.setBlue(true);
+
+
 
         // You may pay {1} and return a basic land you control to its owner's hand rather than pay Fieldmist Borderpost's mana cost.
         Ability ability = new AlternativeCostSourceAbility(new GenericManaCost(1));

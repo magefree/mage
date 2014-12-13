@@ -50,8 +50,8 @@ public class TimeSieve extends CardImpl {
         super(ownerId, 31, "Time Sieve", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{U}{B}");
         this.expansionSetCode = "ARB";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
+
+        
 
         // {tap}, Sacrifice five artifacts: Take an extra turn after this one.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddExtraTurnControllerEffect(), new TapSourceCost());

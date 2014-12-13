@@ -57,8 +57,8 @@ public class PredatoryAdvantage extends CardImpl {
         super(ownerId, 58, "Predatory Advantage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{G}");
         this.expansionSetCode = "ARB";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
+
+
 
         // At the beginning of each opponent's end step, if that player didn't cast a creature spell this turn, put a 2/2 green Lizard creature token onto the battlefield.
         this.addWatcher(new CastCreatureWatcher());

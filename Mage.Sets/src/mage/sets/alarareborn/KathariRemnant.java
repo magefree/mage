@@ -51,8 +51,8 @@ public class KathariRemnant extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Bird");
         this.subtype.add("Skeleton");
-        this.color.setBlue(true);
-        this.color.setBlack(true);
+
+        
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
