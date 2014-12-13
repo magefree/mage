@@ -88,14 +88,6 @@ $raritiesConversion{'M'} = 'MYTHIC';
 $raritiesConversion{'Special'} = 'SPECIAL';
 $raritiesConversion{'Bonus'} = 'BONUS';
 
-my %manaToColor;
-$manaToColor{'B'} = 'Black';
-$manaToColor{'U'} = 'Blue';
-$manaToColor{'G'} = 'Green';
-$manaToColor{'R'} = 'Red';
-$manaToColor{'W'} = 'White';
-
-
 # Get card name
 my $cardName = $ARGV[0];
 if(!$cardName) {
@@ -164,20 +156,7 @@ foreach my $setName (keys %{$cards{$cardName}}) {
                 }
             }
             $vars{'type'} = join(', ', @types);
-
-            my %colors;
-            while ($vars{'manaCost'} =~ m/([BUGRW])/g) {
-                $colors{$manaToColor{$1}} = 1;
-            }
-
-            $vars{'colors'} = '';
-            foreach my $color (keys %colors) {
-                $vars{'colors'} .= "\n        this.color.set$color(true);";
-            }
-            if ($vars{'colors'} || $vars{'power'}) {
-                $vars{'colors'} = "\n" . $vars{'colors'};
-            }
-            
+           
             $vars{'abilitiesImports'} = '';
             $vars{'abilities'} = '';
 
