@@ -31,12 +31,14 @@ import java.util.LinkedList;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -70,10 +72,8 @@ public class BrainMaggot extends CardImpl {
         // When Brain Maggot enters the battlefield, target opponent reveals his or her hand and you choose a nonland card from it. Exile that card until Brain Maggot leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BrainMaggotExileEffect());
         ability.addTarget(new TargetOpponent());
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new BrainMaggotReturnExiledCreatureAbility()));
         this.addAbility(ability);    
-        // Implemented as triggered effect that doesn't uses the stack (implementation with watcher does not work correctly because if the returned creature
-        // has a DiesTriggeredAll ability it triggers for the dying / battlefield leaving source object, what shouldn't happen)
-        this.addAbility(new BrainMaggotReturnExiledAbility());           
     }
 
     public BrainMaggot(final BrainMaggot card) {
@@ -108,15 +108,17 @@ class BrainMaggotExileEffect extends OneShotEffect {
         Player opponent = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && opponent != null && sourcePermanent != null) {
-            opponent.revealCards(sourcePermanent.getLogName(), opponent.getHand(), game);
+            if (!opponent.getHand().isEmpty()) {
+                opponent.revealCards(sourcePermanent.getLogName(), opponent.getHand(), game);
 
-            FilterCard filter = new FilterNonlandCard("nonland card to exile");
-            TargetCard target = new TargetCard(Zone.HAND, filter);
-            if (opponent.getHand().count(filter, game) > 0 && controller.choose(Outcome.Exile, opponent.getHand(), target, game)) {
-                Card card = opponent.getHand().get(target.getFirstTarget(), game);
-                // If source permanent leaves the battlefield before its triggered ability resolves, the target card won't be exiled.
-                if (card != null && game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
-                    controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourcePermanent.getName(), source.getSourceId(), game, Zone.HAND);
+                FilterCard filter = new FilterNonlandCard("nonland card to exile");
+                TargetCard target = new TargetCard(Zone.HAND, filter);
+                if (opponent.getHand().count(filter, game) > 0 && controller.choose(Outcome.Exile, opponent.getHand(), target, game)) {
+                    Card card = opponent.getHand().get(target.getFirstTarget(), game);
+                    // If source permanent leaves the battlefield before its triggered ability resolves, the target card won't be exiled.
+                    if (card != null && game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
+                        controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourcePermanent.getName(), source.getSourceId(), game, Zone.HAND);
+                    }
                 }
             }
             return true;
@@ -132,21 +134,21 @@ class BrainMaggotExileEffect extends OneShotEffect {
  * @author LevelX2
  */
 
-class BrainMaggotReturnExiledAbility extends TriggeredAbilityImpl {
+class BrainMaggotReturnExiledCreatureAbility extends DelayedTriggeredAbility {
 
-    public BrainMaggotReturnExiledAbility() {
-        super(Zone.BATTLEFIELD, new BrainMaggotReturnExiledCreatureEffect());
+    public BrainMaggotReturnExiledCreatureAbility() {
+        super(new BrainMaggotReturnExiledCreatureEffect(), Duration.OneUse);
         this.usesStack = false;
         this.setRuleVisible(false);
     }
 
-    public BrainMaggotReturnExiledAbility(final BrainMaggotReturnExiledAbility ability) {
+    public BrainMaggotReturnExiledCreatureAbility(final BrainMaggotReturnExiledCreatureAbility ability) {
         super(ability);
     }
 
     @Override
-    public BrainMaggotReturnExiledAbility copy() {
-        return new BrainMaggotReturnExiledAbility(this);
+    public BrainMaggotReturnExiledCreatureAbility copy() {
+        return new BrainMaggotReturnExiledCreatureAbility(this);
     }
 
     @Override

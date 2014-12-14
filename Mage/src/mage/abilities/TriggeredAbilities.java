@@ -85,7 +85,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
                                 ability.setControllerId(((Permanent) object).getControllerId());
                             }
                             ability.setSourceObject(object);
-                            if (ability.checkTrigger(event, game)) {
+                                if (ability.checkTrigger(event, game)) {
                                 UUID controllerId = ability.getControllerId();
                                 ability.trigger(game, controllerId);
                             }

@@ -67,17 +67,18 @@ public class ExileSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (!game.getState().getZone(source.getSourceId()).match(onlyfromZone)) {
+        Zone zone = game.getState().getZone(source.getSourceId());
+        if (!zone.match(onlyfromZone)) {
             return false;
         }
         Permanent permanent = game.getPermanent(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         if (permanent != null) {
-            return controller.moveCardToExileWithInfo(permanent, null, null, source.getSourceId(), game, null);
+            return controller.moveCardToExileWithInfo(permanent, null, null, source.getSourceId(), game, zone);
         } else {
             Card card = game.getCard(source.getSourceId());
             if (card != null) {
-                return controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, null);
+                return controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, zone);
             }
         }
         return false;
