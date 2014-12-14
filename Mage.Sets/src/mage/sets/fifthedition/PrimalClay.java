@@ -27,6 +27,7 @@
  */
 package mage.sets.fifthedition;
 
+import java.util.Set;
 import java.util.UUID;
 
 import mage.constants.*;
@@ -41,6 +42,7 @@ import mage.cards.CardImpl;
 import mage.choices.ChoiceImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -57,9 +59,7 @@ public class PrimalClay extends CardImpl {
         this.toughness = new MageInt(0);
 
         // As Primal Clay enters the battlefield, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 Wall artifact creature with defender in addition to its other types.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new PrimalClayEffect(), "As {this} enters the battlefield, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 Wall artifact creature with defender in addition to its other types"));
-        ability.addChoice(new PrimalClayChoice());
-        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new PrimalClayEffect(), "As {this} enters the battlefield, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 Wall artifact creature with defender in addition to its other types")));
     }
 
     public PrimalClay(final PrimalClay card) {
@@ -73,35 +73,68 @@ public class PrimalClay extends CardImpl {
 }
 
 class PrimalClayEffect extends ContinuousEffectImpl {
+
+    private final static String choice1 = "a 3/3 artifact creature";
+    private final static String choice2 = "a 2/2 artifact creature with flying";
+    private final static String choice3 = "a 1/6 Wall artifact creature with defender";
+
+    String choice;
+
     PrimalClayEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
     }
 
     PrimalClayEffect(final PrimalClayEffect effect) {
         super(effect);
+        this.choice = effect.choice;
     }
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (controller != null && permanent != null) {
+            ChoiceImpl primalClayChoice = new ChoiceImpl();
+            Set<String> choices =  primalClayChoice.getChoices();
+            choices.add(choice1);
+            choices.add(choice2);
+            choices.add(choice3);
+            primalClayChoice.setMessage("Choose for " + permanent.getLogName() + " to be");
+            while (!primalClayChoice.isChosen()) {
+                if (!controller.isInGame()) {
+                    discard();
+                    return;
+                }
+                controller.choose(outcome, primalClayChoice, game);
+            }
+            this.choice = primalClayChoice.getChoice();
+            return;
+        }
+        discard();
+    }
+
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        PrimalClayChoice choice = (PrimalClayChoice) source.getChoices().get(0);
         if (permanent == null) {
+            discard();
             return false;
         }
-
         switch (layer) {
             case PTChangingEffects_7:
                 if (sublayer.equals(SubLayer.SetPT_7b)) {
-                    switch (choice.getChoice()) {
-                        case "a 3/3 artifact creature":
+                    switch (choice) {
+                        case choice1:
                             permanent.getPower().setValue(3);
                             permanent.getToughness().setValue(3);
                             break;
-                        case "a 2/2 artifact creature with flying":
+                        case choice2:
                             permanent.getPower().setValue(2);
                             permanent.getToughness().setValue(2);
                             break;
-                        case "a 1/6 Wall artifact creature with defender":
+                        case choice3:
                             permanent.getPower().setValue(1);
                             permanent.getToughness().setValue(6);
                             break;
@@ -109,11 +142,11 @@ class PrimalClayEffect extends ContinuousEffectImpl {
                 }
                 break;
             case AbilityAddingRemovingEffects_6:
-                switch (choice.getChoice()) {
-                    case "a 2/2 artifact creature with flying":
+                switch (choice) {
+                    case choice2:
                         permanent.addAbility(FlyingAbility.getInstance(), source.getSourceId(), game);
                         break;
-                    case "a 1/6 Wall artifact creature with defender":
+                    case choice3:
                         permanent.addAbility(DefenderAbility.getInstance(), source.getSourceId(),  game);
                         break;
                 }
@@ -135,24 +168,5 @@ class PrimalClayEffect extends ContinuousEffectImpl {
     @Override
     public PrimalClayEffect copy() {
         return new PrimalClayEffect(this);
-    }
-}
-
-class PrimalClayChoice extends ChoiceImpl {
-    PrimalClayChoice() {
-        super(true);
-        this.setMessage("Choose for Primal Clay to be");
-        this.choices.add("a 3/3 artifact creature");
-        this.choices.add("a 2/2 artifact creature with flying");
-        this.choices.add("a 1/6 Wall artifact creature with defender");
-    }
-
-    PrimalClayChoice(final PrimalClayChoice choice) {
-        super(choice);
-    }
-
-    @Override
-    public PrimalClayChoice copy() {
-        return new PrimalClayChoice(this);
     }
 }
