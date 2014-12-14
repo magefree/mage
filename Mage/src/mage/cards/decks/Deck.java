@@ -58,7 +58,7 @@ public class Deck implements Serializable {
             if (card != null) {
                 deck.cards.add(card);
             } else if (!ignoreErrors) {
-                throw new GameException("Error loading card - " + deckCardInfo.getCardName() + " for deck - " + deck.getName());
+                throw createCardNotFoundGameException(deckCardInfo, deckCardLists.getName());
             }
         }
         for (DeckCardInfo deckCardInfo: deckCardLists.getSideboard()) {
@@ -66,11 +66,17 @@ public class Deck implements Serializable {
             if (card != null) {
                 deck.sideboard.add(card);
             } else if (!ignoreErrors) {
-                throw new GameException("Error loading card - " + deckCardInfo.getCardName() + " for deck - " + deck.getName());
+                throw createCardNotFoundGameException(deckCardInfo, deckCardLists.getName());
             }
         }
 
         return deck;
+    }
+
+    private static GameException createCardNotFoundGameException(DeckCardInfo deckCardInfo, String deckName) {
+        return new GameException("Card not found - " + deckCardInfo.getCardName() + " - " + deckCardInfo.getSetCode() + " for deck - " + deckName + "\n" +
+                "Possible reason is, that you use cards in your deck, that are only supported in newer versions of the server.\n" +
+                "So it can help to use the same card from another set, that's already supported from this server." );
     }
 
     private static Card createCard(DeckCardInfo deckCardInfo, boolean mockCards) {
