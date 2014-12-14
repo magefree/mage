@@ -42,6 +42,7 @@ import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -60,10 +61,9 @@ public class VeilOfSecrecy extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
 
-        this.color.setBlue(true);
-
         // Target creature gains shroud until end of turn and is unblockable this turn.
         Effect effect = new GainAbilityTargetEffect(ShroudAbility.getInstance(), Duration.EndOfTurn);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         effect.setText("Target creature gains shroud until end of turn");
         this.getSpellAbility().addEffect(effect);
         effect = new UnblockableTargetEffect();
