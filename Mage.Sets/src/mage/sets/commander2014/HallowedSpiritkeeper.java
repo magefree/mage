@@ -38,6 +38,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.filter.common.FilterCreatureCard;
 import mage.game.permanent.token.Token;
 
 /**
@@ -59,7 +60,7 @@ public class HallowedSpiritkeeper extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // When Hallowed Spiritkeeper dies, put X 1/1 white Spirit creature tokens with flying onto the battlefield, where X is the number of creature cards in your graveyard.
-        Effect effect = new CreateTokenEffect(new HallowedSpiritkeeperSpiritToken(), new CardsInControllerGraveyardCount());
+        Effect effect = new CreateTokenEffect(new HallowedSpiritkeeperSpiritToken(), new CardsInControllerGraveyardCount(new FilterCreatureCard("creature cards")));
         effect.setText("put X 1/1 white Spirit creature tokens with flying onto the battlefield, where X is the number of creature cards in your graveyard");
         this.addAbility(new DiesTriggeredAbility(effect, false));
 
