@@ -106,7 +106,7 @@ public class MistformSliver extends CardImpl {
                 }
                 game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());
                 game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice().toString());
-                permanent.addInfo("chosen type", "<i>Chosen type: " + typeChoice.getChoice() + "</i>");
+                permanent.addInfo("chosen type", "<i>Chosen type: " + typeChoice.getChoice() + "</i>", game);
                 permanent.getSubtype().add(typeChoice.getChoice());
             }
             return false;

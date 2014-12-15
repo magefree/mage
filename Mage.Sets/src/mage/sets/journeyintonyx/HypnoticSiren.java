@@ -60,7 +60,7 @@ public class HypnoticSiren extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Bestow 5UU (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
-        this.addAbility(new BestowAbility(this, "{5}{U}{U}"));
+        this.addAbility(new BestowAbility(this.getName(), "{5}{U}{U}"));
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // You control enchanted creature.

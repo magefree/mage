@@ -59,8 +59,7 @@ public class Vengevine extends CardImpl {
         this.toughness = new MageInt(3);
 
         this.addAbility(HasteAbility.getInstance());
-        this.addAbility(new VengevineAbility());
-        this.addWatcher(new VengevineWatcher());
+        this.addAbility(new VengevineAbility(), new VengevineWatcher());
     }
 
     public Vengevine(final Vengevine card) {

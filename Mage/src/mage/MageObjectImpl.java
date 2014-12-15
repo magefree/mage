@@ -126,7 +126,7 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public Abilities<Ability> getAbilities(){
+    public Abilities<Ability> getAbilities() {
         return abilities;
     }
 

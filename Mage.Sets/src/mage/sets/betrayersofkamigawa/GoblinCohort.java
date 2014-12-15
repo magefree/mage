@@ -66,8 +66,9 @@ public class GoblinCohort extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Goblin Cohort can't attack unless you've cast a creature spell this turn.
-        this.addWatcher(new PlayerCastCreatureWatcher());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GoblinCohortEffect()));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GoblinCohortEffect());
+        ability.addWatcher(new PlayerCastCreatureWatcher());
+        this.addAbility(ability);
 
     }
 

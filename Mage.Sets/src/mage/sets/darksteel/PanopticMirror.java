@@ -176,7 +176,7 @@ class PanopticMirrorCastEffect extends OneShotEffect {
                 cardToCopy = cards.get(target.getFirstTarget(), game);
             }
             if(cardToCopy != null){
-                Card copy = game.copyCard(cardToCopy, source, source.getControllerId());
+                Card copy = game.copyCard(cardToCopy, source);
                 if (controller.chooseUse(outcome, "Cast the copied card without paying mana cost?", game)) {
                     return controller.cast(copy.getSpellAbility(), game, true);
                 }

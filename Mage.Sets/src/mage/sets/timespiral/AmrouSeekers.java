@@ -37,7 +37,6 @@ import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.MageSingleton;
 import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
@@ -64,7 +63,7 @@ public class AmrouSeekers extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Amrou Seekers can't be blocked except by artifact creatures and/or white creatures.
-        this.addAbility(new AmrouSeekersEvasionAbility());
+        this.addAbility(AmrouSeekersEvasionAbility.getInstance());
 
     }
 
@@ -80,13 +79,14 @@ public class AmrouSeekers extends CardImpl {
 
 class AmrouSeekersEvasionAbility extends EvasionAbility implements MageSingleton  {
 
-    public AmrouSeekersEvasionAbility() {
-        super();
+    private static AmrouSeekersEvasionAbility instance = new AmrouSeekersEvasionAbility();
+    
+    private AmrouSeekersEvasionAbility() {
         this.addEffect(new AmrouSeekersRestrictionEffect());
     }
 
-    public AmrouSeekersEvasionAbility(final AmrouSeekersEvasionAbility ability) {
-        super(ability);
+    public static AmrouSeekersEvasionAbility getInstance() {
+        return instance;
     }
 
     @Override
@@ -96,7 +96,7 @@ class AmrouSeekersEvasionAbility extends EvasionAbility implements MageSingleton
 
     @Override
     public AmrouSeekersEvasionAbility copy() {
-        return new AmrouSeekersEvasionAbility(this);
+        return instance;
     }
 }
 

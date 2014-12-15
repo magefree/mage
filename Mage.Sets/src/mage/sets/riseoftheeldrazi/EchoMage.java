@@ -27,6 +27,7 @@
  */
 package mage.sets.riseoftheeldrazi;
 
+import java.util.List;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -44,6 +45,7 @@ import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.CardImpl;
+import mage.cards.LevelerCard;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -55,7 +57,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class EchoMage extends CardImpl {
+public class EchoMage extends LevelerCard {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
 
@@ -80,7 +82,7 @@ public class EchoMage extends CardImpl {
         // LEVEL 2-3
         // 2/4
         // {U}{U}, {tap}: Copy target instant or sorcery spell. You may choose new targets for the copy.
-        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), new ManaCostsImpl("{U}{U}"));
         ability.addTarget(new TargetSpell(filter));
         ability.addCost(new TapSourceCost());
@@ -88,15 +90,17 @@ public class EchoMage extends CardImpl {
         // LEVEL 4+
         // 2/5
         // {U}{U}, {tap}: Copy target instant or sorcery spell twice. You may choose new targets for the copies.
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EchoMageEffect(), new ManaCostsImpl("{U}{U}"));
         ability.addTarget(new TargetSpell(filter));
         ability.addCost(new TapSourceCost());
         abilities2.add(ability);
 
-        LevelerCardBuilder.construct(this,
+        List<Ability> levelerAbilities = LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(2, 3, abilities1, 2, 4),
                 new LevelerCardBuilder.LevelAbility(4, -1, abilities2, 2, 5));
+        this.abilities.addAll(levelerAbilities);
+        setMaxLevelCounters(4);
     }
 
     public EchoMage(final EchoMage card) {

@@ -101,7 +101,7 @@ class ScrollRackEffect extends OneShotEffect {
                     for (UUID targetId : targets) {
                         Card card = game.getCard(targetId);
                         if (card != null) {
-                            card.setFaceDown(true);
+                            card.setFaceDown(true, game);
                             if (card.moveToExile(source.getSourceId(), sourceObject.getLogName(), source.getSourceId(), game)) {
                                 amountExiled++;
                             }

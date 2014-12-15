@@ -60,7 +60,7 @@ public class ScoutsWarning extends CardImpl {
 
         // The next creature card you play this turn can be played as though it had flash.
         this.getSpellAbility().addEffect(new ScoutsWarningAsThoughEffect());
-        this.addWatcher(new ScoutsWarningWatcher());
+        this.getSpellAbility().addWatcher(new ScoutsWarningWatcher());
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

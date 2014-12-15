@@ -98,8 +98,8 @@ class PraetorsGraspEffect extends OneShotEffect {
                 UUID targetId = target.getFirstTarget();
                 Card card = opponent.getLibrary().remove(targetId, game);
                 if (card != null) {
-                    card.setFaceDown(true);
-                    card.setControllerId(player.getId());
+                    card.setFaceDown(true, game);
+                    //card.setControllerId(player.getId());
                     card.moveToExile(getId(), sourcePermanent.getName(), source.getSourceId(), game);
                     game.addEffect(new PraetorsGraspPlayEffect(card.getId()), source);
                     game.addEffect(new PraetorsGraspRevealEffect(card.getId()), source);

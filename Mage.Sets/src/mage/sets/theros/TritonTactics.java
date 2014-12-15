@@ -76,9 +76,7 @@ public class TritonTactics extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
         this.getSpellAbility().addEffect(new TritonTacticsUntapTargetEffect());
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new TritonTacticsTriggeredAbility()));
-
-        this.addWatcher(new BlockedCreaturesWatcher());
-
+        this.getSpellAbility().addWatcher(new BlockedCreaturesWatcher());
 
     }
 

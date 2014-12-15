@@ -74,7 +74,7 @@ public class NineRingedBo extends CardImpl {
         Effect effect = new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn);
         effect.setText("If that creature would die this turn, exile it instead");
         ability.addEffect(effect);
-        this.addAbility(ability);
+        this.addAbility(ability, new DamagedByWatcher());
     }
 
     public NineRingedBo(final NineRingedBo card) {

@@ -60,7 +60,7 @@ public class ParallaxWave extends CardImpl {
         this.color.setWhite(true);
 
         // Fading 5
-        this.addAbility(new FadingAbility(5, this));
+        this.addAbility(new FadingAbility(5));
         
         // Remove a fade counter from Parallax Wave: Exile target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(this.getId(), this.getName()), new RemoveCountersSourceCost(CounterType.FADE.createInstance()));

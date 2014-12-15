@@ -59,8 +59,7 @@ public class ArchmageAscension extends CardImpl {
         this.color.setBlue(true);
 
         // At the beginning of each end step, if you drew two or more cards this turn, you may put a quest counter on Archmage Ascension.
-        this.addAbility(new ArchmageAscensionTriggeredAbility());
-        this.addWatcher(new CardsDrawnControllerWatcher());
+        this.addAbility(new ArchmageAscensionTriggeredAbility(), new CardsDrawnControllerWatcher());
 
         // As long as Archmage Ascension has six or more quest counters on it, if you would draw a card, you may instead search your library for a card, put that card into your hand, then shuffle your library.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArchmageAscensionReplacementEffect()));

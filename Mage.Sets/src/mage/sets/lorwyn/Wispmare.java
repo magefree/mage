@@ -64,7 +64,7 @@ public class Wispmare extends CardImpl {
         ability.addTarget(target);
         this.addAbility(ability);
         // Evoke {W}
-        this.addAbility(new EvokeAbility(this, "{W}"));
+        this.addAbility(new EvokeAbility("{W}"));
     }
 
     public Wispmare(final Wispmare card) {

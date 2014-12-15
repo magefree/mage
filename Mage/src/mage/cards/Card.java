@@ -51,13 +51,13 @@ public interface Card extends MageObject {
     Rarity getRarity();
     //void setRarity(Rarity rarity);
     //void setControllerId(UUID controllerId);
-    //void setOwnerId(UUID ownerId);
+    void setOwnerId(UUID ownerId);
     //void addAbility(Ability ability);
     //void addWatcher(Watcher watcher);
     SpellAbility getSpellAbility();
     List<String> getRules(); // gets base card rules
     List<String> getRules(Game game);  // gets card rules + in game modifications
-    List<Watcher> getWatchers();
+//    List<Watcher> getWatchers();
     String getExpansionSetCode();
     String getTokenSetCode();
 //    void setExpansionSetCode(String expansionSetCode);
@@ -79,7 +79,7 @@ public interface Card extends MageObject {
     //void setSecondCardFace(Card card);
     boolean isNightCard();
 
-    //void assignNewId();
+    void assignNewId();
 
     void addInfo(String key, String value, Game game);
 

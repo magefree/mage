@@ -61,7 +61,7 @@ public class HeraldOfTorment extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Bestow {3}{B}{B}
-        this.addAbility(new BestowAbility(this, "{3}{B}{B}"));
+        this.addAbility(new BestowAbility(this.getName(), "{3}{B}{B}"));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

@@ -59,7 +59,7 @@ public class NobleQuarry extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Bestow {5}{G}
-        this.addAbility(new BestowAbility(this, "{5}{G}"));
+        this.addAbility(new BestowAbility(this.getName(), "{5}{G}"));
         // All creatures able to block Noble Quarry or enchanted creature do so.
         Effect effect = new MustBeBlockedByAllSourceEffect(Duration.WhileOnBattlefield);
         effect.setText("All creatures able to block Noble Quarry");

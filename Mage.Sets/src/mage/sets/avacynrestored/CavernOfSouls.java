@@ -79,8 +79,9 @@ public class CavernOfSouls extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {tap}: Add one mana of any color to your mana pool. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.
-        this.addAbility(new ConditionalAnyColorManaAbility(1, new CavernOfSoulsManaBuilder()));
-        this.addWatcher(new CavernOfSoulsWatcher());
+        Ability ability = new ConditionalAnyColorManaAbility(1, new CavernOfSoulsManaBuilder());
+        this.addAbility(ability);
+        ability.addWatcher(new CavernOfSoulsWatcher());
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new CavernOfSoulsCantCounterEffect()));
     }
 
@@ -120,7 +121,7 @@ class CavernOfSoulsEffect extends OneShotEffect {
             }
             game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());
             game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice());
-            permanent.addInfo("chosen type", CardUtil.addToolTipMarkTags("Chosen type: " + typeChoice.getChoice()));
+            permanent.addInfo("chosen type", CardUtil.addToolTipMarkTags("Chosen type: " + typeChoice.getChoice()), game);
         }
         return false;
     }

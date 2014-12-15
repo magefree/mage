@@ -60,8 +60,9 @@ public class FloatingDreamZubera extends CardImpl {
         this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        this.addAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(new ZuberasDiedDynamicValue())));
-        this.addWatcher(new ZuberasDiedWatcher());
+        Ability ability = new DiesTriggeredAbility(new DrawCardSourceControllerEffect(new ZuberasDiedDynamicValue()));
+        this.addAbility(ability);
+        ability.addWatcher(new ZuberasDiedWatcher());
     }
 
     public FloatingDreamZubera(final FloatingDreamZubera card) {

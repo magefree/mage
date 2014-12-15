@@ -55,7 +55,7 @@ public class NyxbornShieldmate extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Bestow {2}{W}
-        this.addAbility(new BestowAbility(this, "{2}{W}"));
+        this.addAbility(new BestowAbility(this.getName(), "{2}{W}"));
         // Enchanted creature gets +1/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1,2, Duration.WhileOnBattlefield)));
     }

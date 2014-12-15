@@ -82,13 +82,10 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
     public static ClashEffect getInstance() {
         return fINSTANCE;
     }    
-    public ClashEffect(final ClashEffect effect) {
-        super(effect);
-    }
     
     @Override
     public ClashEffect copy() {
-        return new ClashEffect(this);
+        return fINSTANCE;
     }
     
     @Override

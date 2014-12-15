@@ -67,9 +67,7 @@ public class CastThroughTime extends CardImpl {
         this.color.setBlue(true);
 
         // Instant and sorcery spells you control have rebound.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainReboundEffect()));
-
-        this.addWatcher(new LeavesBattlefieldWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainReboundEffect()), new LeavesBattlefieldWatcher());
     }
 
     public CastThroughTime(final CastThroughTime card) {

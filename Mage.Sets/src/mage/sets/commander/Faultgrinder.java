@@ -64,7 +64,7 @@ public class Faultgrinder extends CardImpl {
         this.addAbility(ability);
 
         // Evoke {4}{R}
-        this.addAbility(new EvokeAbility(this, "{4}{R}"));
+        this.addAbility(new EvokeAbility("{4}{R}"));
     }
 
     public Faultgrinder(final Faultgrinder card) {

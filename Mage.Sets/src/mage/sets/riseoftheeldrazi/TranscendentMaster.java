@@ -27,6 +27,7 @@
  */
 package mage.sets.riseoftheeldrazi;
 
+import java.util.List;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
@@ -70,10 +71,12 @@ public class TranscendentMaster extends LevelerCard {
                 LifelinkAbility.getInstance(),
                 IndestructibleAbility.getInstance());
 
-        LevelerCardBuilder.construct(this,
+        List<Ability> levelerAbilities = LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(6, 11, abilities1, 6, 6),
                 new LevelerCardBuilder.LevelAbility(12, -1, abilities2, 9, 9)
         );
+        this.abilities.addAll(levelerAbilities);
+        setMaxLevelCounters(12);
     }
 
     public TranscendentMaster(final TranscendentMaster card) {

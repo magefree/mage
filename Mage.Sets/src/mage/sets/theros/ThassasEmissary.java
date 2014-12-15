@@ -61,7 +61,7 @@ public class ThassasEmissary extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Bestow {5}{U} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
-        this.addAbility(new BestowAbility(this, "{5}{U}"));
+        this.addAbility(new BestowAbility(this.getName(), "{5}{U}"));
         // Whenever Thassa's Emissary or enchanted creature deals combat damage to a player, draw a card.
         this.addAbility(new ThassasEmissaryTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
         // Enchanted creature gets +3/+3.

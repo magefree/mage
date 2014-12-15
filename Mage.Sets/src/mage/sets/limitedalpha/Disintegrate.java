@@ -44,6 +44,7 @@ import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCreatureOrPlayer;
+import mage.watchers.common.DamagedByWatcher;
 
 /**
  *
@@ -64,6 +65,7 @@ public class Disintegrate extends CardImpl {
         effect.setText("If the creature would die this turn, exile it instead");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addWatcher(new DamagedByWatcher());
     }
 
     public Disintegrate(final Disintegrate card) {

@@ -63,8 +63,7 @@ public class PatagiaViper extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new PatagiaViperSnakeToken(), 2), false));
         
         // When Patagia Viper enters the battlefield, sacrifice it unless {U} was spent to cast it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.U)), false));
-        this.addWatcher(new ManaSpentToCastWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.U)), false), new ManaSpentToCastWatcher());
     }
 
     public PatagiaViper(final PatagiaViper card) {

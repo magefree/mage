@@ -28,6 +28,7 @@
 
 package mage.sets.riseoftheeldrazi;
 
+import java.util.List;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -62,20 +63,22 @@ public class BrimstoneMage extends LevelerCard {
         this.toughness = new MageInt(2);
 
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{3}{R}")));
-        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         abilities1.add(ability);
 
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         abilities2.add(ability);
 
-        LevelerCardBuilder.construct(this,
+        List<Ability> levelerAbilities = LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 2, abilities1, 2, 3),
                 new LevelerCardBuilder.LevelAbility(3, -1, abilities2, 2, 4)
         );
+        this.abilities.addAll(levelerAbilities);
+        setMaxLevelCounters(3);
     }
 
     public BrimstoneMage (final BrimstoneMage card) {

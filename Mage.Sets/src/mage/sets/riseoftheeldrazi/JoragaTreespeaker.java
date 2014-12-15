@@ -28,6 +28,7 @@
 
 package mage.sets.riseoftheeldrazi;
 
+import java.util.List;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -79,23 +80,25 @@ public class JoragaTreespeaker extends LevelerCard {
         // LEVEL 1-4
         // 1/2
         // {T}: Add {G}{G} to your mana pool.
-        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         abilities1.add(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new TapSourceCost()));
 
         // LEVEL 5+
         // 1/4
         // Elves you control have "{T}: Add {G}{G} to your mana pool."
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         abilities2.add(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(new SimpleManaAbility(Zone.BATTLEFIELD,
                     new BasicManaEffect(Mana.GreenMana(2)),
                     new TapSourceCost()),
                 Duration.WhileOnBattlefield, filter)));
 
-        LevelerCardBuilder.construct(this,
+        List<Ability> levelerAbilities = LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 4, abilities1, 1, 2),
                 new LevelerCardBuilder.LevelAbility(5, -1, abilities2, 1, 4)
         );
+        this.abilities.addAll(levelerAbilities);
+        setMaxLevelCounters(5);
     }
 
     public JoragaTreespeaker(final JoragaTreespeaker card) {

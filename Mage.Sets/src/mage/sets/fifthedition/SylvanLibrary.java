@@ -64,9 +64,7 @@ public class SylvanLibrary extends CardImpl {
         this.color.setGreen(true);
 
         // At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library.
-        this.addAbility(new BeginningOfDrawTriggeredAbility(new SylvanLibraryEffect(), TargetController.YOU, true));
-
-        this.addWatcher(new CardsDrawnThisTurnWatcher());
+        this.addAbility(new BeginningOfDrawTriggeredAbility(new SylvanLibraryEffect(), TargetController.YOU, true), new CardsDrawnThisTurnWatcher());
 
     }
 

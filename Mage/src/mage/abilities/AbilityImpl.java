@@ -61,6 +61,7 @@ import mage.abilities.effects.common.DynamicManaEffect;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
 import mage.game.permanent.Permanent;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -69,6 +70,8 @@ import mage.game.permanent.Permanent;
 public abstract class AbilityImpl implements Ability {
 
     private static final transient Logger logger = Logger.getLogger(AbilityImpl.class);
+    private static final List<Watcher> emptyWatchers = new ArrayList<>();
+    private static final List<Ability> emptyAbilities = new ArrayList<>();
 
     protected UUID id;
     protected UUID originalId;
@@ -80,6 +83,8 @@ public abstract class AbilityImpl implements Ability {
     protected Costs<Cost> costs;
     protected ArrayList<AlternativeCost> alternativeCosts = new ArrayList<>();
     protected Modes modes;
+    protected List<Watcher> watchers = null;    
+    protected List<Ability> subAbilities = null;    
     protected Zone zone;
     protected String name;
     protected AbilityWord abilityWord;
@@ -100,6 +105,7 @@ public abstract class AbilityImpl implements Ability {
         this.manaCostsToPay = new ManaCostsImpl<>();
         this.costs = new CostsImpl<>();
         this.modes = new Modes();
+        //this.watchers = new ArrayList<>();
     }
 
     public AbilityImpl(final AbilityImpl ability) {
@@ -118,6 +124,18 @@ public abstract class AbilityImpl implements Ability {
             this.alternativeCosts.add((AlternativeCost)cost.copy());
         }
         this.modes = ability.modes.copy();
+        if (ability.watchers != null) {
+            this.watchers = new ArrayList<>();
+            for (Watcher watcher: ability.watchers) {
+                watchers.add(watcher.copy());
+            }
+        }
+        if (ability.subAbilities != null) {
+            this.subAbilities = new ArrayList<>();
+            for (Ability subAbility: ability.subAbilities) {
+                subAbilities.add(subAbility.copy());
+            }
+        }
         this.ruleAtTheTop = ability.ruleAtTheTop;
         this.ruleVisible = ability.ruleVisible;
         this.ruleAdditionalCostsVisible = ability.ruleAdditionalCostsVisible;
@@ -514,6 +532,16 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public void setControllerId(UUID controllerId) {
         this.controllerId = controllerId;
+        if (subAbilities != null) {
+            for (Ability subAbility: subAbilities) {
+                subAbility.setControllerId(controllerId);
+            }
+        }
+        if (watchers != null) {
+            for (Watcher watcher: watchers) {
+                watcher.setControllerId(controllerId);
+            }
+        }
     }
 
 
@@ -525,6 +553,16 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public void setSourceId(UUID sourceId) {
         this.sourceId = sourceId;
+        if (subAbilities != null) {
+            for (Ability subAbility: subAbilities) {
+                subAbility.setSourceId(controllerId);
+            }
+        }
+        if (watchers != null) {
+            for (Watcher watcher: watchers) {
+                watcher.setSourceId(sourceId);
+            }
+        }
     }
 
     @Override
@@ -577,6 +615,40 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public Zone getZone() {
         return zone;
+    }
+
+    @Override
+    public List<Ability> getSubAbilities() {
+        if (subAbilities != null)
+            return subAbilities;
+        else
+            return emptyAbilities;
+    }
+
+    @Override
+    public void addSubAbility(Ability ability) {
+        if (subAbilities == null)
+            subAbilities = new ArrayList<>();
+        ability.setSourceId(this.sourceId);
+        ability.setControllerId(this.controllerId);
+        subAbilities.add(ability);
+    }
+
+    @Override
+    public List<Watcher> getWatchers() {
+        if (watchers != null)
+            return watchers;
+        else
+            return emptyWatchers;
+    }
+
+    @Override
+    public void addWatcher(Watcher watcher) {
+        if (watchers == null)
+            watchers = new ArrayList<>();
+        watcher.setSourceId(this.sourceId);
+        watcher.setControllerId(this.controllerId);
+        watchers.add(watcher);
     }
 
     @Override

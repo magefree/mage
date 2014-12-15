@@ -74,7 +74,7 @@ public class UnstoppableAsh extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Champion a Treefolk or Warrior
-        this.addAbility(new ChampionAbility(this, new String[]{"Treefolk", "Warrior"}));
+        this.addAbility(new ChampionAbility(this.getName(), new String[]{"Treefolk", "Warrior"}));
         
         // Whenever a creature you control becomes blocked, it gets +0/+5 until end of turn.
         Effect effect = new BoostTargetEffect(0, 5, Duration.EndOfTurn);

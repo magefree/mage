@@ -113,7 +113,7 @@ class IsochronScepterImprintEffect extends OneShotEffect {
                         Permanent permanent = game.getPermanent(source.getSourceId());
                         if (permanent != null) {
                             permanent.imprint(card.getId(), game);
-                            permanent.addInfo("imprint", CardUtil.addToolTipMarkTags("[Imprinted card - " + card.getLogName() + "]"));
+                            permanent.addInfo("imprint", CardUtil.addToolTipMarkTags("[Imprinted card - " + card.getLogName() + "]"), game);
                         }
                     }
                 }
@@ -156,7 +156,7 @@ class IsochronScepterCopyEffect extends OneShotEffect {
                 Card imprintedInstant = game.getCard(scepter.getImprinted().get(0));
                 if (imprintedInstant != null && game.getState().getZone(imprintedInstant.getId()).equals(Zone.EXILED)) {
                     if (controller.chooseUse(outcome, new StringBuilder("Create a copy of ").append(imprintedInstant.getName()).append("?").toString(), game)) {
-                        Card copiedCard = game.copyCard(imprintedInstant, source, source.getControllerId());
+                        Card copiedCard = game.copyCard(imprintedInstant, source);
                         if (copiedCard != null) {
                             game.getExile().add(source.getSourceId(), "",copiedCard);
                             game.getState().setZone(copiedCard.getId(), Zone.EXILED);

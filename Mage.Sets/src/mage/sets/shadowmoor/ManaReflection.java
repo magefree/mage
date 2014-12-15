@@ -57,8 +57,7 @@ public class ManaReflection extends CardImpl {
         this.color.setGreen(true);
 
         // If you tap a permanent for mana, it produces twice as much of that mana instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ManaReflectionReplacementEffect()));
-        this.addWatcher(new PermanentTappedForManaWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ManaReflectionReplacementEffect()), new PermanentTappedForManaWatcher());
 
     }
 

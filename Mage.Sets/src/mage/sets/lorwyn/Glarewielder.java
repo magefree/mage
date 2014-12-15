@@ -64,7 +64,7 @@ public class Glarewielder extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent(0, 2));
         this.addAbility(ability);
         // Evoke {1}{R}
-        this.addAbility(new EvokeAbility(this, "{1}{R}"));
+        this.addAbility(new EvokeAbility("{1}{R}"));
     }
 
     public Glarewielder(final Glarewielder card) {

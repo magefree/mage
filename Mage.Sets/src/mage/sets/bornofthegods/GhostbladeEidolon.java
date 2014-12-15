@@ -59,7 +59,7 @@ public class GhostbladeEidolon extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Bestow {5}{W}
-        this.addAbility(new BestowAbility(this, "{5}{W}"));
+        this.addAbility(new BestowAbility(this.getName(), "{5}{W}"));
         // Double strike
         this.addAbility(DoubleStrikeAbility.getInstance());
         // Enchanted creature gets +1/+1 and has double strike.

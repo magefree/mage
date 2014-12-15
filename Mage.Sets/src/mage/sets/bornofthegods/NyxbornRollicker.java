@@ -54,7 +54,7 @@ public class NyxbornRollicker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Bestow {1}{R}
-        this.addAbility(new BestowAbility(this, "{1}{R}"));
+        this.addAbility(new BestowAbility(this.getName(), "{1}{R}"));
         // Enchanted creature gets +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1,1, Duration.WhileOnBattlefield )));
     }

@@ -71,7 +71,7 @@ public class SummoningTrap extends CardImpl {
         // Summoning Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(
                 new SummoningTrapAlternativeCost());
-        this.addWatcher(new SummoningTrapWatcher());
+        this.getSpellAbility().addWatcher(new SummoningTrapWatcher());
         // Look at the top seven cards of your library. You may put a creature
         // card from among them onto the battlefield. Put the rest on the bottom
         // of your library in any order.

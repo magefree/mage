@@ -59,9 +59,9 @@ public class ModularAbility extends DiesTriggeredAbility {
         if (sunburst) {
             Ability ability = new SunburstAbility(card);
             ability.setRuleVisible(false);
-            card.addAbility(ability);
+            addSubAbility(ability);
         } else {
-            card.addAbility(new ModularStaticAbility(amount));
+            addSubAbility(new ModularStaticAbility(amount));
         }
     }
 

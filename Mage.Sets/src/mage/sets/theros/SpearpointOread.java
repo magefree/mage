@@ -58,7 +58,7 @@ public class SpearpointOread extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Bestow {5}{R} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
-        this.addAbility(new BestowAbility(this, "{5}{R}"));
+        this.addAbility(new BestowAbility(this.getName(), "{5}{R}"));
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
         // Enchanted creature gets +2/+2 and has first strike.

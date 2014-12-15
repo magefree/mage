@@ -56,6 +56,7 @@ import mage.cards.CardImpl;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.EffectType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -1070,6 +1071,43 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             }
         }
         return true;
+    }
+
+//    @Override
+//    public void assignNewId() {
+//        this.objectId = UUID.randomUUID();
+//        this.abilities.newOriginalId();
+//        this.abilities.setSourceId(objectId);
+//    }
+    
+    @Override
+    public void setCardNumber(int cid) {
+        this.cardNumber = cid;
+    }
+
+    @Override
+    public void setExpansionSetCode(String expansionSetCode) {
+        this.expansionSetCode = expansionSetCode;
+    }
+    
+    @Override
+    public void setRarity(Rarity rarity) {
+        this.rarity = rarity;
+    }
+
+    @Override
+    public void setFlipCard(boolean flipCard) {
+        this.flipCard = flipCard;
+    }
+
+    @Override
+    public void setFlipCardName(String flipCardName) {
+        this.flipCardName = flipCardName;
+    }
+
+    @Override
+    public void setSecondCardFace(Card card) {
+        this.secondSideCard = card;
     }
 
     @Override

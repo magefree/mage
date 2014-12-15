@@ -145,14 +145,14 @@ public abstract class SplitCard extends CardImpl {
 
     }
 
-    @Override
-    public List<Watcher> getWatchers() {
-        List<Watcher> allWatchers = new ArrayList<>();
-        allWatchers.addAll(super.getWatchers());
-        allWatchers.addAll(leftHalfCard.getWatchers());
-        allWatchers.addAll(rightHalfCard.getWatchers());
-        return allWatchers;
-    }
+//    @Override
+//    public List<Watcher> getWatchers() {
+//        List<Watcher> allWatchers = new ArrayList<>();
+//        allWatchers.addAll(super.getWatchers());
+//        allWatchers.addAll(leftHalfCard.getWatchers());
+//        allWatchers.addAll(rightHalfCard.getWatchers());
+//        return allWatchers;
+//    }
 }
 
 /*

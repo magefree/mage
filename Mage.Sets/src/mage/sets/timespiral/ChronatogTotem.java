@@ -81,8 +81,7 @@ public class ChronatogTotem extends CardImpl {
                 new ChronatogTotemCondition(),
                 "{0}: {this} gets +3/+3 until end of turn. You skip your next turn. Activate this ability only once each turn and only if {this} is a creature");
         ability.addEffect(new SkipNextTurnSourceEffect());
-        this.addAbility(ability);
-        this.addWatcher(new ActivatedAbilityUsedThisTurnWatcher());
+        this.addAbility(ability, new ActivatedAbilityUsedThisTurnWatcher());
     }
 
     public ChronatogTotem(final ChronatogTotem card) {

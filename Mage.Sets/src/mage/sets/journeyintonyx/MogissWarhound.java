@@ -59,7 +59,7 @@ public class MogissWarhound extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Bestow 2R (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
-        this.addAbility(new BestowAbility(this, "{2}{R}"));
+        this.addAbility(new BestowAbility(this.getName(), "{2}{R}"));
         // Mogis's Warhound attacks each turn if able.
         this.addAbility(new AttacksEachTurnStaticAbility());
         // Enchanted creature gets +2/+2 and attacks each turn if able.

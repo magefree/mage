@@ -79,7 +79,7 @@ public class OpalPalace extends CardImpl {
         ability.setRuleVisible(false);
         this.addAbility(ability);
         
-        this.addWatcher(new OpalPalaceWatcher());
+        this.getSpellAbility().addWatcher(new OpalPalaceWatcher());
     }
 
     public OpalPalace(final OpalPalace card) {

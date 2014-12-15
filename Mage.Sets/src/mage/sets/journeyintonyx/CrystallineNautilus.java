@@ -60,7 +60,7 @@ public class CrystallineNautilus extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Bestow 3UU (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
-        this.addAbility(new BestowAbility(this, "{3}{U}{U}"));
+        this.addAbility(new BestowAbility(this.getName(), "{3}{U}{U}"));
         
         // When Crystalline Nautilus becomes the target of a spell or ability, sacrifice it.
         this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));

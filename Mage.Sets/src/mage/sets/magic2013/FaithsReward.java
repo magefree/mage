@@ -54,7 +54,7 @@ public class FaithsReward extends CardImpl {
 
         // Return to the battlefield all permanent cards in your graveyard that were put there from the battlefield this turn.
         this.getSpellAbility().addEffect(new FaithsRewardEffect());
-        this.addWatcher(new FaithsRewardWatcher());
+        this.getSpellAbility().addWatcher(new FaithsRewardWatcher());
     }
 
     public FaithsReward(final FaithsReward card) {

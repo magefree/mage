@@ -52,7 +52,7 @@ public class DealtDamageToCreatureBySourceDies extends ReplacementEffectImpl {
 
     public DealtDamageToCreatureBySourceDies(Card card, Duration duration) {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
-        card.addWatcher(new DamagedByWatcher());
+        //card.addWatcher(new DamagedByWatcher(), game);
         if (card.getCardType().contains(CardType.CREATURE)) {
             staticText = "If a creature dealt damage by {this} this turn would die, exile it instead";
         } else {

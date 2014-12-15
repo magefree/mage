@@ -59,7 +59,7 @@ public class CelestialArchon extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Bestow {5}{W}{W}  (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
-        this.addAbility(new BestowAbility(this, "{5}{W}{W}"));
+        this.addAbility(new BestowAbility(this.getName(), "{5}{W}{W}"));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

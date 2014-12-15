@@ -79,8 +79,7 @@ public class GroundlingPouncer extends CardImpl {
         Effect effect2 = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, false, true);
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{G/U}"), condition, rule);
         ability.addEffect(effect2);
-        this.addAbility(ability);
-        this.addWatcher(new ActivatedAbilityUsedThisTurnWatcher());
+        this.addAbility(ability, new ActivatedAbilityUsedThisTurnWatcher());
 
     }
 

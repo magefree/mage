@@ -59,7 +59,7 @@ public class GnarledScarhide extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Bestow {3}{B}
-        this.addAbility(new BestowAbility(this, "{3}{B}"));
+        this.addAbility(new BestowAbility(this.getName(), "{3}{B}"));
         // Gnarled Scarhide can't block.
         this.addAbility(new CantBlockAbility());
         // Enchanted creature gets +2/+1 and can't block.

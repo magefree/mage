@@ -61,7 +61,7 @@ public class ArrowStorm extends CardImpl {
                 new DamageTargetEffect(5, false),
                 RaidCondition.getInstance(),
                 "<br/><br/><i>Raid</i> - If you attacked with a creature this turn, instead {this} deals 5 damage to that creature or player and the damage can't be prevented"));
-        this.addWatcher(new PlayerAttackedWatcher());
+        this.getSpellAbility().addWatcher(new PlayerAttackedWatcher());
     }
 
     public ArrowStorm(final ArrowStorm card) {

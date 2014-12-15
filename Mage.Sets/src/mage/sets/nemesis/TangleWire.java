@@ -60,7 +60,7 @@ public class TangleWire extends CardImpl {
         this.expansionSetCode = "NMS";
 
         // Fading 4
-        this.addAbility(new FadingAbility(4, this));
+        this.addAbility(new FadingAbility(4));
         // At the beginning of each player's upkeep, that player taps an untapped artifact, creature, or land he or she controls for each fade counter on Tangle Wire.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new TangleWireEffect(), TargetController.ANY, false, true));
     }

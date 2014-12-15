@@ -59,7 +59,7 @@ public class EverflameEidolon extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Bestow {2}{R}
-        this.addAbility(new BestowAbility(this, "{2}{R}"));
+        this.addAbility(new BestowAbility(this.getName(), "{2}{R}"));
         // {R}: Everflame Eidolon gets +1/+0 until end of turn. If it's an Aura, enchanted creature gets +1/+0 until end of turn instead.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
                 new BoostEnchantedEffect(1, 0, Duration.EndOfTurn),

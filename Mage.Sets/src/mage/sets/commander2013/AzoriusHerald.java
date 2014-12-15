@@ -29,6 +29,7 @@ package mage.sets.commander2013;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -60,8 +61,9 @@ public class AzoriusHerald extends CardImpl {
         // When Azorius Herald enters the battlefield, you gain 4 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4)));
         // When Azorius Herald enters the battlefield, sacrifice it unless {U} was spent to cast it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.U)), false));
-        this.addWatcher(new ManaSpentToCastWatcher());        
+        Ability ability = new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.U)), false);
+        this.addAbility(ability);
+        ability.addWatcher(new ManaSpentToCastWatcher());        
     }
 
     public AzoriusHerald(final AzoriusHerald card) {

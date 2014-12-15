@@ -106,6 +106,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private List<GameEvent> simultaneousEvents = new ArrayList<>();
     private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
     private Map<UUID, CardState> cardState = new HashMap<>();
+    private Map<UUID, Card> copiedCards = new HashMap<>();
     
     public GameState() {
         players = new Players();
@@ -169,6 +170,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.zoneChangeCounter.putAll(state.zoneChangeCounter);
         for (Map.Entry<UUID, CardState> entry: state.cardState.entrySet()) {
             cardState.put(entry.getKey(), entry.getValue().copy());
+        }
+        for (Map.Entry<UUID, Card> entry: state.copiedCards.entrySet()) {
+            copiedCards.put(entry.getKey(), entry.getValue().copy());
         }
 
     }
@@ -505,6 +509,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         this.simultaneousEvents = state.simultaneousEvents;
         this.zoneChangeCounter = state.zoneChangeCounter;
+        this.cardState = state.cardState;
+        this.copiedCards = state.copiedCards;
     }
 
     public void addSimultaneousEvent(GameEvent event, Game game) {
@@ -541,23 +547,26 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void addCard(Card card) {
         setZone(card.getId(), Zone.OUTSIDE);
-        for (Watcher watcher: card.getWatchers()) {
-            watcher.setControllerId(card.getOwnerId());
-            watcher.setSourceId(card.getId());
-            watchers.add(watcher);
-        }
         for (Ability ability: card.getAbilities()) {
             addAbility(ability, card);
+            for (Watcher watcher: ability.getWatchers()) {
+                watcher.setControllerId(card.getOwnerId());
+                watcher.setSourceId(card.getId());
+                watchers.add(watcher);
+            }
         }
     }
     
-    public void removeCard(Card card) {
-        zones.remove(card.getId());
+    public void removeCopiedCard(Card card) {
+        if (copiedCards.containsKey(card.getId())) {
+            copiedCards.remove(card.getId());
+            cardState.remove(card.getId());
+        }
         // TODO Watchers?
         // TODO Abilities?
         if (card.isSplitCard()) {
-            removeCard( ((SplitCard)card).getLeftHalfCard());
-            removeCard( ((SplitCard)card).getRightHalfCard());
+            removeCopiedCard( ((SplitCard)card).getLeftHalfCard());
+            removeCopiedCard( ((SplitCard)card).getRightHalfCard());
         }
     }
 
@@ -758,6 +767,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         Integer value = this.zoneChangeCounter.getOrDefault(objectId, 1);
         value++;
         this.zoneChangeCounter.put(objectId, value);
+        this.otherAbilities.remove(objectId);
     }
 
     public void setZoneChangeCounter(UUID objectId, int value) {
@@ -770,4 +780,31 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         return cardState.get(cardId);
     }
+
+    public void addWatcher(Watcher watcher) {
+        this.watchers.add(watcher);
+    }
+    
+    public Card getCopiedCard(UUID cardId) {
+        return copiedCards.get(cardId);
+    }
+    
+    public Card copyCard(Card cardToCopy, Ability source) {
+        Card copiedCard = cardToCopy.copy();
+        copiedCard.assignNewId();
+        copiedCard.setOwnerId(source.getControllerId());
+        copiedCard.setCopy(true);
+        copiedCards.put(copiedCard.getId(), copiedCard);
+        addCard(copiedCard);
+        if (copiedCard.isSplitCard()) {
+            Card leftCard = ((SplitCard)copiedCard).getLeftHalfCard();
+            copiedCards.put(leftCard.getId(), leftCard);
+            addCard(leftCard);
+            Card rightCard = ((SplitCard)copiedCard).getRightHalfCard();
+            copiedCards.put(rightCard.getId(), rightCard);
+            addCard(rightCard);
+        }
+        return copiedCard;
+    }
+
 }

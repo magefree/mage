@@ -27,6 +27,7 @@
  */
 package mage.sets.riseoftheeldrazi;
 
+import java.util.List;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -62,20 +63,22 @@ public class KazanduTuskcaller extends LevelerCard {
 
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}{G}")));
 
-        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         abilities1.add(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateTokenEffect(new ElephantToken()),
                 new TapSourceCost()));
 
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         abilities2.add(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateTokenEffect(new ElephantToken(), 2),
                 new TapSourceCost()));
 
-        LevelerCardBuilder.construct(this,
+        List<Ability> levelerAbilities = LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(2, 5, abilities1, 1, 1),
                 new LevelerCardBuilder.LevelAbility(6, -1, abilities2, 1, 1)
         );
+        this.abilities.addAll(levelerAbilities);
+        setMaxLevelCounters(6);
     }
 
     public KazanduTuskcaller(final KazanduTuskcaller card) {

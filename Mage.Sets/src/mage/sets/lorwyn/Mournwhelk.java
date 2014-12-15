@@ -58,7 +58,7 @@ public class Mournwhelk extends CardImpl {
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // Evoke {3}{B}
-        this.addAbility(new EvokeAbility(this, "{3}{B}"));
+        this.addAbility(new EvokeAbility("{3}{B}"));
     }
 
     public Mournwhelk(final Mournwhelk card) {

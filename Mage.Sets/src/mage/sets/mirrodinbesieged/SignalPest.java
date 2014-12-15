@@ -74,16 +74,13 @@ public class SignalPest extends CardImpl {
 
 class SignalPestAbility extends EvasionAbility implements MageSingleton {
 
-    private static SignalPestAbility instance;
+    private static SignalPestAbility instance = new SignalPestAbility();
 
     private Object readResolve() throws ObjectStreamException {
         return instance;
     }
 
     public static SignalPestAbility getInstance() {
-        if (instance == null) {
-            instance = new SignalPestAbility();
-        }
         return instance;
     }
 
@@ -98,7 +95,7 @@ class SignalPestAbility extends EvasionAbility implements MageSingleton {
 
     @Override
     public SignalPestAbility copy() {
-        return getInstance();
+        return instance;
     }
 }
 

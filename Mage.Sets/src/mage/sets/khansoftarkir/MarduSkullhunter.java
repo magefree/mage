@@ -64,8 +64,7 @@ public class MarduSkullhunter extends CardImpl {
         Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1)), RaidCondition.getInstance(), 
                  "<i>Raid</i> - When {this} enters the battlefield, if you attacked with a creature this turn, target opponent discards a card.", false);        
         ability.addTarget(new TargetOpponent());
-        this.addAbility(ability);
-        this.addWatcher(new PlayerAttackedWatcher());
+        this.addAbility(ability, new PlayerAttackedWatcher());
     }
 
     public MarduSkullhunter(final MarduSkullhunter card) {

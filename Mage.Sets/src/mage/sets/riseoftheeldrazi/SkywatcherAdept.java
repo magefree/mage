@@ -27,6 +27,7 @@
  */
 package mage.sets.riseoftheeldrazi;
 
+import java.util.List;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
@@ -59,16 +60,18 @@ public class SkywatcherAdept extends LevelerCard {
 
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{3}")));
 
-        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         abilities1.add(FlyingAbility.getInstance());
 
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         abilities2.add(FlyingAbility.getInstance());
 
-        LevelerCardBuilder.construct(this,
+        List<Ability> levelerAbilities = LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 2, abilities1, 2, 2),
                 new LevelerCardBuilder.LevelAbility(3, -1, abilities2, 4, 2)
         );
+        this.abilities.addAll(levelerAbilities);
+        setMaxLevelCounters(3);
     }
 
     public SkywatcherAdept(final SkywatcherAdept card) {

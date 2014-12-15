@@ -26,7 +26,7 @@ public class ShadowAbility extends EvasionAbility implements MageSingleton {
     }
 
     private ShadowAbility() {
-        this.addEffect(new ShadowEffect());
+        this.addEffect(ShadowEffect.getInstance());
     }
 
     @Override
@@ -43,12 +43,14 @@ public class ShadowAbility extends EvasionAbility implements MageSingleton {
 
 class ShadowEffect extends RestrictionEffect implements MageSingleton {
 
-    public ShadowEffect() {
+    private static final ShadowEffect fINSTANCE =  new ShadowEffect();
+    
+    private ShadowEffect() {
         super(Duration.EndOfGame);
     }
 
-    public ShadowEffect(final ShadowEffect effect) {
-        super(effect);
+    public static ShadowEffect getInstance() {
+        return fINSTANCE;
     }
 
     @Override
@@ -75,6 +77,6 @@ class ShadowEffect extends RestrictionEffect implements MageSingleton {
 
     @Override
     public ShadowEffect copy() {
-        return new ShadowEffect(this);
+        return fINSTANCE;
     }
 }

@@ -63,7 +63,7 @@ public class GrimReturn extends CardImpl {
         effect.setText("Choose target creature card in a graveyard that was put there from the battlefield this turn. Put that card onto the battlefield under your control");
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard(textFilter)));
-        this.addWatcher(new CardsPutIntoGraveyardWatcher());
+        this.getSpellAbility().addWatcher(new CardsPutIntoGraveyardWatcher());
     }
 
     public GrimReturn(final GrimReturn card) {

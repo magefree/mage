@@ -75,11 +75,12 @@ public class EpharaGodOfThePolis extends CardImpl {
         effect.setText("As long as your devotion to white and blue is less than seven, Ephara isn't a creature");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         // At the beginning of each upkeep, if you had another creature enter the battlefield under your control last turn, draw a card.
-        this.addAbility(new ConditionalTriggeredAbility(
+        Ability ability = new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), TargetController.ANY, false),
                 HadAnotherCreatureEnterTheBattlefieldCondition.getInstance(),
-                "At the beginning of each upkeep, if you had another creature enter the battlefield under your control last turn, draw a card."));
-        this.addWatcher(new CreatureEnteredBattlefieldLastTurnWatcher());
+                "At the beginning of each upkeep, if you had another creature enter the battlefield under your control last turn, draw a card.");
+        ability.addWatcher(new CreatureEnteredBattlefieldLastTurnWatcher());
+        this.addAbility(ability);
 
     }
 

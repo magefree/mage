@@ -54,7 +54,7 @@ public class HorsemanshipAbility extends EvasionAbility implements MageSingleton
     }
 
     private HorsemanshipAbility() {
-        this.addEffect(new Horsemanship());
+        this.addEffect(HorsemanshipEffect.getInstance());
     }
 
     @Override
@@ -69,14 +69,16 @@ public class HorsemanshipAbility extends EvasionAbility implements MageSingleton
 
 }
 
-class Horsemanship extends RestrictionEffect implements MageSingleton {
+class HorsemanshipEffect extends RestrictionEffect implements MageSingleton {
+    
+    private static final HorsemanshipEffect fINSTANCE =  new HorsemanshipEffect();
 
-    public Horsemanship() {
+    private HorsemanshipEffect() {
         super(Duration.EndOfGame);
     }
 
-    public Horsemanship(final Horsemanship effect) {
-        super(effect);
+    public static HorsemanshipEffect getInstance() {
+        return fINSTANCE;
     }
 
     @Override
@@ -90,7 +92,7 @@ class Horsemanship extends RestrictionEffect implements MageSingleton {
     }
 
     @Override
-    public Horsemanship copy() {
-        return new Horsemanship(this);
+    public HorsemanshipEffect copy() {
+        return fINSTANCE;
     }
 }

@@ -69,7 +69,7 @@ public class EidolonOfCountlessBattles extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Bestow {2}{W}{W}
-        this.addAbility(new BestowAbility(this, "{2}{W}{W}"));
+        this.addAbility(new BestowAbility(this.getName(), "{2}{W}{W}"));
         // Eidolon of Countless Battles and enchanted creature get +1/+1 for each creature you control and +1/+1 for each Aura you control.        
         PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filter, 1);
         Effect effect = new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield);

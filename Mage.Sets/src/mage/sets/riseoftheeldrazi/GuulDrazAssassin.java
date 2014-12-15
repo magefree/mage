@@ -28,6 +28,7 @@
 
 package mage.sets.riseoftheeldrazi;
 
+import java.util.List;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
@@ -76,10 +77,12 @@ public class GuulDrazAssassin extends LevelerCard {
         ability2.addCost(new TapSourceCost());
         abilities2.add(ability2);
 
-        LevelerCardBuilder.construct(this,
+        List<Ability> levelerAbilities = LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(2, 3, abilities1, 2, 2),
                 new LevelerCardBuilder.LevelAbility(4, -1, abilities2, 4, 4)
         );
+        this.abilities.addAll(levelerAbilities);
+        setMaxLevelCounters(4);
     }
 
     public GuulDrazAssassin (final GuulDrazAssassin card) {

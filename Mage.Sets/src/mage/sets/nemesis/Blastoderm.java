@@ -53,7 +53,7 @@ public class Blastoderm extends CardImpl {
         // Shroud
         this.addAbility(ShroudAbility.getInstance());
         // Fading 3
-        this.addAbility(new FadingAbility(3, this));
+        this.addAbility(new FadingAbility(3));
     }
 
     public Blastoderm(final Blastoderm card) {

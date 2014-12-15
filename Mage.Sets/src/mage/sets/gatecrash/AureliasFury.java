@@ -96,7 +96,7 @@ public class AureliasFury extends CardImpl {
         this.getSpellAbility().addEffect(new DamageMultiEffect(xValue));
         this.getSpellAbility().addEffect(new AureliasFuryEffect());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayerAmount(xValue));
-        this.addWatcher(new AureliasFuryDamagedByWatcher());
+        this.getSpellAbility().addWatcher(new AureliasFuryDamagedByWatcher());
 
     }
 

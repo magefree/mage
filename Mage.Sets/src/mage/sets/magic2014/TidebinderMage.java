@@ -83,8 +83,7 @@ public class TidebinderMage extends CardImpl {
         ability.addEffect(new TidebinderMageEffect());
         Target target = new TargetCreaturePermanent(filter);
         ability.addTarget(target);
-        this.addAbility(ability);
-        this.addWatcher(new TidebinderMageWatcher());
+        this.addAbility(ability, new TidebinderMageWatcher());
 
     }
 

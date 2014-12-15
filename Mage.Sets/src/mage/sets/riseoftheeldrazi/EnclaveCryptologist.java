@@ -28,6 +28,7 @@
 
 package mage.sets.riseoftheeldrazi;
 
+import java.util.List;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -64,15 +65,17 @@ public class EnclaveCryptologist extends LevelerCard {
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}{U}")));
 
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new TapSourceCost());
-        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>(ability);
+        Abilities<Ability> abilities1 = new AbilitiesImpl<>(ability);
 
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost());
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>(ability);
+        Abilities<Ability> abilities2 = new AbilitiesImpl<>(ability);
 
-        LevelerCardBuilder.construct(this,
+        List<Ability> levelerAbilities = LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 2, abilities1, 0, 1),
                 new LevelerCardBuilder.LevelAbility(3, -1, abilities2, 0, 1)
         );
+        this.abilities.addAll(levelerAbilities);
+        setMaxLevelCounters(3);
     }
 
     public EnclaveCryptologist (final EnclaveCryptologist card) {

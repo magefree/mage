@@ -275,35 +275,35 @@ public abstract class GameImpl implements Game, Serializable {
                 card = ((PermanentCard)card).getCard();
             }
             card.setOwnerId(ownerId);
-            card.setFaceDown(false); // can be set face dwon from previous game
+            //card.setFaceDown(false, this); // can be set face dwon from previous game
             gameCards.put(card.getId(), card);
             state.addCard(card);
             if (card.isSplitCard()) {
                 Card leftCard = ((SplitCard)card).getLeftHalfCard();
-                leftCard.setOwnerId(ownerId);
+                //leftCard.setOwnerId(ownerId);
                 gameCards.put(leftCard.getId(), leftCard);
                 state.addCard(leftCard);
                 Card rightCard = ((SplitCard)card).getRightHalfCard();
-                rightCard.setOwnerId(ownerId);
+                //rightCard.setOwnerId(ownerId);
                 gameCards.put(rightCard.getId(), rightCard);
                 state.addCard(rightCard);
             }
         }
     }
 
-    @Override
-    public void unloadCard(Card card) {
-        gameCards.remove(card.getId());
-        state.removeCard(card);
-        if (card.isSplitCard()) {
-            Card leftCard = ((SplitCard)card).getLeftHalfCard();
-            gameCards.remove(leftCard.getId());
-            state.removeCard(leftCard);
-            Card rightCard = ((SplitCard)card).getRightHalfCard();
-            gameCards.remove(rightCard.getId());
-            state.removeCard(rightCard);
-        }                
-    }
+//    @Override
+//    public void unloadCard(Card card) {
+//        gameCards.remove(card.getId());
+//        state.removeCard(card);
+//        if (card.isSplitCard()) {
+//            Card leftCard = ((SplitCard)card).getLeftHalfCard();
+//            gameCards.remove(leftCard.getId());
+//            state.removeCard(leftCard);
+//            Card rightCard = ((SplitCard)card).getRightHalfCard();
+//            gameCards.remove(rightCard.getId());
+//            state.removeCard(rightCard);
+//        }                
+//    }
 
     @Override
     public Collection<Card> getCards() {
@@ -425,7 +425,10 @@ public abstract class GameImpl implements Game, Serializable {
         if (cardId == null) {
             return null;
         }
-        return gameCards.get(cardId);
+        if (gameCards.containsKey(cardId))
+            return gameCards.get(cardId);
+        else
+            return state.getCopiedCard(cardId);
     }
 
     @Override
@@ -1296,7 +1299,7 @@ public abstract class GameImpl implements Game, Serializable {
 
         //getState().addCard(permanent);
         permanent.reset(this);
-        if (copyFromPermanent.isMorphCard() && copyFromPermanent.isFaceDown()) {
+        if (copyFromPermanent.isMorphCard() && copyFromPermanent.isFaceDown(this)) {
             MorphAbility.setPermanentToMorph(permanent);
         }
         permanent.assignNewId();
@@ -1336,10 +1339,10 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public Card copyCard(Card cardToCopy, Ability source, UUID newController) {
+    public Card copyCard(Card cardToCopy, Ability source) {
         Card copiedCard = cardToCopy.copy();
         copiedCard.assignNewId();
-        copiedCard.setControllerId(newController);
+        //copiedCard.setControllerId(newController);
         copiedCard.setCopy(true);
         Set<Card> cards = new HashSet<>();
         cards.add(copiedCard);
@@ -1452,13 +1455,15 @@ public abstract class GameImpl implements Game, Serializable {
             for (Card card: player.getHand().getCards(this)) {
                 if (card.isCopy()) {
                     player.getHand().remove(card);
-                    this.unloadCard(card);
+                    //this.unloadCard(card);
+                    state.removeCopiedCard(card);
                 }
             }
             for (Card card: player.getGraveyard().getCards(this)) {
                 if (card.isCopy()) {
                     player.getGraveyard().remove(card);
-                    this.unloadCard(card);
+                    //this.unloadCard(card);
+                    state.removeCopiedCard(card);
                 }
             }
         }
@@ -1466,7 +1471,8 @@ public abstract class GameImpl implements Game, Serializable {
         for (Card card: this.getState().getExile().getAllCards(this)) {
             if (card.isCopy()) {
                 this.getState().getExile().removeCard(card, this);
-                this.unloadCard(card);                
+                //this.unloadCard(card);
+                state.removeCopiedCard(card);
             }
         }   
         // TODO Library + graveyard

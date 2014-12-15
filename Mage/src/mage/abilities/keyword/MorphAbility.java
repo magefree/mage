@@ -116,7 +116,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
     public MorphAbility(Card card, Costs<Cost> morphCosts) {
         super(Zone.HAND, null);
         this.morphCosts = morphCosts;
-        card.setMorphCard(true);
+        //card.setMorphCard(true);
         this.setWorksFaceDown(true);
         name = ABILITY_KEYWORD;
         StringBuilder sb = new StringBuilder();
@@ -133,7 +133,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
 
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesFaceDownCreatureEffect(morphCosts));
         ability.setRuleVisible(false);
-        card.addAbility(ability);
+        addSubAbility(ability);
 
     }
 
@@ -185,7 +185,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
             Spell spell = game.getStack().getSpell(ability.getId());
             if (player != null && spell != null) {
                 this.resetMorph();
-                spell.setFaceDown(true); // so only the back is visible
+                spell.setFaceDown(true, game); // so only the back is visible
                 if (alternateCosts.canPay(ability, sourceId, controllerId, game)) {
                     if (player.chooseUse(Outcome.Benefit, new StringBuilder("Cast this card as a 2/2 face-down creature for ").append(getCosts().getText()).append(" ?").toString(), game)) {
                         activateMorph(game);
@@ -208,7 +208,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
                         spellColor.setWhite(false);
                         spellColor.setBlue(false);
                     } else {
-                        spell.setFaceDown(false);
+                        spell.setFaceDown(false, game);
                     }
                 }
             }
@@ -325,7 +325,7 @@ class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implements Sour
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && permanent.isFaceDown()) {
+        if (permanent != null && permanent.isFaceDown(game)) {
             switch (layer) {
                 case TypeChangingEffects_4:
                     permanent.setName("");

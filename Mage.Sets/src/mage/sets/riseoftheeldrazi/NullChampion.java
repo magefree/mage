@@ -28,6 +28,7 @@
 
 package mage.sets.riseoftheeldrazi;
 
+import java.util.List;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
@@ -60,15 +61,17 @@ public class NullChampion extends LevelerCard {
         this.toughness = new MageInt(1);
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{3}")));
 
-        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities1 = new AbilitiesImpl<>();
 
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         abilities2.add(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
 
-        LevelerCardBuilder.construct(this,
+        List<Ability> levelerAbilities = LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 3, abilities1, 4, 2),
                 new LevelerCardBuilder.LevelAbility(4, -1, abilities2, 7, 3)
         );
+        this.abilities.addAll(levelerAbilities);
+        setMaxLevelCounters(4);
     }
 
     public NullChampion (final NullChampion card) {

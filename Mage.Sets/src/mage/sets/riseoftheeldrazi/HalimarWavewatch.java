@@ -27,6 +27,7 @@
  */
 package mage.sets.riseoftheeldrazi;
 
+import java.util.List;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
@@ -59,13 +60,15 @@ public class HalimarWavewatch extends LevelerCard {
 
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{2}")));
 
-        Abilities<Ability> levelAbilities = new AbilitiesImpl<Ability>();
+        Abilities<Ability> levelAbilities = new AbilitiesImpl<>();
         levelAbilities.add(new IslandwalkAbility());
 
-        LevelerCardBuilder.construct(this,
-                new LevelerCardBuilder.LevelAbility(1, 4, new AbilitiesImpl<Ability>(), 0, 6),
+        List<Ability> levelerAbilities = LevelerCardBuilder.construct(
+                new LevelerCardBuilder.LevelAbility(1, 4, new AbilitiesImpl<>(), 0, 6),
                 new LevelerCardBuilder.LevelAbility(5, -1, levelAbilities, 6, 6)
         );
+        this.abilities.addAll(levelerAbilities);
+        setMaxLevelCounters(5);
     }
 
     public HalimarWavewatch(final HalimarWavewatch card) {

@@ -37,14 +37,11 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.AlternativeSourceCosts;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.PostResolveEffect;
-import mage.abilities.keyword.BestowAbility;
-import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.constants.*;
@@ -57,11 +54,12 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetAmount;
-import mage.watchers.Watcher;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.keyword.BestowAbility;
+import mage.abilities.keyword.MorphAbility;
 
 /**
  *
@@ -254,8 +252,8 @@ public class Spell implements StackObject, Card {
                 return false;
             }
         } else {
-            if (isFaceDown()) {
-                card.setFaceDown(true);
+            if (isFaceDown(game)) {
+                card.setFaceDown(true, game);
             }
             result = card.putOntoBattlefield(game, fromZone, ability.getId(), controllerId);
             return result;
@@ -516,8 +514,8 @@ public class Spell implements StackObject, Card {
         return card.getRarity();
     }
 
-    @Override
-    public void setRarity(Rarity rarity) {}
+//    @Override
+//    public void setRarity(Rarity rarity) {}
 
     @Override
     public List<CardType> getCardType() {
@@ -585,7 +583,7 @@ public class Spell implements StackObject, Card {
     @Override
     public int getConvertedManaCost() {
         int cmc = 0;
-        if (this.isMorphCard() && this.isFaceDown()) {
+        if (this.isMorphCard() && faceDown) {
             return 0;
         }
         for (Ability spellAbility: spellAbilities) {
@@ -627,18 +625,17 @@ public class Spell implements StackObject, Card {
         spellAbilities.add(spellAbility);
     }
 
-    @Override
-    public void addAbility(Ability ability) {}
+//    @Override
+//    public void addAbility(Ability ability) {}
 
-    @Override
-    public void addWatcher(Watcher watcher) {}
+//    @Override
+//    public void addWatcher(Watcher watcher) {}
 
     @Override
     public SpellAbility getSpellAbility() {
         return ability;
     }
 
-    @Override
     public void setControllerId(UUID controllerId) {
         this.ability.setControllerId(controllerId);
         for (SpellAbility spellAbility: spellAbilities) {
@@ -656,9 +653,14 @@ public class Spell implements StackObject, Card {
     }
 
     @Override
-    public List<Watcher> getWatchers() {
-        return card.getWatchers();
+    public List<String> getRules(Game game) {
+        return card.getRules(game);
     }
+
+//    @Override
+//    public List<Watcher> getWatchers() {
+//        return card.getWatchers();
+//    }
 
     @Override
     public String getExpansionSetCode() {
@@ -670,28 +672,28 @@ public class Spell implements StackObject, Card {
         return card.getTokenSetCode();
     }
 
-    @Override
-    public void setExpansionSetCode(String expansionSetCode) {}
+//    @Override
+//    public void setExpansionSetCode(String expansionSetCode) {}
 
     @Override
-    public void setFaceDown(boolean value) {
+    public void setFaceDown(boolean value, Game game) {
         faceDown = value;
     }
 
     @Override
     public boolean turnFaceUp(Game game, UUID playerId) {
-        setFaceDown(false);
+        setFaceDown(false, game);
         return true;
     }
 
     @Override
     public boolean turnFaceDown(Game game, UUID playerId) {
-        setFaceDown(true);
+        setFaceDown(true, game);
         return true;
     }
 
     @Override
-    public boolean isFaceDown() {
+    public boolean isFaceDown(Game game) {
         return faceDown;
     }
 
@@ -720,24 +722,24 @@ public class Spell implements StackObject, Card {
         return null;
     }
 
-    @Override
-    public void setSecondCardFace(Card card) {
-    }
+//    @Override
+//    public void setSecondCardFace(Card card) {
+//    }
 
     @Override
     public boolean isNightCard() {
         return false;
     }
 
-    @Override
-    public void setFlipCard(boolean flipCard) {
-        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setFlipCardName(String flipCardName) {
-        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    @Override
+//    public void setFlipCard(boolean flipCard) {
+//        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    @Override
+//    public void setFlipCardName(String flipCardName) {
+//        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
 
     @Override
@@ -834,20 +836,20 @@ public class Spell implements StackObject, Card {
         return card.getCardNumber();
     }
 
-    @Override
-    public void setCardNumber(int cid) {
-        card.setCardNumber(cid);
-    }
+//    @Override
+//    public void setCardNumber(int cid) {
+//        card.setCardNumber(cid);
+//    }
 
     @Override
     public boolean getUsesVariousArt() {
         return card.getUsesVariousArt();
     }
 
-    @Override
-    public void setUsesVariousArt(boolean usesVariousArt) {
-        card.setUsesVariousArt(usesVariousArt);
-    }
+//    @Override
+//    public void setUsesVariousArt(boolean usesVariousArt) {
+//        card.setUsesVariousArt(usesVariousArt);
+//    }
 
     @Override
     public List<Mana> getMana() {
@@ -870,7 +872,7 @@ public class Spell implements StackObject, Card {
     }
 
     @Override
-    public void addInfo(String key, String value) {
+    public void addInfo(String key, String value, Game game) {
         // do nothing
     }
 
@@ -900,8 +902,8 @@ public class Spell implements StackObject, Card {
     public void build() {}
 
     @Override
-    public Counters getCounters() {
-        return card.getCounters();
+    public Counters getCounters(Game game) {
+        return card.getCounters(game);
     }
 
     @Override
@@ -938,10 +940,10 @@ public class Spell implements StackObject, Card {
         return card;
     }
 
-    @Override
-    public void setMorphCard(boolean morphCard) {
-        throw new UnsupportedOperationException("Not supported");
-    }
+//    @Override
+//    public void setMorphCard(boolean morphCard) {
+//        throw new UnsupportedOperationException("Not supported");
+//    }
 
     @Override
     public boolean isMorphCard() {

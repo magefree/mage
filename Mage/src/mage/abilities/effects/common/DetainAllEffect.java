@@ -105,7 +105,7 @@ class DetainAllRestrictionEffect extends RestrictionEffect {
         for(FixedTarget fixedTarget :this.detainedObjects) {
             Permanent permanent = game.getPermanent(fixedTarget.getFirst(game, source));
             if (permanent != null) {
-                permanent.addInfo(new StringBuilder("detain").append(getId()).toString(),"[Detained]");
+                permanent.addInfo(new StringBuilder("detain").append(getId()).toString(),"[Detained]", game);
             }
         }
     }
@@ -118,7 +118,7 @@ class DetainAllRestrictionEffect extends RestrictionEffect {
                 for(FixedTarget fixedTarget :this.detainedObjects) {
                     Permanent permanent = game.getPermanent(fixedTarget.getFirst(game, source));
                     if (permanent != null) {
-                        permanent.addInfo(new StringBuilder("detain").append(getId()).toString(),"");
+                        permanent.addInfo(new StringBuilder("detain").append(getId()).toString(),"", game);
                     }
                 }
                 return true;

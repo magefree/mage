@@ -76,7 +76,7 @@ public class SavageSummoning extends CardImpl {
         this.getSpellAbility().addEffect(new SavageSummoningAsThoughEffect());
         this.getSpellAbility().addEffect(new SavageSummoningCantCounterEffect());
         this.getSpellAbility().addEffect(new SavageSummoningEntersBattlefieldEffect());
-        this.addWatcher(new SavageSummoningWatcher());
+        this.getSpellAbility().addWatcher(new SavageSummoningWatcher());
 
     }
 

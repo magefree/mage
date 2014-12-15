@@ -58,7 +58,7 @@ public class Spitebellows extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // Evoke {1}{R}{R}
-        this.addAbility(new EvokeAbility(this, "{1}{R}{R}"));
+        this.addAbility(new EvokeAbility("{1}{R}{R}"));
     }
 
     public Spitebellows(final Spitebellows card) {

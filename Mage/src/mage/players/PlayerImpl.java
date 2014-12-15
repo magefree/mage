@@ -2705,7 +2705,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override 
     public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
         boolean result = false;
-        boolean faceDown = card.isFaceDown(); // move sets card to face up
+        boolean faceDown = card.isFaceDown(game); // move sets card to face up
         if (card.moveToZone(Zone.HAND, sourceId, game, false)) {
             if (card instanceof PermanentCard) {
                 card = game.getCard(card.getId());

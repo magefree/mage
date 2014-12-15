@@ -57,7 +57,7 @@ public class SilentChantZubera extends CardImpl {
         this.toughness = new MageInt(2);
         Ability ability = new DiesTriggeredAbility(new GainLifeEffect(new SilentChantZuberaDynamicValue()));
         this.addAbility(ability);
-        this.addWatcher(new ZuberasDiedWatcher());
+        ability.addWatcher(new ZuberasDiedWatcher());
     }
 
     public SilentChantZubera (final SilentChantZubera card) {

@@ -60,7 +60,7 @@ public class WhiplashTrap extends CardImpl {
 
         // If an opponent had two or more creatures enter the battlefield under his or her control this turn, you may pay {U} rather than pay Whiplash Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(new WhiplashAlternativeCost());
-        this.addWatcher(new WhiplashTrapWatcher());
+        this.getSpellAbility().addWatcher(new WhiplashTrapWatcher());
 
         // Return two target creatures to their owners' hands.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

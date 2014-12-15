@@ -30,7 +30,7 @@ public class IntimidateAbility extends EvasionAbility implements MageSingleton  
     }
 
     private IntimidateAbility() {
-        this.addEffect(new IntimidateEffect());
+        this.addEffect(IntimidateEffect.getInstance());
     }
 
     @Override
@@ -45,12 +45,14 @@ public class IntimidateAbility extends EvasionAbility implements MageSingleton  
 }
 
 class IntimidateEffect extends RestrictionEffect implements MageSingleton {
-    public IntimidateEffect() {
+    private static final IntimidateEffect fInstance = new IntimidateEffect();
+    
+    private IntimidateEffect() {
         super(Duration.EndOfGame);
     }
 
-    public IntimidateEffect(final IntimidateEffect effect) {
-        super(effect);
+    public static IntimidateEffect getInstance() {
+        return fInstance;
     }
 
     @Override
@@ -72,6 +74,6 @@ class IntimidateEffect extends RestrictionEffect implements MageSingleton {
 
     @Override
     public IntimidateEffect copy() {
-        return new IntimidateEffect(this);
+        return fInstance;
     }
 }

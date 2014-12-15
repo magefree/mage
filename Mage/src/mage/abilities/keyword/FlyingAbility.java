@@ -55,7 +55,7 @@ public class FlyingAbility extends EvasionAbility implements MageSingleton {
     }
 
     private FlyingAbility() {
-        this.addEffect(new FlyingEffect());
+        this.addEffect(FlyingEffect.getInstance());
     }
 
     @Override
@@ -72,12 +72,14 @@ public class FlyingAbility extends EvasionAbility implements MageSingleton {
 
 class FlyingEffect extends RestrictionEffect implements MageSingleton {
 
-    public FlyingEffect() {
+    private static final FlyingEffect fINSTANCE =  new FlyingEffect();
+    
+    private FlyingEffect() {
         super(Duration.EndOfGame);
     }
 
-    public FlyingEffect(final FlyingEffect effect) {
-        super(effect);
+    public static FlyingEffect getInstance() {
+        return fINSTANCE;
     }
 
     @Override
@@ -92,7 +94,7 @@ class FlyingEffect extends RestrictionEffect implements MageSingleton {
 
     @Override
     public FlyingEffect copy() {
-        return new FlyingEffect(this);
+        return fINSTANCE;
     }
 
 }

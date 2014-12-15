@@ -56,7 +56,7 @@ public class FearAbility extends EvasionAbility implements MageSingleton {
     }
 
     private FearAbility() {
-        this.addEffect(new FearEffect());
+        this.addEffect(FearEffect.getInstance());
     }
 
     @Override
@@ -73,12 +73,14 @@ public class FearAbility extends EvasionAbility implements MageSingleton {
 
 class FearEffect extends RestrictionEffect implements MageSingleton {
 
-    public FearEffect() {
+    private static final FearEffect fINSTANCE =  new FearEffect();
+    
+    private FearEffect() {
         super(Duration.EndOfGame);
     }
 
-    public FearEffect(final FearEffect effect) {
-        super(effect);
+    public static FearEffect getInstance() {
+        return fINSTANCE;
     }
 
     @Override
@@ -99,7 +101,7 @@ class FearEffect extends RestrictionEffect implements MageSingleton {
 
     @Override
     public FearEffect copy() {
-        return new FearEffect(this);
+        return fINSTANCE;
     }
 
 }

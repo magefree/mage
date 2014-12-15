@@ -50,6 +50,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
+import mage.watchers.Watcher;
 
 /**
  * Practically everything in the game is started from an Ability.  This
@@ -341,6 +342,12 @@ public interface Ability extends Controllable, Serializable {
 
     Modes getModes();
 
+    public List<Ability> getSubAbilities();
+    public void addSubAbility(Ability ability);
+    
+    List<Watcher> getWatchers();
+    void addWatcher(Watcher watcher);
+    
     boolean canChooseTarget(Game game);
 
     /**

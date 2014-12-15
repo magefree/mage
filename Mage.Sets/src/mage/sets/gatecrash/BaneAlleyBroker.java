@@ -146,7 +146,7 @@ class BaneAlleyBrokerDrawExileEffect extends OneShotEffect {
               Card card = game.getCard(target.getFirstTarget());
               MageObject sourceObject = game.getObject(source.getSourceId());              
               if (card != null && sourceObject != null) {
-                  card.setFaceDown(true);
+                  card.setFaceDown(true, game);
                   return card.moveToExile(CardUtil.getCardExileZoneId(game, source), new StringBuilder(sourceObject.getLogName()).toString(), source.getSourceId(), game);
               }
           }

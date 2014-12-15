@@ -63,7 +63,7 @@ public class CobraTrap extends CardImpl {
         // If a noncreature permanent under your control was destroyed this turn by a spell or ability an opponent controlled, you may pay {G} rather than pay Cobra Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(
                 new CobraTrapAlternativeCost());
-        this.addWatcher(new CobraTrapWatcher());
+        this.getSpellAbility().addWatcher(new CobraTrapWatcher());
         // Put four 1/1 green Snake creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SnakeToken(), 4));
     }

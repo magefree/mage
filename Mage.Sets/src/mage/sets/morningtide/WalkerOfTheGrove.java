@@ -55,7 +55,7 @@ public class WalkerOfTheGrove extends CardImpl {
         // When Walker of the Grove leaves the battlefield, put a 4/4 green Elemental creature token onto the battlefield.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new CreateTokenEffect(new WalkerOfTheGroveToken(),1),false));
         // Evoke {4}{G}
-        this.addAbility(new EvokeAbility(this, "{4}{G}"));
+        this.addAbility(new EvokeAbility("{4}{G}"));
     }
 
     public WalkerOfTheGrove(final WalkerOfTheGrove card) {

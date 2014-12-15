@@ -41,6 +41,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.PlayLandAbility;
 import mage.abilities.SpellAbility;
+import mage.abilities.keyword.MorphAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -73,10 +74,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     private static final long serialVersionUID = 1L;
 
     private static final Logger logger = Logger.getLogger(CardImpl.class);
-
+    private static final Map<String, String> emptyInfo = new HashMap<>();
+    
     protected UUID ownerId;
     protected int cardNumber;
-    protected List<Watcher> watchers;
+//    protected List<Watcher> watchers;
     protected String expansionSetCode;
     protected String tokenSetCode;
     protected Rarity rarity;
@@ -87,7 +89,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected SpellAbility spellAbility;
     protected boolean flipCard;
     protected String flipCardName;
-    //protected Map<String, String> info;
+    protected Map<String, String> info;
     protected boolean usesVariousArt = false;
     //protected Counters counters;
     protected boolean splitCard;
@@ -125,7 +127,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         this.ownerId = ownerId;
         this.name = name;
         //this.counters = new Counters();
-        this.watchers = new ArrayList<>();
+        //this.watchers = new ArrayList<>();
     }
 
     protected CardImpl(UUID id, UUID ownerId, String name) {
@@ -133,7 +135,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         this.ownerId = ownerId;
         this.name = name;
         //this.counters = new Counters();
-        this.watchers = new ArrayList<>();
+        //this.watchers = new ArrayList<>();
     }
 
     public CardImpl(final CardImpl card) {
@@ -142,10 +144,10 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         cardNumber = card.cardNumber;
         expansionSetCode = card.expansionSetCode;
         rarity = card.rarity;
-        this.watchers = new ArrayList<>();
-        for (Watcher watcher: card.getWatchers()) {
-            watchers.add(watcher.copy());
-        }
+//        this.watchers = new ArrayList<>();
+//        for (Watcher watcher: card.getWatchers()) {
+//            watchers.add(watcher.copy());
+//        }
         //faceDown = card.faceDown;
 
         canTransform = card.canTransform;
@@ -153,10 +155,10 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             secondSideCard = card.secondSideCard;
             nightCard = card.nightCard;
         }
-//        if (card.info != null) {
-//            info = new HashMap<>();
-//            info.putAll(card.info);
-//        }
+        if (card.info != null) {
+            info = new HashMap<>();
+            info.putAll(card.info);
+        }
         flipCard = card.flipCard;
         flipCardName = card.flipCardName;
         splitCard = card.splitCard;
@@ -165,12 +167,16 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         morphCard = card.isMorphCard();
     }
 
-    protected void assignNewId() {
+    @Override
+    public void assignNewId() {
         this.objectId = UUID.randomUUID();
         this.abilities.newOriginalId();
         this.abilities.setSourceId(objectId);
+//        for (Watcher watcher: watchers) {
+//            watcher.setSourceId(objectId);
+//        }
     }
-
+    
     public static Card createCard(String name) {
         try {
             return createCard(Class.forName(name));
@@ -217,10 +223,20 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         game.getState().getCardState(objectId).addInfo(key, value);
     }
     
+    protected void addInfo(String key, String value) {
+        if (info == null) {
+            info = new HashMap<>();
+        }
+        info.put(key, value);
+    }
+
     @Override
     public List<String> getRules() {
         try {
             List<String> rules = abilities.getRules(this.getLogName());
+            for (String data : info.values()) {
+                rules.add(data);
+            }
             return rules;
         } catch (Exception e) {
             logger.error("Exception in rules generation for card: " + this.getName(), e);
@@ -233,7 +249,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public List<String> getRules(Game game) {
         try {
-            List<String> rules = abilities.getRules(this.getLogName());
+            List<String> rules = getRules();
             CardState state = game.getState().getCardState(objectId);
             for (String data : state.getInfo().values()) {
                 rules.add(data);
@@ -250,13 +266,29 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected void addAbility(Ability ability) {
         ability.setSourceId(this.getId());
         abilities.add(ability);
+        if (ability instanceof MorphAbility)
+            this.morphCard = true;
+        for (Ability subAbility: ability.getSubAbilities()) {
+            abilities.add(subAbility);
+        }
     }
+ 
+    protected void addAbility(Ability ability, Watcher watcher) {
+        addAbility(ability);
+        ability.addWatcher(watcher);
+    }
+
+//    protected void addAbility(CompositeAbility ability) {
+//        for (Ability a: ability.getAbilities()) {
+//            addAbility(a);
+//        }
+//    }
     
-    protected void addWatcher(Watcher watcher) {
-        watcher.setSourceId(this.getId());
-        watcher.setControllerId(this.ownerId);
-        watchers.add(watcher);
-    }
+//    protected void addWatcher(Watcher watcher) {
+//        watcher.setSourceId(this.getId());
+//        watcher.setControllerId(this.ownerId);
+//        watchers.add(watcher);
+//    }
 
     @Override
     public SpellAbility getSpellAbility() {
@@ -275,15 +307,16 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 //        abilities.setControllerId(controllerId);
 //    }
 
-    protected void setOwnerId(UUID ownerId) {
+    @Override
+    public void setOwnerId(UUID ownerId) {
         this.ownerId = ownerId;
         abilities.setControllerId(ownerId);
     }
 
-    @Override
-    public List<Watcher> getWatchers() {
-        return watchers;
-    }
+//    @Override
+//    public List<Watcher> getWatchers() {
+//        return watchers;
+//    }
 
     @Override
     public String getExpansionSetCode() {
@@ -412,7 +445,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                                 .append("] source [").append(sourceCard != null ? sourceCard.getName():"null").append("]").toString());
                     return false;
             }
-            setControllerId(event.getPlayerId());
+//            setControllerId(event.getPlayerId());
             game.setZone(objectId, event.getToZone());
             game.addSimultaneousEvent(event);
             return game.getState().getZone(objectId) == toZone;

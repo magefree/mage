@@ -77,7 +77,7 @@ public class GibberingDescent extends CardImpl {
                 HellbentCondition.getInstance())));
         
         // Madness {2}{B}{B}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl<>("{2}{B}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{2}{B}{B}")));
     }
 
     public GibberingDescent(final GibberingDescent card) {

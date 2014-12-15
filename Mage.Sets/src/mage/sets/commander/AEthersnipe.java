@@ -61,7 +61,7 @@ public class AEthersnipe extends CardImpl {
         this.addAbility(ability);
 
         // Evoke {1}{U}{U}
-        this.addAbility(new EvokeAbility(this, "{1}{U}{U}"));
+        this.addAbility(new EvokeAbility("{1}{U}{U}"));
     }
 
     public AEthersnipe(final AEthersnipe card) {

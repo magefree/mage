@@ -69,7 +69,7 @@ public class Reveillark extends CardImpl {
         ability.addTarget(new TargetCardInYourGraveyard(0,2,filter));
         this.addAbility(ability);        
         // Evoke {5}{W}
-        this.addAbility(new EvokeAbility(this, "{5}{W}"));
+        this.addAbility(new EvokeAbility("{5}{W}"));
     }
 
     public Reveillark(final Reveillark card) {

@@ -61,7 +61,7 @@ public class Slithermuse extends CardImpl {
         // When Slithermuse leaves the battlefield, choose an opponent. If that player has more cards in hand than you, draw cards equal to the difference.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new SlithermuseEffect(), false));
         // Evoke {3}{U}
-        this.addAbility(new EvokeAbility(this, "{3}{U}"));
+        this.addAbility(new EvokeAbility("{3}{U}"));
     }
 
     public Slithermuse(final Slithermuse card) {
