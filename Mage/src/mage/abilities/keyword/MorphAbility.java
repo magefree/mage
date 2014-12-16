@@ -308,7 +308,7 @@ class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implements Sour
     protected int zoneChangeCounter;
     protected Ability turnFaceUpAbility = null;
 
-    public BecomesFaceDownCreatureEffect(Costs morphCosts) {
+    public BecomesFaceDownCreatureEffect(Costs<Cost> morphCosts) {
         super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
         this.zoneChangeCounter = Integer.MIN_VALUE;
         if (morphCosts != null) {
