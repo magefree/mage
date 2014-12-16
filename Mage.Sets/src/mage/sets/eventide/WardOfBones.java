@@ -55,7 +55,7 @@ import mage.players.Player;
 public class WardOfBones extends CardImpl {
 
     public WardOfBones(UUID ownerId) {
-        super(ownerId, 174, "Ward of Bones", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
+        super(ownerId, 174, "Ward of Bones", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
         this.expansionSetCode = "EVE";
 
         // Each opponent who controls more creatures than you can't play creature cards. The same is true for artifacts, enchantments, and lands.
