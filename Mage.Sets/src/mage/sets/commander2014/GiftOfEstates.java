@@ -34,8 +34,9 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -43,6 +44,13 @@ import mage.target.common.TargetCardInLibrary;
  * @author LevelX2
  */
 public class GiftOfEstates extends CardImpl {
+    
+    private static final FilterCard filter = new FilterCard("Plains cards");
+    
+    static {
+        filter.add(new SubtypePredicate("Plains"));
+    }
+    
 
     public GiftOfEstates(UUID ownerId) {
         super(ownerId, 73, "Gift of Estates", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");
@@ -52,7 +60,7 @@ public class GiftOfEstates extends CardImpl {
 
         // If an opponent controls more lands than you, search your library for up to three Plains cards, reveal them, and put them into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 3, new FilterBasicLandCard()), true),
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 3, filter), true),
                 new OpponentControllsMoreCondition(new FilterLandPermanent("lands"))));
     }
 
