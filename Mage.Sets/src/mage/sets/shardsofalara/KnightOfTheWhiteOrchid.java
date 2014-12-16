@@ -36,6 +36,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.OpponentControllsMoreCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterBySubtypeCard;
@@ -62,7 +63,7 @@ public class KnightOfTheWhiteOrchid extends CardImpl {
         
         // When Knight of the White Orchid enters the battlefield, if an opponent controls more lands than you, you may search your library for a Plains card, put it onto the battlefield, then shuffle your library.
         this.addAbility(new ConditionalTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, new FilterBySubtypeCard("Plains")), true), true),
+                new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 1, new FilterBySubtypeCard("Plains")), false), true),
                 new OpponentControllsMoreCondition(new FilterLandPermanent("lands")),
                 "When {this} enters the battlefield, if an opponent controls more lands than you, you may search your library for a Plains card, put it onto the battlefield, then shuffle your library"));
         
