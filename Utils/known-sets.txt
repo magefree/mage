@@ -35,6 +35,7 @@ Eighth Edition|eighthedition|
 Eventide|eventide|
 Exodus|exodus|
 Fallen Empires|fallenempires|
+Fate Reforged|fatereforged|
 Fifth Dawn|fifthdawn|
 Fifth Edition|fifthedition|
 Fourth Edition|fourthedition|

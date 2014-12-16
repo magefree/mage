@@ -27,7 +27,7 @@ public class ConstructedFormats {
 
     private static final String[] constructedFormats = {
             ALL, STANDARD, EXTENDED, MODERN,
-            "* Khans of Tarkir Block", "Khans of Tarkir", /*"Fate Reforged",*/
+            "* Khans of Tarkir Block", "Khans of Tarkir", "Fate Reforged", /*"Dragons of Tarkir"*/
             "* Theros Block", "Journey into Nyx", "Born of the Gods", "Theros",
             "* Return to Ravnica Block", "Dragon's Maze", "Gatecrash", "Return to Ravnica",
             "* Innistrad Block", "Avacyn Restored", "Dark Ascension", "Innistrad",

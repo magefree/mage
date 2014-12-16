@@ -48,6 +48,7 @@ Duel Decks: Venser vs. Koth|DDI|
 Eventide|EVE|
 Exodus|EXO|
 Fallen Empires|FEM|
+Fate Reforged|FRF|
 Future Sight|FUT|
 From the Vault: Dragons|FVD|
 From the Vault: Exiled|FVE|
