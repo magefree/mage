@@ -41,6 +41,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
@@ -75,10 +76,19 @@ public class SwordOfWarAndPeace extends CardImpl {
         super(ownerId, 161, "Sword of War and Peace", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Equipment");
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new ProtectionAbility(filter), AttachmentType.EQUIPMENT)));
+        
+        // Equipped creature gets +2/+2 and has protection from red and from white.        
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2));
+        Effect effect = new GainAbilityAttachedEffect(new ProtectionAbility(filter), AttachmentType.EQUIPMENT);
+        effect.setText("and has protection from red and from white");
+        ability.addEffect(effect);
+        this.addAbility(ability);
+        
+        // Whenever equipped creature deals combat damage to a player, Sword of War and Peace deals damage to that player equal to the number of cards in his or her hand and you gain 1 life for each card in your hand.        
         this.addAbility(new SwordOfWarAndPeaceAbility());
+        
+        // Equip {2}
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
     public SwordOfWarAndPeace (final SwordOfWarAndPeace card) {

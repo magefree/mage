@@ -25,45 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.abilities.effects.common;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.LookLibraryTopCardTargetPlayerEffect;
-import mage.cards.CardImpl;
-import mage.target.TargetPlayer;
+import mage.MageObject;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
+import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class MerfolkObserver extends CardImpl {
 
-    public MerfolkObserver(UUID ownerId) {
-        super(ownerId, 76, "Merfolk Observer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "ROE";
-        this.subtype.add("Merfolk");
-        this.subtype.add("Rogue");
+public class LookLibraryTopCardTargetPlayerEffect extends OneShotEffect {
 
-        this.color.setBlue(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
-
-        // When Merfolk Observer enters the battlefield, look at the top card of target player's library.
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new LookLibraryTopCardTargetPlayerEffect());
-        ability.addTarget(new TargetPlayer());
-        this.addAbility(ability);
+    public LookLibraryTopCardTargetPlayerEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "look at the top card of target player's library";
     }
 
-    public MerfolkObserver(final MerfolkObserver card) {
-        super(card);
+    public LookLibraryTopCardTargetPlayerEffect(final LookLibraryTopCardTargetPlayerEffect effect) {
+        super(effect);
     }
 
     @Override
-    public MerfolkObserver copy() {
-        return new MerfolkObserver(this);
+    public LookLibraryTopCardTargetPlayerEffect copy() {
+        return new LookLibraryTopCardTargetPlayerEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        Player targetPlayer = game.getPlayer(source.getFirstTarget());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (player != null && targetPlayer != null && sourceObject != null) {
+            Card card = targetPlayer.getLibrary().getFromTop(game);
+            if (card != null) {
+                CardsImpl cards = new CardsImpl();
+                cards.add(card);
+                player.lookAtCards(sourceObject.getLogName(), cards, game);
+            }
+            return true;
+        }
+        return false;
     }
 }

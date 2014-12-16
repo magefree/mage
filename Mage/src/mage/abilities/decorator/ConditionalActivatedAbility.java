@@ -22,11 +22,16 @@ import mage.game.Game;
  */
 public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
 
+    private static final Effects emptyEffects = new Effects();
+    
     private final Condition condition;
     private String ruleText = null;
 
-    private static final Effects emptyEffects = new Effects();
-
+    public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition) {
+        super(zone, effect, cost);
+        this.condition = condition;
+    }
+    
     public ConditionalActivatedAbility(Zone zone, Effect effect, ManaCosts cost, Condition condition, String rule) {
         super(zone, effect, cost);
         this.condition = condition;

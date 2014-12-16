@@ -107,4 +107,10 @@ class MoreCardsInHandThanOpponentsCondition implements Condition {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "you have more cards in hand than each opponent";
+    }
+    
 }
