@@ -25,49 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.sets.conspiracy;
 
 import java.util.UUID;
-import mage.abilities.Ability;
+import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.LookLibraryTopCardTargetPlayerEffect;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.combat.CanAttackAsThoughtItDidntHaveDefenderAllEffect;
+import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.TargetPlayer;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
  * @author LevelX2
  */
-public class MishrasBauble extends CardImpl {
+public class WakestoneGargoyle extends CardImpl {
 
-    public MishrasBauble(UUID ownerId) {
-        super(ownerId, 138, "Mishra's Bauble", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
-        this.expansionSetCode = "CSP";
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Creatures you control with defender");
+    
+    static {
+        filter.add(new AbilityPredicate(DefenderAbility.class));
+    }
+    
+    public WakestoneGargoyle(UUID ownerId) {
+        super(ownerId, 88, "Wakestone Gargoyle", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        this.expansionSetCode = "CNS";
+        this.subtype.add("Gargoyle");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(4);
 
-        // {T}, Sacrifice Mishra's Bauble: Look at the top card of target player's library. Draw a card at the beginning of the next turn's upkeep.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryTopCardTargetPlayerEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse), false));
-        ability.addTarget(new TargetPlayer());
-        this.addAbility(ability);
+        // Defender
+        this.addAbility(DefenderAbility.getInstance());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // {1}{W}: Creatures you control with defender can attack this turn as though they didn't have defender.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanAttackAsThoughtItDidntHaveDefenderAllEffect(Duration.EndOfTurn, filter), new ManaCostsImpl("{1}{W}") ));
     }
 
-    public MishrasBauble(final MishrasBauble card) {
+    public WakestoneGargoyle(final WakestoneGargoyle card) {
         super(card);
     }
 
     @Override
-    public MishrasBauble copy() {
-        return new MishrasBauble(this);
+    public WakestoneGargoyle copy() {
+        return new WakestoneGargoyle(this);
     }
 }

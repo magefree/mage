@@ -25,73 +25,91 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.legends;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.PutOnLibrarySourceEffect;
-import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continious.SetToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.BlockedByIdPredicate;
 import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class Cromat extends CardImpl {
-            
-    public Cromat(UUID ownerId) {
-        super(ownerId, 94, "Cromat", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
-        this.expansionSetCode = "APC";
-        this.supertype.add("Legendary");
-        this.subtype.add("Illusion");
+public class Sentinel extends CardImpl {
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
+    public Sentinel(UUID ownerId) {
+        super(ownerId, 239, "Sentinel", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
+        this.expansionSetCode = "LEG";
+        this.subtype.add("Shapeshifter");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // {W}{B}: Destroy target creature blocking or blocked by Cromat.
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature blocking or blocked by Cromat");
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature blocking or blocked by Sentinel");
         filter.add(Predicates.or(new BlockedByIdPredicate(this.getId()),
                                  new BlockingAttackerIdPredicate(this.getId())));        
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{W}{B}"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        // 0: Change Sentinel's base toughness to 1 plus the power of target creature blocking or blocked by Sentinel. (This effect lasts indefinitely.)
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SentinelEffect(), new GenericManaCost(0));
+        ability.addTarget(null);
+        ability.addTarget(new TargetCreaturePermanent(filter));        
         this.addAbility(ability);
-        // {U}{R}: Cromat gains flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{U}{R}")));
-        // {B}{G}: Regenerate Cromat.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}{G}")));
-        // {R}{W}: Cromat gets +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,1, Duration.EndOfTurn), new ManaCostsImpl("{R}{W}")));
-        // {G}{U}: Put Cromat on top of its owner's library.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibrarySourceEffect(true), new ManaCostsImpl("{G}{U}")));
+        
     }
 
-    public Cromat(final Cromat card) {
+    public Sentinel(final Sentinel card) {
         super(card);
     }
 
     @Override
-    public Cromat copy() {
-        return new Cromat(this);
+    public Sentinel copy() {
+        return new Sentinel(this);
+    }
+}
+
+class SentinelEffect extends OneShotEffect {
+    
+    public SentinelEffect() {
+        super(Outcome.Detriment);
+        this.staticText = "Change {this}'s base toughness to 1 plus the power of target creature blocking or blocked by {this}. <i>(This effect lasts indefinitely.)</i>";
+    }
+    
+    public SentinelEffect(final SentinelEffect effect) {
+        super(effect);
+    }
+    
+    @Override
+    public SentinelEffect copy() {
+        return new SentinelEffect(this);
+    }
+    
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent targetPermanent = game.getPermanentOrLKIBattlefield(targetPointer.getFirst(game, source));
+        if (controller != null && targetPermanent != null) {
+            int newToughness = targetPermanent.getPower().getValue() + 1;
+            game.addEffect(new SetToughnessSourceEffect(new StaticValue(newToughness), Duration.Custom), source);
+            return true;
+        }
+        return false;
     }
 }

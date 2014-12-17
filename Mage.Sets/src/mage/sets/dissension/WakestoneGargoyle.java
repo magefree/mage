@@ -25,49 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.sets.dissension;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.LookLibraryTopCardTargetPlayerEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.TargetPlayer;
 
 /**
  *
  * @author LevelX2
  */
-public class MishrasBauble extends CardImpl {
+public class WakestoneGargoyle extends mage.sets.conspiracy.WakestoneGargoyle {
 
-    public MishrasBauble(UUID ownerId) {
-        super(ownerId, 138, "Mishra's Bauble", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
-        this.expansionSetCode = "CSP";
-
-        // {T}, Sacrifice Mishra's Bauble: Look at the top card of target player's library. Draw a card at the beginning of the next turn's upkeep.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryTopCardTargetPlayerEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse), false));
-        ability.addTarget(new TargetPlayer());
-        this.addAbility(ability);
+    public WakestoneGargoyle(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 21;
+        this.expansionSetCode = "DIS";
+        this.rarity = Rarity.RARE;
     }
 
-    public MishrasBauble(final MishrasBauble card) {
+    public WakestoneGargoyle(final WakestoneGargoyle card) {
         super(card);
     }
 
     @Override
-    public MishrasBauble copy() {
-        return new MishrasBauble(this);
+    public WakestoneGargoyle copy() {
+        return new WakestoneGargoyle(this);
     }
 }

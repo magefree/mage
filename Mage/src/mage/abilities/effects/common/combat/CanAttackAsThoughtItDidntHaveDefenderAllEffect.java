@@ -72,15 +72,23 @@ public class CanAttackAsThoughtItDidntHaveDefenderAllEffect extends AsThoughEffe
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        Permanent permanent = game.getPermanent(sourceId);
-        if (permanent != null && filter.match(permanent, game)) {
-            return true;
-        }
-        return false;
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        Permanent permanent = game.getPermanent(objectId);
+        return permanent != null && filter.match(permanent, game);
     }
     
     private String getText() {
-        return filter.getMessage() + " can attack as though they didn't have defender";
+        StringBuilder sb = new StringBuilder(filter.getMessage());
+        sb.append(" can attack ");
+        if (!duration.toString().isEmpty()) {            
+            if(Duration.EndOfTurn.equals(duration)) {
+                sb.append("this turn");
+            } else {
+                sb.append(duration.toString());
+            }
+            sb.append(" ");
+        }
+        sb.append("as though they didn't have defender");
+        return  sb.toString();
     }
 }
