@@ -58,7 +58,7 @@ public abstract class ManaAbility extends ActivatedAbilityImpl {
         }
     }
 
-    public ManaAbility(ManaAbility ability) {
+    public ManaAbility(final ManaAbility ability) {
         super(ability);
         this.netMana.addAll(ability.netMana);
     }

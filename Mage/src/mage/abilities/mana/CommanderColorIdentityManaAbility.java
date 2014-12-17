@@ -36,12 +36,9 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.cards.Card;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.constants.AbilityType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ManaEvent;
 import mage.players.Player;
 
 /**
@@ -54,7 +51,11 @@ public class CommanderColorIdentityManaAbility extends ManaAbility {
     public CommanderColorIdentityManaAbility() {
         super(Zone.BATTLEFIELD, new CommanderIdentityManaEffect(),new TapSourceCost());
     }
-
+    
+    public CommanderColorIdentityManaAbility(Cost cost) {
+        super(Zone.BATTLEFIELD, new CommanderIdentityManaEffect(), cost);
+    }
+    
     public CommanderColorIdentityManaAbility(final CommanderColorIdentityManaAbility ability) {
         super(ability);
     }
