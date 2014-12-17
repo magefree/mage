@@ -605,6 +605,15 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         }
     }
 
+    /**
+     * There are effects, that set an attacker to be blcoked.
+     * Therefore this setter can be used.
+     * @param blocked 
+     */
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
+    }
+   
     @Override
     public CombatGroup copy() {
         return new CombatGroup(this);
