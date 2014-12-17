@@ -25,60 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.dynamicvalue.common;
+package mage.sets.saviorsofkamigawa;
 
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
-import mage.cards.Card;
-import mage.game.Game;
+import java.util.UUID;
+import mage.abilities.effects.common.continious.ExchangeControlTargetEffect;
+import mage.abilities.keyword.SpliceOntoArcaneAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class SweepNumber implements DynamicValue {
+public class ShiftingBorders extends CardImpl {
 
-    private int zoneChangeCounter = 0;
-    private final String sweepSubtype;
-    private final boolean previousZone;
+    public ShiftingBorders(UUID ownerId) {
+        super(ownerId, 56, "Shifting Borders", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
+        this.expansionSetCode = "SOK";
+        this.subtype.add("Arcane");
 
-    public SweepNumber(String sweepSubtype, boolean previousZone) {
-        this.sweepSubtype = sweepSubtype;
-        this.previousZone = previousZone;
+        // Exchange control of two target lands.
+        this.getSpellAbility().addEffect(new ExchangeControlTargetEffect(Duration.EndOfGame, "Exchange control of two target lands"));
+        this.getSpellAbility().addTarget(new TargetLandPermanent(2));
+
+        // Splice onto Arcane {3}{U}
+        this.addAbility(new SpliceOntoArcaneAbility("{3}{U}"));
+    }
+
+    public ShiftingBorders(final ShiftingBorders card) {
+        super(card);
     }
 
     @Override
-    public int calculate(Game game, Ability source, Effect effect) {
-        if (zoneChangeCounter == 0) {
-            Card card = game.getCard(source.getSourceId());
-            if (card != null) {
-                zoneChangeCounter = card.getZoneChangeCounter();
-                if (previousZone) {
-                    zoneChangeCounter--;
-                }
-            }
-        }
-        int number = 0;
-        Integer sweepNumber = (Integer) game.getState().getValue(new StringBuilder("sweep").append(source.getSourceId()).append(zoneChangeCounter).toString());
-        if (sweepNumber != null) {
-            number = sweepNumber;
-        }
-        return number;
-    }
-
-    @Override
-    public SweepNumber copy() {
-        return new SweepNumber(sweepSubtype, previousZone);
-    }
-
-    @Override
-    public String toString() {
-        return "X";
-    }
-
-    @Override
-    public String getMessage() {
-        return new StringBuilder("the number of ").append(sweepSubtype).append(sweepSubtype.endsWith("s") ? "":"s").append(" returned this way").toString();
+    public ShiftingBorders copy() {
+        return new ShiftingBorders(this);
     }
 }

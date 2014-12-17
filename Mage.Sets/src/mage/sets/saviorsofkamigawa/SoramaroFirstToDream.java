@@ -1,4 +1,4 @@
-    /*
+/*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
@@ -28,41 +28,59 @@
 package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.ReturnToHandTargetCost;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SweepNumber;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.abilities.effects.keyword.SweepEffect;
+import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class ChargeAcrossTheAraba extends CardImpl {
+public class SoramaroFirstToDream extends CardImpl {
 
-    public ChargeAcrossTheAraba(UUID ownerId) {
-        super(ownerId, 4, "Charge Across the Araba", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{W}");
+    public SoramaroFirstToDream(UUID ownerId) {
+        super(ownerId, 58, "Soramaro, First to Dream", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         this.expansionSetCode = "SOK";
-        this.subtype.add("Arcane");
+        this.supertype.add("Legendary");
+        this.subtype.add("Spirit");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
 
-        this.color.setWhite(true);
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Soramaro, First to Dream's power and toughness are each equal to the number of cards in your hand.
+         DynamicValue xValue= new CardsInControllerHandCount();
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
 
-        // Sweep - Return any number of Plains you control to their owner's hand. Creatures you control get +1/+1 until end of turn for each Plains returned this way.
-        this.getSpellAbility().addEffect(new SweepEffect("Plains"));
-        DynamicValue sweepValue = new SweepNumber("Plains", true);
-        this.getSpellAbility().addEffect(new BoostControlledEffect(sweepValue, sweepValue, Duration.EndOfTurn));
+        // {4}, Return a land you control to its owner's hand: Draw a card.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new DrawCardSourceControllerEffect(1), new GenericManaCost(4));
+        ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
+        this.addAbility(ability);
 
     }
 
-    public ChargeAcrossTheAraba(final ChargeAcrossTheAraba card) {
+    public SoramaroFirstToDream(final SoramaroFirstToDream card) {
         super(card);
     }
 
     @Override
-    public ChargeAcrossTheAraba copy() {
-        return new ChargeAcrossTheAraba(this);
+    public SoramaroFirstToDream copy() {
+        return new SoramaroFirstToDream(this);
     }
 }
