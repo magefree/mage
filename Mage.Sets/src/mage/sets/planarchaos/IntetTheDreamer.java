@@ -46,6 +46,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.players.Library;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -84,7 +85,7 @@ class IntetTheDreamerEffect extends OneShotEffect {
     
     public IntetTheDreamerEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Exile the top card of your library face down";
+        this.staticText = "exile the top card of your library face down";
     }
     
     public IntetTheDreamerEffect(final IntetTheDreamerEffect effect) {
@@ -99,10 +100,11 @@ class IntetTheDreamerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (controller.getLibrary().size() > 0) {
-                Card card = controller.getLibrary().removeFromTop(game);
-                card.setFaceDown(true);
+        if (controller != null && controller.getLibrary().size() > 0) {
+            Library library = controller.getLibrary();
+            Card card = library.removeFromTop(game);
+            if (card != null) {
+                controller.moveCardToExileWithInfo(card, source.getSourceId(), "Intet, the Dreamer <this card may be played as long as Intet is on the battlefield>", source.getSourceId(), game, Zone.LIBRARY);
                 ContinuousEffect effect = new IntetTheDreamerCastFromExileEffect(); 
                 effect.setTargetPointer(new FixedTarget(card.getId()));
                 game.addEffect(effect, source);
@@ -116,7 +118,7 @@ class IntetTheDreamerEffect extends OneShotEffect {
 class IntetTheDreamerCastFromExileEffect extends AsThoughEffectImpl {
 
     public IntetTheDreamerCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may play the card from exile eithout paying its mana cost for as long as {this} remains on the battlefield";
     }
 
