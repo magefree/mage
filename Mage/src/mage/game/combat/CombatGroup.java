@@ -521,6 +521,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BLOCKER_DECLARED, attackerId, blockerId, players.get(blockerId)));
             }
         }
+        
         if(!blockers.isEmpty()) {
             for (UUID attackerId: attackers) {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, attackerId, null));

@@ -127,7 +127,11 @@ public class SacrificeEffect extends OneShotEffect{
         if (preText != null && (preText.endsWith("player") || preText.endsWith("opponent"))) {
             sb.append(" sacrifices ");
         } else {
-            sb.append(" sacrifice ");
+            if (preText == null || preText.isEmpty()) {
+                sb.append("sacrifice ");
+            } else {
+                sb.append(" sacrifice ");
+            }            
         }
         sb.append(CardUtil.numberToText(count.toString(), "a")).append(" ");
         sb.append(filter.getMessage());
