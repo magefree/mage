@@ -56,6 +56,7 @@ import mage.game.permanent.token.WolfToken;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 
 /**
  *
@@ -71,15 +72,23 @@ public class SwordOfBodyAndMind extends CardImpl {
                 new ColorPredicate(ObjectColor.BLUE)));
     }
 
-
     public SwordOfBodyAndMind (UUID ownerId) {
         super(ownerId, 208, "Sword of Body and Mind", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Equipment");
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new ProtectionAbility(filter), AttachmentType.EQUIPMENT)));
+
+        // Equipped creature gets +2/+2 and has protection from green and from blue.
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2));
+        Effect effect = new GainAbilityAttachedEffect(new ProtectionAbility(filter), AttachmentType.EQUIPMENT);
+        effect.setText("and has protection from green and from blue");
+        ability.addEffect(effect);
+        this.addAbility(ability);
+
+        // Whenever equipped creature deals combat damage to a player, you put a 2/2 green Wolf creature token onto the battlefield and that player puts the top ten cards of his or her library into his or her graveyard.
         this.addAbility(new SwordOfBodyAndMindAbility());
+
+        // Equip {2}
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
     public SwordOfBodyAndMind (final SwordOfBodyAndMind card) {
@@ -115,7 +124,7 @@ class SwordOfBodyAndMindAbility extends TriggeredAbilityImpl {
             Permanent p = game.getPermanent(event.getSourceId());
             if (damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
                 for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                    effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }
                 return true;
             }

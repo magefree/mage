@@ -27,7 +27,6 @@
  */
 package mage.sets.vintagemasters;
 
-import java.util.List;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -41,9 +40,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -76,7 +73,7 @@ public class ManaCrypt extends CardImpl {
 class ManaCryptEffect extends OneShotEffect {
 
     ManaCryptEffect() {
-        super(Outcome.Sacrifice);
+        super(Outcome.Damage);
         staticText = "flip a coin. If you lose the flip, {this} Crypt deals 3 damage to you";
     }
 
