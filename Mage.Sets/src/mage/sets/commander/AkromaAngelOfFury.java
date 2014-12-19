@@ -56,7 +56,7 @@ public class AkromaAngelOfFury extends CardImpl {
     private static final FilterCard protectionFilter = new FilterCard("white and from blue");
 
     static {
-        protectionFilter.add(Predicates.or(new ColorPredicate(ObjectColor.BLACK),new ColorPredicate(ObjectColor.RED)));
+        protectionFilter.add(Predicates.or(new ColorPredicate(ObjectColor.WHITE),new ColorPredicate(ObjectColor.BLUE)));
     }
 
     public AkromaAngelOfFury(UUID ownerId) {
