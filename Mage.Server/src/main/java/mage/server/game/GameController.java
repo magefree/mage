@@ -442,9 +442,9 @@ public class GameController implements GameCallback {
         UUID playerId = getPlayerId(userId);
         if (playerId != null) {
             if (allJoined()) {
-                GameSessionPlayer gameSession = gameSessions.get(playerId);
-                if (gameSession != null) {
-                    gameSession.quitGame();
+                GameSessionPlayer gameSessionPlayer = gameSessions.get(playerId);
+                if (gameSessionPlayer != null) {
+                    gameSessionPlayer.quitGame();
                 }
             } else {
                 // The player did never join the game but the game controller was started because the player was still connected as the

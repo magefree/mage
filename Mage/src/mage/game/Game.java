@@ -222,7 +222,7 @@ public interface Game extends MageItem, Serializable {
     int mulliganDownTo(UUID playerId);
     void mulligan(UUID playerId);
     void endMulligan(UUID playerId);
-    void quit(UUID playerId);
+    // void quit(UUID playerId);
     void timerTimeout(UUID playerId);
     void idleTimeout(UUID playerId);
     void concede(UUID playerId);

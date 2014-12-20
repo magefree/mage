@@ -73,7 +73,7 @@ public class User {
     private final Map<UUID, Table> tables;
     private final Map<UUID, GameSessionPlayer> gameSessions;
     private final Map<UUID, DraftSession> draftSessions;
-    private final Map<UUID, TournamentSession> tournamentSessions;
+    private final Map<UUID, UUID> userTournaments; // playerId, tournamentId
     private final Map<UUID, TournamentSession> constructing;
     private final Map<UUID, Deck> sideboarding;
     private final List<UUID> watchedGames;
@@ -96,7 +96,7 @@ public class User {
         this.tables = new ConcurrentHashMap<>();
         this.gameSessions = new ConcurrentHashMap<>();
         this.draftSessions = new ConcurrentHashMap<>();
-        this.tournamentSessions = new ConcurrentHashMap<>();
+        this.userTournaments = new ConcurrentHashMap<>();
         this.constructing = new ConcurrentHashMap<>();
         this.sideboarding = new ConcurrentHashMap<>();
         this.watchedGames = new ArrayList<>();
@@ -183,36 +183,36 @@ public class User {
         }
     }
 
-    public void joinedTable(final UUID roomId, final UUID tableId, boolean isTournament) {
+    public void ccJoinedTable(final UUID roomId, final UUID tableId, boolean isTournament) {
         fireCallback(new ClientCallback("joinedTable", tableId, new TableClientMessage(roomId, tableId, isTournament)));
     }
 
-    public void gameStarted(final UUID gameId, final UUID playerId) {
+    public void ccGameStarted(final UUID gameId, final UUID playerId) {
         fireCallback(new ClientCallback("startGame", gameId, new TableClientMessage(gameId, playerId)));
     }
 
-    public void draftStarted(final UUID draftId, final UUID playerId) {
+    public void ccDraftStarted(final UUID draftId, final UUID playerId) {
         fireCallback(new ClientCallback("startDraft", draftId, new TableClientMessage(draftId, playerId)));
     }
 
-    public void tournamentStarted(final UUID tournamentId, final UUID playerId) {
+    public void ccTournamentStarted(final UUID tournamentId, final UUID playerId) {
         fireCallback(new ClientCallback("startTournament", tournamentId, new TableClientMessage(tournamentId, playerId)));
     }
 
-    public void sideboard(final Deck deck, final UUID tableId, final int time, boolean limited) {
+    public void ccSideboard(final Deck deck, final UUID tableId, final int time, boolean limited) {
         fireCallback(new ClientCallback("sideboard", tableId, new TableClientMessage(deck, tableId, time, limited)));
         sideboarding.put(tableId, deck);
     }
 
-    public void construct(final Deck deck, final UUID tableId, final int time) {
+    public void ccConstruct(final Deck deck, final UUID tableId, final int time) {
         fireCallback(new ClientCallback("construct", tableId, new TableClientMessage(deck, tableId, time)));
     }
 
-    public void showTournament(final UUID tournamentId) {
+    public void ccShowTournament(final UUID tournamentId) {
         fireCallback(new ClientCallback("showTournament", tournamentId));
     }
 
-    public void showGameEndDialog(final UUID gameId) {
+    public void ccShowGameEndDialog(final UUID gameId) {
         fireCallback(new ClientCallback("showGameEndDialog", gameId));
     }
 
@@ -223,12 +223,12 @@ public class User {
         fireCallback(new ClientCallback("showUserMessage", null, messageData ));
     }
 
-    public boolean watchGame(final UUID gameId) {
+    public boolean ccWatchGame(final UUID gameId) {
         fireCallback(new ClientCallback("watchGame", gameId));
         return true;
     }
 
-    public void replayGame(final UUID gameId) {
+    public void ccReplayGame(final UUID gameId) {
         fireCallback(new ClientCallback("replayGame", gameId));
     }
 
@@ -279,22 +279,24 @@ public class User {
 
     private void reconnect() {
         for (Entry<UUID, Table> entry: tables.entrySet()) {
-            joinedTable(entry.getValue().getRoomId(), entry.getValue().getId(), entry.getValue().isTournament());
+            ccJoinedTable(entry.getValue().getRoomId(), entry.getValue().getId(), entry.getValue().isTournament());
         }
-        for (Entry<UUID, TournamentSession> entry: tournamentSessions.entrySet()) {
-            tournamentStarted(entry.getValue().getTournamentId(), entry.getKey());
-            entry.getValue().init();
-            entry.getValue().update();
+        for (Entry<UUID, UUID> entry: userTournaments.entrySet()) {
+            TournamentController tournamentController = TournamentManager.getInstance().getTournamentController(entry.getValue());
+            if (tournamentController != null) {
+                ccTournamentStarted(entry.getValue(), entry.getKey());
+                tournamentController.rejoin(entry.getKey());
+            }
         }
 
         for (Entry<UUID, GameSessionPlayer> entry: gameSessions.entrySet()) {
-            gameStarted(entry.getValue().getGameId(), entry.getKey());
+            ccGameStarted(entry.getValue().getGameId(), entry.getKey());
             entry.getValue().init();
             GameManager.getInstance().sendPlayerString(entry.getValue().getGameId(), userId, "");
         }
 
         for (Entry<UUID, DraftSession> entry: draftSessions.entrySet()) {
-            draftStarted(entry.getValue().getDraftId(), entry.getKey());
+            ccDraftStarted(entry.getValue().getDraftId(), entry.getKey());
             entry.getValue().init();
             entry.getValue().update();
         }
@@ -304,7 +306,7 @@ public class User {
         }
         for (Entry<UUID, Deck> entry: sideboarding.entrySet()) {
             TableController controller = TableManager.getInstance().getController(entry.getKey());
-            sideboard(entry.getValue(), entry.getKey(), controller.getRemainingTime(), controller.getOptions().isLimited());
+            ccSideboard(entry.getValue(), entry.getKey(), controller.getRemainingTime(), controller.getOptions().isLimited());
         }
     }
 
@@ -324,12 +326,12 @@ public class User {
         draftSessions.remove(playerId);
     }
 
-    public void addTournament(UUID playerId, TournamentSession tournamentSession) {
-        tournamentSessions.put(playerId, tournamentSession);
+    public void addTournament(UUID playerId, UUID tournamentId) {
+        userTournaments.put(playerId, tournamentId);
     }
 
     public void removeTournament(UUID playerId) {
-        tournamentSessions.remove(playerId);
+        userTournaments.remove(playerId);
     }
 
     public void addTable(UUID playerId, Table table) {
@@ -352,33 +354,30 @@ public class User {
         sideboarding.remove(tableId);
     }
 
-    public void remove(DisconnectReason reason) {
-        logger.trace("REMOVE " + getName() + " Game sessions: " + gameSessions.size() );
-        for (GameSessionPlayer gameSession: gameSessions.values()) {
-            logger.debug("-- kill game session of gameId: " + gameSession.getGameId() );
-            gameSession.quitGame();
-        }
-        gameSessions.clear();
+    public void remove(DisconnectReason reason) {        
         logger.trace("REMOVE " + getName() + " Draft sessions " + draftSessions.size());
         for (DraftSession draftSession: draftSessions.values()) {
             draftSession.setKilled();
         }
         draftSessions.clear();
-        logger.trace("REMOVE " + getName() + " Tournament sessions " + tournamentSessions.size());
-        for (TournamentSession tournamentSession: tournamentSessions.values()) {
-            TournamentController tournamentController = TournamentManager.getInstance().getTournamentController(tournamentSession.getTournamentId());
-            if (tournamentController != null) {
-                tournamentController.quit(userId);
-            }
-            tournamentSession.setKilled();
+        logger.trace("REMOVE " + getName() + " Tournament sessions " + userTournaments.size());
+        for (UUID tournamentId: userTournaments.values()) {
+            TournamentManager.getInstance().quit(tournamentId, getId());
         }
-        tournamentSessions.clear();
+        userTournaments.clear();
         logger.trace("REMOVE " + getName() + " Tables " + tables.size());
         for (Entry<UUID, Table> entry: tables.entrySet()) {
             logger.debug("-- leave tableId: " + entry.getValue().getId());
             TableManager.getInstance().leaveTable(userId, entry.getValue().getId());
         }
         tables.clear();
+        logger.trace("REMOVE " + getName() + " Game sessions: " + gameSessions.size() );
+        for (GameSessionPlayer gameSessionPlayer: gameSessions.values()) {
+            logger.debug("-- kill game session of gameId: " + gameSessionPlayer.getGameId() );
+            GameManager.getInstance().quitMatch(gameSessionPlayer.getGameId(), userId);
+            gameSessionPlayer.quitGame();
+        }
+        gameSessions.clear();
         logger.trace("REMOVE " + getName() + " watched Games " + watchedGames.size());
         for (UUID gameId: watchedGames) {
             GameManager.getInstance().stopWatching(gameId, userId);

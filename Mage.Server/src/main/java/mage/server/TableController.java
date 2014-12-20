@@ -213,7 +213,7 @@ public class TableController {
             //only inform human players and add them to sessionPlayerMap
             if (seat.getPlayer().isHuman()) {
                 user.addTable(player.getId(), table);
-                user.joinedTable(table.getRoomId(), table.getId(), true);
+                user.ccJoinedTable(table.getRoomId(), table.getId(), true);
                 userPlayerMap.put(userId, player.getId());
             }
 
@@ -301,7 +301,7 @@ public class TableController {
         //only inform human players and add them to sessionPlayerMap
         if (seat.getPlayer().isHuman()) {
             user.addTable(player.getId(), table);
-            user.joinedTable(table.getRoomId(), table.getId(), false);
+            user.ccJoinedTable(table.getRoomId(), table.getId(), false);
             userPlayerMap.put(userId, player.getId());
         }
         return true;
@@ -392,7 +392,7 @@ public class TableController {
 
     public boolean watchTable(UUID userId) {
         if (table.isTournament()) {
-            UserManager.getInstance().getUser(userId).showTournament(table.getTournament().getId());
+            UserManager.getInstance().getUser(userId).ccShowTournament(table.getTournament().getId());
             return true;
         } else {
             if (table.isTournamentSubTable() && !table.getTournament().getOptions().isWatchingAllowed()) {
@@ -405,7 +405,7 @@ public class TableController {
             if (userPlayerMap.get(userId) != null) {
                 return false;
             }
-            return UserManager.getInstance().getUser(userId).watchGame(match.getGame().getId());
+            return UserManager.getInstance().getUser(userId).ccWatchGame(match.getGame().getId());
         }
     }
 
@@ -550,7 +550,7 @@ public class TableController {
 //                        activePlayers++;
                         Player player = match.getPlayer(entry.getValue()).getPlayer();
                         player.setRequestToShowHandCardsAllowed(user.getUserData().allowRequestShowHandCards());
-                        user.gameStarted(match.getGame().getId(), entry.getValue());                        
+                        user.ccGameStarted(match.getGame().getId(), entry.getValue());
                         
                         if (creator == null) {
                             creator = user.getName();
@@ -618,7 +618,7 @@ public class TableController {
                     User user = UserManager.getInstance().getUser(entry.getKey());
                     if (user != null) {
                         logger.info(new StringBuilder("User ").append(user.getName()).append(" tournament started: ").append(tournament.getId()).append(" userId: ").append(user.getId()));
-                        user.tournamentStarted(tournament.getId(), entry.getValue());
+                        user.ccTournamentStarted(tournament.getId(), entry.getValue());
                     }
                 }
                 ServerMessagesUtil.getInstance().incTournamentsStarted();
@@ -627,7 +627,7 @@ public class TableController {
         catch (Exception ex) {
             logger.fatal("Error starting tournament", ex);
             TableManager.getInstance().removeTable(table.getId());
-            TournamentManager.getInstance().kill(tournament.getId(), userId);
+            TournamentManager.getInstance().quit(tournament.getId(), userId);
         }
     }
 
@@ -638,7 +638,7 @@ public class TableController {
             User user = UserManager.getInstance().getUser(entry.getKey());
             if (user != null) {
                 logger.info(new StringBuilder("User ").append(user.getName()).append(" draft started: ").append(draft.getId()).append(" userId: ").append(user.getId()));
-                user.draftStarted(draft.getId(), entry.getValue());
+                user.ccDraftStarted(draft.getId(), entry.getValue());
             } else {
                 logger.fatal(new StringBuilder("Start draft user not found userId: ").append(entry.getKey()));
             }
@@ -651,7 +651,7 @@ public class TableController {
                 User user = UserManager.getInstance().getUser(entry.getKey());
                 int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
                 if (user != null) {
-                    user.sideboard(deck, table.getId(), remaining, options.isLimited());
+                    user.ccSideboard(deck, table.getId(), remaining, options.isLimited());
                 }
                 break;
             }

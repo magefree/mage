@@ -40,6 +40,7 @@ import java.util.UUID;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
+import org.apache.log4j.Logger;
 
 
 /**
@@ -47,6 +48,8 @@ import mage.game.Game;
  * @author BetaSteward_at_googlemail.com
  */
 public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializable {
+    
+    private static final Logger logger = Logger.getLogger(CardsImpl.class);
 
     private static Random rnd = new Random();
     private UUID ownerId;
@@ -62,7 +65,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
         this.zone = zone;
     }
 
-    public CardsImpl(Zone zone, List<Card> cards) {
+    public CardsImpl(Zone zone, Collection<Card> cards) {
         this(zone);
         for (Card card: cards) {
             this.add(card.getId());
@@ -181,8 +184,14 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     @Override
     public Set<Card> getCards(Game game) {
         Set<Card> cards = new LinkedHashSet<>();
-        for (UUID card: this) {
-            cards.add(game.getCard(card));
+        for (UUID cardId: this) {
+            Card card = game.getCard(cardId);
+            if (card != null) {
+                cards.add(card);
+            } else {
+                // this bug seems to happen, if cause is removed, this check can also be removed
+                logger.error("Card not found  cardId: " + cardId + " gameId: " + game.getId() );
+            }
         }
         return cards;
     }

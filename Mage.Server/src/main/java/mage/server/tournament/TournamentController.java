@@ -169,7 +169,7 @@ public class TournamentController {
         tournamentSessions.put(playerId, tournamentSession);
         User user = UserManager.getInstance().getUser(userId);
         if (user != null) {
-            user.addTournament(playerId, tournamentSession);
+            user.addTournament(playerId, tournament.getId());
             TournamentPlayer player = tournament.getPlayer(playerId);
             player.setJoined();
             logger.debug("player " +player.getPlayer().getName()  + " - client has joined tournament " + tournament.getId());
@@ -178,6 +178,19 @@ public class TournamentController {
         } else {
             logger.error("User not found  userId: " + userId  + "   tournamentId: " + tournament.getId());
         }
+    }
+
+    public void rejoin(UUID playerId) {
+        TournamentSession tournamentSession = tournamentSessions.get(playerId);
+        if (tournamentSession == null) {
+            logger.fatal("Tournament session not found - playerId:"  + playerId + "  tournamentId " + tournament.getId());
+            return;
+        }
+        if (!tournamentSession.init()) {
+            logger.fatal("Unable to initialize client userId: "  + tournamentSession.userId + "  tournamentId " + tournament.getId());
+            return;
+        }
+        tournamentSession.update();
     }
 
     private void checkStart() {
@@ -318,49 +331,55 @@ public class TournamentController {
 
     public void quit(UUID userId) {
         UUID playerId = userPlayerMap.get(userId);
-        if (playerId != null) {
-            TournamentPlayer tPlayer = tournament.getPlayer(playerId);
-            if (tPlayer != null) {
-                if (started) {
-                    if (tPlayer.isInTournament()) {
-                        String info;
-                        if (tournament.isDoneConstructing()) {
-                            info = new StringBuilder("during round ").append(tournament.getRounds().size()).toString();
-                            // quit active matches of that tournament
-                            TableManager.getInstance().userQuitTournamentSubTables(tournament.getId(), userId);
-                        } else {
-                            if (tPlayer.getState().equals(TournamentPlayerState.DRAFTING)) {
-                                info = "during Draft phase";
-                                if (!checkToReplaceDraftPlayerByAi(userId, tPlayer)) {
-                                    this.abortDraftTournament();
-                                } else {
-                                    DraftController draftController = DraftManager.getInstance().getController(tableId);
-                                    if (draftController != null) {
-                                        DraftSession draftSession = draftController.getDraftSession(playerId);
-                                        if (draftSession != null) {
-                                            DraftManager.getInstance().kill(draftSession.getDraftId(), userId);
-                                        }
-                                    }
-                                }
-                            } else if (tPlayer.getState().equals(TournamentPlayerState.CONSTRUCTING)) {
-                                info = "during Construction phase";
-                            } else {
-                                info = "";
+        if (playerId == null) {
+            logger.debug("Player not found userId:" + userId + " tournId: " + tournament.getId());
+            return;
+        }
+        TournamentPlayer tournamentPlayer = tournament.getPlayer(playerId);
+        if (tournamentPlayer == null) {
+            logger.debug("TournamentPlayer not found userId: " + userId + " tournId: " + tournament.getId());
+            return;
+        }
+        if (!started) {
+            tournament.leave(playerId);
+            return;
+        }
+        TournamentSession tournamentSession = tournamentSessions.get(playerId);
+        if (tournamentSession == null) {
+            logger.debug("TournamentSession not found userId: " + userId + " tournId: " + tournament.getId());
+            return;
+        }
+        tournamentSession.setKilled();
+        if (tournamentPlayer.isInTournament()) {
+            String info;
+            if (tournament.isDoneConstructing()) {
+                info = new StringBuilder("during round ").append(tournament.getRounds().size()).toString();
+                // quit active matches of that tournament
+                TableManager.getInstance().userQuitTournamentSubTables(tournament.getId(), userId);
+            } else {
+                if (tournamentPlayer.getState().equals(TournamentPlayerState.DRAFTING)) {
+                    info = "during Draft phase";
+                    if (!checkToReplaceDraftPlayerByAi(userId, tournamentPlayer)) {
+                        this.abortDraftTournament();
+                    } else {
+                        DraftController draftController = DraftManager.getInstance().getController(tableId);
+                        if (draftController != null) {
+                            DraftSession draftSession = draftController.getDraftSession(playerId);
+                            if (draftSession != null) {
+                                DraftManager.getInstance().kill(draftSession.getDraftId(), userId);
                             }
                         }
-                        tPlayer.setQuit(info);
-                        tournament.quit(playerId);
-                        if (tournamentSessions.containsKey(playerId)) {
-                            tournamentSessions.get(tPlayer.getPlayer().getId()).quit();
-                        }
-                        ChatManager.getInstance().broadcast(chatId, "", tPlayer.getPlayer().getName() + " has quit the tournament", MessageColor.BLACK, true, MessageType.STATUS, SoundToPlay.PlayerQuitTournament);                        
                     }
+                } else if (tournamentPlayer.getState().equals(TournamentPlayerState.CONSTRUCTING)) {
+                    info = "during Construction phase";
                 } else {
-                    tournament.leave(playerId);
+                    info = "";
                 }
             }
-        } else {
-            logger.debug("UserId not found " + userId + " tournId: " + tournament.getId());
+            tournamentPlayer.setQuit(info);
+            tournament.quit(playerId);
+            tournamentSession.quit();
+            ChatManager.getInstance().broadcast(chatId, "", tournamentPlayer.getPlayer().getName() + " has quit the tournament", MessageColor.BLACK, true, MessageType.STATUS, SoundToPlay.PlayerQuitTournament);
         }
     }
 

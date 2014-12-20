@@ -71,11 +71,6 @@ public class TournamentManager {
         }
     }
 
-
-    public void kill(UUID tournamentId, UUID userId) {
-        controllers.get(tournamentId).quit(userId);
-    }
-
     public void timeout(UUID tournamentId, UUID userId) {
         controllers.get(tournamentId).timeout(userId);
     }

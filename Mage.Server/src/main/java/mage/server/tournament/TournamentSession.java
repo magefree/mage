@@ -101,7 +101,7 @@ public class TournamentSession {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
                 int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
-                user.construct(tournament.getPlayer(playerId).getDeck(), tableId, remaining);
+                user.ccConstruct(tournament.getPlayer(playerId).getDeck(), tableId, remaining);
             }
         }
     }
@@ -113,11 +113,6 @@ public class TournamentSession {
 
     public void updateDeck(Deck deck) {
         tournament.updateDeck(playerId, deck);
-    }
-
-    protected void handleRemoteException(RemoteException ex) {
-        logger.fatal("TournamentSession error - userId " + userId + " tId " + tournament.getId(), ex);
-        TournamentManager.getInstance().kill(tournament.getId(), userId);
     }
 
     public void setKilled() {
