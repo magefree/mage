@@ -109,7 +109,7 @@ class BalanceEffect extends OneShotEffect {
             for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    TargetControlledPermanent target = new TargetControlledPermanent(minLand, minLand, new FilterControlledLandPermanent(), true);
+                    TargetControlledPermanent target = new TargetControlledPermanent(minLand, minLand, new FilterControlledLandPermanent("lands to keep"), true);
                     if (target.choose(Outcome.Sacrifice, player.getId(), source.getSourceId(), game)) {
                         for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledLandPermanent(), player.getId(), source.getSourceId(), game)) {
                             if (permanent != null && !target.getTargets().contains(permanent.getId())) {
@@ -143,7 +143,7 @@ class BalanceEffect extends OneShotEffect {
             for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    TargetControlledPermanent target = new TargetControlledPermanent(minCreature, minCreature, new FilterControlledCreaturePermanent(), true);
+                    TargetControlledPermanent target = new TargetControlledPermanent(minCreature, minCreature, new FilterControlledCreaturePermanent("creatures to keep"), true);
                     if (target.choose(Outcome.Sacrifice, player.getId(), source.getSourceId(), game)) {
                         for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), player.getId(), source.getSourceId(), game)) {
                             if (permanent != null && !target.getTargets().contains(permanent.getId())) {
@@ -178,7 +178,7 @@ class BalanceEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     Cards cards = new CardsImpl();
-                    TargetCardInHand target = new TargetCardInHand(minCard, new FilterCard());
+                    TargetCardInHand target = new TargetCardInHand(minCard, new FilterCard("cards to keep"));
                     if (target.choose(Outcome.Discard, player.getId(), source.getSourceId(), game)) {
                         for (Card card : player.getHand().getCards(game)) {
                             if (card != null && !target.getTargets().contains(card.getId())) {

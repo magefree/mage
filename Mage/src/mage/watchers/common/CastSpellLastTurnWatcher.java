@@ -96,6 +96,14 @@ public class CastSpellLastTurnWatcher extends Watcher {
     public Map<UUID, Integer> getAmountOfSpellsCastOnCurrentTurn() {
        return amountOfSpellsCastOnCurrentTurn;
     }
+    
+    public int getAmountOfSpellsAllPlayersCastOnCurrentTurn() {
+        int totalAmount = 0;
+        for(Integer amount: amountOfSpellsCastOnCurrentTurn.values()) {
+            totalAmount += amount;
+        }
+        return totalAmount;
+    }
 
     public int getAmountOfSpellsPlayerCastOnCurrentTurn(UUID playerId) {
        Integer value = amountOfSpellsCastOnCurrentTurn.get(playerId);

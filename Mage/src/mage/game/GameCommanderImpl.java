@@ -61,6 +61,7 @@ public abstract class GameCommanderImpl extends GameImpl {
     private final Set<CommanderCombatDamageWatcher> commanderCombatWatcher = new HashSet<>();
     
     protected boolean alsoLibrary; // replace also commander going to library
+    protected boolean startingPlayerSkipsDraw = true;
 
     public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
         super(attackOption, range, freeMulligans, startLife);
@@ -68,6 +69,8 @@ public abstract class GameCommanderImpl extends GameImpl {
 
     public GameCommanderImpl(final GameCommanderImpl game) {
         super(game);
+        this.alsoLibrary = game.alsoLibrary;
+        this.startingPlayerSkipsDraw = game.startingPlayerSkipsDraw;
     }
 
     @Override
@@ -104,9 +107,11 @@ public abstract class GameCommanderImpl extends GameImpl {
 
         }
         this.getState().addAbility(ability, this.getId(), null);
-        state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
+        if (startingPlayerSkipsDraw) {
+            state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
+        }
     }
-
+    
 
     //20130711
     /*903.8. The Commander variant uses an alternate mulligan rule.

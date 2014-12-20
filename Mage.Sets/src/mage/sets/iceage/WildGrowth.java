@@ -33,9 +33,9 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
@@ -45,9 +45,9 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -99,11 +99,17 @@ class WildGrowthTriggeredAbility extends TriggeredManaAbility {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(this.getSourceId());
+    public boolean checkTrigger(GameEvent event, Game game) {        
         if(event.getType() == GameEvent.EventType.TAPPED_FOR_MANA){
+            Permanent enchantment = game.getPermanent(this.getSourceId());
             if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
-                return true;
+                Permanent permanent = game.getPermanent(event.getSourceId());
+                if (permanent != null) {
+                    for(Effect effect : getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));
+                    }
+                    return true;
+                }
             }
         }  
         return false;

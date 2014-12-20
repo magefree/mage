@@ -923,15 +923,15 @@ public class Combat implements Serializable, Copyable<Combat> {
         return null;
     }
 
-    public int totalUnblockedDamage(Game game) {
-        int total = 0;
-        for (CombatGroup group : groups) {
-            if (group.getBlockers().isEmpty()) {
-                total += group.totalAttackerDamage(game);
-            }
-        }
-        return total;
-    }
+//    public int totalUnblockedDamage(Game game) {
+//        int total = 0;
+//        for (CombatGroup group : groups) {
+//            if (group.getBlockers().isEmpty()) {
+//                total += group.totalAttackerDamage(game);
+//            }
+//        }
+//        return total;
+//    }
 
     public boolean attacksAlone() {
         return (groups.size() == 1 && groups.get(0).getAttackers().size() == 1);

@@ -48,12 +48,12 @@ import mage.util.CardUtil;
  */
 public class SweepEffect extends OneShotEffect {
 
-    private String sweepSubtype;
+    private final String sweepSubtype;
 
     public SweepEffect(String sweepSubtype) {
         super(Outcome.Benefit);
         this.sweepSubtype = sweepSubtype;
-        this.staticText = new StringBuilder("<i>Sweep</i> - Return any number of ").append(sweepSubtype).append(sweepSubtype.endsWith("s")?"":"s").append(" you control to their owner's hand").toString();
+        this.staticText = "<i>Sweep</i> - Return any number of "+ sweepSubtype + (sweepSubtype.endsWith("s") ? "":"s") + " you control to their owner's hand";
     }
 
     public SweepEffect(final SweepEffect effect) {
@@ -77,7 +77,7 @@ public class SweepEffect extends OneShotEffect {
                 game.getState().setValue(CardUtil.getCardZoneString("sweep", source.getSourceId(), game), target.getTargets().size());
                 for (UUID uuid : target.getTargets()) {
                     Permanent land = game.getPermanent(uuid);
-                    land.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                    controller.moveCardToHandWithInfo(land, source.getSourceId(), game, Zone.HAND);
                 }
             }
             return true;

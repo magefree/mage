@@ -221,6 +221,9 @@ public class LookLibraryControllerEffect extends OneShotEffect {
     }
 
     public String setText(Mode mode, String middleText) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         int numberLook;
         try {
             numberLook = Integer.parseInt(numberOfCards.toString());

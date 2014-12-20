@@ -27,29 +27,24 @@
  */
 package mage.sets.journeyintonyx;
 
-import java.util.LinkedList;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -72,10 +67,8 @@ public class BanishingLight extends CardImpl {
         // When Banishing Light enters the battlefield, exile target nonland permanent an opponent controls until Banishing Light leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BanishingLightExileEffect());
         ability.addTarget(new TargetPermanent(filter));
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);    
-        // Implemented as triggered effect that doesn't uses the stack (implementation with watcher does not work correctly because if the returned creature
-        // has a DiesTriggeredAll ability it triggers for the dying / battlefield leaving source object, what shouldn't happen)
-        this.addAbility(new BanishingLightReturnExiledAbility());        
     }
 
     public BanishingLight(final BanishingLight card) {
@@ -110,79 +103,7 @@ class BanishingLightExileEffect extends OneShotEffect {
         // If Banishing Light leaves the battlefield before its triggered ability resolves,
         // the target won't be exiled.
         if (permanent != null) {
-            return new ExileTargetEffect(source.getSourceId(), permanent.getName()).apply(game, source);
-        }
-        return false;
-    }
-}
-
-/**
- * Returns the exiled card as source permanent leaves battlefield
- * Uses no stack
- * @author LevelX2
- */
-
-class BanishingLightReturnExiledAbility extends TriggeredAbilityImpl {
-
-    public BanishingLightReturnExiledAbility() {
-        super(Zone.BATTLEFIELD, new ReturnExiledCreatureEffect());
-        this.usesStack = false;
-        this.setRuleVisible(false);
-    }
-
-    public BanishingLightReturnExiledAbility(final BanishingLightReturnExiledAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public BanishingLightReturnExiledAbility copy() {
-        return new BanishingLightReturnExiledAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                return true;
-            }
-        }
-        return false;
-    }
-}
-
-class ReturnExiledCreatureEffect extends OneShotEffect {
-
-    public ReturnExiledCreatureEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Return exiled permanent";
-    }
-
-    public ReturnExiledCreatureEffect(final ReturnExiledCreatureEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ReturnExiledCreatureEffect copy() {
-        return new ReturnExiledCreatureEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            ExileZone exile = game.getExile().getExileZone(source.getSourceId());
-            Card sourceCard = game.getCard(source.getSourceId());
-            if (exile != null && sourceCard != null) {
-                LinkedList<UUID> cards = new LinkedList<>(exile);
-                for (UUID cardId : cards) {
-                    Card card = game.getCard(cardId);
-                    card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
-                    game.informPlayers(new StringBuilder(sourceCard.getName()).append(": ").append(card.getName()).append(" returns to battlefield from exile").toString());
-                }
-                exile.clear();
-                return true;
-            }            
+            return new ExileTargetEffect(CardUtil.getCardExileZoneId(game, source), permanent.getName()).apply(game, source);
         }
         return false;
     }

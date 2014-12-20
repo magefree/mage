@@ -40,8 +40,8 @@ import mage.game.Game;
 public class SweepNumber implements DynamicValue {
 
     private int zoneChangeCounter = 0;
-    private String sweepSubtype;
-    private boolean previousZone;
+    private final String sweepSubtype;
+    private final boolean previousZone;
 
     public SweepNumber(String sweepSubtype, boolean previousZone) {
         this.sweepSubtype = sweepSubtype;
@@ -62,7 +62,7 @@ public class SweepNumber implements DynamicValue {
         int number = 0;
         Integer sweepNumber = (Integer) game.getState().getValue(new StringBuilder("sweep").append(source.getSourceId()).append(zoneChangeCounter).toString());
         if (sweepNumber != null) {
-            number = sweepNumber.intValue();
+            number = sweepNumber;
         }
         return number;
     }
@@ -79,6 +79,6 @@ public class SweepNumber implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return new StringBuilder("the number of ").append(sweepSubtype).append("s returned this way").toString();
+        return new StringBuilder("the number of ").append(sweepSubtype).append(sweepSubtype.endsWith("s") ? "":"s").append(" returned this way").toString();
     }
 }

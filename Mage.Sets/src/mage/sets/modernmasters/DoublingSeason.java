@@ -27,7 +27,6 @@
  */
 package mage.sets.modernmasters;
 
-import java.util.Locale;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -38,8 +37,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
-import mage.counters.Counter;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -96,7 +93,7 @@ class DoublingSeasonTokenEffect extends ReplacementEffectImpl {
             case CREATE_TOKEN:
                 StackObject spell = game.getStack().getStackObject(event.getSourceId());
                 if (spell != null && spell.getControllerId().equals(source.getControllerId())) {
-                    event.setAmount(event.getAmount() * 2);
+                    return true;
                 }
         }
         return false;
@@ -109,7 +106,8 @@ class DoublingSeasonTokenEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return apply(game, source);
+        event.setAmount(event.getAmount() * 2);
+        return false;
     }
 
 }

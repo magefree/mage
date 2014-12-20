@@ -27,18 +27,16 @@
  */
 package mage.sets.magic2015;
 
-import java.util.LinkedList;
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -49,13 +47,10 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -83,7 +78,7 @@ public class ConstrictingSliver extends CardImpl {
         // until this creature leaves the battlefield."
         Ability ability = new EntersBattlefieldTriggeredAbility(new ConstrictingSliverExileEffect(), true);
         ability.addTarget(new TargetCreaturePermanent(filterTarget));
-        ability.addEffect(new ConstrictingSliverAddDelayedReturnEffect());
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability,
                 Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Sliver","Sliver creatures"),
@@ -123,107 +118,7 @@ class ConstrictingSliverExileEffect extends OneShotEffect {
         // If the creature leaves the battlefield before its triggered ability resolves,
         // the target creature won't be exiled.
         if (permanent != null) {
-            return new ExileTargetEffect(source.getSourceId(), permanent.getLogName()).apply(game, source);
-        }
-        return false;
-    }
-}
-
-class ConstrictingSliverAddDelayedReturnEffect extends OneShotEffect {
-
-    public ConstrictingSliverAddDelayedReturnEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "";
-    }
-
-    public ConstrictingSliverAddDelayedReturnEffect(final ConstrictingSliverAddDelayedReturnEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ConstrictingSliverAddDelayedReturnEffect copy() {
-        return new ConstrictingSliverAddDelayedReturnEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        DelayedTriggeredAbility delayedAbility = new ConstrictingSliverReturnExiledCreatureAbility();
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
-        game.addDelayedTriggeredAbility(delayedAbility);
-        return true;
-    }
-}
-
-
-/**
- * Returns the exiled card as creature leaves battlefield
- * Uses no stack
- * @author LevelX2
- */
-
-class ConstrictingSliverReturnExiledCreatureAbility extends DelayedTriggeredAbility {
-
-    public ConstrictingSliverReturnExiledCreatureAbility() {
-        super(new ConstrictingSliverReturnExiledCreatureEffect(), Duration.OneUse);
-        this.usesStack = false;
-        this.setRuleVisible(false);
-    }
-
-    public ConstrictingSliverReturnExiledCreatureAbility(final ConstrictingSliverReturnExiledCreatureAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ConstrictingSliverReturnExiledCreatureAbility copy() {
-        return new ConstrictingSliverReturnExiledCreatureAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                return true;
-            }
-        }
-        return false;
-    }
-}
-
-class ConstrictingSliverReturnExiledCreatureEffect extends OneShotEffect {
-
-    public ConstrictingSliverReturnExiledCreatureEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Return exiled creatures";
-    }
-
-    public ConstrictingSliverReturnExiledCreatureEffect(final ConstrictingSliverReturnExiledCreatureEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ConstrictingSliverReturnExiledCreatureEffect copy() {
-        return new ConstrictingSliverReturnExiledCreatureEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            ExileZone exile = game.getExile().getExileZone(source.getSourceId());
-            MageObject sourceObject = game.getObject(source.getSourceId());
-            if (exile != null && sourceObject != null) {
-                LinkedList<UUID> cards = new LinkedList<>(exile);
-                for (UUID cardId : cards) {
-                    Card card = game.getCard(cardId);
-                    card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
-                    game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ").append(card.getName()).append(" returns to battlefield from exile").toString());
-                }
-                exile.clear();
-                return true;
-            }
-
+            return new ExileTargetEffect(CardUtil.getCardExileZoneId(game, source), permanent.getLogName()).apply(game, source);
         }
         return false;
     }

@@ -125,17 +125,13 @@ class PrimalVigorCounterEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent p = game.getPermanent(event.getTargetId());
-        if (p != null) {
-            p.addCounters(CounterType.P1P1.createInstance(event.getAmount() * 2), game, event.getAppliedEffects());
-            return true;
-        }
+        event.setAmount(event.getAmount() *2);
         return false;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ADD_COUNTER) {
+        if (event.getType() == GameEvent.EventType.ADD_COUNTERS) {
             Permanent target = game.getPermanent(event.getTargetId());
             if (target != null && filter.match(target, game)
                     && event.getData() != null && event.getData().equals("+1/+1")) {

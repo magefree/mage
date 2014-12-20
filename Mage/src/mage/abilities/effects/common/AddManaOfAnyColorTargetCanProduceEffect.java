@@ -57,9 +57,12 @@ public class AddManaOfAnyColorTargetCanProduceEffect extends ManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(this.targetPointer.getFirst(game, source));
-        if (controller != null && permanent != null) {
+        if (permanent != null) {
+            Player targetController = game.getPlayer(permanent.getControllerId());
+            if (targetController == null) {
+                return false;
+            }
             Abilities<ManaAbility> mana = permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
             Mana types = new Mana();
             for (ManaAbility ability : mana) {
@@ -91,7 +94,7 @@ public class AddManaOfAnyColorTargetCanProduceEffect extends ManaEffect {
                 if (choice.getChoices().size() == 1) {
                     choice.setChoice(choice.getChoices().iterator().next());
                 } else {
-                    controller.choose(outcome, choice, game);
+                    targetController.choose(outcome, choice, game);
                 }
                 if (choice.getChoice() == null) {
                     return false;
@@ -117,7 +120,7 @@ public class AddManaOfAnyColorTargetCanProduceEffect extends ManaEffect {
                         newMana.setColorless(1);
                         break;
                 }                
-                controller.getManaPool().addMana(newMana, game, source);
+                targetController.getManaPool().addMana(newMana, game, source);
                 checkToFirePossibleEvents(newMana, game, source);
             }
             return true;

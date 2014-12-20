@@ -27,15 +27,15 @@
  */
 package mage.sets.magic2014;
 
-import java.util.LinkedList;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.IslandwalkAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -43,12 +43,11 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -69,9 +68,6 @@ public class ColossalWhale extends CardImpl {
         this.addAbility(new IslandwalkAbility());
         // Whenever Colossal Whale attacks, you may exile target creature defending player controls until Colossal Whale leaves the battlefield.
         this.addAbility(new ColossalWhaleAbility());
-        // Implemented as triggered effect that doesn't uses the stack (implementation with watcher does not work correctly because if the returned creature
-        // has a DiesTriggeredAll ability it triggers for the dying Banish Priest, what shouldn't happen)
-        this.addAbility(new ColossalWhaleReturnExiledAbility());
 
     }
 
@@ -90,6 +86,7 @@ class ColossalWhaleAbility extends TriggeredAbilityImpl {
     public ColossalWhaleAbility() {
         super(Zone.BATTLEFIELD, null);
         this.addEffect(new ColossalWhaleExileEffect());
+        this.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
     }
 
     public ColossalWhaleAbility(final ColossalWhaleAbility ability) {
@@ -144,76 +141,7 @@ class ColossalWhaleExileEffect extends OneShotEffect {
         // If Whale leaves the battlefield before its triggered ability resolves,
         // the target creature won't be exiled.
         if (permanent != null) {
-            return new ExileTargetEffect(source.getSourceId(), permanent.getName()).apply(game, source);
-        }
-        return false;
-    }
-}
-
-/**
- * Returns the exiled card as Banisher Priest leaves battlefield
- * Uses no stack
- * @author LevelX2
- */
-
-class ColossalWhaleReturnExiledAbility extends TriggeredAbilityImpl {
-
-    public ColossalWhaleReturnExiledAbility() {
-        super(Zone.BATTLEFIELD, new ReturnExiledCreatureColossalWhaleEffect());
-        this.usesStack = false;
-        this.setRuleVisible(false);
-    }
-
-    public ColossalWhaleReturnExiledAbility(final ColossalWhaleReturnExiledAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ColossalWhaleReturnExiledAbility copy() {
-        return new ColossalWhaleReturnExiledAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                return true;
-            }
-        }
-        return false;
-    }
-}
-
-class ReturnExiledCreatureColossalWhaleEffect extends OneShotEffect {
-
-    public ReturnExiledCreatureColossalWhaleEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Return exiled creatures";
-    }
-
-    public ReturnExiledCreatureColossalWhaleEffect(final ReturnExiledCreatureColossalWhaleEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ReturnExiledCreatureColossalWhaleEffect copy() {
-        return new ReturnExiledCreatureColossalWhaleEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        ExileZone exile = game.getExile().getExileZone(source.getSourceId());
-        Card sourceCard = game.getCard(source.getSourceId());
-        if (exile != null && sourceCard != null) {
-            LinkedList<UUID> cards = new LinkedList<>(exile);
-            for (UUID cardId : cards) {
-                Card card = game.getCard(cardId);
-                card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
-                game.informPlayers(new StringBuilder(sourceCard.getName()).append(": ").append(card.getName()).append(" returns to battlefield from exile").toString());
-            }
-            exile.clear();
-            return true;
+            return new ExileTargetEffect(CardUtil.getCardExileZoneId(game, source), permanent.getName()).apply(game, source);
         }
         return false;
     }

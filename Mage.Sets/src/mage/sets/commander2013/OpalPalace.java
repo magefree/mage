@@ -32,13 +32,15 @@ import java.util.List;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.common.EmptyEffect;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.ColorlessManaAbility;
-import mage.abilities.mana.SimpleManaAbility;
+import mage.abilities.mana.CommanderColorIdentityManaAbility;
+import mage.abilities.mana.ManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
@@ -71,7 +73,7 @@ public class OpalPalace extends CardImpl {
         // {tap}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {1}, {tap}: Add to your mana pool one mana of any color in your commander's color identity. If you spend this mana to cast your commander, it enters the battlefield with a number of +1/+1 counters on it equal to the number of times it's been cast from the command zone this game.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new OpalPalaceManaEffect(), new GenericManaCost(1));
+        Ability ability = new CommanderColorIdentityManaAbility(new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
@@ -92,87 +94,9 @@ public class OpalPalace extends CardImpl {
     }
 }
 
-class OpalPalaceManaEffect extends ManaEffect {
-
-    public OpalPalaceManaEffect() {
-        super();
-        this.staticText = "Add to your mana pool one mana of any color in your commander's color identity. If you spend this mana to cast your commander, it enters the battlefield with a number of +1/+1 counters on it equal to the number of times it's been cast from the command zone this game";
-    }
-
-    public OpalPalaceManaEffect(final OpalPalaceManaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public OpalPalaceManaEffect copy() {
-        return new OpalPalaceManaEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Card commander = game.getCard(controller.getCommanderId());
-            if (commander != null) {
-                Mana commanderMana = commander.getManaCost().getMana();
-                Choice choice = new ChoiceImpl(true);
-                choice.setMessage("Pick a mana color");
-                if (commanderMana.getBlack() > 0) {
-                    choice.getChoices().add("Black");
-                }
-                if (commanderMana.getRed() > 0) {
-                    choice.getChoices().add("Red");
-                }
-                if (commanderMana.getBlue() > 0) {
-                    choice.getChoices().add("Blue");
-                }
-                if (commanderMana.getGreen() > 0) {
-                    choice.getChoices().add("Green");
-                }
-                if (commanderMana.getWhite() > 0) {
-                    choice.getChoices().add("White");
-                }
-                if (choice.getChoices().size() > 0) {
-                    Mana mana = new Mana();
-                    if (choice.getChoices().size() == 1) {
-                        choice.setChoice(choice.getChoices().iterator().next());
-                    } else {
-                        controller.choose(outcome, choice, game);
-                    }
-                    if (choice.getChoice().equals("Black")) {
-                        mana.addBlack();
-                    } else if (choice.getChoice().equals("Blue")) {
-                        mana.addBlue();
-                    } else if (choice.getChoice().equals("Red")) {
-                        mana.addRed();
-                    } else if (choice.getChoice().equals("Green")) {
-                        mana.addGreen();
-                    } else if (choice.getChoice().equals("White")) {
-                        mana.addWhite();
-                    }
-                    // set to indicate, that the mana can boost the commander
-                    mana.setFlag(true);
-                    checkToFirePossibleEvents(mana, game, source);
-                    controller.getManaPool().addMana(mana, game, source);
-                    
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public Mana getMana(Game game, Ability source) {
-        return null;
-    }
-
-
-}
-
 class OpalPalaceWatcher extends Watcher {
 
-    public List<UUID> commanderId = new ArrayList<UUID>();
+    public List<UUID> commanderId = new ArrayList<>();
 
     public OpalPalaceWatcher() {
         super("ManaPaidFromOpalPalaceWatcher", WatcherScope.CARD);
@@ -249,7 +173,7 @@ class OpalPalaceEntersBattlefieldEffect extends ReplacementEffectImpl {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null) {
             Integer castCount = (Integer)game.getState().getValue(permanent.getId() + "_castCount");
-            if (castCount != null && castCount.intValue() > 0) {
+            if (castCount != null && castCount > 0) {
                 permanent.addCounters(CounterType.P1P1.createInstance(castCount), game);
             }
         }

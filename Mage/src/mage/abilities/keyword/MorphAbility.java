@@ -308,7 +308,7 @@ class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implements Sour
     protected int zoneChangeCounter;
     protected Ability turnFaceUpAbility = null;
 
-    public BecomesFaceDownCreatureEffect(Costs morphCosts) {
+    public BecomesFaceDownCreatureEffect(Costs<Cost> morphCosts) {
         super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
         this.zoneChangeCounter = Integer.MIN_VALUE;
         if (morphCosts != null) {
@@ -352,14 +352,14 @@ class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implements Sour
                             // gained abilities from other sources won't be removed
                             continue;
                         }
-                        // TODO: Add flag "works also face down" to ability and use it to control ability removement instead of instanceof check
                         if (ability.getWorksFaceDown()) {
                             ability.setRuleVisible(false);
                             continue;
-                        }
-                        if (!ability.getRuleVisible() && !ability.getEffects().isEmpty()) {
-                            if (ability.getEffects().get(0) instanceof BecomesFaceDownCreatureEffect) {
-                                continue;
+                        } else {
+                            if (!ability.getRuleVisible() && !ability.getEffects().isEmpty()) {
+                                if (ability.getEffects().get(0) instanceof BecomesFaceDownCreatureEffect) {
+                                    continue;
+                                }
                             }
                         }
                         abilities.add(ability);

@@ -119,6 +119,7 @@ public class SessionManager {
                     // session was removed meanwhile by another thread so we can return
                     return;
                 }
+                logger.debug("DISCONNECT  " + reason.toString() + " - sessionId: "+ sessionId);
                 sessions.remove(sessionId);
                 switch (reason) {
                     case Disconnected:

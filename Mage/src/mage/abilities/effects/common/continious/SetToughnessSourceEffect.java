@@ -68,6 +68,10 @@ public class SetToughnessSourceEffect extends ContinuousEffectImpl {
             int value = amount.calculate(game, source, this);
             mageObject.getToughness().setValue(value);
             return true;
+        } else {
+            if (Duration.Custom.equals(duration)) {
+                discard();
+            }
         }
         return false;
     }

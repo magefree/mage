@@ -82,7 +82,15 @@ public class PreventDamageToTargetEffect extends PreventionEffectImpl {
         } else {
             sb.append("Prevent the next ").append(amountToPrevent).append(" damage that would be dealt to target ");
         }
-        sb.append(mode.getTargets().get(0).getTargetName()).append(" ").append(duration.toString());
+        sb.append(mode.getTargets().get(0).getTargetName());
+        if (!duration.toString().isEmpty()) {
+            sb.append(" ");
+            if (duration.equals(Duration.EndOfTurn)) {
+                sb.append("this turn");
+            } else {
+                sb.append(duration.toString());
+            }
+        }
         return sb.toString();
     }
 

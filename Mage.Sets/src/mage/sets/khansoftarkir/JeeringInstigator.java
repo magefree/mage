@@ -76,7 +76,8 @@ public class JeeringInstigator extends CardImpl {
         Ability ability = new ConditionalTriggeredAbility(
                 new TurnedFaceUpSourceTriggeredAbility(new GainControlTargetEffect(Duration.EndOfTurn),false, false),
                 MyTurnCondition.getInstance(),
-                "When {this} is turned face up, if it's your turn, gain control of another target creature until end of turn.");
+                "When {this} is turned face up, if it's your turn, gain control of another target creature until end of turn. Untap that creature. It gains haste until end of turn.");
+        ability.setWorksFaceDown(true);
         Effect effect = new UntapTargetEffect();
         effect.setText("Untap that creature");
         ability.addEffect(effect);

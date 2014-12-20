@@ -70,7 +70,7 @@ public class Cromat extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {W}{B}: Destroy target creature blocking or blocked by Cromat.
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature blocking or blocked by {this}");
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature blocking or blocked by Cromat");
         filter.add(Predicates.or(new BlockedByIdPredicate(this.getId()),
                                  new BlockingAttackerIdPredicate(this.getId())));        
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{W}{B}"));

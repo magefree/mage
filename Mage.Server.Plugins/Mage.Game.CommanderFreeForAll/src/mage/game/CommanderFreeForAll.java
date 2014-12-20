@@ -28,6 +28,7 @@
 
 package mage.game;
 
+import java.util.UUID;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.game.match.MatchType;
@@ -47,6 +48,12 @@ public class CommanderFreeForAll extends GameCommanderImpl {
     public CommanderFreeForAll(final CommanderFreeForAll game) {
         super(game);
         this.numPlayers = game.numPlayers;
+    }
+
+    @Override
+    protected void init(UUID choosingPlayerId, GameOptions gameOptions) {
+        startingPlayerSkipsDraw = false;
+        super.init(choosingPlayerId, gameOptions); 
     }
 
     @Override

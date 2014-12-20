@@ -12,7 +12,9 @@ import org.mage.card.arcane.UI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 import java.util.ArrayList;
+import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 public class GuiDisplayUtil {
     private static final Font cardNameFont = new Font("Calibri", Font.BOLD, 15);
@@ -200,19 +202,19 @@ public class GuiDisplayUtil {
         buffer.append("</td></tr></table>");
         buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%'><tr><td style='margin-left: 1px'>");
         if(card.getColor().isWhite()) {
-            buffer.append("<img src='file:src/main/resources/card/color_ind_white.png' alt='W'>");
+            buffer.append("<img src='").append(getResourcePath("card/color_ind_white.png")).append("' alt='W'>");
         }
         if(card.getColor().isBlue()) {
-            buffer.append("<img src='file:src/main/resources/card/color_ind_blue.png' alt='U'>");
+            buffer.append("<img src='").append(getResourcePath("card/color_ind_blue.png")).append("' alt='U'>");
         }
         if(card.getColor().isBlack()) {
-            buffer.append("<img src='file:src/main/resources/card/color_ind_black.png' alt='B'>");
+            buffer.append("<img src='").append(getResourcePath("card/color_ind_black.png")).append("' alt='B'>");
         }
         if(card.getColor().isRed()) {
-            buffer.append("<img src='file:src/main/resources/card/color_ind_red.png' alt='R'>");
+            buffer.append("<img src='").append(getResourcePath("card/color_ind_red.png")).append("' alt='R'>");
         }
         if(card.getColor().isGreen()) {
-            buffer.append("<img src='file:src/main/resources/card/color_ind_green.png' alt='G'>");
+            buffer.append("<img src='").append(getResourcePath("card/color_ind_green.png")).append("' alt='G'>");
         }
         if(!card.getColor().isColorless()) {
             buffer.append("&nbsp;&nbsp;");
@@ -312,7 +314,11 @@ public class GuiDisplayUtil {
         buffer.append("<br></body></html>");    
         return buffer;
     }
-    
+
+    private static String getResourcePath(String image) {
+        return GuiDisplayUtil.class.getClassLoader().getResource(image).toString();
+    }
+
     private static String getTypes(CardView card) {
         String types = "";
         for (String superType : card.getSuperTypes()) {

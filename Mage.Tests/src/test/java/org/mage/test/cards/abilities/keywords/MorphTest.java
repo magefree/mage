@@ -97,7 +97,7 @@ public class MorphTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
         
-        attack(3, playerA, "face down creature");
+        attack(3, playerA, "");
         
         activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "{4}{G}: Turn this face-down permanent face up.");
         setStopAt(3, PhaseStep.END_TURN);
@@ -113,13 +113,15 @@ public class MorphTest extends CardTestPlayerBase {
     }
     
     /**
-     * Test triggered turn face up ability of Pine Walker did not trigger as
-     * long as Pine Walker is not turned face up.
+     * Test that the triggered "turned face up" ability of Pine Walker does not trigger
+     * aas long as Pine Walker is not turned face up.
      * 
      */
     @Test
     public void testDoesNotTriggerFaceDown() {
+        // Whenever Pine Walker or another creature you control is turned face up, untap that creature.
         addCard(Zone.HAND, playerA, "Pine Walker");
+        // When Icefeather Aven is turned face up, you may return another target creature to its owner's hand.
         addCard(Zone.HAND, playerA, "Icefeather Aven");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
@@ -129,14 +131,15 @@ public class MorphTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Icefeather Aven");
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
         
-        attack(3, playerA, "face down creature");
-        attack(3, playerA, "face down creature");
+        attack(3, playerA, "");
+        attack(3, playerA, "");
         activateAbility(3, PhaseStep.DECLARE_BLOCKERS, playerA, "{1}{G}{U}: Turn this face-down permanent face up.");
         setChoice(playerA, "No"); // Don't use return permanent to hand effect
         
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
+        assertLife(playerA, 20);
         assertLife(playerB, 16);
         
         assertHandCount(playerA, "Pine Walker", 0);

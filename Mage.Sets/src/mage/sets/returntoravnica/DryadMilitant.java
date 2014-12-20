@@ -102,7 +102,7 @@ class DryadMilitantReplacementEffect extends ReplacementEffectImpl {
         if (controller != null) {
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
-                return controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, null);
+                return controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, game.getState().getZone(card.getId()));
             }
         }
         return false;

@@ -1,4 +1,4 @@
-/*
+    /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
@@ -30,8 +30,8 @@ package mage.sets.saviorsofkamigawa;
 import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SweepNumber;
-import mage.abilities.effects.keyword.SweepEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.keyword.SweepEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
