@@ -29,11 +29,12 @@ package mage.sets.planarchaos;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.keyword.FlyingAbility;
@@ -45,10 +46,10 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.game.ExileZone;
 import mage.game.Game;
-import mage.players.Library;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -66,11 +67,12 @@ public class IntetTheDreamer extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // Whenever Intet, the Dreamer deals combat damage to a player, you may pay {2}{U}. If you do, exile the top card of your library face down. You may look at that card for as long as it remains exiled. You may play that card without paying its mana cost for as long as Intet remains on the battlefield.
+        // Whenever Intet, the Dreamer deals combat damage to a player, you may pay {2}{U}. If you do, exile the top card of your library face down.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new DoIfCostPaid(new IntetTheDreamerEffect(), new ManaCostsImpl("{2}{U}")), false));
+                new DoIfCostPaid(new IntetTheDreamerExileEffect(), new ManaCostsImpl("{2}{U}")), false, true));
+        // You may look at that card for as long as it remains exiled. You may play that card without paying its mana cost for as long as Intet remains on the battlefield.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IntetTheDreamerEffect()));
     }
-
     public IntetTheDreamer(final IntetTheDreamer card) {
         super(card);
     }
@@ -81,48 +83,45 @@ public class IntetTheDreamer extends CardImpl {
     }
 }
 
-class IntetTheDreamerEffect extends OneShotEffect {
+class IntetTheDreamerExileEffect extends OneShotEffect {
     
-    public IntetTheDreamerEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "exile the top card of your library face down";
+    public IntetTheDreamerExileEffect() {
+        super(Outcome.Discard);
+        staticText = "exile the top card of your library face down";
     }
     
-    public IntetTheDreamerEffect(final IntetTheDreamerEffect effect) {
+    public IntetTheDreamerExileEffect(final IntetTheDreamerExileEffect effect) {
         super(effect);
     }
     
     @Override
-    public IntetTheDreamerEffect copy() {
-        return new IntetTheDreamerEffect(this);
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+          Card card = player.getLibrary().removeFromTop(game);
+          MageObject sourceObject = game.getObject(source.getSourceId());
+          if (card != null && sourceObject != null) {
+              player.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourceObject.getLogName(), source.getSourceId(), game, Zone.LIBRARY);
+              return true;
+          }
+      }
+      return false;
     }
     
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && controller.getLibrary().size() > 0) {
-            Library library = controller.getLibrary();
-            Card card = library.removeFromTop(game);
-            if (card != null) {
-                controller.moveCardToExileWithInfo(card, source.getSourceId(), "Intet, the Dreamer <this card may be played as long as Intet is on the battlefield>", source.getSourceId(), game, Zone.LIBRARY);
-                ContinuousEffect effect = new IntetTheDreamerCastFromExileEffect(); 
-                effect.setTargetPointer(new FixedTarget(card.getId()));
-                game.addEffect(effect, source);
-            }
-            return false;
-        }
-        return true;
+    public IntetTheDreamerExileEffect copy() {
+        return new IntetTheDreamerExileEffect(this);
     }
 }
 
-class IntetTheDreamerCastFromExileEffect extends AsThoughEffectImpl {
+class IntetTheDreamerEffect extends AsThoughEffectImpl {
 
-    public IntetTheDreamerCastFromExileEffect() {
+    public IntetTheDreamerEffect() {
         super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may play the card from exile eithout paying its mana cost for as long as {this} remains on the battlefield";
     }
 
-    public IntetTheDreamerCastFromExileEffect(final IntetTheDreamerCastFromExileEffect effect) {
+    public IntetTheDreamerEffect(final IntetTheDreamerEffect effect) {
         super(effect);
     }
 
@@ -132,14 +131,16 @@ class IntetTheDreamerCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public IntetTheDreamerCastFromExileEffect copy() {
-        return new IntetTheDreamerCastFromExileEffect(this);
+    public IntetTheDreamerEffect copy() {
+        return new IntetTheDreamerEffect(this);
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (targetPointer.getTargets(game, source).contains(sourceId)) {
-            return game.getState().getZone(sourceId).equals(Zone.EXILED);
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        Card card = game.getCard(objectId);
+        if (affectedControllerId.equals(source.getControllerId()) && card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
+            ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
+            return zone != null && zone.contains(card.getId());
         }
         return false;
     }
