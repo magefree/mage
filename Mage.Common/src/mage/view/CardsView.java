@@ -112,7 +112,7 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
                             }
                         }
                         if (!names.isEmpty()) {
-                            abilityView.getRules().add("<i>Targets: " + names.toString() + "</i>");
+                            abilityView.getRules().add("<i>Related to: " + names.toString() + "</i>");
                         }
                     }
                 }

@@ -31,14 +31,21 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.costs.common.ExileSourceFromGraveCost;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.Game;
+import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -63,7 +70,7 @@ public class InameLifeAspect extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Iname, Life Aspect dies, you may exile it. If you do, return any number of target Spirit cards from your graveyard to your hand.
-        Ability ability = new DiesTriggeredAbility(new DoIfCostPaid(new ReturnToHandTargetEffect(), new ExileSourceFromGraveCost(), "Exile to return Spirit cards?"), false);
+        Ability ability = new DiesTriggeredAbility(new InameLifeAspectEffect(), false);
         ability.addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, filter));
         this.addAbility(ability);
     }
@@ -75,5 +82,36 @@ public class InameLifeAspect extends CardImpl {
     @Override
     public InameLifeAspect copy() {
         return new InameLifeAspect(this);
+    }
+}
+
+class InameLifeAspectEffect extends OneShotEffect {
+
+    public InameLifeAspectEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "you may exile it. If you do, return any number of target Spirit cards from your graveyard to your hand";
+    }
+
+    public InameLifeAspectEffect(final InameLifeAspectEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public InameLifeAspectEffect copy() {
+        return new InameLifeAspectEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
+            if (controller.chooseUse(outcome, "Exile " + sourceObject.getLogName() + " to return Spirit cards?", game)) {
+                new ExileSourceEffect(Zone.GRAVEYARD).apply(game, source);
+                return new ReturnToHandTargetEffect().apply(game, source);
+            }
+            return true;
+        }
+        return false;
     }
 }

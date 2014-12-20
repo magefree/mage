@@ -201,7 +201,11 @@ class SpliceOntoArcaneEffect extends SpliceCardEffectImpl {
         // check if spell can be activated (protection problem not solved because effect will be used from the base spell?)
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            return card.getSpellAbility().canActivate(source.getControllerId(), game);
+            if (card.getManaCost().isEmpty()) { // e.g. Evermind
+                return card.getSpellAbility().spellCanBeActivatedRegularlyNow(source.getControllerId(), game);
+            } else {
+                return card.getSpellAbility().canActivate(source.getControllerId(), game);
+            }
         }
         return false;
     }

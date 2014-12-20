@@ -93,7 +93,7 @@ public class ConditionalOneShotEffect extends OneShotEffect {
             return staticText;
         }
         if (otherwiseEffect == null) {
-            return "If " + condition.toString() + ", " + effect.getText(mode);
+            return "if " + condition.toString() + ", " + effect.getText(mode);
         }
         return effect.getText(mode) + ". If " + condition.toString() + ", " + otherwiseEffect.getText(mode);
     }

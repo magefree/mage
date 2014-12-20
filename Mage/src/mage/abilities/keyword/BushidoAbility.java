@@ -43,16 +43,19 @@ public class BushidoAbility extends BlocksOrBecomesBlockedTriggeredAbility {
 
     public BushidoAbility(int value) {
         this(new StaticValue(value));
-        rule = new StringBuilder("Bushido ").append(value).toString();
+        rule = "Bushido " + value + getReminder(Integer.toString(value));
     }
 
     public BushidoAbility(DynamicValue value) {
         super(new BoostSourceEffect(value, value, Duration.EndOfTurn, true), false);
-        if (rule == null) {
-            rule = new StringBuilder("{this} has bushido X, where X is ").append(value.getMessage()).toString();
+        if (!(value instanceof StaticValue)) {
+            rule = "{this} has bushido X, where X is " + value.getMessage() + getReminder(value.toString());
         }
-        rule = new StringBuilder(rule).append("  <i>(When this blocks or becomes blocked, it gets +").append(value.toString()).append("/+").append(value.toString()).append(" until end of turn.)</i>").toString();
         this.value = value;
+    }
+
+    static String getReminder(String xValue) {
+        return "  <i>(When this blocks or becomes blocked, it gets +" + xValue+ "/+" + xValue + " until end of turn.)</i>";
     }
 
     public BushidoAbility(final BushidoAbility ability) {

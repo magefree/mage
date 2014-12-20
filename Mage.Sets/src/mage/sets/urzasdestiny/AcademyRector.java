@@ -29,12 +29,13 @@ package mage.sets.urzasdestiny;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.common.ExileSourceFromGraveCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.ExileSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -88,7 +89,7 @@ class AcademyRectorEffect extends OneShotEffect {
 
     public AcademyRectorEffect() {
         super(Outcome.Benefit);
-        staticText = "search your library for an enchantment card and put it onto the battlefield. Then shuffle your library";
+        staticText = "you may exile it. If you do, search your library for an enchantment card and put it onto the battlefield. Then shuffle your library";
     }
 
     public AcademyRectorEffect(final AcademyRectorEffect effect) {
@@ -98,15 +99,19 @@ class AcademyRectorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            target.setNotTarget(true);
-            controller.searchLibrary(target, game);
-            Card targetCard = game.getCard(target.getFirstTarget());
-            if (targetCard != null) {
-                controller.putOntoBattlefieldWithInfo(targetCard, game, Zone.LIBRARY, source.getSourceId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
+            if (controller.chooseUse(outcome, "Exile " + sourceObject.getLogName() + " to return Spirit card?", game)) {
+                new ExileSourceEffect(Zone.GRAVEYARD).apply(game, source);
+                TargetCardInLibrary target = new TargetCardInLibrary(filter);
+                target.setNotTarget(true);
+                controller.searchLibrary(target, game);
+                Card targetCard = game.getCard(target.getFirstTarget());
+                if (targetCard != null) {
+                    controller.putOntoBattlefieldWithInfo(targetCard, game, Zone.LIBRARY, source.getSourceId());
+                }
+                controller.shuffleLibrary(game);
             }
-            controller.shuffleLibrary(game);
             return true;
         }
         return false;

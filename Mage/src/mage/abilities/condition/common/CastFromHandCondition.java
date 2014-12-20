@@ -23,4 +23,11 @@ public class CastFromHandCondition implements Condition {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "you cast it from your hand";
+    }
+
+
 }
