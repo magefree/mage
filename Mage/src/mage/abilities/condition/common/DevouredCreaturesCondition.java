@@ -52,7 +52,7 @@ public class DevouredCreaturesCondition extends IntCompareCondition {
         int devouredCreatures = 0;
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null) {
-            for (Ability ability : sourcePermanent.getAbilities()) {
+            for (Ability ability : sourcePermanent.getAbilities(game)) {
                 if (ability instanceof DevourAbility) {
                     for (Effect effect: ability.getEffects()) {
                         if (effect instanceof DevourEffect) {

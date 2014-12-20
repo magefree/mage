@@ -886,7 +886,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         //play a land that will allow us to play an unplayable
         for (Mana mana: unplayable.keySet()) {
             for (Card card: lands) {
-                for (ManaAbility ability: card.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
+                for (ManaAbility ability: card.getAbilities(game).getManaAbilities(Zone.BATTLEFIELD)) {
                     for (Mana netMana: ability.getNetMana(game)) {
                         if (netMana.enough(mana)) {
                             this.playLand(card, game);
@@ -900,7 +900,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         //play a land that will get us closer to playing an unplayable
         for (Mana mana: unplayable.keySet()) {
             for (Card card: lands) {
-                for (ManaAbility ability: card.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
+                for (ManaAbility ability: card.getAbilities(game).getManaAbilities(Zone.BATTLEFIELD)) {
                     for (Mana netMana: ability.getNetMana(game)) {
                         if (mana.contains(netMana)) {
                             this.playLand(card, game);
@@ -957,7 +957,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
         }
         for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
-            for (ActivatedAbility ability: permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
+            for (ActivatedAbility ability: permanent.getAbilities(game).getActivatedAbilities(Zone.BATTLEFIELD)) {
                 if (!(ability instanceof ManaAbility) && ability.canActivate(playerId, game)) {
                     if (ability instanceof EquipAbility && permanent.getAttachedTo() != null) {
                         continue;
@@ -985,7 +985,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
         }
         for (Card card: graveyard.getCards(game)) {
-            for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.GRAVEYARD)) {
+            for (ActivatedAbility ability: card.getAbilities(game).getActivatedAbilities(Zone.GRAVEYARD)) {
                 if (ability.canActivate(playerId, game)) {
                     ManaOptions abilityOptions = ability.getManaCosts().getOptions();
                     if (abilityOptions.size() == 0) {
@@ -1024,7 +1024,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
         for (Permanent perm: producers) {
             // pay all colored costs first
-            for (ManaAbility ability: perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+            for (ManaAbility ability: perm.getAbilities(game).getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (cost instanceof ColoredManaCost) {
                     for (Mana netMana: ability.getNetMana(game)) {
                         if (cost.testPay(netMana)) {
@@ -1036,7 +1036,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
             // then pay hybrid
-            for (ManaAbility ability: perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+            for (ManaAbility ability: perm.getAbilities(game).getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (cost instanceof HybridManaCost) {
                     for (Mana netMana: ability.getNetMana(game)) {
                         if (cost.testPay(netMana)) {
@@ -1048,7 +1048,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
             // then pay mono hybrid
-            for (ManaAbility ability: perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+            for (ManaAbility ability: perm.getAbilities(game).getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (cost instanceof MonoHybridManaCost) {
                     for (Mana netMana: ability.getNetMana(game)) {
                         if (cost.testPay(netMana)) {
@@ -1060,7 +1060,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
             // finally pay generic
-            for (ManaAbility ability: perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+            for (ManaAbility ability: perm.getAbilities(game).getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (cost instanceof GenericManaCost) {
                     for (Mana netMana: ability.getNetMana(game)) {
                         if (cost.testPay(netMana)) {
@@ -1101,7 +1101,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             int score = 0;
             for (ManaCost cost: unpaid) {
                 Abilities:
-                for (ManaAbility ability: permanent.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+                for (ManaAbility ability: permanent.getAbilities(game).getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
                     for (Mana netMana: ability.getNetMana(game)) {
                         if (cost.testPay(netMana)) {
                             score++;
@@ -1111,8 +1111,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
             if (score > 0) { // score mana producers that produce other mana types and have other uses higher
-                score += permanent.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game).size();
-                score += permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD).size();
+                score += permanent.getAbilities(game).getAvailableManaAbilities(Zone.BATTLEFIELD, game).size();
+                score += permanent.getAbilities(game).getActivatedAbilities(Zone.BATTLEFIELD).size();
                 if (!permanent.getCardType().contains(CardType.LAND)) {
                     score+=2;
                 }
@@ -1824,11 +1824,11 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return 0;
         }
         int potential = creature.getPower().getValue();
-        potential += creature.getAbilities().getEvasionAbilities().size();
-        potential += creature.getAbilities().getProtectionAbilities().size();
-        potential += creature.getAbilities().containsKey(FirstStrikeAbility.getInstance().getId())?1:0;
-        potential += creature.getAbilities().containsKey(DoubleStrikeAbility.getInstance().getId())?2:0;
-        potential += creature.getAbilities().containsKey(TrampleAbility.getInstance().getId())?1:0;
+        potential += creature.getAbilities(game).getEvasionAbilities().size();
+        potential += creature.getAbilities(game).getProtectionAbilities().size();
+        potential += creature.getAbilities(game).containsKey(FirstStrikeAbility.getInstance().getId())?1:0;
+        potential += creature.getAbilities(game).containsKey(DoubleStrikeAbility.getInstance().getId())?2:0;
+        potential += creature.getAbilities(game).containsKey(TrampleAbility.getInstance().getId())?1:0;
         return potential;
     }
 

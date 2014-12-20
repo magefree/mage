@@ -34,6 +34,7 @@ import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.LevelerCard;
 import mage.constants.Zone;
+import mage.game.CardState;
 import mage.game.Game;
 import mage.game.command.Commander;
 import mage.game.events.ZoneChangeEvent;
@@ -48,16 +49,22 @@ public class PermanentCard extends PermanentImpl {
     protected Card card;
 
     public PermanentCard(Card card, UUID controllerId) {
+        this(card, false, controllerId);
+    }
+    
+    public PermanentCard(Card card, boolean faceDown, UUID controllerId) {
         super(card.getId(), card.getOwnerId(), controllerId, card.getName());
         this.card = card.copy();
+        this.faceDown = faceDown;
+        
         init(card);
     }
 
-    protected PermanentCard(UUID id, Card card, UUID controllerId) {
-        super(card.getId(), card.getOwnerId(), controllerId, card.getName());
-        this.card = card.copy();
-        init(card);
-    }
+//    protected PermanentCard(UUID id, Card card, UUID controllerId) {
+//        super(card.getId(), card.getOwnerId(), controllerId, card.getName());
+//        this.card = card.copy();
+//        init(card);
+//    }
 
     private void init(Card card) {
         copyFromCard(card);

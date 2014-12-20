@@ -68,7 +68,7 @@ public class PermanentToken extends PermanentImpl {
     private void copyFromToken(Token token, Game game) {
         this.name = token.getName();
         this.abilities.clear();
-        for (Ability ability : token.getAbilities()) {
+        for (Ability ability : token.getAbilities(game)) {
             this.addAbility(ability, game);
         }
         this.manaCost.clear();

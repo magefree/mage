@@ -144,7 +144,7 @@ public class Token extends MageObjectImpl {
             amount = event.getAmount();
             for (int i = 0; i < amount; i++) {
                 PermanentToken newToken = new PermanentToken(this, event.getPlayerId(), setCode, game); // use event.getPlayerId() because it can be replaced by replacement effect
-                game.getState().addCard(newToken);
+                game.getState().addCard(newToken, game);
                 game.addPermanent(newToken);
                 if (tapped) {
                     newToken.setTapped(true);

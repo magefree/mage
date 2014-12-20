@@ -84,12 +84,12 @@ class FlyingEffect extends RestrictionEffect implements MageSingleton {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getAbilities().containsKey(FlyingAbility.getInstance().getId());
+        return permanent.getAbilities(game).containsKey(FlyingAbility.getInstance().getId());
     }
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return blocker.getAbilities().containsKey(FlyingAbility.getInstance().getId()) || blocker.getAbilities().containsKey(ReachAbility.getInstance().getId());
+        return blocker.getAbilities(game).containsKey(FlyingAbility.getInstance().getId()) || blocker.getAbilities(game).containsKey(ReachAbility.getInstance().getId());
     }
 
     @Override

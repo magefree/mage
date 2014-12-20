@@ -75,7 +75,7 @@ public class ZulaportEnforcer extends LevelerCard {
                 new LevelerCardBuilder.LevelAbility(1, 2, new AbilitiesImpl<>(), 3, 3),
                 new LevelerCardBuilder.LevelAbility(3, -1, levelAbilities, 5, 5)
         );
-        this.abilities.addAll(levelerAbilities);
+        this.addAbilities(levelerAbilities);
         setMaxLevelCounters(3);
     }
 
@@ -127,7 +127,7 @@ class ZulaportEnforcerEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getAbilities().containsKey(ZulaportEnforcerAbility.getInstance().getId())) {
+        if (permanent.getAbilities(game).containsKey(ZulaportEnforcerAbility.getInstance().getId())) {
             return true;
         }
         return false;

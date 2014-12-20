@@ -108,7 +108,7 @@ class InvertTheSkiesEffect extends ContinuousEffectImpl {
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
         for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             if (opponents.contains(perm.getControllerId())) {
-                perm.getAbilities().remove(FlyingAbility.getInstance());
+                perm.getAbilities(game).remove(FlyingAbility.getInstance());
             }
         }
         return true;

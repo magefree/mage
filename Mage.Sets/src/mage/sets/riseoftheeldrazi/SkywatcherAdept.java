@@ -70,7 +70,7 @@ public class SkywatcherAdept extends LevelerCard {
                 new LevelerCardBuilder.LevelAbility(1, 2, abilities1, 2, 2),
                 new LevelerCardBuilder.LevelAbility(3, -1, abilities2, 4, 2)
         );
-        this.abilities.addAll(levelerAbilities);
+        this.addAbilities(levelerAbilities);
         setMaxLevelCounters(3);
     }
 

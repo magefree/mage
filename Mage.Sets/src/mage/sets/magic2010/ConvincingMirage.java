@@ -159,7 +159,7 @@ class ConvincingMirageContinousEffect extends ContinuousEffectImpl {
                         break;
                     case AbilityAddingRemovingEffects_6:
                         if (sublayer == SubLayer.NA) {
-                            land.getAbilities().clear();
+                            land.clearAbilities(game);
                             if (choice.equals("Forest")) {
                                 land.addAbility(new GreenManaAbility(), game);
                             }

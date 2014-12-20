@@ -96,7 +96,7 @@ public class ReboundAbility extends TriggeredAbilityImpl {
                 ((ZoneChangeEvent) event).getToZone() == Zone.STACK) {
             Card card = (Card) game.getObject(event.getTargetId());
 
-            if (card.getAbilities().contains(this)) {
+            if (card.getAbilities(game).contains(this)) {
                 this.installReboundEffect = true;
             }
         }

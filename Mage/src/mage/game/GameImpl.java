@@ -5,7 +5,7 @@
 * permitted provided that the following conditions are met:
 *
 *    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
+*       conditions and the following disclaimer.void unloadCard(Card card);
 *
 *    2. Redistributions in binary form must reproduce the above copyright notice, this list
 *       of conditions and the following disclaimer in the documentation and/or other materials
@@ -277,16 +277,16 @@ public abstract class GameImpl implements Game, Serializable {
             card.setOwnerId(ownerId);
             //card.setFaceDown(false, this); // can be set face dwon from previous game
             gameCards.put(card.getId(), card);
-            state.addCard(card);
+            state.addCard(card, this);
             if (card.isSplitCard()) {
                 Card leftCard = ((SplitCard)card).getLeftHalfCard();
                 //leftCard.setOwnerId(ownerId);
                 gameCards.put(leftCard.getId(), leftCard);
-                state.addCard(leftCard);
+                state.addCard(leftCard, this);
                 Card rightCard = ((SplitCard)card).getRightHalfCard();
                 //rightCard.setOwnerId(ownerId);
                 gameCards.put(rightCard.getId(), rightCard);
-                state.addCard(rightCard);
+                state.addCard(rightCard, this);
             }
         }
     }
@@ -435,7 +435,7 @@ public abstract class GameImpl implements Game, Serializable {
     public Ability getAbility(UUID abilityId, UUID sourceId) {
         MageObject object = getObject(sourceId);
         if (object != null) {
-            return object.getAbilities().get(abilityId);
+            return object.getAbilities(this).get(abilityId);
         }
         return null;
     }
@@ -908,12 +908,12 @@ public abstract class GameImpl implements Game, Serializable {
             Player player = getPlayer(playerId);
             for (Card card: player.getHand().getCards(this)) {
                 if (player.getHand().contains(card.getId())) {
-                    if (card.getAbilities().containsKey(LeylineAbility.getInstance().getId())) {
+                    if (card.getAbilities(this).containsKey(LeylineAbility.getInstance().getId())) {
                         if (player.chooseUse(Outcome.PutCardInPlay, "Do you wish to put " + card.getName() + " on the battlefield?", this)) {
                             card.putOntoBattlefield(this, Zone.HAND, null, player.getId());
                         }
                     }
-                    for (Ability ability: card.getAbilities()) {
+                    for (Ability ability: card.getAbilities(this)) {
                         if (ability instanceof ChancellorAbility) {
                             if (player.chooseUse(Outcome.PutCardInPlay, "Do you wish to reveal " + card.getName() + "?", this)) {
                                 Cards cards = new CardsImpl();
@@ -1274,13 +1274,13 @@ public abstract class GameImpl implements Game, Serializable {
         for (Ability ability : newEmblem.getAbilities()) {
             ability.setSourceId(newEmblem.getId());
         }
-        state.addCommandObject(newEmblem);
+        state.addCommandObject(newEmblem, this);
     }
 
 
     @Override
     public void addCommander(Commander commander){
-        state.addCommandObject(commander);
+        state.addCommandObject(commander, this);
     }
 
     @Override
@@ -1300,7 +1300,7 @@ public abstract class GameImpl implements Game, Serializable {
         //getState().addCard(permanent);
         permanent.reset(this);
         if (copyFromPermanent.isMorphCard() && copyFromPermanent.isFaceDown(this)) {
-            MorphAbility.setPermanentToMorph(permanent);
+            MorphAbility.setPermanentToMorph(permanent, this);
         }
         permanent.assignNewId();
         if (copyFromPermanent.isTransformed()) {

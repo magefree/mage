@@ -112,7 +112,7 @@ class PhyrexianUnlifeEffect2 extends ReplacementEffectImpl {
             Player player = game.getPlayer(damageEvent.getPlayerId());
             Permanent damageSource = game.getPermanent(damageEvent.getSourceId());
             player.addCounters(CounterType.POISON.createInstance(actualDamage), game);
-            if (damageSource != null && damageSource.getAbilities().containsKey(LifelinkAbility.getInstance().getId())) {
+            if (damageSource != null && damageSource.getAbilities(game).containsKey(LifelinkAbility.getInstance().getId())) {
                 Player controlPlayer = game.getPlayer(damageSource.getControllerId());
                 controlPlayer.gainLife(actualDamage, game);
             }

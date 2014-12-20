@@ -46,10 +46,10 @@ public class LoseAbilityTargetEffect extends ContinuousEffectImpl{
     public boolean apply(Game game, Ability source){
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if(permanent != null){
-            while(permanent.getAbilities().contains(ability)){
-                permanent.getAbilities().remove(ability);
-                }
+            while(permanent.getAbilities(game).contains(ability)) {
+                permanent.getAbilities(game).remove(ability);
             }
+        }
         return true;
     }
 

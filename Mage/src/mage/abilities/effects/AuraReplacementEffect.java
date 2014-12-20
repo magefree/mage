@@ -114,7 +114,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             Target target = card.getSpellAbility().getTargets().get(0);
             Player player = game.getPlayer(card.getOwnerId());
             Outcome auraOutcome = Outcome.BoostCreature;
-            Ability: for (Ability ability:card.getAbilities()) {
+            Ability: for (Ability ability:card.getAbilities(game)) {
                 if (ability instanceof SpellAbility) {
                     for (Effect effect: ability.getEffects()) {
                         if (effect instanceof AttachEffect) {

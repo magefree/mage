@@ -93,7 +93,7 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
                 // check for Morph
                 Card card = game.getCard(perm.getId());
                 if (card != null) {
-                    for (Ability ability: card.getAbilities()) {
+                    for (Ability ability: card.getAbilities(game)) {
                         if (ability instanceof MorphAbility) {
                             this.turnFaceUpAbilityMap.put(card.getId(), new TurnFaceUpAbility(((MorphAbility)ability).getMorphCosts()));
                         }
@@ -125,8 +125,8 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
                     case AbilityAddingRemovingEffects_6:
                         Card card = game.getCard(permanent.getId()); //
                         List<Ability> abilities = new ArrayList<>();
-                        for (Ability ability : permanent.getAbilities()) {
-                            if (card != null && !card.getAbilities().contains(ability)) {
+                        for (Ability ability : permanent.getAbilities(game)) {
+                            if (card != null && !card.getAbilities(game).contains(ability)) {
                                 // gained abilities from other sources won't be removed
                                 continue;
                             }
@@ -142,7 +142,7 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
                             }
                             abilities.add(ability);
                         }
-                        permanent.getAbilities().removeAll(abilities);
+                        permanent.getAbilities(game).removeAll(abilities);
                         if (turnFaceUpAbilityMap.containsKey(permanent.getId())) {
                             permanent.addAbility(turnFaceUpAbilityMap.get(permanent.getId()), game);
                         }

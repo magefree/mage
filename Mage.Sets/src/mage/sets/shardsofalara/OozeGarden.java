@@ -112,7 +112,7 @@ class OozeGardenCreateTokenEffect extends OneShotEffect {
            
       
         };
-        token.getAbilities().newId(); // neccessary if token has ability like DevourAbility()
+        token.getAbilities(game).newId(); // neccessary if token has ability like DevourAbility()
         token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
         return true;
     }

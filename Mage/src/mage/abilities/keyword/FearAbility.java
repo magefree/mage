@@ -85,7 +85,7 @@ class FearEffect extends RestrictionEffect implements MageSingleton {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getAbilities().containsKey(FearAbility.getInstance().getId())) {
+        if (permanent.getAbilities(game).containsKey(FearAbility.getInstance().getId())) {
             return true;
         }
         return false;

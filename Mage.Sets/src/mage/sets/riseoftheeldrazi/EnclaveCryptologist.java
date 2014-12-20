@@ -74,7 +74,7 @@ public class EnclaveCryptologist extends LevelerCard {
                 new LevelerCardBuilder.LevelAbility(1, 2, abilities1, 0, 1),
                 new LevelerCardBuilder.LevelAbility(3, -1, abilities2, 0, 1)
         );
-        this.abilities.addAll(levelerAbilities);
+        this.addAbilities(levelerAbilities);
         setMaxLevelCounters(3);
     }
 

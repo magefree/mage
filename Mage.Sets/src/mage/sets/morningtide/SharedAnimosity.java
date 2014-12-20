@@ -107,7 +107,7 @@ class SharedAnimosityEffect extends ContinuousEffectImpl {
             filter.add(Predicates.not(new PermanentIdPredicate(this.targetPointer.getFirst(game, source))));
             filter.add(new AttackingPredicate());
             boolean isChangeling = false;
-            for(Ability ability : permanent.getAbilities()){
+            for(Ability ability : permanent.getAbilities(game)){
                 if(ability instanceof ChangelingAbility){
                     isChangeling = true;
                 }

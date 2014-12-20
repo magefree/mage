@@ -98,7 +98,7 @@ class SilhanaLedgewalkerEffect extends RestrictionEffect {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (blocker.getAbilities().contains(FlyingAbility.getInstance())) {
+        if (blocker.getAbilities(game).contains(FlyingAbility.getInstance())) {
             return true;
         }
         return false;

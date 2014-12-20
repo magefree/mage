@@ -79,7 +79,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private final Map<UUID, LookedAt> lookedAt = new HashMap<>();
     private final DelayedTriggeredAbilities delayed;
     private final SpecialActions specialActions;
-    private final Map<UUID, Abilities<Ability>> otherAbilities = new HashMap<>();
+    //private final Map<UUID, Abilities<Ability>> otherAbilities = new HashMap<>();
     private final TurnMods turnMods;
     private final Watchers watchers;
     
@@ -162,9 +162,9 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         }
         this.zones.putAll(state.zones);
-        for (Map.Entry<UUID, Abilities<Ability>> entry: state.otherAbilities.entrySet()) {
-            otherAbilities.put(entry.getKey(), entry.getValue().copy());
-        }
+//        for (Map.Entry<UUID, Abilities<Ability>> entry: state.otherAbilities.entrySet()) {
+//            otherAbilities.put(entry.getKey(), entry.getValue().copy());
+//        }
         this.paused = state.paused;
         this.simultaneousEvents.addAll(state.simultaneousEvents);
         this.zoneChangeCounter.putAll(state.zoneChangeCounter);
@@ -437,7 +437,10 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void addEffect(ContinuousEffect effect, UUID sourceId, Ability source) {
-        effects.addEffect(effect, sourceId, source);
+        if (sourceId == null)
+           effects.addEffect(effect, source);
+        else 
+            effects.addEffect(effect, sourceId, source);
     }
 
 //    public void addMessage(String message) {
@@ -545,15 +548,10 @@ public class GameState implements Serializable, Copyable<GameState> {
         return effects.replaceEvent(event, game);
     }
 
-    public void addCard(Card card) {
+    public void addCard(Card card, Game game) {
         setZone(card.getId(), Zone.OUTSIDE);
-        for (Ability ability: card.getAbilities()) {
+        for (Ability ability: card.getAbilities(game)) {
             addAbility(ability, card);
-            for (Watcher watcher: ability.getWatchers()) {
-                watcher.setControllerId(card.getOwnerId());
-                watcher.setSourceId(card.getId());
-                watchers.add(watcher);
-            }
         }
     }
     
@@ -570,20 +568,48 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
     }
 
+    public void addAbility(Ability ability, Card attachedTo) {
+        addAbility(ability, null, attachedTo);
+//        if (ability instanceof StaticAbility) {
+//            for (Mode mode: ability.getModes().values()) {
+//                for (Effect effect: mode.getEffects()) {
+//                    if (effect instanceof ContinuousEffect) {
+//                        addEffect((ContinuousEffect)effect, ability);
+//                    }
+//                }
+//            }
+//        }
+//        else if (ability instanceof TriggeredAbility) {
+//            this.triggers.add((TriggeredAbility)ability, card);
+//        }
+//        for (Watcher watcher: ability.getWatchers()) {
+//            watcher.setControllerId(card.getOwnerId());
+//            watcher.setSourceId(card.getId());
+//            watchers.add(watcher);
+//        }
+//        for (Ability sub: ability.getSubAbilities()) {
+//            addAbility(sub, card);
+//        }
+    }
+
     @Deprecated
     public void addAbility(Ability ability, MageObject attachedTo) {
-        if (ability instanceof StaticAbility) {
-            for (Mode mode: ability.getModes().values()) {
-                for (Effect effect: mode.getEffects()) {
-                    if (effect instanceof ContinuousEffect) {
-                        addEffect((ContinuousEffect)effect, ability);
-                    }
-                }
-            }
-        }
-        else if (ability instanceof TriggeredAbility) {
-            this.triggers.add((TriggeredAbility)ability, attachedTo);
-        }
+        addAbility(ability, null, attachedTo);
+//        if (ability instanceof StaticAbility) {
+//            for (Mode mode: ability.getModes().values()) {
+//                for (Effect effect: mode.getEffects()) {
+//                    if (effect instanceof ContinuousEffect) {
+//                        addEffect((ContinuousEffect)effect, ability);
+//                    }
+//                }
+//            }
+//        }
+//        else if (ability instanceof TriggeredAbility) {
+//            this.triggers.add((TriggeredAbility)ability, attachedTo);
+//        }
+//        for (Ability sub: ability.getSubAbilities()) {
+//            addAbility(sub, attachedTo);
+//        }
     }
 
     public void addAbility(Ability ability, UUID sourceId, MageObject attachedTo) {
@@ -600,12 +626,39 @@ public class GameState implements Serializable, Copyable<GameState> {
             // TODO: add sources for triggers - the same way as in addEffect: sources
             this.triggers.add((TriggeredAbility)ability, sourceId, attachedTo);
         }
+        for (Ability sub: ability.getSubAbilities()) {
+            addAbility(sub, sourceId, attachedTo);
+        }
     }
 
-    public void addCommandObject(CommandObject commandObject) {
+    public void addAbility(Ability ability, UUID sourceId, Card attachedTo) {
+        if (ability instanceof StaticAbility) {
+            for (Mode mode: ability.getModes().values()) {
+                for (Effect effect: mode.getEffects()) {
+                    if (effect instanceof ContinuousEffect) {
+                        addEffect((ContinuousEffect)effect, sourceId, ability);
+                    }
+                }
+            }
+        }
+        else if (ability instanceof TriggeredAbility) {
+            // TODO: add sources for triggers - the same way as in addEffect: sources
+            this.triggers.add((TriggeredAbility)ability, sourceId, attachedTo);
+        }
+        for (Watcher watcher: ability.getWatchers()) {
+            watcher.setControllerId(attachedTo.getOwnerId());
+            watcher.setSourceId(attachedTo.getId());
+            watchers.add(watcher);
+        }
+        for (Ability sub: ability.getSubAbilities()) {
+            addAbility(sub, sourceId, attachedTo);
+        }
+    }
+
+    public void addCommandObject(CommandObject commandObject, Game game) {
         getCommand().add(commandObject);
         setZone(commandObject.getId(), Zone.COMMAND);
-        for (Ability ability: commandObject.getAbilities()) {
+        for (Ability ability: commandObject.getAbilities(game)) {
             addAbility(ability, commandObject);
         }
     }
@@ -669,15 +722,15 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @return
      */
     public Abilities<ActivatedAbility> getActivatedOtherAbilities(UUID objectId, Zone zone) {
-        if (otherAbilities.containsKey(objectId)) {
-            return otherAbilities.get(objectId).getActivatedAbilities(zone);
+        if (cardState.containsKey(objectId)) {
+            return cardState.get(objectId).getAbilities().getActivatedAbilities(zone);
         }
         return null;
     }
     
     public Abilities<Ability> getAllOtherAbilities(UUID objectId) {
-        if (otherAbilities.containsKey(objectId)) {
-            return otherAbilities.get(objectId);
+        if (cardState.containsKey(objectId)) {
+            return cardState.get(objectId).getAbilities();
         }
         return null;
     }
@@ -685,16 +738,15 @@ public class GameState implements Serializable, Copyable<GameState> {
 
 
     public void addOtherAbility(UUID objectId, Ability ability) {
-        if (!otherAbilities.containsKey(objectId)) {
-            otherAbilities.put(objectId, new AbilitiesImpl(ability));
-        } else {
-            otherAbilities.get(objectId).add(ability);
+        if (!cardState.containsKey(objectId)) {
+            cardState.putIfAbsent(objectId, new CardState());
         }
+        cardState.get(objectId).addAbility(ability);
     }
 
-    private void resetOtherAbilities() {
-        otherAbilities.clear();
-    }
+//    private void resetOtherAbilities() {
+//        otherAbilities.clear();
+//    }
 
     /**
      * Removes Triggered abilities that were gained from sourceId
@@ -710,7 +762,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     private void reset() {
         this.setLegendaryRuleActive(true);
-        this.resetOtherAbilities();
+//        this.resetOtherAbilities();
     }
 
     public void clear() {
@@ -730,7 +782,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         legendaryRuleActive = true;
         gameOver = false;
         specialActions.clear();
-        otherAbilities.clear();
+        cardState.clear();
         combat.clear();
         turnMods.clear();
         watchers.clear();
@@ -767,7 +819,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         Integer value = this.zoneChangeCounter.getOrDefault(objectId, 1);
         value++;
         this.zoneChangeCounter.put(objectId, value);
-        this.otherAbilities.remove(objectId);
+        if (cardState.containsKey(objectId))
+            this.cardState.get(objectId).clearAbilities();
     }
 
     public void setZoneChangeCounter(UUID objectId, int value) {
@@ -789,20 +842,20 @@ public class GameState implements Serializable, Copyable<GameState> {
         return copiedCards.get(cardId);
     }
     
-    public Card copyCard(Card cardToCopy, Ability source) {
+    public Card copyCard(Card cardToCopy, Ability source, Game game) {
         Card copiedCard = cardToCopy.copy();
         copiedCard.assignNewId();
         copiedCard.setOwnerId(source.getControllerId());
         copiedCard.setCopy(true);
         copiedCards.put(copiedCard.getId(), copiedCard);
-        addCard(copiedCard);
+        addCard(copiedCard, game);
         if (copiedCard.isSplitCard()) {
             Card leftCard = ((SplitCard)copiedCard).getLeftHalfCard();
             copiedCards.put(leftCard.getId(), leftCard);
-            addCard(leftCard);
+            addCard(leftCard, game);
             Card rightCard = ((SplitCard)copiedCard).getRightHalfCard();
             copiedCards.put(rightCard.getId(), rightCard);
-            addCard(rightCard);
+            addCard(rightCard, game);
         }
         return copiedCard;
     }

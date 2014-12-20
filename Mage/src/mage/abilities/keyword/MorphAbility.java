@@ -270,10 +270,10 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
         return alternateCosts;
     }
     
-    public static void setPermanentToMorph(Permanent permanent) {
+    public static void setPermanentToMorph(Permanent permanent, Game game) {
         permanent.getPower().initValue(2);
         permanent.getToughness().initValue(2);
-        permanent.getAbilities().clear();
+        permanent.clearAbilities(game);
         permanent.getColor().setColor(new ObjectColor());
         permanent.setName("");
         permanent.getCardType().clear();
@@ -341,8 +341,8 @@ class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implements Sour
                 case AbilityAddingRemovingEffects_6:
                     Card card = game.getCard(permanent.getId()); //  
                     List<Ability> abilities = new ArrayList<>();
-                    for (Ability ability : permanent.getAbilities()) {
-                        if (card != null && !card.getAbilities().contains(ability)) {
+                    for (Ability ability : permanent.getAbilities(game)) {
+                        if (card != null && !card.getAbilities(game).contains(ability)) {
                             // gained abilities from other sources won't be removed
                             continue;
                         }
@@ -358,7 +358,7 @@ class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implements Sour
                         }
                         abilities.add(ability);
                     }
-                    permanent.getAbilities().removeAll(abilities);
+                    permanent.getAbilities(game).removeAll(abilities);
                     if (turnFaceUpAbility != null) {
                         permanent.addAbility(turnFaceUpAbility, game);
                     }

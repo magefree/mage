@@ -110,7 +110,7 @@ class BecomesBasicLandTypeAllEffect extends ContinuousEffectImpl {
                 switch (layer) {
                     case AbilityAddingRemovingEffects_6:
                         Mana mana = new Mana();
-                        for (Ability ability : land.getAbilities()){
+                        for (Ability ability : land.getAbilities(game)){
                             if (ability instanceof BasicManaAbility) {
                                 for (Mana netMana: ((BasicManaAbility)ability ).getNetMana(game)) {
                                     mana.add(netMana);

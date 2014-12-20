@@ -96,7 +96,7 @@ class ShoalSerpentEffect extends ContinuousEffectImpl {
             switch (layer) {
                 case AbilityAddingRemovingEffects_6:
                     if (sublayer == SubLayer.NA) {
-                        for (Iterator<Ability> i = permanent.getAbilities().iterator(); i.hasNext();) {
+                        for (Iterator<Ability> i = permanent.getAbilities(game).iterator(); i.hasNext();) {
                             Ability entry = i.next();
                             if (entry.getId().equals(DefenderAbility.getInstance().getId())) {
                                 i.remove();

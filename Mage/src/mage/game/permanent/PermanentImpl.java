@@ -232,7 +232,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     
     @Override
     public void removeAllAbilities(UUID sourceId, Game game) {
-        getAbilities().clear();
+        clearAbilities(game);
         // removes abilities that were gained from abilities of this permanent
         game.getContinuousEffects().removeGainedEffectsForSource(this.getId());
         // remove gained triggered abilities
@@ -606,7 +606,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             }
         }
         this.attachedTo = permanentId;
-        for (Ability ability : this.getAbilities()) {
+        for (Ability ability : this.getAbilities(game)) {
             for (Iterator<Effect> ite = ability.getEffects(game, EffectType.CONTINUOUS).iterator(); ite.hasNext();) {
                 ContinuousEffect effect = (ContinuousEffect) ite.next();
                 game.getContinuousEffects().setOrder(effect);
@@ -658,11 +658,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             }
             if (damageDone > 0) {
                 Permanent source = game.getPermanentOrLKIBattlefield(sourceId);
-                if (source != null && source.getAbilities().containsKey(LifelinkAbility.getInstance().getId())) {
+                if (source != null && source.getAbilities(game).containsKey(LifelinkAbility.getInstance().getId())) {
                     Player player = game.getPlayer(source.getControllerId());
                     player.gainLife(damageAmount, game);
                 }
-                if (source != null && source.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
+                if (source != null && source.getAbilities(game).containsKey(DeathtouchAbility.getInstance().getId())) {
                     deathtouched = true;
                 }
                 if (dealtDamageByThisTurn == null) {
@@ -724,8 +724,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             if (actualDamage > 0) {
                 //Permanent source = game.getPermanent(sourceId);
                 MageObject source = game.getObject(sourceId);
-                if (source != null && (source.getAbilities().containsKey(InfectAbility.getInstance().getId())
-                        || source.getAbilities().containsKey(WitherAbility.getInstance().getId()))) {
+                if (source != null && (source.getAbilities(game).containsKey(InfectAbility.getInstance().getId())
+                        || source.getAbilities(game).containsKey(WitherAbility.getInstance().getId()))) {
                     if (markDamage) {
                         // mark damage only
                         markDamage(CounterType.M1M1.createInstance(actualDamage));

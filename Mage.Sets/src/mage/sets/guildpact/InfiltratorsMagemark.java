@@ -116,7 +116,7 @@ class InfiltratorsMagemarkUnblockableAllEffect extends RestrictionEffect {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return blocker.getAbilities().contains(DefenderAbility.getInstance());
+        return blocker.getAbilities(game).contains(DefenderAbility.getInstance());
     }
 
     @Override

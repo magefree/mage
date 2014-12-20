@@ -109,7 +109,7 @@ class GetKickerXValue implements DynamicValue {
         int count = 0;
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            for (Ability ability: card.getAbilities()) {
+            for (Ability ability: card.getAbilities(game)) {
                 if (ability instanceof KickerAbility) {
                     count += ((KickerAbility) ability).getXManaValue();
                 }

@@ -63,7 +63,7 @@ public class CanBlockOnlyFlyingAttachedEffect extends RestrictionEffect {
 
     @Override
     public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return attacker.getAbilities().contains(FlyingAbility.getInstance());
+        return attacker.getAbilities(game).contains(FlyingAbility.getInstance());
     }
 
     @Override

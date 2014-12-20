@@ -191,7 +191,7 @@ class ReplicateTriggeredAbility extends TriggeredAbilityImpl {
             if (spell instanceof Spell) {
                 Card card = game.getCard(spell.getSourceId());
                 if (card != null) {
-                    for (Ability ability: card.getAbilities()) {
+                    for (Ability ability: card.getAbilities(game)) {
                         if (ability instanceof ReplicateAbility) {
                             if (((ReplicateAbility) ability).isActivated()) {
                                 for (Effect effect : this.getEffects()) {
@@ -234,7 +234,7 @@ class ReplicateCopyEffect extends OneShotEffect {
                 // reset replicate now so the copies don't report x times Replicate
                 Card card = game.getCard(spell.getSourceId());
                 if (card != null) {
-                    for (Ability ability: card.getAbilities()) {
+                    for (Ability ability: card.getAbilities(game)) {
                         if (ability instanceof ReplicateAbility) {
                             if (((ReplicateAbility) ability).isActivated()) {
                                 ((ReplicateAbility) ability).resetReplicate();

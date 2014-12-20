@@ -104,15 +104,15 @@ public abstract class SplitCard extends CardImpl {
     }
     
     @Override
-    public Abilities<Ability> getAbilities(){
+    public Abilities<Ability> getAbilities(Game game){
         Abilities<Ability> allAbilites = new AbilitiesImpl<>();
-        for (Ability ability : super.getAbilities()) {
+        for (Ability ability : super.getAbilities(game)) {
             if (ability instanceof SpellAbility && !((SpellAbility)ability).getSpellAbilityType().equals(SpellAbilityType.SPLIT)) {
                 allAbilites.add(ability);
             }
         }
-        allAbilites.addAll(leftHalfCard.getAbilities());
-        allAbilites.addAll(rightHalfCard.getAbilities());                
+        allAbilites.addAll(leftHalfCard.getAbilities(game));
+        allAbilites.addAll(rightHalfCard.getAbilities(game));                
         return allAbilites;
     }
 
@@ -136,13 +136,9 @@ public abstract class SplitCard extends CardImpl {
 
     @Override
     public void setOwnerId(UUID ownerId) {
-        this.ownerId = ownerId;
-        abilities.setControllerId(ownerId);
-        leftHalfCard.getAbilities().setControllerId(ownerId);
-//        leftHalfCard.setOwnerId(ownerId);
-        rightHalfCard.getAbilities().setControllerId(ownerId);
-//        rightHalfCard.setOwnerId(ownerId);
-
+        super.setOwnerId(ownerId);
+        leftHalfCard.setOwnerId(ownerId);
+        rightHalfCard.setOwnerId(ownerId);
     }
 
 //    @Override

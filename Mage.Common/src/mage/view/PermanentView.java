@@ -116,7 +116,7 @@ public class PermanentView extends CardView {
                 // add morph rule text
                 if (card != null) {
                     if (controlled) {
-                        for (Ability permanentAbility : permanent.getAbilities()) {
+                        for (Ability permanentAbility : permanent.getAbilities(game)) {
                             if (permanentAbility instanceof TurnFaceUpAbility && !permanentAbility.getRuleVisible()) {
                                 this.rules.add(permanentAbility.getRule(true));
                             }

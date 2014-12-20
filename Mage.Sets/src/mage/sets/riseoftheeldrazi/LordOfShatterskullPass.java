@@ -78,7 +78,7 @@ public class LordOfShatterskullPass extends LevelerCard {
         List<Ability> levelerAbilities = LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 5, abilities1, 6, 6),
                 new LevelerCardBuilder.LevelAbility(6, -1, abilities2, 6, 6));
-        this.abilities.addAll(levelerAbilities);
+        this.addAbilities(levelerAbilities);
         setMaxLevelCounters(6);
     }
 

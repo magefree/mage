@@ -57,7 +57,7 @@ class IntimidateEffect extends RestrictionEffect implements MageSingleton {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getAbilities().containsKey(IntimidateAbility.getInstance().getId());
+        return permanent.getAbilities(game).containsKey(IntimidateAbility.getInstance().getId());
     }
 
     @Override

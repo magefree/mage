@@ -95,8 +95,8 @@ class CantBeBlockedExceptByCreaturesWithFlyingOrReachEffect extends RestrictionE
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (blocker.getAbilities().containsKey(FlyingAbility.getInstance().getId())
-                || blocker.getAbilities().containsKey(ReachAbility.getInstance().getId())) {
+        if (blocker.getAbilities(game).containsKey(FlyingAbility.getInstance().getId())
+                || blocker.getAbilities(game).containsKey(ReachAbility.getInstance().getId())) {
             return true;
         }
         return false;

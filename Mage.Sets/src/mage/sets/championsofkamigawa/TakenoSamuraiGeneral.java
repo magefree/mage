@@ -99,7 +99,7 @@ class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl {
         if (this.affectedObjectsSet) {
             for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                 if (!perm.getId().equals(source.getSourceId())) {
-                    for (Ability ability : perm.getAbilities()) {
+                    for (Ability ability : perm.getAbilities(game)) {
                         if (ability instanceof BushidoAbility) {
                             objects.add(perm.getId());
                         }
@@ -114,7 +114,7 @@ class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl {
         for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
             if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
                 if (!perm.getId().equals(source.getSourceId())) {
-                    for (Ability ability : perm.getAbilities()) {
+                    for (Ability ability : perm.getAbilities(game)) {
                         if (ability instanceof BushidoAbility) {
                             int value = ((BushidoAbility) ability).getValue(source, game, this);
                             perm.addPower(value);

@@ -89,13 +89,13 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     public boolean hasFirstOrDoubleStrike(Game game) {
         for (UUID permId: attackers) {
             Permanent attacker = game.getPermanent(permId);
-            if (attacker != null && hasFirstOrDoubleStrike(attacker)) {
+            if (attacker != null && hasFirstOrDoubleStrike(attacker, game)) {
                 return true;
             }
         }
         for (UUID permId: blockers) {
             Permanent blocker = game.getPermanent(permId);
-            if (blocker != null && hasFirstOrDoubleStrike(blocker)) {
+            if (blocker != null && hasFirstOrDoubleStrike(blocker, game)) {
                 return true;
             }
         }
@@ -118,20 +118,20 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         return blockerOrder;
     }
 
-    private boolean hasFirstOrDoubleStrike(Permanent perm) {
-        return perm.getAbilities().containsKey(FirstStrikeAbility.getInstance().getId()) || perm.getAbilities().containsKey(DoubleStrikeAbility.getInstance().getId());
+    private boolean hasFirstOrDoubleStrike(Permanent perm, Game game) {
+        return perm.getAbilities(game).containsKey(FirstStrikeAbility.getInstance().getId()) || perm.getAbilities(game).containsKey(DoubleStrikeAbility.getInstance().getId());
     }
 
-    private boolean hasFirstStrike(Permanent perm) {
-        return perm.getAbilities().containsKey(FirstStrikeAbility.getInstance().getId());
+    private boolean hasFirstStrike(Permanent perm, Game game) {
+        return perm.getAbilities(game).containsKey(FirstStrikeAbility.getInstance().getId());
     }
 
-    private boolean hasDoubleStrike(Permanent perm) {
-        return perm.getAbilities().containsKey(DoubleStrikeAbility.getInstance().getId());
+    private boolean hasDoubleStrike(Permanent perm, Game game) {
+        return perm.getAbilities(game).containsKey(DoubleStrikeAbility.getInstance().getId());
     }
 
-    private boolean hasTrample(Permanent perm) {
-        return perm.getAbilities().containsKey(TrampleAbility.getInstance().getId());
+    private boolean hasTrample(Permanent perm, Game game) {
+        return perm.getAbilities(game).containsKey(TrampleAbility.getInstance().getId());
     }
 
     public void assignDamageToBlockers(boolean first, Game game) {
@@ -141,7 +141,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             }
             else {
                 Permanent attacker = game.getPermanent(attackers.get(0));
-                if (attacker.getAbilities().containsKey(DamageAsThoughNotBlockedAbility.getInstance().getId())) {
+                if (attacker.getAbilities(game).containsKey(DamageAsThoughNotBlockedAbility.getInstance().getId())) {
                     Player player = game.getPlayer(attacker.getControllerId());
                     if (player.chooseUse(Outcome.Damage, "Do you wish to assign damage for " + attacker.getLogName() + " as though it weren't blocked?", game)) {
                         blocked = false;
@@ -191,19 +191,19 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
      * @param first First strike or common combat damage step
      * @return
      */
-    private boolean canDamage(Permanent perm, boolean first) {
+    private boolean canDamage(Permanent perm, boolean first, Game game) {
         // if now first strike combat damage step
         if (first) {
             // should have first strike or double strike
-            return hasFirstOrDoubleStrike(perm);
+            return hasFirstOrDoubleStrike(perm, game);
         }
         // if now not first strike combat
         else {
-            if (hasFirstStrike(perm)) {
+            if (hasFirstStrike(perm, game)) {
                 // if it has first strike in non FS combat damage step
                 // then it can damage only if it has ALSO double strike
                 // Fixes Issue 200
-                return hasDoubleStrike(perm);
+                return hasDoubleStrike(perm, game);
             }
             // can damage otherwise
             return true;
@@ -213,9 +213,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     private void unblockedDamage(boolean first, Game game) {
         for (UUID attackerId: attackers) {
             Permanent attacker = game.getPermanent(attackerId);
-            if (canDamage(attacker, first)) {
+            if (canDamage(attacker, first, game)) {
                 //20091005 - 510.1c, 702.17c
-                if (!blocked || hasTrample(attacker)) {
+                if (!blocked || hasTrample(attacker, game)) {
                     defenderDamage(attacker, getDamageValueFromPermanent(attacker, game), game);
                 }
             }
@@ -230,11 +230,11 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         Permanent attacker = game.getPermanent(attackers.get(0));
         if (blocker != null && attacker != null) {
             int blockerDamage = getDamageValueFromPermanent(blocker, game); // must be set before attacker damage marking because of effects like Test of Faith
-            if (blocked && canDamage(attacker, first)) {
+            if (blocked && canDamage(attacker, first, game)) {
                 int damage = getDamageValueFromPermanent(attacker, game);
-                if (hasTrample(attacker)) {
+                if (hasTrample(attacker, game)) {
                     int lethalDamage;
-                    if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
+                    if (attacker.getAbilities(game).containsKey(DeathtouchAbility.getInstance().getId())) {
                         lethalDamage = 1;
                     } else {
                         lethalDamage = blocker.getToughness().getValue() - blocker.getDamage();
@@ -256,7 +256,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     blocker.markDamage(damage, attacker.getId(), game, true, true);
                 }
             }
-            if (canDamage(blocker, first)) {
+            if (canDamage(blocker, first, game)) {
                 if (blocker.getBlocking() == 1) { // blocking several creatures handled separately                    
                     attacker.markDamage(blockerDamage, blocker.getId(), game, true, true);
                 }
@@ -272,12 +272,12 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         }
         Player player = game.getPlayer(attacker.getControllerId());
         int damage = getDamageValueFromPermanent(attacker, game);
-        if (canDamage(attacker, first)) {
+        if (canDamage(attacker, first, game)) {
             // must be set before attacker damage marking because of effects like Test of Faith
             Map<UUID, Integer> blockerPower = new HashMap<>();
             for (UUID blockerId: blockerOrder) {
                 Permanent blocker = game.getPermanent(blockerId);
-                if (canDamage(blocker, first)) {
+                if (canDamage(blocker, first, game)) {
                     if (blocker.getBlocking() == 1) { // blocking several creatures handled separately
                         blockerPower.put(blockerId, getDamageValueFromPermanent(blocker, game));
                     }
@@ -288,7 +288,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 for (UUID blockerId: blockerOrder) {
                     Permanent blocker = game.getPermanent(blockerId);
                     int lethalDamage;
-                    if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
+                    if (attacker.getAbilities(game).containsKey(DeathtouchAbility.getInstance().getId())) {
                         lethalDamage = 1;
                     } else {
                         lethalDamage = blocker.getToughness().getValue() - blocker.getDamage();
@@ -302,7 +302,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     assigned.put(blockerId, damageAssigned);
                     damage -= damageAssigned;
                 }
-                if (damage > 0 && hasTrample(attacker)) {
+                if (damage > 0 && hasTrample(attacker, game)) {
                     defenderDamage(attacker, damage, game);
                 } else {
                     // Assign the damge left to first blocker
@@ -322,7 +322,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         } else {
             for (UUID blockerId: blockerOrder) {
                 Permanent blocker = game.getPermanent(blockerId);
-                if (canDamage(blocker, first)) {
+                if (canDamage(blocker, first, game)) {
                     attacker.markDamage(getDamageValueFromPermanent(blocker, game), blocker.getId(), game, true, true);
                 }
             }
@@ -342,7 +342,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         Permanent blocker = game.getPermanent(blockers.get(0));
         Permanent attacker = game.getPermanent(attackers.get(0));
         if (blocker != null && attacker != null) {
-            if (canDamage(blocker, first)) {
+            if (canDamage(blocker, first, game)) {
                 int damage = getDamageValueFromPermanent(blocker, game);
                 attacker.markDamage(damage, blocker.getId(), game, true, true);
             }
@@ -366,12 +366,12 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         Player player = game.getPlayer(blocker.getControllerId());
         int damage = getDamageValueFromPermanent(blocker, game);
 
-        if (canDamage(blocker, first)) {
+        if (canDamage(blocker, first, game)) {
             Map<UUID, Integer> assigned = new HashMap<>();
             for (UUID attackerId: attackerOrder) {
                 Permanent attacker = game.getPermanent(attackerId);
                 int lethalDamage;
-                if (blocker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
+                if (blocker.getAbilities(game).containsKey(DeathtouchAbility.getInstance().getId())) {
                     lethalDamage = 1;
                 } else {
                     lethalDamage = attacker.getToughness().getValue() - attacker.getDamage();
@@ -537,7 +537,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             List<UUID> toBeRemoved = new ArrayList<>();
             for (UUID blockerId: getBlockers()) {
                 Permanent blocker = game.getPermanent(blockerId);
-                if (blocker != null && blocker.getAbilities().containsKey(CantBlockAloneAbility.getInstance().getId())) {
+                if (blocker != null && blocker.getAbilities(game).containsKey(CantBlockAloneAbility.getInstance().getId())) {
                     blockWasLegal = false;
                     game.informPlayers(blocker.getLogName() + " can't block alone. Removing it from combat.");
                     toBeRemoved.add(blockerId);

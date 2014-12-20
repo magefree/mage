@@ -99,7 +99,7 @@ public class EchoMage extends LevelerCard {
         List<Ability> levelerAbilities = LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(2, 3, abilities1, 2, 4),
                 new LevelerCardBuilder.LevelAbility(4, -1, abilities2, 2, 5));
-        this.abilities.addAll(levelerAbilities);
+        this.addAbilities(levelerAbilities);
         setMaxLevelCounters(4);
     }
 

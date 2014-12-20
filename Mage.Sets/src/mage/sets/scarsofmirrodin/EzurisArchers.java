@@ -87,7 +87,7 @@ class BlocksCreatureWithFlyingTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.BLOCKER_DECLARED && event.getSourceId().equals(this.getSourceId())
-                && game.getPermanent(event.getTargetId()).getAbilities().containsKey(FlyingAbility.getInstance().getId())) {
+                && game.getPermanent(event.getTargetId()).getAbilities(game).containsKey(FlyingAbility.getInstance().getId())) {
             return true;
         }
         return false;

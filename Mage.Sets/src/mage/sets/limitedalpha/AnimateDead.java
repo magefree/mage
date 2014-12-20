@@ -254,7 +254,7 @@ class AnimateDeadChangeAbilityEffect extends ContinuousEffectImpl implements Sou
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             Ability abilityToRemove = null;
-            for (Ability ability: permanent.getAbilities()) {
+            for (Ability ability: permanent.getAbilities(game)) {
                 if (ability instanceof EnchantAbility) {
                     abilityToRemove = ability;
                 }

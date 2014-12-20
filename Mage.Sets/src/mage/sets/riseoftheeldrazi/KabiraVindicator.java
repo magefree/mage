@@ -75,7 +75,7 @@ public class KabiraVindicator extends LevelerCard {
                 new LevelerCardBuilder.LevelAbility(5, -1, abilities2, 4, 8)
         );
         
-        this.abilities.addAll(levelerAbilities);
+        this.addAbilities(levelerAbilities);
         setMaxLevelCounters(5);
 
     }

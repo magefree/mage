@@ -80,7 +80,7 @@ public interface Game extends MageItem, Serializable {
 
     //game data methods
     void loadCards(Set<Card> cards, UUID ownerId);
-    void unloadCard(Card card);
+//    void unloadCard(Card card);
     Collection<Card> getCards();
     Object getCustomData();
     void setCustomData(Object data);

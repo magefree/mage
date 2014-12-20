@@ -71,7 +71,7 @@ public class NirkanaCutthroat extends LevelerCard {
                 new LevelerCardBuilder.LevelAbility(1, 2, abilities1, 4, 3),
                 new LevelerCardBuilder.LevelAbility(3, -1, abilities2, 5, 4)
         );
-        this.abilities.addAll(levelerAbilities);
+        this.addAbilities(levelerAbilities);
         setMaxLevelCounters(3);
     }
 

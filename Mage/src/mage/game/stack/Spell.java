@@ -157,7 +157,7 @@ public class Spell implements StackObject, Card {
     }
 
     public String getSpellCastText(Game game) {
-        for (Ability spellAbility : (Abilities<Ability>) getAbilities()) {
+        for (Ability spellAbility : (Abilities<Ability>) getAbilities(game)) {
             if (spellAbility instanceof MorphAbility
                     && ((AlternativeSourceCosts) spellAbility).isActivated(getSpellAbility(), game)) {
                 return "a card face down";
@@ -559,6 +559,21 @@ public class Spell implements StackObject, Card {
         return card.getAbilities();
     }
 
+    @Override
+    public Abilities<Ability> getAbilities(Game game) {
+        return card.getAbilities(game);
+    }
+
+    @Override
+    public void clearAbilities(Game game) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+    
+    @Override
+    public void removeAbility(Ability ability, Game game) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+    
     @Override
     public boolean hasAbility(UUID abilityId, Game game) {
         return card.hasAbility(abilityId, game);

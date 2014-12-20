@@ -80,7 +80,7 @@ public class HedronFieldPurists extends LevelerCard {
         List<Ability> levelerAbilities = LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 4, abilities1, 1, 4),
                 new LevelerCardBuilder.LevelAbility(5, -1, abilities2, 2, 5));
-        this.abilities.addAll(levelerAbilities);
+        this.addAbilities(levelerAbilities);
         setMaxLevelCounters(5);
     }
 

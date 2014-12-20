@@ -91,10 +91,10 @@ class TallowispAbilityPredicate implements Predicate<MageObject> {
 
     @Override
     public boolean apply(MageObject input, Game game) {
-        Abilities<Ability> abilities = input.getAbilities();
-        for (int i = 0; i < abilities.size(); i++) {
-            if (abilities.get(i) instanceof EnchantAbility) {
-                String enchantText = abilities.get(i).getRule();
+        Abilities<Ability> abilities = input.getAbilities(game);
+        for (Ability abilitie : abilities) {
+            if (abilitie instanceof EnchantAbility) {
+                String enchantText = abilitie.getRule();
                 if (enchantText.startsWith("Enchant") && enchantText.contains("creature")) {
                     return true;
                 }

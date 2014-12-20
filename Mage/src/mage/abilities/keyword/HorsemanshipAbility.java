@@ -83,12 +83,12 @@ class HorsemanshipEffect extends RestrictionEffect implements MageSingleton {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getAbilities().containsKey(HorsemanshipAbility.getInstance().getId());
+        return permanent.getAbilities(game).containsKey(HorsemanshipAbility.getInstance().getId());
     }
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return blocker.getAbilities().containsKey(HorsemanshipAbility.getInstance().getId());
+        return blocker.getAbilities(game).containsKey(HorsemanshipAbility.getInstance().getId());
     }
 
     @Override

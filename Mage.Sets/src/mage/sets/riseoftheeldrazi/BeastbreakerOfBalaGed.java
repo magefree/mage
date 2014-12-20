@@ -74,7 +74,7 @@ public class BeastbreakerOfBalaGed extends LevelerCard {
                 new LevelerCardBuilder.LevelAbility(4, -1, levelAbilities, 6, 6)
         );
         
-        this.abilities.addAll(levelerAbilities);
+        this.addAbilities(levelerAbilities);
         setMaxLevelCounters(4);
     }
 

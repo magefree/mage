@@ -304,7 +304,7 @@ public abstract class AbilityImpl implements Ability {
         //20100716 - 601.2e
         if (sourceObject != null) {
             sourceObject.adjustCosts(this, game);
-            for (Ability ability : sourceObject.getAbilities()) {
+            for (Ability ability : sourceObject.getAbilities(game)) {
                 if (ability instanceof AdjustingSourceCosts) {
                     ((AdjustingSourceCosts)ability).adjustCosts(this, game);
                 }
@@ -382,7 +382,7 @@ public abstract class AbilityImpl implements Ability {
     public boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, boolean noMana, Player controller, Game game) {
         boolean alternativeCostisUsed = false;
         if (sourceObject != null && !(sourceObject instanceof Permanent) && !(this instanceof FlashbackAbility)) {
-            for (Ability ability : sourceObject.getAbilities()) {
+            for (Ability ability : sourceObject.getAbilities(game)) {
                 // if cast for noMana no Alternative costs are allowed
                 if (!noMana && ability instanceof AlternativeSourceCosts) {
                     AlternativeSourceCosts alternativeSpellCosts = (AlternativeSourceCosts) ability;
@@ -555,7 +555,7 @@ public abstract class AbilityImpl implements Ability {
         this.sourceId = sourceId;
         if (subAbilities != null) {
             for (Ability subAbility: subAbilities) {
-                subAbility.setSourceId(controllerId);
+                subAbility.setSourceId(sourceId);
             }
         }
         if (watchers != null) {
@@ -827,12 +827,12 @@ public abstract class AbilityImpl implements Ability {
             parameterSourceId = getSourceId();
         }
 
-        if (object != null && !object.getAbilities().contains(this)) {
+        if (object != null && !object.getAbilities(game).contains(this)) {
             boolean found = false;
             // unfortunately we need to handle double faced cards separately and only this way
             if (object instanceof PermanentCard && ((PermanentCard)object).canTransform()) {
                 PermanentCard permanent = (PermanentCard)object;
-                found = permanent.getSecondCardFace().getAbilities().contains(this) || permanent.getCard().getAbilities().contains(this);
+                found = permanent.getSecondCardFace().getAbilities(game).contains(this) || permanent.getCard().getAbilities(game).contains(this);
             }
             if (!found) {
                 return false;
@@ -1016,7 +1016,7 @@ public abstract class AbilityImpl implements Ability {
 
     private String getOptionalTextSuffix(Game game, Spell spell) {
         StringBuilder sb = new StringBuilder();
-        for (Ability ability : spell.getAbilities()) {
+        for (Ability ability : spell.getAbilities(game)) {
             if (ability instanceof OptionalAdditionalSourceCosts) {
                 sb.append(((OptionalAdditionalSourceCosts) ability).getCastMessageSuffix());
             }

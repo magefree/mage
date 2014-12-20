@@ -266,7 +266,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             for (CombatGroup group : groups) {
                 for (UUID attackingCreatureId : group.getAttackers()) {
                     Permanent attacker = game.getPermanent(attackingCreatureId);
-                    if (count > 1 && attacker != null && attacker.getAbilities().containsKey(CanAttackOnlyAloneAbility.getInstance().getId())) {
+                    if (count > 1 && attacker != null && attacker.getAbilities(game).containsKey(CanAttackOnlyAloneAbility.getInstance().getId())) {
                         game.informPlayers(attacker.getLogName() + " can only attack alone. Removing it from combat.");
                         tobeRemoved.add(attackingCreatureId);
                         count--;
@@ -283,7 +283,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             for (CombatGroup group : groups) {
                 for (UUID attackingCreatureId : group.getAttackers()) {
                     Permanent attacker = game.getPermanent(attackingCreatureId);
-                    if (attacker != null && attacker.getAbilities().containsKey(CantAttackAloneAbility.getInstance().getId())) {
+                    if (attacker != null && attacker.getAbilities(game).containsKey(CantAttackAloneAbility.getInstance().getId())) {
                         game.informPlayers(attacker.getLogName() + " can't attack alone. Removing it from combat.");
                         tobeRemoved.add(attackingCreatureId);
                     }
@@ -807,7 +807,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         CombatGroup newGroup = new CombatGroup(defenderId, defender != null, defender != null ? defender.getControllerId() : defenderId);
         newGroup.attackers.add(attackerId);
         Permanent attacker = game.getPermanent(attackerId);
-        if (!attacker.getAbilities().containsKey(VigilanceAbility.getInstance().getId())) {
+        if (!attacker.getAbilities(game).containsKey(VigilanceAbility.getInstance().getId())) {
             attacker.tap(game);
         }
         attacker.setAttacking(true);

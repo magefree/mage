@@ -267,13 +267,13 @@ class DanceOfTheDeadChangeAbilityEffect extends ContinuousEffectImpl implements 
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             Ability abilityToRemove = null;
-            for (Ability ability: permanent.getAbilities()) {
+            for (Ability ability: permanent.getAbilities(game)) {
                 if (ability instanceof EnchantAbility) {
                     abilityToRemove = ability;
                 }
             }
             if (abilityToRemove != null) {
-                permanent.getAbilities().remove(abilityToRemove);
+                permanent.getAbilities(game).remove(abilityToRemove);
             }
             permanent.addAbility(newAbility, source.getSourceId(), game);
             return true;

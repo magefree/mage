@@ -105,7 +105,7 @@ class TsabosWebPreventUntapEffect extends ReplacementEffectImpl {
         if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
-                for (Ability ability :permanent.getAbilities()) {
+                for (Ability ability :permanent.getAbilities(game)) {
                     if (!(ability instanceof PlayLandAbility)
                             && !(ability instanceof ManaAbility)
                             && ability instanceof ActivatedAbility) {

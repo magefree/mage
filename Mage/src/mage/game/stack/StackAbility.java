@@ -161,6 +161,21 @@ public class StackAbility implements StackObject, Ability {
     }
 
     @Override
+    public Abilities<Ability> getAbilities(Game game) {
+        return emptyAbilites;
+    }
+
+    @Override
+    public void clearAbilities(Game game) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+    
+    @Override
+    public void removeAbility(Ability ability, Game game) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+
+    @Override
     public boolean hasAbility(UUID abilityId, Game game) {
         return false;
     }

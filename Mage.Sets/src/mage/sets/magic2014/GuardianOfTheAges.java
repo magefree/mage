@@ -93,7 +93,7 @@ class GuardianOfTheAgesTriggerAbility extends TriggeredAbilityImpl {
             Permanent creature = game.getPermanent(event.getSourceId());
             if(creature != null && filter.match(creature, game)
                    && game.getOpponents(this.getControllerId()).contains(creature.getControllerId())
-                   && game.getPermanent(this.getSourceId()).getAbilities().contains(DefenderAbility.getInstance())) {
+                   && game.getPermanent(this.getSourceId()).getAbilities(game).contains(DefenderAbility.getInstance())) {
                return true;
             }
         }

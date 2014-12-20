@@ -80,7 +80,7 @@ public class LighthouseChronologist extends LevelerCard {
                 new LevelerCardBuilder.LevelAbility(4, 6, abilities1, 2, 4),
                 new LevelerCardBuilder.LevelAbility(7, -1, abilities2, 3, 5)
         );
-        this.abilities.addAll(levelerAbilities);
+        this.addAbilities(levelerAbilities);
         setMaxLevelCounters(7);
     }
 

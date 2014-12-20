@@ -111,7 +111,7 @@ class SignalPestEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getAbilities().containsKey(SignalPestAbility.getInstance().getId())) {
+        if (permanent.getAbilities(game).containsKey(SignalPestAbility.getInstance().getId())) {
             return true;
         }
         return false;
@@ -119,7 +119,7 @@ class SignalPestEffect extends RestrictionEffect {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (blocker.getAbilities().contains(FlyingAbility.getInstance()) || blocker.getAbilities().contains(ReachAbility.getInstance())) {
+        if (blocker.getAbilities(game).contains(FlyingAbility.getInstance()) || blocker.getAbilities(game).contains(ReachAbility.getInstance())) {
             return true;
         }
         return false;

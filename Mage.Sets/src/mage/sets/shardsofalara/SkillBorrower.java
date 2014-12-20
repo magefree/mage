@@ -128,7 +128,7 @@ class SkillBorrowerEffect extends ContinuousEffectImpl {
             if(card != null && (card.getCardType().contains(CardType.CREATURE) || card.getCardType().contains(CardType.ARTIFACT))){
                 Permanent permanent = game.getPermanent(source.getSourceId());
                 if(permanent != null){
-                    for(Ability ability : card.getAbilities()){
+                    for(Ability ability : card.getAbilities(game)){
                         if(ability instanceof ActivatedAbility){
                             permanent.addAbility(ability, source.getSourceId(), game);
                         }

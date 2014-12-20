@@ -70,7 +70,7 @@ public class NullChampion extends LevelerCard {
                 new LevelerCardBuilder.LevelAbility(1, 3, abilities1, 4, 2),
                 new LevelerCardBuilder.LevelAbility(4, -1, abilities2, 7, 3)
         );
-        this.abilities.addAll(levelerAbilities);
+        this.addAbilities(levelerAbilities);
         setMaxLevelCounters(4);
     }
 

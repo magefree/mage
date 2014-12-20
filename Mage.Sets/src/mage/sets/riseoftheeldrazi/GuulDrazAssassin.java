@@ -81,7 +81,7 @@ public class GuulDrazAssassin extends LevelerCard {
                 new LevelerCardBuilder.LevelAbility(2, 3, abilities1, 2, 2),
                 new LevelerCardBuilder.LevelAbility(4, -1, abilities2, 4, 4)
         );
-        this.abilities.addAll(levelerAbilities);
+        this.addAbilities(levelerAbilities);
         setMaxLevelCounters(4);
     }
 

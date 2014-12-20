@@ -77,7 +77,7 @@ public class KazanduTuskcaller extends LevelerCard {
                 new LevelerCardBuilder.LevelAbility(2, 5, abilities1, 1, 1),
                 new LevelerCardBuilder.LevelAbility(6, -1, abilities2, 1, 1)
         );
-        this.abilities.addAll(levelerAbilities);
+        this.addAbilities(levelerAbilities);
         setMaxLevelCounters(6);
     }
 

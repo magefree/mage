@@ -70,7 +70,7 @@ public class StudentOfWarfare extends LevelerCard {
                 new LevelerCardBuilder.LevelAbility(2, 6, abilities1, 3, 3),
                 new LevelerCardBuilder.LevelAbility(7, -1, abilities2, 4, 4)
         );
-        this.abilities.addAll(levelerAbilities);
+        this.addAbilities(levelerAbilities);
         setMaxLevelCounters(7);
     }
 

@@ -99,8 +99,8 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                         break;
                     case AbilityAddingRemovingEffects_6:
                         if (sublayer == SubLayer.NA) {
-                            if (token.getAbilities().size() > 0) {
-                                for (Ability ability : token.getAbilities()) {
+                            if (token.getAbilities(game).size() > 0) {
+                                for (Ability ability : token.getAbilities(game)) {
                                     permanent.addAbility(ability, game);
                                 }
                             }

@@ -1112,24 +1112,24 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                     if (attacker.getToughness().getValue() == blocker.getPower().getValue()
                             && attacker.getPower().getValue() == blocker.getToughness().getValue()) {
                         if (attackerValue > blockerValue
-                                || blocker.getAbilities().containsKey(FirstStrikeAbility.getInstance().getId())
-                                || blocker.getAbilities().containsKey(DoubleStrikeAbility.getInstance().getId())
-                                || blocker.getAbilities().contains(new ExaltedAbility())
-                                || blocker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())
-                                || blocker.getAbilities().containsKey(IndestructibleAbility.getInstance().getId())
-                                || !attacker.getAbilities().containsKey(FirstStrikeAbility.getInstance().getId())
-                                || !attacker.getAbilities().containsKey(DoubleStrikeAbility.getInstance().getId())
-                                || !attacker.getAbilities().contains(new ExaltedAbility())) {
+                                || blocker.getAbilities(game).containsKey(FirstStrikeAbility.getInstance().getId())
+                                || blocker.getAbilities(game).containsKey(DoubleStrikeAbility.getInstance().getId())
+                                || blocker.getAbilities(game).contains(new ExaltedAbility())
+                                || blocker.getAbilities(game).containsKey(DeathtouchAbility.getInstance().getId())
+                                || blocker.getAbilities(game).containsKey(IndestructibleAbility.getInstance().getId())
+                                || !attacker.getAbilities(game).containsKey(FirstStrikeAbility.getInstance().getId())
+                                || !attacker.getAbilities(game).containsKey(DoubleStrikeAbility.getInstance().getId())
+                                || !attacker.getAbilities(game).contains(new ExaltedAbility())) {
                             safeToAttack = false;
                         }
                     }
-                    if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())
-                            || attacker.getAbilities().containsKey(IndestructibleAbility.getInstance().getId())) {
+                    if (attacker.getAbilities(game).containsKey(DeathtouchAbility.getInstance().getId())
+                            || attacker.getAbilities(game).containsKey(IndestructibleAbility.getInstance().getId())) {
                         safeToAttack = true;
                     }
-                    if (attacker.getAbilities().containsKey(FlyingAbility.getInstance().getId())
-                            && !blocker.getAbilities().containsKey(FlyingAbility.getInstance().getId())
-                            && !blocker.getAbilities().containsKey(ReachAbility.getInstance().getId())) {
+                    if (attacker.getAbilities(game).containsKey(FlyingAbility.getInstance().getId())
+                            && !blocker.getAbilities(game).containsKey(FlyingAbility.getInstance().getId())
+                            && !blocker.getAbilities(game).containsKey(ReachAbility.getInstance().getId())) {
                         safeToAttack = true;
                     }
                 }
@@ -1395,7 +1395,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     public UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup, List<UUID> blockerOrder, Game game) {
         if (combatGroup.getAttackers().size() == 1) {
             Permanent attacker = game.getPermanent(combatGroup.getAttackers().get(0));
-            boolean attackerDeathtouch = attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId());
+            boolean attackerDeathtouch = attacker.getAbilities(game).containsKey(DeathtouchAbility.getInstance().getId());
             // boolean attackerFirstStrike = attacker.getAbilities().containsKey(FirstStrikeAbility.getInstance().getId());
             List<Permanent> blockerAlreadySet = getAlreadyBlockingPermanents(blockerOrder, game);
             int powerAlreadyNeeded = getPowerAlreadyNeeded(blockerAlreadySet, attackerDeathtouch);
@@ -1406,7 +1406,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             }
             for (Permanent blocker: blockers) {
                 if (attackerDeathtouch || powerLeftToKill >= blocker.getToughness().getValue()) {
-                    if (!blocker.getAbilities().containsKey(IndestructibleAbility.getInstance().getId())) {
+                    if (!blocker.getAbilities(game).containsKey(IndestructibleAbility.getInstance().getId())) {
                         return blocker.getId();
                     }
                 }

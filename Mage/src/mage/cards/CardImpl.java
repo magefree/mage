@@ -234,8 +234,10 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public List<String> getRules() {
         try {
             List<String> rules = abilities.getRules(this.getLogName());
-            for (String data : info.values()) {
-                rules.add(data);
+            if (info != null) {
+                for (String data : info.values()) {
+                    rules.add(data);
+                }
             }
             return rules;
         } catch (Exception e) {
@@ -253,6 +255,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             CardState state = game.getState().getCardState(objectId);
             for (String data : state.getInfo().values()) {
                 rules.add(data);
+            }
+            for (Ability ability: state.getAbilities()) {
+                rules.add(ability.getRule());
             }
             return rules;
         } catch (Exception e) {
@@ -272,7 +277,13 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             abilities.add(subAbility);
         }
     }
- 
+
+    protected void addAbilities(List<Ability> abilities) {
+        for (Ability ability: abilities) {
+            addAbility(ability);
+        }
+    }
+
     protected void addAbility(Ability ability, Watcher watcher) {
         addAbility(ability);
         ability.addWatcher(watcher);
@@ -423,7 +434,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     }
                     break;
                 case BATTLEFIELD:
-                    PermanentCard permanent = new PermanentCard(this, event.getPlayerId()); // controller can be replaced (e.g. Gather Specimens)
+                    PermanentCard permanent = new PermanentCard(this, isFaceDown(game), event.getPlayerId()); // controller can be replaced (e.g. Gather Specimens)
                     game.resetForSourceId(permanent.getId());
                     game.addPermanent(permanent);
                     game.setZone(objectId, Zone.BATTLEFIELD);
@@ -589,7 +600,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 }
             }
             game.updateZoneChangeCounter(objectId);
-            PermanentCard permanent = new PermanentCard(this, event.getPlayerId());
+            PermanentCard permanent = new PermanentCard(this, isFaceDown(game), event.getPlayerId());
             // reset is done to end continuous effects from previous instances of that permanent (e.g undying)
             game.resetForSourceId(permanent.getId());
             // make sure the controller of all continuous effects of this card are switched to the current controller

@@ -186,8 +186,8 @@ class LazavDimirEffect extends ContinuousEffectImpl {
         permanent.addAbility(HexproofAbility.getInstance(), source.getSourceId(), game);
         permanent.addAbility(new CreatureCardPutOpponentGraveyardTriggeredAbility(), source.getSourceId(), game);
 
-        for (Ability ability : cardToCopy.getAbilities()) {
-            if (!permanent.getAbilities().contains(ability)) {
+        for (Ability ability : cardToCopy.getAbilities(game)) {
+            if (!permanent.getAbilities(game).contains(ability)) {
                 permanent.addAbility(ability, source.getSourceId(), game);
             }
         }

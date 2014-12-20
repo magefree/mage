@@ -80,7 +80,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
                     }
 
                     if (object != null) {
-                        if (checkAbilityStillExists(ability, event, object)) {
+                        if (checkAbilityStillExists(ability, event, object, game)) {
                             if (object instanceof Permanent) {
                                 ability.setControllerId(((Permanent) object).getControllerId());
                             }
@@ -96,14 +96,14 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
         }
     }
   
-    private boolean checkAbilityStillExists(TriggeredAbility ability, GameEvent event, MageObject object) {
+    private boolean checkAbilityStillExists(TriggeredAbility ability, GameEvent event, MageObject object, Game game) {
         boolean exists = true;
-        if (!object.getAbilities().contains(ability)) {
+        if (!object.getAbilities(game).contains(ability)) {
             exists = false;
             if (object instanceof PermanentCard) {
                 PermanentCard permanent = (PermanentCard)object;
                 if (permanent.canTransform() && event.getType() == GameEvent.EventType.TRANSFORMED) {
-                    exists = permanent.getCard().getAbilities().contains(ability);
+                    exists = permanent.getCard().getAbilities(game).contains(ability);
                 }
             }
         }
@@ -129,12 +129,17 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
      * @param attachedTo - the object that gained the ability
      */
     public void add(TriggeredAbility ability, UUID sourceId, MageObject attachedTo) {
-        this.add(ability, attachedTo);
-        List<UUID> uuidList = new LinkedList<>();
-        uuidList.add(sourceId);
-        // if the object that gained the ability moves zone, also then the triggered ability must be removed
-        uuidList.add(attachedTo.getId());
-        sources.put(getKey(ability, attachedTo), uuidList);
+        if (sourceId == null) {
+            add(ability, attachedTo);
+        }
+        else {
+            this.add(ability, attachedTo);
+            List<UUID> uuidList = new LinkedList<>();
+            uuidList.add(sourceId);
+            // if the object that gained the ability moves zone, also then the triggered ability must be removed
+            uuidList.add(attachedTo.getId());
+            sources.put(getKey(ability, attachedTo), uuidList);
+        }
     }
 
     public void add(TriggeredAbility ability, MageObject attachedTo) {

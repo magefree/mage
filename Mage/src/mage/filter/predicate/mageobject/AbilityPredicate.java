@@ -47,7 +47,7 @@ public class AbilityPredicate implements Predicate<MageObject> {
 
     @Override
     public boolean apply(MageObject input, Game game) {
-        Abilities<Ability> abilities = input.getAbilities();
+        Abilities<Ability> abilities = input.getAbilities(game);
         for (int i = 0; i < abilities.size(); i++) {
             if (abilityClass.equals(abilities.get(i).getClass())) {
                 return true;

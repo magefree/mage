@@ -117,7 +117,7 @@ class JhoiraOfTheGhituSuspendEffect extends OneShotEffect {
         if (cards != null && !cards.isEmpty()) {
             Card card = game.getCard(cards.get(0).getId());
             boolean hasSuspend = false;
-            for (Ability ability :card.getAbilities()) {
+            for (Ability ability :card.getAbilities(game)) {
                 if (ability instanceof SuspendAbility) {
                     hasSuspend = true;
                     break;
@@ -135,11 +135,12 @@ class JhoiraOfTheGhituSuspendEffect extends OneShotEffect {
                     // add suspend ability
                     // TODO: Find a better solution for giving suspend to a card.
                     // If the exiled card leaves exile by another way, the abilites won't be removed from the card
-                    Abilities oldAbilities = card.getAbilities().copy();
+                    Abilities oldAbilities = card.getAbilities(game).copy();
                     SuspendAbility suspendAbility = new SuspendAbility(4, null, card);
-                    card.addAbility(suspendAbility);
+                    game.getState().addOtherAbility(card.getId(), suspendAbility);
+                    //card.addAbility(suspendAbility);
 
-                    for (Ability ability :card.getAbilities()) {
+                    for (Ability ability :card.getAbilities(game)) {
                         if (!oldAbilities.contains(ability)) {
                             ability.setControllerId(source.getControllerId());
                             game.getState().addAbility(ability, card.getId(), card);

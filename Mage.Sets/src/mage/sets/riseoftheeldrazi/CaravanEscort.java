@@ -64,7 +64,7 @@ public class CaravanEscort extends LevelerCard {
                 new LevelerCardBuilder.LevelAbility(1, 4, new AbilitiesImpl<Ability>(), 2, 2),
                 new LevelerCardBuilder.LevelAbility(5, -1, levelAbilities, 5, 5)
         );
-        this.abilities.addAll(levelerAbilities);
+        this.addAbilities(levelerAbilities);
         setMaxLevelCounters(5);
     }
 

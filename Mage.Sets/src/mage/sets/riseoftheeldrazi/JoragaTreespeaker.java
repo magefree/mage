@@ -97,7 +97,7 @@ public class JoragaTreespeaker extends LevelerCard {
                 new LevelerCardBuilder.LevelAbility(1, 4, abilities1, 1, 2),
                 new LevelerCardBuilder.LevelAbility(5, -1, abilities2, 1, 4)
         );
-        this.abilities.addAll(levelerAbilities);
+        this.addAbilities(levelerAbilities);
         setMaxLevelCounters(5);
     }
 

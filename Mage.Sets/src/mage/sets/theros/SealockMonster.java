@@ -162,7 +162,7 @@ class SealockMonsterBecomesIslandTargetEffect extends ContinuousEffectImpl {
             if (land != null) {
                 switch (layer) {
                     case AbilityAddingRemovingEffects_6:
-                        if (!land.getAbilities().containsRule(islandAbility)) {
+                        if (!land.getAbilities(game).containsRule(islandAbility)) {
                             land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
                         }
                         break;

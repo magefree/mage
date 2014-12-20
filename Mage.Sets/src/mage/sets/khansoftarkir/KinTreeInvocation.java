@@ -103,7 +103,7 @@ class KinTreeInvocationCreateTokenEffect extends OneShotEffect {
         objectColor.setGreen(true);
         Token token = new Token("Spirit Warrior", "X/X black and green Spirit Warrior creature token onto the battlefield, where X is the greatest toughness among creatures you control",
                 objectColor, list, value, value, new AbilitiesImpl());
-        token.getAbilities().newId(); // neccessary if token has ability like DevourAbility()
+        token.getAbilities(game).newId(); // neccessary if token has ability like DevourAbility()
         token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
         return true;
     }

@@ -77,7 +77,7 @@ public class KarganDragonlord extends LevelerCard {
                 new LevelerCardBuilder.LevelAbility(4, 7, abilities1, 4, 4),
                 new LevelerCardBuilder.LevelAbility(8, -1, abilities2, 8, 8)
         );
-        this.abilities.addAll(levelerAbilities);
+        this.addAbilities(levelerAbilities);
         setMaxLevelCounters(8);
     }
 
