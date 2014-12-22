@@ -24,6 +24,7 @@
         <deckType name="Constructed - Legacy" jar="mage-deck-constructed.jar" className="mage.deck.Legacy"/>
         <deckType name="Block Constructed - Innistrad" jar="mage-deck-constructed.jar" className="mage.deck.InnistradBlock"/>
         <deckType name="Block Constructed - Kamigawa" jar="mage-deck-constructed.jar" className="mage.deck.KamigawaBlock"/>
+        <deckType name="Block Constructed - Khans of Tarkir" jar="mage-deck-constructed.jar" className="mage.deck.KhansOfTarkirBlock"/>
         <deckType name="Block Constructed - Return to Ravnica" jar="mage-deck-constructed.jar" className="mage.deck.ReturnToRavnicaBlock"/>
         <deckType name="Block Constructed - Scars of Mirrodin" jar="mage-deck-constructed.jar" className="mage.deck.ScarsOfMirrodinBlock"/>
         <deckType name="Block Constructed - Shadowmoore" jar="mage-deck-constructed.jar" className="mage.deck.ShadowmooreBlock"/>

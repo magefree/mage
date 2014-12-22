@@ -107,6 +107,9 @@ public class ConstructedFormats {
         if (format.equals("* Khans of Tarkir Block")) {
             return Arrays.asList("KTK", "FRF");
         }
+        if (format.equals("Fate Reforged")) {
+            return Arrays.asList("FRF");
+        }
         if (format.equals("Khans of Tarkir")) {
             return Arrays.asList("KTK");
         }

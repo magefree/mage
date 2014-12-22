@@ -29,6 +29,8 @@ public class WizardCardsImageSource implements CardImageSource {
     public WizardCardsImageSource() {
         sets = new HashMap<>();
         setsAliases = new HashMap<>();
+        setsAliases.put("FRF", "fatereforged/cig");
+        setsAliases.put("KTK", "khansoftarkir/cig");
         setsAliases.put("M15", "magic2015coreset/cig");
         setsAliases.put("CNS", "vintagemasters/cig");
         setsAliases.put("CNS", "conspiracy/cig");

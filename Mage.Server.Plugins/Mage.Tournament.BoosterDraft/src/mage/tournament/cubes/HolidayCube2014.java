@@ -115,6 +115,7 @@ public class HolidayCube2014 extends DraftCube {
         cubeCards.add(new CardIdentity("Chandra, Pyromaster", ""));
         cubeCards.add(new CardIdentity("Chandra's Phoenix", ""));
         cubeCards.add(new CardIdentity("Char", ""));
+        cubeCards.add(new CardIdentity("Channel", ""));
         cubeCards.add(new CardIdentity("Chrome Mox", ""));
         cubeCards.add(new CardIdentity("Clifftop Retreat", ""));
         cubeCards.add(new CardIdentity("Cloudgoat Ranger", ""));
