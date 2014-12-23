@@ -39,6 +39,7 @@ Fate Reforged|fatereforged|
 Fifth Dawn|fifthdawn|
 Fifth Edition|fifthedition|
 Fourth Edition|fourthedition|
+Friday Night Magic|fridaynightmagic|
 Future Sight|futuresight|
 Gatecrash|gatecrash|
 Guildpact|guildpact|

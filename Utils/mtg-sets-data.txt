@@ -49,10 +49,11 @@ Eventide|EVE|
 Exodus|EXO|
 Fallen Empires|FEM|
 Fate Reforged|FRF|
-Future Sight|FUT|
+Friday Night Magic|FNMP|
 From the Vault: Dragons|FVD|
 From the Vault: Exiled|FVE|
 From the Vault: Relics|FVR|
+Future Sight|FUT|
 Gatecrash|GTC|
 Guildpact|GPT|
 Homelands|HML|

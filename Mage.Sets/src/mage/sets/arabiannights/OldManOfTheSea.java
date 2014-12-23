@@ -38,11 +38,8 @@ import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.effects.common.continious.GainControlTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -75,7 +72,7 @@ public class OldManOfTheSea extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
 
         // {tap}: Gain control of target creature with power less than or equal to Old Man of the Sea's power for as long as Old Man of the Sea remains tapped and that creature's power remains less than or equal to Old Man of the Sea's power.
-        FilterCreaturePermanent controllableCreatures = new FilterCreaturePermanent("creature with power less than or equal to Old Man of the Sea   's power");
+        FilterCreaturePermanent controllableCreatures = new FilterCreaturePermanent("creature with power less than or equal to Old Man of the Sea's power");
         controllableCreatures.add(new PowerLowerEqualSourcePredicate(this.getId()));
         ConditionalContinousEffect effect = new ConditionalContinousEffect(
                 new OldManOfTheSeaGainControlTargetEffect(Duration.Custom, true), new CompoundCondition(SourceTappedCondition.getInstance(), new SourcePowerGreaterEqualTargetCondition()),
