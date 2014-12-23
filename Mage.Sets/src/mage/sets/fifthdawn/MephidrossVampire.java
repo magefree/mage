@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -118,7 +119,7 @@ class MephidrossVampireEffect extends ContinuousEffectImpl {
         for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             switch (layer) {
                 case AbilityAddingRemovingEffects_6:
-                    creature.addAbility(new BecomesTargetTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())), source.getSourceId(), game);
+                    creature.addAbility(new DealsDamageToACreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, false, false), source.getSourceId(), game);
                     break;
                 case TypeChangingEffects_4:
                     if (!creature.getSubtype().contains("Vampire")) {
