@@ -1,3 +1,11 @@
+#|Generate|TOK:MGDC|Sliver|
+#|Generate|TOK:FNMP|Knight|
+#|Generate|TOK:FNMP|Centaur|
+#|Generate|TOK:FNMP||Rhino|
+
+#|Generate|TOK:FNMP|Centaur|
+#|Generate|TOK:FNMP|Wurm|
+
 |Generate|TOK:DDN|Goblin|
 
 #|Generate|TOK:KTK|Bear|
