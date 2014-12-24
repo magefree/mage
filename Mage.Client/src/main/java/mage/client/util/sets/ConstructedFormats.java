@@ -90,9 +90,12 @@ public class ConstructedFormats {
             "Duel Decks: Speed vs. Cunning",
             "Friday Night Magic",
             "Game Day",
+            "Grand Prix",
             "Guru",
             "Judge Promo",
+            "Launch Party",
             "Unhinged",
+            "World Magic Cup Qualifier",
     };
     
     private ConstructedFormats() {
@@ -453,6 +456,15 @@ public class ConstructedFormats {
         }
         if (format.equals("Game Day")) {
             return Arrays.asList("MGDC");
+        }
+        if (format.equals("Grand Prix")) {
+            return Arrays.asList("GPX");
+        }
+        if (format.equals("Launch Party")) {
+            return Arrays.asList("MLP");
+        }
+        if (format.equals("World Magic Cup Qualifier")) {
+            return Arrays.asList("WMCQ");
         }
         if (format.equals("Guru")) {
             return Arrays.asList("GUR");

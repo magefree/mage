@@ -43,6 +43,7 @@ Friday Night Magic|fridaynightmagic|
 Future Sight|futuresight|
 Game Day|gameday|
 Gatecrash|gatecrash|
+Grand Prix|grandprix|
 Guildpact|guildpact|
 Homelands|homelands|
 Ice Age|iceage|
@@ -52,6 +53,7 @@ Judge Promo|judgepromo|
 Journey into Nyx|journeyintonyx|
 Judgment|judgment|
 Khans of Tarkir|khansoftarkir|
+Launch Party|launchparty|
 Legends|legends|
 Legions|legions|
 Limited Edition Alpha|limitedalpha|
@@ -111,5 +113,6 @@ Urza's Saga|urzassaga|
 Visions|visions|
 Vintage Masters|vintagemasters|
 Weatherlight|weatherlight|
+World Magic Cup Qualifier|worldmagiccupqualifier|
 Worldwake|worldwake|
 Zendikar|zendikar|
