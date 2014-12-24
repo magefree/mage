@@ -48,6 +48,7 @@ Homelands|homelands|
 Ice Age|iceage|
 Innistrad|innistrad|
 Invasion|invasion|
+Judge Promo|judgepromo|
 Journey into Nyx|journeyintonyx|
 Judgment|judgment|
 Khans of Tarkir|khansoftarkir|

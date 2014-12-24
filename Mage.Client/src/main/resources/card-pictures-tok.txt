@@ -1,7 +1,12 @@
-#|Generate|TOK:MGDC|Sliver|
-#|Generate|TOK:FNMP|Knight|
+#|Generate|TOK:JR|Angel|
+#|Generate|TOK:JR|Faerie Rogue|
+#|Generate|TOK:JR|Soldier|
+#|Generate|TOK:JR|Squirrel|
+
 #|Generate|TOK:FNMP|Centaur|
+#|Generate|TOK:FNMP|Knight|
 #|Generate|TOK:FNMP||Rhino|
+#|Generate|TOK:MGDC|Sliver|
 
 #|Generate|TOK:FNMP|Centaur|
 #|Generate|TOK:FNMP|Wurm|

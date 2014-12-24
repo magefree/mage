@@ -91,6 +91,7 @@ public class ConstructedFormats {
             "Friday Night Magic",
             "Game Day",
             "Guru",
+            "Judge Promo",
             "Unhinged",
     };
     
@@ -455,6 +456,9 @@ public class ConstructedFormats {
         }
         if (format.equals("Guru")) {
             return Arrays.asList("GUR");
+        }
+        if (format.equals("Judge Promo")) {
+            return Arrays.asList("JR");
         }
         if (format.equals("Unhinged")) {
             return Arrays.asList("UNH");

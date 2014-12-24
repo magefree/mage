@@ -63,6 +63,7 @@ Ice Age|ICE|
 Innistrad|ISD|
 Invasion|INV|
 Journey into Nyx|JOU|
+Judge Promo|JR|
 Judgment|JUD|
 Khans of Tarkir|KTK|
 Limited Edition Alpha|LEA|
