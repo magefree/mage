@@ -39,7 +39,9 @@ Fate Reforged|fatereforged|
 Fifth Dawn|fifthdawn|
 Fifth Edition|fifthedition|
 Fourth Edition|fourthedition|
+Friday Night Magic|fridaynightmagic|
 Future Sight|futuresight|
+Game Day|gameday|
 Gatecrash|gatecrash|
 Guildpact|guildpact|
 Homelands|homelands|

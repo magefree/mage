@@ -88,6 +88,8 @@ public class ConstructedFormats {
             "Duel Decks: Heroes vs. Monsters",
             "Duel Decks: Jace vs. Vraska",
             "Duel Decks: Speed vs. Cunning",
+            "Friday Night Magic",
+            "Game Day",
             "Guru",
             "Unhinged",
     };
@@ -444,6 +446,12 @@ public class ConstructedFormats {
         }
         if (format.equals("Vintage Masters")) {
             return Arrays.asList("VMA");
+        }
+        if (format.equals("Friday Night Magic")) {
+            return Arrays.asList("FNMP");
+        }
+        if (format.equals("Game Day")) {
+            return Arrays.asList("MGDC");
         }
         if (format.equals("Guru")) {
             return Arrays.asList("GUR");
