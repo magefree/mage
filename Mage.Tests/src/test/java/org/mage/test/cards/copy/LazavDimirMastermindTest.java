@@ -30,8 +30,12 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
     @Test
     public void testCopySimpleCreature() {
         addCard(Zone.BATTLEFIELD, playerA, "Lazav, Dimir Mastermind", 1);
+        // Codex Shredder - Artifact
+        // {T}: Target player puts the top card of his or her library into his or her graveyard.
+        // {5}, {T}, Sacrifice Codex Shredder: Return target card from your graveyard to your hand.
         addCard(Zone.BATTLEFIELD, playerA, "Codex Shredder", 1);
 
+        // Flying 3/2
         addCard(Zone.LIBRARY, playerB, "Assault Griffin",5);
         skipInitShuffling();
 

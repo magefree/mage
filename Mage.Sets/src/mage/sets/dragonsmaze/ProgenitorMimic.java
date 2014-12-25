@@ -54,6 +54,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
 import mage.util.CardUtil;
 import mage.util.functions.ApplyToPermanent;
+import org.apache.log4j.Logger;
 
 /**
  *

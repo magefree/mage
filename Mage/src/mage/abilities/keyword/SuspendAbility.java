@@ -339,10 +339,6 @@ class SuspendPlayCardEffect extends OneShotEffect {
                         abilitiesToRemove.add(ability);
                     }
                 }
-                // remove the triggered abilities from the game
-                game.getState().resetTriggersForSourceId(card.getId());
-                // remove the continious effects from the game
-                game.getState().getContinuousEffects().removeGainedEffectsForSource(card.getId());
                 // remove the abilities from the card
                 card.getAbilities().removeAll(abilitiesToRemove);
             }

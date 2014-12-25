@@ -148,7 +148,6 @@ public interface Game extends MageItem, Serializable {
     Player getLosingPlayer();
     void setStateCheckRequired();
     boolean getStateCheckRequired();
-    void resetForSourceId(UUID sourceId);
 
     //client event methods
     void addTableEventListener(Listener<TableEvent> listener);

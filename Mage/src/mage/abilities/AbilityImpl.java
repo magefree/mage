@@ -536,7 +536,13 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public void setSourceId(UUID sourceId) {
-        this.sourceId = sourceId;
+        if (this.sourceId == null) {
+            this.sourceId = sourceId;
+        } else {
+            if (!(this instanceof MageSingleton)) {
+                this.sourceId = sourceId;
+            }
+        }
     }
 
     @Override

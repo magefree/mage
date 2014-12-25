@@ -69,7 +69,7 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl {
     }
 
     public EntersBattlefieldEffect(Effect baseEffect, Condition condition, String text, boolean selfScope, boolean optional) {
-        super(Duration.OneUse, baseEffect.getOutcome(), selfScope);
+        super(Duration.WhileOnBattlefield, baseEffect.getOutcome(), selfScope);
         this.baseEffects.add(baseEffect);
         this.text = text;
         this.condition = condition;
@@ -124,12 +124,6 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl {
                     game.addEffect((ContinuousEffect) effect, source);
                 }
                 else {
-                    // noxx: commented it out because of resulting in a bug
-                    // with CopyEffect (PhantasmalImageTest.java)
-                    /*if (spell != null)
-                        effect.apply(game, spell.getSpellAbility());
-                    else
-                        effect.apply(game, source);*/
                     if (spell != null) {
                         effect.setValue(SOURCE_CAST_SPELL_ABILITY, spell.getSpellAbility());
                     }

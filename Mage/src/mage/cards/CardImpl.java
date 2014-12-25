@@ -388,7 +388,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     break;
                 case BATTLEFIELD:
                     PermanentCard permanent = new PermanentCard(this, event.getPlayerId()); // controller can be replaced (e.g. Gather Specimens)
-                    game.resetForSourceId(permanent.getId());
                     game.addPermanent(permanent);
                     game.setZone(objectId, Zone.BATTLEFIELD);
                     game.setScopeRelevant(true);
@@ -555,7 +554,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             updateZoneChangeCounter();
             PermanentCard permanent = new PermanentCard(this, event.getPlayerId());
             // reset is done to end continuous effects from previous instances of that permanent (e.g undying)
-            game.resetForSourceId(permanent.getId());
+         // game.resetForSourceId(permanent.getId());
             // make sure the controller of all continuous effects of this card are switched to the current controller
             game.getContinuousEffects().setController(objectId, event.getPlayerId());
             game.addPermanent(permanent);

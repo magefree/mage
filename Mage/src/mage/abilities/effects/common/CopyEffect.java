@@ -28,8 +28,10 @@
 
 package mage.abilities.effects.common;
 
+
 import java.util.UUID;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
@@ -55,7 +57,6 @@ public class CopyEffect extends ContinuousEffectImpl {
      */
     private MageObject target;
     private UUID sourceId;
-    private int zoneChangeCounter;
     private ApplyToPermanent applier;
     
     public CopyEffect(MageObject target, UUID sourceId) {
@@ -72,23 +73,27 @@ public class CopyEffect extends ContinuousEffectImpl {
         super(effect);
         this.target = effect.target.copy();
         this.sourceId = effect.sourceId;
-        this.zoneChangeCounter = effect.zoneChangeCounter;
         this.applier = effect.applier;
     }
 
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        Permanent permanent = game.getPermanent(sourceId);
-        if (permanent != null) {
-            this.zoneChangeCounter = permanent.getZoneChangeCounter();
+        if (affectedObjectsSet) {
+            affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
         }
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(this.sourceId);
+        if (affectedObjectsSet) {
+            permanent = affectedObjectList.get(0).getPermanent(game);
+        } else {
+            permanent = game.getPermanent(this.sourceId);
+        }
         if (permanent == null) {
+            discard();
             return false;
         }
         permanent.setName(target.getName());
@@ -107,9 +112,10 @@ public class CopyEffect extends ContinuousEffectImpl {
         for (String type: target.getSupertype()) {
             permanent.getSupertype().add(type);
         }
+
         permanent.removeAllAbilities(source.getSourceId(), game);
         for (Ability ability: target.getAbilities()) {
-             permanent.addAbility(ability, game);
+             permanent.addAbility(ability, getSourceId(), game, false); // no new Id so consumed replacement effects are known while new continuousEffects.apply happen.
         }
         permanent.getPower().setValue(target.getPower().getValue());
         permanent.getToughness().setValue(target.getToughness().getValue());
@@ -131,15 +137,7 @@ public class CopyEffect extends ContinuousEffectImpl {
         }
 
         permanent.setCopy(true);
-
         return true;
-    }
-
-    @Override
-    public boolean isInactive(Ability source, Game game) {
-        // The copy effect is added, if the copy takes place. If source left battlefield, the copy effect has cease to exist
-        Permanent permanent = game.getPermanent(this.sourceId);
-        return permanent == null || permanent.getZoneChangeCounter() != this.zoneChangeCounter;
     }
 
     @Override
@@ -166,6 +164,5 @@ public class CopyEffect extends ContinuousEffectImpl {
     public void setApplier(ApplyToPermanent applier) {
         this.applier = applier;
     }
-    
-    
+       
 }

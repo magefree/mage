@@ -46,6 +46,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import org.apache.log4j.Logger;
 
 /**
 *
@@ -116,7 +117,7 @@ class MasterBiomancerEntersBattlefieldEffect extends ReplacementEffectImpl {
             if (power > 0) {
                 creature.addCounters(CounterType.P1P1.createInstance(power), game);
             }
-            ContinuousEffect effect = new AddCardSubTypeTargetEffect("Mutant", Duration.WhileOnBattlefield);
+            ContinuousEffect effect = new AddCardSubTypeTargetEffect("Mutant", Duration.Custom);
             effect.setTargetPointer(new FixedTarget(creature.getId()));
             game.addEffect(effect, source);
         }

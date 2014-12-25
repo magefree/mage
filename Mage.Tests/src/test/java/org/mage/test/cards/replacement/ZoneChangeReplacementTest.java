@@ -136,6 +136,8 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
 
     @Test
     public void testHumilityDeactivatesReplacementEffectAbilities() {
+        // Protection from everything
+        // If Progenitus would be put into a graveyard from anywhere, reveal Progenitus and shuffle it into its owner's library instead.
         addCard(Zone.BATTLEFIELD, playerA, "Progenitus");
         // Enchantment  {2}{W}{W}
         // All creatures lose all abilities and are 1/1.

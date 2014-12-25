@@ -58,6 +58,7 @@ import mage.watchers.Watchers;
 
 import java.io.Serializable;
 import java.util.*;
+import org.apache.log4j.Logger;
 
 /**
 *
@@ -397,6 +398,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void applyEffects(Game game) {
+        Logger.getLogger(GameState.class).debug("Apply Effects turn: " + game.getTurnNum() + " - Step: " + (game.getStep() == null ? "null":game.getStep().getType().toString()));
         for (Player player: players.values()) {
             player.reset();
         }
@@ -508,6 +510,7 @@ public class GameState implements Serializable, Copyable<GameState> {
             eventsToHandle.addAll(simultaneousEvents);
             simultaneousEvents.clear();
             for (GameEvent event:eventsToHandle) {
+                Logger.getLogger(GameState.class).debug("Handle Simultanous events - type: " + event.getType().toString() + " sourceId " + event.getSourceId() + " targetId " + event.getTargetId());
                 this.handleEvent(event, game);
             }
         }
@@ -551,7 +554,12 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
     }
 
-    @Deprecated
+    /**
+     * Used for adding abilities that exist permanent on cards/permanents and are not
+     * only gained for a certain time (e.g. until end of turn).
+     * @param ability
+     * @param attachedTo
+     */
     public void addAbility(Ability ability, MageObject attachedTo) {
         if (ability instanceof StaticAbility) {
             for (Mode mode: ability.getModes().values()) {
@@ -567,6 +575,12 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
     }
 
+    /**
+     * Abilities that are applied to other objects or applie for a certain time span
+     * @param ability
+     * @param sourceId
+     * @param attachedTo
+     */
     public void addAbility(Ability ability, UUID sourceId, MageObject attachedTo) {
         if (ability instanceof StaticAbility) {
             for (Mode mode: ability.getModes().values()) {
@@ -678,18 +692,23 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     /**
-     * Removes Triggered abilities that were gained from sourceId
+     * Removes Triggered abilities that belong to sourceId
+     * This is used if a token leaves the battlefield
      *
      * @param sourceId
      */
-    public void resetTriggersForSourceId(UUID sourceId) {
-        List<String> keysToRemove = triggers.removeGainedAbilitiesForSource(sourceId);
-        for (String key : keysToRemove) {
-            triggers.remove(key);
-        }
+    public void removeTriggersOfSourceId(UUID sourceId) {
+        triggers.removeAbilitiesOfSource(sourceId);
     }
 
+
+    /**
+     * Called before applyEffects
+     */
     private void reset() {
+        // All gained abilities have to be removed to prevent adding it multiple times
+        triggers.removeAllGainedAbilities();
+        getContinuousEffects().removeAllTemporaryEffects();
         this.setLegendaryRuleActive(true);
         this.resetOtherAbilities();
     }
@@ -740,4 +759,11 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.legendaryRuleActive = legendaryRuleActive;
     }
 
+    /** 
+     * Used for diagbostic purposes
+     * @return 
+     */
+    public TriggeredAbilities getTriggers() {
+        return triggers;
+    }
 }

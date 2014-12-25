@@ -1,7 +1,15 @@
 package org.mage.test.cards.copy;
 
+import java.util.Iterator;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.ContinuousEffectsList;
+import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.NamePredicate;
+import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -90,4 +98,51 @@ public class CloneTest extends CardTestPlayerBase {
         assertPowerToughness(playerB, "Craw Wurm", 4, 4);
         assertPowerToughness(playerA, "Craw Wurm", 6, 4);
     }
+
+    // copy Nightmare test, check that the P/T setting effect ends
+    // if the clone leaves battlefield
+
+    @Test
+    public void testCopyNightmare() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 6);
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 1);
+        addCard(Zone.HAND, playerB, "Ranger's Guile");
+
+        addCard(Zone.HAND, playerA, "Clone");
+        addCard(Zone.HAND, playerA, "Disperse");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Nightmare", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
+        setChoice(playerA, "Nightmare");
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Ranger's Guile", "Nightmare");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Disperse", "Nightmare");
+
+        setStopAt(2, PhaseStep.UPKEEP);
+        execute();
+
+        assertPermanentCount(playerB, "Nightmare", 1);
+        assertPowerToughness(playerB, "Nightmare", 6, 6);
+        assertPermanentCount(playerA, "Nightmare", 0);
+        assertHandCount(playerA, "Disperse", 0);
+
+        FilterCard filter = new FilterCard();
+        filter.add(new NamePredicate("Clone"));
+        Card card = playerA.getHand().getCards(filter, currentGame).iterator().next();
+        if (card != null) {
+            Assert.assertEquals("Power has to be 0 because copy from nightmare P/T ability may no longer be applied", 0, card.getPower().getValue());
+        }
+
+        Logger.getLogger(CloneTest.class).debug("EXISTING CONTINUOUS EFFECTS:");
+        for (ContinuousEffectsList effectsList : currentGame.getContinuousEffects().allEffectsLists) {
+            Iterator it = effectsList.iterator();
+            while (it.hasNext()) {
+                 ContinuousEffect effect = (ContinuousEffect) it.next();
+                 Logger.getLogger(CloneTest.class).debug("- " + effect.toString());
+            }
+        }
+    }
+            
 }

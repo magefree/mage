@@ -211,7 +211,7 @@ public class Spell implements StackObject, Card {
                         }
                     }
                     if (game.getState().getZone(card.getId()) == Zone.STACK) {
-                        card.moveToZone(Zone.GRAVEYARD, ability.getId(), game, false);
+                        card.moveToZone(Zone.GRAVEYARD, ability.getSourceId(), game, false);
                     }
                 }
                 return result;
@@ -229,7 +229,7 @@ public class Spell implements StackObject, Card {
                     // Otherwise effects like evolve trigger from creature comes into play event
                     card.getCardType().remove(CardType.CREATURE);
                 }
-                if (card.putOntoBattlefield(game, fromZone, ability.getId(), controllerId)) {
+                if (card.putOntoBattlefield(game, fromZone, ability.getSourceId(), controllerId)) {
                     if (bestow) { 
                         // card will be copied during putOntoBattlefield, so the card of CardPermanent has to be changed
                         // TODO: Find a better way to prevent bestow creatures from being effected by creature affecting abilities
@@ -250,7 +250,7 @@ public class Spell implements StackObject, Card {
             // Aura has no legal target and its a bestow enchantment -> Add it to battlefield as creature
             if (this.getSpellAbility() instanceof BestowAbility) { 
                 updateOptionalCosts(0);
-                result = card.putOntoBattlefield(game, fromZone, ability.getId(), controllerId);
+                result = card.putOntoBattlefield(game, fromZone, ability.getSourceId(), controllerId);
                 return result;
             } else {
                 //20091005 - 608.2b
@@ -263,7 +263,7 @@ public class Spell implements StackObject, Card {
             if (isFaceDown()) {
                 card.setFaceDown(true);
             }
-            result = card.putOntoBattlefield(game, fromZone, ability.getId(), controllerId);
+            result = card.putOntoBattlefield(game, fromZone, ability.getSourceId(), controllerId);
             return result;
         }
     }

@@ -44,6 +44,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+import org.apache.log4j.Logger;
 
 /**
 *
@@ -129,6 +130,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
      * @param attachedTo - the object that gained the ability
      */
     public void add(TriggeredAbility ability, UUID sourceId, MageObject attachedTo) {
+        Logger.getLogger(TriggeredAbilities.class).debug("TRIGGER ADDED - sourceId " + sourceId);
         this.add(ability, attachedTo);
         List<UUID> uuidList = new LinkedList<>();
         uuidList.add(sourceId);
@@ -138,6 +140,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
     }
 
     public void add(TriggeredAbility ability, MageObject attachedTo) {
+        Logger.getLogger(TriggeredAbilities.class).debug("TRIGGER ADDED - id: " + ability.getId() + " source: " +attachedTo.getId() + " - " + attachedTo.getLogName() + " - " + ability.getRule());
         this.put(getKey(ability, attachedTo), ability);
     }
 
@@ -149,24 +152,25 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
         return key;
     }
 
-    /**
-     * Removes gained abilities by sourceId
-     *
-     * @param sourceId
-     * @return
-     */
-    public List<String> removeGainedAbilitiesForSource(UUID sourceId) {
+    public void removeAbilitiesOfSource(UUID sourceId) {
         List<String> keysToRemove = new ArrayList<>();
-
-        for (Map.Entry<String, List<UUID>> entry : sources.entrySet()) {
-            if (entry.getValue().contains(sourceId)) {
-                keysToRemove.add(entry.getKey());
+        for (String key: this.keySet()) {
+            if(key.endsWith(sourceId.toString())) {
+                keysToRemove.add(key);
             }
         }
-        for (String key: keysToRemove) {
-            sources.remove(key);
+        for(String key: keysToRemove) {
+            remove(key);
         }
-        return keysToRemove;
+    }
+
+    public void removeAllGainedAbilities() {
+        Logger.getLogger(TriggeredAbilities.class).debug("REMOVE all gained Triggered Abilities");
+
+        for(String key: sources.keySet()) {
+            this.remove(key);
+        }
+        sources.clear();
     }
 
     public TriggeredAbilities copy() {
