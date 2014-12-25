@@ -27,10 +27,10 @@
  */
 package mage.sets.commander2013;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Iterator;
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -42,7 +42,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -112,7 +111,7 @@ class BroodingSaurianControlEffect extends ContinuousEffectImpl {
                 FilterPermanent playerFilter = filter.copy();
                 playerFilter.add(new OwnerIdPredicate(playerId));
                 for (Permanent permanent :game.getBattlefield().getActivePermanents(playerFilter, playerId, game)) {
-                    objects.add(permanent.getId());
+                    affectedObjectList.add(new MageObjectReference(permanent));
                 }
             }
         }
@@ -120,19 +119,17 @@ class BroodingSaurianControlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Set<UUID> toRemove = new HashSet<UUID>();
-        for (UUID creatureId :objects) {
-            Permanent creature = game.getPermanent(creatureId);
+        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) { 
+            Permanent creature = it.next().getPermanent(game);
             if (creature != null) {
                 if (!creature.getControllerId().equals(creature.getOwnerId())) {
                     creature.changeControllerId(creature.getOwnerId(), game);
                 }
             } else {
-                toRemove.add(creatureId);
+                it.remove();
             }
         }
-        objects.removeAll(toRemove);
-        if (objects.isEmpty()) {
+        if (affectedObjectList.isEmpty()) {
             this.discard();
         }
         return true;

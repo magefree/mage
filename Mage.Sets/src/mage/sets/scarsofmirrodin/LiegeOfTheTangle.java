@@ -28,6 +28,7 @@
 
 package mage.sets.scarsofmirrodin;
 
+import java.util.Iterator;
 import java.util.UUID;
 
 import mage.constants.CardType;
@@ -38,6 +39,7 @@ import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -130,8 +132,8 @@ class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        for (UUID permId: objects) {
-            Permanent perm = game.getPermanent(permId);
+        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) { 
+            Permanent perm = it.next().getPermanent(game);
             if (perm != null) {
                 if (perm.getCounters().getCount(CounterType.AWAKENING) > 0) {
                     switch (layer) {
@@ -154,6 +156,8 @@ class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
                             break;
                     }
                 }
+            } else {
+                it.remove();
             }
         }
         return true;
@@ -169,7 +173,7 @@ class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
         super.init(source, game);
         if (this.affectedObjectsSet) {
             for (UUID permId: targetPointer.getTargets(game, source)) {
-                objects.add(permId);
+                affectedObjectList.add(new MageObjectReference(permId, game));
             }
         }
     }

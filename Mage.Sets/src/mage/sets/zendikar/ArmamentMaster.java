@@ -105,28 +105,13 @@ class ArmamentMasterEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        if (this.affectedObjectsSet) {
-            List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game);
-            for (Permanent perm : permanents) {
-                if (!perm.getId().equals(source.getSourceId())) {
-                    objects.add(perm.getId());
-                }
-            }
-        }
-    }
-
-    @Override
     public boolean apply(Game game, Ability source) {
         int count = countEquipment(game, source);
         List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game);
         for (Permanent perm : permanents) {
-            if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
-                if (!perm.getId().equals(source.getSourceId())) {
-                    perm.addPower(2 * count);
-                    perm.addToughness(2 * count);
-                }
+            if (!perm.getId().equals(source.getSourceId())) {
+                perm.addPower(2 * count);
+                perm.addToughness(2 * count);
             }
         }
         return true;

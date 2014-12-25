@@ -28,8 +28,10 @@
 
 package mage.abilities.effects.common.continious;
 
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -89,7 +91,7 @@ public class SetPowerToughnessAllEffect extends ContinuousEffectImpl {
         super.init(source, game);
         if (affectedObjectsSet) {
             for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                objects.add(perm.getId());
+                affectedObjectList.add(new MageObjectReference(perm));
             }
         }
         if (lockedInPT) {
@@ -103,11 +105,13 @@ public class SetPowerToughnessAllEffect extends ContinuousEffectImpl {
         int newPower = power.calculate(game, source, this);
         int newToughness = toughness.calculate(game, source, this);
         if (affectedObjectsSet) {
-            for (UUID permanentId :objects) {
-                Permanent permanent = game.getPermanent(permanentId);
+            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
+                Permanent permanent = it.next().getPermanent(game);
                 if (permanent != null) {
                     permanent.getPower().setValue(newPower);
                     permanent.getToughness().setValue(newToughness);
+                } else {
+                    it.remove(); // no longer on the battlefield, remove reference to object
                 }
             }
         } else {

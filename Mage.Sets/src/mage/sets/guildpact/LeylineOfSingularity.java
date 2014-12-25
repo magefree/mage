@@ -27,7 +27,9 @@
  */
 package mage.sets.guildpact;
 
+import java.util.Iterator;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SimpleStaticAbility;
@@ -96,31 +98,10 @@ class SetSupertypeAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        if (affectedObjectsSet) {
-            for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                objects.add(perm.getId());
-            }
-        }
-    }
-
-    @Override
     public boolean apply(Game game, Ability source) {
-        if (affectedObjectsSet) {
-            for (UUID permanentId :objects) {
-                Permanent permanent = game.getPermanent(permanentId);
-                if (permanent != null) {
-                    if (!permanent.getSupertype().contains("Legendary")) {
-                        permanent.getSupertype().add("Legendary");
-                    }
-                }
-            }
-        } else {
-            for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                if (!permanent.getSupertype().contains("Legendary")) {
-                    permanent.getSupertype().add("Legendary");
-                }
+        for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            if (!permanent.getSupertype().contains("Legendary")) {
+                permanent.getSupertype().add("Legendary");
             }
         }
         return true;

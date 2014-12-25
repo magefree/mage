@@ -29,8 +29,10 @@
 package mage.abilities.effects.common.continious;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -71,8 +73,8 @@ public class SwitchPowerToughnessAllEffect extends ContinuousEffectImpl {
         if (this.affectedObjectsSet) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                for (Permanent creature :game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                    this.objects.add(creature.getId());
+                for (Permanent perm :game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                    affectedObjectList.add(new MageObjectReference(perm));
                 }
             }            
         }
@@ -83,18 +85,16 @@ public class SwitchPowerToughnessAllEffect extends ContinuousEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             if (this.affectedObjectsSet) {
-                Set<UUID> toDelete = new HashSet<>();
-                for (UUID creatureId: objects) {
-                    Permanent creature = game.getPermanent(creatureId);
+                for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
+                    Permanent creature = it.next().getPermanent(game);
                     if (creature != null) {
                         int power = creature.getPower().getValue();
                         creature.getPower().setValue(creature.getToughness().getValue());
                         creature.getToughness().setValue(power);                                            
                     } else {
-                        toDelete.add(creatureId);                        
+                        it.remove();
                     }                    
-                }
-                this.objects.removeAll(toDelete);
+                }                
             } else {
                 for (Permanent creature :game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                     int power = creature.getPower().getValue();

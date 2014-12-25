@@ -28,6 +28,7 @@
 package mage.sets.limitedalpha;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
@@ -246,12 +247,12 @@ class AnimateDeadChangeAbilityEffect extends ContinuousEffectImpl implements Sou
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        getAffectedObjects().add(source.getSourceId());
+        affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = affectedObjectList.get(0).getPermanent(game);
         if (permanent != null) {
             Ability abilityToRemove = null;
             for (Ability ability: permanent.getAbilities()) {

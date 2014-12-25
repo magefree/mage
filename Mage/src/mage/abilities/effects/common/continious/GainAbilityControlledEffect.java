@@ -28,6 +28,8 @@
 
 package mage.abilities.effects.common.continious;
 
+import java.util.Iterator;
+import mage.MageObjectReference;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -89,7 +91,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
         if (this.affectedObjectsSet) {
             for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
-                    objects.add(perm.getId());
+                    affectedObjectList.add(new MageObjectReference(perm));
                 }
             }
         }
@@ -102,8 +104,19 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-            if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
+        if (this.affectedObjectsSet) {
+            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
+                Permanent perm = it.next().getPermanent(game);
+                if (perm != null) {
+                    for (Ability abilityToAdd : ability) {
+                        perm.addAbility(abilityToAdd, source.getSourceId(), game);
+                    }
+                } else {
+                    it.remove(); // no longer on the battlefield, remove reference to object
+                }
+            }
+        } else {
+            for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
                     for (Ability abilityToAdd : ability) {
                         perm.addAbility(abilityToAdd, source.getSourceId(), game);

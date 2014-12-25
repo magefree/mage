@@ -28,8 +28,10 @@
 package mage.sets.commander2013;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -105,7 +107,7 @@ class HomewardPathControlEffect extends ContinuousEffectImpl {
                 FilterPermanent playerFilter = filter.copy();
                 playerFilter.add(new OwnerIdPredicate(playerId));
                 for (Permanent permanent :game.getBattlefield().getActivePermanents(playerFilter, playerId, game)) {
-                    objects.add(permanent.getId());
+                    affectedObjectList.add(new MageObjectReference(permanent));
                 }
             }
         }
@@ -113,19 +115,17 @@ class HomewardPathControlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Set<UUID> toRemove = new HashSet<UUID>();
-        for (UUID creatureId :objects) {
-            Permanent creature = game.getPermanent(creatureId);
+        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) { 
+            Permanent creature = it.next().getPermanent(game);
             if (creature != null) {
                 if (!creature.getControllerId().equals(creature.getOwnerId())) {
                     creature.changeControllerId(creature.getOwnerId(), game);
                 }
             } else {
-                toRemove.add(creatureId);
+                it.remove();
             }
         }
-        objects.removeAll(toRemove);
-        if (objects.isEmpty()) {
+        if (affectedObjectList.isEmpty()) {
             this.discard();
         }
         return true;

@@ -128,4 +128,12 @@ public class MageObjectReference implements Comparable<MageObjectReference> {
         return null;
     }
 
+    public Card getCard(Game game) {
+        Card card = game.getPermanent(sourceId);
+        if (card != null && card.getZoneChangeCounter() == zoneChangeCounter) {
+            return card;
+        }
+        return null;
+    }
+
 }

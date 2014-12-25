@@ -28,6 +28,7 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -99,7 +100,7 @@ class PastInFlamesEffect extends ContinuousEffectImpl {
                 for (UUID cardId: player.getGraveyard()) {
                     Card card = game.getCard(cardId);
                     if (card.getCardType().contains(CardType.INSTANT) || card.getCardType().contains(CardType.SORCERY)) {
-                        objects.add(cardId);
+                        affectedObjectList.add(new MageObjectReference(card));
                     }
                 }
              }
@@ -111,7 +112,7 @@ class PastInFlamesEffect extends ContinuousEffectImpl {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             for (UUID cardId: player.getGraveyard()) {
-                if (objects.contains(cardId)) {
+                if (affectedObjectList.contains(new MageObjectReference(cardId, game))) {
                     Card card = game.getCard(cardId);
                     FlashbackAbility ability = null;
                     if (card.getCardType().contains(CardType.INSTANT)) {

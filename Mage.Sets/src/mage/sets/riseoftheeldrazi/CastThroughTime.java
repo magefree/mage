@@ -48,6 +48,8 @@ import mage.watchers.Watcher;
 
 import java.util.Iterator;
 import java.util.UUID;
+import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 
 /**
  * @author magenoxx_at_gmail.com
@@ -64,11 +66,9 @@ public class CastThroughTime extends CardImpl {
         super(ownerId, 55, "Cast Through Time", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}{U}");
         this.expansionSetCode = "ROE";
 
-        this.color.setBlue(true);
-
         // Instant and sorcery spells you control have rebound.
+        //  (Exile the spell as it resolves if you cast it from your hand. At the beginning of your next upkeep, you may cast that card from exile without paying its mana cost.)
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainReboundEffect()));
-
         this.addWatcher(new LeavesBattlefieldWatcher());
     }
 
@@ -86,7 +86,7 @@ class GainReboundEffect extends ContinuousEffectImpl {
 
     public GainReboundEffect() {
         super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        staticText = "Instant and sorcery spells you control have rebound";
+        staticText = "Instant and sorcery spells you control have rebound  <i>(Exile the spell as it resolves if you cast it from your hand. At the beginning of your next upkeep, you may cast that card from exile without paying its mana cost.)</i>";
     }
 
     public GainReboundEffect(final GainReboundEffect effect) {
@@ -104,27 +104,42 @@ class GainReboundEffect extends ContinuousEffectImpl {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
             for (Card card : player.getHand().getCards(CastThroughTime.filter, game)) {
-                boolean found = false;
-                for (Ability ability : card.getAbilities()) {
-                    if (ability instanceof ReboundAbility) {
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    Ability ability = new AttachedReboundAbility();
-                    card.addAbility(ability);
-                    ability.setControllerId(source.getControllerId());
-                    ability.setSourceId(card.getId());
-                    game.getState().addAbility(ability, source.getSourceId(), card);
-                }
+                addReboundAbility(card, source, game);
             }
-            
+            for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext();) {
+                StackObject stackObject = iterator.next();
+                if (stackObject instanceof Spell && stackObject.getControllerId().equals(source.getControllerId())) {
+                    Spell spell = (Spell) stackObject;
+                    Card card = spell.getCard();
+                    if (card != null) {
+                        addReboundAbility(card, source, game);
+                    }
+                    
+                }                
+            }
             return true;
         }
         return false;
     }
 
+    private void addReboundAbility(Card card, Ability source, Game game) {
+        if (CastThroughTime.filter.match(card, game)) {
+            boolean found = false;
+            for (Ability ability : card.getAbilities()) {
+                if (ability instanceof ReboundAbility) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                Ability ability = new AttachedReboundAbility();
+                card.addAbility(ability);
+                ability.setControllerId(source.getControllerId());
+                ability.setSourceId(card.getId());
+                game.getState().addAbility(ability, card);
+            }
+        }
+    }
 }
 
 class AttachedReboundAbility extends ReboundAbility {}

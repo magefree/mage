@@ -27,7 +27,9 @@
  */
 package mage.sets.tenth;
 
+import java.util.Iterator;
 import java.util.UUID;
+import mage.MageObjectReference;
 
 import mage.constants.*;
 import mage.abilities.Ability;
@@ -91,10 +93,10 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl {
         switch (layer) {
             case TypeChangingEffects_4:
                 if (sublayer == SubLayer.NA) {
-                    objects.clear();
+                    affectedObjectList.clear();
                     for(Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)){
                         if(permanent != null){
-                            objects.add(permanent.getId());
+                            affectedObjectList.add(new MageObjectReference(permanent));
                             permanent.getCardType().add(CardType.CREATURE);
                         }
                     }
@@ -103,9 +105,9 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl {
 
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    for(UUID uuid : objects){
-                        Permanent permanent = game.getPermanent(uuid);
-                        if(permanent != null){
+                    for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
+                        Permanent permanent = it.next().getPermanent(game);
+                        if (permanent != null){
                             int manaCost = permanent.getManaCost().convertedManaCost();
                             permanent.getPower().setValue(manaCost);
                             permanent.getToughness().setValue(manaCost);

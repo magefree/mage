@@ -28,6 +28,7 @@
 package mage.sets.khansoftarkir;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -98,8 +99,6 @@ public class SarkhanTheDragonspeaker extends CardImpl {
 
 class SarkhanTheDragonspeakerEffect extends ContinuousEffectImpl {
     
-    protected int zoneChangeCounter;
-
     SarkhanTheDragonspeakerEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "Until end of turn, {this} becomes a legendary 4/4 red Dragon creature with flying, indestructible, and haste.";
@@ -107,7 +106,6 @@ class SarkhanTheDragonspeakerEffect extends ContinuousEffectImpl {
 
     SarkhanTheDragonspeakerEffect(final SarkhanTheDragonspeakerEffect effect) {
         super(effect);
-        this.zoneChangeCounter = effect.zoneChangeCounter;
     }
 
     @Override
@@ -118,17 +116,13 @@ class SarkhanTheDragonspeakerEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        this.getAffectedObjects().add(source.getSourceId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            this.zoneChangeCounter = permanent.getZoneChangeCounter();
-        }
+        affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
     }
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && permanent.getZoneChangeCounter() == this.zoneChangeCounter) {
+        Permanent permanent = affectedObjectList.get(0).getPermanent(game);
+        if (permanent != null) {
             switch (layer) {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {

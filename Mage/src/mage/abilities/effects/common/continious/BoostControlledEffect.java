@@ -29,7 +29,7 @@
 package mage.abilities.effects.common.continious;
 
 import java.util.Iterator;
-import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -116,7 +116,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
         if (this.affectedObjectsSet) {
             for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
-                    objects.add(perm.getId());
+                    affectedObjectList.add(new MageObjectReference(perm));
                 }
             }
         }
@@ -129,9 +129,8 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         if (this.affectedObjectsSet) {
-            for (Iterator<UUID> it = objects.iterator(); it.hasNext();) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
-                UUID permanentId = it.next();
-                Permanent permanent = game.getPermanent(permanentId);
+            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) { 
+                Permanent permanent = it.next().getPermanent(game);
                 if (permanent != null) {
                     permanent.addPower(power.calculate(game, source, this));
                     permanent.addToughness(toughness.calculate(game, source, this));

@@ -100,11 +100,11 @@ class CrownOfConvergenceColorBoostEffect extends BoostAllEffect  {
     @Override
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
-        Card topCard = you.getLibrary().getFromTop(game);
-        if (you != null && topCard != null) {
-            for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                if (permanent.getColor().shares(topCard.getColor()) && !permanent.getColor().isColorless()) {
-                    if (!this.affectedObjectsSet || objects.contains(permanent.getId())) {
+        if (you != null) {
+            Card topCard = you.getLibrary().getFromTop(game);
+            if (topCard != null) {
+                for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                    if (permanent.getColor().shares(topCard.getColor()) && !permanent.getColor().isColorless()) {
                         permanent.addPower(power.calculate(game, source, this));
                         permanent.addToughness(toughness.calculate(game, source, this));
                     }

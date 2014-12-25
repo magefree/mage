@@ -27,6 +27,7 @@
  */
 package mage.sets.zendikar;
 
+import java.util.Iterator;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
@@ -40,6 +41,7 @@ import mage.target.TargetPlayer;
 
 import java.util.List;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.keyword.KickerAbility;
 
 /**
@@ -80,8 +82,8 @@ public class MarshCasualties extends CardImpl {
 
 class MarshCasualtiesEffect extends ContinuousEffectImpl {
 
-    private int power;
-    private int toughness;
+    private final int power;
+    private final int toughness;
 
     public MarshCasualtiesEffect(int power, int toughness) {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
@@ -104,20 +106,21 @@ class MarshCasualtiesEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (this.affectedObjectsSet) {
-            List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getFirstTarget(), game);
-            for (Permanent creature : creatures) {
-                objects.add(creature.getId());
+            for (Permanent creature : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getFirstTarget(), game)) {
+                affectedObjectList.add(new MageObjectReference(creature));
             }
         }
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getFirstTarget(), game);
-        for (Permanent creature : creatures) {
-            if (!this.affectedObjectsSet || objects.contains(creature.getId())) {
-                creature.addPower(power);
-                creature.addToughness(toughness);
+        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
+            Permanent permanent = it.next().getPermanent(game);
+            if (permanent != null) {
+                permanent.addPower(power);
+                permanent.addToughness(toughness);
+            } else {
+                it.remove();
             }
         }
         return true;

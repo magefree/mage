@@ -29,6 +29,7 @@
 package mage.abilities.effects.common.continious;
 
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
@@ -49,7 +50,6 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
 
     protected Token token;
     protected String type;
-    protected int zoneChangeCounter;
 
     public BecomesCreatureSourceEffect(Token token, String type, Duration duration) {
         super(duration, Outcome.BecomeCreature);
@@ -62,7 +62,6 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
         super(effect);
         this.token = effect.token.copy();
         this.type = effect.type;
-        this.zoneChangeCounter = effect.zoneChangeCounter;
     }
 
     @Override
@@ -73,17 +72,20 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        this.getAffectedObjects().add(source.getSourceId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            this.zoneChangeCounter = permanent.getZoneChangeCounter();
+        if (affectedObjectsSet) {
+            affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
         }
     }
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && permanent.getZoneChangeCounter() == this.zoneChangeCounter) {
+        Permanent permanent;
+        if (affectedObjectsSet) {
+            permanent = affectedObjectList.get(0).getPermanent(game);
+        } else {
+            permanent = game.getPermanent(source.getSourceId());
+        }
+        if (permanent != null) {
             switch (layer) {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {

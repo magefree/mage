@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continious;
 
+import java.util.Iterator;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -12,6 +13,7 @@ import mage.game.permanent.Permanent;
 
 import java.util.Set;
 import java.util.UUID;
+import mage.MageObjectReference;
 
 public class BoostOpponentsEffect extends ContinuousEffectImpl {
     protected int power;
@@ -49,7 +51,7 @@ public class BoostOpponentsEffect extends ContinuousEffectImpl {
             Set<UUID> opponents = game.getOpponents(source.getControllerId());
             for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 if (opponents.contains(perm.getControllerId())) {
-                    objects.add(perm.getId());
+                    affectedObjectList.add(new MageObjectReference(perm));
                 }
             }
         }
@@ -58,8 +60,20 @@ public class BoostOpponentsEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
-        for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
+        if (this.affectedObjectsSet) {
+            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
+                Permanent perm = it.next().getPermanent(game);
+                if (perm != null) {
+                    if (opponents.contains(perm.getControllerId())) {
+                        perm.addPower(power);
+                        perm.addToughness(toughness);
+                    }
+                } else {
+                    it.remove();
+                }
+            }
+        } else {
+            for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 if (opponents.contains(perm.getControllerId())) {
                     perm.addPower(power);
                     perm.addToughness(toughness);

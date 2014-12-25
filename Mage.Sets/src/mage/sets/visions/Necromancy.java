@@ -28,6 +28,7 @@
 package mage.sets.visions;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -313,12 +314,12 @@ class NecromancyChangeAbilityEffect extends ContinuousEffectImpl implements Sour
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        getAffectedObjects().add(source.getSourceId());
+        affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
     }
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = affectedObjectList.get(0).getPermanent(game);;
         if (permanent != null) {
             switch (layer) {
                 case TypeChangingEffects_4:

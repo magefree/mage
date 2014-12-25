@@ -29,7 +29,7 @@ package mage.sets.odyssey;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.VariableManaCost;
@@ -91,7 +91,6 @@ class TestamentOfFaithBecomesCreatureSourceEffect extends ContinuousEffectImpl i
         super(effect);
         this.token = effect.token.copy();
         this.type = effect.type;
-        this.zoneChangeCounter = effect.zoneChangeCounter;
     }
 
     @Override
@@ -102,17 +101,13 @@ class TestamentOfFaithBecomesCreatureSourceEffect extends ContinuousEffectImpl i
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        this.getAffectedObjects().add(source.getSourceId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            this.zoneChangeCounter = permanent.getZoneChangeCounter();
-        }
+        this.getAffectedObjects().add(new MageObjectReference(source.getSourceId(), game));
     }
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && permanent.getZoneChangeCounter() == this.zoneChangeCounter) {
+        Permanent permanent = affectedObjectList.get(0).getPermanent(game);
+        if (permanent != null) {
             switch (layer) {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
@@ -151,10 +146,8 @@ class TestamentOfFaithBecomesCreatureSourceEffect extends ContinuousEffectImpl i
                     if (sublayer == SubLayer.SetPT_7b) {
                         MageInt power = new MageInt(source.getManaCosts().getVariableCosts().get(0).getAmount());
                         MageInt toughness = new MageInt(source.getManaCosts().getVariableCosts().get(0).getAmount());
-                        if (power != null && toughness != null) {
-                            permanent.getPower().setValue(power.getValue());
-                            permanent.getToughness().setValue(toughness.getValue());
-                        }
+                        permanent.getPower().setValue(power.getValue());
+                        permanent.getToughness().setValue(toughness.getValue());
                     }
             }
             return true;

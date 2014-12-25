@@ -61,7 +61,6 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
 
     protected Map<UUID,Ability> turnFaceUpAbilityMap = new HashMap<>();
     protected FilterPermanent filter;
-    protected ArrayList<MageObjectReference> objectList = new ArrayList<>();
 
     public BecomesFaceDownCreatureAllEffect(FilterPermanent filter) {
         super(Duration.EndOfGame, Outcome.BecomeCreature);
@@ -71,7 +70,6 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
 
     public BecomesFaceDownCreatureAllEffect(final BecomesFaceDownCreatureAllEffect effect) {
         super(effect);
-        this.objectList.addAll(effect.objectList);
         for (Map.Entry<UUID,Ability> entry: effect.turnFaceUpAbilityMap.entrySet()) {
             this.turnFaceUpAbilityMap.put(entry.getKey(), entry.getValue());
         }
@@ -88,7 +86,7 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
         super.init(source, game);
         for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             if (!perm.isFaceDown()) {
-                objectList.add(new MageObjectReference(perm));
+                affectedObjectList.add(new MageObjectReference(perm));
                 perm.setFaceDown(true);
                 // check for Morph
                 Card card = game.getCard(perm.getId());
@@ -106,7 +104,7 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         boolean targetExists = false;
-        for (MageObjectReference mor: objectList) {
+        for (MageObjectReference mor: affectedObjectList) {
             Permanent permanent = mor.getPermanent(game);
             if (permanent != null && permanent.isFaceDown()) {
                 targetExists = true;

@@ -28,6 +28,7 @@
 package mage.sets.iceage;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -259,12 +260,12 @@ class DanceOfTheDeadChangeAbilityEffect extends ContinuousEffectImpl implements 
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        getAffectedObjects().add(source.getSourceId());
+        affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = affectedObjectList.get(0).getPermanent(game);;
         if (permanent != null) {
             Ability abilityToRemove = null;
             for (Ability ability: permanent.getAbilities()) {

@@ -33,6 +33,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
@@ -99,13 +100,13 @@ class CantBeBlockedByTokenEffect extends RestrictionEffect {
     public void init(Ability source, Game game) {
         affectedObjectsSet = true;
         for (Permanent perm: game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
-            objects.add(perm.getId());
+            affectedObjectList.add(new MageObjectReference(perm));
         }
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (objects.contains(permanent.getId())) {
+        if (affectedObjectList.contains(new MageObjectReference(permanent))) {
             return true;
         }
         return false;

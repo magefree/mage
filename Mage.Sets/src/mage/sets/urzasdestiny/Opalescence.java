@@ -27,7 +27,9 @@
  */
 package mage.sets.urzasdestiny;
 
+import java.util.Iterator;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -99,30 +101,24 @@ class OpalescenceEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        switch (layer) {
-            case TypeChangingEffects_4:
-                if (sublayer == SubLayer.NA) {
-                    objects.clear();
-                    for(Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)){
-                        objects.add(permanent.getId());
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            switch (layer) {
+                case TypeChangingEffects_4:
+                    if (sublayer == SubLayer.NA) {
                         if (!permanent.getCardType().contains(CardType.CREATURE)) {
                             permanent.getCardType().add(CardType.CREATURE);
                         }
                     }
-                }
-                break;
+                    break;
 
-            case PTChangingEffects_7:
-                if (sublayer == SubLayer.SetPT_7b) {
-                    for(UUID uuid : objects){
-                        Permanent permanent = game.getPermanent(uuid);
-                        if(permanent != null){
-                            int manaCost = permanent.getManaCost().convertedManaCost();
-                            permanent.getPower().setValue(manaCost);
-                            permanent.getToughness().setValue(manaCost);
-                        }
+                case PTChangingEffects_7:
+                    if (sublayer == SubLayer.SetPT_7b) {
+                        int manaCost = permanent.getManaCost().convertedManaCost();
+                        permanent.getPower().setValue(manaCost);
+                        permanent.getToughness().setValue(manaCost);
                     }
-                }
+            }
+
         }
         return true;
     }
