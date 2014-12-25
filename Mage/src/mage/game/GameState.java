@@ -398,7 +398,6 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void applyEffects(Game game) {
-        Logger.getLogger(GameState.class).debug("Apply Effects turn: " + game.getTurnNum() + " - Step: " + (game.getStep() == null ? "null":game.getStep().getType().toString()));
         for (Player player: players.values()) {
             player.reset();
         }
@@ -510,7 +509,6 @@ public class GameState implements Serializable, Copyable<GameState> {
             eventsToHandle.addAll(simultaneousEvents);
             simultaneousEvents.clear();
             for (GameEvent event:eventsToHandle) {
-                Logger.getLogger(GameState.class).debug("Handle Simultanous events - type: " + event.getType().toString() + " sourceId " + event.getSourceId() + " targetId " + event.getTargetId());
                 this.handleEvent(event, game);
             }
         }
@@ -760,7 +758,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     /** 
-     * Used for diagbostic purposes
+     * Onl used for diagnostic purposes of tests
      * @return 
      */
     public TriggeredAbilities getTriggers() {

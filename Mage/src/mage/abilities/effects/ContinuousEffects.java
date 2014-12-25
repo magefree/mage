@@ -344,7 +344,7 @@ public class ContinuousEffects implements Serializable {
                     if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                         if (!game.getScopeRelevant() || effect.hasSelfScope() || !event.getTargetId().equals(ability.getSourceId())) {
                             if (checkAbilityStillExists(ability, effect, event, game)) {
-                                if (effect.applies(event, ability, game)) {
+                                    if (effect.applies(event, ability, game)) {
                                     applicableAbilities.add(ability);
                                 }
                             }
@@ -381,7 +381,7 @@ public class ContinuousEffects implements Serializable {
     }
 
     private boolean checkAbilityStillExists(Ability ability, ContinuousEffect effect, GameEvent event, Game game) {
-        if (effect.getDuration().equals(Duration.OneUse)) { // needed for some special replacment effects (e.g. Undying)
+        if (effect.getDuration().equals(Duration.OneUse) || ability.getSourceId() == null) { // needed for some special replacment effects (e.g. Undying) or commander replacement effect
             return true;
         }
         MageObject object;
@@ -762,7 +762,7 @@ public class ContinuousEffects implements Serializable {
                     consumed.put(rEffect.getId(), set);
                 }
             }
-            // Must be called here so some 
+            // Must be called here for some effects to be able to work correctly
             game.applyEffects();
         } while (true);
         return caught;

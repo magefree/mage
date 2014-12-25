@@ -117,21 +117,18 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
                 return false;
             } else  if (effect.isDiscarded()) {
                 it.remove();
-            } else  if (game.getObject(ability.getSourceId()) == null) {
-                logger.debug("Ability without source object removed: " + ability.getSourceId() + " " + ability.getRule());
+            } else  if (ability.getSourceId() != null && game.getObject(ability.getSourceId()) == null) { // Commander effects have no sourceId
                 it.remove(); // if the related source object does no longer exist  the effect has to be removed
             } else {
                 switch(effect.getDuration()) {
                     case OneUse:
                         if (effect.isUsed()) {
-                            logger.debug("Ability one use removed: " + ability.getSourceId() + " " + ability.getRule());
                             it.remove();
                         }
                         break;
                     case Custom:
                     case UntilYourNextTurn:
                         if (effect.isInactive(ability , game)) {
-                               logger.debug("Ability custom removed: " + ability.getSourceId() + " " + ability.getRule());
                                it.remove();
                         }
                 }
