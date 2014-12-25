@@ -871,7 +871,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 if (playerView.isActive()) {
                     panelOptions = new HashMap<>();
                     panelOptions.put("your_turn", true);
-                    messageToDisplay = message + " <div style='font-size:11pt'>Your turn</div>";
+                    messageToDisplay = message + " <div style='font-size:11pt'>Your turn / " + gameView.getStep().toString() + "</div>";
                 }
                 // magenoxx: because of uncaught bug with saving state, rolling back and stack
                 // undo is allowed only for empty stack
