@@ -80,13 +80,13 @@ public class CopyEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (affectedObjectsSet) {
-            affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
+            affectedObjectList.add(new MageObjectReference(sourceId, game));
         }
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(this.sourceId);
+        Permanent permanent;
         if (affectedObjectsSet) {
             permanent = affectedObjectList.get(0).getPermanent(game);
         } else {
