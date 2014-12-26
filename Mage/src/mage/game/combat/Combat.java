@@ -314,26 +314,29 @@ public class Combat implements Serializable, Copyable<Combat> {
         Player attacker = game.getPlayer(attackerId);
         //20101001 - 509.1c
         this.retrieveMustBlockAttackerRequirements(attacker, game);
+        Player controller;
         for (UUID defenderId : getPlayerDefenders(game)) {
             Player defender = game.getPlayer(defenderId);
             if (defender != null) {
                 boolean choose = true;
                 if (blockController == null) {
-                    blockController = defender;
+                    controller = defender;
+                } else {
+                    controller = blockController;
                 }
                 while (choose) {
-                    blockController.selectBlockers(game, defenderId);
+                    controller.selectBlockers(game, defenderId);
                     if (game.isPaused() || game.gameOver(null)) {
                         return;
                     }
                     if (!this.checkBlockRestrictions(defender, game)) {
-                        if (blockController.isHuman()) { // only human player can decide to do the block in another way
+                        if (controller.isHuman()) { // only human player can decide to do the block in another way
                             continue;
                         }
                     }
-                    choose = !this.checkBlockRequirementsAfter(defender, blockController, game);
+                    choose = !this.checkBlockRequirementsAfter(defender, controller, game);
                     if (!choose) {
-                        choose = !this.checkBlockRestrictionsAfter(defender, blockController, game);
+                        choose = !this.checkBlockRestrictionsAfter(defender, controller, game);
                     }
                 }
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
