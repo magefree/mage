@@ -37,6 +37,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+import mage.target.Target;
 
 /**
  *
@@ -89,10 +90,17 @@ public class RegenerateTargetEffect  extends ReplacementEffectImpl {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
-        sb.append("Regenerate target ");
-        if ( mode != null ) {
-          sb.append(mode.getTargets().get(0).getTargetName());
+        sb.append("Regenerate ");
+        Target target = mode.getTargets().get(0);
+        if (target != null) {
+            if (!target.getTargetName().toLowerCase().startsWith("another")) {
+                sb.append("target ");
+            }
+            sb.append(target.getTargetName());
         }
         return sb.toString();
     }

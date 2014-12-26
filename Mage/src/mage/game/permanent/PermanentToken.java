@@ -29,13 +29,12 @@
 package mage.game.permanent;
 
 import java.util.UUID;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.Token;
-
 
 /**
  *
@@ -48,8 +47,10 @@ public class PermanentToken extends PermanentImpl {
     public PermanentToken(Token token, UUID controllerId, String expansionSetCode, Game game) {
         super(controllerId, controllerId, token.getName());
         this.expansionSetCode = expansionSetCode;
-        this.token = token;
-        this.copyFromToken(this.token, game, false); // needed to have e.g. subtypes for entersTheBattlefield replacement effects
+        this.token = token.copy();
+        this.token.getAbilities().newId(); // neccessary if token has ability like DevourAbility()
+        this.token.getAbilities().setSourceId(objectId);
+        this.copyFromToken(this.token, game, false); // needed to have at this time (e.g. for subtypes for entersTheBattlefield replacement effects)
     }
 
     public PermanentToken(final PermanentToken permanent) {
@@ -60,8 +61,7 @@ public class PermanentToken extends PermanentImpl {
 
     @Override
     public void reset(Game game) {
-        Token tokenCopy = token.copy();
-        copyFromToken(tokenCopy, game, true);
+        copyFromToken(token, game, true);
         super.reset(game);
     }
 
@@ -71,6 +71,7 @@ public class PermanentToken extends PermanentImpl {
         if (reset) {
             this.abilities.addAll(token.getAbilities());
         } else {
+            // first time -> create ContinuousEffects only once
             for (Ability ability : token.getAbilities()) {
                 this.addAbility(ability, game);
             }
