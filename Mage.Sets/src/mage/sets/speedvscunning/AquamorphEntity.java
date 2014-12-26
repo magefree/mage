@@ -25,17 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase2012;
+package mage.sets.speedvscunning;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
@@ -50,63 +49,79 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
-import mage.game.permanent.token.Token;
 import mage.players.Player;
 
 /**
  *
  * @author LevelX2
  */
-public class PrimalPlasma extends CardImpl {
+public class AquamorphEntity extends CardImpl {
 
-    public PrimalPlasma(UUID ownerId) {
-        super(ownerId, 23, "Primal Plasma", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "PC2";
-        this.subtype.add("Elemental");
+    public AquamorphEntity(UUID ownerId) {
+        super(ownerId, 54, "Aquamorph Entity", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
+        this.expansionSetCode = "DDN";
         this.subtype.add("Shapeshifter");
-
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        // As Primal Plasma enters the battlefield, it becomes your choice of a 3/3 creature, a 2/2 creature with flying, or a 1/6 creature with defender.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PrimalPlasmaReplacementEffect()));
+        // As Aquamorph Entity enters the battlefield or is turned face up, it becomes your choice of 5/1 or 1/5.
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new AquamorphEntityReplacementEffect());
+        ability.setWorksFaceDown(true);
+        this.addAbility(ability);
+
+
+        // Morph {2}{U}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{U}")));
     }
 
-    public PrimalPlasma(final PrimalPlasma card) {
+    public AquamorphEntity(final AquamorphEntity card) {
         super(card);
     }
 
     @Override
-    public PrimalPlasma copy() {
-        return new PrimalPlasma(this);
+    public AquamorphEntity copy() {
+        return new AquamorphEntity(this);
     }
 }
 
-class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
 
-    private final String choice33 = "a 3/3 creature";
-    private final String choice22 = "a 2/2 creature with flying";
-    private final String choice16 = "a 1/6 creature with defender";
+class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
 
-    public PrimalPlasmaReplacementEffect() {
+    private final String choice51 = "a 5/1 creature";
+    private final String choice15 = "a 1/5 creature";
+
+    public AquamorphEntityReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "As {this} enters the battlefield, it becomes your choice of a 3/3 creature, a 2/2 creature with flying, or a 1/6 creature with defender";
+        staticText = "as {this} enters the battlefield or is turned face up, it becomes your choice of 5/1 or 1/5";
     }
 
-    public PrimalPlasmaReplacementEffect(PrimalPlasmaReplacementEffect effect) {
+    public AquamorphEntityReplacementEffect(AquamorphEntityReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(EventType.ENTERS_THE_BATTLEFIELD);
+        switch(event.getType()) {
+            case ENTERS_THE_BATTLEFIELD:
+            case TURNFACEUP:
+                return true;
+            default:
+                return false;
+        }
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getSourceId())) {
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-            if (sourcePermanent != null && !sourcePermanent.isFaceDown()) {
+        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
+            if (event.getTargetId().equals(source.getSourceId())) {
+                Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+                if (sourcePermanent != null && !sourcePermanent.isFaceDown()) {
+                    return true;
+                }
+            }
+        }
+        if (event.getType().equals(EventType.TURNFACEUP)) {
+            if (event.getTargetId().equals(source.getSourceId())) {
                 return true;
             }
         }
@@ -124,9 +139,8 @@ class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
         if (permanent != null) {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage("Choose what the creature becomes to");
-            choice.getChoices().add(choice33);
-            choice.getChoices().add(choice22);
-            choice.getChoices().add(choice16);
+            choice.getChoices().add(choice51);
+            choice.getChoices().add(choice15);
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
                 while(!choice.isChosen()) {
@@ -143,37 +157,23 @@ class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
                 mageObject = ((PermanentToken) permanent).getToken();
             }
             switch (choice.getChoice()) {
-                case choice33:
-                    mageObject.getPower().setValue(3);
-                    mageObject.getToughness().setValue(3);
+                case choice51:
+                    mageObject.getPower().setValue(5);
+                    mageObject.getToughness().setValue(1);
                     break;
-                case choice22:
-                    mageObject.getPower().setValue(2);
-                    mageObject.getToughness().setValue(2);
-                    if (mageObject instanceof Card) {
-                        ((Card)mageObject).addAbility(FlyingAbility.getInstance());
-                    } else {
-                        ((Token)mageObject).addAbility(FlyingAbility.getInstance());
-                    }
-                    break;
-                case choice16:
+                case choice15:
                     mageObject.getPower().setValue(1);
-                    mageObject.getToughness().setValue(6);
-                    if (mageObject instanceof Card) {
-                        ((Card)mageObject).addAbility(DefenderAbility.getInstance());
-                    } else {
-                        ((Token)mageObject).addAbility(DefenderAbility.getInstance());
-                    }
+                    mageObject.getToughness().setValue(5);
                     break;
             }
         }
         return false;
-
+        
     }
 
     @Override
-    public PrimalPlasmaReplacementEffect copy() {
-        return new PrimalPlasmaReplacementEffect(this);
+    public AquamorphEntityReplacementEffect copy() {
+        return new AquamorphEntityReplacementEffect(this);
     }
 
 }

@@ -27,21 +27,30 @@
  */
 package mage.sets.fifthedition;
 
-import java.util.Set;
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.EntersBattlefieldEffect;
+import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
+import mage.game.permanent.PermanentToken;
+import mage.game.permanent.token.Token;
 import mage.players.Player;
 
 /**
@@ -59,7 +68,7 @@ public class PrimalClay extends CardImpl {
         this.toughness = new MageInt(0);
 
         // As Primal Clay enters the battlefield, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 Wall artifact creature with defender in addition to its other types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new PrimalClayEffect(), "As {this} enters the battlefield, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 Wall artifact creature with defender in addition to its other types")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PrimalPlasmaReplacementEffect()));
     }
 
     public PrimalClay(final PrimalClay card) {
@@ -72,87 +81,35 @@ public class PrimalClay extends CardImpl {
     }
 }
 
-class PrimalClayEffect extends ContinuousEffectImpl {
+class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
 
-    private final static String choice1 = "a 3/3 artifact creature";
-    private final static String choice2 = "a 2/2 artifact creature with flying";
-    private final static String choice3 = "a 1/6 Wall artifact creature with defender";
+    private final String choice33 = "a 3/3 creature";
+    private final String choice22 = "a 2/2 creature with flying";
+    private final String choice16 = "a 1/6 creature with defender";
 
-    String choice;
-
-    PrimalClayEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
+    public PrimalPlasmaReplacementEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        staticText = "As {this} enters the battlefield, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 Wall artifact creature with defender in addition to its other types";
     }
 
-    PrimalClayEffect(final PrimalClayEffect effect) {
+    public PrimalPlasmaReplacementEffect(PrimalPlasmaReplacementEffect effect) {
         super(effect);
-        this.choice = effect.choice;
     }
 
     @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (controller != null && permanent != null) {
-            ChoiceImpl primalClayChoice = new ChoiceImpl();
-            Set<String> choices =  primalClayChoice.getChoices();
-            choices.add(choice1);
-            choices.add(choice2);
-            choices.add(choice3);
-            primalClayChoice.setMessage("Choose for " + permanent.getLogName() + " to be");
-            while (!primalClayChoice.isChosen()) {
-                if (!controller.isInGame()) {
-                    discard();
-                    return;
-                }
-                controller.choose(outcome, primalClayChoice, game);
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType().equals(EventType.ENTERS_THE_BATTLEFIELD);
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getTargetId().equals(source.getSourceId())) {
+            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            if (sourcePermanent != null && !sourcePermanent.isFaceDown()) {
+                return true;
             }
-            this.choice = primalClayChoice.getChoice();
-            return;
         }
-        discard();
-    }
-
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
-            discard();
-            return false;
-        }
-        switch (layer) {
-            case PTChangingEffects_7:
-                if (sublayer.equals(SubLayer.SetPT_7b)) {
-                    switch (choice) {
-                        case choice1:
-                            permanent.getPower().setValue(3);
-                            permanent.getToughness().setValue(3);
-                            break;
-                        case choice2:
-                            permanent.getPower().setValue(2);
-                            permanent.getToughness().setValue(2);
-                            break;
-                        case choice3:
-                            permanent.getPower().setValue(1);
-                            permanent.getToughness().setValue(6);
-                            break;
-                    }
-                }
-                break;
-            case AbilityAddingRemovingEffects_6:
-                switch (choice) {
-                    case choice2:
-                        permanent.addAbility(FlyingAbility.getInstance(), source.getSourceId(), game);
-                        break;
-                    case choice3:
-                        permanent.addAbility(DefenderAbility.getInstance(), source.getSourceId(),  game);
-                        break;
-                }
-                break;
-        }
-        return true;
+        return false;
     }
 
     @Override
@@ -161,12 +118,61 @@ class PrimalClayEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.TypeChangingEffects_4;
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            Choice choice = new ChoiceImpl(true);
+            choice.setMessage("Choose what the creature becomes to");
+            choice.getChoices().add(choice33);
+            choice.getChoices().add(choice22);
+            choice.getChoices().add(choice16);
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null) {
+                while(!choice.isChosen()) {
+                    controller.choose(Outcome.Neutral, choice, game);
+                    if (!controller.isInGame()) {
+                        return false;
+                    }
+                }
+            }
+            MageObject mageObject;
+            if (permanent instanceof PermanentCard) {
+                mageObject = ((PermanentCard) permanent).getCard();
+            } else {
+                mageObject = ((PermanentToken) permanent).getToken();
+            }
+            switch (choice.getChoice()) {
+                case choice33:
+                    mageObject.getPower().setValue(3);
+                    mageObject.getToughness().setValue(3);
+                    break;
+                case choice22:
+                    mageObject.getPower().setValue(2);
+                    mageObject.getToughness().setValue(2);
+                    if (mageObject instanceof Card) {
+                        ((Card)mageObject).addAbility(FlyingAbility.getInstance());
+                    } else {
+                        ((Token)mageObject).addAbility(FlyingAbility.getInstance());
+                    }
+                    break;
+                case choice16:
+                    mageObject.getPower().setValue(1);
+                    mageObject.getToughness().setValue(6);
+                    if (mageObject instanceof Card) {
+                        ((Card)mageObject).addAbility(DefenderAbility.getInstance());
+                    } else {
+                        ((Token)mageObject).addAbility(DefenderAbility.getInstance());
+                    }
+                    break;
+            }
+        }
+        return false;
+
     }
 
     @Override
-    public PrimalClayEffect copy() {
-        return new PrimalClayEffect(this);
+    public PrimalPlasmaReplacementEffect copy() {
+        return new PrimalPlasmaReplacementEffect(this);
     }
+
 }
