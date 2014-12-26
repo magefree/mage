@@ -1719,14 +1719,13 @@ public abstract class GameImpl implements Game, Serializable {
         if (simulation) {
             return;
         }
-        String message = this.state.getTurn().getStepType().toString();
+        String message;
         if (this.canPlaySorcery(playerId)) {
-            message += " - play spells and abilities.";
+            message = "Play spells and abilities.";
         }
         else {
-            message +=  " - play instants and activated abilities.";
+            message =  "Play instants and activated abilities.";
         }
-
         playerQueryEventSource.select(playerId, message);
     }
 

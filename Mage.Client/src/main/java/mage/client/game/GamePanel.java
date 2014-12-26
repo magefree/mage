@@ -864,15 +864,8 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public void select(String message, GameView gameView, int messageId, Map<String, Serializable> options) {
         updateGame(gameView, options);
-        String messageToDisplay = message;
-        Map<String, Serializable> panelOptions = null;
         for (PlayerView playerView : gameView.getPlayers()) {
             if (playerView.getPlayerId().equals(playerId)) {
-                if (playerView.isActive()) {
-                    panelOptions = new HashMap<>();
-                    panelOptions.put("your_turn", true);
-                    messageToDisplay = message + " <div style='font-size:11pt'>Your turn / " + gameView.getStep().toString() + "</div>";
-                }
                 // magenoxx: because of uncaught bug with saving state, rolling back and stack
                 // undo is allowed only for empty stack
                 if (playerView.getStatesSavedSize() > 0 && gameView.getStack().size() == 0) {
@@ -880,7 +873,18 @@ public final class GamePanel extends javax.swing.JPanel {
                 }
                 break;
             }
+
         }
+        Map<String, Serializable> panelOptions = new HashMap<>();
+        panelOptions.put("your_turn", true);
+        String playerName;
+        if (gameView.getActivePlayerId().equals(playerId)) {
+            playerName = "Your turn";
+        } else {
+            playerName = gameView.getActivePlayerName();
+        }
+        String messageToDisplay = message + "<div style='font-size:11pt'>" + playerName +" / " + gameView.getStep().toString() + "</div>";
+
         this.feedbackPanel.getFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), panelOptions, messageId);
     }
 
