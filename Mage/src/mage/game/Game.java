@@ -131,6 +131,7 @@ public interface Game extends MageItem, Serializable {
     Combat getCombat();
     GameState getState();
     String getWinner();
+    void setDraw(UUID playerId);
     boolean isADraw();
     ContinuousEffects getContinuousEffects();
     GameStates getGameStates();

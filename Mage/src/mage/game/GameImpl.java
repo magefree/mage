@@ -2520,4 +2520,15 @@ public abstract class GameImpl implements Game, Serializable {
         return startLife;
     }
 
+    @Override
+    public void setDraw(UUID playerId) {
+        Player player = getPlayer(playerId);
+        if (player != null) {
+            for (UUID playerToSetId :player.getInRange()) {
+                Player playerToDraw = getPlayer(playerToSetId);
+                playerToDraw.lostForced(this);
+            }
+        }
+    }
+
 }

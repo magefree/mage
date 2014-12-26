@@ -104,6 +104,7 @@ class ChooseColorEffect extends OneShotEffect {
                 game.getState().setValue(source.getSourceId() + "_color", colorChoice.getColor());
                 permanent.addInfo("chosen color", "<font color = 'blue'>Chosen color: " + colorChoice.getColor().getDescription() + "</font>");
             }
+            return true;
         }
         return false;
     }

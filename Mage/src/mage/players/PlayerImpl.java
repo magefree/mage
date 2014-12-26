@@ -1854,20 +1854,25 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void lost(Game game) {
         if (canLose(game)) {
-            logger.debug(this.getName() + " has lost gameId: " + game.getId());
-            //20100423 - 603.9
-            if (!this.wins) {
-                this.loses = true;
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST, null, null, playerId));
-                game.informPlayers(this.getName()+ " has lost the game.");
-            } else {
-                logger.debug(this.getName() + " has already won - stop lost");
-            }
-            // for draw - first all players that have lost have to be set to lost
-            if (!hasLeft()) {
-                logger.debug("Game over playerId: " + playerId);
-                game.gameOver(playerId);
-            }
+            lostForced(game);
+        }
+    }
+    
+    @Override
+    public void lostForced(Game game) {
+        logger.debug(this.getName() + " has lost gameId: " + game.getId());
+        //20100423 - 603.9
+        if (!this.wins) {
+            this.loses = true;
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST, null, null, playerId));
+            game.informPlayers(this.getName()+ " has lost the game.");
+        } else {
+            logger.debug(this.getName() + " has already won - stop lost");
+        }
+        // for draw - first all players that have lost have to be set to lost
+        if (!hasLeft()) {
+            logger.debug("Game over playerId: " + playerId);
+            game.gameOver(playerId);
         }
     }
 

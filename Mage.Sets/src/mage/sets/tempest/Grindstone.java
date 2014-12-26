@@ -53,7 +53,7 @@ public class Grindstone extends CardImpl {
         super(ownerId, 280, "Grindstone", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "TMP";
 
-        // {3}, {tap}: Target player puts the top two cards of his or her library into his or her graveyard. If both cards share a color, repeat this process.
+        // {3}, {T}: Target player puts the top two cards of his or her library into his or her graveyard. If both cards share a color, repeat this process.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrindstoneEffect(), new ManaCostsImpl("{3}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
@@ -93,7 +93,18 @@ class GrindstoneEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         boolean colorShared;
         if (targetPlayer != null) {
+            int possibleIterations = targetPlayer.getLibrary().size() / 2;
+            int iteration = 0;
             do {
+                iteration++;
+                if (iteration > possibleIterations + 20) {
+                    // 801.16. If the game somehow enters a "loop" of mandatory actions, repeating a sequence of events
+                    // with no way to stop, the game is a draw for each player who controls an object that's involved in
+                    // that loop, as well as for each player within the range of influence of any of those players. They
+                    // leave the game. All remaining players continue to play the game.
+                    game.setDraw(source.getControllerId());
+                    return true;
+                }
                 colorShared = false;
                 Card card1 = targetPlayer.getLibrary().removeFromTop(game);
                 if (card1 != null) {
@@ -105,9 +116,7 @@ class GrindstoneEffect extends OneShotEffect {
                             colorShared = card1.getColor().shares(card2.getColor());
                         }
                     }                    
-                }
-
-                
+                }                
             } while (colorShared && targetPlayer.isInGame());
             return true;
         }

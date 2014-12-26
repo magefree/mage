@@ -260,6 +260,7 @@ public interface Player extends MageItem, Copyable<Player> {
     void discardToMax(Game game);
     boolean discard(Card card, Ability source, Game game);
     void lost(Game game);
+    void lostForced(Game game);
     void won(Game game);
     void leave();
     void concede(Game game);
