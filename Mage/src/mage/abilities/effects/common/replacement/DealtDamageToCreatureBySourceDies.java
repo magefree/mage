@@ -85,14 +85,17 @@ public class DealtDamageToCreatureBySourceDies extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(EventType.ZONE_CHANGE)) {
-            ZoneChangeEvent  zce = (ZoneChangeEvent) event;
-            if (zce.isDiesEvent()) {
-                DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
-                if (watcher != null) {
-                    return watcher.wasDamaged(zce.getTarget());
-                }
+        ZoneChangeEvent  zce = (ZoneChangeEvent) event;
+        if (zce.isDiesEvent()) {
+            DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
+            if (watcher != null) {
+                return watcher.wasDamaged(zce.getTarget());
             }
         }
         return false;

@@ -114,14 +114,17 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
         }
         return false;
     }
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && (
-                ((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD ||
+        if (((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD ||
                 ((ZoneChangeEvent)event).getToZone() == Zone.EXILED ||
                 (alsoLibrary && ((ZoneChangeEvent)event).getToZone() == Zone.LIBRARY))
-                ) {
+            {
             if (commanderId != null) {
                 if (((ZoneChangeEvent)event).getFromZone().equals(Zone.STACK)) {
                     Spell spell = game.getStack().getSpell(event.getTargetId());

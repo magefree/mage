@@ -324,14 +324,17 @@ public class ContinuousEffects implements Serializable {
      */
     private HashMap<ReplacementEffect, HashSet<Ability>> getApplicableReplacementEffects(GameEvent event, Game game) {        
         HashMap<ReplacementEffect, HashSet<Ability>> replaceEffects = new HashMap<>();
-        if (planeswalkerRedirectionEffect.applies(event, null, game)) {
+        if (planeswalkerRedirectionEffect.checksEventType(event, game) && planeswalkerRedirectionEffect.applies(event, null, game)) {
             replaceEffects.put(planeswalkerRedirectionEffect, null);
         }
-        if(auraReplacementEffect.applies(event, null, game)){
+        if(auraReplacementEffect.checksEventType(event, game) && auraReplacementEffect.applies(event, null, game)){
             replaceEffects.put(auraReplacementEffect, null);
         }
         //get all applicable transient Replacement effects
         for (ReplacementEffect effect: replacementEffects) {
+            if (!effect.checksEventType(event, game)) {
+                continue;
+            }
             if (event.getAppliedEffects() != null && event.getAppliedEffects().contains(effect.getId())) {
                 // Effect already applied to this event, ignore it
                 // TODO: Handle also gained effect that are connected to different abilities.
@@ -357,6 +360,9 @@ public class ContinuousEffects implements Serializable {
             }
         }
         for (PreventionEffect effect: preventionEffects) {
+            if (!effect.checksEventType(event, game)) {
+                continue;
+            }
             if (event.getAppliedEffects() != null && event.getAppliedEffects().contains(effect.getId())) {
                 // Effect already applied to this event, ignore it
                 // TODO: Handle also gained effect that are connected to different abilities.

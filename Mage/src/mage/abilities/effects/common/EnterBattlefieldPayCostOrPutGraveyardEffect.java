@@ -95,8 +95,13 @@ public class EnterBattlefieldPayCostOrPutGraveyardEffect extends ReplacementEffe
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && source.getSourceId().equals(event.getTargetId())) {
+        if (source.getSourceId().equals(event.getTargetId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if(zEvent.getToZone().equals(Zone.BATTLEFIELD)){
                 return true;

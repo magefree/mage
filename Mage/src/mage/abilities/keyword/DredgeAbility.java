@@ -36,6 +36,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
 /**
@@ -110,7 +111,13 @@ class DredgeEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DRAW_CARD;
+    }
+
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType().equals(GameEvent.EventType.DRAW_CARD) && event.getPlayerId().equals(source.getControllerId());
+        return event.getPlayerId().equals(source.getControllerId());
     }
 }

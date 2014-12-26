@@ -88,13 +88,15 @@ class DoublingSeasonTokenEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType().equals(GameEvent.EventType.CREATE_TOKEN);
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        switch (event.getType()) {
-            case CREATE_TOKEN:
-                StackObject spell = game.getStack().getStackObject(event.getSourceId());
-                if (spell != null && spell.getControllerId().equals(source.getControllerId())) {
-                    return true;
-                }
+        StackObject spell = game.getStack().getStackObject(event.getSourceId());
+        if (spell != null && spell.getControllerId().equals(source.getControllerId())) {
+            return true;
         }
         return false;
     }

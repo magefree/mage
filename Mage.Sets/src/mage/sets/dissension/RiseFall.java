@@ -64,7 +64,7 @@ public class RiseFall extends SplitCard {
         // Rise
         // Return target creature card from a graveyard and target creature on the battlefield to their owners' hands.
         getLeftHalfCard().getSpellAbility().addEffect(new RiseEffect());
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard()));
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
         getLeftHalfCard().getColor().setBlue(true);
         getLeftHalfCard().getColor().setBlack(true);
@@ -151,7 +151,7 @@ class FallEffect extends OneShotEffect {
                     if (targetPlayer.getHand().size() > 1) {
                         do {
                             card = targetPlayer.getHand().getRandom(game);
-                        } while (!cards.contains(card.getId()));
+                        } while (cards.contains(card.getId()));
                         cards.add(card);
                     }
                     targetPlayer.revealCards(sourceObject.getLogName(), cards, game);

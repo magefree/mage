@@ -28,9 +28,12 @@
 
 package mage.abilities.effects;
 
+import mage.abilities.Ability;
 import mage.constants.Duration;
 import mage.constants.EffectType;
 import mage.constants.Outcome;
+import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  *
@@ -70,4 +73,10 @@ public abstract class ReplacementEffectImpl extends ContinuousEffectImpl impleme
     public boolean hasSelfScope() {
         return selfScope;
     }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return true;
+    }
+
 }

@@ -136,6 +136,11 @@ class UnearthLeavesBattlefieldEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return EventType.ZONE_CHANGE.equals(event.getType());
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;

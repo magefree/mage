@@ -179,8 +179,13 @@ class BuybackEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId())) {
+        if (event.getTargetId().equals(source.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
             if (zEvent.getFromZone() == Zone.STACK ) {
                 return true;

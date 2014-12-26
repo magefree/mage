@@ -107,9 +107,13 @@ public class DevourEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
-         && event.getTargetId().equals(source.getSourceId())) {
+        if (event.getTargetId().equals(source.getSourceId())) {
                 Permanent sourcePermanent = game.getPermanent(source.getSourceId());
                 game.getState().setValue(sourcePermanent.getId().toString() + "devoured", null);
                 return true;

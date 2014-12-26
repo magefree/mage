@@ -104,10 +104,21 @@ class PalisadeGiantReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        switch(event.getType()) {
+            case DAMAGED_CREATURE:
+            case DAMAGED_PLAYER:
+            case DAMAGE_PLANESWALKER:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGE_PLAYER && event.getPlayerId().equals(source.getControllerId()))
         {
-
            return true;
         }
         if (event.getType() == GameEvent.EventType.DAMAGE_CREATURE || event.getType() == GameEvent.EventType.DAMAGE_PLANESWALKER)

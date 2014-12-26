@@ -96,12 +96,18 @@ class PersistReplacementEffect extends ReplacementEffectImpl {
         used = true;
         return false;
     }
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(source.getSourceId())) {
+        if (event.getTargetId().equals(source.getSourceId()))
+        {
             Object fixedTarget = game.getState().getValue(new StringBuilder("persist").append(source.getSourceId()).toString());
-            if (fixedTarget instanceof FixedTarget && ((FixedTarget) fixedTarget).getFirst(game, source).equals(source.getSourceId())) {
+            if (fixedTarget instanceof FixedTarget && ((FixedTarget) fixedTarget).getFirst(game, source).equals(source.getSourceId()))
+            {
                 return true;
             }
         }
