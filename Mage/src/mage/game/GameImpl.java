@@ -1292,11 +1292,10 @@ public abstract class GameImpl implements Game, Serializable {
         }
         applier.apply(this, permanent);
 
-        Ability newAbility = source.copy();
-
         CopyEffect newEffect = new CopyEffect(duration, permanent, copyToPermanent.getId());
         newEffect.newId();
         newEffect.setApplier(applier);
+        Ability newAbility = source.copy();
         newEffect.init(newAbility, this);
         
         // handle copies of copies
