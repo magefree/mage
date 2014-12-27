@@ -60,10 +60,6 @@ public class PolymorphousRush extends CardImpl {
         // Strive - Polymorphous Rush costs {1}{U} more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{1}{U}"));
         // Choose a creature on the battlefield. Any number of target creatures you control each become a copy of that creature until end of turn.
-        Target target = new TargetCreaturePermanent(new FilterCreaturePermanent(""));
-        target.setNotTarget(true);
-        target.setTargetName("a creature on the battlefield (creature to copy)");
-        this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
         this.getSpellAbility().addEffect(new PolymorphousRushCopyEffect());
 
@@ -99,12 +95,17 @@ class PolymorphousRushCopyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent copyFromCreature = game.getPermanentOrLKIBattlefield(source.getFirstTarget());
-            if (copyFromCreature != null) {
-                for (UUID copyToId: source.getTargets().get(1).getTargets()) {
-                    Permanent copyToCreature = game.getPermanent(copyToId);
-                    if (copyToCreature != null) {
-                        game.copyPermanent(Duration.EndOfTurn, copyFromCreature, copyToCreature, source, new EmptyApplyToPermanent());
+            Target target = new TargetCreaturePermanent(new FilterCreaturePermanent(""));
+            target.setNotTarget(true);
+            target.setTargetName("a creature on the battlefield (creature to copy)");
+            if (target.canChoose(source.getId(), controller.getId(), game) && controller.chooseTarget(outcome, target, source, game)) {
+                Permanent copyFromCreature = game.getPermanent(target.getFirstTarget());
+                if (copyFromCreature != null) {
+                    for (UUID copyToId: getTargetPointer().getTargets(game, source)) {
+                        Permanent copyToCreature = game.getPermanent(copyToId);
+                        if (copyToCreature != null) {
+                            game.copyPermanent(Duration.EndOfTurn, copyFromCreature, copyToCreature, source, new EmptyApplyToPermanent());
+                        }
                     }
                 }
             }
