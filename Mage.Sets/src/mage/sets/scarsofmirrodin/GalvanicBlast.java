@@ -42,17 +42,18 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class GalvanicBlast extends CardImpl {
 
-    private final String effectText = "Metalcraft - Galvanic Blast deals 4 damage to that creature or player instead if you control three or more artifacts";
+    private final String effectText = "{this} deals 2 damage to target creature or player.<br>Metalcraft - {this}t deals 4 damage to that creature or player instead if you control three or more artifacts";
 
     public GalvanicBlast(UUID ownerId) {
         super(ownerId, 91, "Galvanic Blast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "SOM";
         this.color.setRed(true);
 
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(2));
 
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageTargetEffect(2), MetalcraftCondition.getInstance(), effectText));
+        // Galvanic Blast deals 2 damage to target creature or player.
+        // Metalcraft - Galvanic Blast deals 4 damage to that creature or player instead if you control three or more artifacts.
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageTargetEffect(4), new DamageTargetEffect(2), MetalcraftCondition.getInstance(), effectText));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
     public GalvanicBlast(final GalvanicBlast card) {
