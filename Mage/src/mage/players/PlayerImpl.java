@@ -225,6 +225,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     // indicates that a sourceId will be cast without paying mana
     protected UUID castSourceIdWithoutMana;
+    // indicates that the player is in mana payment phase
+    protected boolean payManaMode = false;
 
     protected UserData userData;
 
@@ -321,6 +323,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.reachedNextTurnAfterLeaving = player.reachedNextTurnAfterLeaving;
 
         this.castSourceIdWithoutMana = player.castSourceIdWithoutMana;
+        this.payManaMode = player.payManaMode;
     }
 
     @Override
@@ -434,6 +437,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canGainLife = true;
         this.canLoseLife = true;
         this.topCardRevealed = false;
+        this.payManaMode = false;
         this.setLife(game.getLife(), game);
         this.setReachedNextTurnAfterLeaving(false);
         game.getState().getWatchers().add(new BloodthirstWatcher(playerId));
@@ -902,6 +906,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public UUID getCastSourceIdWithoutMana() {
         return castSourceIdWithoutMana;
+    }
+
+    @Override
+    public boolean isInPayManaMode() {
+        return payManaMode;
     }
 
 

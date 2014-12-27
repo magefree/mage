@@ -1,4 +1,4 @@
-/*
+    /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
@@ -39,6 +39,8 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
@@ -80,6 +82,15 @@ class LionsEyeDiamondAbility extends ManaAbility {
 
     public LionsEyeDiamondAbility(final LionsEyeDiamondAbility ability) {
         super(ability);
+    }
+
+    @Override
+    public boolean canActivate(UUID playerId, Game game) {
+        Player player = game.getPlayer(playerId);
+        if (player != null && !player.isInPayManaMode()) {
+            return super.canActivate(playerId, game);
+        }
+        return false;
     }
 
     @Override

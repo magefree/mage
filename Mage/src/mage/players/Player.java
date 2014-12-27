@@ -529,4 +529,6 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean isRequestToShowHandCardsAllowed();
     Set<UUID> getUsersAllowedToSeeHandCards();
 
+    boolean isInPayManaMode();
+
 }
