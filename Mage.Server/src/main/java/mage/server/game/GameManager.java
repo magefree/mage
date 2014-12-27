@@ -163,13 +163,6 @@ public class GameManager {
         return false;
     }
 
-    public void timeout(UUID gameId, UUID userId) {
-        GameController gameController = gameControllers.get(gameId);
-        if (gameController != null) {
-            gameController.timeout(userId);
-        }
-    }
-
     public void removeGame(UUID gameId) {
         GameController gameController = gameControllers.get(gameId);
         if (gameController != null) {

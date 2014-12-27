@@ -47,6 +47,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.zip.GZIPOutputStream;
 import mage.MageException;
@@ -100,6 +101,9 @@ public class GameController implements GameCallback {
 
     protected ScheduledExecutorService joinWaitingExecutor = Executors.newSingleThreadScheduledExecutor();
 
+    private ScheduledFuture<?> futureTimeout;
+    protected static ScheduledExecutorService timeoutIdleExecutor = ThreadExecutor.getInstance().getTimeoutIdleExecutor();
+
     private ConcurrentHashMap<UUID, GameSessionPlayer> gameSessions = new ConcurrentHashMap<>();
     private ConcurrentHashMap<UUID, GameSessionWatcher> watchers = new ConcurrentHashMap<>();
     private ConcurrentHashMap<UUID, PriorityTimer> timers = new ConcurrentHashMap<>();
@@ -123,7 +127,7 @@ public class GameController implements GameCallback {
         this.choosingPlayerId = choosingPlayerId;
         for (Player player: game.getPlayers().values()) {
             if (!player.isHuman()) {
-                useTimeout = false; // no timeout because of beeing idle if playing against AI
+                useTimeout = false; // no timeout for AI players because of beeing idle
                 break;
             }
         }
@@ -132,6 +136,10 @@ public class GameController implements GameCallback {
     }
 
     public void cleanUp() {
+        cancelTimeout();
+        for (GameSessionPlayer gameSessionPlayer: gameSessions.values()) {
+            gameSessionPlayer.CleanUp();
+        }
         ChatManager.getInstance().destroyChatSession(chatId);
     }
 
@@ -318,7 +326,7 @@ public class GameController implements GameCallback {
         GameSessionPlayer gameSession = gameSessions.get(playerId);
         String joinType;
         if (gameSession == null) {
-            gameSession = new GameSessionPlayer(game, userId, playerId, useTimeout);
+            gameSession = new GameSessionPlayer(game, userId, playerId);
             gameSessions.put(playerId, gameSession);
             gameSession.setUserData(user.getUserData());
             joinType = "joined";
@@ -568,13 +576,14 @@ public class GameController implements GameCallback {
         }
     }
 
-    public void timeout(UUID userId) {
-        if (userPlayerMap.containsKey(userId)) {
-            String sb = game.getPlayer(userPlayerMap.get(userId)).getName() +
+    public void idleTimeout(UUID playerId) {
+        Player player = game.getPlayer(playerId);
+        if (player != null) {
+            String sb = player.getName() +
                     " has timed out (player had priority and was not active for " +
                     ConfigSettings.getInstance().getMaxSecondsIdle() + " seconds ) - Auto concede.";
             ChatManager.getInstance().broadcast(chatId, "", sb, MessageColor.BLACK, true, MessageType.STATUS);
-            game.idleTimeout(getPlayerId(userId));
+            game.idleTimeout(playerId);
         }
     }
 
@@ -600,7 +609,7 @@ public class GameController implements GameCallback {
     public void sendPlayerUUID(UUID userId, final UUID data) {
         sendMessage(userId, new Command() {
             @Override
-            public void execute(UUID playerId) {
+            public void execute(UUID playerId) {                
                 getGameSession(playerId).sendPlayerUUID(data);
             }
         });
@@ -670,16 +679,13 @@ public class GameController implements GameCallback {
                 }
             }
         }
-        // TODO: inform watchers
-//        for (final GameWatcher gameWatcher: watchers.values()) {
-//                gameWatcher.update();
-//        }
+        // TODO: inform watchers about game end and who won
     }
 
     private synchronized void ask(UUID playerId, final String question) throws MageException {
         perform(playerId, new Command() {
             @Override
-            public void execute(UUID playerId) {
+            public void execute(UUID playerId) {                
                 getGameSession(playerId).ask(question);
             }
         });
@@ -893,13 +899,20 @@ public class GameController implements GameCallback {
         SystemUtil.addCardsForTesting(game);
     }
 
+    /**
+     * Performas a request to a player
+     * @param playerId
+     * @param command
+     * @throws MageException
+     */
     private void perform(UUID playerId, Command command) throws MageException {
         perform(playerId, command, true);
     }
 
     private void perform(UUID playerId, Command command, boolean informOthers) throws MageException {
-        if (game.getPlayer(playerId).isGameUnderControl()) {
+        if (game.getPlayer(playerId).isGameUnderControl()) { // is the player controlling it's own turn
             if (gameSessions.containsKey(playerId)) {
+                setupTimeout(playerId);
                 command.execute(playerId);
             }
             if (informOthers) {
@@ -909,6 +922,7 @@ public class GameController implements GameCallback {
             List<UUID> players = Splitter.split(game, playerId);
             for (UUID uuid : players) {
                 if (gameSessions.containsKey(uuid)) {
+                    setupTimeout(uuid);
                     command.execute(uuid);
                 }
             }
@@ -918,6 +932,11 @@ public class GameController implements GameCallback {
         }
     }
 
+    /**
+     * A player has send an answer / request
+     * @param userId
+     * @param command
+     */
     private void sendMessage(UUID userId, Command command) {
         final UUID playerId = userPlayerMap.get(userId);
         // player has game under control (is not cotrolled by other player)
@@ -926,6 +945,7 @@ public class GameController implements GameCallback {
                 // then execute only your action
                 if (game.getPriorityPlayerId() == null || game.getPriorityPlayerId().equals(playerId)) {
                     if (gameSessions.containsKey(playerId)) {
+                        cancelTimeout();
                         command.execute(playerId);
                     }
                 } else {
@@ -934,6 +954,7 @@ public class GameController implements GameCallback {
                     if (player != null) {
                         for (UUID controlled : player.getPlayersUnderYourControl()) {
                             if (gameSessions.containsKey(controlled) && game.getPriorityPlayerId().equals(controlled)) {
+                                cancelTimeout();
                                 command.execute(controlled);
                             }
                         }
@@ -941,8 +962,32 @@ public class GameController implements GameCallback {
                     // else player has no priority to do something, so ignore the command
                     // e.g. you click at one of your cards, but you can't play something at that moment
                 }
+
         } else {
             // ignore - no control over the turn
+        }
+    }
+
+    private synchronized void setupTimeout(final UUID playerId) {
+        if (!useTimeout) {
+            return;
+        }
+        cancelTimeout();
+        futureTimeout = timeoutIdleExecutor.schedule(
+            new Runnable() {
+                @Override
+                public void run() {
+                    idleTimeout(playerId);
+                }
+            },
+            Main.isTestMode() ? 3600 :ConfigSettings.getInstance().getMaxSecondsIdle(),
+            TimeUnit.SECONDS
+        );
+    }
+
+    private synchronized void cancelTimeout() {
+        if (futureTimeout != null) {
+            futureTimeout.cancel(false);
         }
     }
 

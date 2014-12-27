@@ -37,9 +37,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 import mage.cards.Cards;
 import mage.choices.Choice;
 import mage.constants.ManaType;
@@ -49,10 +46,8 @@ import mage.game.Table;
 import mage.interfaces.callback.ClientCallback;
 import mage.players.Player;
 import mage.players.net.UserData;
-import mage.server.Main;
 import mage.server.User;
 import mage.server.UserManager;
-import mage.server.util.ConfigSettings;
 import mage.server.util.ThreadExecutor;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
@@ -72,23 +67,23 @@ public class GameSessionPlayer extends GameSessionWatcher {
     private static final Logger logger = Logger.getLogger(GameSessionPlayer.class);
 
     private final UUID playerId;
-    private final boolean useTimeout;
 
-    private ScheduledFuture<?> futureTimeout;
-    protected static ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
     private static final ExecutorService callExecutor = ThreadExecutor.getInstance().getCallExecutor();
 
     private UserData userData;
 
-    public GameSessionPlayer(Game game, UUID userId, UUID playerId, boolean useTimeout) {
+    public GameSessionPlayer(Game game, UUID userId, UUID playerId) {
         super(userId, game, true);
         this.playerId = playerId;
-        this.useTimeout = useTimeout;
+    }
+
+    @Override
+    public void CleanUp() {
+        super.CleanUp();
     }
 
     public void ask(final String question)  {
         if (!killed) {
-            setupTimeout();
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
                 user.fireCallback(new ClientCallback("gameAsk", game.getId(), new GameClientMessage(getGameView(), question)));
@@ -98,7 +93,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     public void target(final String question, final CardsView cardView, final Set<UUID> targets, final boolean required, final Map<String, Serializable> options) {
         if (!killed) {
-            setupTimeout();
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
                 user.fireCallback(new ClientCallback("gameTarget", game.getId(), new GameClientMessage(getGameView(), question, cardView, targets, required, options)));
@@ -108,7 +102,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     public void select(final String message, final Map<String, Serializable> options) {
         if (!killed) {
-            setupTimeout();
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
                 user.fireCallback(new ClientCallback("gameSelect", game.getId(), new GameClientMessage(getGameView(), message, options)));
@@ -118,7 +111,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     public void chooseAbility(final AbilityPickerView abilities) {
         if (!killed) {
-            setupTimeout();
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
                 user.fireCallback(new ClientCallback("gameChooseAbility", game.getId(), abilities));
@@ -128,7 +120,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     public void choosePile(final String message, final CardsView pile1, final CardsView pile2) {
         if (!killed) {
-            setupTimeout();
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
                 user.fireCallback(new ClientCallback("gameChoosePile", game.getId(), new GameClientMessage(message, pile1, pile2)));
@@ -138,7 +129,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     public void chooseChoice(final Choice choice) {
         if (!killed) {
-            setupTimeout();
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
                 user.fireCallback(new ClientCallback("gameChooseChoice", game.getId(), new GameClientMessage(choice)));
@@ -148,7 +138,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     public void playMana(final String message) {
         if (!killed) {
-            setupTimeout();
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
                 user.fireCallback(new ClientCallback("gamePlayMana", game.getId(), new GameClientMessage(getGameView(), message)));
@@ -158,7 +147,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     public void playXMana(final String message) {
         if (!killed) {
-            setupTimeout();
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
                 user.fireCallback(new ClientCallback("gamePlayXMana", game.getId(), new GameClientMessage(getGameView(), message)));
@@ -168,7 +156,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     public void getAmount(final String message, final int min, final int max) {
         if (!killed) {
-            setupTimeout();
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
                 user.fireCallback(new ClientCallback("gameSelectAmount", game.getId(), new GameClientMessage(message, min, max)));
@@ -204,64 +191,23 @@ public class GameSessionPlayer extends GameSessionWatcher {
         }
     }
 
-    /**
-     * Reset the timeout counter after priority in game changed
-     * 
-     */
-    public void signalPriorityChange() {
-        setupTimeout();
-    }
-
-    private synchronized void setupTimeout() {
-        if (!useTimeout) {
-            return;
-        }
-        cancelTimeout();
-        futureTimeout = timeoutExecutor.schedule(
-            new Runnable() {
-                @Override
-                public void run() {
-                    // if player has no priority, he does not get timeout
-                    if(game.getPriorityPlayerId().equals(playerId)) {
-                        GameManager.getInstance().timeout(game.getId(), userId);
-                    } else {
-                        setupTimeout();
-                    }
-                }
-            },
-            Main.isTestMode() ? 3600 :ConfigSettings.getInstance().getMaxSecondsIdle(),
-            TimeUnit.SECONDS
-        );
-    }
-
-    private synchronized void cancelTimeout() {
-        if (futureTimeout != null) {
-            futureTimeout.cancel(false);
-        }
-    }
-
     public void sendPlayerUUID(UUID data) {
-        cancelTimeout();
         game.getPlayer(playerId).setResponseUUID(data);
     }
 
     public void sendPlayerString(String data) {
-        cancelTimeout();
         game.getPlayer(playerId).setResponseString(data);
     }
 
     public void sendPlayerManaType(ManaType manaType, UUID manaTypePlayerId) {
-        cancelTimeout();
         game.getPlayer(playerId).setResponseManaType(manaTypePlayerId, manaType);
     }
 
     public void sendPlayerBoolean(Boolean data) {
-        cancelTimeout();
         game.getPlayer(playerId).setResponseBoolean(data);
     }
 
     public void sendPlayerInteger(Integer data) {
-        cancelTimeout();
         game.getPlayer(playerId).setResponseInteger(data);
     }
 
@@ -338,7 +284,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
                                     } else {
                                         logger.debug("- ex: " + ex.toString());
                                     }
-                                    ex.printStackTrace();
                                 }else {
                                     logger.fatal("Game session game quit exception - null  gameId:" + game.getId() +"  playerId: " + playerId);
                                 }

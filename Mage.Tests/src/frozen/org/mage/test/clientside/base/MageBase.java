@@ -110,7 +110,7 @@ public class MageBase {
                             server.ack("gameInit", sessionId);
                         } else if (callback.getMethod().equals("gameAsk")) {
                             GameClientMessage message = (GameClientMessage) callback.getData();
-                            logger.info("ASK >> " + message.getMessage());
+                            logger.log(Level.INFO, "ASK >> {0}", message.getMessage());
                             if (message.getMessage().equals("Do you want to take a mulligan?")) {
                                 server.sendPlayerBoolean(gameId, sessionId, false);
                             }
