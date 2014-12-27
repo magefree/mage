@@ -108,9 +108,11 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
                 if (permanent != null) {
                     targetStillExists = true;
                     if (controllingPlayerId != null) {
-                        permanent.changeControllerId(controllingPlayerId, game);                        
+                        permanent.changeControllerId(controllingPlayerId, game);
+                        permanent.getAbilities().setControllerId(controllingPlayerId);
                     } else {
                         permanent.changeControllerId(source.getControllerId(), game);
+                        permanent.getAbilities().setControllerId(source.getControllerId());
                     }
                 }                
             }

@@ -37,4 +37,43 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertAbility(playerA, "Silvercoat Lion", HasteAbility.getInstance(), true);
     }
+
+    /**
+     * I gained control of my opponent's Glen Elendra Archmage with Vedalken Shackles.
+     * After I sacrificed it to counter a spell, it Persisted back to my battlefield,
+     * but it should return under its owner's control. Maybe a Persist problem, but I
+     * am thinking Vedalken Shackles doesn't realize that it is a different object
+     * when it returns from the graveyard instead.
+     */
+
+    @Test
+    public void testGainControlOfCreatureWithPersistEffect() {
+        // {2},{T}: Gain control of target creature with power less than or equal to the number of Islands you control for as long as Vedalken Shackles remains tapped.
+        addCard(Zone.BATTLEFIELD, playerA, "Vedalken Shackles", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+
+        // Lightning Strike deals 3 damage to target creature or player.
+        addCard(Zone.HAND, playerB, "Lightning Strike", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
+        // Flying
+        // {U}, Sacrifice Glen Elendra Archmage: Counter target noncreature spell.
+        // Persist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
+        addCard(Zone.BATTLEFIELD, playerB, "Glen Elendra Archmage");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}: Gain control of target creature with power less than or equal to the number of Islands you control for as long as {this} remains tapped.","Glen Elendra Archmage");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Strike", playerA);
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{U},Sacrifice {this}: Counter target noncreature spell.", "Lightning Strike");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerB, "Lightning Strike", 1);
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        // under control of the owner after persist triggered
+        assertPermanentCount(playerA, "Glen Elendra Archmage", 0);
+        assertPermanentCount(playerB, "Glen Elendra Archmage", 1);
+
+    }
 }
