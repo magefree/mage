@@ -1,5 +1,5 @@
-woogerworks   (Version 1.3.0 dev 2014-10-29V2) :xmage.woogerworks.com:17171
+woogerworks   (Version 1.3.0 dev 2014-10-29V4) :xmage.woogerworks.com:17171
 XMage.info 1  (Version 1.3.0 dev 2014-11-29v4) :176.31.186.181:17171
-XMage.info 2  (Version 1.3.0 dev 2014-11-29V4) :176.31.186.181:17000
+XMage.info 2  (Version 1.3.0 dev 2014-11-29V5) :176.31.186.181:17000
 Seedds Server (Version 1.3.0 dev 2014-11-29v2) :115.29.203.80:17171
 localhost -> connect to your local server (must be started):localhost:17171

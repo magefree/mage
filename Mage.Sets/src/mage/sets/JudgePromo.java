@@ -45,7 +45,7 @@ public class JudgePromo extends ExpansionSet {
     }
 
     private JudgePromo() {
-        super("Judge Promo", "CMD", "mage.sets.judgepromo", new GregorianCalendar(2011, 6, 17).getTime(), SetType.REPRINT);
+        super("Judge Promo", "JR", "mage.sets.judgepromo", new GregorianCalendar(2011, 6, 17).getTime(), SetType.REPRINT);
     }
 
 }
