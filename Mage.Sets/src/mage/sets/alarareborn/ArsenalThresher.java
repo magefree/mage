@@ -40,6 +40,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterArtifactCard;
+import mage.filter.predicate.mageobject.AnotherCardPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -56,9 +57,6 @@ public class ArsenalThresher extends CardImpl {
         super(ownerId, 131, "Arsenal Thresher", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{W/B}{U}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Construct");
-
-
-        
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -100,7 +98,7 @@ class ArsenalThresherEffect extends OneShotEffect {
         }
         Permanent arsenalThresher = game.getPermanent(source.getSourceId());
         FilterArtifactCard filter = new FilterArtifactCard();
-        filter.add(new AnotherPredicate());
+        filter.add(new AnotherCardPredicate());
         if (you.chooseUse(Outcome.Benefit, "Do you want to reveal other artifacts in your hand?", game)) {
             Cards cards = new CardsImpl();
             if (you.getHand().count(filter, source.getSourceId(), source.getControllerId(), game) > 0) {
