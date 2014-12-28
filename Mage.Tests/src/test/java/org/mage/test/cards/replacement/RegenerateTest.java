@@ -25,46 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package org.mage.test.cards.replacement;
 
-package mage.sets.shardsofalara;
-
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.UnearthAbility;
-import mage.cards.CardImpl;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
+import mage.game.permanent.Permanent;
+import org.junit.Assert;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class KathariScreecher extends CardImpl {
 
-    public KathariScreecher (UUID ownerId) {
-        super(ownerId, 47, "Kathari Screecher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "ALA";
-        this.subtype.add("Bird");
-        this.subtype.add("Soldier");
-        this.color.setBlue(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+public class RegenerateTest extends CardTestPlayerBase {
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
+    @Test
+    public void testRegenerateAbilityGainedByEnchantment() {
+        addCard(Zone.BATTLEFIELD, playerA, "Underworld Cerberus");
 
-        // Unearth {2}{U} ({2}{U}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{2}{U}")));
-    }
+        addCard(Zone.BATTLEFIELD, playerB, "Sagu Archer");
+        addCard(Zone.HAND, playerB, "Molting Snakeskin");
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 4);
 
-    public KathariScreecher (final KathariScreecher card) {
-        super(card);
-    }
 
-    @Override
-    public KathariScreecher copy() {
-        return new KathariScreecher(this);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Molting Snakeskin", "Sagu Archer");
+        attack(2, playerB, "Sagu Archer");
+        block(2, playerA, "Underworld Cerberus", "Sagu Archer");
+        activateAbility(2, PhaseStep.DECLARE_BLOCKERS, playerB, "{2}{B}: Regenerate {this}.");
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        // attacker has to regenerat because of damage
+        
+        assertPermanentCount(playerA, "Underworld Cerberus", 1);
+        assertPermanentCount(playerB, "Sagu Archer", 1);
+        assertPermanentCount(playerB, "Molting Snakeskin", 1);
+
     }
 }
