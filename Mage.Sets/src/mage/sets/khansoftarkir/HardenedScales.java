@@ -40,6 +40,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -86,9 +87,14 @@ class HardenedScalesEffect extends ReplacementEffectImpl {
         return false;
     }
 
+    @Override    
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ADD_COUNTERS;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ADD_COUNTERS && event.getData().equals(CounterType.P1P1.getName())) {
+        if (event.getData().equals(CounterType.P1P1.getName())) {
             Permanent target = game.getPermanent(event.getTargetId());
             if (target != null && target.getControllerId().equals(source.getControllerId())
                                && target.getCardType().contains(CardType.CREATURE)) {

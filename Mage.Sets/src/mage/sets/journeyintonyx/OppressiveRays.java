@@ -129,6 +129,17 @@ class OppressiveRaysEffect extends ReplacementEffectImpl {
         return false;
     }
 
+    @Override    
+    public boolean checksEventType(GameEvent event, Game game) {
+        switch(event.getType()) {
+            case DECLARE_ATTACKER:
+            case DECLARE_BLOCKER:
+                return true;
+            default:
+                return false;
+        }
+    }    
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType().equals(GameEvent.EventType.DECLARE_ATTACKER)) {

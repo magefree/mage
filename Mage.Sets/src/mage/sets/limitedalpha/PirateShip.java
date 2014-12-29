@@ -34,14 +34,13 @@ import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPermanent;
 import mage.cards.CardImpl;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerControlsIslandPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -64,7 +63,7 @@ public class PirateShip extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Pirate Ship can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PirateShipEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Island","an Island"))));
         // {tap}: Pirate Ship deals 1 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
@@ -80,46 +79,6 @@ public class PirateShip extends CardImpl {
     @Override
     public PirateShip copy() {
         return new PirateShip(this);
-    }
-}
-
-class PirateShipEffect extends ReplacementEffectImpl {
-
-    public PirateShipEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "{this} can't attack unless defending player controls an Island";
-    }
-
-    public PirateShipEffect(final PirateShipEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PirateShipEffect copy() {
-        return new PirateShipEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARE_ATTACKER && source.getSourceId().equals(event.getSourceId())) {
-            FilterPermanent filter = new FilterPermanent();
-            filter.add(new SubtypePredicate("Island"));
-
-            if (game.getBattlefield().countAll(filter, event.getTargetId(), game) == 0) {
-                return true;
-            }
-        }
-        return false;
     }
 }
 

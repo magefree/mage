@@ -143,7 +143,12 @@ class UginsNexusExileEffect extends ReplacementEffectImpl {
         }
         return false;
     }
-
+    
+    @Override    
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId())) {

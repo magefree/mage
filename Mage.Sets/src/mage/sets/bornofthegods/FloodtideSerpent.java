@@ -43,6 +43,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
@@ -116,9 +117,15 @@ class FloodtideSerpentReplacementEffect extends ReplacementEffectImpl {
         return false;
     }
 
+    @Override    
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DECLARE_ATTACKER;
+    }
+    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARE_ATTACKER && event.getSourceId().equals(source.getSourceId());
+        return event.getSourceId().equals(source.getSourceId());
     }
 
     @Override

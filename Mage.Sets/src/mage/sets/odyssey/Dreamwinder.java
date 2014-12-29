@@ -42,7 +42,6 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -52,13 +51,7 @@ import mage.target.common.TargetLandPermanent;
  * @author cbt33, LevelX2 (Walk the Aeons), KholdFuzion (Dandan)
  */
 public class Dreamwinder extends CardImpl {
-
-    private static final FilterLandPermanent filter = new FilterLandPermanent("an Island");
-
-    static {
-        filter.add(new SubtypePredicate("Island"));
-    }
-        
+               
     public Dreamwinder(UUID ownerId) {
         super(ownerId, 83, "Dreamwinder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.expansionSetCode = "ODY";
@@ -69,12 +62,12 @@ public class Dreamwinder extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Dreamwinder can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Island","an Island"))));
         // {U}, Sacrifice an Island: Target land becomes an Island until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.EndOfTurn, "Island"), new ManaCostsImpl("{U}"));
         Target target = new TargetLandPermanent();
         ability.addTarget(target);
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, new FilterLandPermanent("Island","an Island"), true)));
         this.addAbility(ability);
     }   
     

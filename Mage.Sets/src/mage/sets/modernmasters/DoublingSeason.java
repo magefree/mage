@@ -130,13 +130,16 @@ class DoublingSeasonCounterEffect extends ReplacementEffectImpl {
         return false;
     }
 
+    @Override    
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ADD_COUNTERS;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ADD_COUNTERS) {
-            Permanent target = game.getPermanent(event.getTargetId());
-            if (target != null && target.getControllerId().equals(source.getControllerId())) {
-                return true;
-            }
+        Permanent target = game.getPermanent(event.getTargetId());
+        if (target != null && target.getControllerId().equals(source.getControllerId())) {
+            return true;
         }
         return false;
     }
