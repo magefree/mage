@@ -46,5 +46,7 @@ public class GameDay extends ExpansionSet {
 
     private GameDay() {
         super("Game Day", "MGDC", "mage.sets.gameday", new GregorianCalendar(2011, 6, 17).getTime(), SetType.REPRINT);
+        this.hasBoosters = false;
+        this.hasBasicLands = false;
     }
 }

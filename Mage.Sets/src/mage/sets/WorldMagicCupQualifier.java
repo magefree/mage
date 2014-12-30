@@ -46,6 +46,8 @@ public class WorldMagicCupQualifier extends ExpansionSet {
 
     private WorldMagicCupQualifier() {
         super("World Magic Cup Qualifier", "WMCQ", "mage.sets.worldmagiccupqualifier", new GregorianCalendar(2011, 6, 17).getTime(), SetType.REPRINT);
+        this.hasBoosters = false;
+        this.hasBasicLands = false;
     }
 
 }

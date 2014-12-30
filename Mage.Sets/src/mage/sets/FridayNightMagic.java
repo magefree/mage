@@ -46,6 +46,8 @@ public class FridayNightMagic extends ExpansionSet {
 
     private FridayNightMagic() {
         super("Friday Night Magic", "FNMP", "mage.sets.fridaynightmagic", new GregorianCalendar(2011, 6, 17).getTime(), SetType.REPRINT);
+        this.hasBoosters = false;
+        this.hasBasicLands = false;
     }
 
 }

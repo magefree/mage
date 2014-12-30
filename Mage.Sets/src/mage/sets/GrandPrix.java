@@ -46,6 +46,8 @@ public class GrandPrix extends ExpansionSet {
 
     private GrandPrix() {
         super("Grand Prix", "GPX", "mage.sets.grandprix", new GregorianCalendar(2011, 6, 17).getTime(), SetType.REPRINT);
+        this.hasBoosters = false;
+        this.hasBasicLands = false;
     }
 
 }
