@@ -37,7 +37,7 @@ import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -71,21 +71,21 @@ public class BolsterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int leastPower = Integer.MAX_VALUE;
+            int leastToughness = Integer.MAX_VALUE;
             Permanent selectedCreature = null;
             for(Permanent permanent: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), controller.getId(), game)) {
-                if (leastPower > permanent.getPower().getValue()) {
-                    leastPower = permanent.getPower().getValue();
+                if (leastToughness > permanent.getToughness().getValue()) {
+                    leastToughness = permanent.getToughness().getValue();
                     selectedCreature = permanent;
-                } else if (leastPower == permanent.getPower().getValue()) {
-                    leastPower = permanent.getPower().getValue();
+                } else if (leastToughness == permanent.getToughness().getValue()) {
+                    leastToughness = permanent.getToughness().getValue();
                     selectedCreature = null;
                 }
             }
-            if (leastPower != Integer.MAX_VALUE) {
+            if (leastToughness != Integer.MAX_VALUE) {
                 if (selectedCreature == null) {
-                    FilterPermanent filter = new FilterControlledCreaturePermanent("creature you control with power " + leastPower);
-                    filter.add(new PowerPredicate(Filter.ComparisonType.Equal, leastPower));
+                    FilterPermanent filter = new FilterControlledCreaturePermanent("creature you control with toughness " + leastToughness);
+                    filter.add(new ToughnessPredicate(Filter.ComparisonType.Equal, leastToughness));
                     Target target = new TargetPermanent(1,1, filter, true);
                     if (controller.chooseTarget(outcome, target, source, game)) {
                         selectedCreature = game.getPermanent(target.getFirstTarget());
