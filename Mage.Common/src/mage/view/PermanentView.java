@@ -31,7 +31,6 @@ package mage.view;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnFaceUpAbility;
 import mage.cards.Card;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -135,6 +134,14 @@ public class PermanentView extends CardView {
                 }                
             } else{
                 if (controlled && card != null) {
+                    for (Ability permanentAbility : permanent.getAbilities()) {
+                        if (permanentAbility instanceof TurnFaceUpAbility && !permanentAbility.getRuleVisible()) {
+                            this.rules.add(permanentAbility.getRule(true));
+                        }
+                        if (permanentAbility.getWorksFaceDown()) {
+                            this.rules.add(permanentAbility.getRule());
+                        }
+                    }
                     this.name = card.getName();
                     this.displayName = card.getName();
                 }                

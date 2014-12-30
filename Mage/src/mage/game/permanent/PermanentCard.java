@@ -133,7 +133,7 @@ public class PermanentCard extends PermanentImpl {
         Zone fromZone = game.getState().getZone(objectId);        
         Player controller = game.getPlayer(controllerId);
         if (controller != null && controller.removeFromBattlefield(this, game)) {
-            if (isFaceDown() && isMorphCard()) {
+            if (isFaceDown()) {
                 setFaceDown(false);
                 game.getCard(this.getId()).setFaceDown(false); //TODO: Do this in a better way
             }

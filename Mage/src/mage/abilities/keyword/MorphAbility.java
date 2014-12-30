@@ -28,14 +28,11 @@
 
 package mage.abilities.keyword;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.TurnFaceUpAbility;
 import mage.abilities.costs.AlternativeCost2Impl;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
@@ -44,16 +41,12 @@ import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.continious.SourceEffect;
+import mage.abilities.effects.common.continious.BecomesFaceDownCreatureEffect;
 import mage.cards.Card;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -293,102 +286,6 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
     }
 }
 
-/**
- * This effect lets the creature always be a 2/2 face-down creature, with no text,
- * no name, no subtypes, and no mana cost, if it's face down on the battlefield.
- * And it adds the MorphTurnFaceUpAbility ability.
- * TODO: Check if it's better to create this effect always as a creature on the battelfield turns face down or
- * a creature enters the battlefield face down. Then the effect could be removed as the permanent turns face up.
- *
- * @author LevelX2
- */
 
-class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implements SourceEffect {
 
-    protected int zoneChangeCounter;
-    protected Ability turnFaceUpAbility = null;
-
-    public BecomesFaceDownCreatureEffect(Costs<Cost> morphCosts) {
-        super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
-        this.zoneChangeCounter = Integer.MIN_VALUE;
-        if (morphCosts != null) {
-            this.turnFaceUpAbility = new TurnFaceUpAbility(morphCosts);
-        }
-        staticText = "{this} becomes a 2/2 face-down creature, with no text, no name, no subtypes, and no mana cost";
-    }
-
-    public BecomesFaceDownCreatureEffect(final BecomesFaceDownCreatureEffect effect) {
-        super(effect);
-        this.zoneChangeCounter = effect.zoneChangeCounter;
-        this.turnFaceUpAbility = effect.turnFaceUpAbility.copy();
-    }
-
-    @Override
-    public BecomesFaceDownCreatureEffect copy() {
-        return new BecomesFaceDownCreatureEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && permanent.isFaceDown()) {
-            switch (layer) {
-                case TypeChangingEffects_4:
-                    permanent.setName("");
-                    permanent.getSupertype().clear();
-                    permanent.getCardType().clear();
-                    permanent.getCardType().add(CardType.CREATURE);
-                    permanent.getSubtype().clear();
-                    permanent.getManaCost().clear();
-                    break;
-                case ColorChangingEffects_5:
-                    permanent.getColor().setColor(new ObjectColor());
-                    break;
-                case AbilityAddingRemovingEffects_6:
-                    Card card = game.getCard(permanent.getId()); //  
-                    List<Ability> abilities = new ArrayList<>();
-                    for (Ability ability : permanent.getAbilities()) {
-                        if (card != null && !card.getAbilities().contains(ability)) {
-                            // gained abilities from other sources won't be removed
-                            continue;
-                        }
-                        if (ability.getWorksFaceDown()) {
-                            ability.setRuleVisible(false);
-                            continue;
-                        } else {
-                            if (!ability.getRuleVisible() && !ability.getEffects().isEmpty()) {
-                                if (ability.getEffects().get(0) instanceof BecomesFaceDownCreatureEffect) {
-                                    continue;
-                                }
-                            }
-                        }
-                        abilities.add(ability);
-                    }
-                    permanent.getAbilities().removeAll(abilities);
-                    if (turnFaceUpAbility != null) {
-                        permanent.addAbility(turnFaceUpAbility, game);
-                    }
-                    break;
-                case PTChangingEffects_7:
-                    if (sublayer == SubLayer.SetPT_7b) {
-                        permanent.getPower().setValue(2);
-                        permanent.getToughness().setValue(2);
-                    }
-
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
-    }
-
-}
 
