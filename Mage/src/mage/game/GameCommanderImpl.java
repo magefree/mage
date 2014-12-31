@@ -106,10 +106,10 @@ public abstract class GameCommanderImpl extends GameImpl {
 
         }
         this.getState().addAbility(ability, null);
+        super.init(choosingPlayerId, gameOptions);
         if (startingPlayerSkipsDraw) {
             state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
         }
-        super.init(choosingPlayerId, gameOptions);
     }
     
 
