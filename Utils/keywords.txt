@@ -44,6 +44,7 @@ Persist|new|
 Phasing|instance|
 Plainscycling|cost|
 Plainswalk|new|
+Poisonous|number|
 Provoke|new|
 Prowess|new|
 Reach|instance|
