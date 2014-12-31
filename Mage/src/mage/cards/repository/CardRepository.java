@@ -34,9 +34,11 @@ import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.support.ConnectionSource;
+import com.j256.ormlite.support.DatabaseConnection;
 import com.j256.ormlite.table.TableUtils;
 import java.io.File;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -56,7 +58,7 @@ public enum CardRepository {
 
     private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE";
     private static final String VERSION_ENTITY_NAME = "card";
-    private static final long CARD_DB_VERSION = 35;
+    private static final long CARD_DB_VERSION = 36;
 
     private final Random random = new Random();
     private Dao<CardInfo, Object> cardDao;
@@ -273,5 +275,15 @@ public enum CardRepository {
         } catch (SQLException ex) {
         }
         return new ArrayList<>();
+    }
+
+    public void closeDB() {
+        try {
+            DatabaseConnection conn = cardDao.getConnectionSource().getReadWriteConnection();
+            conn.executeStatement("shutdown compact", 0);
+
+        } catch (SQLException ex) {
+
+        }
     }
 }
