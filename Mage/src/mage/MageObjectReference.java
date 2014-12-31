@@ -129,7 +129,7 @@ public class MageObjectReference implements Comparable<MageObjectReference> {
     }
 
     public Card getCard(Game game) {
-        Card card = game.getPermanent(sourceId);
+        Card card = game.getCard(sourceId);
         if (card != null && card.getZoneChangeCounter() == zoneChangeCounter) {
             return card;
         }
