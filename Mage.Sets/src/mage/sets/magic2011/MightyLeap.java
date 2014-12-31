@@ -29,13 +29,14 @@
 package mage.sets.magic2011;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,10 +48,15 @@ public class MightyLeap extends CardImpl {
     public MightyLeap(UUID ownerId) {
         super(ownerId, 22, "Mighty Leap", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "M11";
-        this.color.setWhite(true);
+
+        // Target creature gets +2/+2 and gains flying until end of turn.
+        Effect effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
+        effect.setText("Target creature gets +2/+2");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains flying until end of turn");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
     }
 
     public MightyLeap(final MightyLeap card) {
