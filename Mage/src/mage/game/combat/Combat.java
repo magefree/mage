@@ -194,15 +194,16 @@ public class Combat implements Serializable, Copyable<Combat> {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, attackerId, attackerId))) {
             Player player = game.getPlayer(attackerId);
             //20101001 - 508.1d
-            checkAttackRequirements(player, game);
+            game.getCombat().checkAttackRequirements(player, game);
             if (!game.getPlayer(game.getActivePlayerId()).getAvailableAttackers(game).isEmpty()) {
                 player.selectAttackers(game, attackerId);
             }
             if (game.isPaused() || game.gameOver(null)) {
                 return;
             }
-            checkAttackRestrictions(player, game);
-            resumeSelectAttackers(game);
+            // because of possible undo during declare attackers it's neccassary to call here the methods with "game.getCombat()." to get the valid combat object!!!
+            game.getCombat().checkAttackRestrictions(player, game);
+            game.getCombat().resumeSelectAttackers(game);
         }
     }
 
