@@ -153,7 +153,7 @@ class KnacksawCliqueCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (sourceId.equals(this.cardId)) {
+        if (sourceId.equals(this.cardId) && source.getControllerId().equals(affectedControllerId)) {
             Card card = game.getCard(this.cardId);
             if (card != null && game.getState().getExile().getExileZone(exileId).contains(cardId)) {
                 return true;
