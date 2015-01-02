@@ -71,7 +71,7 @@ public class EntersBattlefieldAbility extends StaticAbility {
         this.abilityRule = abilityRule;
     }
 
-    public EntersBattlefieldAbility(EntersBattlefieldAbility ability) {
+    public EntersBattlefieldAbility(final EntersBattlefieldAbility ability) {
         super(ability);
         this.abilityRule = ability.abilityRule;
     }

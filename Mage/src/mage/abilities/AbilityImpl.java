@@ -212,7 +212,8 @@ public abstract class AbilityImpl implements Ability {
             game.getContinuousEffects().applySpliceEffects(this, game);
         }
 
-        
+        // TODO: Because all (non targeted) choices have to be done during resolution
+        // this has to be removed, if all using effects are changed
         MageObject sourceObject = game.getObject(sourceId);
         if (sourceObject != null) {
             sourceObject.adjustChoices(this, game);
