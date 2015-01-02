@@ -40,7 +40,7 @@ import mage.cards.repository.CardRepository;
  */
 public class DckDeckImporter extends DeckImporter {
 
-    private static final Pattern pattern = Pattern.compile("(SB:)?\\s*(\\d*)\\s*\\[([a-zA-Z0-9]{3}):(\\d*)\\].*");
+    private static final Pattern pattern = Pattern.compile("(SB:)?\\s*(\\d*)\\s*\\[([a-zA-Z0-9]{2,4}):(\\d*)\\].*");
 
     @Override
     protected void readLine(String line, DeckCardLists deckList) {
