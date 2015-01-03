@@ -36,7 +36,6 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.PhaseStep;
 import mage.constants.SubLayer;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -110,7 +109,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
                 Permanent perm = it.next().getPermanentOrLKIBattlefield(game); //LKI is neccessary for "dies triggered abilities" to work given to permanets  (e.g. Showstopper)
                 if (perm != null) {
                     for (Ability abilityToAdd : ability) {
-                        perm.addAbility(abilityToAdd, source.getSourceId(), game, false); // new id is neccessary if
+                        perm.addAbility(abilityToAdd, source.getSourceId(), game, false); 
                     }
                 } else {
                     it.remove();

@@ -137,17 +137,9 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
             }
         } else {
             for (UUID permanentId : targetPointer.getTargets(game, source)) {
-                Permanent permanent = game.getPermanent(permanentId);
-                boolean shortLivingLKI = false;
-                if (permanent == null) {
-                    permanent = (Permanent) game.getShortLivingLKI(permanentId, Zone.BATTLEFIELD);
-                    shortLivingLKI = true;
-                }
+                Permanent permanent = game.getPermanentOrLKIBattlefield(permanentId);
                 if (permanent != null) {
-                    permanent.addAbility(ability, source.getSourceId(), game);
-                    if (shortLivingLKI) { // needed for undying because TriggeredAbilities checks if the permanent has still the ability
-                        game.rememberLKI(permanentId, Zone.BATTLEFIELD, permanent);
-                    }
+                    permanent.addAbility(ability, source.getSourceId(), game, false);
                     affectedTargets++;
                 }
             }
