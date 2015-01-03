@@ -28,6 +28,8 @@
 package mage.abilities.effects.keyword;
 
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -50,11 +52,17 @@ import mage.target.targetpointer.FixedTarget;
  * @author LevelX2
  */
 public class BolsterEffect extends OneShotEffect {
-    private final int amount;
+    
+    private final DynamicValue amount;
+    
     public BolsterEffect(int amount) {
+        this(new StaticValue(amount));        
+    }
+    
+    public BolsterEffect(DynamicValue amount) {
         super(Outcome.BoostCreature);
         this.amount = amount;
-        this.staticText = "bolster " + amount + ". <i>(Choose a creature with the least toughness or tied with the least toughness among creatures you control. Put " + amount + " +1/+1 counters on it.)</i>";
+        this.staticText = setText();
     }
     
     public BolsterEffect(final BolsterEffect effect) {
@@ -71,6 +79,9 @@ public class BolsterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
+            if (amount.calculate(game, source, this) <= 0) {
+                return true;
+            }
             int leastToughness = Integer.MAX_VALUE;
             Permanent selectedCreature = null;
             for(Permanent permanent: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), controller.getId(), game)) {
@@ -92,7 +103,7 @@ public class BolsterEffect extends OneShotEffect {
                     }
                 }
                 if (selectedCreature != null) {
-                    Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(amount));
+                    Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(amount.calculate(game, source, this)));
                     effect.setTargetPointer(new FixedTarget(selectedCreature.getId()));
                     return effect.apply(game, source);
                 }                
@@ -100,5 +111,19 @@ public class BolsterEffect extends OneShotEffect {
             return true;
         }
         return false;
+    }
+
+    private String setText() {
+        StringBuilder sb = new StringBuilder("bolster ");
+        if (amount instanceof StaticValue) {
+            sb.append(amount);
+            sb.append(". <i>(Choose a creature with the least toughness or tied with the least toughness among creatures you control. Put ");
+            sb.append(amount).append(" +1/+1 counters on it.)</i>");
+        } else {
+            sb.append("X, where X is the number of ");
+            sb.append(amount.getMessage());
+            sb.append(". (Choose a creature with the least toughness among creatures you control and put X +1/+1 counters on it.)");
+        }
+        return sb.toString();
     }
 }
