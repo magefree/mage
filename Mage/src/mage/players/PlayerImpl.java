@@ -1613,12 +1613,17 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!game.replaceEvent(event)) {
                 int actualDamage = event.getAmount();
                 if (actualDamage > 0) {
-                    Permanent source = game.getPermanent(sourceId);
-                    if(source == null){
-                        MageObject lastKnownInformation = game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD);
-                        if(lastKnownInformation != null &&  lastKnownInformation instanceof Permanent){
-                            source = (Permanent) lastKnownInformation;
+                    UUID sourceControllerId = null;
+                    MageObject source = game.getPermanentOrLKIBattlefield(sourceId);
+                    if (source == null) {
+                        source = game.getObject(sourceId);
+                        if (source instanceof Spell) {
+                            sourceControllerId = ((Spell) source).getControllerId();
+                        } else {
+                            source = null;
                         }
+                    } else {
+                        sourceControllerId = ((Permanent) source).getControllerId();
                     }
                     if (source != null && (source.getAbilities().containsKey(InfectAbility.getInstance().getId()))) {
                         addCounters(CounterType.POISON.createInstance(actualDamage), game);
@@ -1629,7 +1634,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         }
                     }
                     if (source != null && source.getAbilities().containsKey(LifelinkAbility.getInstance().getId())) {
-                        Player player = game.getPlayer(source.getControllerId());
+                        Player player = game.getPlayer(sourceControllerId);
                         player.gainLife(actualDamage, game);
                     }
                     game.fireEvent(new DamagedPlayerEvent(playerId, sourceId, playerId, actualDamage, combatDamage));

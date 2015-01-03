@@ -67,6 +67,7 @@ import mage.game.events.DamagedPlaneswalkerEvent;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
@@ -634,9 +635,20 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 damageDone = damageCreature(damageAmount, sourceId, game, preventable, combat, markDamage, appliedEffects);
             }
             if (damageDone > 0) {
-                Permanent source = game.getPermanentOrLKIBattlefield(sourceId);
+                UUID sourceControllerId = null;
+                MageObject source = game.getPermanentOrLKIBattlefield(sourceId);
+                if (source == null) {
+                    source = game.getObject(sourceId);
+                    if (source instanceof Spell) {
+                        sourceControllerId = ((Spell) source).getControllerId();
+                    } else {
+                        source = null;
+                    }
+                } else {
+                    sourceControllerId = ((Permanent) source).getControllerId();
+                }
                 if (source != null && source.getAbilities().containsKey(LifelinkAbility.getInstance().getId())) {
-                    Player player = game.getPlayer(source.getControllerId());
+                    Player player = game.getPlayer(sourceControllerId);
                     player.gainLife(damageAmount, game);
                 }
                 if (source != null && source.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
