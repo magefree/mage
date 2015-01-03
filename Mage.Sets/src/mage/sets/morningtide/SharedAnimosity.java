@@ -35,7 +35,7 @@ import mage.constants.Rarity;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.AttacksCreatureYourControlTriggeredAbility;
+import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
@@ -65,7 +65,7 @@ public class SharedAnimosity extends CardImpl {
         this.color.setRed(true);
 
         // Whenever a creature you control attacks, it gets +1/+0 until end of turn for each other attacking creature that shares a creature type with it.
-        this.addAbility(new AttacksCreatureYourControlTriggeredAbility(new SharedAnimosityEffect(), false, true));
+        this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new SharedAnimosityEffect(), false, true));
     }
 
     public SharedAnimosity(final SharedAnimosity card) {

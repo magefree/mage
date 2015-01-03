@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.AttacksCreatureYourControlTriggeredAbility;
+import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -64,7 +64,7 @@ public class UtvaraHellkite extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever a Dragon you control attacks, put a 6/6 red Dragon creature token with flying onto the battlefield.
-        this.addAbility(new AttacksCreatureYourControlTriggeredAbility(new CreateTokenEffect(new UtvaraHellkiteDragonToken()),false, filter));
+        this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new CreateTokenEffect(new UtvaraHellkiteDragonToken()),false, filter));
     }
 
     public UtvaraHellkite(final UtvaraHellkite card) {

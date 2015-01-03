@@ -28,9 +28,9 @@
 
 package mage.abilities.common;
 
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -41,34 +41,34 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author noxx
  */
-public class AttacksCreatureYourControlTriggeredAbility extends TriggeredAbilityImpl {
+public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityImpl {
 
     protected FilterControlledCreaturePermanent filter;
     protected boolean setTargetPointer;
 
-    public AttacksCreatureYourControlTriggeredAbility(Effect effect) {
+    public AttacksCreatureYouControlTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
-    public AttacksCreatureYourControlTriggeredAbility(Effect effect, boolean optional) {
+    public AttacksCreatureYouControlTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, new FilterControlledCreaturePermanent());
     }
 
-    public AttacksCreatureYourControlTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
+    public AttacksCreatureYouControlTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
         this(effect, optional, new FilterControlledCreaturePermanent(), setTargetPointer);
     }
 
-    public AttacksCreatureYourControlTriggeredAbility(Effect effect, boolean optional, FilterControlledCreaturePermanent filter) {
+    public AttacksCreatureYouControlTriggeredAbility(Effect effect, boolean optional, FilterControlledCreaturePermanent filter) {
         this(effect, optional, filter, false);
     }
 
-    public AttacksCreatureYourControlTriggeredAbility(Effect effect, boolean optional, FilterControlledCreaturePermanent filter, boolean setTargetPointer) {
+    public AttacksCreatureYouControlTriggeredAbility(Effect effect, boolean optional, FilterControlledCreaturePermanent filter, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
     }
 
-    public AttacksCreatureYourControlTriggeredAbility(AttacksCreatureYourControlTriggeredAbility ability) {
+    public AttacksCreatureYouControlTriggeredAbility(AttacksCreatureYouControlTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.setTargetPointer = ability.setTargetPointer;
@@ -91,8 +91,8 @@ public class AttacksCreatureYourControlTriggeredAbility extends TriggeredAbility
     }
 
     @Override
-    public AttacksCreatureYourControlTriggeredAbility copy() {
-        return new AttacksCreatureYourControlTriggeredAbility(this);
+    public AttacksCreatureYouControlTriggeredAbility copy() {
+        return new AttacksCreatureYouControlTriggeredAbility(this);
     }
 
     @Override

@@ -30,7 +30,7 @@ package mage.sets.dragonsmaze;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.common.AttacksCreatureYourControlTriggeredAbility;
+import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
@@ -49,7 +49,7 @@ public class GleamOfBattle extends CardImpl {
         this.color.setWhite(true);
 
         // Whenever a creature you control attacks, put a +1/+1 counter on it.
-        this.addAbility(new AttacksCreatureYourControlTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false, true));
+        this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false, true));
     }
 
     public GleamOfBattle(final GleamOfBattle card) {

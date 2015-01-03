@@ -29,7 +29,7 @@ package mage.sets.avacynrestored;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksCreatureYourControlTriggeredAbility;
+import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -54,7 +54,7 @@ public class DruidsRepository extends CardImpl {
         this.color.setGreen(true);
 
         // Whenever a creature you control attacks, put a charge counter on Druids' Repository.
-        this.addAbility(new AttacksCreatureYourControlTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance())));
+        this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance())));
 
         // Remove a charge counter from Druids' Repository: Add one mana of any color to your mana pool.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));        

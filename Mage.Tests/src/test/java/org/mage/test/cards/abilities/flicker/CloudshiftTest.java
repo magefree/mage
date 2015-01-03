@@ -127,10 +127,12 @@ public class CloudshiftTest extends CardTestPlayerBase {
 
     @Test
     public void testThatCardIsHandledAsNewInstanceAfterCloudshift() {
+        // Whenever another creature enters the battlefield under your control, you gain life equal to that creature's toughness.
+        // {1}{G}{W}, {T}: Populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
         addCard(Zone.BATTLEFIELD, playerA, "Trostani, Selesnya's Voice");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
-        addCard(Zone.HAND, playerA, "Grizzly Bears");
+        addCard(Zone.HAND, playerA, "Grizzly Bears"); // 2/2
         addCard(Zone.HAND, playerA, "Giant Growth");
         addCard(Zone.HAND, playerA, "Cloudshift");
 
@@ -142,7 +144,7 @@ public class CloudshiftTest extends CardTestPlayerBase {
         
         execute();
         
-        assertLife(playerA, 27);
+        assertLife(playerA, 27); // 5 from the first with Giant Growth + 2 from the second bear.
     }
     
 }

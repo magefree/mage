@@ -28,7 +28,7 @@
 package mage.sets.magic2015;
 
 import mage.MageInt;
-import mage.abilities.common.AttacksCreatureYourControlTriggeredAbility;
+import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeDefendingPlayerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -59,7 +59,7 @@ public class LeechingSliver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever a Sliver you control attacks, defending player loses 1 life.
-        this.addAbility(new AttacksCreatureYourControlTriggeredAbility(new LoseLifeDefendingPlayerEffect(1), false, filter));
+        this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new LoseLifeDefendingPlayerEffect(1), false, filter));
     }
 
     public LeechingSliver(final LeechingSliver card) {

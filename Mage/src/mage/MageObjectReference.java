@@ -128,6 +128,14 @@ public class MageObjectReference implements Comparable<MageObjectReference> {
         return null;
     }
 
+    public Permanent getPermanentOrLKIBattlefield(Game game) {
+        Permanent permanent = game.getPermanentOrLKIBattlefield(sourceId);
+        if (permanent != null && permanent.getZoneChangeCounter() == zoneChangeCounter) {
+            return permanent;
+        }
+        return null;
+    }
+
     public Card getCard(Game game) {
         Card card = game.getCard(sourceId);
         if (card != null && card.getZoneChangeCounter() == zoneChangeCounter) {

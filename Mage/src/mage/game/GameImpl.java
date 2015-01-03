@@ -2192,6 +2192,11 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
+    public Map<UUID, MageObject> getLastKnownInformation(Zone zone) {
+        return lki.get(zone);
+    }
+
+    @Override
     public MageObject getShortLivingLKI(UUID objectId, Zone zone) {
         Map<UUID, MageObject> shortLivingLkiMap = shortLivingLKI.get(zone);
         if (shortLivingLkiMap != null) {

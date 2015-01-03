@@ -131,7 +131,7 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
             return staticText;
         }
         Target target = mode.getTargets().get(0);
-        StringBuilder sb = new StringBuilder("Gain control of ");
+        StringBuilder sb = new StringBuilder("gain control of ");
         if (target.getMaxNumberOfTargets() > 1){
             if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
                 sb.append("up to ");

@@ -29,7 +29,7 @@ package mage.sets.theros;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AttacksCreatureYourControlTriggeredAbility;
+import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
@@ -72,7 +72,7 @@ public class KragmaWarcaller extends CardImpl {
         // Whenever a Minotaur you control attacks, it gets +2/+0 until end of turn.
         Effect effect = new BoostTargetEffect(2,0, Duration.EndOfTurn);
         effect.setText("it gets +2/+0 until end of turn");
-        this.addAbility(new AttacksCreatureYourControlTriggeredAbility(effect, false, filter1, true));
+        this.addAbility(new AttacksCreatureYouControlTriggeredAbility(effect, false, filter1, true));
     }
 
     public KragmaWarcaller(final KragmaWarcaller card) {

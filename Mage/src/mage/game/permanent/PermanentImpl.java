@@ -220,6 +220,15 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             copyAbility.setSourceId(objectId);
             game.getState().addAbility(copyAbility, sourceId, this);
             abilities.add(copyAbility);
+        } else if (!createNewId) {
+            // triggered abilities must be added to the state().triggerdAbilities
+            // still as long as the prev. permanent is known to the LKI (e.g. Showstopper) so gained dies triggered ability will trigger
+            if (!game.getBattlefield().containsPermanent(this.getId())) {
+                Ability copyAbility = ability.copy();
+                copyAbility.setControllerId(controllerId);
+                copyAbility.setSourceId(objectId);
+                game.getState().addAbility(copyAbility, sourceId, this);
+            }
         }
     }
     
