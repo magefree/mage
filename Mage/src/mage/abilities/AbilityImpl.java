@@ -105,6 +105,7 @@ public abstract class AbilityImpl implements Ability {
         this.manaCostsToPay = new ManaCostsImpl<>();
         this.costs = new CostsImpl<>();
         this.modes = new Modes();
+        //this.watchers = new ArrayList<>();
     }
 
     public AbilityImpl(final AbilityImpl ability) {

@@ -79,3 +79,6 @@ Mage.Server.Plugins/Mage.Draft.8PlayerBooster/target
 
 /Mage.Server/config/ai.please.cast.this.txt
 /Mage.Stats/target/
+Thumbs.db
+/temp/*.hprof
+/Mage.Client/plugins/images.old

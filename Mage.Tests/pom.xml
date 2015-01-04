@@ -57,6 +57,11 @@
             <artifactId>log4j</artifactId>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>mage-player-ai-mcts</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

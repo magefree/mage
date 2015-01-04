@@ -168,6 +168,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         this.objectId = UUID.randomUUID();
         this.abilities.newOriginalId();
         this.abilities.setSourceId(objectId);
+//        for (Watcher watcher: watchers) {
+//            watcher.setSourceId(objectId);
+//        }
     }
     
     public static Card createCard(String name) {
@@ -205,6 +208,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public Rarity getRarity() {
         return rarity;
     }
+
+//    @Override
+//    public void setRarity(Rarity rarity) {
+//        this.rarity = rarity;
+//    }
 
     @Override
     public void addInfo(String key, String value, Game game) {

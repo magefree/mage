@@ -671,6 +671,11 @@ public class Spell implements StackObject, Card {
         return card.getRules(game);
     }
 
+//    @Override
+//    public List<Watcher> getWatchers() {
+//        return card.getWatchers();
+//    }
+
     @Override
     public String getExpansionSetCode() {
         return card.getExpansionSetCode();

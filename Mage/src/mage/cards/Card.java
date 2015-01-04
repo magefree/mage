@@ -59,6 +59,7 @@ public interface Card extends MageObject {
     boolean isFaceDown(Game game);
     boolean turnFaceUp(Game game, UUID playerId);
     boolean turnFaceDown(Game game, UUID playerId);
+    
     boolean isFlipCard();
     String getFlipCardName();
     boolean isSplitCard();

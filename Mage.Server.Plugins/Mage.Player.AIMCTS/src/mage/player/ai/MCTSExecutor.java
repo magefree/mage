@@ -50,6 +50,7 @@ public class MCTSExecutor implements Callable<Boolean> {
         this.thinkTime = thinkTime;
         root = new MCTSNode(playerId, sim);
         this.timeOrCount = timeOrCount;
+        this.timeOrCount = timeOrCount;
     }
 
     @Override
