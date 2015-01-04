@@ -34,6 +34,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
@@ -47,31 +48,26 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class Lightform extends CardImpl {
+public class Rageform extends CardImpl {
 
-    public Lightform(UUID ownerId) {
-        super(ownerId, 16, "Lightform", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
+    public Rageform(UUID ownerId) {
+        super(ownerId, 112, "Rageform", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
         this.expansionSetCode = "FRF";
 
-        // When Lightform enters the battlefield, it becomes an Aura with enchant creature. Manifest the top card of your library and attach Lightform to it.
+        // When Rageform enters the battlefield, it becomes an Aura with enchant creature. Manifest the top card of your library and attach Rageform to it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesAuraAttachToManifestSourceEffect()));
 
-        // Enchanted creature has flying and lifelink.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield));
-        Effect effect = new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield);
-        effect.setText("and lifelink");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        // Enchanted creature has double strike.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new GainAbilityAttachedEffect(DoubleStrikeAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
     }
 
-    public Lightform(final Lightform card) {
+    public Rageform(final Rageform card) {
         super(card);
     }
 
     @Override
-    public Lightform copy() {
-        return new Lightform(this);
+    public Rageform copy() {
+        return new Rageform(this);
     }
 }
-
-
