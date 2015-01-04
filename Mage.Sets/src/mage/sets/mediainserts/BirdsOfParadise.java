@@ -34,7 +34,7 @@ public class BirdsOfParadise extends mage.sets.ravnika.BirdsOfParadise {
     
     public BirdsOfParadise(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = 28;
         this.expansionSetCode = "MBP";
     }
     
