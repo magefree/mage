@@ -46,6 +46,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import mage.constants.Outcome;
 
 /**
  *
@@ -60,16 +61,17 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
 
     protected transient MCTSNode root;
     protected int maxThinkTime;
-     private static final transient Logger logger = Logger.getLogger(ComputerPlayerMCTS.class);
+    private static final transient Logger logger = Logger.getLogger(ComputerPlayerMCTS.class);
     private transient ExecutorService pool;
-    private int cores;
+    private int threads;
 
     public ComputerPlayerMCTS(String name, RangeOfInfluence range, int skill) {
         super(name, range);
         human = false;
         maxThinkTime = (int) (skill * THINK_TIME_MULTIPLIER);
-        cores = Runtime.getRuntime().availableProcessors();
-        pool = Executors.newFixedThreadPool(cores);
+        int cores = Runtime.getRuntime().availableProcessors();
+        threads = cores == 1 ? 1 : cores - 1;  // try to leave a core free for server processing
+        pool = Executors.newFixedThreadPool(threads);
     }
 
     protected ComputerPlayerMCTS(UUID id) {
@@ -96,9 +98,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
         if (ability == null)
             logger.fatal("null ability");
         activateAbility((ActivatedAbility)ability, game);
-        if (ability instanceof PassAbility)
-            return false;
-        return true;
+        return !(ability instanceof PassAbility);
     }
 
     protected void calculateActions(Game game, NextAction action) {
@@ -106,7 +106,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
             Game sim = createMCTSGame(game);
             MCTSPlayer player = (MCTSPlayer) sim.getPlayer(playerId);
             player.setNextAction(action);
-            root = new MCTSNode(sim);
+            root = new MCTSNode(playerId, sim);
         }
         applyMCTS(game, action);
         root = root.bestChild();
@@ -162,13 +162,13 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
 //    public boolean chooseMulligan(Game game) {
 //        throw new UnsupportedOperationException("Not supported yet.");
 //    }
-//
+
 //    @Override
 //    public boolean chooseUse(Outcome outcome, String message, Game game) {
 //        getNextAction(game, NextAction.CHOOSE_USE);
-//        return root.get
+//        return root.getUseChoice();
 //    }
-//
+
 //    @Override
 //    public boolean choose(Outcome outcome, Choice choice, Game game) {
 //        throw new UnsupportedOperationException("Not supported yet.");
@@ -255,20 +255,22 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
 //    }
 
     protected void applyMCTS(final Game game, final NextAction action) {
-        int thinkTime = calculateThinkTime(game, action);
+        
+        int count = MCTSNode.cleanupCache(game.getTurnNum());
+        logger.info("Removed " + count + " cache entries");
 
+        int thinkTime = calculateThinkTime(game, action);
         long startTime = System.nanoTime();
         long endTime = startTime + (thinkTime * 1000000000l);
         logger.info("applyMCTS - Thinking for " + (endTime - startTime)/1000000000.0 + "s");
-
         if (thinkTime > 0) {
             if (USE_MULTIPLE_THREADS) {
-                List<MCTSExecutor> tasks = new ArrayList<MCTSExecutor>();
-                for (int i = 0; i < cores; i++) {
+                List<MCTSExecutor> tasks = new ArrayList<>();
+                for (int i = 0; i < threads; i++) {
                     Game sim = createMCTSGame(game);
                     MCTSPlayer player = (MCTSPlayer) sim.getPlayer(playerId);
                     player.setNextAction(action);
-                    MCTSExecutor exec = new MCTSExecutor(sim, playerId, thinkTime);
+                    MCTSExecutor exec = new MCTSExecutor(sim, playerId, thinkTime, true);
                     tasks.add(exec);
                 }
 
@@ -392,7 +394,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
                 }
             }
             else {
-                newPlayer.getLibrary().shuffle();                
+                newPlayer.getLibrary().shuffle();
             }
             mcts.getState().getPlayers().put(copyPlayer.getId(), newPlayer);
         }
@@ -409,6 +411,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
         long mb = 1024 * 1024;
 
         logger.info("Max heap size: " + heapMaxSize/mb + " Heap size: " + heapSize/mb + " Used: " + heapUsedSize/mb);
+        logger.info(MCTSNode.getHitMiss());
     }
 
 }

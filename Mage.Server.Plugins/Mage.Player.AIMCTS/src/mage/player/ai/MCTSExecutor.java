@@ -41,18 +41,21 @@ public class MCTSExecutor implements Callable<Boolean> {
     protected transient MCTSNode root;
     protected int thinkTime;
     protected UUID playerId;
+    protected boolean timeOrCount;
 
-     private static final transient Logger logger = Logger.getLogger(ComputerPlayerMCTS.class);
+    private static final transient Logger logger = Logger.getLogger(ComputerPlayerMCTS.class);
 
-    public MCTSExecutor(Game sim, UUID playerId, int thinkTime) {
+    public MCTSExecutor(Game sim, UUID playerId, int thinkTime, boolean timeOrCount) {
         this.playerId = playerId;
         this.thinkTime = thinkTime;
-        root = new MCTSNode(sim);
+        root = new MCTSNode(playerId, sim);
+        this.timeOrCount = timeOrCount;
     }
 
     @Override
     public Boolean call() {
         int simCount = 0;
+        int count = 0;
         long startTime = System.nanoTime();
         long endTime = startTime + (thinkTime * 1000000000l);
         MCTSNode current;
@@ -60,7 +63,7 @@ public class MCTSExecutor implements Callable<Boolean> {
 
         while (true) {
             long currentTime = System.nanoTime();
-            if (currentTime > endTime)
+            if (timeOrCount ? currentTime > endTime : count > thinkTime)
                 break;
             current = root;
 
@@ -91,6 +94,7 @@ public class MCTSExecutor implements Callable<Boolean> {
             }
             // Backpropagation
             current.backpropagate(result);
+            count++;
         }
         logger.info("Simulated " + simCount + " games - nodes in tree: " + root.size());
         return true;

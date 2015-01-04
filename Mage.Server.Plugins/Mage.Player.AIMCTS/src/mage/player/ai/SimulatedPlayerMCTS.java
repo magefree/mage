@@ -79,6 +79,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
         return this.isSimulatedPlayer;
     }
 
+    @Override
     public int getActionCount() {
         return actionCount;
     }

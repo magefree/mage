@@ -38,6 +38,15 @@ import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.ActivatedAbility;
+import mage.abilities.PlayLandAbility;
+import mage.abilities.costs.AlternativeSourceCosts;
+import mage.abilities.mana.ManaOptions;
+import mage.cards.Card;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
+import mage.game.events.GameEvent;
 
 /**
  *
@@ -45,14 +54,17 @@ import java.util.UUID;
  */
 public class MCTSPlayer extends ComputerPlayer {
 
-     private static final transient Logger logger = Logger.getLogger(MCTSPlayer.class);
+    private static final transient Logger logger = Logger.getLogger(MCTSPlayer.class);
 
     protected PassAbility pass = new PassAbility();
+    
+    private boolean isTargetPlayer = false;
+    private boolean isExpanding = false;
 
     private NextAction nextAction;
 
     public enum NextAction {
-        PRIORITY, SELECT_ATTACKERS, SELECT_BLOCKERS;
+        PRIORITY, SELECT_ATTACKERS, SELECT_BLOCKERS, CHOOSE_USE;
     }
 
     public MCTSPlayer(UUID id) {
@@ -71,6 +83,51 @@ public class MCTSPlayer extends ComputerPlayer {
         return new MCTSPlayer(this);
     }
 
+    protected void setTargetPlayer (boolean targetPlayer) {
+        this.isTargetPlayer = targetPlayer;
+    }
+    
+    protected void setExpanding(boolean expanding) {
+        this.isExpanding = expanding;
+    }
+    
+    @Override
+    protected void getPlayableInHand(Game game, List<Ability> playable, ManaOptions availableMana) {
+        if (!isTargetPlayer && isExpanding) {
+            if (hand.size() > 0) {
+                int handSize = hand.size();
+                library.addAll(hand.getCards(game), game);
+                hand.clear();
+                for (Card card: this.library.getUniqueCards(game)) {
+                    for (Ability ability : card.getAbilities(game)) { // gets this activated ability from hand? (Morph?)
+                        if (ability.getZone().match(Zone.HAND)) {
+                            if (ability instanceof ActivatedAbility) {
+                                if (!(ability instanceof PlayLandAbility) ||
+                                        !game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(), ability.getSourceId(), playerId), ability, game, true)) {
+                                    if (canPlay((ActivatedAbility) ability, availableMana, card, game)) {
+                                        playable.add(ability);
+                                    }
+                                }
+                            } else if (card.getCardType().contains(CardType.LAND) && ability instanceof AlternativeSourceCosts) {
+                                if (canLandPlayAlternateSourceCostsAbility(card, availableMana, ability, game)) { // e.g. Land with Morph
+                                    playable.add(ability);
+                                }
+                            }
+                        }
+                    }
+                }
+                for (int i = 0; i < handSize; i++) {
+                    Card card = library.removeFromTop(game);
+                    game.setZone(card.getId(), Zone.HAND);
+                    hand.add(card);
+                }
+            }
+        }
+        else {
+            super.getPlayableInHand(game, playable, availableMana);
+        }
+    }
+        
     protected List<Ability> getPlayableAbilities(Game game) {
         List<Ability> playables = getPlayable(game, true);
         playables.add(pass);
@@ -78,7 +135,7 @@ public class MCTSPlayer extends ComputerPlayer {
     }
 
     public List<Ability> getPlayableOptions(Game game) {
-        List<Ability> all = new ArrayList<Ability>();
+        List<Ability> all = new ArrayList<>();
         List<Ability> playables = getPlayableAbilities(game);
         for (Ability ability: playables) {
             List<Ability> options = game.getPlayer(playerId).getPlayableOptions(ability, game);
@@ -122,7 +179,7 @@ public class MCTSPlayer extends ComputerPlayer {
     }
 
     public List<List<UUID>> getAttacks(Game game) {
-        List<List<UUID>> engagements = new ArrayList<List<UUID>>();
+        List<List<UUID>> engagements = new ArrayList<>();
         List<Permanent> attackersList = super.getAvailableAttackers(game);
         //use binary digits to calculate powerset of attackers
         int powerElements = (int) Math.pow(2, attackersList.size());
@@ -133,7 +190,7 @@ public class MCTSPlayer extends ComputerPlayer {
             while (binary.length() < attackersList.size()) {
                 binary.insert(0, "0");
             }
-            List<UUID> engagement = new ArrayList<UUID>();
+            List<UUID> engagement = new ArrayList<>();
             for (int j = 0; j < attackersList.size(); j++) {
                 if (binary.charAt(j) == '1') {
                     engagement.add(attackersList.get(j).getId());
@@ -145,14 +202,14 @@ public class MCTSPlayer extends ComputerPlayer {
     }
 
     public List<List<List<UUID>>> getBlocks(Game game) {
-        List<List<List<UUID>>> engagements = new ArrayList<List<List<UUID>>>();
+        List<List<List<UUID>>> engagements = new ArrayList<>();
         int numGroups = game.getCombat().getGroups().size();
         if (numGroups == 0) {
             return engagements;
         }
 
         //add a node with no blockers
-        List<List<UUID>> engagement = new ArrayList<List<UUID>>();
+        List<List<UUID>> engagement = new ArrayList<>();
         for (int i = 0; i < numGroups; i++) {
             engagement.add(new ArrayList<UUID>());
         }
@@ -165,9 +222,9 @@ public class MCTSPlayer extends ComputerPlayer {
     }
 
     private List<List<UUID>> copyEngagement(List<List<UUID>> engagement) {
-        List<List<UUID>> newEngagement = new ArrayList<List<UUID>>();
+        List<List<UUID>> newEngagement = new ArrayList<>();
         for (List<UUID> group: engagement) {
-            newEngagement.add(new ArrayList<UUID>(group));
+            newEngagement.add(new ArrayList<>(group));
         }
         return newEngagement;
     }
@@ -243,14 +300,14 @@ public class MCTSPlayer extends ComputerPlayer {
 //    public boolean chooseMulligan(Game game) {
 //        game.end();
 //    }
-//
-//    @Override
-//    public boolean chooseUse(Outcome outcome, String message, Game game) {
-//        game.pause();
-//        nextAction = NextAction.CHOOSE_USE;
-//        return false;
-//    }
-//
+
+    @Override
+    public boolean chooseUse(Outcome outcome, String message, Game game) {
+        game.pause();
+        nextAction = NextAction.CHOOSE_USE;
+        return false;
+    }
+
 //    @Override
 //    public boolean choose(Outcome outcome, Choice choice, Game game) {
 //        game.end();
