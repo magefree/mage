@@ -66,7 +66,7 @@ public class Joven extends CardImpl {
         // {R}{R}{R}, {tap}: Destroy target noncreature artifact.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{R}{R}{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(new FilterArtifactPermanent(filter)));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 
