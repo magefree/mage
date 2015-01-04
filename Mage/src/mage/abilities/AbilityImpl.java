@@ -631,7 +631,7 @@ public abstract class AbilityImpl implements Ability {
             }
         }
         if (abilityWord != null) {
-            sbRule.insert(0, new StringBuilder("<i>").append(abilityWord.toString()).append("</i> - "));
+            sbRule.insert(0, new StringBuilder("<i>").append(abilityWord.toString()).append("</i> &mdash; "));
         }         
         String text = modes.getText();
         if (!text.isEmpty()) {

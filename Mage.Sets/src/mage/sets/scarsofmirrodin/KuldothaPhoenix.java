@@ -28,20 +28,22 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.common.IsStepCondition;
-import mage.abilities.costs.common.MetalcraftCost;
+import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
+import mage.constants.CardType;
 import mage.constants.PhaseStep;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
@@ -57,19 +59,19 @@ public class KuldothaPhoenix extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // Flying, haste
-        
+        // Flying, haste        
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
-        // Metalcraft - : Return Kuldotha Phoenix from your graveyard to the battlefield. 
+        
+        // Metalcraft - {4}: Return Kuldotha Phoenix from your graveyard to the battlefield.
         // Activate this ability only during your upkeep and only if you control three or more artifacts.        
         Ability ability = new ConditionalActivatedAbility(Zone.GRAVEYARD, 
-                new ReturnSourceFromGraveyardToBattlefieldEffect(true), 
+                new ReturnSourceFromGraveyardToBattlefieldEffect(), 
                 new ManaCostsImpl("{4}"), 
-                new IsStepCondition(PhaseStep.UPKEEP),
-                null
-        );        
-        ability.addCost(new MetalcraftCost());       
+                new CompoundCondition("during your upkeep and only if you control three or more artifacts",
+                        new IsStepCondition(PhaseStep.UPKEEP), new MetalcraftCondition())
+        );
+        ability.setAbilityWord(AbilityWord.METALCRAFT);
         this.addAbility(ability);
     }
 

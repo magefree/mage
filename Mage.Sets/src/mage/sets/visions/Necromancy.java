@@ -248,42 +248,6 @@ class NecromancyLeavesBattlefieldTriggeredEffect extends OneShotEffect {
     }
 }
 
-//class NecromancyAttachEffect extends OneShotEffect {
-//
-//    public NecromancyAttachEffect(Outcome outcome) {
-//        super(outcome);
-//    }
-//
-//    public NecromancyAttachEffect(Outcome outcome, String rule) {
-//        super(outcome);
-//        staticText = rule;
-//    }
-//
-//    public NecromancyAttachEffect(final NecromancyAttachEffect effect) {
-//        super(effect);
-//    }
-//
-//    @Override
-//    public NecromancyAttachEffect copy() {
-//        return new NecromancyAttachEffect(this);
-//    }
-//
-//    @Override
-//    public boolean apply(Game game, Ability source) {
-//        Card card = game.getCard(source.getFirstTarget());
-//        if (card != null && game.getState().getZone(source.getFirstTarget()).equals(Zone.GRAVEYARD)) {
-//            // Card have no attachedTo attribute yet so write ref only to enchantment now
-//            Permanent enchantment = game.getPermanent(source.getSourceId());
-//            if (enchantment != null) {
-//                enchantment.attachTo(card.getId(), game);
-//            }
-//            return true;
-//        }
-//        return false;
-//    }
-//
-//}
-
 class NecromancyChangeAbilityEffect extends ContinuousEffectImpl implements SourceEffect {
 
     private final static Ability newAbility = new EnchantAbility("creature put onto the battlefield with Necromancy");
