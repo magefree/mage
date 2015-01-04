@@ -55,7 +55,7 @@ public class Joven extends CardImpl {
     }
 
     public Joven(UUID ownerId) {
-        super(ownerId, 133, "Joven", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
+        super(ownerId, 97, "Joven", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.expansionSetCode = "HML";
         this.supertype.add("Legendary");
         this.subtype.add("Human");

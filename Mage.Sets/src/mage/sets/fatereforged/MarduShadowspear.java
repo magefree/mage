@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.keyword.DashAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -55,7 +56,7 @@ public class MarduShadowspear extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Mardu Shadowspear attacks, each opponent loses 1 life.
-        this.addAbility(new AttacksTriggeredAbility(new MarduShadowspearLoseLifeEffect(), false));
+        this.addAbility(new AttacksTriggeredAbility(new LoseLifeOpponentsEffect(1),false));
         // Dash {1}{B}
         this.addAbility(new DashAbility(this, "{1}{B}"));
     }
@@ -68,37 +69,4 @@ public class MarduShadowspear extends CardImpl {
     public MarduShadowspear copy() {
         return new MarduShadowspear(this);
     }
-}
-
-class MarduShadowspearLoseLifeEffect extends OneShotEffect {
-
-    private static final String effectText = "each opponent loses 1 life";
-
-    MarduShadowspearLoseLifeEffect ( ) {
-        super(Outcome.Damage);
-        staticText = effectText;
-    }
-
-    MarduShadowspearLoseLifeEffect ( MarduShadowspearLoseLifeEffect effect ) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Players players = game.getPlayers();
-
-        for ( Player player : players.values() ) {
-            if ( !player.getId().equals(source.getControllerId()) ) {
-                player.loseLife(1, game);
-            }
-        }
-
-        return true;
-    }
-
-    @Override
-    public MarduShadowspearLoseLifeEffect copy() {
-        return new MarduShadowspearLoseLifeEffect(this);
-    }
-
 }
