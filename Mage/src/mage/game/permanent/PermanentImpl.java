@@ -900,11 +900,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     protected void fireEvent(EventType eventType, Game game) {
-        game.fireEvent(GameEvent.getEvent(eventType, this.objectId, ownerId)); // controllerId seems to me more logical (LevelX2)
+        game.fireEvent(GameEvent.getEvent(eventType, this.objectId, ownerId));
     }
 
     protected boolean replaceEvent(EventType eventType, Game game) {
-        return game.replaceEvent(GameEvent.getEvent(eventType, this.objectId, ownerId));// controllerId seems to me more logical (LevelX2)
+        return game.replaceEvent(GameEvent.getEvent(eventType, this.objectId, ownerId));
     }
 
 
@@ -1080,76 +1080,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 //        this.abilities.setSourceId(objectId);
 //    }
     
-    @Override
-    public void setCardNumber(int cid) {
-        this.cardNumber = cid;
-    }
-
-    @Override
-    public void setExpansionSetCode(String expansionSetCode) {
-        this.expansionSetCode = expansionSetCode;
-    }
-    
-    @Override
-    public void setRarity(Rarity rarity) {
-        this.rarity = rarity;
-    }
-
-    @Override
-    public void setFlipCard(boolean flipCard) {
-        this.flipCard = flipCard;
-    }
-
-    @Override
-    public void setFlipCardName(String flipCardName) {
-        this.flipCardName = flipCardName;
-    }
-
-    @Override
-    public void setSecondCardFace(Card card) {
-        this.secondSideCard = card;
-    }
-
-    @Override
-    public void setFaceDown(boolean value, Game game) {
-        faceDown = value;
-        //game.getState().getCardState(objectId).setFaceDown(value);
-    }
-
-    @Override
-    public boolean isFaceDown(Game game) {
-        return faceDown;
-    }
-
-    @Override
-    public boolean turnFaceUp(Game game, UUID playerId) {
-        GameEvent event = GameEvent.getEvent(GameEvent.EventType.TURNFACEUP, getId(), playerId);
-        if (!game.replaceEvent(event)) {
-            setFaceDown(false, game);
-            //game.getCard(objectId).setFaceDown(false); // Another instance?
-            for (Ability ability :abilities) { // abilities that were set to not visible face down must be set to visible again
-                if (ability.getWorksFaceDown() && !ability.getRuleVisible()) {
-                    ability.setRuleVisible(true);
-                }
-            }
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TURNEDFACEUP, getId(), playerId));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean turnFaceDown(Game game, UUID playerId) {
-        GameEvent event = GameEvent.getEvent(GameEvent.EventType.TURNFACEDOWN, getId(), playerId);
-        if (!game.replaceEvent(event)) {
-            setFaceDown(true, game);
-            //game.getCard(objectId).setFaceDown(true); // Another instance?
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TURNEDFACEDOWN, getId(), playerId));
-            return true;
-        }
-        return false;
-    }
-
     @Override
     public void setCardNumber(int cid) {
         this.cardNumber = cid;
