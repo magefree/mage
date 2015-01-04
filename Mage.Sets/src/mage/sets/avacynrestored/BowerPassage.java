@@ -89,7 +89,7 @@ class BowerPassageEffect extends RestrictionEffect {
 
     @Override
     public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (attacker != null && attacker.getControllerId().equals(source.getControllerId()) && blocker.getAbilities().contains(FlyingAbility.getInstance())) {
+        if (attacker != null && attacker.getControllerId().equals(source.getControllerId()) && blocker.getAbilities(game).contains(FlyingAbility.getInstance())) {
             return false;
         }
         return true;

@@ -122,7 +122,7 @@ class StormtideLeviathanEffect extends ContinuousEffectImpl {
                     break;
                 case AbilityAddingRemovingEffects_6:
                     boolean addAbility = true;
-                    for (Ability existingAbility : land.getAbilities()) {
+                    for (Ability existingAbility : land.getAbilities(game)) {
                         if (existingAbility instanceof BlueManaAbility) {
                             addAbility = false;
                             break;

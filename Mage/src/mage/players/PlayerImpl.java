@@ -948,7 +948,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         // Check for alternate casting possibilities: e.g. land with Morph
         ActivatedAbility playLandAbility = null;
         boolean found = false;
-        for (Ability ability : card.getAbilities()) {
+        for (Ability ability : card.getAbilities(game)) {
             // if cast for noMana no Alternative costs are allowed
             if ((ability instanceof AlternativeSourceCosts) ||(ability instanceof OptionalAdditionalSourceCosts)) {
                 found = true;
@@ -1125,7 +1125,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     protected LinkedHashMap<UUID, ActivatedAbility> getSpellAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
-        for (Ability ability: object.getAbilities()) {
+        for (Ability ability: object.getAbilities(game)) {
             if (ability instanceof SpellAbility) {
                 if (((SpellAbility) ability).getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
                     if (zone.equals(Zone.HAND)) {
@@ -1151,7 +1151,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
         if (!(object instanceof Permanent) || ((Permanent)object).canUseActivatedAbilities(game)) {
-            for (Ability ability: object.getAbilities()) {
+            for (Ability ability: object.getAbilities(game)) {
                 if (ability.getZone().match(zone)) {
                     if (ability instanceof ActivatedAbility) {
                         if (((ActivatedAbility)ability).canActivate(playerId, game)) {
@@ -1159,7 +1159,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         }
                     } else if (ability instanceof AlternativeSourceCosts){
                         if (object.getCardType().contains(CardType.LAND)) {
-                            for (Ability ability2: object.getAbilities().copy()) {
+                            for (Ability ability2: object.getAbilities(game).copy()) {
                                 if (ability2 instanceof PlayLandAbility) {
                                     useable.put(ability2.getId(), (ActivatedAbility)ability2);
                                 }
@@ -1170,14 +1170,14 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             if (zone != Zone.HAND) {
                 if (Zone.GRAVEYARD.equals(zone) && canPlayCardsFromGraveyard()) {
-                    for (ActivatedAbility ability: object.getAbilities().getPlayableAbilities(Zone.HAND)) {
+                    for (ActivatedAbility ability: object.getAbilities(game).getPlayableAbilities(Zone.HAND)) {
                         if (ability.canActivate(playerId, game)) {
                             useable.put(ability.getId(), ability);
                         }
                     }
                 }
                 if (zone != Zone.BATTLEFIELD && game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, this.getId(), game)) {
-                    for (Ability ability: object.getAbilities()) {
+                    for (Ability ability: object.getAbilities(game)) {
                         ability.setControllerId(this.getId());
                         if (ability instanceof ActivatedAbility && ability.getZone().match(Zone.HAND) 
                                 && ((ActivatedAbility) ability).canActivate(playerId, game)) {
@@ -1235,7 +1235,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected LinkedHashMap<UUID, ManaAbility> getUseableManaAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ManaAbility> useable = new LinkedHashMap<>();
         if (!(object instanceof Permanent) || ((Permanent)object).canUseActivatedAbilities(game)) {
-            for (ManaAbility ability: object.getAbilities().getManaAbilities(zone)) {
+            for (ManaAbility ability: object.getAbilities(game).getManaAbilities(zone)) {
                 if (ability.canActivate(playerId, game)) {
                     useable.put(ability.getId(), ability);
                 }
@@ -1300,7 +1300,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public void phasing(Game game) {
         //20091005 - 502.1
         List<Permanent> phasedOut = game.getBattlefield().getPhasedOut(playerId);
-        for (Permanent permanent: game.getBattlefield().getPhasedIn(playerId)) {
+        for (Permanent permanent: game.getBattlefield().getPhasedIn(playerId, game)) {
             permanent.phaseOut(game);
         }
         for (Permanent permanent: phasedOut) {
@@ -1611,7 +1611,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             source = (Permanent) lastKnownInformation;
                         }
                     }
-                    if (source != null && (source.getAbilities().containsKey(InfectAbility.getInstance().getId()))) {
+                    if (source != null && (source.getAbilities(game).containsKey(InfectAbility.getInstance().getId()))) {
                         addCounters(CounterType.POISON.createInstance(actualDamage), game);
                     } else {
                         GameEvent damageToLifeLossEvent = new GameEvent(EventType.DAMAGE_CAUSES_LIFE_LOSS, playerId, sourceId, playerId, actualDamage, combatDamage);
@@ -1619,7 +1619,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             this.loseLife(damageToLifeLossEvent.getAmount(), game);
                         }
                     }
-                    if (source != null && source.getAbilities().containsKey(LifelinkAbility.getInstance().getId())) {
+                    if (source != null && source.getAbilities(game).containsKey(LifelinkAbility.getInstance().getId())) {
                         Player player = game.getPlayer(source.getControllerId());
                         player.gainLife(actualDamage, game);
                     }
@@ -2058,12 +2058,12 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         List<Permanent> manaPerms = this.getAvailableManaProducers(game);
         for (Permanent perm: manaPerms) {
-            available.addMana(perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game), game);
+            available.addMana(perm.getAbilities(game).getAvailableManaAbilities(Zone.BATTLEFIELD, game), game);
         }
 
         List<Permanent> manaPermsWithCost = this.getAvailableManaProducersWithCost(game);
         for (Permanent perm: manaPermsWithCost) {
-            available.addManaWithCost(perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game), game);
+            available.addManaWithCost(perm.getAbilities(game).getAvailableManaAbilities(Zone.BATTLEFIELD, game), game);
         }
         return available;
     }
@@ -2073,7 +2073,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         List<Permanent> result = new ArrayList<>();
         for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
             boolean canAdd = false;
-            for (ManaAbility ability: permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
+            for (ManaAbility ability: permanent.getAbilities(game).getManaAbilities(Zone.BATTLEFIELD)) {
                 if (ability.canActivate(playerId, game)) {
                     canAdd = true;
                 }
@@ -2093,7 +2093,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected List<Permanent> getAvailableManaProducersWithCost(Game game) {
         List<Permanent> result = new ArrayList<>();
         for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
-            for (ManaAbility ability: permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
+            for (ManaAbility ability: permanent.getAbilities(game).getManaAbilities(Zone.BATTLEFIELD)) {
                 if (ability.canActivate(playerId, game) && !ability.getManaCosts().isEmpty()) {
                     result.add(permanent);
                     break;
@@ -2114,7 +2114,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             Card card = game.getCard(ability.getSourceId());
             if (card != null) {
-                for (Ability ability0 : card.getAbilities()) {
+                for (Ability ability0 : card.getAbilities(game)) {
                     if (ability0 instanceof AdjustingSourceCosts) {
                         // A workaround for Issue#457
                         if (!(ability0 instanceof ConvokeAbility)) {
@@ -2138,7 +2138,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             }
             // old alternate costs
-            for (Ability objectAbility :sourceObject.getAbilities()) {
+            for (Ability objectAbility :sourceObject.getAbilities(game)) {
                 if (objectAbility instanceof AlternativeCostSourceAbility) {
                     if (objectAbility.getCosts().canPay(ability, ability.getSourceId(), playerId, game)) {
                         return true;
@@ -2161,7 +2161,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     protected boolean canPlayCardByAlternateCost(Card sourceObject, ManaOptions available, Ability ability, Game game) {
         if (!(sourceObject instanceof Permanent)) {
-            for (Ability alternateSourceCostsAbility : sourceObject.getAbilities()) {
+            for (Ability alternateSourceCostsAbility : sourceObject.getAbilities(game)) {
                 // if cast for noMana no Alternative costs are allowed
                 if (alternateSourceCostsAbility instanceof AlternativeSourceCosts) {
                     if (((AlternativeSourceCosts)alternateSourceCostsAbility).isAvailable(ability, game)) {
@@ -2195,7 +2195,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean canLandPlayAlternateSourceCostsAbility(Card sourceObject, ManaOptions available, Ability ability, Game game) {
         if (!(sourceObject instanceof Permanent)) {
             Ability sourceAbility = null;
-            for(Ability landAbility : sourceObject.getAbilities()) {
+            for(Ability landAbility : sourceObject.getAbilities(game)) {
                 if (landAbility.getAbilityType().equals(AbilityType.PLAY_LAND)) {
                     sourceAbility = landAbility;
                     break;
@@ -2238,28 +2238,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             availableMana.addMana(manaPool.getMana());
 
             if (hidden) {
-                for (Card card : hand.getUniqueCards(game)) {
-                    for (Ability ability : card.getAbilities()) { // gets this activated ability from hand? (Morph?)
-                        if (ability.getZone().match(Zone.HAND)) {
-                            if (ability instanceof ActivatedAbility) {
-                                if (!(ability instanceof PlayLandAbility) ||
-                                        !game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(), ability.getSourceId(), playerId), ability, game, true)) {
-                                    if (canPlay((ActivatedAbility) ability, availableMana, card, game)) {
-                                        playable.add(ability);
-                                    }
-                                }
-                            } else if (card.getCardType().contains(CardType.LAND) && ability instanceof AlternativeSourceCosts) {
-                                if (canLandPlayAlternateSourceCostsAbility(card, availableMana, ability, game)) { // e.g. Land with Morph
-                                    playable.add(ability);
-                                }
-                            }
-                        }
-                    }
-                }
+                getPlayableInHand(game, playable, availableMana);
             }
             for (Card card : graveyard.getUniqueCards(game)) {
                 boolean asThoughtCast = game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, this.getId(), game);
-                for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.ALL)) {
+                for (ActivatedAbility ability : card.getAbilities(game).getActivatedAbilities(Zone.ALL)) {
                     boolean possible = false;
                     if (ability.getZone().match(Zone.GRAVEYARD)) {
                         possible = true;
@@ -2281,7 +2264,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             for (ExileZone exile : game.getExile().getExileZones()) {
                 for (Card card : exile.getCards(game)) {
                     if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, this.getId(), game)) {
-                        for (Ability ability : card.getAbilities()) {                            
+                        for (Ability ability : card.getAbilities(game)) {                            
                             if (ability.getZone().match(Zone.HAND)) {
                                 ability.setControllerId(this.getId()); // controller must be set for case owner != caster   
                                 if (ability instanceof ActivatedAbility) {
@@ -2297,7 +2280,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             for (Cards cards : game.getState().getRevealed().values()) {
                 for (Card card : cards.getCards(game)) {
                     if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, this.getId(), game)) {
-                        for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {
+                        for (ActivatedAbility ability : card.getAbilities(game).getActivatedAbilities(Zone.HAND)) {
                             if (ability instanceof SpellAbility || ability instanceof PlayLandAbility) {
                                 playable.add(ability);
                             }
@@ -2308,7 +2291,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             // eliminate duplicate activated abilities
             Map<String, Ability> playableActivated = new HashMap<>();
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
-                for (ActivatedAbility ability : permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
+                for (ActivatedAbility ability : permanent.getAbilities(game).getActivatedAbilities(Zone.BATTLEFIELD)) {
                     if (!playableActivated.containsKey(ability.toString())) {
                         if (canPlay(ability, availableMana, permanent, game)) {
                             playableActivated.put(ability.toString(), ability);
@@ -2318,7 +2301,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             // activated abilities from objects in the command zone (emblems or commanders)
             for (CommandObject commandObject: game.getState().getCommand()) {
-                for (ActivatedAbility ability: commandObject.getAbilities().getActivatedAbilities(Zone.COMMAND)) {
+                for (ActivatedAbility ability: commandObject.getAbilities(game).getActivatedAbilities(Zone.COMMAND)) {
                     if (ability.getControllerId().equals(getId())
                             && ability.getAbilityType().equals(AbilityType.ACTIVATED)
                             && canPlay(ability, availableMana, game.getObject(ability.getSourceId()), game)) {
@@ -2333,6 +2316,27 @@ public abstract class PlayerImpl implements Player, Serializable {
         return playable;
     }
 
+    protected void getPlayableInHand(Game game, List<Ability> playable, ManaOptions availableMana) {
+        for (Card card : hand.getUniqueCards(game)) {
+            for (Ability ability : card.getAbilities(game)) { // gets this activated ability from hand? (Morph?)
+                if (ability.getZone().match(Zone.HAND)) {
+                    if (ability instanceof ActivatedAbility) {
+                        if (!(ability instanceof PlayLandAbility) ||
+                                !game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(), ability.getSourceId(), playerId), ability, game, true)) {
+                            if (canPlay((ActivatedAbility) ability, availableMana, card, game)) {
+                                playable.add(ability);
+                            }
+                        }
+                    } else if (card.getCardType().contains(CardType.LAND) && ability instanceof AlternativeSourceCosts) {
+                        if (canLandPlayAlternateSourceCostsAbility(card, availableMana, ability, game)) { // e.g. Land with Morph
+                            playable.add(ability);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     /**
      * Creates a list of card ids that are currently playable.<br>
      * Used to mark the playable cards in GameView
@@ -2353,7 +2357,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             for (Card card : hand.getCards(game)) {
                 Abilities:
-                for (Ability ability : card.getAbilities()) {
+                for (Ability ability : card.getAbilities(game)) {
                     if (ability.getZone().match(Zone.HAND)) {
                         switch (ability.getAbilityType()) {
                             case PLAY_LAND:
@@ -2702,7 +2706,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override 
     public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
         boolean result = false;
-        boolean faceDown = card.isFaceDown(); // move sets card to face up
+        boolean faceDown = card.isFaceDown(game); // move sets card to face up
         if (card.moveToZone(Zone.HAND, sourceId, game, false)) {
             if (card instanceof PermanentCard) {
                 card = game.getCard(card.getId());

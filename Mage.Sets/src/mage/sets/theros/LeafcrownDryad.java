@@ -60,7 +60,7 @@ public class LeafcrownDryad extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Bestow {3}{G}  (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
-        this.addAbility(new BestowAbility(this, "{3}{G}"));
+        this.addAbility(new BestowAbility(this.getName(), "{3}{G}"));
         // Reach
         this.addAbility(ReachAbility.getInstance());
         // Enchanted creature gets +2/+2 and has reach.

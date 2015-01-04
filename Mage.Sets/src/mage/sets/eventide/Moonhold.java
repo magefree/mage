@@ -73,7 +73,7 @@ public class Moonhold extends CardImpl {
                 new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.W))));
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.addInfo("Info1", "<i>(Do both if {R}{W} was spent.)</i>");
-        this.addWatcher(new ManaSpentToCastWatcher());
+        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
     public Moonhold(final Moonhold card) {

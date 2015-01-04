@@ -107,7 +107,7 @@ class DreadWarlockEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getAbilities().containsKey(DreadWarlockAbility.getInstance().getId())) {
+        if (permanent.getAbilities(game).containsKey(DreadWarlockAbility.getInstance().getId())) {
             return true;
         }
         return false;

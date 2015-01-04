@@ -54,7 +54,7 @@ public class NyxbornWolf extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Bestow {4}{G}
-        this.addAbility(new BestowAbility(this, "{4}{G}"));
+        this.addAbility(new BestowAbility(this.getName(), "{4}{G}"));
         // Enchanted creature gets +3/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3,1, Duration.WhileOnBattlefield)));
     }

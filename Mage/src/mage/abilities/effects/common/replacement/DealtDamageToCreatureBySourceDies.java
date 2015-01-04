@@ -52,7 +52,6 @@ public class DealtDamageToCreatureBySourceDies extends ReplacementEffectImpl {
 
     public DealtDamageToCreatureBySourceDies(Card card, Duration duration) {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
-        card.addWatcher(new DamagedByWatcher());
         if (card.getCardType().contains(CardType.CREATURE)) {
             staticText = "If a creature dealt damage by {this} this turn would die, exile it instead";
         } else {
@@ -91,7 +90,7 @@ public class DealtDamageToCreatureBySourceDies extends ReplacementEffectImpl {
             if (zce.isDiesEvent()) {
                 DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
                 if (watcher != null) {
-                    return watcher.wasDamaged(zce.getTarget());
+                    return watcher.wasDamaged(zce.getTarget(), game);
                 }
             }
         }

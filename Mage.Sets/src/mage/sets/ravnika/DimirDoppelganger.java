@@ -136,8 +136,8 @@ class DimirDoppelgangerEffect extends ContinuousEffectImpl {
         dimirDoppelgangerAbility.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard")));
         permanent.addAbility(dimirDoppelgangerAbility, source.getSourceId(), game);
 
-        for (Ability ability : cardToCopy.getAbilities()) {
-            if (!permanent.getAbilities().contains(ability)) {
+        for (Ability ability : cardToCopy.getAbilities(game)) {
+            if (!permanent.getAbilities(game).contains(ability)) {
                 permanent.addAbility(ability, source.getSourceId(), game);
             }
         }

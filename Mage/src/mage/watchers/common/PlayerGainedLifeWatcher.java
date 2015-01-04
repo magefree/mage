@@ -47,7 +47,7 @@ import mage.watchers.Watcher;
  */
 public class PlayerGainedLifeWatcher extends Watcher {
 
-    private Map<UUID, Integer> amountOfLifeGainedThisTurn = new HashMap<UUID, Integer>();
+    private Map<UUID, Integer> amountOfLifeGainedThisTurn = new HashMap<>();
 
 
     public PlayerGainedLifeWatcher() {
@@ -56,9 +56,7 @@ public class PlayerGainedLifeWatcher extends Watcher {
 
     public PlayerGainedLifeWatcher(final PlayerGainedLifeWatcher watcher) {
         super(watcher);
-        for (Entry<UUID, Integer> entry : watcher.amountOfLifeGainedThisTurn.entrySet()) {
-            amountOfLifeGainedThisTurn.put(entry.getKey(), entry.getValue());
-        }
+        this.amountOfLifeGainedThisTurn.putAll(watcher.amountOfLifeGainedThisTurn);
     }
 
     @Override

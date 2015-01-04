@@ -65,9 +65,9 @@ public class HauntAbility extends TriggeredAbilityImpl {
 
     private boolean usedFromExile = false;
 
-    public HauntAbility(Card card, Effect effect) {
+    public HauntAbility(Effect effect) {
         super(Zone.ALL, effect , false);
-        card.addAbility(new HauntExileAbility());
+        addSubAbility(new HauntExileAbility());
     }
 
     public HauntAbility(final HauntAbility ability) {
@@ -92,16 +92,13 @@ public class HauntAbility extends TriggeredAbilityImpl {
                 if (!usedFromExile &&game.getState().getZone(getSourceId()).equals(Zone.EXILED)) {
                     ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
                     if (zEvent.isDiesEvent()) {
-                        Card card = game.getCard(getSourceId());
-                        if (card != null) {
-                            String key = new StringBuilder("Haunting_").append(getSourceId().toString()).append("_").append(card.getZoneChangeCounter()).toString();
-                            Object object = game.getState().getValue(key);
-                            if (object != null && object instanceof FixedTarget) {
-                                FixedTarget target = (FixedTarget) object;
-                                if (target.getTarget() != null &&  target.getTarget().equals(event.getTargetId())) {
-                                    usedFromExile = true;
-                                    return true;
-                                }
+                        String key = new StringBuilder("Haunting_").append(getSourceId().toString()).append("_").append(game.getZoneChangeCounter(getSourceId())).toString();
+                        Object object = game.getState().getValue(key);
+                        if (object != null && object instanceof FixedTarget) {
+                            FixedTarget target = (FixedTarget) object;
+                            if (target.getTarget() != null &&  target.getTarget().equals(event.getTargetId())) {
+                                usedFromExile = true;
+                                return true;
                             }
                         }
                     }
@@ -178,10 +175,10 @@ class HauntEffect extends OneShotEffect {
             if (hauntedCreature != null) {
                 if (card.moveToExile(source.getSourceId(), "Haunting", source.getSourceId(), game)) {
                     // remember the haunted creature
-                    String key = new StringBuilder("Haunting_").append(source.getSourceId().toString()).append("_").append(card.getZoneChangeCounter()).toString();
+                    String key = new StringBuilder("Haunting_").append(source.getSourceId().toString()).append("_").append(game.getZoneChangeCounter(source.getSourceId())).toString();
                     game.getState().setValue(key, new FixedTarget(targetPointer.getFirst(game, source)));
-                    card.addInfo("hauntinfo", new StringBuilder("Haunting ").append(hauntedCreature.getLogName()).toString());
-                    hauntedCreature.addInfo("hauntinfo", new StringBuilder("Haunted by ").append(card.getLogName()).toString());
+                    card.addInfo("hauntinfo", new StringBuilder("Haunting ").append(hauntedCreature.getLogName()).toString(), game);
+                    hauntedCreature.addInfo("hauntinfo", new StringBuilder("Haunted by ").append(card.getLogName()).toString(), game);
                     game.informPlayers(new StringBuilder(card.getName()).append(" haunting ").append(hauntedCreature.getLogName()).toString());
                 }
                 return true;

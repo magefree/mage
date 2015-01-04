@@ -45,17 +45,17 @@ public class TraceUtil {
             for (UUID attackerId : group.getAttackers()) {
                 Permanent attacker = game.getPermanent(attackerId);
                 if (attacker != null) {
-                    if (hasFlying(attacker)) {
+                    if (hasFlying(attacker, game)) {
  // traceCombat(game, attacker, null);
                         for (UUID blockerId : group.getBlockers()) {
                             Permanent blocker = game.getPermanent(blockerId);
-                            if (blocker != null && !hasFlying(blocker) && !hasReach(blocker)) {
+                            if (blocker != null && !hasFlying(blocker, game) && !hasReach(blocker, game)) {
                                 log.warn("Found non-flying non-reach creature blocking creature with flying");
                                 traceCombat(game, attacker, blocker);                                
                             }
                         }
                     }
-                    if (hasIntimidate(attacker)) {
+                    if (hasIntimidate(attacker, game)) {
                         for (UUID blockerId : group.getBlockers()) {
                             Permanent blocker = game.getPermanent(blockerId);
                             if (blocker != null && !blocker.getCardType().contains(CardType.ARTIFACT)
@@ -65,7 +65,7 @@ public class TraceUtil {
                             }
                         }
                     }
-                    if (hasUnblockable(attacker)) {
+                    if (hasUnblockable(attacker, game)) {
                         if (group.getBlockers().size() > 0) {
                             Permanent blocker = game.getPermanent(group.getBlockers().get(0));
                             if (blocker != null) {
@@ -83,8 +83,8 @@ public class TraceUtil {
      * We need this to check Flying existence in not-common way: by instanceof.
      * @return
      */
-    private static boolean hasFlying(Permanent permanent) {
-        for (Ability ability : permanent.getAbilities()) {
+    private static boolean hasFlying(Permanent permanent, Game game) {
+        for (Ability ability : permanent.getAbilities(game)) {
             if (ability instanceof FlyingAbility) {
                 return true;
             }
@@ -92,8 +92,8 @@ public class TraceUtil {
         return false;
     }
 
-    private static boolean hasIntimidate(Permanent permanent) {
-        for (Ability ability : permanent.getAbilities()) {
+    private static boolean hasIntimidate(Permanent permanent, Game game) {
+        for (Ability ability : permanent.getAbilities(game)) {
             if (ability instanceof IntimidateAbility) {
                 return true;
             }
@@ -101,8 +101,8 @@ public class TraceUtil {
         return false;
     }
 
-    private static boolean hasReach(Permanent permanent) {
-        for (Ability ability : permanent.getAbilities()) {
+    private static boolean hasReach(Permanent permanent, Game game) {
+        for (Ability ability : permanent.getAbilities(game)) {
             if (ability instanceof ReachAbility) {
                 return true;
             }
@@ -110,8 +110,8 @@ public class TraceUtil {
         return false;
     }
 
-    private static boolean hasUnblockable(Permanent permanent) {
-        for (Ability ability : permanent.getAbilities()) {
+    private static boolean hasUnblockable(Permanent permanent, Game game) {
+        for (Ability ability : permanent.getAbilities(game)) {
             if (ability instanceof UnblockableAbility) {
                 return true;
             }
@@ -128,12 +128,12 @@ public class TraceUtil {
 
         log.error(prefix);
         log.error(prefix+"Attacker abilities: ");
-        for (Ability ability : attacker.getAbilities()) {
+        for (Ability ability : attacker.getAbilities(game)) {
             log.error(prefix+"     " + ability.toString() + ", id=" + ability.getId());
         }
         if (blocker != null) {
             log.error(prefix+"Blocker abilities: ");
-            for (Ability ability : blocker.getAbilities()) {
+            for (Ability ability : blocker.getAbilities(game)) {
                 log.error(prefix+"     " + ability.toString() + ", id=" + ability.getId());
             }
         }
@@ -201,7 +201,7 @@ public class TraceUtil {
                         MageObject object = game.getObject(ability.getSourceId());
                         log.error(uuid+"        object: " + object);
                         if (object != null) {
-                            log.error(uuid + "        contains ability: " + object.getAbilities().contains(ability));
+                            log.error(uuid + "        contains ability: " + object.getAbilities(game).contains(ability));
                         }
                         Zone test = game.getState().getZone(ability.getSourceId());
                         log.error(uuid+"        test_zone: " + test);

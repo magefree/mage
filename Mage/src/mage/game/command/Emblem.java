@@ -54,7 +54,7 @@ public class Emblem implements CommandObject {
     private UUID id;
     private UUID controllerId;
     private UUID sourceId;
-    private Abilities<Ability> abilites = new AbilitiesImpl<>();
+    private Abilities<Ability> abilities = new AbilitiesImpl<>();
     private String expansionSetCodeForImage = null;
 
     public Emblem() {
@@ -66,7 +66,7 @@ public class Emblem implements CommandObject {
         this.name = emblem.name;
         this.controllerId = emblem.controllerId;
         this.sourceId = emblem.sourceId;
-        this.abilites = emblem.abilites.copy();
+        this.abilities = emblem.abilities.copy();
     }
 
     @Override
@@ -86,7 +86,7 @@ public class Emblem implements CommandObject {
 
     public void setControllerId(UUID controllerId) {
          this.controllerId = controllerId;
-        this.abilites.setControllerId(controllerId);
+        this.abilities.setControllerId(controllerId);
     }
 
     public void setSourceId(UUID sourceId) {
@@ -135,12 +135,27 @@ public class Emblem implements CommandObject {
 
     @Override
     public Abilities<Ability> getAbilities() {
-        return abilites;
+        return abilities;
     }
 
     @Override
+    public Abilities<Ability> getAbilities(Game game) {
+        return abilities;
+    }
+
+    @Override
+    public void clearAbilities(Game game) {
+        abilities.clear();
+    }
+    
+    @Override
+    public void removeAbility(Ability ability, Game game) {
+        abilities.remove(ability);
+    }
+    
+    @Override
     public boolean hasAbility(UUID abilityId, Game game) {
-        return abilites.containsKey(abilityId);
+        return abilities.containsKey(abilityId);
     }
 
     @Override

@@ -56,7 +56,7 @@ public class EmberFistZubera extends CardImpl {
         Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(new ZuberasDiedDynamicValue()));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
-        this.addWatcher(new ZuberasDiedWatcher());
+        ability.addWatcher(new ZuberasDiedWatcher());
     }
 
     public EmberFistZubera (final EmberFistZubera card) {

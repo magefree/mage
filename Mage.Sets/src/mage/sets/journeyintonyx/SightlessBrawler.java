@@ -60,7 +60,7 @@ public class SightlessBrawler extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Bestow 4W (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
-        this.addAbility(new BestowAbility(this, "{4}{W}"));
+        this.addAbility(new BestowAbility(this.getName(), "{4}{W}"));
         // Sightless Brawler can't attack alone.
         this.addAbility(CantAttackAloneAbility.getInstance());
         // Enchanted creature gets +3/+2 and can't attack alone.

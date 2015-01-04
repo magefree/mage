@@ -60,7 +60,7 @@ public class ScoutsWarning extends CardImpl {
 
         // The next creature card you play this turn can be played as though it had flash.
         this.getSpellAbility().addEffect(new ScoutsWarningAsThoughEffect());
-        this.addWatcher(new ScoutsWarningWatcher());
+        this.getSpellAbility().addWatcher(new ScoutsWarningWatcher());
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
@@ -94,9 +94,8 @@ class ScoutsWarningAsThoughEffect extends AsThoughEffectImpl {
     @Override
     public void init(Ability source, Game game) {
          watcher = (ScoutsWarningWatcher) game.getState().getWatchers().get("consumeScoutsWarningWatcher", source.getControllerId());
-         Card card = game.getCard(source.getSourceId());
-         if (watcher != null && card != null) {
-             zoneChangeCounter = card.getZoneChangeCounter();
+         if (watcher != null) {
+             zoneChangeCounter = game.getZoneChangeCounter(source.getSourceId());
              watcher.addScoutsWarningSpell(source.getSourceId(), zoneChangeCounter);
          }
     }

@@ -76,9 +76,7 @@ public class TritonTactics extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
         this.getSpellAbility().addEffect(new TritonTacticsUntapTargetEffect());
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new TritonTacticsTriggeredAbility()));
-
-        this.addWatcher(new BlockedCreaturesWatcher());
-
+        this.getSpellAbility().addWatcher(new BlockedCreaturesWatcher());
 
     }
 
@@ -127,7 +125,7 @@ class TritonTacticsUntapTargetEffect extends OneShotEffect {
             } else {
                 targetMap = new HashMap<>();
             }
-            targetMap.put(new Integer(game.getCard(source.getSourceId()).getZoneChangeCounter()), targets);
+            targetMap.put(new Integer(game.getZoneChangeCounter(source.getSourceId())), targets);
             if (object == null) {
                 game.getState().setValue("targets" + source.getSourceId().toString(), targetMap);
             }

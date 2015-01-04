@@ -55,7 +55,7 @@ public class FlyingAbility extends EvasionAbility implements MageSingleton {
     }
 
     private FlyingAbility() {
-        this.addEffect(new FlyingEffect());
+        this.addEffect(FlyingEffect.getInstance());
     }
 
     @Override
@@ -72,27 +72,29 @@ public class FlyingAbility extends EvasionAbility implements MageSingleton {
 
 class FlyingEffect extends RestrictionEffect implements MageSingleton {
 
-    public FlyingEffect() {
+    private static final FlyingEffect fINSTANCE =  new FlyingEffect();
+    
+    private FlyingEffect() {
         super(Duration.EndOfGame);
     }
 
-    public FlyingEffect(final FlyingEffect effect) {
-        super(effect);
+    public static FlyingEffect getInstance() {
+        return fINSTANCE;
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getAbilities().containsKey(FlyingAbility.getInstance().getId());
+        return permanent.getAbilities(game).containsKey(FlyingAbility.getInstance().getId());
     }
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return blocker.getAbilities().containsKey(FlyingAbility.getInstance().getId()) || blocker.getAbilities().containsKey(ReachAbility.getInstance().getId());
+        return blocker.getAbilities(game).containsKey(FlyingAbility.getInstance().getId()) || blocker.getAbilities(game).containsKey(ReachAbility.getInstance().getId());
     }
 
     @Override
     public FlyingEffect copy() {
-        return new FlyingEffect(this);
+        return fINSTANCE;
     }
 
 }

@@ -36,7 +36,7 @@ public class FlankingAbility extends TriggeredAbilityImpl {
             if(permanent != null)
             {
                 boolean hasFlankingAbility = false;
-                for(Ability ability : permanent.getAbilities()){
+                for(Ability ability : permanent.getAbilities(game)){
                     if(ability instanceof FlankingAbility){
                         hasFlankingAbility = true;
                     }

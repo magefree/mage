@@ -99,7 +99,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl implements Sou
             Card card = game.getCard(source.getSourceId());
             if (card != null) {
                 // add ability to card only once
-                card.addAbility(ability);
+                game.getState().addOtherAbility(card.getId(), ability);
                 discard();
                 return true;
             }

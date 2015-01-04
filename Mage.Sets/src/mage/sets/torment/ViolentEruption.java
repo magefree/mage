@@ -54,7 +54,7 @@ public class ViolentEruption extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayerAmount(4));
 
         // Madness {1}{R}{R}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{1}{R}{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl("{1}{R}{R}")));
     }
 
     public ViolentEruption(final ViolentEruption card) {

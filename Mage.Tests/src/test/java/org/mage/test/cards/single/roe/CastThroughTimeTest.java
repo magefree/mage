@@ -66,7 +66,7 @@ public class CastThroughTimeTest extends CardTestPlayerBase {
         boolean found = false;
         for (Card card : currentGame.getPlayer(playerA.getId()).getHand().getCards(currentGame)) {
             if (card.getName().equals("Lightning Bolt")) {
-                for (String rule : card.getRules()) {
+                for (String rule : card.getRules(currentGame)) {
                     if (rule.startsWith("Rebound")) {
                         found = true;
                     }

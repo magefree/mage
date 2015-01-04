@@ -88,7 +88,7 @@ class FloweringLumberknotEffect extends RestrictionEffect {
                 return true; // not paired => can't attack or block
             }
             Permanent paired = game.getPermanent(permanent.getPairedCard());
-            if (paired != null && paired.getAbilities().contains(SoulbondAbility.getInstance())) {
+            if (paired != null && paired.getAbilities(game).contains(SoulbondAbility.getInstance())) {
                 return false; // paired => can attack or block
             }
             // can't attack or block otherwise

@@ -61,8 +61,7 @@ public class TunnelIgnus extends CardImpl {
         this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        this.addWatcher(new TunnelIgnusWatcher());
-        this.addAbility(new TunnelIgnusTriggeredAbility());
+        this.addAbility(new TunnelIgnusTriggeredAbility(), new TunnelIgnusWatcher());
     }
 
     public TunnelIgnus(final TunnelIgnus card) {
@@ -77,7 +76,7 @@ public class TunnelIgnus extends CardImpl {
 }
 
 class TunnelIgnusWatcher extends Watcher {
-    protected Map<UUID, Integer> counts = new HashMap<UUID, Integer>();
+    protected Map<UUID, Integer> counts = new HashMap<>();
 
     public TunnelIgnusWatcher() {
         super("LandPlayedCount", WatcherScope.PLAYER);
@@ -85,9 +84,7 @@ class TunnelIgnusWatcher extends Watcher {
 
     public TunnelIgnusWatcher(final TunnelIgnusWatcher watcher) {
         super(watcher);
-        for (Entry<UUID, Integer> entry: watcher.counts.entrySet()) {
-            counts.put(entry.getKey(), entry.getValue());
-        }
+        this.counts.putAll(watcher.counts);
     }
 
     @Override

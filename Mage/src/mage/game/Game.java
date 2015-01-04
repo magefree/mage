@@ -80,7 +80,7 @@ public interface Game extends MageItem, Serializable {
 
     //game data methods
     void loadCards(Set<Card> cards, UUID ownerId);
-    void unloadCard(Card card);
+//    void unloadCard(Card card);
     Collection<Card> getCards();
     Object getCustomData();
     void setCustomData(Object data);
@@ -149,6 +149,9 @@ public interface Game extends MageItem, Serializable {
     void setStateCheckRequired();
     boolean getStateCheckRequired();
     void resetForSourceId(UUID sourceId);
+    int getZoneChangeCounter(UUID objectId);
+    void updateZoneChangeCounter(UUID objectId);
+    void setZoneChangeCounter(UUID objectId, int value);
 
     //client event methods
     void addTableEventListener(Listener<TableEvent> listener);
@@ -251,7 +254,7 @@ public interface Game extends MageItem, Serializable {
 
     Permanent copyPermanent(Duration duration, Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier);
     
-    Card copyCard(Card cardToCopy, Ability source, UUID newController);
+    Card copyCard(Card cardToCopy, Ability source);
 
     void addTriggeredAbility(TriggeredAbility ability);
     void addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility);

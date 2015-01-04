@@ -56,9 +56,7 @@ public class CardsDrawnDuringDrawStepWatcher extends Watcher {
 
     public CardsDrawnDuringDrawStepWatcher(final CardsDrawnDuringDrawStepWatcher watcher) {
         super(watcher);
-        for (Entry<UUID, Integer> entry : watcher.amountOfCardsDrawnThisTurn.entrySet()) {
-            amountOfCardsDrawnThisTurn.put(entry.getKey(), entry.getValue());
-        }
+        this.amountOfCardsDrawnThisTurn.putAll(watcher.amountOfCardsDrawnThisTurn);
     }
 
     @Override

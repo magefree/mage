@@ -132,12 +132,13 @@ public class LevelerCardBuilder {
     /**
      * Add abilities to card to enable switching between levels.
      *
-     * @param card
      * @param levelAbilities
+     * @return list of levelAbilities to add to card
      */
-    public static void construct(Card card, LevelAbility... levelAbilities) {
+    public static List<Ability> construct(LevelAbility... levelAbilities) {
         LevelerCardBuilder builder = new LevelerCardBuilder();
-
+        List<Ability> abilities = new ArrayList<>();
+        
         for (LevelAbility levelAbility : levelAbilities) {
             // set main params
             builder = builder
@@ -154,21 +155,10 @@ public class LevelerCardBuilder {
             }
 
             // build static abilities and add them to card
-            for (Ability simpleStaticAbility : builder.build()) {
-                card.addAbility(simpleStaticAbility);
-            }
+            abilities.addAll(builder.build());
         }
 
-        // set max level counters (for ai)
-        if (card instanceof LevelerCard) {
-            int maxValue = 0;
-            for (LevelAbility levelAbility : levelAbilities) {
-                if (levelAbility.getLevel1() > maxValue) {
-                    maxValue = levelAbility.getLevel1();
-                }
-            }
-            ((LevelerCard) card).setMaxLevelCounters(maxValue);
-        }
+        return abilities;
     }
 
     public static class LevelAbility {

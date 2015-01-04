@@ -26,7 +26,7 @@ public class ShadowAbility extends EvasionAbility implements MageSingleton {
     }
 
     private ShadowAbility() {
-        this.addEffect(new ShadowEffect());
+        this.addEffect(ShadowEffect.getInstance());
     }
 
     @Override
@@ -43,17 +43,19 @@ public class ShadowAbility extends EvasionAbility implements MageSingleton {
 
 class ShadowEffect extends RestrictionEffect implements MageSingleton {
 
-    public ShadowEffect() {
+    private static final ShadowEffect fINSTANCE =  new ShadowEffect();
+    
+    private ShadowEffect() {
         super(Duration.EndOfGame);
     }
 
-    public ShadowEffect(final ShadowEffect effect) {
-        super(effect);
+    public static ShadowEffect getInstance() {
+        return fINSTANCE;
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getAbilities().containsKey(ShadowAbility.getInstance().getId())) {
+        if (permanent.getAbilities(game).containsKey(ShadowAbility.getInstance().getId())) {
             return true;
         }
         return false;
@@ -61,12 +63,12 @@ class ShadowEffect extends RestrictionEffect implements MageSingleton {
 
     @Override
     public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return attacker.getAbilities().containsKey(ShadowAbility.getInstance().getId());
+        return attacker.getAbilities(game).containsKey(ShadowAbility.getInstance().getId());
     }
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (blocker.getAbilities().containsKey(ShadowAbility.getInstance().getId())
+        if (blocker.getAbilities(game).containsKey(ShadowAbility.getInstance().getId())
                 || game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_SHADOW, source, blocker.getControllerId(), game)) {
             return true;
         }
@@ -75,6 +77,6 @@ class ShadowEffect extends RestrictionEffect implements MageSingleton {
 
     @Override
     public ShadowEffect copy() {
-        return new ShadowEffect(this);
+        return fINSTANCE;
     }
 }

@@ -98,7 +98,8 @@ class GruesomeEncoreEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getFirstTarget());
         if (card != null) {
-            card.addAbility(HasteAbility.getInstance());
+            game.getState().addOtherAbility(source.getFirstTarget(), HasteAbility.getInstance());
+            //card.addAbility(HasteAbility.getInstance());
             card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
 
             ExileTargetEffect exileEffect = new ExileTargetEffect();

@@ -104,15 +104,15 @@ public abstract class SplitCard extends CardImpl {
     }
     
     @Override
-    public Abilities<Ability> getAbilities(){
+    public Abilities<Ability> getAbilities(Game game){
         Abilities<Ability> allAbilites = new AbilitiesImpl<>();
-        for (Ability ability : super.getAbilities()) {
+        for (Ability ability : super.getAbilities(game)) {
             if (ability instanceof SpellAbility && !((SpellAbility)ability).getSpellAbilityType().equals(SpellAbilityType.SPLIT)) {
                 allAbilites.add(ability);
             }
         }
-        allAbilites.addAll(leftHalfCard.getAbilities());
-        allAbilites.addAll(rightHalfCard.getAbilities());                
+        allAbilites.addAll(leftHalfCard.getAbilities(game));
+        allAbilites.addAll(rightHalfCard.getAbilities(game));                
         return allAbilites;
     }
 
@@ -128,30 +128,10 @@ public abstract class SplitCard extends CardImpl {
     }
 
     @Override
-    public void setControllerId(UUID controllerId) {
-        abilities.setControllerId(controllerId);
-        leftHalfCard.getAbilities().setControllerId(controllerId);
-        rightHalfCard.getAbilities().setControllerId(controllerId);
-    }
-
-    @Override
     public void setOwnerId(UUID ownerId) {
-        this.ownerId = ownerId;
-        abilities.setControllerId(ownerId);
-        leftHalfCard.getAbilities().setControllerId(ownerId);
+        super.setOwnerId(ownerId);
         leftHalfCard.setOwnerId(ownerId);
-        rightHalfCard.getAbilities().setControllerId(ownerId);
         rightHalfCard.setOwnerId(ownerId);
-
-    }
-
-    @Override
-    public List<Watcher> getWatchers() {
-        List<Watcher> allWatchers = new ArrayList<>();
-        allWatchers.addAll(super.getWatchers());
-        allWatchers.addAll(leftHalfCard.getWatchers());
-        allWatchers.addAll(rightHalfCard.getWatchers());
-        return allWatchers;
     }
 }
 
@@ -175,6 +155,11 @@ class LeftHalfCard  extends CardImpl {
     @Override
     public LeftHalfCard copy() {
         return new LeftHalfCard(this);
+    }
+
+    @Override
+    public UUID getOwnerId() {
+        return splitCardParent.getOwnerId();
     }
 
     @Override
@@ -232,6 +217,11 @@ class RightHalfCard  extends CardImpl {
     @Override
     public RightHalfCard copy() {
         return new RightHalfCard(this);
+    }
+
+    @Override
+    public UUID getOwnerId() {
+        return splitCardParent.getOwnerId();
     }
 
     @Override

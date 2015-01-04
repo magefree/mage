@@ -66,7 +66,7 @@ public class MyojinOfNightsReach extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(2);
 
-        this.addWatcher(new CastFromHandWatcher());
+        this.getSpellAbility().addWatcher(new CastFromHandWatcher());
 
         // Myojin of Night's Reach enters the battlefield with a divinity counter on it if you cast it from your hand.
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.DIVINITY.createInstance()), new CastFromHandCondition(), ""), "{this} enters the battlefield with a divinity counter on it if you cast it from your hand"));

@@ -131,7 +131,7 @@ class KioraPreventionEffect extends PreventionEffectImpl {
         for(UUID targetId :this.getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
-                permanent.addInfo(new StringBuilder("kioraPrevention").append(getId()).toString(),CardUtil.addToolTipMarkTags("All damage that would be dealt to and dealt by this permanent is prevented."));
+                permanent.addInfo(new StringBuilder("kioraPrevention").append(getId()).toString(),CardUtil.addToolTipMarkTags("All damage that would be dealt to and dealt by this permanent is prevented."), game);
             }
         }
     }
@@ -154,7 +154,7 @@ class KioraPreventionEffect extends PreventionEffectImpl {
             for(UUID targetId :this.getTargetPointer().getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null) {
-                    permanent.addInfo(new StringBuilder("kioraPrevention").append(getId()).toString(),"");
+                    permanent.addInfo(new StringBuilder("kioraPrevention").append(getId()).toString(),"", game);
                 }
             }
             return true;

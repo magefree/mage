@@ -73,7 +73,7 @@ public class MyojinOfLifesWeb extends CardImpl {
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
 
-        this.addWatcher(new CastFromHandWatcher());
+        this.getSpellAbility().addWatcher(new CastFromHandWatcher());
 
         // Myojin of Life's Web enters the battlefield with a divinity counter on it if you cast it from your hand.
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.DIVINITY.createInstance()), new CastFromHandCondition(), ""), "{this} enters the battlefield with a divinity counter on it if you cast it from your hand"));

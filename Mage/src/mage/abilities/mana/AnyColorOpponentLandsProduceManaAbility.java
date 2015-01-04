@@ -157,7 +157,7 @@ class AnyColorOpponentLandsProduceManaEffect extends ManaEffect {
         List<Permanent> lands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
         Mana types = new Mana();
         for (Permanent land : lands) {
-            Abilities<ManaAbility> mana = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
+            Abilities<ManaAbility> mana = land.getAbilities(game).getManaAbilities(Zone.BATTLEFIELD);
             for (ManaAbility ability : mana) {
                 if (!ability.equals(source) && ability.definesMana()) {
                     for (Mana netMana: ability.getNetMana(game)) {

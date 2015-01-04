@@ -57,6 +57,7 @@ import java.util.UUID;
 import mage.cards.Card;
 import mage.constants.AbilityWord;
 import mage.players.Player;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -157,6 +158,21 @@ public class StackAbility implements StackObject, Ability {
     @Override
     public Abilities<Ability> getAbilities() {
         return emptyAbilites;
+    }
+
+    @Override
+    public Abilities<Ability> getAbilities(Game game) {
+        return emptyAbilites;
+    }
+
+    @Override
+    public void clearAbilities(Game game) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+    
+    @Override
+    public void removeAbility(Ability ability, Game game) {
+        throw new UnsupportedOperationException("Unsupported operation");
     }
 
     @Override
@@ -352,14 +368,6 @@ public class StackAbility implements StackObject, Ability {
     }
 
     @Override
-    public Costs<Cost> getOptionalCosts() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void addOptionalCost(Cost cost) {}
-
-    @Override
     public boolean checkIfClause(Game game) {
         return true;
     }
@@ -475,6 +483,25 @@ public class StackAbility implements StackObject, Ability {
     public void setWorksFaceDown(boolean worksFaceDown) {
         this.ability.setWorksFaceDown(worksFaceDown);
     }
-    
+
+    @Override
+    public List<Watcher> getWatchers() {
+        return this.ability.getWatchers();
+    }
+
+    @Override
+    public void addWatcher(Watcher watcher) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
+    public List<Ability> getSubAbilities() {
+        return this.ability.getSubAbilities();
+    }
+
+    @Override
+    public void addSubAbility(Ability ability) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
     
 }

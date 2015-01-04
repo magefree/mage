@@ -61,7 +61,7 @@ public class SpoilsOfBlood extends CardImpl {
 
         // Put an X/X black Horror creature token onto the battlefield, where X is the number of creatures that died this turn.
         this.getSpellAbility().addEffect(new SpoilsOfBloodEffect());
-        this.addWatcher(new CreaturesDiedThisTurnWatcher());
+        this.getSpellAbility().addWatcher(new CreaturesDiedThisTurnWatcher());
     }
 
     public SpoilsOfBlood(final SpoilsOfBlood card) {

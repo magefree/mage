@@ -110,15 +110,15 @@ class AshlingThePilgrimEffect extends OneShotEffect {
             Object object = game.getState().getValue(source.getSourceId() + "ActivationInfo");
             if (object instanceof ActivationInfo) {
                 info = (ActivationInfo) object;
-                if (info.turn != game.getTurnNum() || sourcePermanent.getZoneChangeCounter() != info.zoneChangeCounter) {
+                if (info.turn != game.getTurnNum() || game.getZoneChangeCounter(source.getSourceId()) != info.zoneChangeCounter) {
                     info.turn = game.getTurnNum();
-                    info.zoneChangeCounter = sourcePermanent.getZoneChangeCounter();
+                    info.zoneChangeCounter = game.getZoneChangeCounter(source.getSourceId());
                     info.activations = 0;
                 }
             } else {
                 info = new ActivationInfo();
                 info.turn = game.getTurnNum();
-                info.zoneChangeCounter = sourcePermanent.getZoneChangeCounter();
+                info.zoneChangeCounter = game.getZoneChangeCounter(source.getSourceId());
                 game.getState().setValue(source.getSourceId() + "ActivationInfo", info);
             }
             info.activations++;

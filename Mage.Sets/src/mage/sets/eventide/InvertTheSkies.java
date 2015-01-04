@@ -73,7 +73,7 @@ public class InvertTheSkies extends CardImpl {
                 new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.U)),
                 "and creatures you control gain flying until end of turn if {U} was spent to cast it"));
         this.addInfo("Info1", "<i>(Do both if {G}{U} was spent.)<i>");
-        this.addWatcher(new ManaSpentToCastWatcher());
+        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
     public InvertTheSkies(final InvertTheSkies card) {
@@ -108,7 +108,7 @@ class InvertTheSkiesEffect extends ContinuousEffectImpl {
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
         for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             if (opponents.contains(perm.getControllerId())) {
-                perm.getAbilities().remove(FlyingAbility.getInstance());
+                perm.getAbilities(game).remove(FlyingAbility.getInstance());
             }
         }
         return true;

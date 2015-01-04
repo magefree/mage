@@ -61,6 +61,7 @@ import mage.abilities.effects.common.DynamicManaEffect;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
 import mage.game.permanent.Permanent;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -69,6 +70,8 @@ import mage.game.permanent.Permanent;
 public abstract class AbilityImpl implements Ability {
 
     private static final transient Logger logger = Logger.getLogger(AbilityImpl.class);
+    private static final List<Watcher> emptyWatchers = new ArrayList<>();
+    private static final List<Ability> emptyAbilities = new ArrayList<>();
 
     protected UUID id;
     protected UUID originalId;
@@ -79,8 +82,9 @@ public abstract class AbilityImpl implements Ability {
     protected ManaCosts<ManaCost> manaCostsToPay;
     protected Costs<Cost> costs;
     protected ArrayList<AlternativeCost> alternativeCosts = new ArrayList<>();
-    protected Costs<Cost> optionalCosts;
     protected Modes modes;
+    protected List<Watcher> watchers = null;    
+    protected List<Ability> subAbilities = null;    
     protected Zone zone;
     protected String name;
     protected AbilityWord abilityWord;
@@ -100,7 +104,6 @@ public abstract class AbilityImpl implements Ability {
         this.manaCosts = new ManaCostsImpl<>();
         this.manaCostsToPay = new ManaCostsImpl<>();
         this.costs = new CostsImpl<>();
-        this.optionalCosts = new CostsImpl<>();
         this.modes = new Modes();
     }
 
@@ -116,11 +119,22 @@ public abstract class AbilityImpl implements Ability {
         this.manaCosts = ability.manaCosts;
         this.manaCostsToPay = ability.manaCostsToPay.copy();
         this.costs = ability.costs.copy();
-        this.optionalCosts = ability.optionalCosts.copy();
         for (AlternativeCost cost: ability.alternativeCosts) {
             this.alternativeCosts.add((AlternativeCost)cost.copy());
         }
         this.modes = ability.modes.copy();
+        if (ability.watchers != null) {
+            this.watchers = new ArrayList<>();
+            for (Watcher watcher: ability.watchers) {
+                watchers.add(watcher.copy());
+            }
+        }
+        if (ability.subAbilities != null) {
+            this.subAbilities = new ArrayList<>();
+            for (Ability subAbility: ability.subAbilities) {
+                subAbilities.add(subAbility.copy());
+            }
+        }
         this.ruleAtTheTop = ability.ruleAtTheTop;
         this.ruleVisible = ability.ruleVisible;
         this.ruleAdditionalCostsVisible = ability.ruleAdditionalCostsVisible;
@@ -286,19 +300,10 @@ public abstract class AbilityImpl implements Ability {
             }
         } // end modes
 
-        // TODO: Handle optionalCosts at the same time as already OptionalAdditionalSourceCosts are handled.
-        for (Cost cost : optionalCosts) {
-              if (cost instanceof ManaCost) {
-                cost.clearPaid();
-                if (controller.chooseUse(Outcome.Benefit, "Pay optional cost " + cost.getText() + "?", game)) {
-                    manaCostsToPay.add((ManaCost) cost);
-                }
-            }
-        }
         //20100716 - 601.2e
         if (sourceObject != null) {
             sourceObject.adjustCosts(this, game);
-            for (Ability ability : sourceObject.getAbilities()) {
+            for (Ability ability : sourceObject.getAbilities(game)) {
                 if (ability instanceof AdjustingSourceCosts) {
                     ((AdjustingSourceCosts)ability).adjustCosts(this, game);
                 }
@@ -376,7 +381,7 @@ public abstract class AbilityImpl implements Ability {
     public boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, boolean noMana, Player controller, Game game) {
         boolean alternativeCostisUsed = false;
         if (sourceObject != null && !(sourceObject instanceof Permanent) && !(this instanceof FlashbackAbility)) {
-            for (Ability ability : sourceObject.getAbilities()) {
+            for (Ability ability : sourceObject.getAbilities(game)) {
                 // if cast for noMana no Alternative costs are allowed
                 if (!noMana && ability instanceof AlternativeSourceCosts) {
                     AlternativeSourceCosts alternativeSpellCosts = (AlternativeSourceCosts) ability;
@@ -526,6 +531,16 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public void setControllerId(UUID controllerId) {
         this.controllerId = controllerId;
+        if (subAbilities != null) {
+            for (Ability subAbility: subAbilities) {
+                subAbility.setControllerId(controllerId);
+            }
+        }
+        if (watchers != null) {
+            for (Watcher watcher: watchers) {
+                watcher.setControllerId(controllerId);
+            }
+        }
     }
 
 
@@ -537,6 +552,16 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public void setSourceId(UUID sourceId) {
         this.sourceId = sourceId;
+        if (subAbilities != null) {
+            for (Ability subAbility: subAbilities) {
+                subAbility.setSourceId(sourceId);
+            }
+        }
+        if (watchers != null) {
+            for (Watcher watcher: watchers) {
+                watcher.setSourceId(sourceId);
+            }
+        }
     }
 
     @Override
@@ -566,11 +591,6 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public Costs<Cost> getOptionalCosts() {
-        return optionalCosts;
-    }
-
-    @Override
     public Effects getEffects() {
         return modes.getMode().getEffects();
     }
@@ -594,6 +614,40 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public Zone getZone() {
         return zone;
+    }
+
+    @Override
+    public List<Ability> getSubAbilities() {
+        if (subAbilities != null)
+            return subAbilities;
+        else
+            return emptyAbilities;
+    }
+
+    @Override
+    public void addSubAbility(Ability ability) {
+        if (subAbilities == null)
+            subAbilities = new ArrayList<>();
+        ability.setSourceId(this.sourceId);
+        ability.setControllerId(this.controllerId);
+        subAbilities.add(ability);
+    }
+
+    @Override
+    public List<Watcher> getWatchers() {
+        if (watchers != null)
+            return watchers;
+        else
+            return emptyWatchers;
+    }
+
+    @Override
+    public void addWatcher(Watcher watcher) {
+        if (watchers == null)
+            watchers = new ArrayList<>();
+        watcher.setSourceId(this.sourceId);
+        watcher.setControllerId(this.controllerId);
+        watchers.add(watcher);
     }
 
     @Override
@@ -680,13 +734,6 @@ public abstract class AbilityImpl implements Ability {
     public void addAlternativeCost(AlternativeCost cost) {
         if (cost != null) {
             this.alternativeCosts.add(cost);
-        }
-    }
-
-    @Override
-    public void addOptionalCost(Cost cost) {
-        if (cost != null) {
-            this.optionalCosts.add(cost);
         }
     }
 
@@ -779,12 +826,12 @@ public abstract class AbilityImpl implements Ability {
             parameterSourceId = getSourceId();
         }
 
-        if (object != null && !object.getAbilities().contains(this)) {
+        if (object != null && !object.getAbilities(game).contains(this)) {
             boolean found = false;
             // unfortunately we need to handle double faced cards separately and only this way
             if (object instanceof PermanentCard && ((PermanentCard)object).canTransform()) {
                 PermanentCard permanent = (PermanentCard)object;
-                found = permanent.getSecondCardFace().getAbilities().contains(this) || permanent.getCard().getAbilities().contains(this);
+                found = permanent.getSecondCardFace().getAbilities(game).contains(this) || permanent.getCard().getAbilities(game).contains(this);
             }
             if (!found) {
                 return false;
@@ -968,7 +1015,7 @@ public abstract class AbilityImpl implements Ability {
 
     private String getOptionalTextSuffix(Game game, Spell spell) {
         StringBuilder sb = new StringBuilder();
-        for (Ability ability : spell.getAbilities()) {
+        for (Ability ability : spell.getAbilities(game)) {
             if (ability instanceof OptionalAdditionalSourceCosts) {
                 sb.append(((OptionalAdditionalSourceCosts) ability).getCastMessageSuffix());
             }

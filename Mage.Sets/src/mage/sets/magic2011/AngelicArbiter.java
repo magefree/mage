@@ -72,8 +72,7 @@ public class AngelicArbiter extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AngelicArbiterCantAttackTargetEffect(Duration.WhileOnBattlefield)));
 
         // Each opponent who attacked with a creature this turn can't cast spells.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AngelicArbiterEffect2()));
-        this.addWatcher(new AngelicArbiterWatcher2());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AngelicArbiterEffect2()), new AngelicArbiterWatcher2());
     }
 
     public AngelicArbiter(final AngelicArbiter card) {

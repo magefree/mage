@@ -61,7 +61,7 @@ public class CircularLogic extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
 
         // Madness {U}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{U}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl("{U}")));
     }
 
     public CircularLogic(final CircularLogic card) {

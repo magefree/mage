@@ -58,7 +58,7 @@ public class HopefulEidolon extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Bestow {3}{W}
-        addAbility(new BestowAbility(this, "{3}{W}"));
+        addAbility(new BestowAbility(this.getName(), "{3}{W}"));
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
         // Echanted creature gets +1/+1 and has lifelink.

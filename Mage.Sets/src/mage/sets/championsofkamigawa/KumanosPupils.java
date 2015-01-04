@@ -37,6 +37,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.watchers.common.DamagedByWatcher;
 
 /**
  * @author LevelX
@@ -53,7 +54,7 @@ public class KumanosPupils extends CardImpl {
         this.toughness = new MageInt(3);
 
         // If a creature dealt damage by Kumano's Pupils this turn would die, exile it instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DealtDamageToCreatureBySourceDies(this, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DealtDamageToCreatureBySourceDies(this, Duration.WhileOnBattlefield)), new DamagedByWatcher());
     }
 
     public KumanosPupils(final KumanosPupils card) {

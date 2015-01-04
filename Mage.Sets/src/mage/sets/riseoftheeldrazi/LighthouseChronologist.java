@@ -28,6 +28,7 @@
 
 package mage.sets.riseoftheeldrazi;
 
+import java.util.List;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -75,10 +76,12 @@ public class LighthouseChronologist extends LevelerCard {
         Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         abilities2.add(new LighthouseChronologistAbility());
 
-        LevelerCardBuilder.construct(this,
+        List<Ability> levelerAbilities = LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(4, 6, abilities1, 2, 4),
                 new LevelerCardBuilder.LevelAbility(7, -1, abilities2, 3, 5)
         );
+        this.addAbilities(levelerAbilities);
+        setMaxLevelCounters(7);
     }
 
     public LighthouseChronologist (final LighthouseChronologist card) {

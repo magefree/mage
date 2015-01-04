@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
@@ -51,8 +52,9 @@ public class DrippingTongueZubera extends CardImpl {
         this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SpiritToken(), new ZuberasDiedDynamicValue()), false));
-        this.addWatcher(new ZuberasDiedWatcher());
+        Ability ability = new DiesTriggeredAbility(new CreateTokenEffect(new SpiritToken(), new ZuberasDiedDynamicValue()), false);
+        this.addAbility(ability);
+        ability.addWatcher(new ZuberasDiedWatcher());
     }
 
     public DrippingTongueZubera (final DrippingTongueZubera card) {

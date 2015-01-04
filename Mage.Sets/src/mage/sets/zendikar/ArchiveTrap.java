@@ -59,7 +59,7 @@ public class ArchiveTrap extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(13));
         this.getSpellAbility().addAlternativeCost(new ArchiveTrapAlternativeCost());
-        this.addWatcher(new ArchiveTrapWatcher());
+        this.getSpellAbility().addWatcher(new ArchiveTrapWatcher());
     }
 
     public ArchiveTrap(final ArchiveTrap card) {

@@ -116,7 +116,6 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
     public MorphAbility(Card card, Costs<Cost> morphCosts) {
         super(Zone.HAND, null);
         this.morphCosts = morphCosts;
-        card.setMorphCard(true);
         this.setWorksFaceDown(true);
         name = ABILITY_KEYWORD;
         StringBuilder sb = new StringBuilder();
@@ -133,7 +132,8 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
 
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesFaceDownCreatureEffect(morphCosts));
         ability.setRuleVisible(false);
-        card.addAbility(ability);
+        ability.setWorksFaceDown(true);
+        addSubAbility(ability);
 
     }
 
@@ -167,8 +167,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
 
     @Override
     public boolean isActivated(Ability ability, Game game) {
-        Card card = game.getCard(sourceId);
-        if (card != null && card.getZoneChangeCounter() <= zoneChangeCounter +1) {
+        if (game.getZoneChangeCounter(sourceId) <= zoneChangeCounter +1) {
             return alternateCosts.isActivated(game);
         }
         return false;
@@ -186,7 +185,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
             Spell spell = game.getStack().getSpell(ability.getId());
             if (player != null && spell != null) {
                 this.resetMorph();
-                spell.setFaceDown(true); // so only the back is visible
+                spell.setFaceDown(true, game); // so only the back is visible
                 if (alternateCosts.canPay(ability, sourceId, controllerId, game)) {
                     if (player.chooseUse(Outcome.Benefit, new StringBuilder("Cast this card as a 2/2 face-down creature for ").append(getCosts().getText()).append(" ?").toString(), game)) {
                         activateMorph(game);
@@ -209,7 +208,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
                         spellColor.setWhite(false);
                         spellColor.setBlue(false);
                     } else {
-                        spell.setFaceDown(false);
+                        spell.setFaceDown(false, game);
                     }
                 }
             }
@@ -243,12 +242,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
         alternateCosts.activate();
         // remember zone change counter
         if (zoneChangeCounter == 0) {
-            Card card = game.getCard(getSourceId());
-            if (card != null) {
-                zoneChangeCounter = card.getZoneChangeCounter();
-            } else {
-                throw new IllegalArgumentException("Morph source card not found");
-            }
+            zoneChangeCounter = game.getZoneChangeCounter(getSourceId());
         }
     }
 
@@ -276,10 +270,10 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
         return alternateCosts;
     }
     
-    public static void setPermanentToMorph(Permanent permanent) {
+    public static void setPermanentToMorph(Permanent permanent, Game game) {
         permanent.getPower().initValue(2);
         permanent.getToughness().initValue(2);
-        permanent.getAbilities().clear();
+        permanent.clearAbilities(game);
         permanent.getColor().setColor(new ObjectColor());
         permanent.setName("");
         permanent.getCardType().clear();
@@ -331,7 +325,7 @@ class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implements Sour
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && permanent.isFaceDown()) {
+        if (permanent != null && permanent.isFaceDown(game)) {
             switch (layer) {
                 case TypeChangingEffects_4:
                     permanent.setName("");
@@ -347,8 +341,8 @@ class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implements Sour
                 case AbilityAddingRemovingEffects_6:
                     Card card = game.getCard(permanent.getId()); //  
                     List<Ability> abilities = new ArrayList<>();
-                    for (Ability ability : permanent.getAbilities()) {
-                        if (card != null && !card.getAbilities().contains(ability)) {
+                    for (Ability ability : permanent.getAbilities(game)) {
+                        if (card != null && !card.getAbilities(game).contains(ability)) {
                             // gained abilities from other sources won't be removed
                             continue;
                         }
@@ -364,7 +358,7 @@ class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implements Sour
                         }
                         abilities.add(ability);
                     }
-                    permanent.getAbilities().removeAll(abilities);
+                    permanent.getAbilities(game).removeAll(abilities);
                     if (turnFaceUpAbility != null) {
                         permanent.addAbility(turnFaceUpAbility, game);
                     }

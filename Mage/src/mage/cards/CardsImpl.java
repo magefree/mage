@@ -36,6 +36,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.UUID;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -102,14 +104,6 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
             return;
         }
         this.remove(card.getId());
-    }
-
-    @Override
-    public void setOwner(UUID ownerId, Game game) {
-        this.ownerId = ownerId;
-        for (UUID card: this) {
-            game.getCard(card).setOwnerId(ownerId);
-        }
     }
 
     @Override
@@ -194,6 +188,20 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
             }
         }
         return cards;
+    }
+    
+    @Override
+    public String getValue(Game game) {
+        StringBuilder sb = new StringBuilder(1024);
+        SortedSet<String> cards = new TreeSet<>();
+        for (UUID cardId: this) {
+            Card card = game.getCard(cardId);
+            cards.add(card.getName());
+        }
+        for (String name: cards) {
+            sb.append(name).append(":");
+        }
+        return sb.toString();
     }
 
     @Override

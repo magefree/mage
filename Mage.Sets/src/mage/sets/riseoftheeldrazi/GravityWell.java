@@ -82,7 +82,7 @@ class GravityWellTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
     if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED ) {
             Permanent attacker = game.getPermanent(event.getSourceId());
-            if (attacker != null && attacker.getAbilities().contains(FlyingAbility.getInstance())) {
+            if (attacker != null && attacker.getAbilities(game).contains(FlyingAbility.getInstance())) {
                 for (Effect effect : getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getSourceId()));
                 }
@@ -126,7 +126,7 @@ class GravityWellEffect extends ContinuousEffectImpl {
             switch (layer) {
                 case AbilityAddingRemovingEffects_6:
                     if (sublayer == SubLayer.NA) {
-            for (Iterator<Ability> i = permanent.getAbilities().iterator(); i.hasNext();) {
+            for (Iterator<Ability> i = permanent.getAbilities(game).iterator(); i.hasNext();) {
                             Ability entry = i.next();
                             if (entry.getId().equals(FlyingAbility.getInstance().getId()))
                 i.remove();

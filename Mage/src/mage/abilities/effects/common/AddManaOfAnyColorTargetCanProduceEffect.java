@@ -63,7 +63,7 @@ public class AddManaOfAnyColorTargetCanProduceEffect extends ManaEffect {
             if (targetController == null) {
                 return false;
             }
-            Abilities<ManaAbility> mana = permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
+            Abilities<ManaAbility> mana = permanent.getAbilities(game).getManaAbilities(Zone.BATTLEFIELD);
             Mana types = new Mana();
             for (ManaAbility ability : mana) {
                 for(Mana netMana: ability.getNetMana(game)) {

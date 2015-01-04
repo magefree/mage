@@ -66,7 +66,7 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
        this.additionalCost = new OptionalAdditionalCostImpl(keywordText, reminderTextMana, new ManaCostsImpl(manaString));
        this.additionalCost.setRepeatable(true);
        setRuleAtTheTop(true);
-       card.addAbility(new ReplicateTriggeredAbility());
+       addSubAbility(new ReplicateTriggeredAbility());
     }
 
     public ReplicateAbility(final ReplicateAbility ability) {
@@ -86,6 +86,7 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
         }
     }
 
+    @Override
     public boolean isActivated() {
         if (additionalCost != null) {
             return additionalCost.isActivated();
@@ -117,8 +118,8 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
                 while (player.isInGame() && again) {
                     String times = "";
                     if (additionalCost.isRepeatable()) {
-                        int activated = additionalCost.getActivateCount();
-                        times = Integer.toString(activated + 1) + (activated == 0 ? " time ":" times ");
+                        int activatedCount = additionalCost.getActivateCount();
+                        times = Integer.toString(activatedCount + 1) + (activatedCount == 0 ? " time ":" times ");
                     }
                     if (additionalCost.canPay(ability, sourceId, controllerId, game) &&
                             player.chooseUse(Outcome.Benefit, new StringBuilder("Pay ").append(times).append(additionalCost.getText(false)).append(" ?").toString(), game)) {
@@ -190,7 +191,7 @@ class ReplicateTriggeredAbility extends TriggeredAbilityImpl {
             if (spell instanceof Spell) {
                 Card card = game.getCard(spell.getSourceId());
                 if (card != null) {
-                    for (Ability ability: card.getAbilities()) {
+                    for (Ability ability: card.getAbilities(game)) {
                         if (ability instanceof ReplicateAbility) {
                             if (((ReplicateAbility) ability).isActivated()) {
                                 for (Effect effect : this.getEffects()) {
@@ -233,7 +234,7 @@ class ReplicateCopyEffect extends OneShotEffect {
                 // reset replicate now so the copies don't report x times Replicate
                 Card card = game.getCard(spell.getSourceId());
                 if (card != null) {
-                    for (Ability ability: card.getAbilities()) {
+                    for (Ability ability: card.getAbilities(game)) {
                         if (ability instanceof ReplicateAbility) {
                             if (((ReplicateAbility) ability).isActivated()) {
                                 ((ReplicateAbility) ability).resetReplicate();

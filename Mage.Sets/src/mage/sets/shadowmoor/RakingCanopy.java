@@ -86,7 +86,7 @@ class RakingCanopyTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
             Permanent attacker = game.getPermanent(event.getSourceId());
-            if (attacker == null || !attacker.getAbilities().contains(FlyingAbility.getInstance())) {
+            if (attacker == null || !attacker.getAbilities(game).contains(FlyingAbility.getInstance())) {
                 return false;
             }
             if (event.getTargetId().equals(this.getControllerId())) {

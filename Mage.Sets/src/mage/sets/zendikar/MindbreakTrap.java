@@ -68,7 +68,7 @@ public class MindbreakTrap extends CardImpl {
         // If an opponent cast three or more spells this turn, you may pay {0} rather than pay Mindbreak Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(
                 new MindbreakTrapAlternativeCost());
-        this.addWatcher(new MindbreakTrapWatcher());
+        this.getSpellAbility().addWatcher(new MindbreakTrapWatcher());
         // Exile any number of target spells.
         this.getSpellAbility().addTarget(new TargetSpell(0, Integer.MAX_VALUE, filter));
         this.getSpellAbility().addEffect(new MindbreakEffect());
@@ -94,9 +94,7 @@ class MindbreakTrapWatcher extends Watcher {
 
     public MindbreakTrapWatcher(final MindbreakTrapWatcher watcher) {
         super(watcher);
-        for (Entry<UUID, Integer> entry: watcher.counts.entrySet()) {
-            counts.put(entry.getKey(), entry.getValue());
-        }
+        counts.putAll(watcher.counts);
     }
 
     @Override

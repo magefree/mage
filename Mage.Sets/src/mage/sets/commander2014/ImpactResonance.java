@@ -57,12 +57,12 @@ public class ImpactResonance extends CardImpl {
         this.color.setRed(true);
 
         // Impact Resonance deals X damage divided as you choose among any number of target creatures, where X is the greatest amount of damage dealt by a source to a permanent or player this turn.
-        DynamicValue xValue = new GreatestAmountOfDamageDealtValue();
-        Effect effect = new DamageMultiEffect(xValue);
+        //DynamicValue xValue = new GreatestAmountOfDamageDealtValue();
+        Effect effect = new DamageMultiEffect(GreatestAmountOfDamageDealtValue.getInstance());
         effect.setText("{this} deals X damage divided as you choose among any number of target creatures, where X is the greatest amount of damage dealt by a source to a permanent or player this turn");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(xValue));
-        this.addWatcher(new GreatestAmountOfDamageWatcher());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(GreatestAmountOfDamageDealtValue.getInstance()));
+        this.getSpellAbility().addWatcher(new GreatestAmountOfDamageWatcher());
     }
 
     public ImpactResonance(final ImpactResonance card) {
@@ -103,7 +103,7 @@ class GreatestAmountOfDamageDealtValue implements DynamicValue, MageSingleton {
 
     @Override
     public DynamicValue copy() {
-        return new GreatestAmountOfDamageDealtValue();
+        return fINSTANCE;
     }
 
     @Override

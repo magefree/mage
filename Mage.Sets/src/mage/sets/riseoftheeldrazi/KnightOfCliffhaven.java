@@ -27,6 +27,7 @@
  */
 package mage.sets.riseoftheeldrazi;
 
+import java.util.List;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
@@ -60,17 +61,19 @@ public class KnightOfCliffhaven extends LevelerCard {
 
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{3}")));
 
-        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         abilities1.add(FlyingAbility.getInstance());
 
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         abilities2.add(FlyingAbility.getInstance());
         abilities2.add(VigilanceAbility.getInstance());
 
-        LevelerCardBuilder.construct(this,
+        List<Ability> levelerAbilities = LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 3, abilities1, 2, 3),
                 new LevelerCardBuilder.LevelAbility(4, -1, abilities2, 4, 4)
         );
+        this.addAbilities(levelerAbilities);
+        setMaxLevelCounters(4);
     }
 
     public KnightOfCliffhaven(final KnightOfCliffhaven card) {

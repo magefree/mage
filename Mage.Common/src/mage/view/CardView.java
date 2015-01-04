@@ -50,6 +50,7 @@ import mage.target.Targets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.game.Game;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -88,6 +89,8 @@ public class CardView extends SimpleCardView {
     protected boolean flipCard;
     protected boolean morphCard;
     
+    protected boolean faceDown;
+    
     protected String alternateName;
     protected String originalName;
 
@@ -116,26 +119,36 @@ public class CardView extends SimpleCardView {
     protected boolean canAttack;
 
     public CardView(Card card) {
-        this(card, null, false);
+        this(card, null, null, false);
+    }
+
+    public CardView(Card card, Game game) {
+        this(card, game, null, false);
     }
 
     public CardView(Card card, UUID cardId) {
-        this(card, null, false);
+        this(card, null, null, false);
+        this.id = cardId;
+    }
+
+    public CardView(Card card, Game game, UUID cardId) {
+        this(card, game, null, false);
         this.id = cardId;
     }
 
     /**
      *
      * @param card
+     * @param game
      * @param cardId
      * @param controlled is the card view created for the card controller - used for morph / face down cards to know which player may see information for the card
      */
-    public CardView(Card card, UUID cardId, boolean controlled) {
-        super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown(), card.getUsesVariousArt(), card.getTokenSetCode());
+    public CardView(Card card, Game game, UUID cardId, boolean controlled) {
+        super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.getTokenSetCode());
         this.morphCard = card.isMorphCard();
         // no information available for face down cards as long it's not a controlled face down morph card
         // TODO: Better handle this in Framework (but currently I'm not sure how to do it there) LevelX2
-        if (card.isFaceDown()) {            
+        if (game != null && card.isFaceDown(game)) {            
             if (card.isMorphCard()) {
                 // special handling for Morph cards
                 this.fillEmpty(card, controlled);
@@ -223,7 +236,7 @@ public class CardView extends SimpleCardView {
         this.color = card.getColor();
         this.canTransform = card.canTransform();
         this.flipCard = card.isFlipCard();
-
+        this.faceDown = game != null ? card.isFaceDown(game) : false;
         
         if (card instanceof PermanentToken) {
             this.isToken = true;
@@ -245,9 +258,9 @@ public class CardView extends SimpleCardView {
             this.rarity = card.getRarity();
             this.isToken = false;
         }
-        if (card.getCounters() != null && !card.getCounters().isEmpty()) {
+        if (game != null && card.getCounters(game) != null && !card.getCounters(game).isEmpty()) {
             counters = new ArrayList<>();
-            for (Counter counter: card.getCounters().values()) {
+            for (Counter counter: card.getCounters(game).values()) {
                 counters.add(new CounterView(counter));
             }
         }
@@ -285,7 +298,7 @@ public class CardView extends SimpleCardView {
     }
 
     public CardView(MageObject object) {
-        super(object.getId(), "", 0, false, false, "");
+        super(object.getId(), "", 0, false, "");
         this.name = object.getName();
         this.displayName = object.getName();
         if (object instanceof Permanent) {
@@ -329,7 +342,7 @@ public class CardView extends SimpleCardView {
     }
 
     protected CardView() {
-        super(null, "", 0, false, false, "");
+        super(null, "", 0, false, "");
     }
     
     public CardView(EmblemView emblem) {
@@ -345,7 +358,7 @@ public class CardView extends SimpleCardView {
     }
 
     public CardView(boolean empty) {
-        super(null, "", 0, false, false, "");
+        super(null, "", 0, false, "");
         if (!empty) {
             throw new IllegalArgumentException("Not supported.");
         }
@@ -403,7 +416,7 @@ public class CardView extends SimpleCardView {
     }
 
     CardView(Token token) {
-        super(token.getId(), "", 0, false, false, "");
+        super(token.getId(), "", 0, false, "");
         this.isToken  = true;
         this.id = token.getId();
         this.name = token.getName();
@@ -567,7 +580,6 @@ public class CardView extends SimpleCardView {
         return getName() + " [" + getId() + "]";
     }
 
-    @Override
     public boolean isFaceDown() {
         return faceDown;
     }

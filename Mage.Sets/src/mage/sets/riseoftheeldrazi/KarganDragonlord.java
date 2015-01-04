@@ -28,6 +28,7 @@
 
 package mage.sets.riseoftheeldrazi;
 
+import java.util.List;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -64,18 +65,20 @@ public class KarganDragonlord extends LevelerCard {
 
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{R}")));
 
-        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         abilities1.add(FlyingAbility.getInstance());
 
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         abilities2.add(FlyingAbility.getInstance());
         abilities2.add(TrampleAbility.getInstance());
         abilities2.add(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
 
-        LevelerCardBuilder.construct(this,
+        List<Ability> levelerAbilities = LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(4, 7, abilities1, 4, 4),
                 new LevelerCardBuilder.LevelAbility(8, -1, abilities2, 8, 8)
         );
+        this.addAbilities(levelerAbilities);
+        setMaxLevelCounters(8);
     }
 
     public KarganDragonlord(final KarganDragonlord card) {

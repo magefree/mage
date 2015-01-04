@@ -27,6 +27,7 @@
  */
 package mage.sets.riseoftheeldrazi;
 
+import java.util.List;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -67,13 +68,15 @@ public class ZulaportEnforcer extends LevelerCard {
 
         // LEVEL 3+: 5/5
         // Zulaport Enforcer can't be blocked except by black creatures.
-        Abilities<Ability> levelAbilities = new AbilitiesImpl<Ability>();
+        Abilities<Ability> levelAbilities = new AbilitiesImpl<>();
         levelAbilities.add(ZulaportEnforcerAbility.getInstance());
 
-        LevelerCardBuilder.construct(this,
-                new LevelerCardBuilder.LevelAbility(1, 2, new AbilitiesImpl<Ability>(), 3, 3),
+        List<Ability> levelerAbilities = LevelerCardBuilder.construct(
+                new LevelerCardBuilder.LevelAbility(1, 2, new AbilitiesImpl<>(), 3, 3),
                 new LevelerCardBuilder.LevelAbility(3, -1, levelAbilities, 5, 5)
         );
+        this.addAbilities(levelerAbilities);
+        setMaxLevelCounters(3);
     }
 
     public ZulaportEnforcer(final ZulaportEnforcer card) {
@@ -124,7 +127,7 @@ class ZulaportEnforcerEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getAbilities().containsKey(ZulaportEnforcerAbility.getInstance().getId())) {
+        if (permanent.getAbilities(game).containsKey(ZulaportEnforcerAbility.getInstance().getId())) {
             return true;
         }
         return false;

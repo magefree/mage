@@ -90,7 +90,7 @@ class PerimeterCaptainTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
             Permanent creature = game.getPermanent(event.getSourceId());
             if (creature != null) {
-                if (creature.getControllerId().equals(this.getControllerId()) && creature.getAbilities().contains(DefenderAbility.getInstance())) {
+                if (creature.getControllerId().equals(this.getControllerId()) && creature.getAbilities(game).contains(DefenderAbility.getInstance())) {
                     return true;
                 }
             }

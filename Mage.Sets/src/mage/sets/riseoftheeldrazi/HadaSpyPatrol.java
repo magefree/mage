@@ -27,6 +27,7 @@
  */
 package mage.sets.riseoftheeldrazi;
 
+import java.util.List;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
@@ -60,17 +61,19 @@ public class HadaSpyPatrol extends LevelerCard {
 
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{2}{U}")));
 
-        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         abilities1.add(new UnblockableAbility());
 
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         abilities2.add(ShroudAbility.getInstance());
         abilities2.add(new UnblockableAbility());
         
-        LevelerCardBuilder.construct(this,
+        List<Ability> levelerAbilities = LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 2, abilities1, 2, 2),
                 new LevelerCardBuilder.LevelAbility(3, -1, abilities2, 3, 3)
         );
+        this.addAbilities(levelerAbilities);
+        setMaxLevelCounters(3);
     }
 
     public HadaSpyPatrol(final HadaSpyPatrol card) {

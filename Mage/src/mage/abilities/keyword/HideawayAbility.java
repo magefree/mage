@@ -64,15 +64,15 @@ import mage.util.CardUtil;
  */
 public class HideawayAbility extends StaticAbility {
 
-    public HideawayAbility(Card card) {
+    public HideawayAbility() {
         super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new TapSourceEffect(true)));
         Ability ability = new EntersBattlefieldTriggeredAbility(new HideawayExileEffect(), false);
         ability.setRuleVisible(false);
-        card.addAbility(ability);
+        addSubAbility(ability);
         // Allow controller to look at face down card
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new HideawayLookAtFaceDownCardEffect());
         ability.setRuleVisible(false);
-        card.addAbility(ability);
+        addSubAbility(ability);
     }
 
     public HideawayAbility(final HideawayAbility ability) {
@@ -130,7 +130,7 @@ class HideawayExileEffect extends OneShotEffect {
             Card card = cards.get(target1.getFirstTarget(), game);
             if (card != null) {
                 cards.remove(card);
-                card.setFaceDown(true);
+                card.setFaceDown(true, game);
                 card.moveToExile(CardUtil.getCardExileZoneId(game, source),
                         new StringBuilder("Hideaway (").append(hideawaySource.getName()).append(")").toString(),
                         source.getSourceId(), game);

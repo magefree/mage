@@ -91,7 +91,7 @@ class VeneratedTeacherEffect extends OneShotEffect {
         List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game);
         if (!permanents.isEmpty()) {
             for (Permanent permanent : permanents) {
-                for (Ability ability : permanent.getAbilities()) {
+                for (Ability ability : permanent.getAbilities(game)) {
                     if (ability instanceof LevelUpAbility) {
                         permanent.addCounters(CounterType.LEVEL.createInstance(2), game);
                     }

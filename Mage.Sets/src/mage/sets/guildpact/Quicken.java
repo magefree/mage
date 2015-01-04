@@ -61,7 +61,7 @@ public class Quicken extends CardImpl {
 
         // The next sorcery card you cast this turn can be cast as though it had flash.
         this.getSpellAbility().addEffect(new QuickenAsThoughEffect());
-        this.addWatcher(new QuickenWatcher());
+        this.getSpellAbility().addWatcher(new QuickenWatcher());
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
@@ -95,9 +95,8 @@ class QuickenAsThoughEffect extends AsThoughEffectImpl {
     @Override
     public void init(Ability source, Game game) {
          quickenWatcher = (QuickenWatcher) game.getState().getWatchers().get("consumeQuickenWatcher", source.getControllerId());
-         Card card = game.getCard(source.getSourceId());
-         if (quickenWatcher != null && card != null) {
-             zoneChangeCounter = card.getZoneChangeCounter();
+         if (quickenWatcher != null) {
+             zoneChangeCounter = game.getZoneChangeCounter(source.getSourceId());
              quickenWatcher.addQuickenSpell(source.getSourceId(), zoneChangeCounter);
          }
     }

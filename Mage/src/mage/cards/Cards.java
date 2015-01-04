@@ -41,12 +41,12 @@ public interface Cards extends Set<UUID>, Serializable {
     void add(Card card);
     Card get(UUID cardId, Game game);
     void remove(Card card);
-    void setOwner(UUID ownerId, Game game);
     void addAll(List<Card> createCards);
     Set<Card> getCards(Game game);
     Set<Card> getCards(FilterCard filter, Game game);
     Set<Card> getCards(FilterCard filter, UUID sourceId, UUID playerId, Game game);
     Collection<Card> getUniqueCards(Game game);
+    String getValue(Game game);
     Card getRandom(Game game);
     int count(FilterCard filter, Game game);
     int count(FilterCard filter, UUID playerId, Game game);

@@ -60,9 +60,7 @@ public class MiracleWatcher extends Watcher {
 
     public MiracleWatcher(final MiracleWatcher watcher) {
         super(watcher);
-        for (Entry<UUID, Integer> entry : watcher.amountOfCardsDrawnThisTurn.entrySet()) {
-            amountOfCardsDrawnThisTurn.put(entry.getKey(), entry.getValue());
-        }
+        this.amountOfCardsDrawnThisTurn.putAll(this.amountOfCardsDrawnThisTurn);
     }
 
     @Override
@@ -90,7 +88,7 @@ public class MiracleWatcher extends Watcher {
     private void checkMiracleAbility(GameEvent event, Game game) {
         Card card = game.getCard(event.getTargetId());
         if (card != null) {
-            for (Ability ability : card.getAbilities()) {
+            for (Ability ability : card.getAbilities(game)) {
                 if (ability instanceof MiracleAbility) {
                     Player controller = game.getPlayer(ability.getControllerId());
                     if (controller != null) {

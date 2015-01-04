@@ -63,7 +63,7 @@ public class Offalsnout extends CardImpl {
         ability.addTarget(target);
         this.addAbility(ability);
         // Evoke {B}
-        this.addAbility(new EvokeAbility(this, "{B}"));
+        this.addAbility(new EvokeAbility("{B}"));
     }
 
     public Offalsnout(final Offalsnout card) {

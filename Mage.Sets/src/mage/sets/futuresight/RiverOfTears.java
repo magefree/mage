@@ -56,10 +56,8 @@ public class RiverOfTears extends CardImpl {
                 new BasicManaEffect(Mana.BlueMana),
                 LandfallCondition.getInstance(),
                 "Add {U} to your mana pool. If you played a land this turn, add {B} to your mana pool instead"),
-            new TapSourceCost()));
+            new TapSourceCost()), new LandfallWatcher());
         
-        
-        this.addWatcher(new LandfallWatcher());
     }
 
     public RiverOfTears(final RiverOfTears card) {

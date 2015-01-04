@@ -108,7 +108,7 @@ class GraveBetrayalTriggeredAbility extends TriggeredAbilityImpl {
                 if (card != null) {
                     Effect effect = new GraveBetrayalEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId()));
-                    Integer zoneChanges = new Integer(card.getZoneChangeCounter());
+                    Integer zoneChanges = new Integer(game.getZoneChangeCounter(permanent.getId()));
                     effect.setValue("zoneChanges", zoneChanges);
 
                     DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
@@ -149,7 +149,7 @@ class GraveBetrayalEffect extends OneShotEffect {
         Card card = game.getCard(targetPointer.getFirst(game, source));
         if (card != null) {
             Integer zoneChanges = (Integer) getValue("zoneChanges");
-            if (card.getZoneChangeCounter() == zoneChanges) {
+            if (game.getZoneChangeCounter(targetPointer.getFirst(game, source)) == zoneChanges) {
                 Zone currentZone = game.getState().getZone(card.getId());
                 if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), source.getControllerId())) {
                     Permanent creature = game.getPermanent(card.getId());

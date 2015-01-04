@@ -131,8 +131,8 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                             if (loseOther) {
                                 permanent.removeAllAbilities(source.getSourceId(), game);
                             }
-                            if (token.getAbilities().size() > 0) {
-                                for (Ability ability: token.getAbilities()) {
+                            if (token.getAbilities(game).size() > 0) {
+                                for (Ability ability: token.getAbilities(game)) {
                                     permanent.addAbility(ability, source.getSourceId(), game);
                                 }
                             }

@@ -27,6 +27,7 @@
  */
 package mage.sets.riseoftheeldrazi;
 
+import java.util.List;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
@@ -60,18 +61,21 @@ public class BeastbreakerOfBalaGed extends LevelerCard {
         // Level up {2}{G} ({2}{G}: Put a level counter on this. Level up only as a sorcery.)
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{2}{G}")));
 
-        Abilities<Ability> levelAbilities = new AbilitiesImpl<Ability>();
+        Abilities<Ability> levelAbilities = new AbilitiesImpl<>();
         levelAbilities.add(TrampleAbility.getInstance());
 
-        LevelerCardBuilder.construct(this,
+        List<Ability> levelerAbilities = LevelerCardBuilder.construct(
                 // LEVEL 1-3
                 //      4/4
-                new LevelerCardBuilder.LevelAbility(1, 3, new AbilitiesImpl<Ability>(), 4, 4),
+                new LevelerCardBuilder.LevelAbility(1, 3, new AbilitiesImpl<>(), 4, 4),
                 // LEVEL 1-3
                 //      4/4
                 //      Trample
                 new LevelerCardBuilder.LevelAbility(4, -1, levelAbilities, 6, 6)
         );
+        
+        this.addAbilities(levelerAbilities);
+        setMaxLevelCounters(4);
     }
 
     public BeastbreakerOfBalaGed(final BeastbreakerOfBalaGed card) {

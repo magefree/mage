@@ -62,7 +62,7 @@ public class Aggravate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
         // Each creature dealt damage this way attacks this turn if able.
         this.getSpellAbility().addEffect(new AggravateRequirementEffect());
-        this.addWatcher(new DamagedByWatcher());
+        this.getSpellAbility().addWatcher(new DamagedByWatcher());
     }
 
     public Aggravate(final Aggravate card) {
@@ -127,7 +127,7 @@ class AggravateRequirementEffect extends RequirementEffect {
     public boolean applies(Permanent permanent, Ability source, Game game) {
         DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
         if (watcher != null) {
-            return watcher.wasDamaged(permanent);
+            return watcher.wasDamaged(permanent, game);
         }
         return false;
     }

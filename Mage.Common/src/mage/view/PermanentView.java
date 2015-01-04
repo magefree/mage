@@ -61,7 +61,7 @@ public class PermanentView extends CardView {
     private final UUID attachedTo;
 
     public PermanentView(Permanent permanent, Card card, UUID createdForPlayerId, Game game) {
-        super(permanent, null, permanent.getControllerId().equals(createdForPlayerId));
+        super(permanent, game, null, permanent.getControllerId().equals(createdForPlayerId));
         this.controlled = permanent.getControllerId().equals(createdForPlayerId);
         this.rules = permanent.getRules();
         this.tapped = permanent.isTapped();
@@ -111,12 +111,12 @@ public class PermanentView extends CardView {
            this.nameOwner = ""; 
         }
         
-        if (permanent.isFaceDown()) {
+        if (permanent.isFaceDown(game)) {
             if (permanent.isMorphCard()){
                 // add morph rule text
                 if (card != null) {
                     if (controlled) {
-                        for (Ability permanentAbility : permanent.getAbilities()) {
+                        for (Ability permanentAbility : permanent.getAbilities(game)) {
                             if (permanentAbility instanceof TurnFaceUpAbility && !permanentAbility.getRuleVisible()) {
                                 this.rules.add(permanentAbility.getRule(true));
                             }

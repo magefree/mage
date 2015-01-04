@@ -58,7 +58,7 @@ public class NyleasEmissary extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Bestow {5}{G}
-        this.addAbility(new BestowAbility(this, "{5}{G}"));
+        this.addAbility(new BestowAbility(this.getName(), "{5}{G}"));
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Enchanted creature gets +3/+3 and has trample.

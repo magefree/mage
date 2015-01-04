@@ -126,7 +126,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             // check if mode modifying abilities exist
             Card card = game.getCard(source.getSourceId());
             if (card != null) {
-                for (Ability modeModifyingAbility : card.getAbilities()) {
+                for (Ability modeModifyingAbility : card.getAbilities(game)) {
                     if (modeModifyingAbility instanceof OptionalAdditionalModeSourceCosts) {
                         ((OptionalAdditionalModeSourceCosts)modeModifyingAbility).addOptionalAdditionalModeCosts(source, game);
                     }

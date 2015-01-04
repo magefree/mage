@@ -59,7 +59,7 @@ public class Spirespine extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Bestow 4G (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
-        this.addAbility(new BestowAbility(this, "{4}{G}"));
+        this.addAbility(new BestowAbility(this.getName(), "{4}{G}"));
         // Spirespine blocks each turn if able.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BlocksIfAbleSourceEffect(Duration.WhileOnBattlefield)));
         // Enchanted creature gets +4/+1 and blocks each turn if able.

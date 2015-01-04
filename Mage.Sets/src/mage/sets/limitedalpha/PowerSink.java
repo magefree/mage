@@ -116,7 +116,7 @@ class PowerSinkCounterUnlessPaysEffect extends OneShotEffect {
                     // that player taps all lands with mana abilities he or she controls...
                     List<Permanent> lands = game.getBattlefield().getAllActivePermanents(new FilterLandPermanent(), player.getId(), game);
                     for (Permanent land : lands) {
-                        Abilities<Ability> landAbilities = land.getAbilities();
+                        Abilities<Ability> landAbilities = land.getAbilities(game);
                         for (Ability ability : landAbilities) {
                             if (ability instanceof ManaAbility) {
                                 land.tap(game);

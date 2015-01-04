@@ -400,10 +400,10 @@ public class Battlefield implements Serializable {
         }
     }
 
-    public List<Permanent> getPhasedIn(UUID controllerId) {
+    public List<Permanent> getPhasedIn(UUID controllerId, Game game) {
         List<Permanent> phasedIn = new ArrayList<>();
         for (Permanent perm: field.values()) {
-            if (perm.getAbilities().containsKey(PhasingAbility.getInstance().getId()) && perm.isPhasedIn() && perm.getControllerId().equals(controllerId)) {
+            if (perm.getAbilities(game).containsKey(PhasingAbility.getInstance().getId()) && perm.isPhasedIn() && perm.getControllerId().equals(controllerId)) {
                 phasedIn.add(perm);
             }
         }

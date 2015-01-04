@@ -79,8 +79,7 @@ public class LullmageMentor extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever a spell or ability you control counters a spell, you may put a 1/1 blue Merfolk creature token onto the battlefield.
-        this.addAbility(new LullmageMentorTriggeredAbility());
-        this.addWatcher(new CastedSpellsWithSpellTarget());
+        this.addAbility(new LullmageMentorTriggeredAbility(), new CastedSpellsWithSpellTarget());
         // Tap seven untapped Merfolk you control: Counter target spell.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(7, 7, filter, true)));
         ability.addTarget(new TargetSpell());

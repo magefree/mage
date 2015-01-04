@@ -54,7 +54,7 @@ public class HorsemanshipAbility extends EvasionAbility implements MageSingleton
     }
 
     private HorsemanshipAbility() {
-        this.addEffect(new Horsemanship());
+        this.addEffect(HorsemanshipEffect.getInstance());
     }
 
     @Override
@@ -69,28 +69,30 @@ public class HorsemanshipAbility extends EvasionAbility implements MageSingleton
 
 }
 
-class Horsemanship extends RestrictionEffect implements MageSingleton {
+class HorsemanshipEffect extends RestrictionEffect implements MageSingleton {
+    
+    private static final HorsemanshipEffect fINSTANCE =  new HorsemanshipEffect();
 
-    public Horsemanship() {
+    private HorsemanshipEffect() {
         super(Duration.EndOfGame);
     }
 
-    public Horsemanship(final Horsemanship effect) {
-        super(effect);
+    public static HorsemanshipEffect getInstance() {
+        return fINSTANCE;
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getAbilities().containsKey(HorsemanshipAbility.getInstance().getId());
+        return permanent.getAbilities(game).containsKey(HorsemanshipAbility.getInstance().getId());
     }
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return blocker.getAbilities().containsKey(HorsemanshipAbility.getInstance().getId());
+        return blocker.getAbilities(game).containsKey(HorsemanshipAbility.getInstance().getId());
     }
 
     @Override
-    public Horsemanship copy() {
-        return new Horsemanship(this);
+    public HorsemanshipEffect copy() {
+        return fINSTANCE;
     }
 }

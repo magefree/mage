@@ -77,7 +77,7 @@ public class Shriekmaw extends CardImpl {
         this.addAbility(ability);
         
         // Evoke {1}{B} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)
-        this.addAbility(new EvokeAbility(this, "{1}{B}"));
+        this.addAbility(new EvokeAbility("{1}{B}"));
     }
 
     public Shriekmaw(final Shriekmaw card) {

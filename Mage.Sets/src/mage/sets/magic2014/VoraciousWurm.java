@@ -27,15 +27,21 @@
  */
 package mage.sets.magic2014;
 
+import java.io.ObjectStreamException;
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.MageSingleton;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
+import mage.game.Game;
+import mage.watchers.common.PlayerGainedLifeWatcher;
 
 /**
  *
@@ -54,7 +60,8 @@ public class VoraciousWurm extends CardImpl {
 
         // Voracious Wurm enters the battlefield with X +1/+1 counters on it, where X is the amount of life you've gained this turn.
         this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), ControllerGotLifeCount.getInstance(this), true)));
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), ControllerGainedLifeCount.getInstance(), true)),
+                new PlayerGainedLifeWatcher());
     }
 
     public VoraciousWurm(final VoraciousWurm card) {
@@ -64,5 +71,46 @@ public class VoraciousWurm extends CardImpl {
     @Override
     public VoraciousWurm copy() {
         return new VoraciousWurm(this);
+    }
+}
+
+class ControllerGainedLifeCount implements DynamicValue, MageSingleton {
+
+    private static final ControllerGainedLifeCount fINSTANCE =  new ControllerGainedLifeCount();
+
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
+
+    public static ControllerGainedLifeCount getInstance() {
+        return fINSTANCE;
+    }
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        return this.calculate(game, sourceAbility.getControllerId());
+    }
+
+    public int calculate(Game game, UUID controllerId) {
+        PlayerGainedLifeWatcher watcher = (PlayerGainedLifeWatcher) game.getState().getWatchers().get("PlayerGainedLifeWatcher");
+        if (watcher != null) {
+            return watcher.getLiveGained(controllerId);
+        }
+        return 0;
+    }
+
+    @Override
+    public DynamicValue copy() {
+        return fINSTANCE;
+    }
+
+    @Override
+    public String toString() {
+        return "X";
+    }
+
+    @Override
+    public String getMessage() {
+        return "the amount of life you've gained this turn";
     }
 }

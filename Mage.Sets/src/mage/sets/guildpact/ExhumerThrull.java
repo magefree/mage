@@ -55,7 +55,7 @@ public class ExhumerThrull extends CardImpl {
 
         // Haunt
         // When Exhumer Thrull enters the battlefield or the creature it haunts dies, return target creature card from your graveyard to your hand.
-        Ability ability = new HauntAbility(this, new ReturnToHandTargetEffect());
+        Ability ability = new HauntAbility(new ReturnToHandTargetEffect());
         ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("target creature card from your graveyard")));
         this.addAbility(ability);
 

@@ -120,7 +120,7 @@ class OrchardSpiritEffect extends RestrictionEffect {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return blocker.getAbilities().contains(FlyingAbility.getInstance()) || blocker.getAbilities().contains(ReachAbility.getInstance());
+        return blocker.getAbilities(game).contains(FlyingAbility.getInstance()) || blocker.getAbilities(game).contains(ReachAbility.getInstance());
     }
 
     @Override

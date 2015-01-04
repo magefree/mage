@@ -109,7 +109,7 @@ class DampingMatrixEffect extends ReplacementEffectImpl {
         if (event.getType() == EventType.ACTIVATE_ABILITY) {
             MageObject object = game.getObject(event.getSourceId());
             if (object instanceof Permanent && filter.match((Permanent)object, game)) {
-                Ability ability = object.getAbilities().get(event.getTargetId());
+                Ability ability = object.getAbilities(game).get(event.getTargetId());
                 if (ability != null && !(ability instanceof ManaAbility)) {
                     return true;
                 }

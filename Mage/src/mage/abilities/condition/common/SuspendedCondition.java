@@ -63,7 +63,7 @@ public class SuspendedCondition implements Condition {
         Card card = game.getCard(source.getSourceId());
         boolean found = false;
         if (card != null) {
-            for (Ability ability: card.getAbilities()) {
+            for (Ability ability: card.getAbilities(game)) {
                 if (ability instanceof SuspendAbility) {
                     found = true;
                     break;
@@ -71,7 +71,7 @@ public class SuspendedCondition implements Condition {
             }
             if (found) {
                 if (game.getState().getZone(card.getId()) == Zone.EXILED &&
-                        card.getCounters().getCount(CounterType.TIME) > 0) {
+                        card.getCounters(game).getCount(CounterType.TIME) > 0) {
                     return true;
                 }
             }

@@ -116,7 +116,7 @@ class WardSliverEffect extends OneShotEffect {
             if (colorChoice.getChoice() != null) {
                 game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
                 game.getState().setValue(permanent.getId() + "_color", colorChoice.getChoice());
-                permanent.addInfo("chosen color", "<font color = 'blue'>Chosen color: " + colorChoice.getColor().getDescription() + "</font>");
+                permanent.addInfo("chosen color", "<font color = 'blue'>Chosen color: " + colorChoice.getColor().getDescription() + "</font>", game);
             }
         }
         return false;

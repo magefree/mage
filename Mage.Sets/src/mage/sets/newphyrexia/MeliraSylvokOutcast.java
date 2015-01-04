@@ -185,7 +185,7 @@ class MeliraSylvokOutcastEffect3 extends ContinuousEffectImpl {
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
         for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             if (opponents.contains(perm.getControllerId())) {
-                perm.getAbilities().remove(InfectAbility.getInstance());
+                perm.getAbilities(game).remove(InfectAbility.getInstance());
             }
         }
         return true;

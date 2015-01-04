@@ -36,8 +36,10 @@ import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.TargetPointer;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -52,6 +54,7 @@ public abstract class EffectImpl implements Effect {
     protected String staticText = "";
     protected Map<String, Object> values;
     protected boolean applyEffectsAfter = false;
+    protected List<Watcher> watchers;
 
     public EffectImpl(Outcome outcome) {
         this.id = UUID.randomUUID();

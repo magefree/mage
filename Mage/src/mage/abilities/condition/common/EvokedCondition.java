@@ -57,7 +57,7 @@ public class EvokedCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            for (Ability ability: card.getAbilities()) {
+            for (Ability ability: card.getAbilities(game)) {
                 if (ability instanceof EvokeAbility) {
                     if(((EvokeAbility) ability).isActivated(source, game)) {
                         return true;

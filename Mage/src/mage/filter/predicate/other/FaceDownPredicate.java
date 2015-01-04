@@ -39,7 +39,7 @@ public class FaceDownPredicate implements Predicate<Card> {
 
     @Override
     public boolean apply(Card input, Game game) {
-        return input.isFaceDown();
+        return input.isFaceDown(game);
     }
 
     @Override

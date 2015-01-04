@@ -119,16 +119,14 @@ class SarkhanTheDragonspeakerEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         this.getAffectedObjects().add(source.getSourceId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            this.zoneChangeCounter = permanent.getZoneChangeCounter();
-        }
+        this.zoneChangeCounter = game.getZoneChangeCounter(source.getSourceId());
+
     }
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && permanent.getZoneChangeCounter() == this.zoneChangeCounter) {
+        if (permanent != null && game.getZoneChangeCounter(source.getSourceId()) == this.zoneChangeCounter) {
             switch (layer) {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {

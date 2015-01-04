@@ -57,7 +57,7 @@ public class BoonSatyr extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // Bestow {3}{G}{G}
-        this.addAbility(new BestowAbility(this, "{3}{G}{G}"));
+        this.addAbility(new BestowAbility(this.getName(), "{3}{G}{G}"));
         // Enchanted creature gets +4/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(4,2, Duration.WhileOnBattlefield)));
     }

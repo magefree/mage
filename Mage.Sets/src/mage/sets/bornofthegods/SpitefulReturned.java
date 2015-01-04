@@ -61,7 +61,7 @@ public class SpitefulReturned extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Bestow {3}{B}
-        this.addAbility(new BestowAbility(this, "{3}{B}"));
+        this.addAbility(new BestowAbility(this.name, "{3}{B}"));
         // Whenever Spiteful Returned or enchanted creature attacks, defending player loses 2 life.
         Effect effect = new LoseLifeTargetEffect(2);
         effect.setText("defending player loses 2 life");

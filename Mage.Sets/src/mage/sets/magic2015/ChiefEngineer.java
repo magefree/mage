@@ -101,7 +101,8 @@ class ChiefEngineerEffect extends ReplacementEffectImpl {
         if (object != null) {
             Card card = (Card) object;
             Ability ability = new ConvokeAbility();
-            card.addAbility(ability);
+            game.getState().addOtherAbility(event.getSourceId(), ability);
+            //card.addAbility(ability);
             ability.setControllerId(source.getControllerId());
             ability.setSourceId(card.getId());
             game.getState().addAbility(ability, source.getSourceId(), card);

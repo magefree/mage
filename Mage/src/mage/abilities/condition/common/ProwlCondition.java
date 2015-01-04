@@ -57,7 +57,7 @@ public class ProwlCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            for (Ability ability: card.getAbilities()) {
+            for (Ability ability: card.getAbilities(game)) {
                 if (ability instanceof ProwlAbility) {
                     if(((ProwlAbility) ability).isActivated(source, game)) {
                         return true;

@@ -58,7 +58,7 @@ public class RelentlessAssault extends CardImpl {
         this.color.setRed(true);
 
         // Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.
-        this.addWatcher(new AttackedThisTurnWatcher());
+        this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
         this.getSpellAbility().addEffect(new RelentlessAssaultUntapEffect());
         this.getSpellAbility().addEffect(new RelentlessAssaultAddPhasesEffect());
     }

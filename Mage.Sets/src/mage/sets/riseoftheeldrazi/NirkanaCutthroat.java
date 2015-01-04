@@ -28,6 +28,7 @@
 
 package mage.sets.riseoftheeldrazi;
 
+import java.util.List;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
@@ -59,17 +60,19 @@ public class NirkanaCutthroat extends LevelerCard {
         this.toughness = new MageInt(2);
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{2}{B}")));
 
-        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         abilities1.add(DeathtouchAbility.getInstance());
 
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         abilities2.add(FirstStrikeAbility.getInstance());
         abilities2.add(DeathtouchAbility.getInstance());
 
-        LevelerCardBuilder.construct(this,
+        List<Ability> levelerAbilities = LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 2, abilities1, 4, 3),
                 new LevelerCardBuilder.LevelAbility(3, -1, abilities2, 5, 4)
         );
+        this.addAbilities(levelerAbilities);
+        setMaxLevelCounters(3);
     }
 
     public NirkanaCutthroat (final NirkanaCutthroat card) {

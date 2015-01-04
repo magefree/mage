@@ -58,7 +58,7 @@ public class PurphorossEmissary extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Bestow {6}{R}  (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
-        this.addAbility(new BestowAbility(this, "{6}{R}"));
+        this.addAbility(new BestowAbility(this.getName(), "{6}{R}"));
         // Purphoros's Emissary can't be blocked except by two or more creatures.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)));
         // Enchanted creature gets +3/+3 and can't be blocked except by two or more creatures.

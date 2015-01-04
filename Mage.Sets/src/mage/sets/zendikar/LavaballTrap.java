@@ -62,7 +62,7 @@ public class LavaballTrap extends CardImpl {
 
         // If an opponent had two or more lands enter the battlefield under his or her control this turn, you may pay {3}{R}{R} rather than pay Lavaball Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(new LavaballTrapAlternativeCost());
-        this.addWatcher(new LavaballTrapWatcher());
+        this.getSpellAbility().addWatcher(new LavaballTrapWatcher());
 
         // Destroy two target lands. Lavaball Trap deals 4 damage to each creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
@@ -83,7 +83,7 @@ public class LavaballTrap extends CardImpl {
 
 class LavaballTrapWatcher extends Watcher {
 
-    private Map<UUID, Integer> amountOfLandsPlayedThisTurn = new HashMap<UUID, Integer>();
+    private Map<UUID, Integer> amountOfLandsPlayedThisTurn = new HashMap<>();
 
     public LavaballTrapWatcher() {
         super("LavaballTrapWatcher", WatcherScope.GAME);
@@ -91,9 +91,7 @@ class LavaballTrapWatcher extends Watcher {
 
     public LavaballTrapWatcher(final LavaballTrapWatcher watcher) {
         super(watcher);
-        for (Map.Entry<UUID, Integer> entry : watcher.amountOfLandsPlayedThisTurn.entrySet()) {
-            amountOfLandsPlayedThisTurn.put(entry.getKey(), entry.getValue());
-        }
+        this.amountOfLandsPlayedThisTurn.putAll(watcher.amountOfLandsPlayedThisTurn);
     }
 
     @Override

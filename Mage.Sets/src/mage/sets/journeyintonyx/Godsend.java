@@ -192,7 +192,7 @@ class GodsendExileEffect extends OneShotEffect {
         if (creature != null && controller != null && sourcePermanent != null) {
             UUID exileId = CardUtil.getCardExileZoneId(game, source);
             controller.moveCardToExileWithInfo(creature, exileId, 
-                    new StringBuilder(sourcePermanent.getName()).append(" (").append(sourcePermanent.getZoneChangeCounter()).append(")").toString()
+                    new StringBuilder(sourcePermanent.getName()).append(" (").append(game.getZoneChangeCounter(sourcePermanent.getId())).append(")").toString()
                     , source.getSourceId(), game, Zone.BATTLEFIELD);
             
         }

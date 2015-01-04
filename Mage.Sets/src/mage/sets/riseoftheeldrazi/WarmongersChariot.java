@@ -98,7 +98,7 @@ class WarmongersChariotEffect extends AsThoughEffectImpl {
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent creature = game.getPermanent(equipment.getAttachedTo());
             if (creature != null && creature.getId().equals(sourceId)
-                    && creature.getAbilities().containsKey(DefenderAbility.getInstance().getId())) {
+                    && creature.getAbilities(game).containsKey(DefenderAbility.getInstance().getId())) {
                 return true;
             }
         }

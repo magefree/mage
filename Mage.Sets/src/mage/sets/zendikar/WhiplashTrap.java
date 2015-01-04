@@ -60,7 +60,7 @@ public class WhiplashTrap extends CardImpl {
 
         // If an opponent had two or more creatures enter the battlefield under his or her control this turn, you may pay {U} rather than pay Whiplash Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(new WhiplashAlternativeCost());
-        this.addWatcher(new WhiplashTrapWatcher());
+        this.getSpellAbility().addWatcher(new WhiplashTrapWatcher());
 
         // Return two target creatures to their owners' hands.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
@@ -80,7 +80,7 @@ public class WhiplashTrap extends CardImpl {
 
 class WhiplashTrapWatcher extends Watcher {
 
-    private Map<UUID, Integer> amountOfCreaturesPlayedThisTurn = new HashMap<UUID, Integer>();
+    private Map<UUID, Integer> amountOfCreaturesPlayedThisTurn = new HashMap<>();
 
     public WhiplashTrapWatcher() {
         super("WhiplashTrapWatcher", WatcherScope.GAME);
@@ -88,9 +88,7 @@ class WhiplashTrapWatcher extends Watcher {
 
     public WhiplashTrapWatcher(final WhiplashTrapWatcher watcher) {
         super(watcher);
-        for (Map.Entry<UUID, Integer> entry : watcher.amountOfCreaturesPlayedThisTurn.entrySet()) {
-            amountOfCreaturesPlayedThisTurn.put(entry.getKey(), entry.getValue());
-        }
+        this.amountOfCreaturesPlayedThisTurn.putAll(watcher.amountOfCreaturesPlayedThisTurn);
     }
 
     @Override

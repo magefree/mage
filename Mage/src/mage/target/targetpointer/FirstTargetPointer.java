@@ -11,7 +11,7 @@ import mage.game.Game;
 
 public class FirstTargetPointer implements TargetPointer {
 
-    private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
+    private final Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
 
     public static FirstTargetPointer getInstance() {
         return new FirstTargetPointer();
@@ -21,20 +21,14 @@ public class FirstTargetPointer implements TargetPointer {
     }
 
     public FirstTargetPointer(FirstTargetPointer firstTargetPointer) {
-        this.zoneChangeCounter = new HashMap<>();
-        for (Map.Entry<UUID, Integer> entry : firstTargetPointer.zoneChangeCounter.entrySet()) {
-            this.zoneChangeCounter.put(entry.getKey(), entry.getValue());
-        }
+        zoneChangeCounter.putAll(firstTargetPointer.zoneChangeCounter);
     }
 
     @Override
     public void init(Game game, Ability source) {
         if (source.getTargets().size() > 0) {
             for (UUID target : source.getTargets().get(0).getTargets()) {
-                Card card = game.getCard(target);
-                if (card != null) {
-                    this.zoneChangeCounter.put(target, card.getZoneChangeCounter());
-                }    
+                this.zoneChangeCounter.put(target, game.getZoneChangeCounter(target));
             }
         }
     }
@@ -44,9 +38,7 @@ public class FirstTargetPointer implements TargetPointer {
         ArrayList<UUID> target = new ArrayList<>();
         if (source.getTargets().size() > 0) {
             for (UUID targetId : source.getTargets().get(0).getTargets()) {
-                Card card = game.getCard(targetId);
-                if (card != null && zoneChangeCounter.containsKey(targetId)
-                        && card.getZoneChangeCounter() != zoneChangeCounter.get(targetId)) {
+                if (zoneChangeCounter.containsKey(targetId) && game.getZoneChangeCounter(targetId) != zoneChangeCounter.get(targetId)) {
                     continue;
                 }
                 target.add(targetId);
@@ -59,9 +51,7 @@ public class FirstTargetPointer implements TargetPointer {
     public UUID getFirst(Game game, Ability source) {
         UUID targetId = source.getFirstTarget();
         if (zoneChangeCounter.containsKey(targetId)) {
-            Card card = game.getCard(targetId);
-            if (card != null && zoneChangeCounter.containsKey(targetId)
-                        && card.getZoneChangeCounter() != zoneChangeCounter.get(targetId)) {
+            if (zoneChangeCounter.containsKey(targetId) && game.getZoneChangeCounter(targetId) != zoneChangeCounter.get(targetId)) {
                 return null;
             }
         }

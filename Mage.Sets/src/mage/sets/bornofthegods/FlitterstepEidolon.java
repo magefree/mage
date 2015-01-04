@@ -58,7 +58,7 @@ public class FlitterstepEidolon extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Bestow {5}{U}
-        this.addAbility(new BestowAbility(this, "{5}{U}"));
+        this.addAbility(new BestowAbility(this.getName(), "{5}{U}"));
         // Flitterstep Eidolon can't be blocked.
         this.addAbility(new UnblockableAbility());
         // Enchanted creature gets +1/+1 and can't be blocked.

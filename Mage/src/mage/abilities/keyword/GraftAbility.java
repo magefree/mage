@@ -73,7 +73,7 @@ public class GraftAbility extends TriggeredAbilityImpl {
             sb.append(theCardtype.toString().toLowerCase(Locale.ENGLISH)).append(" ");
         }
         this.cardtype = sb.toString().trim();
-        card.addAbility(new GraftStaticAbility(amount));
+        addSubAbility(new GraftStaticAbility(amount));
     }
 
     public GraftAbility(GraftAbility ability) {

@@ -183,8 +183,8 @@ public class SuspendAbility extends ActivatedAbilityImpl {
         if (card.getManaCost().isEmpty()) {
             setRuleAtTheTop(true);
         }        
-        card.addAbility(new SuspendBeginningOfUpkeepTriggeredAbility());
-        card.addAbility(new SuspendPlayCardAbility(card.getCardType().contains(CardType.CREATURE)));
+        addSubAbility(new SuspendBeginningOfUpkeepTriggeredAbility());
+        addSubAbility(new SuspendPlayCardAbility(card.getCardType().contains(CardType.CREATURE)));
     }
 
     public SuspendAbility(SuspendAbility ability) {
@@ -285,7 +285,7 @@ class SuspendPlayCardAbility extends TriggeredAbilityImpl {
         if (event.getType() == GameEvent.EventType.COUNTER_REMOVED && event.getTargetId().equals(getSourceId())) {
             Card card = game.getCard(getSourceId());
             if (card != null && game.getState().getZone(card.getId()) == Zone.EXILED
-                    && card.getCounters().getCount(CounterType.TIME) == 0) {
+                    && card.getCounters(game).getCount(CounterType.TIME) == 0) {
                 return true;
             }
         }
@@ -326,7 +326,7 @@ class SuspendPlayCardEffect extends OneShotEffect {
         if (player != null && card != null) {
             // remove temporary suspend ability (used e.g. for Epochrasite)
             List<Ability> abilitiesToRemove = new ArrayList<>();
-            for (Ability ability : card.getAbilities()) {
+            for (Ability ability : card.getAbilities(game)) {
                 if (ability instanceof SuspendAbility) {
                     if (((SuspendAbility)ability).isGainedTemporary()) {
                         abilitiesToRemove.add(ability);
@@ -334,7 +334,7 @@ class SuspendPlayCardEffect extends OneShotEffect {
                 }
             }
             if (!abilitiesToRemove.isEmpty()) {
-                for (Ability ability : card.getAbilities()) {
+                for (Ability ability : card.getAbilities(game)) {
                     if (ability instanceof SuspendBeginningOfUpkeepTriggeredAbility || ability instanceof SuspendPlayCardAbility ) {
                         abilitiesToRemove.add(ability);
                     }
@@ -344,7 +344,7 @@ class SuspendPlayCardEffect extends OneShotEffect {
                 // remove the continious effects from the game
                 game.getState().getContinuousEffects().removeGainedEffectsForSource(card.getId());
                 // remove the abilities from the card
-                card.getAbilities().removeAll(abilitiesToRemove);
+                card.getAbilities(game).removeAll(abilitiesToRemove);
             }
             // cast the card for free
             return player.cast(card.getSpellAbility(), game, true);

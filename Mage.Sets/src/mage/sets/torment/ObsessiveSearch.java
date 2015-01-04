@@ -52,7 +52,7 @@ public class ObsessiveSearch extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
 
         // Madness {U}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{U}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl("{U}")));
     }
 
     public ObsessiveSearch(final ObsessiveSearch card) {

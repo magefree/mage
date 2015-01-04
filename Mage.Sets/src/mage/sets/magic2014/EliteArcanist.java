@@ -130,7 +130,7 @@ class EliteArcanistImprintEffect extends OneShotEffect {
                     Permanent permanent = game.getPermanent(source.getSourceId());
                     if (permanent != null) {
                         permanent.imprint(card.getId(), game);
-                        permanent.addInfo("imprint", new StringBuilder("[Exiled card - ").append(card.getName()).append("]").toString());
+                        permanent.addInfo("imprint", new StringBuilder("[Exiled card - ").append(card.getName()).append("]").toString(), game);
                     }
                     return true;
                 }
@@ -173,7 +173,7 @@ class EliteArcanistCopyEffect extends OneShotEffect {
             if (imprintedInstant != null && game.getState().getZone(imprintedInstant.getId()).equals(Zone.EXILED)) {
                 Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null) {
-                    Card copiedCard = game.copyCard(imprintedInstant, source, source.getControllerId());
+                    Card copiedCard = game.copyCard(imprintedInstant, source);
                     if (copiedCard != null) {
                         game.getExile().add(source.getSourceId(), "",copiedCard);
                         game.getState().setZone(copiedCard.getId(), Zone.EXILED);

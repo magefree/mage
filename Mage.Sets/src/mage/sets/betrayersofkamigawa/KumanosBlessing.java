@@ -77,8 +77,9 @@ public class KumanosBlessing extends CardImpl {
         this.addAbility(ability);
 
         // If a creature dealt damage by enchanted creature this turn would die, exile it instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KumanosBlessingEffect()));
-        this.addWatcher(new DamagedByEnchantedWatcher());
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new KumanosBlessingEffect());
+        ability.addWatcher(new DamagedByEnchantedWatcher());
+        this.addAbility(ability);
     }
 
     public KumanosBlessing(final KumanosBlessing card) {
@@ -129,7 +130,7 @@ class KumanosBlessingEffect extends ReplacementEffectImpl {
             if (zce.isDiesEvent()) {
                 DamagedByEnchantedWatcher watcher = (DamagedByEnchantedWatcher) game.getState().getWatchers().get("DamagedByEnchantedWatcher", source.getSourceId());
                 if (watcher != null) {
-                    return watcher.wasDamaged(zce.getTarget());
+                    return watcher.wasDamaged(zce.getTarget(), game);
                 }
             }
         }
@@ -177,7 +178,7 @@ class DamagedByEnchantedWatcher extends Watcher {
         damagedCreatures.clear();
     }
 
-    public boolean wasDamaged(Permanent permanent) {
-        return damagedCreatures.contains(new MageObjectReference(permanent));
+    public boolean wasDamaged(Permanent permanent, Game game) {
+        return damagedCreatures.contains(new MageObjectReference(permanent, game));
     }
 }

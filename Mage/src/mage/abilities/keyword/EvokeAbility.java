@@ -66,13 +66,13 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
     // needed to check activation status, if card changes zone after casting it
     private   int zoneChangeCounter = 0;
 
-    public EvokeAbility(Card card, String manaString) {
+    public EvokeAbility(String manaString) {
         super(Zone.ALL, null);
         name = EVOKE_KEYWORD;
         this.addEvokeCost(manaString);
         Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceEffect()), EvokedCondition.getInstance(), "Sacrifice {this} when it enters the battlefield and was evoked.");
         ability.setRuleVisible(false);
-        card.addAbility(ability);
+        addSubAbility(ability);
 
     }
 
@@ -102,8 +102,7 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
 
     @Override
     public boolean isActivated(Ability ability, Game game) {
-        Card card = game.getCard(sourceId);
-        if (card != null && card.getZoneChangeCounter() <= zoneChangeCounter +1) {
+        if (game.getZoneChangeCounter(sourceId) <= zoneChangeCounter +1) {
             for (AlternativeCost2 cost: evokeCosts) {
                 if(cost.isActivated(game)) {
                     return true;
@@ -149,12 +148,7 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
         cost.activate();
         // remember zone change counter
         if (zoneChangeCounter == 0) {
-            Card card = game.getCard(getSourceId());
-            if (card != null) {
-                zoneChangeCounter = card.getZoneChangeCounter();
-            } else {
-                throw new IllegalArgumentException("Evoke source card not found");
-            }
+            zoneChangeCounter = game.getZoneChangeCounter(getSourceId());
         }
     }
 

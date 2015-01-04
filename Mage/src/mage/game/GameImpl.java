@@ -5,7 +5,7 @@
 * permitted provided that the following conditions are met:
 *
 *    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
+*       conditions and the following disclaimer.void unloadCard(Card card);
 *
 *    2. Redistributions in binary form must reproduce the above copyright notice, this list
 *       of conditions and the following disclaimer in the documentation and/or other materials
@@ -219,10 +219,7 @@ public abstract class GameImpl implements Game, Serializable {
         this.freeMulligans = game.freeMulligans;
         this.attackOption = game.attackOption;
         this.state = game.state.copy();
-        // Ai simulation modifies e.g. zoneChangeCounter so copy is needed if AI active
-        for (Map.Entry<UUID, Card> entry: game.gameCards.entrySet()) {
-            this.gameCards.put(entry.getKey(), entry.getValue().copy());
-        }
+        this.gameCards = game.gameCards;
         this.simulation = game.simulation;
         this.gameOptions = game.gameOptions;
         this.lki.putAll(game.lki);
@@ -278,34 +275,17 @@ public abstract class GameImpl implements Game, Serializable {
                 card = ((PermanentCard)card).getCard();
             }
             card.setOwnerId(ownerId);
-            card.setFaceDown(false); // can be set face dwon from previous game
             gameCards.put(card.getId(), card);
-            state.addCard(card);
+            state.addCard(card, this);
             if (card.isSplitCard()) {
                 Card leftCard = ((SplitCard)card).getLeftHalfCard();
-                leftCard.setOwnerId(ownerId);
                 gameCards.put(leftCard.getId(), leftCard);
-                state.addCard(leftCard);
+                state.addCard(leftCard, this);
                 Card rightCard = ((SplitCard)card).getRightHalfCard();
-                rightCard.setOwnerId(ownerId);
                 gameCards.put(rightCard.getId(), rightCard);
-                state.addCard(rightCard);
+                state.addCard(rightCard, this);
             }
         }
-    }
-
-    @Override
-    public void unloadCard(Card card) {
-        gameCards.remove(card.getId());
-        state.removeCard(card);
-        if (card.isSplitCard()) {
-            Card leftCard = ((SplitCard)card).getLeftHalfCard();
-            gameCards.remove(leftCard.getId());
-            state.removeCard(leftCard);
-            Card rightCard = ((SplitCard)card).getRightHalfCard();
-            gameCards.remove(rightCard.getId());
-            state.removeCard(rightCard);
-        }                
     }
 
     @Override
@@ -428,14 +408,17 @@ public abstract class GameImpl implements Game, Serializable {
         if (cardId == null) {
             return null;
         }
-        return gameCards.get(cardId);
+        if (gameCards.containsKey(cardId))
+            return gameCards.get(cardId);
+        else
+            return state.getCopiedCard(cardId);
     }
 
     @Override
     public Ability getAbility(UUID abilityId, UUID sourceId) {
         MageObject object = getObject(sourceId);
         if (object != null) {
-            return object.getAbilities().get(abilityId);
+            return object.getAbilities(this).get(abilityId);
         }
         return null;
     }
@@ -450,6 +433,21 @@ public abstract class GameImpl implements Game, Serializable {
         state.setZone(objectId, zone);
     }
 
+    @Override
+    public int getZoneChangeCounter(UUID objectId) {
+        return state.getZoneChangeCounter(objectId);
+    }
+
+    @Override
+    public void updateZoneChangeCounter(UUID objectId) {
+        state.updateZoneChangeCounter(objectId);
+    }
+
+    @Override
+    public void setZoneChangeCounter(UUID objectId, int value) {
+        state.setZoneChangeCounter(objectId, value);
+    }
+    
     @Override
     public GameStates getGameStates() {
         return gameStates;
@@ -893,12 +891,12 @@ public abstract class GameImpl implements Game, Serializable {
             Player player = getPlayer(playerId);
             for (Card card: player.getHand().getCards(this)) {
                 if (player.getHand().contains(card.getId())) {
-                    if (card.getAbilities().containsKey(LeylineAbility.getInstance().getId())) {
+                    if (card.getAbilities(this).containsKey(LeylineAbility.getInstance().getId())) {
                         if (player.chooseUse(Outcome.PutCardInPlay, "Do you wish to put " + card.getName() + " on the battlefield?", this)) {
                             card.putOntoBattlefield(this, Zone.HAND, null, player.getId());
                         }
                     }
-                    for (Ability ability: card.getAbilities()) {
+                    for (Ability ability: card.getAbilities(this)) {
                         if (ability instanceof ChancellorAbility) {
                             if (player.chooseUse(Outcome.PutCardInPlay, "Do you wish to reveal " + card.getName() + "?", this)) {
                                 Cards cards = new CardsImpl();
@@ -1259,13 +1257,13 @@ public abstract class GameImpl implements Game, Serializable {
         for (Ability ability : newEmblem.getAbilities()) {
             ability.setSourceId(newEmblem.getId());
         }
-        state.addCommandObject(newEmblem);
+        state.addCommandObject(newEmblem, this);
     }
 
 
     @Override
     public void addCommander(Commander commander){
-        state.addCommandObject(commander);
+        state.addCommandObject(commander, this);
     }
 
     @Override
@@ -1284,8 +1282,8 @@ public abstract class GameImpl implements Game, Serializable {
 
         //getState().addCard(permanent);
         permanent.reset(this);
-        if (copyFromPermanent.isMorphCard() && copyFromPermanent.isFaceDown()) {
-            MorphAbility.setPermanentToMorph(permanent);
+        if (copyFromPermanent.isMorphCard() && copyFromPermanent.isFaceDown(this)) {
+            MorphAbility.setPermanentToMorph(permanent, this);
         }
         permanent.assignNewId();
         if (copyFromPermanent.isTransformed()) {
@@ -1324,10 +1322,9 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public Card copyCard(Card cardToCopy, Ability source, UUID newController) {
+    public Card copyCard(Card cardToCopy, Ability source) {
         Card copiedCard = cardToCopy.copy();
         copiedCard.assignNewId();
-        copiedCard.setControllerId(newController);
         copiedCard.setCopy(true);
         Set<Card> cards = new HashSet<>();
         cards.add(copiedCard);
@@ -1440,13 +1437,13 @@ public abstract class GameImpl implements Game, Serializable {
             for (Card card: player.getHand().getCards(this)) {
                 if (card.isCopy()) {
                     player.getHand().remove(card);
-                    this.unloadCard(card);
+                    state.removeCopiedCard(card);
                 }
             }
             for (Card card: player.getGraveyard().getCards(this)) {
                 if (card.isCopy()) {
                     player.getGraveyard().remove(card);
-                    this.unloadCard(card);
+                    state.removeCopiedCard(card);
                 }
             }
         }
@@ -1454,7 +1451,7 @@ public abstract class GameImpl implements Game, Serializable {
         for (Card card: this.getState().getExile().getAllCards(this)) {
             if (card.isCopy()) {
                 this.getState().getExile().removeCard(card, this);
-                this.unloadCard(card);                
+                state.removeCopiedCard(card);
             }
         }   
         // TODO Library + graveyard
@@ -2239,10 +2236,10 @@ public abstract class GameImpl implements Game, Serializable {
             if (object instanceof Permanent) {
                 Map<Integer, MageObject> lkiExtendedMap = lkiExtended.get(objectId);
                 if (lkiExtendedMap != null) {
-                    lkiExtendedMap.put(((Permanent) object).getZoneChangeCounter(), copy);
+                    lkiExtendedMap.put(getZoneChangeCounter(object.getId()), copy);
                 } else {
                     lkiExtendedMap = new HashMap<>();
-                    lkiExtendedMap.put(((Permanent) object).getZoneChangeCounter(), copy);
+                    lkiExtendedMap.put(getZoneChangeCounter(object.getId()), copy);
                     lkiExtended.put(objectId, lkiExtendedMap);
                 }
             }

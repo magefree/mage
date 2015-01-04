@@ -70,8 +70,7 @@ public class ShipbreakerKraken extends CardImpl {
         Ability ability = new BecomesMonstrousSourceTriggeredAbility(new TapTargetEffect());
         ability.addTarget(new TargetCreaturePermanent(0,4));
         ability.addEffect(new ShipbreakerKrakenReplacementEffect());
-        this.addAbility(ability);
-        this.addWatcher(new ShipbreakerKrakenWatcher());
+        this.addAbility(ability, new ShipbreakerKrakenWatcher());
     }
 
     public ShipbreakerKraken(final ShipbreakerKraken card) {

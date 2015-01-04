@@ -129,7 +129,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
             for (UUID cardId : targetPointer.getTargets(game, source)) {
                 Card card = game.getCard(cardId);
                 if (card != null) {
-                    card.addAbility(ability);
+                    game.getState().addOtherAbility(cardId, ability);
                     affectedTargets++;
                 }
             }

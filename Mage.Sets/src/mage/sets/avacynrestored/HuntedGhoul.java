@@ -106,7 +106,7 @@ class HuntedGhoulEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getAbilities().containsKey(HuntedGhoulAbility.getInstance().getId())) {
+        if (permanent.getAbilities(game).containsKey(HuntedGhoulAbility.getInstance().getId())) {
             return true;
         }
         return false;

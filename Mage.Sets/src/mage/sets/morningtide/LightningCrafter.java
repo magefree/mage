@@ -55,7 +55,7 @@ public class LightningCrafter extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Champion a Goblin or Shaman
-        this.addAbility(new ChampionAbility(this, new String[]{"Goblin", "Shaman"}));
+        this.addAbility(new ChampionAbility(this.getName(), new String[]{"Goblin", "Shaman"}));
         
         // {T}: Lightning Crafter deals 3 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new TapSourceCost());

@@ -54,7 +54,6 @@ import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
-import mage.util.functions.CopyFunction;
 import mage.util.functions.CopyTokenFunction;
 
 
@@ -378,9 +377,6 @@ public class CardUtil {
      */
     @Deprecated
     //public static CopyFunction copyTo(Card target) {
-    private static CopyFunction copyTo(Card target) {
-        return new CopyFunction(target);
-    }
 
     /**
      * Returns function that copies params\abilities from one card to {@link Token}.
@@ -499,10 +495,8 @@ public class CardUtil {
             uniqueString.append(text);
         }
         uniqueString.append(cardId);
-        Card card = game.getCard(cardId); // if called for a token, the id is enough
-        if (card != null) {
-            uniqueString.append(card.getZoneChangeCounter());
-        }
+        uniqueString.append(game.getZoneChangeCounter(cardId));
+
         return uniqueString.toString();
     }
     

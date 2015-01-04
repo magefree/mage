@@ -61,8 +61,7 @@ public class TinStreetHooligan extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new DestroyTargetEffect(), new ManaWasSpentCondition(ColoredManaSymbol.G),
                 "if {G} was spent to cast {this}, destroy target artifact"), false);
         ability.addTarget(new TargetArtifactPermanent());        
-        this.addAbility(ability);
-        this.addWatcher(new ManaSpentToCastWatcher());
+        this.addAbility(ability, new ManaSpentToCastWatcher());
     }
 
     public TinStreetHooligan(final TinStreetHooligan card) {

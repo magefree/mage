@@ -60,7 +60,7 @@ public class Nighthowler extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Bestow {2}{B}{B}
-        this.addAbility(new BestowAbility(this, "{2}{B}{B}"));
+        this.addAbility(new BestowAbility(this.getName(), "{2}{B}{B}"));
         // Nighthowler and enchanted creature each get +X/+X, where X is the number of creature cards in all graveyards.
         DynamicValue graveCreatures = new CardsInAllGraveyardsCount(new FilterCreatureCard());
         Effect effect = new BoostSourceEffect(graveCreatures, graveCreatures, Duration.WhileOnBattlefield);

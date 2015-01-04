@@ -66,7 +66,7 @@ public class Chromanticore extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Bestow {2}{W}{U}{B}{R}{G}
-        this.addAbility(new BestowAbility(this, "{2}{W}{U}{B}{R}{G}"));
+        this.addAbility(new BestowAbility(this.getName(), "{2}{W}{U}{B}{R}{G}"));
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // First strike

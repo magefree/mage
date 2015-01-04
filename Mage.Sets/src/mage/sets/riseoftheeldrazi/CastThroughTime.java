@@ -67,9 +67,7 @@ public class CastThroughTime extends CardImpl {
         this.color.setBlue(true);
 
         // Instant and sorcery spells you control have rebound.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainReboundEffect()));
-
-        this.addWatcher(new LeavesBattlefieldWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainReboundEffect()), new LeavesBattlefieldWatcher());
     }
 
     public CastThroughTime(final CastThroughTime card) {
@@ -105,7 +103,7 @@ class GainReboundEffect extends ContinuousEffectImpl {
         if (player != null && permanent != null) {
             for (Card card : player.getHand().getCards(CastThroughTime.filter, game)) {
                 boolean found = false;
-                for (Ability ability : card.getAbilities()) {
+                for (Ability ability : card.getAbilities(game)) {
                     if (ability instanceof ReboundAbility) {
                         found = true;
                         break;
@@ -113,7 +111,8 @@ class GainReboundEffect extends ContinuousEffectImpl {
                 }
                 if (!found) {
                     Ability ability = new AttachedReboundAbility();
-                    card.addAbility(ability);
+                    game.getState().addOtherAbility(card.getId(), ability);
+                    //card.addAbility(ability);
                     ability.setControllerId(source.getControllerId());
                     ability.setSourceId(card.getId());
                     game.getState().addAbility(ability, source.getSourceId(), card);
@@ -147,10 +146,11 @@ class LeavesBattlefieldWatcher extends Watcher {
                 Player player = game.getPlayer(this.getControllerId());
                 if (player != null) {
                     for (Card card : player.getHand().getCards(CastThroughTime.filter, game)) {
-                        Iterator<Ability> it = card.getAbilities().iterator();
+                        Iterator<Ability> it = card.getAbilities(game).iterator();
                         while (it.hasNext()) {
-                            if (it.next() instanceof AttachedReboundAbility) {
-                                it.remove();
+                            Ability ability = it.next();
+                            if (ability instanceof AttachedReboundAbility) {
+                                card.removeAbility(ability, game);
                             }
                         }
                     }

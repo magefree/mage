@@ -103,7 +103,7 @@ class RiftsweeperEffect extends OneShotEffect {
         Card card = game.getCard(targetPointer.getFirst(game, source));
         if (card != null) {
             // remove exiting suspend counters
-            card.getCounters().clear();
+            card.getCounters(game).clear();
             // move to exile
             card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
             game.getPlayer(card.getOwnerId()).shuffleLibrary(game);

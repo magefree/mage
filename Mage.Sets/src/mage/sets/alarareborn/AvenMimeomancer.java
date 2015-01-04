@@ -149,7 +149,7 @@ class AvenEffect2 extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent target = game.getPermanent(source.getFirstTarget());
         if (target != null) {
-            if (!target.getAbilities().contains(FlyingAbility.getInstance())) {
+            if (!target.getAbilities(game).contains(FlyingAbility.getInstance())) {
                 target.addAbility(FlyingAbility.getInstance(), source.getSourceId(), game);
                 return true;
             }

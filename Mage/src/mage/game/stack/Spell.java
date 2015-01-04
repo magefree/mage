@@ -37,14 +37,11 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.AlternativeSourceCosts;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.PostResolveEffect;
-import mage.abilities.keyword.BestowAbility;
-import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.constants.*;
@@ -57,11 +54,12 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetAmount;
-import mage.watchers.Watcher;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.keyword.BestowAbility;
+import mage.abilities.keyword.MorphAbility;
 
 /**
  *
@@ -159,7 +157,7 @@ public class Spell implements StackObject, Card {
     }
 
     public String getSpellCastText(Game game) {
-        for (Ability spellAbility : (Abilities<Ability>) getAbilities()) {
+        for (Ability spellAbility : (Abilities<Ability>) getAbilities(game)) {
             if (spellAbility instanceof MorphAbility
                     && ((AlternativeSourceCosts) spellAbility).isActivated(getSpellAbility(), game)) {
                 return "a card face down";
@@ -192,9 +190,6 @@ public class Spell implements StackObject, Card {
                         for (UUID modeId :spellAbility.getModes().getSelectedModes()) {
                             spellAbility.getModes().setMode(spellAbility.getModes().get(modeId));
                             if (spellAbility.getTargets().stillLegal(spellAbility, game)) {
-                                if (!spellAbility.getSpellAbilityType().equals(SpellAbilityType.SPLICE)) {
-                                    updateOptionalCosts(index);
-                                }
                                 result |= spellAbility.resolve(game);
                             }
                         }
@@ -222,7 +217,6 @@ public class Spell implements StackObject, Card {
             return false;
         } else if (this.getCardType().contains(CardType.ENCHANTMENT) && this.getSubtype().contains("Aura")) {
             if (ability.getTargets().stillLegal(ability, game)) {
-                updateOptionalCosts(0);
                 boolean bestow = this.getSpellAbility() instanceof BestowAbility;
                 if (bestow) { 
                     // Must be removed first time, after that will be removed by continous effect
@@ -249,7 +243,6 @@ public class Spell implements StackObject, Card {
             }
             // Aura has no legal target and its a bestow enchantment -> Add it to battlefield as creature
             if (this.getSpellAbility() instanceof BestowAbility) { 
-                updateOptionalCosts(0);
                 result = card.putOntoBattlefield(game, fromZone, ability.getId(), controllerId);
                 return result;
             } else {
@@ -259,9 +252,8 @@ public class Spell implements StackObject, Card {
                 return false;
             }
         } else {
-            updateOptionalCosts(0);
-            if (isFaceDown()) {
-                card.setFaceDown(true);
+            if (isFaceDown(game)) {
+                card.setFaceDown(true, game);
             }
             result = card.putOntoBattlefield(game, fromZone, ability.getId(), controllerId);
             return result;
@@ -290,29 +282,6 @@ public class Spell implements StackObject, Card {
         }
     }
     
-    /**
-     * As we have ability in the stack, we need to update optional costs in original card.
-     * This information will be used later by effects, e.g. to determine whether card was kicked or not.
-     * E.g. Desolation Angel
-     */
-    private void updateOptionalCosts(int index) {
-        Ability abilityOrig = spellCards.get(index).getAbilities().get(spellAbilities.get(index).getId());
-        if (abilityOrig != null) {
-            for (Object object : spellAbilities.get(index).getOptionalCosts()) {
-                Cost cost = (Cost) object;
-                for (Cost costOrig : abilityOrig.getOptionalCosts()) {
-                    if (cost.getId().equals(costOrig.getId())) {
-                        if (cost.isPaid()) {
-                            costOrig.setPaid();
-                        } else {
-                            costOrig.clearPaid();
-                        }
-                        break;
-                    }
-                }
-            }
-        }
-    }
 
     /**
      * Choose new targets for the spell
@@ -546,9 +515,6 @@ public class Spell implements StackObject, Card {
     }
 
     @Override
-    public void setRarity(Rarity rarity) {}
-
-    @Override
     public List<CardType> getCardType() {
         if (this.getSpellAbility() instanceof BestowAbility) {
             List<CardType> cardTypes = new ArrayList<>();
@@ -599,6 +565,21 @@ public class Spell implements StackObject, Card {
     }
 
     @Override
+    public Abilities<Ability> getAbilities(Game game) {
+        return card.getAbilities(game);
+    }
+
+    @Override
+    public void clearAbilities(Game game) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+    
+    @Override
+    public void removeAbility(Ability ability, Game game) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+    
+    @Override
     public boolean hasAbility(UUID abilityId, Game game) {
         return card.hasAbility(abilityId, game);
     }
@@ -622,7 +603,7 @@ public class Spell implements StackObject, Card {
     @Override
     public int getConvertedManaCost() {
         int cmc = 0;
-        if (this.isMorphCard() && this.isFaceDown()) {
+        if (this.isMorphCard() && faceDown) {
             return 0;
         }
         for (Ability spellAbility: spellAbilities) {
@@ -665,17 +646,10 @@ public class Spell implements StackObject, Card {
     }
 
     @Override
-    public void addAbility(Ability ability) {}
-
-    @Override
-    public void addWatcher(Watcher watcher) {}
-
-    @Override
     public SpellAbility getSpellAbility() {
         return ability;
     }
 
-    @Override
     public void setControllerId(UUID controllerId) {
         this.ability.setControllerId(controllerId);
         for (SpellAbility spellAbility: spellAbilities) {
@@ -693,8 +667,8 @@ public class Spell implements StackObject, Card {
     }
 
     @Override
-    public List<Watcher> getWatchers() {
-        return card.getWatchers();
+    public List<String> getRules(Game game) {
+        return card.getRules(game);
     }
 
     @Override
@@ -708,27 +682,24 @@ public class Spell implements StackObject, Card {
     }
 
     @Override
-    public void setExpansionSetCode(String expansionSetCode) {}
-
-    @Override
-    public void setFaceDown(boolean value) {
+    public void setFaceDown(boolean value, Game game) {
         faceDown = value;
     }
 
     @Override
     public boolean turnFaceUp(Game game, UUID playerId) {
-        setFaceDown(false);
+        setFaceDown(false, game);
         return true;
     }
 
     @Override
     public boolean turnFaceDown(Game game, UUID playerId) {
-        setFaceDown(true);
+        setFaceDown(true, game);
         return true;
     }
 
     @Override
-    public boolean isFaceDown() {
+    public boolean isFaceDown(Game game) {
         return faceDown;
     }
 
@@ -758,22 +729,8 @@ public class Spell implements StackObject, Card {
     }
 
     @Override
-    public void setSecondCardFace(Card card) {
-    }
-
-    @Override
     public boolean isNightCard() {
         return false;
-    }
-
-    @Override
-    public void setFlipCard(boolean flipCard) {
-        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setFlipCardName(String flipCardName) {
-        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
     }
 
 
@@ -872,18 +829,8 @@ public class Spell implements StackObject, Card {
     }
 
     @Override
-    public void setCardNumber(int cid) {
-        card.setCardNumber(cid);
-    }
-
-    @Override
     public boolean getUsesVariousArt() {
         return card.getUsesVariousArt();
-    }
-
-    @Override
-    public void setUsesVariousArt(boolean usesVariousArt) {
-        card.setUsesVariousArt(usesVariousArt);
     }
 
     @Override
@@ -907,12 +854,7 @@ public class Spell implements StackObject, Card {
     }
 
     @Override
-    public int getZoneChangeCounter() {
-        return card.getZoneChangeCounter();
-    }
-
-    @Override
-    public void addInfo(String key, String value) {
+    public void addInfo(String key, String value, Game game) {
         // do nothing
     }
 
@@ -942,8 +884,8 @@ public class Spell implements StackObject, Card {
     public void build() {}
 
     @Override
-    public Counters getCounters() {
-        return card.getCounters();
+    public Counters getCounters(Game game) {
+        return card.getCounters(game);
     }
 
     @Override
@@ -978,11 +920,6 @@ public class Spell implements StackObject, Card {
 
     public Card getCard() {
         return card;
-    }
-
-    @Override
-    public void setMorphCard(boolean morphCard) {
-        throw new UnsupportedOperationException("Not supported");
     }
 
     @Override

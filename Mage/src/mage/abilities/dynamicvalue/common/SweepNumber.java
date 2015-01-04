@@ -53,7 +53,7 @@ public class SweepNumber implements DynamicValue {
         if (zoneChangeCounter == 0) {
             Card card = game.getCard(source.getSourceId());
             if (card != null) {
-                zoneChangeCounter = card.getZoneChangeCounter();
+                zoneChangeCounter = game.getZoneChangeCounter(source.getSourceId());
                 if (previousZone) {
                     zoneChangeCounter--;
                 }

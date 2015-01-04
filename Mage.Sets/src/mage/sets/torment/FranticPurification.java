@@ -62,7 +62,7 @@ public class FranticPurification extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // Madness {W}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{W}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl("{W}")));
     }
 
     public FranticPurification(final FranticPurification card) {

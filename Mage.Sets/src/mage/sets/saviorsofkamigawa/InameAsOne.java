@@ -76,8 +76,7 @@ public class InameAsOne extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new ConditionalOneShotEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 1, filter), false),
                     new CastFromHandCondition()));
-        this.addAbility(ability);
-        this.addWatcher(new CastFromHandWatcher());
+        this.addAbility(ability, new CastFromHandWatcher());
         
         // When Iname as One dies, you may exile it. If you do, return target Spirit permanent card from your graveyard to the battlefield.
         ability = new DiesTriggeredAbility(new InameAsOneEffect(), false);

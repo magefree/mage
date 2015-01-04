@@ -67,7 +67,7 @@ public class PermafrostTrap extends CardImpl {
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new PermafrostTrapEffect());
 
-        this.addWatcher(new PermafrostTrapWatcher());
+        this.getSpellAbility().addWatcher(new PermafrostTrapWatcher());
     }
 
     public PermafrostTrap(final PermafrostTrap card) {

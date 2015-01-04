@@ -70,7 +70,7 @@ public class BigGameHunter extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
         // Madness {B}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl("{B}")));
     }
 
     public BigGameHunter(final BigGameHunter card) {

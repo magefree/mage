@@ -58,7 +58,7 @@ public class BalefulEidolon extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Bestow {4}{B}
-        this.addAbility(new BestowAbility(this, "{4}{B}"));
+        this.addAbility(new BestowAbility(this.getName(), "{4}{B}"));
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
         // Enchanted creature gets +1/+1 and has deathtouch.

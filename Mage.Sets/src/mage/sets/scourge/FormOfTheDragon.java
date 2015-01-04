@@ -130,7 +130,7 @@ class FormOfTheDragonRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getCardType().contains(CardType.CREATURE) && !permanent.getAbilities().contains(FlyingAbility.getInstance());
+        return permanent.getCardType().contains(CardType.CREATURE) && !permanent.getAbilities(game).contains(FlyingAbility.getInstance());
     }
 
     @Override

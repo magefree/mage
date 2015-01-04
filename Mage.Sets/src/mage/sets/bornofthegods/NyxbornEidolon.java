@@ -54,7 +54,7 @@ public class NyxbornEidolon extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Bestow {4}{B}
-        this.addAbility(new BestowAbility(this, "{4}{B}"));
+        this.addAbility(new BestowAbility(this.getName(), "{4}{B}"));
         // Enchanted creature gets +2/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 1, Duration.WhileOnBattlefield)));
     }

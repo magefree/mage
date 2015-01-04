@@ -56,12 +56,9 @@ public class CastSpellLastTurnWatcher extends Watcher {
 
     public CastSpellLastTurnWatcher(final CastSpellLastTurnWatcher watcher) {
        super(watcher);
-       for (Entry<UUID, Integer> entry: watcher.amountOfSpellsCastOnCurrentTurn.entrySet()) {
-           amountOfSpellsCastOnCurrentTurn.put(entry.getKey(), entry.getValue());
-       }
-       for (Entry<UUID, Integer> entry: watcher.amountOfSpellsCastOnPrevTurn.entrySet()) {
-           amountOfSpellsCastOnPrevTurn.put(entry.getKey(), entry.getValue());
-       }
+       this.amountOfSpellsCastOnCurrentTurn.putAll(this.amountOfSpellsCastOnPrevTurn);
+       this.amountOfSpellsCastOnPrevTurn.putAll(this.amountOfSpellsCastOnPrevTurn);
+       this.spellsCastThisTurnInOrder.addAll(this.spellsCastThisTurnInOrder);
     }
 
     @Override

@@ -27,6 +27,7 @@
  */
 package mage.sets.riseoftheeldrazi;
 
+import java.util.List;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
@@ -59,11 +60,11 @@ public class CaravanEscort extends LevelerCard {
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{2}")));
 
         AbilitiesImpl<Ability> levelAbilities = new AbilitiesImpl<Ability>(FirstStrikeAbility.getInstance());
-        LevelerCardBuilder.construct(this,
+        List<Ability> levelerAbilities = LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 4, new AbilitiesImpl<Ability>(), 2, 2),
                 new LevelerCardBuilder.LevelAbility(5, -1, levelAbilities, 5, 5)
         );
-
+        this.addAbilities(levelerAbilities);
         setMaxLevelCounters(5);
     }
 

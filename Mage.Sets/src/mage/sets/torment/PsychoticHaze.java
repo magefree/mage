@@ -52,7 +52,7 @@ public class PsychoticHaze extends CardImpl {
         this.getSpellAbility().addEffect(new DamageEverythingEffect(1));
 
         // Madness {1}{B}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl("{1}{B}")));
     }
 
     public PsychoticHaze(final PsychoticHaze card) {

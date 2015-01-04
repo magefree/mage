@@ -97,7 +97,7 @@ class AltarOfTheLostManaCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source.getSourceId());
         if (object != null && game.getState().getZone(object.getId()) == Zone.GRAVEYARD) {
-            for (Ability ability: object.getAbilities()) {
+            for (Ability ability: object.getAbilities(game)) {
                 if (ability instanceof FlashbackAbility) {
                     return true;
                 }

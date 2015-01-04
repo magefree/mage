@@ -110,13 +110,13 @@ class GargoyleSentinelEffect extends ContinuousEffectImpl {
             switch (layer) {
                 case AbilityAddingRemovingEffects_6:
                     if (sublayer == SubLayer.NA) {
-                        for (Iterator<Ability> ability = permanent.getAbilities().iterator(); ability.hasNext();) {
+                        for (Iterator<Ability> ability = permanent.getAbilities(game).iterator(); ability.hasNext();) {
                             Ability entry = ability.next();
                             if (entry.getId().equals(DefenderAbility.getInstance().getId())) {
                                 ability.remove();
                             }
                         }
-                        permanent.getAbilities().add(FlyingAbility.getInstance());
+                        permanent.getAbilities(game).add(FlyingAbility.getInstance());
                     }
                     break;
             }
@@ -154,7 +154,7 @@ class HasDefenderCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            Abilities<Ability> abilities = permanent.getAbilities();
+            Abilities<Ability> abilities = permanent.getAbilities(game);
             for (Ability ability : abilities) {
                 if (ability.getClass().equals(DefenderAbility.getInstance().getClass())) {
                     return true;

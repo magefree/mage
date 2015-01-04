@@ -39,6 +39,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.constants.CardType;
+import mage.game.CardState;
 import mage.game.Game;
 
 public abstract class MageObjectImpl implements MageObject {
@@ -126,13 +127,45 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public Abilities<Ability> getAbilities(){
+    public Abilities<Ability> getAbilities() {
         return abilities;
+    }
+    
+    @Override
+    public Abilities<Ability> getAbilities(Game game) {
+        Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(objectId);
+        if (otherAbilities == null) {
+            return abilities;
+        }
+        Abilities<Ability> all = new AbilitiesImpl<>();
+        all.addAll(abilities);
+        all.addAll(otherAbilities);
+        return all;
+    }
+    
+    @Override
+    public void removeAbility(Ability ability, Game game) {
+        Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(objectId);
+        if (otherAbilities.contains(ability)) {
+            game.getState().getAllOtherAbilities(objectId).remove(ability);
+        }
+        else {
+            abilities.remove(ability);
+        }
     }
 
     @Override
+    public void clearAbilities(Game game) {
+        abilities.clear();
+        CardState state = game.getState().getCardState(objectId);
+        if (state != null) {
+            state.clearAbilities();
+        }
+    }
+    
+    @Override
     public boolean hasAbility(UUID abilityId, Game game) {
-        if (this.getAbilities().containsKey(abilityId)) {
+        if (this.getAbilities(game).containsKey(abilityId)) {
             return true;
         }
         Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(getId());

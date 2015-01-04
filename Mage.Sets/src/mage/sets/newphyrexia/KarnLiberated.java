@@ -126,7 +126,7 @@ class KarnLiberatedEffect extends OneShotEffect {
         }
         game.getState().clear();
         for (Card card: game.getCards()) {
-            game.getState().addCard(card);
+            game.getState().addCard(card, game);
         }
         for (Player player: game.getPlayers().values()) {
             player.getGraveyard().clear();

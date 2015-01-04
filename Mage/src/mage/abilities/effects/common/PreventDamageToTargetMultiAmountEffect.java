@@ -58,6 +58,7 @@ public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl
 
     public PreventDamageToTargetMultiAmountEffect(final PreventDamageToTargetMultiAmountEffect effect) {
         super(effect);
+        this.targetAmountMap.putAll(effect.targetAmountMap);
     }
 
     @Override

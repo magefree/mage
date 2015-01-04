@@ -148,8 +148,8 @@ class LazavDimirEffect extends ContinuousEffectImpl {
                 new FilterCreatureCard("a creature card"),
                 TargetController.OPPONENT, SetTargetPointer.CARD), source.getSourceId(), game);
 
-        for (Ability ability : cardToCopy.getAbilities()) {
-            if (!permanent.getAbilities().contains(ability)) {
+        for (Ability ability : cardToCopy.getAbilities(game)) {
+            if (!permanent.getAbilities(game).contains(ability)) {
                 permanent.addAbility(ability, source.getSourceId(), game);
             }
         }

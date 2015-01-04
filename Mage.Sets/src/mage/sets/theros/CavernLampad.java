@@ -58,7 +58,7 @@ public class CavernLampad extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Bestow {5}{B} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
-        this.addAbility(new BestowAbility(this, "{5}{B}"));
+        this.addAbility(new BestowAbility(this.getName(), "{5}{B}"));
         // Intimidate
         this.addAbility(IntimidateAbility.getInstance());
         // Enchanted creature gets +2/+2 and has intimidate.

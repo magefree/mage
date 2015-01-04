@@ -57,7 +57,7 @@ public class KickedCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            for (Ability ability: card.getAbilities()) {
+            for (Ability ability: card.getAbilities(game)) {
                 if (ability instanceof KickerAbility) {
                     if(((KickerAbility) ability).isKicked(game)) {
                         return true;

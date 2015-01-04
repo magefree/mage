@@ -106,15 +106,15 @@ import mage.target.common.TargetCreaturePermanent;
 
 public class BestowAbility extends SpellAbility {
 
-    public BestowAbility(Card card, String manaString) {
-        super(new ManaCostsImpl(manaString), card.getName() + " using bestow");
+    public BestowAbility(String cardName, String manaString) {
+        super(new ManaCostsImpl(manaString), cardName + " using bestow");
         this.timing = TimingRule.SORCERY;
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.addTarget(auraTarget);
         this.addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BestowTypeChangingEffect());
         ability.setRuleVisible(false);
-        card.addAbility(ability);
+        addSubAbility(ability);
     }
 
     public BestowAbility(final BestowAbility ability) {

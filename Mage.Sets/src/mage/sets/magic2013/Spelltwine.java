@@ -113,16 +113,16 @@ class SpelltwineEffect extends OneShotEffect {
             }
             boolean castCardOne = true;
             if (cardOne != null && controller.chooseUse(Outcome.Neutral, "Cast the copy of " + cardOne.getName() + " first?", game)) {
-                Card copyOne = game.copyCard(cardOne, source, controller.getId());
+                Card copyOne = game.copyCard(cardOne, source);
                 controller.cast(copyOne.getSpellAbility(), game, true);
                 castCardOne = false;
             }
             if (cardTwo != null) {
-                Card copyTwo = game.copyCard(cardTwo, source, controller.getId());
+                Card copyTwo = game.copyCard(cardTwo, source);
                 controller.cast(copyTwo.getSpellAbility(), game, true);
             }
             if (cardOne != null && castCardOne) {
-                Card copyOne = game.copyCard(cardOne, source, controller.getId());
+                Card copyOne = game.copyCard(cardOne, source);
                 controller.cast(copyOne.getSpellAbility(), game, true);
             }
             return true;

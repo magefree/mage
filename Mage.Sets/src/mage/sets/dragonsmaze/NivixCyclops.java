@@ -116,7 +116,7 @@ class AsThoughNoDefenderEffect extends AsThoughEffectImpl {
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         Permanent nivixCyclops = game.getPermanent(source.getSourceId());
         if (nivixCyclops != null
-                && nivixCyclops.getAbilities().containsKey(DefenderAbility.getInstance().getId())) {
+                && nivixCyclops.getAbilities(game).containsKey(DefenderAbility.getInstance().getId())) {
             return true;
         }
         return false;

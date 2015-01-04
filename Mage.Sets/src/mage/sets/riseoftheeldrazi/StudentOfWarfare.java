@@ -28,6 +28,7 @@
 
 package mage.sets.riseoftheeldrazi;
 
+import java.util.List;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
@@ -59,16 +60,18 @@ public class StudentOfWarfare extends LevelerCard {
         this.toughness = new MageInt(1);
 
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{W}")));
-        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         abilities1.add(FirstStrikeAbility.getInstance());
 
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
+        Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         abilities2.add(DoubleStrikeAbility.getInstance());
 
-        LevelerCardBuilder.construct(this,
+        List<Ability> levelerAbilities = LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(2, 6, abilities1, 3, 3),
                 new LevelerCardBuilder.LevelAbility(7, -1, abilities2, 4, 4)
         );
+        this.addAbilities(levelerAbilities);
+        setMaxLevelCounters(7);
     }
 
     public StudentOfWarfare (final StudentOfWarfare card) {

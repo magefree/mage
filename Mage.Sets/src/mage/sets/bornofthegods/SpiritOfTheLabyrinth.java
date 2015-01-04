@@ -61,8 +61,9 @@ public class SpiritOfTheLabyrinth extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Each player can't draw more than one card each turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpiritOfTheLabyrinthEffect()));
-        this.addWatcher(new SpiritOfTheLabyrinthWatcher());        
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new SpiritOfTheLabyrinthEffect());
+        ability.addWatcher(new SpiritOfTheLabyrinthWatcher());        
+        this.addAbility(ability);
         
     }
 

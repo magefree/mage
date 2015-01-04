@@ -60,7 +60,7 @@ public class ExecutionersSwing extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(-5,-5, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanentThatDealtDamageThisTurn());
 
-        this.addWatcher(new SourceDidDamageWatcher());
+        this.getSpellAbility().addWatcher(new SourceDidDamageWatcher());
     }
 
     public ExecutionersSwing(final ExecutionersSwing card) {

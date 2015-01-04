@@ -78,7 +78,8 @@ public class Necromancy extends CardImpl {
         this.color.setBlack(true);
 
         // You may cast Necromancy as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CastSourceAsThoughItHadFlashEffect(this, Duration.EndOfGame, true)));        
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CastSourceAsThoughItHadFlashEffect(this, Duration.EndOfGame)));
+        this.addAbility(new CastAtInstantTimeTriggeredAbility());
         
         // When Necromancy enters the battlefield, if it's on the battlefield, it becomes an Aura with "enchant creature put onto the battlefield with Necromancy." 
         // Put target creature card from a graveyard onto the battlefield under your control and attach Necromancy to it. 
@@ -105,21 +106,21 @@ public class Necromancy extends CardImpl {
 
 class CastSourceAsThoughItHadFlashEffect extends AsThoughEffectImpl {
 
-    private final boolean sacrificeIfCastAsInstant;
+//    private final boolean sacrificeIfCastAsInstant;
 
-    public CastSourceAsThoughItHadFlashEffect(Card card, Duration duration, boolean sacrificeIfCastAsInstant) {
+    public CastSourceAsThoughItHadFlashEffect(Card card, Duration duration) {
         super(AsThoughEffectType.CAST_AS_INSTANT, duration, Outcome.Benefit);
-        this.sacrificeIfCastAsInstant = sacrificeIfCastAsInstant;
-        if (sacrificeIfCastAsInstant) {
-            card.addAbility(new CastAtInstantTimeTriggeredAbility());
-        }
+//        this.sacrificeIfCastAsInstant = sacrificeIfCastAsInstant;
+//        if (sacrificeIfCastAsInstant) {
+//            card.addAbility(new CastAtInstantTimeTriggeredAbility());
+//        }
         staticText = "You may cast {this} as though it had flash";
     }
 
 
     public CastSourceAsThoughItHadFlashEffect(final CastSourceAsThoughItHadFlashEffect effect) {
         super(effect);
-        this.sacrificeIfCastAsInstant = effect.sacrificeIfCastAsInstant;
+//        this.sacrificeIfCastAsInstant = effect.sacrificeIfCastAsInstant;
     }
 
     @Override
