@@ -65,6 +65,8 @@ nbactions-*.xml
 nb-configuration.xml
 glob:Mage.Client/cheat.dck
 glob:Mage.Client/test.dck
+mage-bundle.zip
+mage-stats-ws.war
 
 Mage.Server.Plugins/Mage.Draft.8PlayerBooster/target
 \.orig\..*$
