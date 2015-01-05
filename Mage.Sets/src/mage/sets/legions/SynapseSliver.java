@@ -35,6 +35,7 @@ import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -57,7 +58,7 @@ public class SynapseSliver extends CardImpl {
         effect.setText("its controller may draw a card");
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(effect, 
                         new FilterCreaturePermanent("Sliver", "a Sliver"), 
-                        true, true, true));
+                        true, SetTargetPointer.PLAYER, true));
     }
 
     public SynapseSliver(final SynapseSliver card) {

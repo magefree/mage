@@ -30,6 +30,7 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -46,10 +47,10 @@ import mage.target.targetpointer.FixedTarget;
 
 public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImpl {
     private final FilterPermanent filter;
-    private final boolean setTargetPointer;
+    private final SetTargetPointer setTargetPointer;
     private final boolean onlyCombat;
 
-    public DealsDamageToAPlayerAllTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional, boolean setTargetPointer, boolean onlyCombat) {
+    public DealsDamageToAPlayerAllTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, boolean onlyCombat) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setTargetPointer = setTargetPointer;
         this.filter = filter;
@@ -74,10 +75,18 @@ public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImp
                 && (!onlyCombat || ((DamagedPlayerEvent) event).isCombatDamage())) {
             Permanent permanent = game.getPermanent(event.getSourceId());
             if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
-                if (setTargetPointer) {
+                if (!setTargetPointer.equals(SetTargetPointer.NONE)) {
                     for (Effect effect : this.getEffects()) {
                         effect.setValue("damage", event.getAmount());
-                        effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));
+                        switch(setTargetPointer) {
+                            case PLAYER:
+                                effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));
+                                break;
+                            case PERMANENT:
+                                effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                                break;
+                        }
+                        
                     }
                 }
                 return true;

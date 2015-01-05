@@ -139,6 +139,8 @@ public class AddCountersTargetEffect extends OneShotEffect {
                 sb.append("target ");
             }
             sb.append(targetName);
+        } else {
+            sb.append("it");
         }
         if (amount.getMessage().length() > 0) {
             sb.append(" for each ").append(amount.getMessage());
