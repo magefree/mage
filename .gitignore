@@ -37,6 +37,7 @@ Mage.Server/cache
 Mage.Server/mageserver.log
 Mage.Server/magediag.log
 Mage.Sets/target
+Mage.Stats/server.log
 Mage.Tests/target
 Mage.Tests/cache
 Mage.Tests/db
