@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Quercitron
  */
-public class MesaFalcon extends mage.sets.homelands.MesaFalcon {
+public class MesaFalcon extends mage.sets.homelands.MesaFalcon1 {
 
     public MesaFalcon(UUID ownerId) {
         super(ownerId);

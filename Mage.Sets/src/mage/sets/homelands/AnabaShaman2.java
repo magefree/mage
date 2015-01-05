@@ -28,49 +28,25 @@
 package mage.sets.homelands;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continious.BoostEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Quercitron
+ * @author fireshoes
  */
-public class FeastOfTheUnicorn extends CardImpl {
+public class AnabaShaman2 extends mage.sets.ninthedition.AnabaShaman {
 
-    public FeastOfTheUnicorn(UUID ownerId) {
-        super(ownerId, 9, "Feast of the Unicorn", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
+    public AnabaShaman2(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 85;
         this.expansionSetCode = "HML";
-        this.subtype.add("Aura");
-
-        this.color.setBlack(true);
-
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-        // Enchanted creature gets +4/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(4, 0, Duration.WhileOnBattlefield)));
     }
 
-    public FeastOfTheUnicorn(final FeastOfTheUnicorn card) {
+    public AnabaShaman2(final AnabaShaman2 card) {
         super(card);
     }
 
     @Override
-    public FeastOfTheUnicorn copy() {
-        return new FeastOfTheUnicorn(this);
+    public AnabaShaman2 copy() {
+        return new AnabaShaman2(this);
     }
 }

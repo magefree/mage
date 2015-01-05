@@ -37,7 +37,7 @@ public class WallOfSwords extends mage.sets.tenth.WallOfSwords {
 
     public WallOfSwords(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 227;
+        this.cardNumber = 228;
         this.expansionSetCode = "LEB";
     }
 

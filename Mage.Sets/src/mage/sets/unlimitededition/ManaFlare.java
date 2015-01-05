@@ -25,36 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.homelands;
+package mage.sets.unlimitededition;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DamageEverythingEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
- * @author Quercitron
+ * @author fireshoes
  */
-public class DrySpell extends CardImpl {
+public class ManaFlare extends mage.sets.fourthedition.ManaFlare {
 
-    public DrySpell(UUID ownerId) {
-        super(ownerId, 7, "Dry Spell", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "HML";
-
-        this.color.setBlack(true);
-
-        // Dry Spell deals 1 damage to each creature and each player.
-        this.getSpellAbility().addEffect(new DamageEverythingEffect(1));
+    public ManaFlare(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 163;
+        this.expansionSetCode = "2ED";
     }
 
-    public DrySpell(final DrySpell card) {
+    public ManaFlare(final ManaFlare card) {
         super(card);
     }
 
     @Override
-    public DrySpell copy() {
-        return new DrySpell(this);
+    public ManaFlare copy() {
+        return new ManaFlare(this);
     }
 }

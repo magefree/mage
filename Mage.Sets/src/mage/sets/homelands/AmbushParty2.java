@@ -28,44 +28,25 @@
 package mage.sets.homelands;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 
 /**
  *
- * @author Quercitron
+ * @author fireshoes
  */
-public class MesaFalcon extends CardImpl {
+public class AmbushParty2 extends mage.sets.fifthedition.AmbushParty {
 
-    public MesaFalcon(UUID ownerId) {
-        super(ownerId, 112, "Mesa Falcon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+    public AmbushParty2(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 80;
         this.expansionSetCode = "HML";
-        this.subtype.add("Bird");
-
-        this.color.setWhite(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // {1}{W}: Mesa Falcon gets +0/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}{W}")));
     }
 
-    public MesaFalcon(final MesaFalcon card) {
+    public AmbushParty2(final AmbushParty2 card) {
         super(card);
     }
 
     @Override
-    public MesaFalcon copy() {
-        return new MesaFalcon(this);
+    public AmbushParty2 copy() {
+        return new AmbushParty2(this);
     }
 }
