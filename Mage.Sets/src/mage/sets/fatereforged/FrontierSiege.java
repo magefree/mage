@@ -38,7 +38,6 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AddManaToManaPoolSourceControllerEffect;
 import mage.abilities.effects.common.ChooseModeEffect;
-import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

@@ -35,6 +35,7 @@ import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.Token;
 
@@ -58,7 +59,7 @@ public class BroodSliver extends CardImpl {
         effect.setText("its controller may put a 1/1 colorless Sliver creature token onto the battlefield");
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(effect, 
                         new FilterCreaturePermanent("Sliver", "a Sliver"), 
-                        true, true, true));        
+                        true, SetTargetPointer.PLAYER, true));        
     }
 
     public BroodSliver(final BroodSliver card) {

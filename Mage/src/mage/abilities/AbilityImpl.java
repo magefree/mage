@@ -126,6 +126,7 @@ public abstract class AbilityImpl implements Ability {
         this.ruleAdditionalCostsVisible = ability.ruleAdditionalCostsVisible;
         this.costModificationActive = ability.costModificationActive;
         this.worksFaceDown = ability.worksFaceDown;
+        this.abilityWord = ability.abilityWord;
     }
 
     @Override
