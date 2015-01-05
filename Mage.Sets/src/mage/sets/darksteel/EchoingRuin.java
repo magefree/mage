@@ -75,7 +75,7 @@ public class EchoingRuin extends CardImpl {
 class EchoingRuinEffect extends OneShotEffect {
     EchoingRuinEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "Destroy targetartifact and all other artifacts with the same name as that artifact";
+        staticText = "Destroy target artifact and all other artifacts with the same name as that artifact";
     }
 
     EchoingRuinEffect(final EchoingRuinEffect effect) {

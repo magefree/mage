@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class MemoryLapse2 extends mage.sets.homelands.MemoryLapse1 {
+public class MemoryLapse2 extends mage.sets.seventhedition.MemoryLapse {
 
     public MemoryLapse2(UUID ownerId) {
         super(ownerId);
