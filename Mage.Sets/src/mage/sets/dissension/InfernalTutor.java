@@ -28,6 +28,7 @@
 package mage.sets.dissension;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.HellbentCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -41,6 +42,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
@@ -99,8 +101,8 @@ class InfernalTutorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card sourceCard = game.getCard(source.getSourceId());
-        if (controller != null) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
             if (controller.getHand().size() > 0) {
                 Card cardToReveal = null;
                 if (controller.getHand().size() > 1) {
@@ -112,11 +114,16 @@ class InfernalTutorEffect extends OneShotEffect {
                 } else {
                     cardToReveal = controller.getHand().getRandom(game);
                 }
+                FilterCard filterCard;
                 if (cardToReveal != null) {
-                    controller.revealCards(sourceCard.getName(), new CardsImpl(cardToReveal), game);
-                    FilterCard filterCard = new FilterCard(new StringBuilder("card named ").append(cardToReveal.getName()).toString());
-                    return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true, true).apply(game, source);
-                }
+                    controller.revealCards("from hand :" + sourceObject.getName(), new CardsImpl(cardToReveal), game);                    
+                    filterCard = new FilterCard("card named " + cardToReveal.getName());
+                    filterCard.add(new NamePredicate(cardToReveal.getName()));
+                } else {
+                    filterCard = new FilterCard();
+                }                                
+                return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true, true).apply(game, source);
+                
             }
             return true;
         }
