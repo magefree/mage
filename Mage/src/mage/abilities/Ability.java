@@ -371,7 +371,7 @@ public interface Ability extends Controllable, Serializable {
     boolean isInUseableZone(Game game, MageObject source, boolean checkLKI);
 
     /**
-     * Returns true if this ability has to be shown on top of the card.
+     * Returns true if this ability has to be shown as topmost of all the rules of the object
      *
      * @return
      */
