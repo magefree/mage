@@ -1,5 +1,5 @@
 /*
- *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -25,17 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.continious;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.cards.Card;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.FilterCard;
 import mage.game.Game;
 
 /**
@@ -43,26 +40,15 @@ import mage.game.Game;
  * @author LevelX2
  */
 
-public class CastAsThoughItHadFlashEffect extends AsThoughEffectImpl {
+public class CastAsThoughItHadFlashSourceEffect extends AsThoughEffectImpl {
 
-    private final FilterCard filter;
-    private final boolean anyPlayer;
-
-    public CastAsThoughItHadFlashEffect(Duration duration, FilterCard filter) {
-        this(duration, filter, false);
-    }
-
-    public CastAsThoughItHadFlashEffect(Duration duration, FilterCard filter, boolean anyPlayer) {
+    public CastAsThoughItHadFlashSourceEffect(Duration duration) {
         super(AsThoughEffectType.CAST_AS_INSTANT, duration, Outcome.Benefit);
-        this.filter = filter;
-        this.anyPlayer = anyPlayer;
-        staticText = setText();
+        staticText = "you may cast {this} as though it had flash";
     }
 
-    public CastAsThoughItHadFlashEffect(final CastAsThoughItHadFlashEffect effect) {
+    public CastAsThoughItHadFlashSourceEffect(final CastAsThoughItHadFlashSourceEffect effect) {
         super(effect);
-        this.filter = effect.filter;
-        this.anyPlayer = effect.anyPlayer;
     }
 
     @Override
@@ -71,36 +57,12 @@ public class CastAsThoughItHadFlashEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public CastAsThoughItHadFlashEffect copy() {
-        return new CastAsThoughItHadFlashEffect(this);
+    public CastAsThoughItHadFlashSourceEffect copy() {
+        return new CastAsThoughItHadFlashSourceEffect(this);
     }
 
     @Override
     public boolean applies(UUID affectedSpellId, Ability source, UUID affectedControllerId, Game game) {
-        if (anyPlayer || source.getControllerId().equals(affectedControllerId)) {
-            Card card = game.getCard(affectedSpellId);
-            return card != null && filter.match(card, game);
-        }
-        return false;
-    }
-
-    private String setText() {
-        StringBuilder sb = new StringBuilder();
-        if (anyPlayer) {
-            sb.append("Any player");
-        } else {
-            sb.append("You");
-        }
-        sb.append(" may cast ");
-        sb.append(filter.getMessage());
-        if (!duration.toString().isEmpty()) {
-            if (duration.equals(Duration.EndOfTurn)) {
-                sb.append(" this turn");
-            } else {
-                sb.append(" ");
-                sb.append(duration.toString());
-            }
-        }
-        return sb.append(" as though they had flash").toString();
+        return affectedSpellId.equals(source.getSourceId());
     }
 }

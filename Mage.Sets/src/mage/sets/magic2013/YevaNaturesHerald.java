@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.CastAsThoughItHadFlashEffect;
+import mage.abilities.effects.common.continious.CastAsThoughItHadFlashAllEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -66,7 +66,7 @@ public class YevaNaturesHerald extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // You may cast green creature cards as though they had flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     public YevaNaturesHerald(final YevaNaturesHerald card) {

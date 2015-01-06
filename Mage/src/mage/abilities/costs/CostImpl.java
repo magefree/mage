@@ -28,10 +28,9 @@
 
 package mage.abilities.costs;
 
+import java.util.UUID;
 import mage.target.Target;
 import mage.target.Targets;
-
-import java.util.UUID;
 
 public abstract class CostImpl implements Cost {
 
@@ -56,6 +55,10 @@ public abstract class CostImpl implements Cost {
     @Override
     public String getText() {
         return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public void addTarget(Target target) {

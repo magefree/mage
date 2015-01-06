@@ -30,7 +30,7 @@ package mage.sets.theros;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.CastAsThoughItHadFlashEffect;
+import mage.abilities.effects.common.continious.CastAsThoughItHadFlashAllEffect;
 import mage.abilities.effects.common.continious.UntapAllDuringEachOtherPlayersUntapStepEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -69,7 +69,7 @@ public class ProphetOfKruphix extends CardImpl {
         // Untap all creatures and lands you control during each other player's untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UntapAllDuringEachOtherPlayersUntapStepEffect(filter)));
         // You may cast creature cards as though they had flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashEffect(Duration.WhileOnBattlefield, new FilterCreatureCard("creature cards"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, new FilterCreatureCard("creature cards"))));
 
     }
 

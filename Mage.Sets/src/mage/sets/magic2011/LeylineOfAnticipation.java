@@ -30,7 +30,7 @@ package mage.sets.magic2011;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.CastAsThoughItHadFlashEffect;
+import mage.abilities.effects.common.continious.CastAsThoughItHadFlashAllEffect;
 import mage.abilities.keyword.LeylineAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -63,7 +63,7 @@ public class LeylineOfAnticipation extends CardImpl {
         this.addAbility(LeylineAbility.getInstance());
         
         // You may cast nonland cards as though they had flash. (You may cast them any time you could cast an instant.)        
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     public LeylineOfAnticipation(final LeylineOfAnticipation card) {
