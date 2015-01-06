@@ -28,9 +28,6 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +36,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -64,7 +64,9 @@ public class Floodbringer extends CardImpl {
 
         // {2}, Return a land you control to its owner's hand: Tap target land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new GenericManaCost(2));
-        ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(filter)));
+        ReturnToHandTargetCost cost = new ReturnToHandTargetCost(new TargetControlledPermanent(filter));
+        cost.setText("Return a land you control to its owner's hand");
+        ability.addCost(cost);
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }
