@@ -30,7 +30,7 @@ package mage.sets.shardsofalara;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.TapForManaAllTriggeredManaAbility;
-import mage.abilities.effects.common.AddManaOfAnyColorTargetCanProduceEffect;
+import mage.abilities.effects.common.AddManaOfAnyTypeProducedEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -67,7 +67,7 @@ public class KeeperOfProgenitus extends CardImpl {
 
         // Whenever a player taps a Mountain, Forest, or Plains for mana, that player adds one mana to his or her mana pool of any type that land produced.
         this.addAbility(new TapForManaAllTriggeredManaAbility(
-                new AddManaOfAnyColorTargetCanProduceEffect(),
+                new AddManaOfAnyTypeProducedEffect(),
                 filter, SetTargetPointer.PERMANENT));
     }
 

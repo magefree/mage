@@ -30,7 +30,7 @@ package mage.sets.dragonsmaze;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.TapForManaAllTriggeredManaAbility;
-import mage.abilities.effects.common.AddManaOfAnyColorTargetCanProduceEffect;
+import mage.abilities.effects.common.AddManaOfAnyTypeProducedEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -55,7 +55,7 @@ public class ZhurTaaAncient extends CardImpl {
 
         // Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced.
         this.addAbility(new TapForManaAllTriggeredManaAbility(
-                new AddManaOfAnyColorTargetCanProduceEffect(),
+                new AddManaOfAnyTypeProducedEffect(),
                 new FilterLandPermanent("a player taps a land"),
                 SetTargetPointer.PERMANENT));
     }

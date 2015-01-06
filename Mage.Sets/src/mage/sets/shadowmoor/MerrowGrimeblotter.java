@@ -25,46 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import mage.abilities.common.TapForManaAllTriggeredManaAbility;
-import mage.abilities.effects.common.AddManaOfAnyTypeProducedEffect;
-import mage.abilities.keyword.FlashAbility;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.UntapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.SetTargetPointer;
-import mage.filter.common.FilterLandPermanent;
+import mage.constants.Zone;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author jeffwadsworth
  */
-public class DictateOfKarametra extends CardImpl {
+public class MerrowGrimeblotter extends CardImpl {
 
-    public DictateOfKarametra(UUID ownerId) {
-        super(ownerId, 121, "Dictate of Karametra", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
-        this.expansionSetCode = "JOU";
+    public MerrowGrimeblotter(UUID ownerId) {
+        super(ownerId, 171, "Merrow Grimeblotter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U/B}");
+        this.expansionSetCode = "SHM";
+        this.subtype.add("Merfolk");
+        this.subtype.add("Wizard");
 
-        this.color.setGreen(true);
+        this.color.setBlack(true);
+        this.color.setBlue(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Flash
-        this.addAbility(FlashAbility.getInstance());
-        // Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced.
-        this.addAbility(new TapForManaAllTriggeredManaAbility(
-                new AddManaOfAnyTypeProducedEffect(),
-                new FilterLandPermanent("a player taps a land"),
-                SetTargetPointer.PERMANENT));
+        // {1}{UB}, {untap}: Target creature gets -2/-0 until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{U/B}"));
+        ability.addCost(new UntapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
         
     }
 
-    public DictateOfKarametra(final DictateOfKarametra card) {
+    public MerrowGrimeblotter(final MerrowGrimeblotter card) {
         super(card);
     }
 
     @Override
-    public DictateOfKarametra copy() {
-        return new DictateOfKarametra(this);
+    public MerrowGrimeblotter copy() {
+        return new MerrowGrimeblotter(this);
     }
 }
