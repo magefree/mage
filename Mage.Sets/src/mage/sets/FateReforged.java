@@ -28,13 +28,20 @@
 
 package mage.sets;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
 public class FateReforged extends ExpansionSet {
 
@@ -48,13 +55,48 @@ public class FateReforged extends ExpansionSet {
         super("Fate Reforged", "FRF", "mage.sets.fatereforged", new GregorianCalendar(2015, 1, 23).getTime(), SetType.EXPANSION);
         this.blockName = "Khans of Tarkir";
         this.parentSet = KhansOfTarkir.getInstance();
-        this.hasBasicLands = true;
+        this.hasBasicLands = false;
         this.hasBoosters = true;
-        this.numBoosterLands = 1;
-        this.numBoosterCommon = 11;
+        this.numBoosterSpecial = 1;
+        this.numBoosterLands = 0;
+        this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
     }
 
+ @Override
+    public List<CardInfo> getCommon() {
+        CardCriteria criteria = new CardCriteria();
+        criteria.setCodes(this.code).rarities(Rarity.COMMON).notTypes(CardType.LAND).doubleFaced(false);
+        return CardRepository.instance.findCards(criteria);
+    }
+
+    @Override
+    public List<CardInfo> getSpecialCommon() {
+        CardCriteria criteria = new CardCriteria();
+        criteria.rarities(Rarity.COMMON).setCodes(this.code).types(CardType.LAND);
+        return CardRepository.instance.findCards(criteria);
+    }
+
+    @Override
+    public List<CardInfo> getSpecialRare() {
+        List<CardInfo> specialRare = new ArrayList<>();
+        CardCriteria criteria = new CardCriteria();
+        criteria.setCodes("KTK").name("Bloodstained Mire");
+        specialRare.addAll(CardRepository.instance.findCards(criteria));
+        criteria = new CardCriteria();
+        criteria.setCodes("KTK").name("Flooded Strand");
+        specialRare.addAll(CardRepository.instance.findCards(criteria));
+        criteria = new CardCriteria();
+        criteria.setCodes("KTK").name("Polluted Delta");
+        specialRare.addAll(CardRepository.instance.findCards(criteria));
+        criteria = new CardCriteria();
+        criteria.setCodes("KTK").name("Windswept Heath");
+        specialRare.addAll(CardRepository.instance.findCards(criteria));
+        criteria = new CardCriteria();
+        criteria.setCodes("KTK").name("Wooded Foothills");
+        specialRare.addAll(CardRepository.instance.findCards(criteria));
+        return specialRare;
+    }      
 }
