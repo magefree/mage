@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.TapForManaAllTriggeredManaAbility;
-import mage.abilities.effects.common.AddManaOfAnyColorTargetCanProduceEffect;
+import mage.abilities.effects.common.AddManaOfAnyTypeProducedEffect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -64,7 +64,7 @@ public class VorinclexVoiceOfHunger extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         // Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.
         this.addAbility(new TapForManaAllTriggeredManaAbility(
-                new AddManaOfAnyColorTargetCanProduceEffect(),
+                new AddManaOfAnyTypeProducedEffect(),
                 new FilterControlledLandPermanent("you tap a land"),
                 SetTargetPointer.PERMANENT));
 

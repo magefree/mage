@@ -29,12 +29,9 @@
 package mage.abilities.effects.common;
 
 import mage.Mana;
-import mage.abilities.Abilities;
 import mage.abilities.Ability;
-import mage.abilities.mana.ManaAbility;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -44,14 +41,14 @@ import mage.players.Player;
  * @author LevelX2
  */
 
-public class AddManaOfAnyColorTargetCanProduceEffect extends ManaEffect {
+public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
 
-    public AddManaOfAnyColorTargetCanProduceEffect() {
+    public AddManaOfAnyTypeProducedEffect() {
         super();
         staticText = "that player adds one mana to his or her mana pool of any type that land produced";
     }
 
-    public AddManaOfAnyColorTargetCanProduceEffect(final AddManaOfAnyColorTargetCanProduceEffect effect) {
+    public AddManaOfAnyTypeProducedEffect(final AddManaOfAnyTypeProducedEffect effect) {
         super(effect);
     }
 
@@ -63,13 +60,7 @@ public class AddManaOfAnyColorTargetCanProduceEffect extends ManaEffect {
             if (targetController == null) {
                 return false;
             }
-            Abilities<ManaAbility> mana = permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
-            Mana types = new Mana();
-            for (ManaAbility ability : mana) {
-                for(Mana netMana: ability.getNetMana(game)) {
-                    types.add(netMana);
-                }                
-            }
+            Mana types = (Mana) this.getValue("mana");
             Choice choice = new ChoiceImpl(true);
             choice.setMessage("Pick the type of mana to produce");
             if (types.getBlack() > 0) {
@@ -129,14 +120,12 @@ public class AddManaOfAnyColorTargetCanProduceEffect extends ManaEffect {
     }
 
     @Override
-    public AddManaOfAnyColorTargetCanProduceEffect copy() {
-        return new AddManaOfAnyColorTargetCanProduceEffect(this);
+    public AddManaOfAnyTypeProducedEffect copy() {
+        return new AddManaOfAnyTypeProducedEffect(this);
     }
 
     @Override
     public Mana getMana(Game game, Ability source) {
         return null;
     }
-
-
 }
