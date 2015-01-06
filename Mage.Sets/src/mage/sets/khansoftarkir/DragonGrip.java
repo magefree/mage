@@ -31,10 +31,13 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.FerociousCondition;
+import mage.abilities.decorator.ConditionalAsThoughEffect;
+import mage.abilities.effects.AsThoughEffect;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
+import mage.abilities.effects.common.continious.CastAsThoughItHadFlashSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -64,6 +67,11 @@ public class DragonGrip extends CardImpl {
         this.color.setRed(true);
 
         // Ferocious - If you control a creature with power 4 or greater, you may cast Dragon Grip as though it had flash.
+        AsThoughEffect effect = new CastAsThoughItHadFlashSourceEffect(Duration.EndOfGame);
+        effect.setText("<i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, you may cast Dragon Grip as though it had flash");
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new ConditionalAsThoughEffect(effect,
+                        FerociousCondition.getInstance())));
+
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new DragonGripCastAsThoughItHadFlashEffect()));
 
         // Enchant creature
@@ -74,12 +82,12 @@ public class DragonGrip extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+0 and has first strike.
-        Effect effect = new BoostEnchantedEffect(2, 0, Duration.WhileOnBattlefield);
-        effect.setText("Enchanted creature gets +2/+0");
+        Effect effect2 = new BoostEnchantedEffect(2, 0, Duration.WhileOnBattlefield);
+        effect2.setText("Enchanted creature gets +2/+0");
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 0, Duration.WhileOnBattlefield));
-        effect = new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA);
-        effect.setText("and has first strike");
-        ability.addEffect(effect);
+        effect2 = new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA);
+        effect2.setText("and has first strike");
+        ability.addEffect(effect2);
         this.addAbility(ability);
     }
 
@@ -90,37 +98,5 @@ public class DragonGrip extends CardImpl {
     @Override
     public DragonGrip copy() {
         return new DragonGrip(this);
-    }
-}
-
-class DragonGripCastAsThoughItHadFlashEffect extends AsThoughEffectImpl {
-
-    public DragonGripCastAsThoughItHadFlashEffect() {
-        super(AsThoughEffectType.CAST_AS_INSTANT, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "<i>Ferocious</i> - If you control a creature with power 4 or greater, you may cast Dragon Grip as though it had flash";
-    }
-
-    public DragonGripCastAsThoughItHadFlashEffect(final DragonGripCastAsThoughItHadFlashEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public DragonGripCastAsThoughItHadFlashEffect copy() {
-        return new DragonGripCastAsThoughItHadFlashEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID affectedSpellId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedSpellId.equals(source.getSourceId())) {
-            if (FerociousCondition.getInstance().apply(game, source)) {
-                return true;
-            }
-        }
-        return false;
     }
 }

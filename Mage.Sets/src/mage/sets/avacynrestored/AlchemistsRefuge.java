@@ -42,7 +42,7 @@ import mage.game.Game;
 
 import java.util.UUID;
 import mage.ObjectColor;
-import mage.abilities.effects.common.continious.CastAsThoughItHadFlashEffect;
+import mage.abilities.effects.common.continious.CastAsThoughItHadFlashAllEffect;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -69,7 +69,7 @@ public class AlchemistsRefuge extends CardImpl {
 
         // {G}{U}, {tap}: You may cast nonland cards this turn as though they had flash.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new AddContinuousEffectToGame(new CastAsThoughItHadFlashEffect(Duration.EndOfTurn, filter)),
+                new AddContinuousEffectToGame(new CastAsThoughItHadFlashAllEffect(Duration.EndOfTurn, filter)),
                 new CompositeCost(new ManaCostsImpl("{G}{U}"), new TapSourceCost(), "{G}{U}, {T}")));
     }
 

@@ -30,7 +30,7 @@ package mage.sets.returntoravnica;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.CastAsThoughItHadFlashEffect;
+import mage.abilities.effects.common.continious.CastAsThoughItHadFlashAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
@@ -67,7 +67,7 @@ public class HypersonicDragon extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // You may cast sorcery spells as though they had flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     public HypersonicDragon(final HypersonicDragon card) {

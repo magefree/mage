@@ -34,7 +34,7 @@ import mage.abilities.condition.common.SourceIsSpellCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continious.CastAsThoughItHadFlashEffect;
+import mage.abilities.effects.common.continious.CastAsThoughItHadFlashAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -80,7 +80,7 @@ public class Aluren extends CardImpl {
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new AlurenRuleEffect());
         // and as though they had flash.
         // TODO: This as thought effect may only be used if the creature is cast by the aluren effect
-        Effect effect = new CastAsThoughItHadFlashEffect(Duration.WhileOnBattlefield, filter, true);
+        Effect effect = new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter, true);
         effect.setText("and as though they had flash");
         ability.addEffect(effect);
         this.addAbility(ability);

@@ -25,51 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.weatherlight;
+package mage.sets.fatereforged;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AddContinuousEffectToGame;
-import mage.abilities.effects.common.continious.CastAsThoughItHadFlashAllEffect;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.MageInt;
+import mage.ObjectColor;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.decorator.ConditionalAsThoughEffect;
+import mage.abilities.effects.AsThoughEffect;
+import mage.abilities.effects.common.continious.CastAsThoughItHadFlashSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
- * @author emerald000
+ * @author LevelX2
  */
-public class WindingCanyons extends CardImpl {
+public class HungeringYeti extends CardImpl {
 
-    public WindingCanyons(UUID ownerId) {
-        super(ownerId, 167, "Winding Canyons", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "WTH";
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("as long as you control a green or blue permanent");
 
-        // {tap}: Add {1} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
-        
-        // {2}, {tap}: Until end of turn, you may play creature cards as though they had flash.
-        Effect effect = new AddContinuousEffectToGame(new CastAsThoughItHadFlashAllEffect(Duration.EndOfTurn, new FilterCreatureCard()));
-        effect.setText("Until end of turn, you may play creature cards as though they had flash");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+    static {
+        filter.add(Predicates.or(new ColorPredicate(ObjectColor.GREEN), new ColorPredicate(ObjectColor.BLUE)));
     }
 
-    public WindingCanyons(final WindingCanyons card) {
+    public HungeringYeti(UUID ownerId) {
+        super(ownerId, 105, "Hungering Yeti", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
+        this.expansionSetCode = "FRF";
+        this.subtype.add("Yeti");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+
+        // As long as you control a green or blue permanent, you may cast Hungering Yeti as though it had flash.
+        AsThoughEffect effect = new CastAsThoughItHadFlashSourceEffect(Duration.EndOfGame);
+        effect.setText("As long as you control a green or blue permanent, you may cast Hungering Yeti as though it had flash");
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new ConditionalAsThoughEffect(effect,
+                        new PermanentsOnTheBattlefieldCondition(filter))));
+
+    }
+
+    public HungeringYeti(final HungeringYeti card) {
         super(card);
     }
 
     @Override
-    public WindingCanyons copy() {
-        return new WindingCanyons(this);
+    public HungeringYeti copy() {
+        return new HungeringYeti(this);
     }
 }
