@@ -300,7 +300,9 @@ public class TableController {
         logger.trace(player.getName() + " joined tableId: " + table.getId());
         //only inform human players and add them to sessionPlayerMap
         if (seat.getPlayer().isHuman()) {
-            user.addTable(player.getId(), table);
+            if (!table.isTournamentSubTable()) {
+                user.addTable(player.getId(), table);
+            }
             user.ccJoinedTable(table.getRoomId(), table.getId(), false);
             userPlayerMap.put(userId, player.getId());
         }
@@ -466,7 +468,9 @@ public class TableController {
                     User user = UserManager.getInstance().getUser(userId);
                     if (user != null) {
                         ChatManager.getInstance().broadcast(chatId, user.getName(), "has left the table", ChatMessage.MessageColor.BLUE, true, ChatMessage.MessageType.STATUS, ChatMessage.SoundToPlay.PlayerLeft);
-                        user.removeTable(playerId);
+                        if (!table.isTournamentSubTable()) {
+                            user.removeTable(playerId);
+                        }
                     } else {
                         logger.debug("User not found - userId: " + userId + " tableId:" + table.getId());
                     }
@@ -777,7 +781,9 @@ public class TableController {
                                 user.showUserMessage("Match info", sb.toString());
                             }
                             // remove table from user - table manager holds table for display of finished matches
-                            user.removeTable(entry.getValue());
+                            if (!table.isTournamentSubTable()) {
+                                user.removeTable(entry.getValue());
+                            }
                         }
                     }
                 }
@@ -923,11 +929,13 @@ public class TableController {
     }
     
     void cleanUp() {
-        for(Map.Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
-            User user = UserManager.getInstance().getUser(entry.getKey());
-            if (user != null) {
-                user.removeTable(entry.getValue());
-            }            
+        if (!table.isTournamentSubTable()) {
+            for(Map.Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
+                User user = UserManager.getInstance().getUser(entry.getKey());
+                if (user != null) {
+                    user.removeTable(entry.getValue());
+                }
+            }
         }
         ChatManager.getInstance().destroyChatSession(chatId);
     }
