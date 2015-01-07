@@ -28,15 +28,18 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -65,11 +68,20 @@ public class WolfhuntersQuiver extends CardImpl {
         this.subtype.add("Equipment");
 
         // Equipped creature has "{tap}: This creature deals 1 damage to target creature or player"
-        WolfhuntersQuiverAbility ability = new WolfhuntersQuiverAbility(1, new TargetCreatureOrPlayer());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT)));
-        // and "{tap}: This creature deals 3 damage to target Werewolf creature."
-        ability = new WolfhuntersQuiverAbility(3, new TargetCreaturePermanent(filter));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT)));
+        Ability abilityToGain = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        abilityToGain.addTarget(new TargetCreatureOrPlayer());
+        Effect effect = new GainAbilityAttachedEffect(abilityToGain, AttachmentType.EQUIPMENT);
+        effect.setText("Equipped creature has \"{tap}: This creature deals 1 damage to target creature or player\"");
+        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        
+        // and "{T}: This creature deals 3 damage to target Werewolf creature."
+        abilityToGain = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new TapSourceCost());
+        abilityToGain.addTarget(new TargetCreaturePermanent(filter));
+        effect = new GainAbilityAttachedEffect(abilityToGain, AttachmentType.EQUIPMENT);
+        effect.setText("and \"{T}: This creature deals 3 damage to target Werewolf creature");
+        ability.addEffect(effect);
+        this.addAbility(ability);
+        
         // Equip {5}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(5)));
     }
@@ -81,32 +93,5 @@ public class WolfhuntersQuiver extends CardImpl {
     @Override
     public WolfhuntersQuiver copy() {
         return new WolfhuntersQuiver(this);
-    }
-}
-
-class WolfhuntersQuiverAbility extends ActivatedAbilityImpl {
-
-    private String ruleText;
-
-    public WolfhuntersQuiverAbility(int amount, Target target) {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(amount), new TapSourceCost());
-        this.addTarget(target);
-
-        ruleText = "This creature deals " + amount + " damage to target " + target.getTargetName();
-    }
-
-    public WolfhuntersQuiverAbility(WolfhuntersQuiverAbility ability) {
-        super(ability);
-        this.ruleText = ability.ruleText;
-    }
-
-    @Override
-    public WolfhuntersQuiverAbility copy() {
-        return new WolfhuntersQuiverAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return ruleText;
     }
 }

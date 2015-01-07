@@ -102,7 +102,7 @@ public class NecroticPlague extends CardImpl {
                 if (creatureController != null) {
                     ability.setControllerId(creatureController.getId());
                     ability.getTargets().clear();
-                    TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
+                    TargetPermanent target = new TargetPermanent(filter);
                     ability.getTargets().add(target);
                 }
             }

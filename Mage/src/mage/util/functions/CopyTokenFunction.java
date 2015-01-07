@@ -62,13 +62,18 @@ public class CopyTokenFunction implements Function<Token, Card> {
             // to show the source image, the original values have to be used
             target.setOriginalExpansionSetCode(((Token)sourceObj).getOriginalExpansionSetCode());
             target.setOriginalCardNumber(((Token)sourceObj).getOriginalCardNumber());
+            target.setCopySourceCard(((PermanentToken)source).getToken().getCopySourceCard());
         } else if (source instanceof PermanentCard) {
             sourceObj = ((PermanentCard) source).getCard();
             target.setOriginalExpansionSetCode(source.getExpansionSetCode());
             target.setOriginalCardNumber(source.getCardNumber());
+            target.setCopySourceCard((Card)sourceObj);
         } else {
             target.setOriginalExpansionSetCode(source.getExpansionSetCode());
             target.setOriginalCardNumber(source.getCardNumber());
+            if (source instanceof Card) {
+                target.setCopySourceCard((Card)source);
+            }
         }
 
         target.setName(sourceObj.getName());

@@ -44,7 +44,7 @@ import mage.util.CardUtil;
 public class ActivateOncePerTurnManaAbility extends ManaAbility {
 
     class ActivationInfo {
-
+        
         public int turnNum;
         public int activationCounter;
 
@@ -71,19 +71,19 @@ public class ActivateOncePerTurnManaAbility extends ManaAbility {
     @Override
     public boolean canActivate(UUID playerId, Game game) {
         if (super.canActivate(playerId, game)) {
-            ActivationInfo activationInfo = (ActivationInfo) game.getState().getValue(CardUtil.getCardZoneString("activations", sourceId, game));
+            ActivationInfo activationInfo = getActivationInfo(game);
             if (activationInfo == null || activationInfo.turnNum != game.getTurnNum() || activationInfo.activationCounter < 1) {
                 return true;
             }
         }
         return false;
     }
-
+    
     @Override
     public boolean activate(Game game, boolean noMana) {
         if (canActivate(this.controllerId, game)) {
             if (super.activate(game, noMana)) {
-                ActivationInfo activationInfo = (ActivationInfo) game.getState().getValue(CardUtil.getCardZoneString("activations", sourceId, game));
+                ActivationInfo activationInfo = getActivationInfo(game);
                 if (activationInfo == null) {
                     activationInfo = new ActivationInfo(game.getTurnNum(), 1);
                 } else {
@@ -94,17 +94,9 @@ public class ActivateOncePerTurnManaAbility extends ManaAbility {
                         activationInfo.activationCounter++;
                     }
                 }
-                game.getState().setValue(CardUtil.getCardZoneString("activations", sourceId, game), activationInfo);
+                setActivationInfo(activationInfo, game);
                 return true;
             }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean resolve(Game game) {
-        if (super.resolve(game)) {
-            return true;
         }
         return false;
     }
@@ -119,4 +111,18 @@ public class ActivateOncePerTurnManaAbility extends ManaAbility {
         return new ActivateOncePerTurnManaAbility(this);
     }
 
+    private ActivationInfo getActivationInfo(Game game) {
+        Integer turnNum = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activationsTurn", sourceId, game));
+        Integer activationCount = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activationsCount", sourceId, game));
+        if (turnNum == null || activationCount == null) {
+            return null;
+        }
+        return new ActivationInfo(turnNum, activationCount);
+    }
+    
+    private void setActivationInfo(ActivationInfo activationInfo, Game game) {
+        game.getState().setValue(CardUtil.getCardZoneString("activationsTurn", sourceId, game), activationInfo.turnNum);
+        game.getState().setValue(CardUtil.getCardZoneString("activationsCount", sourceId, game), activationInfo.activationCounter);
+    }    
+    
 }

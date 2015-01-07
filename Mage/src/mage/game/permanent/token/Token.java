@@ -31,13 +31,13 @@ package mage.game.permanent.token;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.MageObjectImpl;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -55,6 +55,7 @@ public class Token extends MageObjectImpl {
     private int tokenType;
     private int originalCardNumber;
     private String originalExpansionSetCode;
+    private Card copySourceCard; // the card the Token is a copy from
     
     public enum Type {
         FIRST(1),
@@ -96,6 +97,7 @@ public class Token extends MageObjectImpl {
         this.lastAddedTokenIds.addAll(token.lastAddedTokenIds);
         this.originalCardNumber =  token.originalCardNumber;
         this.originalExpansionSetCode = token.originalExpansionSetCode;
+        this.copySourceCard = token.copySourceCard; // will never be changed
     }
 
     public String getDescription() {
@@ -192,5 +194,16 @@ public class Token extends MageObjectImpl {
     public void setOriginalExpansionSetCode(String originalExpansionSetCode) {
         this.originalExpansionSetCode = originalExpansionSetCode;
     }
+
+    public Card getCopySourceCard() {
+        return copySourceCard;
+    }
+
+    public void setCopySourceCard(Card copySourceCard) {
+        if (copySourceCard != null) {
+            this.copySourceCard = copySourceCard.copy();
+        }
+    }
+
     
 }

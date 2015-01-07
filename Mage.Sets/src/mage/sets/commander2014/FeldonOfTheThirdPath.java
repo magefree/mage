@@ -106,6 +106,7 @@ class FeldonOfTheThirdPathEffect extends OneShotEffect {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
             EmptyToken token = new EmptyToken();
+            // This fails if a card will be copied, that uses adjustTargets() method.
             CardUtil.copyTo(token).from(card);
 
             token.addAbility(HasteAbility.getInstance());
