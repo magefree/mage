@@ -152,12 +152,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.turnMods = state.turnMods.copy();
         this.watchers = state.watchers.copy();
         for (Map.Entry<String, Object> entry: state.values.entrySet()) {
-            if (entry.getValue() instanceof Boolean) { // AI changed values of Boolean for cards like Wall of Roots TODO: copy other types than Boolean
-                this.values.put(entry.getKey(), Boolean.valueOf(((Boolean)entry.getValue()).toString()));
-            } else {
                 this.values.put(entry.getKey(), entry.getValue());
-            }
-
         }
         this.zones.putAll(state.zones);
         for (Map.Entry<UUID, Abilities<Ability>> entry: state.otherAbilities.entrySet()) {
@@ -646,6 +641,14 @@ public class GameState implements Serializable, Copyable<GameState> {
         return values.get(valueId);
     }
 
+    /**
+     * Best only use immutable objects, otherwise the states/values of the object may be
+     * changed by AI simulation, because the Value objects are not copied as the state 
+     * class is copied.
+     * 
+     * @param valueId
+     * @param value 
+     */
     public void setValue(String valueId, Object value) {
         values.put(valueId, value);
     }
