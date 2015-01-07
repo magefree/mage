@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
@@ -83,7 +84,10 @@ class ScarscaleRitualCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return true;
+        for (Permanent permanent :game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), controllerId, game)) {
+            return permanent != null;
+        }
+        return false;
     }
 
     @Override

@@ -66,10 +66,10 @@ public class RiversGrasp extends CardImpl {
         Target targetPlayer = new TargetPlayer();
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new ReturnToHandTargetEffect(),
-                new ManaWasSpentCondition(ColoredManaSymbol.U), "If {U} was spent to cast River's Grasp, return up to one target creature to its owner's hand"));
+                new ManaWasSpentCondition(ColoredManaSymbol.U), "If {U} was spent to cast {this}, return up to one target creature to its owner's hand"));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new RiversGraspEffect(),
-                new ManaWasSpentCondition(ColoredManaSymbol.B), " If {B} was spent to cast River's Grasp, target player reveals his or her hand, you choose a nonland card from it, then that player discards that card"));
+                new ManaWasSpentCondition(ColoredManaSymbol.B), " If {B} was spent to cast {this}, target player reveals his or her hand, you choose a nonland card from it, then that player discards that card"));
 
         this.getSpellAbility().addTarget(targetCreature);
         this.getSpellAbility().addTarget(targetPlayer);

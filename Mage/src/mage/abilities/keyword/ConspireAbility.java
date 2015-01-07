@@ -80,7 +80,7 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
         filter.add(new SharesColorWithSourcePredicate());
     }
 
-    Cost costConspire = new TapTargetCost(new TargetControlledPermanent(2, 2, filter, false));
+    Cost costConspire = new TapTargetCost(new TargetControlledPermanent(2, 2, filter, true));
     OptionalAdditionalCost conspireCost = new OptionalAdditionalCostImpl(keywordText, "-", reminderTextCost, costConspire);
 
     public ConspireAbility(Card card) {
