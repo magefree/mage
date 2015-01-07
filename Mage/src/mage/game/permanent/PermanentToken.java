@@ -134,4 +134,24 @@ public class PermanentToken extends PermanentImpl {
             abilities.add(copyAbility);
         }
     }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (getToken().getCopySourceCard() != null) {
+            getToken().getCopySourceCard().adjustTargets(ability, game);
+        } else {
+            super.adjustTargets(ability, game);
+        }
+    }
+
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        if (getToken().getCopySourceCard() != null) {
+            getToken().getCopySourceCard().adjustCosts(ability, game);
+        } else {
+            super.adjustCosts(ability, game);
+        }
+    }
+
+
 }

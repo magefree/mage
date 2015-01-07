@@ -44,7 +44,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
-import org.apache.log4j.Logger;
 
 /**
 *
@@ -86,7 +85,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
                                 ability.setControllerId(((Permanent) object).getControllerId());
                             }
                             ability.setSourceObject(object);
-                                if (ability.checkTrigger(event, game)) {
+                            if (ability.checkTrigger(event, game)) {
                                 UUID controllerId = ability.getControllerId();
                                 ability.trigger(game, controllerId);
                             }

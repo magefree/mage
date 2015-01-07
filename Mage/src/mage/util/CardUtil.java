@@ -163,7 +163,7 @@ public class CardUtil {
         for (AlternativeCost alternativeCost : ability.getAlternativeCosts()) {
             if (alternativeCost instanceof AlternativeCostImpl) {
                 AlternativeCostImpl impl = (AlternativeCostImpl) alternativeCost;
-                ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<ManaCost>();
+                ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<>();
                 boolean updated = false;
                 Iterator it = impl.iterator();
                 while (it.hasNext()) {

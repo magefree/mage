@@ -1113,7 +1113,11 @@ public abstract class PlayerImpl implements Player, Serializable {
         //20091005 - 603.3c, 603.3d
         int bookmark = game.bookmarkState();
         TriggeredAbility ability = source.copy();
-        if (ability != null && ability.canChooseTarget(game)) {            
+        MageObject sourceObject = game.getObject(ability.getSourceId());
+        if (sourceObject != null) {
+            sourceObject.adjustTargets(ability, game); 
+        }
+        if (ability.canChooseTarget(game)) {            
             if (ability.isUsesStack()) {
                 game.getStack().push(new StackAbility(ability, playerId));
             }
