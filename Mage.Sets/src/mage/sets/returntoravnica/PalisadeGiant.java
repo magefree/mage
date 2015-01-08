@@ -106,8 +106,8 @@ class PalisadeGiantReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         switch(event.getType()) {
-            case DAMAGED_CREATURE:
-            case DAMAGED_PLAYER:
+            case DAMAGE_CREATURE:
+            case DAMAGE_PLAYER:
             case DAMAGE_PLANESWALKER:
                 return true;
             default:
