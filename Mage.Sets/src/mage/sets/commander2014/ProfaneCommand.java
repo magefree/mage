@@ -32,6 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
@@ -79,8 +80,9 @@ public class ProfaneCommand extends CardImpl {
         this.getSpellAbility().addMode(mode);
 
         // * Target creature gets -X/-X until end of turn.
+        DynamicValue minusValue = new SignInversionDynamicValue(xValue);
         mode = new Mode();
-        mode.getEffects().add(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn));
+        mode.getEffects().add(new BoostTargetEffect(minusValue, minusValue, Duration.EndOfTurn));
         mode.getTargets().add(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
 
