@@ -34,10 +34,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -51,7 +50,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -73,7 +71,7 @@ public class WardSliver extends CardImpl {
 
         
         // As Ward Sliver enters the battlefield, choose a color.
-        this.addAbility(new AsEntersBattlefieldAbility(new WardSliverEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Protect)));
 
         // All Slivers have protection from the chosen color.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WardSliverGainAbilityControlledEffect()));
@@ -88,45 +86,6 @@ public class WardSliver extends CardImpl {
     public WardSliver copy() {
         return new WardSliver(this);
     }
-}
-
-class WardSliverEffect extends OneShotEffect {
-
-    public WardSliverEffect() {
-        super(Outcome.BoostCreature);
-        staticText = "choose a color";
-    }
-
-    public WardSliverEffect(final WardSliverEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            ChoiceColor colorChoice = new ChoiceColor();
-            colorChoice.setMessage("Choose color");
-            while (!player.choose(Outcome.BoostCreature, colorChoice, game)) {
-                if (!player.isInGame()) {
-                    return false;
-                }
-            }
-            if (colorChoice.getChoice() != null) {
-                game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
-                game.getState().setValue(permanent.getId() + "_color", colorChoice.getChoice());
-                permanent.addInfo("chosen color", "<font color = 'blue'>Chosen color: " + colorChoice.getColor().getDescription() + "</font>");
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public WardSliverEffect copy() {
-        return new WardSliverEffect(this);
-    }
-
 }
 
 class WardSliverGainAbilityControlledEffect extends ContinuousEffectImpl {
@@ -159,10 +118,10 @@ class WardSliverGainAbilityControlledEffect extends ContinuousEffectImpl {
         if (protectionFilter == null) {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
-                String color = (String) game.getState().getValue(permanent.getId() + "_color");
+                ObjectColor color = (ObjectColor) game.getState().getValue(permanent.getId() + "_color");
                 if (color != null) {
-                    protectionFilter = new FilterPermanent(color);
-                    protectionFilter.add(new ColorPredicate(new ObjectColor(color)));
+                    protectionFilter = new FilterPermanent(color.getDescription());
+                    protectionFilter.add(new ColorPredicate(color));
                 }
             }
         }
