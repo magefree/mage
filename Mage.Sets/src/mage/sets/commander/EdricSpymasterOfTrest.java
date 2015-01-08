@@ -76,7 +76,7 @@ public class EdricSpymasterOfTrest extends CardImpl {
 class EdricSpymasterOfTrestTriggeredAbility extends TriggeredAbilityImpl {
 
     public EdricSpymasterOfTrestTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardTargetEffect(1), true);
+        super(Zone.BATTLEFIELD, new DrawCardTargetEffect(1, true), false);
     }
 
     public EdricSpymasterOfTrestTriggeredAbility(final EdricSpymasterOfTrestTriggeredAbility ability) {
@@ -91,7 +91,9 @@ class EdricSpymasterOfTrestTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
 
-        if (event.getType().equals(EventType.DAMAGED_PLAYER) && ((DamagedPlayerEvent) event).isCombatDamage() && game.getOpponents(this.controllerId).contains(((DamagedPlayerEvent) event).getPlayerId())) {
+        if (event.getType().equals(EventType.DAMAGED_PLAYER) && 
+                ((DamagedPlayerEvent) event).isCombatDamage() && 
+                game.getOpponents(this.controllerId).contains(((DamagedPlayerEvent) event).getPlayerId())) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(game.getPermanent(event.getSourceId()).getControllerId()));
             }
