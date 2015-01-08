@@ -25,16 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.common;
 
 import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.DamagedCreatureEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -44,45 +45,68 @@ import mage.target.targetpointer.FixedTarget;
 public class DealsDamageToACreatureTriggeredAbility extends TriggeredAbilityImpl {
 
     private boolean combatOnly;
-    private boolean setTargetPointer;
+    private final boolean setTargetPointer;
+    private FilterCreaturePermanent filter;
 
     public DealsDamageToACreatureTriggeredAbility(Effect effect, boolean combatOnly, boolean optional, boolean setTargetPointer) {
+        this(effect, combatOnly, optional, setTargetPointer, null);
+    }
+
+    public DealsDamageToACreatureTriggeredAbility(Effect effect, boolean combatOnly, boolean optional, boolean setTargetPointer, FilterCreaturePermanent filter) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setTargetPointer = setTargetPointer;
     }
 
     public DealsDamageToACreatureTriggeredAbility(final DealsDamageToACreatureTriggeredAbility ability) {
-            super(ability);
-            this.setTargetPointer = ability.setTargetPointer;
-            this.combatOnly = ability.combatOnly;
+        super(ability);
+        this.setTargetPointer = ability.setTargetPointer;
+        this.combatOnly = ability.combatOnly;
+        this.filter = ability.filter;
     }
 
     @Override
     public DealsDamageToACreatureTriggeredAbility copy() {
-            return new DealsDamageToACreatureTriggeredAbility(this);
+        return new DealsDamageToACreatureTriggeredAbility(this);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getType() == EventType.DAMAGED_CREATURE) {
-                  if (event.getSourceId().equals(this.sourceId)
+        if (event.getType() == EventType.DAMAGED_CREATURE) {
+            if (event.getSourceId().equals(this.sourceId)
                     && (!combatOnly || ((DamagedCreatureEvent) event).isCombatDamage())) {
-                            if (setTargetPointer) {
-                                for (Effect effect : this.getEffects()) {
-                                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                                        effect.setValue("damage", event.getAmount());
-                                }
-                            }
-                            return true;
+                if (filter != null) {
+                    Permanent creature = game.getPermanentOrLKIBattlefield(event.getTargetId());
+                    if (creature == null || !filter.match(creature, getSourceId(), getControllerId(), game)) {
+                        return false;
                     }
-
+                }
+                if (setTargetPointer) {
+                    for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                        effect.setValue("damage", event.getAmount());
+                    }
+                }
+                return true;
             }
-            return false;
+
+        }        
+        return false;
     }
 
     @Override
     public String getRule() {
-            return new StringBuilder("Whenever {this} deals ").append(combatOnly ? "combat ":"").append("damage to a creature, ").append(super.getRule()).toString();
+        StringBuilder sb = new StringBuilder("Whenever {this} deals ");
+        if (combatOnly) {
+            sb.append("combat ");
+        }
+        sb.append("damage to ");
+        if (filter == null) {
+            sb.append("a creature, ");
+        } else {
+            sb.append(filter.getMessage());
+        }
+        sb.append(super.getRule());
+        return sb.toString();
     }
 
 }
