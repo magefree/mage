@@ -61,7 +61,8 @@ public class RemoteFarm extends CardImpl {
         // {tap}, Remove a depletion counter from Remote Farm: Add {W}{W} to your mana pool. If there are no depletion counters on Remote Farm, sacrifice it.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(2), new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.DEPLETION.createInstance(1)));
-        ability.addEffect(new ConditionalOneShotEffect(new SacrificeSourceEffect(), new SourceHasCounterCondition(CounterType.DEPLETION, 0,0), "If there are no depletion counters on Remote Farm, sacrifice it"));
+        ability.addEffect(new ConditionalOneShotEffect(new SacrificeSourceEffect(), new SourceHasCounterCondition(CounterType.DEPLETION, 0,0), "If there are no depletion counters on {this}, sacrifice it"));
+        this.addAbility(ability);       
     }
 
     public RemoteFarm(final RemoteFarm card) {
