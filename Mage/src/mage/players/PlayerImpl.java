@@ -1988,13 +1988,14 @@ public abstract class PlayerImpl implements Player, Serializable {
     public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId) {
         //20091005 - 701.14c
         Library searchedLibrary = null;
+        String searchInfo = null;
         if (targetPlayerId.equals(playerId)) {
-            game.informPlayers(new StringBuilder(getName()).append(" searches his or her library").toString());
+            searchInfo = getName() + " searches his or her library";
             searchedLibrary = library;
         } else {
             Player targetPlayer = game.getPlayer(targetPlayerId);
             if (targetPlayer != null) {
-                game.informPlayers(new StringBuilder(getName()).append(" searches the library of ").append(targetPlayer.getName()).toString());
+                searchInfo = getName() + " searches the library of " + targetPlayer.getName();
                 searchedLibrary = targetPlayer.getLibrary();
             }
         }
@@ -2003,6 +2004,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         GameEvent event = GameEvent.getEvent(GameEvent.EventType.SEARCH_LIBRARY, targetPlayerId, playerId, playerId, Integer.MAX_VALUE);
         if (!game.replaceEvent(event)) {
+            game.informPlayers(searchInfo);
             TargetCardInLibrary newTarget = target.copy();
             int count;
             int librarySearchLimit = event.getAmount();
