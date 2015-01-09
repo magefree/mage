@@ -29,6 +29,7 @@ package mage.sets.bornofthegods;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -95,25 +96,17 @@ class SatyrWayfinderEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Cards cards = new CardsImpl(Zone.PICK);
-
-            boolean properCardFound = false;
-            int count = Math.min(player.getLibrary().size(), 4);
-            for (int i = 0; i < count; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                    if (filterPutInHand.match(card, source.getSourceId(), source.getControllerId(), game)) {
-                        properCardFound = true;
-                    }
-                }
-            }
-
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (player != null && sourceObject != null) {
+            Cards cards = new CardsImpl(Zone.LIBRARY);
+            cards.addAll(player.getLibrary().getTopCards(game, 4));
+            boolean properCardFound = cards.count(filterPutInHand, source.getControllerId(), source.getSourceId(), game) > 0;
             if (!cards.isEmpty()) {
-                player.revealCards("Satyr Wayfinder", cards, game);
-                TargetCard target = new TargetCard(Zone.PICK, filterPutInHand);
-                if (properCardFound && player.choose(Outcome.DrawCard, cards, target, game)) {
+                player.revealCards(sourceObject.getLogName(), cards, game);
+                TargetCard target = new TargetCard(Zone.LIBRARY, filterPutInHand);
+                if (properCardFound && 
+                        player.chooseUse(outcome, "Put a land card into your hand?", game) &&
+                        player.choose(Outcome.DrawCard, cards, target, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         cards.remove(card);

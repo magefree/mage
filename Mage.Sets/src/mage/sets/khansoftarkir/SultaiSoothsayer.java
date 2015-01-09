@@ -29,6 +29,7 @@ package mage.sets.khansoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -96,22 +97,15 @@ class SultaiSoothsayerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-
-        if (controller != null) {
-            Cards cards = new CardsImpl(Zone.PICK);
-            int cardsCount = Math.min(4, controller.getLibrary().size());
-            for (int i = 0; i < cardsCount; i++) {
-                Card card = controller.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                    game.setZone(card.getId(), Zone.PICK);
-                }
-            }
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
+            Cards cards = new CardsImpl();
+            cards.addAll(controller.getLibrary().getTopCards(game, 4));
 
             if (cards.size() > 0) {
-                controller.lookAtCards("Sultai Soothsayer", cards, game);
+                controller.lookAtCards(sourceObject.getLogName(), cards, game);
 
-                TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put in your hand"));
+                TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put in your hand"));
                 if (controller.choose(Outcome.Benefit, cards, target, game)) {
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {
