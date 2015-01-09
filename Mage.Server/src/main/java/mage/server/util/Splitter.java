@@ -1,11 +1,10 @@
 package mage.server.util;
 
-import mage.game.Game;
-import mage.players.Player;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  * @author nantuko
@@ -13,7 +12,7 @@ import java.util.UUID;
 public class Splitter {
 
     public static List<UUID> split(Game game, UUID playerId) {
-        List<UUID> players = new ArrayList<UUID>();
+        List<UUID> players = new ArrayList<>();
         //players.add(playerId); // add original player
         Player player = game.getPlayer(playerId);
         if (player != null && player.getTurnControlledBy() != null) {

@@ -136,6 +136,18 @@ class BitterFeudEffect extends ReplacementEffectImpl {
         return new BitterFeudEffect(this);
     }
 
+    @Override    
+    public boolean checksEventType(GameEvent event, Game game) {
+        switch(event.getType()) {
+            case DAMAGE_CREATURE:
+            case DAMAGE_PLAYER:
+            case DAMAGE_PLANESWALKER:
+                return true;
+            default:
+                return false;
+        }
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         player1 = (Player) game.getState().getValue(source.getSourceId() + "_player1");
@@ -147,7 +159,7 @@ class BitterFeudEffect extends ReplacementEffectImpl {
                     targetPlayerId = event.getTargetId();
                     break;
                 case DAMAGE_CREATURE:
-                case DAMAGED_PLANESWALKER:
+                case DAMAGE_PLANESWALKER:
                     Permanent permanent = game.getPermanent(event.getTargetId());
                     if (permanent != null) {
                         targetPlayerId = permanent.getControllerId();

@@ -110,20 +110,20 @@ class TeferiMageOfZhalfirAddFlashEffect extends ContinuousEffectImpl {
             for (UUID cardId: controller.getGraveyard()) {
                 Card card = game.getCard(cardId);
                 if (card.getCardType().contains(CardType.CREATURE)) {
-                    game.getState().addOtherAbility(cardId, FlashAbility.getInstance());
+                    game.getState().addOtherAbility(card, FlashAbility.getInstance());
                 }
             }
             // on Hand
             for (UUID cardId: controller.getHand()) {
                 Card card = game.getCard(cardId);
                 if (card.getCardType().contains(CardType.CREATURE)) {
-                    game.getState().addOtherAbility(cardId, FlashAbility.getInstance());
+                    game.getState().addOtherAbility(card, FlashAbility.getInstance());
                 }
             }
             // in Exile
             for (Card card: game.getState().getExile().getAllCards(game)) {
                 if (card.getOwnerId().equals(controller.getId()) && card.getCardType().contains(CardType.CREATURE)) {
-                    game.getState().addOtherAbility(card.getId(), FlashAbility.getInstance());
+                    game.getState().addOtherAbility(card, FlashAbility.getInstance());
                 }
             }
             // in Library seems not relevant yet

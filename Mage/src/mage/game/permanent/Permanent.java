@@ -125,7 +125,8 @@ public interface Permanent extends Card, Controllable {
     @Deprecated
     void addAbility(Ability ability, Game game);
     void addAbility(Ability ability, UUID sourceId, Game game);
-    
+    void addAbility(Ability ability, UUID sourceId, Game game, boolean createNewId);
+
     void removeAllAbilities(UUID sourceId, Game game);
 
     void addLoyaltyUsed();

@@ -28,6 +28,7 @@
 package mage.sets.visions;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -248,42 +249,6 @@ class NecromancyLeavesBattlefieldTriggeredEffect extends OneShotEffect {
     }
 }
 
-class NecromancyAttachEffect extends OneShotEffect {
-
-    public NecromancyAttachEffect(Outcome outcome) {
-        super(outcome);
-    }
-
-    public NecromancyAttachEffect(Outcome outcome, String rule) {
-        super(outcome);
-        staticText = rule;
-    }
-
-    public NecromancyAttachEffect(final NecromancyAttachEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public NecromancyAttachEffect copy() {
-        return new NecromancyAttachEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getFirstTarget());
-        if (card != null && game.getState().getZone(source.getFirstTarget()).equals(Zone.GRAVEYARD)) {
-            // Card have no attachedTo attribute yet so write ref only to enchantment now
-            Permanent enchantment = game.getPermanent(source.getSourceId());
-            if (enchantment != null) {
-                enchantment.attachTo(card.getId(), game);
-            }
-            return true;
-        }
-        return false;
-    }
-
-}
-
 class NecromancyChangeAbilityEffect extends ContinuousEffectImpl implements SourceEffect {
 
     private final static Ability newAbility = new EnchantAbility("creature put onto the battlefield with Necromancy");
@@ -314,12 +279,12 @@ class NecromancyChangeAbilityEffect extends ContinuousEffectImpl implements Sour
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        getAffectedObjects().add(source.getSourceId());
+        affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
     }
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = affectedObjectList.get(0).getPermanent(game);
         if (permanent != null) {
             switch (layer) {
                 case TypeChangingEffects_4:

@@ -60,12 +60,12 @@ public class ReefWormTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 
-        assertGraveyardCount(playerA, "Lightning Bolt", 4);
-
         assertPermanentCount(playerB, "Fish", 0);
         assertPermanentCount(playerB, "Whale", 0);
         assertPermanentCount(playerB, "Kraken", 1);
         assertGraveyardCount(playerB, "Reef Worm", 1);
+
+        assertGraveyardCount(playerA, "Lightning Bolt", 4);
     }
 
 }

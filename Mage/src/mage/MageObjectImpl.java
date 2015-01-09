@@ -146,7 +146,7 @@ public abstract class MageObjectImpl implements MageObject {
     @Override
     public void removeAbility(Ability ability, Game game) {
         Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(objectId);
-        if (otherAbilities.contains(ability)) {
+        if (otherAbilities != null && otherAbilities.contains(ability)) {
             game.getState().getAllOtherAbilities(objectId).remove(ability);
         }
         else {
@@ -165,13 +165,22 @@ public abstract class MageObjectImpl implements MageObject {
     
     @Override
     public boolean hasAbility(UUID abilityId, Game game) {
-        if (this.getAbilities(game).containsKey(abilityId)) {
+        if (abilities.containsKey(abilityId)) {
             return true;
         }
         Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(getId());
-        return  otherAbilities != null && otherAbilities.containsKey(abilityId);
+        return otherAbilities != null && otherAbilities.containsKey(abilityId);
     }
 
+    @Override
+    public boolean hasAbility(Ability ability, Game game) {
+        if (abilities.contains(ability)) {
+            return true;
+        }
+        Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(getId());
+        return otherAbilities != null && otherAbilities.contains(ability);
+    }
+        
     @Override
     public MageInt getPower() {
         return power;

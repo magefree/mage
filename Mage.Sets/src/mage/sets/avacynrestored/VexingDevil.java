@@ -76,7 +76,7 @@ class VexingDevilEffect extends OneShotEffect {
 
     public VexingDevilEffect() {
         super(Outcome.Neutral);
-        staticText = "any opponent may have it deal 4 damage to him or her. If a player does, sacrifice Vexing Devil";
+        staticText = "any opponent may have it deal 4 damage to him or her. If a player does, sacrifice {this}";
     }
 
     VexingDevilEffect(final VexingDevilEffect effect) {
@@ -85,28 +85,19 @@ class VexingDevilEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("Make ").append(permanent.getName()).append(" deal 4 damage to you?");
-
-            Set<UUID> opponents = game.getOpponents(source.getControllerId());
-            for (UUID opponentUuid : opponents) {
+        if (controller != null && permanent != null) {
+            for (UUID opponentUuid : game.getOpponents(source.getControllerId())) {
                 Player opponent = game.getPlayer(opponentUuid);
-                if (opponent != null && opponent.chooseUse(Outcome.LoseLife, sb.toString(), game)) {
+                if (opponent != null && opponent.chooseUse(Outcome.LoseLife, "Make " + permanent.getName() + " deal 4 damage to you?", game)) {
                     game.informPlayers(opponent.getName() + " has chosen to receive 4 damage from " + permanent.getName());
-                    int dealt = opponent.damage(4, permanent.getId(), game, false, true);
-                    if (dealt == 4) {
-                        game.informPlayers(opponent.getName() + " was dealt 4 damage so " + permanent.getName() + " will be sacrificed.");
-                        permanent.sacrifice(source.getSourceId(), game);
-                        return true;
-                    } else {
-                        game.informPlayers("4 damage wasn't dealt so " + permanent.getName() + " won't be sacrificed.");
-                    }
+                    opponent.damage(4, permanent.getId(), game, false, true);
+                    permanent.sacrifice(source.getSourceId(), game);
+                    return true;
                 }
             }
-
+            game.informPlayers("4 damage wasn't dealt so " + permanent.getName() + " won't be sacrificed.");
             return true;
         }
         return false;

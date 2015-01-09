@@ -85,9 +85,29 @@ public class CardState {
             abilities = new AbilitiesImpl<>();
         }
         abilities.add(ability);
+        for (Ability sub: ability.getSubAbilities()) {
+            abilities.add(sub);
+        }
     }
     
     public void clearAbilities() {
-        abilities = null;
+        if (abilities != null) {
+            for (Ability ability: abilities) {
+                ability.setSourceId(null);
+                ability.setControllerId(null);
+            }
+            abilities = null;
+        }
+    }
+    
+    public void clear() {
+        clearAbilities();
+        counters.clear();
+        info = null;
+    }
+    
+    public void reset() {
+        if (abilities != null)
+            abilities.clear();
     }
 }

@@ -1,11 +1,11 @@
 package org.mage.test.cards.copy;
 
-import junit.framework.Assert;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -87,14 +87,14 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         // Original master should be upgraded to 3rd level
         Assert.assertEquals("Power different", 9, master.getPower().getValue());
         Assert.assertEquals("Toughness different", 9, master.getToughness().getValue());
-        Assert.assertTrue(master.getAbilities().contains(LifelinkAbility.getInstance()));
-        Assert.assertTrue(master.getAbilities().containsRule(IndestructibleAbility.getInstance()));
+        Assert.assertTrue(master.hasAbility(LifelinkAbility.getInstance(), currentGame));
+        Assert.assertTrue(master.hasAbility(IndestructibleAbility.getInstance(), currentGame));
 
         // But copied one should not
         Assert.assertEquals("Power different", 3, masterCopied.getPower().getValue());
         Assert.assertEquals("Toughness different", 3, masterCopied.getToughness().getValue());
-        Assert.assertFalse(masterCopied.getAbilities().contains(LifelinkAbility.getInstance()));
-        Assert.assertFalse(masterCopied.getAbilities().containsRule(IndestructibleAbility.getInstance()));
+        Assert.assertFalse(masterCopied.hasAbility(LifelinkAbility.getInstance(), currentGame));
+        Assert.assertFalse(masterCopied.hasAbility(IndestructibleAbility.getInstance(), currentGame));
     }
 
     /**

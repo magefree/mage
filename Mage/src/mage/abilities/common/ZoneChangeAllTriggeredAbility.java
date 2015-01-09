@@ -62,7 +62,7 @@ public class ZoneChangeAllTriggeredAbility extends TriggeredAbilityImpl {
         this.filter = filter;
     }
 
-    public ZoneChangeAllTriggeredAbility(ZoneChangeAllTriggeredAbility ability) {
+    public ZoneChangeAllTriggeredAbility(final ZoneChangeAllTriggeredAbility ability) {
         super(ability);
         this.fromZone = ability.fromZone;
         this.toZone = ability.toZone;

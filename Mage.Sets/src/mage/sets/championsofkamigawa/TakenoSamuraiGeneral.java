@@ -28,6 +28,7 @@
 
 package mage.sets.championsofkamigawa;
 
+import java.util.Iterator;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,6 +42,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 
 /**
  * @author Loki
@@ -101,7 +103,7 @@ class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl {
                 if (!perm.getId().equals(source.getSourceId())) {
                     for (Ability ability : perm.getAbilities(game)) {
                         if (ability instanceof BushidoAbility) {
-                            objects.add(perm.getId());
+                            affectedObjectList.add(new MageObjectReference(perm, game));
                         }
                     }
                 }
@@ -111,8 +113,23 @@ class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-            if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
+        if (this.affectedObjectsSet) {
+            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
+                Permanent permanent = it.next().getPermanent(game);
+                if (permanent != null) {
+                    for (Ability ability : permanent.getAbilities()) {
+                        if (ability instanceof BushidoAbility) {
+                            int value = ((BushidoAbility) ability).getValue(source, game, this);
+                            permanent.addPower(value);
+                            permanent.addToughness(value);
+                        }
+                    }
+                } else {
+                    it.remove(); // no longer on the battlefield, remove reference to object
+                }
+            }
+        } else {
+            for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                 if (!perm.getId().equals(source.getSourceId())) {
                     for (Ability ability : perm.getAbilities(game)) {
                         if (ability instanceof BushidoAbility) {

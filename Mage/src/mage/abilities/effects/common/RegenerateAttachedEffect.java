@@ -84,6 +84,11 @@ public class RegenerateAttachedEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DESTROY_PERMANENT;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         //20110204 - 701.11c - event.getAmount() is used to signal if regeneration is allowed
         Permanent equipment = game.getPermanent(source.getSourceId());
@@ -91,7 +96,7 @@ public class RegenerateAttachedEffect extends ReplacementEffectImpl {
             Permanent equipped = game.getPermanent(equipment.getAttachedTo());
             if (equipped != null) {
                 UUID equippedID = equipped.getId();
-                if (event.getType() == EventType.DESTROY_PERMANENT && event.getAmount() == 0 && event.getTargetId().equals(equippedID) && !this.used) {
+                if (event.getAmount() == 0 && event.getTargetId().equals(equippedID) && !this.used) {
                     return true;
                 }
             }

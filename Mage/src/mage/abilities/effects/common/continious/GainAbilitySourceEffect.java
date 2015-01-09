@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common.continious;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
@@ -90,29 +91,40 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl implements Sou
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        getAffectedObjects().add(source.getSourceId());
+        if (affectedObjectsSet) {
+            affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
+        }
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         if (onCard) {
-            Card card = game.getCard(source.getSourceId());
+            Card card;
+            if (affectedObjectsSet) {
+                card = affectedObjectList.get(0).getCard(game);
+            } else {
+                card = game.getCard(source.getSourceId());
+            }
             if (card != null) {
-                // add ability to card only once
-                game.getState().addOtherAbility(card.getId(), ability);
-                discard();
+                game.getState().addOtherAbility(card, ability);
+                //discard();
                 return true;
             }
         } else {
-            Permanent permanent = game.getPermanent(source.getSourceId());
+            Permanent permanent;
+            if (affectedObjectsSet) {
+                permanent = affectedObjectList.get(0).getPermanent(game);
+            } else {
+                permanent = game.getPermanent(source.getSourceId());
+            }
             if (permanent != null) {
                 permanent.addAbility(ability, source.getSourceId(), game);
                 return true;
             }
-            if (duration.equals(Duration.Custom)) {
-                this.discard();
-            }            
         }
-        return false;
+        if (duration.equals(Duration.Custom)) {
+            this.discard();
+        }
+        return true;
     }
 }

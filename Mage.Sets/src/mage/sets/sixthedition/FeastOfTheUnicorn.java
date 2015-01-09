@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Quercitron
  */
-public class FeastOfTheUnicorn extends mage.sets.homelands.FeastOfTheUnicorn {
+public class FeastOfTheUnicorn extends mage.sets.homelands.FeastOfTheUnicorn1 {
 
     public FeastOfTheUnicorn(UUID ownerId) {
         super(ownerId);

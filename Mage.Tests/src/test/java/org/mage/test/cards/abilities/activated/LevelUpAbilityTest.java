@@ -1,12 +1,12 @@
 package org.mage.test.cards.abilities.activated;
 
-import junit.framework.Assert;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -31,8 +31,8 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
 
         Assert.assertEquals(3, master.getPower().getValue());
         Assert.assertEquals(3, master.getToughness().getValue());
-        Assert.assertFalse(master.getAbilities().contains(LifelinkAbility.getInstance()));
-        Assert.assertFalse(master.getAbilities().contains(IndestructibleAbility.getInstance()));
+        Assert.assertFalse(master.hasAbility(LifelinkAbility.getInstance(), currentGame));
+        Assert.assertFalse(master.hasAbility(IndestructibleAbility.getInstance(), currentGame));
     }
 
     /**
@@ -53,8 +53,8 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
 
         Assert.assertEquals(3, master.getPower().getValue());
         Assert.assertEquals(3, master.getToughness().getValue());
-        Assert.assertFalse(master.getAbilities().contains(LifelinkAbility.getInstance()));
-        Assert.assertFalse(master.getAbilities().contains(IndestructibleAbility.getInstance()));
+        Assert.assertFalse(master.hasAbility(LifelinkAbility.getInstance(), currentGame));
+        Assert.assertFalse(master.hasAbility(IndestructibleAbility.getInstance(), currentGame));
     }
 
     /**
@@ -78,9 +78,9 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
         Assert.assertEquals(6, master.getPower().getValue());
         Assert.assertEquals(6, master.getToughness().getValue());
         // since now Lifelink will appear
-        Assert.assertTrue(master.getAbilities().contains(LifelinkAbility.getInstance()));
+        Assert.assertTrue(master.hasAbility(LifelinkAbility.getInstance(), currentGame));
         // but still no Indestructible
-        Assert.assertFalse(master.getAbilities().contains(IndestructibleAbility.getInstance()));
+        Assert.assertFalse(master.hasAbility(IndestructibleAbility.getInstance(), currentGame));
     }
 
     /**
@@ -103,8 +103,8 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
 
         Assert.assertEquals("Power different", 9, master.getPower().getValue());
         Assert.assertEquals("Toughness different", 9, master.getToughness().getValue());
-        Assert.assertTrue(master.getAbilities().contains(LifelinkAbility.getInstance()));
-        Assert.assertTrue(master.getAbilities().containsRule(IndestructibleAbility.getInstance()));
+        Assert.assertTrue(master.hasAbility(LifelinkAbility.getInstance(), currentGame));
+        Assert.assertTrue(master.hasAbility(IndestructibleAbility.getInstance(), currentGame));
     }
 
     /**
@@ -127,8 +127,8 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
 
         Assert.assertEquals("Power different", 9, master.getPower().getValue());
         Assert.assertEquals("Toughness different", 9, master.getToughness().getValue());
-        Assert.assertTrue(master.getAbilities().contains(LifelinkAbility.getInstance()));
-        Assert.assertTrue(master.getAbilities().containsRule(IndestructibleAbility.getInstance()));
+        Assert.assertTrue(master.hasAbility(LifelinkAbility.getInstance(), currentGame));
+        Assert.assertTrue(master.hasAbility(IndestructibleAbility.getInstance(), currentGame));
     }
 
 }

@@ -86,17 +86,25 @@ class PyromancersSwathReplacementEffect extends ReplacementEffectImpl {
         super(effect);
     }
 
+    @Override    
+    public boolean checksEventType(GameEvent event, Game game) {
+        switch(event.getType()) {
+            case DAMAGE_CREATURE:
+            case DAMAGE_PLAYER:
+                return true;
+            default:
+                return false;
+        }
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER)
-                || event.getType().equals(GameEvent.EventType.DAMAGE_CREATURE)) {
-            MageObject object = game.getObject(event.getSourceId());
-            if (object != null && object instanceof Spell) {
-                if (((Spell) object).getControllerId().equals(source.getControllerId())
-                        && (object.getCardType().contains(CardType.INSTANT)
-                         || object.getCardType().contains(CardType.SORCERY))){
-                    return true;
-                }
+        MageObject object = game.getObject(event.getSourceId());
+        if (object != null && object instanceof Spell) {
+            if (((Spell) object).getControllerId().equals(source.getControllerId())
+                    && (object.getCardType().contains(CardType.INSTANT)
+                     || object.getCardType().contains(CardType.SORCERY))){
+                return true;
             }
         }
         return false;

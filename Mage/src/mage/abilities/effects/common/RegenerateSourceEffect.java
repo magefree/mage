@@ -72,14 +72,14 @@ public class RegenerateSourceEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         return apply(game, source);
     }
-
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DESTROY_PERMANENT;
+    }
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         //20110204 - 701.11c - event.getAmount() is used to signal if regeneration is allowed
-        if (event.getType() == EventType.DESTROY_PERMANENT && event.getAmount() == 0 && event.getTargetId().equals(source.getSourceId()) && !this.used) {
-            return true;
-        }
-        return false;
+        return event.getAmount() == 0 && event.getTargetId().equals(source.getSourceId()) && !this.used;
     }
 
 }

@@ -137,7 +137,7 @@ class JhoiraOfTheGhituSuspendEffect extends OneShotEffect {
                     // If the exiled card leaves exile by another way, the abilites won't be removed from the card
                     Abilities oldAbilities = card.getAbilities(game).copy();
                     SuspendAbility suspendAbility = new SuspendAbility(4, null, card);
-                    game.getState().addOtherAbility(card.getId(), suspendAbility);
+                    game.getState().addOtherAbility(card, suspendAbility);
                     //card.addAbility(suspendAbility);
 
                     for (Ability ability :card.getAbilities(game)) {

@@ -30,17 +30,18 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.EmptyEffect;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostAllEffect;
-import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -53,7 +54,6 @@ import mage.util.CardUtil;
  *
  * @author LevelX
  */
-
 public class KondasBanner extends CardImpl {
 
     private static final FilterControlledCreaturePermanent legendaryFilter = new FilterControlledCreaturePermanent("Legendary creatures");
@@ -80,8 +80,8 @@ public class KondasBanner extends CardImpl {
         // Equip {2}
         this.addAbility(new EquipAbility(
                 Outcome.AddAbility,
-                new GenericManaCost(2), 
-                new TargetControlledCreaturePermanent(1,1, legendaryFilter, false)));
+                new GenericManaCost(2),
+                new TargetControlledCreaturePermanent(1, 1, legendaryFilter, false)));
 
     }
 
@@ -92,15 +92,15 @@ public class KondasBanner extends CardImpl {
     @Override
     public KondasBanner copy() {
         return new KondasBanner(this);
-    }        
+    }
 }
 
-class KondasBannerTypeBoostEffect extends BoostAllEffect  {
+class KondasBannerTypeBoostEffect extends BoostAllEffect {
 
     private static final String effectText = "Creatures that share a creature type with equipped creature get +1/+1";
 
     KondasBannerTypeBoostEffect() {
-        super(1,1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false);
+        super(1, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false);
         staticText = effectText;
     }
 
@@ -109,27 +109,24 @@ class KondasBannerTypeBoostEffect extends BoostAllEffect  {
     }
 
     @Override
-        public boolean apply(Game game, Ability source) {
-            // Check if the equipment is attached 
-            Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null)
-            {
-                Permanent equipedCreature = game.getPermanent(equipment.getAttachedTo());
-                if (equipedCreature != null) {
-                    for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                            if (CardUtil.shareSubtypes(perm, equipedCreature)) {
-                                    if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
-                                            perm.addPower(power.calculate(game, source, this));
-                                            perm.addToughness(toughness.calculate(game, source, this));
-                                    }
+    public boolean apply(Game game, Ability source) {
+        // Check if the equipment is attached
+        Permanent equipment = game.getPermanent(source.getSourceId());
+        if (equipment != null && equipment.getAttachedTo() != null) {
+            Permanent equipedCreature = game.getPermanent(equipment.getAttachedTo());
+            if (equipedCreature != null) {
+                for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                    if (CardUtil.shareSubtypes(perm, equipedCreature)) {
+                        perm.addPower(power.calculate(game, source, this));
+                        perm.addToughness(toughness.calculate(game, source, this));
 
-                            }
                     }
-                    return true;
                 }
+                return true;
             }
-            return false;
         }
+        return false;
+    }
 
     @Override
     public KondasBannerTypeBoostEffect copy() {
@@ -138,13 +135,12 @@ class KondasBannerTypeBoostEffect extends BoostAllEffect  {
 
 }
 
-
-class KondasBannerColorBoostEffect extends BoostAllEffect  {
+class KondasBannerColorBoostEffect extends BoostAllEffect {
 
     private static final String effectText = "Creatures that share a color with equipped creature get +1/+1.";
 
     KondasBannerColorBoostEffect() {
-        super(1,1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false);
+        super(1, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false);
         staticText = effectText;
     }
 
@@ -153,25 +149,22 @@ class KondasBannerColorBoostEffect extends BoostAllEffect  {
     }
 
     @Override
-        public boolean apply(Game game, Ability source) {
-            // Check if the equipment is attached 
-            Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null)
-            {
-                Permanent equipedCreature = game.getPermanent(equipment.getAttachedTo());
-                for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                        if (equipedCreature.getColor().shares(perm.getColor())) {
-                        if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
+    public boolean apply(Game game, Ability source) {
+        // Check if the equipment is attached
+        Permanent equipment = game.getPermanent(source.getSourceId());
+        if (equipment != null && equipment.getAttachedTo() != null) {
+            Permanent equipedCreature = game.getPermanent(equipment.getAttachedTo());
+            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                if (equipedCreature.getColor().shares(perm.getColor())) {
                     perm.addPower(power.calculate(game, source, this));
                     perm.addToughness(toughness.calculate(game, source, this));
-                                }
 
-                        }
-        }
-        return true;
+                }
             }
-            return false;
+            return true;
         }
+        return false;
+    }
 
     @Override
     public KondasBannerColorBoostEffect copy() {

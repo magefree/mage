@@ -28,8 +28,7 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.List;
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -40,8 +39,8 @@ import mage.abilities.keyword.LevelerCardBuilder;
 import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.LevelerCard;
-
-import java.util.UUID;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -59,11 +58,19 @@ public class HadaSpyPatrol extends LevelerCard {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
+        // Level up 2Blue ({U}{U}: Put a level counter on this. Level up only as a sorcery.)
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{2}{U}")));
 
+        // LEVEL 1-2
+        // 2/2
+        // Hada Spy Patrol can't be blocked.
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         abilities1.add(new UnblockableAbility());
 
+        // LEVEL 3+
+        // 3/3
+        // Shroud (This creature can't be the target of spells or abilities.)
+        // Hada Spy Patrol can't be blocked.
         Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         abilities2.add(ShroudAbility.getInstance());
         abilities2.add(new UnblockableAbility());

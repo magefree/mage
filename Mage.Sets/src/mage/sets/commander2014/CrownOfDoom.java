@@ -48,7 +48,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPlayer;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.other.PlayerPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -64,7 +63,7 @@ public class CrownOfDoom extends CardImpl {
     private static final FilterPlayer filter = new FilterPlayer("player other than Crown of Doom's owner");
 
     static {
-        filter.add(new OwnerPredicate(TargetController.NOT_YOU));
+        filter.add(new PlayerPredicate(TargetController.NOT_YOU));
     }
     
     public CrownOfDoom(UUID ownerId) {

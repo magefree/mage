@@ -51,8 +51,6 @@ import org.apache.log4j.Logger;
  */
 public class CommanderManaReplacementEffect extends ReplacementEffectImpl {
 
-    private static final transient Logger logger = Logger.getLogger(CommanderManaReplacementEffect.class);
-
     private final UUID playerId;
     private final Mana commanderMana;
 
@@ -81,7 +79,7 @@ public class CommanderManaReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Mana mana = ((ManaEvent) event).getMana().copy();
+        Mana mana = ((ManaEvent) event).getMana();
         if (mana.getBlack() > 0 && commanderMana.getBlack() == 0) {
             for (int i = 0; i < mana.getBlack(); i++) {
                 mana.addColorless();
@@ -116,21 +114,13 @@ public class CommanderManaReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ADD_MANA;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ADD_MANA && event.getPlayerId().equals(playerId)) {
-            if (logger.isDebugEnabled()) {
-                if (!game.getGameType().toString().startsWith("Commander")) {
-                    logger.debug("Non Commander game has active CommanderManaReplacementEffect");
-                    Iterator it = game.getState().getCommand().iterator();
-                    while (it.hasNext()) {
-                        Object object = it.next();
-                        logger.debug("Class: " + object.getClass() + " - " + object.toString());
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
+        return event.getPlayerId().equals(playerId);
     }
 
 }

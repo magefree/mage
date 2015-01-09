@@ -80,7 +80,7 @@ class TectonicRiftEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (!permanent.getAbilities(game).contains(FlyingAbility.getInstance())) {
+        if (!permanent.hasAbility(FlyingAbility.getInstance(), game)) {
             return true;
         }
         return false;

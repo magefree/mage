@@ -45,9 +45,16 @@ public class WorldAtWarTest extends CardTestPlayerBase {
     @Test
     public void testCardWithRebound() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        // Enchantment - Creatures you control have haste. (They can attack and as soon as they come under your control.)
         addCard(Zone.BATTLEFIELD, playerA, "Fervor");
+        // After the first postcombat main phase this turn, there's an additional combat phase followed by
+        // an additional main phase. At the beginning of that combat, untap all creatures that attacked this turn.
+        // Rebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your
+        // next upkeep, you may cast this card from exile without paying its mana cost.)
         addCard(Zone.HAND, playerA, "World at War");
+        // Creature - Human Soldier 2/1
         addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        // Creature - Hound 1/1
         addCard(Zone.BATTLEFIELD, playerA, "Warclamp Mastiff");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "World at War");
@@ -71,7 +78,7 @@ public class WorldAtWarTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests creatures attack thrice
+     * Tests creatures attack three times
      */
     @Test
     public void testDoubleCast() {

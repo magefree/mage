@@ -88,6 +88,7 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
                 Player player = game.getPlayer(permanent.getOwnerId());
                 if (player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", game)){
                     boolean result = permanent.moveToZone(Zone.COMMAND, source.getSourceId(), game, false);
+                    game.informPlayers(player.getName() + " has moved his or her commander to the command zone");
                     return result;
                 }
             }
@@ -104,22 +105,26 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
             }           
             if (card != null) {
                 Player player = game.getPlayer(card.getOwnerId());
-                if (player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", game)){
-                    game.informPlayers(player.getName() + " moved his commander to the command zone instead");
-                    return card.moveToZone(Zone.COMMAND, source.getSourceId(), game, false);
+                if (player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", game)){                    
+                    boolean result = card.moveToZone(Zone.COMMAND, source.getSourceId(), game, false);
+                    game.informPlayers(player.getName() + " has moved his or her commander to the command zone");
+                    return result;
                 }
             }
         }
         return false;
     }
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && (
-                ((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD ||
+        if (((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD ||
                 ((ZoneChangeEvent)event).getToZone() == Zone.EXILED ||
                 (alsoLibrary && ((ZoneChangeEvent)event).getToZone() == Zone.LIBRARY))
-                ) {
+            {
             if (commanderId != null) {
                 if (((ZoneChangeEvent)event).getFromZone().equals(Zone.STACK)) {
                     Spell spell = game.getStack().getSpell(event.getTargetId());

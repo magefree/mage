@@ -143,12 +143,14 @@ class StrangleholdSkipExtraTurnsEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType().equals(GameEvent.EventType.EXTRA_TURN);
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (EventType.EXTRA_TURN.equals(event.getType())) {
-            Player controller = game.getPlayer(source.getControllerId());
-            return controller != null && controller.hasOpponent(event.getPlayerId(), game);
-        }
-        return false;
+        Player controller = game.getPlayer(source.getControllerId());
+        return controller != null && controller.hasOpponent(event.getPlayerId(), game);
     }
 
 }

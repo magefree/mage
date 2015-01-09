@@ -57,7 +57,6 @@ import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.common.CopyEffect;
-import mage.abilities.effects.common.continious.SourceEffect;
 import mage.abilities.keyword.LeylineAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.abilities.keyword.TransformAbility;
@@ -1291,11 +1290,10 @@ public abstract class GameImpl implements Game, Serializable {
         }
         applier.apply(this, permanent);
 
-        Ability newAbility = source.copy();
-
         CopyEffect newEffect = new CopyEffect(duration, permanent, copyToPermanent.getId());
         newEffect.newId();
         newEffect.setApplier(applier);
+        Ability newAbility = source.copy();
         newEffect.init(newAbility, this);
         
         // handle copies of copies
@@ -1717,14 +1715,13 @@ public abstract class GameImpl implements Game, Serializable {
         if (simulation) {
             return;
         }
-        String message = this.state.getTurn().getStepType().toString();
+        String message;
         if (this.canPlaySorcery(playerId)) {
-            message += " - play spells and abilities.";
+            message = "Play spells and abilities.";
         }
         else {
-            message +=  " - play instants and activated abilities.";
+            message =  "Play instants and activated abilities.";
         }
-
         playerQueryEventSource.select(playerId, message);
     }
 
@@ -2261,23 +2258,6 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void resetForSourceId(UUID sourceId) {
-        // make sure that all effects don't touch this card once it returns back to battlefield
-        // e.g. this prevents that effects affect creature with undying return from graveyard
-        for (ContinuousEffect effect : getContinuousEffects().getLayeredEffects(this)) {
-            if (effect.getAffectedObjects().contains(sourceId)) {
-                effect.getAffectedObjects().remove(sourceId);
-                if (effect instanceof SourceEffect) {
-                    effect.discard();
-                }
-            }
-        }
-        getContinuousEffects().removeGainedEffectsForSource(sourceId);
-        // remove gained triggered abilities
-        getState().resetTriggersForSourceId(sourceId);
-    }
-
-    @Override
     public void cheat(UUID ownerId, Map<Zone, String> commands) {
         if (commands != null) {
             Player player = getPlayer(ownerId);
@@ -2533,6 +2513,17 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public int getLife() {
         return startLife;
+    }
+
+    @Override
+    public void setDraw(UUID playerId) {
+        Player player = getPlayer(playerId);
+        if (player != null) {
+            for (UUID playerToSetId :player.getInRange()) {
+                Player playerToDraw = getPlayer(playerToSetId);
+                playerToDraw.lostForced(this);
+            }
+        }
     }
 
 }

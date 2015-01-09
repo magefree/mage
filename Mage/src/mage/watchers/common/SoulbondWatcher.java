@@ -73,7 +73,7 @@ public class SoulbondWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
-                if (permanent.getAbilities(game).contains(SoulbondAbility.getInstance())) {
+                if (permanent.hasAbility(SoulbondAbility.getInstance(), game)) {
                     Player controller = game.getPlayer(permanent.getControllerId());
                     if (controller != null) {
                         Cards cards = new CardsImpl();
@@ -101,7 +101,7 @@ public class SoulbondWatcher extends Watcher {
                     // try to find creature with Soulbond and unpaired
                     Player controller = null;
                     for (Permanent chosen : game.getBattlefield().getActivePermanents(filter, permanent.getControllerId(), permanent.getId(), game)) {
-                        if (!chosen.getId().equals(permanent.getId()) && chosen.getAbilities(game).contains(SoulbondAbility.getInstance()) && chosen.getPairedCard() == null) {
+                        if (!chosen.getId().equals(permanent.getId()) && chosen.hasAbility(SoulbondAbility.getInstance(), game) && chosen.getPairedCard() == null) {
                             if (controller == null) {
                                 controller = game.getPlayer(permanent.getControllerId());
                             }

@@ -110,7 +110,7 @@ class PostmortemLungeEffect extends OneShotEffect {
             if (player == null) {
                 return false;
             }
-            game.getState().addOtherAbility(card.getId(), HasteAbility.getInstance());
+            game.getState().addOtherAbility(card, HasteAbility.getInstance());
             //card.addAbility(HasteAbility.getInstance());
             card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
 

@@ -30,21 +30,17 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPermanent;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *
@@ -70,7 +66,7 @@ public class SerpentOfTheEndlessSea extends CardImpl {
         // Serpent of the Endless Sea's power and toughness are each equal to the number of Islands you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
         // Serpent of the Endless Sea can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SerpentOfTheEndlessSeaEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Island","an Island"))));
     }
 
     public SerpentOfTheEndlessSea(final SerpentOfTheEndlessSea card) {
@@ -80,45 +76,5 @@ public class SerpentOfTheEndlessSea extends CardImpl {
     @Override
     public SerpentOfTheEndlessSea copy() {
         return new SerpentOfTheEndlessSea(this);
-    }
-}
-
-class SerpentOfTheEndlessSeaEffect extends ReplacementEffectImpl {
-
-    public SerpentOfTheEndlessSeaEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "{this} can't attack unless defending player controls an Island";
-    }
-
-    public SerpentOfTheEndlessSeaEffect(final SerpentOfTheEndlessSeaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SerpentOfTheEndlessSeaEffect copy() {
-        return new SerpentOfTheEndlessSeaEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARE_ATTACKER && source.getSourceId().equals(event.getSourceId())) {
-            FilterPermanent filter = new FilterPermanent();
-            filter.add(new SubtypePredicate("Island"));
-
-            if (game.getBattlefield().countAll(filter, event.getTargetId(), game) == 0) {
-                return true;
-            }
-        }
-        return false;
     }
 }

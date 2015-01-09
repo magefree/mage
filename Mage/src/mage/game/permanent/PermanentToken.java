@@ -29,13 +29,12 @@
 package mage.game.permanent;
 
 import java.util.UUID;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.Token;
-
 
 /**
  *
@@ -48,8 +47,10 @@ public class PermanentToken extends PermanentImpl {
     public PermanentToken(Token token, UUID controllerId, String expansionSetCode, Game game) {
         super(controllerId, controllerId, token.getName());
         this.expansionSetCode = expansionSetCode;
-        this.token = token;
-        this.copyFromToken(this.token, game); // needed to have e.g. subtypes for entersTheBattlefield replacement effects
+        this.token = token.copy();
+        this.token.getAbilities().newId(); // neccessary if token has ability like DevourAbility()
+        this.token.getAbilities().setSourceId(objectId);
+        this.copyFromToken(this.token, game, false); // needed to have at this time (e.g. for subtypes for entersTheBattlefield replacement effects)
     }
 
     public PermanentToken(final PermanentToken permanent) {
@@ -60,17 +61,22 @@ public class PermanentToken extends PermanentImpl {
 
     @Override
     public void reset(Game game) {
-        Token tokenCopy = token.copy();
-        copyFromToken(tokenCopy, game);
+        copyFromToken(token, game, true);
         super.reset(game);
     }
 
-    private void copyFromToken(Token token, Game game) {
+    private void copyFromToken(Token token, Game game, boolean reset) {
         this.name = token.getName();
         this.abilities.clear();
-        for (Ability ability : token.getAbilities(game)) {
-            this.addAbility(ability, game);
+        if (reset) {
+            this.abilities.addAll(token.getAbilities());
+        } else {
+            // first time -> create ContinuousEffects only once
+            for (Ability ability : token.getAbilities()) {
+                this.addAbility(ability, game);
+            }
         }
+        this.abilities.setControllerId(this.controllerId);
         this.manaCost.clear();
         for (ManaCost cost: token.getManaCost()) {
             this.getManaCost().add(cost.copy());
@@ -90,8 +96,7 @@ public class PermanentToken extends PermanentImpl {
             if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
                 game.setZone(objectId, zone); // needed for triggered dies abilities
                 game.fireEvent(new ZoneChangeEvent(this, this.getControllerId(), Zone.BATTLEFIELD, zone));
-                game.getState().resetTriggersForSourceId(this.getId());// if token is gone triggered abilities no longer needed
-                game.getState().getContinuousEffects().removeGainedEffectsForSource(this.getId());
+                game.getState().removeTriggersOfSourceId(this.getId());// if token is gone endless triggered abilities have to be removed
                 return true;
             }
         }
@@ -125,7 +130,7 @@ public class PermanentToken extends PermanentImpl {
             Ability copyAbility = ability.copy();
             copyAbility.setControllerId(controllerId);
             copyAbility.setSourceId(objectId);
-            game.getState().addAbility(copyAbility, this.getId(), this);
+            game.getState().addAbility(copyAbility, this);
             abilities.add(copyAbility);
         }
     }

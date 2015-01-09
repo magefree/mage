@@ -27,8 +27,10 @@
  */
 package mage.sets.magic2010;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -89,24 +91,16 @@ class CoatOfArmsEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (this.affectedObjectsSet) {
-            List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
-            for (Permanent permanent : permanents) {
-                objects.add(permanent.getId());
-            }
-        }
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
         for (Permanent permanent : permanents) {
-            if (!this.affectedObjectsSet || objects.contains(permanent.getId())) {
-                int amount = getAmount(permanents, permanent);
-                permanent.addPower(amount);
-                permanent.addToughness(amount);
-            }
-        }
+            int amount = getAmount(permanents, permanent);
+            permanent.addPower(amount);
+            permanent.addToughness(amount);
+        }        
         return true;
     }
 

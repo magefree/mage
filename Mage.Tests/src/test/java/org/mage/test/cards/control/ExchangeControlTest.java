@@ -1,7 +1,10 @@
 package org.mage.test.cards.control;
 
+import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.permanent.Permanent;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -178,4 +181,58 @@ public class ExchangeControlTest extends CardTestPlayerBase {
         // War Falcon can't attack
         assertLife(playerA, 20);
     }
+
+    /**
+     * An control exchanged creature gets an copy effect from
+     * an creature with an activated ability to the by exchange controlled creature.
+     * Check that the activated ability is controlled by the new controller of the copy target.
+     */
+    @Test
+    public void testExchangeAnCopyEffect() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        // Gilded Drake {1}{U} Creature - Drake
+        // Flying
+        // When Gilded Drake enters the battlefield, exchange control of Gilded Drake and up to one target
+        // creature an opponent controls. If you don't make an exchange, sacrifice Gilded Drake. This ability
+        // can't be countered except by spells and abilities. (This effect lasts indefinitely.)
+        addCard(Zone.HAND, playerA, "Gilded Drake");
+        // Polymorphous Rush {2}{U} - Instant
+        // Strive — Polymorphous Rush costs {1}{U} more to cast for each target beyond the first.
+        // Choose a creature on the battlefield. Any number of target creatures you control each become a copy of that creature until end of turn.
+        addCard(Zone.HAND, playerA, "Polymorphous Rush");
+        // {U}: Manta Riders gains flying until end of turn.
+        addCard(Zone.BATTLEFIELD, playerB, "Manta Riders");
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
+
+        // exchange control between Gilded Drake and Silvercoat Lion
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gilded Drake");
+        addTarget(playerA, "Silvercoat Lion");
+        // Let your Silvercoat Lion now be a copy of the Manta Riders
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Polymorphous Rush","Silvercoat Lion");
+        addTarget(playerA, "Manta Riders");
+
+        // now use the activated ability to make the "Silvercoat Lions" (that became Mana Riders) flying
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{U}: {this} gains Flying until end of turn.");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        // check creatures change their controllers
+        assertPermanentCount(playerB, "Gilded Drake", 1);
+        assertGraveyardCount(playerA, "Polymorphous Rush", 1);
+
+        assertPermanentCount(playerB, "Silvercoat Lion", 0);
+        assertPermanentCount(playerA, "Silvercoat Lion", 0);
+
+        assertPermanentCount(playerB, "Manta Riders", 1);
+        assertPermanentCount(playerA, "Manta Riders", 1);
+       
+        Permanent controlledMantas = getPermanent("Manta Riders", playerA.getId());
+        Assert.assertTrue("Manta Riders should have flying ability", controlledMantas.hasAbility(FlyingAbility.getInstance(), currentGame));
+
+    }
+
 }

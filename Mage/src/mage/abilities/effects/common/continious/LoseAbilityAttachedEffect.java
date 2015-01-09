@@ -70,12 +70,13 @@ public class LoseAbilityAttachedEffect extends ContinuousEffectImpl {
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent creature = game.getPermanent(equipment.getAttachedTo());
             if (creature != null) {
-                while (creature.getAbilities(game).contains(ability)) {
-                    if (!creature.getAbilities(game).remove(ability)) {
-                        // Something went wrong - ability has an other id?
-                          logger.warn("ability" + ability.getRule() + "couldn't be removed.");
-                    }
-                }
+                creature.removeAbility(ability, game);
+//                while (creature.getAbilities(game).contains(ability)) {
+//                    if (!creature.getAbilities(game).remove(ability)) {
+//                        // Something went wrong - ability has an other id?
+//                          logger.warn("ability" + ability.getRule() + "couldn't be removed.");
+//                    }
+//                }
             }
         }
         return true;

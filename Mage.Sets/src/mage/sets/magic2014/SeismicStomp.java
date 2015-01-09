@@ -77,7 +77,7 @@ class SeismicStompEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (!permanent.getAbilities().contains(FlyingAbility.getInstance())) {
+        if (!permanent.hasAbility(FlyingAbility.getInstance(), game)) {
             return true;
         }
         return false;

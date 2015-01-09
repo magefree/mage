@@ -93,7 +93,7 @@ class SedrisTheTraitorKingEffect extends ContinuousEffectImpl {
                     UnearthAbility ability = new UnearthAbility(new ManaCostsImpl("{2}{B}"));
                     ability.setSourceId(cardId);
                     ability.setControllerId(card.getOwnerId());
-                    game.getState().addOtherAbility(cardId, ability);
+                    game.getState().addOtherAbility(card, ability);
                 }
             }
             return true;

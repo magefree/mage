@@ -44,12 +44,13 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+import org.apache.log4j.Logger;
 
 /**
 *
 * @author BetaSteward_at_googlemail.com
 */
-public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbility> {
+public class TriggeredAbilities extends HashMap<String, TriggeredAbility> {
 
     private final Map<String, List<UUID>> sources = new HashMap<>();
 
@@ -65,8 +66,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
     }
 
     public void checkTriggers(GameEvent event, Game game) {
-        for (Iterator<TriggeredAbility> it = this.values().iterator(); it.hasNext();) {
-            TriggeredAbility ability = it.next();
+        for (TriggeredAbility ability : this.values()) {
             // for effects like when leaves battlefield or destroyed use ShortLKI to check if permanent was in the correct zone before (e.g. Oblivion Ring or Karmic Justice)
             if (ability.isInUseableZone(game, null, event.getType().equals(EventType.ZONE_CHANGE) || event.getType().equals(EventType.DESTROYED_PERMANENT))) {
                 if (!game.getContinuousEffects().preventedByRuleModification(event, ability, game, false)) {
@@ -85,7 +85,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
                                 ability.setControllerId(((Permanent) object).getControllerId());
                             }
                             ability.setSourceObject(object);
-                                if (ability.checkTrigger(event, game)) {
+                            if (ability.checkTrigger(event, game)) {
                                 UUID controllerId = ability.getControllerId();
                                 ability.trigger(game, controllerId);
                             }
@@ -98,12 +98,12 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
   
     private boolean checkAbilityStillExists(TriggeredAbility ability, GameEvent event, MageObject object, Game game) {
         boolean exists = true;
-        if (!object.getAbilities(game).contains(ability)) {
+        if (!object.hasAbility(ability, game)) {
             exists = false;
             if (object instanceof PermanentCard) {
                 PermanentCard permanent = (PermanentCard)object;
                 if (permanent.canTransform() && event.getType() == GameEvent.EventType.TRANSFORMED) {
-                    exists = permanent.getCard().getAbilities(game).contains(ability);
+                    exists = permanent.getCard().hasAbility(ability, game);
                 }
             }
         }
@@ -154,24 +154,23 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
         return key;
     }
 
-    /**
-     * Removes gained abilities by sourceId
-     *
-     * @param sourceId
-     * @return
-     */
-    public List<String> removeGainedAbilitiesForSource(UUID sourceId) {
+    public void removeAbilitiesOfSource(UUID sourceId) {
         List<String> keysToRemove = new ArrayList<>();
-
-        for (Map.Entry<String, List<UUID>> entry : sources.entrySet()) {
-            if (entry.getValue().contains(sourceId)) {
-                keysToRemove.add(entry.getKey());
+        for (String key: this.keySet()) {
+            if(key.endsWith(sourceId.toString())) {
+                keysToRemove.add(key);
             }
         }
-        for (String key: keysToRemove) {
-            sources.remove(key);
+        for(String key: keysToRemove) {
+            remove(key);
         }
-        return keysToRemove;
+    }
+
+    public void removeAllGainedAbilities() {
+        for(String key: sources.keySet()) {
+            this.remove(key);
+        }
+        sources.clear();
     }
 
     public TriggeredAbilities copy() {

@@ -30,6 +30,7 @@ public class WizardCardsImageSource implements CardImageSource {
         sets = new HashMap<>();
         setsAliases = new HashMap<>();
         setsAliases.put("FRF", "fatereforged/cig");
+        setsAliases.put("C14", "commander2014/cig");
         setsAliases.put("KTK", "khansoftarkir/cig");
         setsAliases.put("M15", "magic2015coreset/cig");
         setsAliases.put("CNS", "vintagemasters/cig");
@@ -66,6 +67,16 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("DD2", "jacevschandra/cig");
         setsAliases.put("DDC", "divinevsdemonic/cig");
         setsAliases.put("DDD", "garrukvsliliana/cig");
+        setsAliases.put("DDE", "phyrexiavsthecoalition/cig");
+        setsAliases.put("DDF", "elspethvstezzeret/cig");
+        setsAliases.put("DDG", "knightsvsdragons/cig");
+        setsAliases.put("DDH", "ajanivsnicolbolas/cig");
+        setsAliases.put("DDI", "venservskoth/cig");
+        setsAliases.put("DDJ", "izzetvsgolgari/cig");
+        setsAliases.put("DDK", "sorinvstibalt/cig");
+        setsAliases.put("DDL", "heroesvsmonsters/cig");
+        setsAliases.put("DDM", "jacevsvraska/cig");
+        setsAliases.put("DDN", "speedvscunning/cig");
     }
 
     private Map<String, String> getSetLinks(String cardSet) {

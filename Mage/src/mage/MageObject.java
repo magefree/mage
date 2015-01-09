@@ -27,6 +27,7 @@ public interface MageObject extends MageItem, Serializable {
     void removeAbility(Ability ability, Game game);
     void clearAbilities(Game game);
     boolean hasAbility(UUID abilityId, Game game);
+    boolean hasAbility(Ability ability, Game game);
 
     ObjectColor getColor();
     ManaCosts<ManaCost> getManaCost();

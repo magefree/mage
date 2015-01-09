@@ -163,16 +163,19 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         }
         return true;
     }
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.ZONE_CHANGE)) {
-            if (((ZoneChangeEvent) event).getToZone().equals(Zone.BATTLEFIELD)
-                    && !(((ZoneChangeEvent) event).getFromZone().equals(Zone.HAND)) ) {
-                Card card = game.getCard(event.getTargetId());
-                if (card != null && card.getCardType().contains(CardType.ENCHANTMENT) && card.hasSubtype("Aura")) {
-                    return true;
-                }
+        if (((ZoneChangeEvent) event).getToZone().equals(Zone.BATTLEFIELD)
+                && !(((ZoneChangeEvent) event).getFromZone().equals(Zone.HAND)) ) {
+            Card card = game.getCard(event.getTargetId());
+            if (card != null && card.getCardType().contains(CardType.ENCHANTMENT) && card.hasSubtype("Aura")) {
+                return true;
             }
         }
         return false;

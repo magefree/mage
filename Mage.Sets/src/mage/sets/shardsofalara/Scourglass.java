@@ -28,10 +28,12 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.condition.common.IsStepCondition;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
@@ -61,8 +63,10 @@ public class Scourglass extends CardImpl {
         this.color.setWhite(true);
 
         // {tap}, Sacrifice Scourglass: Destroy all permanents except for artifacts and lands. Activate this ability only during your upkeep.
-        this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD, 
-                new DestroyAllEffect(filter), new TapSourceCost(),  new IsStepCondition(PhaseStep.UPKEEP), null));
+        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
+                new DestroyAllEffect(filter), new TapSourceCost(),  new IsStepCondition(PhaseStep.UPKEEP), null);
+        ability.addCost(new SacrificeSourceCost());
+        this.addAbility(ability);
     }
 
     public Scourglass(final Scourglass card) {

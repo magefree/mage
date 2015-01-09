@@ -29,26 +29,20 @@ package mage.sets.tempest;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPermanent;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.filter.common.FilterLandPermanent;
 
 /**
  *
  * @author Plopman
  */
     public class SeaMonster extends CardImpl {
-
+    
     public SeaMonster(UUID ownerId) {
         super(ownerId, 85, "Sea Monster", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         this.expansionSetCode = "TMP";
@@ -59,7 +53,7 @@ import mage.game.events.GameEvent;
         this.toughness = new MageInt(6);
 
         // Sea Monster can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SeaMonsterEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Island","an Island"))));
     }
 
     public SeaMonster(final SeaMonster card) {
@@ -69,45 +63,5 @@ import mage.game.events.GameEvent;
     @Override
     public SeaMonster copy() {
         return new SeaMonster(this);
-    }
-}
-
-class SeaMonsterEffect extends ReplacementEffectImpl {
-
-    public SeaMonsterEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "{this} can't attack unless defending player controls an Island";
-    }
-
-    public SeaMonsterEffect(final SeaMonsterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SeaMonsterEffect copy() {
-        return new SeaMonsterEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARE_ATTACKER && source.getSourceId().equals(event.getSourceId())) {
-            FilterPermanent filter = new FilterPermanent();
-            filter.add(new SubtypePredicate("Island"));
-
-            if (game.getBattlefield().countAll(filter, event.getTargetId(), game) == 0) {
-                return true;
-            }
-        }
-        return false;
     }
 }

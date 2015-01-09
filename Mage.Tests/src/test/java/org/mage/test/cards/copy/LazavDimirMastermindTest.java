@@ -30,8 +30,12 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
     @Test
     public void testCopySimpleCreature() {
         addCard(Zone.BATTLEFIELD, playerA, "Lazav, Dimir Mastermind", 1);
+        // Codex Shredder - Artifact
+        // {T}: Target player puts the top card of his or her library into his or her graveyard.
+        // {5}, {T}, Sacrifice Codex Shredder: Return target card from your graveyard to your hand.
         addCard(Zone.BATTLEFIELD, playerA, "Codex Shredder", 1);
 
+        // Flying 3/2
         addCard(Zone.LIBRARY, playerB, "Assault Griffin",5);
         skipInitShuffling();
 
@@ -45,7 +49,7 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
 
         Permanent lazav = getPermanent("Lazav, Dimir Mastermind", playerA.getId());
         Assert.assertTrue(lazav.getSubtype().contains("Griffin"));
-        Assert.assertTrue("Lazav, Dimir Mastermind must have flying",lazav.getAbilities().contains(FlyingAbility.getInstance()));
+        Assert.assertTrue("Lazav, Dimir Mastermind must have flying", lazav.hasAbility(FlyingAbility.getInstance(), currentGame));
     }
 
     /**
@@ -74,7 +78,7 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
         Assert.assertTrue(lazav.getSubtype().contains("Rogue"));
 
         Permanent gutterSkulk = getPermanent("Gutter Skulk", playerA.getId());
-        Assert.assertTrue("Gutter Skulk should have deathtouch but hasn't", gutterSkulk.getAbilities().contains(DeathtouchAbility.getInstance()));
+        Assert.assertTrue("Gutter Skulk should have deathtouch but hasn't", gutterSkulk.hasAbility(DeathtouchAbility.getInstance(), currentGame));
 
     }
 
@@ -111,7 +115,7 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Lazav, Dimir Mastermind", 2, 3);
 
         Permanent lazav = getPermanent("Lazav, Dimir Mastermind", playerA.getId());
-        Assert.assertTrue(lazav.getAbilities().contains(FlyingAbility.getInstance()));
+        Assert.assertTrue(lazav.hasAbility(FlyingAbility.getInstance(), currentGame));
         Assert.assertTrue(lazav.getSubtype().contains("Specter"));
         Assert.assertTrue(lazav.getSupertype().contains("Legendary"));
 

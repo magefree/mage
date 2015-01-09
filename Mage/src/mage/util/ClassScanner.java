@@ -39,21 +39,24 @@ import java.util.List;
 import java.util.TreeSet;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author North
  */
 public class ClassScanner {
+    
+    private static final transient Logger logger = Logger.getLogger(ClassScanner.class);
 
     public static List<Class> findClasses(List<String> packages, Class<?> type) {
-        List<Class> cards = new ArrayList<Class>();
+        List<Class> cards = new ArrayList<>();
         try {
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
             assert classLoader != null;
 
-            HashMap<String, String> dirs = new HashMap<String, String>();
-            TreeSet<String> jars = new TreeSet<String>();
+            HashMap<String, String> dirs = new HashMap<>();
+            TreeSet<String> jars = new TreeSet<>();
             for (String packageName : packages) {
                 String path = packageName.replace('.', '/');
                 Enumeration<URL> resources = classLoader.getResources(path);
@@ -79,6 +82,7 @@ public class ClassScanner {
                 cards.addAll(findClassesInJar(file, packages, type));
             }
         } catch (IOException ex) {
+            logger.error("Error loading class", ex);
         }
         return cards;
     }
@@ -97,6 +101,7 @@ public class ClassScanner {
                         cards.add(clazz);
                     }
                 } catch (ClassNotFoundException ex) {
+                    logger.error("Error loading class", ex);
                 }
             }
         }
@@ -128,15 +133,18 @@ public class ClassScanner {
                                 cards.add(clazz);
                             }
                         } catch (ClassNotFoundException ex) {
+                            logger.error("Error loading class", ex);
                         }
                     }
                 }
             }
         } catch (IOException ex) {
+            logger.error("Error loading class", ex);
         } finally {
             try {
                 jarFile.close();
             } catch (IOException ex) {
+                logger.error("Error closing jar", ex);
             }
         }
         return cards;

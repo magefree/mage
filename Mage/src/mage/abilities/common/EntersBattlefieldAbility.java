@@ -28,11 +28,11 @@
 
 package mage.abilities.common;
 
-import mage.constants.Zone;
 import mage.abilities.StaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.EntersBattlefieldEffect;
+import mage.constants.Zone;
 
 /**
  *
@@ -41,7 +41,6 @@ import mage.abilities.effects.EntersBattlefieldEffect;
 public class EntersBattlefieldAbility extends StaticAbility {
 
     protected String abilityRule;
-    protected Boolean showRule;
     
     public EntersBattlefieldAbility(Effect effect) {
         this(effect, true);
@@ -62,20 +61,31 @@ public class EntersBattlefieldAbility extends StaticAbility {
  *
  * @param effect effect that happens when the permanent enters the battlefield
  * @param condition only if this condition is true, the effect will happen
- * @param showRule show a rule for this ability
+ * @param ruleVisible show the rule for this ability
  * @param abilityRule rule for this ability (no text from effects will be added)
  * @param effectText this text will be used for the EnterBattlefieldEffect
  */
-    public EntersBattlefieldAbility(Effect effect, Condition condition, Boolean showRule, String abilityRule, String effectText) {
+    public EntersBattlefieldAbility(Effect effect, Condition condition, Boolean ruleVisible, String abilityRule, String effectText) {
         super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(effect, condition, effectText));
-        this.showRule = showRule;
+        this.setRuleVisible(ruleVisible);
         this.abilityRule = abilityRule;
     }
 
-    public EntersBattlefieldAbility(EntersBattlefieldAbility ability) {
+    public EntersBattlefieldAbility(final EntersBattlefieldAbility ability) {
         super(ability);
-        this.showRule = ability.showRule;
         this.abilityRule = ability.abilityRule;
+    }
+
+    @Override
+    public void addEffect(Effect effect) {
+        if (getEffects().size() > 0) {
+            Effect entersBattlefieldEffect = this.getEffects().get(0);
+            if (entersBattlefieldEffect instanceof EntersBattlefieldEffect) {
+                ((EntersBattlefieldEffect) entersBattlefieldEffect).addEffect(effect);
+                return;
+            }
+        }
+        super.addEffect(effect); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -85,7 +95,7 @@ public class EntersBattlefieldAbility extends StaticAbility {
 
     @Override
     public String getRule() {
-        if (showRule != null && !showRule) {
+        if (!ruleVisible) {
                 return "";
         }
         if (abilityRule != null && !abilityRule.isEmpty()) {

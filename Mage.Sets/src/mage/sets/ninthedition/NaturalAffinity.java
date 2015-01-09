@@ -27,16 +27,19 @@
  */
 package mage.sets.ninthedition;
 
+import java.util.Iterator;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
+import static mage.constants.Layer.PTChangingEffects_7;
+import static mage.constants.Layer.TypeChangingEffects_4;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
@@ -90,7 +93,7 @@ class BecomesCreatureAllEffect extends ContinuousEffectImpl {
         super.init(source, game);
         this.affectedObjectsSet = true;
         for (Permanent perm: game.getBattlefield().getActivePermanents(new FilterLandPermanent(), source.getControllerId(), source.getSourceId(), game)) {
-            objects.add(perm.getId());
+            affectedObjectList.add(new MageObjectReference(perm, game));
         }
     }
 
@@ -99,10 +102,12 @@ class BecomesCreatureAllEffect extends ContinuousEffectImpl {
         switch (layer) {
             case TypeChangingEffects_4:
                 if (sublayer == SubLayer.NA) {
-                    for(UUID uuid : objects){
-                        Permanent permanent = game.getPermanent(uuid);
+                    for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) { 
+                        Permanent permanent = it.next().getPermanent(game);
                         if(permanent != null){
                             permanent.getCardType().add(CardType.CREATURE);
+                        } else {
+                            it.remove();
                         }
                     }
                 }
@@ -110,11 +115,13 @@ class BecomesCreatureAllEffect extends ContinuousEffectImpl {
 
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    for(UUID uuid : objects){
-                        Permanent permanent = game.getPermanent(uuid);
+                    for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
+                        Permanent permanent = it.next().getPermanent(game);
                         if(permanent != null){
                             permanent.getPower().setValue(2);
                             permanent.getToughness().setValue(2);
+                        } else {
+                            it.remove();
                         }
                     }
                 }

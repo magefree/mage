@@ -28,14 +28,16 @@
 
 package mage.abilities.effects.common.continious;
 
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import java.util.Iterator;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -84,7 +86,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
         if (this.affectedObjectsSet) {
             for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
-                    objects.add(perm.getId());
+                    affectedObjectList.add(new MageObjectReference(perm, game));
                 }
             }
         }
@@ -97,8 +99,20 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
+        if (this.affectedObjectsSet) {
+            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
+                Permanent permanent = it.next().getPermanentOrLKIBattlefield(game); //LKI is neccessary for "dies triggered abilities" to work given to permanets  (e.g. Showstopper)
+                if (permanent != null) {
+                    permanent.addAbility(ability, source.getSourceId(), game);
+                } else {
+                    it.remove(); // no longer on the battlefield, remove reference to object
+                    if (affectedObjectList.isEmpty()) {
+                        discard();
+                    }
+                }
+            }
+        } else {
+            for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
                     perm.addAbility(ability, source.getSourceId(), game);
                 }

@@ -66,7 +66,7 @@ public class AddLandDialog extends MageDialog {
         // decide from which sets basic lands are taken from
         for (String setCode :deck.getExpansionSetCodes()) {
             ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);
-            if (expansionInfo.hasBasicLands()) {
+            if (expansionInfo != null && expansionInfo.hasBasicLands()) {
                 this.setCodesland.add(expansionInfo.getCode());
             }
         }
@@ -75,10 +75,12 @@ public class AddLandDialog extends MageDialog {
         if (this.setCodesland.isEmpty()) {
             for (String setCode :deck.getExpansionSetCodes()) {
                 ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);
-                ExpansionInfo [] blockSets = ExpansionRepository.instance.getSetsFromBlock(expansionInfo.getBlockName());
-                for (ExpansionInfo blockSet: blockSets) {
-                    if (blockSet.hasBasicLands()) {
-                        this.setCodesland.add(blockSet.getCode());
+                if (expansionInfo != null) {
+                    ExpansionInfo [] blockSets = ExpansionRepository.instance.getSetsFromBlock(expansionInfo.getBlockName());
+                    for (ExpansionInfo blockSet: blockSets) {
+                        if (blockSet.hasBasicLands()) {
+                            this.setCodesland.add(blockSet.getCode());
+                        }
                     }
                 }
             }

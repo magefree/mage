@@ -28,6 +28,7 @@
 package mage.sets.timespiral;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.SplitSecondAbility;
@@ -96,7 +97,7 @@ class SuddenSpoilingEffect extends ContinuousEffectImpl {
         Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (player != null) {
             for (Permanent perm: game.getState().getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
-                objects.add(perm.getId());
+                affectedObjectList.add(new MageObjectReference(perm, game));
             }
         }
     }
@@ -106,17 +107,17 @@ class SuddenSpoilingEffect extends ContinuousEffectImpl {
         Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (player != null) {
             for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
-                switch (layer) {
-                    case AbilityAddingRemovingEffects_6:
-                        permanent.removeAllAbilities(source.getSourceId(), game);
-                        break;
-                    case PTChangingEffects_7:
-                        if (sublayer.equals(SubLayer.SetPT_7b)) {
-                            if(objects.contains(permanent.getId())){
-                                permanent.getPower().setValue(0);
-                                permanent.getToughness().setValue(2);
+                if (affectedObjectList.contains(new MageObjectReference(permanent, game))) {
+                    switch (layer) {
+                        case AbilityAddingRemovingEffects_6:
+                            permanent.removeAllAbilities(source.getSourceId(), game);
+                            break;
+                        case PTChangingEffects_7:
+                            if (sublayer.equals(SubLayer.SetPT_7b)) {
+                                    permanent.getPower().setValue(0);
+                                    permanent.getToughness().setValue(2);
                             }
-                        }
+                    }
                 }
             }
             return true;

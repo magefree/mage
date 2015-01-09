@@ -17,6 +17,9 @@ public class EvernightShadeTest extends CardTestPlayerBase {
     public void testBoostWithUndying() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        // Evernight Shade  Creature - Shade 1/1  {3}{B}
+        // {B}: Evernight Shade gets +1/+1 until end of turn.
+        // Undying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
         addCard(Zone.BATTLEFIELD, playerA, "Evernight Shade");
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 

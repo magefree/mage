@@ -42,7 +42,8 @@ import mage.game.permanent.Permanent;
  * @author nantuko
  */
 public class AddCardSubTypeTargetEffect extends ContinuousEffectImpl {
-    private String addedSubType;
+     
+    private final String addedSubType;
 
     public AddCardSubTypeTargetEffect(String addedSubType, Duration duration) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
@@ -60,6 +61,10 @@ public class AddCardSubTypeTargetEffect extends ContinuousEffectImpl {
         if (target != null) {
             if (!target.hasSubtype(addedSubType)) {
                 target.getSubtype().add(addedSubType);
+            }
+        } else {
+            if (Duration.Custom.equals(duration)) {
+                discard();
             }
         }
         return false;

@@ -43,7 +43,8 @@ public class ThreadExecutor {
 
     private static final ExecutorService callExecutor = Executors.newCachedThreadPool();
     private static final ExecutorService gameExecutor = Executors.newFixedThreadPool(ConfigSettings.getInstance().getMaxGameThreads());
-    private static final ScheduledExecutorService timeoutExecutor = Executors.newScheduledThreadPool(5);
+    private static final ScheduledExecutorService timeoutExecutor = Executors.newScheduledThreadPool(4);
+    private static final ScheduledExecutorService timeoutIdleExecutor = Executors.newScheduledThreadPool(4);
 
     /**
      * noxx: what the settings below do is setting the ability to keep OS threads for new games for 60 seconds
@@ -62,7 +63,10 @@ public class ThreadExecutor {
         ((ThreadPoolExecutor)gameExecutor).setThreadFactory(new XMageThreadFactory("GAME"));
         ((ThreadPoolExecutor)timeoutExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
         ((ThreadPoolExecutor)timeoutExecutor).allowCoreThreadTimeOut(true);
-        ((ThreadPoolExecutor)timeoutExecutor).setThreadFactory(new XMageThreadFactory("TIME"));
+        ((ThreadPoolExecutor)timeoutExecutor).setThreadFactory(new XMageThreadFactory("TIMEOUT"));
+        ((ThreadPoolExecutor)timeoutIdleExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
+        ((ThreadPoolExecutor)timeoutIdleExecutor).allowCoreThreadTimeOut(true);
+        ((ThreadPoolExecutor)timeoutIdleExecutor).setThreadFactory(new XMageThreadFactory("TIMEOUT_IDLE"));
     }
 
     private static final ThreadExecutor INSTANCE = new ThreadExecutor();
@@ -90,6 +94,10 @@ public class ThreadExecutor {
 
     public ScheduledExecutorService getTimeoutExecutor() {
         return timeoutExecutor;
+    }
+
+    public ScheduledExecutorService getTimeoutIdleExecutor() {
+        return timeoutIdleExecutor;
     }
     
 }

@@ -33,12 +33,12 @@ public class LoseAbilityTest extends CardTestPlayerBase {
 
         Permanent eliteVanguard = getPermanent("Elite Vanguard", playerA.getId());
         Assert.assertNotNull(eliteVanguard);
-        Assert.assertFalse(eliteVanguard.getAbilities().contains(FlyingAbility.getInstance()));
+        Assert.assertFalse(eliteVanguard.hasAbility(FlyingAbility.getInstance(), currentGame));
 
         Permanent airElemental = getPermanent("Air Elemental", playerA.getId());
         Assert.assertNotNull(airElemental);
         // should NOT have flying
-        Assert.assertFalse(airElemental.getAbilities().contains(FlyingAbility.getInstance()));
+        Assert.assertFalse(airElemental.hasAbility(FlyingAbility.getInstance(), currentGame));
     }
 
     /**
@@ -66,7 +66,7 @@ public class LoseAbilityTest extends CardTestPlayerBase {
 
         Assert.assertTrue(airElemental.getAttachments().size() == 2);
         // should have flying
-        Assert.assertTrue(airElemental.getAbilities().contains(FlyingAbility.getInstance()));
+        Assert.assertTrue(airElemental.hasAbility(FlyingAbility.getInstance(), currentGame));
     }
 
     /**
@@ -95,7 +95,7 @@ public class LoseAbilityTest extends CardTestPlayerBase {
 
         Assert.assertEquals(3, airElemental.getAttachments().size());
         // should NOT have flying
-        Assert.assertFalse(airElemental.getAbilities().contains(FlyingAbility.getInstance()));
+        Assert.assertFalse(airElemental.hasAbility(FlyingAbility.getInstance(), currentGame));
     }
     
     /**

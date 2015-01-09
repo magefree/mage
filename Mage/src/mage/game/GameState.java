@@ -566,8 +566,12 @@ public class GameState implements Serializable, Copyable<GameState> {
     public void addAbility(Ability ability, Card attachedTo) {
         addAbility(ability, null, attachedTo);
     }
-
-    @Deprecated
+    /**
+     * Used for adding abilities that exist permanent on cards/permanents and are not
+     * only gained for a certain time (e.g. until end of turn).
+     * @param ability
+     * @param attachedTo
+     */
     public void addAbility(Ability ability, MageObject attachedTo) {
         addAbility(ability, null, attachedTo);
     }
@@ -591,6 +595,12 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
     }
 
+    /**
+     * Abilities that are applied to other objects or applie for a certain time span
+     * @param ability
+     * @param sourceId
+     * @param attachedTo
+     */
     public void addAbility(Ability ability, UUID sourceId, Card attachedTo) {
         if (ability instanceof StaticAbility) {
             for (Mode mode: ability.getModes().values()) {
@@ -695,29 +705,38 @@ public class GameState implements Serializable, Copyable<GameState> {
         return null;
     }
 
-
-
-    public void addOtherAbility(UUID objectId, Ability ability) {
-        if (!cardState.containsKey(objectId)) {
-            cardState.putIfAbsent(objectId, new CardState());
+    public void addOtherAbility(Card attachedTo, Ability ability) {
+        ability.setSourceId(attachedTo.getId());
+        ability.setControllerId(attachedTo.getOwnerId());
+        if (!cardState.containsKey(attachedTo.getId())) {
+            cardState.putIfAbsent(attachedTo.getId(), new CardState());
         }
-        cardState.get(objectId).addAbility(ability);
+        cardState.get(attachedTo.getId()).addAbility(ability);
+        addAbility(ability, attachedTo.getId(), attachedTo);
     }
 
     /**
-     * Removes Triggered abilities that were gained from sourceId
+     * Removes Triggered abilities that belong to sourceId
+     * This is used if a token leaves the battlefield
      *
      * @param sourceId
      */
-    public void resetTriggersForSourceId(UUID sourceId) {
-        List<String> keysToRemove = triggers.removeGainedAbilitiesForSource(sourceId);
-        for (String key : keysToRemove) {
-            triggers.remove(key);
-        }
+    public void removeTriggersOfSourceId(UUID sourceId) {
+        triggers.removeAbilitiesOfSource(sourceId);
     }
 
+
+    /**
+     * Called before applyEffects
+     */
     private void reset() {
+        // All gained abilities have to be removed to prevent adding it multiple times
+        triggers.removeAllGainedAbilities();
+        getContinuousEffects().removeAllTemporaryEffects();
         this.setLegendaryRuleActive(true);
+        for (CardState state: cardState.values()) {
+            state.reset();
+        }
     }
 
     public void clear() {
@@ -766,6 +785,14 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.legendaryRuleActive = legendaryRuleActive;
     }
 
+    /** 
+     * Onl used for diagnostic purposes of tests
+     * @return 
+     */
+    public TriggeredAbilities getTriggers() {
+        return triggers;
+    }
+
     public int getZoneChangeCounter(UUID objectId) {
         return this.zoneChangeCounter.getOrDefault(objectId, 1);
     }
@@ -774,8 +801,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         Integer value = this.zoneChangeCounter.getOrDefault(objectId, 1);
         value++;
         this.zoneChangeCounter.put(objectId, value);
-        if (cardState.containsKey(objectId))
-            this.cardState.get(objectId).clearAbilities();
+        if (cardState.containsKey(objectId)) {
+            this.cardState.get(objectId).clear();
+        }
     }
 
     public void setZoneChangeCounter(UUID objectId, int value) {

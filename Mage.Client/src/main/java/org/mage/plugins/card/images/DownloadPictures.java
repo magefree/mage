@@ -589,7 +589,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         temporaryFile.delete();
                     }
                 } else {
-                    logger.warn("Image download failed - responseCode: " + responseCode + " url: " + url.toString());
+                    logger.warn("Image download for " + card.getName() + "("+card.getSet()+") failed - responseCode: " + responseCode + " url: " + url.toString());
                     if (logger.isDebugEnabled()) { // Shows the returned html from the request to the web server
                         logger.debug("Return ed HTML ERROR:\n" + convertStreamToString(((HttpURLConnection) httpConn).getErrorStream()));
                     }

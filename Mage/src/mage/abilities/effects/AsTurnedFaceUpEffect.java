@@ -61,15 +61,15 @@ public class AsTurnedFaceUpEffect extends ReplacementEffectImpl {
     public void addEffect(Effect effect) {
         baseEffects.add(effect);
     }
-    
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.TURNFACEUP;
+    }
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.TURNFACEUP) {
-            if (event.getTargetId().equals(source.getSourceId())) {
-                return true;
-            }
-        }
-        return false;
+        return event.getTargetId().equals(source.getSourceId());
     }
     
     @Override

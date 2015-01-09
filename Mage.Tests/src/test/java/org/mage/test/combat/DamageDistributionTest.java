@@ -94,7 +94,6 @@ public class DamageDistributionTest extends CardTestPlayerBase {
      */
 
     @Test
-    //@Ignore
     public void testDoubleStrikeTrampleVersusIndestructibleGod() {
         /**
          * Heliod, God of the Sun

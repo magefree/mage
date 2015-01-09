@@ -137,7 +137,7 @@ class DimirDoppelgangerEffect extends ContinuousEffectImpl {
         permanent.addAbility(dimirDoppelgangerAbility, source.getSourceId(), game);
 
         for (Ability ability : cardToCopy.getAbilities(game)) {
-            if (!permanent.getAbilities(game).contains(ability)) {
+            if (!permanent.hasAbility(ability, game)) {
                 permanent.addAbility(ability, source.getSourceId(), game);
             }
         }

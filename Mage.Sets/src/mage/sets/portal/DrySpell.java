@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class DrySpell extends mage.sets.homelands.DrySpell {
+public class DrySpell extends mage.sets.homelands.DrySpell1 {
 
     public DrySpell(UUID ownerId) {
         super(ownerId);

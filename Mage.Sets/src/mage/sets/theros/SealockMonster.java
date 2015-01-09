@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BecomesMonstrousSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPermanent;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
@@ -44,10 +44,8 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetLandPermanent;
@@ -68,7 +66,7 @@ public class SealockMonster extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Sealock Monster can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SealockMonsterCantAttackEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Island","an Island"))));
         // {5}{U}{U}: Monstrosity 3.</i>
         this.addAbility(new MonstrosityAbility("{5}{U}{U}",3));
         // When Sealock Monster becomes monstrous, target land becomes an island in addition to its other types.
@@ -86,48 +84,6 @@ public class SealockMonster extends CardImpl {
     @Override
     public SealockMonster copy() {
         return new SealockMonster(this);
-    }
-}
-
-class SealockMonsterCantAttackEffect extends ReplacementEffectImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent();;
-    static {
-        filter.add(new SubtypePredicate("Island"));
-    }
-
-    public SealockMonsterCantAttackEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "{this} can't attack unless defending player controls an Island";
-    }
-
-    public SealockMonsterCantAttackEffect(final SealockMonsterCantAttackEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SealockMonsterCantAttackEffect copy() {
-        return new SealockMonsterCantAttackEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARE_ATTACKER && source.getSourceId().equals(event.getSourceId())) {
-            if (game.getBattlefield().countAll(filter, event.getTargetId(), game) == 0) {
-                return true;
-            }
-        }
-        return false;
     }
 }
 

@@ -110,6 +110,14 @@ public class GameSessionWatcher {
         }
     }
 
+    /**
+     * Cleanup if Session ends
+     * 
+     */
+    public void CleanUp() {
+
+    }
+
     public void gameError(final String message) {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);

@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.PhaseStep;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -115,7 +116,7 @@ class ChainsOfMephistophelesReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.DRAW_CARD) {
-            if (game.getActivePlayerId().equals(event.getPlayerId())) {
+            if (game.getActivePlayerId().equals(event.getPlayerId()) && game.getPhase().getStep().getType().equals(PhaseStep.DRAW)) {
                 CardsDrawnDuringDrawStepWatcher watcher = (CardsDrawnDuringDrawStepWatcher) game.getState().getWatchers().get("CardsDrawnDuringDrawStep");
                 if (watcher != null && watcher.getAmountCardsDrawn(event.getPlayerId()) > 0) {
                     return true;

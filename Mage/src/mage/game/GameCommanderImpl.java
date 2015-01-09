@@ -75,7 +75,6 @@ public abstract class GameCommanderImpl extends GameImpl {
 
     @Override
     protected void init(UUID choosingPlayerId, GameOptions gameOptions) {
-        super.init(choosingPlayerId, gameOptions);
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new EmptyEffect("Commander effects"));
         //Move commander to command zone
         for (UUID playerId: state.getPlayerList(startingPlayerId)) {
@@ -106,7 +105,8 @@ public abstract class GameCommanderImpl extends GameImpl {
             }
 
         }
-        this.getState().addAbility(ability, this.getId(), null);
+        this.getState().addAbility(ability, null);
+        super.init(choosingPlayerId, gameOptions);
         if (startingPlayerSkipsDraw) {
             state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
         }

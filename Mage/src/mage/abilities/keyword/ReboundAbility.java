@@ -96,7 +96,7 @@ public class ReboundAbility extends TriggeredAbilityImpl {
                 ((ZoneChangeEvent) event).getToZone() == Zone.STACK) {
             Card card = (Card) game.getObject(event.getTargetId());
 
-            if (card.getAbilities(game).contains(this)) {
+            if (card.hasAbility(this, game)) {
                 this.installReboundEffect = true;
             }
         }
@@ -226,11 +226,14 @@ class ReboundCastFromHandReplacementEffect extends ReplacementEffectImpl {
         }
         return false;
     }
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE &&
-                ((ZoneChangeEvent) event).getFromZone() == Zone.STACK &&
+        if (((ZoneChangeEvent) event).getFromZone() == Zone.STACK &&
                 ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD &&
                 source.getSourceId() == this.cardId) {
             return true;

@@ -28,19 +28,30 @@
 package mage.sets.planechase2012;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.EntersBattlefieldEffect;
+import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
+import mage.game.permanent.PermanentToken;
+import mage.game.permanent.token.Token;
+import mage.players.Player;
 
 /**
  *
@@ -54,14 +65,11 @@ public class PrimalPlasma extends CardImpl {
         this.subtype.add("Elemental");
         this.subtype.add("Shapeshifter");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
         // As Primal Plasma enters the battlefield, it becomes your choice of a 3/3 creature, a 2/2 creature with flying, or a 1/6 creature with defender.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new PrimalPlasmaEffect(), "As {this} enters the battlefield, it becomes your choice of a 3/3 creature, a 2/2 creature with flying, or a 1/6 creature with defender"));
-        ability.addChoice(new PrimalPlasmaChoice());
-        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PrimalPlasmaReplacementEffect()));
     }
 
     public PrimalPlasma(final PrimalPlasma card) {
@@ -74,47 +82,35 @@ public class PrimalPlasma extends CardImpl {
     }
 }
 
-class PrimalPlasmaEffect extends ContinuousEffectImpl {
-    PrimalPlasmaEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
+class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
+
+    private final String choice33 = "a 3/3 creature";
+    private final String choice22 = "a 2/2 creature with flying";
+    private final String choice16 = "a 1/6 creature with defender";
+
+    public PrimalPlasmaReplacementEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        staticText = "As {this} enters the battlefield, it becomes your choice of a 3/3 creature, a 2/2 creature with flying, or a 1/6 creature with defender";
     }
 
-    PrimalPlasmaEffect(final PrimalPlasmaEffect effect) {
+    public PrimalPlasmaReplacementEffect(PrimalPlasmaReplacementEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        PrimalPlasmaChoice choice = (PrimalPlasmaChoice) source.getChoices().get(0);
-        if (permanent == null) {
-            return false;
-        }
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType().equals(EventType.ENTERS_THE_BATTLEFIELD);
+    }
 
-        switch (layer) {
-            case PTChangingEffects_7:
-                if (sublayer.equals(SubLayer.SetPT_7b)) {
-                    if (choice.getChoice().equals("a 3/3 creature")) {
-                        permanent.getPower().setValue(3);
-                        permanent.getToughness().setValue(3);
-                    } else if (choice.getChoice().equals("a 2/2 creature with flying")) {
-                        permanent.getPower().setValue(2);
-                        permanent.getToughness().setValue(2);
-                    } else if (choice.getChoice().equals("a 1/6 creature with defender")) {
-                        permanent.getPower().setValue(1);
-                        permanent.getToughness().setValue(6);
-                    }
-                }
-                break;
-            case AbilityAddingRemovingEffects_6:
-                if (choice.getChoice().equals("a 2/2 creature with flying")) {
-                    permanent.addAbility(FlyingAbility.getInstance(), game);
-                } else if (choice.getChoice().equals("a 1/6 creature with defender")) {
-                    permanent.addAbility(DefenderAbility.getInstance(), game);
-                }
-                break;
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getTargetId().equals(source.getSourceId())) {
+            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            if (sourcePermanent != null && !sourcePermanent.isFaceDown(game)) {
+                return true;
+            }
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -123,29 +119,61 @@ class PrimalPlasmaEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.TypeChangingEffects_4;
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            Choice choice = new ChoiceImpl(true);
+            choice.setMessage("Choose what the creature becomes to");
+            choice.getChoices().add(choice33);
+            choice.getChoices().add(choice22);
+            choice.getChoices().add(choice16);
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null) {
+                while(!choice.isChosen()) {
+                    controller.choose(Outcome.Neutral, choice, game);
+                    if (!controller.isInGame()) {
+                        return false;
+                    }
+                }
+            }
+//            MageObject mageObject;
+//            if (permanent instanceof PermanentCard) {
+//                mageObject = ((PermanentCard) permanent).getCard();
+//            } else {
+//                mageObject = ((PermanentToken) permanent).getToken();
+//            }
+            switch (choice.getChoice()) {
+                case choice33:
+                    permanent.getPower().setValue(3);
+                    permanent.getToughness().setValue(3);
+                    break;
+                case choice22:
+                    permanent.getPower().setValue(2);
+                    permanent.getToughness().setValue(2);
+//                    if (mageObject instanceof Card) {
+                        permanent.addAbility(FlyingAbility.getInstance(), game);
+//                    } else {
+//                        ((Token)mageObject).addAbility(FlyingAbility.getInstance());
+//                    }
+                    break;
+                case choice16:
+                    permanent.getPower().setValue(1);
+                    permanent.getToughness().setValue(6);
+//                    if (mageObject instanceof Card) {
+                        permanent.addAbility(DefenderAbility.getInstance(), game);
+//                    } else {
+//                        ((Token)mageObject).addAbility(DefenderAbility.getInstance());
+//                    }
+                    break;
+            }
+        }
+        return false;
+
     }
 
     @Override
-    public PrimalPlasmaEffect copy() {
-        return new PrimalPlasmaEffect(this);
-    }
-}
-class PrimalPlasmaChoice extends ChoiceImpl {
-    PrimalPlasmaChoice() {
-        super(true);
-        this.choices.add("a 3/3 creature");
-        this.choices.add("a 2/2 creature with flying");
-        this.choices.add("a 1/6 creature with defender");
+    public PrimalPlasmaReplacementEffect copy() {
+        return new PrimalPlasmaReplacementEffect(this);
     }
 
-    PrimalPlasmaChoice(final PrimalPlasmaChoice choice) {
-        super(choice);
-    }
-
-    @Override
-    public PrimalPlasmaChoice copy() {
-        return new PrimalPlasmaChoice(this);
-    }
 }

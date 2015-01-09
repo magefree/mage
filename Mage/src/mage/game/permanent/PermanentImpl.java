@@ -69,6 +69,7 @@ import mage.game.events.DamagedPlaneswalkerEvent;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
@@ -217,26 +218,37 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             abilities.add(copyAbility);
         }
     }
-
     @Override
     public void addAbility(Ability ability, UUID sourceId, Game game) {
+        addAbility(ability, sourceId, game, true);
+    }
+
+    @Override
+    public void addAbility(Ability ability, UUID sourceId, Game game, boolean createNewId) {
         if (!abilities.containsKey(ability.getId())) {
             Ability copyAbility = ability.copy();
-            copyAbility.newId(); // needed so that source can get an ability multiple times (e.g. Raging Ravine)
+            if (createNewId) {
+                copyAbility.newId(); // needed so that source can get an ability multiple times (e.g. Raging Ravine)
+            }
             copyAbility.setControllerId(controllerId);
             copyAbility.setSourceId(objectId);
             game.getState().addAbility(copyAbility, sourceId, this);
             abilities.add(copyAbility);
+        } else if (!createNewId) {
+            // triggered abilities must be added to the state().triggerdAbilities
+            // still as long as the prev. permanent is known to the LKI (e.g. Showstopper) so gained dies triggered ability will trigger
+            if (!game.getBattlefield().containsPermanent(this.getId())) {
+                Ability copyAbility = ability.copy();
+                copyAbility.setControllerId(controllerId);
+                copyAbility.setSourceId(objectId);
+                game.getState().addAbility(copyAbility, sourceId, this);
+            }
         }
     }
     
     @Override
     public void removeAllAbilities(UUID sourceId, Game game) {
         clearAbilities(game);
-        // removes abilities that were gained from abilities of this permanent
-        game.getContinuousEffects().removeGainedEffectsForSource(this.getId());
-        // remove gained triggered abilities
-        game.getState().resetTriggersForSourceId(this.getId());
     }
     
     @Override
@@ -657,9 +669,20 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 damageDone = damageCreature(damageAmount, sourceId, game, preventable, combat, markDamage, appliedEffects);
             }
             if (damageDone > 0) {
-                Permanent source = game.getPermanentOrLKIBattlefield(sourceId);
+                UUID sourceControllerId = null;
+                MageObject source = game.getPermanentOrLKIBattlefield(sourceId);
+                if (source == null) {
+                    source = game.getObject(sourceId);
+                    if (source instanceof Spell) {
+                        sourceControllerId = ((Spell) source).getControllerId();
+                    } else {
+                        source = null;
+                    }
+                } else {
+                    sourceControllerId = ((Permanent) source).getControllerId();
+                }
                 if (source != null && source.getAbilities(game).containsKey(LifelinkAbility.getInstance().getId())) {
-                    Player player = game.getPlayer(source.getControllerId());
+                    Player player = game.getPlayer(sourceControllerId);
                     player.gainLife(damageAmount, game);
                 }
                 if (source != null && source.getAbilities(game).containsKey(DeathtouchAbility.getInstance().getId())) {

@@ -89,7 +89,7 @@ class CircleOfFlameTriggeredAbility extends TriggeredAbilityImpl {
 
             // check has flying
             Permanent attacker = game.getPermanent(event.getSourceId());
-            if (attacker == null || attacker.getAbilities().contains(FlyingAbility.getInstance())) {
+            if (attacker == null || attacker.hasAbility(FlyingAbility.getInstance(), game)) {
                 return false;
             }
 

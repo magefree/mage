@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common.continious;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -85,7 +86,9 @@ public class BoostSourceEffect extends ContinuousEffectImpl implements SourceEff
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        getAffectedObjects().add(source.getSourceId());
+        if (affectedObjectsSet) {
+            affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
+        }
         if (lockedIn) {
             power = new StaticValue(power.calculate(game, source, this));
             toughness = new StaticValue(toughness.calculate(game, source, this));
@@ -94,7 +97,12 @@ public class BoostSourceEffect extends ContinuousEffectImpl implements SourceEff
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(source.getSourceId());
+        Permanent target;
+        if (affectedObjectsSet) {
+            target = affectedObjectList.get(0).getPermanent(game);
+        } else {
+            target = game.getPermanent(source.getSourceId());
+        }
         if (target != null) {
             target.addPower(power.calculate(game, source, this));
             target.addToughness(toughness.calculate(game, source, this));

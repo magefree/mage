@@ -120,11 +120,17 @@ class PutIntoGraveFromAnywhereEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (GameEvent.EventType.ZONE_CHANGE.equals(event.getType()) 
-                && ((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD
-                && event.getTargetId().equals(source.getSourceId())) {
-            if (condition == null || condition.apply(game, source)) {
+        if (((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD
+                && event.getTargetId().equals(source.getSourceId()))
+        {
+            if (condition == null || condition.apply(game, source))
+            {
                 return true;
             }
         }

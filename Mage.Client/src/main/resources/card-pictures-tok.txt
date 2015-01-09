@@ -1,3 +1,23 @@
+$|Generate|TOK:MLP|Thopter|
+
+#|Generate|TOK:WMCQ|Angel|
+
+#|Generate|TOK:GPX|Elephant|
+#|Generate|TOK:GPX|Germ|
+
+#|Generate|TOK:JR|Angel|
+#|Generate|TOK:JR|Faerie Rogue|
+#|Generate|TOK:JR|Soldier|
+#|Generate|TOK:JR|Squirrel|
+
+#|Generate|TOK:MGDC|Centaur|
+#|Generate|TOK:MGDC|Knight|
+#|Generate|TOK:MGDC|Rhino|
+#|Generate|TOK:MGDC|Sliver|
+
+#|Generate|TOK:FNMP|Centaur|
+#|Generate|TOK:FNMP|Wurm|
+
 |Generate|TOK:DDN|Goblin|
 
 #|Generate|TOK:KTK|Bear|

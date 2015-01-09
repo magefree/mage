@@ -28,15 +28,13 @@
 
 package mage.abilities.effects;
 
+import java.util.List;
+import mage.MageObjectReference;
+import mage.abilities.Ability;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.SubLayer;
-import mage.abilities.Ability;
 import mage.game.Game;
-
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -57,7 +55,7 @@ public interface ContinuousEffect extends Effect {
     Layer getLayer();
     SubLayer getSublayer();
     void overrideRuleText(String text);
-    List<UUID> getAffectedObjects();
+    List<MageObjectReference> getAffectedObjects();
 
     @Override
     void newId();

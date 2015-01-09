@@ -225,6 +225,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     // indicates that a sourceId will be cast without paying mana
     protected UUID castSourceIdWithoutMana;
+    // indicates that the player is in mana payment phase
+    protected boolean payManaMode = false;
 
     protected UserData userData;
 
@@ -321,6 +323,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.reachedNextTurnAfterLeaving = player.reachedNextTurnAfterLeaving;
 
         this.castSourceIdWithoutMana = player.castSourceIdWithoutMana;
+        this.payManaMode = player.payManaMode;
     }
 
     @Override
@@ -434,6 +437,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canGainLife = true;
         this.canLoseLife = true;
         this.topCardRevealed = false;
+        this.payManaMode = false;
         this.setLife(game.getLife(), game);
         this.setReachedNextTurnAfterLeaving(false);
         game.getState().getWatchers().add(new BloodthirstWatcher(playerId));
@@ -902,6 +906,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public UUID getCastSourceIdWithoutMana() {
         return castSourceIdWithoutMana;
+    }
+
+    @Override
+    public boolean isInPayManaMode() {
+        return payManaMode;
     }
 
 
@@ -1604,12 +1613,17 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!game.replaceEvent(event)) {
                 int actualDamage = event.getAmount();
                 if (actualDamage > 0) {
-                    Permanent source = game.getPermanent(sourceId);
-                    if(source == null){
-                        MageObject lastKnownInformation = game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD);
-                        if(lastKnownInformation != null &&  lastKnownInformation instanceof Permanent){
-                            source = (Permanent) lastKnownInformation;
+                    UUID sourceControllerId = null;
+                    MageObject source = game.getPermanentOrLKIBattlefield(sourceId);
+                    if (source == null) {
+                        source = game.getObject(sourceId);
+                        if (source instanceof Spell) {
+                            sourceControllerId = ((Spell) source).getControllerId();
+                        } else {
+                            source = null;
                         }
+                    } else {
+                        sourceControllerId = ((Permanent) source).getControllerId();
                     }
                     if (source != null && (source.getAbilities(game).containsKey(InfectAbility.getInstance().getId()))) {
                         addCounters(CounterType.POISON.createInstance(actualDamage), game);
@@ -1620,7 +1634,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         }
                     }
                     if (source != null && source.getAbilities(game).containsKey(LifelinkAbility.getInstance().getId())) {
-                        Player player = game.getPlayer(source.getControllerId());
+                        Player player = game.getPlayer(sourceControllerId);
                         player.gainLife(actualDamage, game);
                     }
                     game.fireEvent(new DamagedPlayerEvent(playerId, sourceId, playerId, actualDamage, combatDamage));
@@ -1854,20 +1868,25 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void lost(Game game) {
         if (canLose(game)) {
-            logger.debug(this.getName() + " has lost gameId: " + game.getId());
-            //20100423 - 603.9
-            if (!this.wins) {
-                this.loses = true;
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST, null, null, playerId));
-                game.informPlayers(this.getName()+ " has lost the game.");
-            } else {
-                logger.debug(this.getName() + " has already won - stop lost");
-            }
-            // for draw - first all players that have lost have to be set to lost
-            if (!hasLeft()) {
-                logger.debug("Game over playerId: " + playerId);
-                game.gameOver(playerId);
-            }
+            lostForced(game);
+        }
+    }
+    
+    @Override
+    public void lostForced(Game game) {
+        logger.debug(this.getName() + " has lost gameId: " + game.getId());
+        //20100423 - 603.9
+        if (!this.wins) {
+            this.loses = true;
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST, null, null, playerId));
+            game.informPlayers(this.getName()+ " has lost the game.");
+        } else {
+            logger.debug(this.getName() + " has already won - stop lost");
+        }
+        // for draw - first all players that have lost have to be set to lost
+        if (!hasLeft()) {
+            logger.debug("Game over playerId: " + playerId);
+            game.gameOver(playerId);
         }
     }
 
@@ -2706,13 +2725,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override 
     public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
         boolean result = false;
-        boolean faceDown = card.isFaceDown(game); // move sets card to face up
         if (card.moveToZone(Zone.HAND, sourceId, game, false)) {
             if (card instanceof PermanentCard) {
                 card = game.getCard(card.getId());
             }            
             game.informPlayers(new StringBuilder(this.getName())
-                    .append(" puts ").append(faceDown ? " a face down card":card.getLogName()).append(" ")
+                    .append(" puts ").append(card.getLogName()).append(" ")
                     .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" "):"")
                     .append(card.getOwnerId().equals(this.getId()) ? "into his or her hand":"into its owner's hand").toString());
             result = true;

@@ -115,8 +115,13 @@ class KruphixGodOfHorizonsEffect extends ReplacementEffectImpl {
         return true;
     }
 
+    @Override    
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.EMPTY_MANA_POOL;
+    }
+        
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType() == GameEvent.EventType.EMPTY_MANA_POOL && event.getPlayerId().equals(source.getControllerId());
+        return event.getPlayerId().equals(source.getControllerId());
     }
 }

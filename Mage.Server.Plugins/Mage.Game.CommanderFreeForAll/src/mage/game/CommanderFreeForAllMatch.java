@@ -45,7 +45,7 @@ public class CommanderFreeForAllMatch extends MatchImpl {
     public void startGame() throws GameException {
         int startLife = 40;
         boolean alsoLibrary = false;
-        if (options.getDeckType().equals("Duel Commander")) {
+        if (options.getDeckType().equals("Variant Magic - Duel Commander")) {
             startLife = 30;
             alsoLibrary = true;
         }

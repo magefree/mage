@@ -140,8 +140,13 @@ class AnafenzaTheForemostEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType().equals(GameEvent.EventType.ZONE_CHANGE);
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD) {
+        if (((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD) {
             Card card = game.getCard(event.getTargetId());
             if (card != null && card.getCardType().contains(CardType.CREATURE) &&
                     game.getOpponents(source.getControllerId()).contains(card.getOwnerId())) {

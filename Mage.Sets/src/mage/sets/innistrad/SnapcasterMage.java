@@ -121,7 +121,7 @@ class SnapcasterMageEffect extends ContinuousEffectImpl {
             }
             ability.setSourceId(card.getId());
             ability.setControllerId(card.getOwnerId());
-            game.getState().addOtherAbility(card.getId(), ability);
+            game.getState().addOtherAbility(card, ability);
             return true;
         }
         return false;

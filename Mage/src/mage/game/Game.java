@@ -131,6 +131,7 @@ public interface Game extends MageItem, Serializable {
     Combat getCombat();
     GameState getState();
     String getWinner();
+    void setDraw(UUID playerId);
     boolean isADraw();
     ContinuousEffects getContinuousEffects();
     GameStates getGameStates();
@@ -148,7 +149,6 @@ public interface Game extends MageItem, Serializable {
     Player getLosingPlayer();
     void setStateCheckRequired();
     boolean getStateCheckRequired();
-    void resetForSourceId(UUID sourceId);
     int getZoneChangeCounter(UUID objectId);
     void updateZoneChangeCounter(UUID objectId);
     void setZoneChangeCounter(UUID objectId, int value);

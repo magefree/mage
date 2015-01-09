@@ -106,7 +106,7 @@ class GildedDrakeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourceObject = game.getPermanent(source.getSourceId());
-        Permanent targetPermanent = null;
+        Permanent targetPermanent;
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             if (targetPointer.getFirst(game, source) != null) {

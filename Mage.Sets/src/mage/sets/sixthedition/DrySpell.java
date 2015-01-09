@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Quercitron
  */
-public class DrySpell extends mage.sets.homelands.DrySpell {
+public class DrySpell extends mage.sets.homelands.DrySpell1 {
 
     public DrySpell(UUID ownerId) {
         super(ownerId);

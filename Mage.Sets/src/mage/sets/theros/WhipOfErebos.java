@@ -116,7 +116,7 @@ class WhipOfErebosEffect extends OneShotEffect {
         Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && card != null) {
-            game.getState().addOtherAbility(card.getId(), HasteAbility.getInstance());
+            game.getState().addOtherAbility(card, HasteAbility.getInstance());
             //card.addAbility(HasteAbility.getInstance());
             if (controller.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId())) {
                 // gains haste
@@ -162,11 +162,15 @@ class WhipOfErebosReplacementEffect extends ReplacementEffectImpl {
         }
         return true;
     }
-
+    
+    @Override    
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE
-                && event.getTargetId().equals(source.getFirstTarget())
+        if (event.getTargetId().equals(source.getFirstTarget())
                 && ((ZoneChangeEvent) event).getFromZone().equals(Zone.BATTLEFIELD)
                 && !((ZoneChangeEvent) event).getToZone().equals(Zone.EXILED)) {
             return true;

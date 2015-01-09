@@ -93,6 +93,7 @@ import mage.util.CardUtil;
         }
         Target target = new TargetCardInYourGraveyard(1, Integer.MAX_VALUE, new FilterCard());
         target.setTargetName("cards to delve from your graveyard");
+        target.setNotTarget(true);
         if (!target.canChoose(sourceId, controllerId, game)) {
             return;
         }

@@ -133,6 +133,7 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
                 continue;
             }
             permanent.changeControllerId(lockedControllers.get(permanent.getId()), game);
+            permanent.getAbilities().setControllerId(lockedControllers.get(permanent.getId()));
         }
         if (!toDelete.isEmpty()) {
             for(UUID uuid: toDelete) {

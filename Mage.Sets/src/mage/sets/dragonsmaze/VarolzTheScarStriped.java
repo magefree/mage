@@ -115,7 +115,7 @@ class VarolzTheScarStripedEffect extends ContinuousEffectImpl {
                     ScavengeAbility ability = new ScavengeAbility(new ManaCostsImpl(card.getManaCost().getText()));
                     ability.setSourceId(cardId);
                     ability.setControllerId(card.getOwnerId());
-                    game.getState().addOtherAbility(cardId, ability);
+                    game.getState().addOtherAbility(card, ability);
                 }
             }
             return true;

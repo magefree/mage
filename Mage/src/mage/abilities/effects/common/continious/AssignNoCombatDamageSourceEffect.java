@@ -70,16 +70,21 @@ public class AssignNoCombatDamageSourceEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean checksEventType(GameEvent event, Game game) {
         switch (event.getType()) {
             case DAMAGE_CREATURE:
             case DAMAGE_PLAYER:
             case DAMAGE_PLANESWALKER:
-                DamageEvent damageEvent = (DamageEvent) event;
-                return event.getSourceId().equals(source.getSourceId()) && damageEvent.isCombatDamage();
+                return true;
             default:
                 return false;
         }
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        DamageEvent damageEvent = (DamageEvent) event;
+        return event.getSourceId().equals(source.getSourceId()) && damageEvent.isCombatDamage();
     }
 
     private String setText() {

@@ -51,13 +51,13 @@ public class CombatUtil {
 
         // now count if it is possible to win the game by this attack using unblockable attackers and
         // those attackers that won't be blocked for sure (as player will block other creatures)
-        if (sumDamage(attackersThatWontBeBlocked, defender) >= defender.getLife() && defender.isLifeTotalCanChange()
+        if (sumDamage(attackersThatWontBeBlocked, defender, game) >= defender.getLife() && defender.isLifeTotalCanChange()
                 && defender.canLose(game) && defender.getLife() > 0) {
             blockableAttackers.addAll(unblockableAttackers);
             return blockableAttackers;
         }
 
-        if (sumPoisonDamage(attackersThatWontBeBlocked, defender) >= 10 - defender.getCounters().getCount(CounterType.POISON)) {
+        if (sumPoisonDamage(attackersThatWontBeBlocked, defender, game) >= 10 - defender.getCounters().getCount(CounterType.POISON)) {
             blockableAttackers.addAll(unblockableAttackers);
             return blockableAttackers;
         }
@@ -108,12 +108,12 @@ public class CombatUtil {
         return creatures.get(0);
     }
 
-    private static int sumDamage(List<Permanent> attackersThatWontBeBlocked, Player defender) {
+    private static int sumDamage(List<Permanent> attackersThatWontBeBlocked, Player defender, Game game) {
         int damage = 0;
         for (Permanent attacker : attackersThatWontBeBlocked) {
-            if (!attacker.getAbilities().contains(InfectAbility.getInstance())) {
+            if (!attacker.hasAbility(InfectAbility.getInstance(), game)) {
                 damage += attacker.getPower().getValue();
-                if (attacker.getAbilities().contains(DoubleStrikeAbility.getInstance())) {
+                if (attacker.hasAbility(DoubleStrikeAbility.getInstance(), game)) {
                     damage += attacker.getPower().getValue();
                 }
             }
@@ -121,12 +121,12 @@ public class CombatUtil {
         return damage;
     }
 
-    private static int sumPoisonDamage(List<Permanent> attackersThatWontBeBlocked, Player defender) {
+    private static int sumPoisonDamage(List<Permanent> attackersThatWontBeBlocked, Player defender, Game game) {
         int damage = 0;
         for (Permanent attacker : attackersThatWontBeBlocked) {
-            if (attacker.getAbilities().contains(InfectAbility.getInstance())) {
+            if (attacker.hasAbility(InfectAbility.getInstance(), game)) {
                 damage += attacker.getPower().getValue();
-                if (attacker.getAbilities().contains(DoubleStrikeAbility.getInstance())) {
+                if (attacker.hasAbility(DoubleStrikeAbility.getInstance(), game)) {
                     damage += attacker.getPower().getValue();
                 }
             }

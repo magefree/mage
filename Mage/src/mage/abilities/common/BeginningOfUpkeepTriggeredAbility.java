@@ -43,8 +43,10 @@ import mage.target.targetpointer.FixedTarget;
  */
 
 public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
+
     private TargetController targetController;
     private boolean setTargetPointer;
+    protected String ruleTrigger;
 
     public BeginningOfUpkeepTriggeredAbility(Effect effect, TargetController targetController, boolean isOptional) {
         this(Zone.BATTLEFIELD, effect, targetController, isOptional);
@@ -55,15 +57,21 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public BeginningOfUpkeepTriggeredAbility(Zone zone, Effect effect, TargetController targetController, boolean isOptional, boolean setTargetPointer) {
+        this(zone, effect, targetController, isOptional, setTargetPointer, null);
+    }
+
+    public BeginningOfUpkeepTriggeredAbility(Zone zone, Effect effect, TargetController targetController, boolean isOptional, boolean setTargetPointer, String ruleTrigger) {
         super(zone, effect, isOptional);
         this.targetController = targetController;
         this.setTargetPointer = setTargetPointer;
+        this.ruleTrigger = ruleTrigger;
     }
 
     public BeginningOfUpkeepTriggeredAbility(final BeginningOfUpkeepTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
         this.setTargetPointer = ability.setTargetPointer;
+        this.ruleTrigger = ability.ruleTrigger;
     }
 
     @Override
@@ -126,6 +134,9 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder(super.getRule());
+        if (ruleTrigger != null && !ruleTrigger.isEmpty()) {
+            return sb.insert(0, ruleTrigger).toString();
+        }
         switch (targetController) {
             case YOU:
                 if (this.optional) {

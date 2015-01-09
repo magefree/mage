@@ -28,8 +28,10 @@
 
 package mage.sets.apocalypse;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
@@ -106,18 +108,20 @@ class DayEffect extends ContinuousEffectImpl {
         if (this.affectedObjectsSet) {
             List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getFirstTarget(), game);
             for (Permanent creature : creatures) {
-                objects.add(creature.getId());
+                affectedObjectList.add(new MageObjectReference(creature, game));
             }
         }
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getFirstTarget(), game);
-        for (Permanent creature : creatures) {
-            if (!this.affectedObjectsSet || objects.contains(creature.getId())) {
-                creature.addPower(1);
-                creature.addToughness(1);
+        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
+            Permanent permanent = it.next().getPermanent(game);
+            if (permanent != null) {
+                permanent.addPower(1);
+                permanent.addToughness(1);
+            } else {
+                it.remove();
             }
         }
         return true;

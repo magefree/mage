@@ -150,11 +150,20 @@ public class Commander implements CommandObject{
 
     @Override
     public boolean hasAbility(UUID abilityId, Game game) {
-        if (this.getAbilities(game).containsKey(abilityId)) {
+        if (abilities.containsKey(abilityId)) {
             return true;
         }
         Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(getId());
         return  otherAbilities != null && otherAbilities.containsKey(abilityId);
+    }
+
+    @Override
+    public boolean hasAbility(Ability ability, Game game) {
+        if (abilities.contains(ability)) {
+            return true;
+        }
+        Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(getId());
+        return  otherAbilities != null && otherAbilities.contains(ability);
     }
 
     @Override

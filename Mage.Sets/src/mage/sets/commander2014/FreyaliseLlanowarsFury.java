@@ -76,7 +76,7 @@ public class FreyaliseLlanowarsFury extends CardImpl {
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
         
-        // +2: Put a 1/1 green Elf Druid creature token onto the battlefield with "{tap}: Add {G} to your mana pool."
+        // +2: Put a 1/1 green Elf Druid creature token onto the battlefield with "{T}: Add {G} to your mana pool."
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new FreyaliseLlanowarsFuryToken()), 2));
         // -2: Destroy target artifact or enchantment.
         LoyaltyAbility loyaltyAbility = new LoyaltyAbility(new DestroyTargetEffect(), -2);
@@ -103,7 +103,7 @@ public class FreyaliseLlanowarsFury extends CardImpl {
 class FreyaliseLlanowarsFuryToken extends Token {
 
     FreyaliseLlanowarsFuryToken() {
-        super("Elf Druid", "1/1 green Elf Druid creature token onto the battlefield with \"{t}: Add {G} to your mana pool.\"");
+        super("Elf Druid", "1/1 green Elf Druid creature token with \"{t}: Add {G} to your mana pool.\"");
         this.setOriginalExpansionSetCode("C14");
         this.cardType.add(CardType.CREATURE);
         this.color = ObjectColor.GREEN;

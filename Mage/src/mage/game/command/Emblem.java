@@ -159,6 +159,15 @@ public class Emblem implements CommandObject {
     }
 
     @Override
+    public boolean hasAbility(Ability ability, Game game) {
+        if (abilities.contains(ability)) {
+            return true;
+        }
+        Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(getId());
+        return  otherAbilities != null && otherAbilities.contains(ability);
+    }
+
+    @Override
     public ObjectColor getColor() {
         return emptyColor;
     }

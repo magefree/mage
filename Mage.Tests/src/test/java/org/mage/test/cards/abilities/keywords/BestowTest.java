@@ -182,7 +182,7 @@ public class BestowTest extends CardTestPlayerBase {
      * http://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/513828-bestow-far-away
      */    
     @Test
-    @Ignore
+    @Ignore  // Handling of targets of Fused spells is not handled yet in TestPlayer class
     public void bestowWithFusedSpell() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
         /**

@@ -42,7 +42,7 @@ public class LoseAbilityByEquipmentTest extends CardTestPlayerBase {
         Assert.assertEquals("Silvercoat Lion toughness",6, silvercoatLion.getToughness().getValue());
 
         // should NOT have flying
-        Assert.assertFalse("Silvercoat Lion has flying but shouldn't have",silvercoatLion.getAbilities().contains(FlyingAbility.getInstance()));
+        Assert.assertFalse("Silvercoat Lion has flying but shouldn't have",silvercoatLion.hasAbility(FlyingAbility.getInstance(), currentGame));
     }
 
 }

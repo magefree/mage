@@ -1007,9 +1007,16 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             log.debug("findPlayables: " + playableInstant.toString() + "---" + playableNonInstant.toString() + "---" + playableAbilities.toString() );
         }
     }
-
+    
     @Override
     public boolean playMana(ManaCost unpaid, Game game) {
+        payManaMode = true;
+        boolean result = playManaHandling(unpaid, game);
+        payManaMode = false;
+        return result;
+    }
+
+    protected boolean playManaHandling(ManaCost unpaid, Game game) {
 //        log.info("paying for " + unpaid.getText());
         ManaCost cost;
         List<Permanent> producers;

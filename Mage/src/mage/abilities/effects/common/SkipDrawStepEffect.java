@@ -69,8 +69,12 @@ public class SkipDrawStepEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DRAW_STEP;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType() == GameEvent.EventType.DRAW_STEP
-                && (event.getPlayerId().equals(source.getControllerId()));
+        return event.getPlayerId().equals(source.getControllerId());
     }
 }

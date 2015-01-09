@@ -88,8 +88,14 @@ public class ConstructedFormats {
             "Duel Decks: Heroes vs. Monsters",
             "Duel Decks: Jace vs. Vraska",
             "Duel Decks: Speed vs. Cunning",
+            "Friday Night Magic",
+            "Game Day",
+            "Grand Prix",
             "Guru",
+            "Judge Promo",
+            "Launch Party",
             "Unhinged",
+            "World Magic Cup Qualifier",
     };
     
     private ConstructedFormats() {
@@ -445,8 +451,26 @@ public class ConstructedFormats {
         if (format.equals("Vintage Masters")) {
             return Arrays.asList("VMA");
         }
+        if (format.equals("Friday Night Magic")) {
+            return Arrays.asList("FNMP");
+        }
+        if (format.equals("Game Day")) {
+            return Arrays.asList("MGDC");
+        }
+        if (format.equals("Grand Prix")) {
+            return Arrays.asList("GPX");
+        }
+        if (format.equals("Launch Party")) {
+            return Arrays.asList("MLP");
+        }
+        if (format.equals("World Magic Cup Qualifier")) {
+            return Arrays.asList("WMCQ");
+        }
         if (format.equals("Guru")) {
             return Arrays.asList("GUR");
+        }
+        if (format.equals("Judge Promo")) {
+            return Arrays.asList("JR");
         }
         if (format.equals("Unhinged")) {
             return Arrays.asList("UNH");

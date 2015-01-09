@@ -254,23 +254,21 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
             // Checking also by getRule() without other restrictions is a problem when a triggered ability will be copied to a permanent that had the same ability
             // already before the copy. Because then it keeps the triggered ability twice and it triggers twice.
             // e.g. 2 Biovisonary and one enchanted with Infinite Reflection
-            if (ability.getId().equals(test.getId())) {
+            if (ability.getId().equals(test.getId()) || ability.getOriginalId().equals(test.getId())) {
                 return true;
             }
-            if (ability.getOriginalId().equals(test.getId())) {
-                return true;
-            }
-            if (ability instanceof MageSingleton && test instanceof MageSingleton && ability.getRule().equals(test.getRule())) {
-                return true;
-            }
+//            if (ability instanceof MageSingleton && test instanceof MageSingleton && ability.getRule().equals(test.getRule())) {
+//                return true;
+//            }
         }
         return false;
     }
 
     @Override
     public boolean containsRule(T ability) {
+        String testRule = ability.getRule();
         for (T test: this) {
-            if (ability.getRule().equals(test.getRule())) {
+            if (testRule.equals(test.getRule())) {
                 return true;
             }
         }

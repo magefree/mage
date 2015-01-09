@@ -149,7 +149,7 @@ class LazavDimirEffect extends ContinuousEffectImpl {
                 TargetController.OPPONENT, SetTargetPointer.CARD), source.getSourceId(), game);
 
         for (Ability ability : cardToCopy.getAbilities(game)) {
-            if (!permanent.getAbilities(game).contains(ability)) {
+            if (!permanent.hasAbility(ability, game)) {
                 permanent.addAbility(ability, source.getSourceId(), game);
             }
         }

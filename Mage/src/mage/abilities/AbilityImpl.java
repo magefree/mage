@@ -105,7 +105,6 @@ public abstract class AbilityImpl implements Ability {
         this.manaCostsToPay = new ManaCostsImpl<>();
         this.costs = new CostsImpl<>();
         this.modes = new Modes();
-        //this.watchers = new ArrayList<>();
     }
 
     public AbilityImpl(final AbilityImpl ability) {
@@ -141,6 +140,7 @@ public abstract class AbilityImpl implements Ability {
         this.ruleAdditionalCostsVisible = ability.ruleAdditionalCostsVisible;
         this.costModificationActive = ability.costModificationActive;
         this.worksFaceDown = ability.worksFaceDown;
+        this.abilityWord = ability.abilityWord;
     }
 
     @Override
@@ -227,7 +227,8 @@ public abstract class AbilityImpl implements Ability {
             game.getContinuousEffects().applySpliceEffects(this, game);
         }
 
-        
+        // TODO: Because all (non targeted) choices have to be done during resolution
+        // this has to be removed, if all using effects are changed
         MageObject sourceObject = game.getObject(sourceId);
         if (sourceObject != null) {
             sourceObject.adjustChoices(this, game);
@@ -552,7 +553,13 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public void setSourceId(UUID sourceId) {
-        this.sourceId = sourceId;
+        if (this.sourceId == null) {
+            this.sourceId = sourceId;
+        } else {
+            if (!(this instanceof MageSingleton)) {
+                this.sourceId = sourceId;
+            }
+        }
         if (subAbilities != null) {
             for (Ability subAbility: subAbilities) {
                 subAbility.setSourceId(sourceId);
@@ -679,7 +686,7 @@ public abstract class AbilityImpl implements Ability {
             }
         }
         if (abilityWord != null) {
-            sbRule.insert(0, new StringBuilder("<i>").append(abilityWord.toString()).append("</i> - "));
+            sbRule.insert(0, new StringBuilder("<i>").append(abilityWord.toString()).append("</i> &mdash; "));
         }         
         String text = modes.getText();
         if (!text.isEmpty()) {

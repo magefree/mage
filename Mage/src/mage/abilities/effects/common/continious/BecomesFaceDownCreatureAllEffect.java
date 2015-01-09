@@ -61,7 +61,6 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
 
     protected Map<UUID,Ability> turnFaceUpAbilityMap = new HashMap<>();
     protected FilterPermanent filter;
-    protected ArrayList<MageObjectReference> objectList = new ArrayList<>();
 
     public BecomesFaceDownCreatureAllEffect(FilterPermanent filter) {
         super(Duration.EndOfGame, Outcome.BecomeCreature);
@@ -71,7 +70,6 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
 
     public BecomesFaceDownCreatureAllEffect(final BecomesFaceDownCreatureAllEffect effect) {
         super(effect);
-        this.objectList.addAll(effect.objectList);
         for (Map.Entry<UUID,Ability> entry: effect.turnFaceUpAbilityMap.entrySet()) {
             this.turnFaceUpAbilityMap.put(entry.getKey(), entry.getValue());
         }
@@ -87,8 +85,8 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
     public void init(Ability source, Game game) {
         super.init(source, game);
         for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            if (!perm.isFaceDown(game)) {
-                objectList.add(new MageObjectReference(perm, game));
+            if (!perm.isFaceDown(game) && !perm.canTransform()) {
+                affectedObjectList.add(new MageObjectReference(perm, game));
                 perm.setFaceDown(true, game);
                 // check for Morph
                 Card card = game.getCard(perm.getId());
@@ -106,7 +104,7 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         boolean targetExists = false;
-        for (MageObjectReference mor: objectList) {
+        for (MageObjectReference mor: affectedObjectList) {
             Permanent permanent = mor.getPermanent(game);
             if (permanent != null && permanent.isFaceDown(game)) {
                 targetExists = true;
@@ -126,7 +124,7 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
                         Card card = game.getCard(permanent.getId()); //
                         List<Ability> abilities = new ArrayList<>();
                         for (Ability ability : permanent.getAbilities(game)) {
-                            if (card != null && !card.getAbilities(game).contains(ability)) {
+                            if (card != null && !card.hasAbility(ability, game)) {
                                 // gained abilities from other sources won't be removed
                                 continue;
                             }

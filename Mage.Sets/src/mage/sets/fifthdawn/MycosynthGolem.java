@@ -103,7 +103,7 @@ class MycosynthGolemEffect extends ReplacementEffectImpl {
         if (object != null) {
             Card card = (Card) object;
             Ability ability = new AffinityForArtifactsAbility();
-            game.getState().addOtherAbility(card.getId(), ability);
+            game.getState().addOtherAbility(card, ability);
             //card.addAbility(ability);
             ability.setControllerId(source.getControllerId());
             ability.setSourceId(card.getId());
@@ -111,6 +111,11 @@ class MycosynthGolemEffect extends ReplacementEffectImpl {
         }
         return false;
     }
+    
+    @Override    
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }       
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {

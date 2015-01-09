@@ -41,7 +41,7 @@ import mage.target.common.TargetLandPermanent;
 public class IceStorm extends CardImpl {
 
     public IceStorm(UUID ownerId) {
-        super(ownerId, 75, "Ice Storm", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
+        super(ownerId, 110, "Ice Storm", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "LEA";
 
         // Destroy target land.

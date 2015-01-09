@@ -604,8 +604,17 @@ public class HumanPlayer extends PlayerImpl {
         return null;
     }
 
+
     @Override
     public boolean playMana(ManaCost unpaid, Game game) {
+        payManaMode = true;
+        boolean result = playManaHandling(unpaid, game);
+        payManaMode = false;
+        return result;
+    }
+
+    
+    protected boolean playManaHandling(ManaCost unpaid, Game game) {
         updateGameStatePriority("playMana", game);
         game.firePlayManaEvent(playerId, "Pay " + unpaid.getText());
         waitForResponse(game);

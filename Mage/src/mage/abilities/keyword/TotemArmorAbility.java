@@ -91,14 +91,16 @@ class TotemArmorEffect extends ReplacementEffectImpl {
         }
         return false;
     }
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DESTROY_PERMANENT;
+    }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DESTROY_PERMANENT) {
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-            if (sourcePermanent != null && event.getTargetId().equals(sourcePermanent.getAttachedTo())) {
-                return true;
-            }
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (sourcePermanent != null && event.getTargetId().equals(sourcePermanent.getAttachedTo())) {
+            return true;
         }
         return false;
     }

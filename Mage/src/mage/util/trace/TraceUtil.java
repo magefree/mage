@@ -201,7 +201,7 @@ public class TraceUtil {
                         MageObject object = game.getObject(ability.getSourceId());
                         log.error(uuid+"        object: " + object);
                         if (object != null) {
-                            log.error(uuid + "        contains ability: " + object.getAbilities(game).contains(ability));
+                            log.error(uuid + "        contains ability: " + object.hasAbility(ability, game));
                         }
                         Zone test = game.getState().getZone(ability.getSourceId());
                         log.error(uuid+"        test_zone: " + test);

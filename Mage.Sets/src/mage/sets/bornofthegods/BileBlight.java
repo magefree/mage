@@ -28,6 +28,7 @@
 package mage.sets.bornofthegods;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
@@ -79,17 +80,17 @@ class BileBlightEffect extends BoostAllEffect {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
+        affectedObjectList.clear();
         if (this.affectedObjectsSet) {
-            this.objects.clear();
             Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (target != null) {
                 if (target.getName().isEmpty()) { // face down creature
-                    this.objects.add(target.getId());
+                    affectedObjectList.add(new MageObjectReference(target, game));
                 } else {
                     String name = target.getLogName();
                     for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
                         if (perm.getLogName().equals(name)) {
-                            this.objects.add(perm.getId());
+                            affectedObjectList.add(new MageObjectReference(perm, game));
                         }
                     }
                 }

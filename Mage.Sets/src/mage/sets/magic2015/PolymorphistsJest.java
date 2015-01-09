@@ -27,7 +27,9 @@
  */
 package mage.sets.magic2015;
 
+import java.util.Iterator;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -90,25 +92,30 @@ class PolymorphistsJestEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (this.affectedObjectsSet) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, getTargetPointer().getFirst(game, source), game)) {
+                affectedObjectList.add(new MageObjectReference(permanent, game));
+            }
+        }
+    }
+
+    @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        switch (layer) {
-            case TypeChangingEffects_4:
-                if (sublayer == SubLayer.NA) {
-                    objects.clear();
-                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, getTargetPointer().getFirst(game, source), game)){
-                        if(permanent != null){
-                            objects.add(permanent.getId());
+        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
+            Permanent permanent = it.next().getPermanent(game);
+            if (permanent != null) {
+                switch (layer) {
+                    case TypeChangingEffects_4:
+                        if (sublayer == SubLayer.NA) {
                             permanent.getSubtype().clear();
                             permanent.getSubtype().add("Frog");
                         }
-                    }
-                }
-                break;
-           case ColorChangingEffects_5:
-               if (sublayer == SubLayer.NA) {
-                    for(UUID uuid : objects){
-                        Permanent permanent = game.getPermanent(uuid);
-                        if (permanent != null){
+
+                        break;
+                    case ColorChangingEffects_5:
+                        if (sublayer == SubLayer.NA) {
                             permanent.getColor().setBlack(false);
                             permanent.getColor().setGreen(false);
                             permanent.getColor().setBlue(false);
@@ -116,27 +123,19 @@ class PolymorphistsJestEffect extends ContinuousEffectImpl {
                             permanent.getColor().setBlack(false);
                             permanent.getColor().setColor(ObjectColor.BLUE);
                         }
-                    }
-               }
-               break;
-            case AbilityAddingRemovingEffects_6:
-                for(UUID uuid : objects){
-                    Permanent permanent = game.getPermanent(uuid);
-                    if (permanent != null){
+                        break;
+                    case AbilityAddingRemovingEffects_6:
                         permanent.removeAllAbilities(source.getSourceId(), game);
-                    }
-                }
-                break;
-            case PTChangingEffects_7:
-                if (sublayer == SubLayer.SetPT_7b) {
-                    for(UUID uuid : objects){
-                        Permanent permanent = game.getPermanent(uuid);
-                        if(permanent != null){
+                        break;
+                    case PTChangingEffects_7:
+                        if (sublayer == SubLayer.SetPT_7b) {
                             permanent.getPower().setValue(1);
                             permanent.getToughness().setValue(1);
                         }
-                    }
                 }
+            } else {
+                it.remove();
+            }
         }
         return true;
     }
@@ -146,10 +145,9 @@ class PolymorphistsJestEffect extends ContinuousEffectImpl {
         return false;
     }
 
-
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.PTChangingEffects_7 ||   layer == Layer.ColorChangingEffects_5 ||   layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.TypeChangingEffects_4;
+        return layer == Layer.PTChangingEffects_7 || layer == Layer.ColorChangingEffects_5 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.TypeChangingEffects_4;
     }
 
 }

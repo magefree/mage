@@ -41,8 +41,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterBasicLandCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.other.FaceDownPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -98,6 +96,6 @@ class TrailOfMysteryTriggeredAbility extends TurnedFaceUpAllTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Whenever a permanent you control is turned face up, if it's a creature, it gets +2/+2 until end of turn";
+        return "Whenever a permanent you control is turned face up, if it's a creature, it gets +2/+2 until end of turn.";
     }
 }

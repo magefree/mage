@@ -73,11 +73,13 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        Card card = game.getCard(sourceId);
-        if (card != null && filter.match(card, game)) {
-            Player player = game.getPlayer(card.getOwnerId());
-            if (player != null && card.equals(player.getLibrary().getFromTop(game))) {
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        Card cardOnTop = game.getCard(objectId);
+        if (cardOnTop != null &&
+                affectedControllerId.equals(source.getControllerId()) &&
+                filter.match(cardOnTop, game)) {
+            Player player = game.getPlayer(cardOnTop.getOwnerId());
+            if (player != null && cardOnTop.equals(player.getLibrary().getFromTop(game))) {
                 return true;
             }
         }

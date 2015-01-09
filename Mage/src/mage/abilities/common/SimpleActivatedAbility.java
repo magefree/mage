@@ -45,7 +45,7 @@ public class SimpleActivatedAbility extends ActivatedAbilityImpl {
         super(zone, effect, cost);
     }
 
-    public SimpleActivatedAbility(Zone zone, Effect effect, Costs costs) {
+    public SimpleActivatedAbility(Zone zone, Effect effect, Costs<Cost> costs) {
         super(zone, effect, costs);
     }
 

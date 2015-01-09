@@ -29,21 +29,20 @@
 package mage.abilities.effects.common.continious;
 
 import java.util.Locale;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.cards.Card;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
-
-import java.util.UUID;
-import mage.cards.Card;
-import mage.constants.PhaseStep;
-import mage.game.turn.Step;
 
 /**
  *
@@ -129,7 +128,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
             for (UUID cardId : targetPointer.getTargets(game, source)) {
                 Card card = game.getCard(cardId);
                 if (card != null) {
-                    game.getState().addOtherAbility(cardId, ability);
+                    game.getState().addOtherAbility(card, ability);
                     affectedTargets++;
                 }
             }
@@ -138,9 +137,9 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
             }
         } else {
             for (UUID permanentId : targetPointer.getTargets(game, source)) {
-                Permanent permanent = game.getPermanent(permanentId);
+                Permanent permanent = game.getPermanentOrLKIBattlefield(permanentId);
                 if (permanent != null) {
-                    permanent.addAbility(ability, source.getSourceId(), game);
+                    permanent.addAbility(ability, source.getSourceId(), game, false);
                     affectedTargets++;
                 }
             }

@@ -37,6 +37,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+import mage.target.Target;
 
 /**
  *
@@ -74,9 +75,14 @@ public class RegenerateTargetEffect  extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return EventType.DESTROY_PERMANENT.equals(event.getType());
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         //20110204 - 701.11c - event.getAmount() is used to signal if regeneration is allowed
-        if (event.getType() == EventType.DESTROY_PERMANENT && event.getAmount() == 0 && event.getTargetId().equals(targetPointer.getFirst(game, source)) && !this.used) {
+        if (event.getAmount() == 0 && event.getTargetId().equals(targetPointer.getFirst(game, source)) && !this.used) {
             return true;
         }
         return false;
@@ -84,10 +90,17 @@ public class RegenerateTargetEffect  extends ReplacementEffectImpl {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
-        sb.append("Regenerate target ");
-        if ( mode != null ) {
-          sb.append(mode.getTargets().get(0).getTargetName());
+        sb.append("Regenerate ");
+        Target target = mode.getTargets().get(0);
+        if (target != null) {
+            if (!target.getTargetName().toLowerCase().startsWith("another")) {
+                sb.append("target ");
+            }
+            sb.append(target.getTargetName());
         }
         return sb.toString();
     }

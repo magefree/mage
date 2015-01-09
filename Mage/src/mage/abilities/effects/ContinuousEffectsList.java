@@ -32,8 +32,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.MageSingleton;
 import mage.constants.Duration;
 import mage.game.Game;
 import org.apache.log4j.Logger;
@@ -111,15 +113,14 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
             Ability ability = it.next();
             if (ability == null) {
                 it.remove();
+            } else  if (ability instanceof MageSingleton) {
+                return false;
             } else  if (effect.isDiscarded()) {
                 it.remove();
+            } else  if (ability.getSourceId() != null && game.getObject(ability.getSourceId()) == null) { // Commander effects have no sourceId
+                it.remove(); // if the related source object does no longer exist  the effect has to be removed
             } else {
                 switch(effect.getDuration()) {
-                    case WhileOnBattlefield:
-                        if (game.getObject(ability.getSourceId()) == null) {//TODO: does this really works?? object is returned across the game
-                            it.remove();                                
-                        }
-                        break;
                     case OneUse:
                         if (effect.isUsed()) {
                             it.remove();
@@ -165,32 +166,19 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
         return effectAbilityMap.get(effectId);
     }
 
-    /**
-     * Removes an effect and / or a connected ability.
-     * If no ability for this effect is left in the effectAbilityMap, the effect will be removed.
-     * Otherwise the effect won't be removed.
-     *
-     * @param effect - effect to remove if all abilities are removed
-     * @param ability - ability to remove
-     */
-
-    public void removeEffect(T effect, Ability ability) {
-        for (Iterator<T> i = this.iterator(); i.hasNext();) {
-            T entry = i.next();
-            if (entry.equals(effect)) {
-                HashSet<Ability> abilities = effectAbilityMap.get(effect.getId());
-                if (!abilities.isEmpty()) {
-                    abilities.remove(ability);
-                }
-                if (abilities.isEmpty()) {
-                    i.remove();
+    public void removeEffects(UUID effectIdToRemove, Set<Ability> abilitiesToRemove) {
+        HashSet<Ability> abilities = effectAbilityMap.get(effectIdToRemove);
+        abilities.removeAll(abilitiesToRemove);
+        if (abilities.isEmpty()) {
+            for (Iterator<T> iterator = this.iterator(); iterator.hasNext();) {
+                ContinuousEffect effect = iterator.next();
+                if (effect.getId().equals(effectIdToRemove)) {
+                    iterator.remove();
+                    break;
                 }
             }
+            effectAbilityMap.remove(effectIdToRemove);
         }
-    }
-
-    public void removeEffectAbilityMap(UUID effectId) {
-        effectAbilityMap.remove(effectId);
     }
 
     @Override

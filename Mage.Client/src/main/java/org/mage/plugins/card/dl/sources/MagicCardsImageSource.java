@@ -16,6 +16,12 @@ public class MagicCardsImageSource implements CardImageSource {
            
     private static final Map<String, String> setNameTokenReplacement = new HashMap<String, String>() {
         {
+            put("MLP", "launch-party");
+            put("WMCQ", "world-magic-cup-qualifier");
+            put("GPX", "grand-prix");
+            put("JR", "judge-gift-program");
+            put("MGDC", "magic-game-day-cards");
+            put("FNMP", "friday-night-magic");
             put("FRF", "fate-reforged");
             put("C14", "commander-2014-edition");
             put("KTK", "khans-of-tarkir");

@@ -120,6 +120,12 @@ public class ConditionalReplacementEffect extends ReplacementEffectImpl  {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return effect.checksEventType(event, game)
+                || (otherwiseEffect != null && otherwiseEffect.checksEventType(event, game));
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!initDone) { // if simpleStaticAbility, init won't be called
             init(source, game);

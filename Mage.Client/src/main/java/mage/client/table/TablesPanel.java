@@ -148,7 +148,7 @@ public class TablesPanel extends javax.swing.JPanel {
                 UUID gameId = (UUID)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 2);
                 String action = (String)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN);
                 String deckType = (String)tableModel.getValueAt(modelRow, TableTableModel.COLUMN_DECK_TYPE);
-                String info = (String)tableModel.getValueAt(modelRow, TableTableModel.COLUMN_INFO);
+                String status = (String)tableModel.getValueAt(modelRow, TableTableModel.COLUMN_STATUS);
                 boolean isTournament = (Boolean)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 1);
                 String owner = (String)tableModel.getValueAt(modelRow, 1);
                 switch (action) {
@@ -177,7 +177,7 @@ public class TablesPanel extends javax.swing.JPanel {
                         if (isTournament) {
                             logger.info("Joining tournament " + tableId);
                             if (deckType.startsWith("Limited")) {
-                                if (!info.startsWith("PW")) {
+                                if (!status.endsWith("PW")) {
                                     session.joinTournamentTable(roomId, tableId, session.getUserName(), "Human", 1, null, "");
                                 } else {
                                     joinTableDialog.showDialog(roomId, tableId, true, deckType.startsWith("Limited"));
@@ -712,6 +712,7 @@ class TableTableModel extends AbstractTableModel {
 
     public static final int COLUMN_DECK_TYPE = 0; // column the deck type is located (starting with 0) Start string is used to check for Limited
     public static final int COLUMN_INFO = 3;
+    public static final int COLUMN_STATUS = 4;
     public static final int ACTION_COLUMN = 6; // column the action is located (starting with 0)
 
     private final String[] columnNames = new String[]{"Deck Type", "Owner / Players", "Game Type", "Info", "Status", "Created / Started", "Action"};

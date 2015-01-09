@@ -29,7 +29,7 @@ package mage.sets.timespiral;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AttacksCreatureYourControlTriggeredAbility;
+import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -69,7 +69,7 @@ public class StonebrowKrosanHero extends CardImpl {
         // Whenever a creature you control with trample attacks, it gets +2/+2 until end of turn.
         Effect effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
         effect.setText("it gets +2/+2 until end of turn");
-        this.addAbility(new AttacksCreatureYourControlTriggeredAbility(effect, false, filter, true));
+        this.addAbility(new AttacksCreatureYouControlTriggeredAbility(effect, false, filter, true));
     }
 
     public StonebrowKrosanHero(final StonebrowKrosanHero card) {

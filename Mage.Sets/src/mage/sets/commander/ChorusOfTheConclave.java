@@ -119,7 +119,7 @@ class ChorusOfTheConclaveReplacementEffect extends ReplacementEffectImpl {
                 if (xCost > 0) {
                     Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(xCost)));
                     ability.setRuleVisible(false);
-                    game.getState().addOtherAbility(card.getId(), ability);
+                    game.getState().addOtherAbility(card, ability);
                     //card.addAbility(ability);
                     ability.setControllerId(source.getControllerId());
                     ability.setSourceId(card.getId());

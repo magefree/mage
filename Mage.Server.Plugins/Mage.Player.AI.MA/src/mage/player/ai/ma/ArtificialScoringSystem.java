@@ -68,7 +68,7 @@ public class ArtificialScoringSystem {
         int score = permanent.getCounters().getCount(CounterType.CHARGE) * 30;
         score += permanent.getCounters().getCount(CounterType.LEVEL) * 30;
         score -= permanent.getDamage() * 2;
-        if (!canTap(permanent)) {
+        if (!canTap(permanent, game)) {
             score += getTappedScore(permanent);
         }
         if (permanent.getCardType().contains(CardType.CREATURE)) {
@@ -114,11 +114,11 @@ public class ArtificialScoringSystem {
         return score;
     }
 
-    private static boolean canTap(Permanent permanent) {
+    private static boolean canTap(Permanent permanent, Game game) {
         return !permanent.isTapped()
                 &&(!permanent.hasSummoningSickness()
                     ||!permanent.getCardType().contains(CardType.CREATURE)
-                    ||permanent.getAbilities().contains(HasteAbility.getInstance()));
+                    ||permanent.hasAbility(HasteAbility.getInstance(), game));
     }
 
     private static int getPositive(int value) {

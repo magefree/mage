@@ -1112,24 +1112,24 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                     if (attacker.getToughness().getValue() == blocker.getPower().getValue()
                             && attacker.getPower().getValue() == blocker.getToughness().getValue()) {
                         if (attackerValue > blockerValue
-                                || blocker.getAbilities(game).containsKey(FirstStrikeAbility.getInstance().getId())
-                                || blocker.getAbilities(game).containsKey(DoubleStrikeAbility.getInstance().getId())
-                                || blocker.getAbilities(game).contains(new ExaltedAbility())
-                                || blocker.getAbilities(game).containsKey(DeathtouchAbility.getInstance().getId())
-                                || blocker.getAbilities(game).containsKey(IndestructibleAbility.getInstance().getId())
-                                || !attacker.getAbilities(game).containsKey(FirstStrikeAbility.getInstance().getId())
-                                || !attacker.getAbilities(game).containsKey(DoubleStrikeAbility.getInstance().getId())
-                                || !attacker.getAbilities(game).contains(new ExaltedAbility())) {
+                                || blocker.hasAbility(FirstStrikeAbility.getInstance().getId(), game)
+                                || blocker.hasAbility(DoubleStrikeAbility.getInstance().getId(), game)
+                                || blocker.hasAbility(new ExaltedAbility(), game)
+                                || blocker.hasAbility(DeathtouchAbility.getInstance().getId(), game)
+                                || blocker.hasAbility(IndestructibleAbility.getInstance().getId(), game)
+                                || !attacker.hasAbility(FirstStrikeAbility.getInstance().getId(), game)
+                                || !attacker.hasAbility(DoubleStrikeAbility.getInstance().getId(), game)
+                                || !attacker.hasAbility(new ExaltedAbility(), game)) {
                             safeToAttack = false;
                         }
                     }
-                    if (attacker.getAbilities(game).containsKey(DeathtouchAbility.getInstance().getId())
-                            || attacker.getAbilities(game).containsKey(IndestructibleAbility.getInstance().getId())) {
+                    if (attacker.hasAbility(DeathtouchAbility.getInstance().getId(), game)
+                            || attacker.hasAbility(IndestructibleAbility.getInstance().getId(), game)) {
                         safeToAttack = true;
                     }
-                    if (attacker.getAbilities(game).containsKey(FlyingAbility.getInstance().getId())
-                            && !blocker.getAbilities(game).containsKey(FlyingAbility.getInstance().getId())
-                            && !blocker.getAbilities(game).containsKey(ReachAbility.getInstance().getId())) {
+                    if (attacker.hasAbility(FlyingAbility.getInstance().getId(), game)
+                            && !blocker.hasAbility(FlyingAbility.getInstance().getId(), game)
+                            && !blocker.hasAbility(ReachAbility.getInstance().getId(), game)) {
                         safeToAttack = true;
                     }
                 }

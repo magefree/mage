@@ -30,7 +30,7 @@ package mage.sets.morningtide;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksCreatureYourControlTriggeredAbility;
+import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
@@ -80,7 +80,7 @@ public class RageForger extends CardImpl {
         // When Rage Forger enters the battlefield, put a +1/+1 counter on each other Shaman creature you control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false));
         // Whenever a creature you control with a +1/+1 counter on it attacks, you may have that creature deal 1 damage to target player.
-        Ability ability = new AttacksCreatureYourControlTriggeredAbility(new RageForgerDamageEffect(), true, filterAttack, true);
+        Ability ability = new AttacksCreatureYouControlTriggeredAbility(new RageForgerDamageEffect(), true, filterAttack, true);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         

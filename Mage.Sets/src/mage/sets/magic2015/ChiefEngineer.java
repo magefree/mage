@@ -101,7 +101,7 @@ class ChiefEngineerEffect extends ReplacementEffectImpl {
         if (object != null) {
             Card card = (Card) object;
             Ability ability = new ConvokeAbility();
-            game.getState().addOtherAbility(event.getSourceId(), ability);
+            game.getState().addOtherAbility(card, ability);
             //card.addAbility(ability);
             ability.setControllerId(source.getControllerId());
             ability.setSourceId(card.getId());
@@ -109,6 +109,11 @@ class ChiefEngineerEffect extends ReplacementEffectImpl {
         }
         return false;
     }
+    
+    @Override    
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }    
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {

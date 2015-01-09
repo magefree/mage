@@ -67,7 +67,11 @@ public class Pentavus extends CardImpl {
         this.subtype.add("Construct");
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(5))));
+
+        // Pentavus enters the battlefield with five +1/+1 counters on it.
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)),
+                "with five +1/+1 counters on it"));        
+
         Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new PentaviteToken(), 1), new GenericManaCost(1));
         firstAbility.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
         this.addAbility(firstAbility);

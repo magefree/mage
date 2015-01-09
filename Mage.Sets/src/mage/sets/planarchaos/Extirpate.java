@@ -116,8 +116,8 @@ class ExtirpateEffect extends OneShotEffect {
             
             // Exile all cards with the same name
             // Building a card filter with the name
-            FilterCard filterNamedCards = new FilterCard();
-            filterNamedCards.add(new NamePredicate(chosenCard.getName()));                            
+            FilterCard filterNamedCard = new FilterCard();
+            filterNamedCard.add(new NamePredicate(chosenCard.getName()));                            
 
             // The cards you're searching for must be found and exiled if they're in the graveyard because it's a public zone.
             // Finding those cards in the hand and library is optional, because those zones are hidden (even if the hand is temporarily revealed).
@@ -129,22 +129,28 @@ class ExtirpateEffect extends OneShotEffect {
             }
 
             // search cards in hand
-            TargetCardInHand targetCardsHand = new TargetCardInHand(0, Integer.MAX_VALUE, filterNamedCards);
-            controller.chooseTarget(outcome, owner.getGraveyard(), targetCardsHand, source, game);
-            for(UUID cardId:  targetCardsHand.getTargets()) {
-                Card card = game.getCard(cardId);
-                if (card != null) {
-                    controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.HAND);
+            filterNamedCard.setMessage("card named " + chosenCard.getName() + " in the hand of " + owner.getName());
+            TargetCardInHand targetCardInHand = new TargetCardInHand(0, Integer.MAX_VALUE, filterNamedCard);
+            if (controller.choose(Outcome.Exile, owner.getHand(), targetCardInHand, game)) {
+                List<UUID> targets = targetCardInHand.getTargets();
+                for (UUID targetId : targets) {
+                    Card targetCard = owner.getHand().get(targetId, game);
+                    if (targetCard != null) {
+                        controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.HAND);                                
+                    }
                 }
             }
-
+            
             // search cards in Library
-            TargetCardInLibrary targetCardsLibrary = new TargetCardInLibrary(0, Integer.MAX_VALUE, filterNamedCards);
-            controller.searchLibrary(targetCardsLibrary, game, owner.getId());
-            for(UUID cardId:  targetCardsLibrary.getTargets()) {
-                Card card = game.getCard(cardId);
-                if (card != null) {
-                    controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY);
+            filterNamedCard.setMessage("card named " + chosenCard.getName() + " in the library of " + owner.getName());
+            TargetCardInLibrary targetCardInLibrary = new TargetCardInLibrary(0, Integer.MAX_VALUE, filterNamedCard);
+            if (controller.searchLibrary(targetCardInLibrary, game, owner.getId())) {
+                List<UUID> targets = targetCardInLibrary.getTargets();
+                for (UUID targetId : targets) {
+                    Card targetCard = owner.getLibrary().getCard(targetId, game);
+                    if (targetCard != null) {
+                        controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.LIBRARY);                                
+                    }
                 }
             }
             owner.shuffleLibrary(game);

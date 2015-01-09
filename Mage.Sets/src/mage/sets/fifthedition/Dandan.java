@@ -29,15 +29,13 @@ package mage.sets.fifthedition;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPermanent;
 import mage.cards.CardImpl;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerControlsIslandPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -59,7 +57,8 @@ public class Dandan extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Dandan can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DandanEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Island","an Island"))));
+        
         // When you control no Islands, sacrifice Dandan.
         this.addAbility(new DandanTriggeredAbility());
     }
@@ -71,46 +70,6 @@ public class Dandan extends CardImpl {
     @Override
     public Dandan copy() {
         return new Dandan(this);
-    }
-}
-
-class DandanEffect extends ReplacementEffectImpl {
-
-    public DandanEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "{this} can't attack unless defending player controls an Island";
-    }
-
-    public DandanEffect(final DandanEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DandanEffect copy() {
-        return new DandanEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARE_ATTACKER && source.getSourceId().equals(event.getSourceId())) {
-            FilterPermanent filter = new FilterPermanent();
-            filter.add(new SubtypePredicate("Island"));
-
-            if (game.getBattlefield().countAll(filter, event.getTargetId(), game) == 0) {
-                return true;
-            }
-        }
-        return false;
     }
 }
 
@@ -136,6 +95,6 @@ class DandanTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When you control no islands, sacrifice {this}.";
+        return "When you control no Islands, sacrifice {this}.";
     }
 }

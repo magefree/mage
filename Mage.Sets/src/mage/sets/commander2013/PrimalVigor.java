@@ -37,8 +37,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -89,12 +87,13 @@ class PrimalVigorTokenEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CREATE_TOKEN;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        switch (event.getType()) {
-            case CREATE_TOKEN:
-                return true;
-        }
-        return false;
+        return true;
     }
 
     @Override
@@ -112,8 +111,6 @@ class PrimalVigorTokenEffect extends ReplacementEffectImpl {
 
 class PrimalVigorCounterEffect extends ReplacementEffectImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
     PrimalVigorCounterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature, false);
         staticText = "If one or more +1/+1 counters would be placed on a creature, twice that many +1/+1 counters are placed on that creature instead";
@@ -130,13 +127,16 @@ class PrimalVigorCounterEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ADD_COUNTERS;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ADD_COUNTERS) {
-            Permanent target = game.getPermanent(event.getTargetId());
-            if (target != null && filter.match(target, game)
-                    && event.getData() != null && event.getData().equals("+1/+1")) {
-                return true;
-            }
+        Permanent target = game.getPermanent(event.getTargetId());
+        if (target != null && target.getCardType().contains(CardType.CREATURE)
+                && event.getData() != null && event.getData().equals("+1/+1")) {
+            return true;
         }
         return false;
     }

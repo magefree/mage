@@ -60,14 +60,14 @@ public class MisdirectionTest extends CardTestPlayerBase {
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rakshasa's Secret", playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Misdirection", "Rakshasa's Secret", "Rakshasa's Secret");
-        addTarget(playerA, playerA); // only possible target is player A
+        addTarget(playerB, playerA); // only legal target is player B as opponent - so player A should not be allowed
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertGraveyardCount(playerA, "Rakshasa's Secret", 1);
         assertGraveyardCount(playerB, "Misdirection", 1);
-        assertHandCount(playerB, "Silvercoat Lion", 2);
+        assertHandCount(playerB, "Silvercoat Lion", 0);
 
     }
 }
