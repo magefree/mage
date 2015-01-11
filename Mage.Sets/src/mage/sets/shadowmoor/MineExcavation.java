@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class MineExcavation extends CardImpl {
     
-    private static final FilterCard filter = new FilterCard("artifact or enchantment card");
+    private static final FilterCard filter = new FilterCard("artifact or enchantment card in a graveyard");
     
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
