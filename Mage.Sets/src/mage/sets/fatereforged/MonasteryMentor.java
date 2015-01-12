@@ -29,14 +29,15 @@ package mage.sets.fatereforged;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.ProwessAbility;
-import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.Token;
 
 /**
@@ -44,6 +45,11 @@ import mage.game.permanent.token.Token;
  * @author fireshoes
  */
 public class MonasteryMentor extends CardImpl {
+    
+    private static final FilterSpell filter = new FilterSpell("a noncreature spell");
+    static {
+        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+    }
 
     public MonasteryMentor(UUID ownerId) {
         super(ownerId, 20, "Monastery Mentor", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -56,7 +62,7 @@ public class MonasteryMentor extends CardImpl {
         // Prowess
         this.addAbility(new ProwessAbility());
         // Whenever you cast a noncreature spell, put a 1/1 white Monk creature token with prowess onto the battlefield.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new MonasteryMentorToken()), false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new MonasteryMentorToken()), filter, false));
     }
 
     public MonasteryMentor(final MonasteryMentor card) {
