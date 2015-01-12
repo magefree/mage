@@ -44,6 +44,7 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -63,7 +64,9 @@ public class ShaperParasite extends CardImpl {
         // Morph {2}{U}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{U}")));
         // When Shaper Parasite is turned face up, target creature gets +2/-2 or -2/+2 until end of turn.
-        this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new ShaperParasiteEffect()));
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new ShaperParasiteEffect());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
     public ShaperParasite(final ShaperParasite card) {
