@@ -128,15 +128,9 @@ public class MCTSPlayer extends ComputerPlayer {
         }
     }
         
-    protected List<Ability> getPlayableAbilities(Game game) {
-        List<Ability> playables = getPlayable(game, true);
-        playables.add(pass);
-        return playables;
-    }
-
     public List<Ability> getPlayableOptions(Game game) {
         List<Ability> all = new ArrayList<>();
-        List<Ability> playables = getPlayableAbilities(game);
+        List<Ability> playables = getPlayable(game, true); //getPlayableAbilities(game);
         for (Ability ability: playables) {
             List<Ability> options = game.getPlayer(playerId).getPlayableOptions(ability, game);
             if (options.isEmpty()) {
@@ -158,6 +152,7 @@ public class MCTSPlayer extends ComputerPlayer {
                 }
             }
         }
+        all.add(pass);
         return all;
     }
 

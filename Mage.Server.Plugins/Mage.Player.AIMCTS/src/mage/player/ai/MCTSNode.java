@@ -449,7 +449,7 @@ public class MCTSNode {
                         break;
                     }
                 }
-                else {
+                else if (mergeChild.combat != null && child.combat != null) {
                     if (mergeChild.combat.getValue().equals(child.combat.getValue())) {
                         if (!mergeChild.stateValue.equals(child.stateValue)) {
                             logger.info("mismatched merge states");
@@ -461,6 +461,9 @@ public class MCTSNode {
                         }
                         break;
                     }
+                }
+                else {
+                    logger.info("wtf ???");
                 }
             }
         }

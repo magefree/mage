@@ -55,10 +55,11 @@ import java.util.*;
  */
 public class SimulatedPlayerMCTS extends MCTSPlayer {
 
+    private static final boolean USE_AI_METHODS = false;
     private boolean isSimulatedPlayer;
     private static Random rnd = new Random();
     private int actionCount = 0;
-     private static final transient Logger logger = Logger.getLogger(SimulatedPlayerMCTS.class);
+    private static final transient Logger logger = Logger.getLogger(SimulatedPlayerMCTS.class);
 
     public SimulatedPlayerMCTS(UUID id, boolean isSimulatedPlayer) {
         super(id);
@@ -89,9 +90,10 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 //        logger.info("priority");
         boolean didSomething = false;
         Ability ability = getAction(game);
-//        logger.info("simulate " + ability.toString());
-        if (!(ability instanceof PassAbility))                
+        if (!(ability instanceof PassAbility)) {
             didSomething = true;
+            //logger.info("simulate action: " + ability.toString() + " state: " + game.getState());
+        }
 
         activateAbility((ActivatedAbility) ability, game);
 
@@ -100,7 +102,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     }
 
     private Ability getAction(Game game) {
-        List<Ability> playables = getPlayableAbilities(game);
+        List<Ability> playables = getPlayableOptions(game);
         Ability ability;
         while (true) {
             if (playables.size() == 1)
@@ -264,14 +266,14 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game) {
-        if (this.isHuman())
+        if (USE_AI_METHODS || this.isHuman())
             return chooseRandom(target, game);
         return super.choose(outcome, target, sourceId, game);
     }
 
     @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
-        if (this.isHuman()) {
+        if (USE_AI_METHODS || this.isHuman()) {
             return chooseRandom(target, game);
         }
         return super.choose(outcome, target, sourceId, game, options);
@@ -279,7 +281,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
-        if (this.isHuman()) {
+        if (USE_AI_METHODS || this.isHuman()) {
             if (cards.isEmpty()) {
                 return false;
             }
@@ -346,7 +348,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public boolean chooseUse(Outcome outcome, String message, Game game) {
-        if (this.isHuman()) {
+        if (USE_AI_METHODS || this.isHuman()) {
             return rnd.nextBoolean();
         }
         return super.chooseUse(outcome, message, game);
@@ -354,7 +356,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public boolean choosePile(Outcome outcome, String message, List<? extends Card> pile1, List<? extends Card> pile2, Game game) {
-        if (this.isHuman()) {
+        if (USE_AI_METHODS || this.isHuman()) {
             return rnd.nextBoolean();
         }
         return super.choosePile(outcome, message, pile1, pile2, game);
@@ -362,7 +364,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
-        if (this.isHuman()) {
+        if (USE_AI_METHODS || this.isHuman()) {
             Iterator<String> it = choice.getChoices().iterator();
             String sChoice = it.next();
             int choiceNum = rnd.nextInt(choice.getChoices().size());
@@ -377,7 +379,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public int chooseReplacementEffect(Map<String, String> rEffects, Game game) {
-        if (this.isHuman()) {
+        if (USE_AI_METHODS || this.isHuman()) {
             return rnd.nextInt(rEffects.size());
         }
         return super.chooseReplacementEffect(rEffects, game);
@@ -385,7 +387,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
-        if (this.isHuman()) {
+        if (USE_AI_METHODS || this.isHuman()) {
             return abilities.get(rnd.nextInt(abilities.size()));
         }
         return super.chooseTriggeredAbility(abilities, game);
@@ -393,7 +395,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
-        if (this.isHuman()) {
+        if (USE_AI_METHODS || this.isHuman()) {
             Iterator<Mode> it = modes.values().iterator();
             Mode mode = it.next();
             if (modes.size() == 1) {
@@ -410,7 +412,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public UUID chooseAttackerOrder(List<Permanent> attackers, Game game) {
-        if (this.isHuman()) {
+        if (USE_AI_METHODS || this.isHuman()) {
             return attackers.get(rnd.nextInt(attackers.size())).getId();
         }
         return super.chooseAttackerOrder(attackers, game);
@@ -418,7 +420,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup, List<UUID> blockerOrder, Game game) {
-        if (this.isHuman()) {
+        if (USE_AI_METHODS || this.isHuman()) {
             return blockers.get(rnd.nextInt(blockers.size())).getId();
         }
         return super.chooseBlockerOrder(blockers, combatGroup, blockerOrder, game);
@@ -426,7 +428,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID sourceId, Game game) {
-        if (this.isHuman()) {
+        if (USE_AI_METHODS || this.isHuman()) {
             int remainingDamage = damage;
             UUID targetId;
             int amount;
@@ -461,7 +463,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public int getAmount(int min, int max, String message, Game game) {
-        if (this.isHuman()) {
+        if (USE_AI_METHODS || this.isHuman()) {
             return rnd.nextInt(max - min) + min;
         }
         return super.getAmount(min, max, message, game);
