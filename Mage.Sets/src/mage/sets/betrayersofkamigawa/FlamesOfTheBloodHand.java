@@ -28,13 +28,18 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continious.CantGainLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.target.TargetPlayer;
 
 /**
@@ -52,9 +57,7 @@ public class FlamesOfTheBloodHand extends CardImpl {
         // Flames of the Blood Hand deals 4 damage to target player. The damage can't be prevented.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4, false));
         // If that player would gain life this turn, that player gains no life instead.
-        Effect effect = new CantGainLifeTargetEffect(Duration.EndOfTurn);
-        effect.setText("If that player would gain life this turn, that player gains no life instead");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new FlamesOfTheBloodHandReplacementEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
@@ -66,4 +69,42 @@ public class FlamesOfTheBloodHand extends CardImpl {
     public FlamesOfTheBloodHand copy() {
         return new FlamesOfTheBloodHand(this);
     }
+}
+
+class FlamesOfTheBloodHandReplacementEffect extends ReplacementEffectImpl {
+
+    public FlamesOfTheBloodHandReplacementEffect() {
+        super(Duration.EndOfTurn, Outcome.Benefit);
+        staticText = "If that player would gain life this turn, that player gains no life instead";
+    }
+
+    public FlamesOfTheBloodHandReplacementEffect(final FlamesOfTheBloodHandReplacementEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public FlamesOfTheBloodHandReplacementEffect copy() {
+        return new FlamesOfTheBloodHandReplacementEffect(this);
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.GAIN_LIFE;
+    }    
+    
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return event.getPlayerId().equals(getTargetPointer().getFirst(game, source));
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
+    }
+
 }

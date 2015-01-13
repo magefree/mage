@@ -28,7 +28,7 @@ public class GainLifeOpponentCost extends CostImpl {
     
     static {
         filter.add(new PlayerPredicate(TargetController.OPPONENT));
-        filter.add(new PlayerCanGainLifePredicate());
+        filter.add(new PlayerCanGainLifePredicate()); // you can't pay the costs by letting a player gain life that can't get life by rule changing effect
     }
     
     private final int amount;

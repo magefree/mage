@@ -28,17 +28,22 @@
 package mage.sets.scourge;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.continious.CantGainLifeAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -54,10 +59,9 @@ public class SulfuricVortex extends CardImpl {
 
         // At the beginning of each player's upkeep, Sulfuric Vortex deals 2 damage to that player.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2, true, "that player"), TargetController.ANY, false, true));        
+        
         // If a player would gain life, that player gains no life instead.
-        Effect effect = new CantGainLifeAllEffect(Duration.WhileOnBattlefield);
-        effect.setText("If a player would gain life, that player gains no life instead");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SulfuricVortexReplacementEffect()));
         
     }
 
@@ -69,4 +73,42 @@ public class SulfuricVortex extends CardImpl {
     public SulfuricVortex copy() {
         return new SulfuricVortex(this);
     }
+}
+
+class SulfuricVortexReplacementEffect extends ReplacementEffectImpl {
+
+    public SulfuricVortexReplacementEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        staticText = "If a player would gain life, that player gains no life instead";
+    }
+
+    public SulfuricVortexReplacementEffect(final SulfuricVortexReplacementEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public SulfuricVortexReplacementEffect copy() {
+        return new SulfuricVortexReplacementEffect(this);
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.GAIN_LIFE;
+    }    
+    
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return true;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
+    }
+
 }
