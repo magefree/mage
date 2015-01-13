@@ -33,6 +33,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -46,6 +47,8 @@ public class PressurePoint extends CardImpl {
 
         // Tap target creature.
         this.getSpellAbility().addEffect(new TapTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
