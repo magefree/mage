@@ -1,3 +1,10 @@
+#|Generate|TOK:MBP:Beast|
+#|Generate|TOK:MBP|Cat|
+#|Generate|TOK:MBP|Dragon|
+#|Generate|TOK:MBP|Elephant|
+#|Generate|TOK:MBP|Goblin|
+#|Generate|TOK:MBP|Zombie|
+
 $|Generate|TOK:MLP|Thopter|
 
 #|Generate|TOK:WMCQ|Angel|

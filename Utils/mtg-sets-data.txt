@@ -81,6 +81,7 @@ Magic 2014|M14|
 Magic 2015|M15|
 Magic: The Gathering-Commander|CMD|
 Magic: The Gathering-Conspiracy|CNS|
+Media Inserts|MBP|
 Masters Edition II|ME2|
 Masters Edition III|ME3|
 Masters Edition IV|ME4|

@@ -66,6 +66,7 @@ Magic 2013|magic2013|
 Magic 2014|magic2014|
 Magic 2015|magic2015|
 Magic: The Gathering-Commander|commander|
+Media Inserts|mediainserts|
 Magic: The Gathering-Conspiracy|conspiracy|
 Mercadian Masques|mercadianmasques|
 Mirage|mirage|

@@ -94,6 +94,7 @@ public class ConstructedFormats {
             "Guru",
             "Judge Promo",
             "Launch Party",
+            "Media Inserts",
             "Unhinged",
             "World Magic Cup Qualifier",
     };
@@ -462,6 +463,9 @@ public class ConstructedFormats {
         }
         if (format.equals("Launch Party")) {
             return Arrays.asList("MLP");
+        }
+        if (format.equals("Media Inserts")) {
+            return Arrays.asList("MBP");
         }
         if (format.equals("World Magic Cup Qualifier")) {
             return Arrays.asList("WMCQ");
