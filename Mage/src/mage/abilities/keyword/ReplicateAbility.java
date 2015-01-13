@@ -86,6 +86,7 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
         }
     }
 
+    @Override
     public boolean isActivated() {
         if (additionalCost != null) {
             return additionalCost.isActivated();
@@ -117,8 +118,8 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
                 while (player.isInGame() && again) {
                     String times = "";
                     if (additionalCost.isRepeatable()) {
-                        int activated = additionalCost.getActivateCount();
-                        times = Integer.toString(activated + 1) + (activated == 0 ? " time ":" times ");
+                        int numActivations = additionalCost.getActivateCount();
+                        times = Integer.toString(numActivations + 1) + (numActivations == 0 ? " time ":" times ");
                     }
                     if (additionalCost.canPay(ability, sourceId, controllerId, game) &&
                             player.chooseUse(Outcome.Benefit, new StringBuilder("Pay ").append(times).append(additionalCost.getText(false)).append(" ?").toString(), game)) {

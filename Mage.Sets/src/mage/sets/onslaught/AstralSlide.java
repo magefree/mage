@@ -77,7 +77,7 @@ class AstralSlideEffect extends OneShotEffect {
 
     public AstralSlideEffect() {
         super(Outcome.Detriment);
-        staticText = "Exile target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step";
+        staticText = "exile target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step";
     }
 
     public AstralSlideEffect(final AstralSlideEffect effect) {

@@ -27,6 +27,8 @@
  */
 package mage.abilities.keyword;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -71,13 +73,20 @@ import mage.util.CardUtil;
 
  public class DelveAbility extends SimpleStaticAbility implements AdjustingSourceCosts {
 
+    private List<Card> delvedCards;
+
     public DelveAbility() {
         super(Zone.STACK, null);
         this.setRuleAtTheTop(true);
+        this.delvedCards = null;
     }
 
     public DelveAbility(final DelveAbility ability) {
-      super(ability);
+        super(ability);
+        if (ability.delvedCards != null) {
+            this.delvedCards = new ArrayList<>();
+            this.delvedCards.addAll(ability.delvedCards);
+        }
     }
 
     @Override
@@ -97,15 +106,18 @@ import mage.util.CardUtil;
         if (!target.canChoose(sourceId, controllerId, game)) {
             return;
         }
-        if (!CardUtil.isCheckPlayableMode(ability) && player.chooseUse(Outcome.Detriment, "Delve cards from your graveyard?", game)) {
+        if (!CardUtil.isCheckPlayableMode(ability) &&
+                player.chooseUse(Outcome.Detriment, "Delve cards from your graveyard?", game)) {
             player.chooseTarget(Outcome.Detriment, target, ability, game);
             if (target.getTargets().size() > 0) {
+                delvedCards = new ArrayList<>();
                 int adjCost = 0;
                 for (UUID cardId: target.getTargets()) {
                     Card card = game.getCard(cardId);
                     if (card == null) {
                         continue;
                     }
+                    delvedCards.add(card);
                     player.moveCardToExileWithInfo(card, null, "", getSourceId(), game, Zone.GRAVEYARD);
                     ++adjCost;
                 }
@@ -120,4 +132,9 @@ import mage.util.CardUtil;
     public String getRule() {
       return "Delve <i>(You may exile any number of cards from your graveyard as you cast this spell. It costs {1} less to cast for each card exiled this way.)</i>";
     }
+
+    public List<Card> getDelvedCards() {
+        return delvedCards;
+    }
+
 }
