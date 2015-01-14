@@ -82,3 +82,4 @@ Mage.Server.Plugins/Mage.Draft.8PlayerBooster/target
 
 /Mage.Server/config/ai.please.cast.this.txt
 /Mage.Stats/target/
+/Utils/*_unimplemented.txt
