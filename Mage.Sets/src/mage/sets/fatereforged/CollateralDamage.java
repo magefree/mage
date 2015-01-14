@@ -28,57 +28,39 @@
 package mage.sets.fatereforged;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
  * @author LevelX2
  */
-public class HoodedAssassin extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that was dealt damage this turn");
+public class CollateralDamage extends CardImpl {
 
-    static {
-        filter.add(new WasDealtDamageThisTurnPredicate());
-    }
-    
-    public HoodedAssassin(UUID ownerId) {
-        super(ownerId, 73, "Hooded Assassin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+    public CollateralDamage(UUID ownerId) {
+        super(ownerId, 95, "Collateral Damage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "FRF";
-        this.subtype.add("Human");
-        this.subtype.add("Assassin");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
 
-        // When Hooded Assassin enters the battlefield, choose one -
-        // * Put a +1/+1 counter on Hooded Assassin.        
-        Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
-        // * Destroy target creature that was dealt damage this turn.
-        Mode mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetCreaturePermanent(filter));
-        ability.addMode(mode);
-        this.addAbility(ability);        
+        // As an additional cost to cast Collateral Damge, sacrifice a creature.
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));
+        
+        // Collateral Damage deals 3 damage to target creature or player.
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addEffect(new DamageTargetEffect(3));        
     }
 
-    public HoodedAssassin(final HoodedAssassin card) {
+    public CollateralDamage(final CollateralDamage card) {
         super(card);
     }
 
     @Override
-    public HoodedAssassin copy() {
-        return new HoodedAssassin(this);
+    public CollateralDamage copy() {
+        return new CollateralDamage(this);
     }
 }

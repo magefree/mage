@@ -28,57 +28,58 @@
 package mage.sets.fatereforged;
 
 import java.util.UUID;
-import mage.MageInt;
+import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DynamicManaEffect;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AttackingPredicate;
 
 /**
  *
  * @author LevelX2
  */
-public class HoodedAssassin extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that was dealt damage this turn");
+public class Dragonrage extends CardImpl {
 
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("attacking creature you control");
+    
     static {
-        filter.add(new WasDealtDamageThisTurnPredicate());
+        filter.add(new AttackingPredicate());
     }
     
-    public HoodedAssassin(UUID ownerId) {
-        super(ownerId, 73, "Hooded Assassin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+    
+    public Dragonrage(UUID ownerId) {
+        super(ownerId, 97, "Dragonrage", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "FRF";
-        this.subtype.add("Human");
-        this.subtype.add("Assassin");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
 
-        // When Hooded Assassin enters the battlefield, choose one -
-        // * Put a +1/+1 counter on Hooded Assassin.        
-        Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
-        // * Destroy target creature that was dealt damage this turn.
-        Mode mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetCreaturePermanent(filter));
-        ability.addMode(mode);
-        this.addAbility(ability);        
+        // Add {R} to your mana pool for each attacking creature you control. 
+        this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana, 
+                new PermanentsOnBattlefieldCount(filter)));
+        
+        // Until end of turn, attacking creatures you control gain "{R}: This creature gets +1/+0 until end of turn."
+        Ability abilityToGain = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0,Duration.EndOfTurn), new ManaCostsImpl("{R}"));
+        Effect effect = new GainAbilityAllEffect(abilityToGain, Duration.EndOfTurn, filter);
+        effect.setText("Until end of turn, attacking creatures you control gain \"{R}: This creature gets +1/+0 until end of turn.\"");
+        this.getSpellAbility().addEffect(effect);        
+        
     }
 
-    public HoodedAssassin(final HoodedAssassin card) {
+    public Dragonrage(final Dragonrage card) {
         super(card);
     }
 
     @Override
-    public HoodedAssassin copy() {
-        return new HoodedAssassin(this);
+    public Dragonrage copy() {
+        return new Dragonrage(this);
     }
 }

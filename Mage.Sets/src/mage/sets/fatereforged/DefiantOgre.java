@@ -38,47 +38,39 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetArtifactPermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class HoodedAssassin extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that was dealt damage this turn");
+public class DefiantOgre extends CardImpl {
 
-    static {
-        filter.add(new WasDealtDamageThisTurnPredicate());
-    }
-    
-    public HoodedAssassin(UUID ownerId) {
-        super(ownerId, 73, "Hooded Assassin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+    public DefiantOgre(UUID ownerId) {
+        super(ownerId, 96, "Defiant Ogre", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");
         this.expansionSetCode = "FRF";
-        this.subtype.add("Human");
-        this.subtype.add("Assassin");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
+        this.subtype.add("Ogre");
+        this.subtype.add("Warrior");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(5);
 
-        // When Hooded Assassin enters the battlefield, choose one -
-        // * Put a +1/+1 counter on Hooded Assassin.        
+        // When Defiant Ogre enters the battlefield, choose one -
+        // * Put a +1/+1 counter on Defiant Ogre.
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
-        // * Destroy target creature that was dealt damage this turn.
+        // * Destroy target artifact.
         Mode mode = new Mode();
         mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetCreaturePermanent(filter));
+        mode.getTargets().add(new TargetArtifactPermanent());
         ability.addMode(mode);
-        this.addAbility(ability);        
+        this.addAbility(ability);           
     }
 
-    public HoodedAssassin(final HoodedAssassin card) {
+    public DefiantOgre(final DefiantOgre card) {
         super(card);
     }
 
     @Override
-    public HoodedAssassin copy() {
-        return new HoodedAssassin(this);
+    public DefiantOgre copy() {
+        return new DefiantOgre(this);
     }
 }

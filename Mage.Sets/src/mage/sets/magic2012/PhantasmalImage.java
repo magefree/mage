@@ -98,7 +98,7 @@ class PhantasmalImageCopyEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (player != null && sourcePermanent != null) {
-            Target target = new TargetPermanent(new FilterCreaturePermanent());
+            Target target = new TargetPermanent(new FilterCreaturePermanent("creature (you copy from)"));
             target.setNotTarget(true);
             if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
                 player.choose(Outcome.Copy, target, source.getSourceId(), game);

@@ -28,57 +28,55 @@
 package mage.sets.fatereforged;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
+import mage.constants.Zone;
+import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
+import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class HoodedAssassin extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that was dealt damage this turn");
+public class BreakThroughTheLine extends CardImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 2 or less");
+    
     static {
-        filter.add(new WasDealtDamageThisTurnPredicate());
+        filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
     }
     
-    public HoodedAssassin(UUID ownerId) {
-        super(ownerId, 73, "Hooded Assassin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+    public BreakThroughTheLine(UUID ownerId) {
+        super(ownerId, 94, "Break Through the Line", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
         this.expansionSetCode = "FRF";
-        this.subtype.add("Human");
-        this.subtype.add("Assassin");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
 
-        // When Hooded Assassin enters the battlefield, choose one -
-        // * Put a +1/+1 counter on Hooded Assassin.        
-        Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
-        // * Destroy target creature that was dealt damage this turn.
-        Mode mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetCreaturePermanent(filter));
-        ability.addMode(mode);
-        this.addAbility(ability);        
+        // {R}: Target creature with power 2 or less gains haste until end of turn and can't be blocked this turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R}"));
+        Effect effect = new CantBeBlockedTargetEffect(Duration.EndOfTurn);
+        effect.setText("and can't be blocked this turn");
+        ability.addEffect(effect);
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+        
     }
 
-    public HoodedAssassin(final HoodedAssassin card) {
+    public BreakThroughTheLine(final BreakThroughTheLine card) {
         super(card);
     }
 
     @Override
-    public HoodedAssassin copy() {
-        return new HoodedAssassin(this);
+    public BreakThroughTheLine copy() {
+        return new BreakThroughTheLine(this);
     }
 }

@@ -182,15 +182,15 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         } 
         StringBuilder sb = new StringBuilder();
         if (this.getMinModes() == 1 && this.getMaxModes() == 3) {
-            sb.append("choose one or more - ");
+            sb.append("choose one or more ");
         }else if (this.getMinModes() == 1 && this.getMaxModes() == 2) {
-            sb.append("choose one or both - ");
+            sb.append("choose one or both ");
         } else if (this.getMinModes() == 2 && this.getMaxModes() == 2) {
-            sb.append("choose two - ");
+            sb.append("choose two ");
         } else {
-            sb.append("choose one - ");
+            sb.append("choose one ");
         }
-        sb.append("<br>");            
+        sb.append("&mdash;<br>");            
         for (Mode mode: this.values()) {
             sb.append("&bull  ");
             sb.append(mode.getEffects().getTextStartingUpperCase(mode));
