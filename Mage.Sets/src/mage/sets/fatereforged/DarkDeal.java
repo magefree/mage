@@ -48,6 +48,7 @@ public class DarkDeal extends CardImpl {
         this.expansionSetCode = "FRF";
 
         // Each player discards all the cards in his or her hand, then draws that many cards minus one.
+        this.getSpellAbility().addEffect(new DarkDealEffect());
     }
 
     public DarkDeal(final DarkDeal card) {
@@ -62,12 +63,12 @@ public class DarkDeal extends CardImpl {
 
 class DarkDealEffect extends OneShotEffect {
 
-    public DarkDealEffect() {
+    DarkDealEffect() {
         super(Outcome.Detriment);
         this.staticText = "Each player discards all the cards in his or her hand, then draws that many cards minus one";
     }
 
-    public DarkDealEffect(final DarkDealEffect effect) {
+    DarkDealEffect(final DarkDealEffect effect) {
         super(effect);
     }
 
@@ -80,10 +81,10 @@ class DarkDealEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for(UUID playerId :controller.getInRange()) {
+            for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    int cardsInHand = player.getLibrary().size();
+                    int cardsInHand = player.getHand().size();
                     player.discard(cardsInHand, false, source, game);
                     if (cardsInHand > 1) {
                         player.drawCards(cardsInHand - 1, game);

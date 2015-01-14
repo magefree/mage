@@ -70,7 +70,7 @@ public class AncestralVengeance extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature gets -1/-1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1,-1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-1, -1, Duration.WhileOnBattlefield)));
     }
 
     public AncestralVengeance(final AncestralVengeance card) {
