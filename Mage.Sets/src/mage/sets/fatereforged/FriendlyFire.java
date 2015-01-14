@@ -53,7 +53,7 @@ public class FriendlyFire extends CardImpl {
         super(ownerId, 101, "Friendly Fire", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
         this.expansionSetCode = "FRF";
 
-        // Target creature's controller reveals a card at random from his or her hand. Friendly fire deals damage to that creature and that player equal to the revealed card's converted mana cost.
+        // Target creature's controller reveals a card at random from his or her hand. Friendly Fire deals damage to that creature and that player equal to the revealed card's converted mana cost.
         this.getSpellAbility().addEffect(new FriendlyFireEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
@@ -73,7 +73,7 @@ class FriendlyFireEffect extends OneShotEffect {
 
     public FriendlyFireEffect() {
         super(Outcome.Discard);
-        this.staticText = "Target creature's controller reveals a card at random from his or her hand. Friendly fire deals damage to that creature and that player equal to the revealed card's converted mana cost";
+        this.staticText = "Target creature's controller reveals a card at random from his or her hand. {this} deals damage to that creature and that player equal to the revealed card's converted mana cost";
     }
 
     public FriendlyFireEffect(final FriendlyFireEffect effect) {
