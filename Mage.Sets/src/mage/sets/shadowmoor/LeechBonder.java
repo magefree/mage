@@ -45,6 +45,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -94,7 +95,7 @@ public class LeechBonder extends CardImpl {
 class LeechBonderEffect extends OneShotEffect {
 
     public LeechBonderEffect() {
-        super(Outcome.Detriment);
+        super(Outcome.AIDontUseIt);
         this.staticText = "Move a counter from target creature onto a second target creature";
     }
 
@@ -109,26 +110,29 @@ class LeechBonderEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent fromPermanent = game.getPermanent(source.getFirstTarget());
         Permanent toPermanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (fromPermanent == null
                 || toPermanent == null
-                || you == null) {
+                || controller == null) {
             return false;
         }
         Choice choice = new ChoiceImpl();
-        Set<String> possibleChoices = new HashSet<String>();
+        Set<String> possibleChoices = new HashSet<>();
         for (String counterName : fromPermanent.getCounters().keySet()) {
             possibleChoices.add(counterName);
         }
         choice.setChoices(possibleChoices);
-        you.choose(Outcome.Neutral, choice, game);
-        String chosen = choice.getChoice();
-        if (fromPermanent.getCounters().containsKey(chosen)) {
-            fromPermanent.removeCounters(chosen, 1, game);
-            toPermanent.addCounters(chosen, 1, game);
+        if (controller.choose(Outcome.AIDontUseIt, choice, game)) {
+            String chosen = choice.getChoice();
+            if (fromPermanent.getCounters().containsKey(chosen)) {
+                Counter counter = new Counter(chosen, 1);
+                fromPermanent.removeCounters(counter, game);
+                toPermanent.addCounters(counter, game);
+                return true;
+            }
         }
-        return true;
+        return false;
     }
 }
