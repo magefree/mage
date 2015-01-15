@@ -43,6 +43,7 @@ import mage.cards.CardImpl;
 public class UrzasTower extends CardImpl {
     public UrzasTower(UUID ownerId) {
         super(ownerId, 449, "Urza's Tower", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
+        this.subtype.add("Urza's Tower");
         this.expansionSetCode = "5ED";
 
         // {T}: Add {1} to your mana pool. If you control an Urza's Mine and an Urza's Power-Plant, add {3} to your mana pool instead.
