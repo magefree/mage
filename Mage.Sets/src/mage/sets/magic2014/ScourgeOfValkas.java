@@ -45,9 +45,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ThisPermanentPredicate;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -60,10 +58,7 @@ public class ScourgeOfValkas extends CardImpl {
     private final static FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("Dragons you control");
 
     static {
-        filter.add(Predicates.or(
-                new ThisPermanentPredicate(), 
-                new SubtypePredicate("Dragon")
-        ));        
+        filter.add(new SubtypePredicate("Dragon"));       
         filter2.add(new SubtypePredicate("Dragon"));
     }
     
