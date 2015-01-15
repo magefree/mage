@@ -40,7 +40,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
@@ -94,7 +93,7 @@ public class ManifestEffect extends OneShotEffect {
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("Manifest the top ");
+        StringBuilder sb = new StringBuilder("manifest the top ");
         if (amount > 1) {
             sb.append(CardUtil.numberToText(amount)).append(" cards ");
         } else {

@@ -122,7 +122,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
             sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName()).append(" get ");
         } else {
             if (!target.getTargetName().toUpperCase().startsWith("ANOTHER")) {
-                sb.append("Target ");
+                sb.append("target ");
             }
             sb.append(target.getTargetName()).append(" gets ");
         }
