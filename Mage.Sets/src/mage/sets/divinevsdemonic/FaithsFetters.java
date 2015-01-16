@@ -71,11 +71,11 @@ public class FaithsFetters extends CardImpl {
         this.addAbility(ability);
         // When Faith's Fetters enters the battlefield, you gain 4 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4)));
-        // Enchanted permanent's activated abilities can't be activated unless they're mana abilities. If enchanted permanent is a creature, it can't attack or block.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new FaithsFettersEffect());
+        // Enchanted permanent can't attack or block, and its activated abilities can't be activated unless they're mana abilities.
         Effect effect = new CantAttackBlockAttachedEffect(AttachmentType.AURA);
-        effect.setText("If enchanted permanent is a creature, it can't attack or block");
-        ability.addEffect(effect);
+        effect.setText("Enchanted permanent can't attack or block,");
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability.addEffect(new FaithsFettersEffect());
         this.addAbility(ability);
     }
 
@@ -93,7 +93,7 @@ class FaithsFettersEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public FaithsFettersEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Enchanted permanent's activated abilities can't be activated unless they're mana abilities";
+        staticText = "and its activated abilities can't be activated unless they're mana abilities";
     }
 
     public FaithsFettersEffect(final FaithsFettersEffect effect) {

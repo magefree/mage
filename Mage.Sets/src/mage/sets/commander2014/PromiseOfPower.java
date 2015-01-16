@@ -70,7 +70,7 @@ public class PromiseOfPower extends CardImpl {
         effect.setText("and you lose 5 life");
         this.getSpellAbility().addEffect(effect);
 
-        // - Put an X/X black Demon creature token with flying onto the battlefield, where X is the number of cards in your hand as the token enters the battlefield.
+        // - Put an X/X black Demon creature token with flying onto the battlefield, where X is the number of cards in your hand.
         Mode mode = new Mode();
         mode.getEffects().add(new PromiseOfPowerEffect());
         this.getSpellAbility().getModes().addMode(mode);
@@ -93,7 +93,7 @@ class PromiseOfPowerEffect extends OneShotEffect {
 
     public PromiseOfPowerEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "Put an X/X black Demon creature token with flying onto the battlefield, where X is the number of cards in your hand as the token enters the battlefield";
+        staticText = "Put an X/X black Demon creature token with flying onto the battlefield, where X is the number of cards in your hand";
     }
 
     public PromiseOfPowerEffect(PromiseOfPowerEffect ability) {
