@@ -34,6 +34,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -58,6 +59,9 @@ public class ArchfiendOfDepravity extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        
         // At the beginning of each opponent's end step, that player chooses up to two creatures he or she controls, then sacrifices the rest.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new ArchfiendOfDepravityEffect(), TargetController.OPPONENT, false));
     }

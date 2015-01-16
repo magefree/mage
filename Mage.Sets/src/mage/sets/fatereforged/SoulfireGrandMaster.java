@@ -173,7 +173,7 @@ class SoulfireGrandMasterCastFromHandReplacementEffect extends ReplacementEffect
     SoulfireGrandMasterCastFromHandReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.ReturnToHand);
         this.spellId = null;
-        this.staticText = "The next time you cast an instant or sorcery spell from your hand this turn, put that card into your hand instead of your graveyard as it resolves";
+        this.staticText = "The next time you cast an instant or sorcery spell from your hand this turn, put that card into your hand instead of into your graveyard as it resolves";
     }
 
     SoulfireGrandMasterCastFromHandReplacementEffect(SoulfireGrandMasterCastFromHandReplacementEffect effect) {

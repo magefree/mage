@@ -53,7 +53,7 @@ public class Cloudform extends CardImpl {
         super(ownerId, 32, "Cloudform", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
         this.expansionSetCode = "FRF";
 
-        // When Cloudform enters the battlefield, it becomes an aura with enchant creature. Manifest the top card of your library and attach Cloudform to it.
+        // When Cloudform enters the battlefield, it becomes an Aura with enchant creature. Manifest the top card of your library and attach Cloudform to it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesAuraAttachToManifestSourceEffect()));
         
         // Enchanted creature has flying and hexproof.
