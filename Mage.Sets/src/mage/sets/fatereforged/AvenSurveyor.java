@@ -34,6 +34,7 @@ import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -53,6 +54,9 @@ public class AvenSurveyor extends CardImpl {
         this.subtype.add("Scout");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+
+        // FLying
+        this.addAbility(FlyingAbility.getInstance());
 
         // When Aven Surveyor enters the battlefield, choose one -
         // * Put a +1/+1 counter on Aven Surveyor
