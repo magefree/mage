@@ -25,45 +25,34 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.fatereforged;
 
-package mage.abilities.condition.common;
-
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.filter.Filter;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.game.Game;
+import java.util.UUID;
+import mage.abilities.effects.keyword.BolsterEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
  * @author LevelX2
  */
-public class FerociousCondition  implements Condition {
+public class CachedDefenses extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    public CachedDefenses(UUID ownerId) {
+        super(ownerId, 126, "Cached Defenses", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
+        this.expansionSetCode = "FRF";
 
-    static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
+        // Bolster 3.
+        this.getSpellAbility().addEffect(new BolsterEffect(3));
     }
 
-    private static final FerociousCondition fInstance = new FerociousCondition();
-
-    private FerociousCondition() {};
-
-    public static FerociousCondition getInstance() {
-        return fInstance;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0;
+    public CachedDefenses(final CachedDefenses card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return "you control a creature with power 4 or greater";
+    public CachedDefenses copy() {
+        return new CachedDefenses(this);
     }
-
-
 }

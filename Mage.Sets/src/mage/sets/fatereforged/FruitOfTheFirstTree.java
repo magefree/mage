@@ -25,9 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.sets.fatereforged;
 
 import java.util.UUID;
+import static javax.xml.bind.JAXBIntrospector.getValue;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
@@ -46,16 +47,14 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Plopman
+ * @author LevelX2
  */
-public class BanewaspAffliction extends CardImpl {
+public class FruitOfTheFirstTree extends CardImpl {
 
-    public BanewaspAffliction(UUID ownerId) {
-        super(ownerId, 65, "Banewasp Affliction", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "ALA";
+    public FruitOfTheFirstTree(UUID ownerId) {
+        super(ownerId, 132, "Fruit of the First Tree", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
+        this.expansionSetCode = "FRF";
         this.subtype.add("Aura");
-
-        this.color.setBlack(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -64,44 +63,43 @@ public class BanewaspAffliction extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // When enchanted creature dies, that creature's controller loses life equal to its toughness.
-        this.addAbility( new DiesAttachedTriggeredAbility(new BanewaspAfflictionLoseLifeEffect(), "enchanted creature"));
+        // When enchanted creature dies, you gain X life and draw X cards, where X is its toughness.
+        this.addAbility( new DiesAttachedTriggeredAbility(new FruitOfTheFirstTreeEffect(), "enchanted creature"));
     }
 
-    public BanewaspAffliction(final BanewaspAffliction card) {
+    public FruitOfTheFirstTree(final FruitOfTheFirstTree card) {
         super(card);
     }
 
     @Override
-    public BanewaspAffliction copy() {
-        return new BanewaspAffliction(this);
+    public FruitOfTheFirstTree copy() {
+        return new FruitOfTheFirstTree(this);
     }
 }
 
+class FruitOfTheFirstTreeEffect extends OneShotEffect {
 
-class BanewaspAfflictionLoseLifeEffect extends OneShotEffect {
-
-    public BanewaspAfflictionLoseLifeEffect() {
-        super(Outcome.LoseLife);
+    public FruitOfTheFirstTreeEffect() {
+        super(Outcome.Benefit);
     }
 
-    public BanewaspAfflictionLoseLifeEffect(BanewaspAfflictionLoseLifeEffect copy) {
+    public FruitOfTheFirstTreeEffect(FruitOfTheFirstTreeEffect copy) {
         super(copy);
     }
 
-
     @Override
-    public BanewaspAfflictionLoseLifeEffect copy() {
-        return new BanewaspAfflictionLoseLifeEffect(this);
+    public FruitOfTheFirstTreeEffect copy() {
+        return new FruitOfTheFirstTreeEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent creature = (Permanent) getValue("attachedTo");
-        if(creature != null){
-            Player player = game.getPlayer(creature.getOwnerId());
-            if (player != null) {
-                player.loseLife(creature.getToughness().getValue(), game);
+        if (creature != null){
+            Player controller = game.getPlayer(creature.getOwnerId());
+            if (controller != null) {
+                controller.gainLife(creature.getToughness().getValue(), game);
+                controller.drawCards(creature.getToughness().getValue(), game);
                 return true;
             }
         }
@@ -110,7 +108,7 @@ class BanewaspAfflictionLoseLifeEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        return "that creature's controller loses life equal to its toughness";
+        return "you gain X life and draw X cards, where X is its toughness";
     }
 
 }

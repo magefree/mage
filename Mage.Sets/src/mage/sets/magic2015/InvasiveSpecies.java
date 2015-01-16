@@ -61,9 +61,8 @@ public class InvasiveSpecies extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Invasive Species enters the battlefield, return another permanent you control to its owner's hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter)));
         
-        this.addAbility(ability);
     }
 
     public InvasiveSpecies(final InvasiveSpecies card) {

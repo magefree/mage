@@ -25,45 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.fatereforged;
 
-package mage.abilities.condition.common;
-
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.filter.Filter;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.game.Game;
+import java.util.UUID;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class FerociousCondition  implements Condition {
+public class ReturnToTheEarth extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterPermanent filter = new FilterPermanent("artifact, enchantment, or creature with flying");
 
     static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.ENCHANTMENT),
+                Predicates.and(
+                    new CardTypePredicate(CardType.CREATURE),
+                    new AbilityPredicate(FlyingAbility.class))
+              ));
     }
 
-    private static final FerociousCondition fInstance = new FerociousCondition();
+    public ReturnToTheEarth(UUID ownerId) {
+        super(ownerId, 135, "Return to the Earth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
+        this.expansionSetCode = "FRF";
 
-    private FerociousCondition() {};
+        // Destroy target artifact, enchantment, or creature with flying.
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
-    public static FerociousCondition getInstance() {
-        return fInstance;
+    }
+
+    public ReturnToTheEarth(final ReturnToTheEarth card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0;
+    public ReturnToTheEarth copy() {
+        return new ReturnToTheEarth(this);
     }
-
-    @Override
-    public String toString() {
-        return "you control a creature with power 4 or greater";
-    }
-
-
 }

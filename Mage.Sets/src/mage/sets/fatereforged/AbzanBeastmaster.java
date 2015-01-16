@@ -25,45 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.fatereforged;
 
-package mage.abilities.condition.common;
-
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.filter.Filter;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.game.Game;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.condition.common.ControlsCreatureGreatestToughnessCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
 
 /**
  *
  * @author LevelX2
  */
-public class FerociousCondition  implements Condition {
+public class AbzanBeastmaster extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    public AbzanBeastmaster(UUID ownerId) {
+        super(ownerId, 119, "Abzan Beastmaster", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        this.expansionSetCode = "FRF";
+        this.subtype.add("Hound");
+        this.subtype.add("Shaman");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-    static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
+        // At the beginning of your upkeep, draw a card if you control the creature with the greatest toughness or tied for the greatest toughness.
+        this.addAbility(new ConditionalTriggeredAbility(
+                new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(1), TargetController.YOU, false),
+                ControlsCreatureGreatestToughnessCondition.getInstance(),
+                "At the beginning of your upkeep, draw a card if you control the creature with the greatest toughness or tied for the greatest toughness."
+        ));
     }
 
-    private static final FerociousCondition fInstance = new FerociousCondition();
-
-    private FerociousCondition() {};
-
-    public static FerociousCondition getInstance() {
-        return fInstance;
+    public AbzanBeastmaster(final AbzanBeastmaster card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0;
+    public AbzanBeastmaster copy() {
+        return new AbzanBeastmaster(this);
     }
-
-    @Override
-    public String toString() {
-        return "you control a creature with power 4 or greater";
-    }
-
-
 }

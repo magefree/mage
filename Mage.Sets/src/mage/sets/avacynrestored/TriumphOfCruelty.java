@@ -31,7 +31,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.common.ControlsBiggestOrTiedCreatureCondition;
+import mage.abilities.condition.common.ControlsCreatureGreatestPowerCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
@@ -59,7 +59,7 @@ public class TriumphOfCruelty extends CardImpl {
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new DiscardTargetEffect(1), TargetController.YOU, false);
         Target target =  new TargetOpponent();
         ability.addTarget(target);
-        this.addAbility(new ConditionalTriggeredAbility(ability, ControlsBiggestOrTiedCreatureCondition.getInstance(), ruleText));
+        this.addAbility(new ConditionalTriggeredAbility(ability, ControlsCreatureGreatestPowerCondition.getInstance(), ruleText));
     }
 
     public TriumphOfCruelty(final TriumphOfCruelty card) {

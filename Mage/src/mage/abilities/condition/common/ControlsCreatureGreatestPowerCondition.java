@@ -25,45 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.condition.common;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
+ * Condition for:
+ *   - if you control the creature with the greatest power or tied for the greatest power
  *
- * @author LevelX2
+ * @author noxx
  */
-public class FerociousCondition  implements Condition {
+public class ControlsCreatureGreatestPowerCondition implements Condition {
+
+    private static final ControlsCreatureGreatestPowerCondition fInstance = new ControlsCreatureGreatestPowerCondition();
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
-    static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
-    }
-
-    private static final FerociousCondition fInstance = new FerociousCondition();
-
-    private FerociousCondition() {};
-
-    public static FerociousCondition getInstance() {
+    public static Condition getInstance() {
         return fInstance;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0;
+        Set<UUID> controllers = new HashSet<>();
+        Integer maxPower = null;
+
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
+        for (Permanent permanent : permanents) {
+            if (permanent == null) {
+                continue;
+            }
+
+            int power = permanent.getPower().getValue();
+            if (maxPower == null || power > maxPower) {
+                maxPower = permanent.getPower().getValue();
+                controllers.clear();
+            }
+            if (power == maxPower) {
+                controllers.add(permanent.getControllerId());
+            }
+        }
+        return controllers.contains(source.getControllerId());
     }
 
     @Override
     public String toString() {
-        return "you control a creature with power 4 or greater";
+        return "you control the creature with the greatest power or tied for the greatest power";
     }
-
 
 }

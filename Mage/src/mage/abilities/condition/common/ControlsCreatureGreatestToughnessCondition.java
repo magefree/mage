@@ -27,26 +27,25 @@
  */
 package mage.abilities.condition.common;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-
 /**
  * Condition for:
- *   - if you control the creature with the greatest power or tied for the greatest power
+ *   - if you control the creature with the greatest toughness or tied for the greatest toughness
  *
- * @author noxx
+ * @author LevelX2
  */
-public class ControlsBiggestOrTiedCreatureCondition implements Condition {
+public class ControlsCreatureGreatestToughnessCondition implements Condition {
 
-    private static ControlsBiggestOrTiedCreatureCondition fInstance = new ControlsBiggestOrTiedCreatureCondition();
+    private static final ControlsCreatureGreatestToughnessCondition fInstance = new ControlsCreatureGreatestToughnessCondition();
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
@@ -57,7 +56,7 @@ public class ControlsBiggestOrTiedCreatureCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Set<UUID> controllers = new HashSet<>();
-        Integer maxPower = null;
+        Integer maxToughness = null;
 
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
         for (Permanent permanent : permanents) {
@@ -65,15 +64,21 @@ public class ControlsBiggestOrTiedCreatureCondition implements Condition {
                 continue;
             }
 
-            int power = permanent.getPower().getValue();
-            if (maxPower == null || power > maxPower) {
-                maxPower = permanent.getPower().getValue();
+            int toughness = permanent.getToughness().getValue();
+            if (maxToughness == null || toughness > maxToughness) {
+                maxToughness = permanent.getToughness().getValue();
                 controllers.clear();
             }
-            if (power == maxPower) {
+            if (toughness == maxToughness) {
                 controllers.add(permanent.getControllerId());
             }
         }
         return controllers.contains(source.getControllerId());
     }
+
+    @Override
+    public String toString() {
+        return "you control the creature with the greatest toughness or tied for the greatest toughness";
+    }
+
 }

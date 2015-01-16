@@ -25,45 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.fatereforged;
 
-package mage.abilities.condition.common;
-
+import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.filter.Filter;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.game.Game;
+import mage.abilities.Mode;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.counters.CounterType;
+import mage.filter.common.FilterBasicLandCard;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
  * @author LevelX2
  */
-public class FerociousCondition  implements Condition {
+public class AinokGuide extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    public AinokGuide(UUID ownerId) {
+        super(ownerId, 121, "Ainok Guide", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "FRF";
+        this.subtype.add("Hound");
+        this.subtype.add("Scout");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-    static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
+        // When Ainok Guide enters the battlefield, choose one -
+        // * Put a +1/+1 counter on Ainok Guide.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+
+        // * Search your library for a basic land card, reveal it, then shuffle your library and put that card on top of it.
+        Mode mode = new Mode();
+        mode.getEffects().add(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true, true));
+        ability.addMode(mode);
+        this.addAbility(ability);
+
     }
 
-    private static final FerociousCondition fInstance = new FerociousCondition();
-
-    private FerociousCondition() {};
-
-    public static FerociousCondition getInstance() {
-        return fInstance;
+    public AinokGuide(final AinokGuide card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0;
+    public AinokGuide copy() {
+        return new AinokGuide(this);
     }
-
-    @Override
-    public String toString() {
-        return "you control a creature with power 4 or greater";
-    }
-
-
 }

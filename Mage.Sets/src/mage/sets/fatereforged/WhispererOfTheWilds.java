@@ -25,45 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.fatereforged;
 
-package mage.abilities.condition.common;
-
+import java.util.UUID;
+import mage.MageInt;
+import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.filter.Filter;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.game.Game;
+import mage.abilities.condition.common.FerociousCondition;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.mana.ActivateIfConditionManaAbility;
+import mage.abilities.mana.GreenManaAbility;
+import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
  * @author LevelX2
  */
-public class FerociousCondition  implements Condition {
+public class WhispererOfTheWilds extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    public WhispererOfTheWilds(UUID ownerId) {
+        super(ownerId, 144, "Whisperer of the Wilds", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "FRF";
+        this.subtype.add("Human");
+        this.subtype.add("Shaman");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(2);
 
-    static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
+        // {T}: Add {G} to your mana pool.
+        this.addAbility(new GreenManaAbility());
+
+        // Ferocious - {T}: Add {G}{G} to your mana pool. Activate this ability only if you control a creature with power 4 or greater.
+        Ability ability = new ActivateIfConditionManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.GreenMana(2)), new TapSourceCost(), FerociousCondition.getInstance());
+        ability.setAbilityWord(AbilityWord.FEROCIOUS);
+        this.addAbility(ability);
     }
 
-    private static final FerociousCondition fInstance = new FerociousCondition();
-
-    private FerociousCondition() {};
-
-    public static FerociousCondition getInstance() {
-        return fInstance;
+    public WhispererOfTheWilds(final WhispererOfTheWilds card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0;
+    public WhispererOfTheWilds copy() {
+        return new WhispererOfTheWilds(this);
     }
-
-    @Override
-    public String toString() {
-        return "you control a creature with power 4 or greater";
-    }
-
-
 }

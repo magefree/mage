@@ -31,7 +31,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.common.ControlsBiggestOrTiedCreatureCondition;
+import mage.abilities.condition.common.ControlsCreatureGreatestPowerCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -54,7 +54,7 @@ public class TriumphOfFerocity extends CardImpl {
 
         // At the beginning of your upkeep, draw a card if you control the creature with the greatest power or tied for the greatest power.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(1), TargetController.YOU, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, ControlsBiggestOrTiedCreatureCondition.getInstance(), ruleText));
+        this.addAbility(new ConditionalTriggeredAbility(ability, ControlsCreatureGreatestPowerCondition.getInstance(), ruleText));
     }
 
     public TriumphOfFerocity(final TriumphOfFerocity card) {
