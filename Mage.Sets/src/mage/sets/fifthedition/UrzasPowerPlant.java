@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
  */
 public class UrzasPowerPlant extends CardImpl {
     public UrzasPowerPlant(UUID ownerId) {
-        super(ownerId, 448, "Urza's Power Plant", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
+        super(ownerId, 448, "Urza's Power-Plant", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
         this.subtype.add("Urza's Power Plant");
         this.expansionSetCode = "5ED";
 

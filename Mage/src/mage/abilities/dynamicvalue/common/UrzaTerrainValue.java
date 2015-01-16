@@ -17,7 +17,7 @@ public class UrzaTerrainValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         FilterControlledPermanent pp = new FilterControlledPermanent("Urza's Power Plant");
-        pp.add(new SubtypePredicate("Urza's Power Plant"));
+        pp.add(new SubtypePredicate("Urza's Power-Plant"));
         PermanentsOnBattlefieldCount ppP = new PermanentsOnBattlefieldCount(pp);
         if (ppP.calculate(game, sourceAbility, effect) < 1)
         {
