@@ -30,14 +30,13 @@ package mage.sets.exodus;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -92,7 +91,7 @@ class CataclysmEffect extends OneShotEffect {
 
     public CataclysmEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "Each player chooses from the permanents he or she controls an artifact, a creature, an enchantment, and a land, then sacrifices the rest";
+        staticText = "Each player chooses from among the permanents he or she controls an artifact, a creature, an enchantment, and a land, then sacrifices the rest";
     }
 
     public CataclysmEffect(CataclysmEffect effect) {

@@ -66,7 +66,7 @@ public class AshcloudPhoenix extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         
-        // When Ashcloud Phoenix dies, return it to the battlefield face down.
+        // When Ashcloud Phoenix dies, return it to the battlefield face down under your control.
         this.addAbility(new DiesTriggeredAbility(new AshcloudPhoenixEffect()));
         
         // Morph {4}{R}{R}
@@ -92,7 +92,7 @@ class AshcloudPhoenixEffect extends OneShotEffect {
     
     AshcloudPhoenixEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "return it to the battlefield face down";
+        this.staticText = "return it to the battlefield face down under your control";
     }
     
     AshcloudPhoenixEffect(final AshcloudPhoenixEffect effect) {

@@ -28,10 +28,6 @@
 package mage.sets.lorwyn;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,6 +39,10 @@ import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.effects.common.continious.SetPowerToughnessAllEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -64,13 +64,13 @@ public class MirrorEntity extends CardImpl {
 
         // Changeling
         this.addAbility(ChangelingAbility.getInstance());
-        // {X}: Creatures you control become X/X and gain all creature types until end of turn.
+        // {X}: Until end of turn, creatures you control have base power and toughness X/X and gain all creature types.
         DynamicValue variableMana = new ManacostVariableValue();
         Effect effect = new SetPowerToughnessAllEffect(variableMana, variableMana, Duration.EndOfTurn, filter, true);
-        effect.setText("Creatures you control become X/X");
+        effect.setText("Until end of turn, creatures you control have base power and toughness X/X");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new VariableManaCost());
         effect = new GainAbilityAllEffect(ChangelingAbility.getInstance(), Duration.EndOfTurn, filter);
-        effect.setText("and gain all creature types until end of turn");
+        effect.setText("and gain all creature types");
         ability.addEffect(effect);
         this.addAbility(ability);
     }

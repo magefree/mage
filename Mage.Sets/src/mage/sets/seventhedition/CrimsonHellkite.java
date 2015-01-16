@@ -69,9 +69,9 @@ public class CrimsonHellkite extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // {X}, {tap}: Crimson Hellkite deals X damage to target creature. Spend only red mana this way.
+        // {X}, {tap}: Crimson Hellkite deals X damage to target creature. Spend only red mana on X.
         Effect effect = new DamageTargetEffect(new ManacostVariableValue());
-        effect.setText("{this} deals X damage to target creature. Spend only red mana this way");
+        effect.setText("{this} deals X damage to target creature. Spend only red mana on X");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
         VariableCost variableCost = ability.getManaCostsToPay().getVariableCosts().get(0);

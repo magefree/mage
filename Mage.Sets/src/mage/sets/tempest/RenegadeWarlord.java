@@ -28,15 +28,14 @@
 package mage.sets.tempest;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
 
 /**
@@ -49,7 +48,7 @@ public class RenegadeWarlord extends CardImpl {
         super(ownerId, 197, "Renegade Warlord", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Human");
-        this.subtype.add("Warrior");
+        this.subtype.add("Soldier");
         this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

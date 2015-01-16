@@ -56,7 +56,7 @@ public class SoltariChampion extends CardImpl {
 
         // Shadow
         this.addAbility(ShadowAbility.getInstance());
-        // Whenever Soltari Champion attacks, all other creatures you control get +1/+1 until end of turn.
+        // Whenever Soltari Champion attacks, other creatures you control get +1/+1 until end of turn.
         this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn, new FilterCreaturePermanent(), true), false));
     }
 
