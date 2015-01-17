@@ -72,7 +72,7 @@ public class RenownedWeaponsmith extends CardImpl {
         // {t}: Add {2} to your mana pool. Spend this mana only to cast artifact spells or activate abilities of artifacts.
         this.addAbility(new ConditionalColorlessManaAbility(new TapSourceCost(), 2, new RenownedWeaponsmithManaBuilder()));
 
-        // {U}, {t}: Search your library for a card named Heart-Piercer Bow or Vial of Dragonfire, reveal it, put it into your hand, then shuffle your library.
+        // {U}, {T}: Search your library for a card named Heart-Piercer Bow or Vial of Dragonfire, reveal it, put it into your hand, then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RenownedWeaponsmithEffect(), new ManaCostsImpl("{U"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -122,11 +122,11 @@ class RenownedWeaponsmithCondition implements Condition {
 
 class RenownedWeaponsmithEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard("card named Heart-Piercer Bow or Heart-Piercer Bow");
+    private static final FilterCard filter = new FilterCard("card named Heart-Piercer Vial of Dragonfire");
 
     static {
         filter.add(Predicates.or(new NamePredicate("Heart-Piercer Bow"),
-                new NamePredicate("Heart-Piercer Bow")));
+                new NamePredicate("Vial of Dragonfire")));
     }
 
     public RenownedWeaponsmithEffect() {
@@ -141,18 +141,20 @@ class RenownedWeaponsmithEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (sourceObject != null && controller != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             if (controller.searchLibrary(target, game)) {
                 if (target.getTargets().size() > 0) {
                     Card card = game.getCard(target.getFirstTarget());
                     Cards revealed = new CardsImpl();
                     revealed.add(card);
-                    controller.revealCards("Renowned Weaponsmith", revealed, game);
-                    controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                    controller.shuffleLibrary(game);
+                    controller.revealCards(sourceObject.getLogName(), revealed, game);
+                    controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);                    
                 }
             }
+            controller.shuffleLibrary(game);
+            return true;
         }
         return false;
     }
