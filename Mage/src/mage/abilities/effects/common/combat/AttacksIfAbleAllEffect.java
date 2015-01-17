@@ -22,8 +22,15 @@ public class AttacksIfAbleAllEffect extends RequirementEffect {
     private final FilterCreaturePermanent filter;
 
     public AttacksIfAbleAllEffect(FilterCreaturePermanent filter) {
-        super(Duration.WhileOnBattlefield);
-        staticText = new StringBuilder(filter.getMessage()).append(" attack each turn if able").toString();
+        this(filter, Duration.WhileOnBattlefield);
+    }
+    
+    public AttacksIfAbleAllEffect(FilterCreaturePermanent filter, Duration duration) {
+        super(duration);
+        staticText = new StringBuilder(filter.getMessage())
+                .append(" attack ")
+                .append(duration.equals(Duration.EndOfTurn) ? "this":"each")
+                .append(" turn if able").toString();
         this.filter = filter;
     }
 
@@ -44,12 +51,12 @@ public class AttacksIfAbleAllEffect extends RequirementEffect {
 
     @Override
     public boolean mustAttack(Game game) {
-        return true;
+        return false;
     }
 
     @Override
     public boolean mustBlock(Game game) {
-        return false;
+        return true;
     }
 
 }

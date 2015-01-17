@@ -29,6 +29,8 @@ package mage.abilities.effects.common;
 
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.choices.ChoiceColor;
 import mage.game.Game;
@@ -39,20 +41,34 @@ import mage.players.Player;
  */
 public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
 
-    private final int amount;
+    private final DynamicValue amount;
     private final ConditionalManaBuilder manaBuilder;
+    private final boolean oneChoice;
 
     public AddConditionalManaOfAnyColorEffect(int amount, ConditionalManaBuilder manaBuilder) {
+        this(new StaticValue(amount), manaBuilder);
+    }
+
+    public AddConditionalManaOfAnyColorEffect(DynamicValue amount, ConditionalManaBuilder manaBuilder) {
+        this(amount, manaBuilder, true);
+    }
+
+    public AddConditionalManaOfAnyColorEffect(DynamicValue amount, ConditionalManaBuilder manaBuilder, boolean oneChoice) {
         super();
         this.amount = amount;
         this.manaBuilder = manaBuilder;
-        staticText = "Add " + amount + " mana of any one color to your mana pool. "  + manaBuilder.getRule();
+        this.oneChoice = oneChoice;
+        //
+        staticText = "Add " + amount + " mana of " +
+                (oneChoice ? "any one color":"in any combination of colors") +
+                " to your mana pool. "  + manaBuilder.getRule();
     }
 
     public AddConditionalManaOfAnyColorEffect(final AddConditionalManaOfAnyColorEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.manaBuilder = effect.manaBuilder;
+        this.oneChoice = effect.oneChoice;
     }
 
     @Override
@@ -62,15 +78,20 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
 
+        int value = amount.calculate(game, source, this);
         boolean result = false;
-        for (int i = 0; i < amount; i++) {
-            ChoiceColor choice = (ChoiceColor) source.getChoices().get(i);
-
+        ChoiceColor choice = new ChoiceColor();
+        for (int i = 0; i < value; i++) {
+            if (!choice.isChosen()) {
+                if (!controller.choose(outcome, choice, game)) {
+                    return false;
+                }
+            }
             Mana mana = null;
             if (choice.getColor().isBlack()) {
                 mana = manaBuilder.setMana(Mana.BlackMana(1), source, game).build();
@@ -85,10 +106,12 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
             }
 
             if (mana != null) {
-                player.getManaPool().addMana(mana, game, source);
+                controller.getManaPool().addMana(mana, game, source);
                 result = true;
             }
-
+            if (!oneChoice) {
+                choice.clearChoice();
+            }
         }
 
 

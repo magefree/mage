@@ -115,7 +115,7 @@ class OdricMasterTacticianTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever Odric, Master Tactician and at least three other creatures attack, you choose which creatures block this combat and how those creatures block.";
+        return "Whenever {this} and at least three other creatures attack, you choose which creatures block this combat and how those creatures block.";
     }
 
 }
@@ -151,16 +151,18 @@ class OdricMasterTacticianEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DECLARING_BLOCKERS;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARING_BLOCKERS) {
-            Object object = getValue("apply_" + source.getSourceId());
-            if (object != null && object instanceof Boolean) {
-                if ((Boolean)object) {
-                    return true; // replace event
-                }
+        Object object = getValue("apply_" + source.getSourceId());
+        if (object != null && object instanceof Boolean) {
+            if ((Boolean)object) {
+                return true; // replace event
             }
         }
-
         return false;
     }
 }

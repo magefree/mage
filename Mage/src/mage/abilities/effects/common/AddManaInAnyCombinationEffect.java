@@ -90,7 +90,7 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
         sb.append(CardUtil.numberToText(amount.toString()));
         sb.append(" mana in any combination of ");
         if (manaSymbols.size() == 5) {
-            sb.append("of colors");
+            sb.append("colors");
         } else {
             int i = 0;
             for (ColoredManaSymbol coloredManaSymbol: manaSymbols) {
