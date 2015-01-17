@@ -92,6 +92,7 @@ class ShockmawDragonEffect extends OneShotEffect {
             for (Permanent creature : creatures) {
                 if (creature != null) {
                     creature.damage(1, source.getSourceId(), game, false, true);
+                    return true;
                 }
             }
         }
