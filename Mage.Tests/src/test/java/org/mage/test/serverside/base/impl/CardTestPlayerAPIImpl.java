@@ -538,7 +538,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void assertTapped(String cardName, boolean tapped) throws AssertionError {
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
-            if (permanent.getName().equals(cardName)) {
+            if (permanent.getLogName().equals(cardName)) {
                 found = permanent;
             }
         }
