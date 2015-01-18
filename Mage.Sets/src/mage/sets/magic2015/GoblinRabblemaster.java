@@ -46,6 +46,7 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -63,9 +64,11 @@ public class GoblinRabblemaster extends CardImpl {
     static {
         otherGoblinFilter.add(new AnotherPredicate());
         otherGoblinFilter.add(new ControllerPredicate(TargetController.YOU));
+        otherGoblinFilter.add(new SubtypePredicate("Goblin"));
         
         attackingFilter.add(new AttackingPredicate());
         attackingFilter.add(new AnotherPredicate());
+        attackingFilter.add(new SubtypePredicate("Goblin"));
     }
     
     public GoblinRabblemaster(UUID ownerId) {

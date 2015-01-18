@@ -113,7 +113,7 @@ class DinOfTheFireherdEffect extends OneShotEffect {
             effect.apply(game, source);
             
             Effect effect2 = new SacrificeEffect(new FilterControlledLandPermanent(), redCreaturesControllerControls, "Target Opponent");
-            effect.setTargetPointer(new FixedTarget(targetOpponent.getId()));
+            effect2.setTargetPointer(new FixedTarget(targetOpponent.getId()));
             effect2.apply(game, source);
             applied = true;
         }
