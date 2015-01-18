@@ -94,7 +94,7 @@ class MarduWoeReaperTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && event.getPlayerId().equals(this.getControllerId())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && (permanent.getId() == event.getSourceId() || permanent.getSubtype().contains("Warrior"))) {
+            if (permanent != null && (permanent.getId() == this.getSourceId() || permanent.getSubtype().contains("Warrior"))) {
                 return true;
             }
         }
