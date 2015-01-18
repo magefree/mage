@@ -51,12 +51,12 @@ public class AttacksIfAbleAllEffect extends RequirementEffect {
 
     @Override
     public boolean mustAttack(Game game) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean mustBlock(Game game) {
-        return true;
+        return false;
     }
 
 }

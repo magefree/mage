@@ -64,11 +64,9 @@ public class GoblinRabblemaster extends CardImpl {
     static {
         otherGoblinFilter.add(new AnotherPredicate());
         otherGoblinFilter.add(new ControllerPredicate(TargetController.YOU));
-        otherGoblinFilter.add(new SubtypePredicate("Goblin"));
         
         attackingFilter.add(new AttackingPredicate());
         attackingFilter.add(new AnotherPredicate());
-        attackingFilter.add(new SubtypePredicate("Goblin"));
     }
     
     public GoblinRabblemaster(UUID ownerId) {
