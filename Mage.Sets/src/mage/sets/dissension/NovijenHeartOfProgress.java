@@ -44,6 +44,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -58,11 +59,10 @@ public class NovijenHeartOfProgress extends CardImpl {
         super(ownerId, 175, "Novijen, Heart of Progress", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "DIS";
 
-        // {tap}: Add {1} to your mana pool.
-        // {G}{U}, {tap}: Put a +1/+1 counter on each creature that entered the battlefield this turn.
-        this.addAbility(new EntersBattlefieldTappedAbility());
+        // {tap}: Add {1} to your mana pool.        
         this.addAbility(new ColorlessManaAbility());
         
+	// {G}{U}, {tap}: Put a +1/+1 counter on each creature that entered the battlefield this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NovijenHeartOfProgressEffect(), new ManaCostsImpl<>("{G}{U}"));        
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -96,8 +96,8 @@ class NovijenHeartOfProgressEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FilterPermanent filter = new FilterPermanent();
-        filter.add(new CardTypePredicate(CardType.CREATURE));        
+        FilterCreaturePermanent filter = new FilterCreaturePermanent();      
+        
         for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             if (permanent.getTurnsOnBattlefield() == 0) {
                 permanent.addCounters(CounterType.P1P1.createInstance(), game);
@@ -105,5 +105,4 @@ class NovijenHeartOfProgressEffect extends OneShotEffect {
         }
         return true;
     }
-
 }
