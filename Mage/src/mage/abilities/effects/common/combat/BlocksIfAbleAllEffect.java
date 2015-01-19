@@ -48,7 +48,7 @@ public class BlocksIfAbleAllEffect extends RequirementEffect {
     }
 
     public BlocksIfAbleAllEffect(FilterCreaturePermanent filter, Duration duration) {
-        super(Duration.WhileOnBattlefield);
+        super(duration);
         staticText = new StringBuilder(filter.getMessage())
                 .append(" block ")
                 .append(duration.equals(Duration.EndOfTurn) ? "this":"each")
@@ -72,12 +72,12 @@ public class BlocksIfAbleAllEffect extends RequirementEffect {
 
     @Override
     public boolean mustAttack(Game game) {
-        return true;
+        return false;
     }
 
     @Override
     public boolean mustBlock(Game game) {
-        return false;
+        return true;
     }
 
 }

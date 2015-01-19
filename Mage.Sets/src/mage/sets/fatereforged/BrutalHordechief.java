@@ -36,6 +36,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.combat.BlocksIfAbleAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -94,7 +95,7 @@ public class BrutalHordechief extends CardImpl {
 class BrutalHordechiefTriggeredAbility extends TriggeredAbilityImpl {
 
     public BrutalHordechiefTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
+        super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1));
         this.addEffect(new GainLifeEffect(1));
     }
 
