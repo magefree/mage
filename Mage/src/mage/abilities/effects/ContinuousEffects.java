@@ -410,6 +410,13 @@ public class ContinuousEffects implements Serializable {
                     exists = permanent.getCard().getAbilities().contains(ability);
                 }
             }
+        } else {
+             if (object instanceof PermanentCard) {
+                 PermanentCard permanent = (PermanentCard)object;
+                 if (permanent.isFaceDown() && !ability.getWorksFaceDown()) {
+                     return false;
+                 }
+             }
         }
         return exists;
     }

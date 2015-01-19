@@ -39,11 +39,12 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.cards.CardImpl;
 import mage.counters.CounterType;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.SaprolingToken;
@@ -81,7 +82,7 @@ public class GhaveGuruOfSpores extends CardImpl {
 		
 		// {1}, Remove a +1/+1 counter from a creature you control: Put a 1/1 green Saproling creature token onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new GenericManaCost(1));
-        ability.addCost(new RemoveCounterCost(new TargetControlledCreaturePermanent(), CounterType.P1P1));
+        ability.addCost(new RemoveCounterCost(new TargetControlledCreaturePermanent(1,1, new FilterControlledCreaturePermanent(), true), CounterType.P1P1));
         this.addAbility(ability);
 		
 		// {1}, Sacrifice a creature: Put a +1/+1 counter on target creature.

@@ -27,13 +27,16 @@
 */
 package mage.abilities.mana;
 
+import java.util.List;
 import mage.Mana;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.AddConditionalManaOfAnyColorEffect;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
-import mage.choices.ChoiceColor;
 import mage.constants.Zone;
+import mage.game.Game;
 
 /**
  * For cards like:
@@ -42,6 +45,8 @@ import mage.constants.Zone;
  * @author noxx
  */
 public class ConditionalAnyColorManaAbility extends ManaAbility {
+
+    private DynamicValue amount;
 
     public ConditionalAnyColorManaAbility(int amount, ConditionalManaBuilder manaBuilder) {
         this(new TapSourceCost(), amount, manaBuilder);
@@ -52,22 +57,24 @@ public class ConditionalAnyColorManaAbility extends ManaAbility {
     }
 
     public ConditionalAnyColorManaAbility(Cost cost, int amount, ConditionalManaBuilder manaBuilder, boolean oneChoice) {
-        super(Zone.BATTLEFIELD, new AddConditionalManaOfAnyColorEffect(oneChoice ? 1 :amount, manaBuilder), cost);
-        int choices = amount;
-        if (oneChoice) {
-            for (int i = 1; i < amount; i++) {
-                this.addEffect(new AddConditionalManaOfAnyColorEffect(1 , manaBuilder));
-            }
-            choices = 1;
-        }
-        for (int i = 0; i < choices; i++) {
-            this.addChoice(new ChoiceColor());
-        }
-        this.netMana.add(new Mana(0,0,0,0,0,0,amount));
+        this(cost, new StaticValue(amount), manaBuilder, oneChoice);
+    }
+
+    public ConditionalAnyColorManaAbility(Cost cost, DynamicValue amount, ConditionalManaBuilder manaBuilder, boolean oneChoice) {
+        super(Zone.BATTLEFIELD, new AddConditionalManaOfAnyColorEffect(amount, manaBuilder, oneChoice), cost);
+        this.amount = amount;
     }
 
     public ConditionalAnyColorManaAbility(final ConditionalAnyColorManaAbility ability) {
         super(ability);
+        this.amount = ability.amount;
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game) {
+        this.netMana.clear();
+        this.netMana.add(new Mana(0,0,0,0,0,0, amount.calculate(game, this, null)));
+        return super.getNetMana(game);
     }
 
     @Override

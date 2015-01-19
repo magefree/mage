@@ -89,8 +89,8 @@ public class SacrificeEffect extends OneShotEffect{
 
         Target target = new TargetControlledPermanent(amount, amount, filter, true);
 
-        //A spell or ability could have removed the only legal target this player
-        //had, if thats the case this ability should fizzle.
+        // A spell or ability could have removed the only legal target this player
+        // had, if thats the case this ability should fizzle.
         if (amount > 0 && target.canChoose(source.getSourceId(), player.getId(), game)) {
             boolean abilityApplied = false;
             while (!target.isChosen() && target.canChoose(player.getId(), game) && player.isInGame()) {

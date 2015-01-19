@@ -25,55 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.condition.common;
+package mage.sets.shadowmoor;
 
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import java.util.UUID;
+import mage.MageInt;
+import mage.ObjectColor;
+import mage.abilities.common.SimpleEvasionAbility;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
- * Condition for:
- *   - if you control the creature with the greatest power or tied for the greatest power
  *
- * @author noxx
+ * @author jeffwadsworth
  */
-public class ControlsBiggestOrTiedCreatureCondition implements Condition {
+public class Sootwalkers extends CardImpl {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white creatures");
+    
+    static {
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
+    }
 
-    private static ControlsBiggestOrTiedCreatureCondition fInstance = new ControlsBiggestOrTiedCreatureCondition();
+    public Sootwalkers(UUID ownerId) {
+        super(ownerId, 196, "Sootwalkers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B/R}{B/R}");
+        this.expansionSetCode = "SHM";
+        this.subtype.add("Elemental");
+        this.subtype.add("Rogue");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+        // Sootwalkers can't be blocked by white creatures.
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
+        
+    }
 
-    public static Condition getInstance() {
-        return fInstance;
+    public Sootwalkers(final Sootwalkers card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Set<UUID> controllers = new HashSet<>();
-        Integer maxPower = null;
-
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
-        for (Permanent permanent : permanents) {
-            if (permanent == null) {
-                continue;
-            }
-
-            int power = permanent.getPower().getValue();
-            if (maxPower == null || power > maxPower) {
-                maxPower = permanent.getPower().getValue();
-                controllers.clear();
-            }
-            if (power == maxPower) {
-                controllers.add(permanent.getControllerId());
-            }
-        }
-        return controllers.contains(source.getControllerId());
+    public Sootwalkers copy() {
+        return new Sootwalkers(this);
     }
 }

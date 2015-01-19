@@ -37,6 +37,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterBasicLandCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -63,7 +64,7 @@ public class PilgrimsEye extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         // When Pilgrim's Eye enters the battlefield, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true, true), true));
     }
 
     public PilgrimsEye (final PilgrimsEye card) {

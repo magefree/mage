@@ -86,6 +86,7 @@ public class ManifestEffect extends OneShotEffect {
                 ContinuousEffect effect = new BecomesFaceDownCreatureEffect(manaCosts, true, Duration.Custom);
                 effect.setTargetPointer(new FixedTarget(card.getId()));
                 game.addEffect(effect, source);
+                game.applyEffects(); // to apply nefore ETB triggered or replace Effects are executed
             }
             return true;
         }

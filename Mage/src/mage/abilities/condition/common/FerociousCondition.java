@@ -60,4 +60,10 @@ public class FerociousCondition  implements Condition {
         return game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0;
     }
 
+    @Override
+    public String toString() {
+        return "you control a creature with power 4 or greater";
+    }
+
+
 }

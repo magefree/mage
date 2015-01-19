@@ -27,6 +27,7 @@
  */
 package mage.abilities.common;
 
+import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.CardType;
@@ -90,10 +91,21 @@ public class AttacksAllTriggeredAbility extends TriggeredAbilityImpl {
                         return false;
                     }
                 }
-                if (SetTargetPointer.PERMANENT.equals(setTargetPointer)) {
-                    for (Effect effect: getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(permanent.getId()));
-                    }
+                switch(setTargetPointer) {
+                    case PERMANENT:
+                        for (Effect effect: getEffects()) {
+                            effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                        }
+                        break;
+                    case PLAYER:
+                        UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(permanent.getId(), game);
+                        if (defendingPlayerId != null) {
+                            for (Effect effect: getEffects()) {
+                                effect.setTargetPointer(new FixedTarget(defendingPlayerId));
+                            }
+                        }
+                        break;
+
                 }
                 return true;
             }

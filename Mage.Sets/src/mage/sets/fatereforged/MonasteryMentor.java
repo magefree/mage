@@ -79,7 +79,7 @@ public class MonasteryMentor extends CardImpl {
     MonasteryMentorToken() {
         super("Monk", "1/1 white Monk creature token with prowess");
         cardType.add(CardType.CREATURE);
-        color.setBlack(true);
+        color.setWhite(true);
         subtype.add("Monk");
         power = new MageInt(1);
         toughness = new MageInt(1);

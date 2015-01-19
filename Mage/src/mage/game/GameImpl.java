@@ -277,7 +277,7 @@ public abstract class GameImpl implements Game, Serializable {
                 card = ((PermanentCard)card).getCard();
             }
             card.setOwnerId(ownerId);
-            card.setFaceDown(false); // can be set face dwon from previous game
+            card.setFaceDown(false); // can be set face down from previous game
             gameCards.put(card.getId(), card);
             state.addCard(card);
             if (card.isSplitCard()) {

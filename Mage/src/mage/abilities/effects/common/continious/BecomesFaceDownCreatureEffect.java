@@ -62,6 +62,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
     protected int zoneChangeCounter;
     protected Ability turnFaceUpAbility = null;
     protected boolean useTargetPointer;
+    protected boolean foundPermanent;
 
 
     public BecomesFaceDownCreatureEffect(Costs<Cost> morphCosts) {
@@ -84,6 +85,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
             this.turnFaceUpAbility = new TurnFaceUpAbility(morphCosts);
         }
         staticText = "{this} becomes a 2/2 face-down creature, with no text, no name, no subtypes, and no mana cost";
+        foundPermanent = false;
     }
 
 
@@ -94,6 +96,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
             this.turnFaceUpAbility = effect.turnFaceUpAbility.copy();
         }
         this.useTargetPointer = effect.useTargetPointer;
+        this.foundPermanent = effect.foundPermanent;
     }
 
     @Override
@@ -120,6 +123,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
         }
         
         if (permanent != null && permanent.isFaceDown()) {
+            foundPermanent = true;
             switch (layer) {
                 case TypeChangingEffects_4:
                     permanent.setName("");
@@ -164,7 +168,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
                     }
             }
         } else {
-            if (duration.equals(Duration.Custom)) {
+            if (duration.equals(Duration.Custom) && foundPermanent == true) {
                 discard();
             }
         }

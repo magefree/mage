@@ -161,18 +161,13 @@ class RikuOfTwoReflectionsCopyTokenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        if (permanent == null) {
-            permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        }
-
+        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             EmptyToken token = new EmptyToken();
             CardUtil.copyTo(token).from(permanent);
             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
             return true;
         }
-
         return false;
     }
 }

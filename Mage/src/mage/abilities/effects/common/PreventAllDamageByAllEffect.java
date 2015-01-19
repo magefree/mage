@@ -80,7 +80,7 @@ public class PreventAllDamageByAllEffect extends PreventionEffectImpl {
                     return true;
                 }
                 Permanent permanent = game.getPermanent(damageEvent.getSourceId());
-                if (permanent != null && filter.match(permanent, game)) {
+                if (permanent != null && filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
                     return true;
                 }
             }

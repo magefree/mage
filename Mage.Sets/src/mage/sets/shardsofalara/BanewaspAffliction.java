@@ -28,10 +28,6 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
@@ -39,6 +35,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -64,9 +63,9 @@ public class BanewaspAffliction extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
         // When enchanted creature dies, that creature's controller loses life equal to its toughness.
-        ability = new DiesAttachedTriggeredAbility(new LoseLifeEffect(), "enchanted creature");
-        this.addAbility(ability);
+        this.addAbility( new DiesAttachedTriggeredAbility(new BanewaspAfflictionLoseLifeEffect(), "enchanted creature"));
     }
 
     public BanewaspAffliction(final BanewaspAffliction card) {
@@ -80,33 +79,30 @@ public class BanewaspAffliction extends CardImpl {
 }
 
 
-class LoseLifeEffect extends OneShotEffect {
+class BanewaspAfflictionLoseLifeEffect extends OneShotEffect {
 
-    public LoseLifeEffect() {
+    public BanewaspAfflictionLoseLifeEffect() {
         super(Outcome.LoseLife);
     }
 
-    public LoseLifeEffect(LoseLifeEffect copy) {
+    public BanewaspAfflictionLoseLifeEffect(BanewaspAfflictionLoseLifeEffect copy) {
         super(copy);
     }
 
 
     @Override
-    public LoseLifeEffect copy() {
-        return new LoseLifeEffect(this);
+    public BanewaspAfflictionLoseLifeEffect copy() {
+        return new BanewaspAfflictionLoseLifeEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent banewaspAffliction = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        if(banewaspAffliction != null){
-            Permanent creature = (Permanent) game.getLastKnownInformation(banewaspAffliction.getAttachedTo(), Zone.BATTLEFIELD);
-            if(creature != null){
-                Player player = game.getPlayer(creature.getOwnerId());
-                if (player != null) {
-                    player.loseLife(creature.getToughness().getValue(), game);
-                    return true;
-                }
+        Permanent creature = (Permanent) getValue("attachedTo");
+        if(creature != null){
+            Player player = game.getPlayer(creature.getOwnerId());
+            if (player != null) {
+                player.loseLife(creature.getToughness().getValue(), game);
+                return true;
             }
         }
         return false;
@@ -116,6 +112,5 @@ class LoseLifeEffect extends OneShotEffect {
     public String getText(Mode mode) {
         return "that creature's controller loses life equal to its toughness";
     }
-
 
 }
