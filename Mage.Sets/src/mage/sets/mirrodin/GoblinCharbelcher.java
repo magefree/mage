@@ -28,6 +28,7 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -41,11 +42,9 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -94,29 +93,27 @@ class GoblinCharbelcherEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean isMountain = false;
-        Card sourceCard = game.getCard(source.getSourceId());
-        Player player = game.getPlayer(source.getControllerId());
-        
-        if (player == null || sourceCard == null) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null || sourceObject == null) {
             return false;
         }
         Cards cards = new CardsImpl();
-        while (player.getLibrary().size() > 0) {
-            Card card = player.getLibrary().removeFromTop(game);
+        while (controller.getLibrary().size() > 0) {
+            Card card = controller.getLibrary().removeFromTop(game);
             if (card != null) {
                 cards.add(card);
-                if(card.getCardType().contains(CardType.LAND)){
+                if (card.getCardType().contains(CardType.LAND)){
                     if(card.getSubtype().contains("Mountain")){
                         isMountain = true;
                     }
                     break;
                 }
-            }
-            else{
+            } else {
                 break;
             }
         }
-        player.revealCards(sourceCard.getName(), cards, game);
+        controller.revealCards(sourceObject.getLogName(), cards, game);
         int damage = cards.size();
         if(isMountain == true){
             damage *= 2;
@@ -132,7 +129,7 @@ class GoblinCharbelcherEffect extends OneShotEffect {
                 targetPlayer.damage(damage, source.getSourceId(), game, false, true);
             }
         }        
-        player.putCardsOnBottomOfLibrary(cards, game, source, true);
+        controller.putCardsOnBottomOfLibrary(cards, game, source, true);
         return true;
     }
 }

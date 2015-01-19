@@ -29,16 +29,13 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
-import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
-import mage.constants.TargetController;
+import mage.constants.Duration;
 import mage.filter.FilterInPlay;
 import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.PlayerIdPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -57,9 +54,17 @@ public class PreventAllDamageToAllEffect extends PreventionEffectImpl {
     }
 
     public PreventAllDamageToAllEffect(Duration duration, FilterInPlay filter) {
-        super(duration);
+        this(duration, filter, false);
+    }
+
+    public PreventAllDamageToAllEffect(Duration duration, FilterInPlay filter, boolean onlyCombat) {
+        super(duration, Integer.MAX_VALUE, onlyCombat);
         this.filter = filter;
-        staticText = "Prevent all damage that would be dealt to " + filter.getMessage() + (duration.toString().isEmpty() ?"": " "+ duration.toString());
+        staticText = "Prevent all "
+                + (onlyCombat ? "combat ":"")
+                + "damage that would be dealt to " 
+                + filter.getMessage()
+                + (duration.toString().isEmpty() ?"": " "+ duration.toString());
     }
 
     public PreventAllDamageToAllEffect(final PreventAllDamageToAllEffect effect) {
