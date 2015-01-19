@@ -56,15 +56,16 @@ public class Modern extends Constructed {
 
         banned.add("Ancestral Vision");
         banned.add("Ancient Den");
+        banned.add("Birthing Pod"); //  banned effective January 23, 2015
         banned.add("Blazing Shoal");
         banned.add("Bloodbraid Elf"); //  (banned effective February 1, 2013)
         banned.add("Chrome Mox");
         banned.add("Cloudpost");
         banned.add("Dark Depths");
         banned.add("Deathrite Shaman"); // (banned effective February 7, 2014
+        banned.add("Dig Through Time"); //  banned effective January 23, 2015
         banned.add("Dread Return");
         banned.add("Glimpse of Nature");
-        banned.add("Golgari Grave-Troll");
         banned.add("Great Furnace");
         banned.add("Green Sun's Zenith");
         banned.add("Hypergenesis");
@@ -81,6 +82,7 @@ public class Modern extends Constructed {
         banned.add("Stoneforge Mystic");
         banned.add("Skullclamp");
         banned.add("Sword of the Meek");
+        banned.add("Treasure Cruise"); //  banned effective January 23, 2015
         banned.add("Tree of Tales");
         banned.add("Umezawa's Jitte");
         banned.add("Vault of Whispers");

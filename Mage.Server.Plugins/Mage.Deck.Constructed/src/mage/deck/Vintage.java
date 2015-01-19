@@ -74,7 +74,6 @@ public class Vintage extends Constructed {
         restricted.add("Demonic Tutor");
         restricted.add("Fastbond");
         restricted.add("Flash");
-        restricted.add("Gifts Ungiven");
         restricted.add("Imperial Seal");
         restricted.add("Library of Alexandria");
         restricted.add("Lion’s Eye Diamond");
@@ -100,6 +99,7 @@ public class Vintage extends Constructed {
         restricted.add("Timetwister");
         restricted.add("Tinker");
         restricted.add("Tolarian Academy");
+        restricted.add("Treasure Cruise"); //  banned effective January 23, 2015
         restricted.add("Trinisphere");
         restricted.add("Vampiric Tutor");
         restricted.add("Wheel of Fortune");

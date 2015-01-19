@@ -104,11 +104,11 @@ public class Legacy extends Constructed {
         banned.add("Timmerian Fiends");
         banned.add("Tinker");
         banned.add("Tolarian Academy");
+        banned.add("Treasure Cruise"); //  banned effective January 23, 2015
         banned.add("Unexpected Potential");
         banned.add("Vampiric Tutor");
         banned.add("Wheel of Fortune");
         banned.add("Windfall");
-        banned.add("Worldgorger Dragon");
         banned.add("Worldknit");
         banned.add("Yawgmoth's Bargain");
         banned.add("Yawgmoth's Will");
