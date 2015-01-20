@@ -34,13 +34,17 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.CascadeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Library;
 import mage.players.Player;
 
@@ -61,8 +65,8 @@ public class EnigmaSphinx extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // When Enigma Sphinx is put into your graveyard from the battlefield, put it into your library third from the top.
-        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new EnigmaSphinxEffect()));
+        // When Enigma Sphinx is put into your graveyard from the battlefield, put it into your library third from the top.        
+        this.addAbility(new EnigmaSphinxTriggeredAbility(new EnigmaSphinxEffect()));
 
         // Cascade
         this.addAbility(new CascadeAbility());
@@ -75,6 +79,49 @@ public class EnigmaSphinx extends CardImpl {
     @Override
     public EnigmaSphinx copy() {
         return new EnigmaSphinx(this);
+    }
+}
+
+class EnigmaSphinxTriggeredAbility extends TriggeredAbilityImpl {
+
+    public EnigmaSphinxTriggeredAbility(Effect effect) {
+        this(effect, false);
+    }
+
+    public EnigmaSphinxTriggeredAbility(Effect effect, boolean optional) {
+        super(Zone.ALL, effect, optional);
+    }
+
+    EnigmaSphinxTriggeredAbility(EnigmaSphinxTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public EnigmaSphinxTriggeredAbility copy() {
+        return new EnigmaSphinxTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+            Permanent permanent = zEvent.getTarget();
+            if (permanent != null &&
+                    zEvent.getToZone() == Zone.GRAVEYARD &&
+                    zEvent.getFromZone() == Zone.BATTLEFIELD &&
+                    permanent.getId().equals(this.getSourceId()) &&
+                    // 5/1/2009 If you control an Enigma Sphinx that's owned by another player, it's put into that player's 
+                    //          graveyard from the battlefield, so Enigma Sphinx's middle ability won't trigger.                    
+                    permanent.getOwnerId().equals(permanent.getControllerId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "When {this} is put into your graveyard from the battlefield, " + super.getRule();
     }
 }
 
