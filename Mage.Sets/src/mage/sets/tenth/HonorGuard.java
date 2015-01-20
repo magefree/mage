@@ -47,10 +47,11 @@ public class HonorGuard extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Human");
         this.subtype.add("Soldier");
-        this.color.setWhite(true);
+        
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.W)));
+        
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.W)));
     }
 
     public HonorGuard(final HonorGuard card) {
