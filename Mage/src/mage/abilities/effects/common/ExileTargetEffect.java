@@ -113,9 +113,9 @@ public class ExileTargetEffect extends OneShotEffect {
             return staticText;
         }
         if (mode.getTargets().isEmpty()) {
-            return "Exile it";
+            return "exile it";
         } else {
-            return "Exile target " + mode.getTargets().get(0).getTargetName();
+            return "exile target " + mode.getTargets().get(0).getTargetName();
         }
     }
 }

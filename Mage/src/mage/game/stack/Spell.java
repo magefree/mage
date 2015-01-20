@@ -159,7 +159,7 @@ public class Spell implements StackObject, Card {
     }
 
     public String getSpellCastText(Game game) {
-        for (Ability spellAbility : (Abilities<Ability>) getAbilities()) {
+        for (Ability spellAbility : getAbilities()) {
             if (spellAbility instanceof MorphAbility
                     && ((AlternativeSourceCosts) spellAbility).isActivated(getSpellAbility(), game)) {
                 return "a card face down";

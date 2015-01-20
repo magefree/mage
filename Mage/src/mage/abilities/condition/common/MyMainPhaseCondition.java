@@ -41,11 +41,13 @@ import mage.game.Game;
 
 public class MyMainPhaseCondition implements Condition {
 
-    private static MyMainPhaseCondition fInstance = new MyMainPhaseCondition();
-    private static  Set<TurnPhase> turnPhases = new HashSet<TurnPhase>() {{
+    private static final MyMainPhaseCondition fInstance = new MyMainPhaseCondition();
+
+    private static final  Set<TurnPhase> turnPhases = new HashSet<TurnPhase>() {{
         add(TurnPhase.PRECOMBAT_MAIN);
         add(TurnPhase.POSTCOMBAT_MAIN);
     }};
+    
     public static Condition getInstance() {
         return fInstance;
     }

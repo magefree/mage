@@ -28,15 +28,12 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import static jdk.nashorn.internal.runtime.Debug.id;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -87,9 +84,11 @@ class PoisonTheWellEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent targetedLand = game.getPermanent(source.getFirstTarget());
         if (targetedLand != null) {
+            targetedLand.destroy(source.getSourceId(), game, true);
             Player controller = game.getPlayer(targetedLand.getControllerId());
-            targetedLand.destroy(source.getId(), game, true);
-            controller.damage(2, source.getId(), game, false, true);
+            if (controller != null) {            
+                controller.damage(2, source.getSourceId(), game, false, true);
+            }
             return true;
         }
         return false;
