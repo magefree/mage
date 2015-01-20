@@ -42,6 +42,7 @@ import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -59,8 +60,6 @@ public class KaervekTheMerciless extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Shaman");
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 
@@ -100,8 +99,8 @@ class KaervekTheMercilessEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject spellCast = game.getObject(targetPointer.getFirst(game, source));
-        if (spellCast != null) {
-            int cost = spellCast.getManaCost().convertedManaCost();
+        if (spellCast instanceof Spell) {
+            int cost = ((Spell)spellCast).getConvertedManaCost();
             Player target = game.getPlayer(source.getFirstTarget());
             if (target != null) {
                 target.damage(cost, source.getSourceId(), game, false, true);
