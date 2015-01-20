@@ -1,20 +1,24 @@
 package org.mage.test.cards.copy;
 
-import junit.framework.Assert;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
+import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  * @author noxx
  *
- * Card: You may have {this} enter the battlefield as a copy of any creature on the battlefield, except
- * it's an Illusion in addition to its other types and it gains "When this creature becomes the target
- * of a spell or ability, sacrifice it."
+ * Card: You may have {this} enter the battlefield as a copy of any creature on
+ * the battlefield, except it's an Illusion in addition to its other types and
+ * it gains "When this creature becomes the target of a spell or ability,
+ * sacrifice it."
  *
  */
 public class PhantasmalImageTest extends CardTestPlayerBase {
@@ -37,7 +41,8 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests that copy effect will copy EntersBattlefieldTriggeredAbility and it will be applied.
+     * Tests that copy effect will copy EntersBattlefieldTriggeredAbility and it
+     * will be applied.
      */
     @Test
     public void testCopyEntersBattlefieldTriggeredAbility() {
@@ -68,7 +73,6 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
         addCard(Zone.HAND, playerB, "Phantasmal Image");
 
-
         for (int i = 0; i < 12; i++) {
             activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Level up {1}");
         }
@@ -85,16 +89,16 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         Permanent masterCopied = getPermanent("Transcendent Master", playerB.getId());
 
         // Original master should be upgraded to 3rd level
-        Assert.assertEquals("Power different", 9, master.getPower().getValue());
-        Assert.assertEquals("Toughness different", 9, master.getToughness().getValue());
-        Assert.assertTrue(master.getAbilities().contains(LifelinkAbility.getInstance()));
-        Assert.assertTrue(master.getAbilities().containsRule(IndestructibleAbility.getInstance()));
+        assertEquals("Power different", 9, master.getPower().getValue());
+        assertEquals("Toughness different", 9, master.getToughness().getValue());
+        assertTrue(master.getAbilities().contains(LifelinkAbility.getInstance()));
+        assertTrue(master.getAbilities().containsRule(IndestructibleAbility.getInstance()));
 
         // But copied one should not
-        Assert.assertEquals("Power different", 3, masterCopied.getPower().getValue());
-        Assert.assertEquals("Toughness different", 3, masterCopied.getToughness().getValue());
-        Assert.assertFalse(masterCopied.getAbilities().contains(LifelinkAbility.getInstance()));
-        Assert.assertFalse(masterCopied.getAbilities().containsRule(IndestructibleAbility.getInstance()));
+        assertEquals("Power different", 3, masterCopied.getPower().getValue());
+        assertEquals("Toughness different", 3, masterCopied.getToughness().getValue());
+        assertFalse(masterCopied.getAbilities().contains(LifelinkAbility.getInstance()));
+        assertFalse(masterCopied.getAbilities().containsRule(IndestructibleAbility.getInstance()));
     }
 
     /**
@@ -122,15 +126,13 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Illusionary Servant", 3);
     }
 
-
     //  PhantasmalImageTest.testCopyAlreadyTransformed:143->
     //  CardTestPlayerAPIImpl.assertPowerToughness:351->CardTestPlayerAPIImpl.assertPowerToughness:337
     // There is no such creature under player's control with specified power&toughness, player=PlayerA,
     // cardName=Ravager of the Fells (found similar: 1, one of them: power=8 toughness=8)
-
     /**
-     * Tests copying already transformed creature
-     * Makes sure it still has "When this creature becomes the target of a spell or ability, sacrifice it"
+     * Tests copying already transformed creature Makes sure it still has "When
+     * this creature becomes the target of a spell or ability, sacrifice it"
      */
     @Test
     public void testCopyAlreadyTransformed() {
@@ -164,12 +166,12 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         // check playerB's creature was sacrificed
         assertGraveyardCount(playerB, "Phantasmal Image", 1);
         assertPermanentCount(playerB, "Ravager of the Fells", 0);
-        
+
     }
 
     /**
-     * Tests that copy of Geralf's Messenger also enters tapped
-     * Geralf's Messenger: Geralf's Messenger enters the battlefield tapped
+     * Tests that copy of Geralf's Messenger also enters tapped Geralf's
+     * Messenger: Geralf's Messenger enters the battlefield tapped
      */
     @Test
     public void testCopyEntersTapped() {
@@ -190,10 +192,10 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertLife(playerB, 18);
     }
 
-
     /**
-     * Tests that copy effect will copy AsEntersBattlefieldAbility and will choose another color.
-     * As there is no permanent of the second color, copy of Lurebound Scarecrow will be sacrificed.
+     * Tests that copy effect will copy AsEntersBattlefieldAbility and will
+     * choose another color. As there is no permanent of the second color, copy
+     * of Lurebound Scarecrow will be sacrificed.
      */
     @Test
     public void testCopyAsEntersBattlefieldAbility() {
@@ -214,8 +216,9 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests that copy effect will copy AsEntersBattlefieldAbility and will choose another color.
-     * Both Lurebound Scarecrow cards should stay on battlefield.
+     * Tests that copy effect will copy AsEntersBattlefieldAbility and will
+     * choose another color. Both Lurebound Scarecrow cards should stay on
+     * battlefield.
      */
     @Test
     public void testCopyAsEntersBattlefieldAbility2() {
@@ -261,32 +264,29 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
     }
 
     /**
-     *  I attack with a Phantasmal Image of Steel Hellkite. It deals damage. I activate 
-     *  it for zero. A.I. has Chalice of the Void set to one counter. The Chalice should 
-     *  be destroyed I think as in play it has a converted mana cost of zero but it is not.
+     * I attack with a Phantasmal Image of Steel Hellkite. It deals damage. I
+     * activate it for zero. A.I. has Chalice of the Void set to one counter.
+     * The Chalice should be destroyed I think as in play it has a converted
+     * mana cost of zero but it is not.
      */
-
     @Test
     public void testCopiedSteelHellkite() {
         addCard(Zone.BATTLEFIELD, playerA, "Steel Hellkite");
         addCard(Zone.HAND, playerA, "Chalice of the Void");
 
-        
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
         addCard(Zone.HAND, playerB, "Phantasmal Image");
-
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chalice of the Void");
         setChoice(playerA, "X=0");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image");
         setChoice(playerB, "Steel Hellkite");
-        
+
         attack(4, playerB, "Steel Hellkite");
 
         activateAbility(4, PhaseStep.POSTCOMBAT_MAIN, playerB, "{X}: Destroy each nonland permanent with converted mana cost X whose controller was dealt combat damage by {this} this turn. Activate this ability only once each turn.");
         setChoice(playerB, "X=0");
-        
 
         setStopAt(4, PhaseStep.END_TURN);
         execute();
@@ -296,11 +296,90 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
 
         assertLife(playerB, 20);
         assertLife(playerA, 15);
-        
+
         assertPermanentCount(playerA, "Chalice of the Void", 0);
         assertGraveyardCount(playerA, "Chalice of the Void", 1);
-        
-        
-        
+
     }
+
+    /**
+     * I cast Phantasmal Image copying a Frost Titan and the image did not have
+     * the "When this creature becomes the target of a spell or ability,
+     * sacrifice it." ability. I did not pay attention to see if it failed to
+     * become an illusion too.
+     *
+     */
+    @Test
+    public void testCopiedFrostTitan() {
+        // Whenever Frost Titan becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {2}.
+        // Whenever Frost Titan enters the battlefield or attacks, tap target permanent. It doesn't untap during its controller's next untap step.
+        addCard(Zone.BATTLEFIELD, playerA, "Frost Titan");
+        addCard(Zone.HAND, playerA, "Terror");
+        // {1}{U} - Target creature gains shroud until end of turn and is unblockable this turn.
+        addCard(Zone.HAND, playerA, "Veil of Secrecy");        
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.HAND, playerB, "Phantasmal Image");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image"); // not targeted
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Veil of Secrecy", "Frost Titan"); // so it's no longer targetable 
+        setChoice(playerB, "Frost Titan");
+
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Terror", "Frost Titan"); // of player Bs Phantasmal Image copying Frost Titan
+                                                                                   // should be countered if not paying {2}
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Veil of Secrecy", 1);
+        assertGraveyardCount(playerA, "Terror", 1);
+        
+        assertLife(playerB, 20);
+        assertLife(playerA, 20);
+
+        assertPermanentCount(playerA, "Frost Titan", 1); 
+        
+        assertGraveyardCount(playerB, "Phantasmal Image", 1); // if triggered ability did not work, the Titan would be in the graveyard instaed
+
+    }
+    
+    // I've casted a Phantasmal Image targeting opponent's Wurmcoil Engine
+    // When my Phantasmal Image died, it didn't triggered the Wurmcoil Engine's last ability 
+    // (When Wurmcoil Engine dies, put a 3/3 colorless Wurm artifact creature token with deathtouch and
+    // a 3/3 colorless Wurm artifact creature token with lifelink onto the battlefield.)
+    
+    @Test
+    public void testDiesTriggeredAbilities() {
+        addCard(Zone.BATTLEFIELD, playerA, "Wurmcoil Engine");
+        // Destroy target artifact or enchantment.
+        addCard(Zone.HAND, playerA, "Public Execution");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.HAND, playerB, "Phantasmal Image");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image"); // not targeted
+        setChoice(playerB, "Wurmcoil Engine");
+
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Public Execution", "Wurmcoil Engine"); // of player Bs Phantasmal Image copying Frost Titan
+                                                                                   // should be countered if not paying {2}
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Public Execution", 1);
+        
+        assertLife(playerB, 20);
+        assertLife(playerA, 20);
+
+        
+        assertPermanentCount(playerA, "Wurmcoil Engine", 1); 
+        
+        assertGraveyardCount(playerB, "Phantasmal Image", 1);
+        assertPermanentCount(playerB, "Wurm", 2); // if triggered ability did not work, the Titan would be in the graveyard instaed
+
+    }
+    
 }
