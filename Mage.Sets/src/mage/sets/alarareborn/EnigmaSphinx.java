@@ -51,13 +51,10 @@ import mage.players.Player;
 public class EnigmaSphinx extends CardImpl {
 
     public EnigmaSphinx(UUID ownerId) {
-        super(ownerId, 106, "Enigma Sphinx", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{U}{B}");
+        super(ownerId, 106, "Enigma Sphinx", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{W}{U}{B}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Sphinx");
 
-
-
-        
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 
@@ -102,17 +99,16 @@ class EnigmaSphinxEffect extends OneShotEffect {
         Card card = game.getCard(source.getSourceId());
         if (card != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
             Player owner = game.getPlayer(card.getOwnerId());
-            if (card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true)) {
+            if (owner != null && card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true)) {
                 // Move Sphinx to third position
-                Library lib = game.getPlayer(source.getControllerId()).getLibrary();
+                game.informPlayers(card.getName() + " is put into " + owner.getName() +"'s library third from the top");
+                Library lib = owner.getLibrary();
                 if (lib != null) {
                     Card card1 = lib.removeFromTop(game);
-                    if (card1.getId().equals(source.getSourceId())) {
+                    if (card1 != null && card1.getId().equals(source.getSourceId())) {
                         Card card2 = lib.removeFromTop(game);
                         Card card3 = lib.removeFromTop(game);
-                        if (card1 != null) {
-                            lib.putOnTop(card1, game);
-                        }
+                        lib.putOnTop(card1, game);
                         if (card3 != null) {
                             lib.putOnTop(card3, game);
                         }
