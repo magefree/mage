@@ -179,7 +179,6 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
         if (rule != null) {
             return rule;
         }
-        // you may cast Massacre without paying its mana cost.
         StringBuilder sb = new StringBuilder();
         if (condition != null) {
             sb.append(condition.toString());
