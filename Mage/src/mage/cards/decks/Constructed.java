@@ -38,6 +38,7 @@ import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -45,6 +46,8 @@ import mage.constants.Rarity;
  */
 public class Constructed extends DeckValidator {
 
+    private static final Logger logger = Logger.getLogger(DeckValidator.class);
+    
     protected List<String> banned = new ArrayList<>();
     protected List<String> restricted = new ArrayList<>();
     protected List<String> setCodes = new ArrayList<>();
@@ -60,6 +63,7 @@ public class Constructed extends DeckValidator {
 
     @Override
     public boolean validate(Deck deck) {
+        logger.debug("DECK validate start: " + name + " deckname: " + deck.getName() );
         boolean valid = true;
         //20091005 - 100.2a
         if (deck.getCards().size() < 60) {
@@ -153,7 +157,7 @@ public class Constructed extends DeckValidator {
                 }
             }
         }
-
+        logger.debug("DECK validate end: " + name + " deckname: " + deck.getName() + " invalids:" + invalid.size());
         return valid;
     }
 
