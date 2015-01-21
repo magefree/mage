@@ -1374,7 +1374,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 }
                                 sb.append(")");
                                 filter.setMessage(sb.toString());
-                                Target target = new TargetPermanent(filter);
+                                Target target = new TargetPermanent(1, 1, filter, true);
                                 if (!this.chooseTarget(Outcome.Untap, target, ability, game)) {
                                     // player canceled, go on with the next effect (if no other effect available, this effect will be active again)
                                     playerCanceledSelection = true;
