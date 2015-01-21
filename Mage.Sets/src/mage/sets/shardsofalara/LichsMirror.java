@@ -120,8 +120,13 @@ class LichsMirrorEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.LOSES;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.LOSES && event.getPlayerId().equals(source.getControllerId())) {
+        if (event.getPlayerId().equals(source.getControllerId())) {
             return true;
         }
         return false;

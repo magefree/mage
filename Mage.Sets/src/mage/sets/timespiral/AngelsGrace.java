@@ -29,6 +29,7 @@ package mage.sets.timespiral;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.SplitSecondAbility;
 import mage.cards.CardImpl;
@@ -71,10 +72,10 @@ public class AngelsGrace extends CardImpl {
     }
 }
 
-class AngelsGraceEffect extends ReplacementEffectImpl {
+class AngelsGraceEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public AngelsGraceEffect() {
-        super(Duration.EndOfTurn, Outcome.Benefit);
+        super(Duration.EndOfTurn, Outcome.Benefit, false, false);
         staticText = "You can't lose the game this turn and your opponents can't win the game this turn";
     }
 
@@ -89,11 +90,6 @@ class AngelsGraceEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         return true;
     }
 
@@ -125,9 +121,14 @@ class AngelsGraceReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType().equals(GameEvent.EventType.DAMAGE_CAUSES_LIFE_LOSS);
+    }
+
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DAMAGE_CAUSES_LIFE_LOSS)
-                && event.getPlayerId().equals(source.getControllerId())) {
+        if (event.getPlayerId().equals(source.getControllerId())) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null
                     && (controller.getLife() - event.getAmount()) < 1 ) {

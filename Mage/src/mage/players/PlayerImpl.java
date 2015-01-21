@@ -1896,12 +1896,23 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean canLose(Game game) {
-        return !game.replaceEvent(new GameEvent(GameEvent.EventType.LOSES, null, null, playerId));
+        return hasLeft() // If a player concedes or has left the match he loses also if effect would say otherwise
+                || !game.replaceEvent(new GameEvent(GameEvent.EventType.LOSES, null, null, playerId));
     }
 
     @Override
-    public void won(Game game) {        
-        if (!game.replaceEvent(new GameEvent(GameEvent.EventType.WINS, null, null, playerId))) {
+    public void won(Game game) {       
+        boolean opponentInGame = false;
+        for (UUID opponentId: game.getOpponents(playerId)) {
+            Player opponent = game.getPlayer(opponentId);
+
+            if (opponent != null && opponent.isInGame()) {
+                opponentInGame = true;
+                break;
+            }
+        }
+        if (!opponentInGame || // if no more opponent is in game the wins event may no longer be replaced
+                !game.replaceEvent(new GameEvent(GameEvent.EventType.WINS, null, null, playerId))) {
             logger.debug("player won -> start: " + this.getName());
             if (!this.loses) {
                 //20130501 - 800.7, 801.16

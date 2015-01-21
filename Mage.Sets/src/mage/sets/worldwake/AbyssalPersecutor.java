@@ -79,7 +79,7 @@ public class AbyssalPersecutor extends CardImpl {
 class AbyssalPersecutorCannotWinEffect extends ContinuousRuleModifiyingEffectImpl {
 
     AbyssalPersecutorCannotWinEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment, false, false);
         staticText = "You can't win the game and your opponents can't lose the game";
     }
 
