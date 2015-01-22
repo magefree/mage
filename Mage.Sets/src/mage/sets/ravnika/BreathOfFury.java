@@ -145,22 +145,20 @@ class BreathOfFuryEffect extends OneShotEffect {
         filter.add(new CanBeEnchantedPredicate(enchantment));
         Target target = new TargetControlledCreaturePermanent(filter);
         target.setNotTarget(true);
-        if (enchantedCreature != null && controller != null) {                
-            // sacrifice the enchanted creature (don't check return state because controller has sarificed independant if something replaced later);
-            // e.g. Commander replacement effect going to command zone
-            enchantedCreature.sacrifice(source.getSourceId(), game);                
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
-                controller.choose(outcome, target, source.getSourceId(), game);
-                Permanent newCreature = game.getPermanent(target.getFirstTarget());
-                if (newCreature != null &&
-                    newCreature.addAttachment(enchantment.getId(), game)) {
-                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterControlledCreaturePermanent(), controller.getId(), game)) {
-                        permanent.untap(game);
-                    }
-                    game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), TurnPhase.COMBAT, null, false));
-
+        // It's important to check that the creature was successfully sacrificed here. Effects that prevent sacrifice will also prevent Breath of Fury's effect from working.
+        // Commanders going to the command zone and Rest in Peace style replacement effects don't make Permanent.sacrifice return false.
+        if (enchantedCreature != null && controller != null
+            && enchantedCreature.sacrifice(source.getSourceId(), game)
+            && target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+            controller.choose(outcome, target, source.getSourceId(), game);
+            Permanent newCreature = game.getPermanent(target.getFirstTarget());
+            if (newCreature != null &&
+                newCreature.addAttachment(enchantment.getId(), game)) {
+                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterControlledCreaturePermanent(), controller.getId(), game)) {
+                    permanent.untap(game);
                 }
 
+                game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), TurnPhase.COMBAT, null, false));
             }
             return true;
         }
