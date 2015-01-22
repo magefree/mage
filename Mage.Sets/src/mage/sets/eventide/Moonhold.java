@@ -110,15 +110,19 @@ class MoonholdEffect extends ContinuousRuleModifiyingEffectImpl {
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            return "You can't play land cards this turn (" + mageObject.getLogName() + ").";
+            return "you can't play land cards this turn (" + mageObject.getLogName() + ").";
         }
         return null;
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.PLAY_LAND;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.PLAY_LAND
-                && event.getPlayerId().equals(source.getFirstTarget())) {
+        if (event.getPlayerId().equals(source.getFirstTarget())) {
             return true;
         }
         return false;
@@ -155,9 +159,13 @@ class MoonholdEffect2 extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CAST_SPELL
-                && event.getPlayerId().equals(source.getFirstTarget())) {
+        if (event.getPlayerId().equals(source.getFirstTarget())) {
             Card card = game.getCard(event.getSourceId());
             if (card != null && card.getCardType().contains(CardType.CREATURE)) {
                 return true;

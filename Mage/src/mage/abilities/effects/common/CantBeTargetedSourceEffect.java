@@ -66,10 +66,15 @@ public class CantBeTargetedSourceEffect extends ContinuousRuleModifiyingEffectIm
     public boolean apply(Game game, Ability source) {
         return true;
     }
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TARGET;
+    }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.TARGET && event.getTargetId().equals(source.getSourceId())) {
+        if (event.getTargetId().equals(source.getSourceId())) {
             StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
             if (sourceObject != null && filterSource.match(sourceObject, source.getControllerId(), game)) {
                 return true;

@@ -35,6 +35,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -63,12 +64,15 @@ public class CantRegenerateTargetEffect extends ContinuousRuleModifiyingEffectIm
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.REGENERATE;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (GameEvent.EventType.REGENERATE.equals(event.getType())) {
-            UUID targetId = getTargetPointer().getFirst(game, source);
-            if (targetId != null) {
-                return targetId.equals(event.getTargetId());
-            }
+        UUID targetId = getTargetPointer().getFirst(game, source);
+        if (targetId != null) {
+            return targetId.equals(event.getTargetId());
         }
         return false;
     }

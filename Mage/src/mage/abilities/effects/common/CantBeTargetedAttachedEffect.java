@@ -73,14 +73,17 @@ public class CantBeTargetedAttachedEffect extends ContinuousRuleModifiyingEffect
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TARGET;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.TARGET) {
-            Permanent attachment = game.getPermanent(source.getSourceId());
-            if (attachment != null && event.getTargetId().equals(attachment.getAttachedTo())) {
-                StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
-                if (sourceObject != null && filterSource.match(sourceObject, source.getControllerId(), game)) {
-                    return true;
-                }
+        Permanent attachment = game.getPermanent(source.getSourceId());
+        if (attachment != null && event.getTargetId().equals(attachment.getAttachedTo())) {
+            StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
+            if (sourceObject != null && filterSource.match(sourceObject, source.getControllerId(), game)) {
+                return true;
             }
         }
         return false;

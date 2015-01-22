@@ -75,13 +75,17 @@ public class CantBeCounteredSourceEffect extends ContinuousRuleModifiyingEffectI
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.COUNTER;
+    }
+
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.COUNTER) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null) {
-                if (spell.getSourceId().equals(source.getSourceId())) {
-                    return true;
-                }
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (spell != null) {
+            if (spell.getSourceId().equals(source.getSourceId())) {
+                return true;
             }
         }
         return false;

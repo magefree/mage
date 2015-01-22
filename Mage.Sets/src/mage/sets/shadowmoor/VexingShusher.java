@@ -112,8 +112,13 @@ class VexingShusherCantCounterTargetEffect extends ContinuousRuleModifiyingEffec
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.COUNTER;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType() == EventType.COUNTER && event.getTargetId().equals(targetPointer.getFirst(game, source));
+        return event.getTargetId().equals(targetPointer.getFirst(game, source));
     }
 
 }

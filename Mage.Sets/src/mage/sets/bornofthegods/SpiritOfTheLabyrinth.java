@@ -138,12 +138,15 @@ class SpiritOfTheLabyrinthEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DRAW_CARD;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DRAW_CARD) {
-            SpiritOfTheLabyrinthWatcher watcher = (SpiritOfTheLabyrinthWatcher) game.getState().getWatchers().get("DrewCard");
-            if (watcher != null && watcher.hasPlayerDrewCardThisTurn(event.getPlayerId())) {
-                return true;
-            }
+        SpiritOfTheLabyrinthWatcher watcher = (SpiritOfTheLabyrinthWatcher) game.getState().getWatchers().get("DrewCard");
+        if (watcher != null && watcher.hasPlayerDrewCardThisTurn(event.getPlayerId())) {
+            return true;
         }
         return false;
     }

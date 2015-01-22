@@ -81,18 +81,21 @@ public class CantBeCounteredControlledEffect extends ContinuousRuleModifiyingEff
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.COUNTER;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.COUNTER) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.getControllerId().equals(source.getControllerId())
-                    && filterTarget.match(spell, game)) {
-                if (filterSource == null) {
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (spell != null && spell.getControllerId().equals(source.getControllerId())
+                && filterTarget.match(spell, game)) {
+            if (filterSource == null) {
+                return true;
+            } else {
+                MageObject sourceObject = game.getObject(source.getSourceId());
+                if (sourceObject != null && filterSource.match(sourceObject, game)) {
                     return true;
-                } else {
-                    MageObject sourceObject = game.getObject(source.getSourceId());
-                    if (sourceObject != null && filterSource.match(sourceObject, game)) {
-                        return true;
-                    }
                 }
             }
         }

@@ -45,10 +45,14 @@ public class DontUntapInControllersUntapStepEnchantedEffect extends ContinuousRu
         return null;
     }
 
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.UNTAP;
+    }
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (GameEvent.EventType.UNTAP.equals(event.getType()) && PhaseStep.UNTAP.equals(game.getTurn().getStepType())) {
+        if (PhaseStep.UNTAP.equals(game.getTurn().getStepType())) {
             Permanent enchantment = game.getPermanent(source.getSourceId());
             if (enchantment != null && enchantment.getAttachedTo() != null && event.getTargetId().equals(enchantment.getAttachedTo())) {
                 Permanent permanent = game.getPermanent(enchantment.getAttachedTo());

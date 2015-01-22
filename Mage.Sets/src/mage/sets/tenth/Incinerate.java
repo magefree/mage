@@ -92,12 +92,15 @@ class IncinerateEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.REGENERATE;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.REGENERATE) {
-            DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
-            if (watcher != null) {
-                return watcher.wasDamaged(event.getTargetId(), game);
-            }
+        DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
+        if (watcher != null) {
+            return watcher.wasDamaged(event.getTargetId(), game);
         }
         return false;
     }

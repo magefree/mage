@@ -646,6 +646,9 @@ public class ContinuousEffects implements Serializable {
      */
     public boolean preventedByRuleModification(GameEvent event, Ability targetAbility, Game game, boolean checkPlayableMode) {
        for (ContinuousRuleModifiyingEffect effect: continuousRuleModifyingEffects) {
+            if (!effect.checksEventType(event, game)) {
+                continue;
+            }
             for (Ability sourceAbility : continuousRuleModifyingEffects.getAbility(effect.getId())) {
                 if (!(sourceAbility instanceof StaticAbility) || sourceAbility.isInUseableZone(game, null, false)) {
                     if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {

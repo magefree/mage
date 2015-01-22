@@ -86,6 +86,11 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
         }
         return null;
     }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UNTAP_STEP || event.getType() == EventType.UNTAP;
+    }
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
@@ -99,7 +104,7 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
             return false;
         }
         // remember the turn of the untap step the effect has to be applied
-        if (GameEvent.EventType.UNTAP_STEP.equals(event.getType())) {            
+        if (GameEvent.EventType.UNTAP_STEP.equals(event.getType())) {
             UUID controllerId = null;
             for(UUID targetId : getTargetPointer().getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(targetId);
@@ -109,17 +114,16 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
             }
             if (controllerId == null) { // no more targets on the battlefield, effect can be discarded
                 discard();
-                return false;                                
+                return false;
             }
-            
-            if (game.getActivePlayerId().equals(controllerId)) { 
+
+            if (game.getActivePlayerId().equals(controllerId)) {
                 if (validForTurnNum == game.getTurnNum()) { // the turn has a second untap step but the effect is already related to the first untap step
                     discard();
-                    return false;                                
+                    return false;
                 }
                 validForTurnNum = game.getTurnNum();
             }
-            
         }
         
         if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == EventType.UNTAP) {

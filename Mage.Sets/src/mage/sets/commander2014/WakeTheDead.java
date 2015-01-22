@@ -107,8 +107,13 @@ class WakeTheDeadEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.CAST_SPELL) && event.getSourceId().equals(source.getSourceId())) {
+        if (event.getSourceId().equals(source.getSourceId())) {
             if (game.getPhase().getType().equals(TurnPhase.COMBAT)) {
                 return !game.getOpponents(source.getControllerId()).contains(game.getActivePlayerId());
             }

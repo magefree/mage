@@ -106,15 +106,18 @@ class UnderworldCerberusEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.TARGET;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.TARGET) {
-            Card targetCard = game.getCard(event.getTargetId());
-            StackObject stackObject = (StackObject) game.getStack().getStackObject(event.getSourceId());
-            if (targetCard != null && stackObject != null) {
-                Zone zone = game.getState().getZone(targetCard.getId());
-                if (zone != null && (zone == Zone.GRAVEYARD)) {
-                    return true;
-                }
+        Card targetCard = game.getCard(event.getTargetId());
+        StackObject stackObject = (StackObject) game.getStack().getStackObject(event.getSourceId());
+        if (targetCard != null && stackObject != null) {
+            Zone zone = game.getState().getZone(targetCard.getId());
+            if (zone != null && (zone == Zone.GRAVEYARD)) {
+                return true;
             }
         }
         return false;

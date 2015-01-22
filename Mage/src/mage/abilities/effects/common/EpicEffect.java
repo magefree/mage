@@ -108,11 +108,15 @@ class EpicReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
         }
         return null;
     }
-    
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CAST_SPELL
-                && source.getControllerId() == event.getPlayerId()) {
+        if (source.getControllerId() == event.getPlayerId()) {
             MageObject object = game.getObject(event.getSourceId());
             if (object != null) {
                 return true;
