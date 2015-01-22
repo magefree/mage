@@ -31,8 +31,8 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.CantCounterControlledEffect;
-import mage.abilities.effects.common.CantCounterSourceEffect;
+import mage.abilities.effects.common.CantBeCounteredControlledEffect;
+import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -65,9 +65,9 @@ public class RootSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Root Sliver can't be countered.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantCounterSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantBeCounteredSourceEffect()));
         // Sliver spells can't be countered by spells or abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantCounterControlledEffect(filter, new FilterStackObject(), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantBeCounteredControlledEffect(filter, new FilterStackObject(), Duration.WhileOnBattlefield)));
 
     }
 

@@ -29,7 +29,7 @@ package mage.sets.khansoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.CantCounterAbility;
+import mage.abilities.common.CantBeCounteredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ReturnToHandTargetCost;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
@@ -61,7 +61,7 @@ public class PearlLakeAncient extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
         
         // Pearl Lake Ancient can't be countered.
-        this.addAbility(new CantCounterAbility());
+        this.addAbility(new CantBeCounteredAbility());
         
         // Prowess
         this.addAbility(new ProwessAbility());

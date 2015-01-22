@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.CantCounterAbility;
+import mage.abilities.common.CantBeCounteredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
@@ -64,7 +64,7 @@ public class VexingShusher extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Vexing Shusher can't be countered.
-        this.addAbility(new CantCounterAbility());
+        this.addAbility(new CantBeCounteredAbility());
         // {R/G}: Target spell can't be countered by spells or abilities.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VexingShusherCantCounterTargetEffect(), new ManaCostsImpl("{R/G}"));
         ability.addTarget(new TargetSpell());

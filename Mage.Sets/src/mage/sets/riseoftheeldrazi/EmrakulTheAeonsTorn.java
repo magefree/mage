@@ -36,7 +36,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.CantCounterAbility;
+import mage.abilities.common.CantBeCounteredAbility;
 import mage.abilities.common.PutIntoGraveFromAnywhereSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
@@ -73,7 +73,7 @@ public class EmrakulTheAeonsTorn extends CardImpl {
         this.toughness = new MageInt(15);
         
         // Emrakul, the Aeons Torn can't be countered.
-        this.addAbility(new CantCounterAbility());
+        this.addAbility(new CantBeCounteredAbility());
         // When you cast Emrakul, take an extra turn after this one.   
         this.addAbility(new EmrakulTheAeonsTornOnCastAbility());
         // Flying, protection from colored spells, annihilator 6

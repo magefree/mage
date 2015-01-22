@@ -30,7 +30,7 @@ package mage.sets.commander;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.CantCounterAbility;
+import mage.abilities.common.CantBeCounteredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
@@ -70,7 +70,7 @@ public class AkromaAngelOfFury extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Akroma, Angel of Fury can't be countered.
-        this.addAbility(new CantCounterAbility());
+        this.addAbility(new CantBeCounteredAbility());
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Trample

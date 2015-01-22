@@ -30,7 +30,7 @@ package mage.sets.tempest;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.CantCounterAbility;
+import mage.abilities.common.CantBeCounteredAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -59,7 +59,7 @@ public class Scragnoth extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Scragnoth can't be countered.
-        this.addAbility(new CantCounterAbility());
+        this.addAbility(new CantBeCounteredAbility());
         // Protection from blue
         this.addAbility(new ProtectionAbility(filter));
     }

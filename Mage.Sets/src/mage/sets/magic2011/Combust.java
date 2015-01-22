@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.CantCounterSourceEffect;
+import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
@@ -62,7 +62,7 @@ public class Combust extends CardImpl {
         this.color.setRed(true);
         this.getSpellAbility().addEffect(new DamageTargetEffect(5, false));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantCounterSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantBeCounteredSourceEffect()));
     }
 
     public Combust(final Combust card) {

@@ -29,9 +29,9 @@ package mage.sets.khansoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.CantCounterAbility;
+import mage.abilities.common.CantBeCounteredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.CantCounterControlledEffect;
+import mage.abilities.effects.common.CantBeCounteredControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -74,10 +74,10 @@ public class SurrakDragonclaw extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
         
         // Surrak Dragonclaw can't be countered.
-        this.addAbility(new CantCounterAbility());
+        this.addAbility(new CantBeCounteredAbility());
         
         // Creature spells you control can't be countered.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantCounterControlledEffect(filterTarget, null, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeCounteredControlledEffect(filterTarget, null, Duration.WhileOnBattlefield)));
 
         // Other creatures you control have trample.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
