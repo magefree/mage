@@ -34,14 +34,14 @@ import mage.constants.Rarity;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
-import mage.game.permanent.token.ElfToken;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.abilities.Ability;
 import mage.game.permanent.Permanent;
 import mage.constants.Outcome;
-
+import mage.game.permanent.token.Token;
+import mage.MageInt;
 
 /**
  * @author duncancmt
@@ -91,10 +91,24 @@ class MercyKillingTokenEffect extends OneShotEffect {
         Permanent permanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
         if (permanent != null) {
             int power = permanent.getPower().getValue();
-            ElfToken token = new ElfToken();
+            MercyKillingToken token = new MercyKillingToken();
             token.putOntoBattlefield(power, game, source.getSourceId(), permanent.getControllerId());
         }
         return true;
     }
 
+}
+
+class MercyKillingToken extends Token {
+
+    public MercyKillingToken() {
+        super("Elf Warrior", "1/1 green and white Elf Warrior creature token");
+        cardType.add(CardType.CREATURE);
+        color.setGreen(true);
+        color.setWhite(true);
+        subtype.add("Elf");
+        subtype.add("Warrior");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+    }
 }
