@@ -35,7 +35,6 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
-
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -56,6 +55,7 @@ import java.util.List;
 import mage.target.Target;
 import mage.abilities.Modes;
 import mage.filter.predicate.mageobject.FromSetPredicate;
+import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.util.SpellTargetAddress;
 
@@ -68,6 +68,7 @@ public class InkTreaderNephilim extends CardImpl {
         super(ownerId, 117, "Ink-Treader Nephilim", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}{G}{W}{U}");
         this.expansionSetCode = "GPT";
         this.subtype.add("Nephilim");
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
@@ -113,7 +114,7 @@ class InkTreaderNephilimTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null &&
-                spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY)){
+                (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))){
                 for (Effect effect : getEffects()) {
                     effect.setValue("TriggeringSpell", spell);
                 }
@@ -129,10 +130,10 @@ class InkTreaderNephilimTriggeredAbility extends TriggeredAbilityImpl {
         if (spell != null) {
             boolean allTargetsInkTreaderNephilim = true;
             boolean atLeastOneTargetsInkTreaderNephilim = false;
-            for (SpellAbility sa: spell.getSpellAbilities()){
-                Modes modes = sa.getModes();
-                for (UUID mode : modes.getSelectedModes()) {
-                    for (Target targetInstance : modes.get(mode).getTargets()) {
+            for (SpellAbility spellAbility: spell.getSpellAbilities()){
+                Modes modesSpell = spellAbility.getModes();
+                for (UUID mode : modesSpell.getSelectedModes()) {
+                    for (Target targetInstance : modesSpell.get(mode).getTargets()) {
                         for (UUID target : targetInstance.getTargets()) {
                             allTargetsInkTreaderNephilim &= target.equals(sourceId);
                             atLeastOneTargetsInkTreaderNephilim |= target.equals(sourceId);
@@ -149,7 +150,7 @@ class InkTreaderNephilimTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a player casts an instant or sorcery spell, if that spell targets only Ink-Treader Nephilim, copy the spell for each other creature that spell could target. Each copy targets a different one of those creatures.";
+        return "Whenever a player casts an instant or sorcery spell, if that spell targets only {this}, copy the spell for each other creature that spell could target. Each copy targets a different one of those creatures.";
     }
 }
 
@@ -163,6 +164,7 @@ class InkTreaderNephilimEffect extends OneShotEffect {
 
     public InkTreaderNephilimEffect() {
         super(Outcome.Copy);
+        staticText = "copy the spell for each other creature that spell could target. Each copy targets a different one of those creatures";
     }
 
     public InkTreaderNephilimEffect(final InkTreaderNephilimEffect effect) {
@@ -171,13 +173,17 @@ class InkTreaderNephilimEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
         Spell spell = (Spell) getValue("TriggeringSpell");
         if (spell != null) {
             Map<UUID, Spell> targetable = new HashMap<>();
-            UUID controller = source.getControllerId();
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, controller, source.getSourceId(), game)) {
+            // gather all creatures that can be targeted from the spell to copy 
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, controller.getId(), source.getSourceId(), game)) {
                 Spell copy = spell.copySpell();                
-                copy.setControllerId(controller);
+                copy.setControllerId(controller.getId());
                 copy.setCopiedSpell(true);
                 if (permanent.getId().equals(source.getSourceId())) {
                     continue; // copy only for other creatures
@@ -200,28 +206,29 @@ class InkTreaderNephilimEffect extends OneShotEffect {
                     targetable.put(permanent.getId(), copy);
                 }
             }
+            // controller 
             while (targetable.size() > 0) {
-                FilterPermanent filter = new FilterPermanent("creature that spell could target ("+targetable.size()+" remaining)");
-                filter.add(new FromSetPredicate(targetable.keySet()));
-                TargetPermanent target = new TargetPermanent(0, 1, filter, true);
-                if (target.possibleTargets(controller, game).size() > 1
-                    && target.canChoose(source.getSourceId(), controller, game)) {
-                    game.getPlayer(controller).choose(Outcome.Neutral, target, source.getId(), game);
+                FilterPermanent filterCreatures = new FilterPermanent("creature that spell could target ("+ targetable.size() + " remaining)");
+                filterCreatures.add(new FromSetPredicate(targetable.keySet()));
+                TargetPermanent target = new TargetPermanent(0, 1, filterCreatures, true);
+                if (target.possibleTargets(controller.getId(), game).size() > 1
+                    && target.canChoose(source.getSourceId(), controller.getId(), game)) {
+                    controller.choose(Outcome.Neutral, target, source.getId(), game);
                 }
-                Collection<UUID> chosen = target.getTargets();
-                if (chosen.size() == 0) {
-                    chosen = targetable.keySet();
+                Collection<UUID> choosenIds = target.getTargets();
+                if (choosenIds.isEmpty()) {
+                    choosenIds = targetable.keySet();
                 }
                 List<UUID> toDelete = new ArrayList<>();
-                for (UUID chosenId : chosen) {
+                for (UUID chosenId : choosenIds) {
                     Spell chosenCopy = targetable.get(chosenId);
                     if (chosenCopy != null) {
                         game.getStack().push(chosenCopy);
                         toDelete.add(chosenId);
                     }
                 }
-                for (UUID id : toDelete) {
-                    targetable.remove(id);
+                for (UUID idToDelte : toDelete) {
+                    targetable.remove(idToDelte);
                 }
             }
             return true;

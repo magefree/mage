@@ -28,18 +28,15 @@
 package mage.sets.ravnika;
 
 import java.util.UUID;
-
 import mage.cards.CardImpl;
 import mage.constants.Rarity;
 import mage.constants.CardType;
-
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.abilities.effects.common.AttachEffect;
 import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.keyword.EnchantAbility;
-
 import mage.abilities.TriggeredAbilityImpl;
 import mage.constants.Zone;
 import mage.game.events.GameEvent;
@@ -47,8 +44,6 @@ import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.permanent.Permanent;
-import mage.abilities.effects.Effect;
-import mage.target.targetpointer.FixedTarget;
 import mage.players.Player;
 import mage.target.Target;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -105,12 +100,11 @@ class BreathOfFuryAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event instanceof DamagedPlayerEvent) {
-            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
-            Permanent p = game.getPermanent(event.getSourceId());
-            if (damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
-                for (Effect effect : getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(p.getId()));
-                }
+            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;            
+            Permanent enchantment = game.getPermanent(getSourceId());
+            if (damageEvent.isCombatDamage() && 
+                    enchantment != null && 
+                    enchantment.getAttachedTo().equals(event.getSourceId())) {
                 return true;
             }
         }
@@ -119,7 +113,7 @@ class BreathOfFuryAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When enchanted creature deals combat damage to a player, sacrifice it and attach Breath of Fury to a creature you control. If you do, untap all creatures you control and after this phase, there is an additional combat phase.";
+        return "When enchanted creature deals combat damage to a player, " + super.getRule();
     }
 }
 
@@ -127,7 +121,7 @@ class BreathOfFuryEffect extends OneShotEffect {
 
     public BreathOfFuryEffect() {
         super(Outcome.Benefit);
-        staticText = "Sacrifice enchanted creature and attach Breath of Fury to a creature you control. If you do, untap all creatures you control and after this phase, there is an additional combat phase.";
+        staticText = "sacrifice enchanted creature and attach {this} to a creature you control. If you do, untap all creatures you control and after this phase, there is an additional combat phase.";
     }
 
     public BreathOfFuryEffect(final BreathOfFuryEffect effect) {
@@ -141,51 +135,38 @@ class BreathOfFuryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source){
-        Permanent enchantedCreature = game.getPermanent(targetPointer.getFirst(game, source));
         Permanent enchantment = game.getPermanent(source.getSourceId());
+        if (enchantment == null) {
+            return false;
+        }
+        Permanent enchantedCreature = game.getPermanent(enchantment.getAttachedTo());        
         Player controller = game.getPlayer(source.getControllerId());
-        Target target = new TargetControlledCreaturePermanent(new FilterCanBeEnchantedControlledCreaturePermanent(enchantment));
+        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control that could be enchanted by " + enchantment.getName());
+        filter.add(new CanBeEnchantedPredicate(enchantment));
+        Target target = new TargetControlledCreaturePermanent(filter);
         target.setNotTarget(true);
-        if (enchantedCreature != null &&
-            enchantedCreature.sacrifice(source.getSourceId(), game) &&
-            enchantment != null &&
-            controller != null &&
-            target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
-            controller.choose(outcome, target, source.getId(), game);
-            Permanent newCreature = game.getPermanent(target.getFirstTarget());
-            if (newCreature != null &&
-                newCreature.addAttachment(enchantment.getId(), game)) {
-                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterControlledCreaturePermanent(),
-                                                                                        controller.getId(), game)) {
-                    permanent.untap(game);
+        if (enchantedCreature != null && controller != null) {                
+            // sacrifice the enchanted creature (don't check return state because controller has sarificed independant if something replaced later);
+            // e.g. Commander replacement effect going to command zone
+            enchantedCreature.sacrifice(source.getSourceId(), game);                
+            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+                controller.choose(outcome, target, source.getSourceId(), game);
+                Permanent newCreature = game.getPermanent(target.getFirstTarget());
+                if (newCreature != null &&
+                    newCreature.addAttachment(enchantment.getId(), game)) {
+                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterControlledCreaturePermanent(), controller.getId(), game)) {
+                        permanent.untap(game);
+                    }
+                    game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), TurnPhase.COMBAT, null, false));
+
                 }
-                game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), TurnPhase.COMBAT, null, false));
-                return true;
+
             }
+            return true;
         }
         return false;
     }
 }
-
-
-
-class FilterCanBeEnchantedControlledCreaturePermanent extends FilterControlledCreaturePermanent {
-
-    public FilterCanBeEnchantedControlledCreaturePermanent(final FilterCanBeEnchantedControlledCreaturePermanent filter) {
-        super(filter);
-    }
-
-    public FilterCanBeEnchantedControlledCreaturePermanent(MageObject auraEnchantment) {
-        super("creature you control that could be enchanted by " + auraEnchantment.getName());
-        this.add(new CanBeEnchantedPredicate(auraEnchantment));
-    }
-
-    @Override
-    public FilterCanBeEnchantedControlledCreaturePermanent copy() {
-        return new FilterCanBeEnchantedControlledCreaturePermanent(this);
-    }
-}
-
 
 class CanBeEnchantedPredicate implements Predicate<Permanent> {
 

@@ -42,7 +42,6 @@ import mage.game.permanent.Permanent;
 import mage.constants.Outcome;
 import mage.game.permanent.token.Token;
 import mage.MageInt;
-import mage.abilities.effects.Effect;
 
 /**
  * @author duncancmt
@@ -54,11 +53,9 @@ public class MercyKilling extends CardImpl {
         this.expansionSetCode = "SHM";
         
         // Target creature's controller sacrifices it, then puts X 1/1 green and white Elf Warrior creature tokens onto the battlefield, where X is that creature's power.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        Effect sacEffect = new SacrificeTargetEffect();
-        sacEffect.setText("Target creature's controller sacrifices it");
-        this.getSpellAbility().addEffect(sacEffect);
+        this.getSpellAbility().addEffect(new SacrificeTargetEffect("Target creature's controller sacrifices it"));
         this.getSpellAbility().addEffect(new MercyKillingTokenEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public MercyKilling(final MercyKilling card) {
@@ -75,7 +72,7 @@ class MercyKillingTokenEffect extends OneShotEffect {
 
     public MercyKillingTokenEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = ", then puts X 1/1 green and white Elf Warrior creature tokens onto the battlefield, where X is that creature's power.";
+        staticText = ", then puts X 1/1 green and white Elf Warrior creature tokens onto the battlefield, where X is that creature's power";
     }
 
     public MercyKillingTokenEffect(final MercyKillingTokenEffect effect) {
@@ -89,13 +86,12 @@ class MercyKillingTokenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             int power = permanent.getPower().getValue();
-            MercyKillingToken token = new MercyKillingToken();
-            token.putOntoBattlefield(power, game, source.getSourceId(), permanent.getControllerId());
+            return new MercyKillingToken().putOntoBattlefield(power, game, source.getSourceId(), permanent.getControllerId());
         }
-        return true;
+        return false;
     }
 
 }
