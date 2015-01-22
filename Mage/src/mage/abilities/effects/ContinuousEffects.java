@@ -67,6 +67,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import org.apache.log4j.Logger;
@@ -416,6 +417,11 @@ public class ContinuousEffects implements Serializable {
                  if (permanent.isFaceDown() && !ability.getWorksFaceDown()) {
                      return false;
                  }
+             } else if (object instanceof Spell) {
+                 Spell spell = (Spell)object;
+                 if (spell.isFaceDown() && !ability.getWorksFaceDown()) {
+                     return false;
+                 }
              }
         }
         return exists;
@@ -651,24 +657,26 @@ public class ContinuousEffects implements Serializable {
             }
             for (Ability sourceAbility : continuousRuleModifyingEffects.getAbility(effect.getId())) {
                 if (!(sourceAbility instanceof StaticAbility) || sourceAbility.isInUseableZone(game, null, false)) {
-                    if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
-                        effect.setValue("targetAbility", targetAbility);
-                        if (effect.applies(event, sourceAbility, game)) {
-                            if (!checkPlayableMode) {
-                                String message = effect.getInfoMessage(sourceAbility, event, game);
-                                if (message != null && !message.isEmpty()) {
-                                    if (effect.sendMessageToUser()) {
-                                        Player player = game.getPlayer(event.getPlayerId());
-                                        if (player != null) {
-                                            game.informPlayer(player, message);
+                    if (checkAbilityStillExists(sourceAbility, effect, event, game)) {
+                        if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
+                            effect.setValue("targetAbility", targetAbility);
+                            if (effect.applies(event, sourceAbility, game)) {
+                                if (!checkPlayableMode) {
+                                    String message = effect.getInfoMessage(sourceAbility, event, game);
+                                    if (message != null && !message.isEmpty()) {
+                                        if (effect.sendMessageToUser()) {
+                                            Player player = game.getPlayer(event.getPlayerId());
+                                            if (player != null) {
+                                                game.informPlayer(player, message);
+                                            }
+                                        }
+                                        if (effect.sendMessageToGameLog()) {
+                                            game.informPlayers(message);
                                         }
                                     }
-                                    if (effect.sendMessageToGameLog()) {
-                                        game.informPlayers(message);
-                                    }
                                 }
+                                return true;
                             }
-                            return true;
                         }
                     }
                 }

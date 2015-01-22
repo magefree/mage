@@ -27,10 +27,8 @@
  */
 package org.mage.test.cards.abilities.keywords;
 
-import mage.abilities.keyword.HexproofAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.game.permanent.Permanent;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -70,5 +68,5 @@ public class ManifestTest extends CardTestPlayerBase {
         // not tapped
         assertTapped("face down creature", false);
     }
-
+  
 }
