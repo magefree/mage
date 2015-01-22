@@ -55,8 +55,6 @@ public class RallyTheRighteous extends CardImpl {
     public RallyTheRighteous(UUID ownerId) {
         super(ownerId, 222, "Rally the Righteous", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{W}");
         this.expansionSetCode = "RAV";
-        this.color.setRed(true);
-        this.color.setWhite(true);
         
         // Radiance — Untap target creature and each other creature that shares a color with it. Those creatures get +2/+0 until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -79,7 +77,7 @@ class RallyTheRighteousUntapEffect extends OneShotEffect {
 
     public RallyTheRighteousUntapEffect() {
         super(Outcome.Untap);
-        staticText = "Radiance — Untap target creature and each other creature that shares a color with it.";
+        staticText = "<i>Radiance</i> — Untap target creature and each other creature that shares a color with it.";
     }
 
     public RallyTheRighteousUntapEffect(final RallyTheRighteousUntapEffect effect) {
@@ -113,7 +111,7 @@ class RallyTheRighteousBoostEffect extends ContinuousEffectImpl {
 
     public RallyTheRighteousBoostEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-        staticText = "Radiance — Target creature and each other creature that shares a color with it get +2/+0 until end of turn.";
+        staticText = " Those creatures get +2/+0 until end of turn.";
     }
 
     public RallyTheRighteousBoostEffect(final RallyTheRighteousBoostEffect effect) {

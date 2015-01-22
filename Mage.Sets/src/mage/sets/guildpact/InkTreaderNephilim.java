@@ -68,10 +68,6 @@ public class InkTreaderNephilim extends CardImpl {
         super(ownerId, 117, "Ink-Treader Nephilim", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}{G}{W}{U}");
         this.expansionSetCode = "GPT";
         this.subtype.add("Nephilim");
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.color.setWhite(true);
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
@@ -205,7 +201,7 @@ class InkTreaderNephilimEffect extends OneShotEffect {
                 }
             }
             while (targetable.size() > 0) {
-                FilterPermanent filter = new FilterPermanent("creature that spell could target ("+Integer.toString(targetable.size())+" remaining)");
+                FilterPermanent filter = new FilterPermanent("creature that spell could target ("+targetable.size()+" remaining)");
                 filter.add(new FromSetPredicate(targetable.keySet()));
                 TargetPermanent target = new TargetPermanent(0, 1, filter, true);
                 if (target.possibleTargets(controller, game).size() > 1

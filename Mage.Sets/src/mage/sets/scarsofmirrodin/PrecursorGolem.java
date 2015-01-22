@@ -210,7 +210,7 @@ class PrecursorGolemCopySpellEffect extends OneShotEffect {
             UUID spellController = spell.getControllerId();
             while (targetable.size() > 0) {
                 FilterPermanent filter = new FilterPermanent("Golem",
-                                                             "Golem that spell could target ("+Integer.toString(targetable.size())+" remaining)");
+                                                             "Golem that spell could target ("+targetable.size()+" remaining)");
                 filter.add(new FromSetPredicate(targetable.keySet()));
                 TargetPermanent target = new TargetPermanent(0, 1, filter, true);
 

@@ -66,8 +66,6 @@ public class BreathOfFury extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
-
         // Enchant creature you control
         TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
