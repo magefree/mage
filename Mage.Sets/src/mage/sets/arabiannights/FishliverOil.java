@@ -30,21 +30,17 @@ package mage.sets.arabiannights;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
-import static mage.constants.Layer.AbilityAddingRemovingEffects_6;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -58,18 +54,16 @@ public class FishliverOil extends CardImpl {
         this.expansionSetCode = "ARN";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
-
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Enchanted creature has islandwalk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FishliverOilEffect()));
+        // Enchanted creature has islandwalk.        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+                new GainAbilityAttachedEffect(new IslandwalkAbility(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
     }
 
     public FishliverOil(final FishliverOil card) {
@@ -80,51 +74,4 @@ public class FishliverOil extends CardImpl {
     public FishliverOil copy() {
         return new FishliverOil(this);
     }
-}
-
-class FishliverOilEffect extends ContinuousEffectImpl {
-
-    public FishliverOilEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-        staticText = "Enchanted creature has islandwalk";
-    }
-
-    public FishliverOilEffect(final FishliverOilEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FishliverOilEffect copy() {
-        return new FishliverOilEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-            if (creature != null) {
-                switch (layer) {
-                    case AbilityAddingRemovingEffects_6:
-                        if (sublayer == SubLayer.NA) {
-                            creature.addAbility(new IslandwalkAbility(), game);
-                        }
-                        break;
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6;
-    }
-
 }

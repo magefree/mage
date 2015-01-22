@@ -46,8 +46,6 @@ public class UrborgUprising extends CardImpl {
         super(ownerId, 53, "Urborg Uprising", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
         this.expansionSetCode = "APC";
 
-        this.color.setBlack(true);
-
         // Return up to two target creature cards from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, new FilterCreatureCard("creature cards from your graveyard")));
