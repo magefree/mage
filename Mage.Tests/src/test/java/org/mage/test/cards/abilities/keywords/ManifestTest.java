@@ -68,5 +68,36 @@ public class ManifestTest extends CardTestPlayerBase {
         // not tapped
         assertTapped("face down creature", false);
     }
-  
+
+    /**
+     * If Doomwake Giant gets manifested, it's Constellation trigger may not trigger
+     */
+    @Test
+    public void testETBTriggeredAbilities2() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        // Manifest the top card of your library {1}{W}
+        addCard(Zone.HAND, playerA, "Soul Summons");
+
+        // Constellation - When Doomwake Giant or another enchantment enters the battlefield
+        // under your control, creatures your opponents control get -1/-1 until end of turn.
+        addCard(Zone.LIBRARY, playerA, "Doomwake Giant");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Soul Summons");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        // no life gain
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        // a facedown creature is on the battlefield
+        assertPermanentCount(playerA, "face down creature", 1);
+        assertPowerToughness(playerA, "face down creature", 2, 2);
+        // PlayerB's Silvercoat Lion should not have get -1/-1/
+        assertPermanentCount(playerB, "Silvercoat Lion", 1);
+        assertPowerToughness(playerB, "Silvercoat Lion", 2, 2);
+    }
 }
