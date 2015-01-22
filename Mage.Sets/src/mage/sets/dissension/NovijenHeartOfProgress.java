@@ -28,26 +28,23 @@
 package mage.sets.dissension;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
-import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -59,10 +56,10 @@ public class NovijenHeartOfProgress extends CardImpl {
         super(ownerId, 175, "Novijen, Heart of Progress", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "DIS";
 
-        // {tap}: Add {1} to your mana pool.        
+        // {T}: Add {1} to your mana pool.        
         this.addAbility(new ColorlessManaAbility());
         
-	// {G}{U}, {tap}: Put a +1/+1 counter on each creature that entered the battlefield this turn.
+	// {G}{U}, {T}: Put a +1/+1 counter on each creature that entered the battlefield this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NovijenHeartOfProgressEffect(), new ManaCostsImpl<>("{G}{U}"));        
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -82,7 +79,7 @@ class NovijenHeartOfProgressEffect extends OneShotEffect {
 
     public NovijenHeartOfProgressEffect() {
         super(Outcome.BoostCreature);
-        staticText = "Put a +1/+1 counter on each creature that came into play this turn.";
+        staticText = "put a +1/+1 counter on each creature that came into play this turn";
     }
 
     public NovijenHeartOfProgressEffect(final NovijenHeartOfProgressEffect effect) {
@@ -96,13 +93,17 @@ class NovijenHeartOfProgressEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FilterCreaturePermanent filter = new FilterCreaturePermanent();      
-        
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-            if (permanent.getTurnsOnBattlefield() == 0) {
-                permanent.addCounters(CounterType.P1P1.createInstance(), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
+            for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+                if (permanent.getTurnsOnBattlefield() == 0) {
+                    permanent.addCounters(CounterType.P1P1.createInstance(), game);
+                    game.informPlayers(sourceObject.getLogName()+ ": " + controller.getName() + " puts a +1/+1 counter on " + permanent.getLogName());
+                }
             }
+            return true;
         }
-        return true;
+        return false;
     }
 }
