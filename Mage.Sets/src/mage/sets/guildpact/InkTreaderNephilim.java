@@ -60,7 +60,7 @@ import mage.abilities.Modes;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.target.TargetPermanent;
-
+import mage.util.SpellTargetAddress;
 
 /**
  * @author duncancmt
@@ -190,26 +190,18 @@ class InkTreaderNephilimEffect extends OneShotEffect {
                     continue; // copy only for other creatures
                 }
                 boolean legal = true;
-                for (SpellAbility sa : copy.getSpellAbilities()) {
-                    Modes modes = sa.getModes();
-                    for (UUID mode : modes.getSelectedModes()) {
-                        for (Target targetInstance : modes.get(mode).getTargets()) {
-                            legal &= targetInstance.canTarget(permanent.getId(), sa, game);
-                        }
-                    }
+                for (SpellTargetAddress addr : SpellTargetAddress.walk(copy)) {
+                    Target targetInstance = addr.getTarget(copy);
+                    legal &= targetInstance.canTarget(permanent.getId(), addr.getSpellAbility(copy), game);
                 }
                 if (legal) {
-                    for (SpellAbility sa : copy.getSpellAbilities()) {
-                        Modes modes = sa.getModes();
-                        for (UUID mode : modes.getSelectedModes()) {
-                            for (Target targetInstance : modes.get(mode).getTargets()) {
-                                int numTargets = targetInstance.getNumberOfTargets();
-                                targetInstance.clearChosen();
-                                while (numTargets > 0) {
-                                    targetInstance.add(permanent.getId(), game);
-                                    numTargets--;
-                                }
-                            }
+                    for (SpellTargetAddress addr : SpellTargetAddress.walk(copy)) {
+                        Target targetInstance = addr.getTarget(copy);
+                        int numTargets = targetInstance.getNumberOfTargets();
+                        targetInstance.clearChosen();
+                        while (numTargets > 0) {
+                            targetInstance.add(permanent.getId(), game);
+                            numTargets--;
                         }
                     }
                     targetable.put(permanent.getId(), copy);
