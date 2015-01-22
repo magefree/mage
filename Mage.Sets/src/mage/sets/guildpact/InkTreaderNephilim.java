@@ -52,13 +52,10 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import java.util.Map;
-import java.util.Set;
 import java.util.List;
-import mage.MageObject;
 import mage.target.Target;
 import mage.abilities.Modes;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.mageobject.FromSetPredicate;
 import mage.target.TargetPermanent;
 import mage.util.SpellTargetAddress;
 
@@ -208,10 +205,9 @@ class InkTreaderNephilimEffect extends OneShotEffect {
                 }
             }
             while (targetable.size() > 0) {
-                TargetPermanent target = new TargetPermanent(0, 1,
-                                                             new FilterPermanentFromSet("creature that spell could target ("+Integer.toString(targetable.size())+" remaining)",
-                                                                     targetable.keySet()),
-                                                             true);
+                FilterPermanent filter = new FilterPermanent("creature that spell could target ("+Integer.toString(targetable.size())+" remaining)");
+                filter.add(new FromSetPredicate(targetable.keySet()));
+                TargetPermanent target = new TargetPermanent(0, 1, filter, true);
                 if (target.possibleTargets(controller, game).size() > 1
                     && target.canChoose(source.getSourceId(), controller, game)) {
                     game.getPlayer(controller).choose(Outcome.Neutral, target, source.getId(), game);
@@ -242,33 +238,4 @@ class InkTreaderNephilimEffect extends OneShotEffect {
         return new InkTreaderNephilimEffect(this);
     }
 
-}
-
-class FromSetPredicate<T extends ObjectPlayer<MageObject>> implements ObjectPlayerPredicate<T> {
-    protected Set<UUID> set;
-
-    public FromSetPredicate(Set<UUID> set) {
-        this.set = set;
-    }
-
-    public boolean apply(T input, Game game) {
-        return set.contains(input.getObject().getId());
-    }
-}
-
-class FilterPermanentFromSet extends FilterPermanent {
-    public FilterPermanentFromSet(Set<UUID> set) {
-        super();
-        this.extraPredicates.add(new FromSetPredicate(set));
-    }
-
-    public FilterPermanentFromSet(String name, Set<UUID> set) {
-        super(name);
-        this.extraPredicates.add(new FromSetPredicate(set));
-    }
-
-    public FilterPermanentFromSet(String subtype, String name, Set<UUID> set) {
-        super(subtype, name);
-        this.extraPredicates.add(new FromSetPredicate(set));
-    }
 }
