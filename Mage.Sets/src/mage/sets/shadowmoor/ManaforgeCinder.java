@@ -27,16 +27,24 @@
  */
 package mage.sets.shadowmoor;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
+import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.choices.Choice;
+import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
@@ -53,7 +61,7 @@ public class ManaforgeCinder extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}: Add {B} or {R} to your mana pool. Activate this ability no more than three times each turn.
-        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.BlackMana), new ManaCostsImpl("{1}"), 3));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new ManaforgeCinderManaEffect(), new ManaCostsImpl("{1}"), 3));
         
     }
 
@@ -64,5 +72,57 @@ public class ManaforgeCinder extends CardImpl {
     @Override
     public ManaforgeCinder copy() {
         return new ManaforgeCinder(this);
+    }
+}
+
+
+
+class ManaforgeCinderManaEffect extends OneShotEffect {
+
+    public ManaforgeCinderManaEffect() {
+        super(Outcome.PutManaInPool);
+        this.staticText = "Add {B} or {R} to your mana pool";
+    }
+
+    public ManaforgeCinderManaEffect(final ManaforgeCinderManaEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ManaforgeCinderManaEffect copy() {
+        return new ManaforgeCinderManaEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Choice manaChoice = new ChoiceImpl();
+            Set<String> choices = new LinkedHashSet<>();
+            choices.add("Black");
+            choices.add("Red");
+            manaChoice.setChoices(choices);
+            manaChoice.setMessage("Select black or red mana to add to your mana pool");
+            Mana mana = new Mana();
+            while (!controller.choose(Outcome.Benefit, manaChoice, game)) {
+                if (!controller.isInGame()) {
+                    return false;
+                }
+            }
+            if (manaChoice.getChoice() == null) {
+                return false;
+            }
+            switch (manaChoice.getChoice()) {
+                case "Black":
+                    mana.addBlack();
+                    break;
+                case "Red":
+                    mana.addRed();
+                    break;
+            }
+            controller.getManaPool().addMana(mana, game, source);
+            return true;
+        }
+        return false;
     }
 }
