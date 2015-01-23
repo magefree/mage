@@ -73,7 +73,7 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
 
             if (controller.choose(outcome, choice, game)) {
                 if (choice.getColor() == null) {
-                    return false; // it happenes, don't know how
+                    return false; // it happens, don't know how
                 }
                 Mana createdMana = null;
                 if (choice.getColor().isBlack()) {
@@ -89,6 +89,7 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
                 }
                 if (createdMana != null) {
                     controller.getManaPool().addMana(createdMana, game, source);
+                    checkToFirePossibleEvents(createdMana, game, source);
                 }
                 return true;
             }

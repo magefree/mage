@@ -62,6 +62,7 @@ sub toCamelCase {
     $string;
 }
 
+# TODO: check for basic lands with ending 1,2,3,4,5 ...
 my $toPrint = '';
 foreach my $card (sort cardSort @setCards) {
 	my $className = toCamelCase(@{$card}[0]);

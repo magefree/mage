@@ -35,7 +35,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.CantCounterSourceEffect;
+import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
@@ -64,7 +64,7 @@ public class GreatSableStag extends CardImpl {
 
         this.addAbility(new ProtectionAbility(filter1));
         this.addAbility(new ProtectionAbility(filter2));
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantCounterSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantBeCounteredSourceEffect()));
     }
 
     public GreatSableStag(final GreatSableStag card) {

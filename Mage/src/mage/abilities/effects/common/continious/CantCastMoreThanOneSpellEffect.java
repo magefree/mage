@@ -69,34 +69,37 @@ public class CantCastMoreThanOneSpellEffect extends ContinuousRuleModifiyingEffe
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CAST_SPELL) {
-            switch (targetController) {
-                case YOU:
-                    if (!event.getPlayerId().equals(source.getControllerId())) {
-                        return false;
-                    }
-                    break;
-                case NOT_YOU:
-                    if (event.getPlayerId().equals(source.getControllerId())) {
-                        return false;
-                    }
-                    break;
-                case OPPONENT:
-                    if (!game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-                        return false;
-                    }
-                    break;
-                case CONTROLLER_ATTACHED_TO:
-                    Permanent attachment = game.getPermanent(source.getSourceId());
-                    if (attachment == null || !attachment.getAttachedTo().equals(event.getPlayerId())) {
-                        return false;
-                    }                    
-            }
-            CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
-            if (watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(event.getPlayerId())> 0) {
-                return true;
-            }
+        switch (targetController) {
+            case YOU:
+                if (!event.getPlayerId().equals(source.getControllerId())) {
+                    return false;
+                }
+                break;
+            case NOT_YOU:
+                if (event.getPlayerId().equals(source.getControllerId())) {
+                    return false;
+                }
+                break;
+            case OPPONENT:
+                if (!game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+                    return false;
+                }
+                break;
+            case CONTROLLER_ATTACHED_TO:
+                Permanent attachment = game.getPermanent(source.getSourceId());
+                if (attachment == null || !attachment.getAttachedTo().equals(event.getPlayerId())) {
+                    return false;
+                }                    
+        }
+        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
+        if (watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(event.getPlayerId())> 0) {
+            return true;
         }
         return false;
     }

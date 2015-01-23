@@ -401,4 +401,33 @@ public class MorphTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "face down creature", 1);
 
     }
+
+    /**
+     * I played a Akroma, Angel of Fury face down, and my opponent tried to counter it.
+     * The counter failed and Akroma face successfully play face down, when it should have
+     * been countered. (The card text on akroma should not prevent her from being countered).
+     */
+
+    @Test
+    public void testRuleModifyingEffectsFromManifestedCardWontBeAppliedAbilities() {
+        addCard(Zone.HAND, playerA, "Akroma, Angel of Fury", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+
+        addCard(Zone.HAND, playerB, "Counterspell", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Fury");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Counterspell", "Akroma, Angel of Fury");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerB, 20);
+
+        assertGraveyardCount(playerB, "Counterspell", 1);
+        assertGraveyardCount(playerA, "Akroma, Angel of Fury", 1);
+
+    }
 }

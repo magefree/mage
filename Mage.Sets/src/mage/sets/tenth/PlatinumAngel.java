@@ -37,6 +37,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -70,10 +71,10 @@ public class PlatinumAngel extends CardImpl {
         return new PlatinumAngel(this);
     }
 
-    class PlatinumAngelEffect extends ReplacementEffectImpl {
+    class PlatinumAngelEffect extends ContinuousRuleModifiyingEffectImpl {
 
         public PlatinumAngelEffect() {
-            super(Duration.WhileOnBattlefield, Outcome.Benefit);
+            super(Duration.WhileOnBattlefield, Outcome.Benefit, false, false);
             staticText = "You can't lose the game and your opponents can't win the game";
         }
 
@@ -88,11 +89,6 @@ public class PlatinumAngel extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            return true;
-        }
-
-        @Override
-        public boolean replaceEvent(GameEvent event, Ability source, Game game) {
             return true;
         }
 

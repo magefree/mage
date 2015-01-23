@@ -79,12 +79,17 @@ public class AbyssalPersecutor extends CardImpl {
 class AbyssalPersecutorCannotWinEffect extends ContinuousRuleModifiyingEffectImpl {
 
     AbyssalPersecutorCannotWinEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment, false, false);
         staticText = "You can't win the game and your opponents can't lose the game";
     }
 
     AbyssalPersecutorCannotWinEffect ( final AbyssalPersecutorCannotWinEffect effect ) {
         super(effect);
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.LOSES || event.getType() == EventType.WINS ;
     }
 
     @Override

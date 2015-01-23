@@ -82,18 +82,21 @@ public class CantBeTargetedAllEffect extends ContinuousRuleModifiyingEffectImpl 
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TARGET;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.TARGET) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && filterTarget.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
-                if (filterSource == null) {
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent != null && filterTarget.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
+            if (filterSource == null) {
+                return true;
+            }
+            else {
+                StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
+                if (sourceObject != null && filterSource.match(sourceObject, sourceObject.getSourceId(), game)) {
                     return true;
-                }
-                else {
-                    StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
-                    if (sourceObject != null && filterSource.match(sourceObject, sourceObject.getSourceId(), game)) {
-                        return true;
-                    }
                 }
             }
         }

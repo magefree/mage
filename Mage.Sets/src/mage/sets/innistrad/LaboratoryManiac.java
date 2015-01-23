@@ -106,8 +106,13 @@ class LaboratoryManiacEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.LOSES;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.LOSES && event.getPlayerId().equals(source.getControllerId())) {
+        if (event.getPlayerId().equals(source.getControllerId())) {
             Player player = game.getPlayer(event.getPlayerId());
               if (!player.hasLost() && (
                         (player.getLife() > 0 || !player.canLoseByZeroOrLessLife())

@@ -30,12 +30,12 @@ package mage.sets.returntoravnica;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.CantCounterAbility;
+import mage.abilities.common.CantBeCounteredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.CantCounterSourceEffect;
+import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
@@ -55,7 +55,7 @@ public class SupremeVerdict extends CardImpl {
         this.color.setBlue(true);
 
         // Supreme Verdict can't be countered.
-        Ability ability = new CantCounterAbility();
+        Ability ability = new CantBeCounteredAbility();
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 

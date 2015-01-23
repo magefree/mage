@@ -27,6 +27,11 @@
  */
 package mage.sets.scarsofmirrodin;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -53,6 +58,9 @@ import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
+import mage.filter.predicate.mageobject.FromSetPredicate;
+import mage.target.TargetPermanent;
+import mage.util.SpellTargetAddress;
 
 /**
  * @author nantuko
@@ -122,27 +130,25 @@ class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl {
         if (spell != null &&
             (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))) {
             UUID targetGolem = null;
-            SpellAbility sa = spell.getSpellAbility();
-            for (Effect effect : sa.getEffects()) {
-                for (UUID target : effect.getTargetPointer().getTargets(game, sa)) {
+            for (SpellTargetAddress addr : SpellTargetAddress.walk(spell)) {
+                Target targetInstance = addr.getTarget(spell);
+                for (UUID target : targetInstance.getTargets()) {
                     Permanent permanent = game.getPermanent(target);
-                    if (permanent != null) {
-                        if (!permanent.hasSubtype("Golem")) {
+                    if (permanent == null || !permanent.hasSubtype("Golem")) {
+                        return false;
+                    }
+                    if (targetGolem == null) {
+                        targetGolem = target;
+                    } else {
+                        // If a spell has multiple targets, but it's targeting the same Golem with all of them, Precursor Golem's last ability will trigger
+                        if (!targetGolem.equals(target)) {
                             return false;
-                        }
-                        if (targetGolem == null) {
-                            targetGolem = target;
-                        } else {
-                            // If a spell has multiple targets, but it's targeting the same Golem with all of them, Precursor Golem's last ability will trigger
-                            if (!targetGolem.equals(target)) {
-                                return false;
-                            }
                         }
                     }
                 }
             }
             if (targetGolem != null) {
-                getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId()));
+                getEffects().get(0).setValue("triggeringSpell", spell);
                 getEffects().get(0).setValue("targetedGolem", targetGolem);
                 return true;
             }
@@ -174,16 +180,17 @@ class PrecursorGolemCopySpellEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = (Spell) getValue("triggeringSpell");
         if (spell != null) {
-            SpellAbility sa = spell.getSpellAbility();
             UUID targetedGolem = (UUID) getValue("targetedGolem");
+            Map<UUID, Spell> targetable = new HashMap<>();
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filterGolem, source.getControllerId(), source.getSourceId(), game)) {
                 if (permanent.getId().equals(targetedGolem)) {
                     continue; // copy only for other golems
                 }
                 boolean legal = true;
-                for (Target target : sa.getTargets()) {
+                for (SpellTargetAddress addr : SpellTargetAddress.walk(spell)) {
+                    Target target = addr.getTarget(spell);
                     if (!target.canTarget(permanent.getId(), game)) {
                         legal = false;
                         break;
@@ -191,16 +198,40 @@ class PrecursorGolemCopySpellEffect extends OneShotEffect {
                 }
                 if (legal) {
                     Spell copy = spell.copySpell();
-                    copy.setControllerId(spell.getControllerId());
                     copy.setCopiedSpell(true);
-                    for (Effect effect : copy.getSpellAbility().getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(permanent.getId()));
-                    }
-                    for (Target target : copy.getSpellAbility().getTargets()) {
+                    for (SpellTargetAddress addr : SpellTargetAddress.walk(copy)) {
+                        Target target = addr.getTarget(copy);
                         target.clearChosen();
                         target.add(permanent.getId(), game);
                     }
-                    game.getStack().push(copy);
+                    targetable.put(permanent.getId(), copy);
+                }
+            }
+            UUID spellController = spell.getControllerId();
+            while (targetable.size() > 0) {
+                FilterPermanent filter = new FilterPermanent("Golem",
+                                                             "Golem that spell could target ("+targetable.size()+" remaining)");
+                filter.add(new FromSetPredicate(targetable.keySet()));
+                TargetPermanent target = new TargetPermanent(0, 1, filter, true);
+
+                if (target.possibleTargets(spellController, game).size() > 1
+                    && target.canChoose(spell.getSourceId(), spellController, game)) {
+                    game.getPlayer(spellController).choose(Outcome.Neutral, target, source.getId(), game);
+                }
+                Collection<UUID> chosen = target.getTargets();
+                if (chosen.size() == 0) {
+                    chosen = targetable.keySet();
+                }
+                List<UUID> toDelete = new ArrayList<>();
+                for (UUID chosenId : chosen) {
+                    Spell chosenCopy = targetable.get(chosenId);
+                    if (chosenCopy != null) {
+                        game.getStack().push(chosenCopy);
+                        toDelete.add(chosenId);
+                    }
+                }
+                for (UUID id : toDelete) {
+                    targetable.remove(id);
                 }
             }
             return true;

@@ -98,8 +98,13 @@ class AggressiveMiningEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.PLAY_LAND;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType().equals(GameEvent.EventType.PLAY_LAND) && event.getPlayerId().equals(source.getControllerId());
+        return event.getPlayerId().equals(source.getControllerId());
     }
     
 }

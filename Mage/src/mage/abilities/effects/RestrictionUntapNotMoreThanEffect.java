@@ -42,7 +42,7 @@ import mage.players.Player;
  */
 public abstract class RestrictionUntapNotMoreThanEffect extends ContinuousEffectImpl {
 
-    private int number;
+    private final int number;
     private FilterControlledPermanent filter;
 
     public RestrictionUntapNotMoreThanEffect(Duration duration, int number, FilterControlledPermanent filter) {

@@ -49,6 +49,7 @@ public class DamageEverythingEffect extends OneShotEffect {
 
     private DynamicValue amount;
     private FilterPermanent filter;
+    private UUID damageSource;
 
     public DamageEverythingEffect(int amount) {
         this(new StaticValue(amount), new FilterCreaturePermanent());
@@ -57,11 +58,15 @@ public class DamageEverythingEffect extends OneShotEffect {
     public DamageEverythingEffect(int amount, FilterPermanent filter) {
         this(new StaticValue(amount), filter);
     }
-    
     public DamageEverythingEffect(DynamicValue amount, FilterPermanent filter) {
+        this(amount, filter, null);
+    }
+    
+    public DamageEverythingEffect(DynamicValue amount, FilterPermanent filter, UUID damageSource) {
         super(Outcome.Damage);
         this.amount = amount;
         this.filter = filter;
+        this.damageSource = damageSource;
         staticText = "{source} deals " + amount.toString() + " damage to each " + filter.getMessage() + " and each player";   
     }
 
@@ -69,6 +74,7 @@ public class DamageEverythingEffect extends OneShotEffect {
         super(effect);
         this.amount = effect.amount;
         this.filter = effect.filter;
+        this.damageSource = effect.damageSource;
     }
 
     @Override
@@ -81,12 +87,12 @@ public class DamageEverythingEffect extends OneShotEffect {
         int damage = amount.calculate(game, source, this);
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
         for (Permanent permanent: permanents) {
-            permanent.damage(damage, source.getSourceId(), game, false, true);
+            permanent.damage(damage, damageSource == null ? source.getSourceId(): damageSource, game, false, true);
         }
         for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                player.damage(damage, source.getSourceId(), game, false, true);
+                player.damage(damage, damageSource == null ? source.getSourceId(): damageSource, game, false, true);
             }
         }
         return true;

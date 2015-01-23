@@ -41,6 +41,7 @@ import static mage.constants.TargetController.YOU;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -76,10 +77,15 @@ public class DontUntapInControllersUntapStepAllEffect extends ContinuousRuleModi
     public boolean apply(Game game, Ability source) {
         return false;
     }
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UNTAP;
+    }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (GameEvent.EventType.UNTAP.equals(event.getType()) && PhaseStep.UNTAP.equals(game.getTurn().getStepType())) {
+        if (PhaseStep.UNTAP.equals(game.getTurn().getStepType())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null) {
                 switch(targetController) {

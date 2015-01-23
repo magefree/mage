@@ -283,7 +283,6 @@ public class TableController {
             }
             return false;
         }
-
         Player player = createPlayer(name, seat.getPlayerType(), skill);
         if (player == null) {
             String message = new StringBuilder("Could not create player ").append(name).append(" of type ").append(seat.getPlayerType()).toString();
@@ -291,6 +290,7 @@ public class TableController {
             user.showUserMessage("Join Table",message);
             return false;
         }
+        logger.debug("DECK validated: " + table.getValidator().getName() + " " + player.getName() + " " + deck.getName());
         if (!player.canJoinTable(table)) {
             user.showUserMessage("Join Table", new StringBuilder("A ").append(seat.getPlayerType()).append(" player can't join this table.").toString());
             return false;

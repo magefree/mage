@@ -36,7 +36,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CantCounterSourceEffect;
+import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
@@ -58,7 +58,7 @@ public class ThrunTheLastTroll extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CantCounterSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CantBeCounteredSourceEffect()));
         this.addAbility(HexproofAbility.getInstance());
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
     }

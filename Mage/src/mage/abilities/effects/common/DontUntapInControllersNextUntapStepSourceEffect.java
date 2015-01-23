@@ -42,7 +42,11 @@ public class DontUntapInControllersNextUntapStepSourceEffect extends ContinuousR
         return null;
     }
 
-    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.UNTAP_STEP || event.getType() == GameEvent.EventType.UNTAP;
+    }
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         // the check for turn number is needed if multiple effects are added to prevent untap in next untap step
@@ -55,7 +59,7 @@ public class DontUntapInControllersNextUntapStepSourceEffect extends ContinuousR
             return false;
         }
         // remember the turn of the untap step the effect has to be applied
-        if (GameEvent.EventType.UNTAP_STEP.equals(event.getType()) 
+        if (GameEvent.EventType.UNTAP_STEP.equals(event.getType())
                 && game.getActivePlayerId().equals(source.getControllerId())) {
             if (validForTurnNum == game.getTurnNum()) { // the turn has a second untap step but the effect is already related to the first untap step
                 discard();

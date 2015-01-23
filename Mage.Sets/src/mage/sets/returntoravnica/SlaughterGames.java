@@ -36,7 +36,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CantCounterSourceEffect;
+import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -62,7 +62,7 @@ public class SlaughterGames extends CardImpl {
         this.color.setRed(true);
 
         // Slaughter Games can't be countered by spells or abilities.
-        Effect effect =  new CantCounterSourceEffect();
+        Effect effect =  new CantBeCounteredSourceEffect();
         effect.setText("{this} can't be countered by spells or abilities");
         Ability ability = new SimpleStaticAbility(Zone.STACK,effect);
         ability.setRuleAtTheTop(true);

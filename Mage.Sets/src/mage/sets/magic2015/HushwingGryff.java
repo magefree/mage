@@ -99,17 +99,20 @@ class HushwingGryffEffect extends ContinuousRuleModifiyingEffectImpl {
         }
         return null;
     }
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            Permanent permanent = ((EntersTheBattlefieldEvent)event).getTarget();
-            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
-                // Because replacement events have to be executed 
-                // call replaceEvent here without calling the triggering event after
-                game.getContinuousEffects().replaceEvent(event, game);
-                return true;
-            }
+        Permanent permanent = ((EntersTheBattlefieldEvent)event).getTarget();
+        if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
+            // Because replacement events have to be executed 
+            // call replaceEvent here without calling the triggering event after
+            game.getContinuousEffects().replaceEvent(event, game);
+            return true;
         }
         return false;
     }

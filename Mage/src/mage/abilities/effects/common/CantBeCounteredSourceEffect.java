@@ -43,20 +43,20 @@ import mage.game.stack.StackObject;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CantCounterSourceEffect extends ContinuousRuleModifiyingEffectImpl {
+public class CantBeCounteredSourceEffect extends ContinuousRuleModifiyingEffectImpl {
 
-    public CantCounterSourceEffect() {
+    public CantBeCounteredSourceEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, false, true);
         staticText = "{this} can't be countered";
     }
 
-    public CantCounterSourceEffect(final CantCounterSourceEffect effect) {
+    public CantBeCounteredSourceEffect(final CantBeCounteredSourceEffect effect) {
         super(effect);
     }
 
     @Override
-    public CantCounterSourceEffect copy() {
-        return new CantCounterSourceEffect(this);
+    public CantBeCounteredSourceEffect copy() {
+        return new CantBeCounteredSourceEffect(this);
     }
 
     @Override
@@ -75,13 +75,17 @@ public class CantCounterSourceEffect extends ContinuousRuleModifiyingEffectImpl 
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.COUNTER;
+    }
+
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.COUNTER) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null) {
-                if (spell.getSourceId().equals(source.getSourceId())) {
-                    return true;
-                }
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (spell != null) {
+            if (spell.getSourceId().equals(source.getSourceId())) {
+                return true;
             }
         }
         return false;

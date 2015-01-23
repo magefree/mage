@@ -88,7 +88,7 @@ class VaultbreakerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Cards discardedCard = controller.discard(1, true, source, game);
+            Cards discardedCard = controller.discard(1, false, source, game);
             if (discardedCard != null) {
                 controller.drawCards(1, game);
                 return true;

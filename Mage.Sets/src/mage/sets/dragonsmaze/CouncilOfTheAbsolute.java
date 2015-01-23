@@ -29,11 +29,6 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -41,21 +36,20 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.NameACardEffect;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
 import mage.constants.CostModificationType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
@@ -82,7 +76,6 @@ public class CouncilOfTheAbsolute extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CouncilOfTheAbsoluteReplacementEffect()));
         // Spells with the chosen name cost 2 less for you to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CouncilOfTheAbsoluteCostReductionEffect()));
-
 
     }
 
@@ -128,8 +121,13 @@ class CouncilOfTheAbsoluteReplacementEffect extends ContinuousRuleModifiyingEffe
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.CAST_SPELL;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.CAST_SPELL && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+        if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             MageObject object = game.getObject(event.getSourceId());
             if (object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY))) {
                 return true;
