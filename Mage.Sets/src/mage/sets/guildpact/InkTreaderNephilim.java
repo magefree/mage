@@ -36,7 +36,6 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -53,7 +52,6 @@ import mage.game.stack.Spell;
 import java.util.Map;
 import java.util.List;
 import mage.target.Target;
-import mage.abilities.Modes;
 import mage.filter.predicate.mageobject.FromSetPredicate;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -130,15 +128,11 @@ class InkTreaderNephilimTriggeredAbility extends TriggeredAbilityImpl {
         if (spell != null) {
             boolean allTargetsInkTreaderNephilim = true;
             boolean atLeastOneTargetsInkTreaderNephilim = false;
-            for (SpellAbility spellAbility: spell.getSpellAbilities()){
-                Modes modesSpell = spellAbility.getModes();
-                for (UUID mode : modesSpell.getSelectedModes()) {
-                    for (Target targetInstance : modesSpell.get(mode).getTargets()) {
-                        for (UUID target : targetInstance.getTargets()) {
-                            allTargetsInkTreaderNephilim &= target.equals(sourceId);
-                            atLeastOneTargetsInkTreaderNephilim |= target.equals(sourceId);
-                        }
-                    }
+            for (SpellTargetAddress addr : SpellTargetAddress.walk(spell)) {
+                Target targetInstance = addr.getTarget(spell);
+                for (UUID target : targetInstance.getTargets()) {
+                    allTargetsInkTreaderNephilim &= target.equals(sourceId);
+                    atLeastOneTargetsInkTreaderNephilim |= target.equals(sourceId);
                 }
             }
             if (allTargetsInkTreaderNephilim && atLeastOneTargetsInkTreaderNephilim) {
