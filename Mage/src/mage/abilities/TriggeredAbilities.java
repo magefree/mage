@@ -103,9 +103,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
             exists = false;
             if (object instanceof PermanentCard) {
                 PermanentCard permanent = (PermanentCard)object;
-                if (permanent.isFaceDown()) {
-                    exists = ability.getWorksFaceDown();
-                } else if (permanent.canTransform() && event.getType() == GameEvent.EventType.TRANSFORMED) {
+                if (permanent.canTransform() && event.getType() == GameEvent.EventType.TRANSFORMED) {
                     exists = permanent.getCard().getAbilities().contains(ability);
                 }                
             }            
