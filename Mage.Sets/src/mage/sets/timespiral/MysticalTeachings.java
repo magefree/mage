@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
 public class MysticalTeachings extends CardImpl {
 
 
-    private static final FilterCard filter = new FilterCard("creature an opponent controls");
+    private static final FilterCard filter = new FilterCard("an instant card or a card with flash");
 
     static {
         filter.add(Predicates.or(

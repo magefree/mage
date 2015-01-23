@@ -30,7 +30,7 @@ package mage.sets.conflux;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.common.CantCounterAbility;
+import mage.abilities.common.CantBeCounteredAbility;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.cards.CardImpl;
 
@@ -47,7 +47,7 @@ public class VolcanicFallout extends CardImpl {
         this.color.setRed(true);
 
         // Volcanic Fallout can't be countered.
-        this.addAbility(new CantCounterAbility());
+        this.addAbility(new CantBeCounteredAbility());
         // Volcanic Fallout deals 2 damage to each creature and each player.
         this.getSpellAbility().addEffect(new DamageEverythingEffect(2));
     }

@@ -38,7 +38,6 @@ import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -74,10 +73,15 @@ public class DontUntapInControllersUntapStepTargetEffect extends ContinuousRuleM
         }
         return null;
     }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.UNTAP;
+    }
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (GameEvent.EventType.UNTAP.equals(event.getType()) && PhaseStep.UNTAP.equals(game.getTurn().getStepType())) {
+        if (PhaseStep.UNTAP.equals(game.getTurn().getStepType())) {
             for (UUID targetId : targetPointer.getTargets(game, source)) {
                 if (event.getTargetId().equals(targetId)) {
                     Permanent permanent = game.getPermanent(targetId);

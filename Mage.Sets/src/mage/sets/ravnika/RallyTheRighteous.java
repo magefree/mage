@@ -29,7 +29,7 @@
 package mage.sets.ravnika;
 
 import java.util.UUID;
-
+import mage.MageObjectReference;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Outcome;
@@ -55,8 +55,6 @@ public class RallyTheRighteous extends CardImpl {
     public RallyTheRighteous(UUID ownerId) {
         super(ownerId, 222, "Rally the Righteous", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{W}");
         this.expansionSetCode = "RAV";
-        this.color.setRed(true);
-        this.color.setWhite(true);
         
         // Radiance — Untap target creature and each other creature that shares a color with it. Those creatures get +2/+0 until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -79,7 +77,7 @@ class RallyTheRighteousUntapEffect extends OneShotEffect {
 
     public RallyTheRighteousUntapEffect() {
         super(Outcome.Untap);
-        staticText = "Radiance — Untap target creature and each other creature that shares a color with it.";
+        staticText = "<i>Radiance</i> — Untap target creature and each other creature that shares a color with it";
     }
 
     public RallyTheRighteousUntapEffect(final RallyTheRighteousUntapEffect effect) {
@@ -93,13 +91,13 @@ class RallyTheRighteousUntapEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (target != null) {
             ObjectColor color = target.getColor();
             target.untap(game);
-            for (Permanent p : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
-                if (p.getColor().shares(color) && !p.getId().equals(target.getId())) {
-                    p.untap(game);
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
+                if (permanent.getColor().shares(color) && !permanent.getId().equals(target.getId())) {
+                    permanent.untap(game);
                 }
             }
             return true;
@@ -113,7 +111,7 @@ class RallyTheRighteousBoostEffect extends ContinuousEffectImpl {
 
     public RallyTheRighteousBoostEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-        staticText = "Radiance — Target creature and each other creature that shares a color with it get +2/+0 until end of turn.";
+        staticText = "Those creatures get +2/+0 until end of turn";
     }
 
     public RallyTheRighteousBoostEffect(final RallyTheRighteousBoostEffect effect) {
@@ -121,19 +119,30 @@ class RallyTheRighteousBoostEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
+    public void init(Ability source, Game game) {
+        super.init(source, game); 
+        Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));        
         if (target != null) {
+            affectedObjectList.add(new MageObjectReference(target));
             ObjectColor color = target.getColor();
             target.addPower(2);
-            for (Permanent p : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
-                if (p.getColor().shares(color) && !p.getId().equals(target.getId())) {
-                    p.addPower(2);
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
+                if (!permanent.getId().equals(target.getId()) && permanent.getColor().shares(color)) {
+                    affectedObjectList.add(new MageObjectReference(permanent));
                 }
             }
-            return true;
+        }        
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for(MageObjectReference mageObjectReference :affectedObjectList) {
+            Permanent permanent = mageObjectReference.getPermanent(game);
+            if (permanent != null) {
+                permanent.addPower(2);
+            } 
         }
-        return false;
+        return true;        
     }
 
     @Override

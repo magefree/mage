@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.ObjectColor;
-import mage.abilities.effects.common.CantCounterControlledEffect;
+import mage.abilities.effects.common.CantBeCounteredControlledEffect;
 import mage.abilities.effects.common.CantBeTargetedAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
@@ -62,7 +62,7 @@ public class AutumnsVeil extends CardImpl {
         this.expansionSetCode = "M11";
         this.color.setGreen(true);
         // Spells you control can't be countered by blue or black spells this turn
-        this.getSpellAbility().addEffect(new CantCounterControlledEffect(filterTarget1, filterSource, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new CantBeCounteredControlledEffect(filterTarget1, filterSource, Duration.EndOfTurn));
         // and creatures you control can't be the targets of blue or black spells this turn.
         this.getSpellAbility().addEffect(new CantBeTargetedAllEffect(filterTarget2, filterSource, Duration.EndOfTurn));
     }

@@ -79,6 +79,11 @@ public abstract class ContinuousRuleModifiyingEffectImpl extends ContinuousEffec
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return true;
+    }
+
+    @Override
     public boolean apply(Game game, Ability source) {
         return true;
     }

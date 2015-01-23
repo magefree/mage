@@ -31,7 +31,7 @@ package mage.sets.darksteel;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.common.CantCounterAbility;
+import mage.abilities.common.CantBeCounteredAbility;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.TargetSpell;
@@ -46,7 +46,7 @@ public class LastWord extends CardImpl {
         super(ownerId, 23, "Last Word", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "DST";
         this.color.setBlue(true);
-        this.addAbility(new CantCounterAbility());
+        this.addAbility(new CantBeCounteredAbility());
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
     }

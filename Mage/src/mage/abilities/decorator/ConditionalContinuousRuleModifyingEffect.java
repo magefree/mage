@@ -100,6 +100,16 @@ public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModi
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        if (effect.checksEventType(event, game)) {
+            return true;
+        } else if (otherwiseEffect != null) {
+            return otherwiseEffect.checksEventType(event, game);
+        }
+        return false;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!initDone) { // if simpleStaticAbility, init won't be called
             init(source, game);

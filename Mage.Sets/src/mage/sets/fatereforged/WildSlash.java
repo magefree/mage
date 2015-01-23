@@ -81,7 +81,7 @@ class DamageCantBePreventedEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public DamageCantBePreventedEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit, false, false);
-        staticText = "Damage can't be prevented this turn";
+        staticText = "damage can't be prevented this turn";
     }
 
     public DamageCantBePreventedEffect(final DamageCantBePreventedEffect effect) {
@@ -99,10 +99,12 @@ class DamageCantBePreventedEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.PREVENT_DAMAGE;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.PREVENT_DAMAGE)) {
-            return true;
-        }
-        return false;
+        return true;
     }
 }

@@ -34,10 +34,8 @@ import java.util.List;
 import java.util.Map;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
@@ -55,7 +53,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.target.Target;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 import mage.filter.predicate.mageobject.FromSetPredicate;
@@ -210,7 +207,7 @@ class PrecursorGolemCopySpellEffect extends OneShotEffect {
             UUID spellController = spell.getControllerId();
             while (targetable.size() > 0) {
                 FilterPermanent filter = new FilterPermanent("Golem",
-                                                             "Golem that spell could target ("+Integer.toString(targetable.size())+" remaining)");
+                                                             "Golem that spell could target ("+targetable.size()+" remaining)");
                 filter.add(new FromSetPredicate(targetable.keySet()));
                 TargetPermanent target = new TargetPermanent(0, 1, filter, true);
 

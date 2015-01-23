@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -854,6 +855,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         //20091005 - 701.13
         if (!game.replaceEvent(GameEvent.getEvent(EventType.SACRIFICE_PERMANENT, objectId, sourceId, controllerId))) {
             // Commander replacement effect or Rest in Peace (exile instead of graveyard) in play does not prevent successful sacrifice
+            // so the return value of the moveToZone is not taken into account here
             moveToZone(Zone.GRAVEYARD, sourceId, game, false);
             Player player = game.getPlayer(getControllerId());
             if (player != null) {

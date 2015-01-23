@@ -35,8 +35,8 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.CantCounterControlledEffect;
-import mage.abilities.effects.common.CantCounterSourceEffect;
+import mage.abilities.effects.common.CantBeCounteredControlledEffect;
+import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterSpell;
@@ -66,8 +66,8 @@ public class SpellbreakerBehemoth extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantCounterSourceEffect()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantCounterControlledEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantBeCounteredSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeCounteredControlledEffect(filter, Duration.WhileOnBattlefield)));
     }
 
     public SpellbreakerBehemoth(final SpellbreakerBehemoth card) {

@@ -28,12 +28,9 @@
 package mage.sets.futuresight;
 
 import java.util.UUID;
-
 import mage.cards.CardImpl;
 import mage.constants.Rarity;
 import mage.constants.CardType;
-
-
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.filter.FilterSpell;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
@@ -55,10 +52,7 @@ public class VeilstoneAmulet extends CardImpl {
         this.expansionSetCode = "FUT";
 
         // Whenever you cast a spell, creatures you control can't be the targets of spells or abilities your opponents control this turn.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new VeilstoneAmuletEffect(),
-                                                                new FilterSpell(),
-                                                                false,
-                                                                "Whenever you cast a spell, creatures you control can't be the targets of spells or abilities your opponents control this turn."));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new VeilstoneAmuletEffect(), new FilterSpell("a spell"), false));
     }
 
     public VeilstoneAmulet(final VeilstoneAmulet card) {
@@ -78,6 +72,7 @@ class VeilstoneAmuletEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public VeilstoneAmuletEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
+        staticText = "creatures you control can't be the targets of spells or abilities your opponents control this turn";
     }
 
     public VeilstoneAmuletEffect(final VeilstoneAmuletEffect effect) {
@@ -99,12 +94,9 @@ class VeilstoneAmuletEffect extends ContinuousRuleModifiyingEffectImpl {
         if (event.getType() == EventType.TARGET) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null) {
-                UUID permanentController = permanent.getControllerId();
-                UUID abilityController = ability.getControllerId();
-                UUID sourceController = event.getPlayerId();
                 if (permanent.getCardType().contains(CardType.CREATURE) &&
-                    permanentController.equals(abilityController) &&
-                    game.getPlayer(abilityController).hasOpponent(sourceController, game)) {
+                    permanent.getControllerId().equals(ability.getControllerId()) &&
+                    game.getPlayer(ability.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
                     return true;
                 }
             }

@@ -97,12 +97,15 @@ class WardscaleDragonRuleEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CAST_SPELL ) {
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-            if (sourcePermanent != null && sourcePermanent.isAttacking()) {
-                return event.getPlayerId() == game.getCombat().getDefendingPlayerId(sourcePermanent.getId(), game);                
-            }
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (sourcePermanent != null && sourcePermanent.isAttacking()) {
+            return event.getPlayerId() == game.getCombat().getDefendingPlayerId(sourcePermanent.getId(), game);                
         }
         return false;
     }

@@ -30,7 +30,7 @@ package mage.sets.invasion;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.common.CantCounterAbility;
+import mage.abilities.common.CantBeCounteredAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
@@ -59,7 +59,7 @@ public class Obliterate extends CardImpl {
         this.color.setRed(true);
 
         // Obliterate can't be countered.
-        this.addAbility(new CantCounterAbility());
+        this.addAbility(new CantBeCounteredAbility());
         // Destroy all artifacts, creatures, and lands. They can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }

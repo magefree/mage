@@ -38,7 +38,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CantCounterSourceEffect;
+import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
@@ -73,7 +73,7 @@ public class Counterflux extends CardImpl {
         this.color.setRed(true);
 
         // Counterflux can't be countered by spells or abilities.
-        Effect effect =  new CantCounterSourceEffect();
+        Effect effect =  new CantBeCounteredSourceEffect();
         effect.setText("{this} can't be countered by spells or abilities");
         Ability ability = new SimpleStaticAbility(Zone.STACK,effect);
         ability.setRuleAtTheTop(true);

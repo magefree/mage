@@ -39,6 +39,15 @@ import mage.game.events.GameEvent;
 public interface ContinuousRuleModifiyingEffect extends ContinuousEffect {
 
     /**
+     * This check for the relevant events is called at first to prevent further actions if
+     * the current event is ignored from this effect
+     * @param event
+     * @param game
+     * @return
+     */
+    boolean checksEventType(GameEvent event, Game game);
+
+    /**
      * 
      * @param event the event to check if it may happen
      * @param source the ability of the effect

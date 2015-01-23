@@ -42,6 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.filter.common.FilterAttackingCreature;
 
 
 /**
@@ -52,11 +53,10 @@ public class BalduvianRage extends CardImpl {
     public BalduvianRage(UUID ownerId) {
         super(ownerId, 76, "Balduvian Rage", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{R}");
         this.expansionSetCode = "CSP";
-        this.color.setRed(true);
 
         // Target attacking creature gets +X/+0 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(new ManacostVariableValue(), new StaticValue(0), Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterAttackingCreature()));
 
         // Draw a card at the beginning of the next turn's upkeep.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)),false));

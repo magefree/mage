@@ -44,23 +44,23 @@ import mage.game.stack.Spell;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CantCounterControlledEffect extends ContinuousRuleModifiyingEffectImpl {
+public class CantBeCounteredControlledEffect extends ContinuousRuleModifiyingEffectImpl {
 
     private FilterSpell filterTarget;
     private FilterObject filterSource;
 
-    public CantCounterControlledEffect(FilterSpell filterTarget, FilterObject filterSource, Duration duration) {
+    public CantBeCounteredControlledEffect(FilterSpell filterTarget, FilterObject filterSource, Duration duration) {
         super(duration, Outcome.Benefit);
         this.filterTarget = filterTarget;
         this.filterSource = filterSource;
         setText();
     }
 
-    public CantCounterControlledEffect(FilterSpell filterTarget, Duration duration) {
+    public CantBeCounteredControlledEffect(FilterSpell filterTarget, Duration duration) {
         this(filterTarget, null, duration);
     }
 
-    public CantCounterControlledEffect(final CantCounterControlledEffect effect) {
+    public CantBeCounteredControlledEffect(final CantBeCounteredControlledEffect effect) {
         super(effect);
         if (effect.filterTarget != null) {
             this.filterTarget = effect.filterTarget.copy();
@@ -71,8 +71,8 @@ public class CantCounterControlledEffect extends ContinuousRuleModifiyingEffectI
     }
 
     @Override
-    public CantCounterControlledEffect copy() {
-        return new CantCounterControlledEffect(this);
+    public CantBeCounteredControlledEffect copy() {
+        return new CantBeCounteredControlledEffect(this);
     }
 
     @Override
@@ -81,18 +81,21 @@ public class CantCounterControlledEffect extends ContinuousRuleModifiyingEffectI
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.COUNTER;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.COUNTER) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.getControllerId().equals(source.getControllerId())
-                    && filterTarget.match(spell, game)) {
-                if (filterSource == null) {
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (spell != null && spell.getControllerId().equals(source.getControllerId())
+                && filterTarget.match(spell, game)) {
+            if (filterSource == null) {
+                return true;
+            } else {
+                MageObject sourceObject = game.getObject(source.getSourceId());
+                if (sourceObject != null && filterSource.match(sourceObject, game)) {
                     return true;
-                } else {
-                    MageObject sourceObject = game.getObject(source.getSourceId());
-                    if (sourceObject != null && filterSource.match(sourceObject, game)) {
-                        return true;
-                    }
                 }
             }
         }

@@ -35,7 +35,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.CantCounterAbility;
+import mage.abilities.common.CantBeCounteredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -67,7 +67,7 @@ public class SavageSummoning extends CardImpl {
         this.color.setGreen(true);
 
         // Savage Summoning can't be countered.
-        Ability ability = new CantCounterAbility();
+        Ability ability = new CantBeCounteredAbility();
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 

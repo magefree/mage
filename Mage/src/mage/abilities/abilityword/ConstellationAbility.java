@@ -30,7 +30,6 @@ package mage.abilities.abilityword;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;

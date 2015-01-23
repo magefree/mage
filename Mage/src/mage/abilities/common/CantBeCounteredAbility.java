@@ -29,20 +29,20 @@
 package mage.abilities.common;
 
 import mage.abilities.StaticAbility;
-import mage.abilities.effects.common.CantCounterSourceEffect;
+import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.constants.Zone;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CantCounterAbility extends StaticAbility {
+public class CantBeCounteredAbility extends StaticAbility {
 
-    public CantCounterAbility() {
-        super(Zone.STACK, new CantCounterSourceEffect());
+    public CantBeCounteredAbility() {
+        super(Zone.STACK, new CantBeCounteredSourceEffect());
     }
 
-    public CantCounterAbility(CantCounterAbility ability) {
+    public CantBeCounteredAbility(CantBeCounteredAbility ability) {
         super(ability);
     }
 
@@ -52,7 +52,7 @@ public class CantCounterAbility extends StaticAbility {
     }
 
     @Override
-    public CantCounterAbility copy() {
-        return new CantCounterAbility(this);
+    public CantBeCounteredAbility copy() {
+        return new CantBeCounteredAbility(this);
     }
 }

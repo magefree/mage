@@ -35,7 +35,7 @@ import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CantCounterSourceEffect;
+import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
@@ -62,7 +62,7 @@ public class AbruptDecay extends CardImpl {
         this.color.setBlack(true);
 
         // Abrupt Decay can't be countered by spells or abilities.
-        Effect effect =  new CantCounterSourceEffect();
+        Effect effect =  new CantBeCounteredSourceEffect();
         effect.setText("{this} can't be countered by spells or abilities");
         Ability ability = new SimpleStaticAbility(Zone.STACK,effect);
         ability.setRuleAtTheTop(true);
