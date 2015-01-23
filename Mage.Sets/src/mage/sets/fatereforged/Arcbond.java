@@ -30,6 +30,7 @@ package mage.sets.fatereforged;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -86,7 +87,7 @@ class ArcbondDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE && event.getTargetId().equals(this.getFirstTarget())) {
             for (Effect effect : this.getEffects()) {
-                    effect.setValue("damage", event.getAmount());
+                effect.setValue("damage", event.getAmount());
             }
             return true;
         }
@@ -126,7 +127,7 @@ class ArcbondEffect extends OneShotEffect {
         if (damage > 0) {
             FilterPermanent filter = new FilterCreaturePermanent("each other creature");
             filter.add(Predicates.not(new PermanentIdPredicate(source.getTargets().getFirstTarget())));
-            return new DamageEverythingEffect(damage, filter).apply(game, source);
+            return new DamageEverythingEffect(new StaticValue(damage), filter, source.getTargets().getFirstTarget()).apply(game, source);
         }        
         return false;
     }
