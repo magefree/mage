@@ -100,4 +100,39 @@ public class ManifestTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
         assertPowerToughness(playerB, "Silvercoat Lion", 2, 2);
     }
+    /**
+     * If Doomwake Giant gets manifested, it's Constellation trigger may not trigger
+     */
+    @Test
+    public void testETBTriggeredAbilities3() {
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        // Exile target creature. Its controller manifests the top card of his or her library {1}{U}
+        addCard(Zone.HAND, playerB, "Reality Shift");
+
+        // Constellation - When Doomwake Giant or another enchantment enters the battlefield
+        // under your control, creatures your opponents control get -1/-1 until end of turn.
+        addCard(Zone.LIBRARY, playerA, "Doomwake Giant");
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox");        
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+        
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Reality Shift", "Silvercoat Lion");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        // no life gain
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        assertGraveyardCount(playerB, "Reality Shift", 1);
+        assertExileCount("Silvercoat Lion" , 1);
+        // a facedown creature is on the battlefield
+        assertPermanentCount(playerA, "face down creature", 1);
+        assertPowerToughness(playerA, "face down creature", 2, 2);
+        // PlayerA's Pillarfield Ox should not have get -1/-1/
+        assertPermanentCount(playerB, "Pillarfield Ox", 1);
+        assertPowerToughness(playerB, "Pillarfield Ox", 2, 4);
+    }    
 }

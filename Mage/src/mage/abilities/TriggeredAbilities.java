@@ -98,14 +98,24 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
   
     private boolean checkAbilityStillExists(TriggeredAbility ability, GameEvent event, MageObject object) {
         boolean exists = true;
+        
         if (!object.getAbilities().contains(ability)) {
             exists = false;
             if (object instanceof PermanentCard) {
                 PermanentCard permanent = (PermanentCard)object;
-                if (permanent.canTransform() && event.getType() == GameEvent.EventType.TRANSFORMED) {
+                if (permanent.isFaceDown()) {
+                    exists = ability.getWorksFaceDown();
+                } else if (permanent.canTransform() && event.getType() == GameEvent.EventType.TRANSFORMED) {
                     exists = permanent.getCard().getAbilities().contains(ability);
+                }                
+            }            
+        } else {
+            if (object instanceof PermanentCard) {
+                PermanentCard permanent = (PermanentCard)object;
+                if (permanent.isFaceDown()) {
+                    exists = ability.getWorksFaceDown();
                 }
-            }
+            }            
         }
         return exists;
     }
