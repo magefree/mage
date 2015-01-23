@@ -53,7 +53,7 @@ public class MageDrawAction extends MageAction {
             numDrawn++;
             score += value;
         }
-        if (!player.isTopCardRevealed() && numDrawn > 0) {
+        if (!game.isSimulation() && !player.isTopCardRevealed() && numDrawn > 0) {
             game.fireInformEvent(player.getName() + " draws " + CardUtil.numberToText(numDrawn, "a") + " card" + (numDrawn > 1 ? "s" : ""));
         }
         if (player.isEmptyDraw()) {
@@ -81,7 +81,7 @@ public class MageDrawAction extends MageAction {
             if (card != null) {
                 drawnCards.add(card);
                 card.moveToZone(Zone.HAND, null, game, false);
-                if (player.isTopCardRevealed()) {
+                if (!game.isSimulation() && player.isTopCardRevealed()) {
                     game.fireInformEvent(player.getName() + " draws a revealed card  (" + card.getLogName() + ")");
                 }
 

@@ -156,7 +156,8 @@ public abstract class GameCommanderImpl extends GameImpl {
                 }
             }
             player.drawCards(numCards - deduction, this);
-            fireInformEvent(new StringBuilder(player.getName())
+            if (!isSimulation())
+                fireInformEvent(new StringBuilder(player.getName())
                     .append(" mulligans ")
                     .append(numCards)
                     .append(numCards == 1? " card":" cards")

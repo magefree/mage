@@ -109,7 +109,8 @@ import mage.util.CardUtil;
                     player.moveCardToExileWithInfo(card, null, "", getSourceId(), game, Zone.GRAVEYARD);
                     ++adjCost;
                 }
-                game.informPlayers(new StringBuilder("Delve: ").append(player.getName()).append(" exiled ")
+                if (!game.isSimulation())
+                    game.informPlayers(new StringBuilder("Delve: ").append(player.getName()).append(" exiled ")
                         .append(adjCost).append(" card").append(adjCost != 1?"s":"").append(" from his or her graveyard").toString());
                 CardUtil.adjustCost((SpellAbility)ability, adjCost);
             }

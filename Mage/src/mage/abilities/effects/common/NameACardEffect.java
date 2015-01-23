@@ -93,7 +93,8 @@ public class NameACardEffect extends OneShotEffect {
                 }
             }
             String cardName = cardChoice.getChoice();
-            game.informPlayers(sourceObject.getLogName() + ", named card: [" + cardName + "]");
+            if (!game.isSimulation())
+                game.informPlayers(sourceObject.getLogName() + ", named card: [" + cardName + "]");
             game.getState().setValue(source.getSourceId().toString() + INFO_KEY, cardName);
             if (sourceObject instanceof Permanent) {
                 ((Permanent)sourceObject).addInfo(INFO_KEY, CardUtil.addToolTipMarkTags("Named card: " + cardName), game);

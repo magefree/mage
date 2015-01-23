@@ -644,7 +644,7 @@ public class ContinuousEffects implements Serializable {
                     if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                         effect.setValue("targetAbility", targetAbility);
                         if (effect.applies(event, sourceAbility, game)) {
-                            if (!checkPlayableMode) {
+                            if (!checkPlayableMode && !game.isSimulation()) {
                                 String message = effect.getInfoMessage(sourceAbility, event, game);
                                 if (message != null && !message.isEmpty()) {
                                     if (effect.sendMessageToUser()) {

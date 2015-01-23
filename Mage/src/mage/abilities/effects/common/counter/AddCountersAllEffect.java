@@ -72,7 +72,8 @@ public class AddCountersAllEffect extends OneShotEffect {
                 for (Permanent permanent : permanents) {
                     if (filter.match(permanent, source.getSourceId(), controllerId, game)) {
                         permanent.addCounters(counter.copy(), game);
-                        game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ")
+                        if (!game.isSimulation())
+                            game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ")
                                 .append(controller.getName()).append(" puts ")
                                 .append(counter.getCount()).append(" ").append(counter.getName().toLowerCase())
                                 .append(" counter on ").append(permanent.getName()).toString());

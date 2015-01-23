@@ -77,7 +77,7 @@ public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect
                     return;
                 }
             }
-            if (choice.isChosen()) {
+            if (!game.isSimulation() && choice.isChosen()) {
                 game.informPlayers(sourceObject.getLogName() + ": " + controller.getName() + " has chosen protection from " + choice.getChoice());
             }
         }

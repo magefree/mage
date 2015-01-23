@@ -79,10 +79,12 @@ public class DetainTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID target: this.getTargetPointer().getTargets(game, source)) {
-            Permanent permanent = game.getPermanent(target);
-            if (permanent != null) {
-                game.informPlayers("Detained permanent: " + permanent.getName());
+        if (!game.isSimulation()) {
+            for (UUID target: this.getTargetPointer().getTargets(game, source)) {
+                Permanent permanent = game.getPermanent(target);
+                if (permanent != null) {
+                    game.informPlayers("Detained permanent: " + permanent.getName());
+                }
             }
         }
         DetainRestrictionEffect effect = new DetainRestrictionEffect();

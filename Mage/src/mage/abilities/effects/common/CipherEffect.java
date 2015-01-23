@@ -99,7 +99,8 @@ public class CipherEffect extends OneShotEffect {
                     ContinuousEffect effect = new GainAbilityTargetEffect(ability, Duration.Custom);
                     effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
                     game.addEffect(effect, source);
-                    game.informPlayers(new StringBuilder(sourceCard.getLogName()).append(": Spell ciphered to ").append(targetCreature.getLogName()).toString());
+                    if (!game.isSimulation())
+                        game.informPlayers(new StringBuilder(sourceCard.getLogName()).append(": Spell ciphered to ").append(targetCreature.getLogName()).toString());
                     return sourceCard.moveToExile(null, "", source.getSourceId(), game);
                 } else {
                     return false;

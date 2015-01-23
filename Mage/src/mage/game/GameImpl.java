@@ -632,7 +632,8 @@ public abstract class GameImpl implements Game, Serializable {
         boolean wasPaused = state.isPaused();
         state.resume();
         if (!gameOver(null)) {
-            fireInformEvent(new StringBuilder("Turn ").append(state.getTurnNum()).toString());
+            if (!isSimulation())
+                fireInformEvent(new StringBuilder("Turn ").append(state.getTurnNum()).toString());
             if (checkStopOnTurnOption()) {
                 return;
             }
@@ -694,7 +695,8 @@ public abstract class GameImpl implements Game, Serializable {
                 if (extraPlayer != null && extraPlayer.isInGame()) {
                     state.setExtraTurn(true);
                     state.setTurnId(extraTurn.getId());
-                    informPlayers(extraPlayer.getName() + " takes an extra turn");
+                    if (!isSimulation())
+                        informPlayers(extraPlayer.getName() + " takes an extra turn");
                     playTurn(extraPlayer);
                     state.setTurnNum(state.getTurnNum() + 1);
                 }
@@ -723,7 +725,8 @@ public abstract class GameImpl implements Game, Serializable {
     }
     
     private boolean playTurn(Player player) {
-        this.logStartOfTurn(player);
+        if (!isSimulation())
+            this.logStartOfTurn(player);
         if (checkStopOnTurnOption()) {
             return false;
         }
@@ -809,17 +812,19 @@ public abstract class GameImpl implements Game, Serializable {
         }
 
         if (choosingPlayer != null && choosingPlayer.choose(Outcome.Benefit, targetPlayer, null, this)) {
-            startingPlayerId = targetPlayer.getTargets().get(0);
-            Player startingPlayer = state.getPlayer(startingPlayerId);
-            StringBuilder message = new StringBuilder(choosingPlayer.getName()).append(" chooses that ");
-            if (choosingPlayer.getId().equals(startingPlayerId)) {
-                message.append("he or she");
-            } else {
-                message.append(startingPlayer.getName());
-            }
-            message.append(" takes the first turn");
+            if (!isSimulation()) {
+                startingPlayerId = targetPlayer.getTargets().get(0);
+                Player startingPlayer = state.getPlayer(startingPlayerId);
+                StringBuilder message = new StringBuilder(choosingPlayer.getName()).append(" chooses that ");
+                if (choosingPlayer.getId().equals(startingPlayerId)) {
+                    message.append("he or she");
+                } else {
+                    message.append(startingPlayer.getName());
+                }
+                message.append(" takes the first turn");
 
-            this.informPlayers(message.toString());
+                this.informPlayers(message.toString());
+            }
         } else {
             // not possible to choose starting player, stop here
             return;
@@ -1698,7 +1703,8 @@ public abstract class GameImpl implements Game, Serializable {
     private boolean movePermanentToGraveyardWithInfo(Permanent permanent) {
         boolean result = false;
         if (permanent.moveToZone(Zone.GRAVEYARD, null, this, false)) {
-            this.informPlayers(new StringBuilder(permanent.getLogName())
+            if (!isSimulation())
+                this.informPlayers(new StringBuilder(permanent.getLogName())
                     .append(" is put into graveyard from battlefield").toString());
             result = true;
         }
@@ -2097,22 +2103,24 @@ public abstract class GameImpl implements Game, Serializable {
         MageObject preventionSource = game.getObject(source.getSourceId());
 
         if (damageSource != null && preventionSource != null) {
-            MageObject targetObject = game.getObject(event.getTargetId());
-            String targetName = "";
-            if (targetObject == null) {
-                Player targetPlayer = game.getPlayer(event.getTargetId());
-                if (targetPlayer != null) {
-                    targetName = targetPlayer.getName();
+            if (!game.isSimulation()) {
+                MageObject targetObject = game.getObject(event.getTargetId());
+                String targetName = "";
+                if (targetObject == null) {
+                    Player targetPlayer = game.getPlayer(event.getTargetId());
+                    if (targetPlayer != null) {
+                        targetName = targetPlayer.getName();
+                    }
+                } else {
+                    targetName = targetObject.getLogName();
                 }
-            } else {
-                targetName = targetObject.getLogName();
+                StringBuilder message = new StringBuilder(preventionSource.getLogName()).append(": Prevented ");
+                message.append(Integer.toString(result.getPreventedDamage())).append(" damage from ").append(damageSource.getName());
+                if (!targetName.isEmpty()) {
+                    message.append(" to ").append(targetName);
+                }
+                game.informPlayers(message.toString());
             }
-            StringBuilder message = new StringBuilder(preventionSource.getLogName()).append(": Prevented ");
-            message.append(Integer.toString(result.getPreventedDamage())).append(" damage from ").append(damageSource.getName());
-            if (!targetName.isEmpty()) {
-                message.append(" to ").append(targetName);
-            }
-            game.informPlayers(message.toString());
         }
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, damageEvent.getTargetId(), source.getSourceId(), source.getControllerId(), result.getPreventedDamage()));
         return result;

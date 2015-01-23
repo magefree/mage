@@ -89,7 +89,8 @@ class TurnFaceUpEffect extends OneShotEffect {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             if (sourcePermanent != null) {
                 if (sourcePermanent.turnFaceUp(game, source.getControllerId())) {
-                    game.informPlayers(controller.getName() + " pays the costs of " + card.getLogName() + " to turn it face up");
+                    if (!game.isSimulation())
+                        game.informPlayers(controller.getName() + " pays the costs of " + card.getLogName() + " to turn it face up");
 
                     return true;
                 }

@@ -100,7 +100,8 @@ public class StackAbility implements StackObject, Ability {
         if (ability.getTargets().stillLegal(ability, game)) {
             return ability.resolve(game);
         }
-        game.informPlayers("Ability has been fizzled: " + getRule());
+        if (!game.isSimulation())
+            game.informPlayers("Ability has been fizzled: " + getRule());
         counter(null, game);
         return false;
     }

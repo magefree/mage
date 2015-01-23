@@ -165,7 +165,7 @@ public class ConvokeAbility extends SimpleStaticAbility implements AdjustingSour
                         if (costBefore == ability.getManaCostsToPay().convertedManaCost()) {
                             // creature could not reduce mana costs so tap must be reverted
                             perm.untap(game);
-                        } else {
+                        } else if (!game.isSimulation()) {
                             game.informPlayers("Convoke: " + player.getName() + " taps " + perm.getLogName() + " to reduce mana costs by " + manaCostsToReduce.getText());
                         }
                     }
