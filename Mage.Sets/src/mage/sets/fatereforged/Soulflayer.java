@@ -43,6 +43,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -146,6 +147,9 @@ class SoulflayerEffect extends ContinuousEffectImpl implements SourceEffect {
                                     }
                                     if (cardAbility instanceof HexproofAbility) {
                                         abilitiesToAdd.add(HexproofAbility.getInstance());
+                                    }
+                                    if (cardAbility instanceof IndestructibleAbility) {
+                                        abilitiesToAdd.add(IndestructibleAbility.getInstance());
                                     }
                                     if (cardAbility instanceof LifelinkAbility) {
                                         abilitiesToAdd.add(LifelinkAbility.getInstance());

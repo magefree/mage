@@ -7,7 +7,7 @@ public class JaceBeleren extends mage.sets.lorwyn.JaceBeleren {
     public JaceBeleren(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 15;
-        this.expansionSetCode = "MPB";
+        this.expansionSetCode = "MBP";
     }
     
     public JaceBeleren(final JaceBeleren card) {
