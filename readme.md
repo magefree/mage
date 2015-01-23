@@ -1,6 +1,6 @@
 # XMage - Magic, Another Game Engine
 
-XMage allows you to play magic against one or more online players or computer opponents. It includes full rules enforcement for over **8,500** unique cards (15,481 counting all cards from different editions). Starting with Eventide, all regular sets have nearly all the cards implemented ([see here in detail which cards are implemented](http://ct-magefree.rhcloud.com/stats)).
+XMage allows you to play magic against one or more online players or computer opponents. It includes full rules enforcement for over **9,500** unique cards (over 17.800 counting all cards from different editions). Starting with Eventide, all regular sets have nearly all the cards implemented ([see here in detail which cards are implemented](http://ct-magefree.rhcloud.com/stats)).
 
 There are public servers where you can play XMage against other players. Apart from this, you can also host your own server to play against the AI and/or your friends.
 
@@ -17,11 +17,8 @@ You can visit the XMage forum [here](http://www.slightlymagic.net/forum/viewforu
  * Sealed (also from Cube) tournaments (2-16)
 
 ## Installation
-Download the latest release from [here](http://XMage.info). You need this to be able to play on the public server.
-
-After you extract the content of the archive, you will find batch files to start the client/server in the corresponding directories. See the included readme files for more instructions.
-
-You will need to have the [Java Runtime Environment](http://java.com/en/) Version 7.
+Install the XMage Launcher to download and install always the latest XMage release from [here](http://XMage.info). 
+You will need to have the [Java Runtime Environment](http://java.com/en/) Version 7 or later.
 
 Here you can find a log of the latest changes: [Release changes] (http://github.com/magefree/mage/wiki/Release-changes)
 
