@@ -50,6 +50,7 @@ public class DamageTargetEffect extends OneShotEffect {
     protected DynamicValue amount;
     protected boolean preventable;
     protected String targetDescription;
+    protected boolean useOnlyTargetPointer;
 
     public DamageTargetEffect(int amount) {
         this(new StaticValue(amount), true);
@@ -72,10 +73,15 @@ public class DamageTargetEffect extends OneShotEffect {
     }
 
     public DamageTargetEffect(DynamicValue amount, boolean preventable, String targetDescription) {
+        this(amount, preventable, targetDescription, false);
+    }
+
+    public DamageTargetEffect(DynamicValue amount, boolean preventable, String targetDescription, boolean useOnlyTargetPointer) {
         super(Outcome.Damage);
         this.amount = amount;
         this.preventable = preventable;
         this.targetDescription = targetDescription;
+        this.useOnlyTargetPointer = useOnlyTargetPointer;
     }
 
     public int getAmount() {
@@ -95,6 +101,7 @@ public class DamageTargetEffect extends OneShotEffect {
         this.amount = effect.amount.copy();
         this.preventable = effect.preventable;
         this.targetDescription = effect.targetDescription;
+        this.useOnlyTargetPointer = effect.useOnlyTargetPointer;
     }
 
     @Override
@@ -104,7 +111,7 @@ public class DamageTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source.getTargets().size() > 1) {
+        if (!useOnlyTargetPointer && source.getTargets().size() > 1) {
             for (Target target : source.getTargets()) {
                 for (UUID targetId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(targetId);

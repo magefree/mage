@@ -28,6 +28,7 @@
 package mage.sets.fatereforged;
 
 import java.util.UUID;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -49,10 +50,9 @@ public class CunningStrike extends CardImpl {
         this.expansionSetCode = "FRF";
 
         // Cunning Strike deals 2 damage to target creature and 2 damage to target player.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(2));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(new StaticValue(2), true, "", true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-
-        Effect effect = new DamageTargetEffect(2);
+        Effect effect = new DamageTargetEffect(new StaticValue(2), true, "", true);
         effect.setTargetPointer(new SecondTargetPointer());
         effect.setText("and 2 damage to target player");
         this.getSpellAbility().addEffect(effect);
