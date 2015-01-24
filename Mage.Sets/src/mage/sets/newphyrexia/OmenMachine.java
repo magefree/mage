@@ -34,17 +34,17 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -60,7 +60,7 @@ public class OmenMachine extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OmenMachineEffect()));
 
         // At the beginning of each player's draw step, that player exiles the top card of his or her library. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.
-        this.addAbility(new OmenMachineAbility());
+        this.addAbility(new BeginningOfDrawTriggeredAbility(new OmenMachineEffect2(), TargetController.ANY, false));
     }
 
     public OmenMachine(final OmenMachine card) {
@@ -73,10 +73,10 @@ public class OmenMachine extends CardImpl {
     }
 }
 
-class OmenMachineEffect extends ReplacementEffectImpl {
+class OmenMachineEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public OmenMachineEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral);
+        super(Duration.WhileOnBattlefield, Outcome.Neutral, false, false);
         staticText = "Players can't draw cards";
     }
 
@@ -95,47 +95,13 @@ class OmenMachineEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DRAW_CARD;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.DRAW_CARD) {
-            return true;
-        }
-        return false;
-    }
-
-}
-
-class OmenMachineAbility extends TriggeredAbilityImpl {
-
-    public OmenMachineAbility() {
-        super(Zone.BATTLEFIELD, new OmenMachineEffect2());
-    }
-
-    public OmenMachineAbility(final OmenMachineAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public OmenMachineAbility copy() {
-        return new OmenMachineAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.DRAW_STEP_PRE) {
-            this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "At the beginning of each player's draw step, that player exiles the top card of his or her library. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.";
+        return true;
     }
 
 }
@@ -144,6 +110,7 @@ class OmenMachineEffect2 extends OneShotEffect {
 
     public OmenMachineEffect2() {
         super(Outcome.PlayForFree);
+        staticText = "that player exiles the top card of his or her library. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able";
     }
 
     public OmenMachineEffect2(final OmenMachineEffect2 effect) {
@@ -156,12 +123,14 @@ class OmenMachineEffect2 extends OneShotEffect {
         if (player != null) {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
-                card.moveToExile(source.getSourceId(), "Omen Machine Exile", source.getSourceId(), game);
+                player.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY);
                 if (card.getCardType().contains(CardType.LAND)) {
-                    card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), player.getId());
+                    player.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
                 }
                 else {
-                    player.cast(card.getSpellAbility(), game, true);
+                    if (card.getSpellAbility().canChooseTarget(game)) {
+                        player.cast(card.getSpellAbility(), game, true);
+                    }
                 }
             }
             return true;
