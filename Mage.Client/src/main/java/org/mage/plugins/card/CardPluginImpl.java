@@ -113,7 +113,7 @@ public class CardPluginImpl implements CardPlugin {
         JLayeredPane battlefieldPanel = (JLayeredPane) component;
         JComponent jPanel = ui.get("jPanel");
 
-        Row allLands = new Row();
+        Row rowAllLands = new Row();
 
         outerLoop:
         //
@@ -125,8 +125,8 @@ public class CardPluginImpl implements CardPlugin {
             int insertIndex = -1;
 
             // Find lands with the same name.
-            for (int i = 0, n = allLands.size(); i < n; i++) {
-                Stack stack = allLands.get(i);
+            for (int i = 0, n = rowAllLands.size(); i < n; i++) {
+                Stack stack = rowAllLands.get(i);
                 MagePermanent firstPanel = stack.get(0);
                 if (firstPanel.getOriginal().getName().equals(permanent.getOriginal().getName())) {
 
@@ -169,19 +169,19 @@ public class CardPluginImpl implements CardPlugin {
             }
 
             stack.add(permanent);
-            allLands.add(insertIndex == -1 ? allLands.size() : insertIndex, stack);
+            rowAllLands.add(insertIndex == -1 ? rowAllLands.size() : insertIndex, stack);
         }
 
-        Row allCreatures = new Row(permanents, RowType.creature);
-        Row allOthers = new Row(permanents, RowType.other);
-        Row allAttached = new Row(permanents, RowType.attached);
+        Row rowAllCreatures = new Row(permanents, RowType.creature);
+        Row rowAllOthers = new Row(permanents, RowType.other);
+        Row rowAllAttached = new Row(permanents, RowType.attached);
 
         boolean othersOnTheRight = true;
         if (options != null && options.containsKey("nonLandPermanentsInOnePile")) {
             if (options.get("nonLandPermanentsInOnePile").equals("true")) {
                 othersOnTheRight = false;
-                   allCreatures.addAll(allOthers);
-                allOthers.clear();
+                rowAllCreatures.addAll(rowAllOthers);
+                rowAllOthers.clear();
             }
         }
 
@@ -198,9 +198,9 @@ public class CardPluginImpl implements CardPlugin {
             stackSpacingX = stackVertical ? 0 : Math.round(cardWidth * STACK_SPACING_X);
             stackSpacingY = Math.round(cardHeight * STACK_SPACING_Y);
             attachmentSpacingY = Math.round(cardHeight * ATTACHMENT_SPACING_Y);
-            Row creatures = (Row) allCreatures.clone();
-            Row lands = (Row) allLands.clone();
-            Row others = (Row) allOthers.clone();
+            Row creatures = (Row) rowAllCreatures.clone();
+            Row lands = (Row) rowAllLands.clone();
+            Row others = (Row) rowAllOthers.clone();
             // Wrap all creatures and lands.
             wrap(creatures, rows, -1);
             int afterCreaturesIndex = rows.size();
@@ -291,7 +291,7 @@ public class CardPluginImpl implements CardPlugin {
 
         // we need this only for defining card size
         // attached permanents will be handled separately
-        for (Stack stack : allAttached) {
+        for (Stack stack : rowAllAttached) {
             for (MagePermanent panel : stack) {
                 panel.setCardBounds(0, 0, cardWidth, cardHeight);
             }
@@ -380,8 +380,7 @@ public class CardPluginImpl implements CardPlugin {
                 case other:
                     return !CardUtil.isLand(card) && !CardUtil.isCreature(card);
                 case attached:
-                    return card.getOriginalPermanent().isAttachedTo()
-                            && !card.getOriginalPermanent().getSubTypes().contains("Curse");
+                    return card.getOriginalPermanent().isAttachedToPermanent();
                 default:
                     throw new RuntimeException("Unhandled type: " + this);
             }
@@ -401,18 +400,18 @@ public class CardPluginImpl implements CardPlugin {
         }
 
         private void addAll(Collection<MagePermanent> permanents, RowType type) {
-            for (MagePermanent panel : permanents) {
-                if (!type.isType(panel)) {
+            for (MagePermanent permanent : permanents) {
+                if (!type.isType(permanent)) {
                     continue;
                 }
                 // all attached permanents are grouped separately later
-                if (!type.equals(RowType.attached) && RowType.attached.isType(panel)) {
+                if (!type.equals(RowType.attached) && RowType.attached.isType(permanent)) {
                     continue;
                 }
                 Stack stack = new Stack();
-                stack.add(panel);
-                if (panel.getOriginalPermanent().getAttachments() != null) {
-                    stack.setMaxAttachedCount(panel.getOriginalPermanent().getAttachments().size());
+                stack.add(permanent);
+                if (permanent.getOriginalPermanent().getAttachments() != null) {
+                    stack.setMaxAttachedCount(permanent.getOriginalPermanent().getAttachments().size());
                 }
                 add(stack);
             }

@@ -59,6 +59,7 @@ public class PermanentView extends CardView {
     private final UUID attachedTo;
     private final boolean morphed;
     private final boolean manifested;
+    private final boolean attachedToPermanent;
 
     public PermanentView(Permanent permanent, Card card, UUID createdForPlayerId, Game game) {
         super(permanent, null, permanent.getControllerId().equals(createdForPlayerId));
@@ -143,7 +144,13 @@ public class PermanentView extends CardView {
                             " A face-down card can also be turned face up for its morph cost.");
                 }
             }
-        }        
+        } 
+        // determines if shown in it's own column
+        if (permanent.getAttachedTo() != null) {
+            attachedToPermanent = game.getPermanent(permanent.getAttachedTo()) != null;
+        } else {
+            attachedToPermanent = false;
+        }
     }
 
     public boolean isTapped() {
@@ -196,6 +203,10 @@ public class PermanentView extends CardView {
 
     public boolean isAttachedTo() {
         return attachedTo != null;
+    }
+
+    public boolean isAttachedToPermanent() {
+        return attachedToPermanent;
     }
 
     public boolean isMorphed() {
