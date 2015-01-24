@@ -310,11 +310,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                     }
                     BufferedImage srcImage;
                     if (gameCard.isFaceDown()) {
-                        if (gameCard.isMorphCard()) {
-                            srcImage = ImageCache.getMorphImage();
-                        }else {
-                            srcImage = ImageCache.loadImage(new TFile(DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename));
-                        }
+                        srcImage = getFaceDownImage();
                     } else {
                         srcImage = ImageCache.getImage(gameCard, getCardWidth(), getCardHeight());
                     }
@@ -705,11 +701,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                     flippedAngle = isFlipped() ? CardPanel.FLIPPED_ANGLE : 0;
                     BufferedImage srcImage;
                     if (gameCard.isFaceDown()) {
-                        if (gameCard.isMorphCard()) {
-                            srcImage = ImageCache.getMorphImage();
-                        } else {
-                            srcImage = ImageCache.loadImage(new TFile(DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename));
-                        }
+                        srcImage = getFaceDownImage();
                     } else {
                         srcImage = ImageCache.getThumbnail(gameCard);
                     }
@@ -725,6 +717,22 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                 }
             }
         });
+    }
+
+    private BufferedImage getFaceDownImage() {
+        if (isPermanent) {
+            if (((PermanentView) gameCard).isMorphed()) {
+                return ImageCache.getMorphImage();
+            } else {
+                return ImageCache.getManifestImage();
+            }
+        } else {
+            if (gameCard.isMorphCard()) {
+                return ImageCache.getMorphImage();
+            } else {
+                return ImageCache.loadImage(new TFile(DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename));
+            }
+        }
     }
 
     @Override
@@ -942,8 +950,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     @Override
     public Image getImage() {
         if (this.hasImage) {
-            if (gameCard.isMorphCard() && gameCard.isFaceDown()) {
-                return ImageCache.getMorphImage();
+            if (gameCard.isFaceDown()) {
+                return getFaceDownImage();
             } else {
                 return ImageCache.getImageOriginal(gameCard);
             }

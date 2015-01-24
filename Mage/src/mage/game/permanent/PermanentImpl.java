@@ -37,7 +37,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -80,6 +79,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean flipped;
     protected boolean transformed;
     protected boolean monstrous;
+    protected boolean manifested = false;
+    protected boolean morphed = false;
     protected UUID originalControllerId;
     protected UUID controllerId;
     protected UUID beforeResetControllerId;
@@ -152,6 +153,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.monstrous = permanent.monstrous;
         this.pairedCard = permanent.pairedCard;
         this.timesLoyaltyUsed = permanent.timesLoyaltyUsed;
+
+        this.morphed = permanent.morphed;
+        this.manifested = permanent.manifested;
     }
 
     @Override
@@ -1144,6 +1148,26 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             }
         }
         return name;
+    }
+
+    @Override
+    public boolean isManifested() {
+        return manifested;
+    }
+
+    @Override
+    public void setManifested(boolean value) {
+        manifested = value;
+    }
+
+    @Override
+    public boolean isMorphed() {
+        return morphed;
+    }
+
+    @Override
+    public void setMorphed(boolean value) {
+        morphed = value;
     }
 
 }

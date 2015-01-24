@@ -139,6 +139,14 @@ public class ImageCache {
         return loadImage(file);
     }
 
+    public static BufferedImage getManifestImage() {
+        CardDownloadData info = new CardDownloadData("Manifest", "FRF", 0, false, 0, "FRF");
+        info.setToken(true);
+        String path = CardImageUtils.generateTokenImagePath(info);
+        TFile file = new TFile(path);
+        return loadImage(file);
+    }
+
     private static String buildThumbnailPath(String path) {
         String thumbnailPath;
         if (PreferencesDialog.isSaveImagesToZip()) {

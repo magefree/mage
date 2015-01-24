@@ -28,6 +28,9 @@
 
 package mage.view;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnFaceUpAbility;
 import mage.cards.Card;
@@ -35,10 +38,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -58,6 +57,8 @@ public class PermanentView extends CardView {
     private final String nameOwner; // only filled if != controller
     private final boolean controlled;
     private final UUID attachedTo;
+    private final boolean morphed;
+    private final boolean manifested;
 
     public PermanentView(Permanent permanent, Card card, UUID createdForPlayerId, Game game) {
         super(permanent, null, permanent.getControllerId().equals(createdForPlayerId));
@@ -67,6 +68,8 @@ public class PermanentView extends CardView {
         this.flipped = permanent.isFlipped();
         this.phasedIn = permanent.isPhasedIn();
         this.summoningSickness = permanent.hasSummoningSickness();
+        this.morphed = permanent.isMorphed();
+        this.manifested = permanent.isManifested();
         this.damage = permanent.getDamage();
         if (permanent.getAttachments().size() > 0) {
             attachments = new ArrayList<>();
@@ -79,7 +82,11 @@ public class PermanentView extends CardView {
             tokenSetCode = original.getTokenSetCode();
         } else {
             if (card != null) {
+                // original may not be face down
+                boolean wasfaceDown = card.isFaceDown();
+                card.setFaceDown(false);
                 original = new CardView(card);
+                card.setFaceDown(wasfaceDown);
             } else {
                 original = null;
             }
@@ -93,7 +100,8 @@ public class PermanentView extends CardView {
                 this.alternateName = permanent.getFlipCardName();
                 this.originalName = this.getName();
             } else {
-                if (!this.isMorphCard() || controlled) {
+                if (controlled   // controller may always know
+                        || (!morphed && !manifested)) { // others don't know for morph or transformed cards
                     this.alternateName = original.getName();
                     this.originalName = this.getName();
                 }
@@ -110,44 +118,32 @@ public class PermanentView extends CardView {
            this.nameOwner = ""; 
         }
         
-        if (permanent.isFaceDown()) {
-            if (permanent.isMorphCard()){
-                // add morph rule text
-                if (card != null) {
-                    if (controlled) {
-                        for (Ability permanentAbility : permanent.getAbilities()) {
-                            if (permanentAbility instanceof TurnFaceUpAbility && !permanentAbility.getRuleVisible()) {
-                                this.rules.add(permanentAbility.getRule(true));
-                            }
-                            if (permanentAbility.getWorksFaceDown()) {
-                                this.rules.add(permanentAbility.getRule());
-                            }
-                        }
-                        this.name = card.getName();
-                        this.expansionSetCode = card.getExpansionSetCode();
-                        this.cardNumber = card.getCardNumber();
-                    } else {
+        if (permanent.isFaceDown() && card != null) {
+            if (controlled){
+                // must be a morphed or manifested card
+                for (Ability permanentAbility : permanent.getAbilities()) {
+                    if (permanentAbility instanceof TurnFaceUpAbility && !permanentAbility.getRuleVisible()) {
+                        this.rules.add(permanentAbility.getRule(true));
+                    }
+                    if (permanentAbility.getWorksFaceDown()) {
+                        this.rules.add(permanentAbility.getRule());
+                    }
+                }
+                this.name = card.getName();
+                this.displayName = card.getName();
+                this.expansionSetCode = card.getExpansionSetCode();
+                this.cardNumber = card.getCardNumber();
+            } else{
+                if (permanent.isMorphed()) {
                         this.rules.add("If the controller has priority, he or she may turn this permanent face up." +
                             " This is a special action; it doesnt use the stack. To do this he or she pays the morph costs," +
                             " then turns this permanent face up.");
-                    }
-                }                
-            } else{
-                if (controlled && card != null) {
-                    for (Ability permanentAbility : permanent.getAbilities()) {
-                        if (permanentAbility instanceof TurnFaceUpAbility && !permanentAbility.getRuleVisible()) {
-                            this.rules.add(permanentAbility.getRule(true));
-                        }
-                        if (permanentAbility.getWorksFaceDown()) {
-                            this.rules.add(permanentAbility.getRule());
-                        }
-                    }
-                    this.name = card.getName();
-                    this.displayName = card.getName();
-                }                
+                }else if (permanent.isManifested()) {
+                        this.rules.add("A manifested creature card can be turned face up any time for it's mana cost." +
+                            " A face-down card can also be turned face up for its morph cost.");
+                }
             }
-        }
-        
+        }        
     }
 
     public boolean isTapped() {
@@ -200,5 +196,12 @@ public class PermanentView extends CardView {
 
     public boolean isAttachedTo() {
         return attachedTo != null;
+    }
+
+    public boolean isMorphed() {
+        return morphed;
+    }
+    public boolean isManifested() {
+        return manifested;
     }
 }

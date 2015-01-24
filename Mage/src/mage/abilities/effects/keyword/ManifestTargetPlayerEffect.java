@@ -34,12 +34,14 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BecomesFaceDownCreatureEffect;
+import mage.abilities.effects.common.continious.BecomesFaceDownCreatureEffect.FaceDownType;
 import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
@@ -80,17 +82,20 @@ public class ManifestTargetPlayerEffect extends OneShotEffect {
             for (Card card: cards) {
                 card.setFaceDown(true);
                 targetPlayer.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
-                ManaCosts manaCosts = null;
-                if (card.getCardType().contains(CardType.CREATURE)) {
-                    manaCosts = card.getSpellAbility().getManaCosts();
-                    if (manaCosts == null) {
-                        manaCosts = new ManaCostsImpl("{0}");
+                Permanent permanent = game.getPermanent(card.getId());
+                if (permanent != null) {
+                    permanent.setManifested(true);
+                    ManaCosts manaCosts = null;
+                    if (card.getCardType().contains(CardType.CREATURE)) {
+                        manaCosts = card.getSpellAbility().getManaCosts();
+                        if (manaCosts == null) {
+                            manaCosts = new ManaCostsImpl("{0}");
+                        }
                     }
-                }
-                ContinuousEffect effect = new BecomesFaceDownCreatureEffect(manaCosts, true, Duration.Custom);
-                effect.setTargetPointer(new FixedTarget(card.getId()));
-                game.addEffect(effect, source);
-            }
+                    ContinuousEffect effect = new BecomesFaceDownCreatureEffect(manaCosts, true, Duration.Custom, FaceDownType.MANIFESTED);
+                    effect.setTargetPointer(new FixedTarget(card.getId()));
+                    game.addEffect(effect, source);
+                }            }
             return true;
         }
         return false;

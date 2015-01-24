@@ -247,6 +247,12 @@ public interface Permanent extends Card, Controllable {
      */
     void clearPairedCard();
 
+    void setMorphed(boolean value);
+    boolean isMorphed();
+
+    void setManifested(boolean value);
+    boolean isManifested();
+
     @Override
     Permanent copy();
 

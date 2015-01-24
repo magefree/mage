@@ -36,9 +36,6 @@ public class DevotionCount implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int devotion = 0;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(sourceAbility.getControllerId())) {
-            if (permanent.isFaceDown()) {
-                continue; // workaround as long as Morph creatures are not cast as separate objects, face down creature does not have a mana cost
-            }
             for(ManaCost manaCost :permanent.getManaCost()) {
                 for(ColoredManaSymbol coloredManaSymbol: devotionColors) {
                     if (manaCost.containsColor(coloredManaSymbol)) {

@@ -150,6 +150,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         cardNumber = card.cardNumber;
         expansionSetCode = card.expansionSetCode;
         rarity = card.rarity;
+        this.watchers.clear();
         for (Watcher watcher: (List<Watcher>)card.getWatchers()) {
             watchers.add(watcher.copy());
         }

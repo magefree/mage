@@ -42,6 +42,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.common.continious.BecomesFaceDownCreatureEffect;
+import mage.abilities.effects.common.continious.BecomesFaceDownCreatureEffect.FaceDownType;
 import mage.cards.Card;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
@@ -124,7 +125,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
         sb.append(REMINDER_TEXT);
         ruleText = sb.toString();
 
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesFaceDownCreatureEffect(morphCosts));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesFaceDownCreatureEffect(morphCosts, FaceDownType.MORPHED));
         ability.setRuleVisible(false);
         card.addAbility(ability);
 
@@ -269,7 +270,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
         return alternateCosts;
     }
     
-    public static void setPermanentToMorph(Permanent permanent) {
+    public static void setPermanentToFaceDownCreature(Permanent permanent) {
         permanent.getPower().initValue(2);
         permanent.getToughness().initValue(2);
         permanent.getAbilities().clear();

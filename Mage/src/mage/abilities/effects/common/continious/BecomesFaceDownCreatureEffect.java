@@ -59,33 +59,40 @@ import mage.game.permanent.Permanent;
 
 public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implements SourceEffect {
 
+    public enum FaceDownType {
+        MORPHED,
+        MANIFESTED
+    }
+
     protected int zoneChangeCounter;
     protected Ability turnFaceUpAbility = null;
     protected boolean useTargetPointer;
     protected boolean foundPermanent;
+    protected FaceDownType faceDownType;
 
 
-    public BecomesFaceDownCreatureEffect(Costs<Cost> morphCosts) {
-        this(morphCosts, false);
+    public BecomesFaceDownCreatureEffect(Costs<Cost> turnFaceUpCosts, FaceDownType faceDownType){
+        this(turnFaceUpCosts, false, faceDownType);
     }
 
-    public BecomesFaceDownCreatureEffect(Costs<Cost> morphCosts, boolean useTargetPointer) {
-        this(morphCosts, useTargetPointer, Duration.WhileOnBattlefield);
+    public BecomesFaceDownCreatureEffect(Costs<Cost> turnFaceUpCosts, boolean useTargetPointer, FaceDownType faceDownType) {
+        this(turnFaceUpCosts, useTargetPointer, Duration.WhileOnBattlefield, faceDownType);
     }
 
-    public BecomesFaceDownCreatureEffect(Cost cost, boolean useTargetPointer, Duration duration) {
-        this(createCosts(cost), useTargetPointer, duration);
+    public BecomesFaceDownCreatureEffect(Cost cost, boolean useTargetPointer, Duration duration, FaceDownType faceDownType) {
+        this(createCosts(cost), useTargetPointer, duration, faceDownType);
     }
 
-    public BecomesFaceDownCreatureEffect(Costs<Cost> morphCosts, boolean useTargetPointer, Duration duration) {
+    public BecomesFaceDownCreatureEffect(Costs<Cost> turnFaceUpCosts, boolean useTargetPointer, Duration duration, FaceDownType faceDownType) {
         super(duration, Outcome.BecomeCreature);
         this.useTargetPointer = useTargetPointer;
         this.zoneChangeCounter = Integer.MIN_VALUE;
-        if (morphCosts != null) {
-            this.turnFaceUpAbility = new TurnFaceUpAbility(morphCosts);
+        if (turnFaceUpCosts != null) {
+            this.turnFaceUpAbility = new TurnFaceUpAbility(turnFaceUpCosts);
         }
         staticText = "{this} becomes a 2/2 face-down creature, with no text, no name, no subtypes, and no mana cost";
         foundPermanent = false;
+        this.faceDownType = faceDownType;
     }
 
 
@@ -97,6 +104,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
         }
         this.useTargetPointer = effect.useTargetPointer;
         this.foundPermanent = effect.foundPermanent;
+        this.faceDownType = effect.faceDownType;
     }
 
     @Override
@@ -123,7 +131,17 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
         }
         
         if (permanent != null && permanent.isFaceDown()) {
-            foundPermanent = true;
+            if (!foundPermanent) {
+                foundPermanent = true;
+                switch(faceDownType) {
+                    case MANIFESTED:
+                        permanent.setManifested(true);
+                        break;
+                    case MORPHED:
+                        permanent.setMorphed(true);
+                        break;
+                }
+            }
             switch (layer) {
                 case TypeChangingEffects_4:
                     permanent.setName("");

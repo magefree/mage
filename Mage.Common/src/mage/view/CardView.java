@@ -135,14 +135,15 @@ public class CardView extends SimpleCardView {
         this.morphCard = card.isMorphCard();
         // no information available for face down cards as long it's not a controlled face down morph card
         // TODO: Better handle this in Framework (but currently I'm not sure how to do it there) LevelX2
-        if (card.isFaceDown()) {            
+        if (card.isFaceDown()) {
+            this.fillEmpty(card, controlled);
             if (card.isMorphCard()) {
-                // special handling for Morph cards
-                this.fillEmpty(card, controlled);
+                // special handling for casting of Morph cards
                 if (card instanceof Spell /*|| card instanceof Card*/) {
                     if (controlled) {
                         this.name = card.getName();
                         this.displayName = card.getName();
+                        this.alternateName = card.getName();
                     }
                     this.power = "2";
                     this.toughness = "2";
@@ -150,15 +151,12 @@ public class CardView extends SimpleCardView {
                         " no name, no subtypes, and no mana cost by paying {3} rather than paying its mana cost.");
                     return;
                 }
-            } else {
-                
+            } else {                
                 if (card instanceof Permanent) {
-                    this.fillEmpty(card, controlled);
                     this.power = Integer.toString(card.getPower().getValue());
                     this.toughness = Integer.toString(card.getToughness().getValue());
                     this.cardTypes = card.getCardType();
                 } else {
-                    this.fillEmpty(card, false);
                     this.hideInfo = true;
                     return;
                 }

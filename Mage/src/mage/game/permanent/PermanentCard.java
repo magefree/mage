@@ -31,6 +31,9 @@ package mage.game.permanent;
 import java.util.ArrayList;
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.Card;
 import mage.cards.LevelerCard;
 import mage.constants.Zone;
@@ -108,7 +111,7 @@ public class PermanentCard extends PermanentImpl {
         this.cardNumber = card.getCardNumber();
         this.usesVariousArt = card.getUsesVariousArt();
         this.zoneChangeCounter = card.getZoneChangeCounter();
-        
+
         canTransform = card.canTransform();
         if (canTransform) {
             secondSideCard = card.getSecondCardFace();
@@ -116,7 +119,6 @@ public class PermanentCard extends PermanentImpl {
         }
         this.flipCard = card.isFlipCard();
         this.flipCardName = card.getFlipCardName();
-        this.morphCard = card.isMorphCard();
         this.faceDown = card.isFaceDown();
     }
 
@@ -130,7 +132,7 @@ public class PermanentCard extends PermanentImpl {
 
     @Override
     public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects) {
-        Zone fromZone = game.getState().getZone(objectId);        
+        Zone fromZone = game.getState().getZone(objectId);
         Player controller = game.getPlayer(controllerId);
         if (controller != null && controller.removeFromBattlefield(this, game)) {
             if (isFaceDown()) {
@@ -218,6 +220,8 @@ public class PermanentCard extends PermanentImpl {
     @Override
     public boolean turnFaceUp(Game game, UUID playerId) {
         if (super.turnFaceUp(game, playerId)) {
+            setManifested(false);
+            setMorphed(false);
             card.setFaceDown(false);
             return true;
         }
@@ -253,7 +257,17 @@ public class PermanentCard extends PermanentImpl {
         super.setFaceDown(value);
         if (card != null) {
             card.setFaceDown(value);
-        }   
+        }
     }
-    
+
+    @Override
+    public ManaCosts<ManaCost> getManaCost() {
+        if (isFaceDown()) { // face down permanent has always {0} mana costs
+            manaCost.clear();
+            manaCost.add(new GenericManaCost(0));
+        }
+        return super.getManaCost();
+    }
+
+
 }

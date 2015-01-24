@@ -37,6 +37,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BecomesFaceDownCreatureEffect;
+import mage.abilities.effects.common.continious.BecomesFaceDownCreatureEffect.FaceDownType;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -127,7 +128,7 @@ class GhastlyConscriptionEffect extends OneShotEffect {
                             manaCosts = new ManaCostsImpl<>("{0}");
                         }
                     }
-                    ContinuousEffect effect = new BecomesFaceDownCreatureEffect(manaCosts, true, Duration.Custom);
+                    ContinuousEffect effect = new BecomesFaceDownCreatureEffect(manaCosts, true, Duration.Custom, FaceDownType.MANIFESTED);
                     effect.setTargetPointer(new FixedTarget(card.getId()));
                     game.addEffect(effect, source);
                     game.informPlayers(controller.getName() + " puts facedown card from exile onto the battlefield");
