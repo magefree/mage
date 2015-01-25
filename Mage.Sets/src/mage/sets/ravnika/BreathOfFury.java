@@ -38,6 +38,7 @@ import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.events.GameEvent;
 import mage.game.Game;
@@ -103,7 +104,13 @@ class BreathOfFuryAbility extends TriggeredAbilityImpl {
             if (damageEvent.isCombatDamage() && 
                     enchantment != null && 
                     enchantment.getAttachedTo().equals(event.getSourceId())) {
-                return true;
+                Permanent creature = game.getPermanent(enchantment.getAttachedTo());
+                if (creature != null) {
+                    for (Effect effect : getEffects()) {
+                        effect.setValue("TriggeringCreatureId", creature.getId());
+                    }
+                    return true;
+                }
             }
         }
         return false;
@@ -137,7 +144,7 @@ class BreathOfFuryEffect extends OneShotEffect {
         if (enchantment == null) {
             return false;
         }
-        Permanent enchantedCreature = game.getPermanent(enchantment.getAttachedTo());        
+        Permanent enchantedCreature = game.getPermanent((UUID) getValue("TriggeringCreatureId"));
         Player controller = game.getPlayer(source.getControllerId());
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control that could be enchanted by " + enchantment.getName());
         filter.add(new CanBeEnchantedByPredicate(enchantment));
@@ -147,7 +154,7 @@ class BreathOfFuryEffect extends OneShotEffect {
         // Commanders going to the command zone and Rest in Peace style replacement effects don't make Permanent.sacrifice return false.
         if (enchantedCreature != null && controller != null
             && enchantedCreature.sacrifice(source.getSourceId(), game)
-            && target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+            && target.canChoose(source.getSourceId(), controller.getId(), game)) {
             controller.choose(outcome, target, source.getSourceId(), game);
             Permanent newCreature = game.getPermanent(target.getFirstTarget());
             if (newCreature != null &&
