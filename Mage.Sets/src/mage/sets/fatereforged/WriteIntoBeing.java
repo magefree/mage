@@ -110,10 +110,10 @@ class WriteIntoBeingEffect extends OneShotEffect {
             }
             new ManifestEffect(1).apply(game, source);
             if (controller.getLibrary().size() > 0) {
-                Card cardToPutBack = controller.getLibrary().removeFromTop(game);
+                Card cardToPutBack = controller.getLibrary().getFromTop(game);
                 String position = "on top";
                 if (controller.chooseUse(Outcome.Detriment, "Put " + cardToPutBack.getName() + " on bottom of library?", game)) {
-                    controller.moveCardToLibraryWithInfo(cardToPutBack, source.getSourceId(), game, Zone.LIBRARY, false, false);
+                    cardToPutBack.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
                     position = "on bottom";
                 }
                 game.informPlayers(sourceObject.getLogName() + ": " + controller.getName() + " puts the other card " + position + " of his or her library");
