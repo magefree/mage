@@ -59,13 +59,13 @@ public class AuraGraft extends CardImpl {
         super(ownerId, 67, "Aura Graft", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "10E";
 
+        // Gain control of target Aura that's attached to a permanent. Attach it to another permanent it can enchant.
         FilterPermanent filter = new FilterPermanent("Aura that's attached to a permanent");
         filter.add(new SubtypePredicate("Aura"));
         filter.add(new AttachedToPermanentPredicate());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
         Effect gainControlEffect = new GainControlTargetEffect(Duration.EndOfGame);
-        //gainControlEffect.setText("Gain control of target Aura that's attached to a permanent");
         this.getSpellAbility().addEffect(gainControlEffect);
 
         this.getSpellAbility().addEffect(new MoveTargetAuraEffect());
