@@ -38,6 +38,7 @@ import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.events.GameEvent;
 import mage.game.Game;
@@ -49,9 +50,7 @@ import mage.target.Target;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.turn.TurnMod;
 import mage.constants.TurnPhase;
-import mage.MageObject;
-import mage.filter.predicate.Predicate;
-
+import mage.filter.predicate.permanent.CanBeEnchantedByPredicate;
 /**
  * @author duncancmt
  */
@@ -105,7 +104,13 @@ class BreathOfFuryAbility extends TriggeredAbilityImpl {
             if (damageEvent.isCombatDamage() && 
                     enchantment != null && 
                     enchantment.getAttachedTo().equals(event.getSourceId())) {
-                return true;
+                Permanent creature = game.getPermanent(enchantment.getAttachedTo());
+                if (creature != null) {
+                    for (Effect effect : getEffects()) {
+                        effect.setValue("TriggeringCreatureId", creature.getId());
+                    }
+                    return true;
+                }
             }
         }
         return false;
@@ -139,21 +144,38 @@ class BreathOfFuryEffect extends OneShotEffect {
         if (enchantment == null) {
             return false;
         }
-        Permanent enchantedCreature = game.getPermanent(enchantment.getAttachedTo());        
+        Permanent enchantedCreature = game.getPermanent((UUID) getValue("TriggeringCreatureId"));
         Player controller = game.getPlayer(source.getControllerId());
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control that could be enchanted by " + enchantment.getName());
-        filter.add(new CanBeEnchantedPredicate(enchantment));
+        filter.add(new CanBeEnchantedByPredicate(enchantment));
         Target target = new TargetControlledCreaturePermanent(filter);
         target.setNotTarget(true);
         // It's important to check that the creature was successfully sacrificed here. Effects that prevent sacrifice will also prevent Breath of Fury's effect from working.
         // Commanders going to the command zone and Rest in Peace style replacement effects don't make Permanent.sacrifice return false.
         if (enchantedCreature != null && controller != null
             && enchantedCreature.sacrifice(source.getSourceId(), game)
-            && target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+            && target.canChoose(source.getSourceId(), controller.getId(), game)) {
             controller.choose(outcome, target, source.getSourceId(), game);
             Permanent newCreature = game.getPermanent(target.getFirstTarget());
-            if (newCreature != null &&
-                newCreature.addAttachment(enchantment.getId(), game)) {
+            boolean success = false;
+            if (newCreature != null) {
+                Permanent oldCreature = game.getPermanent(enchantment.getAttachedTo());
+                if (oldCreature != null) {
+                    if (oldCreature.getId().equals(newCreature.getId())) {
+                        success = true;
+                    } else {
+                        if (oldCreature.removeAttachment(enchantment.getId(), game)
+                            && newCreature.addAttachment(enchantment.getId(), game)) {
+                            game.informPlayers(enchantment.getLogName() + " was unattached from " + oldCreature.getLogName() + " and attached to " + newCreature.getLogName());
+                            success = true;
+                        }
+                    }
+                } else if (newCreature.addAttachment(enchantment.getId(), game)) {
+                    game.informPlayers(enchantment.getLogName() + " was attached to " + newCreature.getLogName());
+                    success = true;
+                }
+            }
+            if (success) {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterControlledCreaturePermanent(), controller.getId(), game)) {
                     permanent.untap(game);
                 }
@@ -163,24 +185,5 @@ class BreathOfFuryEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-}
-
-class CanBeEnchantedPredicate implements Predicate<Permanent> {
-
-    private final MageObject auraEnchantment;
-
-    public CanBeEnchantedPredicate(MageObject auraEnchantment){
-        this.auraEnchantment = auraEnchantment;
-    }
-
-    @Override
-    public boolean apply(Permanent input, Game game) {
-        return !input.cantBeEnchantedBy(auraEnchantment, game);
-    }
-
-    @Override
-    public String toString() {
-        return "CanBeEnchanted(" + auraEnchantment.toString() + ")";
     }
 }

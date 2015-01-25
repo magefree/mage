@@ -52,7 +52,7 @@ public interface Target extends Serializable {
 
     /**
      * controlls if it will be checked, if the target can be targeted from source
-     * @param notTarget true = check for protection, false = do not check for protection
+     * @param notTarget true = do not check for protection, false = check for protection
      */
     void setNotTarget(boolean notTarget);
 

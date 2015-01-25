@@ -57,7 +57,7 @@ import mage.target.Target;
 import java.util.UUID;
 import mage.filter.predicate.mageobject.FromSetPredicate;
 import mage.target.TargetPermanent;
-import mage.util.SpellTargetAddress;
+import mage.util.TargetAddress;
 
 /**
  * @author nantuko
@@ -127,7 +127,7 @@ class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl {
         if (spell != null &&
             (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))) {
             UUID targetGolem = null;
-            for (SpellTargetAddress addr : SpellTargetAddress.walk(spell)) {
+            for (TargetAddress addr : TargetAddress.walk(spell)) {
                 Target targetInstance = addr.getTarget(spell);
                 for (UUID target : targetInstance.getTargets()) {
                     Permanent permanent = game.getPermanent(target);
@@ -186,7 +186,7 @@ class PrecursorGolemCopySpellEffect extends OneShotEffect {
                     continue; // copy only for other golems
                 }
                 boolean legal = true;
-                for (SpellTargetAddress addr : SpellTargetAddress.walk(spell)) {
+                for (TargetAddress addr : TargetAddress.walk(spell)) {
                     Target target = addr.getTarget(spell);
                     if (!target.canTarget(permanent.getId(), game)) {
                         legal = false;
@@ -196,7 +196,7 @@ class PrecursorGolemCopySpellEffect extends OneShotEffect {
                 if (legal) {
                     Spell copy = spell.copySpell();
                     copy.setCopiedSpell(true);
-                    for (SpellTargetAddress addr : SpellTargetAddress.walk(copy)) {
+                    for (TargetAddress addr : TargetAddress.walk(copy)) {
                         Target target = addr.getTarget(copy);
                         target.clearChosen();
                         target.add(permanent.getId(), game);

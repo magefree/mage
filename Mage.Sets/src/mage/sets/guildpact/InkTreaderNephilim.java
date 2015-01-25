@@ -55,7 +55,7 @@ import mage.target.Target;
 import mage.filter.predicate.mageobject.FromSetPredicate;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.util.SpellTargetAddress;
+import mage.util.TargetAddress;
 
 /**
  * @author duncancmt
@@ -128,7 +128,7 @@ class InkTreaderNephilimTriggeredAbility extends TriggeredAbilityImpl {
         if (spell != null) {
             boolean allTargetsInkTreaderNephilim = true;
             boolean atLeastOneTargetsInkTreaderNephilim = false;
-            for (SpellTargetAddress addr : SpellTargetAddress.walk(spell)) {
+            for (TargetAddress addr : TargetAddress.walk(spell)) {
                 Target targetInstance = addr.getTarget(spell);
                 for (UUID target : targetInstance.getTargets()) {
                     allTargetsInkTreaderNephilim &= target.equals(sourceId);
@@ -183,12 +183,12 @@ class InkTreaderNephilimEffect extends OneShotEffect {
                     continue; // copy only for other creatures
                 }
                 boolean legal = true;
-                for (SpellTargetAddress addr : SpellTargetAddress.walk(copy)) {
+                for (TargetAddress addr : TargetAddress.walk(copy)) {
                     Target targetInstance = addr.getTarget(copy);
                     legal &= targetInstance.canTarget(permanent.getId(), addr.getSpellAbility(copy), game);
                 }
                 if (legal) {
-                    for (SpellTargetAddress addr : SpellTargetAddress.walk(copy)) {
+                    for (TargetAddress addr : TargetAddress.walk(copy)) {
                         Target targetInstance = addr.getTarget(copy);
                         int numTargets = targetInstance.getNumberOfTargets();
                         targetInstance.clearChosen();
