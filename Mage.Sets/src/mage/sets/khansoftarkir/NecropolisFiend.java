@@ -110,7 +110,7 @@ public class NecropolisFiend extends CardImpl {
                     ExileFromGraveCost exileCost = (ExileFromGraveCost) cost;
                     for(Target target: exileCost.getTargets()) {
                         if (target instanceof TargetCardInYourGraveyard) {
-                            target.setMaxNumberOftargets(xValue);
+                            target.setMaxNumberOfTargets(xValue);
                             target.setMinNumberOfTargets(xValue);
                         }
                     }

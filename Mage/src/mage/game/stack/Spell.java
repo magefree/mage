@@ -455,7 +455,7 @@ public class Spell implements StackObject, Card {
                         ((TargetAmount)tempTarget).setAmountDefinition(new StaticValue(target.getTargetAmount(targetId)));
                     }
                     tempTarget.setMinNumberOfTargets(1);
-                    tempTarget.setMaxNumberOftargets(1);
+                    tempTarget.setMaxNumberOfTargets(1);
                     boolean again;
                     do {
                         again = false;

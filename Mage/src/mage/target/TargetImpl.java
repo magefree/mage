@@ -103,7 +103,7 @@ public abstract class TargetImpl implements Target {
     }
     
     @Override
-    public void setMaxNumberOftargets(int maxNumberOftargets) {
+    public void setMaxNumberOfTargets(int maxNumberOftargets) {
         this.maxNumberOfTargets = maxNumberOftargets;
     }
 
