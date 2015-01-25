@@ -28,16 +28,15 @@
 package mage.sets.antiquities;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbilityImpl;
-import mage.abilities.costs.AdjustingSourceCosts;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
@@ -45,55 +44,41 @@ import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author Plopman
+ * @author duncant
  */
 public class CandelabraOfTawnos extends CardImpl {
+
+    private final UUID originalId;
 
     public CandelabraOfTawnos(UUID ownerId) {
         super(ownerId, 8, "Candelabra of Tawnos", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "ATQ";
 
-        // {X}, {tap}: Untap X target lands.
-        this.addAbility(new CandelabraOfTawnosAbility());
+        // {X}, {T}: Untap X target lands.
+        Effect effect = new UntapTargetEffect();
+        effect.setText("untap X target lands");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
+        ability.addCost(new TapSourceCost());
+        originalId = ability.getOriginalId();
+        this.addAbility(ability);
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability.getOriginalId().equals(originalId)){
+            int xValue = ability.getManaCostsToPay().getX();
+            ability.getTargets().clear();
+            ability.addTarget(new TargetLandPermanent(xValue, xValue, new FilterLandPermanent(), false));
+        }
     }
 
     public CandelabraOfTawnos(final CandelabraOfTawnos card) {
         super(card);
+        this.originalId = card.originalId;
     }
 
     @Override
     public CandelabraOfTawnos copy() {
         return new CandelabraOfTawnos(this);
-    }
-}
-
-class CandelabraOfTawnosAbility extends ActivatedAbilityImpl implements AdjustingSourceCosts{
-    public CandelabraOfTawnosAbility(){
-        super(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
-        addTarget(new TargetLandPermanent(0, Integer.MAX_VALUE, new FilterLandPermanent(), false));
-    }
-
-     public CandelabraOfTawnosAbility(CandelabraOfTawnosAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public CandelabraOfTawnosAbility copy() {
-        return new CandelabraOfTawnosAbility(this);
-    }
-    
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        if(ability instanceof CandelabraOfTawnosAbility){
-            int numTargets = ability.getTargets().get(0).getTargets().size();
-            if (numTargets > 0) {
-                ability.getManaCostsToPay().add(new GenericManaCost(numTargets));
-            }
-        }
-    }
-
-    @Override
-    public String getRule(boolean all) {
-        return "{X}, {T}: Untap X target lands";
     }
 }
