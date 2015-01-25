@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.Modes;
 import mage.abilities.SpellAbility;
+import mage.cards.Card;
 import mage.game.stack.Spell;
 import mage.target.Target;
 
@@ -39,30 +40,30 @@ import mage.target.Target;
 /**
  * @author duncancmt
  */
-public class SpellTargetAddress {
+public class TargetAddress {
     protected int spellAbilityIndex;
     protected UUID mode;
     protected int targetIndex;
 
-    public SpellTargetAddress(int spellAbilityIndex, UUID mode, int targetIndex) {
+    public TargetAddress(int spellAbilityIndex, UUID mode, int targetIndex) {
         this.spellAbilityIndex = spellAbilityIndex;
         this.mode = mode;
         this.targetIndex = targetIndex;
     }
 
-    protected static class SpellTargetAddressIterable implements Iterable<SpellTargetAddress> {
-        protected final Spell spell;
+    protected static class TargetAddressIterable implements Iterable<TargetAddress> {
+        protected final Card card;
         
-        public SpellTargetAddressIterable(Spell spell) {
-            this.spell = spell;
+        public TargetAddressIterable(Card card) {
+            this.card = card;
         }
 
-        public Iterator<SpellTargetAddress> iterator() {
-            return new SpellTargetAddressIterator(spell);
+        public Iterator<TargetAddress> iterator() {
+            return new TargetAddressIterator(card);
         }
     }
 
-    protected static class SpellTargetAddressIterator implements Iterator<SpellTargetAddress> {
+    protected static class TargetAddressIterator implements Iterator<TargetAddress> {
         protected Iterator<SpellAbility> spellAbilityIterator;
         protected Integer lastSpellAbilityIndex = null;
         protected Iterator<UUID> modeIterator = null;
@@ -71,8 +72,16 @@ public class SpellTargetAddress {
         protected Iterator<Target> targetIterator = null;
         protected Integer lastTargetIndex = null;
 
-        public SpellTargetAddressIterator(Spell spell) {
+        public TargetAddressIterator(Spell spell) {
             this.spellAbilityIterator = spell.getSpellAbilities().iterator();
+            calcNext();
+        }
+
+        public TargetAddressIterator(Card card) {
+            this.lastSpellAbilityIndex = 0;
+            this.spellAbilityIterator = null;
+            this.modes = card.getSpellAbility().getModes();
+            this.modeIterator = this.modes.getSelectedModes().iterator();
             calcNext();
         }
 
@@ -80,10 +89,10 @@ public class SpellTargetAddress {
             return lastTargetIndex != null;
         }
         
-        public SpellTargetAddress next() {
-            SpellTargetAddress ret = new SpellTargetAddress(lastSpellAbilityIndex,
-                                                            lastMode,
-                                                            lastTargetIndex);
+        public TargetAddress next() {
+            TargetAddress ret = new TargetAddress(lastSpellAbilityIndex,
+                                                  lastMode,
+                                                  lastTargetIndex);
             calcNext();
             return ret;
             
@@ -96,7 +105,7 @@ public class SpellTargetAddress {
         protected void calcNext() {
             if (targetIterator == null) {
                 if (modeIterator == null) {
-                    if (spellAbilityIterator.hasNext()) {
+                    if (spellAbilityIterator != null && spellAbilityIterator.hasNext()) {
                         if (lastSpellAbilityIndex == null) {
                             lastSpellAbilityIndex = 0;
                         } else {
@@ -137,19 +146,34 @@ public class SpellTargetAddress {
     }
 
 
-    public static Iterable<SpellTargetAddress> walk(Spell spell) {
-        return new SpellTargetAddressIterable(spell);
+    public static Iterable<TargetAddress> walk(Card card) {
+        return new TargetAddressIterable(card);
     }
 
     public Target getTarget(Spell spell) {
-        return spell.getSpellAbilities().get(spellAbilityIndex).getModes().get(mode).getTargets().get(targetIndex);
+        return getMode(spell).getTargets().get(targetIndex);
+    }
+
+    public Target getTarget(Card card) {
+        return getMode(card).getTargets().get(targetIndex);
     }
 
     public Mode getMode(Spell spell) {
-        return spell.getSpellAbilities().get(spellAbilityIndex).getModes().get(mode);
+        return getSpellAbility(spell).getModes().get(mode);
+    }
+
+    public Mode getMode(Card card) {
+        return getSpellAbility(card).getModes().get(mode);
     }
 
     public SpellAbility getSpellAbility(Spell spell) {
         return spell.getSpellAbilities().get(spellAbilityIndex);
+    }
+
+    public SpellAbility getSpellAbility(Card card) {
+        if (spellAbilityIndex > 0) {
+            throw new IndexOutOfBoundsException("SpellAbility index " + spellAbilityIndex + " is out of bounds.");
+        }
+        return card.getSpellAbility();
     }
 }
