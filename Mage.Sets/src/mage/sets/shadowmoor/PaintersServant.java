@@ -47,9 +47,11 @@ import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.sets.Commander;
 
 /**
  *
