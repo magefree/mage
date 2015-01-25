@@ -49,9 +49,7 @@ import mage.target.Target;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.turn.TurnMod;
 import mage.constants.TurnPhase;
-import mage.MageObject;
-import mage.filter.predicate.Predicate;
-
+import mage.filter.predicate.permanent.CanBeEnchantedByPredicate;
 /**
  * @author duncancmt
  */
@@ -142,7 +140,7 @@ class BreathOfFuryEffect extends OneShotEffect {
         Permanent enchantedCreature = game.getPermanent(enchantment.getAttachedTo());        
         Player controller = game.getPlayer(source.getControllerId());
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control that could be enchanted by " + enchantment.getName());
-        filter.add(new CanBeEnchantedPredicate(enchantment));
+        filter.add(new CanBeEnchantedByPredicate(enchantment));
         Target target = new TargetControlledCreaturePermanent(filter);
         target.setNotTarget(true);
         // It's important to check that the creature was successfully sacrificed here. Effects that prevent sacrifice will also prevent Breath of Fury's effect from working.
@@ -163,24 +161,5 @@ class BreathOfFuryEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-}
-
-class CanBeEnchantedPredicate implements Predicate<Permanent> {
-
-    private final MageObject auraEnchantment;
-
-    public CanBeEnchantedPredicate(MageObject auraEnchantment){
-        this.auraEnchantment = auraEnchantment;
-    }
-
-    @Override
-    public boolean apply(Permanent input, Game game) {
-        return !input.cantBeEnchantedBy(auraEnchantment, game);
-    }
-
-    @Override
-    public String toString() {
-        return "CanBeEnchanted(" + auraEnchantment.toString() + ")";
     }
 }
