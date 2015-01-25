@@ -93,18 +93,7 @@ class CandelabraOfTawnosAbility extends ActivatedAbilityImpl implements Adjustin
     }
 
     @Override
-    public String getRule() {
-        return "{X}, {T}: Untap X target lands";
-    }
-    
-    @Override
     public String getRule(boolean all) {
         return "{X}, {T}: Untap X target lands";
     }
-
-    @Override
-    public String getRule(String source) {
-        return "{X}, {T}: Untap X target lands";
-    }
-        
 }
