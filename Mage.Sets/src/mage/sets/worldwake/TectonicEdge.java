@@ -47,6 +47,13 @@ import mage.game.Game;
 import mage.target.common.TargetNonBasicLandPermanent;
 
 import java.util.UUID;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
+import mage.abilities.condition.common.OpponentControllsMoreCondition;
+import mage.abilities.condition.common.OpponentControlsPermanentCondition;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.filter.common.FilterLandCard;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
@@ -57,14 +64,21 @@ public class TectonicEdge extends CardImpl {
     public TectonicEdge(UUID ownerId) {
         super(ownerId, 145, "Tectonic Edge", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "WWK";
+
+        // Tap: Add 1 to your mana pool.
         this.addAbility(new ColorlessManaAbility());
-        Costs costs = new CostsImpl();
-        costs.add(new TapSourceCost());
-        costs.add(new SacrificeSourceCost());
-        costs.add(new TectonicEdgeCost());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), costs);
+
+        // {1}, {T}, Sacrifice Tectonic Edge: Destroy target nonbasic land. Activate this ability only if an opponent controls four or more lands.
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                Zone.BATTLEFIELD,
+                new DestroyTargetEffect(),
+                new ManaCostsImpl("{1}"),
+                new OpponentControlsPermanentCondition(
+                        new FilterLandPermanent("an opponent controls four or more lands"),
+                        OpponentControlsPermanentCondition.CountType.MORE_THAN, 3));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetNonBasicLandPermanent());
-        ability.addManaCost(new GenericManaCost(1));
         this.addAbility(ability);
     }
 

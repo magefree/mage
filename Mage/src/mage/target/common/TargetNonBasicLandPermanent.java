@@ -29,7 +29,7 @@
 package mage.target.common;
 
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -38,11 +38,11 @@ import mage.filter.predicate.mageobject.NamePredicate;
 public class TargetNonBasicLandPermanent extends TargetLandPermanent {
 
     public TargetNonBasicLandPermanent() {
-        filter.add(Predicates.not(new NamePredicate("Island")));
-        filter.add(Predicates.not(new NamePredicate("Forest")));
-        filter.add(Predicates.not(new NamePredicate("Mountain")));
-        filter.add(Predicates.not(new NamePredicate("Swamp")));
-        filter.add(Predicates.not(new NamePredicate("Plains")));
+        filter.add(Predicates.not(new SubtypePredicate("Island")));
+        filter.add(Predicates.not(new SubtypePredicate("Forest")));
+        filter.add(Predicates.not(new SubtypePredicate("Mountain")));
+        filter.add(Predicates.not(new SubtypePredicate("Swamp")));
+        filter.add(Predicates.not(new SubtypePredicate("Plains")));
         this.targetName = "nonbasic land";
     }
 
