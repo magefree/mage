@@ -96,6 +96,7 @@ public class ConnectDialog extends MageDialog {
         this.txtPort.setText(MageFrame.getPreferences().get("serverPort", Integer.toString(Config.port)));
         this.txtUserName.setText(MageFrame.getPreferences().get("userName", ""));
         this.chkAutoConnect.setSelected(Boolean.parseBoolean(MageFrame.getPreferences().get("autoConnect", "false")));
+        this.chkForceUpdateDB.setSelected(false); // has always to be set manually to force comparison
         this.setModal(true);
         this.setLocation(50, 50);
         this.setVisible(true);
@@ -118,24 +119,34 @@ public class ConnectDialog extends MageDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtServer = new javax.swing.JTextField();
         lblServer = new javax.swing.JLabel();
+        txtServer = new javax.swing.JTextField();
+        btnFind = new javax.swing.JButton();
         lblPort = new javax.swing.JLabel();
         txtPort = new javax.swing.JTextField();
-        txtUserName = new javax.swing.JTextField();
         lblUserName = new javax.swing.JLabel();
+        txtUserName = new javax.swing.JTextField();
+        chkAutoConnect = new javax.swing.JCheckBox();
+        chkForceUpdateDB = new javax.swing.JCheckBox();
+        jProxySettingsButton = new javax.swing.JButton();
         btnConnect = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
-        chkAutoConnect = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
-        jProxySettingsButton = new javax.swing.JButton();
         lblStatus = new javax.swing.JLabel();
 
-        setTitle("Connect");
+        setTitle("Connect to server");
         setNormalBounds(new java.awt.Rectangle(100, 100, 410, 307));
 
         lblServer.setLabelFor(txtServer);
         lblServer.setText("Server:");
+
+        btnFind.setText("Find...");
+        btnFind.setToolTipText("Shows the list of public servers");
+        btnFind.setName("findServerBtn"); // NOI18N
+        btnFind.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                findPublicServerActionPerformed(evt);
+            }
+        });
 
         lblPort.setLabelFor(txtPort);
         lblPort.setText("Port:");
@@ -148,6 +159,29 @@ public class ConnectDialog extends MageDialog {
 
         lblUserName.setLabelFor(txtUserName);
         lblUserName.setText("User Name:");
+
+        chkAutoConnect.setText("Automatically connect to this server next time");
+        chkAutoConnect.setToolTipText("<HTML>If active this connect dialog will not be shown if you choose to connect.<br>\nInstead XMage tries to connect to the last server you were connected to.");
+        chkAutoConnect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkAutoConnectActionPerformed(evt);
+            }
+        });
+
+        chkForceUpdateDB.setText("Force update of card database");
+        chkForceUpdateDB.setToolTipText("<HTML>If active the comparison of the server cards database to the client database will be enforced.<br>If not, the comparison will only done if the database version of the client is lower than the version of the server.");
+        chkForceUpdateDB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkForceUpdateDBActionPerformed(evt);
+            }
+        });
+
+        jProxySettingsButton.setText("Proxy Settings...");
+        jProxySettingsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jProxySettingsButtonActionPerformed(evt);
+            }
+        });
 
         btnConnect.setText("Connect");
         btnConnect.addActionListener(new java.awt.event.ActionListener() {
@@ -163,91 +197,70 @@ public class ConnectDialog extends MageDialog {
             }
         });
 
-        chkAutoConnect.setText("Automatically connect to this server next time");
-        chkAutoConnect.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkAutoConnectActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("Find...");
-        jButton1.setToolTipText("Find public server");
-        jButton1.setName("findServerBtn"); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                findPublicServerActionPerformed(evt);
-            }
-        });
-
-        jProxySettingsButton.setText("Proxy Settings...");
-        jProxySettingsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jProxySettingsButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(lblPort)
-                                                        .addComponent(lblServer)
-                                                        .addComponent(lblUserName))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(131, 131, 131))
-                                                        .addComponent(txtUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
-                                                        .addComponent(chkAutoConnect, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                                .addComponent(txtServer, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(jButton1))
-                                                        .addComponent(jProxySettingsButton)))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(btnConnect)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(btnCancel))
-                                        .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap())
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnConnect)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblPort)
+                            .addComponent(lblServer)
+                            .addComponent(lblUserName))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(chkForceUpdateDB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(chkAutoConnect, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jProxySettingsButton)
+                                .addGap(164, 237, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtServer, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                                    .addComponent(txtPort, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtUserName))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnFind)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(lblServer)
-                                        .addComponent(txtServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblPort))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblUserName))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(chkAutoConnect)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jProxySettingsButton)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(btnCancel)
-                                                        .addComponent(btnConnect))
-                                                .addContainerGap())
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(8, 8, 8)
-                                                .addComponent(lblStatus)
-                                                .addContainerGap())))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblServer)
+                    .addComponent(txtServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFind))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPort))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUserName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkAutoConnect)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkForceUpdateDB)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jProxySettingsButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnConnect)
+                    .addComponent(btnCancel))
+                .addContainerGap())
         );
 
         pack();
@@ -289,6 +302,8 @@ public class ConnectDialog extends MageDialog {
             connection.setHost(this.txtServer.getText().trim());
             connection.setPort(Integer.valueOf(this.txtPort.getText().trim()));
             connection.setUsername(this.txtUserName.getText().trim());
+            connection.setForceDBComparison(this.chkForceUpdateDB.isSelected());
+
 
             ProxyType configProxyType = Connection.ProxyType.valueByText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_TYPE, "None"));
 
@@ -497,12 +512,17 @@ public class ConnectDialog extends MageDialog {
         PreferencesDialog.main(new String[]{PreferencesDialog.OPEN_CONNECTION_TAB});
     }//GEN-LAST:event_jProxySettingsButtonActionPerformed
 
+    private void chkForceUpdateDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkForceUpdateDBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkForceUpdateDBActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnConnect;
+    private javax.swing.JButton btnFind;
     private javax.swing.JCheckBox chkAutoConnect;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBox chkForceUpdateDB;
     private javax.swing.JButton jProxySettingsButton;
     private javax.swing.JLabel lblPort;
     private javax.swing.JLabel lblServer;

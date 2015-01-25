@@ -51,6 +51,8 @@ public class Connection {
     private int proxyPort;
     private String proxyUsername;
     private String proxyPassword;
+    private int clientCardDatabaseVersion;
+    private boolean forceDBComparison;
 
     private int avatarId;
     private boolean showAbilityPickerForced;
@@ -202,8 +204,9 @@ public class Connection {
     public static InetAddress getLocalAddress() throws SocketException {
         for (Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces(); interfaces.hasMoreElements(); ) {
             NetworkInterface iface = interfaces.nextElement( );
-            if (iface.isLoopback())
+            if (iface.isLoopback()) {
                 continue;
+            }
             for (InterfaceAddress addr: iface.getInterfaceAddresses()) {
                 if (addr != null) {
                     InetAddress iaddr = addr.getAddress();
@@ -245,6 +248,14 @@ public class Connection {
 
     public void setUserSkipPrioritySteps(UserSkipPrioritySteps userSkipPrioritySteps) {
         this.userSkipPrioritySteps = userSkipPrioritySteps;
+    }
+
+    public boolean isForceDBComparison() {
+        return forceDBComparison;
+    }
+
+    public void setForceDBComparison(boolean forceDBComparison) {
+        this.forceDBComparison = forceDBComparison;
     }
 
 }

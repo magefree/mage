@@ -889,7 +889,10 @@ public class MageServerImpl implements MageServer {
                     DeckValidatorFactory.getInstance().getDeckTypes().toArray(new String[DeckValidatorFactory.getInstance().getDeckTypes().size()]),
                     CubeFactory.getInstance().getDraftCubes().toArray(new String[CubeFactory.getInstance().getDraftCubes().size()]),
                     testMode,
-                    Main.getVersion());
+                    Main.getVersion(),
+                    CardRepository.instance.getContentVersionConstant(),
+                    ExpansionRepository.instance.getContentVersionConstant()
+            );
         }
         catch (Exception ex) {
             handleException(ex);
@@ -1111,7 +1114,7 @@ public class MageServerImpl implements MageServer {
         List<ExpansionInfo> result = new ArrayList<>();
         for (ExpansionInfo expansionInfo : ExpansionRepository.instance.getAll()) {
             if (!codes.contains(expansionInfo.getCode())) {
-                result .add(expansionInfo);
+                result.add(expansionInfo);
             }
         }
         return result;

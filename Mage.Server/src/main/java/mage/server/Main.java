@@ -63,7 +63,6 @@ import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
-import static mage.server.Session.getBasicCause;
 import org.jboss.remoting.transport.bisocket.BisocketServerInvoker;
 
 

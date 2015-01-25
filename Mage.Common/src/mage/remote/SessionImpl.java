@@ -49,6 +49,7 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
+import mage.cards.repository.RepositoryUtil;
 import mage.constants.Constants.SessionState;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
@@ -287,7 +288,7 @@ public class SessionImpl implements Session {
                 sessionState = SessionState.CONNECTED;
                 serverState = server.getServerState();
                 if (!connection.getUsername().equals("Admin")) {
-                    updateDatabase();
+                    updateDatabase(connection.isForceDBComparison(), serverState);
                 }
                 logger.info("Connected as " + (this.getUserName() == null ? "":this.getUserName()) + " to MAGE server at " + connection.getHost() + ":" + connection.getPort());
                 client.connected(this.getUserName() == null ? "":this.getUserName() +"@" + connection.getHost() + ":" + connection.getPort() +" ");
@@ -322,15 +323,27 @@ public class SessionImpl implements Session {
         return false;
     }
 
-    private void updateDatabase() {
-        List<String> classNames = CardRepository.instance.getClassNames();
-        List<CardInfo> cards = server.getMissingCardsData(classNames);
-        CardRepository.instance.addCards(cards);
+    private void updateDatabase(boolean forceDBComparison, ServerState serverState) {
+        long cardDBVersion = CardRepository.instance.getContentVersionFromDB();
+        if (forceDBComparison || serverState.getCardsContentVersion() > cardDBVersion) {
+            List<String> classNames = CardRepository.instance.getClassNames();
+            List<CardInfo> cards = server.getMissingCardsData(classNames);
+            CardRepository.instance.addCards(cards);
+            CardRepository.instance.setContentVersion(serverState.getCardsContentVersion());
+            logger.info("Updating client cards DB - existing cards: " + classNames.size() + " new cards: " + cards.size() +
+                    " content versions - server: " + serverState.getCardsContentVersion() + " client: " + cardDBVersion);
+        }
 
-        List<String> setCodes = ExpansionRepository.instance.getSetCodes();
-        List<ExpansionInfo> expansions = server.getMissingExpansionData(setCodes);
-        for (ExpansionInfo expansion : expansions) {
-            ExpansionRepository.instance.add(expansion);
+        long expansionDBVersion = ExpansionRepository.instance.getContentVersionFromDB();
+        if (forceDBComparison || serverState.getExpansionsContentVersion() > expansionDBVersion) {
+            List<String> setCodes = ExpansionRepository.instance.getSetCodes();
+            List<ExpansionInfo> expansions = server.getMissingExpansionData(setCodes);
+            for (ExpansionInfo expansion : expansions) {
+                ExpansionRepository.instance.add(expansion);
+            }
+            ExpansionRepository.instance.setContentVersion(serverState.getExpansionsContentVersion());
+            logger.info("Updating client expansions DB - existing sets: " + setCodes.size() + " new sets: " + expansions.size()+
+                    " content versions - server: " + serverState.getExpansionsContentVersion() + " client: " + expansionDBVersion);
         }
     }
 
@@ -366,10 +379,10 @@ public class SessionImpl implements Session {
 
     /**
      *
-     * @param errorCall - was connection lost because of error - ask user if he want to try to reconnect
+     * @param askForReconnect - true = connection was lost because of error and ask the user if he want to try to reconnect
      */
     @Override
-    public synchronized void disconnect(boolean errorCall) {
+    public synchronized void disconnect(boolean askForReconnect) {
         if (isConnected()) {
             logger.info("DISCONNECT (still connected)");
             sessionState = SessionState.DISCONNECTING;
@@ -389,10 +402,10 @@ public class SessionImpl implements Session {
         if (sessionState == SessionState.DISCONNECTING || sessionState == SessionState.CONNECTING) {
             sessionState = SessionState.DISCONNECTED;
             logger.info("Disconnected ... ");
-            if (errorCall) {
+            if (askForReconnect) {
                 client.showError("Network error.  You have been disconnected");
             }
-            client.disconnected(errorCall); // MageFrame with check to reconnect
+            client.disconnected(askForReconnect); // MageFrame with check to reconnect
             pingTime.clear();
         }
     }

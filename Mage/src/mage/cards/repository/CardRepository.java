@@ -38,7 +38,6 @@ import com.j256.ormlite.support.DatabaseConnection;
 import com.j256.ormlite.table.TableUtils;
 import java.io.File;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -58,7 +57,10 @@ public enum CardRepository {
 
     private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE";
     private static final String VERSION_ENTITY_NAME = "card";
+    // raise this if db structure was changed
     private static final long CARD_DB_VERSION = 36;
+    // raise this if new cards were added to the server
+    private static final long CARD_CONTENT_VERSION = 1;
 
     private final Random random = new Random();
     private Dao<CardInfo, Object> cardDao;
@@ -275,6 +277,29 @@ public enum CardRepository {
         } catch (SQLException ex) {
         }
         return new ArrayList<>();
+    }
+
+    public long getContentVersionFromDB() {
+        try {
+            ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
+            return RepositoryUtil.getDatabaseVersion(connectionSource, VERSION_ENTITY_NAME + "Content");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    public void setContentVersion(long version) {
+        try {
+            ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
+            RepositoryUtil.updateVersion(connectionSource, VERSION_ENTITY_NAME  + "Content", version);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public long getContentVersionConstant() {
+        return CARD_CONTENT_VERSION;
     }
 
     public void closeDB() {

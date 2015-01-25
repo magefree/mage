@@ -25,14 +25,21 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.repository;
 
-import mage.cards.*;
-import mage.util.ClassScanner;
-import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.ExpansionSet;
+import mage.cards.Sets;
+import mage.cards.SplitCard;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.cards.repository.ExpansionInfo;
+import mage.cards.repository.ExpansionRepository;
+import mage.util.ClassScanner;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -57,6 +64,7 @@ public class CardScanner {
             packages.add(set.getPackageName());
             ExpansionRepository.instance.add(new ExpansionInfo(set));
         }
+        ExpansionRepository.instance.setContentVersion(CardRepository.instance.getContentVersionConstant());
 
         for (Class c : ClassScanner.findClasses(packages, CardImpl.class)) {
             if (!CardRepository.instance.cardExists(c.getCanonicalName())) {
@@ -75,6 +83,7 @@ public class CardScanner {
             logger.info("Cards need storing in DB: " + cardsToAdd.size());
             CardRepository.instance.addCards(cardsToAdd);
         }
+        CardRepository.instance.setContentVersion(CardRepository.instance.getContentVersionConstant());
 
     }
 }

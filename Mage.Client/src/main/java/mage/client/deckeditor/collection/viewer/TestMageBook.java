@@ -1,9 +1,8 @@
 package mage.client.deckeditor.collection.viewer;
 
-import mage.client.plugins.impl.Plugins;
-
-import javax.swing.*;
+import javax.swing.JFrame;
 import mage.cards.repository.CardScanner;
+import mage.client.plugins.impl.Plugins;
 import org.mage.card.arcane.ManaSymbols;
 
 /**

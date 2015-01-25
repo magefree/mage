@@ -24,6 +24,7 @@ public enum ExpansionRepository {
     private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE";
     private static final String VERSION_ENTITY_NAME = "expansion";
     private static final long EXPANSION_DB_VERSION = 3;
+    private static final long EXPANSION_CONTENT_VERSION = 1;
 
     private Dao<ExpansionInfo, Object> expansionDao;
 
@@ -34,7 +35,7 @@ public enum ExpansionRepository {
         }
         try {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
-            boolean obsolete = RepositoryUtil.isDatabaseObsolete(connectionSource, VERSION_ENTITY_NAME, EXPANSION_DB_VERSION);
+            boolean obsolete = RepositoryUtil.isDatabaseObsolete(connectionSource, VERSION_ENTITY_NAME, 0);
 
             if (obsolete) {
                 TableUtils.dropTable(connectionSource, ExpansionInfo.class, true);
@@ -55,7 +56,7 @@ public enum ExpansionRepository {
     }
 
     public List<String> getSetCodes() {
-        List<String> setCodes = new ArrayList<String>();
+        List<String> setCodes = new ArrayList<>();
         try {
             List<ExpansionInfo> expansions = expansionDao.queryForAll();
             for (ExpansionInfo expansion : expansions) {
@@ -80,7 +81,7 @@ public enum ExpansionRepository {
     }
 
     public List<ExpansionInfo> getSetsWithBasicLandsByReleaseDate() {
-        List<ExpansionInfo> sets = new LinkedList<ExpansionInfo>();
+        List<ExpansionInfo> sets = new LinkedList<>();
         try {
             QueryBuilder<ExpansionInfo, Object> qb = expansionDao.queryBuilder();
             qb.orderBy("releaseDate", false);
@@ -122,6 +123,29 @@ public enum ExpansionRepository {
             return expansionDao.queryForAll();
         } catch (SQLException ex) {
         }
-        return new ArrayList<ExpansionInfo>();
+        return new ArrayList<>();
+    }
+
+    public long getContentVersionFromDB() {
+        try {
+            ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
+            return RepositoryUtil.getDatabaseVersion(connectionSource, VERSION_ENTITY_NAME + "Content");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    public void setContentVersion(long version) {
+        try {
+            ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
+            RepositoryUtil.updateVersion(connectionSource, VERSION_ENTITY_NAME + "Content", version);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public long getContentVersionConstant() {
+        return EXPANSION_CONTENT_VERSION;
     }
 }

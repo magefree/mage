@@ -2,7 +2,7 @@
 
 <Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <Properties>
-    <Property name="title" type="java.lang.String" value="Connect"/>
+    <Property name="title" type="java.lang.String" value="Connect to server"/>
     <Property name="normalBounds" type="java.awt.Rectangle" editor="org.netbeans.beaninfo.editors.RectangleEditor">
       <Rectangle value="[100, 100, 410, 307]"/>
     </Property>
@@ -28,7 +28,13 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="btnConnect" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="lblPort" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="lblServer" min="-2" max="-2" attributes="0"/>
@@ -36,23 +42,25 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtUserName" alignment="0" pref="382" max="32767" attributes="0"/>
-                          <Component id="chkAutoConnect" alignment="0" pref="382" max="32767" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="txtServer" pref="311" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblStatus" alignment="1" max="32767" attributes="0"/>
+                          <Component id="chkForceUpdateDB" max="32767" attributes="0"/>
+                          <Component id="chkAutoConnect" pref="362" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jProxySettingsButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="164" pref="237" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="txtPort" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
-                          <Component id="jProxySettingsButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="txtServer" pref="286" max="32767" attributes="0"/>
+                                  <Component id="txtPort" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
+                                  <Component id="txtUserName" alignment="1" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnFind" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="btnConnect" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="lblStatus" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -65,7 +73,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblServer" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtServer" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnFind" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -79,20 +87,16 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="chkAutoConnect" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="chkForceUpdateDB" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jProxySettingsButton" min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace pref="24" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnConnect" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                      <Component id="lblStatus" min="-2" max="-2" attributes="0"/>
-                  </Group>
+              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <Component id="lblStatus" min="-2" pref="24" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnConnect" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -100,8 +104,6 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="txtServer">
-    </Component>
     <Component class="javax.swing.JLabel" name="lblServer">
       <Properties>
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
@@ -109,6 +111,18 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Server:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtServer">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnFind">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Find..."/>
+        <Property name="toolTipText" type="java.lang.String" value="Shows the list of public servers"/>
+        <Property name="name" type="java.lang.String" value="findServerBtn" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="findPublicServerActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblPort">
       <Properties>
@@ -123,8 +137,6 @@
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="keyTyped"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtUserName">
-    </Component>
     <Component class="javax.swing.JLabel" name="lblUserName">
       <Properties>
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
@@ -132,6 +144,34 @@
         </Property>
         <Property name="text" type="java.lang.String" value="User Name:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtUserName">
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chkAutoConnect">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Automatically connect to this server next time"/>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;If active this connect dialog will not be shown if you choose to connect.&lt;br&gt;&#xa;Instead XMage tries to connect to the last server you were connected to."/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkAutoConnectActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chkForceUpdateDB">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Force update of card database"/>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;If active the comparison of the server cards database to the client database will be enforced.&lt;br&gt;If not, the comparison will only done if the database version of the client is lower than the version of the server."/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkForceUpdateDBActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jProxySettingsButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Proxy Settings..."/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jProxySettingsButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnConnect">
       <Properties>
@@ -147,32 +187,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JCheckBox" name="chkAutoConnect">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Automatically connect to this server next time"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkAutoConnectActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Find..."/>
-        <Property name="toolTipText" type="java.lang.String" value="Find public server"/>
-        <Property name="name" type="java.lang.String" value="findServerBtn" noResource="true"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="findPublicServerActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="jProxySettingsButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Proxy Settings..."/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jProxySettingsButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblStatus">
