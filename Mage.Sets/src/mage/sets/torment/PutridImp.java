@@ -29,6 +29,7 @@ package mage.sets.torment;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
@@ -63,8 +64,13 @@ public class PutridImp extends CardImpl {
         // Discard a card: Putrid Imp gains flying until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new DiscardCardCost()));
         // Threshold - As long as seven or more cards are in your graveyard, Putrid Imp gets +1/+1 and can't block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7), "Threshold - As long as seven or more cards are in your graveyard, Putrid Imp gets +1/+1 and can't block")));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CantBlockSourceEffect(Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7), "")));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+                new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
+                new CardsInControllerGraveCondition(7),
+                "<i>Threshold</i> - As long as seven or more cards are in your graveyard, {this} gets +1/+1"));
+        ability.addEffect(new ConditionalContinousEffect(new CantBlockSourceEffect(Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7),
+                "and can't block"));
+        this.addAbility(ability);
         
     }
 
