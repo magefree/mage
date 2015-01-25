@@ -27,17 +27,16 @@
  */
 package mage.abilities.effects.common.continious;
 
-import java.util.Iterator;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -52,9 +51,9 @@ import org.apache.log4j.Logger;
 public class CommanderManaReplacementEffect extends ReplacementEffectImpl {
 
     private final UUID playerId;
-    private final Mana commanderMana;
+    private final FilterMana commanderMana;
 
-    public CommanderManaReplacementEffect(UUID playerId, Mana commanderMana) {
+    public CommanderManaReplacementEffect(UUID playerId, FilterMana commanderMana) {
         super(Duration.EndOfGame, Outcome.Neutral);
         staticText = "If mana would be added to a player's mana pool of a color that isn't in the color identity of that player's commander, that amount of colorless mana is added to that player's mana pool instead.";
         this.playerId = playerId;
@@ -80,31 +79,31 @@ public class CommanderManaReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Mana mana = ((ManaEvent) event).getMana();
-        if (mana.getBlack() > 0 && commanderMana.getBlack() == 0) {
+        if (mana.getBlack() > 0 && !commanderMana.isBlack()) {
             for (int i = 0; i < mana.getBlack(); i++) {
                 mana.addColorless();
             }
             mana.setBlack(0);
         }
-        if (mana.getBlue() > 0 && commanderMana.getBlue() == 0) {
+        if (mana.getBlue() > 0 && !commanderMana.isBlue()) {
             for (int i = 0; i < mana.getBlue(); i++) {
                 mana.addColorless();
             }
             mana.setBlue(0);
         }
-        if (mana.getGreen() > 0 && commanderMana.getGreen() == 0) {
+        if (mana.getGreen() > 0 && !commanderMana.isGreen()) {
             for (int i = 0; i < mana.getGreen(); i++) {
                 mana.addColorless();
             }
             mana.setGreen(0);
         }
-        if (mana.getRed() > 0 && commanderMana.getRed() == 0) {
+        if (mana.getRed() > 0 && !commanderMana.isRed()) {
             for (int i = 0; i < mana.getRed(); i++) {
                 mana.addColorless();
             }
             mana.setRed(0);
         }
-        if (mana.getWhite() > 0 && commanderMana.getWhite()== 0) {
+        if (mana.getWhite() > 0 && !commanderMana.isWhite()) {
             for (int i = 0; i < mana.getWhite(); i++) {
                 mana.addColorless();
             }

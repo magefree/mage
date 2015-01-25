@@ -33,7 +33,6 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
-
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -51,6 +50,7 @@ import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
+import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
@@ -58,11 +58,16 @@ import mage.util.functions.CopyFunction;
 import mage.util.functions.CopyTokenFunction;
 
 
-
 /**
  * @author nantuko
  */
 public class CardUtil {
+
+    private static final String regexBlack = ".*\\x7b.{0,2}B.{0,2}\\x7d.*";
+    private static final String regexBlue = ".*\\x7b.{0,2}U.{0,2}\\x7d.*";
+    private static final String regexRed = ".*\\x7b.{0,2}R.{0,2}\\x7d.*";
+    private static final String regexGreen = ".*\\x7b.{0,2}G.{0,2}\\x7d.*";
+    private static final String regexWhite = ".*\\x7b.{0,2}W.{0,2}\\x7d.*";
 
     static String numberStrings[] = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
                                       "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "ninteen", "twenty"};
@@ -556,4 +561,41 @@ public class CardUtil {
         } 
         return cmcObject;
     }
+    
+    /**
+     * Gets the colors that are in the casting cost but also in the rules text 
+     * as far as not included in reminder text.
+     * 
+     * @param card
+     * @return 
+     */
+    public static FilterMana getColorIdentity(Card card) {
+        FilterMana mana = new FilterMana();
+        mana.setBlack(card.getManaCost().getText().matches(regexBlack));
+        mana.setBlue(card.getManaCost().getText().matches(regexBlue));
+        mana.setGreen(card.getManaCost().getText().matches(regexGreen));
+        mana.setRed(card.getManaCost().getText().matches(regexRed));
+        mana.setWhite(card.getManaCost().getText().matches(regexWhite));
+
+        for (String rule : card.getRules()) {
+            rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
+            if (rule.matches(regexBlack)) {
+                mana.setBlack(true);
+            }
+            if (rule.matches(regexBlue)) {
+                mana.setBlue(true);
+            }
+            if (rule.matches(regexGreen)) {
+                mana.setGreen(true);
+            }
+            if (rule.matches(regexRed)) {
+                mana.setRed(true);
+            }
+            if (rule.matches(regexWhite)) {
+                mana.setWhite(true);
+            }
+        }
+        return mana;
+    }
+
 }

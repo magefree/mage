@@ -38,6 +38,7 @@ import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
 import mage.constants.CardType;
 import mage.filter.FilterMana;
+import mage.util.CardUtil;
 
 /**
  *
@@ -47,12 +48,6 @@ public class Commander extends DeckValidator {
 
     protected  List<String> banned = new ArrayList<>();
     protected  List<String> bannedCommander = new ArrayList<>();
-
-    private static final String regexBlack = ".*\\x7b.{0,2}B.{0,2}\\x7d.*";
-    private static final String regexBlue = ".*\\x7b.{0,2}U.{0,2}\\x7d.*";
-    private static final String regexRed = ".*\\x7b.{0,2}R.{0,2}\\x7d.*";
-    private static final String regexGreen = ".*\\x7b.{0,2}G.{0,2}\\x7d.*";
-    private static final String regexWhite = ".*\\x7b.{0,2}W.{0,2}\\x7d.*";
 
     public Commander() {
         this("Commander");
@@ -138,7 +133,7 @@ public class Commander extends DeckValidator {
             if ((commander.getCardType().contains(CardType.CREATURE) && commander.getSupertype().contains("Legendary")) ||
                     (commander.getCardType().contains(CardType.PLANESWALKER) && commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
                 if (!bannedCommander.contains(commander.getName())) {
-                    FilterMana color = getColorIdentity(commander);
+                    FilterMana color = CardUtil.getColorIdentity(commander);
                     for (Card card : deck.getCards()) {
                         if (!cardHasValideColor(color, card)) {
                             invalid.put(card.getName(), "Invalid color (" + commander.getName() +")");
@@ -160,37 +155,8 @@ public class Commander extends DeckValidator {
         return valid;
     }
 
-    public FilterMana getColorIdentity(Card card) {
-        FilterMana mana = new FilterMana();
-        mana.setBlack(card.getManaCost().getText().matches(regexBlack));
-        mana.setBlue(card.getManaCost().getText().matches(regexBlue));
-        mana.setGreen(card.getManaCost().getText().matches(regexGreen));
-        mana.setRed(card.getManaCost().getText().matches(regexRed));
-        mana.setWhite(card.getManaCost().getText().matches(regexWhite));
-
-        for (String rule : card.getRules()) {
-            rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
-            if (rule.matches(regexBlack)) {
-                mana.setBlack(true);
-            }
-            if (rule.matches(regexBlue)) {
-                mana.setBlue(true);
-            }
-            if (rule.matches(regexGreen)) {
-                mana.setGreen(true);
-            }
-            if (rule.matches(regexRed)) {
-                mana.setRed(true);
-            }
-            if (rule.matches(regexWhite)) {
-                mana.setWhite(true);
-            }
-        }
-        return mana;
-    }
-
     public boolean cardHasValideColor(FilterMana commander, Card card) {
-        FilterMana cardColor = getColorIdentity(card);
+        FilterMana cardColor = CardUtil.getColorIdentity(card);
         if (cardColor.isBlack() && !commander.isBlack()
                 || cardColor.isBlue() && !commander.isBlue()
                 || cardColor.isGreen() && !commander.isGreen()
