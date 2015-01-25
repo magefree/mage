@@ -30,27 +30,22 @@ package mage.sets.morningtide;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.Filter;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -71,7 +66,8 @@ public class MaralenOfTheMornsong extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MaralenOfTheMornsongEffect()));
 
         // At the beginning of each player's draw step, that player loses 3 life, searches his or her library for a card, puts it into his or her hand, then shuffles his or her library.
-        this.addAbility(new MaralenOfTheMornsongAbility());
+        this.addAbility(new BeginningOfDrawTriggeredAbility(new MaralenOfTheMornsongEffect2(), TargetController.ANY, false));
+
     }
 
     public MaralenOfTheMornsong(final MaralenOfTheMornsong card) {
@@ -84,10 +80,10 @@ public class MaralenOfTheMornsong extends CardImpl {
     }
 }
 
-class MaralenOfTheMornsongEffect extends ReplacementEffectImpl {
+class MaralenOfTheMornsongEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public MaralenOfTheMornsongEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral);
+        super(Duration.WhileOnBattlefield, Outcome.Neutral, false, false);
         staticText = "Players can't draw cards";
     }
 
@@ -106,46 +102,13 @@ class MaralenOfTheMornsongEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DRAW_CARD;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DRAW_CARD) {
-            return true;
-        }
-        return false;
-    }
-}
-
-class MaralenOfTheMornsongAbility extends TriggeredAbilityImpl {
-
-    public MaralenOfTheMornsongAbility() {
-        super(Zone.BATTLEFIELD, new MaralenOfTheMornsongEffect2());
-    }
-
-    public MaralenOfTheMornsongAbility(final MaralenOfTheMornsongAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public MaralenOfTheMornsongAbility copy() {
-        return new MaralenOfTheMornsongAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DRAW_STEP_PRE) {
-            this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "At the beginning of each player's draw step, that player loses 3 life, searches his or her library for a card, puts it into his or her hand, then shuffles his or her library.";
+        return true;
     }
 
 }
@@ -154,6 +117,7 @@ class MaralenOfTheMornsongEffect2 extends OneShotEffect {
 
     public MaralenOfTheMornsongEffect2() {
         super(Outcome.LoseLife);
+        staticText = "that player loses 3 life, searches his or her library for a card, puts it into his or her hand, then shuffles his or her library";
     }
 
     public MaralenOfTheMornsongEffect2(final MaralenOfTheMornsongEffect2 effect) {
@@ -184,4 +148,3 @@ class MaralenOfTheMornsongEffect2 extends OneShotEffect {
     }
 
 }
-
