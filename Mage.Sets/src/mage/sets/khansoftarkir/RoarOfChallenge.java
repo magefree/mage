@@ -28,25 +28,17 @@
 package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.MustBeBlockedByAllTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.IndestructibleAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -62,9 +54,12 @@ public class RoarOfChallenge extends CardImpl {
         this.color.setGreen(true);
 
         // All creatures able to block target creature this turn do so.
-        // <i>Ferocious</i> - That creature gains indestructible until end of turn if you control a creature with power 4 or greater.
         this.getSpellAbility().addEffect(new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new RoarOfChallengeEffect());
+        // <i>Ferocious</i> - That creature gains indestructible until end of turn if you control a creature with power 4 or greater.
+        this.getSpellAbility().addEffect(new ConditionalContinousEffect(
+                new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
+                new LockedInCondition(FerociousCondition.getInstance()),
+                "<br><i>Ferocious</i> &mdash; That creature gains indestructible until end of turn if you control a creature with power 4 or greater."));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
@@ -75,36 +70,5 @@ public class RoarOfChallenge extends CardImpl {
     @Override
     public RoarOfChallenge copy() {
         return new RoarOfChallenge(this);
-    }
-}
-
-class RoarOfChallengeEffect extends OneShotEffect {
-
-    public RoarOfChallengeEffect() {
-        super(Outcome.AddAbility);
-        this.staticText = "<br/><br/><i>Ferocious</i> - That creature gains indestructible until end of turn if you control a creature with power 4 or greater";
-    }
-
-    public RoarOfChallengeEffect(final RoarOfChallengeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RoarOfChallengeEffect copy() {
-        return new RoarOfChallengeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (FerociousCondition.getInstance().apply(game, source)) {
-                ContinuousEffect effect = new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn);
-                effect.setTargetPointer(getTargetPointer());
-                game.addEffect(effect, source);
-            }
-            return true;
-        }
-        return false;
     }
 }

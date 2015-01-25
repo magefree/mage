@@ -30,7 +30,9 @@ package mage.sets.khansoftarkir;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.FerociousCondition;
+import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
@@ -58,8 +60,10 @@ public class IcyBlast extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, new FilterCreaturePermanent(), false));
         
         // <i>Ferocious</i> - If you control a creature with power 4 or greater, those creatures don't untap during their controllers' next untap steps.
-        Effect effect = new IcyBlastSkipNextUntapTargetEffect();
-        effect.setText("<br/><br/><i>Ferocious</i> - If you control a creature with power 4 or greater, those creatures don't untap during their controllers' next untap steps");
+        Effect effect = new ConditionalContinuousRuleModifyingEffect(
+                new DontUntapInControllersNextUntapStepTargetEffect(),
+                new LockedInCondition(FerociousCondition.getInstance()));
+        effect.setText("<br/><i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, those creatures don't untap during their controllers' next untap steps");
         this.getSpellAbility().addEffect(effect);
     }
 
@@ -80,33 +84,5 @@ public class IcyBlast extends CardImpl {
     @Override
     public IcyBlast copy() {
         return new IcyBlast(this);
-    }
-}
-
-class IcyBlastSkipNextUntapTargetEffect extends DontUntapInControllersNextUntapStepTargetEffect {
-
-    public IcyBlastSkipNextUntapTargetEffect() {
-        super();
-    }
-
-    public IcyBlastSkipNextUntapTargetEffect(final IcyBlastSkipNextUntapTargetEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public IcyBlastSkipNextUntapTargetEffect copy() {
-        return new IcyBlastSkipNextUntapTargetEffect(this);
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        if (!FerociousCondition.getInstance().apply(game, source)) {
-            discard();
-        }
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 }

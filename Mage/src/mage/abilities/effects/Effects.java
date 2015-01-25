@@ -72,8 +72,10 @@ public class Effects extends ArrayList<Effect> {
                     endString = " ";
                 } else if (nextRule.startsWith(",")) {
                     endString = "";
-                } else if (lastRule != null && lastRule.length()> 3 && !lastRule.endsWith(".")) {
-                    endString = ". ";
+                } else if (lastRule != null && lastRule.length()> 3) {
+                    if (!lastRule.endsWith(".") && !lastRule.endsWith("<br>")) {
+                        endString = ". ";
+                    }
                     if (nextRule.length() > 3) {
                         nextRule = Character.toUpperCase(nextRule.charAt(0)) + nextRule.substring(1);
                     }
@@ -82,7 +84,12 @@ public class Effects extends ArrayList<Effect> {
             }
             lastRule = nextRule;
         }
-        if (lastRule != null && lastRule.length()> 3 && !lastRule.endsWith(".") && !lastRule.endsWith("\"") && !lastRule.startsWith("<b>Level ")) {
+        if (lastRule != null && lastRule.length()> 3 && 
+                !lastRule.endsWith(".") &&
+                !lastRule.endsWith("\"") &&
+                !lastRule.startsWith("<b>Level ") &&
+                !lastRule.endsWith(".)") &&
+                !lastRule.endsWith("<i/>") ) {
             sbText.append(".");
         }
         return sbText.toString();

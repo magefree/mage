@@ -57,8 +57,6 @@ public class StubbornDenial extends CardImpl {
         super(ownerId, 56, "Stubborn Denial", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "KTK";
 
-        this.color.setBlue(true);
-
         // Counter target noncreature spell unless its controller pays {1}.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new CounterUnlessPaysEffect(new GenericManaCost(1)),
@@ -68,7 +66,7 @@ public class StubbornDenial extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new CounterTargetEffect(),
                 FerociousCondition.getInstance(),
-                "<br><br><i>Ferocious</i> - If you control a creature with power 4 or greater, counter that spell instead"));
+                "<br><i>Ferocious</i> &mdash If you control a creature with power 4 or greater, counter that spell instead"));
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 

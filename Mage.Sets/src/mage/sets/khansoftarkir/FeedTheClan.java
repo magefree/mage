@@ -28,15 +28,12 @@
 package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.condition.common.FerociousCondition;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -48,11 +45,13 @@ public class FeedTheClan extends CardImpl {
         super(ownerId, 132, "Feed the Clan", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "KTK";
 
-        this.color.setGreen(true);
-
         // You gain 5 life.
         // Ferocious - You gain 10 life instead if you control a creature with power 4 or greater
-        this.getSpellAbility().addEffect(new FeedTheClanEffect());
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
+                new GainLifeEffect(10),
+                new GainLifeEffect(5),
+                FerociousCondition.getInstance(),
+                "You gain 5 life. <br><i>Ferocious</i> &mdash; You gain 10 life instead if you control a creature with power 4 or greater"));
 
     }
 
@@ -63,36 +62,5 @@ public class FeedTheClan extends CardImpl {
     @Override
     public FeedTheClan copy() {
         return new FeedTheClan(this);
-    }
-}
-
-class FeedTheClanEffect extends OneShotEffect {
-
-    public FeedTheClanEffect() {
-        super(Outcome.GainLife);
-        this.staticText = "You gain 5 life. <br><br><i>Ferocious</i> - You gain 10 life instead if you control a creature with power 4 or greater";
-    }
-
-    public FeedTheClanEffect(final FeedTheClanEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FeedTheClanEffect copy() {
-        return new FeedTheClanEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (FerociousCondition.getInstance().apply(game, source)) {
-                controller.gainLife(10, game);
-            } else {
-                controller.gainLife(5, game);
-            }
-            return true;
-        }
-        return false;
     }
 }

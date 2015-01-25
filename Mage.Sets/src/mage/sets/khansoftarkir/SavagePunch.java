@@ -63,18 +63,17 @@ public class SavagePunch extends CardImpl {
         super(ownerId, 147, "Savage Punch", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "KTK";
 
-        this.color.setGreen(true);
         // <i>Ferocious</i> - The creature you control gets +2/+2 until end of turn before it fights if you control a creature with power 4 or greater.
         Effect effect = new ConditionalContinousEffect(
                 new BoostTargetEffect(2,2,Duration.EndOfTurn),
                 new LockedInCondition(FerociousCondition.getInstance()),
-                "<i>Ferocious</i> - The creature you control gets +2/+2 until end of turn before it fights if you control a creature with power 4 or greater");
+                "<i>Ferocious</i> &mdash; The creature you control gets +2/+2 until end of turn before it fights if you control a creature with power 4 or greater");
         effect.setApplyEffectsAfter();
         this.getSpellAbility().addEffect(effect);
 
         // Target creature you control fights target creature you don't control.
         effect = new FightTargetsEffect();
-        effect.setText("<br/><br/>Target creature you control fights target creature you don't control");
+        effect.setText("<br/>Target creature you control fights target creature you don't control");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         Target target = new TargetCreaturePermanent(filter);

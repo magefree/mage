@@ -30,6 +30,7 @@ package mage.sets.fatereforged;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
 import mage.abilities.effects.ContinuousRuleModifiyingEffect;
@@ -57,9 +58,9 @@ public class WildSlash extends CardImpl {
 
         // <i>Ferocious</i> If you control a creature with power 4 or greater, damage can't be prevented this turn.
         ContinuousRuleModifiyingEffect effect = new DamageCantBePreventedEffect();
-        effect.setText("<i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, damage can't be prevented this turn");
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new ConditionalContinuousRuleModifyingEffect(effect,
-                        FerociousCondition.getInstance())));
+        effect.setText("<i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, damage can't be prevented this turn.<br>");
+        this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(effect,
+                        new LockedInCondition(FerociousCondition.getInstance())));
         
         // Wild Slash deals 2 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));

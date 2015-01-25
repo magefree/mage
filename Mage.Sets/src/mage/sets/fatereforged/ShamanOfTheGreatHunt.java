@@ -35,6 +35,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -72,10 +73,12 @@ public class ShamanOfTheGreatHunt extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         
-        // Whenever a creature you control deals combat damage to a player, put a +1/+1 counter on it.
+        // Whenever a creature you control deals combat damage to a player, put a +1/+1 counter on that creature.
+        Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
+        effect.setText("put a +1/+1 counter on that creature");
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), 
-                new FilterControlledCreaturePermanent(), false, SetTargetPointer.PERMANENT, true
+                effect,
+                new FilterControlledCreaturePermanent("a creature you control"), false, SetTargetPointer.PERMANENT, true
         ));
         
         // <i>Ferocious</i> - {2}{G/U}{G/U}: Draw a card for each creature you control with power 4 or greater.

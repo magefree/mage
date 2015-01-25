@@ -28,8 +28,9 @@
 package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.abilities.Ability;
+import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.FerociousCondition;
+import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
@@ -40,7 +41,6 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
 
 /**
  *
@@ -63,8 +63,11 @@ public class BarrageOfBoulders extends CardImpl {
         // Barrage of Boulders deals 1 damage to each creature you don't control.
         this.getSpellAbility().addEffect(new DamageAllEffect(1, filter));
         // Ferocious - If you control a creature with power 4 or greater, creatures can't block this turn
-        Effect effect = new BarrageOfBouldersCantBlockAllEffect(new FilterCreaturePermanent("creatures"), Duration.EndOfTurn);
-        effect.setText("<br/><br/><i>Ferocious</i> - If you control a creature with power 4 or greater, creatures can't block this turn");
+        Effect effect = new ConditionalRestrictionEffect(
+                Duration.EndOfTurn,
+                new CantBlockAllEffect(new FilterCreaturePermanent("creatures"), Duration.EndOfTurn),
+                new LockedInCondition(FerociousCondition.getInstance()), null);
+        effect.setText("<br/><i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, creatures can't block this turn");
         this.getSpellAbility().addEffect(effect);
     }
 
@@ -76,28 +79,4 @@ public class BarrageOfBoulders extends CardImpl {
     public BarrageOfBoulders copy() {
         return new BarrageOfBoulders(this);
     }
-}
-
-class BarrageOfBouldersCantBlockAllEffect extends CantBlockAllEffect {
-
-    public BarrageOfBouldersCantBlockAllEffect(FilterCreaturePermanent filter, Duration duration) {
-        super(filter, duration);
-    }
-
-    public BarrageOfBouldersCantBlockAllEffect(final BarrageOfBouldersCantBlockAllEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        if (!FerociousCondition.getInstance().apply(game, source)) {
-            discard();
-        }
-    }
-
-    @Override
-    public BarrageOfBouldersCantBlockAllEffect copy() {
-        return new BarrageOfBouldersCantBlockAllEffect(this);
-    }
-
 }
