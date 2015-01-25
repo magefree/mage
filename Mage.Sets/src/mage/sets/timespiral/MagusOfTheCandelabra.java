@@ -44,7 +44,7 @@ import mage.game.Game;
 import mage.target.common.TargetLandPermanent;
 
 /**
- * @author duncancmt
+ * @author duncant
  */
 public class MagusOfTheCandelabra extends CardImpl {
 

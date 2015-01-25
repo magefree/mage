@@ -52,7 +52,7 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
- * @author duncancmt
+ * @author duncant
  */
 public class MycosynthLattice extends CardImpl {
 

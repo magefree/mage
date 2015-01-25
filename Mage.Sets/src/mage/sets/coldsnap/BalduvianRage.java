@@ -46,7 +46,7 @@ import mage.filter.common.FilterAttackingCreature;
 
 
 /**
- * @author duncancmt
+ * @author duncant
  */
 public class BalduvianRage extends CardImpl {
 

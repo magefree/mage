@@ -52,7 +52,7 @@ import mage.game.turn.TurnMod;
 import mage.constants.TurnPhase;
 import mage.filter.predicate.permanent.CanBeEnchantedByPredicate;
 /**
- * @author duncancmt
+ * @author duncant
  */
 public class BreathOfFury extends CardImpl {
     public BreathOfFury(UUID ownerId) {

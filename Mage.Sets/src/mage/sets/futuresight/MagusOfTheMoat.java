@@ -42,7 +42,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
- * @author duncancmt
+ * @author duncant
  */
 public class MagusOfTheMoat extends CardImpl {
     

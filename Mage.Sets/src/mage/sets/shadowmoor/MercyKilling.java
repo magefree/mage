@@ -44,7 +44,7 @@ import mage.game.permanent.token.Token;
 import mage.MageInt;
 
 /**
- * @author duncancmt
+ * @author duncant
  */
 public class MercyKilling extends CardImpl {
 

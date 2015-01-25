@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
 import mage.util.TargetAddress;
 
 /**
- * @author duncancmt
+ * @author duncant
  */
 public class AuraGraft extends CardImpl {
 

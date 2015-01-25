@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
 import mage.game.events.GameEvent.EventType;
 
 /**
- * @author duncancmt
+ * @author duncant
  */
 public class VeilstoneAmulet extends CardImpl {
 

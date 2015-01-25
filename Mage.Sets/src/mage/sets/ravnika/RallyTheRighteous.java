@@ -47,7 +47,7 @@ import mage.abilities.Ability;
 import mage.game.Game;
 
 /**
- * @author duncancmt
+ * @author duncant
  */
 
 public class RallyTheRighteous extends CardImpl {

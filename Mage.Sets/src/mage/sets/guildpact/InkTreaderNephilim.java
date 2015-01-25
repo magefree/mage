@@ -58,7 +58,7 @@ import mage.target.TargetPermanent;
 import mage.util.TargetAddress;
 
 /**
- * @author duncancmt
+ * @author duncant
  */
 public class InkTreaderNephilim extends CardImpl {
 

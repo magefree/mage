@@ -33,7 +33,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- * @author duncancmt
+ * @author duncant
  */
 public class CanBeEnchantedByPredicate implements Predicate<Permanent> {
 

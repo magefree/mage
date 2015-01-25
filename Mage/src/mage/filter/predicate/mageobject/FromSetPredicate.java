@@ -35,7 +35,7 @@ import mage.game.Controllable;
 import mage.game.Game;
 
 /**
- * @author duncancmt
+ * @author duncant
  */
 public class FromSetPredicate implements  ObjectPlayerPredicate<ObjectPlayer<Controllable>> {
     
