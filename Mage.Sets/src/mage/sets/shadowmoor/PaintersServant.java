@@ -133,116 +133,65 @@ class PaintersServantEffect extends ContinuousEffectImpl {
             }
             String colorString = color.toString();
             for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-                switch (colorString) {
-                    case "W":
-                        perm.getColor().setWhite(true);
-                        break;
-                    case "B":
-                        perm.getColor().setBlack(true);
-                        break;
-                    case "U":
-                        perm.getColor().setBlue(true);
-                        break;
-                    case "G":
-                        perm.getColor().setGreen(true);
-                        break;
-                    case "R":
-                        perm.getColor().setRed(true);
-                        break;
+                setObjectColor(perm, colorString);
+            }
+            // Stack
+            for (MageObject object : game.getStack()) {
+                if (object instanceof Spell) {
+                    setObjectColor(object, colorString);
                 }
             }
+            // Exile
+            for (Card card : game.getExile().getAllCards(game)) {
+                setObjectColor(card, colorString);
+            }
+            // Command
+            for (CommandObject commandObject : game.getState().getCommand()) {
+                if (commandObject instanceof Commander) {
+                    setObjectColor(commandObject, colorString);
+                }
+            }
+
             for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     // Hand
                     for (Card card : player.getHand().getCards(game)) {
-                        switch (colorString) {
-                            case "W":
-                                card.getColor().setWhite(true);
-                                break;
-                            case "B":
-                                card.getColor().setBlack(true);
-                                break;
-                            case "U":
-                                card.getColor().setBlue(true);
-                                break;
-                            case "G":
-                                card.getColor().setGreen(true);
-                                break;
-                            case "R":
-                                card.getColor().setRed(true);
-                                break;
-                        }
+                        setObjectColor(card, colorString);
                     }
                     // Library
                     for (Card card : player.getLibrary().getCards(game)) {
-                        switch (colorString) {
-                            case "W":
-                                card.getColor().setWhite(true);
-                                break;
-                            case "B":
-                                card.getColor().setBlack(true);
-                                break;
-                            case "U":
-                                card.getColor().setBlue(true);
-                                break;
-                            case "G":
-                                card.getColor().setGreen(true);
-                                break;
-                            case "R":
-                                card.getColor().setRed(true);
-                                break;
-                        }
+                        setObjectColor(card, colorString);
                     }
-
-                }
-
-                // Stack
-                for (MageObject object : game.getStack()) {
-                    if (object instanceof Spell) {
-                        switch (colorString) {
-                            case "W":
-                                object.getColor().setWhite(true);
-                                break;
-                            case "B":
-                                object.getColor().setBlack(true);
-                                break;
-                            case "U":
-                                object.getColor().setBlue(true);
-                                break;
-                            case "G":
-                                object.getColor().setGreen(true);
-                                break;
-                            case "R":
-                                object.getColor().setRed(true);
-                                break;
-                        }
-                    }
-                }
-                // Exile
-                for (Card card : game.getExile().getAllCards(game)) {
-                    switch (colorString) {
-                        case "W":
-                            card.getColor().setWhite(true);
-                            break;
-                        case "B":
-                            card.getColor().setBlack(true);
-                            break;
-                        case "U":
-                            card.getColor().setBlue(true);
-                            break;
-                        case "G":
-                            card.getColor().setGreen(true);
-                            break;
-                        case "R":
-                            card.getColor().setRed(true);
-                            break;
+                    // Graveyard
+                    for (Card card : player.getGraveyard().getCards(game)) {
+                        setObjectColor(card, colorString);
                     }
                 }
             }
             return true;
         }
         return false;
+    }
+
+    protected static void setObjectColor(MageObject obj, String colorString) {
+        switch (colorString) {
+            case "W":
+                obj.getColor().setWhite(true);
+                break;
+            case "B":
+                obj.getColor().setBlack(true);
+                break;
+            case "U":
+                obj.getColor().setBlue(true);
+                break;
+            case "G":
+                obj.getColor().setGreen(true);
+                break;
+            case "R":
+                obj.getColor().setRed(true);
+                break;
+        }
     }
 
     @Override
