@@ -108,19 +108,9 @@ class GhastlyConscriptionEffect extends OneShotEffect {
             Collections.shuffle(cardsToManifest);
             game.informPlayers(controller.getName() + " shuffles the face-down pile");
             for (Card card: cardsToManifest) {
-                //Manual zone change to keep the cards face-down.
-                ZoneChangeEvent event = new ZoneChangeEvent(card.getId(), source.getSourceId(), source.getControllerId(), Zone.EXILED, Zone.BATTLEFIELD);
-                if (!game.replaceEvent(event)) {
-                    game.getExile().removeCard(card, game);
-                    game.rememberLKI(card.getId(), event.getFromZone(), card);
-                    PermanentCard permanent = new PermanentCard(card, event.getPlayerId());
-                    game.addPermanent(permanent);
-                    game.setZone(card.getId(), Zone.BATTLEFIELD);
-                    game.setScopeRelevant(true);
-                    permanent.entersBattlefield(source.getSourceId(), game, event.getFromZone(), true);
-                    game.setScopeRelevant(false);
-                    game.applyEffects();
-                    game.fireEvent(new ZoneChangeEvent(permanent, event.getPlayerId(), Zone.EXILED, Zone.BATTLEFIELD));
+                if (card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false)) {
+                    game.informPlayers(new StringBuilder(controller.getName())
+                            .append(" puts facedown card from exile onto the battlefield").toString());
                     ManaCosts<ManaCost> manaCosts = null;
                     if (card.getCardType().contains(CardType.CREATURE)) {
                         manaCosts = card.getSpellAbility().getManaCosts();
@@ -131,7 +121,6 @@ class GhastlyConscriptionEffect extends OneShotEffect {
                     ContinuousEffect effect = new BecomesFaceDownCreatureEffect(manaCosts, true, Duration.Custom, FaceDownType.MANIFESTED);
                     effect.setTargetPointer(new FixedTarget(card.getId()));
                     game.addEffect(effect, source);
-                    game.informPlayers(controller.getName() + " puts facedown card from exile onto the battlefield");
                 }
             }
             return true;

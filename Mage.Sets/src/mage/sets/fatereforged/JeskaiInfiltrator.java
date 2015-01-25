@@ -54,9 +54,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -116,32 +114,23 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
             List<Card> cardsToManifest = new ArrayList<>(2);
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             Card sourceCard = game.getCard(source.getSourceId());
-            if (sourcePermanent != null && sourceCard != null) {
+            if (sourcePermanent != null && sourceCard != null) {                
+                player.moveCardToExileWithInfo(sourcePermanent, sourcePermanent.getId(), sourcePermanent.getName(), source.getSourceId(), game, Zone.BATTLEFIELD);
                 sourceCard.setFaceDown(true);
-                player.moveCardToExileWithInfo(sourcePermanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD);
                 cardsToManifest.add(sourceCard);
             }
             if (player.getLibrary().size() > 0) {
                 Card cardFromLibrary = player.getLibrary().removeFromTop(game);
                 cardFromLibrary.setFaceDown(true);
-                player.moveCardToExileWithInfo(cardFromLibrary, null, "", source.getSourceId(), game, Zone.LIBRARY);
+                player.moveCardToExileWithInfo(cardFromLibrary, sourcePermanent.getId(), sourcePermanent.getName(), source.getSourceId(), game, Zone.LIBRARY);
                 cardsToManifest.add(cardFromLibrary);
             }
             Collections.shuffle(cardsToManifest);
+            game.fireUpdatePlayersEvent(); // removes Jeskai from Battlefield, so he returns as a fresh permanent to the battlefield with new position
             for (Card card : cardsToManifest) {
-                //Manual zone change to keep the cards face-down.
-                ZoneChangeEvent event = new ZoneChangeEvent(card.getId(), source.getSourceId(), source.getControllerId(), Zone.EXILED, Zone.BATTLEFIELD);
-                if (!game.replaceEvent(event)) {
-                    game.getExile().removeCard(card, game);   
-                    game.rememberLKI(card.getId(), event.getFromZone(), card);
-                    PermanentCard permanent = new PermanentCard(card, event.getPlayerId());
-                    game.addPermanent(permanent);
-                    game.setZone(card.getId(), Zone.BATTLEFIELD);
-                    game.setScopeRelevant(true);
-                    permanent.entersBattlefield(source.getSourceId(), game, event.getFromZone(), true);
-                    game.setScopeRelevant(false);
-                    game.applyEffects();
-                    game.fireEvent(new ZoneChangeEvent(permanent, event.getPlayerId(), Zone.EXILED, Zone.BATTLEFIELD));
+                if (card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false)) {
+                    game.informPlayers(new StringBuilder(player.getName())
+                            .append(" puts facedown card from exile onto the battlefield").toString());
                     ManaCosts<ManaCost> manaCosts = null;
                     if (card.getCardType().contains(CardType.CREATURE)) {
                         manaCosts = card.getSpellAbility().getManaCosts();
@@ -149,11 +138,15 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
                             manaCosts = new ManaCostsImpl<>("{0}");
                         }
                     }
-                    ContinuousEffect effect = new BecomesFaceDownCreatureEffect(manaCosts, true, Duration.Custom, FaceDownType.MANIFESTED);
+                    ContinuousEffect effect = new BecomesFaceDownCreatureEffect(
+                            manaCosts,
+                            true,
+                            Duration.Custom,
+                            FaceDownType.MANIFESTED
+                    );
                     effect.setTargetPointer(new FixedTarget(card.getId()));
                     game.addEffect(effect, source);
-                    game.informPlayers(new StringBuilder(player.getName())
-                            .append(" puts facedown card from exile onto the battlefield").toString());
+
                 }
             }
             return true;

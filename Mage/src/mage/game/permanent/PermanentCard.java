@@ -264,7 +264,7 @@ public class PermanentCard extends PermanentImpl {
     public ManaCosts<ManaCost> getManaCost() {
         if (isFaceDown()) { // face down permanent has always {0} mana costs
             manaCost.clear();
-            manaCost.add(new GenericManaCost(0));
+            return manaCost;
         }
         return super.getManaCost();
     }
