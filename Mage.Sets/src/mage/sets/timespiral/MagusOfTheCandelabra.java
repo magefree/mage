@@ -30,10 +30,10 @@ package mage.sets.timespiral;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbilityImpl;
-import mage.abilities.costs.AdjustingSourceCosts;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -48,6 +48,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class MagusOfTheCandelabra extends CardImpl {
 
+    private final UUID originalId;
+
     public MagusOfTheCandelabra(UUID ownerId) {
         super(ownerId, 203, "Magus of the Candelabra", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
         this.expansionSetCode = "TSP";
@@ -58,46 +60,30 @@ public class MagusOfTheCandelabra extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {X}, {T}: Untap X target lands.
-        this.addAbility(new MagusOfTheCandelabraAbility());
+        Effect effect = new UntapTargetEffect();
+        effect.setText("untap X target lands");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
+        ability.addCost(new TapSourceCost());
+        originalId = ability.getOriginalId();
+        this.addAbility(ability);
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability.getOriginalId().equals(originalId)){
+            int xValue = ability.getManaCostsToPay().getX();
+            ability.getTargets().clear();
+            ability.addTarget(new TargetLandPermanent(xValue, xValue, new FilterLandPermanent(), false));
+        }
     }
 
     public MagusOfTheCandelabra(final MagusOfTheCandelabra card) {
         super(card);
+        this.originalId = card.originalId;
     }
 
     @Override
     public MagusOfTheCandelabra copy() {
         return new MagusOfTheCandelabra(this);
-    }
-}
-
-class MagusOfTheCandelabraAbility extends ActivatedAbilityImpl implements AdjustingSourceCosts {
-    public MagusOfTheCandelabraAbility(){
-        super(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
-        addTarget(new TargetLandPermanent(0, Integer.MAX_VALUE, new FilterLandPermanent(), false));
-    }
-
-    public MagusOfTheCandelabraAbility(MagusOfTheCandelabraAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public MagusOfTheCandelabraAbility copy() {
-        return new MagusOfTheCandelabraAbility(this);
-    }
-    
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        if(ability instanceof MagusOfTheCandelabraAbility){
-            int numTargets = ability.getTargets().get(0).getTargets().size();
-            if (numTargets > 0) {
-                ability.getManaCostsToPay().add(new GenericManaCost(numTargets));
-            }
-        }
-    }
-
-    @Override
-    public String getRule(boolean all) {
-        return "{X}, {T}: Untap X target lands";
     }
 }
