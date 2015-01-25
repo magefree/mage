@@ -157,8 +157,25 @@ class BreathOfFuryEffect extends OneShotEffect {
             && target.canChoose(source.getSourceId(), controller.getId(), game)) {
             controller.choose(outcome, target, source.getSourceId(), game);
             Permanent newCreature = game.getPermanent(target.getFirstTarget());
-            if (newCreature != null &&
-                newCreature.addAttachment(enchantment.getId(), game)) {
+            boolean success = false;
+            if (newCreature != null) {
+                Permanent oldCreature = game.getPermanent(enchantment.getAttachedTo());
+                if (oldCreature != null) {
+                    if (oldCreature.getId().equals(newCreature.getId())) {
+                        success = true;
+                    } else {
+                        if (oldCreature.removeAttachment(enchantment.getId(), game)
+                            && newCreature.addAttachment(enchantment.getId(), game)) {
+                            game.informPlayers(enchantment.getLogName() + " was unattached from " + oldCreature.getLogName() + " and attached to " + newCreature.getLogName());
+                            success = true;
+                        }
+                    }
+                } else if (newCreature.addAttachment(enchantment.getId(), game)) {
+                    game.informPlayers(enchantment.getLogName() + " was attached to " + newCreature.getLogName());
+                    success = true;
+                }
+            }
+            if (success) {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterControlledCreaturePermanent(), controller.getId(), game)) {
                     permanent.untap(game);
                 }
