@@ -193,11 +193,11 @@ class SoulfireGrandMasterCastFromHandReplacementEffect extends ReplacementEffect
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Spell sourceSpell = (Spell) game.getObject(spellId);
-        if (sourceSpell != null && sourceSpell.isCopiedSpell()) {
+        MageObject mageObject = game.getObject(spellId);        
+        if (mageObject == null || !(mageObject instanceof Spell) || ((Spell)mageObject).isCopiedSpell()) {
             return false;
         } else {
-            Card sourceCard = (Card) game.getCard(spellId);
+            Card sourceCard = game.getCard(spellId);
             if (sourceCard != null) {
                 Player player = game.getPlayer(sourceCard.getOwnerId());
                 if (player != null) {
@@ -218,7 +218,7 @@ class SoulfireGrandMasterCastFromHandReplacementEffect extends ReplacementEffect
     public boolean applies(GameEvent event, Ability source, Game game) {
         //Something hit the stack from the hand, see if its a spell with this ability.
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (spellId == null &&
+        if (spellId == null && // because this effect works only once, spellId has to be null here
                 zEvent.getFromZone() == Zone.HAND &&
                 zEvent.getToZone() == Zone.STACK &&
                 event.getPlayerId().equals(source.getControllerId())) {
