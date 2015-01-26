@@ -280,9 +280,9 @@ public class GameSessionPlayer extends GameSessionWatcher {
                                     logger.fatal("Game session game quit exception " + (ex.getMessage() == null ? "null":ex.getMessage()));
                                     logger.debug("- gameId:" + game.getId() +"  playerId: " + playerId);
                                     if (ex.getCause() != null) {
-                                        logger.debug("- Cause: " + (ex.getCause().getMessage() == null ? "null":ex.getCause().getMessage()));
+                                        logger.debug("- Cause: " + (ex.getCause().getMessage() == null ? "null":ex.getCause().getMessage()), ex);
                                     } else {
-                                        logger.debug("- ex: " + ex.toString());
+                                        logger.debug("- ex: " + ex.toString(), ex);
                                     }
                                 }else {
                                     logger.fatal("Game session game quit exception - null  gameId:" + game.getId() +"  playerId: " + playerId);

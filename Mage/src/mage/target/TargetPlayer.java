@@ -196,7 +196,12 @@ public class TargetPlayer extends TargetImpl {
     public String getTargetedName(Game game) {
         StringBuilder sb = new StringBuilder();
         for (UUID targetId: getTargets()) {
-            sb.append(game.getPlayer(targetId).getName()).append(" ");
+            Player player = game.getPlayer(targetId);
+            if (player != null) {
+                sb.append(player.getName()).append(" ");
+            } else {
+                sb.append("[target missing]");
+            }
         }
         return sb.toString();
     }
