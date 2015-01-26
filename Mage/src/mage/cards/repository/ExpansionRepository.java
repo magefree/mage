@@ -35,7 +35,7 @@ public enum ExpansionRepository {
         }
         try {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
-            boolean obsolete = RepositoryUtil.isDatabaseObsolete(connectionSource, VERSION_ENTITY_NAME, 0);
+            boolean obsolete = RepositoryUtil.isDatabaseObsolete(connectionSource, VERSION_ENTITY_NAME, EXPANSION_DB_VERSION);
 
             if (obsolete) {
                 TableUtils.dropTable(connectionSource, ExpansionInfo.class, true);
