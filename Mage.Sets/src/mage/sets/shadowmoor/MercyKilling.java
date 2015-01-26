@@ -35,7 +35,6 @@ import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.abilities.Ability;
 import mage.game.permanent.Permanent;

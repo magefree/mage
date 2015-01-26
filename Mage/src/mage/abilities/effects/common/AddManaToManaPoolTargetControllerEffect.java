@@ -36,7 +36,7 @@ public class AddManaToManaPoolTargetControllerEffect extends ManaEffect {
         super();
         this.mana = mana;
         this.emptyOnlyOnTurnsEnd = emptyOnTurnsEnd;
-        this.staticText = (textManaPoolOwner.equals("his or her")?"that player adds":"add ") + mana.toString() + " to " + textManaPoolOwner + " mana pool";
+        this.staticText = (textManaPoolOwner.equals("his or her")?"that player adds ":"add ") + mana.toString() + " to " + textManaPoolOwner + " mana pool";
     }
 
     public AddManaToManaPoolTargetControllerEffect(final AddManaToManaPoolTargetControllerEffect effect) {
