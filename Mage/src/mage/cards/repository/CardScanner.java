@@ -26,6 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
+package mage.cards.repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,10 +35,6 @@ import mage.cards.CardImpl;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.SplitCard;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
-import mage.cards.repository.ExpansionInfo;
-import mage.cards.repository.ExpansionRepository;
 import mage.util.ClassScanner;
 import org.apache.log4j.Logger;
 
