@@ -39,6 +39,7 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.players.Player;
 
 /**
  *
@@ -97,10 +98,13 @@ class SkipUntapStepEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.UNTAP_STEP;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.UNTAP) {
-            return true;
-        }
-        return false;
+        Player controller = game.getPlayer(source.getControllerId());
+        return controller != null && controller.getInRange().contains(event.getPlayerId());
     }
 }
