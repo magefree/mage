@@ -72,12 +72,9 @@ public class CumulativeUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder("Cumulative upkeep");
-        if(cumulativeCost instanceof ManaCost){
-            sb.append(" ");
-        }
-        else{
-            sb.append("-");
+        StringBuilder sb = new StringBuilder("Cumulative upkeep ");
+        if (!(cumulativeCost instanceof ManaCost)) {
+            sb.append("&mdash; ");
         }
         sb.append(cumulativeCost.getText());
         return sb.toString();
