@@ -31,21 +31,33 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
+import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.keyword.ForestwalkAbility;
+import mage.abilities.keyword.IslandwalkAbility;
+import mage.abilities.keyword.MountainwalkAbility;
+import mage.abilities.keyword.PlainswalkAbility;
+import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
  * @author emerald000
  */
 public class MagnigothTreefolk extends CardImpl {
+    
+    private static final FilterLandPermanent filterPlains = new FilterLandPermanent("Plains", "Plains");
+    private static final FilterLandPermanent filterIsland = new FilterLandPermanent("Island", "Island");
+    private static final FilterLandPermanent filterSwamp = new FilterLandPermanent("Swamp", "Swamp");
+    private static final FilterLandPermanent filterMountain = new FilterLandPermanent("Mountain", "Mountain");
+    private static final FilterLandPermanent filterForest = new FilterLandPermanent("Forest", "Forest");
 
     public MagnigothTreefolk(UUID ownerId) {
         super(ownerId, 82, "Magnigoth Treefolk", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}");
@@ -55,7 +67,28 @@ public class MagnigothTreefolk extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Domain - For each basic land type among lands you control, Magnigoth Treefolk has landwalk of that type.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MagnigothTreefolkEffect()));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, 
+                new ConditionalContinousEffect(
+                        new GainAbilitySourceEffect(new PlainswalkAbility()), 
+                        new PermanentsOnTheBattlefieldCondition(filterPlains, CountType.MORE_THAN, 0, true), 
+                        "Domain &mdash; For each basic land type among lands you control, {this} has landwalk of that type."));
+        ability.addEffect(new ConditionalContinousEffect(
+                new GainAbilitySourceEffect(new IslandwalkAbility(), Duration.WhileOnBattlefield, false, true), 
+                new PermanentsOnTheBattlefieldCondition(filterIsland, CountType.MORE_THAN, 0, true), 
+                ""));
+        ability.addEffect(new ConditionalContinousEffect(
+                new GainAbilitySourceEffect(new SwampwalkAbility(), Duration.WhileOnBattlefield, false, true), 
+                new PermanentsOnTheBattlefieldCondition(filterSwamp, CountType.MORE_THAN, 0, true), 
+                ""));
+        ability.addEffect(new ConditionalContinousEffect(
+                new GainAbilitySourceEffect(new MountainwalkAbility(), Duration.WhileOnBattlefield, false, true), 
+                new PermanentsOnTheBattlefieldCondition(filterMountain, CountType.MORE_THAN, 0, true), 
+                ""));
+        ability.addEffect(new ConditionalContinousEffect(
+                new GainAbilitySourceEffect(new ForestwalkAbility(), Duration.WhileOnBattlefield, false, true), 
+                new PermanentsOnTheBattlefieldCondition(filterForest, CountType.MORE_THAN, 0, true), 
+                ""));
+        this.addAbility(ability);
     }
 
     public MagnigothTreefolk(final MagnigothTreefolk card) {
@@ -68,44 +101,3 @@ public class MagnigothTreefolk extends CardImpl {
     }
 }
 
-class MagnigothTreefolkEffect extends RestrictionEffect {
-
-    private static final FilterLandPermanent filterPlains = new FilterLandPermanent("Plains", "Plains");
-    private static final FilterLandPermanent filterIsland = new FilterLandPermanent("Island", "Island");
-    private static final FilterLandPermanent filterSwamp = new FilterLandPermanent("Swamp", "Swamp");
-    private static final FilterLandPermanent filterMountain = new FilterLandPermanent("Mountain", "Mountain");
-    private static final FilterLandPermanent filterForest = new FilterLandPermanent("Forest", "Forest");
-
-    MagnigothTreefolkEffect() {
-        super(Duration.WhileOnBattlefield);
-        staticText = "Domain &mdash; For each basic land type among lands you control, {this} has landwalk of that type";
-    }
-
-    MagnigothTreefolkEffect(final MagnigothTreefolkEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return !((game.getBattlefield().contains(filterPlains, blocker.getControllerId(), 1, game) 
-                    && game.getBattlefield().contains(filterPlains, source.getControllerId(), 1, game))
-                || (game.getBattlefield().contains(filterIsland, blocker.getControllerId(), 1, game) 
-                    && game.getBattlefield().contains(filterIsland, source.getControllerId(), 1, game))
-                || (game.getBattlefield().contains(filterSwamp, blocker.getControllerId(), 1, game) 
-                    && game.getBattlefield().contains(filterSwamp, source.getControllerId(), 1, game))
-                || (game.getBattlefield().contains(filterMountain, blocker.getControllerId(), 1, game) 
-                    && game.getBattlefield().contains(filterMountain, source.getControllerId(), 1, game))
-                || (game.getBattlefield().contains(filterForest, blocker.getControllerId(), 1, game) 
-                    && game.getBattlefield().contains(filterForest, source.getControllerId(), 1, game)));
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getId().equals(source.getSourceId());
-    }
-
-    @Override
-    public MagnigothTreefolkEffect copy() {
-        return new MagnigothTreefolkEffect(this);
-    }
-}
