@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class FilterPermanent extends FilterObject<Permanent> {
+public class FilterPermanent extends FilterObject<Permanent> implements FilterInPlay<Permanent> {
     protected List<ObjectPlayerPredicate<ObjectPlayer<Permanent>>> extraPredicates = new ArrayList<>();
 
     public FilterPermanent() {
