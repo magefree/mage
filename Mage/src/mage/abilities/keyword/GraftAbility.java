@@ -86,11 +86,12 @@ public class GraftAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent sourcePermanent = game.getPermanent(this.getSourceId());
-            if (sourcePermanent == null) {
-                return false;
-            }
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && sourcePermanent.getCounters().containsKey(CounterType.P1P1)&& filter.match(permanent, game)) {
+            if (sourcePermanent != null
+                    && permanent != null
+                    && !sourcePermanent.getId().equals(permanent.getId())
+                    && sourcePermanent.getCounters().containsKey(CounterType.P1P1)
+                    && filter.match(permanent, game)) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 }
