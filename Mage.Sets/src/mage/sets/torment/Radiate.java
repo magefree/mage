@@ -37,8 +37,8 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.filter.FilterInPlay;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.common.FilterInstantOrSorcerySpell;
+import mage.filter.common.FilterPermanentOrPlayer;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.game.Game;
@@ -128,7 +128,7 @@ class SpellWithOnlyPermanentOrPlayerTargetsPredicate implements ObjectPlayerPred
 class RadiateEffect extends CopySpellForEachItCouldTargetEffect<MageItem> {
 
     public RadiateEffect() {
-        this(new FilterCreatureOrPlayer());
+        this(new FilterPermanentOrPlayer());
     }
     
     public RadiateEffect(RadiateEffect effect) {
