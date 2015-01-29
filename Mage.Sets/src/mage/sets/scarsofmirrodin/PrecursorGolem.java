@@ -27,27 +27,15 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -55,12 +43,13 @@ import mage.game.stack.Spell;
 import mage.target.Target;
 
 import java.util.UUID;
-import mage.filter.predicate.mageobject.FromSetPredicate;
-import mage.target.TargetPermanent;
+import mage.abilities.effects.common.CopySpellForEachItCouldTargetEffect;
+import mage.filter.FilterInPlay;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.util.TargetAddress;
 
 /**
- * @author nantuko
+ * @author duncant
  */
 public class PrecursorGolem extends CardImpl {
 
@@ -90,14 +79,6 @@ public class PrecursorGolem extends CardImpl {
 }
 
 class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl {
-
-    private static final FilterSpell filter = new FilterSpell();
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
-    }
 
     PrecursorGolemCopyTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PrecursorGolemCopySpellEffect(), false);
@@ -159,87 +140,37 @@ class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class PrecursorGolemCopySpellEffect extends OneShotEffect {
 
-    private static final FilterPermanent filterGolem = new FilterPermanent();
-
-    static {
-        filterGolem.add(new SubtypePredicate("Golem"));
-    }
+class PrecursorGolemCopySpellEffect extends CopySpellForEachItCouldTargetEffect<Permanent> {
 
     public PrecursorGolemCopySpellEffect() {
-        super(Outcome.Copy);
+        this(new FilterCreaturePermanent("Golem", "Golem"));
     }
-
-    public PrecursorGolemCopySpellEffect(final PrecursorGolemCopySpellEffect effect) {
+    
+    public PrecursorGolemCopySpellEffect(PrecursorGolemCopySpellEffect effect) {
         super(effect);
     }
 
+    private PrecursorGolemCopySpellEffect(FilterInPlay<Permanent> filter) {
+        super(filter);
+    }
+    
     @Override
-    public boolean apply(Game game, Ability source) {
-        Spell spell = (Spell) getValue("triggeringSpell");
-        if (spell != null) {
-            UUID targetedGolem = (UUID) getValue("targetedGolem");
-            Map<UUID, Spell> targetable = new HashMap<>();
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filterGolem, source.getControllerId(), source.getSourceId(), game)) {
-                if (permanent.getId().equals(targetedGolem)) {
-                    continue; // copy only for other golems
-                }
-                boolean legal = true;
-                for (TargetAddress addr : TargetAddress.walk(spell)) {
-                    Target target = addr.getTarget(spell);
-                    if (!target.canTarget(permanent.getId(), game)) {
-                        legal = false;
-                        break;
-                    }
-                }
-                if (legal) {
-                    Spell copy = spell.copySpell();
-                    copy.setCopiedSpell(true);
-                    for (TargetAddress addr : TargetAddress.walk(copy)) {
-                        Target target = addr.getTarget(copy);
-                        target.clearChosen();
-                        target.add(permanent.getId(), game);
-                    }
-                    targetable.put(permanent.getId(), copy);
-                }
-            }
-            UUID spellController = spell.getControllerId();
-            while (targetable.size() > 0) {
-                FilterPermanent filter = new FilterPermanent("Golem",
-                                                             "Golem that spell could target ("+targetable.size()+" remaining)");
-                filter.add(new FromSetPredicate(targetable.keySet()));
-                TargetPermanent target = new TargetPermanent(0, 1, filter, true);
+    protected Spell getSpell(Game game, Ability source) {
+        return (Spell) getValue("triggeringSpell");
+    }
 
-                if (target.possibleTargets(spellController, game).size() > 1
-                    && target.canChoose(spell.getSourceId(), spellController, game)) {
-                    game.getPlayer(spellController).choose(Outcome.Neutral, target, source.getId(), game);
-                }
-                Collection<UUID> chosen = target.getTargets();
-                if (chosen.size() == 0) {
-                    chosen = targetable.keySet();
-                }
-                List<UUID> toDelete = new ArrayList<>();
-                for (UUID chosenId : chosen) {
-                    Spell chosenCopy = targetable.get(chosenId);
-                    if (chosenCopy != null) {
-                        game.getStack().push(chosenCopy);
-                        toDelete.add(chosenId);
-                    }
-                }
-                for (UUID id : toDelete) {
-                    targetable.remove(id);
-                }
-            }
-            return true;
-        }
-        return false;
+    @Override
+    protected boolean changeTarget(Target target, Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    protected void modifyCopy(Spell copy, Game game, Ability source) {
     }
 
     @Override
     public PrecursorGolemCopySpellEffect copy() {
         return new PrecursorGolemCopySpellEffect(this);
     }
-
 }
-
