@@ -38,7 +38,7 @@ import mage.target.Target;
 
 
 /**
- * @author duncancmt
+ * @author duncant
  */
 public class TargetAddress {
     protected int spellAbilityIndex;
@@ -175,5 +175,16 @@ public class TargetAddress {
             throw new IndexOutOfBoundsException("SpellAbility index " + spellAbilityIndex + " is out of bounds.");
         }
         return card.getSpellAbility();
+    }
+
+    public boolean equals(TargetAddress other) {
+        return spellAbilityIndex == other.spellAbilityIndex
+            && mode.equals(other.mode)
+            && targetIndex == other.targetIndex;
+    }
+
+    @Override
+    public int hashCode() {
+        return spellAbilityIndex ^ mode.hashCode() ^ targetIndex;
     }
 }
