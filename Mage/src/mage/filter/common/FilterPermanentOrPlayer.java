@@ -37,11 +37,12 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.UUID;
+import mage.MageItem;
 
 /**
  * @author nantuko
  */
-public class FilterPermanentOrPlayer extends FilterImpl<Object> implements FilterInPlay<Object> {
+public class FilterPermanentOrPlayer extends FilterImpl<MageItem> implements FilterInPlay<MageItem> {
 
     protected FilterPermanent permanentFilter;
     protected FilterPlayer playerFilter;
@@ -63,7 +64,7 @@ public class FilterPermanentOrPlayer extends FilterImpl<Object> implements Filte
     }
 
     @Override
-    public boolean match(Object o, Game game) {
+    public boolean match(MageItem o, Game game) {
         if (o instanceof Player) {
             return playerFilter.match((Player) o, game);
         } else if (o instanceof Permanent) {
@@ -73,7 +74,7 @@ public class FilterPermanentOrPlayer extends FilterImpl<Object> implements Filte
     }
 
     @Override
-    public boolean match(Object o, UUID sourceId, UUID playerId, Game game) {
+    public boolean match(MageItem o, UUID sourceId, UUID playerId, Game game) {
         if (o instanceof Player) {
             return playerFilter.match((Player) o, sourceId, playerId, game);
         } else if (o instanceof Permanent) {

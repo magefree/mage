@@ -33,6 +33,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.UUID;
+import mage.MageItem;
 
 /**
  * @author nantuko
@@ -52,7 +53,7 @@ public class FilterPermanentOrPlayerWithCounter extends FilterPermanentOrPlayer 
     }
 
     @Override
-    public boolean match(Object o, Game game) {
+    public boolean match(MageItem o, Game game) {
         if (o instanceof Player) {
             if (((Player)o).getCounters().size() == 0) {
                 return false;
@@ -66,7 +67,7 @@ public class FilterPermanentOrPlayerWithCounter extends FilterPermanentOrPlayer 
     }
 
     @Override
-    public boolean match(Object o, UUID sourceId, UUID playerId, Game game) {
+    public boolean match(MageItem o, UUID sourceId, UUID playerId, Game game) {
         if (o instanceof Player) {
             return playerFilter.match((Player) o, sourceId, playerId, game);
         } else if (o instanceof Permanent) {
