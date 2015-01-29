@@ -28,7 +28,6 @@
 
 package mage.target;
 
-import java.io.Serializable;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.abilities.Ability;
@@ -109,11 +108,11 @@ public abstract class TargetImpl implements Target {
 
     @Override
     public String getMessage() {
-        if (maxNumberOfTargets != 1) {
+        if (getMaxNumberOfTargets() != 1) {
             StringBuilder sb = new StringBuilder();
             sb.append("Select ").append(targetName);
-            if (maxNumberOfTargets > 0 && maxNumberOfTargets != Integer.MAX_VALUE) {
-                sb.append(" (").append(targets.size()).append("/").append(maxNumberOfTargets).append(")");
+            if (getMaxNumberOfTargets() > 0 && getMaxNumberOfTargets() != Integer.MAX_VALUE) {
+                sb.append(" (").append(targets.size()).append("/").append(getMaxNumberOfTargets()).append(")");
             } else {
                 sb.append(" (").append(targets.size()).append(")");
             }
@@ -177,10 +176,10 @@ public abstract class TargetImpl implements Target {
 
     @Override
     public boolean isChosen() {
-        if (maxNumberOfTargets == 0 && minNumberOfTargets == 0) {
+        if (getMaxNumberOfTargets() == 0 && getNumberOfTargets() == 0) {
             return true;
         }
-        if (maxNumberOfTargets != 0 && targets.size() == maxNumberOfTargets) {
+        if (getMaxNumberOfTargets() != 0 && targets.size() == getMaxNumberOfTargets()) {
             return true;
         }
         return chosen;
@@ -188,10 +187,10 @@ public abstract class TargetImpl implements Target {
 
     @Override
     public boolean doneChosing() {
-        if (maxNumberOfTargets == 0) {
+        if (getMaxNumberOfTargets() == 0) {
             return false;
         }
-        return targets.size() == maxNumberOfTargets;
+        return targets.size() == getMaxNumberOfTargets();
     }
 
     @Override
@@ -203,7 +202,7 @@ public abstract class TargetImpl implements Target {
 
     @Override
     public void add(UUID id, Game game) {
-        if (maxNumberOfTargets == 0 || targets.size() < maxNumberOfTargets) {
+        if (getMaxNumberOfTargets() == 0 || targets.size() < getMaxNumberOfTargets()) {
             if (!targets.containsKey(id)) {
                 targets.put(id, 0);
                 rememberZoneChangeCounter(id, game);
@@ -227,13 +226,13 @@ public abstract class TargetImpl implements Target {
     @Override
     public void addTarget(UUID id, Ability source, Game game, boolean skipEvent) {
         //20100423 - 113.3
-        if (maxNumberOfTargets == 0 || targets.size() < maxNumberOfTargets) {
+        if (getMaxNumberOfTargets() == 0 || targets.size() < getMaxNumberOfTargets()) {
             if (!targets.containsKey(id)) {
                 if (source != null && !skipEvent) {
                     if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getSourceId(), source.getControllerId()))) {
                         targets.put(id, 0);
                         rememberZoneChangeCounter(id, game);
-                        chosen = targets.size() >= minNumberOfTargets;
+                        chosen = targets.size() >= getNumberOfTargets();
                         if (!skipEvent) {
                             game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getSourceId(), source.getControllerId()));
                         }
@@ -271,7 +270,7 @@ public abstract class TargetImpl implements Target {
             if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getSourceId(), source.getControllerId()))) {
                 targets.put(id, amount);
                 rememberZoneChangeCounter(id, game);
-                chosen = targets.size() >= minNumberOfTargets;
+                chosen = targets.size() >= getNumberOfTargets();
                 if (!skipEvent) {
                     game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getSourceId(), source.getControllerId()));
                 }
@@ -286,11 +285,11 @@ public abstract class TargetImpl implements Target {
     public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Game game) {
         Player player = game.getPlayer(playerId);
         while (!isChosen() && !doneChosing()) {
-            chosen = targets.size() >= minNumberOfTargets;
+            chosen = targets.size() >= getNumberOfTargets();
             if (!player.choose(outcome, this, sourceId, game)) {
                 return chosen;
             }
-            chosen = targets.size() >= minNumberOfTargets;
+            chosen = targets.size() >= getNumberOfTargets();
         }
         return chosen = true;
     }
@@ -299,7 +298,7 @@ public abstract class TargetImpl implements Target {
     public boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game) {
         Player player = game.getPlayer(playerId);
         while (!isChosen() && !doneChosing()) {
-            chosen = targets.size() >= minNumberOfTargets;
+            chosen = targets.size() >= getNumberOfTargets();
             if (isRandom()) {
                 Set<UUID> possibleTargets = possibleTargets(source.getSourceId(), playerId, game);
                 if (possibleTargets.size() > 0) {
@@ -319,7 +318,7 @@ public abstract class TargetImpl implements Target {
                     return chosen;
                 }
             }
-            chosen = targets.size() >= minNumberOfTargets;
+            chosen = targets.size() >= getNumberOfTargets();
         }
         return chosen = true;
     }
@@ -353,7 +352,7 @@ public abstract class TargetImpl implements Target {
 //        if (replacedTargets > 0 && replacedTargets == targets.size()) {
 //            return false;
 //        }
-        if (minNumberOfTargets == 0 && targets.isEmpty()) {
+        if (getNumberOfTargets() == 0 && targets.isEmpty()) {
             return true;
         }
         return targets.size() > 0;
