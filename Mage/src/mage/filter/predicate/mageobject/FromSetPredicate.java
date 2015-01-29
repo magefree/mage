@@ -29,15 +29,14 @@ package mage.filter.predicate.mageobject;
 
 import java.util.Set;
 import java.util.UUID;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
-import mage.game.Controllable;
+import mage.MageItem;
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
 
 /**
  * @author duncant
  */
-public class FromSetPredicate implements  ObjectPlayerPredicate<ObjectPlayer<Controllable>> {
+public class FromSetPredicate<T extends MageItem> implements Predicate<T> {
     
     protected Set<UUID> set;
 
@@ -46,7 +45,7 @@ public class FromSetPredicate implements  ObjectPlayerPredicate<ObjectPlayer<Con
     }
 
     @Override
-    public boolean apply(ObjectPlayer<Controllable> input, Game game) {
-        return set.contains(input.getObject().getId());
+    public boolean apply(T input, Game game) {
+        return set.contains(input.getId());
     }
 }

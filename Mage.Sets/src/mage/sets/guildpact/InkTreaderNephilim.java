@@ -27,9 +27,6 @@
  */
 package mage.sets.guildpact;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.ArrayList;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -38,23 +35,15 @@ import mage.cards.CardImpl;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import java.util.Map;
-import java.util.List;
+import mage.abilities.effects.common.CopySpellForEachItCouldTargetEffect;
+import mage.filter.FilterInPlay;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.game.permanent.Permanent;
 import mage.target.Target;
-import mage.filter.predicate.mageobject.FromSetPredicate;
-import mage.players.Player;
-import mage.target.TargetPermanent;
 import mage.util.TargetAddress;
 
 /**
@@ -86,14 +75,6 @@ public class InkTreaderNephilim extends CardImpl {
 
 class InkTreaderNephilimTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterSpell filter = new FilterSpell();
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
-    }
-
     InkTreaderNephilimTriggeredAbility() {
         super(Zone.BATTLEFIELD, new InkTreaderNephilimEffect(), false);
     }
@@ -114,7 +95,7 @@ class InkTreaderNephilimTriggeredAbility extends TriggeredAbilityImpl {
             if (spell != null &&
                 (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))){
                 for (Effect effect : getEffects()) {
-                    effect.setValue("TriggeringSpell", spell);
+                    effect.setValue("triggeringSpell", spell);
                 }
                 return true;
             }
@@ -124,7 +105,7 @@ class InkTreaderNephilimTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        Spell spell = (Spell) getEffects().get(0).getValue("TriggeringSpell");
+        Spell spell = (Spell) getEffects().get(0).getValue("triggeringSpell");
         if (spell != null) {
             boolean allTargetsInkTreaderNephilim = true;
             boolean atLeastOneTargetsInkTreaderNephilim = false;
@@ -148,91 +129,38 @@ class InkTreaderNephilimTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class InkTreaderNephilimEffect extends OneShotEffect {
 
-    private static final FilterPermanent filter = new FilterPermanent();
-
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
+class InkTreaderNephilimEffect extends CopySpellForEachItCouldTargetEffect<Permanent> {
 
     public InkTreaderNephilimEffect() {
-        super(Outcome.Copy);
-        staticText = "copy the spell for each other creature that spell could target. Each copy targets a different one of those creatures";
+        this(new FilterCreaturePermanent());
     }
 
-    public InkTreaderNephilimEffect(final InkTreaderNephilimEffect effect) {
+    public InkTreaderNephilimEffect(InkTreaderNephilimEffect effect) {
         super(effect);
     }
 
+    private InkTreaderNephilimEffect(FilterInPlay<Permanent> filter) {
+        super(filter);
+    }
+
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        Spell spell = (Spell) getValue("TriggeringSpell");
-        if (spell != null) {
-            Map<UUID, Spell> targetable = new HashMap<>();
-            // gather all creatures that can be targeted from the spell to copy 
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, controller.getId(), source.getSourceId(), game)) {
-                Spell copy = spell.copySpell();                
-                copy.setControllerId(controller.getId());
-                copy.setCopiedSpell(true);
-                if (permanent.getId().equals(source.getSourceId())) {
-                    continue; // copy only for other creatures
-                }
-                boolean legal = true;
-                for (TargetAddress addr : TargetAddress.walk(copy)) {
-                    Target targetInstance = addr.getTarget(copy);
-                    legal &= targetInstance.canTarget(permanent.getId(), addr.getSpellAbility(copy), game);
-                }
-                if (legal) {
-                    for (TargetAddress addr : TargetAddress.walk(copy)) {
-                        Target targetInstance = addr.getTarget(copy);
-                        int numTargets = targetInstance.getNumberOfTargets();
-                        targetInstance.clearChosen();
-                        while (numTargets > 0) {
-                            targetInstance.add(permanent.getId(), game);
-                            numTargets--;
-                        }
-                    }
-                    targetable.put(permanent.getId(), copy);
-                }
-            }
-            // controller 
-            while (targetable.size() > 0) {
-                FilterPermanent filterCreatures = new FilterPermanent("creature that spell could target ("+ targetable.size() + " remaining)");
-                filterCreatures.add(new FromSetPredicate(targetable.keySet()));
-                TargetPermanent target = new TargetPermanent(0, 1, filterCreatures, true);
-                if (target.possibleTargets(controller.getId(), game).size() > 1
-                    && target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                    controller.choose(Outcome.Neutral, target, source.getId(), game);
-                }
-                Collection<UUID> choosenIds = target.getTargets();
-                if (choosenIds.isEmpty()) {
-                    choosenIds = targetable.keySet();
-                }
-                List<UUID> toDelete = new ArrayList<>();
-                for (UUID chosenId : choosenIds) {
-                    Spell chosenCopy = targetable.get(chosenId);
-                    if (chosenCopy != null) {
-                        game.getStack().push(chosenCopy);
-                        toDelete.add(chosenId);
-                    }
-                }
-                for (UUID idToDelte : toDelete) {
-                    targetable.remove(idToDelte);
-                }
-            }
-            return true;
-        }
-        return false;
+    protected Spell getSpell(Game game, Ability source) {
+        return (Spell) getValue("triggeringSpell");
+    }
+
+    @Override
+    protected boolean changeTarget(Target target, Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    protected void modifyCopy(Spell copy, Game game, Ability source) {
+        copy.setControllerId(source.getControllerId());
     }
 
     @Override
     public InkTreaderNephilimEffect copy() {
         return new InkTreaderNephilimEffect(this);
     }
-
 }
