@@ -201,7 +201,7 @@ public class Spell implements StackObject, Card {
                         index++;
                     }
                 }
-                if (!copiedSpell) {
+                if (!isCopiedSpell()) {
                     for (Effect effect : ability.getEffects()) {
                         if (effect instanceof PostResolveEffect) {
                             if (((PostResolveEffect) effect).isActive(ability, game)) {
@@ -509,7 +509,9 @@ public class Spell implements StackObject, Card {
     
     @Override
     public void counter(UUID sourceId, Game game) {
-        card.moveToZone(Zone.GRAVEYARD, sourceId, game, false);
+        if (!isCopiedSpell()) {
+            card.moveToZone(Zone.GRAVEYARD, sourceId, game, false);
+        }
     }
 
     @Override
@@ -836,13 +838,15 @@ public class Spell implements StackObject, Card {
             game.getStack().remove(this);
             game.rememberLKI(this.getId(), event.getFromZone(), this);
 
-            if (exileId == null) {
-                game.getExile().getPermanentExile().add(this.card);
+            if (!this.isCopiedSpell()) {
+                if (exileId == null) {
+                    game.getExile().getPermanentExile().add(this.card);
+                } else {
+                    game.getExile().createZone(exileId, name).add(this.card);
+                }
+
+                game.setZone(this.card.getId(), event.getToZone());
             }
-            else {
-                game.getExile().createZone(exileId, name).add(this.card);
-            }
-            game.setZone(this.card.getId(), event.getToZone());
             game.fireEvent(event);
             return event.getToZone() == Zone.EXILED;
         }
