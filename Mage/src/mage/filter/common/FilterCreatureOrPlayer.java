@@ -34,6 +34,7 @@ import mage.filter.FilterPlayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.MageItem;
 
 import java.util.UUID;
 
@@ -41,7 +42,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterCreatureOrPlayer extends FilterImpl<Object> implements FilterInPlay<Object> {
+public class FilterCreatureOrPlayer extends FilterImpl<MageItem> implements FilterInPlay<MageItem> {
 
     protected FilterCreaturePermanent creatureFilter;
     protected FilterPlayer playerFilter;
@@ -63,7 +64,7 @@ public class FilterCreatureOrPlayer extends FilterImpl<Object> implements Filter
     }
 
     @Override
-    public boolean match(Object o, Game game) {
+    public boolean match(MageItem o, Game game) {
         if (o instanceof Player) {
             return playerFilter.match((Player)o, game);
         }
@@ -74,7 +75,7 @@ public class FilterCreatureOrPlayer extends FilterImpl<Object> implements Filter
     }
 
     @Override
-    public boolean match(Object o, UUID sourceId, UUID playerId, Game game) {
+    public boolean match(MageItem o, UUID sourceId, UUID playerId, Game game) {
         if (o instanceof Player) {
             return playerFilter.match((Player)o, sourceId, playerId, game);
         }
