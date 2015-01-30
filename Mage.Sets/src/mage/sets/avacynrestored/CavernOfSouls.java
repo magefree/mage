@@ -75,10 +75,10 @@ public class CavernOfSouls extends CardImpl {
         // As Cavern of Souls enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new CavernOfSoulsEffect(), ruleText));
 
-        // {tap}: Add {1} to your mana pool.
+        // {T}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
-        // {tap}: Add one mana of any color to your mana pool. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.
+        // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.
         this.addAbility(new ConditionalAnyColorManaAbility(1, new CavernOfSoulsManaBuilder()));
         this.addWatcher(new CavernOfSoulsWatcher());
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new CavernOfSoulsCantCounterEffect()));
@@ -133,21 +133,28 @@ class CavernOfSoulsEffect extends OneShotEffect {
 
 class CavernOfSoulsManaBuilder extends ConditionalManaBuilder {
 
-    String creatuerType;
+    String creatureType;
     
     @Override
     public ConditionalManaBuilder setMana(Mana mana, Ability source, Game game) {
         Object value = game.getState().getValue(source.getSourceId() + "_type");
         if (value != null && value instanceof String) {
-            creatuerType = (String) value;
+            creatureType = (String) value;
         }         
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
+            game.informPlayers(controller.getName() + " produces " + mana.toString() + " with " + sourceObject.getLogName() +
+                    " (can only be spend to cast for creatures of type " + creatureType + " and that spell can't be countered)");
+        }
+        
         return super.setMana(mana, source, game); 
     }
 
     @Override
     public ConditionalMana build(Object... options) {
         this.mana.setFlag(true); // indicates that the mana is from second ability
-        return new CavernOfSoulsConditionalMana(this.mana, creatuerType);
+        return new CavernOfSoulsConditionalMana(this.mana, creatureType);
     }
 
     @Override
