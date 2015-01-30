@@ -34,29 +34,26 @@ import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.SubLayer;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.Spell;
+import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 
 /**
@@ -73,7 +70,7 @@ public class HallOfTheBanditLord extends CardImpl {
         // Hall of the Bandit Lord enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         
-        // {tap}, Pay 3 life: Add {1} to your mana pool. If that mana is spent on a creature spell, it gains haste.
+        // {T}, Pay 3 life: Add {1} to your mana pool. If that mana is spent on a creature spell, it gains haste.
         Mana mana = Mana.ColorlessMana;
         mana.setFlag(true);
         ManaEffect effect = new BasicManaEffect(mana);
@@ -81,8 +78,8 @@ public class HallOfTheBanditLord extends CardImpl {
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         ability.addCost(new PayLifeCost(3));
         this.addAbility(ability);
-        this.addWatcher(new HallOfTheBanditLordWatcher());
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new HallOfTheBanditLordHasteEffect()));
+        
+        this.addWatcher(new HallOfTheBanditLordWatcher(ability));
     }
 
     public HallOfTheBanditLord(final HallOfTheBanditLord card) {
@@ -97,15 +94,18 @@ public class HallOfTheBanditLord extends CardImpl {
 
 class HallOfTheBanditLordWatcher extends Watcher {
 
-    public List<UUID> creatures = new ArrayList<>(1);
+    private final Ability source;
+    private final List<UUID> creatures = new ArrayList<>();
     
-    HallOfTheBanditLordWatcher() {
+    HallOfTheBanditLordWatcher(Ability source) {
         super("HallOfTheBanditLordWatcher", WatcherScope.CARD);
+        this.source = source;
     }
     
     HallOfTheBanditLordWatcher(final HallOfTheBanditLordWatcher watcher) {
         super(watcher);
         this.creatures.addAll(watcher.creatures);
+        this.source = watcher.source;
     }
 
     @Override
@@ -123,42 +123,34 @@ class HallOfTheBanditLordWatcher extends Watcher {
                 }
             }
         }
+        if (event.getType() == EventType.COUNTERED) {
+            if (creatures.contains(event.getTargetId())) {                
+                creatures.remove(event.getSourceId());
+            }            
+        }        
+        if (event.getType() == EventType.ZONE_CHANGE) {
+            if (creatures.contains(event.getSourceId())) {
+                ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+                // spell was e.g. exiled and goes again to stack, so previous cast has not resolved.
+                if (zEvent.getToZone() == Zone.STACK) {
+                    creatures.remove(event.getSourceId());
+                }
+            }            
+        }        
+        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
+            if (creatures.contains(event.getSourceId())) {                
+                ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
+                effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+                game.addEffect(effect, source);
+                creatures.remove(event.getSourceId());
+            }            
+        }
     }
-
+    
     @Override
     public void reset() {
         super.reset();
         creatures.clear();
     }
     
-}
-
-class HallOfTheBanditLordHasteEffect extends ContinuousEffectImpl {
-
-    HallOfTheBanditLordHasteEffect() {
-        super(Duration.EndOfGame, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-    }
-    
-    HallOfTheBanditLordHasteEffect(final HallOfTheBanditLordHasteEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ContinuousEffect copy() {
-        return new HallOfTheBanditLordHasteEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        HallOfTheBanditLordWatcher watcher = (HallOfTheBanditLordWatcher) game.getState().getWatchers().get("HallOfTheBanditLordWatcher", source.getSourceId());
-        if (watcher != null) {
-            for (Permanent perm : game.getBattlefield().getAllActivePermanents()) {
-                if (watcher.creatures.contains(perm.getId())) {
-                    perm.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
-                }
-            }
-            return true;
-        }
-        return false;
-    }
 }
