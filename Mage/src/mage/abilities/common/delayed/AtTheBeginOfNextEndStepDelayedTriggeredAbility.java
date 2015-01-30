@@ -27,9 +27,13 @@
  */
 package mage.abilities.common.delayed;
 
-import mage.constants.TargetController;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
+import mage.constants.TargetController;
+import static mage.constants.TargetController.ANY;
+import static mage.constants.TargetController.CONTROLLER_ATTACHED_TO;
+import static mage.constants.TargetController.OPPONENT;
+import static mage.constants.TargetController.YOU;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -55,6 +59,14 @@ public class AtTheBeginOfNextEndStepDelayedTriggeredAbility extends DelayedTrigg
     public AtTheBeginOfNextEndStepDelayedTriggeredAbility(AtTheBeginOfNextEndStepDelayedTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
+    }
+
+    @Override
+    public void init(Game game) {
+        super.init(game);
+        for (Effect effect: this.getEffects()) {
+            effect.getTargetPointer().init(game, this);
+        }
     }
 
     @Override
