@@ -101,7 +101,7 @@ class WhimsOfTheFateEffect extends OneShotEffect {
             // Map of players and their piles (1,2,3) with values of UUID of the permanents
             Map<UUID, Map<Integer, Set<UUID>>> playerPermanents = new LinkedHashMap<>();
 
-            PlayerList playerList = game.getState().getPlayerList();
+            PlayerList playerList = game.getState().getPlayerList().copy();
             while (!playerList.get().equals(source.getControllerId()) && controller.isInGame()) {
                 playerList.getNext();
             }
@@ -116,6 +116,9 @@ class WhimsOfTheFateEffect extends OneShotEffect {
                 }
                 if (firstNextPlayer == null) {
                     firstNextPlayer = nextPlayer.getId();
+                }
+                if (!nextPlayer.isInGame()) {
+                    continue;
                 }
                 // if player is in range of controller he chooses 3 piles with all its permanents
                 if (currentPlayer != null && controller.getInRange().contains(currentPlayer.getId())) {
