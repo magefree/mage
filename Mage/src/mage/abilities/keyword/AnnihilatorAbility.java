@@ -27,14 +27,14 @@
  */
 package mage.abilities.keyword;
 
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -42,8 +42,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.UUID;
+import mage.util.CardUtil;
 
 /**
  * 702.84. Annihilator 702.84a Annihilator is a triggered ability. "Annihilator
@@ -72,14 +71,22 @@ public class AnnihilatorAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-            return true;
+            UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(sourceId, game);
+            if (defendingPlayerId != null) {
+                // the id has to be set here because the source can be leave battlefield
+                for(Effect effect : getEffects()) {
+                    effect.setValue("defendingPlayerId", defendingPlayerId);
+                }
+                return true;
+            }
         }
         return false;
     }
 
     @Override
     public String getRule() {
-        return "Annihilator " + count;
+        return "Annihilator " + count + "<i>(Whenever this creature attacks, defending player sacrifices " +
+                (count == 1 ? "a permanent": CardUtil.numberToText(count) + " permanents") + ".)</i>";
     }
 
     @Override
@@ -106,39 +113,26 @@ class AnnihilatorEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID defenderId = game.getCombat().getDefenderId(source.getSourceId());
-        Player player = game.getPlayer(defenderId);
-
-        //Defender may be a planeswalker.
-        if (player == null) {
-            Permanent permanent = game.getPermanent(defenderId);
-            if (permanent != null) {
-                player = game.getPlayer(permanent.getControllerId());
-            }
+        UUID defendingPlayerId = (UUID) getValue("defendingPlayerId");
+        Player player = null;
+        if (defendingPlayerId != null) {
+            player= game.getPlayer(defendingPlayerId);
         }
-        
         if (player != null) {
             int amount = Math.min(count, game.getBattlefield().countAll(filter, player.getId(), game));
             Target target = new TargetControlledPermanent(amount, amount, filter, false);
-
-            //A spell or ability could have removed the only legal target this player
-            //had, if thats the case this ability should fizzle.
             if (target.canChoose(player.getId(), game)) {
-                boolean abilityApplied = false;
                 while (!target.isChosen() && target.canChoose(player.getId(), game) && player.isInGame()) {
                     player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                 }
-
                 for (int idx = 0; idx < target.getTargets().size(); idx++) {
                     Permanent permanent = game.getPermanent((UUID) target.getTargets().get(idx));
-
                     if (permanent != null) {
-                        abilityApplied |= permanent.sacrifice(source.getSourceId(), game);
+                        permanent.sacrifice(source.getSourceId(), game);
                     }
                 }
-
-                return abilityApplied;
             }
+            return true;
         }
         return false;
     }
