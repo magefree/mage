@@ -28,6 +28,8 @@
 package mage.sets.fatereforged;
 
 import java.util.UUID;
+import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -46,6 +48,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -75,17 +78,43 @@ public class Arcbond extends CardImpl {
 
 class ArcbondDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
+    MageObjectReference targetObject;
+
     public ArcbondDelayedTriggeredAbility() {
         super(new ArcbondEffect(), Duration.EndOfTurn, false);
     }
 
     public ArcbondDelayedTriggeredAbility(ArcbondDelayedTriggeredAbility ability) {
         super(ability);
+        this.targetObject = ability.targetObject;
+    }
+
+    @Override
+    public void init(Game game) {
+        super.init(game);
+        // because target can already be gone from battlefield if triggered ability resolves, we need to hold an own object reference
+        targetObject = new MageObjectReference(getTargets().getFirstTarget(), game);
+        if (targetObject != null) {
+            for (Effect effect : this.getEffects()) {
+                effect.setValue("sourceId", targetObject.getSourceId());
+            }
+            this.getTargets().clear();
+        }
+    }
+
+    @Override
+    public boolean isInactive(Game game) {
+        if (targetObject == null) {
+            return true;
+        }
+        return super.isInactive(game);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE && event.getTargetId().equals(this.getFirstTarget())) {
+        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE && 
+                event.getTargetId().equals(targetObject.getSourceId()) &&
+                targetObject.getPermanentOrLKIBattlefield(game) != null) {
             for (Effect effect : this.getEffects()) {
                 effect.setValue("damage", event.getAmount());
             }
@@ -124,10 +153,16 @@ class ArcbondEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int damage = (Integer) this.getValue("damage");
-        if (damage > 0) {
+        UUID sourceId = (UUID) this.getValue("sourceId");
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (sourceObject != null && damage > 0 && sourceId != null) {
+            Permanent targetObject = game.getPermanentOrLKIBattlefield(sourceId);
+            if (targetObject != null) {
+                game.informPlayers(sourceObject.getLogName() + ": " + targetObject.getLogName() + " deals " + damage + " damage to each other creature and each player");
+            }
             FilterPermanent filter = new FilterCreaturePermanent("each other creature");
-            filter.add(Predicates.not(new PermanentIdPredicate(source.getTargets().getFirstTarget())));
-            return new DamageEverythingEffect(new StaticValue(damage), filter, source.getTargets().getFirstTarget()).apply(game, source);
+            filter.add(Predicates.not(new PermanentIdPredicate(sourceId)));
+            return new DamageEverythingEffect(new StaticValue(damage), filter, sourceId).apply(game, source);
         }        
         return false;
     }
