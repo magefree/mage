@@ -584,13 +584,13 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             List<Permanent> targets;
             boolean outcomeTargets = true;
             if (outcome.isGood()) {
-                targets = threats(playerId, source == null?null:source.getSourceId(), ((TargetPermanent)target).getFilter(), game, target.getTargets());
+                targets = threats(playerId, source == null?null:source.getSourceId(), ((TargetSpellOrPermanent)target).getPermanentFilter(), game, target.getTargets());
             }
             else {
-                targets = threats(opponentId, source == null?null:source.getSourceId(), ((TargetPermanent)target).getFilter(), game, target.getTargets());
+                targets = threats(opponentId, source == null?null:source.getSourceId(), ((TargetSpellOrPermanent)target).getPermanentFilter(), game, target.getTargets());
             }            
             if (targets.isEmpty() && target.isRequired(source)) {
-                targets = threats(null, source == null?null:source.getSourceId(), ((TargetPermanent)target).getFilter(), game, target.getTargets());
+                targets = threats(null, source == null?null:source.getSourceId(), ((TargetSpellOrPermanent)target).getPermanentFilter(), game, target.getTargets());
                 Collections.reverse(targets);
                 outcomeTargets = false;
                 //targets = game.getBattlefield().getActivePermanents(((TargetPermanent)target).getFilter(), playerId, game);
@@ -606,10 +606,12 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             if (game.getStack().size() > 0) {
                 Iterator<StackObject> it = game.getStack().iterator();
                 while (it.hasNext()) {
-                    StackObject o = it.next();
-                    if (o instanceof Spell && !source.getId().equals(o.getStackAbility().getId())) {
-                        target.addTarget(o.getId(), source, game);
-                        return true;
+                    StackObject stackObject = it.next();
+                    if (stackObject instanceof Spell && source != null && !source.getId().equals(stackObject.getStackAbility().getId())) {
+                        if (((TargetSpellOrPermanent)target).getFilter().match(stackObject, game)) {
+                            target.addTarget(stackObject.getId(), source, game);
+                            return true;
+                        }
                     }
                 }
             }
