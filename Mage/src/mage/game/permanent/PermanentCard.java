@@ -31,7 +31,6 @@ package mage.game.permanent;
 import java.util.ArrayList;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.Card;
@@ -120,6 +119,7 @@ public class PermanentCard extends PermanentImpl {
         this.flipCard = card.isFlipCard();
         this.flipCardName = card.getFlipCardName();
         this.faceDown = card.isFaceDown();
+        this.morphCard = card.isMorphCard();
     }
 
     public Card getCard() {
