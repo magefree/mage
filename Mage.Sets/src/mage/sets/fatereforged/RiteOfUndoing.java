@@ -49,10 +49,12 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public class RiteOfUndoing extends CardImpl {
     
-    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent you don't control");
+    private static final FilterNonlandPermanent filterControlled = new FilterNonlandPermanent("nonland permanent you control");
+    private static final FilterNonlandPermanent filterNotControlled = new FilterNonlandPermanent("nonland permanent you don't control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filterControlled.add(new ControllerPredicate(TargetController.YOU));
+        filterNotControlled.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
     public RiteOfUndoing(UUID ownerId) {
@@ -61,10 +63,11 @@ public class RiteOfUndoing extends CardImpl {
 
         // Delve
         this.addAbility(new DelveAbility());
+        
         // Return target nonland permanent you control and target nonland permanent you don't control to their owners' hands.
         this.getSpellAbility().addEffect(new RiteOfUndoingEffect());
-        this.getSpellAbility().addTarget(new TargetNonlandPermanent());
-        this.getSpellAbility().addTarget(new TargetNonlandPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetNonlandPermanent(filterControlled));
+        this.getSpellAbility().addTarget(new TargetNonlandPermanent(filterNotControlled));
     }
 
     public RiteOfUndoing(final RiteOfUndoing card) {
