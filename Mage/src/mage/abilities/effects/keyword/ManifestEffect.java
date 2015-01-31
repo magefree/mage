@@ -74,10 +74,12 @@ public class ManifestEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
+            Ability newSource = source.copy();
+            newSource.setWorksFaceDown(true);
             List<Card> cards = controller.getLibrary().getTopCards(game, amount);
             for (Card card: cards) {
                 card.setFaceDown(true);
-                controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, newSource.getSourceId());
                 Permanent permanent = game.getPermanent(card.getId());
                 if (permanent != null) {
                     permanent.setManifested(true);
@@ -90,7 +92,7 @@ public class ManifestEffect extends OneShotEffect {
                     }
                     ContinuousEffect effect = new BecomesFaceDownCreatureEffect(manaCosts, true, Duration.Custom, FaceDownType.MANIFESTED);
                     effect.setTargetPointer(new FixedTarget(card.getId()));
-                    game.addEffect(effect, source);
+                    game.addEffect(effect, newSource);
                 }
             }
             game.applyEffects(); // to apply before ETB triggered or replace Effects are executed

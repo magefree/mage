@@ -119,7 +119,7 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
                 sourceCard.setFaceDown(true);
                 cardsToManifest.add(sourceCard);
             }
-            if (player.getLibrary().size() > 0) {
+            if (sourcePermanent!= null && player.getLibrary().size() > 0) {
                 Card cardFromLibrary = player.getLibrary().removeFromTop(game);
                 cardFromLibrary.setFaceDown(true);
                 player.moveCardToExileWithInfo(cardFromLibrary, sourcePermanent.getId(), sourcePermanent.getName(), source.getSourceId(), game, Zone.LIBRARY);
@@ -127,8 +127,10 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
             }
             Collections.shuffle(cardsToManifest);
             game.fireUpdatePlayersEvent(); // removes Jeskai from Battlefield, so he returns as a fresh permanent to the battlefield with new position
+            Ability newSource = source.copy();
+            newSource.setWorksFaceDown(true);
             for (Card card : cardsToManifest) {
-                if (card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false)) {
+                if (card.moveToZone(Zone.BATTLEFIELD, newSource.getSourceId(), game, false)) {
                     game.informPlayers(new StringBuilder(player.getName())
                             .append(" puts facedown card from exile onto the battlefield").toString());
                     ManaCosts<ManaCost> manaCosts = null;
@@ -145,7 +147,7 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
                             FaceDownType.MANIFESTED
                     );
                     effect.setTargetPointer(new FixedTarget(card.getId()));
-                    game.addEffect(effect, source);
+                    game.addEffect(effect, newSource);
 
                 }
             }

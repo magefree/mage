@@ -28,6 +28,7 @@
 package mage.sets.theros;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -121,11 +122,12 @@ class AshiokNightmareWeaverExileEffect extends OneShotEffect {
         UUID exileId = CardUtil.getCardExileZoneId(game, source);
         Player opponent = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        if (opponent != null && controller != null) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (sourceObject != null && opponent != null && controller != null) {
             for (int i = 0; i < 3; i++) {
                 Card card = opponent.getLibrary().getFromTop(game);
                 if (card != null) {
-                    controller.moveCardToExileWithInfo(card, exileId, "Ashiok, Nightmare Weaver", source.getSourceId(), game, Zone.LIBRARY);
+                    controller.moveCardToExileWithInfo(card, exileId, sourceObject.getLogName(), source.getSourceId(), game, Zone.LIBRARY);
                 }
             }
             return true;
@@ -166,7 +168,8 @@ class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect {
 
         FilterCard filter = new FilterCreatureCard(new StringBuilder("creature card with converted mana cost {").append(cmc).append("} exiled with Ashiok, Nightmare Weaver").toString());
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, cmc));
-        Target target = new TargetCardInExile(filter, CardUtil.getCardExileZoneId(game, source));
+        
+        Target target = new TargetCardInExile(filter, CardUtil.getCardExileZoneId(game, source.getSourceId(), game.getPermanent(source.getSourceId()) == null));
 
         if (target.canChoose(source.getSourceId(), player.getId(), game)) {
             if (player.chooseTarget(Outcome.PutCreatureInPlay, target, source, game)) {

@@ -665,7 +665,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         return zoneChangeCounter;
     }
 
-    private void updateZoneChangeCounter() {
+    @Override
+    public void updateZoneChangeCounter() {
         zoneChangeCounter++;
     }
 

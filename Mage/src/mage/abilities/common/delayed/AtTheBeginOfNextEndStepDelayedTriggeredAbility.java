@@ -62,14 +62,6 @@ public class AtTheBeginOfNextEndStepDelayedTriggeredAbility extends DelayedTrigg
     }
 
     @Override
-    public void init(Game game) {
-        super.init(game);
-        for (Effect effect: this.getEffects()) {
-            effect.getTargetPointer().init(game, this);
-        }
-    }
-
-    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.END_TURN_STEP_PRE) {
             switch (targetController) {

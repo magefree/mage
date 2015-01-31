@@ -7,7 +7,9 @@ import java.util.Map;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 public class FirstTargetPointer implements TargetPointer {
 
@@ -47,7 +49,12 @@ public class FirstTargetPointer implements TargetPointer {
                 Card card = game.getCard(targetId);
                 if (card != null && zoneChangeCounter.containsKey(targetId)
                         && card.getZoneChangeCounter() != zoneChangeCounter.get(targetId)) {
-                    continue;
+                    // because if dies trigger has to trigger as permanent has already moved zone, we have to check if target was on the battlefield immed. before
+                    // but no longer if new permanent is already on the battlefield
+                    Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
+                    if (permanent == null || permanent.getZoneChangeCounter() != zoneChangeCounter.get(targetId)) {
+                        continue;
+                    }
                 }
                 target.add(targetId);
             }
@@ -62,7 +69,12 @@ public class FirstTargetPointer implements TargetPointer {
             Card card = game.getCard(targetId);
             if (card != null && zoneChangeCounter.containsKey(targetId)
                         && card.getZoneChangeCounter() != zoneChangeCounter.get(targetId)) {
-                return null;
+                    // because if dies trigger has to trigger as permanent has already moved zone, we have to check if target was on the battlefield immed. before
+                    // but no longer if new permanent is already on the battlefield
+                Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
+                if (permanent == null || permanent.getZoneChangeCounter() != zoneChangeCounter.get(targetId)) {
+                    return null;
+                }
             }
         }
         return targetId;

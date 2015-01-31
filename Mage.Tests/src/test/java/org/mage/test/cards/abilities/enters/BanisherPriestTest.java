@@ -83,7 +83,7 @@ public class BanisherPriestTest extends CardTestPlayerBase {
          *  Rockslide Elemental
          *  Creature — Elemental 1/1, 2R (3)
          *  First strike.
-         *  Whenever another creature dies, you may put a +1/+1 counter on Rockslide Elemental..
+         *  Whenever another creature dies, you may put a +1/+1 counter on Rockslide Elemental.
          */
         addCard(Zone.BATTLEFIELD, playerB, "Rockslide Elemental");
 
