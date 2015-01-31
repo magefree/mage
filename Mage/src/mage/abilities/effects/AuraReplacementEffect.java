@@ -88,6 +88,10 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         UUID sourceId = event.getSourceId();
         UUID controllerId = event.getPlayerId();
 
+        // Aura cards that go to battlefield face down (Manifest) don't have to select targets
+        if (card.isFaceDown()) {
+            return false;
+        }
         // Aura enters the battlefield attached
         Object object = game.getState().getValue("attachTo:"+card.getId());
         if (object != null && object instanceof PermanentCard) {

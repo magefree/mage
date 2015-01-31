@@ -51,7 +51,7 @@ public class Targets extends ArrayList<Target> {
     }
 
     public List<Target> getUnchosen() {
-        List<Target> unchosen = new ArrayList<Target>();
+        List<Target> unchosen = new ArrayList<>();
         for (Target target: this) {
             if (!target.isChosen()) {
                 unchosen.add(target);
