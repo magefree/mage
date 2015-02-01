@@ -109,7 +109,7 @@ class MistbindCliqueAbility extends ZoneChangeTriggeredAbility {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getSourceId() != null && event.getSourceId().equals(getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
             if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.EXILED) {
-                if (zEvent.getTarget() != null && zEvent.getTarget().getSubtype().contains("Faerie")) {
+                if (zEvent.getTarget() != null && zEvent.getTarget().hasSubtype("Faerie")) {
                     return true;
                 }
             }

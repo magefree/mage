@@ -22,9 +22,17 @@ public class MomentousFallTest extends CardTestPlayerBase {
     public void testSacrificeCostAndLKI() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
         addCard(Zone.HAND, playerA, "Momentous Fall");
+
+        // Geralf's Messenger enters the battlefield tapped.
+        // When Geralf's Messenger enters the battlefield, target opponent loses 2 life.
+        // Undying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
         addCard(Zone.BATTLEFIELD, playerA, "Geralf's Messenger", 1);
+
+        // Creatures you control get +1/+1.
         addCard(Zone.BATTLEFIELD, playerA, "Glorious Anthem", 1);
 
+        // As an additional cost to cast Momentous Fall, sacrifice a creature.
+        // You draw cards equal to the sacrificed creature's power, then you gain life equal to its toughness.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Momentous Fall");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

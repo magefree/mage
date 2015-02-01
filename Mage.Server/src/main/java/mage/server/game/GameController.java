@@ -940,7 +940,8 @@ public class GameController implements GameCallback {
     private void sendMessage(UUID userId, Command command) {
         final UUID playerId = userPlayerMap.get(userId);
         // player has game under control (is not cotrolled by other player)
-        if (game.getPlayer(playerId).isGameUnderControl()) {
+        Player player = game.getPlayer(playerId);
+        if (player != null && player.isGameUnderControl()) {
                 // if it's your priority (or game not started yet in which case it will be null)
                 // then execute only your action
                 if (game.getPriorityPlayerId() == null || game.getPriorityPlayerId().equals(playerId)) {
@@ -950,13 +951,10 @@ public class GameController implements GameCallback {
                     }
                 } else {
                     // otherwise execute the action under other player's control
-                    Player player = game.getPlayer(playerId);
-                    if (player != null) {
-                        for (UUID controlled : player.getPlayersUnderYourControl()) {
-                            if (gameSessions.containsKey(controlled) && game.getPriorityPlayerId().equals(controlled)) {
-                                cancelTimeout();
-                                command.execute(controlled);
-                            }
+                    for (UUID controlled : player.getPlayersUnderYourControl()) {
+                        if (gameSessions.containsKey(controlled) && game.getPriorityPlayerId().equals(controlled)) {
+                            cancelTimeout();
+                            command.execute(controlled);
                         }
                     }
                     // else player has no priority to do something, so ignore the command

@@ -48,6 +48,8 @@ public class GloriousAnthem extends CardImpl {
         super(ownerId, 17, "Glorious Anthem", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
         this.expansionSetCode = "10E";
         this.color.setWhite(true);
+
+        // Creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false)));
     }
 
