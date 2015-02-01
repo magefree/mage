@@ -28,19 +28,18 @@
 
 package mage.target;
 
-import mage.constants.Zone;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.constants.Zone;
 import mage.filter.FilterObject;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *

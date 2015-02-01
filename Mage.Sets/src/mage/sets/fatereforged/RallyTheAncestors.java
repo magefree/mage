@@ -59,7 +59,8 @@ public class RallyTheAncestors extends CardImpl {
         super(ownerId, 22, "Rally the Ancestors", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{W}{W}");
         this.expansionSetCode = "FRF";
 
-        // Return each creature card with converted mana cost X or less from your graveyard to the battlefield. Exile those creatures at the beginning of your next upkeep. Exile Rally the Ancestors.
+        // Return each creature card with converted mana cost X or less from your graveyard to the battlefield.
+        // Exile those creatures at the beginning of your next upkeep. Exile Rally the Ancestors.
         this.getSpellAbility().addEffect(new RallyTheAncestorsEffect());
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
@@ -101,7 +102,7 @@ class RallyTheAncestorsEffect extends OneShotEffect {
             for (Card card : cards) {
                 if (card != null) {
                     player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
-                    Effect exileEffect = new ExileTargetEffect();
+                    Effect exileEffect = new ExileTargetEffect("Exile those creatures at the beginning of your next upkeep");
                     exileEffect.setTargetPointer(new FixedTarget(card.getId()));
                     DelayedTriggeredAbility delayedAbility = new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(exileEffect);
                     delayedAbility.setSourceId(source.getSourceId());

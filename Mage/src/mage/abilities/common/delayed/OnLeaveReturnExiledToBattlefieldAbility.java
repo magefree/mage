@@ -100,7 +100,8 @@ class ReturnExiledPermanentsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            ExileZone exile = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
+            // because source already changed zone we have to get previous related exile zone
+            ExileZone exile = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source.getSourceId(), true));
             if (exile != null) {
                 LinkedList<UUID> cards = new LinkedList<>(exile);
                 for (UUID cardId : cards) {

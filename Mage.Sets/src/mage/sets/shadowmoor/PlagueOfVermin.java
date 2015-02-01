@@ -93,7 +93,7 @@ class PlagueOfVerminEffect extends OneShotEffect {
         int currentLifePaid;
         int totalPaidLife;
         if (controller != null) {
-            PlayerList playerList = game.getState().getPlayerList();
+            PlayerList playerList = game.getState().getPlayerList().copy();
             while (!playerList.get().equals(source.getControllerId()) && controller.isInGame()) {
                 playerList.getNext();
             }
@@ -101,10 +101,10 @@ class PlagueOfVerminEffect extends OneShotEffect {
             UUID firstInactivePlayer = null;
 
             while (controller.isInGame()) {
-                if (currentPlayer != null && controller.getInRange().contains(currentPlayer.getId())) {
-                    if (firstInactivePlayer == null) {
-                        firstInactivePlayer = currentPlayer.getId();
-                    }
+                if (firstInactivePlayer == null) {
+                    firstInactivePlayer = currentPlayer.getId();
+                }
+                if (currentPlayer != null && currentPlayer.isInGame() && controller.getInRange().contains(currentPlayer.getId())) {
                     currentLifePaid = 0;
                     totalPaidLife = 0;
                     if (currentPlayer.chooseUse(Outcome.AIDontUseIt, "Pay life?", game)) {

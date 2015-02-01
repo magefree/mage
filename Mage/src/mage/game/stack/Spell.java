@@ -901,6 +901,11 @@ public class Spell implements StackObject, Card {
     }
 
     @Override
+    public void updateZoneChangeCounter() {
+        throw new UnsupportedOperationException("Unsupported operation"); 
+    }
+
+    @Override
     public Ability getStackAbility() {
         return this.ability;
     }

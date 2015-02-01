@@ -99,13 +99,13 @@ class CouncilsJudgmentEffect extends OneShotEffect {
             FilterNonlandPermanent filter = new FilterNonlandPermanent("a nonland permanent " + controller.getName() + " doesn't control");
             filter.add(Predicates.not(new ControllerIdPredicate(controller.getId())));
             //Players each choose a legal permanent
-            PlayerList playerList = game.getState().getPlayerList();
+            PlayerList playerList = game.getState().getPlayerList().copy();
             while (!playerList.get().equals(controller.getId()) && controller.isInGame()) {
                 playerList.getNext();
             }
             do {
                 Player player = game.getPlayer(playerList.get());
-                if (player != null) {
+                if (player != null && player.isInGame()) {
                     Target target = new TargetNonlandPermanent(filter);
                     target.setNotTarget(true);
                     if (player.choose(Outcome.Exile, target, source.getSourceId(), game)) {

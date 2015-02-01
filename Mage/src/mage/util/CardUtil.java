@@ -479,7 +479,11 @@ public class CardUtil {
     }
     
     public static UUID getCardExileZoneId(Game game, UUID sourceId) {
-        String key = getCardZoneString("SourceExileZone", sourceId, game);
+        return getCardExileZoneId(game, sourceId, false);
+    }
+
+    public static UUID getCardExileZoneId(Game game, UUID sourceId, boolean previous) {
+        String key = getCardZoneString("SourceExileZone", sourceId, game, previous);
         UUID exileId = (UUID) game.getState().getValue(key);
         if (exileId == null) {
             exileId = UUID.randomUUID();
@@ -499,6 +503,11 @@ public class CardUtil {
      * @return
      */
     public static String getCardZoneString(String text, UUID cardId, Game game) {
+        return getCardZoneString(text, cardId, game, false);
+    }
+
+    public static String getCardZoneString(String text, UUID cardId, Game game, boolean previous) {
+
         StringBuilder uniqueString = new StringBuilder();
         if (text != null) {
             uniqueString.append(text);
@@ -506,7 +515,7 @@ public class CardUtil {
         uniqueString.append(cardId);
         Card card = game.getCard(cardId); // if called for a token, the id is enough
         if (card != null) {
-            uniqueString.append(card.getZoneChangeCounter());
+            uniqueString.append(previous ? card.getZoneChangeCounter() - 1: card.getZoneChangeCounter());
         }
         return uniqueString.toString();
     }

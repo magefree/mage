@@ -34,6 +34,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -149,12 +150,13 @@ class GoblinGuideEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {        
         Player defender = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (defender != null) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (sourceObject != null && defender != null) {
             Cards cards = new CardsImpl();
             Card card = defender.getLibrary().getFromTop(game);
             if (card != null) {
                 cards.add(card);
-                defender.revealCards("Goblin Guide", cards, game);
+                defender.revealCards(sourceObject.getLogName(), cards, game);
                 if (card.getCardType().contains(CardType.LAND)) {
                     defender.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                 }

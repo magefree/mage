@@ -32,18 +32,12 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.effects.common.PreventDamageBySourceEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.DamageEvent;
-import mage.game.events.GameEvent;
-import mage.target.TargetSource;
 
 /**
  *
@@ -55,10 +49,11 @@ public class PrahvSpiresOfOrder extends CardImpl {
         super(ownerId, 177, "Prahv, Spires of Order", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "DIS";
 
-        // {tap}: Add {1} to your mana pool.
+        // {T}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
-        // {4}{W}{U}, {tap}: Prevent all damage a source of your choice would deal this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PrahvSpiresOfOrderPreventionEffect(), new ManaCostsImpl("{4}{W}{U}"));
+
+        // {4}{W}{U}, {T}: Prevent all damage a source of your choice would deal this turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageBySourceEffect(), new ManaCostsImpl("{4}{W}{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
@@ -72,39 +67,4 @@ public class PrahvSpiresOfOrder extends CardImpl {
     public PrahvSpiresOfOrder copy() {
         return new PrahvSpiresOfOrder(this);
     }
-}
-
-class PrahvSpiresOfOrderPreventionEffect extends PreventionEffectImpl {
-    private TargetSource target = new TargetSource();
-
-    public PrahvSpiresOfOrderPreventionEffect() {
-        super(Duration.EndOfTurn);
-        staticText = "Prevent all damage a source of your choice would deal to you this turn";
-    }
-
-    public PrahvSpiresOfOrderPreventionEffect(final PrahvSpiresOfOrderPreventionEffect effect) {
-        super(effect);
-        this.target = effect.target.copy();
-    }
-
-    @Override
-    public PrahvSpiresOfOrderPreventionEffect copy() {
-        return new PrahvSpiresOfOrderPreventionEffect(this);
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event instanceof DamageEvent && super.applies(event, source, game)) {
-            if (event.getSourceId().equals(target.getFirstTarget())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 }

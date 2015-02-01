@@ -28,7 +28,6 @@
 package mage.sets.fatereforged;
 
 import java.util.UUID;
-import static javax.xml.bind.JAXBIntrospector.getValue;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
@@ -94,14 +93,12 @@ class FruitOfTheFirstTreeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent creature = (Permanent) getValue("attachedTo");
-        if (creature != null){
-            Player controller = game.getPlayer(creature.getOwnerId());
-            if (controller != null) {
-                controller.gainLife(creature.getToughness().getValue(), game);
-                controller.drawCards(creature.getToughness().getValue(), game);
-                return true;
-            }
+        if (controller != null && creature != null) {
+            controller.gainLife(creature.getToughness().getValue(), game);
+            controller.drawCards(creature.getToughness().getValue(), game);
+            return true;            
         }
         return false;
     }

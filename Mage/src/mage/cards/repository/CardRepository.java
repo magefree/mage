@@ -304,8 +304,10 @@ public enum CardRepository {
 
     public void closeDB() {
         try {
-            DatabaseConnection conn = cardDao.getConnectionSource().getReadWriteConnection();
-            conn.executeStatement("shutdown compact", 0);
+            if (cardDao != null && cardDao.getConnectionSource() != null) {
+                DatabaseConnection conn = cardDao.getConnectionSource().getReadWriteConnection();
+                conn.executeStatement("shutdown compact", 0);
+            }
 
         } catch (SQLException ex) {
 

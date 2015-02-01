@@ -68,5 +68,42 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
         Assert.assertFalse("player B should play NOT with top card revealed", playerB.isTopCardRevealed());
     }
     
+    @Test
+    public void testVillainousWealthExilesBoost() {
+        // Villainous Wealth {X}{B}{G}{U}
+        // Target opponent exiles the top X cards of his or her library. You may cast any number
+        // of nonland cards with converted mana cost X or less from among them without paying
+        // their mana costs.
+        addCard(Zone.HAND, playerA, "Villainous Wealth");
+        addCard(Zone.HAND, playerA, "Master of Pearls");
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+
+        // Secret Plans {G}{U}
+        // Face-down creatures you control get +0/+1.
+        // Whenever a permanent you control is turned face up, draw a card. 
+        addCard(Zone.LIBRARY, playerB, "Secret Plans");
+        skipInitShuffling(); // to keep this card on top of library
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Master of Pearls");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Villainous Wealth", playerB);
+        setChoice(playerA, "X=3");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Secret Plans");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Villainous Wealth", 1);
+        assertExileCount(playerB, 2);
+        assertExileCount("Secret Plans", 0);
+        assertPermanentCount(playerA, "Secret Plans", 1);
+        
+        assertPermanentCount(playerA, "face down creature", 1);
+        assertPowerToughness(playerA, "face down creature", 2, 3);        
+    }    
 
 }

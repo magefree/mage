@@ -1,18 +1,18 @@
 package mage.abilities.keyword;
 
-import mage.constants.Duration;
-import mage.constants.Outcome;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author Loki
@@ -36,9 +36,9 @@ public class UndyingAbility extends DiesTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
-            Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (!p.getCounters().containsKey(CounterType.P1P1) || p.getCounters().getCount(CounterType.P1P1) == 0) {
-                game.getState().setValue(new StringBuilder("undying").append(getSourceId()).toString(), new FixedTarget(p.getId()));
+            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+            if (!permanent.getCounters().containsKey(CounterType.P1P1) || permanent.getCounters().getCount(CounterType.P1P1) == 0) {
+                game.getState().setValue("undying" + getSourceId(),permanent.getId());
                 return true;
             }
         }
@@ -109,8 +109,10 @@ class UndyingReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getSourceId())) {
-            Object fixedTarget = game.getState().getValue(new StringBuilder("undying").append(source.getSourceId()).toString());
-            if (fixedTarget instanceof FixedTarget && ((FixedTarget) fixedTarget).getFirst(game, source).equals(source.getSourceId())) {
+            // Check if undying condition is true
+            UUID target = (UUID) game.getState().getValue("undying" + source.getSourceId());
+            if (target.equals(source.getSourceId())) {
+                game.getState().setValue("undying" + source.getSourceId(), null);
                 return true;
             }
         }

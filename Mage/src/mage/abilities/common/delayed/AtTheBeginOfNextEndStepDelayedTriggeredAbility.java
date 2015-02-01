@@ -27,9 +27,13 @@
  */
 package mage.abilities.common.delayed;
 
-import mage.constants.TargetController;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
+import mage.constants.TargetController;
+import static mage.constants.TargetController.ANY;
+import static mage.constants.TargetController.CONTROLLER_ATTACHED_TO;
+import static mage.constants.TargetController.OPPONENT;
+import static mage.constants.TargetController.YOU;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;

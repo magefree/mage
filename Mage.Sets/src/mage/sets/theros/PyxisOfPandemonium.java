@@ -30,6 +30,7 @@ package mage.sets.theros;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -96,7 +97,8 @@ class PyxisOfPandemoniumExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (sourceObject != null && controller != null) {
             Map<String, UUID> exileIds;
             String valueKey = CardUtil.getCardZoneString("exileIds", source.getSourceId(), game);
             Object object = game.getState().getValue(valueKey);
@@ -122,7 +124,7 @@ class PyxisOfPandemoniumExileEffect extends OneShotEffect {
                         }
                         card.setFaceDown(true);
                         player.moveCardToExileWithInfo(card, exileId, 
-                                new StringBuilder("Pyxis of Pandemonium (").append(player.getName()).append(")").toString(),
+                                new StringBuilder(sourceObject.getLogName() +" (").append(player.getName()).append(")").toString(),
                                 source.getSourceId(), game, Zone.LIBRARY);
                     }
                 }
@@ -137,7 +139,7 @@ class PyxisOfPandemoniumPutOntoBattlefieldEffect extends OneShotEffect {
 
     public PyxisOfPandemoniumPutOntoBattlefieldEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "Each player turns face up all cards he or she owns exiled with Pyxis of Pandemonium, then puts all permanent cards among them onto the battlefield";
+        this.staticText = "Each player turns face up all cards he or she owns exiled with {this}, then puts all permanent cards among them onto the battlefield";
     }
 
     public PyxisOfPandemoniumPutOntoBattlefieldEffect(final PyxisOfPandemoniumPutOntoBattlefieldEffect effect) {

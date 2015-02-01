@@ -28,17 +28,10 @@
 package mage.sets.magic2014;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.PreventionEffectImpl;
-import mage.abilities.effects.common.PreventDamageByTargetEffect;
+import mage.abilities.effects.common.PreventDamageBySourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.target.TargetSource;
 
 /**
  *
@@ -53,11 +46,7 @@ public class PayNoHeed extends CardImpl {
         this.color.setWhite(true);
 
         // Prevent all damage a source of your choice would deal this turn.
-        Effect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE, false);
-        effect.setText("Prevent all damage a source of your choice would deal this turn");
-        this.getSpellAbility().addEffect(effect);
-        TargetSource targetSource = new TargetSource();
-        this.getSpellAbility().addTarget(targetSource);
+        this.getSpellAbility().addEffect(new PreventDamageBySourceEffect());
         
     }
 
@@ -69,37 +58,4 @@ public class PayNoHeed extends CardImpl {
     public PayNoHeed copy() {
         return new PayNoHeed(this);
     }
-}
-
-class PayNoHeedEffect extends PreventionEffectImpl {
-
-    public PayNoHeedEffect() {
-        super(Duration.EndOfTurn, Integer.MAX_VALUE, false);
-        staticText = "Prevent all damage a source of your choice would deal this turn";
-    }
-
-    public PayNoHeedEffect(final PayNoHeedEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PayNoHeedEffect copy() {
-        return new PayNoHeedEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game)) {
-            if (event.getSourceId().equals(this.getTargetPointer().getFirst(game, source))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 }

@@ -65,7 +65,7 @@ public class HungeringYeti extends CardImpl {
 
         // As long as you control a green or blue permanent, you may cast Hungering Yeti as though it had flash.
         AsThoughEffect effect = new CastAsThoughItHadFlashSourceEffect(Duration.EndOfGame);
-        effect.setText("As long as you control a green or blue permanent, you may cast Hungering Yeti as though it had flash");
+        effect.setText("As long as you control a green or blue permanent, you may cast {this} as though it had flash");
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new ConditionalAsThoughEffect(effect,
                         new PermanentsOnTheBattlefieldCondition(filter))));
 

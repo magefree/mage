@@ -31,7 +31,6 @@ package mage.game.permanent;
 import java.util.ArrayList;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.Card;
@@ -120,6 +119,7 @@ public class PermanentCard extends PermanentImpl {
         this.flipCard = card.isFlipCard();
         this.flipCardName = card.getFlipCardName();
         this.faceDown = card.isFaceDown();
+        this.morphCard = card.isMorphCard();
     }
 
     public Card getCard() {
@@ -135,9 +135,10 @@ public class PermanentCard extends PermanentImpl {
         Zone fromZone = game.getState().getZone(objectId);
         Player controller = game.getPlayer(controllerId);
         if (controller != null && controller.removeFromBattlefield(this, game)) {
+            Card originalCard = game.getCard(this.getId());
             if (isFaceDown()) {
                 setFaceDown(false);
-                game.getCard(this.getId()).setFaceDown(false); //TODO: Do this in a better way
+                originalCard.setFaceDown(false); //TODO: Do this in a better way
             }
             ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, controllerId, fromZone, toZone, appliedEffects);
             if (!game.replaceEvent(event)) {
@@ -145,6 +146,7 @@ public class PermanentCard extends PermanentImpl {
                 game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
                 if (owner != null) {
                     this.setControllerId(ownerId); // neccessary for e.g. abilities in graveyard or hand to not have a controller != owner
+                    originalCard.updateZoneChangeCounter();
                     switch (event.getToZone()) {
                         case GRAVEYARD:
                             owner.putInGraveyard(card, game, !flag);
@@ -195,6 +197,8 @@ public class PermanentCard extends PermanentImpl {
             ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, ownerId, fromZone, Zone.EXILED, appliedEffects);
             if (!game.replaceEvent(event)) {
                 game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
+                // update zone change counter of original card
+                game.getCard(this.getId()).updateZoneChangeCounter();
                 if (exileId == null) {
                     game.getExile().getPermanentExile().add(card);
                 } else {

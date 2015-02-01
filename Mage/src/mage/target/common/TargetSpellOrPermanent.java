@@ -91,6 +91,10 @@ public class TargetSpellOrPermanent extends TargetImpl {
         return this.filter;
     }
 
+    public FilterPermanent getPermanentFilter() {
+        return this.filterPermanent;
+    }
+
     public void setFilter(FilterSpellOrPermanent filter) {
         this.filter = filter;
     }
@@ -197,7 +201,7 @@ public class TargetSpellOrPermanent extends TargetImpl {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<UUID>();
+        Set<UUID> possibleTargets = new HashSet<>();
         MageObject targetSource = game.getObject(sourceId);
                 for (StackObject stackObject: game.getStack()) {
             Spell spell = game.getStack().getSpell(stackObject.getId());
@@ -215,7 +219,7 @@ public class TargetSpellOrPermanent extends TargetImpl {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<UUID>();
+        Set<UUID> possibleTargets = new HashSet<>();
                 for (StackObject stackObject: game.getStack()) {
             Spell spell = game.getStack().getSpell(stackObject.getId());
             if (spell != null && filter.match(spell, null, sourceControllerId, game) && filter.match(spell, game)) {

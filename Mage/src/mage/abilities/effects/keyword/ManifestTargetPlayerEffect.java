@@ -78,10 +78,12 @@ public class ManifestTargetPlayerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
+            Ability newSource = source.copy();
+            newSource.setWorksFaceDown(true);
             List<Card> cards = targetPlayer.getLibrary().getTopCards(game, amount);
             for (Card card: cards) {
                 card.setFaceDown(true);
-                targetPlayer.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                targetPlayer.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, newSource.getSourceId());
                 Permanent permanent = game.getPermanent(card.getId());
                 if (permanent != null) {
                     permanent.setManifested(true);
@@ -94,7 +96,7 @@ public class ManifestTargetPlayerEffect extends OneShotEffect {
                     }
                     ContinuousEffect effect = new BecomesFaceDownCreatureEffect(manaCosts, true, Duration.Custom, FaceDownType.MANIFESTED);
                     effect.setTargetPointer(new FixedTarget(card.getId()));
-                    game.addEffect(effect, source);
+                    game.addEffect(effect, newSource);
                 }            }
             return true;
         }

@@ -43,8 +43,10 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.cards.Card;
 import mage.constants.Duration;
@@ -52,6 +54,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -74,7 +77,9 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
         Ability ability = new EntersBattlefieldAbility(
                 new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.Custom, false),
                 DashedCondition.getInstance(), false, "","");
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnToHandSourceEffect(true)), false));
+        Effect effect = new ReturnToHandTargetEffect();
+        effect.setTargetPointer(new FixedTarget(card.getId()));
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), false));
         card.addAbility(ability);
 
     }

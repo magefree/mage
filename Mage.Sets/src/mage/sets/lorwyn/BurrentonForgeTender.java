@@ -30,21 +30,17 @@ package mage.sets.lorwyn;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PreventDamageByTargetEffect;
+import mage.abilities.effects.common.PreventDamageBySourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.target.TargetSource;
 
 /**
  *
@@ -53,7 +49,7 @@ import mage.target.TargetSource;
 public class BurrentonForgeTender extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Red");
-    private static final FilterObject filterObject = new FilterObject("red source of your choice");
+    private static final FilterObject filterObject = new FilterObject("a red");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
@@ -74,12 +70,7 @@ public class BurrentonForgeTender extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
         
         // Sacrifice Burrenton Forge-Tender: Prevent all damage a red source of your choice would deal this turn.
-        Effect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE, false);
-        effect.setText("Prevent all damage a red source of your choice would deal this turn");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,  effect, new SacrificeSourceCost());
-        TargetSource targetSource = new TargetSource(filterObject);
-        ability.addTarget(targetSource);
-        this.addAbility(ability);
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,  new PreventDamageBySourceEffect(filterObject), new SacrificeSourceCost()));
 
     }
 

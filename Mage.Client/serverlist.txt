@@ -1,5 +1,6 @@
 woogerworks   (North America):xmage.woogerworks.com:17171
-XMage.info 1  (Europe) :176.31.186.181:17171
-XMage.info 2  (Europe):176.31.186.181:17000
-Seedds Server (Asia) :115.29.203.80:17171
+XMage.info 1  (Europe)       :176.31.186.181:17171
+XMage.info 2  (Europe)       :176.31.186.181:17000
+Seedds Server (Asia)         :115.29.203.80:17171
+Felipejoys    (Brazil)       :felipejoys.no-ip.org:17171
 localhost -> connect to your local server (must be started):localhost:17171

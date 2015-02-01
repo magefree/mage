@@ -126,6 +126,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
         ruleText = sb.toString();
 
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesFaceDownCreatureEffect(morphCosts, FaceDownType.MORPHED));
+        ability.setWorksFaceDown(true);
         ability.setRuleVisible(false);
         card.addAbility(ability);
 

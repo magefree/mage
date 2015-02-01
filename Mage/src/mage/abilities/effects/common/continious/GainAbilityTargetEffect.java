@@ -39,7 +39,6 @@ import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.SubLayer;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;

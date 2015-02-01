@@ -28,16 +28,16 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -96,39 +96,30 @@ class GrislySalvageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Cards cards = new CardsImpl(Zone.PICK);
-
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (sourceObject != null && controller != null) {
+            Cards cards = new CardsImpl();
+            cards.addAll(controller.getLibrary().getTopCards(game, 5));
             boolean properCardFound = false;
-            int count = Math.min(player.getLibrary().size(), 5);
-            for (int i = 0; i < count; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                    if (filterPutInHand.match(card, source.getSourceId(), source.getControllerId(), game)) {
-                        properCardFound = true;
-                    }
+            for (Card card: cards.getCards(game)) {
+                if (filterPutInHand.match(card, source.getSourceId(), source.getControllerId(), game)) {
+                    properCardFound = true;
                 }
             }
 
             if (!cards.isEmpty()) {
-                player.revealCards("Grisly Salvage", cards, game);
-                TargetCard target = new TargetCard(Zone.PICK, filterPutInHand);
-                if (properCardFound && player.choose(Outcome.DrawCard, cards, target, game)) {
+                controller.revealCards(sourceObject.getLogName(), cards, game);
+                TargetCard target = new TargetCard(Zone.LIBRARY, filterPutInHand);
+                if (properCardFound && controller.choose(Outcome.DrawCard, cards, target, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
+                        controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                         cards.remove(card);
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                     }
-
                 }
-
-                for (UUID cardId : cards) {
-                    Card card = game.getCard(cardId);
-                    if (card != null) {
-                        card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
-                    }
+                for (Card card : cards.getCards(game)) {
+                    controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                 }
             }
             return true;

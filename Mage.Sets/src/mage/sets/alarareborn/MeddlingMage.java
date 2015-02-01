@@ -110,14 +110,14 @@ class MeddlingMageReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.CAST_SPELL;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.CAST_SPELL) {
-            MageObject object = game.getObject(event.getSourceId());
-            if (object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY))) {
-                return true;
-            }
-        }
-        return false;
+        MageObject object = game.getObject(event.getSourceId());
+        return object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY));
     }
 
 }

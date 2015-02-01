@@ -89,7 +89,7 @@ class EurekaEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            PlayerList playerList = game.getState().getPlayerList();
+            PlayerList playerList = game.getState().getPlayerList().copy();
             while (!playerList.get().equals(source.getControllerId()) && controller.isInGame()) {
                 playerList.getNext();
             }
@@ -98,10 +98,11 @@ class EurekaEffect extends OneShotEffect {
             Target target = new TargetCardInHand(new FilterPermanentCard());
 
             while (controller.isInGame()) {
-                if (currentPlayer != null && controller.getInRange().contains(currentPlayer.getId())) {
-                    if (firstInactivePlayer == null) {
-                        firstInactivePlayer = currentPlayer.getId();
-                    }
+                if (firstInactivePlayer == null) {
+                    firstInactivePlayer = currentPlayer.getId();
+                }
+                if (currentPlayer != null && currentPlayer.isInGame() && controller.getInRange().contains(currentPlayer.getId())) {
+
                     target.clearChosen();
                     if (target.canChoose(source.getSourceId(), currentPlayer.getId(), game)
                             && currentPlayer.chooseUse(outcome, "Put permanent from your hand to play?", game)) {

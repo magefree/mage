@@ -76,7 +76,11 @@ public abstract class DelayedTriggeredAbility extends TriggeredAbilityImpl {
         return triggerOnlyOnce;
     }
     
-    public void init(Game game) {};
+    public void init(Game game) {
+        for (Effect effect: this.getEffects()) {
+            effect.getTargetPointer().init(game, this);
+        }
+    };
     
     public boolean isInactive(Game game) {
         return false;

@@ -107,8 +107,10 @@ class GhastlyConscriptionEffect extends OneShotEffect {
             }
             Collections.shuffle(cardsToManifest);
             game.informPlayers(controller.getName() + " shuffles the face-down pile");
+            Ability newSource = source.copy();
+            newSource.setWorksFaceDown(true);
             for (Card card: cardsToManifest) {
-                if (card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false)) {
+                if (card.moveToZone(Zone.BATTLEFIELD, newSource.getSourceId(), game, false)) {
                     game.informPlayers(new StringBuilder(controller.getName())
                             .append(" puts facedown card from exile onto the battlefield").toString());
                     ManaCosts<ManaCost> manaCosts = null;
@@ -120,7 +122,7 @@ class GhastlyConscriptionEffect extends OneShotEffect {
                     }
                     ContinuousEffect effect = new BecomesFaceDownCreatureEffect(manaCosts, true, Duration.Custom, FaceDownType.MANIFESTED);
                     effect.setTargetPointer(new FixedTarget(card.getId()));
-                    game.addEffect(effect, source);
+                    game.addEffect(effect, newSource);
                 }
             }
             return true;
