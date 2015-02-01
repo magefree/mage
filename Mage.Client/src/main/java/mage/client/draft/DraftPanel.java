@@ -382,10 +382,7 @@ public class DraftPanel extends javax.swing.JPanel {
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Add the card to the hidden cards
-                cardsHidden.add(cardIdPopupMenu);
-                pickedCardsShown.remove(cardIdPopupMenu);
-                draftPicks.loadCards(CardsViewUtil.convertSimple(pickedCardsShown), bigCard, null);
+                hideThisCard(cardIdPopupMenu);
             }
         });
 
@@ -393,11 +390,20 @@ public class DraftPanel extends javax.swing.JPanel {
 
     }
 
+    private void hideThisCard(UUID card) {
+        // Add the card to the hidden cards
+        cardsHidden.add(card);
+        pickedCardsShown.remove(card);
+        draftPicks.loadCards(CardsViewUtil.convertSimple(pickedCardsShown), bigCard, null);
+    }
 
     private void showAgainAllHiddenCards() {
-        // show again all hidden cards
+        // Add back the hidden cards to the shown set
+        for (UUID card : cardsHidden) {
+            pickedCardsShown.put(card, pickedCards.get(card));
+        }
         cardsHidden.clear();
-        draftPicks.loadCards(CardsViewUtil.convertSimple(pickedCards), bigCard, null);
+        draftPicks.loadCards(CardsViewUtil.convertSimple(pickedCardsShown), bigCard, null);
     }
 
     /** This method is called from within the constructor to
