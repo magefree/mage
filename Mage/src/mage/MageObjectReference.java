@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 
 /**
  * A object reference that takes zone changes into account.
@@ -61,6 +62,8 @@ public class MageObjectReference implements Comparable<MageObjectReference> {
             this.zoneChangeCounter = ((Permanent)mageObject).getZoneChangeCounter();
         } else if (mageObject instanceof Card) {
             this.zoneChangeCounter = ((Card)mageObject).getZoneChangeCounter();
+        } else if (mageObject instanceof Spell) {
+            this.zoneChangeCounter = ((Spell)mageObject).getZoneChangeCounter();
         } else {
             zoneChangeCounter = 0;
         }
@@ -111,11 +114,17 @@ public class MageObjectReference implements Comparable<MageObjectReference> {
         return card.getZoneChangeCounter()== zoneChangeCounter && card.getId().equals(sourceId);
     }
 
+    public boolean refersTo(Spell spell) {
+        return spell.getZoneChangeCounter()== zoneChangeCounter && spell.getSourceId().equals(sourceId);
+    }
+
     public boolean refersTo(MageObject mageObject) {
         if (mageObject instanceof Permanent) {
-            return equals(((Permanent)mageObject));
+            return refersTo(((Permanent)mageObject));
+        } else if (mageObject instanceof Spell) {
+            return refersTo(((Spell)mageObject));
         } else if (mageObject instanceof Card) {
-            return equals(((Card)mageObject));
+            return refersTo(((Card)mageObject));
         }
         return mageObject.getId().equals(sourceId);
     }

@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.cards.Card;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
