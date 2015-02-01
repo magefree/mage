@@ -30,18 +30,15 @@ package mage.sets.arabiannights;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.SacrificeCostCreaturesToughness;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -54,9 +51,10 @@ public class DiamondValley extends CardImpl {
         super(ownerId, 87, "Diamond Valley", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "ARN";
 
-        // {tap}, Sacrifice a creature: You gain life equal to the sacrificed creature's toughness.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiamondValleyEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,new FilterControlledCreaturePermanent("a creature"), true)));
+        Effect effect = new GainLifeEffect(new SacrificeCostCreaturesToughness());
+        effect.setText("You gain life equal to the sacrificed creature's toughness");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         this.addAbility(ability);
     }
 
@@ -67,39 +65,5 @@ public class DiamondValley extends CardImpl {
     @Override
     public DiamondValley copy() {
         return new DiamondValley(this);
-    }
-}
-
-class DiamondValleyEffect extends OneShotEffect {
-
-    public DiamondValleyEffect() {
-        super(Outcome.GainLife);
-        this.staticText = "You gain life equal to the sacrificed creature's toughness";
-    }
-
-    public DiamondValleyEffect(final DiamondValleyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DiamondValleyEffect copy() {
-        return new DiamondValleyEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (Cost cost : source.getCosts()) {
-                if (cost instanceof SacrificeTargetCost) {
-                    int amount = ((SacrificeTargetCost) cost).getPermanents().get(0).getToughness().getValue();
-                    if (amount > 0) {
-                        controller.gainLife(amount, game);
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }
