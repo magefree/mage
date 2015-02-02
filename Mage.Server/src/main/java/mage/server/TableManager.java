@@ -81,7 +81,7 @@ public class TableManager {
      *
      * In minutes.
      */
-    private static final int EXPIRE_CHECK_PERIOD = 10;
+    private static final int EXPIRE_CHECK_PERIOD = 1;
     
     public static TableManager getInstance() {
         return INSTANCE;

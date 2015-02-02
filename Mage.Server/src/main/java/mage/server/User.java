@@ -71,6 +71,7 @@ public class User {
     private final String host;    
     private final Date connectionTime;
     private final Map<UUID, Table> tables;
+    private final ArrayList<UUID> tablesToDelete;
     private final Map<UUID, GameSessionPlayer> gameSessions;
     private final Map<UUID, DraftSession> draftSessions;
     private final Map<UUID, UUID> userTournaments; // playerId, tournamentId
@@ -100,7 +101,7 @@ public class User {
         this.constructing = new ConcurrentHashMap<>();
         this.sideboarding = new ConcurrentHashMap<>();
         this.watchedGames = new ArrayList<>();
-        
+        this.tablesToDelete = new ArrayList<>();
         this.sessionId = "";
     }
 
@@ -435,6 +436,7 @@ public class User {
                             } else {
                                 // can happen if tournamet has just ended
                                 logger.debug(getName() + " tournament player missing - tableId:" + table.getId(), null);
+                                tablesToDelete.add(tableEntry.getKey());
                             }
                         } else {
                             logger.error(getName() + " tournament key missing - tableId: " + table.getId(), null);
@@ -456,6 +458,12 @@ public class User {
                     }
                 }
             }
+        }
+        if (!tablesToDelete.isEmpty()) {
+            for(UUID keyId: tablesToDelete) {
+                removeTable(keyId);
+            }
+            tablesToDelete.clear();
         }
         if (waiting > 0) {
             sb.append("Wait: ").append(waiting).append(" ");

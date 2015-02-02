@@ -226,6 +226,7 @@ public class TournamentController {
             }
         }
         started = true;
+        logger.debug("Tournament starts (all players joined): " + tournament.getId() + " - " + tournament.getTournamentType().toString());
         tournament.nextStep();
     }
 
@@ -454,5 +455,48 @@ public class TournamentController {
     
     public void cleanUpOnRemoveTournament() {
         ChatManager.getInstance().destroyChatSession(chatId);
+    }
+
+    /**
+     * Check tournaments that are not already finished, if they are in a still valid state
+     *
+     * @param tableState state of the tournament table
+     * @return true  - if tournament is valid
+     *         false - if tournament is not valid and should be removed
+     */
+
+    public boolean isTournamentStillValid(TableState tableState) {
+        int activePlayers = 0;
+        for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
+            TournamentPlayer tournamentPlayer = tournament.getPlayer(entry.getValue());
+            if (tournamentPlayer != null) {
+                if (!tournamentPlayer.hasQuit()) {
+                    if (tournamentPlayer.getPlayer().isHuman()) {
+                        User user = UserManager.getInstance().getUser(entry.getKey());
+                        if (user == null) {
+                            logger.debug("Tournament user is missing but player active -> start quit - tournamentId: " + tournament.getId() + " state: " + tableState.toString());
+                            // active tournament player but the user is no longer online
+                            quit(entry.getKey());
+                        }
+                    }
+                    activePlayers++;
+                }                    
+            } else {
+                // tournament player is missing
+                logger.debug("Tournament player is missing - tournamentId: " + tournament.getId() + " state: " + tableState.toString());
+            }
+        }
+        for(TournamentPlayer tournamentPlayer: tournament.getPlayers()) {
+            if (!tournamentPlayer.getPlayer().isHuman()) {
+                if (!tournamentPlayer.hasQuit()) {
+                    activePlayers++;
+                }
+            }
+        }
+        if (activePlayers < 2 && !tableState.equals(TableState.WAITING)) {
+            logger.debug("Tournament has less than 2 active players - tournamentId: " + tournament.getId() + " state: " + tableState.toString());
+            return false;
+        }
+        return true;
     }
 }

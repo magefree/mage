@@ -209,7 +209,7 @@ public class TableController {
                 tournamentPlayer.submitDeck(deck);
             } 
             table.joinTable(player, seat);            
-            logger.trace("player " + player.getName() + " joined tableId: " + table.getId());
+            logger.debug("Player " + player.getName() + " id: "+ player.getId() + " joined tableId: " + table.getId());
             //only inform human players and add them to sessionPlayerMap
             if (seat.getPlayer().isHuman()) {
                 user.addTable(player.getId(), table);
@@ -866,7 +866,9 @@ public class TableController {
         if (table.getTournament() != null) {
             TournamentController tournamentController = TournamentManager.getInstance().getTournamentController(table.getTournament().getId());
             if (tournamentController != null) {
-                //TODO: Check tournament state
+                return tournamentController.isTournamentStillValid(table.getState());
+            } else {
+                return false;
             }
         }
         return true;
