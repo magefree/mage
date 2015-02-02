@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -61,7 +62,7 @@ public class RakshasaVizier extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever one or more cards are put into exile from your graveyard, put that many +1/+1 counters on Rakshasa Vizier.
-        // TODO: Handle effects that move more than one card with one trigger.
+        // TODO: Handle effects that move more than one card with one trigger (e.g. if opponent want to counter a trigger, he has now to counter multiple instead of one).
         this.addAbility(new RakshasaVizierTriggeredAbility());
     }
 
@@ -91,7 +92,10 @@ class RakshasaVizierTriggeredAbility extends TriggeredAbilityImpl {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getFromZone() == Zone.GRAVEYARD
                     && zEvent.getToZone() == Zone.EXILED) {
-                return true;
+                Card card = game.getCard(event.getTargetId());
+                if (card != null && card.getOwnerId().equals(getControllerId())) {
+                    return true;
+                }
 
             }
         }
