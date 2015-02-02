@@ -28,27 +28,23 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Outcome;
-import mage.constants.TimingRule;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbilityImpl;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.AsThoughEffectType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -69,10 +65,11 @@ public class SkaabRuinator extends CardImpl {
         // As an additional cost to cast Skaab Ruinator, exile three creature cards from your graveyard.
         this.getSpellAbility().addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(3, 3, new FilterCreatureCard("creature card from your graveyard"))));
 
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+        
         // You may cast Skaab Ruinator from your graveyard.
-        this.addAbility(new SkaabRuinatorAbility(new ManaCostsImpl("{1}{U}{U}"), TimingRule.INSTANT));
-
+        this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, new SkaabRuinatorPlayEffect()));
     }
 
     public SkaabRuinator(final SkaabRuinator card) {
@@ -85,63 +82,35 @@ public class SkaabRuinator extends CardImpl {
     }
 }
 
-class SkaabRuinatorAbility extends ActivatedAbilityImpl {
 
-    public SkaabRuinatorAbility(ManaCosts costs, TimingRule timingRule) {
-        super(Zone.GRAVEYARD, new SkaabRuinatorEffect(), costs);
-        this.timing = TimingRule.SORCERY;
-        this.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(3, 3, new FilterCreatureCard("creature card from your graveyard"))));
-        this.usesStack = false;
+class SkaabRuinatorPlayEffect extends AsThoughEffectImpl {
+
+    public SkaabRuinatorPlayEffect() {
+        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.EndOfGame, Outcome.PutCreatureInPlay);
+        staticText = "You may cast {this} from your graveyard";
     }
 
-    @Override
-    public boolean activate(Game game, boolean noMana) {
-        Card card = game.getCard(sourceId);
-        if (card != null) {
-            getEffects().get(0).setTargetPointer(new FixedTarget(card.getId()));
-            return super.activate(game, noMana);
-        }
-        return false;
-    }
-
-    public SkaabRuinatorAbility(final SkaabRuinatorAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SkaabRuinatorAbility copy() {
-        return new SkaabRuinatorAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "You may cast Skaab Ruinator from your graveyard.";
-    }
-}
-
-class SkaabRuinatorEffect extends OneShotEffect {
-
-    public SkaabRuinatorEffect() {
-        super(Outcome.PutCreatureInPlay);
-        staticText = "";
-    }
-
-    public SkaabRuinatorEffect(final SkaabRuinatorEffect effect) {
+    public SkaabRuinatorPlayEffect(final SkaabRuinatorPlayEffect effect) {
         super(effect);
     }
 
     @Override
-    public SkaabRuinatorEffect copy() {
-        return new SkaabRuinatorEffect(this);
+    public boolean apply(Game game, Ability source) {
+        return true;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Card target = (Card) game.getObject(targetPointer.getFirst(game, source));
-        if (target != null) {
-            Player controller = game.getPlayer(target.getOwnerId());
-            if (controller != null) {
-                return target.cast(game, Zone.GRAVEYARD, target.getSpellAbility(), controller.getId());
+    public SkaabRuinatorPlayEffect copy() {
+        return new SkaabRuinatorPlayEffect(this);
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        if (objectId.equals(source.getSourceId()) &&
+                affectedControllerId.equals(source.getControllerId())) {
+            Card card = game.getCard(source.getSourceId());
+            if (card != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
+                return true;
             }
         }
         return false;
