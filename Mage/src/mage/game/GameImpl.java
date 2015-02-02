@@ -2328,19 +2328,18 @@ public abstract class GameImpl implements Game, Serializable {
             loadCards(ownerId, graveyard);
 
             for (Card card : library) {
-                setZone(card.getId(), Zone.LIBRARY);
                 player.getLibrary().putOnTop(card, this);
             }
             for (Card card : hand) {
-                setZone(card.getId(), Zone.HAND);
+                card.setZone(Zone.HAND, this);
                 player.getHand().add(card);
             }
             for (Card card : graveyard) {
-                setZone(card.getId(), Zone.GRAVEYARD);
+                card.setZone(Zone.GRAVEYARD, this);
                 player.getGraveyard().add(card);
             }
             for (PermanentCard card : battlefield) {
-                setZone(card.getId(), Zone.BATTLEFIELD);
+                card.setZone(Zone.BATTLEFIELD, this);
                 card.setOwnerId(ownerId);
                 PermanentCard permanent = new PermanentCard(card.getCard(), ownerId);
                 getBattlefield().addPermanent(permanent);

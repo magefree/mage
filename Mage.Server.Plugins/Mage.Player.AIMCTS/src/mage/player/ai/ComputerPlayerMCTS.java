@@ -387,7 +387,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
                 newPlayer.getLibrary().shuffle();
                 for (int i = 0; i < handSize; i++) {
                     Card card = newPlayer.getLibrary().removeFromTop(mcts);
-                    mcts.setZone(card.getId(), Zone.HAND);
+                    card.setZone(Zone.HAND, mcts);
                     newPlayer.getHand().add(card);
                 }
             }

@@ -131,7 +131,7 @@ public class Library implements Serializable {
 
     public void putOnTop(Card card, Game game) {
         if (card.getOwnerId().equals(playerId)) {
-            game.setZone(card.getId(), Zone.LIBRARY);
+            card.setZone(Zone.LIBRARY, game);
             library.addFirst(card.getId());
         }
         else {
@@ -141,7 +141,7 @@ public class Library implements Serializable {
 
     public void putOnBottom(Card card, Game game) {
         if (card.getOwnerId().equals(playerId)) {
-            game.setZone(card.getId(), Zone.LIBRARY);
+            card.setZone(Zone.LIBRARY, game);
             if (library.contains(card.getId())) {
                 library.remove(card.getId());
             }
@@ -226,7 +226,7 @@ public class Library implements Serializable {
 
     public void addAll(Set<Card> cards, Game game) {
         for (Card card: cards) {
-            game.setZone(card.getId(), Zone.LIBRARY);
+            card.setZone(Zone.LIBRARY, game);
             library.add(card.getId());
         }
     }

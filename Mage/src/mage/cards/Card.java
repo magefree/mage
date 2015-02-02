@@ -140,4 +140,12 @@ public interface Card extends MageObject {
 
     @Override
     Card copy();
+    
+    /**
+     *
+     * @return The main card of a split half card, otherwise thae card itself is returned
+     */
+    Card getMainCard();
+
+    void setZone(Zone zone, Game game);
 }

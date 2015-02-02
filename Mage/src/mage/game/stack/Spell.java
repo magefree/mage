@@ -210,7 +210,7 @@ public class Spell implements StackObject, Card {
                             }
                         }
                     }
-                    if (game.getState().getZone(card.getId()) == Zone.STACK) {
+                    if (game.getState().getZone(card.getMainCard().getId()) == Zone.STACK) {
                         card.moveToZone(Zone.GRAVEYARD, ability.getSourceId(), game, false);
                     }
                 }
@@ -997,6 +997,16 @@ public class Spell implements StackObject, Card {
     @Override
     public boolean isMorphCard() {
         return card.isMorphCard();
+    }
+
+    @Override
+    public Card getMainCard() {
+        return card.getMainCard();
+    }
+
+    @Override
+    public void setZone(Zone zone, Game game) {
+        card.setZone(zone, game);
     }
 
 }

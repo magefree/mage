@@ -419,38 +419,39 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
-        ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, ability.getId(), controllerId, fromZone, Zone.STACK);
+        Card mainCard = getMainCard();
+        ZoneChangeEvent event = new ZoneChangeEvent(mainCard.getId(), ability.getId(), controllerId, fromZone, Zone.STACK);
         if (!game.replaceEvent(event)) {
             if (event.getFromZone() != null) {
                 switch (event.getFromZone()) {
                     case GRAVEYARD:
-                        game.getPlayer(ownerId).removeFromGraveyard(this, game);
+                        game.getPlayer(ownerId).removeFromGraveyard(mainCard, game);
                         break;
                     case HAND:
-                        game.getPlayer(ownerId).removeFromHand(this, game);
+                        game.getPlayer(ownerId).removeFromHand(mainCard, game);
                         break;
                     case LIBRARY:
-                        game.getPlayer(ownerId).removeFromLibrary(this, game);
+                        game.getPlayer(ownerId).removeFromLibrary(mainCard, game);
                         break;
                     case EXILED:
-                        game.getExile().removeCard(this, game);
+                        game.getExile().removeCard(mainCard, game);
                         break;
                     case OUTSIDE:
-                        game.getPlayer(ownerId).getSideboard().remove(this);
+                        game.getPlayer(ownerId).getSideboard().remove(mainCard);
                         break;
                         
                     case COMMAND:
-                        game.getState().getCommand().remove((Commander)game.getObject(objectId));
+                        game.getState().getCommand().remove((Commander)game.getObject(mainCard.getId()));
                         break;
                     default:
                         //logger.warning("moveToZone, not fully implemented: from="+event.getFromZone() + ", to="+event.getToZone());
                 }
-                game.rememberLKI(objectId, event.getFromZone(), this);
+                game.rememberLKI(mainCard.getId(), event.getFromZone(), this);
             }
             game.getStack().push(new Spell(this, ability.copy(), controllerId, event.getFromZone()));
-            game.setZone(objectId, event.getToZone());
+            setZone(event.getToZone(), game);
             game.fireEvent(event);
-            return game.getState().getZone(objectId) == Zone.STACK;
+            return game.getState().getZone(mainCard.getId()) == Zone.STACK;
         }
         return false;
     }
@@ -557,7 +558,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             // make sure the controller of all continuous effects of this card are switched to the current controller
             game.getContinuousEffects().setController(objectId, event.getPlayerId());
             game.addPermanent(permanent);
-            game.setZone(objectId, Zone.BATTLEFIELD);
+            setZone(Zone.BATTLEFIELD, game);
             game.setScopeRelevant(true);
             permanent.setTapped(tapped);
             permanent.entersBattlefield(sourceId, game, event.getFromZone(), true);
@@ -776,5 +777,15 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             return "facedown card";
         }
         return name;
+    }
+
+    @Override
+    public Card getMainCard() {
+        return this;
+    }
+
+    @Override
+    public void setZone(Zone zone, Game game) {
+        game.setZone(getId(), zone);
     }
 }
