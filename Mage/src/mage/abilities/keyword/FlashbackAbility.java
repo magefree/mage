@@ -88,6 +88,14 @@ public class FlashbackAbility extends SpellAbility {
         if (super.canActivate(playerId, game)) {
             Card card = game.getCard(getSourceId());
             if (card != null) {
+                // Flashback can never cast a split card by Fuse, because Fuse only works from hand
+                if (card.isSplitCard()) {
+                    if (((SplitCard)card).getLeftHalfCard().getName().equals(abilityName)) {
+                        return ((SplitCard)card).getLeftHalfCard().getSpellAbility().canActivate(playerId, game);
+                    } else if (((SplitCard)card).getRightHalfCard().getName().equals(abilityName)) {
+                        return ((SplitCard)card).getRightHalfCard().getSpellAbility().canActivate(playerId, game);                        
+                    }
+                }
                 return card.getSpellAbility().canActivate(playerId, game);
             }
         }

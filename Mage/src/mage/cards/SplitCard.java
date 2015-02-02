@@ -90,7 +90,7 @@ public abstract class SplitCard extends CardImpl {
     public Card getRightHalfCard () {
         return rightHalfCard;
     }
-
+    
     @Override
     public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
         switch(ability.getSpellAbilityType()) {
@@ -102,7 +102,7 @@ public abstract class SplitCard extends CardImpl {
                 return super.cast(game, fromZone, ability, controllerId);
         }
     }
-    
+
     @Override
     public Abilities<Ability> getAbilities(){
         Abilities<Ability> allAbilites = new AbilitiesImpl<>();
@@ -119,8 +119,6 @@ public abstract class SplitCard extends CardImpl {
     @Override
     public List<String> getRules() {
         List<String> rules = new ArrayList<>();
-//        rules.addAll(leftHalfCard.getRules());
-//        rules.addAll(rightHalfCard.getRules());
         if (getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
             rules.add("--------------------------------------------------------------------------\nFuse (You may cast one or both halves of this card from your hand.)");
         }
@@ -191,25 +189,16 @@ class LeftHalfCard  extends CardImpl {
     public int getCardNumber() {
         return splitCardParent.getCardNumber();
     }
-    @Override
-    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag) {
-        return splitCardParent.moveToZone(toZone, sourceId, game, flag, null);
-    }
 
     @Override
     public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects) {
         return splitCardParent.moveToZone(toZone, sourceId, game, flag, appliedEffects);
     }
-
-    @Override
-    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
-        return splitCardParent.moveToExile(exileId, name, sourceId, game, null);
-    }
-
+  
     @Override
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
         return splitCardParent.moveToExile(exileId, name, sourceId, game, appliedEffects);
-    }
+    }    
 }
 
 /*
@@ -250,20 +239,10 @@ class RightHalfCard  extends CardImpl {
     }
 
     @Override
-    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag) {
-        return splitCardParent.moveToZone(toZone, sourceId, game, flag, null);
-    }
-
-    @Override
     public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects) {
         return splitCardParent.moveToZone(toZone, sourceId, game, flag, appliedEffects);
     }
-
-    @Override
-    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
-        return splitCardParent.moveToExile(exileId, name, sourceId, game, null);
-    }
-
+    
     @Override
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
         return splitCardParent.moveToExile(exileId, name, sourceId, game, appliedEffects);

@@ -1080,19 +1080,20 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!ability.canActivate(this.playerId, game)) {
                 return false;
             }
-            if (ability instanceof SpecialAction) {
+            
+            if (ability.getAbilityType().equals(AbilityType.SPECIAL_ACTION)) {
                 result = specialAction((SpecialAction)ability.copy(), game);
             }
-            else if (ability instanceof ManaAbility) {
+            else if (ability.getAbilityType().equals(AbilityType.MANA)) {
                 result = playManaAbility((ManaAbility)ability.copy(), game);
             }
-            else if (ability instanceof FlashbackAbility){
-                result = playAbility(ability.copy(), game);
-            }
-            else if (ability instanceof SpellAbility) {
-                result = cast((SpellAbility)ability, game, false);
-            }
-            else {
+            else if (ability.getAbilityType().equals(AbilityType.SPELL)) {
+                if (ability instanceof FlashbackAbility){
+                    result = playAbility(ability.copy(), game);
+                }  else  {
+                    result = cast((SpellAbility)ability, game, false);
+                }
+            } else {
                 result = playAbility(ability.copy(), game);
             }
         }
@@ -1214,8 +1215,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                     Card card = game.getCard(ability.getSourceId());
                     if (card.isSplitCard() && ability instanceof FlashbackAbility) {
                         FlashbackAbility flashbackAbility;
-                        if (card.getCardType().contains(CardType.INSTANT)) {
-                            flashbackAbility = new FlashbackAbility(((SplitCard) card).getLeftHalfCard().getManaCost(), TimingRule.INSTANT);
+                        // Left Half
+                        if (card.getCardType().contains(CardType.INSTANT)) {                            
+                            flashbackAbility = new FlashbackAbility(((SplitCard) card).getLeftHalfCard().getManaCost(), TimingRule.INSTANT);                             
                         }
                         else {
                             flashbackAbility = new FlashbackAbility(((SplitCard) card).getLeftHalfCard().getManaCost(), TimingRule.SORCERY);
@@ -1224,7 +1226,10 @@ public abstract class PlayerImpl implements Player, Serializable {
                         flashbackAbility.setControllerId(card.getOwnerId());
                         flashbackAbility.setSpellAbilityType(SpellAbilityType.SPLIT_LEFT);
                         flashbackAbility.setAbilityName(((SplitCard) card).getLeftHalfCard().getName());
-                        useable.put(flashbackAbility.getId(), flashbackAbility);
+                        if (flashbackAbility.canActivate(playerId, game)) {
+                            useable.put(flashbackAbility.getId(), flashbackAbility);
+                        }
+                        // Right Half
                         if (card.getCardType().contains(CardType.INSTANT)) {
                             flashbackAbility = new FlashbackAbility(((SplitCard) card).getRightHalfCard().getManaCost(), TimingRule.INSTANT);
                         }
@@ -1235,7 +1240,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                         flashbackAbility.setControllerId(card.getOwnerId());
                         flashbackAbility.setSpellAbilityType(SpellAbilityType.SPLIT_RIGHT);
                         flashbackAbility.setAbilityName(((SplitCard) card).getRightHalfCard().getName());
-                        useable.put(flashbackAbility.getId(), flashbackAbility);
+                        if (flashbackAbility.canActivate(playerId, game)) {
+                            useable.put(flashbackAbility.getId(), flashbackAbility);
+                        }
 
                     } else {
                         useable.put(ability.getId(), ability);
@@ -2205,7 +2212,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             ManaCostsImpl manaCosts = new ManaCostsImpl();
                             for(Cost cost:alternateSourceCostsAbility.getCosts()) {
                                 if (cost instanceof ManaCost) {
-                                   manaCosts.add(cost);
+                                   manaCosts.add((ManaCost)cost);
                                 }
                             }
 
@@ -2242,7 +2249,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     ManaCostsImpl manaCosts = new ManaCostsImpl();
                     for(Cost cost:ability.getCosts()) {
                         if (cost instanceof ManaCost) {
-                           manaCosts.add(cost);
+                           manaCosts.add((ManaCost)cost);
                         }
                     }
 
