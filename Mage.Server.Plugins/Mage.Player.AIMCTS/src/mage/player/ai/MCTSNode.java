@@ -328,7 +328,7 @@ public class MCTSNode {
                 player.getLibrary().shuffle();
                 for (int i = 0; i < handSize; i++) {
                     Card card = player.getLibrary().removeFromTop(game);
-                    game.setZone(card.getId(), Zone.HAND);
+                    card.setZone(Zone.HAND, game);
                     player.getHand().add(card);
                 }
             }

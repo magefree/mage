@@ -650,8 +650,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean putInHand(Card card, Game game) {
         if (card.getOwnerId().equals(playerId)) {
+            card.setZone(Zone.HAND, game);
             this.hand.add(card);
-            game.setZone(card.getId(), Zone.HAND);
         } else {
             return game.getPlayer(card.getOwnerId()).putInHand(card, game);
         }
@@ -924,7 +924,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (card != null) {
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getId(), ability.getSourceId(), playerId))) {
                 int bookmark = game.bookmarkState();
-                Zone fromZone = game.getState().getZone(card.getId());
+                Zone fromZone = game.getState().getZone(card.getMainCard().getId());
                 card.cast(game, fromZone, ability, playerId);
                 Spell spell = game.getStack().getSpell(ability.getId());
                 // some effects set sourceId to cast without paying mana costs

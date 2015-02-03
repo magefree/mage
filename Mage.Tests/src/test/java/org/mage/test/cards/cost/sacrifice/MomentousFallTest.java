@@ -2,6 +2,7 @@ package org.mage.test.cards.cost.sacrifice;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -39,6 +40,7 @@ public class MomentousFallTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Geralf's Messenger", 1);
+        assertCounterCount("Geralf's Messenger", CounterType.P1P1, 1);
         assertPowerToughness(playerA, "Geralf's Messenger", 5, 4); // +1/+1 counter + Anthem effect
         assertHandCount(playerA, 4); // +4 cards
         assertLife(playerA, 23); // +3 life

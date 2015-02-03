@@ -31,15 +31,16 @@ package mage.cards;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.SpellAbilityType;
-import mage.constants.Zone;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.SpellAbilityType;
+import static mage.constants.SpellAbilityType.SPLIT_LEFT;
+import static mage.constants.SpellAbilityType.SPLIT_RIGHT;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.watchers.Watcher;
 
@@ -90,7 +91,28 @@ public abstract class SplitCard extends CardImpl {
     public Card getRightHalfCard () {
         return rightHalfCard;
     }
-    
+
+    @Override
+    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects) {
+        if (super.moveToZone(toZone, sourceId, game, flag, appliedEffects)) {
+            game.getState().setZone(getLeftHalfCard().getId(), toZone);
+            game.getState().setZone(getRightHalfCard().getId(), toZone);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
+        if (super.moveToExile(exileId, name, sourceId, game, appliedEffects)) {
+            Zone currentZone = game.getState().getZone(getId());
+            game.getState().setZone(getLeftHalfCard().getId(), currentZone);
+            game.getState().setZone(getRightHalfCard().getId(), currentZone);
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
         switch(ability.getSpellAbilityType()) {
@@ -102,6 +124,14 @@ public abstract class SplitCard extends CardImpl {
                 return super.cast(game, fromZone, ability, controllerId);
         }
     }
+
+    @Override
+    public void setZone(Zone zone, Game game) {
+        super.setZone(zone, game);
+        game.setZone(getLeftHalfCard().getId(), zone);
+        game.setZone(getRightHalfCard().getId(), zone);
+    }
+
 
     @Override
     public Abilities<Ability> getAbilities(){
@@ -198,7 +228,21 @@ class LeftHalfCard  extends CardImpl {
     @Override
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
         return splitCardParent.moveToExile(exileId, name, sourceId, game, appliedEffects);
-    }    
+    }
+
+    @Override
+    public Card getMainCard() {
+        return splitCardParent;
+    }
+
+    @Override
+    public void setZone(Zone zone, Game game) {
+        super.setZone(zone, game);
+        game.setZone(splitCardParent.getId(), zone);
+        game.setZone(splitCardParent.getRightHalfCard().getId(), zone);
+    }
+
+
 }
 
 /*
@@ -247,4 +291,17 @@ class RightHalfCard  extends CardImpl {
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
         return splitCardParent.moveToExile(exileId, name, sourceId, game, appliedEffects);
     }
+    
+    @Override
+    public Card getMainCard() {
+        return splitCardParent;
+    }
+
+    @Override
+    public void setZone(Zone zone, Game game) {
+        super.setZone(zone, game);
+        game.setZone(splitCardParent.getId(), zone);
+        game.setZone(splitCardParent.getLeftHalfCard().getId(), zone);
+    }
+
 }

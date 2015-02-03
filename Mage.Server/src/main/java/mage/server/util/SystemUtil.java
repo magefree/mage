@@ -96,7 +96,7 @@ public class SystemUtil {
                     }
 
                     Random random = new Random();
-                    Set<Card> cardsToLoad = new HashSet<Card>();
+                    Set<Card> cardsToLoad = new HashSet<>();
                     for (int i = 0; i < amount; i++) {
                         CardInfo cardInfo = cards.get(random.nextInt(cards.size()));
                         Card card = cardInfo != null ? cardInfo.getCard() : null;
@@ -128,7 +128,7 @@ public class SystemUtil {
         if (zone.equals(Zone.BATTLEFIELD)) {
             card.putOntoBattlefield(game, Zone.OUTSIDE, null, player.getId());
         } else if (zone.equals(Zone.LIBRARY)) {
-            game.setZone(card.getId(), Zone.LIBRARY);
+            card.setZone(Zone.LIBRARY, game);
             player.getLibrary().putOnTop(card, game);
         } else {
             card.moveToZone(zone, null, game, false);

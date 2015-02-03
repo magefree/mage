@@ -210,7 +210,7 @@ public class Spell implements StackObject, Card {
                             }
                         }
                     }
-                    if (game.getState().getZone(card.getId()) == Zone.STACK) {
+                    if (game.getState().getZone(card.getMainCard().getId()) == Zone.STACK) {
                         card.moveToZone(Zone.GRAVEYARD, ability.getSourceId(), game, false);
                     }
                 }
@@ -235,7 +235,8 @@ public class Spell implements StackObject, Card {
                         // TODO: Find a better way to prevent bestow creatures from being effected by creature affecting abilities
                         Permanent permanent = game.getPermanent(card.getId());
                         if (permanent != null && permanent instanceof PermanentCard) {
-                                ((PermanentCard) permanent).getCard().getCardType().add(CardType.CREATURE);
+                            permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
+                            ((PermanentCard) permanent).getCard().getCardType().add(CardType.CREATURE);
                         }
                         card.getCardType().add(CardType.CREATURE);
                     }                
@@ -997,6 +998,21 @@ public class Spell implements StackObject, Card {
     @Override
     public boolean isMorphCard() {
         return card.isMorphCard();
+    }
+
+    @Override
+    public Card getMainCard() {
+        return card.getMainCard();
+    }
+
+    @Override
+    public void setZone(Zone zone, Game game) {
+        card.setZone(zone, game);
+    }
+
+    @Override
+    public void setSpellAbility(SpellAbility ability) {
+        throw new UnsupportedOperationException("Not supported."); 
     }
 
 }

@@ -53,6 +53,7 @@ public interface Card extends MageObject {
     void setOwnerId(UUID ownerId);
     void addAbility(Ability ability);
     void addWatcher(Watcher watcher);
+    void setSpellAbility(SpellAbility ability);
     SpellAbility getSpellAbility();
     List<String> getRules();
     List<Watcher> getWatchers();
@@ -140,4 +141,12 @@ public interface Card extends MageObject {
 
     @Override
     Card copy();
+    
+    /**
+     *
+     * @return The main card of a split half card, otherwise thae card itself is returned
+     */
+    Card getMainCard();
+
+    void setZone(Zone zone, Game game);
 }

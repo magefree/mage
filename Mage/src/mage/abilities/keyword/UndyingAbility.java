@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -13,6 +14,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import org.apache.log4j.Logger;
 
 /**
  * @author Loki
@@ -38,6 +40,7 @@ public class UndyingAbility extends DiesTriggeredAbility {
         if (super.checkTrigger(event, game)) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (!permanent.getCounters().containsKey(CounterType.P1P1) || permanent.getCounters().getCount(CounterType.P1P1) == 0) {
+                Logger.getLogger(UndyingAbility.class).info("Undying trigger: " + getSourceId());
                 game.getState().setValue("undying" + getSourceId(),permanent.getId());
                 return true;
             }
@@ -95,6 +98,7 @@ class UndyingReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null) {
+            game.getState().setValue("undying" + source.getSourceId(), null);
             permanent.addCounters(CounterType.P1P1.createInstance(), game);
         }
         used = true;
@@ -110,9 +114,10 @@ class UndyingReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getSourceId())) {
             // Check if undying condition is true
-            UUID target = (UUID) game.getState().getValue("undying" + source.getSourceId());
-            if (target.equals(source.getSourceId())) {
-                game.getState().setValue("undying" + source.getSourceId(), null);
+            UUID targetId = (UUID) game.getState().getValue("undying" + source.getSourceId());
+            Logger.getLogger(UndyingReplacementEffect.class).info("Undying replacement applies: " + targetId + " eventSourceId " + event.getTargetId());
+
+            if (targetId != null && targetId.equals(source.getSourceId())) {
                 return true;
             }
         }

@@ -195,15 +195,15 @@ class JaceTheMindSculptorEffect3 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getFirstTarget());
-        ExileZone exile = game.getExile().getPermanentExile();
         if (player != null) {
             while (true) {
                 if (player.getLibrary().getFromTop(game) == null) {
                     break;
                 }
                 Card card = player.getLibrary().removeFromTop(game);
-                exile.add(card);
-                game.setZone(card.getId(), Zone.EXILED);
+                if (card != null) {
+                    card.moveToExile(null, "", source.getSourceId(), game);
+                }
             }
             for (Card card : player.getHand().getCards(game)) {
                 card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);

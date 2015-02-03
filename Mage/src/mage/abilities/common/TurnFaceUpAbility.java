@@ -30,6 +30,7 @@ package mage.abilities.common;
 
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
+import mage.abilities.SpecialAction;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.effects.OneShotEffect;
@@ -46,10 +47,12 @@ import mage.players.Player;
  * @author LevelX2
  */
 
-public class TurnFaceUpAbility extends ActivatedAbilityImpl {
+public class TurnFaceUpAbility extends SpecialAction  {
 
     public TurnFaceUpAbility(Costs<Cost> costs) {
-        super(Zone.BATTLEFIELD, new TurnFaceUpEffect(), costs);
+        super(Zone.BATTLEFIELD);
+        this.addEffect(new TurnFaceUpEffect());
+        this.addCost(costs);
         this.usesStack = false;
         this.abilityType = AbilityType.SPECIAL_ACTION;
         this.setRuleVisible(false); // will be made visible only to controller in CardView
