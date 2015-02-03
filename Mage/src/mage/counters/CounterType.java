@@ -57,6 +57,7 @@ public enum CounterType {
     HATCHLING("hatchling"),
     HOOFPRINT("hoofprint"),
     ICE("ice"),
+    JAVELIN("javelin"),
     KI("ki"),
     LEVEL("level"),
     LORE("lore"),

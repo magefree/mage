@@ -137,4 +137,5 @@ Visions|VIS|
 Weatherlight|WTH|
 World Magic Cup Qualifier|WMCQ|
 Worldwake|WWK|
+WPN Gateway|GRC|
 Zendikar|ZEN|

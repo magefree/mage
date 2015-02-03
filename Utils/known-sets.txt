@@ -116,4 +116,5 @@ Vintage Masters|vintagemasters|
 Weatherlight|weatherlight|
 World Magic Cup Qualifier|worldmagiccupqualifier|
 Worldwake|worldwake|
+WPN Gateway|wpngateway|
 Zendikar|zendikar|

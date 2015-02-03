@@ -97,6 +97,7 @@ public class ConstructedFormats {
             "Media Inserts",
             "Unhinged",
             "World Magic Cup Qualifier",
+            "WPN Gateway",
     };
     
     private ConstructedFormats() {
@@ -469,6 +470,9 @@ public class ConstructedFormats {
         }
         if (format.equals("World Magic Cup Qualifier")) {
             return Arrays.asList("WMCQ");
+        }
+        if (format.equals("WPN Gateway")) {
+            return Arrays.asList("GRC");
         }
         if (format.equals("Guru")) {
             return Arrays.asList("GUR");

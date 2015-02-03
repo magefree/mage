@@ -1,3 +1,9 @@
+#|Generate|TOK:GRC|Bird|
+#|Generate|TOK:GRC|Golem|
+#|Generate|TOK:GRC|Human|
+#|Generate|TOK:GRC|Myr|
+#|Generate|TOK:GRC|Saproling|
+
 #|Generate|TOK:MBP:Beast|
 #|Generate|TOK:MBP|Cat|
 #|Generate|TOK:MBP|Dragon|
