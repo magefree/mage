@@ -168,7 +168,6 @@ class BestowTypeChangingEffect extends ContinuousEffectImpl implements SourceEff
                             permanent.getCardType().remove(CardType.CREATURE);
                             permanent.getSubtype().clear();
                             if (!permanent.getSubtype().contains("Aura")) {
-
                                 permanent.getSubtype().add("Aura");
                             }
                         }

@@ -789,4 +789,10 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public void setZone(Zone zone, Game game) {
         game.setZone(getId(), zone);
     }
+
+    @Override
+    public void setSpellAbility(SpellAbility ability) {
+        spellAbility = ability;
+    }
+    
 }

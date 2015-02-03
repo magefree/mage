@@ -53,6 +53,7 @@ public interface Card extends MageObject {
     void setOwnerId(UUID ownerId);
     void addAbility(Ability ability);
     void addWatcher(Watcher watcher);
+    void setSpellAbility(SpellAbility ability);
     SpellAbility getSpellAbility();
     List<String> getRules();
     List<Watcher> getWatchers();
