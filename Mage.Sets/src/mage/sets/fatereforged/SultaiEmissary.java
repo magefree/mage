@@ -42,7 +42,7 @@ import mage.constants.Rarity;
 public class SultaiEmissary extends CardImpl {
 
     public SultaiEmissary(UUID ownerId) {
-        super(ownerId, 86, "Sultai Emissary", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        super(ownerId, 85, "Sultai Emissary", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.expansionSetCode = "FRF";
         this.subtype.add("Zombie");
         this.subtype.add("Warrior");
