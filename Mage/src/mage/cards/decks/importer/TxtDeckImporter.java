@@ -40,6 +40,7 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
+import mage.constants.SetType;
 
 /**
  *
@@ -96,24 +97,30 @@ public class TxtDeckImporter extends DeckImporter {
             } else {
                 // search the card released last with this name
                 Date lastReleaseDate = new GregorianCalendar(1900, 1, 1).getTime();
-                CardInfo lastReleasedCard = null;
+                Date lastExpansionDate = new GregorianCalendar(1900, 1, 1).getTime();
+                CardInfo cardToUse = null;
                 for (CardInfo cardinfo: cards) {
                     ExpansionInfo set = ExpansionRepository.instance.getSetByCode(cardinfo.getSetCode());
                     if (set != null) {
-                        if (lastReleaseDate == null || set.getReleaseDate().after(lastReleaseDate)) {
-                            lastReleasedCard = cardinfo;
+                        if ((set.getType().equals(SetType.EXPANSION) || set.getType().equals(SetType.CORE)) &&
+                                (lastExpansionDate == null || set.getReleaseDate().after(lastExpansionDate))) {
+                            cardToUse = cardinfo;
+                            lastExpansionDate = set.getReleaseDate();
+                        }
+                        if (lastExpansionDate == null && (lastReleaseDate == null || set.getReleaseDate().after(lastReleaseDate))) {
+                            cardToUse = cardinfo;
                             lastReleaseDate = set.getReleaseDate();
                         }
                     }
                 }
-                if (lastReleasedCard == null) {
-                    lastReleasedCard = cards.get(0);
+                if (cardToUse == null) {
+                    cardToUse = cards.get(0);
                 }
                 for (int i = 0; i < num; i++) {
                     if (!sideboard) {
-                        deckList.getCards().add(new DeckCardInfo(lastReleasedCard.getName(),lastReleasedCard.getCardNumber(), lastReleasedCard.getSetCode()));
+                        deckList.getCards().add(new DeckCardInfo(cardToUse.getName(),cardToUse.getCardNumber(), cardToUse.getSetCode()));
                     } else {
-                        deckList.getSideboard().add(new DeckCardInfo(lastReleasedCard.getName(),lastReleasedCard.getCardNumber(), lastReleasedCard.getSetCode()));
+                        deckList.getSideboard().add(new DeckCardInfo(cardToUse.getName(),cardToUse.getCardNumber(), cardToUse.getSetCode()));
                     }
                 }
             }
