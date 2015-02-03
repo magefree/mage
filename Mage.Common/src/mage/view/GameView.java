@@ -49,6 +49,7 @@ import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
+import mage.watchers.common.CastSpellLastTurnWatcher;
 
 
 /**
@@ -79,6 +80,7 @@ public class GameView implements Serializable {
     private final int turn;
     private boolean special = false;
     private final boolean isPlayer;
+    private final int spellsCastCurrentTurn;
 
 
     public GameView(GameState state, Game game, UUID createdForPlayerId, UUID watcherUserId) {
@@ -160,6 +162,12 @@ public class GameView implements Serializable {
             combat.add(new CombatGroupView(combatGroup, game));
         }
         this.special = state.getSpecialActions().getControlledBy(state.getPriorityPlayerId()).size() > 0;
+        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
+        if (watcher != null) {
+            spellsCastCurrentTurn = watcher.getAmountOfSpellsAllPlayersCastOnCurrentTurn();
+        } else {
+            spellsCastCurrentTurn = 0;
+        }
     }
 
     private void checkPaid(UUID uuid, StackAbility stackAbility) {
@@ -298,4 +306,9 @@ public class GameView implements Serializable {
     public void setCanPlayInHand(Set<UUID> canPlayInHand) {
         this.canPlayInHand = canPlayInHand;
     }
+
+    public int getSpellsCastCurrentTurn() {
+        return spellsCastCurrentTurn;
+    }
+    
 }

@@ -31,6 +31,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Point;
@@ -57,6 +58,7 @@ import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import javax.swing.AbstractAction;
+import javax.swing.Box;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
@@ -66,6 +68,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -603,6 +606,7 @@ public final class GamePanel extends javax.swing.JPanel {
         else {
             this.txtStep.setText("");
         }
+        this.txtPhasesBottomInfo.setText("  " + Integer.toString(game.getSpellsCastCurrentTurn()+99));
         this.txtActivePlayer.setText(game.getActivePlayerName());
         this.txtPriority.setText(game.getPriorityPlayerName());
         this.txtTurn.setText(Integer.toString(game.getTurn()));
@@ -982,6 +986,9 @@ public final class GamePanel extends javax.swing.JPanel {
         lblPriority = new javax.swing.JLabel();
         feedbackPanel = new mage.client.game.FeedbackPanel();
 
+        txtPhasesBottomInfo = new javax.swing.JLabel();
+        txtPhasesBottomInfo.setToolTipText("spells cast during the current turn");
+        
         btnCancelSkip = new javax.swing.JButton(); // F3
         btnSkipToNextTurn = new javax.swing.JButton(); // F4
         btnSkipToEndTurn = new javax.swing.JButton(); // F5
@@ -991,7 +998,6 @@ public final class GamePanel extends javax.swing.JPanel {
 
         btnConcede = new javax.swing.JButton();
         btnSwitchHands = new javax.swing.JButton();
-
         btnStopWatching = new javax.swing.JButton();
         
         bigCard = new mage.client.cards.BigCard();
@@ -1048,7 +1054,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         lblTurn.setLabelFor(txtTurn);
         lblTurn.setText("Turn:");
-
+        
         txtTurn.setText("Turn");
         txtTurn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
         txtTurn.setMinimumSize(new java.awt.Dimension(0, 16));
@@ -1457,7 +1463,7 @@ public final class GamePanel extends javax.swing.JPanel {
         jPhases = new JPanel();
         jPhases.setBackground(new Color(0, 0, 0, 0));
         jPhases.setLayout(null);
-        jPhases.setPreferredSize(new Dimension(X_PHASE_WIDTH, 450));
+        jPhases.setPreferredSize(new Dimension(X_PHASE_WIDTH, 435));
                 
         MouseAdapter phasesMouseAdapter = new MouseAdapter() {
             @Override
@@ -1501,9 +1507,11 @@ public final class GamePanel extends javax.swing.JPanel {
         empty1.setBackground(new Color(0, 0, 0, 0));
         phasesContainer.add(empty1, ratio);
         phasesContainer.add(jPhases);
-        JPanel empty2 = new JPanel();
-        empty2.setBackground(new Color(0, 0, 0, 0));
-        phasesContainer.add(empty2, ratio);
+        
+        JPanel phasesBottomPanel = new JPanel();
+        phasesBottomPanel.setBackground(new Color(0, 0, 0, 0));
+        phasesBottomPanel.add(txtPhasesBottomInfo);        
+        phasesContainer.add(phasesBottomPanel);
 
         javax.swing.GroupLayout gl_jPanel3 = new javax.swing.GroupLayout(jPanel3);
         gl_jPanel3.setHorizontalGroup(
@@ -1854,7 +1862,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private javax.swing.JSplitPane jSplitPane2;
     private JPanel jPhases;
     private JPanel phasesContainer;
-
+    private javax.swing.JLabel txtPhasesBottomInfo;
 
     private HoverButton currentStep;
     private Point prevPoint;
