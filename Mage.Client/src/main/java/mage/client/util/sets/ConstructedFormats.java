@@ -564,7 +564,7 @@ public class ConstructedFormats {
         }
         
         for (ExpansionInfo set : ExpansionRepository.instance.getAll()) {
-            if (!set.getType().equals(SetType.REPRINT) && !set.getType().equals(SetType.JOKESET)) {
+            if (set.getType().equals(SetType.CORE) || set.getType().equals(SetType.EXPANSION)) {
                 if (set.getReleaseDate().after(cutoff.getTime())) {
                     standard.add(set.getCode());
                 }

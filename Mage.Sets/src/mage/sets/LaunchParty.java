@@ -45,7 +45,7 @@ public class LaunchParty extends ExpansionSet {
     }
 
     private LaunchParty() {
-        super("Launch Party", "MLP", "mage.sets.launchparty", new GregorianCalendar(2011, 6, 17).getTime(), SetType.REPRINT);
+        super("Launch Party", "MLP", "mage.sets.launchparty", new GregorianCalendar(2011, 6, 17).getTime(), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
     }

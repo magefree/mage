@@ -45,7 +45,7 @@ public class VenserVsKoth extends ExpansionSet {
     }
 
     private VenserVsKoth() {
-        super("Duel Decks: Venser vs. Koth", "DDI", "mage.sets.venservskoth", new GregorianCalendar(2012, 3, 30).getTime(), SetType.REPRINT);
+        super("Duel Decks: Venser vs. Koth", "DDI", "mage.sets.venservskoth", new GregorianCalendar(2012, 3, 30).getTime(), SetType.DUEL_DECK);
         this.hasBasicLands = false;
     }
 }

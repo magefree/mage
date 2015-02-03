@@ -13,7 +13,7 @@ public class ElspethvsTezzeret extends ExpansionSet {
     }
 
     private ElspethvsTezzeret() {
-        super("Duel Decks: Elspeth vs. Tezzeret", "DDF", "mage.sets.elspethvstezzeret", new GregorianCalendar(2010, 8, 3).getTime(), SetType.REPRINT);
+        super("Duel Decks: Elspeth vs. Tezzeret", "DDF", "mage.sets.elspethvstezzeret", new GregorianCalendar(2010, 8, 3).getTime(), SetType.DUEL_DECK);
         this.hasBasicLands = false;
     }
 }

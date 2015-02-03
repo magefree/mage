@@ -44,7 +44,7 @@ public class IzzetVsGolgari extends ExpansionSet {
     }
 
     private IzzetVsGolgari() {
-        super("Duel Decks: Izzet vs. Golgari", "DDJ", "mage.sets.izzetvsgolgari", new GregorianCalendar(2012, 9, 7).getTime(), SetType.REPRINT);
+        super("Duel Decks: Izzet vs. Golgari", "DDJ", "mage.sets.izzetvsgolgari", new GregorianCalendar(2012, 9, 7).getTime(), SetType.DUEL_DECK);
         this.hasBasicLands = false;
     }
 }

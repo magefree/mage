@@ -54,8 +54,8 @@ public class Standard extends Constructed {
             cutoff = new GregorianCalendar(current.get(Calendar.YEAR) - 2, Calendar.SEPTEMBER, 1);
         }
         for (ExpansionSet set: Sets.getInstance().values()) {
-            if (set.getReleaseDate().after(cutoff.getTime()) && set.getSetType() != SetType.REPRINT
-                    && set.getSetType() != SetType.JOKESET) {
+            if (set.getReleaseDate().after(cutoff.getTime()) &&
+                    (set.getSetType() == SetType.CORE || set.getSetType() == SetType.EXPANSION)){
                 setCodes.add(set.getCode());
             }
         }

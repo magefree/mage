@@ -44,7 +44,7 @@ public class PhyrexiaVsTheCoalition extends ExpansionSet {
     }
 
     private PhyrexiaVsTheCoalition() {
-        super("Duel Decks: Phyrexia vs. the Coalition", "DDE", "mage.sets.phyrexiavsthecoalition", new GregorianCalendar(2010, 3, 19).getTime(), SetType.REPRINT);
+        super("Duel Decks: Phyrexia vs. the Coalition", "DDE", "mage.sets.phyrexiavsthecoalition", new GregorianCalendar(2010, 3, 19).getTime(), SetType.DUEL_DECK);
         this.hasBasicLands = false;
     }
 }

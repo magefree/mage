@@ -45,7 +45,7 @@ public class JaceVsVraska extends ExpansionSet {
     }
 
     private JaceVsVraska() {
-        super("Duel Decks: Jace vs. Vraska", "DDM", "mage.sets.jacevsvraska", new GregorianCalendar(2014, 3, 14).getTime(), SetType.REPRINT);
+        super("Duel Decks: Jace vs. Vraska", "DDM", "mage.sets.jacevsvraska", new GregorianCalendar(2014, 3, 14).getTime(), SetType.DUEL_DECK);
         this.hasBasicLands = false;
     }
 }

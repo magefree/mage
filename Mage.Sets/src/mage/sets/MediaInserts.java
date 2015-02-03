@@ -27,10 +27,9 @@
  */
 package mage.sets;
 
+import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
-
-import java.util.GregorianCalendar;
 
 public class MediaInserts extends ExpansionSet {
     private static final MediaInserts fINSTANCE = new MediaInserts();
@@ -40,7 +39,7 @@ public class MediaInserts extends ExpansionSet {
     }
 
     private MediaInserts() {
-        super("Media Inserts", "MBP", "mage.sets.mediainserts", new GregorianCalendar(1990, 1, 1).getTime(), SetType.EXPANSION);
+        super("Media Inserts", "MBP", "mage.sets.mediainserts", new GregorianCalendar(1990, 1, 1).getTime(), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
     }

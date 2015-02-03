@@ -13,7 +13,7 @@ public class MagicPlayerRewards extends ExpansionSet {
     }
 
     private MagicPlayerRewards() {
-        super("Magic Player Rewards", "MPR", "mage.sets.playerrewards", new GregorianCalendar(1990, 1, 1).getTime(), SetType.EXPANSION);
+        super("Magic Player Rewards", "MPR", "mage.sets.playerrewards", new GregorianCalendar(1990, 1, 1).getTime(), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
     }

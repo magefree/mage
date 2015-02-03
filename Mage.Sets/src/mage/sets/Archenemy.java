@@ -45,7 +45,7 @@ public class Archenemy extends ExpansionSet {
     }
 
     private Archenemy() {
-        super("Archenemy", "ARC", "mage.sets.archenemy", new GregorianCalendar(2010, 6, 18).getTime(), SetType.REPRINT);
+        super("Archenemy", "ARC", "mage.sets.archenemy", new GregorianCalendar(2010, 6, 18).getTime(), SetType.NON_STANDARD_LEGAL_SETS);
     }
 
 }

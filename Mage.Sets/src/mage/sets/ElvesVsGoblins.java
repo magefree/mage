@@ -23,7 +23,7 @@ public class ElvesVsGoblins extends ExpansionSet {
     }
 
     private ElvesVsGoblins() {
-        super("Duel Decks: Elves vs. Goblins", "EVG", "mage.sets.elvesvsgoblins", new GregorianCalendar(2007, 11, 16).getTime(), SetType.REPRINT);
+        super("Duel Decks: Elves vs. Goblins", "EVG", "mage.sets.elvesvsgoblins", new GregorianCalendar(2007, 11, 16).getTime(), SetType.DUEL_DECK);
         this.hasBasicLands = false;
     }
 }

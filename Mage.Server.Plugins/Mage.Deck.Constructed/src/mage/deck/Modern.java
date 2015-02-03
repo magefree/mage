@@ -48,8 +48,8 @@ public class Modern extends Constructed {
 
         Date cutoff = new GregorianCalendar(2003, 7, 28).getTime(); // Eight edition release date
         for (ExpansionSet set: Sets.getInstance().values()) {
-            if ((set.getReleaseDate().after(cutoff) || set.getReleaseDate().equals(cutoff)) && set.getSetType() != SetType.REPRINT
-                    && set.getSetType() != SetType.JOKESET) {
+            if ((set.getReleaseDate().after(cutoff) || set.getReleaseDate().equals(cutoff)) &&
+                    (set.getSetType() == SetType.CORE || set.getSetType() == SetType.EXPANSION)) {
                 setCodes.add(set.getCode());
             }
         }

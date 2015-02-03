@@ -6,11 +6,14 @@ package mage.constants;
  */
 public enum SetType {
     CORE("Core"),
+    DUEL_DECK("Duel Deck"),
     EXPANSION("Expansion"),
+    NON_STANDARD_LEGAL_SETS("Non-standard-legal sets"),
     REPRINT("Reprint"),
+    PROMOTIONAL("Promotional"),
     JOKESET("Joke Set");
 
-    private String text;
+    private final String text;
 
     SetType(String text) {
         this.text = text;

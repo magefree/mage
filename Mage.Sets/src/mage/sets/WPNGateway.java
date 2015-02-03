@@ -22,7 +22,7 @@ public class WPNGateway extends ExpansionSet {
     }
 
     private WPNGateway() {
-        super("WPN Gateway", "GRC", "mage.sets.wpngateway", new GregorianCalendar(2011, 6, 17).getTime(), SetType.REPRINT);
+        super("WPN Gateway", "GRC", "mage.sets.wpngateway", new GregorianCalendar(2011, 6, 17).getTime(), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
     }
