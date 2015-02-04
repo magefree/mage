@@ -30,22 +30,19 @@ package mage.sets.urzaslegacy;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
@@ -53,9 +50,10 @@ import mage.game.permanent.Permanent;
  */
 public class RadiantArchangel extends CardImpl {
     
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creature with flying on the battlefield");
 
     static {
+        filter.add(new AnotherPredicate());        
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
     
@@ -74,8 +72,10 @@ public class RadiantArchangel extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
+        
         // Radiant, Archangel gets +1/+1 for each other creature with flying on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RadiantArchangelEffect()));
+        DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(xValue, xValue, Duration.WhileOnBattlefield)));        
     }
 
     public RadiantArchangel(final RadiantArchangel card) {
@@ -85,36 +85,5 @@ public class RadiantArchangel extends CardImpl {
     @Override
     public RadiantArchangel copy() {
         return new RadiantArchangel(this);
-    }
-    class RadiantArchangelEffect extends ContinuousEffectImpl {
-
-        public RadiantArchangelEffect() {
-            super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-            staticText = "{this} gets +1/+1 for each other creature with flying on the battlefield";
-        }
-
-        public RadiantArchangelEffect(final RadiantArchangelEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public RadiantArchangelEffect copy() {
-            return new RadiantArchangelEffect(this);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) - 1;
-            if (count > 0) {
-                Permanent target = (Permanent) game.getPermanent(source.getSourceId());
-                if (target != null) {
-                    target.addPower(count);
-                    target.addToughness(count);
-                    return true;
-                }
-            }
-            return false;
-        }
-
     }
 }
