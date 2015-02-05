@@ -50,11 +50,16 @@ public class RottingRats extends CardImpl {
         this.expansionSetCode = "CON";
         this.subtype.add("Zombie");
         this.subtype.add("Rat");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+
+        // When Rotting Rats enters the battlefield, each player discards a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect()));
+
+        // Unearth {1}{B} ({1}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{1}{B}")));
+
     }
 
     public RottingRats (final RottingRats card) {

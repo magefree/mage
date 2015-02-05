@@ -51,9 +51,6 @@ public class SimicCharm extends CardImpl {
         super(ownerId, 195, "Simic Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}{U}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlack(true);
-        this.color.setBlue(true);
-
         //Choose one - Target creature gets +3/+3 until end of turn
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
