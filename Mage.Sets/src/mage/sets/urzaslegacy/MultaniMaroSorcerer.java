@@ -27,11 +27,10 @@
  */
 package mage.sets.urzaslegacy;
 
+import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.CardsInAllHandsCount;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
@@ -39,10 +38,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *
@@ -56,14 +51,14 @@ public class MultaniMaroSorcerer extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Elemental");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
         // Shroud
         this.addAbility(ShroudAbility.getInstance());
+        
         // Multani, Maro-Sorcerer's power and toughness are each equal to the total number of cards in all players' hands.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInHandCount(), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInAllHandsCount(), Duration.EndOfGame)));
     }
 
     public MultaniMaroSorcerer(final MultaniMaroSorcerer card) {
@@ -73,35 +68,5 @@ public class MultaniMaroSorcerer extends CardImpl {
     @Override
     public MultaniMaroSorcerer copy() {
         return new MultaniMaroSorcerer(this);
-    }
-}
-
-class CardsInHandCount implements DynamicValue {
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int count = 0;
-        for (UUID playerId: game.getPlayer(sourceAbility.getControllerId()).getInRange()) {
-            Player player = game.getPlayer(playerId);
-            if (player != null)
-            {
-                count += player.getHand().size();
-            }
-        }
-        return count;
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return new CardsInHandCount();
-    }
-
-    @Override
-    public String getMessage() {
-        return "the total number of cards in all players' hands";
-    }
-
-    @Override
-    public String toString() {
-        return "1";
     }
 }
