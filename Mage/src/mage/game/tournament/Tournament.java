@@ -95,5 +95,7 @@ public interface Tournament {
     void cleanUpOnTournamentEnd();
     boolean isAbort();
     void setAbort(boolean abort);
+
+    void clearDraft();
     Draft getDraft();
 }

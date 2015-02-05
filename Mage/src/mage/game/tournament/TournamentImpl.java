@@ -504,6 +504,11 @@ public abstract class TournamentImpl implements Tournament {
     }
 
     @Override
+    public void clearDraft() {
+        draft = null;
+    }
+
+    @Override
     public Draft getDraft() {
         return draft;
     }

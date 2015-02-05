@@ -823,10 +823,13 @@ public class TableController {
     }
 
     public void endDraft(Draft draft) {
-        for (DraftPlayer player: draft.getPlayers()) {
-            player.prepareDeck();
-            tournament.getPlayer(player.getPlayer().getId()).setDeck(player.getDeck());
+        if (!draft.isAbort()) {
+            for (DraftPlayer player: draft.getPlayers()) {
+                player.prepareDeck();
+                tournament.getPlayer(player.getPlayer().getId()).setDeck(player.getDeck());
+            }
         }
+        tournament.clearDraft(); // free the draft resources after draft step has ended
         tournament.nextStep();
     }
 

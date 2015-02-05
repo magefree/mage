@@ -198,6 +198,7 @@ public class DraftController {
             draftSession.removeDraft();
         }
         TableManager.getInstance().endDraft(tableId, draft);
+        DraftManager.getInstance().removeDraft(draft.getId());
     }
 
     public void kill(UUID userId) {
@@ -259,5 +260,10 @@ public class DraftController {
 
     public void abortDraft() {
         draft.setAbort(true);
+        try {
+            endDraft();
+        } catch(MageException ex) {
+
+        }
     }
 }
