@@ -141,7 +141,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                     PlayerPanelExt.this.avatar.repaint();
                 }
             });
-            timer.init();
+            timer.init(gameId);
         }
     }
 

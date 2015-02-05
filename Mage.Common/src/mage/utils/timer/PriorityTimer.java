@@ -2,6 +2,7 @@ package mage.utils.timer;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.UUID;
 import mage.MageException;
 import mage.interfaces.Action;
 import org.apache.log4j.Logger;
@@ -34,9 +35,9 @@ public class PriorityTimer extends TimerTask {
         this.taskOnTimeout = taskOnTimeout;
     }
 
-    public void init() {
+    public void init(UUID gameId) {
         state = States.INIT;
-        Timer timer = new Timer("Priority Timer", false);
+        Timer timer = new Timer("Priority Timer-" + gameId.toString(), false);
         long delayMs = delay * (int) (1000L / delay);
         timer.scheduleAtFixedRate(this, delayMs, delayMs);
     }
@@ -105,21 +106,4 @@ public class PriorityTimer extends TimerTask {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        long delay = 250L;
-        int count = 5;
-        PriorityTimer timer = new PriorityTimer(count, delay, new Action() {
-            @Override
-            public void execute() throws MageException {
-                System.out.println("Exit");
-                System.exit(0);
-            }
-        });
-        timer.init();
-        timer.start();
-        Thread.sleep(2000);
-        timer.pause();
-        Thread.sleep(3000);
-        timer.resume();
-    }
 }

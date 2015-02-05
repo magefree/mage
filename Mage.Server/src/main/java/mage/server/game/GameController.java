@@ -141,6 +141,9 @@ public class GameController implements GameCallback {
             gameSessionPlayer.CleanUp();
         }
         ChatManager.getInstance().destroyChatSession(chatId);
+        for(PriorityTimer priorityTimer: timers.values()) {
+            priorityTimer.cancel();
+        }
     }
 
     private void init() {
@@ -301,7 +304,7 @@ public class GameController implements GameCallback {
 
         PriorityTimer timer = new PriorityTimer(count, delayMs, executeOnNoTimeLeft);
         timers.put(playerId, timer);
-        timer.init();
+        timer.init(game.getId());
         return timer;
     }
 
