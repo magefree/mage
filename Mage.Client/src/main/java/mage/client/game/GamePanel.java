@@ -606,7 +606,7 @@ public final class GamePanel extends javax.swing.JPanel {
         else {
             this.txtStep.setText("");
         }
-        this.txtPhasesBottomInfo.setText("  " + Integer.toString(game.getSpellsCastCurrentTurn()+99));
+        this.txtPhasesBottomInfo.setText("  " + (game.getSpellsCastCurrentTurn() > 0 ? Integer.toString(game.getSpellsCastCurrentTurn()):""));
         this.txtActivePlayer.setText(game.getActivePlayerName());
         this.txtPriority.setText(game.getPriorityPlayerName());
         this.txtTurn.setText(Integer.toString(game.getTurn()));
