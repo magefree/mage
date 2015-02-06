@@ -62,7 +62,7 @@ public class SickeningShoal extends CardImpl {
         FilterOwnedCard filter = new FilterOwnedCard("a black card with converted mana cost X from your hand");
         filter.add(new ColorPredicate(ObjectColor.BLACK));
         filter.add(Predicates.not(new CardIdPredicate(this.getId()))); // the exile cost can never be paid with the card itself
-        this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter))));
+        this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter), true)));
 
         // Target creature gets -X/-X until end of turn.
         DynamicValue x = new SignInversionDynamicValue(new ExileFromHandCostCardConvertedMana());

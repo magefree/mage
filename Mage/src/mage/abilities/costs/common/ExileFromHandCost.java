@@ -31,8 +31,10 @@ package mage.abilities.costs.common;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
+import mage.abilities.costs.mana.VariableManaCost;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -47,30 +49,49 @@ import mage.target.common.TargetCardInHand;
 public class ExileFromHandCost extends CostImpl {
  
     List<Card> cards = new ArrayList<>();
+    private boolean setXFromCMC;
  
     public ExileFromHandCost(TargetCardInHand target) {
+        this(target, false);
+    }
+    /**
+     * 
+     * @param target
+     * @param setXFromCMC the spells X value on the stack is set to the converted mana costs of the exiled card
+     */
+    public ExileFromHandCost(TargetCardInHand target, boolean setXFromCMC) {
         this.addTarget(target);
         this.text = "exile " + target.getTargetName();
+        this.setXFromCMC = setXFromCMC;
     }
  
-    public ExileFromHandCost(ExileFromHandCost cost) {
+    public ExileFromHandCost(final ExileFromHandCost cost) {
         super(cost);
         for (Card card: cost.cards) {
             this.cards.add(card.copy());
         }
+        this.setXFromCMC = cost.setXFromCMC;
     }
  
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         if (targets.choose(Outcome.Exile, controllerId, sourceId, game)) {
             Player player = game.getPlayer(controllerId);
+            int cmc = 0;
             for (UUID targetId: targets.get(0).getTargets()) {
                 Card card = player.getHand().get(targetId, game);
                 if (card == null) {
                     return false;
                 }
+                cmc += card.getManaCost().convertedManaCost();
                 this.cards.add(card);
                 paid |= player.moveCardToExileWithInfo(card, null, null, ability.getSourceId(), game, Zone.HAND);
+            }
+            if (paid && setXFromCMC) {
+                VariableManaCost vmc = new VariableManaCost();
+                vmc.setAmount(cmc);
+                vmc.setPaid();
+                ability.getManaCostsToPay().add(vmc);
             }
         }
         return paid;

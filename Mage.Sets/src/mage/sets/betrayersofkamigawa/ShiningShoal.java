@@ -68,7 +68,7 @@ public class ShiningShoal extends CardImpl {
         FilterOwnedCard filter = new FilterOwnedCard("a white card with converted mana cost X from your hand");
         filter.add(new ColorPredicate(ObjectColor.WHITE));
         filter.add(Predicates.not(new CardIdPredicate(this.getId()))); // the exile cost can never be paid with the card itself
-        this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter))));
+        this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter), true)));
 
         // The next X damage that a source of your choice would deal to you and/or creatures you control this turn is dealt to target creature or player instead.
         this.getSpellAbility().addEffect(new ShiningShoalPreventDamageTargetEffect(Duration.EndOfTurn, new ExileFromHandCostCardConvertedMana()));

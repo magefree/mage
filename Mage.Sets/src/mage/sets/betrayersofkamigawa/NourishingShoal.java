@@ -58,7 +58,7 @@ public class NourishingShoal extends CardImpl {
         FilterOwnedCard filter = new FilterOwnedCard("a green card with converted mana cost X from your hand");
         filter.add(new ColorPredicate(ObjectColor.GREEN));
         filter.add(Predicates.not(new CardIdPredicate(this.getId()))); // the exile cost can never be paid with the card itself
-        this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter))));
+        this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter), true)));
 
         // You gain X life.
         this.getSpellAbility().addEffect(new GainLifeEffect(new ExileFromHandCostCardConvertedMana()));
