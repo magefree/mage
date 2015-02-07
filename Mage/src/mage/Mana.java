@@ -170,6 +170,10 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     public int count() {
         return red + green + blue + white + black + colorless + any;
     }
+    
+    public int countColored() {
+        return red + green + blue + white + black + any;
+    }
 
     public int count(FilterMana filter) {
         if (filter == null) {
@@ -506,4 +510,74 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         return flag;
     }
 
+    public void setToMana(Mana mana) {
+        this.any = mana.any;
+        this.red = mana.red;
+        this.green = mana.green;
+        this.white = mana.white;
+        this.blue = mana.blue;
+        this.black = mana.black;
+        this.colorless = mana.colorless;
+    }
+
+    public boolean equalManaValue(Mana mana) {
+        return this.any == mana.any &&
+                this.red == mana.red &&
+                this.green == mana.green &&
+                this.white == mana.white &&
+                this.blue == mana.blue &&
+                this.black == mana.black &&
+                this.colorless == mana.colorless;
+    }
+
+    /**
+     * Don't takes any mana into account to be usable in calculating available mana
+     * @param mana
+     * @return 
+     */
+    public boolean includesMana(Mana mana) {
+        return this.green >= mana.green &&
+                this.blue >= mana.blue &&
+                this.white >= mana.white &&
+                this.black >= mana.black &&
+                this.red >= mana.red &&
+                (
+                    this.colorless >= mana.colorless ||
+                    this.countColored() >= mana.countColored() + mana.colorless
+                );
+
+    }
+
+    /**
+     * Returns the mana that is more colored but does not contain
+     * one less mana in any color but colorless
+     * if you call with {1}{W}{R} and {G}{W}{R} you get back {G}{W}{R}
+     * if you call with {G}{W}{R} and {G}{W}{R} you get back {G}{W}{R}
+     * if you call with {G}{W}{B} and {G}{W}{R} you get back null
+     *
+     * @param mana1
+     * @param mana2
+     * @return
+     */
+    public static Mana getMoreValuableMana(Mana mana1, Mana mana2) {
+        Mana moreMana;
+        Mana lessMana;
+        if (mana2.count() > mana1.count() || mana2.getAny() > mana1.getAny() || mana2.getColorless() < mana1.getColorless()) {
+            moreMana = mana2;
+            lessMana = mana1;
+        } else {
+            moreMana = mana1;
+            lessMana = mana2;
+        }
+        if (lessMana.getWhite() > moreMana.getWhite() ||
+                lessMana.getRed() > moreMana.getRed() ||
+                lessMana.getGreen() > moreMana.getGreen() ||
+                lessMana.getBlue() > moreMana.getBlue() ||
+                lessMana.getBlack() > moreMana.getBlack() ||
+                lessMana.getAny() > moreMana.getAny()
+                ) {
+            return null;
+        }
+        return moreMana;
+    }
 }

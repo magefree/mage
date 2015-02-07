@@ -2099,14 +2099,35 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected ManaOptions getManaAvailable(Game game) {
         ManaOptions available = new ManaOptions();
 
-        List<Permanent> manaPerms = this.getAvailableManaProducers(game);
-        for (Permanent perm: manaPerms) {
-            available.addMana(perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game), game);
+        List<Abilities<ManaAbility>> sourceWithoutCosts = new ArrayList<>();
+        List<Abilities<ManaAbility>> sourceWithCosts = new ArrayList<>();
+        for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
+            boolean canAdd = false;
+            boolean withCost = false;
+            Abilities<ManaAbility> manaAbilities = permanent.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game);
+            for (ManaAbility ability: manaAbilities) {
+                if (ability.canActivate(playerId, game)) {
+                    canAdd = true;
+                    if (!ability.getManaCosts().isEmpty()) {
+                        withCost = true;
+                        break;
+                    }
+                }
+            }
+            if (canAdd) {
+                if (withCost) {
+                    sourceWithCosts.add(manaAbilities);
+                } else {
+                    sourceWithoutCosts.add(manaAbilities);
+                }
+            }
         }
 
-        List<Permanent> manaPermsWithCost = this.getAvailableManaProducersWithCost(game);
-        for (Permanent perm: manaPermsWithCost) {
-            available.addManaWithCost(perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game), game);
+        for (Abilities<ManaAbility> manaAbilities: sourceWithoutCosts) {
+            available.addMana(manaAbilities, game);
+        }
+        for (Abilities<ManaAbility> manaAbilities: sourceWithCosts) {
+            available.addManaWithCost(manaAbilities, game);
         }
         return available;
     }
@@ -2117,12 +2138,12 @@ public abstract class PlayerImpl implements Player, Serializable {
         for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
             boolean canAdd = false;
             for (ManaAbility ability: permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
-                if (ability.canActivate(playerId, game)) {
-                    canAdd = true;
-                }
                 if (!ability.getManaCosts().isEmpty()) {
                     canAdd = false;
                     break;
+                }
+                if (ability.canActivate(playerId, game)) {
+                    canAdd = true;
                 }
             }
             if (canAdd) {
@@ -2203,7 +2224,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     protected boolean canPlayCardByAlternateCost(Card sourceObject, ManaOptions available, Ability ability, Game game) {
-        if (!(sourceObject instanceof Permanent)) {
+        if (sourceObject != null && !(sourceObject instanceof Permanent)) {
             for (Ability alternateSourceCostsAbility : sourceObject.getAbilities()) {
                 // if cast for noMana no Alternative costs are allowed
                 if (alternateSourceCostsAbility instanceof AlternativeSourceCosts) {

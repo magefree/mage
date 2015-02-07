@@ -82,10 +82,22 @@ public class ManaOptions extends ArrayList<Mana> {
                 this.clear();
                 for (ManaAbility ability: abilities) {
                     for (Mana netMana: ability.getNetMana(game)) {
+                        SkipAddMana:
                         for (Mana mana: copy) {
                             Mana newMana = new Mana();
                             newMana.add(mana);
                             newMana.add(netMana);
+                            for(Mana existingMana: this) {
+                                if (existingMana.equalManaValue(newMana)) {
+                                   continue SkipAddMana;
+                                }
+                                Mana moreValuable = Mana.getMoreValuableMana(newMana, existingMana);
+                                if (moreValuable != null) {
+                                    // only keep the more valuable mana
+                                    existingMana.setToMana(newMana);
+                                    continue SkipAddMana;
+                                }
+                            }
                             this.add(newMana);
                         }
                     }
@@ -103,6 +115,7 @@ public class ManaOptions extends ArrayList<Mana> {
                 //if there is only one mana option available add it to all the existing options
                 ManaAbility ability = abilities.get(0);
                 List<Mana> netManas =  abilities.get(0).getNetMana(game);
+                // no mana costs
                 if (ability.getManaCosts().isEmpty()) {
                     if (netManas.size() == 1) {
                         addMana(netManas.get(0));
@@ -121,7 +134,7 @@ public class ManaOptions extends ArrayList<Mana> {
                 }
                 else {                    
                     if (netManas.size() == 1) {
-                        addMana(ability.getManaCosts().getMana(), netManas.get(0));
+                        subtractCostAddMana(ability.getManaCosts().getMana(), netManas.get(0), ability.getCosts().isEmpty());
                     } else {
                         List<Mana> copy = copy();
                         this.clear();
@@ -130,7 +143,7 @@ public class ManaOptions extends ArrayList<Mana> {
                                 Mana newMana = new Mana();
                                 newMana.add(mana);
                                 newMana.add(netMana);
-                                addMana(ability.getManaCosts().getMana(), netMana);
+                                subtractCostAddMana(ability.getManaCosts().getMana(), netMana, ability.getCosts().isEmpty());
                             }                        
                         }                    
                     }                                        
@@ -208,14 +221,21 @@ public class ManaOptions extends ArrayList<Mana> {
         return new ManaOptions(this);
     }
 
-    public void addMana(Mana cost, Mana addMana) {
+    public void subtractCostAddMana(Mana cost, Mana addMana, boolean onlyManaCosts) {
         if (isEmpty()) {
             this.add(new Mana());
         }
+        boolean addAny = false;
+        if (addMana.getAny() == 1 && addMana.count() == 1) {
+            addAny = true; // only replace to any will be repeated
+        }
         for (Mana mana: this) {
-            if (mana.contains(cost)) {
+            while (mana.includesMana(cost)) {
                 mana.subtract(cost);
                 mana.add(addMana);
+                if (!addAny) {
+                    break;
+                }
             }
         }
     }
