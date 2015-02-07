@@ -328,7 +328,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public void setWindowTitle() {
-        setTitle(TITLE_NAME + "  Client: " + version.toString() + "  Server: " + ((session != null && session.isConnected()) ? session.getVersionInfo():"<not connected>"));
+        setTitle(TITLE_NAME + "  Client: " 
+                + version == null ? "<not available>" : version.toString() + "  Server: "
+                + ((session != null && session.isConnected()) ? session.getVersionInfo():"<not connected>"));
     }
 
     private void addTooltipContainer() {

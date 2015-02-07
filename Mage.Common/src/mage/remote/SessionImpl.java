@@ -28,6 +28,8 @@
 
 package mage.remote;
 
+import java.io.IOException;
+import java.lang.reflect.UndeclaredThrowableException;
 import java.net.Authenticator;
 import java.net.ConnectException;
 import java.net.MalformedURLException;
@@ -49,7 +51,6 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
-import mage.cards.repository.RepositoryUtil;
 import mage.constants.Constants.SessionState;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
@@ -76,6 +77,7 @@ import org.jboss.remoting.CannotConnectException;
 import org.jboss.remoting.Client;
 import org.jboss.remoting.ConnectionListener;
 import org.jboss.remoting.ConnectionValidator;
+import org.jboss.remoting.InvocationFailureException;
 import org.jboss.remoting.InvokerLocator;
 import org.jboss.remoting.Remoting;
 import org.jboss.remoting.callback.Callback;
@@ -299,6 +301,27 @@ public class SessionImpl implements Session {
         } catch (MalformedURLException ex) {
             logger.fatal("", ex);
             client.showMessage("Unable to connect to server. "  + ex.getMessage());
+        } catch (UndeclaredThrowableException ex) {
+            String addMessage = "";
+            if (ex.getCause() instanceof InvocationFailureException) {
+                InvocationFailureException exep = (InvocationFailureException) ex.getCause();
+                if (exep.getCause() instanceof IOException) {
+                    if (exep.getCause().getMessage().startsWith("Field hash null is not available on current")) {
+                        addMessage = "Probabaly the server version is not compatible to the client. ";
+                    }
+                }
+            }
+            if (addMessage.isEmpty()) {
+                logger.fatal("", ex);
+            }
+            client.showMessage("Unable to connect to server. " + addMessage + (ex.getMessage() != null ? ex.getMessage():""));
+        } catch (IOException ex) {
+            logger.fatal("", ex);
+            String addMessage = "";
+            if (ex.getMessage() != null && ex.getMessage().startsWith("Unable to perform invocation")) {
+                addMessage = "Maybe the server version is not compatible. ";
+            }
+            client.showMessage("Unable to connect to server. " + addMessage + ex.getMessage() != null ? ex.getMessage():"");
         } catch (MageVersionException ex) {
             if (!canceled) {
                 client.showMessage("Unable to connect to server. "  + ex.getMessage());
@@ -1418,7 +1441,11 @@ public class SessionImpl implements Session {
 
     @Override
     public String getVersionInfo() {
-        return serverState.getVersion().toString();
+        if (serverState != null) {
+            return serverState.getVersion().toString();
+        } else {
+            return "<no server state>";
+        }
     }
 
 }
