@@ -49,6 +49,7 @@ public class MapTheWastes extends CardImpl {
         // Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(target, true));
+        
         // Bolster 1.
         this.getSpellAbility().addEffect(new BolsterEffect(1));
     }

@@ -28,18 +28,16 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 
@@ -52,8 +50,14 @@ public class ForbiddingWatchtower extends CardImpl {
     public ForbiddingWatchtower(UUID ownerId) {
         super(ownerId, 352, "Forbidding Watchtower", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "10E";
+
+        // Forbidding Watchtower enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
+
+        // {T}: Add {W} to your mana pool.
         this.addAbility(new WhiteManaAbility());
+
+        // {1}{W}: Forbidding Watchtower becomes a 1/5 white Soldier creature until end of turn. It's still a land.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new ForbiddingWatchtowerToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{W}")));
     }
 

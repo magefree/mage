@@ -1518,60 +1518,65 @@ public abstract class GameImpl implements Game, Serializable {
                     }
                 }
                 else {
-                    Target target = perm.getSpellAbility().getTargets().get(0);
-                    if (target instanceof TargetPermanent) {
-                        Permanent attachedTo = getPermanent(perm.getAttachedTo());
-                        if (attachedTo == null || !attachedTo.getAttachments().contains(perm.getId())) {
-                            // handle bestow unattachment
-                            Card card = this.getCard(perm.getId());
-                            if (card != null && card.getCardType().contains(CardType.CREATURE)) {
-                                UUID wasAttachedTo = perm.getAttachedTo();
-                                perm.attachTo(null, this);
-                                fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, wasAttachedTo, perm.getId(), perm.getControllerId()));
-                            } else {
-                                if (movePermanentToGraveyardWithInfo(perm)) {
-                                    somethingHappened = true;
-                                }
-                            }
-                        }
-                        else {
-                            Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
-                            if (auraFilter instanceof FilterControlledCreaturePermanent) {
-                                if (!((FilterControlledCreaturePermanent)auraFilter).match(attachedTo, perm.getId(), perm.getControllerId(), this)
-                                        || attachedTo.cantBeEnchantedBy(perm, this)) {
+                    if (perm.getSpellAbility().getTargets().isEmpty()) {
+                        Permanent enchanted = this.getPermanent(perm.getAttachedTo());
+                        logger.error("Aura without target: " + perm.getName() + " attached to " + enchanted == null ? " null" : enchanted.getName());
+                    } else {
+                        Target target = perm.getSpellAbility().getTargets().get(0);
+                        if (target instanceof TargetPermanent) {
+                            Permanent attachedTo = getPermanent(perm.getAttachedTo());
+                            if (attachedTo == null || !attachedTo.getAttachments().contains(perm.getId())) {
+                                // handle bestow unattachment
+                                Card card = this.getCard(perm.getId());
+                                if (card != null && card.getCardType().contains(CardType.CREATURE)) {
+                                    UUID wasAttachedTo = perm.getAttachedTo();
+                                    perm.attachTo(null, this);
+                                    fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, wasAttachedTo, perm.getId(), perm.getControllerId()));
+                                } else {
                                     if (movePermanentToGraveyardWithInfo(perm)) {
                                         somethingHappened = true;
                                     }
                                 }
-                            } else {
-                                if (!auraFilter.match(attachedTo, this) || attachedTo.cantBeEnchantedBy(perm, this)) {
-                                    // handle bestow unattachment
-                                    Card card = this.getCard(perm.getId());
-                                    if (card != null && card.getCardType().contains(CardType.CREATURE)) {
-                                        UUID wasAttachedTo = perm.getAttachedTo();
-                                        perm.attachTo(null, this);
-                                        fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, wasAttachedTo, perm.getId(), perm.getControllerId()));
-                                    } else {
+                            }
+                            else {
+                                Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
+                                if (auraFilter instanceof FilterControlledCreaturePermanent) {
+                                    if (!((FilterControlledCreaturePermanent)auraFilter).match(attachedTo, perm.getId(), perm.getControllerId(), this)
+                                            || attachedTo.cantBeEnchantedBy(perm, this)) {
                                         if (movePermanentToGraveyardWithInfo(perm)) {
                                             somethingHappened = true;
+                                        }
+                                    }
+                                } else {
+                                    if (!auraFilter.match(attachedTo, this) || attachedTo.cantBeEnchantedBy(perm, this)) {
+                                        // handle bestow unattachment
+                                        Card card = this.getCard(perm.getId());
+                                        if (card != null && card.getCardType().contains(CardType.CREATURE)) {
+                                            UUID wasAttachedTo = perm.getAttachedTo();
+                                            perm.attachTo(null, this);
+                                            fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, wasAttachedTo, perm.getId(), perm.getControllerId()));
+                                        } else {
+                                            if (movePermanentToGraveyardWithInfo(perm)) {
+                                                somethingHappened = true;
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
-                    }
-                    else if (target instanceof TargetPlayer) {
-                        Player attachedToPlayer = getPlayer(perm.getAttachedTo());
-                        if (attachedToPlayer == null) {
-                            if (movePermanentToGraveyardWithInfo(perm)) {
-                                somethingHappened = true;
-                            }
-                        }
-                        else {
-                            Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
-                            if (!auraFilter.match(attachedToPlayer, this) || attachedToPlayer.hasProtectionFrom(perm, this)) {
+                        else if (target instanceof TargetPlayer) {
+                            Player attachedToPlayer = getPlayer(perm.getAttachedTo());
+                            if (attachedToPlayer == null) {
                                 if (movePermanentToGraveyardWithInfo(perm)) {
                                     somethingHappened = true;
+                                }
+                            }
+                            else {
+                                Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
+                                if (!auraFilter.match(attachedToPlayer, this) || attachedToPlayer.hasProtectionFrom(perm, this)) {
+                                    if (movePermanentToGraveyardWithInfo(perm)) {
+                                        somethingHappened = true;
+                                    }
                                 }
                             }
                         }

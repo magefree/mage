@@ -49,6 +49,7 @@ public class DevouringLight extends CardImpl {
 
         // Convoke
         this.addAbility(new ConvokeAbility());
+        
         // Exile target attacking or blocking creature.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetAttackingOrBlockingCreature());
