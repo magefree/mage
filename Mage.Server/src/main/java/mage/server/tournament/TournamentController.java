@@ -477,9 +477,10 @@ public class TournamentController {
                             logger.debug("Tournament user is missing but player active -> start quit - tournamentId: " + tournament.getId() + " state: " + tableState.toString());
                             // active tournament player but the user is no longer online
                             quit(entry.getKey());
+                        } else {
+                            activePlayers++;
                         }
-                    }
-                    activePlayers++;
+                    }                    
                 }                    
             } else {
                 // tournament player is missing

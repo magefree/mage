@@ -867,14 +867,29 @@ public class TableController {
 
     public boolean isTournamentStillValid() {
         if (table.getTournament() != null) {
-            TournamentController tournamentController = TournamentManager.getInstance().getTournamentController(table.getTournament().getId());
-            if (tournamentController != null) {
-                return tournamentController.isTournamentStillValid(table.getState());
+            if (!table.getState().equals(TableState.WAITING) && !table.getState().equals(TableState.READY_TO_START) && !table.getState().equals(TableState.STARTING) ) {
+                TournamentController tournamentController = TournamentManager.getInstance().getTournamentController(table.getTournament().getId());
+                if (tournamentController != null) {
+                    return tournamentController.isTournamentStillValid(table.getState());
+                } else {
+                    return false;
+                }
             } else {
-                return false;
+                // check if table creator is still a valid user, if not remove table
+                User user = UserManager.getInstance().getUser(userId);
+                return user != null;
             }
         }
-        return true;
+        return false;
+    }
+
+    public UUID getUserId(UUID playerId) {
+        for (Map.Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
+            if (entry.getValue().equals(playerId)) {
+                return entry.getKey();
+            }
+        }
+        return null;
     }
 
     public boolean isMatchTableStillValid() {
