@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -399,7 +400,18 @@ public abstract class TournamentImpl implements Tournament {
                 }
             }
         }
+        resetBufferedCards();
         nextStep();
+    }
+
+    public void resetBufferedCards() {
+        HashSet<ExpansionSet> setsDone = new HashSet<>();
+        for(ExpansionSet set: sets) {
+            if (!setsDone.contains(set)) {
+                set.removeSavedCards();
+                setsDone.add(set);
+            }
+        }
     }
 
     public void playMatch(TournamentPairing pair) {

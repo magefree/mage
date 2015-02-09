@@ -29,6 +29,7 @@
 package mage.game.draft;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -350,5 +351,18 @@ public abstract class DraftImpl implements Draft {
     public void setStarted() {
         started = true;
     }
+
+    @Override
+    public void resetBufferedCards() {
+        HashSet<ExpansionSet> setsDone = new HashSet<>();
+        for(ExpansionSet set: sets) {
+            if (!setsDone.contains(set)) {
+                set.removeSavedCards();
+                setsDone.add(set);
+            }
+        }
+
+    }
+
 
 }

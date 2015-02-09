@@ -54,6 +54,8 @@ public class DragonsMaze extends ExpansionSet {
         return fINSTANCE;
     }
 
+    List<CardInfo> savedSpecialRares = new ArrayList<>();
+
     private DragonsMaze() {
         super("Dragon's Maze", "DGM", "mage.sets.dragonsmaze", new GregorianCalendar(2013, 5, 03).getTime(), SetType.EXPANSION);
         this.blockName = "Return to Ravnica";
@@ -69,10 +71,23 @@ public class DragonsMaze extends ExpansionSet {
     }
 
     @Override
-    public List<CardInfo> getCommon() {
-        CardCriteria criteria = new CardCriteria();
-        criteria.setCodes(this.code).rarities(Rarity.COMMON).notTypes(CardType.LAND).doubleFaced(false);
-        return CardRepository.instance.findCards(criteria);
+    public List<CardInfo> getCardsByRarity(Rarity rarity) {
+        if (rarity.equals(Rarity.COMMON)) {
+            List<CardInfo> savedCardsInfos = savedCards.get(rarity);
+            if (savedCardsInfos == null) {
+                CardCriteria criteria = new CardCriteria();
+                criteria.setCodes(this.code).notTypes(CardType.LAND);
+                criteria.rarities(rarity).doubleFaced(false);
+                if (maxCardNumberInBooster != Integer.MAX_VALUE) {
+                    criteria.maxCardNumber(maxCardNumberInBooster);
+                }
+                savedCardsInfos = CardRepository.instance.findCards(criteria);
+                savedCards.put(rarity, savedCardsInfos);
+            }
+            return savedCardsInfos;
+        } else {
+            return super.getCardsByRarity(rarity);
+        }
     }
 
     @Override
@@ -84,39 +99,42 @@ public class DragonsMaze extends ExpansionSet {
 
     @Override
     public List<CardInfo> getSpecialRare() {
-        List<CardInfo> specialRare = new ArrayList<>();
-        CardCriteria criteria = new CardCriteria();
-        criteria.setCodes("GTC").name("Breeding Pool");
-        specialRare.addAll(CardRepository.instance.findCards(criteria));
-        criteria = new CardCriteria();
-        criteria.setCodes("GTC").name("Godless Shrine");
-        specialRare.addAll(CardRepository.instance.findCards(criteria));
-        criteria = new CardCriteria();
-        criteria.setCodes("GTC").name("Sacred Foundry");
-        specialRare.addAll(CardRepository.instance.findCards(criteria));
-        criteria = new CardCriteria();
-        criteria.setCodes("GTC").name("Stomping Ground");
-        specialRare.addAll(CardRepository.instance.findCards(criteria));
-        criteria = new CardCriteria();
-        criteria.setCodes("GTC").name("Watery Grave");
-        specialRare.addAll(CardRepository.instance.findCards(criteria));
+        List<CardInfo> specialRares = new ArrayList<>();
+        if (savedSpecialRares == null) {
+            CardCriteria criteria = new CardCriteria();
+            criteria.setCodes("GTC").name("Breeding Pool");
+            savedSpecialRares.addAll(CardRepository.instance.findCards(criteria));
+            criteria = new CardCriteria();
+            criteria.setCodes("GTC").name("Godless Shrine");
+            savedSpecialRares.addAll(CardRepository.instance.findCards(criteria));
+            criteria = new CardCriteria();
+            criteria.setCodes("GTC").name("Sacred Foundry");
+            savedSpecialRares.addAll(CardRepository.instance.findCards(criteria));
+            criteria = new CardCriteria();
+            criteria.setCodes("GTC").name("Stomping Ground");
+            savedSpecialRares.addAll(CardRepository.instance.findCards(criteria));
+            criteria = new CardCriteria();
+            criteria.setCodes("GTC").name("Watery Grave");
+            savedSpecialRares.addAll(CardRepository.instance.findCards(criteria));
 
-        criteria = new CardCriteria();
-        criteria.setCodes("RTR").name("Blood Crypt");
-        specialRare.addAll(CardRepository.instance.findCards(criteria));
-        criteria = new CardCriteria();
-        criteria.setCodes("RTR").name("Hallowed Fountain");
-        specialRare.addAll(CardRepository.instance.findCards(criteria));
-        criteria = new CardCriteria();
-        criteria.setCodes("RTR").name("Overgrown Tomb");
-        specialRare.addAll(CardRepository.instance.findCards(criteria));
-        criteria = new CardCriteria();
-        criteria.setCodes("RTR").name("Steam Vents");
-        specialRare.addAll(CardRepository.instance.findCards(criteria));
-        criteria = new CardCriteria();
-        criteria.setCodes("RTR").name("Temple Garden");
-        specialRare.addAll(CardRepository.instance.findCards(criteria));
-        return specialRare;
+            criteria = new CardCriteria();
+            criteria.setCodes("RTR").name("Blood Crypt");
+            savedSpecialRares.addAll(CardRepository.instance.findCards(criteria));
+            criteria = new CardCriteria();
+            criteria.setCodes("RTR").name("Hallowed Fountain");
+            savedSpecialRares.addAll(CardRepository.instance.findCards(criteria));
+            criteria = new CardCriteria();
+            criteria.setCodes("RTR").name("Overgrown Tomb");
+            savedSpecialRares.addAll(CardRepository.instance.findCards(criteria));
+            criteria = new CardCriteria();
+            criteria.setCodes("RTR").name("Steam Vents");
+            savedSpecialRares.addAll(CardRepository.instance.findCards(criteria));
+            criteria = new CardCriteria();
+            criteria.setCodes("RTR").name("Temple Garden");
+            savedSpecialRares.addAll(CardRepository.instance.findCards(criteria));
+        }
+        specialRares.addAll(savedSpecialRares);
+        return specialRares;
     }
     
     @Override

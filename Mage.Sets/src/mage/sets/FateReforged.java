@@ -47,6 +47,8 @@ public class FateReforged extends ExpansionSet {
 
     private static final FateReforged fINSTANCE =  new FateReforged();
 
+    List<CardInfo> savedSpecialRares = new ArrayList<>();
+
     public static FateReforged getInstance() {
         return fINSTANCE;
     }
@@ -65,11 +67,24 @@ public class FateReforged extends ExpansionSet {
         this.ratioBoosterMythic = 8;
     }
 
- @Override
-    public List<CardInfo> getCommon() {
-        CardCriteria criteria = new CardCriteria();
-        criteria.setCodes(this.code).rarities(Rarity.COMMON).notTypes(CardType.LAND).doubleFaced(false);
-        return CardRepository.instance.findCards(criteria);
+    @Override
+    public List<CardInfo> getCardsByRarity(Rarity rarity) {
+        if (rarity.equals(Rarity.COMMON)) {
+            List<CardInfo> savedCardsInfos = savedCards.get(rarity);
+            if (savedCardsInfos == null) {
+                CardCriteria criteria = new CardCriteria();
+                criteria.setCodes(this.code).notTypes(CardType.LAND);
+                criteria.rarities(rarity).doubleFaced(false);
+                if (maxCardNumberInBooster != Integer.MAX_VALUE) {
+                    criteria.maxCardNumber(maxCardNumberInBooster);
+                }
+                savedCardsInfos = CardRepository.instance.findCards(criteria);
+                savedCards.put(rarity, savedCardsInfos);
+            }
+            return savedCardsInfos;
+        } else {
+            return super.getCardsByRarity(rarity);
+        }
     }
 
     @Override
@@ -81,22 +96,25 @@ public class FateReforged extends ExpansionSet {
 
     @Override
     public List<CardInfo> getSpecialRare() {
-        List<CardInfo> specialRare = new ArrayList<>();
-        CardCriteria criteria = new CardCriteria();
-        criteria.setCodes("KTK").name("Bloodstained Mire");
-        specialRare.addAll(CardRepository.instance.findCards(criteria));
-        criteria = new CardCriteria();
-        criteria.setCodes("KTK").name("Flooded Strand");
-        specialRare.addAll(CardRepository.instance.findCards(criteria));
-        criteria = new CardCriteria();
-        criteria.setCodes("KTK").name("Polluted Delta");
-        specialRare.addAll(CardRepository.instance.findCards(criteria));
-        criteria = new CardCriteria();
-        criteria.setCodes("KTK").name("Windswept Heath");
-        specialRare.addAll(CardRepository.instance.findCards(criteria));
-        criteria = new CardCriteria();
-        criteria.setCodes("KTK").name("Wooded Foothills");
-        specialRare.addAll(CardRepository.instance.findCards(criteria));
-        return specialRare;
+        List<CardInfo> specialRares = new ArrayList<>();
+        if (savedSpecialRares.isEmpty()) {
+            CardCriteria criteria = new CardCriteria();
+            criteria.setCodes("KTK").name("Bloodstained Mire");
+            savedSpecialRares.addAll(CardRepository.instance.findCards(criteria));
+            criteria = new CardCriteria();
+            criteria.setCodes("KTK").name("Flooded Strand");
+            savedSpecialRares.addAll(CardRepository.instance.findCards(criteria));
+            criteria = new CardCriteria();
+            criteria.setCodes("KTK").name("Polluted Delta");
+            savedSpecialRares.addAll(CardRepository.instance.findCards(criteria));
+            criteria = new CardCriteria();
+            criteria.setCodes("KTK").name("Windswept Heath");
+            savedSpecialRares.addAll(CardRepository.instance.findCards(criteria));
+            criteria = new CardCriteria();
+            criteria.setCodes("KTK").name("Wooded Foothills");
+            savedSpecialRares.addAll(CardRepository.instance.findCards(criteria));
+        }
+        specialRares.addAll(savedSpecialRares);
+        return specialRares;
     }      
 }

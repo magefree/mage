@@ -189,7 +189,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
             if (card != null) {
                 cards.add(card);
             } else {
-                // this bug seems to happen, if cause is removed, this check can also be removed
+                // seems like this can happen during the cancelation of a game
                 logger.error("Card not found  cardId: " + cardId + " gameId: " + game.getId() );
             }
         }

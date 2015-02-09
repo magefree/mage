@@ -54,6 +54,7 @@ public class BoosterDraft extends DraftImpl {
                 fireUpdatePlayersEvent();
             }
         }
+        resetBufferedCards();
         this.fireEndDraftEvent();
     }
 
