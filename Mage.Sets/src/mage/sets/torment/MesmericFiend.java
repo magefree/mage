@@ -142,7 +142,7 @@ class MesmericFiendLeaveEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            ExileZone exZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
+            ExileZone exZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source.getSourceId(), true));
             if (exZone != null) {
                 for (Card card : exZone.getCards(game)) {
                     if (card != null) {
