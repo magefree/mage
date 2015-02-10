@@ -66,7 +66,10 @@ public abstract class ManaEffect extends OneShotEffect {
         if (source.getAbilityType().equals(AbilityType.MANA)) {
             for (Cost cost: source.getCosts()) {
                 if (cost instanceof TapSourceCost) {
-                    game.fireEvent(new ManaEvent(GameEvent.EventType.TAPPED_FOR_MANA, source.getSourceId(), source.getSourceId(), source.getControllerId(), mana));
+                    ManaEvent event = new ManaEvent(GameEvent.EventType.TAPPED_FOR_MANA, source.getSourceId(), source.getSourceId(), source.getControllerId(), mana);
+                    if (!game.replaceEvent(event)) {
+                        game.fireEvent(event);
+                    }
                 }
             }
         }
