@@ -225,15 +225,15 @@ public class ManaOptions extends ArrayList<Mana> {
         if (isEmpty()) {
             this.add(new Mana());
         }
-        boolean addAny = false;
-        if (addMana.getAny() == 1 && addMana.count() == 1) {
-            addAny = true; // only replace to any will be repeated
+        boolean repeatable = false;
+        if (addMana.getAny() == 1 && addMana.count() == 1 && onlyManaCosts) {
+            repeatable = true; // only replace to any with mana costs only will be repeated if able
         }
         for (Mana mana: this) {
             while (mana.includesMana(cost)) {
                 mana.subtract(cost);
                 mana.add(addMana);
-                if (!addAny) {
+                if (!repeatable) {
                     break;
                 }
             }
