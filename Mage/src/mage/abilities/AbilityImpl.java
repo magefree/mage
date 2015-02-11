@@ -106,6 +106,7 @@ public abstract class AbilityImpl implements Ability {
     protected boolean costModificationActive = true;
     protected boolean activated = false;
     protected boolean worksFaceDown = false;
+    protected MageObject sourceObject;
 
     public AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
@@ -142,6 +143,7 @@ public abstract class AbilityImpl implements Ability {
         this.costModificationActive = ability.costModificationActive;
         this.worksFaceDown = ability.worksFaceDown;
         this.abilityWord = ability.abilityWord;
+        this.sourceObject = ability.sourceObject;
     }
 
     @Override
@@ -230,7 +232,7 @@ public abstract class AbilityImpl implements Ability {
 
         // TODO: Because all (non targeted) choices have to be done during resolution
         // this has to be removed, if all using effects are changed
-        MageObject sourceObject = game.getObject(sourceId);
+        sourceObject = game.getObject(sourceId);
         if (sourceObject != null) {
             sourceObject.adjustChoices(this, game);
         }
@@ -1024,6 +1026,19 @@ public abstract class AbilityImpl implements Ability {
         this.worksFaceDown = worksFaceDown;
     }
 
+    @Override
+    public MageObject getSourceObject(Game game) {
+        if (sourceObject != null) {
+            return sourceObject;
+        } else {
+            return game.getObject(sourceId);
+        }
+    }
+
+    @Override
+    public void setSourceObject(MageObject sourceObject) {
+        this.sourceObject = sourceObject;
+    }
 
 
 }

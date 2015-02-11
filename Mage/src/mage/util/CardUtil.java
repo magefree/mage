@@ -69,6 +69,8 @@ public class CardUtil {
     private static final String regexGreen = ".*\\x7b.{0,2}G.{0,2}\\x7d.*";
     private static final String regexWhite = ".*\\x7b.{0,2}W.{0,2}\\x7d.*";
 
+    private static final String SOURCE_EXILE_ZONE_TEXT = "SourceExileZone";
+    
     static String numberStrings[] = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
                                       "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "ninteen", "twenty"};
 
@@ -483,13 +485,28 @@ public class CardUtil {
     }
 
     public static UUID getCardExileZoneId(Game game, UUID sourceId, boolean previous) {
-        String key = getCardZoneString("SourceExileZone", sourceId, game, previous);
+        return getExileZoneId(getCardZoneString(SOURCE_EXILE_ZONE_TEXT, sourceId, game, previous), game);
+    }
+    
+    public static UUID getObjectExileZoneId(Game game, MageObject mageObject) {
+        int zoneChangeCounter = 0;
+        if (mageObject instanceof Card) {
+            zoneChangeCounter = ((Card) mageObject).getZoneChangeCounter();
+        }
+        return getExileZoneId(getObjectZoneString(SOURCE_EXILE_ZONE_TEXT,mageObject.getId(), game, zoneChangeCounter, false), game);
+    }
+    
+    public static UUID getExileZoneId(Game game, UUID objectId, int zoneChangeCounter) {
+        return getExileZoneId(getObjectZoneString(SOURCE_EXILE_ZONE_TEXT,objectId, game, zoneChangeCounter, false), game);
+    }
+    
+    public static UUID getExileZoneId(String key, Game game) {
         UUID exileId = (UUID) game.getState().getValue(key);
         if (exileId == null) {
             exileId = UUID.randomUUID();
             game.getState().setValue(key, exileId);
         }
-        return exileId;
+        return exileId;        
     }
 
     /**
@@ -506,18 +523,23 @@ public class CardUtil {
         return getCardZoneString(text, cardId, game, false);
     }
 
-    public static String getCardZoneString(String text, UUID cardId, Game game, boolean previous) {
-
+    public static String getCardZoneString(String text, UUID cardId, Game game, boolean previous) {        
+        int zoneChangeCounter= 0;
+        Card card = game.getCard(cardId); // if called for a token, the id is enough
+        if (card != null) {
+            zoneChangeCounter = card.getZoneChangeCounter();
+        }
+        return getObjectZoneString(text,cardId, game, zoneChangeCounter, previous);
+    }
+    
+    public static String getObjectZoneString(String text, UUID objectId, Game game, int zoneChangeCounter, boolean previous) {
         StringBuilder uniqueString = new StringBuilder();
         if (text != null) {
             uniqueString.append(text);
         }
-        uniqueString.append(cardId);
-        Card card = game.getCard(cardId); // if called for a token, the id is enough
-        if (card != null) {
-            uniqueString.append(previous ? card.getZoneChangeCounter() - 1: card.getZoneChangeCounter());
-        }
-        return uniqueString.toString();
+        uniqueString.append(objectId);
+        uniqueString.append(previous ? zoneChangeCounter - 1: zoneChangeCounter);
+        return uniqueString.toString();        
     }
     
     /**

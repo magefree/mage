@@ -30,7 +30,6 @@ package mage.sets.stronghold;
 import java.util.UUID;
 
 import mage.MageObject;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.cards.CardImpl;
@@ -41,8 +40,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
-import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.target.targetpointer.FixedTarget;
 

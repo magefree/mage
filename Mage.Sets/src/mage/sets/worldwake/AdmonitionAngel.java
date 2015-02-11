@@ -73,7 +73,7 @@ public class AdmonitionAngel extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Landfall - Whenever a land enters the battlefield under your control, you may exile target nonland permanent other than Admonition Angel.
-        TriggeredAbility ability = new LandfallAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect("Admonition Angel Exile"), true);
+        TriggeredAbility ability = new LandfallAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect(), true);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 

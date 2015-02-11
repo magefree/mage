@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common;
 
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
@@ -62,8 +63,9 @@ public class CastSourceTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType().equals(GameEvent.EventType.SPELL_CAST) && event.getSourceId().equals(this.getSourceId())) {
-            if (getSourceObject() != null && getSourceObject() instanceof Spell) {
-                Spell spell = (Spell)getSourceObject();
+            MageObject sourceObject = getSourceObject(game);
+            if (sourceObject != null && (sourceObject instanceof Spell)) {
+                Spell spell = (Spell)sourceObject;
                 if (spell.getSpellAbility() != null) {
                     for (Effect effect : getEffects()) {
                         effect.setValue(SOURCE_CAST_SPELL_ABILITY, spell.getSpellAbility());

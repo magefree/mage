@@ -43,7 +43,6 @@ import mage.players.Player;
 public abstract class TriggeredAbilityImpl extends AbilityImpl implements TriggeredAbility {
 
     protected boolean optional;
-    protected MageObject sourceObject;
 
     public TriggeredAbilityImpl(Zone zone, Effect effect) {
         this(zone, effect, false);
@@ -152,12 +151,4 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         return sb.toString();
     }
 
-    public MageObject getSourceObject() {
-        return sourceObject;
-    }
-
-    @Override
-    public void setSourceObject(MageObject sourceObject) {
-        this.sourceObject = sourceObject;
-    }
 }

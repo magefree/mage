@@ -58,9 +58,9 @@ public class NephaliaSmuggler extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {3}{U}, {tap}: Exile another target creature you control, then return that card to the battlefield under your control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect("Exile Nephalia Smuggler"), new ManaCostsImpl("{3}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect(), new ManaCostsImpl("{3}{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect());
+        ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect(true));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

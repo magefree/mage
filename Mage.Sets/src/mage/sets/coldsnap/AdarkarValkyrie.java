@@ -77,7 +77,7 @@ public class AdarkarValkyrie extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
-        // {tap}: When target creature other than Adarkar Valkyrie dies this turn, return that card to the battlefield under your control.
+        // {T}: When target creature other than Adarkar Valkyrie dies this turn, return that card to the battlefield under your control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AdarkarValkyrieEffect(), new TapSourceCost());
         Target target = new TargetCreaturePermanent(filter);
         ability.addTarget(target);
@@ -98,7 +98,7 @@ class AdarkarValkyrieEffect extends OneShotEffect {
 
     public AdarkarValkyrieEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "When target creature other than Adarkar Valkyrie dies this turn, return that card to the battlefield under your control";
+        this.staticText = "When target creature other than {this} dies this turn, return that card to the battlefield under your control";
     }
 
     public AdarkarValkyrieEffect(final AdarkarValkyrieEffect effect) {

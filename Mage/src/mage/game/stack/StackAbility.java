@@ -476,5 +476,15 @@ public class StackAbility implements StackObject, Ability {
         this.ability.setWorksFaceDown(worksFaceDown);
     }
     
+    @Override
+    public MageObject getSourceObject(Game game) {
+        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setSourceObject(MageObject sourceObject) {
+        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+    }    
+
     
 }

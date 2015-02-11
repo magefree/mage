@@ -29,15 +29,19 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -45,12 +49,6 @@ import mage.players.Player;
  */
 public class ExileTargetForSourceEffect extends OneShotEffect {
 
-    private String exileZone = null;
-
-    public ExileTargetForSourceEffect(String exileZone) {
-        this();
-        this.exileZone = exileZone;
-    }
 
     public ExileTargetForSourceEffect() {
         super(Outcome.Exile);
@@ -58,7 +56,6 @@ public class ExileTargetForSourceEffect extends OneShotEffect {
 
     public ExileTargetForSourceEffect(final ExileTargetForSourceEffect effect) {
         super(effect);
-        this.exileZone = effect.exileZone;
     }
 
     @Override
@@ -69,15 +66,16 @@ public class ExileTargetForSourceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-            UUID exileId = source.getSourceId();
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
+            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+            UUID exileId = CardUtil.getObjectExileZoneId(game, sourceObject);
             if (permanent != null) {
-                return controller.moveCardToExileWithInfo(permanent, exileId, exileZone, source.getSourceId(), game, Zone.BATTLEFIELD);
+                return controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getLogName(), source.getSourceId(), game, Zone.BATTLEFIELD);
             } else {
-                Card card = game.getCard(targetPointer.getFirst(game, source));
+                Card card = game.getCard(getTargetPointer().getFirst(game, source));
                 if (card != null) {
-                    return controller.moveCardToExileWithInfo(card, exileId, exileZone, source.getSourceId(), game, game.getState().getZone(card.getId()));
+                    return controller.moveCardToExileWithInfo(card, exileId, sourceObject.getLogName(), source.getSourceId(), game, game.getState().getZone(card.getId()));
                 }
             }
         }

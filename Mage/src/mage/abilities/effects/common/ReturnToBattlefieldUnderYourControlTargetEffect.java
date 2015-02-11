@@ -28,6 +28,8 @@
 
 package mage.abilities.effects.common;
 
+import java.util.UUID;
+import mage.MageObject;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.abilities.Ability;
@@ -35,6 +37,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -42,13 +45,25 @@ import mage.players.Player;
  */
 public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffect {
 
+    private boolean fromExileZone;
+    
     public ReturnToBattlefieldUnderYourControlTargetEffect() {
+        this(false);
+    }
+    
+    /**
+     * 
+     * @param fromExileZone - the card will only be retunred if it's still in the sour obect specific exile zone
+     */
+    public ReturnToBattlefieldUnderYourControlTargetEffect(boolean fromExileZone) {
         super(Outcome.Benefit);
         staticText = "return that card to the battlefield under your control";
+        this.fromExileZone = fromExileZone;
     }
 
     public ReturnToBattlefieldUnderYourControlTargetEffect(final ReturnToBattlefieldUnderYourControlTargetEffect effect) {
         super(effect);
+        this.fromExileZone = effect.fromExileZone;
     }
 
     @Override
@@ -59,17 +74,23 @@ public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffe
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Card card = game.getCard(targetPointer.getFirst(game, source));
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {            
+            Card card = null;        
+            if (fromExileZone) {
+                UUID exilZoneId = CardUtil.getObjectExileZoneId(game, sourceObject);
+                if (exilZoneId != null) {
+                card = game.getExile().getExileZone(exilZoneId).get(getTargetPointer().getFirst(game, source), game);
+                }
+            } else {
+                card = game.getCard(targetPointer.getFirst(game, source));
+            }
             if (card != null) {
                 Zone currentZone = game.getState().getZone(card.getId());
-                if (controller.putOntoBattlefieldWithInfo(card, game, currentZone, source.getSourceId())) {
-                    return true;
-                }
+                controller.putOntoBattlefieldWithInfo(card, game, currentZone, source.getSourceId());
             }
-
+            return true;
         }
         return false;
     }
-
 }

@@ -44,5 +44,5 @@ public interface TriggeredAbility extends Ability {
     boolean checkTrigger(GameEvent event, Game game);
     boolean checkInterveningIfClause(Game game);
     TriggeredAbility copy();
-    void setSourceObject(MageObject mageObject);
+    
 }

@@ -49,12 +49,16 @@ public class ZoneChangeTriggeredAbility extends TriggeredAbilityImpl {
     protected String rule;
 
     public ZoneChangeTriggeredAbility(Zone fromZone, Zone toZone, Effect effect, String rule, boolean optional) {
-        super(fromZone, effect, optional);
+        this(fromZone, fromZone, toZone, effect, rule, optional);
+    }
+    
+    public ZoneChangeTriggeredAbility(Zone worksInZone, Zone fromZone, Zone toZone, Effect effect, String rule, boolean optional) {
+        super(worksInZone, effect, optional);
         this.fromZone = fromZone;
         this.toZone = toZone;
         this.rule = rule;
     }
-
+    
     public ZoneChangeTriggeredAbility(Zone toZone, Effect effect, String rule, boolean optional) {
         super(toZone, effect, optional);
         this.fromZone = null;
@@ -62,7 +66,7 @@ public class ZoneChangeTriggeredAbility extends TriggeredAbilityImpl {
         this.rule = rule;
     }
 
-    public ZoneChangeTriggeredAbility(ZoneChangeTriggeredAbility ability) {
+    public ZoneChangeTriggeredAbility(final ZoneChangeTriggeredAbility ability) {
         super(ability);
         this.fromZone = ability.fromZone;
         this.toZone = ability.toZone;

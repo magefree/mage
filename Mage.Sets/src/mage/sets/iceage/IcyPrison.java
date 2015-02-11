@@ -42,8 +42,6 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.target.Target;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -59,7 +57,7 @@ public class IcyPrison extends CardImpl {
         this.color.setBlue(true);
 
         // When Icy Prison enters the battlefield, exile target creature.
-        Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(this.getLogName()), false);
+        Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), false);
         ability1.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability1);
 

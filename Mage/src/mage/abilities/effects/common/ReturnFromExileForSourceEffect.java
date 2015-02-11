@@ -30,9 +30,12 @@ package mage.abilities.effects.common;
 
 import java.util.LinkedList;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import static mage.constants.Zone.BATTLEFIELD;
@@ -41,6 +44,7 @@ import static mage.constants.Zone.HAND;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -75,9 +79,10 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            UUID exileId = source.getSourceId();
+        Player controller = game.getPlayer(source.getControllerId());        
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
+            UUID exileId = CardUtil.getObjectExileZoneId(game, sourceObject);
             ExileZone exile = game.getExile().getExileZone(exileId);
             if (exile != null) { // null is valid if source left battlefield before enters the battlefield effect resolved
                 LinkedList<UUID> cards = new LinkedList<>(exile);
@@ -86,7 +91,7 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
                     if (card == null) {
                         return false;
                     }
-                    game.informPlayers(controller.getName() + " moves " + card.getLogName() + " to " + zone.toString().toLowerCase());
+                    game.informPlayers(controller.getName() + " moves " + card.getLogName() + " from exile to " + zone.toString().toLowerCase());
                     card.moveToZone(zone, source.getSourceId(), game, tapped);
                 }
                 exile.clear();

@@ -45,7 +45,8 @@ public class EyeOfNowhere extends CardImpl {
         super(ownerId, 59, "Eye of Nowhere", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}{U}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-        this.color.setBlue(true);
+        
+        // Return target permanent to its owner's hand.        
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent());
 

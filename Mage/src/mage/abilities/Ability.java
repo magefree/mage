@@ -476,5 +476,22 @@ public interface Ability extends Controllable, Serializable {
     void setCostModificationActive(boolean active);
 
     boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, boolean noMana, Player controller, Game game);
-
+    
+    /**
+     * Sets the object that actually existed while a ability triggerd or
+     * an ability was activated.
+     * 
+     * @param mageObject 
+     */
+    void setSourceObject(MageObject mageObject);
+    
+    /**
+     * Returns the object that actually existed while a ability triggerd or 
+     * an ability was activated.
+     * If not set yet, the current object will be retrieved from the game.
+     * 
+     * @param game
+     * @return 
+     */
+    MageObject getSourceObject(Game game);
 }

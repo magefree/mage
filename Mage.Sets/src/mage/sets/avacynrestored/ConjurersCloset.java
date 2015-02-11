@@ -48,8 +48,8 @@ public class ConjurersCloset extends CardImpl {
         this.expansionSetCode = "AVR";
 
         // At the beginning of your end step, you may exile target creature you control, then return that card to the battlefield under your control.
-        Ability ability = new BeginningOfYourEndStepTriggeredAbility(new ExileTargetForSourceEffect("Conjurer's Closet Exile"), true);
-        ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect());
+        Ability ability = new BeginningOfYourEndStepTriggeredAbility(new ExileTargetForSourceEffect(), true);
+        ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect(true));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

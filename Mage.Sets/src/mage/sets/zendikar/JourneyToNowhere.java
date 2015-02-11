@@ -53,12 +53,16 @@ public class JourneyToNowhere extends CardImpl {
         super(ownerId, 14, "Journey to Nowhere", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "ZEN";
         this.color.setWhite(true);
+        
+        // When Journey to Nowhere enters the battlefield, exile target creature.
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
         filter.add(new AnotherPredicate());
-        Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect("Journey to Nowhere exile"), false);
+        Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), false);
         Target target = new TargetPermanent(filter);
         ability1.addTarget(target);
         this.addAbility(ability1);
+        
+        // When Journey to Nowhere leaves the battlefield, return the exiled card to the battlefield under its owner's control.
         Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false);
         this.addAbility(ability2);
     }

@@ -49,6 +49,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
 
 /*
  * @author LevelX2
@@ -151,14 +152,16 @@ class ChampionExileCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         Player controller = game.getPlayer(controllerId);
-        if (controller != null) {
+        MageObject sourceObject = ability.getSourceObject(game);        
+        if (controller != null && sourceObject != null) {
             if (targets.choose(Outcome.Exile, controllerId, sourceId, game)) {
+                UUID exileId = CardUtil.getObjectExileZoneId(game, sourceObject);
                 for (UUID targetId: targets.get(0).getTargets()) {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent == null) {
                         return false;
                     }
-                    paid |= controller.moveCardToExileWithInfo(permanent, sourceId, exileZone, sourceId, game, Zone.BATTLEFIELD);
+                    paid |= controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getLogName() + " championed permanents", sourceId, game, Zone.BATTLEFIELD);
                 }
             }
         }

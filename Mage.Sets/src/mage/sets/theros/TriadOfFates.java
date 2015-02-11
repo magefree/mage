@@ -67,7 +67,7 @@ public class TriadOfFates extends CardImpl {
     }
 
     public TriadOfFates(UUID ownerId) {
-        super(ownerId, 206, "Triad of Fates", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");
+            super(ownerId, 206, "Triad of Fates", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");
         this.expansionSetCode = "THS";
         this.supertype.add("Legendary");
         this.subtype.add("Human");
@@ -85,7 +85,7 @@ public class TriadOfFates extends CardImpl {
         ability.addTarget(target);
         this.addAbility(ability);
         // {W}, {T}: Exile target creature that has a fate counter on it, then return it to the battlefield under its owner's control.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect("Triad of Fates"), new ManaCostsImpl("{W}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect(), new ManaCostsImpl("{W}"));
         ability.addCost(new TapSourceCost());
         target = new TargetCreaturePermanent(filterCounter);
         ability.addTarget(target);

@@ -25,62 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.sets.ravnika;
 
 import java.util.UUID;
-
+import mage.MageInt;
+import mage.abilities.common.ZoneChangeTriggeredAbility;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.keyword.DredgeAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
-import mage.cards.CardImpl;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.target.Target;
-import mage.target.TargetPermanent;
 
 /**
- * @author nantuko
+ *
+ * @author LevelX2
  */
-public class FiendHunter extends CardImpl {
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+public class GolgariBrownscale extends CardImpl {
 
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
-    public FiendHunter(UUID ownerId) {
-        super(ownerId, 15, "Fiend Hunter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-        this.expansionSetCode = "ISD";
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
-
-        this.color.setWhite(true);
-        this.power = new MageInt(1);
+    public GolgariBrownscale(UUID ownerId) {
+        super(ownerId, 166, "Golgari Brownscale", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
+        this.expansionSetCode = "RAV";
+        this.subtype.add("Lizard");
+        this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // When Fiend Hunter enters the battlefield, you may exile another target creature.
-        Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), true);
-        Target target = new TargetPermanent(filter);
-        ability1.addTarget(target);
-        this.addAbility(ability1);
-
-        // When Fiend Hunter leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false);
-        this.addAbility(ability2);
+        // When Golgari Brownscale is put into your hand from your graveyard, you gain 2 life.
+        this.addAbility(new ZoneChangeTriggeredAbility(Zone.ALL, Zone.GRAVEYARD, Zone.HAND, new GainLifeEffect(2), 
+                "When {this} is put into your hand from your graveyard,", false));
+        
+        // Dredge 2
+        this.addAbility(new DredgeAbility(2));
     }
 
-    public FiendHunter(final FiendHunter card) {
+    public GolgariBrownscale(final GolgariBrownscale card) {
         super(card);
     }
 
     @Override
-    public FiendHunter copy() {
-        return new FiendHunter(this);
+    public GolgariBrownscale copy() {
+        return new GolgariBrownscale(this);
     }
 }
