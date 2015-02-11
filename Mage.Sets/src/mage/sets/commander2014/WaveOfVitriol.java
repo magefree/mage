@@ -40,7 +40,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterBasicLandCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -84,11 +84,7 @@ class WaveOfVitriolEffect extends OneShotEffect {
                 new CardTypePredicate(CardType.ENCHANTMENT),
                 Predicates.and(
                         new CardTypePredicate(CardType.LAND),
-                        Predicates.not(new NamePredicate("Island")),
-                        Predicates.not(new NamePredicate("Mountain")),
-                        Predicates.not(new NamePredicate("Plains")),
-                        Predicates.not(new NamePredicate("Forest")),
-                        Predicates.not(new NamePredicate("Swamp"))
+                        Predicates.not(new SupertypePredicate("Basic"))
                 )
 
         ));

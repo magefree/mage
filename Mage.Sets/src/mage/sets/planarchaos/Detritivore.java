@@ -48,6 +48,7 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -124,11 +125,7 @@ class NonBasicLandsInOpponentsGraveyards implements DynamicValue {
 
     static {
         filter.add(new CardTypePredicate(CardType.LAND));
-        filter.add(Predicates.not(new NamePredicate("Island")));
-        filter.add(Predicates.not(new NamePredicate("Forest")));
-        filter.add(Predicates.not(new NamePredicate("Mountain")));
-        filter.add(Predicates.not(new NamePredicate("Swamp")));
-        filter.add(Predicates.not(new NamePredicate("Plains")));
+        filter.add(Predicates.not(new SupertypePredicate("Basic")));
     }
 
 

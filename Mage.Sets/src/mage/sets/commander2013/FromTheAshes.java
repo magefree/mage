@@ -101,7 +101,7 @@ class FromTheAshesEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Map<UUID, Integer> playerAmount = new HashMap<UUID, Integer>();
+            Map<UUID, Integer> playerAmount = new HashMap<>();
             for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
@@ -110,16 +110,16 @@ class FromTheAshesEffect extends OneShotEffect {
                         amount++;
                         permanent.destroy(source.getSourceId(), game, false);
                     }
-                    playerAmount.put(playerId, new Integer(amount));
+                    playerAmount.put(playerId, amount);
                 }
             }
             for(Map.Entry<UUID, Integer> entry : playerAmount.entrySet()) {
                 Player player = game.getPlayer(entry.getKey());
                 if (player != null) {
-                    TargetCardInLibrary target = new TargetCardInLibrary(0, entry.getValue().intValue(), new FilterBasicLandCard());
+                    TargetCardInLibrary target = new TargetCardInLibrary(0, entry.getValue(), new FilterBasicLandCard());
                     if (player.searchLibrary(target, game)) {
                         if (target.getTargets().size() > 0) {
-                            for (UUID cardId: (List<UUID>)target.getTargets()) {
+                            for (UUID cardId: target.getTargets()) {
                                 Card card = player.getLibrary().getCard(cardId, game);
                                 if (card != null) {
                                     card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId(), false);

@@ -39,21 +39,13 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
-import mage.target.common.TargetLandPermanent;
+import mage.target.common.TargetNonBasicLandPermanent;
 
 /**
  *
  * @author Loki
  */
 public class Wasteland extends CardImpl {
-    private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic land");
-
-    static {
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
-    }
 
     public Wasteland(UUID ownerId) {
         super(ownerId, 340, "Wasteland", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
@@ -64,7 +56,7 @@ public class Wasteland extends CardImpl {
         // {tap}, Sacrifice Wasteland: Destroy target nonbasic land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetLandPermanent(filter));
+        ability.addTarget(new TargetNonBasicLandPermanent());
         this.addAbility(ability);
     }
 

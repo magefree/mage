@@ -37,11 +37,8 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetLandPermanent;
+import mage.target.common.TargetNonBasicLandPermanent;
 
 /**
  *
@@ -49,12 +46,6 @@ import mage.target.common.TargetLandPermanent;
  */
 public class ShivanHarvest extends CardImpl {
     
-    private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic land");
-
-    static {
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
-    }
-
     public ShivanHarvest(UUID ownerId) {
         super(ownerId, 167, "Shivan Harvest", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
         this.expansionSetCode = "INV";
@@ -62,7 +53,7 @@ public class ShivanHarvest extends CardImpl {
         // {1}{R}, Sacrifice a creature: Destroy target nonbasic land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{R}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
-        ability.addTarget(new TargetLandPermanent(filter));
+        ability.addTarget(new TargetNonBasicLandPermanent());
         this.addAbility(ability);
     }
 

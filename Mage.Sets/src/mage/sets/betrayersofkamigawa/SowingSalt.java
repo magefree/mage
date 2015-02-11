@@ -32,21 +32,13 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.ExileTargetAndSearchGraveyardHandLibraryEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetNonBasicLandPermanent;
 
 /**
  *
  * @author LevelX2
  */
 public class SowingSalt extends CardImpl {
-    private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic land");
-
-    static {
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
-    }
 
     public SowingSalt(UUID ownerId) {
         super(ownerId, 118, "Sowing Salt", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
@@ -56,7 +48,7 @@ public class SowingSalt extends CardImpl {
 
         // Exile target nonbasic land. Search its controller's graveyard, hand, and library for all cards with 
         // the same name as that land and exile them. Then that player shuffles his or her library.
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetNonBasicLandPermanent());
         this.getSpellAbility().addEffect(new ExileTargetAndSearchGraveyardHandLibraryEffect(false, "its controller's","all cards with the same name as that land"));
     }
 

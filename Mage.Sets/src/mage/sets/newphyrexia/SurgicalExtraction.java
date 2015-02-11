@@ -41,6 +41,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
@@ -58,6 +59,7 @@ public class SurgicalExtraction extends CardImpl {
     private static final FilterCard filter = new FilterCard("card in a graveyard other than a basic land card");
 
     static {
+        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
         filter.add(Predicates.not(new SupertypePredicate("Basic")));
     }
 
