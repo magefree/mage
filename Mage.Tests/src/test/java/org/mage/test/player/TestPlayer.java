@@ -64,6 +64,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.constants.Zone;
 import mage.target.TargetSource;
@@ -366,12 +367,19 @@ public class TestPlayer extends ComputerPlayer {
                     String[] targetList = targetDefinition.split("\\^");
                     boolean targetFound = false;
                     for (String targetName: targetList) {
+                        boolean allowCopy = true;
+                        if (targetName.endsWith("[no copy]")) {
+                            allowCopy = false;
+                            targetName = targetName.substring(0, targetName.length()-9);
+                        }
                         for (Permanent permanent : game.getBattlefield().getAllActivePermanents((FilterPermanent)target.getFilter(), game)) {
                             if (permanent.getName().equals(targetName) || (permanent.getName()+"-"+permanent.getExpansionSetCode()).equals(targetName)) {
-                                if (((TargetPermanent)target).canTarget(source.getControllerId(), permanent.getId(), source, game) && !target.getTargets().contains(permanent.getId())) {
-                                    target.add(permanent.getId(), game);
-                                    targetFound = true;
-                                    break;
+                                if (((TargetPermanent)target).canTarget(source == null ? this.getId(): source.getControllerId(), permanent.getId(), source, game) && !target.getTargets().contains(permanent.getId())) {
+                                    if (!permanent.isCopy() || allowCopy) {
+                                        target.add(permanent.getId(), game);
+                                        targetFound = true;
+                                        break;
+                                    }
                                 }
                             }
                         }
@@ -620,6 +628,10 @@ public class TestPlayer extends ComputerPlayer {
             result = false;
         }
         return result;
+    }
+
+    public ManaOptions getAvailableManaTest(Game game) {
+        return getManaAvailable(game);
     }
 }
 

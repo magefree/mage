@@ -171,7 +171,7 @@ public class ManaOptions extends ArrayList<Mana> {
                                 Mana newMana = new Mana();
                                 newMana.add(mana);
                                 if (mana.contains(ability.getManaCosts().getMana())) {
-                                    newMana.subtract(ability.getManaCosts().getMana());
+                                    newMana.subtractCost(ability.getManaCosts().getMana());
                                     newMana.add(netMana);
                                 }
                                 this.add(newMana);
@@ -231,7 +231,7 @@ public class ManaOptions extends ArrayList<Mana> {
         }
         for (Mana mana: this) {
             while (mana.includesMana(cost)) {
-                mana.subtract(cost);
+                mana.subtractCost(cost);
                 mana.add(addMana);
                 if (!repeatable) {
                     break;

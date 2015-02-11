@@ -167,6 +167,43 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         any -= mana.getAny();
     }
 
+    public void subtractCost(Mana cost) {
+        red -= cost.getRed();
+        green -= cost.getGreen();
+        blue -= cost.getBlue();
+        white -= cost.getWhite();
+        black -= cost.getBlack();
+        any -= cost.getAny();
+        colorless -= cost.getColorless();
+        while (colorless < 0) {
+            if (red > 0) {
+                red--;
+                colorless++;
+                continue;
+            }
+            if (green > 0) {
+                green--;
+                colorless++;
+                continue;
+            }
+            if (blue > 0) {
+                blue--;
+                colorless++;
+                continue;
+            }
+            if (white > 0) {
+                white--;
+                colorless++;
+                continue;
+            }
+            if (black > 0) {
+                black--;
+                colorless++;
+            }
+        }
+    }
+
+
     public int count() {
         return red + green + blue + white + black + colorless + any;
     }
