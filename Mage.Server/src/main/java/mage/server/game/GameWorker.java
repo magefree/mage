@@ -38,7 +38,7 @@ import org.apache.log4j.Logger;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GameWorker implements Callable {
+public class GameWorker<T> implements Callable {
 
     private static final Logger logger = Logger.getLogger(GameWorker.class);
 
@@ -56,6 +56,7 @@ public class GameWorker implements Callable {
     public Object call() {
         try {
             logger.debug("GAME WORKER started gameId "+ game.getId());
+            Thread.currentThread().setName("GAME " + game.getId());
             game.start(choosingPlayerId);
             game.fireUpdatePlayersEvent();
             gameController.gameResult(game.getWinner());
