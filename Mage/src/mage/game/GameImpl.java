@@ -1520,7 +1520,7 @@ public abstract class GameImpl implements Game, Serializable {
                 else {
                     if (perm.getSpellAbility().getTargets().isEmpty()) {
                         Permanent enchanted = this.getPermanent(perm.getAttachedTo());
-                        logger.error("Aura without target: " + perm.getName() + " attached to " + enchanted == null ? " null" : enchanted.getName());
+                        logger.error("Aura without target: " + perm.getName() + " attached to " + (enchanted == null ? " null" : enchanted.getName()));
                     } else {
                         Target target = perm.getSpellAbility().getTargets().get(0);
                         if (target instanceof TargetPermanent) {
