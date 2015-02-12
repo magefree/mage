@@ -25,41 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.sets.dissension;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CounterTargetEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.target.common.TargetActivatedAbility;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class Squelch extends CardImpl {
+public class AzoriusGuildmage extends CardImpl {
 
-    public Squelch(UUID ownerId) {
-        super(ownerId, 92, "Squelch", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "CHK";
+    public AzoriusGuildmage(UUID ownerId) {
+        super(ownerId, 141, "Azorius Guildmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W/U}{W/U}");
+        this.expansionSetCode = "DIS";
+        this.subtype.add("Vedalken");
+        this.subtype.add("Wizard");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        this.color.setBlue(true);
-
-        // Counter target activated ability.
-        this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addTarget(new TargetActivatedAbility());
-        // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        // {2}{W}: Tap target creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{2}{W}"));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
+        
+        // {2}{U}: Counter target activated ability.
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{2}{U}"));
+        ability.addTarget(new TargetActivatedAbility());
+        this.addAbility(ability);
     }
 
-    public Squelch(final Squelch card) {
+    public AzoriusGuildmage(final AzoriusGuildmage card) {
         super(card);
     }
 
     @Override
-    public Squelch copy() {
-        return new Squelch(this);
+    public AzoriusGuildmage copy() {
+        return new AzoriusGuildmage(this);
     }
 }

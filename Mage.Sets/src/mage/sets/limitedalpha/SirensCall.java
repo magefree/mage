@@ -25,41 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.sets.limitedalpha;
 
 import java.util.UUID;
-import mage.abilities.effects.common.CounterTargetEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.target.common.TargetActivatedAbility;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class Squelch extends CardImpl {
+public class SirensCall extends mage.sets.fourthedition.SirensCall {
 
-    public Squelch(UUID ownerId) {
-        super(ownerId, 92, "Squelch", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "CHK";
-
-        this.color.setBlue(true);
-
-        // Counter target activated ability.
-        this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addTarget(new TargetActivatedAbility());
-        // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+    public SirensCall(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 78;
+        this.expansionSetCode = "LEA";
     }
 
-    public Squelch(final Squelch card) {
+    public SirensCall(final SirensCall card) {
         super(card);
     }
 
     @Override
-    public Squelch copy() {
-        return new Squelch(this);
+    public SirensCall copy() {
+        return new SirensCall(this);
     }
 }
