@@ -55,6 +55,19 @@ public class MageObjectReference implements Comparable<MageObjectReference> {
         this.zoneChangeCounter = card.getZoneChangeCounter();
     }
 
+    /**
+     * That values manually (can be used to let it reference to a Permanent
+     * that is not yet on the battlefield.
+     * 
+     * @param sourceId
+     * @param zoneChangeCounter
+     * @param game 
+     */
+    public MageObjectReference(UUID sourceId, int zoneChangeCounter, Game game) {
+        this.sourceId = sourceId;
+        this.zoneChangeCounter = zoneChangeCounter;
+    }
+
     public MageObjectReference(UUID sourceId, Game game) {
         MageObject mageObject = game.getObject(sourceId);
         this.sourceId = sourceId;

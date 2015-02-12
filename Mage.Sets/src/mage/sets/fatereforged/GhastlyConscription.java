@@ -30,6 +30,7 @@ package mage.sets.fatereforged;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -110,19 +111,19 @@ class GhastlyConscriptionEffect extends OneShotEffect {
             Ability newSource = source.copy();
             newSource.setWorksFaceDown(true);
             for (Card card: cardsToManifest) {
+                card.setFaceDown(true);
+                ManaCosts manaCosts = null;
+                if (card.getCardType().contains(CardType.CREATURE)) {
+                    manaCosts = card.getSpellAbility().getManaCosts();
+                    if (manaCosts == null) {
+                        manaCosts = new ManaCostsImpl("{0}");
+                    }
+                }
+                MageObjectReference objectReference= new MageObjectReference(card.getId(), card.getZoneChangeCounter() +1, game);
+                game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, FaceDownType.MANIFESTED), newSource);                                
                 if (card.moveToZone(Zone.BATTLEFIELD, newSource.getSourceId(), game, false)) {
                     game.informPlayers(new StringBuilder(controller.getName())
                             .append(" puts facedown card from exile onto the battlefield").toString());
-                    ManaCosts<ManaCost> manaCosts = null;
-                    if (card.getCardType().contains(CardType.CREATURE)) {
-                        manaCosts = card.getSpellAbility().getManaCosts();
-                        if (manaCosts == null) {
-                            manaCosts = new ManaCostsImpl<>("{0}");
-                        }
-                    }
-                    ContinuousEffect effect = new BecomesFaceDownCreatureEffect(manaCosts, true, Duration.Custom, FaceDownType.MANIFESTED);
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
-                    game.addEffect(effect, newSource);
                 }
             }
             return true;

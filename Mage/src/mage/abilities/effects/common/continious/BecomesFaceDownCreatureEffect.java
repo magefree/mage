@@ -29,6 +29,7 @@ package mage.abilities.effects.common.continious;
 
 import java.util.ArrayList;
 import java.util.List;
+import mage.MageObjectReference;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnFaceUpAbility;
@@ -66,26 +67,26 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
 
     protected int zoneChangeCounter;
     protected Ability turnFaceUpAbility = null;
-    protected boolean useTargetPointer;
+    protected MageObjectReference objectReference= null;
     protected boolean foundPermanent;
     protected FaceDownType faceDownType;
 
 
     public BecomesFaceDownCreatureEffect(Costs<Cost> turnFaceUpCosts, FaceDownType faceDownType){
-        this(turnFaceUpCosts, false, faceDownType);
+        this(turnFaceUpCosts, null, faceDownType);
     }
 
-    public BecomesFaceDownCreatureEffect(Costs<Cost> turnFaceUpCosts, boolean useTargetPointer, FaceDownType faceDownType) {
-        this(turnFaceUpCosts, useTargetPointer, Duration.WhileOnBattlefield, faceDownType);
+    public BecomesFaceDownCreatureEffect(Costs<Cost> turnFaceUpCosts, MageObjectReference objectReference, FaceDownType faceDownType) {
+        this(turnFaceUpCosts, objectReference, Duration.WhileOnBattlefield, faceDownType);
     }
 
-    public BecomesFaceDownCreatureEffect(Cost cost, boolean useTargetPointer, Duration duration, FaceDownType faceDownType) {
-        this(createCosts(cost), useTargetPointer, duration, faceDownType);
+    public BecomesFaceDownCreatureEffect(Cost cost, MageObjectReference objectReference, Duration duration, FaceDownType faceDownType) {
+        this(createCosts(cost), objectReference, duration, faceDownType);
     }
 
-    public BecomesFaceDownCreatureEffect(Costs<Cost> turnFaceUpCosts, boolean useTargetPointer, Duration duration, FaceDownType faceDownType) {
+    public BecomesFaceDownCreatureEffect(Costs<Cost> turnFaceUpCosts, MageObjectReference objectReference, Duration duration, FaceDownType faceDownType) {
         super(duration, Outcome.BecomeCreature);
-        this.useTargetPointer = useTargetPointer;
+        this.objectReference = objectReference;
         this.zoneChangeCounter = Integer.MIN_VALUE;
         if (turnFaceUpCosts != null) {
             this.turnFaceUpAbility = new TurnFaceUpAbility(turnFaceUpCosts);
@@ -102,7 +103,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
         if (effect.turnFaceUpAbility != null) {
             this.turnFaceUpAbility = effect.turnFaceUpAbility.copy();
         }
-        this.useTargetPointer = effect.useTargetPointer;
+        this.objectReference = effect.objectReference;
         this.foundPermanent = effect.foundPermanent;
         this.faceDownType = effect.faceDownType;
     }
@@ -124,8 +125,8 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent permanent;
-        if (useTargetPointer) {
-            permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (objectReference != null) {
+            permanent = objectReference.getPermanent(game);
         } else {
             permanent = game.getPermanent(source.getSourceId());
         }

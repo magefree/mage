@@ -167,4 +167,42 @@ public class ManifestTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "face down creature", 2, 2);
 
     }
+    
+    /*
+        Had a Foundry Street Denizen and another creature out.
+        Opponent Reality Shift'ed the other creature, manifested card was a red creature. This pumped the foundry street denizen even though it shouldn't.
+    */
+    @Test
+    public void testColorOfManifestedCardDoesNotCount() {
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        // Exile target creature. Its controller manifests the top card of his or her library {1}{U}
+        addCard(Zone.HAND, playerB, "Reality Shift");
+
+        // Gore Swine {2}{R}
+        // 4/1
+        addCard(Zone.LIBRARY, playerA, "Gore Swine");
+        
+        // Whenever another red creature enters the battlefield under your control, Foundry Street Denizen gets +1/+0 until end of turn.
+        addCard(Zone.BATTLEFIELD, playerA, "Foundry Street Denizen");
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Reality Shift", "Silvercoat Lion");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        // no life gain
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        assertGraveyardCount(playerB, "Reality Shift", 1);
+        assertExileCount("Silvercoat Lion" , 1);
+        // a facedown creature is on the battlefield
+        assertPermanentCount(playerA, "face down creature", 1);
+        assertPowerToughness(playerA, "face down creature", 2, 2);
+        assertPowerToughness(playerA, "Foundry Street Denizen", 1, 1);
+
+    }    
+    
 }

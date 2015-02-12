@@ -48,6 +48,7 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.InfectAbility;
 import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.MorphAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.keyword.WitherAbility;
@@ -762,6 +763,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void entersBattlefield(UUID sourceId, Game game, Zone fromZone, boolean fireEvent) {
         controlledFromStartOfControllerTurn = false;
+        if (this.isFaceDown()) {
+            // remove some attributes here, bceause first apply effects comes later otherwise abilities (e.g. color related) will unintended trigger 
+            MorphAbility.setPermanentToFaceDownCreature(this);
+        }
         EntersTheBattlefieldEvent event = new EntersTheBattlefieldEvent(this, sourceId, getControllerId(), fromZone);
         if (!game.replaceEvent(event)) {
             if (fireEvent) {

@@ -32,6 +32,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -130,25 +131,19 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
             Ability newSource = source.copy();
             newSource.setWorksFaceDown(true);
             for (Card card : cardsToManifest) {
+                card.setFaceDown(true);
+                ManaCosts manaCosts = null;
+                if (card.getCardType().contains(CardType.CREATURE)) {
+                    manaCosts = card.getSpellAbility().getManaCosts();
+                    if (manaCosts == null) {
+                        manaCosts = new ManaCostsImpl("{0}");
+                    }
+                }
+                MageObjectReference objectReference= new MageObjectReference(card.getId(), card.getZoneChangeCounter() +1, game);
+                game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, FaceDownType.MANIFESTED), newSource);                                
                 if (card.moveToZone(Zone.BATTLEFIELD, newSource.getSourceId(), game, false)) {
                     game.informPlayers(new StringBuilder(player.getName())
                             .append(" puts facedown card from exile onto the battlefield").toString());
-                    ManaCosts<ManaCost> manaCosts = null;
-                    if (card.getCardType().contains(CardType.CREATURE)) {
-                        manaCosts = card.getSpellAbility().getManaCosts();
-                        if (manaCosts == null) {
-                            manaCosts = new ManaCostsImpl<>("{0}");
-                        }
-                    }
-                    ContinuousEffect effect = new BecomesFaceDownCreatureEffect(
-                            manaCosts,
-                            true,
-                            Duration.Custom,
-                            FaceDownType.MANIFESTED
-                    );
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
-                    game.addEffect(effect, newSource);
-
                 }
             }
             return true;

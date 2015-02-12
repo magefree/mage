@@ -28,6 +28,7 @@
 package mage.abilities.effects.keyword;
 
 import java.util.List;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -83,21 +84,21 @@ public class ManifestTargetPlayerEffect extends OneShotEffect {
             List<Card> cards = targetPlayer.getLibrary().getTopCards(game, amount);
             for (Card card: cards) {
                 card.setFaceDown(true);
+                ManaCosts manaCosts = null;
+                if (card.getCardType().contains(CardType.CREATURE)) {
+                    manaCosts = card.getSpellAbility().getManaCosts();
+                    if (manaCosts == null) {
+                        manaCosts = new ManaCostsImpl("{0}");
+                    }
+                }
+                MageObjectReference objectReference= new MageObjectReference(card.getId(), card.getZoneChangeCounter() +1, game);
+                game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, FaceDownType.MANIFESTED), newSource);                
                 targetPlayer.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, newSource.getSourceId());
                 Permanent permanent = game.getPermanent(card.getId());
                 if (permanent != null) {
                     permanent.setManifested(true);
-                    ManaCosts manaCosts = null;
-                    if (card.getCardType().contains(CardType.CREATURE)) {
-                        manaCosts = card.getSpellAbility().getManaCosts();
-                        if (manaCosts == null) {
-                            manaCosts = new ManaCostsImpl("{0}");
-                        }
-                    }
-                    ContinuousEffect effect = new BecomesFaceDownCreatureEffect(manaCosts, true, Duration.Custom, FaceDownType.MANIFESTED);
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
-                    game.addEffect(effect, newSource);
-                }            }
+                }            
+            }
             return true;
         }
         return false;

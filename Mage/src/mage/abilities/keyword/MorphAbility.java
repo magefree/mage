@@ -282,7 +282,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
         permanent.getSubtype().clear();
         permanent.getSupertype().clear();
         permanent.getManaCost().clear();
-        permanent.setExpansionSetCode("KTK");
+//        permanent.setExpansionSetCode("KTK");
         permanent.setRarity(Rarity.NA);
         
     }
