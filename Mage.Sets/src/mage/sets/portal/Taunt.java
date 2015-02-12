@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
 public class Taunt extends CardImpl {
 
     public Taunt(UUID ownerId) {
-        super(ownerId, 94, "Taunt", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{U}");
+        super(ownerId, 72, "Taunt", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{U}");
         this.expansionSetCode = "POR";
 
         // During target player's next turn, creatures that player controls attack you if able.
