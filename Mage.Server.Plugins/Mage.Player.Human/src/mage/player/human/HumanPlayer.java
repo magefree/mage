@@ -919,7 +919,7 @@ public class HumanPlayer extends PlayerImpl {
     public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID sourceId, Game game) {
         updateGameStatePriority("assignDamage", game);
         int remainingDamage = damage;
-        while (remainingDamage > 0) {
+        while (remainingDamage > 0 && isInGame()) {
             Target target = new TargetCreatureOrPlayer();
             if (singleTargetName != null) {
                 target.setTargetName(singleTargetName);

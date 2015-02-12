@@ -113,7 +113,7 @@ class MasterOfTheWildHuntEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<UUID> wolves = new ArrayList<UUID>();
+        List<UUID> wolves = new ArrayList<>();
         Permanent target = game.getPermanent(source.getFirstTarget());
         if (target != null && game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0) {
             for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
