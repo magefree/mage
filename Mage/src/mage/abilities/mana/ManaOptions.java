@@ -227,7 +227,8 @@ public class ManaOptions extends ArrayList<Mana> {
         }
         boolean repeatable = false;
         if (addMana.getAny() == 1 && addMana.count() == 1 && onlyManaCosts) {
-            repeatable = true; // only replace to any with mana costs only will be repeated if able
+            // deactivated because it does cause loops TODO: Find reason
+            //repeatable = true; // only replace to any with mana costs only will be repeated if able
         }
         for (Mana mana: this) {
             while (mana.includesMana(cost)) {
