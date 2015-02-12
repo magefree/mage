@@ -443,6 +443,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public void removeSummoningSickness() {
         this.controlledFromStartOfControllerTurn = true;
     }
+    
+    @Override
+    public boolean wasControlledFromStartOfControllerTurn() {
+        return this.controlledFromStartOfControllerTurn;
+    }
 
     @Override
     public boolean hasSummoningSickness() {

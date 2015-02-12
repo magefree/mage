@@ -79,6 +79,7 @@ public interface Permanent extends Card, Controllable {
     boolean canBeTargetedBy(MageObject source, UUID controllerId, Game game);
     boolean hasProtectionFrom(MageObject source, Game game);
     boolean cantBeEnchantedBy(MageObject source, Game game);
+    boolean wasControlledFromStartOfControllerTurn();
     boolean hasSummoningSickness();
     int getDamage();
     int damage(int damage, UUID sourceId, Game game, boolean combat, boolean preventable);
