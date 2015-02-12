@@ -34,6 +34,7 @@ import mage.abilities.effects.Effect;
 import mage.constants.AbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 
 /**
@@ -72,6 +73,12 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
+        return true;
+    }
+
+    // TODO: Implement for all TriggeredAbilities so this default method can be removed
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
         return true;
     }
 

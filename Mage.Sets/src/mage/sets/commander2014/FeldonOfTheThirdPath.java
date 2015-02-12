@@ -118,6 +118,7 @@ class FeldonOfTheThirdPathEffect extends OneShotEffect {
             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
+            delayedAbility.setSourceObject(source.getSourceObject(game));
             game.addDelayedTriggeredAbility(delayedAbility);
             return true;
         }

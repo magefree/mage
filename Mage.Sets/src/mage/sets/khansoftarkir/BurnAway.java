@@ -84,16 +84,19 @@ class BurnAwayDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.ZONE_CHANGE)) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.isDiesEvent() && zEvent.getTarget() != null && zEvent.getTargetId().equals(getTargets().getFirstTarget())) {
-                this.getTargets().clear(); // else spell fizzels because target creature died
-                Target target = new TargetPlayer();
-                target.add(zEvent.getTarget().getControllerId(), game);
-                this.addTarget(target);
-                return true;
-            }
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (zEvent.isDiesEvent() && zEvent.getTarget() != null && zEvent.getTargetId().equals(getTargets().getFirstTarget())) {
+            this.getTargets().clear(); // else spell fizzels because target creature died
+            Target target = new TargetPlayer();
+            target.add(zEvent.getTarget().getControllerId(), game);
+            this.addTarget(target);
+            return true;
         }
         return false;
     }

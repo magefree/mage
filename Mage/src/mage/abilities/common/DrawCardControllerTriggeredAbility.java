@@ -48,11 +48,13 @@ public class DrawCardControllerTriggeredAbility  extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DREW_CARD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DREW_CARD && event.getPlayerId().equals(controllerId)) {
-            return true;
-        }
-        return false;
+        return event.getPlayerId().equals(controllerId);
     }
 
     @Override

@@ -29,6 +29,7 @@ package mage.abilities.common.delayed;
 
 import java.util.LinkedList;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -69,8 +70,13 @@ public class OnLeaveReturnExiledToBattlefieldAbility extends DelayedTriggeredAbi
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())) {
+        if (event.getTargetId().equals(this.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
                 return true;
@@ -99,21 +105,24 @@ class ReturnExiledPermanentsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            // because source already changed zone we have to get previous related exile zone
-            ExileZone exile = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source.getSourceId(), true));
-            if (exile != null) {
-                LinkedList<UUID> cards = new LinkedList<>(exile);
-                for (UUID cardId : cards) {
-                    Card card = game.getCard(cardId);
-                    if (card != null) {
-                        Player owner = game.getPlayer(card.getOwnerId());
-                        if (owner != null && owner.isInGame()) {
-                            owner.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject != null && controller != null) {
+            UUID exileZone = CardUtil.getObjectExileZoneId(game, sourceObject);
+            if (exileZone != null) {
+                ExileZone exile = game.getExile().getExileZone(exileZone);
+                if (exile != null) {
+                    LinkedList<UUID> cards = new LinkedList<>(exile);
+                    for (UUID cardId : cards) {
+                        Card card = game.getCard(cardId);
+                        if (card != null) {
+                            Player owner = game.getPlayer(card.getOwnerId());
+                            if (owner != null && owner.isInGame()) {
+                                owner.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
+                            }
                         }
                     }
+                    exile.clear();
                 }
-                exile.clear();
                 return true;
             }
         }

@@ -54,25 +54,28 @@ public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbili
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event instanceof DamagedPlayerEvent;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event instanceof DamagedPlayerEvent) {
-            if (targetController.equals(TargetController.OPPONENT)) {
-                Player controller = game.getPlayer(this.getControllerId());
-                if (controller == null || !game.isOpponent(controller, event.getPlayerId())) {
-                    return false;
+        if (targetController.equals(TargetController.OPPONENT)) {
+            Player controller = game.getPlayer(this.getControllerId());
+            if (controller == null || !game.isOpponent(controller, event.getPlayerId())) {
+                return false;
+            }
+        }
+        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
+        Permanent p = game.getPermanent(event.getSourceId());
+        if ((!onlyCombat || damageEvent.isCombatDamage())
+                && p != null && p.getAttachments().contains(this.getSourceId())) {
+            if (setFixedTargetPointer) {
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }
             }
-            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-            Permanent p = game.getPermanent(event.getSourceId());
-            if ((!onlyCombat || damageEvent.isCombatDamage())
-                    && p != null && p.getAttachments().contains(this.getSourceId())) {
-                if (setFixedTargetPointer) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                    }
-                }
-                return true;
-            }
+            return true;
         }
         return false;
     }

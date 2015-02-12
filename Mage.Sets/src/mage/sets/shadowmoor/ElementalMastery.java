@@ -117,8 +117,9 @@ class ElementalMasteryEffect extends OneShotEffect {
                 ExileTargetEffect exileEffect = new ExileTargetEffect("exile the token");
                 exileEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
                 DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-                delayedAbility.setSourceId(creatureAttached.getId());
-                delayedAbility.setControllerId(creatureAttached.getControllerId());
+                delayedAbility.setSourceId(source.getId());
+                delayedAbility.setControllerId(source.getControllerId());
+                delayedAbility.setSourceObject(source.getSourceObject(game));
                 game.addDelayedTriggeredAbility(delayedAbility);
             }
             return true;

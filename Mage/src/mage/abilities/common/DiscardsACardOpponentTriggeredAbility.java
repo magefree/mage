@@ -31,11 +31,13 @@ public class DiscardsACardOpponentTriggeredAbility extends TriggeredAbilityImpl 
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DISCARDED_CARD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.DISCARDED_CARD && game.getOpponents(controllerId).contains(event.getPlayerId())) {
-            return true;
-        }
-        return false;
+        return game.getOpponents(controllerId).contains(event.getPlayerId());
     }
 
     @Override

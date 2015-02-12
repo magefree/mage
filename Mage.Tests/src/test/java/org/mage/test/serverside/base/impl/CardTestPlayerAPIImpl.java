@@ -806,6 +806,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *               e.g.    "creatureName1^creatureName2"
      *               you can qualify the target additional by setcode
      *               e.g. "creatureName-M15"
+     *               you can add [no copy] to prohibite targets that are copied
      */
     public void addTarget(TestPlayer player, String target) {
         player.addTarget(target);

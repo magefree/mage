@@ -67,25 +67,29 @@ public class DealsDamageToACreatureAttachedTriggeredAbility extends TriggeredAbi
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getType() == EventType.DAMAGED_CREATURE
-                    && (!combatOnly || ((DamagedCreatureEvent) event).isCombatDamage())) {
-                Permanent attachment = game.getPermanent(this.getSourceId());
-                  if (attachment != null
-                          && attachment.getAttachedTo() != null
-                          && event.getSourceId().equals(attachment.getAttachedTo())
-                    ) {
-                            if (setTargetPointer) {
-                                for (Effect effect : this.getEffects()) {
-                                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                                        effect.setValue("damage", event.getAmount());
-                                }
-                            }
-                            return true;
-                    }
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
+    }
 
-            }
-            return false;
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (!combatOnly || ((DamagedCreatureEvent) event).isCombatDamage()) {
+            Permanent attachment = game.getPermanent(this.getSourceId());
+              if (attachment != null
+                      && attachment.getAttachedTo() != null
+                      && event.getSourceId().equals(attachment.getAttachedTo())
+                ) {
+                        if (setTargetPointer) {
+                            for (Effect effect : this.getEffects()) {
+                                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                                    effect.setValue("damage", event.getAmount());
+                            }
+                        }
+                        return true;
+                }
+
+        }
+        return false;
     }
 
     @Override

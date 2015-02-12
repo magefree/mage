@@ -49,8 +49,13 @@ public class TurnedFaceUpSourceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TURNEDFACEUP;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (EventType.TURNEDFACEUP.equals(event.getType()) && event.getTargetId().equals(this.getSourceId())) {
+        if (event.getTargetId().equals(this.getSourceId())) {
             if (setTargetPointer) {
                 for (Effect effect: getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));

@@ -28,9 +28,9 @@
 
 package mage.abilities.common;
 
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -41,8 +41,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class OnEventTriggeredAbility extends TriggeredAbilityImpl {
 
-    private EventType eventType;
-    private String eventName;
+    private final EventType eventType;
+    private final String eventName;
     private boolean allPlayers = false;
 
     public OnEventTriggeredAbility(EventType eventType, String eventName, Effect effect) {
@@ -72,11 +72,14 @@ public class OnEventTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == eventType;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == eventType) {
-            if (allPlayers || event.getPlayerId().equals(this.controllerId) ) {
-                return true;
-            }
+        if (allPlayers || event.getPlayerId().equals(this.controllerId) ) {
+            return true;
         }
         return false;
     }

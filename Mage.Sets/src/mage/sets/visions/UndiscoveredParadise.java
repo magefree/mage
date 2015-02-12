@@ -87,6 +87,7 @@ class UndiscoveredParadiseEffect extends OneShotEffect {
             AtBeginningOfUntapDelayedTriggeredAbility delayedAbility = new AtBeginningOfUntapDelayedTriggeredAbility(new ReturnToHandSourceEffect(true));
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
+            delayedAbility.setSourceObject(source.getSourceObject(game));
             game.addDelayedTriggeredAbility(delayedAbility);
             return true;
         }

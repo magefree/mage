@@ -28,11 +28,9 @@
 
 package mage.abilities;
 
-import mage.MageObject;
+import java.util.UUID;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-
-import java.util.UUID;
 
 /**
  *
@@ -41,8 +39,19 @@ import java.util.UUID;
 public interface TriggeredAbility extends Ability {
 
     void trigger(Game game, UUID controllerId);
+    
+    /**
+     * This check for the relevant event types is called at first to prevent further actions if
+     * the current event is ignored from this triggered ability
+     * @param event
+     * @param game
+     * @return
+     */
+    boolean checkEventType(GameEvent event, Game game);
     boolean checkTrigger(GameEvent event, Game game);
     boolean checkInterveningIfClause(Game game);
+
+    @Override
     TriggeredAbility copy();
     
 }

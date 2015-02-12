@@ -41,51 +41,54 @@ public class BeginningOfUntapTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.UNTAP_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.UNTAP_STEP_PRE) {
-            switch (targetController) {
-                case YOU:
-                    boolean yours = event.getPlayerId().equals(this.controllerId);
-                    if (yours) {
-                        if (getTargets().size() == 0) {
-                            for (Effect effect : this.getEffects()) {
-                                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                            }
+        switch (targetController) {
+            case YOU:
+                boolean yours = event.getPlayerId().equals(this.controllerId);
+                if (yours) {
+                    if (getTargets().size() == 0) {
+                        for (Effect effect : this.getEffects()) {
+                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                         }
                     }
-                    return yours;
-                case NOT_YOU:
-                    Player controller = game.getPlayer(this.getControllerId());
-                    if (controller != null && controller.getInRange().contains(event.getPlayerId()) && !event.getPlayerId().equals(this.getControllerId())) {
-                        if (getTargets().size() == 0) {
-                            for (Effect effect : this.getEffects()) {
-                                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                            }
+                }
+                return yours;
+            case NOT_YOU:
+                Player controller = game.getPlayer(this.getControllerId());
+                if (controller != null && controller.getInRange().contains(event.getPlayerId()) && !event.getPlayerId().equals(this.getControllerId())) {
+                    if (getTargets().size() == 0) {
+                        for (Effect effect : this.getEffects()) {
+                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                         }
-                        return true;
                     }
-		    break;
-                case OPPONENT:
-                    if (game.getPlayer(this.controllerId).hasOpponent(event.getPlayerId(), game)) {
-                        if (getTargets().size() == 0) {
-                            for (Effect effect : this.getEffects()) {
-                                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                            }
+                    return true;
+                }
+        break;
+            case OPPONENT:
+                if (game.getPlayer(this.controllerId).hasOpponent(event.getPlayerId(), game)) {
+                    if (getTargets().size() == 0) {
+                        for (Effect effect : this.getEffects()) {
+                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                         }
-                        return true;
                     }
-		    break;
-                case ANY:
-                    controller = game.getPlayer(this.getControllerId());
-                    if (controller != null && controller.getInRange().contains(event.getPlayerId())) {
-                        if (getTargets().size() == 0) {
-                            for (Effect effect : this.getEffects()) {
-                                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                            }
+                    return true;
+                }
+        break;
+            case ANY:
+                controller = game.getPlayer(this.getControllerId());
+                if (controller != null && controller.getInRange().contains(event.getPlayerId())) {
+                    if (getTargets().size() == 0) {
+                        for (Effect effect : this.getEffects()) {
+                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                         }
-                        return true;
                     }
-            }
+                    return true;
+                }
         }
         return false;
     }

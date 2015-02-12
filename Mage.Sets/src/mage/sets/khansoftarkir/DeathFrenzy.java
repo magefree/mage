@@ -82,12 +82,15 @@ class DeathFrenzyDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.ZONE_CHANGE)) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.isDiesEvent() && zEvent.getTarget() != null && filter.match(zEvent.getTarget(), sourceId, controllerId, game)) {
-                return true;
-            }
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (zEvent.isDiesEvent() && zEvent.getTarget() != null && filter.match(zEvent.getTarget(), sourceId, controllerId, game)) {
+            return true;
         }
         return false;
     }

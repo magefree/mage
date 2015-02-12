@@ -118,6 +118,7 @@ class MeanderingTowershellEffect extends OneShotEffect {
             DelayedTriggeredAbility delayedAbility = new AtBeginningNextDeclareAttackersStepNextTurnDelayedTriggeredAbility();
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
+            delayedAbility.setSourceObject(source.getSourceObject(game));
             game.addDelayedTriggeredAbility(delayedAbility);
             return true;
         }
@@ -143,10 +144,14 @@ class AtBeginningNextDeclareAttackersStepNextTurnDelayedTriggeredAbility extends
         startingTurn = game.getTurnNum();
     }
 
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DECLARED_ATTACKERS;
+    }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.DECLARED_ATTACKERS && event.getPlayerId().equals(this.controllerId)) {
+        if (event.getPlayerId().equals(this.controllerId)) {
             if (game.getTurnNum() != startingTurn) {
                 return true;
             }

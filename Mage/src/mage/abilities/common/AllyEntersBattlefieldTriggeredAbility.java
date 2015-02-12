@@ -51,15 +51,18 @@ public class AllyEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl 
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
-            UUID targetId = event.getTargetId();
-            Permanent permanent = game.getPermanent(targetId);
-            if (permanent.getControllerId().equals(this.controllerId)
-                    && (targetId.equals(this.getSourceId())
-                    || (permanent.hasSubtype("Ally") && !targetId.equals(this.getSourceId())))) {
-                return true;
-            }
+        UUID targetId = event.getTargetId();
+        Permanent permanent = game.getPermanent(targetId);
+        if (permanent.getControllerId().equals(this.controllerId)
+                && (targetId.equals(this.getSourceId())
+                || (permanent.hasSubtype("Ally") && !targetId.equals(this.getSourceId())))) {
+            return true;
         }
         return false;
     }

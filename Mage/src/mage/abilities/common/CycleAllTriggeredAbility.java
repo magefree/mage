@@ -53,14 +53,16 @@ public class CycleAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
-            StackObject item = game.getState().getStack().getFirst();
-            if (item instanceof StackAbility
-                    && ((StackAbility)item).getStackAbility() instanceof CyclingAbility) {
-                return true;
-            }
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ACTIVATED_ABILITY;
+    }
 
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        StackObject item = game.getState().getStack().getFirst();
+        if (item instanceof StackAbility
+                && ((StackAbility)item).getStackAbility() instanceof CyclingAbility) {
+            return true;
         }
         return false;
     }

@@ -112,22 +112,25 @@ public class CreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityI
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (filter.match(permanent, sourceId, controllerId, game)
-                    && (permanent.getControllerId().equals(this.controllerId) ^ opponentController)) {
-                if (!this.getTargets().isEmpty()) {
-                    Target target = this.getTargets().get(0);
-                    if (target instanceof TargetPlayer) {
-                        target.add(permanent.getControllerId(), game);
-                    }
-                    if (target instanceof TargetCreaturePermanent) {
-                        target.add(event.getTargetId(), game);
-                    }
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (filter.match(permanent, sourceId, controllerId, game)
+                && (permanent.getControllerId().equals(this.controllerId) ^ opponentController)) {
+            if (!this.getTargets().isEmpty()) {
+                Target target = this.getTargets().get(0);
+                if (target instanceof TargetPlayer) {
+                    target.add(permanent.getControllerId(), game);
                 }
-                return true;
+                if (target instanceof TargetCreaturePermanent) {
+                    target.add(event.getTargetId(), game);
+                }
             }
+            return true;
         }
         return false;
     }

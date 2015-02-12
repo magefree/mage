@@ -100,6 +100,7 @@ class LoyalCatharEffect extends OneShotEffect {
         AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnLoyalCatharEffect(source.getSourceId()));
         delayedAbility.setSourceId(source.getSourceId());
         delayedAbility.setControllerId(source.getControllerId());
+        delayedAbility.setSourceObject(source.getSourceObject(game));
         game.addDelayedTriggeredAbility(delayedAbility);
         return true;
     }

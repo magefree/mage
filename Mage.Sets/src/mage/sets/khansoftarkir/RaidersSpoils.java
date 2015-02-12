@@ -88,15 +88,18 @@ class RaidersSpoilsTriggeredAbility extends TriggeredAbilityImpl {
     public RaidersSpoilsTriggeredAbility copy() {
         return new RaidersSpoilsTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.DAMAGED_PLAYER) {
-            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (damageEvent.isCombatDamage() && permanent != null && permanent.hasSubtype("Warrior") && permanent.getControllerId().equals(controllerId)) {
-                return true;
-            }
+        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
+        Permanent permanent = game.getPermanent(event.getSourceId());
+        if (damageEvent.isCombatDamage() && permanent != null && permanent.hasSubtype("Warrior") && permanent.getControllerId().equals(controllerId)) {
+            return true;
         }
         return false;
     }

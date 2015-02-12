@@ -87,17 +87,20 @@ class RakshasaVizierTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.GRAVEYARD
-                    && zEvent.getToZone() == Zone.EXILED) {
-                Card card = game.getCard(event.getTargetId());
-                if (card != null && card.getOwnerId().equals(getControllerId())) {
-                    return true;
-                }
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
 
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (zEvent.getFromZone() == Zone.GRAVEYARD
+                && zEvent.getToZone() == Zone.EXILED) {
+            Card card = game.getCard(event.getTargetId());
+            if (card != null && card.getOwnerId().equals(getControllerId())) {
+                return true;
             }
+
         }
         return false;
     }

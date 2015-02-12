@@ -91,10 +91,15 @@ class HeraldOfAnafenzaTriggeredAbility extends TriggeredAbilityImpl {
     public HeraldOfAnafenzaTriggeredAbility copy() {
         return new HeraldOfAnafenzaTriggeredAbility(this);
     }
+    
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ACTIVATED_ABILITY;
+    }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (EventType.ACTIVATED_ABILITY.equals(event.getType()) && event.getSourceId().equals(getSourceId())) {
+        if (event.getSourceId().equals(getSourceId())) {
             StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getTargetId());
             if (stackAbility != null && (stackAbility.getStackAbility() instanceof OutlastAbility)) {
                 return true;

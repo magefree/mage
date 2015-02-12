@@ -61,24 +61,27 @@ public class TapForManaAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA) {
-            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-            if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
-                ManaEvent mEvent = (ManaEvent) event;
-                for(Effect effect:getEffects()) {
-                    effect.setValue("mana", mEvent.getMana());
-                }
-                switch(setTargetPointer) {
-                    case PERMANENT:
-                        getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
-                        break;
-                    case PLAYER:
-                        getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getControllerId()));
-                        break;
-                }
-                return true;
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
+            ManaEvent mEvent = (ManaEvent) event;
+            for(Effect effect:getEffects()) {
+                effect.setValue("mana", mEvent.getMana());
             }
+            switch(setTargetPointer) {
+                case PERMANENT:
+                    getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
+                    break;
+                case PLAYER:
+                    getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getControllerId()));
+                    break;
+            }
+            return true;
         }
         return false;
     }

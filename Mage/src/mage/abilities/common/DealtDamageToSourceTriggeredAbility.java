@@ -55,14 +55,17 @@ public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE) {
-            if (event.getTargetId().equals(getSourceId())) {
-                for (Effect effect : this.getEffects()) {
-                        effect.setValue("damage", event.getAmount());
-                }
-                return true;
+        if (event.getTargetId().equals(getSourceId())) {
+            for (Effect effect : this.getEffects()) {
+                    effect.setValue("damage", event.getAmount());
             }
+            return true;
         }
         return false;
     }

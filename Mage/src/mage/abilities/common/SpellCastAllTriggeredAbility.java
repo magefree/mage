@@ -82,15 +82,18 @@ public class SpellCastAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && filter.match(spell, getControllerId(), game)) {
-                if (rememberSource) {
-                    this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId()));
-                }
-                return true;
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (spell != null && filter.match(spell, getControllerId(), game)) {
+            if (rememberSource) {
+                this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId()));
             }
+            return true;
         }
         return false;
     }

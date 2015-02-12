@@ -58,18 +58,20 @@ public class DealsDamageGainLifeSourceTriggeredAbility extends TriggeredAbilityI
     public DealsDamageGainLifeSourceTriggeredAbility copy() {
         return new DealsDamageGainLifeSourceTriggeredAbility(this);
     }
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE
+                || event.getType() ==  GameEvent.EventType.DAMAGED_PLAYER
+                || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER;
+    }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DAMAGED_CREATURE)
-                || event.getType().equals(GameEvent.EventType.DAMAGED_PLAYER)
-                || event.getType().equals(GameEvent.EventType.DAMAGED_PLANESWALKER)) {
-            if (event.getSourceId().equals(this.getSourceId())) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setValue("damage", event.getAmount());
-                }
-                return true;
+        if (event.getSourceId().equals(this.getSourceId())) {
+            for (Effect effect : this.getEffects()) {
+                effect.setValue("damage", event.getAmount());
             }
+            return true;
         }
         return false;
     }

@@ -20,11 +20,13 @@ public class AtTheEndOfCombatDelayedTriggeredAbility extends DelayedTriggeredAbi
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.COMBAT_PHASE_POST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.COMBAT_PHASE_POST) {
-            return true;
-        }
-        return false;
+        return true;
     }
 
     @Override

@@ -40,25 +40,26 @@ import mage.game.events.GameEvent.EventType;
  */
 public class BlocksTriggeredAbility extends TriggeredAbilityImpl {
 
-//    private boolean fixedTargetPointer;
-
     public BlocksTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, false);
     }
 
     public BlocksTriggeredAbility(Effect effect, boolean optional, boolean fixedTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
-//        this.fixedTargetPointer = fixedTargetPointer;
     }
 
     public BlocksTriggeredAbility(final BlocksTriggeredAbility ability) {
         super(ability);
-//        this.fixedTargetPointer = ability.fixedTargetPointer;
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DECLARED_BLOCKERS;
+    }
+    
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.DECLARED_BLOCKERS && game.getCombat().getBlockers().contains(this.getSourceId())) {
+        if (game.getCombat().getBlockers().contains(this.getSourceId())) {
             return true;
         }
         return false;

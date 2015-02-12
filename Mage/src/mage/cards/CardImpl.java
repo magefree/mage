@@ -63,6 +63,7 @@ import mage.game.Game;
 import mage.game.command.Commander;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
@@ -664,12 +665,15 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public int getZoneChangeCounter() {
+//        logger.info(name + " get= " + zoneChangeCounter + "  " + ((this instanceof Permanent) ? " Permanent":"Card"));
         return zoneChangeCounter;
+
     }
 
     @Override
     public void updateZoneChangeCounter() {
         zoneChangeCounter++;
+//        logger.info(name + " set= " + zoneChangeCounter + "  " + ((this instanceof Permanent) ? " Permanent":"Card"));
     }
 
     @Override

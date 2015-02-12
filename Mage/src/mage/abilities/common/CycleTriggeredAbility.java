@@ -60,13 +60,16 @@ public class CycleTriggeredAbility extends ZoneChangeTriggeredAbility {
     }
     
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ACTIVATED_ABILITY;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY){
-            if(event.getSourceId().equals(this.getSourceId())) {
-                StackObject object = game.getStack().getStackObject(event.getSourceId());
-                if(object != null && object.getStackAbility() instanceof CyclingAbility){
-                    return true;    
-                }
+        if(event.getSourceId().equals(this.getSourceId())) {
+            StackObject object = game.getStack().getStackObject(event.getSourceId());
+            if(object != null && object.getStackAbility() instanceof CyclingAbility){
+                return true;    
             }
         }
         return false;

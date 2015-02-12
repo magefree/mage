@@ -67,8 +67,13 @@ public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl 
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER && event.getSourceId().equals(this.sourceId)
+        if (event.getSourceId().equals(this.sourceId)
                 && game.getOpponents(this.getControllerId()).contains(event.getTargetId())) {
             if (onlyCombat && event instanceof DamagedPlayerEvent) {
                 DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;

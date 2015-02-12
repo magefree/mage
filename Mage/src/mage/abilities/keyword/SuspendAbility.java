@@ -281,8 +281,13 @@ class SuspendPlayCardAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.COUNTER_REMOVED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.COUNTER_REMOVED && event.getTargetId().equals(getSourceId())) {
+        if (event.getTargetId().equals(getSourceId())) {
             Card card = game.getCard(getSourceId());
             if (card != null && game.getState().getZone(card.getId()) == Zone.EXILED
                     && card.getCounters().getCount(CounterType.TIME) == 0) {

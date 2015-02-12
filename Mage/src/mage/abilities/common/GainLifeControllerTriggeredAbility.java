@@ -63,8 +63,13 @@ public class GainLifeControllerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.GAINED_LIFE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.GAINED_LIFE && event.getPlayerId().equals(this.getControllerId())) {
+        if (event.getPlayerId().equals(this.getControllerId())) {
             if (setTargetPointer) {
                 for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getPlayerId()));

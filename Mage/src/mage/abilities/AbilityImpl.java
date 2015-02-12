@@ -232,7 +232,7 @@ public abstract class AbilityImpl implements Ability {
 
         // TODO: Because all (non targeted) choices have to be done during resolution
         // this has to be removed, if all using effects are changed
-        sourceObject = game.getObject(sourceId);
+        sourceObject = this.getSourceObject(game);
         if (sourceObject != null) {
             sourceObject.adjustChoices(this, game);
         }

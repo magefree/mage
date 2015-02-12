@@ -73,42 +73,45 @@ public class AttacksAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.ATTACKER_DECLARED)) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
-                if (attacksYouOrYourPlaneswalker) {
-                    boolean check = false;
-                    if (event.getTargetId().equals(getControllerId())) {
-                        check = true;
-                    } else {
-                        Permanent planeswalker = game.getPermanent(event.getTargetId());
-                        if (planeswalker != null && planeswalker.getCardType().contains(CardType.PLANESWALKER) && planeswalker.getControllerId().equals(getControllerId())) {
-                            check = true;
-                        }
-                    }
-                    if (!check) {
-                        return false;
-                    }
-                }
-                switch(setTargetPointer) {
-                    case PERMANENT:
-                        for (Effect effect: getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(permanent.getId()));
-                        }
-                        break;
-                    case PLAYER:
-                        UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(permanent.getId(), game);
-                        if (defendingPlayerId != null) {
-                            for (Effect effect: getEffects()) {
-                                effect.setTargetPointer(new FixedTarget(defendingPlayerId));
-                            }
-                        }
-                        break;
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
+    }
 
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        Permanent permanent = game.getPermanent(event.getSourceId());
+        if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
+            if (attacksYouOrYourPlaneswalker) {
+                boolean check = false;
+                if (event.getTargetId().equals(getControllerId())) {
+                    check = true;
+                } else {
+                    Permanent planeswalker = game.getPermanent(event.getTargetId());
+                    if (planeswalker != null && planeswalker.getCardType().contains(CardType.PLANESWALKER) && planeswalker.getControllerId().equals(getControllerId())) {
+                        check = true;
+                    }
                 }
-                return true;
+                if (!check) {
+                    return false;
+                }
             }
+            switch(setTargetPointer) {
+                case PERMANENT:
+                    for (Effect effect: getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                    }
+                    break;
+                case PLAYER:
+                    UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(permanent.getId(), game);
+                    if (defendingPlayerId != null) {
+                        for (Effect effect: getEffects()) {
+                            effect.setTargetPointer(new FixedTarget(defendingPlayerId));
+                        }
+                    }
+                    break;
+
+            }
+            return true;
         }
         return false;
     }

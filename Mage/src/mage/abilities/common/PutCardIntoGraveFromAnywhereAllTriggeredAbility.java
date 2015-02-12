@@ -99,8 +99,13 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
+        if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
             Card card = game.getCard(event.getTargetId());
             if (card != null && filter.match(card, getSourceId(), getControllerId(), game)) {
                 switch (setTargetPointer) {

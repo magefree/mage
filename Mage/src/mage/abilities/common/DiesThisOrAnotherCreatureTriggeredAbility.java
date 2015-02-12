@@ -63,25 +63,28 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
 
-            if (game.getPermanent(sourceId) == null) {
-                if (game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD) == null) {
-                    return false;
-                }
+        if (game.getPermanent(sourceId) == null) {
+            if (game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD) == null) {
+                return false;
             }
+        }
 
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
-                Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-                if (permanent != null) {
-                    if (permanent.getId().equals(this.getSourceId())) {
+        if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
+            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+            if (permanent != null) {
+                if (permanent.getId().equals(this.getSourceId())) {
+                    return true;
+                } else {
+                    if (filter.match(permanent, sourceId, controllerId, game)) {
                         return true;
-                    } else {
-                        if (filter.match(permanent, sourceId, controllerId, game)) {
-                            return true;
-                        }
                     }
                 }
             }

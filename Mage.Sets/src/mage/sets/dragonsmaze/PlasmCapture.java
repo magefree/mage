@@ -101,6 +101,7 @@ class PlasmCaptureCounterEffect extends OneShotEffect {
                     new AtTheBeginOMainPhaseDelayedTriggeredAbility(new PlasmCaptureManaEffect(mana), false, TargetController.YOU, PhaseSelection.NEXT_PRECOMBAT_MAIN);
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
+            delayedAbility.setSourceObject(source.getSourceObject(game));
             game.addDelayedTriggeredAbility(delayedAbility);
             return true;
         }

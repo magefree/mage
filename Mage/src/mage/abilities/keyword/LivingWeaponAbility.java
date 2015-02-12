@@ -1,7 +1,6 @@
 package mage.abilities.keyword;
 
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;

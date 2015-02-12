@@ -51,8 +51,13 @@ public class UnattachedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.UNATTACHED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.UNATTACHED && event.getSourceId().equals(this.getSourceId()) ) {
+        if (event.getSourceId().equals(this.getSourceId()) ) {
             getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
             return true;
         }

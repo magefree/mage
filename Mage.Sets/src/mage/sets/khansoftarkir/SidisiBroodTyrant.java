@@ -96,6 +96,11 @@ class SidisiBroodTyrantAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED || event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
             return true;
@@ -128,26 +133,29 @@ class SidisiBroodTyrantTriggeredAbility extends ZoneChangeTriggeredAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if ((fromZone == null || zEvent.getFromZone() == fromZone) && (toZone == null || zEvent.getToZone() == toZone)) {
-                Card card = game.getCard(event.getTargetId());
-                if (card != null && card.getOwnerId().equals(getControllerId()) && card.getCardType().contains(CardType.CREATURE)) {
-                    StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
-                    if (stackObject == null) {
-                        stackObject = (StackObject) game.getLastKnownInformation(event.getSourceId(), Zone.STACK);
+        ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+        if ((fromZone == null || zEvent.getFromZone() == fromZone) && (toZone == null || zEvent.getToZone() == toZone)) {
+            Card card = game.getCard(event.getTargetId());
+            if (card != null && card.getOwnerId().equals(getControllerId()) && card.getCardType().contains(CardType.CREATURE)) {
+                StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
+                if (stackObject == null) {
+                    stackObject = (StackObject) game.getLastKnownInformation(event.getSourceId(), Zone.STACK);
+                }
+                if (stackObject != null) {
+                    if (stackObject.getId().equals(lastStackObjectId)) {
+                        return false; // was already handled
                     }
-                    if (stackObject != null) {
-                        if (stackObject.getId().equals(lastStackObjectId)) {
-                            return false; // was already handled
-                        }
-                        lastStackObjectId = stackObject.getId();
-                        return true;
-                    } else {
-                        // special action or replacement effect, so we can't check yet if multiple cards are moved with one effect
-                        return true;
-                    }
+                    lastStackObjectId = stackObject.getId();
+                    return true;
+                } else {
+                    // special action or replacement effect, so we can't check yet if multiple cards are moved with one effect
+                    return true;
                 }
             }
         }

@@ -112,8 +112,8 @@ public class GatherSpecimensTest extends CardTestPlayerBase {
 
         execute();
 
-        assertPermanentCount(playerA, "Memnite", 1);
         assertPermanentCount(playerB, "Memnite", 0);
+        assertPermanentCount(playerA, "Memnite", 1);
 
     }
 

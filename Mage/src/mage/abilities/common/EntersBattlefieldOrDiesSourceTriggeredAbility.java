@@ -57,6 +57,11 @@ public class EntersBattlefieldOrDiesSourceTriggeredAbility extends TriggeredAbil
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD || event.getType() == GameEvent.EventType.ZONE_CHANGE ;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
                 && event.getTargetId().equals(getSourceId())) {

@@ -49,11 +49,13 @@ public class BecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CREATURE_BLOCKED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.CREATURE_BLOCKED && event.getTargetId().equals(this.getSourceId())) {
-            return true;
-        }
-        return false;
+        return event.getTargetId().equals(this.getSourceId());
     }
 
     @Override

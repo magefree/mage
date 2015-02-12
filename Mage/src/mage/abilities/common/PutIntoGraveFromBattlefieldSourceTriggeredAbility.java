@@ -31,18 +31,20 @@ public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends Triggered
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        Permanent permanent = zEvent.getTarget();
 
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            Permanent permanent = zEvent.getTarget();
-
-            if (permanent != null &&
-                    zEvent.getToZone() == Zone.GRAVEYARD &&
-                    zEvent.getFromZone() == Zone.BATTLEFIELD &&
-                    permanent.getId().equals(this.getSourceId())) {
-                return true;
-            }
+        if (permanent != null &&
+                zEvent.getToZone() == Zone.GRAVEYARD &&
+                zEvent.getFromZone() == Zone.BATTLEFIELD &&
+                permanent.getId().equals(this.getSourceId())) {
+            return true;
         }
         return false;
     }

@@ -64,24 +64,27 @@ public class DethroneAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DECLARED_ATTACKERS;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (GameEvent.EventType.DECLARED_ATTACKERS.equals(event.getType())) {
-            UUID defenderId = game.getCombat().getDefenderId(getSourceId());
-            if (defenderId != null) {
-                Player attackedPlayer = game.getPlayer(defenderId);
-                Player controller = game.getPlayer(getControllerId());
-                if (attackedPlayer != null && controller != null) {
-                    int mostLife = Integer.MIN_VALUE;
-                    for (UUID playerId: controller.getInRange()) {
-                        Player player = game.getPlayer(playerId);
-                        if (player != null) {
-                            if (player.getLife() > mostLife) {
-                                mostLife = player.getLife();
-                            }
+        UUID defenderId = game.getCombat().getDefenderId(getSourceId());
+        if (defenderId != null) {
+            Player attackedPlayer = game.getPlayer(defenderId);
+            Player controller = game.getPlayer(getControllerId());
+            if (attackedPlayer != null && controller != null) {
+                int mostLife = Integer.MIN_VALUE;
+                for (UUID playerId: controller.getInRange()) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null) {
+                        if (player.getLife() > mostLife) {
+                            mostLife = player.getLife();
                         }
                     }
-                    return attackedPlayer.getLife() == mostLife;
                 }
+                return attackedPlayer.getLife() == mostLife;
             }
         }
         return false;

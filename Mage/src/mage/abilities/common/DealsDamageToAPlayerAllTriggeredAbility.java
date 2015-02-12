@@ -70,9 +70,13 @@ public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImp
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.DAMAGED_PLAYER 
-                && (!onlyCombat || ((DamagedPlayerEvent) event).isCombatDamage())) {
+        if (!onlyCombat || ((DamagedPlayerEvent) event).isCombatDamage()) {
             Permanent permanent = game.getPermanent(event.getSourceId());
             if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
                 if (!setTargetPointer.equals(SetTargetPointer.NONE)) {
@@ -86,7 +90,7 @@ public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImp
                                 effect.setTargetPointer(new FixedTarget(permanent.getId()));
                                 break;
                         }
-                        
+
                     }
                 }
                 return true;

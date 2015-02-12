@@ -25,60 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package org.mage.test.cards.copy;
 
-package mage.abilities.common;
-
-import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.mana.TriggeredManaAbility;
 import mage.constants.CardType;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.game.permanent.PermanentToken;
+import org.junit.Assert;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
  * @author LevelX2
  */
-public class TapLandForManaAllTriggeredManaAbility extends TriggeredManaAbility {
 
-    private final boolean setTargetPointer;
-    
-    public TapLandForManaAllTriggeredManaAbility(ManaEffect manaEffect, boolean optional, boolean setTargetPointer) {
-        super(Zone.BATTLEFIELD, manaEffect, optional);
-        this.setTargetPointer = setTargetPointer;
+public class SharuumTheHegemonTest extends CardTestPlayerBase {
+
+    /**
+     * 
+     */
+    @Test
+    public void testCloneTriggered() {
+        // When Sharuum the Hegemon enters the battlefield, you may return target artifact card from your graveyard to the battlefield.
+        addCard(Zone.BATTLEFIELD, playerA, "Sharuum the Hegemon", 1);
+        addCard(Zone.HAND, playerA, "Clone", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+
+        // Whenever Blood Artist or another creature dies, target player loses 1 life and you gain 1 life.
+        addCard(Zone.BATTLEFIELD, playerA, "Blood Artist", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
+        setChoice(playerA, "Yes");
+        setChoice(playerA, "Sharuum the Hegemon"); // what creature to clone
+
+        addTarget(playerA, "Sharuum the Hegemon[no copy]"); // which legend to sacrifice
+        
+        addTarget(playerA, "Sharuum the Hegemon[no copy]"); // which legend to sacrifice
+        setChoice(playerA, "No");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 21);
+        assertLife(playerB, 19);
+
+
+
     }
 
-    public TapLandForManaAllTriggeredManaAbility(final TapLandForManaAllTriggeredManaAbility ability) {
-        super(ability);
-        this.setTargetPointer = ability.setTargetPointer;
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
-            if (setTargetPointer) {
-                getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public TapLandForManaAllTriggeredManaAbility copy() {
-        return new TapLandForManaAllTriggeredManaAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return new StringBuilder("Whenever a player taps a land for mana, ").append(super.getRule()).toString();
-    }
 }

@@ -64,17 +64,20 @@ public class BecomesBlockedAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CREATURE_BLOCKED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.CREATURE_BLOCKED) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
-                if (setTargetPointer) {
-                    for(Effect effect :this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                    }
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
+            if (setTargetPointer) {
+                for(Effect effect :this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 }
-                return true;
             }
+            return true;
         }
         return false;
     }

@@ -70,10 +70,14 @@ public class AttacksAttachedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent equipment = game.getPermanent(this.sourceId);
         if (equipment != null && equipment.getAttachedTo() != null
-                && event.getType() == GameEvent.EventType.ATTACKER_DECLARED
                 && event.getSourceId().equals(equipment.getAttachedTo())) {
             return true;
         }

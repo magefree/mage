@@ -68,12 +68,15 @@ public class CascadeAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.SPELL_CAST) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.getSourceId().equals(this.getSourceId())) {
-                return true;
-            }
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (spell != null && spell.getSourceId().equals(this.getSourceId())) {
+            return true;
         }
         return false;
     }

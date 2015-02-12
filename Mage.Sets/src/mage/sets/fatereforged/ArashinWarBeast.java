@@ -98,6 +98,11 @@ class ArashinWarBeastTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE || event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST ;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.DAMAGED_CREATURE && 
                 event.getSourceId().equals(this.sourceId) && 

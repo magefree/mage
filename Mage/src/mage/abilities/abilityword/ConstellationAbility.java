@@ -63,8 +63,13 @@ public class ConstellationAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && event.getPlayerId().equals(this.getControllerId())) {
+        if (event.getPlayerId().equals(this.getControllerId())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && permanent.getCardType().contains(CardType.ENCHANTMENT)) {
                 return true;

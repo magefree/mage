@@ -80,21 +80,45 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE) {
-            switch (targetController) {
-                case YOU:
-                    boolean yours = event.getPlayerId().equals(this.controllerId);
-                    if (yours && setTargetPointer) {
-                        if (getTargets().size() == 0) {
-                            for (Effect effect : this.getEffects()) {
-                                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                            }
+        switch (targetController) {
+            case YOU:
+                boolean yours = event.getPlayerId().equals(this.controllerId);
+                if (yours && setTargetPointer) {
+                    if (getTargets().size() == 0) {
+                        for (Effect effect : this.getEffects()) {
+                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                         }
                     }
-                    return yours;
-                case OPPONENT:
-                    if (game.getPlayer(this.controllerId).hasOpponent(event.getPlayerId(), game)) {
+                }
+                return yours;
+            case OPPONENT:
+                if (game.getPlayer(this.controllerId).hasOpponent(event.getPlayerId(), game)) {
+                    if (setTargetPointer && getTargets().size() == 0) {
+                        for (Effect effect : this.getEffects()) {
+                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                        }
+                    }
+                    return true;
+                }
+                break;
+            case ANY:
+                if (setTargetPointer && getTargets().size() == 0) {
+                    for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                    }
+                }
+                return true;
+            case CONTROLLER_ATTACHED_TO:
+                Permanent attachment = game.getPermanent(sourceId);
+                if (attachment != null && attachment.getAttachedTo() != null) {
+                    Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
+                    if (attachedTo != null && attachedTo.getControllerId().equals(event.getPlayerId())) {
                         if (setTargetPointer && getTargets().size() == 0) {
                             for (Effect effect : this.getEffects()) {
                                 effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
@@ -102,31 +126,10 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
                         }
                         return true;
                     }
-                    break;
-                case ANY:
-                    if (setTargetPointer && getTargets().size() == 0) {
-                        for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                        }
-                    }
-                    return true;
-                case CONTROLLER_ATTACHED_TO:
-                    Permanent attachment = game.getPermanent(sourceId);
-                    if (attachment != null && attachment.getAttachedTo() != null) {
-                        Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
-                        if (attachedTo != null && attachedTo.getControllerId().equals(event.getPlayerId())) {
-                            if (setTargetPointer && getTargets().size() == 0) {
-                                for (Effect effect : this.getEffects()) {
-                                    effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                                }
-                            }
-                            return true;
-                        }
-                    }
-                    break;
-                default:
-                    throw new UnsupportedOperationException("Value for targetController not supported: " + targetController.toString());
-            }
+                }
+                break;
+            default:
+                throw new UnsupportedOperationException("Value for targetController not supported: " + targetController.toString());
         }
         return false;
     }

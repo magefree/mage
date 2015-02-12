@@ -54,8 +54,13 @@ public class EntersAnotherCreatureYourControlTriggeredAbility extends ZoneChange
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && !event.getTargetId().equals(this.getSourceId())) {
+        if (!event.getTargetId().equals(this.getSourceId())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && permanent.getCardType().contains(CardType.CREATURE) && permanent.getControllerId().equals(this.getControllerId())) {
                 return true;

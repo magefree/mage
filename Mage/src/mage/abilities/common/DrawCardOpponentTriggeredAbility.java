@@ -60,8 +60,13 @@ public class DrawCardOpponentTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DREW_CARD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DREW_CARD && game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
+        if (game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
             if (setTargetPointer) {
                 for (Effect effect:this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getPlayerId()));

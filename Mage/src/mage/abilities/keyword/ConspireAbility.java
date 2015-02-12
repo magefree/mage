@@ -182,9 +182,13 @@ class ConspireTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST
-                && event.getSourceId().equals(this.sourceId)) {
+        if (event.getSourceId().equals(this.sourceId)) {
             StackObject spell = game.getStack().getStackObject(this.sourceId);
             if (spell instanceof Spell) {
                 Card card = game.getCard(spell.getSourceId());

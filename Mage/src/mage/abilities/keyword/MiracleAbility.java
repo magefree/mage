@@ -114,8 +114,13 @@ public class MiracleAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.MIRACLE_CARD_REVEALED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(EventType.MIRACLE_CARD_REVEALED) && event.getSourceId().equals(getSourceId())) {
+        if (event.getSourceId().equals(getSourceId())) {
             // Refer to the card at the zone it is now (hand)
             FixedTarget fixedTarget = new FixedTarget(event.getSourceId());
             fixedTarget.init(game, this);

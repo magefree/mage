@@ -24,14 +24,13 @@ public class AttacksOrBlocksTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "When {this} attacks or blocks, " + super.getRule();
     }
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED || event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
+    }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED || event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
-            if (event.getSourceId().equals(this.getSourceId())) {
-                return true;
-            }
-        }
-        return false;
+        return event.getSourceId().equals(this.getSourceId());
     }
 }

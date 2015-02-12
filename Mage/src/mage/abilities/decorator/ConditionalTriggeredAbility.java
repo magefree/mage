@@ -50,6 +50,11 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return ability.checkEventType(event, game);
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ability.setSourceId(this.getSourceId());
         ability.setControllerId(this.getControllerId());

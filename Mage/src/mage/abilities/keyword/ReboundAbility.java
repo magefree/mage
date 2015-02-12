@@ -269,8 +269,13 @@ class ReboundEffectCastFromExileDelayedTrigger extends DelayedTriggeredAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getType() == EventType.UPKEEP_STEP_PRE && MyTurnCondition.getInstance().apply(game, this);
+        return MyTurnCondition.getInstance().apply(game, this);
     }
     @Override
     public String getRule() {

@@ -23,8 +23,13 @@ public class AnotherCreatureEntersBattlefieldTriggeredAbility extends TriggeredA
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId() != this.getSourceId()) {
+        if (event.getTargetId() != this.getSourceId()) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent.getCardType().contains(CardType.CREATURE)) {
                 return true;

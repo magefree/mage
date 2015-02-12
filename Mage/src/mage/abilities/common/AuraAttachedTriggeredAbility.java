@@ -49,8 +49,13 @@ public class AuraAttachedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ATTACHED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACHED && event.getTargetId().equals(this.getSourceId())) {
+        if (event.getTargetId().equals(this.getSourceId())) {
             Permanent attachment = game.getPermanent(event.getSourceId());
             if (attachment != null && attachment.getSubtype().contains("Aura")) {
                 return true;

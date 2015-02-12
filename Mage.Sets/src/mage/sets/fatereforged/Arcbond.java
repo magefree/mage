@@ -111,9 +111,13 @@ class ArcbondDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE && 
-                event.getTargetId().equals(targetObject.getSourceId()) &&
+        if (event.getTargetId().equals(targetObject.getSourceId()) &&
                 targetObject.getPermanentOrLKIBattlefield(game) != null) {
             for (Effect effect : this.getEffects()) {
                 effect.setValue("damage", event.getAmount());

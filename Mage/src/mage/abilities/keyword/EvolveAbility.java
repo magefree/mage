@@ -95,22 +95,24 @@ public class EvolveAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            if (!event.getTargetId().equals(this.getSourceId())) {
-                Permanent triggeringCreature = game.getPermanent(event.getTargetId());
-                if (triggeringCreature != null
-                        && triggeringCreature.getCardType().contains(CardType.CREATURE)
-                        && triggeringCreature.getControllerId().equals(this.controllerId)) {
-                    Permanent sourceCreature = game.getPermanent(sourceId);
-                    if (sourceCreature != null && isPowerOrThoughnessGreater(sourceCreature, triggeringCreature)) {
-                        this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
-                        return true;
-                    }
+        if (!event.getTargetId().equals(this.getSourceId())) {
+            Permanent triggeringCreature = game.getPermanent(event.getTargetId());
+            if (triggeringCreature != null
+                    && triggeringCreature.getCardType().contains(CardType.CREATURE)
+                    && triggeringCreature.getControllerId().equals(this.controllerId)) {
+                Permanent sourceCreature = game.getPermanent(sourceId);
+                if (sourceCreature != null && isPowerOrThoughnessGreater(sourceCreature, triggeringCreature)) {
+                    this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
+                    return true;
                 }
             }
         }
-
         return false;
     }
 

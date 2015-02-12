@@ -56,23 +56,22 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.ZONE_CHANGE)) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            // why is this check neccessary?
-//            if (game.getPermanentOrLKIBattlefield(sourceId) == null) {
-//                return false;
-//            }
-            if (zEvent.getFromZone().equals(Zone.BATTLEFIELD) && zEvent.getToZone().equals(Zone.GRAVEYARD)) {
-                Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-                if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
-                    if (setTargetPointer) {
-                        for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                        }
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (zEvent.getFromZone().equals(Zone.BATTLEFIELD) && zEvent.getToZone().equals(Zone.GRAVEYARD)) {
+            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+            if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
+                if (setTargetPointer) {
+                    for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                     }
-                    return true;
                 }
+                return true;
             }
         }
         return false;

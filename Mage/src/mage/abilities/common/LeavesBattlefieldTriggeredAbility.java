@@ -28,10 +28,9 @@
 
 package mage.abilities.common;
 
-import mage.constants.Zone;
 import mage.abilities.effects.Effect;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.constants.Zone;
+
 
 /**
  *

@@ -61,13 +61,13 @@ public class BattalionAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DECLARED_ATTACKERS;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARED_ATTACKERS) {
-            if (game.getCombat().getAttackers().size() >= 3 && game.getCombat().getAttackers().contains(this.sourceId)) {
-                return true;
-            }
-        }
-        return false;
+        return game.getCombat().getAttackers().size() >= 3 && game.getCombat().getAttackers().contains(this.sourceId);
     }
 
     @Override

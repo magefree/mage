@@ -74,8 +74,13 @@ public class ZoneChangeTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())) {
+        if (event.getTargetId().equals(this.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
             if ((fromZone == null || zEvent.getFromZone() == fromZone) && (toZone == null || zEvent.getToZone() == toZone)) {
                 return true;

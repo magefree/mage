@@ -73,29 +73,32 @@ public class TurnedFaceUpAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.TURNEDFACEUP;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (EventType.TURNEDFACEUP.equals(event.getType())) {
-            if (!event.getTargetId().equals(getSourceId())) {
-                Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(getSourceId());
-                if (sourcePermanent != null) {
-                    if (sourcePermanent.isFaceDown()) {
-                        // if face down and it's not itself that is turned face up, it does not trigger
-                        return false;
-                    }
-                } else {
-                    // Permanent is and was not on the battlefield
+        if (!event.getTargetId().equals(getSourceId())) {
+            Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(getSourceId());
+            if (sourcePermanent != null) {
+                if (sourcePermanent.isFaceDown()) {
+                    // if face down and it's not itself that is turned face up, it does not trigger
                     return false;
                 }
+            } else {
+                // Permanent is and was not on the battlefield
+                return false;
             }
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
-                if (setTargetPointer) {
-                    for (Effect effect: getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                    }
+        }
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
+            if (setTargetPointer) {
+                for (Effect effect: getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 }
-                return true;
             }
+            return true;
         }
         return false;
     }

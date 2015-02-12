@@ -56,12 +56,16 @@ public class PactDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && game.getActivePlayerId().equals(this.getControllerId())) {
-            return true;
-        }
-        return false;
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
     }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return game.getActivePlayerId().equals(this.getControllerId());
+    }
+
+    
 
     @Override
     public String getRule() {

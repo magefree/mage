@@ -85,6 +85,11 @@ public class EchoAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD || event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         // reset the echo paid state back, if creature enteres the battlefield
         if (event.getType().equals(GameEvent.EventType.ENTERS_THE_BATTLEFIELD) 
@@ -99,13 +104,12 @@ public class EchoAbility extends TriggeredAbilityImpl {
             }
             // remember the last controller
             lastController = this.getControllerId();
-        }
-        // if echo not paid yet, controller has to pay
-        if (event.getType().equals(GameEvent.EventType.UPKEEP_STEP_PRE) &&
-            event.getPlayerId().equals(this.controllerId) &&
-            lastController.equals(this.controllerId) && !this.echoPaid){
-            this.echoPaid = true;
-            return true;
+            // if echo not paid yet, controller has to pay
+            if (event.getPlayerId().equals(this.controllerId) &&
+                lastController.equals(this.controllerId) && !this.echoPaid){
+                this.echoPaid = true;
+                return true;
+            }
         }
         return false;
     }

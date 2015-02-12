@@ -95,6 +95,7 @@ class GhostwayEffect extends OneShotEffect {
                         AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD, true));
                         delayedAbility.setSourceId(source.getSourceId());
                         delayedAbility.setControllerId(source.getControllerId());
+                        delayedAbility.setSourceObject(source.getSourceObject(game));
                         game.addDelayedTriggeredAbility(delayedAbility);
                     }
                 }

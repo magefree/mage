@@ -61,11 +61,16 @@ public class CastSourceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.SPELL_CAST) && event.getSourceId().equals(this.getSourceId())) {
-            MageObject sourceObject = getSourceObject(game);
-            if (sourceObject != null && (sourceObject instanceof Spell)) {
-                Spell spell = (Spell)sourceObject;
+        if (event.getSourceId().equals(this.getSourceId())) {
+            MageObject spellObject = game.getObject(sourceId);
+            if (spellObject != null && (spellObject instanceof Spell)) {
+                Spell spell = (Spell)spellObject;
                 if (spell.getSpellAbility() != null) {
                     for (Effect effect : getEffects()) {
                         effect.setValue(SOURCE_CAST_SPELL_ABILITY, spell.getSpellAbility());

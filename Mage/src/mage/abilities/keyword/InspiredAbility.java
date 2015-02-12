@@ -33,6 +33,7 @@ import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 
 /**
  * Inspired ability word
@@ -61,11 +62,13 @@ public class InspiredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UNTAPPED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.UNTAPPED) && event.getTargetId().equals(this.getSourceId())) {
-            return true;
-        }
-        return false;
+        return event.getTargetId().equals(this.getSourceId());
     }
 
     @Override

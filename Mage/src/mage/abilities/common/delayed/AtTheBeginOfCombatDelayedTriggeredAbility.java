@@ -20,11 +20,13 @@ public class AtTheBeginOfCombatDelayedTriggeredAbility extends DelayedTriggeredA
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.COMBAT_PHASE_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.COMBAT_PHASE_PRE) {
-            return true;
-        }
-        return false;
+        return true;
     }
 
     @Override

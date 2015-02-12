@@ -97,12 +97,15 @@ class SecretPlanTriggeredAbility extends TriggeredAbilityImpl{
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.TURNEDFACEUP;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TURNEDFACEUP) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent.getControllerId().equals(this.controllerId)) {
-                return true;
-            }
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent.getControllerId().equals(this.controllerId)) {
+            return true;
         }
         return false;
     }

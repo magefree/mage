@@ -97,26 +97,29 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            UUID targetId = event.getTargetId();
-            Permanent permanent = game.getPermanent(targetId);
-            if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
-                if (!setTargetPointer.equals(SetTargetPointer.NONE)) {
-                    for (Effect effect : this.getEffects()) {
-                        switch(setTargetPointer) {
-                            case PERMANENT:
-                                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                                break;
-                            case PLAYER:
-                                effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));
-                                break;
-                        }
-                        
+        UUID targetId = event.getTargetId();
+        Permanent permanent = game.getPermanent(targetId);
+        if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
+            if (!setTargetPointer.equals(SetTargetPointer.NONE)) {
+                for (Effect effect : this.getEffects()) {
+                    switch(setTargetPointer) {
+                        case PERMANENT:
+                            effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                            break;
+                        case PLAYER:
+                            effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));
+                            break;
                     }
+
                 }
-                return true;
             }
+            return true;
         }
         return false;
     }

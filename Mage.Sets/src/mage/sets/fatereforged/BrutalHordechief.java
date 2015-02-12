@@ -109,14 +109,17 @@ class BrutalHordechiefTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
-            Permanent source = game.getPermanent(event.getSourceId());
-            if (source != null && source.getControllerId().equals(controllerId)) {
-                UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(event.getSourceId(), game);
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(defendingPlayerId));
-                return true;
-            }
+        Permanent source = game.getPermanent(event.getSourceId());
+        if (source != null && source.getControllerId().equals(controllerId)) {
+            UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(event.getSourceId(), game);
+            this.getEffects().get(0).setTargetPointer(new FixedTarget(defendingPlayerId));
+            return true;
         }
         return false;
     }

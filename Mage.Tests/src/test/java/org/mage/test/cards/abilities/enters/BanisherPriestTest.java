@@ -72,7 +72,7 @@ public class BanisherPriestTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
 
         /**
-        * Banisher Pries
+        * Banisher Priest
         * Creature — Human Cleric 2/2, 1WW
         * When Banisher Priest enters the battlefield, exile target creature an opponent controls until Banisher Priest leaves the battlefield.
         */

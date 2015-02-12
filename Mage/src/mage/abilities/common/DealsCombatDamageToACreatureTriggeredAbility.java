@@ -65,21 +65,23 @@ public class DealsCombatDamageToACreatureTriggeredAbility extends TriggeredAbili
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getType() == EventType.DAMAGED_CREATURE) {
-                  if (event.getSourceId().equals(this.sourceId)
-                    && ((DamagedCreatureEvent) event).isCombatDamage()) {
-                            if (setTargetPointer) {
-                                for (Effect effect : this.getEffects()) {
-                                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                                        effect.setValue("damage", event.getAmount());
-                                }
-                            }
-                            return true;
-                    }
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
+    }
 
-            }
-            return false;
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+      if (event.getSourceId().equals(this.sourceId)
+        && ((DamagedCreatureEvent) event).isCombatDamage()) {
+                if (setTargetPointer) {
+                    for (Effect effect : this.getEffects()) {
+                            effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                            effect.setValue("damage", event.getAmount());
+                    }
+                }
+                return true;
+        }
+        return false;
     }
 
     @Override

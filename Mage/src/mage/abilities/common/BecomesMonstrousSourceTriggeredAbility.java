@@ -57,8 +57,13 @@ public class BecomesMonstrousSourceTriggeredAbility extends TriggeredAbilityImpl
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.BECOMES_MONSTROUS;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(EventType.BECOMES_MONSTROUS) && event.getSourceId().equals(this.getSourceId())) {
+        if (event.getSourceId().equals(this.getSourceId())) {
             this.monstrosityValue = event.getAmount();
             return true;
         }

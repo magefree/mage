@@ -136,6 +136,7 @@ class FlickerformEffect extends OneShotEffect {
                             new FlickerformReturnEffect(enchantedCreature.getId(), exileZoneId));
                     delayedAbility.setSourceId(source.getSourceId());
                     delayedAbility.setControllerId(source.getControllerId());
+                    delayedAbility.setSourceObject(source.getSourceObject(game));
                     game.addDelayedTriggeredAbility(delayedAbility);
                 }
                 return true;

@@ -75,17 +75,20 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
-            Permanent sourcePermanent = game.getPermanent(event.getSourceId());
-            if (sourcePermanent != null && filter.match(sourcePermanent, sourceId, controllerId, game)) {
-                if (setTargetPointer) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getSourceId()));
-                    }
+        Permanent sourcePermanent = game.getPermanent(event.getSourceId());
+        if (sourcePermanent != null && filter.match(sourcePermanent, sourceId, controllerId, game)) {
+            if (setTargetPointer) {
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getSourceId()));
                 }
-                return true;
             }
+            return true;
         }
         return false;
     }

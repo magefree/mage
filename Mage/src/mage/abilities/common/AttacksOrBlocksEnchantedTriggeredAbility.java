@@ -23,14 +23,17 @@ public class AttacksOrBlocksEnchantedTriggeredAbility extends TriggeredAbilityIm
     public AttacksOrBlocksEnchantedTriggeredAbility copy() {
         return new AttacksOrBlocksEnchantedTriggeredAbility(this);
     }
-    
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED || event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
+    }
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanent(this.getSourceId());
-         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED || event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
-            if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
-                return true;
-            }
+        if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
+            return true;
         }
         return false;
     }

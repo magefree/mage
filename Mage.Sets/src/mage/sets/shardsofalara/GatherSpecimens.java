@@ -100,6 +100,11 @@ class GatherSpecimensReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE || event.getType() == GameEvent.EventType.CREATE_TOKEN;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE
                 && ((ZoneChangeEvent) event).getToZone() == Zone.BATTLEFIELD) {

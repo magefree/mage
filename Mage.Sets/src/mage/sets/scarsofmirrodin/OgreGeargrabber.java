@@ -111,6 +111,7 @@ class OgreGeargrabberEffect1 extends OneShotEffect {
             OgreGeargrabberDelayedTriggeredAbility delayedAbility = new OgreGeargrabberDelayedTriggeredAbility(equipmentId);
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
+            delayedAbility.setSourceObject(source.getSourceObject(game));
             game.addDelayedTriggeredAbility(delayedAbility);
             Permanent equipment = game.getPermanent(equipmentId);
             if (equipment != null) {

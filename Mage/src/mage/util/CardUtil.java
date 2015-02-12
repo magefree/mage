@@ -52,6 +52,7 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.filter.FilterMana;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.util.functions.CopyFunction;
@@ -490,7 +491,9 @@ public class CardUtil {
     
     public static UUID getObjectExileZoneId(Game game, MageObject mageObject) {
         int zoneChangeCounter = 0;
-        if (mageObject instanceof Card) {
+        if (mageObject instanceof Permanent) {
+            zoneChangeCounter = ((Permanent) mageObject).getZoneChangeCounter();
+        } else if (mageObject instanceof Card) {
             zoneChangeCounter = ((Card) mageObject).getZoneChangeCounter();
         }
         return getExileZoneId(getObjectZoneString(SOURCE_EXILE_ZONE_TEXT,mageObject.getId(), game, zoneChangeCounter, false), game);

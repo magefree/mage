@@ -57,11 +57,13 @@ public class AtTheEndOfTurnStepPostDelayedTriggeredAbility extends DelayedTrigge
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.END_TURN_STEP_POST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.END_TURN_STEP_POST) {
-            return true;
-        }
-        return false;
+        return true;
     }
 
     @Override

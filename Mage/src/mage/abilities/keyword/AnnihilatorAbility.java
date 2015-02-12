@@ -69,8 +69,13 @@ public class AnnihilatorAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ATTACKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
+        if (event.getSourceId().equals(this.getSourceId())) {
             UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(sourceId, game);
             if (defendingPlayerId != null) {
                 // the id has to be set here because the source can be leave battlefield

@@ -133,8 +133,13 @@ class MadnessTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.MADNESS_CARD_EXILED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.MADNESS_CARD_EXILED && event.getTargetId().equals(getSourceId());
+        return event.getTargetId().equals(getSourceId());
     }
 
     @Override

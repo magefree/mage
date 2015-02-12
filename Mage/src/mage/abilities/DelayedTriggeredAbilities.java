@@ -60,6 +60,9 @@ import mage.game.events.GameEvent;
                         continue;
                     }
                 }
+                if (!ability.checkEventType(event, game)) {
+                    continue;
+                }
                 if (ability.checkTrigger(event, game)) {
                     ability.trigger(game, ability.controllerId);
                     if (ability.getTriggerOnlyOnce()) {

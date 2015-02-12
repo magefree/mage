@@ -57,20 +57,23 @@ public class BlocksOrBecomesBlockedByCreatureTriggeredAbility extends TriggeredA
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
-            if (event.getSourceId().equals(this.getSourceId())) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                }
-                return true;
+        if (event.getSourceId().equals(this.getSourceId())) {
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
             }
-            if (event.getTargetId().equals(this.getSourceId())) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getSourceId()));
-                }
-                return true;
+            return true;
+        }
+        if (event.getTargetId().equals(this.getSourceId())) {
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getSourceId()));
             }
+            return true;
         }
         return false;
     }

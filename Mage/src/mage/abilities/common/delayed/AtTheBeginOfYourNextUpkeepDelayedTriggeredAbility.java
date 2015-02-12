@@ -34,8 +34,13 @@ public class AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility extends DelayedTr
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId);
+        return event.getPlayerId().equals(this.controllerId);
     }
 }
 

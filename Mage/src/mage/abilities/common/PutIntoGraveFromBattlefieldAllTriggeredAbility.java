@@ -57,19 +57,22 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD
-                    && zEvent.getToZone() == Zone.GRAVEYARD) {                
-                if (filter.match(zEvent.getTarget(), this.getSourceId(), this.getControllerId(), game)) {
-                    if (setTargetPointer) {
-                        for (Effect effect :this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getSourceId()));
-                        }
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (zEvent.getFromZone() == Zone.BATTLEFIELD
+                && zEvent.getToZone() == Zone.GRAVEYARD) {                
+            if (filter.match(zEvent.getTarget(), this.getSourceId(), this.getControllerId(), game)) {
+                if (setTargetPointer) {
+                    for (Effect effect :this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getSourceId()));
                     }
-                    return true;
                 }
+                return true;
             }
         }
         return false;

@@ -58,8 +58,13 @@ public class BlocksCreatureTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.BLOCKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
+        if (event.getSourceId().equals(this.getSourceId())) {
             if (setTargetPointer) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));

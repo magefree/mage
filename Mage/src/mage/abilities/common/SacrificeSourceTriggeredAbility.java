@@ -55,11 +55,13 @@ public class SacrificeSourceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-         if (event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT && event.getTargetId().equals(sourceId)) {
-            return true;
-        }
-        return false;
+         return event.getTargetId().equals(sourceId);
     }
 
     @Override

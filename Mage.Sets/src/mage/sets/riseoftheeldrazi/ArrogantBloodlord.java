@@ -133,6 +133,7 @@ class ArrogantBloodlordEffect extends OneShotEffect {
             AtTheEndOfCombatDelayedTriggeredAbility delayedAbility = new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect());
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
+            delayedAbility.setSourceObject(source.getSourceObject(game));
             delayedAbility.getEffects().get(0).setTargetPointer(new FixedTarget(source.getSourceId()));
             game.addDelayedTriggeredAbility(delayedAbility);
             return true;

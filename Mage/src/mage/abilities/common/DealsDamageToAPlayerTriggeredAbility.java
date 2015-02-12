@@ -63,8 +63,13 @@ public class DealsDamageToAPlayerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.DAMAGED_PLAYER && event.getSourceId().equals(this.sourceId)) {
+        if (event.getSourceId().equals(this.sourceId)) {
             if (setTargetPointer) {
                 for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getPlayerId()));

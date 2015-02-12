@@ -73,61 +73,64 @@ public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DRAW_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DRAW_STEP_PRE) {
-            switch (targetController) {
-                case YOU:
-                    boolean yours = event.getPlayerId().equals(this.controllerId);
-                    if (yours) {
-                        if (getTargets().size() == 0) {
-                            for (Effect effect : this.getEffects()) {
-                                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                            }
+        switch (targetController) {
+            case YOU:
+                boolean yours = event.getPlayerId().equals(this.controllerId);
+                if (yours) {
+                    if (getTargets().size() == 0) {
+                        for (Effect effect : this.getEffects()) {
+                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                         }
                     }
-                    return yours;
-                case OPPONENT:
-                    if (game.getPlayer(this.controllerId).hasOpponent(event.getPlayerId(), game)) {
-                        if (getTargets().size() == 0) {
-                            for (Effect effect : this.getEffects()) {
-                                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                            }
-                        }
-                        return true;
-                    }
-                    break;
-                case NOT_YOU:
-                    if (!this.controllerId.equals(event.getPlayerId())) {
-                        if (getTargets().size() == 0) {
-                            for (Effect effect : this.getEffects()) {
-                                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                            }
-                        }
-                        return true;
-                    }
-                    break;
-                case CONTROLLER_ATTACHED_TO:
-                    Permanent attachment = game.getPermanent(sourceId);
-                    if (attachment != null && attachment.getAttachedTo() != null) {
-                        Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
-                        if (attachedTo != null && attachedTo.getControllerId().equals(event.getPlayerId())) {
-                            if (getTargets().size() == 0) {
-                                for (Effect effect : this.getEffects()) {
-                                    effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                                }
-                            }
-                            return true;
-                        }
-                    }
-                    break;
-                case ANY:
+                }
+                return yours;
+            case OPPONENT:
+                if (game.getPlayer(this.controllerId).hasOpponent(event.getPlayerId(), game)) {
                     if (getTargets().size() == 0) {
                         for (Effect effect : this.getEffects()) {
                             effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                         }
                     }
                     return true;
-            }
+                }
+                break;
+            case NOT_YOU:
+                if (!this.controllerId.equals(event.getPlayerId())) {
+                    if (getTargets().size() == 0) {
+                        for (Effect effect : this.getEffects()) {
+                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                        }
+                    }
+                    return true;
+                }
+                break;
+            case CONTROLLER_ATTACHED_TO:
+                Permanent attachment = game.getPermanent(sourceId);
+                if (attachment != null && attachment.getAttachedTo() != null) {
+                    Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
+                    if (attachedTo != null && attachedTo.getControllerId().equals(event.getPlayerId())) {
+                        if (getTargets().size() == 0) {
+                            for (Effect effect : this.getEffects()) {
+                                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                            }
+                        }
+                        return true;
+                    }
+                }
+                break;
+            case ANY:
+                if (getTargets().size() == 0) {
+                    for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                    }
+                }
+                return true;
         }
         return false;
     }

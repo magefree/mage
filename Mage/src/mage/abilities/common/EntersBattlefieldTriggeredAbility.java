@@ -67,12 +67,13 @@ public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
-                && event.getTargetId().equals(getSourceId())) {
-            return true;
-        }
-        return false;
+        return  event.getTargetId().equals(getSourceId());
     }
 
     @Override

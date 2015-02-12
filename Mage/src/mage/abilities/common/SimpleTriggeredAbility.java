@@ -68,11 +68,14 @@ public class SimpleTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == eventType;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == eventType) {
-            if (!onlyController || event.getPlayerId().equals(this.controllerId)) {
-               return true;
-            }
+        if (!onlyController || event.getPlayerId().equals(this.controllerId)) {
+           return true;
         }
         return false;
     }

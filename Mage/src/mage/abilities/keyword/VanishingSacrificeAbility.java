@@ -19,8 +19,13 @@ public class VanishingSacrificeAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.COUNTER_REMOVED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.COUNTER_REMOVED && event.getData().equals("time") && event.getTargetId().equals(this.getSourceId())) {
+        if (event.getData().equals("time") && event.getTargetId().equals(this.getSourceId())) {
             Permanent p = game.getPermanent(this.getSourceId());
             if (p != null) {
                 return p.getCounters().getCount(CounterType.TIME) == 0;

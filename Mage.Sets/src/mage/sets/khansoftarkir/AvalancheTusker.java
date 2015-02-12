@@ -85,8 +85,13 @@ class AvalancheTuskerAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
+        if (event.getSourceId().equals(this.getSourceId())) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
             UUID defenderId = game.getCombat().getDefendingPlayerId(sourceId, game);
             filter.add(new ControllerIdPredicate(defenderId));

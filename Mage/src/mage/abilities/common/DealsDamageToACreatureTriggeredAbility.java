@@ -68,28 +68,30 @@ public class DealsDamageToACreatureTriggeredAbility extends TriggeredAbilityImpl
     public DealsDamageToACreatureTriggeredAbility copy() {
         return new DealsDamageToACreatureTriggeredAbility(this);
     }
+    
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
+    }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.DAMAGED_CREATURE) {
-            if (event.getSourceId().equals(this.sourceId)
-                    && (!combatOnly || ((DamagedCreatureEvent) event).isCombatDamage())) {
-                if (filter != null) {
-                    Permanent creature = game.getPermanentOrLKIBattlefield(event.getTargetId());
-                    if (creature == null || !filter.match(creature, getSourceId(), getControllerId(), game)) {
-                        return false;
-                    }
+        if (event.getSourceId().equals(this.sourceId)
+                && (!combatOnly || ((DamagedCreatureEvent) event).isCombatDamage())) {
+            if (filter != null) {
+                Permanent creature = game.getPermanentOrLKIBattlefield(event.getTargetId());
+                if (creature == null || !filter.match(creature, getSourceId(), getControllerId(), game)) {
+                    return false;
                 }
-                if (setTargetPointer) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                        effect.setValue("damage", event.getAmount());
-                    }
-                }
-                return true;
             }
-
-        }        
+            if (setTargetPointer) {
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                    effect.setValue("damage", event.getAmount());
+                }
+            }
+            return true;
+        }
         return false;
     }
 

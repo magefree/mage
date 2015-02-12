@@ -83,29 +83,32 @@ public class AtTheBeginOMainPhaseDelayedTriggeredAbility extends DelayedTriggere
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return checkPhase(event.getType());
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (checkPhase(event.getType())) {
-            switch (targetController) {
-                case ANY:
+        switch (targetController) {
+            case ANY:
+                return true;
+            case YOU:
+                boolean yours = event.getPlayerId().equals(this.controllerId);
+                return yours;
+            case OPPONENT:
+                if (game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
                     return true;
-                case YOU:
-                    boolean yours = event.getPlayerId().equals(this.controllerId);
-                    return yours;
-                case OPPONENT:
-                    if (game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
+                }
+                break;
+
+            case CONTROLLER_ATTACHED_TO:
+                Permanent attachment = game.getPermanent(sourceId);
+                if (attachment != null && attachment.getAttachedTo() != null) {
+                    Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
+                    if (attachedTo != null && attachedTo.getControllerId().equals(event.getPlayerId())) {
                         return true;
                     }
-                    break;
-
-                case CONTROLLER_ATTACHED_TO:
-                    Permanent attachment = game.getPermanent(sourceId);
-                    if (attachment != null && attachment.getAttachedTo() != null) {
-                        Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
-                        if (attachedTo != null && attachedTo.getControllerId().equals(event.getPlayerId())) {
-                            return true;
-                        }
-                    }
-            }
+                }
         }
         return false;
     }

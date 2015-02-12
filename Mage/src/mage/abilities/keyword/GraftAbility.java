@@ -83,20 +83,23 @@ public class GraftAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            Permanent sourcePermanent = game.getPermanent(this.getSourceId());
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (sourcePermanent != null
-                    && permanent != null
-                    && !sourcePermanent.getId().equals(permanent.getId())
-                    && sourcePermanent.getCounters().containsKey(CounterType.P1P1)
-                    && filter.match(permanent, game)) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                }
-                return true;
+        Permanent sourcePermanent = game.getPermanent(this.getSourceId());
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (sourcePermanent != null
+                && permanent != null
+                && !sourcePermanent.getId().equals(permanent.getId())
+                && sourcePermanent.getCounters().containsKey(CounterType.P1P1)
+                && filter.match(permanent, game)) {
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
             }
+            return true;
         }
         return false;
     }

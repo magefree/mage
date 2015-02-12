@@ -235,8 +235,13 @@ class FlashbackTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(this.sourceId)) {
+        if (event.getTargetId().equals(this.sourceId)) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getFromZone() == Zone.STACK) {
                 return true;

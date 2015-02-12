@@ -68,18 +68,21 @@ public class AttackedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
-            UUID playerId = game.getCombat().getDefendingPlayerId(event.getSourceId(), game);
-            Permanent attackingCreature = game.getPermanent(event.getSourceId());
-            if (getControllerId().equals(playerId) && attackingCreature != null) {
-                if (setTargetPointer) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getSourceId()));
-                    }
+        UUID playerId = game.getCombat().getDefendingPlayerId(event.getSourceId(), game);
+        Permanent attackingCreature = game.getPermanent(event.getSourceId());
+        if (getControllerId().equals(playerId) && attackingCreature != null) {
+            if (setTargetPointer) {
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getSourceId()));
                 }
-                return true;
             }
+            return true;
         }
         return false;
     }

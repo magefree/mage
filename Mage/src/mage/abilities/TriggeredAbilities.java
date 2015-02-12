@@ -67,6 +67,9 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
     public void checkTriggers(GameEvent event, Game game) {
         for (Iterator<TriggeredAbility> it = this.values().iterator(); it.hasNext();) {
             TriggeredAbility ability = it.next();
+            if (!ability.checkEventType(event, game)) {
+                continue;
+            }
             // for effects like when leaves battlefield or destroyed use ShortLKI to check if permanent was in the correct zone before (e.g. Oblivion Ring or Karmic Justice)
             if (ability.isInUseableZone(game, null, event.getType().equals(EventType.ZONE_CHANGE) || event.getType().equals(EventType.DESTROYED_PERMANENT))) {
                 if (!game.getContinuousEffects().preventedByRuleModification(event, ability, game, false)) {

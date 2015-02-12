@@ -32,13 +32,16 @@ public class BecomesTappedCreatureControlledTriggeredAbility extends TriggeredAb
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.TAPPED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TAPPED) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getControllerId().equals(this.controllerId) 
-                    && permanent.getCardType().contains(CardType.CREATURE)) {
-                return true;
-            }
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent != null && permanent.getControllerId().equals(this.controllerId) 
+                && permanent.getCardType().contains(CardType.CREATURE)) {
+            return true;
         }
         return false;
     }

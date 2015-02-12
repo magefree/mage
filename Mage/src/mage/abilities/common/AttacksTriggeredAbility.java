@@ -68,9 +68,13 @@ public class AttacksTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DECLARED_ATTACKERS;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.DECLARED_ATTACKERS
-                && game.getCombat().getAttackers().contains(this.getSourceId()) ) {
+        if (game.getCombat().getAttackers().contains(this.getSourceId()) ) {
             switch(setTargetPointer) {
                 case PLAYER:
                     UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(getSourceId(), game);

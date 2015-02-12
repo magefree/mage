@@ -37,8 +37,13 @@ public class AtTheBeginOfNextCleanupDelayedTriggeredAbility extends DelayedTrigg
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
+    public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.CLEANUP_STEP_PRE;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return true;
     }
 
     @Override

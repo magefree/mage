@@ -39,7 +39,8 @@ import mage.game.permanent.Permanent;
  * @author garnold
  */
 public class BlocksAttachedTriggeredAbility extends TriggeredAbilityImpl{
-    private String attachedDescription;
+    
+    private final String attachedDescription;
 
     public BlocksAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
@@ -57,12 +58,15 @@ public class BlocksAttachedTriggeredAbility extends TriggeredAbilityImpl{
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DECLARED_BLOCKERS;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARED_BLOCKERS) {
-            Permanent attachment = game.getPermanent(this.getSourceId());
-            if (attachment != null && attachment.getAttachedTo() != null && game.getCombat().getBlockers().contains(attachment.getAttachedTo())) {
-                return true;
-            }
+        Permanent attachment = game.getPermanent(this.getSourceId());
+        if (attachment != null && attachment.getAttachedTo() != null && game.getCombat().getBlockers().contains(attachment.getAttachedTo())) {
+            return true;
         }
         return false;
     }

@@ -49,8 +49,13 @@ public class BecomesBlockedByCreatureTriggeredAbility extends TriggeredAbilityIm
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED && event.getTargetId().equals(this.getSourceId())) {
+        if (event.getTargetId().equals(this.getSourceId())) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(event.getSourceId()));
             }

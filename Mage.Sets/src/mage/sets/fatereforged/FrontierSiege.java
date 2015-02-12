@@ -122,10 +122,14 @@ class FrontierSiegeKhansTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.PRECOMBAT_MAIN_PHASE_PRE
+                || event.getType() == GameEvent.EventType.POSTCOMBAT_MAIN_PHASE_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return (event.getType() == GameEvent.EventType.PRECOMBAT_MAIN_PHASE_PRE
-                || event.getType() == GameEvent.EventType.POSTCOMBAT_MAIN_PHASE_PRE)
-                && event.getPlayerId().equals(this.controllerId);
+        return event.getPlayerId().equals(this.controllerId);
     }
 
     @Override

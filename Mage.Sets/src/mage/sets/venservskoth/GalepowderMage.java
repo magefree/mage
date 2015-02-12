@@ -120,6 +120,7 @@ class GalepowderMageEffect extends OneShotEffect {
                             AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(exileId, Zone.BATTLEFIELD));
                             delayedAbility.setSourceId(source.getSourceId());
                             delayedAbility.setControllerId(card.getOwnerId());
+                            delayedAbility.setSourceObject(source.getSourceObject(game));
                             game.addDelayedTriggeredAbility(delayedAbility);
                         }
                     }

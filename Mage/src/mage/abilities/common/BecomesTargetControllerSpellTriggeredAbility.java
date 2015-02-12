@@ -55,12 +55,15 @@ public class BecomesTargetControllerSpellTriggeredAbility extends TriggeredAbili
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.TARGETED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.TARGETED) {
-            if (event.getTargetId().equals(controllerId)) {
-                if (game.getObject(event.getSourceId()) instanceof Spell) {
-                    return true;
-                }
+        if (event.getTargetId().equals(controllerId)) {
+            if (game.getObject(event.getSourceId()) instanceof Spell) {
+                return true;
             }
         }
         return false;

@@ -75,22 +75,25 @@ public class BlocksCreatureAttachedTriggeredAbility extends TriggeredAbilityImpl
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
-            Permanent p = game.getPermanent(event.getSourceId());
-            if (p != null && p.getAttachments().contains(this.getSourceId())) {
-                if (setFixedTargetPointer) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                    }
+        Permanent p = game.getPermanent(event.getSourceId());
+        if (p != null && p.getAttachments().contains(this.getSourceId())) {
+            if (setFixedTargetPointer) {
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }
-                if (setFixedTargetPointerToBlocked) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                    }
-                }
-                return true;
             }
+            if (setFixedTargetPointerToBlocked) {
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                }
+            }
+            return true;
         }
         return false;
     }
