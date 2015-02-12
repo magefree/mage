@@ -51,8 +51,10 @@ public class ForbiddenOrchard extends CardImpl {
     public ForbiddenOrchard (UUID ownerId) {
         super(ownerId, 276, "Forbidden Orchard", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "CHK";
+        
         // {T}: Add one mana of any color to your mana pool.
         this.addAbility(new AnyColorManaAbility());
+        
         // Whenever you tap Forbidden Orchard for mana, put a 1/1 colorless Spirit creature token onto the battlefield under target opponent's control.
         this.addAbility(new ForbiddenOrchardTriggeredAbility());
     }
@@ -79,11 +81,13 @@ class ForbiddenOrchardTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
+    }
+    
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA && event.getSourceId().equals(getSourceId())) {
-            return true;
-        }
-        return false;
+        return event.getSourceId().equals(getSourceId());
     }
 
     @Override

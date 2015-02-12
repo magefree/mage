@@ -376,7 +376,7 @@ public abstract class AbilityImpl implements Ability {
                     } else if (effect instanceof DynamicManaEffect) {
                         mana = ((DynamicManaEffect)effect).getMana(game, this);
                     }
-                    if (mana != null) { // if mana == null the event has to be fired in the mana effect
+                    if (mana != null && mana.getAny() == 0) { // if mana == null or Any > 0 the event has to be fired in the mana effect to know which mana was produced
                         ManaEvent event = new ManaEvent(GameEvent.EventType.TAPPED_FOR_MANA, sourceId, sourceId, controllerId, mana);
                         if (!game.replaceEvent(event)) {
                             game.fireEvent(event);
