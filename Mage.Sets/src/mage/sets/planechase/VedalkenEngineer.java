@@ -159,7 +159,7 @@ class VedalkenEngineerEffect extends ManaEffect {
         }
 
         Mana mana = new Mana();
-        ChoiceColor choiceColor = (ChoiceColor) source.getChoices().get(0);
+        ChoiceColor choiceColor = new ChoiceColor(true);
         while (!controller.choose(Outcome.Benefit, choiceColor, game)) {
             if (!controller.isInGame()) {
                 return false;
