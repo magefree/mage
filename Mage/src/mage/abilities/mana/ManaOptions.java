@@ -114,7 +114,7 @@ public class ManaOptions extends ArrayList<Mana> {
             if (abilities.size() == 1) {
                 //if there is only one mana option available add it to all the existing options
                 ManaAbility ability = abilities.get(0);
-                List<Mana> netManas =  abilities.get(0).getNetMana(game);
+                List<Mana> netManas =  abilities.get(0).getNetMana(game);                
                 // no mana costs
                 if (ability.getManaCosts().isEmpty()) {
                     if (netManas.size() == 1) {
@@ -154,7 +154,9 @@ public class ManaOptions extends ArrayList<Mana> {
                 List<Mana> copy = copy();
                 this.clear();
                 for (ManaAbility ability: abilities) {
+                    
                     List<Mana> netManas =  ability.getNetMana(game);
+                    
                     if (ability.getManaCosts().isEmpty()) {
                         for (Mana netMana: netManas) {
                             for (Mana mana: copy) {
@@ -167,12 +169,22 @@ public class ManaOptions extends ArrayList<Mana> {
                     }
                     else {
                         for (Mana netMana: netManas) {
+                            CombineWithExisting:
                             for (Mana mana: copy) {                            
                                 Mana newMana = new Mana();
                                 newMana.add(mana);
-                                if (mana.includesMana(ability.getManaCosts().getMana())) {
+                                if (mana.includesMana(ability.getManaCosts().getMana())) { // costs can be paid
                                     newMana.subtractCost(ability.getManaCosts().getMana());
                                     newMana.add(netMana);
+                                    // if the new mana is more than another already existing than replace
+                                    for(Mana existingMana: this) {
+                                        Mana moreValuable = Mana.getMoreValuableMana(newMana, existingMana);
+                                        if (moreValuable != null) {
+                                            existingMana.setToMana(moreValuable);
+                                            continue CombineWithExisting;
+                                        } 
+                                    }
+                                    // no existing Mana includes this new mana so add
                                     this.add(newMana);
                                 }                                
                             }

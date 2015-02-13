@@ -167,6 +167,6 @@ class NykthosDynamicManaEffect extends ManaEffect {
                     break;
             }
         }
-        return computedMana;
+        return computedMana.copy();
     }
 }

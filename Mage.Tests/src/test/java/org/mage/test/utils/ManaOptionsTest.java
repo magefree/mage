@@ -164,6 +164,41 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         Assert.assertEquals("{R}{G}{U}{W}{B}", getManaOption(1, manaOptions));
     }
 
+    // Nykthos, Shrine to Nyx
+    // {T}: Add {1} to your mana pool.
+    // {2}, {T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color. (Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)
+    @Test
+    public void testNykthos1() {
+        addCard(Zone.BATTLEFIELD, playerA, "Sedge Scorpion", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Nykthos, Shrine to Nyx", 1);
+
+        setStopAt(1, PhaseStep. UPKEEP);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+
+        Assert.assertEquals("mana variations don't fit",1, manaOptions.size());
+        Assert.assertEquals("{G}{G}{G}{G}{G}", getManaOption(0, manaOptions));
+    }
+    
+    @Test
+    public void testNykthos2() {
+        addCard(Zone.BATTLEFIELD, playerA, "Sedge Scorpion", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Akroan Crusader", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Nykthos, Shrine to Nyx", 1);
+
+        setStopAt(1, PhaseStep. UPKEEP);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+
+        Assert.assertEquals("mana variations don't fit",2, manaOptions.size());
+        Assert.assertEquals("{G}{G}{G}{G}{G}", getManaOption(0, manaOptions));
+        Assert.assertEquals("{R}{R}{R}{G}", getManaOption(1, manaOptions));
+    }
+    
     private     String getManaOption(int index, ManaOptions manaOptions) {
         if (manaOptions.size() < index + 1) {
             return "";
