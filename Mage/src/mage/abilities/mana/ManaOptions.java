@@ -170,11 +170,11 @@ public class ManaOptions extends ArrayList<Mana> {
                             for (Mana mana: copy) {                            
                                 Mana newMana = new Mana();
                                 newMana.add(mana);
-                                if (mana.contains(ability.getManaCosts().getMana())) {
+                                if (mana.includesMana(ability.getManaCosts().getMana())) {
                                     newMana.subtractCost(ability.getManaCosts().getMana());
                                     newMana.add(netMana);
-                                }
-                                this.add(newMana);
+                                    this.add(newMana);
+                                }                                
                             }
                         }
                     }
@@ -228,7 +228,7 @@ public class ManaOptions extends ArrayList<Mana> {
         boolean repeatable = false;
         if (addMana.getAny() == 1 && addMana.count() == 1 && onlyManaCosts) {
             // deactivated because it does cause loops TODO: Find reason
-            //repeatable = true; // only replace to any with mana costs only will be repeated if able
+            repeatable = true; // only replace to any with mana costs only will be repeated if able
         }
         for (Mana mana: this) {
             while (mana.includesMana(cost)) {

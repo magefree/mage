@@ -128,6 +128,42 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         Assert.assertEquals("{W}{W}{Any}{Any}", getManaOption(0, manaOptions));
     }
 
+    // Crystal Quarry
+    // {T}: {1} Add  to your mana pool.
+    // {5}, {T}: Add {W}{U}{B}{R}{G} to your mana pool.
+    @Test
+    public void testCrystalQuarry() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Crystal Quarry", 1);
+
+        setStopAt(1, PhaseStep. UPKEEP);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+
+        Assert.assertEquals("mana variations don't fit",1, manaOptions.size());
+        Assert.assertEquals("{1}{G}{G}{W}{W}", getManaOption(0, manaOptions));
+    }
+    // Crystal Quarry
+    // {T}: {1} Add  to your mana pool.
+    // {5}, {T}: Add {W}{U}{B}{R}{G} to your mana pool.
+    @Test
+    public void testCrystalQuarry2() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Crystal Quarry", 1);
+
+        setStopAt(1, PhaseStep. UPKEEP);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+
+        Assert.assertEquals("mana variations don't fit",2, manaOptions.size());
+        Assert.assertEquals("{1}{G}{G}{G}{W}{W}", getManaOption(0, manaOptions));
+        Assert.assertEquals("{R}{G}{U}{W}{B}", getManaOption(1, manaOptions));
+    }
+
     private     String getManaOption(int index, ManaOptions manaOptions) {
         if (manaOptions.size() < index + 1) {
             return "";
