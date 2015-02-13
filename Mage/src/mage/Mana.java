@@ -176,6 +176,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         any -= cost.getAny();
         colorless -= cost.getColorless();
         while (colorless < 0) {
+            int oldColorless = colorless;
             if (red > 0) {
                 red--;
                 colorless++;
@@ -199,6 +200,13 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             if (black > 0) {
                 black--;
                 colorless++;
+            }
+            if (any > 0) {
+                any--;
+                colorless++;
+            }
+            if (oldColorless == colorless) {
+                break; // to prevent endless loop -> should not be possible, but who knows
             }
         }
     }

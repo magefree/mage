@@ -198,7 +198,39 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         Assert.assertEquals("{G}{G}{G}{G}{G}", getManaOption(0, manaOptions));
         Assert.assertEquals("{R}{R}{R}{G}", getManaOption(1, manaOptions));
     }
-    
+
+    @Test
+    public void testNykthos3() {
+        addCard(Zone.BATTLEFIELD, playerA, "Sylvan Caryatid", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Nykthos, Shrine to Nyx", 1);
+
+        setStopAt(1, PhaseStep. UPKEEP);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+
+        Assert.assertEquals("mana variations don't fit",1, manaOptions.size());
+        Assert.assertEquals("{1}{G}{Any}", getManaOption(0, manaOptions));
+    }
+
+    @Test
+    public void testMix1() {
+        addCard(Zone.BATTLEFIELD, playerA, "Chromatic Star", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Chromatic Sphere", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Urza's Tower", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Grove of the Burnwillows", 1);
+
+        setStopAt(1, PhaseStep. UPKEEP);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+
+        Assert.assertEquals("mana variations don't fit",2, manaOptions.size());
+        Assert.assertEquals("{Any}{Any}", getManaOption(0, manaOptions));
+        Assert.assertEquals("{Any}{Any}", getManaOption(1, manaOptions));
+    }
+
     private     String getManaOption(int index, ManaOptions manaOptions) {
         if (manaOptions.size() < index + 1) {
             return "";

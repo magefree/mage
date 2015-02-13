@@ -131,8 +131,8 @@ public class ManaOptions extends ArrayList<Mana> {
                             }                        
                         }                    
                     }                    
-                }
-                else {                    
+                } else {
+                    // the ability has mana costs
                     if (netManas.size() == 1) {
                         subtractCostAddMana(ability.getManaCosts().getMana(), netManas.get(0), ability.getCosts().isEmpty());
                     } else {
@@ -148,8 +148,7 @@ public class ManaOptions extends ArrayList<Mana> {
                         }                    
                     }                                        
                 }
-            }
-            else if (abilities.size() > 1) {
+            } else if (abilities.size() > 1) {
                 //perform a union of all existing options and the new options
                 List<Mana> copy = copy();
                 this.clear();
@@ -166,18 +165,16 @@ public class ManaOptions extends ArrayList<Mana> {
                                 this.add(newMana);
                             }
                         }
-                    }
-                    else {
+                    } else {
                         for (Mana netMana: netManas) {
                             CombineWithExisting:
-                            for (Mana mana: copy) {                            
-                                Mana newMana = new Mana();
-                                newMana.add(mana);
-                                if (mana.includesMana(ability.getManaCosts().getMana())) { // costs can be paid
+                            for (Mana previousMana: copy) {
+                                Mana newMana = new Mana(previousMana);
+                                if (previousMana.includesMana(ability.getManaCosts().getMana())) { // costs can be paid
                                     newMana.subtractCost(ability.getManaCosts().getMana());
                                     newMana.add(netMana);
-                                    // if the new mana is more than another already existing than replace
-                                    for(Mana existingMana: this) {
+                                    // if the new mana is in all colors more than another already existing than replace
+                                    for (Mana existingMana: this) {
                                         Mana moreValuable = Mana.getMoreValuableMana(newMana, existingMana);
                                         if (moreValuable != null) {
                                             existingMana.setToMana(moreValuable);
@@ -190,6 +187,7 @@ public class ManaOptions extends ArrayList<Mana> {
                             }
                         }
                     }
+
                 }
             }
         }
