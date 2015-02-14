@@ -138,11 +138,11 @@ class BaneAlleyBrokerDrawExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-      Player player = game.getPlayer(source.getControllerId());
-      if (player != null) {
-          player.drawCards(1, game);
+      Player controller = game.getPlayer(source.getControllerId());
+      if (controller != null) {
+          controller.drawCards(1, game);
           Target target = new TargetCardInHand(new FilterCard("card to exile"));
-          if (player.chooseTarget(outcome, target, source, game)) {
+          if (controller.chooseTarget(outcome, target, source, game)) {
               Card card = game.getCard(target.getFirstTarget());
               MageObject sourceObject = game.getObject(source.getSourceId());              
               if (card != null && sourceObject != null) {

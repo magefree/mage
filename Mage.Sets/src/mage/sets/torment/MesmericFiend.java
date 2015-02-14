@@ -102,15 +102,15 @@ class MesmericFiendExileEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(source.getFirstTarget());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        Permanent sourcePermanent = (Permanent) source.getSourceObject(game);
         if (controller != null && opponent != null && sourcePermanent != null) {
             opponent.revealCards(sourcePermanent.getName(), opponent.getHand(), game);
 
-            TargetCard target = new TargetCard(Zone.PICK, new FilterNonlandCard("nonland card to exile"));
+            TargetCard target = new TargetCard(Zone.HAND, new FilterNonlandCard("nonland card to exile"));
             if (controller.choose(Outcome.Exile, opponent.getHand(), target, game)) {
                 Card card = opponent.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
-                    controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourcePermanent.getName(), source.getSourceId(), game, Zone.HAND);
+                    controller.moveCardToExileWithInfo(card, CardUtil.getObjectExileZoneId(game, sourcePermanent), sourcePermanent.getName(), source.getSourceId(), game, Zone.HAND);
                 }
             }
 
@@ -142,7 +142,7 @@ class MesmericFiendLeaveEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            ExileZone exZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source.getSourceId(), true));
+            ExileZone exZone = game.getExile().getExileZone(CardUtil.getObjectExileZoneId(game, source.getSourceObject(game)));
             if (exZone != null) {
                 for (Card card : exZone.getCards(game)) {
                     if (card != null) {

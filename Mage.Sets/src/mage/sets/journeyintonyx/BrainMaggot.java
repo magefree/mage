@@ -117,7 +117,7 @@ class BrainMaggotExileEffect extends OneShotEffect {
                     Card card = opponent.getHand().get(target.getFirstTarget(), game);
                     // If source permanent leaves the battlefield before its triggered ability resolves, the target card won't be exiled.
                     if (card != null && game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
-                        controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourcePermanent.getName(), source.getSourceId(), game, Zone.HAND);
+                        controller.moveCardToExileWithInfo(card, CardUtil.getObjectExileZoneId(game, sourcePermanent), sourcePermanent.getName(), source.getSourceId(), game, Zone.HAND);
                     }
                 }
             }
@@ -183,7 +183,7 @@ class BrainMaggotReturnExiledCreatureEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            ExileZone exile = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
+            ExileZone exile = game.getExile().getExileZone(CardUtil.getObjectExileZoneId(game, source.getSourceObject(game)));
             Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
             if (exile != null && sourcePermanent != null) {
                 LinkedList<UUID> cards = new LinkedList<>(exile);
