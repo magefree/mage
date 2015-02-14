@@ -51,7 +51,7 @@ public class GatekeeperOfMalakir extends CardImpl {
     private static final FilterControlledPermanent filter;
 
     static {
-        filter = new FilterControlledPermanent(" a creature");
+        filter = new FilterControlledPermanent("creature");
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
