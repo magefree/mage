@@ -70,7 +70,7 @@ public class TorporOrb extends CardImpl {
 class TorporOrbEffect extends ContinuousRuleModifiyingEffectImpl {
 
     TorporOrbEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment, false, true);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment, false, false);
         staticText = "Creatures entering the battlefield don't cause abilities to trigger";
     }
 
