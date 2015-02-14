@@ -63,24 +63,21 @@ public class CantAttackUnlessDefenderControllsPermanent extends RestrictionEffec
     }
 
     @Override
-    public boolean canAttack(Game game) {
-        return false;
-    }
-
-    @Override
     public boolean canAttack(UUID defenderId, Ability source, Game game) {
-        UUID defendingPlayerId = null;
+        UUID defendingPlayerId;
         Player player = game.getPlayer(defenderId);
         if (player == null) {
             Permanent permanent = game.getPermanent(defenderId);
             if (permanent != null) {
                 defendingPlayerId = permanent.getControllerId();
+            } else {
+                return false;
             }
         } else {
             defendingPlayerId = defenderId;
         }
         if (defendingPlayerId != null && game.getBattlefield().countAll(filter, defendingPlayerId, game) == 0) {
-            return true;
+            return false;
         }
         return true;
     }

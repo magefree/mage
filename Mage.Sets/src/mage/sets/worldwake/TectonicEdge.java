@@ -28,32 +28,23 @@
 
 package mage.sets.worldwake;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
+import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.abilities.costs.CostImpl;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.target.common.TargetNonBasicLandPermanent;
-
-import java.util.UUID;
-import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.condition.common.OpponentControllsMoreCondition;
-import mage.abilities.condition.common.OpponentControlsPermanentCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
-import mage.filter.common.FilterLandCard;
-import mage.target.common.TargetCardInLibrary;
 
 /**
  *
