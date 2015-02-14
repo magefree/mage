@@ -28,6 +28,7 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -113,6 +114,7 @@ class ContaminationReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return true;
+        MageObject mageObject = source.getSourceObject(game);
+        return mageObject != null && mageObject.getCardType().contains(CardType.LAND);
     }
 }
