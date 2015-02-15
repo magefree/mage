@@ -48,6 +48,15 @@ public class TargetCardInExile extends TargetCard {
     private UUID zoneId;
     private boolean allExileZones;
 
+    public TargetCardInExile(FilterCard filter) {
+        this(1, 1, filter, null);
+    }
+
+    /**
+     *
+     * @param filter
+     * @param zoneId - if null card can be in ever exile zone
+     */
     public TargetCardInExile(FilterCard filter, UUID zoneId) {
         this(1, 1, filter, zoneId);
     }
@@ -59,7 +68,11 @@ public class TargetCardInExile extends TargetCard {
     public TargetCardInExile(int minNumTargets, int maxNumTargets, FilterCard filter, UUID zoneId, boolean allExileZones) {
         super(minNumTargets, maxNumTargets, Zone.EXILED, filter);
         this.zoneId = zoneId;
-        this.allExileZones = allExileZones;
+        if (zoneId == null) {
+            this.allExileZones = true;
+        } else {
+            this.allExileZones = allExileZones;
+        }
         this.targetName = filter.getMessage();
     }
 
