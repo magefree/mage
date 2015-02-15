@@ -43,7 +43,7 @@ import mage.target.Target;
 
 /**
  *
- * @author anonymous
+ * @author daagar
  */
 public class MyrLandshaper extends CardImpl {
 
