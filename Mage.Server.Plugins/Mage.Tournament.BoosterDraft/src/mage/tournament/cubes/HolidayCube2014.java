@@ -239,7 +239,7 @@ public class HolidayCube2014 extends DraftCube {
         cubeCards.add(new CardIdentity("Heartbeat of Spring", ""));
         cubeCards.add(new CardIdentity("Hellrider", ""));
         cubeCards.add(new CardIdentity("Hero of Bladehold", ""));
-        cubeCards.add(new CardIdentity("Hero of Oxid Ridge ", ""));
+        cubeCards.add(new CardIdentity("Hero of Oxid Ridge", ""));
         cubeCards.add(new CardIdentity("Hero's Downfall", ""));
         cubeCards.add(new CardIdentity("Hinterland Harbor", ""));
         cubeCards.add(new CardIdentity("Honor of the Pure", ""));
