@@ -56,10 +56,8 @@ public class RunicRepetition extends CardImpl {
         super(ownerId, 72, "Runic Repetition", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "ISD";
 
-        this.color.setBlue(true);
-
         // Return target exiled card with flashback you own to your hand.
-        TargetCardInExile target = new TargetCardInExile(filter, null);
+        TargetCardInExile target = new TargetCardInExile(filter);
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
     }
