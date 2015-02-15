@@ -28,16 +28,15 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -53,9 +52,6 @@ public class SphinxSovereign extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Sphinx");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
@@ -93,20 +89,18 @@ class SphinxSovereignEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
-            permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        }
-
-        if (player != null && permanent != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent permanent = (Permanent) source.getSourceObject(game);
+        if (controller != null && permanent != null) {
             if (!permanent.isTapped()) {
-                player.gainLife(3, game);
+                controller.gainLife(3, game);
             } else {
-                for (UUID opponentId : player.getInRange()) {
+                for (UUID opponentId : controller.getInRange()) {
+                    if (controller.hasOpponent(opponentId, game)) {
                     Player opponent = game.getPlayer(opponentId);
-                    if (opponent != null) {
-                        opponent.loseLife(3, game);
+                        if (opponent != null) {
+                            opponent.loseLife(3, game);
+                        }
                     }
                 }
             }
