@@ -25,56 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenth;
+package mage.sets.thedark;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.WinGameSourceControllerEffect;
+import mage.ObjectColor;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreatureCard;
-import mage.game.Game;
-import mage.players.Player;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author daagar
  */
-public class MortalCombat extends CardImpl {
-
-    public MortalCombat(UUID ownerId) {
-        super(ownerId, 160, "Mortal Combat", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
-        this.expansionSetCode = "10E";
-
-        // At the beginning of your upkeep, if twenty or more creature cards are in your graveyard, you win the game.
-        this.addAbility(new ConditionalTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false),
-                new TwentyGraveyardCreatureCondition(),
-                "At the beginning of your upkeep, if twenty or more creature cards are in your graveyard, you win the game."));
+public class HolyLight extends CardImpl {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Nonwhite creatures");
+    
+    static {
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.WHITE)));
     }
 
-    public MortalCombat(final MortalCombat card) {
+
+    public HolyLight(UUID ownerId) {
+        super(ownerId, 83, "Holy Light", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
+        this.expansionSetCode = "DRK";
+
+        // Nonwhite creatures get -1/-1 until end of turn.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Duration.EndOfTurn, filter, false)));
+    }
+
+    public HolyLight(final HolyLight card) {
         super(card);
     }
 
     @Override
-    public MortalCombat copy() {
-        return new MortalCombat(this);
-    }
-}
-
-class TwentyGraveyardCreatureCondition implements Condition {
-    
-    private static final FilterCreatureCard filter = new FilterCreatureCard();
-    
-    @Override
-    public boolean apply(Game game, Ability source) {  
-        Player player = game.getPlayer(source.getControllerId());
-        return player != null && player.getGraveyard().count(filter, game) >= 20;    
+    public HolyLight copy() {
+        return new HolyLight(this);
     }
 }
