@@ -30,7 +30,7 @@ package mage.sets.khansoftarkir;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -55,7 +55,7 @@ public class CranialArchive extends CardImpl {
 
         // {2}, Exile Cranial Archive: Target player shuffles his or her gravyeard into his or her library. Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CranialArchiveEffect(), new GenericManaCost(2));
-        ability.addCost(new SacrificeSourceCost());
+        ability.addCost(new ExileSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
