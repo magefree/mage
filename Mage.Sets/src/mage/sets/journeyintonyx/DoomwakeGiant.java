@@ -56,7 +56,6 @@ public class DoomwakeGiant extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Giant");
 
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
 

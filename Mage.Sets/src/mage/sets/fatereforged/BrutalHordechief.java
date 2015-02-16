@@ -34,7 +34,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.combat.BlocksIfAbleAllEffect;
@@ -168,7 +167,7 @@ class BrutalHordechiefReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(event.getPlayerId());
-        return player != null && game.isOpponent(player, source.getControllerId());
+        // this won't work correctly if coop formats are supported someday
+        return event.getPlayerId().equals(source.getSourceId());
     }
 }
