@@ -1269,7 +1269,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             hideGames();
             hideTables();
         } else {
-            logger.info("DISCONNECTED (NO Event Dispacth Thread)");
+            logger.info("DISCONNECTED (NO Event Dispatch Thread)");
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
