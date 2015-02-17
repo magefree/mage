@@ -44,7 +44,7 @@ import mage.players.Player;
 public class PreventAllDamageToPlayersEffect extends PreventionEffectImpl {
 
     public PreventAllDamageToPlayersEffect(Duration duration, boolean onlyCombat) {
-        super(duration);
+        super(duration, Integer.MAX_VALUE, onlyCombat);
         staticText = setText();
     }
 
