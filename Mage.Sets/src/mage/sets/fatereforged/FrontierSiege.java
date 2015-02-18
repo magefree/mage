@@ -89,7 +89,7 @@ public class FrontierSiege extends CardImpl {
         Ability ability2 = new ConditionalTriggeredAbility(
                 new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new FrontierSiegeFightEffect(), filter, true, SetTargetPointer.PERMANENT, ""),
                 new ModeChoiceSourceCondition("Dragons"),
-                ruleTrigger2);
+                ruleTrigger2, true);
         ability2.addTarget(new TargetCreaturePermanent(filter2));
         this.addAbility(ability2);
 
