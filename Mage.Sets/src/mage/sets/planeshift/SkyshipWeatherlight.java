@@ -37,6 +37,7 @@ public class SkyshipWeatherlight extends CardImpl {
     public SkyshipWeatherlight(UUID ownerId) {
         super(ownerId, 133, "Skyship Weatherlight", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "PLS";
+        this.supertype.add("Legendary");
         
         // When Skyship Weatherlight enters the battlefield, search your library for any number of artifact and/or creature cards and exile them. Then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SkyshipWeatherlightEffect(), false));
