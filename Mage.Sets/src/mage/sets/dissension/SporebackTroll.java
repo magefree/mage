@@ -25,50 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.sets.dissension;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.RegenerateTargetEffect;
+import mage.abilities.keyword.GraftAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.counters.CounterType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.CounterPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author fireshoes
  */
-public class CentaurGlade extends CardImpl {
-
-    public CentaurGlade(UUID ownerId) {
-        super(ownerId, 251, "Centaur Glade", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
-        this.expansionSetCode = "ONS";
-
-        // {2}{G}{G}: Put a 3/3 green Centaur creature token onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CentaurToken(), 1), new ManaCostsImpl("{2}{G}{G}")));
+public class SporebackTroll extends CardImpl {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with a +1/+1 counter on it");
+    static {
+        filter.add(new CounterPredicate(CounterType.P1P1));
     }
 
-    public CentaurGlade(final CentaurGlade card) {
+    public SporebackTroll(UUID ownerId) {
+        super(ownerId, 94, "Sporeback Troll", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "DIS";
+        this.subtype.add("Troll");
+        this.subtype.add("Mutant");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
+
+        // Graft 2
+        this.addAbility(new GraftAbility(this, 2));
+        
+        // {1}{G}: Regenerate target creature with a +1/+1 counter on it.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{1}{G}"));
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public SporebackTroll(final SporebackTroll card) {
         super(card);
     }
 
     @Override
-    public CentaurGlade copy() {
-        return new CentaurGlade(this);
-    }
-}
-
-class CentaurToken extends Token {
-    CentaurToken() {
-        super("Centaur", "3/3 green Centaur creature token");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Centaur");
-        power = new MageInt(3);
-        toughness = new MageInt(3);
+    public SporebackTroll copy() {
+        return new SporebackTroll(this);
     }
 }

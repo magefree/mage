@@ -25,50 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.sets.legions;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.RegenerateTargetEffect;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author fireshoes
  */
-public class CentaurGlade extends CardImpl {
+public class DaruMender extends CardImpl {
 
-    public CentaurGlade(UUID ownerId) {
-        super(ownerId, 251, "Centaur Glade", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
-        this.expansionSetCode = "ONS";
+    public DaruMender(UUID ownerId) {
+        super(ownerId, 8, "Daru Mender", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");
+        this.expansionSetCode = "LGN";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // {2}{G}{G}: Put a 3/3 green Centaur creature token onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CentaurToken(), 1), new ManaCostsImpl("{2}{G}{G}")));
+        // Morph {W}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{W}")));
+        // When Daru Mender is turned face up, regenerate target creature.
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new RegenerateTargetEffect());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public CentaurGlade(final CentaurGlade card) {
+    public DaruMender(final DaruMender card) {
         super(card);
     }
 
     @Override
-    public CentaurGlade copy() {
-        return new CentaurGlade(this);
-    }
-}
-
-class CentaurToken extends Token {
-    CentaurToken() {
-        super("Centaur", "3/3 green Centaur creature token");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Centaur");
-        power = new MageInt(3);
-        toughness = new MageInt(3);
+    public DaruMender copy() {
+        return new DaruMender(this);
     }
 }

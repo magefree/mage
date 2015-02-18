@@ -25,50 +25,61 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.sets.planeshift;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.TargetSpell;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author fireshoes
  */
-public class CentaurGlade extends CardImpl {
-
-    public CentaurGlade(UUID ownerId) {
-        super(ownerId, 251, "Centaur Glade", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
-        this.expansionSetCode = "ONS";
-
-        // {2}{G}{G}: Put a 3/3 green Centaur creature token onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CentaurToken(), 1), new ManaCostsImpl("{2}{G}{G}")));
+public class ErtaiTheCorrupted extends CardImpl {
+    
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a creature or enchantment");
+    
+    static {
+        filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
-    public CentaurGlade(final CentaurGlade card) {
+    public ErtaiTheCorrupted(UUID ownerId) {
+        super(ownerId, 107, "Ertai, the Corrupted", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{U}{B}");
+        this.expansionSetCode = "PLS";
+        this.supertype.add("Legendary");
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(4);
+
+        // {U}, {tap}, Sacrifice a creature or enchantment: Counter target spell.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{U}"));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addTarget(new TargetSpell());
+        this.addAbility(ability);
+}
+
+    public ErtaiTheCorrupted(final ErtaiTheCorrupted card) {
         super(card);
     }
 
     @Override
-    public CentaurGlade copy() {
-        return new CentaurGlade(this);
-    }
-}
-
-class CentaurToken extends Token {
-    CentaurToken() {
-        super("Centaur", "3/3 green Centaur creature token");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Centaur");
-        power = new MageInt(3);
-        toughness = new MageInt(3);
+    public ErtaiTheCorrupted copy() {
+        return new ErtaiTheCorrupted(this);
     }
 }

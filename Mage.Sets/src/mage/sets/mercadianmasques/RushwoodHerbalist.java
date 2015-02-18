@@ -25,50 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.sets.mercadianmasques;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author fireshoes
  */
-public class CentaurGlade extends CardImpl {
+public class RushwoodHerbalist extends CardImpl {
 
-    public CentaurGlade(UUID ownerId) {
-        super(ownerId, 251, "Centaur Glade", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
-        this.expansionSetCode = "ONS";
+    public RushwoodHerbalist(UUID ownerId) {
+        super(ownerId, 265, "Rushwood Herbalist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        this.expansionSetCode = "MMQ";
+        this.subtype.add("Human");
+        this.subtype.add("Spellshaper");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // {2}{G}{G}: Put a 3/3 green Centaur creature token onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CentaurToken(), 1), new ManaCostsImpl("{2}{G}{G}")));
+        // {G}, {tap}, Discard a card: Regenerate target creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{G}"));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new DiscardCardCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public CentaurGlade(final CentaurGlade card) {
+    public RushwoodHerbalist(final RushwoodHerbalist card) {
         super(card);
     }
 
     @Override
-    public CentaurGlade copy() {
-        return new CentaurGlade(this);
-    }
-}
-
-class CentaurToken extends Token {
-    CentaurToken() {
-        super("Centaur", "3/3 green Centaur creature token");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Centaur");
-        power = new MageInt(3);
-        toughness = new MageInt(3);
+    public RushwoodHerbalist copy() {
+        return new RushwoodHerbalist(this);
     }
 }

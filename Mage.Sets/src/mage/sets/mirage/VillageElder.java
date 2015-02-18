@@ -25,50 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.sets.mirage;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author fireshoes
  */
-public class CentaurGlade extends CardImpl {
-
-    public CentaurGlade(UUID ownerId) {
-        super(ownerId, 251, "Centaur Glade", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
-        this.expansionSetCode = "ONS";
-
-        // {2}{G}{G}: Put a 3/3 green Centaur creature token onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CentaurToken(), 1), new ManaCostsImpl("{2}{G}{G}")));
+public class VillageElder extends CardImpl {
+    
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a Forest");
+    static{
+        filter.add(new SubtypePredicate("Forest"));
     }
 
-    public CentaurGlade(final CentaurGlade card) {
+    public VillageElder(UUID ownerId) {
+        super(ownerId, 149, "Village Elder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "MIR";
+        this.subtype.add("Human");
+        this.subtype.add("Druid");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // {G}, {tap}, Sacrifice a Forest: Regenerate target creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{G}"));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
+    }
+
+    public VillageElder(final VillageElder card) {
         super(card);
     }
 
     @Override
-    public CentaurGlade copy() {
-        return new CentaurGlade(this);
-    }
-}
-
-class CentaurToken extends Token {
-    CentaurToken() {
-        super("Centaur", "3/3 green Centaur creature token");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Centaur");
-        power = new MageInt(3);
-        toughness = new MageInt(3);
+    public VillageElder copy() {
+        return new VillageElder(this);
     }
 }

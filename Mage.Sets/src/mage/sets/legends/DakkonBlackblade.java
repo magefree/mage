@@ -25,50 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.sets.legends;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterControlledPermanent;
 
 /**
  *
  * @author fireshoes
  */
-public class CentaurGlade extends CardImpl {
+public class DakkonBlackblade extends CardImpl {
+    
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("lands you control");
 
-    public CentaurGlade(UUID ownerId) {
-        super(ownerId, 251, "Centaur Glade", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
-        this.expansionSetCode = "ONS";
+    public DakkonBlackblade(UUID ownerId) {
+        super(ownerId, 265, "Dakkon Blackblade", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{U}{U}{B}");
+        this.expansionSetCode = "LEG";
+        this.supertype.add("Legendary");
+        this.subtype.add("Human");
+        this.subtype.add("Warrior");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
 
-        // {2}{G}{G}: Put a 3/3 green Centaur creature token onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CentaurToken(), 1), new ManaCostsImpl("{2}{G}{G}")));
+        // Dakkon Blackblade's power and toughness are each equal to the number of lands you control.
+        DynamicValue controlledLands = new PermanentsOnBattlefieldCount(filter);
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(controlledLands, Duration.EndOfGame)));
     }
 
-    public CentaurGlade(final CentaurGlade card) {
+    public DakkonBlackblade(final DakkonBlackblade card) {
         super(card);
     }
 
     @Override
-    public CentaurGlade copy() {
-        return new CentaurGlade(this);
-    }
-}
-
-class CentaurToken extends Token {
-    CentaurToken() {
-        super("Centaur", "3/3 green Centaur creature token");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Centaur");
-        power = new MageInt(3);
-        toughness = new MageInt(3);
+    public DakkonBlackblade copy() {
+        return new DakkonBlackblade(this);
     }
 }
