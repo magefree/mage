@@ -138,7 +138,9 @@ public class PermanentCard extends PermanentImpl {
             Card originalCard = game.getCard(this.getId());
             if (isFaceDown()) {
                 setFaceDown(false);
-                originalCard.setFaceDown(false); //TODO: Do this in a better way
+                if (originalCard != null) {
+                    originalCard.setFaceDown(false); //TODO: Do this in a better way
+                }
             }
             ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, controllerId, fromZone, toZone, appliedEffects);
             if (!game.replaceEvent(event)) {
@@ -146,7 +148,9 @@ public class PermanentCard extends PermanentImpl {
                 game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
                 if (owner != null) {
                     this.setControllerId(ownerId); // neccessary for e.g. abilities in graveyard or hand to not have a controller != owner
-                    originalCard.updateZoneChangeCounter();
+                    if (originalCard != null) {
+                        originalCard.updateZoneChangeCounter();
+                    }
                     switch (event.getToZone()) {
                         case GRAVEYARD:
                             owner.putInGraveyard(card, game, !flag);

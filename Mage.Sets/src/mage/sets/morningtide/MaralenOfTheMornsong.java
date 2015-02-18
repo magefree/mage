@@ -126,7 +126,8 @@ class MaralenOfTheMornsongEffect2 extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        UUID activePlayerId = game.getActivePlayerId();
+        Player player = game.getPlayer(activePlayerId);
         if (player != null) {
             player.loseLife(3, game);
             TargetCardInLibrary target = new TargetCardInLibrary();

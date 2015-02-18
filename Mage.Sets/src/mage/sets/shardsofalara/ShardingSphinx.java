@@ -28,21 +28,16 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.events.DamagedEvent;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 
 /**
@@ -51,19 +46,28 @@ import mage.game.permanent.token.Token;
  */
 public class ShardingSphinx extends CardImpl {
 
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an artifact creature you control");
+    
+    static{
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+    }
+
     public ShardingSphinx(UUID ownerId) {
         super(ownerId, 55, "Sharding Sphinx", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{U}{U}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Sphinx");
 
-        this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Whenever an artifact creature you control deals combat damage to a player, you may put a 1/1 blue Thopter artifact creature token with flying onto the battlefield.
-        this.addAbility(new ShardingSphinxTriggeredAbility());  
+        this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
+                new CreateTokenEffect(new ThopterToken()), 
+                filter, true, SetTargetPointer.NONE, true));
+
     }
 
     public ShardingSphinx(final ShardingSphinx card) {
@@ -76,49 +80,12 @@ public class ShardingSphinx extends CardImpl {
     }
 }
 
-class ShardingSphinxTriggeredAbility extends TriggeredAbilityImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("artifact creature you control");
-    static{
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-    
-    public ShardingSphinxTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new ThopterToken()), true);
-    }
-
-    public ShardingSphinxTriggeredAbility(final ShardingSphinxTriggeredAbility ability) {
-            super(ability);
-    }
-
-    @Override
-    public ShardingSphinxTriggeredAbility copy() {
-            return new ShardingSphinxTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER || event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
-                Permanent permanent = game.getPermanent(event.getSourceId());
-                if(permanent != null &&  filter.match(permanent, sourceId, controllerId, game) && ((DamagedEvent) event).isCombatDamage()){
-                    return true;
-                }
-            }
-            return false;
-    }
-
-    @Override
-    public String getRule() {
-            return "Whenever a creature you control deals combat damage, " + super.getRule();
-    }
-
-}
-
 class ThopterToken extends Token {
     ThopterToken() {
         super("Thopter", "a 1/1 blue Thopter artifact creature token with flying");
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
+        color.setBlue(true);
         subtype.add("Thopter");
         power = new MageInt(1);
         toughness = new MageInt(1);
