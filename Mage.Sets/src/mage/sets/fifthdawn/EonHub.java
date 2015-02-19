@@ -9,10 +9,11 @@ import java.util.UUID;
 import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.players.Player;
 
 /**
@@ -40,10 +41,10 @@ public class EonHub extends CardImpl {
     
 }
 
-class SkipUpkeepStepEffect extends ReplacementEffectImpl {
+class SkipUpkeepStepEffect extends ContinuousRuleModifiyingEffectImpl {
     
     public SkipUpkeepStepEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral);
+        super(Duration.WhileOnBattlefield, Outcome.Neutral, false, false);
         staticText = "Players skip their upkeep steps";
     }
     
@@ -57,24 +58,8 @@ class SkipUpkeepStepEffect extends ReplacementEffectImpl {
     }
     
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-    
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-    
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.UPKEEP_STEP;
-    }
-    
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        return controller != null && controller.getInRange().contains(event.getPlayerId());
+        return event.getType() == EventType.UPKEEP_STEP && controller != null && controller.getInRange().contains(event.getPlayerId());
     }
-    
 }
