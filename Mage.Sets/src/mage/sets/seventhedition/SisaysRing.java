@@ -29,11 +29,12 @@ package mage.sets.seventhedition;
 
 import java.util.UUID;
 import mage.Mana;
-import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
@@ -46,7 +47,7 @@ public class SisaysRing extends CardImpl {
         this.expansionSetCode = "7ED";
 
         // {tap}: Add {2} to your mana pool.
-        this.addAbility(new SisaysRingAbility());
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0,0,0,0,0,2,0), new TapSourceCost()));
     }
 
     public SisaysRing(final SisaysRing card) {
@@ -56,22 +57,5 @@ public class SisaysRing extends CardImpl {
     @Override
     public SisaysRing copy() {
         return new SisaysRing(this);
-    }
-}
-
-class SisaysRingAbility extends BasicManaAbility {
-
-    public SisaysRingAbility() {
-        super(new BasicManaEffect(new Mana(0, 0, 0, 0, 0, 2, 0)));
-        this.netMana.add(new Mana(0, 0, 0, 0, 0, 2, 0));
-    }
-
-    public SisaysRingAbility(final SisaysRingAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SisaysRingAbility copy() {
-        return new SisaysRingAbility(this);
     }
 }

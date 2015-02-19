@@ -33,9 +33,10 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.Mana;
-import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -46,7 +47,9 @@ public class UrGolemsEye extends CardImpl {
     public UrGolemsEye (UUID ownerId) {
         super(ownerId, 155, "Ur-Golem's Eye", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "DST";
-        this.addAbility(new UrGolemsEyeAbility());
+        
+        // {tap}: Add {2} to your mana pool.
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0,0,0,0,0,2,0), new TapSourceCost()));
     }
 
     public UrGolemsEye (final UrGolemsEye card) {
@@ -58,22 +61,5 @@ public class UrGolemsEye extends CardImpl {
         return new UrGolemsEye(this);
     }
 
-}
-
-class UrGolemsEyeAbility extends BasicManaAbility {
-
-    public UrGolemsEyeAbility() {
-        super(new BasicManaEffect(new Mana(0, 0, 0, 0, 0, 2, 0)));
-        this.netMana.add(new Mana(0, 0, 0, 0, 0, 2, 0));
-    }
-
-    public UrGolemsEyeAbility(final UrGolemsEyeAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public UrGolemsEyeAbility copy() {
-        return new UrGolemsEyeAbility(this);
-    }
 }
 

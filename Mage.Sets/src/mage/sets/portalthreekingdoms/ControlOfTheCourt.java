@@ -28,16 +28,12 @@
 package mage.sets.portalthreekingdoms;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -50,7 +46,10 @@ public class ControlOfTheCourt extends CardImpl {
         this.expansionSetCode = "PTK";
 
         // Draw four cards, then discard three cards at random.
-        this.getSpellAbility().addEffect(new ControlOfTheCourtEffect());
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(4));
+        Effect effect = new DiscardControllerEffect(3, true);
+        effect.setText("then discard three cards at random");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public ControlOfTheCourt(final ControlOfTheCourt card) {
@@ -60,39 +59,5 @@ public class ControlOfTheCourt extends CardImpl {
     @Override
     public ControlOfTheCourt copy() {
         return new ControlOfTheCourt(this);
-    }
-}
-
-class ControlOfTheCourtEffect extends OneShotEffect {
-
-    public ControlOfTheCourtEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Draw four cards, then discard three cards at random";
-    }
-
-    public ControlOfTheCourtEffect(final ControlOfTheCourtEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ControlOfTheCourtEffect copy() {
-        return new ControlOfTheCourtEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.drawCards(4, game);
-            Cards hand = player.getHand();
-            for (int i = 0; i < 3; i++) {
-                Card card = hand.getRandom(game);
-                if (card != null) {
-                    player.discard(card, source, game);
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }

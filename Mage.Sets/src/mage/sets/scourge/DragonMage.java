@@ -31,16 +31,13 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DrawCardAllEffect;
+import mage.abilities.effects.common.discard.DiscardHandAllEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -59,7 +56,11 @@ public class DragonMage extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Dragon Mage deals combat damage to a player, each player discards his or her hand and draws seven cards.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DragonMageEffect(), false));
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardHandAllEffect(), false);
+        Effect effect = new DrawCardAllEffect(7);
+        effect.setText("and draws seven cards");
+        ability.addEffect(effect);
+        this.addAbility(ability);
     }
 
     public DragonMage(final DragonMage card) {
@@ -69,41 +70,5 @@ public class DragonMage extends CardImpl {
     @Override
     public DragonMage copy() {
         return new DragonMage(this);
-    }
-}
-
-class DragonMageEffect extends OneShotEffect {
-
-    public DragonMageEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Each player discards his or her hand, then draws seven cards";
-    }
-
-    public DragonMageEffect(final DragonMageEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DragonMageEffect copy() {
-        return new DragonMageEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (UUID playerId : controller.getInRange()) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    for (Card card : player.getHand().getCards(game)) {
-                        player.discard(card, source, game);
-                    }
-
-                    player.drawCards(7, game);
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }

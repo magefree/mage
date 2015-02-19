@@ -61,9 +61,9 @@ public class HelmOfPossession extends CardImpl {
         
         // {2}, {tap}, Sacrifice a creature: Gain control of target creature for as long as you control Helm of Possession and Helm of Possession remains tapped.
         ConditionalContinousEffect effect = new ConditionalContinousEffect(
-                new GainControlTargetEffect(Duration.OneUse),
+                new GainControlTargetEffect(Duration.Custom),
                 new HelmOfPossessionCondition(),
-                "Gain control of target creature for as long as you control Helm of Possession and Helm of Possession remains tapped");
+                "Gain control of target creature for as long as you control {this} and {this} remains tapped");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
