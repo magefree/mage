@@ -63,7 +63,7 @@ public class OhranViper extends CardImpl {
         // Whenever Ohran Viper deals combat damage to a creature, destroy that creature at end of combat.
         this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(new OhranViperDestroyEffect(), false, true));
         // Whenever Ohran Viper deals combat damage to a player, you may draw a card.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
     }
 
     public OhranViper(final OhranViper card) {
