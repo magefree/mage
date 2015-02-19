@@ -14,6 +14,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.players.Player;
 
 /**
  *
@@ -43,7 +44,7 @@ public class EonHub extends CardImpl {
 class SkipUpkeepStepEffect extends ContinuousRuleModifiyingEffectImpl {
     
     public SkipUpkeepStepEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral);
+        super(Duration.WhileOnBattlefield, Outcome.Neutral, false, false);
         staticText = "Players skip their upkeep steps";
     }
     
@@ -58,6 +59,7 @@ class SkipUpkeepStepEffect extends ContinuousRuleModifiyingEffectImpl {
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType() == EventType.UPKEEP_STEP;
+        Player controller = game.getPlayer(source.getControllerId());
+        return event.getType() == EventType.UPKEEP_STEP && controller != null && controller.getInRange().contains(event.getPlayerId());
     }
 }
