@@ -28,13 +28,13 @@
 package mage.sets.apocalypse;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.game.permanent.token.Token;
 
 /**
@@ -47,10 +47,14 @@ public class PenumbraWurm extends CardImpl {
         super(ownerId, 84, "Penumbra Wurm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
         this.expansionSetCode = "APC";
         this.subtype.add("Wurm");
-        this.color.setGreen(true);
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
+
+        // Trample
         this.addAbility(TrampleAbility.getInstance());
+
+        // When Penumbra Wurm dies, put a 6/6 black Wurm creature token with trample onto the battlefield.
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new PenumbraWurmToken(), 1), false));
     }
 
@@ -70,8 +74,9 @@ class PenumbraWurmToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add("Wurm");
-        power = new MageInt(3);
-        toughness = new MageInt(3);
+        power = new MageInt(6);
+        toughness = new MageInt(6);
+
         this.addAbility(TrampleAbility.getInstance());
     }
 }
