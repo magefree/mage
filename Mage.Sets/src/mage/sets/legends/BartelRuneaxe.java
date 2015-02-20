@@ -112,9 +112,8 @@ class BartelRuneaxeEffect extends ContinuousRuleModifiyingEffectImpl {
             Card targetCard = game.getCard(event.getTargetId());
             StackObject stackObject = (StackObject) game.getStack().getStackObject(event.getSourceId());
             if (targetCard != null && stackObject != null && targetCard.getId().equals(source.getSourceId())) {
-                if (stackObject.getSubtype().contains("Aura"))
-                {
-                    return true;   
+                if (stackObject.getSubtype().contains("Aura")) {
+                    return true;
                 }
             }
         }
