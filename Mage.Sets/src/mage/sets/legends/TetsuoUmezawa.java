@@ -57,23 +57,19 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author JRHerlehy
  */
+public class TetsuoUmezawa extends CardImpl {
 
-public class TetsuoUmezawa extends CardImpl 
-{
     private static final FilterCreaturePermanent creatureFilter = new FilterCreaturePermanent("tapped or blocking creature");
 
-    static
-    {
+    static {
         creatureFilter.add(Predicates.or(
                 new TappedPredicate(),
                 new BlockingPredicate()));
     }
 
-    public TetsuoUmezawa(UUID ownerId)
-    {
-        super(ownerId, 302, "Tetsuo Umezawa", Rarity.RARE, new CardType[]
-      {
-          CardType.CREATURE
+    public TetsuoUmezawa(UUID ownerId) {
+        super(ownerId, 302, "Tetsuo Umezawa", Rarity.RARE, new CardType[]{
+            CardType.CREATURE
         }, "{U}{B}{R}");
         this.expansionSetCode = "LEG";
         this.supertype.add("Legendary");
@@ -91,14 +87,12 @@ public class TetsuoUmezawa extends CardImpl
         this.addAbility(ability);
     }
 
-    public TetsuoUmezawa(final TetsuoUmezawa card)
-    {
+    public TetsuoUmezawa(final TetsuoUmezawa card) {
         super(card);
     }
 
     @Override
-    public TetsuoUmezawa copy()
-    {
+    public TetsuoUmezawa copy() {
         return new TetsuoUmezawa(this);
     }
 }
@@ -139,9 +133,8 @@ class TetsuoUmezawaEffect extends ContinuousRuleModifiyingEffectImpl {
             Card targetCard = game.getCard(event.getTargetId());
             StackObject stackObject = (StackObject) game.getStack().getStackObject(event.getSourceId());
             if (targetCard != null && stackObject != null && targetCard.getId().equals(source.getSourceId())) {
-                if (stackObject.getSubtype().contains("Aura"))
-                {
-                    return true;   
+                if (stackObject.getSubtype().contains("Aura")) {
+                    return true;
                 }
             }
         }
