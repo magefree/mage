@@ -9,9 +9,9 @@ import java.util.UUID;
 import mage.Mana;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.EnterBattlefieldPayCostOrPutGraveyardEffect;
-import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -41,7 +41,8 @@ public class ScorchedRuins extends CardImpl {
         // owner's graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new EnterBattlefieldPayCostOrPutGraveyardEffect(new SacrificeTargetCost(new TargetControlledPermanent(2,2,filter,false)))));
         // {tap}: Add {4} to your mana pool
-        this.addAbility(new ScorchedRuinsManaAbility());
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(4), new TapSourceCost()));
+        
     }
     
     public ScorchedRuins(final ScorchedRuins card) {
@@ -53,22 +54,4 @@ public class ScorchedRuins extends CardImpl {
         return new ScorchedRuins(this);
     }
     
-}
-
-class ScorchedRuinsManaAbility extends BasicManaAbility {
-    
-    public ScorchedRuinsManaAbility() {
-        super(new BasicManaEffect(new Mana(0,0,0,0,0,4,0)));
-        this.netMana.add(new Mana(0,0,0,0,0,4,0));
-    }    
-    
-    public ScorchedRuinsManaAbility(final ScorchedRuinsManaAbility ability) {
-        super(ability);
-    }
-    
-    @Override
-    public ScorchedRuinsManaAbility copy() {
-        return new ScorchedRuinsManaAbility(this);
-    }
-           
 }
