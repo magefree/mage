@@ -10,9 +10,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -23,7 +21,6 @@ import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.util.CardUtil;
 
@@ -34,7 +31,7 @@ import mage.util.CardUtil;
 public class CloudKey extends CardImpl {
     
     private static final Choice spellTypeChoice = new ChoiceImpl(true);
-    private static final Set<String> spellTypeChoices = new HashSet<String>();
+    private static final Set<String> spellTypeChoices = new HashSet<>();
     static {
         spellTypeChoice.setMessage("Choose a spell type");
         spellTypeChoices.add(CardType.ARTIFACT.toString());
