@@ -32,10 +32,8 @@ import java.util.Collections;
 import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.common.continious.BecomesFaceDownCreatureEffect.FaceDownType;
@@ -48,11 +46,8 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
