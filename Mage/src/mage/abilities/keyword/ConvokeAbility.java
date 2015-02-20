@@ -28,28 +28,33 @@
 
 package mage.abilities.keyword;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
+import mage.abilities.SpecialAction;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.AdjustingSourceCosts;
+import mage.abilities.costs.mana.AlternateManaPaymentAbility;
 import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.AbilityType;
+import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.ManaPool;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.util.CardUtil;
 
 /*
  * 502.46. Convoke
@@ -84,13 +89,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class ConvokeAbility extends SimpleStaticAbility implements AdjustingSourceCosts {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-    
-    static {
-      filter.add(Predicates.not(new TappedPredicate()));
-    }
+public class ConvokeAbility extends SimpleStaticAbility implements AlternateManaPaymentAbility {
 
     public ConvokeAbility() {
         super(Zone.STACK, null);
@@ -107,96 +106,171 @@ public class ConvokeAbility extends SimpleStaticAbility implements AdjustingSour
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-        Player player = game.getPlayer(controllerId);
-        if (player == null || !(ability instanceof SpellAbility)) {
-            return;
-        }
-        Target target = new TargetControlledCreaturePermanent(1, Integer.MAX_VALUE, filter,true);
-        target.setTargetName("creatures to convoke");
-        if (!target.canChoose(sourceId, controllerId, game)) {
-            return;
-        }
-        if (player.chooseUse(Outcome.Detriment, "Convoke creatures?", game)) {
-            player.chooseTarget(Outcome.Tap, target, ability, game);
-            if (target.getTargets().size() > 0) {
-                for (UUID creatureId: target.getTargets()) {
-                    Permanent perm = game.getPermanent(creatureId);
-                    if (perm == null || ability.getManaCostsToPay().convertedManaCost() == 0) {
-                        continue;
+    public void addSpecialAction(Ability source, Game game, ManaCost unpaid) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && controller.getGraveyard().size() > 0) {
+            if (unpaid.getMana().getColorless() > 0 && source.getAbilityType().equals(AbilityType.SPELL)) {
+                SpecialAction specialAction = new ConvokeSpecialAction(unpaid);
+                specialAction.setControllerId(source.getControllerId());
+                specialAction.setSourceId(source.getSourceId());
+                // create filter for possible creatures to tap
+                FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+                filter.add(Predicates.not(new TappedPredicate()));
+                if (unpaid.getMana().getColorless() == 0) {
+                    List<ColorPredicate> colorPredicates = new ArrayList<>();
+                    if (unpaid.getMana().getBlack() > 0) {
+                        colorPredicates.add(new ColorPredicate(ObjectColor.BLACK));
                     }
-                    if (!perm.isTapped() && perm.tap(game)) {
-                        ManaCosts<ManaCost> manaCostsToReduce = new ManaCostsImpl<>();
-                        int costBefore = ability.getManaCostsToPay().convertedManaCost();
-                        Choice chooseManaType = buildChoice(perm.getColor(), ability.getManaCostsToPay());
-                        if (chooseManaType.getChoices().size() > 0) {
-                            if (chooseManaType.getChoices().size() > 1) {
-                                chooseManaType.getChoices().add("Colorless");
-                                chooseManaType.setMessage("Choose mana color to reduce from " + perm.getName());
-                                while (!chooseManaType.isChosen()) {
-                                    player.choose(Outcome.Benefit, chooseManaType, game);
-                                }
-                            } else {
-                                chooseManaType.setChoice(chooseManaType.getChoices().iterator().next());
-                            }
-                            if (chooseManaType.getChoice().equals("Black")) {
-                                manaCostsToReduce.load("{B}");
-                            }
-                            if (chooseManaType.getChoice().equals("Blue")) {
-                                manaCostsToReduce.load("{U}");
-                            }
-                            if (chooseManaType.getChoice().equals("Green")) {
-                                manaCostsToReduce.load("{G}");
-                            }
-                            if (chooseManaType.getChoice().equals("White")) {
-                                manaCostsToReduce.load("{W}");
-                            }
-                            if (chooseManaType.getChoice().equals("Red")) {
-                                manaCostsToReduce.load("{R}");
-                            }
-                            if (chooseManaType.getChoice().equals("Colorless")) {
-                                manaCostsToReduce.load("{1}");
-                            }
-                            CardUtil.reduceCost((SpellAbility)ability, manaCostsToReduce);
-                        } else {
-                            manaCostsToReduce.load("{1}");
-                            CardUtil.reduceCost((SpellAbility)ability, manaCostsToReduce);
-                        }
-                        if (costBefore == ability.getManaCostsToPay().convertedManaCost()) {
-                            // creature could not reduce mana costs so tap must be reverted
-                            perm.untap(game);
-                        } else {
-                            game.informPlayers("Convoke: " + player.getName() + " taps " + perm.getLogName() + " to reduce mana costs by " + manaCostsToReduce.getText());
-                        }
+                    if (unpaid.getMana().getBlue() > 0) {
+                        colorPredicates.add(new ColorPredicate(ObjectColor.BLUE));
                     }
+                    if (unpaid.getMana().getRed() > 0) {
+                        colorPredicates.add(new ColorPredicate(ObjectColor.RED));
+                    }
+                    if (unpaid.getMana().getGreen() > 0) {
+                        colorPredicates.add(new ColorPredicate(ObjectColor.GREEN));
+                    }
+                    if (unpaid.getMana().getWhite() > 0) {
+                        colorPredicates.add(new ColorPredicate(ObjectColor.WHITE));
+                    }
+                    filter.add(Predicates.or(colorPredicates));
+                }
+                Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
+                target.setTargetName("creature to convoke");
+                specialAction.addTarget(target);
+                if (specialAction.canActivate(source.getControllerId(), game)) {
+                    game.getState().getSpecialActions().add(specialAction);
                 }
             }
         }
     }
 
-    private Choice buildChoice(ObjectColor creatureColor, ManaCosts manaCostsSpell) {
-       Choice choice = new ChoiceImpl();
-       String spellCosts = manaCostsSpell.getText();
-       if (creatureColor.isBlack() && spellCosts.contains("B")) {
-           choice.getChoices().add("Black");
-       }
-       if (creatureColor.isBlue() && spellCosts.contains("U")) {
-           choice.getChoices().add("Blue");
-       }
-       if (creatureColor.isGreen() && spellCosts.contains("G")) {
-           choice.getChoices().add("Green");
-       }
-       if (creatureColor.isRed() && spellCosts.contains("R")) {
-           choice.getChoices().add("Red");
-       }
-       if (creatureColor.isWhite() && spellCosts.contains("W")) {
-           choice.getChoices().add("White");
-       }
-       return choice;
-    }
-
     @Override
     public String getRule() {
       return "Convoke <i>(Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)</i>";
+    }
+}
+
+class ConvokeSpecialAction extends SpecialAction {
+
+    public ConvokeSpecialAction(ManaCost unpaid) {
+        super(Zone.ALL, true);
+        setRuleVisible(false);
+        this.addEffect(new ConvokeEffect(unpaid));
+    }
+
+    public ConvokeSpecialAction(final ConvokeSpecialAction ability) {
+        super(ability);
+    }
+
+    @Override
+    public ConvokeSpecialAction copy() {
+        return new ConvokeSpecialAction(this);
+    }
+}
+
+class ConvokeEffect extends OneShotEffect {
+
+    private final ManaCost unpaid;
+
+    public ConvokeEffect(ManaCost unpaid) {
+        super(Outcome.Benefit);
+        this.unpaid = unpaid;
+        this.staticText = "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)";
+    }
+
+    public ConvokeEffect(final ConvokeEffect effect) {
+        super(effect);
+        this.unpaid = effect.unpaid;
+    }
+
+    @Override
+    public ConvokeEffect copy() {
+        return new ConvokeEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+                for (UUID creatureId: this.getTargetPointer().getTargets(game, source)) {
+                    Permanent perm = game.getPermanent(creatureId);
+                    if (perm == null) {
+                        continue;
+                    }
+                    String manaName;
+                    if (!perm.isTapped() && perm.tap(game)) {
+                        ManaPool manaPool = controller.getManaPool();
+                        Choice chooseManaType = buildChoice(perm.getColor(), unpaid.getMana());
+                        if (chooseManaType.getChoices().size() > 0) {
+                            if (chooseManaType.getChoices().size() > 1) {
+                                chooseManaType.getChoices().add("Colorless");
+                                chooseManaType.setMessage("Choose mana color to reduce from " + perm.getName());
+                                while (!chooseManaType.isChosen()) {
+                                    controller.choose(Outcome.Benefit, chooseManaType, game);
+                                    if (!controller.isInGame()) {
+                                        return false;
+                                    }
+                                }
+                            } else {
+                                chooseManaType.setChoice(chooseManaType.getChoices().iterator().next());
+                            }
+                            if (chooseManaType.getChoice().equals("Black")) {
+                                manaPool.addMana(Mana.BlackMana, game, source);
+                                manaPool.unlockManaType(ManaType.BLACK);
+                            }
+                            if (chooseManaType.getChoice().equals("Blue")) {
+                                manaPool.addMana(Mana.BlueMana, game, source);
+                                manaPool.unlockManaType(ManaType.BLUE);
+                            }
+                            if (chooseManaType.getChoice().equals("Green")) {
+                                manaPool.addMana(Mana.GreenMana, game, source);
+                                manaPool.unlockManaType(ManaType.GREEN);
+                            }
+                            if (chooseManaType.getChoice().equals("White")) {
+                                manaPool.addMana(Mana.WhiteMana, game, source);
+                                manaPool.unlockManaType(ManaType.WHITE);
+                            }
+                            if (chooseManaType.getChoice().equals("Red")) {
+                                manaPool.addMana(Mana.RedMana, game, source);
+                                manaPool.unlockManaType(ManaType.RED);
+                            }
+                            if (chooseManaType.getChoice().equals("Colorless")) {
+                                manaPool.addMana(Mana.ColorlessMana, game, source);
+                                manaPool.unlockManaType(ManaType.COLORLESS);
+                            }
+                            manaName = chooseManaType.getChoice().toLowerCase();
+                        } else {
+                            manaPool.addMana(Mana.ColorlessMana, game, source);
+                            manaPool.unlockManaType(ManaType.COLORLESS);
+                            manaName = "colorless";
+                        }
+                        game.informPlayers("Convoke: " + controller.getName() + " taps " + perm.getLogName() + " to pay one " + manaName + " mana");
+                    }
+
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private Choice buildChoice(ObjectColor creatureColor, Mana mana) {
+       Choice choice = new ChoiceImpl();
+       if (creatureColor.isBlack() && mana.getBlack() > 0) {
+           choice.getChoices().add("Black");
+       }
+       if (creatureColor.isBlue() && mana.getBlue() > 0) {
+           choice.getChoices().add("Blue");
+       }
+       if (creatureColor.isGreen() && mana.getGreen() > 0) {
+           choice.getChoices().add("Green");
+       }
+       if (creatureColor.isRed() && mana.getRed() > 0) {
+           choice.getChoices().add("Red");
+       }
+       if (creatureColor.isWhite() && mana.getWhite() > 0) {
+           choice.getChoices().add("White");
+       }
+       return choice;
     }
 }
