@@ -30,23 +30,27 @@ package mage.sets.legends;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.MageSingleton;
-import mage.abilities.StaticAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.keyword.ProtectionAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.BlockingPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+import mage.game.stack.StackObject;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -54,10 +58,8 @@ import mage.target.common.TargetCreaturePermanent;
  * @author JRHerlehy
  */
 
-public class TetsuoUmezawa extends CardImpl
+public class TetsuoUmezawa extends CardImpl 
 {
-
-    private static final FilterSpell spellFilter = new FilterSpell("aura spells");
     private static final FilterCreaturePermanent creatureFilter = new FilterCreaturePermanent("tapped or blocking creature");
 
     static
@@ -81,7 +83,7 @@ public class TetsuoUmezawa extends CardImpl
         this.toughness = new MageInt(3);
 
         // Tetsuo Umezawa can't be the target of Aura spells.
-        this.addAbility(new ProtectionAbility(spellFilter));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TetsuoUmezawaEffect()));
         // {U}{B}{B}{R}, {tap}: Destroy target tapped or blocking creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{U}{B}{B}{R}"));
         ability.addCost(new TapSourceCost());
@@ -98,5 +100,51 @@ public class TetsuoUmezawa extends CardImpl
     public TetsuoUmezawa copy()
     {
         return new TetsuoUmezawa(this);
+    }
+}
+
+class TetsuoUmezawaEffect extends ContinuousRuleModifiyingEffectImpl {
+
+    public TetsuoUmezawaEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
+        staticText = "{this} can't be the target of Aura spells";
+    }
+
+    public TetsuoUmezawaEffect(final TetsuoUmezawaEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public TetsuoUmezawaEffect copy() {
+        return new TetsuoUmezawaEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (sourcePermanent != null) {
+            return sourcePermanent.getLogName() + " can't be the target of Aura spells";
+        }
+        return null;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == GameEvent.EventType.TARGET) {
+            Card targetCard = game.getCard(event.getTargetId());
+            StackObject stackObject = (StackObject) game.getStack().getStackObject(event.getSourceId());
+            if (targetCard != null && stackObject != null && targetCard.getId().equals(source.getSourceId())) {
+                if (stackObject.getSubtype().contains("Aura"))
+                {
+                    return true;   
+                }
+            }
+        }
+        return false;
     }
 }
