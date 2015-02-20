@@ -62,7 +62,17 @@ public abstract class ContinuousRuleModifiyingEffectImpl extends ContinuousEffec
     public ContinuousRuleModifiyingEffectImpl(Duration duration, Outcome outcome) {
         this(duration, outcome, true, false);
     }
-    
+
+    /**
+     *
+     * @param duration
+     * @param outcome
+     * @param messageToUser - Every time the effect replaces an event, the user gets a message in a dialog window.
+     *                        Don't set it to true if the event heppens regularly or very often. The message can be
+     *                        changed by overriding the getInfoMessage method.
+     * @param messageToLog  - Every time the effect replaces an event, a message is posted to the game log. The message
+     *                        can be changed by overriding the getInfoMessage method.
+     */
     public ContinuousRuleModifiyingEffectImpl(Duration duration, Outcome outcome, boolean messageToUser, boolean messageToLog) {
         super(duration, outcome);
         this.effectType = EffectType.CONTINUOUS_RULE_MODIFICATION;
@@ -78,6 +88,14 @@ public abstract class ContinuousRuleModifiyingEffectImpl extends ContinuousEffec
         this.messageToGameLog = effect.messageToGameLog;
     }
 
+    /**
+     * An early check for the event types this effect applies to. This check was added
+     * to speed up event handling. Once all existing ContinuousRuleModifiyingEffects have
+     * implemented this method, the method should be changed to abstract here or removed.
+     * @param event
+     * @param game
+     * @return
+     */
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return true;

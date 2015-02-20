@@ -25,41 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.darksteel;
+package mage.sets.scourge;
 
 import java.util.UUID;
-
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DrawCardAllEffect;
+import mage.abilities.effects.common.discard.DiscardHandAllEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.Mana;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.mana.SimpleManaAbility;
-import mage.cards.CardImpl;
-import mage.constants.Zone;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class UrGolemsEye extends CardImpl {
+public class DragonMage extends CardImpl {
 
-    public UrGolemsEye (UUID ownerId) {
-        super(ownerId, 155, "Ur-Golem's Eye", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "DST";
-        
-        // {tap}: Add {2} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0,0,0,0,0,2,0), new TapSourceCost()));
+    public DragonMage(UUID ownerId) {
+        super(ownerId, 87, "Dragon Mage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
+        this.expansionSetCode = "SCG";
+        this.subtype.add("Dragon");
+        this.subtype.add("Wizard");
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Whenever Dragon Mage deals combat damage to a player, each player discards his or her hand and draws seven cards.
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardHandAllEffect(), false);
+        Effect effect = new DrawCardAllEffect(7);
+        effect.setText("and draws seven cards");
+        ability.addEffect(effect);
+        this.addAbility(ability);
     }
 
-    public UrGolemsEye (final UrGolemsEye card) {
+    public DragonMage(final DragonMage card) {
         super(card);
     }
 
     @Override
-    public UrGolemsEye copy() {
-        return new UrGolemsEye(this);
+    public DragonMage copy() {
+        return new DragonMage(this);
     }
-
 }
-

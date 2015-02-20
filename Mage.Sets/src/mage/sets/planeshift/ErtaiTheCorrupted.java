@@ -25,58 +25,61 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.jacevsvraska;
+package mage.sets.planeshift;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToACreatureTriggeredAbility;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.TargetSpell;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class OhranViper extends CardImpl {
-
-    public OhranViper(UUID ownerId) {
-        super(ownerId, 57, "Ohran Viper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-        this.expansionSetCode = "DDM";
-        this.supertype.add("Snow");
-        this.subtype.add("Snake");
-
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
-
-        // Whenever Ohran Viper deals combat damage to a creature, destroy that creature at end of combat.
-        this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(
-                new CreateDelayedTriggeredAbilityEffect(
-                        new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect("destroy that creature at end of combat")), true),
-                false, 
-                true));
-
-        // Whenever Ohran Viper deals combat damage to a player, you may draw a card.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
+public class ErtaiTheCorrupted extends CardImpl {
+    
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a creature or enchantment");
+    
+    static {
+        filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
-    public OhranViper(final OhranViper card) {
+    public ErtaiTheCorrupted(UUID ownerId) {
+        super(ownerId, 107, "Ertai, the Corrupted", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{U}{B}");
+        this.expansionSetCode = "PLS";
+        this.supertype.add("Legendary");
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(4);
+
+        // {U}, {tap}, Sacrifice a creature or enchantment: Counter target spell.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{U}"));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addTarget(new TargetSpell());
+        this.addAbility(ability);
+}
+
+    public ErtaiTheCorrupted(final ErtaiTheCorrupted card) {
         super(card);
     }
 
     @Override
-    public OhranViper copy() {
-        return new OhranViper(this);
+    public ErtaiTheCorrupted copy() {
+        return new ErtaiTheCorrupted(this);
     }
 }

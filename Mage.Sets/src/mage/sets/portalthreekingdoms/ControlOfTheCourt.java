@@ -25,41 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.darksteel;
+package mage.sets.portalthreekingdoms;
 
 import java.util.UUID;
-
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.discard.DiscardControllerEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.Mana;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.mana.SimpleManaAbility;
-import mage.cards.CardImpl;
-import mage.constants.Zone;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class UrGolemsEye extends CardImpl {
+public class ControlOfTheCourt extends CardImpl {
 
-    public UrGolemsEye (UUID ownerId) {
-        super(ownerId, 155, "Ur-Golem's Eye", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "DST";
-        
-        // {tap}: Add {2} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0,0,0,0,0,2,0), new TapSourceCost()));
+    public ControlOfTheCourt(UUID ownerId) {
+        super(ownerId, 105, "Control of the Court", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
+        this.expansionSetCode = "PTK";
+
+        // Draw four cards, then discard three cards at random.
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(4));
+        Effect effect = new DiscardControllerEffect(3, true);
+        effect.setText("then discard three cards at random");
+        this.getSpellAbility().addEffect(effect);
     }
 
-    public UrGolemsEye (final UrGolemsEye card) {
+    public ControlOfTheCourt(final ControlOfTheCourt card) {
         super(card);
     }
 
     @Override
-    public UrGolemsEye copy() {
-        return new UrGolemsEye(this);
+    public ControlOfTheCourt copy() {
+        return new ControlOfTheCourt(this);
     }
-
 }
-

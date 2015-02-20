@@ -25,41 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.darksteel;
+package mage.sets.legends;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.Mana;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.mana.SimpleManaAbility;
+import mage.MageInt;
+import mage.ObjectColor;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class UrGolemsEye extends CardImpl {
-
-    public UrGolemsEye (UUID ownerId) {
-        super(ownerId, 155, "Ur-Golem's Eye", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "DST";
-        
-        // {tap}: Add {2} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0,0,0,0,0,2,0), new TapSourceCost()));
+public class JacquesLeVert extends CardImpl {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Green creatures");
+    
+    static {
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    public UrGolemsEye (final UrGolemsEye card) {
+    public JacquesLeVert(UUID ownerId) {
+        super(ownerId, 272, "Jacques le Vert", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{W}");
+        this.expansionSetCode = "LEG";
+        this.supertype.add("Legendary");
+        this.subtype.add("Human");
+        this.subtype.add("Warrior");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
+
+        // Green creatures you control get +0/+2.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0,2, Duration.WhileOnBattlefield, filter)));
+    }
+
+    public JacquesLeVert(final JacquesLeVert card) {
         super(card);
     }
 
     @Override
-    public UrGolemsEye copy() {
-        return new UrGolemsEye(this);
+    public JacquesLeVert copy() {
+        return new JacquesLeVert(this);
     }
-
 }
-

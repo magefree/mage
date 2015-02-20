@@ -25,41 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.darksteel;
+package mage.sets.dissension;
 
 import java.util.UUID;
-
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.RegenerateTargetEffect;
+import mage.abilities.keyword.GraftAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.Mana;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.mana.SimpleManaAbility;
-import mage.cards.CardImpl;
 import mage.constants.Zone;
+import mage.counters.CounterType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.CounterPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class UrGolemsEye extends CardImpl {
-
-    public UrGolemsEye (UUID ownerId) {
-        super(ownerId, 155, "Ur-Golem's Eye", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "DST";
-        
-        // {tap}: Add {2} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0,0,0,0,0,2,0), new TapSourceCost()));
+public class SporebackTroll extends CardImpl {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with a +1/+1 counter on it");
+    static {
+        filter.add(new CounterPredicate(CounterType.P1P1));
     }
 
-    public UrGolemsEye (final UrGolemsEye card) {
+    public SporebackTroll(UUID ownerId) {
+        super(ownerId, 94, "Sporeback Troll", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "DIS";
+        this.subtype.add("Troll");
+        this.subtype.add("Mutant");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
+
+        // Graft 2
+        this.addAbility(new GraftAbility(this, 2));
+        
+        // {1}{G}: Regenerate target creature with a +1/+1 counter on it.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{1}{G}"));
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public SporebackTroll(final SporebackTroll card) {
         super(card);
     }
 
     @Override
-    public UrGolemsEye copy() {
-        return new UrGolemsEye(this);
+    public SporebackTroll copy() {
+        return new SporebackTroll(this);
     }
-
 }
-

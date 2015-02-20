@@ -25,58 +25,70 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.ConspireAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.permanent.token.Token;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
- * @author Loki
+ * @author jeffwadsworth
  */
-public class PenumbraWurm extends CardImpl {
+public class GhastlyDiscovery extends CardImpl {
 
-    public PenumbraWurm(UUID ownerId) {
-        super(ownerId, 84, "Penumbra Wurm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
-        this.expansionSetCode = "APC";
-        this.subtype.add("Wurm");
+    public GhastlyDiscovery(UUID ownerId) {
+        super(ownerId, 39, "Ghastly Discovery", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
+        this.expansionSetCode = "SHM";
 
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
+        // Draw two cards, then discard a card.
+        this.getSpellAbility().addEffect(new GhastlyDiscoveryEffect());
 
-        // Trample
-        this.addAbility(TrampleAbility.getInstance());
-
-        // When Penumbra Wurm dies, put a 6/6 black Wurm creature token with trample onto the battlefield.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new PenumbraWurmToken(), 1), false));
+        // Conspire
+        this.addAbility(new ConspireAbility(this));
     }
 
-    public PenumbraWurm(final PenumbraWurm card) {
+    public GhastlyDiscovery(final GhastlyDiscovery card) {
         super(card);
     }
 
     @Override
-    public PenumbraWurm copy() {
-        return new PenumbraWurm(this);
+    public GhastlyDiscovery copy() {
+        return new GhastlyDiscovery(this);
     }
 }
 
-class PenumbraWurmToken extends Token {
-    PenumbraWurmToken() {
-        super("Wurm", "6/6 black Wurm creature token with trample");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Wurm");
-        power = new MageInt(6);
-        toughness = new MageInt(6);
+class GhastlyDiscoveryEffect extends OneShotEffect {
 
-        this.addAbility(TrampleAbility.getInstance());
+    public GhastlyDiscoveryEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "Draw two cards, then discard a card";
+    }
+
+    public GhastlyDiscoveryEffect(final GhastlyDiscoveryEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public GhastlyDiscoveryEffect copy() {
+        return new GhastlyDiscoveryEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            controller.drawCards(2, game);
+            controller.discard(1, false, source, game);
+            return true;
+        }
+        return false;
     }
 }

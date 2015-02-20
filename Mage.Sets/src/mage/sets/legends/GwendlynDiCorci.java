@@ -25,41 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.darksteel;
+package mage.sets.legends;
 
 import java.util.UUID;
-
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
+import mage.abilities.condition.common.MyTurnCondition;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.Mana;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.mana.SimpleManaAbility;
-import mage.cards.CardImpl;
 import mage.constants.Zone;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class UrGolemsEye extends CardImpl {
+public class GwendlynDiCorci extends CardImpl {
 
-    public UrGolemsEye (UUID ownerId) {
-        super(ownerId, 155, "Ur-Golem's Eye", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "DST";
-        
-        // {tap}: Add {2} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0,0,0,0,0,2,0), new TapSourceCost()));
+    public GwendlynDiCorci(UUID ownerId) {
+        super(ownerId, 268, "Gwendlyn Di Corci", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U}{B}{B}{R}");
+        this.expansionSetCode = "LEG";
+        this.supertype.add("Legendary");
+        this.subtype.add("Human");
+        this.subtype.add("Rogue");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(5);
+
+        // {tap}: Target player discards a card at random. Activate this ability only during your turn.
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1, true), new TapSourceCost(), MyTurnCondition.getInstance());
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
     }
 
-    public UrGolemsEye (final UrGolemsEye card) {
+    public GwendlynDiCorci(final GwendlynDiCorci card) {
         super(card);
     }
 
     @Override
-    public UrGolemsEye copy() {
-        return new UrGolemsEye(this);
+    public GwendlynDiCorci copy() {
+        return new GwendlynDiCorci(this);
     }
-
 }
-

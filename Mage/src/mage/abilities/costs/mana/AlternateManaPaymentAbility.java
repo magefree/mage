@@ -25,58 +25,26 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.abilities.costs.mana;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.TrampleAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.game.permanent.token.Token;
+import mage.abilities.Ability;
+import mage.game.Game;
 
 /**
+ * Interface for abilities that allow the player to pay mana costs of a spell in alternate ways.
+ * For the payment SpecialActions are used.
  *
- * @author Loki
+ * Example of such an alternate payment ability: {@link mage.abilities.keyword.DelveAbility}
+ *
+ * @author LevelX2
  */
-public class PenumbraWurm extends CardImpl {
-
-    public PenumbraWurm(UUID ownerId) {
-        super(ownerId, 84, "Penumbra Wurm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
-        this.expansionSetCode = "APC";
-        this.subtype.add("Wurm");
-
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
-
-        // Trample
-        this.addAbility(TrampleAbility.getInstance());
-
-        // When Penumbra Wurm dies, put a 6/6 black Wurm creature token with trample onto the battlefield.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new PenumbraWurmToken(), 1), false));
-    }
-
-    public PenumbraWurm(final PenumbraWurm card) {
-        super(card);
-    }
-
-    @Override
-    public PenumbraWurm copy() {
-        return new PenumbraWurm(this);
-    }
-}
-
-class PenumbraWurmToken extends Token {
-    PenumbraWurmToken() {
-        super("Wurm", "6/6 black Wurm creature token with trample");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Wurm");
-        power = new MageInt(6);
-        toughness = new MageInt(6);
-
-        this.addAbility(TrampleAbility.getInstance());
-    }
+public interface AlternateManaPaymentAbility {
+    /**
+     * Adds the special action to the state, that allows the user to do the alternate mana payment
+     *
+     * @param source
+     * @param game
+     * @param unpaid unapaid mana costs of the spell
+     */
+    void addSpecialAction(Ability source, Game game, ManaCost unpaid);
 }

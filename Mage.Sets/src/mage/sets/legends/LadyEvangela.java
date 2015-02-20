@@ -25,41 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.darksteel;
+package mage.sets.legends;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.Mana;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.mana.SimpleManaAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.PreventDamageByTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class UrGolemsEye extends CardImpl {
+public class LadyEvangela extends CardImpl {
 
-    public UrGolemsEye (UUID ownerId) {
-        super(ownerId, 155, "Ur-Golem's Eye", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "DST";
-        
-        // {tap}: Add {2} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0,0,0,0,0,2,0), new TapSourceCost()));
+    public LadyEvangela(UUID ownerId) {
+        super(ownerId, 280, "Lady Evangela", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{U}{B}");
+        this.expansionSetCode = "LEG";
+        this.supertype.add("Legendary");
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
+
+        // {W}{B}, {tap}: Prevent all combat damage that would be dealt by target creature this turn.
+        Effect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, true);
+        effect.setText("Prevent all combat damage that would be dealt by target creature this turn.");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{W}{B}"));
+        ability.addEffect(effect);
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public UrGolemsEye (final UrGolemsEye card) {
+    public LadyEvangela(final LadyEvangela card) {
         super(card);
     }
 
     @Override
-    public UrGolemsEye copy() {
-        return new UrGolemsEye(this);
+    public LadyEvangela copy() {
+        return new LadyEvangela(this);
     }
-
 }
-

@@ -25,41 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.darksteel;
+package mage.sets.phyrexiavsthecoalition;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.Mana;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.mana.SimpleManaAbility;
-import mage.cards.CardImpl;
-import mage.constants.Zone;
 
 /**
  *
- * @author Loki
+ * @author anonymous
  */
-public class UrGolemsEye extends CardImpl {
+public class PhyrexianNegator extends mage.sets.urzasdestiny.PhyrexianNegator {
 
-    public UrGolemsEye (UUID ownerId) {
-        super(ownerId, 155, "Ur-Golem's Eye", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "DST";
-        
-        // {tap}: Add {2} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0,0,0,0,0,2,0), new TapSourceCost()));
+    public PhyrexianNegator(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 1;
+        this.expansionSetCode = "DDE";
+        this.rarity = Rarity.MYTHIC;
     }
 
-    public UrGolemsEye (final UrGolemsEye card) {
+    public PhyrexianNegator(final PhyrexianNegator card) {
         super(card);
     }
 
     @Override
-    public UrGolemsEye copy() {
-        return new UrGolemsEye(this);
+    public PhyrexianNegator copy() {
+        return new PhyrexianNegator(this);
     }
-
 }
-

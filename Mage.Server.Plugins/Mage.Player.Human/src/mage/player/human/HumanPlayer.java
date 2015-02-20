@@ -627,6 +627,8 @@ public class HumanPlayer extends PlayerImpl {
             playManaAbilities(unpaid, game);
         } else if (response.getString() != null && response.getString().equals("special")) {
             if (unpaid instanceof ManaCostsImpl) {
+                specialManaAction(unpaid, game);
+                // TODO: delve or convoke cards with PhyrexianManaCost won't work together (this combinaton does not exist yet)
                 ManaCostsImpl<ManaCost> costs = (ManaCostsImpl<ManaCost>) unpaid;
                 for (ManaCost cost : costs.getUnpaid()) {
                     if (cost instanceof PhyrexianManaCost) {
@@ -970,14 +972,34 @@ public class HumanPlayer extends PlayerImpl {
         draft.firePickCardEvent(playerId);
     }
 
-    protected void specialAction(Game game) {
-        updateGameStatePriority("specialAction", game);
-        LinkedHashMap<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId);
-        game.fireGetChoiceEvent(playerId, name, null, new ArrayList<>(specialActions.values()));
-        waitForResponse(game);
-        if (response.getUUID() != null) {
-            if (specialActions.containsKey(response.getUUID())) {
-                activateAbility(specialActions.get(response.getUUID()), game);
+    protected void specialAction(Game game) {        
+        LinkedHashMap<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId, false);
+        if (!specialActions.isEmpty()) {
+            updateGameStatePriority("specialAction", game);
+            game.fireGetChoiceEvent(playerId, name, null, new ArrayList<>(specialActions.values()));
+            waitForResponse(game);
+            if (response.getUUID() != null) {
+                if (specialActions.containsKey(response.getUUID())) {
+                    activateAbility(specialActions.get(response.getUUID()), game);
+                }
+            }
+        }
+    }
+
+    protected void specialManaAction(ManaCost unpaid, Game game) {
+        LinkedHashMap<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId, true);
+        if (!specialActions.isEmpty()) {
+            updateGameStatePriority("specialAction", game);
+            game.fireGetChoiceEvent(playerId, name, null, new ArrayList<>(specialActions.values()));
+            waitForResponse(game);
+            if (response.getUUID() != null) {
+                if (specialActions.containsKey(response.getUUID())) {
+                    SpecialAction specialAction = specialActions.get(response.getUUID());
+                    if (specialAction != null) {
+                        specialAction.setUnpaidMana(unpaid);
+                        activateAbility(specialActions.get(response.getUUID()), game);
+                    }
+                }
             }
         }
     }

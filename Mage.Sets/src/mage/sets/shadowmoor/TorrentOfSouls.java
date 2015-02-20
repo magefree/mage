@@ -25,58 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.TrampleAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.game.permanent.token.Token;
 
 /**
  *
- * @author Loki
+ * @author jeffwadsworth
  */
-public class PenumbraWurm extends CardImpl {
+public class TorrentOfSouls extends mage.sets.sorinvstibalt.TorrentOfSouls {
 
-    public PenumbraWurm(UUID ownerId) {
-        super(ownerId, 84, "Penumbra Wurm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
-        this.expansionSetCode = "APC";
-        this.subtype.add("Wurm");
-
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
-
-        // Trample
-        this.addAbility(TrampleAbility.getInstance());
-
-        // When Penumbra Wurm dies, put a 6/6 black Wurm creature token with trample onto the battlefield.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new PenumbraWurmToken(), 1), false));
+    public TorrentOfSouls(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 199;
+        this.expansionSetCode = "SHM";
     }
 
-    public PenumbraWurm(final PenumbraWurm card) {
+    public TorrentOfSouls(final TorrentOfSouls card) {
         super(card);
     }
 
     @Override
-    public PenumbraWurm copy() {
-        return new PenumbraWurm(this);
-    }
-}
-
-class PenumbraWurmToken extends Token {
-    PenumbraWurmToken() {
-        super("Wurm", "6/6 black Wurm creature token with trample");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Wurm");
-        power = new MageInt(6);
-        toughness = new MageInt(6);
-
-        this.addAbility(TrampleAbility.getInstance());
+    public TorrentOfSouls copy() {
+        return new TorrentOfSouls(this);
     }
 }

@@ -25,41 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.darksteel;
+package mage.sets.legions;
 
 import java.util.UUID;
-
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.RegenerateTargetEffect;
+import mage.abilities.keyword.MorphAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.Mana;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.mana.SimpleManaAbility;
-import mage.cards.CardImpl;
-import mage.constants.Zone;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class UrGolemsEye extends CardImpl {
+public class DaruMender extends CardImpl {
 
-    public UrGolemsEye (UUID ownerId) {
-        super(ownerId, 155, "Ur-Golem's Eye", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "DST";
-        
-        // {tap}: Add {2} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0,0,0,0,0,2,0), new TapSourceCost()));
+    public DaruMender(UUID ownerId) {
+        super(ownerId, 8, "Daru Mender", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");
+        this.expansionSetCode = "LGN";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // Morph {W}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{W}")));
+        // When Daru Mender is turned face up, regenerate target creature.
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new RegenerateTargetEffect());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public UrGolemsEye (final UrGolemsEye card) {
+    public DaruMender(final DaruMender card) {
         super(card);
     }
 
     @Override
-    public UrGolemsEye copy() {
-        return new UrGolemsEye(this);
+    public DaruMender copy() {
+        return new DaruMender(this);
     }
-
 }
-

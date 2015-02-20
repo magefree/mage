@@ -85,7 +85,7 @@ public class ManaUtil {
             chosenManaAbility = chosenManaAbilityForHybrid != null ? chosenManaAbilityForHybrid : chosenManaAbility;
         }
 
-        if (countColored.size() == 0) { // seems there is no colorful mana we can pay for
+        if (countColored.isEmpty()) { // seems there is no colorful mana we can pay for
             // try to pay {1}
             if (unpaidMana.getColorless() > 0) {
                 // use any (lets choose first)

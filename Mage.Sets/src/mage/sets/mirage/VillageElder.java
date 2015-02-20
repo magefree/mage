@@ -25,41 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.darksteel;
+package mage.sets.mirage;
 
 import java.util.UUID;
-
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.RegenerateTargetEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.Mana;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.mana.SimpleManaAbility;
-import mage.cards.CardImpl;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class UrGolemsEye extends CardImpl {
-
-    public UrGolemsEye (UUID ownerId) {
-        super(ownerId, 155, "Ur-Golem's Eye", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "DST";
-        
-        // {tap}: Add {2} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0,0,0,0,0,2,0), new TapSourceCost()));
+public class VillageElder extends CardImpl {
+    
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a Forest");
+    static{
+        filter.add(new SubtypePredicate("Forest"));
     }
 
-    public UrGolemsEye (final UrGolemsEye card) {
+    public VillageElder(UUID ownerId) {
+        super(ownerId, 149, "Village Elder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "MIR";
+        this.subtype.add("Human");
+        this.subtype.add("Druid");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // {G}, {tap}, Sacrifice a Forest: Regenerate target creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{G}"));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
+    }
+
+    public VillageElder(final VillageElder card) {
         super(card);
     }
 
     @Override
-    public UrGolemsEye copy() {
-        return new UrGolemsEye(this);
+    public VillageElder copy() {
+        return new VillageElder(this);
     }
-
 }
-

@@ -25,41 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.darksteel;
+package mage.sets.planarchaos;
 
 import java.util.UUID;
-
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.HasteAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.Mana;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.mana.SimpleManaAbility;
-import mage.cards.CardImpl;
-import mage.constants.Zone;
+import mage.counters.CounterType;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class UrGolemsEye extends CardImpl {
+public class MirriTheCursed extends CardImpl {
 
-    public UrGolemsEye (UUID ownerId) {
-        super(ownerId, 155, "Ur-Golem's Eye", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "DST";
-        
-        // {tap}: Add {2} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0,0,0,0,0,2,0), new TapSourceCost()));
+    public MirriTheCursed(UUID ownerId) {
+        super(ownerId, 75, "Mirri the Cursed", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        this.expansionSetCode = "PLC";
+        this.supertype.add("Legendary");
+        this.subtype.add("Vampire");
+        this.subtype.add("Cat");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // First strike
+        this.addAbility(FirstStrikeAbility.getInstance());
+        // Haste
+        this.addAbility(HasteAbility.getInstance());
+        // Whenever Mirri the Cursed deals combat damage to a creature, put a +1/+1 counter on Mirri the Cursed.
+        Ability ability;
+        ability = new DealsDamageToACreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), true, false, true);
+        this.addAbility(ability);
     }
 
-    public UrGolemsEye (final UrGolemsEye card) {
+    public MirriTheCursed(final MirriTheCursed card) {
         super(card);
     }
 
     @Override
-    public UrGolemsEye copy() {
-        return new UrGolemsEye(this);
+    public MirriTheCursed copy() {
+        return new MirriTheCursed(this);
     }
-
 }
-

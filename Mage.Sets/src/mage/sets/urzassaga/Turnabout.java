@@ -29,15 +29,14 @@ package mage.sets.urzassaga;
 
 import java.util.HashSet;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -53,12 +52,9 @@ import mage.target.TargetPlayer;
  */
 public class Turnabout extends CardImpl {
 
-    
     public Turnabout(UUID ownerId) {
         super(ownerId, 105, "Turnabout", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "USG";
-
-        this.color.setBlue(true);
 
         // Choose artifact, creature, or land. Tap all untapped permanents of the chosen type target player controls, or untap all tapped permanents of that type that player controls.
         this.getSpellAbility().addTarget(new TargetPlayer());
@@ -77,20 +73,22 @@ public class Turnabout extends CardImpl {
 }
 
 class TurnaboutEffect extends OneShotEffect {
-    
-    private static final HashSet<String> choice = new HashSet<String>();
-    static{
+
+    private static final HashSet<String> choice = new HashSet<>();
+
+    static {
         choice.add(CardType.ARTIFACT.toString());
         choice.add(CardType.CREATURE.toString());
         choice.add(CardType.LAND.toString());
     }
-    
-    private static final HashSet<String> choice2 = new HashSet<String>();
-    static{
+
+    private static final HashSet<String> choice2 = new HashSet<>();
+
+    static {
         choice2.add("Untap");
         choice2.add("Tap");
     }
-    
+
     public TurnaboutEffect() {
         super(Outcome.Benefit);
         staticText = "Choose artifact, creature, or land. Tap all untapped permanents of the chosen type target player controls, or untap all tapped permanents of that type that player controls";
@@ -107,52 +105,56 @@ class TurnaboutEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         UUID target = source.getFirstTarget();
-        if(player != null && target != null){
+        if (controller != null && target != null) {
             Choice choiceImpl = new ChoiceImpl();
             choiceImpl.setChoices(choice);
-            while(!player.choose(outcome.Neutral, choiceImpl, game));
+            while (!controller.choose(Outcome.Neutral, choiceImpl, game)) {
+                if (!controller.isInGame()) {
+                    return false;
+                }
+            }
             CardType type;
             String choosenType = choiceImpl.getChoice();
-            
-            if(choosenType.equals(CardType.ARTIFACT.toString())){
+
+            if (choosenType.equals(CardType.ARTIFACT.toString())) {
                 type = CardType.ARTIFACT;
-            }else if(choosenType.equals(CardType.LAND.toString())){
+            } else if (choosenType.equals(CardType.LAND.toString())) {
                 type = CardType.LAND;
-            }else{
-                type = CardType.CREATURE;                
+            } else {
+                type = CardType.CREATURE;
             }
-            
+
             choiceImpl = new ChoiceImpl();
             choiceImpl.setChoices(choice2);
-            while(!player.choose(outcome.Neutral, choiceImpl, game));
-            
+            while (!controller.choose(Outcome.Neutral, choiceImpl, game)) {
+                if (!controller.isInGame()) {
+                    return false;
+                }
+            }
+
             FilterPermanent filter = new FilterPermanent();
             filter.add(new CardTypePredicate(type));
-            
-            
-            if(choiceImpl.getChoice().equals("Untap")){
+
+            if (choiceImpl.getChoice().equals("Untap")) {
                 filter.add(new TappedPredicate());
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                    if(permanent.getControllerId().equals(target)){
+                    if (permanent.getControllerId().equals(target)) {
                         permanent.untap(game);
                     }
                 }
-            }
-            else{
+            } else {
                 filter.add(Predicates.not(new TappedPredicate()));
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                    if(permanent.getControllerId().equals(target)){
+                    if (permanent.getControllerId().equals(target)) {
                         permanent.tap(game);
                     }
                 }
             }
-            
-            
+
         }
-        
-        
+
         return true;
     }
 }

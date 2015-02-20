@@ -33,9 +33,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.VariableCost;
+import mage.abilities.keyword.DelveAbility;
 import mage.abilities.mana.ManaOptions;
 import mage.constants.ColoredManaSymbol;
 import mage.filter.Filter;
@@ -117,17 +119,37 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         }
 
         Player player = game.getPlayer(controllerId);
-        assignPayment(game, ability, player.getManaPool());
+        assignPayment(game, ability, player.getManaPool());        
         while (!isPaid()) {
+            addSpecialManaPayAbilities(ability, game);
             if (player.playMana(this.getUnpaid(), game)) {
                 assignPayment(game, ability, player.getManaPool());
-            }
-            else {
+            } else {
                 return false;
             }
+            game.getState().getSpecialActions().removeManaActions();
         }
         return true;
     }
+
+    /**
+     * This activates the special button if there exists special ways to pay the mana (Delve, Convoke)
+     *
+     * @param ability
+     * @param game
+     */
+    private void addSpecialManaPayAbilities(Ability source, Game game) {
+        // check for special mana payment possibilities
+        MageObject mageObject = source.getSourceObject(game);
+        if (mageObject != null) {
+            for (Ability ability :mageObject.getAbilities()) {
+                if (ability instanceof AlternateManaPaymentAbility) {
+                    ((AlternateManaPaymentAbility) ability).addSpecialAction(source, game, getUnpaid());
+                }
+            }
+        }
+    }
+
 
     /**
      * bookmarks the current state and restores it if player doesn't pay the mana cost

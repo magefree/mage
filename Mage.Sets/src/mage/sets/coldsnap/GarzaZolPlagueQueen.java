@@ -25,41 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.darksteel;
+package mage.sets.coldsnap;
 
 import java.util.UUID;
-
+import mage.MageInt;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.HasteAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.Mana;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.mana.SimpleManaAbility;
-import mage.cards.CardImpl;
-import mage.constants.Zone;
+import mage.counters.CounterType;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class UrGolemsEye extends CardImpl {
+public class GarzaZolPlagueQueen extends CardImpl {
 
-    public UrGolemsEye (UUID ownerId) {
-        super(ownerId, 155, "Ur-Golem's Eye", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "DST";
+    public GarzaZolPlagueQueen(UUID ownerId) {
+        super(ownerId, 129, "Garza Zol, Plague Queen", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{B}{R}");
+        this.expansionSetCode = "CSP";
+        this.supertype.add("Legendary");
+        this.subtype.add("Vampire");
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
         
-        // {tap}: Add {2} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0,0,0,0,0,2,0), new TapSourceCost()));
+        // Haste
+        this.addAbility(HasteAbility.getInstance());
+        
+        // Whenever a creature dealt damage by Garza Zol, Plague Queen this turn dies, put a +1/+1 counter on Garza Zol.
+        this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
+
+        // Whenever Garza Zol deals combat damage to a player, you may draw a card.
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
     }
 
-    public UrGolemsEye (final UrGolemsEye card) {
+    public GarzaZolPlagueQueen(final GarzaZolPlagueQueen card) {
         super(card);
     }
 
     @Override
-    public UrGolemsEye copy() {
-        return new UrGolemsEye(this);
+    public GarzaZolPlagueQueen copy() {
+        return new GarzaZolPlagueQueen(this);
     }
-
 }
-
