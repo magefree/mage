@@ -82,7 +82,7 @@ public class ManaUtilTest extends CardTestPlayerBase {
         HashMap<UUID, ManaAbility> useableAbilities = getManaAbilities(card);
         Assert.assertEquals(expected1, useableAbilities.size());
 
-        useableAbilities = ManaUtil.tryToAutoPay(unpaid, (LinkedHashMap)useableAbilities);
+        useableAbilities = ManaUtil.tryToAutoPay(unpaid, (LinkedHashMap<UUID, ManaAbility>)useableAbilities);
         Assert.assertEquals(expected2, useableAbilities.size());
     }
 
@@ -109,7 +109,7 @@ public class ManaUtilTest extends CardTestPlayerBase {
         HashMap<UUID, ManaAbility> useableAbilities = getManaAbilities(card);
         Assert.assertEquals(expected1, useableAbilities.size());
 
-        useableAbilities = ManaUtil.tryToAutoPay(unpaid, (LinkedHashMap)useableAbilities);
+        useableAbilities = ManaUtil.tryToAutoPay(unpaid, (LinkedHashMap<UUID, ManaAbility>)useableAbilities);
         Assert.assertEquals(1, useableAbilities.size());
         ManaAbility ability = useableAbilities.values().iterator().next();
         Assert.assertTrue("Wrong mana ability has been chosen", expectedChosen.isInstance(ability));

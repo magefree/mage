@@ -1,8 +1,8 @@
 package org.mage.test.cards.single;
 
-import junit.framework.Assert;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -27,7 +27,7 @@ public class ArchangelsLightTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
         assertGraveyardCount(playerA, 1);
         assertGraveyardCount(playerA, "Archangel's Light", 1);
-        Assert.assertEquals(currentGame.getPlayer(playerA.getId()).getLibrary().size(), 77);
+        Assert.assertEquals(77, currentGame.getPlayer(playerA.getId()).getLibrary().size());
     }
 
 
