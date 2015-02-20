@@ -5,23 +5,25 @@
  */
 package mage.sets.futuresight;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
+import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
@@ -30,30 +32,16 @@ import mage.util.CardUtil;
  */
 public class CloudKey extends CardImpl {
     
-    private static final Choice spellTypeChoice = new ChoiceImpl(true);
-    private static final Set<String> spellTypeChoices = new HashSet<>();
-    static {
-        spellTypeChoice.setMessage("Choose a spell type");
-        spellTypeChoices.add(CardType.ARTIFACT.toString());
-        spellTypeChoices.add(CardType.CREATURE.toString());
-        spellTypeChoices.add(CardType.ENCHANTMENT.toString());
-        spellTypeChoices.add(CardType.INSTANT.toString());
-        spellTypeChoices.add(CardType.SORCERY.toString());
-        spellTypeChoice.setChoices(spellTypeChoices);
-    }
-    
     public CloudKey(UUID ownerId) {
         super(ownerId, 160, "Cloud Key", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "FUT";
         
         // As Cloud Key enters the battlefield, choose artifact, creature, 
         // enchantment, instant, or sorcery.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new CloudKeyChooseEffect(), false);
-        ability.addChoice(spellTypeChoice);
-        this.addAbility(ability);
+        this.addAbility(new AsEntersBattlefieldAbility(new CloudKeyChooseTypeEffect()));
         
         // Spells of the chosen type cost {1} less to cast
-        // implement here
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CloudKeyCostModificationEffect()));
     }
     
     @Override
@@ -66,20 +54,59 @@ public class CloudKey extends CardImpl {
     }
 }
 
-class CloudKeyChooseEffect extends CostModificationEffectImpl {
-
-    public CloudKeyChooseEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        this.staticText = "choose artifact, creature, enchantment, instant, or sorcery. Spells of the chosen type cost {1} less to cast.";
+class CloudKeyChooseTypeEffect extends OneShotEffect {
+    
+    public CloudKeyChooseTypeEffect() {
+        super(Outcome.Neutral);
+        this.staticText = "Choose a spell type";
     }
     
-    public CloudKeyChooseEffect(final CloudKeyChooseEffect effect) {
+    public CloudKeyChooseTypeEffect(final CloudKeyChooseTypeEffect effect) {
         super(effect);
     }
     
     @Override
-    public CloudKeyChooseEffect copy() {
-        return new CloudKeyChooseEffect(this);
+    public CloudKeyChooseTypeEffect copy() {
+        return new CloudKeyChooseTypeEffect(this);
+    }
+    
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject != null && controller != null) {
+            ChoiceImpl choices = new ChoiceImpl(true);
+            choices.setMessage("Choose a spell type");
+            choices.getChoices().add(CardType.ARTIFACT.toString());
+            choices.getChoices().add(CardType.CREATURE.toString());
+            choices.getChoices().add(CardType.ENCHANTMENT.toString());
+            choices.getChoices().add(CardType.INSTANT.toString());
+            choices.getChoices().add(CardType.SORCERY.toString());
+            if(controller.choose(Outcome.Neutral, choices, game)) {
+                game.informPlayers(sourceObject.getLogName() + ": chosen spell type is " + choices.getChoice());
+                game.getState().setValue(source.getSourceId().toString() + "_CloudKey", choices.getChoice());
+                return true;
+            }
+        }
+        return false;
+    }
+    
+}
+
+class CloudKeyCostModificationEffect extends CostModificationEffectImpl {
+
+    public CloudKeyCostModificationEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
+        this.staticText = "choose artifact, creature, enchantment, instant, or sorcery. Spells of the chosen type cost {1} less to cast.";
+    }
+    
+    public CloudKeyCostModificationEffect(final CloudKeyCostModificationEffect effect) {
+        super(effect);
+    }
+    
+    @Override
+    public CloudKeyCostModificationEffect copy() {
+        return new CloudKeyCostModificationEffect(this);
     }
 
     @Override
@@ -94,7 +121,7 @@ class CloudKeyChooseEffect extends CostModificationEffectImpl {
         
         if (abilityToModify instanceof SpellAbility && abilityToModify.getControllerId().equals(source.getControllerId())) {
             Card card = game.getCard(abilityToModify.getSourceId());
-            if (card.getCardType().toString().contains(source.getChoices().get(0).getChoice())) {                
+            if (card.getCardType().toString().contains((String) game.getState().getValue(source.getSourceId().toString() + "_CloudKey"))) {                
                 return true;
             }
         }
