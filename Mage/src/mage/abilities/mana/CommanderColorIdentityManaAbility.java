@@ -38,8 +38,10 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
+import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -48,16 +50,20 @@ import mage.players.Player;
 
 public class CommanderColorIdentityManaAbility extends ManaAbility {
 
+    private FilterMana commanderMana;
+
     public CommanderColorIdentityManaAbility() {
         super(Zone.BATTLEFIELD, new CommanderIdentityManaEffect(),new TapSourceCost());
     }
     
     public CommanderColorIdentityManaAbility(Cost cost) {
         super(Zone.BATTLEFIELD, new CommanderIdentityManaEffect(), cost);
+        commanderMana = null;
     }
     
     public CommanderColorIdentityManaAbility(final CommanderColorIdentityManaAbility ability) {
         super(ability);
+        this.commanderMana = ability.commanderMana;
     }
 
     @Override
@@ -70,24 +76,29 @@ public class CommanderColorIdentityManaAbility extends ManaAbility {
         if (netMana.isEmpty()) {
             Player controller = game.getPlayer(getControllerId());
             if (controller != null) {
-                Card commander = game.getCard(controller.getCommanderId());
-                if (commander != null) {
-                    Mana commanderMana = commander.getManaCost().getMana();
-                    if (commanderMana.getBlack() > 0) {
-                        netMana.add(new Mana(ColoredManaSymbol.B));
+                if (commanderMana == null) {
+                    Card commander = game.getCard(controller.getCommanderId());
+                    if (commander != null) {
+                        commanderMana = CardUtil.getColorIdentity(commander);
+                    } else {
+                        // In formats other than Commander, Command Tower's ability produces no mana.
+                        commanderMana = new FilterMana();
                     }
-                    if (commanderMana.getBlue() > 0) {
-                        netMana.add(new Mana(ColoredManaSymbol.U));
-                    }
-                    if (commanderMana.getGreen() > 0) {
-                        netMana.add(new Mana(ColoredManaSymbol.G));
-                    }
-                    if (commanderMana.getRed() > 0) {
-                        netMana.add(new Mana(ColoredManaSymbol.R));
-                    }
-                    if (commanderMana.getWhite() > 0) {
-                        netMana.add(new Mana(ColoredManaSymbol.W));
-                    }
+                }
+                if (commanderMana.isBlack()) {
+                    netMana.add(new Mana(ColoredManaSymbol.B));
+                }
+                if (commanderMana.isBlue()) {
+                    netMana.add(new Mana(ColoredManaSymbol.U));
+                }
+                if (commanderMana.isGreen()) {
+                    netMana.add(new Mana(ColoredManaSymbol.G));
+                }
+                if (commanderMana.isRed()) {
+                    netMana.add(new Mana(ColoredManaSymbol.R));
+                }
+                if (commanderMana.isWhite()) {
+                    netMana.add(new Mana(ColoredManaSymbol.W));
                 }
             }
         }
@@ -104,13 +115,17 @@ public class CommanderColorIdentityManaAbility extends ManaAbility {
 
 class CommanderIdentityManaEffect extends ManaEffect {
 
+    private FilterMana commanderMana;
+
     public CommanderIdentityManaEffect() {
         super();
         this.staticText = "Add to your mana pool one mana of any color in your commander's color identity";
+        commanderMana = null;
     }
 
     public CommanderIdentityManaEffect(final CommanderIdentityManaEffect effect) {
         super(effect);
+        this.commanderMana = effect.commanderMana;
     }
 
     @Override
@@ -122,56 +137,61 @@ class CommanderIdentityManaEffect extends ManaEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card commander = game.getCard(controller.getCommanderId());
-            if (commander != null) {
-                Mana commanderMana = commander.getManaCost().getMana();
-                Choice choice = new ChoiceImpl();
-                choice.setMessage("Pick a mana color");
-                if (commanderMana.getBlack() > 0) {
-                    choice.getChoices().add("Black");
+            if (commanderMana == null) {
+                Card commander = game.getCard(controller.getCommanderId());
+                if (commander != null) {
+                    commanderMana = CardUtil.getColorIdentity(commander);
+                } else {
+                    // In formats other than Commander, Command Tower's ability produces no mana.
+                    commanderMana = new FilterMana();
                 }
-                if (commanderMana.getRed() > 0) {
-                    choice.getChoices().add("Red");
-                }
-                if (commanderMana.getBlue() > 0) {
-                    choice.getChoices().add("Blue");
-                }
-                if (commanderMana.getGreen() > 0) {
-                    choice.getChoices().add("Green");
-                }
-                if (commanderMana.getWhite() > 0) {
-                    choice.getChoices().add("White");
-                }
-                if (choice.getChoices().size() > 0) {
-                    if (choice.getChoices().size() == 1) {
-                        choice.setChoice(choice.getChoices().iterator().next());
-                    } else {
-                        if (!controller.choose(outcome, choice, game)) {
-                            return false;
-                        }
+            }
+            Choice choice = new ChoiceImpl();
+            choice.setMessage("Pick a mana color");
+            if (commanderMana.isBlack()) {
+                choice.getChoices().add("Black");
+            }
+            if (commanderMana.isRed()) {
+                choice.getChoices().add("Red");
+            }
+            if (commanderMana.isBlue()) {
+                choice.getChoices().add("Blue");
+            }
+            if (commanderMana.isGreen()) {
+                choice.getChoices().add("Green");
+            }
+            if (commanderMana.isWhite()) {
+                choice.getChoices().add("White");
+            }
+            if (choice.getChoices().size() > 0) {
+                if (choice.getChoices().size() == 1) {
+                    choice.setChoice(choice.getChoices().iterator().next());
+                } else {
+                    if (!controller.choose(outcome, choice, game)) {
+                        return false;
                     }
-                    Mana mana = new Mana();
-                    switch (choice.getChoice()) {
-                        case "Black":
-                            mana.setBlack(1);
-                            break;
-                        case "Blue":
-                            mana.setBlue(1);
-                            break;
-                        case "Red":
-                            mana.setRed(1);
-                            break;
-                        case "Green":
-                            mana.setGreen(1);
-                            break;
-                        case "White":
-                            mana.setWhite(1);
-                            break;
-                    }
-                    checkToFirePossibleEvents(mana, game, source);
-                    controller.getManaPool().addMana(mana, game, source);                    
-                    return true;
                 }
+                Mana mana = new Mana();
+                switch (choice.getChoice()) {
+                    case "Black":
+                        mana.setBlack(1);
+                        break;
+                    case "Blue":
+                        mana.setBlue(1);
+                        break;
+                    case "Red":
+                        mana.setRed(1);
+                        break;
+                    case "Green":
+                        mana.setGreen(1);
+                        break;
+                    case "White":
+                        mana.setWhite(1);
+                        break;
+                }
+                checkToFirePossibleEvents(mana, game, source);
+                controller.getManaPool().addMana(mana, game, source);                    
+                return true;
             }
         }
         return false;
