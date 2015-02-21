@@ -27,8 +27,6 @@
  */
 package mage.sets.shadowmoor;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
@@ -42,7 +40,7 @@ import mage.constants.Zone;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.BecomesColorOrColorsTargetEffect;
+import mage.abilities.effects.common.continious.BecomesColorTargetEffect;
 import mage.choices.ChoiceColor;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -94,7 +92,7 @@ class ChangeColorsTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
         Permanent target = game.getPermanent(source.getFirstTarget());
-        List<ObjectColor> chosenColors = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
         
         if (you != null && target != null) {
             for (int i = 0; i < 5; i++) {
@@ -108,20 +106,22 @@ class ChangeColorsTargetEffect extends OneShotEffect {
                 }
                 game.informPlayers(target.getName() + ": " + you.getName() + " has chosen " + choiceColor.getChoice());
                 if (choiceColor.getColor().isBlack()) {
-                    chosenColors.add(ObjectColor.BLACK);
+                    sb.append("B");
                 } else if (choiceColor.getColor().isBlue()) {
-                    chosenColors.add(ObjectColor.BLUE);
+                    sb.append("U");
                 } else if (choiceColor.getColor().isRed()) {
-                    chosenColors.add(ObjectColor.RED);
+                    sb.append("R");
                 } else if (choiceColor.getColor().isGreen()) {
-                    chosenColors.add(ObjectColor.GREEN);
+                    sb.append("G");
                 } else if (choiceColor.getColor().isWhite()) {
-                    chosenColors.add(ObjectColor.WHITE);
+                    sb.append("W");
                 }
             }
+            String colors = new String(sb);
+            ObjectColor chosenColors = new ObjectColor(colors);
             
             
-                ContinuousEffect effect = new BecomesColorOrColorsTargetEffect(chosenColors, Duration.EndOfTurn);
+                ContinuousEffect effect = new BecomesColorTargetEffect(chosenColors, Duration.EndOfTurn);
                 effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
                 game.addEffect(effect, source);
             
