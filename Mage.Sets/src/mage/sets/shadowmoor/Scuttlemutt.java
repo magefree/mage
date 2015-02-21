@@ -29,26 +29,17 @@ package mage.sets.shadowmoor;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.constants.Zone;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.BecomesColorTargetEffect;
-import mage.choices.ChoiceColor;
+import mage.abilities.effects.common.continious.BecomesColorOrColorsTargetEffect;
+import mage.abilities.mana.AnyColorManaAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -63,10 +54,11 @@ public class Scuttlemutt extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {tap}: Add one mana of any color to your mana pool.
+        // {T}: Add one mana of any color to your mana pool.
         this.addAbility(new AnyColorManaAbility());
-        // {tap}: Target creature becomes the color or colors of your choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChangeColorsTargetEffect(), new TapSourceCost());
+
+        // {T}: Target creature becomes the color or colors of your choice until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorOrColorsTargetEffect(Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -80,64 +72,3 @@ public class Scuttlemutt extends CardImpl {
         return new Scuttlemutt(this);
     }
 }
-
-class ChangeColorsTargetEffect extends OneShotEffect {
-    
-    public ChangeColorsTargetEffect() {
-        super(Outcome.Neutral);
-        staticText = "target creature becomes the color or colors of your choice until end of turn";
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        Permanent target = game.getPermanent(source.getFirstTarget());
-        StringBuilder sb = new StringBuilder();
-        
-        if (you != null && target != null) {
-            for (int i = 0; i < 5; i++) {
-                if (!you.chooseUse(Outcome.Neutral, "Do you wish to choose another color?", game)) {
-                    break;
-                }
-                ChoiceColor choiceColor = new ChoiceColor();
-                you.choose(Outcome.Benefit, choiceColor, game);
-                if (!you.isInGame()) {
-                    return false;
-                }
-                game.informPlayers(target.getName() + ": " + you.getName() + " has chosen " + choiceColor.getChoice());
-                if (choiceColor.getColor().isBlack()) {
-                    sb.append("B");
-                } else if (choiceColor.getColor().isBlue()) {
-                    sb.append("U");
-                } else if (choiceColor.getColor().isRed()) {
-                    sb.append("R");
-                } else if (choiceColor.getColor().isGreen()) {
-                    sb.append("G");
-                } else if (choiceColor.getColor().isWhite()) {
-                    sb.append("W");
-                }
-            }
-            String colors = new String(sb);
-            ObjectColor chosenColors = new ObjectColor(colors);
-            
-            
-                ContinuousEffect effect = new BecomesColorTargetEffect(chosenColors, Duration.EndOfTurn);
-                effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
-                game.addEffect(effect, source);
-            
-            return true;
-        }
-        return false;
-    }
-    
-    public ChangeColorsTargetEffect(final ChangeColorsTargetEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public ChangeColorsTargetEffect copy() {
-        return new ChangeColorsTargetEffect(this);
-    }
-}
-
-

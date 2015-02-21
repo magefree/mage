@@ -103,7 +103,7 @@ class ThirstforKnowledgeEffect extends OneShotEffect {
             }
         }
         if (you != null) {
-            you.discard(2, source, game);
+            you.discard(2, false, source, game);
             return true;
         }
         return false;

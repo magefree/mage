@@ -117,7 +117,7 @@ class WaveOfVitriolEffect extends OneShotEffect {
                         }
                         permanent.sacrifice(source.getSourceId(), game);
                     }
-                    if (count > 0 && player.chooseUse(Outcome.PutLandInPlay, "Search your libraray for up to " + count + " basic lands?", game)) {
+                    if (count > 0 && player.chooseUse(Outcome.PutLandInPlay, "Search your library for up to " + count + " basic lands?", game)) {
                         Target target = new TargetCardInLibrary(0,count, new FilterBasicLandCard());
                         player.chooseTarget(outcome, target, source, game);
                         for(UUID targetId: target.getTargets()) {
