@@ -93,6 +93,11 @@ class BartelRuneaxeEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.TARGET;
+    }
+
+    @Override
     public boolean apply(Game game, Ability source) {
         return true;
     }
@@ -108,15 +113,12 @@ class BartelRuneaxeEffect extends ContinuousRuleModifiyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.TARGET) {
-            Card targetCard = game.getCard(event.getTargetId());
             StackObject stackObject = (StackObject) game.getStack().getStackObject(event.getSourceId());
-            if (targetCard != null && stackObject != null && event.getTargetId().equals(source.getSourceId())) {
+            if (stackObject != null && event.getTargetId().equals(source.getSourceId())) {
                 if (stackObject.getSubtype().contains("Aura")) {
                     return true;
                 }
             }
-        }
         return false;
     }
 }
