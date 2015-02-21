@@ -34,7 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -71,11 +71,11 @@ public class Stasis extends CardImpl {
     }
 }
 
-class SkipUntapStepEffect extends ReplacementEffectImpl {
+class SkipUntapStepEffect extends ContinuousRuleModifiyingEffectImpl {
 
     public SkipUntapStepEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        staticText = "Players skip their untap steps";
+        super(Duration.WhileOnBattlefield, Outcome.Neutral, false, false);
+        staticText = "Players skip their uptap steps";
     }
 
     public SkipUntapStepEffect(final SkipUntapStepEffect effect) {
@@ -88,23 +88,10 @@ class SkipUntapStepEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.UNTAP_STEP;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        return controller != null && controller.getInRange().contains(event.getPlayerId());
+        return event.getType() == GameEvent.EventType.UNTAP_STEP 
+                && controller != null 
+                && controller.getInRange().contains(event.getPlayerId());
     }
 }
