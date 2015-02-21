@@ -134,9 +134,8 @@ class TetsuoUmezawaEffect extends ContinuousRuleModifiyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        //Card targetCard = game.getCard(event.getTargetId());
         StackObject stackObject = (StackObject) game.getStack().getStackObject(event.getSourceId());
-        if (/*targetCard != null && */stackObject != null && event.getTargetId().equals(source.getSourceId())) {
+        if (stackObject != null && event.getTargetId().equals(source.getSourceId())) {
             if (stackObject.getSubtype().contains("Aura")) {
                 return true;
             }
