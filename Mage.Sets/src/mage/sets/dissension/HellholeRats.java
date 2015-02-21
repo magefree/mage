@@ -103,8 +103,8 @@ class HellholeRatsEffect extends OneShotEffect {
                     damage = card.getManaCost().convertedManaCost();
                 }
                 targetPlayer.damage(damage, source.getSourceId(), game, false, true);
-                return true;
             }
+            return true;
         }
         return false;
     }
