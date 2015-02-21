@@ -73,10 +73,10 @@ public class SepulchralPrimordial extends CardImpl {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof EntersBattlefieldTriggeredAbility) {
+            ability.getTargets().clear();
             for(UUID opponentId : game.getOpponents(ability.getControllerId())) {
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null) {
-                    ability.getTargets().clear();
                     FilterCard filter = new FilterCreatureCard(new StringBuilder("creature card from ").append(opponent.getName()).append("'s graveyard").toString());
                     filter.add(new OwnerIdPredicate(opponentId));
                     TargetCardInOpponentsGraveyard target = new TargetCardInOpponentsGraveyard(0,1, filter);
