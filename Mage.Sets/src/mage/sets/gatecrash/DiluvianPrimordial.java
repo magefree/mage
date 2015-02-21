@@ -80,10 +80,10 @@ public class DiluvianPrimordial extends CardImpl {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof EntersBattlefieldTriggeredAbility) {
+            ability.getTargets().clear();
             for(UUID opponentId : game.getOpponents(ability.getControllerId())) {
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null) {
-                    ability.getTargets().clear();
                     FilterCard filter = new FilterCard(new StringBuilder("instant or sorcery card from ").append(opponent.getName()).append("'s graveyard").toString());
                     filter.add(new OwnerIdPredicate(opponentId));
                     filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT),new CardTypePredicate(CardType.SORCERY)));
@@ -122,13 +122,13 @@ class DiluvianPrimordialEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         for (Target target: source.getTargets()) {
             if (target instanceof TargetCardInOpponentsGraveyard) {
                 Card targetCard = game.getCard(target.getFirstTarget());
-                if (player != null && targetCard != null) {
-                    if (player.chooseUse(outcome, "Cast " + targetCard.getName() +"?", game)) {
-                        player.cast(targetCard.getSpellAbility(), game, true);
+                if (controller != null && targetCard != null) {
+                    if (controller.chooseUse(outcome, "Cast " + targetCard.getName() +"?", game)) {
+                        controller.cast(targetCard.getSpellAbility(), game, true);
                         ContinuousEffect effect = new DiluvianPrimordialReplacementEffect();
                         effect.setTargetPointer(new FixedTarget(targetCard.getId()));
                         game.addEffect(effect, source);
@@ -175,13 +175,16 @@ class DiluvianPrimordialReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone() == Zone.GRAVEYARD
-                    && ((ZoneChangeEvent) event).getTargetId().equals(getTargetPointer().getFirst(game, source))) {
-                return true;
-            }
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (zEvent.getToZone() == Zone.GRAVEYARD
+                && ((ZoneChangeEvent) event).getTargetId().equals(getTargetPointer().getFirst(game, source))) {
+            return true;
         }
         return false;
     }
