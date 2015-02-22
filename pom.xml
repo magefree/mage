@@ -20,6 +20,13 @@
                     <source>1.7</source>
                     <target>1.7</target>
                     <encoding>UTF-8</encoding>
+                    <!--
+                    Because of known error in maven-compiler-plugin 3.2 useIncrementalCompilation is inverted
+                    so remove this arg with update that fixes the problem
+                    https://jira.codehaus.org/browse/MCOMPILER-209
+                    -->
+                    <useIncrementalCompilation>false</useIncrementalCompilation>
+<!--                    <compilerArgument>-Xlint:all</compilerArgument> -->
                 </configuration>
             </plugin>
             <plugin>
