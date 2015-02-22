@@ -69,8 +69,10 @@ public class MiracleWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.UNTAP_STEP_PRE) {
             reset();
+            return;
         }
-        if (event.getType() == GameEvent.EventType.DREW_CARD) {
+        // inital card draws do not trigger miracle so check that phase != null
+        if (game.getPhase() != null && event.getType() == GameEvent.EventType.DREW_CARD) {
             UUID playerId = event.getPlayerId();
             if (playerId != null) {
                 Integer amount = amountOfCardsDrawnThisTurn.get(playerId);
