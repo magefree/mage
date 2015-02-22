@@ -33,9 +33,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageEverythingEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -69,7 +67,6 @@ public class SkirkFireMarshal extends CardImpl {
         this.expansionSetCode = "ONS";
         this.subtype.add("Goblin");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
@@ -79,7 +76,7 @@ public class SkirkFireMarshal extends CardImpl {
         // Tap five untapped Goblins you control: Skirk Fire Marshal deals 10 damage to each creature and each player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DamageEverythingEffect(10),
-                new TapTargetCost(new TargetControlledCreaturePermanent(5,5, filter, false)));
+                new TapTargetCost(new TargetControlledCreaturePermanent(5,5, filter, true)));
         this.addAbility(ability);
     }
 
