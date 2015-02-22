@@ -28,9 +28,6 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -39,7 +36,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
@@ -62,7 +61,6 @@ public class ShimianSpecter extends CardImpl {
         this.expansionSetCode = "M13";
         this.subtype.add("Specter");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
@@ -102,9 +100,9 @@ class ShimianSpecterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = source.getSourceObject(game);
         if (targetPlayer != null && sourceObject != null && controller != null) {
             
             // reveal hand of target player 
@@ -116,8 +114,7 @@ class ShimianSpecterEffect extends OneShotEffect {
             Card chosenCard = null;
             if (controller.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
                 chosenCard = game.getCard(target.getFirstTarget());
-            }
-            
+            }            
             
             // Exile all cards with the same name
             // Building a card filter with the name
@@ -139,9 +136,9 @@ class ShimianSpecterEffect extends OneShotEffect {
                 }
 
                 // search cards in hand
-                TargetCardInHand targetCardsHand = new TargetCardInHand(0, Integer.MAX_VALUE, filterNamedCards);
-                controller.chooseTarget(outcome, targetPlayer.getGraveyard(), targetCardsHand, source, game);
-                for(UUID cardId:  targetCardsHand.getTargets()) {
+                TargetCardInHand targetHandCards = new TargetCardInHand(0, Integer.MAX_VALUE, filterNamedCards);
+                controller.chooseTarget(outcome, targetPlayer.getHand(), targetHandCards, source, game);
+                for(UUID cardId:  targetHandCards.getTargets()) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
                         controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.HAND);
