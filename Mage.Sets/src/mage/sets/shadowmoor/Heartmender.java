@@ -40,6 +40,7 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.counters.Counter;
 import mage.counters.CounterType;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -93,7 +94,11 @@ class HeartmenderEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean applied = false;
-        for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+        if (game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game).isEmpty()) {
+            return true;
+        }
+        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             if (creature != null
                     && creature.getCounters().getCount(counter.getName()) >= counter.getCount()) {
                 creature.removeCounters(counter.getName(), counter.getCount(), game);
