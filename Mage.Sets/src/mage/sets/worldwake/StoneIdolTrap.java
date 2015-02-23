@@ -62,10 +62,8 @@ public class StoneIdolTrap extends CardImpl {
         this.expansionSetCode = "WWK";
         this.subtype.add("Trap");
 
-        this.color.setRed(true);
-
         // Stone Idol Trap costs {1} less to cast for each attacking creature.
-        Ability ability = new SimpleStaticAbility(Zone.STACK, new StoneIdolTrapCostReductionEffect());
+        Ability ability = new SimpleStaticAbility(Zone.ALL, new StoneIdolTrapCostReductionEffect());
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 
@@ -108,8 +106,7 @@ class StoneIdolTrapCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if ((abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility)
-                && abilityToModify.getSourceId().equals(source.getSourceId())) {
+        if ((abilityToModify instanceof SpellAbility) && abilityToModify.getSourceId().equals(source.getSourceId())) {
             return game.getCard(abilityToModify.getSourceId()) != null;
         }
         return false;
@@ -156,7 +153,7 @@ class StoneIdolTrapEffect extends OneShotEffect {
 class StoneTrapIdolToken extends Token {
 
     public StoneTrapIdolToken() {
-        super("Construct", "6/12 construct artifact creature token with trample");
+        super("Construct", "6/12  colorless Construct artifact creature token with trample");
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
         subtype.add("Construct");

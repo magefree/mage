@@ -120,8 +120,7 @@ class KaradorGhostChieftainCostReductionEffect extends CostModificationEffectImp
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if ((abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility)
-                && abilityToModify.getSourceId().equals(source.getSourceId())) {
+        if ((abilityToModify instanceof SpellAbility) && abilityToModify.getSourceId().equals(source.getSourceId())) {
             return game.getCard(abilityToModify.getSourceId()) != null;
         }
         return false;

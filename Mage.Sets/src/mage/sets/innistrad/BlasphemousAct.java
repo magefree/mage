@@ -27,18 +27,26 @@
  */
 package mage.sets.innistrad;
 
-import java.util.List;
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.SpellAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.DamageAllEffect;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
+import mage.constants.CostModificationType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.util.CardUtil;
 
 
 /**
@@ -49,25 +57,14 @@ public class BlasphemousAct extends CardImpl {
     public BlasphemousAct(UUID ownerId) {
         super(ownerId, 130, "Blasphemous Act", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{8}{R}");
         this.expansionSetCode = "ISD";
-
-        this.color.setRed(true);
-
+        
         // Blasphemous Act costs {1} less to cast for each creature on the battlefield.
+        Ability ability = new SimpleStaticAbility(Zone.ALL, new BlasphemousCostReductionEffect());
+        ability.setRuleAtTheTop(true);
+        this.addAbility(ability);
+        
         // Blasphemous Act deals 13 damage to each creature.
-        // need to override DamageAllEffect because of rules string
-        this.getSpellAbility().addEffect(new BlasphemousActEffect());
-    }
-
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        int creatureCount = game.getState().getBattlefield().count(new FilterCreaturePermanent(), ability.getSourceId(), ability.getControllerId(), game);
-        int cost = 8 - creatureCount;
-        String adjustedCost = "{R}";
-        if (cost > 0) {
-            adjustedCost = "{" + String.valueOf(cost) + "}" + adjustedCost;
-        }
-        ability.getManaCostsToPay().clear();
-        ability.getManaCostsToPay().load(adjustedCost);
+        this.getSpellAbility().addEffect(new DamageAllEffect(13, new FilterCreaturePermanent()));
     }
 
     public BlasphemousAct(final BlasphemousAct card) {
@@ -80,29 +77,39 @@ public class BlasphemousAct extends CardImpl {
     }
 }
 
-class BlasphemousActEffect extends OneShotEffect {
+class BlasphemousCostReductionEffect extends CostModificationEffectImpl {
 
-    public BlasphemousActEffect() {
-        super(Outcome.Damage);
-        staticText = "{this} costs {1} less to cast for each creature on the battlefield.\n {this} deals 13 damage to each creature";
+    BlasphemousCostReductionEffect() {
+        super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
+        staticText = "{this} costs {1} less to cast for each creature on the battlefield";
     }
 
-    public BlasphemousActEffect(final BlasphemousActEffect effect) {
+    BlasphemousCostReductionEffect(BlasphemousCostReductionEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
-        for (Permanent permanent : permanents) {
-            permanent.damage(13, source.getSourceId(), game, false, true);
+    public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            int reductionAmount = game.getBattlefield().count(new FilterCreaturePermanent(), source.getSourceId(), source.getControllerId(), game);
+            CardUtil.reduceCost(abilityToModify, reductionAmount);
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override
-    public BlasphemousActEffect copy() {
-        return new BlasphemousActEffect(this);
+    public boolean applies(Ability abilityToModify, Ability source, Game game) {
+        if ((abilityToModify instanceof SpellAbility) && abilityToModify.getSourceId().equals(source.getSourceId())) {
+            return game.getCard(abilityToModify.getSourceId()) != null;
+        }
+        return false;
     }
 
+    @Override
+    public BlasphemousCostReductionEffect copy() {
+        return new BlasphemousCostReductionEffect(this);
+    }
 }
+
