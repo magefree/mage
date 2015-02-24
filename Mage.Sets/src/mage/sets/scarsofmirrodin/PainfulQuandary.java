@@ -50,7 +50,6 @@ public class PainfulQuandary extends CardImpl {
     public PainfulQuandary(UUID ownerId) {
         super(ownerId, 73, "Painful Quandary", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
         this.expansionSetCode = "SOM";
-        this.color.setBlack(true);
 
         // Whenever an opponent casts a spell, that player loses 5 life unless he or she discards a card.
         this.addAbility(new SpellCastOpponentTriggeredAbility(new PainfulQuandryEffect(), false));
@@ -89,7 +88,7 @@ class PainfulQuandryEffect extends OneShotEffect {
         if (player != null) {
             boolean paid = false;
             Cost cost = new DiscardTargetCost(new TargetCardInHand());
-            if (cost.canPay(source, player.getId(), player.getId(), game)
+            if (cost.canPay(source, source.getSourceId(), player.getId(), game)
                     && player.chooseUse(Outcome.Detriment, "Discard a card (otherwise you lose 5 life)?", game)) {
                 paid = cost.pay(source, game, source.getSourceId(), player.getId(), false);
             }
