@@ -43,7 +43,7 @@ import mage.filter.FilterCard;
 public class Impulse extends CardImpl {
 
     public Impulse(UUID ownerId) {
-        super(ownerId, 254, "Impulse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
+        super(ownerId, 34, "Impulse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "VIS";
 
         this.color.setBlue(true);

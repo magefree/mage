@@ -43,8 +43,7 @@ import mage.constants.Rarity;
 public class SandsteppeMastodon extends CardImpl {
 
     public SandsteppeMastodon(UUID ownerId) {
-        // TODO: Fix collector number
-        super(ownerId, 9901, "Sandsteppe Mastodon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
+        super(ownerId, 137, "Sandsteppe Mastodon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
         this.expansionSetCode = "FRF";
         this.subtype.add("Elephant");
         this.power = new MageInt(5);
