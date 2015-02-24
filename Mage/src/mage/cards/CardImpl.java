@@ -63,7 +63,6 @@ import mage.game.Game;
 import mage.game.command.Commander;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
@@ -219,11 +218,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public void setRarity(Rarity rarity) {
-        this.rarity = rarity;
-    }
-
-    @Override
     public List<String> getRules() {
         try {
             List<String> rules = abilities.getRules(this.getLogName());
@@ -269,11 +263,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public void setControllerId(UUID controllerId) {
-        abilities.setControllerId(controllerId);
-    }
-
-    @Override
     public void setOwnerId(UUID ownerId) {
         this.ownerId = ownerId;
         abilities.setControllerId(ownerId);
@@ -292,11 +281,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public String getTokenSetCode() {
         return tokenSetCode;
-    }
-
-    @Override
-    public void setExpansionSetCode(String expansionSetCode) {
-        this.expansionSetCode = expansionSetCode;
     }
 
     @Override
@@ -411,7 +395,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                                 .append("] source [").append(sourceCard != null ? sourceCard.getName():"null").append("]").toString());
                     return false;
             }
-            setControllerId(event.getPlayerId());
             game.setZone(objectId, event.getToZone());
             game.addSimultaneousEvent(event);
             return game.getState().getZone(objectId) == toZone;
@@ -573,11 +556,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public void setCardNumber(int cid) {
-        this.cardNumber = cid;
-    }
-
-    @Override
     public void setFaceDown(boolean value) {
         faceDown = value;
     }
@@ -627,11 +605,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public void setSecondCardFace(Card card) {
-        this.secondSideCard = card;
-    }
-
-    @Override
     public boolean isNightCard() {
         return this.nightCard;
     }
@@ -645,17 +618,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public String getFlipCardName() {
         return flipCardName;
     }
-
-    @Override
-    public void setFlipCard(boolean flipCard) {
-        this.flipCard = flipCard;
-    }
-
-    @Override
-    public void setFlipCardName(String flipCardName) {
-        this.flipCardName = flipCardName;
-    }
-
 
     @Override
     public boolean isSplitCard() {

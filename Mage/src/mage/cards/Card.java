@@ -46,10 +46,7 @@ public interface Card extends MageObject {
 
     UUID getOwnerId();
     int getCardNumber();
-    void setCardNumber(int cid);
     Rarity getRarity();
-    void setRarity(Rarity rarity);
-    void setControllerId(UUID controllerId);
     void setOwnerId(UUID ownerId);
     void addAbility(Ability ability);
     void addWatcher(Watcher watcher);
@@ -59,20 +56,16 @@ public interface Card extends MageObject {
     List<Watcher> getWatchers();
     String getExpansionSetCode();
     String getTokenSetCode();
-    void setExpansionSetCode(String expansionSetCode);
     void setFaceDown(boolean value);
     boolean isFaceDown();
     boolean turnFaceUp(Game game, UUID playerId);
     boolean turnFaceDown(Game game, UUID playerId);
     boolean isFlipCard();
     String getFlipCardName();
-    void setFlipCard(boolean flipCard);
-    void setFlipCardName(String flipCardName);
     boolean isSplitCard();
 
     boolean canTransform();
     Card getSecondCardFace();
-    void setSecondCardFace(Card card);
     boolean isNightCard();
 
     void assignNewId();

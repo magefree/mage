@@ -549,9 +549,6 @@ public class Spell implements StackObject, Card {
     }
 
     @Override
-    public void setRarity(Rarity rarity) {}
-
-    @Override
     public List<CardType> getCardType() {
         if (this.getSpellAbility() instanceof BestowAbility) {
             List<CardType> cardTypes = new ArrayList<>();
@@ -678,7 +675,6 @@ public class Spell implements StackObject, Card {
         return ability;
     }
 
-    @Override
     public void setControllerId(UUID controllerId) {
         this.ability.setControllerId(controllerId);
         for (SpellAbility spellAbility: spellAbilities) {
@@ -709,9 +705,6 @@ public class Spell implements StackObject, Card {
     public String getTokenSetCode() {
         return card.getTokenSetCode();
     }
-
-    @Override
-    public void setExpansionSetCode(String expansionSetCode) {}
 
     @Override
     public void setFaceDown(boolean value) {
@@ -761,24 +754,9 @@ public class Spell implements StackObject, Card {
     }
 
     @Override
-    public void setSecondCardFace(Card card) {
-    }
-
-    @Override
     public boolean isNightCard() {
         return false;
     }
-
-    @Override
-    public void setFlipCard(boolean flipCard) {
-        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setFlipCardName(String flipCardName) {
-        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 
     @Override
     public Spell copy() {
@@ -874,11 +852,6 @@ public class Spell implements StackObject, Card {
     @Override
     public int getCardNumber() {
         return card.getCardNumber();
-    }
-
-    @Override
-    public void setCardNumber(int cid) {
-        card.setCardNumber(cid);
     }
 
     @Override

@@ -1325,7 +1325,6 @@ public abstract class GameImpl implements Game, Serializable {
     public Card copyCard(Card cardToCopy, Ability source, UUID newController) {
         Card copiedCard = cardToCopy.copy();
         copiedCard.assignNewId();
-        copiedCard.setControllerId(newController);
         copiedCard.setCopy(true);
         Set<Card> cards = new HashSet<>();
         cards.add(copiedCard);
