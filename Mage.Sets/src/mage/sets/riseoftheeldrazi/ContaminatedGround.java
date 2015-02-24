@@ -66,8 +66,10 @@ public class ContaminatedGround extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
         // Enchanted land is a Swamp.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesBasicLandEnchantedEffect("Swamp")));
+        
         // Whenever enchanted land becomes tapped, its controller loses 2 life.
         this.addAbility(new ContaminatedGroundAbility());
     }
