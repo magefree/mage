@@ -178,7 +178,8 @@ class AmberPrisonUntapTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.UNTAPPED) && event.getTargetId().equals(this.getSourceId());
+        return event.getType().equals(GameEvent.EventType.UNTAP) && event.getTargetId().equals(this.getSourceId());
+                
     }
     
 }
