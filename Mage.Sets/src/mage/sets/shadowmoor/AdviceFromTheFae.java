@@ -114,15 +114,15 @@ class AdviceFromTheFaeEffect extends OneShotEffect {
             if (game.getBattlefield().countAll(new FilterControlledCreaturePermanent(), controller.getId(), game) > max) {
                 TargetCard target = new TargetCard(2, Zone.LIBRARY, new FilterCard());
                 if (controller.choose(Outcome.DrawCard, cards, target, game)) {
-                    controller.moveCardToHandWithInfo(game.getCard(target.getFirstTarget()), source.getId(), game, Zone.LIBRARY);
+                    controller.moveCardToHandWithInfo(game.getCard(target.getFirstTarget()), source.getSourceId(), game, Zone.LIBRARY);
                     cards.remove(game.getCard(target.getFirstTarget()));
-                    controller.moveCardToHandWithInfo(game.getCard(target.getTargets().get(1)), source.getId(), game, Zone.LIBRARY);
+                    controller.moveCardToHandWithInfo(game.getCard(target.getTargets().get(1)), source.getSourceId(), game, Zone.LIBRARY);
                     cards.remove(game.getCard(target.getTargets().get(1)));
                 }
             } else {
                 TargetCard target = new TargetCard(1, Zone.LIBRARY, new FilterCard());
                 if (controller.choose(Outcome.DrawCard, cards, target, game)) {
-                    controller.moveCardToHandWithInfo(game.getCard(target.getFirstTarget()), source.getId(), game, Zone.LIBRARY);
+                    controller.moveCardToHandWithInfo(game.getCard(target.getFirstTarget()), source.getSourceId(), game, Zone.LIBRARY);
                     cards.remove(game.getCard(target.getFirstTarget()));
                 }
             }
