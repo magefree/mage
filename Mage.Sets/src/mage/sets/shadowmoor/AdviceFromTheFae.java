@@ -96,7 +96,7 @@ class AdviceFromTheFaeEffect extends OneShotEffect {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (controller != null) {
             List<Card> cardsFromTopLibrary = controller.getLibrary().getTopCards(game, 5);
-            Cards cards = new CardsImpl(Zone.HAND);
+            Cards cards = new CardsImpl(Zone.LIBRARY);
             for (Card card : cardsFromTopLibrary) {
                 cards.add(card);
             }
@@ -112,7 +112,7 @@ class AdviceFromTheFaeEffect extends OneShotEffect {
                 }
             }
             if (game.getBattlefield().countAll(new FilterControlledCreaturePermanent(), controller.getId(), game) > max) {
-                TargetCard target = new TargetCard(2, Zone.HAND, new FilterCard());
+                TargetCard target = new TargetCard(2, Zone.LIBRARY, new FilterCard());
                 if (controller.choose(Outcome.DrawCard, cards, target, game)) {
                     controller.moveCardToHandWithInfo(game.getCard(target.getFirstTarget()), source.getId(), game, Zone.LIBRARY);
                     cards.remove(game.getCard(target.getFirstTarget()));
@@ -120,7 +120,7 @@ class AdviceFromTheFaeEffect extends OneShotEffect {
                     cards.remove(game.getCard(target.getTargets().get(1)));
                 }
             } else {
-                TargetCard target = new TargetCard(1, Zone.HAND, new FilterCard());
+                TargetCard target = new TargetCard(1, Zone.LIBRARY, new FilterCard());
                 if (controller.choose(Outcome.DrawCard, cards, target, game)) {
                     controller.moveCardToHandWithInfo(game.getCard(target.getFirstTarget()), source.getId(), game, Zone.LIBRARY);
                     cards.remove(game.getCard(target.getFirstTarget()));

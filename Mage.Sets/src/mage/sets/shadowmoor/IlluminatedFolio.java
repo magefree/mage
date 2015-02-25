@@ -117,7 +117,7 @@ class TargetTwoCardsWithTheSameColorInHand extends TargetCardInHand {
         Cards cardsToCheck = new CardsImpl();
         cardsToCheck.addAll(possibleTargets);
         if (targets.size() == 1) {
-            // first target is laready choosen, now only targets with the same name are selectable
+            // first target is already choosen, now only targets with the shared color are selectable
             for (Map.Entry<UUID, Integer> entry : targets.entrySet()) {
                 Card chosenCard = cardsToCheck.get(entry.getKey(), game);
                 if (chosenCard != null) {
