@@ -23,7 +23,7 @@ public class UndyingAbility extends DiesTriggeredAbility {
     
     public UndyingAbility() {
         super(new UndyingEffect());
-        this.addEffect(new ReturnSourceFromGraveyardToBattlefieldEffect());
+        this.addEffect(new ReturnSourceFromGraveyardToBattlefieldEffect(false, true));
     }
 
     public UndyingAbility(final UndyingAbility ability) {
