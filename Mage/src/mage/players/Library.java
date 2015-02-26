@@ -76,11 +76,15 @@ public class Library implements Serializable {
      */
     public void shuffle() {
         UUID[] shuffled = library.toArray(new UUID[0]);
-        for (int n = shuffled.length - 1; n > 0; n--) {
-            int r = rnd.nextInt(n);
-            UUID temp = shuffled[n];
-            shuffled[n] = shuffled[r];
-            shuffled[r] = temp;
+        int lastIndex = shuffled.length;
+        // shuffle 3 times to get a better result
+        for (int t = 0; t < 3; t++) {
+            for (int n = lastIndex; n > 0; n--) {
+                int r = rnd.nextInt(lastIndex);
+                UUID temp = shuffled[n];
+                shuffled[n] = shuffled[r];
+                shuffled[r] = temp;
+            }
         }
         library.clear();
         library.addAll(Arrays.asList(shuffled));
