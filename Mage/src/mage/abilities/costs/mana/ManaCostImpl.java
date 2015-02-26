@@ -39,6 +39,7 @@ import mage.filter.Filter;
 import mage.game.Game;
 import mage.players.ManaPool;
 import mage.players.Player;
+import mage.util.ManaUtil;
 
 
 public abstract class ManaCostImpl extends CostImpl implements ManaCost {
@@ -218,12 +219,15 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
         Player player = game.getPlayer(controllerId);
         assignPayment(game, ability, player.getManaPool());
         while (!isPaid()) {
-            if (player.playMana(this, game)) {
+            ManaCost unpaid = this.getUnpaid();
+            String promptText = ManaUtil.addSpecialManaPayAbilities(ability, game, unpaid);            
+            if (player.playMana(unpaid, promptText, game)) {
                 assignPayment(game, ability, player.getManaPool());
             }
             else {
                 return false;
             }
+            game.getState().getSpecialActions().removeManaActions();
         }
         return true;
     }

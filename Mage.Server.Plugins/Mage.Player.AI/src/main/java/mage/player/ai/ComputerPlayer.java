@@ -1011,7 +1011,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
     
     @Override
-    public boolean playMana(ManaCost unpaid, Game game) {
+    public boolean playMana(ManaCost unpaid, String promptText, Game game) {
         payManaMode = true;
         boolean result = playManaHandling(unpaid, game);
         payManaMode = false;

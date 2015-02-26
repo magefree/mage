@@ -606,17 +606,17 @@ public class HumanPlayer extends PlayerImpl {
 
 
     @Override
-    public boolean playMana(ManaCost unpaid, Game game) {
+    public boolean playMana(ManaCost unpaid, String promptText, Game game) {
         payManaMode = true;
-        boolean result = playManaHandling(unpaid, game);
+        boolean result = playManaHandling(unpaid, promptText, game);
         payManaMode = false;
         return result;
     }
 
     
-    protected boolean playManaHandling(ManaCost unpaid, Game game) {
+    protected boolean playManaHandling(ManaCost unpaid, String promptText, Game game) {
         updateGameStatePriority("playMana", game);
-        game.firePlayManaEvent(playerId, "Pay " + unpaid.getText());
+        game.firePlayManaEvent(playerId, "Pay " + promptText);
         waitForResponse(game);
         if (!this.isInGame()) {
             return false;
