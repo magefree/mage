@@ -37,12 +37,10 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.common.FilterControlledArtifactPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledEnchantmentPermanent;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -58,8 +56,6 @@ public class Cataclysm extends CardImpl {
     public Cataclysm(UUID ownerId) {
         super(ownerId, 3, "Cataclysm", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
         this.expansionSetCode = "EXO";
-
-        this.color.setWhite(true);
 
         // Each player chooses from the permanents he or she controls an artifact, a creature, an enchantment, and a land, then sacrifices the rest.
         this.getSpellAbility().addEffect(new CataclysmEffect());
@@ -77,18 +73,6 @@ public class Cataclysm extends CardImpl {
 
 class CataclysmEffect extends OneShotEffect {
 
-    private static final FilterArtifactPermanent filter1 = new FilterArtifactPermanent("artifact you control");
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature you control");
-    private static final FilterEnchantmentPermanent filter3 = new FilterEnchantmentPermanent("enchantment you control");
-    private static final FilterLandPermanent filter4 = new FilterLandPermanent("land you control");
-
-    static {
-        filter1.add(new ControllerPredicate(TargetController.YOU));
-        filter2.add(new ControllerPredicate(TargetController.YOU));
-        filter3.add(new ControllerPredicate(TargetController.YOU));
-        filter4.add(new ControllerPredicate(TargetController.YOU));
-    }
-
     public CataclysmEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Each player chooses from among the permanents he or she controls an artifact, a creature, an enchantment, and a land, then sacrifices the rest";
@@ -105,20 +89,14 @@ class CataclysmEffect extends OneShotEffect {
         for (UUID playerId : game.getPlayerList()) {
             Player player = game.getPlayer(playerId);
 
-            Target target1 = new TargetControlledPermanent(1, 1, filter1, false);
-            Target target2 = new TargetControlledPermanent(1, 1, filter2, false);
-            Target target3 = new TargetControlledPermanent(1, 1, filter3, false);
-            Target target4 = new TargetControlledPermanent(1, 1, filter4, false);
-
-
-            target1.setNotTarget(true);
-            target2.setNotTarget(true);
-            target3.setNotTarget(true);
-            target4.setNotTarget(true);
+            Target target1 = new TargetControlledPermanent(1, 1, new FilterControlledArtifactPermanent(), true);
+            Target target2 = new TargetControlledPermanent(1, 1, new FilterControlledCreaturePermanent(), true);
+            Target target3 = new TargetControlledPermanent(1, 1, new FilterControlledEnchantmentPermanent(), true);
+            Target target4 = new TargetControlledPermanent(1, 1, new FilterControlledLandPermanent(), true);
 
             if (target1.canChoose(player.getId(), game)) {
                 while (player.isInGame() && !target1.isChosen() && target1.canChoose(player.getId(), game)) {
-                    player.choose(Outcome.Benefit, target1, source.getSourceId(), game);
+                    player.chooseTarget(Outcome.Benefit, target1, source, game);
                 }
                 Permanent artifact = game.getPermanent(target1.getFirstTarget());
                 if (artifact != null) {
@@ -129,7 +107,7 @@ class CataclysmEffect extends OneShotEffect {
 
             if (target2.canChoose(player.getId(), game)) {
                 while (player.isInGame() && !target2.isChosen() && target2.canChoose(player.getId(), game)) {
-                    player.choose(Outcome.Benefit, target2, source.getSourceId(), game);
+                    player.chooseTarget(Outcome.Benefit, target2, source, game);
                 }
                 Permanent creature = game.getPermanent(target2.getFirstTarget());
                 if (creature != null) {
@@ -140,7 +118,7 @@ class CataclysmEffect extends OneShotEffect {
 
             if (target3.canChoose(player.getId(), game)) {
                 while (player.isInGame() && !target3.isChosen() && target3.canChoose(player.getId(), game)) {
-                    player.choose(Outcome.Benefit, target3, source.getSourceId(), game);
+                    player.chooseTarget(Outcome.Benefit, target3, source, game);
                 }
                 Permanent enchantment = game.getPermanent(target3.getFirstTarget());
                 if (enchantment != null) {
@@ -151,7 +129,7 @@ class CataclysmEffect extends OneShotEffect {
             
             if (target4.canChoose(player.getId(), game)) {
                 while (player.isInGame() && !target4.isChosen() && target4.canChoose(player.getId(), game)) {
-                    player.choose(Outcome.Benefit, target4, source.getSourceId(), game);
+                    player.chooseTarget(Outcome.Benefit, target4, source, game);
                 }
                 Permanent land = game.getPermanent(target4.getFirstTarget());
                 if (land != null) {

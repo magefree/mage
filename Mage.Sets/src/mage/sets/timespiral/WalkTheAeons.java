@@ -36,7 +36,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class WalkTheAeons extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("three Islands");
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("three Islands");
 
     static {
         filter.add(new SubtypePredicate("Island"));

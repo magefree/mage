@@ -25,54 +25,34 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.filter.common;
 
-import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.CardImpl;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
- * @author jeffwadsworth
-
+ * @author LevelX2
  */
-public class Fireblast extends CardImpl {
-    
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountain");
-    
-    static {
-        filter.add(new SubtypePredicate("Mountain"));
+
+public class FilterControlledPlaneswalkerPermanent extends FilterControlledPermanent {
+
+    public FilterControlledPlaneswalkerPermanent() {
+        this("planeswalker you control");
     }
 
-    public Fireblast(UUID ownerId) {
-        super(ownerId, 79, "Fireblast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{R}{R}");
-        this.expansionSetCode = "VIS";
-
-        this.color.setRed(true);
-                
-        // You may sacrifice two Mountains rather than pay Fireblast's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, true))));
-        
-        // Fireblast deals 4 damage to target creature or player.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-        
+    public FilterControlledPlaneswalkerPermanent(String name) {
+        super(name);
+        this.add(new CardTypePredicate(CardType.PLANESWALKER));
     }
 
-    public Fireblast(final Fireblast card) {
-        super(card);
+    public FilterControlledPlaneswalkerPermanent(final FilterControlledPlaneswalkerPermanent filter) {
+        super(filter);
     }
 
     @Override
-    public Fireblast copy() {
-        return new Fireblast(this);
+    public FilterControlledPlaneswalkerPermanent copy() {
+        return new FilterControlledPlaneswalkerPermanent(this);
     }
+
 }

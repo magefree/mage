@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -54,13 +54,12 @@ public class KrarkClanEngineers extends CardImpl {
         this.subtype.add("Goblin");
         this.subtype.add("Artificer");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // {R}, Sacrifice two artifacts: Destroy target artifact.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{R}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterArtifactPermanent("two artifacts"), true)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledArtifactPermanent("two artifacts"), true)));
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
         

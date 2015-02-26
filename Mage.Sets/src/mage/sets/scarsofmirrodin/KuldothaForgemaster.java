@@ -38,7 +38,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterArtifactCard;
-import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 
@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
 public class KuldothaForgemaster extends CardImpl {
 
     private static final FilterArtifactCard filterArtifactCard = new FilterArtifactCard();
-    private static final FilterArtifactPermanent filterArtifactPermanent = new FilterArtifactPermanent();
+    private static final FilterControlledArtifactPermanent filterArtifactPermanent = new FilterControlledArtifactPermanent();
 
     public KuldothaForgemaster(UUID ownerId) {
         super(ownerId, 169, "Kuldotha Forgemaster", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

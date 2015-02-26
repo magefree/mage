@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledPermanent;
 
@@ -59,7 +59,7 @@ public class AnthousaSetessanHero extends CardImpl {
 
         // <i>Heroic</i> - Whenever you cast a spell that targets Anthousa, Setessan Hero, up to three target lands you control each become 2/2 Warrior creatures until end of turn. They're still lands.
         Ability ability = new HeroicAbility(new BecomesCreatureTargetEffect(new AnthousaWarriorToken(), false, true, Duration.EndOfTurn));
-        ability.addTarget(new TargetControlledPermanent(0,3,new FilterLandPermanent("lands"), false));
+        ability.addTarget(new TargetControlledPermanent(0,3,new FilterControlledLandPermanent("lands"), false));
         this.addAbility(ability);
     }
 
