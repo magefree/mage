@@ -139,7 +139,7 @@ class HellkiteTyrantControlEffect extends ContinuousEffectImpl {
     private final UUID controllerId;
 
     public HellkiteTyrantControlEffect(UUID controllerId) {
-        super(Duration.EndOfCombat, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
+        super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.controllerId = controllerId;
     }
 
