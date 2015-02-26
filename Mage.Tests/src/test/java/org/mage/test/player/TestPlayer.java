@@ -531,7 +531,7 @@ public class TestPlayer extends ComputerPlayer {
         boolean result = true;
         for (int i = 1; i < groups.length; i++) {
             String group = groups[i];
-            if (group.startsWith("spellOnStack") || group.startsWith("spellOnTopOfStack") || group.startsWith("!spellOnStack")) {
+            if (group.startsWith("spellOnStack") || group.startsWith("spellOnTopOfStack") || group.startsWith("!spellOnStack") || group.startsWith("target=null") ) {
                 break;
             }
             if (ability instanceof SpellAbility && ((SpellAbility) ability).getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {

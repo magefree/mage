@@ -29,6 +29,7 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
@@ -40,7 +41,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -120,7 +120,7 @@ public class EchoAbility extends TriggeredAbilityImpl {
         if (manaEcho) {
             sb.append(" ");
         } else {
-            sb.append("-");
+            sb.append("&mdash;");
         }
         sb.append(echoCosts.getText());
         sb.append(" <i>(At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)</i>");
@@ -143,16 +143,16 @@ class EchoEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) { 
-            if (player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() /* + " or sacrifice " + permanent.getName() */ + "?", game)) {
-                cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
-                    return true;
-                                }
-            }
-            permanent.sacrifice(source.getSourceId(), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObjectReference mor = new MageObjectReference(source.getSourceId(), game);
+        if (controller != null && mor.refersTo(source.getSourceObject(game))) {
+                if (controller.chooseUse(Outcome.Benefit, "Pay " + cost.getText() /* + " or sacrifice " + permanent.getName() */ + "?", game)) {
+                    cost.clearPaid();
+                    if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+                        return true;
+                    }
+                }
+                mor.getPermanent(game).sacrifice(source.getSourceId(), game);
             return true;
         }
         return false;
