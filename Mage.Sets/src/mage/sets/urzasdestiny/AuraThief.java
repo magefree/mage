@@ -75,7 +75,6 @@ class AuraThiefDiesTriggeredEffect extends OneShotEffect {
     @Override 
     public boolean apply(Game game, Ability source) {
         boolean ret = false;
-        // ContinuousEffect gainControl = new GainControlTargetEffect(Duration.EndOfGame);
         for(Permanent enchantment : game.getBattlefield().getActivePermanents(new FilterEnchantmentPermanent(), source.getControllerId(), source.getControllerId(), game)) {
             ContinuousEffect gainControl = new GainControlTargetEffect(Duration.EndOfGame);
             gainControl.setTargetPointer(new FixedTarget(enchantment.getId()));
