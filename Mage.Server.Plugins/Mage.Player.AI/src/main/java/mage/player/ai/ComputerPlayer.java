@@ -77,6 +77,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import mage.filter.Filter;
 import mage.filter.predicate.other.PlayerIdPredicate;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 
 
 /**
@@ -1954,7 +1955,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             threats = game.getBattlefield().getActivePermanents(filter, this.getId(), sourceId, game); // all permanents within the range of the player
         } else {
             FilterPermanent filterCopy = filter.copy();
-            filterCopy.add(new PlayerIdPredicate(playerId));
+            filterCopy.add(new ControllerIdPredicate(playerId));
             threats = game.getBattlefield().getActivePermanents(filter, this.getId(), sourceId, game);
         } 
         Iterator<Permanent> it = threats.iterator();
