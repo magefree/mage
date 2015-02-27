@@ -28,6 +28,7 @@
 package mage.sets.bornofthegods;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -162,6 +163,7 @@ class SearingBloodDelayedEffect extends OneShotEffect {
         if (permanent != null) {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
+                MageObject sourceObject = source.getSourceObject(game);
                 player.damage(3, source.getSourceId(), game, false, true);
                 return true;
             }
