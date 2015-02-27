@@ -18,6 +18,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
@@ -59,7 +60,7 @@ class AuraThiefDiesTriggeredEffect extends OneShotEffect {
     
     public AuraThiefDiesTriggeredEffect() {
         super(Outcome.Benefit);
-        this.staticText = "gain control of all enchantments";
+        this.staticText = "gain control of all enchantments. <i>(You don't get to move Auras.)</i>";
     }
     
     public AuraThiefDiesTriggeredEffect(final AuraThiefDiesTriggeredEffect effect) {
@@ -74,8 +75,9 @@ class AuraThiefDiesTriggeredEffect extends OneShotEffect {
     @Override 
     public boolean apply(Game game, Ability source) {
         boolean ret = false;
-        ContinuousEffect gainControl = new GainControlTargetEffect(Duration.EndOfGame);
-        for(Permanent enchantment : game.getBattlefield().getAllActivePermanents(CardType.ENCHANTMENT)) {
+        // ContinuousEffect gainControl = new GainControlTargetEffect(Duration.EndOfGame);
+        for(Permanent enchantment : game.getBattlefield().getActivePermanents(new FilterEnchantmentPermanent(), source.getControllerId(), source.getControllerId(), game)) {
+            ContinuousEffect gainControl = new GainControlTargetEffect(Duration.EndOfGame);
             gainControl.setTargetPointer(new FixedTarget(enchantment.getId()));
             game.addEffect(gainControl, source);
             ret = true;
