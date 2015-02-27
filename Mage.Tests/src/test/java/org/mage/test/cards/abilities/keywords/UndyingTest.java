@@ -112,5 +112,39 @@ public class UndyingTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Strangleroot Geist", 3, 2);
     }
 
+    /**
+     * Tests "Target creature with Undying will be exiled by Anafenza before it returns to battlefield
+     * 
+     * Anafenza the foremost doesn't exile an undying creature when dying at the same time as 
+     * that undying one. The undying comes back to the field when he shouldn't. 
+     */
+    @Test
+    public void testReplacementEffectPreventsReturnOfUndying() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        // Butcher Ghoul
+        // Creature - Zombie, 1/1  {1}{B}
+        // Undying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
+        addCard(Zone.HAND, playerA, "Butcher Ghoul");
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+        addCard(Zone.HAND, playerB, "Lightning Bolt");
+        // Anafenza, the Foremost
+        // Whenever Anafenza, the Foremost attacks, put a +1/+1 counter on another target tapped creature you control.
+        // If a creature card would be put into an opponent's graveyard from anywhere, exile it instead.
+        addCard(Zone.BATTLEFIELD, playerB, "Anafenza, the Foremost");
 
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Butcher Ghoul");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Butcher Ghoul");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerB, "Anafenza, the Foremost", 1);
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+        
+        assertPermanentCount(playerA, "Butcher Ghoul", 0);
+        assertExileCount("Butcher Ghoul", 1);
+    }
+
+    
 }
