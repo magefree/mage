@@ -75,6 +75,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
+import mage.filter.Filter;
+import mage.filter.predicate.other.PlayerIdPredicate;
 
 
 /**
@@ -1947,10 +1949,14 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     protected List<Permanent> threats(UUID playerId, UUID sourceId, FilterPermanent filter, Game game, List<UUID> targets) {
-        List<Permanent> threats = (playerId == null || sourceId ==null) ?
-                game.getBattlefield().getActivePermanents(filter, this.getId(), sourceId, game) : // all permanents within the range of the player
-                game.getBattlefield().getActivePermanents(filter, playerId, sourceId, game);
-
+        List<Permanent> threats;
+        if (playerId == null) {
+            threats = game.getBattlefield().getActivePermanents(filter, this.getId(), sourceId, game); // all permanents within the range of the player
+        } else {
+            FilterPermanent filterCopy = filter.copy();
+            filterCopy.add(new PlayerIdPredicate(playerId));
+            threats = game.getBattlefield().getActivePermanents(filter, this.getId(), sourceId, game);
+        } 
         Iterator<Permanent> it = threats.iterator();
         while (it.hasNext()) { // remove permanents already targeted
             Permanent test = it.next();

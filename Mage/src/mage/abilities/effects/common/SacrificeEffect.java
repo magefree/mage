@@ -52,19 +52,19 @@ public class SacrificeEffect extends OneShotEffect{
     private String preText;
     private DynamicValue count;
 
-    public SacrificeEffect ( FilterPermanent filter, DynamicValue count, String preText ) {
+    public SacrificeEffect (FilterPermanent filter, int count, String preText ) {
+        this(filter, new StaticValue(count), preText);
+    }
+
+    public SacrificeEffect (FilterPermanent filter, DynamicValue count, String preText ) {
         super(Outcome.Sacrifice);
         this.filter = filter;
         this.count = count;
         this.preText = preText;
         setText();
     }
-
-    public SacrificeEffect ( FilterPermanent filter, int count, String preText ) {
-        this(filter, new StaticValue(count), preText);
-    }
-
-    public SacrificeEffect ( final SacrificeEffect effect ) {
+    
+    public SacrificeEffect (final SacrificeEffect effect ) {
         super(effect);
         this.filter = effect.filter;
         this.count = effect.count;
