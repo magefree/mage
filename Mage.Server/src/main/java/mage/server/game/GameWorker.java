@@ -62,7 +62,7 @@ public class GameWorker<T> implements Callable {
             gameController.gameResult(game.getWinner());
             game.cleanUp();
         } catch (MageException ex) {
-            logger.fatal("GameWorker mage error [" + game.getId() + "]" +ex, ex);
+            logger.fatal("GameWorker mage error [" + game.getId() + "]" + ex, ex);
             ex.printStackTrace();
         } catch (Exception e) {
             logger.fatal("GameWorker general exception [" + game.getId() + "]" + e.getMessage(), e);
