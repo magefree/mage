@@ -28,8 +28,6 @@
 
 package org.mage.plugins.card.dl.sources;
 
-import java.net.URLEncoder;
-import mage.cards.SplitCard;
 import org.mage.plugins.card.images.CardDownloadData;
 
 /**
@@ -56,7 +54,7 @@ public class MtgImageSource implements CardImageSource {
             throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);
         }
         StringBuilder url = new StringBuilder("http://mtgimage.com/set/");
-        url.append(cardSet.toUpperCase()).append("/");
+            url.append(cardSet.toUpperCase()).append("/");
 
         if (card.isSplitCard()) {            
             url.append(card.getDownloadName().replaceAll(" // ", ""));
