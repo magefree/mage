@@ -146,5 +146,39 @@ public class UndyingTest extends CardTestPlayerBase {
         assertExileCount("Butcher Ghoul", 1);
     }
 
-    
+    /**
+     * Tests "Target creature with Undying will be exiled by Anafenza before it returns to battlefield
+     * if both leave the battlefield at the same time
+     *
+     * Anafenza the foremost doesn't exile an undying creature when dying at the same time as
+     * that undying one. The undying comes back to the field when he shouldn't.
+     */
+    @Test
+    public void testReplacementEffectPreventsReturnOfUndyingWrath() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        // Butcher Ghoul
+        // Creature - Zombie, 1/1  {1}{B}
+        // Undying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
+        addCard(Zone.HAND, playerA, "Butcher Ghoul");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 4);
+        // Destroy all creatures. They can't be regenerated.
+        addCard(Zone.HAND, playerB, "Wrath of God");
+        // Anafenza, the Foremost
+        // Whenever Anafenza, the Foremost attacks, put a +1/+1 counter on another target tapped creature you control.
+        // If a creature card would be put into an opponent's graveyard from anywhere, exile it instead.
+        addCard(Zone.BATTLEFIELD, playerB, "Anafenza, the Foremost");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Butcher Ghoul");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Wrath of God");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, "Anafenza, the Foremost", 1);
+        assertGraveyardCount(playerB, "Wrath of God", 1);
+
+        assertPermanentCount(playerA, "Butcher Ghoul", 0);
+        assertExileCount("Butcher Ghoul", 1);
+    }
 }
