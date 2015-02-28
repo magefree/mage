@@ -38,7 +38,7 @@ import mage.constants.Zone;
 
 /**
  *
- * @author anonymous
+ * @author michael.napoleon@gmail.com
  */
 public class GoblinSpy extends CardImpl {
 
