@@ -85,3 +85,6 @@ Mage.Server.Plugins/Mage.Draft.8PlayerBooster/target
 /Mage.Stats/target/
 /Utils/*_unimplemented.txt
 *.netbeans_automatic_build
+*.txt
+Mage.Client/serverlist.txt
+Mage.Client/serverlist.txt

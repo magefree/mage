@@ -34,7 +34,7 @@ import mage.game.match.MatchType;
  *
  * @author JRHerlehy
  */
-class TinyLeadersDuelType extends MatchType {
+public class TinyLeadersDuelType extends MatchType {
 
     public TinyLeadersDuelType() {
         this.name = "Tiny Leaders Two Player Duel";
