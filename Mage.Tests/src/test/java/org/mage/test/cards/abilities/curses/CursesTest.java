@@ -192,6 +192,9 @@ public class CursesTest extends CardTestPlayerBase {
     @Test
     public void testCurseOfMisfortune1() {
         removeAllCardsFromLibrary(playerA);
+
+        // At the beginning of your upkeep, you may search your library for a Curse card that doesn't have the same name as a
+        // Curse attached to enchanted player, put it onto the battlefield attached to that player, then shuffle your library.
         addCard(Zone.LIBRARY, playerA, "Curse of Misfortunes", 2);
         addCard(Zone.HAND, playerA, "Curse of Misfortunes");
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);

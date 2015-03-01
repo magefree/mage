@@ -1286,6 +1286,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             if (card != null) {
                 target.addTarget(card.getId(), source, game);
                 cardChoices.remove(card);
+            } else {
+                // We don't have any valid target to choose so stop choosing
+                return target.getTargets().size() < target.getNumberOfTargets();
             }
             if (outcome.equals(Outcome.Neutral) && target.getTargets().size() > target.getNumberOfTargets() + (target.getMaxNumberOfTargets() - target.getNumberOfTargets()) / 2) {
                 return true;
