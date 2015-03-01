@@ -48,7 +48,7 @@ import mage.util.CardUtil;
 
 /**
  *
- * @author Justin
+ * @author JRHerlehy
  */
 public abstract class GameTinyLeadersImpl extends GameImpl{
     
