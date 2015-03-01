@@ -139,8 +139,14 @@ public class TinyLeaders extends DeckValidator {
             }
         }
 
-        if (deck.getSideboard().size() == 1) {
-            Card commander = (Card) deck.getSideboard().toArray()[0];
+        if (deck.getSideboard().size() <= 11) {
+            Card commander = null;
+            
+            for (Card card : deck.getSideboard()) {
+                if (card.getName().equalsIgnoreCase(deck.getName())) {
+                    commander = card;
+                }
+            }
             
             /**
              * 905.5b - Each card must have a converted mana cost of three of less.
@@ -149,7 +155,8 @@ public class TinyLeaders extends DeckValidator {
              */
             
             if (commander == null  || commander.getManaCost().convertedManaCost() > 3) {
-                invalid.put("Commander", "Commander invalide ");
+                if (commander == null) invalid.put("Leader", "Please be sure to set your leader in the NAME field in the DECK EDITOR");
+                if (commander != null && commander.getManaCost().convertedManaCost() > 3) invalid.put("Leader", "Commander CMC is Greater than 3");
                 return false;
             }
             if ((commander.getCardType().contains(CardType.CREATURE) && commander.getSupertype().contains("Legendary"))
