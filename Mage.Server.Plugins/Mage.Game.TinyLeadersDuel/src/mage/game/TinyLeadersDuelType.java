@@ -43,7 +43,7 @@ public class TinyLeadersDuelType extends MatchType {
         this.numTeams = 0;
         this.useAttackOption = false;
         this.useRange = false;
-        this.sideboardingAllowed = false;
+        this.sideboardingAllowed = true;
     }
     
     protected TinyLeadersDuelType(final TinyLeadersDuelType matchType){
