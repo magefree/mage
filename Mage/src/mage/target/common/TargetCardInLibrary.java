@@ -92,7 +92,7 @@ public class TargetCardInLibrary extends TargetCard {
         Collections.sort(cards, new CardNameComparator());
         while (!isChosen() && !doneChosing()) {
             chosen = targets.size() >= minNumberOfTargets;
-            if (!player.choose(outcome, new CardsImpl(Zone.LIBRARY, cards), this, game)) {
+            if (!player.chooseTarget(outcome, new CardsImpl(Zone.LIBRARY, cards), this, null, game)) {
                 return chosen;
             }
             chosen = targets.size() >= minNumberOfTargets;
