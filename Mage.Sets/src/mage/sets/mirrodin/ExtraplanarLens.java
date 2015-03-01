@@ -28,13 +28,13 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AddManaOfAnyTypeProducedEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -66,7 +66,7 @@ public class ExtraplanarLens extends CardImpl {
 
         // Whenever a land with the same name as the exiled card is tapped for mana, its controller adds one mana to his or her mana pool of any type that land produced.
         this.addAbility(new ExtraplanarLensTriggeredAbility());
-        
+
     }
 
     public ExtraplanarLens(final ExtraplanarLens card) {
@@ -144,17 +144,21 @@ class ExtraplanarLensTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent landTappedForMana = game.getPermanentOrLKIBattlefield(event.getSourceId());
         Permanent extraplanarLens = game.getPermanent(getSourceId());
-        if (extraplanarLens != null 
-                && landTappedForMana != null) {
-            MageObject object = game.getObject(extraplanarLens.getImprinted().get(0));
-            if (landTappedForMana.getName().equals(object.getName())
-                    && landTappedForMana.getCardType().contains(CardType.LAND)) {
-                ManaEvent mEvent = (ManaEvent) event;
-                for (Effect effect : getEffects()) {
-                    effect.setValue("mana", mEvent.getMana());
+        if (extraplanarLens != null
+                && landTappedForMana != null
+                && !extraplanarLens.getImprinted().isEmpty()) {
+            Card imprinted = game.getCard(extraplanarLens.getImprinted().get(0));
+            if (imprinted != null
+                    && game.getState().getZone(imprinted.getId()).equals(Zone.EXILED)) {
+                if (landTappedForMana.getName().equals(imprinted.getName())
+                        && landTappedForMana.getCardType().contains(CardType.LAND)) {
+                    ManaEvent mEvent = (ManaEvent) event;
+                    for (Effect effect : getEffects()) {
+                        effect.setValue("mana", mEvent.getMana());
+                    }
+                    getEffects().get(0).setTargetPointer(new FixedTarget(landTappedForMana.getId()));
+                    return true;
                 }
-                getEffects().get(0).setTargetPointer(new FixedTarget(landTappedForMana.getId()));
-                return true;
             }
         }
         return false;
