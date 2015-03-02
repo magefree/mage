@@ -1,3 +1,5 @@
+$|Generate|TOK:DTK|Djinn Monk|
+
 #|Generate|TOK:GRC|Bird|
 #|Generate|TOK:GRC|Golem|
 #|Generate|TOK:GRC|Human|
