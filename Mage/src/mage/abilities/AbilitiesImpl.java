@@ -35,7 +35,6 @@ import java.util.List;
 import java.util.UUID;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.costs.AlternativeCost;
-import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.mana.ManaAbility;
@@ -294,6 +293,16 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
     public boolean containsKey(UUID abilityId) {
         for (T ability: this) {
             if (ability.getId().equals(abilityId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean containsClass(Class classObject) {
+        for (T ability: this) {
+            if (ability.getClass().equals(classObject)) {
                 return true;
             }
         }

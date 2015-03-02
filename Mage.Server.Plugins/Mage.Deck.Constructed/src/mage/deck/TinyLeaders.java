@@ -188,7 +188,7 @@ public class TinyLeaders extends DeckValidator {
                 valid = false;
             }
         } else {
-            invalid.put("Commander", "Sideboard must contain only the commander");
+            invalid.put("Commander", "Sideboard must contain only the commander and a maximum of 10 sideboard cards");
             valid = false;
         }
 

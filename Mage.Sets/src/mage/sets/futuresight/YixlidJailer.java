@@ -102,6 +102,7 @@ class YixlidJailerEffect extends ContinuousEffectImpl {
                         for (Card card : player.getGraveyard().getCards(game)) {
                             if (card != null) {
                                 card.getAbilities().clear(); // Will the abilities ever come back????
+                                // TODO: Fix that (LevelX2)
                                 // game.getContinuousEffects().removeGainedEffectsForSource(card.getId());
                                 // game.getState().resetTriggersForSourceId(card.getId());
                                 Abilities abilities = game.getState().getAllOtherAbilities(card.getId());
