@@ -29,7 +29,6 @@ package mage.sets.magic2015;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.ConvokeAbility;
@@ -57,8 +56,6 @@ public class ReturnToTheRanks extends CardImpl {
     public ReturnToTheRanks(UUID ownerId) {
         super(ownerId, 29, "Return to the Ranks", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{W}{W}");
         this.expansionSetCode = "M15";
-
-        this.color.setWhite(true);
 
         // Convoke
         this.addAbility(new ConvokeAbility());

@@ -549,6 +549,25 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
+     * Assert whether a permanent is attacking or not
+     *
+     * @param cardName  Name of the permanent that should be checked.
+     * @param attacking    Whether the permanent is attacking or not
+     */
+    public void assertAttacking(String cardName, boolean attacking) throws AssertionError {
+        Permanent found = null;
+        for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
+            if (permanent.getLogName().equals(cardName)) {
+                found = permanent;
+            }
+        }
+
+        Assert.assertNotNull("There is no such permanent on the battlefield, cardName=" + cardName, found);
+
+        Assert.assertEquals("(Battlefield) Attacking state is not equal (" + cardName + ")", attacking, found.isAttacking());
+    }
+
+    /**
      * Assert card count in player's hand.
      *
      * @param player   {@link Player} who's hand should be counted.

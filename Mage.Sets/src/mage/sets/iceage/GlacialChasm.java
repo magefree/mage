@@ -27,29 +27,23 @@
  */
 package mage.sets.iceage;
 
-import mage.abilities.Ability;
+import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.PreventAllDamageToControllerEffect;
+import mage.abilities.effects.common.SacrificeControllerEffect;
+import mage.abilities.effects.common.combat.CantAttackAllAnyPlayerEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
-import mage.constants.*;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterLandPermanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -64,9 +58,11 @@ public class GlacialChasm extends CardImpl {
         // Cumulative upkeep-Pay 2 life.
         this.addAbility(new CumulativeUpkeepAbility(new PayLifeCost(2)));
         // When Glacial Chasm enters the battlefield, sacrifice a land.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(new FilterLandPermanent(), 1, "")));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(new FilterControlledLandPermanent(), 1, "")));
         // Creatures you control can't attack.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackEffect()));
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
+        filter.add(new ControllerPredicate(TargetController.YOU));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAllAnyPlayerEffect(Duration.WhileOnBattlefield, filter)));
         // Prevent all damage that would be dealt to you.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToControllerEffect(Duration.WhileOnBattlefield)));
     }
@@ -78,110 +74,5 @@ public class GlacialChasm extends CardImpl {
     @Override
     public GlacialChasm copy() {
         return new GlacialChasm(this);
-    }
-}
-class SacrificeControllerEffect extends OneShotEffect{
-
-    private FilterPermanent filter;
-    private DynamicValue count;
-
-    public SacrificeControllerEffect ( FilterPermanent filter, DynamicValue count, String preText ) {
-        super(Outcome.Sacrifice);
-        this.filter = filter;
-        this.count = count;
-        staticText = "sacrifice a land";
-    }
-
-    public SacrificeControllerEffect ( FilterPermanent filter, int count, String preText ) {
-        this(filter, new StaticValue(count), preText);
-    }
-
-    public SacrificeControllerEffect ( SacrificeControllerEffect effect ) {
-        super(effect);
-        this.filter = effect.filter;
-        this.count = effect.count;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-
-        if (player == null) {
-            return false;
-        }
-
-        filter.add(new ControllerPredicate(TargetController.YOU));
-
-        int amount = count.calculate(game, source, this);
-        int realCount = game.getBattlefield().countAll(filter, player.getId(), game);
-        amount = Math.min(amount, realCount);
-
-        Target target = new TargetControlledPermanent(amount, amount, filter, false);
-
-        //A spell or ability could have removed the only legal target this player
-        //had, if thats the case this ability should fizzle.
-        if (amount > 0 && target.canChoose(source.getSourceId(), player.getId(), game)) {
-            boolean abilityApplied = false;
-            while (player.isInGame() && !target.isChosen() && target.canChoose(player.getId(), game)) {
-                player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
-            }
-
-            for ( int idx = 0; idx < target.getTargets().size(); idx++) {
-                Permanent permanent = game.getPermanent((UUID)target.getTargets().get(idx));
-
-                if ( permanent != null ) {
-                    abilityApplied |= permanent.sacrifice(source.getSourceId(), game);
-                }
-            }
-
-            return abilityApplied;
-        }
-        return false;
-    }
-
-    public void setAmount(DynamicValue amount) {
-        this.count = amount;
-    }
-
-    @Override
-    public SacrificeControllerEffect copy() {
-        return new SacrificeControllerEffect(this);
-    }
-
-}
-
-
-class CantAttackEffect extends ReplacementEffectImpl {
-
-    public CantAttackEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Creatures you control can't attack";
-    }
-
-    public CantAttackEffect(final CantAttackEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CantAttackEffect copy() {
-        return new CantAttackEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARE_ATTACKER && source.getControllerId().equals(event.getPlayerId())) {
-            return true;
-        }
-        return false;
     }
 }

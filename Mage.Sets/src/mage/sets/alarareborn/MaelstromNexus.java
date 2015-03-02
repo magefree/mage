@@ -63,8 +63,7 @@ public class MaelstromNexus extends CardImpl {
 
 
         // The first spell you cast each turn has cascade.
-        this.addAbility(new MaelstromNexusTriggeredAbility());
-        this.addWatcher(new FirstSpellCastThisTurnWatcher());
+        this.addAbility(new MaelstromNexusTriggeredAbility(), new FirstSpellCastThisTurnWatcher());
 
     }
 

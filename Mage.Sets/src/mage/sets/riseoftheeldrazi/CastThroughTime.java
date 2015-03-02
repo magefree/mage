@@ -68,8 +68,7 @@ public class CastThroughTime extends CardImpl {
 
         // Instant and sorcery spells you control have rebound.
         //  (Exile the spell as it resolves if you cast it from your hand. At the beginning of your next upkeep, you may cast that card from exile without paying its mana cost.)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainReboundEffect()));
-        this.addWatcher(new LeavesBattlefieldWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainReboundEffect()), new LeavesBattlefieldWatcher());
     }
 
     public CastThroughTime(final CastThroughTime card) {

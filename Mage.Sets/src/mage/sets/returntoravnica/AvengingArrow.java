@@ -56,7 +56,7 @@ public class AvengingArrow extends CardImpl {
         // Destroy target creature that dealt damage this turn.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new AvengingArrowTarget());
-        this.addWatcher(new SourceDidDamageWatcher());
+        this.getSpellAbility().addWatcher(new SourceDidDamageWatcher());
     }
 
     public AvengingArrow(final AvengingArrow card) {

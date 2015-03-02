@@ -79,8 +79,7 @@ public class GeneratorServant extends CardImpl {
         ability.getEffects().get(0).setText("Add {2} to your mana pool. If that mana is spent on a creature spell, it gains haste until end of turn.");
         this.addAbility(ability);
         
-        this.addWatcher(new GeneratorServantWatcher());
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new GeneratorServantHasteEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new GeneratorServantHasteEffect()), new GeneratorServantWatcher());
     }
 
     public GeneratorServant(final GeneratorServant card) {

@@ -59,14 +59,12 @@ public class ScionOfVituGhazi extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.addWatcher(new CastFromHandWatcher());
-
         // When Scion of Vitu-Ghazi enters the battlefield, if you cast it from your hand, put a 1/1 white Bird creature token with flying onto the battlefield, then populate.
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new ConditionalOneShotEffect(new CreateTokenEffect(new BirdToken()), new CastFromHandCondition(),
                 "if you cast it from your hand, put a 1/1 white Bird creature token with flying onto the battlefield,"));
         ability.addEffect(new PopulateEffect("then"));
-        this.addAbility(ability);
+        this.addAbility(ability, new CastFromHandWatcher());
     }
 
     public ScionOfVituGhazi (final ScionOfVituGhazi card) {

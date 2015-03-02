@@ -71,8 +71,7 @@ public class HotheadedGiant extends CardImpl {
         
         // Hotheaded Giant enters the battlefield with two -1/-1 counters on it unless you've cast another red spell this turn.
         Condition condition = new CastRedSpellThisTurnCondition();
-        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.M1M1.createInstance(2)), new InvertCondition(condition), ""), "with two -1/-1 counters on it unless you've cast another red spell this turn"));
-        this.addWatcher(new HotHeadedGiantWatcher(this.getId()));
+        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.M1M1.createInstance(2)), new InvertCondition(condition), ""), "with two -1/-1 counters on it unless you've cast another red spell this turn"), new HotHeadedGiantWatcher(this.getId()));
         
     }
 

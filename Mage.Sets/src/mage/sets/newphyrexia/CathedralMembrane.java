@@ -62,8 +62,7 @@ public class CathedralMembrane extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // When Cathedral Membrane dies during combat, it deals 6 damage to each creature it blocked this combat.
-        this.addWatcher(new CathedralMembraneWatcher());
-        this.addAbility(new CathedralMembraneAbility());
+        this.addAbility(new CathedralMembraneAbility(), new CathedralMembraneWatcher());
 
     }
 

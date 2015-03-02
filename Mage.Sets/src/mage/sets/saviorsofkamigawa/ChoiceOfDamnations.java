@@ -36,6 +36,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -53,8 +54,6 @@ public class ChoiceOfDamnations extends CardImpl {
         super(ownerId, 62, "Choice of Damnations", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{B}");
         this.expansionSetCode = "SOK";
         this.subtype.add("Arcane");
-
-        this.color.setBlack(true);
 
         // Target opponent chooses a number. You may have that player lose that much life. If you don't, that player sacrifices all but that many permanents.
         this.getSpellAbility().addEffect(new ChoiceOfDamnationsEffect());
@@ -94,14 +93,14 @@ class ChoiceOfDamnationsEffect extends OneShotEffect {
             int amount = targetPlayer.getAmount(0, Integer.MAX_VALUE, "Chooses a number", game);
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                StringBuilder sb = new StringBuilder("Shall ").append(targetPlayer.getName()).append(" lose ").append(amount).append(" life?");
-                if (controller.chooseUse(outcome, sb.toString(), game)) {
+                String sb = String.valueOf("Shall " + targetPlayer.getName() + " lose ") + Integer.toString(amount) + " life?";
+                if (controller.chooseUse(outcome, sb, game)) {
                     targetPlayer.loseLife(amount, game);
                 } else {
                     int numberPermanents = game.getState().getBattlefield().countAll(new FilterPermanent(), targetPlayer.getId(), game);
                     if (numberPermanents > amount) {
                         int numberToSacrifice = numberPermanents - amount;
-                        Target target = new TargetControlledPermanent(numberToSacrifice, numberToSacrifice, new FilterPermanent(), false);
+                        Target target = new TargetControlledPermanent(numberToSacrifice, numberToSacrifice, new FilterControlledPermanent(), false);
                         targetPlayer.chooseTarget(Outcome.Sacrifice, target, source, game);
                         for (UUID uuid : target.getTargets()) {
                             Permanent permanent = game.getPermanent(uuid);

@@ -65,7 +65,7 @@ public class RepelIntruders extends CardImpl {
                 new ManaWasSpentCondition(ColoredManaSymbol.U), " Counter up to one target creature spell if {U} was spent to cast {this}"));
         this.getSpellAbility().addTarget(target);
         this.addInfo("Info1", "<i>(Do both if {W}{U} was spent.)</i>");
-        this.addWatcher(new ManaSpentToCastWatcher());
+        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
         
     }
 

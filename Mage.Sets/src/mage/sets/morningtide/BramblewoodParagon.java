@@ -106,7 +106,7 @@ class BramblewoodParagonReplacementEffect extends ReplacementEffectImpl {
             Permanent creature = game.getPermanent(event.getTargetId());
             if (creature != null && creature.getControllerId().equals(source.getControllerId()) 
                     && creature.getCardType().contains(CardType.CREATURE)
-                    && creature.getSubtype().contains("Warrior")
+                    && creature.hasSubtype("Warrior")
                     && !event.getTargetId().equals(source.getSourceId())) {
                 return true;
             }

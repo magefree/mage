@@ -61,7 +61,7 @@ public class Quicken extends CardImpl {
 
         // The next sorcery card you cast this turn can be cast as though it had flash.
         this.getSpellAbility().addEffect(new QuickenAsThoughEffect());
-        this.addWatcher(new QuickenWatcher());
+        this.getSpellAbility().addWatcher(new QuickenWatcher());
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

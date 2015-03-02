@@ -185,5 +185,42 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
         // Check Horror on the Battlefield
         // assertPermanentCount(playerA, "Fume Spitter", 1);
     }    
-    
+
+    /**
+     * Return to the Ranks cannot be countered if mana produced by Cavern of Souls
+     * was used to pay X. Can be bug also for all other spells with X in their cost, not sure.
+     *
+     */
+    @Test
+    public void testCastWithColorlessManaCanBeCountered() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.HAND, playerA, "Cavern of Souls");
+        // Sorcery {X}{W}{W}
+        // Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for or one mana of that creature's color.)
+        // Return X target creature cards with converted mana cost 2 or less from your graveyard to the battlefield.
+        addCard(Zone.HAND, playerA, "Return to the Ranks");
+        addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion");
+
+        // {1}{U} Remove Soul - Counter target creature spell.
+        addCard(Zone.HAND, playerB, "Counterspell");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cavern of Souls");
+        setChoice(playerA, "Drake");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Return to the Ranks", "Silvercoat Lion");
+        setChoice(playerA, "X=1");
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Counterspell", "Return to the Ranks");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        // check it was countered
+        assertGraveyardCount(playerA, "Return to the Ranks", 1);
+        assertGraveyardCount(playerB, "Counterspell", 1);
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+        assertPermanentCount(playerA, "Silvercoat Lion", 0);
+
+    }
 }

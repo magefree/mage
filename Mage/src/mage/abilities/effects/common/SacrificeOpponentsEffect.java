@@ -36,11 +36,13 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 
 /**
@@ -81,15 +83,17 @@ public class SacrificeOpponentsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<UUID> perms = new ArrayList<UUID>();
+        List<UUID> perms = new ArrayList<>();
+        filter.add(new ControllerPredicate(TargetController.YOU));
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
+                
                 int numTargets = Math.min(amount.calculate(game, source, this), game.getBattlefield().countAll(filter, player.getId(), game));
-                TargetControlledPermanent target = new TargetControlledPermanent(numTargets, numTargets, filter, false);
+                TargetPermanent target = new TargetPermanent(numTargets, numTargets, filter, false);
                 if (target.canChoose(player.getId(), game)) {
                     while (!target.isChosen() && player.isInGame()) {
-                        player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+                        player.chooseTarget(Outcome.Sacrifice, target, source, game);
                     }
                     perms.addAll(target.getTargets());
                 }

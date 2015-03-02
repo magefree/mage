@@ -66,8 +66,7 @@ public class TheChainVeil extends CardImpl {
         this.supertype.add("Legendary");
 
         // At the beginning of your end step, if you didn't activate a loyalty ability of a planeswalker this turn, you lose 2 life.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new TheChainVeilTriggeredEffect(), TargetController.YOU, false));
-        this.addWatcher(new ActivatedLoyaltyAbilityWatcher());
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new TheChainVeilTriggeredEffect(), TargetController.YOU, false), new ActivatedLoyaltyAbilityWatcher());
         // {4}, {T}: For each planeswalker you control, you may activate one of its loyalty abilities once this turn as though none of its loyalty abilities had been activated this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
             new TheChainVeilIncreaseLoyaltyUseEffect(),

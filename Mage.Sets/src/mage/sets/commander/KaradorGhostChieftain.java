@@ -82,8 +82,7 @@ public class KaradorGhostChieftain extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new KaradorGhostChieftainCostReductionEffect()));
         
         // During each of your turns, you may cast one creature card from your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KaradorGhostChieftainContinuousEffect()));
-        this.addWatcher(new KaradorGhostChieftainWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KaradorGhostChieftainContinuousEffect()), new KaradorGhostChieftainWatcher());
     }
 
     public KaradorGhostChieftain(final KaradorGhostChieftain card) {

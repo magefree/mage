@@ -23,7 +23,7 @@ public class UndyingAbility extends DiesTriggeredAbility {
     
     public UndyingAbility() {
         super(new UndyingEffect());
-        this.addEffect(new ReturnSourceFromGraveyardToBattlefieldEffect());
+        this.addEffect(new ReturnSourceFromGraveyardToBattlefieldEffect(false, true));
     }
 
     public UndyingAbility(final UndyingAbility ability) {
@@ -40,7 +40,6 @@ public class UndyingAbility extends DiesTriggeredAbility {
         if (super.checkTrigger(event, game)) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (!permanent.getCounters().containsKey(CounterType.P1P1) || permanent.getCounters().getCount(CounterType.P1P1) == 0) {
-                Logger.getLogger(UndyingAbility.class).info("Undying trigger: " + getSourceId());
                 game.getState().setValue("undying" + getSourceId(),permanent.getId());
                 return true;
             }
@@ -115,8 +114,6 @@ class UndyingReplacementEffect extends ReplacementEffectImpl {
         if (event.getTargetId().equals(source.getSourceId())) {
             // Check if undying condition is true
             UUID targetId = (UUID) game.getState().getValue("undying" + source.getSourceId());
-            Logger.getLogger(UndyingReplacementEffect.class).info("Undying replacement applies: " + targetId + " eventSourceId " + event.getTargetId());
-
             if (targetId != null && targetId.equals(source.getSourceId())) {
                 return true;
             }

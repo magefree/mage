@@ -61,9 +61,7 @@ public class WindbriskHeights extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD, new HideawayPlayEffect(), new ManaCostsImpl("{W}"), WindbriskHeightsAttackersCondition.getInstance());
         ability.addCost(new TapSourceCost());
-        this.addAbility(ability);     
-        
-        this.addWatcher(new PlayerAttackedWatcher());
+        this.addAbility(ability, new PlayerAttackedWatcher());
 
     }
 

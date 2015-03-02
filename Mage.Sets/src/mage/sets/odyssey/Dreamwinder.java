@@ -41,7 +41,9 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -57,7 +59,6 @@ public class Dreamwinder extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Serpent");
 
-        this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
@@ -67,7 +68,9 @@ public class Dreamwinder extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.EndOfTurn, "Island"), new ManaCostsImpl("{U}"));
         Target target = new TargetLandPermanent();
         ability.addTarget(target);
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, new FilterLandPermanent("Island","an Island"), true)));
+        FilterControlledLandPermanent filter = new FilterControlledLandPermanent("an Island");
+        filter.add(new SubtypePredicate("Island"));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
         this.addAbility(ability);
     }   
     

@@ -59,7 +59,7 @@ public class Groundswell extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GroundswellEffect(Duration.EndOfTurn));
 
-        this.addWatcher(new LandfallWatcher());
+        this.getSpellAbility().addWatcher(new LandfallWatcher());
     }
 
     public Groundswell(final Groundswell card) {

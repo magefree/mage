@@ -52,14 +52,14 @@ public class FilterPlaneswalkerOrPlayer extends FilterImpl<Object> {
     public FilterPlaneswalkerOrPlayer(Set<UUID> defenders) {
         super("planeswalker or player");
 
-        ArrayList<Predicate<Permanent>> permanentPredicates = new ArrayList<Predicate<Permanent>>();
+        ArrayList<Predicate<Permanent>> permanentPredicates = new ArrayList<>();
         for (UUID defenderId : defenders) {
             permanentPredicates.add(new ControllerIdPredicate(defenderId));
         }
         planeswalkerFilter = new FilterPlaneswalkerPermanent();
         planeswalkerFilter.add(Predicates.or(permanentPredicates));
 
-        ArrayList<Predicate<Player>> playerPredicates = new ArrayList<Predicate<Player>>();
+        ArrayList<Predicate<Player>> playerPredicates = new ArrayList<>();
         for (UUID defenderId : defenders) {
             playerPredicates.add(new PlayerIdPredicate(defenderId));
         }

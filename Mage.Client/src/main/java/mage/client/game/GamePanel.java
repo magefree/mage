@@ -27,6 +27,7 @@
 */
 package mage.client.game;
 
+import com.sun.java.swing.plaf.windows.WindowsBorders;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -606,7 +607,14 @@ public final class GamePanel extends javax.swing.JPanel {
         else {
             this.txtStep.setText("");
         }
-        this.txtPhasesBottomInfo.setText("  " + (game.getSpellsCastCurrentTurn() > 0 ? Integer.toString(game.getSpellsCastCurrentTurn()):""));
+        if (game.getSpellsCastCurrentTurn() > 0) {
+            this.phasesBottomPanel.setVisible(true);
+            this.txtPhasesBottomInfo.setText(Integer.toString(game.getSpellsCastCurrentTurn()));
+        } else {
+            this.phasesBottomPanel.setVisible(false);
+            this.txtPhasesBottomInfo.setText("");
+        }
+
         this.txtActivePlayer.setText(game.getActivePlayerName());
         this.txtPriority.setText(game.getPriorityPlayerName());
         this.txtTurn.setText(Integer.toString(game.getTurn()));
@@ -1508,8 +1516,9 @@ public final class GamePanel extends javax.swing.JPanel {
         phasesContainer.add(empty1, ratio);
         phasesContainer.add(jPhases);
         
-        JPanel phasesBottomPanel = new JPanel();
-        phasesBottomPanel.setBackground(new Color(0, 0, 0, 0));
+        phasesBottomPanel = new JPanel();
+        phasesBottomPanel.setBackground(Color.LIGHT_GRAY);
+        phasesBottomPanel.setBorder(new LineBorder(Color.DARK_GRAY, 2));
         phasesBottomPanel.add(txtPhasesBottomInfo);        
         phasesContainer.add(phasesBottomPanel);
 
@@ -1862,6 +1871,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private javax.swing.JSplitPane jSplitPane2;
     private JPanel jPhases;
     private JPanel phasesContainer;
+    private JPanel phasesBottomPanel;
     private javax.swing.JLabel txtPhasesBottomInfo;
 
     private HoverButton currentStep;

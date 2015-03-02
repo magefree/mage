@@ -34,7 +34,7 @@ import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 public class TorrentOfStone extends CardImpl {
-    private static final FilterLandPermanent filterSacrifice = new FilterLandPermanent("two Mountains");
+    private static final FilterControlledLandPermanent filterSacrifice = new FilterControlledLandPermanent("two Mountains");
 
     static {
         filterSacrifice.add(new SubtypePredicate("Mountain"));

@@ -70,7 +70,7 @@ public class RefractionTrap extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSource());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
 
-        this.addWatcher(new RefractionTrapWatcher());
+        this.getSpellAbility().addWatcher(new RefractionTrapWatcher());
     }
 
     public RefractionTrap(final RefractionTrap card) {

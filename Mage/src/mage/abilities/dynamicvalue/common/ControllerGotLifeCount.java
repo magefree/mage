@@ -32,7 +32,6 @@ import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.cards.Card;
 import mage.game.Game;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
@@ -53,8 +52,7 @@ public class ControllerGotLifeCount implements DynamicValue, MageSingleton {
         return fINSTANCE;
     }
 
-    public static ControllerGotLifeCount getInstance(Card card) {
-        card.addWatcher(new PlayerGainedLifeWatcher());
+    public static ControllerGotLifeCount getInstance() {
         return fINSTANCE;
     }
 

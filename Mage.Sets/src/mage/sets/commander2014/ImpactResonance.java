@@ -62,7 +62,7 @@ public class ImpactResonance extends CardImpl {
         effect.setText("{this} deals X damage divided as you choose among any number of target creatures, where X is the greatest amount of damage dealt by a source to a permanent or player this turn");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(xValue));
-        this.addWatcher(new GreatestAmountOfDamageWatcher());
+        this.getSpellAbility().addWatcher(new GreatestAmountOfDamageWatcher());
     }
 
     public ImpactResonance(final ImpactResonance card) {

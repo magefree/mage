@@ -61,6 +61,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
+import mage.counters.Counters;
 import mage.game.Game;
 import mage.game.events.DamageCreatureEvent;
 import mage.game.events.DamagePlaneswalkerEvent;
@@ -104,6 +105,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected List<UUID> dealtDamageByThisTurn;
     protected UUID attachedTo;
     protected UUID pairedCard;
+    protected Counters counters;
     protected List<Counter> markedDamage;
     protected int timesLoyaltyUsed = 0;
 
@@ -113,12 +115,14 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         super(ownerId, name);
         this.originalControllerId = controllerId;
         this.controllerId = controllerId;
+        this.counters = new Counters();
     }
 
     public PermanentImpl(UUID id, UUID ownerId, UUID controllerId, String name) {
         super(id, ownerId, name);
         this.originalControllerId = controllerId;
         this.controllerId = controllerId;
+        this.counters = new Counters();
     }
 
     public PermanentImpl(final PermanentImpl permanent) {
@@ -148,6 +152,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 }
             }
         }
+        this.counters = permanent.counters.copy();
         this.attachedTo = permanent.attachedTo;
         this.minBlockedBy = permanent.minBlockedBy;
         this.maxBlockedBy = permanent.maxBlockedBy;
@@ -252,6 +257,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public Counters getCounters() {
+        return counters;
+    }
+
+    @Override
+    public void addCounters(String name, int amount, Game game) {
+        addCounters(name, amount, game, null);
+    }
+    
+    @Override
     public void addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects) {
         GameEvent countersEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, controllerId, name, amount);
         countersEvent.setAppliedEffects(appliedEffects);
@@ -295,6 +310,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             game.fireEvent(event);
         }
     }
+
+    @Override
+    public void removeCounters(Counter counter, Game game) {
+        removeCounters(counter.getName(), counter.getCount(), game);
+    }
+    
     @Override
     public int getTurnsOnBattlefield() {
         return turnsOnBattlefield;

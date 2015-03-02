@@ -100,7 +100,7 @@ class LightningStormCountCondition implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Spell spell = game.getStack().getSpell(sourceAbility.getSourceId());
         if (spell != null) {
-            return spell.getCounters().getCount(counter) + 3;
+            return spell.getCounters(game).getCount(counter) + 3;
         }
         return 0;
     }

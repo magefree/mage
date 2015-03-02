@@ -35,10 +35,7 @@ import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -52,16 +49,9 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class DevourFlesh extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-    static{
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
-    }
-
     public DevourFlesh (UUID ownerId) {
         super(ownerId, 63, "Devour Flesh", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
         this.expansionSetCode = "GTC";
-
-        this.color.setBlack(true);
 
         // Target player sacrifices a creature, then gains life equal to that creature's toughness.
         this.getSpellAbility().addEffect(new DevourFleshSacrificeEffect());
@@ -100,13 +90,12 @@ class DevourFleshSacrificeEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new ControllerIdPredicate(player.getId()));
+        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
         int realCount = game.getBattlefield().countAll(filter, player.getId(), game);
         if (realCount > 0) {
             Target target = new TargetControlledPermanent(1, 1, filter, true);
             while (player.isInGame() && !target.isChosen() && target.canChoose(player.getId(), game)) {
-                player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+                player.chooseTarget(Outcome.Sacrifice, target, source, game);
             }
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {

@@ -54,9 +54,7 @@ public class FirstResponse extends CardImpl {
         this.color.setWhite(true);
 
         // At the beginning of each upkeep, if you lost life last turn, put a 1/1 white Soldier creature token onto the battlefield.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new FirstResponseEffect(), TargetController.ANY, false));
-
-        this.addWatcher(new PlayerLostLifeWatcher());
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new FirstResponseEffect(), TargetController.ANY, false), new PlayerLostLifeWatcher());
 
     }
 

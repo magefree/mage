@@ -32,13 +32,12 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -93,22 +92,24 @@ class FeastOfWormsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        Player targetPlayer = game.getPlayer(permanent.getControllerId());
-        if (targetPlayer != null && permanent != null && (permanent.getSupertype().get(0).toString().equals("Legendary"))) {
-                FilterPermanent filter = new FilterLandPermanent("land to sacrifice");
-                filter.add(new ControllerIdPredicate(targetPlayer.getId()));
-                TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
+        Permanent permanent = game.getPermanentOrLKIBattlefield(id);
+        Player targetPlayer = null;
+        if (permanent != null) {
+            targetPlayer = game.getPlayer(permanent.getControllerId());
+        }
+        if (targetPlayer != null && permanent != null && (permanent.getSupertype().get(0).equals("Legendary"))) {
+            FilterControlledPermanent filter = new FilterControlledLandPermanent("land to sacrifice");
+            filter.add(new ControllerIdPredicate(targetPlayer.getId()));
+            TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
 
-                if (target.canChoose(targetPlayer.getId(), game)) {
-                    targetPlayer.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
-
-                    Permanent land = game.getPermanent(target.getFirstTarget());
-                    if (land != null) {
-                        return land.sacrifice(source.getSourceId(), game);
-                    }
-                    return true;
+            if (target.canChoose(targetPlayer.getId(), game)) {
+                targetPlayer.chooseTarget(Outcome.Sacrifice, target, source, game);
+                Permanent land = game.getPermanent(target.getFirstTarget());
+                if (land != null) {
+                    land.sacrifice(source.getSourceId(), game);
                 }
+            }
+            return true;            
         }
         return false;
     }

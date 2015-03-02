@@ -68,7 +68,7 @@ public class PhantomNantuko extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Phantom Nantuko enters the battlefield with two +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2), true)));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2), true), "with two +1/+1 counters on it"));
         // If damage would be dealt to Phantom Nantuko, prevent that damage. Remove a +1/+1 counter from Phantom Nantuko.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhantomNantukoPreventionEffect()));
         // {tap}: Put a +1/+1 counter on Phantom Nantuko.

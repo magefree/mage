@@ -140,12 +140,17 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
      * @param attachedTo - the object that gained the ability
      */
     public void add(TriggeredAbility ability, UUID sourceId, MageObject attachedTo) {
-        this.add(ability, attachedTo);
-        List<UUID> uuidList = new LinkedList<>();
-        uuidList.add(sourceId);
-        // if the object that gained the ability moves zone, also then the triggered ability must be removed
-        uuidList.add(attachedTo.getId());
-        sources.put(getKey(ability, attachedTo), uuidList);
+        if (sourceId == null) {
+            add(ability, attachedTo);
+        }
+        else {
+            this.add(ability, attachedTo);
+            List<UUID> uuidList = new LinkedList<>();
+            uuidList.add(sourceId);
+            // if the object that gained the ability moves zone, also then the triggered ability must be removed
+            uuidList.add(attachedTo.getId());
+            sources.put(getKey(ability, attachedTo), uuidList);
+        }
     }
 
     public void add(TriggeredAbility ability, MageObject attachedTo) {

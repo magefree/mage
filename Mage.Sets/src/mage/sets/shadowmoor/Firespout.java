@@ -69,7 +69,7 @@ public class Firespout extends CardImpl {
                 new DamageAllEffect(3, filter2),
                 new ManaWasSpentCondition(ColoredManaSymbol.G), " And 3 damage to each creature with flying if {G} was spent to cast it"));
         this.addInfo("Info1", "<i>(Do both if {R}{G} was spent.)</i>");
-        this.addWatcher(new ManaSpentToCastWatcher());
+        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
 
 
 

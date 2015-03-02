@@ -53,8 +53,6 @@ public class CometStorm extends CardImpl {
         super(ownerId, 76, "Comet Storm", Rarity.MYTHIC, new CardType[]{CardType.INSTANT}, "{X}{R}{R}");
         this.expansionSetCode = "WWK";
 
-        this.color.setRed(true);
-
         // Multikicker {1}
         this.addAbility(new MultikickerAbility("{1}"));
 
@@ -96,8 +94,8 @@ class CometStormEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int damage = source.getManaCostsToPay().getX();
-        Player you = game.getPlayer(source.getControllerId());
-        if (you != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             for (UUID uuid : this.getTargetPointer().getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(uuid);
                 Player player = game.getPlayer(uuid);
@@ -105,7 +103,7 @@ class CometStormEffect extends OneShotEffect {
                     permanent.damage(damage, source.getSourceId(), game, false, true);
                 }
                 if (player != null) {
-                    player.damage(damage, source.getSourceId(), game, true, false);
+                    player.damage(damage, source.getSourceId(), game, false, true);
                 }
             }
             return true;

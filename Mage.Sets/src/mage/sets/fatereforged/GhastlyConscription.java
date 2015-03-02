@@ -115,8 +115,8 @@ class GhastlyConscriptionEffect extends OneShotEffect {
                     }
                 }
                 MageObjectReference objectReference= new MageObjectReference(card.getId(), card.getZoneChangeCounter() +1, game);
-                game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, FaceDownType.MANIFESTED), newSource);                                
-                if (card.moveToZone(Zone.BATTLEFIELD, newSource.getSourceId(), game, false)) {
+                game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, FaceDownType.MANIFESTED), newSource);
+                if (controller.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId())) {
                     game.informPlayers(new StringBuilder(controller.getName())
                             .append(" puts facedown card from exile onto the battlefield").toString());
                 }

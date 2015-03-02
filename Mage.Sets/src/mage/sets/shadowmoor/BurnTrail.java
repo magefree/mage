@@ -25,52 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.shadowmoor;
 
-package mage.watchers.common;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
-import mage.constants.WatcherScope;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.watchers.Watcher;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.keyword.ConspireAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
+ *
  * @author jeffwadsworth
  */
+public class BurnTrail extends CardImpl {
 
-public class PermanentTappedForManaWatcher extends Watcher {
+    public BurnTrail(UUID ownerId) {
+        super(ownerId, 86, "Burn Trail", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
+        this.expansionSetCode = "SHM";
 
-    public List<UUID> permanentId = new ArrayList<>();
-
-    public PermanentTappedForManaWatcher() {
-        super("PermanentTappedForMana", WatcherScope.GAME);
+        // Burn Trail deals 3 damage to target creature or player.
+        this.getSpellAbility().addEffect(new DamageTargetEffect(3));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+                
+        // Conspire
+        this.addAbility(new ConspireAbility(this));
     }
 
-    public PermanentTappedForManaWatcher(final PermanentTappedForManaWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public PermanentTappedForManaWatcher copy() {
-        return new PermanentTappedForManaWatcher(this);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA) {
-            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-            if (permanent != null) {
-                permanentId.add(permanent.getId());
-            }
-        }
+    public BurnTrail(final BurnTrail card) {
+        super(card);
     }
 
     @Override
-    public void reset() {
-        super.reset();
-        permanentId.clear();
+    public BurnTrail copy() {
+        return new BurnTrail(this);
     }
 }

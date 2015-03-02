@@ -49,11 +49,9 @@ public interface Card extends MageObject {
     Rarity getRarity();
     void setOwnerId(UUID ownerId);
     void addAbility(Ability ability);
-    void addWatcher(Watcher watcher);
     void setSpellAbility(SpellAbility ability);
     SpellAbility getSpellAbility();
     List<String> getRules();
-    List<Watcher> getWatchers();
     String getExpansionSetCode();
     String getTokenSetCode();
     void setFaceDown(boolean value);
@@ -119,7 +117,7 @@ public interface Card extends MageObject {
      * @return true if there exists various art images for this card
      */
     boolean getUsesVariousArt();
-    Counters getCounters();
+    Counters getCounters(Game game);
 
     void addCounters(String name, int amount, Game game);
     void addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects);

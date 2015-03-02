@@ -73,8 +73,7 @@ public class SpinerockKnoll extends CardImpl {
                 new ColoredManaCost(ColoredManaSymbol.R),
                 new SpinerockKnollCondition());
         ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
-        this.addWatcher(new SpinerockKnollWatcher());
+        this.addAbility(ability, new SpinerockKnollWatcher());
     }
 
     public SpinerockKnoll(final SpinerockKnoll card) {

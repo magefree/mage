@@ -34,7 +34,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -85,11 +85,11 @@ class ReadTheRunesEffect extends OneShotEffect {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            int drawnCards = player.drawCards(source.getManaCostsToPay().getX(), game);
-            Target target = new TargetControlledPermanent(0, drawnCards, new FilterPermanent(), true);
-            target.choose(Outcome.Sacrifice, player.getId(), source.getSourceId(), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            int drawnCards = controller.drawCards(source.getManaCostsToPay().getX(), game);
+            Target target = new TargetControlledPermanent(0, drawnCards, new FilterControlledPermanent(), true);
+            controller.chooseTarget(Outcome.Sacrifice, target, source, game);
             int sacrificedPermanents = 0;
             for (UUID permanentId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(permanentId);
@@ -99,7 +99,7 @@ class ReadTheRunesEffect extends OneShotEffect {
                     }
                 }
             }
-            player.discard(drawnCards - sacrificedPermanents, source, game);
+            controller.discard(drawnCards - sacrificedPermanents, false, source, game);
             return true;
         }
         return false;

@@ -290,7 +290,7 @@ class SuspendPlayCardAbility extends TriggeredAbilityImpl {
         if (event.getTargetId().equals(getSourceId())) {
             Card card = game.getCard(getSourceId());
             if (card != null && game.getState().getZone(card.getId()) == Zone.EXILED
-                    && card.getCounters().getCount(CounterType.TIME) == 0) {
+                    && card.getCounters(game).getCount(CounterType.TIME) == 0) {
                 return true;
             }
         }

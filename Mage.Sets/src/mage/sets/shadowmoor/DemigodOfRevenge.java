@@ -106,7 +106,7 @@ class DemigodOfRevengeTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When you cast Demigod of Revenge, " + super.getRule();
+        return "When you cast {this}, " + super.getRule();
     }
 }
 
@@ -133,9 +133,9 @@ class DemigodOfRevengeReturnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            for (Card creature : player.getGraveyard().getCards(filter, game)) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (Card creature : controller.getGraveyard().getCards(filter, game)) {
                 creature.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
             }
             return true;

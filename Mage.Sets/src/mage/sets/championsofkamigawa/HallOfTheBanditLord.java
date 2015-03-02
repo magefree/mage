@@ -77,9 +77,7 @@ public class HallOfTheBanditLord extends CardImpl {
         effect.setText("Add {1} to your mana pool. If that mana is spent on a creature spell, it gains haste");
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         ability.addCost(new PayLifeCost(3));
-        this.addAbility(ability);
-        
-        this.addWatcher(new HallOfTheBanditLordWatcher(ability));
+        this.addAbility(ability, new HallOfTheBanditLordWatcher(ability));
     }
 
     public HallOfTheBanditLord(final HallOfTheBanditLord card) {

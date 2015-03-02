@@ -71,8 +71,7 @@ public class Gomazoa extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {tap}: Put Gomazoa and each creature it's blocking on top of their owners' libraries, then those players shuffle their libraries.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GomazoaEffect(), new TapSourceCost()));
-        this.addWatcher(new BlockedByWatcher());
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GomazoaEffect(), new TapSourceCost()), new BlockedByWatcher());
 
     }
 

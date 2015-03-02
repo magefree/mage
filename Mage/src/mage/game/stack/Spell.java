@@ -678,9 +678,6 @@ public class Spell implements StackObject, Card {
     public void addAbility(Ability ability) {}
 
     @Override
-    public void addWatcher(Watcher watcher) {}
-
-    @Override
     public SpellAbility getSpellAbility() {
         return ability;
     }
@@ -699,11 +696,6 @@ public class Spell implements StackObject, Card {
     @Override
     public List<String> getRules() {
         return card.getRules();
-    }
-
-    @Override
-    public List<Watcher> getWatchers() {
-        return card.getWatchers();
     }
 
     @Override
@@ -935,8 +927,8 @@ public class Spell implements StackObject, Card {
     public void build() {}
 
     @Override
-    public Counters getCounters() {
-        return card.getCounters();
+    public Counters getCounters(Game game) {
+        return card.getCounters(game);
     }
 
     @Override

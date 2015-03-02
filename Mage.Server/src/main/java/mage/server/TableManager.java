@@ -395,8 +395,6 @@ public class TableManager {
             debugServerState();
         }
         logger.debug("TABLE HEALTH CHECK");
-        List<UUID> toRemove = new ArrayList<>();
-
         ArrayList<Table> tableCopy = new ArrayList<>();
         tableCopy.addAll(tables.values());
         for (Table table : tableCopy) {
@@ -406,13 +404,13 @@ public class TableManager {
                     logger.debug(table.getId() + " [" + table.getName()+ "] " + formatter.format(table.getStartTime() == null ? table.getCreateTime() : table.getCreateTime()) +" (" + table.getState().toString() + ") " + (table.isTournament() ? "- Tournament":""));
                     TableController tableController = getController(table.getId());
                     if (tableController != null) {
-                        if (table.isTournament()) {
-                            if (!tableController.isTournamentStillValid()) {
-                                toRemove.add(table.getId());
-                            }
-                        } else {
-                            if (!tableController.isMatchTableStillValid()) {
-                                toRemove.add(table.getId());
+                        if ((table.isTournament() && !tableController.isTournamentStillValid()) ||
+                            (!table.isTournament() &&   !tableController.isMatchTableStillValid())) {
+                            try {
+                                logger.warn("Removing unhealthy tableId " + table.getId());
+                                removeTable(table.getId());
+                            } catch (Exception e) {
+                                logger.error(e);
                             }
                         }
                     }
@@ -420,14 +418,6 @@ public class TableManager {
             } catch (Exception ex) {
                 logger.debug("Table Health check error tableId: " + table.getId());
                 logger.debug(Arrays.toString(ex.getStackTrace()));
-            }
-        }
-        for (UUID tableId : toRemove) {
-            try {
-                logger.warn("Removing unhealthy tableId " + tableId);
-                removeTable(tableId);
-            } catch (Exception e) {
-                logger.error(e);
             }
         }
         logger.debug("TABLE HEALTH CHECK - END");

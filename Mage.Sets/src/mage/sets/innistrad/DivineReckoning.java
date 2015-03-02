@@ -49,6 +49,7 @@ import mage.target.common.TargetControlledPermanent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  * @author nantuko
@@ -58,8 +59,6 @@ public class DivineReckoning extends CardImpl {
     public DivineReckoning(UUID ownerId) {
         super(ownerId, 10, "Divine Reckoning", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
         this.expansionSetCode = "ISD";
-
-        this.color.setWhite(true);
 
         // Each player chooses a creature he or she controls. Destroy the rest.
         this.getSpellAbility().addEffect(new DivineReckoningEffect());
@@ -79,13 +78,7 @@ public class DivineReckoning extends CardImpl {
 }
 
 class DivineReckoningEffect extends OneShotEffect {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
-
+   
     public DivineReckoningEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Each player chooses a creature he or she controls. Destroy the rest";
@@ -97,16 +90,16 @@ class DivineReckoningEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Card> chosen = new ArrayList<Card>();
+        List<Card> chosen = new ArrayList<>();
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
 
-                Target target = new TargetControlledPermanent(1, 1, filter, false);
+                Target target = new TargetControlledPermanent(1, 1, new FilterControlledCreaturePermanent(), false);
                 if (target.canChoose(player.getId(), game)) {
                     while (player.isInGame() && !target.isChosen() && target.canChoose(player.getId(), game)) {
-                        player.choose(Outcome.Benefit, target, source.getSourceId(), game);
+                        player.chooseTarget(Outcome.Benefit, target, source, game);
                     }
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     if (permanent != null) {

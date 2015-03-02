@@ -50,7 +50,7 @@ public class MysteriesOfTheDeep extends CardImpl {
 
         // Draw two cards.
         // Landfall - If you had a land enter the battlefield under your control this turn, draw three cards instead.
-        this.addWatcher(new LandfallWatcher());
+        this.getSpellAbility().addWatcher(new LandfallWatcher());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(3), new DrawCardSourceControllerEffect(2), LandfallCondition.getInstance(), "Draw 2 cards. Landfall - If you had a land enter the battlefield under your control this turn, draw three cards instead"));
     }
 

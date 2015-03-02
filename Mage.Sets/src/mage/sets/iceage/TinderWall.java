@@ -80,10 +80,7 @@ public class TinderWall extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{R}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability);
-        
-        
-        this.addWatcher(new BlockedByWatcher());
+        this.addAbility(ability, new BlockedByWatcher());
     }
 
     public TinderWall(final TinderWall card) {

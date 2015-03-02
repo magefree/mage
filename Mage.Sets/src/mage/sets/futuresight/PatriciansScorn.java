@@ -59,8 +59,7 @@ public class PatriciansScorn extends CardImpl {
         this.color.setWhite(true);
 
         // If you've cast another white spell this turn, you may cast Patrician's Scorn without paying its mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new CastWhiteSpellThisTurnCondition()));
-        this.addWatcher(new PatriciansScornWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new CastWhiteSpellThisTurnCondition()), new PatriciansScornWatcher());
         // Destroy all enchantments.
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterEnchantmentPermanent()));
     }

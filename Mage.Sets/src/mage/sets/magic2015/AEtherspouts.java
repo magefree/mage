@@ -106,6 +106,7 @@ class AEtherspoutsEffect extends OneShotEffect {
             PlayerList playerList = game.getPlayerList();
             playerList.setCurrent(game.getActivePlayerId());
             Player player = game.getPlayer(game.getActivePlayerId());
+            Player activePlayer = player;
             do {
                 ArrayList<Permanent> permanentsToTop = new ArrayList<>();
                 ArrayList<Permanent> permanentsToBottom = new ArrayList<>();
@@ -134,7 +135,10 @@ class AEtherspoutsEffect extends OneShotEffect {
                     }
                 }
                 TargetCard target = new TargetCard(Zone.BATTLEFIELD, new FilterCard("order to put on the top of library (last choosen will be the top most)"));
-                while (player.isInGame() && cards.size() > 1) {
+                while (cards.size() > 1) {
+                    if (!player.isInGame()) {
+                        return false;
+                    }
                     player.choose(Outcome.Neutral, cards, target, game);
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {
@@ -173,6 +177,7 @@ class AEtherspoutsEffect extends OneShotEffect {
                 target = new TargetCard(Zone.BATTLEFIELD, new FilterCard("order to put on bottom of library (last choosen will be bottommost card)"));
                 while (player.isInGame() && cards.size() > 1) {
                     player.choose(Outcome.Neutral, cards, target, game);
+
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {
                         cards.remove(card);
@@ -195,7 +200,7 @@ class AEtherspoutsEffect extends OneShotEffect {
                     player.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, false, false);
                 }
                 player = playerList.getNext(game);            
-            } while (player != null && !player.getId().equals(game.getActivePlayerId()));
+            } while (player != null && !player.getId().equals(game.getActivePlayerId()) && activePlayer.isInGame());
             return true;
         }
         return false;

@@ -30,15 +30,12 @@ package mage.sets.visions;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -49,7 +46,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class Fireblast extends CardImpl {
     
-    private static final FilterPermanent filter = new FilterPermanent("Mountain");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountain");
     
     static {
         filter.add(new SubtypePredicate("Mountain"));
