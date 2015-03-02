@@ -129,6 +129,7 @@ class ExtraplanarLensTriggeredAbility extends TriggeredAbilityImpl {
 
     public ExtraplanarLensTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddManaOfAnyTypeProducedEffect());
+        this.usesStack = false;
     }
 
     public ExtraplanarLensTriggeredAbility(final ExtraplanarLensTriggeredAbility ability) {
