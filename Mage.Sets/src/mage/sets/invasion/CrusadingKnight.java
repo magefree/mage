@@ -33,7 +33,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.constants.*;
@@ -43,39 +42,39 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
- * @author michael.napoleon@gmail.com
+ * @author anonymous
  */
-public class MaraudingKnight extends CardImpl {
+public class CrusadingKnight extends CardImpl {
 
-    private static final FilterCard filterWhite = new FilterCard("White");
-    private static final FilterLandPermanent filterPlains = new FilterLandPermanent("Plains your opponent controls");
+    private static final FilterCard filterBlack = new FilterCard("Black");
+    private static final FilterLandPermanent filterSwamps = new FilterLandPermanent("Swamps your opponent controls");
     static {
-      filterPlains.add(new ControllerPredicate(TargetController.OPPONENT));
+      filterSwamps.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public MaraudingKnight(UUID ownerId) {
-        super(ownerId, 110, "Marauding Knight", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+    public CrusadingKnight(UUID ownerId) {
+        super(ownerId, 12, "Crusading Knight", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         this.expansionSetCode = "INV";
-        this.subtype.add("Zombie");
+        this.subtype.add("Human");
         this.subtype.add("Knight");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Protection from white
-        this.addAbility(new ProtectionAbility(filterWhite));
+        // Protection from black
+      this.addAbility(new ProtectionAbility(filterBlack));
 
-        // Marauding Knight gets +1/+1 for each Plains your opponents control.
-        PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filterPlains, 1);
-        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(amount, amount, Duration.WhileOnBattlefield));
-        this.addAbility(ability);
+        // Crusading Knight gets +1/+1 for each Swamp your opponents control.
+      PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filterSwamps, 1);
+      SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(amount, amount, Duration.WhileOnBattlefield));
+      this.addAbility(ability);
     }
 
-    public MaraudingKnight(final MaraudingKnight card) {
+    public CrusadingKnight(final CrusadingKnight card) {
         super(card);
     }
 
     @Override
-    public MaraudingKnight copy() {
-        return new MaraudingKnight(this);
+    public CrusadingKnight copy() {
+        return new CrusadingKnight(this);
     }
 }
