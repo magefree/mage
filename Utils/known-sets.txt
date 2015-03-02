@@ -16,7 +16,7 @@ Conflux|conflux|
 Dark Ascension|darkascension|
 Darksteel|darksteel|
 Dissension|dissension|
-Dragons of Tarkir[dragonsoftarkir]
+Dragons of Tarkir[dragonsoftarkir|
 Dragon's Maze|dragonsmaze|
 Duel Decks: Ajani vs. Nicol Bolas|ajanivsnicolbolas|
 Duel Decks: Divine vs. Demonic|divinevsdemonic|
