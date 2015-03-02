@@ -36,7 +36,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -106,7 +106,7 @@ class ShimatsuTheBloodcloakedEffect extends ReplacementEffectImpl {
         Permanent creature = game.getPermanent(event.getTargetId());
         Player controller = game.getPlayer(source.getControllerId());
         if (creature != null && controller != null) {
-            Target target = new TargetControlledPermanent(0, Integer.MAX_VALUE, new FilterPermanent(), true);
+            Target target = new TargetControlledPermanent(0, Integer.MAX_VALUE, new FilterControlledPermanent(), true);
             if (!target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
                 return false;
             }

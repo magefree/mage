@@ -36,9 +36,8 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.MonocoloredPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -91,12 +90,11 @@ class DefilerOfSoulsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("monocolored creature");
+        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("monocolored creature");
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player == null) {
             return false;
         }
-        filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new MonocoloredPredicate());
         
         int amount;

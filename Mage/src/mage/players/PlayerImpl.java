@@ -1628,6 +1628,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                     MageObject source = game.getPermanentOrLKIBattlefield(sourceId);
                     if (source == null) {
                         source = game.getObject(sourceId);
+                        if (source instanceof Card && !CardUtil.isPermanentCard((Card)source)) {
+                            source = game.getLastKnownInformation(sourceId, Zone.STACK);
+                        }
                         if (source instanceof Spell) {
                             sourceControllerId = ((Spell) source).getControllerId();
                         } else {

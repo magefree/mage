@@ -38,8 +38,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -97,10 +96,7 @@ class ReturnToHandEffect extends OneShotEffect {
             return false;
         }
 
-        FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new ControllerPredicate(TargetController.YOU));
-        Target target = new TargetControlledPermanent(1, 1, filter, true);
-
+        Target target = new TargetControlledPermanent(1, 1, new FilterControlledCreaturePermanent(), true);
         if (target.canChoose(player.getId(), game)) {
             while (player.isInGame() && !target.isChosen() && target.canChoose(player.getId(), game)) {
                 player.chooseTarget(Outcome.ReturnToHand, target, source, game);

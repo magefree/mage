@@ -28,6 +28,9 @@
 
 package mage.game.stack;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -47,7 +50,11 @@ import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
 import mage.cards.SplitCard;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SpellAbilityType;
+import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
@@ -58,10 +65,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.watchers.Watcher;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -181,7 +184,7 @@ public class Spell implements StackObject, Card {
                 // if muliple modes are selected, and there are modes with targets, then at least one mode has to have a legal target or 
                 // When resolving a fused split spell with multiple targets, treat it as you would any spell with multiple targets. 
                 // If all targets are illegal when the spell tries to resolve, the spell is countered and none of its effects happen. 
-                // If at least one target is still legal at that time, the spell resolves, but an illegal target can’t perform any actions
+                // If at least one target is still legal at that time, the spell resolves, but an illegal target can't perform any actions
                 // or have any actions performed on it. 
                 legalParts |= spellAbilityHasLegalParts(spellAbility, game);
             }
@@ -635,7 +638,14 @@ public class Spell implements StackObject, Card {
                     index = symbolString.indexOf("{X}");
                 }
             }
-            cmc += spellAbility.getManaCosts().convertedManaCost() + spellAbility.getManaCostsToPay().getX() * xMultiplier;
+            if (this.getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.BASE_ALTERNATE)) {
+                cmc += spellAbility.getManaCostsToPay().getX() * xMultiplier;
+            } else {
+                cmc += spellAbility.getManaCosts().convertedManaCost() + spellAbility.getManaCostsToPay().getX() * xMultiplier;
+            }
+        }
+        if (this.getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.BASE_ALTERNATE)) {
+            cmc += getCard().getManaCost().convertedManaCost();
         }
         return cmc;
     }

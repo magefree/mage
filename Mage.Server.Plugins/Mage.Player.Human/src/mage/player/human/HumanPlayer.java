@@ -432,13 +432,29 @@ public class HumanPlayer extends PlayerImpl {
             if (target.getTargets().size() >= target.getNumberOfTargets()) {
                 required = false;
             }
-            game.fireSelectTargetEvent(playerId, target.getMessage(), cards, required, getOptions(target, null));
+            Map<String, Serializable> options = getOptions(target, null);
+            List<UUID> chosen = target.getTargets();
+            options.put("chosen", (Serializable)chosen);
+            List<UUID> choosable = new ArrayList<>();
+            for (UUID cardId : cards) {
+                if (target.canTarget(cardId, cards, game)) {
+                    choosable.add(cardId);
+                }
+            }
+            if (!choosable.isEmpty()) {
+                options.put("choosable", (Serializable) choosable);
+            }
+            game.fireSelectTargetEvent(playerId, target.getMessage(), cards, required, options);
             waitForResponse(game);
             if (response.getUUID() != null) {
-                if (target.canTarget(response.getUUID(), cards, game)) {
-                    target.addTarget(response.getUUID(), source, game);
-                    if(target.doneChosing()){
-                        return true;
+                if (target.getTargets().contains(response.getUUID())) { // if already included remove it 
+                    target.remove(response.getUUID());
+                } else {
+                    if (target.canTarget(response.getUUID(), cards, game)) {
+                        target.addTarget(response.getUUID(), source, game);
+                        if (target.doneChosing()) {
+                            return true;
+                        }
                     }
                 }
             } else {
@@ -606,17 +622,17 @@ public class HumanPlayer extends PlayerImpl {
 
 
     @Override
-    public boolean playMana(ManaCost unpaid, Game game) {
+    public boolean playMana(ManaCost unpaid, String promptText, Game game) {
         payManaMode = true;
-        boolean result = playManaHandling(unpaid, game);
+        boolean result = playManaHandling(unpaid, promptText, game);
         payManaMode = false;
         return result;
     }
 
     
-    protected boolean playManaHandling(ManaCost unpaid, Game game) {
+    protected boolean playManaHandling(ManaCost unpaid, String promptText, Game game) {
         updateGameStatePriority("playMana", game);
-        game.firePlayManaEvent(playerId, "Pay " + unpaid.getText());
+        game.firePlayManaEvent(playerId, "Pay " + promptText);
         waitForResponse(game);
         if (!this.isInGame()) {
             return false;

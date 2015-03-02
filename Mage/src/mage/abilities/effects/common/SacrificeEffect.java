@@ -39,9 +39,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
-
-import java.util.UUID;
+import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 
 /**
@@ -54,19 +52,19 @@ public class SacrificeEffect extends OneShotEffect{
     private String preText;
     private DynamicValue count;
 
-    public SacrificeEffect ( FilterPermanent filter, DynamicValue count, String preText ) {
+    public SacrificeEffect (FilterPermanent filter, int count, String preText ) {
+        this(filter, new StaticValue(count), preText);
+    }
+
+    public SacrificeEffect (FilterPermanent filter, DynamicValue count, String preText ) {
         super(Outcome.Sacrifice);
         this.filter = filter;
         this.count = count;
         this.preText = preText;
         setText();
     }
-
-    public SacrificeEffect ( FilterPermanent filter, int count, String preText ) {
-        this(filter, new StaticValue(count), preText);
-    }
-
-    public SacrificeEffect ( final SacrificeEffect effect ) {
+    
+    public SacrificeEffect (final SacrificeEffect effect ) {
         super(effect);
         this.filter = effect.filter;
         this.count = effect.count;
@@ -87,14 +85,14 @@ public class SacrificeEffect extends OneShotEffect{
         int realCount = game.getBattlefield().countAll(filter, player.getId(), game);
         amount = Math.min(amount, realCount);
 
-        Target target = new TargetControlledPermanent(amount, amount, filter, true);
+        Target target = new TargetPermanent(amount, amount, filter, true);
 
         // A spell or ability could have removed the only legal target this player
         // had, if thats the case this ability should fizzle.
         if (amount > 0 && target.canChoose(source.getSourceId(), player.getId(), game)) {
             boolean abilityApplied = false;
             while (!target.isChosen() && target.canChoose(player.getId(), game) && player.isInGame()) {
-                player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+                player.chooseTarget(Outcome.Sacrifice, target, source, game);
             }
 
             for ( int idx = 0; idx < target.getTargets().size(); idx++) {

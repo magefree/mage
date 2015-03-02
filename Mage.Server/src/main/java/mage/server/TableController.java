@@ -924,7 +924,9 @@ public class TableController {
                 }
                 if (matchPlayer.getPlayer().isHuman()) {
                     humanPlayers++;                    
-                    if ((table.getState().equals(TableState.WAITING) || table.getState().equals(TableState.STARTING) || table.getState().equals(TableState.READY_TO_START)) ||
+                    if ((table.getState().equals(TableState.WAITING) || 
+                         table.getState().equals(TableState.STARTING) ||
+                         table.getState().equals(TableState.READY_TO_START)) ||
                             !match.isDoneSideboarding() || 
                             (!matchPlayer.hasQuit() && match.getGame() != null && matchPlayer.getPlayer().isInGame())) {
                         User user = UserManager.getInstance().getUser(userPlayerEntry.getKey());

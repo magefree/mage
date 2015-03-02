@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -50,12 +50,9 @@ public class TimeSieve extends CardImpl {
         super(ownerId, 31, "Time Sieve", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{U}{B}");
         this.expansionSetCode = "ARB";
 
-
-        
-
         // {tap}, Sacrifice five artifacts: Take an extra turn after this one.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddExtraTurnControllerEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(5, 5, new FilterArtifactPermanent("five artifacts"), true)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(5, 5, new FilterControlledArtifactPermanent("five artifacts"), true)));
         this.addAbility(ability);
 
     }

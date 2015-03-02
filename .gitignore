@@ -18,6 +18,7 @@ Mage.Server.Plugins/Mage.Deck.Limited/target
 Mage.Server.Plugins/Mage.Game.CommanderDuel/target
 Mage.Server.Plugins/Mage.Game.FreeForAll/target
 Mage.Server.Plugins/Mage.Game.TwoPlayerDuel/target
+Mage.Server.Plugins/Mage.Game.TinyLeadersDuel/target
 Mage.Server.Plugins/Mage.Player.AI/target
 Mage.Server.Plugins/Mage.Player.AIMinimax/target
 Mage.Server.Plugins/Mage.Player.AI.MA/target
@@ -83,3 +84,6 @@ Mage.Server.Plugins/Mage.Draft.8PlayerBooster/target
 /Mage.Server/config/ai.please.cast.this.txt
 /Mage.Stats/target/
 /Utils/*_unimplemented.txt
+*.netbeans_automatic_build
+*.txt
+Mage.Client/serverlist.txt
