@@ -29,7 +29,7 @@ package mage.sets.iceage;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.continious.LoseAbilityTargetEffect;
+import mage.abilities.effects.common.continuous.LoseAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

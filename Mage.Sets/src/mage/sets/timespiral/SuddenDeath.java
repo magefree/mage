@@ -29,7 +29,7 @@ package mage.sets.timespiral;
 
 import java.util.UUID;
 
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.SplitSecondAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

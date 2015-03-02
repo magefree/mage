@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.SetCardColorSourceEffect;
+import mage.abilities.effects.common.continuous.SetCardColorSourceEffect;
 import mage.abilities.keyword.FlankingAbility;
 import mage.cards.CardImpl;
 import mage.constants.Duration;

@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.common.continious.SetPowerToughnessAllEffect;
+import mage.abilities.effects.common.continuous.SetPowerToughnessAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;

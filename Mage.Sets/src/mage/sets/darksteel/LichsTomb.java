@@ -33,7 +33,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.effects.common.SacrificeEffect;
-import mage.abilities.effects.common.continious.DontLoseByZeroOrLessLifeEffect;
+import mage.abilities.effects.common.continuous.DontLoseByZeroOrLessLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;

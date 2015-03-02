@@ -30,7 +30,7 @@ package mage.sets.khansoftarkir;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.UntapAllDuringEachOtherPlayersUntapStepEffect;
+import mage.abilities.effects.common.continuous.UntapAllDuringEachOtherPlayersUntapStepEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;

@@ -40,7 +40,7 @@ import mage.abilities.condition.common.KickedCostCondition;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;

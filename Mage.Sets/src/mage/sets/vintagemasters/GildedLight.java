@@ -29,7 +29,7 @@ package mage.sets.vintagemasters;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.GainAbilityControllerEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;

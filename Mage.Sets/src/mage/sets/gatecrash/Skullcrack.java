@@ -35,7 +35,7 @@ import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.continious.CantGainLifeAllEffect;
+import mage.abilities.effects.common.continuous.CantGainLifeAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.game.Game;

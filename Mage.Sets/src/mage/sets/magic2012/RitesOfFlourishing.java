@@ -34,7 +34,7 @@ import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DrawCardTargetEffect;
-import mage.abilities.effects.common.continious.PlayAdditionalLandsAllEffect;
+import mage.abilities.effects.common.continuous.PlayAdditionalLandsAllEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;

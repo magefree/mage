@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BecomesBlockedAllTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.ChampionAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;

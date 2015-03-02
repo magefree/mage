@@ -28,7 +28,7 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.abilities.effects.common.continious.GainProtectionFromColorTargetEffect;
+import mage.abilities.effects.common.continuous.GainProtectionFromColorTargetEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

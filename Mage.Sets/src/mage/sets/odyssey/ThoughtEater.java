@@ -34,8 +34,8 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect;
-import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect.HandSizeModification;
+import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
+import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect.HandSizeModification;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 
