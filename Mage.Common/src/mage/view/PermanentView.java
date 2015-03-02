@@ -62,7 +62,7 @@ public class PermanentView extends CardView {
     private final boolean attachedToPermanent;
 
     public PermanentView(Permanent permanent, Card card, UUID createdForPlayerId, Game game) {
-        super(permanent, null, permanent.getControllerId().equals(createdForPlayerId));
+        super(permanent, game, null, permanent.getControllerId().equals(createdForPlayerId));
         this.controlled = permanent.getControllerId().equals(createdForPlayerId);
         this.rules = permanent.getRules();
         this.tapped = permanent.isTapped();

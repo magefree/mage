@@ -71,8 +71,7 @@ public class TalarasBattalion extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Cast Talara's Battalion only if you've cast another green spell this turn.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new TalarasBattalionEffect()));
-        this.addWatcher(new TalarasBattalionWatcher(this.getId()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new TalarasBattalionEffect()), new TalarasBattalionWatcher(this.getId()));
 
     }
 

@@ -60,7 +60,7 @@ public class BalothCageTrap extends CardImpl {
 
         // If an opponent had an artifact enter the battlefield under his or her control this turn, you may pay {1}{G} rather than pay Baloth Cage Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(new BalothCageTrapAlternativeCost());
-        this.addWatcher(new BalothCageTrapWatcher());
+        this.getSpellAbility().addWatcher(new BalothCageTrapWatcher());
 
         // Put a 4/4 green Beast creature token onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastGreenToken()));

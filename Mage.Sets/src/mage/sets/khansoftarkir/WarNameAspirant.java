@@ -71,8 +71,8 @@ public class WarNameAspirant extends CardImpl {
                 RaidCondition.getInstance(), 
                 true, 
                 "<i>Raid</i> - {this} enters the battlefield with a +1/+1 counter on it if you attacked with a creature this turn", 
-                "{this} enters the battlefield with a +1/+1 counter"));
-        this.addWatcher(new PlayerAttackedWatcher());
+                "{this} enters the battlefield with a +1/+1 counter"), 
+                new PlayerAttackedWatcher());
 
         // War-Name Aspirant can't be blocked by creatures with power 1 or less.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));

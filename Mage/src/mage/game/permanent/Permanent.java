@@ -36,6 +36,7 @@ import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.counters.Counters;
 import mage.game.Controllable;
 import mage.game.Game;
 
@@ -78,6 +79,8 @@ public interface Permanent extends Card, Controllable {
     void setFlipCard(boolean flipCard);
     void setFlipCardName(String flipCardName);
     void setSecondCardFace(Card card);
+    
+    Counters getCounters();
     
     List<UUID> getAttachments();
     UUID getAttachedTo();

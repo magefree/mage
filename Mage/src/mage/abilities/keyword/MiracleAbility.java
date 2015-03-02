@@ -98,7 +98,7 @@ public class MiracleAbility extends TriggeredAbilityImpl {
     @SuppressWarnings("unchecked")
     public MiracleAbility(Card card, ManaCosts miracleCosts) {
             super(Zone.HAND, new MiracleEffect((ManaCosts<ManaCost>)miracleCosts), true);
-            card.addWatcher(new MiracleWatcher());
+            addWatcher(new MiracleWatcher());
             ruleText = "Miracle " + miracleCosts.getText() + staticRule;
     }
 

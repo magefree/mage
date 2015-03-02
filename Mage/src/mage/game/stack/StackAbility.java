@@ -57,6 +57,7 @@ import java.util.UUID;
 import mage.cards.Card;
 import mage.constants.AbilityWord;
 import mage.players.Player;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -474,6 +475,16 @@ public class StackAbility implements StackObject, Ability {
     @Override
     public void setWorksFaceDown(boolean worksFaceDown) {
         this.ability.setWorksFaceDown(worksFaceDown);
+    }
+
+    @Override
+    public List<Watcher> getWatchers() {
+        return this.ability.getWatchers();
+    }
+
+    @Override
+    public void addWatcher(Watcher watcher) {
+        throw new UnsupportedOperationException("Not supported.");
     }
     
     @Override

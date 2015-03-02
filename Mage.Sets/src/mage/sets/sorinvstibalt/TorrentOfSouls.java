@@ -77,7 +77,7 @@ public class TorrentOfSouls extends CardImpl {
         this.getSpellAbility().addTarget(targetPlayer);
 
         this.addInfo("Info1", "<i>(Do both if {B}{R} was spent.)</i>");
-        this.addWatcher(new ManaSpentToCastWatcher());
+        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
 
     }
 

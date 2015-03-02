@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
+import mage.watchers.common.PlayerGainedLifeWatcher;
 
 /**
  *
@@ -54,7 +55,8 @@ public class VoraciousWurm extends CardImpl {
 
         // Voracious Wurm enters the battlefield with X +1/+1 counters on it, where X is the amount of life you've gained this turn.
         this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), ControllerGotLifeCount.getInstance(this), true)));
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), ControllerGotLifeCount.getInstance(), true)),
+                new PlayerGainedLifeWatcher());
     }
 
     public VoraciousWurm(final VoraciousWurm card) {

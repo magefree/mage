@@ -73,7 +73,7 @@ public class InvertTheSkies extends CardImpl {
                 new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.U)),
                 "and creatures you control gain flying until end of turn if {U} was spent to cast it"));
         this.addInfo("Info1", "<i>(Do both if {G}{U} was spent.)<i>");
-        this.addWatcher(new ManaSpentToCastWatcher());
+        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
     public InvertTheSkies(final InvertTheSkies card) {

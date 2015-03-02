@@ -72,8 +72,7 @@ public class ReiverDemon extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new ConditionalOneShotEffect(new DestroyAllEffect(filter), new CastFromHandCondition(),
                 "if you cast it from your hand, destroy all nonartifact, nonblack creatures. They can't be regenerated"));
-        this.addAbility(ability);
-        this.addWatcher(new CastFromHandWatcher());
+        this.addAbility(ability, new CastFromHandWatcher());
     }
 
     public ReiverDemon(final ReiverDemon card) {

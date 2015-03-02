@@ -73,7 +73,7 @@ public class RicochetTrap extends CardImpl {
         this.getSpellAbility().addEffect(new ChooseNewTargetsTargetEffect(true, true));
         this.getSpellAbility().addTarget(new TargetSpell(filter));
 
-        this.addWatcher(new RicochetTrapWatcher());
+        this.getSpellAbility().addWatcher(new RicochetTrapWatcher());
     }
 
     public RicochetTrap(final RicochetTrap card) {

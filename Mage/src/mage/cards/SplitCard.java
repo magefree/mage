@@ -42,7 +42,6 @@ import static mage.constants.SpellAbilityType.SPLIT_LEFT;
 import static mage.constants.SpellAbilityType.SPLIT_RIGHT;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.watchers.Watcher;
 
 /**
  *
@@ -166,14 +165,6 @@ public abstract class SplitCard extends CardImpl {
 
     }
 
-    @Override
-    public List<Watcher> getWatchers() {
-        List<Watcher> allWatchers = new ArrayList<>();
-        allWatchers.addAll(super.getWatchers());
-        allWatchers.addAll(leftHalfCard.getWatchers());
-        allWatchers.addAll(rightHalfCard.getWatchers());
-        return allWatchers;
-    }
 }
 
 /*

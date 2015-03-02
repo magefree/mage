@@ -74,7 +74,7 @@ public class SourceHasCounterCondition implements Condition {
         if (from != -1) { //range compare
             int count;
             if (card != null) {
-                count = card.getCounters().getCount(counterType);
+                count = card.getCounters(game).getCount(counterType);
             } else {
                 count = permanent.getCounters().getCount(counterType);
             }
@@ -84,7 +84,7 @@ public class SourceHasCounterCondition implements Condition {
             return count >= from && count <= to;
         } else { // single compare (lte)
             if (card != null) {
-                return card.getCounters().getCount(counterType) >= amount;
+                return card.getCounters(game).getCount(counterType) >= amount;
             } else  {
                 return permanent.getCounters().getCount(counterType) >= amount;
             }

@@ -60,7 +60,7 @@ public class DreamSalvage extends CardImpl {
         // Draw cards equal to the number of cards target opponent discarded this turn.
         this.getSpellAbility().addEffect(new DreamSalvageEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
-        this.addWatcher(new CardsDiscardedThisTurnWatcher());
+        this.getSpellAbility().addWatcher(new CardsDiscardedThisTurnWatcher());
 
     }
 

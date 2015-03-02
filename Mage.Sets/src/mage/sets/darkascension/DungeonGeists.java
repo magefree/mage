@@ -81,9 +81,8 @@ public class DungeonGeists extends CardImpl {
         ability.addEffect(new DungeonGeistsEffect());
         Target target = new TargetCreaturePermanent(filter);
         ability.addTarget(target);
-        this.addAbility(ability);
+        this.addAbility(ability, new DungeonGeistsWatcher());
         // watcher needed to send normal events to Dungeon Geists ReplacementEffect
-        this.addWatcher(new DungeonGeistsWatcher());
     }
 
     public DungeonGeists(final DungeonGeists card) {

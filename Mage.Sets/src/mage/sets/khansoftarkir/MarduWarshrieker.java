@@ -57,8 +57,8 @@ public class MarduWarshrieker extends CardImpl {
 
         // <em>Raid</em> - When Mardu Warshrieker enters the battlefield, if you attacked with a creature this turn, add {R}{W}{B} to your mana pool.
         this.addAbility(new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new AddManaToManaPoolSourceControllerEffect(new Mana(1,0,0,1,1,0,0))), RaidCondition.getInstance(), 
-                 "<i>Raid</i> -  When {this} enters the battlefield, if you attacked with a creature this turn, add {R}{W}{B} to your mana pool.", false));
-        this.addWatcher(new PlayerAttackedWatcher());
+                 "<i>Raid</i> -  When {this} enters the battlefield, if you attacked with a creature this turn, add {R}{W}{B} to your mana pool.", false), 
+                new PlayerAttackedWatcher());
     }
 
     public MarduWarshrieker(final MarduWarshrieker card) {

@@ -36,6 +36,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
+import mage.watchers.common.DamagedByWatcher;
 
 /**
  *
@@ -56,6 +57,7 @@ public class MagmaSpray extends CardImpl {
         Effect effect = new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn);
         effect.setText("If that creature would die this turn, exile it instead");
         this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addWatcher(new DamagedByWatcher());
     }
 
     public MagmaSpray(final MagmaSpray card) {

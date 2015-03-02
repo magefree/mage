@@ -70,8 +70,7 @@ public class DreamThief extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Dream Thief enters the battlefield, draw a card if you've cast another blue spell this turn.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1), new CastBlueSpellThisTurnCondition(), rule)));
-        this.addWatcher(new DreamThiefWatcher(this.getId()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1), new CastBlueSpellThisTurnCondition(), rule)), new DreamThiefWatcher(this.getId()));
         
     }
 

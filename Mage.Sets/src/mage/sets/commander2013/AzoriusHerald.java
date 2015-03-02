@@ -60,8 +60,7 @@ public class AzoriusHerald extends CardImpl {
         // When Azorius Herald enters the battlefield, you gain 4 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4)));
         // When Azorius Herald enters the battlefield, sacrifice it unless {U} was spent to cast it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.U)), false));
-        this.addWatcher(new ManaSpentToCastWatcher());        
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.U)), false), new ManaSpentToCastWatcher());        
     }
 
     public AzoriusHerald(final AzoriusHerald card) {
