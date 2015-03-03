@@ -29,16 +29,16 @@ package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -48,11 +48,12 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class MaraudingKnight extends CardImpl {
 
-    private static final FilterCard filterWhite = new FilterCard("White");
-    private static final FilterLandPermanent filterPlains = new FilterLandPermanent("Plains your opponent controls");
+    private static final FilterCard protectionFilter = new FilterCard("White");
+    private static final FilterLandPermanent plainsFilter = new FilterLandPermanent("Plains your opponent controls");
     static {
-      filterPlains.add(new SubtypePredicate("Plains"));
-      filterPlains.add(new ControllerPredicate(TargetController.OPPONENT));
+      protectionFilter.add(new ColorPredicate(ObjectColor.WHITE));
+      plainsFilter.add(new SubtypePredicate("Plains"));
+      plainsFilter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public MaraudingKnight(UUID ownerId) {
@@ -64,10 +65,10 @@ public class MaraudingKnight extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Protection from white
-        this.addAbility(new ProtectionAbility(filterWhite));
+        this.addAbility(new ProtectionAbility(protectionFilter));
 
         // Marauding Knight gets +1/+1 for each Plains your opponents control.
-        PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filterPlains, 1);
+        PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(plainsFilter, 1);
         SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield));
         this.addAbility(ability);
     }
