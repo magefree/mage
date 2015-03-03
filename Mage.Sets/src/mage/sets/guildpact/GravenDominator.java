@@ -30,7 +30,7 @@ package mage.sets.guildpact;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.continious.SetPowerToughnessAllEffect;
+import mage.abilities.effects.common.continuous.SetPowerToughnessAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HauntAbility;
 import mage.cards.CardImpl;

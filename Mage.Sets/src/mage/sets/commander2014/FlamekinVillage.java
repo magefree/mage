@@ -34,7 +34,7 @@ import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;

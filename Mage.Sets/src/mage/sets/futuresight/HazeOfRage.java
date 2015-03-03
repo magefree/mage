@@ -28,7 +28,7 @@
 package mage.sets.futuresight;
 
 import java.util.UUID;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.BuybackAbility;
 import mage.abilities.keyword.StormAbility;
 import mage.cards.CardImpl;

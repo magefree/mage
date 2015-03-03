@@ -30,7 +30,7 @@ package mage.sets.shadowmoor;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.SetPowerToughnessAllEffect;
+import mage.abilities.effects.common.continuous.SetPowerToughnessAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

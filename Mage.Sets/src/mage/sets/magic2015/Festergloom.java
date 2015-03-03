@@ -28,7 +28,7 @@
 package mage.sets.magic2015;
 
 import mage.ObjectColor;
-import mage.abilities.effects.common.continious.BoostAllEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;

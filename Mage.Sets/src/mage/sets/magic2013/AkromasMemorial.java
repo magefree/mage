@@ -32,7 +32,7 @@ import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.CompoundAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
 import mage.constants.Duration;

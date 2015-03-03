@@ -42,7 +42,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DynamicManaEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
-import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
+import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.*;

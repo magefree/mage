@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.common.continious.BecomesBasicLandTargetEffect;
+import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
 import mage.abilities.keyword.PlainswalkAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

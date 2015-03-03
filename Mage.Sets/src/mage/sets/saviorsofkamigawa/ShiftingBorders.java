@@ -28,7 +28,7 @@
 package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
-import mage.abilities.effects.common.continious.ExchangeControlTargetEffect;
+import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

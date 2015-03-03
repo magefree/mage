@@ -34,7 +34,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continious.SourceEffect;
+import mage.abilities.effects.common.continuous.SourceEffect;
 import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Duration;

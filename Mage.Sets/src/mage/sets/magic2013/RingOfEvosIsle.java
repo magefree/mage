@@ -42,7 +42,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.EquippedMatchesFilterCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.effects.common.counter.AddPlusOneCountersAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.HexproofAbility;

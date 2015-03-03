@@ -36,7 +36,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.continious.SourceEffect;
+import mage.abilities.effects.common.continuous.SourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.DelveAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;

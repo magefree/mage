@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BlocksTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;

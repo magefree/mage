@@ -34,7 +34,7 @@ import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.effects.common.continious.BoostEnchantedEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.BestowAbility;
 import mage.cards.CardImpl;
 import mage.constants.AttachmentType;

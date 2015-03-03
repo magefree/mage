@@ -32,7 +32,7 @@ import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.constants.Duration;
 import mage.game.Game;
 

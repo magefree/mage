@@ -34,9 +34,9 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.PlayAdditionalLandsControllerEffect;
-import mage.abilities.effects.common.continious.PlayTheTopCardEffect;
-import mage.abilities.effects.common.continious.PlayWithTheTopCardRevealedEffect;
+import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
+import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
+import mage.abilities.effects.common.continuous.PlayWithTheTopCardRevealedEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandCard;
 

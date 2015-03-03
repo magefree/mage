@@ -34,7 +34,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.BlocksIfAbleAttachedEffect;
 import mage.abilities.effects.common.combat.BlocksIfAbleSourceEffect;
-import mage.abilities.effects.common.continious.BoostEnchantedEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.BestowAbility;
 import mage.cards.CardImpl;
 import mage.constants.AttachmentType;

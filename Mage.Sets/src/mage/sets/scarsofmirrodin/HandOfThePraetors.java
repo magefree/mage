@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 import mage.target.TargetPlayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.AbilityPredicate;

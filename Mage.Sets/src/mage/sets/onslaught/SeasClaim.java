@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continious.BecomesBasicLandEnchantedEffect;
+import mage.abilities.effects.common.continuous.BecomesBasicLandEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;

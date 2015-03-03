@@ -30,7 +30,7 @@ package mage.sets.fatereforged;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksAllTriggeredAbility;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.DashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;

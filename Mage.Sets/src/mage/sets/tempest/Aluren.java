@@ -34,7 +34,7 @@ import mage.abilities.condition.common.SourceIsSpellCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continious.CastAsThoughItHadFlashAllEffect;
+import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;

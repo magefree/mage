@@ -36,7 +36,7 @@ import mage.abilities.condition.common.CastFromHandCondition;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.ExileSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
