@@ -33,7 +33,7 @@ import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
 

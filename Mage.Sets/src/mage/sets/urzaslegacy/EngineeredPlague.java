@@ -33,7 +33,7 @@ import mage.constants.*;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
-import mage.abilities.effects.common.continious.BoostAllEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;

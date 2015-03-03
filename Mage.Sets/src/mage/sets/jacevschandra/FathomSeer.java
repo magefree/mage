@@ -36,7 +36,7 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class FathomSeer extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("Islands");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Islands");
 
     static {
         filter.add(new SubtypePredicate("Island"));

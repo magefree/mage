@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.BoostOpponentsEffect;
+import mage.abilities.effects.common.continuous.BoostOpponentsEffect;
 import mage.cards.CardImpl;
 
 /**

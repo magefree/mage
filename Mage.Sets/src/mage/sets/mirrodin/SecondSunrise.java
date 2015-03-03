@@ -54,7 +54,7 @@ public class SecondSunrise extends CardImpl {
 
         // Each player returns to the battlefield all artifact, creature, enchantment, and land cards in his or her graveyard that were put there from the battlefield this turn.
         this.getSpellAbility().addEffect(new SecondSunriseEffect());
-        this.addWatcher(new SecondSunriseWatcher());
+        this.getSpellAbility().addWatcher(new SecondSunriseWatcher());
     }
 
     public SecondSunrise(final SecondSunrise card) {

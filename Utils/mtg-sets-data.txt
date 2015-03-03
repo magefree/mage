@@ -31,6 +31,7 @@ Dissension|DIS|
 Deckmasters|DKM|
 Dragon's Maze|DGM|
 The Dark|DRK|
+Dragons of Tarkir|DTK|
 Duel Decks: Ajani vs. Nicol Bolas|DDH|
 Duel Decks: Elves vs. Goblins|EVG|
 Duel Decks: Divine vs. Demonic|DDC|

@@ -242,6 +242,14 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
     boolean containsAll(Abilities<T> abilities);
 
     /**
+     * Searches this set of abilities for the existence of the give class
+     *
+     * @param classObject
+     * @return True if the passed in class is also in this set of abilities.
+     */
+    boolean containsClass(Class classObject);
+
+    /**
      * Copies this set of abilities.  This copy should be new instances of all
      * the contained abilities.
      * 

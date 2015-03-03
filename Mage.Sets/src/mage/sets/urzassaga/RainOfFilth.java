@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.common.continious.GainAbilityAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;

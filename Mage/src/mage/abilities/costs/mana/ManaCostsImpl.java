@@ -33,6 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.VariableCost;
@@ -43,6 +44,7 @@ import mage.game.Game;
 import mage.players.ManaPool;
 import mage.players.Player;
 import mage.target.Targets;
+import mage.util.ManaUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -117,14 +119,16 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         }
 
         Player player = game.getPlayer(controllerId);
-        assignPayment(game, ability, player.getManaPool());
+        assignPayment(game, ability, player.getManaPool());        
         while (!isPaid()) {
-            if (player.playMana(this.getUnpaid(), game)) {
+            ManaCost unpaid = this.getUnpaid();
+            String promptText = ManaUtil.addSpecialManaPayAbilities(ability, game, unpaid);
+            if (player.playMana(unpaid, promptText, game)) {
                 assignPayment(game, ability, player.getManaPool());
-            }
-            else {
+            } else {
                 return false;
             }
+            game.getState().getSpecialActions().removeManaActions();
         }
         return true;
     }

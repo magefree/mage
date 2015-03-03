@@ -15,23 +15,30 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.0.2</version>
+                <version>3.2</version>
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
                     <encoding>UTF-8</encoding>
+                    <!--
+                    Because of known error in maven-compiler-plugin 3.2 useIncrementalCompilation is inverted
+                    so remove this arg with update that fixes the problem
+                    https://jira.codehaus.org/browse/MCOMPILER-209
+                    -->
+                    <useIncrementalCompilation>false</useIncrementalCompilation>
+<!--                    <compilerArgument>-Xlint:all</compilerArgument> -->
                 </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>2.5</version>
+                <version>2.7</version>
                 <configuration>
-                    <encoding>UTF-8</encoding>
+                <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>2.4</version>
+                <version>2.5</version>
 				<configuration>
 					<archive>
 						<manifestEntries>
@@ -43,17 +50,16 @@
         </plugins>
     </build>
     <modules>
-        <module>Mage</module>
         <module>Mage.Common</module>
-        <module>Mage.Server</module>
-        <module>Mage.Sets</module>
         <module>Mage.Client</module>
         <module>Mage.Plugins</module>
+        <module>Mage</module>
+        <module>Mage.Server</module>
+        <module>Mage.Sets</module>
         <module>Mage.Server.Plugins</module>
         <module>Mage.Server.Console</module>
         <module>Mage.Tests</module>
         <module>Mage.Updater</module>
-        <module>Mage.Stats</module>
     </modules>
 
     <repositories>
@@ -85,12 +91,17 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.11</version>
+                <version>4.12</version>
             </dependency>
             <dependency>
                 <groupId>log4j</groupId>
                 <artifactId>log4j</artifactId>
                 <version>1.2.17</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>1.7.10</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

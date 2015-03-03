@@ -443,7 +443,7 @@ public class ConnectDialog extends MageDialog {
             try {
                 in = new BufferedReader(new InputStreamReader(serverListURL.openConnection(p).getInputStream()));
             } catch (FileNotFoundException| UnknownHostException ex ) {
-                logger.info("Could not read serverlist from: " + serverListURL.toString());
+                logger.warn("Could not read serverlist from: " + serverListURL.toString());
                 File f = new File("serverlist.txt");
                 if (f.exists() && !f.isDirectory()) {
                     logger.info("Using buffered serverlist: serverlist.txt");
@@ -465,7 +465,7 @@ public class ConnectDialog extends MageDialog {
 
                 String inputLine;
                 while ((inputLine = in.readLine()) != null) {
-                    logger.info("Found server: " + inputLine);
+                    logger.debug("Found server: " + inputLine);
                     servers.add(inputLine);
                     if (output != null) {
                         output.append(inputLine).append('\n');

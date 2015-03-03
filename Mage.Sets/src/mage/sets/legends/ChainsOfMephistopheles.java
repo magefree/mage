@@ -60,8 +60,7 @@ public class ChainsOfMephistopheles extends CardImpl {
         this.color.setBlack(true);
 
         // If a player would draw a card except the first one he or she draws in his or her draw step each turn, that player discards a card instead. If the player discards a card this way, he or she draws a card. If the player doesn't discard a card this way, he or she puts the top card of his or her library into his or her graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChainsOfMephistophelesReplacementEffect()));
-        this.addWatcher(new CardsDrawnDuringDrawStepWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChainsOfMephistophelesReplacementEffect()), new CardsDrawnDuringDrawStepWatcher());
     }
 
     public ChainsOfMephistopheles(final ChainsOfMephistopheles card) {

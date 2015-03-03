@@ -37,6 +37,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
+import mage.watchers.common.DamagedByWatcher;
 
 /**
  *
@@ -55,6 +56,7 @@ public class YamabushisFlame extends CardImpl {
 
             // If a creature dealt damage this way would die this turn, exile it instead.
             this.getSpellAbility().addEffect(new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn));
+            this.getSpellAbility().addWatcher(new DamagedByWatcher());
         }
 
         public YamabushisFlame(final YamabushisFlame card) {

@@ -34,7 +34,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilityAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

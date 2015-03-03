@@ -6,9 +6,10 @@
 package mage.sets.planeshift;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
@@ -73,7 +74,7 @@ class SkyshipWeatherlightEffect extends SearchEffect {
     public SkyshipWeatherlightEffect() {
         
         super(new TargetCardInLibrary(0, Integer.MAX_VALUE, filter), Outcome.Neutral);
-        this.staticText = "search your library for any number of artifact and/or creature cards and remove them from the game. Then shuffle your library.";
+        this.staticText = "search your library for any number of artifact and/or creature cards and remove them from the game. Then shuffle your library";
         
     }
     
@@ -88,20 +89,22 @@ class SkyshipWeatherlightEffect extends SearchEffect {
     
     @Override
     public boolean apply (Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you != null) {
-            if (you.searchLibrary(target, game)) {
-                UUID exileZone = CardUtil.getCardExileZoneId(game, source);
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject != null && controller != null) {
+            if (controller.searchLibrary(target, game)) {
+                UUID exileZone = CardUtil.getObjectExileZoneId(game, sourceObject);
                 if (target.getTargets().size() > 0) {
                     for (UUID cardID : target.getTargets()) {
-                        Card card = you.getLibrary().getCard(cardID, game);
+                        Card card = controller.getLibrary().getCard(cardID, game);
                         if (card != null) {
-                            card.moveToExile(exileZone, "Skyship Weatherlight", source.getSourceId(), game);
+                            controller.moveCardToExileWithInfo(card, exileZone, sourceObject.getLogName(), source.getSourceId(), game, Zone.LIBRARY);
                         }
                     }
                 }
             }
-            you.shuffleLibrary(game);
+            controller.shuffleLibrary(game);
+            return true;
         }
         return false;
     }
@@ -112,7 +115,7 @@ class SkyshipWeatherlightEffect2 extends OneShotEffect {
     
     public SkyshipWeatherlightEffect2() {
         super(Outcome.ReturnToHand);
-        this.staticText = "Choose a card at random that was removed from the game with Skyship Weatherlight. Put that card into your hand.";
+        this.staticText = "Choose a card at random that was removed from the game with {this}. Put that card into your hand";
     }
     
     public SkyshipWeatherlightEffect2(final SkyshipWeatherlightEffect2 effect) {
@@ -126,12 +129,17 @@ class SkyshipWeatherlightEffect2 extends OneShotEffect {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        ExileZone exZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-        if (exZone != null) {
-            Card card = exZone.getRandom(game);
-            card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject != null && controller != null) {
+            ExileZone exZone = game.getExile().getExileZone(CardUtil.getObjectExileZoneId(game, sourceObject));
+            if (exZone != null) {
+                Card card = exZone.getRandom(game);
+                controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.EXILED);
+            }
+            return true;
         }
-        return true;
+        return false;
     }
     
 }

@@ -28,7 +28,7 @@
 package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.DelveAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

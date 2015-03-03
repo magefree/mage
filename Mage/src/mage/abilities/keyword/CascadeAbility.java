@@ -62,7 +62,7 @@ public class CascadeAbility extends TriggeredAbilityImpl {
         this.withReminder = withReminder;
     }
 
-    public CascadeAbility(CascadeAbility ability) {
+    public CascadeAbility(final CascadeAbility ability) {
         super(ability);
         this.withReminder = ability.withReminder;
     }

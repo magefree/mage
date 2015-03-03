@@ -38,7 +38,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.ZoneChangeAllTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;

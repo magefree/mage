@@ -68,8 +68,7 @@ public class TwilightShepherd extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // When Twilight Shepherd enters the battlefield, return to your hand all cards in your graveyard that were put there from the battlefield this turn.
-        this.addWatcher(new CardsPutIntoGraveyardWatcher());
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TwilightShepherdEffect(), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TwilightShepherdEffect(), false), new CardsPutIntoGraveyardWatcher());
 
         // Persist
         this.addAbility(new PersistAbility());

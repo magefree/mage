@@ -105,6 +105,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Map<String, Object> values = new HashMap<>();
     private Map<UUID, Zone> zones = new HashMap<>();
     private List<GameEvent> simultaneousEvents = new ArrayList<>();
+    private Map<UUID, CardState> cardState = new HashMap<>();
 
     public GameState() {
         players = new Players();
@@ -160,6 +161,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         this.paused = state.paused;
         this.simultaneousEvents.addAll(state.simultaneousEvents);
+        for (Map.Entry<UUID, CardState> entry: state.cardState.entrySet()) {
+            cardState.put(entry.getKey(), entry.getValue().copy());
+        }
     }
 
     @Override
@@ -420,7 +424,10 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void addEffect(ContinuousEffect effect, UUID sourceId, Ability source) {
-        effects.addEffect(effect, sourceId, source);
+        if (sourceId == null)
+            effects.addEffect(effect, source);
+        else 
+            effects.addEffect(effect, sourceId, source);
     }
 
 //    public void addMessage(String message) {
@@ -491,6 +498,7 @@ public class GameState implements Serializable, Copyable<GameState> {
             origPlayer.restore(copyPlayer);
         }
         this.simultaneousEvents = state.simultaneousEvents;
+        this.cardState = state.cardState;
     }
 
     public void addSimultaneousEvent(GameEvent event, Game game) {
@@ -527,11 +535,6 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void addCard(Card card) {
         setZone(card.getId(), Zone.OUTSIDE);
-        for (Watcher watcher: card.getWatchers()) {
-            watcher.setControllerId(card.getOwnerId());
-            watcher.setSourceId(card.getId());
-            watchers.add(watcher);
-        }
         for (Ability ability: card.getAbilities()) {
             addAbility(ability, card);
         }
@@ -553,6 +556,10 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @param ability
      * @param attachedTo
      */
+    public void addAbility(Ability ability, Card attachedTo) {
+        addAbility(ability, null, attachedTo);
+    }
+
     public void addAbility(Ability ability, MageObject attachedTo) {
         if (ability instanceof StaticAbility) {
             for (Mode mode: ability.getModes().values()) {
@@ -574,7 +581,7 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @param sourceId
      * @param attachedTo
      */
-    public void addAbility(Ability ability, UUID sourceId, MageObject attachedTo) {
+    public void addAbility(Ability ability, UUID sourceId, Card attachedTo) {
         if (ability instanceof StaticAbility) {
             for (Mode mode: ability.getModes().values()) {
                 for (Effect effect: mode.getEffects()) {
@@ -587,6 +594,11 @@ public class GameState implements Serializable, Copyable<GameState> {
         else if (ability instanceof TriggeredAbility) {
             // TODO: add sources for triggers - the same way as in addEffect: sources
             this.triggers.add((TriggeredAbility)ability, sourceId, attachedTo);
+        }
+        for (Watcher watcher: ability.getWatchers()) {
+            watcher.setControllerId(attachedTo.getOwnerId());
+            watcher.setSourceId(attachedTo.getId());
+            watchers.add(watcher);
         }
     }
 
@@ -732,6 +744,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         gameOver = false;
         specialActions.clear();
         otherAbilities.clear();
+        cardState.clear();
         combat.clear();
         turnMods.clear();
         watchers.clear();
@@ -767,4 +780,17 @@ public class GameState implements Serializable, Copyable<GameState> {
     public TriggeredAbilities getTriggers() {
         return triggers;
     }
+    
+    public CardState getCardState(UUID cardId) {
+        if (!cardState.containsKey(cardId)) {
+            cardState.put(cardId, new CardState());
+            // cardState.putIfAbsent(cardId, new CardState());
+        }
+        return cardState.get(cardId);
+    }
+
+    public void addWatcher(Watcher watcher) {
+        this.watchers.add(watcher);
+    }
+    
 }

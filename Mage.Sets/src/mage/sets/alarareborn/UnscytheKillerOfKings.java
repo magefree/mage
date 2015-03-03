@@ -36,8 +36,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.BoostEquippedEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.effects.common.continuous.BoostEquippedEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.Card;
@@ -79,8 +79,7 @@ public class UnscytheKillerOfKings extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
 
         // Whenever a creature dealt damage by equipped creature this turn dies, you may exile that card. If you do, put a 2/2 black Zombie creature token onto the battlefield.
-        this.addAbility(new UnscytheKillerOfKingsTriggeredAbility(new UnscytheEffect()));
-        this.addWatcher(new EquippedDidDamageWatcher());
+        this.addAbility(new UnscytheKillerOfKingsTriggeredAbility(new UnscytheEffect()), new EquippedDidDamageWatcher());
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), new TargetControlledCreaturePermanent()));

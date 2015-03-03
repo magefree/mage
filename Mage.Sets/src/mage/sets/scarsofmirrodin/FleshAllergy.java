@@ -65,7 +65,7 @@ public class FleshAllergy extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new FleshAllergyEffect());
-        this.addWatcher(new FleshAllergyWatcher());
+        this.getSpellAbility().addWatcher(new FleshAllergyWatcher());
     }
 
     public FleshAllergy (final FleshAllergy card) {

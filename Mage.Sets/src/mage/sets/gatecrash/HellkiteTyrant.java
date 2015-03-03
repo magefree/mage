@@ -29,13 +29,6 @@ package mage.sets.gatecrash;
 
 import java.util.List;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.SubLayer;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
@@ -50,6 +43,12 @@ import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactPermanent;
@@ -137,10 +136,10 @@ class HellkiteTyrantEffect extends OneShotEffect {
 
 class HellkiteTyrantControlEffect extends ContinuousEffectImpl {
 
-    private UUID controllerId;
+    private final UUID controllerId;
 
     public HellkiteTyrantControlEffect(UUID controllerId) {
-        super(Duration.WhileOnBattlefield, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
+        super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.controllerId = controllerId;
     }
 
@@ -160,6 +159,8 @@ class HellkiteTyrantControlEffect extends ContinuousEffectImpl {
         if (permanent != null && controllerId != null) {
             return permanent.changeControllerId(controllerId, game);
         }
+        // Permanent is no longer on the battlefield, the effect can be discarded.
+        discard();
         return false;
     }
 }

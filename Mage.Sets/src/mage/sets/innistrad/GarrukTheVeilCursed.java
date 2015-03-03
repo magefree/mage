@@ -34,19 +34,16 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.WolfTokenWithDeathtouch;
@@ -56,6 +53,7 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  * @author nantuko
@@ -132,12 +130,7 @@ class GarrukTheVeilCursedValue implements DynamicValue {
 
 class GarrukTheVeilCursedEffect extends OneShotEffect {
 
-    private static final FilterPermanent filterCreature = new FilterPermanent("a creature you control");
-
-    static {
-        filterCreature.add(new CardTypePredicate(CardType.CREATURE));
-        filterCreature.add(new ControllerPredicate(TargetController.YOU));
-    }
+    private static final FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("a creature you control");
 
     public GarrukTheVeilCursedEffect() {
         super(Outcome.Benefit);
@@ -150,22 +143,22 @@ class GarrukTheVeilCursedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
 
-        if (player == null) {
+        if (controller == null) {
             return false;
         }
 
         // sacrifice a creature
         Target target = new TargetControlledPermanent(1, 1, filterCreature, false);
         boolean sacrificed = false;
-        if (target.canChoose(player.getId(), game)) {
-            while (player.isInGame() && !target.isChosen() && target.canChoose(player.getId(), game)) {
-                player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+        if (target.canChoose(controller.getId(), game)) {
+            while (controller.isInGame() && !target.isChosen() && target.canChoose(controller.getId(), game)) {
+                controller.chooseTarget(Outcome.Sacrifice, target, source, game);
             }
 
             for (int idx = 0; idx < target.getTargets().size(); idx++) {
-                Permanent permanent = game.getPermanent((UUID) target.getTargets().get(idx));
+                Permanent permanent = game.getPermanent(target.getTargets().get(idx));
                 if (permanent != null) {
                     sacrificed |= permanent.sacrifice(source.getSourceId(), game);
                 }
@@ -177,9 +170,9 @@ class GarrukTheVeilCursedEffect extends OneShotEffect {
             FilterCreatureCard filter = new FilterCreatureCard();
             TargetCardInLibrary targetInLibrary = new TargetCardInLibrary(filter);
             Cards cards = new CardsImpl();
-            if (player.searchLibrary(targetInLibrary, game)) {
+            if (controller.searchLibrary(targetInLibrary, game)) {
                 for (UUID cardId : targetInLibrary.getTargets()) {
-                    Card card = player.getLibrary().remove(cardId, game);
+                    Card card = controller.getLibrary().remove(cardId, game);
                     if (card != null) {
                         card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                         cards.add(card);
@@ -188,10 +181,10 @@ class GarrukTheVeilCursedEffect extends OneShotEffect {
             }
             // reveal
             if (cards.size() > 0) {
-                player.revealCards("Garruk, the Veil-Cursed", cards, game);
+                controller.revealCards("Garruk, the Veil-Cursed", cards, game);
             }
             // shuffle
-            player.shuffleLibrary(game);
+            controller.shuffleLibrary(game);
             return true;
         }
         return false;

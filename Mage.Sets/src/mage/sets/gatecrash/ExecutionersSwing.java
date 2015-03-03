@@ -35,7 +35,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -60,7 +60,7 @@ public class ExecutionersSwing extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(-5,-5, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanentThatDealtDamageThisTurn());
 
-        this.addWatcher(new SourceDidDamageWatcher());
+        this.getSpellAbility().addWatcher(new SourceDidDamageWatcher());
     }
 
     public ExecutionersSwing(final ExecutionersSwing card) {

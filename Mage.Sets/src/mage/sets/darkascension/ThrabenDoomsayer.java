@@ -38,7 +38,7 @@ import mage.abilities.condition.common.FatefulHourCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.constants.Zone;

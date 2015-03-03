@@ -76,8 +76,7 @@ public class JelevaNephaliasScourge extends CardImpl {
         // When Jeleva, Nephalia's Scourge enters the battlefield, each player exiles the top X cards of his or her library, where X is the amount of mana spent to cast Jeleva.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new JelevaNephaliasScourgeEffect(), false));
         // Whenever Jeleva attacks, you may cast an instant or sorcery card exiled with it without paying its mana cost.
-        this.addAbility(new AttacksTriggeredAbility(new JelevaNephaliasCastEffect(), false));
-        this.addWatcher(new JelevaNephaliasWatcher());
+        this.addAbility(new AttacksTriggeredAbility(new JelevaNephaliasCastEffect(), false), new JelevaNephaliasWatcher());
 
     }
 

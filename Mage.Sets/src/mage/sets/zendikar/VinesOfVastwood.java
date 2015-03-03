@@ -36,7 +36,7 @@ import mage.constants.Rarity;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.CantBeTargetedTargetEffect;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.constants.TargetController;

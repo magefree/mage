@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class FlameKinZealot extends mage.sets.ravnika.FlameKinZealot {
+public class FlameKinZealot extends mage.sets.ravnica.FlameKinZealot {
 
     public FlameKinZealot(UUID ownerId) {
         super(ownerId);

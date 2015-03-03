@@ -32,7 +32,7 @@ import mage.ObjectColor;
 import mage.abilities.costs.common.ReturnToHandTargetCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.UnblockableTargetEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.CardImpl;

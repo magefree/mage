@@ -10,6 +10,10 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Set;
 import java.util.UUID;
+import mage.MageObject;
+import mage.abilities.Ability;
+import mage.abilities.costs.mana.AlternateManaPaymentAbility;
+import mage.game.Game;
 
 /**
  * @author noxx
@@ -85,7 +89,7 @@ public class ManaUtil {
             chosenManaAbility = chosenManaAbilityForHybrid != null ? chosenManaAbilityForHybrid : chosenManaAbility;
         }
 
-        if (countColored.size() == 0) { // seems there is no colorful mana we can pay for
+        if (countColored.isEmpty()) { // seems there is no colorful mana we can pay for
             // try to pay {1}
             if (unpaidMana.getColorless() > 0) {
                 // use any (lets choose first)
@@ -334,4 +338,28 @@ public class ManaUtil {
 
         return useableAbilities;
     }
+    
+    /**
+     * This activates the special button inthe feedback panel of the client 
+     * if there exists special ways to pay the mana (e.g. Delve, Convoke)
+     *
+     * @param source ability the mana costs have to be paid for
+     * @param game
+     * @param unpaid mana that has still to be paid
+     * @return message to be shown in human players feedback area
+     */
+    public static String addSpecialManaPayAbilities(Ability source, Game game, ManaCost unpaid) {
+        // check for special mana payment possibilities
+        MageObject mageObject = source.getSourceObject(game);        
+        if (mageObject != null) {            
+            for (Ability ability :mageObject.getAbilities()) {
+                if (ability instanceof AlternateManaPaymentAbility) {
+                    ((AlternateManaPaymentAbility) ability).addSpecialAction(source, game, unpaid);
+                }
+            }
+            return unpaid.getText() + "<div style='font-size:11pt'>" + mageObject.getLogName() + "</div>";
+        } else {
+            return unpaid.getText();
+        }
+    }    
 }

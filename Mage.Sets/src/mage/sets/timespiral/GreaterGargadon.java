@@ -104,7 +104,7 @@ class GreaterGargadonAbility extends ActivatedAbilityImpl {
     @Override
     public boolean canActivate(UUID playerId, Game game) {
         Card card = game.getCard(this.getSourceId());
-        if(super.canActivate(playerId, game) && card != null && card.getCounters().getCount(CounterType.TIME) > 0){
+        if(super.canActivate(playerId, game) && card != null && card.getCounters(game).getCount(CounterType.TIME) > 0){
             return true;
         }
         return false;

@@ -35,7 +35,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.CreatureEntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.LeylineAbility;
 import mage.cards.CardImpl;

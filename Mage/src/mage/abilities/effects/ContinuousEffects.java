@@ -331,6 +331,7 @@ public class ContinuousEffects implements Serializable {
         if(auraReplacementEffect.checksEventType(event, game) && auraReplacementEffect.applies(event, null, game)){
             replaceEffects.put(auraReplacementEffect, null);
         }
+        boolean checkLKI = event.getType().equals(EventType.ZONE_CHANGE) || event.getType().equals(EventType.DESTROYED_PERMANENT);
         //get all applicable transient Replacement effects
         for (ReplacementEffect effect: replacementEffects) {
             if (!effect.checksEventType(event, game)) {
@@ -344,7 +345,7 @@ public class ContinuousEffects implements Serializable {
             HashSet<Ability> abilities = replacementEffects.getAbility(effect.getId());
             HashSet<Ability> applicableAbilities = new HashSet<>();
             for (Ability ability : abilities) {
-                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, false)) {
+                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, checkLKI)) {
                     if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                         if (!game.getScopeRelevant() || effect.hasSelfScope() || !event.getTargetId().equals(ability.getSourceId())) {
                             if (checkAbilityStillExists(ability, effect, event, game)) {

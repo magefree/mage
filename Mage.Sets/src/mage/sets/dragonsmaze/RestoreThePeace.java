@@ -54,7 +54,7 @@ public class RestoreThePeace extends CardImpl {
 
         // Return each creature that dealt damage this turn to its owner's hand.
         this.getSpellAbility().addEffect(new RestoreThePeaceEffect());
-        this.addWatcher(new SourceDidDamageWatcher());
+        this.getSpellAbility().addWatcher(new SourceDidDamageWatcher());
 
     }
 

@@ -2,6 +2,7 @@ package org.mage.test.cards.single;
 
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
+import mage.abilities.Ability;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -51,7 +52,7 @@ public class HomicidalSeclusionTest extends CardTestPlayerBase {
 
         assertPowerToughness(playerA, "Horned Turtle", 4, 5, Filter.ComparisonScope.All);
 
-        Abilities abilities = new AbilitiesImpl();
+        Abilities<Ability> abilities = new AbilitiesImpl<>();
         abilities.add(LifelinkAbility.getInstance());
         assertAbilities(playerA, "Horned Turtle", abilities);
     }
@@ -95,7 +96,7 @@ public class HomicidalSeclusionTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Elite Vanguard", 0);
         assertPowerToughness(playerA, "Air Elemental", 7, 5, Filter.ComparisonScope.All);
 
-        Abilities abilities = new AbilitiesImpl();
+        Abilities<Ability> abilities = new AbilitiesImpl<>();
         abilities.add(LifelinkAbility.getInstance());
         assertAbilities(playerA, "Air Elemental", abilities);
     }

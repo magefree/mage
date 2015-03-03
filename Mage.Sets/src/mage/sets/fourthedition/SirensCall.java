@@ -69,7 +69,7 @@ public class SirensCall extends CardImpl {
         
         // At the beginning of the next end step, destroy all non-Wall creatures that player controls that didn't attack this turn. Ignore this effect for each creature the player didn't control continuously since the beginning of the turn.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SirensCallDestroyEffect())));
-        this.addWatcher(new AttackedThisTurnWatcher());
+        this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
     }
 
     public SirensCall(final SirensCall card) {

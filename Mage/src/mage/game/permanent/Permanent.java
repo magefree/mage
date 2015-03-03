@@ -34,12 +34,15 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.counters.Counters;
 import mage.game.Controllable;
 import mage.game.Game;
 
 public interface Permanent extends Card, Controllable {
 
+    void setControllerId(UUID controllerId);
     boolean isTapped();
     boolean untap(Game game);
     boolean tap(Game game);
@@ -70,6 +73,15 @@ public interface Permanent extends Card, Controllable {
     boolean isMonstrous();
     void setMonstrous(boolean value);
 
+    void setCardNumber(int cid);
+    void setExpansionSetCode(String expansionSetCode);
+    void setRarity(Rarity rarity);
+    void setFlipCard(boolean flipCard);
+    void setFlipCardName(String flipCardName);
+    void setSecondCardFace(Card card);
+    
+    Counters getCounters();
+    
     List<UUID> getAttachments();
     UUID getAttachedTo();
     void attachTo(UUID permanentId, Game game);

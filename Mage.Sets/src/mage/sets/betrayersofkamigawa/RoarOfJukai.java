@@ -34,7 +34,7 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.Count
 import mage.abilities.costs.common.GainLifeOpponentCost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

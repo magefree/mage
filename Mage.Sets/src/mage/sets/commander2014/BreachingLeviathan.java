@@ -68,8 +68,7 @@ public class BreachingLeviathan extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new ConditionalOneShotEffect(new BreachingLeviathanEffect(), new CastFromHandCondition(),
                 "if you cast it from your hand, tap all nonblue creatures. Those creatures don't untap during their controllers' next untap steps"));
-        this.addAbility(ability);
-        this.addWatcher(new CastFromHandWatcher());
+        this.addAbility(ability, new CastFromHandWatcher());
     }
 
     public BreachingLeviathan(final BreachingLeviathan card) {

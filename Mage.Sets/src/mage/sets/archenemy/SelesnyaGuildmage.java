@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class SelesnyaGuildmage extends mage.sets.ravnika.SelesnyaGuildmage {
+public class SelesnyaGuildmage extends mage.sets.ravnica.SelesnyaGuildmage {
 
     public SelesnyaGuildmage(UUID ownerId) {
         super(ownerId);

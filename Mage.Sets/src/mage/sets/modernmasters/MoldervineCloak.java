@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class MoldervineCloak extends mage.sets.ravnika.MoldervineCloak {
+public class MoldervineCloak extends mage.sets.ravnica.MoldervineCloak {
 
     public MoldervineCloak(UUID ownerId) {
         super(ownerId);

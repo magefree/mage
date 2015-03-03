@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author magenoxx_at_gmail.com
  */
-public class OvergrownTomb extends mage.sets.ravnika.OvergrownTomb {
+public class OvergrownTomb extends mage.sets.ravnica.OvergrownTomb {
 
     public OvergrownTomb(UUID ownerId) {
         super(ownerId);

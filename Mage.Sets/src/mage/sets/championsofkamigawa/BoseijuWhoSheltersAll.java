@@ -75,8 +75,7 @@ public class BoseijuWhoSheltersAll extends CardImpl {
         ability.getEffects().get(0).setText("Add {1} to your mana pool. If that mana is spent on an instant or sorcery spell, that spell can't be countered by spells or abilities");
         this.addAbility(ability);
                 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoseijuWhoSheltersAllCantCounterEffect()));        
-        this.addWatcher(new BoseijuWhoSheltersAllWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoseijuWhoSheltersAllCantCounterEffect()), new BoseijuWhoSheltersAllWatcher());
     }
 
     public BoseijuWhoSheltersAll(final BoseijuWhoSheltersAll card) {

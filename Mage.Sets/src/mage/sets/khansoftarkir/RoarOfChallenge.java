@@ -32,7 +32,7 @@ import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.combat.MustBeBlockedByAllTargetEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;

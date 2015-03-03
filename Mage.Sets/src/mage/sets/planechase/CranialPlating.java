@@ -39,7 +39,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continious.BoostEquippedEffect;
+import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;

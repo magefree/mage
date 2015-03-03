@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.continious.GainAbilityAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -106,7 +106,7 @@ class BramblewoodParagonReplacementEffect extends ReplacementEffectImpl {
             Permanent creature = game.getPermanent(event.getTargetId());
             if (creature != null && creature.getControllerId().equals(source.getControllerId()) 
                     && creature.getCardType().contains(CardType.CREATURE)
-                    && creature.getSubtype().contains("Warrior")
+                    && creature.hasSubtype("Warrior")
                     && !event.getTargetId().equals(source.getSourceId())) {
                 return true;
             }

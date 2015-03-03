@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;

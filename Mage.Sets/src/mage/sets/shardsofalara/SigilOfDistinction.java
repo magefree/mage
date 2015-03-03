@@ -41,7 +41,7 @@ import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.dynamicvalue.common.CountersCount;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.BoostEquippedEffect;
+import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;

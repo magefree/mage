@@ -30,7 +30,7 @@ package mage.sets.eventide;
 import java.util.UUID;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.common.continious.BoostAllEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
@@ -72,7 +72,7 @@ public class UnnervingAssault extends CardImpl {
                 new BoostAllEffect(1, 0, Duration.EndOfTurn, filter2, false),
                 new ManaWasSpentCondition(ColoredManaSymbol.R), " and creatures you control get +1/0 until end of turn if {R} was spent to cast it"));
         this.addInfo("Info1", "<i>(Do both if {U}{R} was spent.)</i>");
-        this.addWatcher(new ManaSpentToCastWatcher());
+        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
         
     }
 

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class TwilightDrover extends mage.sets.ravnika.TwilightDrover {
+public class TwilightDrover extends mage.sets.ravnica.TwilightDrover {
 
     public TwilightDrover(UUID ownerId) {
         super(ownerId);

@@ -36,7 +36,7 @@ import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCreaturePermanent;

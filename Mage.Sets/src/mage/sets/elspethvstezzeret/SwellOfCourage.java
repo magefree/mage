@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.ReinforceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

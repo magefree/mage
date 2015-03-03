@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class Sandsower extends mage.sets.ravnika.Sandsower {
+public class Sandsower extends mage.sets.ravnica.Sandsower {
 
     public Sandsower(UUID ownerId) {
         super(ownerId);

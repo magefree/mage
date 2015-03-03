@@ -55,7 +55,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
-import mage.util.functions.CopyFunction;
 import mage.util.functions.CopyTokenFunction;
 
 
@@ -379,16 +378,6 @@ public class CardUtil {
         spellAbility.getManaCostsToPay().addAll(adjustedCost);
     }
     
-    /**
-     * Returns function that copies params\abilities from one card to another.
-     *
-     * @param target
-     */
-    @Deprecated
-    //public static CopyFunction copyTo(Card target) {
-    private static CopyFunction copyTo(Card target) {
-        return new CopyFunction(target);
-    }
 
     /**
      * Returns function that copies params\abilities from one card to {@link Token}.
@@ -490,11 +479,18 @@ public class CardUtil {
     }
     
     public static UUID getObjectExileZoneId(Game game, MageObject mageObject) {
+        return getObjectExileZoneId(game, mageObject, false);
+    }
+
+    public static UUID getObjectExileZoneId(Game game, MageObject mageObject, boolean previous) {
         int zoneChangeCounter = 0;
         if (mageObject instanceof Permanent) {
             zoneChangeCounter = ((Permanent) mageObject).getZoneChangeCounter();
         } else if (mageObject instanceof Card) {
             zoneChangeCounter = ((Card) mageObject).getZoneChangeCounter();
+        }
+        if (zoneChangeCounter > 0 && previous) {
+            zoneChangeCounter--;
         }
         return getExileZoneId(getObjectZoneString(SOURCE_EXILE_ZONE_TEXT,mageObject.getId(), game, zoneChangeCounter, false), game);
     }

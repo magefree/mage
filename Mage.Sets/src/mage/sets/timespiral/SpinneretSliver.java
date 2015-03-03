@@ -30,7 +30,7 @@ package mage.sets.timespiral;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.GainAbilityAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

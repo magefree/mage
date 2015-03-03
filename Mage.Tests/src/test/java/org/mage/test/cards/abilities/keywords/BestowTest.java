@@ -28,11 +28,11 @@
 
 package org.mage.test.cards.abilities.keywords;
 
-import junit.framework.Assert;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -231,5 +231,45 @@ public class BestowTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Nyxborn Rollicker", 0);
         assertGraveyardCount(playerA, "Nyxborn Rollicker", 1);
         
-    }      
+    }
+
+    /**
+     * Test that CMC of a spell cast with bestowed is correct
+     * Disdainful Stroke doesn't check converted mana cost correctly. Opponent was
+     * able to use it to counter a Hypnotic Siren cast with Bestow.
+     */
+    @Test
+    public void bestowCheckForCorrectCMC() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 7);
+        // Enchantment Creature — Siren
+        // 1/1
+        // Bestow {5}{U}{U} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
+        // Flying
+        // You control enchanted creature.
+        // Enchanted creature gets +1/+1 and has flying.
+        addCard(Zone.HAND, playerA, "Hypnotic Siren");
+        // Instant {1}{U}
+        // Counter target spell with converted mana cost 4 or greater.
+        addCard(Zone.HAND, playerB, "Disdainful Stroke");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hypnotic Siren using bestow", "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Disdainful Stroke", "Hypnotic Siren");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        //
+        assertHandCount(playerA, "Hypnotic Siren", 0);
+        assertGraveyardCount(playerA, "Hypnotic Siren", 0);
+        assertHandCount(playerB, "Disdainful Stroke", 1);
+        assertPermanentCount(playerA, "Hypnotic Siren", 1);
+
+        // because cast with bestow, Boon Satyr may not be tapped
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+        assertPowerToughness(playerA, "Silvercoat Lion", 3,3);
+
+    }
 }

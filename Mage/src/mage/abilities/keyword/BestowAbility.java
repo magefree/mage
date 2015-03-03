@@ -34,13 +34,14 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continious.SourceEffect;
+import mage.abilities.effects.common.continuous.SourceEffect;
 import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import static mage.constants.Layer.TypeChangingEffects_4;
 import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
 import mage.constants.SubLayer;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
@@ -108,6 +109,7 @@ public class BestowAbility extends SpellAbility {
 
     public BestowAbility(Card card, String manaString) {
         super(new ManaCostsImpl(manaString), card.getName() + " using bestow");
+        this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
         this.timing = TimingRule.SORCERY;
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.addTarget(auraTarget);

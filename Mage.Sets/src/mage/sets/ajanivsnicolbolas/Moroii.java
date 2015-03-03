@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class Moroii extends mage.sets.ravnika.Moroii {
+public class Moroii extends mage.sets.ravnica.Moroii {
 
     public Moroii(UUID ownerId) {
         super(ownerId);

@@ -65,8 +65,7 @@ public class PhageTheUntouchable extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(new LoseGameSourceControllerEffect(), false),
                 new InvertCondition(new CastFromHandCondition()),
                 "When {this} enters the battlefield, if you didn't cast it from your hand, you lose the game"
-        ));
-        this.addWatcher(new CastFromHandWatcher());
+        ), new CastFromHandWatcher());
 
         // Whenever Phage deals combat damage to a creature, destroy that creature. It can't be regenerated.
         this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(new DestroyTargetEffect(true), false, true));

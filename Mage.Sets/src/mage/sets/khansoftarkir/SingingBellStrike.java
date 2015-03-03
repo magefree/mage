@@ -38,7 +38,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
 import mage.abilities.effects.common.TapEnchantedEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.AttachmentType;

@@ -37,8 +37,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.turn.SkipNextTurnSourceEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
@@ -81,8 +81,7 @@ public class ChronatogTotem extends CardImpl {
                 new ChronatogTotemCondition(),
                 "{0}: {this} gets +3/+3 until end of turn. You skip your next turn. Activate this ability only once each turn and only if {this} is a creature");
         ability.addEffect(new SkipNextTurnSourceEffect());
-        this.addAbility(ability);
-        this.addWatcher(new ActivatedAbilityUsedThisTurnWatcher());
+        this.addAbility(ability, new ActivatedAbilityUsedThisTurnWatcher());
     }
 
     public ChronatogTotem(final ChronatogTotem card) {

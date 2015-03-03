@@ -36,8 +36,8 @@ import mage.abilities.dynamicvalue.common.TargetPermanentPowerCount;
 import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -68,8 +68,7 @@ public class Berserk extends CardImpl {
         this.color.setGreen(true);
 
         // Cast Berserk only before the combat damage step. (Zone = all because it can be at least graveyard or hand)
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new BerserkReplacementEffect()));
-        this.addWatcher(new CombatDamageStepStartedWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new BerserkReplacementEffect()), new CombatDamageStepStartedWatcher());
 
         // Target creature gains trample and gets +X/+0 until end of turn, where X is its power. 
         // At the beginning of the next end step, destroy that creature if it attacked this turn.
@@ -81,7 +80,7 @@ public class Berserk extends CardImpl {
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new BerserkDestroyEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.addWatcher(new AttackedThisTurnWatcher());
+        this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
 
     }
 

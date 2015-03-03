@@ -34,6 +34,7 @@ import mage.abilities.common.DealsCombatDamageToACreatureTriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -56,14 +57,18 @@ public class OhranViper extends CardImpl {
         this.supertype.add("Snow");
         this.subtype.add("Snake");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
         // Whenever Ohran Viper deals combat damage to a creature, destroy that creature at end of combat.
-        this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(new OhranViperDestroyEffect(), false, true));
+        this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(
+                new CreateDelayedTriggeredAbilityEffect(
+                        new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect("destroy that creature at end of combat")), true),
+                false, 
+                true));
+
         // Whenever Ohran Viper deals combat damage to a player, you may draw a card.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
     }
 
     public OhranViper(final OhranViper card) {
@@ -73,37 +78,5 @@ public class OhranViper extends CardImpl {
     @Override
     public OhranViper copy() {
         return new OhranViper(this);
-    }
-}
-
-class OhranViperDestroyEffect extends OneShotEffect {
-
-    OhranViperDestroyEffect() {
-        super(Outcome.DestroyPermanent);
-        staticText = "destroy that creature at end of combat";
-    }
-
-    OhranViperDestroyEffect(final OhranViperDestroyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent targetCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        if (targetCreature != null) {
-            AtTheEndOfCombatDelayedTriggeredAbility delayedAbility = new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect());
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game));
-            delayedAbility.getEffects().get(0).setTargetPointer(new FixedTarget(targetCreature.getId()));
-            game.addDelayedTriggeredAbility(delayedAbility);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public OhranViperDestroyEffect copy() {
-        return new OhranViperDestroyEffect(this);
     }
 }

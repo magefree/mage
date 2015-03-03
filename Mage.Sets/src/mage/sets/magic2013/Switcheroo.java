@@ -29,7 +29,7 @@ package mage.sets.magic2013;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.continious.ExchangeControlTargetEffect;
+import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;

@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -58,7 +58,7 @@ public class FledglingImp extends CardImpl {
 
         // {B}, Discard a card: Fledgling Imp gains flying until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{B}"));
-        ability.addCost(new DiscardCardCost(true));
+        ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }
 

@@ -34,7 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DealsDamageToOpponentTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continious.GainAbilityPairedEffect;
+import mage.abilities.effects.common.continuous.GainAbilityPairedEffect;
 import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.CardImpl;
 import mage.constants.Zone;

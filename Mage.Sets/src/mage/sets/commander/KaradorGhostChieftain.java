@@ -82,8 +82,7 @@ public class KaradorGhostChieftain extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new KaradorGhostChieftainCostReductionEffect()));
         
         // During each of your turns, you may cast one creature card from your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KaradorGhostChieftainContinuousEffect()));
-        this.addWatcher(new KaradorGhostChieftainWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KaradorGhostChieftainContinuousEffect()), new KaradorGhostChieftainWatcher());
     }
 
     public KaradorGhostChieftain(final KaradorGhostChieftain card) {
@@ -120,8 +119,7 @@ class KaradorGhostChieftainCostReductionEffect extends CostModificationEffectImp
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if ((abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility)
-                && abilityToModify.getSourceId().equals(source.getSourceId())) {
+        if ((abilityToModify instanceof SpellAbility) && abilityToModify.getSourceId().equals(source.getSourceId())) {
             return game.getCard(abilityToModify.getSourceId()) != null;
         }
         return false;

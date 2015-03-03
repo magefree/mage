@@ -28,6 +28,8 @@
 
 package mage.abilities.costs.common;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
@@ -46,10 +48,16 @@ import mage.util.CardUtil;
  */
 public class ExileFromGraveCost extends CostImpl {
 
+    private final List<Card> exiledCards = new ArrayList<>();
+
     public ExileFromGraveCost(TargetCardInYourGraveyard target) {
         this.addTarget(target);
         if (target.getMaxNumberOfTargets() > 1) {
-            this.text = "Exile " + CardUtil.numberToText(target.getMaxNumberOfTargets()) + " " + target.getTargetName();
+            this.text = "Exile " + 
+                    (target.getNumberOfTargets() < target.getMaxNumberOfTargets() ? "up to ":"") +
+                    CardUtil.numberToText(target.getMaxNumberOfTargets()) +
+                    " " +
+                    target.getTargetName();
         }
         else {
             this.text = "Exile " + target.getTargetName();
@@ -72,6 +80,7 @@ public class ExileFromGraveCost extends CostImpl {
 
     public ExileFromGraveCost(final ExileFromGraveCost cost) {
         super(cost);
+        this.exiledCards.addAll(cost.getExiledCards());
     }
 
     @Override
@@ -84,6 +93,7 @@ public class ExileFromGraveCost extends CostImpl {
                     if (card == null || !game.getState().getZone(targetId).equals(Zone.GRAVEYARD)) {
                         return false;
                     }
+                    exiledCards.add(card);
                     paid |= controller.moveCardToExileWithInfo(card, null, null, sourceId, game, Zone.GRAVEYARD);
                 }
             }
@@ -102,4 +112,7 @@ public class ExileFromGraveCost extends CostImpl {
         return new ExileFromGraveCost(this);
     }
 
+    public List<Card> getExiledCards() {
+        return exiledCards;
+    }
 }

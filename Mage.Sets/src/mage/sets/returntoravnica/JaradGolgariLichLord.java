@@ -42,7 +42,7 @@ import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.dynamicvalue.common.SacrificeCostCreaturesPower;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.constants.Zone;

@@ -1,7 +1,7 @@
 package mage.abilities.keyword;
 
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.constants.Duration;
 import mage.filter.common.FilterAttackingCreature;
 

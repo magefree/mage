@@ -61,8 +61,8 @@ public class TunnelIgnus extends CardImpl {
         this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        this.addWatcher(new TunnelIgnusWatcher());
-        this.addAbility(new TunnelIgnusTriggeredAbility());
+
+        this.addAbility(new TunnelIgnusTriggeredAbility(), new TunnelIgnusWatcher());
     }
 
     public TunnelIgnus(final TunnelIgnus card) {

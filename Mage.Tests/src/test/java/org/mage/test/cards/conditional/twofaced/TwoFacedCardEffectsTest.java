@@ -1,10 +1,10 @@
 package org.mage.test.cards.conditional.twofaced;
 
-import junit.framework.Assert;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.game.permanent.Permanent;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 

@@ -42,7 +42,7 @@ import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
@@ -71,7 +71,7 @@ public class MyojinOfSeeingWinds extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        this.addWatcher(new CastFromHandWatcher());
+        this.getSpellAbility().addWatcher(new CastFromHandWatcher());
 
         // Myojin of Seeing Winds enters the battlefield with a divinity counter on it if you cast it from your hand.
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.DIVINITY.createInstance()), new CastFromHandCondition(), ""), "{this} enters the battlefield with a divinity counter on it if you cast it from your hand"));

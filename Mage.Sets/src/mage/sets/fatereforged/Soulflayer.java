@@ -32,10 +32,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.continious.SourceEffect;
+import mage.abilities.effects.common.continuous.SourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.DelveAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -59,6 +60,7 @@ import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -95,10 +97,11 @@ public class Soulflayer extends CardImpl {
 class SoulflayerEffect extends ContinuousEffectImpl implements SourceEffect {
 
     private Set<Ability> abilitiesToAdd;
+    private MageObjectReference objectReference = null;
 
     public SoulflayerEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        staticText = "If a creature card with flying was exiled with Soulflayer's delve ability, Soulflayer has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, reach, trample, and vigilance";
+        staticText = "If a creature card with flying was exiled with {this}'s delve ability, {this} has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, reach, trample, and vigilance";
         abilitiesToAdd = null;
     }
 
@@ -108,6 +111,7 @@ class SoulflayerEffect extends ContinuousEffectImpl implements SourceEffect {
             this.abilitiesToAdd = new HashSet<>();
             this.abilitiesToAdd.addAll(effect.abilitiesToAdd);
         }
+        this.objectReference = effect.objectReference;
     }
 
     @Override
@@ -119,51 +123,49 @@ class SoulflayerEffect extends ContinuousEffectImpl implements SourceEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            if (abilitiesToAdd == null) {
-                for (Ability ability :permanent.getAbilities()) {
-                    if (ability instanceof DelveAbility) {
-                        List<Card> delvedCards = ((DelveAbility) ability).getDelvedCards();
-                        abilitiesToAdd = new HashSet<>();
-                        if (delvedCards != null) {
-                            for(Card card: delvedCards) {
-                                if (!card.getCardType().contains(CardType.CREATURE)) {
-                                    continue;
-                                }
-                                for (Ability cardAbility: card.getAbilities()) {
-                                    if (cardAbility instanceof FlyingAbility) {
-                                        abilitiesToAdd.add(FlyingAbility.getInstance());
-                                    }
-                                    if (cardAbility instanceof FirstStrikeAbility) {
-                                        abilitiesToAdd.add(FirstStrikeAbility.getInstance());
-                                    }
-                                    if (cardAbility instanceof DoubleStrikeAbility) {
-                                        abilitiesToAdd.add(DoubleStrikeAbility.getInstance());
-                                    }
-                                    if (cardAbility instanceof DeathtouchAbility) {
-                                        abilitiesToAdd.add(DeathtouchAbility.getInstance());
-                                    }
-                                    if (cardAbility instanceof HasteAbility) {
-                                        abilitiesToAdd.add(HasteAbility.getInstance());
-                                    }
-                                    if (cardAbility instanceof HexproofAbility) {
-                                        abilitiesToAdd.add(HexproofAbility.getInstance());
-                                    }
-                                    if (cardAbility instanceof IndestructibleAbility) {
-                                        abilitiesToAdd.add(IndestructibleAbility.getInstance());
-                                    }
-                                    if (cardAbility instanceof LifelinkAbility) {
-                                        abilitiesToAdd.add(LifelinkAbility.getInstance());
-                                    }
-                                    if (cardAbility instanceof ReachAbility) {
-                                        abilitiesToAdd.add(ReachAbility.getInstance());
-                                    }
-                                    if (cardAbility instanceof TrampleAbility) {
-                                        abilitiesToAdd.add(TrampleAbility.getInstance());
-                                    }
-                                    if (cardAbility instanceof VigilanceAbility) {
-                                        abilitiesToAdd.add(VigilanceAbility.getInstance());
-                                    }
-                                }
+            if (objectReference == null || !objectReference.refersTo(permanent)) {
+                abilitiesToAdd = new HashSet<>();
+                this.objectReference = new MageObjectReference(permanent);
+                String keyString = CardUtil.getCardZoneString("delvedCards", source.getSourceId(), game, true);
+                List<Card> delvedCards = (List<Card>) game.getState().getValue(keyString);
+                if (delvedCards != null) {
+                    for(Card card: delvedCards) {
+                        if (!card.getCardType().contains(CardType.CREATURE)) {
+                            continue;
+                        }
+                        for (Ability cardAbility: card.getAbilities()) {
+                            if (cardAbility instanceof FlyingAbility) {
+                                abilitiesToAdd.add(FlyingAbility.getInstance());
+                            }
+                            if (cardAbility instanceof FirstStrikeAbility) {
+                                abilitiesToAdd.add(FirstStrikeAbility.getInstance());
+                            }
+                            if (cardAbility instanceof DoubleStrikeAbility) {
+                                abilitiesToAdd.add(DoubleStrikeAbility.getInstance());
+                            }
+                            if (cardAbility instanceof DeathtouchAbility) {
+                                abilitiesToAdd.add(DeathtouchAbility.getInstance());
+                            }
+                            if (cardAbility instanceof HasteAbility) {
+                                abilitiesToAdd.add(HasteAbility.getInstance());
+                            }
+                            if (cardAbility instanceof HexproofAbility) {
+                                abilitiesToAdd.add(HexproofAbility.getInstance());
+                            }
+                            if (cardAbility instanceof IndestructibleAbility) {
+                                abilitiesToAdd.add(IndestructibleAbility.getInstance());
+                            }
+                            if (cardAbility instanceof LifelinkAbility) {
+                                abilitiesToAdd.add(LifelinkAbility.getInstance());
+                            }
+                            if (cardAbility instanceof ReachAbility) {
+                                abilitiesToAdd.add(ReachAbility.getInstance());
+                            }
+                            if (cardAbility instanceof TrampleAbility) {
+                                abilitiesToAdd.add(TrampleAbility.getInstance());
+                            }
+                            if (cardAbility instanceof VigilanceAbility) {
+                                abilitiesToAdd.add(VigilanceAbility.getInstance());
                             }
                         }
                     }

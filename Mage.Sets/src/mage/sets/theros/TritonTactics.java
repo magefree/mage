@@ -39,7 +39,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -77,7 +77,7 @@ public class TritonTactics extends CardImpl {
         this.getSpellAbility().addEffect(new TritonTacticsUntapTargetEffect());
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new TritonTacticsTriggeredAbility()));
 
-        this.addWatcher(new BlockedCreaturesWatcher());
+        this.getSpellAbility().addWatcher(new BlockedCreaturesWatcher());
 
 
     }

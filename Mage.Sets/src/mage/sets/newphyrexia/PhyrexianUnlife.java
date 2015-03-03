@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.continious.DontLoseByZeroOrLessLifeEffect;
+import mage.abilities.effects.common.continuous.DontLoseByZeroOrLessLifeEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

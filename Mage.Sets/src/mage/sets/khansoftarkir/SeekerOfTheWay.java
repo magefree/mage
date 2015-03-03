@@ -30,7 +30,7 @@ package mage.sets.khansoftarkir;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.ProwessAbility;
 import mage.cards.CardImpl;

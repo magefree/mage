@@ -99,11 +99,13 @@ class GoblinCharbelcherEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl();
+        boolean landFound = false;
         while (controller.getLibrary().size() > 0) {
             Card card = controller.getLibrary().removeFromTop(game);
             if (card != null) {
                 cards.add(card);
                 if (card.getCardType().contains(CardType.LAND)){
+                    landFound = true;
                     if(card.getSubtype().contains("Mountain")){
                         isMountain = true;
                     }
@@ -113,8 +115,12 @@ class GoblinCharbelcherEffect extends OneShotEffect {
                 break;
             }
         }
+
         controller.revealCards(sourceObject.getLogName(), cards, game);
         int damage = cards.size();
+        if (landFound) {
+            damage--;
+        }
         if(isMountain == true){
             damage *= 2;
         }

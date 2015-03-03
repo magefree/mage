@@ -28,6 +28,7 @@
 
 package mage.abilities;
 
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.UUID;
 
@@ -43,10 +44,17 @@ public class SpecialActions extends AbilitiesImpl<SpecialAction> {
         super(actions);
     }
 
-    public LinkedHashMap<UUID, SpecialAction> getControlledBy(UUID controllerId) {
+    /**
+     *
+     * @param controllerId
+     * @param manaAction true  = if mana actions should get returned
+     *                   false = only non mana actions get returned
+     * @return
+     */
+    public LinkedHashMap<UUID, SpecialAction> getControlledBy(UUID controllerId, boolean manaAction) {
         LinkedHashMap<UUID, SpecialAction> controlledBy = new LinkedHashMap<>();
         for (SpecialAction action: this) {
-            if (action.getControllerId().equals(controllerId)) {
+            if (action.getControllerId().equals(controllerId) && action.isManaAction() == manaAction) {
                 controlledBy.put(action.id, action);
             }
         }
@@ -58,4 +66,12 @@ public class SpecialActions extends AbilitiesImpl<SpecialAction> {
         return new SpecialActions(this);
     }
 
+    public void removeManaActions() {
+        for (Iterator<SpecialAction> iterator = this.iterator(); iterator.hasNext();) {
+            SpecialAction next = iterator.next();
+            if (next.isManaAction()) {
+                iterator.remove();
+            }
+        }
+    }
 }

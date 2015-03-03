@@ -2,6 +2,7 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
+import mage.abilities.Ability;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -346,7 +347,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Nearheath Pilgrim", 2, 1);
         assertPowerToughness(playerA, "Elite Vanguard", 2, 1);
 
-        Abilities abilities = new AbilitiesImpl();
+        Abilities<Ability> abilities = new AbilitiesImpl<>();
         abilities.add(LifelinkAbility.getInstance());
         assertAbilities(playerA, "Nearheath Pilgrim", abilities);
         assertAbilities(playerA, "Elite Vanguard", abilities);
@@ -373,7 +374,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
 
         Permanent trustedForcemange = getPermanent("Trusted Forcemage", playerA.getId());
         Permanent eliteVanguard = getPermanent("Elite Vanguard", playerA.getId());
-        Assert.assertTrue(trustedForcemange.getPairedCard() == null);
-        Assert.assertTrue(eliteVanguard.getPairedCard() == null);
+        Assert.assertEquals(trustedForcemange.getPairedCard(), null);
+        Assert.assertEquals(eliteVanguard.getPairedCard(),null);
     }
 }

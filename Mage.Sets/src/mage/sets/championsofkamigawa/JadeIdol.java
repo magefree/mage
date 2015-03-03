@@ -35,7 +35,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
+import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.game.permanent.token.Token;

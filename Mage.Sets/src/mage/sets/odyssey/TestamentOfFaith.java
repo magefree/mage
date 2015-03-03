@@ -34,7 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.continious.SourceEffect;
+import mage.abilities.effects.common.continuous.SourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

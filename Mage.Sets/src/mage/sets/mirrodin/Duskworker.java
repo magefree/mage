@@ -36,7 +36,7 @@ import mage.abilities.common.BecomesBlockedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.constants.Zone;

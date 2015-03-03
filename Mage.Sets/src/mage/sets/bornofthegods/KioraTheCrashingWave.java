@@ -37,7 +37,7 @@ import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
-import mage.abilities.effects.common.continious.PlayAdditionalLandsControllerEffect;
+import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

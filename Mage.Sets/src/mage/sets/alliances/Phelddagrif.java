@@ -37,7 +37,7 @@ import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;

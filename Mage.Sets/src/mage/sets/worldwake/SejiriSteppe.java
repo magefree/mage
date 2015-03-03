@@ -31,7 +31,7 @@ package mage.sets.worldwake;
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.continious.GainProtectionFromColorTargetEffect;
+import mage.abilities.effects.common.continuous.GainProtectionFromColorTargetEffect;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

@@ -62,7 +62,7 @@ public class WavesOfAggression extends CardImpl {
         this.color.setWhite(true);
 
         // Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.
-        this.addWatcher(new AttackedThisTurnWatcher());
+        this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
         this.getSpellAbility().addEffect(new WavesOfAggressionUntapEffect());
         this.getSpellAbility().addEffect(new WavesOfAggressionAddPhasesEffect());        
         // Retrace

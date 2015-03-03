@@ -39,7 +39,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.BoostEnchantedEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;

@@ -27,28 +27,17 @@
  */
 package mage.sets.shadowmoor;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.BecomesColorTargetEffect;
+import mage.abilities.effects.common.continuous.BecomesColorOrColorsTargetEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -62,7 +51,6 @@ public class PrismwakeMerrow extends CardImpl {
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
@@ -70,7 +58,7 @@ public class PrismwakeMerrow extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // When Prismwake Merrow enters the battlefield, target permanent becomes the color or colors of your choice until end of turn.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ChangeColorOrColorsTargetEffect(), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BecomesColorOrColorsTargetEffect(Duration.EndOfTurn), false);
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
 
@@ -83,60 +71,5 @@ public class PrismwakeMerrow extends CardImpl {
     @Override
     public PrismwakeMerrow copy() {
         return new PrismwakeMerrow(this);
-    }
-}
-
-class ChangeColorOrColorsTargetEffect extends OneShotEffect {
-
-    public ChangeColorOrColorsTargetEffect() {
-        super(Outcome.Neutral);
-        staticText = "target permanent becomes the color or colors of your choice until end of turn";
-    }
-
-    public ChangeColorOrColorsTargetEffect(final ChangeColorOrColorsTargetEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        Permanent target = game.getPermanent(source.getFirstTarget());
-        List<ObjectColor> chosenColors = new ArrayList<>();
-        if (you != null && target != null) {
-            for (int i = 0; i < 5; i++) {
-                if (!you.chooseUse(Outcome.Neutral, "Do you wish to choose another color?", game)) {
-                    break;
-                }
-                ChoiceColor choiceColor = new ChoiceColor();
-                you.choose(Outcome.Benefit, choiceColor, game);
-                if (!you.isInGame()) {
-                    return false;
-                }
-                game.informPlayers(target.getName() + ": " + you.getName() + " has chosen " + choiceColor.getChoice());
-                if (choiceColor.getColor().isBlack()) {
-                    chosenColors.add(ObjectColor.BLACK);
-                } else if (choiceColor.getColor().isBlue()) {
-                    chosenColors.add(ObjectColor.BLUE);
-                } else if (choiceColor.getColor().isRed()) {
-                    chosenColors.add(ObjectColor.RED);
-                } else if (choiceColor.getColor().isGreen()) {
-                    chosenColors.add(ObjectColor.GREEN);
-                } else if (choiceColor.getColor().isWhite()) {
-                    chosenColors.add(ObjectColor.WHITE);
-                }
-            }
-            for (ObjectColor color : chosenColors) {
-                ContinuousEffect effect = new BecomesColorTargetEffect(color, Duration.EndOfTurn, "is " + color);
-                effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
-                game.addEffect(effect, source);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public ChangeColorOrColorsTargetEffect copy() {
-        return new ChangeColorOrColorsTargetEffect(this);
     }
 }

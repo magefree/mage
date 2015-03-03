@@ -66,8 +66,7 @@ public class CourtHussar extends CardImpl {
                 new LookLibraryAndPickControllerEffect(new StaticValue(3), false, new StaticValue(1), new FilterCard(), Zone.LIBRARY, false, false),
                 false));
         // When Court Hussar enters the battlefield, sacrifice it unless {W} was spent to cast it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.W)), false));
-        this.addWatcher(new ManaSpentToCastWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.W)), false), new ManaSpentToCastWatcher());
     }
 
     public CourtHussar(final CourtHussar card) {

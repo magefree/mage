@@ -42,7 +42,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
-import mage.watchers.common.PermanentTappedForManaWatcher;
 
 /**
  *
@@ -58,7 +57,6 @@ public class ManaReflection extends CardImpl {
 
         // If you tap a permanent for mana, it produces twice as much of that mana instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ManaReflectionReplacementEffect()));
-        this.addWatcher(new PermanentTappedForManaWatcher());
 
     }
 
@@ -92,41 +90,35 @@ class ManaReflectionReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Mana mana = ((ManaEvent) event).getMana();
         if (mana.getBlack() > 0) {
-            ((ManaEvent) event).getMana().set(ManaType.BLACK, mana.count() * 2);
+            ((ManaEvent) event).getMana().set(ManaType.BLACK, mana.getBlack()* 2);
         }
         if (mana.getBlue() > 0) {
-            ((ManaEvent) event).getMana().set(ManaType.BLUE, mana.count() * 2);
+            ((ManaEvent) event).getMana().set(ManaType.BLUE, mana.getBlue() * 2);
         }
         if (mana.getWhite() > 0) {
-            ((ManaEvent) event).getMana().set(ManaType.WHITE, mana.count() * 2);
+            ((ManaEvent) event).getMana().set(ManaType.WHITE, mana.getWhite() * 2);
         }
         if (mana.getGreen() > 0) {
-            ((ManaEvent) event).getMana().set(ManaType.GREEN, mana.count() * 2);
+            ((ManaEvent) event).getMana().set(ManaType.GREEN, mana.getGreen() * 2);
         }
         if (mana.getRed() > 0) {
-            ((ManaEvent) event).getMana().set(ManaType.RED, mana.count() * 2);
+            ((ManaEvent) event).getMana().set(ManaType.RED, mana.getRed() * 2);
         }
         if (mana.getColorless() > 0) {
-            ((ManaEvent) event).getMana().set(ManaType.COLORLESS, mana.count() * 2);
+            ((ManaEvent) event).getMana().set(ManaType.COLORLESS, mana.getColorless() * 2);
         }
         return false;
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ADD_MANA
-                && event.getPlayerId().equals(source.getControllerId())
-                && game.getPermanentOrLKIBattlefield(event.getSourceId()) != null) {
-            UUID permanentId = game.getPermanentOrLKIBattlefield(event.getSourceId()).getId();
-            PermanentTappedForManaWatcher watcher = (PermanentTappedForManaWatcher) game.getState().getWatchers().get("PermanentTappedForMana");
-            if (watcher != null) {
-                if (watcher.permanentId.contains(permanentId)) {
-                    watcher.permanentId.remove(permanentId);
-                    return true;
-                }
-            }
-        }
-        return false;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {       
+        return event.getPlayerId().equals(source.getControllerId())
+                && game.getPermanentOrLKIBattlefield(event.getSourceId()) != null;
     }
 
     @Override

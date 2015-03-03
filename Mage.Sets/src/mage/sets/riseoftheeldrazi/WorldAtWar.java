@@ -61,9 +61,7 @@ public class WorldAtWar extends CardImpl {
         this.getSpellAbility().addEffect(new WorldAtWarEffect());
 
         // Rebound
-        this.addAbility(new ReboundAbility());
-
-        this.addWatcher(new AttackedThisTurnWatcher());
+        this.addAbility(new ReboundAbility(), new AttackedThisTurnWatcher());
     }
 
     public WorldAtWar(final WorldAtWar card) {

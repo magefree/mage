@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class VituGhaziTheCityTree extends mage.sets.ravnika.VituGhaziTheCityTree {
+public class VituGhaziTheCityTree extends mage.sets.ravnica.VituGhaziTheCityTree {
 
     public VituGhaziTheCityTree(UUID ownerId) {
         super(ownerId);

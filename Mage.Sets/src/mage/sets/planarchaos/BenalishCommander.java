@@ -34,7 +34,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

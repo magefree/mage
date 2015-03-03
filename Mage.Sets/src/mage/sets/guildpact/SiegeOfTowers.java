@@ -30,7 +30,7 @@ package mage.sets.guildpact;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
+import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.keyword.ReplicateAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

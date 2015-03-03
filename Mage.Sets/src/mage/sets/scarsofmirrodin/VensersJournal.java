@@ -38,8 +38,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect;
-import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect.HandSizeModification;
+import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
+import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect.HandSizeModification;
 import mage.cards.CardImpl;
 
 /**

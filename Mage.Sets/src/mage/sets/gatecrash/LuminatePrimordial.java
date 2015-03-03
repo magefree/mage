@@ -71,10 +71,10 @@ public class LuminatePrimordial extends CardImpl {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof EntersBattlefieldTriggeredAbility) {
+            ability.getTargets().clear();
             for(UUID opponentId : game.getOpponents(ability.getControllerId())) {
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null) {
-                    ability.getTargets().clear();
                     FilterCreaturePermanent filter = new FilterCreaturePermanent(new StringBuilder("creature from opponent ").append(opponent.getName()).toString());
                     filter.add(new ControllerIdPredicate(opponentId));
                     TargetCreaturePermanent target = new TargetCreaturePermanent(0,1, filter,false);

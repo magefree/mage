@@ -36,7 +36,7 @@ import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.effects.common.TapSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;

@@ -33,7 +33,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continious.LoseCreatureTypeSourceEffect;
+import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;

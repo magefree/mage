@@ -38,7 +38,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.effects.common.continious.BecomesBasicLandEnchantedEffect;
+import mage.abilities.effects.common.continuous.BecomesBasicLandEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -66,8 +66,10 @@ public class ContaminatedGround extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
         // Enchanted land is a Swamp.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesBasicLandEnchantedEffect("Swamp")));
+        
         // Whenever enchanted land becomes tapped, its controller loses 2 life.
         this.addAbility(new ContaminatedGroundAbility());
     }

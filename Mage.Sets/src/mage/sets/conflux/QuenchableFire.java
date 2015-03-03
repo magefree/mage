@@ -56,7 +56,9 @@ public class QuenchableFire extends CardImpl {
     public QuenchableFire(UUID ownerId) {
         super(ownerId, 70, "Quenchable Fire", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "CON";
-        this.color.setRed(true);
+
+        // Quenchable Fire deals 3 damage to target player.
+        // It deals an additional 3 damage to that player at the beginning of your next upkeep step unless he or she pays {U} before that step.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addEffect(new QuenchableFireEffect());
@@ -97,6 +99,7 @@ class QuenchableFireEffect extends OneShotEffect {
         delayedAbility.setSourceObject(source.getSourceObject(game));
         delayedAbility.getTargets().addAll(source.getTargets());
         game.addDelayedTriggeredAbility(delayedAbility);
+
         //create special action
         QuenchableFireSpecialAction newAction = new QuenchableFireSpecialAction(delayedAbility.getId());
         delayedAbility.setSpecialActionId(newAction.getId());
@@ -149,6 +152,7 @@ class QuenchableFireDelayedTriggeredAbility extends DelayedTriggeredAbility {
 class QuenchableFireSpecialAction extends SpecialAction {
 
     public QuenchableFireSpecialAction(UUID effectId) {
+        super();
         this.addCost(new ManaCostsImpl("{U}"));
         this.addEffect(new RemoveDelayedTriggeredAbilityEffect(effectId));
         this.addEffect(new RemoveSpecialActionEffect(this.getId()));

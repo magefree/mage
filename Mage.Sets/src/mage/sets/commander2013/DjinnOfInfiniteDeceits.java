@@ -34,7 +34,7 @@ import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.IsPhaseCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.continious.ExchangeControlTargetEffect;
+import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

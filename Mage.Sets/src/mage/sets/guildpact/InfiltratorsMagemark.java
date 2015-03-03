@@ -33,7 +33,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continious.BoostAllEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;

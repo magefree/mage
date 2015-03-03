@@ -33,7 +33,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BecomesBlockedTriggeredAbility;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 

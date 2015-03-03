@@ -37,7 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.constants.Zone;

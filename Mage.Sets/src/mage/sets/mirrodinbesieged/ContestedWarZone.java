@@ -28,6 +28,7 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
+import mage.Mana;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -43,8 +44,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.continious.BoostAllEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
@@ -103,12 +105,17 @@ class ContestedWarZoneAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event instanceof DamagedPlayerEvent) {
-            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
-            Permanent p = game.getPermanent(event.getSourceId());
-            if (damageEvent.getPlayerId().equals(controllerId) && damageEvent.isCombatDamage() && p != null && p.getCardType().contains(CardType.CREATURE)) {
-                game.getState().setValue(sourceId.toString(), p.getControllerId());
+        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
+        if (damageEvent.isCombatDamage()) {
+            Permanent permanent = game.getPermanent(event.getSourceId());
+            if (damageEvent.getPlayerId().equals(getControllerId()) && permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
+                game.getState().setValue(getSourceId().toString(), permanent.getControllerId());
                 return true;
             }
         }

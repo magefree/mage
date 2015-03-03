@@ -27,9 +27,9 @@
  */
 package org.mage.test.cards.triggers;
 
-import junit.framework.Assert;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 

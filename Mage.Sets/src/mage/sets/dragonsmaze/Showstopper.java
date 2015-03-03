@@ -36,7 +36,7 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;

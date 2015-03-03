@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.abilityword.StriveAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapTargetEffect;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;

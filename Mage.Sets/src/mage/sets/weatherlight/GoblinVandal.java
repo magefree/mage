@@ -34,7 +34,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.continious.AssignNoCombatDamageSourceEffect;
+import mage.abilities.effects.common.continuous.AssignNoCombatDamageSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;

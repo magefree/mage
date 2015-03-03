@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author dustinconrad
  */
-public class LoxodonHierarch extends mage.sets.ravnika.LoxodonHierarch {
+public class LoxodonHierarch extends mage.sets.ravnica.LoxodonHierarch {
 
     public LoxodonHierarch(UUID ownerId) {
         super(ownerId);

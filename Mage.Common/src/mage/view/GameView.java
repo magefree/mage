@@ -84,10 +84,14 @@ public class GameView implements Serializable {
 
 
     public GameView(GameState state, Game game, UUID createdForPlayerId, UUID watcherUserId) {
+        Player createdForPlayer = null;
         this.isPlayer = createdForPlayerId != null;
         this.priorityTime = game.getPriorityTime();
         for (Player player: state.getPlayers().values()) {
             players.add(new PlayerView(player, state, game, createdForPlayerId, watcherUserId));
+            if (player.getId().equals(createdForPlayerId)) {
+                createdForPlayer = player;
+            }
         }
         for (StackObject stackObject: state.getStack()) {
             if (stackObject instanceof StackAbility) {
@@ -132,7 +136,7 @@ public class GameView implements Serializable {
             }
             else {
                 // Spell
-                stack.put(stackObject.getId(), new CardView((Spell)stackObject, null, stackObject.getControllerId().equals(createdForPlayerId)));
+                stack.put(stackObject.getId(), new CardView((Spell)stackObject, game, null, stackObject.getControllerId().equals(createdForPlayerId)));
                 checkPaid(stackObject.getId(), (Spell)stackObject);
             }
             //stackOrder.add(stackObject.getId());
@@ -161,7 +165,15 @@ public class GameView implements Serializable {
         for (CombatGroup combatGroup: state.getCombat().getGroups()) {
             combat.add(new CombatGroupView(combatGroup, game));
         }
-        this.special = state.getSpecialActions().getControlledBy(state.getPriorityPlayerId()).size() > 0;
+        if (isPlayer) {
+            // has only to be set for active palyer with priority (e.g. pay mana by delve or Quenchable Fire special action)
+            if (state.getPriorityPlayerId() == createdForPlayerId && createdForPlayer != null) {
+                this.special = state.getSpecialActions().getControlledBy(state.getPriorityPlayerId(), createdForPlayer.isInPayManaMode()).size() > 0;
+            }
+        } else {
+            this.special = false;
+        }
+        
         CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
         if (watcher != null) {
             spellsCastCurrentTurn = watcher.getAmountOfSpellsAllPlayersCastOnCurrentTurn();

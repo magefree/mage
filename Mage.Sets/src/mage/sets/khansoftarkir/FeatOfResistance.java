@@ -29,7 +29,7 @@ package mage.sets.khansoftarkir;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continious.GainProtectionFromColorTargetEffect;
+import mage.abilities.effects.common.continuous.GainProtectionFromColorTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

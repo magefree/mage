@@ -37,7 +37,7 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
+import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.UnblockableAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
@@ -53,9 +53,15 @@ public class CreepingTarPit extends CardImpl {
     public CreepingTarPit (UUID ownerId) {
         super(ownerId, 134, "Creeping Tar Pit", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "WWK";
+
+        // Creeping Tar Pit enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
+
+        // {T}: Add {U} or {B} to your mana pool.
         this.addAbility(new BlueManaAbility());
         this.addAbility(new BlackManaAbility());
+        
+        // {1}{U}{B}: Until end of turn, Creeping Tar Pit becomes a 3/2 blue and black Elemental creature and is unblockable. It's still a land.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new CreepingTarPitToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{U}{B}")));
     }
 

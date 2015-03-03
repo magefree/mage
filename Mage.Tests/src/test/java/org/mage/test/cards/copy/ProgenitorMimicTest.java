@@ -1,11 +1,10 @@
 package org.mage.test.cards.copy;
-
-import junit.framework.Assert;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -54,8 +53,8 @@ public class ProgenitorMimicTest extends CardTestPlayerBase {
             }
         }
 
-        Assert.assertTrue("Only one non token permanent ",nonTokens == 1);
-        Assert.assertTrue("Only one token permanent ",tokens == 1);
+        Assert.assertEquals("Only one non token permanent ",1, nonTokens);
+        Assert.assertEquals("Only one token permanent ",1, tokens);
     }
 
 //    /**

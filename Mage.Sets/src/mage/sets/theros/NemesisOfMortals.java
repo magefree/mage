@@ -34,15 +34,19 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.CostModificationType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -60,35 +64,16 @@ public class NemesisOfMortals extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Nemesis of Mortals costs {1} less to cast for each creature card in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new NemesisOfMortalsEffect()));
-
+        Ability ability = new SimpleStaticAbility(Zone.ALL, new NemesisOfMortalsCostReductionEffect());
+        ability.setRuleAtTheTop(true);
+        this.addAbility(ability);
+        
         // {7}{G}{G}: Monstrosity 5.  This ability costs {1} less to activate for each creature card in your graveyard.
-        Ability  ability = new MonstrosityAbility("{7}{G}{G}", 5);
+        ability = new MonstrosityAbility("{7}{G}{G}", 5);
         for (Effect effect : ability.getEffects()) {
             effect.setText("Monstrosity 5.  This ability costs {1} less to activate for each creature card in your graveyard");
         }
         this.addAbility(ability);
-    }
-
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        if (ability instanceof SpellAbility || ability instanceof MonstrosityAbility) {
-            Player player = game.getPlayer(this.getOwnerId());
-            int creatureCount = player.getGraveyard().count(new FilterCreatureCard(), game);
-            int genericMana;
-            if (ability instanceof MonstrosityAbility) {
-                genericMana = 7 - creatureCount;
-            } else {
-                genericMana = 4 - creatureCount;
-            }
-            StringBuilder adjustedCost = new StringBuilder();
-            if (genericMana > 0) {
-                adjustedCost.append("{").append(genericMana).append("}");
-            }
-            adjustedCost.insert(0,"{G}{G}");
-            ability.getManaCostsToPay().clear();
-            ability.getManaCostsToPay().load(adjustedCost.toString());
-        }
     }
 
     public NemesisOfMortals(final NemesisOfMortals card) {
@@ -101,24 +86,39 @@ public class NemesisOfMortals extends CardImpl {
     }
 }
 
-class NemesisOfMortalsEffect extends OneShotEffect {
+class NemesisOfMortalsCostReductionEffect extends CostModificationEffectImpl {
 
-    public NemesisOfMortalsEffect() {
-        super(Outcome.Neutral);
-        this.staticText = "{this} costs {1} less to cast for each creature card in your graveyard";
+    NemesisOfMortalsCostReductionEffect() {
+        super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
+        staticText = "{this} costs {1} less to cast for each creature card in your graveyard";
     }
 
-    public NemesisOfMortalsEffect(final NemesisOfMortalsEffect effect) {
+    NemesisOfMortalsCostReductionEffect(NemesisOfMortalsCostReductionEffect effect) {
         super(effect);
     }
 
     @Override
-    public NemesisOfMortalsEffect copy() {
-        return new NemesisOfMortalsEffect(this);
+    public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {        
+            int reductionAmount = player.getGraveyard().count(new FilterCreatureCard(), game);            
+            CardUtil.reduceCost(abilityToModify, reductionAmount);
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean applies(Ability abilityToModify, Ability source, Game game) {
+        if ((abilityToModify instanceof SpellAbility) && abilityToModify.getSourceId().equals(source.getSourceId())) {
+            return game.getCard(abilityToModify.getSourceId()) != null;
+        }
+        return false;
+    }
+
+    @Override
+    public NemesisOfMortalsCostReductionEffect copy() {
+        return new NemesisOfMortalsCostReductionEffect(this);
     }
 }
+

@@ -42,7 +42,7 @@
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>
-            <version>2.1.12</version>
+            <version>2.1.17</version>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
@@ -133,6 +133,12 @@
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>mage-game-tinyleadersduel</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -140,7 +146,7 @@
             <plugin>
                 <groupId>org.jvnet.jaxb2.maven2</groupId>
                 <artifactId>maven-jaxb2-plugin</artifactId>
-                <version>0.7.4</version>
+                <version>0.12.3</version>
                 <configuration>
                     <generatePackage>mage.server.util.config</generatePackage>
                     <schemaDirectory>./src/main/xml-resources/jaxb/Config/</schemaDirectory>
@@ -157,7 +163,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.0.2</version>
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>

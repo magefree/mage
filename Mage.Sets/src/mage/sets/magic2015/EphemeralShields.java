@@ -29,7 +29,7 @@ package mage.sets.magic2015;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;

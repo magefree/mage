@@ -29,7 +29,7 @@ package mage.sets.elspethvstezzeret;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColorOrArtifact;

@@ -75,7 +75,7 @@ public class RiversGrasp extends CardImpl {
         this.getSpellAbility().addTarget(targetPlayer);
 
         this.addInfo("Info1", "<i>(Do both if {U}{B} was spent.)</i>");
-        this.addWatcher(new ManaSpentToCastWatcher());
+        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
     public RiversGrasp(final RiversGrasp card) {

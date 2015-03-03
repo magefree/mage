@@ -29,21 +29,17 @@ package mage.sets.limitedalpha;
 
 import java.util.UUID;
 
-import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
 import mage.abilities.effects.common.ruleModifying.CantRegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.target.common.TargetCreatureOrPlayer;
+import mage.watchers.common.DamagedByWatcher;
 
 /**
  *
@@ -64,6 +60,7 @@ public class Disintegrate extends CardImpl {
         effect.setText("If the creature would die this turn, exile it instead");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addWatcher(new DamagedByWatcher());
     }
 
     public Disintegrate(final Disintegrate card) {

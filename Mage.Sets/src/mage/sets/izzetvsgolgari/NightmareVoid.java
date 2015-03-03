@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class NightmareVoid extends mage.sets.ravnika.NightmareVoid {
+public class NightmareVoid extends mage.sets.ravnica.NightmareVoid {
 
     public NightmareVoid(UUID ownerId) {
         super(ownerId);

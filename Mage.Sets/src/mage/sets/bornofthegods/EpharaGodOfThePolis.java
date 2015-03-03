@@ -37,7 +37,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continious.LoseCreatureTypeSourceEffect;
+import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -78,8 +78,8 @@ public class EpharaGodOfThePolis extends CardImpl {
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), TargetController.ANY, false),
                 HadAnotherCreatureEnterTheBattlefieldCondition.getInstance(),
-                "At the beginning of each upkeep, if you had another creature enter the battlefield under your control last turn, draw a card."));
-        this.addWatcher(new CreatureEnteredBattlefieldLastTurnWatcher());
+                "At the beginning of each upkeep, if you had another creature enter the battlefield under your control last turn, draw a card."), 
+                new CreatureEnteredBattlefieldLastTurnWatcher());
 
     }
 

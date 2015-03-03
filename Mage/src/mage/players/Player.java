@@ -299,7 +299,7 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean chooseUse(Outcome outcome, String message, Game game);
     boolean choose(Outcome outcome, Choice choice, Game game);
     boolean choosePile(Outcome outcome, String message, List<? extends Card> pile1, List<? extends Card> pile2, Game game);
-    boolean playMana(ManaCost unpaid, Game game);
+    boolean playMana(ManaCost unpaid, String promptText, Game game);
 
     /**
      * Moves the cards from cards to the bottom of the players library.

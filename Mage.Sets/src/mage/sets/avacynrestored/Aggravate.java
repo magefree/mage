@@ -62,7 +62,7 @@ public class Aggravate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
         // Each creature dealt damage this way attacks this turn if able.
         this.getSpellAbility().addEffect(new AggravateRequirementEffect());
-        this.addWatcher(new DamagedByWatcher());
+        this.getSpellAbility().addWatcher(new DamagedByWatcher());
     }
 
     public Aggravate(final Aggravate card) {

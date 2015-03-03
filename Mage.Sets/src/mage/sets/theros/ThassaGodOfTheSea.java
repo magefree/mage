@@ -39,7 +39,7 @@ import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
-import mage.abilities.effects.common.continious.LoseCreatureTypeSourceEffect;
+import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

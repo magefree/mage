@@ -42,7 +42,6 @@ import static mage.constants.SpellAbilityType.SPLIT_LEFT;
 import static mage.constants.SpellAbilityType.SPLIT_RIGHT;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.watchers.Watcher;
 
 /**
  *
@@ -156,15 +155,8 @@ public abstract class SplitCard extends CardImpl {
     }
 
     @Override
-    public void setControllerId(UUID controllerId) {
-        abilities.setControllerId(controllerId);
-        leftHalfCard.getAbilities().setControllerId(controllerId);
-        rightHalfCard.getAbilities().setControllerId(controllerId);
-    }
-
-    @Override
     public void setOwnerId(UUID ownerId) {
-        this.ownerId = ownerId;
+        super.setOwnerId(ownerId);
         abilities.setControllerId(ownerId);
         leftHalfCard.getAbilities().setControllerId(ownerId);
         leftHalfCard.setOwnerId(ownerId);
@@ -173,14 +165,6 @@ public abstract class SplitCard extends CardImpl {
 
     }
 
-    @Override
-    public List<Watcher> getWatchers() {
-        List<Watcher> allWatchers = new ArrayList<>();
-        allWatchers.addAll(super.getWatchers());
-        allWatchers.addAll(leftHalfCard.getWatchers());
-        allWatchers.addAll(rightHalfCard.getWatchers());
-        return allWatchers;
-    }
 }
 
 /*
@@ -203,6 +187,11 @@ class LeftHalfCard  extends CardImpl {
     @Override
     public LeftHalfCard copy() {
         return new LeftHalfCard(this);
+    }
+
+    @Override
+    public UUID getOwnerId() {
+        return splitCardParent.getOwnerId();
     }
 
     @Override
@@ -265,6 +254,11 @@ class RightHalfCard  extends CardImpl {
     @Override
     public RightHalfCard copy() {
         return new RightHalfCard(this);
+    }
+
+    @Override
+    public UUID getOwnerId() {
+        return splitCardParent.getOwnerId();
     }
 
     @Override

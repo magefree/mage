@@ -100,7 +100,7 @@ public class StoneforgeMystic extends CardImpl {
 
 class StoneforgeMysticEffect extends OneShotEffect {
 
-    private static final FilterArtifactCard filter = new FilterArtifactCard("Equipment card");
+    private static final FilterArtifactCard filter = new FilterArtifactCard("an Equipment card from your hand");
 
     static {
         filter.add(new SubtypePredicate("Equipment"));
@@ -124,7 +124,7 @@ class StoneforgeMysticEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Target target = new TargetCardInHand(new FilterArtifactCard("an Equipment card from your hand"));
+            Target target = new TargetCardInHand(filter);
             if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
                     && controller.chooseUse(outcome, "Put an Equipment from your hand to battlefield?", game)
                     && controller.chooseTarget(outcome, target, source, game)) {

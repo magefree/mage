@@ -27,23 +27,22 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
 
 /**
  * @author noxx
@@ -53,8 +52,6 @@ public class WildDefiance extends CardImpl {
     public WildDefiance(UUID ownerId) {
         super(ownerId, 203, "Wild Defiance", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "AVR";
-
-        this.color.setGreen(true);
 
         // Whenever a creature you control becomes the target of an instant or sorcery spell, that creature gets +3/+3 until end of turn.
         this.addAbility(new CreaturesYouControlBecomesTargetTriggeredAbility(new BoostTargetEffect(3, 3, Duration.EndOfTurn)));
@@ -86,21 +83,24 @@ class CreaturesYouControlBecomesTargetTriggeredAbility extends TriggeredAbilityI
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.TARGETED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TARGETED) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getControllerId().equals(this.controllerId) && permanent.getCardType().contains(CardType.CREATURE)) {
-                MageObject object = game.getObject(event.getSourceId());
-                if (object != null && object instanceof Spell) {
-                    Card c = (Spell)object;
-                    if (c.getCardType().contains(CardType.INSTANT) || c.getCardType().contains(CardType.SORCERY)) {
-                        if (getTargets().size() == 0) {
-                            for (Effect effect : getEffects()) {
-                                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                            }
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent != null && permanent.getControllerId().equals(this.controllerId) && permanent.getCardType().contains(CardType.CREATURE)) {
+            MageObject object = game.getObject(event.getSourceId());
+            if (object != null && object instanceof Spell) {
+                Card c = (Spell)object;
+                if (c.getCardType().contains(CardType.INSTANT) || c.getCardType().contains(CardType.SORCERY)) {
+                    if (getTargets().size() == 0) {
+                        for (Effect effect : getEffects()) {
+                            effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                         }
-                        return true;
                     }
+                    return true;
                 }
             }
         }

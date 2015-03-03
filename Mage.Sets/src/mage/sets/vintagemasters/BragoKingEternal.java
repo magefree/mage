@@ -39,7 +39,10 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -65,7 +68,9 @@ public class BragoKingEternal extends CardImpl {
         Effect effect = new ExileTargetEffect(this.getId(), this.getName(), Zone.BATTLEFIELD);
         effect.setText("exile any number of target nonland permanents you control");
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(effect, false);
-        ability.addTarget(new TargetControlledPermanent(0, Integer.MAX_VALUE, new FilterNonlandPermanent(), false));
+        FilterControlledPermanent filterControlledNonlandPermanent = new FilterControlledPermanent();
+        filterControlledNonlandPermanent.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        ability.addTarget(new TargetControlledPermanent(0, Integer.MAX_VALUE, filterControlledNonlandPermanent, false));
         ability.addEffect(new ReturnFromExileEffect(this.getId(), Zone.BATTLEFIELD, ", then return those cards to the battlefield under their owner's control"));
         this.addAbility(ability);
     }

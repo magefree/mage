@@ -39,7 +39,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.constants.AttachmentType;

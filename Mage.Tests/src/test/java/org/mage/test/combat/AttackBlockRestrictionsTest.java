@@ -1,10 +1,11 @@
 package org.mage.test.combat;
 
-import junit.framework.Assert;
+
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -51,7 +52,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
         Permanent crawWurm = getPermanent("Craw Wurm", playerB.getId());
-        Assert.assertTrue("Should be tapped because of being blocked by Wall of Frost", crawWurm.isTapped());
+        Assert.assertEquals("Should be tapped because of being blocked by Wall of Frost", true, crawWurm.isTapped());
     }
 
     /**

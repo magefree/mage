@@ -27,16 +27,25 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import java.util.*;
-
-import mage.abilities.SpecialAction;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.*;
-import mage.constants.*;
+import java.util.AbstractMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.SpecialAction;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -62,6 +71,7 @@ public class LeoninArbiter extends CardImpl {
 
         // Players can't search libraries.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeoninArbiterCantSearchEffect(keyString)));
+
         //  Any player may pay {2} for that player to ignore this effect until end of turn.
         this.addAbility(new LeoninArbiterSpecialAction(keyString));
     }

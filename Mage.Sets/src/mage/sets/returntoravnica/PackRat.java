@@ -40,7 +40,7 @@ import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.Duration;

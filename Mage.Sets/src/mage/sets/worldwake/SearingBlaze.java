@@ -65,7 +65,7 @@ public class SearingBlaze extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addTarget(new SearingBlazeTarget());
         this.getSpellAbility().addEffect(new SearingBlazeEffect());
-        this.addWatcher(new LandfallWatcher());
+        this.getSpellAbility().addWatcher(new LandfallWatcher());
     }
 
     public SearingBlaze(final SearingBlaze card) {

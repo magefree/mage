@@ -28,11 +28,11 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.continious.BoostAllEffect;
-import mage.cards.CardImpl;
 import mage.filter.common.FilterAttackingCreature;
 
 /**
@@ -47,8 +47,7 @@ public class TrumpetBlast extends CardImpl {
         super(ownerId, 160, "Trumpet Blast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "M10";
 
-        this.color.setRed(true);
-
+        // Attacking creatures get +2/+0 until end of turn.
         this.getSpellAbility().addEffect(new BoostAllEffect(2, 0, Duration.EndOfTurn, filter, false));
     }
 

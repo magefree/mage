@@ -59,7 +59,7 @@ public class FreshMeat extends CardImpl {
 
         this.color.setGreen(true);
 
-        this.addWatcher(new FreshMeatWatcher());
+        this.getSpellAbility().addWatcher(new FreshMeatWatcher());
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken(), new FreshMeatDynamicValue()));
     }
 

@@ -35,7 +35,7 @@ import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
+import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.*;
 import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.ManaOptions;
@@ -75,6 +75,9 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
+import mage.filter.Filter;
+import mage.filter.predicate.other.PlayerIdPredicate;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 
 
 /**
@@ -1011,7 +1014,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
     
     @Override
-    public boolean playMana(ManaCost unpaid, Game game) {
+    public boolean playMana(ManaCost unpaid, String promptText, Game game) {
         payManaMode = true;
         boolean result = playManaHandling(unpaid, game);
         payManaMode = false;
@@ -1283,6 +1286,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             if (card != null) {
                 target.addTarget(card.getId(), source, game);
                 cardChoices.remove(card);
+            } else {
+                // We don't have any valid target to choose so stop choosing
+                return target.getTargets().size() < target.getNumberOfTargets();
             }
             if (outcome.equals(Outcome.Neutral) && target.getTargets().size() > target.getNumberOfTargets() + (target.getMaxNumberOfTargets() - target.getNumberOfTargets()) / 2) {
                 return true;
@@ -1947,10 +1953,14 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     protected List<Permanent> threats(UUID playerId, UUID sourceId, FilterPermanent filter, Game game, List<UUID> targets) {
-        List<Permanent> threats = (playerId == null || sourceId ==null) ?
-                game.getBattlefield().getActivePermanents(filter, this.getId(), sourceId, game) : // all permanents within the range of the player
-                game.getBattlefield().getActivePermanents(filter, playerId, sourceId, game);
-
+        List<Permanent> threats;
+        if (playerId == null) {
+            threats = game.getBattlefield().getActivePermanents(filter, this.getId(), sourceId, game); // all permanents within the range of the player
+        } else {
+            FilterPermanent filterCopy = filter.copy();
+            filterCopy.add(new ControllerIdPredicate(playerId));
+            threats = game.getBattlefield().getActivePermanents(filter, this.getId(), sourceId, game);
+        } 
         Iterator<Permanent> it = threats.iterator();
         while (it.hasNext()) { // remove permanents already targeted
             Permanent test = it.next();

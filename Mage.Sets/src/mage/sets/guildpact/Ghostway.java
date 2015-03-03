@@ -28,18 +28,24 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-
-import mage.constants.*;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -50,8 +56,6 @@ public class Ghostway extends CardImpl {
     public Ghostway(UUID ownerId) {
         super(ownerId, 6, "Ghostway", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "GPT";
-
-        this.color.setWhite(true);
 
         // Exile each creature you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step.
         this.getSpellAbility().addEffect(new GhostwayEffect());
@@ -87,18 +91,24 @@ class GhostwayEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID exileId = source.getSourceId();
-        if (exileId != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject != null && controller != null) {
+            int numberCreatures = 0;
+            UUID exileId = CardUtil.getObjectExileZoneId(game, sourceObject);
             for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
                 if (creature != null) {
-                    if (creature.moveToExile(source.getSourceId(), "Ghostway Exile", source.getSourceId(), game)) {
-                        AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD, true));
-                        delayedAbility.setSourceId(source.getSourceId());
-                        delayedAbility.setControllerId(source.getControllerId());
-                        delayedAbility.setSourceObject(source.getSourceObject(game));
-                        game.addDelayedTriggeredAbility(delayedAbility);
-                    }
+                    controller.moveCardToExileWithInfo(creature, exileId,sourceObject.getLogName(), source.getSourceId(), game, Zone.BATTLEFIELD);
+                    numberCreatures++;
                 }
+            }
+            if (numberCreatures > 0) {
+                AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
+                        new ReturnFromExileEffect(exileId, Zone.BATTLEFIELD, false));
+                delayedAbility.setSourceId(source.getSourceId());
+                delayedAbility.setControllerId(source.getControllerId());
+                delayedAbility.setSourceObject(source.getSourceObject(game));
+                game.addDelayedTriggeredAbility(delayedAbility);                
             }
             return true;
         }

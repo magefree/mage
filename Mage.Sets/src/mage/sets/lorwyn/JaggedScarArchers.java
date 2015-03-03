@@ -36,7 +36,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

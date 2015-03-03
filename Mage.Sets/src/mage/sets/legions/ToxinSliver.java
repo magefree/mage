@@ -57,7 +57,7 @@ public class ToxinSliver extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever a Sliver deals combat damage to a creature, destroy that creature. It can't be regenerated.
-        this.addAbility(new DealsDamageToACreatureTriggeredAbility(new DestroyTargetEffect(false), true, false, true));
+        this.addAbility(new DealsDamageToACreatureTriggeredAbility(new DestroyTargetEffect(true), true, false, true));
        
     }
 

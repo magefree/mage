@@ -4,7 +4,7 @@ package mage.abilities.keyword;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;

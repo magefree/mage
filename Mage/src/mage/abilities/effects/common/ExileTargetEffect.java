@@ -49,24 +49,24 @@ public class ExileTargetEffect extends OneShotEffect {
     private String exileZone = null;
     private UUID exileId = null;
 
-    public ExileTargetEffect(UUID exileId, String exileZone, Zone onlyFromZone) {
-        super(Outcome.Exile);
-        this.exileZone = exileZone;
-        this.exileId = exileId;
-        this.onlyFromZone = onlyFromZone;
-    }
-    
-    public ExileTargetEffect(UUID exileId, String exileZone) {
-        this(exileId, exileZone, null);
-    }
-
     public ExileTargetEffect(String effectText) {
         this();
         this.staticText = effectText;
     }
 
     public ExileTargetEffect() {
-        this(null, null);
+        this(null, "");
+    }
+
+    public ExileTargetEffect(UUID exileId, String exileZone) {
+        this(exileId, exileZone, null);
+    }
+
+    public ExileTargetEffect(UUID exileId, String exileZone, Zone onlyFromZone) {
+        super(Outcome.Exile);
+        this.exileZone = exileZone;
+        this.exileId = exileId;
+        this.onlyFromZone = onlyFromZone;
     }
 
     public ExileTargetEffect(final ExileTargetEffect effect) {

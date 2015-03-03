@@ -33,7 +33,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 

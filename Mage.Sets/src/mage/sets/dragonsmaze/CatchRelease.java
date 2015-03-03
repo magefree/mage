@@ -39,18 +39,16 @@ import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.effects.common.continious.GainControlTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.SplitCard;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.common.FilterPlaneswalkerPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.common.FilterControlledArtifactPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledEnchantmentPermanent;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterControlledPlaneswalkerPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -70,13 +68,8 @@ public class CatchRelease extends SplitCard {
         super(ownerId, 125, "Catch", "Release", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{U}{R}", "{4}{R}{W}",true);
         this.expansionSetCode = "DGM";
 
-        this.color.setBlue(true);
-        this.color.setRed(true);
-        this.color.setWhite(true);
-
         // Catch
         // Gain control of target permanent until end of turn. Untap it. It gains haste until end of turn.
-        getLeftHalfCard().getColor().setRed(true);
         getLeftHalfCard().getSpellAbility().addTarget(new TargetPermanent(new FilterPermanent()));
         getLeftHalfCard().getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
         getLeftHalfCard().getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
@@ -84,7 +77,6 @@ public class CatchRelease extends SplitCard {
 
         // Release
         // Each player sacrifices an artifact, a creature, an enchantment, a land, and a planeswalker.
-        getRightHalfCard().getColor().setGreen(true);
         getRightHalfCard().getSpellAbility().addEffect(new ReleaseSacrificeEffect());   
 
     }
@@ -101,20 +93,6 @@ public class CatchRelease extends SplitCard {
 
 class ReleaseSacrificeEffect extends OneShotEffect {
 
-    private static final FilterArtifactPermanent filter1 = new FilterArtifactPermanent("artifact you control");
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature you control");
-    private static final FilterEnchantmentPermanent filter3 = new FilterEnchantmentPermanent("enchantment you control");
-    private static final FilterLandPermanent filter4 = new FilterLandPermanent("land you control");
-    private static final FilterPlaneswalkerPermanent filter5 = new FilterPlaneswalkerPermanent("planeswalker you control");
-
-    static {
-        filter1.add(new ControllerPredicate(TargetController.YOU));
-        filter2.add(new ControllerPredicate(TargetController.YOU));
-        filter3.add(new ControllerPredicate(TargetController.YOU));
-        filter4.add(new ControllerPredicate(TargetController.YOU));
-        filter5.add(new ControllerPredicate(TargetController.YOU));
-    }
-
     public ReleaseSacrificeEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Each player sacrifices an artifact, a creature, an enchantment, a land, and a planeswalker";
@@ -126,7 +104,7 @@ class ReleaseSacrificeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<UUID> chosen = new ArrayList<UUID>();
+        List<UUID> chosen = new ArrayList<>();
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;
@@ -134,18 +112,11 @@ class ReleaseSacrificeEffect extends OneShotEffect {
         for (UUID playerId : controller.getInRange()) {
             Player player = game.getPlayer(playerId);
 
-            Target target1 = new TargetControlledPermanent(1, 1, filter1, false);
-            Target target2 = new TargetControlledPermanent(1, 1, filter2, false);
-            Target target3 = new TargetControlledPermanent(1, 1, filter3, false);
-            Target target4 = new TargetControlledPermanent(1, 1, filter4, false);
-            Target target5 = new TargetControlledPermanent(1, 1, filter5, false);
-
-
-            target1.setNotTarget(false);
-            target2.setNotTarget(false);
-            target3.setNotTarget(false);
-            target4.setNotTarget(false);
-            target5.setNotTarget(false);
+            Target target1 = new TargetControlledPermanent(1, 1, new FilterControlledArtifactPermanent(), true);
+            Target target2 = new TargetControlledPermanent(1, 1, new FilterControlledCreaturePermanent(), true);
+            Target target3 = new TargetControlledPermanent(1, 1, new FilterControlledEnchantmentPermanent(), true);
+            Target target4 = new TargetControlledPermanent(1, 1, new FilterControlledLandPermanent(), true);
+            Target target5 = new TargetControlledPermanent(1, 1, new FilterControlledPlaneswalkerPermanent(), true);
 
             if (target1.canChoose(player.getId(), game)) {
                 while (player.isInGame() && !target1.isChosen() && target1.canChoose(player.getId(), game)) {

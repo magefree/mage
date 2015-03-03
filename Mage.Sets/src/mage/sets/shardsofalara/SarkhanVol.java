@@ -28,6 +28,8 @@
 
 package mage.sets.shardsofalara;
 
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -35,10 +37,9 @@ import mage.constants.Rarity;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.Effects;
-import mage.abilities.effects.common.continious.*;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.effects.common.continious.GainControlTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.keyword.HasteAbility;

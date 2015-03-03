@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class VinelasherKudzu extends mage.sets.ravnika.VinelasherKudzu {
+public class VinelasherKudzu extends mage.sets.ravnica.VinelasherKudzu {
 
     public VinelasherKudzu(UUID ownerId) {
         super(ownerId);

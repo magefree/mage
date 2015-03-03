@@ -30,8 +30,8 @@ package mage.sets.planarchaos;
 import java.util.UUID;
 
 import mage.abilities.Mode;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;

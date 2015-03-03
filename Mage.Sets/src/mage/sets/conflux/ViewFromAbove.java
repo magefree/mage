@@ -34,7 +34,7 @@ import mage.constants.Zone;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.PostResolveEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;

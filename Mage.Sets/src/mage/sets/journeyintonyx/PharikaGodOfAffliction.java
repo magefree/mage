@@ -36,7 +36,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.LoseCreatureTypeSourceEffect;
+import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.Card;

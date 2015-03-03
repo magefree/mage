@@ -29,18 +29,23 @@ package mage.abilities.keyword;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
+import mage.abilities.SpecialAction;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.AdjustingSourceCosts;
+import mage.abilities.costs.common.ExileFromGraveCost;
+import mage.abilities.costs.mana.AlternateManaPaymentAbility;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.AbilityType;
+import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
+import mage.players.ManaPool;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
 
@@ -71,22 +76,16 @@ import mage.util.CardUtil;
  * increase the mana costs.
  */
 
- public class DelveAbility extends SimpleStaticAbility implements AdjustingSourceCosts {
+ public class DelveAbility extends SimpleStaticAbility implements AlternateManaPaymentAbility {
 
-    private List<Card> delvedCards;
 
     public DelveAbility() {
         super(Zone.STACK, null);
         this.setRuleAtTheTop(true);
-        this.delvedCards = null;
     }
 
     public DelveAbility(final DelveAbility ability) {
         super(ability);
-        if (ability.delvedCards != null) {
-            this.delvedCards = new ArrayList<>();
-            this.delvedCards.addAll(ability.delvedCards);
-        }
     }
 
     @Override
@@ -95,46 +94,81 @@ import mage.util.CardUtil;
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-        Player player = game.getPlayer(controllerId);
-        if (player == null || !(ability instanceof SpellAbility)) {
-            return;
-        }
-        Target target = new TargetCardInYourGraveyard(1, Integer.MAX_VALUE, new FilterCard());
-        target.setTargetName("cards to delve from your graveyard");
-        target.setNotTarget(true);
-        if (!target.canChoose(sourceId, controllerId, game)) {
-            return;
-        }
-        if (!CardUtil.isCheckPlayableMode(ability) &&
-                player.chooseUse(Outcome.Detriment, "Delve cards from your graveyard?", game)) {
-            player.chooseTarget(Outcome.Detriment, target, ability, game);
-            if (target.getTargets().size() > 0) {
-                delvedCards = new ArrayList<>();
-                int adjCost = 0;
-                for (UUID cardId: target.getTargets()) {
-                    Card card = game.getCard(cardId);
-                    if (card == null) {
-                        continue;
-                    }
-                    delvedCards.add(card);
-                    player.moveCardToExileWithInfo(card, null, "", getSourceId(), game, Zone.GRAVEYARD);
-                    ++adjCost;
-                }
-                game.informPlayers(new StringBuilder("Delve: ").append(player.getName()).append(" exiled ")
-                        .append(adjCost).append(" card").append(adjCost != 1?"s":"").append(" from his or her graveyard").toString());
-                CardUtil.adjustCost((SpellAbility)ability, adjCost);
-            }
-        }
+    public String getRule() {
+      return "Delve <i>(Each card you exile from your graveyard while casting this spell pays for {1})</i>";
     }
 
     @Override
-    public String getRule() {
-      return "Delve <i>(You may exile any number of cards from your graveyard as you cast this spell. It costs {1} less to cast for each card exiled this way.)</i>";
+    public void addSpecialAction(Ability source, Game game, ManaCost unpaid) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && controller.getGraveyard().size() > 0) {
+            if (unpaid.getMana().getColorless() > 0 && source.getAbilityType().equals(AbilityType.SPELL)) {
+                SpecialAction specialAction = new DelveSpecialAction();
+                specialAction.setControllerId(source.getControllerId());
+                specialAction.setSourceId(source.getSourceId());
+                specialAction.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(
+                                0, Math.min(controller.getGraveyard().size(), unpaid.getMana().getColorless()), new FilterCard())));
+                if (specialAction.canActivate(source.getControllerId(), game)) {
+                    game.getState().getSpecialActions().add(specialAction);
+                }
+            }
+        }
+    }
+}
+
+class DelveSpecialAction extends SpecialAction {
+
+    public DelveSpecialAction() {
+        super(Zone.ALL, true);
+        this.addEffect(new DelveEffect());
     }
 
-    public List<Card> getDelvedCards() {
-        return delvedCards;
+    public DelveSpecialAction(final DelveSpecialAction ability) {
+        super(ability);
     }
 
+    @Override
+    public DelveSpecialAction copy() {
+        return new DelveSpecialAction(this);
+    }
+}
+
+class DelveEffect extends OneShotEffect {
+
+    public DelveEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)";
+    }
+
+    public DelveEffect(final DelveEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public DelveEffect copy() {
+        return new DelveEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            ExileFromGraveCost exileFromGraveCost = (ExileFromGraveCost) source.getCosts().get(0);
+            List<Card> exiledCards = exileFromGraveCost.getExiledCards();
+            if (exiledCards.size() > 0) {
+                ManaPool manaPool = controller.getManaPool();
+                manaPool.addMana(new Mana(0,0,0,0,0,exiledCards.size(),0), game, source);
+                manaPool.unlockManaType(ManaType.COLORLESS);
+                String keyString = CardUtil.getCardZoneString("delvedCards", source.getSourceId(), game);
+                List<Card> delvedCards = (List<Card>) game.getState().getValue(keyString);
+                if (delvedCards == null) {
+                    game.getState().setValue(keyString, exiledCards);
+                } else {
+                    delvedCards.addAll(exiledCards);
+                }
+            }
+            return true;
+        }
+        return false;
+    }
 }

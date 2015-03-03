@@ -27,6 +27,8 @@
  */
 package mage.sets.newphyrexia;
 
+import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -34,14 +36,18 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.constants.*;
+import mage.constants.AsThoughEffectType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
-
-import java.util.UUID;
-import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -90,17 +96,18 @@ class PraetorsGraspEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(source.getFirstTarget());
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (player != null && opponent != null && sourcePermanent != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && opponent != null && sourceObject != null) {
             TargetCardInLibrary target = new TargetCardInLibrary();
-            if (player.searchLibrary(target, game, opponent.getId())) {
+            if (controller.searchLibrary(target, game, opponent.getId())) {
                 UUID targetId = target.getFirstTarget();
-                Card card = opponent.getLibrary().remove(targetId, game);
-                if (card != null) {
+                Card card = opponent.getLibrary().getCard(targetId, game);
+                UUID exileId = CardUtil.getObjectExileZoneId(game, sourceObject);
+                if (card != null && exileId != null) {
                     card.setFaceDown(true);
-                    card.setControllerId(player.getId());
-                    card.moveToExile(getId(), sourcePermanent.getName(), source.getSourceId(), game);
+                    game.informPlayers(controller.getName() + " moves the searched card face down to exile");
+                    card.moveToExile(exileId, sourceObject.getName(), source.getSourceId(), game);
                     game.addEffect(new PraetorsGraspPlayEffect(card.getId()), source);
                     game.addEffect(new PraetorsGraspRevealEffect(card.getId()), source);
                 }
@@ -140,10 +147,18 @@ class PraetorsGraspPlayEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         if (sourceId.equals(cardId)) {
-            Card card = game.getCard(cardId);
             Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null && card != null && game.getState().getZone(cardId) == Zone.EXILED) {
-                return true;
+            MageObject sourceObject = source.getSourceObject(game);
+            UUID exileId = CardUtil.getObjectExileZoneId(game, sourceObject, true);
+            if (exileId != null && sourceObject != null && controller != null) {
+                ExileZone exileZone = game.getExile().getExileZone(exileId);
+                if (exileZone != null && exileZone.contains(cardId)) {
+                    if (controller.chooseUse(outcome, "Play the exiled card?", game)) {
+                        return true;
+                    }
+                } else {
+                    discard();
+                }
             }
         }
         return false;
@@ -179,13 +194,21 @@ class PraetorsGraspRevealEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         if (sourceId.equals(cardId)) {
-            Card card = game.getCard(cardId);
-            Card sourceCard = game.getCard(source.getSourceId());
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null && card != null && game.getState().getZone(cardId) == Zone.EXILED) {
-                if (controller.chooseUse(outcome, "Reveal exiled card?", game)) {
-                    Cards cards = new CardsImpl(card);
-                    controller.lookAtCards("Exiled with " + sourceCard.getName(), cards, game);
+            MageObject sourceObject = source.getSourceObject(game);
+            UUID exileId = CardUtil.getObjectExileZoneId(game, sourceObject, true);
+            if (exileId != null && sourceObject != null) {
+                ExileZone exileZone = game.getExile().getExileZone(exileId);
+                if (exileZone != null && exileZone.contains(cardId)) {
+                    Player controller = game.getPlayer(source.getControllerId());
+                    Card card = game.getCard(cardId);
+                    if (controller != null && card != null && game.getState().getZone(cardId) == Zone.EXILED) {
+                        if (controller.chooseUse(outcome, "Reveal exiled card?", game)) {
+                            Cards cards = new CardsImpl(card);
+                            controller.lookAtCards("Exiled with " + sourceObject.getName(), cards, game);
+                        }
+                    }
+                } else {
+                    discard();
                 }
             }
         }

@@ -30,7 +30,7 @@ package mage.sets.futuresight;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;

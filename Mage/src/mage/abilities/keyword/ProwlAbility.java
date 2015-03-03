@@ -72,7 +72,7 @@ public class ProwlAbility extends StaticAbility implements AlternativeSourceCost
         name = PROWL_KEYWORD;
         setReminderText(card);
         this.addProwlCost(manaString);
-        card.addWatcher(new ProwlWatcher());
+        addWatcher(new ProwlWatcher());
 
     }
 

@@ -29,15 +29,11 @@ package mage.sets.tenth;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -52,8 +48,10 @@ public class GoblinLore extends CardImpl {
         this.color.setRed(true);
 
         // Draw four cards, then discard three cards at random.
-        this.getSpellAbility().addEffect(new GoblinLoreEffect());
-    }
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(4));
+        Effect effect = new DiscardControllerEffect(3, true);
+        effect.setText("then discard three cards at random");
+        this.getSpellAbility().addEffect(effect);    }
 
     public GoblinLore(final GoblinLore card) {
         super(card);
@@ -62,39 +60,5 @@ public class GoblinLore extends CardImpl {
     @Override
     public GoblinLore copy() {
         return new GoblinLore(this);
-    }
-}
-
-class GoblinLoreEffect extends OneShotEffect {
-
-    public GoblinLoreEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Draw four cards, then discard three cards at random";
-    }
-
-    public GoblinLoreEffect(final GoblinLoreEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GoblinLoreEffect copy() {
-        return new GoblinLoreEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.drawCards(4, game);
-            Cards hand = player.getHand();
-            for (int i = 0; i < 3; i++) {
-                Card card = hand.getRandom(game);
-                if (card != null) {
-                    player.discard(card, source, game);
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }

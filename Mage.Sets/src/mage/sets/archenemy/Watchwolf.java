@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class Watchwolf extends mage.sets.ravnika.Watchwolf {
+public class Watchwolf extends mage.sets.ravnica.Watchwolf {
 
     public Watchwolf(UUID ownerId) {
         super(ownerId);

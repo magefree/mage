@@ -58,7 +58,7 @@ public class Overmaster extends CardImpl {
 
         // The next instant or sorcery spell you cast this turn can't be countered by spells or abilities.
         this.getSpellAbility().addEffect(new OvermasterEffect());
-        this.addWatcher(new OvermasterWatcher());
+        this.getSpellAbility().addWatcher(new OvermasterWatcher());
         
         // Draw a card.
         Effect effect = new DrawCardSourceControllerEffect(1);

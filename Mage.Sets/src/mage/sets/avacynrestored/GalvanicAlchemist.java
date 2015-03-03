@@ -35,7 +35,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.UntapSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilityPairedEffect;
+import mage.abilities.effects.common.continuous.GainAbilityPairedEffect;
 import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.CardImpl;
 import mage.constants.Zone;

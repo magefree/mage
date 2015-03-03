@@ -34,7 +34,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.continious.BoostSourceWhileControlsEffect;
+import mage.abilities.effects.common.continuous.BoostSourceWhileControlsEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;

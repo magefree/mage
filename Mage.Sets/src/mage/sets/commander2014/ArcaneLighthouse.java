@@ -33,7 +33,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continious.CreaturesCantGetOrHaveAbilityEffect;
+import mage.abilities.effects.common.continuous.CreaturesCantGetOrHaveAbilityEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.mana.ColorlessManaAbility;

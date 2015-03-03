@@ -63,7 +63,6 @@ import mage.game.Game;
 import mage.game.command.Commander;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
@@ -77,7 +76,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     protected UUID ownerId;
     protected int cardNumber;
-    protected List<Watcher> watchers = new ArrayList<>();
     protected String expansionSetCode;
     protected String tokenSetCode;
     protected Rarity rarity;
@@ -91,7 +89,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected int zoneChangeCounter = 1;
     protected Map<String, String> info;
     protected boolean usesVariousArt = false;
-    protected Counters counters;
     protected boolean splitCard;
     protected boolean morphCard;
 
@@ -120,7 +117,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             abilities.add(ability);            
         }
         this.usesVariousArt = Character.isDigit(this.getClass().getName().charAt(this.getClass().getName().length()-1));
-        this.counters = new Counters();
         this.morphCard = false;
     }
 
@@ -135,14 +131,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected CardImpl(UUID ownerId, String name) {
         this.ownerId = ownerId;
         this.name = name;
-        this.counters = new Counters();
     }
 
     protected CardImpl(UUID id, UUID ownerId, String name) {
         super(id);
         this.ownerId = ownerId;
         this.name = name;
-        this.counters = new Counters();
     }
 
     public CardImpl(final CardImpl card) {
@@ -151,10 +145,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         cardNumber = card.cardNumber;
         expansionSetCode = card.expansionSetCode;
         rarity = card.rarity;
-        this.watchers.clear();
-        for (Watcher watcher: (List<Watcher>)card.getWatchers()) {
-            watchers.add(watcher.copy());
-        }
         faceDown = card.faceDown;
 
         canTransform = card.canTransform;
@@ -171,7 +161,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         flipCardName = card.flipCardName;
         splitCard = card.splitCard;
         usesVariousArt = card.usesVariousArt;
-        counters = card.counters.copy();
         morphCard = card.isMorphCard();
     }
 
@@ -219,11 +208,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public void setRarity(Rarity rarity) {
-        this.rarity = rarity;
-    }
-
-    @Override
     public List<String> getRules() {
         try {
             List<String> rules = abilities.getRules(this.getLogName());
@@ -247,14 +231,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         ability.setSourceId(this.getId());
         abilities.add(ability);
     }
-    
-    @Override
-    public void addWatcher(Watcher watcher) {
-        watcher.setSourceId(this.getId());
-        watcher.setControllerId(this.ownerId);
-        watchers.add(watcher);
-    }
 
+    protected void addAbility(Ability ability, Watcher watcher) {
+        addAbility(ability);
+        ability.addWatcher(watcher);
+    }
+    
     @Override
     public SpellAbility getSpellAbility() {
         if (spellAbility == null) {
@@ -269,19 +251,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public void setControllerId(UUID controllerId) {
-        abilities.setControllerId(controllerId);
-    }
-
-    @Override
     public void setOwnerId(UUID ownerId) {
         this.ownerId = ownerId;
         abilities.setControllerId(ownerId);
-    }
-
-    @Override
-    public List<Watcher> getWatchers() {
-        return watchers;
     }
 
     @Override
@@ -292,11 +264,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public String getTokenSetCode() {
         return tokenSetCode;
-    }
-
-    @Override
-    public void setExpansionSetCode(String expansionSetCode) {
-        this.expansionSetCode = expansionSetCode;
     }
 
     @Override
@@ -411,7 +378,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                                 .append("] source [").append(sourceCard != null ? sourceCard.getName():"null").append("]").toString());
                     return false;
             }
-            setControllerId(event.getPlayerId());
             game.setZone(objectId, event.getToZone());
             game.addSimultaneousEvent(event);
             return game.getState().getZone(objectId) == toZone;
@@ -573,11 +539,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public void setCardNumber(int cid) {
-        this.cardNumber = cid;
-    }
-
-    @Override
     public void setFaceDown(boolean value) {
         faceDown = value;
     }
@@ -627,11 +588,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public void setSecondCardFace(Card card) {
-        this.secondSideCard = card;
-    }
-
-    @Override
     public boolean isNightCard() {
         return this.nightCard;
     }
@@ -645,17 +601,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public String getFlipCardName() {
         return flipCardName;
     }
-
-    @Override
-    public void setFlipCard(boolean flipCard) {
-        this.flipCard = flipCard;
-    }
-
-    @Override
-    public void setFlipCardName(String flipCardName) {
-        this.flipCardName = flipCardName;
-    }
-
 
     @Override
     public boolean isSplitCard() {
@@ -702,8 +647,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public Counters getCounters() {
-        return counters;
+    public Counters getCounters(Game game) {
+        return game.getState().getCardState(this.objectId).getCounters();
     }
 
     @Override
@@ -720,7 +665,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, ownerId, name, 1);
                 event.setAppliedEffects(appliedEffects);
                 if (!game.replaceEvent(event)) {
-                    counters.addCounter(name, 1);
+                    game.getState().getCardState(this.objectId).getCounters().addCounter(name, 1);
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, ownerId, name, 1));
                 }
             }
@@ -744,7 +689,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, ownerId, counter.getName(), 1);
                 event.setAppliedEffects(appliedEffects);
                 if (!game.replaceEvent(event)) {
-                    counters.addCounter(eventCounter);
+                    game.getState().getCardState(this.objectId).getCounters().addCounter(eventCounter);
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, ownerId, counter.getName(), 1));
                 }
             }
@@ -754,7 +699,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public void removeCounters(String name, int amount, Game game) {
         for (int i = 0; i < amount; i++) {
-            counters.removeCounter(name, 1);
+            game.getState().getCardState(this.objectId).getCounters().removeCounter(name, 1);
             GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, ownerId);
             event.setData(name);
             game.fireEvent(event);

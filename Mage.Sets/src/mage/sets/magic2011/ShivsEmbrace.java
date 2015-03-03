@@ -42,7 +42,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continious.BoostEnchantedEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -60,7 +60,6 @@ public class ShivsEmbrace extends CardImpl {
     public ShivsEmbrace(UUID ownerId) {
         super(ownerId, 156, "Shiv's Embrace", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
         this.expansionSetCode = "M11";
-        this.color.setRed(true);
         this.subtype.add("Aura");
 
         // Enchant creature
@@ -69,8 +68,10 @@ public class ShivsEmbrace extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+        
         // Enchanted creature gets +2/+2 and has flying.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ShivsEmbraceEffect()));
+        
         // {R}: Enchanted creature gets +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
 
@@ -117,7 +118,7 @@ class ShivsEmbraceEffect extends ContinuousEffectImpl {
                         break;
                     case AbilityAddingRemovingEffects_6:
                         if (sublayer == SubLayer.NA) {
-                            creature.addAbility(FlyingAbility.getInstance(), game);
+                            creature.addAbility(FlyingAbility.getInstance(), source.getSourceId(), game);
                         }
                         break;
                 }
@@ -134,7 +135,7 @@ class ShivsEmbraceEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == layer.PTChangingEffects_7;
+        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.PTChangingEffects_7;
     }
 
 }

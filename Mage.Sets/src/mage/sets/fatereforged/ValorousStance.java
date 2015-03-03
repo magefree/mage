@@ -30,7 +30,7 @@ package mage.sets.fatereforged;
 import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -64,7 +64,7 @@ public class ValorousStance extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // or destroy target creature with toughness 4 or greater.
         Mode mode1 = new Mode();
-        mode1.getEffects().add(new DestroyTargetEffect(true));
+        mode1.getEffects().add(new DestroyTargetEffect());
         mode1.getTargets().add(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addMode(mode1);
 

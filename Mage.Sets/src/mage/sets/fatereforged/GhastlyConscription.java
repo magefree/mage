@@ -32,13 +32,11 @@ import java.util.Collections;
 import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.BecomesFaceDownCreatureEffect;
-import mage.abilities.effects.common.continious.BecomesFaceDownCreatureEffect.FaceDownType;
+import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
+import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect.FaceDownType;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -48,11 +46,8 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -120,8 +115,8 @@ class GhastlyConscriptionEffect extends OneShotEffect {
                     }
                 }
                 MageObjectReference objectReference= new MageObjectReference(card.getId(), card.getZoneChangeCounter() +1, game);
-                game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, FaceDownType.MANIFESTED), newSource);                                
-                if (card.moveToZone(Zone.BATTLEFIELD, newSource.getSourceId(), game, false)) {
+                game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, FaceDownType.MANIFESTED), newSource);
+                if (controller.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId())) {
                     game.informPlayers(new StringBuilder(controller.getName())
                             .append(" puts facedown card from exile onto the battlefield").toString());
                 }

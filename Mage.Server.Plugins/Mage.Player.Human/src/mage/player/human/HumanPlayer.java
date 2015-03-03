@@ -432,13 +432,29 @@ public class HumanPlayer extends PlayerImpl {
             if (target.getTargets().size() >= target.getNumberOfTargets()) {
                 required = false;
             }
-            game.fireSelectTargetEvent(playerId, target.getMessage(), cards, required, getOptions(target, null));
+            Map<String, Serializable> options = getOptions(target, null);
+            List<UUID> chosen = target.getTargets();
+            options.put("chosen", (Serializable)chosen);
+            List<UUID> choosable = new ArrayList<>();
+            for (UUID cardId : cards) {
+                if (target.canTarget(cardId, cards, game)) {
+                    choosable.add(cardId);
+                }
+            }
+            if (!choosable.isEmpty()) {
+                options.put("choosable", (Serializable) choosable);
+            }
+            game.fireSelectTargetEvent(playerId, target.getMessage(), cards, required, options);
             waitForResponse(game);
             if (response.getUUID() != null) {
-                if (target.canTarget(response.getUUID(), cards, game)) {
-                    target.addTarget(response.getUUID(), source, game);
-                    if(target.doneChosing()){
-                        return true;
+                if (target.getTargets().contains(response.getUUID())) { // if already included remove it 
+                    target.remove(response.getUUID());
+                } else {
+                    if (target.canTarget(response.getUUID(), cards, game)) {
+                        target.addTarget(response.getUUID(), source, game);
+                        if (target.doneChosing()) {
+                            return true;
+                        }
                     }
                 }
             } else {
@@ -606,17 +622,17 @@ public class HumanPlayer extends PlayerImpl {
 
 
     @Override
-    public boolean playMana(ManaCost unpaid, Game game) {
+    public boolean playMana(ManaCost unpaid, String promptText, Game game) {
         payManaMode = true;
-        boolean result = playManaHandling(unpaid, game);
+        boolean result = playManaHandling(unpaid, promptText, game);
         payManaMode = false;
         return result;
     }
 
     
-    protected boolean playManaHandling(ManaCost unpaid, Game game) {
+    protected boolean playManaHandling(ManaCost unpaid, String promptText, Game game) {
         updateGameStatePriority("playMana", game);
-        game.firePlayManaEvent(playerId, "Pay " + unpaid.getText());
+        game.firePlayManaEvent(playerId, "Pay " + promptText);
         waitForResponse(game);
         if (!this.isInGame()) {
             return false;
@@ -627,6 +643,8 @@ public class HumanPlayer extends PlayerImpl {
             playManaAbilities(unpaid, game);
         } else if (response.getString() != null && response.getString().equals("special")) {
             if (unpaid instanceof ManaCostsImpl) {
+                specialManaAction(unpaid, game);
+                // TODO: delve or convoke cards with PhyrexianManaCost won't work together (this combinaton does not exist yet)
                 ManaCostsImpl<ManaCost> costs = (ManaCostsImpl<ManaCost>) unpaid;
                 for (ManaCost cost : costs.getUnpaid()) {
                     if (cost instanceof PhyrexianManaCost) {
@@ -970,14 +988,34 @@ public class HumanPlayer extends PlayerImpl {
         draft.firePickCardEvent(playerId);
     }
 
-    protected void specialAction(Game game) {
-        updateGameStatePriority("specialAction", game);
-        LinkedHashMap<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId);
-        game.fireGetChoiceEvent(playerId, name, null, new ArrayList<>(specialActions.values()));
-        waitForResponse(game);
-        if (response.getUUID() != null) {
-            if (specialActions.containsKey(response.getUUID())) {
-                activateAbility(specialActions.get(response.getUUID()), game);
+    protected void specialAction(Game game) {        
+        LinkedHashMap<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId, false);
+        if (!specialActions.isEmpty()) {
+            updateGameStatePriority("specialAction", game);
+            game.fireGetChoiceEvent(playerId, name, null, new ArrayList<>(specialActions.values()));
+            waitForResponse(game);
+            if (response.getUUID() != null) {
+                if (specialActions.containsKey(response.getUUID())) {
+                    activateAbility(specialActions.get(response.getUUID()), game);
+                }
+            }
+        }
+    }
+
+    protected void specialManaAction(ManaCost unpaid, Game game) {
+        LinkedHashMap<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId, true);
+        if (!specialActions.isEmpty()) {
+            updateGameStatePriority("specialAction", game);
+            game.fireGetChoiceEvent(playerId, name, null, new ArrayList<>(specialActions.values()));
+            waitForResponse(game);
+            if (response.getUUID() != null) {
+                if (specialActions.containsKey(response.getUUID())) {
+                    SpecialAction specialAction = specialActions.get(response.getUUID());
+                    if (specialAction != null) {
+                        specialAction.setUnpaidMana(unpaid);
+                        activateAbility(specialActions.get(response.getUUID()), game);
+                    }
+                }
             }
         }
     }

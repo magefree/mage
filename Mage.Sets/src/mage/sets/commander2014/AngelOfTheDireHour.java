@@ -65,8 +65,7 @@ public class AngelOfTheDireHour extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new ConditionalOneShotEffect(new ExileAllEffect(new FilterAttackingCreature("attacking creatures")), new CastFromHandCondition(),
                 " if you cast it from your hand, exile all attacking creatures"));
-        this.addAbility(ability);
-        this.addWatcher(new CastFromHandWatcher());
+        this.addAbility(ability, new CastFromHandWatcher());
     }
 
     public AngelOfTheDireHour(final AngelOfTheDireHour card) {

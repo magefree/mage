@@ -50,6 +50,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
+import mage.watchers.Watcher;
 
 /**
  * Practically everything in the game is started from an Ability.  This
@@ -360,6 +361,9 @@ public interface Ability extends Controllable, Serializable {
 
     boolean canChooseTarget(Game game);
 
+    List<Watcher> getWatchers();
+    void addWatcher(Watcher watcher);
+    
     /**
      * Returns true if this abilities source is in the zone for the ability
      * 

@@ -36,8 +36,8 @@ import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.AbilityType;
@@ -79,8 +79,7 @@ public class GroundlingPouncer extends CardImpl {
         Effect effect2 = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, false, true);
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{G/U}"), condition, rule);
         ability.addEffect(effect2);
-        this.addAbility(ability);
-        this.addWatcher(new ActivatedAbilityUsedThisTurnWatcher());
+        this.addAbility(ability, new ActivatedAbilityUsedThisTurnWatcher());
 
     }
 

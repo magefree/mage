@@ -34,7 +34,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.condition.common.LandfallCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
@@ -54,7 +54,7 @@ public class TombHex extends CardImpl {
 
         // Target creature gets -2/-2 until end of turn.
         // Landfall - If you had a land enter the battlefield under your control this turn, that creature gets -4/-4 until end of turn instead.
-        this.addWatcher(new LandfallWatcher());
+        this.getSpellAbility().addWatcher(new LandfallWatcher());
         this.getSpellAbility().addEffect(new ConditionalContinousEffect(new BoostTargetEffect(-4, -4, Duration.EndOfTurn), new BoostTargetEffect(-2, -2, Duration.EndOfTurn), 
                 new LockedInCondition(LandfallCondition.getInstance()),
                 "Target creature gets -2/-2 until end of turn. Landfall - If you had a land enter the battlefield under your control this turn, that creature gets -4/-4 until end of turn instead"));

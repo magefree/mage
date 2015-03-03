@@ -38,7 +38,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.FatefulHourCondition;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;

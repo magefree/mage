@@ -29,7 +29,7 @@ package mage.sets.guildpact;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.BoostAllEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.LeylineAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

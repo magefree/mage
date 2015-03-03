@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
-import mage.abilities.effects.common.continious.LoseAbilitySourceEffect;
+import mage.abilities.effects.common.continuous.LoseAbilitySourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;

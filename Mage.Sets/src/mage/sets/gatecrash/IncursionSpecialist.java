@@ -33,7 +33,7 @@ import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.combat.UnblockableSourceEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -57,8 +57,7 @@ public class IncursionSpecialist extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you cast your second spell each turn, Incursion Specialist gets +2/+0 until end of turn and is unblockable this turn.
-        this.addAbility(new IncursionTriggeredAbility());
-        this.addWatcher(new IncursionWatcher());
+        this.addAbility(new IncursionTriggeredAbility(), new IncursionWatcher());
     }
 
     public IncursionSpecialist(final IncursionSpecialist card) {

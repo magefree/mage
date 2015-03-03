@@ -40,7 +40,7 @@ public interface ContinuousRuleModifiyingEffect extends ContinuousEffect {
 
     /**
      * This check for the relevant events is called at first to prevent further actions if
-     * the current event is ignored from this effect
+     * the current event is ignored from this effect. Speeds up event handling.
      * @param event
      * @param game
      * @return

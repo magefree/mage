@@ -11,7 +11,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class MorticianBeetleTest extends CardTestPlayerBase {
 
     /**
-     * Checks that pro black can still be sacrificed
+     * Checks that creature with protection black can still be sacrificed
      */
     @Test
     public void testSacrifice() {

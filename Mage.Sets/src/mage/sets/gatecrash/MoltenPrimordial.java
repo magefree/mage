@@ -38,8 +38,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.effects.common.continious.GainControlTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
@@ -76,10 +76,10 @@ public class MoltenPrimordial extends CardImpl {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof EntersBattlefieldTriggeredAbility) {
+            ability.getTargets().clear();
             for(UUID opponentId : game.getOpponents(ability.getControllerId())) {
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null) {
-                    ability.getTargets().clear();
                     FilterCreaturePermanent filter = new FilterCreaturePermanent(new StringBuilder("creature from opponent ").append(opponent.getName()).toString());
                     filter.add(new ControllerIdPredicate(opponentId));
                     TargetCreaturePermanent target = new TargetCreaturePermanent(0,1, filter,false);

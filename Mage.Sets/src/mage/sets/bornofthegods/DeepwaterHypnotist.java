@@ -30,7 +30,7 @@ package mage.sets.bornofthegods;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.InspiredAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

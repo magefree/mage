@@ -29,8 +29,8 @@ package mage.sets.fifthdawn;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

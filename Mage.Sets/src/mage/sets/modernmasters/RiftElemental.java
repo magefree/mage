@@ -39,7 +39,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.RemoveCounterCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -150,16 +150,16 @@ class RemoveCounterFromCardCost extends CostImpl {
             for (UUID targetId: (List<UUID>)target.getTargets()) {
                 Card card = game.getCard(targetId);
                 if (card != null) {
-                    if (card.getCounters().size() > 0 && (counterTypeToRemove == null || card.getCounters().containsKey(counterTypeToRemove))) {
+                    if (card.getCounters(game).size() > 0 && (counterTypeToRemove == null || card.getCounters(game).containsKey(counterTypeToRemove))) {
                         String counterName = null;
                         if (counterTypeToRemove != null) {
                             counterName = counterTypeToRemove.getName();
                         } else {
-                            if (card.getCounters().size() > 1 && counterTypeToRemove == null) {
+                            if (card.getCounters(game).size() > 1 && counterTypeToRemove == null) {
                                 Choice choice = new ChoiceImpl(true);
                                 Set<String> choices = new HashSet<String>();
-                                for (Counter counter : card.getCounters().values()) {
-                                    if (card.getCounters().getCount(counter.getName()) > 0) {
+                                for (Counter counter : card.getCounters(game).values()) {
+                                    if (card.getCounters(game).getCount(counter.getName()) > 0) {
                                         choices.add(counter.getName());
                                     }
                                 }
@@ -168,7 +168,7 @@ class RemoveCounterFromCardCost extends CostImpl {
                                 controller.choose(Outcome.UnboostCreature, choice, game);
                                 counterName = choice.getChoice();
                             } else {
-                                for (Counter counter : card.getCounters().values()) {
+                                for (Counter counter : card.getCounters(game).values()) {
                                     if (counter.getCount() > 0) {
                                         counterName = counter.getName();
                                     }
@@ -177,8 +177,8 @@ class RemoveCounterFromCardCost extends CostImpl {
                         }
                         if (counterName != null) {
                             card.removeCounters(counterName, 1, game);
-                            if (card.getCounters().getCount(counterName) == 0 ){
-                                card.getCounters().removeCounter(counterName);
+                            if (card.getCounters(game).getCount(counterName) == 0 ){
+                                card.getCounters(game).removeCounter(counterName);
                             }
                             this.paid = true;
                             game.informPlayers(new StringBuilder(controller.getName()).append(" removes a ").append(counterName).append(" counter from ").append(card.getName()).toString());

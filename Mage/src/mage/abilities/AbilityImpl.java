@@ -75,6 +75,7 @@ import mage.game.stack.StackAbility;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
+import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
 /**
@@ -84,6 +85,7 @@ import org.apache.log4j.Logger;
 public abstract class AbilityImpl implements Ability {
 
     private static final transient Logger logger = Logger.getLogger(AbilityImpl.class);
+    private static final List<Watcher> emptyWatchers = new ArrayList<>();
 
     protected UUID id;
     protected UUID originalId;
@@ -107,6 +109,7 @@ public abstract class AbilityImpl implements Ability {
     protected boolean activated = false;
     protected boolean worksFaceDown = false;
     protected MageObject sourceObject;
+    protected List<Watcher> watchers = null;    
 
     public AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
@@ -135,6 +138,12 @@ public abstract class AbilityImpl implements Ability {
         this.optionalCosts = ability.optionalCosts.copy();
         for (AlternativeCost cost: ability.alternativeCosts) {
             this.alternativeCosts.add((AlternativeCost)cost.copy());
+        }
+        if (ability.watchers != null) {
+            this.watchers = new ArrayList<>();
+            for (Watcher watcher: ability.watchers) {
+                watchers.add(watcher.copy());
+            }
         }
         this.modes = ability.modes.copy();
         this.ruleAtTheTop = ability.ruleAtTheTop;
@@ -548,6 +557,11 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public void setControllerId(UUID controllerId) {
         this.controllerId = controllerId;
+        if (watchers != null) {
+            for (Watcher watcher: watchers) {
+                watcher.setControllerId(controllerId);
+            }
+        }
     }
 
 
@@ -563,6 +577,11 @@ public abstract class AbilityImpl implements Ability {
         } else {
             if (!(this instanceof MageSingleton)) {
                 this.sourceId = sourceId;
+            }
+        }
+        if (watchers != null) {
+            for (Watcher watcher: watchers) {
+                watcher.setSourceId(sourceId);
             }
         }
     }
@@ -622,6 +641,23 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public Zone getZone() {
         return zone;
+    }
+
+    @Override
+    public List<Watcher> getWatchers() {
+        if (watchers != null)
+            return watchers;
+        else
+            return emptyWatchers;
+    }
+
+    @Override
+    public void addWatcher(Watcher watcher) {
+        if (watchers == null)
+            watchers = new ArrayList<>();
+        watcher.setSourceId(this.sourceId);
+        watcher.setControllerId(this.controllerId);
+        watchers.add(watcher);
     }
 
     @Override

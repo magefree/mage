@@ -69,8 +69,10 @@ public class MiracleWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.UNTAP_STEP_PRE) {
             reset();
+            return;
         }
-        if (event.getType() == GameEvent.EventType.DREW_CARD) {
+        // inital card draws do not trigger miracle so check that phase != null
+        if (game.getPhase() != null && event.getType() == GameEvent.EventType.DREW_CARD) {
             UUID playerId = event.getPlayerId();
             if (playerId != null) {
                 Integer amount = amountOfCardsDrawnThisTurn.get(playerId);
@@ -97,7 +99,7 @@ public class MiracleWatcher extends Watcher {
                         Cards cards = new CardsImpl();
                         cards.add(card);
                         controller.lookAtCards("Miracle", cards, game);
-                        if (controller.chooseUse(Outcome.Benefit, "Reveal card to be able to use Miracle?", game)) {
+                        if (controller.chooseUse(Outcome.Benefit, "Reveal " + card.getName() + " to be able to use Miracle?", game)) {
                             controller.revealCards("Miracle", cards, game);
                             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.MIRACLE_CARD_REVEALED, card.getId(), card.getId(),controller.getId()));
                             break;

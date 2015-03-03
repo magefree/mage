@@ -34,8 +34,8 @@ import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Pulverize extends CardImpl {
     
-    private static final FilterPermanent filter = new FilterPermanent("two Mountains");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("two Mountains");
     static {
         filter.add(new SubtypePredicate("Mountain"));
     }

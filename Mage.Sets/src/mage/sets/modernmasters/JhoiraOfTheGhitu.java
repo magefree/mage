@@ -142,12 +142,14 @@ class JhoiraOfTheGhituSuspendEffect extends OneShotEffect {
                     for (Ability ability :card.getAbilities()) {
                         if (!oldAbilities.contains(ability)) {
                             ability.setControllerId(source.getControllerId());
-                            game.getState().addAbility(ability, card.getId(), card);
+                            ability.setSourceId(source.getSourceId());
+                            ability.setSourceObject(source.getSourceObject(game));
+                            game.getState().addAbility(ability, card);
                         }
                     }
                     
                 }
-                game.informPlayers(new StringBuilder(controller.getName()).append(" suspends (").append(4).append(") ").append(card.getName()).toString());
+                game.informPlayers(controller.getName() + " suspends 4 - " + card.getName());
                 return true;
             }
         }

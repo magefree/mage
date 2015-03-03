@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
@@ -66,7 +66,7 @@ public class CankerousThirst extends CardImpl {
                 "If {G} was spent to cast {this}, you may have target creature get +3/+3 until end of turn"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.addInfo("Info1", "<i>(Do both if {B}{G} was spent.)<i>");
-        this.addWatcher(new ManaSpentToCastWatcher());
+        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
     public CankerousThirst(final CankerousThirst card) {

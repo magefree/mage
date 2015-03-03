@@ -58,7 +58,7 @@ public class InfernoTrap extends CardImpl {
 
         // If you've been dealt damage by two or more creatures this turn, you may pay {R} rather than pay Inferno Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(new InfernoTrapAlternativeCost());
-        this.addWatcher(new ControllerDamagedByCreatureWatcher());
+        this.getSpellAbility().addWatcher(new ControllerDamagedByCreatureWatcher());
         
         // Inferno Trap deals 4 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));

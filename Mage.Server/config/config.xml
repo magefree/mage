@@ -41,13 +41,14 @@
         <!--<playerType name="Computer - minimax" jar="mage-player-aiminimax.jar" className="mage.player.ai.ComputerPlayer3"/>-->
         <playerType name="Computer - mad" jar="mage-player-ai-ma.jar" className="mage.player.ai.ComputerPlayer7"/>
         <!--<playerType name="Computer - monte carlo" jar="mage-player-aimcts.jar" className="mage.player.ai.ComputerPlayerMCTS"/>-->
-	<playerType name="Computer - draftbot" jar="mage-player-ai-draft-bot.jar" className="mage.player.ai.ComputerDraftPlayer"/>
+		<playerType name="Computer - draftbot" jar="mage-player-ai-draft-bot.jar" className="mage.player.ai.ComputerDraftPlayer"/>
     </playerTypes>
     <gameTypes>
         <gameType name="Two Player Duel" jar="mage-game-twoplayerduel.jar" className="mage.game.TwoPlayerMatch" typeName="mage.game.TwoPlayerDuelType"/>
         <gameType name="Free For All" jar="mage-game-freeforall.jar" className="mage.game.FreeForAllMatch" typeName="mage.game.FreeForAllType"/>
         <gameType name="Commander Two Player Duel" jar="mage-game-commanderduel.jar" className="mage.game.CommanderDuelMatch" typeName="mage.game.CommanderDuelType"/>
         <gameType name="Commander Free For All" jar="mage-game-commanderfreeforall.jar" className="mage.game.CommanderFreeForAllMatch" typeName="mage.game.CommanderFreeForAllType"/>
+		<gameType name="Tiny Leaders Two Player Duel" jar="mage-game-tinyleadersduel.jar" className="mage.game.TinyLeadersDuelMatch" typeName="mage.game.TinyLeadersDuelType"/>
     </gameTypes>
     <tournamentTypes>
         <tournamentType name="Constructed Elimination" jar="mage-tournament-constructed.jar" className="mage.tournament.ConstructedEliminationTournament" typeName="mage.tournament.ConstructedEliminationTournamentType"/>
@@ -91,6 +92,7 @@
         <deckType name="Block Constructed - Zendikar" jar="mage-deck-constructed.jar" className="mage.deck.ZendikarBlock"/>
         <deckType name="Variant Magic - Commander" jar="mage-deck-constructed.jar" className="mage.deck.Commander"/>
         <deckType name="Variant Magic - Duel Commander" jar="mage-deck-constructed.jar" className="mage.deck.DuelCommander"/>
+		<deckType name="Variant Magic - Tiny Leaders" jar="mage-deck-constructed.jar" className="mage.deck.TinyLeaders"/>
         <deckType name="Limited" jar="mage-deck-limited.jar" className="mage.deck.Limited"/>
     </deckTypes>
 </config>

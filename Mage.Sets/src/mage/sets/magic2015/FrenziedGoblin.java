@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class FrenziedGoblin extends mage.sets.ravnika.FrenziedGoblin {
+public class FrenziedGoblin extends mage.sets.ravnica.FrenziedGoblin {
 
     public FrenziedGoblin(UUID ownerId) {
         super(ownerId);

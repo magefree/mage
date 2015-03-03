@@ -28,6 +28,7 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -75,8 +76,8 @@ class CaravanVigilEffect extends OneShotEffect {
 
     public CaravanVigilEffect() {
         super(Outcome.PutLandInPlay);
-        this.staticText = "Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.\n"
-                + "Morbid - You may put that card onto the battlefield instead of putting it into your hand if a creature died this turn";
+        this.staticText = "Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.<br>"
+                + "<i>Morbid</i> &mdash; You may put that card onto the battlefield instead of putting it into your hand if a creature died this turn";
     }
 
     public CaravanVigilEffect(final CaravanVigilEffect effect) {
@@ -90,26 +91,26 @@ class CaravanVigilEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject != null && controller != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
-            if (player.searchLibrary(target, game)) {
-                Cards cards = new CardsImpl();
-                Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
+            if (controller.searchLibrary(target, game)) {
+                Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
                 if (card != null) {
+                    Cards cards = new CardsImpl();
                     cards.add(card);
                     if (MorbidCondition.getInstance().apply(game, source)
-                            && player.chooseUse(Outcome.PutLandInPlay, "Do you wish to put the card onto the battlefield instead?", game)) {
-                        card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), source.getControllerId());
+                            && controller.chooseUse(Outcome.PutLandInPlay, "Do you wish to put the card onto the battlefield instead?", game)) {
+                        controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
                     } else {
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                        controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                     }
-                }
-                player.revealCards("Caravan Vigil", cards, game);
-                player.shuffleLibrary(game);
-                return true;
+                    controller.revealCards(sourceObject.getLogName(), cards, game);
+                }                
             }
-            player.shuffleLibrary(game);
+            controller.shuffleLibrary(game);
+            return true;
         }
         return false;
     }

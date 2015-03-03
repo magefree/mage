@@ -37,7 +37,7 @@ import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.FlipSourceEffect;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;

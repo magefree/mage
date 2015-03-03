@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class PrimordialSage extends mage.sets.ravnika.PrimordialSage {
+public class PrimordialSage extends mage.sets.ravnica.PrimordialSage {
 
     public PrimordialSage(UUID ownerId) {
         super(ownerId);

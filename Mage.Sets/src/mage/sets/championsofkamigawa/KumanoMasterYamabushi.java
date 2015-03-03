@@ -44,6 +44,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
+import mage.watchers.common.DamagedByWatcher;
 
 /**
  * @author LevelX
@@ -65,7 +66,7 @@ public class KumanoMasterYamabushi extends CardImpl {
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
         // If a creature dealt damage by Kumano this turn would die, exile it instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DealtDamageToCreatureBySourceDies(this, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DealtDamageToCreatureBySourceDies(this, Duration.WhileOnBattlefield)), new DamagedByWatcher());
         
     }
 

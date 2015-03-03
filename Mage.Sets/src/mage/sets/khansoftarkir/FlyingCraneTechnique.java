@@ -30,7 +30,7 @@ package mage.sets.khansoftarkir;
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;

@@ -28,17 +28,17 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -58,7 +58,6 @@ public class TuktukScrapper extends CardImpl {
         this.subtype.add("Artificer");
         this.subtype.add("Ally");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
@@ -80,6 +79,7 @@ class TuktukScrapperTriggeredAbility extends TriggeredAbilityImpl {
 
     public TuktukScrapperTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TuktukScrapperEffect(), true);
+        this.addTarget(new TargetArtifactPermanent());
     }
 
     public TuktukScrapperTriggeredAbility(final TuktukScrapperTriggeredAbility ability) {
@@ -92,14 +92,18 @@ class TuktukScrapperTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getId() == this.getSourceId()) {
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent != null) {
+            if (permanent.getId() == this.getSourceId()) {
                 return true;
             }
-            if (permanent != null
-                    && permanent.hasSubtype("Ally")
+            if (permanent.hasSubtype("Ally")
                     && permanent.getControllerId().equals(this.getControllerId())) {
                 return true;
             }
@@ -115,11 +119,10 @@ class TuktukScrapperTriggeredAbility extends TriggeredAbilityImpl {
 
 class TuktukScrapperEffect extends OneShotEffect {
 
-    private static final FilterPermanent filter = new FilterPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
     static {
         filter.add(new SubtypePredicate("Ally"));
-        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public TuktukScrapperEffect() {
@@ -137,22 +140,18 @@ class TuktukScrapperEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TargetArtifactPermanent target = new TargetArtifactPermanent();
-        Player you = game.getPlayer(source.getControllerId());
-        if (you != null) {
-            if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.DestroyPermanent, source.getControllerId(), source.getSourceId(), game)) {
-                Permanent targetedArtifact = game.getPermanent(target.getFirstTarget());
-                if (targetedArtifact != null) {
-                    Card artifact = game.getCard(targetedArtifact.getId());
-                    Player controller = game.getPlayer(targetedArtifact.getControllerId());
-                    targetedArtifact.destroy(id, game, true);
-                    if (controller.getGraveyard().contains(artifact.getId())) {
-                        int alliesControlled = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
-                        controller.damage(alliesControlled, id, game, false, true);
-                        return true;
-                    }
+        Permanent targetArtifact = game.getPermanent(getTargetPointer().getFirst(game, source));
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && targetArtifact != null) {
+            targetArtifact.destroy(source.getSourceId(), game, false);
+            Player targetController = game.getPlayer(targetArtifact.getControllerId());
+            if (targetController != null && game.getState().getZone(targetArtifact.getId()).equals(Zone.GRAVEYARD)) {
+                int alliesControlled = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+                if (alliesControlled > 0) {
+                    targetController.damage(alliesControlled, source.getSourceId(), game, false, true);
                 }
             }
+            return true;
         }
         return false;
     }

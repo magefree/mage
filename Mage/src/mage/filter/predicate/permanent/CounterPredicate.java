@@ -46,7 +46,7 @@ public class CounterPredicate implements Predicate<Card> {
 
     @Override
     public boolean apply(Card input, Game game) {
-        return input.getCounters().containsKey(counter);
+        return input.getCounters(game).containsKey(counter);
     }
 
     @Override

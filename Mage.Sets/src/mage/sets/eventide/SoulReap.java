@@ -78,7 +78,7 @@ public class SoulReap extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new SoulReapEffect(), new CastBlackSpellThisTurnCondition(), rule));
-        this.addWatcher(new SoulReapWatcher(this.getId()));
+        this.getSpellAbility().addWatcher(new SoulReapWatcher(this.getId()));
         
     }
 

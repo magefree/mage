@@ -36,7 +36,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.BoostAllEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;

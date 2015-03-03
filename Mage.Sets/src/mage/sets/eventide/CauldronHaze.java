@@ -28,7 +28,7 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.PersistAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
