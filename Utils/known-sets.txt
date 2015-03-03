@@ -88,7 +88,7 @@ Portal Second Age|portalsecondage|
 Portal Three Kingdoms|portalthreekingdoms|
 Portal|portal|
 Prophecy|prophecy|
-Ravnica: City of Guilds|ravnika|
+Ravnica: City of Guilds|ravnica|
 Return to Ravnica|returntoravnica|
 Revised Edition|revisededition|
 Rise of the Eldrazi|riseoftheeldrazi|
