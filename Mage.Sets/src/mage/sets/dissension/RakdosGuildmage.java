@@ -123,7 +123,7 @@ class RakdosGuildmageEffect extends OneShotEffect {
 class RakdosGuildmageGoblinToken extends Token {
 
     RakdosGuildmageGoblinToken() {
-        super("Goblin", "2/14 red Goblin creature token with haste");
+        super("Goblin", "2/1 red Goblin creature token with haste");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add("Goblin");
