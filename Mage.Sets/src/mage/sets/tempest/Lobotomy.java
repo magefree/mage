@@ -29,26 +29,21 @@ package mage.sets.tempest;
 
 import java.util.UUID;
 import mage.MageObject;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
@@ -62,9 +57,6 @@ public class Lobotomy extends CardImpl {
     public Lobotomy(UUID ownerId) {
         super(ownerId, 342, "Lobotomy", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");
         this.expansionSetCode = "TMP";
-
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Target player reveals his or her hand, then you choose a card other than a basic land card from it. Search that player's graveyard, hand, and library for all cards with the same name as the chosen card and exile them. Then that player shuffles his or her library.
         this.getSpellAbility().addEffect(new LobotomyEffect());
@@ -86,8 +78,7 @@ class LobotomyEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("card other than a basic land card");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
+        filter.add(Predicates.not(Predicates.and(new CardTypePredicate(CardType.LAND), new SupertypePredicate("Basic"))));
     }
 
     public LobotomyEffect() {
@@ -109,8 +100,8 @@ class LobotomyEffect extends OneShotEffect {
             // reveal hand of target player 
             targetPlayer.revealCards(sourceObject.getLogName(), targetPlayer.getHand(), game);
             
-            // You choose a nonland card from it
-            TargetCardInHand target = new TargetCardInHand(new FilterNonlandCard());
+            // You choose card other than a basic land card
+            TargetCardInHand target = new TargetCardInHand(filter);
             target.setNotTarget(true);
             Card chosenCard = null;
             if (controller.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
