@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.UntapAllLandsControllerEffect;
-import mage.abilities.effects.common.continious.BecomesCreatureAllEffect;
+import mage.abilities.effects.common.continuous.BecomesCreatureAllEffect;
 import mage.abilities.keyword.EntwineAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

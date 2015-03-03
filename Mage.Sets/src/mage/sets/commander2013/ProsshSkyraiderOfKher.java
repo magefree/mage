@@ -34,7 +34,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.dynamicvalue.common.ManaSpentToCastCount;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

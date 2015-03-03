@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author magenoxx_at_gmail.com
  */
-public class TempleGarden extends mage.sets.ravnika.TempleGarden {
+public class TempleGarden extends mage.sets.ravnica.TempleGarden {
 
     public TempleGarden(UUID ownerId) {
         super(ownerId);

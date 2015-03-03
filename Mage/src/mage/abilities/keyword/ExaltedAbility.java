@@ -31,7 +31,7 @@ package mage.abilities.keyword;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;

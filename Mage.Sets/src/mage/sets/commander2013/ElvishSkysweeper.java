@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class ElvishSkysweeper extends mage.sets.ravnika.ElvishSkysweeper {
+public class ElvishSkysweeper extends mage.sets.ravnica.ElvishSkysweeper {
 
     public ElvishSkysweeper(UUID ownerId) {
         super(ownerId);

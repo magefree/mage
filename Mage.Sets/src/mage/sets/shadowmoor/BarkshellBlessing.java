@@ -28,7 +28,7 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.ConspireAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

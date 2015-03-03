@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class CompulsiveResearch extends mage.sets.ravnika.CompulsiveResearch {
+public class CompulsiveResearch extends mage.sets.ravnica.CompulsiveResearch {
 
     public CompulsiveResearch(UUID ownerId) {
         super(ownerId);

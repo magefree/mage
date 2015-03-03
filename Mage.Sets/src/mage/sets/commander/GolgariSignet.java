@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class GolgariSignet extends mage.sets.ravnika.GolgariSignet {
+public class GolgariSignet extends mage.sets.ravnica.GolgariSignet {
 
     public GolgariSignet(UUID ownerId) {
         super(ownerId);

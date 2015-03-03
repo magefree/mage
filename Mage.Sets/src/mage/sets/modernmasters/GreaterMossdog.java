@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class GreaterMossdog extends mage.sets.ravnika.GreaterMossdog {
+public class GreaterMossdog extends mage.sets.ravnica.GreaterMossdog {
 
     public GreaterMossdog(UUID ownerId) {
         super(ownerId);

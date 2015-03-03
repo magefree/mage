@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class DarkConfidant extends mage.sets.ravnika.DarkConfidant {
+public class DarkConfidant extends mage.sets.ravnica.DarkConfidant {
 
     public DarkConfidant(UUID ownerId) {
         super(ownerId);

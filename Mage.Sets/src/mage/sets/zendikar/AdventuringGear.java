@@ -35,7 +35,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;

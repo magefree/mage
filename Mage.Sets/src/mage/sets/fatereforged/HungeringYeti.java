@@ -34,7 +34,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.effects.AsThoughEffect;
-import mage.abilities.effects.common.continious.CastAsThoughItHadFlashSourceEffect;
+import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;

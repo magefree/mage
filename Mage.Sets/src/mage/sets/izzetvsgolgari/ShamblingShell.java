@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class ShamblingShell extends mage.sets.ravnika.ShamblingShell {
+public class ShamblingShell extends mage.sets.ravnica.ShamblingShell {
 
     public ShamblingShell(UUID ownerId) {
         super(ownerId);

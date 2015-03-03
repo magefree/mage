@@ -29,7 +29,7 @@ package mage.sets.eventide;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continious.SwitchPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SwitchPowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;

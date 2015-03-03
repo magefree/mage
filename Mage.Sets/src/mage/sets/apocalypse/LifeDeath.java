@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.BecomesCreatureAllEffect;
+import mage.abilities.effects.common.continuous.BecomesCreatureAllEffect;
 import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Rarity;

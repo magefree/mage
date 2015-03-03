@@ -28,7 +28,7 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.abilities.effects.common.continious.BoostAllEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

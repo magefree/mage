@@ -29,7 +29,7 @@ package mage.sets.mirage;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.continious.GainControlTargetEffect;
+import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;

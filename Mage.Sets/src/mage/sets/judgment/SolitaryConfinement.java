@@ -34,7 +34,7 @@ import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.PreventAllDamageToControllerEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.effects.common.SkipDrawStepEffect;
-import mage.abilities.effects.common.continious.GainAbilityControllerEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

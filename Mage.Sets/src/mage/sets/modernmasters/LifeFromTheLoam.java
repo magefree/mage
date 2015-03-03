@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class LifeFromTheLoam extends mage.sets.ravnika.LifeFromTheLoam {
+public class LifeFromTheLoam extends mage.sets.ravnica.LifeFromTheLoam {
 
     public LifeFromTheLoam(UUID ownerId) {
         super(ownerId);

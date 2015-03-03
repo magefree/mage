@@ -40,7 +40,7 @@ import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.combat.CanAttackAsThoughtItDidntHaveDefenderEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;

@@ -34,7 +34,7 @@ import java.util.UUID;
  *
  * @author Backfir3
  */
-public class GoblinSpelunkers extends mage.sets.ravnika.GoblinSpelunkers {
+public class GoblinSpelunkers extends mage.sets.ravnica.GoblinSpelunkers {
 
     public GoblinSpelunkers(UUID ownerId) {
         super(ownerId);

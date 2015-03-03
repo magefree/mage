@@ -28,7 +28,7 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.abilities.effects.common.continious.SwitchPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SwitchPowerToughnessTargetEffect;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

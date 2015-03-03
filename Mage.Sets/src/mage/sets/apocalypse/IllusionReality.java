@@ -30,7 +30,7 @@ package mage.sets.apocalypse;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.continious.BecomesColorTargetEffect;
+import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;

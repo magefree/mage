@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author fireshoes
  */
-public class Farseek extends mage.sets.ravnika.Farseek {
+public class Farseek extends mage.sets.ravnica.Farseek {
 
     public Farseek(UUID ownerId) {
         super(ownerId);

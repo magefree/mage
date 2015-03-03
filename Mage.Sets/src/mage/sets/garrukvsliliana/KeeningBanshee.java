@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class KeeningBanshee extends mage.sets.ravnika.KeeningBanshee {
+public class KeeningBanshee extends mage.sets.ravnica.KeeningBanshee {
 
     public KeeningBanshee(UUID ownerId) {
         super(ownerId);

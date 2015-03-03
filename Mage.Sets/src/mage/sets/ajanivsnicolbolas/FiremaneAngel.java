@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class FiremaneAngel extends mage.sets.ravnika.FiremaneAngel {
+public class FiremaneAngel extends mage.sets.ravnica.FiremaneAngel {
 
     public FiremaneAngel(UUID ownerId) {
         super(ownerId);

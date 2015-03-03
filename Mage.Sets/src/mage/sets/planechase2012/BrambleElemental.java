@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class BrambleElemental extends mage.sets.ravnika.BrambleElemental {
+public class BrambleElemental extends mage.sets.ravnica.BrambleElemental {
 
     public BrambleElemental(UUID ownerId) {
         super(ownerId);

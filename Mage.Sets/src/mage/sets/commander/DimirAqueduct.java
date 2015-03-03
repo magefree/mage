@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class DimirAqueduct extends mage.sets.ravnika.DimirAqueduct {
+public class DimirAqueduct extends mage.sets.ravnica.DimirAqueduct {
 
     public DimirAqueduct(UUID ownerId) {
         super(ownerId);

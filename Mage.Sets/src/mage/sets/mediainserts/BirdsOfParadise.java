@@ -30,7 +30,7 @@ package mage.sets.mediainserts;
 
 import java.util.UUID;
 
-public class BirdsOfParadise extends mage.sets.ravnika.BirdsOfParadise {
+public class BirdsOfParadise extends mage.sets.ravnica.BirdsOfParadise {
     
     public BirdsOfParadise(UUID ownerId) {
         super(ownerId);

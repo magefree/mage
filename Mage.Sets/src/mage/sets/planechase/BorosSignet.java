@@ -34,7 +34,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class BorosSignet extends mage.sets.ravnika.BorosSignet {
+public class BorosSignet extends mage.sets.ravnica.BorosSignet {
 
     public BorosSignet (UUID ownerId) {
         super(ownerId);

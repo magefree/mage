@@ -29,7 +29,7 @@ package mage.abilities.common;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.BecomesAuraSourceEffect;
+import mage.abilities.effects.common.continuous.BecomesAuraSourceEffect;
 import mage.abilities.effects.keyword.ManifestEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class BorosGuildmage extends mage.sets.ravnika.BorosGuildmage {
+public class BorosGuildmage extends mage.sets.ravnica.BorosGuildmage {
 
     public BorosGuildmage(UUID ownerId) {
         super(ownerId);

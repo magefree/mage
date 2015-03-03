@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class GatherCourage extends mage.sets.ravnika.GatherCourage {
+public class GatherCourage extends mage.sets.ravnica.GatherCourage {
 
     public GatherCourage(UUID ownerId) {
         super(ownerId);

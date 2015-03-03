@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class SkyknightLegionnaire extends mage.sets.ravnika.SkyknightLegionnaire {
+public class SkyknightLegionnaire extends mage.sets.ravnica.SkyknightLegionnaire {
 
     public SkyknightLegionnaire(UUID ownerId) {
         super(ownerId);

@@ -32,7 +32,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect;
+import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.*;

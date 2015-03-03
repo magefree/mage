@@ -27,6 +27,11 @@
  */
 package mage.sets.magic2010;
 
+import mage.abilities.effects.common.continuous.PlayWithTheTopCardRevealedEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -38,7 +43,6 @@ import mage.abilities.StaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.common.continious.*;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;

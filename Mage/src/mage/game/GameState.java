@@ -783,7 +783,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     
     public CardState getCardState(UUID cardId) {
         if (!cardState.containsKey(cardId)) {
-            cardState.putIfAbsent(cardId, new CardState());
+            cardState.put(cardId, new CardState());
+            // cardState.putIfAbsent(cardId, new CardState());
         }
         return cardState.get(cardId);
     }

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class SelesnyaSignet extends mage.sets.ravnika.SelesnyaSignet {
+public class SelesnyaSignet extends mage.sets.ravnica.SelesnyaSignet {
 
     public SelesnyaSignet(UUID ownerId) {
         super(ownerId);

@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continious.AddCardTypeTargetEffect;
+import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
 

@@ -38,7 +38,7 @@ import mage.abilities.ActivatedAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.continious.PlayWithTheTopCardRevealedEffect;
+import mage.abilities.effects.common.continuous.PlayWithTheTopCardRevealedEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.Duration;

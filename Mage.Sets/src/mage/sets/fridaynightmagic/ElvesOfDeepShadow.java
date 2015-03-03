@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author fireshoes
  */
-public class ElvesOfDeepShadow extends mage.sets.ravnika.ElvesOfDeepShadow {
+public class ElvesOfDeepShadow extends mage.sets.ravnica.ElvesOfDeepShadow {
 
     public ElvesOfDeepShadow(UUID ownerId) {
         super(ownerId);

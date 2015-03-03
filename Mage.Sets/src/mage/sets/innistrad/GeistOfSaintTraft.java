@@ -43,7 +43,6 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.AngelToken;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -60,11 +59,10 @@ public class GeistOfSaintTraft extends CardImpl {
         this.subtype.add("Spirit");
         this.subtype.add("Cleric");
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
+        // Hexproof
         this.addAbility(HexproofAbility.getInstance());
         // Whenever Geist of Saint Traft attacks, put a 4/4 white Angel creature token with flying onto the battlefield tapped and attacking. Exile that token at end of combat.
         this.addAbility(new AttacksTriggeredAbility(new GeistOfSaintTraftEffect(), false));
@@ -97,7 +95,7 @@ class GeistOfSaintTraftEffect extends OneShotEffect {
         if (controller != null && token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), true, true)) {
             Effect effect = new ExileTargetEffect();
             effect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
-            CreateDelayedTriggeredAbilityEffect createEffect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(effect));
+            CreateDelayedTriggeredAbilityEffect createEffect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(effect), false);
             createEffect.apply(game, source);
             return true;
         }

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class HuntedTroll extends mage.sets.ravnika.HuntedTroll {
+public class HuntedTroll extends mage.sets.ravnica.HuntedTroll {
 
     public HuntedTroll(UUID ownerId) {
         super(ownerId);
