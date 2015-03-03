@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class FistsOfIronwood extends mage.sets.ravnika.FistsOfIronwood {
+public class FistsOfIronwood extends mage.sets.ravnica.FistsOfIronwood {
 
     public FistsOfIronwood(UUID ownerId) {
         super(ownerId);

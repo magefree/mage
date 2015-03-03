@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class CourierHawk extends mage.sets.ravnika.CourierHawk {
+public class CourierHawk extends mage.sets.ravnica.CourierHawk {
 
     public CourierHawk(UUID ownerId) {
         super(ownerId);

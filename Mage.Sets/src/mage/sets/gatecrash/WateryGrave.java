@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class WateryGrave extends mage.sets.ravnika.WateryGrave {
+public class WateryGrave extends mage.sets.ravnica.WateryGrave {
 
     public WateryGrave(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class VedalkenDismisser extends mage.sets.ravnika.VedalkenDismisser {
+public class VedalkenDismisser extends mage.sets.ravnica.VedalkenDismisser {
 
     public VedalkenDismisser(UUID ownerId) {
         super(ownerId);

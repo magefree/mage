@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class SearingMeditation extends mage.sets.ravnika.SearingMeditation {
+public class SearingMeditation extends mage.sets.ravnica.SearingMeditation {
 
     public SearingMeditation(UUID ownerId) {
         super(ownerId);

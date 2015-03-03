@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class DarkConfidant extends mage.sets.ravnika.DarkConfidant {
+public class DarkConfidant extends mage.sets.ravnica.DarkConfidant {
 
     public DarkConfidant(UUID ownerId) {
         super(ownerId);

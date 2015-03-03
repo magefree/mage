@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class SiegeWurm extends mage.sets.ravnika.SiegeWurm {
+public class SiegeWurm extends mage.sets.ravnica.SiegeWurm {
 
     public SiegeWurm(UUID ownerId) {
         super(ownerId);

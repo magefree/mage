@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class Remand extends mage.sets.ravnika.Remand {
+public class Remand extends mage.sets.ravnica.Remand {
 
     public Remand(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class VeteranArmorer extends mage.sets.ravnika.VeteranArmorer {
+public class VeteranArmorer extends mage.sets.ravnica.VeteranArmorer {
 
     public VeteranArmorer(UUID ownerId) {
         super(ownerId);

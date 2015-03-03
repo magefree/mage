@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class Hex extends mage.sets.ravnika.Hex {
+public class Hex extends mage.sets.ravnica.Hex {
 
     public Hex(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author emerald000
  */
-public class VigorMortis extends mage.sets.ravnika.VigorMortis {
+public class VigorMortis extends mage.sets.ravnica.VigorMortis {
 
     public VigorMortis(UUID ownerId) {
         super(ownerId);

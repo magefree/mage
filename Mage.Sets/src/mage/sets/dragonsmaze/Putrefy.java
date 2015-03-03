@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class Putrefy extends mage.sets.ravnika.Putrefy {
+public class Putrefy extends mage.sets.ravnica.Putrefy {
 
     public Putrefy(UUID ownerId) {
         super(ownerId);

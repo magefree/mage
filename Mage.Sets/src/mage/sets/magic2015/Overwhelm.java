@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class Overwhelm extends mage.sets.ravnika.Overwhelm {
+public class Overwhelm extends mage.sets.ravnica.Overwhelm {
 
     public Overwhelm(UUID ownerId) {
         super(ownerId);

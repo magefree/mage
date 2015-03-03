@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class SurveillingSprite extends mage.sets.ravnika.SurveillingSprite {
+public class SurveillingSprite extends mage.sets.ravnica.SurveillingSprite {
 
     public SurveillingSprite(UUID ownerId) {
         super(ownerId);

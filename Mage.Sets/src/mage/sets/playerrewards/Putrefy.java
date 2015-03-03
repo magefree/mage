@@ -5,7 +5,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class Putrefy extends mage.sets.ravnika.Putrefy {
+public class Putrefy extends mage.sets.ravnica.Putrefy {
     public Putrefy(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 14;

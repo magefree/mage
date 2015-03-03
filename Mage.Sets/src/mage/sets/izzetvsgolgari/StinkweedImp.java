@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class StinkweedImp extends mage.sets.ravnika.StinkweedImp {
+public class StinkweedImp extends mage.sets.ravnica.StinkweedImp {
 
     public StinkweedImp(UUID ownerId) {
         super(ownerId);
