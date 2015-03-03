@@ -31,12 +31,14 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continious.BoostEnchantedEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -46,8 +48,9 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 public class CrusadingKnight extends CardImpl {
 
     private static final FilterCard filterBlack = new FilterCard("Black");
-    private static final FilterLandPermanent filterSwamps = new FilterLandPermanent("Swamps your opponent controls");
+    private static final FilterLandPermanent filterSwamps = new FilterLandPermanent("Swamp your opponent controls");
     static {
+      filterSwamps.add(new SubtypePredicate("Swamp"));
       filterSwamps.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
@@ -64,7 +67,7 @@ public class CrusadingKnight extends CardImpl {
 
         // Crusading Knight gets +1/+1 for each Swamp your opponents control.
       PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filterSwamps, 1);
-      SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(amount, amount, Duration.WhileOnBattlefield));
+      SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield));
       this.addAbility(ability);
     }
 

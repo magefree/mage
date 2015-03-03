@@ -34,7 +34,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class BorosGuildmage extends mage.sets.ravnika.BorosGuildmage {
+public class BorosGuildmage extends mage.sets.ravnica.BorosGuildmage {
 
     public BorosGuildmage (UUID ownerId) {
         super(ownerId);

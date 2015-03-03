@@ -5,7 +5,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class LightningHelix extends mage.sets.ravnika.LightningHelix {
+public class LightningHelix extends mage.sets.ravnica.LightningHelix {
     public LightningHelix(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 16;

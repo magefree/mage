@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -53,7 +52,8 @@ public class CapashenUnicorn extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
     static {
-      filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.ENCHANTMENT)));
+      filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), 
+              new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
     public CapashenUnicorn(UUID ownerId) {
@@ -64,7 +64,7 @@ public class CapashenUnicorn extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{W}, {tap}, Sacrifice Capashen Unicorn: Destroy target artifact or enchantment.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(),  new ManaCostsImpl<>("{W}{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(filter));

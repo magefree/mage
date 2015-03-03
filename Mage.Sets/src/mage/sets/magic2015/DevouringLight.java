@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class DevouringLight extends mage.sets.ravnika.DevouringLight {
+public class DevouringLight extends mage.sets.ravnica.DevouringLight {
 
     public DevouringLight(UUID ownerId) {
         super(ownerId);

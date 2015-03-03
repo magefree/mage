@@ -53,13 +53,9 @@ public class Bribery extends CardImpl {
         super(ownerId, 62, "Bribery", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
         this.expansionSetCode = "MMQ";
 
-        this.color.setBlue(true);
-
         // Search target opponent's library for a creature card and put that card onto the battlefield under your control. Then that player shuffles his or her library.
         this.getSpellAbility().addEffect(new BriberyEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
-
-
     }
 
     public Bribery(final Bribery card) {
@@ -97,7 +93,7 @@ class BriberyEffect extends OneShotEffect {
             if (controller.searchLibrary(target, game, opponent.getId())) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
-                    Card card = opponent.getLibrary().remove(targetId, game);
+                    Card card = opponent.getLibrary().getCard(targetId, game);
                     if (card != null) {
                         controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
                     }

@@ -34,7 +34,7 @@ import java.util.UUID;
  * @author jeffwadsworth
 
  */
-public class DimirCutpurse extends mage.sets.ravnika.DimirCutpurse {
+public class DimirCutpurse extends mage.sets.ravnica.DimirCutpurse {
 
     public DimirCutpurse(UUID ownerId) {
         super(ownerId);

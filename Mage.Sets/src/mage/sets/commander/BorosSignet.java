@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class BorosSignet extends mage.sets.ravnika.BorosSignet {
+public class BorosSignet extends mage.sets.ravnica.BorosSignet {
 
     public BorosSignet(UUID ownerId) {
         super(ownerId);

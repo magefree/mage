@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class GolgariRotwurm extends mage.sets.ravnika.GolgariRotwurm {
+public class GolgariRotwurm extends mage.sets.ravnica.GolgariRotwurm {
 
     public GolgariRotwurm(UUID ownerId) {
         super(ownerId);

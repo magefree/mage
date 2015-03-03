@@ -35,14 +35,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.SplitSecondAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -62,15 +59,12 @@ public class Extirpate extends CardImpl {
     private static final FilterCard filter = new FilterCard("card in a graveyard other than a basic land card");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
+        filter.add(Predicates.not(Predicates.and(new CardTypePredicate(CardType.LAND), new SupertypePredicate("Basic"))));
     }
 
     public Extirpate(UUID ownerId) {
         super(ownerId, 71, "Extirpate", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "PLC";
-
-        this.color.setBlack(true);
 
         // Split second
         this.addAbility(new SplitSecondAbility());

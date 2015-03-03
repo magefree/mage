@@ -29,14 +29,17 @@ package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continious.BoostEnchantedEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -48,6 +51,7 @@ public class MaraudingKnight extends CardImpl {
     private static final FilterCard filterWhite = new FilterCard("White");
     private static final FilterLandPermanent filterPlains = new FilterLandPermanent("Plains your opponent controls");
     static {
+      filterPlains.add(new SubtypePredicate("Plains"));
       filterPlains.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
@@ -64,7 +68,7 @@ public class MaraudingKnight extends CardImpl {
 
         // Marauding Knight gets +1/+1 for each Plains your opponents control.
         PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filterPlains, 1);
-        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(amount, amount, Duration.WhileOnBattlefield));
+        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield));
         this.addAbility(ability);
     }
 

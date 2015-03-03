@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class SacredFoundry extends mage.sets.ravnika.SacredFoundry {
+public class SacredFoundry extends mage.sets.ravnica.SacredFoundry {
 
     public SacredFoundry(UUID ownerId) {
         super(ownerId);

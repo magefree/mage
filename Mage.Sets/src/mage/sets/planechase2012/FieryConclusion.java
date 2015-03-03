@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author  * @author LevelX2
  */
-public class FieryConclusion extends mage.sets.ravnika.FieryConclusion {
+public class FieryConclusion extends mage.sets.ravnica.FieryConclusion {
 
     public FieryConclusion(UUID ownerId) {
         super(ownerId);

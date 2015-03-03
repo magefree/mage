@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author North
  */
-public class DarkHeartOfTheWood extends mage.sets.ravnika.DarkHeartOfTheWood {
+public class DarkHeartOfTheWood extends mage.sets.ravnica.DarkHeartOfTheWood {
 
     public DarkHeartOfTheWood(UUID ownerId) {
         super(ownerId);

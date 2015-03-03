@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author  * @author LevelX2
  */
-public class DowsingShaman extends mage.sets.ravnika.DowsingShaman {
+public class DowsingShaman extends mage.sets.ravnica.DowsingShaman {
 
     public DowsingShaman(UUID ownerId) {
         super(ownerId);

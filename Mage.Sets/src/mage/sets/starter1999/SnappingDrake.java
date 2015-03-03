@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class SnappingDrake extends mage.sets.ravnika.SnappingDrake {
+public class SnappingDrake extends mage.sets.ravnica.SnappingDrake {
 
     public SnappingDrake(UUID ownerId) {
         super(ownerId);

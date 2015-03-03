@@ -59,15 +59,12 @@ public class SurgicalExtraction extends CardImpl {
     private static final FilterCard filter = new FilterCard("card in a graveyard other than a basic land card");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
+        filter.add(Predicates.not(Predicates.and(new CardTypePredicate(CardType.LAND), new SupertypePredicate("Basic"))));
     }
 
     public SurgicalExtraction(UUID ownerId) {
         super(ownerId, 74, "Surgical Extraction", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{BP}");
         this.expansionSetCode = "NPH";
-
-        this.color.setBlack(true);
 
         // Choose target card in a graveyard other than a basic land card. Search its owner's graveyard,
         // hand, and library for any number of cards with the same name as that card and exile them.

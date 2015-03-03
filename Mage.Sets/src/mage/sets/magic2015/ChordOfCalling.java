@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class ChordOfCalling extends mage.sets.ravnika.ChordOfCalling {
+public class ChordOfCalling extends mage.sets.ravnica.ChordOfCalling {
 
     public ChordOfCalling(UUID ownerId) {
         super(ownerId);

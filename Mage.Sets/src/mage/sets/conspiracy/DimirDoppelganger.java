@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class DimirDoppelganger extends mage.sets.ravnika.DimirDoppelganger {
+public class DimirDoppelganger extends mage.sets.ravnica.DimirDoppelganger {
 
     public DimirDoppelganger(UUID ownerId) {
         super(ownerId);

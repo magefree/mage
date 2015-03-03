@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author nantuko
  */
-public class BelltowerSphinx extends mage.sets.ravnika.BelltowerSphinx {
+public class BelltowerSphinx extends mage.sets.ravnica.BelltowerSphinx {
 
     public BelltowerSphinx(UUID ownerId) {
         super(ownerId);

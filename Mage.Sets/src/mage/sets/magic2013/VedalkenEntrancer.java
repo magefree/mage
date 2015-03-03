@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class VedalkenEntrancer extends mage.sets.ravnika.VedalkenEntrancer {
+public class VedalkenEntrancer extends mage.sets.ravnica.VedalkenEntrancer {
 
     public VedalkenEntrancer(UUID ownerId) {
         super(ownerId);
