@@ -17,6 +17,7 @@ Dredge|number|
 Entwine|manaString|
 Evoke|card, manaString|
 Exalted|new|
+Exploit|new|
 Extort|new|
 Fear|instance|
 First strike|instance|

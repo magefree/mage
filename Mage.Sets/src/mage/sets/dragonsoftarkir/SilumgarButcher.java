@@ -30,9 +30,9 @@ package mage.sets.dragonsoftarkir;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.ExploidedCreatureTriggeredAbility;
+import mage.abilities.common.ExploitCreatureTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.keyword.ExploidAbility;
+import mage.abilities.keyword.ExploitAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -54,10 +54,10 @@ public class SilumgarButcher extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Exploit (When this creature enters the battlefield, you may sacrifice a creature.)
-        this.addAbility(new ExploidAbility());
+        this.addAbility(new ExploitAbility());
         
         // When Silumgar Butcher exploits a creature, target creature gets -3/-3 until end of turn.
-        Ability ability = new ExploidedCreatureTriggeredAbility(new BoostTargetEffect(-3,-3, Duration.EndOfTurn), false);
+        Ability ability = new ExploitCreatureTriggeredAbility(new BoostTargetEffect(-3,-3, Duration.EndOfTurn), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         
