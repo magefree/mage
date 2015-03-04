@@ -36,6 +36,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -74,7 +75,7 @@ public class Valleymaker extends CardImpl {
         this.addAbility(ability);
         
         // {tap}, Sacrifice a Forest: Choose a player. That player adds {G}{G}{G} to his or her mana pool.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddManaToManaPoolTargetControllerEffect(new Mana(0,3,0,0,0,0,0), "chosen player"), new TapSourceCost(), false);
+        Ability ability2 = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaToManaPoolTargetControllerEffect(new Mana(0,3,0,0,0,0,0), "chosen player"), new TapSourceCost());
         ability2.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter2)));
         ability2.addTarget(new TargetPlayer(1, 1, true));
         this.addAbility(ability2);
