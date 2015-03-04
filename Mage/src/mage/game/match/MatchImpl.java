@@ -98,6 +98,7 @@ public abstract class MatchImpl implements Match {
     @Override
     public void addPlayer(Player player, Deck deck) {
         MatchPlayer matchPlayer = new MatchPlayer(player, deck);
+        player.setMatchPlayer(matchPlayer);
         players.add(matchPlayer);
     }
 

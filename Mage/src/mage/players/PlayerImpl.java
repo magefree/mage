@@ -118,6 +118,7 @@ import mage.game.events.DamagePlayerEvent;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
@@ -228,6 +229,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean payManaMode = false;
 
     protected UserData userData;
+    protected MatchPlayer matchPlayer;
 
     /**
      * During some steps we can't play anything
@@ -2919,6 +2921,16 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public Set<UUID> getUsersAllowedToSeeHandCards() {
         return usersAllowedToSeeHandCards;
+    }
+
+    @Override
+    public void setMatchPlayer(MatchPlayer matchPlayer) {
+        this.matchPlayer = matchPlayer;
+    }
+
+    @Override
+    public MatchPlayer getMatchPlayer() {
+        return matchPlayer;
     }
 
 }

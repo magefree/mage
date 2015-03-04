@@ -61,6 +61,7 @@ import java.io.Serializable;
 import java.util.*;
 import mage.constants.PlayerAction;
 import mage.game.combat.CombatGroup;
+import mage.game.match.MatchPlayer;
 
 /**
  *
@@ -531,4 +532,6 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean isInPayManaMode();
 
+    void setMatchPlayer(MatchPlayer matchPlayer);
+    MatchPlayer getMatchPlayer();
 }
