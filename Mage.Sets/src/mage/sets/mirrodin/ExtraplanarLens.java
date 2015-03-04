@@ -29,11 +29,11 @@ package mage.sets.mirrodin;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AddManaOfAnyTypeProducedEffect;
+import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -125,11 +125,10 @@ class ExtraplanarLensImprintEffect extends OneShotEffect {
 
 }
 
-class ExtraplanarLensTriggeredAbility extends TriggeredAbilityImpl {
+class ExtraplanarLensTriggeredAbility extends TriggeredManaAbility {
 
     public ExtraplanarLensTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddManaOfAnyTypeProducedEffect());
-        this.usesStack = false;
     }
 
     public ExtraplanarLensTriggeredAbility(final ExtraplanarLensTriggeredAbility ability) {
