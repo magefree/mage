@@ -17,6 +17,7 @@ import mage.constants.Rarity;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -58,7 +59,12 @@ class ForcedMarchEffect extends OneShotEffect {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        for(Permanent permanent : game.getBattlefield().getAllActivePermanents(CardType.CREATURE)) {
+        
+       // for(Permanent permanent : game.getBattlefield().getAllActivePermanents(CardType.CREATURE)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), 
+                                                                                source.getControllerId(), 
+                                                                                source.getSourceId(), 
+                                                                                game)) {
             if (permanent.getManaCost().convertedManaCost() <= source.getManaCostsToPay().getX()) {
                 permanent.destroy(source.getSourceId(), game, false);
             }
