@@ -105,6 +105,7 @@ Planar Chaos|PLC|
 Planeshift|PLS|
 Portal|POR|
 Portal Second Age|PO2|
+Prerelease Events|PTC|
 Portal Three Kingdoms|PTK|
 Premium Deck Series: Fire and Lightning|PD2|
 Premium Deck Series: Slivers|PDS|
