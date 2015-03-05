@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author michael.napoleon@gmail.com
  */
 public class NightscapeMaster extends CardImpl {
 

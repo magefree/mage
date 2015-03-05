@@ -41,7 +41,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
 
 /**
  *
- * @author anonymous
+ * @author michael.napoleon@gmail.com
  */
 public class TrenchWurm extends CardImpl {
 
