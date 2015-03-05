@@ -32,7 +32,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -132,7 +132,7 @@ class BaneFireEffect extends OneShotEffect {
     }
 }
 
-class BanefireCantCounterEffect extends ContinuousRuleModifiyingEffectImpl {
+class BanefireCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
 
     Condition condition = new testCondition(new ManacostVariableValue(), 5);
 

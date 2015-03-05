@@ -35,7 +35,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -70,11 +70,11 @@ public class CrashingCentaur extends CardImpl {
         // Threshold - As long as seven or more cards are in your graveyard, Crashing Centaur gets +2/+2 and has shroud.
         Ability thresholdAbility = new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(
+                new ConditionalContinuousEffect(
                     new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
                     new CardsInControllerGraveCondition(7),
                     "<i>Threshold</i> - If seven or more cards are in your graveyard, {this} gets +2/+2"));
-                Effect effect = new ConditionalContinousEffect(
+                Effect effect = new ConditionalContinuousEffect(
                                         new GainAbilitySourceEffect(ShroudAbility.getInstance()),
                                         new CardsInControllerGraveCondition(7), "and has shroud");
         thresholdAbility.addEffect(effect);

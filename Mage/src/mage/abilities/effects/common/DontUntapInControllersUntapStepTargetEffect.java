@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  * 
  * @author BetaSteward_at_googlemail.com
  */
-public class DontUntapInControllersUntapStepTargetEffect extends ContinuousRuleModifiyingEffectImpl {
+public class DontUntapInControllersUntapStepTargetEffect extends ContinuousRuleModifyingEffectImpl {
 
     public DontUntapInControllersUntapStepTargetEffect(Duration duration) {
         super(duration, Outcome.Detriment);

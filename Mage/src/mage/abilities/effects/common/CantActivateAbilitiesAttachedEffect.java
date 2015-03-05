@@ -28,7 +28,7 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 
-public class CantActivateAbilitiesAttachedEffect extends ContinuousRuleModifiyingEffectImpl {
+public class CantActivateAbilitiesAttachedEffect extends ContinuousRuleModifyingEffectImpl {
 
     public CantActivateAbilitiesAttachedEffect() {
         super(Duration.WhileOnBattlefield, Outcome.UnboostCreature);

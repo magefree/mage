@@ -43,7 +43,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DefenderAbility;
@@ -71,7 +71,7 @@ public class ManorGargoyle extends CardImpl {
 
         this.addAbility(DefenderAbility.getInstance());
         // Manor Gargoyle is indestructible as long as it has defender.
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance()), HasDefenderCondition.getInstance(), rule);
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance()), HasDefenderCondition.getInstance(), rule);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         // {1}: Until end of turn, Manor Gargoyle loses defender and gains flying.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GargoyleSentinelEffect(), new ManaCostsImpl("{1}")));

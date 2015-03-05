@@ -42,7 +42,7 @@ import mage.filter.common.FilterAttackingCreature;
 
 import java.util.UUID;
 import mage.abilities.condition.common.TransformedCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 
 /**
  * @author nantuko
@@ -64,7 +64,7 @@ public class InstigatorGang extends CardImpl {
 
         // Attacking creatures you control get +1/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new ConditionalContinousEffect(new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, new FilterAttackingCreature()), 
+                new ConditionalContinuousEffect(new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, new FilterAttackingCreature()), 
                 new TransformedCondition(true), "Attacking creatures you control get +1/+0")));
 
 

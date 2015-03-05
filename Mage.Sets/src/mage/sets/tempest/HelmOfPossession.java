@@ -34,7 +34,7 @@ import mage.abilities.common.SkipUntapOptionalAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -60,7 +60,7 @@ public class HelmOfPossession extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
         
         // {2}, {tap}, Sacrifice a creature: Gain control of target creature for as long as you control Helm of Possession and Helm of Possession remains tapped.
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new GainControlTargetEffect(Duration.Custom),
                 new HelmOfPossessionCondition(),
                 "Gain control of target creature for as long as you control {this} and {this} remains tapped");

@@ -36,7 +36,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -77,7 +77,7 @@ public class IllusoryAngel extends CardImpl {
     }
 }
 
-class IllusoryAngelEffect extends ContinuousRuleModifiyingEffectImpl {
+class IllusoryAngelEffect extends ContinuousRuleModifyingEffectImpl {
     IllusoryAngelEffect() {
        super(Duration.EndOfGame, Outcome.Detriment);
        staticText = "Cast {this} only if you've cast another spell this turn";

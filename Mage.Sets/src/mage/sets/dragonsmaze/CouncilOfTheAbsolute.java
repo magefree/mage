@@ -35,7 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.NameACardEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;
@@ -90,7 +90,7 @@ public class CouncilOfTheAbsolute extends CardImpl {
 
 }
 
-class CouncilOfTheAbsoluteReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
+class CouncilOfTheAbsoluteReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     public CouncilOfTheAbsoluteReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

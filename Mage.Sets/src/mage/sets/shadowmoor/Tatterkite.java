@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.ruleModifying.CantRegenerateTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -75,7 +75,7 @@ public class Tatterkite extends CardImpl {
     }
 }
 
-class CantHaveCountersSourceEffect extends ContinuousRuleModifiyingEffectImpl {
+class CantHaveCountersSourceEffect extends ContinuousRuleModifyingEffectImpl {
 
     public CantHaveCountersSourceEffect(Duration duration, String objectText) {
         super(duration, Outcome.Detriment);

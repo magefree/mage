@@ -38,7 +38,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.EnchantedCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -69,11 +69,11 @@ public class FlaringFlameKin extends CardImpl {
                 new ManaCostsImpl("{R}"));
 
         Condition enchanted = new EnchantedCondition();
-        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), enchanted, rule1);
+        ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), enchanted, rule1);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect1));
-        ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), enchanted, rule2);
+        ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), enchanted, rule2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
-        ConditionalContinousEffect effect3 = new ConditionalContinousEffect(new GainAbilitySourceEffect(grantedAbility), enchanted, rule3);
+        ConditionalContinuousEffect effect3 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(grantedAbility), enchanted, rule3);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect3));
     }
 

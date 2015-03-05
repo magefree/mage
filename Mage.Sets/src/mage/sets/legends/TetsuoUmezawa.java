@@ -34,7 +34,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -97,7 +97,7 @@ public class TetsuoUmezawa extends CardImpl {
     }
 }
 
-class TetsuoUmezawaEffect extends ContinuousRuleModifiyingEffectImpl {
+class TetsuoUmezawaEffect extends ContinuousRuleModifyingEffectImpl {
 
     public TetsuoUmezawaEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);

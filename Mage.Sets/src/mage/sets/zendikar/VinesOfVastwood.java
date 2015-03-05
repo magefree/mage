@@ -34,7 +34,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.CantBeTargetedTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -70,7 +70,7 @@ public class VinesOfVastwood extends CardImpl {
         this.getSpellAbility().addEffect(new CantBeTargetedTargetEffect(filter, Duration.EndOfTurn));
 
         // If Vines of Vastwood was kicked, that creature gets +4/+4 until end of turn.
-        this.getSpellAbility().addEffect(new ConditionalContinousEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn),
+        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn),
                 new LockedInCondition(KickedCondition.getInstance()), staticText));
     }
 

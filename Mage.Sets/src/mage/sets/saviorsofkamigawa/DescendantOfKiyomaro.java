@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -59,11 +59,11 @@ public class DescendantOfKiyomaro extends CardImpl {
         this.toughness = new MageInt(3);
 
         // As long as you have more cards in hand than each opponent, Descendant of Kiyomaro gets +1/+2 and has "Whenever this creature deals combat damage, you gain 3 life."
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostSourceEffect(1,2, Duration.WhileOnBattlefield),
                 new MoreCardsInHandThanOpponentsCondition(),
                 "As long as you have more cards in hand than each opponent, {this} gets +1/+2"));
-        ability.addEffect(new ConditionalContinousEffect(
+        ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new DealsCombatDamageTriggeredAbility(new GainLifeEffect(3), false)),
                 new MoreCardsInHandThanOpponentsCondition(),
                 "and has \"Whenever this creature deals combat damage, you gain 3 life.\""));

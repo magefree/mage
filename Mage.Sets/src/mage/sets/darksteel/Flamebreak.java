@@ -30,7 +30,7 @@ package mage.sets.darksteel;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -80,7 +80,7 @@ public class Flamebreak extends CardImpl {
     }
 }
 
-class FlamebreakCantRegenerateEffect extends ContinuousRuleModifiyingEffectImpl {
+class FlamebreakCantRegenerateEffect extends ContinuousRuleModifyingEffectImpl {
 
     public FlamebreakCantRegenerateEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);

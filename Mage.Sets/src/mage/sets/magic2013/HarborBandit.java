@@ -37,7 +37,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.combat.UnblockableSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -68,7 +68,7 @@ public class HarborBandit extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Harbor Bandit gets +1/+1 as long as you control an Island.
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), new PermanentsOnTheBattlefieldCondition(filter), rule);
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), new PermanentsOnTheBattlefieldCondition(filter), rule);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         
         // {1}{U}: Harbor Bandit is unblockable this turn.

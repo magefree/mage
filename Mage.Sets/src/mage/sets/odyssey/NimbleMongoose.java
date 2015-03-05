@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
@@ -59,7 +59,7 @@ public class NimbleMongoose extends CardImpl {
         // Shroud
         this.addAbility(ShroudAbility.getInstance());
         // Threshold - Nimble Mongoose gets +2/+2 as long as seven or more cards are in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7), "<i> Threshold</i> - {this} gets +2/+2 as long as seven or more cards are in your graveyard")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7), "<i> Threshold</i> - {this} gets +2/+2 as long as seven or more cards are in your graveyard")));
     }
 
     public NimbleMongoose(final NimbleMongoose card) {

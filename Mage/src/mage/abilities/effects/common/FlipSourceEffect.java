@@ -2,7 +2,7 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.common.FlippedCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
@@ -36,7 +36,7 @@ public class FlipSourceEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (permanent != null && controller != null) {
             if (permanent.flip(game)) {
-                ContinuousEffect effect = new ConditionalContinousEffect(new CopyTokenEffect(flipToken), FlippedCondition.getInstance(), "");
+                ContinuousEffect effect = new ConditionalContinuousEffect(new CopyTokenEffect(flipToken), FlippedCondition.getInstance(), "");
                 game.addEffect(effect, source);
                 game.informPlayers(new StringBuilder(controller.getName()).append(" flips ").append(permanent.getName()).toString());
                 return true;

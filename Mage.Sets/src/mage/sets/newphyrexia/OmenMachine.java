@@ -36,7 +36,7 @@ import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -73,7 +73,7 @@ public class OmenMachine extends CardImpl {
     }
 }
 
-class OmenMachineEffect extends ContinuousRuleModifiyingEffectImpl {
+class OmenMachineEffect extends ContinuousRuleModifyingEffectImpl {
 
     public OmenMachineEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral, false, false);

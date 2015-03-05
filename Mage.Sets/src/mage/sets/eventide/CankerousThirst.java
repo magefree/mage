@@ -30,7 +30,7 @@ package mage.sets.eventide;
 import java.util.UUID;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.ManaWasSpentCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -56,11 +56,11 @@ public class CankerousThirst extends CardImpl {
         this.color.setBlack(true);
 
         // If {B} was spent to cast Cankerous Thirst, you may have target creature get -3/-3 until end of turn. If {G} was spent to cast Cankerous Thirst, you may have target creature get +3/+3 until end of turn.
-        this.getSpellAbility().addEffect(new ConditionalContinousEffect(
+        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new BoostTargetEffect(-3, -3, Duration.EndOfTurn),
                 new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.B)),
                 "If {B} was spent to cast {this}, you may have target creature get -3/-3 until end of turn"));
-        this.getSpellAbility().addEffect(new ConditionalContinousEffect(
+        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new BoostTargetEffect(3, 3, Duration.EndOfTurn),
                 new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.G)),
                 "If {G} was spent to cast {this}, you may have target creature get +3/+3 until end of turn"));

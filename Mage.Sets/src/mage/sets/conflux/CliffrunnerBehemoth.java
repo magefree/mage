@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.LifelinkAbility;
@@ -72,13 +72,13 @@ public class CliffrunnerBehemoth extends CardImpl {
         // Cliffrunner Behemoth has haste as long as you control a red permanent.
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(
+                new ConditionalContinuousEffect(
                     new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield),
                     new PermanentsOnTheBattlefieldCondition(redPermanentFilter), "{this} has haste as long as you control a red permanent")));
         // Cliffrunner Behemoth has lifelink as long as you control a white permanent.
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(
+                new ConditionalContinuousEffect(
                     new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield),
                     new PermanentsOnTheBattlefieldCondition(whitePermanentFilter), "{this} has lifelink as long as you control a white permanent")));
     }

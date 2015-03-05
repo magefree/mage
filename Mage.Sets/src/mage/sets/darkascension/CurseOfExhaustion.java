@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -77,7 +77,7 @@ public class CurseOfExhaustion extends CardImpl {
     }
 }
 
-class CurseOfExhaustionEffect extends ContinuousRuleModifiyingEffectImpl {
+class CurseOfExhaustionEffect extends ContinuousRuleModifyingEffectImpl {
 
     public CurseOfExhaustionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

@@ -35,7 +35,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -110,7 +110,7 @@ public class JayaBallardTaskMage extends CardImpl {
     }
 }
 
-class CantRegenerateEffect extends ContinuousRuleModifiyingEffectImpl {
+class CantRegenerateEffect extends ContinuousRuleModifyingEffectImpl {
 
     public CantRegenerateEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);

@@ -34,7 +34,7 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.dynamicvalue.common.GetXValue;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
@@ -95,7 +95,7 @@ public class WakeTheDead extends CardImpl {
     }
 }
 
-class WakeTheDeadEffect extends ContinuousRuleModifiyingEffectImpl {
+class WakeTheDeadEffect extends ContinuousRuleModifyingEffectImpl {
 
     WakeTheDeadEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);

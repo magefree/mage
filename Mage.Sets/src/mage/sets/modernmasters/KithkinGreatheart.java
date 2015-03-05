@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -70,12 +70,12 @@ public class KithkinGreatheart extends CardImpl {
         this.toughness = new MageInt(1);
 
         // As long as you control a Giant, Kithkin Greatheart gets +1/+1 and has first strike.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostSourceEffect(1,1, Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "As long as you control a Giant, Kithkin Greatheart gets +1/+1"));
         this.addAbility(ability);
-        ConditionalContinousEffect effect2 = new ConditionalContinousEffect(
+        ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()),  
                 new PermanentsOnTheBattlefieldCondition(filter),
                 rule2);

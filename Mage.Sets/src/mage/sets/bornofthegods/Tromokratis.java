@@ -35,7 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -70,7 +70,7 @@ public class Tromokratis extends CardImpl {
         this.toughness = new MageInt(8);
 
         // Tromokratis has hexproof unless it's attacking or blocking.
-        Effect effect = new ConditionalContinousEffect(
+        Effect effect = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield),
                 new InvertCondition(new SourceMatchesFilterCondition(new FilterAttackingOrBlockingCreature())),
                 "{this} has hexproof unless it's attacking or blocking");

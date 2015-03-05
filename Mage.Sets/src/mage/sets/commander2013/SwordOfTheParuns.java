@@ -36,7 +36,7 @@ import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.AttachedToTappedCondition;
 import mage.abilities.condition.common.EquipmentAttachedCondition;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -72,14 +72,14 @@ public class SwordOfTheParuns extends CardImpl {
         this.subtype.add("Equipment");
 
         // As long as equipped creature is tapped, tapped creatures you control get +2/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostControlledEffect(2,0, Duration.WhileOnBattlefield, filterTapped),
                 new CompoundCondition(EquipmentAttachedCondition.getInstance(), new AttachedToTappedCondition()),
                 "As long as equipped creature is tapped, tapped creatures you control get +2/+0"
         )));
 
         // As long as equipped creature is untapped, untapped creatures you control get +0/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostControlledEffect(0,2, Duration.WhileOnBattlefield, filterUntapped),
                 new CompoundCondition(EquipmentAttachedCondition.getInstance(), new InvertCondition(new AttachedToTappedCondition())),
                 "As long as equipped creature is untapped, untapped creatures you control get +0/+2"

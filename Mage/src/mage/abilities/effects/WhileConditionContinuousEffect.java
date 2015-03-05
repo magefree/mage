@@ -8,17 +8,17 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 
-public abstract class WhileConditionContiniousEffect extends ContinuousEffectImpl {
+public abstract class WhileConditionContinuousEffect extends ContinuousEffectImpl {
     protected Condition condition;
 
-    public WhileConditionContiniousEffect(Duration duration, Layer layer, SubLayer sublayer, Condition condition, Outcome outcome) {
+    public WhileConditionContinuousEffect(Duration duration, Layer layer, SubLayer sublayer, Condition condition, Outcome outcome) {
         super(duration, outcome);
         this.condition = condition;
         this.layer = layer;
         this.sublayer = sublayer;
     }
 
-    public WhileConditionContiniousEffect(final WhileConditionContiniousEffect effect) {
+    public WhileConditionContinuousEffect(final WhileConditionContinuousEffect effect) {
         super(effect);
         this.condition = effect.condition;
     }

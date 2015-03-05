@@ -39,7 +39,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.repository.CardRepository;
@@ -123,7 +123,7 @@ class PhyrexianRevokerEffect1 extends OneShotEffect {
 
 }
 
-class PhyrexianRevokerEffect2 extends ContinuousRuleModifiyingEffectImpl {
+class PhyrexianRevokerEffect2 extends ContinuousRuleModifyingEffectImpl {
 
     public PhyrexianRevokerEffect2() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

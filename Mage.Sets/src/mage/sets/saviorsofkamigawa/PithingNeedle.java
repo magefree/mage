@@ -32,7 +32,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.NameACardEffect;
 import mage.cards.CardImpl;
 import mage.constants.AbilityType;
@@ -71,7 +71,7 @@ public class PithingNeedle extends CardImpl {
     }
 }
 
-class PithingNeedleEffect extends ContinuousRuleModifiyingEffectImpl {
+class PithingNeedleEffect extends ContinuousRuleModifyingEffectImpl {
 
     public PithingNeedleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

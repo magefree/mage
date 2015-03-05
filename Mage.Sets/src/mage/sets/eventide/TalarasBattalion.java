@@ -33,7 +33,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -85,7 +85,7 @@ public class TalarasBattalion extends CardImpl {
     }
 }
 
-class TalarasBattalionEffect extends ContinuousRuleModifiyingEffectImpl {
+class TalarasBattalionEffect extends ContinuousRuleModifyingEffectImpl {
 
     TalarasBattalionEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);

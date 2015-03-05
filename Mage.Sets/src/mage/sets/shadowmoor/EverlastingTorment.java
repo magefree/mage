@@ -30,7 +30,7 @@ package mage.sets.shadowmoor;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.CantGainLifeAllEffect;
 import mage.cards.CardImpl;
@@ -77,7 +77,7 @@ public class EverlastingTorment extends CardImpl {
     }
 }
 
-class DamageCantBePreventedEffect extends ContinuousRuleModifiyingEffectImpl {
+class DamageCantBePreventedEffect extends ContinuousRuleModifyingEffectImpl {
 
     public DamageCantBePreventedEffect(Duration duration) {
         super(duration, Outcome.Benefit);

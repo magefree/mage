@@ -30,7 +30,7 @@ package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -44,7 +44,7 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  * @author LevelX2
  */
 
-public class CantCastMoreThanOneSpellEffect extends ContinuousRuleModifiyingEffectImpl {
+public class CantCastMoreThanOneSpellEffect extends ContinuousRuleModifyingEffectImpl {
 
     private final TargetController targetController;
     

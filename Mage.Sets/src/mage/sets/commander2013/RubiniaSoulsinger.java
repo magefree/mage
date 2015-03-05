@@ -34,7 +34,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SkipUntapOptionalAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -66,7 +66,7 @@ public class RubiniaSoulsinger extends CardImpl {
         // You may choose not to untap Rubinia Soulsinger during your untap step.
         this.addAbility(new SkipUntapOptionalAbility());
         // {tap}: Gain control of target creature for as long as you control Rubinia and Rubinia remains tapped.
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new GainControlTargetEffect(Duration.OneUse),
                 new RubiniaSoulsingerCondition(),
                 "Gain control of target creature for as long as you control Rubinia and Rubinia remains tapped");

@@ -33,8 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
-import mage.abilities.effects.ContinuousRuleModifiyingEffect;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffect;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -61,8 +61,8 @@ public class Moonhold extends CardImpl {
         this.color.setWhite(true);
 
         // Target player can't play land cards this turn if {R} was spent to cast Moonhold and can't play creature cards this turn if {W} was spent to cast it.
-        ContinuousRuleModifiyingEffect effect = new MoonholdEffect();
-        ContinuousRuleModifiyingEffect effect2 = new MoonholdEffect2();
+        ContinuousRuleModifyingEffect effect = new MoonholdEffect();
+        ContinuousRuleModifyingEffect effect2 = new MoonholdEffect2();
         effect.setText("Target player can't play land cards this turn if {R} was spent to cast {this} ");
         effect2.setText("and can't play creature cards this turn if {W} was spent to cast it.");
         this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(
@@ -86,7 +86,7 @@ public class Moonhold extends CardImpl {
     }
 }
 
-class MoonholdEffect extends ContinuousRuleModifiyingEffectImpl {
+class MoonholdEffect extends ContinuousRuleModifyingEffectImpl {
 
     public MoonholdEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
@@ -129,7 +129,7 @@ class MoonholdEffect extends ContinuousRuleModifiyingEffectImpl {
     }
 }
 
-class MoonholdEffect2 extends ContinuousRuleModifiyingEffectImpl {
+class MoonholdEffect2 extends ContinuousRuleModifyingEffectImpl {
 
     public MoonholdEffect2() {
         super(Duration.EndOfTurn, Outcome.Detriment);

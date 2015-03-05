@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -69,7 +69,7 @@ public class HewedStoneRetainers extends CardImpl {
     }
 }
 
-class HewedStoneRetainersEffect extends ContinuousRuleModifiyingEffectImpl {
+class HewedStoneRetainersEffect extends ContinuousRuleModifyingEffectImpl {
     HewedStoneRetainersEffect() {
        super(Duration.EndOfGame, Outcome.Detriment);
        staticText = "Cast {this} only if you've cast another spell this turn";

@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EquippedMatchesFilterCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -75,7 +75,7 @@ public class NyxInfusion extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2 as long as it's an enchantment. Otherwise, it gets -2/-2.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostEnchantedEffect(2,2,Duration.WhileOnBattlefield),
                 new BoostEnchantedEffect(-2,-2,Duration.WhileOnBattlefield),
                 new EquippedMatchesFilterCondition(filter),

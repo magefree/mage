@@ -30,7 +30,7 @@ package mage.sets.elspethvstezzeret;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.EntwineAbility;
@@ -116,7 +116,7 @@ class BlindingBeamEffect extends OneShotEffect {
 
 }
 
-class BlindingBeamEffect2 extends ContinuousRuleModifiyingEffectImpl {
+class BlindingBeamEffect2 extends ContinuousRuleModifyingEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

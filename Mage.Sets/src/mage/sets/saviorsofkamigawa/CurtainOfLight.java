@@ -30,7 +30,7 @@ package mage.sets.saviorsofkamigawa;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -92,7 +92,7 @@ public class CurtainOfLight extends CardImpl {
     }
 }
 
-class CurtainOfLightRuleModifyingEffect extends ContinuousRuleModifiyingEffectImpl {
+class CurtainOfLightRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
     CurtainOfLightRuleModifyingEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);

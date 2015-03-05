@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.common.DamageAsThoughNotBlockedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceAttackingCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
@@ -62,7 +62,7 @@ public class SiegeBehemoth extends CardImpl {
         // TODO: DamageAsThoughNotBlockedAbility should be done by rule modifying effect instead of adding ability (if controlled creature looses all abilities it should'nt loose this effect)
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(
+                new ConditionalContinuousEffect(
                         new GainAbilityControlledEffect(DamageAsThoughNotBlockedAbility.getInstance(), Duration.WhileOnBattlefield),
                         SourceAttackingCondition.getInstance(),
                         "As long as {this} is attacking, for each creature you control, you may have that creature assign its combat damage as though it weren't blocked"

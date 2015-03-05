@@ -32,7 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.EquippedHasSubtypeCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
@@ -70,7 +70,7 @@ public class BondsOfFaith extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2 as long as it's a Human. Otherwise, it can't attack or block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostEquippedEffect(2, 2), new EquippedHasSubtypeCondition("Human"), rule)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEquippedEffect(2, 2), new EquippedHasSubtypeCondition("Human"), rule)));
         Effect effect = new ConditionalRestrictionEffect(new CantAttackBlockAttachedEffect(AttachmentType.AURA), new InvertCondition(new EquippedHasSubtypeCondition("Human")));
         effect.setText("Otherwise, it can't attack or block");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));

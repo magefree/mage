@@ -36,7 +36,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
@@ -64,7 +64,7 @@ public class ViridianBetrayers extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Viridian Betrayers has infect as long as an opponent is poisoned.
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(new GainAbilitySourceEffect(InfectAbility.getInstance()), PoisonedCondition.getInstance(), rule);
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(InfectAbility.getInstance()), PoisonedCondition.getInstance(), rule);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

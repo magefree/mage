@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.TenOrLessLifeCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.IntimidateAbility;
@@ -63,9 +63,9 @@ public class GuulDrazVampire extends CardImpl {
 
         // As long as an opponent has 10 or less life, Guul Draz Vampire gets +2/+1 and has intimidate. (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)
         Condition condition = new TenOrLessLifeCondition(TenOrLessLifeCondition.CheckType.AN_OPPONENT);
-        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new BoostSourceEffect(2, 1, Duration.WhileOnBattlefield), condition, rule1);
+        ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(2, 1, Duration.WhileOnBattlefield), condition, rule1);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect1));
-        ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(IntimidateAbility.getInstance()), condition, rule2);
+        ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(IntimidateAbility.getInstance()), condition, rule2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
 
     }

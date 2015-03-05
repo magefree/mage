@@ -30,7 +30,7 @@ package mage.sets.odyssey;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -75,7 +75,7 @@ public class CeaseFire extends CardImpl {
     }
 }
 
-class CeaseFireEffect extends ContinuousRuleModifiyingEffectImpl {
+class CeaseFireEffect extends ContinuousRuleModifyingEffectImpl {
 
     private static final FilterSpell filter = new FilterSpell();
     static {

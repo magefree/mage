@@ -37,7 +37,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.CantBeCounteredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -221,7 +221,7 @@ class SavageSummoningWatcher extends Watcher {
 
 }
 
-class SavageSummoningCantCounterEffect extends ContinuousRuleModifiyingEffectImpl {
+class SavageSummoningCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
     private SavageSummoningWatcher watcher;
     private int zoneChangeCounter;
 

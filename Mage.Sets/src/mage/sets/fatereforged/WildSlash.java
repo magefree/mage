@@ -33,8 +33,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
-import mage.abilities.effects.ContinuousRuleModifiyingEffect;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffect;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -57,7 +57,7 @@ public class WildSlash extends CardImpl {
         this.expansionSetCode = "FRF";
 
         // <i>Ferocious</i> If you control a creature with power 4 or greater, damage can't be prevented this turn.
-        ContinuousRuleModifiyingEffect effect = new DamageCantBePreventedEffect();
+        ContinuousRuleModifyingEffect effect = new DamageCantBePreventedEffect();
         effect.setText("<i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, damage can't be prevented this turn.<br>");
         this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(effect,
                         new LockedInCondition(FerociousCondition.getInstance())));
@@ -78,7 +78,7 @@ public class WildSlash extends CardImpl {
     }
 }
 
-class DamageCantBePreventedEffect extends ContinuousRuleModifiyingEffectImpl {
+class DamageCantBePreventedEffect extends ContinuousRuleModifyingEffectImpl {
 
     public DamageCantBePreventedEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit, false, false);

@@ -33,7 +33,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.NameACardEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -79,7 +79,7 @@ public class MeddlingMage extends CardImpl {
     }
 }
 
-class MeddlingMageReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
+class MeddlingMageReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     public MeddlingMageReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

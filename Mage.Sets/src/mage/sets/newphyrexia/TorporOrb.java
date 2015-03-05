@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.CardImpl;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
@@ -67,7 +67,7 @@ public class TorporOrb extends CardImpl {
     }
 }
 
-class TorporOrbEffect extends ContinuousRuleModifiyingEffectImpl {
+class TorporOrbEffect extends ContinuousRuleModifyingEffectImpl {
 
     TorporOrbEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, false, false);

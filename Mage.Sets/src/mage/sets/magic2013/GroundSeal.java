@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -73,7 +73,7 @@ public class GroundSeal extends CardImpl {
     }
 }
 
-class GroundSealEffect extends ContinuousRuleModifiyingEffectImpl {
+class GroundSealEffect extends ContinuousRuleModifyingEffectImpl {
 
     public GroundSealEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

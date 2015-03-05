@@ -34,7 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.CantBeCounteredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -81,7 +81,7 @@ public class VexingShusher extends CardImpl {
     }
 }
 
-class VexingShusherCantCounterTargetEffect extends ContinuousRuleModifiyingEffectImpl {
+class VexingShusherCantCounterTargetEffect extends ContinuousRuleModifyingEffectImpl {
 
     public VexingShusherCantCounterTargetEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);

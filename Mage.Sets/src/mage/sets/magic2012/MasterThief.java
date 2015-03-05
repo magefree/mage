@@ -33,7 +33,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.SourceOnBattlefieldControlUnchangedCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -63,7 +63,7 @@ public class MasterThief extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Master Thief enters the battlefield, gain control of target artifact for as long as you control Master Thief.
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new GainControlTargetEffect(Duration.Custom),
                 new SourceOnBattlefieldControlUnchangedCondition(),
                 "gain control of target artifact for as long as you control Master Thief");

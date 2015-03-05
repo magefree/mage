@@ -32,7 +32,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.TopLibraryCardTypeCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.PlayWithTheTopCardRevealedEffect;
@@ -65,7 +65,7 @@ public class CrownOfConvergence extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
 
         // As long as the top card of your library is a creature card, creatures you control that share a color with that card get +1/+1.
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(new CrownOfConvergenceColorBoostEffect(), new TopLibraryCardTypeCondition(CREATURE), rule1);
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new CrownOfConvergenceColorBoostEffect(), new TopLibraryCardTypeCondition(CREATURE), rule1);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // {G}{W}: Put the top card of your library on the bottom of your library.

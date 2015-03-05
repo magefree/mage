@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -75,7 +75,7 @@ public class Valor extends CardImpl {
         // As long as Valor is in your graveyard and you control a Plains, creatures you control have first strike
         ContinuousEffect effect = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(),
                 Duration.WhileOnBattlefield, new FilterCreaturePermanent());
-        ConditionalContinousEffect valorEffect = new ConditionalContinousEffect(effect,
+        ConditionalContinuousEffect valorEffect = new ConditionalContinuousEffect(effect,
                 new PermanentsOnTheBattlefieldCondition(filter), ruleText);
         this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, valorEffect));
     }

@@ -38,7 +38,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.TopLibraryCardTypeCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -73,12 +73,12 @@ public class MulDayaChannelers extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
 
         // As long as the top card of your library is a creature card, Mul Daya Channelers gets +3/+3.
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield), new TopLibraryCardTypeCondition(TopLibraryCardTypeCondition.CheckType.CREATURE), rule1);
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield), new TopLibraryCardTypeCondition(TopLibraryCardTypeCondition.CheckType.CREATURE), rule1);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // As long as the top card of your library is a land card, Mul Daya Channelers has "T: Add two mana of any one color to your mana pool."
         SimpleManaAbility manaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(2), new TapSourceCost());
-        effect = new ConditionalContinousEffect(new GainAbilitySourceEffect(manaAbility, Duration.WhileOnBattlefield),
+        effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(manaAbility, Duration.WhileOnBattlefield),
                 new TopLibraryCardTypeCondition(TopLibraryCardTypeCondition.CheckType.LAND),
                 "As long as the top card of your library is a land card, Mul Daya Channelers has \"{T}: Add two mana of any one color to your mana pool.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));

@@ -30,7 +30,7 @@ package mage.sets.odyssey;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -66,7 +66,7 @@ public class PatriarchsDesire extends CardImpl {
         ability.addEffect(new BoostEnchantedEffect(2, -2, Duration.WhileOnBattlefield));
         
         // Threshold - Enchanted creature gets an additional +2/-2 as long as seven or more cards are in your graveyard.
-        ability.addEffect(new ConditionalContinousEffect(new BoostEnchantedEffect(2, -2, 
+        ability.addEffect(new ConditionalContinuousEffect(new BoostEnchantedEffect(2, -2, 
                                                          Duration.WhileOnBattlefield), 
                                                          new CardsInControllerGraveCondition(7), 
                                                          "<br/><br/><i>Threshold</i> - Enchanted creature gets an additional +2/-2 as long as seven or more cards are in your graveyard." ));

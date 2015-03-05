@@ -35,7 +35,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
@@ -69,7 +69,7 @@ public class DirtyWererat extends CardImpl {
         ability.addCost(new DiscardCardCost());
         // Threshold - As long as seven or more cards are in your graveyard, Dirty Wererat gets +2/+2 and can't block.
         Ability thresholdAbility = new SimpleStaticAbility(Zone.BATTLEFIELD,
-                    new ConditionalContinousEffect(
+                    new ConditionalContinuousEffect(
                     new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
                     new CardsInControllerGraveCondition(7),
                     "<i>Threshold</i> - If seven or more cards are in your graveyard, Dirty Wererat gets +2/+2 and can't block"

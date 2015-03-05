@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -116,7 +116,7 @@ class RenderSilentCounterEffect extends OneShotEffect {
 
 }
 
-class RenderSilentEffect extends ContinuousRuleModifiyingEffectImpl {
+class RenderSilentEffect extends ContinuousRuleModifyingEffectImpl {
 
     public RenderSilentEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);

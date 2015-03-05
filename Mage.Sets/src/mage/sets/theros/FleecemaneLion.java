@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MonstrousCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.HexproofAbility;
@@ -63,12 +63,12 @@ public class FleecemaneLion extends CardImpl {
         // {3}{G}{W}: Monstrosity 1.
         this.addAbility(new MonstrosityAbility("{3}{G}{W}", 1));
         // As long as Fleecemane Lion is monstrous, it has hexproof and indestructible.
-        Effect effect = new ConditionalContinousEffect(
+        Effect effect = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield),
                 MonstrousCondition.getInstance(),
                 "As long as {this} is monstrous, it has hexproof");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        effect = new ConditionalContinousEffect(
+        effect = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
                 MonstrousCondition.getInstance(),
                 "and indestructible");

@@ -33,7 +33,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceHasSubtypeCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.BestowAbility;
@@ -61,7 +61,7 @@ public class EverflameEidolon extends CardImpl {
         // Bestow {2}{R}
         this.addAbility(new BestowAbility(this, "{2}{R}"));
         // {R}: Everflame Eidolon gets +1/+0 until end of turn. If it's an Aura, enchanted creature gets +1/+0 until end of turn instead.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostEnchantedEffect(1, 0, Duration.EndOfTurn),
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn),
                 new SourceHasSubtypeCondition("Aura"),

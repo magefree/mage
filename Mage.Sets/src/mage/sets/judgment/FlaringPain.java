@@ -30,7 +30,7 @@ package mage.sets.judgment;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -69,7 +69,7 @@ public class FlaringPain extends CardImpl {
     }
 }
 
-class DamageCantBePreventedEffect extends ContinuousRuleModifiyingEffectImpl {
+class DamageCantBePreventedEffect extends ContinuousRuleModifyingEffectImpl {
 
     public DamageCantBePreventedEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit, false, false);

@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
@@ -65,7 +65,7 @@ public class SummitApes extends CardImpl {
 
         // As long as you control a Mountain, Summit Apes can't be blocked except by two or more creatures.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(new CantBeBlockedByOneEffect(2), new PermanentsOnTheBattlefieldCondition(filter), rule)));
+                new ConditionalContinuousEffect(new CantBeBlockedByOneEffect(2), new PermanentsOnTheBattlefieldCondition(filter), rule)));
     }
 
     public SummitApes(final SummitApes card) {

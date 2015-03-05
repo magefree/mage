@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -75,7 +75,7 @@ public class WardscaleDragon extends CardImpl {
     }
 }
 
-class WardscaleDragonRuleEffect extends ContinuousRuleModifiyingEffectImpl {
+class WardscaleDragonRuleEffect extends ContinuousRuleModifyingEffectImpl {
 
     public WardscaleDragonRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, true, false);

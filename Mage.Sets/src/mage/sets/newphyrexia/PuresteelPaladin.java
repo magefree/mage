@@ -39,7 +39,7 @@ import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -70,7 +70,7 @@ public class PuresteelPaladin extends CardImpl {
         // Whenever an Equipment enters the battlefield under your control, you may draw a card.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), filter, true));
         // Metalcraft - Equipment you control have equip {0} as long as you control three or more artifacts
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new GainAbilityControlledEffect(new EquipAbility(Outcome.AddAbility, new GenericManaCost(0)), Duration.WhileOnBattlefield, filter),
                 MetalcraftCondition.getInstance(),
                 "Metalcraft - Equipment you control have equip {0} as long as you control three or more artifacts")));

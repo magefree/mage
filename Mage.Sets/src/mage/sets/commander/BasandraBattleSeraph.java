@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.combat.AttacksIfAbleTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.AttacksThisTurnMarkerAbility;
@@ -90,7 +90,7 @@ public class BasandraBattleSeraph extends CardImpl {
     }
 }
 
-class BasandraBattleSeraphEffect extends ContinuousRuleModifiyingEffectImpl {
+class BasandraBattleSeraphEffect extends ContinuousRuleModifyingEffectImpl {
 
     public BasandraBattleSeraphEffect() {
         super(Duration.EndOfTurn, Outcome.Neutral);

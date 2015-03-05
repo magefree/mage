@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -62,7 +62,7 @@ public class GorillaTitan extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Gorilla Titan gets +4/+4 as long as there are no cards in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostSourceEffect(4,4, Duration.WhileInGraveyard),
                 new GorillaTitanCondition(),
                 "{this} gets +4/+4 as long as there are no cards in your graveyard"

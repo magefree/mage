@@ -38,7 +38,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.combat.CanAttackAsThoughtItDidntHaveDefenderEffect;
@@ -62,7 +62,7 @@ public class SpireSerpent extends CardImpl {
         this.toughness = new MageInt(5);
 
         this.addAbility(DefenderAbility.getInstance());
-        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), MetalcraftCondition.getInstance(), abilityText1);
+        ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), MetalcraftCondition.getInstance(), abilityText1);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
         Effect effect = new ConditionalAsThoughEffect(new CanAttackAsThoughtItDidntHaveDefenderEffect(Duration.WhileOnBattlefield),
                 MetalcraftCondition.getInstance());

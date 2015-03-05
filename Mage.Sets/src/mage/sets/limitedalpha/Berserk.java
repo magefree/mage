@@ -33,7 +33,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.dynamicvalue.common.TargetPermanentPowerCount;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -94,7 +94,7 @@ public class Berserk extends CardImpl {
     }
 }
 
-class BerserkReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
+class BerserkReplacementEffect extends ContinuousRuleModifyingEffectImpl {
     BerserkReplacementEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);
         staticText = "Cast {this} only before the combat damage step";

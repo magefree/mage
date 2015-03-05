@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.HellbentCondition;
 import mage.abilities.costs.common.DiscardCardCost;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
@@ -58,7 +58,7 @@ public class GathanRaiders extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Hellbent - Gathan Raiders gets +2/+2 as long as you have no cards in hand.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostSourceEffect(2,2,Duration.WhileOnBattlefield), HellbentCondition.getInstance(),
                 "<i>Hellbent</i> - {this} gets +2/+2 as long as you have no cards in hand")));
         // Morph-Discard a card.

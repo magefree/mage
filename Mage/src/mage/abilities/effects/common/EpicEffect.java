@@ -8,7 +8,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Duration;
@@ -79,7 +79,7 @@ public class EpicEffect extends OneShotEffect {
     }
 }
 
-class EpicReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
+class EpicReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     public EpicReplacementEffect() {
         super(Duration.EndOfGame, Outcome.Neutral);

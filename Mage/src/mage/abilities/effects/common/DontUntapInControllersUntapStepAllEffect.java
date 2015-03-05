@@ -30,7 +30,7 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
@@ -51,7 +51,7 @@ import mage.players.Player;
  * @author LevelX2
  */
 
-public class DontUntapInControllersUntapStepAllEffect extends ContinuousRuleModifiyingEffectImpl {
+public class DontUntapInControllersUntapStepAllEffect extends ContinuousRuleModifyingEffectImpl {
 
     TargetController targetController;
     FilterPermanent filter;

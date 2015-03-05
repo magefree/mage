@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -89,7 +89,7 @@ public class FaithsFetters extends CardImpl {
     }
 }
 
-class FaithsFettersEffect extends ContinuousRuleModifiyingEffectImpl {
+class FaithsFettersEffect extends ContinuousRuleModifyingEffectImpl {
 
     public FaithsFettersEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

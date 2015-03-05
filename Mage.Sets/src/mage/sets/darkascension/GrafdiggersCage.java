@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -71,7 +71,7 @@ public class GrafdiggersCage extends CardImpl {
     }
 }
 
-class GrafdiggersCageEffect extends ContinuousRuleModifiyingEffectImpl {
+class GrafdiggersCageEffect extends ContinuousRuleModifyingEffectImpl {
 
     public GrafdiggersCageEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
@@ -108,7 +108,7 @@ class GrafdiggersCageEffect extends ContinuousRuleModifiyingEffectImpl {
 
 }
 
-class GrafdiggersCageEffect2 extends ContinuousRuleModifiyingEffectImpl {
+class GrafdiggersCageEffect2 extends ContinuousRuleModifyingEffectImpl {
 
     public GrafdiggersCageEffect2() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

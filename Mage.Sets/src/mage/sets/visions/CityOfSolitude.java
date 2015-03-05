@@ -30,7 +30,7 @@ package mage.sets.visions;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -67,7 +67,7 @@ public class CityOfSolitude extends CardImpl {
     }
 }
 
-class CityOfSolitudeEffect extends ContinuousRuleModifiyingEffectImpl {
+class CityOfSolitudeEffect extends ContinuousRuleModifyingEffectImpl {
 
     CityOfSolitudeEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

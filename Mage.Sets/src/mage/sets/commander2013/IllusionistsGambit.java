@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
@@ -80,7 +80,7 @@ public class IllusionistsGambit extends CardImpl {
     }
 }
 
-class IllusionistsGambitEffect extends ContinuousRuleModifiyingEffectImpl {
+class IllusionistsGambitEffect extends ContinuousRuleModifyingEffectImpl {
     IllusionistsGambitEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);
         staticText = "Cast {this} only during the declare blockers step on an opponent's turn";

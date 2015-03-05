@@ -2,7 +2,7 @@ package mage.abilities.keyword;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.mana.ManaAbility;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -40,7 +40,7 @@ public class SplitSecondAbility extends SimpleStaticAbility  {
 
 // Molten Disaster has a copy of this effect in it's class, so in case this effect has to be changed check also there
 
-class SplitSecondEffect extends ContinuousRuleModifiyingEffectImpl {
+class SplitSecondEffect extends ContinuousRuleModifyingEffectImpl {
 
     SplitSecondEffect() {
         super(Duration.WhileOnStack, Outcome.Detriment);

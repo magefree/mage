@@ -34,7 +34,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.HellbentCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
@@ -90,7 +90,7 @@ public class GibberingDescent extends CardImpl {
     }
 }
 
-class GibberingDescentSkipUpkeepEffect extends ContinuousRuleModifiyingEffectImpl {
+class GibberingDescentSkipUpkeepEffect extends ContinuousRuleModifyingEffectImpl {
 
     GibberingDescentSkipUpkeepEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);

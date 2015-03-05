@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -75,7 +75,7 @@ public class Anger extends CardImpl {
         // As long as Anger is in your graveyard and you control a Mountain, creatures you control have haste
         ContinuousEffect effect = new GainAbilityControlledEffect(HasteAbility.getInstance(),
                 Duration.WhileOnBattlefield, new FilterCreaturePermanent());
-        ConditionalContinousEffect angerEffect = new ConditionalContinousEffect(effect,
+        ConditionalContinuousEffect angerEffect = new ConditionalContinuousEffect(effect,
                 new PermanentsOnTheBattlefieldCondition(filter), ruleText);
         this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, angerEffect));
     }

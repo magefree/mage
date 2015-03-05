@@ -34,7 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -71,22 +71,22 @@ public class WaywardAngel extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
         // Threshold - As long as seven or more cards are in your graveyard, Wayward Angel gets +3/+3, is black, has trample, and has "At the beginning of your upkeep, sacrifice a creature."
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield),
                 new CardsInControllerGraveCondition(7),
                 "<i>Threshold</i> - As long as seven or more cards are in your graveyard, {this} gets +3/+3,"));
-        ability.addEffect(new ConditionalContinousEffect(
+        ability.addEffect(new ConditionalContinuousEffect(
                 new SetCardColorSourceEffect(ObjectColor.BLACK, Duration.WhileOnBattlefield),
                 new CardsInControllerGraveCondition(7),
                 " is black,"));
-        ability.addEffect(new ConditionalContinousEffect(
+        ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(TrampleAbility.getInstance()),
                 new CardsInControllerGraveCondition(7),
                 " has trample,"));
         
         Ability gainedAbility = new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(new FilterControlledCreaturePermanent(), 1, ""), TargetController.YOU, false);
         
-        ability.addEffect(new ConditionalContinousEffect(
+        ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(gainedAbility),
                 new CardsInControllerGraveCondition(7),
                 " and has \"At the beginning of your upkeep, sacrifice a creature.\" "));

@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.OpponentsLostLifeCount;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -89,7 +89,7 @@ public class RakdosLordOfRiots extends CardImpl {
     }
 }
 
-class RakdosLordOfRiotsCantCastEffect extends ContinuousRuleModifiyingEffectImpl {
+class RakdosLordOfRiotsCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
     public RakdosLordOfRiotsCantCastEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

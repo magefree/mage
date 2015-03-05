@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesMonstrousSourceTriggeredAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
@@ -83,7 +83,7 @@ public class ShipbreakerKraken extends CardImpl {
     }
 }
 
-class ShipbreakerKrakenReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
+class ShipbreakerKrakenReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     public ShipbreakerKrakenReplacementEffect() {
         super(Duration.Custom, Outcome.Detriment);

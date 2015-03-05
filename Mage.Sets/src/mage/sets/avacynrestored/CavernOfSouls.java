@@ -37,7 +37,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
@@ -229,7 +229,7 @@ class CavernOfSoulsWatcher extends Watcher {
     }
 }
 
-class CavernOfSoulsCantCounterEffect extends ContinuousRuleModifiyingEffectImpl {
+class CavernOfSoulsCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
 
     public CavernOfSoulsCantCounterEffect() {
         super(Duration.EndOfGame, Outcome.Benefit);

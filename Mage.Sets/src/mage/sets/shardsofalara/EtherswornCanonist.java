@@ -33,7 +33,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -122,7 +122,7 @@ class EtherswornCanonistWatcher extends Watcher {
 
 }
 
-class EtherswornCanonistReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
+class EtherswornCanonistReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     public EtherswornCanonistReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

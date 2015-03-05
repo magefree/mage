@@ -33,7 +33,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
@@ -82,7 +82,7 @@ public class SpiritOfTheNight extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
         
         // Spirit of the Night has first strike as long as it's attacking.
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), new SourceMatchesFilterCondition(new FilterAttackingCreature()), rule);
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), new SourceMatchesFilterCondition(new FilterAttackingCreature()), rule);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

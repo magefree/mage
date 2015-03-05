@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.SourceTappedCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -56,7 +56,7 @@ public class GiantTortoise extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Giant Tortoise gets +0/+3 as long as it's untapped.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostSourceEffect(0,3, Duration.WhileOnBattlefield),
                 new InvertCondition(new SourceTappedCondition()),
                 "{this} gets +0/+3 as long as it's untapped")));

@@ -31,7 +31,7 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -64,7 +64,7 @@ public class Silence extends CardImpl {
     }
 }
 
-class SilenceEffect extends ContinuousRuleModifiyingEffectImpl {
+class SilenceEffect extends ContinuousRuleModifyingEffectImpl {
 
     public SilenceEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);

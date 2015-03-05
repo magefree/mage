@@ -29,7 +29,7 @@ package mage.sets.ravnica;
 
 import java.util.UUID;
 import mage.abilities.condition.common.ManaWasSpentCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
@@ -56,7 +56,7 @@ public class RollingSpoil extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
         
         // If {B} was spent to cast Rolling Spoil, all creatures get -1/-1 until end of turn.
-        this.getSpellAbility().addEffect(new ConditionalContinousEffect(
+        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new BoostAllEffect(-1, -1, Duration.EndOfTurn),
                 new ManaWasSpentCondition(ColoredManaSymbol.B), "If {B} was spent to cast {this}, all creatures get -1/-1 until end of turn"));
     }

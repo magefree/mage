@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.ManaWasSpentCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -64,11 +64,11 @@ public class InvertTheSkies extends CardImpl {
         this.color.setGreen(true);
 
         // Creatures your opponents control lose flying until end of turn if {G} was spent to cast Invert the Skies, and creatures you control gain flying until end of turn if {U} was spent to cast it.
-        this.getSpellAbility().addEffect(new ConditionalContinousEffect(
+        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new InvertTheSkiesEffect(),
                 new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.G)),
                 "Creatures your opponents control lose flying until end of turn if {G} was spent to cast {this},"));
-        this.getSpellAbility().addEffect(new ConditionalContinousEffect(
+        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
                 new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.U)),
                 "and creatures you control gain flying until end of turn if {U} was spent to cast it"));

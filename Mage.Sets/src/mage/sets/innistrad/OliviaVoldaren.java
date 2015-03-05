@@ -35,7 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.AddCardSubTypeTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -92,7 +92,7 @@ public class OliviaVoldaren extends CardImpl {
         this.addAbility(ability);
 
         // {3}{B}{B}: Gain control of target Vampire for as long as you control Olivia Voldaren.
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(new GainControlTargetEffect(Duration.Custom), new PermanentsOnTheBattlefieldCondition(filter2), rule);
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainControlTargetEffect(Duration.Custom), new PermanentsOnTheBattlefieldCondition(filter2), rule);
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{3}{B}{B}"));
         ability2.addTarget(new TargetCreaturePermanent(vampireFilter));
         this.addAbility(ability2);

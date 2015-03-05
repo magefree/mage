@@ -33,7 +33,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -70,7 +70,7 @@ public class ShadowOfDoubt extends CardImpl {
     }
 }
 
-class LibrariesCantBeSearchedEffect extends ContinuousRuleModifiyingEffectImpl {
+class LibrariesCantBeSearchedEffect extends ContinuousRuleModifyingEffectImpl {
 
     public LibrariesCantBeSearchedEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit, true, false);
