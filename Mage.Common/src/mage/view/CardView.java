@@ -210,6 +210,12 @@ public class CardView extends SimpleCardView {
             if (!permanent.getControllerId().equals(permanent.getOwnerId())) {
                 controlledByOwner = false;
             }
+            if (game != null && permanent.getCounters() != null && !permanent.getCounters().isEmpty()) {
+                counters = new ArrayList<>();
+                for (Counter counter: permanent.getCounters().values()) {
+                    counters.add(new CounterView(counter));
+                }
+            }
         } else {
             if (card.isCopy()) {
                 this.mageObjectType = MageObjectType.COPY_CARD;
@@ -217,6 +223,12 @@ public class CardView extends SimpleCardView {
                 this.mageObjectType = MageObjectType.CARD;
             }
             this.loyalty = "";
+            if (game != null && card.getCounters(game) != null && !card.getCounters(game).isEmpty()) {
+                counters = new ArrayList<>();
+                for (Counter counter: card.getCounters(game).values()) {
+                    counters.add(new CounterView(counter));
+                }
+            }
         }
         this.power = Integer.toString(card.getPower().getValue());
         this.toughness = Integer.toString(card.getToughness().getValue());
@@ -248,12 +260,7 @@ public class CardView extends SimpleCardView {
             this.rarity = card.getRarity();
             this.isToken = false;
         }
-        if (game != null && card.getCounters(game) != null && !card.getCounters(game).isEmpty()) {
-            counters = new ArrayList<>();
-            for (Counter counter: card.getCounters(game).values()) {
-                counters.add(new CounterView(counter));
-            }
-        }
+
         if (card.getSecondCardFace() != null) {
             this.secondCardFace = new CardView(card.getSecondCardFace());
             this.alternateName = secondCardFace.getName();
