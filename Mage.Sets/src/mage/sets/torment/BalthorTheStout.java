@@ -25,66 +25,65 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.sets.torment;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.RegenerateTargetEffect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-
-import java.util.UUID;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author fireshoes
  */
-public class MadAuntie extends CardImpl {
-
-    private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("another Goblin");
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Goblins you control");
+public class BalthorTheStout extends CardImpl {
+    
+    private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Barbarian creatures");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another target Barbarian");
 
     static {
-        filter1.add(new SubtypePredicate("Goblin"));
-        filter1.add(new AnotherPredicate());
-        filter2.add(new SubtypePredicate("Goblin"));
+        filter1.add(new SubtypePredicate("Barbarian"));
+        filter2.add(new AnotherPredicate());
+        filter2.add(new SubtypePredicate("Barbarian"));
     }
-
-    public MadAuntie(UUID ownerId) {
-        super(ownerId, 123, "Mad Auntie", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "LRW";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
-        this.color.setBlack(true);
+    
+    public BalthorTheStout(UUID ownerId) {
+        super(ownerId, 91, "Balthor the Stout", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
+        this.expansionSetCode = "TOR";
+        this.supertype.add("Legendary");
+        this.subtype.add("Dwarf");
+        this.subtype.add("Barbarian");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+
+        // Other Barbarian creatures get +1/+1.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter1, true)));
         
-        // Other Goblin creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter2, true)));
-        
-        // {T}: Regenerate another target Goblin.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(1, 1, filter1, true));
+        // {R}: Another target Barbarian creature gets +1/+0 until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 0, Duration.EndOfTurn),new ManaCostsImpl("{R}"));
+        ability.addTarget(new TargetCreaturePermanent(1, 1, filter2, true));
         this.addAbility(ability);
     }
 
-    public MadAuntie(final MadAuntie card) {
+    public BalthorTheStout(final BalthorTheStout card) {
         super(card);
     }
 
     @Override
-    public MadAuntie copy() {
-        return new MadAuntie(this);
+    public BalthorTheStout copy() {
+        return new BalthorTheStout(this);
     }
 }
