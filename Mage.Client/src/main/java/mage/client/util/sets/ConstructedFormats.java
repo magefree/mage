@@ -95,6 +95,7 @@ public class ConstructedFormats {
             "Judge Promo",
             "Launch Party",
             "Media Inserts",
+            "Prerelease Events",
             "Unhinged",
             "World Magic Cup Qualifier",
             "WPN Gateway",
@@ -470,6 +471,9 @@ public class ConstructedFormats {
         }
         if (format.equals("Media Inserts")) {
             return Arrays.asList("MBP");
+        }
+        if (format.equals("Prerelease Events")) {
+            return Arrays.asList("PTC");
         }
         if (format.equals("World Magic Cup Qualifier")) {
             return Arrays.asList("WMCQ");

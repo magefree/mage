@@ -87,6 +87,7 @@ Planeshift|planeshift|
 Portal Second Age|portalsecondage|
 Portal Three Kingdoms|portalthreekingdoms|
 Portal|portal|
+Prerelease Events|prereleaseevents|
 Prophecy|prophecy|
 Ravnica: City of Guilds|ravnica|
 Return to Ravnica|returntoravnica|
