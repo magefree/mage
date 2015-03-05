@@ -109,6 +109,7 @@ class TurnaboutEffect extends OneShotEffect {
         UUID target = source.getFirstTarget();
         if (controller != null && target != null) {
             Choice choiceImpl = new ChoiceImpl();
+            choiceImpl.setMessage("Choose card type to tap or untap");
             choiceImpl.setChoices(choice);
             while (!controller.choose(Outcome.Neutral, choiceImpl, game)) {
                 if (!controller.isInGame()) {
@@ -127,6 +128,7 @@ class TurnaboutEffect extends OneShotEffect {
             }
 
             choiceImpl = new ChoiceImpl();
+            choiceImpl.setMessage("Choose to tap or untap");
             choiceImpl.setChoices(choice2);
             while (!controller.choose(Outcome.Neutral, choiceImpl, game)) {
                 if (!controller.isInGame()) {

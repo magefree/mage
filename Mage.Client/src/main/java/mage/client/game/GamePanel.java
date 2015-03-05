@@ -27,12 +27,11 @@
 */
 package mage.client.game;
 
-import com.sun.java.swing.plaf.windows.WindowsBorders;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Point;
@@ -59,7 +58,7 @@ import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import javax.swing.AbstractAction;
-import javax.swing.Box;
+import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
@@ -69,8 +68,8 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
-import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.basic.BasicSplitPaneDivider;
@@ -607,12 +606,11 @@ public final class GamePanel extends javax.swing.JPanel {
         else {
             this.txtStep.setText("");
         }
-        if (game.getSpellsCastCurrentTurn() > 0) {
-            this.phasesBottomPanel.setVisible(true);
-            this.txtPhasesBottomInfo.setText(Integer.toString(game.getSpellsCastCurrentTurn()));
+        if (game.getSpellsCastCurrentTurn() > 0 && PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_SHOW_STORM_COUNTER, "true").equals("true")) {
+            this.txtSpellsCast.setVisible(true);
+            this.txtSpellsCast.setText(" " + Integer.toString(game.getSpellsCastCurrentTurn()) + " ");
         } else {
-            this.phasesBottomPanel.setVisible(false);
-            this.txtPhasesBottomInfo.setText("");
+            this.txtSpellsCast.setVisible(false);
         }
 
         this.txtActivePlayer.setText(game.getActivePlayerName());
@@ -994,9 +992,16 @@ public final class GamePanel extends javax.swing.JPanel {
         lblPriority = new javax.swing.JLabel();
         feedbackPanel = new mage.client.game.FeedbackPanel();
 
-        txtPhasesBottomInfo = new javax.swing.JLabel();
-        txtPhasesBottomInfo.setToolTipText("spells cast during the current turn");
-        
+        txtSpellsCast = new javax.swing.JLabel();
+        Font font = new Font("SansSerif", Font.BOLD,12);
+        txtSpellsCast.setFont(font);
+        Border paddingBorder = BorderFactory.createEmptyBorder(4,4,4,4);        
+        Border border = BorderFactory.createLineBorder(Color.DARK_GRAY,2);        
+        txtSpellsCast.setBorder(BorderFactory.createCompoundBorder(border,paddingBorder));
+        txtSpellsCast.setBackground(Color.LIGHT_GRAY);
+        txtSpellsCast.setOpaque(true);
+        txtSpellsCast.setToolTipText("spells cast during the current turn");
+                
         btnCancelSkip = new javax.swing.JButton(); // F3
         btnSkipToNextTurn = new javax.swing.JButton(); // F4
         btnSkipToEndTurn = new javax.swing.JButton(); // F5
@@ -1388,7 +1393,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 btnPreviousPlayActionPerformed(evt);
             }
         });
-
+               
         // Replay panel to control replay of games
         javax.swing.GroupLayout gl_pnlReplay = new javax.swing.GroupLayout(pnlReplay);
         pnlReplay.setLayout(gl_pnlReplay);
@@ -1426,6 +1431,7 @@ public final class GamePanel extends javax.swing.JPanel {
                                 .addComponent(btnSkipStack)
                         )
                         .addGroup(gl_pnlShortCuts.createSequentialGroup()
+                                .addComponent(txtSpellsCast)
                                 .addComponent(btnSwitchHands)
                                 .addComponent(btnCancelSkip)
                                 .addComponent(btnConcede)
@@ -1458,6 +1464,7 @@ public final class GamePanel extends javax.swing.JPanel {
                             .addComponent(btnSkipStack)
                     )
                     .addGroup(gl_pnlShortCuts.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtSpellsCast)
                             .addComponent(btnSwitchHands)
                             .addComponent(btnCancelSkip)
                             .addComponent(btnConcede)
@@ -1514,14 +1521,8 @@ public final class GamePanel extends javax.swing.JPanel {
         JPanel empty1 = new JPanel();
         empty1.setBackground(new Color(0, 0, 0, 0));
         phasesContainer.add(empty1, ratio);
-        phasesContainer.add(jPhases);
+        phasesContainer.add(jPhases);          
         
-        phasesBottomPanel = new JPanel();
-        phasesBottomPanel.setBackground(Color.LIGHT_GRAY);
-        phasesBottomPanel.setBorder(new LineBorder(Color.DARK_GRAY, 2));
-        phasesBottomPanel.add(txtPhasesBottomInfo);        
-        phasesContainer.add(phasesBottomPanel);
-
         javax.swing.GroupLayout gl_jPanel3 = new javax.swing.GroupLayout(jPanel3);
         gl_jPanel3.setHorizontalGroup(
             gl_jPanel3.createParallelGroup(Alignment.LEADING)
@@ -1871,8 +1872,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private javax.swing.JSplitPane jSplitPane2;
     private JPanel jPhases;
     private JPanel phasesContainer;
-    private JPanel phasesBottomPanel;
-    private javax.swing.JLabel txtPhasesBottomInfo;
+    private javax.swing.JLabel txtSpellsCast;
 
     private HoverButton currentStep;
     private Point prevPoint;

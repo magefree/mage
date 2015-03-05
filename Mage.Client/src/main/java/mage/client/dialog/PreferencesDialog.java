@@ -84,6 +84,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_SHOW_PLAYER_NAMES_PERMANENTLY = "showPlayerNamesPermanently";
     public static final String KEY_SHOW_ABILITY_PICKER_FORCED = "showAbilityPicker";
     public static final String KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS = "gameAllowRequestShowHandCards";
+    public static final String KEY_GAME_SHOW_STORM_COUNTER = "gameShowStormCounter";
+    
     public static final String KEY_GAME_LOG_AUTO_SAVE = "gameLogAutoSave";
 
     public static final String KEY_CARD_IMAGES_USE_DEFAULT = "cardImagesUseDefault";
@@ -320,6 +322,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         showPlayerNamesPermanently = new javax.swing.JCheckBox();
         showAbilityPickerForced = new javax.swing.JCheckBox();
         cbAllowRequestToShowHandCards = new javax.swing.JCheckBox();
+        cbShowStormCounter = new javax.swing.JCheckBox();
         main_gamelog = new javax.swing.JPanel();
         cbGameLogAutoSave = new javax.swing.JCheckBox();
         tabPhases = new javax.swing.JPanel();
@@ -524,6 +527,16 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
+        cbShowStormCounter.setSelected(true);
+        cbShowStormCounter.setText("Show the number of spell casts during the current turn");
+        cbShowStormCounter.setToolTipText("<html>Adds a little box left to the short keys line with the number<br>\nof spells already cast during the current turn (storm counter).");
+        cbShowStormCounter.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        cbShowStormCounter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbShowStormCounterActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout main_gameLayout = new javax.swing.GroupLayout(main_game);
         main_game.setLayout(main_gameLayout);
         main_gameLayout.setHorizontalGroup(
@@ -533,12 +546,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addGroup(main_gameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(main_gameLayout.createSequentialGroup()
                         .addComponent(cbAllowRequestToShowHandCards, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(14, Short.MAX_VALUE))
                     .addGroup(main_gameLayout.createSequentialGroup()
-                        .addGroup(main_gameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(showPlayerNamesPermanently, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(nonLandPermanentsInOnePile, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(showAbilityPickerForced, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGroup(main_gameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(main_gameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(showPlayerNamesPermanently, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(nonLandPermanentsInOnePile, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(showAbilityPickerForced, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(cbShowStormCounter, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         main_gameLayout.setVerticalGroup(
@@ -550,7 +565,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(showAbilityPickerForced)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbAllowRequestToShowHandCards))
+                .addComponent(cbAllowRequestToShowHandCards)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbShowStormCounter))
         );
 
         nonLandPermanentsInOnePile.getAccessibleContext().setAccessibleName("nonLandPermanentsInOnePile");
@@ -601,7 +618,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addComponent(main_game, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(main_gamelog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         main_card.getAccessibleContext().setAccessibleName("Game panel");
@@ -784,7 +801,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addComponent(checkBoxEndTurnOthers))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(phases_stopSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Phases", tabPhases);
@@ -1358,7 +1375,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         );
         tabAvatarsLayout.setVerticalGroup(
             tabAvatarsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
         );
 
         tabsPanel.addTab("Avatars", tabAvatars);
@@ -1540,7 +1557,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addComponent(cbProxyType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(pnlProxySettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         pnlProxySettings.getAccessibleContext().setAccessibleDescription("");
@@ -1600,6 +1617,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.showPlayerNamesPermanently, KEY_SHOW_PLAYER_NAMES_PERMANENTLY, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.showAbilityPickerForced, KEY_SHOW_ABILITY_PICKER_FORCED, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbAllowRequestToShowHandCards, KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbShowStormCounter, KEY_GAME_SHOW_STORM_COUNTER, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbGameLogAutoSave, KEY_GAME_LOG_AUTO_SAVE, "true", "false", UPDATE_CACHE_POLICY);
 
         // Phases
@@ -1913,6 +1931,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbAllowRequestToShowHandCardsActionPerformed
 
+    private void cbShowStormCounterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbShowStormCounterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbShowStormCounterActionPerformed
+
     private void showProxySettings() {
         if (cbProxyType.getSelectedItem() == Connection.ProxyType.SOCKS) {
             this.pnlProxy.setVisible(true);
@@ -1988,6 +2010,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.showPlayerNamesPermanently, KEY_SHOW_PLAYER_NAMES_PERMANENTLY, "true");
         load(prefs, dialog.showAbilityPickerForced, KEY_SHOW_ABILITY_PICKER_FORCED, "true");
         load(prefs, dialog.cbAllowRequestToShowHandCards, KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true");
+        load(prefs, dialog.cbShowStormCounter, KEY_GAME_SHOW_STORM_COUNTER, "true");
+
         load(prefs, dialog.cbGameLogAutoSave, KEY_GAME_LOG_AUTO_SAVE, "true");
 
         load(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU, "on","on");
@@ -2346,6 +2370,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbPreferedImageLanguage;
     private javax.swing.JComboBox<ProxyType> cbProxyType;
     private javax.swing.JCheckBox cbSaveToZipFiles;
+    private javax.swing.JCheckBox cbShowStormCounter;
     private javax.swing.JCheckBox cbStopAttack;
     private javax.swing.JCheckBox cbStopBlock;
     private javax.swing.JCheckBox cbStopOnAllEnd;
