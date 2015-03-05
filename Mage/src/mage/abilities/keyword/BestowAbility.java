@@ -142,12 +142,16 @@ public class BestowAbility extends SpellAbility {
 
 class BestowTypeChangingEffect extends ContinuousEffectImpl implements SourceEffect {
 
+    private boolean wasAttached;
+            
     public BestowTypeChangingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
+        wasAttached = false;
     }
 
     public BestowTypeChangingEffect(final BestowTypeChangingEffect effect) {
         super(effect);
+        this.wasAttached = effect.wasAttached;
     }
 
     @Override
@@ -163,8 +167,9 @@ class BestowTypeChangingEffect extends ContinuousEffectImpl implements SourceEff
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
                         if (permanent.getAttachedTo() == null) {
-                            if (permanent.getSubtype().contains("Aura")) {
+                            if (wasAttached && permanent.getSubtype().contains("Aura")) {
                                 permanent.getSubtype().remove("Aura");
+                                wasAttached = false;
                             }
                         } else {
                             permanent.getCardType().remove(CardType.CREATURE);
@@ -172,6 +177,7 @@ class BestowTypeChangingEffect extends ContinuousEffectImpl implements SourceEff
                             if (!permanent.getSubtype().contains("Aura")) {
                                 permanent.getSubtype().add("Aura");
                             }
+                            wasAttached = true;
                         }
                     }
                     break;

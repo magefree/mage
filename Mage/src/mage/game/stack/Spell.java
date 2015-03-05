@@ -231,6 +231,7 @@ public class Spell implements StackObject, Card {
                     // Must be removed first time, after that will be removed by continous effect
                     // Otherwise effects like evolve trigger from creature comes into play event
                     card.getCardType().remove(CardType.CREATURE);
+                    card.getSubtype().add("Aura");          
                 }
                 if (card.putOntoBattlefield(game, fromZone, ability.getSourceId(), controllerId)) {
                     if (bestow) { 
@@ -240,8 +241,10 @@ public class Spell implements StackObject, Card {
                         if (permanent != null && permanent instanceof PermanentCard) {
                             permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
                             ((PermanentCard) permanent).getCard().getCardType().add(CardType.CREATURE);
+                            ((PermanentCard) permanent).getCard().getSubtype().remove("Aura");
                         }
                         card.getCardType().add(CardType.CREATURE);
+                        card.getSubtype().remove("Aura");
                     }                
                     game.getState().handleSimultaneousEvent(game);
                     return ability.resolve(game);
@@ -642,7 +645,7 @@ public class Spell implements StackObject, Card {
                 cmc += spellAbility.getManaCostsToPay().getX() * xMultiplier;
             } else {
                 cmc += spellAbility.getManaCosts().convertedManaCost() + spellAbility.getManaCostsToPay().getX() * xMultiplier;
-            }
+            }            
         }
         if (this.getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.BASE_ALTERNATE)) {
             cmc += getCard().getManaCost().convertedManaCost();

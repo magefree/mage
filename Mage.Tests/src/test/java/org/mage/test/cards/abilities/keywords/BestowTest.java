@@ -95,9 +95,11 @@ public class BestowTest extends CardTestPlayerBase {
     @Test
     public void bestowEnchantmentDoesNotTriggerEvolve() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
+        // Creature - Giant 3/5
         addCard(Zone.BATTLEFIELD, playerA, "Silent Artisan");
         
         addCard(Zone.HAND, playerA, "Experiment One");
+        // Enchanted creature gets +4/+2.
         addCard(Zone.HAND, playerA, "Boon Satyr");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Experiment One");
@@ -107,10 +109,14 @@ public class BestowTest extends CardTestPlayerBase {
         execute();
 
         // because Boon Satyr is no creature on the battlefield, evolve may not trigger
+        assertPermanentCount(playerA, "Boon Satyr", 1);
+        Permanent boonSatyr = getPermanent("Boon Satyr", playerA);
+        Assert.assertTrue("Boon Satyr may not be a creature",!boonSatyr.getCardType().contains(CardType.CREATURE));
         assertPermanentCount(playerA, "Silent Artisan", 1);
-        assertPowerToughness(playerA, "Silent Artisan", 7, 7);
         assertPermanentCount(playerA, "Experiment One", 1);
         assertPowerToughness(playerA, "Experiment One", 1, 1);
+        assertPowerToughness(playerA, "Silent Artisan", 7, 7);        
+        
     }
     
     /**
