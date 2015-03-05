@@ -102,12 +102,16 @@ class StormEffect extends OneShotEffect {
         if (spell != null) {
             CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
 
-            for (int i = 0; i < watcher.getSpellOrder(spell) - 1; i++) {
-                Spell copy = spell.copySpell();
-                copy.setControllerId(source.getControllerId());
-                copy.setCopiedSpell(true);
-                game.getStack().push(copy);
-                copy.chooseNewTargets(game, source.getControllerId());
+            int stormCount = watcher.getSpellOrder(spell) - 1;
+            if (stormCount > 0) {
+                game.informPlayers("Storm: " + spell.getName() + " will be copied " + stormCount + " time" + (stormCount > 1 ?"s":""));
+                for (int i = 0; i < stormCount; i++) {
+                    Spell copy = spell.copySpell();
+                    copy.setControllerId(source.getControllerId());
+                    copy.setCopiedSpell(true);
+                    game.getStack().push(copy);
+                    copy.chooseNewTargets(game, source.getControllerId());
+                }
             }
             return true;
         }
