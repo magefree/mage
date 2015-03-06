@@ -1,13 +1,15 @@
-#|Generate|TOK:PTC||Angel|
-#|Generate|TOK:PTC||Avatar|
-#|Generate|TOK:PTC||Beast|
-#|Generate|TOK:PTC||Dragon|
-#|Generate|TOK:PTC||Elemental|
-#|Generate|TOK:PTC||Harpy|
-#|Generate|TOK:PTC||Hippo|
-#|Generate|TOK:PTC||Soldier|
-#|Generate|TOK:PTC||Wolf|
-#|Generate|TOK:PTC||Wurm|
+#|Generate|TOK:ORI|Zombie|
+
+#|Generate|TOK:PTC|Angel|
+#|Generate|TOK:PTC|Avatar|
+#|Generate|TOK:PTC|Beast|
+#|Generate|TOK:PTC|Dragon|
+#|Generate|TOK:PTC|Elemental|
+#|Generate|TOK:PTC|Harpy|
+#|Generate|TOK:PTC|Hippo|
+#|Generate|TOK:PTC|Soldier|
+#|Generate|TOK:PTC|Wolf|
+#|Generate|TOK:PTC|Wurm|
 
 $|Generate|TOK:DTK|Djinn Monk|
 $|Generate|TOK:DTK|Goblin|

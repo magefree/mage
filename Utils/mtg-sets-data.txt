@@ -80,6 +80,7 @@ Magic 2012|M12|
 Magic 2013|M13|
 Magic 2014|M14|
 Magic 2015|M15|
+Magic Origins|ORI|
 Magic: The Gathering-Commander|CMD|
 Magic: The Gathering-Conspiracy|CNS|
 Media Inserts|MBP|
@@ -92,6 +93,7 @@ Mirage|MIR|
 Mercadian Masques|MMQ|
 Morningtide|MOR|
 Modern Masters|MMA|
+Modern Masters 2015|MMB|
 Mirrodin|MRD|
 Mirrodin Besieged|MBS|
 MTGO Vanguard|VGO|

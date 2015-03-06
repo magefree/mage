@@ -49,6 +49,7 @@ public class ConstructedFormats {
             "* Mirage Block", "Weatherlight", "Visions", "Mirage", 
             "* Ice Age Block", "Coldsnap", "Alliances", "Ice Age", 
             "Homelands", "Fallen Empires", "The Dark", "Legends", "Antiquities", "Arabian Nights",
+            "Magic Origina",
             "Magic 2015",
             "Magic 2014",
             "Magic 2013",
@@ -66,6 +67,7 @@ public class ConstructedFormats {
             "Vintage Masters",
             "Conspiracy",
             "Modern Masters",
+            "Modern Masters 2015",
             "Archenemy",
             "Commander 2014 Edition",
             "Commander 2013 Edition",
@@ -430,6 +432,9 @@ public class ConstructedFormats {
         if (format.equals("Magic 2015")) {
             return Arrays.asList("M15");
         }
+        if (format.equals("Magic Origins")) {
+            return Arrays.asList("ORI");
+        }
         if (format.equals("Archenemy")) {
             return Arrays.asList("ARC");
         }
@@ -450,6 +455,9 @@ public class ConstructedFormats {
         }
         if (format.equals("Modern Masters")) {
             return Arrays.asList("MMA");
+        }
+        if (format.equals("Modern Masters 2015")) {
+            return Arrays.asList("MMB");
         }
         if (format.equals("Conspiracy")) {
             return Arrays.asList("CNS");

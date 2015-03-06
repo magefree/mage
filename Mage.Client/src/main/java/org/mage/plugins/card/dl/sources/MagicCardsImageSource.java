@@ -16,6 +16,8 @@ public class MagicCardsImageSource implements CardImageSource {
            
     private static final Map<String, String> setNameTokenReplacement = new HashMap<String, String>() {
         {
+            put("ORI", "magic-origins");
+            put("MMB", "modern-masters-2015");
             put("PTC", "prerelease-events");
             put("DTK", "dragons-of-tarkir");
             put("GRC","wpngateway");

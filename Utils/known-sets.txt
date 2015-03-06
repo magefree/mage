@@ -66,6 +66,7 @@ Magic 2012|magic2012|
 Magic 2013|magic2013|
 Magic 2014|magic2014|
 Magic 2015|magic2015|
+Magic Origins|magicorigins|
 Magic: The Gathering-Commander|commander|
 Media Inserts|mediainserts|
 Magic: The Gathering-Conspiracy|conspiracy|
@@ -74,6 +75,7 @@ Mirage|mirage|
 Mirrodin Besieged|mirrodinbesieged|
 Mirrodin|mirrodin|
 Modern Masters|modernmasters|
+Modern Masters 2015|modernmasters2015|
 Morningtide|morningtide|
 Nemesis|nemesis|
 New Phyrexia|newphyrexia|
