@@ -50,6 +50,7 @@ import mage.util.trace.TraceUtil;
 
 import java.io.Serializable;
 import java.util.*;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -881,6 +882,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         if (creature != null) {
             creature.setAttacking(false);
             creature.setBlocking(0);
+            creature.setRemovedFromCombat(true);
             for (CombatGroup group : groups) {
                 result |= group.remove(creatureId);
             }
@@ -905,6 +907,10 @@ public class Combat implements Serializable, Copyable<Combat> {
                     creature.setBlocking(0);
                 }
             }
+        }
+        // reset the removeFromCombat flag on all creatures on the battlefield
+        for (Permanent creaturePermanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), game)) {
+            creaturePermanent.setRemovedFromCombat(false);
         }
         clear();
     }

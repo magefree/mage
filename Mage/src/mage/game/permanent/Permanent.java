@@ -154,6 +154,8 @@ public interface Permanent extends Card, Controllable {
     int getMinBlockedBy();
     void setMinBlockedBy(int minBlockedBy);
     int getMaxBlockedBy();
+    boolean isRemovedFromCombat();
+    void setRemovedFromCombat(boolean removedFromCombat);
 
     /**
      * Sets the maximum number of blockers the creature can be blocked by.
