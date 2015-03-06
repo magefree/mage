@@ -13,7 +13,7 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.players.Player;
 
 /**
@@ -41,7 +41,7 @@ public class EonHub extends CardImpl {
     
 }
 
-class SkipUpkeepStepEffect extends ContinuousRuleModifiyingEffectImpl {
+class SkipUpkeepStepEffect extends ContinuousRuleModifyingEffectImpl {
     
     public SkipUpkeepStepEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral, false, false);

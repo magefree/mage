@@ -30,7 +30,7 @@ package mage.abilities.effects.common.ruleModifying;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -42,7 +42,7 @@ import mage.game.events.GameEvent.EventType;
  * @author LevelX2
  */
 
-public class CantRegenerateTargetEffect extends ContinuousRuleModifiyingEffectImpl {
+public class CantRegenerateTargetEffect extends ContinuousRuleModifyingEffectImpl {
 
     public CantRegenerateTargetEffect(Duration duration, String objectText) {
         super(duration, Outcome.Detriment);

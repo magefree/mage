@@ -29,7 +29,7 @@ package mage.sets.tenth;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -70,7 +70,7 @@ public class Incinerate extends CardImpl {
     }
 }
 
-class IncinerateEffect extends ContinuousRuleModifiyingEffectImpl {
+class IncinerateEffect extends ContinuousRuleModifyingEffectImpl {
 
     public IncinerateEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment, true, false);

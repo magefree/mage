@@ -37,7 +37,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
@@ -63,7 +63,7 @@ public class DivinityOfPride extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(LifelinkAbility.getInstance());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(new BoostSourceEffect(4, 4, Duration.WhileOnBattlefield),
+                new ConditionalContinuousEffect(new BoostSourceEffect(4, 4, Duration.WhileOnBattlefield),
                 new DivinityOfPrideCondition(),
                 "Divinity of Pride gets +4/+4 as long as you have 25 or more life")));
     }

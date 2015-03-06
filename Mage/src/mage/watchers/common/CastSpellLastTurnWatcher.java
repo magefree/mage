@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -48,7 +49,7 @@ public class CastSpellLastTurnWatcher extends Watcher {
 
     private final Map<UUID, Integer> amountOfSpellsCastOnPrevTurn = new HashMap<>();
     private final Map<UUID, Integer> amountOfSpellsCastOnCurrentTurn = new HashMap<>();
-    private final List<UUID> spellsCastThisTurnInOrder = new ArrayList<>();
+    private final List<MageObjectReference> spellsCastThisTurnInOrder = new ArrayList<>();
 
     public CastSpellLastTurnWatcher() {
        super("CastSpellLastTurnWatcher", WatcherScope.GAME);
@@ -67,7 +68,7 @@ public class CastSpellLastTurnWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-           spellsCastThisTurnInOrder.add(event.getTargetId());
+           spellsCastThisTurnInOrder.add(new MageObjectReference(event.getSourceId(), game));
            UUID playerId = event.getPlayerId();
            if (playerId != null) {
                Integer amount = amountOfSpellsCastOnCurrentTurn.get(playerId);
@@ -116,9 +117,9 @@ public class CastSpellLastTurnWatcher extends Watcher {
 
     public int getSpellOrder(Spell spell) {
        int index = 0;
-       for (UUID uuid : spellsCastThisTurnInOrder) {
+       for (MageObjectReference mor : spellsCastThisTurnInOrder) {
            index++;
-           if (spell.getId().equals(uuid)) {
+           if (mor.refersTo(spell)) {
                return index;
            }
        }

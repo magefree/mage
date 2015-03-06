@@ -30,7 +30,7 @@ package mage.sets.khansoftarkir;
 import java.util.UUID;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.FerociousCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.combat.MustBeBlockedByAllTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -56,7 +56,7 @@ public class RoarOfChallenge extends CardImpl {
         // All creatures able to block target creature this turn do so.
         this.getSpellAbility().addEffect(new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn));
         // <i>Ferocious</i> - That creature gains indestructible until end of turn if you control a creature with power 4 or greater.
-        this.getSpellAbility().addEffect(new ConditionalContinousEffect(
+        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
                 new LockedInCondition(FerociousCondition.getInstance()),
                 "<br><i>Ferocious</i> &mdash; That creature gains indestructible until end of turn if you control a creature with power 4 or greater."));

@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -69,7 +69,7 @@ public class AboshansDesire extends CardImpl {
         // Enchanted creature has flying.
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield));
         // Threshold - Enchanted creature has shroud as long as seven or more cards are in your graveyard.
-        ability.addEffect(new ConditionalContinousEffect(new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield), 
+        ability.addEffect(new ConditionalContinuousEffect(new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield), 
                                                          new CardsInControllerGraveCondition(7),  
                                                          "<i>Threshold</i> - Enchanted creature gets shroud as long as seven or more cards are in your graveyard"));
         this.addAbility(ability);

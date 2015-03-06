@@ -40,7 +40,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-public abstract class ContinuousRuleModifiyingEffectImpl extends ContinuousEffectImpl implements ContinuousRuleModifiyingEffect {
+public abstract class ContinuousRuleModifyingEffectImpl extends ContinuousEffectImpl implements ContinuousRuleModifyingEffect {
 
     protected final boolean messageToUser;
     protected final boolean messageToGameLog;
@@ -59,7 +59,7 @@ public abstract class ContinuousRuleModifiyingEffectImpl extends ContinuousEffec
     // They work technical like a replacement effect that replaces the event completely. 
     // But player isn't asked to choose order of effects if multiple are applied to the same event.
 
-    public ContinuousRuleModifiyingEffectImpl(Duration duration, Outcome outcome) {
+    public ContinuousRuleModifyingEffectImpl(Duration duration, Outcome outcome) {
         this(duration, outcome, true, false);
     }
 
@@ -73,7 +73,7 @@ public abstract class ContinuousRuleModifiyingEffectImpl extends ContinuousEffec
      * @param messageToLog  - Every time the effect replaces an event, a message is posted to the game log. The message
      *                        can be changed by overriding the getInfoMessage method.
      */
-    public ContinuousRuleModifiyingEffectImpl(Duration duration, Outcome outcome, boolean messageToUser, boolean messageToLog) {
+    public ContinuousRuleModifyingEffectImpl(Duration duration, Outcome outcome, boolean messageToUser, boolean messageToLog) {
         super(duration, outcome);
         this.effectType = EffectType.CONTINUOUS_RULE_MODIFICATION;
         this.infoMessage = null;
@@ -81,7 +81,7 @@ public abstract class ContinuousRuleModifiyingEffectImpl extends ContinuousEffec
         this.messageToGameLog = messageToLog;
     }
 
-    public ContinuousRuleModifiyingEffectImpl(final ContinuousRuleModifiyingEffectImpl effect) {
+    public ContinuousRuleModifyingEffectImpl(final ContinuousRuleModifyingEffectImpl effect) {
         super(effect);
         this.infoMessage = effect.infoMessage;
         this.messageToUser = effect.messageToUser;

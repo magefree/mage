@@ -1,7 +1,7 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
@@ -12,7 +12,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author nantuko
  */
-public class DontUntapInControllersUntapStepEnchantedEffect extends ContinuousRuleModifiyingEffectImpl {
+public class DontUntapInControllersUntapStepEnchantedEffect extends ContinuousRuleModifyingEffectImpl {
 
     public DontUntapInControllersUntapStepEnchantedEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, false, true);

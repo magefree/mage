@@ -52,11 +52,6 @@ public class SimpleActivatedAbility extends ActivatedAbilityImpl {
     public SimpleActivatedAbility(Zone zone, Effect effect, Cost cost) {
         super(zone, effect, cost);
     }
-    
-    public SimpleActivatedAbility(Zone zone, Effect effect, Cost cost, boolean usesStack) {
-        super(zone, effect, cost);
-        this.usesStack = usesStack;
-    }
 
     public SimpleActivatedAbility(SimpleActivatedAbility ability) {
         super(ability);

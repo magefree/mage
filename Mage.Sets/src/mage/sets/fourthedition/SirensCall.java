@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -82,7 +82,7 @@ public class SirensCall extends CardImpl {
     }
 }
 
-class SirensCallTimingEffect extends ContinuousRuleModifiyingEffectImpl {
+class SirensCallTimingEffect extends ContinuousRuleModifyingEffectImpl {
 
     SirensCallTimingEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);

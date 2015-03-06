@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -294,7 +294,7 @@ class CityInABottleSacrificeEffect extends OneShotEffect {
     }
 }
 
-class CityInABottleCantPlayEffect extends ContinuousRuleModifiyingEffectImpl {
+class CityInABottleCantPlayEffect extends ContinuousRuleModifyingEffectImpl {
     
     private static final FilterCard filter = new FilterCard("cards originally printed in the Arabian Nights expansion");
     static {

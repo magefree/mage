@@ -84,7 +84,7 @@ public class ContinuousEffects implements Serializable {
 
     //transient Continuous effects
     private ContinuousEffectsList<ContinuousEffect> layeredEffects = new ContinuousEffectsList<>();
-    private ContinuousEffectsList<ContinuousRuleModifiyingEffect> continuousRuleModifyingEffects = new ContinuousEffectsList<>();
+    private ContinuousEffectsList<ContinuousRuleModifyingEffect> continuousRuleModifyingEffects = new ContinuousEffectsList<>();
     private ContinuousEffectsList<ReplacementEffect> replacementEffects = new ContinuousEffectsList<>();
     private ContinuousEffectsList<PreventionEffect> preventionEffects = new ContinuousEffectsList<>();
     private ContinuousEffectsList<RequirementEffect> requirementEffects = new ContinuousEffectsList<>();
@@ -652,7 +652,7 @@ public class ContinuousEffects implements Serializable {
      * @return 
      */
     public boolean preventedByRuleModification(GameEvent event, Ability targetAbility, Game game, boolean checkPlayableMode) {
-       for (ContinuousRuleModifiyingEffect effect: continuousRuleModifyingEffects) {
+       for (ContinuousRuleModifyingEffect effect: continuousRuleModifyingEffects) {
             if (!effect.checksEventType(event, game)) {
                 continue;
             }
@@ -987,7 +987,7 @@ public class ContinuousEffects implements Serializable {
                 spliceCardEffects.addEffect(newSpliceCardEffect, source);
                 break;
             case CONTINUOUS_RULE_MODIFICATION:
-                ContinuousRuleModifiyingEffect newContinuousRuleModifiyingEffect = (ContinuousRuleModifiyingEffect)effect;
+                ContinuousRuleModifyingEffect newContinuousRuleModifiyingEffect = (ContinuousRuleModifyingEffect)effect;
                 continuousRuleModifyingEffects.addEffect(newContinuousRuleModifiyingEffect, source);
                 break;                
             default:                

@@ -30,7 +30,7 @@ package mage.sets.commander;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -70,7 +70,7 @@ public class Stranglehold extends CardImpl {
     }
 }
 
-class OpponentsCantSearchLibarariesEffect extends ContinuousRuleModifiyingEffectImpl {
+class OpponentsCantSearchLibarariesEffect extends ContinuousRuleModifyingEffectImpl {
 
     public OpponentsCantSearchLibarariesEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit, true, false);

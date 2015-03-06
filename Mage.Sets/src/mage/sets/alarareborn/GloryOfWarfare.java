@@ -37,7 +37,7 @@ import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.condition.common.NotMyTurnCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 
@@ -54,11 +54,11 @@ public class GloryOfWarfare extends CardImpl {
 
 
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield),
                 MyTurnCondition.getInstance(),
                 "As long as it's your turn, creatures you control get +2/+0")));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostControlledEffect(0, 2, Duration.WhileOnBattlefield),
                 NotMyTurnCondition.getInstance(),
                 "As long as it's not your turn, creatures you control get +0/+2")));

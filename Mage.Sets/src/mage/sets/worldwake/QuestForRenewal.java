@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.common.BecomesTappedCreatureControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.UntapAllDuringEachOtherPlayersUntapStepEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -59,7 +59,7 @@ public class QuestForRenewal extends CardImpl {
         this.addAbility(new BecomesTappedCreatureControlledTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));
         
         // As long as there are four or more quest counters on Quest for Renewal, untap all creatures you control during each other player's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new UntapAllDuringEachOtherPlayersUntapStepEffect(filter),
                 new SourceHasCounterCondition(CounterType.QUEST, 4),
                 "As long as there are four or more quest counters on {this}, untap all creatures you control during each other player's untap step.")));        

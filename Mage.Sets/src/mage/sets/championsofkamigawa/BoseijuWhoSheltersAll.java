@@ -37,7 +37,7 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -123,7 +123,7 @@ class BoseijuWhoSheltersAllWatcher extends Watcher {
     }
 }
 
-class BoseijuWhoSheltersAllCantCounterEffect extends ContinuousRuleModifiyingEffectImpl {
+class BoseijuWhoSheltersAllCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
 
     private static final FilterCard filter = new FilterInstantOrSorceryCard();
     

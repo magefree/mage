@@ -35,7 +35,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -68,7 +68,7 @@ public class MindlockOrb extends CardImpl {
     }
 }
 
-class MindlockRuleModifyingEffect extends ContinuousRuleModifiyingEffectImpl {
+class MindlockRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
     
     MindlockRuleModifyingEffect ( ) {
         super(Duration.WhileOnBattlefield, Outcome.Neutral, true, false);

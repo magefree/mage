@@ -36,7 +36,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -81,7 +81,7 @@ public class SerraAvenger extends CardImpl {
     }
 }
 
-class CantCastSerraAvengerEffect extends ContinuousRuleModifiyingEffectImpl {
+class CantCastSerraAvengerEffect extends ContinuousRuleModifyingEffectImpl {
 
     public CantCastSerraAvengerEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

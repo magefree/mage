@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.SwampwalkAbility;
@@ -75,7 +75,7 @@ public class Filth extends CardImpl {
         // As long as Filth is in your graveyard and you control a Swamp, creatures you control have swampwalk.
         ContinuousEffect effect = new GainAbilityControlledEffect(new SwampwalkAbility(),
                 Duration.WhileOnBattlefield, new FilterCreaturePermanent());
-        ConditionalContinousEffect filthEffect = new ConditionalContinousEffect(effect,
+        ConditionalContinuousEffect filthEffect = new ConditionalContinuousEffect(effect,
                 new PermanentsOnTheBattlefieldCondition(filter), ruleText);
         this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, filthEffect));
     }

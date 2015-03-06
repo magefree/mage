@@ -87,6 +87,10 @@ public class MatchPlayer {
     }
 
     public void updateDeck(Deck deck) {
+        if (this.deck != null) {
+            // preserver deck name, important for Tiny Leaders format
+            deck.setName(this.getDeck().getName());
+        }
         this.deck = deck;
     }
 

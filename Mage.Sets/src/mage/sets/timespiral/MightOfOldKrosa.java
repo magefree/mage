@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.abilities.condition.common.MyMainPhaseCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
@@ -51,7 +51,7 @@ public class MightOfOldKrosa extends CardImpl {
         this.color.setGreen(true);
 
         // Target creature gets +2/+2 until end of turn. If you cast this spell during your main phase, that creature gets +4/+4 until end of turn instead.
-        this.getSpellAbility().addEffect(new ConditionalContinousEffect(
+        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new BoostTargetEffect(4,4, Duration.EndOfTurn),
                 new BoostTargetEffect(2, 2, Duration.EndOfTurn),
                 new LockedInCondition(MyMainPhaseCondition.getInstance()),

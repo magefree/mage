@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
@@ -64,7 +64,7 @@ public class WardenOfTheBeyond extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
         // Warden of the Beyond gets +2/+2 as long as an opponent owns a card in exile.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(new BoostSourceEffect(2,2,Duration.WhileOnBattlefield), OpponentOwnsCardInExileCondition.getInstance(),
+                new ConditionalContinuousEffect(new BoostSourceEffect(2,2,Duration.WhileOnBattlefield), OpponentOwnsCardInExileCondition.getInstance(),
                         "{this} gets +2/+2 as long as an opponent owns a card in exile")));
     }
 

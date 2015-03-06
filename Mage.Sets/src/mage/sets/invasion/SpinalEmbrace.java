@@ -32,7 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
@@ -97,7 +97,7 @@ public class SpinalEmbrace extends CardImpl {
     }
 }
 
-class SpinalEmbraceEffect extends ContinuousRuleModifiyingEffectImpl {
+class SpinalEmbraceEffect extends ContinuousRuleModifyingEffectImpl {
     SpinalEmbraceEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);
         staticText = "Cast {this} only during combat";

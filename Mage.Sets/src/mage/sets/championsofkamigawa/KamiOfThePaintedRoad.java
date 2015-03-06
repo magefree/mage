@@ -29,13 +29,13 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.choices.Choice;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -45,6 +45,7 @@ import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -64,11 +65,7 @@ public class KamiOfThePaintedRoad extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you cast a Spirit or Arcane spell, Kami of the Painted Road gains protection from the color of your choice until end of turn.
-        Ability ability = new SpellCastControllerTriggeredAbility(new GainProtectionFromColorSourceEffect(Duration.EndOfTurn), filter, true);
-        Choice colorChoice = new ChoiceColor();
-        colorChoice.setMessage("Choose color (Kami of the Painted Road)");
-        ability.addChoice(colorChoice);
-        this.addAbility(ability);
+        this.addAbility(new SpellCastControllerTriggeredAbility(new GainProtectionFromColorSourceEffect(Duration.EndOfTurn), filter, false));
 
     }
 
@@ -102,17 +99,37 @@ class GainProtectionFromColorSourceEffect extends GainAbilitySourceEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(source.getSourceId());
-        if (creature != null) {
-            ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
-            protectionFilter.add(new ColorPredicate(choice.getColor()));
-            protectionFilter.setMessage(choice.getChoice());
-            ((ProtectionAbility)ability).setFilter(protectionFilter);
-            creature.addAbility(ability, source.getSourceId(), game);
-            return true;
+    public void init(Ability source, Game game) {
+        super.init(source, game); 
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {        
+            ChoiceColor colorChoice = new ChoiceColor(true);
+            colorChoice.setMessage("Choose color for protection ability");
+            while (!colorChoice.isChosen()) {
+                controller.choose(outcome, colorChoice, game);
+                if (!controller.isInGame()) {
+                    discard();
+                    return;
+                }
+            }
+            protectionFilter.add(new ColorPredicate(colorChoice.getColor()));
+            protectionFilter.setMessage(colorChoice.getChoice());
+            ((ProtectionAbility)ability).setFilter(protectionFilter);              
+            return;
         }
-        return false;
+        discard();
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null && new MageObjectReference(permanent).refersTo(source.getSourceObject(game))) {
+            permanent.addAbility(ability, source.getSourceId(), game);
+        } else {
+            // the source permanent is no longer on the battlefield, effect can be discarded
+            discard();
+        }
+        return true;
     }
 
     @Override

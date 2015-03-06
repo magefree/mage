@@ -34,7 +34,7 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.effects.WhileConditionContiniousEffect;
+import mage.abilities.effects.WhileConditionContinuousEffect;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BoostSourceWhileControlsEffect extends WhileConditionContiniousEffect {
+public class BoostSourceWhileControlsEffect extends WhileConditionContinuousEffect {
 
     private final int power;
     private final int toughness;

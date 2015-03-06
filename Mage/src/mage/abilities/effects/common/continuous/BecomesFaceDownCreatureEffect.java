@@ -62,6 +62,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
 
     public enum FaceDownType {
         MORPHED,
+        MEGAMORPHED,
         MANIFESTED
     }
 
@@ -89,7 +90,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
         this.objectReference = objectReference;
         this.zoneChangeCounter = Integer.MIN_VALUE;
         if (turnFaceUpCosts != null) {
-            this.turnFaceUpAbility = new TurnFaceUpAbility(turnFaceUpCosts);
+            this.turnFaceUpAbility = new TurnFaceUpAbility(turnFaceUpCosts, faceDownType.equals(FaceDownType.MEGAMORPHED));
         }
         staticText = "{this} becomes a 2/2 face-down creature, with no text, no name, no subtypes, and no mana cost";
         foundPermanent = false;
@@ -139,6 +140,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
                         permanent.setManifested(true);
                         break;
                     case MORPHED:
+                    case MEGAMORPHED:
                         permanent.setMorphed(true);
                         break;
                 }
@@ -176,7 +178,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
                     }
                     permanent.getAbilities().removeAll(abilities);
                     if (turnFaceUpAbility != null) {
-                        permanent.addAbility(turnFaceUpAbility, game);
+                        permanent.addAbility(turnFaceUpAbility, source.getSourceId(), game);
                     }
                     break;
                 case PTChangingEffects_7:

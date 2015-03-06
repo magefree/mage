@@ -34,7 +34,7 @@ import mage.abilities.common.SkipUntapOptionalAbility;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -70,7 +70,7 @@ public class VedalkenShackles extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
 
         // {2}, {tap}: Gain control of target creature with power less than or equal to the number of Islands you control for as long as Vedalken Shackles remains tapped.
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new GainControlTargetEffect(Duration.Custom), SourceTappedCondition.getInstance(),
                 "Gain control of target creature with power less than or equal to the number of Islands you control for as long as {this} remains tapped");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));

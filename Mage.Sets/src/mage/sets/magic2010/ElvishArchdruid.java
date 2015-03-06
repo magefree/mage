@@ -67,7 +67,10 @@ public class ElvishArchdruid extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
+        // Other Elf creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        
+        // {T}: Add {G} to your mana pool for each Elf you control.
         this.addAbility(new DynamicManaAbility(Mana.GreenMana, new PermanentsOnBattlefieldCount(filterCount)));
     }
 

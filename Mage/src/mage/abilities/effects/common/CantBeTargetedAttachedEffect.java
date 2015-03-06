@@ -29,7 +29,7 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.AttachmentType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -45,7 +45,7 @@ import mage.game.stack.StackObject;
  * @author LevelX2
  */
 
-public class CantBeTargetedAttachedEffect extends ContinuousRuleModifiyingEffectImpl {
+public class CantBeTargetedAttachedEffect extends ContinuousRuleModifyingEffectImpl {
 
     private final FilterStackObject filterSource;
     private final AttachmentType attachmentType;

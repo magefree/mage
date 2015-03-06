@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -62,9 +62,9 @@ public class BloodfireEnforcers extends CardImpl {
 
         // Bloodfire Enforcers has first strike and trample as long as an instant card and a sorcery card are in your graveyard.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
+                new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
                 new BloodfireEnforcersCondition(), "{this} has first strike"));
-        ability.addEffect(new ConditionalContinousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield),
+        ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield),
                 new BloodfireEnforcersCondition(), "and trample as long as an instant card and a sorcery card are in your graveyard"));
         this.addAbility(ability);
      

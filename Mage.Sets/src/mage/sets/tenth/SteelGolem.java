@@ -34,7 +34,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -67,7 +67,7 @@ public class SteelGolem extends CardImpl {
     }
 }
 
-class SteelGolemEffect extends ContinuousRuleModifiyingEffectImpl {
+class SteelGolemEffect extends ContinuousRuleModifyingEffectImpl {
     
     public SteelGolemEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

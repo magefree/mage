@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -72,7 +72,7 @@ public class DosanTheFallingLeaf extends CardImpl {
     }
 }
 
-class DosanTheFallingLeafEffect extends ContinuousRuleModifiyingEffectImpl {
+class DosanTheFallingLeafEffect extends ContinuousRuleModifyingEffectImpl {
 
     DosanTheFallingLeafEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

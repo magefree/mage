@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInOpponentGraveCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -59,7 +59,7 @@ public class JacesPhantasm extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Jace's Phantasm gets +4/+4 as long as an opponent has ten or more cards in his or her graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostSourceEffect(4, 4, Duration.WhileOnBattlefield), new CardsInOpponentGraveCondition(10), "{this} gets +4/+4 as long as an opponent has ten or more cards in his or her graveyard")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostSourceEffect(4, 4, Duration.WhileOnBattlefield), new CardsInOpponentGraveCondition(10), "{this} gets +4/+4 as long as an opponent has ten or more cards in his or her graveyard")));
     }
 
     public JacesPhantasm(final JacesPhantasm card) {

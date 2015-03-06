@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -60,10 +60,10 @@ public class WoodbornBehemoth extends CardImpl {
 
         // As long as you control eight or more lands, Woodborn Behemoth gets +4/+4 and has trample.
         PermanentsOnTheBattlefieldCondition eightOrMoreLandCondition = new PermanentsOnTheBattlefieldCondition(new FilterLandPermanent(), PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN,7);
-        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(
+        ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(
                 new BoostSourceEffect(4,4, Duration.WhileOnBattlefield), eightOrMoreLandCondition,
                 "As long as you control eight or more lands, {this} gets +4/+4");
-        ConditionalContinousEffect effect2 = new ConditionalContinousEffect(
+        ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield),
                 eightOrMoreLandCondition, " and has trample");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);

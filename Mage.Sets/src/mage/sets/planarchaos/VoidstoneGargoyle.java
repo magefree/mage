@@ -35,7 +35,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -124,7 +124,7 @@ class VoidstoneGargoyleChooseCardEffect extends OneShotEffect {
 
 }
 
-class VoidstoneGargoyleReplacementEffect1 extends ContinuousRuleModifiyingEffectImpl {
+class VoidstoneGargoyleReplacementEffect1 extends ContinuousRuleModifyingEffectImpl {
 
     public VoidstoneGargoyleReplacementEffect1() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
@@ -167,7 +167,7 @@ class VoidstoneGargoyleReplacementEffect1 extends ContinuousRuleModifiyingEffect
 
 }
 
-class VoidstoneGargoyleRuleModifyingEffect2 extends ContinuousRuleModifiyingEffectImpl {
+class VoidstoneGargoyleRuleModifyingEffect2 extends ContinuousRuleModifyingEffectImpl {
 
     public VoidstoneGargoyleRuleModifyingEffect2() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

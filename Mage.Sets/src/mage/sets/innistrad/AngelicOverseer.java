@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
@@ -69,9 +69,9 @@ public class AngelicOverseer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // As long as you control a Human, Angelic Overseer has hexproof and is indestructible.
-        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new GainAbilitySourceEffect(HexproofAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filter), rule1);
+        ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(HexproofAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filter), rule1);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
-        ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filter), rule2);
+        ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filter), rule2);
         ability.addEffect(effect2);
         this.addAbility(ability);
     }

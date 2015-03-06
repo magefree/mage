@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -59,7 +59,7 @@ public class KrosanBeast extends CardImpl {
         // Threshold - Krosan Beast gets +7/+7 as long as seven or more cards are in your graveyard.
         Ability thresholdAbility = new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(
+                new ConditionalContinuousEffect(
                     new BoostSourceEffect(7, 7, Duration.WhileOnBattlefield),
                     new CardsInControllerGraveCondition(7),
                     "<i>Threshold</i> - {this} gets +7/+7 as long as seven or more cards are in your graveyard"

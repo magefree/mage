@@ -38,6 +38,7 @@ public enum AbilityWord {
     FEROCIOUS("Ferocious"),    
     HELLBENT("Hellbent"),
     HEROIC("Heroic"),
+    FORMIDABLE("Formidable"),
     LANDFALL("Landfall"),
     METALCRAFT("Metalcraft"),
     GRANDEUR("Grandeur"),

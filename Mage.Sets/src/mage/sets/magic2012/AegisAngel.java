@@ -37,7 +37,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.SourceOnBattlefieldControlUnchangedCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -71,7 +71,7 @@ public class AegisAngel extends CardImpl {
 
         // When Aegis Angel enters the battlefield, another target permanent is indestructible for as long as you control Aegis Angel.
 
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.Custom),
                 new SourceOnBattlefieldControlUnchangedCondition(),
                 "another target permanent is indestructible for as long as you control Aegis Angel");

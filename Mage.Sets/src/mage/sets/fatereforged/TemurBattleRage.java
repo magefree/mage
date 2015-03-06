@@ -30,7 +30,7 @@ package mage.sets.fatereforged;
 import java.util.UUID;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.FerociousCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -57,7 +57,7 @@ public class TemurBattleRage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         
         // <i>Ferocious</i> That creature also gains trample until end of turn if you control a creature with power 4 or greater.
-        this.getSpellAbility().addEffect(new ConditionalContinousEffect(
+        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn),
                 new LockedInCondition(FerociousCondition.getInstance()),
                 rule));

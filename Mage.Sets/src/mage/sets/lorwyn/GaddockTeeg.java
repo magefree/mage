@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -76,7 +76,7 @@ public class GaddockTeeg extends CardImpl {
     }
 }
 
-class GaddockTeegReplacementEffect4 extends ContinuousRuleModifiyingEffectImpl {
+class GaddockTeegReplacementEffect4 extends ContinuousRuleModifyingEffectImpl {
 
     public GaddockTeegReplacementEffect4() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
@@ -110,7 +110,7 @@ class GaddockTeegReplacementEffect4 extends ContinuousRuleModifiyingEffectImpl {
 
 }
 
-class GaddockTeegReplacementEffectX extends ContinuousRuleModifiyingEffectImpl {
+class GaddockTeegReplacementEffectX extends ContinuousRuleModifyingEffectImpl {
 
     public GaddockTeegReplacementEffectX() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

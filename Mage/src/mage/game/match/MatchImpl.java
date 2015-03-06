@@ -98,6 +98,7 @@ public abstract class MatchImpl implements Match {
     @Override
     public void addPlayer(Player player, Deck deck) {
         MatchPlayer matchPlayer = new MatchPlayer(player, deck);
+        player.setMatchPlayer(matchPlayer);
         players.add(matchPlayer);
     }
 
@@ -397,6 +398,8 @@ public abstract class MatchImpl implements Match {
     public void submitDeck(UUID playerId, Deck deck) {
         MatchPlayer player = getPlayer(playerId);
         if (player != null) {
+            // make sure the deck name (needed for Tiny Leaders) won't get lost by sideboarding
+            deck.setName(player.getDeck().getName());
             player.submitDeck(deck);
         }
         synchronized (this) {

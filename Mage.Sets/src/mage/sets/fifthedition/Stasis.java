@@ -34,7 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -71,7 +71,7 @@ public class Stasis extends CardImpl {
     }
 }
 
-class SkipUntapStepEffect extends ContinuousRuleModifiyingEffectImpl {
+class SkipUntapStepEffect extends ContinuousRuleModifyingEffectImpl {
 
     public SkipUntapStepEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral, false, false);

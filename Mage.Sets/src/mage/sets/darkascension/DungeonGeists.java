@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -95,7 +95,7 @@ public class DungeonGeists extends CardImpl {
     }
 }
 
-class DungeonGeistsEffect extends ContinuousRuleModifiyingEffectImpl {
+class DungeonGeistsEffect extends ContinuousRuleModifyingEffectImpl {
 
     public DungeonGeistsEffect() {
         super(Duration.Custom, Outcome.Detriment, false, false);

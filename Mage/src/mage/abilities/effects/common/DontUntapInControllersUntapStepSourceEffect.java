@@ -31,7 +31,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -41,7 +41,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class DontUntapInControllersUntapStepSourceEffect extends ContinuousRuleModifiyingEffectImpl {
+public class DontUntapInControllersUntapStepSourceEffect extends ContinuousRuleModifyingEffectImpl {
 
     public DontUntapInControllersUntapStepSourceEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, false, true);

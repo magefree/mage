@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EnchantedCreatureColorCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -70,12 +70,12 @@ public class HelmOfTheGhastlord extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // As long as enchanted creature is blue, it gets +1/+1 and has "Whenever this creature deals damage to an opponent, draw a card."
-        SimpleStaticAbility blueAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.BLUE), "As long as enchanted creature is blue, it gets +1/+1"));
-        blueAbility.addEffect(new ConditionalContinousEffect(new GainAbilityAttachedEffect(new DealsDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1),false), AttachmentType.AURA), new EnchantedCreatureColorCondition(ObjectColor.BLUE), "and has \"Whenever this creature deals damage to an opponent, draw a card.\""));
+        SimpleStaticAbility blueAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.BLUE), "As long as enchanted creature is blue, it gets +1/+1"));
+        blueAbility.addEffect(new ConditionalContinuousEffect(new GainAbilityAttachedEffect(new DealsDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1),false), AttachmentType.AURA), new EnchantedCreatureColorCondition(ObjectColor.BLUE), "and has \"Whenever this creature deals damage to an opponent, draw a card.\""));
         this.addAbility(blueAbility);
         // As long as enchanted creature is black, it gets +1/+1 and has "Whenever this creature deals damage to an opponent, that player discards a card."
-        SimpleStaticAbility blackAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.BLACK), "As long as enchanted creature is black, it gets +1/+1"));
-        blackAbility.addEffect(new ConditionalContinousEffect(new GainAbilityAttachedEffect(new DealsDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1), false, true), AttachmentType.AURA), new EnchantedCreatureColorCondition(ObjectColor.BLACK), "and has \"Whenever this creature deals damage to an opponent, that player discards a card.\""));
+        SimpleStaticAbility blackAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.BLACK), "As long as enchanted creature is black, it gets +1/+1"));
+        blackAbility.addEffect(new ConditionalContinuousEffect(new GainAbilityAttachedEffect(new DealsDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1), false, true), AttachmentType.AURA), new EnchantedCreatureColorCondition(ObjectColor.BLACK), "and has \"Whenever this creature deals damage to an opponent, that player discards a card.\""));
         this.addAbility(blackAbility);
     }
 

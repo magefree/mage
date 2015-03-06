@@ -36,7 +36,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-public interface ContinuousRuleModifiyingEffect extends ContinuousEffect {
+public interface ContinuousRuleModifyingEffect extends ContinuousEffect {
 
     /**
      * This check for the relevant events is called at first to prevent further actions if

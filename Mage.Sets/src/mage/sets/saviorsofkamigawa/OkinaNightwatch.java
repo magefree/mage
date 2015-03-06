@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -56,7 +56,7 @@ public class OkinaNightwatch extends CardImpl {
         this.toughness = new MageInt(3);
 
         // As long as you have more cards in hand than each opponent, Okina Nightwatch gets +3/+3.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostSourceEffect(3,3, Duration.WhileOnBattlefield),
                 new MoreCardsInHandThanOpponentsCondition(),
                 "As long as you have more cards in hand than each opponent, Okina Nightwatch gets +3/+3"));

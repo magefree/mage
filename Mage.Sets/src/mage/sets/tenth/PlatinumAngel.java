@@ -37,7 +37,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -71,7 +71,7 @@ public class PlatinumAngel extends CardImpl {
         return new PlatinumAngel(this);
     }
 
-    class PlatinumAngelEffect extends ContinuousRuleModifiyingEffectImpl {
+    class PlatinumAngelEffect extends ContinuousRuleModifyingEffectImpl {
 
         public PlatinumAngelEffect() {
             super(Duration.WhileOnBattlefield, Outcome.Benefit, false, false);

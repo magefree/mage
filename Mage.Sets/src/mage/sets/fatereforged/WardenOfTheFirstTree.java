@@ -33,7 +33,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -79,7 +79,7 @@ public class WardenOfTheFirstTree extends CardImpl {
         // {2}{W/B}{W/B}: If Warden of the First Tree is a Warrior, it becomes a Human Spirit Warrior with trample and lifelink.
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(
+                new ConditionalContinuousEffect(
                     new BecomesCreatureSourceEffect(new WardenOfTheFirstTree2(), "", Duration.Custom),
                     new LockedInCondition(new SourceMatchesFilterCondition(filter)),
                     "If {this} is a Warrior, it becomes a Human Spirit Warrior with trample and lifelink"),

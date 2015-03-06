@@ -38,6 +38,8 @@ import mage.abilities.effects.common.continuous.CommanderManaReplacementEffect;
 import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
 import mage.abilities.effects.common.cost.CommanderCostModification;
 import mage.cards.Card;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
@@ -73,14 +75,20 @@ public abstract class GameTinyLeadersImpl extends GameImpl{
             Player player = getPlayer(playerId);
             if (player != null){
                 if (player.getSideboard().size() > 0){
-                    Card commander =  getCard((UUID)player.getSideboard().toArray()[0]);
-                    if (commander != null) {
-                        player.setCommanderId(commander.getId());
-                        commander.moveToZone(Zone.COMMAND, null, this, true);
-                        ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoLibrary));
-                        ability.addEffect(new CommanderCostModification(commander.getId()));
-                        ability.addEffect(new CommanderManaReplacementEffect(player.getId(), CardUtil.getColorIdentity(commander)));
-                        getState().setValue(commander.getId() + "_castCount", 0);
+                    CardInfo cardInfo = CardRepository.instance.findCard(player.getMatchPlayer().getDeck().getName());
+                    if (cardInfo != null) {
+                        Card commander = cardInfo.getCard();
+                        Set<Card> cards = new HashSet<>();
+                        cards.add(commander);
+                        this.loadCards(cards, playerId);
+                        if (commander != null) {
+                            player.setCommanderId(commander.getId());
+                            commander.moveToZone(Zone.COMMAND, null, this, true);
+                            ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoLibrary));
+                            ability.addEffect(new CommanderCostModification(commander.getId()));
+                            ability.addEffect(new CommanderManaReplacementEffect(player.getId(), CardUtil.getColorIdentity(commander)));
+                            getState().setValue(commander.getId() + "_castCount", 0);
+                        }
                     }
                 }
             }

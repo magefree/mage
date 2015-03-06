@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -65,11 +65,11 @@ public class ScrapyardMongrel extends CardImpl {
         this.toughness = new MageInt(3);
 
         // As long as you control an artifact, Scrapyard Mongrel gets +2/+0 and has trample.
-        Effect boostEffect = new ConditionalContinousEffect(
+        Effect boostEffect = new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 0, Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "As long as you control an artifact, {this} gets +2/+0");
-        Effect gainAbilityEffect = new ConditionalContinousEffect(
+        Effect gainAbilityEffect = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "and has trample");

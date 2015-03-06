@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
@@ -68,7 +68,7 @@ public class FesteringNewt extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Festering Newt dies, target creature an opponent controls gets -1/-1 until end of turn. That creature gets -4/-4 instead if you control a creature named Bogbrew Witch.
-        Effect effect = new ConditionalContinousEffect(
+        Effect effect = new ConditionalContinuousEffect(
                 new BoostTargetEffect(-4,-4, Duration.EndOfTurn), 
                 new BoostTargetEffect(-1,-1, Duration.EndOfTurn),
                 new LockedInCondition(new PermanentsOnTheBattlefieldCondition(filterBogbrewWitch)),

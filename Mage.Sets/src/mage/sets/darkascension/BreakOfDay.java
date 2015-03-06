@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.abilities.condition.common.FatefulHourCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -56,7 +56,7 @@ public class BreakOfDay extends CardImpl {
         // Creatures you control get +1/+1 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
         // Fateful hour - If you have 5 or less life, those creatures also are indestructible this turn.
-        this.getSpellAbility().addEffect(new ConditionalContinousEffect(
+        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("creatures you control"), false),
                 new LockedInCondition(FatefulHourCondition.getInstance()),
                 "If you have 5 or less life, those creatures also are indestructible this turn"));

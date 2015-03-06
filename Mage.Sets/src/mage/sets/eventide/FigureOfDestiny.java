@@ -33,7 +33,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -77,7 +77,7 @@ public class FigureOfDestiny extends CardImpl {
         // {RW}{RW}{RW}: If Figure of Destiny is a Spirit, it becomes a Kithkin Spirit Warrior with base power and toughness 4/4.
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(
+                new ConditionalContinuousEffect(
                     new BecomesCreatureSourceEffect(new FigureOfDestiny.FigureOfDestinyToken2(), "", Duration.Custom),
                     new LockedInCondition(new SourceMatchesFilterCondition(filter2)),
                     "If {this} is a Spirit, it becomes a Kithkin Spirit Warrior with base power and toughness 4/4"),
@@ -86,7 +86,7 @@ public class FigureOfDestiny extends CardImpl {
         // {RW}{RW}{RW}{RW}{RW}{RW}: If Figure of Destiny is a Warrior, it becomes a Kithkin Spirit Warrior Avatar with base power and toughness 8/8, flying, and first strike.
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(
+                new ConditionalContinuousEffect(
                     new BecomesCreatureSourceEffect(new FigureOfDestiny.FigureOfDestinyToken3(), "", Duration.Custom),
                     new LockedInCondition(new SourceMatchesFilterCondition(filter3)),
                     "If {this} is a Warrior, it becomes a Kithkin Spirit Warrior Avatar with base power and toughness 8/8, flying, and first strike"),

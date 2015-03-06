@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -58,7 +58,7 @@ public class MysticVisionary extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Threshold - Mystic Visionary has flying as long as seven or more cards are in your graveyard.
-       Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+       Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                                                                    new GainAbilitySourceEffect(FlyingAbility.getInstance()), new CardsInControllerGraveCondition(7), "<i>Threshold</i> - {this} has flying as long as seven or more cards are in your graveyard."));
        this.addAbility(ability);
     }

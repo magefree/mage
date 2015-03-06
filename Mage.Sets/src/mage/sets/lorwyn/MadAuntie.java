@@ -39,13 +39,12 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -53,8 +52,8 @@ import java.util.UUID;
  */
 public class MadAuntie extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter1 = new FilterControlledCreaturePermanent("another Goblin");
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Goblin creatures");
+    private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("another Goblin");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Goblins you control");
 
     static {
         filter1.add(new SubtypePredicate("Goblin"));
@@ -70,9 +69,13 @@ public class MadAuntie extends CardImpl {
         this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+        
+        // Other Goblin creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter2, true)));
+        
+        // {T}: Regenerate another target Goblin.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetControlledCreaturePermanent(1, 1, filter1, true));
+        ability.addTarget(new TargetCreaturePermanent(1, 1, filter1, true));
         this.addAbility(ability);
     }
 

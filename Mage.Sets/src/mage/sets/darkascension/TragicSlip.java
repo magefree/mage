@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.abilities.condition.common.MorbidCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
@@ -52,7 +52,7 @@ public class TragicSlip extends CardImpl {
 
         // Target creature gets -1/-1 until end of turn.
         // Morbid - That creature gets -13/-13 until end of turn instead if a creature died this turn.
-        this.getSpellAbility().addEffect(new ConditionalContinousEffect(
+        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new BoostTargetEffect(-13, -13, Duration.EndOfTurn),
                 new BoostTargetEffect(-1, -1, Duration.EndOfTurn),
                 new LockedInCondition(MorbidCondition.getInstance()),

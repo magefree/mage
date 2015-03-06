@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -73,7 +73,7 @@ public class WardOfBones extends CardImpl {
     }
 }
 
-class WardOfBonesEffect extends ContinuousRuleModifiyingEffectImpl {
+class WardOfBonesEffect extends ContinuousRuleModifyingEffectImpl {
 
     public WardOfBonesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

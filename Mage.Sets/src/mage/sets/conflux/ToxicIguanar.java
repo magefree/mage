@@ -36,7 +36,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
@@ -66,7 +66,7 @@ public class ToxicIguanar extends CardImpl {
 
         // Toxic Iguanar has deathtouch as long as you control a green permanent.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield),
+                new ConditionalContinuousEffect(new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(filter), "{this} has deathtouch as long as you control a green permanent")));
     }
 

@@ -2,14 +2,14 @@ package mage.abilities.effects.common;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
-public class DontUntapInControllersNextUntapStepSourceEffect extends ContinuousRuleModifiyingEffectImpl {
+public class DontUntapInControllersNextUntapStepSourceEffect extends ContinuousRuleModifyingEffectImpl {
 
     private int validForTurnNum;
     

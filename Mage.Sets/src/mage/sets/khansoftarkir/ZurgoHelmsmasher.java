@@ -33,7 +33,7 @@ import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -70,7 +70,7 @@ public class ZurgoHelmsmasher extends CardImpl {
         this.addAbility(new AttacksEachTurnStaticAbility());
         // Zurgo Helmsmasher has indestructible as long as it's your turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new ConditionalContinousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
+                new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
                 MyTurnCondition.getInstance(),
                 "{this} has indestructible as long as it's your turn")));
 

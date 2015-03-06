@@ -36,7 +36,7 @@ import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.common.SourceOnBattlefieldControlUnchangedCondition;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -69,7 +69,7 @@ public class WillowSatyr extends CardImpl {
         // You may choose not to untap Willow Satyr during your untap step.
         this.addAbility(new SkipUntapOptionalAbility());
         // {tap}: Gain control of target legendary creature for as long as you control Willow Satyr and Willow Satyr remains tapped.
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
             new GainControlTargetEffect(Duration.Custom), new CompoundCondition(SourceTappedCondition.getInstance(), new SourceOnBattlefieldControlUnchangedCondition()),
             "Gain control of target legendary creature for as long as you control {this} and {this} remains tapped");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());

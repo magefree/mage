@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -97,7 +97,7 @@ public class TidebinderMage extends CardImpl {
     }
 }
 
-class TidebinderMageEffect extends ContinuousRuleModifiyingEffectImpl {
+class TidebinderMageEffect extends ContinuousRuleModifyingEffectImpl {
 
     public TidebinderMageEffect() {
         super(Duration.OneUse, Outcome.Detriment, false, false);

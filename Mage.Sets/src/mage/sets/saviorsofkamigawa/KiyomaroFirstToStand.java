@@ -34,7 +34,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInHandCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
@@ -71,7 +71,7 @@ public class KiyomaroFirstToStand extends CardImpl {
         
         // As long as you have four or more cards in hand, Kiyomaro has vigilance.
         Condition condition = new CardsInHandCondition(CardsInHandCondition.CountType.MORE_THAN,3);
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield), condition,
                 "As long as you have four or more cards in hand, {this} has vigilance"));
         this.addAbility(ability);

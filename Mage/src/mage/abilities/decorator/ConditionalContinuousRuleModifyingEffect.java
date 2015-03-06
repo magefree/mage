@@ -32,8 +32,8 @@ import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.FixedCondition;
 import mage.abilities.condition.LockedInCondition;
-import mage.abilities.effects.ContinuousRuleModifiyingEffect;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffect;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -41,19 +41,19 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModifiyingEffectImpl  {
+public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl  {
 
-    protected ContinuousRuleModifiyingEffect effect;
-    protected ContinuousRuleModifiyingEffect otherwiseEffect;
+    protected ContinuousRuleModifyingEffect effect;
+    protected ContinuousRuleModifyingEffect otherwiseEffect;
     protected Condition condition;
     protected Condition baseCondition;
     protected boolean initDone = false;
 
-    public ConditionalContinuousRuleModifyingEffect(ContinuousRuleModifiyingEffect effect, Condition condition) {
+    public ConditionalContinuousRuleModifyingEffect(ContinuousRuleModifyingEffect effect, Condition condition) {
         this(effect, condition, null);
     }
 
-    public ConditionalContinuousRuleModifyingEffect(ContinuousRuleModifiyingEffect effect, Condition condition, ContinuousRuleModifiyingEffect otherwiseEffect) {
+    public ConditionalContinuousRuleModifyingEffect(ContinuousRuleModifyingEffect effect, Condition condition, ContinuousRuleModifyingEffect otherwiseEffect) {
         super(effect.getDuration(), effect.getOutcome());
         this.effect = effect;
         this.baseCondition = condition;
@@ -62,9 +62,9 @@ public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModi
 
     public ConditionalContinuousRuleModifyingEffect(final ConditionalContinuousRuleModifyingEffect effect) {
         super(effect);
-        this.effect = (ContinuousRuleModifiyingEffect) effect.effect.copy();
+        this.effect = (ContinuousRuleModifyingEffect) effect.effect.copy();
         if (effect.otherwiseEffect != null) {
-            this.otherwiseEffect = (ContinuousRuleModifiyingEffect) effect.otherwiseEffect.copy();
+            this.otherwiseEffect = (ContinuousRuleModifyingEffect) effect.otherwiseEffect.copy();
         }
         this.condition = effect.condition;
         this.baseCondition = effect.baseCondition;

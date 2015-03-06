@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -75,7 +75,7 @@ public class Brawn extends CardImpl {
         // As long as Brawn is in your graveyard and you control a Forest, creatures you control have trample
         ContinuousEffect effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(),
                 Duration.WhileOnBattlefield, new FilterCreaturePermanent());
-        ConditionalContinousEffect brawnEffect = new ConditionalContinousEffect(effect,
+        ConditionalContinuousEffect brawnEffect = new ConditionalContinuousEffect(effect,
                 new PermanentsOnTheBattlefieldCondition(filter), ruleText);
         this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, brawnEffect));
     }

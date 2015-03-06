@@ -30,7 +30,7 @@ package mage.abilities.effects.common;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -43,7 +43,7 @@ import mage.game.stack.StackObject;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CantBeCounteredSourceEffect extends ContinuousRuleModifiyingEffectImpl {
+public class CantBeCounteredSourceEffect extends ContinuousRuleModifyingEffectImpl {
 
     public CantBeCounteredSourceEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, false, true);

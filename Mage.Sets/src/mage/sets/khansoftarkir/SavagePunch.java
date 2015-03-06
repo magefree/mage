@@ -37,7 +37,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -64,7 +64,7 @@ public class SavagePunch extends CardImpl {
         this.expansionSetCode = "KTK";
 
         // <i>Ferocious</i> - The creature you control gets +2/+2 until end of turn before it fights if you control a creature with power 4 or greater.
-        Effect effect = new ConditionalContinousEffect(
+        Effect effect = new ConditionalContinuousEffect(
                 new BoostTargetEffect(2,2,Duration.EndOfTurn),
                 new LockedInCondition(FerociousCondition.getInstance()),
                 "<i>Ferocious</i> &mdash; The creature you control gets +2/+2 until end of turn before it fights if you control a creature with power 4 or greater");

@@ -17,7 +17,7 @@ import mage.game.Game;
  *
  * @author nantuko
  */
-public class ConditionalContinousEffect extends ContinuousEffectImpl {
+public class ConditionalContinuousEffect extends ContinuousEffectImpl {
 
     protected ContinuousEffect effect;
     protected ContinuousEffect otherwiseEffect;
@@ -26,7 +26,7 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl {
     protected boolean initDone = false;
 
 
-    public ConditionalContinousEffect(ContinuousEffect effect, Condition condition, String text) {
+    public ConditionalContinuousEffect(ContinuousEffect effect, Condition condition, String text) {
         this(effect, null, condition, text);
     }
 
@@ -38,7 +38,7 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl {
      * @param condition
      * @param text
      */
-    public ConditionalContinousEffect(ContinuousEffect effect, ContinuousEffect otherwiseEffect, Condition condition, String text) {
+    public ConditionalContinuousEffect(ContinuousEffect effect, ContinuousEffect otherwiseEffect, Condition condition, String text) {
         super(effect.getDuration(), effect.getLayer(), effect.getSublayer(), effect.getOutcome());
         this.effect = effect;
         this.otherwiseEffect = otherwiseEffect;
@@ -46,7 +46,7 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl {
         this.staticText = text;
     }
 
-    public ConditionalContinousEffect(final ConditionalContinousEffect effect) {
+    public ConditionalContinuousEffect(final ConditionalContinuousEffect effect) {
         super(effect);
         this.effect = effect.effect.copy();
         if (effect.otherwiseEffect != null) {
@@ -131,7 +131,7 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public ConditionalContinousEffect copy() {
-        return new ConditionalContinousEffect(this);
+    public ConditionalContinuousEffect copy() {
+        return new ConditionalContinuousEffect(this);
     }
 }

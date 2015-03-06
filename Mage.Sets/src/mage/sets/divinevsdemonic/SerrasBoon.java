@@ -32,7 +32,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EquippedMatchesFilterCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -72,7 +72,7 @@ public class SerrasBoon extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature gets +1/+2 as long as it's white. Otherwise, it gets -2/-1.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield),
                 new BoostEnchantedEffect(-2, -1, Duration.WhileOnBattlefield),
                 new EquippedMatchesFilterCondition(filter),

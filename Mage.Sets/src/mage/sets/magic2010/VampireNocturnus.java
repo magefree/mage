@@ -42,7 +42,7 @@ import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -92,17 +92,15 @@ class VampireNocturnusAbility extends StaticAbility {
 
     public VampireNocturnusAbility() {
         super(Zone.BATTLEFIELD, null);
-        this.addEffect(new ConditionalContinousEffect(
+        this.addEffect(new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 1, Duration.WhileOnBattlefield),
                 new VampireNocturnusCondition(), ""));
-        this.addEffect(new ConditionalContinousEffect(
+        this.addEffect(new ConditionalContinuousEffect(
                 new BoostControlledEffect(2, 1, Duration.WhileOnBattlefield, filter, true),
                 new VampireNocturnusCondition(), ""));
-        this.addEffect(
-                new ConditionalContinousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()),
+        this.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()),
                 new VampireNocturnusCondition(), ""));
-        this.addEffect(
-                new ConditionalContinousEffect(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter, true),
+        this.addEffect(new ConditionalContinuousEffect(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter, true),
                 new VampireNocturnusCondition(), ""));
     }
 

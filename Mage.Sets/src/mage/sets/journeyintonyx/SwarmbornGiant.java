@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MonstrousCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.MonstrosityAbility;
@@ -71,7 +71,7 @@ public class SwarmbornGiant extends CardImpl {
         // As long as Swarmborn Giant is monstrous, it has reach.
         Ability ability = new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(new GainAbilitySourceEffect(ReachAbility.getInstance(), Duration.WhileOnBattlefield),
+                new ConditionalContinuousEffect(new GainAbilitySourceEffect(ReachAbility.getInstance(), Duration.WhileOnBattlefield),
                 MonstrousCondition.getInstance(),
                 "As long as {this} is monstrous, it has reach"));
         this.addAbility(ability);

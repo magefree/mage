@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.abilityword.GrandeurAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -87,7 +87,7 @@ public class OrissSamiteGuardian extends CardImpl {
     }
 }
 
-class OrissSamiteGuardianCantCastEffect extends ContinuousRuleModifiyingEffectImpl {
+class OrissSamiteGuardianCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
     OrissSamiteGuardianCantCastEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
@@ -120,7 +120,7 @@ class OrissSamiteGuardianCantCastEffect extends ContinuousRuleModifiyingEffectIm
     }
 }
 
-class OrissSamiteGuardianCantAttackEffect extends ContinuousRuleModifiyingEffectImpl {
+class OrissSamiteGuardianCantAttackEffect extends ContinuousRuleModifyingEffectImpl {
 
     OrissSamiteGuardianCantAttackEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);

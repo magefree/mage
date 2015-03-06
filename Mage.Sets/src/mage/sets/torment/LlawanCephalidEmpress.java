@@ -34,7 +34,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -95,7 +95,7 @@ public class LlawanCephalidEmpress extends CardImpl {
 }
 
 
-class LlawanCephalidRuleModifyingEffect extends ContinuousRuleModifiyingEffectImpl {
+class LlawanCephalidRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
     private static final FilterCard filter = new FilterCard("blue creature spells");
 

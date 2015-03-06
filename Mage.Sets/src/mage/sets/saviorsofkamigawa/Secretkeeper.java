@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -57,11 +57,11 @@ public class Secretkeeper extends CardImpl {
         this.toughness = new MageInt(2);
 
         // As long as you have more cards in hand than each opponent, Secretkeeper gets +2/+2 and has flying.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostSourceEffect(2,2, Duration.WhileOnBattlefield),
                 new MoreCardsInHandThanOpponentsCondition(),
                 "As long as you have more cards in hand than each opponent, Secretkeeper gets +2/+2"));
-        ability.addEffect(new ConditionalContinousEffect(
+        ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield),
                 new MoreCardsInHandThanOpponentsCondition(),
                 "and has flying"));

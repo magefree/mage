@@ -32,7 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
@@ -68,7 +68,7 @@ public class PathOfBravery extends CardImpl {
         this.color.setWhite(true);
 
         // As long as your life total is greater than or equal to your starting life total, creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true), new LifeCondition(), rule)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true), new LifeCondition(), rule)));
 
         // Whenever one or more creatures you control attack, you gain life equal to the number of attacking creatures.
         this.addAbility(new PathOfBraveryTriggeredAbility());

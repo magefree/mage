@@ -28,6 +28,7 @@
 package mage.sets.prophecy;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.costs.Cost;
@@ -53,10 +54,8 @@ public class RhysticStudy extends CardImpl {
         super(ownerId, 45, "Rhystic Study", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.expansionSetCode = "PCY";
 
-        this.color.setBlue(true);
-
         // Whenever an opponent casts a spell, you may draw a card unless that player pays {1}.
-        this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new RhysticStudyDrawEffect(), new FilterSpell(), true, SetTargetPointer.PLAYER));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new RhysticStudyDrawEffect(), new FilterSpell(), false, SetTargetPointer.PLAYER));
     }
 
     public RhysticStudy(final RhysticStudy card) {
@@ -89,11 +88,14 @@ class RhysticStudyDrawEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
-        if (controller != null && opponent != null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && opponent != null && sourceObject != null) {
             Cost cost = new GenericManaCost(1);
             String message = "Would you like to pay {1} to prevent the opponent to draw a card?";
             if (!(opponent.chooseUse(Outcome.Benefit, message, game) && cost.pay(source, game, source.getSourceId(), opponent.getId(), false))) {
-                controller.drawCards(1, game);
+                if(controller.chooseUse(Outcome.DrawCard, "Draw a card (" + sourceObject.getLogName() +")", game)) {
+                    controller.drawCards(1, game);
+                }
             }
             return true;
         }

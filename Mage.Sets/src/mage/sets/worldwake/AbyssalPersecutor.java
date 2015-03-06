@@ -36,7 +36,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -76,7 +76,7 @@ public class AbyssalPersecutor extends CardImpl {
     }
 }
 
-class AbyssalPersecutorCannotWinEffect extends ContinuousRuleModifiyingEffectImpl {
+class AbyssalPersecutorCannotWinEffect extends ContinuousRuleModifyingEffectImpl {
 
     AbyssalPersecutorCannotWinEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, false, false);

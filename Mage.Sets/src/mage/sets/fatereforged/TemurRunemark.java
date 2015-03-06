@@ -32,7 +32,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -78,7 +78,7 @@ public class TemurRunemark extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
         // Enchanted creature has trample as long as you control a blue or red permanent.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA),
+                new ConditionalContinuousEffect(new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA),
                 new PermanentsOnTheBattlefieldCondition(filter), "{this} has trample as long as you control a blue or red permanent")));
     }
 

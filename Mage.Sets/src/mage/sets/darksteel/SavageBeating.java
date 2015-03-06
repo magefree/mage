@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -90,7 +90,7 @@ public class SavageBeating extends CardImpl {
     }
 }
 
-class SavageBeatingTimingEffect extends ContinuousRuleModifiyingEffectImpl {
+class SavageBeatingTimingEffect extends ContinuousRuleModifyingEffectImpl {
     SavageBeatingTimingEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);
         staticText = "Cast {this} only during your turn and only during combat";

@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -76,7 +76,7 @@ public class BartelRuneaxe extends CardImpl {
     }
 }
 
-class BartelRuneaxeEffect extends ContinuousRuleModifiyingEffectImpl {
+class BartelRuneaxeEffect extends ContinuousRuleModifyingEffectImpl {
 
     public BartelRuneaxeEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);

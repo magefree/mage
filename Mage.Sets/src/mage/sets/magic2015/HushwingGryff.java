@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -79,7 +79,7 @@ public class HushwingGryff extends CardImpl {
     }
 }
 
-class HushwingGryffEffect extends ContinuousRuleModifiyingEffectImpl {
+class HushwingGryffEffect extends ContinuousRuleModifyingEffectImpl {
 
     HushwingGryffEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, false, true);

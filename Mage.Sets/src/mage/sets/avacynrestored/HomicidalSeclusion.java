@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.OneControlledCreatureCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -58,10 +58,10 @@ public class HomicidalSeclusion extends CardImpl {
 
         // As long as you control exactly one creature, that creature gets +3/+1 and has lifelink.
         ContinuousEffect boostEffect = new BoostControlledEffect(3, 1, Duration.WhileOnBattlefield);
-        Effect effect = new ConditionalContinousEffect(boostEffect, new OneControlledCreatureCondition(), rule);
+        Effect effect = new ConditionalContinuousEffect(boostEffect, new OneControlledCreatureCondition(), rule);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         ContinuousEffect lifelinkEffect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield);
-        effect = new ConditionalContinousEffect(lifelinkEffect, new OneControlledCreatureCondition(), "and has lifelink");
+        effect = new ConditionalContinuousEffect(lifelinkEffect, new OneControlledCreatureCondition(), "and has lifelink");
         ability.addEffect(effect);
         this.addAbility(ability);
 

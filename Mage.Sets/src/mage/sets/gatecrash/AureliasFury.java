@@ -55,7 +55,7 @@ import mage.watchers.Watcher;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 
 /**
  * GATECRASH FAQ 11.01.2013
@@ -148,7 +148,7 @@ class AureliasFuryEffect extends OneShotEffect {
     }
 }
 
-class AureliasFuryCantCastEffect extends ContinuousRuleModifiyingEffectImpl {
+class AureliasFuryCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
     public AureliasFuryCantCastEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);

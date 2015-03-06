@@ -30,7 +30,7 @@ package mage.sets.legends;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.UntapAllLandsControllerEffect;
 import mage.cards.CardImpl;
@@ -73,7 +73,7 @@ public class Reset extends CardImpl {
     }
 }
 
-class ResetReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
+class ResetReplacementEffect extends ContinuousRuleModifyingEffectImpl {
     ResetReplacementEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);
         staticText = "Cast {this} only during an opponent's turn after his or her upkeep step";

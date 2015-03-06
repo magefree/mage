@@ -37,7 +37,7 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -64,7 +64,7 @@ public class ElementalAppeal extends CardImpl {
         // Put a 7/1 red Elemental creature token with trample and haste onto the battlefield. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new ElementalAppealEffect());
         // If Elemental Appeal was kicked, that creature gets +7/+0 until end of turn.
-        this.getSpellAbility().addEffect(new ConditionalContinousEffect(
+        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new BoostTargetEffect(7, 0, Duration.EndOfTurn),
                 new LockedInCondition(KickedCondition.getInstance()),
                 "If {this} was kicked, that creature gets +7/+0 until end of turn"));

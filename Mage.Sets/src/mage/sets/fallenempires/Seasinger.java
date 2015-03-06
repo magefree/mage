@@ -38,7 +38,7 @@ import mage.abilities.common.SkipUntapOptionalAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
@@ -87,7 +87,7 @@ public class Seasinger extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
 
         // {tap}: Gain control of target creature whose controller controls an Island for as long as you control Seasinger and Seasinger remains tapped.
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new GainControlTargetEffect(Duration.Custom),
                 new PermanentsOnTheBattlefieldCondition(seasinger, PermanentsOnTheBattlefieldCondition.CountType.EQUAL_TO, 1, SourceTappedCondition.getInstance()), rule);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());

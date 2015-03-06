@@ -33,7 +33,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -75,7 +75,7 @@ public class PardicMiner extends CardImpl {
     }
 }
 
-class PardicMinerEffect extends ContinuousRuleModifiyingEffectImpl {
+class PardicMinerEffect extends ContinuousRuleModifyingEffectImpl {
    
     public PardicMinerEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);

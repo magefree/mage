@@ -37,7 +37,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.FatefulHourCondition;
 import mage.abilities.condition.common.MorbidCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -60,7 +60,7 @@ public class VillageSurvivors extends CardImpl {
 
         this.addAbility(VigilanceAbility.getInstance());
         // Fateful hour - As long as you have 5 or less life, other creatures you control have vigilance.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent(), true),
                 FatefulHourCondition.getInstance(),
                 "Fateful hour - As long as you have 5 or less life, other creatures you control have vigilance")));

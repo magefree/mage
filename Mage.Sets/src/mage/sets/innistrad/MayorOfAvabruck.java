@@ -33,7 +33,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
 import mage.abilities.condition.common.TransformedCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -76,7 +76,7 @@ public class MayorOfAvabruck extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Other Human creatures you control get +1/+1.
-        Effect effect = new ConditionalContinousEffect(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true), new InvertCondition(new TransformedCondition()), ruleText);
+        Effect effect = new ConditionalContinuousEffect(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true), new InvertCondition(new TransformedCondition()), ruleText);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Mayor of Avabruck.

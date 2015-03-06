@@ -35,7 +35,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -70,9 +70,9 @@ public class GriffinRider extends CardImpl {
         this.toughness = new MageInt(1);
 
         // As long as you control a Griffin creature, Griffin Rider gets +3/+3 and has flying.
-        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield), new PermanentsOnTheBattlefieldCondition(filterGriffinCard), rule1);
+        ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield), new PermanentsOnTheBattlefieldCondition(filterGriffinCard), rule1);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect1));
-        ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filterGriffinCard), rule2);
+        ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filterGriffinCard), rule2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
     }
 

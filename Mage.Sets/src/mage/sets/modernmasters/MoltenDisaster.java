@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;
@@ -82,7 +82,7 @@ public class MoltenDisaster extends CardImpl {
     }
 }
 
-class MoltenDisasterSplitSecondEffect extends ContinuousRuleModifiyingEffectImpl {
+class MoltenDisasterSplitSecondEffect extends ContinuousRuleModifyingEffectImpl {
 
     MoltenDisasterSplitSecondEffect() {
         super(Duration.WhileOnStack, Outcome.Detriment);

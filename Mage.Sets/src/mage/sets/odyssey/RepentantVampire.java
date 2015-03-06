@@ -36,7 +36,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.continuous.SetCardColorSourceEffect;
@@ -77,13 +77,13 @@ public class RepentantVampire extends CardImpl {
         // Whenever a creature dealt damage by Repentant Vampire this turn dies, put a +1/+1 counter on Repentant Vampire.
         this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
         // Threshold - As long as seven or more cards are in your graveyard, Repentant Vampire is white and has "{tap}: Destroy target black creature."
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new SetCardColorSourceEffect(ObjectColor.WHITE, Duration.WhileOnBattlefield),
                 new CardsInControllerGraveCondition(7),
                 "<i>Threshold</i> - As long as seven or more cards are in your graveyard, {this} is white"));
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
         gainedAbility.addTarget(new TargetCreaturePermanent(filter));
-        ability.addEffect(new ConditionalContinousEffect(
+        ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(gainedAbility, Duration.WhileOnBattlefield),
                 new CardsInControllerGraveCondition(7),
                 "and has \"{t}: Destroy target black creature.\""));

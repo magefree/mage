@@ -38,7 +38,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -64,7 +64,7 @@ public class GuulDrazSpecter extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         // Guul Draz Specter gets +3/+3 as long as an opponent has no cards in hand.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield),
                 new GuulDrazSpecterCondition(),
                 ruleText)));

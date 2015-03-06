@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MetalcraftCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
@@ -65,7 +65,7 @@ public class JorKadeenThePrevailer extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Metalcraft - Creatures you control get +3/+0 as long as you control three or more artifacts.
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(new BoostControlledEffect(3, 0, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false),
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostControlledEffect(3, 0, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false),
                 MetalcraftCondition.getInstance(), effectText);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

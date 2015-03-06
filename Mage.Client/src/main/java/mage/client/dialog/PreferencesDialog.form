@@ -85,7 +85,7 @@
                       <Component id="main_game" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="main_gamelog" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="120" max="32767" attributes="0"/>
+                      <EmptySpace pref="63" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -203,13 +203,16 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="cbAllowRequestToShowHandCards" min="-2" pref="546" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace pref="14" max="32767" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="showPlayerNamesPermanently" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="nonLandPermanentsInOnePile" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="showAbilityPickerForced" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="showPlayerNamesPermanently" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="nonLandPermanentsInOnePile" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="showAbilityPickerForced" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="cbShowStormCounter" alignment="0" min="-2" pref="546" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
@@ -227,6 +230,8 @@
                           <Component id="showAbilityPickerForced" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="cbAllowRequestToShowHandCards" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="cbShowStormCounter" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -275,6 +280,17 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbAllowRequestToShowHandCardsActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbShowStormCounter">
+                  <Properties>
+                    <Property name="selected" type="boolean" value="true"/>
+                    <Property name="text" type="java.lang.String" value="Show the number of spell casts during the current turn"/>
+                    <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Adds a little box left to the short keys line with the number&lt;br&gt;&#xa;of spells already cast during the current turn (storm counter)."/>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbShowStormCounterActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -474,7 +490,7 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="phases_stopSettings" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="31" max="32767" attributes="0"/>
+                      <EmptySpace pref="13" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1117,7 +1133,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="0" pref="419" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="0" pref="359" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -1568,7 +1584,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="pnlProxySettings" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="92" max="32767" attributes="0"/>
+                      <EmptySpace pref="54" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

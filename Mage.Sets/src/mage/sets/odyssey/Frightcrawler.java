@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.combat.CantBlockSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FearAbility;
@@ -62,13 +62,12 @@ public class Frightcrawler extends CardImpl {
         // Threshold - As long as seven or more cards are in your graveyard, Frightcrawler gets +2/+2 and can't block.
         Ability thresholdAbility = new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(
+                new ConditionalContinuousEffect(
                     new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
                     new CardsInControllerGraveCondition(7),
                     "<i>Threshold</i> - If seven or more cards are in your graveyard, {this} gets +2/+2 "
                 ));
-            thresholdAbility.addEffect(
-                new ConditionalContinousEffect(
+            thresholdAbility.addEffect(new ConditionalContinuousEffect(
                     new CantBlockSourceEffect(Duration.WhileOnBattlefield),
                     new CardsInControllerGraveCondition(7),
                     "and can't block."));

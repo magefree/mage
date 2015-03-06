@@ -29,7 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
@@ -44,7 +44,7 @@ import mage.game.stack.StackObject;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CantBeTargetedAllEffect extends ContinuousRuleModifiyingEffectImpl {
+public class CantBeTargetedAllEffect extends ContinuousRuleModifyingEffectImpl {
 
     private FilterPermanent filterTarget;
     private FilterStackObject filterSource;

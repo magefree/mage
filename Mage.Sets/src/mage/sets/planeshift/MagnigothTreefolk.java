@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.abilities.keyword.IslandwalkAbility;
@@ -68,23 +68,23 @@ public class MagnigothTreefolk extends CardImpl {
 
         // Domain - For each basic land type among lands you control, Magnigoth Treefolk has landwalk of that type.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new ConditionalContinousEffect(
+                new ConditionalContinuousEffect(
                         new GainAbilitySourceEffect(new PlainswalkAbility()), 
                         new PermanentsOnTheBattlefieldCondition(filterPlains, CountType.MORE_THAN, 0, true), 
                         "Domain &mdash; For each basic land type among lands you control, {this} has landwalk of that type."));
-        ability.addEffect(new ConditionalContinousEffect(
+        ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new IslandwalkAbility(), Duration.WhileOnBattlefield, false, true), 
                 new PermanentsOnTheBattlefieldCondition(filterIsland, CountType.MORE_THAN, 0, true), 
                 ""));
-        ability.addEffect(new ConditionalContinousEffect(
+        ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new SwampwalkAbility(), Duration.WhileOnBattlefield, false, true), 
                 new PermanentsOnTheBattlefieldCondition(filterSwamp, CountType.MORE_THAN, 0, true), 
                 ""));
-        ability.addEffect(new ConditionalContinousEffect(
+        ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new MountainwalkAbility(), Duration.WhileOnBattlefield, false, true), 
                 new PermanentsOnTheBattlefieldCondition(filterMountain, CountType.MORE_THAN, 0, true), 
                 ""));
-        ability.addEffect(new ConditionalContinousEffect(
+        ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new ForestwalkAbility(), Duration.WhileOnBattlefield, false, true), 
                 new PermanentsOnTheBattlefieldCondition(filterForest, CountType.MORE_THAN, 0, true), 
                 ""));

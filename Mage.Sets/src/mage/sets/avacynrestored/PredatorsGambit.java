@@ -31,7 +31,7 @@ import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.OneControlledCreatureCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
@@ -71,7 +71,7 @@ public class PredatorsGambit extends CardImpl {
 
         // Enchanted creature has intimidate as long as its controller controls no other creatures.
         ContinuousEffect effect = new GainAbilityAttachedEffect(IntimidateAbility.getInstance(), AttachmentType.AURA);
-        ConditionalContinousEffect intimidate = new ConditionalContinousEffect(effect, new OneControlledCreatureCondition(), rule);
+        ConditionalContinuousEffect intimidate = new ConditionalContinuousEffect(effect, new OneControlledCreatureCondition(), rule);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, intimidate));
 
     }

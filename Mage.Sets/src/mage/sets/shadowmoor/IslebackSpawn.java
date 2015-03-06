@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInAnyLibraryCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
@@ -59,7 +59,7 @@ public class IslebackSpawn extends CardImpl {
         // Shroud
         this.addAbility(ShroudAbility.getInstance());
         // Isleback Spawn gets +4/+8 as long as a library has twenty or fewer cards in it.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new ConditionalContinousEffect(
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new ConditionalContinuousEffect(
                 new BoostSourceEffect(4,8, Duration.EndOfGame),
                 new CardsInAnyLibraryCondition(Condition.ComparisonType.LessThan, 21),
                 "{this} gets +4/+8 as long as a library has twenty or fewer cards in it")));

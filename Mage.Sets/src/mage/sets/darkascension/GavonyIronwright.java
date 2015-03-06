@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.FatefulHourCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
@@ -58,7 +58,7 @@ public class GavonyIronwright extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Fateful hour - As long as you have 5 or less life, other creatures you control get +1/+4.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostControlledEffect(1, 4, Duration.WhileOnBattlefield, false),
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostControlledEffect(1, 4, Duration.WhileOnBattlefield, false),
                 FatefulHourCondition.getInstance(), "As long as you have 5 or less life, other creatures you control get +1/+4")));
     }
 

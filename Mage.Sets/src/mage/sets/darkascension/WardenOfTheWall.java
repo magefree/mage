@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.NotMyTurnCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.ColorlessManaAbility;
@@ -61,7 +61,7 @@ public class WardenOfTheWall extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // As long as it's not your turn, Warden of the Wall is a 2/3 Gargoyle artifact creature with flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BecomesCreatureSourceEffect(new GargoyleToken(), "", Duration.WhileOnBattlefield), NotMyTurnCondition.getInstance(), "As long as it's not your turn, Warden of the Wall is a 2/3 Gargoyle artifact creature with flying")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BecomesCreatureSourceEffect(new GargoyleToken(), "", Duration.WhileOnBattlefield), NotMyTurnCondition.getInstance(), "As long as it's not your turn, Warden of the Wall is a 2/3 Gargoyle artifact creature with flying")));
     }
 
     public WardenOfTheWall(final WardenOfTheWall card) {

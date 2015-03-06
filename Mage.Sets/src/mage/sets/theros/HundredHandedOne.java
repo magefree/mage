@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MonstrousCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.combat.CanBlockAdditionalCreatureEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.MonstrosityAbility;
@@ -66,11 +66,11 @@ public class HundredHandedOne extends CardImpl {
         this.addAbility(new MonstrosityAbility("{3}{W}{W}{W}", 3));
 
         // As long as Hundred-Handed One is monstrous, it has reach and can block an additional ninety-nine creatures each combat.
-        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(
+        ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(ReachAbility.getInstance(), Duration.WhileOnBattlefield), 
                 MonstrousCondition.getInstance(), 
                 "As long as Hundred-Handed One is monstrous, it has reach");
-        ConditionalContinousEffect effect2 = new ConditionalContinousEffect(
+        ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(
                 new CanBlockAdditionalCreatureEffect(99), 
                 MonstrousCondition.getInstance(), 
                 "and can block an additional ninety-nine creatures each combat");

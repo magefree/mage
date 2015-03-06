@@ -36,7 +36,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MetalcraftCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
@@ -72,7 +72,7 @@ public class EtchedChampion extends CardImpl {
         this.toughness = new MageInt(2);
 
         ContinuousEffect effect = new GainAbilitySourceEffect(new ProtectionAbility(filter), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(effect, MetalcraftCondition.getInstance(), ruleText)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect, MetalcraftCondition.getInstance(), ruleText)));
     }
 
     public EtchedChampion(final EtchedChampion card) {

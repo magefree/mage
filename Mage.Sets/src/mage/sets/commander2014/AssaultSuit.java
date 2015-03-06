@@ -33,7 +33,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantAttackControllerAttachedEffect;
@@ -97,7 +97,7 @@ public class AssaultSuit extends CardImpl {
     }
 }
 
- class AssaultSuitCantBeSacrificed extends ContinuousRuleModifiyingEffectImpl {
+ class AssaultSuitCantBeSacrificed extends ContinuousRuleModifyingEffectImpl {
 
     public AssaultSuitCantBeSacrificed() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, true, false);

@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.constants.CardType;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.filter.FilterSpell;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -68,7 +68,7 @@ public class VeilstoneAmulet extends CardImpl {
 // Veilstone Amulet's effect is strange. It effects all creatures you control,
 // even if they entered the battlefield after the ability resolved. It modifies
 // the rules of the game until end of turn.
-class VeilstoneAmuletEffect extends ContinuousRuleModifiyingEffectImpl {
+class VeilstoneAmuletEffect extends ContinuousRuleModifyingEffectImpl {
 
     public VeilstoneAmuletEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);

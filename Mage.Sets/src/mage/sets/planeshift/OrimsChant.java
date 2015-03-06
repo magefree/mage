@@ -31,7 +31,7 @@ package mage.sets.planeshift;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantAttackAllAnyPlayerEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -105,7 +105,7 @@ class OrimsChantEffect extends OneShotEffect {
     }
 }
 
-class OrimsChantCantCastEffect extends ContinuousRuleModifiyingEffectImpl {
+class OrimsChantCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
     public OrimsChantCantCastEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);

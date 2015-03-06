@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterArtifactPermanent;
@@ -62,7 +62,7 @@ public class CourtHomunculus extends CardImpl {
 
         // Court Homunculus gets +1/+1 as long as you control another artifact.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
+                new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
                 new ControlsAnotherArtifactCondition(), "{this} gets +1/+1 as long as you control another artifact")));
     }
 

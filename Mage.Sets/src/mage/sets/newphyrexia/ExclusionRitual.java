@@ -33,7 +33,7 @@ import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -108,7 +108,7 @@ class ExclusionRitualImprintEffect extends OneShotEffect {
     }
 }
 
-class ExclusionRitualReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
+class ExclusionRitualReplacementEffect extends ContinuousRuleModifyingEffectImpl {
     ExclusionRitualReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Players can't cast spells with the same name as the exiled card";

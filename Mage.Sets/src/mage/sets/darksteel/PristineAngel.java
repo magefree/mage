@@ -34,7 +34,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.SourceTappedCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -81,7 +81,7 @@ public class PristineAngel extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // As long as Pristine Angel is untapped, it has protection from artifacts and from all colors.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(
+                new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new ProtectionAbility(filter), Duration.WhileOnBattlefield),
                 new InvertCondition(new SourceTappedCondition()),
                 "As long as {this} is untapped, it has protection from artifacts and from all colors")));

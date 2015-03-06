@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.SourceOnBattelfieldCondition;
 import mage.abilities.condition.common.SourceOnBattlefieldControlUnchangedCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -65,7 +65,7 @@ public class SowerOfTemptation extends CardImpl {
         // When Sower of Temptation enters the battlefield, gain control of target creature for as long as Sower of Temptation remains on the battlefield.
         // 10/1/2007: You retain control of the targeted creature as long as Sower of Temptation
         //            remains on the battlefield, even if a different player gains control of Sower of Temptation itself.
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new GainControlTargetEffect(Duration.Custom, true),
                 new SourceOnBattelfieldCondition(),
                 "gain control of target creature for as long as {this} remains on the battlefield");
@@ -103,7 +103,7 @@ class SowerOfTemptationGainControlEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new GainControlTargetEffect(Duration.Custom),
                 new SourceOnBattelfieldCondition(),
                 "gain control of target creature for as long as Sower of Temptation remains on the battlefield");

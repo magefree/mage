@@ -33,7 +33,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -69,9 +69,9 @@ public class BattleBrawler extends CardImpl {
 
         // As long as you control a red or white permanent, Battle Brawler gets +1/+0 and has first strike.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(new BoostSourceEffect(1,0, Duration.WhileOnBattlefield),
+                new ConditionalContinuousEffect(new BoostSourceEffect(1,0, Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(filter), "As long as you control a red or white permanent, {this} gets +1/+0"));
-        ability.addEffect(new ConditionalContinousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
+        ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(filter), "and has first strike"));
         this.addAbility(ability);
     }

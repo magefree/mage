@@ -38,6 +38,7 @@ import mage.cards.Card;
 import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -50,8 +51,12 @@ import mage.players.Player;
 public class TurnFaceUpAbility extends SpecialAction  {
 
     public TurnFaceUpAbility(Costs<Cost> costs) {
+        this(costs, false);
+    }
+    
+    public TurnFaceUpAbility(Costs<Cost> costs, boolean megamorph) {
         super(Zone.BATTLEFIELD);
-        this.addEffect(new TurnFaceUpEffect());
+        this.addEffect(new TurnFaceUpEffect(megamorph));
         this.addCost(costs);
         this.usesStack = false;
         this.abilityType = AbilityType.SPECIAL_ACTION;
@@ -70,13 +75,17 @@ public class TurnFaceUpAbility extends SpecialAction  {
 
 class TurnFaceUpEffect extends OneShotEffect {
 
-    public TurnFaceUpEffect() {
+    private final boolean megamorph;
+    
+    public TurnFaceUpEffect(boolean megamorph) {
         super(Outcome.Benefit);
-        this.staticText = "Turn this face-down permanent face up";
+        this.staticText = "Turn this face-down permanent face up" +(megamorph ? " and put a +1/+1 counter on it":"");
+        this.megamorph = megamorph;
     }
 
     public TurnFaceUpEffect(final TurnFaceUpEffect effect) {
         super(effect);
+        this.megamorph = effect.megamorph;
     }
 
     @Override
@@ -92,8 +101,9 @@ class TurnFaceUpEffect extends OneShotEffect {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             if (sourcePermanent != null) {
                 if (sourcePermanent.turnFaceUp(game, source.getControllerId())) {
-                    game.informPlayers(controller.getName() + " pays the costs of " + card.getLogName() + " to turn it face up");
-
+                    if (megamorph) {
+                        sourcePermanent.addCounters(CounterType.P1P1.createInstance(), game);
+                    }
                     return true;
                 }
             }

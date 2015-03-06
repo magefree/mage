@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -73,7 +73,7 @@ public class GrandAbolisher extends CardImpl {
     }
 }
 
-class GrandAbolisherEffect extends ContinuousRuleModifiyingEffectImpl {
+class GrandAbolisherEffect extends ContinuousRuleModifyingEffectImpl {
 
     public GrandAbolisherEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

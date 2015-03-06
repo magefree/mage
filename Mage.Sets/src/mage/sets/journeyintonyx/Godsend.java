@@ -37,7 +37,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -199,7 +199,7 @@ class GodsendExileEffect extends OneShotEffect {
     }
 }
 
-class GodsendRuleModifyingEffect extends ContinuousRuleModifiyingEffectImpl {
+class GodsendRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
     public GodsendRuleModifyingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

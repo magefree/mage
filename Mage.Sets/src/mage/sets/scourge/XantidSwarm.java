@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -108,7 +108,7 @@ class XantidSwarmTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class XantidSwarmReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
+class XantidSwarmReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     public XantidSwarmReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);

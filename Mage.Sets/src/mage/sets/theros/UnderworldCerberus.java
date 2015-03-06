@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.ReturnToHandFromGraveyardAllEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
@@ -84,7 +84,7 @@ public class UnderworldCerberus extends CardImpl {
     }
 }
 
-class UnderworldCerberusEffect extends ContinuousRuleModifiyingEffectImpl {
+class UnderworldCerberusEffect extends ContinuousRuleModifyingEffectImpl {
 
     public UnderworldCerberusEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);

@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.HellbentCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -57,7 +57,7 @@ public class DemonsJester extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Hellbent - Demon's Jester gets +2/+1 as long as you have no cards in hand.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
             new BoostSourceEffect(2,1,Duration.WhileOnBattlefield), HellbentCondition.getInstance(),
             "<i>Hellbent</i> - {this} gets +2/+1 as long as you have no cards in hand")));
     }

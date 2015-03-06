@@ -37,7 +37,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -146,7 +146,7 @@ class LeoninArbiterIgnoreEffect extends OneShotEffect {
     }
 }
 
-class LeoninArbiterCantSearchEffect extends ContinuousRuleModifiyingEffectImpl {
+class LeoninArbiterCantSearchEffect extends ContinuousRuleModifyingEffectImpl {
 
     private final String keyString;
 

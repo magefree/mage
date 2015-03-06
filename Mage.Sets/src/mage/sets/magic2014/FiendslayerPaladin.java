@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.Card;
@@ -84,7 +84,7 @@ public class FiendslayerPaladin extends CardImpl {
     }
 }
 
-class FiendslayerPaladinEffect extends ContinuousRuleModifiyingEffectImpl {
+class FiendslayerPaladinEffect extends ContinuousRuleModifyingEffectImpl {
 
     public FiendslayerPaladinEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);

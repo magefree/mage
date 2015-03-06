@@ -33,7 +33,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceHasSubtypeCondition;
 import mage.abilities.costs.common.DiscardTargetCost;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.BestowAbility;
@@ -63,7 +63,7 @@ public class ErebossEmissary extends CardImpl {
         // Bestow {5}{B}
         this.addAbility(new BestowAbility(this, "{5}{B}"));
         // Discard a creature card: Erebos's Emissary gets +2/+2 until end of turn. If Erebos's Emissary is an Aura, enchanted creature gets +2/+2 until end of turn instead.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostEnchantedEffect(2,2, Duration.EndOfTurn),
                 new BoostSourceEffect(2,2, Duration.EndOfTurn),
                 new SourceHasSubtypeCondition("Aura"),

@@ -34,7 +34,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.TransformedCondition;
 import mage.abilities.condition.common.TwoOrMoreSpellsWereCastLastTurnCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -78,7 +78,7 @@ public class TerrorOfKruinPass extends CardImpl {
 
         this.addAbility(DoubleStrikeAbility.getInstance());
         // Each Werewolf you control can't be blocked except by two or more creatures.
-        Effect effect = new ConditionalContinousEffect(new CantBeBlockedByOneAllEffect(2, filter), new TransformedCondition(), ruleText);
+        Effect effect = new ConditionalContinuousEffect(new CantBeBlockedByOneAllEffect(2, filter), new TransformedCondition(), ruleText);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Terror of Kruin Pass.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);

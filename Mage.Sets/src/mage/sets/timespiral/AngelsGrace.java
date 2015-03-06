@@ -29,7 +29,7 @@ package mage.sets.timespiral;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.SplitSecondAbility;
 import mage.cards.CardImpl;
@@ -72,7 +72,7 @@ public class AngelsGrace extends CardImpl {
     }
 }
 
-class AngelsGraceEffect extends ContinuousRuleModifiyingEffectImpl {
+class AngelsGraceEffect extends ContinuousRuleModifyingEffectImpl {
 
     public AngelsGraceEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit, false, false);

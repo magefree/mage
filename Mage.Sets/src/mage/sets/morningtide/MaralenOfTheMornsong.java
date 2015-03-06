@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -80,7 +80,7 @@ public class MaralenOfTheMornsong extends CardImpl {
     }
 }
 
-class MaralenOfTheMornsongEffect extends ContinuousRuleModifiyingEffectImpl {
+class MaralenOfTheMornsongEffect extends ContinuousRuleModifyingEffectImpl {
 
     public MaralenOfTheMornsongEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral, false, false);

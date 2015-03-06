@@ -38,7 +38,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MetalcraftCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -58,7 +58,7 @@ public class ArdentRecruit extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         ContinuousEffect boostSource = new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield);
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(boostSource, MetalcraftCondition.getInstance(), "Ardent Recruit gets +2/+2 as long as you control three or more artifacts");
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(boostSource, MetalcraftCondition.getInstance(), "Ardent Recruit gets +2/+2 as long as you control three or more artifacts");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         ability.setAbilityWord(AbilityWord.METALCRAFT);
         this.addAbility(ability);

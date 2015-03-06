@@ -33,7 +33,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -133,7 +133,7 @@ class TeferiMageOfZhalfirAddFlashEffect extends ContinuousEffectImpl {
     }
 }
 
-class TeferiMageOfZhalfirReplacementEffect extends ContinuousRuleModifiyingEffectImpl {
+class TeferiMageOfZhalfirReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     TeferiMageOfZhalfirReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

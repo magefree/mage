@@ -33,7 +33,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -122,7 +122,7 @@ class HaakonStromgaldScourgePlayEffect extends AsThoughEffectImpl {
     }
 }
 
-class HaakonStromgaldScourgePlayEffect2 extends ContinuousRuleModifiyingEffectImpl {
+class HaakonStromgaldScourgePlayEffect2 extends ContinuousRuleModifyingEffectImpl {
 
     public HaakonStromgaldScourgePlayEffect2() {
         super(Duration.EndOfGame, Outcome.Detriment);

@@ -30,7 +30,7 @@ package mage.sets.guildpact;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifiyingEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.keyword.LeylineAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -72,7 +72,7 @@ public class LeylineOfLifeforce extends CardImpl {
     }
 }
 
-class LeylineOfLifeforceEffect extends ContinuousRuleModifiyingEffectImpl {
+class LeylineOfLifeforceEffect extends ContinuousRuleModifyingEffectImpl {
 
     LeylineOfLifeforceEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
