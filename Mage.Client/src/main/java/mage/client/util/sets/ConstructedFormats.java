@@ -49,7 +49,7 @@ public class ConstructedFormats {
             "* Mirage Block", "Weatherlight", "Visions", "Mirage", 
             "* Ice Age Block", "Coldsnap", "Alliances", "Ice Age", 
             "Homelands", "Fallen Empires", "The Dark", "Legends", "Antiquities", "Arabian Nights",
-            "Magic Origina",
+            "Magic Origins",
             "Magic 2015",
             "Magic 2014",
             "Magic 2013",
