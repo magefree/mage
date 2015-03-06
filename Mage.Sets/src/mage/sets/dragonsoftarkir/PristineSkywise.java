@@ -29,6 +29,7 @@ package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -37,7 +38,6 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.choices.Choice;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -49,6 +49,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -75,9 +76,6 @@ public class PristineSkywise extends CardImpl {
         // Whenever you cast a noncreature spell, untap Pristine Skywise. It gains protection from the color of your choice until the end of turn.
         Ability ability = new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, false);
         ability.addEffect(new GainProtectionFromColorSourceEffect(Duration.EndOfTurn));
-        Choice colorChoice = new ChoiceColor();
-        colorChoice.setMessage("Choose color (Pristine Skywise)");
-        ability.addChoice(colorChoice);
         this.addAbility(ability);
     }
 
@@ -111,17 +109,37 @@ class GainProtectionFromColorSourceEffect extends GainAbilitySourceEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(source.getSourceId());
-        if (creature != null) {
-            ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
-            protectionFilter.add(new ColorPredicate(choice.getColor()));
-            protectionFilter.setMessage(choice.getChoice());
-            ((ProtectionAbility)ability).setFilter(protectionFilter);
-            creature.addAbility(ability, source.getSourceId(), game);
-            return true;
+    public void init(Ability source, Game game) {
+        super.init(source, game); 
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {        
+            ChoiceColor colorChoice = new ChoiceColor(true);
+            colorChoice.setMessage("Choose color for protection ability");
+            while (!colorChoice.isChosen()) {
+                controller.choose(outcome, colorChoice, game);
+                if (!controller.isInGame()) {
+                    discard();
+                    return;
+                }
+            }
+            protectionFilter.add(new ColorPredicate(colorChoice.getColor()));
+            protectionFilter.setMessage(colorChoice.getChoice());
+            ((ProtectionAbility)ability).setFilter(protectionFilter);              
+            return;
         }
-        return false;
+        discard();
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null && new MageObjectReference(permanent).refersTo(source.getSourceObject(game))) {
+            permanent.addAbility(ability, source.getSourceId(), game);
+        } else {
+            // the source permanent is no longer on the battlefield, effect can be discarded
+            discard();
+        }
+        return true;
     }
 
     @Override
