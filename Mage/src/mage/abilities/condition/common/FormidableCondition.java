@@ -25,34 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.abilities.condition.common;
 
-package mage.constants;
+import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author LevelX2
  */
-public enum AbilityWord {
-    BLOODRUSH("Bloodrush"),
-    CONSTELLATION("Constellation"),
-    FEROCIOUS("Ferocious"),    
-    HELLBENT("Hellbent"),
-    HEROIC("Heroic"),
-    FORMIDABLE("Formidable"),
-    LANDFALL("Landfall"),
-    METALCRAFT("Metalcraft"),
-    GRANDEUR("Grandeur"),
-    RAID("Raid");
 
-    private final String text;
+public class FormidableCondition implements Condition {
 
-    AbilityWord(String text) {
-        this.text = text;
+    private static final FormidableCondition fInstance = new FormidableCondition();
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+
+    public static Condition getInstance() {
+        return fInstance;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        int sumPower = 0;
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+            sumPower += permanent.getPower().getValue();
+        }
+        return sumPower >= 8;
     }
 
     @Override
     public String toString() {
-        return text;
+        return "creatures you control have total power 8 or greater";
     }
 
 }
