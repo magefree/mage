@@ -96,25 +96,41 @@ import mage.players.Player;
 public class MorphAbility extends StaticAbility implements AlternativeSourceCosts {
 
     protected static final String ABILITY_KEYWORD = "Morph";
+    protected static final String ABILITY_KEYWORD_MEGA = "Megamorph";
     protected static final String REMINDER_TEXT = "<i>(You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)</i>";
+    protected static final String REMINDER_TEXT_MEGA = "<i>(You may cast this card face down as a 2/2 creature for {3}. Turn it face up at any time for its megamorph cost and put a +1/+1 counter on it.)</i>";
     protected String ruleText;
     protected AlternativeCost2Impl alternateCosts = new AlternativeCost2Impl(ABILITY_KEYWORD, REMINDER_TEXT, new GenericManaCost(3));
     protected Costs<Cost> morphCosts;
     // needed to check activation status, if card changes zone after casting it
     private   int zoneChangeCounter = 0;
-
+    private   boolean megamorph;
+    
     public MorphAbility(Card card, Cost morphCost) {
         this(card, createCosts(morphCost));
     }
 
+    public MorphAbility(Card card, Cost morphCost, boolean megamorph) {
+        this(card, createCosts(morphCost), megamorph);
+    }
+
     public MorphAbility(Card card, Costs<Cost> morphCosts) {
+        this(card, morphCosts, false);
+    }
+    
+    public MorphAbility(Card card, Costs<Cost> morphCosts, boolean megamorph) {
         super(Zone.HAND, null);
         this.morphCosts = morphCosts;
+        this.megamorph = megamorph;
         card.setMorphCard(true);
         this.setWorksFaceDown(true);
-        name = ABILITY_KEYWORD;
         StringBuilder sb = new StringBuilder();
-        sb.append(ABILITY_KEYWORD).append(" ");
+        if (megamorph) {
+            sb.append(ABILITY_KEYWORD_MEGA).append(" ");
+        } else {
+            sb.append(ABILITY_KEYWORD).append(" ");
+        }        
+        name = ABILITY_KEYWORD;        
         for (Cost cost :morphCosts) {
             if (!(cost instanceof ManaCosts)) {
                 sb.append("- ");
@@ -122,10 +138,15 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
             }
         }
         sb.append(morphCosts.getText()).append(" ");
-        sb.append(REMINDER_TEXT);
+        if (megamorph) {
+            sb.append(REMINDER_TEXT_MEGA);
+        } else {
+            sb.append(REMINDER_TEXT);
+        }
+        
         ruleText = sb.toString();
 
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesFaceDownCreatureEffect(morphCosts, FaceDownType.MORPHED));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesFaceDownCreatureEffect(morphCosts, (megamorph ? FaceDownType.MEGAMORPHED :FaceDownType.MORPHED)));
         ability.setWorksFaceDown(true);
         ability.setRuleVisible(false);
         card.addAbility(ability);
@@ -138,6 +159,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
        this.ruleText = ability.ruleText;
        this.alternateCosts = ability.alternateCosts.copy();
        this.morphCosts = ability.morphCosts; // can't be changed
+       this.megamorph = ability.megamorph;
     }
 
     private static Costs<Cost> createCosts(Cost cost) {
