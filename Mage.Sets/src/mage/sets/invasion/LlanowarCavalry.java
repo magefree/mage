@@ -28,70 +28,41 @@
 package mage.sets.invasion;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.Zone;
 
 /**
  *
  * @author michael.napoleon@gmail.com
  */
-public class Backlash extends CardImpl {
+public class LlanowarCavalry extends CardImpl {
 
-    public Backlash(UUID ownerId) {
-        super(ownerId, 234, "Backlash", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{R}");
+    public LlanowarCavalry(UUID ownerId) {
+        super(ownerId, 195, "Llanowar Cavalry", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "INV";
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(4);
 
-        // Tap target untapped creature. That creature deals damage equal to its power to its controller.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BacklashEffect());
+        // {W}: Llanowar Cavalry gains vigilance until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W}")));
     }
 
-    public Backlash(final Backlash card) {
+    public LlanowarCavalry(final LlanowarCavalry card) {
         super(card);
     }
 
     @Override
-    public Backlash copy() {
-        return new Backlash(this);
+    public LlanowarCavalry copy() {
+        return new LlanowarCavalry(this);
     }
-}
-
-class BacklashEffect extends OneShotEffect {
-  
-  public BacklashEffect() {
-    super(Outcome.Detriment);
-    this.staticText = "Tap target untapped creature. That creature deals damage equal to its power to its controller.";
-  }
-  
-  public BacklashEffect(final BacklashEffect effect) {
-    super(effect);
-  }
-  
-  @Override
-  public BacklashEffect copy () {
-    return new BacklashEffect(this);
-  }
-  
-  @Override
-  public boolean apply(Game game, Ability source) {
-    boolean applied = false;
-    Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
-    if (targetCreature != null) {
-      applied = targetCreature.tap(game);
-      Player controller = game.getPlayer(targetCreature.getControllerId());
-      if (controller != null) {
-        controller.damage(targetCreature.getPower().getValue(), source.getSourceId(), game, false, true);
-        applied = true;
-      }
-    }
-    return applied;
-  }
 }

@@ -28,70 +28,52 @@
 package mage.sets.invasion;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.KickerAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.counters.CounterType;
 
 /**
  *
  * @author michael.napoleon@gmail.com
  */
-public class Backlash extends CardImpl {
+public class LlanowarElite extends CardImpl {
 
-    public Backlash(UUID ownerId) {
-        super(ownerId, 234, "Backlash", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{R}");
+    public LlanowarElite(UUID ownerId) {
+        super(ownerId, 196, "Llanowar Elite", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
         this.expansionSetCode = "INV";
+        this.subtype.add("Elf");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Tap target untapped creature. That creature deals damage equal to its power to its controller.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BacklashEffect());
+        // Kicker {8}
+        this.addAbility(new KickerAbility("{8}"));
+        
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        
+        // If Llanowar Elite was kicked, it enters the battlefield with five +1/+1 counters on it.
+        Ability ability = new EntersBattlefieldAbility(
+                new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)), KickedCondition.getInstance(), ""), 
+                  "If Llanowar Elite was kicked, it enters the battlefield with five +1/+1 counters on it.");
+        this.addAbility(ability);
+        
     }
 
-    public Backlash(final Backlash card) {
+    public LlanowarElite(final LlanowarElite card) {
         super(card);
     }
 
     @Override
-    public Backlash copy() {
-        return new Backlash(this);
+    public LlanowarElite copy() {
+        return new LlanowarElite(this);
     }
-}
-
-class BacklashEffect extends OneShotEffect {
-  
-  public BacklashEffect() {
-    super(Outcome.Detriment);
-    this.staticText = "Tap target untapped creature. That creature deals damage equal to its power to its controller.";
-  }
-  
-  public BacklashEffect(final BacklashEffect effect) {
-    super(effect);
-  }
-  
-  @Override
-  public BacklashEffect copy () {
-    return new BacklashEffect(this);
-  }
-  
-  @Override
-  public boolean apply(Game game, Ability source) {
-    boolean applied = false;
-    Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
-    if (targetCreature != null) {
-      applied = targetCreature.tap(game);
-      Player controller = game.getPlayer(targetCreature.getControllerId());
-      if (controller != null) {
-        controller.damage(targetCreature.getPower().getValue(), source.getSourceId(), game, false, true);
-        applied = true;
-      }
-    }
-    return applied;
-  }
 }
